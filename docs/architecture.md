@@ -1,109 +1,186 @@
-# Browser architecture and the SRA port
+# Browser architecture and the SRA integration
 
-## Release 0.1: a real game, a prepared agent boundary
+## Current release: 100 local game engines
 
-The first release contains one faithful TypeScript game port: PIPE, with six
-levels. The interface and game execute in the browser. Vite produces static
-HTML, CSS and JavaScript; no application backend, remote inference or external
-asset service is required to play after the assets have loaded.
+The Playground executes the original Python engines for 100 games: 25 official
+games and 75 custom games across three waves. Pyodide runs CPython in WebAssembly
+inside a dedicated browser worker. TypeScript owns the interface, translates
+input into game actions, and renders the observations returned by that worker.
 
-The SRA tab is deliberately marked unavailable. No part of the Python reasoning
-agent has been substituted with a puzzle-specific solver, prerecorded actions,
-or a server endpoint. A functioning SRA worker is a separate next milestone.
+This is a browser execution bridge for the original engines. It is not a claim
+that all 100 games have been translated into TypeScript. The earlier TypeScript
+PIPE implementation remains in the repository as a tested reference port.
 
-The original Python project remains the reference:
+The real SRA is a separate next milestone. The game worker contains game
+mechanics; it does not run the agent's knowledge, composition, or action-selection
+system. The SRA tab remains marked unavailable. No puzzle solver, prerecorded
+trajectory, or remote agent endpoint substitutes for the actual SRA.
+
+The pinned Python SRA and custom-game reference is
 [ARC-AGI-3-Yannick-Fontan at 212d8d4](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/tree/212d8d426f07eea2b6797c2bb647545767488a96).
+The visitor-facing `/architecture.html` page explains its Logos, DRM, SRC,
+runtime, and behavior-tree-loop concepts. This document describes how the
+browser application executes games and what remains for agent integration.
 
 ## Current boundaries
 
-| Component | Responsibility | Status |
-| --- | --- | --- |
-| `src/games/pipes.ts` | Deterministic game state, actions, transitions and pixel rendering | Implemented |
-| `src/main.ts`, `src/styles.css` | Manual interaction, presentation, campaign and practice controls | Implemented |
-| `src/games/catalog.ts` | Pinned 100-game catalogue with codes and explicit port availability | Implemented |
-| `architecture.html`, `src/architecture.ts`, `src/architecture.css` | Visitor-facing explanation of the SRA architecture | Implemented |
-| `src/runtime/contracts.ts` | Explicit public observation projection and typed worker messages | Defined; no worker is connected |
-| `reference/python/pipes.py` | Pinned upstream parity reference | Development only |
-| `scripts/generate-pipe-fixtures.py`, `tests/` | Independent Python traces and TypeScript parity checks | Development only |
+| Component | Responsibility |
+| --- | --- |
+| `src/main.ts`, `src/styles.css` | Minimal manual interface, input, rendering, game selection, and history navigation |
+| `src/games/catalog.ts` | The 100 source games, four-character codes, groups, and provenance |
+| `src/runtime/browser-games.ts` | Typed game requests, response correlation, worker creation, timeout, and disposal |
+| `src/runtime/game-worker.ts` | Local Python initialization and serialized dispatch of game operations |
+| `public/python/custom-games.zip` | The custom Python game sources required by the runtime |
+| `public/python/official-games.zip` | The exact official Python engines and required ARC engine sources |
+| `public/python/game_bridge.py` | Shared game loading, action dispatch, observations, session cache, Undo, and Reset |
+| `public/python/official_adapter.py` | Official engine adaptation, frame handling, and deterministic replay for restoration |
+| `scripts/prepare-python.mjs` | Download and integrity-check pinned runtime files before development or build |
+| `scripts/python-runtime-assets.json` | Runtime versions, asset URLs, byte lengths, and SHA-256 hashes |
+| `public/vendor/pyodide/` | Prepared runtime and dependency files served from the same origin |
+| `src/runtime/contracts.ts` | Earlier prepared PIPE agent protocol; no real SRA is connected |
+| `src/games/pipes.ts`, `reference/python/pipes.py`, `tests/` | The independent PIPE TypeScript reference and development parity checks |
+| `architecture.html`, `src/architecture.ts`, `src/architecture.css` | Public explanation of the SRA architecture and current browser status |
 
-Engine diagnostics such as leaks and connection counts are useful in the human
-interface. They are **not** sent by the prepared agent observation adapter.
-The adapter allows only public image data, available action IDs, level progress
-and terminal state. It constructs the message field by field and copies pixels.
+## Loading and local execution
 
-Images use the original 64 × 64 raster, with row-major unsigned palette indices
-0–15. They are not RGB byte arrays. The palette used to display those indices is
-exported as `PALETTE` by the game module. The current adapter projects the final
-frame of a transition. Before connecting SRA, compare its Python input handling
-and decide whether every animation frame must also be observed, without silently
-changing the Python agent's perception contract.
+The worker loads Pyodide from `/vendor/pyodide/`, initializes the pinned Python
+runtime, and loads NumPy, Pydantic, and their required dependencies. It retrieves
+the custom and official game archives plus their adapters from `/python/`,
+extracts them into the worker's virtual filesystem, and imports the shared
+dispatcher. All of these browser requests use the site's own origin.
 
-The main thread owns the game. The proposed worker must import the reasoning
-port and public protocol types, never game fixtures, hidden board masks, source
-coordinates, engine analysis functions or test solutions. A Web Worker provides
-responsiveness and an explicit module boundary, not a security sandbox against
-someone who controls the browser or edits the application.
+The worker then accepts serialized requests to load a game, act, undo, reset,
+or select a level where supported. Each request has an ID; the TypeScript
+bridge resolves the matching response. Operations execute in order. The worker
+returns the public frame sequence, final frame, game state, available actions,
+progress metadata, and the flags needed to enable manual controls.
 
-## Next milestone: the genuine SRA in a Web Worker
+The main thread paints palette-indexed frames, preserves the returned animation
+timing, and validates input against the currently available action IDs. A click
+is mapped to coordinates in the game's rendered frame. The selected game and
+presentation generation are checked before showing an asynchronous result, so
+an old response cannot replace the newly selected game's display.
 
-1. **Pin the exact active Python SRA revision and entrypoint.** Inventory its
-   inputs, outputs, persistence, random choices and Python/native dependencies.
-   Preserve the actual algorithm before attempting performance improvements.
-2. **Record small reference traces.** Use public observations and seeds to
-   compare Python and TypeScript decisions, internal invariants and resumable
-   state. Separate semantic parity from acceptable numerical differences.
-3. **Port coherent components.** Follow the real dependency graph: observation
-   processing, knowledge representation, discovery, composition, goal handling,
-   and action selection. Preserve the behavior-tree-loop where it exists; do not
-   add game-specific rules to make the first demo succeed.
-4. **Implement the worker host.** Support initialize, step, pause, resume and
-   terminate. Reject replies from previous session IDs or observation sequences;
-   rotate the session on reset, game change and mode change. Validate every
-   action against the current available actions and coordinate bounds.
-5. **Apply resource budgets.** Use deterministic work budgets where practical,
-   cooperative yielding and a host-side termination path. Keep rendering and
-   manual controls responsive. Measure memory and decision time in real browsers.
-6. **Run the original agent against the same observations.** Establish behavior
-   parity before claiming that SRA solves a level. A lower solve rate must remain
-   visible; a specialized solver cannot stand in for the port.
-7. **Enable the Agent controls only after integration.** Show the actual active
-   goal, step state and observations that the agent chooses to expose. Keep
-   manual and agent runs separate so human actions cannot contaminate an agent
-   evaluation.
+Game actions run entirely on the user's device. No game action is sent to an
+external server. Hosting is still used to serve the initial page, worker,
+runtime, and game files. There is no service worker or guaranteed offline cold
+start; normal HTTP caching may reuse previously downloaded assets.
 
-`sessionId`, `sequence`, budget and cancellation fields are prepared protocol
-fields today. Their enforcement, pause/resume behavior, worker lifecycle and
-memory accounting are **not implemented in release 0.1**.
+### Pinned runtime assets
 
-## Scaling the playground
+The manifest specifies **Pyodide 314.0.7**, **CPython 3.14.2**, and exact package
+versions. Its listed files total **18,339,702 bytes** (18.34 MB), excluding game
+archives and before any hosting compression. This is the manifest's asset
+size, not a fixed network-transfer or performance claim.
 
-The selectable catalogue contains the 100 games in the pinned upstream evaluation
-suite: 25 official games and 75 custom games across three waves. It exposes each
-four-character code and the browser port's availability. PIPE is currently the
-only playable engine; selecting another entry opens its metadata and source
-reference. An unported game never displays PIPE as though it were that game.
+`npm run dev` and `npm run build` run the preparation script first. The script
+reuses files with matching hashes, fetches missing or mismatched files from the
+pinned source URLs, verifies both byte length and SHA-256, and writes them under
+`public/vendor/pyodide/`. Those upstream downloads are a preparation step; the
+deployed application serves its copies locally. The script fails rather than
+accepting an unexpected asset.
 
-Add game engines through a common action/observation adapter, with one provenance
-entry and independent parity checks per port. Keep reusable UI controls separate
-from game mechanics. The visible Architecture page explains the current Python
-SRA; this developer document describes the browser application's boundaries.
+## Undo, Reset, and game sessions
 
-After each coherent SRA porting increment, rerun the relevant component traces
-and an expanding cross-game regression set. Keep a pinned baseline and compare
-new successes, regressions and resource costs separately. Optimizations belong
-after equivalence checks, especially changes to ordering, caches, numeric types,
-or the scheduling of discovery and goal resumption.
+The browser runtime keeps up to **eight game sessions** in memory. Switching
+to a cached game resumes its state and history. Selecting games updates the
+`?game=CODE` query, and Back/Forward navigation uses that selection mechanism.
+The URL identifies a game; it does not encode a save file. Sessions are lost
+when evicted, when the worker is terminated, or when the page is reloaded.
 
-## Deployment and persistence
+Undo is bounded to **64 steps**, with an **8 MiB per-session history budget**.
+Older snapshots are evicted when the step or byte budget is exceeded. The most
+recent snapshot is retained even if that single snapshot exceeds the byte budget.
+Custom games use retained state snapshots.
+The official adapter restores earlier states by re-creating the seeded game
+and deterministically replaying its action history. This accommodates engine
+objects that contain closures and cannot be restored reliably through ordinary
+pickling. Replay costs can grow with a session's history; it is not a promise
+of constant-time Undo.
 
-The GitHub repository is the maintainable source of this project. Sites has its
-own versioned deployment source, identified by `.openai/hosting.json`. A release
-must update the intended GitHub source and publish the corresponding verified
-build to the existing Site. This first release does not configure automatic
-GitHub-to-Sites synchronization or a GitHub Actions workflow.
+Reset restarts the current level and clears its Undo history; direct level
+selection also clears that history. A game's original action availability and terminal states drive
+the controls. The manual interface presents no puzzle-specific instructions or
+derived diagnostic counters. Level selection is shown only when the runtime
+supports it for that game.
 
-The game stores state in memory. Reloading the page starts again. There is no
-service worker or guaranteed offline cold start; browser execution means no
-server round trips for game actions once the page is loaded. User-submitted HTML
-games, file uploads, account features and a submissions backend are outside this
-first release.
+The game worker is isolated from rendering work so Python execution does not
+run in the interface's event loop. The bridge rejects failed operations and
+provides a timeout/termination path. A Web Worker is an application boundary
+and responsiveness mechanism, not a security sandbox against someone who edits
+the application or controls the browser.
+
+## Verification and provenance
+
+The original sources remain the behavioral reference. Browser validation must
+exercise each catalog entry's initialization, frame shape, advertised actions,
+Undo restoration, and Reset. Successful initialization or an action trace does
+not establish that every level is solvable or completed. Preserve source
+identities, exact official game versions, license headers, and package versions
+when updating the bundled archives.
+
+The retained PIPE suite compares the TypeScript reference port against Python
+fixtures. Its 22 tests include 11 scenarios, 618 commands, 610 observations,
+644 complete 64 × 64 frames, six individual level wins, and a full campaign.
+Those checks provide focused reference-port evidence. They do not stand in for
+the 100-game runtime checks, agent parity, or SRA solve-rate evaluations.
+
+The fixture generator's solver and recorded solutions remain development-only
+tools. Neither is exposed as the SRA agent. Likewise, running the original game
+engine locally gives the application access to its implementation; the future
+agent must still consume only an explicit public observation projection.
+
+## Next milestone: the genuine SRA in the browser
+
+1. **Pin the active SRA entry point and dependencies.** Inventory observation
+   input, output actions, persistence, randomness, and Python/native packages.
+   Preserve the algorithm before attempting performance changes.
+2. **Choose a faithful execution path.** The game runtime proves that Python
+   engines can execute locally; it does not prove that the full agent's
+   dependencies, memory demands, or resumable state already work in this
+   environment. A TypeScript port or local Python integration must each be
+   validated on the actual SRA components.
+3. **Define a cross-game public contract.** Project pixels, available actions,
+   public progression, and terminal state field by field. Keep hidden engine
+   variables, source objects, diagnostics, fixtures, and solutions outside the
+   agent boundary. Resolve whether the Python agent consumes every animation
+   frame or only transition endpoints before changing that behavior.
+4. **Record small reference traces.** Compare observations, decisions, internal
+   invariants, and resumable reasoning state against the Python reference.
+   Follow the actual dependency graph through representation, discovery,
+   composition, goals, and action release. Preserve the behavior-tree-loop
+   semantics where implemented.
+5. **Implement the agent lifecycle.** Support initialization, stepping, pause,
+   resume, and termination independently of the game worker. Bind actions to
+   the current session and observation sequence. Invalidate stale reasoning
+   after Undo, Reset, game change, or manual intervention.
+6. **Budget and measure real browser work.** Use cooperative yielding and a
+   host-side termination path. Measure memory, initialization, and decision
+   latency on real devices. The presence of WebAssembly or a worker alone
+   establishes no speed advantage over the original Python setup.
+7. **Validate before enabling Agent mode.** Check interrupted plans, stale
+   premises, transferred knowledge, and parent-goal resumption as well as level
+   results. Track new successes, regressions, and resource costs separately.
+   Keep manually assisted runs distinct from agent evaluations.
+
+The existing `src/runtime/contracts.ts` protocol is preparatory work from the
+PIPE release. Its agent session, sequence, budget, and cancellation fields do
+not imply an implemented SRA lifecycle across these 100 games. The operational
+game worker and the future reasoning worker have different responsibilities.
+
+## Deployment and licensing
+
+Vite produces a static `dist/` directory containing the application and prepared
+same-origin assets. No application backend is required for play. The GitHub
+repository is the maintainable source; Sites has a separate versioned deployment
+identified by `.openai/hosting.json`. Releases must align the intended commit
+with the verified build published to the existing Site. No automatic
+GitHub-to-Sites synchronization is configured.
+
+The Playground's own code uses the repository's MIT license. Game sources,
+Pyodide, CPython, and dependencies retain their respective licenses and notices;
+the repository license does not replace those terms. Preserve and update
+`THIRD_PARTY_NOTICES.md` alongside any runtime or game-source change.
+
+User-submitted HTML games, uploads, account features, and a submissions backend
+remain outside this implementation.

@@ -7,8 +7,8 @@
  * Both sources are pinned to SOURCE_COMMIT below.
  *
  * Friendly custom names and a few descriptions are translated into English.
- * Official titles and level counts are intentionally not guessed.
- * "playable" describes the browser game port, not SRA integration.
+ * Official level counts come from the matching ARC Prize game metadata.
+ * "playable" describes the local game runtime, not SRA integration.
  */
 
 export const SOURCE_REPOSITORY = 'https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan';
@@ -37,10 +37,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 8,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "BP35",
@@ -48,10 +48,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 9,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "CD82",
@@ -59,10 +59,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 6,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "CN04",
@@ -70,10 +70,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 6,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "DC22",
@@ -81,10 +81,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 6,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "FT09",
@@ -92,10 +92,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 6,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "G50T",
@@ -103,10 +103,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 7,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "KA59",
@@ -114,10 +114,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 7,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "LF52",
@@ -125,10 +125,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 10,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "LP85",
@@ -136,10 +136,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 8,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "LS20",
@@ -147,10 +147,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 7,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "M0R0",
@@ -158,10 +158,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 6,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "R11L",
@@ -169,10 +169,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 6,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "RE86",
@@ -180,10 +180,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 8,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "S5I5",
@@ -191,10 +191,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 8,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "SB26",
@@ -202,10 +202,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 8,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "SC25",
@@ -213,10 +213,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 6,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "SK48",
@@ -224,10 +224,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 8,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "SP80",
@@ -235,10 +235,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 6,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "SU15",
@@ -246,10 +246,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 9,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "TN36",
@@ -257,10 +257,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 7,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "TR87",
@@ -268,10 +268,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 6,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "TU93",
@@ -279,10 +279,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 9,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "VC33",
@@ -290,10 +290,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 7,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "WA30",
@@ -301,10 +301,10 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "name": "Official ARC-AGI-3 game",
     "group": "official",
     "family": "official_arc_agi_3",
-    "levels": null,
-    "description": "An official ARC-AGI-3 game included in the upstream 100-game evaluation suite. Its game-specific title and level count are not documented in the catalogue source.",
+    "levels": 9,
+    "description": "The original official ARC-AGI-3 game, executed locally in your browser.",
     "sourcePath": "run_all_level1_v5.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "SKBN",
@@ -315,7 +315,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Custom Sokoban: push boxes onto targets (6 levels).",
     "sourcePath": "custom_games/engines/sokoban.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "CLRS",
@@ -326,7 +326,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Additive RGB glass panes: R+G=Y, G+B=C, B+R=M, RGB=W. Click select, arrows move, SPACE rotate; match center 10x10 to legend.",
     "sourcePath": "custom_games/engines/color_glass.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "SWCH",
@@ -337,7 +337,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Multi-piece rooms: light switches (yellow+piece), door switches (A+grey+B), battery budget; dark when unlit; arrows only.",
     "sourcePath": "custom_games/engines/switch_rooms.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "STCK",
@@ -348,7 +348,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Isometric diamond grid: build a color card stack at the magenta shop (per-level palette + max_stack). SPACE executes bottom→top (cyan L, blue U, green R, yellow D, red attack-8, pink push-8-neighbours). Damage removes top; orange/grey holes kill; clear all foes.",
     "sourcePath": "custom_games/engines/stack_iso.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "HANO",
@@ -359,7 +359,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 4,
     "description": "Tower of Hanoi: only top disc moves; only a smaller disc may rest on a larger one. Start left; rebuild full ordered tower on the rightmost peg (white + ghost outline). Click peg to pick/place (ACTION6).",
     "sourcePath": "custom_games/engines/hanoi.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "SEQN",
@@ -370,7 +370,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Red frames of symbol sequences (triangle/circle/square/star). Direction keys light matching white-focus symbols green; mismatch resets unfinished frames; completed frames lock green. Tight pip bar; start-order is the puzzle.",
     "sourcePath": "custom_games/engines/seqn_groups.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "MIND",
@@ -381,7 +381,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Mastermind-style code breaking: click palette colours to build a guess, SPACE/SUBMIT to score. Feedback uses yellow (exact place) and cyan (colour present, wrong place) — not semantic black/white pegs. L01 has white didactic click outlines.",
     "sourcePath": "custom_games/engines/mind_code.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "MEMO",
@@ -392,7 +392,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Circle recall: click a symbol that was present on the previous step. 10 stages, 15-click budget. Colours/rotation/zoom harden across levels. L01 has white didactic outlines on the target symbol.",
     "sourcePath": "custom_games/engines/memo_recall.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "REGN",
@@ -403,7 +403,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Three RGB gauges with low/high limits. Choose left or right trios of +/− consumables, recurring triangles, and coloured transfers. Keep all gauges in-bounds for N steps (10+2 per level).",
     "sourcePath": "custom_games/engines/reign_gauges.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "CONN",
@@ -414,7 +414,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Connect Four 7×6: click a column to drop. L01 teaches the four winning lines on mini-boards; L02–L06 are versus a scripted AI of rising strength. Player is yellow, adversary red.",
     "sourcePath": "custom_games/engines/connect_four.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "DNOI",
@@ -425,7 +425,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Denoise a patterned grid: click big pixels to toggle broken↔correct. L01 foreign noise colour; later levels camouflage noise using trame colours. Oracle matches ARC-2 constelize consensus denoise.",
     "sourcePath": "custom_games/engines/denoise_trame.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "SYME",
@@ -436,7 +436,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Repair broken symmetry by toggling broken↔correct. No axis is drawn: infer H/V/rot180 or H+V. Foreign holes early; camouflage on double-axis late levels. UX like DNOI.",
     "sourcePath": "custom_games/engines/symmetry_fix.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "GORI",
@@ -447,7 +447,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Gorillas-like ballistic aim: left/right power gauge (start 50%), click to fire toward a point. Passive target is passive. Miss reconfigures the whole skyline. L04 one portal pair; L05 two pairs; L06 two pairs with 90° velocity rotation.",
     "sourcePath": "custom_games/engines/gori_ballistics.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "KEYD",
@@ -458,7 +458,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Typed keys and doors under bounded inventory: consumption, reusable keys, non-commutative allocation, topology-coded types, and hidden inter-level possession recall.",
     "sourcePath": "custom_games/engines/key_doors.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "LOGI",
@@ -469,7 +469,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Dense coloured circuits with abstract three- and four-wire gates, live propagation, direct switch clicks, mixed solutions, and automatic lamp completion.",
     "sourcePath": "custom_games/engines/logic_circuit.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "PORT",
@@ -480,7 +480,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Oriented portal pairs across separated rooms: learn stable identities, preserve exit pose, remember hidden pairings between levels, and replan when a switch rewrites the topology.",
     "sourcePath": "custom_games/engines/portal_topology.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "FOGW",
@@ -491,7 +491,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Track shaped entities through opaque fog, preserve episode-specific direction and timing, synchronize capture bays, and revise hidden routes after delayed switches.",
     "sourcePath": "custom_games/engines/fog_hidden_motion.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "LIFE",
@@ -502,7 +502,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Follow stable lineage signatures through birth, compatible merges, compound splits, changed shells, and episode-specific destination phenotypes remembered between levels.",
     "sourcePath": "custom_games/engines/life_lineage.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "VALV",
@@ -513,7 +513,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Route and recover a finite water stock through reversible valves, prime hidden relays, stage all-at-once water-tower bursts, and satisfy permuted target gauges without sewer loss or animated overflow.",
     "sourcePath": "custom_games/engines/valve_flow.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "SIGN",
@@ -524,7 +524,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Authenticate true beacons among decoys: step-on glow is only a visual cue; SPACE seals underfoot (true→gauge+white core, false→brown). No click. Covers inverted HUD until calibrate, shape/position channels, and delayed SPACE validation.",
     "sourcePath": "custom_games/engines/signal_seal.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "CASC",
@@ -535,7 +535,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Metro-like domino routing: 3x3 tiles with 1px gaps, brown blockers, magenta continuators. L01 is SPACE-only; later levels need precise smother/bridge. Multi-terminal Tokyo/NY/Paris maps. Pink O; spent=brown.",
     "sourcePath": "custom_games/engines/cascade_quiesce.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "CRAF",
@@ -546,7 +546,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Night-watch craft console: click stock bins into recipe slots, SPACE crafts (A+B→C), click ORDER to ship. Shared rare resources, morphology swap, intermediate chains, tight energy, and X↔Y exchange bay.",
     "sourcePath": "custom_games/engines/craft_console.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "ESCT",
@@ -557,7 +557,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Night-watch escort console: a passive convoy advances on a rail while a deterministic patrol closes in. Cage hunters and clear several delayed rail chokes; collision resets the level. Later arenas mix fast and predictive hunters while role colours stay stable.",
     "sourcePath": "custom_games/engines/escort_patrol.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "LS19",
@@ -568,7 +568,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 8,
     "description": "Preserved standalone LS20 Legacy game under the LS19 custom identity: navigate, change shape/color/rotation, manage oxygen, and align with the matching target across all 8 original levels.",
     "sourcePath": "custom_games/engines/ls19_legacy.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "FITE",
@@ -579,7 +579,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Turn-based arena: colour kits, move then auto-power (no SPACE), white-outline player, initiative HUD. Survive 10+level turns with 3 hearts. Immortal enemies aggro nearest (fight each other). Damage copies attacker kit.",
     "sourcePath": "custom_games/engines/fite_arena.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "AS66",
@@ -590,7 +590,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 9,
     "description": "Always Sliding (AS66): arrows slide all cursors until blocked; wrap at edges (edge flashes green). Seat every cursor in a U-slot at once. Later levels add colour matching, paint portals, and orange blockers/patrols.",
     "sourcePath": "custom_games/engines/always_sliding.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "GARE",
@@ -601,7 +601,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Click rail controls to slide trains and let mechanical arms transfer their cargo. Later levels introduce inverse arms, multiple trains, mismatched slots and trap entries.",
     "sourcePath": "custom_games/engines/gare_cadence.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "COLM",
@@ -612,7 +612,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Columns-like: steer a falling triple of jewels, cycle their colours, match 3+ in a line (H/V/diag). Clears cascade with gravity. Distinct from craft/inventory games.",
     "sourcePath": "custom_games/engines/columns_match.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "GABA",
@@ -623,7 +623,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Carry cargo through corridors while accounting for its complete footprint. Attach, detach and rotate loads to pass through narrow spaces.",
     "sourcePath": "custom_games/engines/transport_gabarit.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "FUIT",
@@ -634,7 +634,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Catch a fleeing element by pushing stones to close its escape routes. The element moves after each player action.",
     "sourcePath": "custom_games/engines/flee_stones.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "ETAG",
@@ -645,7 +645,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Navigate a multi-floor maze with several stairwells and return trips to reach the exit within the action budget.",
     "sourcePath": "custom_games/engines/etag_floors.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "TICT",
@@ -656,7 +656,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Tic-tac-toe 3×3: click empty cells (X yellow vs O red). L01 saboteur AI; later levels add opponent/player pre-moves, then multi-boards (win ≥1). L06 perfect minimax on 4 boards. Animated pulse on three-in-a-row.",
     "sourcePath": "custom_games/engines/tic_tac_toe.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "GLOB",
@@ -667,7 +667,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Globe track: 7 latitude rings (1-4-7-10-7-4-1). Click a slot to arm a path; SPACE plays recorded directions. Lava/cyclone/cyan hazards; reach the green goal. Exact ASCII globe frame.",
     "sourcePath": "custom_games/engines/globe_track.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "KATA",
@@ -678,7 +678,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Katamino-style pentomino packing: pick, move, rotate and release pieces to tile the board. Fixed hint pieces, collision preview, and increasing board sizes across L01–L06.",
     "sourcePath": "custom_games/engines/katamino.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "HOLE",
@@ -689,7 +689,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Hole palette: paint nested regions with R/G/B primaries. Mixing yields Y/P/C; same-color parent/child conflicts error-reset. Inspired by ARC e3721c99.",
     "sourcePath": "custom_games/engines/hole_palette.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "GRAV",
@@ -700,7 +700,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Gravity Box: choose wall gravity (N/E/S/W) so colored crates slide and stick to matching walls. Later levels add obstacles and a glue toggle. 64×64 pixel controls; six authored boards.",
     "sourcePath": "custom_games/engines/gravity_box.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "VOIS",
@@ -711,7 +711,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Neighbor Cubes: arrange movable cubes so their orthogonal-neighbor colors reproduce the legend inside one of the outlined zones. Six authored 64x64 boards with keyboard and pixel-click controls.",
     "sourcePath": "custom_games/engines/neighbor_cubes.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "POLA",
@@ -722,7 +722,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Polarity: rotate selected red/blue magnets, then let attraction and repulsion settle the board until a magnet reaches the green target. Six authored 64x64 magnetic-physics puzzles.",
     "sourcePath": "custom_games/engines/polarity.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "ELAS",
@@ -733,7 +733,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Elastic Grid: move and stack colored tiles on an irregular grid until the visible raster exactly matches the legend at a uniform scale. Six authored 64x64 boards with hidden stacked tiles.",
     "sourcePath": "custom_games/engines/elastic_grid.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "TRIA",
@@ -744,7 +744,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Triade: steer three colored cubes with three independent joysticks until their relative arrangement matches the legend. Six authored 64x64 toroidal movement puzzles.",
     "sourcePath": "custom_games/engines/triade.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "SERI",
@@ -755,7 +755,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Sequence Lab: infer the missing glyph in four visual sequences per level, select one of three proposals, and submit it. Six authored 64x64 visual-reasoning levels.",
     "sourcePath": "custom_games/engines/sequence_lab.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "COMB",
@@ -766,7 +766,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Combina: press two to four cyclic indicator buttons and visit every possible joint configuration within a bounded action budget. Six authored 64x64 combinatorial puzzles.",
     "sourcePath": "custom_games/engines/combina.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "ISOS",
@@ -777,7 +777,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Iso Sketch: construct an isometric voxel drawing by clicking visible faces, or erase visible cubes, until the cropped view matches the legend. Six authored 64x64 construction puzzles.",
     "sourcePath": "custom_games/engines/iso_sketch.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "SELE",
@@ -788,7 +788,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Selene: rotate selected lunar relays and launch a laser through the complete sphere chain to the terminal target. Six authored 64x64 analytical ray puzzles.",
     "sourcePath": "custom_games/engines/selene.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "REWI",
@@ -799,7 +799,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Rewind: scan a photographic film, observe its complete playback, and click the unique image region matching the target fragment. Six authored 64x64 visual-search puzzles.",
     "sourcePath": "custom_games/engines/rewind.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "LKEY",
@@ -810,7 +810,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Lock & Key: swap keys between rows, apply each row's tool, and test the resulting teeth against the real locks. Six authored 64x64 puzzles with empty lock slots.",
     "sourcePath": "custom_games/engines/lock_and_key.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "TEQU",
@@ -821,7 +821,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Tower Equilibrium: place beams of three lengths to connect both foundations to the target while keeping every supported structure stable. Six authored physics puzzles.",
     "sourcePath": "custom_games/engines/tower_equilibrium.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "GMAP",
@@ -832,7 +832,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Graved Map: explore connected rooms, reveal the engraved map, collect keys automatically and enter matching doors from their keyed side. Six levels with a 30-move limit.",
     "sourcePath": "custom_games/engines/graved_map.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "CGWL",
@@ -843,7 +843,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Cabbage, Goat & Wolf: guide the shepherd and transport each passenger safely across the river, using the calming zone and colored reception slots. Six tutorial levels.",
     "sourcePath": "custom_games/engines/cabbage_goat_wolf.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "WEAV",
@@ -854,7 +854,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Weave colored horizontal and vertical threads through a small grid to reproduce the visible target motif. Six authored levels.",
     "sourcePath": "custom_games/engines/weave.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "GRIL",
@@ -865,7 +865,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Identify colored shapes behind a grille by translating them, then select their matching models within a shared movement budget.",
     "sourcePath": "custom_games/engines/grillage.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "DICO",
@@ -876,7 +876,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Locate a faulty lamp by testing and subdividing series circuits. Read the complete outage animation within the fixed test budget.",
     "sourcePath": "custom_games/engines/dichotomy.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "EVAS",
@@ -887,7 +887,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Reach the exit while avoiding guards and their moving light cones. Click a destination to walk or wait with ACTION5.",
     "sourcePath": "custom_games/engines/evasion.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "KLOT",
@@ -898,7 +898,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Slide rigid pieces one cell at a time to bring the gold bar or L into its exit. Selection and movement each consume one action.",
     "sourcePath": "custom_games/engines/simple_klotski.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "UPST",
@@ -909,7 +909,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Open and close doors to reshape colored entities' routes and reactions until the red entity eats the violet boss.",
     "sourcePath": "custom_games/engines/upset.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "THER",
@@ -920,7 +920,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Fill each thermometer continuously from its bulb until all row and column totals match the visible clues.",
     "sourcePath": "custom_games/engines/thermometers.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "ZIPP",
@@ -931,7 +931,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Draw a path from the blue start through every cell exactly once, reaching the green exit last without crossing walls.",
     "sourcePath": "custom_games/engines/zip.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "AMZE",
@@ -942,7 +942,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Jump along the current arrow's ray to reach the goal within the click reserve. Legal destinations are highlighted in cyan.",
     "sourcePath": "custom_games/engines/arrow_maze.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "PIPE",
@@ -964,7 +964,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Move nested rooms and their descendants to open a path from the source to the outer exit.",
     "sourcePath": "custom_games/engines/nested_rooms.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "CATL",
@@ -975,7 +975,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Infer the classification rule from examples and sort eight caterpillars into violet or orange.",
     "sourcePath": "custom_games/engines/caterpillar_logic.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "PRTL",
@@ -986,7 +986,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Place linked portals and move crates through chambers to reach the exit.",
     "sourcePath": "custom_games/engines/portal_chambers.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "MOTO",
@@ -997,7 +997,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Reposition turning posts, then launch an autonomous motorcycle run to reach the exit.",
     "sourcePath": "custom_games/engines/moto_orbit.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "ONDE",
@@ -1008,7 +1008,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Shift individual waves or the shared film to match every detector's target height.",
     "sourcePath": "custom_games/engines/wave_alignment.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "SNAR",
@@ -1019,7 +1019,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Reveal hidden walls with sonar and navigate moving obstacles to reach the exit.",
     "sourcePath": "custom_games/engines/sonar_maze.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "TRCP",
@@ -1030,7 +1030,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Excavate irreversible tunnels and route source pigments to their matching pockets within the tile budget.",
     "sourcePath": "custom_games/engines/tracing_path.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "SPOR",
@@ -1041,7 +1041,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Schedule biological production and deliver sufficiently fresh doses within the action budget.",
     "sourcePath": "custom_games/engines/spore_lab.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "CWSE",
@@ -1052,7 +1052,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Use an eight-direction lamp and coordinated crate pushes to fill target slots.",
     "sourcePath": "custom_games/engines/catching_without_seeing.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "CAVA",
@@ -1063,7 +1063,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Use knight jumps, seals, switches, portals and fragile cells to reach the goal.",
     "sourcePath": "custom_games/engines/knight_maze.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "SMLP",
@@ -1074,7 +1074,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Configure gates so every runner reaches the shared exit on the same tick.",
     "sourcePath": "custom_games/engines/same_length_path.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "DAME",
@@ -1085,7 +1085,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Select a piece and chain diagonal captures until the solitaire objective is satisfied.",
     "sourcePath": "custom_games/engines/checkers_solitaire.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "HPDL",
@@ -1096,7 +1096,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Configure receiver capacities, color filters and outputs to process the cube train.",
     "sourcePath": "custom_games/engines/homogeneous_pair_deletion.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "CATR",
@@ -1107,7 +1107,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Toggle attraction relations in the control panel to match the target arrangement.",
     "sourcePath": "custom_games/engines/configured_attraction.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "RECR",
@@ -1118,7 +1118,7 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Recruit an ordered squad between battles to clear successive enemy rooms.",
     "sourcePath": "custom_games/engines/recruit_army.py",
-    "availability": "port-pending"
+    "availability": "playable"
   },
   {
     "code": "RSWP",
@@ -1129,13 +1129,15 @@ const records: Omit<GameCatalogEntry, 'sourceUrl'>[] = [
     "levels": 6,
     "description": "Configure three workers and execute shared workshop turns with role changes.",
     "sourcePath": "custom_games/engines/role_swap.py",
-    "availability": "port-pending"
+    "availability": "playable"
   }
 ];
 
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
-  sourceUrl: `${SOURCE_REPOSITORY}/blob/${SOURCE_COMMIT}/${entry.sourcePath}`,
+  sourceUrl: entry.group === 'official'
+    ? `https://three.arcprize.org/api/games/${entry.id}/source`
+    : `${SOURCE_REPOSITORY}/blob/${SOURCE_COMMIT}/${entry.sourcePath}`,
 }));
 
 /** Look up an exact four-character game code, regardless of letter case. */

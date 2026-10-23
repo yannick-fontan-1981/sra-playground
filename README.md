@@ -1,42 +1,51 @@
 # SRA Playground
 
-An English-language playground for Yannick Fontan's custom games and the future
-browser port of his **Symbolic Reasoning Agent**.
+An English-language playground for **100 interactive games** and Yannick
+Fontan's **Symbolic Reasoning Agent** research.
 
-## First playable release
+## The browser playground
 
-- **Dark appearance by default:** charcoal surfaces, light text and lime accents.
-- **100-game catalogue:** all 25 official and 75 custom entries from the pinned
-  upstream evaluation suite, with prominent four-character codes and explicit
-  browser-port availability.
-- **PIPE:** the real Python game ported to TypeScript, with all six levels.
-- **Manual play:** mouse, touch and keyboard; campaign and individual practice.
-- **SRA Agent:** a clearly marked upcoming mode. The genuine reasoning agent is
-  not connected yet; this release does not claim to solve games with SRA.
-- **Browser execution:** static HTML/CSS/JavaScript; no game-action backend,
-  remote inference, CDN assets or external fonts.
-- **Architecture page:** a separate `/architecture.html` page explaining the
-  Python SRA components, evidence and action boundaries, the behavior-tree-loop,
-  and the browser porting roadmap, with links to the pinned source.
+- **100 original game engines:** 25 official games and 75 custom games from
+  three waves, selected by their prominent four-character codes.
+- **Local execution:** the original Python engines run in WebAssembly through
+  Pyodide inside a dedicated Web Worker. A TypeScript interface renders their
+  observations and sends actions to that local worker.
+- **Minimal manual controls:** arrows, a generic Space action, board clicks,
+  Undo, and Reset. The player leaves the game mechanics for you to discover.
+- **Dark appearance:** charcoal surfaces, light text, and lime accents.
+- **SRA Agent:** an upcoming mode. The genuine reasoning agent is not connected
+  yet; playable games are not a claim that SRA solves them.
+- **Architecture page:** `/architecture.html` explains the Python SRA
+  components, evidence and action boundaries, the **behavior-tree-loop**, and
+  the browser integration roadmap, with pinned implementation links.
 
-Selecting an unported catalogue entry opens its own information panel. It does
-not load PIPE under another name. PIPE is the one playable browser engine in
-this version; the catalogue is not a claim that all 100 games have been ported.
+The 100 games use their original Python engines. They have not all been rewritten
+in TypeScript. The independent TypeScript PIPE implementation is retained for
+parity tests and future porting work.
 
-### Controls
+The Python runtime, dependencies, and game bundles are loaded from the site's
+own origin. After initialization, game actions require no server round trip,
+remote inference, or external CDN request. Static hosting serves the initial
+files; the game worker performs the computation on the user's device.
+
+### Controls and session state
 
 | Input | Action |
 | --- | --- |
-| Click or tap a pipe | Select it and rotate it clockwise |
-| Arrow keys, with the board focused | Select a neighboring pipe |
-| Space / the generic button below the arrows | Primary game action (rotates a pipe in PIPE) |
-| R / Restart level | Restart the current level |
-| Numbered level buttons | Start a practice round at that level |
-| New campaign | Restart from level 1 and clear campaign progress |
+| Arrow keys or arrow buttons | Directional action, when available |
+| Space or the button below the arrows | Primary action, when available |
+| Click or tap the board | Coordinate action, when available |
+| Z, Ctrl+Z, or Undo | Undo the last action, when history is available |
+| R or Reset | Restart the current level |
+| Level buttons, where supported | Select a level |
+| Game selector | Load or resume the selected game |
 
-Connect every cell to the blue source without leaks or loops. Completing a
-campaign level advances automatically. Practice rounds remain separate from
-campaign credit. Progress lives in memory and resets when the page reloads.
+Keyboard shortcuts act while the game board is focused. Unsupported actions are
+disabled. Undo retains up to 64 steps, with older snapshots evicted when its
+memory budget is reached; up to eight game sessions are cached in memory.
+Switching games, including browser Back/Forward navigation,
+resumes a cached session. Eviction or reloading the page clears that session.
+The `?game=CODE` URL selects a game; it does not serialize its progress.
 
 ## Run locally
 
@@ -54,54 +63,93 @@ npm run build
 npm run preview
 ```
 
+`dev` and `build` first run `scripts/prepare-python.mjs`. It downloads any missing
+runtime assets specified in `scripts/python-runtime-assets.json`, checks their
+sizes and SHA-256 hashes, and places them in `public/vendor/pyodide/` for
+same-origin delivery. Already verified files are reused. A clean preparation
+requires network access; browser play does not fetch those assets from the
+upstream CDN.
+
+The pinned runtime is **Pyodide 314.0.7 / CPython 3.14.2**. The asset manifest
+totals approximately **18.34 MB**, before hosting compression and excluding the
+game archives. Browser download size and cold-start time depend on caching,
+compression, device, and connection.
+
 The static build is written to `dist/`. Deploy that directory to a static host.
-The `.openai/hosting.json` manifest identifies the existing Sites project; do not
-create a second project when updating this site. The repository has no automatic
-deployment workflow. Sites deployment history and GitHub commits are separate;
-future releases must keep their intended source snapshots aligned.
+The `.openai/hosting.json` manifest identifies the existing Sites project; do
+not create a second project when updating it. Sites deployment history and
+GitHub commits are separate; releases must keep their intended source snapshots
+aligned. No automatic GitHub-to-Sites deployment workflow is configured.
 
-## Faithful game port
+## Game sources and the PIPE reference port
 
-The reference is
-[`custom_games/engines/pipes.py`](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/custom_games/engines/pipes.py)
-at commit `212d8d426f07eea2b6797c2bb647545767488a96`.
-The unchanged Python file is kept under `reference/python/`; release provenance
-is in `public/provenance.json`.
+The custom source reference is
+[ARC-AGI-3-Yannick-Fontan at `212d8d4`](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/tree/212d8d426f07eea2b6797c2bb647545767488a96).
+The official engines retain their source versions and license headers. Runtime
+bundles live under `public/python/`; the official adapter supplies the local
+ARC engine interface used by those sources.
 
-The parity suite covers **22 tests**, including 11 scenarios, 618 commands,
-610 observations, **644 complete 64 × 64 frames**, six independent level wins,
-and a full campaign. It compares game state, counters, action boundaries,
-animations, transitions and frame hashes against the Python reference. Level
-titles and notes are intentionally translated into English.
+### Validate the 100 original engines
 
-To regenerate the deterministic fixtures using Python 3:
+The shipped archives passed **439 advertised action checks**, **373 directly
+accessible level starts and resets**, and **2,163 complete observation
+comparisons** between native Python and self-hosted Pyodide. A separate official
+engine suite covers all **183 official levels** and **874 matching observations**.
+These checks include animation frames, state, Undo, and deterministic continuation;
+they do not establish that every puzzle has been solved.
+
+With Python 3.12+ and NumPy, Pydantic, and typing_extensions installed:
+
+```sh
+node scripts/prepare-python.mjs
+python scripts/test-python-games.py --output /tmp/sra-native.json
+node scripts/test-python-games.mjs --native-report /tmp/sra-native.json
+python scripts/test-official-runtime.py --output /tmp/sra-official-native.json
+node scripts/test-official-runtime.mjs --native-report /tmp/sra-official-native.json
+```
+
+Both WebAssembly runners reject HTTP requests, so a missing local dependency
+cannot silently fall back to a CDN. See [release validation](docs/release-validation.md)
+for the check scope and remaining limits.
+
+### PIPE TypeScript reference
+
+`src/games/pipes.ts` and
+[`reference/python/pipes.py`](reference/python/pipes.py) preserve the original
+Python-to-TypeScript parity work. Its **22-test suite** includes 11 scenarios,
+618 commands, 610 observations, 644 complete 64 × 64 frames, six independent level
+wins, and a full campaign. These results describe the PIPE reference port,
+not solve coverage for the 100-game browser runtime or the SRA agent.
+
+To regenerate those deterministic fixtures using Python 3:
 
 ```sh
 python3 scripts/generate-pipe-fixtures.py
 npm test
 ```
 
-The constraint solver in the fixture generator is exclusively a testing tool.
-Neither it nor the Python reference nor the fixture data is included in the
-browser application. It is not SRA.
+The fixture generator's constraint solver and fixtures are development tools.
+They are not bundled as a playing agent. The browser games execute their own
+Python mechanics through `game_bridge.py` and `official_adapter.py`.
 
 ## Bringing the genuine SRA to the browser
 
-`src/runtime/contracts.ts` prepares an explicit observation/action protocol for
-a future Web Worker. It projects public pixels and progression, excluding hidden
-engine state. No worker or TypeScript reasoning implementation is installed yet.
+`src/runtime/browser-games.ts` and `src/runtime/game-worker.ts` implement the
+current game worker. This worker runs game engines, not SRA reasoning.
 
-See [the architecture and porting plan](docs/architecture.md) for the staged
-Python-to-TypeScript work, parity requirements, session cancellation, resource
-budgets and cross-game regression strategy.
+`src/runtime/contracts.ts` retains a prepared public observation/action contract
+from the PIPE integration work. Connecting the actual SRA requires a complete
+cross-game observation contract, an agent lifecycle, faithful reasoning
+execution, and comparison against the pinned Python agent.
 
-The original project is
-[ARC-AGI-3-Yannick-Fontan](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan).
-The catalogue contains 100 entries, with one playable game and six levels; the
-remaining game ports and genuine SRA integration are future milestones.
+See [the browser architecture and integration plan](docs/architecture.md) for
+runtime boundaries, Undo and Reset semantics, session limits, parity
+requirements, and the next SRA milestones.
 
 ## License
 
-MIT, as selected for this repository. See [LICENSE](LICENSE) and
-[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the preserved upstream notice.
+The Playground's own code is MIT licensed; see [LICENSE](LICENSE). Bundled
+game sources, Pyodide, CPython, and dependencies retain their own licenses and
+copyright notices. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for the
+corresponding attributions and preserved license references.
 
