@@ -6,12 +6,22 @@ browser port of his **Symbolic Reasoning Agent**.
 ## First playable release
 
 - **Dark appearance by default:** charcoal surfaces, light text and lime accents.
+- **100-game catalogue:** all 25 official and 75 custom entries from the pinned
+  upstream evaluation suite, with prominent four-character codes and explicit
+  browser-port availability.
 - **PIPE:** the real Python game ported to TypeScript, with all six levels.
 - **Manual play:** mouse, touch and keyboard; campaign and individual practice.
 - **SRA Agent:** a clearly marked upcoming mode. The genuine reasoning agent is
   not connected yet; this release does not claim to solve games with SRA.
 - **Browser execution:** static HTML/CSS/JavaScript; no game-action backend,
   remote inference, CDN assets or external fonts.
+- **Architecture page:** a separate `/architecture.html` page explaining the
+  Python SRA components, evidence and action boundaries, the behavior-tree-loop,
+  and the browser porting roadmap, with links to the pinned source.
+
+Selecting an unported catalogue entry opens its own information panel. It does
+not load PIPE under another name. PIPE is the one playable browser engine in
+this version; the catalogue is not a claim that all 100 games have been ported.
 
 ### Controls
 
@@ -19,7 +29,7 @@ browser port of his **Symbolic Reasoning Agent**.
 | --- | --- |
 | Click or tap a pipe | Select it and rotate it clockwise |
 | Arrow keys, with the board focused | Select a neighboring pipe |
-| Space, with the board focused | Rotate the selected pipe |
+| Space / the generic button below the arrows | Primary game action (rotates a pipe in PIPE) |
 | R / Restart level | Restart the current level |
 | Numbered level buttons | Start a practice round at that level |
 | New campaign | Restart from level 1 and clear campaign progress |
@@ -87,8 +97,8 @@ budgets and cross-game regression strategy.
 
 The original project is
 [ARC-AGI-3-Yannick-Fontan](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan).
-This first increment contains one game with six levels; the remaining game ports
-and genuine SRA integration are future milestones.
+The catalogue contains 100 entries, with one playable game and six levels; the
+remaining game ports and genuine SRA integration are future milestones.
 
 ## License
 

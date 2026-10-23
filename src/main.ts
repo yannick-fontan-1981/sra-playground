@@ -1,6 +1,7 @@
 import './styles.css';
 import { PipesEngine, PALETTE, type PipesObservation } from './games/pipes';
 import { AGENT_STATUS } from './runtime/contracts';
+import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
 const agentRepo = 'https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan';
@@ -8,7 +9,7 @@ const icon = (name: string, cls = ''): string => {
   const paths: Record<string, string> = {
     arrow: '<path d="M5 12h14m-6-6 6 6-6 6"/>',
     external: '<path d="M7 17 17 7M7 7h10v10"/>',
-    rotate: '<path d="M20 7v5h-5M19 12a7 7 0 1 0-1.7 4.6"/>',
+    space: '<path d="M4 9v6h16V9"/>',
     reset: '<path d="M4 7v5h5M5 12a7 7 0 1 1 1.7 4.6"/>',
     up: '<path d="m6 14 6-6 6 6"/>',
     down: '<path d="m6 10 6 6 6-6"/>',
@@ -23,10 +24,29 @@ const icon = (name: string, cls = ''): string => {
   return `<svg class="icon ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${paths[name] ?? paths.arrow}</svg>`;
 };
 
+const groupLabels: Record<GameCatalogEntry['group'], string> = {
+  official: 'Official ARC-AGI-3',
+  custom: 'Custom · Wave 1',
+  custom_2: 'Custom · Wave 2',
+  custom_3: 'Custom · Wave 3',
+};
+const defaultGame = getGameByCode('PIPE');
+if (!defaultGame) throw new Error('The PIPE catalogue entry is missing.');
+let selectedGame: GameCatalogEntry = getGameByCode(new URL(window.location.href).searchParams.get('game') ?? 'PIPE') ?? defaultGame;
+const playableCount = GAME_CATALOG.filter(game => game.availability === 'playable').length;
+const escapeHtml = (value: string): string => value.replace(/[&<>"']/g, character => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+})[character]!);
+const gameOptions = Object.entries(groupLabels).map(([group, label]) =>
+  `<optgroup label="${escapeHtml(label)}">${GAME_CATALOG.filter(game => game.group === group).map(game =>
+    `<option value="${game.code}"${game.code === selectedGame.code ? ' selected' : ''}>${game.code} — ${escapeHtml(game.name)}${game.availability === 'playable' ? ' · Play now' : ' · Port pending'}</option>`,
+  ).join('')}</optgroup>`,
+).join('');
+
 const app = document.querySelector<HTMLDivElement>('#app');
 if (!app) throw new Error('Application mount is missing.');
 app.innerHTML = `
-  <a class="skip-link" href="#game-canvas">Skip to the game</a>
+  <a class="skip-link" href="#game-select">Skip to the games</a>
   <header class="site-header wrap">
     <a class="brand" href="#" aria-label="SRA Playground home">
       <svg class="brand-mark" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="8" fill="currentColor"/><path d="M9 11h12v7h-7v7h14" fill="none" stroke="#d2f36c" stroke-width="4"/><circle cx="9" cy="11" r="2.5" fill="#d2f36c"/><circle cx="28" cy="25" r="2.5" fill="#d2f36c"/></svg>
@@ -34,35 +54,54 @@ app.innerHTML = `
     </a>
     <nav aria-label="Main navigation">
       <a class="nav-active" href="#playground">Playground</a>
-      <a href="#about">The project</a>
-      <a class="source-link" href="${websiteRepo}" target="_blank" rel="noopener noreferrer">${icon('github')}<span>Source code</span>${icon('external', 'small-icon')}</a>
+      <a href="/architecture.html">Architecture</a>
+      <a class="source-link" href="${websiteRepo}" target="_blank" rel="noopener noreferrer" aria-label="SRA Playground source code on GitHub">${icon('github')}<span>Source code</span>${icon('external', 'small-icon')}</a>
     </nav>
   </header>
 
   <main>
     <section class="intro wrap" aria-labelledby="page-title">
       <div class="intro-main">
-        <p class="eyebrow"><span class="status-dot"></span> SYMBOLIC REASONING, IN PLAY</p>
-        <h1 id="page-title">Small worlds.<br>Big <span class="question-word">questions<span class="title-dot">.</span></span></h1>
+        <p class="eyebrow"><span class="status-dot"></span> SYMBOLIC REASONING AGENT</p>
+        <h1 id="page-title"><span class="toward">Toward</span><br><em>Understandable<br>Intelligence</em></h1>
       </div>
       <div class="intro-copy">
-        <p>Every puzzle is a world to understand.<br>Explore the games behind SRA, one discovery at a time.</p>
+        <p>Explore worlds. Discover mechanisms.<br>Follow the reasoning that connects them.</p>
         <div class="byline"><span class="author-monogram">YF</span><span>A project by <strong>Yannick Fontan</strong></span></div>
       </div>
       <div class="intro-decoration" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
     </section>
 
     <section class="playground-section wrap" id="playground" aria-labelledby="game-title">
-      <div class="section-line"><span class="eyebrow">THE PLAYGROUND</span><span class="catalog-count">01 game available <span>/</span> more worlds ahead</span></div>
+      <div class="section-line"><span class="eyebrow">THE PLAYGROUND</span><span class="catalog-count">${GAME_CATALOG.length} games in the catalogue <span>/</span> ${playableCount} playable in your browser</span></div>
       <article class="player">
         <header class="player-header">
           <div class="game-identity">
-            <div class="pipe-emblem" aria-hidden="true"><svg viewBox="0 0 40 40"><path d="M9 10h13v12h10M22 22v10" fill="none" stroke="currentColor" stroke-width="6"/><circle cx="9" cy="10" r="4" fill="currentColor"/><circle cx="32" cy="22" r="4" fill="currentColor"/></svg></div>
-            <div><div class="game-title-row"><h2 id="game-title">Pipes</h2><span class="game-code">PIPE</span></div><p>Rotation. Connection. One complete network.</p></div>
+            <span class="game-code-badge" id="game-code">PIPE</span>
+            <div><h2 id="game-title">Pipes</h2><p id="game-meta">Custom · Wave 3 · 6 levels</p></div>
           </div>
-          <div class="game-tags"><span>6 levels</span><span>Logic puzzle</span></div>
+          <div class="game-picker">
+            <div class="picker-label"><label for="game-select">CHOOSE A GAME</label><span id="game-availability" class="availability-tag">Playable</span></div>
+            <select id="game-select" aria-describedby="catalogue-help">${gameOptions}</select>
+            <span id="catalogue-help" class="sr-only">100 games grouped by collection. PIPE is playable; other games are listed with their browser port status.</span>
+          </div>
         </header>
+        <p id="selection-feedback" class="sr-only" role="status" aria-live="polite"></p>
 
+        <section id="port-pending" class="port-pending" aria-labelledby="pending-title" hidden>
+          <div class="pending-world" aria-hidden="true"><span class="pending-orbit"></span><span id="pending-code">LS20</span><i></i><i></i><i></i></div>
+          <div class="pending-content">
+            <p class="eyebrow"><span class="status-dot"></span> IN THE CATALOGUE</p>
+            <h3 id="pending-title">Browser port pending</h3>
+            <p id="pending-description"></p>
+            <dl class="pending-details"><div><dt>Collection</dt><dd id="pending-group"></dd></div><div><dt>Levels</dt><dd id="pending-levels"></dd></div></dl>
+            <p class="pending-note">This game is part of the reference suite. Its browser version is not available yet.</p>
+            <div class="pending-actions"><button id="play-pipes" class="primary-button" type="button">Play PIPE ${icon('arrow')}</button><a id="pending-source" class="text-link" target="_blank" rel="noopener noreferrer">Reference source ${icon('external')}</a></div>
+            <a class="pending-architecture text-link" href="/architecture.html">How the project works ${icon('arrow')}</a>
+          </div>
+        </section>
+
+        <div id="playable-game">
         <div class="mode-bar">
           <div class="mode-tabs" role="tablist" aria-label="Play mode">
             <button type="button" id="manual-tab" role="tab" aria-selected="true" aria-controls="manual-panel" tabindex="0">${icon('play')}Manual</button>
@@ -75,12 +114,12 @@ app.innerHTML = `
           <div class="board-column">
             <div class="board-meta"><span id="session-kind">CAMPAIGN</span><button id="fullscreen-button" class="icon-button" type="button" aria-label="Expand game board" title="Expand game board">${icon('expand')}</button></div>
             <div class="canvas-stage" id="canvas-stage">
-              <canvas id="game-canvas" width="64" height="64" tabindex="0" role="application" aria-label="Pipes puzzle. Use the arrow keys to select a pipe, then Space to rotate. Click or tap a pipe to rotate it." aria-describedby="keyboard-help">Your browser must support canvas to play Pipes.</canvas>
+              <canvas id="game-canvas" width="64" height="64" tabindex="0" role="application" aria-label="Pipes game board. Use the arrow keys, Space, or click a cell to interact." aria-describedby="keyboard-help">Your browser must support canvas to play Pipes.</canvas>
               <div class="game-overlay" id="win-overlay" hidden><div class="win-check">${icon('check')}</div><p class="eyebrow" id="win-eyebrow">LEVEL COMPLETE</p><h3 id="win-title">Everything connects.</h3><p id="win-copy">A single network. No leaks. No loops.</p><button class="primary-button" type="button" id="win-continue">Play again ${icon('arrow')}</button></div>
               <div class="agent-board-label" id="agent-board-label" hidden>${icon('agent')} SRA integration in progress</div>
             </div>
             <div class="board-caption"><span><span class="source-dot"></span> Blue is your source</span><span>64 × 64</span></div>
-            <p class="game-feedback" id="game-feedback" aria-live="polite">Click a pipe. Turn a possibility into a connection.</p>
+            <p class="game-feedback" id="game-feedback" aria-live="polite">Choose an action. Observe what changes.</p>
           </div>
 
           <aside class="control-column">
@@ -90,8 +129,22 @@ app.innerHTML = `
               <p class="game-goal">Rotate the pipes to connect every cell to the blue source, with no leaks or loops.</p>
               <div class="supply-status"><div><span>Connected to source</span><strong id="connected-count">1 <span>/ 9</span></strong></div><div class="supply-track" aria-hidden="true"><div id="supply-fill"></div></div></div>
               <dl class="game-stats"><div><dt>Rotations</dt><dd id="moves-count">0</dd></div><div><dt>Leaks</dt><dd id="leaks-count">0</dd></div><div><dt>Loops</dt><dd id="cycles-count">0</dd></div></dl>
-              <div class="main-controls"><button type="button" id="rotate-button" class="primary-button">${icon('rotate')}Rotate pipe <kbd>Space</kbd></button><button type="button" id="restart-button" class="secondary-button">${icon('reset')}Restart level<kbd>R</kbd></button></div>
-              <div class="direction-controls"><div class="d-pad" aria-label="Move pipe selection"><button type="button" data-action="1" class="direction-up" aria-label="Select pipe above">${icon('up')}</button><button type="button" data-action="3" class="direction-left" aria-label="Select pipe to the left">${icon('left')}</button><span class="d-pad-center" aria-hidden="true"></span><button type="button" data-action="4" class="direction-right" aria-label="Select pipe to the right">${icon('right')}</button><button type="button" data-action="2" class="direction-down" aria-label="Select pipe below">${icon('down')}</button></div><p id="keyboard-help">Arrow keys to select.<br>Space to rotate.<br>Or just click a pipe.</p></div>
+              <div class="compact-controller" aria-label="Game controls">
+                <div class="input-pad">
+                  <div class="d-pad" aria-label="Directional actions">
+                    <button type="button" data-action="1" class="direction-up" aria-label="Up" title="Arrow up">${icon('up')}</button>
+                    <button type="button" data-action="3" class="direction-left" aria-label="Left" title="Arrow left">${icon('left')}</button>
+                    <span class="d-pad-center" aria-hidden="true"></span>
+                    <button type="button" data-action="4" class="direction-right" aria-label="Right" title="Arrow right">${icon('right')}</button>
+                    <button type="button" data-action="2" class="direction-down" aria-label="Down" title="Arrow down">${icon('down')}</button>
+                  </div>
+                  <button type="button" id="rotate-button" class="space-action" aria-label="Primary action (Space)" title="Space">${icon('space')}<span>Space</span></button>
+                </div>
+                <div class="utility-controls">
+                  <button type="button" id="restart-button" class="reset-control" aria-label="Restart level (R)" title="Restart level (R)">${icon('reset')}<kbd>R</kbd></button>
+                  <p id="keyboard-help">Arrow keys<br>Space · click</p>
+                </div>
+              </div>
             </div>
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}" hidden>
               <span class="eyebrow agent-status"><span class="status-dot"></span> NEXT CHAPTER</span>
@@ -105,13 +158,14 @@ app.innerHTML = `
           </aside>
         </div>
 
-        <footer class="level-explorer"><div><span class="eyebrow">EXPLORE A LEVEL</span><span class="practice-note">Jump in for a practice round</span></div><div class="level-buttons" aria-label="Practice a level">${Array.from({ length: 6 }, (_, i) => `<button type="button" data-level="${i + 1}" aria-label="Practice level ${i + 1}"><span>${String(i + 1).padStart(2, '0')}</span><span class="level-complete-mark" aria-hidden="true">${icon('check')}</span></button>`).join('')}</div><button type="button" id="campaign-button" class="campaign-button">New campaign ${icon('arrow')}</button></footer>
+        <footer class="level-explorer"><div><span class="eyebrow">LEVELS</span><span class="practice-note">Practice</span></div><div class="level-buttons" aria-label="Practice a level">${Array.from({ length: 6 }, (_, i) => `<button type="button" data-level="${i + 1}" aria-label="Practice level ${i + 1}"><span>${String(i + 1).padStart(2, '0')}</span><span class="level-complete-mark" aria-hidden="true">${icon('check')}</span></button>`).join('')}</div><button type="button" id="campaign-button" class="campaign-button">New campaign ${icon('arrow')}</button></footer>
+        </div>
       </article>
     </section>
 
     <section class="about-section wrap" id="about" aria-labelledby="about-title">
-      <div class="about-heading"><p class="eyebrow">BEHIND THE PLAYGROUND</p><h2 id="about-title">A place to play.<br>A way to study reasoning.</h2><a class="text-link" href="${agentRepo}" target="_blank" rel="noopener noreferrer">Inside the SRA project ${icon('external')}</a></div>
-      <div class="about-content"><p>SRA stands for <strong>Symbolic Reasoning Agent</strong>. This playground brings Yannick Fontan’s games together with his exploration of how an agent can discover mechanisms, connect knowledge, and pursue a goal.</p><p>Start by playing. The next step is to bring the agent alongside you, with the game and its reasoning running in your browser.</p><div class="reasoning-flow" aria-label="The intended reasoning loop: observe, discover, compose, act"><span><b>01</b>Observe</span><span><b>02</b>Discover</span><span><b>03</b>Compose</span><span><b>04</b>Act</span></div></div>
+      <div class="about-heading"><p class="eyebrow">BEHIND THE PLAYGROUND</p><h2 id="about-title">From a discovery<br>to a reasoned action.</h2><a class="text-link" href="/architecture.html">Explore the architecture ${icon('arrow')}</a></div>
+      <div class="about-content"><p>SRA stands for <strong>Symbolic Reasoning Agent</strong>. The project studies how an agent can discover mechanisms, connect what it learns, and return to a goal with a new way forward.</p><p>The architecture page follows that process: observations, reusable knowledge, compositions, and the behavior-tree-loop that links discovery to continued action.</p><div class="reasoning-flow" aria-label="The intended reasoning loop: observe, discover, compose, act"><span><b>01</b>Observe</span><span><b>02</b>Discover</span><span><b>03</b>Compose</span><span><b>04</b>Act</span></div></div>
     </section>
   </main>
   <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Yannick Fontan · 2026</span><div><span class="release-label">First playable release</span><a href="${websiteRepo}/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT license ${icon('external')}</a></div></footer>
@@ -134,6 +188,7 @@ let observation: PipesObservation = engine.observe();
 let mode: 'manual' | 'agent' = 'manual';
 let busy = false;
 let animationGeneration = 0;
+const isPlayable = (): boolean => selectedGame.code === 'PIPE' && selectedGame.availability === 'playable';
 
 function paint(frame: readonly (readonly number[])[]): void {
   if (!context) return;
@@ -151,6 +206,7 @@ function paint(frame: readonly (readonly number[])[]): void {
 }
 
 function updateInterface(): void {
+  const playable = isPlayable();
   element('#level-number').textContent = `LEVEL ${String(observation.level).padStart(2, '0')} / 06`;
   element('#level-title').textContent = observation.level_name;
   element('#moves-count').textContent = String(observation.moves);
@@ -165,23 +221,24 @@ function updateInterface(): void {
     button.classList.toggle('current-level', level === observation.level);
     button.classList.toggle('completed-level', Boolean(observation.completed[level - 1]));
     button.setAttribute('aria-pressed', String(level === observation.level));
-    button.disabled = mode !== 'manual' || busy;
+    button.disabled = !playable || mode !== 'manual' || busy;
   }
   const won = observation.state === 'WIN';
-  element('#win-overlay').hidden = !won || busy || mode !== 'manual';
+  element('#win-overlay').hidden = !playable || !won || busy || mode !== 'manual';
   element('#win-eyebrow').textContent = observation.test_mode ? 'LEVEL COMPLETE' : 'CAMPAIGN COMPLETE';
   element('#win-title').textContent = observation.test_mode ? 'Everything connects.' : 'Six worlds. All connected.';
   element('#win-copy').textContent = observation.test_mode ? 'A single network. No leaks. No loops.' : 'You brought every pipe into the flow.';
   element('#win-continue').innerHTML = `${observation.test_mode && observation.level < 6 ? 'Try the next level' : 'Play again'} ${icon('arrow')}`;
-  element<HTMLButtonElement>('#rotate-button').disabled = won || busy || mode !== 'manual';
-  element<HTMLButtonElement>('#restart-button').disabled = busy || mode !== 'manual';
-  element<HTMLButtonElement>('#campaign-button').disabled = busy || mode !== 'manual';
-  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-action]')) button.disabled = won || busy || mode !== 'manual';
+  element<HTMLButtonElement>('#rotate-button').disabled = !playable || won || busy || mode !== 'manual';
+  element<HTMLButtonElement>('#restart-button').disabled = !playable || busy || mode !== 'manual';
+  element<HTMLButtonElement>('#campaign-button').disabled = !playable || busy || mode !== 'manual';
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-action]')) button.disabled = !playable || won || busy || mode !== 'manual';
   canvas.setAttribute('aria-busy', String(busy));
-  canvas.tabIndex = mode === 'manual' ? 0 : -1;
+  canvas.tabIndex = playable && mode === 'manual' ? 0 : -1;
 }
 
 async function present(next: PipesObservation, initialMessage?: string): Promise<void> {
+  if (!isPlayable()) return;
   const generation = ++animationGeneration;
   observation = next;
   busy = next.frames.length > 1;
@@ -189,11 +246,11 @@ async function present(next: PipesObservation, initialMessage?: string): Promise
   if (initialMessage) element('#game-feedback').textContent = initialMessage;
   const frames = next.frames.length ? next.frames : [next.frame];
   for (let i = 0; i < frames.length; i += 1) {
-    if (generation !== animationGeneration) return;
+    if (generation !== animationGeneration || !isPlayable()) return;
     paint(frames[i]!);
     if (frames.length > 1 && i < frames.length - 1) await new Promise<void>((resolve) => window.setTimeout(resolve, 1000 / next.default_fps));
   }
-  if (generation !== animationGeneration) return;
+  if (generation !== animationGeneration || !isPlayable()) return;
   busy = false;
   updateInterface();
   if (next.event === 'success') {
@@ -201,12 +258,12 @@ async function present(next: PipesObservation, initialMessage?: string): Promise
   } else if (next.event === 'win') {
     element('#game-feedback').textContent = next.test_mode ? 'Level complete. Every pipe is connected.' : 'Campaign complete. All six levels solved.';
   } else if (!initialMessage && next.event !== 'ignored') {
-    element('#game-feedback').textContent = next.selected_cell ? 'Selected pipe outlined in white. Space to rotate.' : 'Click a pipe. Turn a possibility into a connection.';
+    element('#game-feedback').textContent = next.selected_cell ? 'Selection updated. Choose your next action.' : 'Choose an action. Observe what changes.';
   }
 }
 
 function perform(action: number, data?: { x: number; y: number }): void {
-  if (mode !== 'manual' || busy) return;
+  if (!isPlayable() || mode !== 'manual' || busy) return;
   void present(engine.action(action, data));
 }
 
@@ -227,6 +284,55 @@ function setMode(next: 'manual' | 'agent', focusTab = false): void {
   if (focusTab) (manual ? manualTab : agentTab).focus();
 }
 
+function selectGame(code: string, historyMode: 'push' | 'replace' | 'none' = 'push'): void {
+  const game = getGameByCode(code) ?? defaultGame!;
+  const changed = selectedGame.code !== game.code;
+  if (changed) {
+    // The engine already holds the final state of an animation. Stop presenting
+    // its old frames before switching the catalogue view, then restore that state.
+    animationGeneration += 1;
+    busy = false;
+  }
+  selectedGame = game;
+  const playable = isPlayable();
+  element<HTMLSelectElement>('#game-select').value = game.code;
+  element('#game-code').textContent = game.code;
+  element('#game-title').textContent = game.name;
+  element('#game-meta').textContent = `${groupLabels[game.group]}${game.levels === null ? '' : ` · ${game.levels} levels`}`;
+  element('#game-availability').textContent = playable ? 'Playable' : 'Port pending';
+  element('#game-availability').classList.toggle('is-pending', !playable);
+  element('#playable-game').hidden = !playable;
+  element('#port-pending').hidden = playable;
+  element('#pending-code').textContent = game.code;
+  element('#pending-description').textContent = game.description;
+  element('#pending-group').textContent = groupLabels[game.group];
+  element('#pending-levels').textContent = game.levels === null ? 'Not specified in the catalogue' : String(game.levels);
+  element<HTMLAnchorElement>('#pending-source').href = game.sourceUrl;
+  element('#selection-feedback').textContent = `${game.code} selected. ${playable ? 'Available for manual play.' : 'Browser port pending.'}`;
+  document.title = `${game.code} · SRA Playground`;
+  if (changed) setMode('manual');
+  else updateInterface();
+  if (playable) paint(observation.frame);
+  if (historyMode !== 'none') {
+    const url = new URL(window.location.href);
+    url.searchParams.set('game', game.code);
+    if (historyMode === 'replace') window.history.replaceState(null, '', url);
+    else if (url.href !== window.location.href) window.history.pushState(null, '', url);
+  }
+}
+
+element<HTMLSelectElement>('#game-select').addEventListener('change', event => {
+  selectGame((event.currentTarget as HTMLSelectElement).value);
+});
+window.addEventListener('popstate', () => {
+  selectGame(new URL(window.location.href).searchParams.get('game') ?? 'PIPE', 'none');
+});
+element('#play-pipes').addEventListener('click', () => {
+  selectGame('PIPE');
+  setMode('manual');
+  canvas.focus({ preventScroll: true });
+});
+
 element('#manual-tab').addEventListener('click', () => setMode('manual'));
 element('#agent-tab').addEventListener('click', () => setMode('agent'));
 element('#return-manual').addEventListener('click', () => { setMode('manual'); canvas.focus({ preventScroll: true }); });
@@ -237,7 +343,7 @@ element('.mode-tabs').addEventListener('keydown', (event: KeyboardEvent) => {
 });
 
 canvas.addEventListener('click', (event: MouseEvent) => {
-  if (mode !== 'manual' || busy) return;
+  if (!isPlayable() || mode !== 'manual' || busy) return;
   const rect = canvas.getBoundingClientRect();
   const x = Math.floor(((event.clientX - rect.left) / rect.width) * 64);
   const y = Math.floor(((event.clientY - rect.top) / rect.height) * 64);
@@ -253,21 +359,21 @@ canvas.addEventListener('keydown', (event: KeyboardEvent) => {
   perform(action);
 });
 element('#rotate-button').addEventListener('click', () => { perform(5); canvas.focus({ preventScroll: true }); });
-element('#restart-button').addEventListener('click', () => { if (mode !== 'manual' || busy) return; void present(engine.level_reset(), 'Fresh pipes. A new way through.'); canvas.focus({ preventScroll: true }); });
+element('#restart-button').addEventListener('click', () => { if (!isPlayable() || mode !== 'manual' || busy) return; void present(engine.level_reset(), 'Fresh pipes. A new way through.'); canvas.focus({ preventScroll: true }); });
 for (const button of document.querySelectorAll<HTMLButtonElement>('[data-action]')) {
   button.addEventListener('click', () => { perform(Number(button.dataset.action)); canvas.focus({ preventScroll: true }); });
 }
 for (const button of document.querySelectorAll<HTMLButtonElement>('[data-level]')) {
   button.addEventListener('click', () => {
-    if (mode !== 'manual' || busy) return;
+    if (!isPlayable() || mode !== 'manual' || busy) return;
     const level = Number(button.dataset.level);
     void present(engine.jump_to_level(level), `Practice level ${level}. Campaign progress starts fresh when you choose New campaign.`);
     canvas.focus({ preventScroll: true });
   });
 }
-element('#campaign-button').addEventListener('click', () => { if (mode !== 'manual' || busy) return; void present(engine.reset(), 'A fresh campaign. Six networks to discover.'); canvas.focus({ preventScroll: true }); });
+element('#campaign-button').addEventListener('click', () => { if (!isPlayable() || mode !== 'manual' || busy) return; void present(engine.reset(), 'A fresh campaign. Six networks to discover.'); canvas.focus({ preventScroll: true }); });
 element('#win-continue').addEventListener('click', () => {
-  if (mode !== 'manual' || busy) return;
+  if (!isPlayable() || mode !== 'manual' || busy) return;
   void present(observation.test_mode && observation.level < 6 ? engine.jump_to_level(observation.level + 1) : engine.reset());
   canvas.focus({ preventScroll: true });
 });
@@ -278,5 +384,4 @@ fullscreenButton.addEventListener('click', () => {
   void operation.catch(() => { element('#game-feedback').textContent = 'Full-screen mode is not available in this browser window.'; });
 });
 
-paint(observation.frame);
-updateInterface();
+selectGame(selectedGame.code, 'replace');

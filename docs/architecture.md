@@ -20,6 +20,8 @@ The original Python project remains the reference:
 | --- | --- | --- |
 | `src/games/pipes.ts` | Deterministic game state, actions, transitions and pixel rendering | Implemented |
 | `src/main.ts`, `src/styles.css` | Manual interaction, presentation, campaign and practice controls | Implemented |
+| `src/games/catalog.ts` | Pinned 100-game catalogue with codes and explicit port availability | Implemented |
+| `architecture.html`, `src/architecture.ts`, `src/architecture.css` | Visitor-facing explanation of the SRA architecture | Implemented |
 | `src/runtime/contracts.ts` | Explicit public observation projection and typed worker messages | Defined; no worker is connected |
 | `reference/python/pipes.py` | Pinned upstream parity reference | Development only |
 | `scripts/generate-pipe-fixtures.py`, `tests/` | Independent Python traces and TypeScript parity checks | Development only |
@@ -75,10 +77,16 @@ memory accounting are **not implemented in release 0.1**.
 
 ## Scaling the playground
 
+The selectable catalogue contains the 100 games in the pinned upstream evaluation
+suite: 25 official games and 75 custom games across three waves. It exposes each
+four-character code and the browser port's availability. PIPE is currently the
+only playable engine; selecting another entry opens its metadata and source
+reference. An unported game never displays PIPE as though it were that game.
+
 Add game engines through a common action/observation adapter, with one provenance
 entry and independent parity checks per port. Keep reusable UI controls separate
-from game mechanics. A catalogue of 100 games is the product direction; this
-release exposes one game, not 100 converted engines.
+from game mechanics. The visible Architecture page explains the current Python
+SRA; this developer document describes the browser application's boundaries.
 
 After each coherent SRA porting increment, rerun the relevant component traces
 and an expanding cross-game regression set. Keep a pinned baseline and compare
