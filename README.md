@@ -5,6 +5,7 @@ browser port of his **Symbolic Reasoning Agent**.
 
 ## First playable release
 
+- **Dark appearance by default:** charcoal surfaces, light text and lime accents.
 - **PIPE:** the real Python game ported to TypeScript, with all six levels.
 - **Manual play:** mouse, touch and keyboard; campaign and individual practice.
 - **SRA Agent:** a clearly marked upcoming mode. The genuine reasoning agent is
