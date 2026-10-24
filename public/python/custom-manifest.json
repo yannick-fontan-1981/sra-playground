@@ -1,0 +1,4238 @@
+{
+  "repository": "https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan",
+  "commit": "212d8d426f07eea2b6797c2bb647545767488a96",
+  "license": "MIT (preserved in licenses/custom-source-MIT.txt)",
+  "note": "Original game engines and required level assets, unchanged. No oracle or solution-replay files are bundled.",
+  "games": [
+    {
+      "code": "SKBN",
+      "game_id": "skbn-c0000001",
+      "engine": "sokoban",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "CLRS",
+      "game_id": "clrs-c0000001",
+      "engine": "color_glass",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "SWCH",
+      "game_id": "swch-c0000001",
+      "engine": "switch_rooms",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "STCK",
+      "game_id": "stck-c0000001",
+      "engine": "stack_iso",
+      "level_count": 6,
+      "default_fps": 10
+    },
+    {
+      "code": "HANO",
+      "game_id": "hano-c0000001",
+      "engine": "hanoi",
+      "level_count": 4,
+      "default_fps": 8
+    },
+    {
+      "code": "SEQN",
+      "game_id": "seqn-c0000001",
+      "engine": "seqn_groups",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "MIND",
+      "game_id": "mind-c0000001",
+      "engine": "mind_code",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "MEMO",
+      "game_id": "memo-c0000001",
+      "engine": "memo_recall",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "REGN",
+      "game_id": "regn-c0000001",
+      "engine": "reign_gauges",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "CONN",
+      "game_id": "conn-c0000001",
+      "engine": "connect_four",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "DNOI",
+      "game_id": "dnoi-c0000001",
+      "engine": "denoise_trame",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "SYME",
+      "game_id": "syme-c0000001",
+      "engine": "symmetry_fix",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "GORI",
+      "game_id": "gori-c0000001",
+      "engine": "gori_ballistics",
+      "level_count": 6,
+      "default_fps": 10
+    },
+    {
+      "code": "KEYD",
+      "game_id": "keyd-c0000001",
+      "engine": "key_doors",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "LOGI",
+      "game_id": "logi-c0000001",
+      "engine": "logic_circuit",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "PORT",
+      "game_id": "port-c0000001",
+      "engine": "portal_topology",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "FOGW",
+      "game_id": "fogw-c0000001",
+      "engine": "fog_hidden_motion",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "LIFE",
+      "game_id": "life-c0000001",
+      "engine": "life_lineage",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "VALV",
+      "game_id": "valv-c0000001",
+      "engine": "valve_flow",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "SIGN",
+      "game_id": "sign-c0000001",
+      "engine": "signal_seal",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "CASC",
+      "game_id": "casc-c0000001",
+      "engine": "cascade_quiesce",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "CRAF",
+      "game_id": "craf-c0000001",
+      "engine": "craft_console",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "ESCT",
+      "game_id": "esct-c0000001",
+      "engine": "escort_patrol",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "LS19",
+      "game_id": "ls19-c0000001",
+      "engine": "ls19_legacy",
+      "level_count": 8,
+      "default_fps": 10
+    },
+    {
+      "code": "FITE",
+      "game_id": "fite-c0000001",
+      "engine": "fite_arena",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "AS66",
+      "game_id": "as66-c0000001",
+      "engine": "always_sliding",
+      "level_count": 9,
+      "default_fps": 12
+    },
+    {
+      "code": "GARE",
+      "game_id": "gare-c0000001",
+      "engine": "gare_cadence",
+      "level_count": 6,
+      "default_fps": 10
+    },
+    {
+      "code": "COLM",
+      "game_id": "colm-c0000001",
+      "engine": "columns_match",
+      "level_count": 6,
+      "default_fps": 12
+    },
+    {
+      "code": "GABA",
+      "game_id": "gaba-c0000001",
+      "engine": "transport_gabarit",
+      "level_count": 6,
+      "default_fps": 10
+    },
+    {
+      "code": "FUIT",
+      "game_id": "fuit-c0000001",
+      "engine": "flee_stones",
+      "level_count": 6,
+      "default_fps": 10
+    },
+    {
+      "code": "ETAG",
+      "game_id": "etag-c0000001",
+      "engine": "etag_floors",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "TICT",
+      "game_id": "tict-c0000001",
+      "engine": "tic_tac_toe",
+      "level_count": 6,
+      "default_fps": 10
+    },
+    {
+      "code": "GLOB",
+      "game_id": "glob-c0000001",
+      "engine": "globe_track",
+      "level_count": 6,
+      "default_fps": 10
+    },
+    {
+      "code": "KATA",
+      "game_id": "kata-c0000001",
+      "engine": "katamino",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "HOLE",
+      "game_id": "hole-c0000001",
+      "engine": "hole_palette",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "GRAV",
+      "game_id": "grav-c0000001",
+      "engine": "gravity_box",
+      "level_count": 6,
+      "default_fps": 20
+    },
+    {
+      "code": "VOIS",
+      "game_id": "vois-c0000001",
+      "engine": "neighbor_cubes",
+      "level_count": 6,
+      "default_fps": 10
+    },
+    {
+      "code": "POLA",
+      "game_id": "pola-c0000001",
+      "engine": "polarity",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "ELAS",
+      "game_id": "elas-c0000001",
+      "engine": "elastic_grid",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "TRIA",
+      "game_id": "tria-c0000001",
+      "engine": "triade",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "SERI",
+      "game_id": "seri-c0000001",
+      "engine": "sequence_lab",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "COMB",
+      "game_id": "comb-c0000001",
+      "engine": "combina",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "ISOS",
+      "game_id": "isos-c0000001",
+      "engine": "iso_sketch",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "SELE",
+      "game_id": "sele-c0000001",
+      "engine": "selene",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "REWI",
+      "game_id": "rewi-c0000001",
+      "engine": "rewind",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "LKEY",
+      "game_id": "lkey-c0000001",
+      "engine": "lock_and_key",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "TEQU",
+      "game_id": "tequ-c0000001",
+      "engine": "tower_equilibrium",
+      "level_count": 6,
+      "default_fps": 12
+    },
+    {
+      "code": "GMAP",
+      "game_id": "gmap-c0000001",
+      "engine": "graved_map",
+      "level_count": 6,
+      "default_fps": 12
+    },
+    {
+      "code": "CGWL",
+      "game_id": "cgwl-c0000001",
+      "engine": "cabbage_goat_wolf",
+      "level_count": 6,
+      "default_fps": 12
+    },
+    {
+      "code": "WEAV",
+      "game_id": "weav-c0000001",
+      "engine": "weave",
+      "level_count": 6,
+      "default_fps": 12
+    },
+    {
+      "code": "GRIL",
+      "game_id": "gril-c3000001",
+      "engine": "grillage",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "DICO",
+      "game_id": "dico-c3000001",
+      "engine": "dichotomy",
+      "level_count": 6,
+      "default_fps": 16
+    },
+    {
+      "code": "EVAS",
+      "game_id": "evas-c3000001",
+      "engine": "evasion",
+      "level_count": 6,
+      "default_fps": 24
+    },
+    {
+      "code": "KLOT",
+      "game_id": "klot-c3000001",
+      "engine": "simple_klotski",
+      "level_count": 6,
+      "default_fps": 24
+    },
+    {
+      "code": "UPST",
+      "game_id": "upst-c3000001",
+      "engine": "upset",
+      "level_count": 6,
+      "default_fps": 60
+    },
+    {
+      "code": "THER",
+      "game_id": "ther-c3000001",
+      "engine": "thermometers",
+      "level_count": 6,
+      "default_fps": 8
+    },
+    {
+      "code": "ZIPP",
+      "game_id": "zipp-c3000001",
+      "engine": "zip",
+      "level_count": 6,
+      "default_fps": 10
+    },
+    {
+      "code": "AMZE",
+      "game_id": "amze-c3000001",
+      "engine": "arrow_maze",
+      "level_count": 6,
+      "default_fps": 24
+    },
+    {
+      "code": "PIPE",
+      "game_id": "pipe-c3000001",
+      "engine": "pipes",
+      "level_count": 6,
+      "default_fps": 10
+    },
+    {
+      "code": "GIGO",
+      "game_id": "gigo-c3000001",
+      "engine": "nested_rooms",
+      "level_count": 6,
+      "default_fps": 30
+    },
+    {
+      "code": "CATL",
+      "game_id": "catl-c3000001",
+      "engine": "caterpillar_logic",
+      "level_count": 6,
+      "default_fps": 24
+    },
+    {
+      "code": "PRTL",
+      "game_id": "prtl-c3000001",
+      "engine": "portal_chambers",
+      "level_count": 6,
+      "default_fps": 24
+    },
+    {
+      "code": "MOTO",
+      "game_id": "moto-c3000001",
+      "engine": "moto_orbit",
+      "level_count": 6,
+      "default_fps": 20
+    },
+    {
+      "code": "ONDE",
+      "game_id": "onde-c3000001",
+      "engine": "wave_alignment",
+      "level_count": 6,
+      "default_fps": 16
+    },
+    {
+      "code": "SNAR",
+      "game_id": "snar-c3000001",
+      "engine": "sonar_maze",
+      "level_count": 6,
+      "default_fps": 20
+    },
+    {
+      "code": "TRCP",
+      "game_id": "trcp-c3000001",
+      "engine": "tracing_path",
+      "level_count": 6,
+      "default_fps": 16
+    },
+    {
+      "code": "SPOR",
+      "game_id": "spor-c3000001",
+      "engine": "spore_lab",
+      "level_count": 6,
+      "default_fps": 40
+    },
+    {
+      "code": "CWSE",
+      "game_id": "cwse-c3000001",
+      "engine": "catching_without_seeing",
+      "level_count": 6,
+      "default_fps": 12
+    },
+    {
+      "code": "CAVA",
+      "game_id": "cava-c3000001",
+      "engine": "knight_maze",
+      "level_count": 6,
+      "default_fps": 25
+    },
+    {
+      "code": "SMLP",
+      "game_id": "smlp-c3000001",
+      "engine": "same_length_path",
+      "level_count": 6,
+      "default_fps": 40
+    },
+    {
+      "code": "DAME",
+      "game_id": "dame-c3000001",
+      "engine": "checkers_solitaire",
+      "level_count": 6,
+      "default_fps": 25
+    },
+    {
+      "code": "HPDL",
+      "game_id": "hpdl-c3000001",
+      "engine": "homogeneous_pair_deletion",
+      "level_count": 6,
+      "default_fps": 20
+    },
+    {
+      "code": "CATR",
+      "game_id": "catr-c3000001",
+      "engine": "configured_attraction",
+      "level_count": 6,
+      "default_fps": 30
+    },
+    {
+      "code": "RECR",
+      "game_id": "recr-c3000001",
+      "engine": "recruit_army",
+      "level_count": 6,
+      "default_fps": 25
+    },
+    {
+      "code": "RSWP",
+      "game_id": "rswp-c3000001",
+      "engine": "role_swap",
+      "level_count": 6,
+      "default_fps": 20
+    }
+  ],
+  "files": [
+    {
+      "path": "LICENSE",
+      "archive_path": "licenses/custom-source-MIT.txt",
+      "bytes": 1065,
+      "sha256": "75c4276c506fd93082b38ad39f67ee97aa859574401ef978e701710c7a40af04",
+      "git_blob_sha": "d8e1cd42ac40338c6c76a8a6ac18eea0eaf95fbe"
+    },
+    {
+      "path": "api/specs/LS20-spec.json",
+      "archive_path": "api/specs/LS20-spec.json",
+      "bytes": 60803,
+      "sha256": "267972487ff6bcb5bfb71ea4ba051c87f3de34113c9a50dfe96357f6ee4f07b0",
+      "git_blob_sha": "0d0d22308cb2230431e0662ac7a1be7964ba3595"
+    },
+    {
+      "path": "api/standalone_game_api/engine/LS20_engine.py",
+      "archive_path": "api/standalone_game_api/engine/LS20_engine.py",
+      "bytes": 32041,
+      "sha256": "2dfcc25e9017d141224ed49cacef23e4fd543a58f822e6e10c2e34b8ff8916cc",
+      "git_blob_sha": "a54c82c0ad35847119183afe7c6f3359de98fe29"
+    },
+    {
+      "path": "api/standalone_game_api/engine/base.py",
+      "archive_path": "api/standalone_game_api/engine/base.py",
+      "bytes": 570,
+      "sha256": "6f5a5cb3b7e3bf773b7340f8b8ed85ff9604e293394734d025fd7ceff904408e",
+      "git_blob_sha": "c0bbd61e07cffe2c2e318ab82663fbcfb7d06c16"
+    },
+    {
+      "path": "api/standalone_game_api/game_registry.py",
+      "archive_path": "api/standalone_game_api/game_registry.py",
+      "bytes": 840,
+      "sha256": "23b0600f13009a44b40e8f962b246444f30fdea1510576c681e13e8e84c2f0d4",
+      "git_blob_sha": "e46a26f95ae1686cadf8c6fe78f5bcb750d6a210"
+    },
+    {
+      "path": "custom_games/__init__.py",
+      "archive_path": "custom_games/__init__.py",
+      "bytes": 298,
+      "sha256": "39d6ffdf6a0058507af50215861ba74df1e897ad2b8128f15fc69c18f753c60e",
+      "git_blob_sha": "847ba717f35a51154507386ace76ba951b156c28"
+    },
+    {
+      "path": "custom_games/engines/__init__.py",
+      "archive_path": "custom_games/engines/__init__.py",
+      "bytes": 27,
+      "sha256": "be412dfe79fe7fd6ec79718861936e4f2aad5dfcc64fc758b8b57a270ce9c57b",
+      "git_blob_sha": "3c13064a1feed793db6524da4d0b9beef9454577"
+    },
+    {
+      "path": "custom_games/engines/always_sliding.py",
+      "archive_path": "custom_games/engines/always_sliding.py",
+      "bytes": 22923,
+      "sha256": "ec32aee3cfab5fedecc1d769c43d453005f4c53a1d15e623f41e874205ef2580",
+      "git_blob_sha": "434ea8572000e2d72191023f21ed53af2037d282"
+    },
+    {
+      "path": "custom_games/engines/arrow_maze.py",
+      "archive_path": "custom_games/engines/arrow_maze.py",
+      "bytes": 15135,
+      "sha256": "fb361530e46a75c824973b4594550ac8471bc90c7b8db969ee91f0de5349af2b",
+      "git_blob_sha": "ad6bcb6a431d06a608030e0e93af20c6d19c8450"
+    },
+    {
+      "path": "custom_games/engines/cabbage_goat_wolf.py",
+      "archive_path": "custom_games/engines/cabbage_goat_wolf.py",
+      "bytes": 19800,
+      "sha256": "cd97a21e7f6bde8cc4bec1b588a194eeb78e2427598ba7c8c3764e93b6b73382",
+      "git_blob_sha": "aab82d54dcd0f2ef98b7fa7d4dab6053485f4cc7"
+    },
+    {
+      "path": "custom_games/engines/cascade_quiesce.py",
+      "archive_path": "custom_games/engines/cascade_quiesce.py",
+      "bytes": 31688,
+      "sha256": "cb9a74dec5391d7580067c97bacf4c165bba5901b79295cf2cf7cc1480ab014a",
+      "git_blob_sha": "f324c13ec8714d2fb7437f08de6bb3f55c7a1d8b"
+    },
+    {
+      "path": "custom_games/engines/catching_without_seeing.py",
+      "archive_path": "custom_games/engines/catching_without_seeing.py",
+      "bytes": 37425,
+      "sha256": "d48b1eaee436dd87ef08ffe9b9993b29226edd10d3071927d9c004f7541a88a2",
+      "git_blob_sha": "f12ba9eba0f93726bf57c573fac8eed62627e9dd"
+    },
+    {
+      "path": "custom_games/engines/caterpillar_logic.py",
+      "archive_path": "custom_games/engines/caterpillar_logic.py",
+      "bytes": 23096,
+      "sha256": "ea0fee84199aba856957bc2439b580e62e0064b41c0a3336ac12367ce3e5963d",
+      "git_blob_sha": "01e4f1b7a72a1829fc61f62287115e79ebfc62b3"
+    },
+    {
+      "path": "custom_games/engines/checkers_solitaire.py",
+      "archive_path": "custom_games/engines/checkers_solitaire.py",
+      "bytes": 27721,
+      "sha256": "2e86bd84a32d89120e5c453f93b8b751fe57a3fa3abc151f5580b6e127e406c8",
+      "git_blob_sha": "d2c492b4952ea78145109499bfc1a8fb5e2955c9"
+    },
+    {
+      "path": "custom_games/engines/color_glass.py",
+      "archive_path": "custom_games/engines/color_glass.py",
+      "bytes": 15220,
+      "sha256": "9066a2ad8f7080132d1cf02899ef791251c76afaa51444a487a303186391dd48",
+      "git_blob_sha": "b545d29d57ffbac44a851c689803308a59c0f696"
+    },
+    {
+      "path": "custom_games/engines/columns_match.py",
+      "archive_path": "custom_games/engines/columns_match.py",
+      "bytes": 18725,
+      "sha256": "a248455722b6690123cfff017040673b5d9fcc8403179d296c092ab293688f2c",
+      "git_blob_sha": "f3c8c4beefe3f222e011eb5bc562a9d485349ed3"
+    },
+    {
+      "path": "custom_games/engines/combina.py",
+      "archive_path": "custom_games/engines/combina.py",
+      "bytes": 15835,
+      "sha256": "d0d346613b95fd37397a07a2024483e2e7c2b85f5f1cf7e5a616486641586806",
+      "git_blob_sha": "036fca0d0b6e463198df6a98e31af4b3c44eff8f"
+    },
+    {
+      "path": "custom_games/engines/configured_attraction.py",
+      "archive_path": "custom_games/engines/configured_attraction.py",
+      "bytes": 23445,
+      "sha256": "7738b7faca48a7167f7761a21601bbf7026fdc6b3ce494b0524ef5ae886829e2",
+      "git_blob_sha": "87ba06c2231308507f39f30d5d398f928351ab86"
+    },
+    {
+      "path": "custom_games/engines/connect_four.py",
+      "archive_path": "custom_games/engines/connect_four.py",
+      "bytes": 26502,
+      "sha256": "de6af4c45db802548f79d91bb6fafeba13de88cbd7af27f67fdbe2674fef3e9c",
+      "git_blob_sha": "8399862dc4e098af63ab191bc3679cfd7216a0aa"
+    },
+    {
+      "path": "custom_games/engines/craft_console.py",
+      "archive_path": "custom_games/engines/craft_console.py",
+      "bytes": 43191,
+      "sha256": "09dfd32f572660e5271ec14567163e45d3be0183dedac4b68af73e53dee69c9f",
+      "git_blob_sha": "737388b349f6d31140255f003bbb2e471ca5d3bf"
+    },
+    {
+      "path": "custom_games/engines/denoise_trame.py",
+      "archive_path": "custom_games/engines/denoise_trame.py",
+      "bytes": 21942,
+      "sha256": "46ee03bdb3f1b760bfb0ad12de8742578b728ae6245cf99b054ed4d21c90c34f",
+      "git_blob_sha": "296583497afb62b1e9a245dfc854bac221147750"
+    },
+    {
+      "path": "custom_games/engines/dichotomy.py",
+      "archive_path": "custom_games/engines/dichotomy.py",
+      "bytes": 27157,
+      "sha256": "aa00a79e65c95a12ecfaadd0fc8ca5c7d86ed8ce0b26026e8662b30f78e7270b",
+      "git_blob_sha": "0ff769a48053085feb32d4f408f120b4a0bce549"
+    },
+    {
+      "path": "custom_games/engines/elastic_grid.py",
+      "archive_path": "custom_games/engines/elastic_grid.py",
+      "bytes": 36278,
+      "sha256": "45d534fe0cb7d6f79f24a4c9180d0d29a670f542cc00684ce80e6a916bdf368e",
+      "git_blob_sha": "6d7ea50347dab33890aba768e13907f1ac56e627"
+    },
+    {
+      "path": "custom_games/engines/escort_patrol.py",
+      "archive_path": "custom_games/engines/escort_patrol.py",
+      "bytes": 29460,
+      "sha256": "471a01a96db8be08f3de29c1056cc827941e2c46ca615018f75cb525121a06a9",
+      "git_blob_sha": "3f3b2ee01e74f31015edbc56e69c5e83f11fdbf0"
+    },
+    {
+      "path": "custom_games/engines/etag_floors.py",
+      "archive_path": "custom_games/engines/etag_floors.py",
+      "bytes": 20297,
+      "sha256": "ccb5a05198ec2fa6301607060ce82422350a0072795448ed36cb75ef374142a8",
+      "git_blob_sha": "246531f952a72cbcb1684d4239739a96c993e4da"
+    },
+    {
+      "path": "custom_games/engines/evasion.py",
+      "archive_path": "custom_games/engines/evasion.py",
+      "bytes": 28077,
+      "sha256": "27f9bec8f0d9ac8cace00dcc26a16f88b52b32df8559a534a5fa5daa9ba56637",
+      "git_blob_sha": "39dd50b4715c40d39938cd32d98a55db040d24fa"
+    },
+    {
+      "path": "custom_games/engines/fite_arena.py",
+      "archive_path": "custom_games/engines/fite_arena.py",
+      "bytes": 46064,
+      "sha256": "115547d9a82df0239138447dbb28031e65e69f976190a0d62fbf45e51dc5851d",
+      "git_blob_sha": "6c20f9ca27ae11e56282108c0d4ab80f9d85a93b"
+    },
+    {
+      "path": "custom_games/engines/flee_stones.py",
+      "archive_path": "custom_games/engines/flee_stones.py",
+      "bytes": 20599,
+      "sha256": "b330daa5a5fa89d592926e821d6bcc59d97d260712c52cdf661dfc78aa1696f0",
+      "git_blob_sha": "6d1b23a3b53eb51c91dbf409d3136b8d966650c9"
+    },
+    {
+      "path": "custom_games/engines/fog_hidden_motion.py",
+      "archive_path": "custom_games/engines/fog_hidden_motion.py",
+      "bytes": 23003,
+      "sha256": "0cc34b8f01031a1fed6c52fb2f0a94a1cc4ee1fb79ac26e10c04a37d5748e069",
+      "git_blob_sha": "d9c1fa2702ecfad85956030792d116c61995f5b4"
+    },
+    {
+      "path": "custom_games/engines/gare_cadence.py",
+      "archive_path": "custom_games/engines/gare_cadence.py",
+      "bytes": 35262,
+      "sha256": "a65fd390da88c255cca3dc0d1f438e8a88cbbe8311cff718eeea761d0e902442",
+      "git_blob_sha": "f0d8b183b2eacd428984521329ee0cf0afa78166"
+    },
+    {
+      "path": "custom_games/engines/globe_track.py",
+      "archive_path": "custom_games/engines/globe_track.py",
+      "bytes": 28243,
+      "sha256": "d0e35963eafffc0fd3d6503e0bd955be130d6935066a444482cd0d10714f3832",
+      "git_blob_sha": "041eddbbe8e9b3811f946cdc5a215fe681acbd17"
+    },
+    {
+      "path": "custom_games/engines/gori_ballistics.py",
+      "archive_path": "custom_games/engines/gori_ballistics.py",
+      "bytes": 29495,
+      "sha256": "69147ac38d49e54201306c064a3f90434dff66c579d3603e16faff14f2545430",
+      "git_blob_sha": "9b39a43bcea4cfba922f625f9361465bc62c3d98"
+    },
+    {
+      "path": "custom_games/engines/graved_map.py",
+      "archive_path": "custom_games/engines/graved_map.py",
+      "bytes": 29396,
+      "sha256": "7aac8dd1b97c6c8541d57c7834df6904da246beb8b9c9bef4828820eb919d421",
+      "git_blob_sha": "aed5fb06cd30fbb7440535a31cd82c979bc2b0a8"
+    },
+    {
+      "path": "custom_games/engines/gravity_box.py",
+      "archive_path": "custom_games/engines/gravity_box.py",
+      "bytes": 31054,
+      "sha256": "b1072f6b7158e782c02b5c1d5f62b25ec49398c7d9b34113563d206eb1ab30d6",
+      "git_blob_sha": "183011458b5163dbbfd081e6031cb6abc9aed745"
+    },
+    {
+      "path": "custom_games/engines/grillage.py",
+      "archive_path": "custom_games/engines/grillage.py",
+      "bytes": 19124,
+      "sha256": "056b8ec5343ba17ad31eb37aa157c722ed5a40b74f0f1f7f3340d8d24b4ba2dd",
+      "git_blob_sha": "9fc8de2a0a0b2da6b805524438b89a4aa5202391"
+    },
+    {
+      "path": "custom_games/engines/hanoi.py",
+      "archive_path": "custom_games/engines/hanoi.py",
+      "bytes": 23650,
+      "sha256": "47b86c6c52d601787c2125cf130eb2249ac62a3cfa7652a53ad830fc4a33b278",
+      "git_blob_sha": "4f11844f2d892b8de027715a6346865753112cf6"
+    },
+    {
+      "path": "custom_games/engines/hole_palette.py",
+      "archive_path": "custom_games/engines/hole_palette.py",
+      "bytes": 20664,
+      "sha256": "4db957ae43da9c447ea2f2ffa92cdfbbcf2a431a2995df539fec097e65ecd3d3",
+      "git_blob_sha": "1dcab8d32d5dc61a8e815174bf031a6a9e8f7c87"
+    },
+    {
+      "path": "custom_games/engines/homogeneous_pair_deletion.py",
+      "archive_path": "custom_games/engines/homogeneous_pair_deletion.py",
+      "bytes": 34084,
+      "sha256": "d7ed8ff8a1fcb3b50d45f984dae291fcc9a4d5a89351fdb9d0c411c088f7a011",
+      "git_blob_sha": "2c277f0dc5401de0d65b73038d9d732e4d544f42"
+    },
+    {
+      "path": "custom_games/engines/iso_sketch.py",
+      "archive_path": "custom_games/engines/iso_sketch.py",
+      "bytes": 27395,
+      "sha256": "97ea595a93cd808ebd6f849f0c438026468b2cb299e7125519ee5ae7798edd6d",
+      "git_blob_sha": "7b04a299d6f83902a24f00fbe178004e2d462e13"
+    },
+    {
+      "path": "custom_games/engines/katamino.py",
+      "archive_path": "custom_games/engines/katamino.py",
+      "bytes": 26264,
+      "sha256": "b77ca7fbe1efb825ae64f455c1e8a533d5d4ac8c3fa206c3179f65211991b8da",
+      "git_blob_sha": "531e7b4564887eb20244f1dcc27fbe7ee22bcc58"
+    },
+    {
+      "path": "custom_games/engines/key_doors.py",
+      "archive_path": "custom_games/engines/key_doors.py",
+      "bytes": 19086,
+      "sha256": "fe50e5fb1a89dca1e20b8c60e283e675338c460ba33e1397427d3ffcfee39378",
+      "git_blob_sha": "b667517109e7f3d6a63762e199afe86b603b72a3"
+    },
+    {
+      "path": "custom_games/engines/knight_maze.py",
+      "archive_path": "custom_games/engines/knight_maze.py",
+      "bytes": 21726,
+      "sha256": "36860bb81005feec13c2291aef6b99a75dd7a3d5bc7ca5eebabbd85a514cded7",
+      "git_blob_sha": "adf91ffcba8c53689ea87626d792f69537dbe63e"
+    },
+    {
+      "path": "custom_games/engines/life_lineage.py",
+      "archive_path": "custom_games/engines/life_lineage.py",
+      "bytes": 20273,
+      "sha256": "2335977618383131bbd2a38c5765d96aa6d0770d61f2466d15e09e52f604e0e6",
+      "git_blob_sha": "358e22512c1a4e82b37bc51fbc81996999234e7c"
+    },
+    {
+      "path": "custom_games/engines/lock_and_key.py",
+      "archive_path": "custom_games/engines/lock_and_key.py",
+      "bytes": 11383,
+      "sha256": "bb42298fbcfe4db1d0a853f6041675b359c87ddd850ca2b4ebe74e02831f41f7",
+      "git_blob_sha": "c1d3343349f2463b1b78de4b736c8cc01b0be24d"
+    },
+    {
+      "path": "custom_games/engines/logic_circuit.py",
+      "archive_path": "custom_games/engines/logic_circuit.py",
+      "bytes": 25992,
+      "sha256": "08b1448e45fadb17c168b1bae406020f87eef58e04533fca92713cbea08d03d2",
+      "git_blob_sha": "801b96de2242aba52c4d99b1d8b8b3a969564a52"
+    },
+    {
+      "path": "custom_games/engines/ls19_legacy.py",
+      "archive_path": "custom_games/engines/ls19_legacy.py",
+      "bytes": 3648,
+      "sha256": "5aaab51ab96a77668aab072e6e363583914cd38a629f90ac946b30f5ea7dab2c",
+      "git_blob_sha": "62fba5732cd67fdd89015c638e72b462a7b54c86"
+    },
+    {
+      "path": "custom_games/engines/memo_recall.py",
+      "archive_path": "custom_games/engines/memo_recall.py",
+      "bytes": 29141,
+      "sha256": "12a890a2ed959883ade0bf2cc7c65d936d5f497f8b5300c58ff001dff3d9993e",
+      "git_blob_sha": "8b3489f5e438e6e238c910a2f837c4dcb9758c72"
+    },
+    {
+      "path": "custom_games/engines/mind_code.py",
+      "archive_path": "custom_games/engines/mind_code.py",
+      "bytes": 22241,
+      "sha256": "5fcb6e9d246f22efd5ef0a9c166187f0cecf3449c8505a9b59571dd79500dae8",
+      "git_blob_sha": "49701f83dc6b133bd326744ed4aee569dfde2872"
+    },
+    {
+      "path": "custom_games/engines/moto_orbit.py",
+      "archive_path": "custom_games/engines/moto_orbit.py",
+      "bytes": 21218,
+      "sha256": "72ca91ae300a34db76a3377022856b81dd1c54f20a5906a03a4b09a97d9dae75",
+      "git_blob_sha": "44a7c82555aa6c14ecef7abad3244ea2fa0e6ea8"
+    },
+    {
+      "path": "custom_games/engines/neighbor_cubes.py",
+      "archive_path": "custom_games/engines/neighbor_cubes.py",
+      "bytes": 40448,
+      "sha256": "15bb22459a92ca59e4b8cdde5a93f1ec4bbb7cba306dae384611fc4932abd47b",
+      "git_blob_sha": "6706b56eb0b88ae304d71a937296d101c60d5f4b"
+    },
+    {
+      "path": "custom_games/engines/nested_rooms.py",
+      "archive_path": "custom_games/engines/nested_rooms.py",
+      "bytes": 31643,
+      "sha256": "4ffafd6220f39b5e6747a4e9cb962bc524cb871d659cf3387b118f6e0ce410c9",
+      "git_blob_sha": "0f6db3d01a1f9efcaaffd55d0c519ad40657f048"
+    },
+    {
+      "path": "custom_games/engines/pipes.py",
+      "archive_path": "custom_games/engines/pipes.py",
+      "bytes": 23606,
+      "sha256": "da87a3f8edfebe9d4d846402f487beb167a50bb144370ebea2415aba60cc733c",
+      "git_blob_sha": "da8ac1d81bc6fd13d56267ad96654cea3448cee7"
+    },
+    {
+      "path": "custom_games/engines/polarity.py",
+      "archive_path": "custom_games/engines/polarity.py",
+      "bytes": 29536,
+      "sha256": "7d96cc7786a96d9b0f9838280145152f779d5cc83292fa0ea0befa4a4de85900",
+      "git_blob_sha": "40734f128ff1b8fa303c74589ba5ecf5b4b60885"
+    },
+    {
+      "path": "custom_games/engines/portal_chambers.py",
+      "archive_path": "custom_games/engines/portal_chambers.py",
+      "bytes": 47245,
+      "sha256": "8fa65ea492e96026777870e97701563d964aa20376e4349a15c7e30803cf5e0d",
+      "git_blob_sha": "d1d25b406d97a1dfb8dc4abbdcd511837a40b504"
+    },
+    {
+      "path": "custom_games/engines/portal_topology.py",
+      "archive_path": "custom_games/engines/portal_topology.py",
+      "bytes": 18102,
+      "sha256": "eee9756478298cd350ea57b87feb3c182027bf1f5efa8810c2b1897f4b677be4",
+      "git_blob_sha": "64da0b0ec9832075ad9180bcfe23336a651ef399"
+    },
+    {
+      "path": "custom_games/engines/recruit_army.py",
+      "archive_path": "custom_games/engines/recruit_army.py",
+      "bytes": 23717,
+      "sha256": "5eaa4190acf5e7a6b924a2a920fe580613d03c16525b4a03f6ba63aa08cffea9",
+      "git_blob_sha": "3c8957774c72112ff94fe1c548f5b48fc6e860ba"
+    },
+    {
+      "path": "custom_games/engines/reign_gauges.py",
+      "archive_path": "custom_games/engines/reign_gauges.py",
+      "bytes": 38644,
+      "sha256": "90b14aeeb55b7710a0ad60e55a9f970cb835aedc2bb62bbc88f373c3571e63fa",
+      "git_blob_sha": "645d4fa22f6508ac28ad56cad178778d9906833b"
+    },
+    {
+      "path": "custom_games/engines/rewind.py",
+      "archive_path": "custom_games/engines/rewind.py",
+      "bytes": 28306,
+      "sha256": "335cb97433471f0cf3f729499f9559ee37fe1284a9082e5bc057632bb1245bfb",
+      "git_blob_sha": "aa9f84f11fb33b1cb973fe54bb362db30a29a377"
+    },
+    {
+      "path": "custom_games/engines/role_swap.py",
+      "archive_path": "custom_games/engines/role_swap.py",
+      "bytes": 47291,
+      "sha256": "29aa143c429a42dc1a6f812541d31e50797b5cfa2a4bccac1612903fd0db9c89",
+      "git_blob_sha": "3125d2f5d3fd1d438ecd17027fd3487432b5b052"
+    },
+    {
+      "path": "custom_games/engines/same_length_path.py",
+      "archive_path": "custom_games/engines/same_length_path.py",
+      "bytes": 34920,
+      "sha256": "3362aa84d7e5bbf10313934fc1d3894e19f30f03951b0ba812b85f2ae061e69b",
+      "git_blob_sha": "c9db51d5089bdd79759088dcd53fb5b27aada1d2"
+    },
+    {
+      "path": "custom_games/engines/selene.py",
+      "archive_path": "custom_games/engines/selene.py",
+      "bytes": 34337,
+      "sha256": "24831be489a01880002a75c1eab8b73d213ccaccbfb2f09d9d20d23ade721e55",
+      "git_blob_sha": "6c998c28cd6f3cf1459ad46956b191e37567dac1"
+    },
+    {
+      "path": "custom_games/engines/seqn_groups.py",
+      "archive_path": "custom_games/engines/seqn_groups.py",
+      "bytes": 17114,
+      "sha256": "1432b9b5a0baafbaa3559b35dfde1dbd56bb5aa89fbc123051559c9a4eb0f7d1",
+      "git_blob_sha": "d31c8992c4b4db28be98fc7aa71200c8c14d11d2"
+    },
+    {
+      "path": "custom_games/engines/sequence_lab.py",
+      "archive_path": "custom_games/engines/sequence_lab.py",
+      "bytes": 39792,
+      "sha256": "2614278ec6a9c044fc83f115b09d762cf4850c18f7bbb3d088c258c25928d764",
+      "git_blob_sha": "942d60777848b09b88ed98beaafd2072de73a5eb"
+    },
+    {
+      "path": "custom_games/engines/signal_seal.py",
+      "archive_path": "custom_games/engines/signal_seal.py",
+      "bytes": 33551,
+      "sha256": "72686e617c565d822cfb49b6e70fb3eaa13307c7771321a544a9e6692c427fe6",
+      "git_blob_sha": "f5c5b12ad0b035dad3c794f1a4bb3ed3a3bccde8"
+    },
+    {
+      "path": "custom_games/engines/simple_klotski.py",
+      "archive_path": "custom_games/engines/simple_klotski.py",
+      "bytes": 22987,
+      "sha256": "0c0e5fc19fbf790192ca6e84ef147e0b87f5274ec2f366f1ff02226508ffb7a0",
+      "git_blob_sha": "47c6c823d6429ed6d2b5a483fba6dc8014e3fd6e"
+    },
+    {
+      "path": "custom_games/engines/sokoban.py",
+      "archive_path": "custom_games/engines/sokoban.py",
+      "bytes": 13919,
+      "sha256": "8275ae84213eaaf22503e921a76eca6d12b1048d418399fe54198fbd501729cb",
+      "git_blob_sha": "afa81bc71dfe96d79248d6e39d26312107c54abc"
+    },
+    {
+      "path": "custom_games/engines/sonar_maze.py",
+      "archive_path": "custom_games/engines/sonar_maze.py",
+      "bytes": 47001,
+      "sha256": "8cf4c735ecb89434084ab037926602da22ab2a7efd109a483307e5538a55b377",
+      "git_blob_sha": "0d42f0324c2bcf98f164834dddc8fec52ad4679c"
+    },
+    {
+      "path": "custom_games/engines/spore_lab.py",
+      "archive_path": "custom_games/engines/spore_lab.py",
+      "bytes": 29751,
+      "sha256": "9a815ed62f59293a4e9cc95b73e1b16f95b3a36e889a710dd84e248435dbda86",
+      "git_blob_sha": "d8f99f9d5648677726a66103cc45891902d5ee61"
+    },
+    {
+      "path": "custom_games/engines/stack_iso.py",
+      "archive_path": "custom_games/engines/stack_iso.py",
+      "bytes": 39029,
+      "sha256": "403e67d86396f9a5e8b55f87c47c91ce5001afc829672ca465713b363443b25f",
+      "git_blob_sha": "d325acce6f1e059a1905c077560b17e3eca2786f"
+    },
+    {
+      "path": "custom_games/engines/switch_rooms.py",
+      "archive_path": "custom_games/engines/switch_rooms.py",
+      "bytes": 35200,
+      "sha256": "20d75a2d5d9f3c469ad621a6b2c63f6dfbd574e8b32440e3715ee3c83cd1d03b",
+      "git_blob_sha": "3eaa5ff61f84f2bf9a23f71583839399350c54e8"
+    },
+    {
+      "path": "custom_games/engines/symmetry_fix.py",
+      "archive_path": "custom_games/engines/symmetry_fix.py",
+      "bytes": 21895,
+      "sha256": "c3a0a9b9b685e304e191006ad335841e8fe5b4ac8245fbf3a038a25d302b51ee",
+      "git_blob_sha": "592d78793a88a63905a61936bd54d90c095ebfe7"
+    },
+    {
+      "path": "custom_games/engines/thermometers.py",
+      "archive_path": "custom_games/engines/thermometers.py",
+      "bytes": 24621,
+      "sha256": "89a5315cea2a2f98b7c338e08099baca78bf5c2def96814d8e621b3b33ef79ac",
+      "git_blob_sha": "2c67782d4bfca2e91604fc759fd62502f2676565"
+    },
+    {
+      "path": "custom_games/engines/tic_tac_toe.py",
+      "archive_path": "custom_games/engines/tic_tac_toe.py",
+      "bytes": 30331,
+      "sha256": "03dd2fd5aae0c170d87424ef8734d3fda6bc497d1ade38b060784cd6f3543e9a",
+      "git_blob_sha": "c1348e2cb58f5421aaf6d739cc1baf5b6f2572cc"
+    },
+    {
+      "path": "custom_games/engines/tower_equilibrium.py",
+      "archive_path": "custom_games/engines/tower_equilibrium.py",
+      "bytes": 35329,
+      "sha256": "edbcd1bd020c2164bc1608e3db4e94e0de9d1f6ac76ba2db1d15c8ba5c6b27b6",
+      "git_blob_sha": "441badee7836b6808e9e5ece0d0456a6c4aa822d"
+    },
+    {
+      "path": "custom_games/engines/tracing_path.py",
+      "archive_path": "custom_games/engines/tracing_path.py",
+      "bytes": 27288,
+      "sha256": "4269b2bdb8fa2237371d9ef413ee1ba41b54edee4c3866581b7632890179250c",
+      "git_blob_sha": "7c5059480fe3e148ea45ac96303d17840dc9a69f"
+    },
+    {
+      "path": "custom_games/engines/transport_gabarit.py",
+      "archive_path": "custom_games/engines/transport_gabarit.py",
+      "bytes": 16311,
+      "sha256": "50e1db731925d5d77227bae4c5cb7927d9ebf1d8be423e971355cc553fa48348",
+      "git_blob_sha": "244e6b905f44083e5859a9e971f92c9388d2d1f6"
+    },
+    {
+      "path": "custom_games/engines/triade.py",
+      "archive_path": "custom_games/engines/triade.py",
+      "bytes": 45131,
+      "sha256": "c03add17f2e7f9ab98652bfce1d2aea5ef12da59f65ffb85f628fba7b5b1485f",
+      "git_blob_sha": "0409162e49efa16e6cbc328210fa9d569ed692e3"
+    },
+    {
+      "path": "custom_games/engines/upset.py",
+      "archive_path": "custom_games/engines/upset.py",
+      "bytes": 55228,
+      "sha256": "4a8eabecb35de8c6834a060d333002871ae34169c5777e0a0842511a750647b1",
+      "git_blob_sha": "fe5c27a53d7d6a50fe7478d4bccc385cd52e5dd1"
+    },
+    {
+      "path": "custom_games/engines/valve_flow.py",
+      "archive_path": "custom_games/engines/valve_flow.py",
+      "bytes": 35358,
+      "sha256": "b5aa58ed7c883f4db4b464044dc711ebd4f6038cd9d512e36ed46506a2791fa6",
+      "git_blob_sha": "1772a879b48a03413e796be39ea8682161509673"
+    },
+    {
+      "path": "custom_games/engines/wave_alignment.py",
+      "archive_path": "custom_games/engines/wave_alignment.py",
+      "bytes": 24895,
+      "sha256": "0cb4e077ab5ed225e50edb27061d897c6481ef78e2d234a9fee75b76aa43f3b0",
+      "git_blob_sha": "368436172528e954621ae9a255de1a3652c59a0b"
+    },
+    {
+      "path": "custom_games/engines/weave.py",
+      "archive_path": "custom_games/engines/weave.py",
+      "bytes": 25263,
+      "sha256": "14b0cbc5b83fdd37e99d409a6add55c1f88c31ef2d0cd2eb99a730b88a1bad5a",
+      "git_blob_sha": "4e83eb32d386d4fce1c776f9c1bf7e2f13fecb34"
+    },
+    {
+      "path": "custom_games/engines/zip.py",
+      "archive_path": "custom_games/engines/zip.py",
+      "bytes": 23905,
+      "sha256": "407f4599e87bc8e3ad74d0acef47be68d21f7a5edb18d4c2e8f5c0b12d6acf2b",
+      "git_blob_sha": "1d9213ecc7d3c22fbbe78b3d7d14591461fe98e0"
+    },
+    {
+      "path": "custom_games/games/always_sliding/levels/L01.json",
+      "archive_path": "custom_games/games/always_sliding/levels/L01.json",
+      "bytes": 1550,
+      "sha256": "bc242458ac2b63c1b103739b4e2569f6e4fc766d68cff519868dfa6ad9350bce",
+      "git_blob_sha": "3b584c6d669e7a2862619ebe1cab5bc38943aa3c"
+    },
+    {
+      "path": "custom_games/games/always_sliding/levels/L02.json",
+      "archive_path": "custom_games/games/always_sliding/levels/L02.json",
+      "bytes": 1167,
+      "sha256": "802fa6a936acc9f4b04848e25e2defadd39501457e85d752b915994b0f1052b2",
+      "git_blob_sha": "af2bbfc25eb44dbeef63e88c495ae3668a366a48"
+    },
+    {
+      "path": "custom_games/games/always_sliding/levels/L03.json",
+      "archive_path": "custom_games/games/always_sliding/levels/L03.json",
+      "bytes": 1749,
+      "sha256": "8014bbaf5e7e63205f7adf04532a8a3dfff218a675bbd8bca875e5b60d8036e9",
+      "git_blob_sha": "4ac6785aca87d2540a8e3053ba2e134ac512ff65"
+    },
+    {
+      "path": "custom_games/games/always_sliding/levels/L04.json",
+      "archive_path": "custom_games/games/always_sliding/levels/L04.json",
+      "bytes": 1719,
+      "sha256": "6f641aa8c612bfe677cdd9ce7724000282009b7c6bc4b3f35ce7b36267405ddd",
+      "git_blob_sha": "233ad807e97cff5adcd4af80ef676e215c8a8272"
+    },
+    {
+      "path": "custom_games/games/always_sliding/levels/L05.json",
+      "archive_path": "custom_games/games/always_sliding/levels/L05.json",
+      "bytes": 4712,
+      "sha256": "69c8f4722a4d64a6eb0ca93677df7d135c5749853622a0b802ef163f422715e7",
+      "git_blob_sha": "95681c257cdeffaa1cb2075a9d2cbc16f722e934"
+    },
+    {
+      "path": "custom_games/games/always_sliding/levels/L06.json",
+      "archive_path": "custom_games/games/always_sliding/levels/L06.json",
+      "bytes": 2565,
+      "sha256": "dbc0530664e13bee276905dd060ac58fb73c2bfb88a03f36ae90acbdea6793da",
+      "git_blob_sha": "b6a9e79fc80b57e11374bf9994d6972c82b47586"
+    },
+    {
+      "path": "custom_games/games/always_sliding/levels/L07.json",
+      "archive_path": "custom_games/games/always_sliding/levels/L07.json",
+      "bytes": 1363,
+      "sha256": "ef2a8cf385c7e779909f494c2fdc8bf0ec5363c5389cc5fef3810149e9532c1d",
+      "git_blob_sha": "ce11d5b699717cce8b17275f71e8b3e98366f32b"
+    },
+    {
+      "path": "custom_games/games/always_sliding/levels/L08.json",
+      "archive_path": "custom_games/games/always_sliding/levels/L08.json",
+      "bytes": 3083,
+      "sha256": "41127af016944a2e5cc158e524268fe72f772ab1398e17946563907bf1e9fe4f",
+      "git_blob_sha": "09be3c788f5bb2e0234fdde0fb231b53cab2a0bd"
+    },
+    {
+      "path": "custom_games/games/always_sliding/levels/L09.json",
+      "archive_path": "custom_games/games/always_sliding/levels/L09.json",
+      "bytes": 3717,
+      "sha256": "fbd068d945b1142b69f318d78e288d0fd3ff60c1de88e7a505185156da3da325",
+      "git_blob_sha": "0db46f9721b793ada73e0614750add320071ed78"
+    },
+    {
+      "path": "custom_games/games/arrow_maze/levels/L01.json",
+      "archive_path": "custom_games/games/arrow_maze/levels/L01.json",
+      "bytes": 225,
+      "sha256": "5b61a627ca6862ab95d21198a6a94a81367c10341f982fafcb893161881b42f2",
+      "git_blob_sha": "38ba4bae53f54a7704ef21c94c62934c6c60f218"
+    },
+    {
+      "path": "custom_games/games/arrow_maze/levels/L02.json",
+      "archive_path": "custom_games/games/arrow_maze/levels/L02.json",
+      "bytes": 242,
+      "sha256": "9165db99a96f24e47a5dfd3d9bcd4b6dec420f8bd8e8938e42c79bbb69e44ef9",
+      "git_blob_sha": "85f1fa331ad3ff573dd9ecc6c821971fc9612349"
+    },
+    {
+      "path": "custom_games/games/arrow_maze/levels/L03.json",
+      "archive_path": "custom_games/games/arrow_maze/levels/L03.json",
+      "bytes": 243,
+      "sha256": "278f48bf192f7b20d051491f3668d8cf468903a2f88bebfe880043b77ee26859",
+      "git_blob_sha": "e6b804302439abeedd479e4382279de42b413495"
+    },
+    {
+      "path": "custom_games/games/arrow_maze/levels/L04.json",
+      "archive_path": "custom_games/games/arrow_maze/levels/L04.json",
+      "bytes": 260,
+      "sha256": "8d28da604bf7cde80dbfb3c9e0a4b41f89039924b49d225756a730c31641b895",
+      "git_blob_sha": "2cf663590f9f41c359ae8db547396538b37179e6"
+    },
+    {
+      "path": "custom_games/games/arrow_maze/levels/L05.json",
+      "archive_path": "custom_games/games/arrow_maze/levels/L05.json",
+      "bytes": 263,
+      "sha256": "bd0d7344adce2fe7be9e31f2ce1e0b3ff8916676a3ac43df8d1d261840e643fb",
+      "git_blob_sha": "2090a39c1c7f86ccd8d88ea0c336828951401a55"
+    },
+    {
+      "path": "custom_games/games/arrow_maze/levels/L06.json",
+      "archive_path": "custom_games/games/arrow_maze/levels/L06.json",
+      "bytes": 283,
+      "sha256": "392643ea7daa54afbde6b4e30d37f7baa0bc0cff9d6a394d6cc03b4b0916eadb",
+      "git_blob_sha": "1f10168ad898b25b2cfde75fd06b424a485539d6"
+    },
+    {
+      "path": "custom_games/games/cabbage_goat_wolf/levels/L01.json",
+      "archive_path": "custom_games/games/cabbage_goat_wolf/levels/L01.json",
+      "bytes": 335,
+      "sha256": "6087af938a690d5f04361ae8477803518df73330f7f14f8567eb95c4742da93a",
+      "git_blob_sha": "012feba4f4d1993e11f622f3ac7b61ce2267ed79"
+    },
+    {
+      "path": "custom_games/games/cabbage_goat_wolf/levels/L02.json",
+      "archive_path": "custom_games/games/cabbage_goat_wolf/levels/L02.json",
+      "bytes": 481,
+      "sha256": "365168d826842a776a9d9ee261c2397d995745ba0da57e6ebff5f98639685ddf",
+      "git_blob_sha": "5d4b9f3dc56a6d93e73f97c50f19de3b01975630"
+    },
+    {
+      "path": "custom_games/games/cabbage_goat_wolf/levels/L03.json",
+      "archive_path": "custom_games/games/cabbage_goat_wolf/levels/L03.json",
+      "bytes": 464,
+      "sha256": "72eff7d568fdfc26748d908896a8b0edac3ad231c90cb0e697cf30b2ea3bce32",
+      "git_blob_sha": "a4abe019f94c014f19cb13135eab52a344ff9a4d"
+    },
+    {
+      "path": "custom_games/games/cabbage_goat_wolf/levels/L04.json",
+      "archive_path": "custom_games/games/cabbage_goat_wolf/levels/L04.json",
+      "bytes": 472,
+      "sha256": "5fee29c181671a7faa1f0cd38dcb3121fb46f76179eb229117adea25df3c272d",
+      "git_blob_sha": "cc8fed0b2383e99de4fa4e9678dd3b903f735ce8"
+    },
+    {
+      "path": "custom_games/games/cabbage_goat_wolf/levels/L05.json",
+      "archive_path": "custom_games/games/cabbage_goat_wolf/levels/L05.json",
+      "bytes": 720,
+      "sha256": "dc6069d8defc8fd9abd8415f6a67016675c57f6e6f60961f5b05cd011325d4f2",
+      "git_blob_sha": "97e4fa95f31c1eb15dbecafc54313d381b9fca46"
+    },
+    {
+      "path": "custom_games/games/cabbage_goat_wolf/levels/L06.json",
+      "archive_path": "custom_games/games/cabbage_goat_wolf/levels/L06.json",
+      "bytes": 735,
+      "sha256": "a5dafc1af30e2326f76f14d1ce27c354fd909e38b70bb0e44fdc3aa6597e2d53",
+      "git_blob_sha": "2358e7618d5825d6eafce351f16104d2eb0476c1"
+    },
+    {
+      "path": "custom_games/games/cascade_quiesce/levels/L01.json",
+      "archive_path": "custom_games/games/cascade_quiesce/levels/L01.json",
+      "bytes": 494,
+      "sha256": "8001f8f46b614c159a552c34636e88382796bb45e8b4c147b92ab221fa2c83eb",
+      "git_blob_sha": "61b1097ec372083f4a5ee236f8585199f691e0ce"
+    },
+    {
+      "path": "custom_games/games/cascade_quiesce/levels/L02.json",
+      "archive_path": "custom_games/games/cascade_quiesce/levels/L02.json",
+      "bytes": 1167,
+      "sha256": "3d30c2b0143c8cb0b3b925fa99e659a06df0f0dedebe9c93bb897b403bbbbbb9",
+      "git_blob_sha": "2d09b97272c3e26ecb55c3b98cb21f18ecfba29d"
+    },
+    {
+      "path": "custom_games/games/cascade_quiesce/levels/L03.json",
+      "archive_path": "custom_games/games/cascade_quiesce/levels/L03.json",
+      "bytes": 632,
+      "sha256": "fce43d0acb9301885b3fe86f226449ac385dd2ffe91cbb3217066f922e12ea21",
+      "git_blob_sha": "d40d1c1e4bc13aed0f3fd3496c430aa12831d4c0"
+    },
+    {
+      "path": "custom_games/games/cascade_quiesce/levels/L04.json",
+      "archive_path": "custom_games/games/cascade_quiesce/levels/L04.json",
+      "bytes": 583,
+      "sha256": "c5af5df62087b01934b53f18a7f1d132bed3fef1a299d6b3c24216e8480a208d",
+      "git_blob_sha": "e9ff55c16ef4ad9d345f53aedd3d2078d5dade01"
+    },
+    {
+      "path": "custom_games/games/cascade_quiesce/levels/L05.json",
+      "archive_path": "custom_games/games/cascade_quiesce/levels/L05.json",
+      "bytes": 783,
+      "sha256": "9a59c852ad78785348ede8acd54985eb7c16ad5229fb13e87d502cd1a3c6f8a1",
+      "git_blob_sha": "a56217dbcbc02fef1a5af5291225586b3aa928e1"
+    },
+    {
+      "path": "custom_games/games/cascade_quiesce/levels/L06.json",
+      "archive_path": "custom_games/games/cascade_quiesce/levels/L06.json",
+      "bytes": 607,
+      "sha256": "40515b06783d5e758000fee0a85f07d986453c969fd761d9f61f8f34d059715c",
+      "git_blob_sha": "80b626abe2b42a0d6e79e7218e3bfa01a4b996ca"
+    },
+    {
+      "path": "custom_games/games/catching_without_seeing/levels/L01.json",
+      "archive_path": "custom_games/games/catching_without_seeing/levels/L01.json",
+      "bytes": 2134,
+      "sha256": "286ad3064b8d20c802c8135afa2fa71858a7e1d9c643aeb152f4a3c620e59ea1",
+      "git_blob_sha": "08f4e4ba8511a7450aaf2f2e1e0b7e598d1ee822"
+    },
+    {
+      "path": "custom_games/games/catching_without_seeing/levels/L02.json",
+      "archive_path": "custom_games/games/catching_without_seeing/levels/L02.json",
+      "bytes": 1845,
+      "sha256": "a970b8cf568c55f660983ab92c8b2186eb600ab24c91dc85aaac1f544dd37f0d",
+      "git_blob_sha": "962e544315dea81ae311dccbce47835a7e596f18"
+    },
+    {
+      "path": "custom_games/games/catching_without_seeing/levels/L03.json",
+      "archive_path": "custom_games/games/catching_without_seeing/levels/L03.json",
+      "bytes": 1346,
+      "sha256": "306766f34a83f61502721e470ed423840d07613839b8713622c79520de0cede1",
+      "git_blob_sha": "9008d7af7dbdef01bcd5caa6aa4b42e1f9678f9d"
+    },
+    {
+      "path": "custom_games/games/catching_without_seeing/levels/L04.json",
+      "archive_path": "custom_games/games/catching_without_seeing/levels/L04.json",
+      "bytes": 1753,
+      "sha256": "d02dab85f7f1b69f562d0a6796b87f95b91c617eb2251cc28c2a39c176a971e4",
+      "git_blob_sha": "114231792c0caad6e3af604afc290f9e13bf2bf4"
+    },
+    {
+      "path": "custom_games/games/catching_without_seeing/levels/L05.json",
+      "archive_path": "custom_games/games/catching_without_seeing/levels/L05.json",
+      "bytes": 1981,
+      "sha256": "0a403b20e2bf53e13dc442e428f35c1fd8e12ce818e58a56beed5733a5a6756d",
+      "git_blob_sha": "5c9a9ca6b81eecdd1df51141473a89244e9b87a4"
+    },
+    {
+      "path": "custom_games/games/catching_without_seeing/levels/L06.json",
+      "archive_path": "custom_games/games/catching_without_seeing/levels/L06.json",
+      "bytes": 1995,
+      "sha256": "984945bcdbd368f346e4ca49e1b2447e2c89c6143bf6d2187fde2dd8435440bf",
+      "git_blob_sha": "1179a1d00d6c90f342cd5025c9da9b536ee891da"
+    },
+    {
+      "path": "custom_games/games/caterpillar_logic/levels/L01.json",
+      "archive_path": "custom_games/games/caterpillar_logic/levels/L01.json",
+      "bytes": 2524,
+      "sha256": "5ed4389ab48d750868023f827837d8ddf8f6b7f229b523a0936ba265967847be",
+      "git_blob_sha": "27a5e4b19cd53c80495bc8660074620e7bdd0260"
+    },
+    {
+      "path": "custom_games/games/caterpillar_logic/levels/L02.json",
+      "archive_path": "custom_games/games/caterpillar_logic/levels/L02.json",
+      "bytes": 2534,
+      "sha256": "785bcb467bd53becf6c3dea544752eb877d6335d735f60f7d42581ba5cd592de",
+      "git_blob_sha": "8f5764e03d06ab1337a619fa2f02768e0ed4a413"
+    },
+    {
+      "path": "custom_games/games/caterpillar_logic/levels/L03.json",
+      "archive_path": "custom_games/games/caterpillar_logic/levels/L03.json",
+      "bytes": 2716,
+      "sha256": "d0d6197f36a2e896f484154b6ae9334bcd947ba25f4ebc69d2c8ad4421c95bb7",
+      "git_blob_sha": "4dcd6e409a401ad1a2d8164944efbb12274f88c0"
+    },
+    {
+      "path": "custom_games/games/caterpillar_logic/levels/L04.json",
+      "archive_path": "custom_games/games/caterpillar_logic/levels/L04.json",
+      "bytes": 2600,
+      "sha256": "c7d6d4325120a245d28dea34c76e7bb104e4dbec05a8cbdfe1cf9a7c052dcf35",
+      "git_blob_sha": "8cdf5b2811946b8c59e184cae07c66cf3da77984"
+    },
+    {
+      "path": "custom_games/games/caterpillar_logic/levels/L05.json",
+      "archive_path": "custom_games/games/caterpillar_logic/levels/L05.json",
+      "bytes": 2729,
+      "sha256": "0b033f1ad2c202bf392a5cc2752b5e50e5e78784ed57d7a2893035d05b9c97a9",
+      "git_blob_sha": "e3aaed1046bc81dd379a1d73d34cb3092e27b4c1"
+    },
+    {
+      "path": "custom_games/games/caterpillar_logic/levels/L06.json",
+      "archive_path": "custom_games/games/caterpillar_logic/levels/L06.json",
+      "bytes": 2675,
+      "sha256": "35243ad11c55484cae36d338feb84b5a9fc5c89e5459d9b13b4069e234cdbbde",
+      "git_blob_sha": "1de83e03b40b3d9af400928feb545c5f8190085c"
+    },
+    {
+      "path": "custom_games/games/checkers_solitaire/levels/L01.json",
+      "archive_path": "custom_games/games/checkers_solitaire/levels/L01.json",
+      "bytes": 515,
+      "sha256": "4164877fdd924d1b1951e9af84f81dd2d16cac64b15b0cf1f52d3f0787e5b555",
+      "git_blob_sha": "5055822534d311b47fc86ca6639f0f95980a0ccb"
+    },
+    {
+      "path": "custom_games/games/checkers_solitaire/levels/L02.json",
+      "archive_path": "custom_games/games/checkers_solitaire/levels/L02.json",
+      "bytes": 610,
+      "sha256": "03f1c9f8708cb345e7f98daa9318aec46546e92d17207e52003c1d6002a31609",
+      "git_blob_sha": "35fe965ab8f7c80007dcfb0f54732730a7fd4260"
+    },
+    {
+      "path": "custom_games/games/checkers_solitaire/levels/L03.json",
+      "archive_path": "custom_games/games/checkers_solitaire/levels/L03.json",
+      "bytes": 611,
+      "sha256": "b8fab7409fd9ddab615c6b8606b8adf2d92e65864e8a6de1e58505e436baa96b",
+      "git_blob_sha": "89032e2a2189a23081309608716905fbb44ac2de"
+    },
+    {
+      "path": "custom_games/games/checkers_solitaire/levels/L04.json",
+      "archive_path": "custom_games/games/checkers_solitaire/levels/L04.json",
+      "bytes": 664,
+      "sha256": "02954fb4acf2fabc636dbb99ef4d0a503c506cf7cd1deb3d0dd27b96cf7c08ea",
+      "git_blob_sha": "7114cf7f8261f4a873dbea476293cfa58325258f"
+    },
+    {
+      "path": "custom_games/games/checkers_solitaire/levels/L05.json",
+      "archive_path": "custom_games/games/checkers_solitaire/levels/L05.json",
+      "bytes": 672,
+      "sha256": "7da836cfdf69536eabdf551ef79b2837f96f4a3fa7bb99c06ae09a2365854712",
+      "git_blob_sha": "bd268a335d5b284063cba8e3ff9ef92a59696760"
+    },
+    {
+      "path": "custom_games/games/checkers_solitaire/levels/L06.json",
+      "archive_path": "custom_games/games/checkers_solitaire/levels/L06.json",
+      "bytes": 741,
+      "sha256": "788fbfac6efd0707bfb32f0b03d2de3e5ab2e81f9fc18c6ae91f7ddb5f8a9ab2",
+      "git_blob_sha": "a92545b4eb39a3b4b5bc42c3ea7fe4d00d214512"
+    },
+    {
+      "path": "custom_games/games/color_glass/levels/L01.json",
+      "archive_path": "custom_games/games/color_glass/levels/L01.json",
+      "bytes": 36590,
+      "sha256": "ac69ac859b95ff41eeaf5e9ab94d8b833f7a9292f4a56448f4a5f8dab1a44634",
+      "git_blob_sha": "865f8c74aabed3fd473240a06d50a3c80abd2508"
+    },
+    {
+      "path": "custom_games/games/color_glass/levels/L02.json",
+      "archive_path": "custom_games/games/color_glass/levels/L02.json",
+      "bytes": 27081,
+      "sha256": "a2d7323836da581487d22d94a11f8378f691be952800943e4cc43aa9f4f9017e",
+      "git_blob_sha": "0198d8b7673d55addd56beafbf29ac2f7e6a3f4b"
+    },
+    {
+      "path": "custom_games/games/color_glass/levels/L03.json",
+      "archive_path": "custom_games/games/color_glass/levels/L03.json",
+      "bytes": 26342,
+      "sha256": "e9ab92d93ea6fceee6c723a22cd1d4d669767e311a8c75bed9a98deaf6be267d",
+      "git_blob_sha": "6ec58d4b0ce860811b23c7af4754d738442f0d92"
+    },
+    {
+      "path": "custom_games/games/color_glass/levels/L04.json",
+      "archive_path": "custom_games/games/color_glass/levels/L04.json",
+      "bytes": 26348,
+      "sha256": "7690f1ebff8038e810a13a2147616310389b88952812031d14a364f4afa83803",
+      "git_blob_sha": "4f722fcbeec060e88fd0b0b6ace19341d6605e27"
+    },
+    {
+      "path": "custom_games/games/color_glass/levels/L05.json",
+      "archive_path": "custom_games/games/color_glass/levels/L05.json",
+      "bytes": 31468,
+      "sha256": "2c74ec1c2c4c4df72ca44f5cb6bd69937de096501210cd8ba9b1d303b487485a",
+      "git_blob_sha": "4f45c0409275c8db5587cc9b8f8a340dab8c6317"
+    },
+    {
+      "path": "custom_games/games/color_glass/levels/L06.json",
+      "archive_path": "custom_games/games/color_glass/levels/L06.json",
+      "bytes": 34700,
+      "sha256": "c5fdaabea6057d91fe188b5a718f5a999160e008b37b2055a8566cb726a2188a",
+      "git_blob_sha": "10e53da470b4198a051a8397871f386c34e2496f"
+    },
+    {
+      "path": "custom_games/games/columns_match/levels/L01.json",
+      "archive_path": "custom_games/games/columns_match/levels/L01.json",
+      "bytes": 478,
+      "sha256": "5026acbdd02adb7c1235a7e0d7eaf6ac1d0e5e89d0e6a5a9ec3bdffe1e0f530e",
+      "git_blob_sha": "35c54f121ea9e82f05b3fe8f727e81d9e6d47073"
+    },
+    {
+      "path": "custom_games/games/columns_match/levels/L02.json",
+      "archive_path": "custom_games/games/columns_match/levels/L02.json",
+      "bytes": 470,
+      "sha256": "aa2eb8a684525e013624fee846512879de26fd30dcf34c890c2a5252b138fe26",
+      "git_blob_sha": "2cfced257469399affc29e7e897bb465494c7098"
+    },
+    {
+      "path": "custom_games/games/columns_match/levels/L03.json",
+      "archive_path": "custom_games/games/columns_match/levels/L03.json",
+      "bytes": 477,
+      "sha256": "d464329c089753a250ce6d824b0dbd1a834d634d8343c864ef4c5b26744b7756",
+      "git_blob_sha": "179030e45d75fa121679586ae8d05f2232795389"
+    },
+    {
+      "path": "custom_games/games/columns_match/levels/L04.json",
+      "archive_path": "custom_games/games/columns_match/levels/L04.json",
+      "bytes": 477,
+      "sha256": "64c5580a7d142a8938da85d18554d7a7f1d66821794d6c7ec56e67b84ca0494b",
+      "git_blob_sha": "00e46b5ef8e64e23a10b9d83ec7fa87bc345de87"
+    },
+    {
+      "path": "custom_games/games/columns_match/levels/L05.json",
+      "archive_path": "custom_games/games/columns_match/levels/L05.json",
+      "bytes": 479,
+      "sha256": "660c02f43617ee465a077b51f2010f649b9b19dcd0130ab9748778c334ae4fd7",
+      "git_blob_sha": "02ca08b2c546cee6b1ec3cafd470d86c4de8849b"
+    },
+    {
+      "path": "custom_games/games/columns_match/levels/L06.json",
+      "archive_path": "custom_games/games/columns_match/levels/L06.json",
+      "bytes": 477,
+      "sha256": "86328e33ecae7091d446e15f4259175208e038efb066c49527e45ddc35ec8153",
+      "git_blob_sha": "5c6606fe6e569b83f77cafafaa59927262b0a655"
+    },
+    {
+      "path": "custom_games/games/combina/levels/L01.json",
+      "archive_path": "custom_games/games/combina/levels/L01.json",
+      "bytes": 401,
+      "sha256": "6f53bbb566ecb30a78cb1ec6473703f2e47aec8c6f559e78e3111173fd8f663a",
+      "git_blob_sha": "7839569593476c40d88034ece5c0e69ea4217eb9"
+    },
+    {
+      "path": "custom_games/games/combina/levels/L02.json",
+      "archive_path": "custom_games/games/combina/levels/L02.json",
+      "bytes": 498,
+      "sha256": "0c6b1f15d0f95c57df9ded9198cb0f5684a617028703eed82e88f984c24f5ca3",
+      "git_blob_sha": "8caa39b36414e7581e79a8e1e2ac8d15f2ad62d3"
+    },
+    {
+      "path": "custom_games/games/combina/levels/L03.json",
+      "archive_path": "custom_games/games/combina/levels/L03.json",
+      "bytes": 531,
+      "sha256": "7aebacf03a1043ca7a895f65ede658f81653360e390b931d6e8f62c0ef23b093",
+      "git_blob_sha": "60739f8f9d21e2fe2b3e8d4d1aecaa9341009c7d"
+    },
+    {
+      "path": "custom_games/games/combina/levels/L04.json",
+      "archive_path": "custom_games/games/combina/levels/L04.json",
+      "bytes": 587,
+      "sha256": "40e73e44347c4dfb54009e3717d89ea5033d3e95aaa93dc90e0aa81ddc023c06",
+      "git_blob_sha": "4cf9c8269df7a5270d0c6a6d47072cb0bfb2d361"
+    },
+    {
+      "path": "custom_games/games/combina/levels/L05.json",
+      "archive_path": "custom_games/games/combina/levels/L05.json",
+      "bytes": 634,
+      "sha256": "24d6c2234b04283e11f097c8d2f573768c1d67d7e8e38756e40a036810fe1c18",
+      "git_blob_sha": "76e8ab411c7efe3919d3bc616797d6fa78133b39"
+    },
+    {
+      "path": "custom_games/games/combina/levels/L06.json",
+      "archive_path": "custom_games/games/combina/levels/L06.json",
+      "bytes": 561,
+      "sha256": "f5a0778651feed992e5dcf9727d4eedd61b7e61aeab76023fb178100f1c1cf10",
+      "git_blob_sha": "b2251d4989605ed88a185d4791823904a415449c"
+    },
+    {
+      "path": "custom_games/games/configured_attraction/levels/L01.json",
+      "archive_path": "custom_games/games/configured_attraction/levels/L01.json",
+      "bytes": 536,
+      "sha256": "e064de3de15894a9fa0bd924fb873b7fa7cc9ab0ad088db2a5878b88feb86a3c",
+      "git_blob_sha": "e5d7e164fd7bd66d06690d7ca6d7ee0e9fbcd98e"
+    },
+    {
+      "path": "custom_games/games/configured_attraction/levels/L02.json",
+      "archive_path": "custom_games/games/configured_attraction/levels/L02.json",
+      "bytes": 814,
+      "sha256": "c6cf9db55e9b0b8a42e4ce31356557e56870929102f82349b528d70a0f042c55",
+      "git_blob_sha": "12f863d06451aa08f0c5034811bf682d77f09b9e"
+    },
+    {
+      "path": "custom_games/games/configured_attraction/levels/L03.json",
+      "archive_path": "custom_games/games/configured_attraction/levels/L03.json",
+      "bytes": 809,
+      "sha256": "e5d374c3a93f7e50dd5bd87c10badfcd8f81e02e7ac83bfb0c47f33ab9a7d1a2",
+      "git_blob_sha": "e10dd623aa4a1eb3e6b1feab4b65a71566f432c4"
+    },
+    {
+      "path": "custom_games/games/configured_attraction/levels/L04.json",
+      "archive_path": "custom_games/games/configured_attraction/levels/L04.json",
+      "bytes": 1077,
+      "sha256": "0e492c37709421a79f20d0d35ee4edc3d13dbff1cae41739e0c22fbae993a5f5",
+      "git_blob_sha": "0192693b59605a3e36bfbac7f8df31727b0d6605"
+    },
+    {
+      "path": "custom_games/games/configured_attraction/levels/L05.json",
+      "archive_path": "custom_games/games/configured_attraction/levels/L05.json",
+      "bytes": 1078,
+      "sha256": "f46f4433deb8babbcb1b58217f01770de937a818aaa943749084547ff5df25fe",
+      "git_blob_sha": "cd10bfa26eef2f0a9c2c349fb087e60a56bcc37d"
+    },
+    {
+      "path": "custom_games/games/configured_attraction/levels/L06.json",
+      "archive_path": "custom_games/games/configured_attraction/levels/L06.json",
+      "bytes": 1174,
+      "sha256": "410629c8d22caee0e72b1b1a6f484c7d7d99417df4c95eb2695975c246049f3c",
+      "git_blob_sha": "ccf87757ab3648061aa4d8877e01d36fe1abadcc"
+    },
+    {
+      "path": "custom_games/games/connect_four/levels/L01.json",
+      "archive_path": "custom_games/games/connect_four/levels/L01.json",
+      "bytes": 903,
+      "sha256": "39616cf44dd0fabf1ea07c774da7992722b67945a16a2415e3e4ea410e121f97",
+      "git_blob_sha": "d0263b5a6f6e255cf32d867f8def4f999cd15c03"
+    },
+    {
+      "path": "custom_games/games/connect_four/levels/L02.json",
+      "archive_path": "custom_games/games/connect_four/levels/L02.json",
+      "bytes": 99,
+      "sha256": "ed0ac290a2b4b14ef19c5896d53fd7e5520e356d7a084c805433b6c7ef0c500a",
+      "git_blob_sha": "4136bab95cdbd561b9c2925d5b8cd7c3b128f40d"
+    },
+    {
+      "path": "custom_games/games/connect_four/levels/L03.json",
+      "archive_path": "custom_games/games/connect_four/levels/L03.json",
+      "bytes": 99,
+      "sha256": "8027cab6c4b5a690a200fc9172ce645552ed55c19f1d071d0575400e7ad64065",
+      "git_blob_sha": "1230d8d0766518b8da762d02801cd84290b0638c"
+    },
+    {
+      "path": "custom_games/games/connect_four/levels/L04.json",
+      "archive_path": "custom_games/games/connect_four/levels/L04.json",
+      "bytes": 105,
+      "sha256": "e06c7baef432b94b4183de450001ec0ba4a68a262ab687898212ce1a8f9a4931",
+      "git_blob_sha": "94659216113a98f7002f0370f8b38b0304a2a787"
+    },
+    {
+      "path": "custom_games/games/connect_four/levels/L05.json",
+      "archive_path": "custom_games/games/connect_four/levels/L05.json",
+      "bytes": 100,
+      "sha256": "09a43191fc045ef6105eb5bca418163efe903f7d0516a1dad675575736fbe824",
+      "git_blob_sha": "d5061ce6bbcb7bf7082ea1ed83a012071aa46f87"
+    },
+    {
+      "path": "custom_games/games/connect_four/levels/L06.json",
+      "archive_path": "custom_games/games/connect_four/levels/L06.json",
+      "bytes": 99,
+      "sha256": "91547f9f39f4923d89e9b620ff3f437517da4487a2fca142b3a028707e5f69dc",
+      "git_blob_sha": "9d209fdda67c53d93b91378459943a6db1bdb6a7"
+    },
+    {
+      "path": "custom_games/games/craft_console/levels/L01.json",
+      "archive_path": "custom_games/games/craft_console/levels/L01.json",
+      "bytes": 381,
+      "sha256": "8c541997b0c65e02b196000136911ca4b1803e7516da5cde26d98e197f6e411f",
+      "git_blob_sha": "c5b71d15e249e289f3a79d6b6ca1d9a0a3c2feb4"
+    },
+    {
+      "path": "custom_games/games/craft_console/levels/L02.json",
+      "archive_path": "custom_games/games/craft_console/levels/L02.json",
+      "bytes": 514,
+      "sha256": "6495206c8787cd6cc907635fe43a6f2482ba30b44f06a28e81ae35b2d1aaa2ec",
+      "git_blob_sha": "980be0530da2ccb8ac9968a9a88cefc39e81afcd"
+    },
+    {
+      "path": "custom_games/games/craft_console/levels/L03.json",
+      "archive_path": "custom_games/games/craft_console/levels/L03.json",
+      "bytes": 515,
+      "sha256": "11c08cad22ddba6f465e211a551398967e86c2de7bdbfe0a47699785d7974cca",
+      "git_blob_sha": "bb8e67952999edc843f8c0005b4b4a3ac1b7ae7f"
+    },
+    {
+      "path": "custom_games/games/craft_console/levels/L04.json",
+      "archive_path": "custom_games/games/craft_console/levels/L04.json",
+      "bytes": 558,
+      "sha256": "4ec9fe2839d99931759ec191f9a628e94a8c116de4c55648df2dc5c2f42a9b00",
+      "git_blob_sha": "bb823d9928a742e669b72981095d985a8e475fe1"
+    },
+    {
+      "path": "custom_games/games/craft_console/levels/L05.json",
+      "archive_path": "custom_games/games/craft_console/levels/L05.json",
+      "bytes": 482,
+      "sha256": "cf80ec07361f7dbd0b167520c88098444800a9abc64f97b2dbdc7b66e7dbd1b4",
+      "git_blob_sha": "27e33c215c28313c76e7f6b52c58fa406d0b8c0e"
+    },
+    {
+      "path": "custom_games/games/craft_console/levels/L06.json",
+      "archive_path": "custom_games/games/craft_console/levels/L06.json",
+      "bytes": 565,
+      "sha256": "863decab509521abdb5114c9aefbc9610e974c0c9fb4325152c1e86f1b2836d2",
+      "git_blob_sha": "fd9839bb226f1112e74bba9bd699b28353e2d6b6"
+    },
+    {
+      "path": "custom_games/games/denoise_trame/levels/L01.json",
+      "archive_path": "custom_games/games/denoise_trame/levels/L01.json",
+      "bytes": 247,
+      "sha256": "21ab868dcd4c059f1c0033dd1961051d1d1a05505fe3bb7535e86686cad143f3",
+      "git_blob_sha": "c08978f01db5993dfd472996a66a906646028337"
+    },
+    {
+      "path": "custom_games/games/denoise_trame/levels/L02.json",
+      "archive_path": "custom_games/games/denoise_trame/levels/L02.json",
+      "bytes": 253,
+      "sha256": "bef82184ab9ebe375cb6ba5a5bef80fae7ea43374caa1c3c3428ed5d4589ab1d",
+      "git_blob_sha": "0a0abb90d5df75384ba169c575d5eca6ca089d79"
+    },
+    {
+      "path": "custom_games/games/denoise_trame/levels/L03.json",
+      "archive_path": "custom_games/games/denoise_trame/levels/L03.json",
+      "bytes": 240,
+      "sha256": "1b5bdec20faf3cb04a6a210cda20ba50c5647d15e32b528cdd27a6212cd649a5",
+      "git_blob_sha": "f39ac3e965a80c7030e8b4bfbe535357964f2927"
+    },
+    {
+      "path": "custom_games/games/denoise_trame/levels/L04.json",
+      "archive_path": "custom_games/games/denoise_trame/levels/L04.json",
+      "bytes": 276,
+      "sha256": "3d51eda4de6c51827047cc288774c8de94e5ae9d79de1ecf014c7f53d35a7b96",
+      "git_blob_sha": "daa9b9177476ec7749802a4e7c386a7bb16f1a05"
+    },
+    {
+      "path": "custom_games/games/denoise_trame/levels/L05.json",
+      "archive_path": "custom_games/games/denoise_trame/levels/L05.json",
+      "bytes": 292,
+      "sha256": "c346de9dc0bcee6fb2e6ae746a40a7c1c765f4b794d7a0662a3b3fa4493974ef",
+      "git_blob_sha": "1e5a5f54fdc8e20cdbcb43d6f6018f825bd65156"
+    },
+    {
+      "path": "custom_games/games/denoise_trame/levels/L06.json",
+      "archive_path": "custom_games/games/denoise_trame/levels/L06.json",
+      "bytes": 250,
+      "sha256": "4009954b033c4db27a0f3c468b02bbfc4f1919ad14ebab6ed1c6fe1338cee52f",
+      "git_blob_sha": "a9440ad6238535eb25686484ec025db83dd829df"
+    },
+    {
+      "path": "custom_games/games/dichotomy/levels/L01.json",
+      "archive_path": "custom_games/games/dichotomy/levels/L01.json",
+      "bytes": 135,
+      "sha256": "a20ec1235a7b8c1dbf0eaffeba62ecd70fa4aad18c826c99db055e507e52df60",
+      "git_blob_sha": "c630bbaa6ba4a846c3857f25f798c0c0953bcccc"
+    },
+    {
+      "path": "custom_games/games/dichotomy/levels/L02.json",
+      "archive_path": "custom_games/games/dichotomy/levels/L02.json",
+      "bytes": 131,
+      "sha256": "189aa5ba790e811786f03cd332ae78be5b3a73c68a2ae8ae79dbcb187773e5e6",
+      "git_blob_sha": "23fbdb1c5a5443d96b12a7b46d706bde3d2a8cbf"
+    },
+    {
+      "path": "custom_games/games/dichotomy/levels/L03.json",
+      "archive_path": "custom_games/games/dichotomy/levels/L03.json",
+      "bytes": 135,
+      "sha256": "61eb2c6c3224ac3a5711b3e28a14573d9b79f77872637dc1aef94aa36654adcd",
+      "git_blob_sha": "3152a81ca2a1c24941edeb7afbb327cfa7bad8b8"
+    },
+    {
+      "path": "custom_games/games/dichotomy/levels/L04.json",
+      "archive_path": "custom_games/games/dichotomy/levels/L04.json",
+      "bytes": 138,
+      "sha256": "06b7df3234ffd49b1706750230bb2db7079433a915a5ecdbd9fea91ec1e5fbec",
+      "git_blob_sha": "e5a3d4e70cf2034215d37d0ded4f4315d3b1d473"
+    },
+    {
+      "path": "custom_games/games/dichotomy/levels/L05.json",
+      "archive_path": "custom_games/games/dichotomy/levels/L05.json",
+      "bytes": 136,
+      "sha256": "d2fa796387feb4f6f374e59737f2a80d4db5b3e64fc663f6ba2bb40ec3aca227",
+      "git_blob_sha": "80855ea37e9e01664c3a4687cfdf9713e6fb79c9"
+    },
+    {
+      "path": "custom_games/games/dichotomy/levels/L06.json",
+      "archive_path": "custom_games/games/dichotomy/levels/L06.json",
+      "bytes": 137,
+      "sha256": "1dd8f23ce3e219885f475c41302d458ec0070e202bcb8e8f4b2615f1cc51d6c6",
+      "git_blob_sha": "048af3d35531b182d43ba3256187cd86722dd463"
+    },
+    {
+      "path": "custom_games/games/elastic_grid/levels/L01.json",
+      "archive_path": "custom_games/games/elastic_grid/levels/L01.json",
+      "bytes": 1127,
+      "sha256": "61df452441c8d703f1a8df51c99997f96e3b77f973796a2fcd0436b986086bee",
+      "git_blob_sha": "8105f5a39406984c69648bfa4e168519ba080d4a"
+    },
+    {
+      "path": "custom_games/games/elastic_grid/levels/L02.json",
+      "archive_path": "custom_games/games/elastic_grid/levels/L02.json",
+      "bytes": 1121,
+      "sha256": "bb0b920a3282628b4b4f73ec3b3464208d5ac3c8fefade430e8b691ebbf7d18d",
+      "git_blob_sha": "4545bd8763a6750db387d22bc716b02684a8d6b0"
+    },
+    {
+      "path": "custom_games/games/elastic_grid/levels/L03.json",
+      "archive_path": "custom_games/games/elastic_grid/levels/L03.json",
+      "bytes": 1747,
+      "sha256": "441e42010df1f6cd70521e4c4f1d119df113fadbb965c637ca898cf513136b19",
+      "git_blob_sha": "5aceb15c89867956b78a63b04d3a96b02527db87"
+    },
+    {
+      "path": "custom_games/games/elastic_grid/levels/L04.json",
+      "archive_path": "custom_games/games/elastic_grid/levels/L04.json",
+      "bytes": 1403,
+      "sha256": "b3513b44b5b8fd909155dafe8e93d4fbf7678f1b7f1ecd53e79913ddb7ebeff4",
+      "git_blob_sha": "453d0b995c49dafa0bd87d561b248cc114e87765"
+    },
+    {
+      "path": "custom_games/games/elastic_grid/levels/L05.json",
+      "archive_path": "custom_games/games/elastic_grid/levels/L05.json",
+      "bytes": 2099,
+      "sha256": "50a8821d31d7f9c8a89e347709a1df5da00aeb2a1c5d47535e7e9d97b7635edd",
+      "git_blob_sha": "2952de77f98dabe6e8da31567e30e75a20b53f5e"
+    },
+    {
+      "path": "custom_games/games/elastic_grid/levels/L06.json",
+      "archive_path": "custom_games/games/elastic_grid/levels/L06.json",
+      "bytes": 3826,
+      "sha256": "9311f05789d1dd7e0fd361dcbb782afc23573b3e9d1b7b631b6e9fbbba23509a",
+      "git_blob_sha": "df786b3805f8af48750ddd4dd3309723e64d7625"
+    },
+    {
+      "path": "custom_games/games/escort_patrol/levels/L01.json",
+      "archive_path": "custom_games/games/escort_patrol/levels/L01.json",
+      "bytes": 2597,
+      "sha256": "42c1f5901f22ff0e84a0beebed2d48cb72c458e3a9c21b32ac4bbfe1db33f6db",
+      "git_blob_sha": "8f3c00be6a6bef9442b0ba874c562f071894bca0"
+    },
+    {
+      "path": "custom_games/games/escort_patrol/levels/L02.json",
+      "archive_path": "custom_games/games/escort_patrol/levels/L02.json",
+      "bytes": 3385,
+      "sha256": "34fd7007326984077f4f754cc228e1ecf11d76f724736b0ba16bbc6d7312720d",
+      "git_blob_sha": "2fdd9f01c09e503998d205e9f0835b4e425e054b"
+    },
+    {
+      "path": "custom_games/games/escort_patrol/levels/L03.json",
+      "archive_path": "custom_games/games/escort_patrol/levels/L03.json",
+      "bytes": 3521,
+      "sha256": "88b9e0be6ab719acd75eb1c151a5c29d3d9d5e5f0534526608539244dd0961e9",
+      "git_blob_sha": "458a6040f3d10965885beb0a47d0893d90267eb0"
+    },
+    {
+      "path": "custom_games/games/escort_patrol/levels/L04.json",
+      "archive_path": "custom_games/games/escort_patrol/levels/L04.json",
+      "bytes": 3668,
+      "sha256": "259c47c298f8014500f3f74f40de0f2485ef932e7e2c479b3bb87927a236fa7d",
+      "git_blob_sha": "651fae59b6706369346ad877ee846f6ea770da5b"
+    },
+    {
+      "path": "custom_games/games/escort_patrol/levels/L05.json",
+      "archive_path": "custom_games/games/escort_patrol/levels/L05.json",
+      "bytes": 3766,
+      "sha256": "c94eb3cf8e937faf1b2024334f2b6e4148d627ca28ad5a3cc3075f1e0e465247",
+      "git_blob_sha": "3481b1f2ea5f67692cc41d70d13647704234b01b"
+    },
+    {
+      "path": "custom_games/games/escort_patrol/levels/L06.json",
+      "archive_path": "custom_games/games/escort_patrol/levels/L06.json",
+      "bytes": 3838,
+      "sha256": "42235f10698f308c0e8cbaaac976bdef1990c90e49013cf44c708f19bd670120",
+      "git_blob_sha": "13c8ff38f22721318ff0b2a7ce0b79a40b3a726b"
+    },
+    {
+      "path": "custom_games/games/etag_floors/levels/L01.json",
+      "archive_path": "custom_games/games/etag_floors/levels/L01.json",
+      "bytes": 896,
+      "sha256": "5e8a768c9203015dc4b99a86a5e490307b6cc765800fb122d94935b8e1a95fff",
+      "git_blob_sha": "5a70bad1116921c5f37d0365663d66c91a357bbb"
+    },
+    {
+      "path": "custom_games/games/etag_floors/levels/L02.json",
+      "archive_path": "custom_games/games/etag_floors/levels/L02.json",
+      "bytes": 1175,
+      "sha256": "5fe39fd8739b965631cf0312b77944e346a4bf47a476a1d08b5048e590148a6d",
+      "git_blob_sha": "6f170c4a404264d5148600a74bb9e412a1dacd4e"
+    },
+    {
+      "path": "custom_games/games/etag_floors/levels/L03.json",
+      "archive_path": "custom_games/games/etag_floors/levels/L03.json",
+      "bytes": 1176,
+      "sha256": "ccce893ce1ba22bdeb9662c86b4c6885e0c7b713460e17fd1000c014107d1a1e",
+      "git_blob_sha": "fe22a462c3396ca0bf929b1d900a3761688aae47"
+    },
+    {
+      "path": "custom_games/games/etag_floors/levels/L04.json",
+      "archive_path": "custom_games/games/etag_floors/levels/L04.json",
+      "bytes": 1448,
+      "sha256": "73200731b55a747f1e6132348ea2e846314d0865a3d40be6645442e0286acf95",
+      "git_blob_sha": "128232162a431fa6e8767ddaa20cb7e5fac74974"
+    },
+    {
+      "path": "custom_games/games/etag_floors/levels/L05.json",
+      "archive_path": "custom_games/games/etag_floors/levels/L05.json",
+      "bytes": 1727,
+      "sha256": "5fc295004f1e98e2cc62aafbd6d05d41ec40a746a6e14ee4238c8134e57facfe",
+      "git_blob_sha": "f7ffa09e8ceccc24a8f00056f3ad6d31ac07a95e"
+    },
+    {
+      "path": "custom_games/games/etag_floors/levels/L06.json",
+      "archive_path": "custom_games/games/etag_floors/levels/L06.json",
+      "bytes": 1451,
+      "sha256": "2af6f1e4d6ec8af368f6da9b0200e4cfbcac3b46acc306cc2b48ba0cef60db43",
+      "git_blob_sha": "1404fadcc0023822f9b4c1f26afade12282948b7"
+    },
+    {
+      "path": "custom_games/games/evasion/levels/L01.json",
+      "archive_path": "custom_games/games/evasion/levels/L01.json",
+      "bytes": 758,
+      "sha256": "09cb88fd64c127f4607e37c660813a0d396b864d6c660672f3a8dbcc6c37f338",
+      "git_blob_sha": "4174ec3ecde292115e19ef9c78613a23385bfc13"
+    },
+    {
+      "path": "custom_games/games/evasion/levels/L02.json",
+      "archive_path": "custom_games/games/evasion/levels/L02.json",
+      "bytes": 1070,
+      "sha256": "98adb0af3160198848c0feb83723bcb59d51f82c0576ffb70277b58d1e427a69",
+      "git_blob_sha": "80557af5cf5157fa7cfa3a555ac3330f28661980"
+    },
+    {
+      "path": "custom_games/games/evasion/levels/L03.json",
+      "archive_path": "custom_games/games/evasion/levels/L03.json",
+      "bytes": 1228,
+      "sha256": "72140736dfff4cb084e42799150573160fc5aa4b72b543e9eace1fd9acb3311b",
+      "git_blob_sha": "3fd88c85148aad9a83c91edd95506aee88f02c0b"
+    },
+    {
+      "path": "custom_games/games/evasion/levels/L04.json",
+      "archive_path": "custom_games/games/evasion/levels/L04.json",
+      "bytes": 1557,
+      "sha256": "c9bc49773f58d83adcf5218baa3b62908f720f715c4692050dbb08e0c18dce01",
+      "git_blob_sha": "3ce6d91c37d0972ca5d41ba5b172d55db1da47be"
+    },
+    {
+      "path": "custom_games/games/evasion/levels/L05.json",
+      "archive_path": "custom_games/games/evasion/levels/L05.json",
+      "bytes": 1699,
+      "sha256": "ab0ef46cf145c1d403be8c17f70001230181a1493d621d10085fc2649f9e78b4",
+      "git_blob_sha": "b1655d36d19fac0ab5aa4be3e3117cb750ea6752"
+    },
+    {
+      "path": "custom_games/games/evasion/levels/L06.json",
+      "archive_path": "custom_games/games/evasion/levels/L06.json",
+      "bytes": 2129,
+      "sha256": "9060f8e857ebcfc466a3d1f95ebfbefe2a265fbd567df8c50faceeab36300a95",
+      "git_blob_sha": "2772e8f482ede9968b51f1a9648eafa6572a0a8a"
+    },
+    {
+      "path": "custom_games/games/fite_arena/levels/L01.json",
+      "archive_path": "custom_games/games/fite_arena/levels/L01.json",
+      "bytes": 759,
+      "sha256": "90dbdb2ffc4d6c750821f603a52ec2961b84775243e135fc13e4186c4e985b4a",
+      "git_blob_sha": "5b73ef530a991660a5462f08e7e09374699604a0"
+    },
+    {
+      "path": "custom_games/games/fite_arena/levels/L02.json",
+      "archive_path": "custom_games/games/fite_arena/levels/L02.json",
+      "bytes": 450,
+      "sha256": "1cd25e902eefa64804b99749ce915a9a560e66d1faf72377fc1be81f8b4a2420",
+      "git_blob_sha": "610a5b047513d6a08d745eb38133ece07f8220d6"
+    },
+    {
+      "path": "custom_games/games/fite_arena/levels/L03.json",
+      "archive_path": "custom_games/games/fite_arena/levels/L03.json",
+      "bytes": 650,
+      "sha256": "d7342d454a658e0eeabb6327c0bf3e96f6bbf16a9cf8a7967e95949ea420ccc9",
+      "git_blob_sha": "d7d8498149eb245e0ea90557365360bef1722bd9"
+    },
+    {
+      "path": "custom_games/games/fite_arena/levels/L04.json",
+      "archive_path": "custom_games/games/fite_arena/levels/L04.json",
+      "bytes": 515,
+      "sha256": "02856dc5c2b85bc56bd5ede721f96b64d565f681b08f77244e94fbbd1ee07369",
+      "git_blob_sha": "bb82595189f5a2c556cbc5509cb19edb7393da48"
+    },
+    {
+      "path": "custom_games/games/fite_arena/levels/L05.json",
+      "archive_path": "custom_games/games/fite_arena/levels/L05.json",
+      "bytes": 498,
+      "sha256": "3582e039dc82555fb131835ea25f1311fd57cb148953997e9934860f6f1bcaec",
+      "git_blob_sha": "b838420511854a0f568bcd08089f312c645e82be"
+    },
+    {
+      "path": "custom_games/games/fite_arena/levels/L06.json",
+      "archive_path": "custom_games/games/fite_arena/levels/L06.json",
+      "bytes": 592,
+      "sha256": "d75f295a0b4fd114f067ab372e1e77870762c71b6a42685abb33917e68f5159e",
+      "git_blob_sha": "f097a624c615a2dd9854ff890e44acc7d0f2f818"
+    },
+    {
+      "path": "custom_games/games/flee_stones/levels/L01.json",
+      "archive_path": "custom_games/games/flee_stones/levels/L01.json",
+      "bytes": 291,
+      "sha256": "57ca91fb0bff190656d11a66043529d96ac438ae5e44aa7b16967dcab26db3bc",
+      "git_blob_sha": "b40ced864656d3348d801460f8034487c9016815"
+    },
+    {
+      "path": "custom_games/games/flee_stones/levels/L02.json",
+      "archive_path": "custom_games/games/flee_stones/levels/L02.json",
+      "bytes": 287,
+      "sha256": "504a07bbce0f661a61adc7a1bbfc84ea59f5c3a0c2f07bb584c56a69cfdc1208",
+      "git_blob_sha": "1c2de606ad46a6a9d4aa166f01a95c96db4a6724"
+    },
+    {
+      "path": "custom_games/games/flee_stones/levels/L03.json",
+      "archive_path": "custom_games/games/flee_stones/levels/L03.json",
+      "bytes": 287,
+      "sha256": "2517be3c1f4cd2ea118ae6e1382a68a1b9de36abba0c8b2c2f3b088dc26a400a",
+      "git_blob_sha": "848555e223fe2c652f05896505a6a318848487ea"
+    },
+    {
+      "path": "custom_games/games/flee_stones/levels/L04.json",
+      "archive_path": "custom_games/games/flee_stones/levels/L04.json",
+      "bytes": 296,
+      "sha256": "1086816d9de2a44fe971c021d0b639994246202653892b5d338accfa944a8381",
+      "git_blob_sha": "97dfd40f219ca2ce189260e51a20ffea42d0b871"
+    },
+    {
+      "path": "custom_games/games/flee_stones/levels/L05.json",
+      "archive_path": "custom_games/games/flee_stones/levels/L05.json",
+      "bytes": 289,
+      "sha256": "5350e3ddeac4b49597fce8ff719b594ddc69bbb57cb5330daa8bd4cf3e19f437",
+      "git_blob_sha": "cde5adacc42e6d8d4edfcc864c32d067e6e20241"
+    },
+    {
+      "path": "custom_games/games/flee_stones/levels/L06.json",
+      "archive_path": "custom_games/games/flee_stones/levels/L06.json",
+      "bytes": 289,
+      "sha256": "a1aeedea634d9dc8a2463a7acb06624ce3740d08331152439d46b1fb072485c1",
+      "git_blob_sha": "5bcd71335b67820bf77b7c03de7d196fcd8625de"
+    },
+    {
+      "path": "custom_games/games/fog_hidden_motion/levels/L01.json",
+      "archive_path": "custom_games/games/fog_hidden_motion/levels/L01.json",
+      "bytes": 1090,
+      "sha256": "39959dd313abda6ab6a2e501be38b7b2f7bfa0a7040d623e055ec7146544a997",
+      "git_blob_sha": "de8927793d0ab0657e6f65541497349263f36475"
+    },
+    {
+      "path": "custom_games/games/fog_hidden_motion/levels/L02.json",
+      "archive_path": "custom_games/games/fog_hidden_motion/levels/L02.json",
+      "bytes": 1776,
+      "sha256": "2499a079808783975763456851cc3a25dad7d3d2666e8f528d531c84fdfde3ce",
+      "git_blob_sha": "06d054b02ecad43e6f76077d8141123a6ba986db"
+    },
+    {
+      "path": "custom_games/games/fog_hidden_motion/levels/L03.json",
+      "archive_path": "custom_games/games/fog_hidden_motion/levels/L03.json",
+      "bytes": 1738,
+      "sha256": "6b4522be6bb027fb1a536c423384c82670f4247f4bff42bd5b52c083558db88b",
+      "git_blob_sha": "1c960e977d87a5bc5433f130291803fa198d3240"
+    },
+    {
+      "path": "custom_games/games/fog_hidden_motion/levels/L04.json",
+      "archive_path": "custom_games/games/fog_hidden_motion/levels/L04.json",
+      "bytes": 1925,
+      "sha256": "005fa48b2e002323180dcc5a477c5843e23793bbe82ffe367ec7ca88dc2d4ba5",
+      "git_blob_sha": "dc061612389198916c232482575508f78bb00968"
+    },
+    {
+      "path": "custom_games/games/fog_hidden_motion/levels/L05.json",
+      "archive_path": "custom_games/games/fog_hidden_motion/levels/L05.json",
+      "bytes": 2080,
+      "sha256": "3708c45c7f175c62d67f39aef9f325acc10ed886e0276f78b35dd17b8e7226ae",
+      "git_blob_sha": "85bd99e62f98865bc50791d99239af25e430645e"
+    },
+    {
+      "path": "custom_games/games/fog_hidden_motion/levels/L06.json",
+      "archive_path": "custom_games/games/fog_hidden_motion/levels/L06.json",
+      "bytes": 2499,
+      "sha256": "9fd2b4a90644d91495edae817124083a790db4f85abbec7ee52746cfd84fead4",
+      "git_blob_sha": "41ecd201f0b1e1d9304d18fff59302ba765e9f93"
+    },
+    {
+      "path": "custom_games/games/gare_cadence/levels/L01.json",
+      "archive_path": "custom_games/games/gare_cadence/levels/L01.json",
+      "bytes": 295,
+      "sha256": "1d40dc078c936e819d9f31e2d21610c60ef0450346faafc4bb28d0efc9b53baf",
+      "git_blob_sha": "1a977a094825dd5ef3d269d8fe81c72e45ccfc6f"
+    },
+    {
+      "path": "custom_games/games/gare_cadence/levels/L02.json",
+      "archive_path": "custom_games/games/gare_cadence/levels/L02.json",
+      "bytes": 292,
+      "sha256": "43c9f3c9f95daace405e604374d6d645551d2abb35b74662fb0f7915235f22a9",
+      "git_blob_sha": "26aa1369fdad49b16dd0993df8328770481ce20c"
+    },
+    {
+      "path": "custom_games/games/gare_cadence/levels/L03.json",
+      "archive_path": "custom_games/games/gare_cadence/levels/L03.json",
+      "bytes": 489,
+      "sha256": "d3b9f2d7a077b7da4c74223d8887ae4c064ddbce0c5e39b42908149bc8133f78",
+      "git_blob_sha": "2152837e1241647df77e4a21e08cb8b57551ebc0"
+    },
+    {
+      "path": "custom_games/games/gare_cadence/levels/L04.json",
+      "archive_path": "custom_games/games/gare_cadence/levels/L04.json",
+      "bytes": 494,
+      "sha256": "8000d22b9050f0d1d2afe3aa47dcfc24adab65b3d7e0ce573e5ed80d59a47f2a",
+      "git_blob_sha": "7c9855658671205e63b8ee385459318fcc6b1952"
+    },
+    {
+      "path": "custom_games/games/gare_cadence/levels/L05.json",
+      "archive_path": "custom_games/games/gare_cadence/levels/L05.json",
+      "bytes": 545,
+      "sha256": "55d5069d7151043649657df9521fa25e1023ccb0b28ff932f03ccbd2a2d3870f",
+      "git_blob_sha": "1cf9ba482f916dbd1827854d3595204feee5b3a7"
+    },
+    {
+      "path": "custom_games/games/gare_cadence/levels/L06.json",
+      "archive_path": "custom_games/games/gare_cadence/levels/L06.json",
+      "bytes": 544,
+      "sha256": "fb2b2e4aaf5991ad8b611feae4caba649932e6cbedc44c66840949b999bd811a",
+      "git_blob_sha": "017b088d4e5bf17156eb8558fb75f0c22c4b9a48"
+    },
+    {
+      "path": "custom_games/games/globe_track/base_frame.txt",
+      "archive_path": "custom_games/games/globe_track/base_frame.txt",
+      "bytes": 4160,
+      "sha256": "0512afb5efc275de5ea2d7176881141e5877abdab9bbb7011aafb86172b83c73",
+      "git_blob_sha": "6e71c0b0c23451783852638233ede28dc59f4bd4"
+    },
+    {
+      "path": "custom_games/games/globe_track/levels/L01.json",
+      "archive_path": "custom_games/games/globe_track/levels/L01.json",
+      "bytes": 192,
+      "sha256": "02b22b5f998390cc0160bd1a026b9051c908ec2fbbae7a7f5fb6c6b1319fc65b",
+      "git_blob_sha": "49f9398b57ffef23f8310ef03a120587c10b2cc3"
+    },
+    {
+      "path": "custom_games/games/globe_track/levels/L02.json",
+      "archive_path": "custom_games/games/globe_track/levels/L02.json",
+      "bytes": 184,
+      "sha256": "0fe77b10a73ad2659d6706a9ed396c9df1c1b72cb49edf3b825bfdd70d373947",
+      "git_blob_sha": "2ea64ad58b84a22170467f104738354f54fd95da"
+    },
+    {
+      "path": "custom_games/games/globe_track/levels/L03.json",
+      "archive_path": "custom_games/games/globe_track/levels/L03.json",
+      "bytes": 205,
+      "sha256": "87722126751b2e6809982b367cffa620f4b76f550d80dcc219cb7f11196a780a",
+      "git_blob_sha": "5065ca0811f175df34a7fe9b9de63bdf832daed5"
+    },
+    {
+      "path": "custom_games/games/globe_track/levels/L04.json",
+      "archive_path": "custom_games/games/globe_track/levels/L04.json",
+      "bytes": 214,
+      "sha256": "dd5a42d31edd28f23b58533e8e575e8535ddde60984213dbb99b38e14547199b",
+      "git_blob_sha": "07bacaeae7173b611f47bf8e701e1f0edec727b5"
+    },
+    {
+      "path": "custom_games/games/globe_track/levels/L05.json",
+      "archive_path": "custom_games/games/globe_track/levels/L05.json",
+      "bytes": 243,
+      "sha256": "46635260bdfe227d39c3fa49d8205238dd25f6558c1ceaec90368106891d29eb",
+      "git_blob_sha": "b299e55260d531eba67f28711d7a9b641b874c3a"
+    },
+    {
+      "path": "custom_games/games/globe_track/levels/L06.json",
+      "archive_path": "custom_games/games/globe_track/levels/L06.json",
+      "bytes": 251,
+      "sha256": "0dac0e05abe7c1703682d9b22baf2efde90b2f4cd1724f828f1b2ba9328643c7",
+      "git_blob_sha": "37b80203fffc4d56d544b5f1b4cb2f9c637ba4cc"
+    },
+    {
+      "path": "custom_games/games/gori_ballistics/levels/L01.json",
+      "archive_path": "custom_games/games/gori_ballistics/levels/L01.json",
+      "bytes": 253,
+      "sha256": "debfb37367ae5b63880736f78996f70aa6b860e3da5f820320405cf3996693aa",
+      "git_blob_sha": "54fcab25538472e8b55e3242df82f7f5c562940b"
+    },
+    {
+      "path": "custom_games/games/gori_ballistics/levels/L02.json",
+      "archive_path": "custom_games/games/gori_ballistics/levels/L02.json",
+      "bytes": 214,
+      "sha256": "2fd76867d11d7ad43f74dff3ee926576a9ef6ce81b8098538734d2ac84253d82",
+      "git_blob_sha": "86db8072a9ac68fa4dc84351897515e9e1441a96"
+    },
+    {
+      "path": "custom_games/games/gori_ballistics/levels/L03.json",
+      "archive_path": "custom_games/games/gori_ballistics/levels/L03.json",
+      "bytes": 219,
+      "sha256": "8c9d4a02299ea162a1b46f6e926d4c5d1ce995d50ecaa90f8c1e7bbcf50469c6",
+      "git_blob_sha": "10a06ade35ecd5df48ddb401a8d07b8fc7cf9ab1"
+    },
+    {
+      "path": "custom_games/games/gori_ballistics/levels/L04.json",
+      "archive_path": "custom_games/games/gori_ballistics/levels/L04.json",
+      "bytes": 224,
+      "sha256": "c0a7b4356954663bd79dded201af0f7210b561ab8fae928c7ce9c6d66c4ec38d",
+      "git_blob_sha": "602a43afd05342054b3f85baee091dbc8f6aab97"
+    },
+    {
+      "path": "custom_games/games/gori_ballistics/levels/L05.json",
+      "archive_path": "custom_games/games/gori_ballistics/levels/L05.json",
+      "bytes": 253,
+      "sha256": "c2697c78a0e00362e59032c0639716eb989b3b63a0e3175499d5c815fe4cee07",
+      "git_blob_sha": "3231bd3b57d0b6d2086e20b1e13a845631ff07c2"
+    },
+    {
+      "path": "custom_games/games/gori_ballistics/levels/L06.json",
+      "archive_path": "custom_games/games/gori_ballistics/levels/L06.json",
+      "bytes": 228,
+      "sha256": "fd33ade99e85f840d32b38e8af0f08dadc5c13ef5931cc5b0b80b1dd8373df86",
+      "git_blob_sha": "c29a9c4abeb00c5c06df886bfa839aa5e4bd6be9"
+    },
+    {
+      "path": "custom_games/games/graved_map/levels/L01.json",
+      "archive_path": "custom_games/games/graved_map/levels/L01.json",
+      "bytes": 1129,
+      "sha256": "db554e40f821ea06ab3e115d58e6143d0a1df6cd698ec08d14b4055b83962bd9",
+      "git_blob_sha": "7224aaca5107673a081c5c2062196bbf3f59eaa1"
+    },
+    {
+      "path": "custom_games/games/graved_map/levels/L02.json",
+      "archive_path": "custom_games/games/graved_map/levels/L02.json",
+      "bytes": 1351,
+      "sha256": "2189041b37121ae2498bd5c251a40e291cbfd992356d894be4641867b07ac1d0",
+      "git_blob_sha": "96be3d3667f7247e81d688055b47c446b74985ee"
+    },
+    {
+      "path": "custom_games/games/graved_map/levels/L03.json",
+      "archive_path": "custom_games/games/graved_map/levels/L03.json",
+      "bytes": 1818,
+      "sha256": "8ead8019fddbf873460f3a261d780db1809d21a8ecfe8dfce472116dd1e9c2c4",
+      "git_blob_sha": "a381b35149dcf556731f1b5c96ea0e02598e4928"
+    },
+    {
+      "path": "custom_games/games/graved_map/levels/L04.json",
+      "archive_path": "custom_games/games/graved_map/levels/L04.json",
+      "bytes": 2138,
+      "sha256": "346e7cf399febf06c7161fc57e35ca72bc5a4bdb0c455963d5c35b7982e2ddff",
+      "git_blob_sha": "568ef7c43a3d9aced46f53a3132a3c386b35e7a9"
+    },
+    {
+      "path": "custom_games/games/graved_map/levels/L05.json",
+      "archive_path": "custom_games/games/graved_map/levels/L05.json",
+      "bytes": 3393,
+      "sha256": "259fbe9bfc6a00ff68807a8325e9ec3dbc390000bfa8de50d91d435a6e9b5ba6",
+      "git_blob_sha": "978fae2546414b29fb9dd130bcc857b98f889d91"
+    },
+    {
+      "path": "custom_games/games/graved_map/levels/L06.json",
+      "archive_path": "custom_games/games/graved_map/levels/L06.json",
+      "bytes": 4333,
+      "sha256": "f47174db0e584b6af9fb6cb9aa9912d183fb2df6b273ad60b4f3f7e137292472",
+      "git_blob_sha": "1dfea8e22951a0b96b65e5a8befb7b813727690a"
+    },
+    {
+      "path": "custom_games/games/gravity_box/levels/L01.json",
+      "archive_path": "custom_games/games/gravity_box/levels/L01.json",
+      "bytes": 625,
+      "sha256": "c44fc857de0c7450802a7ac6e76bc333e99eb61ab54b72c5a9dca4ab693a0e39",
+      "git_blob_sha": "725147ac7dc5e8dc29b2e414caa46020571255ce"
+    },
+    {
+      "path": "custom_games/games/gravity_box/levels/L02.json",
+      "archive_path": "custom_games/games/gravity_box/levels/L02.json",
+      "bytes": 821,
+      "sha256": "25c17353e431af625bb4dadf658a51ed632eac95888f2cacb8a316cd7c33b4be",
+      "git_blob_sha": "1e2973be807a75dba612b2791198c7d02c68aa02"
+    },
+    {
+      "path": "custom_games/games/gravity_box/levels/L03.json",
+      "archive_path": "custom_games/games/gravity_box/levels/L03.json",
+      "bytes": 930,
+      "sha256": "3fa7e0edaa8ef8f1e66d96e3b68b0704536fe37e515b30435c2e0588439fbb17",
+      "git_blob_sha": "96630aeeeccc944af108affe7cdddf168c5fa672"
+    },
+    {
+      "path": "custom_games/games/gravity_box/levels/L04.json",
+      "archive_path": "custom_games/games/gravity_box/levels/L04.json",
+      "bytes": 1153,
+      "sha256": "5ebe904ad0dbdfd14bd893a035e36225170254c7352a63f32797007b6939079f",
+      "git_blob_sha": "9e7b37345c721169106912955b129d6150fabc1a"
+    },
+    {
+      "path": "custom_games/games/gravity_box/levels/L05.json",
+      "archive_path": "custom_games/games/gravity_box/levels/L05.json",
+      "bytes": 1055,
+      "sha256": "e31b4b25b5d4f4b5aba30ea29024f87de06207cb81450016c3ff0669c72b6a18",
+      "git_blob_sha": "7d6705544a3b25e95b89b7aa18f405421734f987"
+    },
+    {
+      "path": "custom_games/games/gravity_box/levels/L06.json",
+      "archive_path": "custom_games/games/gravity_box/levels/L06.json",
+      "bytes": 1490,
+      "sha256": "c7f6d6643b0903038c28f3ed3cc9180a66c4f7597a5822357a337f02a96c46c8",
+      "git_blob_sha": "1038846b3f4a31a7df99a7b57f1fd6f751b1eac4"
+    },
+    {
+      "path": "custom_games/games/grillage/levels/L01.json",
+      "archive_path": "custom_games/games/grillage/levels/L01.json",
+      "bytes": 3564,
+      "sha256": "e33e201450633d0ffb71e70c1597dc52c63ce2be414233253039cd3997780b43",
+      "git_blob_sha": "31240c62f8e87bd7bc8faf04f3231c3fe6dd3172"
+    },
+    {
+      "path": "custom_games/games/grillage/levels/L02.json",
+      "archive_path": "custom_games/games/grillage/levels/L02.json",
+      "bytes": 3962,
+      "sha256": "117a0d345a09403c64c4d16920abcc14d566f7b32e9820fc990711c72b0e94d4",
+      "git_blob_sha": "bcbd486503484953f8080f5af3ffae85f55e91c9"
+    },
+    {
+      "path": "custom_games/games/grillage/levels/L03.json",
+      "archive_path": "custom_games/games/grillage/levels/L03.json",
+      "bytes": 4890,
+      "sha256": "c873af0b8bf87e82d212461292527691d2d29f90c512e67538ee8ea9b1b527d6",
+      "git_blob_sha": "8c87e36fd7d4fe4ed0e74851edae2cf3f0800965"
+    },
+    {
+      "path": "custom_games/games/grillage/levels/L04.json",
+      "archive_path": "custom_games/games/grillage/levels/L04.json",
+      "bytes": 5482,
+      "sha256": "889d6066fad87bc1647fdff5afcb37999cf02fcc91c8a384bb9f0901f0287730",
+      "git_blob_sha": "fe80ddae0f4d3714f4c733eeaa8fd3d70fb5f5ec"
+    },
+    {
+      "path": "custom_games/games/grillage/levels/L05.json",
+      "archive_path": "custom_games/games/grillage/levels/L05.json",
+      "bytes": 6614,
+      "sha256": "985279cfbfaa8af5b99f4e1972c3032efc66745b29191635157318180d373e77",
+      "git_blob_sha": "4be600356522f8cbad43d3f6b04a11a0fd8afe5f"
+    },
+    {
+      "path": "custom_games/games/grillage/levels/L06.json",
+      "archive_path": "custom_games/games/grillage/levels/L06.json",
+      "bytes": 8712,
+      "sha256": "6ea49e81ab32cdfaa6200f3e509ce48303d5325a49c335b31a15061a96150fcb",
+      "git_blob_sha": "5afefe713a8e5a485ea46be22c3985a5c3bce443"
+    },
+    {
+      "path": "custom_games/games/hanoi/levels/L01.json",
+      "archive_path": "custom_games/games/hanoi/levels/L01.json",
+      "bytes": 132,
+      "sha256": "c4a3ef43cb7399e13b7b0e09aaa6cb8cdb01f6276b99fd301e89541fe2800c24",
+      "git_blob_sha": "e916dfa2dd670e2410bac4052246ef60b98ce476"
+    },
+    {
+      "path": "custom_games/games/hanoi/levels/L02.json",
+      "archive_path": "custom_games/games/hanoi/levels/L02.json",
+      "bytes": 144,
+      "sha256": "217dde2994a2cd8d9a67b62c3bacbe1c0da3c0ef9535dd2a9cbee5f6d75fc731",
+      "git_blob_sha": "3b7d4d06e316a37de181c3c869a2d38d2940e132"
+    },
+    {
+      "path": "custom_games/games/hanoi/levels/L03.json",
+      "archive_path": "custom_games/games/hanoi/levels/L03.json",
+      "bytes": 134,
+      "sha256": "14614299cf9c0c437577c902c6d1081b11f13eb7e2756165203b3f6e4456388e",
+      "git_blob_sha": "ead38d299c87e003443490ebb9cfc95f9267dbe6"
+    },
+    {
+      "path": "custom_games/games/hanoi/levels/L04.json",
+      "archive_path": "custom_games/games/hanoi/levels/L04.json",
+      "bytes": 134,
+      "sha256": "4a05f14caf8b0045575d0afbac1bed2042b577a559a59094a6a44003af6861bb",
+      "git_blob_sha": "ad9a82743278b218aacb886672af840eda3532e3"
+    },
+    {
+      "path": "custom_games/games/hole_palette/levels/L01.json",
+      "archive_path": "custom_games/games/hole_palette/levels/L01.json",
+      "bytes": 4889,
+      "sha256": "560b3f218324bc970b1f672bdd6dc900d3636bab0f40bba4f0c5328706203f88",
+      "git_blob_sha": "068fd4e35d3ad7ec77ada7d75677266332116560"
+    },
+    {
+      "path": "custom_games/games/hole_palette/levels/L02.json",
+      "archive_path": "custom_games/games/hole_palette/levels/L02.json",
+      "bytes": 4905,
+      "sha256": "d25cca540a4b640aacce5def36dc595eaaea134f713a594cadc5e35494ab5847",
+      "git_blob_sha": "5e0e2e861cb08f3c0b767fa2776d3c55af70154f"
+    },
+    {
+      "path": "custom_games/games/hole_palette/levels/L03.json",
+      "archive_path": "custom_games/games/hole_palette/levels/L03.json",
+      "bytes": 4947,
+      "sha256": "5dfe3e054171fea2a36ffe1edd15d33d4390bb28f7cf4793c7d1b4785e365f98",
+      "git_blob_sha": "d465e59ea48338607478d665a989971d0827add9"
+    },
+    {
+      "path": "custom_games/games/hole_palette/levels/L04.json",
+      "archive_path": "custom_games/games/hole_palette/levels/L04.json",
+      "bytes": 4991,
+      "sha256": "6ed4ab461f10ab4c8dbe3ab91f2ec2f58e5d7aa2d1e40f644e952306c6d44fa3",
+      "git_blob_sha": "db613cdd91377fa19691802e473797f84a4738fd"
+    },
+    {
+      "path": "custom_games/games/hole_palette/levels/L05.json",
+      "archive_path": "custom_games/games/hole_palette/levels/L05.json",
+      "bytes": 5046,
+      "sha256": "f8ab8284200747107a5405a00e5bb4f46ce3603e4ea9ea52273b43d65ef52a4f",
+      "git_blob_sha": "a9e33159788f7c06ab45fc7454fd931d61c3aee8"
+    },
+    {
+      "path": "custom_games/games/hole_palette/levels/L06.json",
+      "archive_path": "custom_games/games/hole_palette/levels/L06.json",
+      "bytes": 9599,
+      "sha256": "bc248e906ced51bd292e2d42b53ed65b36f33aa095e8762e705b7a2307ab2d0e",
+      "git_blob_sha": "48f05974a59f91aba71e4aab5dd0348bc4d19432"
+    },
+    {
+      "path": "custom_games/games/homogeneous_pair_deletion/levels/L01.json",
+      "archive_path": "custom_games/games/homogeneous_pair_deletion/levels/L01.json",
+      "bytes": 1499,
+      "sha256": "2f2af1121b1e2aaf5a040e83f336fbba497343f7f4166d88cb2b318bbfe10f67",
+      "git_blob_sha": "3a94545c57dd57bf552b4cf4921b533676f7661c"
+    },
+    {
+      "path": "custom_games/games/homogeneous_pair_deletion/levels/L02.json",
+      "archive_path": "custom_games/games/homogeneous_pair_deletion/levels/L02.json",
+      "bytes": 2451,
+      "sha256": "c9ddf99433b6b2b50a83087fdec66e884744c14ca1441795d695a78519c958c1",
+      "git_blob_sha": "283272e72a88a17c224163c8fb1e6d0d90cc7e6e"
+    },
+    {
+      "path": "custom_games/games/homogeneous_pair_deletion/levels/L03.json",
+      "archive_path": "custom_games/games/homogeneous_pair_deletion/levels/L03.json",
+      "bytes": 2733,
+      "sha256": "1098262c1ae7bcf37967856a732b4b3b391fee08204e2aefc56f58b2c9ce5197",
+      "git_blob_sha": "051857083ce0af672f991ab420f95a71df953098"
+    },
+    {
+      "path": "custom_games/games/homogeneous_pair_deletion/levels/L04.json",
+      "archive_path": "custom_games/games/homogeneous_pair_deletion/levels/L04.json",
+      "bytes": 3304,
+      "sha256": "441a6ed9ff6cdd20e27fe687ad48293f9b6cc25023e4cd9de76b86f6dc9defbd",
+      "git_blob_sha": "08cc204da1f0fb7814bfbca23a579466332281b2"
+    },
+    {
+      "path": "custom_games/games/homogeneous_pair_deletion/levels/L05.json",
+      "archive_path": "custom_games/games/homogeneous_pair_deletion/levels/L05.json",
+      "bytes": 3915,
+      "sha256": "485193c99fa9192f3b2e7bee575f9dc1a1cacd49e70256242bb150ecf7545bcb",
+      "git_blob_sha": "48c82028e72bd04bda5e8d41f6794af42d05e56d"
+    },
+    {
+      "path": "custom_games/games/homogeneous_pair_deletion/levels/L06.json",
+      "archive_path": "custom_games/games/homogeneous_pair_deletion/levels/L06.json",
+      "bytes": 4613,
+      "sha256": "bf8aeab047a9063b8d5bb94b79e95adcfa91d2fe60cb23845a6da02d94b6fd91",
+      "git_blob_sha": "d754b1f61f6a6fdbf9f7963f8b6ca867b7542120"
+    },
+    {
+      "path": "custom_games/games/iso_sketch/levels/L01.json",
+      "archive_path": "custom_games/games/iso_sketch/levels/L01.json",
+      "bytes": 416,
+      "sha256": "f50f2abaa9ef490301c9e6d4b44410da0a9a314acce1cddb816d32d342753b13",
+      "git_blob_sha": "34b259a4d70e8b7b7c13614647780867f9ca540a"
+    },
+    {
+      "path": "custom_games/games/iso_sketch/levels/L02.json",
+      "archive_path": "custom_games/games/iso_sketch/levels/L02.json",
+      "bytes": 499,
+      "sha256": "dbf24bf008c9017e55a2ff84c7e5802ae22e75278aa2c1b3c05a87d12978ae65",
+      "git_blob_sha": "fa147cdb3b62798a526b4df037cdac83affc1322"
+    },
+    {
+      "path": "custom_games/games/iso_sketch/levels/L03.json",
+      "archive_path": "custom_games/games/iso_sketch/levels/L03.json",
+      "bytes": 570,
+      "sha256": "1c60334fa61a875c9c84f1ff9285173e66a5f5280422722a96be69fe0eebf53a",
+      "git_blob_sha": "9135353cbc6c2860f80a3739da65e7ca23dc6032"
+    },
+    {
+      "path": "custom_games/games/iso_sketch/levels/L04.json",
+      "archive_path": "custom_games/games/iso_sketch/levels/L04.json",
+      "bytes": 620,
+      "sha256": "eaf399febafcd45e26c9a47850563c9b72279f501121f1d23c1487485daf84a9",
+      "git_blob_sha": "2d79b0677b7482fc509eb69689b50d4f55efa738"
+    },
+    {
+      "path": "custom_games/games/iso_sketch/levels/L05.json",
+      "archive_path": "custom_games/games/iso_sketch/levels/L05.json",
+      "bytes": 761,
+      "sha256": "995b4226491d824200a17395f32c1de93bc06793723c249109ef420f87113d53",
+      "git_blob_sha": "277325ba2c073811e22ba23a91bc5bac5400188a"
+    },
+    {
+      "path": "custom_games/games/iso_sketch/levels/L06.json",
+      "archive_path": "custom_games/games/iso_sketch/levels/L06.json",
+      "bytes": 955,
+      "sha256": "7c7cc05550c76a8fea3a930004f9cf9b2df2e64c4cff6fdefe349ec1cb2b4fca",
+      "git_blob_sha": "1c3dd120acf3fe8e7aefbf927695ad4f8e8edef3"
+    },
+    {
+      "path": "custom_games/games/katamino/levels/L01.json",
+      "archive_path": "custom_games/games/katamino/levels/L01.json",
+      "bytes": 1236,
+      "sha256": "55d50e7235a08133ba25757175e822a53973bd312182fe9a77b31d729c2e2559",
+      "git_blob_sha": "c0466e08594fdecf5d58944a91b31a025e359c1d"
+    },
+    {
+      "path": "custom_games/games/katamino/levels/L02.json",
+      "archive_path": "custom_games/games/katamino/levels/L02.json",
+      "bytes": 1241,
+      "sha256": "2e023b6ba0bf25dabc0612d0ac97e5703c82716e04649a9274684db0691ef26e",
+      "git_blob_sha": "57f5d9f0ec9fae45a57b903c8d616ec041c6942a"
+    },
+    {
+      "path": "custom_games/games/katamino/levels/L03.json",
+      "archive_path": "custom_games/games/katamino/levels/L03.json",
+      "bytes": 1614,
+      "sha256": "89a9688e67c6fc23bbfe52ae353ef515a3d0ce604889a2ffe4c5cf49a621d409",
+      "git_blob_sha": "0a918e841d712b841b8a7830ec998ba583c949be"
+    },
+    {
+      "path": "custom_games/games/katamino/levels/L04.json",
+      "archive_path": "custom_games/games/katamino/levels/L04.json",
+      "bytes": 1623,
+      "sha256": "93c35847652b19a95ea0c4545fbfb8736f83da43220e9fd847710bc91d49ee16",
+      "git_blob_sha": "bc30bb8c7b84bf2eeb29da9528711dbfe6c1f79e"
+    },
+    {
+      "path": "custom_games/games/katamino/levels/L05.json",
+      "archive_path": "custom_games/games/katamino/levels/L05.json",
+      "bytes": 1997,
+      "sha256": "e3ed8aa8cc71e97addf73da6cf358291e6d2a62fa8f57a35ff0993f380afd396",
+      "git_blob_sha": "fa4987efb4f36e12b34fda40dbc14db5a73cff19"
+    },
+    {
+      "path": "custom_games/games/katamino/levels/L06.json",
+      "archive_path": "custom_games/games/katamino/levels/L06.json",
+      "bytes": 1008,
+      "sha256": "1e9589792925ec49bb0ad028c7f25ddd9f76e789c378d31c31d7772d7b99934e",
+      "git_blob_sha": "47b670a20df0f09ce9229cefba588c84a152438c"
+    },
+    {
+      "path": "custom_games/games/key_doors/levels/L01.json",
+      "archive_path": "custom_games/games/key_doors/levels/L01.json",
+      "bytes": 541,
+      "sha256": "834fb9fc215aeba1d5243f98f62ab0004f7385ebfb779d611559988e8c620b33",
+      "git_blob_sha": "56bd6e13646627b9a3aef5474c2c79a7d8262975"
+    },
+    {
+      "path": "custom_games/games/key_doors/levels/L02.json",
+      "archive_path": "custom_games/games/key_doors/levels/L02.json",
+      "bytes": 442,
+      "sha256": "94d54bf5b329e4c3d9346465f9a642fb01d0f3b895360a62c0156579dd611c50",
+      "git_blob_sha": "6db276f1b064a8c8edd8f4a6406cfea7f8c309de"
+    },
+    {
+      "path": "custom_games/games/key_doors/levels/L03.json",
+      "archive_path": "custom_games/games/key_doors/levels/L03.json",
+      "bytes": 515,
+      "sha256": "f922da9059d2d1518396e8a3cf9ce5e48ab09ae41dc71ba8674072e876222363",
+      "git_blob_sha": "53b235f466b4f2fbab35c417c2c4bf8126daeb51"
+    },
+    {
+      "path": "custom_games/games/key_doors/levels/L04.json",
+      "archive_path": "custom_games/games/key_doors/levels/L04.json",
+      "bytes": 512,
+      "sha256": "7bc4489446138eb4c696bb870a6edfa67dd0d22264d940fa1c1a86d10813a155",
+      "git_blob_sha": "861d02277b530a6ab381c5424dcdf3356f066db6"
+    },
+    {
+      "path": "custom_games/games/key_doors/levels/L05.json",
+      "archive_path": "custom_games/games/key_doors/levels/L05.json",
+      "bytes": 525,
+      "sha256": "7de5ed20d885e2813dad1e9474e1a118a14a8ce17e117bc39c0ab3f98159af7b",
+      "git_blob_sha": "023d3f2e97fef4f5a93d2d91aeb18361c58d2703"
+    },
+    {
+      "path": "custom_games/games/key_doors/levels/L06.json",
+      "archive_path": "custom_games/games/key_doors/levels/L06.json",
+      "bytes": 539,
+      "sha256": "e37b6ca8dd0189df3938579363c29f53bd56ce9f8a60eb93d9c1e90c6307b735",
+      "git_blob_sha": "cd8fb1ae914f8a9e29ef04b3cecf120699841b2e"
+    },
+    {
+      "path": "custom_games/games/knight_maze/levels/L01.json",
+      "archive_path": "custom_games/games/knight_maze/levels/L01.json",
+      "bytes": 453,
+      "sha256": "a9b3e64008509bbc4f736ced7670fa87b215abc37fd290c1a48f75815b6f30bc",
+      "git_blob_sha": "6baf602fd4d5f4cb8b700ac75080a5e18b9c28cc"
+    },
+    {
+      "path": "custom_games/games/knight_maze/levels/L02.json",
+      "archive_path": "custom_games/games/knight_maze/levels/L02.json",
+      "bytes": 520,
+      "sha256": "fa6842d9fb69ea4f7b5e326f9a687619600282add02ad9ef3e52c775182a0c3d",
+      "git_blob_sha": "7ca7c6d39b5fa68394d1e5b1904a879db2d21495"
+    },
+    {
+      "path": "custom_games/games/knight_maze/levels/L03.json",
+      "archive_path": "custom_games/games/knight_maze/levels/L03.json",
+      "bytes": 648,
+      "sha256": "893412f25ea0f887c73df4b3ff4faa003a8259c6fd0b01ea4bc70925e29e837f",
+      "git_blob_sha": "75753bd33fd884ff5215e684fa12925429ab95c8"
+    },
+    {
+      "path": "custom_games/games/knight_maze/levels/L04.json",
+      "archive_path": "custom_games/games/knight_maze/levels/L04.json",
+      "bytes": 563,
+      "sha256": "eced8d433ca8085394fd21c6b3ffc2465cc9b34420a271cb2731c6f0ba35b9e8",
+      "git_blob_sha": "e04a6f91ffdb614e62451398b165d8aaad725551"
+    },
+    {
+      "path": "custom_games/games/knight_maze/levels/L05.json",
+      "archive_path": "custom_games/games/knight_maze/levels/L05.json",
+      "bytes": 590,
+      "sha256": "b230dc7b021092f8a29370e9e32e4af6497eb630080fd069f42e70f9c42874bd",
+      "git_blob_sha": "2b05984e40306b94bfc8a48570ed9d1c77e8a19e"
+    },
+    {
+      "path": "custom_games/games/knight_maze/levels/L06.json",
+      "archive_path": "custom_games/games/knight_maze/levels/L06.json",
+      "bytes": 702,
+      "sha256": "b85efd9d297a0e8e1cd0d26a5828d374c793fd42e8d97879033296597c80dce2",
+      "git_blob_sha": "6e81ed94c2b5d7d5e00a59173a95add1dda77525"
+    },
+    {
+      "path": "custom_games/games/life_lineage/levels/L01.json",
+      "archive_path": "custom_games/games/life_lineage/levels/L01.json",
+      "bytes": 189,
+      "sha256": "d8868c03439a5f92bbe063845bb465f923045b787ca3a9f8bf96f095f09dd5a4",
+      "git_blob_sha": "5d2a914964178e7ba0b635344a114b1de2e1eb6d"
+    },
+    {
+      "path": "custom_games/games/life_lineage/levels/L02.json",
+      "archive_path": "custom_games/games/life_lineage/levels/L02.json",
+      "bytes": 217,
+      "sha256": "f8068d67b1ac06e976c8bfa93dab788ec45adee4e7c49e7209fdad2402544a66",
+      "git_blob_sha": "f9cd9330e0c752b3505c817b2518ac4fec7f4ff7"
+    },
+    {
+      "path": "custom_games/games/life_lineage/levels/L03.json",
+      "archive_path": "custom_games/games/life_lineage/levels/L03.json",
+      "bytes": 255,
+      "sha256": "0c9351f601e561dff575f009f8050c009d062fe590146b7ce5211e8ccc5eb656",
+      "git_blob_sha": "8d8a54c386f8b15d22c2dbc29357d5afed2c8a7f"
+    },
+    {
+      "path": "custom_games/games/life_lineage/levels/L04.json",
+      "archive_path": "custom_games/games/life_lineage/levels/L04.json",
+      "bytes": 307,
+      "sha256": "d8bae7ec1c8d64e4ee7d8b508f8c17102379fadc6cb6239a94fd13e9dd870877",
+      "git_blob_sha": "6a2f1b228d14be70b4943b0c0d150099fdb74d6b"
+    },
+    {
+      "path": "custom_games/games/life_lineage/levels/L05.json",
+      "archive_path": "custom_games/games/life_lineage/levels/L05.json",
+      "bytes": 270,
+      "sha256": "eee2102cd022418922968562c2bc88241bd823e54a5f3ec7c3b06a92ffaa35e0",
+      "git_blob_sha": "384c501786cd82921fdf22d4c1b9a8fa8c4e365b"
+    },
+    {
+      "path": "custom_games/games/life_lineage/levels/L06.json",
+      "archive_path": "custom_games/games/life_lineage/levels/L06.json",
+      "bytes": 273,
+      "sha256": "e2c74a309a96c764ded675cda25f8bd942cbdc4930ab2e64b4009774fdd3df6d",
+      "git_blob_sha": "f686668c66afbd1a3ecdca98d31841ef14f4f562"
+    },
+    {
+      "path": "custom_games/games/lock_and_key/levels/L01.json",
+      "archive_path": "custom_games/games/lock_and_key/levels/L01.json",
+      "bytes": 597,
+      "sha256": "d544a4041b1375c7e248d884cba5f5e66377ba0fe39e8bd135a0bacb74b711a5",
+      "git_blob_sha": "ede350a9f709e921c5b4ef6d866a43c1b8c0f3aa"
+    },
+    {
+      "path": "custom_games/games/lock_and_key/levels/L02.json",
+      "archive_path": "custom_games/games/lock_and_key/levels/L02.json",
+      "bytes": 575,
+      "sha256": "486bc4e2768f93a0b40106b455a77bce74aa4c26cd2ba42c5d3a7e6ba5d187c7",
+      "git_blob_sha": "8e7a67a85c3478267a9ec7c99791f05dcf6da36d"
+    },
+    {
+      "path": "custom_games/games/lock_and_key/levels/L03.json",
+      "archive_path": "custom_games/games/lock_and_key/levels/L03.json",
+      "bytes": 815,
+      "sha256": "b4370c86d472d83c512a221ef6bbb2f0e60ac5fb392cb4c53e199b78a58f9fc4",
+      "git_blob_sha": "7e17fa515ccba7d2a835d6021888d084323006c0"
+    },
+    {
+      "path": "custom_games/games/lock_and_key/levels/L04.json",
+      "archive_path": "custom_games/games/lock_and_key/levels/L04.json",
+      "bytes": 835,
+      "sha256": "6e866aa19f7e705b163ebb1ed2190bf03ef38540f9d7a320705c4390ede6230b",
+      "git_blob_sha": "32d1aa8f69d75f3a3b2ec460553b747e4e23b823"
+    },
+    {
+      "path": "custom_games/games/lock_and_key/levels/L05.json",
+      "archive_path": "custom_games/games/lock_and_key/levels/L05.json",
+      "bytes": 1033,
+      "sha256": "331124c0f151793ee64ef192a588b8ed6d203639250b8cbde171b1359cdd63b6",
+      "git_blob_sha": "1b54f3f263afc60a15b0833ae0276ee2ded46cf5"
+    },
+    {
+      "path": "custom_games/games/lock_and_key/levels/L06.json",
+      "archive_path": "custom_games/games/lock_and_key/levels/L06.json",
+      "bytes": 1027,
+      "sha256": "4ba8d0869c98ecc40a1923befff34324ba89f9a5db518a8d82530296503039c4",
+      "git_blob_sha": "7928ddcccda422481a11d326cfb8cea0d3e1d5d9"
+    },
+    {
+      "path": "custom_games/games/logic_circuit/levels/L01.json",
+      "archive_path": "custom_games/games/logic_circuit/levels/L01.json",
+      "bytes": 244,
+      "sha256": "c0b2aeaa69a9f4e8c6ae0bd4d7d827f27d2c089b2f8d475d9776ba7b6ce4ccd5",
+      "git_blob_sha": "e7980aeef109275ebdd36ac417ac582976bbe6f6"
+    },
+    {
+      "path": "custom_games/games/logic_circuit/levels/L02.json",
+      "archive_path": "custom_games/games/logic_circuit/levels/L02.json",
+      "bytes": 399,
+      "sha256": "7a590f074a2d05de396f317bfce4b2e9d4c0b356f9cbb081a417058417ce7370",
+      "git_blob_sha": "bb99430ecb608a0877f5578bade26b128922eef3"
+    },
+    {
+      "path": "custom_games/games/logic_circuit/levels/L03.json",
+      "archive_path": "custom_games/games/logic_circuit/levels/L03.json",
+      "bytes": 358,
+      "sha256": "3dde3952bf7468d0504c4f8b0db567015496c086d98ce996d8024023eff1e935",
+      "git_blob_sha": "f4ab3edc2e97641fa62316c67df8c2b086899f48"
+    },
+    {
+      "path": "custom_games/games/logic_circuit/levels/L04.json",
+      "archive_path": "custom_games/games/logic_circuit/levels/L04.json",
+      "bytes": 418,
+      "sha256": "4861ca8b3a8a4f2037cfcd5d984a720bfb4bcec627cc299b34784432e0e32ac5",
+      "git_blob_sha": "44eb3c40315b91a0cfb23ad327cfd1923d09e637"
+    },
+    {
+      "path": "custom_games/games/logic_circuit/levels/L05.json",
+      "archive_path": "custom_games/games/logic_circuit/levels/L05.json",
+      "bytes": 259,
+      "sha256": "78557cb1c724c5ebdf1f429a557ecb53039fc478197154bd5358155c12de3d83",
+      "git_blob_sha": "887f2d02d6f9514cc0fa31e9724a5b75890fb700"
+    },
+    {
+      "path": "custom_games/games/logic_circuit/levels/L06.json",
+      "archive_path": "custom_games/games/logic_circuit/levels/L06.json",
+      "bytes": 417,
+      "sha256": "3181aa6863262572b8d90e2fbc6a45a57c979d5c2e841ca567b851eb9dba8caf",
+      "git_blob_sha": "719ff0b486142cee43f48df5848ef0d536a8cdbc"
+    },
+    {
+      "path": "custom_games/games/memo_recall/levels/L01.json",
+      "archive_path": "custom_games/games/memo_recall/levels/L01.json",
+      "bytes": 194,
+      "sha256": "90031bdbe7d930500815feac58093978d7f1363e666af3f73481c1df51f63022",
+      "git_blob_sha": "a440c7d1f37809101089e44c8af130f919b7ee62"
+    },
+    {
+      "path": "custom_games/games/memo_recall/levels/L02.json",
+      "archive_path": "custom_games/games/memo_recall/levels/L02.json",
+      "bytes": 194,
+      "sha256": "8a275e573af2f46b8e32afb371701cac32b37dcd21d54873b0f0b207ad93e5ca",
+      "git_blob_sha": "33b26bfdab8754fbe00daf1b1f0a433fb8ce87fb"
+    },
+    {
+      "path": "custom_games/games/memo_recall/levels/L03.json",
+      "archive_path": "custom_games/games/memo_recall/levels/L03.json",
+      "bytes": 214,
+      "sha256": "bf5c4191eeb13e218c2873acccf000747baabd620246dbb18489b1ac1092e04a",
+      "git_blob_sha": "968f2db534fb36cd231f3c4d0e8b417b6eda06b7"
+    },
+    {
+      "path": "custom_games/games/memo_recall/levels/L04.json",
+      "archive_path": "custom_games/games/memo_recall/levels/L04.json",
+      "bytes": 198,
+      "sha256": "c299a3f1d1079c23a0f8637a35b967a2e82d309b6311213421b263ace188723d",
+      "git_blob_sha": "ea79ca25b4339387e564c4df3bb6d95f0f24204f"
+    },
+    {
+      "path": "custom_games/games/memo_recall/levels/L05.json",
+      "archive_path": "custom_games/games/memo_recall/levels/L05.json",
+      "bytes": 198,
+      "sha256": "5af0c0b1e2048ebfe10bd2224a118e878b920558525dddbb3455372ad2b65b9c",
+      "git_blob_sha": "e7a9be537b186762f9edf6fc418c03a4c48f7eb5"
+    },
+    {
+      "path": "custom_games/games/memo_recall/levels/L06.json",
+      "archive_path": "custom_games/games/memo_recall/levels/L06.json",
+      "bytes": 193,
+      "sha256": "e06d1acd77a0e57b9470e583ebf0eeefc340725692f93d62a448a83001cfde34",
+      "git_blob_sha": "258ddc62b231d4a1066a9f9f5fa4cc8da51a265f"
+    },
+    {
+      "path": "custom_games/games/mind_code/levels/L01.json",
+      "archive_path": "custom_games/games/mind_code/levels/L01.json",
+      "bytes": 245,
+      "sha256": "2ec330be0fde14805a2f8ff8dbc9b18cb06499d79a786418629d035639ab471e",
+      "git_blob_sha": "8cb98f17d4c4f635c238ca37bb05d772578276c3"
+    },
+    {
+      "path": "custom_games/games/mind_code/levels/L02.json",
+      "archive_path": "custom_games/games/mind_code/levels/L02.json",
+      "bytes": 194,
+      "sha256": "a25a92aff8478f0c0168c9c421af70375e1688d81702ed40899a5685ad73e3f1",
+      "git_blob_sha": "198a9cefb83ccad0d83f0c6e6c425d1fcdfbb28c"
+    },
+    {
+      "path": "custom_games/games/mind_code/levels/L03.json",
+      "archive_path": "custom_games/games/mind_code/levels/L03.json",
+      "bytes": 202,
+      "sha256": "e45faf7b33627d936274c19743de381e9ce3bc7403541b13b2be4a176c1c75c2",
+      "git_blob_sha": "dd5dd6f9758a1585f34730ea4fd897a8c4068447"
+    },
+    {
+      "path": "custom_games/games/mind_code/levels/L04.json",
+      "archive_path": "custom_games/games/mind_code/levels/L04.json",
+      "bytes": 218,
+      "sha256": "c4bab9a973448a323e79552fcb1e73c813a42ef697672dcdd52679c6d58106bc",
+      "git_blob_sha": "80e97259f269cef633b9cedf1e111ced29517c94"
+    },
+    {
+      "path": "custom_games/games/mind_code/levels/L05.json",
+      "archive_path": "custom_games/games/mind_code/levels/L05.json",
+      "bytes": 221,
+      "sha256": "b596dd480ee1612c43effcf6d3fa96eecea455fcfe459b97840a446631fb0642",
+      "git_blob_sha": "108ac81b130747a3c6c79a6a08ef23277f00aad5"
+    },
+    {
+      "path": "custom_games/games/mind_code/levels/L06.json",
+      "archive_path": "custom_games/games/mind_code/levels/L06.json",
+      "bytes": 231,
+      "sha256": "2a28d25a448900b985e9256c2c7471b44eb191df516f33e52bcd0e251c57f609",
+      "git_blob_sha": "e62efc327ca7df7948410e6581bc6592fa537b12"
+    },
+    {
+      "path": "custom_games/games/moto_orbit/levels/L01.json",
+      "archive_path": "custom_games/games/moto_orbit/levels/L01.json",
+      "bytes": 437,
+      "sha256": "f7907dc7ab0d6854d2248e4c802844748ee8fcab4168f1ce7304045311ee8bcc",
+      "git_blob_sha": "6e8f20198f540b12f0be0c28ccff228b3ed6cb29"
+    },
+    {
+      "path": "custom_games/games/moto_orbit/levels/L02.json",
+      "archive_path": "custom_games/games/moto_orbit/levels/L02.json",
+      "bytes": 728,
+      "sha256": "307018f7ff0a68f606963eb04ae25757cf98d65e043b4a5aaf7a45893503f465",
+      "git_blob_sha": "fbdc5149d5b44d684416cef34a9cf92c054303a3"
+    },
+    {
+      "path": "custom_games/games/moto_orbit/levels/L03.json",
+      "archive_path": "custom_games/games/moto_orbit/levels/L03.json",
+      "bytes": 902,
+      "sha256": "c662e4bf5829eae816cd43b994d2ff852702dba94e3f2cea7ddbcd667cd295dc",
+      "git_blob_sha": "64efd09adddd64af2fee5b804fff42b1f64a6e14"
+    },
+    {
+      "path": "custom_games/games/moto_orbit/levels/L04.json",
+      "archive_path": "custom_games/games/moto_orbit/levels/L04.json",
+      "bytes": 1039,
+      "sha256": "dc83add154f5f3419065f2d7c6abbf927264495528d28ee7445f58a9d4bff25b",
+      "git_blob_sha": "6e2737258dbfe0a36ec8fa3e2ec3082def9ab482"
+    },
+    {
+      "path": "custom_games/games/moto_orbit/levels/L05.json",
+      "archive_path": "custom_games/games/moto_orbit/levels/L05.json",
+      "bytes": 1277,
+      "sha256": "32379184bd4798977fc5feb2be4c4d58b831a9851fc383d3c3f0bf149687752a",
+      "git_blob_sha": "e8842dd83aed0d84f226c8622a79594fbebcf59b"
+    },
+    {
+      "path": "custom_games/games/moto_orbit/levels/L06.json",
+      "archive_path": "custom_games/games/moto_orbit/levels/L06.json",
+      "bytes": 1222,
+      "sha256": "2be924029db1acbd72019e651c15a5b4a4ff7c701d9af5f13e1f3a4f05a0edca",
+      "git_blob_sha": "ef51637a99abdeaad6d7891d9065281a05b1f2a0"
+    },
+    {
+      "path": "custom_games/games/neighbor_cubes/levels/L01.json",
+      "archive_path": "custom_games/games/neighbor_cubes/levels/L01.json",
+      "bytes": 836,
+      "sha256": "410d7023f8e016fd4f764bd49c99af54a7a81d76fd6f3c1329e54b4f7f256982",
+      "git_blob_sha": "2c0db30d095d0b5a20e947a00120aae382f24c99"
+    },
+    {
+      "path": "custom_games/games/neighbor_cubes/levels/L02.json",
+      "archive_path": "custom_games/games/neighbor_cubes/levels/L02.json",
+      "bytes": 1189,
+      "sha256": "6cf16c6700e38c72d0a5931d6a8a743844b9c4b390439bea9ee598cd763289f1",
+      "git_blob_sha": "8eec942f3c75a82a5930e10f5b534a5085c3afed"
+    },
+    {
+      "path": "custom_games/games/neighbor_cubes/levels/L03.json",
+      "archive_path": "custom_games/games/neighbor_cubes/levels/L03.json",
+      "bytes": 1413,
+      "sha256": "d8d8674a7f6f14e7a182da8aefb01a66e730cf13f7b7e81ec6f13a4b23a6665f",
+      "git_blob_sha": "60d1010cfb64c631b3c90849cffe67ef1bc388ba"
+    },
+    {
+      "path": "custom_games/games/neighbor_cubes/levels/L04.json",
+      "archive_path": "custom_games/games/neighbor_cubes/levels/L04.json",
+      "bytes": 1030,
+      "sha256": "4f06216779114b521d3d723c8847eeaa10c146056dfca24896c624247a94fed3",
+      "git_blob_sha": "0bfc79e5df2a61ec3e2e9809b86761ac57aee226"
+    },
+    {
+      "path": "custom_games/games/neighbor_cubes/levels/L05.json",
+      "archive_path": "custom_games/games/neighbor_cubes/levels/L05.json",
+      "bytes": 2086,
+      "sha256": "fa61375d4891a6aeb4c338d72ad19880d9adaad1518621f990ba8e578241d91e",
+      "git_blob_sha": "7ab348df4361cc2e11283d54c3528b8f2a374178"
+    },
+    {
+      "path": "custom_games/games/neighbor_cubes/levels/L06.json",
+      "archive_path": "custom_games/games/neighbor_cubes/levels/L06.json",
+      "bytes": 3151,
+      "sha256": "75beb2c9587bb784f622b67d5e95dc82c9209758e3e6d5bd3d3531794c5d028d",
+      "git_blob_sha": "5151ee7b035e1c23d50edef43f6b77681b45592f"
+    },
+    {
+      "path": "custom_games/games/nested_rooms/levels/L01.json",
+      "archive_path": "custom_games/games/nested_rooms/levels/L01.json",
+      "bytes": 3449,
+      "sha256": "9fe630683e7d2be87e74f6ae60a37e391617a881dc81de3b9016e3e18135d168",
+      "git_blob_sha": "58f551ec9cdcda97238edd49bf90c966001072e2"
+    },
+    {
+      "path": "custom_games/games/nested_rooms/levels/L02.json",
+      "archive_path": "custom_games/games/nested_rooms/levels/L02.json",
+      "bytes": 3098,
+      "sha256": "57bf915a91d2ceb51b7f02b4e80052fdf616178b0c723ad07d9c4914c0af4b06",
+      "git_blob_sha": "68c315e1cfb4470eb32e3eea1093d7986375e01b"
+    },
+    {
+      "path": "custom_games/games/nested_rooms/levels/L03.json",
+      "archive_path": "custom_games/games/nested_rooms/levels/L03.json",
+      "bytes": 6954,
+      "sha256": "30857394ddf992c8871656f63382ccb73c2ef841bafe1b1d65b356bdde62f6e7",
+      "git_blob_sha": "381776d9af6f0d8b186ecc0b4bb8fe4d24bf6954"
+    },
+    {
+      "path": "custom_games/games/nested_rooms/levels/L04.json",
+      "archive_path": "custom_games/games/nested_rooms/levels/L04.json",
+      "bytes": 4921,
+      "sha256": "36e2e6f9e39362b05851be37128a773f584057c69829aa29eb86c7af6b15e34f",
+      "git_blob_sha": "89b9bbbcfecf3a5ed34728600bc2a8857a1131f0"
+    },
+    {
+      "path": "custom_games/games/nested_rooms/levels/L05.json",
+      "archive_path": "custom_games/games/nested_rooms/levels/L05.json",
+      "bytes": 6027,
+      "sha256": "8f7c22826f7f53d227969abe4d014677a2fb7ceeb95312807db92a56adb5cfb4",
+      "git_blob_sha": "7b01e24a2641072f1c63df561f3061e756285dbd"
+    },
+    {
+      "path": "custom_games/games/nested_rooms/levels/L06.json",
+      "archive_path": "custom_games/games/nested_rooms/levels/L06.json",
+      "bytes": 13087,
+      "sha256": "0020589b5f4439c3f56ce46e4bc4246bcca653ccfa95e55d9e91a18a634ade31",
+      "git_blob_sha": "71cf5f0e47d8ae4abb0e221be86d21b2ad4f0158"
+    },
+    {
+      "path": "custom_games/games/pipes/levels/L01.json",
+      "archive_path": "custom_games/games/pipes/levels/L01.json",
+      "bytes": 295,
+      "sha256": "0fc5216afd98d149da4c496ef6cafc8fa9b78ff2b12e517254cb6a480c80ed04",
+      "git_blob_sha": "8528d4f0477173a31a3898446cd779b044b286a8"
+    },
+    {
+      "path": "custom_games/games/pipes/levels/L02.json",
+      "archive_path": "custom_games/games/pipes/levels/L02.json",
+      "bytes": 285,
+      "sha256": "c1e4b9a923074704a66f15e27844195ee1d9fe353d5a6306f7627ec5c8678098",
+      "git_blob_sha": "a988917cdba7802d2570af00fe4e723b6912f51d"
+    },
+    {
+      "path": "custom_games/games/pipes/levels/L03.json",
+      "archive_path": "custom_games/games/pipes/levels/L03.json",
+      "bytes": 376,
+      "sha256": "c952b19d7f00fe2b146d45b0160866799c1cfd90013abe40cfe25d6cc4cf5478",
+      "git_blob_sha": "95647775ca28d72cf8a971f16a69b20a1bd3e32c"
+    },
+    {
+      "path": "custom_games/games/pipes/levels/L04.json",
+      "archive_path": "custom_games/games/pipes/levels/L04.json",
+      "bytes": 363,
+      "sha256": "47ebe0d5caf1690522c7a1c248e25c66a73dbfc6bab028d8805b41d8a43d4e77",
+      "git_blob_sha": "04cd306fdc847ccf0a061de32505adc0be650f50"
+    },
+    {
+      "path": "custom_games/games/pipes/levels/L05.json",
+      "archive_path": "custom_games/games/pipes/levels/L05.json",
+      "bytes": 460,
+      "sha256": "ab5aecaf730730c8740b20f6cec220424de7867345d6cebff8c375f11b67b2ed",
+      "git_blob_sha": "91411ff9cd4cf5058492d691a51adcdce5733257"
+    },
+    {
+      "path": "custom_games/games/pipes/levels/L06.json",
+      "archive_path": "custom_games/games/pipes/levels/L06.json",
+      "bytes": 464,
+      "sha256": "4d4a13e37526b4975077a3395c500a18f458eb83f208cdd0c45999fe7a02801e",
+      "git_blob_sha": "fbd1c1c181d93ef56e4792c0fce81615a8c48c3c"
+    },
+    {
+      "path": "custom_games/games/polarity/levels/L01.json",
+      "archive_path": "custom_games/games/polarity/levels/L01.json",
+      "bytes": 536,
+      "sha256": "520cef8d6134575a698ce236d9025318a7724a3254d097c733f9c18043424bba",
+      "git_blob_sha": "79132cc8d7c5b320c4df5f4bc4db1d462447dcf4"
+    },
+    {
+      "path": "custom_games/games/polarity/levels/L02.json",
+      "archive_path": "custom_games/games/polarity/levels/L02.json",
+      "bytes": 541,
+      "sha256": "586e14d67e9dccb535dc4c5bc25da65d5334a4b81740d06683fd92fa4755e6ae",
+      "git_blob_sha": "925eee9682f2bc392c6faf52c06d2d461fb7a1b2"
+    },
+    {
+      "path": "custom_games/games/polarity/levels/L03.json",
+      "archive_path": "custom_games/games/polarity/levels/L03.json",
+      "bytes": 617,
+      "sha256": "d1234f4ee736056b52a776096df1b5989621b80cd00b8acf91f07e4df9e7b3dd",
+      "git_blob_sha": "368326b08fec1cab1db5ec2d3f75bc0b004d7815"
+    },
+    {
+      "path": "custom_games/games/polarity/levels/L04.json",
+      "archive_path": "custom_games/games/polarity/levels/L04.json",
+      "bytes": 759,
+      "sha256": "d0be2f88d9ce7ce71f5a9d2458e49df82fd481db0e4fa9b0468cca0d1c616df9",
+      "git_blob_sha": "99e68ceeb160dd3193aefe04ec7fe42939e5cd0c"
+    },
+    {
+      "path": "custom_games/games/polarity/levels/L05.json",
+      "archive_path": "custom_games/games/polarity/levels/L05.json",
+      "bytes": 773,
+      "sha256": "76cf6b47262492c5a8566c34a8e3d4dab333cdf27579cd16543d7b54754fcf13",
+      "git_blob_sha": "3f8338b670d0fefcb10dde3fb45664192ff24d45"
+    },
+    {
+      "path": "custom_games/games/polarity/levels/L06.json",
+      "archive_path": "custom_games/games/polarity/levels/L06.json",
+      "bytes": 839,
+      "sha256": "983b3edcc87474427a355a14856ce8a5881cd40ac63be275cc342d4b82ba826f",
+      "git_blob_sha": "01eed4ab87626b8001aa8d87e5fd41ebbd0a9eee"
+    },
+    {
+      "path": "custom_games/games/portal_chambers/levels/L01.json",
+      "archive_path": "custom_games/games/portal_chambers/levels/L01.json",
+      "bytes": 1166,
+      "sha256": "c9df6ef50544794bf140690277c181ba8fbf4a19061dbb7edd8368218ac15de7",
+      "git_blob_sha": "74343d5616dfd8bb519a02440af492aafd73ca84"
+    },
+    {
+      "path": "custom_games/games/portal_chambers/levels/L02.json",
+      "archive_path": "custom_games/games/portal_chambers/levels/L02.json",
+      "bytes": 1561,
+      "sha256": "98edad4d4ff84a9fb966f7ac4a13fca83587a1ccf4c4cfa0477cd0e4278cd523",
+      "git_blob_sha": "4b32612b15710bd406b41bdb6b1b8005ea769528"
+    },
+    {
+      "path": "custom_games/games/portal_chambers/levels/L03.json",
+      "archive_path": "custom_games/games/portal_chambers/levels/L03.json",
+      "bytes": 1580,
+      "sha256": "b693392870653dad31d955ab623cc4e496abeeb930d839a937c086bdeb4f7f26",
+      "git_blob_sha": "9763020bb16ceb23d915e1bbbd00cf4c59c7c9dd"
+    },
+    {
+      "path": "custom_games/games/portal_chambers/levels/L04.json",
+      "archive_path": "custom_games/games/portal_chambers/levels/L04.json",
+      "bytes": 1344,
+      "sha256": "5b1df7dcaef25ea7733e04e27e965afe33ef09c455a731060e44a7611b2b125d",
+      "git_blob_sha": "97d11dd84578b44bd93cf0098ee5adb7774a0956"
+    },
+    {
+      "path": "custom_games/games/portal_chambers/levels/L05.json",
+      "archive_path": "custom_games/games/portal_chambers/levels/L05.json",
+      "bytes": 2004,
+      "sha256": "f0773c3c6c4ae8730609b5df01d211bed471da571013e49df5982dc6fe81536e",
+      "git_blob_sha": "e864a6b8f5f834ead124ac628a7cf3f2a1b08426"
+    },
+    {
+      "path": "custom_games/games/portal_chambers/levels/L06.json",
+      "archive_path": "custom_games/games/portal_chambers/levels/L06.json",
+      "bytes": 2257,
+      "sha256": "d53acf36f2bd10b22506a2bff5a5c28625a48cf94753435ac81d6f18664a44da",
+      "git_blob_sha": "ef0f334d318bc599ad1986195368ac835b86b4bd"
+    },
+    {
+      "path": "custom_games/games/portal_topology/levels/L01.json",
+      "archive_path": "custom_games/games/portal_topology/levels/L01.json",
+      "bytes": 471,
+      "sha256": "56461e9550e8a26de740dc597a5e3ca6803aa7e4705b97ce94caab157e055971",
+      "git_blob_sha": "b843ff0fab32c844021e4b32ef863b3890d293b4"
+    },
+    {
+      "path": "custom_games/games/portal_topology/levels/L02.json",
+      "archive_path": "custom_games/games/portal_topology/levels/L02.json",
+      "bytes": 521,
+      "sha256": "d77d29199e22dac9ff34b75aefc8fa12fe2507a2c01621c61fd6ae7d5f008a65",
+      "git_blob_sha": "423a32688dff2e9cfb5fff9f7b6aae347d4fb210"
+    },
+    {
+      "path": "custom_games/games/portal_topology/levels/L03.json",
+      "archive_path": "custom_games/games/portal_topology/levels/L03.json",
+      "bytes": 574,
+      "sha256": "55fd4988392af385b3d0f4d83f77245955b6a1165b42a4f44566db223d668567",
+      "git_blob_sha": "572c41a96f13a3c8c7d28c4bc2f6e2c557b2dee3"
+    },
+    {
+      "path": "custom_games/games/portal_topology/levels/L04.json",
+      "archive_path": "custom_games/games/portal_topology/levels/L04.json",
+      "bytes": 564,
+      "sha256": "d09f357fcbcf2090b509bdcf78c22f814a3a99e0f916a111211d5475e6e6ea67",
+      "git_blob_sha": "d9488e97af2542d338eca655f5680df276a7864e"
+    },
+    {
+      "path": "custom_games/games/portal_topology/levels/L05.json",
+      "archive_path": "custom_games/games/portal_topology/levels/L05.json",
+      "bytes": 530,
+      "sha256": "f1479cb68f07a6a9837d60bd951bb70ba14d7d6f2414bdc5d83cd7a140c07339",
+      "git_blob_sha": "6803fb76ac7c1fba9a4d1a9d6acfbfb49c3b2145"
+    },
+    {
+      "path": "custom_games/games/portal_topology/levels/L06.json",
+      "archive_path": "custom_games/games/portal_topology/levels/L06.json",
+      "bytes": 746,
+      "sha256": "53907fa7fb1e9d0e257fd564295d5455902538346e4624a129fce7482557a96b",
+      "git_blob_sha": "6dbe3ac79fc5d5090d593bb6d4d956e6f81ba828"
+    },
+    {
+      "path": "custom_games/games/recruit_army/levels/L01.json",
+      "archive_path": "custom_games/games/recruit_army/levels/L01.json",
+      "bytes": 287,
+      "sha256": "058a70154d47856c53b62d9a02af43b45e21a844979fdd44d7f2345eeb475d04",
+      "git_blob_sha": "179b4d797e5bf221a745ff7cf1ae86cf6df631dd"
+    },
+    {
+      "path": "custom_games/games/recruit_army/levels/L02.json",
+      "archive_path": "custom_games/games/recruit_army/levels/L02.json",
+      "bytes": 434,
+      "sha256": "c7938f2bea64b9ef59d0af802781ea591f8de3918bef263d871be911dee98482",
+      "git_blob_sha": "14bea939d5105dd82c3513fb288f8ab5a7d7db53"
+    },
+    {
+      "path": "custom_games/games/recruit_army/levels/L03.json",
+      "archive_path": "custom_games/games/recruit_army/levels/L03.json",
+      "bytes": 481,
+      "sha256": "bc879e3f4daf3431da0fa4f7221f3ac1f71150b242d44095d9c1fa3a84d5c3b6",
+      "git_blob_sha": "ed22c400555b3d1ea80ed66fff5d956bd6b795ff"
+    },
+    {
+      "path": "custom_games/games/recruit_army/levels/L04.json",
+      "archive_path": "custom_games/games/recruit_army/levels/L04.json",
+      "bytes": 602,
+      "sha256": "4dd46c323d605f3df223423ee6d160beecef5cbe9644de6ad4a40a1fa57bb134",
+      "git_blob_sha": "5f0a62945e1cf5e6f8fd83db78e852f8f37684fe"
+    },
+    {
+      "path": "custom_games/games/recruit_army/levels/L05.json",
+      "archive_path": "custom_games/games/recruit_army/levels/L05.json",
+      "bytes": 652,
+      "sha256": "8388016baa9b275ac3e0ea6576ccb627792d58b882dda4ca86ea83d1548b4ecc",
+      "git_blob_sha": "bd482e629e5915773bed77eec8a1344cb8c56ef1"
+    },
+    {
+      "path": "custom_games/games/recruit_army/levels/L06.json",
+      "archive_path": "custom_games/games/recruit_army/levels/L06.json",
+      "bytes": 744,
+      "sha256": "3379f2d7348eb4eb8235f1b7e247e925e72643690c0507e720e20bf89c38f3e0",
+      "git_blob_sha": "374c284e05c236167daabbfa8954fc23065d3977"
+    },
+    {
+      "path": "custom_games/games/reign_gauges/levels/L01.json",
+      "archive_path": "custom_games/games/reign_gauges/levels/L01.json",
+      "bytes": 332,
+      "sha256": "ed8f62af7c6530bfcc2ccf7c0ab4568e1f8910c4548c749f89ca27a26912ba9f",
+      "git_blob_sha": "c60e0a738467623f8b520bea7d0005426a3b02b2"
+    },
+    {
+      "path": "custom_games/games/reign_gauges/levels/L02.json",
+      "archive_path": "custom_games/games/reign_gauges/levels/L02.json",
+      "bytes": 375,
+      "sha256": "ff8d2cc421e2c76dd278eb23df6c56aaf8f17a656a38869df8f7e182a5b8da6d",
+      "git_blob_sha": "ef7288b895033275102f58e330d557abe888f4c7"
+    },
+    {
+      "path": "custom_games/games/reign_gauges/levels/L03.json",
+      "archive_path": "custom_games/games/reign_gauges/levels/L03.json",
+      "bytes": 372,
+      "sha256": "69816415424e8c4aa6a09528fbfc285009b2d1fbd15fa9a7beb8b470bbab8288",
+      "git_blob_sha": "b02aeb866ce1f15f7a6ad9fb8268d40d950f5ae2"
+    },
+    {
+      "path": "custom_games/games/reign_gauges/levels/L04.json",
+      "archive_path": "custom_games/games/reign_gauges/levels/L04.json",
+      "bytes": 410,
+      "sha256": "cf621ca3ce842035be2c7fa75f4d9a366db1ee5a0083e664c1e1ed05c19c9474",
+      "git_blob_sha": "d52dd9bef7f776b52ba2d60253caf8a750ec5a8d"
+    },
+    {
+      "path": "custom_games/games/reign_gauges/levels/L05.json",
+      "archive_path": "custom_games/games/reign_gauges/levels/L05.json",
+      "bytes": 469,
+      "sha256": "980f5b2527b77d530e7bbcf7bdd4fadfe49023df5710ee7f618d7f0c88609b92",
+      "git_blob_sha": "0bd5b9f5e4b1020e2accc6e60dfe30d08a302277"
+    },
+    {
+      "path": "custom_games/games/reign_gauges/levels/L06.json",
+      "archive_path": "custom_games/games/reign_gauges/levels/L06.json",
+      "bytes": 470,
+      "sha256": "0f97389d7573c3ac4b31dc0e861273c98e2fd726ffd8eb71897d314920cfbd5c",
+      "git_blob_sha": "8c64b22d5654cb53e88bb9dbde6df06cc6b95506"
+    },
+    {
+      "path": "custom_games/games/rewind/levels/L01.json",
+      "archive_path": "custom_games/games/rewind/levels/L01.json",
+      "bytes": 16756,
+      "sha256": "0e6f8318224594ae1535e495381ec451baf68a6def7dac3041797096f67e80c3",
+      "git_blob_sha": "d69b247c0e06b97b2d95347db84750803aa515c8"
+    },
+    {
+      "path": "custom_games/games/rewind/levels/L02.json",
+      "archive_path": "custom_games/games/rewind/levels/L02.json",
+      "bytes": 24088,
+      "sha256": "8b980efe065fafd5b2001e1bd372705c7bd2af8434d6016034ba06d39025538b",
+      "git_blob_sha": "e790c3a4ea61e8ad7e2a93098f6a066d56d7d321"
+    },
+    {
+      "path": "custom_games/games/rewind/levels/L03.json",
+      "archive_path": "custom_games/games/rewind/levels/L03.json",
+      "bytes": 31777,
+      "sha256": "cd5cb5df3091c9d343913d8c1e073b132ee32068bfb17218cb6515d03d115e1b",
+      "git_blob_sha": "e111d36a4db4df03dbfeb6a93a16812ced016231"
+    },
+    {
+      "path": "custom_games/games/rewind/levels/L04.json",
+      "archive_path": "custom_games/games/rewind/levels/L04.json",
+      "bytes": 39498,
+      "sha256": "e68904b5cc9ca6b4e4efdb36a9b85328f8682400014d0195ea6e95ea99ab144c",
+      "git_blob_sha": "1d51c73152d1945e11a899bea03ff7f7f8421159"
+    },
+    {
+      "path": "custom_games/games/rewind/levels/L05.json",
+      "archive_path": "custom_games/games/rewind/levels/L05.json",
+      "bytes": 47565,
+      "sha256": "3715efeeb43f835bf69a4eeeeef29988d825d6b0ed0d8c428474a32b0b424cf1",
+      "git_blob_sha": "fad046f4c00304854bd6c666bded71b257c9619a"
+    },
+    {
+      "path": "custom_games/games/rewind/levels/L06.json",
+      "archive_path": "custom_games/games/rewind/levels/L06.json",
+      "bytes": 56807,
+      "sha256": "714cec7d7a7191d9788c28b7e2576cd91beb34fe51f86e001c50c0c0b0059e42",
+      "git_blob_sha": "392bb2c22429ddd3b69ebb0f21fe5ec0ed696d46"
+    },
+    {
+      "path": "custom_games/games/role_swap/levels/L01.json",
+      "archive_path": "custom_games/games/role_swap/levels/L01.json",
+      "bytes": 983,
+      "sha256": "76cfb922221affa8b20e7a45a24f33d46cc4210f1668326efaf6ab1a6e02206b",
+      "git_blob_sha": "d345f3c2fd4114b39301a0bd4b67252a61eec319"
+    },
+    {
+      "path": "custom_games/games/role_swap/levels/L02.json",
+      "archive_path": "custom_games/games/role_swap/levels/L02.json",
+      "bytes": 926,
+      "sha256": "89be4ebceacbb01688fc10fcba37f8faeb23f014007e41745b9c5d4e7fd9db0c",
+      "git_blob_sha": "586ebba70a837e3bd6c6c914ef3f3065260c0af9"
+    },
+    {
+      "path": "custom_games/games/role_swap/levels/L03.json",
+      "archive_path": "custom_games/games/role_swap/levels/L03.json",
+      "bytes": 853,
+      "sha256": "5bf1f8f0dbc0b041ad728a509d70af510385b63f97d5bc402e07626254920132",
+      "git_blob_sha": "311e0e4f9d2d86aebd1dc36aa9d89b4cb01062c3"
+    },
+    {
+      "path": "custom_games/games/role_swap/levels/L04.json",
+      "archive_path": "custom_games/games/role_swap/levels/L04.json",
+      "bytes": 905,
+      "sha256": "d6a3256741915ace62d6b9fe447a3021d9ec1bba95a43a113db2fe720ce066fc",
+      "git_blob_sha": "63d8984c8de53229b3c08dd0283dc78fadab600f"
+    },
+    {
+      "path": "custom_games/games/role_swap/levels/L05.json",
+      "archive_path": "custom_games/games/role_swap/levels/L05.json",
+      "bytes": 929,
+      "sha256": "6a84dc70473375894e4c1c4af9fd4f9ce5e5cab314beabf048209026cc3d3be6",
+      "git_blob_sha": "b0116c5f4086bbb8c029f29e72fefc94e7788f4f"
+    },
+    {
+      "path": "custom_games/games/role_swap/levels/L06.json",
+      "archive_path": "custom_games/games/role_swap/levels/L06.json",
+      "bytes": 994,
+      "sha256": "a72b6679b90d5bdb9ba6f3ef28278ead5c2f73db9b0064d8b8dda5e49a6fa996",
+      "git_blob_sha": "06f41758a540afa7e7e13829a241bb12ef8b34d9"
+    },
+    {
+      "path": "custom_games/games/same_length_path/levels/L01.json",
+      "archive_path": "custom_games/games/same_length_path/levels/L01.json",
+      "bytes": 1062,
+      "sha256": "5927290c766695350965d48bf5f395034a7936189469721cca7925093b63d4bb",
+      "git_blob_sha": "87e03c1440ebf03c2c74ff572c85488292c39879"
+    },
+    {
+      "path": "custom_games/games/same_length_path/levels/L02.json",
+      "archive_path": "custom_games/games/same_length_path/levels/L02.json",
+      "bytes": 1794,
+      "sha256": "d0129eef54ed7c3729b1a8ef01ef37b8d56d2214d2b683f25cc37a5c8873d5e6",
+      "git_blob_sha": "ebdc74c0e13b05caf10490e755868846ab24b54c"
+    },
+    {
+      "path": "custom_games/games/same_length_path/levels/L03.json",
+      "archive_path": "custom_games/games/same_length_path/levels/L03.json",
+      "bytes": 2438,
+      "sha256": "81964f16be90d8d1bbc89d3b2e8970b4ffdb04d097e044c331e6a9d077260a9f",
+      "git_blob_sha": "b0d7a7f6854e7133ef57e7ad39fe430f00afa385"
+    },
+    {
+      "path": "custom_games/games/same_length_path/levels/L04.json",
+      "archive_path": "custom_games/games/same_length_path/levels/L04.json",
+      "bytes": 2806,
+      "sha256": "5045ae36726227656b3cf2071388bdbd66b14e37b43ebf6d053bbe077391103c",
+      "git_blob_sha": "fb5a17fd311332d410b122951f85e8ee1bbddfe7"
+    },
+    {
+      "path": "custom_games/games/same_length_path/levels/L05.json",
+      "archive_path": "custom_games/games/same_length_path/levels/L05.json",
+      "bytes": 3380,
+      "sha256": "7123517524574396c1252779d59f3bda7f19265936d000c20f56fc98e7e2ab2e",
+      "git_blob_sha": "b2732bbb342921d370c7b6d16250ec3109d5a596"
+    },
+    {
+      "path": "custom_games/games/same_length_path/levels/L06.json",
+      "archive_path": "custom_games/games/same_length_path/levels/L06.json",
+      "bytes": 4402,
+      "sha256": "dbd547ee01ab4542479a1375a2bd6231ebcadc712df97ade15aa503e8ca1e2ae",
+      "git_blob_sha": "1e6d4f5e518ee4f47cea4ae847f52c7545cfb6ed"
+    },
+    {
+      "path": "custom_games/games/selene/levels/L01.json",
+      "archive_path": "custom_games/games/selene/levels/L01.json",
+      "bytes": 457,
+      "sha256": "c11958c5154d882a63b5140f25f4b9333b3f919e76764be363416bf6bfabf3ef",
+      "git_blob_sha": "6e0e6bb114601de0fac99803d669a3f405cedcc8"
+    },
+    {
+      "path": "custom_games/games/selene/levels/L02.json",
+      "archive_path": "custom_games/games/selene/levels/L02.json",
+      "bytes": 586,
+      "sha256": "43c5cceea61ae80e92fe81ac3e266039ecf7b12d7f57750061a641ac3e303ded",
+      "git_blob_sha": "acdd0192ded05d82efffa53a958e5b50c129e8e4"
+    },
+    {
+      "path": "custom_games/games/selene/levels/L03.json",
+      "archive_path": "custom_games/games/selene/levels/L03.json",
+      "bytes": 716,
+      "sha256": "55eba9fb67432da80691fb3f9565a01b2503001753db11115ad57099e601a31c",
+      "git_blob_sha": "af37c782148135ca6c28ac377ffee8a20cb1e869"
+    },
+    {
+      "path": "custom_games/games/selene/levels/L04.json",
+      "archive_path": "custom_games/games/selene/levels/L04.json",
+      "bytes": 873,
+      "sha256": "10e150a6bd6e5c26a64a385bb559c43c529d5f3452c9da2271f3bdcfbd13853d",
+      "git_blob_sha": "5a533ee187f2b7b79fda79f2b63060e9518adca3"
+    },
+    {
+      "path": "custom_games/games/selene/levels/L05.json",
+      "archive_path": "custom_games/games/selene/levels/L05.json",
+      "bytes": 1022,
+      "sha256": "c53f26f2a477ef069f460913bfd4dfd183a31a1344265f11ff39f3c7a588ac8b",
+      "git_blob_sha": "b80b4d7db1150fffc0d1e9ab66c2e697ef41a3ff"
+    },
+    {
+      "path": "custom_games/games/selene/levels/L06.json",
+      "archive_path": "custom_games/games/selene/levels/L06.json",
+      "bytes": 1048,
+      "sha256": "c016b3ca38b7f5da76c11c1d017889f8c8743cf6c03a3705f71df0889d189af3",
+      "git_blob_sha": "e4d42c6a0cde9bef957ec79b6989c48f37325e64"
+    },
+    {
+      "path": "custom_games/games/seqn_groups/levels/L01.json",
+      "archive_path": "custom_games/games/seqn_groups/levels/L01.json",
+      "bytes": 160,
+      "sha256": "10b5ee917460329dbb7dda0a85b8e700ece9e11579f408d7545a1ba80f606ace",
+      "git_blob_sha": "760f505a3d21afffda4062e33ec56133946dec7d"
+    },
+    {
+      "path": "custom_games/games/seqn_groups/levels/L02.json",
+      "archive_path": "custom_games/games/seqn_groups/levels/L02.json",
+      "bytes": 297,
+      "sha256": "0ee1d1d99261daea10a350d0c79a863c1e77951fdc9d1fd05586362ae854e6d1",
+      "git_blob_sha": "a3fff2ab9ae7f430abcb66c4506959e0efd03f9f"
+    },
+    {
+      "path": "custom_games/games/seqn_groups/levels/L03.json",
+      "archive_path": "custom_games/games/seqn_groups/levels/L03.json",
+      "bytes": 299,
+      "sha256": "bf4fa3d631fe706bdf4483d24f7c24209690b7da804b06231124067183a817aa",
+      "git_blob_sha": "778471cc76f70bb5b9503a6aad53eb0ca7873333"
+    },
+    {
+      "path": "custom_games/games/seqn_groups/levels/L04.json",
+      "archive_path": "custom_games/games/seqn_groups/levels/L04.json",
+      "bytes": 387,
+      "sha256": "21e28e716bfaac927e022a13e37a85862a2c5c4190a926c756abab5003a145ad",
+      "git_blob_sha": "4543b209ea8497e18711f8e4a2b20b1f60f7904a"
+    },
+    {
+      "path": "custom_games/games/seqn_groups/levels/L05.json",
+      "archive_path": "custom_games/games/seqn_groups/levels/L05.json",
+      "bytes": 411,
+      "sha256": "dc9627b0d6150db513f308519e18a202c2b86675ee3fe8dcface4cc7ea09206e",
+      "git_blob_sha": "ee0c2fd964879c41ff59aaf0b5bfba339a9afeda"
+    },
+    {
+      "path": "custom_games/games/seqn_groups/levels/L06.json",
+      "archive_path": "custom_games/games/seqn_groups/levels/L06.json",
+      "bytes": 407,
+      "sha256": "d9b953d5b1d83ebcf025e8410903df1c11bcca319ec03ed443444fef2adda923",
+      "git_blob_sha": "2b707baeb3fda7c6156c900690dc872a23a05752"
+    },
+    {
+      "path": "custom_games/games/sequence_lab/levels/L01.json",
+      "archive_path": "custom_games/games/sequence_lab/levels/L01.json",
+      "bytes": 35439,
+      "sha256": "b6a68fb400b2121bb733d5417fd8caf81a63585db02925e2df1256d524e58d50",
+      "git_blob_sha": "1e81d1462764198ad6d719417e309b5f87ee8d72"
+    },
+    {
+      "path": "custom_games/games/sequence_lab/levels/L02.json",
+      "archive_path": "custom_games/games/sequence_lab/levels/L02.json",
+      "bytes": 39253,
+      "sha256": "44b4c1cccb4234c780a0062373e917806c023775801b01ff242a5d4a688403dc",
+      "git_blob_sha": "e301078feec778b0567575636d22d0d5d514e5df"
+    },
+    {
+      "path": "custom_games/games/sequence_lab/levels/L03.json",
+      "archive_path": "custom_games/games/sequence_lab/levels/L03.json",
+      "bytes": 39198,
+      "sha256": "a5a9611144499162d42487c93f8328a08a3bd571f8171d66ca3b594b9b6e0d70",
+      "git_blob_sha": "ad476b45c3dc5e303da9e171c6339e17c5d6b4d8"
+    },
+    {
+      "path": "custom_games/games/sequence_lab/levels/L04.json",
+      "archive_path": "custom_games/games/sequence_lab/levels/L04.json",
+      "bytes": 42900,
+      "sha256": "050482fc2d6aca26725c1f98c277c6774e81358b88e60cc523f7b81db0dba244",
+      "git_blob_sha": "b9a4f23ac4b60a5109d64a42ff9a656c5f6deea1"
+    },
+    {
+      "path": "custom_games/games/sequence_lab/levels/L05.json",
+      "archive_path": "custom_games/games/sequence_lab/levels/L05.json",
+      "bytes": 47089,
+      "sha256": "5a097aafc5f3949fae980f84b9e542584f66a7e607434c20d3de684ea4acfb42",
+      "git_blob_sha": "3fee956d21946ec694e6e4c397cd1d8a0c96fd56"
+    },
+    {
+      "path": "custom_games/games/sequence_lab/levels/L06.json",
+      "archive_path": "custom_games/games/sequence_lab/levels/L06.json",
+      "bytes": 47122,
+      "sha256": "c8630dae291fff18da34f70ff0abf1fe73b08f3d6d459f9df2f0a7f2cdf465e6",
+      "git_blob_sha": "e9e91cacb399adeab94e58146abed482ab4431c1"
+    },
+    {
+      "path": "custom_games/games/signal_seal/levels/L01.json",
+      "archive_path": "custom_games/games/signal_seal/levels/L01.json",
+      "bytes": 374,
+      "sha256": "5404ac6a557e7ff9bdfa310425a94a052cbe262030824ee3704bb13ebc401a99",
+      "git_blob_sha": "c335ca851b27171022be4512476abd52f2c62918"
+    },
+    {
+      "path": "custom_games/games/signal_seal/levels/L02.json",
+      "archive_path": "custom_games/games/signal_seal/levels/L02.json",
+      "bytes": 402,
+      "sha256": "cdd3402d15d63d2bc028ac9754354da167ab2b211be889f55c7a558baec63250",
+      "git_blob_sha": "6c4f14ecef911aec56393cdd1ae8e3d7b3c58404"
+    },
+    {
+      "path": "custom_games/games/signal_seal/levels/L03.json",
+      "archive_path": "custom_games/games/signal_seal/levels/L03.json",
+      "bytes": 322,
+      "sha256": "e8f95a35a68e5fd4afc9184f78199881fd153a8c09ebf21b6f4c2693f36072b2",
+      "git_blob_sha": "6f47c7419142b089d04caccdb9cbac850c634926"
+    },
+    {
+      "path": "custom_games/games/signal_seal/levels/L04.json",
+      "archive_path": "custom_games/games/signal_seal/levels/L04.json",
+      "bytes": 513,
+      "sha256": "78e13e7c23e3e1fc79fffe9e3afce3681761e02a8a027497f234a88dd62906df",
+      "git_blob_sha": "4d8514c237e17b477788191693f11239c5b94432"
+    },
+    {
+      "path": "custom_games/games/signal_seal/levels/L05.json",
+      "archive_path": "custom_games/games/signal_seal/levels/L05.json",
+      "bytes": 558,
+      "sha256": "bedfeb896ac18c102a1861494137e85cc2e28134ed54f0d96b1776ffa09956f2",
+      "git_blob_sha": "343281a6adcb5b0d0d54cf35b63fa0d91be9fd27"
+    },
+    {
+      "path": "custom_games/games/signal_seal/levels/L06.json",
+      "archive_path": "custom_games/games/signal_seal/levels/L06.json",
+      "bytes": 788,
+      "sha256": "a5550c3e34ba069482de8abd55e66e001cc874815994b2722ea228d7ff1e2fad",
+      "git_blob_sha": "376895a520857b4a8020faf688f4e28be748ca94"
+    },
+    {
+      "path": "custom_games/games/simple_klotski/levels/L01.json",
+      "archive_path": "custom_games/games/simple_klotski/levels/L01.json",
+      "bytes": 1614,
+      "sha256": "a7e86a0e5bab383fde2ef35ec97085e982427bbf6c8e0e732260c8e2770562c1",
+      "git_blob_sha": "5fe218654dd6cc9eadc6be895202eea5b9acda1b"
+    },
+    {
+      "path": "custom_games/games/simple_klotski/levels/L02.json",
+      "archive_path": "custom_games/games/simple_klotski/levels/L02.json",
+      "bytes": 1619,
+      "sha256": "7d87bc805b7a9d10d102da2bf79f27b79b19cc9bdba1367ee5064d5fb2256ccd",
+      "git_blob_sha": "0ca4e8a266fd13e23339e3cfe2a0590caa8fca25"
+    },
+    {
+      "path": "custom_games/games/simple_klotski/levels/L03.json",
+      "archive_path": "custom_games/games/simple_klotski/levels/L03.json",
+      "bytes": 1597,
+      "sha256": "ee6a6056e2e81d5a5900a3a72565b4bd9cc23793b2eb7641f039e13a32c5210f",
+      "git_blob_sha": "dd00ab6310dc7b2e9f8e0fe3dd349a85b6174e2c"
+    },
+    {
+      "path": "custom_games/games/simple_klotski/levels/L04.json",
+      "archive_path": "custom_games/games/simple_klotski/levels/L04.json",
+      "bytes": 1610,
+      "sha256": "b210d68a65f5ddffe49fb4ad77e5f569f3aa165d8aa70720507c0bcad64bdf0a",
+      "git_blob_sha": "0562848c342f68d56d227881a695e33231d7f706"
+    },
+    {
+      "path": "custom_games/games/simple_klotski/levels/L05.json",
+      "archive_path": "custom_games/games/simple_klotski/levels/L05.json",
+      "bytes": 1591,
+      "sha256": "c84506b5e9ca2d1c97a3392608c43264e930de4d51f4b8c483354cab6e7bab66",
+      "git_blob_sha": "b98e9e1e11d69d59d287c99a56aca29caa2f8da3"
+    },
+    {
+      "path": "custom_games/games/simple_klotski/levels/L06.json",
+      "archive_path": "custom_games/games/simple_klotski/levels/L06.json",
+      "bytes": 1508,
+      "sha256": "e7e9b4a73896486118e936d1abf89c3dd4a9e88841d88b12d73066c5b476b4b3",
+      "git_blob_sha": "1bf20d6ac755bff25cf457eb518244dbcdb392cc"
+    },
+    {
+      "path": "custom_games/games/sokoban/levels/L01.txt",
+      "archive_path": "custom_games/games/sokoban/levels/L01.txt",
+      "bytes": 289,
+      "sha256": "59db9f8c7e5c85c8541e99cc317068b774bd84f9564ddc9876ee7a83604398e5",
+      "git_blob_sha": "9a6c1d7c54727b5cf171fcd050d4f5b45781ebf9"
+    },
+    {
+      "path": "custom_games/games/sokoban/levels/L02.txt",
+      "archive_path": "custom_games/games/sokoban/levels/L02.txt",
+      "bytes": 131,
+      "sha256": "9722d2ceb65795727f105790f51d3b2b2bd5234987580bd1d9d1872ebb04e11e",
+      "git_blob_sha": "6bfb876e533150d05d7990a909d080c3aea5ea02"
+    },
+    {
+      "path": "custom_games/games/sokoban/levels/L03.txt",
+      "archive_path": "custom_games/games/sokoban/levels/L03.txt",
+      "bytes": 119,
+      "sha256": "70a07017e42c45c1376691672b1ed8f8171e34fa6d96b3cc1d16d052f1f35a27",
+      "git_blob_sha": "9199389469f49faa5fc0e1a707294fec53e92d6c"
+    },
+    {
+      "path": "custom_games/games/sokoban/levels/L04.txt",
+      "archive_path": "custom_games/games/sokoban/levels/L04.txt",
+      "bytes": 128,
+      "sha256": "55db2884d47af155e5da4c2843f43459ca4ea6e704e5bd9ee232f8422ef84918",
+      "git_blob_sha": "029e3d966015bea5870d00c90a3eaea7e096e755"
+    },
+    {
+      "path": "custom_games/games/sokoban/levels/L05.txt",
+      "archive_path": "custom_games/games/sokoban/levels/L05.txt",
+      "bytes": 189,
+      "sha256": "2b1c14e24064300a9db1786f63c9cff2184889f61214bb7a7de5fe7ebd9d746e",
+      "git_blob_sha": "e1c3bb7289c8e88e0d61dc47f3e71099e392c001"
+    },
+    {
+      "path": "custom_games/games/sokoban/levels/L06.txt",
+      "archive_path": "custom_games/games/sokoban/levels/L06.txt",
+      "bytes": 179,
+      "sha256": "2b665397a8c968a4949e41f2b697e835b5bd8257a7d7c818e627d0d9c7f3d63f",
+      "git_blob_sha": "75a5b2255d715d35656fa9c8ca4526b081804461"
+    },
+    {
+      "path": "custom_games/games/sonar_maze/levels/L01.json",
+      "archive_path": "custom_games/games/sonar_maze/levels/L01.json",
+      "bytes": 1041,
+      "sha256": "2cf0145bfc622ce7103c40eab09b28ee746ddcfb73a273708d933b0c6dea9dda",
+      "git_blob_sha": "5ea38be13f392096d09f2170d1f22cfaf3df332f"
+    },
+    {
+      "path": "custom_games/games/sonar_maze/levels/L02.json",
+      "archive_path": "custom_games/games/sonar_maze/levels/L02.json",
+      "bytes": 1407,
+      "sha256": "b1fe9695a6f4573c0db27afecc954dbe9f36e6e3eced92b996957fe6e37bee21",
+      "git_blob_sha": "e32b3bc9aab7297ad022fddd661e7605f824ea4a"
+    },
+    {
+      "path": "custom_games/games/sonar_maze/levels/L03.json",
+      "archive_path": "custom_games/games/sonar_maze/levels/L03.json",
+      "bytes": 1683,
+      "sha256": "8e3fbf44359bb585be7dc7718dd78cc8e019d1d9b9134ea8e179f4badf9d4b97",
+      "git_blob_sha": "12b93a25db2e5d8095f2d1dd95d78d20caf8e9c7"
+    },
+    {
+      "path": "custom_games/games/sonar_maze/levels/L04.json",
+      "archive_path": "custom_games/games/sonar_maze/levels/L04.json",
+      "bytes": 2495,
+      "sha256": "6bea1b27a6c1b9c3570732699b6ff00ad4c8772085b51b75f20073fee069b8f2",
+      "git_blob_sha": "6d25cfa62cc99e5d90a1cc983e7e53fcd0639a09"
+    },
+    {
+      "path": "custom_games/games/sonar_maze/levels/L05.json",
+      "archive_path": "custom_games/games/sonar_maze/levels/L05.json",
+      "bytes": 2662,
+      "sha256": "29fa3d79d5ebd1facc868f57bbefb69c4dc1062d10f09fa3329e1968820cd19d",
+      "git_blob_sha": "3473dd688768178abe15b5ca737333d9d45af771"
+    },
+    {
+      "path": "custom_games/games/sonar_maze/levels/L06.json",
+      "archive_path": "custom_games/games/sonar_maze/levels/L06.json",
+      "bytes": 3239,
+      "sha256": "2f5fc11b5523138b85c952443571f0565081b79c5891f1ac695b47571e360cbc",
+      "git_blob_sha": "736abf5cc4d78ceca19b3144a8d963bbb95b71bc"
+    },
+    {
+      "path": "custom_games/games/spore_lab/levels/L01.json",
+      "archive_path": "custom_games/games/spore_lab/levels/L01.json",
+      "bytes": 353,
+      "sha256": "13ccba72adea266868fc3fa9e0a9921ba9b0d9c07e5b43702d08c1bda14c0989",
+      "git_blob_sha": "d726a6b19e31e346acd61d78d84520b36a7ba5cb"
+    },
+    {
+      "path": "custom_games/games/spore_lab/levels/L02.json",
+      "archive_path": "custom_games/games/spore_lab/levels/L02.json",
+      "bytes": 358,
+      "sha256": "ef9c613a3aff2bba5e1c7a793d0cdaedc0d1eee70d45a581e7db73e4060575c6",
+      "git_blob_sha": "c3780c4db65ccee03038a39d1a15dfbfda5585af"
+    },
+    {
+      "path": "custom_games/games/spore_lab/levels/L03.json",
+      "archive_path": "custom_games/games/spore_lab/levels/L03.json",
+      "bytes": 362,
+      "sha256": "fdd5af84493d6ad5bb19d97297659557a8cc09df0bccf5eece085fe55f308bf3",
+      "git_blob_sha": "48a54862ec6eae183ba685b4a85baa06a9bccb32"
+    },
+    {
+      "path": "custom_games/games/spore_lab/levels/L04.json",
+      "archive_path": "custom_games/games/spore_lab/levels/L04.json",
+      "bytes": 356,
+      "sha256": "970bf71c423ffc5951bf73b85613ca7655ca90c76a1680834d5baebef5d9ce94",
+      "git_blob_sha": "7e5d8f4a9399368df0fff257fb915c323c40ad07"
+    },
+    {
+      "path": "custom_games/games/spore_lab/levels/L05.json",
+      "archive_path": "custom_games/games/spore_lab/levels/L05.json",
+      "bytes": 362,
+      "sha256": "1d7e1b46667471a9451df0f9e69454fbc645286c8743234cb3dcb504d148d7e4",
+      "git_blob_sha": "98653215f704e1f64ef3d42a1775fc934d1c49ba"
+    },
+    {
+      "path": "custom_games/games/spore_lab/levels/L06.json",
+      "archive_path": "custom_games/games/spore_lab/levels/L06.json",
+      "bytes": 348,
+      "sha256": "6afe9340d76cdebe811bec2896714c10c8e68b1815a675b86a10a0dea006223a",
+      "git_blob_sha": "5890da11ece34585720dca778e8e557d4280a78a"
+    },
+    {
+      "path": "custom_games/games/stack_iso/levels/L01.json",
+      "archive_path": "custom_games/games/stack_iso/levels/L01.json",
+      "bytes": 475,
+      "sha256": "26d112bac76c2975bcfb0d76aff339d346fd27129a4e59648a1c6f76c2417157",
+      "git_blob_sha": "0e3e7ee6931c9e2530e7c797d418e64668b30b8d"
+    },
+    {
+      "path": "custom_games/games/stack_iso/levels/L02.json",
+      "archive_path": "custom_games/games/stack_iso/levels/L02.json",
+      "bytes": 386,
+      "sha256": "a371b15cc244903c19906c2e14d6a74cc33d0f5fda7fe711f58b1eeff25bcba6",
+      "git_blob_sha": "0d7fc3aa1ceaab7f0bd2702a098aaf61380c4f2e"
+    },
+    {
+      "path": "custom_games/games/stack_iso/levels/L03.json",
+      "archive_path": "custom_games/games/stack_iso/levels/L03.json",
+      "bytes": 517,
+      "sha256": "48ae895aa1ceb72ce7be9421fa5011b0048373a19badbd908a2f34ee8033d9a7",
+      "git_blob_sha": "9859b0ac47215e5833cae87d276d67c9bb2a08bd"
+    },
+    {
+      "path": "custom_games/games/stack_iso/levels/L04.json",
+      "archive_path": "custom_games/games/stack_iso/levels/L04.json",
+      "bytes": 393,
+      "sha256": "1c58427afe0eb3ca5ca95f4d57d321ec4cb7ca7d8d20c1875ff865f13e70a24b",
+      "git_blob_sha": "76a65828903f79c696304ed90861d3261403ea7b"
+    },
+    {
+      "path": "custom_games/games/stack_iso/levels/L05.json",
+      "archive_path": "custom_games/games/stack_iso/levels/L05.json",
+      "bytes": 522,
+      "sha256": "49f4e4195f11f3b1a3239fb539367b68358fce9a65e36ec7c572a532e52e40ef",
+      "git_blob_sha": "f3d44af75fe2cdaefdb71d1bd58725dca8182b98"
+    },
+    {
+      "path": "custom_games/games/stack_iso/levels/L06.json",
+      "archive_path": "custom_games/games/stack_iso/levels/L06.json",
+      "bytes": 777,
+      "sha256": "ec3d6732c2b0e1566bbfc2aa6a282cb53cc8e46cd3a9ed69305fb48cccc2a311",
+      "git_blob_sha": "4779a562da6790f4915a313c61863075ef0bdc56"
+    },
+    {
+      "path": "custom_games/games/switch_rooms/levels/L01.json",
+      "archive_path": "custom_games/games/switch_rooms/levels/L01.json",
+      "bytes": 576,
+      "sha256": "7c3c05dd5e35f8678c100a4d71df8fc05b6f31c078e5baee1fd6d182ee0829f3",
+      "git_blob_sha": "c61bfd9aa6f89c44b236498d0aa61bd482bf0ad1"
+    },
+    {
+      "path": "custom_games/games/switch_rooms/levels/L02.json",
+      "archive_path": "custom_games/games/switch_rooms/levels/L02.json",
+      "bytes": 759,
+      "sha256": "8522c1ef3f93252433b683987d6920f8756b1baafd6ba74135a2a25e4bf6d68f",
+      "git_blob_sha": "af99499a4412fed5bb5ddacd550c059189ffcdb0"
+    },
+    {
+      "path": "custom_games/games/switch_rooms/levels/L03.json",
+      "archive_path": "custom_games/games/switch_rooms/levels/L03.json",
+      "bytes": 993,
+      "sha256": "830bdaf7bcc78b54f5a62d54685cabb6d73642385072650249c49a0d9f49a215",
+      "git_blob_sha": "8bf75a51d8974c96ff40e31e15e0a350a5bad21f"
+    },
+    {
+      "path": "custom_games/games/switch_rooms/levels/L04.json",
+      "archive_path": "custom_games/games/switch_rooms/levels/L04.json",
+      "bytes": 1003,
+      "sha256": "b8ef84b44422123f29a69d5b04d463a27362e0020baff4151c80e5aad78595bd",
+      "git_blob_sha": "6f0e4edd4172aa69f8a13f3ff1ea728766b357f4"
+    },
+    {
+      "path": "custom_games/games/switch_rooms/levels/L05.json",
+      "archive_path": "custom_games/games/switch_rooms/levels/L05.json",
+      "bytes": 1000,
+      "sha256": "d2bb9cf0c59fbb982b186be4f1256f777d72e9a79a7e5cb3c2d738443b0b96a4",
+      "git_blob_sha": "dfa29da42d13875b75f39394edecc941afdd45d2"
+    },
+    {
+      "path": "custom_games/games/switch_rooms/levels/L06.json",
+      "archive_path": "custom_games/games/switch_rooms/levels/L06.json",
+      "bytes": 974,
+      "sha256": "36606b1dfbf1a003a5a4f4aa509bc9849d4ac35f1be7af28638a8c69a12660c0",
+      "git_blob_sha": "5699069dd6a660ce6329d402f4d1ddffc9de73d2"
+    },
+    {
+      "path": "custom_games/games/symmetry_fix/levels/L01.json",
+      "archive_path": "custom_games/games/symmetry_fix/levels/L01.json",
+      "bytes": 199,
+      "sha256": "fab27e730aa56f51ba464b0eaac5edc18c5fc45bc2f73ed6416e3477bf898064",
+      "git_blob_sha": "f1266e3a967fc8b64db12c386ccd7cb61b4cca40"
+    },
+    {
+      "path": "custom_games/games/symmetry_fix/levels/L02.json",
+      "archive_path": "custom_games/games/symmetry_fix/levels/L02.json",
+      "bytes": 218,
+      "sha256": "afd551a46a63207e30f7cda992980f15216afe9a9a605fc17087b747f9c7b1b1",
+      "git_blob_sha": "022b967fb5378909291b3e9ca72a48779b96c72f"
+    },
+    {
+      "path": "custom_games/games/symmetry_fix/levels/L03.json",
+      "archive_path": "custom_games/games/symmetry_fix/levels/L03.json",
+      "bytes": 214,
+      "sha256": "9003d8b7e73bad05afabd2b8aeb39e00bab1de0298f417c569f5fe6e829f1b1f",
+      "git_blob_sha": "afab6adf27cf3e8171c7edd963a9cb49b77ba56f"
+    },
+    {
+      "path": "custom_games/games/symmetry_fix/levels/L04.json",
+      "archive_path": "custom_games/games/symmetry_fix/levels/L04.json",
+      "bytes": 209,
+      "sha256": "8aeb777676f255a1dab06dcba8f9233b42d574a59f6eab7a4906b4c659c0d074",
+      "git_blob_sha": "ac59c519a6863eda93f674e10ff0deb90653dd4d"
+    },
+    {
+      "path": "custom_games/games/symmetry_fix/levels/L05.json",
+      "archive_path": "custom_games/games/symmetry_fix/levels/L05.json",
+      "bytes": 224,
+      "sha256": "7929bed58178eda4438bca12a1a27f0e01b545b863a2664811dc21e8f9285e5a",
+      "git_blob_sha": "9e35b275a2c7d6213c686d4911e37884eacebfc6"
+    },
+    {
+      "path": "custom_games/games/symmetry_fix/levels/L06.json",
+      "archive_path": "custom_games/games/symmetry_fix/levels/L06.json",
+      "bytes": 230,
+      "sha256": "e995661f8250d1c9389a97d770af22b1c820bcabca79e7f6ef44caf64e2e1e1c",
+      "git_blob_sha": "cdd5330c9dc7b88c129a2c1e95b6d42eae25b08c"
+    },
+    {
+      "path": "custom_games/games/thermometers/levels/L01.json",
+      "archive_path": "custom_games/games/thermometers/levels/L01.json",
+      "bytes": 643,
+      "sha256": "1d00ee2d6bfb31f6dbc10998d774c2a3b5cf6f03dbc9499f1f68c8a957fe8897",
+      "git_blob_sha": "620c32fa9409c6a6b958183c4b1bcdeff6b6e55a"
+    },
+    {
+      "path": "custom_games/games/thermometers/levels/L02.json",
+      "archive_path": "custom_games/games/thermometers/levels/L02.json",
+      "bytes": 632,
+      "sha256": "15962e09142964f4319d69d2136f8f9b7e928ff879af97bcf1d065a119c81701",
+      "git_blob_sha": "ce3657aa0fc77632f5487cbf28ae170abc367a4a"
+    },
+    {
+      "path": "custom_games/games/thermometers/levels/L03.json",
+      "archive_path": "custom_games/games/thermometers/levels/L03.json",
+      "bytes": 941,
+      "sha256": "d51f42b838f0fe56497f337641c069870534ea357b31e77408d6656feafe4cdf",
+      "git_blob_sha": "3a7d37d5f1c1d3dabe791d7306e6d84175f6e59a"
+    },
+    {
+      "path": "custom_games/games/thermometers/levels/L04.json",
+      "archive_path": "custom_games/games/thermometers/levels/L04.json",
+      "bytes": 957,
+      "sha256": "1f546e41afa86dd087ffd46a8a8bc98efa464f15c065c8970c6d649ba3fe30d4",
+      "git_blob_sha": "04d07a21231683c7aeb8af9e539c7d09533e37d0"
+    },
+    {
+      "path": "custom_games/games/thermometers/levels/L05.json",
+      "archive_path": "custom_games/games/thermometers/levels/L05.json",
+      "bytes": 1319,
+      "sha256": "5bc3d31e4903e3ce242488f1a2a84c3db2fd2ea62f75e9e3e88c541ea09ef0bd",
+      "git_blob_sha": "a95225ae4fdbce0dae72b1ce0949c75fdf46def8"
+    },
+    {
+      "path": "custom_games/games/thermometers/levels/L06.json",
+      "archive_path": "custom_games/games/thermometers/levels/L06.json",
+      "bytes": 1323,
+      "sha256": "1972505a268bcc5f70664c4a3bea1abdc2ce5379162e824b8488de69278f0ff9",
+      "git_blob_sha": "a9fb1fab21935212a5a7b3f2e8a29921ba022ba7"
+    },
+    {
+      "path": "custom_games/games/tic_tac_toe/levels/L01.json",
+      "archive_path": "custom_games/games/tic_tac_toe/levels/L01.json",
+      "bytes": 212,
+      "sha256": "7ac5dc4cc8c2856cdecced032304eee5b528b72cc835a7d617a7f4a1cb7a881d",
+      "git_blob_sha": "7ea76447a3ba86a1d58ef08364a6e46576880239"
+    },
+    {
+      "path": "custom_games/games/tic_tac_toe/levels/L02.json",
+      "archive_path": "custom_games/games/tic_tac_toe/levels/L02.json",
+      "bytes": 211,
+      "sha256": "38258a4972bc3af551b62cf06220598aa4ee3c3ef8060a278aa2f21f0bc5d835",
+      "git_blob_sha": "a7fdaf33b1cc4a167b623ae5731a0d7b855f5cd3"
+    },
+    {
+      "path": "custom_games/games/tic_tac_toe/levels/L03.json",
+      "archive_path": "custom_games/games/tic_tac_toe/levels/L03.json",
+      "bytes": 322,
+      "sha256": "be89d10eecd5a8fb4f95c5f3aa8fae3d7d1d67d3d74a6fcb163d86c53e96dd66",
+      "git_blob_sha": "be754b649138ecbce98dd782a9bcf993d2bf0699"
+    },
+    {
+      "path": "custom_games/games/tic_tac_toe/levels/L04.json",
+      "archive_path": "custom_games/games/tic_tac_toe/levels/L04.json",
+      "bytes": 318,
+      "sha256": "dd15241716531f01eb51a042cd290ac1c304391e2e8189cc4d3d98687378b651",
+      "git_blob_sha": "6e2353023086c60dd02a8c858111a9f66c0d67eb"
+    },
+    {
+      "path": "custom_games/games/tic_tac_toe/levels/L05.json",
+      "archive_path": "custom_games/games/tic_tac_toe/levels/L05.json",
+      "bytes": 425,
+      "sha256": "163233e5a0ae58f1602d2e11e6f4c7d27820fb662373d02b0aaa86306b701580",
+      "git_blob_sha": "8b9cf0316d48e1d7a3bdd39ae244a11ef6ebea5e"
+    },
+    {
+      "path": "custom_games/games/tic_tac_toe/levels/L06.json",
+      "archive_path": "custom_games/games/tic_tac_toe/levels/L06.json",
+      "bytes": 545,
+      "sha256": "44e5f72edd7a851b445259dd1273f48863b880c51e52a2e0be9bb654e745e0eb",
+      "git_blob_sha": "17d38e9b488a83ae8c81db6c2b9200b19a5fdeaf"
+    },
+    {
+      "path": "custom_games/games/tower_equilibrium/levels/L01.json",
+      "archive_path": "custom_games/games/tower_equilibrium/levels/L01.json",
+      "bytes": 365,
+      "sha256": "596430f447354f50916ef5c2c6fbc134f76435610202172dc29ecc6962352cfd",
+      "git_blob_sha": "3aa7635d8d4c4381fdf7e8507c7c1038c2e107ea"
+    },
+    {
+      "path": "custom_games/games/tower_equilibrium/levels/L02.json",
+      "archive_path": "custom_games/games/tower_equilibrium/levels/L02.json",
+      "bytes": 437,
+      "sha256": "450b289fab6010ecbdf57cfa4d52aee91093690d0c4bd57a1243cde62ee495e8",
+      "git_blob_sha": "3f4a2bcdd152a815f32ad36bd2e72197dff09a7a"
+    },
+    {
+      "path": "custom_games/games/tower_equilibrium/levels/L03.json",
+      "archive_path": "custom_games/games/tower_equilibrium/levels/L03.json",
+      "bytes": 394,
+      "sha256": "6009342ec706f3a054fc38dd9a3358dd68cf012d8174f96a378ff392434b8174",
+      "git_blob_sha": "20faf66c73c4661d9419856ca782966fbe327b6f"
+    },
+    {
+      "path": "custom_games/games/tower_equilibrium/levels/L04.json",
+      "archive_path": "custom_games/games/tower_equilibrium/levels/L04.json",
+      "bytes": 385,
+      "sha256": "a98c6e48359a806164db57abdad0012903c58c699b718e45f5f6d6fc9b58cc71",
+      "git_blob_sha": "8bfba0e43c171a88be08573a2c69e888e1a296b0"
+    },
+    {
+      "path": "custom_games/games/tower_equilibrium/levels/L05.json",
+      "archive_path": "custom_games/games/tower_equilibrium/levels/L05.json",
+      "bytes": 440,
+      "sha256": "86bef93d44fe3f2e6fc47a77974fbabaac4c8622d87e63340135a5207e08fa7d",
+      "git_blob_sha": "eb0a59e3dc9c18762713c46e0a57558f8cf2b427"
+    },
+    {
+      "path": "custom_games/games/tower_equilibrium/levels/L06.json",
+      "archive_path": "custom_games/games/tower_equilibrium/levels/L06.json",
+      "bytes": 469,
+      "sha256": "91e16085a03862a6f419bea6e6d42be34b97120798411e921cdf5788c4014b4d",
+      "git_blob_sha": "28943d611906bc9c53999dcac6c9bcc80b832e52"
+    },
+    {
+      "path": "custom_games/games/tracing_path/levels/L01.json",
+      "archive_path": "custom_games/games/tracing_path/levels/L01.json",
+      "bytes": 1238,
+      "sha256": "7e30b2f8c57109f395f260649d3a4a147ec650a2d7365ee6471f065edbfc4788",
+      "git_blob_sha": "5fdb0ed6bf2c04b324e9043295a19d2d280abaa1"
+    },
+    {
+      "path": "custom_games/games/tracing_path/levels/L02.json",
+      "archive_path": "custom_games/games/tracing_path/levels/L02.json",
+      "bytes": 1336,
+      "sha256": "1adc3ca8d2d71427c5533ec0647515d55cf9d9c7da28a2c1fb2fdbe024d3861c",
+      "git_blob_sha": "b099d4c557c334e0d98df1c6b57c075d7b2bfeec"
+    },
+    {
+      "path": "custom_games/games/tracing_path/levels/L03.json",
+      "archive_path": "custom_games/games/tracing_path/levels/L03.json",
+      "bytes": 1648,
+      "sha256": "1c5aa3261a7538b35f64282b8af09d3217abf9908084cdeae4677a5b1423e76a",
+      "git_blob_sha": "d46f0a64cf50683b865f4206b60238ab1dbef4fe"
+    },
+    {
+      "path": "custom_games/games/tracing_path/levels/L04.json",
+      "archive_path": "custom_games/games/tracing_path/levels/L04.json",
+      "bytes": 2047,
+      "sha256": "4985f44408c48652eed004f1ecf6d128ee1e916510e124f7daff441f0afe3063",
+      "git_blob_sha": "ab3fafcb8d536b91628884052a61ee9d0f6fb66b"
+    },
+    {
+      "path": "custom_games/games/tracing_path/levels/L05.json",
+      "archive_path": "custom_games/games/tracing_path/levels/L05.json",
+      "bytes": 2242,
+      "sha256": "c91cdc0c24e52d9f0ee00e82f3b57d82745144b2574453ca11d6ece2e2381e53",
+      "git_blob_sha": "8e33fc87297f9b929e8ee97ab3900e0e5ecbefd5"
+    },
+    {
+      "path": "custom_games/games/tracing_path/levels/L06.json",
+      "archive_path": "custom_games/games/tracing_path/levels/L06.json",
+      "bytes": 2549,
+      "sha256": "6da323e8854c5c23b0590402cf46dec914e6a22213a4558ec200d1972862102d",
+      "git_blob_sha": "8cacc666f30d19d00132aef21d1868a27b7075b7"
+    },
+    {
+      "path": "custom_games/games/transport_gabarit/levels/L01.json",
+      "archive_path": "custom_games/games/transport_gabarit/levels/L01.json",
+      "bytes": 316,
+      "sha256": "a541080a87c522ccf779044a91849d70aa2aa684b738c6ff8149cd7d69c4aca7",
+      "git_blob_sha": "988285791d5e1b8e8054b3e983e47de030dce461"
+    },
+    {
+      "path": "custom_games/games/transport_gabarit/levels/L02.json",
+      "archive_path": "custom_games/games/transport_gabarit/levels/L02.json",
+      "bytes": 292,
+      "sha256": "e9b40ad267f3e8191c867610e72b50842d54eab3411b0370953f184936f79560",
+      "git_blob_sha": "c0701ac9479ca84d28673cf0fafde5e930167cf3"
+    },
+    {
+      "path": "custom_games/games/transport_gabarit/levels/L03.json",
+      "archive_path": "custom_games/games/transport_gabarit/levels/L03.json",
+      "bytes": 296,
+      "sha256": "99ce5a4479d451728c1dddedf71493a30fba8382b25f312e993e6efba2dbc6aa",
+      "git_blob_sha": "5d51bb28eee092e3cbd303b83bc0b920aa2206d2"
+    },
+    {
+      "path": "custom_games/games/transport_gabarit/levels/L04.json",
+      "archive_path": "custom_games/games/transport_gabarit/levels/L04.json",
+      "bytes": 300,
+      "sha256": "f7a4dcc2e48034f28a238c44483e0e994548881f4b65db368ed81cb3497ce695",
+      "git_blob_sha": "a2e8bc8578c4d928a41142ae447c3d1af133ebf2"
+    },
+    {
+      "path": "custom_games/games/transport_gabarit/levels/L05.json",
+      "archive_path": "custom_games/games/transport_gabarit/levels/L05.json",
+      "bytes": 298,
+      "sha256": "422f565e25f3718b7c002e4fd2a38eec27cbd6a0753ee4542fb1b6830f5c1df4",
+      "git_blob_sha": "2f47149f6103c5b3df218a8aa878edc27d343fda"
+    },
+    {
+      "path": "custom_games/games/transport_gabarit/levels/L06.json",
+      "archive_path": "custom_games/games/transport_gabarit/levels/L06.json",
+      "bytes": 297,
+      "sha256": "9e70378e79d9abcf2c5c61d57c9539ac88db37b6de8bf8848355f8718e4443fe",
+      "git_blob_sha": "960b9ab3f9983c741b806bbad9f38029a75a8946"
+    },
+    {
+      "path": "custom_games/games/triade/levels/L01.json",
+      "archive_path": "custom_games/games/triade/levels/L01.json",
+      "bytes": 933,
+      "sha256": "0439728f2f88317642327a2bcf9a760c800f943b4dee867a90dea86216850acd",
+      "git_blob_sha": "5e95edf7aa88ef8362e8713d1ec29eb352ff3e16"
+    },
+    {
+      "path": "custom_games/games/triade/levels/L02.json",
+      "archive_path": "custom_games/games/triade/levels/L02.json",
+      "bytes": 1301,
+      "sha256": "cd0c9890723f8db1a267b794e2c5a56a22921080bb9eaf1232922cf2e4692562",
+      "git_blob_sha": "45a5b1f0c317f3f1dbf2b261f6746ee5d3d4e2a5"
+    },
+    {
+      "path": "custom_games/games/triade/levels/L03.json",
+      "archive_path": "custom_games/games/triade/levels/L03.json",
+      "bytes": 1649,
+      "sha256": "e87357c436b20c92e5061638bb50a86e2c012886f99398032c78c708c6280fdc",
+      "git_blob_sha": "d78b0f532949d59d6e69d4275fb711f1fc0504be"
+    },
+    {
+      "path": "custom_games/games/triade/levels/L04.json",
+      "archive_path": "custom_games/games/triade/levels/L04.json",
+      "bytes": 2270,
+      "sha256": "589da030aef14150c138cd5f0c3243543e682507e62b4009def6e0f6c9debfb5",
+      "git_blob_sha": "9f8c9d4a82bb3d0342b916d4936340daeffb4f5c"
+    },
+    {
+      "path": "custom_games/games/triade/levels/L05.json",
+      "archive_path": "custom_games/games/triade/levels/L05.json",
+      "bytes": 2609,
+      "sha256": "f30db712fccadac14f7bb6d945c1c886a84c54cc6d64c9310d68dec83e107b57",
+      "git_blob_sha": "250d3c4ec0b28ad3360a7c5d78b5d001990c2501"
+    },
+    {
+      "path": "custom_games/games/triade/levels/L06.json",
+      "archive_path": "custom_games/games/triade/levels/L06.json",
+      "bytes": 3282,
+      "sha256": "cea56b4852cdfb80b4623abf9f089aa4234684a771c6897946c2f6983e84799e",
+      "git_blob_sha": "b75fd03629ee3ca537c1616029118e87dd4478a1"
+    },
+    {
+      "path": "custom_games/games/upset/levels/L01.json",
+      "archive_path": "custom_games/games/upset/levels/L01.json",
+      "bytes": 2652,
+      "sha256": "34593e8cec73998995b848526a6236906201751da36486918e1ec0d585c5a352",
+      "git_blob_sha": "86fc3ff0c94a39b0a5acb12bf03a6d4144a8e018"
+    },
+    {
+      "path": "custom_games/games/upset/levels/L02.json",
+      "archive_path": "custom_games/games/upset/levels/L02.json",
+      "bytes": 2421,
+      "sha256": "03dcb1d8dd9c3006ee4b4d17097d64841c3d67d32d5abc028fda0ed121168ef9",
+      "git_blob_sha": "f21c5c5100486a938c6f2404d4f2fb09d03e9270"
+    },
+    {
+      "path": "custom_games/games/upset/levels/L03.json",
+      "archive_path": "custom_games/games/upset/levels/L03.json",
+      "bytes": 4749,
+      "sha256": "54141ad65c6aa03126e6e45ee5f24bd72502c94f862eb8e5ba57e148c8b3e62c",
+      "git_blob_sha": "5b4f19f85a8cb992f2505b7c80480465208fa211"
+    },
+    {
+      "path": "custom_games/games/upset/levels/L04.json",
+      "archive_path": "custom_games/games/upset/levels/L04.json",
+      "bytes": 6115,
+      "sha256": "f7fe65f6f66435799ce420afa0fb4843091c4edb5028fa68427d0b828d7d7284",
+      "git_blob_sha": "6fb53be4ddcebc5f956fdc3560d0b40bfbbef8bf"
+    },
+    {
+      "path": "custom_games/games/upset/levels/L05.json",
+      "archive_path": "custom_games/games/upset/levels/L05.json",
+      "bytes": 7594,
+      "sha256": "db005226895f5bd45b3d6ddea9bf57b5e1e712208a1896407d868cc5dd1c9b3c",
+      "git_blob_sha": "533f6710185c1733ffd745ff7c6a3148b2afdcd8"
+    },
+    {
+      "path": "custom_games/games/upset/levels/L06.json",
+      "archive_path": "custom_games/games/upset/levels/L06.json",
+      "bytes": 9514,
+      "sha256": "d94b82f12355d87946718d158353824bc7fab30115871934dc24660a0531d0a8",
+      "git_blob_sha": "a81cba118f279c7d6659ce09f259a134c193e140"
+    },
+    {
+      "path": "custom_games/games/valve_flow/levels/L01.json",
+      "archive_path": "custom_games/games/valve_flow/levels/L01.json",
+      "bytes": 980,
+      "sha256": "9762b886dad44cf9b251369f1254e403e68906b705db7ca351a014b16c891193",
+      "git_blob_sha": "6efc25701c248ce34f038e5a67e5dde5bdddeed9"
+    },
+    {
+      "path": "custom_games/games/valve_flow/levels/L02.json",
+      "archive_path": "custom_games/games/valve_flow/levels/L02.json",
+      "bytes": 1213,
+      "sha256": "d580ea45deb388720c0fd087c5af217005c274d8b2571515f9ec899e602b7685",
+      "git_blob_sha": "691275597e6d0ddb3f992fa22826df00d2fc69e8"
+    },
+    {
+      "path": "custom_games/games/valve_flow/levels/L03.json",
+      "archive_path": "custom_games/games/valve_flow/levels/L03.json",
+      "bytes": 1102,
+      "sha256": "84b1e3858ab66ca9cde069499006f18c6e61bdb094ee05cb498c1a27e88d080b",
+      "git_blob_sha": "84609c3a1c757c962b6335361d599e277602a27d"
+    },
+    {
+      "path": "custom_games/games/valve_flow/levels/L04.json",
+      "archive_path": "custom_games/games/valve_flow/levels/L04.json",
+      "bytes": 1424,
+      "sha256": "a94d3dcd7b509916cdbfc26be344864104bca79ff2a4e1ba8a6a6e92a76da1c3",
+      "git_blob_sha": "b8c61a01c669d92761be10da82c5253de2d907f7"
+    },
+    {
+      "path": "custom_games/games/valve_flow/levels/L05.json",
+      "archive_path": "custom_games/games/valve_flow/levels/L05.json",
+      "bytes": 1422,
+      "sha256": "657a193ac15d5276010a66265e0ea07b8553a7d07c9b2b52c80a9c227368f7e3",
+      "git_blob_sha": "c1ac4e187c66e4566775902894c77897a4a28863"
+    },
+    {
+      "path": "custom_games/games/valve_flow/levels/L06.json",
+      "archive_path": "custom_games/games/valve_flow/levels/L06.json",
+      "bytes": 1825,
+      "sha256": "333ddb3b5f572f7060a6bbd71f8e39d68810243d0ff91ecdb8acd9460699b761",
+      "git_blob_sha": "b28b9f102a148a4a4480743e9979d71fab854b77"
+    },
+    {
+      "path": "custom_games/games/wave_alignment/levels/L01.json",
+      "archive_path": "custom_games/games/wave_alignment/levels/L01.json",
+      "bytes": 717,
+      "sha256": "31d0d463525973d49f2988211e30ad6014a7f27e017fa75a2e901a2d88d1be13",
+      "git_blob_sha": "90c2f7b76dc41b05803603a2faed1b8417a8d7d5"
+    },
+    {
+      "path": "custom_games/games/wave_alignment/levels/L02.json",
+      "archive_path": "custom_games/games/wave_alignment/levels/L02.json",
+      "bytes": 772,
+      "sha256": "cfd1a62d871feca24703d66ed7e22d33e5c0bb80cff387b8c19d66b789bdb9a6",
+      "git_blob_sha": "1a26d619ce8580d872c43aaf8b2503e82035bff7"
+    },
+    {
+      "path": "custom_games/games/wave_alignment/levels/L03.json",
+      "archive_path": "custom_games/games/wave_alignment/levels/L03.json",
+      "bytes": 818,
+      "sha256": "2b074d4a5350e18b9955422b20479e4b8c4f773b47d978ead881b6cf7dd12e88",
+      "git_blob_sha": "ce02e23b0f8981ddc68878406f6fc81e13b57713"
+    },
+    {
+      "path": "custom_games/games/wave_alignment/levels/L04.json",
+      "archive_path": "custom_games/games/wave_alignment/levels/L04.json",
+      "bytes": 975,
+      "sha256": "7f380d56cccb1206fa2a2cb71166d35b533b6c77e0a4e64b9c54923cee1c0962",
+      "git_blob_sha": "91550280974dce0078109650489d4ff1257db329"
+    },
+    {
+      "path": "custom_games/games/wave_alignment/levels/L05.json",
+      "archive_path": "custom_games/games/wave_alignment/levels/L05.json",
+      "bytes": 1112,
+      "sha256": "732712318c5a281ca941ad610a76bae7c2791233034b2f4284a1777a120f1d91",
+      "git_blob_sha": "c450eb2f8789156d3f75f4c15d211d57f563835c"
+    },
+    {
+      "path": "custom_games/games/wave_alignment/levels/L06.json",
+      "archive_path": "custom_games/games/wave_alignment/levels/L06.json",
+      "bytes": 1157,
+      "sha256": "da1ca4c965503f4a443d171933a21555b2ff25d3455129b3f4beac7050c4fd1b",
+      "git_blob_sha": "437f4d148346c6836f1548ad90b8e4d0cd89950e"
+    },
+    {
+      "path": "custom_games/games/weave/levels/L01.json",
+      "archive_path": "custom_games/games/weave/levels/L01.json",
+      "bytes": 2307,
+      "sha256": "bfd6b34baca3312647c9eb24fe33124dd0ca521a0802ceb71faf15d5c00e38e9",
+      "git_blob_sha": "8e8c2def03416ea03e33859ba50661525d78ab50"
+    },
+    {
+      "path": "custom_games/games/weave/levels/L02.json",
+      "archive_path": "custom_games/games/weave/levels/L02.json",
+      "bytes": 2277,
+      "sha256": "870e9d83d92a5e466207397d43395b19572fa8703e158a946ee3b5955b09c5d1",
+      "git_blob_sha": "9875a9ffe0f5337ada82326911bc2bdbb53fa195"
+    },
+    {
+      "path": "custom_games/games/weave/levels/L03.json",
+      "archive_path": "custom_games/games/weave/levels/L03.json",
+      "bytes": 2812,
+      "sha256": "e1424d429e8cf9af1ff431922efe1b0c34595c40ddadd48d3f3cbe736c48212b",
+      "git_blob_sha": "e8645ec082912da8d3894692122fb92cb3dbeb01"
+    },
+    {
+      "path": "custom_games/games/weave/levels/L04.json",
+      "archive_path": "custom_games/games/weave/levels/L04.json",
+      "bytes": 4370,
+      "sha256": "ccad7c3fffafac51af5d9f46b5da395c861a77f7855d8cf49a0b0b2632b34ecf",
+      "git_blob_sha": "80958c22de2d829b4969c65d8cacea1867d69c55"
+    },
+    {
+      "path": "custom_games/games/weave/levels/L05.json",
+      "archive_path": "custom_games/games/weave/levels/L05.json",
+      "bytes": 4350,
+      "sha256": "b17e22f57ea1f68a171f9512bfd3b210648aae0fb9ba4863afdb9d5bd91a6a0e",
+      "git_blob_sha": "1e717c29710836691b4c12de71a133fcc20a9149"
+    },
+    {
+      "path": "custom_games/games/weave/levels/L06.json",
+      "archive_path": "custom_games/games/weave/levels/L06.json",
+      "bytes": 4362,
+      "sha256": "256719fa0b0945bc0986e05e722cd404b35641f0b34fe99c36de1b9547d4ea8c",
+      "git_blob_sha": "40e37af45acba16cf744ba60d638645840fcfbb9"
+    },
+    {
+      "path": "custom_games/games/zip/levels/L01.json",
+      "archive_path": "custom_games/games/zip/levels/L01.json",
+      "bytes": 323,
+      "sha256": "a4a72d3fe0edcb668330f64406a2fd895ff3f85cb330484441c665e3ef35f4f0",
+      "git_blob_sha": "2f50e0cde85a0cc18fed4b0aec7e2ea685da8836"
+    },
+    {
+      "path": "custom_games/games/zip/levels/L02.json",
+      "archive_path": "custom_games/games/zip/levels/L02.json",
+      "bytes": 462,
+      "sha256": "d0a0d383a0741ff1a3b87d4463d996f266448dfdf994b789dcb1deb0424739a6",
+      "git_blob_sha": "78d725c1c213d14d5d66e9f1ec0a33f78f428266"
+    },
+    {
+      "path": "custom_games/games/zip/levels/L03.json",
+      "archive_path": "custom_games/games/zip/levels/L03.json",
+      "bytes": 563,
+      "sha256": "89cd21a9a30c6f20d96c230c78343879d6f931fb98902679c92ed91a2a12cb9a",
+      "git_blob_sha": "4dc5746db271ed8cb80df682e9131ce794134989"
+    },
+    {
+      "path": "custom_games/games/zip/levels/L04.json",
+      "archive_path": "custom_games/games/zip/levels/L04.json",
+      "bytes": 595,
+      "sha256": "d979057a2768bd3a1381d8d114af3632f3c2c573b7d2ac5c81abdd82789c3154",
+      "git_blob_sha": "50f0393926e05030f88e9b968903323911796265"
+    },
+    {
+      "path": "custom_games/games/zip/levels/L05.json",
+      "archive_path": "custom_games/games/zip/levels/L05.json",
+      "bytes": 649,
+      "sha256": "75eabdbd8ac0e70232bf4abf1eaff54e3d72319d0d0f851f55f08477d9065095",
+      "git_blob_sha": "1762d7ae9c7d94f6ba36b6a2c212a277d3634306"
+    },
+    {
+      "path": "custom_games/games/zip/levels/L06.json",
+      "archive_path": "custom_games/games/zip/levels/L06.json",
+      "bytes": 837,
+      "sha256": "b86e8aa8fd7e4a4a70a26ed0d04209124be2403384605d17de131beb7ea7f48a",
+      "git_blob_sha": "bb6b01ab872c1bfd9367a4615c0270d6d24060d2"
+    },
+    {
+      "path": "custom_games/registry.py",
+      "archive_path": "custom_games/registry.py",
+      "bytes": 47655,
+      "sha256": "eb556d6c84aa8cf5bc772059ffed6d300937ba083ae9ca0882697271e301138f",
+      "git_blob_sha": "a62861ea8d76b755df901ef65c8fff8d3773e67a"
+    }
+  ]
+}

@@ -1,15 +1,21 @@
 import './styles.css';
-import { PipesEngine, PALETTE, type PipesObservation } from './games/pipes';
+import { BrowserGameRuntime, type GameObservation } from './runtime/browser-games';
 import { AGENT_STATUS } from './runtime/contracts';
 import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
 const agentRepo = 'https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan';
+const fallbackPalette = [
+  '#F3F2EB', '#C9CDC8', '#37404B', '#66707B', '#1B2028', '#11161C',
+  '#614439', '#E7B9A3', '#F06B65', '#679DEB', '#63D5D6', '#F1CE62',
+  '#EBA258', '#86513A', '#77CB93', '#BB94EB',
+];
 const icon = (name: string, cls = ''): string => {
   const paths: Record<string, string> = {
     arrow: '<path d="M5 12h14m-6-6 6 6-6 6"/>',
     external: '<path d="M7 17 17 7M7 7h10v10"/>',
     space: '<path d="M4 9v6h16V9"/>',
+    undo: '<path d="m9 5-5 5 5 5M4 10h9a6 6 0 0 1 6 6v3"/>',
     reset: '<path d="M4 7v5h5M5 12a7 7 0 1 1 1.7 4.6"/>',
     up: '<path d="m6 14 6-6 6 6"/>',
     down: '<path d="m6 10 6 6 6-6"/>',
@@ -33,13 +39,12 @@ const groupLabels: Record<GameCatalogEntry['group'], string> = {
 const defaultGame = getGameByCode('PIPE');
 if (!defaultGame) throw new Error('The PIPE catalogue entry is missing.');
 let selectedGame: GameCatalogEntry = getGameByCode(new URL(window.location.href).searchParams.get('game') ?? 'PIPE') ?? defaultGame;
-const playableCount = GAME_CATALOG.filter(game => game.availability === 'playable').length;
 const escapeHtml = (value: string): string => value.replace(/[&<>"']/g, character => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[character]!);
 const gameOptions = Object.entries(groupLabels).map(([group, label]) =>
-  `<optgroup label="${escapeHtml(label)}">${GAME_CATALOG.filter(game => game.group === group).map(game =>
-    `<option value="${game.code}"${game.code === selectedGame.code ? ' selected' : ''}>${game.code} — ${escapeHtml(game.name)}${game.availability === 'playable' ? ' · Play now' : ' · Port pending'}</option>`,
+  `<optgroup label="${escapeHtml(label)}">${GAME_CATALOG.filter(game => game.group === group).sort((a, b) => a.code.localeCompare(b.code, 'en')).map(game =>
+    `<option value="${game.code}"${game.code === selectedGame.code ? ' selected' : ''}>${game.code} — ${escapeHtml(game.name)}</option>`,
   ).join('')}</optgroup>`,
 ).join('');
 
@@ -48,7 +53,7 @@ if (!app) throw new Error('Application mount is missing.');
 app.innerHTML = `
   <a class="skip-link" href="#game-select">Skip to the games</a>
   <header class="site-header wrap">
-    <a class="brand" href="#" aria-label="SRA Playground home">
+    <a class="brand" href="/" aria-label="SRA Playground home">
       <svg class="brand-mark" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="8" fill="currentColor"/><path d="M9 11h12v7h-7v7h14" fill="none" stroke="#d2f36c" stroke-width="4"/><circle cx="9" cy="11" r="2.5" fill="#d2f36c"/><circle cx="28" cy="25" r="2.5" fill="#d2f36c"/></svg>
       <span>SRA<span class="brand-divider">/</span><span class="brand-light">Playground</span></span>
     </a>
@@ -73,62 +78,47 @@ app.innerHTML = `
     </section>
 
     <section class="playground-section wrap" id="playground" aria-labelledby="game-title">
-      <div class="section-line"><span class="eyebrow">THE PLAYGROUND</span><span class="catalog-count">${GAME_CATALOG.length} games in the catalogue <span>/</span> ${playableCount} playable in your browser</span></div>
+      <div class="section-line"><span class="eyebrow">THE PLAYGROUND</span><span class="catalog-count">${GAME_CATALOG.length} games</span></div>
       <article class="player">
         <header class="player-header">
           <div class="game-identity">
-            <span class="game-code-badge" id="game-code">PIPE</span>
-            <div><h2 id="game-title">Pipes</h2><p id="game-meta">Custom · Wave 3 · 6 levels</p></div>
+            <span class="game-code-badge" id="game-code">${selectedGame.code}</span>
+            <div><h2 id="game-title">${escapeHtml(selectedGame.name)}</h2><p id="game-meta">${groupLabels[selectedGame.group]}</p></div>
           </div>
           <div class="game-picker">
-            <div class="picker-label"><label for="game-select">CHOOSE A GAME</label><span id="game-availability" class="availability-tag">Playable</span></div>
-            <select id="game-select" aria-describedby="catalogue-help">${gameOptions}</select>
-            <span id="catalogue-help" class="sr-only">100 games grouped by collection. PIPE is playable; other games are listed with their browser port status.</span>
+            <div class="picker-label"><label for="game-select">CHOOSE A GAME</label><span id="game-availability" class="availability-tag">Loading</span></div>
+            <select id="game-select">${gameOptions}</select>
           </div>
         </header>
         <p id="selection-feedback" class="sr-only" role="status" aria-live="polite"></p>
 
-        <section id="port-pending" class="port-pending" aria-labelledby="pending-title" hidden>
-          <div class="pending-world" aria-hidden="true"><span class="pending-orbit"></span><span id="pending-code">LS20</span><i></i><i></i><i></i></div>
-          <div class="pending-content">
-            <p class="eyebrow"><span class="status-dot"></span> IN THE CATALOGUE</p>
-            <h3 id="pending-title">Browser port pending</h3>
-            <p id="pending-description"></p>
-            <dl class="pending-details"><div><dt>Collection</dt><dd id="pending-group"></dd></div><div><dt>Levels</dt><dd id="pending-levels"></dd></div></dl>
-            <p class="pending-note">This game is part of the reference suite. Its browser version is not available yet.</p>
-            <div class="pending-actions"><button id="play-pipes" class="primary-button" type="button">Play PIPE ${icon('arrow')}</button><a id="pending-source" class="text-link" target="_blank" rel="noopener noreferrer">Reference source ${icon('external')}</a></div>
-            <a class="pending-architecture text-link" href="/architecture.html">How the project works ${icon('arrow')}</a>
-          </div>
-        </section>
-
-        <div id="playable-game">
         <div class="mode-bar">
           <div class="mode-tabs" role="tablist" aria-label="Play mode">
             <button type="button" id="manual-tab" role="tab" aria-selected="true" aria-controls="manual-panel" tabindex="0">${icon('play')}Manual</button>
             <button type="button" id="agent-tab" role="tab" aria-selected="false" aria-controls="agent-panel" tabindex="-1">${icon('agent')}SRA Agent<span class="soon-label">Coming next</span></button>
           </div>
-          <span class="local-label"><span class="status-dot"></span> Runs in your browser</span>
+          <span class="local-label"><span class="status-dot"></span> In your browser</span>
         </div>
 
-        <div class="play-area">
+        <div class="play-area minimal-play-area">
           <div class="board-column">
-            <div class="board-meta"><span id="session-kind">CAMPAIGN</span><button id="fullscreen-button" class="icon-button" type="button" aria-label="Expand game board" title="Expand game board">${icon('expand')}</button></div>
+            <button id="fullscreen-button" class="icon-button" type="button" aria-label="Expand game board" title="Expand game board">${icon('expand')}</button>
             <div class="canvas-stage" id="canvas-stage">
-              <canvas id="game-canvas" width="64" height="64" tabindex="0" role="application" aria-label="Pipes game board. Use the arrow keys, Space, or click a cell to interact." aria-describedby="keyboard-help">Your browser must support canvas to play Pipes.</canvas>
-              <div class="game-overlay" id="win-overlay" hidden><div class="win-check">${icon('check')}</div><p class="eyebrow" id="win-eyebrow">LEVEL COMPLETE</p><h3 id="win-title">Everything connects.</h3><p id="win-copy">A single network. No leaks. No loops.</p><button class="primary-button" type="button" id="win-continue">Play again ${icon('arrow')}</button></div>
-              <div class="agent-board-label" id="agent-board-label" hidden>${icon('agent')} SRA integration in progress</div>
+              <canvas id="game-canvas" width="64" height="64" tabindex="0" role="application" aria-label="Game board. Use the arrow keys, Space, or click to interact." aria-describedby="keyboard-help">Your browser must support canvas to play.</canvas>
+              <div class="runtime-overlay" id="runtime-overlay" role="status" aria-live="polite">
+                <span class="runtime-spinner" id="runtime-spinner" aria-hidden="true"></span>
+                <p id="runtime-message">Loading game…</p>
+                <button class="secondary-button" type="button" id="retry-button" hidden>Retry</button>
+              </div>
+              <div class="game-overlay" id="win-overlay" hidden>
+                <div class="win-check">${icon('check')}</div><h3 id="win-title">Complete</h3>
+                <button class="primary-button" type="button" id="win-continue">Play again ${icon('arrow')}</button>
+              </div>
             </div>
-            <div class="board-caption"><span><span class="source-dot"></span> Blue is your source</span><span>64 × 64</span></div>
-            <p class="game-feedback" id="game-feedback" aria-live="polite">Choose an action. Observe what changes.</p>
           </div>
 
-          <aside class="control-column">
+          <aside class="control-column minimal-control-column">
             <div id="manual-panel" role="tabpanel" aria-labelledby="manual-tab">
-              <div class="level-heading"><span class="eyebrow" id="level-number">LEVEL 01 / 06</span><span id="practice-label" class="practice-label" hidden>Practice</span></div>
-              <h3 id="level-title">First connection</h3>
-              <p class="game-goal">Rotate the pipes to connect every cell to the blue source, with no leaks or loops.</p>
-              <div class="supply-status"><div><span>Connected to source</span><strong id="connected-count">1 <span>/ 9</span></strong></div><div class="supply-track" aria-hidden="true"><div id="supply-fill"></div></div></div>
-              <dl class="game-stats"><div><dt>Rotations</dt><dd id="moves-count">0</dd></div><div><dt>Leaks</dt><dd id="leaks-count">0</dd></div><div><dt>Loops</dt><dd id="cycles-count">0</dd></div></dl>
               <div class="compact-controller" aria-label="Game controls">
                 <div class="input-pad">
                   <div class="d-pad" aria-label="Directional actions">
@@ -138,28 +128,30 @@ app.innerHTML = `
                     <button type="button" data-action="4" class="direction-right" aria-label="Right" title="Arrow right">${icon('right')}</button>
                     <button type="button" data-action="2" class="direction-down" aria-label="Down" title="Arrow down">${icon('down')}</button>
                   </div>
-                  <button type="button" id="rotate-button" class="space-action" aria-label="Primary action (Space)" title="Space">${icon('space')}<span>Space</span></button>
+                  <button type="button" id="space-button" data-action="5" class="space-action" aria-label="Primary action (Space)" title="Space">${icon('space')}<span>Space</span></button>
                 </div>
                 <div class="utility-controls">
-                  <button type="button" id="restart-button" class="reset-control" aria-label="Restart level (R)" title="Restart level (R)">${icon('reset')}<kbd>R</kbd></button>
-                  <p id="keyboard-help">Arrow keys<br>Space · click</p>
+                  <button type="button" id="undo-button" class="utility-button" aria-label="Undo last action" title="Undo (Z or Ctrl+Z)">${icon('undo')}<span>Undo</span></button>
+                  <button type="button" id="reset-button" class="utility-button" aria-label="Reset level" title="Reset level (R)">${icon('reset')}<span>Reset</span></button>
                 </div>
               </div>
+              <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level.</p>
             </div>
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}" hidden>
-              <span class="eyebrow agent-status"><span class="status-dot"></span> NEXT CHAPTER</span>
               <div class="agent-illustration" aria-hidden="true"><span class="node node-a"></span><span class="node node-b"></span><span class="node node-c"></span><span class="node node-d"></span><span class="node-line line-a"></span><span class="node-line line-b"></span><span class="node-line line-c"></span></div>
-              <h3>Meet your future<br>puzzle partner.</h3>
-              <p class="game-goal">SRA is being brought to the browser. Its job: observe the world, discover how it works, and compose a path forward.</p>
-              <p class="agent-honesty">The agent is not connected in this release. Manual play is ready to explore.</p>
-              <button id="return-manual" type="button" class="primary-button">Play it yourself ${icon('arrow')}</button>
-              <a class="text-link" href="${agentRepo}" target="_blank" rel="noopener noreferrer">Explore the SRA project ${icon('external')}</a>
+              <h3>SRA is coming.</h3>
+              <p class="agent-honesty">The real agent is not connected yet.</p>
+              <button id="return-manual" type="button" class="primary-button">Play manually ${icon('arrow')}</button>
+              <a class="text-link" href="${agentRepo}" target="_blank" rel="noopener noreferrer">SRA source ${icon('external')}</a>
             </div>
           </aside>
         </div>
 
-        <footer class="level-explorer"><div><span class="eyebrow">LEVELS</span><span class="practice-note">Practice</span></div><div class="level-buttons" aria-label="Practice a level">${Array.from({ length: 6 }, (_, i) => `<button type="button" data-level="${i + 1}" aria-label="Practice level ${i + 1}"><span>${String(i + 1).padStart(2, '0')}</span><span class="level-complete-mark" aria-hidden="true">${icon('check')}</span></button>`).join('')}</div><button type="button" id="campaign-button" class="campaign-button">New campaign ${icon('arrow')}</button></footer>
-        </div>
+        <footer class="level-explorer minimal-level-explorer" id="level-explorer" hidden>
+          <span class="eyebrow">LEVEL</span>
+          <div class="level-buttons" id="level-buttons" aria-label="Choose a level"></div>
+        </footer>
+        <p id="game-feedback" class="sr-only" aria-live="polite"></p>
       </article>
     </section>
 
@@ -168,7 +160,7 @@ app.innerHTML = `
       <div class="about-content"><p>SRA stands for <strong>Symbolic Reasoning Agent</strong>. The project studies how an agent can discover mechanisms, connect what it learns, and return to a goal with a new way forward.</p><p>The architecture page follows that process: observations, reusable knowledge, compositions, and the behavior-tree-loop that links discovery to continued action.</p><div class="reasoning-flow" aria-label="The intended reasoning loop: observe, discover, compose, act"><span><b>01</b>Observe</span><span><b>02</b>Discover</span><span><b>03</b>Compose</span><span><b>04</b>Act</span></div></div>
     </section>
   </main>
-  <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Yannick Fontan · 2026</span><div><span class="release-label">First playable release</span><a href="${websiteRepo}/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT license ${icon('external')}</a></div></footer>
+  <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Yannick Fontan · 2026</span><div><a href="${websiteRepo}/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses & notices ${icon('external')}</a></div></footer>
 `;
 
 function element<T extends HTMLElement>(selector: string): T {
@@ -181,90 +173,148 @@ const canvas = element<HTMLCanvasElement>('#game-canvas');
 const context = canvas.getContext('2d', { alpha: false });
 if (!context) throw new Error('This browser does not support the 2D canvas.');
 context.imageSmoothingEnabled = false;
-const imageData = context.createImageData(64, 64);
-const colors = PALETTE.map((hex) => [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)]);
-const engine = new PipesEngine();
-let observation: PipesObservation = engine.observe();
+const runtime = new BrowserGameRuntime();
+let observation: GameObservation | null = null;
 let mode: 'manual' | 'agent' = 'manual';
 let busy = false;
-let animationGeneration = 0;
-const isPlayable = (): boolean => selectedGame.code === 'PIPE' && selectedGame.availability === 'playable';
+let loading = false;
+let failed = false;
+let selectionGeneration = 0;
+let presentationGeneration = 0;
+let renderedLevelCount = 0;
+let renderedPalette = '';
+let colors: number[][] = [];
 
-function paint(frame: readonly (readonly number[])[]): void {
-  if (!context) return;
-  for (let y = 0; y < 64; y += 1) {
-    for (let x = 0; x < 64; x += 1) {
-      const color = colors[frame[y]?.[x] ?? 4] ?? colors[4]!;
-      const offset = (y * 64 + x) * 4;
-      imageData.data[offset] = color[0]!;
-      imageData.data[offset + 1] = color[1]!;
-      imageData.data[offset + 2] = color[2]!;
-      imageData.data[offset + 3] = 255;
+function paint(frame: readonly (readonly number[])[], palette: readonly string[] = observation?.palette ?? fallbackPalette): void {
+  if (!context || !frame.length || !frame[0]?.length) return;
+  const width = frame[0].length;
+  const height = frame.length;
+  if (canvas.width !== width || canvas.height !== height) {
+    canvas.width = width;
+    canvas.height = height;
+    context.imageSmoothingEnabled = false;
+  }
+  const paletteKey = palette.join(',');
+  if (renderedPalette !== paletteKey) {
+    renderedPalette = paletteKey;
+    colors = palette.map(hex => [parseInt(hex.slice(1, 3), 16), parseInt(hex.slice(3, 5), 16), parseInt(hex.slice(5, 7), 16)]);
+  }
+  const image = context.createImageData(width, height);
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      const color = colors[frame[y]?.[x] ?? 4] ?? colors[4] ?? [27, 32, 40];
+      const offset = (y * width + x) * 4;
+      image.data[offset] = color[0]!;
+      image.data[offset + 1] = color[1]!;
+      image.data[offset + 2] = color[2]!;
+      image.data[offset + 3] = 255;
     }
   }
-  context.putImageData(imageData, 0, 0);
+  context.putImageData(image, 0, 0);
+}
+
+function ready(): boolean {
+  return Boolean(observation && observation.gameCode === selectedGame.code && !busy && !loading && !failed);
 }
 
 function updateInterface(): void {
-  const playable = isPlayable();
-  element('#level-number').textContent = `LEVEL ${String(observation.level).padStart(2, '0')} / 06`;
-  element('#level-title').textContent = observation.level_name;
-  element('#moves-count').textContent = String(observation.moves);
-  element('#leaks-count').textContent = String(observation.leak_count);
-  element('#cycles-count').textContent = String(observation.cycle_count);
-  element('#connected-count').innerHTML = `${observation.connected} <span>/ ${observation.total}</span>`;
-  element('#supply-fill').style.width = `${(observation.connected / observation.total) * 100}%`;
-  element('#session-kind').textContent = observation.test_mode ? 'PRACTICE' : 'CAMPAIGN';
-  element('#practice-label').hidden = !observation.test_mode;
-  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-level]')) {
-    const level = Number(button.dataset.level);
-    button.classList.toggle('current-level', level === observation.level);
-    button.classList.toggle('completed-level', Boolean(observation.completed[level - 1]));
-    button.setAttribute('aria-pressed', String(level === observation.level));
-    button.disabled = !playable || mode !== 'manual' || busy;
+  const enabled = ready() && mode === 'manual';
+  const won = observation?.state === 'WIN';
+  const lost = observation?.state === 'GAME_OVER' || observation?.state === 'GAMEOVER';
+  const available = new Set(observation?.availableActionIds ?? []);
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-action]')) {
+    button.disabled = !enabled || Boolean(won || lost) || !available.has(Number(button.dataset.action));
   }
-  const won = observation.state === 'WIN';
-  element('#win-overlay').hidden = !playable || !won || busy || mode !== 'manual';
-  element('#win-eyebrow').textContent = observation.test_mode ? 'LEVEL COMPLETE' : 'CAMPAIGN COMPLETE';
-  element('#win-title').textContent = observation.test_mode ? 'Everything connects.' : 'Six worlds. All connected.';
-  element('#win-copy').textContent = observation.test_mode ? 'A single network. No leaks. No loops.' : 'You brought every pipe into the flow.';
-  element('#win-continue').innerHTML = `${observation.test_mode && observation.level < 6 ? 'Try the next level' : 'Play again'} ${icon('arrow')}`;
-  element<HTMLButtonElement>('#rotate-button').disabled = !playable || won || busy || mode !== 'manual';
-  element<HTMLButtonElement>('#restart-button').disabled = !playable || busy || mode !== 'manual';
-  element<HTMLButtonElement>('#campaign-button').disabled = !playable || busy || mode !== 'manual';
-  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-action]')) button.disabled = !playable || won || busy || mode !== 'manual';
-  canvas.setAttribute('aria-busy', String(busy));
-  canvas.tabIndex = playable && mode === 'manual' ? 0 : -1;
+  element<HTMLButtonElement>('#undo-button').disabled = !enabled || !observation?.canUndo;
+  element<HTMLButtonElement>('#reset-button').disabled = !enabled;
+  const levelCount = observation?.canSelectLevel ? observation.levelCount : 0;
+  if (levelCount !== renderedLevelCount) {
+    renderedLevelCount = levelCount;
+    element('#level-buttons').innerHTML = Array.from({ length: levelCount }, (_, index) =>
+      `<button type="button" data-level="${index + 1}" aria-label="Choose level ${index + 1}">${String(index + 1).padStart(2, '0')}</button>`,
+    ).join('');
+  }
+  element('#level-explorer').hidden = !observation?.canSelectLevel || levelCount < 2 || loading || failed;
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-level]')) {
+    const current = Number(button.dataset.level) === observation?.level;
+    button.classList.toggle('current-level', current);
+    button.setAttribute('aria-pressed', String(current));
+    button.disabled = !enabled;
+  }
+  element('#win-overlay').hidden = !enabled || !won;
+  element('#win-title').textContent = 'Complete';
+  element<HTMLButtonElement>('#win-continue').disabled = !enabled;
+  element('#runtime-overlay').hidden = !loading && !failed;
+  element('#runtime-spinner').hidden = !loading;
+  element<HTMLButtonElement>('#retry-button').hidden = !failed;
+  element('#game-availability').textContent = loading ? 'Loading' : failed ? 'Unavailable' : 'Ready';
+  element('#game-availability').classList.toggle('is-pending', loading || failed);
+  canvas.setAttribute('aria-busy', String(busy || loading));
+  canvas.tabIndex = enabled ? 0 : -1;
 }
 
-async function present(next: PipesObservation, initialMessage?: string): Promise<void> {
-  if (!isPlayable()) return;
-  const generation = ++animationGeneration;
+async function present(next: GameObservation, selectedGeneration: number): Promise<void> {
+  if (selectedGeneration !== selectionGeneration || next.gameCode !== selectedGame.code) return;
+  const generation = ++presentationGeneration;
   observation = next;
-  busy = next.frames.length > 1;
+  loading = false;
+  failed = false;
   updateInterface();
-  if (initialMessage) element('#game-feedback').textContent = initialMessage;
   const frames = next.frames.length ? next.frames : [next.frame];
+  const frameDuration = 1000 / Math.max(1, Math.min(60, next.defaultFps || 10));
   for (let i = 0; i < frames.length; i += 1) {
-    if (generation !== animationGeneration || !isPlayable()) return;
-    paint(frames[i]!);
-    if (frames.length > 1 && i < frames.length - 1) await new Promise<void>((resolve) => window.setTimeout(resolve, 1000 / next.default_fps));
+    if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
+    paint(frames[i]!, next.palette ?? fallbackPalette);
+    const requestedDuration = next.frameDurationsMs?.[i];
+    const duration = requestedDuration !== undefined && Number.isFinite(requestedDuration) && requestedDuration >= 0
+      ? requestedDuration : frameDuration;
+    if (i < frames.length - 1) await new Promise<void>(resolve => window.setTimeout(resolve, duration));
   }
-  if (generation !== animationGeneration || !isPlayable()) return;
+  if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
+  paint(next.frame, next.palette ?? fallbackPalette);
   busy = false;
   updateInterface();
-  if (next.event === 'success') {
-    element('#game-feedback').textContent = `Level ${next.played_level} complete. A new network awaits.`;
-  } else if (next.event === 'win') {
-    element('#game-feedback').textContent = next.test_mode ? 'Level complete. Every pipe is connected.' : 'Campaign complete. All six levels solved.';
-  } else if (!initialMessage && next.event !== 'ignored') {
-    element('#game-feedback').textContent = next.selected_cell ? 'Selection updated. Choose your next action.' : 'Choose an action. Observe what changes.';
+  if (next.state === 'WIN') element('#game-feedback').textContent = 'Complete.';
+  else if (next.state === 'GAME_OVER' || next.state === 'GAMEOVER') element('#game-feedback').textContent = 'Game over. Undo or reset to continue.';
+}
+
+function showFailure(error: unknown, generation: number): void {
+  if (generation !== selectionGeneration) return;
+  busy = false;
+  loading = false;
+  failed = true;
+  console.error(`Game operation failed for ${selectedGame.code}.`, error);
+  element('#runtime-message').textContent = `Could not load ${selectedGame.code}. Please retry.`;
+  element('#game-feedback').textContent = 'The game could not continue. Retry to reload it.';
+  updateInterface();
+}
+
+async function run(operation: () => Promise<GameObservation>, announcement = ''): Promise<void> {
+  if (!ready() || mode !== 'manual') return;
+  const generation = selectionGeneration;
+  busy = true;
+  updateInterface();
+  try {
+    await present(await operation(), generation);
+    if (generation === selectionGeneration && announcement) element('#game-feedback').textContent = announcement;
+  } catch (error) {
+    showFailure(error, generation);
   }
 }
 
 function perform(action: number, data?: { x: number; y: number }): void {
-  if (!isPlayable() || mode !== 'manual' || busy) return;
-  void present(engine.action(action, data));
+  if (!observation?.availableActionIds.includes(action) || ['WIN', 'GAME_OVER', 'GAMEOVER'].includes(observation.state)) return;
+  void run(() => runtime.action(action, data));
+}
+function undo(): void {
+  if (!observation?.canUndo) return;
+  void run(() => runtime.undo(), 'Last action undone.');
+}
+function reset(): void {
+  void run(() => runtime.reset(), 'Level reset.');
+}
+function focusCanvas(): void {
+  canvas.focus({ preventScroll: true });
 }
 
 function setMode(next: 'manual' | 'agent', focusTab = false): void {
@@ -278,110 +328,102 @@ function setMode(next: 'manual' | 'agent', focusTab = false): void {
   agentTab.tabIndex = manual ? -1 : 0;
   element('#manual-panel').hidden = !manual;
   element('#agent-panel').hidden = manual;
-  element('#agent-board-label').hidden = manual;
   element('#canvas-stage').classList.toggle('agent-preview', !manual);
   updateInterface();
   if (focusTab) (manual ? manualTab : agentTab).focus();
 }
 
-function selectGame(code: string, historyMode: 'push' | 'replace' | 'none' = 'push'): void {
+async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none' = 'push'): Promise<void> {
   const game = getGameByCode(code) ?? defaultGame!;
-  const changed = selectedGame.code !== game.code;
-  if (changed) {
-    // The engine already holds the final state of an animation. Stop presenting
-    // its old frames before switching the catalogue view, then restore that state.
-    animationGeneration += 1;
-    busy = false;
-  }
+  const generation = ++selectionGeneration;
+  presentationGeneration += 1;
   selectedGame = game;
-  const playable = isPlayable();
+  observation = null;
+  busy = true;
+  loading = true;
+  failed = false;
   element<HTMLSelectElement>('#game-select').value = game.code;
   element('#game-code').textContent = game.code;
   element('#game-title').textContent = game.name;
-  element('#game-meta').textContent = `${groupLabels[game.group]}${game.levels === null ? '' : ` · ${game.levels} levels`}`;
-  element('#game-availability').textContent = playable ? 'Playable' : 'Port pending';
-  element('#game-availability').classList.toggle('is-pending', !playable);
-  element('#playable-game').hidden = !playable;
-  element('#port-pending').hidden = playable;
-  element('#pending-code').textContent = game.code;
-  element('#pending-description').textContent = game.description;
-  element('#pending-group').textContent = groupLabels[game.group];
-  element('#pending-levels').textContent = game.levels === null ? 'Not specified in the catalogue' : String(game.levels);
-  element<HTMLAnchorElement>('#pending-source').href = game.sourceUrl;
-  element('#selection-feedback').textContent = `${game.code} selected. ${playable ? 'Available for manual play.' : 'Browser port pending.'}`;
+  element('#game-meta').textContent = groupLabels[game.group];
+  element('#runtime-message').textContent = 'Loading game…';
+  element('#selection-feedback').textContent = `${game.code} selected.`;
+  canvas.setAttribute('aria-label', `${game.code} game board. Use the arrow keys, Space, or click to interact.`);
   document.title = `${game.code} · SRA Playground`;
-  if (changed) setMode('manual');
-  else updateInterface();
-  if (playable) paint(observation.frame);
+  setMode('manual');
   if (historyMode !== 'none') {
     const url = new URL(window.location.href);
     url.searchParams.set('game', game.code);
     if (historyMode === 'replace') window.history.replaceState(null, '', url);
     else if (url.href !== window.location.href) window.history.pushState(null, '', url);
   }
+  try {
+    await present(await runtime.load(game.code), generation);
+  } catch (error) {
+    showFailure(error, generation);
+  }
 }
 
 element<HTMLSelectElement>('#game-select').addEventListener('change', event => {
-  selectGame((event.currentTarget as HTMLSelectElement).value);
+  void selectGame((event.currentTarget as HTMLSelectElement).value);
 });
 window.addEventListener('popstate', () => {
-  selectGame(new URL(window.location.href).searchParams.get('game') ?? 'PIPE', 'none');
+  void selectGame(new URL(window.location.href).searchParams.get('game') ?? 'PIPE', 'none');
 });
-element('#play-pipes').addEventListener('click', () => {
-  selectGame('PIPE');
-  setMode('manual');
-  canvas.focus({ preventScroll: true });
-});
-
+element('#retry-button').addEventListener('click', () => { void selectGame(selectedGame.code, 'none'); });
 element('#manual-tab').addEventListener('click', () => setMode('manual'));
 element('#agent-tab').addEventListener('click', () => setMode('agent'));
-element('#return-manual').addEventListener('click', () => { setMode('manual'); canvas.focus({ preventScroll: true }); });
+element('#return-manual').addEventListener('click', () => { setMode('manual'); focusCanvas(); });
 element('.mode-tabs').addEventListener('keydown', (event: KeyboardEvent) => {
   if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
   event.preventDefault();
   setMode(event.key === 'Home' ? 'manual' : event.key === 'End' ? 'agent' : mode === 'manual' ? 'agent' : 'manual', true);
 });
-
 canvas.addEventListener('click', (event: MouseEvent) => {
-  if (!isPlayable() || mode !== 'manual' || busy) return;
+  if (!ready() || mode !== 'manual') return;
   const rect = canvas.getBoundingClientRect();
-  const x = Math.floor(((event.clientX - rect.left) / rect.width) * 64);
-  const y = Math.floor(((event.clientY - rect.top) / rect.height) * 64);
+  const x = Math.max(0, Math.min(canvas.width - 1, Math.floor(((event.clientX - rect.left) / rect.width) * canvas.width)));
+  const y = Math.max(0, Math.min(canvas.height - 1, Math.floor(((event.clientY - rect.top) / rect.height) * canvas.height)));
   perform(6, { x, y });
-  canvas.focus({ preventScroll: true });
+  focusCanvas();
 });
 canvas.addEventListener('keydown', (event: KeyboardEvent) => {
-  if (event.ctrlKey || event.metaKey || event.altKey) return;
-  const actions: Record<string, number> = { ArrowUp: 1, ArrowDown: 2, ArrowLeft: 3, ArrowRight: 4, ' ': 5, r: 7, R: 7 };
+  if (event.altKey || event.shiftKey) return;
+  if (event.key.toLowerCase() === 'z') {
+    event.preventDefault();
+    undo();
+    return;
+  }
+  if (event.ctrlKey || event.metaKey) return;
+  if (event.key.toLowerCase() === 'r') {
+    event.preventDefault();
+    reset();
+    return;
+  }
+  const actions: Record<string, number> = { ArrowUp: 1, ArrowDown: 2, ArrowLeft: 3, ArrowRight: 4, ' ': 5 };
   const action = actions[event.key];
   if (action === undefined) return;
   event.preventDefault();
   perform(action);
 });
-element('#rotate-button').addEventListener('click', () => { perform(5); canvas.focus({ preventScroll: true }); });
-element('#restart-button').addEventListener('click', () => { if (!isPlayable() || mode !== 'manual' || busy) return; void present(engine.level_reset(), 'Fresh pipes. A new way through.'); canvas.focus({ preventScroll: true }); });
+element('#undo-button').addEventListener('click', () => { undo(); focusCanvas(); });
+element('#reset-button').addEventListener('click', () => { reset(); focusCanvas(); });
 for (const button of document.querySelectorAll<HTMLButtonElement>('[data-action]')) {
-  button.addEventListener('click', () => { perform(Number(button.dataset.action)); canvas.focus({ preventScroll: true }); });
+  button.addEventListener('click', () => { perform(Number(button.dataset.action)); focusCanvas(); });
 }
-for (const button of document.querySelectorAll<HTMLButtonElement>('[data-level]')) {
-  button.addEventListener('click', () => {
-    if (!isPlayable() || mode !== 'manual' || busy) return;
-    const level = Number(button.dataset.level);
-    void present(engine.jump_to_level(level), `Practice level ${level}. Campaign progress starts fresh when you choose New campaign.`);
-    canvas.focus({ preventScroll: true });
-  });
-}
-element('#campaign-button').addEventListener('click', () => { if (!isPlayable() || mode !== 'manual' || busy) return; void present(engine.reset(), 'A fresh campaign. Six networks to discover.'); canvas.focus({ preventScroll: true }); });
-element('#win-continue').addEventListener('click', () => {
-  if (!isPlayable() || mode !== 'manual' || busy) return;
-  void present(observation.test_mode && observation.level < 6 ? engine.jump_to_level(observation.level + 1) : engine.reset());
-  canvas.focus({ preventScroll: true });
+element('#level-buttons').addEventListener('click', (event: MouseEvent) => {
+  const button = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-level]');
+  if (!button || button.disabled || !observation?.canSelectLevel) return;
+  const level = Number(button.dataset.level);
+  void run(() => runtime.selectLevel(level));
+  focusCanvas();
 });
+element('#win-continue').addEventListener('click', reset);
 const fullscreenButton = element<HTMLButtonElement>('#fullscreen-button');
 fullscreenButton.hidden = !document.fullscreenEnabled;
 fullscreenButton.addEventListener('click', () => {
   const operation = document.fullscreenElement ? document.exitFullscreen() : element('#canvas-stage').requestFullscreen();
   void operation.catch(() => { element('#game-feedback').textContent = 'Full-screen mode is not available in this browser window.'; });
 });
-
-selectGame(selectedGame.code, 'replace');
+window.addEventListener('pagehide', event => { if (!event.persisted) runtime.dispose(); });
+void selectGame(selectedGame.code, 'replace');

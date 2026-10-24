@@ -42,7 +42,7 @@ app.innerHTML = `
 
     <div class="arch-status wrap">
       <span class="arch-status-label">READING THIS PAGE</span>
-      <p>The architecture below describes the <strong>Python V5 source</strong>. The Playground currently runs the <strong>PIPE game</strong> in your browser; connecting the real SRA agent is the next stage.</p>
+      <p>The architecture below describes the <strong>Python V5 source</strong>. The Playground executes <strong>100 game engines locally in your browser</strong>; connecting the real SRA agent is the next stage.</p>
       <a href="#browser">Implementation status ${arrow}</a>
     </div>
 
@@ -155,11 +155,11 @@ app.innerHTML = `
     </section>
 
     <section class="arch-section wrap" id="browser" aria-labelledby="browser-title">
-      <div class="arch-section-heading"><p class="eyebrow">05 / FROM PYTHON TO THE PLAYGROUND</p><h2 id="browser-title">The whole experience.<br>Inside the browser.</h2><p class="arch-section-lead">The target is local game execution and local SRA reasoning, with no server round trip required for a move or a reasoning step.</p></div>
+      <div class="arch-section-heading"><p class="eyebrow">05 / FROM PYTHON TO THE PLAYGROUND</p><h2 id="browser-title">The whole experience.<br>Inside the browser.</h2><p class="arch-section-lead">The games now execute locally. The next milestone is to bring SRA’s reasoning into the browser as well, keeping decisions and actions on your device.</p></div>
       <div class="arch-status-grid">
-        <article><span class="arch-phase arch-phase-live"><span class="status-dot"></span> PLAYABLE TODAY</span><h3>A real first game</h3><p>PIPE runs in TypeScript with six playable levels and manual controls. The catalog identifies 100 source games: 25 official games and 75 custom games. Catalog inclusion is separate from browser availability.</p><a class="text-link" href="/">Open the Playground ${arrow}</a></article>
-        <article><span class="arch-phase">NEXT IMPLEMENTATION STAGE</span><h3>Bring the real agent over</h3><p>Port the representations, declarations, reasoning workflows, and runtime semantics. A local Web Worker is the intended home for agent computation, keeping the interface responsive. The SRA mode is not connected yet.</p></article>
-        <article><span class="arch-phase">VALIDATION REQUIREMENT</span><h3>Preserve the reasoning</h3><p>Compare public observations, action traces, state transitions, and relevant reasoning records with Python. Keep hidden game-engine state outside the agent interface. Check interrupted plans, stale evidence, and parent-goal resumption as well as completed levels.</p></article>
+        <article><span class="arch-phase arch-phase-live"><span class="status-dot"></span> PLAYABLE TODAY</span><h3>100 original games</h3><p>The catalog brings together 25 official games and 75 custom games. Their original Python engines execute locally through Pyodide and WebAssembly, with manual controls, Undo, and Reset. The separate TypeScript PIPE implementation remains a parity reference.</p><a class="text-link" href="/">Open the Playground ${arrow}</a></article>
+        <article><span class="arch-phase">LOCAL EXECUTION</span><h3>Python, in the browser</h3><p>A TypeScript interface talks to a dedicated game worker. The Python runtime, dependencies, and game bundles are served by this site during loading. Once initialized, moves run on your device with no game server or external CDN request. This is a browser execution bridge; the 100 engines have not all been rewritten in TypeScript.</p></article>
+        <article><span class="arch-phase">NEXT IMPLEMENTATION STAGE</span><h3>Bring the real agent over</h3><p>SRA is not connected yet. Its representations, reasoning workflows, and action semantics still need browser integration and validation against the Python reference. Public observations must remain separate from hidden engine state, with interrupted plans and parent-goal resumption checked alongside completed levels.</p></article>
       </div>
       <div class="arch-limit-note"><h3>What remains an open research question?</h3><p>Typed contracts and traceable decisions make the system easier to inspect. Their presence does not establish reliable transfer, general understanding, or successful composition in every game. Those claims need behavioral evidence across unfamiliar situations, with regressions tracked. This page describes architectural mechanisms and intended behavior, not a new benchmark result.</p></div>
     </section>
@@ -170,5 +170,5 @@ app.innerHTML = `
     </section>
   </main>
 
-  <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Yannick Fontan · 2026</span><div><a href="/">Back to the games ${arrow}</a><a href="${websiteRepo}/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT license ${external}</a></div></footer>
+  <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Yannick Fontan · 2026</span><div><a href="/">Back to the games ${arrow}</a><a href="${websiteRepo}/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses &amp; notices ${external}</a></div></footer>
 `;

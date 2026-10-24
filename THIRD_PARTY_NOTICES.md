@@ -1,4 +1,42 @@
-# Source attribution
+# Third-party components
+
+The Playground interface and integration code are covered by this repository's
+MIT license. Bundled components retain their own licenses and notices.
+
+## Game sources
+
+- The 75 custom engines and their authored level data are copied from Yannick
+  Fontan's ARC-AGI-3 repository at commit
+  `212d8d426f07eea2b6797c2bb647545767488a96`. The bundle includes source provenance
+  and the upstream license. The engine source is not translated or replaced by
+  recordings; it executes locally through WebAssembly.
+- The 25 official games retain the complete MIT copyright and license headers
+  supplied by ARC Prize Foundation in 2026. Their exact version identifiers,
+  source URLs, and hashes are recorded in the official bundle manifest.
+- ARCEngine 0.9.3 is bundled from commit
+  `b495c6acaf253c9681cd7b75c4299d352e9ce6f8` of
+  [arcprize/ARCEngine](https://github.com/arcprize/ARCEngine). Its original MIT
+  license is included with the bundled package.
+
+## Browser Python runtime
+
+The site self-hosts the unmodified runtime distribution of
+[Pyodide 314.0.7](https://github.com/pyodide/pyodide/tree/314.0.7), including
+CPython 3.14.2. Pyodide is distributed under the Mozilla Public License 2.0;
+a copy is served at `public/licenses/pyodide-MPL-2.0.txt`. The matching source
+is available from that pinned upstream repository.
+
+The exact distribution files and integrity hashes are pinned in
+`scripts/python-runtime-assets.json`. The build copies/downloads them into the
+site's static assets; visitors load the runtime from the same site as the games.
+
+NumPy, Pydantic, pydantic-core, typing-extensions, annotated-types, and
+typing-inspection are supplied as unmodified wheels from that Pyodide
+distribution. Their copyright and license files remain inside the original
+wheel archives. CPython and the runtime's bundled libraries retain their own
+original notices.
+
+## Original PIPE reference attribution
 
 PIPE is ported from Yannick Fontan's custom game at
 `custom_games/engines/pipes.py` in the repository

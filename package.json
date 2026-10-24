@@ -5,8 +5,8 @@
   "type": "module",
   "description": "Browser-native games and the future TypeScript home of the Symbolic Reasoning Agent.",
   "scripts": {
-    "dev": "vite --host 0.0.0.0",
-    "build": "tsc --noEmit && vite build",
+    "dev": "node scripts/prepare-python.mjs && vite --host 0.0.0.0",
+    "build": "node scripts/prepare-python.mjs && tsc --noEmit && vite build",
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test tests/*.test.ts",
     "typecheck": "tsc --noEmit"
