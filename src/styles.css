@@ -431,6 +431,7 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 .site-header>.brand{align-self:flex-start}
 .brand{gap:13px;letter-spacing:0;color:var(--ink)}
 .brand-symbol{width:35px;height:35px;flex-shrink:0}
+.brand-green{fill:#4ecb71}
 .brand-blue{fill:var(--accent)}
 .brand-yellow{fill:var(--yellow)}
 .brand-type{display:flex;flex-direction:column;gap:4px}

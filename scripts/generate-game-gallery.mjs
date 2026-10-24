@@ -96,7 +96,7 @@ const page = `<!doctype html>
     <meta name="description" content="Browse 75 new custom games created or compiled by Yannick Fontan, followed by 25 official ARC-AGI-3 games. Preview a level and click to play it in your browser." />
     <title>75 New Games · SRA Playground</title>
     <link rel="canonical" href="https://sra-playground.yannick-fontan.chatgpt.site/gallery.html" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=green-blue-yellow" />
   </head>
   <body class="gallery-page">
     <a class="skip-link" href="#gallery">Skip to the games</a>

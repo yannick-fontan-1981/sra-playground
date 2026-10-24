@@ -55,7 +55,7 @@ function documentPage({ title, description, path, active, body, script = '/src/r
     <meta name="description" content="${escape(description)}" />
     <title>${escape(title)} · SRA Playground</title>
     <link rel="canonical" href="${siteOrigin}${path}" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=green-blue-yellow" />
   </head>
   <body class="reading-document">
     <a class="skip-link" href="#content">Skip to content</a>
