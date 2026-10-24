@@ -13,10 +13,15 @@ const legacySections: Record<string, string> = {
   system: '/architecture/implementation.html#the-python-v5-source',
   evidence: '/architecture/memory.html#evidence-of-transfer',
   browser: '/architecture/implementation.html#what-runs-in-the-playground',
+  'ethical-principles-and-inspectable-reasoning': '/architecture.html#design-rooted-in-human-intelligence',
 };
 if (window.location.pathname === '/architecture.html') {
-  const target = legacySections[window.location.hash.slice(1)];
-  if (target) window.location.replace(target);
+  const redirectLegacySection = () => {
+    const target = legacySections[window.location.hash.slice(1)];
+    if (target) window.location.replace(target);
+  };
+  redirectLegacySection();
+  window.addEventListener('hashchange', redirectLegacySection);
 }
 
 for (const container of document.querySelectorAll<HTMLDivElement>('.video-player')) {

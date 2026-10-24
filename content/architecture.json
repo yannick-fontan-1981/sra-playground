@@ -11,23 +11,12 @@
       "description": "How the Symbolic Reasoning Agent represents a game, investigates its mechanisms, and selects actions.",
       "sections": [
         {
-          "title": "Ethical principles and inspectable reasoning",
+          "title": "Design rooted in human intelligence",
           "label": "Project design premise",
           "paragraphs": [
-            "SRA starts from a design premise: artificial intelligence should be built around explicit ethical principles. Those principles should constrain which goals an agent may pursue, which means it may use, and when it should stop or ask for human judgment.",
-            "Symbolic reasoning offers a way to design the concepts, inference rules, and conditions that govern decisions while allowing the agent to discover new hypotheses and compositions. The aim is to make the reasons for an action accessible: which goal was pursued, which evidence was used, which constraints applied, and where uncertainty remained.",
-            "Readability must be tested. A decision trace should reflect the operations that actually selected the action, be understandable at the reader’s level, and expose the system’s limits. Human responsibility also requires identified people with the authority and practical means to challenge a decision, intervene, and correct the system.",
-            "This is an engineering objective for SRA. The current Python architecture provides inspectable terms, claims, provenance, goals, and action-release checks. Implementing and evaluating ethical principles, handling conflicts between them, and providing effective human oversight remain work to be done."
-          ],
-          "sources": [
-            {
-              "label": "NIST: Four Principles of Explainable AI",
-              "url": "https://doi.org/10.6028/NIST.IR.8312"
-            },
-            {
-              "label": "Meaningful human control",
-              "url": "https://doi.org/10.3389/frobt.2018.00015"
-            }
+            "SRA begins with a premise about the design of intelligence: ethical principles should inform the concepts, relationships, representations, and reasoning structures through which it is built. Symbolic reasoning makes it possible to specify these structures explicitly and to examine the meaning and purpose assigned to them.",
+            "The source of this design is human intelligence. SRA is intended to draw its concepts, distinctions, and purposes from human understanding, and to retain that connection in its symbolic structures. A symbol should be linked to a meaning we can explain; a relation should express a distinction we can justify; a reasoning operation should have a role we can identify. This connection gives the design a human basis on which its authors can assume responsibility.",
+            "Within this framework, observations can lead to new hypotheses and compositions. Their links to the original concepts, supporting evidence, and intended purposes should remain traceable. The project aims to preserve continuity between human understanding and the intelligence constructed from it. Realizing this aim requires evaluating the implementation and its readability."
           ]
         },
         {
