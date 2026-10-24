@@ -11,6 +11,26 @@
       "description": "How the Symbolic Reasoning Agent represents a game, investigates its mechanisms, and selects actions.",
       "sections": [
         {
+          "title": "Ethical principles and inspectable reasoning",
+          "label": "Project design premise",
+          "paragraphs": [
+            "SRA starts from a design premise: artificial intelligence should be built around explicit ethical principles. Those principles should constrain which goals an agent may pursue, which means it may use, and when it should stop or ask for human judgment.",
+            "Symbolic reasoning offers a way to design the concepts, inference rules, and conditions that govern decisions while allowing the agent to discover new hypotheses and compositions. The aim is to make the reasons for an action accessible: which goal was pursued, which evidence was used, which constraints applied, and where uncertainty remained.",
+            "Readability must be tested. A decision trace should reflect the operations that actually selected the action, be understandable at the reader’s level, and expose the system’s limits. Human responsibility also requires identified people with the authority and practical means to challenge a decision, intervene, and correct the system.",
+            "This is an engineering objective for SRA. The current Python architecture provides inspectable terms, claims, provenance, goals, and action-release checks. Implementing and evaluating ethical principles, handling conflicts between them, and providing effective human oversight remain work to be done."
+          ],
+          "sources": [
+            {
+              "label": "NIST: Four Principles of Explainable AI",
+              "url": "https://doi.org/10.6028/NIST.IR.8312"
+            },
+            {
+              "label": "Meaningful human control",
+              "url": "https://doi.org/10.3389/frobt.2018.00015"
+            }
+          ]
+        },
+        {
           "paragraphs": [
             "The phrase artificial cortex describes the intended organization of the system: perception, memory, hypotheses, goals, and action share a persistent model of the situation. An investigation should retain the goal that prompted it. A discovery should update that model and affect the next decision.",
             "The research interest is in reusable structure. A mechanism learned in one scene might become part of a different composition later. This requires a representation of its conditions and effects, a way to check whether it applies, and control logic that carries the result back to the current goal."

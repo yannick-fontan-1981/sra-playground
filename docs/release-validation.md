@@ -352,6 +352,29 @@ fixture was removed before source synchronization and publication.
 
 ![Smaller title and clearer navigation on desktop](annotations-desktop-20261024.jpg)
 
+## Ethical design premise
+
+The Playground now displays a compact Design Premise between its hero and the
+games. It states that ethical principles should shape reasoning from the start,
+and describes symbolic reasoning as SRA's approach to making decision structures
+explicit, inspectable, and open to correction. Its link opens the new Ethical
+principles and inspectable reasoning section in the Architecture introduction.
+
+The expanded section distinguishes this engineering objective from the current
+game agent's capabilities. It covers designed reasoning structures, discovery,
+faithful decision traces, uncertainty, intervention, and human responsibility.
+It identifies ethical-rule implementation, conflict handling, and oversight as
+remaining work, with references to NIST IR 8312 and the research on meaningful
+human control. It makes no guarantee of perfect readability or ethical behavior.
+
+TypeScript, the production build, and `git diff --check` pass. All 13 HTML pages
+build, and the homepage anchor matches the generated Architecture section.
+Browser QA confirmed a readable 114 px premise band at the desktop viewport and
+a 205.28 px band with 14 px text in a 390 px same-origin iframe viewport. Neither
+document has horizontal overflow. The link scrolls to the correct section;
+CASC reaches Ready in both layouts. The temporary viewport fixture was removed.
+The game engines, agent integration status, and game controls are unchanged.
+
 ## Reproduce
 
 With Node 22.18+ and Python 3.12+ with NumPy, Pydantic, and typing_extensions:
