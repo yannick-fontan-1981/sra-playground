@@ -94,7 +94,7 @@ const page = `<!doctype html>
     <meta name="theme-color" content="#0e0c0c" />
     <meta name="color-scheme" content="dark" />
     <meta name="description" content="Browse 75 new custom games created or compiled by Yannick Fontan, followed by 25 official ARC-AGI-3 games. Preview a level and click to play it in your browser." />
-    <title>Game gallery · SRA Playground</title>
+    <title>75 New Games · SRA Playground</title>
     <link rel="canonical" href="https://sra-playground.yannick-fontan.chatgpt.site/gallery.html" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
@@ -103,11 +103,11 @@ const page = `<!doctype html>
     ${renderSiteHeader('gallery')}
     <main class="gallery-main wrap" id="gallery">
       <header class="gallery-intro">
-        <div class="gallery-title-row"><div><p class="eyebrow">ARC AGI 3 / CUSTOM &amp; OFFICIAL</p><h1>Game gallery</h1></div><span class="gallery-total">100 games<span>/</span>${levelCount} levels</span></div>
+        <div class="gallery-title-row"><div><p class="eyebrow">ARC AGI 3 / CUSTOM &amp; OFFICIAL</p><h1>75 New Games</h1></div><span class="gallery-total">100 games<span>/</span>${levelCount} levels</span></div>
         <p class="gallery-credit"><strong>75 new custom games</strong><span>created or compiled by <span>Yannick Fontan.</span></span></p>
         <p class="gallery-guide">Choose a level, then click its preview to play. The 25 official games follow the custom collection.</p>
       </header>
-      <nav class="gallery-index" aria-label="Gallery sections">${groups.map(group => `<a href="#${group.anchor}"><span>${escape(group.shortTitle)}</span><span class="gallery-group-count">25</span></a>`).join('')}</nav>
+      <nav class="gallery-index" aria-label="Game collections">${groups.map(group => `<a href="#${group.anchor}"><span>${escape(group.shortTitle)}</span><span class="gallery-group-count">25</span></a>`).join('')}</nav>
       <p class="sr-only" data-gallery-feedback role="status" aria-live="polite"></p>
       ${groups.map(group => `
       <section class="gallery-section" id="${group.anchor}" aria-labelledby="${group.anchor}-title">

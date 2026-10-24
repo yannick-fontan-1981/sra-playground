@@ -70,9 +70,9 @@ app.innerHTML = `
         <p class="hero-agent">Symbolic Reasoning Agent</p>
         <p class="hero-statement">Toward <em>Understandable Intelligence.</em></p>
       </div>
-      <a class="intro-art" href="/gallery.html" aria-label="Browse the game gallery: 75 custom games and 25 official games">
+      <a class="intro-art" href="/gallery.html" aria-label="Explore 75 New Games, followed by 25 official games">
         <img src="/game-mosaic.png?v=custom-wave-3" alt="A patchwork of custom game boards" width="405" height="204" />
-        <span class="mosaic-label">EXPLORE THE GAME GALLERY ${icon('arrow')}</span>
+        <span class="mosaic-label">EXPLORE 75 NEW GAMES ${icon('arrow')}</span>
       </a>
     </section>
 
@@ -85,7 +85,7 @@ app.innerHTML = `
     </aside>
 
     <section class="playground-section wrap" id="playground" aria-labelledby="playground-title">
-      <div class="section-line"><div class="playground-heading-group"><h2 class="playground-heading" id="playground-title">ARC AGI <span>3</span></h2><a class="text-link" href="/arc-agi-3.html">What is ARC-AGI-3? ${icon('arrow')}</a></div><a class="catalog-count" href="/gallery.html" aria-label="Browse all 100 games in the gallery">${GAME_CATALOG.length} GAMES<span>/</span>25 OFFICIAL + 75 CUSTOM</a></div>
+      <div class="section-line"><div class="playground-heading-group"><h2 class="playground-heading" id="playground-title">ARC AGI <span>3</span></h2><a class="text-link" href="/arc-agi-3.html">What is ARC-AGI-3? ${icon('arrow')}</a></div><a class="catalog-count" href="/gallery.html" aria-label="75 New Games and 25 official games: browse all 100 games">${GAME_CATALOG.length} GAMES<span>/</span>25 OFFICIAL + 75 CUSTOM</a></div>
       <p class="custom-game-credit"><strong>75 new custom games</strong><span class="custom-game-author">created or compiled by <span>Yannick Fontan.</span></span></p>
       <article class="player">
         <header class="player-header">

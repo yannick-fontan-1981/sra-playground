@@ -1,0 +1,181 @@
+{
+  "title": "Symbolic Reasoning",
+  "description": "Reasoning with explicit objects, relationships, rules, and goals. What it means, how it works, and why SRA is built around it.",
+  "reviewedDate": "2026-10-24",
+  "definition": "Symbolic reasoning is the process of using explicit representations of things and their relationships, together with defined operations, to derive conclusions or construct plans.",
+  "intro": [
+    "A symbol can refer to an object, a property, an action, a relationship, or a goal. A reasoning system gives these symbols a structure and specifies how they can be combined. It can then ask which conclusions follow, which conditions are missing, or which actions could achieve a desired result.",
+    "The representations need not be sentences in English. They can be logical expressions, graphs, constraints, or structured records. Symbolic AI is the broader family of approaches that uses such representations for tasks including reasoning, search, planning, and learning."
+  ],
+  "sections": [
+    {
+      "title": "What makes it symbolic?",
+      "navTitle": "The definition",
+      "paragraphs": [
+        "Consider a key and a locked door. A system can represent each as an identifiable object and state a relation between them: this key matches this door. The relation has defined arguments and a meaning in the model. A rule can refer to any key and door that satisfy the same conditions.",
+        "This separation matters: the vocabulary describes the situation, while the reasoning procedure works with that description. Changing the objects can leave the useful relationship intact. A graph can store these relationships, but an agent also needs procedures for drawing conclusions, selecting actions, and checking their effects."
+      ],
+      "table": {
+        "headers": ["Part", "Its role", "Example"],
+        "rows": [
+          ["Symbol", "Identifies something the system can refer to.", "key_1, door_1, agent"],
+          ["Fact", "States a property or relationship accepted in the current model.", "Matches(key_1, door_1)"],
+          ["Rule", "Specifies when a conclusion or an action is justified.", "A held, matching key can unlock the door when the agent is there."],
+          ["Goal", "Describes a condition the system is trying to establish.", "Reached(exit)"],
+          ["Inference or search", "Combines what is known to find a conclusion or a plan.", "Work out the steps that would make Reached(exit) true."]
+        ]
+      },
+      "sources": [
+        { "label": "McCarthy · Programs with Common Sense", "url": "https://jmc.stanford.edu/articles/mcc59.html" },
+        { "label": "Fikes & Nilsson · STRIPS", "url": "https://ai.stanford.edu/~nilsson/OnlinePubs-Nils/PublishedPapers/strips.pdf" }
+      ]
+    },
+    {
+      "title": "An example: from a key to an exit",
+      "navTitle": "Try an example",
+      "paragraphs": [
+        "The agent is standing at a locked door. The exit is beyond it. We supply four action rules: take a reachable key, unlock the door with a held matching key, open an unlocked door, and pass through an open door. The task is to find a sequence whose predicted effects reach the goal.",
+        "Change the starting knowledge below. The same rules produce a shorter plan when the key is already held. If compatibility is unknown, the system cannot justify unlocking. Unknown does not mean that the key has been proved incompatible."
+      ],
+      "example": true,
+      "after": [
+        "The example searches forward: it tries actions whose preconditions hold and follows their effects until it reaches the goal. A planner can also reason backward from a goal, asking which action could establish it and what that action would require.",
+        "These are predictions inside a model. In an actual game, the agent must execute an action and inspect the result. If the door stays locked, the model or the action interpretation needs investigation. In ARC-AGI-3, the rules themselves must first be discovered and tested."
+      ],
+      "sources": [
+        { "label": "Action models and planning · STRIPS", "url": "https://ai.stanford.edu/~nilsson/OnlinePubs-Nils/PublishedPapers/strips.pdf" }
+      ]
+    },
+    {
+      "title": "Meaning, evidence, and learning",
+      "navTitle": "Meaning & learning",
+      "paragraphs": [
+        "Calling an object door does not establish that it is a door. For a game agent, the representation must connect to observations, possible interactions, and effects that can be checked. Its human-readable name is useful because it tells us what the designer intends it to represent. Its adequacy depends on those connections.",
+        "The symbol grounding problem asks how symbols acquire meaning beyond references to other symbols. For SRA, a practical design task is to keep concepts connected both to human understanding and to evidence from the environment. That is an engineering commitment; it does not settle the philosophical question of machine understanding."
+      ],
+      "table": {
+        "headers": ["Reasoning task", "Question", "In the example"],
+        "rows": [
+          ["Deduction", "What follows from the accepted premises and rules?", "Given a held matching key and the agent at the door, unlocking is applicable."],
+          ["Abduction", "What hypothesis could explain an observation?", "The door stayed locked; perhaps this key does not match it."],
+          ["Induction", "What general rule could explain several examples?", "Repeated trials suggest that keys open doors of a particular type."],
+          ["Planning", "Which sequence of actions could achieve the goal?", "Take the key, unlock the door, open it, and pass through."]
+        ]
+      },
+      "after": [
+        "A hypothesis remains a hypothesis until it has enough support for the intended use. An agent should be able to retain its source, conditions, and exceptions instead of treating every proposed relation as an established fact.",
+        "Symbolic systems can also learn rules. Inductive logic programming, for example, searches for logic programs that explain examples using background knowledge. The designer supplies a representation language and constraints; the system can discover new combinations within that space."
+      ],
+      "sources": [
+        { "label": "Harnad · The Symbol Grounding Problem", "url": "https://arxiv.org/abs/cs/9906002" },
+        { "label": "Cropper & Hocquette · Learning Logic Programs", "url": "https://ojs.aaai.org/index.php/AAAI/article/view/25774/25546" }
+      ]
+    },
+    {
+      "title": "A short history",
+      "navTitle": "A short history",
+      "paragraphs": [
+        "Symbolic reasoning draws on formal logic and has been part of AI since the field’s early years. These milestones show several directions it has taken: proving, planning, representing expertise, sharing knowledge, and working with learned models."
+      ],
+      "timeline": [
+        {
+          "date": "1956",
+          "title": "Searching for proofs",
+          "text": "Allen Newell and Herbert Simon described the Logic Theory Machine, which combined expressions in symbolic logic with heuristic methods for finding proofs. Search could construct a result from smaller reasoning steps.",
+          "source": { "label": "The original RAND report", "url": "https://www.rand.org/pubs/papers/P868.html" }
+        },
+        {
+          "date": "1958–1959",
+          "title": "Expressing knowledge explicitly",
+          "text": "John McCarthy proposed the Advice Taker in Programs with Common Sense: a system that would receive statements in a formal language and derive consequences. This was a proposal for how knowledge and reasoning could be organized.",
+          "source": { "label": "McCarthy’s paper", "url": "https://jmc.stanford.edu/articles/mcc59.html" }
+        },
+        {
+          "date": "1971",
+          "title": "Planning through actions",
+          "text": "Richard Fikes and Nils Nilsson introduced STRIPS. An initial world model, a goal, and action operators made it possible to search for a sequence of state changes. The key-and-door example above uses this general idea.",
+          "source": { "label": "The STRIPS paper", "url": "https://ai.stanford.edu/~nilsson/OnlinePubs-Nils/PublishedPapers/strips.pdf" }
+        },
+        {
+          "date": "1970s–1980s",
+          "title": "Knowledge-based expert systems",
+          "text": "Projects such as MYCIN represented specialist knowledge with rules and separated that knowledge from the inference procedures using it. Their researchers also studied explanations, uncertainty, and the work required to acquire and maintain knowledge.",
+          "source": { "label": "Buchanan & Shortliffe · MYCIN", "url": "https://www.shortliffe.net/Buchanan-Shortliffe-1984/Chapter-01.pdf" }
+        },
+        {
+          "date": "2000s",
+          "title": "Shared, formal vocabularies",
+          "text": "Web ontology languages brought explicit classes, properties, and relations into shared knowledge models. W3C published OWL in 2004 and OWL 2 in 2009, with formal semantics for reasoning about what an ontology implies.",
+          "source": { "label": "W3C · OWL 2 overview", "url": "https://www.w3.org/TR/owl2-overview/" }
+        },
+        {
+          "date": "2024",
+          "title": "Neural proposals, symbolic proofs",
+          "text": "AlphaGeometry combined a neural language model with a symbolic deduction engine to solve geometry problems. It is a concrete example of the two approaches taking different roles within one reasoning system.",
+          "source": { "label": "Trinh et al. · AlphaGeometry", "url": "https://research.google/pubs/solving-olympiad-geometry-without-human-demonstrations/" }
+        }
+      ]
+    },
+    {
+      "title": "How it differs from neural networks",
+      "navTitle": "Neural networks",
+      "paragraphs": [
+        "A neural network represents a learned function through numerical parameters and activations. Training adjusts its parameters to improve an objective on data or experience. In deep learning, useful internal representations can emerge through this training rather than being specified as named objects and relations.",
+        "Backpropagation computes derivatives: how a training objective changes with the network’s parameters. An optimizer uses those derivatives to update the parameters. This is a learning mechanism. Symbolic inference, by comparison, uses the representations and operations currently available to derive a result. A deployed neural network can produce an answer without updating its weights.",
+        "The comparison below describes common designs. Symbolic systems can use probabilities and learn from examples. Neural systems can perform reasoning tasks, and a complete system may combine networks, search, tools, and formal verification. Statistical describes the learning approach; it does not mean every calculation is random."
+      ],
+      "table": {
+        "headers": ["Question", "Explicit symbolic reasoning", "Statistical neural networks"],
+        "rows": [
+          ["Representation", "Identifiable objects, relations, facts, rules, constraints, and goals.", "Numerical vectors, learned weights, and activations; representations are often distributed."],
+          ["Producing a result", "Apply inference rules, match structures, solve constraints, or search for a plan.", "Compute through a learned function; the surrounding system may add search or verification."],
+          ["Learning", "Discover or revise facts, rules, programs, and their conditions of use.", "Optimize parameters from data or interaction, commonly using backpropagation."],
+          ["Inspection", "Recorded premises, rules, and dependencies can explain how a result was derived.", "Weights and activations can be examined, but their relation to human concepts is usually less direct."],
+          ["Correction", "Target a fact or rule, then recheck conclusions and plans that depend on it.", "Change data, training, or parameters, then evaluate the effects on behavior."],
+          ["Typical difficulties", "Choosing useful concepts, grounding them, and controlling the size of the search.", "Learning useful representations and generalizing reliably beyond the training conditions."]
+        ]
+      },
+      "after": [
+        "For SRA, the attraction is the level at which we can work: objects, mechanisms, goals, and dependencies become explicit design elements. The binary-to-assembly analogy captures this preference for a more directly manipulable representation. It is an analogy about abstraction, not a literal hierarchy in which neural networks are binary code or symbolic AI is always superior."
+      ],
+      "sources": [
+        { "label": "Rumelhart, Hinton & Williams · Backpropagation", "url": "https://www.cs.toronto.edu/~hinton/absps/naturebp.pdf" },
+        { "label": "LeCun, Bengio & Hinton · Deep Learning", "url": "https://www.cs.toronto.edu/~hinton/absps/NatureDeepReview.pdf?file=NatureDeepReview.pdf" },
+        { "label": "Learning explicit rules · ILP", "url": "https://ojs.aaai.org/index.php/AAAI/article/view/25774/25546" }
+      ]
+    },
+    {
+      "title": "Strengths, limits, and combinations",
+      "navTitle": "Strengths & limits",
+      "paragraphs": [
+        "Explicit structure makes some engineering tasks easier to formulate. We can ask which premise supported a conclusion, which prerequisite blocks a plan, or where a rule should apply. A general rule can be reused with new objects when its conditions remain valid.",
+        "There are costs. Building the right representations is difficult. A mistaken observation can invalidate a sound deduction. A large search space can make planning impractical. And a local rule change can affect many dependent behaviors, so explicit structure does not remove the need for regression checks."
+      ],
+      "items": [
+        "Validity is conditional: a derivation can be valid relative to its premises while its prediction about the environment is wrong.",
+        "Readability is designed: names alone are insufficient. Useful traces need evidence, scope, conditions, and clear explanations of the operations used.",
+        "Uncertainty must be represented: an untested possibility, an observation, and a supported rule should not silently become interchangeable.",
+        "Composition requires control: storing a useful relation is only part of the task. The agent must use it at the right time, execute the resulting plan, and check for progress."
+      ],
+      "after": [
+        "Hybrid systems can assign different jobs to each approach. A neural model might interpret a complex observation or propose candidates; symbolic operations might enforce constraints or check a derivation. AlphaGeometry demonstrates one such division of work. Whether a hybrid is useful depends on the task and how its components are connected."
+      ],
+      "sources": [
+        { "label": "Koller · Structured Representations and Intractibility", "url": "https://ai.stanford.edu/~koller/Papers/Koller:96.html" },
+        { "label": "Uncertainty and knowledge engineering · MYCIN", "url": "https://www.shortliffe.net/Buchanan-Shortliffe-1984/Chapter-01.pdf" },
+        { "label": "A working hybrid · AlphaGeometry", "url": "https://research.google/pubs/solving-olympiad-geometry-without-human-demonstrations/" }
+      ]
+    },
+    {
+      "title": "Why this matters for SRA",
+      "navTitle": "The SRA project",
+      "label": "Project design premise",
+      "paragraphs": [
+        "SRA explores how an agent can turn discoveries into explicit relationships, connect them to a goal, and compose them into effective action. Its behavior-tree-loop is the intended link between discovering something, recognizing a new possibility, resuming the relevant goal, and checking that the action produced real progress.",
+        "The design begins with an ethical premise. Symbolic reasoning makes it possible to specify concepts, relations, and reasoning structures in terms we can explain and examine. SRA aims to draw its source, meaning, and purpose from human intelligence, preserving that connection as the system develops new hypotheses and compositions.",
+        "This is meant to enable us to take responsibility for the intelligence we build and thereby fulfill the ethical principle guiding its design. Achieving that aim requires more than symbolic notation: the implemented representations, decisions, and consequences must actually be understandable and assessable.",
+        "The Architecture pages describe the current Python system and its research direction. The Playground’s game engines already run in the browser; integration of the real SRA agent is still pending. The small example on this page is a teaching model."
+      ]
+    }
+  ]
+}
