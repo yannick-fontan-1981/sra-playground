@@ -60,6 +60,7 @@ local game-action boundary.
 | Component | Responsibility |
 | --- | --- |
 | `src/main.ts`, `src/styles.css` | Minimal manual interface, input, rendering, game selection, and history navigation |
+| `gallery.html`, `src/gallery.ts`, `src/gallery.css` | Static gallery with per-game level previews and exact game/level launch links |
 | `src/games/catalog.ts` | The 100 source games, four-character codes, groups, and provenance |
 | `src/runtime/browser-games.ts` | Typed game requests, response correlation, worker creation, timeout, and disposal |
 | `src/runtime/game-worker.ts` | Local Python initialization and serialized dispatch of game operations |
@@ -77,6 +78,8 @@ local game-action boundary.
 | `scripts/generate-content-pages.mjs` | Complete static architecture, video-index, and episode HTML pages |
 | `src/reading.ts`, `src/reading.css` | Reading layout, legacy section links, and click-to-load video embeds |
 | `public/videos/` | Original Yanik_AI episode thumbnails, with provenance in the catalogue |
+| `scripts/generate-game-gallery-assets.py`, `content/game-gallery-assets.json`, `public/gallery/` | Reproducible native level frames, per-frame hashes, and four lossless image atlases |
+| `scripts/generate-game-gallery.mjs` | Catalogue-validated static gallery generation without game runtime loading |
 
 ## Loading and local execution
 
@@ -91,6 +94,13 @@ the current level, restart from level 1, or select a level. Each request has an 
 bridge resolves the matching response. Operations execute in order. The worker
 returns the public frame sequence, final frame, game state, available actions,
 progress metadata, and the flags needed to enable manual controls.
+
+A gallery link includes both `game` and `level`. They enter the worker in one
+atomic `load` request so a rapid second game selection cannot intervene between
+loading a game and choosing its level. An explicit level starts fresh; an
+ordinary game-selector request without a level resumes its cached session.
+The player's URL then follows the current observed level. The gallery itself
+loads only HTML, CSS, its small preview script, and native image atlases.
 
 Full restart and level selection prepare a fresh seeded session and validate
 its observation before replacing the cached active game. A successful change

@@ -497,3 +497,73 @@ Restart button remain visible and work at narrow widths. The old numbered
 footer is absent. The completion overlay's new branch was code-reviewed but
 was not reached through browser play in this bounded UI check. The temporary
 responsive test fixture was removed before the production build.
+
+## Clickable game gallery
+
+Updated on 24 October 2026. Clicking the homepage patchwork now opens
+`/gallery.html`; Gallery is also present in the shared navigation, including
+mobile views. The page contains one card per game: the 75 custom games come
+first in three waves of 25, followed by the 25 official games. Each group is
+alphabetical by four-character code. A card's level selector changes its native
+preview and its `/?game=CODE&level=N#playground` launch link together.
+
+The previews are real initial frames from all 636 levels, with seed 0 and the
+same browser bridge used by the player. The game sources remain unchanged.
+`scripts/generate-game-gallery-assets.py` produces four lossless image atlases
+and a manifest recording source identity, ordering, native frame hashes, PNG
+hashes, level counts and tile coordinates. There are 100 rows in total, with
+one 64×64 tile per level. The four PNGs total 186,981 bytes. The gallery build
+checks these assets against the game catalogue before generating the page.
+
+All 636 source observations were checked for the requested game and level,
+playable state, and absent Undo history. Saved atlases decoded to identical
+RGB pixels. Eight additional fresh-runtime checks compared both native frame
+hashes and atlas pixel crops for CASC, KEYD, PIPE and LF52 at their first and
+last levels. The generated page contains 100 unique cards, 636 level options,
+four atlas URLs, and 100 valid default launch links. Its 75 custom cards precede
+every official card.
+
+### Exact game and level launch
+
+A link supplies the game and level in one worker `load` operation. The bridge
+validates and prepares the requested session before replacing the active state;
+there is no asynchronous gap in which another game's load can intervene.
+Ordinary game selection without a level keeps its existing cached-session
+behavior. Explicit game/level launches start the selected level fresh. The
+player URL follows its observed level after manual changes, progress and Undo.
+Invalid URL level values fall back to ordinary game loading and are normalized
+when the observation arrives.
+
+The native/WebAssembly bridge comparison passed all 100 games, 439 advertised
+action combinations, all 636 level starts and resets, and 100 full restarts.
+Five new linked-level scenarios—CASC L6, KEYD L2, SPOR L6, LS20 L7 and LF52 L3—
+verify initial selection, resuming an ordinary cached game, and replacing it
+with a fresh explicit linked-level session. Invalid linked-level inputs leave
+the active game unchanged. All 2,799 recorded observations matched between
+native Python (23.73 s) and self-hosted WebAssembly (40.21 s), with zero HTTP
+requests in the WebAssembly test and no failures.
+
+The gallery's runtime bundle imports only shared styles and gallery controls;
+it neither creates a game worker nor imports Pyodide. Default L1 links work
+without JavaScript. With JavaScript, preview changes update the crop, link,
+accessible image label and visible Play level text. `pageshow` resynchronizes
+restored dropdowns after browser Back.
+
+### Gallery browser checks
+
+The homepage patchwork opens the gallery. Browser inspection confirmed four
+ordered sections with 25 unique cards each and alphabetical codes within each
+section. Native previews load correctly. Changing and launching CASC L6, KEYD
+L2, PIPE L6 and LS20 L7 opens the requested game and level at Ready. Browser
+Back restores the same level dropdown, atlas crop and launch link. Changing
+the player from LS20 L7 to L6 updates its URL; a CASC level 999 URL falls back
+to L1 without an error.
+
+The gallery uses five card columns at desktop width, three at 619 px and two
+at 390 px. All six main navigation links remain visible, with a 3+3 arrangement
+at 390 px. No horizontal document overflow was observed. The mobile previews,
+four-character codes and selectors are legible. The browser's resource API was
+not available for an independent network-traffic check; the no-game-runtime
+claim above is established by the gallery's source and built import boundary.
+The temporary responsive fixture was removed and is absent from the source
+and production output. TypeScript and the production build passed.

@@ -15,7 +15,7 @@ export interface GameObservation {
   palette?: string[];
 }
 
-type Request = { type: 'load'; code: string }
+type Request = { type: 'load'; code: string; level?: number }
   | { type: 'action'; actionId: number; data?: { x: number; y: number } }
   | { type: 'undo' | 'reset' | 'restart' }
   | { type: 'selectLevel'; level: number };
@@ -72,7 +72,9 @@ export class BrowserGameRuntime {
     });
   }
 
-  load(code: string): Promise<GameObservation> { return this.request({ type: 'load', code }); }
+  load(code: string, level?: number): Promise<GameObservation> {
+    return this.request({ type: 'load', code, ...(level === undefined ? {} : { level }) });
+  }
   action(actionId: number, data?: { x: number; y: number }): Promise<GameObservation> {
     return this.request({ type: 'action', actionId, ...(data ? { data } : {}) });
   }

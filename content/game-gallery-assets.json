@@ -1,0 +1,3930 @@
+{
+  "tileSize": 64,
+  "sourceCommit": "212d8d426f07eea2b6797c2bb647545767488a96",
+  "groups": [
+    {
+      "id": "custom",
+      "rows": 25,
+      "columns": 8,
+      "image": "/gallery/custom.png",
+      "width": 512,
+      "height": 1600,
+      "sha256": "55c26c2e0c1ba517d25bd71e3d7e2b10eb63fb3a305f4bcdea3aacf20ba7ce36",
+      "games": [
+        {
+          "code": "CASC",
+          "row": 0,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "54b4a1fb718b69e73cc0f8d01f748da82cfd717b21c5139e1ab9be37c510d4ac"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "ac6c86d1aa49e7623d49fccae53f432003d3ab35d1e4e54370affade3a17c92d"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "2d8c4e87b69b6cf5e6fd1ad0cf5c204cdf3b3c74bd3b2d324079108825a07499"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "355f8494f7937a96476cf4af64033186e9945aba2552132055907d560d0f8733"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "e3475482a91548eddd4a3077b798ef599ad02a463d4c747fb8341ba00a1f39ea"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "0dd7ce1a5edc1cd1bb1773cfc2d0812c6baabb9bb38fc14aea890cd6d5471870"
+            }
+          ]
+        },
+        {
+          "code": "CLRS",
+          "row": 1,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "d39989f4f7cd43c03d078ae5407b171331692825e03374c2448b674c777cde3f"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "aa4dd2e67af2079b8266a64ebbd0dc856ca14ecd3872b271114f6890a0cb1ee5"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "560d9af82642af83118633e431b67cb1553cb941a82f08c56359f94f2e31967b"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "96da1a5c4d0fc1f9374d994ea144b9e50d37594adde6bd9ee6c4fe2319c9d0ea"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "4d574c823201ceb7340ccfdaa5dcdae7fb85e06df63a2787a7e2e17a0da46085"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "b0472e4068168f78451f75ea1711c643a853fe314bffba9bbbc90cb56af108df"
+            }
+          ]
+        },
+        {
+          "code": "CONN",
+          "row": 2,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "102e3ad7fff000c16fcb6fe08cb669afd2ef5530f56fa8e80561f0b3b273e649"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "54d2cfdbda81890622908977aa485a674f1f91a51336fd2a04784eda53233ed1"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "5fc08a65e50b3158e3121973baa729ec124e902d7178fffe306a37526c72a148"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "6b922200096a29dc5ee75868adcd6e5a86bcf85505486ea018a0e6ebea90d35b"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "5c5f13756bd0f62604ce78621da36e51347632df684ecb00e9aaee928594eab0"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "b02ac5023fe72e62dbeb2288d80042c59dd3e769be41f1a59f8359b972485a75"
+            }
+          ]
+        },
+        {
+          "code": "CRAF",
+          "row": 3,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "b745e8096d8668c2bcd24e9d5ad4f14556b7782d6eb30e2419f5a18491254922"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "bc8553932c1569952591bf2f62b7512032536d597280da909649cec32c75de59"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "e8473401f818fb948277ff5ea7f1732695654dc63273a8c6cfeb7a8edec93c1b"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "73bd8cd2b37530db248c2585daf6e9ec232b32c00ef916338e39db3ac6296764"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "c1db31a6a1e0e9f71ade1ac6f880936082878e70cfcce985493934417e330ad0"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "d4c023fb7e46aa988b3bfbe23973dadd52fe414f976844147ced8ccdf680bced"
+            }
+          ]
+        },
+        {
+          "code": "DNOI",
+          "row": 4,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "98c1fc7b9fe227bbf8a175dd3cf148caeb8c9fa398f104926faeb48d94b5230f"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "4ed851364c9cbed45a20e18e8f2fbc21555169db182254e80c43e58e3159233e"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "0b06e0c641e511418e264cfae021b8c111011fd36d2d017f93cfacb957a79502"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "4efe063c3bba73c35db1909a3ba5c728382c181f604b0813080f42b15e5e2c1b"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "b27ccffc07316475f2d4441841ae7187a294d21c1883797ee558233dd0fbad5c"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "75e1290d6fe2a28726c292a81bcdf24f694340924b6a5438732e4298cccb6a4b"
+            }
+          ]
+        },
+        {
+          "code": "ESCT",
+          "row": 5,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "4fcc27322fdf3512383267f7ef6592a5d0fa02b456f59b6cebb4bea275c457be"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "e7531c58f9c2823c7ac3bdd20f1b19826735564e8fd1f0f7435a8e0d19d7013f"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "9f4611178e48bf6afbbfed3c1ef753575caaf08972d57ef76a9a9f0af159bf4b"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "d40b2742a7238fe0eb5f0cce1b707391b86eb8395cabfcddeae75f52e10e7f4c"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "cff38509bb66f61afe8f008c4d47919e1a7a5d0b6a0702f131f2bb45c15c2ee5"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "e8ce7c2587044c338a861337151fe72fcf88193317608e4462fae7f0ddb9b99c"
+            }
+          ]
+        },
+        {
+          "code": "FITE",
+          "row": 6,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "3a8576abec78e92a5cc7fd4af26e29cae61e8f9519572e70914a4559d3ad2b9c"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "d76f1f8b6fe543836caec1e5df5d8abe2dcf95204ae78048791414948fc43db4"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "5335e9a32debd0cf7d4ceedc6e007b077bd674c8f33fd2cec71f576de4f6ceab"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "cd881bfb0c818dbeed12eaffba4b974d7562e7525f85e24ddbdece44b11f6ff6"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "7e56b605f7f43e5e1f5ae3e1fd340bf8b2ac69923217d93f833a9da2938f4f2c"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "1176dd421afa99074d5c74e134e3855593c785af5d549f88fa5910702b27137c"
+            }
+          ]
+        },
+        {
+          "code": "FOGW",
+          "row": 7,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "845b1c97d9313f5a56d3fd16e59aeadb129b9f19bf5c69ae1ad9f827a49b4429"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "0a3478d37890009beea1e3509cc2b6b7afb40d89836a409ae76cce520f8f4fb0"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "9edaa3735ee20abc09b6f0111e17afd7d6c6d92d7e4035abb7ba838b007202d1"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "c466619800544262d675bf9ca5666325f9f58f1dc35033e7da0b260165580f71"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "24e3d71d0e1a1e719b0119102e0f7ee017af80a9492b8aee2ed7ce23972f4ff2"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "0ccaf2530cb840d352bc8243d90dbf32806abd42c6d4c7597bfecffdb4860f3b"
+            }
+          ]
+        },
+        {
+          "code": "GORI",
+          "row": 8,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "df2448f2a74f389532685e7ec990ec25f0241833844826cd22f11468a5ce0549"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "821f2c84b49b124325cfe7c73e97c303d794cd0e3b5477163801a0c8e49bc54f"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "1e42abdb35268e5459ad5c2cde57c61c8e5e649baa1aef9058deeb60687cf4d2"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "ff500ea37c193bf3e6bf718a0a70a0f06fcb4d5ec5f43e2d4f58580be0fb4ac1"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "7dc08a6b748620dbb74999e136aad2b54f6362914a26c257ff859c4f2192de8b"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "116f026fe88a8110bc5689831d0ff578a4669341018522bdc56a78b5e8510eb3"
+            }
+          ]
+        },
+        {
+          "code": "HANO",
+          "row": 9,
+          "levelCount": 4,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "3480f7a250cddcd03f7152fc9f6b3e780357e9dac3db8d3a0e7a34e4522d4e9b"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "4d71775e87145de66de86ea7ac71fa00c67aa663f42f6b82274f48e50515c2dc"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "87e3b243c20f5beb6b135e10a90190e058f323de5cace0f4aaa8fb3eaa8cacf1"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "5a2dc7d733df993116e5e986e69bf27a40f0f24dfafe86365e1886c18dfa6262"
+            }
+          ]
+        },
+        {
+          "code": "KEYD",
+          "row": 10,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "53f6f2dd7c3d6cecbeb0288317cf63ae57787a6316b7233b81870b150cfe89f8"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "05558232320723e99f588fc26d6a10028d2307e13796d1e1c758a89dc304f177"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "7b2932abdf6df076f01004d333f05d6c8a9154d6d0f88ed2d73506646bbcb296"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "ca8b77d4b499306abb6bbc61cbc7a19fb8ecd8766bb08b6dada8a7c71a53ce80"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "28afcf0bf29c533846a7a72b2a82d4d79d358dbf87ea2726329f3b859ef38755"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "00ed4ca9c14359a37b15e4b5239cbcb7f33230b718529957a0da6d3683fbec6e"
+            }
+          ]
+        },
+        {
+          "code": "LIFE",
+          "row": 11,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "cd0f848fd6ed2c24cff04f849595315c668a2301d7a33d6daa6ce7053df6eabf"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "786fdd5e8b7340bd5a4c0f8515a89e3ceb4998a1939a708a0fee957634fac870"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "e806d0fe66995ce0116d2a58e354219c26013285ca62810e5205c6b44e6283d4"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "1866ba6440e3acae32b22e8fea4bdeceb24d10de4fe318e688dbe993792a6301"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "51d54be8fa319af1665b5a3c7d0ad71daf665e9ad287a72fe607330ca0002a9f"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "fda2e07d6b2a4e7c10e1d5800ebaa04474bf14beb3bf4967cc1e3739e562a065"
+            }
+          ]
+        },
+        {
+          "code": "LOGI",
+          "row": 12,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "00648d9e0eda63fa9616b181559ba4c79332d7012cd4eb0939929861824bb7da"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "c641f7c440eac014557c40c65f16e1bb8670835cb1bb0311e9f0de106d44242d"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "5cb0c2a7f1f3c37ad0b8ddd0ae64a70ee2ffdb8fde4ad859f83d8c3ad82686a1"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "e74d9ef72588842739cd148d22b575042676fc6271ef630db8307273801bc192"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "1ae3bbbed64efb2e89274e93de2cba95288414af2854da61250035f5f8d2039a"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "4bfd52708be64940e7ba2bd57238bb215e481a41d106e874b7aa135aafa49777"
+            }
+          ]
+        },
+        {
+          "code": "LS19",
+          "row": 13,
+          "levelCount": 8,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "270c6bd92e771b9e4766ecae50d96ccd464f36c9f97a0024cc7de951c9b64a1e"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "638973621a2e76aad847cfa860740d68f6c29fe74b6d6dd3594eccc0a3f42083"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "02fde66aae258fea57ff2653c974c1dd2b58c34950bf10f6cd23b66b0748485b"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "ddd2cf16c9f0be7292e32c48ee34a3648f84902898afa76a79d86d75f6ab64ec"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "c24b24679acb46347f094e0ccde33e0da8501083d3f4580e82787b7546292d57"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "de30c5df261f8b53d27abe05a4592255677dd4958121397519d2fb39c1cd5a94"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "52cafa722c5965f03392056e95b77ce83c29c180db0cba60a4076acdc6fc9fc1"
+            },
+            {
+              "level": 8,
+              "column": 7,
+              "frameSha256": "fec35cee460d1acff55657e297fe53c64a3efc753b18ed9b4afcf79514c8a9e0"
+            }
+          ]
+        },
+        {
+          "code": "MEMO",
+          "row": 14,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "a5ba6466ad59a8eeaebdeb203a6a90e4732e0571f50c725465ff844d5e8e0761"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "2ef00a04181db2b974aa3d7d8660caab140f488180f7cf191705160c09ec0e9c"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "d8d8ff1689d1ea2baf3bcf8e715e0887bfe03701fd3ee7a52eeb2219787b4ea6"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "ae750214c52381e44fc1ed47e2517c7bfa4e43eb931454686071e791afc57049"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "85e182a13474b1bce0d17fa8da8a62ada20fc1786bad3beeaf8b77a39261fd23"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "5fb6a198fcb95e73a8fb294e820e0d1878c6f4240055fb87a51c90ef4f0fd373"
+            }
+          ]
+        },
+        {
+          "code": "MIND",
+          "row": 15,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "6b935e5729bda67622d1bef4230f891a3a32165c90b50659c5877390802c34d9"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "3bc357300533e38621d01ac3032ff99e3195d55b3254bf5f9414588c50f5c4eb"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "a0aad8c6ac1e18782a10502e0e8860760288af3ec71ca76b48da0af07577d4bd"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "7ce109aa2ef003747a80f4693c23761d161a1d5d30ddc9bbb1a70927bd1dacd6"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "282ed8e42ed159e83fc5f749770e94e1ff0767b9ef2298119aa68761d990ceb4"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "d081f7a0631be6bd293ef1253ea7222657e05ef79d08666715ab2fafe4ea3e3c"
+            }
+          ]
+        },
+        {
+          "code": "PORT",
+          "row": 16,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "7059bca395a65a6a4afe83de9e88660b55042d66a57c0730fecc25e7b0cd03b0"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "726d5fe2ceaae81c7b4f8d9291a23d5b003fc0d8a1c9452eb2ba83b18c61a143"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "a347008ff8669e313ba177b0fb8184f5d75c6cd98e54c02426b123279237f317"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "f4bc194bafa3a1e091a6c5b08d916348b86eb46daf7edc08b06e949ddfa248af"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "58e1f52eadc55a07049f63f4991e8233adcab5361ea7ff7986e2239e2cc86090"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "231f55322c3fb0f2fa09209db8bec7d72c581a5ad33576e5cce4431f254164e2"
+            }
+          ]
+        },
+        {
+          "code": "REGN",
+          "row": 17,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "94edeb8a213df4cf47ecd7090d4a5162a4d9f6a9c67ea1c168c611ccf7664363"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "237a0ab8376fbd9fdfbe8ee280bee6fed25a4cfe0b54c3c70e9dbe7487d7ba55"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "852208ce31c31dced739d8a67987186b15808341f838ea45e5e9ae7e92abecd2"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "c6c4fb8fa37875dd90cdfbb281436c6bca6a39319a3564845d7b7387a1488506"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "4e6dedaeb6a5944a154696d4bd2110f89977fcffb678e3728460614597bd4316"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "cd505efc66bc7cc29b777d21d6775c9c80332ea1f99e1ce8559a73cb8cdab4bf"
+            }
+          ]
+        },
+        {
+          "code": "SEQN",
+          "row": 18,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "06aba2af4fe7d945704e1d9c7bf45a5f3e811637733cb120fb6dc0ae27d7cd9e"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "bdf25d5849af2bcb537000cf5ba8050e5294776c38d53d9be977612258df46f0"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "b05aa482d8e2ea637f4c8c3eae66864eb37a3286974f16e36f3fac9a3d4312ae"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "6e05155e591309cce679c28e64a2b5ebbeaf23b16f601c9f38f18bb6d4437a6d"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "af4fdfda1e40d2d795bf76213ab978a30174ec728adb72b7d55da9895a437db7"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "a4cc5c413e5aa17da66d5a3543df1d96d9bf0d19a786c3abf1e63702773e27c8"
+            }
+          ]
+        },
+        {
+          "code": "SIGN",
+          "row": 19,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "0aa9eb55b96d94328ad4974327f8400462433e551469184dc1232fa00306ae92"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "0337a6e45598126135ad3514f6dde1381894aad3f68ac40b7bd5a10c2c565a00"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "c30e511a7749848cc2e04a293c2ebe69b5de418df683743816c9b4ac3e75d778"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "8c5af9a05a2be6fd34b2b773e04d905f9c0de3dd9cc1469d7b12487178b0b2ae"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "57f5ace2d973ddeca80551155a0bf04035ca9b2526e0205403977a5871c943a5"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "ff68bb86e495ceb600bc10930c68877532bebd7be3872655bef7fe0da29b479b"
+            }
+          ]
+        },
+        {
+          "code": "SKBN",
+          "row": 20,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "106846d47c771eb320dfaed21b76cd5e55406735dddcac8f79ef0c8f56a1cce3"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "8e70df237dd7e701b34d53116f4f7b381bea8665de62a6b89a6f9e2917a2ebc7"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "979a830938646650807171a32e3d6d1f194a9b9f50ede54af035477b5066a18b"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "f50450d392395fb698c2fce3a4df364cfa34bd7adbfbccd6757b711c38e258c3"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "b80b82fe9ee099211dda23c9895c62eb4d9d573171f47a47518ffa848d851391"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "7239fb4cd3c44b8d89b5974b5e19435542dfa0bdcbeb94632d45d4a9c1cbe232"
+            }
+          ]
+        },
+        {
+          "code": "STCK",
+          "row": 21,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "80a028f10a54e97bddb3130b5089a5b3902b2bfde249876864aa9610f728c25f"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "b1039fe2533312a954680652c9606676a02a57c49c8cf5660c0952f7855ebe40"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "96a9207de93ebac161ea37a90e5cf592c11f1000cd7f8c359a1ff3021311d84b"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "7f9285cdf9e9b7b45ff2bfee2e35dcf11590568305239ffb1bcba85f7130ab5e"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "5f3f8944153dd24ef2cca41127c6dd8ece898194fe0f0051110e09ecf605d0c3"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "b5c973d81d564c96c1f099bf52c1506c9eee7f0ceca42b79364fd8ee9284d5d5"
+            }
+          ]
+        },
+        {
+          "code": "SWCH",
+          "row": 22,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "55554236cb7cd8c968a36897681980f5c34658b23856783f9d41c18b477e58dd"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "0485f3501b0f795460b340e49f0544286b80400eff3a5cc325c5938b6b3e4827"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "bdc37741fcb70a8557d48314031cb095b5248451919d56f897691be4d8b502e6"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "da30aa245a8f29cbabed46318c4450934c14c0104bdb852a97169398fcb07687"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "9e0a597bd9358720e90ad8772ad9634f187a07f7e2afd442a7efe7635994a20c"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "6982a42ee35ae4f5623efcaafea2d5631c7cf7e6f678ea489c11327d299ff51d"
+            }
+          ]
+        },
+        {
+          "code": "SYME",
+          "row": 23,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "b96ae765cb05ce2c335e437b08f5e30588c8ddb4aa8c874d0910d5bc817d39bb"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "65733cc8d62fa8097f6c21aa62f96b150b47c46f83ed926573f8b9770b20484a"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "88092fff29fd40185aa7515afbbe015f413a2d384f88e9df3526d77d2c300371"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "382008142af389cfb00df5fd3720ecc5e6f7334285cde841c60618a6be57fdac"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "a848539ffbbe870caca04465dd4e471f45b34fe4f7d922a53a6684e99441faf7"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "cd9abfb8dca6114f235386bdf958d7784b67f24a98561f5af78b5bf42382af33"
+            }
+          ]
+        },
+        {
+          "code": "VALV",
+          "row": 24,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "915bef85f28bc37093dfae9480be228010598143b5261468c788bdde7dfff896"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "d3838725d00f51207315c2d85342ff6baf74332d9d8ee4279b758829f3f0351c"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "d7dafc9a47045ae5545ec5eb5e7af05dd1e1cfb03a0fd98e757ee1363c0e3504"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "4fc0588181dc569c424f0c617531e8caf8ea222b3c509049f20a83d7cd666b61"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "577fe2b178c16d8de4b77c76c7eb1def3e9bc27663a050731ff53a05ae221c33"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "79cf58aaf8fa988c2a2f4da5b09d7d9ee0fb9fe308318af8aab8ce6ab9a9529d"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "custom_2",
+      "rows": 25,
+      "columns": 9,
+      "image": "/gallery/custom_2.png",
+      "width": 576,
+      "height": 1600,
+      "sha256": "761462d1686d3080ff4814d41bf6e6f00471a2a6bcd041717d4193182d96a16e",
+      "games": [
+        {
+          "code": "AS66",
+          "row": 0,
+          "levelCount": 9,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "9196bf25a7376505dd2cd81128a547241abc2ed22cc6f4a0c7e207586a907fc2"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "78fcaa074b2296c44b9775a839bf1ec950e2fb1af031f08946f808404420067c"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "2e54d49bce3400a0f8181068f61c8f20e67aea9ac17a1759ea1425021587d1bd"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "b169f3ab7cbf2b60b305bb13b32368894c67ce033ee3e0e189a927b5bff19b33"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "957e14a986bca282f1d27e185ca944275f6b77b41e1f61c7043bdb56b7fc4b40"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "b0bb214bd9007f78e5778ac819426d428704ebe0137837e6fb2ed5997988cac5"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "85f4370e500a177daeb32ff341fbdbd015dd8636869ae7549139db23a03f2018"
+            },
+            {
+              "level": 8,
+              "column": 7,
+              "frameSha256": "2797834f238bb37af8fd543db208725432c0076abdb298ed3a58669a6c79a73e"
+            },
+            {
+              "level": 9,
+              "column": 8,
+              "frameSha256": "f2893ad3de9ccd1014a9f922893c1fd0c17dcfae84bd513f04e78722c97bcc93"
+            }
+          ]
+        },
+        {
+          "code": "CGWL",
+          "row": 1,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "854b31fc9b44fdad8db0933b32351a45e9782866d2e78863d4e99f23497496ab"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "d111d08bb7b944e34c43f7fcafeaa3a07c95613232c7ebc7ab52d9d4a1db34d7"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "b3f516df3a0e4d358991603cd360d924b8f6b231bb067c9260b894dd724719c4"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "eee58818c10673edfc6e8ab3b608bc2c52efd7a562cc61054f83525027ad196e"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "6a1077fb55e8c40a5243790eb604e4f190326dbf0f9a14681e6fb6cbe1d6a6eb"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "14ef0653032bc6d1d8967850eb4a13749148ed9659ef037b6e601cb3dd87c9dc"
+            }
+          ]
+        },
+        {
+          "code": "COLM",
+          "row": 2,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "d4f760f97a02aa0343b2491ccf41339a98704031b1b37103ac4d538d9e59c037"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "6659706ab775c7f52350b0face90a85b6aef4fec142d960ad3b591d1baa6a732"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "9f51ef7f8637d5900c7d436f2eac1ff23e5d402b3474bfc50b16fddcfc1da23b"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "b05d29b83e613ab85c08b1a1a50efb703db12f57fcbf9fe3abbe0d91585f2191"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "f0c03c6647412e0e16faa94b01cd687e7c90dde595f19ba25b4fac065fb750d7"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "5ff0090d910874e7c3ee6a8d445cd13e40a7bf0640856464d2eb934ed6fe1479"
+            }
+          ]
+        },
+        {
+          "code": "COMB",
+          "row": 3,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "17caf1ea593030c4d391717fa3ceefa8c63db24df295a07415562843da84e87d"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "2bd2ef654f59a568212e34f70dfd8d192e67c150f3945f759e6282ebb8b1a838"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "e9637e9d8ffbb0ce3f148733a564959499969462eb21b86a80c44f63f8ed4f83"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "c7b12c3bfc43b310550e562fa3672d96a1bb66a9a45c64c05bf66b1ec14e8c70"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "94a17472e4c1985e0712aaff1e47a3d2144661d5919f3441bb85dceab228cc2f"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "da77774520fdfd96f4f7abe8e10be9ffeb35251e9d8a57dbb4eccc9d646fdea1"
+            }
+          ]
+        },
+        {
+          "code": "ELAS",
+          "row": 4,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "abecda07210fcf6406e49cf49307285959af454cbd4de95b6a742407a63618a6"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "d8719e5ad04d0de9443e7184740ad511d01cb6957ed7b0711540941e87790f72"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "3484fb68455577bc69683bd273fdce2a29aba4eab6750a35c53b852ee90d1f2b"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "6cc91577019f15a7050da070ed9ec512f05b7ea72c66385e5b972a5fc41335b0"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "2ab0705c83a2082f2c160c0af5fc57d5bf428f66176f41cdd0dc29fb4a93f61d"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "5409cf2e27d2ccb311ff8d98917282b1c8afe669a9e050f121e9cbcb259dbe29"
+            }
+          ]
+        },
+        {
+          "code": "ETAG",
+          "row": 5,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "74786e817e1ce7239333ea0742bc910ccbfa117cfe769794c7906cab765125ce"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "58825bc0c499c9354f387dcee9589ead6b492465fad6e0ace24e2dc4e3c1a43d"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "4a2aa199cc12d748360b9081e7f31ea74c0d7e0e07b4530f619810380526fb25"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "06e51aa656bbe0427f532f66ac9e68eb5f41b22f72392a688782299825028aa4"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "e423f684380b3ecfd0b43a569be8d837c61ebedb83a1e149b8fb391c1f2837a4"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "d24bf0202e8e4ed73e31a7bdc9a0d384e19eea15181be34d4f9d54bed4723fd2"
+            }
+          ]
+        },
+        {
+          "code": "FUIT",
+          "row": 6,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "2c523b811e29d5903bf32bb9f9bbd8d1e0979d4219b81f4bc6cce1d2534de6d1"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "53415da5158ad4f0e0e4f3002e450d54d1cf01da223c4589dcb5274a2da4f682"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "219fd1360595c3ddeeeb9ad1e53b530634d60148748ff004605ecff81dc864c2"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "59122639c2f429149b01a25f49aab4541cd13ba447d9ab2d440548b063bbdb65"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "c14ced028a87d1135205e5f3e15a03c840196fd6d75875a76ec5bb0f26822528"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "838f4022c93e768e33a5f63e4a92bce2bc0bb7cfb2989400373fdf57e8d37037"
+            }
+          ]
+        },
+        {
+          "code": "GABA",
+          "row": 7,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "4d7859dc1f80ae5cf8e51b590b341984157eaa6140746feb66dc19cbdb8ea8e9"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "d340c8c4a5f61e8ad4919235f3915d3e74c97774400699bcf5db7f67ff7450f5"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "45b9ed981589df38701c7ed7d347e655d4edb53a5679c8c5015fbab9ec741e3b"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "f795b8e3b0c4931d009c1350b8593a7bbc6b163c165a4f8ba940cae523f18c19"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "e3f2f1983537af83786c5f28015b4add1a2f10918ac0d8c9b563e833cbc75d73"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "bb18d4eb2ae9600e37b6509b7098ecb50fe4b51040e568aced1ca975b851ca3d"
+            }
+          ]
+        },
+        {
+          "code": "GARE",
+          "row": 8,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "074c71f463770e9c199b10c3c92204f734269bb72787aa37f9381e8ed958405a"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "6ef34e1f3769e4652ba6eab294b82219bc920a252e5deb21757310ed9b3d6d74"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "b862dd74d07cb4da980a23625034f7b290f176eb565b01b4844230d9a64962a6"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "4bbd56d22449c1fa75a21a97950f476db45bd88c582fab1c901855e20ec6180d"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "812acd7502b0e5cde4e0d821d7b0253937052e261a76f0f06ee5f4d023eeef16"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "3cb4c141ef71207d60b27eccf4804fdea1c5a28f1cb0b72060783faf2a65f7d7"
+            }
+          ]
+        },
+        {
+          "code": "GLOB",
+          "row": 9,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "afa1d7dc1c43ed9e7e8909001a7fc4f43ae153dab36dd1e581f3b64dea2ce9e4"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "c2a3fcbeb8990e1952b61e9e27e91b84197b86d3491bc278324e7fbdffa3609c"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "cb0e37a4d6ae2a052abf9e4b6e06e6caf72843ee814d52c3623f844ad1c655ff"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "cafdb8de452ce94edc6791c8d43c8759d7e8a113f5cc114dc9ddf98c3c6a0547"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "4467c005e2d2816934de23b2af91cf7c3dc34304c1c3117a12888a9395022e41"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "af586db74d46447c88eedff7706f4a668f4b09b9d596b3f52e7401b6e3c5a93e"
+            }
+          ]
+        },
+        {
+          "code": "GMAP",
+          "row": 10,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "c7b74949d6dce646becd6735eb0d3ac85f8f2dce211af8f94420398649e77257"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "b482e435caa6c52ef86df2a6849dcb1706563f2800549706771efa6685f2f2bd"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "76ccdc6c0b217e58eb2db28da230c0ac1e9d68bfdfd84910212ce6f34f7a81eb"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "4a1a02235c951ea9323c6e86fdc6b07a86a6fa5195645ce99f0ca255919e71b3"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "4b1662ba1c875e03f5699408ce006987577a6478a61109a55cb9d4d6e71757fe"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "21e649df29ef74c96f30af58558f010f0563aa6c62625eac76da67326f22e6a9"
+            }
+          ]
+        },
+        {
+          "code": "GRAV",
+          "row": 11,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "cfe2d4e7ca10ec092d54136a6f4e8ad9c4c2802e9ec2da0d546d5712cc82f681"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "e6be8a4a4268da9632cf817b6e45c826553890441bfe3c7fdd2f9e384b43d017"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "dbc106d408015ca904ef70f7ee8062e789a39bd33069e8887b0396acd5470cba"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "c9c1831698d9535565e5ccb036a61a4cff1e19d8afeb399c3b3d11e6bdfe3bbe"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "05e1755b7ee6ef4d0b8fbbcd028ff1ad9f6d02630f898db94fbf0156184d77d3"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "94b97bd7886db618d3321c7f7e3ae2a49ffdd16b12f717cb8763ecc64e600c84"
+            }
+          ]
+        },
+        {
+          "code": "HOLE",
+          "row": 12,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "03c796711416929b6667bfc14118e428c7289de962ff90066d39790448d742f4"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "bf7cfec608b285348452447fb484fa6bb84f69b5a225bbe603a758264c666e7e"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "7e5901e49446df0a34e16a16e1a5ff9a6cc6e7b80ed7cc929c5c0d2018cbdde7"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "b58b2b3af9d8e34fe5fb057f8a9c5b33624984c5bbf4be757e357737b12d9423"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "06fa3acab86ce738da39258143c9e3fc1927a0ece34d87c7fa6affb7ebdf13c1"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "c06a666ba92f30144bf3d739a5ed563f8abb746db01560069ee9042f139e5ddd"
+            }
+          ]
+        },
+        {
+          "code": "ISOS",
+          "row": 13,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "fd7aa8b04dbbbaa91ba66ffc612706df4eae342a6dd00f59accbb2ecf7ea87c7"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "e769d6b588ab24e3866aed0a52c55302786978f04f8ae68c9cdd44293e1b5b95"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "98ef4c8b06849d0207ba167bd19160661287a3772f1ac6a3fa5b50e826157f0e"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "03de7572abf1f97abeaaafee63edb92e6551b7251af13d1891cd4d2b74f41a83"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "39231fc9abcbceee8fcf7283647e89d4d09a1227bc6885280a024912647c4d08"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "456a3cd76a95aa79683f39a1fb3e1a98066321211b890eed43f4b736458202e7"
+            }
+          ]
+        },
+        {
+          "code": "KATA",
+          "row": 14,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "feb090f5d6bfc51c8666329a786fc1f1fc607a13840f088978d2d4e3626dc515"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "094d4b1dceaf9065405019530124c043bd5548797baa8778373885c2c6e02841"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "7c43fb9e104e96e7411dc42d35d2972e48126d36eaa3af3e968b51c37f869d18"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "823fbea4e05ed276f9d16b1e6ca10b5f783bc1ccd48c4aa513f33f043c82c8ae"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "8510006819ff47613c505ef8cc7e5482487b8059d1fd65ca43e079e2d7654243"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "b5151e506d173506c935f872103fe699ba22af5ce323b1183cb57539bb1c87df"
+            }
+          ]
+        },
+        {
+          "code": "LKEY",
+          "row": 15,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "4163d1d849884c4461ddb2b60427a1f764c5d801e3f529d828800abfc59ad8e2"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "7c2a4a28add827305964bed7690a65cb5a4d2575c6883f25b20b09e4a92e2845"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "fec38f3c6de7781a28f8e9f62a807080dbf70e3ceb7214d15bd7cc201a3ef383"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "250ebf9e84d9046013c94c344f8218c02eac8f9c818490bf7eae100dff752fd5"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "c590a0346f484604e1d3fa8db88f3d76255c812fd5300c2e3eff6280044a9a66"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "c4d8efb5cdb802c3aaf20aa481b93b98cbe73027ae6c40656dcaa451282ed110"
+            }
+          ]
+        },
+        {
+          "code": "POLA",
+          "row": 16,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "9275d61fc47277742774194151a8c649fb80ac5e3344c00b1d7eff42f5615103"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "080acc02aa1b13c02a36c67b86f016bcf5bb8040e2445c0234a75b955494483a"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "1150463226a3bc4186fa6037983f876c1a1a177f4a99b2c81bf4120150903414"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "5e910546fb030a02cad5fb8d3395d9e154ec27b9f3746ec6c24ef93308975472"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "d47f1a3faacdd1ceb173694c3c4db843dc06862dc395ee49b53567eed3413fae"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "11ce90099569bce9f734808c6c7b63912e2ee15051c72072cfc9dafb8a70ebf1"
+            }
+          ]
+        },
+        {
+          "code": "REWI",
+          "row": 17,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "c1f7c7d01c885a056fd6e0d6c4e4ccda5a57eb9b8bff79feeb72150971cec39e"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "0b3408ab6eff907b519c1e9dffa042102bc5532120d79f297e1ba56c56a25be3"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "891a154b6c641b4490ed9b025bd685e7af6b0fa39a02f50083c954e8c1ee638e"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "aa8442cbda1abfa27684f26555135d7623bd3ab67371c32e7db70e0efdf5a608"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "b10fc9c6f90086f82233b83cf4d841f3634d82e25409c364f70c3d6fa1f5c6b9"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "d121115890dc1aeb5fddf110c2ca1c76976b80b475a5ee1bf7d2f4c2d1a7b891"
+            }
+          ]
+        },
+        {
+          "code": "SELE",
+          "row": 18,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "311d8f6e49a3c09e2ef314974fc2ba1f419f8276f727f93222a83a5535f3098b"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "17ef208e4642331ec1feeb418c29a1ecb4a0d0c30e41c75157c470239f26dc7b"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "12baf53eebe1ea7dde5f922918d19db5cd17b896bdeedaf915b200a703c393d5"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "41dbe882c51780114f19cd2f932f5dd3ec8779fca07a4363ebb96383c7688cf3"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "18653b0f694bb265fdf10690ed35020eee0d73563d7070425d158afb3d16948e"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "6ae16dc583f2dde83a51b0d327cffe810fe576601d796cfea80b3d521c54222f"
+            }
+          ]
+        },
+        {
+          "code": "SERI",
+          "row": 19,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "b0e0e053466403847c7d970c8fb0d0e6d67c3aaf70591870c856d7f596472551"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "731c507e3ed613f90d5902698bec2d75b8b5f569d7be954b60099675eaf92d68"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "d3d32b34cddd54a51cefc594d1957c99b6ee8f249ca3e987b5b4fb9e3ee2224f"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "f7237d3df83ba20842ec6039ecc56767a68ac42a373a9abd961df165e114bc33"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "2910bef93aeee4f13ccdb10c23d9ac7c4fc48a4ced405fc7b0ef1e6b2d08caa9"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "536a541644b5881b4899528e2e4c404384020c8a1f90cafdeeb4b0cc1cc84a8c"
+            }
+          ]
+        },
+        {
+          "code": "TEQU",
+          "row": 20,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "73181a1b6299cc0ec7ab26bc3ca05bd308da45fc3c46ddf286a7758df701c998"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "b9f3a294b53f808d5b62f640aded183b909ad635d422ab5d1d0db1dcea61a28f"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "a64e83cb0bba1f65f676e0c64b4b97912c910d0941d12235b5c766e1f283d8e7"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "be4e774bf0a4fa9a1b106108380bac43be886cbc4e38c6bf0e92c437a5e638df"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "4553a3bdb91d68aa8053ad9c1ce27c73d23c7e034a8f5ea3a649f020f652539f"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "05f961553698493adb7e2f45fb597f4d0f1a6db8c6504339c1bd2fd4501896dc"
+            }
+          ]
+        },
+        {
+          "code": "TICT",
+          "row": 21,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "5f4c65705af53c4ec80105dffe3ef1eb4c25c0367cf5e41f5e5371de574d2df5"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "88bf0a09d392dcdfcd9a334266b55f757b1ad518b062d0df4163bf46650e011b"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "bd2ca49948ab0f62b223a668cf76aa0c3613ed93e9c7bbd3dd7db03594b0e869"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "0ca89a1e9ebb5fbdfcbd41a3bc28c317ba9b559d64aad12d8122b8e45f2b7190"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "e6fd654cc084a9da06adcbc0a3ece73edf83fbf3ddc3b03e1c10c53423c7db61"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "25f17c609a4df2ed3b045543b566414ce66f36235acccc24e2ac51f6e1c3bf59"
+            }
+          ]
+        },
+        {
+          "code": "TRIA",
+          "row": 22,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "b2bafeb3b70789e8253b75de386253085af31d52698ac01dda455f085989e527"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "43adaed18540c08b5f52208fd6d8a627c6ca09b452ec7a717f971be4d54f606c"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "f37c9ec2d4dd7a1680238e3f936f639eecf1414564418965dbef961b762129d4"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "1ab78eba87882fa165fea6a8d6c4909d4a195a718b2e4897be2c7cff7bb8150a"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "f9a4fbe9ac2b241717b4c77cdbce93accee63080353666a781012425e9c0c22c"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "a03d8c31cca39a9c4c7a37e1dde5f7930ef97e4e9ac55180e2c705ca9e3c20fa"
+            }
+          ]
+        },
+        {
+          "code": "VOIS",
+          "row": 23,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "6a4609b8c17508a4e2bb49edf041ee725d9347e5663ec89250060daff5decf61"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "e8746e0439275acf9e9fe411bf41328e1a5c58ff0de12098866dc05f9ee608f7"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "7d985ba64204caf297029891e82335b26a18c482d67d75c9a795efdf903336b2"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "7451d20aab8b3584180aed23f4c8a484dce8d08b586e413fc9fd21a04500536e"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "06375b006ccc5af773a8fc91fce963bdda38da7d4c01b45cb7d8c35385eb580e"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "d0afd9bb14470f8731d8d722e3c0a5dc8dc7999afe00dda6ac2ab54142bb219e"
+            }
+          ]
+        },
+        {
+          "code": "WEAV",
+          "row": 24,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "788064f83c87f69af523386a78626f5c4f973d8ed8a2bd05dbc6661380f8e9f5"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "eea3a190b1ed48fd23f251daf003e02f991f82bc5b3f90fad17d06bd6184df3a"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "91135b74ffac574dc7799947359d683401e00d7769efef93d96b9cc886f8252a"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "e848230223e219e0b12253a2d9cad57454689082362aa7161e85a6263b6f3626"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "42538611407658b4dbb287d4896f2ec8231537f5960954fec6369bc7b82f2775"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "c8799d4c8eb96d561373ce2c403c91b7b9ac502816776fe28dc98c2ed1dc6665"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "custom_3",
+      "rows": 25,
+      "columns": 6,
+      "image": "/gallery/custom_3.png",
+      "width": 384,
+      "height": 1600,
+      "sha256": "33905823143e957237e4d01d43f63ad79fc4b9a141802dd85bd29869ff372682",
+      "games": [
+        {
+          "code": "AMZE",
+          "row": 0,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "1441965f055a5be5e2df220f5972293b1967e26130737dbead683c805460999b"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "63bbd6ff87f744d3a0b7f423112ef1176de33d3489cf2b210b5e2262e8f2dbc2"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "a17dabf626985de48e2bc6aa25113145aa0c70d22c09456a9c46530df6ae3dc9"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "c0bdd369222ea954c219aa02336bd222071579be4950f3f9b580abf20c3c5bb0"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "c688c0967b21eb265420954af94052f014864dee15db94d22105b9e7713a4df8"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "3eabf1de4ae33c7c6d4d3fe2bb56cc0d212854a41d185b5e40996f4a2c674718"
+            }
+          ]
+        },
+        {
+          "code": "CATL",
+          "row": 1,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "2101baad6ff892402728b9be4d01435fc7771d62466d063731cfe9b10e318d1d"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "53184a4651acc26ea4dd451c253226d57bf622ccfbf86c2960dad207b37bf10c"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "475e9c1c547f10bd1f3208afd34186cc9623f2332a8fa63b06c9c636229970fd"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "81b8d06a6233be5f9840bc942ae4f48cd5c0347430eae1c00e225ae8327018db"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "7a386dda7da558356c1bdb15863e3d843134bbc4cbfa4ef91b3f3a97a2912ebf"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "f9d523a77ff625dfdbe073c0f551c58ae786223d570f2c30ebd8dd34c2a1da21"
+            }
+          ]
+        },
+        {
+          "code": "CATR",
+          "row": 2,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "37baa73c474fde8a15295ca40ec7b9fc709764b760bbfd8f6d4859b01fe2b94a"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "13c08b66028fe5e3b41ad69c5c1d8fd0d06252c1ebb13c8fffa6c1ab1b5a7d80"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "914da09c55c6ed23c542cda74ed757870808982315c44c32798217a67014c69c"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "2709925ea10221464431ba14f70c2dad51b17caccc76c46ffb78c2ec815effad"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "b49607c1bcb0b73d74e01c23f89adc3829984f7a29c86c6c9603d4a1cface0fa"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "3bb9f4ff46e5cd4f3a5ae531a06c93e0baf8df5c49b038531b18bff0c8420628"
+            }
+          ]
+        },
+        {
+          "code": "CAVA",
+          "row": 3,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "d422c8ef7cf1db76836b09cad6d964ad615c0f72d41e948c3296be0152239013"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "8fdd55cc1a798d220fb81bd4a32d4e16ec1dda9d9cc4f9aa7c75947032b20390"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "6795477a9b65b1d49c273ef7cd732c5b8f2ff72f6f4f31a8ba5687e77719f872"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "776aec93008b98b209bf4d6429e134e1a811cab534c60b715024ba6fb0edf99a"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "c3d6a2d61143b17f1f77dba608c1c1bdd1265924a4f3120d09405c4564a5116e"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "f6051df1f748297ee6154b0483c93e98dcfedeeeb5680fd573320dd2f131de22"
+            }
+          ]
+        },
+        {
+          "code": "CWSE",
+          "row": 4,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "3594b5765d56311c920982c8567696cbfa4ab85fa137fbe259aef821d979de9e"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "2b977219ab7609424dc76e2a57510b462878834d20f430fd8ee09fadd1c3fd00"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "362ee2efe76569677eb34c89bd00153696a89bf7406f48a098bcee1225604982"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "f71ac50f17fb9df4527ad8b685a9f36e8e0094ca5b97cf0f0ed2d38433f757bb"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "d3d840791991472f9ebb9dae42b12bf468f91c6dd7e482d1e1676ba29450d121"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "beaea040219846cc074025c11186c105529aa09c7470c302b44dffe12887b3e9"
+            }
+          ]
+        },
+        {
+          "code": "DAME",
+          "row": 5,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "ac8d9eb72506f6b69f06709f9ee466db63701112948be8b1e24a13fae59cda70"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "5c23145c47eff9bba353fa8319daf44c5c545d2b53a5afd0e90bb80ff7b35d87"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "67aaec60313d064120dc527f14088f65c6e5227cc5016fd5158cca6844fe8763"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "46a97f8c13e26c8a00e54c08930240aa521c412777afddda58175a6ba2a2e2e8"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "1f20d6a62fd11f9a64d26969e4996edd2895038538bffe755abdf959a2b88527"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "499dad3a3a9ed32130c22f0c68ccac63f2182f48f924311d9463276fcbf12800"
+            }
+          ]
+        },
+        {
+          "code": "DICO",
+          "row": 6,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "064a3825dfb819e5d792c8476124a4c9e8c52c91b321f323049192fb54f1fbf7"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "c91cd0bdcd3508f723de3469e499dbcbb399a70d5b5a49b99e1e931851e43b2e"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "438778c0a09353359aa8411e7621345c633719cc5670102ad53c24ef855b4ae5"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "0b7722549866f7ab0f0f5b29ecee74094e5d94863e46b10a62d5c8e063b7aaa2"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "be54c3f44f9546688ccc82a6411a9715c9111744a7c1067d45f3a6a89debd565"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "73a418fdaa74e1d3e568a008bd320152014f9408df801a33a1eaa86164349b85"
+            }
+          ]
+        },
+        {
+          "code": "EVAS",
+          "row": 7,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "141c096f8f97428b5f750366103591ffe03380a36a8cc2b3f20e2b980345e9eb"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "3a4351d410cb57bdb5d6a16c7fcad6b514918174178d610e13b0cd24d24c2751"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "2d91f84faacc5ecde9735a4cf190467a6614cf27408fbd97694a78a336cb4b74"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "fc2851dfce9452f5eb815d336c5304573c34222cd68c038f5abd16c4b98c7c2a"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "a9b7a64b5e1fccb007f65411f5e7578a7815a1167ab9cb93e30a955663f76c59"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "0d71387f1585124d26d6cc47237c944823ba7e0467ac5166405860682c571d64"
+            }
+          ]
+        },
+        {
+          "code": "GIGO",
+          "row": 8,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "efd48aee6d4ccda92c78a07fa05cd28867d4907056da8113f885861fa970875e"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "0ed28f1f8879f552c49480f67de21e1f1b9e39f4c43bc03024a8e170ffc2a261"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "3db5030b5aa1c0d7d1ac305ff2a71e726e05fd458d61cd6d68b15eb42e184266"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "e994ff42732f9cce51899b6c821e465d504d19a14257da696b15fdae86d842a3"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "a953eb953ab66229fe16dcb751c55bfd071c74c1ee197bcca3485facc79ae301"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "c94a4fbb28b425e2bfcd02b3d8198b0cc50c5e8513c39f4495fd5625fe62639f"
+            }
+          ]
+        },
+        {
+          "code": "GRIL",
+          "row": 9,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "0894f05c5302ea786579147c8c161f5206fc7c3c1654a5021cbc7f39a54fe10c"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "ba9200fe4817358984cf53fb3d01df1839de391405810d02b58700fb086bfd2d"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "a4cbdf2ea25a4c84c4664391e06558be2ad97e90a1a21ab373699c138ce688db"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "dbe0bdc5e08faf58fb9eb7de2bffa895b6dd75e36c50b0a68385565c3d182c5f"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "7a65d89c4d1a8262e2bb7f54e17d2ca617a6afc5246bfe3bfe359a388bd124f4"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "2c3e586fd517ece4b71250b182a2b3136f7331c73341ef508747f847ee120936"
+            }
+          ]
+        },
+        {
+          "code": "HPDL",
+          "row": 10,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "86013b08ef738f0494bef011535fb9445f6d5e10af9f87661ed51dc4ce431abc"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "01dafc914e61d66908376d51a0ca893ee5157262f501d5132e8a3c5e175838a6"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "bc8edb3bafea1e9976cdf8a61359a104f917b7c5e2f338868cf96a784fddca61"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "5b351bd0f24283873ccbb34975e254c556d119839073b0d92adea45f83b5cb0c"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "5e489f2832595f0cf9f9cb4873169361ecff4b07399b8354cae66d4c38ab4698"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "3073966467a5414ac30fa44ec75f489c501f9c13b90776f68361e8262aa3e628"
+            }
+          ]
+        },
+        {
+          "code": "KLOT",
+          "row": 11,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "0f98f70016ed1614608553faeb736ea7688247c8ec4206b127e800b4c2aa1e7c"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "e6e0032c21f44d19417355478e7acc57bd851f2968703f30572acc0ce5bf13f2"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "62785c7dc96a0b0ab3169594cff8f7db9fbada18fb8c0439e42e60a2f8a7036d"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "bc5839779d3e3b5a5078d10f60350ef616dd58cd953919db517319b89a311e2c"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "83e6efd7a24116bd57206638f5e361ca8192ca4f470159be1443ddfa557d8ceb"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "c71bc83abada74e54a493e5bf793db47e93b16bfc476aee0856b600d369113f4"
+            }
+          ]
+        },
+        {
+          "code": "MOTO",
+          "row": 12,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "f267c441cc4d6485b22a07b712140e35ab3347c8129005734754a70533f0ddc9"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "2275372926209693f8b85aaa060c626d72f8a2fa884d8dee713dfcd3943c7e53"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "ca50f2921fb5e375e00cdb3e77c4763517b9ac5e4e13d8321f3b0bf88ad6479a"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "ba73eac3a8d67e1655210a5f461cfdddc545413db682a44d4d7e7b59927cc440"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "f9166da9bff977d4509eaeee85f3c40abe59fae38d033aa265471be384c03716"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "848dbee1e513ced173d0d6160c49430418755ca886a0aafd60dc6c17e814d462"
+            }
+          ]
+        },
+        {
+          "code": "ONDE",
+          "row": 13,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "c1ca59105b05a537611b450eccfc481d8ff460c5e504a246e341014be0bf2516"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "a7479f447d00112b8d877dab79dbd629864b41ce3021b0723c3552815c1b5102"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "4fe098352d800d33b6e64b1724849afe3ab74972b755aaf11ba70ec8bd52f6e3"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "c047785d348278761a9240f85c5b4939d1ef7330f68cf532d4a62a635491ddc7"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "f2948ae79ba6d659c3a9290332297cb21a52aaa93efbcd65a6dafc80f110980d"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "66b82a1cc660e6d567ccc7354c7dfa1bb8d37504b3052ace0424ad558559668c"
+            }
+          ]
+        },
+        {
+          "code": "PIPE",
+          "row": 14,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "385f4a6e803f02c5daa9ce9a7a1ba88199a248c2882df80e85a2f493d331d591"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "5c0c36125fda308cbc2fc96915590b3aa977edec524a38e94f72b470f975dd20"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "82d5aefa455685e2881775f6816ef813c243f0465ed83710fb5b3ff4dcbb17a5"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "a87b7764a941e8c65a57abd6e082e30b130d82686ea91b58047348dcd5376a7d"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "fba4cf7e6b39971cde6feaa3d69b285f1e5e6418704a223757249677eac27786"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "f539398ab065ed9dea0a1b7c1943ed8fcd22665989673cfa7ee7f41ad072211a"
+            }
+          ]
+        },
+        {
+          "code": "PRTL",
+          "row": 15,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "f77eeb93f6462b55c497b1fc00512fb489187e3462c9e3e2268bf52cb45d8aaa"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "09ca292f09fcc09d111564bd9a0c101d7b4df651d1664fb9f95f167f6d0df429"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "51e339ee11784473fa7cdd0c460094a696be5a4da8a01e35b77cffd1bfeaaeab"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "f74f83dcfd72918d627d456522cb73330edfb85c050704ca2cfdf44ec6abbccf"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "3a0f01d995546424816cbf7b7ab2b951702478b2fcf9f1f627149d779c190ecf"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "cac2f07fdc7f695cb3bc88cf4383436d7342b24acec94f0329cc5814ae89916b"
+            }
+          ]
+        },
+        {
+          "code": "RECR",
+          "row": 16,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "fd5bb1181f19d9e066ba48e5c04bdbaad8b1407cc0ea94d52e8dc0648b3c5d80"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "a44e75e2091da9312c517702e0ae90c80714c498314901394e620e8f82d35bc3"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "e00528e7ea3dad51d3cef03b08afec3e04f90f7b9be9511d395bb60c0f755115"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "5f49f5a32015f2d9d6e01bd3d757e05aad69265cfd891b222f4efa33ae691bbe"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "274451a4e7188cd04259846601ce1625092b351e0ede0b1e9d0ea3c9e22f3c37"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "f0e8904522ab76e665774f388cb76dccc5d22b15d0794c60d505fb0a2afe8324"
+            }
+          ]
+        },
+        {
+          "code": "RSWP",
+          "row": 17,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "43e241375c1b1f2700fd244b924f0e75551ccbe3feab9e5d67a634cb96a423e7"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "c4f3ed504f6fdb33c19eaa5eabc7d80aaf6c13ff5830c10f42dfb1b67ac693a2"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "e3e590e6dd30d5468e5ae4b09d919ac8142e55f3dcd27bfb152175342186b1a9"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "2916601529a3ae2b770f6fa5c4c1d76923278f484dd431728b4f870aa2c90d60"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "77ec0974b6160bfd0ddb7bdc5ef329f8749971bf1e7f68f927fe512c10b2ce33"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "b78412fbe803424baf069008f5af52a0677595d9412f0d78b38d67f992a7345b"
+            }
+          ]
+        },
+        {
+          "code": "SMLP",
+          "row": 18,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "0be203b6ce80ac043c30f42b08b925eeccb433d124957070d77b93903e67635c"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "e9347b73350a113f4ac8079c1e44695b35c3bad513b31cad0249a0be1c24792e"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "1de491e15aec7ec0ba458bd76616fc2c3c737f9b7e83f576be91427a6cd496af"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "0060e66b001ce1d6481dd8934ef30cd077eb06cab65c5d24bbe9e181976e2fc9"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "a18aef32aca05cc82f18f822906a7cfcfe10cb8757fb5fd95f61438835c71d7c"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "a677b264dc74bcf60fdaa0a51f9f4001e977711e064a5ea7593dbf3e45e3f952"
+            }
+          ]
+        },
+        {
+          "code": "SNAR",
+          "row": 19,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "ba6a6a242dc64acf81f4285f304445b192d522720fbf99e60ce7488772c94257"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "566070946450b31ef00a32d3dd7c9230b1a8257f277a8ba7273905c35186235a"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "c7023a70f4127686fa7bbdb14524d47e200f39a583ba47602aef23858ef80a3f"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "ec0293cd5efb9729bd60214984541d36946976cb404df884210a672c6cf51e75"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "b823e78c5c76e393edcd9faa80fad8510d9b6fc54989bb22fc9051851698f46b"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "45f3fd77aef4bb55560b7cc60e3d4753ce26e910645886b22ce86d4cede26654"
+            }
+          ]
+        },
+        {
+          "code": "SPOR",
+          "row": 20,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "070e6b2809875963bb537c260e2fc84d1bdd4cef6c5f897453ebb7f6b92f93c0"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "59f420c1f8cb80c5ac05569b290d12565a9ae0f75cd93d8841c3be63df0450f0"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "bcc7ec7b2e29388b7f9f7fd68e032016570155d644fa8fa3b1e138ba61194ae5"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "c7230252270e82e18b4d37895b3faac7ea070e2d790a13d97b980a12a31eca15"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "f82c851a6b72ed8ab035ae553f53650fc4615d73524ee66194f933eb5609dfe9"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "8d47ac97632b4d858dd59d7c819a6bb4d40511fd1378f1e50d54a4761dca0e67"
+            }
+          ]
+        },
+        {
+          "code": "THER",
+          "row": 21,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "0d3fae70725e42a2a0fcc1089f55c58cfdbc6c12e6057f861fa8718648007f29"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "57ef0644679f89ca145a903b58c6a0b575631189cb5397e32bdc6047820c9faf"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "669a194feb3a726302120dc7203902262820820fe6d74fa7d1c57a16d9276210"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "46f5332f1dafa55fb79afafb3bd8c27b1d5714b6d64885a3e8eea7930d0b84f4"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "f512413f2f41bba83c22d94318c4e53491af07a80b998fdd15dc1c439e690884"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "521670548d67d667d588ce6a442797fc5b5776153d6abc26937306593fb1a887"
+            }
+          ]
+        },
+        {
+          "code": "TRCP",
+          "row": 22,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "b10add8f164050e7d797b6f48d4b05f787eda1095d186f441ad839a769e4a190"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "45808a29feb9f9b7aedcf26de5e555164ef84caecb76a243c9f7f904672d99cd"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "c4620edc7f92fcfd54332cf4a779cd3ddea35287b871c2866e35ab0877cde543"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "1074f357bc83aa52c54a8378f57da7781e3f6b6d6a2e8f4d1d1fcd4a84dc83a9"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "aa122224bf6e0d79981acfddcf5d2008167fad1fea441d5737960aece3b49b68"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "3f0624c90f6ffa08ae5b6942bfcb5b522ab4db7e36c1fe8efcf95b016f5014f8"
+            }
+          ]
+        },
+        {
+          "code": "UPST",
+          "row": 23,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "a40ff09b8e25af6fedab8e77ef95abcacf74c7a632f819994f1cb5620f37941d"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "5bed84da61bdb91898a4527bac78ed639c7435e36cc74c2960939707a14ff655"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "de36460aab650b9c7241d487528438d2e8aa75f43a28733e44c6a6c178933294"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "bbd78a0bcb583f906064a6bd39f92d9c3ecc58cd7e3ac89a00430a70b4bc113e"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "f9efd22b589cb672b2e82d059844564f5c8d33bdd4ecfe6b2844d1bd2a9014b7"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "2612db4eea8baf7ed4eb955402f162d6e0274956ce3975fa32fec896ff1435e4"
+            }
+          ]
+        },
+        {
+          "code": "ZIPP",
+          "row": 24,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "3b40017429f73b6a435bf768c4d1e7c0b7d994f2af6d752024cfc9da6afc8196"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "1bd635ab0bdfc73fbb7258c97241179d7dd55099423897a1b7c94e0adbcc0fc5"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "28c11cee8e41d665b520531613f63e6a4dab178e1fdd79803b792d5055100e34"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "96952f380865d7b9cf27dd18b39babc1692e4437ed9940815361024c5387ea23"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "96e358a8924c852dd4c42311096ceb3a95216efd9f96561ecce4197ec2b969aa"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "65b5af935e1b256f9ea4308b03586bb8fe3305666cfca08b0e7afd0ec42de49e"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "official",
+      "rows": 25,
+      "columns": 10,
+      "image": "/gallery/official.png",
+      "width": 640,
+      "height": 1600,
+      "sha256": "01136766dd4d43e0c500b486ec2a984db37d757d8e543de4fe321ce3ed41a294",
+      "games": [
+        {
+          "code": "AR25",
+          "row": 0,
+          "levelCount": 8,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "a874bc9fd78ac5c3e729c15cc2d3afbaa52271847177d5e8580e87af2b4b83b6"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "ca797b58b0702e6fcaa00014a3b889479e44e3e3e5b27d6d35a4decde4e8b482"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "a1e4e02d7dea65a277b503ced617490f86cad6ecf15a2ae7f7d0029c1183e0aa"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "eeae42d9053c1b6da0ae8e7df70565bab2cfa0aaf41504d91cb6f0ceef739f85"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "e877e215e931c09dfd346fa30c4a0a79ef928c171b7dd29e5207c7b8b18d4718"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "d89ec8be697f33f0cdb990c6fa174fdfbbdeab0c00c2236eda90797dab891ad8"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "36423c803815df26f98e1cb29093f447652f1cc7ce4901f5710d260d52d82b06"
+            },
+            {
+              "level": 8,
+              "column": 7,
+              "frameSha256": "be883d7650f7487cb8c8fba92983d8683aff8b808b03688f0120f1cd88b236ee"
+            }
+          ]
+        },
+        {
+          "code": "BP35",
+          "row": 1,
+          "levelCount": 9,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "e673f0158ffbf5ffa45f3f32f30a91c9dc7f22ad41c8aaf3feeb8e7dda11fa31"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "7ab0e39c2e2f2cf45cca88440770cfb7be137721a9cc9d7276f1d4391d20aaf6"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "081698ef8b0bb02aac4b537fe26a4341463bf6e9456327ed619613adddf659a2"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "bf602ba95ae53fe6dcd8e2b1a52011d35e71d8d560524d88dd78cdafa1807663"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "e43ead73220afe1b5e78d9e907f68a19c0d99728ae8799f29d451ef5286dc061"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "f34c1e69af3b9285051c68f33edd7e0b6afc555992c913374d6cd158a93e771a"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "52bc22e63740f41d876087d0fc17f6021ab5ef7bdf2412e14f807e5ebe8b5aef"
+            },
+            {
+              "level": 8,
+              "column": 7,
+              "frameSha256": "41d88d03f072def4dcf0a2c6c43d9e1e084da83cb47fe5476fa6c9cb7444d7f7"
+            },
+            {
+              "level": 9,
+              "column": 8,
+              "frameSha256": "375b7eddf99ae0a2ef41439fe15d92d2c8925b57720f3c6c833b9bb64711d2c0"
+            }
+          ]
+        },
+        {
+          "code": "CD82",
+          "row": 2,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "e69c5467f71698ff6f34ba9df5b9e0c47d7405e4669df9b7d628c6548ed5daee"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "abee4895c5fb3c18fb0d9b755c271a9f6ba550c6c2da875791bbc6a807498da9"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "3f91dfb36915c1ac740106de58624c3a74f88355d5707e608107ec348da9424d"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "3124ab3d4f6bbfa8e8b4ab3620153ec026ad23ceeefff7699940f2b5f87bf4a4"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "dc9f090c17576efaeb300dac108d54b0a98fda7a35d80b8dafc58f11be433f59"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "85c5487f4930e5a4677f78b51f92b0ece031c40f1ad74a9d8bd7922f8f54e37f"
+            }
+          ]
+        },
+        {
+          "code": "CN04",
+          "row": 3,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "0ccad6a075659c25d756122f5b9aa60553c23bd9fc5101b8a7b1c70146f1e02d"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "9853612afc8a55290b97b311c12ecaf31b33dcc28316e6dfae61a0fedea8de27"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "c6071d1cde43275698b473c3ee02c3e445bd011d368c7668182da8ec7c407986"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "28098ba245df0c6f1db1cb55073d17c7abff27ff164e43f505db76d2e0b01b26"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "8f83bda74fa26b3106d2e0616d1820552a715c9cf5108669e9db1472d7e00aa1"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "2690c1998b9a78c0cdab2174c68127afe590a4255742dad4877599636e1b48c7"
+            }
+          ]
+        },
+        {
+          "code": "DC22",
+          "row": 4,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "9fbf1c933c7b6b321493fc0fd3dbeffb0a51c7f845916690e6609b8d637de2f6"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "a5b1b288de47e75b77243acadd4057c4e8b6df51b5e549fea48bac30819436e5"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "17466d6b5d37d205fed5ffa0f09478c5b52345eac995b560509b212944033590"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "c6ead30cb6eacf47c076fb129f518fdb7855ab6fc10e58f43fdffab988966dca"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "31d52995c1b21076da5d808a74a6713dabed4d721748ec7e37464f53d6e32c19"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "c92ccda78e8a4fb8a337fc02422e2ab734d7ccfdc6940f193228fe30eb1f72ea"
+            }
+          ]
+        },
+        {
+          "code": "FT09",
+          "row": 5,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "715d7283fd89dabc7b1d3b1c979ceb123ae112caeb97b15c03bfbe88d1010eb9"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "14f45f2aca62cd0b973a84fc25771e0a2c3bb1aa36fdf9cedd40cd421f4440c1"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "cc8b8efbdd8e253ea08f49723dda700b14e2bacbecfe5b29397bb53e47079c4a"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "3742cedf4a1f7e4b2f351ac236471b7282e63edc4f8f83b8ef5648ea8dfa3f98"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "5c71b2903d9f8d87c0d7b0a81f7e3504d65d35295da5d3856d90a61f30361907"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "0be734834c3f5b729d5022132c3442b2c69f4ef188e5084c61a5f3440ac3ac96"
+            }
+          ]
+        },
+        {
+          "code": "G50T",
+          "row": 6,
+          "levelCount": 7,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "ee27296e4a3810b3f17db2871e0b9cb45b7680f2889ec6c7518ecc8aa5cf6858"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "5a5b8154db6848db119e44db3147cfe87d31c2a024f459e043910339f1c1dd4d"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "c0954dc5553436bf7709fcfd9f516fefa4d16ac110f3e16aab58582fa37ea7ac"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "9cf8211d6ced39250b7dba51de4ddb8fe25c46cc46dffa1b9e820826573600a4"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "4c0223da00c53da3aac9d93f7c72195f381b3dcbd1e78cdc27fafd40f223a5f5"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "fe3df0a53df764cbe1d617508d1db436445d14650d84469620017844c5b61298"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "431b78bb8603e617462cdd7fce0fbd0accd3794a04201051947a3efabcfb0869"
+            }
+          ]
+        },
+        {
+          "code": "KA59",
+          "row": 7,
+          "levelCount": 7,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "9c4552326a7051734724f576663812d58d43a94ae52104c2fcff1477e3263427"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "49c6511d5461291a5e4c16913d8ed2d44f5cab8f6969a5c5e2290fa09826f1f2"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "972af240f69b85ed795c70e2e1e6efce58e1cbd81f818627bba5a1c9610bae4e"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "49818625af19fc4ec1c5b7252ba1278f09146a88ec6dcb58b47de35254010d4a"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "4cdd0958b8579073f0501a621013cff4ab66e4d9557fce43da9b630ef317327e"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "2a29bf8bf6d1760c00cd1174e69d08f76ce07a90b1d3993b162c62b5faed133b"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "0cec4839aea2d7cd9d06b72011a4170077e669b11f35b7b7ae1dd230182654f6"
+            }
+          ]
+        },
+        {
+          "code": "LF52",
+          "row": 8,
+          "levelCount": 10,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "0379ec57b6607450dcc483ac5d8c6b06f704c6f2009aea2024f2acc73afd30d5"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "820104bc94442e9b9ad82849aa7fdf5b2389f272ee7615b8c7a7ea6ab10a2aa6"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "1364324567b2c9b3a5e4f343c94750bd77d0279c5a420f556a607077b5086ba0"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "20a0d1dea06127b54e3760f9ef90647c43ecd37292cb8649a17bbee17b7e0ad3"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "c1f9d3f27d7814f9166e9321aa3cf87cb2706600362b523a42f77c334bbf9312"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "ac45ef456bcca571f62d001c599b0bc8b5f1a62e64211e7cf50608d7cf290cb3"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "83d26fcc55fc1e23d69583bbe778c9d1094af2072d39e2fd0b7a2dfeaeee3e83"
+            },
+            {
+              "level": 8,
+              "column": 7,
+              "frameSha256": "bfe0148b602865a70bf96ac59e7df5e18fb78d548f6dca12feab8b65633547af"
+            },
+            {
+              "level": 9,
+              "column": 8,
+              "frameSha256": "d71bde5f576168460f607acf71178c3ce36537e0f7ee1155ad893b7c3d68aa61"
+            },
+            {
+              "level": 10,
+              "column": 9,
+              "frameSha256": "b5a81df7fa7cc5a4d60246bf816e4c06e32f4d918a2c3a93f4c7c85a8ca36063"
+            }
+          ]
+        },
+        {
+          "code": "LP85",
+          "row": 9,
+          "levelCount": 8,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "adfd4d70a7ebbf4f51b1bba1bfbadede885867fba137820bccc3f08b2e98741b"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "cf6fd213dcc346966f36d93e1e4072d93f9c80c81ca06991de2997c3fa9d9852"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "f7b66f55d7aa588c9f579a77a5f0adb4421c71fce39ba5f26953a15cc3646ce4"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "03c22eeacb27a6daf7969a119e863bb28d471f49d51773ad2214d96f0b15f0d1"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "cb8fb7329af8ac09b6a9659993fde049170b4a00fb6eaddbfb2a22cca49c3d40"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "bbbbd81f685c0a176b3b9a2893125ba9a9bdd7d1c9dd7640b257cdfc1acdfba3"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "5a2f98ba6611f054fb2f54308f8043a309590acbedd8e55c3bc0d85ff19b093f"
+            },
+            {
+              "level": 8,
+              "column": 7,
+              "frameSha256": "94bd7570b467918a68dca27e1d742936359ba24ee4b9716f7adbaa9ee515b987"
+            }
+          ]
+        },
+        {
+          "code": "LS20",
+          "row": 10,
+          "levelCount": 7,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "cfe5196fb75182bbcf1368da5c1298bbac7864ebb054d7dd1c9babee229b77a4"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "4412df0168a89497dd6e45885ca16198a795e40e9ac4c75317a721a90fbc40bf"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "6f5f924b98b877628b999456d3c6d553cc1f5748a2729e14d9b2884e502f9597"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "ac158a3c5ba8a2989acab487695ab36a6dd5fe57ae7ae61ece3eb318ff4c96a0"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "e65e75c3944f3f5a3e2e7f1680b2755fde75e2ed7794b0c1bc5c570c398d125c"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "64d6cc237ac45cf99e2ebef3383e9a32cca293bd1b8c0eb4e8951976ff38a147"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "b61ec00d9de5e5192828561a824c60be424b6f7f8d37ccf1885efaa60a332dce"
+            }
+          ]
+        },
+        {
+          "code": "M0R0",
+          "row": 11,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "2642c7e451efe2f5eb1476f5a1ee96eb06191a1adf85c67a3faf058ff89b0b23"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "6cdaee5abede9dd4078b40874d514f10df29985e79c285d1cfd0a69abcc5c130"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "90c2695eaabbc43a171f3fe703be1828ac4d564634d385c94efd0e7983a1e015"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "475b228c71ee71a4c102022cb34f56d98da64c84b8d4f9b468a8d8d8fbb99d14"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "014a4cc4f4a7e9c5002763fe30137e62a329db4a18e59a1eaa31d3f2137940d2"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "5419491c748ea87951c478db7b7af6881b3623e6c888cc9595d8a87773d3eaae"
+            }
+          ]
+        },
+        {
+          "code": "R11L",
+          "row": 12,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "44caf05bf3eb1c9bcb2e0d19d19dfe623e1d97f3685384260bcc636d3de97af5"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "5596f2ac0f1c1cc68ccadd8df8053e0ebf07c79667c69d26ae44ec8e3d9c971d"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "51e3be4822be129e30321f83f61b96d72e0a29d77731dc438912aebd1d60c4a8"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "7128afd7fe78d9f5e2b8a7c1c6b9e07261c77d459bef16459753bd80404c7556"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "5bb3cf829bc9e7960dd3309ca2ea709d3108a3776df8a012318f3df8fcfb03cb"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "77ce3b5a91ff94f8e57304f4d951cd219d14f37a5dd31f63e91065280186de9f"
+            }
+          ]
+        },
+        {
+          "code": "RE86",
+          "row": 13,
+          "levelCount": 8,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "f7f4f61cd5dd3078ad9f6c6ffa1926d2ee17fbfed933edbfb667980511cfb73b"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "e318b8a7a5a31c020bfe7b89dc0353408af11e76f2db0ff743552494836b5e78"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "616ef3a02dd1204280902b407cfb3c5469ed4837171160ba09cbb7fb207ca3c6"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "816482847d083ac8b5c36b0384bcd49cb4fa898e63dc432414331fdc20e6c386"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "374c69263de5fb12795eb2b10450797b1d87956c059146f9ba08d534375975f9"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "8e3ca60fa83d9d270513a9da703893447e44ecd9a3c1ad32ef1612591d164044"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "b806efaebb39a588faddb28d96c78fbe098aaed2cf71551d2c583d7984ceb437"
+            },
+            {
+              "level": 8,
+              "column": 7,
+              "frameSha256": "2a099acf29ec7ad3ed24e32e661106f5a9509625be09c5d60c69f83af0bea746"
+            }
+          ]
+        },
+        {
+          "code": "S5I5",
+          "row": 14,
+          "levelCount": 8,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "6c0878b45d6b24e9fe0097ba85bb3c9191dc86a5f9e8e67a0550aaf6d2d9f169"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "596fdf8e48fe8282749c857124fa226dfa88a4608c75f5524dd6d74df753bf00"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "bb19b103cb03c531098fcccc82e6f3bcc230c8f3c8965c890f0d73664db0e247"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "3f202919e3992b48816a6e01548f6bf0d9d12225d28014076a0e93fb1edbd186"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "e5b0590ff7d16aa95b839851c6591d178035af954adcd61df0cf542170ec6bb7"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "79115d4ee03fe19ecaff62c5471288fc4d6548e2e71f37fc476f20288b9902c9"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "c08bcdcaa563446e0897f81b9383a7cc648d662968219e181ba09e6c69a4c6a3"
+            },
+            {
+              "level": 8,
+              "column": 7,
+              "frameSha256": "35bd1dd3f14317f861a60feb95fc00c570f6af1d0017cb4817fa27e87e048c58"
+            }
+          ]
+        },
+        {
+          "code": "SB26",
+          "row": 15,
+          "levelCount": 8,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "0a2b74b2fece6e590be214a387672a129622285f3e92e9233069470a156e3be8"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "3c9db1621f428d96f23bee324427c3687aa15534a5f6981c4a82a582221c4e96"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "c68c1fe0cfd4a9567fbbdd73e25c3c9f378a9a1cb3749af7e1e5db87c4a3267f"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "1a0cbdde249f163c18879859f42b3de70ec82410d579d3016cffe1a278c5c7c8"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "06dee515322c081db02ee49a968fa73783c632d20f6a3db959505e12622a62d3"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "986e8bae268e5253f9c994c771d20219c4df1f772ebf964333864fc2469d7c47"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "1a6f75f359c14823ed94404d9ed6f14fa5ecb899d1d755f60771a7e75a26991e"
+            },
+            {
+              "level": 8,
+              "column": 7,
+              "frameSha256": "617e0a076e5baf93489b2a27987b0497163ad86e2fc94803043190bbc5034bed"
+            }
+          ]
+        },
+        {
+          "code": "SC25",
+          "row": 16,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "2c4aba87cbc38ffb4244e1aa7031ec69d976d51d8c234c9b3f4e4e92fc83f88e"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "3ade5cae3b324270a2864622b08e92faeacbd5b2fab0d0be908e32e19a51bacf"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "df6074cf604c9ee3fb12dfe489d1df9fdb436235aec297a7d124dacefbf6b0db"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "f58a74f26869738919d8776af3e9378c6a1be0e6fb3d6de5093d577bba67a012"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "accb962e7da2f2a74051fe54afbc480a1438bcf38b67ad133ee62cb11588d952"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "1613f16113b4e2ed250e44b9d943361365b448304d95529d0ee920914b440e09"
+            }
+          ]
+        },
+        {
+          "code": "SK48",
+          "row": 17,
+          "levelCount": 8,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "62fabd1676c12342a5226899072bd02e21f511974445d30e56fbf7936c98d525"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "9a357142c7766bbdb9dcc0f31847b0dba7ffc924c2d7fb249c54b00d54e1f8c1"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "7c7c422d6cacbdd9b4a7af5eb11fe5193c7b37c824f89dd776a7e7519917a334"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "4ea7e6e712f045e45031bc685e3b76e60792b826142b0ad5c5ba6d3986741ae6"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "32a1754a30999e08b85b9ad7d81678965cefe3c4893f09c0b1587e404a3a53ab"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "9b190480212bb01f8732c6f56d7910f15d0a845b2f4ae42bc12886bfee11b060"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "9a4fa9fee242d0742dbab22c5da0f3781ce269423dff20db18ea32e8141aa86a"
+            },
+            {
+              "level": 8,
+              "column": 7,
+              "frameSha256": "9dc6e2c9f28e9c9c3f9a3f91c2e1f8325e7e5d91d9a2155a9df548401766e66a"
+            }
+          ]
+        },
+        {
+          "code": "SP80",
+          "row": 18,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "c7f2485b0a58ce60bea7437240a90fdf2410a5e1d7c5d08538472306a8e8b8fe"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "c05288ced4dfc919036c1f8019a470519f23509b1aa2b4c327a16dbaaf13f273"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "b23d0e2243bc716d36e8602c7d30758a687250f142263510d2bc36432b5f35b4"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "53176f9aa3071fb649c2b87232ed0ada09ff9cd5cc0abbbd801b735462703e96"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "c8e2a6530c771069363a9677e647ad6833680a131a83a733ecc0f95017290a00"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "f8e2f2cbbc0d970a6305b4070af709fb8129ae253135900579cb99b9991c9eb9"
+            }
+          ]
+        },
+        {
+          "code": "SU15",
+          "row": 19,
+          "levelCount": 9,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "3f2a9c477b4c7e53dd9bba63c58ef7356a539e82ec2e29e8f7e14b5b22e31151"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "f5ca55ecc32aca5f97eeb2e110f2240124594841808f2424e564484982fba238"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "48e3345b77b6726331751895a3b7ab8eedb6bd0eaa433cd3dfd57eb3a80fb618"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "95aa7e9deba8a293b45af6a1ea19108b0fcd44966c57347a8ba0ab5bf33543b9"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "37c8dcfe943424c5deb8b57add9849b956e5dc1510a24cd6aafb2d9011f0de38"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "229ff844919c63c7edd566e9a7d8b953238882e8f832527f436315f5eb3a09ec"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "d5d3f977d84c41eb27919ba917e543e1a551d52d83ef65e78f1d9e036defd7c6"
+            },
+            {
+              "level": 8,
+              "column": 7,
+              "frameSha256": "26a2e5cc4dfc4fe4b7f7e29f3b89f5ab99e1abbe70735ebc068cce961f297a26"
+            },
+            {
+              "level": 9,
+              "column": 8,
+              "frameSha256": "f5590ab1d6d99aa15760ac613f845f668b5e62b03593e4c8bbfd8831694c240b"
+            }
+          ]
+        },
+        {
+          "code": "TN36",
+          "row": 20,
+          "levelCount": 7,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "25f09fc875554bab436d17867cef4ec3292b42ed17c27d31a1e1c315da016bc4"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "1d95c4e7a6219cfc887b7c026011e519baf868534529d236487e7e3f1a39cfb3"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "b3747b11754d75613676d5818a508daa4d49fbfebf47d6bba5e5ce17b12cbc53"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "ec2e4cb8d9f5ad34668c310b4c495ffcf164dc7e21093923ffe92a857f34487f"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "75670c893fc6bf3fb33413a6a2b53d90a039aac915ea0047044226ae3b62f934"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "24e01519f90f4f27d7770760233f0550c58b15ec6f7e2eceb3d3b3b7bd8828f4"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "377e5453eb34b4424e15a9b243deeea6ff7dc20e20ed8bd7aea18f76b89fab09"
+            }
+          ]
+        },
+        {
+          "code": "TR87",
+          "row": 21,
+          "levelCount": 6,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "4ba62ba467dd589ff223b14684107bb31f613d392584f202750c85168ae90dc9"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "71476e520108f985b13912a7c28f0a6edb627bb12f0e7523c3759df9f7b0562e"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "cf85d4b016e256b29da6aa2acdf0ac3657a64776ee6c7ca018cf0892ace425da"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "08fb702332750b7c02360aaaf731e7b5c91a8ea9779ae9cededa20f86e60a316"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "86c480456f0256e5d52ed0c81f5a7e68b30528685792bf22a184a04f4f438380"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "b646b91c8d7620a25bdf68967f5f8b8ce4ec2b2f1230f5bc2c60a43a1069680b"
+            }
+          ]
+        },
+        {
+          "code": "TU93",
+          "row": 22,
+          "levelCount": 9,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "98673a054ca46c417d9b879aaa6997061bfa9ceeb34cf75f719faed6b504210f"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "96265052e474bee9ba84ea5a61a7300ea59f685f4c2ecca3d8cd6da9bed0acfc"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "50c0be06b5054312d8802f3a0616bec9fbc27586ce1071a95ab4e822f1ae4634"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "d957b6dbe046cd6e58ca0dff8045a1ff4210212cfa372214a319c947ebfe43cb"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "728818f7a9083d0f5609c2e4f6be95f09be5b19ace7a54c106fdf55e62aa5315"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "41f206eb3aebfaab621faffcae731a976042fb874c4c5a2306efec6023b17342"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "137fe1f42894c76cf96678000a79668319fc11cda997542fd56d4702130163c0"
+            },
+            {
+              "level": 8,
+              "column": 7,
+              "frameSha256": "a5f9abf4d03bb165fdbd228a766d599285c125c9a1c12e0cd0c210981a94cd71"
+            },
+            {
+              "level": 9,
+              "column": 8,
+              "frameSha256": "bf9d17a9bcf984900f2e1cb761c990265f526d36ed2c49ab8935d84bce35c09f"
+            }
+          ]
+        },
+        {
+          "code": "VC33",
+          "row": 23,
+          "levelCount": 7,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "579a9e2090f4bd099acd5c5bd5477ea3fdd682e682111b407a1f2582859c9d5e"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "8c046d6628774e72ec73445131676ad22620b9159e7722ba505bb2fb8bb2983c"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "6ba59523c81387c1a0db78e040df8564438ffcf76db0021c322a9531977806b2"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "ac5815e1998bbfd9381d2110fcab03e01b56f7480b48d8aeba1b944c6f63d46e"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "a296afbfc9ca5ac4b1fc87c1353731de6cc37144a9faafadbd0561e426f97019"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "207467ebdfd9d89ea1acf781a34df82c9d9eb21a00d2f4cc58675f7bd4b4ee72"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "ce2fa8ff348ab9254c1a7b421e2e0f9748553a9d66c2f84c83f45ece68a72992"
+            }
+          ]
+        },
+        {
+          "code": "WA30",
+          "row": 24,
+          "levelCount": 9,
+          "levels": [
+            {
+              "level": 1,
+              "column": 0,
+              "frameSha256": "69b13ff6c4d0da677c20056a19148ecfe4883d3936c6ee27739a326b9c53bc67"
+            },
+            {
+              "level": 2,
+              "column": 1,
+              "frameSha256": "abc12e3c4ae942c28e41830da24b0678b757ffd05c090bec187764a8010c1fb0"
+            },
+            {
+              "level": 3,
+              "column": 2,
+              "frameSha256": "2377b72a520dbc93cecdfafa8f6cd1b3f7be189aff287633f289b0f9b2efa79a"
+            },
+            {
+              "level": 4,
+              "column": 3,
+              "frameSha256": "38da5208bcf5e2925e5717ebaec48d1b07460a6296ccb98e8bfce1f56f3e9e89"
+            },
+            {
+              "level": 5,
+              "column": 4,
+              "frameSha256": "3d67a34ea26297e5d9810224074a22d2bbb4a5f700de525b2c228f043ab90fd8"
+            },
+            {
+              "level": 6,
+              "column": 5,
+              "frameSha256": "2cbe2da7722c70289cbf2e1aedbd5ecb83e2745f13e58abe369ce54f024ef16e"
+            },
+            {
+              "level": 7,
+              "column": 6,
+              "frameSha256": "8d2bd953ed8f25687808504d11ec9b10788db2ee68206d354d046ff3f0e49612"
+            },
+            {
+              "level": 8,
+              "column": 7,
+              "frameSha256": "ea98b894521caf02de873ccdfc3b86f4eba731f7f97c95f9f7edbd1c789f3bfb"
+            },
+            {
+              "level": 9,
+              "column": 8,
+              "frameSha256": "56977705181f36cb491514bfe3c2a798cdaa49b104e6052936b5ec2ceac6552d"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

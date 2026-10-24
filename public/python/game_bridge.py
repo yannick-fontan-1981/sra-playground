@@ -176,6 +176,8 @@ def _new_session(code: str, level: int = 1) -> Session:
         session = Session(code, engine, engine.game_id, engine.level_count, DEFAULT_PALETTE.copy())
     else:
         raise ValueError(f"Unknown game code: {code}")
+    if type(level) is not int or not 1 <= level <= session.level_count:
+        raise ValueError(f"Level must be between 1 and {session.level_count}")
     if level == 1:
         raw = session.engine.public_state()
     elif code in CUSTOM_BY_CODE:
@@ -191,14 +193,23 @@ def _new_session(code: str, level: int = 1) -> Session:
     return session
 
 
-def load_game(code: str) -> dict[str, Any]:
+def load_game(code: str, level: int | None = None) -> dict[str, Any]:
     global _active
     code = str(code).strip().upper()
-    if code in _sessions:
+    if code in _sessions and level is None:
         _active = code
         return _response(_session())
-    session = _new_session(code)
+    # An explicit game + level is one atomic worker operation. Separate load
+    # and select requests could select a level in the wrong game if a second
+    # game selection is queued between them.
+    previous_random = random.getstate()
+    try:
+        session = _new_session(code, 1 if level is None else level)
+    except Exception:
+        random.setstate(previous_random)
+        raise
     _sessions[code] = session
+    _sessions.move_to_end(code)
     _active = code
     while len(_sessions) > MAX_SESSIONS:
         _sessions.popitem(last=False)
@@ -297,7 +308,7 @@ def dispatch(request_json: str) -> str:
             raise ValueError("The game command must be an object")
         kind = request.get("type")
         if kind == "load":
-            result = load_game(request.get("code", ""))
+            result = load_game(request.get("code", ""), request.get("level"))
         elif kind == "action":
             result = perform_action(request.get("actionId"), request.get("data"))
         elif kind == "undo":
