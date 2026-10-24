@@ -14,7 +14,7 @@ export default defineConfig({
   preview: { allowedHosts: ['terminal.local'] },
   build: {
     rolldownOptions: {
-      input: ['index.html', 'architecture.html', 'videos.html', ...contentPages]
+      input: ['index.html', 'arc-agi-3.html', 'architecture.html', 'videos.html', ...contentPages]
         .map(path => fileURLToPath(new URL(`./${path}`, import.meta.url))),
     },
   },

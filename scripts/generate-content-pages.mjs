@@ -6,6 +6,7 @@ import { renderSiteHeader } from '../src/site-header.ts';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const architecture = JSON.parse(await readFile(resolve(root, 'content/architecture.json'), 'utf8'));
 const catalog = JSON.parse(await readFile(resolve(root, 'content/videos.json'), 'utf8'));
+const benchmark = JSON.parse(await readFile(resolve(root, 'content/arc-agi-3.json'), 'utf8'));
 const pages = architecture.pages;
 const videos = [...catalog.videos].sort((a, b) => a.episode - b.episode);
 const siteOrigin = 'https://sra-playground.yannick-fontan.chatgpt.site';
@@ -105,6 +106,20 @@ function renderChapter(page, index) {
       </article>
     </main>`});
 }
+function renderBenchmark() {
+  const path = '/arc-agi-3.html';
+  return documentPage({title:benchmark.title,description:benchmark.description,path,active:'arc-agi-3',body:`
+    <main class="reading-layout wrap">
+      <aside class="reading-sidebar benchmark-sidebar"><a class="sidebar-heading" href="${path}">ARC-AGI-3</a><nav aria-label="On this page">${benchmark.sections.map((item,index)=>`<a href="#${anchor(item.title)}"><span>${number(index+1)}</span>${escape(item.navTitle)}</a>`).join('')}</nav>${externalLink('https://arcprize.org/arc-agi/3','Official benchmark','sidebar-series')}</aside>
+      <article class="reading-article benchmark-article" id="content">
+        <header class="reading-header"><p class="reading-breadcrumb">ARC-AGI-3 <span>/</span> An introduction</p><h1>${escape(benchmark.title)}</h1><p class="reading-deck">${escape(benchmark.description)}</p></header>
+        <div class="reading-intro">${paragraphs(benchmark.intro)}${sources(benchmark.sources)}</div>
+        ${benchmark.sections.map(section).join('\n')}
+        <section class="related-reading"><h2>Try it for yourself</h2><div class="benchmark-actions"><a class="reading-button" href="/?game=LS20">Play LS20 · official ${arrow}</a><a class="reading-button" href="/?game=CASC">Play CASC · custom ${arrow}</a><a class="reading-button" href="/architecture.html">How SRA is designed ${arrow}</a></div></section>
+        <p class="source-snapshot">Official sources checked ${escape(displayDate(benchmark.reviewedDate))}.</p>
+      </article>
+    </main>`});
+}
 function videoCard(video) {
   return `<a class="video-card" href="${videoPath(video)}"><div class="video-thumb"><img src="${video.thumbnail}" alt="" width="1280" height="720" loading="lazy"/><span class="video-duration">${escape(video.duration)}</span><span class="video-card-play">${play}</span></div><div class="video-card-meta"><span>Episode ${number(video.episode)}</span><span>${escape(video.games.join(' / '))}${video.gameVersion === 'Legacy' ? ' · Legacy' : ''}</span></div><h2>${escape(video.displayTitle)}</h2><p>${escape(video.topics.slice(0,2).join(' · '))}</p></a>`;
 }
@@ -142,6 +157,7 @@ async function save(path, html) {
   await writeFile(target, html.replace(/[\t ]+$/gm, ''));
 }
 for (const [index,page] of pages.entries()) await save(archPath(page),renderChapter(page,index));
+await save('/arc-agi-3.html',renderBenchmark());
 await save('/videos.html',renderVideoIndex());
 for (const [index,video] of videos.entries()) await save(videoPath(video),renderVideo(video,index));
-console.log(`Generated ${pages.length} architecture pages, ${videos.length} episode pages, and the video index.`);
+console.log(`Generated the ARC-AGI-3 introduction, ${pages.length} architecture pages, ${videos.length} episode pages, and the video index.`);

@@ -379,6 +379,32 @@ section. The temporary viewport fixture was removed before packaging. The
 latest wording refinement leaves the styling and navigation unchanged.
 The game engines, agent integration status, and game controls are unchanged.
 
+## ARC-AGI-3 introduction
+
+The new `/arc-agi-3.html` page explains the benchmark in English: static grid
+tasks versus interaction, observations and action semantics, exploration and
+goal discovery, composition across levels, and Relative Human Action Efficiency.
+It includes links to the ARC Prize overview, Foundation paper, and current
+schema, actions, and scoring documentation checked on 24 October 2026. Scoring
+uses the current documentation; the older paper is used for benchmark design.
+The 10-baseline/20-agent-action example is identified as a per-level score,
+with caps, weighting, and completion limits acknowledged separately.
+
+The page distinguishes the official public and held-out environments from this
+Playground's 25 official and 75 custom games. It describes the current manual
+browser runtime and pending SRA integration. Links open LS20, CASC, and the
+Architecture introduction. A new shared main-navigation entry and a link beside
+the Playground's ARC AGI 3 heading make the explanation easy to find.
+
+The content generator and Vite entry list now include the new page. TypeScript,
+the production build, and `git diff --check` pass, producing 14 HTML pages.
+Generated section anchors, article links, and shared navigation were checked.
+Browser QA confirms the five menu entries remain visible on desktop, at 619 px
+(one row), and at 390 px (three entries above two). There is no horizontal
+document overflow; the comparison table and action links fit narrow layouts.
+The page links and sidebar anchors work, and the LS20 link selects LS20 in the
+Playground. The temporary viewport fixture was removed before packaging.
+
 ## Reproduce
 
 With Node 22.18+ and Python 3.12+ with NumPy, Pydantic, and typing_extensions:
