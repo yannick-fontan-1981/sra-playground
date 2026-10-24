@@ -433,20 +433,22 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 .brand-blue{fill:var(--accent)}
 .brand-yellow{fill:var(--yellow)}
 .brand-type{display:flex;flex-direction:column;gap:4px}
-.brand-title{font-family:var(--mono);font-size:21px;line-height:1;font-weight:750;letter-spacing:1.1px}
-.brand-project{font-family:var(--mono);font-size:8px;line-height:1;letter-spacing:2.2px;color:var(--subtle);font-weight:400}
+.brand-title{font-size:22px;line-height:1;font-weight:600;letter-spacing:-.7px}
+.brand-project{font-family:var(--mono);font-size:8px;line-height:1;letter-spacing:1.1px;color:var(--subtle);font-weight:400}
+.brand-context{font-family:var(--mono);font-size:9px;line-height:1.5;letter-spacing:.3px;font-weight:400;color:var(--subtle);border-left:1px solid var(--line);margin-left:3px;padding-left:15px}
 .site-header nav{gap:30px;font-family:var(--mono);font-size:10px;font-weight:400;text-transform:uppercase;letter-spacing:.35px}
 .site-header nav a{color:var(--subtle);padding:7px 0}
 .site-header nav a:hover,.site-header nav a.nav-active{color:var(--ink)}
 .nav-active:after{width:5px;height:5px;border-radius:0;background:var(--yellow);bottom:-7px}
 .source-link{gap:6px}
 .source-link>.small-icon{width:13px;height:13px}
-.intro{grid-template-columns:1fr 405px;align-items:center;gap:48px;padding:31px 0 30px;min-height:236px}
-.intro .eyebrow{font-size:9px;letter-spacing:1.35px;color:var(--muted);margin:0 0 17px}
+.intro{grid-template-columns:minmax(0,1fr) 365px;align-items:center;gap:42px;padding:29px 0 29px;min-height:244px}
+.intro-main{min-width:0}
+.intro .eyebrow{font-size:9px;letter-spacing:1.35px;color:var(--muted);margin:0 0 14px}
 .status-dot{border-radius:0;background:var(--yellow)}
-.intro h1{font-size:clamp(53px,6.2vw,82px);font-weight:500;line-height:.95;letter-spacing:-4px;white-space:nowrap;margin:0}
-.hero-version{color:var(--accent)}
-.hero-statement{font-size:18px;line-height:1.5;color:var(--muted);margin:18px 0 0;letter-spacing:-.3px}
+.intro h1{font-size:clamp(44px,5.4vw,72px);font-weight:550;line-height:1.04;letter-spacing:-3px;white-space:nowrap;margin:0}
+.hero-agent{font-size:clamp(24px,2.6vw,34px);font-weight:500;line-height:1.2;letter-spacing:-.8px;color:var(--accent-hover);margin:9px 0 0}
+.hero-statement{font-size:16px;line-height:1.5;color:var(--muted);margin:14px 0 0;letter-spacing:-.2px}
 .hero-statement em{font-style:normal;color:var(--ink)}
 .intro-art{position:relative;display:grid;place-items:center;width:100%;align-self:stretch;overflow:hidden}
 .intro-art img{width:100%;height:auto;max-height:204px;object-fit:contain;image-rendering:pixelated;opacity:.48;mask-image:linear-gradient(90deg,transparent,#000 20%,#000 86%,transparent)}
@@ -535,9 +537,10 @@ button:disabled{opacity:.32}
   .minimal-play-area .canvas-stage{width:448px}
 }
 @media(max-width:1050px){
-  .intro{grid-template-columns:1fr 330px;gap:30px;min-height:214px}
-  .intro h1{font-size:64px;letter-spacing:-3px}
-  .hero-statement{font-size:16px}
+  .intro{grid-template-columns:minmax(0,1fr) 270px;gap:26px;min-height:225px}
+  .intro h1{font-size:clamp(43px,5.3vw,56px);letter-spacing:-2.2px}
+  .hero-agent{font-size:clamp(23px,2.7vw,28px)}
+  .hero-statement{font-size:15px}
   .minimal-play-area{grid-template-columns:minmax(0,1fr) 218px;min-height:430px}
   .minimal-play-area .board-column{padding:26px 27px}
   .minimal-control-column{padding-inline:12px}
@@ -548,14 +551,16 @@ button:disabled{opacity:.32}
   .site-header{height:72px;gap:18px}
   .brand{gap:10px}
   .brand-symbol{width:31px;height:31px}
-  .brand-title{font-size:18px;letter-spacing:.7px}
-  .brand-project{font-size:7px;letter-spacing:1.6px}
+  .brand-title{font-size:20px;letter-spacing:-.6px}
+  .brand-project{font-size:7px;letter-spacing:.75px}
+  .brand-context{font-size:8px;margin-left:0;padding-left:10px}
   .site-header nav{gap:19px;font-size:9px}
   .source-link span,.source-link .small-icon{display:inline}
   .intro{grid-template-columns:1fr;min-height:0;padding:30px 0 28px}
-  .intro .eyebrow{font-size:8px;margin-bottom:17px}
-  .intro h1{font-size:clamp(53px,10vw,70px);letter-spacing:-3px}
-  .hero-statement{font-size:16px;margin-top:14px}
+  .intro .eyebrow{font-size:8px;margin-bottom:14px}
+  .intro h1{font-size:clamp(40px,8.5vw,64px);letter-spacing:-2px}
+  .hero-agent{font-size:clamp(22px,4.4vw,29px);letter-spacing:-.5px;margin-top:8px}
+  .hero-statement{font-size:14px;margin-top:12px}
   .intro-art{display:none}
   .catalog-count{font-size:7px}
   .catalog-count>span{margin-inline:6px}

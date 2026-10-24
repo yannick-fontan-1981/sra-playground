@@ -12,15 +12,18 @@ Fontan's **Symbolic Reasoning Agent** research.
   observations and sends actions to that local worker.
 - **Minimal manual controls:** arrows, a generic Space action, board clicks,
   Undo, and Reset. The player leaves the game mechanics for you to discover.
-- **ARC-inspired dark appearance:** a prominent ARC AGI 3 heading, warm black
-  surfaces, off-white text, blue and yellow accents, and a mosaic rendered
-  from 18 real game frames. SRA Playground remains identified as Yannick
-  Fontan's independent research project.
+- **SRA-first identity:** SRA Playground and Symbolic Reasoning Agent lead
+  the hierarchy, with ARC AGI 3 as the research setting. Warm black surfaces,
+  off-white text, blue and yellow accents, and a mosaic rendered from 18 real
+  game frames retain the ARC-inspired appearance.
 - **SRA Agent:** an upcoming mode. The genuine reasoning agent is not connected
   yet; playable games are not a claim that SRA solves them.
-- **Architecture page:** `/architecture.html` explains the Python SRA
-  components, evidence and action boundaries, the **behavior-tree-loop**, and
-  the browser integration roadmap, with pinned implementation links.
+- **Architecture page:** `/architecture.html` presents the case for symbolic
+  reasoning, the artificial cortex ambition, explicit abstraction, relational
+  meaning, the **behavior-tree-loop**, and the current Python implementation.
+  An interactive illustration shows how a changed mechanism changes a plan.
+  Pinned code links, research references, and implementation status distinguish
+  the research vision from demonstrated behavior.
 
 The 100 games use their original Python engines. They have not all been rewritten
 in TypeScript. The independent TypeScript PIPE implementation is retained for
