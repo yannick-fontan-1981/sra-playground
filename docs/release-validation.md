@@ -358,7 +358,8 @@ The Playground now displays a compact Design Premise between its hero and the
 games. Ethical principles are presented as a foundation for the design of
 intelligence. Symbolic reasoning enables explicit concepts, relations, and
 reasoning structures whose meaning and purpose are grounded in human
-intelligence. Responsibility is attributed to the human designers.
+intelligence. This explicit design is presented as enabling human responsibility,
+thereby fulfilling the ethical principle on which it is founded.
 
 The Architecture introduction develops this premise under Design rooted in
 human intelligence. It connects symbols, relations, and reasoning operations
@@ -372,10 +373,10 @@ are no longer attached to this statement of the author's design philosophy.
 TypeScript, the production build, and `git diff --check` pass. All 13 HTML pages
 build, and the homepage anchor matches the generated Architecture section.
 The previous Architecture anchor redirects to the updated section.
-Browser QA confirmed that the revised copy and its link remain fully visible
-with 14 px text in a 390 px same-origin iframe viewport, with no horizontal
-overflow. The band is 229.08 px high. The new link reaches the correct section;
-the temporary viewport fixture was removed before packaging.
+Prior browser QA confirmed readable 14 px text in a 390 px same-origin iframe
+viewport, with no horizontal overflow and a working link to the correct
+section. The temporary viewport fixture was removed before packaging. The
+latest wording refinement leaves the styling and navigation unchanged.
 The game engines, agent integration status, and game controls are unchanged.
 
 ## Reproduce
