@@ -39,8 +39,11 @@ physical completion, and the pages report no new solve rate or transfer result.
 
 `content/videos.json` records six public Yanik_AI uploads verified on
 24 October 2026. Each `/videos/<slug>.html` page has the original thumbnail,
-an explicit Play button, a YouTube watch link, a short summary based on the
-author's public description, and related chapter/game links. The index lives
+an explicit Play button, a YouTube watch link, the author's complete original
+English text from the public description, and related chapter/game links.
+The text is visible in the static HTML, with paragraph and line breaks preserved;
+the metadata records its source and a header link jumps directly to it.
+Short summaries are retained only for page metadata. The index lives
 at `/videos.html`. Episode 1 links its legacy recording to the current official
 LS20 with that distinction stated. Episodes 4 and 6 refer to FT09 and AR25.
 
@@ -69,7 +72,7 @@ local game-action boundary.
 | `public/vendor/pyodide/` | Prepared runtime and dependency files served from the same origin |
 | `src/runtime/contracts.ts` | Earlier prepared PIPE agent protocol; no real SRA is connected |
 | `src/games/pipes.ts`, `reference/python/pipes.py`, `tests/` | The independent PIPE TypeScript reference and development parity checks |
-| `content/architecture.json`, `content/videos.json` | Authored chapters and verified episode metadata |
+| `content/architecture.json`, `content/videos.json` | Authored chapters, verified episode metadata, and full original episode texts |
 | `scripts/generate-content-pages.mjs` | Complete static architecture, video-index, and episode HTML pages |
 | `src/reading.ts`, `src/reading.css` | Reading layout, legacy section links, and click-to-load video embeds |
 | `public/videos/` | Original Yanik_AI episode thumbnails, with provenance in the catalogue |

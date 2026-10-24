@@ -36,6 +36,8 @@ for (const entry of [...pages, ...videos]) if (!/^[a-z0-9-]+$/.test(entry.slug))
 for (const video of videos) {
   if (!/^[A-Za-z0-9_-]{11}$/.test(video.id)) throw new Error(`Invalid YouTube ID: ${video.id}`);
   if (!video.thumbnail.startsWith('/videos/')) throw new Error('Video thumbnail must be served locally.');
+  if (video.fullText?.kind !== 'youtube-description' || typeof video.fullText.text !== 'string' || !video.fullText.text.trim()) throw new Error(`Missing original episode text: ${video.id}`);
+  if (video.fullText.sourceUrl !== video.sourceUrl || video.fullText.language !== 'en' || !video.fullText.author) throw new Error(`Invalid episode text attribution: ${video.id}`);
   for (const slug of video.relatedArchitecture) if (!pages.some(page => page.slug === slug)) throw new Error(`Missing related chapter: ${slug}`);
 }
 
@@ -112,20 +114,21 @@ function renderVideoIndex() {
       <header class="video-index-header"><div><p class="reading-breadcrumb">Yanik_AI <span>/</span> Video series</p><h1>Building SRA</h1><p>Game runs and notes on the development of the Symbolic Reasoning Agent.</p></div>${externalLink(catalog.channelUrl, 'Watch the channel', 'reading-button')}</header>
       <div class="video-index-count"><span>${videos.length} episodes</span><span>Yannick Fontan</span></div>
       <div class="video-grid">${videos.map(videoCard).join('')}</div>
-      <p class="video-index-note">Episode notes are based on the descriptions published by the author.</p>
+      <p class="video-index-note">Each episode includes the full original text published by Yannick Fontan in its YouTube description.</p>
     </main>`});
 }
 function renderVideo(video, index) {
   const related = video.relatedArchitecture.map(slug=>pages.find(page=>page.slug===slug));
   const gameLinks = video.games.map(code=>`<a class="reading-button" href="/?game=${encodeURIComponent(code)}">Play ${escape(code)}${video.gameVersion === 'Legacy' ? ' (current official version)' : ''}${arrow}</a>`).join('');
+  const fullText = video.fullText.text.split(/\n\s*\n/).map(block=>`<p>${escape(block)}</p>`).join('\n');
   const body = `
     <main class="reading-layout wrap">
       ${videoNav(video.slug)}
       <article class="reading-article video-article" id="content">
-        <header class="reading-header"><p class="reading-breadcrumb"><a href="/videos.html">Videos</a><span>/</span> Episode ${number(video.episode)}</p><h1>${escape(video.displayTitle)}</h1><div class="video-meta"><span>${escape(video.duration)}</span><span>${escape(video.games.join(' / '))}${video.gameVersion ? ` · ${escape(video.gameVersion)}` : ''}</span><time datetime="${escape(video.date)}">${escape(displayDate(video.date))}</time></div></header>
+        <header class="reading-header"><p class="reading-breadcrumb"><a href="/videos.html">Videos</a><span>/</span> Episode ${number(video.episode)}</p><h1>${escape(video.displayTitle)}</h1><div class="video-meta"><span>${escape(video.duration)}</span><span>${escape(video.games.join(' / '))}${video.gameVersion ? ` · ${escape(video.gameVersion)}` : ''}</span><time datetime="${escape(video.date)}">${escape(displayDate(video.date))}</time><a href="#full-text">Read full text ↓</a></div></header>
         <div class="video-player" data-video-id="${escape(video.id)}" data-video-title="${escape(video.displayTitle)}"><button type="button" class="video-launch" aria-label="Play Episode ${number(video.episode)}: ${escape(video.displayTitle)}"><img src="${video.thumbnail}" alt="" width="1280" height="720"/><span class="video-play-label">${play}<span>Play video</span></span></button></div>
         <div class="video-watch-link">${externalLink(video.sourceUrl, 'Watch on YouTube')}${externalLink(catalog.channelUrl, 'Yanik_AI channel')}</div>
-        <section class="reading-section episode-notes"><h2>About this episode</h2><p>${escape(video.summary)}</p><ul class="episode-topics">${video.topics.map(topic=>`<li>${escape(topic)}</li>`).join('')}</ul><p class="video-source-note">Notes from the author’s published description. ${externalLink(video.sourceUrl, video.title)}</p></section>
+        <section class="reading-section episode-text" id="full-text" aria-labelledby="full-text-heading"><h2 id="full-text-heading">Full episode text</h2><p class="video-source-note">${escape(video.fullText.author)} · Original text from the ${externalLink(video.fullText.sourceUrl, 'YouTube description')}.</p><div class="episode-full-text" lang="${escape(video.fullText.language)}">${fullText}</div></section>
         <section class="related-reading"><h2>Related pages</h2><div>${related.map(page=>`<a href="${archPath(page)}"><span>Architecture</span><strong>${escape(page.navTitle)}</strong>${arrow}</a>`).join('')}</div></section>
         <div class="episode-games">${gameLinks}</div>
         ${pager(videos[index-1],videos[index+1],videoPath,'Episode navigation')}

@@ -95,6 +95,8 @@
 .video-article .reading-header{border-bottom:0;padding-bottom:0;margin-bottom:23px}
 .video-article .reading-header h1{font-size:38px;letter-spacing:-.9px;line-height:1.2}
 .video-meta{display:flex;flex-wrap:wrap;gap:9px 20px;font-family:var(--mono);font-size:10px;line-height:1.8;color:var(--subtle);margin-top:18px}
+.video-meta>a{color:var(--accent-hover)}
+.video-meta>a:hover{text-decoration:underline;text-underline-offset:4px}
 .video-player{position:relative;aspect-ratio:16/9;border:1px solid var(--control-border);background:#080d15}
 .video-launch{display:block;position:relative;width:100%;height:100%;padding:0;background:none;border:0;color:#f3f4f5}
 .video-launch>img{display:block;width:100%;height:100%;object-fit:cover}
@@ -107,13 +109,14 @@
 .video-watch-link>a{display:inline-flex;align-items:center;gap:6px;font-size:11px;line-height:1.8;color:var(--accent-hover)}
 .video-watch-link>a:hover{text-decoration:underline;text-underline-offset:4px}
 .video-watch-link .icon{height:12px;width:12px}
-.reading-section.episode-notes{margin-top:29px}
-.reading-article .episode-topics{display:flex;flex-wrap:wrap;gap:7px 18px;list-style:none;margin:20px 0;padding:0}
-.reading-article .episode-topics li{font-size:11px;line-height:1.7;color:var(--subtle);padding:0;margin:0}
-.reading-article .episode-topics li:before{content:"";display:inline-block;width:4px;height:4px;background:var(--accent);margin:0 7px 2px 0}
-.reading-article .video-source-note{font-size:10px;color:var(--subtle);line-height:1.8;margin:17px 0 0}
+.reading-section.episode-text{margin-top:33px;padding-top:27px;border-top:1px solid var(--line)}
+.episode-text>h2{margin-bottom:7px}
+.reading-article .video-source-note{font-size:11px;color:var(--subtle);line-height:1.8;margin:0 0 25px}
 .video-source-note a{display:inline-flex;align-items:center;gap:4px;color:var(--accent-hover)}
 .video-source-note .icon{width:11px;height:11px}
+.episode-full-text{max-width:72ch}
+.reading-article .episode-full-text>p{font-size:16px;line-height:1.9;white-space:pre-line;overflow-wrap:break-word;margin:0 0 25px}
+.reading-article .episode-full-text>p:first-child{font-size:14px;color:var(--ink);line-height:1.8}
 .episode-games{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0 0}
 @media(max-width:1050px){
  .reading-layout{grid-template-columns:165px minmax(0,1fr);gap:36px}
@@ -175,7 +178,8 @@
  .video-play-label svg{width:22px;height:22px}
  .video-watch-link{gap:13px;margin-top:11px}
  .video-watch-link>a{font-size:10px}
- .reading-section.episode-notes{margin-top:24px}
+ .reading-section.episode-text{margin-top:27px;padding-top:23px}
+ .reading-article .episode-full-text>p{font-size:15px;line-height:1.9;margin-bottom:23px}
 }
 @media(max-width:460px){
  .reading-header h1{font-size:30px;line-height:1.18;letter-spacing:-.7px}
