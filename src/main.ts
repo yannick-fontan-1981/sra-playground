@@ -43,7 +43,7 @@ const escapeHtml = (value: string): string => value.replace(/[&<>"']/g, characte
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[character]!);
 const gameOptions = Object.entries(groupLabels).map(([group, label]) =>
-  `<optgroup label="${escapeHtml(label)}">${GAME_CATALOG.filter(game => game.group === group).map(game =>
+  `<optgroup label="${escapeHtml(label)}">${GAME_CATALOG.filter(game => game.group === group).sort((a, b) => a.code.localeCompare(b.code, 'en')).map(game =>
     `<option value="${game.code}"${game.code === selectedGame.code ? ' selected' : ''}>${game.code} — ${escapeHtml(game.name)}</option>`,
   ).join('')}</optgroup>`,
 ).join('');

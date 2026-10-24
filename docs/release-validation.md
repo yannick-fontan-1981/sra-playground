@@ -85,7 +85,9 @@ static assets from its own origin.
 - The retained TypeScript PIPE parity test file passes. Its 22 cases cover
   11 scenarios, 618 commands, 610 observations, 644 complete frame hashes,
   six isolated level wins, and an entire six-level campaign.
-- The compiled interface contains the 100-game selector, compact directional
+- The 100-game selector keeps four groups of 25, each sorted alphabetically by
+  its four-character game code.
+- The compiled interface contains compact directional
   actions, neutral Space action, a separate Undo button, and a separate Reset
   button. It removes the prior level title, instructions, connected-cell
   counter, rotations, leaks, and loops panels.
