@@ -73,3 +73,14 @@ SOFTWARE.
 
 The new playground code is covered by this repository's MIT `LICENSE`.
 Development packages retain their own licenses in the installed packages.
+
+## Yanik_AI videos and thumbnails
+
+The video section presents Yannick Fontan's six public
+[Yanik_AI episodes](https://www.youtube.com/@Yanik_AI/videos), verified on
+24 October 2026. Original, unchanged episode thumbnails are stored under
+`public/videos/`; their source URLs are recorded in `content/videos.json`.
+Episode notes are original short summaries of the author's published
+descriptions. The full videos remain hosted on YouTube and are embedded only
+after the visitor selects Play. The code license does not relicense those videos
+or their original media.

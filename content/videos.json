@@ -1,0 +1,197 @@
+{
+  "channel": "Yanik_AI",
+  "channelUrl": "https://www.youtube.com/@Yanik_AI/videos",
+  "channelId": "UCzX9sT0zYb4PiSwZsIKMSVw",
+  "verifiedDate": "2026-10-24",
+  "publicVideoCount": 6,
+  "catalogComplete": true,
+  "completenessEvidence": {
+    "channelDisplayedCount": 6,
+    "listedVideoCount": 6,
+    "continuationCount": 0,
+    "visibleChannelTabs": [
+      "Videos"
+    ],
+    "note": "All six videos were visible after one normal refresh of the newly updated channel, and every watch page was opened. No separate Shorts or Live channel tabs were displayed."
+  },
+  "videos": [
+    {
+      "episode": 1,
+      "id": "QMfJfiyfn88",
+      "title": "ARC AGI 3 SRA Ep 1",
+      "slug": "01-understandable-intelligence",
+      "displayTitle": "The Promise of an Understandable Intelligence",
+      "topics": [
+        "Visible reasoning",
+        "Symbolic representations",
+        "Legacy LS20"
+      ],
+      "games": [
+        "LS20"
+      ],
+      "gameVersion": "Legacy",
+      "summary": "The series opens in legacy LS20. Yannick introduces his aim for SRA: an agent whose perceptions, hypotheses, explorations, and conclusions are available for inspection. ARC-AGI 3 provides unfamiliar worlds in which the meaning of an action has to be discovered. The episode explains why he chose symbolic representations to express those discoveries, and how the agent’s own reasoning could become something both the system and its developer can examine.",
+      "duration": "6:04",
+      "durationISO": "PT6M4S",
+      "date": "2026-10-24",
+      "publishedAt": "2026-10-23T20:29:10-07:00",
+      "sourceUrl": "https://www.youtube.com/watch?v=QMfJfiyfn88",
+      "thumbnailUrl": "https://i.ytimg.com/vi/QMfJfiyfn88/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGIgYihiMA8=&rs=AOn4CLBSSND1uTuZxDkn6ZtzYnqgY-2XQA",
+      "provenance": "Title, duration, publication timestamp, thumbnail and full description read from the public YouTube watch page. Summary written from the description; the video was not watched in full.",
+      "thumbnail": "/videos/episode-01.jpg",
+      "thumbnailSource": "https://img.youtube.com/vi/QMfJfiyfn88/maxresdefault.jpg",
+      "relatedArchitecture": [
+        "introduction",
+        "representations"
+      ]
+    },
+    {
+      "episode": 2,
+      "id": "Oj-7Z2oWODY",
+      "title": "ARC AGI 3 SRA Ep 2 LS20 Official",
+      "slug": "02-principle-distillation",
+      "displayTitle": "Human-Agent Principle Distillation",
+      "topics": [
+        "Reusable principles",
+        "Evidence from failure",
+        "Human and coding-agent feedback"
+      ],
+      "games": [
+        "LS20"
+      ],
+      "gameVersion": "Official",
+      "summary": "Official LS20 is the setting for Human-Agent Principle Distillation. An SRA run produces evidence about where its reasoning stops being sufficient. Yannick examines that evidence and identifies a principle that could apply more broadly. A coding agent integrates the principle, and the next run tests its use. The episode describes this development cycle and the need to connect new knowledge to existing structure so that it can support later discoveries.",
+      "duration": "4:52",
+      "durationISO": "PT4M52S",
+      "date": "2026-10-24",
+      "publishedAt": "2026-10-23T20:29:51-07:00",
+      "sourceUrl": "https://www.youtube.com/watch?v=Oj-7Z2oWODY",
+      "thumbnailUrl": "https://i.ytimg.com/vi/Oj-7Z2oWODY/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGHIgNig-MA8=&rs=AOn4CLCXGn8X74U_bT_HylzrM6PTUjmcMQ",
+      "provenance": "Title, duration, publication timestamp, thumbnail and full description read from the public YouTube watch page. Summary written from the description; the video was not watched in full.",
+      "thumbnail": "/videos/episode-02.jpg",
+      "thumbnailSource": "https://img.youtube.com/vi/Oj-7Z2oWODY/maxresdefault.jpg",
+      "relatedArchitecture": [
+        "reasoning",
+        "implementation"
+      ]
+    },
+    {
+      "episode": 3,
+      "id": "G8Ob_QJTHwo",
+      "title": "ARC AGI 3 SRA Ep 3",
+      "slug": "03-operational-consciousness",
+      "displayTitle": "Operational Artificial Consciousness",
+      "topics": [
+        "Maintained internal state",
+        "Beliefs and objectives",
+        "Continuity of reasoning"
+      ],
+      "games": [
+        "LP85"
+      ],
+      "gameVersion": null,
+      "summary": "In the LP85 environment, Yannick introduces Operational Artificial Consciousness as a maintained account of what currently matters to the agent: beliefs, objectives, principles, hypotheses, resources, and their relationships. Observations and deductions update that state. Its practical purpose is continuity across successive reasoning steps, with current commitments and priorities available for inspection. The episode also considers self-observation and revision as possible extensions of this operational definition.",
+      "duration": "5:17",
+      "durationISO": "PT5M17S",
+      "date": "2026-10-24",
+      "publishedAt": "2026-10-23T20:30:18-07:00",
+      "sourceUrl": "https://www.youtube.com/watch?v=G8Ob_QJTHwo",
+      "thumbnailUrl": "https://i.ytimg.com/vi/G8Ob_QJTHwo/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGIgYihiMA8=&rs=AOn4CLBoOQZfuuasWtyxKUikZX4dH2xDfw",
+      "provenance": "Title, duration, publication timestamp, thumbnail and full description read from the public YouTube watch page. Summary written from the description; the video was not watched in full.",
+      "thumbnail": "/videos/episode-03.jpg",
+      "thumbnailSource": "https://img.youtube.com/vi/G8Ob_QJTHwo/maxresdefault.jpg",
+      "relatedArchitecture": [
+        "reasoning",
+        "memory"
+      ]
+    },
+    {
+      "episode": 4,
+      "id": "kF-IaM-WXkE",
+      "title": "ARC AGI 3 SRA Ep 4",
+      "slug": "04-verbalizing-reasoning",
+      "displayTitle": "Observing and Verbalizing Reasoning",
+      "topics": [
+        "Observing human reasoning",
+        "Making intuition explicit",
+        "Transmitting principles"
+      ],
+      "games": [
+        "FT09"
+      ],
+      "gameVersion": "Official",
+      "summary": "This episode uses official FT09 to examine how a human solver identifies and describes their own reasoning. Yannick discusses the geometric perception, inference, analogy, and hypothesis testing that can pass unnoticed within an intuitive decision. Verbalizing those steps exposes their assumptions and structure. It is part of the development method introduced in Episode 2: extracting a reusable principle first requires a sufficiently clear account of the reasoning behind it.",
+      "duration": "3:18",
+      "durationISO": "PT3M18S",
+      "date": "2026-10-24",
+      "publishedAt": "2026-10-23T20:30:30-07:00",
+      "sourceUrl": "https://www.youtube.com/watch?v=kF-IaM-WXkE",
+      "thumbnailUrl": "https://i.ytimg.com/vi/kF-IaM-WXkE/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgZShlMA8=&rs=AOn4CLA9G4YQlldxyPurd-o4flPZXRaPdA",
+      "provenance": "Title, duration, publication timestamp, thumbnail and full description read from the public YouTube watch page. Summary written from the description; the video was not watched in full.",
+      "thumbnail": "/videos/episode-04.jpg",
+      "thumbnailSource": "https://img.youtube.com/vi/kF-IaM-WXkE/maxresdefault.jpg",
+      "relatedArchitecture": [
+        "reasoning"
+      ]
+    },
+    {
+      "episode": 5,
+      "id": "yvFP02W2Gm8",
+      "title": "ARC AGI 3 SRA Ep 5",
+      "slug": "05-alignment",
+      "displayTitle": "Reasoning Begins with Alignment",
+      "topics": [
+        "Coherent world rules",
+        "Shared conventions",
+        "Trust in acquired principles"
+      ],
+      "games": [
+        "VC33"
+      ],
+      "gameVersion": null,
+      "summary": "VC33 provides the setting for a discussion of alignment. Here the term includes expectations that a world has coherent rules, conventions that make objects recognizable, and assumptions about its designer’s intentions. Yannick examines when an acquired principle deserves continued use, and how consistency can support that trust. The episode connects these expectations to the symbols, goals, and values supplied by the people developing an intelligent system.",
+      "duration": "4:51",
+      "durationISO": "PT4M51S",
+      "date": "2026-10-24",
+      "publishedAt": "2026-10-23T20:30:42-07:00",
+      "sourceUrl": "https://www.youtube.com/watch?v=yvFP02W2Gm8",
+      "thumbnailUrl": "https://i.ytimg.com/vi/yvFP02W2Gm8/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGQgZChkMA8=&rs=AOn4CLB1utwnKKI1rxqkaaJl89SjBBZ6GQ",
+      "provenance": "Title, duration, publication timestamp, thumbnail and full description read from the public YouTube watch page. Summary written from the description; the video was not watched in full.",
+      "thumbnail": "/videos/episode-05.jpg",
+      "thumbnailSource": "https://img.youtube.com/vi/yvFP02W2Gm8/maxresdefault.jpg",
+      "relatedArchitecture": [
+        "memory"
+      ]
+    },
+    {
+      "episode": 6,
+      "id": "ad9ZZUK6bak",
+      "title": "ARC AGI 3 SRA Ep 6",
+      "slug": "06-primitives-of-reasoning",
+      "displayTitle": "The Search for the Primitives of Reasoning",
+      "topics": [
+        "Terms and claims",
+        "Nine candidate operators",
+        "Workflows and principles"
+      ],
+      "games": [
+        "AR25"
+      ],
+      "gameVersion": null,
+      "summary": "The sixth episode, set in AR25, separates stored knowledge, cognitive transformations, and the workflows that organize them. Terms and claims express structural, dynamic, epistemic, and control relations. Yannick proposes nine operators: OBSERVE, ACT, DISTINGUISH, RELATE, PROPOSE, DERIVE, COMPARE, UPDATE, and SELECT. He uses TEST as an example of a workflow built from such operations, with principles determining when a step is justified. The vocabulary is a working proposal; some transformations remain within specialized capabilities, and the operator set may change.",
+      "duration": "6:40",
+      "durationISO": "PT6M40S",
+      "date": "2026-10-24",
+      "publishedAt": "2026-10-23T20:30:55-07:00",
+      "sourceUrl": "https://www.youtube.com/watch?v=ad9ZZUK6bak",
+      "thumbnailUrl": "https://i.ytimg.com/vi/ad9ZZUK6bak/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGBYgUCh_MA8=&rs=AOn4CLBXuivtB9aFQJMW4R1LtftjMboowA",
+      "provenance": "Title, duration, publication timestamp, thumbnail and full description read from the public YouTube watch page. Summary written from the description; the video was not watched in full.",
+      "thumbnail": "/videos/episode-06.jpg",
+      "thumbnailSource": "https://img.youtube.com/vi/ad9ZZUK6bak/maxresdefault.jpg",
+      "relatedArchitecture": [
+        "representations",
+        "implementation"
+      ]
+    }
+  ]
+}

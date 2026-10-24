@@ -1,5 +1,12 @@
 import { defineConfig } from 'vite';
 import { fileURLToPath } from 'node:url';
+import { readdirSync } from 'node:fs';
+
+const contentPages = ['architecture', 'videos'].flatMap(directory =>
+  readdirSync(new URL(`./${directory}/`, import.meta.url))
+    .filter(filename => filename.endsWith('.html'))
+    .map(filename => `${directory}/${filename}`),
+);
 
 export default defineConfig({
   // The managed Sites preview uses this explicit development hostname.
@@ -7,10 +14,8 @@ export default defineConfig({
   preview: { allowedHosts: ['terminal.local'] },
   build: {
     rolldownOptions: {
-      input: {
-        playground: fileURLToPath(new URL('./index.html', import.meta.url)),
-        architecture: fileURLToPath(new URL('./architecture.html', import.meta.url)),
-      },
+      input: ['index.html', 'architecture.html', 'videos.html', ...contentPages]
+        .map(path => fileURLToPath(new URL(`./${path}`, import.meta.url))),
     },
   },
 });

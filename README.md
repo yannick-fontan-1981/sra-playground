@@ -6,24 +6,27 @@ Fontan's **Symbolic Reasoning Agent** research.
 ## The browser playground
 
 - **100 original game engines:** 25 official games and 75 custom games from
-  three waves, selected by their prominent four-character codes.
+  three waves, selected by their prominent four-character codes. CASC is the
+  default; an explicit `?game=CODE` link selects that game instead.
 - **Local execution:** the original Python engines run in WebAssembly through
   Pyodide inside a dedicated Web Worker. A TypeScript interface renders their
   observations and sends actions to that local worker.
 - **Minimal manual controls:** arrows, a generic Space action, board clicks,
   Undo, and Reset. The player leaves the game mechanics for you to discover.
 - **SRA-first identity:** SRA Playground and Symbolic Reasoning Agent lead
-  the hierarchy, with ARC AGI 3 as the research setting. Warm black surfaces,
+  the hierarchy, with a prominent ARC AGI 3 heading above the player and the
+  credit “75 new custom games created or compiled by Yannick Fontan.” Warm black surfaces,
   off-white text, blue and yellow accents, and a mosaic rendered from 18 real
   game frames retain the ARC-inspired appearance.
 - **SRA Agent:** an upcoming mode. The genuine reasoning agent is not connected
   yet; playable games are not a claim that SRA solves them.
-- **Architecture page:** `/architecture.html` presents the case for symbolic
-  reasoning, the artificial cortex ambition, explicit abstraction, relational
-  meaning, the **behavior-tree-loop**, and the current Python implementation.
-  An interactive illustration shows how a changed mechanism changes a plan.
-  Pinned code links, research references, and implementation status distinguish
-  the research vision from demonstrated behavior.
+- **Architecture chapters:** `/architecture.html` is a short introduction.
+  Four separate pages cover representations, reasoning and the
+  **behavior-tree-loop**, memory and reuse, and implementation. They use
+  concrete examples, source excerpts, and pinned code links.
+- **Video series:** `/videos.html` lists all six public Yanik_AI episodes
+  verified on 24 October 2026. Each has a separate page, original thumbnail,
+  click-to-load YouTube player, short notes, and related architecture/game links.
 
 The 100 games use their original Python engines. They have not all been rewritten
 in TypeScript. The independent TypeScript PIPE implementation is retained for
@@ -52,6 +55,31 @@ memory budget is reached; up to eight game sessions are cached in memory.
 Switching games, including browser Back/Forward navigation,
 resumes a cached session. Eviction or reloading the page clears that session.
 The `?game=CODE` URL selects a game; it does not serialize its progress.
+
+### Architecture and video pages
+
+| Route | Content |
+| --- | --- |
+| `/architecture.html` | Introduction and chapter directory |
+| `/architecture/representations.html` | Terms, claims, relation families, roles, mechanisms, and spaces |
+| `/architecture/reasoning.html` | Goals, composition, the behavior-tree-loop, and parent continuation |
+| `/architecture/memory.html` | Portable activity schemas, current evidence, and reuse |
+| `/architecture/implementation.html` | Logos, DRM, SRC, Python, and the browser integration boundary |
+| `/videos.html` | The six-episode video index |
+| `/videos/<slug>.html` | One episode, its player, notes, and related links |
+
+Edit `content/architecture.json` and `content/videos.json`, then run
+`npm run content:generate`. `scripts/generate-content-pages.mjs` writes complete
+HTML documents and shares the same header as the Playground. The generated
+HTML is tracked for review; the build regenerates it deterministically.
+`src/reading.css` controls the reading layout, and `src/reading.ts` handles
+click-to-load video embeds and redirects useful old Architecture section links.
+
+The video catalogue is an explicitly verified snapshot, not an automatic
+channel feed. Add newly verified uploads to its data file and keep each
+thumbnail's source attribution. Videos stream from YouTube after Play is
+clicked; original thumbnails are served locally from `public/videos/`.
+The game runtime is unchanged by this media integration.
 
 ## Run locally
 
