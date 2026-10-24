@@ -1,0 +1,98 @@
+{
+  "title": "What is ARC-AGI-3?",
+  "description": "An interactive benchmark for learning how unfamiliar environments work, then using that knowledge to act effectively.",
+  "reviewedDate": "2026-10-24",
+  "intro": [
+    "ARC-AGI-3 is an interactive reasoning benchmark developed by the ARC Prize Foundation. An AI agent enters an unfamiliar visual game, experiments with its controls, infers the objective, and works out how to reach it. The game does not explain its rules or goal in natural language.",
+    "ARC stands for Abstraction and Reasoning Corpus; AGI means artificial general intelligence. The series studies how efficiently a system can acquire a new skill from limited experience. In ARC-AGI-3, that experience comes from playing."
+  ],
+  "sources": [
+    { "label": "Official ARC-AGI-3 overview", "url": "https://arcprize.org/arc-agi/3" },
+    { "label": "ARC Prize Foundation paper", "url": "https://arxiv.org/html/2603.24621v1" }
+  ],
+  "sections": [
+    {
+      "title": "From examples to interaction",
+      "navTitle": "The benchmark",
+      "paragraphs": [
+        "ARC-AGI-1 and ARC-AGI-2 present examples of a transformation between grids. The task is to infer the transformation and apply it to a new input. ARC-AGI-3 introduces an environment whose state changes in response to actions. The agent helps determine which evidence it will receive next."
+      ],
+      "table": {
+        "headers": ["", "ARC-AGI-1 & 2", "ARC-AGI-3"],
+        "rows": [
+          ["Starting point", "Example input/output grids", "An unfamiliar game state"],
+          ["Response", "Produce an output grid", "Choose an action"],
+          ["New evidence", "The supplied examples", "The consequences of interaction"]
+        ]
+      },
+      "sources": [
+        { "label": "Benchmark formats", "url": "https://arxiv.org/html/2603.24621v1#S1" }
+      ]
+    },
+    {
+      "title": "What the agent sees and does",
+      "navTitle": "Observations & actions",
+      "paragraphs": [
+        "The games are turn-based. An observation contains one or more visual frames and information about the game state. Frames use a grid of up to 64 × 64 cells and a palette of 16 colors. The agent selects an available action, receives the resulting observation, and continues.",
+        "The interface provides five simple actions, a coordinate-based action, an undo action where supported, and reset. Each game exposes its available subset. A control’s effect depends on the game: the same input might move something, change a selection, or operate a mechanism. Discovering that effect is part of the task."
+      ],
+      "sources": [
+        { "label": "Game schema", "url": "https://docs.arcprize.org/game-schema" },
+        { "label": "Action interface", "url": "https://docs.arcprize.org/actions" }
+      ]
+    },
+    {
+      "title": "Learning what matters",
+      "navTitle": "Learning & composition",
+      "paragraphs": [
+        "Successful play brings several questions together:"
+      ],
+      "items": [
+        "Exploration: which action could reveal something useful?",
+        "Understanding: which objects, relations, or mechanisms explain the changes?",
+        "Goal discovery: what would count as progress or completion?",
+        "Planning: how can these discoveries be combined into a working sequence?"
+      ],
+      "sources": [
+        { "label": "Capabilities evaluated", "url": "https://docs.arcprize.org/" }
+      ]
+    },
+    {
+      "title": "Why the later levels matter",
+      "navTitle": "Progress across levels",
+      "paragraphs": [
+        "An opening level introduces the interaction through experience. Later levels are designed to require the integration of mechanisms learned earlier. Reaching the next state therefore depends on retaining useful discoveries and finding how they fit together.",
+        "For example, learning that an action changes an object is one discovery. Working out when that change is useful, what must happen first, and how to combine it with another mechanism is a further reasoning problem. This example illustrates the kind of composition SRA investigates."
+      ],
+      "sources": [
+        { "label": "Game design and composition", "url": "https://arxiv.org/html/2603.24621v1#S3.SS4" }
+      ]
+    },
+    {
+      "title": "How success is measured",
+      "navTitle": "Scoring",
+      "paragraphs": [
+        "The scoring metric is Relative Human Action Efficiency, or RHAE. It combines how many levels an agent completes with how many environment actions it needs, compared with baselines established by people encountering the games for the first time.",
+        "Repeated trial and error can be expensive in this measure. The per-level calculation begins by squaring the ratio of human baseline actions to agent actions: completing a level in 20 actions when the baseline is 10 gives a level efficiency score of 25%. The full scoring method also applies caps, level weights, and completion limits.",
+        "RHAE counts interactions with the environment. Internal reasoning steps are not themselves game actions. Action efficiency and the time or computing resources needed to obtain it are different measurements."
+      ],
+      "sources": [
+        { "label": "Current scoring methodology", "url": "https://docs.arcprize.org/methodology" }
+      ]
+    },
+    {
+      "title": "Where SRA Playground fits",
+      "navTitle": "This Playground",
+      "paragraphs": [
+        "The official public demonstration games introduce the format. The official benchmark also uses separate held-out environments to evaluate adaptation to unfamiliar situations.",
+        "SRA Playground brings together 25 official public games and 75 custom games created or compiled by Yannick Fontan. The custom collection adds mechanisms and compositions for SRA research. These 100 games form this Playground’s independent research collection; the official held-out evaluation is separate.",
+        "For SRA, the practical question is whether explicit representations of observations, mechanisms, goals, and their dependencies can support effective exploration and composition. The Architecture pages explain that design.",
+        "You can play the games here manually, with the game engines running in your browser. The real SRA agent is not connected to the Playground yet."
+      ],
+      "sources": [
+        { "label": "Official dataset structure", "url": "https://arxiv.org/html/2603.24621v1#S3.SS6" },
+        { "label": "Playground game catalogue", "url": "https://github.com/yannick-fontan-1981/sra-playground/blob/main/src/games/catalog.ts" }
+      ]
+    }
+  ]
+}
