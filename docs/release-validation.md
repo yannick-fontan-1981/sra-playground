@@ -96,11 +96,45 @@ static assets from its own origin.
   fixtures remain outside `dist/`.
 - Source review checks stale-selection guards, serial worker requests, action
   availability, terminal-state Undo/Reset, and local-only asset paths.
-- **Fresh Chrome UI verification could not be completed:** the managed preview
+- **Initial 100-game release:** fresh Chrome UI verification could not be completed. The managed preview
   reported running, but two browser-control calls timed out. Browser rendering,
   actual Web Worker integration in Chrome, responsive appearance, touch input,
-  and a new screenshot are therefore unverified for this release. The
+  and a new screenshot were therefore unverified for that release. The
   native/WebAssembly checks above passed independently of that infrastructure.
+
+## ARC visual identity update
+
+The following interface update uses ARC AGI 3 as the prominent shared header
+and homepage title, with SRA Playground identified as independent research.
+The warm black, off-white, mono navigation, and pixel framing were informed
+by live inspection of the official ARC-AGI-3 overview and task player. Blue
+interface accents follow the user’s explicit preference, with yellow retained
+for key controls. The 405 × 204 hero mosaic is rendered from initial public frames of
+18 bundled games, including nine official and nine custom games. Its generator
+is kept in `scripts/generate-game-mosaic.py`.
+
+The same identity is used on the Architecture page. The four alphabetically
+sorted groups of 25 games, compact controls, Undo, and Reset remain in place.
+The Python engines and worker protocol are unchanged by this visual update.
+Strict TypeScript checking and the production build pass.
+
+Fresh Chrome verification now succeeds for the updated interface:
+
+- The local Web Worker loads PIPE and reaches Ready with its actual board.
+- Space changes the board; Undo visibly restores it and clears the available
+  history. A second action followed by Reset restores the starting board and
+  leaves Undo disabled.
+- LS20 loads its actual board, seven level buttons, and native action availability.
+- The selector contains 100 options in four groups of 25, each sorted by code.
+- The removed instructions and statistics panels remain absent.
+- The shared ARC AGI 3 header and Architecture page render correctly. Both pages
+  have no horizontal document overflow at the checked 1348-pixel desktop width.
+- No game/runtime error surfaced during these checks. A separate mobile-device
+  or touch-hardware session was not performed.
+
+![ARC-inspired Playground with blue accents](arc-playground-20261023.jpg)
+
+![Architecture with the shared ARC AGI 3 identity](arc-architecture-20261023.jpg)
 
 ## Reproduce
 

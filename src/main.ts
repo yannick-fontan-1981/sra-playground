@@ -1,4 +1,5 @@
 import './styles.css';
+import { renderSiteHeader } from './site-header';
 import { BrowserGameRuntime, type GameObservation } from './runtime/browser-games';
 import { AGENT_STATUS } from './runtime/contracts';
 import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
@@ -52,33 +53,23 @@ const app = document.querySelector<HTMLDivElement>('#app');
 if (!app) throw new Error('Application mount is missing.');
 app.innerHTML = `
   <a class="skip-link" href="#game-select">Skip to the games</a>
-  <header class="site-header wrap">
-    <a class="brand" href="/" aria-label="SRA Playground home">
-      <svg class="brand-mark" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="8" fill="currentColor"/><path d="M9 11h12v7h-7v7h14" fill="none" stroke="#d2f36c" stroke-width="4"/><circle cx="9" cy="11" r="2.5" fill="#d2f36c"/><circle cx="28" cy="25" r="2.5" fill="#d2f36c"/></svg>
-      <span>SRA<span class="brand-divider">/</span><span class="brand-light">Playground</span></span>
-    </a>
-    <nav aria-label="Main navigation">
-      <a class="nav-active" href="#playground">Playground</a>
-      <a href="/architecture.html">Architecture</a>
-      <a class="source-link" href="${websiteRepo}" target="_blank" rel="noopener noreferrer" aria-label="SRA Playground source code on GitHub">${icon('github')}<span>Source code</span>${icon('external', 'small-icon')}</a>
-    </nav>
-  </header>
+  ${renderSiteHeader('playground')}
 
   <main>
     <section class="intro wrap" aria-labelledby="page-title">
       <div class="intro-main">
         <p class="eyebrow"><span class="status-dot"></span> SYMBOLIC REASONING AGENT</p>
-        <h1 id="page-title"><span class="toward">Toward</span><br><em>Understandable<br>Intelligence</em></h1>
+        <h1 id="page-title">ARC AGI <span class="hero-version">3</span></h1>
+        <p class="hero-statement">Toward <em>Understandable Intelligence.</em></p>
       </div>
-      <div class="intro-copy">
-        <p>Explore worlds. Discover mechanisms.<br>Follow the reasoning that connects them.</p>
-        <div class="byline"><span class="author-monogram">YF</span><span>A project by <strong>Yannick Fontan</strong></span></div>
+      <div class="intro-art" aria-hidden="true">
+        <img src="/game-mosaic.png" alt="" width="405" height="204" />
+        <span class="mosaic-label">EXPLORE. DISCOVER. REASON.</span>
       </div>
-      <div class="intro-decoration" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
     </section>
 
     <section class="playground-section wrap" id="playground" aria-labelledby="game-title">
-      <div class="section-line"><span class="eyebrow">THE PLAYGROUND</span><span class="catalog-count">${GAME_CATALOG.length} games</span></div>
+      <div class="section-line"><span class="eyebrow"><span class="section-square" aria-hidden="true"></span> SRA PLAYGROUND</span><span class="catalog-count">${GAME_CATALOG.length} GAMES<span>/</span>25 OFFICIAL + 75 CUSTOM</span></div>
       <article class="player">
         <header class="player-header">
           <div class="game-identity">
@@ -160,7 +151,7 @@ app.innerHTML = `
       <div class="about-content"><p>SRA stands for <strong>Symbolic Reasoning Agent</strong>. The project studies how an agent can discover mechanisms, connect what it learns, and return to a goal with a new way forward.</p><p>The architecture page follows that process: observations, reusable knowledge, compositions, and the behavior-tree-loop that links discovery to continued action.</p><div class="reasoning-flow" aria-label="The intended reasoning loop: observe, discover, compose, act"><span><b>01</b>Observe</span><span><b>02</b>Discover</span><span><b>03</b>Compose</span><span><b>04</b>Act</span></div></div>
     </section>
   </main>
-  <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Yannick Fontan · 2026</span><div><a href="${websiteRepo}/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses & notices ${icon('external')}</a></div></footer>
+  <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Independent research by Yannick Fontan</span><div><a href="https://arcprize.org/arc-agi/3" target="_blank" rel="noopener noreferrer">ARC Prize ${icon('external')}</a><a href="${websiteRepo}/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses & notices ${icon('external')}</a></div></footer>
 `;
 
 function element<T extends HTMLElement>(selector: string): T {
@@ -349,7 +340,7 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   element('#runtime-message').textContent = 'Loading game…';
   element('#selection-feedback').textContent = `${game.code} selected.`;
   canvas.setAttribute('aria-label', `${game.code} game board. Use the arrow keys, Space, or click to interact.`);
-  document.title = `${game.code} · SRA Playground`;
+  document.title = `${game.code} · ARC AGI 3 — SRA Playground`;
   setMode('manual');
   if (historyMode !== 'none') {
     const url = new URL(window.location.href);

@@ -12,7 +12,10 @@ Fontan's **Symbolic Reasoning Agent** research.
   observations and sends actions to that local worker.
 - **Minimal manual controls:** arrows, a generic Space action, board clicks,
   Undo, and Reset. The player leaves the game mechanics for you to discover.
-- **Dark appearance:** charcoal surfaces, light text, and lime accents.
+- **ARC-inspired dark appearance:** a prominent ARC AGI 3 heading, warm black
+  surfaces, off-white text, blue and yellow accents, and a mosaic rendered
+  from 18 real game frames. SRA Playground remains identified as Yannick
+  Fontan's independent research project.
 - **SRA Agent:** an upcoming mode. The genuine reasoning agent is not connected
   yet; playable games are not a claim that SRA solves them.
 - **Architecture page:** `/architecture.html` explains the Python SRA
