@@ -136,7 +136,9 @@
         ]
       },
       "after": [
-        "For SRA, the attraction is the level at which we can work: objects, mechanisms, goals, and dependencies become explicit design elements. The binary-to-assembly analogy captures this preference for a more directly manipulable representation. It is an analogy about abstraction, not a literal hierarchy in which neural networks are binary code or symbolic AI is always superior."
+        "A useful programming analogy is the move from binary machine code to assembly language. The same machine operation can be represented either as bits or as a named instruction, such as ADD, with explicit operands. Assembly makes those operations easier for a programmer to identify, combine, and inspect.",
+        "SRA pursues a comparable shift in how reasoning is designed. Objects, mechanisms, goals, and dependencies become explicit elements that a designer can name, connect, examine, and revise. For example, a relation such as Matches(key, door) can be connected directly to an unlocking rule and to the goal that requires it.",
+        "The analogy concerns the designer’s access to explicit structure: how operations are represented, inspected, and changed. Neural and symbolic approaches both support abstraction, and hybrid systems can combine their different representations."
       ],
       "sources": [
         { "label": "Rumelhart, Hinton & Williams · Backpropagation", "url": "https://www.cs.toronto.edu/~hinton/absps/naturebp.pdf" },
