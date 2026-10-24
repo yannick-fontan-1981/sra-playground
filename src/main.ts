@@ -73,8 +73,8 @@ app.innerHTML = `
     <aside class="design-premise wrap" aria-labelledby="design-premise-title">
       <h2 id="design-premise-title">DESIGN PREMISE</h2>
       <div>
-        <p><strong>Ethical principles should shape an agent’s reasoning from the start.</strong> SRA explores symbolic reasoning to make the structures behind decisions explicit, inspectable, and open to correction—so people can take responsibility for the intelligence they build.</p>
-        <a class="text-link" href="/architecture.html#ethical-principles-and-inspectable-reasoning">Ethics &amp; human responsibility ${icon('arrow')}</a>
+        <p><strong>The design of artificial intelligence should begin with ethical principles.</strong> Symbolic reasoning makes deliberate design possible through explicit concepts, relations, and reasoning structures rooted in human intelligence. SRA draws its meaning and purpose from this human source, with responsibility for its design remaining ours.</p>
+        <a class="text-link" href="/architecture.html#design-rooted-in-human-intelligence">Design, meaning &amp; responsibility ${icon('arrow')}</a>
       </div>
     </aside>
 

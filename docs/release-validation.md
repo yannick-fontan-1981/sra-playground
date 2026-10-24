@@ -352,27 +352,30 @@ fixture was removed before source synchronization and publication.
 
 ![Smaller title and clearer navigation on desktop](annotations-desktop-20261024.jpg)
 
-## Ethical design premise
+## Design rooted in human intelligence
 
 The Playground now displays a compact Design Premise between its hero and the
-games. It states that ethical principles should shape reasoning from the start,
-and describes symbolic reasoning as SRA's approach to making decision structures
-explicit, inspectable, and open to correction. Its link opens the new Ethical
-principles and inspectable reasoning section in the Architecture introduction.
+games. Ethical principles are presented as a foundation for the design of
+intelligence. Symbolic reasoning enables explicit concepts, relations, and
+reasoning structures whose meaning and purpose are grounded in human
+intelligence. Responsibility is attributed to the human designers.
 
-The expanded section distinguishes this engineering objective from the current
-game agent's capabilities. It covers designed reasoning structures, discovery,
-faithful decision traces, uncertainty, intervention, and human responsibility.
-It identifies ethical-rule implementation, conflict handling, and oversight as
-remaining work, with references to NIST IR 8312 and the research on meaningful
-human control. It makes no guarantee of perfect readability or ethical behavior.
+The Architecture introduction develops this premise under Design rooted in
+human intelligence. It connects symbols, relations, and reasoning operations
+to meanings that people can explain and to purposes for which they take
+responsibility. Discovery and composition remain possible within that designed
+framework. This is identified as the project's design direction, with its
+implementation and readability to be evaluated in practice. The earlier
+behavioral-correction wording is removed. External explainability references
+are no longer attached to this statement of the author's design philosophy.
 
 TypeScript, the production build, and `git diff --check` pass. All 13 HTML pages
 build, and the homepage anchor matches the generated Architecture section.
-Browser QA confirmed a readable 114 px premise band at the desktop viewport and
-a 205.28 px band with 14 px text in a 390 px same-origin iframe viewport. Neither
-document has horizontal overflow. The link scrolls to the correct section;
-CASC reaches Ready in both layouts. The temporary viewport fixture was removed.
+The previous Architecture anchor redirects to the updated section.
+Browser QA confirmed that the revised copy and its link remain fully visible
+with 14 px text in a 390 px same-origin iframe viewport, with no horizontal
+overflow. The band is 229.08 px high. The new link reaches the correct section;
+the temporary viewport fixture was removed before packaging.
 The game engines, agent integration status, and game controls are unchanged.
 
 ## Reproduce
