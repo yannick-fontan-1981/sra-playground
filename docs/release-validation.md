@@ -249,6 +249,36 @@ update; the original engines and worker protocol were untouched.
 
 ![Dedicated Episode 06 page with original poster and related navigation](video-episode-20261024.jpg)
 
+## Complete original episode texts
+
+At the author's request, all six video pages now show the complete original
+English texts published in their YouTube descriptions, replacing the short
+episode summaries. The expanded descriptions were rechecked on 24 October
+2026 and matched the captured originals character for character: 3,015 words
+and 20,663 characters across the six episodes.
+
+The exact source strings and attribution are stored in each `fullText` in
+`content/videos.json`. All paragraphs and line breaks are rendered in the
+static HTML beneath the player, with no collapsed section. A “Read full text”
+link in the episode header jumps to the text. The short summaries remain only
+in page metadata. The visible byline identifies the author and links to the
+original YouTube description; these texts are not labelled as audio transcripts.
+
+Source-to-output checks confirmed that all six built pages contain the complete
+original wording and punctuation, allowing only HTML whitespace normalization.
+They also verified source links, the full-text anchors, local navigation, and
+one article H1 per episode. TypeScript, the production build, and
+`git diff --check` pass. No game runtime, agent, or video-player code changed.
+
+Browser QA followed the video index into Episodes 1 and 6, checked the
+full-text anchor and first/last original passages, and used the episode pager.
+Both texts remain fully expanded, with no horizontal document overflow at
+1348 px. The body text renders at 16 px with 30.4 px line spacing. The Episode 6
+source link points to its verified YouTube watch URL. Mobile CSS was reviewed;
+no separate mobile browser session was available.
+
+![Episode 6 with the complete original text and source attribution](video-full-text-20261024.jpg)
+
 ## Reproduce
 
 With Node 22.18+ and Python 3.12+ with NumPy, Pydantic, and typing_extensions:

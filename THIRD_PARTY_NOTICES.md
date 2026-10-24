@@ -80,7 +80,10 @@ The video section presents Yannick Fontan's six public
 [Yanik_AI episodes](https://www.youtube.com/@Yanik_AI/videos), verified on
 24 October 2026. Original, unchanged episode thumbnails are stored under
 `public/videos/`; their source URLs are recorded in `content/videos.json`.
-Episode notes are original short summaries of the author's published
-descriptions. The full videos remain hosted on YouTube and are embedded only
+At Yannick Fontan's request, each episode page reproduces his published
+English description in full. The original text, author, source URL, and
+retrieval date are recorded in `content/videos.json`; this text is attributed
+to the description, not represented as a verbatim audio transcription.
+The full videos remain hosted on YouTube and are embedded only
 after the visitor selects Play. The code license does not relicense those videos
-or their original media.
+or their original media and texts.

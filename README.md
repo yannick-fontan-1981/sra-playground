@@ -26,7 +26,8 @@ Fontan's **Symbolic Reasoning Agent** research.
   concrete examples, source excerpts, and pinned code links.
 - **Video series:** `/videos.html` lists all six public Yanik_AI episodes
   verified on 24 October 2026. Each has a separate page, original thumbnail,
-  click-to-load YouTube player, short notes, and related architecture/game links.
+  click-to-load YouTube player, the full original English text published in its
+  description, and related architecture/game links.
 
 The 100 games use their original Python engines. They have not all been rewritten
 in TypeScript. The independent TypeScript PIPE implementation is retained for
@@ -66,7 +67,7 @@ The `?game=CODE` URL selects a game; it does not serialize its progress.
 | `/architecture/memory.html` | Portable activity schemas, current evidence, and reuse |
 | `/architecture/implementation.html` | Logos, DRM, SRC, Python, and the browser integration boundary |
 | `/videos.html` | The six-episode video index |
-| `/videos/<slug>.html` | One episode, its player, notes, and related links |
+| `/videos/<slug>.html` | One episode, its player, full original text, and related links |
 
 Edit `content/architecture.json` and `content/videos.json`, then run
 `npm run content:generate`. `scripts/generate-content-pages.mjs` writes complete
@@ -77,7 +78,12 @@ click-to-load video embeds and redirects useful old Architecture section links.
 
 The video catalogue is an explicitly verified snapshot, not an automatic
 channel feed. Add newly verified uploads to its data file and keep each
-thumbnail's source attribution. Videos stream from YouTube after Play is
+thumbnail's source attribution. Each `fullText` stores the exact original
+English description with its author, source URL, and retrieval date. The
+episode page renders all of it, including the original paragraph and line
+breaks, without a collapsed section. The short `summary` is used only in page
+metadata. The text is attributed to the video description rather than labelled
+as an audio transcription. Videos stream from YouTube after Play is
 clicked; original thumbnails are served locally from `public/videos/`.
 The game runtime is unchanged by this media integration.
 
