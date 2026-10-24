@@ -279,6 +279,48 @@ no separate mobile browser session was available.
 
 ![Episode 6 with the complete original text and source attribution](video-full-text-20261024.jpg)
 
+## Visual hierarchy, controls, and latest custom-level patchwork
+
+The homepage gives the Symbolic Reasoning Agent name more prominence: its
+desktop maximum size increases from 34 to 42 px, with brighter blue and a
+stronger weight. The SRA Playground title decreases from 72 to 60 px. The
+shared header makes the same adjustment in proportion. Above the player,
+“75 new custom games” increases from 15 to 24 px, with the attribution retained.
+
+Enabled directions and utility controls have a filled blue surface, a brighter
+border, and white icons/text; disabled actions have a muted neutral treatment.
+Space retains its yellow active appearance. Current-level selection remains
+distinct. Enabled-control text contrast is 6.24:1, and reading-page buttons
+and the current-level text also exceed 4.5:1.
+
+The replacement `public/game-mosaic.png` contains 18 genuine initial-level
+frames selected exclusively from Custom Wave 3. The 405 × 204 image preserves
+the native 64 × 64 frames and palettes. Its six-column layout contains:
+GRIL, CATL, PIPE, KLOT, SPOR, RSWP; DICO, EVAS, GIGO, TRCP, ONDE, CATR;
+CAVA, AMZE, MOTO, DAME, CWSE, RECR. Two independent renders gave the same
+SHA-256, `4d7ffcee792622cb066f5e1f9f713010487614a84ead6f82d91907e4c7be86c4`.
+The image now renders at full opacity without the earlier gradient mask or
+shadow overlay. A versioned image URL refreshes previously cached artwork.
+
+All six episode pages omit the visible “Full episode text” heading while
+retaining the complete original text, attribution, and direct text anchor.
+Built-output checks confirm complete wording, no stale heading/ARIA target,
+and valid accessible labels. TypeScript and the production build pass.
+Game engines, worker code, and agent availability are unchanged.
+
+Browser QA at 1348 px confirmed the requested type sizes, brighter patchwork,
+and no horizontal document overflow. CASC starts at Ready. Its four available
+directions render blue with white icons, Undo starts muted, and Space enables
+Undo. Undo restores the state and becomes muted again; a directional action
+followed by Reset returns to the initial level and clears Undo. Episode 6
+retains all 673 original words and its working text anchor without the removed
+heading. Mobile breakpoint styles were reviewed, but the available browser API
+did not expose viewport resizing for a separate mobile session.
+
+![Refined identity, visible custom-game count, and bright latest-wave patchwork](playground-visual-refinement-20261024.jpg)
+
+![Available game controls with Undo enabled after an action](controls-enabled-20261024.jpg)
+
 ## Reproduce
 
 With Node 22.18+ and Python 3.12+ with NumPy, Pydantic, and typing_extensions:
