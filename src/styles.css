@@ -437,17 +437,18 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 .brand-project{font-family:var(--mono);font-size:11px;line-height:1.2;letter-spacing:.55px;color:#a5ceff;font-weight:600}
 .brand-context{font-family:var(--mono);font-size:17px;line-height:1.5;letter-spacing:.2px;font-weight:500;color:var(--ink);border-left:1px solid var(--line);margin-left:3px;padding-left:17px}
 .brand-context>span{color:var(--accent-hover)}
-.site-header nav{gap:30px;font-family:var(--mono);font-size:10px;font-weight:400;text-transform:uppercase;letter-spacing:.35px}
-.site-header nav a{color:var(--subtle);padding:7px 0}
-.site-header nav a:hover,.site-header nav a.nav-active{color:var(--ink)}
-.nav-active:after{width:5px;height:5px;border-radius:0;background:var(--yellow);bottom:-7px}
+.site-header nav{gap:10px;font-family:var(--mono);font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.25px}
+.site-header nav a{display:inline-flex;align-items:center;justify-content:center;min-height:38px;color:#d8e3f2;padding:9px 10px;border:1px solid transparent;border-radius:3px;white-space:nowrap}
+.site-header nav a:hover{color:#fff;background:#14283f;border-color:#36577d}
+.site-header nav a.nav-active{color:#c3deff;background:#183454;border-color:#6295d3}
+.nav-active:after{display:none}
 .source-link{gap:6px}
 .source-link>.small-icon{width:13px;height:13px}
 .intro{grid-template-columns:minmax(0,1fr) 365px;align-items:center;gap:42px;padding:29px 0 29px;min-height:244px}
 .intro-main{min-width:0}
 .intro .eyebrow{font-size:9px;letter-spacing:1.35px;color:var(--muted);margin:0 0 14px}
 .status-dot{border-radius:0;background:var(--yellow)}
-.intro h1{font-size:clamp(40px,4.7vw,60px);font-weight:500;line-height:1.04;letter-spacing:-2px;white-space:nowrap;margin:0}
+.intro h1{font-size:clamp(30px,3vw,40px);font-weight:500;line-height:1.1;letter-spacing:-1px;white-space:nowrap;margin:0}
 .hero-agent{font-size:clamp(27px,3.2vw,42px);font-weight:600;line-height:1.2;letter-spacing:-1px;color:#9fcaff;margin:10px 0 0}
 .hero-statement{font-size:16px;line-height:1.5;color:var(--muted);margin:14px 0 0;letter-spacing:-.2px}
 .hero-statement em{font-style:normal;color:var(--ink)}
@@ -479,6 +480,7 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 .mode-bar{height:42px;padding-inline:21px;background:#0f151e;border-color:#2a3d54}
 .mode-tabs{gap:24px}
 .mode-tabs button{font-size:10px;font-family:var(--mono);font-weight:400}
+.mode-tabs .icon{width:18px;height:18px}
 .mode-tabs button[aria-selected=true]{color:#8dbaff;font-weight:500}
 .mode-tabs button[aria-selected=true]:after{background:var(--accent)}
 .soon-label{font-size:7px;padding:2px 4px;border-radius:2px;background:#1f2c3f}
@@ -547,10 +549,11 @@ button:disabled{opacity:.32}
 }
 @media(max-width:1050px){
   .site-header{gap:18px}
-  .site-header nav{gap:20px;font-size:9px}
+  .site-header nav{gap:6px;font-size:12px}
+  .site-header nav a{padding:8px}
   .brand-context{font-size:16px;padding-left:13px}
   .intro{grid-template-columns:minmax(0,1fr) 270px;gap:26px;min-height:225px}
-  .intro h1{font-size:clamp(39px,4.8vw,52px);letter-spacing:-1.8px}
+  .intro h1{font-size:clamp(28px,3.4vw,36px);letter-spacing:-.9px}
   .hero-agent{font-size:clamp(26px,3.2vw,34px);letter-spacing:-.7px}
   .hero-statement{font-size:15px}
   .minimal-play-area{grid-template-columns:minmax(0,1fr) 218px;min-height:430px}
@@ -559,6 +562,11 @@ button:disabled{opacity:.32}
   .minimal-control-column .compact-controller{gap:12px}
   .game-picker{width:330px}
 }
+@media(max-width:900px){
+  .site-header{height:auto;min-height:113px;padding:15px 0 13px;flex-direction:column;align-items:stretch;gap:13px}
+  .site-header nav{width:100%;justify-content:space-between;gap:8px}
+  .site-header nav a{flex:1}
+}
 @media(max-width:760px){
   .site-header{height:auto;min-height:105px;padding:17px 0 14px;flex-direction:column;align-items:stretch;gap:15px}
   .brand{gap:10px}
@@ -566,13 +574,13 @@ button:disabled{opacity:.32}
   .brand-title{font-size:17px;letter-spacing:-.5px}
   .brand-project{font-size:10px;letter-spacing:.5px}
   .brand-context{font-size:16px;margin-left:0;padding-left:13px}
-  .site-header nav{justify-content:space-between;gap:19px;font-size:9px}
-  .site-header nav a{padding:0}
+  .site-header nav{justify-content:space-between;gap:8px;font-size:12px}
+  .site-header nav a{padding:8px 9px}
   .nav-active:after{bottom:-6px;width:4px;height:4px}
   .source-link span,.source-link .small-icon{display:inline}
   .intro{grid-template-columns:1fr;min-height:0;padding:30px 0 28px}
   .intro .eyebrow{font-size:8px;margin-bottom:14px}
-  .intro h1{font-size:clamp(38px,7.5vw,56px);letter-spacing:-1.7px}
+  .intro h1{font-size:clamp(28px,4.8vw,34px);letter-spacing:-.8px}
   .hero-agent{font-size:clamp(25px,4.9vw,36px);letter-spacing:-.65px;margin-top:9px}
   .hero-statement{font-size:14px;margin-top:12px}
   .intro-art{display:none}
@@ -605,8 +613,8 @@ button:disabled{opacity:.32}
 @media(max-width:540px){
   .site-header{height:auto;min-height:103px;padding:17px 0 14px;flex-direction:column;align-items:stretch;gap:15px}
   .brand{align-self:flex-start}
-  .site-header nav{justify-content:space-between;gap:18px;font-size:9px}
-  .site-header nav a{padding:0}
+  .site-header nav{justify-content:space-between;gap:6px;font-size:12px}
+  .site-header nav a{padding:8px 6px}
   .site-header nav>.source-link{display:inline-flex}
   .nav-active:after{bottom:-6px;width:4px;height:4px}
   .catalog-count{max-width:none;font-size:6.5px}
@@ -614,6 +622,9 @@ button:disabled{opacity:.32}
 }
 @media(max-width:400px){
   .brand{gap:8px}
+  .site-header nav{gap:3px;font-size:11px}
+  .site-header nav a{padding:8px 3px}
+  .site-header nav .small-icon{display:none}
   .brand-title{font-size:16px}
   .brand-project{font-size:9px;letter-spacing:.3px}
   .brand-symbol{width:28px;height:28px}
