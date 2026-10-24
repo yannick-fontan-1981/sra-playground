@@ -37,9 +37,10 @@ const groupLabels: Record<GameCatalogEntry['group'], string> = {
   custom_2: 'Custom · Wave 2',
   custom_3: 'Custom · Wave 3',
 };
-const defaultGame = getGameByCode('PIPE');
-if (!defaultGame) throw new Error('The PIPE catalogue entry is missing.');
-let selectedGame: GameCatalogEntry = getGameByCode(new URL(window.location.href).searchParams.get('game') ?? 'PIPE') ?? defaultGame;
+const defaultGameCode = 'CASC';
+const defaultGame = getGameByCode(defaultGameCode);
+if (!defaultGame) throw new Error(`The ${defaultGameCode} catalogue entry is missing.`);
+let selectedGame: GameCatalogEntry = getGameByCode(new URL(window.location.href).searchParams.get('game') ?? defaultGameCode) ?? defaultGame;
 const escapeHtml = (value: string): string => value.replace(/[&<>"']/g, character => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[character]!);
@@ -58,19 +59,20 @@ app.innerHTML = `
   <main>
     <section class="intro wrap" aria-labelledby="page-title">
       <div class="intro-main">
-        <p class="eyebrow"><span class="status-dot"></span> INDEPENDENT RESEARCH / ARC AGI 3</p>
+        <p class="eyebrow"><span class="status-dot"></span> INTERACTIVE GAMES / INDEPENDENT RESEARCH</p>
         <h1 id="page-title">SRA Playground</h1>
         <p class="hero-agent">Symbolic Reasoning Agent</p>
         <p class="hero-statement">Toward <em>Understandable Intelligence.</em></p>
       </div>
       <div class="intro-art" aria-hidden="true">
         <img src="/game-mosaic.png" alt="" width="405" height="204" />
-        <span class="mosaic-label">EXPLORE. DISCOVER. REASON.</span>
+        <span class="mosaic-label">18 GAME FRAMES</span>
       </div>
     </section>
 
-    <section class="playground-section wrap" id="playground" aria-labelledby="game-title">
-      <div class="section-line"><span class="eyebrow"><span class="section-square" aria-hidden="true"></span> SRA PLAYGROUND</span><span class="catalog-count">${GAME_CATALOG.length} GAMES<span>/</span>25 OFFICIAL + 75 CUSTOM</span></div>
+    <section class="playground-section wrap" id="playground" aria-labelledby="playground-title">
+      <div class="section-line"><h2 class="playground-heading" id="playground-title">ARC AGI <span>3</span></h2><span class="catalog-count">${GAME_CATALOG.length} GAMES<span>/</span>25 OFFICIAL + 75 CUSTOM</span></div>
+      <p class="custom-game-credit"><strong>75 new custom games</strong> created or compiled by <span>Yannick Fontan.</span></p>
       <article class="player">
         <header class="player-header">
           <div class="game-identity">
@@ -148,8 +150,8 @@ app.innerHTML = `
     </section>
 
     <section class="about-section wrap" id="about" aria-labelledby="about-title">
-      <div class="about-heading"><p class="eyebrow">BEHIND THE PLAYGROUND</p><h2 id="about-title">Toward an<br>artificial cortex.</h2><a class="text-link" href="/architecture.html">Explore the architecture ${icon('arrow')}</a></div>
-      <div class="about-content"><p>SRA stands for <strong>Symbolic Reasoning Agent</strong>. Its research ambition is an artificial cortex built around explicit concepts, relations, mechanisms, and goals: knowledge an agent can examine, compose, and put to use.</p><p>Explore the case for symbolic reasoning, the architecture behind it, and the behavior-tree-loop that connects a discovery to a new possibility and the effective pursuit of a goal.</p><div class="reasoning-flow" aria-label="The intended reasoning loop: observe, discover, compose, act"><span><b>01</b>Observe</span><span><b>02</b>Discover</span><span><b>03</b>Compose</span><span><b>04</b>Act</span></div></div>
+      <div class="about-heading"><p class="eyebrow">THE PROJECT</p><h2 id="about-title">About SRA</h2><div class="about-links"><a class="text-link" href="/architecture.html">Architecture ${icon('arrow')}</a><a class="text-link" href="/videos.html">Video series ${icon('arrow')}</a></div></div>
+      <div class="about-content"><p><strong>Symbolic Reasoning Agent</strong> is Yannick Fontan’s research project for interactive games. The Python agent uses explicit representations of observations, mechanisms, and goals to organize its reasoning.</p><p>The 100 games on this page run locally in your browser. Connecting the agent is the next implementation step. The architecture pages describe the code; the video series follows the project’s development.</p></div>
     </section>
   </main>
   <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Independent research by Yannick Fontan</span><div><a href="https://arcprize.org/arc-agi/3" target="_blank" rel="noopener noreferrer">ARC Prize ${icon('external')}</a><a href="${websiteRepo}/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses & notices ${icon('external')}</a></div></footer>
@@ -360,7 +362,7 @@ element<HTMLSelectElement>('#game-select').addEventListener('change', event => {
   void selectGame((event.currentTarget as HTMLSelectElement).value);
 });
 window.addEventListener('popstate', () => {
-  void selectGame(new URL(window.location.href).searchParams.get('game') ?? 'PIPE', 'none');
+  void selectGame(new URL(window.location.href).searchParams.get('game') ?? defaultGameCode, 'none');
 });
 element('#retry-button').addEventListener('click', () => { void selectGame(selectedGame.code, 'none'); });
 element('#manual-tab').addEventListener('click', () => setMode('manual'));

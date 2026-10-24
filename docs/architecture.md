@@ -18,38 +18,39 @@ trajectory, or remote agent endpoint substitutes for the actual SRA.
 
 The pinned Python SRA and custom-game reference is
 [ARC-AGI-3-Yannick-Fontan at 212d8d4](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/tree/212d8d426f07eea2b6797c2bb647545767488a96).
-The visitor-facing `/architecture.html` page develops the case for symbolic
-reasoning, the artificial cortex ambition, explicit abstraction, relational
-meaning, and the behavior-tree-loop. It connects these ideas to Logos, DRM,
-SRC, the runtime, and the current memory and continuation contracts. This
-document describes how the browser application executes games and what remains
-for agent integration.
+The visitor-facing `/architecture.html` is a short introduction. Separate
+chapters under `/architecture/` cover representations, reasoning, memory, and
+implementation. This document describes how the browser application executes
+games and what remains for agent integration.
 
-## Public architecture narrative
+## Architecture chapters and video pages
 
-The page leads with the research thesis: explicit concepts, relations,
-conditions, evidence, and goals give an agent structures it can inspect and
-compose. “Artificial cortex” is a functional organizing ambition, not a claim
-of biological simulation or consciousness. The binary-to-assembly analogy
-describes a change in addressable representation; it does not equate neural
-networks with binary code or assert a general superiority of symbolic AI.
+The chapters are generated from `content/architecture.json` as complete HTML.
+They use a shared navigation, source-linked prose, a typed-claim illustration,
+relation and component tables, and an actual SRC action-cycle excerpt.
+The earlier long manifesto page and its interactive illustration have been
+replaced. “Artificial cortex” remains a concise functional organizing idea;
+the abstraction analogy appears within the representations chapter.
 
-An authored interactive example compares an unknown pad mechanism, a
-persistent switch, and a pressure plate. Selecting a premise changes the
-displayed prerequisites and plan. This explanatory interaction is independent
-of the game runtime and does not execute or evaluate SRA. Its labels explicitly
-identify it as an illustration. The behavior-tree-loop diagram likewise
-summarizes existing source workflows and typed contexts; it is not presented
-as a single finished generic behavior-tree engine.
+The behavior-tree-loop chapter follows goals, prerequisites, bounded
+composition, action release, and child returns. Its pad/gate scenario is
+labelled as an illustration. Informative progress is distinguished from
+physical completion, and the pages report no new solve rate or transfer result.
 
-The distinction between informative and physical progress is retained: a
-negative experiment may improve the parent's continuation, while completing a
-physical objective still requires an observed outcome. Architecture mechanisms
-are linked to the inspected source commit, including claims, goal relations,
-portable activity memory, reuse contracts, bounded synthesis, child return
-handling, and action release. The page cites Newell and Simon (1976), Bengio,
-Courville and Vincent (2013), and Harnad (1990) for its limited research context.
-It reports no new solve rate or demonstrated transfer result.
+`content/videos.json` records six public Yanik_AI uploads verified on
+24 October 2026. Each `/videos/<slug>.html` page has the original thumbnail,
+an explicit Play button, a YouTube watch link, a short summary based on the
+author's public description, and related chapter/game links. The index lives
+at `/videos.html`. Episode 1 links its legacy recording to the current official
+LS20 with that distinction stated. Episodes 4 and 6 refer to FT09 and AR25.
+
+The build-time generator imports the same shared header used by the game UI.
+Vite includes every generated HTML route as a separate static entry. Reading
+pages need no client rendering to expose their text or links. A small script
+creates a `youtube-nocookie.com` iframe only after a Play click and redirects
+the important old single-page Architecture anchors to their new chapters.
+Thumbnails are local; video playback uses YouTube. This does not alter the
+local game-action boundary.
 
 ## Current boundaries
 
@@ -68,7 +69,10 @@ It reports no new solve rate or demonstrated transfer result.
 | `public/vendor/pyodide/` | Prepared runtime and dependency files served from the same origin |
 | `src/runtime/contracts.ts` | Earlier prepared PIPE agent protocol; no real SRA is connected |
 | `src/games/pipes.ts`, `reference/python/pipes.py`, `tests/` | The independent PIPE TypeScript reference and development parity checks |
-| `architecture.html`, `src/architecture.ts`, `src/architecture.css` | Public explanation of the SRA architecture and current browser status |
+| `content/architecture.json`, `content/videos.json` | Authored chapters and verified episode metadata |
+| `scripts/generate-content-pages.mjs` | Complete static architecture, video-index, and episode HTML pages |
+| `src/reading.ts`, `src/reading.css` | Reading layout, legacy section links, and click-to-load video embeds |
+| `public/videos/` | Original Yanik_AI episode thumbnails, with provenance in the catalogue |
 
 ## Loading and local execution
 

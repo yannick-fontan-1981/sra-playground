@@ -435,7 +435,8 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 .brand-type{display:flex;flex-direction:column;gap:4px}
 .brand-title{font-size:22px;line-height:1;font-weight:600;letter-spacing:-.7px}
 .brand-project{font-family:var(--mono);font-size:8px;line-height:1;letter-spacing:1.1px;color:var(--subtle);font-weight:400}
-.brand-context{font-family:var(--mono);font-size:9px;line-height:1.5;letter-spacing:.3px;font-weight:400;color:var(--subtle);border-left:1px solid var(--line);margin-left:3px;padding-left:15px}
+.brand-context{font-family:var(--mono);font-size:17px;line-height:1.5;letter-spacing:.2px;font-weight:500;color:var(--ink);border-left:1px solid var(--line);margin-left:3px;padding-left:17px}
+.brand-context>span{color:var(--accent-hover)}
 .site-header nav{gap:30px;font-family:var(--mono);font-size:10px;font-weight:400;text-transform:uppercase;letter-spacing:.35px}
 .site-header nav a{color:var(--subtle);padding:7px 0}
 .site-header nav a:hover,.site-header nav a.nav-active{color:var(--ink)}
@@ -454,8 +455,13 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 .intro-art img{width:100%;height:auto;max-height:204px;object-fit:contain;image-rendering:pixelated;opacity:.48;mask-image:linear-gradient(90deg,transparent,#000 20%,#000 86%,transparent)}
 .intro-art:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,var(--paper),transparent 35%,transparent 80%,var(--paper));pointer-events:none}
 .mosaic-label{position:absolute;bottom:10px;z-index:1;font-family:var(--mono);font-size:8px;letter-spacing:1.4px;color:var(--subtle)}
-.section-line{margin-bottom:12px;gap:20px}
+.section-line{margin-bottom:8px;gap:20px}
 .section-line>.eyebrow{display:flex;align-items:center;gap:8px;font-size:9px;letter-spacing:1.1px;color:var(--ink)}
+.playground-heading{font-family:var(--mono);font-size:27px;line-height:1.2;letter-spacing:.4px;font-weight:600;margin:0}
+.playground-heading>span{color:var(--accent-hover)}
+.custom-game-credit{font-size:15px;line-height:1.7;color:var(--muted);margin:0 0 18px}
+.custom-game-credit strong{font-weight:500;color:var(--accent-hover)}
+.custom-game-credit>span{color:var(--ink)}
 .section-square{width:6px;height:6px;background:var(--accent)}
 .catalog-count{font-family:var(--mono);font-size:9px;letter-spacing:.3px}
 .catalog-count>span{color:#535f70;margin-inline:11px}
@@ -525,6 +531,7 @@ button:disabled{opacity:.32}
 .about-heading .eyebrow{font-size:9px;letter-spacing:1px}
 .about-heading h2{font-size:30px;font-weight:400;letter-spacing:-1px}
 .about-content>p{font-size:12px;color:var(--muted)}
+.about-links{display:flex;flex-wrap:wrap;gap:14px 26px}
 .reasoning-flow span{font-family:var(--mono);font-size:9px;font-weight:400}
 .reasoning-flow span:before{border-radius:0;background:var(--yellow)}
 .site-footer{font-size:9px;line-height:1.8;color:var(--subtle);padding:23px 0 28px}
@@ -537,6 +544,9 @@ button:disabled{opacity:.32}
   .minimal-play-area .canvas-stage{width:448px}
 }
 @media(max-width:1050px){
+  .site-header{gap:18px}
+  .site-header nav{gap:20px;font-size:9px}
+  .brand-context{font-size:16px;padding-left:13px}
   .intro{grid-template-columns:minmax(0,1fr) 270px;gap:26px;min-height:225px}
   .intro h1{font-size:clamp(43px,5.3vw,56px);letter-spacing:-2.2px}
   .hero-agent{font-size:clamp(23px,2.7vw,28px)}
@@ -548,13 +558,15 @@ button:disabled{opacity:.32}
   .game-picker{width:330px}
 }
 @media(max-width:760px){
-  .site-header{height:72px;gap:18px}
+  .site-header{height:auto;min-height:105px;padding:17px 0 14px;flex-direction:column;align-items:stretch;gap:15px}
   .brand{gap:10px}
   .brand-symbol{width:31px;height:31px}
   .brand-title{font-size:20px;letter-spacing:-.6px}
   .brand-project{font-size:7px;letter-spacing:.75px}
-  .brand-context{font-size:8px;margin-left:0;padding-left:10px}
-  .site-header nav{gap:19px;font-size:9px}
+  .brand-context{font-size:16px;margin-left:0;padding-left:13px}
+  .site-header nav{justify-content:space-between;gap:19px;font-size:9px}
+  .site-header nav a{padding:0}
+  .nav-active:after{bottom:-6px;width:4px;height:4px}
   .source-link span,.source-link .small-icon{display:inline}
   .intro{grid-template-columns:1fr;min-height:0;padding:30px 0 28px}
   .intro .eyebrow{font-size:8px;margin-bottom:14px}
@@ -565,6 +577,8 @@ button:disabled{opacity:.32}
   .catalog-count{font-size:7px}
   .catalog-count>span{margin-inline:6px}
   .section-line>.eyebrow{font-size:8px;letter-spacing:.65px}
+  .playground-heading{font-size:24px;letter-spacing:0}
+  .custom-game-credit{font-size:14px;margin-bottom:16px}
   .player-header{padding:15px 17px;gap:15px}
   .game-code-badge{height:44px;width:75px;font-size:23px}
   .game-identity h2{font-size:21px}
@@ -594,4 +608,13 @@ button:disabled{opacity:.32}
   .nav-active:after{bottom:-6px;width:4px;height:4px}
   .catalog-count{max-width:none;font-size:6.5px}
   .catalog-count>span{margin-inline:5px}
+}
+@media(max-width:400px){
+  .brand{gap:8px}
+  .brand-title{font-size:18px}
+  .brand-project{font-size:6.5px;letter-spacing:.5px}
+  .brand-symbol{width:28px;height:28px}
+  .brand-context{font-size:14px;padding-left:10px}
+  .playground-heading{font-size:22px}
+  .section-line{gap:12px}
 }

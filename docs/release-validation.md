@@ -189,6 +189,66 @@ available through the exposed browser API.
 
 ![A pressure mechanism changes the prerequisites and continuation plan](sra-meaning-20261023.jpg)
 
+## CASC default, architecture chapters, and video series
+
+The Playground now starts with CASC when no game is specified. Explicit game
+links remain supported. ARC AGI 3 is larger in the shared header and above the
+player, followed by the visible credit “75 new custom games created or compiled
+by Yannick Fontan.” The 100-game catalogue and native engine behaviour remain
+unchanged.
+
+The earlier long architecture page has been replaced by a short introduction
+and four separate chapters: representations, reasoning and the behavior-tree-loop,
+memory and reuse, and implementation. The text is stored in
+`content/architecture.json`; source claims remain pinned to the inspected
+Python commit `212d8d426f07eea2b6797c2bb647545767488a96`.
+
+The public Yanik_AI channel was inspected on 24 October 2026. Its displayed
+count and complete video list both contained six uploads; every watch page's
+metadata and full description were read. Each video now has its own page with
+an original thumbnail, a click-to-load player, concise notes based on the
+author's description, and relevant chapter/game links. Episode 4 is FT09 and
+Episode 6 is AR25. The Legacy LS20 recording is distinguished from the current
+official game linked in the Playground. Full source descriptions were not
+copied into the site.
+
+`scripts/generate-content-pages.mjs` produces five architecture documents,
+six episode documents, and the video index. Including the Playground, Vite
+builds 13 HTML pages. A built-output check resolved all 211 local links and
+their relevant fragment targets, checked image/script assets, and found no
+missing routes or duplicate article headings. An independent content review
+found no material mismatch with the inspected Python sources or the video
+descriptions. TypeScript, production build, and `git diff --check` pass.
+
+Fresh browser verification at 1348 px confirmed:
+
+- CASC loads the actual board and reaches Ready. Space acts, Undo restores,
+  and Reset restores the level.
+- There are still 100 selector options in four alphabetically sorted groups
+  of 25. The custom-game credit is visible above the player at 15 px.
+- The introduction, chapter navigation, representations table/code, and
+  six-step behavior-tree-loop render as separate pages without horizontal
+  document overflow.
+- The six original video thumbnails load at 1280 × 720.
+- Episode 06's Play button inserts the correct `youtube-nocookie.com` iframe,
+  which shows the correct title, controls, and 6:40 duration. The persistent
+  Watch on YouTube link points to the same verified episode.
+
+The embedded player stayed at 0:00 after a normal Play click, without an explicit
+error or sign-in wall. Loading the embed and its controls is verified; continuous
+playback is not confirmed in the preview environment. Mobile viewport resizing
+was unavailable, so responsive CSS was reviewed without a mobile browser session.
+No broad engine parity suite was repeated for this presentation/default-selection
+update; the original engines and worker protocol were untouched.
+
+![CASC, larger ARC AGI 3 heading, and the visible custom-game credit](playground-casc-20261024.jpg)
+
+![Short architecture introduction and chapter navigation](architecture-introduction-20261024.jpg)
+
+![The six verified Yanik_AI episodes](video-series-20261024.jpg)
+
+![Dedicated Episode 06 page with original poster and related navigation](video-episode-20261024.jpg)
+
 ## Reproduce
 
 With Node 22.18+ and Python 3.12+ with NumPy, Pydantic, and typing_extensions:
