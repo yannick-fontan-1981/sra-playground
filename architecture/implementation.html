@@ -26,8 +26,9 @@
       </a>
       <nav aria-label="Main navigation">
         <a href="/">Playground</a>
-        <a href="/gallery.html">Gallery</a>
+        <a href="/gallery.html">75 New Games</a>
         <a href="/arc-agi-3.html" aria-label="What is ARC-AGI-3?">ARC-AGI-3</a>
+        <a href="/symbolic-reasoning.html">Symbolic Reasoning</a>
         <a class="nav-active" aria-current="page" href="/architecture.html">Architecture</a>
         <a href="/videos.html">Videos</a>
         <a class="source-link" href="https://github.com/yannick-fontan-1981/sra-playground" target="_blank" rel="noopener noreferrer" aria-label="SRA Playground source code on GitHub"><span>GitHub</span><svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
@@ -46,6 +47,9 @@
     <p>Four parts organize the current implementation. They separate the representation of a situation, the declarations used to reason about it, the control flow of reasoning, and the computation that executes each operation.</p>
 
     <div class="reading-table" role="region" aria-label="The Python V5 source" tabindex="0"><table><thead><tr><th scope="col">Part</th><th scope="col">Responsibility</th><th scope="col">Starting point</th></tr></thead><tbody><tr><th scope="row">Logos</th><td>Typed terms, claims, goals, intentions, and result records.</td><td>logos/claims.py</td></tr><tr><th scope="row">DRM</th><td>Declared applicability, dependencies, priorities, expected effects, and falsifiers.</td><td>drm/knowledge.py</td></tr><tr><th scope="row">SRC</th><td>Source workflows with calls, selections, branches, waits, and outcomes.</td><td>src/core/released_action_cycle.src</td></tr><tr><th scope="row">Python runtime</th><td>Controller, scheduler, computation, state transport, and environment adapters.</td><td>agent.py</td></tr></tbody></table></div>
+
+
+
 
     <div class="reading-sources"><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/logos/claims.py" target="_blank" rel="noopener noreferrer">Logos<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/drm/knowledge.py" target="_blank" rel="noopener noreferrer">DRM<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/src/core/released_action_cycle.src" target="_blank" rel="noopener noreferrer">SRC<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/agent.py" target="_blank" rel="noopener noreferrer">Agent entry point<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
   </section>
@@ -71,6 +75,9 @@ STEP observe_result
         FROM after_frame
         USING acquisition.frame
     STOP success</code></pre><figcaption>Excerpt from released_action_cycle.src: dispatch, wait for a frame, and observe the result.</figcaption></figure>
+
+
+
     <div class="reading-sources"><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/agent.py" target="_blank" rel="noopener noreferrer">Agent bridge<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/src/core/release_action.src" target="_blank" rel="noopener noreferrer">Action release<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/src/core/released_action_cycle.src" target="_blank" rel="noopener noreferrer">Released action cycle<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
   </section>
 <section class="reading-section" id="what-runs-in-the-playground">
@@ -79,6 +86,9 @@ STEP observe_result
     <p>The website currently executes the original Python engines for 25 official games and 75 custom games. Pyodide runs Python in WebAssembly inside a worker. TypeScript handles selection, controls, and rendering. Initial assets come from the site; subsequent game actions execute locally.</p>
 <p>The SRA reasoning agent is not connected to this worker. Browser integration must preserve the Python agent&#39;s observations, action semantics, and resumable reasoning state. The agent should receive the public observation projection, with hidden engine variables kept outside that interface.</p>
 <p>Undo, Reset, a game change, or manual intervention can invalidate a pending plan. The integration therefore needs a lifecycle for initialization, stepping, pause, cancellation, and resumption, followed by comparisons with the Python reference. A complete TypeScript translation remains a separate implementation choice.</p>
+
+
+
 
 
 

@@ -26,8 +26,9 @@
       </a>
       <nav aria-label="Main navigation">
         <a href="/">Playground</a>
-        <a href="/gallery.html">Gallery</a>
+        <a href="/gallery.html">75 New Games</a>
         <a href="/arc-agi-3.html" aria-label="What is ARC-AGI-3?">ARC-AGI-3</a>
+        <a href="/symbolic-reasoning.html">Symbolic Reasoning</a>
         <a class="nav-active" aria-current="page" href="/architecture.html">Architecture</a>
         <a href="/videos.html">Videos</a>
         <a class="source-link" href="https://github.com/yannick-fontan-1981/sra-playground" target="_blank" rel="noopener noreferrer" aria-label="SRA Playground source code on GitHub"><span>GitHub</span><svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
@@ -48,6 +49,9 @@
 
 
 
+
+
+
     <div class="reading-sources"><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/logos/goal_frontier.py" target="_blank" rel="noopener noreferrer">Goal frontier<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/scheduler/reasoning_context_stack.py" target="_blank" rel="noopener noreferrer">Reasoning context stack<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
   </section>
 <section class="reading-section" id="the-behavior-tree-loop">
@@ -55,6 +59,9 @@
 
     <p>The behavior-tree-loop is a compact way to describe the intended control cycle. The current implementation distributes it across SRC workflows, typed requests and returns, and the reasoning context stack. The outline below summarizes those responsibilities.</p>
     <ol><li>Read the current observation and reconcile any returned investigation with its parent question.</li><li>Reassess the goal&#39;s prerequisites using the updated claims.</li><li>If a supported composition is available, check its conditions and prepare the next action.</li><li>If a missing relation prevents progress, open a scoped investigation and preserve its parent context.</li><li>After an action, observe the result and compare it with the expected effect.</li><li>Continue the parent goal, revise the composition, select an admitted alternative, or defer with a reason.</li></ol>
+
+
+
 
 
     <div class="reading-sources"><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/src/arc3/continue_after_information_probe.src" target="_blank" rel="noopener noreferrer">Continuation after an information probe<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/src/core/released_action_cycle.src" target="_blank" rel="noopener noreferrer">Released action cycle<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
@@ -67,6 +74,9 @@
 
 
 
+
+
+
     <div class="reading-sources"><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/dynamic_workflow/synthesis.py" target="_blank" rel="noopener noreferrer">Bounded synthesis<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/src/core/release_action.src" target="_blank" rel="noopener noreferrer">Action release<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
   </section>
 <section class="reading-section" id="example-returning-from-a-probe">
@@ -75,6 +85,9 @@
     <p>Suppose the goal is to reach an exit behind a gate. Standing on a pad opens the gate. The agent leaves the pad and the gate closes. That result rules out the simple plan of pressing once and walking through.</p>
 <p>The parent goal remains active. It now needs a way to maintain occupancy while the agent moves. A box becomes relevant only after establishing that it can be moved onto the pad and that its presence keeps the gate open. Those conditions support a new composition: place the box, verify the opening, then cross.</p>
 <p>The first probe made informative progress by changing the parent&#39;s next step. Physical completion still depends on observing arrival. The continuation workflow preserves this distinction: it handles completed, blocked, failed, and deferred returns, consumes each receipt once, and examines the remaining reasoning options.</p>
+
+
+
 
 
 

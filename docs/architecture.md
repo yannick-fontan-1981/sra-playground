@@ -61,6 +61,8 @@ local game-action boundary.
 | --- | --- |
 | `src/main.ts`, `src/styles.css` | Minimal manual interface, input, rendering, game selection, and history navigation |
 | `gallery.html`, `src/gallery.ts`, `src/gallery.css` | Static gallery with per-game level previews and exact game/level launch links |
+| `symbolic-reasoning.html`, `content/symbolic-reasoning.json` | Sourced introduction to symbolic reasoning, history, neural comparison, and SRA design |
+| `src/symbolic-reasoning.ts`, `src/symbolic-example.ts`, `src/symbolic-example.css` | Page-specific teaching model with explicit facts, action schemas, local planning, and missing-prerequisite explanations |
 | `src/games/catalog.ts` | The 100 source games, four-character codes, groups, and provenance |
 | `src/runtime/browser-games.ts` | Typed game requests, response correlation, worker creation, timeout, and disposal |
 | `src/runtime/game-worker.ts` | Local Python initialization and serialized dispatch of game operations |
@@ -75,7 +77,7 @@ local game-action boundary.
 | `src/runtime/contracts.ts` | Earlier prepared PIPE agent protocol; no real SRA is connected |
 | `src/games/pipes.ts`, `reference/python/pipes.py`, `tests/` | The independent PIPE TypeScript reference and development parity checks |
 | `content/architecture.json`, `content/videos.json` | Authored chapters, verified episode metadata, and full original episode texts |
-| `scripts/generate-content-pages.mjs` | Complete static architecture, video-index, and episode HTML pages |
+| `scripts/generate-content-pages.mjs` | Complete static architecture, ARC-AGI-3, symbolic-reasoning, video-index, and episode HTML pages |
 | `src/reading.ts`, `src/reading.css` | Reading layout, legacy section links, and click-to-load video embeds |
 | `public/videos/` | Original Yanik_AI episode thumbnails, with provenance in the catalogue |
 | `scripts/generate-game-gallery-assets.py`, `content/game-gallery-assets.json`, `public/gallery/` | Reproducible native level frames, per-frame hashes, and four lossless image atlases |

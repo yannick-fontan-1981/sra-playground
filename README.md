@@ -26,7 +26,7 @@ Fontan's **Symbolic Reasoning Agent** research.
   at full opacity. `scripts/generate-game-mosaic.py` reproduces the asset.
 - **SRA Agent:** an upcoming mode. The genuine reasoning agent is not connected
   yet; playable games are not a claim that SRA solves them.
-- **Visual gallery:** click the homepage patchwork or Gallery in the navigation.
+- **75 New Games:** click the homepage patchwork or 75 New Games in the navigation.
   `/gallery.html` shows 75 custom games in three alphabetic groups of 25, then
   the 25 official games. Each card previews any of its levels and launches
   exactly the game and level shown. All 636 native level images are stored in
@@ -81,11 +81,13 @@ Reset stays on the current level; Restart from level 1 creates a fresh game.
 Games that stop after a selected level show a completion panel with Next level,
 or Restart from level 1 when the final level is complete.
 
-### Architecture and video pages
+### Reading pages and game collection
 
 | Route | Content |
 | --- | --- |
 | `/gallery.html` | 75 custom and 25 official game cards, native level previews, and exact game/level launch links |
+| `/symbolic-reasoning.html` | Definition, interactive key-and-door example, history, comparison with neural networks, and the SRA design premise |
+| `/arc-agi-3.html` | What the interactive benchmark is, how it works, and how the Playground relates to it |
 | `/architecture.html` | Introduction and chapter directory |
 | `/architecture/representations.html` | Terms, claims, relation families, roles, mechanisms, and spaces |
 | `/architecture/reasoning.html` | Goals, composition, the behavior-tree-loop, and parent continuation |
@@ -94,12 +96,22 @@ or Restart from level 1 when the final level is complete.
 | `/videos.html` | The six-episode video index |
 | `/videos/<slug>.html` | One episode, its player, full original text, and related links |
 
-Edit `content/architecture.json` and `content/videos.json`, then run
+Edit `content/architecture.json`, `content/arc-agi-3.json`,
+`content/symbolic-reasoning.json`, or `content/videos.json`, then run
 `npm run content:generate`. `scripts/generate-content-pages.mjs` writes complete
 HTML documents and shares the same header as the Playground. The generated
 HTML is tracked for review; the build regenerates it deterministically.
 `src/reading.css` controls the reading layout, and `src/reading.ts` handles
 click-to-load video embeds and redirects useful old Architecture section links.
+
+The Symbolic Reasoning introduction links primary sources beside its claims
+and historical milestones. Its separate entry point, `src/symbolic-reasoning.ts`,
+loads a small local teaching example from `src/symbolic-example.ts`.
+The example searches explicit action preconditions and effects for a plan.
+Four starting scenarios distinguish a reachable key, an already held key,
+unknown compatibility, and an unreachable key. It is independent of the actual
+SRA agent and game worker. The complete default example is readable without
+JavaScript; its selector becomes active after initialization.
 
 The video catalogue is an explicitly verified snapshot, not an automatic
 channel feed. Add newly verified uploads to its data file and keep each

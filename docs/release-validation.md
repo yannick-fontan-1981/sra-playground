@@ -567,3 +567,43 @@ not available for an independent network-traffic check; the no-game-runtime
 claim above is established by the gallery's source and built import boundary.
 The temporary responsive fixture was removed and is absent from the source
 and production output. TypeScript and the production build passed.
+
+## Symbolic Reasoning introduction and 75 New Games navigation
+
+The main navigation now says **75 New Games**, and the same label appears in
+the collection page title and homepage patchwork link. The existing
+`/gallery.html` route, all 100 game cards, level previews, and launch links are
+preserved. A new **Symbolic Reasoning** link opens `/symbolic-reasoning.html`.
+
+The new introduction contains a definition, a worked key-and-door example,
+meaning and learning, six historical milestones, a comparison with neural
+networks, practical limits and hybrid approaches, and the SRA design premise.
+Eleven primary sources are linked beside the relevant discussion. Technical
+review checked history dates, unknown versus false, training versus inference,
+prediction versus observation, and the distinction between the teaching model
+and pending real SRA browser integration.
+
+The teaching example uses a small breadth-first search over four explicit
+action schemas, including preconditions and added/removed facts. A reachable
+matching key gives a four-action plan; an already held key gives three actions.
+Unknown key compatibility and an unreachable key produce blocked plans with
+the corresponding unsupported prerequisite. The explanation follows the
+action dependencies backward. The page provides a complete static default
+example and enables the selector when its module initializes. It imports no
+game engine, worker, or SRA implementation.
+
+TypeScript and the production build passed. All 16 built HTML pages were
+checked for internal targets and fragments, duplicate IDs, and active
+navigation. The 15 static reading/collection pages each have one active main
+navigation link; the home navigation is rendered by its existing module.
+No broken internal links were found. The renamed collection retains 100 cards.
+The game runtime and engine assets are unchanged, so the existing engine
+parity suite was not rerun for this content and navigation update.
+
+Browser checks passed on desktop and at 619 px and 390 px. All seven main
+navigation links remain visible, with three rows of 3/2/2 links at 390 px.
+The article, comparison tables, example, expanded rules, and blocked-state
+explanations fit without horizontal document overflow. All four example
+scenarios behaved as described above. Sidebar links target the correct
+sections. The collection title and navigation read 75 New Games, while its
+first launch link still opens CASC level 1.
