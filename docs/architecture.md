@@ -18,9 +18,38 @@ trajectory, or remote agent endpoint substitutes for the actual SRA.
 
 The pinned Python SRA and custom-game reference is
 [ARC-AGI-3-Yannick-Fontan at 212d8d4](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/tree/212d8d426f07eea2b6797c2bb647545767488a96).
-The visitor-facing `/architecture.html` page explains its Logos, DRM, SRC,
-runtime, and behavior-tree-loop concepts. This document describes how the
-browser application executes games and what remains for agent integration.
+The visitor-facing `/architecture.html` page develops the case for symbolic
+reasoning, the artificial cortex ambition, explicit abstraction, relational
+meaning, and the behavior-tree-loop. It connects these ideas to Logos, DRM,
+SRC, the runtime, and the current memory and continuation contracts. This
+document describes how the browser application executes games and what remains
+for agent integration.
+
+## Public architecture narrative
+
+The page leads with the research thesis: explicit concepts, relations,
+conditions, evidence, and goals give an agent structures it can inspect and
+compose. “Artificial cortex” is a functional organizing ambition, not a claim
+of biological simulation or consciousness. The binary-to-assembly analogy
+describes a change in addressable representation; it does not equate neural
+networks with binary code or assert a general superiority of symbolic AI.
+
+An authored interactive example compares an unknown pad mechanism, a
+persistent switch, and a pressure plate. Selecting a premise changes the
+displayed prerequisites and plan. This explanatory interaction is independent
+of the game runtime and does not execute or evaluate SRA. Its labels explicitly
+identify it as an illustration. The behavior-tree-loop diagram likewise
+summarizes existing source workflows and typed contexts; it is not presented
+as a single finished generic behavior-tree engine.
+
+The distinction between informative and physical progress is retained: a
+negative experiment may improve the parent's continuation, while completing a
+physical objective still requires an observed outcome. Architecture mechanisms
+are linked to the inspected source commit, including claims, goal relations,
+portable activity memory, reuse contracts, bounded synthesis, child return
+handling, and action release. The page cites Newell and Simon (1976), Bengio,
+Courville and Vincent (2013), and Harnad (1990) for its limited research context.
+It reports no new solve rate or demonstrated transfer result.
 
 ## Current boundaries
 

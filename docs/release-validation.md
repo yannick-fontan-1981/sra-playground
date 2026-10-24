@@ -136,6 +136,59 @@ Fresh Chrome verification now succeeds for the updated interface:
 
 ![Architecture with the shared ARC AGI 3 identity](arc-architecture-20261023.jpg)
 
+## SRA identity and architecture narrative update
+
+SRA Playground is now the primary shared identity and homepage heading.
+Symbolic Reasoning Agent is a large blue subtitle on the homepage and the
+Architecture page's main heading. ARC AGI 3 remains a smaller research-context
+label. The original game mosaic, blue interface accents, compact controls,
+and four sorted groups are retained.
+
+The Architecture page now develops a case for symbolic reasoning, the
+artificial cortex ambition, an explicitly qualified binary/assembly analogy,
+relational meaning, a behavior-tree-loop, current implementation mechanisms,
+and behavioral evidence to seek. Current upstream main was verified as
+`212d8d426f07eea2b6797c2bb647545767488a96`, matching the pinned code links.
+An independent content review checked the claims against that source. The
+copy distinguishes informative progress from physical completion, authored
+structures from acquired knowledge, and architectural mechanisms from
+demonstrated transfer.
+
+The two Google Docs supplied with the request were inaccessible in this
+session (HTTP 401 / Google sign-in). No text or ideas are attributed to their
+unread contents. The narrative uses the inspected repository, the explicit
+project brief, and the cited primary research context.
+
+The new interactive example is an authored presentation of three mechanisms,
+separate from the game runtime. It does not execute SRA or report a game run.
+Fresh Chrome checks confirmed:
+
+- The homepage's primary heading is 72 px at the checked desktop width;
+  Symbolic Reasoning Agent is 34 px and the ARC AGI 3 context label is 9 px.
+- PIPE reaches Ready. Space changes its board; Undo reports restoration;
+  Reset restores the level and leaves Undo disabled.
+- The selector still has 100 options in four groups of 25, all alphabetically
+  sorted by code within their original groups.
+- All three illustration buttons change the relation, prerequisite, plan,
+  and progress criterion; exactly one button has `aria-pressed="true"`.
+- All local Architecture fragment links resolve. The hero, research sections,
+  mechanism illustration, behavior-tree-loop, and evidence table fit the
+  checked 1348 px document width without horizontal overflow.
+- No application failure surfaced; unrelated extension metadata entries were
+  excluded from the app-error assessment.
+
+Strict TypeScript checking, production build, and `git diff --check` pass.
+The engine sources and worker protocol were not changed, so the earlier
+engine parity suites were not rerun for this presentation update. Responsive
+CSS was reviewed, but a mobile-sized browser or touch-device session was not
+available through the exposed browser API.
+
+![SRA Playground and Symbolic Reasoning Agent lead the homepage](sra-identity-20261023.jpg)
+
+![Architecture introduces the symbolic reasoning and artificial cortex thesis](sra-architecture-20261023.jpg)
+
+![A pressure mechanism changes the prerequisites and continuation plan](sra-meaning-20261023.jpg)
+
 ## Reproduce
 
 With Node 22.18+ and Python 3.12+ with NumPy, Pydantic, and typing_extensions:

@@ -58,8 +58,9 @@ app.innerHTML = `
   <main>
     <section class="intro wrap" aria-labelledby="page-title">
       <div class="intro-main">
-        <p class="eyebrow"><span class="status-dot"></span> SYMBOLIC REASONING AGENT</p>
-        <h1 id="page-title">ARC AGI <span class="hero-version">3</span></h1>
+        <p class="eyebrow"><span class="status-dot"></span> INDEPENDENT RESEARCH / ARC AGI 3</p>
+        <h1 id="page-title">SRA Playground</h1>
+        <p class="hero-agent">Symbolic Reasoning Agent</p>
         <p class="hero-statement">Toward <em>Understandable Intelligence.</em></p>
       </div>
       <div class="intro-art" aria-hidden="true">
@@ -147,8 +148,8 @@ app.innerHTML = `
     </section>
 
     <section class="about-section wrap" id="about" aria-labelledby="about-title">
-      <div class="about-heading"><p class="eyebrow">BEHIND THE PLAYGROUND</p><h2 id="about-title">From a discovery<br>to a reasoned action.</h2><a class="text-link" href="/architecture.html">Explore the architecture ${icon('arrow')}</a></div>
-      <div class="about-content"><p>SRA stands for <strong>Symbolic Reasoning Agent</strong>. The project studies how an agent can discover mechanisms, connect what it learns, and return to a goal with a new way forward.</p><p>The architecture page follows that process: observations, reusable knowledge, compositions, and the behavior-tree-loop that links discovery to continued action.</p><div class="reasoning-flow" aria-label="The intended reasoning loop: observe, discover, compose, act"><span><b>01</b>Observe</span><span><b>02</b>Discover</span><span><b>03</b>Compose</span><span><b>04</b>Act</span></div></div>
+      <div class="about-heading"><p class="eyebrow">BEHIND THE PLAYGROUND</p><h2 id="about-title">Toward an<br>artificial cortex.</h2><a class="text-link" href="/architecture.html">Explore the architecture ${icon('arrow')}</a></div>
+      <div class="about-content"><p>SRA stands for <strong>Symbolic Reasoning Agent</strong>. Its research ambition is an artificial cortex built around explicit concepts, relations, mechanisms, and goals: knowledge an agent can examine, compose, and put to use.</p><p>Explore the case for symbolic reasoning, the architecture behind it, and the behavior-tree-loop that connects a discovery to a new possibility and the effective pursuit of a goal.</p><div class="reasoning-flow" aria-label="The intended reasoning loop: observe, discover, compose, act"><span><b>01</b>Observe</span><span><b>02</b>Discover</span><span><b>03</b>Compose</span><span><b>04</b>Act</span></div></div>
     </section>
   </main>
   <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Independent research by Yannick Fontan</span><div><a href="https://arcprize.org/arc-agi/3" target="_blank" rel="noopener noreferrer">ARC Prize ${icon('external')}</a><a href="${websiteRepo}/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses & notices ${icon('external')}</a></div></footer>
@@ -340,7 +341,7 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   element('#runtime-message').textContent = 'Loading game…';
   element('#selection-feedback').textContent = `${game.code} selected.`;
   canvas.setAttribute('aria-label', `${game.code} game board. Use the arrow keys, Space, or click to interact.`);
-  document.title = `${game.code} · ARC AGI 3 — SRA Playground`;
+  document.title = `SRA Playground · ${game.code} — Symbolic Reasoning Agent`;
   setMode('manual');
   if (historyMode !== 'none') {
     const url = new URL(window.location.href);
