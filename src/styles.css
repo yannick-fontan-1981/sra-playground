@@ -517,6 +517,14 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 .utility-controls{gap:9px}
 .utility-button{font-family:var(--mono);font-size:10px;font-weight:600;min-width:78px;height:31px;padding:0 9px;border-color:#8ab9f3;border-radius:3px;background:#285e9e;color:#f5f9ff;box-shadow:inset 0 1px 0 #ffffff24,0 2px 0 #06090e}
 .utility-button:hover:not(:disabled){background:#3779bf;border-color:#b5d6ff;color:#fff}
+.level-controls{display:flex;flex-direction:column;gap:9px;max-width:210px;margin:0 auto 22px}
+.level-picker{display:flex;align-items:center;gap:12px}
+.level-picker label{font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:1px;color:#b5cae4}
+.level-picker select{flex:1;min-width:0;height:34px;padding:0 9px;border:1px solid #8ab9f3;border-radius:3px;background:#1e3654;color:#f5f9ff;font-family:var(--mono);font-size:12px;cursor:pointer;color-scheme:dark}
+.level-picker select:hover:not(:disabled){background:#2b5485;border-color:#b5d6ff}
+.level-picker select:focus-visible{outline:2px solid var(--yellow);outline-offset:3px}
+.level-picker select:disabled{background:#151c25;border-color:#2c3848;color:#657184;cursor:default;opacity:.65}
+.restart-button{width:100%;min-height:34px;justify-content:center;white-space:nowrap}
 .d-pad button:active:not(:disabled),.utility-button:active:not(:disabled){background:#1d4c83;box-shadow:inset 0 1px 2px #0004}
 button:disabled{opacity:.32}
 .primary-button,.secondary-button{border-radius:3px;font-weight:400}

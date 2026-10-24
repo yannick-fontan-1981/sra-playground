@@ -17,7 +17,7 @@ export interface GameObservation {
 
 type Request = { type: 'load'; code: string }
   | { type: 'action'; actionId: number; data?: { x: number; y: number } }
-  | { type: 'undo' | 'reset' }
+  | { type: 'undo' | 'reset' | 'restart' }
   | { type: 'selectLevel'; level: number };
 
 interface Pending {
@@ -78,6 +78,7 @@ export class BrowserGameRuntime {
   }
   undo(): Promise<GameObservation> { return this.request({ type: 'undo' }); }
   reset(): Promise<GameObservation> { return this.request({ type: 'reset' }); }
+  restart(): Promise<GameObservation> { return this.request({ type: 'restart' }); }
   selectLevel(level: number): Promise<GameObservation> { return this.request({ type: 'selectLevel', level }); }
   dispose(): void { this.disposed = true; this.fail(new Error('The game session was closed.')); }
 }

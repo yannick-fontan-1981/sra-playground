@@ -1,5 +1,9 @@
 # 100-game browser runtime validation
 
+This document records successive releases. The initial runtime checks below
+predate direct selection for all games; see [Manual level selection and restart](#manual-level-selection-and-restart)
+for the latest navigation coverage across all 636 levels.
+
 Validated on 23 October 2026 with Node 24.19.0, TypeScript 5.9.3,
 Vite 8.0.13, and self-hosted Pyodide 314.0.7 / CPython 3.14.2.
 
@@ -427,3 +431,69 @@ complete TypeScript rewrite, or validate SRA reasoning. The real SRA agent is
 not connected to the browser interface yet. Cold loading without network access,
 persistent progress across reloads, and game submissions are outside this
 release's scope.
+
+## Manual level selection and restart
+
+Updated on 24 October 2026. The Manual panel now has a level dropdown and a
+separate **Restart from level 1** button. The dropdown replaces the old numbered
+footer, follows observations after actions and Undo, and is hidden in Agent
+mode. Reset continues to restart only the current level.
+
+All 100 games support direct manual selection: 183 official levels and 453
+custom levels. `custom_level_navigation.py` adds audited entry adapters for
+52 custom engines that previously exposed only campaign progression; the
+other 23 retain their native jump methods. Game-source archives are unchanged.
+The adapter restores authored cross-level prerequisites for KEYD, FOGH, PORT,
+LIFE and VALV, and preserves Sequence Lab's ability to advance from a directly
+selected level. Native level counters used as entry offsets are practice state,
+not evidence that skipped puzzles were solved.
+
+Full restart and level selection build a fresh seeded session, validate its
+public observation and snapshot support, and then replace the active cached
+session. Successful changes clear Undo; failed entry leaves the old session
+intact. Restart returns the exact initial L1 observation for every game.
+
+Native single-level preview behavior is retained. Both `LEVEL_COMPLETE` and an
+early `WIN` now show a level-completion panel with Next level where applicable;
+final-level completion offers Restart from level 1. This avoids changing the
+games' test-mode or completion bookkeeping. Ordinary game actions are disabled
+after completion while navigation, Undo and Reset remain available.
+
+### Runtime checks
+
+| Check | Result |
+| --- | ---: |
+| Games loaded and exercised | 100 / 100 |
+| Advertised action combinations with Undo / repeat checks | 439 |
+| Direct level starts and current-level Reset checks | 636 / 636 |
+| Full restarts from later-level sessions after an action | 100 / 100 |
+| Complete native / WebAssembly observation matches | 2,789 |
+| HTTP requests in WebAssembly validation | 0 |
+| Failures | 0 |
+
+Executed `scripts/test-python-games.py` and then
+`scripts/test-python-games.mjs --native-report …` against the same final adapter.
+The native run took 22.85 seconds; the self-hosted WebAssembly run took 40.22
+seconds. Invalid level numbers, booleans, fractional values and strings return
+errors without changing the current observation.
+
+The focused `scripts/test-level-navigation.py` also passed all 453 custom level
+entries, pickle round-trips, and native current-level retries. It checks the
+cross-level entry prerequisites and completes selected Sequence Lab levels
+through actual actions: L2 advances to L3, and its final level reaches WIN.
+These checks establish navigation and state-handling coverage, not that every
+puzzle has been solved.
+
+### Browser checks
+
+CASC jumped to L2, L6 and L1; an action enabled Undo, Reset stayed on L6 and
+cleared Undo, and Restart returned to L1 with Undo disabled. KEYD entered L2 and
+L6, retained L6 on Reset, and restarted at L1. LS20 exposed all seven levels,
+entered L7, reset L7 and restarted L1. Switching to Agent hides the navigation
+controls; Manual restores them.
+
+Desktop, 619 px and 390 px views have no horizontal overflow; the dropdown and
+Restart button remain visible and work at narrow widths. The old numbered
+footer is absent. The completion overlay's new branch was code-reviewed but
+was not reached through browser play in this bounded UI check. The temporary
+responsive test fixture was removed before the production build.

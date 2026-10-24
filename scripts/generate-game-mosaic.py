@@ -39,7 +39,7 @@ def main() -> None:
         for bundle in ("custom-games.zip", "official-games.zip"):
             with zipfile.ZipFile(assets / bundle) as archive:
                 archive.extractall(runtime)
-        for adapter in ("game_bridge.py", "official_adapter.py"):
+        for adapter in ("game_bridge.py", "official_adapter.py", "custom_level_navigation.py"):
             shutil.copyfile(assets / adapter, runtime / adapter)
         sys.path.insert(0, str(runtime))
         from game_bridge import load_game

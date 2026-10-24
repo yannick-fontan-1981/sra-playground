@@ -65,8 +65,9 @@ local game-action boundary.
 | `src/runtime/game-worker.ts` | Local Python initialization and serialized dispatch of game operations |
 | `public/python/custom-games.zip` | The custom Python game sources required by the runtime |
 | `public/python/official-games.zip` | The exact official Python engines and required ARC engine sources |
-| `public/python/game_bridge.py` | Shared game loading, action dispatch, observations, session cache, Undo, and Reset |
+| `public/python/game_bridge.py` | Shared game loading, action dispatch, observations, session cache, Undo, current-level Reset, full restart, and atomic level changes |
 | `public/python/official_adapter.py` | Official engine adaptation, frame handling, and deterministic replay for restoration |
+| `public/python/custom_level_navigation.py` | Direct manual level entry through custom engine loaders and authored cross-level prerequisites |
 | `scripts/prepare-python.mjs` | Download and integrity-check pinned runtime files before development or build |
 | `scripts/python-runtime-assets.json` | Runtime versions, asset URLs, byte lengths, and SHA-256 hashes |
 | `public/vendor/pyodide/` | Prepared runtime and dependency files served from the same origin |
@@ -85,11 +86,21 @@ the custom and official game archives plus their adapters from `/python/`,
 extracts them into the worker's virtual filesystem, and imports the shared
 dispatcher. All of these browser requests use the site's own origin.
 
-The worker then accepts serialized requests to load a game, act, undo, reset,
-or select a level where supported. Each request has an ID; the TypeScript
+The worker then accepts serialized requests to load a game, act, undo, reset
+the current level, restart from level 1, or select a level. Each request has an ID; the TypeScript
 bridge resolves the matching response. Operations execute in order. The worker
 returns the public frame sequence, final frame, game state, available actions,
 progress metadata, and the flags needed to enable manual controls.
+
+Full restart and level selection prepare a fresh seeded session and validate
+its observation before replacing the cached active game. A successful change
+clears that session's Undo history; a failed entry preserves the prior session.
+The manual level selector follows observations after actions, natural progress,
+and Undo. Native counters used to select a later level are practice navigation
+state, not a record of benchmark completion. Some custom engines require an
+authored entry item or memory flag from an earlier level; the navigation adapter
+sets those prerequisites before calling the native loader. Reset continues to
+use the current level's native restart behavior.
 
 The main thread paints palette-indexed frames, preserves the returned animation
 timing, and validates input against the currently available action IDs. A click

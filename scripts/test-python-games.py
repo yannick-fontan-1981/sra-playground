@@ -56,6 +56,7 @@ def run_checks() -> dict:
         try:
             initial = send("load", code=code)
             assert initial["code"] == code and not initial["canUndo"]
+            assert initial["canSelectLevel"], (code, "manual level selection missing")
             assert len(initial["frame"]) == 64
             record(code + ":load", initial)
             for action_id in initial["availableActionIds"]:
@@ -73,7 +74,7 @@ def run_checks() -> dict:
                 send("undo")
                 actions_checked += 1
 
-            # Other engines retain their authored campaign progression.
+            # Manual navigation uses the authored level-entry state.
             selected_levels = range(1, initial["levelCount"] + 1) if initial["canSelectLevel"] else [1]
             for level in selected_levels:
                 current = send("selectLevel", level=level) if initial["canSelectLevel"] else send("observe")
@@ -85,6 +86,17 @@ def run_checks() -> dict:
                 assert not reset["canUndo"]
                 record(f"{code}:reset:{level}", reset)
                 levels_checked += 1
+
+            # Full restart must discard a later level's state and Undo history,
+            # rather than resume the LRU session or merely reset that level.
+            action_id = reset["availableActionIds"][0]
+            send("action", actionId=action_id, data={"x": 32, "y": 32} if action_id == 6 else None)
+            assert send("observe")["canUndo"]
+            restarted = send("restart")
+            assert signature(restarted) == signature(initial), (code, "full restart")
+            assert restarted["level"] == 1 and restarted["levelsCompleted"] == 0
+            assert not restarted["canUndo"]
+            record(code + ":restart", restarted)
             passed.append(code)
         except Exception as error:
             failures.append({"code": code, "error": str(error)})
@@ -94,7 +106,11 @@ def run_checks() -> dict:
     stable = signature(send("observe"))
     for payload in ({"type": "action", "actionId": 99},
                     {"type": "action", "actionId": 6, "data": {"x": -1, "y": 32}},
-                    {"type": "selectLevel", "level": 0}):
+                    {"type": "selectLevel", "level": 0},
+                    {"type": "selectLevel", "level": 999},
+                    {"type": "selectLevel", "level": True},
+                    {"type": "selectLevel", "level": 1.5},
+                    {"type": "selectLevel", "level": "2"}):
         response = json.loads(bridge.dispatch(json.dumps(payload)))
         assert "error" in response
         assert signature(send("observe")) == stable
@@ -128,7 +144,7 @@ def main() -> None:
         for bundle in ("custom-games.zip", "official-games.zip"):
             with zipfile.ZipFile(assets / bundle) as archive:
                 archive.extractall(root)
-        for adapter in ("game_bridge.py", "official_adapter.py"):
+        for adapter in ("game_bridge.py", "official_adapter.py", "custom_level_navigation.py"):
             shutil.copy(assets / adapter, root / adapter)
         sys.path.insert(0, str(root))
         report = run_checks()

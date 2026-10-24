@@ -114,13 +114,20 @@ app.innerHTML = `
               </div>
               <div class="game-overlay" id="win-overlay" hidden>
                 <div class="win-check">${icon('check')}</div><h3 id="win-title">Complete</h3>
-                <button class="primary-button" type="button" id="win-continue">Play again ${icon('arrow')}</button>
+                <button class="primary-button" type="button" id="win-continue"><span id="win-continue-label">Restart from level 1</span>${icon('arrow')}</button>
               </div>
             </div>
           </div>
 
           <aside class="control-column minimal-control-column">
             <div id="manual-panel" role="tabpanel" aria-labelledby="manual-tab">
+              <div class="level-controls" aria-label="Level navigation">
+                <div class="level-picker">
+                  <label for="level-select">LEVEL</label>
+                  <select id="level-select" aria-label="Jump to level" disabled><option value="">Loading…</option></select>
+                </div>
+                <button type="button" id="restart-button" class="utility-button restart-button" title="Start this game again from level 1" disabled>${icon('reset')}<span>Restart from level 1</span></button>
+              </div>
               <div class="compact-controller" aria-label="Game controls">
                 <div class="input-pad">
                   <div class="d-pad" aria-label="Directional actions">
@@ -149,10 +156,6 @@ app.innerHTML = `
           </aside>
         </div>
 
-        <footer class="level-explorer minimal-level-explorer" id="level-explorer" hidden>
-          <span class="eyebrow">LEVEL</span>
-          <div class="level-buttons" id="level-buttons" aria-label="Choose a level"></div>
-        </footer>
         <p id="game-feedback" class="sr-only" aria-live="polite"></p>
       </article>
     </section>
@@ -183,7 +186,7 @@ let loading = false;
 let failed = false;
 let selectionGeneration = 0;
 let presentationGeneration = 0;
-let renderedLevelCount = 0;
+let renderedLevelCount = -1;
 let renderedPalette = '';
 let colors: number[][] = [];
 
@@ -221,30 +224,29 @@ function ready(): boolean {
 
 function updateInterface(): void {
   const enabled = ready() && mode === 'manual';
-  const won = observation?.state === 'WIN';
+  const complete = observation?.state === 'WIN' || observation?.state === 'LEVEL_COMPLETE';
   const lost = observation?.state === 'GAME_OVER' || observation?.state === 'GAMEOVER';
   const available = new Set(observation?.availableActionIds ?? []);
   for (const button of document.querySelectorAll<HTMLButtonElement>('[data-action]')) {
-    button.disabled = !enabled || Boolean(won || lost) || !available.has(Number(button.dataset.action));
+    button.disabled = !enabled || Boolean(complete || lost) || !available.has(Number(button.dataset.action));
   }
   element<HTMLButtonElement>('#undo-button').disabled = !enabled || !observation?.canUndo;
   element<HTMLButtonElement>('#reset-button').disabled = !enabled;
+  element<HTMLButtonElement>('#restart-button').disabled = !enabled;
+  const levelSelect = element<HTMLSelectElement>('#level-select');
   const levelCount = observation?.canSelectLevel ? observation.levelCount : 0;
   if (levelCount !== renderedLevelCount) {
     renderedLevelCount = levelCount;
-    element('#level-buttons').innerHTML = Array.from({ length: levelCount }, (_, index) =>
-      `<button type="button" data-level="${index + 1}" aria-label="Choose level ${index + 1}">${String(index + 1).padStart(2, '0')}</button>`,
-    ).join('');
+    levelSelect.innerHTML = levelCount ? Array.from({ length: levelCount }, (_, index) =>
+      `<option value="${index + 1}">Level ${index + 1}</option>`,
+    ).join('') : '<option value="">Loading…</option>';
   }
-  element('#level-explorer').hidden = !observation?.canSelectLevel || levelCount < 2 || loading || failed;
-  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-level]')) {
-    const current = Number(button.dataset.level) === observation?.level;
-    button.classList.toggle('current-level', current);
-    button.setAttribute('aria-pressed', String(current));
-    button.disabled = !enabled;
-  }
-  element('#win-overlay').hidden = !enabled || !won;
-  element('#win-title').textContent = 'Complete';
+  levelSelect.disabled = !enabled || levelCount < 2;
+  if (levelCount && observation) levelSelect.value = String(observation.level);
+  const hasNextLevel = Boolean(observation && observation.level < observation.levelCount);
+  element('#win-overlay').hidden = !enabled || !complete;
+  element('#win-title').textContent = hasNextLevel ? 'Level complete' : 'Complete';
+  element('#win-continue-label').textContent = hasNextLevel ? 'Next level' : 'Restart from level 1';
   element<HTMLButtonElement>('#win-continue').disabled = !enabled;
   element('#runtime-overlay').hidden = !loading && !failed;
   element('#runtime-spinner').hidden = !loading;
@@ -276,7 +278,7 @@ async function present(next: GameObservation, selectedGeneration: number): Promi
   paint(next.frame, next.palette ?? fallbackPalette);
   busy = false;
   updateInterface();
-  if (next.state === 'WIN') element('#game-feedback').textContent = 'Complete.';
+  if (next.state === 'WIN' || next.state === 'LEVEL_COMPLETE') element('#game-feedback').textContent = `Level ${next.level} complete.`;
   else if (next.state === 'GAME_OVER' || next.state === 'GAMEOVER') element('#game-feedback').textContent = 'Game over. Undo or reset to continue.';
 }
 
@@ -305,7 +307,7 @@ async function run(operation: () => Promise<GameObservation>, announcement = '')
 }
 
 function perform(action: number, data?: { x: number; y: number }): void {
-  if (!observation?.availableActionIds.includes(action) || ['WIN', 'GAME_OVER', 'GAMEOVER'].includes(observation.state)) return;
+  if (!observation?.availableActionIds.includes(action) || ['WIN', 'LEVEL_COMPLETE', 'GAME_OVER', 'GAMEOVER'].includes(observation.state)) return;
   void run(() => runtime.action(action, data));
 }
 function undo(): void {
@@ -314,6 +316,9 @@ function undo(): void {
 }
 function reset(): void {
   void run(() => runtime.reset(), 'Level reset.');
+}
+function restart(): void {
+  void run(() => runtime.restart(), 'Game restarted from level 1.');
 }
 function focusCanvas(): void {
   canvas.focus({ preventScroll: true });
@@ -410,17 +415,24 @@ canvas.addEventListener('keydown', (event: KeyboardEvent) => {
 });
 element('#undo-button').addEventListener('click', () => { undo(); focusCanvas(); });
 element('#reset-button').addEventListener('click', () => { reset(); focusCanvas(); });
+element('#restart-button').addEventListener('click', () => { restart(); focusCanvas(); });
 for (const button of document.querySelectorAll<HTMLButtonElement>('[data-action]')) {
   button.addEventListener('click', () => { perform(Number(button.dataset.action)); focusCanvas(); });
 }
-element('#level-buttons').addEventListener('click', (event: MouseEvent) => {
-  const button = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-level]');
-  if (!button || button.disabled || !observation?.canSelectLevel) return;
-  const level = Number(button.dataset.level);
-  void run(() => runtime.selectLevel(level));
+element<HTMLSelectElement>('#level-select').addEventListener('change', event => {
+  const select = event.currentTarget as HTMLSelectElement;
+  if (select.disabled || !observation?.canSelectLevel) return;
+  const level = Number(select.value);
+  void run(() => runtime.selectLevel(level), `Level ${level} selected.`);
+});
+element('#win-continue').addEventListener('click', () => {
+  if (!observation) return;
+  if (observation.level < observation.levelCount) {
+    const level = observation.level + 1;
+    void run(() => runtime.selectLevel(level), `Level ${level} selected.`);
+  } else restart();
   focusCanvas();
 });
-element('#win-continue').addEventListener('click', reset);
 const fullscreenButton = element<HTMLButtonElement>('#fullscreen-button');
 fullscreenButton.hidden = !document.fullscreenEnabled;
 fullscreenButton.addEventListener('click', () => {
