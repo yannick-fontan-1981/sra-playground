@@ -70,6 +70,14 @@ app.innerHTML = `
       </div>
     </section>
 
+    <aside class="design-premise wrap" aria-labelledby="design-premise-title">
+      <h2 id="design-premise-title">DESIGN PREMISE</h2>
+      <div>
+        <p><strong>Ethical principles should shape an agent’s reasoning from the start.</strong> SRA explores symbolic reasoning to make the structures behind decisions explicit, inspectable, and open to correction—so people can take responsibility for the intelligence they build.</p>
+        <a class="text-link" href="/architecture.html#ethical-principles-and-inspectable-reasoning">Ethics &amp; human responsibility ${icon('arrow')}</a>
+      </div>
+    </aside>
+
     <section class="playground-section wrap" id="playground" aria-labelledby="playground-title">
       <div class="section-line"><h2 class="playground-heading" id="playground-title">ARC AGI <span>3</span></h2><span class="catalog-count">${GAME_CATALOG.length} GAMES<span>/</span>25 OFFICIAL + 75 CUSTOM</span></div>
       <p class="custom-game-credit"><strong>75 new custom games</strong><span class="custom-game-author">created or compiled by <span>Yannick Fontan.</span></span></p>

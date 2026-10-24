@@ -39,7 +39,19 @@
         <header class="reading-header"><p class="reading-breadcrumb">Architecture <span>/</span> Introduction</p><h1>SRA architecture</h1><p class="reading-deck">How the Symbolic Reasoning Agent represents a game, investigates its mechanisms, and selects actions.</p></header>
         <div class="reading-intro"><p>SRA is an experimental agent developed by Yannick Fontan for ARC-AGI 3. It uses game observations to form hypotheses about objects, controls, mechanisms, and goals, then uses those hypotheses to select actions.</p>
 <p>The Python V5 implementation expresses knowledge through typed terms and claims. Declarations describe when reasoning operations apply. Source workflows organize investigations, compositions, and action release. These structures can be inspected when a decision succeeds, stalls, or relies on a mistaken premise.</p><div class="reading-sources"><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/agent.py" target="_blank" rel="noopener noreferrer">Python agent entry point<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></div>
-        <section class="reading-section" id="the-artificial-cortex-idea">
+        <section class="reading-section" id="ethical-principles-and-inspectable-reasoning">
+    <h2>Ethical principles and inspectable reasoning</h2>
+    <p class="example-label">Project design premise</p>
+    <p>SRA starts from a design premise: artificial intelligence should be built around explicit ethical principles. Those principles should constrain which goals an agent may pursue, which means it may use, and when it should stop or ask for human judgment.</p>
+<p>Symbolic reasoning offers a way to design the concepts, inference rules, and conditions that govern decisions while allowing the agent to discover new hypotheses and compositions. The aim is to make the reasons for an action accessible: which goal was pursued, which evidence was used, which constraints applied, and where uncertainty remained.</p>
+<p>Readability must be tested. A decision trace should reflect the operations that actually selected the action, be understandable at the reader’s level, and expose the system’s limits. Human responsibility also requires identified people with the authority and practical means to challenge a decision, intervene, and correct the system.</p>
+<p>This is an engineering objective for SRA. The current Python architecture provides inspectable terms, claims, provenance, goals, and action-release checks. Implementing and evaluating ethical principles, handling conflicts between them, and providing effective human oversight remain work to be done.</p>
+
+
+
+    <div class="reading-sources"><a href="https://doi.org/10.6028/NIST.IR.8312" target="_blank" rel="noopener noreferrer">NIST: Four Principles of Explainable AI<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a href="https://doi.org/10.3389/frobt.2018.00015" target="_blank" rel="noopener noreferrer">Meaningful human control<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
+  </section>
+<section class="reading-section" id="the-artificial-cortex-idea">
     <h2>The artificial cortex idea</h2>
 
     <p>The phrase artificial cortex describes the intended organization of the system: perception, memory, hypotheses, goals, and action share a persistent model of the situation. An investigation should retain the goal that prompted it. A discovery should update that model and affect the next decision.</p>
