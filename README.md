@@ -12,7 +12,8 @@ Fontan's **Symbolic Reasoning Agent** research.
   Pyodide inside a dedicated Web Worker. A TypeScript interface renders their
   observations and sends actions to that local worker.
 - **Minimal manual controls:** arrows, a generic Space action, board clicks,
-  Undo, and Reset. Enabled directions and utility buttons use a bright blue
+  Undo, current-level Reset, a level dropdown, and Restart from level 1.
+  Enabled directions and utility buttons use a bright blue
   fill with white icons; unavailable actions are muted. The player leaves
   the game mechanics for you to discover.
 - **SRA-first identity:** SRA Playground and Symbolic Reasoning Agent lead
@@ -52,7 +53,8 @@ files; the game worker performs the computation on the user's device.
 | Click or tap the board | Coordinate action, when available |
 | Z, Ctrl+Z, or Undo | Undo the last action, when history is available |
 | R or Reset | Restart the current level |
-| Level buttons, where supported | Select a level |
+| Restart from level 1 | Start the selected game over, clearing its progress and Undo history |
+| Level dropdown in Manual mode | Start any authored level of the selected game |
 | Game selector | Load or resume the selected game |
 
 Keyboard shortcuts act while the game board is focused. Unsupported actions are
@@ -61,6 +63,15 @@ memory budget is reached; up to eight game sessions are cached in memory.
 Switching games, including browser Back/Forward navigation,
 resumes a cached session. Eviction or reloading the page clears that session.
 The `?game=CODE` URL selects a game; it does not serialize its progress.
+
+The level dropdown follows the current observation, including natural level
+advancement and Undo. Selecting a level starts a fresh practice session for
+that level and clears Undo history. The navigation adapter supplies authored
+entry prerequisites for games that carry items or knowledge between levels.
+Skipped levels are not evidence of solved puzzles or benchmark results.
+Reset stays on the current level; Restart from level 1 creates a fresh game.
+Games that stop after a selected level show a completion panel with Next level,
+or Restart from level 1 when the final level is complete.
 
 ### Architecture and video pages
 
@@ -137,9 +148,10 @@ ARC engine interface used by those sources.
 
 ### Validate the 100 original engines
 
-The shipped archives passed **439 advertised action checks**, **373 directly
-accessible level starts and resets**, and **2,163 complete observation
-comparisons** between native Python and self-hosted Pyodide. A separate official
+The shipped engines and adapters passed **439 advertised action checks**,
+**636 level starts and resets**, **100 full restarts**, and **2,789 complete
+observation comparisons** between native Python and self-hosted Pyodide.
+A separate official
 engine suite covers all **183 official levels** and **874 matching observations**.
 These checks include animation frames, state, Undo, and deterministic continuation;
 they do not establish that every puzzle has been solved.
@@ -148,6 +160,7 @@ With Python 3.12+ and NumPy, Pydantic, and typing_extensions installed:
 
 ```sh
 node scripts/prepare-python.mjs
+python scripts/test-level-navigation.py
 python scripts/test-python-games.py --output /tmp/sra-native.json
 node scripts/test-python-games.mjs --native-report /tmp/sra-native.json
 python scripts/test-official-runtime.py --output /tmp/sra-official-native.json
@@ -177,6 +190,8 @@ npm test
 The fixture generator's constraint solver and fixtures are development tools.
 They are not bundled as a playing agent. The browser games execute their own
 Python mechanics through `game_bridge.py` and `official_adapter.py`.
+`custom_level_navigation.py` adapts direct manual entry to the custom engines'
+level loaders without changing their source archives or puzzle mechanics.
 
 ## Bringing the genuine SRA to the browser
 

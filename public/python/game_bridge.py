@@ -17,6 +17,8 @@ from typing import Any
 import zlib
 
 from custom_games.registry import CUSTOM_GAMES, build_seeded_engine
+from custom_level_navigation import can_select_level as can_select_custom_level
+from custom_level_navigation import select_level as select_custom_level
 from official_adapter import OFFICIAL_GAMES, create_official
 
 
@@ -113,7 +115,8 @@ def _normalize(session: Session, raw: dict[str, Any]) -> dict[str, Any]:
         "levelsCompleted": completed,
         "availableActionIds": available,
         "canUndo": bool(session.history),
-        "canSelectLevel": callable(getattr(session.engine, "jump_to_level", None)),
+        "canSelectLevel": (can_select_custom_level(session.engine) if session.code in CUSTOM_BY_CODE
+                           else callable(getattr(session.engine, "jump_to_level", None))),
         "backend": "python-wasm",
     }
 
@@ -160,12 +163,8 @@ def _remember(session: Session, snapshot: bytes) -> None:
         session.history_bytes -= len(session.history.popleft())
 
 
-def load_game(code: str) -> dict[str, Any]:
-    global _active
-    code = str(code).strip().upper()
-    if code in _sessions:
-        _active = code
-        return _response(_session())
+def _new_session(code: str, level: int = 1) -> Session:
+    """Prepare a fresh practice session before replacing any playable state."""
     if code in CUSTOM_BY_CODE:
         info = CUSTOM_BY_CODE[code]
         engine = build_seeded_engine(info.game_id, instance_seed=0)
@@ -177,10 +176,28 @@ def load_game(code: str) -> dict[str, Any]:
         session = Session(code, engine, engine.game_id, engine.level_count, DEFAULT_PALETTE.copy())
     else:
         raise ValueError(f"Unknown game code: {code}")
-    session.current = _normalize(session, session.engine.public_state())
+    if level == 1:
+        raw = session.engine.public_state()
+    elif code in CUSTOM_BY_CODE:
+        raw = select_custom_level(session.engine, level)
+    else:
+        raw = session.engine.jump_to_level(level)
+    session.current = _normalize(session, raw)
+    if session.current["level"] != level or session.current["state"] != "NOT_FINISHED":
+        raise ValueError(f"{code} could not start level {level}")
     # Prove Undo support before presenting a game as ready. This never replays
     # a move and does not alter the live engine.
     _snapshot(session)
+    return session
+
+
+def load_game(code: str) -> dict[str, Any]:
+    global _active
+    code = str(code).strip().upper()
+    if code in _sessions:
+        _active = code
+        return _response(_session())
+    session = _new_session(code)
     _sessions[code] = session
     _active = code
     while len(_sessions) > MAX_SESSIONS:
@@ -246,22 +263,30 @@ def reset() -> dict[str, Any]:
     return _response(session, animate=True)
 
 
-def select_level(level: int) -> dict[str, Any]:
+def _restart_at_level(level: int) -> dict[str, Any]:
     session = _session()
     if type(level) is not int or not 1 <= level <= session.level_count:
         raise ValueError(f"Level must be between 1 and {session.level_count}")
-    method = getattr(session.engine, "jump_to_level", None)
-    if not callable(method):
-        raise ValueError("This game advances through its levels by playing")
-    before = _snapshot(session)
+    # Build separately: a failed level entry must leave the previous engine,
+    # current frame, and Undo history intact. A successful jump starts fresh.
+    previous_random = random.getstate()
     try:
-        session.current = _normalize(session, method(level))
+        replacement = _new_session(session.code, level)
     except Exception:
-        _restore(session, before)
+        random.setstate(previous_random)
         raise
-    session.history.clear()
-    session.history_bytes = 0
-    return _response(session)
+    _sessions[session.code] = replacement
+    return _response(replacement)
+
+
+def restart() -> dict[str, Any]:
+    """Start the active game again from level one, clearing its campaign state."""
+    return _restart_at_level(1)
+
+
+def select_level(level: int) -> dict[str, Any]:
+    """Start an authored level for manual practice, without replaying earlier ones."""
+    return _restart_at_level(level)
 
 
 def dispatch(request_json: str) -> str:
@@ -279,6 +304,8 @@ def dispatch(request_json: str) -> str:
             result = undo()
         elif kind == "reset":
             result = reset()
+        elif kind == "restart":
+            result = restart()
         elif kind == "selectLevel":
             result = select_level(request.get("level"))
         elif kind == "observe":

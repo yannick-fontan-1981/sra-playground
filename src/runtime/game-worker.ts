@@ -27,16 +27,18 @@ async function initialize(): Promise<PythonRuntime> {
   };
   const python = await loader.loadPyodide({ indexURL: directory, stdout: () => {}, stderr: text => console.warn(text) });
   await python.loadPackage(['numpy', 'pydantic', 'typing-extensions']);
-  const [custom, official, bridge, adapter] = await Promise.all([
+  const [custom, official, bridge, adapter, navigation] = await Promise.all([
     asset('/python/custom-games.zip').then(response => response.arrayBuffer()),
     asset('/python/official-games.zip').then(response => response.arrayBuffer()),
     asset('/python/game_bridge.py').then(response => response.text()),
     asset('/python/official_adapter.py').then(response => response.text()),
+    asset('/python/custom_level_navigation.py').then(response => response.text()),
   ]);
   python.unpackArchive(custom, 'zip', { extractDir: '/games' });
   python.unpackArchive(official, 'zip', { extractDir: '/games' });
   python.FS.writeFile('/games/game_bridge.py', bridge);
   python.FS.writeFile('/games/official_adapter.py', adapter);
+  python.FS.writeFile('/games/custom_level_navigation.py', navigation);
   python.runPython("import sys\nsys.path.insert(0, '/games')\nfrom game_bridge import dispatch");
   return python;
 }

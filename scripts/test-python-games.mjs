@@ -43,7 +43,7 @@ try {
     pyodide.unpackArchive(new Uint8Array(await readFile(path.join(root, 'public/python', name))),
       'zip', { extractDir: '/games' });
   }
-  for (const name of ['game_bridge.py', 'official_adapter.py']) {
+  for (const name of ['game_bridge.py', 'official_adapter.py', 'custom_level_navigation.py']) {
     pyodide.FS.writeFile('/games/' + name, new Uint8Array(await readFile(path.join(root, 'public/python', name))));
   }
   pyodide.runPython('import sys\nsys.path.insert(0, "/games")');
