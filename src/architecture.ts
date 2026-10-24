@@ -1,5 +1,6 @@
 import './styles.css';
 import './architecture.css';
+import { renderSiteHeader } from './site-header';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
 const agentRepo = 'https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan';
@@ -7,7 +8,6 @@ const sourceCommit = '212d8d426f07eea2b6797c2bb647545767488a96';
 const sourceBase = `${agentRepo}/blob/${sourceCommit}/agents/yf_arc3_v5/`;
 const external = '<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg>';
 const arrow = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>';
-const github = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4.3 1.3-4.3-2-6-2m12 5v-3.4a3 3 0 0 0-.8-2.3c2.7-.3 5.5-1.3 5.5-6a4.7 4.7 0 0 0-1.3-3.3 4.3 4.3 0 0 0-.1-3.3s-1-.3-3.4 1.3a11.5 11.5 0 0 0-6.2 0C6.3 3.4 5.3 3.7 5.3 3.7a4.3 4.3 0 0 0-.1 3.3A4.7 4.7 0 0 0 4 10.3c0 4.7 2.8 5.7 5.5 6a3 3 0 0 0-.8 2.3V22"/></svg>';
 const source = (path: string, label: string): string => `<a class="arch-source" href="${sourceBase}${path}" target="_blank" rel="noopener noreferrer">${label}${external}</a>`;
 
 const app = document.querySelector<HTMLDivElement>('#app');
@@ -15,22 +15,12 @@ if (!app) throw new Error('Application mount is missing.');
 
 app.innerHTML = `
   <a class="skip-link" href="#architecture-content">Skip to architecture</a>
-  <header class="site-header wrap">
-    <a class="brand" href="/" aria-label="SRA Playground home">
-      <svg class="brand-mark" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="8" fill="currentColor"/><path d="M9 11h12v7h-7v7h14" fill="none" stroke="#d2f36c" stroke-width="4"/><circle cx="9" cy="11" r="2.5" fill="#d2f36c"/><circle cx="28" cy="25" r="2.5" fill="#d2f36c"/></svg>
-      <span>SRA<span class="brand-divider">/</span><span class="brand-light">Playground</span></span>
-    </a>
-    <nav aria-label="Main navigation">
-      <a href="/">Playground</a>
-      <a class="nav-active" href="/architecture.html" aria-current="page">Architecture</a>
-      <a class="source-link" href="${websiteRepo}" target="_blank" rel="noopener noreferrer" aria-label="SRA Playground source code on GitHub">${github}<span>Source code</span>${external}</a>
-    </nav>
-  </header>
+  ${renderSiteHeader('architecture')}
 
   <main class="architecture-page" id="architecture-content">
     <section class="arch-hero wrap" aria-labelledby="architecture-title">
       <div>
-        <p class="eyebrow"><span class="status-dot"></span> INSIDE THE SYMBOLIC REASONING AGENT</p>
+        <p class="eyebrow"><span class="status-dot"></span> SRA / ARCHITECTURE</p>
         <h1 id="architecture-title">Toward<br><em>Understandable<br class="arch-title-break"> Intelligence</em><span class="title-dot">.</span></h1>
       </div>
       <div class="arch-hero-copy">
@@ -131,16 +121,16 @@ app.innerHTML = `
           <svg viewBox="0 0 420 250" role="img" aria-labelledby="world-title world-description">
             <title id="world-title">A pad, a gate, and a goal</title>
             <desc id="world-description">An illustrative agent stands near a pressure pad. A gate separates it from a goal. A dotted relation connects pad and gate; whether the effect persists remains a question.</desc>
-            <defs><pattern id="world-grid" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="#354538" stroke-width="0.7"/></pattern><marker id="world-arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="m0 0 6 3-6 3" fill="none" stroke="#d2f36c" stroke-width="1"/></marker></defs>
-            <rect x="15" y="28" width="390" height="182" rx="8" fill="url(#world-grid)" stroke="#354538"/>
-            <path d="M275 28v57m0 68v57" stroke="#708568" stroke-width="10"/>
-            <path d="M275 87v64" stroke="#d2f36c" stroke-width="5" stroke-dasharray="7 5"/>
-            <rect x="99" y="111" width="38" height="14" rx="3" fill="#d2f36c"/>
-            <circle cx="66" cy="119" r="13" fill="#a9bfd1"/>
-            <path d="m345 104 15 15-15 15-15-15Z" fill="none" stroke="#d2f36c" stroke-width="3"/>
-            <path d="M120 94C150 47 236 45 267 91" fill="none" stroke="#d2f36c" stroke-width="1.5" stroke-dasharray="4 5" marker-end="url(#world-arrow)"/>
+            <defs><pattern id="world-grid" width="26" height="26" patternUnits="userSpaceOnUse"><path d="M26 0H0V26" fill="none" stroke="var(--line)" stroke-width="0.7"/></pattern><marker id="world-arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="m0 0 6 3-6 3" fill="none" stroke="var(--yellow)" stroke-width="1"/></marker></defs>
+            <rect x="15" y="28" width="390" height="182" fill="url(#world-grid)" stroke="var(--line)"/>
+            <path d="M275 28v57m0 68v57" stroke="var(--control-border)" stroke-width="10"/>
+            <path d="M275 87v64" stroke="var(--yellow)" stroke-width="5" stroke-dasharray="7 5"/>
+            <rect x="99" y="111" width="38" height="14" fill="var(--accent)"/>
+            <rect x="53" y="106" width="26" height="26" fill="var(--ink)"/>
+            <path d="m345 104 15 15-15 15-15-15Z" fill="none" stroke="var(--yellow)" stroke-width="3"/>
+            <path d="M120 94C150 47 236 45 267 91" fill="none" stroke="var(--yellow)" stroke-width="1.5" stroke-dasharray="4 5" marker-end="url(#world-arrow)"/>
             <text x="67" y="159" text-anchor="middle">AGENT</text><text x="120" y="159" text-anchor="middle">PAD</text><text x="276" y="238" text-anchor="middle">GATE</text><text x="345" y="159" text-anchor="middle">GOAL</text>
-            <rect x="139" y="47" width="112" height="25" rx="4" fill="#232e27" stroke="#354538"/><text x="195" y="64" class="arch-world-question" text-anchor="middle">effect persists?</text>
+            <rect x="139" y="47" width="112" height="25" fill="var(--surface-raised)" stroke="var(--line)"/><text x="195" y="64" class="arch-world-question" text-anchor="middle">effect persists?</text>
           </svg>
           <p>The useful relationship includes its conditions: <strong>pad occupied → gate open</strong> may differ from <strong>pad activated → gate stays open</strong>.</p>
         </div>
