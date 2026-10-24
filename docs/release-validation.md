@@ -321,6 +321,37 @@ did not expose viewport resizing for a separate mobile session.
 
 ![Available game controls with Undo enabled after an action](controls-enabled-20261024.jpg)
 
+## Annotated title, navigation, and mode icons
+
+The four browser annotations are addressed in the shared styling and the
+Playground's mode tabs. The SRA Playground hero title is capped at 40 px on
+desktop and is approximately 30 px at the annotated 619 px width, while the
+Symbolic Reasoning Agent heading keeps its stronger emphasis.
+
+Main navigation uses brighter text at 13 px on desktop and 12 px at the
+annotated width, with 38 px minimum link heights and a filled blue current-page
+state. At narrow widths the menu spans a separate header row; a compact 11 px
+variant keeps all four links visible at 400 px and below. Existing focus
+outlines and `aria-current` remain in place.
+
+Manual now uses an outlined hand icon, and SRA Agent uses an outlined robot
+head. Both are 18 px inline SVGs with decorative `aria-hidden` treatment;
+the visible tab names, tab semantics, and existing selection handlers remain.
+TypeScript, the production build, and `git diff --check` pass.
+
+Browser QA verified the desktop page and actual 619 px and 390 px same-origin
+iframe viewports, which apply the site's responsive CSS. At 619 px the title
+measures 29.712 px and navigation text 12 px; at 390 px the values are 28 px and
+11 px. Navigation links remain at least 38 px tall. All four links are visible
+and neither narrow document has horizontal overflow. Both icons are visibly
+recognizable. Manual/Agent tab switching and the Architecture navigation link
+work, and the active-page highlight updates correctly. The temporary viewport
+fixture was removed before source synchronization and publication.
+
+![Annotated layout checked at 619 px](annotations-619-20261024.jpg)
+
+![Smaller title and clearer navigation on desktop](annotations-desktop-20261024.jpg)
+
 ## Reproduce
 
 With Node 22.18+ and Python 3.12+ with NumPy, Pydantic, and typing_extensions:
