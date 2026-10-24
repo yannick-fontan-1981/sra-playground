@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Render the hero mosaic from genuine bundled games' initial public frames.
+"""Render the hero patchwork from the latest custom wave's real level frames.
 
 Requires Pillow plus the same native Python dependencies as the game bridge.
-No gameplay, image generation, external assets, resampling or network requests.
+All 18 selections are custom_3 games, opened at their initial level with seed 0.
+Their native 64×64 pixels and palettes are preserved without darkening.
+No gameplay, invented imagery, external assets, resampling or network requests.
 """
 from pathlib import Path
 import shutil
@@ -14,9 +16,9 @@ from PIL import Image, ImageColor
 
 
 GAMES = (
-    "LS20", "PIPE", "FT09", "COLM", "RE86", "SKBN",
-    "BP35", "HANO", "VC33", "DNOI", "TN36", "GORI",
-    "LF52", "KATA", "SP80", "ONDE", "TU93", "ELAS",
+    "GRIL", "CATL", "PIPE", "KLOT", "SPOR", "RSWP",
+    "DICO", "EVAS", "GIGO", "TRCP", "ONDE", "CATR",
+    "CAVA", "AMZE", "MOTO", "DAME", "CWSE", "RECR",
 )
 COLUMNS = 6
 TILE_SIZE = 64
@@ -53,7 +55,7 @@ def main() -> None:
 
     destination = site / "public" / "game-mosaic.png"
     mosaic.save(destination, format="PNG", optimize=True)
-    print(f"{destination}: {size[0]}×{size[1]}, {len(GAMES)} initial game frames")
+    print(f"{destination}: {size[0]}×{size[1]}, {len(GAMES)} custom_3 initial level frames")
 
 
 if __name__ == "__main__":

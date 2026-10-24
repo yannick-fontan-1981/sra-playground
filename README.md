@@ -12,12 +12,17 @@ Fontan's **Symbolic Reasoning Agent** research.
   Pyodide inside a dedicated Web Worker. A TypeScript interface renders their
   observations and sends actions to that local worker.
 - **Minimal manual controls:** arrows, a generic Space action, board clicks,
-  Undo, and Reset. The player leaves the game mechanics for you to discover.
+  Undo, and Reset. Enabled directions and utility buttons use a bright blue
+  fill with white icons; unavailable actions are muted. The player leaves
+  the game mechanics for you to discover.
 - **SRA-first identity:** SRA Playground and Symbolic Reasoning Agent lead
   the hierarchy, with a prominent ARC AGI 3 heading above the player and the
-  credit “75 new custom games created or compiled by Yannick Fontan.” Warm black surfaces,
-  off-white text, blue and yellow accents, and a mosaic rendered from 18 real
-  game frames retain the ARC-inspired appearance.
+  credit “75 new custom games created or compiled by Yannick Fontan.” The
+  agent name is larger and brighter, with a smaller SRA Playground title and
+  prominent custom-game count. Warm black surfaces, off-white text, blue and
+  yellow accents retain the ARC-inspired appearance. The patchwork shows 18
+  real initial levels from the latest Custom Wave 3, in their original colors
+  at full opacity. `scripts/generate-game-mosaic.py` reproduces the asset.
 - **SRA Agent:** an upcoming mode. The genuine reasoning agent is not connected
   yet; playable games are not a claim that SRA solves them.
 - **Architecture chapters:** `/architecture.html` is a short introduction.
@@ -81,7 +86,8 @@ channel feed. Add newly verified uploads to its data file and keep each
 thumbnail's source attribution. Each `fullText` stores the exact original
 English description with its author, source URL, and retrieval date. The
 episode page renders all of it, including the original paragraph and line
-breaks, without a collapsed section. The short `summary` is used only in page
+breaks, without a collapsed section or a separate visible text heading. The
+short `summary` is used only in page
 metadata. The text is attributed to the video description rather than labelled
 as an audio transcription. Videos stream from YouTube after Play is
 clicked; original thumbnails are served locally from `public/videos/`.

@@ -65,14 +65,14 @@ app.innerHTML = `
         <p class="hero-statement">Toward <em>Understandable Intelligence.</em></p>
       </div>
       <div class="intro-art" aria-hidden="true">
-        <img src="/game-mosaic.png" alt="" width="405" height="204" />
-        <span class="mosaic-label">18 GAME FRAMES</span>
+        <img src="/game-mosaic.png?v=custom-wave-3" alt="" width="405" height="204" />
+        <span class="mosaic-label">CUSTOM GAMES · WAVE 3</span>
       </div>
     </section>
 
     <section class="playground-section wrap" id="playground" aria-labelledby="playground-title">
       <div class="section-line"><h2 class="playground-heading" id="playground-title">ARC AGI <span>3</span></h2><span class="catalog-count">${GAME_CATALOG.length} GAMES<span>/</span>25 OFFICIAL + 75 CUSTOM</span></div>
-      <p class="custom-game-credit"><strong>75 new custom games</strong> created or compiled by <span>Yannick Fontan.</span></p>
+      <p class="custom-game-credit"><strong>75 new custom games</strong><span class="custom-game-author">created or compiled by <span>Yannick Fontan.</span></span></p>
       <article class="player">
         <header class="player-header">
           <div class="game-identity">
