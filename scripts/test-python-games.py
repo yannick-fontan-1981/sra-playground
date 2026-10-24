@@ -101,6 +101,21 @@ def run_checks() -> dict:
         except Exception as error:
             failures.append({"code": code, "error": str(error)})
 
+    # Gallery links must atomically choose both the game and requested level,
+    # even when that game already has a cached, modified session.
+    for code, level in (("CASC", 6), ("KEYD", 2), ("SPOR", 6), ("LS20", 7), ("LF52", 3)):
+        launched = send("load", code=code, level=level)
+        assert launched["code"] == code and launched["level"] == level
+        assert not launched["canUndo"]
+        record(f"{code}:linked-level:{level}", launched)
+        action_id = launched["availableActionIds"][0]
+        changed = send("action", actionId=action_id, data={"x": 32, "y": 32} if action_id == 6 else None)
+        assert send("load", code=code)["canUndo"], "ordinary game switch must resume"
+        assert signature(send("observe")) == signature(changed)
+        relaunched = send("load", code=code, level=level)
+        assert signature(relaunched) == signature(launched) and not relaunched["canUndo"]
+        record(f"{code}:linked-level-repeat:{level}", relaunched)
+
     # Invalid input must be a JSON error and leave the active game unchanged.
     send("load", code="PIPE")
     stable = signature(send("observe"))
@@ -110,7 +125,11 @@ def run_checks() -> dict:
                     {"type": "selectLevel", "level": 999},
                     {"type": "selectLevel", "level": True},
                     {"type": "selectLevel", "level": 1.5},
-                    {"type": "selectLevel", "level": "2"}):
+                    {"type": "selectLevel", "level": "2"},
+                    {"type": "load", "code": "CASC", "level": 999},
+                    {"type": "load", "code": "LS20", "level": True},
+                    {"type": "load", "code": "LS20", "level": "2"},
+                    {"type": "load", "code": "LS20", "level": 1.5}):
         response = json.loads(bridge.dispatch(json.dumps(payload)))
         assert "error" in response
         assert signature(send("observe")) == stable

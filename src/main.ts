@@ -41,6 +41,12 @@ const defaultGameCode = 'CASC';
 const defaultGame = getGameByCode(defaultGameCode);
 if (!defaultGame) throw new Error(`The ${defaultGameCode} catalogue entry is missing.`);
 let selectedGame: GameCatalogEntry = getGameByCode(new URL(window.location.href).searchParams.get('game') ?? defaultGameCode) ?? defaultGame;
+function requestedLevel(url: URL, game: GameCatalogEntry): number | undefined {
+  const value = url.searchParams.get('level');
+  if (!value || !/^\d+$/.test(value)) return undefined;
+  const level = Number(value);
+  return Number.isSafeInteger(level) && level >= 1 && level <= (game.levels ?? 1) ? level : undefined;
+}
 const escapeHtml = (value: string): string => value.replace(/[&<>"']/g, character => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[character]!);
@@ -64,10 +70,10 @@ app.innerHTML = `
         <p class="hero-agent">Symbolic Reasoning Agent</p>
         <p class="hero-statement">Toward <em>Understandable Intelligence.</em></p>
       </div>
-      <div class="intro-art" aria-hidden="true">
-        <img src="/game-mosaic.png?v=custom-wave-3" alt="" width="405" height="204" />
-        <span class="mosaic-label">CUSTOM GAMES · WAVE 3</span>
-      </div>
+      <a class="intro-art" href="/gallery.html" aria-label="Browse the game gallery: 75 custom games and 25 official games">
+        <img src="/game-mosaic.png?v=custom-wave-3" alt="A patchwork of custom game boards" width="405" height="204" />
+        <span class="mosaic-label">EXPLORE THE GAME GALLERY ${icon('arrow')}</span>
+      </a>
     </section>
 
     <aside class="design-premise wrap" aria-labelledby="design-premise-title">
@@ -79,7 +85,7 @@ app.innerHTML = `
     </aside>
 
     <section class="playground-section wrap" id="playground" aria-labelledby="playground-title">
-      <div class="section-line"><div class="playground-heading-group"><h2 class="playground-heading" id="playground-title">ARC AGI <span>3</span></h2><a class="text-link" href="/arc-agi-3.html">What is ARC-AGI-3? ${icon('arrow')}</a></div><span class="catalog-count">${GAME_CATALOG.length} GAMES<span>/</span>25 OFFICIAL + 75 CUSTOM</span></div>
+      <div class="section-line"><div class="playground-heading-group"><h2 class="playground-heading" id="playground-title">ARC AGI <span>3</span></h2><a class="text-link" href="/arc-agi-3.html">What is ARC-AGI-3? ${icon('arrow')}</a></div><a class="catalog-count" href="/gallery.html" aria-label="Browse all 100 games in the gallery">${GAME_CATALOG.length} GAMES<span>/</span>25 OFFICIAL + 75 CUSTOM</a></div>
       <p class="custom-game-credit"><strong>75 new custom games</strong><span class="custom-game-author">created or compiled by <span>Yannick Fontan.</span></span></p>
       <article class="player">
         <header class="player-header">
@@ -263,6 +269,10 @@ async function present(next: GameObservation, selectedGeneration: number): Promi
   observation = next;
   loading = false;
   failed = false;
+  const url = new URL(window.location.href);
+  url.searchParams.set('game', next.gameCode);
+  url.searchParams.set('level', String(next.level));
+  if (url.href !== window.location.href) window.history.replaceState(null, '', url);
   updateInterface();
   const frames = next.frames.length ? next.frames : [next.frame];
   const frameDuration = 1000 / Math.max(1, Math.min(60, next.defaultFps || 10));
@@ -340,7 +350,7 @@ function setMode(next: 'manual' | 'agent', focusTab = false): void {
   if (focusTab) (manual ? manualTab : agentTab).focus();
 }
 
-async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none' = 'push'): Promise<void> {
+async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none' = 'push', level?: number): Promise<void> {
   const game = getGameByCode(code) ?? defaultGame!;
   const generation = ++selectionGeneration;
   presentationGeneration += 1;
@@ -361,11 +371,13 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   if (historyMode !== 'none') {
     const url = new URL(window.location.href);
     url.searchParams.set('game', game.code);
+    if (level === undefined) url.searchParams.delete('level');
+    else url.searchParams.set('level', String(level));
     if (historyMode === 'replace') window.history.replaceState(null, '', url);
     else if (url.href !== window.location.href) window.history.pushState(null, '', url);
   }
   try {
-    await present(await runtime.load(game.code), generation);
+    await present(await runtime.load(game.code, level), generation);
   } catch (error) {
     showFailure(error, generation);
   }
@@ -375,9 +387,13 @@ element<HTMLSelectElement>('#game-select').addEventListener('change', event => {
   void selectGame((event.currentTarget as HTMLSelectElement).value);
 });
 window.addEventListener('popstate', () => {
-  void selectGame(new URL(window.location.href).searchParams.get('game') ?? defaultGameCode, 'none');
+  const url = new URL(window.location.href);
+  const game = getGameByCode(url.searchParams.get('game') ?? defaultGameCode) ?? defaultGame!;
+  void selectGame(game.code, 'none', requestedLevel(url, game));
 });
-element('#retry-button').addEventListener('click', () => { void selectGame(selectedGame.code, 'none'); });
+element('#retry-button').addEventListener('click', () => {
+  void selectGame(selectedGame.code, 'none', requestedLevel(new URL(window.location.href), selectedGame));
+});
 element('#manual-tab').addEventListener('click', () => setMode('manual'));
 element('#agent-tab').addEventListener('click', () => setMode('agent'));
 element('#return-manual').addEventListener('click', () => { setMode('manual'); focusCanvas(); });
@@ -440,4 +456,4 @@ fullscreenButton.addEventListener('click', () => {
   void operation.catch(() => { element('#game-feedback').textContent = 'Full-screen mode is not available in this browser window.'; });
 });
 window.addEventListener('pagehide', event => { if (!event.persisted) runtime.dispose(); });
-void selectGame(selectedGame.code, 'replace');
+void selectGame(selectedGame.code, 'replace', requestedLevel(new URL(window.location.href), selectedGame));

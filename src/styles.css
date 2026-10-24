@@ -455,6 +455,11 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 .intro-art{position:relative;display:grid;grid-template-rows:auto auto;justify-items:end;align-content:center;gap:10px;width:100%;align-self:center}
 .intro-art img{display:block;width:100%;height:auto;max-height:204px;object-fit:contain;image-rendering:pixelated;opacity:1;mask-image:none}
 .mosaic-label{font-family:var(--mono);font-size:8px;line-height:1.5;letter-spacing:1.1px;color:var(--muted);padding-right:3px}
+.intro-art:focus-visible{outline:2px solid var(--yellow);outline-offset:7px}
+.intro-art:hover .mosaic-label{color:#b2d5ff}
+.mosaic-label{display:inline-flex;align-items:center;gap:8px;color:#9fcaff}
+.mosaic-label .icon{width:14px;height:14px}
+.catalog-count:hover{color:#b2d5ff}
 .design-premise{display:grid;grid-template-columns:140px minmax(0,1fr);gap:23px;border-left:3px solid var(--accent);padding:4px 0 5px 20px;margin-bottom:29px}
 .design-premise h2{margin:4px 0 0;font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:1px;font-weight:600;color:#9fcaff}
 .design-premise p{margin:0;max-width:92ch;font-size:15px;line-height:1.7;color:var(--muted)}
@@ -635,7 +640,6 @@ button:disabled{opacity:.32}
   .brand{align-self:flex-start}
   .site-header nav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;font-size:12px}
   .site-header nav a{grid-column:span 2;padding:8px 6px}
-  .site-header nav a:nth-child(n+4){grid-column:span 3}
   .site-header nav>.source-link{display:inline-flex}
   .nav-active:after{bottom:-6px;width:4px;height:4px}
   .catalog-count{max-width:none;font-size:6.5px}
