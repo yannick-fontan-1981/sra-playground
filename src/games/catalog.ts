@@ -11,8 +11,9 @@
  * "playable" describes the local game runtime, not SRA integration.
  */
 
-export const SOURCE_REPOSITORY = 'https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan';
+export const SOURCE_REPOSITORY = 'https://github.com/yannick-fontan-1981/sra-playground';
 export const SOURCE_COMMIT = '212d8d426f07eea2b6797c2bb647545767488a96';
+export const PUBLIC_SOURCE_BASE = `${SOURCE_REPOSITORY}/blob/main/reference/sra/${SOURCE_COMMIT.slice(0, 12)}`;
 
 export type GameGroup = 'official' | 'custom' | 'custom_2' | 'custom_3';
 export type GameAvailability = 'playable' | 'port-pending';
@@ -1137,7 +1138,7 @@ export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => 
   ...entry,
   sourceUrl: entry.group === 'official'
     ? `https://three.arcprize.org/api/games/${entry.id}/source`
-    : `${SOURCE_REPOSITORY}/blob/${SOURCE_COMMIT}/${entry.sourcePath}`,
+    : `${PUBLIC_SOURCE_BASE}/${entry.sourcePath}`,
 }));
 
 /** Look up an exact four-character game code, regardless of letter case. */

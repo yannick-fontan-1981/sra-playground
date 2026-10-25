@@ -1,0 +1,470 @@
+# A native primary return is consumed before any degraded child is opened.
+# A return is consumed once. Other admitted strategies remain available.
+# Exhaustion is scoped to the exact premises; reentry never releases ACT.
+MODULE arc3.continue_after_information_probe
+
+WORKFLOW continue_after_information_probe(
+    descriptive_strategy_evidence: Any
+) -> Any
+    STATE
+        bound_evidence: Any
+        parent_question: Any
+        native_question_return: Any
+        contribution_request: Any
+        contribution_return: Any
+        contribution_measured: Any
+        contribution_activation: Ref
+        projected_return: DeclaredAlternativeFacts
+        return_assessment: Assessment
+        question_present: Boolean
+        local_question_ready: Boolean
+        continuation_dispatch: Any
+        context_event: Any
+        context_return: Any
+        reserve_inventory: Any
+        bound_reserve_inventory: Any
+        reserve_dispositions: DeclaredAlternativeFacts
+        reserve_selected: Assessment
+        failure_request: Any
+        failure_return: Any
+        failure_measured: Any
+        failure_consumed: Any?
+        failure_consumption_ref: Ref?
+        parent_context_request: Any
+        parent_context_return: Any
+        parent_context_measured: Any
+        parent_context_consumed: Any?
+        deferral_request: Any
+        deferral_return: Any
+        deferral_measured: Any
+        deferral_consumed: Any?
+        deferral_consumption_ref: Ref?
+    STEP consume_current_native_child_return
+        CALL control.bind_current_native_child_return_evidence(
+            descriptive_strategy_evidence=descriptive_strategy_evidence,
+            checkpoint_field_ref="current_native_child_checkpoint_ref",
+            receipts_field_ref="native_parent_revalidation_child_receipts",
+            history_field_ref="native_parent_revalidation_child_receipts_history"
+        ) -> bound_evidence
+        MATCH bound_evidence.current_native_receipt_present
+            false -> NEXT inspect_unqualified_child_return
+            true -> NEXT consume_receipt_once
+    STEP inspect_unqualified_child_return
+        MATCH bound_evidence.current_unqualified_return_present
+            false -> NEXT preserve_current_frontier
+            true -> NEXT consume_unqualified_receipt_once
+    STEP consume_unqualified_receipt_once
+        MATCH descriptive_strategy_evidence.receipt_previously_consumed
+            true -> NEXT preserve_current_frontier
+            false -> NEXT inspect_child_terminal_status
+    STEP inspect_child_terminal_status
+        MATCH bound_evidence.current_unqualified_return.source_receipt.status
+            "completed" -> NEXT inspect_remaining_reasoning_reserves
+            "blocked" -> NEXT inspect_canonical_child_failure
+            "failed" -> NEXT inspect_canonical_child_failure
+            "deferred" -> NEXT inspect_canonical_child_deferral
+    STEP inspect_canonical_child_deferral
+        CALL control.begin_contribution_request(
+            producer_definition_ref="arc3.continue_after_information_probe.inspect_source_deferral_return",
+            question_ref="question.why_is_the_child_deferred"
+        ) -> deferral_request
+        CALL workflow.inspect_source_deferral_return(
+            request=deferral_request, child_return=bound_evidence.current_unqualified_return
+        ) -> deferral_return
+        CALL control.measure_typed_contribution_return(
+            request=deferral_request, receipt=deferral_return
+        ) -> deferral_measured
+        CALL workflow.consume_reasoning_contribution(measured=deferral_measured) -> deferral_consumed
+        MATCH deferral_consumed.consumption_accepted
+            false -> NEXT preserve_current_frontier
+            true -> NEXT return_deferred_frontier
+    STEP return_deferred_frontier
+        CALL control.read_current_consumption_ref(receipt=deferral_consumed) -> deferral_consumption_ref
+        CALL control.parent_continuation_dispatch(
+            continuation_ref="continuation.preserve_current_frontier", native_return=deferral_consumed,
+            consumption_receipt_ref=deferral_consumption_ref, reasoning_strategy_ref=null
+        ) -> continuation_dispatch
+        STOP continuation_dispatch
+    STEP inspect_canonical_child_failure
+        CALL control.begin_contribution_request(
+            producer_definition_ref="arc3.continue_after_information_probe.inspect_source_failure_return",
+            question_ref="question.why_did_the_child_fail_or_block"
+        ) -> failure_request
+        CALL workflow.inspect_source_failure_return(
+            request=failure_request, child_return=bound_evidence.current_unqualified_return
+        ) -> failure_return
+        CALL control.measure_typed_contribution_return(
+            request=failure_request, receipt=failure_return
+        ) -> failure_measured
+        CALL workflow.consume_reasoning_contribution(measured=failure_measured) -> failure_consumed
+        MATCH failure_consumed.consumption_accepted
+            false -> NEXT preserve_current_frontier
+            true -> NEXT inspect_consumed_failure_evidence
+    STEP inspect_consumed_failure_evidence
+        MATCH failure_consumed.source_failure_evidence.cause_kind
+            "unresolved" -> NEXT preserve_current_frontier
+            "operator_result" -> NEXT inspect_parent_without_candidate
+            "call_refusal" -> NEXT inspect_parent_without_candidate
+            "source_terminal" -> NEXT inspect_parent_without_candidate
+            "technical_failure" -> NEXT inspect_parent_without_candidate
+            "dispatch_refusal" -> NEXT inspect_parent_without_candidate
+            "causal_resume_refusal" -> NEXT inspect_parent_without_candidate
+    STEP inspect_parent_without_candidate
+        CALL control.begin_contribution_request(
+            producer_definition_ref="arc3.continue_after_information_probe.inspect_parent_context_return",
+            question_ref="question.which_parent_remains_responsible_for_the_child"
+        ) -> parent_context_request
+        CALL workflow.inspect_parent_context_return(
+            request=parent_context_request, failure_consumption=failure_consumed,
+            descriptive_strategy_evidence=bound_evidence
+        ) -> parent_context_return
+        CALL control.measure_typed_contribution_return(
+            request=parent_context_request, receipt=parent_context_return
+        ) -> parent_context_measured
+        CALL workflow.consume_reasoning_contribution(measured=parent_context_measured) -> parent_context_consumed
+        MATCH parent_context_consumed.consumption_accepted
+            true -> NEXT inspect_remaining_reasoning_reserves
+            false -> NEXT preserve_current_frontier
+    STEP consume_receipt_once
+        MATCH descriptive_strategy_evidence.receipt_previously_consumed
+            true -> NEXT preserve_current_frontier
+            false -> NEXT bound_current_parent_reentry
+    STEP inspect_remaining_reasoning_reserves
+        CALL workflow.inspect_reasoning_reserves(
+            descriptive_strategy_evidence=descriptive_strategy_evidence.reserve_selection_facts,
+            attempt_rows=descriptive_strategy_evidence.reserve_attempt_rows,
+            selection_receipt=descriptive_strategy_evidence.reserve_selection_receipt
+        ) -> reserve_inventory
+        CALL control.bind_native_return_reserve_inventory(
+            bound_evidence=bound_evidence, inventory=reserve_inventory,
+            failure_consumption=failure_consumed, question_consumption=native_question_return,
+            parent_context_consumption=parent_context_consumed
+        ) -> bound_reserve_inventory
+        CALL control.project_declared_alternatives(
+            selection_policy_ref="policy.reasoning_reserve_continuation",
+            alternative_refs=[],
+            descriptive_facts=bound_reserve_inventory
+        ) -> reserve_dispositions
+        SELECT reserve_selected
+            FOR "goal.preserve_parent_and_drain_admitted_reserves"
+            FROM reserve_dispositions.alternative_refs
+            UNDER policy.reasoning_reserve_continuation
+            REQUIRE ["requirement.current_source_reserve_inventory_is_complete"]
+            PRESERVE reserve_dispositions.alternative_refs
+            FACTS reserve_dispositions.alternative_facts
+        MATCH reserve_selected.alternatives.selected
+            "continuation.reenter_reserved_reasoning" -> NEXT return_reserved_reasoning
+            "continuation.reasoning_reserves_exhausted" -> NEXT return_exhausted_reserves
+            "continuation.inspect_parent_question" -> NEXT inspect_unexamined_parent_question
+            "continuation.preserve_current_frontier" -> NEXT preserve_current_frontier
+    STEP inspect_unexamined_parent_question
+        MATCH bound_reserve_inventory.parent_question_consumption_present
+            true -> NEXT preserve_current_frontier
+            false -> NEXT inspect_parent_reentry_history
+    STEP inspect_parent_reentry_history
+        MATCH bound_reserve_inventory.parent_root_reentry_completed
+            true -> NEXT preserve_current_frontier
+            false -> NEXT assess_refusal_parent_question
+    STEP assess_refusal_parent_question
+        CALL control.begin_contribution_request(producer_definition_ref="arc3.assess_mechanism_application_question.assess_parent_dependency_revalidation_question", question_ref="question.which_parent_dependency_requires_revalidation") -> contribution_request
+        CALL workflow.assess_parent_dependency_revalidation_question(
+            descriptive_strategy_evidence=bound_reserve_inventory, request=contribution_request
+        ) -> contribution_return
+        CALL control.measure_typed_contribution_return(request=contribution_request, receipt=contribution_return) -> contribution_measured
+        CALL workflow.consume_reasoning_contribution(measured=contribution_measured) -> native_question_return
+        MATCH native_question_return.consumption_accepted
+            true -> NEXT qualify_refusal_parent_return
+            false -> NEXT preserve_current_frontier
+    STEP qualify_refusal_parent_return
+        CALL control.project_declared_alternatives(
+            selection_policy_ref="policy.native_parent_question_return",
+            alternative_refs=native_question_return.alternative_refs,
+            descriptive_facts=native_question_return.alternative_facts
+        ) -> projected_return
+        SELECT return_assessment
+            FOR "goal.reconcile_native_parent_question_return"
+            FROM projected_return.alternative_refs
+            UNDER policy.native_parent_question_return
+            REQUIRE ["requirement.native_parent_return_preserves_refusal_and_never_grants_act"]
+            PRESERVE projected_return.alternative_refs
+            FACTS projected_return.alternative_facts
+        CALL control.selected_parent_continuity_facts(
+            projected=projected_return, assessment=return_assessment
+        ) -> parent_question
+        CALL control.build_native_reasoning_context_event(
+            descriptive_strategy_evidence=bound_reserve_inventory, native_return=parent_question
+        ) -> context_event
+        CALL workflow.transition_reasoning_context_stack(event=context_event) -> context_return
+        CALL control.read_declared_boolean_fact(
+            facts=parent_question, fact_ref="parent_return_requires_local_question"
+        ) -> local_question_ready
+        MATCH local_question_ready
+            true -> NEXT resume_current_parent_question
+            false -> NEXT inspect_refusal_parent_root_need
+    STEP inspect_refusal_parent_root_need
+        CALL control.read_declared_boolean_fact(
+            facts=parent_question, fact_ref="parent_return_requires_root_reentry"
+        ) -> question_present
+        MATCH question_present
+            true -> NEXT reopen_parent_root
+            false -> NEXT return_consumed_parent_question_result
+    STEP return_consumed_parent_question_result
+        CALL control.parent_continuation_dispatch(
+            continuation_ref="continuation.reasoning_reserves_exhausted", native_return=parent_question,
+            consumption_receipt_ref=native_question_return.consumption_receipt_ref, reasoning_strategy_ref=null
+        ) -> continuation_dispatch
+        STOP continuation_dispatch
+    STEP bound_current_parent_reentry
+        MATCH descriptive_strategy_evidence.prior_root_reentry_completed
+            true -> NEXT inspect_remaining_reasoning_reserves
+            false -> NEXT assess_current_parent_question
+    STEP assess_current_parent_question
+        CALL control.begin_contribution_request(producer_definition_ref="arc3.assess_mechanism_application_question.assess_parent_dependency_revalidation_question", question_ref="question.which_parent_dependency_requires_revalidation") -> contribution_request
+        CALL workflow.assess_parent_dependency_revalidation_question(
+            descriptive_strategy_evidence=bound_evidence, request=contribution_request
+        ) -> contribution_return
+        CALL control.measure_typed_contribution_return(request=contribution_request, receipt=contribution_return) -> contribution_measured
+        CALL workflow.consume_reasoning_contribution(measured=contribution_measured) -> native_question_return
+        MATCH native_question_return.consumption_accepted
+            true -> NEXT qualify_consumed_parent_return
+            false -> NEXT inspect_remaining_reasoning_reserves
+    STEP qualify_consumed_parent_return
+        CALL control.project_declared_alternatives(
+            selection_policy_ref="policy.native_parent_question_return",
+            alternative_refs=native_question_return.alternative_refs,
+            descriptive_facts=native_question_return.alternative_facts
+        ) -> projected_return
+        SELECT return_assessment
+            FOR "goal.reconcile_native_parent_question_return"
+            FROM projected_return.alternative_refs
+            UNDER policy.native_parent_question_return
+            REQUIRE ["requirement.native_parent_return_preserves_refusal_and_never_grants_act"]
+            PRESERVE projected_return.alternative_refs
+            FACTS projected_return.alternative_facts
+        CALL control.selected_parent_continuity_facts(
+            projected=projected_return, assessment=return_assessment
+        ) -> parent_question
+        CALL control.build_native_reasoning_context_event(
+            descriptive_strategy_evidence=bound_evidence, native_return=parent_question
+        ) -> context_event
+        CALL workflow.transition_reasoning_context_stack(event=context_event) -> context_return
+        CALL control.read_declared_boolean_fact(
+            facts=parent_question, fact_ref="parent_return_requires_local_question"
+        ) -> local_question_ready
+        MATCH local_question_ready
+            true -> NEXT resume_current_parent_question
+            false -> NEXT assess_need_for_parent_root
+    STEP assess_need_for_parent_root
+        CALL control.read_declared_boolean_fact(
+            facts=parent_question, fact_ref="parent_return_requires_root_reentry"
+        ) -> question_present
+        MATCH question_present
+            false -> NEXT inspect_remaining_reasoning_reserves
+            true -> NEXT reopen_parent_root
+    STEP resume_current_parent_question
+        CALL control.record_contribution_activation(receipt_ref=native_question_return.consumption_receipt_ref,
+            disposition_ref="consumption.parent_question_continuation_enabled", dependency_refs=[],
+            continuation_refs=["continuation.resume_parent_question"],
+            evidence_refs=[parent_question.native_question_checkpoint_ref]) -> contribution_activation
+        CALL control.parent_continuation_dispatch(
+            continuation_ref="continuation.resume_parent_question", native_return=parent_question,
+            consumption_receipt_ref=contribution_activation,
+            reasoning_strategy_ref=parent_question.parent_return_strategy_ref
+        ) -> continuation_dispatch
+        STOP continuation_dispatch
+    STEP reopen_parent_root
+        CALL control.record_contribution_activation(receipt_ref=native_question_return.consumption_receipt_ref,
+            disposition_ref="consumption.parent_continuation_enabled", dependency_refs=[],
+            continuation_refs=["continuation.reenter_parent_root"],
+            evidence_refs=[parent_question.native_question_checkpoint_ref]) -> contribution_activation
+        CALL control.parent_continuation_dispatch(
+            continuation_ref="continuation.reenter_parent_root", native_return=parent_question,
+            consumption_receipt_ref=contribution_activation,
+            reasoning_strategy_ref=null
+        ) -> continuation_dispatch
+        STOP continuation_dispatch
+    STEP return_reserved_reasoning
+        CALL control.read_current_consumption_ref(receipt=failure_consumed) -> failure_consumption_ref
+        CALL control.parent_continuation_dispatch(
+            continuation_ref="continuation.reenter_reserved_reasoning", native_return=bound_evidence.current_unqualified_return,
+            consumption_receipt_ref=failure_consumption_ref, reasoning_strategy_ref=null
+        ) -> continuation_dispatch
+        STOP continuation_dispatch
+    STEP return_exhausted_reserves
+        CALL control.read_current_consumption_ref(receipt=failure_consumed) -> failure_consumption_ref
+        CALL control.parent_continuation_dispatch(
+            continuation_ref="continuation.reasoning_reserves_exhausted", native_return=bound_evidence.current_unqualified_return,
+            consumption_receipt_ref=failure_consumption_ref, reasoning_strategy_ref=null
+        ) -> continuation_dispatch
+        STOP continuation_dispatch
+    STEP preserve_current_frontier
+        CALL control.read_current_consumption_ref(receipt=failure_consumed) -> failure_consumption_ref
+        CALL control.parent_continuation_dispatch(
+            continuation_ref="continuation.preserve_current_frontier", native_return=bound_evidence.current_unqualified_return,
+            consumption_receipt_ref=failure_consumption_ref, reasoning_strategy_ref=null
+        ) -> continuation_dispatch
+        STOP continuation_dispatch
+
+# Inspecting a refusal is a new request; it never invents the original child's
+# acquisition request and never declares the child's physical goal achieved.
+WORKFLOW inspect_parent_context_return(
+    request: Any, failure_consumption: Any, descriptive_strategy_evidence: Any
+) -> Any
+    STATE
+        measured: Any
+        projected: DeclaredAlternativeFacts
+        selected: Assessment
+        facts: Any
+        returned: Any
+        origin_path: Any
+    STEP inspect_parent_lineage
+        CALL control.read_declared_configuration(
+            declaration_ref="policy.composition_parent_lineage",
+            configuration_field_ref="parent_origin_contract"
+        ) -> origin_path
+        CALL control.measure_composition_parent_context(
+            request=request, failure_consumption=failure_consumption,
+            descriptive_strategy_evidence=descriptive_strategy_evidence,
+            why_measurement_policy_ref="policy.parent_goal_why_measurement",
+            parent_origin_contract=origin_path
+        ) -> measured
+        CALL control.project_declared_alternatives(
+            selection_policy_ref="policy.composition_parent_lineage",
+            alternative_refs=measured.alternative_refs, descriptive_facts=measured
+        ) -> projected
+        SELECT selected
+            FOR "goal.inspect_parent_without_fabricating_candidate"
+            FROM projected.alternative_refs
+            UNDER policy.composition_parent_lineage
+            REQUIRE ["requirement.parent_lineage_is_distinct_from_candidate_permission"]
+            PRESERVE projected.alternative_refs
+            FACTS projected.alternative_facts
+        CALL control.selected_parent_continuity_facts(
+            projected=projected, assessment=selected, context_facts=measured
+        ) -> facts
+        CALL control.finish_parent_context_return(request=request, facts=facts) -> returned
+        STOP returned
+
+WORKFLOW inspect_source_deferral_return(request: Any, child_return: Any) -> Any
+    STATE
+        inspected: Any
+    STEP inspect_canonical_child_wait
+        CALL control.inspect_source_deferral_return(request=request, child_return=child_return) -> inspected
+        STOP inspected
+
+WORKFLOW inspect_source_failure_return(request: Any, child_return: Any) -> Any
+    STATE
+        inspected: Any
+    STEP read_canonical_child_failure
+        CALL control.inspect_source_failure_return(request=request, child_return=child_return) -> inspected
+        STOP inspected
+
+# This workflow owns the context transition; its record grants no ACT.
+WORKFLOW transition_reasoning_context_stack(event: Any) -> Any
+    STATE
+        effect_contract: Any
+        measured: Any
+        projected: DeclaredAlternativeFacts
+        assessment: Assessment
+        selected_facts: Any
+        update_allowed: Boolean
+    STEP qualify_current_context_transition
+        CALL control.read_declared_configuration(
+            declaration_ref="policy.reasoning_context_stack_transition",
+            configuration_field_ref="child_effect_contract"
+        ) -> effect_contract
+        CALL control.measure_reasoning_context_stack_transition(
+            event=event, maximum_depth=16, effect_contract=effect_contract
+        ) -> measured
+        CALL control.project_declared_alternatives(
+            selection_policy_ref="policy.reasoning_context_stack_transition",
+            alternative_refs=[], descriptive_facts=measured
+        ) -> projected
+        SELECT assessment
+            FOR "goal.preserve_parent_context_across_local_execution"
+            FROM projected.alternative_refs
+            UNDER policy.reasoning_context_stack_transition
+            REQUIRE ["requirement.context_transition_preserves_parent_and_never_grants_act"]
+            PRESERVE projected.alternative_refs
+            FACTS projected.alternative_facts
+        CALL control.selected_parent_continuity_facts(
+            projected=projected, assessment=assessment
+        ) -> selected_facts
+        CALL control.read_declared_boolean_fact(
+            facts=selected_facts, fact_ref="stack_update_allowed"
+        ) -> update_allowed
+        MATCH update_allowed
+            false -> NEXT preserve_context
+            true -> NEXT commit_declared_context_transition
+    STEP commit_declared_context_transition
+        CALL control.record_declared_reasoning_context_transition(
+            event=event, facts=selected_facts
+        ) -> result
+        STOP result
+    STEP preserve_context
+        CALL control.selected_parent_continuity_facts(
+            projected=projected, assessment=assessment
+        ) -> result
+        STOP result
+
+WORKFLOW bind_local_execution_context(
+    scope: Any, intent: Any, parent_qualification: Any,
+    owner_workflow_instance_ref: Ref, execution_intent_refs: Any,
+    preserve_constraint_refs: Any, overshoot_constraint_refs: Any
+) -> Any
+    STATE
+        event: Any
+    STEP enter_source_declared_action_context
+        CALL control.build_reasoning_context_event(
+            event_ref="context_stack.enter_local_execution", scope=scope,
+            intent=intent, parent_qualification=parent_qualification,
+            owner_workflow_instance_ref=owner_workflow_instance_ref,
+            execution_intent_refs=execution_intent_refs,
+            preserve_constraint_refs=preserve_constraint_refs,
+            overshoot_constraint_refs=overshoot_constraint_refs
+        ) -> event
+        CALL workflow.transition_reasoning_context_stack(event=event) -> result
+        STOP result
+
+WORKFLOW return_local_execution_context(
+    scope: Any, owner_workflow_instance_ref: Ref, returned_context_ref: Ref?,
+    returned_intent_ref: Ref, return_evidence_ref: Ref
+) -> Any
+    STATE
+        event: Any
+        condition_contract: Any
+    STEP return_current_reconciled_action_context
+        CALL control.read_declared_configuration(
+            declaration_ref="policy.parent_observed_condition_answer",
+            configuration_field_ref="observation_contract"
+        ) -> condition_contract
+        CALL control.measure_returned_parent_question_answer(
+            returned_intent_ref=returned_intent_ref, condition_contract=condition_contract,
+            returned_context_ref=returned_context_ref
+        ) -> observed_answers
+        CALL control.begin_contribution_request(
+            producer_definition_ref="arc3.revalidate_parent_goal_continuity.consume_observed_parent_question_answers",
+            question_ref="question.what_does_the_observed_effect_answer_for_the_parent"
+        ) -> answer_request
+        LET returned_answer_rows: List<Any> = observed_answers.answer_rows
+        CALL workflow.consume_observed_parent_question_answers(
+            request=answer_request, intent=observed_answers.intent, answer_rows=returned_answer_rows
+        ) -> answer_return
+        CALL control.measure_typed_contribution_return(request=answer_request, receipt=answer_return) -> answer_measured
+        CALL workflow.consume_reasoning_contribution(measured=answer_measured) -> answer_consumed
+        CALL control.read_consumed_parent_question_answers(returned=answer_return, receipt=answer_consumed) -> answer_receipts
+        CALL control.record_contribution_activation(receipt_ref=answer_consumed.consumption_receipt_ref,
+            disposition_ref="consumption.observed_answer_domain_examined_before_context_return", dependency_refs=[],
+            continuation_refs=["continuation.return_local_execution_after_observed_answers"],
+            evidence_refs=answer_receipts) -> answer_activation
+        IF observed_answers.returned_context_present
+            CALL control.build_reasoning_context_event(
+                event_ref="context_stack.return_local_execution", scope=scope,
+                owner_workflow_instance_ref=owner_workflow_instance_ref,
+                returned_context_ref=returned_context_ref,
+                returned_intent_ref=returned_intent_ref,
+                return_evidence_ref=return_evidence_ref
+            ) -> event
+            CALL workflow.transition_reasoning_context_stack(event=event) -> result
+            STOP result
+        STOP answer_receipts

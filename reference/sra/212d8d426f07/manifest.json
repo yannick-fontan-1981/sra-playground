@@ -1,0 +1,930 @@
+{
+  "schemaVersion": 1,
+  "upstreamRepository": "yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan",
+  "upstreamCommit": "212d8d426f07eea2b6797c2bb647545767488a96",
+  "publishedRepository": "yannick-fontan-1981/sra-playground",
+  "publishedDate": "2026-10-25",
+  "scope": "Selected architecture references, complete reasoning and composition tree texts, and the 75 custom game engines.",
+  "files": [
+    {
+      "path": "LICENSE",
+      "bytes": 1065,
+      "sha256": "75c4276c506fd93082b38ad39f67ee97aa859574401ef978e701710c7a40af04",
+      "gitBlobSha": "d8e1cd42ac40338c6c76a8a6ac18eea0eaf95fbe",
+      "originalSha256": "75c4276c506fd93082b38ad39f67ee97aa859574401ef978e701710c7a40af04",
+      "originalGitBlobSha": "d8e1cd42ac40338c6c76a8a6ac18eea0eaf95fbe",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/agent.py",
+      "bytes": 6453,
+      "sha256": "99a62a2355912108a7621967b59fb14b55d732071e1e187726a1adb30067c58a",
+      "gitBlobSha": "1bfc3cd49420101b79fc9691cf8d84e90fe4eb2c",
+      "originalSha256": "99a62a2355912108a7621967b59fb14b55d732071e1e187726a1adb30067c58a",
+      "originalGitBlobSha": "1bfc3cd49420101b79fc9691cf8d84e90fe4eb2c",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/drm/knowledge.py",
+      "bytes": 3696,
+      "sha256": "ec545ef97573a9f1744c19d10df5b135929fcc74b8ad65207113d22c4ff84087",
+      "gitBlobSha": "dd775ec35143df6e90e613751e24f7da8a08b793",
+      "originalSha256": "ec545ef97573a9f1744c19d10df5b135929fcc74b8ad65207113d22c4ff84087",
+      "originalGitBlobSha": "dd775ec35143df6e90e613751e24f7da8a08b793",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/dynamic_workflow/synthesis.py",
+      "bytes": 19276,
+      "sha256": "f931186186dd84bf75a85e76782a4b9288e60318a62246af5053e0752e580f31",
+      "gitBlobSha": "06b2fca5927dc2f0f949b3a692347cc1dbf89af0",
+      "originalSha256": "f931186186dd84bf75a85e76782a4b9288e60318a62246af5053e0752e580f31",
+      "originalGitBlobSha": "06b2fca5927dc2f0f949b3a692347cc1dbf89af0",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/claims.py",
+      "bytes": 2250,
+      "sha256": "f184f2e08172f446e1fc0699d3f09ece6a77a9b62bb5273cfacaf97bd46dee5b",
+      "gitBlobSha": "e1f3346eb6cc1ab336d95e0e3f1151275d64e2f2",
+      "originalSha256": "f184f2e08172f446e1fc0699d3f09ece6a77a9b62bb5273cfacaf97bd46dee5b",
+      "originalGitBlobSha": "e1f3346eb6cc1ab336d95e0e3f1151275d64e2f2",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/goal_frontier.py",
+      "bytes": 5969,
+      "sha256": "ad130bb24bdd4022a476322392a9f543704d9fff1a240f8eca81f6593527775a",
+      "gitBlobSha": "545e58507674055ace4805710619b039185df28f",
+      "originalSha256": "ad130bb24bdd4022a476322392a9f543704d9fff1a240f8eca81f6593527775a",
+      "originalGitBlobSha": "545e58507674055ace4805710619b039185df28f",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/terms.py",
+      "bytes": 963,
+      "sha256": "5eeb7b729cd7db2e552f7e76b6f9de7998b8c1a1b56f5841963c263219136843",
+      "gitBlobSha": "c44177bb72ffc3486f3488e3a825f24b42a121cf",
+      "originalSha256": "5eeb7b729cd7db2e552f7e76b6f9de7998b8c1a1b56f5841963c263219136843",
+      "originalGitBlobSha": "c44177bb72ffc3486f3488e3a825f24b42a121cf",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/logos/types.py",
+      "bytes": 52289,
+      "sha256": "a950b21da3f290f814b71398d96a5df6b8158bcbc52880d630f6c9b7d5f506d2",
+      "gitBlobSha": "b0d91695ad413c92f8072163034aeaa53cf38989",
+      "originalSha256": "a950b21da3f290f814b71398d96a5df6b8158bcbc52880d630f6c9b7d5f506d2",
+      "originalGitBlobSha": "b0d91695ad413c92f8072163034aeaa53cf38989",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/runtime/compiled_selection_tree.py",
+      "bytes": 18230,
+      "sha256": "ab5db1215a810e109cefd50807005766d98e75429242aad4502216385b59c775",
+      "gitBlobSha": "07253358e1ff147e13eebb13af15e72e330cfd07",
+      "originalSha256": "ab5db1215a810e109cefd50807005766d98e75429242aad4502216385b59c775",
+      "originalGitBlobSha": "07253358e1ff147e13eebb13af15e72e330cfd07",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/scheduler/contribution_contract.py",
+      "bytes": 26944,
+      "sha256": "585a9b97e9a411f2a9799ed2e528580ac82dbfc50e88d435708f73d608a81a5d",
+      "gitBlobSha": "f51fb67fcddeafa8963c0968e206affecf014a1a",
+      "originalSha256": "585a9b97e9a411f2a9799ed2e528580ac82dbfc50e88d435708f73d608a81a5d",
+      "originalGitBlobSha": "f51fb67fcddeafa8963c0968e206affecf014a1a",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/scheduler/reasoning_context_stack.py",
+      "bytes": 7393,
+      "sha256": "11056fbc4fb5cc8b2dc9332d54a7ed527a9c82cb09a555c1f74900a54634d76e",
+      "gitBlobSha": "cfa5ac989feba45b4a66e486f7f2e19f93fc0ed3",
+      "originalSha256": "11056fbc4fb5cc8b2dc9332d54a7ed527a9c82cb09a555c1f74900a54634d76e",
+      "originalGitBlobSha": "cfa5ac989feba45b4a66e486f7f2e19f93fc0ed3",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/src/arc3/conditional_reasoning_tree.src",
+      "bytes": 50407,
+      "sha256": "b98074bdf87026c160ca91b6d3863fea86e106d8cb51ec07b79b82516bb3be85",
+      "gitBlobSha": "599bb88e707747d3424ef4db993bf5d36d95787b",
+      "originalSha256": "b98074bdf87026c160ca91b6d3863fea86e106d8cb51ec07b79b82516bb3be85",
+      "originalGitBlobSha": "599bb88e707747d3424ef4db993bf5d36d95787b",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/src/arc3/continue_after_information_probe.src",
+      "bytes": 26245,
+      "sha256": "02ac71b34807936d7ea730fba40e9c0b62506bc1ca5e8cc225a86299a96ac34c",
+      "gitBlobSha": "d4621136c86e5ff87e31b0ab9a5d462c0ff3be8c",
+      "originalSha256": "02ac71b34807936d7ea730fba40e9c0b62506bc1ca5e8cc225a86299a96ac34c",
+      "originalGitBlobSha": "d4621136c86e5ff87e31b0ab9a5d462c0ff3be8c",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/src/core/release_action.src",
+      "bytes": 6790,
+      "sha256": "4f42cae446c4996e1715873a968a117a635e2614c43453338344b705a50649b5",
+      "gitBlobSha": "70ef3eceb4c7f180e41931750712abd98ef79f32",
+      "originalSha256": "4f42cae446c4996e1715873a968a117a635e2614c43453338344b705a50649b5",
+      "originalGitBlobSha": "70ef3eceb4c7f180e41931750712abd98ef79f32",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/src/core/released_action_cycle.src",
+      "bytes": 1228,
+      "sha256": "8ad359106fb36ad64638c145e9b6423becc77894181281a64764ff61573393c4",
+      "gitBlobSha": "cf6c7e829dbe3b132e5f930f4fc51332429101c2",
+      "originalSha256": "8ad359106fb36ad64638c145e9b6423becc77894181281a64764ff61573393c4",
+      "originalGitBlobSha": "cf6c7e829dbe3b132e5f930f4fc51332429101c2",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/memory_reuse_contract.py",
+      "bytes": 2879,
+      "sha256": "f5a4e4b3482de7d94870f30f4d2405a14bf93c6fa098998b61721e6fba6e108e",
+      "gitBlobSha": "525aeea8e20b0aa9903ac0b4265f995815b0ea71",
+      "originalSha256": "f5a4e4b3482de7d94870f30f4d2405a14bf93c6fa098998b61721e6fba6e108e",
+      "originalGitBlobSha": "525aeea8e20b0aa9903ac0b4265f995815b0ea71",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "agents/yf_arc3_v5/state/portable_activity_memory.py",
+      "bytes": 14443,
+      "sha256": "fad73e72f38f48c88a85d5748fbf977b9d871dd26ad7ff9e73e90201e7c9b548",
+      "gitBlobSha": "3039c9e9d7b12329bac76a60181e335570d51d5d",
+      "originalSha256": "fad73e72f38f48c88a85d5748fbf977b9d871dd26ad7ff9e73e90201e7c9b548",
+      "originalGitBlobSha": "3039c9e9d7b12329bac76a60181e335570d51d5d",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "custom_games/engines/always_sliding.py",
+      "bytes": 22923,
+      "sha256": "ec32aee3cfab5fedecc1d769c43d453005f4c53a1d15e623f41e874205ef2580",
+      "gitBlobSha": "434ea8572000e2d72191023f21ed53af2037d282",
+      "originalSha256": "ec32aee3cfab5fedecc1d769c43d453005f4c53a1d15e623f41e874205ef2580",
+      "originalGitBlobSha": "434ea8572000e2d72191023f21ed53af2037d282",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/arrow_maze.py",
+      "bytes": 15135,
+      "sha256": "fb361530e46a75c824973b4594550ac8471bc90c7b8db969ee91f0de5349af2b",
+      "gitBlobSha": "ad6bcb6a431d06a608030e0e93af20c6d19c8450",
+      "originalSha256": "fb361530e46a75c824973b4594550ac8471bc90c7b8db969ee91f0de5349af2b",
+      "originalGitBlobSha": "ad6bcb6a431d06a608030e0e93af20c6d19c8450",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/cabbage_goat_wolf.py",
+      "bytes": 19800,
+      "sha256": "cd97a21e7f6bde8cc4bec1b588a194eeb78e2427598ba7c8c3764e93b6b73382",
+      "gitBlobSha": "aab82d54dcd0f2ef98b7fa7d4dab6053485f4cc7",
+      "originalSha256": "cd97a21e7f6bde8cc4bec1b588a194eeb78e2427598ba7c8c3764e93b6b73382",
+      "originalGitBlobSha": "aab82d54dcd0f2ef98b7fa7d4dab6053485f4cc7",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/cascade_quiesce.py",
+      "bytes": 31688,
+      "sha256": "cb9a74dec5391d7580067c97bacf4c165bba5901b79295cf2cf7cc1480ab014a",
+      "gitBlobSha": "f324c13ec8714d2fb7437f08de6bb3f55c7a1d8b",
+      "originalSha256": "cb9a74dec5391d7580067c97bacf4c165bba5901b79295cf2cf7cc1480ab014a",
+      "originalGitBlobSha": "f324c13ec8714d2fb7437f08de6bb3f55c7a1d8b",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/catching_without_seeing.py",
+      "bytes": 37425,
+      "sha256": "d48b1eaee436dd87ef08ffe9b9993b29226edd10d3071927d9c004f7541a88a2",
+      "gitBlobSha": "f12ba9eba0f93726bf57c573fac8eed62627e9dd",
+      "originalSha256": "d48b1eaee436dd87ef08ffe9b9993b29226edd10d3071927d9c004f7541a88a2",
+      "originalGitBlobSha": "f12ba9eba0f93726bf57c573fac8eed62627e9dd",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/caterpillar_logic.py",
+      "bytes": 23096,
+      "sha256": "ea0fee84199aba856957bc2439b580e62e0064b41c0a3336ac12367ce3e5963d",
+      "gitBlobSha": "01e4f1b7a72a1829fc61f62287115e79ebfc62b3",
+      "originalSha256": "ea0fee84199aba856957bc2439b580e62e0064b41c0a3336ac12367ce3e5963d",
+      "originalGitBlobSha": "01e4f1b7a72a1829fc61f62287115e79ebfc62b3",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/checkers_solitaire.py",
+      "bytes": 27721,
+      "sha256": "2e86bd84a32d89120e5c453f93b8b751fe57a3fa3abc151f5580b6e127e406c8",
+      "gitBlobSha": "d2c492b4952ea78145109499bfc1a8fb5e2955c9",
+      "originalSha256": "2e86bd84a32d89120e5c453f93b8b751fe57a3fa3abc151f5580b6e127e406c8",
+      "originalGitBlobSha": "d2c492b4952ea78145109499bfc1a8fb5e2955c9",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/color_glass.py",
+      "bytes": 15220,
+      "sha256": "9066a2ad8f7080132d1cf02899ef791251c76afaa51444a487a303186391dd48",
+      "gitBlobSha": "b545d29d57ffbac44a851c689803308a59c0f696",
+      "originalSha256": "9066a2ad8f7080132d1cf02899ef791251c76afaa51444a487a303186391dd48",
+      "originalGitBlobSha": "b545d29d57ffbac44a851c689803308a59c0f696",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/columns_match.py",
+      "bytes": 18725,
+      "sha256": "a248455722b6690123cfff017040673b5d9fcc8403179d296c092ab293688f2c",
+      "gitBlobSha": "f3c8c4beefe3f222e011eb5bc562a9d485349ed3",
+      "originalSha256": "a248455722b6690123cfff017040673b5d9fcc8403179d296c092ab293688f2c",
+      "originalGitBlobSha": "f3c8c4beefe3f222e011eb5bc562a9d485349ed3",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/combina.py",
+      "bytes": 15835,
+      "sha256": "d0d346613b95fd37397a07a2024483e2e7c2b85f5f1cf7e5a616486641586806",
+      "gitBlobSha": "036fca0d0b6e463198df6a98e31af4b3c44eff8f",
+      "originalSha256": "d0d346613b95fd37397a07a2024483e2e7c2b85f5f1cf7e5a616486641586806",
+      "originalGitBlobSha": "036fca0d0b6e463198df6a98e31af4b3c44eff8f",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/configured_attraction.py",
+      "bytes": 23445,
+      "sha256": "7738b7faca48a7167f7761a21601bbf7026fdc6b3ce494b0524ef5ae886829e2",
+      "gitBlobSha": "87ba06c2231308507f39f30d5d398f928351ab86",
+      "originalSha256": "7738b7faca48a7167f7761a21601bbf7026fdc6b3ce494b0524ef5ae886829e2",
+      "originalGitBlobSha": "87ba06c2231308507f39f30d5d398f928351ab86",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/connect_four.py",
+      "bytes": 26502,
+      "sha256": "de6af4c45db802548f79d91bb6fafeba13de88cbd7af27f67fdbe2674fef3e9c",
+      "gitBlobSha": "8399862dc4e098af63ab191bc3679cfd7216a0aa",
+      "originalSha256": "de6af4c45db802548f79d91bb6fafeba13de88cbd7af27f67fdbe2674fef3e9c",
+      "originalGitBlobSha": "8399862dc4e098af63ab191bc3679cfd7216a0aa",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/craft_console.py",
+      "bytes": 43191,
+      "sha256": "09dfd32f572660e5271ec14567163e45d3be0183dedac4b68af73e53dee69c9f",
+      "gitBlobSha": "737388b349f6d31140255f003bbb2e471ca5d3bf",
+      "originalSha256": "09dfd32f572660e5271ec14567163e45d3be0183dedac4b68af73e53dee69c9f",
+      "originalGitBlobSha": "737388b349f6d31140255f003bbb2e471ca5d3bf",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/denoise_trame.py",
+      "bytes": 21942,
+      "sha256": "46ee03bdb3f1b760bfb0ad12de8742578b728ae6245cf99b054ed4d21c90c34f",
+      "gitBlobSha": "296583497afb62b1e9a245dfc854bac221147750",
+      "originalSha256": "46ee03bdb3f1b760bfb0ad12de8742578b728ae6245cf99b054ed4d21c90c34f",
+      "originalGitBlobSha": "296583497afb62b1e9a245dfc854bac221147750",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/dichotomy.py",
+      "bytes": 27157,
+      "sha256": "aa00a79e65c95a12ecfaadd0fc8ca5c7d86ed8ce0b26026e8662b30f78e7270b",
+      "gitBlobSha": "0ff769a48053085feb32d4f408f120b4a0bce549",
+      "originalSha256": "aa00a79e65c95a12ecfaadd0fc8ca5c7d86ed8ce0b26026e8662b30f78e7270b",
+      "originalGitBlobSha": "0ff769a48053085feb32d4f408f120b4a0bce549",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/elastic_grid.py",
+      "bytes": 36278,
+      "sha256": "45d534fe0cb7d6f79f24a4c9180d0d29a670f542cc00684ce80e6a916bdf368e",
+      "gitBlobSha": "6d7ea50347dab33890aba768e13907f1ac56e627",
+      "originalSha256": "45d534fe0cb7d6f79f24a4c9180d0d29a670f542cc00684ce80e6a916bdf368e",
+      "originalGitBlobSha": "6d7ea50347dab33890aba768e13907f1ac56e627",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/escort_patrol.py",
+      "bytes": 29460,
+      "sha256": "471a01a96db8be08f3de29c1056cc827941e2c46ca615018f75cb525121a06a9",
+      "gitBlobSha": "3f3b2ee01e74f31015edbc56e69c5e83f11fdbf0",
+      "originalSha256": "471a01a96db8be08f3de29c1056cc827941e2c46ca615018f75cb525121a06a9",
+      "originalGitBlobSha": "3f3b2ee01e74f31015edbc56e69c5e83f11fdbf0",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/etag_floors.py",
+      "bytes": 20297,
+      "sha256": "ccb5a05198ec2fa6301607060ce82422350a0072795448ed36cb75ef374142a8",
+      "gitBlobSha": "246531f952a72cbcb1684d4239739a96c993e4da",
+      "originalSha256": "ccb5a05198ec2fa6301607060ce82422350a0072795448ed36cb75ef374142a8",
+      "originalGitBlobSha": "246531f952a72cbcb1684d4239739a96c993e4da",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/evasion.py",
+      "bytes": 28077,
+      "sha256": "27f9bec8f0d9ac8cace00dcc26a16f88b52b32df8559a534a5fa5daa9ba56637",
+      "gitBlobSha": "39dd50b4715c40d39938cd32d98a55db040d24fa",
+      "originalSha256": "27f9bec8f0d9ac8cace00dcc26a16f88b52b32df8559a534a5fa5daa9ba56637",
+      "originalGitBlobSha": "39dd50b4715c40d39938cd32d98a55db040d24fa",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/fite_arena.py",
+      "bytes": 46064,
+      "sha256": "115547d9a82df0239138447dbb28031e65e69f976190a0d62fbf45e51dc5851d",
+      "gitBlobSha": "6c20f9ca27ae11e56282108c0d4ab80f9d85a93b",
+      "originalSha256": "115547d9a82df0239138447dbb28031e65e69f976190a0d62fbf45e51dc5851d",
+      "originalGitBlobSha": "6c20f9ca27ae11e56282108c0d4ab80f9d85a93b",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/flee_stones.py",
+      "bytes": 20599,
+      "sha256": "b330daa5a5fa89d592926e821d6bcc59d97d260712c52cdf661dfc78aa1696f0",
+      "gitBlobSha": "6d1b23a3b53eb51c91dbf409d3136b8d966650c9",
+      "originalSha256": "b330daa5a5fa89d592926e821d6bcc59d97d260712c52cdf661dfc78aa1696f0",
+      "originalGitBlobSha": "6d1b23a3b53eb51c91dbf409d3136b8d966650c9",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/fog_hidden_motion.py",
+      "bytes": 23003,
+      "sha256": "0cc34b8f01031a1fed6c52fb2f0a94a1cc4ee1fb79ac26e10c04a37d5748e069",
+      "gitBlobSha": "d9c1fa2702ecfad85956030792d116c61995f5b4",
+      "originalSha256": "0cc34b8f01031a1fed6c52fb2f0a94a1cc4ee1fb79ac26e10c04a37d5748e069",
+      "originalGitBlobSha": "d9c1fa2702ecfad85956030792d116c61995f5b4",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/gare_cadence.py",
+      "bytes": 35262,
+      "sha256": "a65fd390da88c255cca3dc0d1f438e8a88cbbe8311cff718eeea761d0e902442",
+      "gitBlobSha": "f0d8b183b2eacd428984521329ee0cf0afa78166",
+      "originalSha256": "a65fd390da88c255cca3dc0d1f438e8a88cbbe8311cff718eeea761d0e902442",
+      "originalGitBlobSha": "f0d8b183b2eacd428984521329ee0cf0afa78166",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/globe_track.py",
+      "bytes": 28243,
+      "sha256": "d0e35963eafffc0fd3d6503e0bd955be130d6935066a444482cd0d10714f3832",
+      "gitBlobSha": "041eddbbe8e9b3811f946cdc5a215fe681acbd17",
+      "originalSha256": "d0e35963eafffc0fd3d6503e0bd955be130d6935066a444482cd0d10714f3832",
+      "originalGitBlobSha": "041eddbbe8e9b3811f946cdc5a215fe681acbd17",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/gori_ballistics.py",
+      "bytes": 29495,
+      "sha256": "69147ac38d49e54201306c064a3f90434dff66c579d3603e16faff14f2545430",
+      "gitBlobSha": "9b39a43bcea4cfba922f625f9361465bc62c3d98",
+      "originalSha256": "69147ac38d49e54201306c064a3f90434dff66c579d3603e16faff14f2545430",
+      "originalGitBlobSha": "9b39a43bcea4cfba922f625f9361465bc62c3d98",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/graved_map.py",
+      "bytes": 29396,
+      "sha256": "7aac8dd1b97c6c8541d57c7834df6904da246beb8b9c9bef4828820eb919d421",
+      "gitBlobSha": "aed5fb06cd30fbb7440535a31cd82c979bc2b0a8",
+      "originalSha256": "7aac8dd1b97c6c8541d57c7834df6904da246beb8b9c9bef4828820eb919d421",
+      "originalGitBlobSha": "aed5fb06cd30fbb7440535a31cd82c979bc2b0a8",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/gravity_box.py",
+      "bytes": 31054,
+      "sha256": "b1072f6b7158e782c02b5c1d5f62b25ec49398c7d9b34113563d206eb1ab30d6",
+      "gitBlobSha": "183011458b5163dbbfd081e6031cb6abc9aed745",
+      "originalSha256": "b1072f6b7158e782c02b5c1d5f62b25ec49398c7d9b34113563d206eb1ab30d6",
+      "originalGitBlobSha": "183011458b5163dbbfd081e6031cb6abc9aed745",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/grillage.py",
+      "bytes": 19124,
+      "sha256": "056b8ec5343ba17ad31eb37aa157c722ed5a40b74f0f1f7f3340d8d24b4ba2dd",
+      "gitBlobSha": "9fc8de2a0a0b2da6b805524438b89a4aa5202391",
+      "originalSha256": "056b8ec5343ba17ad31eb37aa157c722ed5a40b74f0f1f7f3340d8d24b4ba2dd",
+      "originalGitBlobSha": "9fc8de2a0a0b2da6b805524438b89a4aa5202391",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/hanoi.py",
+      "bytes": 23650,
+      "sha256": "47b86c6c52d601787c2125cf130eb2249ac62a3cfa7652a53ad830fc4a33b278",
+      "gitBlobSha": "4f11844f2d892b8de027715a6346865753112cf6",
+      "originalSha256": "47b86c6c52d601787c2125cf130eb2249ac62a3cfa7652a53ad830fc4a33b278",
+      "originalGitBlobSha": "4f11844f2d892b8de027715a6346865753112cf6",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/hole_palette.py",
+      "bytes": 20664,
+      "sha256": "4db957ae43da9c447ea2f2ffa92cdfbbcf2a431a2995df539fec097e65ecd3d3",
+      "gitBlobSha": "1dcab8d32d5dc61a8e815174bf031a6a9e8f7c87",
+      "originalSha256": "4db957ae43da9c447ea2f2ffa92cdfbbcf2a431a2995df539fec097e65ecd3d3",
+      "originalGitBlobSha": "1dcab8d32d5dc61a8e815174bf031a6a9e8f7c87",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/homogeneous_pair_deletion.py",
+      "bytes": 34084,
+      "sha256": "d7ed8ff8a1fcb3b50d45f984dae291fcc9a4d5a89351fdb9d0c411c088f7a011",
+      "gitBlobSha": "2c277f0dc5401de0d65b73038d9d732e4d544f42",
+      "originalSha256": "d7ed8ff8a1fcb3b50d45f984dae291fcc9a4d5a89351fdb9d0c411c088f7a011",
+      "originalGitBlobSha": "2c277f0dc5401de0d65b73038d9d732e4d544f42",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/iso_sketch.py",
+      "bytes": 27395,
+      "sha256": "97ea595a93cd808ebd6f849f0c438026468b2cb299e7125519ee5ae7798edd6d",
+      "gitBlobSha": "7b04a299d6f83902a24f00fbe178004e2d462e13",
+      "originalSha256": "97ea595a93cd808ebd6f849f0c438026468b2cb299e7125519ee5ae7798edd6d",
+      "originalGitBlobSha": "7b04a299d6f83902a24f00fbe178004e2d462e13",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/katamino.py",
+      "bytes": 26264,
+      "sha256": "b77ca7fbe1efb825ae64f455c1e8a533d5d4ac8c3fa206c3179f65211991b8da",
+      "gitBlobSha": "531e7b4564887eb20244f1dcc27fbe7ee22bcc58",
+      "originalSha256": "b77ca7fbe1efb825ae64f455c1e8a533d5d4ac8c3fa206c3179f65211991b8da",
+      "originalGitBlobSha": "531e7b4564887eb20244f1dcc27fbe7ee22bcc58",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/key_doors.py",
+      "bytes": 19086,
+      "sha256": "fe50e5fb1a89dca1e20b8c60e283e675338c460ba33e1397427d3ffcfee39378",
+      "gitBlobSha": "b667517109e7f3d6a63762e199afe86b603b72a3",
+      "originalSha256": "fe50e5fb1a89dca1e20b8c60e283e675338c460ba33e1397427d3ffcfee39378",
+      "originalGitBlobSha": "b667517109e7f3d6a63762e199afe86b603b72a3",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/knight_maze.py",
+      "bytes": 21726,
+      "sha256": "36860bb81005feec13c2291aef6b99a75dd7a3d5bc7ca5eebabbd85a514cded7",
+      "gitBlobSha": "adf91ffcba8c53689ea87626d792f69537dbe63e",
+      "originalSha256": "36860bb81005feec13c2291aef6b99a75dd7a3d5bc7ca5eebabbd85a514cded7",
+      "originalGitBlobSha": "adf91ffcba8c53689ea87626d792f69537dbe63e",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/life_lineage.py",
+      "bytes": 20273,
+      "sha256": "2335977618383131bbd2a38c5765d96aa6d0770d61f2466d15e09e52f604e0e6",
+      "gitBlobSha": "358e22512c1a4e82b37bc51fbc81996999234e7c",
+      "originalSha256": "2335977618383131bbd2a38c5765d96aa6d0770d61f2466d15e09e52f604e0e6",
+      "originalGitBlobSha": "358e22512c1a4e82b37bc51fbc81996999234e7c",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/lock_and_key.py",
+      "bytes": 11383,
+      "sha256": "bb42298fbcfe4db1d0a853f6041675b359c87ddd850ca2b4ebe74e02831f41f7",
+      "gitBlobSha": "c1d3343349f2463b1b78de4b736c8cc01b0be24d",
+      "originalSha256": "bb42298fbcfe4db1d0a853f6041675b359c87ddd850ca2b4ebe74e02831f41f7",
+      "originalGitBlobSha": "c1d3343349f2463b1b78de4b736c8cc01b0be24d",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/logic_circuit.py",
+      "bytes": 25992,
+      "sha256": "08b1448e45fadb17c168b1bae406020f87eef58e04533fca92713cbea08d03d2",
+      "gitBlobSha": "801b96de2242aba52c4d99b1d8b8b3a969564a52",
+      "originalSha256": "08b1448e45fadb17c168b1bae406020f87eef58e04533fca92713cbea08d03d2",
+      "originalGitBlobSha": "801b96de2242aba52c4d99b1d8b8b3a969564a52",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/ls19_legacy.py",
+      "bytes": 3648,
+      "sha256": "5aaab51ab96a77668aab072e6e363583914cd38a629f90ac946b30f5ea7dab2c",
+      "gitBlobSha": "62fba5732cd67fdd89015c638e72b462a7b54c86",
+      "originalSha256": "5aaab51ab96a77668aab072e6e363583914cd38a629f90ac946b30f5ea7dab2c",
+      "originalGitBlobSha": "62fba5732cd67fdd89015c638e72b462a7b54c86",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/memo_recall.py",
+      "bytes": 29141,
+      "sha256": "12a890a2ed959883ade0bf2cc7c65d936d5f497f8b5300c58ff001dff3d9993e",
+      "gitBlobSha": "8b3489f5e438e6e238c910a2f837c4dcb9758c72",
+      "originalSha256": "12a890a2ed959883ade0bf2cc7c65d936d5f497f8b5300c58ff001dff3d9993e",
+      "originalGitBlobSha": "8b3489f5e438e6e238c910a2f837c4dcb9758c72",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/mind_code.py",
+      "bytes": 22241,
+      "sha256": "5fcb6e9d246f22efd5ef0a9c166187f0cecf3449c8505a9b59571dd79500dae8",
+      "gitBlobSha": "49701f83dc6b133bd326744ed4aee569dfde2872",
+      "originalSha256": "5fcb6e9d246f22efd5ef0a9c166187f0cecf3449c8505a9b59571dd79500dae8",
+      "originalGitBlobSha": "49701f83dc6b133bd326744ed4aee569dfde2872",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/moto_orbit.py",
+      "bytes": 21218,
+      "sha256": "72ca91ae300a34db76a3377022856b81dd1c54f20a5906a03a4b09a97d9dae75",
+      "gitBlobSha": "44a7c82555aa6c14ecef7abad3244ea2fa0e6ea8",
+      "originalSha256": "72ca91ae300a34db76a3377022856b81dd1c54f20a5906a03a4b09a97d9dae75",
+      "originalGitBlobSha": "44a7c82555aa6c14ecef7abad3244ea2fa0e6ea8",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/neighbor_cubes.py",
+      "bytes": 40448,
+      "sha256": "15bb22459a92ca59e4b8cdde5a93f1ec4bbb7cba306dae384611fc4932abd47b",
+      "gitBlobSha": "6706b56eb0b88ae304d71a937296d101c60d5f4b",
+      "originalSha256": "15bb22459a92ca59e4b8cdde5a93f1ec4bbb7cba306dae384611fc4932abd47b",
+      "originalGitBlobSha": "6706b56eb0b88ae304d71a937296d101c60d5f4b",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/nested_rooms.py",
+      "bytes": 31643,
+      "sha256": "4ffafd6220f39b5e6747a4e9cb962bc524cb871d659cf3387b118f6e0ce410c9",
+      "gitBlobSha": "0f6db3d01a1f9efcaaffd55d0c519ad40657f048",
+      "originalSha256": "4ffafd6220f39b5e6747a4e9cb962bc524cb871d659cf3387b118f6e0ce410c9",
+      "originalGitBlobSha": "0f6db3d01a1f9efcaaffd55d0c519ad40657f048",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/pipes.py",
+      "bytes": 23606,
+      "sha256": "da87a3f8edfebe9d4d846402f487beb167a50bb144370ebea2415aba60cc733c",
+      "gitBlobSha": "da8ac1d81bc6fd13d56267ad96654cea3448cee7",
+      "originalSha256": "da87a3f8edfebe9d4d846402f487beb167a50bb144370ebea2415aba60cc733c",
+      "originalGitBlobSha": "da8ac1d81bc6fd13d56267ad96654cea3448cee7",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/polarity.py",
+      "bytes": 29536,
+      "sha256": "7d96cc7786a96d9b0f9838280145152f779d5cc83292fa0ea0befa4a4de85900",
+      "gitBlobSha": "40734f128ff1b8fa303c74589ba5ecf5b4b60885",
+      "originalSha256": "7d96cc7786a96d9b0f9838280145152f779d5cc83292fa0ea0befa4a4de85900",
+      "originalGitBlobSha": "40734f128ff1b8fa303c74589ba5ecf5b4b60885",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/portal_chambers.py",
+      "bytes": 47245,
+      "sha256": "8fa65ea492e96026777870e97701563d964aa20376e4349a15c7e30803cf5e0d",
+      "gitBlobSha": "d1d25b406d97a1dfb8dc4abbdcd511837a40b504",
+      "originalSha256": "8fa65ea492e96026777870e97701563d964aa20376e4349a15c7e30803cf5e0d",
+      "originalGitBlobSha": "d1d25b406d97a1dfb8dc4abbdcd511837a40b504",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/portal_topology.py",
+      "bytes": 18102,
+      "sha256": "eee9756478298cd350ea57b87feb3c182027bf1f5efa8810c2b1897f4b677be4",
+      "gitBlobSha": "64da0b0ec9832075ad9180bcfe23336a651ef399",
+      "originalSha256": "eee9756478298cd350ea57b87feb3c182027bf1f5efa8810c2b1897f4b677be4",
+      "originalGitBlobSha": "64da0b0ec9832075ad9180bcfe23336a651ef399",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/recruit_army.py",
+      "bytes": 23717,
+      "sha256": "5eaa4190acf5e7a6b924a2a920fe580613d03c16525b4a03f6ba63aa08cffea9",
+      "gitBlobSha": "3c8957774c72112ff94fe1c548f5b48fc6e860ba",
+      "originalSha256": "5eaa4190acf5e7a6b924a2a920fe580613d03c16525b4a03f6ba63aa08cffea9",
+      "originalGitBlobSha": "3c8957774c72112ff94fe1c548f5b48fc6e860ba",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/reign_gauges.py",
+      "bytes": 38644,
+      "sha256": "90b14aeeb55b7710a0ad60e55a9f970cb835aedc2bb62bbc88f373c3571e63fa",
+      "gitBlobSha": "645d4fa22f6508ac28ad56cad178778d9906833b",
+      "originalSha256": "90b14aeeb55b7710a0ad60e55a9f970cb835aedc2bb62bbc88f373c3571e63fa",
+      "originalGitBlobSha": "645d4fa22f6508ac28ad56cad178778d9906833b",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/rewind.py",
+      "bytes": 28306,
+      "sha256": "335cb97433471f0cf3f729499f9559ee37fe1284a9082e5bc057632bb1245bfb",
+      "gitBlobSha": "aa9f84f11fb33b1cb973fe54bb362db30a29a377",
+      "originalSha256": "335cb97433471f0cf3f729499f9559ee37fe1284a9082e5bc057632bb1245bfb",
+      "originalGitBlobSha": "aa9f84f11fb33b1cb973fe54bb362db30a29a377",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/role_swap.py",
+      "bytes": 47291,
+      "sha256": "29aa143c429a42dc1a6f812541d31e50797b5cfa2a4bccac1612903fd0db9c89",
+      "gitBlobSha": "3125d2f5d3fd1d438ecd17027fd3487432b5b052",
+      "originalSha256": "29aa143c429a42dc1a6f812541d31e50797b5cfa2a4bccac1612903fd0db9c89",
+      "originalGitBlobSha": "3125d2f5d3fd1d438ecd17027fd3487432b5b052",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/same_length_path.py",
+      "bytes": 34920,
+      "sha256": "3362aa84d7e5bbf10313934fc1d3894e19f30f03951b0ba812b85f2ae061e69b",
+      "gitBlobSha": "c9db51d5089bdd79759088dcd53fb5b27aada1d2",
+      "originalSha256": "3362aa84d7e5bbf10313934fc1d3894e19f30f03951b0ba812b85f2ae061e69b",
+      "originalGitBlobSha": "c9db51d5089bdd79759088dcd53fb5b27aada1d2",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/selene.py",
+      "bytes": 34337,
+      "sha256": "24831be489a01880002a75c1eab8b73d213ccaccbfb2f09d9d20d23ade721e55",
+      "gitBlobSha": "6c998c28cd6f3cf1459ad46956b191e37567dac1",
+      "originalSha256": "24831be489a01880002a75c1eab8b73d213ccaccbfb2f09d9d20d23ade721e55",
+      "originalGitBlobSha": "6c998c28cd6f3cf1459ad46956b191e37567dac1",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/seqn_groups.py",
+      "bytes": 17114,
+      "sha256": "1432b9b5a0baafbaa3559b35dfde1dbd56bb5aa89fbc123051559c9a4eb0f7d1",
+      "gitBlobSha": "d31c8992c4b4db28be98fc7aa71200c8c14d11d2",
+      "originalSha256": "1432b9b5a0baafbaa3559b35dfde1dbd56bb5aa89fbc123051559c9a4eb0f7d1",
+      "originalGitBlobSha": "d31c8992c4b4db28be98fc7aa71200c8c14d11d2",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/sequence_lab.py",
+      "bytes": 39792,
+      "sha256": "2614278ec6a9c044fc83f115b09d762cf4850c18f7bbb3d088c258c25928d764",
+      "gitBlobSha": "942d60777848b09b88ed98beaafd2072de73a5eb",
+      "originalSha256": "2614278ec6a9c044fc83f115b09d762cf4850c18f7bbb3d088c258c25928d764",
+      "originalGitBlobSha": "942d60777848b09b88ed98beaafd2072de73a5eb",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/signal_seal.py",
+      "bytes": 33551,
+      "sha256": "72686e617c565d822cfb49b6e70fb3eaa13307c7771321a544a9e6692c427fe6",
+      "gitBlobSha": "f5c5b12ad0b035dad3c794f1a4bb3ed3a3bccde8",
+      "originalSha256": "72686e617c565d822cfb49b6e70fb3eaa13307c7771321a544a9e6692c427fe6",
+      "originalGitBlobSha": "f5c5b12ad0b035dad3c794f1a4bb3ed3a3bccde8",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/simple_klotski.py",
+      "bytes": 22987,
+      "sha256": "0c0e5fc19fbf790192ca6e84ef147e0b87f5274ec2f366f1ff02226508ffb7a0",
+      "gitBlobSha": "47c6c823d6429ed6d2b5a483fba6dc8014e3fd6e",
+      "originalSha256": "0c0e5fc19fbf790192ca6e84ef147e0b87f5274ec2f366f1ff02226508ffb7a0",
+      "originalGitBlobSha": "47c6c823d6429ed6d2b5a483fba6dc8014e3fd6e",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/sokoban.py",
+      "bytes": 13919,
+      "sha256": "8275ae84213eaaf22503e921a76eca6d12b1048d418399fe54198fbd501729cb",
+      "gitBlobSha": "afa81bc71dfe96d79248d6e39d26312107c54abc",
+      "originalSha256": "8275ae84213eaaf22503e921a76eca6d12b1048d418399fe54198fbd501729cb",
+      "originalGitBlobSha": "afa81bc71dfe96d79248d6e39d26312107c54abc",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/sonar_maze.py",
+      "bytes": 47001,
+      "sha256": "8cf4c735ecb89434084ab037926602da22ab2a7efd109a483307e5538a55b377",
+      "gitBlobSha": "0d42f0324c2bcf98f164834dddc8fec52ad4679c",
+      "originalSha256": "8cf4c735ecb89434084ab037926602da22ab2a7efd109a483307e5538a55b377",
+      "originalGitBlobSha": "0d42f0324c2bcf98f164834dddc8fec52ad4679c",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/spore_lab.py",
+      "bytes": 29751,
+      "sha256": "9a815ed62f59293a4e9cc95b73e1b16f95b3a36e889a710dd84e248435dbda86",
+      "gitBlobSha": "d8f99f9d5648677726a66103cc45891902d5ee61",
+      "originalSha256": "9a815ed62f59293a4e9cc95b73e1b16f95b3a36e889a710dd84e248435dbda86",
+      "originalGitBlobSha": "d8f99f9d5648677726a66103cc45891902d5ee61",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/stack_iso.py",
+      "bytes": 39029,
+      "sha256": "403e67d86396f9a5e8b55f87c47c91ce5001afc829672ca465713b363443b25f",
+      "gitBlobSha": "d325acce6f1e059a1905c077560b17e3eca2786f",
+      "originalSha256": "403e67d86396f9a5e8b55f87c47c91ce5001afc829672ca465713b363443b25f",
+      "originalGitBlobSha": "d325acce6f1e059a1905c077560b17e3eca2786f",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/switch_rooms.py",
+      "bytes": 35200,
+      "sha256": "20d75a2d5d9f3c469ad621a6b2c63f6dfbd574e8b32440e3715ee3c83cd1d03b",
+      "gitBlobSha": "3eaa5ff61f84f2bf9a23f71583839399350c54e8",
+      "originalSha256": "20d75a2d5d9f3c469ad621a6b2c63f6dfbd574e8b32440e3715ee3c83cd1d03b",
+      "originalGitBlobSha": "3eaa5ff61f84f2bf9a23f71583839399350c54e8",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/symmetry_fix.py",
+      "bytes": 21895,
+      "sha256": "c3a0a9b9b685e304e191006ad335841e8fe5b4ac8245fbf3a038a25d302b51ee",
+      "gitBlobSha": "592d78793a88a63905a61936bd54d90c095ebfe7",
+      "originalSha256": "c3a0a9b9b685e304e191006ad335841e8fe5b4ac8245fbf3a038a25d302b51ee",
+      "originalGitBlobSha": "592d78793a88a63905a61936bd54d90c095ebfe7",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/thermometers.py",
+      "bytes": 24621,
+      "sha256": "89a5315cea2a2f98b7c338e08099baca78bf5c2def96814d8e621b3b33ef79ac",
+      "gitBlobSha": "2c67782d4bfca2e91604fc759fd62502f2676565",
+      "originalSha256": "89a5315cea2a2f98b7c338e08099baca78bf5c2def96814d8e621b3b33ef79ac",
+      "originalGitBlobSha": "2c67782d4bfca2e91604fc759fd62502f2676565",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/tic_tac_toe.py",
+      "bytes": 30331,
+      "sha256": "03dd2fd5aae0c170d87424ef8734d3fda6bc497d1ade38b060784cd6f3543e9a",
+      "gitBlobSha": "c1348e2cb58f5421aaf6d739cc1baf5b6f2572cc",
+      "originalSha256": "03dd2fd5aae0c170d87424ef8734d3fda6bc497d1ade38b060784cd6f3543e9a",
+      "originalGitBlobSha": "c1348e2cb58f5421aaf6d739cc1baf5b6f2572cc",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/tower_equilibrium.py",
+      "bytes": 35329,
+      "sha256": "edbcd1bd020c2164bc1608e3db4e94e0de9d1f6ac76ba2db1d15c8ba5c6b27b6",
+      "gitBlobSha": "441badee7836b6808e9e5ece0d0456a6c4aa822d",
+      "originalSha256": "edbcd1bd020c2164bc1608e3db4e94e0de9d1f6ac76ba2db1d15c8ba5c6b27b6",
+      "originalGitBlobSha": "441badee7836b6808e9e5ece0d0456a6c4aa822d",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/tracing_path.py",
+      "bytes": 27288,
+      "sha256": "4269b2bdb8fa2237371d9ef413ee1ba41b54edee4c3866581b7632890179250c",
+      "gitBlobSha": "7c5059480fe3e148ea45ac96303d17840dc9a69f",
+      "originalSha256": "4269b2bdb8fa2237371d9ef413ee1ba41b54edee4c3866581b7632890179250c",
+      "originalGitBlobSha": "7c5059480fe3e148ea45ac96303d17840dc9a69f",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/transport_gabarit.py",
+      "bytes": 16311,
+      "sha256": "50e1db731925d5d77227bae4c5cb7927d9ebf1d8be423e971355cc553fa48348",
+      "gitBlobSha": "244e6b905f44083e5859a9e971f92c9388d2d1f6",
+      "originalSha256": "50e1db731925d5d77227bae4c5cb7927d9ebf1d8be423e971355cc553fa48348",
+      "originalGitBlobSha": "244e6b905f44083e5859a9e971f92c9388d2d1f6",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/triade.py",
+      "bytes": 45131,
+      "sha256": "c03add17f2e7f9ab98652bfce1d2aea5ef12da59f65ffb85f628fba7b5b1485f",
+      "gitBlobSha": "0409162e49efa16e6cbc328210fa9d569ed692e3",
+      "originalSha256": "c03add17f2e7f9ab98652bfce1d2aea5ef12da59f65ffb85f628fba7b5b1485f",
+      "originalGitBlobSha": "0409162e49efa16e6cbc328210fa9d569ed692e3",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/upset.py",
+      "bytes": 55228,
+      "sha256": "4a8eabecb35de8c6834a060d333002871ae34169c5777e0a0842511a750647b1",
+      "gitBlobSha": "fe5c27a53d7d6a50fe7478d4bccc385cd52e5dd1",
+      "originalSha256": "4a8eabecb35de8c6834a060d333002871ae34169c5777e0a0842511a750647b1",
+      "originalGitBlobSha": "fe5c27a53d7d6a50fe7478d4bccc385cd52e5dd1",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/valve_flow.py",
+      "bytes": 35358,
+      "sha256": "b5aa58ed7c883f4db4b464044dc711ebd4f6038cd9d512e36ed46506a2791fa6",
+      "gitBlobSha": "1772a879b48a03413e796be39ea8682161509673",
+      "originalSha256": "b5aa58ed7c883f4db4b464044dc711ebd4f6038cd9d512e36ed46506a2791fa6",
+      "originalGitBlobSha": "1772a879b48a03413e796be39ea8682161509673",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/wave_alignment.py",
+      "bytes": 24895,
+      "sha256": "0cb4e077ab5ed225e50edb27061d897c6481ef78e2d234a9fee75b76aa43f3b0",
+      "gitBlobSha": "368436172528e954621ae9a255de1a3652c59a0b",
+      "originalSha256": "0cb4e077ab5ed225e50edb27061d897c6481ef78e2d234a9fee75b76aa43f3b0",
+      "originalGitBlobSha": "368436172528e954621ae9a255de1a3652c59a0b",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/weave.py",
+      "bytes": 25263,
+      "sha256": "14b0cbc5b83fdd37e99d409a6add55c1f88c31ef2d0cd2eb99a730b88a1bad5a",
+      "gitBlobSha": "4e83eb32d386d4fce1c776f9c1bf7e2f13fecb34",
+      "originalSha256": "14b0cbc5b83fdd37e99d409a6add55c1f88c31ef2d0cd2eb99a730b88a1bad5a",
+      "originalGitBlobSha": "4e83eb32d386d4fce1c776f9c1bf7e2f13fecb34",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "custom_games/engines/zip.py",
+      "bytes": 23905,
+      "sha256": "407f4599e87bc8e3ad74d0acef47be68d21f7a5edb18d4c2e8f5c0b12d6acf2b",
+      "gitBlobSha": "1d9213ecc7d3c22fbbe78b3d7d14591461fe98e0",
+      "originalSha256": "407f4599e87bc8e3ad74d0acef47be68d21f7a5edb18d4c2e8f5c0b12d6acf2b",
+      "originalGitBlobSha": "1d9213ecc7d3c22fbbe78b3d7d14591461fe98e0",
+      "retrievedFrom": "public/python/custom-games.zip"
+    },
+    {
+      "path": "docs/architecture/artificial_wisdom_design.md",
+      "bytes": 3975,
+      "sha256": "353575b21289f33c1cc6e134ce049fe7f60127cb673094395f64cbb36deeff40",
+      "gitBlobSha": "c3fa509d36b48949957fd2bb9ae959ef35bff078",
+      "originalSha256": "353575b21289f33c1cc6e134ce049fe7f60127cb673094395f64cbb36deeff40",
+      "originalGitBlobSha": "c3fa509d36b48949957fd2bb9ae959ef35bff078",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "docs/architecture/l1_conditional_reasoning_tree.md",
+      "bytes": 53518,
+      "sha256": "b08d73331b4472e3847e9c277010df958cbaafd2b3792a3fb8a7745263a186f1",
+      "gitBlobSha": "a6efc075c32ca9316a59144afd2a1dbb980d9078",
+      "originalSha256": "a5232ca3bb36a2645afb97cbfc84d670e732989c3ce428c0a9945c768864b17d",
+      "originalGitBlobSha": "a589ac74dfa8867cb487d29f41a3bd13e2fcfcf6",
+      "retrievedFrom": "upstream repository at pinned commit",
+      "adjustments": "Internal Markdown link formatting only; see link-adjustments.json."
+    },
+    {
+      "path": "docs/architecture/resolving_architecture_overview.md",
+      "bytes": 114736,
+      "sha256": "a78206fe01553cf16632060c8b2a7f9d21b26d83d600a0250cfeb9054170d47f",
+      "gitBlobSha": "53d77da4a20fa0c1a1c89dbdf39dd2414a07dfb7",
+      "originalSha256": "a78206fe01553cf16632060c8b2a7f9d21b26d83d600a0250cfeb9054170d47f",
+      "originalGitBlobSha": "53d77da4a20fa0c1a1c89dbdf39dd2414a07dfb7",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "docs/architecture/v5_principle_migration_generalization.md",
+      "bytes": 36929,
+      "sha256": "49c754215a93ca3431d9dc897c14ac87a836284806affcc66600a81c7beddf7b",
+      "gitBlobSha": "9b1078798021ae87558d90ccc01a9f743303943a",
+      "originalSha256": "49c754215a93ca3431d9dc897c14ac87a836284806affcc66600a81c7beddf7b",
+      "originalGitBlobSha": "9b1078798021ae87558d90ccc01a9f743303943a",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "docs/reasoning-tree/composition-target-tree_v-1.0.txt",
+      "bytes": 682543,
+      "sha256": "67bb04e595021eff3fe9cbd0641b39cbdbf75bdaaa98857224937c1b96258f9e",
+      "gitBlobSha": "ac61dfc0436092ba5e67809681b1628a3615acb3",
+      "originalSha256": "67bb04e595021eff3fe9cbd0641b39cbdbf75bdaaa98857224937c1b96258f9e",
+      "originalGitBlobSha": "ac61dfc0436092ba5e67809681b1628a3615acb3",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "docs/reasoning-tree/composition-target-tree_v-1.0/README.md",
+      "bytes": 16686,
+      "sha256": "628377288f0ca84cc3458e2eca9758af103c9a53abfc517d522b059ee52e3e20",
+      "gitBlobSha": "23602a6176528aa90f3778b10e29dda84a541521",
+      "originalSha256": "423219ef5d724c0436c05f9f445faeef3688039b516f32e5dc1a3d64ba4cacd1",
+      "originalGitBlobSha": "6af1818040969c3a119ef4da9b0fe897afe61091",
+      "retrievedFrom": "upstream repository at pinned commit",
+      "adjustments": "Internal Markdown link formatting only; see link-adjustments.json."
+    },
+    {
+      "path": "docs/reasoning-tree/reasoning-tree_v-1.5.txt",
+      "bytes": 1395122,
+      "sha256": "e7d1eb0b21b9bacd4f8f5236bf1442bfc7e297ff374b49fdc3ce83b716794e63",
+      "gitBlobSha": "99ab1a7ded62263985bea61f4327282fda76c516",
+      "originalSha256": "e7d1eb0b21b9bacd4f8f5236bf1442bfc7e297ff374b49fdc3ce83b716794e63",
+      "originalGitBlobSha": "99ab1a7ded62263985bea61f4327282fda76c516",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "docs/reasoning-tree/reasoning-tree_v-1.5/README.md",
+      "bytes": 2715,
+      "sha256": "481c0ff96bad064c07ff1798ad0dddf9e878eeffdab158e03a291d010f694e9e",
+      "gitBlobSha": "8acf94c3c6b41277319b524c0acc0bf34f939566",
+      "originalSha256": "481c0ff96bad064c07ff1798ad0dddf9e878eeffdab158e03a291d010f694e9e",
+      "originalGitBlobSha": "8acf94c3c6b41277319b524c0acc0bf34f939566",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "docs/reasoning-tree/reasoning-tree_v-1.5/runtime_extensions.json",
+      "bytes": 23146,
+      "sha256": "48ef4b6f37073fcedb83ee18854025d02ca9de1713a2b16c34901d46c7971661",
+      "gitBlobSha": "3a2a8560362e882d51f5a1ab33d4cff09db1f414",
+      "originalSha256": "48ef4b6f37073fcedb83ee18854025d02ca9de1713a2b16c34901d46c7971661",
+      "originalGitBlobSha": "3a2a8560362e882d51f5a1ab33d4cff09db1f414",
+      "retrievedFrom": "upstream repository at pinned commit"
+    },
+    {
+      "path": "tools/index_v5_reasoning_tree_usage.py",
+      "bytes": 42872,
+      "sha256": "17343413d0d808ad82b5368a239db1e6f24001d419521d439488358aaca597cf",
+      "gitBlobSha": "d45bd341142ab8cf65e57d995f15cd6c96b90dba",
+      "originalSha256": "17343413d0d808ad82b5368a239db1e6f24001d419521d439488358aaca597cf",
+      "originalGitBlobSha": "d45bd341142ab8cf65e57d995f15cd6c96b90dba",
+      "retrievedFrom": "upstream repository at pinned commit"
+    }
+  ]
+}

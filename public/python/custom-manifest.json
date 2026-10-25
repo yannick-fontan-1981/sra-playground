@@ -1,5 +1,5 @@
 {
-  "repository": "https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan",
+  "repository": "yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan",
   "commit": "212d8d426f07eea2b6797c2bb647545767488a96",
   "license": "MIT (preserved in licenses/custom-source-MIT.txt)",
   "note": "Original game engines and required level assets, unchanged. No oracle or solution-replay files are bundled.",
@@ -4234,5 +4234,6 @@
       "sha256": "eb556d6c84aa8cf5bc772059ffed6d300937ba083ae9ca0882697271e301138f",
       "git_blob_sha": "a62861ea8d76b755df901ef65c8fff8d3773e67a"
     }
-  ]
+  ],
+  "publicSourceIndex": "https://github.com/yannick-fontan-1981/sra-playground/blob/main/reference/sra/212d8d426f07/README.md#custom-game-engines"
 }

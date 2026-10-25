@@ -16,10 +16,13 @@ mechanics; it does not run the agent's knowledge, composition, or action-selecti
 system. The SRA tab remains marked unavailable. No puzzle solver, prerecorded
 trajectory, or remote agent endpoint substitutes for the actual SRA.
 
-The pinned Python SRA and custom-game reference is
-[ARC-AGI-3-Yannick-Fontan at 212d8d4](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/tree/212d8d426f07eea2b6797c2bb647545767488a96).
+The [public reference snapshot](../reference/sra/212d8d426f07/README.md)
+contains the cited Python SRA resources and custom game engines from source
+revision `212d8d426f07eea2b6797c2bb647545767488a96`. Source links resolve to
+copies in this public repository; the original development repository is private.
 The visitor-facing `/architecture.html` is a short introduction. Separate
-chapters under `/architecture/` cover representations, reasoning, memory, and
+chapters under `/architecture/` cover the symbolic choice, representations,
+the reasoning tree, the reasoning loop, memory, principle distillation, and
 implementation. This document describes how the browser application executes
 games and what remains for agent integration.
 

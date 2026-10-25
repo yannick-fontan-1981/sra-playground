@@ -18,6 +18,16 @@ MIT license. Bundled components retain their own licenses and notices.
   [arcprize/ARCEngine](https://github.com/arcprize/ARCEngine). Its original MIT
   license is included with the bundled package.
 
+## SRA reference documents and code
+
+The [public reference snapshot](reference/sra/212d8d426f07/README.md) contains
+selected source documents and code cited by the architecture pages, plus the
+complete reasoning and composition tree texts. Original notices are retained;
+the source repository’s [MIT license](reference/sra/212d8d426f07/LICENSE) is
+included. Its manifest records source and public-copy hashes. Two Markdown
+documents have internal link formatting adjusted for this selected snapshot;
+those changes are recorded separately from their substantive text.
+
 ## Browser Python runtime
 
 The site self-hosts the unmodified runtime distribution of
@@ -40,10 +50,10 @@ original notices.
 
 PIPE is ported from Yannick Fontan's custom game at
 `custom_games/engines/pipes.py` in the repository
-https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan,
+`yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan`,
 commit `212d8d426f07eea2b6797c2bb647545767488a96`.
 
-`reference/python/pipes.py` preserves that source for reproducible parity tests.
+[`reference/python/pipes.py`](reference/python/pipes.py) preserves that source for reproducible parity tests.
 The upstream repository carries the following license notice, reproduced without
 claiming that its named copyright holder authored this particular custom game.
 

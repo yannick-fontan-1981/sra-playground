@@ -2,10 +2,10 @@ import './styles.css';
 import { renderSiteHeader } from './site-header';
 import { BrowserGameRuntime, type GameObservation } from './runtime/browser-games';
 import { AGENT_STATUS } from './runtime/contracts';
-import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
+import { GAME_CATALOG, PUBLIC_SOURCE_BASE, getGameByCode, type GameCatalogEntry } from './games/catalog';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
-const agentRepo = 'https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan';
+const agentSources = `${PUBLIC_SOURCE_BASE}/README.md`;
 const fallbackPalette = [
   '#F3F2EB', '#C9CDC8', '#37404B', '#66707B', '#1B2028', '#11161C',
   '#614439', '#E7B9A3', '#F06B65', '#679DEB', '#63D5D6', '#F1CE62',
@@ -157,7 +157,7 @@ app.innerHTML = `
               <h3>SRA is coming.</h3>
               <p class="agent-honesty">The real agent is not connected yet.</p>
               <button id="return-manual" type="button" class="primary-button">Play manually ${icon('arrow')}</button>
-              <a class="text-link" href="${agentRepo}" target="_blank" rel="noopener noreferrer">SRA source ${icon('external')}</a>
+              <a class="text-link" href="${agentSources}" target="_blank" rel="noopener noreferrer">SRA source references ${icon('external')}</a>
             </div>
           </aside>
         </div>
