@@ -8,7 +8,7 @@
   "pages": [
     {
       "title": "SRA architecture",
-      "description": "How the Symbolic Reasoning Agent represents a game, investigates its mechanisms, and selects actions.",
+      "description": "The design of an explicit reasoning system: its symbolic knowledge, reasoning tree, development process, and runtime.",
       "sections": [
         {
           "title": "Design rooted in human intelligence",
@@ -17,6 +17,57 @@
             "SRA begins with a premise about the design of intelligence: ethical principles should inform the concepts, relationships, representations, and reasoning structures through which it is built. Symbolic reasoning makes it possible to specify these structures explicitly and to examine the meaning and purpose assigned to them.",
             "The source of this design is human intelligence. SRA is intended to draw its concepts, distinctions, and purposes from human understanding, and to retain that connection in its symbolic structures. A symbol should be linked to a meaning we can explain; a relation should express a distinction we can justify; a reasoning operation should have a role we can identify. This explicit connection to human understanding is intended to enable us to take responsibility for the intelligence we build and thereby fulfill the ethical principle at the foundation of its design.",
             "Within this framework, observations can lead to new hypotheses and compositions. Their links to the original concepts, supporting evidence, and intended purposes should remain traceable. The project aims to preserve continuity between human understanding and the intelligence constructed from it. Realizing this aim requires evaluating the implementation and its readability."
+          ]
+        },
+        {
+          "title": "Three foundations of the SRA project",
+          "paragraphs": [
+            "The project works on three connected foundations: good design, good data and knowledge, and fine tuning. These are practical levers for developing SRA. Their value is established through the agent’s ability to understand new situations, compose what it knows, and make progress.",
+            "Design determines what the system can represent and how it can reason. The knowledge corpus supplies reusable distinctions and principles. Refinement brings those structures into better agreement with observed behavior. Each depends on the others: a principle is useful only if the architecture can represent it, select it, and apply it under the right conditions."
+          ],
+          "table": {
+            "headers": [
+              "Foundation",
+              "What it means for SRA"
+            ],
+            "rows": [
+              [
+                "Good design",
+                "Explicit representations of objects, relations, evidence, goals, and dependencies; a control process connecting discoveries to useful action."
+              ],
+              [
+                "Good data and knowledge",
+                "Concepts, principles, workflows, examples, counterexamples, and conditions of use. The reasoning tree organizes this corpus and its connections to execution and evidence."
+              ],
+              [
+                "Fine tuning",
+                "Refinement of distinctions, applicability, priorities, composition, continuation, and execution efficiency, guided by observed results."
+              ]
+            ]
+          },
+          "after": [
+            "Here, fine tuning means symbolic refinement and calibration. A correction might add a missing concept, narrow an overgeneral rule, preserve a prerequisite, or reconnect an investigation to its parent goal. This differs from neural fine tuning, which updates a model’s learned parameters.",
+            "Quality matters at every stage. More branches do not necessarily mean more useful reasoning. The relevant questions are whether the knowledge expresses the right distinction, whether the agent actually uses it, and whether it remains useful when the situation changes."
+          ],
+          "sources": [
+            {
+              "label": "Principle migration and generalization",
+              "path": "docs/architecture/v5_principle_migration_generalization.md"
+            },
+            {
+              "label": "Reasoning-tree contracts and evidence",
+              "path": "docs/reasoning-tree/reasoning-tree_v-1.5/README.md"
+            }
+          ],
+          "links": [
+            {
+              "label": "The reasoning tree",
+              "href": "/architecture/reasoning-tree.html"
+            },
+            {
+              "label": "Human-Agent Principle Distillation",
+              "href": "/architecture/principle-distillation.html"
+            }
           ]
         },
         {
@@ -34,7 +85,8 @@
         },
         {
           "paragraphs": [
-            "Representations covers the objects SRA stores. Reasoning follows a goal through investigation and action. Memory explains how earlier knowledge is qualified for reuse. Implementation maps those responsibilities to the source code and the browser application.",
+            "Why symbolic? explains the architectural choice and the meaning of a reasoning corpus. Representations introduces the objects, claims, and relations SRA uses. The reasoning tree has its own chapter, covering knowledge organization, implementation, and evidence.",
+            "The reasoning loop follows discovery through composition, action, and return to the parent goal. Memory and reuse examines transfer. Principle distillation explains how human analysis, a coding agent, and new runs refine the system. Implementation connects these ideas to the Python source and the browser application.",
             "These pages describe the current Python architecture. The Playground already runs the 100 game engines locally in the browser; integration of the SRA agent is still pending."
           ],
           "title": "Reading these pages"
@@ -52,6 +104,157 @@
         }
       ],
       "navTitle": "Introduction"
+    },
+    {
+      "slug": "symbolic-choice",
+      "navTitle": "Why symbolic?",
+      "title": "Why SRA is symbolic",
+      "description": "A deliberate choice about how knowledge, meaning, and the design of intelligence are represented.",
+      "intro": [
+        "SRA’s reasoning core is designed around explicit symbolic representations, declared reasoning operations, and inspectable control structures. Its decisions are organized through concepts, claims, conditions, and workflows that a designer can identify and change. This is the architecture Yannick Fontan has chosen to investigate.",
+        "The ambition is to design an artificial intelligence whose reasoning structures retain an explicit connection to human understanding. The project asks how far a carefully organized corpus of reusable reasoning can support the discovery of unfamiliar worlds and the composition of useful actions."
+      ],
+      "sources": [
+        {
+          "label": "Current Python reasoning architecture",
+          "path": "docs/architecture/resolving_architecture_overview.md"
+        },
+        {
+          "label": "Declared reasoning workflows",
+          "path": "src/arc3/conditional_reasoning_tree.src"
+        }
+      ],
+      "sections": [
+        {
+          "title": "What is designed explicitly",
+          "paragraphs": [
+            "Consider a decision to investigate a gate. SRA needs a representation of the gate, a question about what controls it, evidence for competing explanations, and a goal that makes the answer useful. The design specifies these distinctions and the operations that connect them. A discovery must be able to change what the agent can attempt next.",
+            "In the V5 implementation, Logos provides typed terms and claims; DRM declares reasoning knowledge and selection conditions; SRC describes workflows and control transitions. The runtime executes these structures against the current situation. This gives the designer concrete places to examine an incorrect premise, an unsuitable operation, or a result that never reaches its intended goal.",
+            "The meaning of these structures comes from human intelligence: the distinctions we choose, the relations we express, and the purposes we assign. Making them explicit is intended to enable us to take responsibility for the intelligence we build and thereby fulfill the ethical principle guiding its design. This intention must be carried through the implementation, including the evidence needed to understand an actual decision."
+          ],
+          "sources": [
+            {
+              "label": "Typed claims",
+              "path": "logos/claims.py"
+            },
+            {
+              "label": "Declared reasoning knowledge",
+              "path": "drm/knowledge.py"
+            },
+            {
+              "label": "Reasoning context and parent goals",
+              "path": "scheduler/reasoning_context_stack.py"
+            }
+          ]
+        },
+        {
+          "title": "Why this core is not a neural network",
+          "paragraphs": [
+            "In a neural network, training adjusts numerical parameters so that the network learns useful transformations of its inputs. Learned representations can support sophisticated abstraction and reasoning. Those representations do not generally provide a directly editable catalog of named principles, their premises, and their intended contribution to a goal.",
+            "SRA places that explicit organization at the center of its reasoning core. Its conceptual vocabulary, applicability conditions, and control structures are represented in symbolic declarations and executable software. Improving a principle can therefore involve changing its stated scope, preserving a missing dependency, or revising the workflow that applies it.",
+            "A neural coding assistant may help develop this software. That development tool is separate from the mechanism used by the SRA reasoning core during play. The relevant architectural question is what represents and controls the running agent’s decisions."
+          ],
+          "sources": [
+            {
+              "label": "LeCun, Bengio & Hinton: Deep Learning",
+              "url": "https://www.cs.toronto.edu/~hinton/absps/NatureDeepReview.pdf"
+            },
+            {
+              "label": "SRA selection-tree executor",
+              "path": "runtime/compiled_selection_tree.py"
+            }
+          ],
+          "links": [
+            {
+              "label": "Symbolic reasoning: definition and examples",
+              "href": "/symbolic-reasoning.html"
+            }
+          ]
+        },
+        {
+          "title": "Where is the corpus?",
+          "paragraphs": [
+            "ARC stands for Abstraction and Reasoning Corpus. In that name, the corpus is the collection of tasks used to study and evaluate intelligence. It belongs to the benchmark; it does not prescribe the internal architecture of a solver.",
+            "The word corpus also raises a productive design question for SRA: where does reusable reasoning knowledge reside, how is it organized, and how can the agent bring it to bear on a new situation? Three different meanings need to remain distinct."
+          ],
+          "table": {
+            "headers": [
+              "Corpus",
+              "What it contains",
+              "How it relates to an agent"
+            ],
+            "rows": [
+              [
+                "ARC’s task corpus",
+                "Tasks and environments used for development or evaluation, according to the benchmark protocol.",
+                "It supplies problems to solve. Its existence does not require a particular kind of solver."
+              ],
+              [
+                "A neural training corpus",
+                "Examples or experience used to adjust a model’s parameters.",
+                "Training encodes learned regularities in the parameters. The original examples need not be retained as an inspectable runtime knowledge base."
+              ],
+              [
+                "SRA’s reasoning corpus",
+                "Explicit concepts, principles, conditions, workflows, examples, counterexamples, and evidence.",
+                "The reasoning tree organizes this knowledge and connects its intended meaning to executable mechanisms and observed behavior."
+              ]
+            ]
+          },
+          "after": [
+            "Neural systems can also use external corpora and memory. Retrieval-augmented systems, for example, combine learned parameters with a separately searchable collection. The useful distinction concerns the representation and use of knowledge, rather than the simple presence or absence of data.",
+            "SRA makes a particular commitment: reusable reasoning should have an explicit form that can be examined, related to other knowledge, and composed when its conditions are satisfied. The reasoning-tree chapter explains how that commitment is organized."
+          ],
+          "sources": [
+            {
+              "label": "Chollet: On the Measure of Intelligence",
+              "url": "https://arxiv.org/abs/1911.01547"
+            },
+            {
+              "label": "Original ARC task corpus",
+              "url": "https://github.com/fchollet/ARC-AGI"
+            },
+            {
+              "label": "Lewis et al.: Retrieval-Augmented Generation",
+              "url": "https://arxiv.org/abs/2005.11401"
+            },
+            {
+              "label": "SRA reasoning tree V1.5",
+              "path": "docs/reasoning-tree/reasoning-tree_v-1.5/README.md"
+            }
+          ],
+          "links": [
+            {
+              "label": "The reasoning tree",
+              "href": "/architecture/reasoning-tree.html"
+            }
+          ]
+        },
+        {
+          "title": "What this choice commits the project to",
+          "paragraphs": [
+            "An explicit design has to earn its usefulness. Symbols must attach to observable distinctions. A general principle must survive changes in appearance while respecting changes in causal conditions. Composition must remain manageable, and the control process must turn relevant knowledge into progress.",
+            "This creates practical failure modes. A rule can apply too broadly. Two valid components can be connected in the wrong order. An investigation can produce the right information while the parent goal never resumes. A larger reasoning corpus helps only when selection, execution, and continuation make its knowledge available at the right time.",
+            "Yannick’s choice is to address these problems through structures that can be deliberately designed and refined. The evidence remains behavioral: whether the agent uses a principle appropriately, reaches a more advanced state, and transfers the same reasoning to a changed situation. Readability makes the work inspectable; these outcomes establish what the current design can do."
+          ],
+          "sources": [
+            {
+              "label": "Principle migration and generalization",
+              "path": "docs/architecture/v5_principle_migration_generalization.md"
+            },
+            {
+              "label": "Composition scope and evidence",
+              "path": "docs/reasoning-tree/composition-target-tree_v-1.0/README.md"
+            }
+          ],
+          "links": [
+            {
+              "label": "How principles are distilled and refined",
+              "href": "/architecture/principle-distillation.html"
+            }
+          ]
+        }
+      ]
     },
     {
       "title": "Representations",
@@ -151,6 +354,208 @@
       "navTitle": "Representations"
     },
     {
+      "slug": "reasoning-tree",
+      "navTitle": "Reasoning tree",
+      "title": "The reasoning tree",
+      "description": "An explicit corpus of reusable reasoning: how SRA organizes knowledge, connects it to execution and checks what it contributes.",
+      "intro": [
+        "SRA’s design starts from a demanding idea: reasoning knowledge should be something we can write, examine and improve. The reasoning tree organizes the situations the agent can distinguish, the questions it can ask and the operations that may answer them. It gives human design choices an explicit structure.",
+        "This is a corpus of reusable knowledge, developed from observations, attempts and analysis. Its purpose is to express principles that remain meaningful across different games. The quality of that corpus depends on precise conditions, meaningful relations and evidence that connects a principle to useful behavior."
+      ],
+      "sources": [
+        {
+          "label": "Normative reasoning tree V1.5",
+          "path": "docs/reasoning-tree/reasoning-tree_v-1.5/README.md"
+        },
+        {
+          "label": "Conditional reasoning specification",
+          "path": "docs/architecture/l1_conditional_reasoning_tree.md"
+        }
+      ],
+      "sections": [
+        {
+          "title": "What a reasoning entry needs to express",
+          "paragraphs": [
+            "A useful principle must specify its scope. Recognizing a similar-looking situation is insufficient: the relevant roles, relations, and evidence must also match. These questions set the design requirements for good reasoning knowledge. Each entry needs evidence of how fully its implementation meets them."
+          ],
+          "table": {
+            "headers": [
+              "Question",
+              "Purpose"
+            ],
+            "rows": [
+              [
+                "When does this apply?",
+                "Define the conditions that distinguish this situation from others."
+              ],
+              [
+                "What plays which role?",
+                "Connect objects, relations and mechanisms to the question being asked."
+              ],
+              [
+                "What is known or uncertain?",
+                "Keep observations, hypotheses and missing evidence distinct."
+              ],
+              [
+                "What can be tried?",
+                "Specify an operation or bounded experiment with interpretable consequences."
+              ],
+              [
+                "What would confirm or contradict it?",
+                "Define expected effects, supporting evidence and falsifiers."
+              ],
+              [
+                "How does it help the parent goal?",
+                "Explain the contribution that a result must make to the ongoing task."
+              ]
+            ]
+          },
+          "after": [
+            "These concerns have concrete counterparts in the current context stack: premise references, falsifiers, expected changes, reconciliation checkpoints and parent-goal contracts travel with the active reasoning path."
+          ],
+          "sources": [
+            {
+              "label": "Goal context and evidence carried by the runtime",
+              "path": "scheduler/reasoning_context_stack.py"
+            }
+          ]
+        },
+        {
+          "title": "Specification, execution and the composition catalog",
+          "paragraphs": [
+            "Three artifacts have different responsibilities. The normative reasoning tree provides stable semantic identities and a readable organization of reasoning. Executable SRC workflows and DRM policies implement specific contracts. The composition target tree documents families of compositions, their implementation scope and remaining gaps.",
+            "The composition catalog explicitly states that its TXT is not a solver input. Likewise, editing a readable conditional-tree description does not automatically alter the agent. The executable declarations must be updated and the change validated."
+          ],
+          "table": {
+            "headers": [
+              "Artifact",
+              "What it contributes"
+            ],
+            "rows": [
+              [
+                "Reasoning specification",
+                "A reviewable statement of the intended reasoning and its conditions."
+              ],
+              [
+                "Executable SRC / DRM projection",
+                "Workflows and declared policies evaluated against current facts."
+              ],
+              [
+                "Composition target catalog",
+                "An account of intended combinations, existing connections and unresolved scope."
+              ]
+            ]
+          },
+          "after": [
+            "The current compiled selection-tree executor handles a defined form of source-declared selection and branching. It preserves source hashes and the visited path. This provides a concrete connection between a declared decision and its execution without making the entire documented tree an automatically executable program."
+          ],
+          "sources": [
+            {
+              "label": "Composition catalog: scope and implementation status",
+              "path": "docs/reasoning-tree/composition-target-tree_v-1.0/README.md"
+            },
+            {
+              "label": "Promotion from specification to executable source",
+              "path": "docs/architecture/l1_conditional_reasoning_tree.md"
+            },
+            {
+              "label": "Compiled selection-tree executor",
+              "path": "runtime/compiled_selection_tree.py"
+            }
+          ]
+        },
+        {
+          "title": "Illustrative path: testing a possible control",
+          "paragraphs": [
+            "A possible control relation shows how a reasoning entry can connect an observation to an experiment, then make the result available to a larger goal."
+          ],
+          "ordered": true,
+          "items": [
+            "Notice a candidate object whose visible properties make it worth testing as a possible controllable object.",
+            "Keep that role hypothetical. State what a directional input might reveal and which observation would leave the hypothesis unresolved.",
+            "If the experiment satisfies the current action conditions, try one bounded input rather than committing to an unsupported route.",
+            "Compare the observed result with the expectation. A visual change alone does not establish which mechanism caused it.",
+            "Record the supported relation, its evidence and remaining uncertainty. Contradictory evidence should revise the interpretation.",
+            "Return the result to the parent question. Use the new relation if it enables a justified next step; otherwise preserve the goal and determine what evidence is still missing."
+          ],
+          "sources": [
+            {
+              "label": "Revisable control tests and targeted measurement",
+              "path": "src/arc3/conditional_reasoning_tree.src"
+            },
+            {
+              "label": "Consuming information and resuming the parent",
+              "path": "src/arc3/continue_after_information_probe.src"
+            }
+          ],
+          "label": "Simplified example"
+        },
+        {
+          "title": "A tree, relational graphs and a behavior-tree-loop",
+          "paragraphs": [
+            "A tree organizes reasoning responsibilities. A world can still contain several interacting objects, competing interpretations and dependencies between goals. Those relationships need explicit representations of their own. In the current implementation, the canonical goal graph owns dependencies; context frames carry the active path and its returns.",
+            "The behavior-tree-loop describes the coordination needed around this knowledge: discover something, reconsider the possibilities, pursue an appropriate step, observe its effects and resume the relevant goal. The tree supplies reusable reasoning; the loop must make it contribute to the ongoing attempt. Current continuation workflows already distinguish completed, blocked, failed and deferred child returns."
+          ],
+          "sources": [
+            {
+              "label": "Goal graph and active context path",
+              "path": "scheduler/reasoning_context_stack.py"
+            },
+            {
+              "label": "Continuation after an information probe",
+              "path": "src/arc3/continue_after_information_probe.src"
+            }
+          ],
+          "links": [
+            {
+              "href": "/architecture/reasoning.html",
+              "label": "Explore the reasoning loop"
+            }
+          ]
+        },
+        {
+          "title": "Implemented, used, useful and transferable",
+          "paragraphs": [
+            "These are separate claims. A source connection establishes that an implementation exists within a stated scope. A trace can establish that it was used. Establishing its contribution requires examining what changed because of that reasoning. Transfer requires evidence from other relevant situations.",
+            "A successful game does not prove that every expected principle was visited. The repository’s usage indexer explicitly preserves that distinction. This makes gaps easier to investigate: missing knowledge, missing implementation, unused capability and ineffective contribution require different corrections."
+          ],
+          "sources": [
+            {
+              "label": "Implementation does not certify behavior or transfer",
+              "path": "docs/reasoning-tree/reasoning-tree_v-1.5/README.md"
+            },
+            {
+              "label": "Static, expected and runtime-use evidence",
+              "url": "https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/tools/index_v5_reasoning_tree_usage.py"
+            }
+          ]
+        },
+        {
+          "title": "Improving the corpus through development",
+          "paragraphs": [
+            "An attempt supplies observations and counterexamples. Analysis identifies a missing distinction or broken connection. A proposed principle then needs a precise contract, an executable implementation and checks on the situations affected by the change. The ambition is to retain what generalizes while making exceptions and uncertainty explicit.",
+            "Here, fine tuning means careful refinement of symbolic conditions, contracts, and implementation, followed by evaluation. During play, the agent investigates and revises its current knowledge. Changes to the general reasoning tree and its implementation belong to the development process, where human analysis and coding assistance can extend what future runs are able to do."
+          ],
+          "sources": [
+            {
+              "label": "Source promotion and focused validation",
+              "path": "docs/architecture/l1_conditional_reasoning_tree.md"
+            },
+            {
+              "label": "Scope and evidence for reusable compositions",
+              "path": "docs/reasoning-tree/composition-target-tree_v-1.0/README.md"
+            }
+          ],
+          "links": [
+            {
+              "href": "/architecture/principle-distillation.html",
+              "label": "Follow the principle-distillation process"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "title": "Reasoning and the behavior-tree-loop",
       "description": "How investigations and compositions remain connected to the goal that opened them.",
       "sections": [
@@ -194,7 +599,13 @@
             "After an action, observe the result and compare it with the expected effect.",
             "Continue the parent goal, revise the composition, select an admitted alternative, or defer with a reason."
           ],
-          "ordered": true
+          "ordered": true,
+          "links": [
+            {
+              "label": "How the reasoning tree supplies reusable knowledge",
+              "href": "/architecture/reasoning-tree.html"
+            }
+          ]
         },
         {
           "paragraphs": [
@@ -231,7 +642,7 @@
       ],
       "slug": "reasoning",
       "intro": [],
-      "navTitle": "Reasoning"
+      "navTitle": "Reasoning loop"
     },
     {
       "title": "Memory and reuse",
@@ -280,6 +691,211 @@
       "slug": "memory",
       "intro": [],
       "navTitle": "Memory and reuse"
+    },
+    {
+      "slug": "principle-distillation",
+      "navTitle": "Principle distillation",
+      "title": "Human-Agent Principle Distillation",
+      "description": "How a difficult run becomes a reusable principle, an executable change, and a new test of the agent’s understanding.",
+      "intro": [
+        "Human-Agent Principle Distillation is the development process Yannick uses to turn experience into explicit reasoning knowledge. The SRA agent executes and produces evidence. The human identifies a principle. A coding agent helps formalize and integrate it. Another run tests what the changed system can actually do.",
+        "The intended result is a principle that remains useful when the objects, appearance, or arrangement change. Its applicability must preserve the causal conditions that made it relevant. This is how a particular difficulty can enrich a broader structure of meaning."
+      ],
+      "sources": [
+        {
+          "label": "Yannick Fontan · Episode 2",
+          "url": "https://www.youtube.com/watch?v=Oj-7Z2oWODY"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Three contributions to the development loop",
+          "paragraphs": [
+            "The human, the coding agent, and the running SRA have distinct responsibilities. Their contributions meet around evidence from the environment."
+          ],
+          "table": {
+            "headers": [
+              "Participant",
+              "Contribution"
+            ],
+            "rows": [
+              [
+                "Human",
+                "Interpret the difficulty, identify the intended meaning, and assess whether a proposed principle expresses the right general distinction."
+              ],
+              [
+                "Coding agent",
+                "Locate existing mechanisms, formalize the principle, connect it to the architecture, and help evaluate the implementation."
+              ],
+              [
+                "SRA agent",
+                "Select and execute reasoning operations during play, then expose the observations and outcomes needed to assess their use."
+              ]
+            ]
+          },
+          "sources": [
+            {
+              "label": "The process in Episode 2",
+              "url": "https://www.youtube.com/watch?v=Oj-7Z2oWODY"
+            }
+          ]
+        },
+        {
+          "title": "Find the actual reasoning gap",
+          "paragraphs": [
+            "A failed run does not always mean a missing principle. The failure may come from a technical defect, mistaken evidence, an unsuitable condition of use, or a broken connection between an investigation and its parent goal. Start by identifying where the expected causal chain stops working.",
+            "Ask what the agent was trying to establish, which premises supported its choice, what effect it expected, and what it observed. A principle can already exist yet never reach the workflow that needs it. Repairing that connection is different from adding more knowledge."
+          ],
+          "sources": [
+            {
+              "label": "Principle applicability and integration requirements",
+              "path": "docs/architecture/v5_principle_migration_generalization.md"
+            }
+          ]
+        },
+        {
+          "title": "Give the principle a usable form",
+          "paragraphs": [
+            "The principle migration design specifies records that connect a statement to its premises, applicability, typed parameters, invariants, expected effects, falsifiers, workflows, and evidence. These details make the statement operational and delimit its scope."
+          ],
+          "table": {
+            "headers": [
+              "Question",
+              "What the record should provide"
+            ],
+            "rows": [
+              [
+                "When does it apply?",
+                "Observable or explicitly derived premises, roles, and conditions."
+              ],
+              [
+                "What does it justify?",
+                "A conclusion, investigation, revision, or action under those conditions."
+              ],
+              [
+                "What must remain true?",
+                "Invariants and conditions that dependent steps require."
+              ],
+              [
+                "What would defeat it?",
+                "An observable falsifier or a known counterexample."
+              ],
+              [
+                "Where is it used?",
+                "References to selection, execution, reconciliation, and evidence of actual use."
+              ]
+            ]
+          },
+          "after": [
+            "Episode 6 distinguishes the parts: an operator performs a transformation, a workflow organizes transformations over time, and a principle states why a step is justified. A workflow can apply several principles; one principle can guide several workflows."
+          ],
+          "sources": [
+            {
+              "label": "Versioned principle records",
+              "path": "docs/architecture/v5_principle_migration_generalization.md"
+            },
+            {
+              "label": "Operators, workflows, and principles · Episode 6",
+              "url": "https://www.youtube.com/watch?v=ad9ZZUK6bak"
+            }
+          ]
+        },
+        {
+          "title": "Example: preserving a prerequisite",
+          "label": "Illustrative reasoning example",
+          "paragraphs": [
+            "Suppose standing on a pad opens a gate. The agent leaves the pad and the gate closes. Repeating the same attempt cannot establish a lasting passage. The observation suggests that opening depends on continued occupancy.",
+            "The reusable principle concerns preservation: when a later action depends on a condition, the plan must keep that condition satisfied until the dependent action is complete. The particular pad and gate are participants in this instance of the relation.",
+            "A movable object might maintain occupancy while the agent crosses. That possibility needs evidence: the object must be movable into position, its presence must activate the pad, and the gate must remain open. The resulting composition must still be executed and checked."
+          ]
+        },
+        {
+          "title": "Connect the principle to executable reasoning",
+          "paragraphs": [
+            "Integration connects meaning, applicability, control, and computation. The principle migration design assigns these responsibilities to different layers."
+          ],
+          "table": {
+            "headers": [
+              "Layer",
+              "Integration responsibility"
+            ],
+            "rows": [
+              [
+                "Logos",
+                "Represent terms, common principles, epistemic distinctions, and falsifiers."
+              ],
+              [
+                "DRM",
+                "Declare applicability, roles, goals, variants, priorities, and selection conditions."
+              ],
+              [
+                "SRC",
+                "Organize branches, execution, checkpoints, continuation, and reconciliation."
+              ],
+              [
+                "Python",
+                "Perform measurements, bounded computation, and mechanical state transport."
+              ]
+            ]
+          },
+          "after": [
+            "The editable conditional-tree document helps describe and review the intended structure. That Markdown view is separate from the executable SRC/DRM projection. A document change must reach the corresponding declarations and implementation before it can change runtime behavior. The conditional-tree source makes this promotion step explicit."
+          ],
+          "sources": [
+            {
+              "label": "Layer responsibilities",
+              "path": "docs/architecture/v5_principle_migration_generalization.md"
+            },
+            {
+              "label": "Editable tree and executable projection",
+              "path": "docs/architecture/l1_conditional_reasoning_tree.md"
+            }
+          ],
+          "links": [
+            {
+              "href": "/architecture/reasoning-tree.html",
+              "label": "Read the reasoning-tree chapter"
+            }
+          ]
+        },
+        {
+          "title": "Fine tuning through observed results",
+          "paragraphs": [
+            "For SRA, fine tuning means refining the explicit system: clarifying a concept, narrowing an overgeneral condition, distinguishing causal variants, repairing a continuation, or improving an expensive computation. It is guided by the behavior the change produces.",
+            "Check whether the principle was selected, whether its premises were supported, and whether its use contributed to progress. Then vary the features that should be irrelevant and test a case where an essential condition is false. Review earlier cases that depend on the changed structure to detect regressions.",
+            "The migration design distinguishes a shared law, typed parameters, genuinely different causal variants, and compositions of existing principles. More general wording alone is insufficient. The abstraction must preserve the conditions that make its prediction or decision valid."
+          ],
+          "sources": [
+            {
+              "label": "Generalization dimensions and causal variants",
+              "path": "docs/architecture/v5_principle_migration_generalization.md"
+            }
+          ]
+        },
+        {
+          "title": "Two loops, with different kinds of change",
+          "paragraphs": [
+            "During play, SRA can investigate an observation, propose an interpretation, test it, and revise the current knowledge. During development, the human and coding agent can change the reusable principles and mechanisms available to future runs. Keeping these loops distinct makes the origin of a new capability clear.",
+            "Human-Agent Principle Distillation also has a specific meaning here. Neural knowledge distillation trains a student model using a teacher model’s behavior. Yannick’s process extracts and integrates explicit principles. The coding assistance used to develop SRA is separate from the reasoning performed by SRA during play."
+          ],
+          "sources": [
+            {
+              "label": "Human-Agent Principle Distillation · Episode 2",
+              "url": "https://www.youtube.com/watch?v=Oj-7Z2oWODY"
+            },
+            {
+              "label": "Hinton, Vinyals & Dean · Neural knowledge distillation",
+              "url": "https://www.cs.toronto.edu/~hinton/absps/distillation.pdf"
+            }
+          ],
+          "links": [
+            {
+              "href": "/architecture/reasoning.html",
+              "label": "Follow the behavior-tree-loop during play"
+            }
+          ]
+        }
+      ]
     },
     {
       "title": "Implementation",

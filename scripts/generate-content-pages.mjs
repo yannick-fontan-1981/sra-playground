@@ -84,6 +84,10 @@ function section(section) {
     ${section.example ? symbolicExample() : ''}
     ${section.timeline ? `<ol class="symbolic-timeline">${section.timeline.map(item=>`<li><span class="timeline-date">${escape(item.date)}</span><div><h3>${escape(item.title)}</h3><p>${escape(item.text)}</p>${sources([item.source])}</div></li>`).join('')}</ol>` : ''}
     ${paragraphs(section.after)}
+    ${section.links?.length ? `<div class="reading-sources chapter-links">${section.links.map(item => {
+      if (!/^\/(?!\/)[a-z0-9/.-]+(?:#[a-z0-9-]+)?$/.test(item.href)) throw new Error(`Invalid chapter link: ${item.href}`);
+      return `<a href="${escape(item.href)}">${escape(item.label)}${arrow}</a>`;
+    }).join('')}</div>` : ''}
     ${sources(section.sources)}
   </section>`;
 }
@@ -92,6 +96,7 @@ function pager(previous, next, path, label) {
 }
 function relatedVideos(page) {
   const selected = videos.filter(video => video.relatedArchitecture.includes(page.slug));
+  if (!selected.length) return '';
   return `<section class="related-reading"><h2>Related videos</h2><div>${selected.map(video => `<a href="${videoPath(video)}"><span>Episode ${number(video.episode)}</span><strong>${escape(video.displayTitle)}</strong>${arrow}</a>`).join('')}</div></section>`;
 }
 function renderChapter(page, index) {

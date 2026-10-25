@@ -43,7 +43,7 @@
 
 
     <main class="reading-layout wrap">
-      <aside class="reading-sidebar"><a class="sidebar-heading" href="/architecture.html">Architecture</a><nav aria-label="Architecture chapters"><a href="/architecture.html"><span>00</span>Introduction</a><a href="/architecture/representations.html"><span>01</span>Representations</a><a href="/architecture/reasoning.html"><span>02</span>Reasoning</a><a href="/architecture/memory.html" class="is-current" aria-current="page"><span>03</span>Memory and reuse</a><a href="/architecture/implementation.html"><span>04</span>Implementation</a></nav><a class="sidebar-series" href="/videos.html">Video series <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a></aside>
+      <aside class="reading-sidebar"><a class="sidebar-heading" href="/architecture.html">Architecture</a><nav aria-label="Architecture chapters"><a href="/architecture.html"><span>00</span>Introduction</a><a href="/architecture/symbolic-choice.html"><span>01</span>Why symbolic?</a><a href="/architecture/representations.html"><span>02</span>Representations</a><a href="/architecture/reasoning-tree.html"><span>03</span>Reasoning tree</a><a href="/architecture/reasoning.html"><span>04</span>Reasoning loop</a><a href="/architecture/memory.html" class="is-current" aria-current="page"><span>05</span>Memory and reuse</a><a href="/architecture/principle-distillation.html"><span>06</span>Principle distillation</a><a href="/architecture/implementation.html"><span>07</span>Implementation</a></nav><a class="sidebar-series" href="/videos.html">Video series <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a></aside>
       <article class="reading-article" id="content">
         <header class="reading-header"><p class="reading-breadcrumb">Architecture <span>/</span> Memory and reuse</p><h1>Memory and reuse</h1><p class="reading-deck">What is retained from an earlier situation, and what must be checked again.</p></header>
         <div class="reading-intro"></div>
@@ -52,6 +52,7 @@
 
     <p>Portable activity memory carries observed workflow schemas between controllers. The archive retains the activity structure, its originating claim, proof rule, evidence references, and source identity. Scene geometry, local object bindings, and concrete action payloads are excluded.</p>
 <p>This separation is important for transfer. A sequence of coordinates belongs to one layout. A workflow that describes how to establish and preserve a useful condition can be considered in another layout, provided its participants and prerequisites can be bound there. An imported schema starts as a historical hypothesis.</p>
+
 
 
 
@@ -71,6 +72,7 @@
 
 
 
+
     <div class="reading-sources"><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/state/memory_reuse_contract.py" target="_blank" rel="noopener noreferrer">Memory reuse contract<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
   </section>
 <section class="reading-section" id="evidence-of-transfer">
@@ -84,12 +86,13 @@
 
 
 
+
     <div class="reading-sources"><a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/docs/reasoning-tree/composition-target-tree_v-1.0/README.md" target="_blank" rel="noopener noreferrer">Composition evidence definitions<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
   </section>
 
         <section class="related-reading"><h2>Related videos</h2><div><a href="/videos/03-operational-consciousness.html"><span>Episode 03</span><strong>Operational Artificial Consciousness</strong><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a><a href="/videos/05-alignment.html"><span>Episode 05</span><strong>Reasoning Begins with Alignment</strong><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a></div></section>
         <p class="source-snapshot">Python source: <a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/tree/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5" target="_blank" rel="noopener noreferrer">212d8d426f07<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></p>
-        <nav class="reading-pager" aria-label="Chapter navigation"><a href="/architecture/reasoning.html"><small>Previous</small><span>Reasoning</span></a><a class="pager-next" href="/architecture/implementation.html"><small>Next</small><span>Implementation<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a></nav>
+        <nav class="reading-pager" aria-label="Chapter navigation"><a href="/architecture/reasoning.html"><small>Previous</small><span>Reasoning loop</span></a><a class="pager-next" href="/architecture/principle-distillation.html"><small>Next</small><span>Principle distillation<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></span></a></nav>
       </article>
     </main>
     <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Yannick Fontan</span><div><a href="/">Play the games <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a><a href="https://www.youtube.com/@Yanik_AI/videos" target="_blank" rel="noopener noreferrer">Yanik_AI<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a><a href="https://github.com/yannick-fontan-1981/sra-playground/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses &amp; notices<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></footer>

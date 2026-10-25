@@ -42,7 +42,8 @@
       "thumbnailSource": "https://img.youtube.com/vi/QMfJfiyfn88/maxresdefault.jpg",
       "relatedArchitecture": [
         "introduction",
-        "representations"
+        "representations",
+        "symbolic-choice"
       ],
       "fullText": {
         "kind": "youtube-description",
@@ -80,7 +81,8 @@
       "thumbnailSource": "https://img.youtube.com/vi/Oj-7Z2oWODY/maxresdefault.jpg",
       "relatedArchitecture": [
         "reasoning",
-        "implementation"
+        "implementation",
+        "principle-distillation"
       ],
       "fullText": {
         "kind": "youtube-description",
@@ -230,7 +232,9 @@
       "thumbnailSource": "https://img.youtube.com/vi/ad9ZZUK6bak/maxresdefault.jpg",
       "relatedArchitecture": [
         "representations",
-        "implementation"
+        "implementation",
+        "reasoning-tree",
+        "principle-distillation"
       ],
       "fullText": {
         "kind": "youtube-description",

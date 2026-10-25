@@ -58,6 +58,7 @@
 
 
 
+
     <div class="reading-sources"><a href="https://arxiv.org/html/2603.24621v1#S1" target="_blank" rel="noopener noreferrer">Benchmark formats<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
   </section>
 <section class="reading-section" id="what-the-agent-sees-and-does">
@@ -65,6 +66,7 @@
 
     <p>The games are turn-based. An observation contains one or more visual frames and information about the game state. Frames use a grid of up to 64 × 64 cells and a palette of 16 colors. The agent selects an available action, receives the resulting observation, and continues.</p>
 <p>The interface provides five simple actions, a coordinate-based action, an undo action where supported, and reset. Each game exposes its available subset. A control’s effect depends on the game: the same input might move something, change a selection, or operate a mechanism. Discovering that effect is part of the task.</p>
+
 
 
 
@@ -83,6 +85,7 @@
 
 
 
+
     <div class="reading-sources"><a href="https://docs.arcprize.org/" target="_blank" rel="noopener noreferrer">Capabilities evaluated<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
   </section>
 <section class="reading-section" id="why-the-later-levels-matter">
@@ -90,6 +93,7 @@
 
     <p>An opening level introduces the interaction through experience. Later levels are designed to require the integration of mechanisms learned earlier. Reaching the next state therefore depends on retaining useful discoveries and finding how they fit together.</p>
 <p>For example, learning that an action changes an object is one discovery. Working out when that change is useful, what must happen first, and how to combine it with another mechanism is a further reasoning problem. This example illustrates the kind of composition SRA investigates.</p>
+
 
 
 
@@ -110,6 +114,7 @@
 
 
 
+
     <div class="reading-sources"><a href="https://docs.arcprize.org/methodology" target="_blank" rel="noopener noreferrer">Current scoring methodology<svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div>
   </section>
 <section class="reading-section" id="where-sra-playground-fits">
@@ -119,6 +124,7 @@
 <p>SRA Playground brings together 25 official public games and 75 custom games created or compiled by Yannick Fontan. The custom collection adds mechanisms and compositions for SRA research. These 100 games form this Playground’s independent research collection; the official held-out evaluation is separate.</p>
 <p>For SRA, the practical question is whether explicit representations of observations, mechanisms, goals, and their dependencies can support effective exploration and composition. The Architecture pages explain that design.</p>
 <p>You can play the games here manually, with the game engines running in your browser. The real SRA agent is not connected to the Playground yet.</p>
+
 
 
 
