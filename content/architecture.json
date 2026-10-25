@@ -2,8 +2,8 @@
   "sourceCommit": "212d8d426f07eea2b6797c2bb647545767488a96",
   "verifiedDate": "2026-10-24",
   "linkBuilder": {
-    "agentBase": "https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/agents/yf_arc3_v5/",
-    "repoBase": "https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/"
+    "agentBase": "https://github.com/yannick-fontan-1981/sra-playground/blob/main/reference/sra/212d8d426f07/agents/yf_arc3_v5/",
+    "repoBase": "https://github.com/yannick-fontan-1981/sra-playground/blob/main/reference/sra/212d8d426f07/"
   },
   "pages": [
     {
@@ -370,6 +370,10 @@
         {
           "label": "Conditional reasoning specification",
           "path": "docs/architecture/l1_conditional_reasoning_tree.md"
+        },
+        {
+          "label": "Full reasoning tree V1.5",
+          "path": "docs/reasoning-tree/reasoning-tree_v-1.5.txt"
         }
       ],
       "sections": [
@@ -461,6 +465,10 @@
             {
               "label": "Compiled selection-tree executor",
               "path": "runtime/compiled_selection_tree.py"
+            },
+            {
+              "label": "Full composition target tree V1.0",
+              "path": "docs/reasoning-tree/composition-target-tree_v-1.0.txt"
             }
           ]
         },
@@ -526,7 +534,7 @@
             },
             {
               "label": "Static, expected and runtime-use evidence",
-              "url": "https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/blob/212d8d426f07eea2b6797c2bb647545767488a96/tools/index_v5_reasoning_tree_usage.py"
+              "url": "https://github.com/yannick-fontan-1981/sra-playground/blob/main/reference/sra/212d8d426f07/tools/index_v5_reasoning_tree_usage.py"
             }
           ]
         },
@@ -1000,5 +1008,6 @@
       "intro": [],
       "navTitle": "Implementation"
     }
-  ]
+  ],
+  "sourceSnapshotUrl": "https://github.com/yannick-fontan-1981/sra-playground/blob/main/reference/sra/212d8d426f07/README.md"
 }

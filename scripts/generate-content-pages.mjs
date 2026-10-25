@@ -1,7 +1,9 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { renderSiteHeader } from '../src/site-header.ts';
+import { GAME_CATALOG } from '../src/games/catalog.ts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const architecture = JSON.parse(await readFile(resolve(root, 'content/architecture.json'), 'utf8'));
@@ -22,8 +24,19 @@ const play = '<svg viewBox="0 0 28 28" fill="currentColor" aria-hidden="true"><p
 const archPath = page => page.slug === 'introduction' ? '/architecture.html' : `/architecture/${page.slug}.html`;
 const videoPath = video => `/videos/${video.slug}.html`;
 const paragraphs = values => (values ?? []).map(value => `<p>${escape(value)}</p>`).join('\n');
+function validatePublicReference(url) {
+  if (/^https:\/\/(?:github\.com|raw\.githubusercontent\.com)\/yannick-fontan-1981\/ARC-AGI-3-Yannick-Fontan(?:\/|$)/i.test(url)) {
+    throw new Error('A visitor-facing reference points to the private source repository. Copy the cited resource into sra-playground first.');
+  }
+  const prefix = `${repo}/blob/main/`;
+  if (url.startsWith(prefix)) {
+    const path = decodeURIComponent(url.slice(prefix.length).split(/[?#]/)[0]);
+    if (path.split('/').includes('..') || !existsSync(resolve(root, path))) throw new Error(`Missing public reference copy: ${path}`);
+  }
+}
 const externalLink = (url, label, cls = '') => {
   if (!url.startsWith('https://')) throw new Error(`Unsupported external URL: ${url}`);
+  validatePublicReference(url);
   return `<a${cls ? ` class="${cls}"` : ''} href="${escape(url)}" target="_blank" rel="noopener noreferrer">${escape(label)}${external}</a>`;
 };
 const sources = values => !values?.length ? '' : `<div class="reading-sources">${values.map(item => {
@@ -32,6 +45,7 @@ const sources = values => !values?.length ? '' : `<div class="reading-sources">$
 }).join('')}</div>`;
 
 if (new Set(pages.map(page => page.slug)).size !== pages.length) throw new Error('Duplicate chapter slug.');
+for (const game of GAME_CATALOG) validatePublicReference(game.sourceUrl);
 if (new Set(videos.map(video => video.id)).size !== videos.length) throw new Error('Duplicate video ID.');
 if (new Set(videos.map(video => video.slug)).size !== videos.length) throw new Error('Duplicate video slug.');
 for (const entry of [...pages, ...videos]) if (!/^[a-z0-9-]+$/.test(entry.slug)) throw new Error(`Invalid page slug: ${entry.slug}`);
@@ -110,7 +124,7 @@ function renderChapter(page, index) {
         ${page.sections.map(section).join('\n')}
         ${directory}
         ${relatedVideos(page)}
-        <p class="source-snapshot">Python source: ${externalLink(`https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/tree/${architecture.sourceCommit}/agents/yf_arc3_v5`, architecture.sourceCommit.slice(0,12))}</p>
+        <p class="source-snapshot">Source reference: ${externalLink(architecture.sourceSnapshotUrl, `${architecture.sourceCommit.slice(0,12)} · public copies`)}</p>
         ${pager(pages[index-1],pages[index+1],archPath,'Chapter navigation')}
       </article>
     </main>`});

@@ -1,0 +1,79 @@
+[
+  {
+    "path": "docs/architecture/l1_conditional_reasoning_tree.md",
+    "originalSha256": "a5232ca3bb36a2645afb97cbfc84d670e732989c3ce428c0a9945c768864b17d",
+    "newSha256": "b08d73331b4472e3847e9c277010df958cbaafd2b3792a3fb8a7745263a186f1",
+    "originalBytes": 53266,
+    "newBytes": 53518,
+    "adjustedLinks": [
+      {
+        "label": "instance",
+        "target": "../oracles/AR25/LVL1/ar25_level1_oracle_instance.srl",
+        "replacement": "instance — `../oracles/AR25/LVL1/ar25_level1_oracle_instance.srl`"
+      },
+      {
+        "label": "pseudocode",
+        "target": "../oracles/AR25/LVL1/ar25_level1_oracle_pseudocode.md",
+        "replacement": "pseudocode — `../oracles/AR25/LVL1/ar25_level1_oracle_pseudocode.md`"
+      },
+      {
+        "label": "l1_objective_trace_ledger.json",
+        "target": "l1_objective_trace_ledger.json",
+        "replacement": "l1_objective_trace_ledger.json — `l1_objective_trace_ledger.json`"
+      },
+      {
+        "label": "l1_objective_contract_catalog.json",
+        "target": "l1_objective_contract_catalog.json",
+        "replacement": "l1_objective_contract_catalog.json — `l1_objective_contract_catalog.json`"
+      },
+      {
+        "label": "l1_objective_contract_review.md",
+        "target": "l1_objective_contract_review.md",
+        "replacement": "l1_objective_contract_review.md — `l1_objective_contract_review.md`"
+      },
+      {
+        "label": "`l1_objective_contract_matrix.md`",
+        "target": "l1_objective_contract_matrix.md",
+        "replacement": "`l1_objective_contract_matrix.md` — `l1_objective_contract_matrix.md`"
+      }
+    ],
+    "preservedLinks": [],
+    "publicCopyNote": "> **Public-copy note:** Only internal link formatting has been adjusted in this copy. Links to project files outside the selected export are shown as source paths. Provenance is recorded in the snapshot’s root README and manifest."
+  },
+  {
+    "path": "docs/reasoning-tree/composition-target-tree_v-1.0/README.md",
+    "originalSha256": "423219ef5d724c0436c05f9f445faeef3688039b516f32e5dc1a3d64ba4cacd1",
+    "newSha256": "628377288f0ca84cc3458e2eca9758af103c9a53abfc517d522b059ee52e3e20",
+    "originalBytes": 16440,
+    "newBytes": 16686,
+    "adjustedLinks": [
+      {
+        "label": "Bilan lisible et index des289 clés",
+        "target": "reconciliation_main_effe5dee_20261017.md",
+        "replacement": "Bilan lisible et index des289 clés — `reconciliation_main_effe5dee_20261017.md`"
+      },
+      {
+        "label": "Raccords source et observations exactes",
+        "target": "reconciliation_main_effe5dee_20261017.json",
+        "replacement": "Raccords source et observations exactes — `reconciliation_main_effe5dee_20261017.json`"
+      },
+      {
+        "label": "Trois revues ciblées de repères historiques",
+        "target": "reconciliation_reviews.json",
+        "replacement": "Trois revues ciblées de repères historiques — `reconciliation_reviews.json`"
+      },
+      {
+        "label": "document des 100 jeux L1",
+        "target": "../COMPOSITIONS_COMPLEXES_L1_100_JEUX_TRAVAIL_20261014.md",
+        "replacement": "document des 100 jeux L1 — `../COMPOSITIONS_COMPLEXES_L1_100_JEUX_TRAVAIL_20261014.md`"
+      }
+    ],
+    "preservedLinks": [
+      {
+        "label": "Lire l’arbre v1.0",
+        "target": "../composition-target-tree_v-1.0.txt"
+      }
+    ],
+    "publicCopyNote": "> **Public-copy note:** Only internal link formatting has been adjusted in this copy. Links to project files outside the selected export are shown as source paths. Provenance is recorded in the snapshot’s root README and manifest."
+  }
+]

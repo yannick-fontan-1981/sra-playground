@@ -170,8 +170,11 @@ aligned. No automatic GitHub-to-Sites deployment workflow is configured.
 
 ## Game sources and the PIPE reference port
 
-The custom source reference is
-[ARC-AGI-3-Yannick-Fontan at `212d8d4`](https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/tree/212d8d426f07eea2b6797c2bb647545767488a96).
+The [public source reference snapshot](reference/sra/212d8d426f07/README.md)
+contains the resources cited by the architecture pages, the complete reasoning
+and composition trees, and individually browsable copies of all 75 custom
+engines. They originate from source revision
+`212d8d426f07eea2b6797c2bb647545767488a96`.
 The official engines retain their source versions and license headers. Runtime
 bundles live under `public/python/`; the official adapter supplies the local
 ARC engine interface used by those sources.

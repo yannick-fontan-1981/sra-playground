@@ -1,0 +1,235 @@
+{
+  "extensions": [
+    {
+      "address": "0.4.6.2,8",
+      "key": "solving.missing.fact.current_connector_control_question_before_incidental_surface",
+      "parent_key": "solving.missing.fact.untried.grounded.test",
+      "after_key": "solving.missing.fact.untried.grounded.test",
+      "description": "Preserve an already admitted current connector-conditioned control-peer or uniform-cohort contrast question at the current sprite center before an incidental recolored response-surface question. Require the existing current connector transition and canonical proof supports, the direct exploration goal, no committed plan and no incoming engaged route. The homologous center keeps state readings comparable instead of mixing contour points and interior values. Keep destination alternatives, the existing question WHY and all action permits; do not infer a destination or a Boolean law from a remote recoloration.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.connector_context.current_control_question_before_incidental_surface",
+      "src_path": "agents/yf_arc3_v5/src/arc3/choose_information_probe.src",
+      "src_step": "STEP preserve_selected_probe_context"
+    },
+    {
+      "address": "0.1.1-3,9",
+      "key": "continuation.separate_portable_goal_basis_from_pose_bound_release_evidence",
+      "parent_key": "continuation.bind.current.episode.attempt.level",
+      "after_key": "continuation.current_identity_click_binding",
+      "description": "For a reconciled tiled correspondence cursor with a frozen portable goal basis, construct the next release from its current candidate premises before acquiring current pose-bound control support. Keep the original acquisition references and WHY as history; they cannot authorize a new pose. Refuse stale current premises and preserve ordinary non-cursor behavior.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.verified_alignment.reconciled_tiled_cursor_current_release_basis",
+      "src_path": "agents/yf_arc3_v5/src/arc3/choose_verified_alignment_action.src",
+      "src_step": "STEP project_committed_verified_agenda"
+    },
+    {
+      "address": "0.1.1-3,10",
+      "key": "continuation.preserve_capacity_retest_after_measured_collection_reduction",
+      "parent_key": "continuation.bind.current.episode.attempt.level",
+      "after_key": "continuation.separate_portable_goal_basis_from_pose_bound_release_evidence",
+      "description": "After a measured collection reduction below its observed maximum, preserve the current same-control capacity retest before an unconfirmed selection/destination interpretation; retain alternatives and ordinary release guards. Ground the current measured experimental premises before release without replacing existing premise channels.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.current_collection_reduction_preserves_capacity_retest",
+      "src_path": "agents/yf_arc3_v5/src/arc3/choose_information_probe.src",
+      "src_step": "ground_current_collection_measurements"
+    },
+    {
+      "address": "0.1.1-3,11",
+      "key": "continuation.preserve_execution_probe_after_confirmed_capacity_insertion",
+      "parent_key": "continuation.bind.current.episode.attempt.level",
+      "after_key": "continuation.preserve_capacity_retest_after_measured_collection_reduction",
+      "description": "After a glyph insertion actually restores the observed collection maximum following its measured reduction, preserve one current unproved execution question before an unconfirmed selection/destination question; retain alternatives and ordinary release guards. Ground the current measured experimental premises before release without replacing existing premise channels.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.confirmed_capacity_insertion_preserves_execution_question",
+      "src_path": "agents/yf_arc3_v5/src/arc3/choose_information_probe.src",
+      "src_step": "ground_current_collection_measurements"
+    },
+    {
+      "address": "0.4.6.2,1",
+      "key": "solving.missing.fact.enclosed_dominant_locus_keeps_independent_test",
+      "parent_key": "solving.missing.fact.untried.grounded.test",
+      "after_key": "solving.missing.fact.untried.grounded.test",
+      "description": "A failed point at one location does not exhaust independent untried repeated compact enclosed loci, even if their interior has the dominant image value. With no directional vocabulary, committed plan or selected dynamic goal, preserve a bounded current-measured point experiment. This is not established click control or a program inverse; retain ordinary WHY, support acquisition and action release.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.independent_enclosed_dominant_locus_retains_point_question",
+      "src_path": "agents/yf_arc3_v5/src/arc3/choose_information_probe.src",
+      "src_step": "STEP preserve_selected_probe_context"
+    },
+    {
+      "address": "0.1.4-4,5,2",
+      "key": "continuation.reconciliation.separate_boundary_stability_from_transient_packet_changes",
+      "parent_key": "continuation.compare.three_outcomes",
+      "after_key": "continuation.reconciliation.one_transaction_many_frames",
+      "description": "For a complete canonically reconciled current unresolved-contact packet with identical observed boundary rasters and intermediate changes, select the boundary support only for current destination stability. Preserve transient phenomenon evidence, dangers, resources, all other route and release guards and the original union everywhere else. Neither picture equality nor a refused contact proves hidden-state invariance or goal completion.",
+      "drm_path": "agents/yf_arc3_v5/drm/destination_stability_observation.drm",
+      "projection_id": "projection.destination_stability.current_returned_contact_packet",
+      "src_path": "agents/yf_arc3_v5/src/arc3/measure_reasoning_input.src",
+      "src_step": "bind_packet_support"
+    },
+    {
+      "address": "0.4.6.2,2",
+      "key": "solving.missing.fact.bounded_local_question_declares_unknown_effect",
+      "parent_key": "solving.missing.fact.untried.grounded.test",
+      "after_key": "solving.missing.fact.enclosed_dominant_locus_keeps_independent_test",
+      "description": "An existing grounded one-step local parameter-cycle question with an untried candidate and unknown effect must declare experimental_unknown when both causal-class channels are absent. Preserve known classes, the current goal, measured preconditions, experiment, falsifiers and ordinary action release; never infer success or use a Python fallback.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.inset_value.unclassified_local_cycle_is_an_explicit_unknown_experiment",
+      "src_path": "agents/yf_arc3_v5/src/arc3/choose_information_probe.src",
+      "src_step": "STEP execute_prepare_selected_inset_value"
+    },
+    {
+      "address": "0.4.6.2,3",
+      "key": "solving.missing.fact.preserve_current_relocated_entry_question_before_unproved_operator",
+      "parent_key": "solving.missing.fact.untried.grounded.test",
+      "after_key": "solving.missing.fact.enclosed_dominant_locus_keeps_independent_test",
+      "description": "Under exact retained raster evidence of a pointed aligned member removal, ordered sibling relayout and one remote same-value addition, preserve the current bounded family-entry experiment before an unproved operator. Respect layer ownership, engaged continuations and current tutorial indications. A measured2-to-1 survivor is a distinct guarded case; no feedback law, hidden answer or submit precondition is asserted.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.current_relocated_multiple_entry_family_before_operator",
+      "src_path": "agents/yf_arc3_v5/src/arc3/choose_information_probe.src",
+      "src_step": "select_non_frontier_probe_by_mode"
+    },
+    {
+      "address": "0.4.6.2,4",
+      "key": "solving.missing.fact.first_directional_commitment_before_secondary_parameter",
+      "parent_key": "solving.missing.fact.untried.grounded.test",
+      "after_key": "solving.missing.fact.preserve_current_relocated_entry_question_before_unproved_operator",
+      "description": "After one observed persistent rectangular commitment, prioritize an untried towards-alignment directional qualification before an incidental inset parameter question, only before any directional input and without an engaged route. Preserve current canonical commitment evidence, provisional effect and independent release guards.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.fresh_rectangular_direction_before_secondary_parameter_question",
+      "src_path": "agents/yf_arc3_v5/src/arc3/choose_information_probe.src",
+      "src_step": "STEP preserve_selected_probe_context"
+    },
+    {
+      "address": "0.4.6.2,7",
+      "key": "solving.missing.fact.palette_variant_recall_requires_current_motion_revalidation",
+      "parent_key": "solving.missing.fact.untried.grounded.test",
+      "after_key": "solving.missing.fact.first_directional_commitment_before_secondary_parameter",
+      "description": "A palette-variant geometric analogy with an exact current core opens the existing one-motion attachment/independence test. Preserve historical method evidence, current measured shape/basis, unique group and common clearance; do not assert current coupling or bypass route/experiment guards.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.palette_variant_recall_keeps_one_motion_unconfirmed",
+      "src_path": "agents/yf_arc3_v5/src/arc3/choose_information_probe.src",
+      "src_step": "STEP preserve_selected_probe_context"
+    },
+    {
+      "address": "0.4.6.2,5",
+      "key": "solving.missing.fact.preserve_measured_entry_role_under_current_feedback_parent",
+      "parent_key": "solving.missing.fact.untried.grounded.test",
+      "after_key": "solving.missing.fact.first_directional_commitment_before_secondary_parameter",
+      "description": "Under an already current feedback-constrained entry parent, preserve the input role supported by a complete current raster suffix: the pointed member disappears, every survivor keeps order and the same value appears remotely. Complete the admissible current prefix before an incidental destination reprobe, preserve engaged continuations and materialize the exact current measurement as a revisable premise. Do not bridge an incomplete observation or infer a hidden code or feedback law.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.current_measured_feedback_entry_before_incidental_destination",
+      "src_path": "agents/yf_arc3_v5/src/arc3/choose_information_probe.src",
+      "src_step": "ground_current_entry_relayout_measurement"
+    },
+    {
+      "address": "0.4.6.2,5,1",
+      "key": "solving.missing.fact.preserve_current_feedback_parent_through_point_submission",
+      "parent_key": "solving.missing.fact.preserve_measured_entry_role_under_current_feedback_parent",
+      "after_key": "solving.missing.fact.preserve_measured_entry_role_under_current_feedback_parent",
+      "description": "After the last observed addition closes the current ordered row, preserve the same authoritative reconciled feedback-construction parent while testing the currently surfaced already effectful point control for submission. Keep older premises, acquire current canonical closure/parent support and reconcile the official result under that parent. This specializes the existing submission test, without asserting the hidden answer or a feedback law.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.current_point_submission_preserves_feedback_parent",
+      "src_path": "agents/yf_arc3_v5/src/arc3/control_evidence_binding.src",
+      "src_step": "qualify_current_measured_probe_preconditions"
+    },
+    {
+      "address": "0.4.6.2,6",
+      "key": "solving.missing.fact.preserve_current_progress_guidance_before_incidental_surface",
+      "parent_key": "solving.missing.fact.untried.grounded.test",
+      "after_key": "solving.missing.fact.preserve_measured_entry_role_under_current_feedback_parent",
+      "description": "Preserve a current instruction-cue question already admitted from repeated measured progress before an incidental response-surface question. Require the effectful prior invitation, current cue, changed edge-band evidence excluding the last point, no other layer owner and no engaged continuation or committed plan. Keep all siblings, the existing goal chain and action guards; acquire exact canonical selected-probe preconditions. No temporal-memory law is inferred from a contour alone. Union the current raw-field requirements with previously required fields; initialize an empty list only when absent under the same guards.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.current_progress_guidance_before_incidental_surface",
+      "src_path": "agents/yf_arc3_v5/src/arc3/control_evidence_binding.src",
+      "src_step": "qualify_current_measured_probe_preconditions"
+    },
+    {
+      "address": "0.4.6.2,6,1",
+      "key": "solving.missing.fact.preserve_current_progress_recurrence_before_incidental_surface",
+      "parent_key": "solving.missing.fact.preserve_current_progress_guidance_before_incidental_surface",
+      "after_key": "solving.missing.fact.preserve_current_progress_guidance_before_incidental_surface",
+      "description": "Without a current instruction cue, preserve a unique prior-nonselected recurrence already admitted by existing exact, anchor-morphology or moved-zone progress relations before an incidental response-surface question. Require the same current point/progress/uniqueness measurements and explicit negative layer-pair measure, with no engaged continuation or committed plan. Keep the original goal, principle and all alternatives; acquire exact canonical selected-probe preconditions. This repairs priority and does not infer a new memory law. Union the current raw-field requirements with previously required fields; initialize an empty list only when absent under the same guards.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.current_progress_recurrence_before_incidental_surface.anchor_morphology_recurrence",
+      "src_path": "agents/yf_arc3_v5/src/arc3/control_evidence_binding.src",
+      "src_step": "qualify_current_measured_probe_preconditions"
+    },
+    {
+      "address": "0.4.6.2,9",
+      "key": "solving.missing.fact.revalidated_port_rotation_continuation_before_incidental_surface",
+      "parent_key": "solving.missing.fact.untried.grounded.test",
+      "after_key": "solving.missing.fact.current_connector_control_question_before_incidental_surface",
+      "description": "Preserve an already admitted reciprocal-port rotation contribution before an incidental response-surface experiment only when the full current port inventory matches the prior exact successor, the same unique complete connected acyclic assignment is reused and required edits remain. Keep the existing terminal goal, conditional model, canonical current precondition support and WHY/ACT guards; never infer a network goal from recoloration alone or override a committed plan or engaged route. Unvalidated initial questions and contradicted successors do not gain this priority.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.revalidated_port_rotation_continuation_before_incidental_surface",
+      "src_path": "agents/yf_arc3_v5/src/arc3/control_evidence_binding.src",
+      "src_step": "qualify_current_measured_probe_preconditions"
+    },
+    {
+      "address": "0.4.6.2,6,2",
+      "key": "solving.missing.fact.identified_oriented_field_control_opens_activation_question",
+      "parent_key": "solving.missing.fact.preserve_current_progress_guidance_before_incidental_surface",
+      "after_key": "solving.missing.fact.preserve_current_progress_recurrence_before_incidental_surface",
+      "description": "After an effective directional inquiry has identified the unique outline in a repeated oriented field, preserve the still-unresolved nontranslation process question before unrelated geometric exploration. Require the exact previous inquiry goal, a current measured translation, no temporal incidence yet, no committed plan or enabled prepared continuation, and an untried admissible discrete nondirectional action. Reuse the existing directed-activation experiment, frozen WHY and ordinary release/reconciliation. No game identity, command constant, junction law or route is inferred; transfer and unrelated-game behavior require separate evidence.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.ordered_tip_identified_control_opens_process_question",
+      "src_path": "agents/yf_arc3_v5/src/arc3/choose_information_probe.src",
+      "src_step": "STEP inspect_available_local_composition_script"
+    },
+    {
+      "address": "0.1.1-3,12",
+      "key": "continuation.prepared_ordered_activation_keeps_current_candidate_why",
+      "parent_key": "continuation.bind.current.episode.attempt.level",
+      "after_key": "continuation.preserve_execution_probe_after_confirmed_capacity_insertion",
+      "description": "For an observed ordered incidence whose earlier branch is currently covered, preserve the current targeted protected-activation candidate goal and its complete WHY at action preparation. Require current temporal incidence, cover membership, remaining initial-type marks, the observed packet action, discrete interaction and no contextual no-effect. Declare the existing candidate-local goal basis so a separate empty release channel cannot erase its measured premises. Keep parent, canonical evidence checks, permits and reconciliation unchanged; no scope guard is relaxed.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.current_ordered_tip_protected_activation_scope",
+      "src_path": "agents/yf_arc3_v5/src/arc3/choose_information_probe.src",
+      "src_step": "STEP bind_selected_probe_after_local_geometry"
+    },
+    {
+      "address": "0.1.1-3,17",
+      "key": "continuation.current_parent_neighbor_calculation_preserves_productive_operator",
+      "parent_key": "continuation.bind.current.episode.attempt.level",
+      "after_key": "continuation.preserve_execution_probe_after_confirmed_capacity_insertion",
+      "description": "Preserve the acquired placement parent while its current revalidated minimal calculation requires a productive operator. A coincident compatible control zone does not complete this joint placement. Exact current no-effect memory and ordinary WHY/ACT guards remain authoritative. Known model consistency, source implementation, native use and transfer remain separate.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.neighbor_pattern.current_parent_reuses_productive_operator_under_current_calculation",
+      "src_path": "agents/yf_arc3_v5/src/arc3/choose_information_probe.src",
+      "src_step": "STEP select_probe"
+    },
+    {
+      "address": "0.4.6.2,10",
+      "key": "solving.missing.fact.ordered_encounter_evidence_and_reset_distinct_trial",
+      "parent_key": "solving.missing.fact.untried.grounded.test",
+      "after_key": "solving.missing.fact.revalidated_port_rotation_continuation_before_incidental_surface",
+      "description": "Retain source-authenticated ordered mask correspondences as historical encounter evidence. Distinguish motion, stationary material change, directed replacement, unresolved identity and unseen contact mode. Give an already grounded cohort-opportunity or grown-peer access question priority over an incidental object-selection cue, without overriding a committed plan or route. Same-level reset retains observations, discards physical identity bindings and permits a different measured origin trial only when current interface trials are exhausted. A native win does not prove a complete mode/predation law or cross-level transfer.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.ordered_encounter_access_before_incidental_selection",
+      "src_path": "agents/yf_arc3_v5/src/arc3/choose_information_probe.src",
+      "src_step": "WORKFLOW query_ordered_encounter_observations_d"
+    },
+    {
+      "address": "0.4.6.2,11",
+      "key": "solving.missing.fact.fixed_span_disjoint_run_cover_before_incidental_selection",
+      "parent_key": "solving.missing.fact.untried.grounded.test",
+      "after_key": "solving.missing.fact.ordered_encounter_evidence_and_reset_distinct_trial",
+      "description": "When a unique current multi-row panel domain has preserved notched spans, editable prefixes, visible paint domains and a marked multicolor fixed field, enumerate the declared disjoint run correspondences. Only a unique complete cover opens bounded field-cycle or activation questions. Keep the original single-row correspondence, current continuations, premises and permits unchanged; row-major order and first eligible consumption remain falsifiable hypotheses.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.fixed_span_word.prefix_correspondence_experiment",
+      "src_path": "agents/yf_arc3_v5/src/arc3/choose_information_probe.src",
+      "src_step": "WORKFLOW choose_information_probe"
+    },
+    {
+      "address": "0.4.6.2,12",
+      "key": "solving.missing.fact.revalidated_paired_edit_opens_complete_joint_transit_domain",
+      "parent_key": "solving.missing.fact.untried.grounded.test",
+      "after_key": "solving.missing.fact.fixed_span_disjoint_run_cover_before_incidental_selection",
+      "description": "Revalidate a historical traversed-cell edit by exact current D4 masks and compatible measured motion. Source enumerates the existing bounded binary configuration domain through STEP, checks reproduction of the observed reference, and preserves all internal-route alternatives. DRM admits decreasing exact edit distance to complete coincident-first-reception configurations; independence and reversibility remain explicit hypotheses with current falsifiers.",
+      "drm_path": "agents/yf_arc3_v5/drm/interaction.drm",
+      "projection_id": "projection.exploration.joint_revalidated_transit_configuration_contribution.edit",
+      "src_path": "agents/yf_arc3_v5/src/arc3/query_observed_transit_configuration.src",
+      "src_step": "STEP calculate_joint_configuration"
+    }
+  ]
+}

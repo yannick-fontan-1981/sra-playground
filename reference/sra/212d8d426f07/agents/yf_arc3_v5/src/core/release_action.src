@@ -1,0 +1,133 @@
+# Release is a source-visible gate over an already constructed wisdom decision.
+MODULE core.release_action
+
+WORKFLOW release_action(
+    viability: ViabilityAssessment,
+    wisdom: CommitmentDecision,
+    announced_data: Any,
+    observed_fatal_replay_facts: Any,
+    current_frame_ref: Ref,
+    intent: ActionIntent,
+    world_context: Any
+) -> TerminalResult
+    STATE
+        parent_influence: Any
+        parent_continuity: Any
+        frontier_payload_present: Boolean
+        frontier_preserves_parent: Boolean
+        frontier_activation: DynamicGoalFrontierActivation
+        frontier_requires_enrollment: Boolean
+        endpoint_measurements: AnnouncedStepMeasurements?
+        endpoint_projection: Any?
+        endpoint_assessment: Assessment?
+        fatal_replay_projection: Any?
+        fatal_replay_assessment: Assessment?
+        memory_reuse_valid: Boolean
+        control_binding_result: Any
+        experiment_commitment_current: Any
+    STEP require_commitment
+        MATCH wisdom.decision
+            commit -> NEXT require_viability
+            revise -> BLOCK revise
+            defer -> DEFER wait
+            reject -> BLOCK reject
+    STEP require_viability
+        MATCH viability.status
+            viable, conditional -> NEXT require_consumed_experiment_commitment
+            blocked -> BLOCK blocked
+            undetermined -> DEFER unresolved
+    STEP require_consumed_experiment_commitment
+        CALL control.validate_conscious_experiment_commitment(intent=intent, viability=viability, wisdom=wisdom) -> experiment_commitment_current
+        MATCH experiment_commitment_current
+            true -> NEXT require_current_control_binding
+            false -> BLOCK "experiment_commitment_requires_current_consumption"
+    STEP require_current_control_binding
+        CALL workflow.validate_current_control_evidence_binding(intent=intent) -> control_binding_result
+        NEXT require_current_memory_reuse
+    STEP require_current_memory_reuse
+        # A lost/stale declared recall cannot silently fall back to exploration.
+        # No contract is not proof of transfer; legacy non-recall actions remain
+        # subject to the existing grounding and parent-conservation gates.
+        CALL control.validate_memory_reuse_contract(intent=intent) -> memory_reuse_valid
+        MATCH memory_reuse_valid
+            true -> NEXT inspect_current_parent_declaration
+            false -> BLOCK "memory_reuse_contract_not_validated"
+    STEP inspect_current_parent_declaration
+        CALL control.dynamic_goal_frontier_payload_present(
+            facts=world_context
+        ) -> frontier_payload_present
+        MATCH frontier_payload_present
+            true -> NEXT conserve_current_parent_declaration
+            false -> NEXT require_parent_continuity
+    STEP conserve_current_parent_declaration
+        CALL control.activation_preserves_selected_action_goal(
+            facts=world_context, intent=intent
+        ) -> frontier_preserves_parent
+        MATCH frontier_preserves_parent
+            true -> NEXT inspect_current_parent_origin
+            false -> NEXT require_parent_continuity
+    STEP inspect_current_parent_origin
+        CALL control.instantiate_dynamic_goal_frontier_activation(
+            facts=world_context
+        ) -> frontier_activation
+        CALL control.dynamic_goal_frontier_activation_needs_commit(
+            activation=frontier_activation, world_context=world_context
+        ) -> frontier_requires_enrollment
+        MATCH frontier_requires_enrollment
+            true -> NEXT require_preparation_enrollment
+            false -> NEXT require_parent_continuity
+    STEP require_preparation_enrollment
+        BLOCK "parent_source_enrollment_required_before_preparation"
+    STEP require_parent_continuity
+        CALL workflow.revalidate_parent_goal_continuity(
+            intent=intent, world_context=world_context
+        ) -> parent_continuity
+        MATCH parent_continuity.parent_continuity_allows_candidate
+            true -> NEXT require_parent_influence
+            false -> BLOCK "engaged_parent_requires_revalidation"
+    STEP require_parent_influence
+        CALL workflow.assess_parent_influence(
+            intent=intent, world_context=world_context, current_frame_ref=current_frame_ref,
+            parent_continuity=parent_continuity
+        ) -> parent_influence
+        MATCH parent_influence.parent_influence_allows_candidate
+            true -> NEXT require_observed_fatal_replay_safety
+            false -> BLOCK "parent_influence_requires_causal_revalidation"
+    STEP require_observed_fatal_replay_safety
+        CALL control.project_declared_alternatives(
+            selection_policy_ref="policy.declared_observed_fatal_replay_safety",
+            alternative_refs=[],
+            descriptive_facts=observed_fatal_replay_facts
+        ) -> fatal_replay_projection
+        SELECT fatal_replay_assessment
+            FOR "goal.preserve_protected_entity_before_progress"
+            FROM fatal_replay_projection.alternative_refs
+            UNDER policy.declared_observed_fatal_replay_safety
+            REQUIRE ["requirement.no_exact_fatal_action_retry"]
+            PRESERVE fatal_replay_projection.alternative_refs
+            FACTS fatal_replay_projection.alternative_facts
+        MATCH fatal_replay_assessment.alternatives.selected
+            "safety.reject_observed_fatal_replay" -> BLOCK "observed_fatal_replay"
+            "safety.no_observed_fatal_replay" -> NEXT require_endpoint_preservation
+    STEP require_endpoint_preservation
+        CALL capability.announced_step_measurements(
+            data=announced_data,
+            current_frame_ref=current_frame_ref,
+            alternative_refs=["announced.not_applicable", "announced.contact", "announced.clear", "announced.unresolved"]
+        ) -> endpoint_measurements
+        CALL control.project_declared_alternatives(
+            selection_policy_ref="policy.declared_announced_step_safety",
+            alternative_refs=endpoint_measurements.alternative_refs,
+            descriptive_facts=endpoint_measurements.alternative_facts
+        ) -> endpoint_projection
+        SELECT endpoint_assessment
+            FOR "goal.preserve_protected_entity_before_progress"
+            FROM endpoint_projection.alternative_refs
+            UNDER policy.declared_announced_step_safety
+            REQUIRE ["requirement.preserve_declared_excluded_coincidences"]
+            PRESERVE endpoint_projection.alternative_refs
+            FACTS endpoint_projection.alternative_facts
+        MATCH endpoint_assessment.alternatives.selected
+            "announced.not_applicable", "announced.clear" -> STOP release
+            "announced.contact" -> BLOCK "hostile_contact"
+            "announced.unresolved" -> DEFER "unknown_contact_safety"

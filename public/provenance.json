@@ -1,11 +1,18 @@
 {
   "release": "0.1.0",
   "game": "pipe-c3000001",
-  "sourceRepository": "https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan",
+  "sourceRepository": "yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan",
   "sourceCommit": "212d8d426f07eea2b6797c2bb647545767488a96",
   "sourcePath": "custom_games/engines/pipes.py",
   "sourceSha256": "6044daec8a1cf175c6a801bb1cd95514d7a0a573897d3e51024c7fdfb9edf0a3",
   "portLanguage": "TypeScript",
-  "intentionalDifferences": ["English level titles and notes"],
-  "agent": { "name": "SRA", "available": false, "status": "port-pending" }
+  "intentionalDifferences": [
+    "English level titles and notes"
+  ],
+  "agent": {
+    "name": "SRA",
+    "available": false,
+    "status": "port-pending"
+  },
+  "publicSourceUrl": "https://github.com/yannick-fontan-1981/sra-playground/blob/main/reference/sra/212d8d426f07/custom_games/engines/pipes.py"
 }
