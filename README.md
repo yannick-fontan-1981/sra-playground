@@ -92,7 +92,7 @@ or Restart from level 1 when the final level is complete.
 | `/architecture/representations.html` | Terms, claims, relation families, roles, mechanisms, and spaces |
 | `/architecture/reasoning.html` | Goals, composition, the behavior-tree-loop, and parent continuation |
 | `/architecture/memory.html` | Portable activity schemas, current evidence, and reuse |
-| `/architecture/implementation.html` | Logos, DRM, SRC, Python, and the browser integration boundary |
+| `/architecture/implementation.html` | Logos Engine, DRM, SRC, Python, and the browser integration boundary |
 | `/videos.html` | The six-episode video index |
 | `/videos/<slug>.html` | One episode, its player, full original text, and related links |
 
