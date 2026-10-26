@@ -428,7 +428,12 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 
 /* ARC-inspired identity: warm black, restrained type, pixel color accents. */
 .site-header{height:auto;min-height:113px;padding:16px 0 14px;flex-direction:column;align-items:stretch;border-bottom-color:var(--line);gap:13px}
-.site-header>.brand{align-self:flex-start}
+.site-masthead{display:flex;align-items:center;justify-content:space-between;gap:18px 28px;min-width:0}
+.site-author{min-width:0}
+.site-author-name{margin:0;font-size:24px;line-height:1.25;font-weight:600;letter-spacing:-.5px;color:var(--ink)}
+.site-author-description{margin:7px 0 0;font-family:var(--mono);font-size:14px;line-height:1.6;font-weight:500;letter-spacing:.6px;color:var(--muted)}
+.site-masthead>.brand{flex-shrink:0}
+@media(max-width:760px){.site-masthead{flex-direction:column;align-items:flex-start;gap:16px}}
 .brand{gap:13px;letter-spacing:0;color:var(--ink)}
 .brand-symbol{width:35px;height:35px;flex-shrink:0}
 .brand-green{fill:#4ecb71}

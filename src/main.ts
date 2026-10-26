@@ -65,7 +65,6 @@ app.innerHTML = `
   <main>
     <section class="intro wrap" aria-labelledby="page-title">
       <div class="intro-main">
-        <p class="eyebrow"><span class="status-dot"></span> INTERACTIVE GAMES / INDEPENDENT RESEARCH</p>
         <h1 id="page-title">SRA Playground</h1>
         <p class="hero-agent">Symbolic Reasoning Agent</p>
         <p class="hero-statement">Toward <em>Understandable Intelligence.</em></p>

@@ -4,6 +4,11 @@ const sourceUrl = 'https://github.com/yannick-fontan-1981/sra-playground';
 export function renderSiteHeader(active: 'playground' | 'gallery' | 'arc-agi-3' | 'symbolic-reasoning' | 'architecture' | 'videos'): string {
   return `
     <header class="site-header wrap">
+      <div class="site-masthead">
+        <div class="site-author">
+          <p class="site-author-name">Yannick Fontan</p>
+          <p class="site-author-description">INTERACTIVE GAMES / INDEPENDENT RESEARCH</p>
+        </div>
       <a class="brand" href="/" aria-label="SRA Playground — Symbolic Reasoning Agent home">
         <svg class="brand-symbol" viewBox="0 0 36 36" shape-rendering="crispEdges" aria-hidden="true">
           <rect x="0" y="0" width="10" height="10" class="brand-green"/>
@@ -19,6 +24,7 @@ export function renderSiteHeader(active: 'playground' | 'gallery' | 'arc-agi-3' 
         <span class="brand-type"><span class="brand-title">SRA Playground</span><span class="brand-project">SYMBOLIC REASONING AGENT</span></span>
         <span class="brand-context">ARC AGI <span>3</span></span>
       </a>
+      </div>
       <nav aria-label="Main navigation">
         <a${active === 'playground' ? ' class="nav-active" aria-current="page"' : ''} href="${active === 'playground' ? '#playground' : '/'}">Playground</a>
         <a${active === 'gallery' ? ' class="nav-active" aria-current="page"' : ''} href="/gallery.html">75 New Games</a>
