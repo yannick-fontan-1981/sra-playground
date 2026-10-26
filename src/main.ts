@@ -32,10 +32,10 @@ const icon = (name: string, cls = ''): string => {
 };
 
 const groupLabels: Record<GameCatalogEntry['group'], string> = {
-  official: 'Official ARC-AGI-3',
   custom: 'Custom · Wave 1',
   custom_2: 'Custom · Wave 2',
   custom_3: 'Custom · Wave 3',
+  official: 'Official ARC-AGI-3',
 };
 const defaultGameCode = 'CASC';
 const defaultGame = getGameByCode(defaultGameCode);
