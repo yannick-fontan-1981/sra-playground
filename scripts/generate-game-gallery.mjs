@@ -116,7 +116,7 @@ const page = `<!doctype html>
         </div>
       </section>`).join('')}
     </main>
-    <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Yannick Fontan</span><div><a href="/#playground">Playground ${arrow}</a><a href="https://github.com/yannick-fontan-1981/sra-playground/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses &amp; notices ${external}</a></div></footer>
+    <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Yannick Fontan</span><div><a href="/#playground">Playground ${arrow}</a><a href="/contact.html">Contact ${arrow}</a><a href="https://github.com/yannick-fontan-1981/sra-playground/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses &amp; notices ${external}</a></div></footer>
     <script type="module" src="/src/gallery.ts"></script>
   </body>
 </html>

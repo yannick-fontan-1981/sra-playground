@@ -10,6 +10,7 @@ const architecture = JSON.parse(await readFile(resolve(root, 'content/architectu
 const catalog = JSON.parse(await readFile(resolve(root, 'content/videos.json'), 'utf8'));
 const benchmark = JSON.parse(await readFile(resolve(root, 'content/arc-agi-3.json'), 'utf8'));
 const symbolic = JSON.parse(await readFile(resolve(root, 'content/symbolic-reasoning.json'), 'utf8'));
+const contact = JSON.parse(await readFile(resolve(root, 'content/contact.json'), 'utf8'));
 const pages = architecture.pages;
 const videos = [...catalog.videos].sort((a, b) => a.episode - b.episode);
 const siteOrigin = 'https://sra-playground.yannick-fontan.chatgpt.site';
@@ -75,11 +76,37 @@ function documentPage({ title, description, path, active, body, script = '/src/r
     <a class="skip-link" href="#content">Skip to content</a>
     ${renderSiteHeader(active)}
     ${body}
-    <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Yannick Fontan</span><div><a href="/">Play the games ${arrow}</a>${externalLink(catalog.channelUrl, 'Yanik_AI')}${externalLink(`${repo}/blob/main/THIRD_PARTY_NOTICES.md`, 'Licenses & notices')}</div></footer>
+    <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Yannick Fontan</span><div><a href="/">Play the games ${arrow}</a><a href="/contact.html">Contact ${arrow}</a>${externalLink(catalog.channelUrl, 'Yanik_AI')}${externalLink(`${repo}/blob/main/THIRD_PARTY_NOTICES.md`, 'Licenses & notices')}</div></footer>
     <script type="module" src="${script}"></script>
   </body>
 </html>
 `;
+}
+function renderContact() {
+  const envelope = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg>';
+  return documentPage({title:contact.title,description:contact.description,path:'/contact.html',active:'contact',body:`
+    <main class="contact-page wrap" id="content">
+      <header class="reading-header contact-header">
+        <p class="reading-breadcrumb">SRA Playground <span>/</span> Get in touch</p>
+        <h1>${escape(contact.title)}</h1>
+        <p class="reading-deck">${escape(contact.deck)}</p>
+      </header>
+      <div class="contact-layout">
+        <section class="contact-about" aria-labelledby="contact-name">
+          <p class="contact-kicker">About me</p>
+          <h2 id="contact-name">${escape(contact.name)}</h2>
+          <p class="contact-role">${escape(contact.role)}</p>
+          ${paragraphs(contact.bio)}
+        </section>
+        <aside class="contact-card" aria-labelledby="contact-email-heading">
+          <p class="contact-kicker">Get in touch</p>
+          <h2 id="contact-email-heading">Let’s talk.</h2>
+          <p>${escape(contact.invitation)}</p>
+          <a class="contact-email" href="mailto:${escape(contact.email)}">${envelope}<span>${escape(contact.email)}</span>${arrow}</a>
+          <div class="contact-links">${externalLink(repo, 'GitHub')}${externalLink(catalog.channelUrl, 'Yanik_AI on YouTube')}</div>
+        </aside>
+      </div>
+    </main>`});
 }
 function chapterNav(current) {
   return `<aside class="reading-sidebar"><a class="sidebar-heading" href="/architecture.html">Architecture</a><nav aria-label="Architecture chapters">${pages.map((page, index) => `<a href="${archPath(page)}"${page.slug === current ? ' class="is-current" aria-current="page"' : ''}><span>${number(index)}</span>${escape(page.navTitle)}</a>`).join('')}</nav><a class="sidebar-series" href="/videos.html">Video series ${arrow}</a></aside>`;
@@ -220,5 +247,6 @@ for (const [index,page] of pages.entries()) await save(archPath(page),renderChap
 await save('/arc-agi-3.html',renderBenchmark());
 await save('/symbolic-reasoning.html',renderSymbolicReasoning());
 await save('/videos.html',renderVideoIndex());
+await save('/contact.html',renderContact());
 for (const [index,video] of videos.entries()) await save(videoPath(video),renderVideo(video,index));
-console.log(`Generated the ARC-AGI-3 and Symbolic Reasoning introductions, ${pages.length} architecture pages, ${videos.length} episode pages, and the video index.`);
+console.log(`Generated the ARC-AGI-3 and Symbolic Reasoning introductions, ${pages.length} architecture pages, ${videos.length} episode pages, the video index, and the Contact page.`);

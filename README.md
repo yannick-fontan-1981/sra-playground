@@ -39,6 +39,8 @@ Fontan's **Symbolic Reasoning Agent** research.
   verified on 24 October 2026. Each has a separate page, original thumbnail,
   click-to-load YouTube player, the full original English text published in its
   description, and related architecture/game links.
+- **Contact:** `/contact.html` presents Yannick Fontan and a direct email link.
+  Its short biography and contact details are maintained in `content/contact.json`.
 
 The 100 games use their original Python engines. They have not all been rewritten
 in TypeScript. The independent TypeScript PIPE implementation is retained for

@@ -1,7 +1,7 @@
 const sourceUrl = 'https://github.com/yannick-fontan-1981/sra-playground';
 
 /** SRA is the project identity; ARC-AGI-3 is its interactive research setting. */
-export function renderSiteHeader(active: 'playground' | 'gallery' | 'arc-agi-3' | 'symbolic-reasoning' | 'architecture' | 'videos'): string {
+export function renderSiteHeader(active: 'playground' | 'gallery' | 'arc-agi-3' | 'symbolic-reasoning' | 'architecture' | 'videos' | 'contact'): string {
   return `
     <header class="site-header wrap">
       <div class="site-masthead">
@@ -32,6 +32,7 @@ export function renderSiteHeader(active: 'playground' | 'gallery' | 'arc-agi-3' 
         <a${active === 'symbolic-reasoning' ? ' class="nav-active" aria-current="page"' : ''} href="/symbolic-reasoning.html">Symbolic Reasoning</a>
         <a${active === 'architecture' ? ' class="nav-active" aria-current="page"' : ''} href="/architecture.html">Architecture</a>
         <a${active === 'videos' ? ' class="nav-active" aria-current="page"' : ''} href="/videos.html">Videos</a>
+        <a${active === 'contact' ? ' class="nav-active" aria-current="page"' : ''} href="/contact.html">Contact</a>
         <a class="source-link" href="${sourceUrl}" target="_blank" rel="noopener noreferrer" aria-label="SRA Playground source code on GitHub"><span>GitHub</span><svg class="icon small-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
       </nav>
     </header>
