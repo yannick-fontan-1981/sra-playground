@@ -1,0 +1,12 @@
+MODULE prototype.v7_activation
+
+WORKFLOW configure(request: Any) -> Any
+    STATE
+        created: Any
+        identity: Any
+        memory: Any
+    STEP configure
+        CALL v7.identity(template="activation", bindings=[]) -> identity
+        CALL v7.emit(memory=request.memory, template="activation", bindings=[["configuration", request.configuration]]) -> created
+        CALL v7.assign(memory=created, identity=identity, field="configuration", value=request.configuration) -> memory
+        STOP memory

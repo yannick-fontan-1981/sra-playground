@@ -26,6 +26,11 @@ Fontan's **Symbolic Reasoning Agent** research.
   at full opacity. `scripts/generate-game-mosaic.py` reproduces the asset.
 - **SRA Agent:** an upcoming mode. The genuine reasoning agent is not connected
   yet; playable games are not a claim that SRA solves them.
+- **Logos Engine Reasoning Lab:** `/reasoning-lab.html` runs the first native
+  TypeScript V7 kernel on controlled observations. Inspect the executed program,
+  hypotheses, compositions, revisions and counterexamples. See
+  [the implementation notes](docs/logos-engine-typescript.md) for the supported
+  SRC subset, Python reference checks and next steps toward editable nodes.
 - **75 New Games:** click the homepage patchwork or 75 New Games in the navigation.
   `/gallery.html` shows 75 custom games in three alphabetic groups of 25, then
   the 25 official games. Each card previews any of its levels and launches
@@ -88,6 +93,7 @@ or Restart from level 1 when the final level is complete.
 | Route | Content |
 | --- | --- |
 | `/gallery.html` | 75 custom and 25 official game cards, native level previews, and exact game/level launch links |
+| `/reasoning-lab.html` | Native TypeScript V7 experiment, actual program tree, knowledge inspector and execution trace |
 | `/symbolic-reasoning.html` | Definition, interactive key-and-door example, history, comparison with neural networks, and the SRA design premise |
 | `/arc-agi-3.html` | What the interactive benchmark is, how it works, and how the Playground relates to it |
 | `/architecture.html` | Introduction and chapter directory |

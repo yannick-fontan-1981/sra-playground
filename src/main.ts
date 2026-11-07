@@ -153,8 +153,9 @@ app.innerHTML = `
             </div>
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}" hidden>
               <div class="agent-illustration" aria-hidden="true"><span class="node node-a"></span><span class="node node-b"></span><span class="node node-c"></span><span class="node node-d"></span><span class="node-line line-a"></span><span class="node-line line-b"></span><span class="node-line line-c"></span></div>
-              <h3>SRA is coming.</h3>
-              <p class="agent-honesty">The real agent is not connected yet.</p>
+              <h3>Explore Logos Engine.</h3>
+              <p class="agent-honesty">The TypeScript reasoning kernel is available in the lab. The agent is not connected to the games yet.</p>
+              <a class="text-link" href="/reasoning-lab.html">Open the Reasoning Lab ${icon('arrow')}</a>
               <button id="return-manual" type="button" class="primary-button">Play manually ${icon('arrow')}</button>
               <a class="text-link" href="${agentSources}" target="_blank" rel="noopener noreferrer">SRA source references ${icon('external')}</a>
             </div>
@@ -167,7 +168,7 @@ app.innerHTML = `
 
     <section class="about-section wrap" id="about" aria-labelledby="about-title">
       <div class="about-heading"><p class="eyebrow">THE PROJECT</p><h2 id="about-title">About SRA</h2><div class="about-links"><a class="text-link" href="/architecture.html">Architecture ${icon('arrow')}</a><a class="text-link" href="/videos.html">Video series ${icon('arrow')}</a></div></div>
-      <div class="about-content"><p><strong>Symbolic Reasoning Agent</strong> is Yannick Fontan’s research project for interactive games. The Python agent uses explicit representations of observations, mechanisms, and goals to organize its reasoning.</p><p>The 100 games on this page run locally in your browser. Connecting the agent is the next implementation step. The architecture pages describe the code; the video series follows the project’s development.</p></div>
+      <div class="about-content"><p><strong>Symbolic Reasoning Agent</strong> is Yannick Fontan’s research project for interactive games. The Python agent uses explicit representations of observations, mechanisms, and goals to organize its reasoning.</p><p>The 100 games on this page run locally in your browser. Explore the first TypeScript reasoning kernel in the <a class="text-link" href="/reasoning-lab.html">Logos Engine Reasoning Lab</a>. Connecting it to the games is a subsequent step. The architecture pages describe the code; the video series follows the project’s development.</p></div>
     </section>
   </main>
   <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Independent research by Yannick Fontan</span><div><a href="/contact.html">Contact ${icon('arrow')}</a><a href="https://arcprize.org/arc-agi/3" target="_blank" rel="noopener noreferrer">ARC Prize ${icon('external')}</a><a href="${websiteRepo}/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses & notices ${icon('external')}</a></div></footer>

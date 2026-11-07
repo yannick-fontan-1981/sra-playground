@@ -1,0 +1,267 @@
+{
+  "schema": "arc.v7.generators.v1",
+  "limits": {"nodes": 128, "facts": 8, "actions": 8, "events": 12, "src_instructions": 4096},
+  "profiles": {
+    "relational": {
+      "limits": {
+        "nodes": 512,
+        "facts": 8,
+        "actions": 8,
+        "events": 32,
+        "src_instructions": 8192
+      },
+      "study": {
+        "maximum_primitives": 16,
+        "deadline_seconds": 240,
+        "instance_seed": 0,
+        "minimum_overlap_fraction": 0.5,
+        "maximum_actions": 12,
+        "required_applications": 2
+      },
+      "grid_selectors": [
+        [
+          "square_cells",
+          true
+        ],
+        [
+          "square_pitch",
+          true
+        ],
+        [
+          "body_count",
+          1
+        ]
+      ],
+      "goal": "reveal_cells_outside_initial_visible_extent",
+      "selection": "revalidate a pending member; once test a visible guard boundary; calibrate unknown grounded input; prefer a two-member composition ending at an unvisited projected position; order ties by action identifiers"
+    },
+    "matched_goal": {
+      "limits": {
+        "nodes": 512,
+        "facts": 8,
+        "actions": 8,
+        "events": 32,
+        "src_instructions": 8192
+      },
+      "study": {
+        "maximum_primitives": 24,
+        "deadline_seconds": 240,
+        "policy": "context_novelty",
+        "instance_seed": 0,
+        "training_actions": 1,
+        "maximum_recovery_actions": 6,
+        "path_depths": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "maximum_path_length": 6
+      }
+    }
+  },
+  "availability": {
+    "default": {"disabled_kinds": [], "disabled_nodes": [], "actor": "experiment_operator", "reason": "all_enabled"},
+    "dependency_fields": {"composition": ["members"], "experiment_option": ["question_ref"], "experiment": ["question_ref", "option_ref"], "composition_experiment": ["composition_ref", "hypothesis_ref"], "path_composition": ["members", "goal_ref"], "goal_experiment": ["path_ref", "hypothesis_ref", "goal_ref"], "relational_composition": ["members"], "relational_experiment": ["premise_refs"]},
+    "meaning": "Reversible experimental availability, separate from truth or applicability. Observation retention and contradiction maintenance remain active. Source and evidence are not erased."
+  },
+  "relational_choices": {
+    "calibration": {
+      "intent": "calibration",
+      "action": "$binding.action",
+      "command": "$binding.command",
+      "expectation": {
+        "enabled": false,
+        "axis": 0,
+        "delta": 0,
+        "model_ref": ""
+      },
+      "composition_ref": "",
+      "member_index": -1,
+      "application_ref": "",
+      "binding_origin": "$world_body",
+      "premise_refs": [
+        "$control.id"
+      ],
+      "guard": {
+        "purpose": "observe an unknown grounded input"
+      }
+    },
+    "guard_probe": {
+      "intent": "guard_probe",
+      "action": "$bound.action",
+      "command": "$binding.command",
+      "expectation": {
+        "enabled": true,
+        "axis": "$bound.axis",
+        "delta": 0,
+        "model_ref": "$bound.model_ref"
+      },
+      "composition_ref": "",
+      "member_index": -1,
+      "application_ref": "",
+      "binding_origin": "$world_body",
+      "premise_refs": [
+        "$control.id",
+        "$bound.model_ref"
+      ],
+      "guard": "$bound"
+    },
+    "composition": {
+      "intent": "composition",
+      "action": "$bound.action",
+      "command": "$binding.command",
+      "expectation": {
+        "enabled": true,
+        "axis": "$bound.axis",
+        "delta": "$bound.delta",
+        "model_ref": "$bound.model_ref"
+      },
+      "composition_ref": "$composition.id",
+      "member_index": "$member_index",
+      "application_ref": "$application_ref",
+      "binding_origin": "$binding_origin",
+      "premise_refs": [
+        "$control.id",
+        "$composition.id",
+        "$bound.model_ref"
+      ],
+      "guard": "$bound"
+    }
+  },
+  "native_study": {"maximum_primitives": 9, "deadline_seconds": 240, "policy": "native_context_curiosity", "instance_seed": 0},
+  "experimental_policies": {
+    "context_novelty": {
+      "id": "curiosity.exact_context_novelty.v1",
+      "eligible_question_statuses": [
+        "open",
+        "effect_to_explain"
+      ],
+      "order": [
+        "$context_trials",
+        "$action"
+      ],
+      "reason": "Prefer an interaction less observed in this exact context; break ties by its declared identifier. No target-specific sequence.",
+      "release": "proposal_only_requires_current_source_bound_dispatch"
+    },
+    "native_context_curiosity": {
+      "id": "curiosity.context_then_scope_trials.v1",
+      "eligible_question_statuses": ["open", "effect_to_explain"],
+      "order": ["$context_trials", "$trials", "$action"],
+      "reason": "Examiner d'abord une interaction moins observée dans le contexte exact actuel, puis dans cette portée ; départager par identifiant.",
+      "release": "proposal_only_requires_current_source_bound_dispatch"
+    }
+  },
+  "experiment_policy": {
+    "id": "curiosity.least_observed_grounded_input.v1",
+    "eligible_question_statuses": ["open", "effect_to_explain"],
+    "order": ["$trials", "$action"],
+    "reason": "Choisir une interaction dont les effets restent à examiner, parmi les commandes entièrement liées ; préférer le moins d'essais observés dans cette portée, puis départager par identifiant. Ce départage ne prouve aucune supériorité causale.",
+    "release": "proposal_only_no_environment_authority"
+  },
+  "public_interface": {
+    "maximum_archive_steps": 3,
+    "maximum_frame_cells": 4096,
+    "maximum_input_file_bytes": 8388608,
+    "actions": {
+      "ACTION1": {"required_arguments": []},
+      "ACTION2": {"required_arguments": []},
+      "ACTION3": {"required_arguments": []},
+      "ACTION4": {"required_arguments": []},
+      "ACTION5": {"required_arguments": []},
+      "ACTION6": {"required_arguments": ["x", "y"]},
+      "ACTION7": {"required_arguments": [], "required_authority": ["recovery"]}
+    }
+  },
+  "templates": {
+    "spatial_control": {
+      "identity": ["spatial_control", "$observation.scope"],
+      "body": {"kind": "spatial_control", "status": "candidate", "scope": "$observation.scope", "palette": "$body.palette", "geometry": "$scene.geometry", "confirmed": false, "evidence": ["$observation_node"]}
+    },
+    "spatial_scene": {
+      "identity": ["spatial_scene", "$observation.id"],
+      "body": {"kind": "spatial_scene", "status": "observed", "scope": "$observation.scope", "observation_ref": "$observation.id", "measurement_digest": "$scene.digest", "world_body": "$camera.world_body", "camera_shift": "$camera.shift", "origin_offset": "$camera.origin", "extent": "$camera.extent", "new_cells": "$camera.new_cells", "body_delta": "$camera.delta", "evidence": ["$observation_node"]}
+    },
+    "frontier_goal": {
+      "identity": ["frontier_goal", "$observation.scope"],
+      "body": {"kind": "frontier_goal", "status": "open", "scope": "$observation.scope", "initial_extent": "$camera.extent", "criterion": "new_visible_cells_outside_initial_extent", "evidence": ["$observation_node"]}
+    },
+    "relational_model": {
+      "identity": ["relational_model", "$observation.scope", "$performed.action", "$camera.axis", "$camera.delta", "$camera.destination_pattern"],
+      "body": {"kind": "relational_model", "status": "candidate", "scope": "$observation.scope", "action": "$performed.action", "axis": "$camera.axis", "vector": "$camera.delta", "material": "$camera.destination_pattern", "body_palette": "$body.palette", "precondition": {"predicate": "axis_at", "axis": "$camera.axis", "body": {"variable": "body"}, "position": {"variable": "from"}}, "effect": {"predicate": "axis_at", "axis": "$camera.axis", "body": {"variable": "body"}, "position": {"variable": "to"}}, "constraints": {"offset": "$camera.delta", "target_material": "$camera.destination_pattern", "unpredicted": "orthogonal displacement, hidden state and outside-view continuation"}, "evidence": ["$before_ref", "$observation_node"]}
+    },
+    "relational_composition": {
+      "identity": ["relational_composition", "$first.id", "$second.id"],
+      "body": {"kind": "relational_composition", "status": "candidate", "scope": "$first.scope", "members": ["$first.id", "$second.id"], "unification": "$unification.bindings", "meaning": "Rebind relative origins; join the first projected effect to the second precondition; independently revalidate each material guard.", "evidence": ["$first.id", "$second.id"]}
+    },
+    "relational_experience": {
+      "identity": ["relational_experience", "$observation.id"],
+      "body": {"kind": "relational_experience", "status": "observed", "scope": "$observation.scope", "proposal_ref": "$performed.id", "intent": "$performed.intent", "action": "$performed.action", "observed_delta": "$camera.delta", "prediction_matches": "$matched", "evidence": ["$before_ref", "$observation_node", "$performed.id"]}
+    },
+    "relational_experiment": {
+      "identity": ["relational_experiment", "$observation.id", "$basis"],
+      "body": {"kind": "relational_experiment", "status": "proposed", "scope": "$observation.scope", "observation_ref": "$observation.id", "intent": "$choice.intent", "action": "$choice.action", "command": "$choice.command", "expectation": "$choice.expectation", "composition_ref": "$choice.composition_ref", "member_index": "$choice.member_index", "application_ref": "$choice.application_ref", "binding_origin": "$choice.binding_origin", "premise_refs": "$choice.premise_refs", "guard": "$choice.guard", "basis": "$basis", "executed": false, "evidence": "$choice.premise_refs"}
+    },
+    "goal": {
+      "identity": ["goal", "$initial.scope", "$initial.values", "$target.after"],
+      "body": {"kind": "goal", "status": "open", "scope": "$initial.scope", "conditions": "$initial.values", "target": "$target.after", "initial_pose": "$target.before", "criterion": "unique_exact_shape_at_bbox", "evidence": ["$initial_ref", "$observation_node"]}
+    },
+    "goal_observation": {
+      "identity": ["goal_observation", "$goal.id", "$observation.id"],
+      "body": {"kind": "goal_observation", "status": "observed", "scope": "$observation.scope", "goal_ref": "$goal.id", "observation_ref": "$observation.id", "context": "$observation.values", "satisfied": "$satisfied", "evidence": ["$goal.id", "$observation_node"], "pose_catalogue_digest": "$pose_digest", "shape_count": "$shape_count"}
+    },
+    "path_composition": {
+      "identity": ["path_composition", "$goal.id", "$members"],
+      "body": {"kind": "path_composition", "status": "candidate", "scope": "$goal.scope", "goal_ref": "$goal.id", "members": "$members", "conditions": "$goal.conditions", "prediction": "$hypothesis.prediction", "unresolved": ["hidden_preconditions", "independent_applicability", "transfer"], "evidence": "$members"}
+    },
+    "goal_experiment": {
+      "identity": ["goal_experiment", "$path.id", "$hypothesis.id", "$observation.id", "$basis"],
+      "body": {"kind": "goal_experiment", "status": "proposed", "scope": "$observation.scope", "goal_ref": "$goal.id", "path_ref": "$path.id", "hypothesis_ref": "$hypothesis.id", "observation_ref": "$observation.id", "action": "$hypothesis.action", "command": "$binding.command", "expected_before": "$hypothesis.context", "expected_after": "$hypothesis.prediction", "basis": "$basis", "executed": false, "evidence": ["$goal.id", "$path.id", "$hypothesis.id", "$observation_node"]}
+    },
+    "composition_experiment": {
+      "identity": ["composition_experiment", "$composition.id", "$hypothesis.id", "$observation.id", "$basis"],
+      "body": {"kind": "composition_experiment", "status": "proposed", "scope": "$observation.scope", "composition_ref": "$composition.id", "hypothesis_ref": "$hypothesis.id", "observation_ref": "$observation.id", "action": "$hypothesis.action", "command": "$binding.command", "expected_before": "$hypothesis.context", "expected_after": "$hypothesis.prediction", "basis": "$basis", "executed": false, "evidence": ["$composition.id", "$hypothesis.id", "$observation_node"]}
+    },
+    "activation": {
+      "identity": ["activation", "runtime"],
+      "body": {"kind": "activation", "status": "configured", "scope": "runtime", "configuration": "$configuration", "evidence": []}
+    },
+    "observation": {
+      "identity": ["observation", "$observation.id"],
+      "body": {"kind": "observation", "status": "observed", "scope": "$observation.scope", "observation_ref": "$observation.id", "values": "$observation.values", "evidence": []}
+    },
+    "transition": {
+      "identity": ["transition", "$before.id", "$action", "$after.id"],
+      "body": {"kind": "transition", "status": "observed", "scope": "$before.scope", "before": "$before.id", "after": "$after.id", "context": "$before.values", "outcome": "$after.values", "action": "$action", "effects": "$effects", "evidence": ["$before_ref", "$after_ref"]}
+    },
+    "question": {
+      "identity": ["question", "$observation.scope", "$observation.values", "$action"],
+      "body": {"kind": "question", "status": "open", "scope": "$observation.scope", "context": "$observation.values", "action": "$action", "intent": "What changes, and what remains unexplained, after this interaction?", "needs": [], "predictions": [], "evidence": ["$observation_ref"]}
+    },
+    "hypothesis": {
+      "identity": ["hypothesis", "$before.scope", "$before.values", "$action", "$after.values"],
+      "body": {"kind": "hypothesis", "status": "candidate", "scope": "$before.scope", "context": "$before.values", "action": "$action", "conditions": "$before.values", "effects": "$effects", "prediction": "$after.values", "counterexamples": [], "evidence": ["$transition_ref"]}
+    },
+    "composition": {
+      "identity": ["composition", "$first.id", "$second.id"],
+      "body": {"kind": "composition", "status": "candidate", "scope": "$first.scope", "members": ["$first.id", "$second.id"], "conditions": "$first.conditions", "raccord": "$raccord", "unresolved": ["remaining_preconditions", "interfering_effects", "preservation", "independent_applicability"], "counterexamples": [], "evidence": ["$first.id", "$second.id"]}
+    },
+    "experiment_option": {
+      "identity": ["experiment_option", "$observation.id", "$question.id", "$basis"],
+      "body": {"kind": "experiment_option", "status": "$status", "scope": "$observation.scope", "question_ref": "$question.id", "observation_ref": "$observation.id", "action": "$question.action", "trial_count": "$trials", "grounding": "$grounding", "basis": "$basis", "evidence": ["$question.id", "$observation_node"]}
+    },
+    "experiment": {
+      "identity": ["experiment", "$observation.id", "$basis"],
+      "body": {"kind": "experiment", "status": "proposed", "scope": "$observation.scope", "question_ref": "$question.id", "option_ref": "$option", "observation_ref": "$observation.id", "action": "$question.action", "command": "$binding.command", "trial_count": "$trials", "policy_ref": "$policy.id", "reason": "$policy.reason", "basis": "$basis", "executed": false, "evidence": ["$question.id", "$option", "$observation_node"]}
+    }
+  },
+  "rationale": {
+    "curiosity": "Open interaction questions without a supplied goal or expected outcome. Exact context/action identity deduplicates them; an observed result still needs explanation.",
+    "acquisition": "Retain measured transitions as exact-context hypotheses. A changed full observation signature does not establish an invariant causal mechanism.",
+    "refutation": "In the same declared scope, complete measured context and action, a different complete outcome contradicts the empirical hypothesis. Preserve both outcomes.",
+    "composition": "A nonempty equality intersection between declared effects and conditions can propose a pair, but never discharges all applicability obligations.",
+    "revision": "Suspend compositions whose direct hypothesis dependencies are contradicted. This prototype emits only pairs, so no deeper closure is claimed."
+  }
+}

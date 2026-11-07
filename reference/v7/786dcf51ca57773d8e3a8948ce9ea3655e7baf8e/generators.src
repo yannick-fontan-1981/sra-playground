@@ -1,0 +1,128 @@
+MODULE prototype.v7
+
+WORKFLOW cycle(request: Any, interactions: List<String>) -> Any
+    STATE
+        memory: Any
+        with_after: Any
+        with_before: Any
+        revised: Any
+        revised_question: Any
+        revised_composition: Any
+        before_ref: Any
+        after_ref: Any
+        transition_ref: Any
+        item_ref: Any
+        hypotheses: List<Any>
+        transitions: List<Any>
+        compositions: List<Any>
+        questions: List<Any>
+        effects: Any
+        raccord: Any
+        scope_matches: Any
+        context_matches: Any
+        action_matches: Any
+        outcome_matches: Any
+        question_scope_matches: Any
+        question_context_matches: Any
+        question_action_matches: Any
+        contradicted: Any
+        first_candidate: Any
+        second_candidate: Any
+        distinct_members: Any
+        same_scope: Any
+        has_raccord: Any
+        fresh: Any
+        member: Any
+        candidate: Any
+        composition_disabled: Boolean
+    STEP begin
+        CALL v7.value(value=request.memory) -> memory
+        NEXT observations
+    STEP observations
+        CALL v7.emit(memory=memory, template="observation", bindings=[["observation", request.after]]) -> with_after
+        CALL v7.identity(template="observation", bindings=[["observation", request.after]]) -> after_ref
+        IF request.has_transition
+            CALL v7.emit(memory=with_after, template="observation", bindings=[["observation", request.before]]) -> with_before
+            CALL v7.identity(template="observation", bindings=[["observation", request.before]]) -> before_ref
+            CALL v7.difference(before=request.before.values, after=request.after.values) -> effects
+            CALL v7.identity(template="transition", bindings=[["before", request.before], ["action", request.action], ["after", request.after]]) -> transition_ref
+            CALL v7.absent(memory=with_before, identity=transition_ref) -> fresh
+            IF fresh
+                CALL v7.emit(memory=with_before, template="transition", bindings=[["before", request.before], ["after", request.after], ["action", request.action], ["effects", effects], ["before_ref", before_ref], ["after_ref", after_ref]]) -> memory
+                NEXT construct
+            ELSE
+                CALL v7.value(value=with_before) -> memory
+                NEXT availability
+        ELSE
+            CALL v7.value(value=with_after) -> memory
+            NEXT availability
+    STEP construct
+        CALL v7.emit(memory=memory, template="hypothesis", bindings=[["before", request.before], ["after", request.after], ["action", request.action], ["effects", effects], ["transition_ref", transition_ref]]) -> memory
+        NEXT acquisition
+    STEP acquisition
+        CALL v7.select(memory=memory, kind="hypothesis") -> hypotheses
+        CALL v7.select(memory=memory, kind="transition") -> transitions
+        FOR EACH hypothesis IN hypotheses
+            FOR EACH transition IN transitions
+                CALL v7.equal(left=hypothesis.scope, right=transition.scope) -> scope_matches
+                IF scope_matches
+                    CALL v7.equal(left=hypothesis.context, right=transition.context) -> context_matches
+                    IF context_matches
+                        CALL v7.equal(left=hypothesis.action, right=transition.action) -> action_matches
+                        IF action_matches
+                            CALL v7.equal(left=hypothesis.prediction, right=transition.outcome) -> outcome_matches
+                            IF outcome_matches
+                                CALL v7.append_unique(memory=memory, identity=hypothesis.id, field="evidence", value=transition.id) -> memory
+                            ELSE
+                                CALL v7.assign(memory=memory, identity=hypothesis.id, field="status", value="contradicted") -> revised
+                                CALL v7.append_unique(memory=revised, identity=hypothesis.id, field="counterexamples", value=transition.id) -> memory
+        CALL v7.select(memory=memory, kind="question") -> questions
+        FOR EACH question IN questions
+            CALL v7.equal(left=question.scope, right=request.before.scope) -> question_scope_matches
+            IF question_scope_matches
+                CALL v7.equal(left=question.context, right=request.before.values) -> question_context_matches
+                IF question_context_matches
+                    CALL v7.equal(left=question.action, right=request.action) -> question_action_matches
+                    IF question_action_matches
+                        CALL v7.assign(memory=memory, identity=question.id, field="status", value="effect_to_explain") -> revised_question
+                        CALL v7.append_unique(memory=revised_question, identity=question.id, field="evidence", value=transition_ref) -> memory
+        NEXT revision
+    STEP revision
+        CALL v7.select(memory=memory, kind="composition") -> compositions
+        CALL v7.select(memory=memory, kind="hypothesis") -> hypotheses
+        FOR EACH composition IN compositions
+            FOR EACH hypothesis IN hypotheses
+                CALL v7.contains(items=composition.members, value=hypothesis.id) -> member
+                IF member
+                    CALL v7.equal(left=hypothesis.status, right="contradicted") -> contradicted
+                    IF contradicted
+                        CALL v7.assign(memory=memory, identity=composition.id, field="status", value="suspended") -> revised_composition
+                        CALL v7.append_unique(memory=revised_composition, identity=composition.id, field="counterexamples", value=hypothesis.id) -> memory
+        NEXT availability
+    STEP availability
+        CALL v7.contains(items=request.availability.selection.disabled_kinds, value="composition") -> composition_disabled
+        IF composition_disabled
+            NEXT curiosity
+        ELSE
+            NEXT composition
+    STEP composition
+        CALL v7.select_active(memory=memory, kind="hypothesis", selection=request.availability.selection, dependency_fields=request.availability.dependency_fields) -> hypotheses
+        FOR EACH first IN hypotheses
+            CALL v7.equal(left=first.status, right="candidate") -> first_candidate
+            IF first_candidate
+                FOR EACH second IN hypotheses
+                    CALL v7.equal(left=second.status, right="candidate") -> second_candidate
+                    IF second_candidate
+                        CALL v7.distinct(left=first.id, right=second.id) -> distinct_members
+                        IF distinct_members
+                            CALL v7.equal(left=first.scope, right=second.scope) -> same_scope
+                            IF same_scope
+                                CALL v7.intersection(left=first.effects, right=second.conditions) -> raccord
+                                CALL v7.nonempty(items=raccord) -> has_raccord
+                                IF has_raccord
+                                    CALL v7.emit(memory=memory, template="composition", bindings=[["first", first], ["second", second], ["raccord", raccord]]) -> memory
+        NEXT curiosity
+    STEP curiosity
+        FOR EACH action IN interactions
+            CALL v7.emit(memory=memory, template="question", bindings=[["observation", request.after], ["action", action], ["observation_ref", after_ref]]) -> memory
+        STOP memory
