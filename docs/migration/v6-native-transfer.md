@@ -82,7 +82,11 @@ episode observations.
 Reasoning facts and trace records are individual authoritative nodes. An ordered
 index reconstructs the full source memory snapshot; unchanged entries retain
 their identity across checkpoints. Public memory reads remain independent
-copies, and a failed transaction does not mark its pending writes as committed.
+copies. Restoration checks each retained leaf as well as the ordered index,
+so an independent fact or trace revision cannot be hidden by an unchanged
+index. A checkpoint refuses a stale graph base; only a successfully committed
+and verified prepared batch can update the read cache. Failed transactions and
+unrelated commits do not mark unread revisions as acquired.
 
 ## Behavioral invariants
 
@@ -139,6 +143,14 @@ empirical-acquisition integration. The integrated caller must repeat those
 campaigns before the baseline is treated as validation of the completed agent.
 The full-game replays are deliberately separate from the component suite.
 
+After the incremental memory and independent-leaf revision corrections, the
+integrated runtime was tested again against the real HANO game with
+`node tests/v6-agent-native.smoke.ts HANO 1`. It completed the first level in six
+actions and three prefixes, reached the second level, and loaded zero Python
+agent modules. This current one-level smoke result includes WHY/ACT and
+transition acquisition; it does not extend to the entire earlier nine-level
+baseline or to the still-disconnected autonomous caller coordinator.
+
 These nine solved levels **do not establish parity on all games**. They do
 not establish identical global WHY/ACT, parent-tree or complete StrategyRouter
 state on every alternative. Family-level differential fixtures are labelled
@@ -149,6 +161,21 @@ positive, ambiguous and counterexample cases. Synthetic tests are not counted
 as solved game levels. The original visual-sequence family does not propose an
 action on the initial SEQN scene used in this fixture; the native port preserves
 that refusal rather than substituting a new solver.
+
+### Common-caller acquisition checkpoint
+
+Two additional oracles execute the unchanged original common caller and retain
+its acquired component states, frontier deltas, reasoning facts and assessment
+results. The HANO case covers its first two-action prefix. The controlled View
+case supplies only coherent public viewport packets; the original caller itself
+selects its view experiment. Together they provide 44 passing comparisons,
+including physical transition guards. The fixture exports, scope and explicit
+limitations are documented in `v6-common-caller-oracle.md`.
+
+These comparisons exercise the autonomous `NativeCallerCoordinator`. It is not
+yet connected to the browser runtime. Its six missing acquisition stores and
+the remaining provider integration are still required work. A matching bounded
+acquisition scenario is not a complete-caller campaign result.
 
 ### Component comparisons
 
@@ -170,6 +197,7 @@ test names, fixtures, generators and exact source mapping are recorded in
 | Slot, word, port and constellation families | Complete family modules and their called parser/pose primitives, 235 operations with restoration after every step; registration remains pending |
 | Prospective contact closure | Effect access, factored returns, scored rewrites and passage options, including score-qualified terminal learning and next-epoch reuse |
 | Remaining geometry and target methods | Framed alignment, occlusion, lattice paths, ambiguous component matches and scored-boundary method recall |
+| Autonomous caller coordinator | Two unchanged-main acquisition scenarios, retained component state, frontier deltas and physical guards; product-runtime connection remains pending |
 | Native persistence | Atomic revisions, real program replacement, immutable fragments, integrity and lossless episodes larger than a single V7 value |
 
 Unit fixtures deliberately include positive proposals and state-changing
@@ -183,7 +211,8 @@ The checkpoint component run used:
 node --test --test-concurrency=2 --test-skip-pattern='native SRC/service/controller replays' tests/*.test.ts
 ```
 
-It passed 1,367 tests. The four full-caller game replay cases were excluded from
+It passed 1,418 tests, including the caller oracles and independent fact/trace
+revision regressions. The four full-caller game replay cases were excluded from
 that run and remain a separate integration gate. This result is not reported as
 an unqualified full-suite or complete-campaign success.
 

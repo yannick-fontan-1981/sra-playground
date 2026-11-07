@@ -16,6 +16,16 @@ const EPISODE = 'common-observation-frontier';
 const MEMORY_INDEX = 'logos-engine.v6.reasoning-memory-index.v1';
 const factId = (episode: string, key: string): string => `reasoning:fact:${symbolicDigest([episode, key])}`;
 const traceId = (id: number): string => `reasoning:trace:${id}`;
+// Checkpoint acknowledgements compare actual stored types, including Float64
+// signed zero. Python's True == 1 equality is unsuitable for this cache guard.
+function sameStoredValue(left: unknown, right: unknown): boolean {
+  if (Object.is(left, right)) return true;
+  if (!left || !right || typeof left !== 'object' || typeof right !== 'object'
+    || Array.isArray(left) !== Array.isArray(right)) return false;
+  const keys = Object.keys(left);
+  return keys.length === Object.keys(right).length && keys.every(key => Object.hasOwn(right, key)
+    && sameStoredValue((left as R)[key], (right as R)[key]));
+}
 function frozenSource<T>(value: T): T {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
     for (const child of Object.values(value)) frozenSource(child); Object.freeze(value);
@@ -40,6 +50,9 @@ export class NativeCompositionAuthority {
   private restoredMemoryNode: KnowledgeNode | null = null;
   private restoredNativeRevision: number | null = null;
   private retainedEntries = new Map<string, { version: number; node: KnowledgeNode }>();
+  private pendingCheckpoint: { revision: number; index: R; entries: Map<string, {
+    version: number; node: KnowledgeNode | undefined; written: boolean; record: unknown;
+  }> } | null = null;
   private frozen: R | null = null;
   private lastRelease: CompositionReport | null = null;
   private lastAnalysis: R[] = [];
@@ -61,6 +74,7 @@ export class NativeCompositionAuthority {
   /** Every prepare/persist boundary reads the actual retained facts and cache. */
   restore(): void {
     if (!this.store) throw new Error('Native composition authority is not initialized');
+    this.pendingCheckpoint = null;
     const catalogNode = this.store.node('reasoning:catalog');
     const memoryNode = this.store.node('reasoning:memory');
     // Catalog data is immutable and still comes from its real versioned node.
@@ -70,7 +84,8 @@ export class NativeCompositionAuthority {
       this.memory.restore({ ...catalog, ...this.retainedDynamicState() } as unknown as ReasoningMemoryState);
       this.catalogRevision = catalogNode.revision;
       this.rememberEntries(memoryNode);
-    } else if (memoryNode !== this.restoredMemoryNode || this.memory.nativeCheckpoint().revision !== this.restoredNativeRevision) {
+    } else if (memoryNode !== this.restoredMemoryNode || !this.retainedNodesCurrent()
+      || this.memory.nativeCheckpoint().revision !== this.restoredNativeRevision) {
       this.memory.restoreDynamic(this.retainedDynamicState()); this.rememberEntries(memoryNode);
     }
     this.bridge.restore(this.store.stateValue('reasoning:bridge') as unknown as CompositionBridgeState);
@@ -106,25 +121,49 @@ export class NativeCompositionAuthority {
     }
     this.restoredMemoryNode = memoryNode; this.restoredNativeRevision = checkpoint.revision;
   }
+  private retainedNodesCurrent(): boolean {
+    return [...this.retainedEntries].every(([id, entry]) => this.store?.memory.nodes[id] === entry.node);
+  }
   /** Called only after the containing V7 transaction succeeds. */
   didCheckpoint(): void {
-    if (!this.store?.memory.nodes['reasoning:memory']) return;
+    const pending = this.pendingCheckpoint; this.pendingCheckpoint = null;
+    if (!pending || !this.store?.memory.nodes['reasoning:memory']
+      || pending.revision !== this.memory.nativeCheckpoint().revision) return;
     const index = this.store.stateValue('reasoning:memory') as R;
-    if (index.native_revision === this.memory.nativeCheckpoint().revision) this.rememberEntries(this.store.node('reasoning:memory'));
+    if (!sameStoredValue(index, pending.index)) return;
+    const retained = new Map<string, { version: number; node: KnowledgeNode }>();
+    for (const [id, entry] of pending.entries) {
+      const node = this.store.memory.nodes[id];
+      // Unwritten entries keep their acquired identity. Written entries are
+      // acknowledged only after reading their actually committed value.
+      if (!node || (entry.written ? !sameStoredValue(this.store.stateValue(id), entry.record) : node !== entry.node)) return;
+      retained.set(id, { version: entry.version, node });
+    }
+    this.retainedEntries = retained;
+    this.restoredMemoryNode = this.store.node('reasoning:memory'); this.restoredNativeRevision = pending.revision;
   }
   checkpointWrites(): NativeStoreWrite[] {
+    if (this.restoredMemoryNode && (this.store?.memory.nodes['reasoning:memory'] !== this.restoredMemoryNode || !this.retainedNodesCurrent())) {
+      this.pendingCheckpoint = null;
+      throw new Error('Native reasoning graph changed; restore before checkpoint');
+    }
     const checkpoint = this.memory.nativeCheckpoint(), writes: NativeStoreWrite[] = [];
     const facts: string[] = [], traces: string[] = [];
+    const entries: NonNullable<NativeCompositionAuthority['pendingCheckpoint']>['entries'] = new Map();
     const retain = (id: string, version: number, record: unknown, component: string): void => {
       const previous = this.retainedEntries.get(id);
-      if (!previous || previous.version !== version || this.store?.memory.nodes[id] !== previous.node) {
+      const written = !previous || previous.version !== version;
+      entries.set(id, { version, node: previous?.node, written, record });
+      if (written) {
         writes.push({ id, kind: 'component_state', component, value: record, relations: [{ relation: 'retained_by', target: 'reasoning:memory' }] });
       }
     };
     for (const entry of checkpoint.facts) { const id = factId(entry.record.episode, entry.record.key); facts.push(id); retain(id, entry.version, entry.record, 'native_reasoning_fact'); }
     for (const entry of checkpoint.traces) { const id = traceId(entry.record.id); traces.push(id); retain(id, entry.version, entry.record, 'native_reasoning_trace'); }
+    const index = { schema: MEMORY_INDEX, native_revision: checkpoint.revision, facts, traces };
+    this.pendingCheckpoint = { revision: checkpoint.revision, index, entries };
     return [...writes, { id: 'reasoning:memory', kind: 'component_state', component: 'native_reasoning_memory',
-      value: { schema: MEMORY_INDEX, native_revision: checkpoint.revision, facts, traces },
+      value: index,
       relations: [{ relation: 'uses_catalog', target: 'reasoning:catalog' }] },
     { id: 'reasoning:bridge', kind: 'component_state', component: 'composition_bridge', value: this.bridge.state(),
       relations: [{ relation: 'reads', target: 'reasoning:memory' }, { relation: 'executes', target: 'program:prototype.laya_router.route' }] }];

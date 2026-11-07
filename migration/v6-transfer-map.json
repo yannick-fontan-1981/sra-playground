@@ -301,16 +301,26 @@
       "targets": [
         "src/logos-engine/v6-target-binding.ts",
         "src/logos-engine/v6-native-runtime.ts",
-        "src/logos-engine/v6-native-authority.ts"
+        "src/logos-engine/v6-native-authority.ts",
+        "src/logos-engine/v6-native-caller.ts"
       ],
       "status": "partial_transfer",
       "proof": [
         "scripts/export-v6-target-reference.py",
         "tests/fixtures/v6-target-reference.json",
         "tests/v6-target-binding.test.ts",
-        "tests/v6-native-runtime.test.ts"
+        "tests/v6-native-runtime.test.ts",
+        "scripts/export-v6-caller-reference.py",
+        "scripts/v6-caller-host-boundary.py",
+        "scripts/compare-v6-caller-reference.ts",
+        "tests/helpers/v6-caller-differential.ts",
+        "tests/v6-native-caller.test.ts",
+        "tests/fixtures/v6-native-caller/hano-first-prefix.json",
+        "tests/fixtures/v6-native-caller/viewport-three-prefixes.json",
+        "tests/fixtures/v6-native-caller/report.json",
+        "docs/migration/v6-common-caller-oracle.md"
       ],
-      "notes": "Caller projection helpers are transferred; the complete caller orchestration remains in progress."
+      "notes": "Caller projection helpers and an autonomous native coordinator are transferred. Independent unchanged-main oracles compare HANO's first prefix and a controlled public View scenario, including retained component state and physical guards. The coordinator is not yet connected to the product runtime; six acquisition stores and complete caller orchestration remain pending. This is bounded differential evidence, not full-campaign parity."
     },
     {
       "sources": [

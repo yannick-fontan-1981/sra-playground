@@ -1,0 +1,537 @@
+{
+  "schema": "v6-original-caller-audit.v1",
+  "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceModified": false,
+  "agentInProduct": "native TypeScript only",
+  "cases": [
+    {
+      "id": "hano-first-prefix-r4",
+      "host": {
+        "kind": "real_original_custom_game",
+        "game": "HANO",
+        "gameId": "hano-c0000001",
+        "engineArchiveSha256": "44d108fe4feed3ce0c9587e90f071876b13730af8136cd54cbfa5c1562d87822"
+      },
+      "physicalActions": 2,
+      "sealedPrefixes": 1,
+      "snapshots": 7,
+      "events": 62,
+      "checksPassed": 15,
+      "checksFailed": 0,
+      "selectedProposalKinds": [
+        "conditional_ordered_support_transfer"
+      ],
+      "outsideComparedCoordinator": [
+        "addressed_material_event",
+        "framed_transfer_event",
+        "ordered_support_state",
+        "repeated_series_state",
+        "support_navigation_event",
+        "temporal_selection_state"
+      ],
+      "oracleSha256": "6bfdfef94cf41b773e534e1c062f1ea6f332da026705dca7db9775abaedd2b35",
+      "originalAnalyses": 3,
+      "fixture": "tests/fixtures/v6-native-caller/hano-first-prefix.json"
+    },
+    {
+      "id": "viewport-three-prefixes-r2",
+      "host": {
+        "kind": "synthetic_public_protocol",
+        "available": [
+          5
+        ],
+        "completionClaim": false,
+        "purpose": "Original caller exploration, bulk registration, coverage and frontier acquisition"
+      },
+      "physicalActions": 3,
+      "sealedPrefixes": 3,
+      "snapshots": 13,
+      "events": 109,
+      "checksPassed": 29,
+      "checksFailed": 0,
+      "selectedProposalKinds": [
+        "experiment",
+        "experiment",
+        "public_view_frontier"
+      ],
+      "outsideComparedCoordinator": [
+        "addressed_material_event",
+        "repeated_series_state",
+        "temporal_selection_state"
+      ],
+      "oracleSha256": "f3f9db78d1da262de307739dc4a841ad28a8ac6c26141a3737dcd4d2bddf38ec",
+      "originalAnalyses": 9,
+      "fixture": "tests/fixtures/v6-native-caller/viewport-three-prefixes.json"
+    }
+  ],
+  "passed": 44,
+  "failed": 0,
+  "normalization": [],
+  "findings": [
+    "No mismatch in captured coordinator acquisition, guards, assessments, state and owned memory facts.",
+    "Source selected-family callback work is outside this coordinator differential; separate ordered-support oracle covers it.",
+    "Other always-on source acquisitions are still absent from the coordinator: addressed material, framed transfer, repeated-series and temporal-selection memory; meter and collection state are retained in the raw snapshots.",
+    "Captured first HANO proposal is identical to the existing uninstrumented full-original MAIN baseline."
+  ],
+  "limits": [
+    "Released-prefix checkpoints are restored for each differential cycle; complete strategy election is not claimed.",
+    "The original post-prefix WHY/ACT operations and facts/traces are retained, but not rerun by this differential driver.",
+    "No scoring boundary occurs in these short cases; Goal event replay and Frontier boundary reconstruction are not covered here.",
+    "The viewport protocol is synthetic and has no game score or completion claim."
+  ],
+  "status": "retained source evidence; native coordinator not yet integrated into the product runtime",
+  "proofs": {
+    "exporter": "scripts/export-v6-caller-reference.py",
+    "hostBoundary": "scripts/v6-caller-host-boundary.py",
+    "comparator": "tests/helpers/v6-caller-differential.ts",
+    "cli": "scripts/compare-v6-caller-reference.ts",
+    "test": "tests/v6-native-caller.test.ts",
+    "documentation": "docs/migration/v6-common-caller-oracle.md"
+  },
+  "generatorHashes": {
+    "scripts/export-v6-caller-reference.py": "54aaa019f472ae92e54f57f412dbba87ac267707eb59c086800d6b82904af238",
+    "scripts/v6-caller-host-boundary.py": "9147cc4c80bf374164f0e1498a65e85e53e9ed82521afffb4b9541e21ab6b2a5"
+  },
+  "nodeTests": {
+    "passed": 47,
+    "failed": 0,
+    "includes": {
+      "nativeComparisons": 44,
+      "provenance": 1,
+      "parentCases": 2
+    },
+    "durationMs": 3845.904743
+  },
+  "captureHostQualification": "The historical captures used a host adapting only the unused engine import, while common main and reasoning functions stayed intact. The repository reproduction uses an import dependency stub, with no AST transformation of any source.",
+  "freshReproductions": [
+    {
+      "fixture": "tests/fixtures/v6-native-caller/hano-first-prefix.json",
+      "originalProposalsEqualToRetained": true,
+      "publicProtocolEqualToRetained": true,
+      "oracleSha256": "17a74ba4b517ad43217281761344f1ef36555eb97a2742c29e22f7d58f8844ee",
+      "sourceVerification": {
+        "afterOriginalMain": true,
+        "beforeOriginalMain": true,
+        "normalizedManifestSha256": "06d0af589ee7b9c0766abea083166f05df1c74100b014ae45515e47ab2eadf0d",
+        "verification": "verify_source_manifest rejects byte/hash changes to every pinned manifest entry",
+        "verifiedOriginalFiles": 1786
+      },
+      "physicalActions": 2,
+      "levelsCompleted": 0,
+      "sealedPrefixes": 1,
+      "snapshots": 7,
+      "events": 62,
+      "wallSeconds": 37.95337533800193,
+      "nativeComparison": {
+        "schema": "v6-native-caller-differential.v1",
+        "oracle": {
+          "engineArchiveSha256": "44d108fe4feed3ce0c9587e90f071876b13730af8136cd54cbfa5c1562d87822",
+          "game": "HANO",
+          "gameId": "hano-c0000001",
+          "kind": "real_original_custom_game"
+        },
+        "qualifications": [
+          "Original main and per-transition memory were captured without source/AST modification.",
+          "This differential restores each original released-prefix checkpoint; it tests common acquisition, not complete strategy selection.",
+          "Selected-family acquisition is excluded here and verified by its separate original-family differential.",
+          "Original post-prefix WHY/ACT reports/facts/traces are in the fixture; this driver does not rerun those operations.",
+          "Source acquisitions outside the current coordinator remain explicitly listed and are not claimed as transferred."
+        ],
+        "passed": 15,
+        "failed": 0,
+        "checks": [
+          {
+            "label": "initial caller objects",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "initial caller facts",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "source checkpoint round-trip 1",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "acquisition returns at revision 1",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller state before assessment at revision 1",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller facts before assessment at revision 1",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "full learning assessment at revision 1",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller state after acquisition at revision 2",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller facts after acquisition at revision 2",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "acquisition returns at revision 2",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller state before assessment at revision 2",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller facts before assessment at revision 2",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "full learning assessment at revision 2",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller state after acquisition at revision 3",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller facts after acquisition at revision 3",
+            "passed": true,
+            "differences": []
+          }
+        ],
+        "unsupported": [
+          {
+            "revision": 1,
+            "sourceWritesOutsideCoordinator": [
+              {
+                "key": "addressed_material_event:1",
+                "evidence": "run:epoch:1:revision:2:frame:dd9089663f52e835",
+                "revision": 2
+              },
+              {
+                "key": "framed_transfer_event:1",
+                "evidence": "run:epoch:1:revision:2:frame:dd9089663f52e835",
+                "revision": 2
+              },
+              {
+                "key": "ordered_support_state",
+                "evidence": "run:epoch:1:revision:2:frame:dd9089663f52e835",
+                "revision": 2
+              },
+              {
+                "key": "repeated_series_state",
+                "evidence": "run:epoch:1:revision:2:frame:dd9089663f52e835",
+                "revision": 2
+              },
+              {
+                "key": "support_navigation_event:1",
+                "evidence": "run:epoch:1:revision:2:frame:dd9089663f52e835",
+                "revision": 2
+              },
+              {
+                "key": "temporal_selection_state",
+                "evidence": "run:epoch:1:revision:2:frame:dd9089663f52e835",
+                "revision": 2
+              }
+            ]
+          },
+          {
+            "revision": 2,
+            "sourceWritesOutsideCoordinator": [
+              {
+                "key": "addressed_material_event:1",
+                "evidence": "run:epoch:1:revision:2:frame:dd9089663f52e835",
+                "revision": 2
+              },
+              {
+                "key": "addressed_material_event:2",
+                "evidence": "run:epoch:1:revision:3:frame:b4d48b14e12cfd69",
+                "revision": 3
+              },
+              {
+                "key": "framed_transfer_event:1",
+                "evidence": "run:epoch:1:revision:2:frame:dd9089663f52e835",
+                "revision": 2
+              },
+              {
+                "key": "framed_transfer_event:2",
+                "evidence": "run:epoch:1:revision:3:frame:b4d48b14e12cfd69",
+                "revision": 3
+              },
+              {
+                "key": "ordered_support_state",
+                "evidence": "run:epoch:1:revision:3:frame:b4d48b14e12cfd69",
+                "revision": 3
+              },
+              {
+                "key": "repeated_series_state",
+                "evidence": "run:epoch:1:revision:2:frame:dd9089663f52e835",
+                "revision": 2
+              },
+              {
+                "key": "support_navigation_event:1",
+                "evidence": "run:epoch:1:revision:2:frame:dd9089663f52e835",
+                "revision": 2
+              },
+              {
+                "key": "support_navigation_event:2",
+                "evidence": "run:epoch:1:revision:3:frame:b4d48b14e12cfd69",
+                "revision": 3
+              },
+              {
+                "key": "temporal_selection_state",
+                "evidence": "run:epoch:1:revision:3:frame:b4d48b14e12cfd69",
+                "revision": 3
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fixture": "tests/fixtures/v6-native-caller/viewport-three-prefixes.json",
+      "originalProposalsEqualToRetained": true,
+      "publicProtocolEqualToRetained": true,
+      "oracleSha256": "ebd97c7708830e875f5fc17c358db0258d3047ac5fdeb70c3131b637b9d0e2af",
+      "sourceVerification": {
+        "afterOriginalMain": true,
+        "beforeOriginalMain": true,
+        "normalizedManifestSha256": "06d0af589ee7b9c0766abea083166f05df1c74100b014ae45515e47ab2eadf0d",
+        "verification": "verify_source_manifest rejects byte/hash changes to every pinned manifest entry",
+        "verifiedOriginalFiles": 1786
+      },
+      "physicalActions": 3,
+      "levelsCompleted": 0,
+      "sealedPrefixes": 3,
+      "snapshots": 13,
+      "events": 109,
+      "wallSeconds": 53.066340885998216,
+      "nativeComparison": {
+        "schema": "v6-native-caller-differential.v1",
+        "oracle": {
+          "available": [
+            5
+          ],
+          "completionClaim": false,
+          "kind": "synthetic_public_protocol",
+          "purpose": "Original caller exploration, bulk registration, coverage and frontier acquisition"
+        },
+        "qualifications": [
+          "Original main and per-transition memory were captured without source/AST modification.",
+          "This differential restores each original released-prefix checkpoint; it tests common acquisition, not complete strategy selection.",
+          "Selected-family acquisition is excluded here and verified by its separate original-family differential.",
+          "Original post-prefix WHY/ACT reports/facts/traces are in the fixture; this driver does not rerun those operations.",
+          "Source acquisitions outside the current coordinator remain explicitly listed and are not claimed as transferred."
+        ],
+        "passed": 29,
+        "failed": 0,
+        "checks": [
+          {
+            "label": "initial caller objects",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "initial caller facts",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "source checkpoint round-trip 1",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "actual path guard at revision 1",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "actual outcome guard at revision 1",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "acquisition returns at revision 1",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller state before assessment at revision 1",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller facts before assessment at revision 1",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "full learning assessment at revision 1",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller state after acquisition at revision 2",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller facts after acquisition at revision 2",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "source checkpoint round-trip 2",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "actual path guard at revision 2",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "actual outcome guard at revision 2",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "acquisition returns at revision 2",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller state before assessment at revision 2",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller facts before assessment at revision 2",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "full learning assessment at revision 2",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller state after acquisition at revision 3",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller facts after acquisition at revision 3",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "source checkpoint round-trip 3",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "actual path guard at revision 3",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "actual outcome guard at revision 3",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "acquisition returns at revision 3",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller state before assessment at revision 3",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller facts before assessment at revision 3",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "full learning assessment at revision 3",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller state after acquisition at revision 4",
+            "passed": true,
+            "differences": []
+          },
+          {
+            "label": "caller facts after acquisition at revision 4",
+            "passed": true,
+            "differences": []
+          }
+        ],
+        "unsupported": [
+          {
+            "revision": 1,
+            "sourceWritesOutsideCoordinator": [
+              {
+                "key": "addressed_material_event:1",
+                "evidence": "run:epoch:1:revision:2:frame:15fd316c828d7dd7",
+                "revision": 2
+              },
+              {
+                "key": "repeated_series_state",
+                "evidence": "run:epoch:1:revision:2:frame:15fd316c828d7dd7",
+                "revision": 2
+              },
+              {
+                "key": "temporal_selection_state",
+                "evidence": "run:epoch:1:revision:2:frame:15fd316c828d7dd7",
+                "revision": 2
+              }
+            ]
+          },
+          {
+            "revision": 2,
+            "sourceWritesOutsideCoordinator": [
+              {
+                "key": "addressed_material_event:2",
+                "evidence": "run:epoch:1:revision:3:frame:3cdba8b40ff2c2f1",
+                "revision": 3
+              }
+            ]
+          },
+          {
+            "revision": 3,
+            "sourceWritesOutsideCoordinator": [
+              {
+                "key": "addressed_material_event:3",
+                "evidence": "run:epoch:1:revision:4:frame:20cc40167f2e9f9c",
+                "revision": 4
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
