@@ -8,12 +8,14 @@
     "sourceFiles": {
       "generators.src": "e5c9e07eaa050941a8def83884c3b5dca3c9e4a35c9a88157a0441ad05cd8ac7",
       "activation.src": "369058af44c77253b981a1a410eb45add33eb1e94820b272b084f995c0acedec",
+      "experiment.src": "ac34b875c22c17badb897248ecdd025ffde13064c66e7061fa3e8674ccc2a4fc",
       "knowledge.logos.json": "f632bf589cde404719d372034d5f1aefd994955dce8c782cf3ab60f1f2b0c96c",
       "knowledge.drm.json": "c2eeef389cd37c4e1205dd17dac9b20b5d71da9110329abea4285cd729ef4541"
     },
     "workflowHashes": {
       "generators": "f0de438de88bd021c302159df145d2746622c96d7056bc587825fee4b1d9dd01",
-      "activation": "2b7badcdecc3be92a3d668737549c9d223cd3995c12d62e7d96adac7a37f15fb"
+      "activation": "2b7badcdecc3be92a3d668737549c9d223cd3995c12d62e7d96adac7a37f15fb",
+      "experiment": "e3057f045e437373fc3bdb79ab1726162b4fa3bf617c30406d9df4bdfd8f9609"
     },
     "pythonSourceManifest": "reference/v7/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/python-sources.json",
     "pythonSourceManifestSha256": "c9fbf55afaeca119a751c4a54e13399b4a7b9b21375ecde417e34b9a210c19d6",
@@ -6129,6 +6131,3493 @@
         }
       ],
       "schema_version": "yf_arc3_v5.src_ir.v0_1"
+    },
+    "experiment": {
+      "module_id": "prototype.v7_experiment",
+      "source_name": "agents/yf_arc3_v7/experiment.src",
+      "source_hash": "ac34b875c22c17badb897248ecdd025ffde13064c66e7061fa3e8674ccc2a4fc",
+      "semantic_hash": "9a20790a818527456c08998c77da71cb9373a62265fadc131a99d9bd8ba4e7fa",
+      "imports": [],
+      "workflows": [
+        {
+          "id": "prototype.v7_experiment.choose",
+          "entry_step_id": "prototype.v7_experiment.choose.availability",
+          "inputs": [
+            {
+              "name": "request",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            }
+          ],
+          "outputs": [
+            {
+              "name": "result",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            }
+          ],
+          "state": [
+            {
+              "name": "memory",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "questions",
+              "type_spec": {
+                "name": "List",
+                "arguments": [
+                  {
+                    "name": "Any",
+                    "arguments": [],
+                    "optional": false
+                  }
+                ],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "transitions",
+              "type_spec": {
+                "name": "List",
+                "arguments": [
+                  {
+                    "name": "Any",
+                    "arguments": [],
+                    "optional": false
+                  }
+                ],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "scope_matches",
+              "type_spec": {
+                "name": "Boolean",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "context_matches",
+              "type_spec": {
+                "name": "Boolean",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "question_eligible",
+              "type_spec": {
+                "name": "Boolean",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "binding",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "trials",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "context_trials",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "option",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "found",
+              "type_spec": {
+                "name": "Boolean",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "replace",
+              "type_spec": {
+                "name": "Boolean",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "best_question",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "best_binding",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "best_trials",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "best_option",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "rank_key",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "best_rank",
+              "type_spec": {
+                "name": "Any",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "experiment_disabled",
+              "type_spec": {
+                "name": "Boolean",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            },
+            {
+              "name": "options_disabled",
+              "type_spec": {
+                "name": "Boolean",
+                "arguments": [],
+                "optional": false
+              },
+              "default": null
+            }
+          ],
+          "steps": [
+            {
+              "id": "prototype.v7_experiment.choose.availability",
+              "statements": [
+                {
+                  "id": "prototype.v7_experiment.choose.availability.s0000",
+                  "kind": "CALL",
+                  "target": null,
+                  "expression": {
+                    "kind": "call",
+                    "value": "v7.value",
+                    "items": [],
+                    "arguments": [
+                      {
+                        "name": "value",
+                        "value": {
+                          "kind": "reference",
+                          "value": "request.memory",
+                          "items": [],
+                          "arguments": []
+                        }
+                      }
+                    ]
+                  },
+                  "type_annotation": null,
+                  "result_binding": "memory",
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                },
+                {
+                  "id": "prototype.v7_experiment.choose.availability.s0001",
+                  "kind": "CALL",
+                  "target": null,
+                  "expression": {
+                    "kind": "call",
+                    "value": "v7.contains",
+                    "items": [],
+                    "arguments": [
+                      {
+                        "name": "items",
+                        "value": {
+                          "kind": "reference",
+                          "value": "request.availability.selection.disabled_kinds",
+                          "items": [],
+                          "arguments": []
+                        }
+                      },
+                      {
+                        "name": "value",
+                        "value": {
+                          "kind": "string",
+                          "value": "experiment",
+                          "items": [],
+                          "arguments": []
+                        }
+                      }
+                    ]
+                  },
+                  "type_annotation": null,
+                  "result_binding": "experiment_disabled",
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                },
+                {
+                  "id": "prototype.v7_experiment.choose.availability.s0002",
+                  "kind": "IF",
+                  "target": null,
+                  "expression": {
+                    "kind": "reference",
+                    "value": "experiment_disabled",
+                    "items": [],
+                    "arguments": []
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [
+                    {
+                      "id": "prototype.v7_experiment.choose.availability.s0002.body.s0000",
+                      "kind": "STOP",
+                      "target": null,
+                      "expression": {
+                        "kind": "reference",
+                        "value": "memory",
+                        "items": [],
+                        "arguments": []
+                      },
+                      "type_annotation": null,
+                      "result_binding": null,
+                      "clauses": [],
+                      "body": [],
+                      "else_body": [],
+                      "match_arms": [],
+                      "iterator": null,
+                      "loop_contract": null
+                    }
+                  ],
+                  "else_body": [
+                    {
+                      "id": "prototype.v7_experiment.choose.availability.s0002.else.s0000",
+                      "kind": "NEXT",
+                      "target": null,
+                      "expression": {
+                        "kind": "reference",
+                        "value": "option_availability",
+                        "items": [],
+                        "arguments": []
+                      },
+                      "type_annotation": null,
+                      "result_binding": null,
+                      "clauses": [],
+                      "body": [],
+                      "else_body": [],
+                      "match_arms": [],
+                      "iterator": null,
+                      "loop_contract": null
+                    }
+                  ],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                }
+              ]
+            },
+            {
+              "id": "prototype.v7_experiment.choose.option_availability",
+              "statements": [
+                {
+                  "id": "prototype.v7_experiment.choose.option_availability.s0000",
+                  "kind": "CALL",
+                  "target": null,
+                  "expression": {
+                    "kind": "call",
+                    "value": "v7.contains",
+                    "items": [],
+                    "arguments": [
+                      {
+                        "name": "items",
+                        "value": {
+                          "kind": "reference",
+                          "value": "request.availability.selection.disabled_kinds",
+                          "items": [],
+                          "arguments": []
+                        }
+                      },
+                      {
+                        "name": "value",
+                        "value": {
+                          "kind": "string",
+                          "value": "experiment_option",
+                          "items": [],
+                          "arguments": []
+                        }
+                      }
+                    ]
+                  },
+                  "type_annotation": null,
+                  "result_binding": "options_disabled",
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                },
+                {
+                  "id": "prototype.v7_experiment.choose.option_availability.s0001",
+                  "kind": "IF",
+                  "target": null,
+                  "expression": {
+                    "kind": "reference",
+                    "value": "options_disabled",
+                    "items": [],
+                    "arguments": []
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [
+                    {
+                      "id": "prototype.v7_experiment.choose.option_availability.s0001.body.s0000",
+                      "kind": "STOP",
+                      "target": null,
+                      "expression": {
+                        "kind": "reference",
+                        "value": "memory",
+                        "items": [],
+                        "arguments": []
+                      },
+                      "type_annotation": null,
+                      "result_binding": null,
+                      "clauses": [],
+                      "body": [],
+                      "else_body": [],
+                      "match_arms": [],
+                      "iterator": null,
+                      "loop_contract": null
+                    }
+                  ],
+                  "else_body": [
+                    {
+                      "id": "prototype.v7_experiment.choose.option_availability.s0001.else.s0000",
+                      "kind": "NEXT",
+                      "target": null,
+                      "expression": {
+                        "kind": "reference",
+                        "value": "begin",
+                        "items": [],
+                        "arguments": []
+                      },
+                      "type_annotation": null,
+                      "result_binding": null,
+                      "clauses": [],
+                      "body": [],
+                      "else_body": [],
+                      "match_arms": [],
+                      "iterator": null,
+                      "loop_contract": null
+                    }
+                  ],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                }
+              ]
+            },
+            {
+              "id": "prototype.v7_experiment.choose.begin",
+              "statements": [
+                {
+                  "id": "prototype.v7_experiment.choose.begin.s0000",
+                  "kind": "CALL",
+                  "target": null,
+                  "expression": {
+                    "kind": "call",
+                    "value": "v7.value",
+                    "items": [],
+                    "arguments": [
+                      {
+                        "name": "value",
+                        "value": {
+                          "kind": "reference",
+                          "value": "request.memory",
+                          "items": [],
+                          "arguments": []
+                        }
+                      }
+                    ]
+                  },
+                  "type_annotation": null,
+                  "result_binding": "memory",
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                },
+                {
+                  "id": "prototype.v7_experiment.choose.begin.s0001",
+                  "kind": "CALL",
+                  "target": null,
+                  "expression": {
+                    "kind": "call",
+                    "value": "v7.value",
+                    "items": [],
+                    "arguments": [
+                      {
+                        "name": "value",
+                        "value": {
+                          "kind": "boolean",
+                          "value": false,
+                          "items": [],
+                          "arguments": []
+                        }
+                      }
+                    ]
+                  },
+                  "type_annotation": null,
+                  "result_binding": "found",
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                },
+                {
+                  "id": "prototype.v7_experiment.choose.begin.s0002",
+                  "kind": "CALL",
+                  "target": null,
+                  "expression": {
+                    "kind": "call",
+                    "value": "v7.select_active",
+                    "items": [],
+                    "arguments": [
+                      {
+                        "name": "memory",
+                        "value": {
+                          "kind": "reference",
+                          "value": "memory",
+                          "items": [],
+                          "arguments": []
+                        }
+                      },
+                      {
+                        "name": "kind",
+                        "value": {
+                          "kind": "string",
+                          "value": "question",
+                          "items": [],
+                          "arguments": []
+                        }
+                      },
+                      {
+                        "name": "selection",
+                        "value": {
+                          "kind": "reference",
+                          "value": "request.availability.selection",
+                          "items": [],
+                          "arguments": []
+                        }
+                      },
+                      {
+                        "name": "dependency_fields",
+                        "value": {
+                          "kind": "reference",
+                          "value": "request.availability.dependency_fields",
+                          "items": [],
+                          "arguments": []
+                        }
+                      }
+                    ]
+                  },
+                  "type_annotation": null,
+                  "result_binding": "questions",
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                },
+                {
+                  "id": "prototype.v7_experiment.choose.begin.s0003",
+                  "kind": "CALL",
+                  "target": null,
+                  "expression": {
+                    "kind": "call",
+                    "value": "v7.select_active",
+                    "items": [],
+                    "arguments": [
+                      {
+                        "name": "memory",
+                        "value": {
+                          "kind": "reference",
+                          "value": "memory",
+                          "items": [],
+                          "arguments": []
+                        }
+                      },
+                      {
+                        "name": "kind",
+                        "value": {
+                          "kind": "string",
+                          "value": "transition",
+                          "items": [],
+                          "arguments": []
+                        }
+                      },
+                      {
+                        "name": "selection",
+                        "value": {
+                          "kind": "reference",
+                          "value": "request.availability.selection",
+                          "items": [],
+                          "arguments": []
+                        }
+                      },
+                      {
+                        "name": "dependency_fields",
+                        "value": {
+                          "kind": "reference",
+                          "value": "request.availability.dependency_fields",
+                          "items": [],
+                          "arguments": []
+                        }
+                      }
+                    ]
+                  },
+                  "type_annotation": null,
+                  "result_binding": "transitions",
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                },
+                {
+                  "id": "prototype.v7_experiment.choose.begin.s0004",
+                  "kind": "NEXT",
+                  "target": null,
+                  "expression": {
+                    "kind": "reference",
+                    "value": "rank",
+                    "items": [],
+                    "arguments": []
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                }
+              ]
+            },
+            {
+              "id": "prototype.v7_experiment.choose.rank",
+              "statements": [
+                {
+                  "id": "prototype.v7_experiment.choose.rank.s0000",
+                  "kind": "FOR_EACH",
+                  "target": null,
+                  "expression": {
+                    "kind": "reference",
+                    "value": "questions",
+                    "items": [],
+                    "arguments": []
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [
+                    {
+                      "id": "prototype.v7_experiment.choose.rank.s0000.body.s0000",
+                      "kind": "CALL",
+                      "target": null,
+                      "expression": {
+                        "kind": "call",
+                        "value": "v7.equal",
+                        "items": [],
+                        "arguments": [
+                          {
+                            "name": "left",
+                            "value": {
+                              "kind": "reference",
+                              "value": "question.scope",
+                              "items": [],
+                              "arguments": []
+                            }
+                          },
+                          {
+                            "name": "right",
+                            "value": {
+                              "kind": "reference",
+                              "value": "request.observation.scope",
+                              "items": [],
+                              "arguments": []
+                            }
+                          }
+                        ]
+                      },
+                      "type_annotation": null,
+                      "result_binding": "scope_matches",
+                      "clauses": [],
+                      "body": [],
+                      "else_body": [],
+                      "match_arms": [],
+                      "iterator": null,
+                      "loop_contract": null
+                    },
+                    {
+                      "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001",
+                      "kind": "IF",
+                      "target": null,
+                      "expression": {
+                        "kind": "reference",
+                        "value": "scope_matches",
+                        "items": [],
+                        "arguments": []
+                      },
+                      "type_annotation": null,
+                      "result_binding": null,
+                      "clauses": [],
+                      "body": [
+                        {
+                          "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0000",
+                          "kind": "CALL",
+                          "target": null,
+                          "expression": {
+                            "kind": "call",
+                            "value": "v7.equal",
+                            "items": [],
+                            "arguments": [
+                              {
+                                "name": "left",
+                                "value": {
+                                  "kind": "reference",
+                                  "value": "question.context",
+                                  "items": [],
+                                  "arguments": []
+                                }
+                              },
+                              {
+                                "name": "right",
+                                "value": {
+                                  "kind": "reference",
+                                  "value": "request.observation.values",
+                                  "items": [],
+                                  "arguments": []
+                                }
+                              }
+                            ]
+                          },
+                          "type_annotation": null,
+                          "result_binding": "context_matches",
+                          "clauses": [],
+                          "body": [],
+                          "else_body": [],
+                          "match_arms": [],
+                          "iterator": null,
+                          "loop_contract": null
+                        },
+                        {
+                          "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001",
+                          "kind": "IF",
+                          "target": null,
+                          "expression": {
+                            "kind": "reference",
+                            "value": "context_matches",
+                            "items": [],
+                            "arguments": []
+                          },
+                          "type_annotation": null,
+                          "result_binding": null,
+                          "clauses": [],
+                          "body": [
+                            {
+                              "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0000",
+                              "kind": "CALL",
+                              "target": null,
+                              "expression": {
+                                "kind": "call",
+                                "value": "v7.contains",
+                                "items": [],
+                                "arguments": [
+                                  {
+                                    "name": "items",
+                                    "value": {
+                                      "kind": "reference",
+                                      "value": "request.policy.eligible_question_statuses",
+                                      "items": [],
+                                      "arguments": []
+                                    }
+                                  },
+                                  {
+                                    "name": "value",
+                                    "value": {
+                                      "kind": "reference",
+                                      "value": "question.status",
+                                      "items": [],
+                                      "arguments": []
+                                    }
+                                  }
+                                ]
+                              },
+                              "type_annotation": null,
+                              "result_binding": "question_eligible",
+                              "clauses": [],
+                              "body": [],
+                              "else_body": [],
+                              "match_arms": [],
+                              "iterator": null,
+                              "loop_contract": null
+                            },
+                            {
+                              "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001",
+                              "kind": "IF",
+                              "target": null,
+                              "expression": {
+                                "kind": "reference",
+                                "value": "question_eligible",
+                                "items": [],
+                                "arguments": []
+                              },
+                              "type_annotation": null,
+                              "result_binding": null,
+                              "clauses": [],
+                              "body": [
+                                {
+                                  "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0000",
+                                  "kind": "CALL",
+                                  "target": null,
+                                  "expression": {
+                                    "kind": "call",
+                                    "value": "v7.get",
+                                    "items": [],
+                                    "arguments": [
+                                      {
+                                        "name": "mapping",
+                                        "value": {
+                                          "kind": "reference",
+                                          "value": "request.bindings",
+                                          "items": [],
+                                          "arguments": []
+                                        }
+                                      },
+                                      {
+                                        "name": "key",
+                                        "value": {
+                                          "kind": "reference",
+                                          "value": "question.action",
+                                          "items": [],
+                                          "arguments": []
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "type_annotation": null,
+                                  "result_binding": "binding",
+                                  "clauses": [],
+                                  "body": [],
+                                  "else_body": [],
+                                  "match_arms": [],
+                                  "iterator": null,
+                                  "loop_contract": null
+                                },
+                                {
+                                  "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0001",
+                                  "kind": "CALL",
+                                  "target": null,
+                                  "expression": {
+                                    "kind": "call",
+                                    "value": "v7.count_matching",
+                                    "items": [],
+                                    "arguments": [
+                                      {
+                                        "name": "items",
+                                        "value": {
+                                          "kind": "reference",
+                                          "value": "transitions",
+                                          "items": [],
+                                          "arguments": []
+                                        }
+                                      },
+                                      {
+                                        "name": "selectors",
+                                        "value": {
+                                          "kind": "list",
+                                          "value": null,
+                                          "items": [
+                                            {
+                                              "kind": "list",
+                                              "value": null,
+                                              "items": [
+                                                {
+                                                  "kind": "string",
+                                                  "value": "scope",
+                                                  "items": [],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "reference",
+                                                  "value": "question.scope",
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              ],
+                                              "arguments": []
+                                            },
+                                            {
+                                              "kind": "list",
+                                              "value": null,
+                                              "items": [
+                                                {
+                                                  "kind": "string",
+                                                  "value": "action",
+                                                  "items": [],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "reference",
+                                                  "value": "question.action",
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              ],
+                                              "arguments": []
+                                            }
+                                          ],
+                                          "arguments": []
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "type_annotation": null,
+                                  "result_binding": "trials",
+                                  "clauses": [],
+                                  "body": [],
+                                  "else_body": [],
+                                  "match_arms": [],
+                                  "iterator": null,
+                                  "loop_contract": null
+                                },
+                                {
+                                  "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0002",
+                                  "kind": "CALL",
+                                  "target": null,
+                                  "expression": {
+                                    "kind": "call",
+                                    "value": "v7.count_matching",
+                                    "items": [],
+                                    "arguments": [
+                                      {
+                                        "name": "items",
+                                        "value": {
+                                          "kind": "reference",
+                                          "value": "transitions",
+                                          "items": [],
+                                          "arguments": []
+                                        }
+                                      },
+                                      {
+                                        "name": "selectors",
+                                        "value": {
+                                          "kind": "list",
+                                          "value": null,
+                                          "items": [
+                                            {
+                                              "kind": "list",
+                                              "value": null,
+                                              "items": [
+                                                {
+                                                  "kind": "string",
+                                                  "value": "scope",
+                                                  "items": [],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "reference",
+                                                  "value": "question.scope",
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              ],
+                                              "arguments": []
+                                            },
+                                            {
+                                              "kind": "list",
+                                              "value": null,
+                                              "items": [
+                                                {
+                                                  "kind": "string",
+                                                  "value": "action",
+                                                  "items": [],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "reference",
+                                                  "value": "question.action",
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              ],
+                                              "arguments": []
+                                            },
+                                            {
+                                              "kind": "list",
+                                              "value": null,
+                                              "items": [
+                                                {
+                                                  "kind": "string",
+                                                  "value": "context",
+                                                  "items": [],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "reference",
+                                                  "value": "question.context",
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              ],
+                                              "arguments": []
+                                            }
+                                          ],
+                                          "arguments": []
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "type_annotation": null,
+                                  "result_binding": "context_trials",
+                                  "clauses": [],
+                                  "body": [],
+                                  "else_body": [],
+                                  "match_arms": [],
+                                  "iterator": null,
+                                  "loop_contract": null
+                                },
+                                {
+                                  "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0003",
+                                  "kind": "CALL",
+                                  "target": null,
+                                  "expression": {
+                                    "kind": "call",
+                                    "value": "v7.identity",
+                                    "items": [],
+                                    "arguments": [
+                                      {
+                                        "name": "template",
+                                        "value": {
+                                          "kind": "string",
+                                          "value": "experiment_option",
+                                          "items": [],
+                                          "arguments": []
+                                        }
+                                      },
+                                      {
+                                        "name": "bindings",
+                                        "value": {
+                                          "kind": "list",
+                                          "value": null,
+                                          "items": [
+                                            {
+                                              "kind": "list",
+                                              "value": null,
+                                              "items": [
+                                                {
+                                                  "kind": "string",
+                                                  "value": "observation",
+                                                  "items": [],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "reference",
+                                                  "value": "request.observation",
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              ],
+                                              "arguments": []
+                                            },
+                                            {
+                                              "kind": "list",
+                                              "value": null,
+                                              "items": [
+                                                {
+                                                  "kind": "string",
+                                                  "value": "question",
+                                                  "items": [],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "reference",
+                                                  "value": "question",
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              ],
+                                              "arguments": []
+                                            },
+                                            {
+                                              "kind": "list",
+                                              "value": null,
+                                              "items": [
+                                                {
+                                                  "kind": "string",
+                                                  "value": "basis",
+                                                  "items": [],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "reference",
+                                                  "value": "request.basis",
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              ],
+                                              "arguments": []
+                                            }
+                                          ],
+                                          "arguments": []
+                                        }
+                                      }
+                                    ]
+                                  },
+                                  "type_annotation": null,
+                                  "result_binding": "option",
+                                  "clauses": [],
+                                  "body": [],
+                                  "else_body": [],
+                                  "match_arms": [],
+                                  "iterator": null,
+                                  "loop_contract": null
+                                },
+                                {
+                                  "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004",
+                                  "kind": "IF",
+                                  "target": null,
+                                  "expression": {
+                                    "kind": "reference",
+                                    "value": "binding.grounded",
+                                    "items": [],
+                                    "arguments": []
+                                  },
+                                  "type_annotation": null,
+                                  "result_binding": null,
+                                  "clauses": [],
+                                  "body": [
+                                    {
+                                      "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0000",
+                                      "kind": "CALL",
+                                      "target": null,
+                                      "expression": {
+                                        "kind": "call",
+                                        "value": "v7.emit",
+                                        "items": [],
+                                        "arguments": [
+                                          {
+                                            "name": "memory",
+                                            "value": {
+                                              "kind": "reference",
+                                              "value": "memory",
+                                              "items": [],
+                                              "arguments": []
+                                            }
+                                          },
+                                          {
+                                            "name": "template",
+                                            "value": {
+                                              "kind": "string",
+                                              "value": "experiment_option",
+                                              "items": [],
+                                              "arguments": []
+                                            }
+                                          },
+                                          {
+                                            "name": "bindings",
+                                            "value": {
+                                              "kind": "list",
+                                              "value": null,
+                                              "items": [
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "observation",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "reference",
+                                                      "value": "request.observation",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "question",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "reference",
+                                                      "value": "question",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "basis",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "reference",
+                                                      "value": "request.basis",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "status",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "eligible",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "trials",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "reference",
+                                                      "value": "trials",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "grounding",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "reference",
+                                                      "value": "binding.reason",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "observation_node",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "reference",
+                                                      "value": "request.observation_node",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                }
+                                              ],
+                                              "arguments": []
+                                            }
+                                          }
+                                        ]
+                                      },
+                                      "type_annotation": null,
+                                      "result_binding": "memory",
+                                      "clauses": [],
+                                      "body": [],
+                                      "else_body": [],
+                                      "match_arms": [],
+                                      "iterator": null,
+                                      "loop_contract": null
+                                    },
+                                    {
+                                      "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0001",
+                                      "kind": "CALL",
+                                      "target": null,
+                                      "expression": {
+                                        "kind": "call",
+                                        "value": "v7.substitute",
+                                        "items": [],
+                                        "arguments": [
+                                          {
+                                            "name": "pattern",
+                                            "value": {
+                                              "kind": "reference",
+                                              "value": "request.policy.order",
+                                              "items": [],
+                                              "arguments": []
+                                            }
+                                          },
+                                          {
+                                            "name": "bindings",
+                                            "value": {
+                                              "kind": "list",
+                                              "value": null,
+                                              "items": [
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "context_trials",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "reference",
+                                                      "value": "context_trials",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "trials",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "reference",
+                                                      "value": "trials",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "action",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "reference",
+                                                      "value": "question.action",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                }
+                                              ],
+                                              "arguments": []
+                                            }
+                                          }
+                                        ]
+                                      },
+                                      "type_annotation": null,
+                                      "result_binding": "rank_key",
+                                      "clauses": [],
+                                      "body": [],
+                                      "else_body": [],
+                                      "match_arms": [],
+                                      "iterator": null,
+                                      "loop_contract": null
+                                    },
+                                    {
+                                      "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0002",
+                                      "kind": "IF",
+                                      "target": null,
+                                      "expression": {
+                                        "kind": "reference",
+                                        "value": "found",
+                                        "items": [],
+                                        "arguments": []
+                                      },
+                                      "type_annotation": null,
+                                      "result_binding": null,
+                                      "clauses": [],
+                                      "body": [
+                                        {
+                                          "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0002.body.s0000",
+                                          "kind": "CALL",
+                                          "target": null,
+                                          "expression": {
+                                            "kind": "call",
+                                            "value": "v7.less",
+                                            "items": [],
+                                            "arguments": [
+                                              {
+                                                "name": "left",
+                                                "value": {
+                                                  "kind": "reference",
+                                                  "value": "rank_key",
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              },
+                                              {
+                                                "name": "right",
+                                                "value": {
+                                                  "kind": "reference",
+                                                  "value": "best_rank",
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          "type_annotation": null,
+                                          "result_binding": "replace",
+                                          "clauses": [],
+                                          "body": [],
+                                          "else_body": [],
+                                          "match_arms": [],
+                                          "iterator": null,
+                                          "loop_contract": null
+                                        }
+                                      ],
+                                      "else_body": [
+                                        {
+                                          "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0002.else.s0000",
+                                          "kind": "CALL",
+                                          "target": null,
+                                          "expression": {
+                                            "kind": "call",
+                                            "value": "v7.value",
+                                            "items": [],
+                                            "arguments": [
+                                              {
+                                                "name": "value",
+                                                "value": {
+                                                  "kind": "boolean",
+                                                  "value": true,
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          "type_annotation": null,
+                                          "result_binding": "replace",
+                                          "clauses": [],
+                                          "body": [],
+                                          "else_body": [],
+                                          "match_arms": [],
+                                          "iterator": null,
+                                          "loop_contract": null
+                                        }
+                                      ],
+                                      "match_arms": [],
+                                      "iterator": null,
+                                      "loop_contract": null
+                                    },
+                                    {
+                                      "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0003",
+                                      "kind": "IF",
+                                      "target": null,
+                                      "expression": {
+                                        "kind": "reference",
+                                        "value": "replace",
+                                        "items": [],
+                                        "arguments": []
+                                      },
+                                      "type_annotation": null,
+                                      "result_binding": null,
+                                      "clauses": [],
+                                      "body": [
+                                        {
+                                          "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0003.body.s0000",
+                                          "kind": "CALL",
+                                          "target": null,
+                                          "expression": {
+                                            "kind": "call",
+                                            "value": "v7.value",
+                                            "items": [],
+                                            "arguments": [
+                                              {
+                                                "name": "value",
+                                                "value": {
+                                                  "kind": "reference",
+                                                  "value": "question",
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          "type_annotation": null,
+                                          "result_binding": "best_question",
+                                          "clauses": [],
+                                          "body": [],
+                                          "else_body": [],
+                                          "match_arms": [],
+                                          "iterator": null,
+                                          "loop_contract": null
+                                        },
+                                        {
+                                          "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0003.body.s0001",
+                                          "kind": "CALL",
+                                          "target": null,
+                                          "expression": {
+                                            "kind": "call",
+                                            "value": "v7.value",
+                                            "items": [],
+                                            "arguments": [
+                                              {
+                                                "name": "value",
+                                                "value": {
+                                                  "kind": "reference",
+                                                  "value": "binding",
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          "type_annotation": null,
+                                          "result_binding": "best_binding",
+                                          "clauses": [],
+                                          "body": [],
+                                          "else_body": [],
+                                          "match_arms": [],
+                                          "iterator": null,
+                                          "loop_contract": null
+                                        },
+                                        {
+                                          "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0003.body.s0002",
+                                          "kind": "CALL",
+                                          "target": null,
+                                          "expression": {
+                                            "kind": "call",
+                                            "value": "v7.value",
+                                            "items": [],
+                                            "arguments": [
+                                              {
+                                                "name": "value",
+                                                "value": {
+                                                  "kind": "reference",
+                                                  "value": "trials",
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          "type_annotation": null,
+                                          "result_binding": "best_trials",
+                                          "clauses": [],
+                                          "body": [],
+                                          "else_body": [],
+                                          "match_arms": [],
+                                          "iterator": null,
+                                          "loop_contract": null
+                                        },
+                                        {
+                                          "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0003.body.s0003",
+                                          "kind": "CALL",
+                                          "target": null,
+                                          "expression": {
+                                            "kind": "call",
+                                            "value": "v7.value",
+                                            "items": [],
+                                            "arguments": [
+                                              {
+                                                "name": "value",
+                                                "value": {
+                                                  "kind": "reference",
+                                                  "value": "option",
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          "type_annotation": null,
+                                          "result_binding": "best_option",
+                                          "clauses": [],
+                                          "body": [],
+                                          "else_body": [],
+                                          "match_arms": [],
+                                          "iterator": null,
+                                          "loop_contract": null
+                                        },
+                                        {
+                                          "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0003.body.s0004",
+                                          "kind": "CALL",
+                                          "target": null,
+                                          "expression": {
+                                            "kind": "call",
+                                            "value": "v7.value",
+                                            "items": [],
+                                            "arguments": [
+                                              {
+                                                "name": "value",
+                                                "value": {
+                                                  "kind": "reference",
+                                                  "value": "rank_key",
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          "type_annotation": null,
+                                          "result_binding": "best_rank",
+                                          "clauses": [],
+                                          "body": [],
+                                          "else_body": [],
+                                          "match_arms": [],
+                                          "iterator": null,
+                                          "loop_contract": null
+                                        },
+                                        {
+                                          "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0003.body.s0005",
+                                          "kind": "CALL",
+                                          "target": null,
+                                          "expression": {
+                                            "kind": "call",
+                                            "value": "v7.value",
+                                            "items": [],
+                                            "arguments": [
+                                              {
+                                                "name": "value",
+                                                "value": {
+                                                  "kind": "boolean",
+                                                  "value": true,
+                                                  "items": [],
+                                                  "arguments": []
+                                                }
+                                              }
+                                            ]
+                                          },
+                                          "type_annotation": null,
+                                          "result_binding": "found",
+                                          "clauses": [],
+                                          "body": [],
+                                          "else_body": [],
+                                          "match_arms": [],
+                                          "iterator": null,
+                                          "loop_contract": null
+                                        }
+                                      ],
+                                      "else_body": [],
+                                      "match_arms": [],
+                                      "iterator": null,
+                                      "loop_contract": null
+                                    }
+                                  ],
+                                  "else_body": [
+                                    {
+                                      "id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.else.s0000",
+                                      "kind": "CALL",
+                                      "target": null,
+                                      "expression": {
+                                        "kind": "call",
+                                        "value": "v7.emit",
+                                        "items": [],
+                                        "arguments": [
+                                          {
+                                            "name": "memory",
+                                            "value": {
+                                              "kind": "reference",
+                                              "value": "memory",
+                                              "items": [],
+                                              "arguments": []
+                                            }
+                                          },
+                                          {
+                                            "name": "template",
+                                            "value": {
+                                              "kind": "string",
+                                              "value": "experiment_option",
+                                              "items": [],
+                                              "arguments": []
+                                            }
+                                          },
+                                          {
+                                            "name": "bindings",
+                                            "value": {
+                                              "kind": "list",
+                                              "value": null,
+                                              "items": [
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "observation",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "reference",
+                                                      "value": "request.observation",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "question",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "reference",
+                                                      "value": "question",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "basis",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "reference",
+                                                      "value": "request.basis",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "status",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "deferred",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "trials",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "reference",
+                                                      "value": "trials",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "grounding",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "reference",
+                                                      "value": "binding.reason",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                },
+                                                {
+                                                  "kind": "list",
+                                                  "value": null,
+                                                  "items": [
+                                                    {
+                                                      "kind": "string",
+                                                      "value": "observation_node",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    },
+                                                    {
+                                                      "kind": "reference",
+                                                      "value": "request.observation_node",
+                                                      "items": [],
+                                                      "arguments": []
+                                                    }
+                                                  ],
+                                                  "arguments": []
+                                                }
+                                              ],
+                                              "arguments": []
+                                            }
+                                          }
+                                        ]
+                                      },
+                                      "type_annotation": null,
+                                      "result_binding": "memory",
+                                      "clauses": [],
+                                      "body": [],
+                                      "else_body": [],
+                                      "match_arms": [],
+                                      "iterator": null,
+                                      "loop_contract": null
+                                    }
+                                  ],
+                                  "match_arms": [],
+                                  "iterator": null,
+                                  "loop_contract": null
+                                }
+                              ],
+                              "else_body": [],
+                              "match_arms": [],
+                              "iterator": null,
+                              "loop_contract": null
+                            }
+                          ],
+                          "else_body": [],
+                          "match_arms": [],
+                          "iterator": null,
+                          "loop_contract": null
+                        }
+                      ],
+                      "else_body": [],
+                      "match_arms": [],
+                      "iterator": null,
+                      "loop_contract": null
+                    }
+                  ],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": "question",
+                  "loop_contract": null
+                },
+                {
+                  "id": "prototype.v7_experiment.choose.rank.s0001",
+                  "kind": "NEXT",
+                  "target": null,
+                  "expression": {
+                    "kind": "reference",
+                    "value": "propose",
+                    "items": [],
+                    "arguments": []
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                }
+              ]
+            },
+            {
+              "id": "prototype.v7_experiment.choose.propose",
+              "statements": [
+                {
+                  "id": "prototype.v7_experiment.choose.propose.s0000",
+                  "kind": "IF",
+                  "target": null,
+                  "expression": {
+                    "kind": "reference",
+                    "value": "found",
+                    "items": [],
+                    "arguments": []
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [
+                    {
+                      "id": "prototype.v7_experiment.choose.propose.s0000.body.s0000",
+                      "kind": "CALL",
+                      "target": null,
+                      "expression": {
+                        "kind": "call",
+                        "value": "v7.emit",
+                        "items": [],
+                        "arguments": [
+                          {
+                            "name": "memory",
+                            "value": {
+                              "kind": "reference",
+                              "value": "memory",
+                              "items": [],
+                              "arguments": []
+                            }
+                          },
+                          {
+                            "name": "template",
+                            "value": {
+                              "kind": "string",
+                              "value": "experiment",
+                              "items": [],
+                              "arguments": []
+                            }
+                          },
+                          {
+                            "name": "bindings",
+                            "value": {
+                              "kind": "list",
+                              "value": null,
+                              "items": [
+                                {
+                                  "kind": "list",
+                                  "value": null,
+                                  "items": [
+                                    {
+                                      "kind": "string",
+                                      "value": "observation",
+                                      "items": [],
+                                      "arguments": []
+                                    },
+                                    {
+                                      "kind": "reference",
+                                      "value": "request.observation",
+                                      "items": [],
+                                      "arguments": []
+                                    }
+                                  ],
+                                  "arguments": []
+                                },
+                                {
+                                  "kind": "list",
+                                  "value": null,
+                                  "items": [
+                                    {
+                                      "kind": "string",
+                                      "value": "question",
+                                      "items": [],
+                                      "arguments": []
+                                    },
+                                    {
+                                      "kind": "reference",
+                                      "value": "best_question",
+                                      "items": [],
+                                      "arguments": []
+                                    }
+                                  ],
+                                  "arguments": []
+                                },
+                                {
+                                  "kind": "list",
+                                  "value": null,
+                                  "items": [
+                                    {
+                                      "kind": "string",
+                                      "value": "option",
+                                      "items": [],
+                                      "arguments": []
+                                    },
+                                    {
+                                      "kind": "reference",
+                                      "value": "best_option",
+                                      "items": [],
+                                      "arguments": []
+                                    }
+                                  ],
+                                  "arguments": []
+                                },
+                                {
+                                  "kind": "list",
+                                  "value": null,
+                                  "items": [
+                                    {
+                                      "kind": "string",
+                                      "value": "binding",
+                                      "items": [],
+                                      "arguments": []
+                                    },
+                                    {
+                                      "kind": "reference",
+                                      "value": "best_binding",
+                                      "items": [],
+                                      "arguments": []
+                                    }
+                                  ],
+                                  "arguments": []
+                                },
+                                {
+                                  "kind": "list",
+                                  "value": null,
+                                  "items": [
+                                    {
+                                      "kind": "string",
+                                      "value": "trials",
+                                      "items": [],
+                                      "arguments": []
+                                    },
+                                    {
+                                      "kind": "reference",
+                                      "value": "best_trials",
+                                      "items": [],
+                                      "arguments": []
+                                    }
+                                  ],
+                                  "arguments": []
+                                },
+                                {
+                                  "kind": "list",
+                                  "value": null,
+                                  "items": [
+                                    {
+                                      "kind": "string",
+                                      "value": "policy",
+                                      "items": [],
+                                      "arguments": []
+                                    },
+                                    {
+                                      "kind": "reference",
+                                      "value": "request.policy",
+                                      "items": [],
+                                      "arguments": []
+                                    }
+                                  ],
+                                  "arguments": []
+                                },
+                                {
+                                  "kind": "list",
+                                  "value": null,
+                                  "items": [
+                                    {
+                                      "kind": "string",
+                                      "value": "basis",
+                                      "items": [],
+                                      "arguments": []
+                                    },
+                                    {
+                                      "kind": "reference",
+                                      "value": "request.basis",
+                                      "items": [],
+                                      "arguments": []
+                                    }
+                                  ],
+                                  "arguments": []
+                                },
+                                {
+                                  "kind": "list",
+                                  "value": null,
+                                  "items": [
+                                    {
+                                      "kind": "string",
+                                      "value": "observation_node",
+                                      "items": [],
+                                      "arguments": []
+                                    },
+                                    {
+                                      "kind": "reference",
+                                      "value": "request.observation_node",
+                                      "items": [],
+                                      "arguments": []
+                                    }
+                                  ],
+                                  "arguments": []
+                                }
+                              ],
+                              "arguments": []
+                            }
+                          }
+                        ]
+                      },
+                      "type_annotation": null,
+                      "result_binding": "memory",
+                      "clauses": [],
+                      "body": [],
+                      "else_body": [],
+                      "match_arms": [],
+                      "iterator": null,
+                      "loop_contract": null
+                    }
+                  ],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                },
+                {
+                  "id": "prototype.v7_experiment.choose.propose.s0001",
+                  "kind": "STOP",
+                  "target": null,
+                  "expression": {
+                    "kind": "reference",
+                    "value": "memory",
+                    "items": [],
+                    "arguments": []
+                  },
+                  "type_annotation": null,
+                  "result_binding": null,
+                  "clauses": [],
+                  "body": [],
+                  "else_body": [],
+                  "match_arms": [],
+                  "iterator": null,
+                  "loop_contract": null
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "authority_attestations": [
+        {
+          "authority_id": "v7.contains",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "prototype.v7.mechanical_kernel",
+          "source_hash": "c65c1b3e661eebe6a0449f902856a148a8e5ae53f359223739ed1af20216a392"
+        },
+        {
+          "authority_id": "v7.count_matching",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "prototype.v7.mechanical_kernel",
+          "source_hash": "c65c1b3e661eebe6a0449f902856a148a8e5ae53f359223739ed1af20216a392"
+        },
+        {
+          "authority_id": "v7.emit",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "prototype.v7.mechanical_kernel",
+          "source_hash": "c65c1b3e661eebe6a0449f902856a148a8e5ae53f359223739ed1af20216a392"
+        },
+        {
+          "authority_id": "v7.equal",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "prototype.v7.mechanical_kernel",
+          "source_hash": "c65c1b3e661eebe6a0449f902856a148a8e5ae53f359223739ed1af20216a392"
+        },
+        {
+          "authority_id": "v7.get",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "prototype.v7.mechanical_kernel",
+          "source_hash": "c65c1b3e661eebe6a0449f902856a148a8e5ae53f359223739ed1af20216a392"
+        },
+        {
+          "authority_id": "v7.identity",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "prototype.v7.mechanical_kernel",
+          "source_hash": "c65c1b3e661eebe6a0449f902856a148a8e5ae53f359223739ed1af20216a392"
+        },
+        {
+          "authority_id": "v7.less",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "prototype.v7.mechanical_kernel",
+          "source_hash": "c65c1b3e661eebe6a0449f902856a148a8e5ae53f359223739ed1af20216a392"
+        },
+        {
+          "authority_id": "v7.select_active",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "prototype.v7.mechanical_kernel",
+          "source_hash": "c65c1b3e661eebe6a0449f902856a148a8e5ae53f359223739ed1af20216a392"
+        },
+        {
+          "authority_id": "v7.substitute",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "prototype.v7.mechanical_kernel",
+          "source_hash": "c65c1b3e661eebe6a0449f902856a148a8e5ae53f359223739ed1af20216a392"
+        },
+        {
+          "authority_id": "v7.value",
+          "kind": "workflow",
+          "effect_class": "pure",
+          "source_unit": "prototype.v7.mechanical_kernel",
+          "source_hash": "c65c1b3e661eebe6a0449f902856a148a8e5ae53f359223739ed1af20216a392"
+        }
+      ],
+      "source_map": [
+        {
+          "node_id": "prototype.v7_experiment",
+          "construct_kind": "MODULE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 1,
+              "column": 1,
+              "offset": 0
+            },
+            "end": {
+              "line": 77,
+              "column": 1,
+              "offset": 4748
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose",
+          "construct_kind": "WORKFLOW",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 3,
+              "column": 1,
+              "offset": 32
+            },
+            "end": {
+              "line": 77,
+              "column": 1,
+              "offset": 4748
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.input.request",
+          "construct_kind": "INPUT",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 3,
+              "column": 17,
+              "offset": 48
+            },
+            "end": {
+              "line": 3,
+              "column": 29,
+              "offset": 60
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.output.result",
+          "construct_kind": "OUTPUT",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 3,
+              "column": 34,
+              "offset": 65
+            },
+            "end": {
+              "line": 3,
+              "column": 37,
+              "offset": 68
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.memory",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 5,
+              "column": 9,
+              "offset": 87
+            },
+            "end": {
+              "line": 5,
+              "column": 20,
+              "offset": 98
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.questions",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 6,
+              "column": 9,
+              "offset": 107
+            },
+            "end": {
+              "line": 6,
+              "column": 29,
+              "offset": 127
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.transitions",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 7,
+              "column": 9,
+              "offset": 136
+            },
+            "end": {
+              "line": 7,
+              "column": 31,
+              "offset": 158
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.scope_matches",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 8,
+              "column": 9,
+              "offset": 167
+            },
+            "end": {
+              "line": 8,
+              "column": 31,
+              "offset": 189
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.context_matches",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 9,
+              "column": 9,
+              "offset": 198
+            },
+            "end": {
+              "line": 9,
+              "column": 33,
+              "offset": 222
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.question_eligible",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 10,
+              "column": 9,
+              "offset": 231
+            },
+            "end": {
+              "line": 10,
+              "column": 35,
+              "offset": 257
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.binding",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 11,
+              "column": 9,
+              "offset": 266
+            },
+            "end": {
+              "line": 11,
+              "column": 21,
+              "offset": 278
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.trials",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 12,
+              "column": 9,
+              "offset": 287
+            },
+            "end": {
+              "line": 12,
+              "column": 20,
+              "offset": 298
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.context_trials",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 13,
+              "column": 9,
+              "offset": 307
+            },
+            "end": {
+              "line": 13,
+              "column": 28,
+              "offset": 326
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.option",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 14,
+              "column": 9,
+              "offset": 335
+            },
+            "end": {
+              "line": 14,
+              "column": 20,
+              "offset": 346
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.found",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 15,
+              "column": 9,
+              "offset": 355
+            },
+            "end": {
+              "line": 15,
+              "column": 23,
+              "offset": 369
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.replace",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 16,
+              "column": 9,
+              "offset": 378
+            },
+            "end": {
+              "line": 16,
+              "column": 25,
+              "offset": 394
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.best_question",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 17,
+              "column": 9,
+              "offset": 403
+            },
+            "end": {
+              "line": 17,
+              "column": 27,
+              "offset": 421
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.best_binding",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 18,
+              "column": 9,
+              "offset": 430
+            },
+            "end": {
+              "line": 18,
+              "column": 26,
+              "offset": 447
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.best_trials",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 19,
+              "column": 9,
+              "offset": 456
+            },
+            "end": {
+              "line": 19,
+              "column": 25,
+              "offset": 472
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.best_option",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 20,
+              "column": 9,
+              "offset": 481
+            },
+            "end": {
+              "line": 20,
+              "column": 25,
+              "offset": 497
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.rank_key",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 21,
+              "column": 9,
+              "offset": 506
+            },
+            "end": {
+              "line": 21,
+              "column": 22,
+              "offset": 519
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.best_rank",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 22,
+              "column": 9,
+              "offset": 528
+            },
+            "end": {
+              "line": 22,
+              "column": 23,
+              "offset": 542
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.experiment_disabled",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 23,
+              "column": 9,
+              "offset": 551
+            },
+            "end": {
+              "line": 23,
+              "column": 37,
+              "offset": 579
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.state.options_disabled",
+          "construct_kind": "STATE",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 24,
+              "column": 9,
+              "offset": 588
+            },
+            "end": {
+              "line": 24,
+              "column": 34,
+              "offset": 613
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.availability",
+          "construct_kind": "STEP",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 25,
+              "column": 5,
+              "offset": 618
+            },
+            "end": {
+              "line": 32,
+              "column": 5,
+              "offset": 920
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.availability.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 26,
+              "column": 9,
+              "offset": 644
+            },
+            "end": {
+              "line": 26,
+              "column": 54,
+              "offset": 689
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.availability.s0001",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 27,
+              "column": 9,
+              "offset": 698
+            },
+            "end": {
+              "line": 27,
+              "column": 121,
+              "offset": 810
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.availability.s0002",
+          "construct_kind": "IF",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 28,
+              "column": 9,
+              "offset": 819
+            },
+            "end": {
+              "line": 32,
+              "column": 5,
+              "offset": 920
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.availability.s0002.body.s0000",
+          "construct_kind": "STOP",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 29,
+              "column": 13,
+              "offset": 854
+            },
+            "end": {
+              "line": 29,
+              "column": 24,
+              "offset": 865
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.availability.s0002.else.s0000",
+          "construct_kind": "NEXT",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 31,
+              "column": 13,
+              "offset": 891
+            },
+            "end": {
+              "line": 31,
+              "column": 37,
+              "offset": 915
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.option_availability",
+          "construct_kind": "STEP",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 32,
+              "column": 5,
+              "offset": 920
+            },
+            "end": {
+              "line": 38,
+              "column": 5,
+              "offset": 1162
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.option_availability.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 33,
+              "column": 9,
+              "offset": 953
+            },
+            "end": {
+              "line": 33,
+              "column": 125,
+              "offset": 1069
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.option_availability.s0001",
+          "construct_kind": "IF",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 34,
+              "column": 9,
+              "offset": 1078
+            },
+            "end": {
+              "line": 38,
+              "column": 5,
+              "offset": 1162
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.option_availability.s0001.body.s0000",
+          "construct_kind": "STOP",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 35,
+              "column": 13,
+              "offset": 1110
+            },
+            "end": {
+              "line": 35,
+              "column": 24,
+              "offset": 1121
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.option_availability.s0001.else.s0000",
+          "construct_kind": "NEXT",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 37,
+              "column": 13,
+              "offset": 1147
+            },
+            "end": {
+              "line": 37,
+              "column": 23,
+              "offset": 1157
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.begin",
+          "construct_kind": "STEP",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 38,
+              "column": 5,
+              "offset": 1162
+            },
+            "end": {
+              "line": 44,
+              "column": 5,
+              "offset": 1647
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.begin.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 39,
+              "column": 9,
+              "offset": 1181
+            },
+            "end": {
+              "line": 39,
+              "column": 54,
+              "offset": 1226
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.begin.s0001",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 40,
+              "column": 9,
+              "offset": 1235
+            },
+            "end": {
+              "line": 40,
+              "column": 44,
+              "offset": 1270
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.begin.s0002",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 41,
+              "column": 9,
+              "offset": 1279
+            },
+            "end": {
+              "line": 41,
+              "column": 175,
+              "offset": 1445
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.begin.s0003",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 42,
+              "column": 9,
+              "offset": 1454
+            },
+            "end": {
+              "line": 42,
+              "column": 179,
+              "offset": 1624
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.begin.s0004",
+          "construct_kind": "NEXT",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 43,
+              "column": 9,
+              "offset": 1633
+            },
+            "end": {
+              "line": 43,
+              "column": 18,
+              "offset": 1642
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank",
+          "construct_kind": "STEP",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 44,
+              "column": 5,
+              "offset": 1647
+            },
+            "end": {
+              "line": 73,
+              "column": 5,
+              "offset": 4368
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000",
+          "construct_kind": "FOR_EACH",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 45,
+              "column": 9,
+              "offset": 1665
+            },
+            "end": {
+              "line": 72,
+              "column": 9,
+              "offset": 4351
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 46,
+              "column": 13,
+              "offset": 1708
+            },
+            "end": {
+              "line": 46,
+              "column": 97,
+              "offset": 1792
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001",
+          "construct_kind": "IF",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 47,
+              "column": 13,
+              "offset": 1805
+            },
+            "end": {
+              "line": 72,
+              "column": 9,
+              "offset": 4351
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 48,
+              "column": 17,
+              "offset": 1838
+            },
+            "end": {
+              "line": 48,
+              "column": 106,
+              "offset": 1927
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001",
+          "construct_kind": "IF",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 49,
+              "column": 17,
+              "offset": 1944
+            },
+            "end": {
+              "line": 72,
+              "column": 9,
+              "offset": 4351
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 50,
+              "column": 21,
+              "offset": 1983
+            },
+            "end": {
+              "line": 50,
+              "column": 130,
+              "offset": 2092
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001",
+          "construct_kind": "IF",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 51,
+              "column": 21,
+              "offset": 2113
+            },
+            "end": {
+              "line": 72,
+              "column": 9,
+              "offset": 4351
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 52,
+              "column": 25,
+              "offset": 2158
+            },
+            "end": {
+              "line": 52,
+              "column": 94,
+              "offset": 2227
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0001",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 53,
+              "column": 25,
+              "offset": 2252
+            },
+            "end": {
+              "line": 53,
+              "column": 144,
+              "offset": 2371
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0002",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 54,
+              "column": 25,
+              "offset": 2396
+            },
+            "end": {
+              "line": 54,
+              "column": 183,
+              "offset": 2554
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0003",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 55,
+              "column": 25,
+              "offset": 2579
+            },
+            "end": {
+              "line": 55,
+              "column": 180,
+              "offset": 2734
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004",
+          "construct_kind": "IF",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 56,
+              "column": 25,
+              "offset": 2759
+            },
+            "end": {
+              "line": 72,
+              "column": 9,
+              "offset": 4351
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 57,
+              "column": 29,
+              "offset": 2807
+            },
+            "end": {
+              "line": 57,
+              "column": 318,
+              "offset": 3096
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0001",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 58,
+              "column": 29,
+              "offset": 3125
+            },
+            "end": {
+              "line": 58,
+              "column": 185,
+              "offset": 3281
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0002",
+          "construct_kind": "IF",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 59,
+              "column": 29,
+              "offset": 3310
+            },
+            "end": {
+              "line": 63,
+              "column": 29,
+              "offset": 3537
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0002.body.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 60,
+              "column": 33,
+              "offset": 3351
+            },
+            "end": {
+              "line": 60,
+              "column": 88,
+              "offset": 3406
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0002.else.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 62,
+              "column": 33,
+              "offset": 3472
+            },
+            "end": {
+              "line": 62,
+              "column": 69,
+              "offset": 3508
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0003",
+          "construct_kind": "IF",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 63,
+              "column": 29,
+              "offset": 3537
+            },
+            "end": {
+              "line": 70,
+              "column": 25,
+              "offset": 4020
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0003.body.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 64,
+              "column": 33,
+              "offset": 3580
+            },
+            "end": {
+              "line": 64,
+              "column": 79,
+              "offset": 3626
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0003.body.s0001",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 65,
+              "column": 33,
+              "offset": 3659
+            },
+            "end": {
+              "line": 65,
+              "column": 77,
+              "offset": 3703
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0003.body.s0002",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 66,
+              "column": 33,
+              "offset": 3736
+            },
+            "end": {
+              "line": 66,
+              "column": 75,
+              "offset": 3778
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0003.body.s0003",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 67,
+              "column": 33,
+              "offset": 3811
+            },
+            "end": {
+              "line": 67,
+              "column": 75,
+              "offset": 3853
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0003.body.s0004",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 68,
+              "column": 33,
+              "offset": 3886
+            },
+            "end": {
+              "line": 68,
+              "column": 75,
+              "offset": 3928
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.body.s0003.body.s0005",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 69,
+              "column": 33,
+              "offset": 3961
+            },
+            "end": {
+              "line": 69,
+              "column": 67,
+              "offset": 3995
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0000.body.s0001.body.s0001.body.s0001.body.s0004.else.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 71,
+              "column": 29,
+              "offset": 4053
+            },
+            "end": {
+              "line": 71,
+              "column": 318,
+              "offset": 4342
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.rank.s0001",
+          "construct_kind": "NEXT",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 72,
+              "column": 9,
+              "offset": 4351
+            },
+            "end": {
+              "line": 72,
+              "column": 21,
+              "offset": 4363
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.propose",
+          "construct_kind": "STEP",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 73,
+              "column": 5,
+              "offset": 4368
+            },
+            "end": {
+              "line": 77,
+              "column": 1,
+              "offset": 4748
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.propose.s0000",
+          "construct_kind": "IF",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 74,
+              "column": 9,
+              "offset": 4389
+            },
+            "end": {
+              "line": 76,
+              "column": 9,
+              "offset": 4736
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.propose.s0000.body.s0000",
+          "construct_kind": "CALL",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 75,
+              "column": 13,
+              "offset": 4410
+            },
+            "end": {
+              "line": 75,
+              "column": 330,
+              "offset": 4727
+            }
+          }
+        },
+        {
+          "node_id": "prototype.v7_experiment.choose.propose.s0001",
+          "construct_kind": "STOP",
+          "span": {
+            "source_name": "agents/yf_arc3_v7/experiment.src",
+            "start": {
+              "line": 76,
+              "column": 9,
+              "offset": 4736
+            },
+            "end": {
+              "line": 76,
+              "column": 20,
+              "offset": 4747
+            }
+          }
+        }
+      ],
+      "schema_version": "yf_arc3_v5.src_ir.v0_1"
     }
   },
   "knowledge": {
@@ -7054,7 +10543,8 @@
   },
   "sources": {
     "generators": "MODULE prototype.v7\n\nWORKFLOW cycle(request: Any, interactions: List<String>) -> Any\n    STATE\n        memory: Any\n        with_after: Any\n        with_before: Any\n        revised: Any\n        revised_question: Any\n        revised_composition: Any\n        before_ref: Any\n        after_ref: Any\n        transition_ref: Any\n        item_ref: Any\n        hypotheses: List<Any>\n        transitions: List<Any>\n        compositions: List<Any>\n        questions: List<Any>\n        effects: Any\n        raccord: Any\n        scope_matches: Any\n        context_matches: Any\n        action_matches: Any\n        outcome_matches: Any\n        question_scope_matches: Any\n        question_context_matches: Any\n        question_action_matches: Any\n        contradicted: Any\n        first_candidate: Any\n        second_candidate: Any\n        distinct_members: Any\n        same_scope: Any\n        has_raccord: Any\n        fresh: Any\n        member: Any\n        candidate: Any\n        composition_disabled: Boolean\n    STEP begin\n        CALL v7.value(value=request.memory) -> memory\n        NEXT observations\n    STEP observations\n        CALL v7.emit(memory=memory, template=\"observation\", bindings=[[\"observation\", request.after]]) -> with_after\n        CALL v7.identity(template=\"observation\", bindings=[[\"observation\", request.after]]) -> after_ref\n        IF request.has_transition\n            CALL v7.emit(memory=with_after, template=\"observation\", bindings=[[\"observation\", request.before]]) -> with_before\n            CALL v7.identity(template=\"observation\", bindings=[[\"observation\", request.before]]) -> before_ref\n            CALL v7.difference(before=request.before.values, after=request.after.values) -> effects\n            CALL v7.identity(template=\"transition\", bindings=[[\"before\", request.before], [\"action\", request.action], [\"after\", request.after]]) -> transition_ref\n            CALL v7.absent(memory=with_before, identity=transition_ref) -> fresh\n            IF fresh\n                CALL v7.emit(memory=with_before, template=\"transition\", bindings=[[\"before\", request.before], [\"after\", request.after], [\"action\", request.action], [\"effects\", effects], [\"before_ref\", before_ref], [\"after_ref\", after_ref]]) -> memory\n                NEXT construct\n            ELSE\n                CALL v7.value(value=with_before) -> memory\n                NEXT availability\n        ELSE\n            CALL v7.value(value=with_after) -> memory\n            NEXT availability\n    STEP construct\n        CALL v7.emit(memory=memory, template=\"hypothesis\", bindings=[[\"before\", request.before], [\"after\", request.after], [\"action\", request.action], [\"effects\", effects], [\"transition_ref\", transition_ref]]) -> memory\n        NEXT acquisition\n    STEP acquisition\n        CALL v7.select(memory=memory, kind=\"hypothesis\") -> hypotheses\n        CALL v7.select(memory=memory, kind=\"transition\") -> transitions\n        FOR EACH hypothesis IN hypotheses\n            FOR EACH transition IN transitions\n                CALL v7.equal(left=hypothesis.scope, right=transition.scope) -> scope_matches\n                IF scope_matches\n                    CALL v7.equal(left=hypothesis.context, right=transition.context) -> context_matches\n                    IF context_matches\n                        CALL v7.equal(left=hypothesis.action, right=transition.action) -> action_matches\n                        IF action_matches\n                            CALL v7.equal(left=hypothesis.prediction, right=transition.outcome) -> outcome_matches\n                            IF outcome_matches\n                                CALL v7.append_unique(memory=memory, identity=hypothesis.id, field=\"evidence\", value=transition.id) -> memory\n                            ELSE\n                                CALL v7.assign(memory=memory, identity=hypothesis.id, field=\"status\", value=\"contradicted\") -> revised\n                                CALL v7.append_unique(memory=revised, identity=hypothesis.id, field=\"counterexamples\", value=transition.id) -> memory\n        CALL v7.select(memory=memory, kind=\"question\") -> questions\n        FOR EACH question IN questions\n            CALL v7.equal(left=question.scope, right=request.before.scope) -> question_scope_matches\n            IF question_scope_matches\n                CALL v7.equal(left=question.context, right=request.before.values) -> question_context_matches\n                IF question_context_matches\n                    CALL v7.equal(left=question.action, right=request.action) -> question_action_matches\n                    IF question_action_matches\n                        CALL v7.assign(memory=memory, identity=question.id, field=\"status\", value=\"effect_to_explain\") -> revised_question\n                        CALL v7.append_unique(memory=revised_question, identity=question.id, field=\"evidence\", value=transition_ref) -> memory\n        NEXT revision\n    STEP revision\n        CALL v7.select(memory=memory, kind=\"composition\") -> compositions\n        CALL v7.select(memory=memory, kind=\"hypothesis\") -> hypotheses\n        FOR EACH composition IN compositions\n            FOR EACH hypothesis IN hypotheses\n                CALL v7.contains(items=composition.members, value=hypothesis.id) -> member\n                IF member\n                    CALL v7.equal(left=hypothesis.status, right=\"contradicted\") -> contradicted\n                    IF contradicted\n                        CALL v7.assign(memory=memory, identity=composition.id, field=\"status\", value=\"suspended\") -> revised_composition\n                        CALL v7.append_unique(memory=revised_composition, identity=composition.id, field=\"counterexamples\", value=hypothesis.id) -> memory\n        NEXT availability\n    STEP availability\n        CALL v7.contains(items=request.availability.selection.disabled_kinds, value=\"composition\") -> composition_disabled\n        IF composition_disabled\n            NEXT curiosity\n        ELSE\n            NEXT composition\n    STEP composition\n        CALL v7.select_active(memory=memory, kind=\"hypothesis\", selection=request.availability.selection, dependency_fields=request.availability.dependency_fields) -> hypotheses\n        FOR EACH first IN hypotheses\n            CALL v7.equal(left=first.status, right=\"candidate\") -> first_candidate\n            IF first_candidate\n                FOR EACH second IN hypotheses\n                    CALL v7.equal(left=second.status, right=\"candidate\") -> second_candidate\n                    IF second_candidate\n                        CALL v7.distinct(left=first.id, right=second.id) -> distinct_members\n                        IF distinct_members\n                            CALL v7.equal(left=first.scope, right=second.scope) -> same_scope\n                            IF same_scope\n                                CALL v7.intersection(left=first.effects, right=second.conditions) -> raccord\n                                CALL v7.nonempty(items=raccord) -> has_raccord\n                                IF has_raccord\n                                    CALL v7.emit(memory=memory, template=\"composition\", bindings=[[\"first\", first], [\"second\", second], [\"raccord\", raccord]]) -> memory\n        NEXT curiosity\n    STEP curiosity\n        FOR EACH action IN interactions\n            CALL v7.emit(memory=memory, template=\"question\", bindings=[[\"observation\", request.after], [\"action\", action], [\"observation_ref\", after_ref]]) -> memory\n        STOP memory\n",
-    "activation": "MODULE prototype.v7_activation\n\nWORKFLOW configure(request: Any) -> Any\n    STATE\n        created: Any\n        identity: Any\n        memory: Any\n    STEP configure\n        CALL v7.identity(template=\"activation\", bindings=[]) -> identity\n        CALL v7.emit(memory=request.memory, template=\"activation\", bindings=[[\"configuration\", request.configuration]]) -> created\n        CALL v7.assign(memory=created, identity=identity, field=\"configuration\", value=request.configuration) -> memory\n        STOP memory\n"
+    "activation": "MODULE prototype.v7_activation\n\nWORKFLOW configure(request: Any) -> Any\n    STATE\n        created: Any\n        identity: Any\n        memory: Any\n    STEP configure\n        CALL v7.identity(template=\"activation\", bindings=[]) -> identity\n        CALL v7.emit(memory=request.memory, template=\"activation\", bindings=[[\"configuration\", request.configuration]]) -> created\n        CALL v7.assign(memory=created, identity=identity, field=\"configuration\", value=request.configuration) -> memory\n        STOP memory\n",
+    "experiment": "MODULE prototype.v7_experiment\n\nWORKFLOW choose(request: Any) -> Any\n    STATE\n        memory: Any\n        questions: List<Any>\n        transitions: List<Any>\n        scope_matches: Boolean\n        context_matches: Boolean\n        question_eligible: Boolean\n        binding: Any\n        trials: Any\n        context_trials: Any\n        option: Any\n        found: Boolean\n        replace: Boolean\n        best_question: Any\n        best_binding: Any\n        best_trials: Any\n        best_option: Any\n        rank_key: Any\n        best_rank: Any\n        experiment_disabled: Boolean\n        options_disabled: Boolean\n    STEP availability\n        CALL v7.value(value=request.memory) -> memory\n        CALL v7.contains(items=request.availability.selection.disabled_kinds, value=\"experiment\") -> experiment_disabled\n        IF experiment_disabled\n            STOP memory\n        ELSE\n            NEXT option_availability\n    STEP option_availability\n        CALL v7.contains(items=request.availability.selection.disabled_kinds, value=\"experiment_option\") -> options_disabled\n        IF options_disabled\n            STOP memory\n        ELSE\n            NEXT begin\n    STEP begin\n        CALL v7.value(value=request.memory) -> memory\n        CALL v7.value(value=false) -> found\n        CALL v7.select_active(memory=memory, kind=\"question\", selection=request.availability.selection, dependency_fields=request.availability.dependency_fields) -> questions\n        CALL v7.select_active(memory=memory, kind=\"transition\", selection=request.availability.selection, dependency_fields=request.availability.dependency_fields) -> transitions\n        NEXT rank\n    STEP rank\n        FOR EACH question IN questions\n            CALL v7.equal(left=question.scope, right=request.observation.scope) -> scope_matches\n            IF scope_matches\n                CALL v7.equal(left=question.context, right=request.observation.values) -> context_matches\n                IF context_matches\n                    CALL v7.contains(items=request.policy.eligible_question_statuses, value=question.status) -> question_eligible\n                    IF question_eligible\n                        CALL v7.get(mapping=request.bindings, key=question.action) -> binding\n                        CALL v7.count_matching(items=transitions, selectors=[[\"scope\", question.scope], [\"action\", question.action]]) -> trials\n                        CALL v7.count_matching(items=transitions, selectors=[[\"scope\", question.scope], [\"action\", question.action], [\"context\", question.context]]) -> context_trials\n                        CALL v7.identity(template=\"experiment_option\", bindings=[[\"observation\", request.observation], [\"question\", question], [\"basis\", request.basis]]) -> option\n                        IF binding.grounded\n                            CALL v7.emit(memory=memory, template=\"experiment_option\", bindings=[[\"observation\", request.observation], [\"question\", question], [\"basis\", request.basis], [\"status\", \"eligible\"], [\"trials\", trials], [\"grounding\", binding.reason], [\"observation_node\", request.observation_node]]) -> memory\n                            CALL v7.substitute(pattern=request.policy.order, bindings=[[\"context_trials\", context_trials], [\"trials\", trials], [\"action\", question.action]]) -> rank_key\n                            IF found\n                                CALL v7.less(left=rank_key, right=best_rank) -> replace\n                            ELSE\n                                CALL v7.value(value=true) -> replace\n                            IF replace\n                                CALL v7.value(value=question) -> best_question\n                                CALL v7.value(value=binding) -> best_binding\n                                CALL v7.value(value=trials) -> best_trials\n                                CALL v7.value(value=option) -> best_option\n                                CALL v7.value(value=rank_key) -> best_rank\n                                CALL v7.value(value=true) -> found\n                        ELSE\n                            CALL v7.emit(memory=memory, template=\"experiment_option\", bindings=[[\"observation\", request.observation], [\"question\", question], [\"basis\", request.basis], [\"status\", \"deferred\"], [\"trials\", trials], [\"grounding\", binding.reason], [\"observation_node\", request.observation_node]]) -> memory\n        NEXT propose\n    STEP propose\n        IF found\n            CALL v7.emit(memory=memory, template=\"experiment\", bindings=[[\"observation\", request.observation], [\"question\", best_question], [\"option\", best_option], [\"binding\", best_binding], [\"trials\", best_trials], [\"policy\", request.policy], [\"basis\", request.basis], [\"observation_node\", request.observation_node]]) -> memory\n        STOP memory\n"
   },
   "scenarios": [
     {

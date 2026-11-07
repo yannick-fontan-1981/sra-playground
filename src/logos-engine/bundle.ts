@@ -17,9 +17,9 @@ export interface DemonstrationScenario {
 export interface V7Bundle {
   schema: string;
   provenance: Record<string, unknown>;
-  programs: { generators: CompiledModule; activation: CompiledModule };
+  programs: { generators: CompiledModule; activation: CompiledModule; experiment: CompiledModule };
   knowledge: { logos: unknown; drm: unknown };
-  sources: { generators: string; activation: string };
+  sources: { generators: string; activation: string; experiment: string };
   scenarios: DemonstrationScenario[];
 }
 
@@ -28,7 +28,7 @@ export async function loadV7Bundle(): Promise<V7Bundle> {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Cannot load the V7 reference (${response.status}).`);
   const bundle = await response.json() as V7Bundle;
-  if (!bundle.programs?.generators || !bundle.programs.activation || !bundle.knowledge || !Array.isArray(bundle.scenarios)) {
+  if (!bundle.programs?.generators || !bundle.programs.activation || !bundle.programs.experiment || !bundle.knowledge || !Array.isArray(bundle.scenarios)) {
     throw new Error('The V7 reference bundle is incomplete.');
   }
   return bundle;

@@ -30,7 +30,7 @@ import tempfile
 COMMIT = "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e"
 REPOSITORY = "yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan"
 V7 = Path("agents/yf_arc3_v7")
-EXPORTED_SOURCES = ("generators.src", "activation.src", "knowledge.logos.json", "knowledge.drm.json")
+EXPORTED_SOURCES = ("generators.src", "activation.src", "experiment.src", "knowledge.logos.json", "knowledge.drm.json")
 LABELS = ("Initial observation", "First transition", "Composable transition",
           "Supporting evidence", "Counterexample", "Repeated event")
 SCENARIO_METADATA = {
@@ -53,6 +53,14 @@ NORMALIZATION = {
     "preserved": "Every node identity, revision, kind, status, value, evidence, relationship, delta sequence, cause and SRC statement identifier; receipt sequence, workflow hash, input hash, status and instruction count.",
     "raw_reference": "python contains original graph and provenance hashes; volatile timing fields alone are omitted from raw receipts.",
     "numeric_scope": "These fixtures use safe integers. They do not establish equivalence for Python float versus int identity or integers outside the JavaScript safe-integer range.",
+}
+CHOICE_NORMALIZATION = {
+    **NORMALIZATION,
+    "id": "logos-engine.v7.choice-history.v1",
+    "preserved": "All revisions, kinds, statuses, values, evidence, relationships, ordered deltas, SRC causes, commands, policy inputs and outcomes. Only implementation provenance and its propagated basis-dependent identities are aliased in expected; python retains all original identities and hashes.",
+    "basis_dependent_identities": "Experiment/option identities include graph-chain basis, which includes the path-dependent Python source digest. For repeatable --check only, alias every node identity by its first delta occurrence and every graph-chain digest by delta sequence. Raw Python snapshots retain every original byte-valued identifier and hash.",
+    "ordered_views": "After identity aliasing, sort availability.nodes and receipt.options by aliased id; their original order is a hash-key view, not the policy ranking. Delta order, commands, ranking inputs and all retained knowledge remain unchanged.",
+    "exact_replay": "The TypeScript choice test separately injects the raw fixture source_digest as a controlled input to compare complete raw graph histories and identifiers. Production uses its own TypeScript manifest digest.",
 }
 
 
@@ -148,6 +156,11 @@ def capture_step(runtime, operation, label, plain):
         receipt = runtime.advance(operation["event"])
     elif operation["kind"] == "set_activation":
         receipt = runtime.set_activation(**operation["configuration"])
+    elif operation["kind"] == "choose":
+        from agents.yf_arc3_v7.kernel import empty_argument_bindings
+        observation = operation["observation"]
+        bindings = empty_argument_bindings(observation["actions"], runtime.drm["public_interface"]["actions"])
+        receipt = runtime.choose(observation, bindings, policy_ref=operation["policy_ref"])
     else:
         raise ValueError("Unsupported reference operation")
     memory = plain(runtime.memory)
@@ -160,7 +173,39 @@ def capture_step(runtime, operation, label, plain):
         "python": {"memory": memory, "availability": availability, "receipt": raw_receipt}}
 
 
-def validate_raw_histories(fixture, kernel):
+def normalize_choice_snapshot(raw):
+    memory = raw["memory"]
+    identities = {}
+    chains = {}
+    for delta in memory["deltas"]:
+        identity = delta["node"]["id"]
+        if identity not in identities:
+            identities[identity] = f"node@{len(identities) + 1:04d}"
+        chains[delta["digest"]] = f"chain@{delta['sequence']:04d}"
+    def alias(value):
+        if isinstance(value, str):
+            return identities.get(value, chains.get(value, value))
+        if isinstance(value, list):
+            return [alias(item) for item in value]
+        if isinstance(value, dict):
+            return {identities.get(key, key): alias(item) for key, item in value.items()}
+        return value
+    receipt = normalize_receipt(raw["receipt"])
+    if "decision" in receipt:
+        if receipt["decision"] is not None:
+            receipt["decision"]["origin"].pop("source_digest")
+        for option in receipt["options"]:
+            option["origin"].pop("source_digest")
+    result = {"memory": alias(normalize_memory(memory)),
+              "availability": alias(normalize_availability(raw["availability"])),
+              "receipt": alias(receipt)}
+    result["availability"]["nodes"].sort(key=lambda node: node["id"])
+    if "options" in result["receipt"]:
+        result["receipt"]["options"].sort(key=lambda node: node["id"])
+    return result
+
+
+def validate_raw_histories(fixture, kernel, *, choice=False):
     for scenario in fixture["scenarios"]:
         for step in scenario["steps"]:
             memory = step["python"]["memory"]
@@ -173,9 +218,12 @@ def validate_raw_histories(fixture, kernel):
             assert memory["chain"] == previous
             assert step["python"]["availability"]["graph_chain"] == previous
             assert step["python"]["receipt"]["graph_chain"] == previous
-            assert normalize_memory(memory) == step["expected"]["memory"]
-            assert normalize_availability(step["python"]["availability"]) == step["expected"]["availability"]
-            assert normalize_receipt(step["python"]["receipt"]) == step["expected"]["receipt"]
+            if choice:
+                assert normalize_choice_snapshot(step["python"]) == step["expected"]
+            else:
+                assert normalize_memory(memory) == step["expected"]["memory"]
+                assert normalize_availability(step["python"]["availability"]) == step["expected"]["availability"]
+                assert normalize_receipt(step["python"]["receipt"]) == step["expected"]["receipt"]
 
 
 def stable_golden_projection(fixture):
@@ -191,11 +239,11 @@ def export_reference(root, prepared, manifest, manifest_bytes):
     import pydantic
     from agents.yf_arc3_v5.src.compiler import CompiledModule
     from agents.yf_arc3_v7 import kernel
-    from agents.yf_arc3_v7.demo import cases, summary, assess
+    from agents.yf_arc3_v7.demo import cases, summary, assess, scenario
     from agents.yf_arc3_v7.runtime import Runtime, plain
 
     runtime = Runtime()
-    programs = {"generators": runtime.module, "activation": runtime.activation_module}
+    programs = {"generators": runtime.module, "activation": runtime.activation_module, "experiment": runtime.experiment_module}
     compiled = {name: relative_source_metadata(module.model_dump(mode="json"), root)
                 for name, module in programs.items()}
     for module in compiled.values():
@@ -206,7 +254,8 @@ def export_reference(root, prepared, manifest, manifest_bytes):
         "compilerSha256": manifest["files"]["agents/yf_arc3_v5/src/compiler.py"]["sha256"],
         "sourceFiles": {name: manifest["files"][(V7 / name).as_posix()]["sha256"] for name in EXPORTED_SOURCES},
         "workflowHashes": {"generators": str(runtime.entry.transitive_source_hash),
-                           "activation": str(runtime.activation_entry.transitive_source_hash)},
+                           "activation": str(runtime.activation_entry.transitive_source_hash),
+                           "experiment": str(runtime.experiment_entry.transitive_source_hash)},
         "pythonSourceManifest": f"reference/v7/{COMMIT}/python-sources.json",
         "pythonSourceManifestSha256": sha256(manifest_bytes),
         "sourceBoundary": manifest["source_boundary"],
@@ -260,6 +309,54 @@ def export_reference(root, prepared, manifest, manifest_bytes):
         activation_assessments[mask_kind + "_mask_blocks_dependency_and_reactivation_clears_it"] = True
         scenarios.append({"id": "activation_" + mask_kind, "steps": steps})
 
+    choice_scenarios = []
+    choice_assessments = {}
+    def choice_case(name, operations):
+        instance = Runtime()
+        steps = []
+        for label, operation in operations:
+            step = capture_step(instance, operation, label, plain)
+            step["expected"] = normalize_choice_snapshot(step["python"])
+            steps.append(step)
+        choice_scenarios.append({"id": name, "steps": steps})
+        return steps
+    def choose(observation):
+        return {"kind": "choose", "observation": observation, "policy_ref": "native_context_curiosity"}
+    def advance(event):
+        return {"kind": "advance", "event": event}
+    native_events = scenario("controlled:native-choice", actions=("ACTION1", "ACTION2", "ACTION6", "ACTION7"))[:3]
+    returning = {"before": native_events[2]["after"],
+                 "after": {**native_events[1]["after"], "id": "controlled:native-choice:return"}, "action": "ACTION1"}
+    native_steps = []
+    for index, event in enumerate([*native_events, returning]):
+        native_steps.extend([(f"Observe {index}", advance(event)), (f"Choose {index}", choose(event["after"]))])
+    native = choice_case("native_context_curiosity", native_steps)
+    choices = [step["python"]["receipt"] for step in native if step["operation"]["kind"] == "choose"]
+    choice_assessments["context_then_scope_trials_choose_original_policy"] = [receipt["decision"]["action"] for receipt in choices] == ["ACTION1", "ACTION2", "ACTION1", "ACTION1"]
+    choice_assessments["arguments_and_authority_remain_deferred"] = all(
+        {node["action"]: node["grounding"] for node in receipt["options"] if node["status"] == "deferred"}
+        == {"ACTION6": "missing_arguments:x,y", "ACTION7": "authority_missing:recovery"} for receipt in choices)
+    deferred = scenario("controlled:deferred-choice", actions=("ACTION0", "ACTION6", "ACTION7"))[0]
+    deferred_steps = choice_case("deferred_only", [("Observe unsupported inputs", advance(deferred)), ("Keep unsupported inputs deferred", choose(deferred["after"]))])
+    choice_assessments["unsupported_actions_never_create_a_decision"] = deferred_steps[-1]["python"]["receipt"]["decision"] is None
+    enabled = scenario("controlled:masked-choice", actions=("ACTION1", "ACTION2"))[0]
+    masked_steps = choice_case("question_mask", [
+        ("Observe two grounded inputs", advance(enabled)), ("Choose while available", choose(enabled["after"])),
+        ("Mask questions", {"kind": "set_activation", "configuration": {"disabled_kinds": ["question"], "disabled_nodes": [], "reason": "Reference choice mask"}}),
+        ("No choice from masked questions", choose(enabled["after"])),
+        ("Restore questions", {"kind": "set_activation", "configuration": {"disabled_kinds": [], "disabled_nodes": [], "reason": "Reference choice restoration"}}),
+        ("Choose after restoration", choose(enabled["after"])),
+    ])
+    choice_assessments["masked_questions_block_choices_until_reactivation"] = (
+        masked_steps[3]["python"]["receipt"]["decision"] is None and not masked_steps[3]["python"]["receipt"]["options"]
+        and masked_steps[-1]["python"]["receipt"]["decision"] is not None)
+    empty = scenario("controlled:no-choice")[0]
+    empty["after"]["actions"] = []
+    no_actions = choice_case("no_actions", [("Observe no actions", advance(empty)), ("Stop without inventing actions", choose(empty["after"]))])
+    choice_assessments["empty_vocabulary_has_no_options_or_decision"] = no_actions[-1]["python"]["receipt"]["decision"] is None and not no_actions[-1]["python"]["receipt"]["options"]
+    if not all(choice_assessments.values()):
+        raise AssertionError({"original_choice_failed": choice_assessments})
+
     prepared.verify_workspace()
     report = prepared.report()
     fixture = {"schema": "logos-engine.v7.python-golden.v1", "provenance": provenance,
@@ -270,8 +367,12 @@ def export_reference(root, prepared, manifest, manifest_bytes):
         "normalization": NORMALIZATION, "assessments": assessments,
         "activationAssessments": activation_assessments, "scenarios": scenarios}
     validate_raw_histories(fixture, kernel)
+    choice_fixture = {"schema": "logos-engine.v7.python-choice-golden.v1", "provenance": provenance,
+        "referenceEngine": fixture["referenceEngine"], "normalization": CHOICE_NORMALIZATION,
+        "assessments": choice_assessments, "activationAssessments": {}, "scenarios": choice_scenarios}
+    validate_raw_histories(choice_fixture, kernel, choice=True)
     source_bytes = {name: prepared.payloads[str(root / V7 / name)] for name in EXPORTED_SOURCES}
-    return bundle, fixture, source_bytes, kernel
+    return bundle, fixture, choice_fixture, source_bytes, kernel
 
 
 def main():
@@ -284,6 +385,7 @@ def main():
     target = args.target_root.resolve()
     output = target / "reference" / "v7" / COMMIT
     fixture_path = target / "tests" / "fixtures" / "v7-reference.json"
+    choice_fixture_path = target / "tests" / "fixtures" / "v7-choice-reference.json"
     manifest_bytes = (output / "python-sources.json").read_bytes()
     manifest = json.loads(manifest_bytes)
     if manifest["repository"] != REPOSITORY or manifest["commit"] != COMMIT:
@@ -292,12 +394,16 @@ def main():
         root = Path(temporary).resolve()
         materialize(args.python_root.resolve(), root, manifest)
         prepared = prepare_original_source(root)
-        bundle, fixture, sources, kernel = export_reference(root, prepared, manifest, manifest_bytes)
+        bundle, fixture, choice_fixture, sources, kernel = export_reference(root, prepared, manifest, manifest_bytes)
         if args.check:
             previous = json.loads(fixture_path.read_bytes())
             validate_raw_histories(previous, kernel)
             if stable_golden_projection(previous) != stable_golden_projection(fixture):
                 raise AssertionError("Normalized Python golden histories changed")
+            previous_choice = json.loads(choice_fixture_path.read_bytes())
+            validate_raw_histories(previous_choice, kernel, choice=True)
+            if stable_golden_projection(previous_choice) != stable_golden_projection(choice_fixture):
+                raise AssertionError("Normalized Python choice histories changed")
             if (output / "bundle.json").read_bytes() != json_bytes(bundle):
                 raise AssertionError("Compiled browser bundle changed")
             for name, data in sources.items():
@@ -310,11 +416,14 @@ def main():
                 (output / name).write_bytes(data)
             (output / "bundle.json").write_bytes(json_bytes(bundle))
             fixture_path.write_bytes(json_bytes(fixture))
+            choice_fixture_path.write_bytes(json_bytes(choice_fixture))
         print(json.dumps({"mode": "checked" if args.check else "exported", "commit": COMMIT,
             "original_demo_assertions": len(fixture["assessments"]),
             "activation_assertions": len(fixture["activationAssessments"]),
             "scenarios": len(fixture["scenarios"]),
             "snapshots": sum(len(case["steps"]) for case in fixture["scenarios"]),
+            "choice_assertions": len(choice_fixture["assessments"]),
+            "choice_snapshots": sum(len(case["steps"]) for case in choice_fixture["scenarios"]),
             "original_source_files": len(manifest["files"]),
             "bundle": str(output / "bundle.json"), "fixture": str(fixture_path)}))
 

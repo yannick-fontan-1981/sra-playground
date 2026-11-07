@@ -1,11 +1,12 @@
 import './styles.css';
+import './sra-agent.css';
 import { renderSiteHeader } from './site-header';
 import { BrowserGameRuntime, type GameObservation } from './runtime/browser-games';
 import { AGENT_STATUS } from './runtime/contracts';
-import { GAME_CATALOG, PUBLIC_SOURCE_BASE, getGameByCode, type GameCatalogEntry } from './games/catalog';
+import { BrowserSraAgent, type SraAgentSnapshot } from './runtime/sra-agent.ts';
+import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
-const agentSources = `${PUBLIC_SOURCE_BASE}/README.md`;
 const fallbackPalette = [
   '#F3F2EB', '#C9CDC8', '#37404B', '#66707B', '#1B2028', '#11161C',
   '#614439', '#E7B9A3', '#F06B65', '#679DEB', '#63D5D6', '#F1CE62',
@@ -102,7 +103,7 @@ app.innerHTML = `
         <div class="mode-bar">
           <div class="mode-tabs" role="tablist" aria-label="Play mode">
             <button type="button" id="manual-tab" role="tab" aria-selected="true" aria-controls="manual-panel" tabindex="0">${icon('hand')}Manual</button>
-            <button type="button" id="agent-tab" role="tab" aria-selected="false" aria-controls="agent-panel" tabindex="-1">${icon('robot')}SRA Agent<span class="soon-label">Coming next</span></button>
+            <button type="button" id="agent-tab" role="tab" aria-selected="false" aria-controls="agent-panel" tabindex="-1">${icon('robot')}SRA Agent<span class="agent-mode-label">Exploration</span></button>
           </div>
           <span class="local-label"><span class="status-dot"></span> In your browser</span>
         </div>
@@ -152,15 +153,35 @@ app.innerHTML = `
               <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level.</p>
             </div>
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}" hidden>
-              <div class="agent-illustration" aria-hidden="true"><span class="node node-a"></span><span class="node node-b"></span><span class="node node-c"></span><span class="node node-d"></span><span class="node-line line-a"></span><span class="node-line line-b"></span><span class="node-line line-c"></span></div>
-              <h3>Explore Logos Engine.</h3>
-              <p class="agent-honesty">The TypeScript reasoning kernel is available in the lab. The agent is not connected to the games yet.</p>
-              <a class="text-link" href="/reasoning-lab.html">Open the Reasoning Lab ${icon('arrow')}</a>
-              <button id="return-manual" type="button" class="primary-button">Play manually ${icon('arrow')}</button>
-              <a class="text-link" href="${agentSources}" target="_blank" rel="noopener noreferrer">SRA source references ${icon('external')}</a>
+              <p class="agent-engine-name">LOGOS ENGINE / V7</p>
+              <h3>Explore with SRA.</h3>
+              <p class="agent-introduction">SRA tries an input, observes its visible effects, and builds or revises hypotheses.</p>
+              <p id="agent-message" class="agent-message" role="status" aria-live="polite">Choose one action or run a short experiment.</p>
+              <div class="agent-run-controls">
+                <button id="agent-run" type="button" class="primary-button">Run 4 actions</button>
+                <button id="agent-step" type="button" class="secondary-button">One action</button>
+                <button id="agent-pause" type="button" class="secondary-button" disabled>Pause</button>
+              </div>
+              <div class="agent-live-stats" aria-label="Agent session">
+                <div><strong id="agent-action-count">0</strong><span>actions</span></div>
+                <div><strong id="agent-hypothesis-count">0</strong><span>hypotheses</span></div>
+                <div><strong id="agent-node-count">0</strong><span>nodes</span></div>
+              </div>
+              <p id="agent-decision" class="agent-decision">The next action will be selected by the V7 experiment program.</p>
+              <div id="agent-unsupported" hidden><p>This first mode needs a directional or Space input. Coordinate-based exploration is the next extension.</p><button id="agent-example" type="button" class="secondary-button">Try BP35</button></div>
+              <p class="agent-scope">Experimental exploration of action effects. Goal-directed level solving is a later step.</p>
+              <button id="agent-new-session" type="button" class="agent-text-button">New reasoning session</button>
+              <button id="return-manual" type="button" class="agent-text-button">Return to Manual ${icon('arrow')}</button>
             </div>
           </aside>
         </div>
+
+        <section id="agent-inspection" class="agent-inspection" aria-label="Agent reasoning" hidden>
+          <div class="agent-inspection-header"><div><p class="eyebrow">LIVE REASONING</p><h3>From observation to action</h3></div><a class="text-link" href="/reasoning-lab.html">Open the Reasoning Lab ${icon('arrow')}</a></div>
+          <p id="agent-cycle-summary">The engine will read the current visible frame when you start.</p>
+          <details id="agent-trace-details"><summary>Inspect the latest SRC trace <span id="agent-trace-count"></span></summary><div id="agent-trace" class="agent-trace"><p>No reasoning cycle yet.</p></div></details>
+          <p class="agent-boundary-note">Pause finishes an action already sent to the game. Returning to Manual starts a new reasoning session next time.</p>
+        </section>
 
         <p id="game-feedback" class="sr-only" aria-live="polite"></p>
       </article>
@@ -168,7 +189,7 @@ app.innerHTML = `
 
     <section class="about-section wrap" id="about" aria-labelledby="about-title">
       <div class="about-heading"><p class="eyebrow">THE PROJECT</p><h2 id="about-title">About SRA</h2><div class="about-links"><a class="text-link" href="/architecture.html">Architecture ${icon('arrow')}</a><a class="text-link" href="/videos.html">Video series ${icon('arrow')}</a></div></div>
-      <div class="about-content"><p><strong>Symbolic Reasoning Agent</strong> is Yannick Fontan’s research project for interactive games. The Python agent uses explicit representations of observations, mechanisms, and goals to organize its reasoning.</p><p>The 100 games on this page run locally in your browser. Explore the first TypeScript reasoning kernel in the <a class="text-link" href="/reasoning-lab.html">Logos Engine Reasoning Lab</a>. Connecting it to the games is a subsequent step. The architecture pages describe the code; the video series follows the project’s development.</p></div>
+      <div class="about-content"><p><strong>Symbolic Reasoning Agent</strong> is Yannick Fontan’s research project for interactive games. The Python agent uses explicit representations of observations, mechanisms, and goals to organize its reasoning.</p><p>The 100 games on this page run locally in your browser. The experimental SRA Agent mode uses Logos Engine to explore visible action effects in games with directional or Space inputs. Inspect its reasoning here or study controlled examples in the <a class="text-link" href="/reasoning-lab.html">Logos Engine Reasoning Lab</a>.</p></div>
     </section>
   </main>
   <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Independent research by Yannick Fontan</span><div><a href="/contact.html">Contact ${icon('arrow')}</a><a href="https://arcprize.org/arc-agi/3" target="_blank" rel="noopener noreferrer">ARC Prize ${icon('external')}</a><a href="${websiteRepo}/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses & notices ${icon('external')}</a></div></footer>
@@ -187,6 +208,7 @@ context.imageSmoothingEnabled = false;
 const runtime = new BrowserGameRuntime();
 let observation: GameObservation | null = null;
 let mode: 'manual' | 'agent' = 'manual';
+let modeGeneration = 0;
 let busy = false;
 let loading = false;
 let failed = false;
@@ -195,6 +217,62 @@ let presentationGeneration = 0;
 let renderedLevelCount = -1;
 let renderedPalette = '';
 let colors: number[][] = [];
+let agentState: SraAgentSnapshot | null = null;
+const agent = new BrowserSraAgent({
+  getObservation: () => observation,
+  canDispatch: () => ready() && mode === 'agent',
+  dispatch: async actionId => {
+    if (!ready() || mode !== 'agent' || !observation?.availableActionIds.includes(actionId)) {
+      throw new Error('The game changed before the action could be sent.');
+    }
+    const generation = selectionGeneration;
+    busy = true;
+    updateInterface();
+    try {
+      const next = await runtime.action(actionId);
+      await present(next, generation);
+      if (generation !== selectionGeneration || next.gameCode !== selectedGame.code) {
+        throw new Error('The action belongs to an earlier game session.');
+      }
+      return next;
+    } catch (error) {
+      showFailure(error, generation);
+      throw error;
+    }
+  },
+  onState: state => { agentState = state; updateInterface(); },
+});
+
+function updateAgentInterface(): void {
+  const state = agentState;
+  const terminal = Boolean(observation && ['WIN', 'LEVEL_COMPLETE', 'GAME_OVER', 'GAMEOVER'].includes(observation.state));
+  const grounded = Boolean(observation?.availableActionIds.some(id => id >= 1 && id <= 5));
+  const available = mode === 'agent' && ready() && !terminal && grounded;
+  element<HTMLButtonElement>('#agent-step').disabled = !available || !(state?.canStep ?? true);
+  element<HTMLButtonElement>('#agent-run').disabled = !available || !(state?.canRun ?? true);
+  element<HTMLButtonElement>('#agent-pause').disabled = !state?.busy;
+  element<HTMLButtonElement>('#agent-new-session').disabled = !ready() || Boolean(state?.busy);
+  element<HTMLButtonElement>('#agent-example').disabled = !ready() || Boolean(state?.busy);
+  element('#agent-unsupported').hidden = !observation || grounded || terminal;
+  const message = loading ? 'Waiting for the game to load…' : failed ? 'Reload the game to continue.'
+    : terminal ? 'This level has ended. Use Manual to reset it or continue.'
+    : observation && !grounded ? 'No fully grounded input is available in this game yet.'
+    : state?.message ?? 'Choose one action or run a short experiment.';
+  element('#agent-message').textContent = message;
+  element('#agent-message').setAttribute('data-status', state?.status ?? 'idle');
+  element('#agent-action-count').textContent = String(state?.actionCount ?? 0);
+  element('#agent-hypothesis-count').textContent = String(state?.hypothesisCount ?? 0);
+  element('#agent-node-count').textContent = String(state?.nodeCount ?? 0);
+  element('#agent-decision').textContent = state?.lastDecision ?? 'The next action will be selected by the V7 experiment program.';
+  element('#agent-cycle-summary').textContent = state?.sessionId
+    ? `${state.cycles} observation cycles · ${state.nodeCount} knowledge nodes · ${state.compositionCount} compositions · ${state.actionCount} game actions`
+    : 'The engine will read the current visible frame when you start.';
+  const trace = state?.trace ?? [];
+  element('#agent-trace-count').textContent = trace.length ? `(${trace.length} events)` : '';
+  element('#agent-trace').innerHTML = trace.length
+    ? `${trace.length > 120 ? '<p>Showing the last 120 retained execution events.</p>' : ''}<table><thead><tr><th>Instruction</th><th>Operation</th><th>Outcome</th></tr></thead><tbody>${trace.slice(-120).map(event => `<tr><td><code>${escapeHtml(String(event.statementId))}</code></td><td>${escapeHtml(String(event.kind))} ${escapeHtml(String(event.target ?? ''))}</td><td>${escapeHtml(String(event.summary ?? event.status))}</td></tr>`).join('')}</tbody></table>`
+    : '<p>No reasoning cycle yet.</p>';
+}
 
 function paint(frame: readonly (readonly number[])[], palette: readonly string[] = observation?.palette ?? fallbackPalette): void {
   if (!context || !frame.length || !frame[0]?.length) return;
@@ -261,6 +339,7 @@ function updateInterface(): void {
   element('#game-availability').classList.toggle('is-pending', loading || failed);
   canvas.setAttribute('aria-busy', String(busy || loading));
   canvas.tabIndex = enabled ? 0 : -1;
+  updateAgentInterface();
 }
 
 async function present(next: GameObservation, selectedGeneration: number): Promise<void> {
@@ -287,6 +366,7 @@ async function present(next: GameObservation, selectedGeneration: number): Promi
   if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
   paint(next.frame, next.palette ?? fallbackPalette);
   busy = false;
+  agent.refresh();
   updateInterface();
   if (next.state === 'WIN' || next.state === 'LEVEL_COMPLETE') element('#game-feedback').textContent = `Level ${next.level} complete.`;
   else if (next.state === 'GAME_OVER' || next.state === 'GAMEOVER') element('#game-feedback').textContent = 'Game over. Undo or reset to continue.';
@@ -305,6 +385,7 @@ function showFailure(error: unknown, generation: number): void {
 
 async function run(operation: () => Promise<GameObservation>, announcement = ''): Promise<void> {
   if (!ready() || mode !== 'manual') return;
+  agent.invalidate('Manual play changed the observation. Start a fresh experiment when ready.');
   const generation = selectionGeneration;
   busy = true;
   updateInterface();
@@ -335,6 +416,8 @@ function focusCanvas(): void {
 }
 
 function setMode(next: 'manual' | 'agent', focusTab = false): void {
+  modeGeneration += 1;
+  if (mode !== next && next === 'manual') agent.invalidate('Manual control. Start a fresh experiment when ready.');
   mode = next;
   const manual = next === 'manual';
   const manualTab = element<HTMLButtonElement>('#manual-tab');
@@ -345,12 +428,15 @@ function setMode(next: 'manual' | 'agent', focusTab = false): void {
   agentTab.tabIndex = manual ? -1 : 0;
   element('#manual-panel').hidden = !manual;
   element('#agent-panel').hidden = manual;
-  element('#canvas-stage').classList.toggle('agent-preview', !manual);
+  element('.player').classList.toggle('is-agent-mode', !manual);
+  element('#agent-inspection').hidden = manual;
+  agent.refresh();
   updateInterface();
   if (focusTab) (manual ? manualTab : agentTab).focus();
 }
 
 async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none' = 'push', level?: number): Promise<void> {
+  agent.invalidate('A new game observation is ready for exploration.');
   const game = getGameByCode(code) ?? defaultGame!;
   const generation = ++selectionGeneration;
   presentationGeneration += 1;
@@ -397,6 +483,18 @@ element('#retry-button').addEventListener('click', () => {
 element('#manual-tab').addEventListener('click', () => setMode('manual'));
 element('#agent-tab').addEventListener('click', () => setMode('agent'));
 element('#return-manual').addEventListener('click', () => { setMode('manual'); focusCanvas(); });
+element('#agent-step').addEventListener('click', () => { void agent.step(); });
+element('#agent-run').addEventListener('click', () => { void agent.run(4); });
+element('#agent-pause').addEventListener('click', () => agent.pause());
+element('#agent-new-session').addEventListener('click', () => agent.invalidate('New reasoning session. The current game position is preserved.'));
+element('#agent-example').addEventListener('click', () => {
+  const generation = selectionGeneration + 1;
+  const load = selectGame('BP35');
+  const requestedMode = modeGeneration;
+  void load.then(() => {
+    if (selectionGeneration === generation && modeGeneration === requestedMode && selectedGame.code === 'BP35' && ready()) setMode('agent');
+  });
+});
 element('.mode-tabs').addEventListener('keydown', (event: KeyboardEvent) => {
   if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
   event.preventDefault();
@@ -455,5 +553,8 @@ fullscreenButton.addEventListener('click', () => {
   const operation = document.fullscreenElement ? document.exitFullscreen() : element('#canvas-stage').requestFullscreen();
   void operation.catch(() => { element('#game-feedback').textContent = 'Full-screen mode is not available in this browser window.'; });
 });
-window.addEventListener('pagehide', event => { if (!event.persisted) runtime.dispose(); });
+window.addEventListener('pagehide', event => {
+  agent.pause();
+  if (!event.persisted) { agent.dispose(); runtime.dispose(); }
+});
 void selectGame(selectedGame.code, 'replace', requestedLevel(new URL(window.location.href), selectedGame));

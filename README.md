@@ -24,8 +24,12 @@ Fontan's **Symbolic Reasoning Agent** research.
   yellow accents retain the ARC-inspired appearance. The patchwork shows 18
   real initial levels from the latest Custom Wave 3, in their original colors
   at full opacity. `scripts/generate-game-mosaic.py` reproduces the asset.
-- **SRA Agent:** an upcoming mode. The genuine reasoning agent is not connected
-  yet; playable games are not a claim that SRA solves them.
+- **SRA Agent:** an experimental exploration mode connected to live game
+  observations. The V7 SRC experiment program selects grounded directional or
+  Space inputs, observes their effects and updates its knowledge. Use **One
+  action**, **Run 4 actions**, and **Pause**; opening the tab alone does not move
+  the game. Coordinate inputs and goal-directed solving are future extensions.
+  See [the browser agent notes](docs/sra-agent-browser.md).
 - **Logos Engine Reasoning Lab:** `/reasoning-lab.html` runs the first native
   TypeScript V7 kernel on controlled observations. Inspect the executed program,
   hypotheses, compositions, revisions and counterexamples. See

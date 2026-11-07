@@ -2,7 +2,7 @@ import type { CompiledModule, ExecutionOptions, JsonObject, JsonValue, TraceEven
 import { executeWorkflow, SrcExecutionError, validateCompiledModule } from './interpreter.ts';
 import { arrayValue, assertPortableNumber, canonical, compareUnicode, digest, equal, exactKeys, immutableJson, objectValue, ownValue, stringValue } from './canonical.ts';
 import { blockers, emptyMemory, Kernel, memoryValue } from './kernel.ts';
-import type { KnowledgeMemory } from './kernel.ts';
+import type { KnowledgeMemory, KnowledgeNode } from './kernel.ts';
 
 export interface PublicObservation extends JsonObject {
   readonly id: string;
@@ -22,10 +22,11 @@ export interface V7RuntimeConfiguration {
   readonly drm: unknown;
   readonly generators: CompiledModule;
   readonly activation: CompiledModule;
+  readonly experiment?: CompiledModule;
   /** Digest of the caller's declared, versioned TS execution manifest; not a Python engine digest. */
   readonly sourceDigest: string;
   /** Optional hashes exported by the original Python WorkflowRegistry. */
-  readonly workflowHashes?: { readonly generators: string; readonly activation: string };
+  readonly workflowHashes?: { readonly generators: string; readonly activation: string; readonly experiment?: string };
 }
 
 export interface CycleReceipt {
@@ -66,6 +67,68 @@ export interface ActivationReceipt {
   readonly reconsideration?: CycleReceipt;
 }
 
+export interface ChoiceOptions extends ExecutionOptions {
+  readonly policyRef?: string;
+}
+
+export interface ProposalTicket extends JsonObject {
+  readonly choiceSequence: number;
+  readonly sourceDigest: string;
+  readonly graphChain: string;
+  readonly observationRef: string;
+  readonly decisionId: string;
+  readonly decisionRevision: number;
+}
+
+/** A validated command for the host; consuming it does not execute an action. */
+export interface ProposalCommand extends JsonObject {
+  readonly actionRef: string;
+  readonly data: JsonObject;
+  readonly proposalId: string;
+  readonly observationRef: string;
+  readonly sourceDigest: string;
+  readonly graphChain: string;
+  readonly choiceSequence: number;
+  readonly executed: false;
+}
+
+export interface ChoiceReceipt {
+  readonly sequence: number;
+  readonly srcStatus: 'completed';
+  readonly observationRef: string;
+  readonly currentObservation: PublicObservation;
+  readonly basis: string | null;
+  readonly sourceDigest: string;
+  readonly workflowHash: string;
+  readonly workflowHashKind: 'python-transitive-source' | 'compiler-semantic';
+  readonly policyRef: string;
+  readonly policyId: string;
+  readonly decision: KnowledgeNode | null;
+  readonly options: readonly KnowledgeNode[];
+  readonly groundings: JsonObject;
+  readonly deltaCount: number;
+  readonly graphChain: string | null;
+  readonly executed: false;
+  readonly instructions: number;
+  readonly durationMs: number;
+  readonly trace: readonly TraceEvent[];
+  readonly proposal: ProposalTicket | null;
+}
+
+/** Original V7 empty_argument_bindings: no inferred coordinates or recovery authority. */
+export function emptyArgumentBindings(actions: readonly string[], interfaces: JsonObject): JsonObject {
+  return immutableJson(Object.fromEntries(actions.map(action => {
+    const declaration = Object.hasOwn(interfaces, action) ? objectValue(interfaces[action], 'input declaration') : null;
+    const authority = declaration && Object.hasOwn(declaration, 'required_authority')
+      ? arrayValue(declaration.required_authority, 'required authority').map(value => stringValue(value)) : [];
+    const required = declaration ? arrayValue(declaration.required_arguments, 'required arguments').map(value => stringValue(value)) : [];
+    const grounded = declaration !== null && required.length === 0 && authority.length === 0;
+    const reason = grounded ? 'arguments_complete' : authority.length ? `authority_missing:${authority.join(',')}`
+      : declaration === null ? 'interface_undeclared' : `missing_arguments:${required.join(',')}`;
+    return [action, { grounded, reason, command: grounded ? { action_ref: action, data: {} } : null }];
+  })));
+}
+
 function frozenTrace(trace: readonly TraceEvent[]): readonly TraceEvent[] {
   return immutableJson(trace) as unknown as readonly TraceEvent[];
 }
@@ -75,8 +138,8 @@ function ensureNotAborted(signal?: AbortSignal): void {
 }
 
 /**
- * The bounded, public observation bridge for the original generators/activation
- * SRC programs. Acquisition, contradiction and composition are executed by the
+ * The bounded public bridge for the original generators/activation/experiment
+ * SRC programs. Acquisition, contradiction, composition and choice run through
  * compiler IR; this bridge contains no replacement acquisition algorithm.
  *
  * Every operation publishes one immutable result only after complete execution.
@@ -89,15 +152,18 @@ export class V7Runtime {
   readonly sourceDigest: string;
   readonly generators: CompiledModule;
   readonly activation: CompiledModule;
-  private readonly workflowHashes?: { readonly generators: string; readonly activation: string };
+  readonly experiment?: CompiledModule;
+  private readonly workflowHashes?: { readonly generators: string; readonly activation: string; readonly experiment?: string };
   private readonly limits: Readonly<Record<'nodes' | 'facts' | 'actions' | 'events' | 'src_instructions', number>>;
   private _memory: KnowledgeMemory = emptyMemory();
   private _sequence = 0;
   private _lastTrace: readonly TraceEvent[] = Object.freeze([]);
   private _receipts: readonly CycleReceipt[] = Object.freeze([]);
   private _activationReceipts: readonly ActivationReceipt[] = Object.freeze([]);
+  private _choices: readonly ChoiceReceipt[] = Object.freeze([]);
+  private readonly consumedProposals = new Set<string>();
   private readonly observations = new Map<string, PublicObservation>();
-  private currentObservation: PublicObservation | null = null;
+  private _currentObservation: PublicObservation | null = null;
   private busy = false;
 
   constructor(configuration: V7RuntimeConfiguration) {
@@ -105,6 +171,12 @@ export class V7Runtime {
     this.sourceDigest = this.kernel.sourceDigest;
     this.generators = validateCompiledModule(immutableJson(configuration.generators), this.kernel.primitives);
     this.activation = validateCompiledModule(immutableJson(configuration.activation), this.kernel.primitives);
+    if (configuration.experiment) {
+      this.experiment = validateCompiledModule(immutableJson(configuration.experiment), this.kernel.primitives);
+      if (!this.experiment.workflows.some(workflow => workflow.id === 'prototype.v7_experiment.choose')) {
+        throw new TypeError('Required V7 experiment workflow is missing');
+      }
+    }
     if (!this.generators.workflows.some(workflow => workflow.id === 'prototype.v7.cycle')
       || !this.activation.workflows.some(workflow => workflow.id === 'prototype.v7_activation.configure')) {
       throw new TypeError('Required V7 generators and activation workflows are missing');
@@ -127,6 +199,7 @@ export class V7Runtime {
       this.workflowHashes = Object.freeze({
         generators: stringValue(configuration.workflowHashes.generators),
         activation: stringValue(configuration.workflowHashes.activation),
+        ...(configuration.workflowHashes.experiment === undefined ? {} : { experiment: stringValue(configuration.workflowHashes.experiment) }),
       });
     }
   }
@@ -136,6 +209,9 @@ export class V7Runtime {
   get lastTrace(): readonly TraceEvent[] { return this._lastTrace; }
   get receipts(): readonly CycleReceipt[] { return this._receipts; }
   get activationReceipts(): readonly ActivationReceipt[] { return this._activationReceipts; }
+  get choices(): readonly ChoiceReceipt[] { return this._choices; }
+  get lastChoice(): ChoiceReceipt | null { return this._choices.at(-1) ?? null; }
+  get currentObservation(): PublicObservation | null { return this._currentObservation; }
 
   /** Validates and freezes only public, witnessed observations. */
   validateEvent(input: unknown): ObservationEvent {
@@ -187,6 +263,72 @@ export class V7Runtime {
       ensureNotAborted(options.signal);
       this.publishCycle(result.memory, validated, result.receipt);
       return result.receipt;
+    });
+  }
+
+  /** Execute the original experiment SRC against this runtime's committed graph. */
+  async choose(observation: PublicObservation, options: ChoiceOptions = {}): Promise<ChoiceReceipt> {
+    return this.exclusive(async () => {
+      const started = performance.now();
+      ensureNotAborted(options.signal);
+      if (!this.experiment) throw new Error('The compiled V7 experiment program was not loaded');
+      if (this._choices.length >= this.limits.events) throw new RangeError('Declared choice budget exhausted');
+      const current = this.validateEvent({ before: null, after: observation, action: null }).after;
+      if (this.currentObservation === null || !equal(current, this.currentObservation)) {
+        throw new TypeError('Experiment request does not bind the current committed observation');
+      }
+      const policyRef = options.policyRef ?? 'native_context_curiosity';
+      const policies = objectValue(this.kernel.drm.experimental_policies, 'experimental policies');
+      const policy = objectValue(ownValue(policies, stringValue(policyRef, 'policy reference')), 'experimental policy');
+      const interfaces = objectValue(objectValue(this.kernel.drm.public_interface).actions, 'public input interface');
+      const groundings = emptyArgumentBindings(current.actions, interfaces);
+      const basis = this._memory.chain;
+      const observationNode = await this.kernel.identity('observation', [['observation', current]]);
+      const request = immutableJson({
+        memory: this._memory, observation: current, observation_node: observationNode,
+        bindings: groundings, policy, basis, availability: await this.activationInputs(this._memory),
+      });
+      const execution = await executeWorkflow(this.experiment, 'prototype.v7_experiment.choose',
+        { request }, this.kernel.primitives, this.boundedOptions(options));
+      ensureNotAborted(options.signal);
+      const memory = this.resultMemory(execution.bindings);
+      const candidates = this.kernel.select(memory, 'experiment').filter(node => node.basis === basis);
+      const proposedOptions = this.kernel.select(memory, 'experiment_option').filter(node => node.basis === basis);
+      if (candidates.length > 1) throw new Error('More than one SRC proposal for the same decision basis');
+      const decision = candidates[0] ?? null;
+      const sequence = this._choices.length + 1;
+      const proposal: ProposalTicket | null = decision === null ? null : immutableJson({
+        choiceSequence: sequence, sourceDigest: this.sourceDigest,
+        graphChain: stringValue(memory.chain, 'proposal graph chain'),
+        observationRef: current.id, decisionId: decision.id, decisionRevision: decision.revision,
+      });
+      const receipt: ChoiceReceipt = Object.freeze({
+        sequence, srcStatus: 'completed', observationRef: current.id,
+        currentObservation: current, basis, sourceDigest: this.sourceDigest,
+        ...this.workflowProvenance('experiment'), policyRef, policyId: stringValue(policy.id, 'policy identity'),
+        decision, options: immutableJson(proposedOptions), groundings,
+        deltaCount: memory.deltas.length - this._memory.deltas.length,
+        graphChain: memory.chain, executed: false, instructions: execution.instructions,
+        durationMs: performance.now() - started, trace: frozenTrace(execution.trace), proposal,
+      });
+      this._memory = memory;
+      this._lastTrace = receipt.trace;
+      this._choices = Object.freeze([...this._choices, receipt]);
+      return receipt;
+    });
+  }
+
+  /** Validate a proposal against current source, graph, observation and availability. */
+  async validateProposal(ticket: ProposalTicket): Promise<ProposalCommand> {
+    return this.exclusive(() => this.checkProposal(ticket));
+  }
+
+  /** One-use handoff to the host. No game is dispatched, and evidence is not rewritten. */
+  async consumeProposal(ticket: ProposalTicket): Promise<ProposalCommand> {
+    return this.exclusive(async () => {
+      const command = await this.checkProposal(ticket);
+      this.consumedProposals.add(command.proposalId);
+      return command;
     });
   }
 
@@ -269,9 +411,45 @@ export class V7Runtime {
     return { ...options, maxInstructions: Math.min(maximum, this.limits.src_instructions), maxCollectionItems: Math.min(collection, 1024) };
   }
 
-  private workflowProvenance(program: 'generators' | 'activation'): Pick<CycleReceipt, 'workflowHash' | 'workflowHashKind'> {
-    return this.workflowHashes ? { workflowHash: this.workflowHashes[program], workflowHashKind: 'python-transitive-source' }
-      : { workflowHash: this[program].semantic_hash, workflowHashKind: 'compiler-semantic' };
+  private workflowProvenance(program: 'generators' | 'activation' | 'experiment'): Pick<CycleReceipt, 'workflowHash' | 'workflowHashKind'> {
+    const supplied = this.workflowHashes?.[program];
+    const module = this[program];
+    if (!module) throw new Error(`Compiled program is not loaded: ${program}`);
+    return supplied ? { workflowHash: supplied, workflowHashKind: 'python-transitive-source' }
+      : { workflowHash: module.semantic_hash, workflowHashKind: 'compiler-semantic' };
+  }
+
+  private async checkProposal(input: ProposalTicket): Promise<ProposalCommand> {
+    const ticket = objectValue(immutableJson(input), 'proposal ticket');
+    exactKeys(ticket, ['choiceSequence', 'sourceDigest', 'graphChain', 'observationRef', 'decisionId', 'decisionRevision'], 'proposal ticket');
+    const choice = this.lastChoice;
+    if (choice === null || choice.decision === null || choice.proposal === null) throw new Error('There is no current SRC proposal');
+    if (!equal(ticket, choice.proposal)) throw new Error('Proposal ticket does not match the current source-bound decision');
+    if (this.consumedProposals.has(choice.decision.id)) throw new Error('Proposal was already consumed');
+    if (ticket.sourceDigest !== this.sourceDigest || ticket.graphChain !== this._memory.chain) throw new Error('Proposal source or graph basis is stale');
+    if (this.currentObservation === null || ticket.observationRef !== this.currentObservation.id
+      || !equal(choice.currentObservation, this.currentObservation)) throw new Error('Proposal observation is stale');
+    const decision = this._memory.nodes[choice.decision.id];
+    if (!decision || !equal(decision, choice.decision) || decision.status !== 'proposed' || decision.executed !== false) {
+      throw new Error('The retained proposal changed or is no longer proposed');
+    }
+    const availability = await this.activationInputs(this._memory);
+    if (blockers(this._memory, decision.id, objectValue(availability.selection), objectValue(availability.dependency_fields)).length) {
+      throw new Error('The proposal or a declared dependency is unavailable');
+    }
+    const actionRef = stringValue(decision.action, 'proposed action');
+    if (!this.currentObservation.actions.includes(actionRef)) throw new Error('Proposed action is absent from the current public vocabulary');
+    const interfaces = objectValue(objectValue(this.kernel.drm.public_interface).actions);
+    const bindings = emptyArgumentBindings(this.currentObservation.actions, interfaces);
+    const binding = objectValue(ownValue(bindings, actionRef));
+    if (binding.grounded !== true || !equal(decision.command, binding.command)) throw new Error('Proposal grounding differs from the declared public interface');
+    const command = objectValue(binding.command, 'grounded command');
+    return immutableJson({
+      actionRef: stringValue(command.action_ref), data: objectValue(command.data),
+      proposalId: decision.id, observationRef: this.currentObservation.id,
+      sourceDigest: this.sourceDigest, graphChain: stringValue(this._memory.chain),
+      choiceSequence: choice.sequence, executed: false,
+    });
   }
 
   private async activationInputs(memory: KnowledgeMemory): Promise<JsonObject> {
@@ -310,7 +488,7 @@ export class V7Runtime {
     this._lastTrace = receipt.trace;
     this._receipts = Object.freeze([...this._receipts, receipt]);
     for (const observation of [event.before, event.after]) if (observation) this.observations.set(observation.id, observation);
-    this.currentObservation = event.after;
+    this._currentObservation = event.after;
   }
 
   private async exclusive<T>(operation: () => Promise<T>): Promise<T> {

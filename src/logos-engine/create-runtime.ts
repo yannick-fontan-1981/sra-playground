@@ -9,7 +9,7 @@ import type { V7Bundle } from './bundle.ts';
  */
 export async function createV7Runtime(bundle: V7Bundle): Promise<V7Runtime> {
   const manifest = {
-    implementation: 'logos-engine.typescript.v7/0.1.0',
+    implementation: 'logos-engine.typescript.v7/0.2.0',
     sourceEncoding: 'json-stringify-v1',
     referenceCommit: V7_SOURCE_COMMIT,
     knowledge: bundle.knowledge,
@@ -18,15 +18,16 @@ export async function createV7Runtime(bundle: V7Bundle): Promise<V7Runtime> {
   const bytes = new TextEncoder().encode(JSON.stringify(manifest));
   const digest = await crypto.subtle.digest('SHA-256', bytes);
   const sourceDigest = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
-  const hashes = bundle.provenance.workflowHashes as { generators?: unknown; activation?: unknown } | undefined;
+  const hashes = bundle.provenance.workflowHashes as { generators?: unknown; activation?: unknown; experiment?: unknown } | undefined;
   const workflowHashes = typeof hashes?.generators === 'string' && typeof hashes.activation === 'string'
-    ? { generators: hashes.generators, activation: hashes.activation }
+    ? { generators: hashes.generators, activation: hashes.activation, ...(typeof hashes.experiment === 'string' ? { experiment: hashes.experiment } : {}) }
     : undefined;
   return new V7Runtime({
     logos: bundle.knowledge.logos,
     drm: bundle.knowledge.drm,
     generators: bundle.programs.generators,
     activation: bundle.programs.activation,
+    experiment: bundle.programs.experiment,
     sourceDigest,
     workflowHashes,
   });

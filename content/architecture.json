@@ -989,7 +989,7 @@
           "paragraphs": [
             "The website currently executes the original Python engines for 25 official games and 75 custom games. Pyodide runs Python in WebAssembly inside a worker. TypeScript handles selection, controls, and rendering. Initial assets come from the site; subsequent game actions execute locally.",
             "The Logos Engine Reasoning Lab now executes a first native TypeScript port of the V7 acquisition program in a separate worker. It uses controlled observations to demonstrate hypothesis creation, composition, revision and contradiction, with the executed program tree and knowledge available for inspection.",
-            "The SRA reasoning agent is not connected to the game worker. Browser integration must preserve the Python agent's observations, action semantics, and resumable reasoning state. The agent should receive the public observation projection, with hidden engine variables kept outside that interface.",
+            "The experimental SRA Agent mode now connects this TypeScript kernel to public game frames. The original V7 experiment program proposes a grounded directional or Space input, the host checks that the proposal still belongs to the current session, and the returned frame becomes new evidence. This first mode explores action effects; goal-directed solving and coordinate-based exploration remain subsequent steps.",
             "Undo, Reset, a game change, or manual intervention can invalidate a pending plan. The integration therefore needs a lifecycle for initialization, stepping, pause, cancellation, and resumption, followed by comparisons with the Python reference. A complete TypeScript translation remains a separate implementation choice."
           ],
           "sources": [

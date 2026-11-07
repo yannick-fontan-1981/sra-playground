@@ -8,12 +8,14 @@
     "sourceFiles": {
       "generators.src": "e5c9e07eaa050941a8def83884c3b5dca3c9e4a35c9a88157a0441ad05cd8ac7",
       "activation.src": "369058af44c77253b981a1a410eb45add33eb1e94820b272b084f995c0acedec",
+      "experiment.src": "ac34b875c22c17badb897248ecdd025ffde13064c66e7061fa3e8674ccc2a4fc",
       "knowledge.logos.json": "f632bf589cde404719d372034d5f1aefd994955dce8c782cf3ab60f1f2b0c96c",
       "knowledge.drm.json": "c2eeef389cd37c4e1205dd17dac9b20b5d71da9110329abea4285cd729ef4541"
     },
     "workflowHashes": {
       "generators": "f0de438de88bd021c302159df145d2746622c96d7056bc587825fee4b1d9dd01",
-      "activation": "2b7badcdecc3be92a3d668737549c9d223cd3995c12d62e7d96adac7a37f15fb"
+      "activation": "2b7badcdecc3be92a3d668737549c9d223cd3995c12d62e7d96adac7a37f15fb",
+      "experiment": "e3057f045e437373fc3bdb79ab1726162b4fa3bf617c30406d9df4bdfd8f9609"
     },
     "pythonSourceManifest": "reference/v7/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/python-sources.json",
     "pythonSourceManifestSha256": "c9fbf55afaeca119a751c4a54e13399b4a7b9b21375ecde417e34b9a210c19d6",
