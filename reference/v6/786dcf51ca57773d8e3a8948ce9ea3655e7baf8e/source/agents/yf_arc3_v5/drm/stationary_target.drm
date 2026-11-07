@@ -1,0 +1,84 @@
+{
+  "module_id": "drm.stationary_target",
+  "declarations": [
+    {
+      "id": "policy.stationary_target_interpretation",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": ["stationary_target.scoped_hypothesis", "stationary_target.unknown"],
+      "fact_projections": [
+        {
+          "id": "projection.stationary_target.scoped_hypothesis",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "stationary_target.scoped_hypothesis"},
+            {"field": "stationary_target_count", "operator": "equals", "expected": 1}
+          ],
+          "any_conditions": [
+            {"field": "executed_action_is_directional_interface_action", "operator": "equals", "expected": true},
+            {"field": "series_stationary_control_preserved", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {"stationary_target_applicable": true},
+          "bound_facts": {
+            "action_ref": "action_ref", "transition_ref": "transition_ref", "context_epoch": "context_epoch",
+            "body_ref": "stationary_target_body_ref", "target_ref": "stationary_target_ref",
+            "target_identity_basis": "stationary_target_identity_basis",
+            "body_token": "stationary_target_body_token", "component_token": "stationary_target_component_token",
+            "body_height": "stationary_target_body_height", "body_width": "stationary_target_body_width",
+            "calibration_refs": "stationary_target_calibration_refs", "observation_token": "stationary_target_token",
+            "before_bbox": "stationary_target_before_bbox",
+            "delta_row": "stationary_target_delta_row", "delta_col": "stationary_target_delta_col"
+          }
+        },
+        {
+          "id": "projection.stationary_target.unknown",
+          "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "stationary_target.unknown"}],
+          "static_facts": {"stationary_target_applicable": false}
+        }
+      ],
+      "selection_tiers": [
+        {"id": "tier.stationary_target.scoped", "all_conditions": [{"field": "stationary_target_applicable", "operator": "equals", "expected": true}], "reason_ref": "reason.calibrated_motion_counterexample_revises_local_passage_assumption"},
+        {"id": "tier.stationary_target.unknown", "all_conditions": [{"field": "stationary_target_applicable", "operator": "equals", "expected": false}], "reason_ref": "reason.missing_calibration_or_identity_keeps_obstruction_unknown"}
+      ],
+      "selection_tie_breakers": [{"field": "stationary_target_applicable", "preferred_order": "maximize"}],
+      "meaning_template_ref_by_alternative": {"stationary_target.scoped_hypothesis": "rule.stationary_target_scoped_hypothesis"},
+      "invariants": ["no_palette_class_obstacle_inference", "unchanged_body_and_target_required", "hypothesis_is_not_material_law"],
+      "falsifiers": ["target_or_body_changes", "same_scoped_body_enters_target"],
+      "reason_refs": ["reason.calibrated_motion_counterexample_revises_local_passage_assumption"]
+    },
+    {
+      "id": "rule.stationary_target_scoped_hypothesis", "kind": "rule",
+      "evaluation": "project_requested_conclusions", "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "dynamic",
+      "premises": ["unique_calibrated_body_translation", "unchanged_body", "unique_unchanged_target_component"],
+      "claim_templates": [{
+        "id_pattern": "claim.stationary_target.{context_epoch}.{observation_token}",
+        "predicate": "supports_revisable_component_entry_exclusion", "family": "dynamic",
+        "argument_patterns": ["{body_ref}", "{target_ref}"], "epistemic_status": "supported",
+        "required_fields": ["body_ref", "target_ref", "body_token", "component_token", "context_epoch", "observation_token"],
+        "attribute_bindings": {
+          "body_ref": "body_ref", "target_ref": "target_ref", "body_token": "body_token", "component_token": "component_token",
+          "target_identity_basis": "target_identity_basis",
+          "body_height": "body_height", "body_width": "body_width", "context_epoch": "context_epoch",
+          "action_ref": "action_ref", "transition_ref": "transition_ref", "calibration_refs": "calibration_refs",
+          "before_bbox": "before_bbox", "delta_row": "delta_row", "delta_col": "delta_col"
+        },
+        "static_attributes": {
+          "commitment": "revisable", "status": "provisional_obstruction_hypothesis",
+          "route_constraint": "exclude_current_exact_component_mask",
+          "competing_explanations": ["conditional_access", "control_mode", "movable_component"],
+          "revalidation": ["same_epoch", "same_body_identity_and_patch", "same_unique_observed_component_mask_or_tracked_target"],
+          "identity_scope": "exact_visible_spatial_component_is_not_persistent_entity_identity",
+          "falsifier": "same_scoped_body_enters_target"
+        }
+      }],
+      "invariants": ["retain_observation_and_competing_causes", "changed_scope_reopens_passage", "no_runtime_oracle"],
+      "falsifiers": ["target_or_body_changes", "same_scoped_body_enters_target"],
+      "reason_refs": ["reason.calibrated_motion_counterexample_revises_local_passage_assumption"]
+    }
+  ]
+}

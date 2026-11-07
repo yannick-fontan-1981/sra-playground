@@ -1,0 +1,122 @@
+{
+  "module_id": "relief_solving_c",
+  "declarations": [
+    {
+      "id": "policy.relief_solving_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_ordered_paint_parent_question"
+      ],
+      "applicability": [
+        "K21_requested_operation"
+      ],
+      "invariants": [
+        "surviving_contribution",
+        "future_repair",
+        "current_canvas",
+        "real_footprints_and_pose_edges",
+        "no_act"
+      ],
+      "falsifiers": [
+        "unbound_reference",
+        "wrong_forward_receipt",
+        "insufficient_resource"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "relief_solving.native",
+        "relief_solving.missing"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.relief_solving.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "relief_solving.native"
+            },
+            {
+              "field": "current_relief_question",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "relief_solving.native"
+          }
+        },
+        {
+          "id": "projection.relief_solving.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "relief_solving.missing"
+            },
+            {
+              "field": "current_relief_question",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "relief_solving.missing"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.relief_solving.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "relief_solving.native"
+            }
+          ],
+          "reason_ref": "reason.final_visible_contribution_and_later_cover_serve_reference"
+        },
+        {
+          "id": "tier.relief_solving.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "relief_solving.missing"
+            }
+          ],
+          "reason_ref": "reason.relief_question_requires_current_evidence"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.relief_solving_activation_unverified",
+      "reason_refs": [
+        "reason.final_visible_contribution_and_later_cover_serve_reference",
+        "reason.relief_question_requires_current_evidence"
+      ]
+    }
+  ]
+}

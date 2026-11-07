@@ -1,0 +1,51 @@
+{
+  "module_id": "arc3.seating_return_publication_d",
+  "declarations": [
+    {
+      "id": "policy.seating_normalized_return_publication_d", "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single", "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason.exact_seating_return_preserves_current_parent_why"],
+      "configuration": {"return_predicate_ref": "supports_exact_acquired_seating_computational_return"},
+      "declared_alternative_refs": ["seating_return.publish", "seating_return.unknown"],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {"id": "projection.seating_return.publish", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "seating_return.publish"},
+          {"field": "seating_return_publication_complete", "operator": "equals", "expected": true}
+        ], "static_facts": {"eligible": true}},
+        {"id": "projection.seating_return.unknown", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "seating_return.unknown"},
+          {"field": "seating_return_publication_complete", "operator": "equals", "expected": false}
+        ], "static_facts": {"eligible": true}}
+      ],
+      "meaning_template_ref_by_alternative": {"seating_return.publish": "rule.seating_normalized_return_publication_d"},
+      "invariants": ["actual_acquisition_revalidated", "exact_canonical_demand_and_normalized_identity",
+        "original_parent_why_preserved", "no_action_authority", "no_physical_goal_confirmation"]
+    },
+    {
+      "id": "rule.seating_normalized_return_publication_d", "kind": "rule",
+      "evaluation": "project_requested_conclusions", "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": ["reason.exact_seating_return_preserves_current_parent_why"],
+      "term_templates": [],
+      "claim_templates": [{
+        "id_pattern": "{output_claim_ref}", "predicate": "supports_exact_acquired_seating_computational_return",
+        "family": "epistemic", "epistemic_status": "supported",
+        "argument_patterns": ["{parent_goal_ref}", "{consumer_ref}", "{request_ref}"],
+        "required_term_patterns": ["{parent_goal_ref}", "{agenda_ref}"],
+        "required_fields": ["output_claim_ref", "exact_demand", "normalized_return", "record_digest"],
+        "scope_bindings": {"parent_goal_ref": "parent_goal_ref", "epoch": "epoch",
+          "episode_ref": "episode_ref", "level_scope_ref": "level_scope_ref",
+          "input_revision_ref": "input_revision_ref", "scope_ref": "scope_ref"},
+        "attribute_bindings": {"exact_demand": "exact_demand", "normalized_return": "normalized_return",
+          "record_digest": "record_digest"},
+        "static_attributes": {"no_action_authority": true, "no_physical_goal_confirmation": true,
+          "falsifier": "changed_acquisition_native_identity_parent_why_or_exact_demand"}
+      }]
+    }
+  ]
+}

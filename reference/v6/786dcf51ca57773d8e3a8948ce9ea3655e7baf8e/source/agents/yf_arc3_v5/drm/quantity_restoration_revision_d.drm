@@ -1,0 +1,58 @@
+{
+  "module_id": "quantity_restoration_revision_d",
+  "declarations": [
+    {
+      "id": "policy.quantity_restoration_revision_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason.acquired_resource_exact_scoped_computation"],
+      "declared_alternative_refs": ["quantity_restoration.reopen", "quantity_restoration.keep"],
+      "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+      "canonical_equivalence_tie_break_debt_ref": "debt.quantity_restoration.exact_replacement",
+      "selection_tiers": [
+        {"id": "tier.quantity_restoration.reopen", "reason_ref": "reason.acquired_resource_exact_scoped_computation",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "quantity_restoration.reopen"},
+            {"field": "restoration_binding_current", "operator": "equals", "expected": true},
+            {"field": "replacement_complete", "operator": "equals", "expected": true},
+            {"field": "replacement_released_quantity_state_count", "operator": "greater_than", "expected": 0}
+          ]},
+        {"id": "tier.quantity_restoration.keep", "reason_ref": "reason.acquired_resource_exact_scoped_computation",
+          "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "quantity_restoration.keep"}]}
+      ],
+      "meaning_template_ref_by_alternative": {"quantity_restoration.reopen": "rule.quantity_restoration_revision_d"},
+      "configuration": {}
+    },
+    {
+      "id": "rule.quantity_restoration_revision_d",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": ["reason.acquired_resource_exact_scoped_computation"],
+      "premises": ["actual_new_alignment_and_current_transport_conflict", "complete_replacement_retains_original_terminal_conjunction"],
+      "invariants": ["principal_goal_unchanged", "supersede_commitment_not_physical_observation", "restoration_is_not_erasure", "no_ACT", "renew_local_execution_scope_before_control"],
+      "term_templates": [
+        {"id_pattern": "{restoration_term_ref}", "kind": "goal", "label": "Restore the temporarily released terminal relation",
+          "required_fields": ["restoration_term_ref", "parent_goal_ref", "restoration_goal", "revision_claim_ref"],
+          "attribute_bindings": {"parent_goal_ref": "parent_goal_ref", "quantity_tag_goal": "restoration_goal", "commitment_revision_ref": "revision_claim_ref", "frozen_why": "frozen_why"},
+          "static_attributes": {"status": "proposed", "restoration_debt": true, "no_action_authority": true}}
+      ],
+      "claim_templates": [
+        {"id_pattern": "{revision_claim_ref}", "predicate": "supports_reopened_quantity_preservation_with_restoration",
+          "family": "epistemic", "epistemic_status": "supported",
+          "argument_patterns": ["{parent_goal_ref}", "{restoration_term_ref}"],
+          "required_term_patterns": ["{parent_goal_ref}", "{restoration_term_ref}"],
+          "required_fields": ["revision_claim_ref", "commitment_claim_ref", "parent_goal_ref", "scope_ref", "epoch", "input_revision_ref", "episode_ref", "level_scope_ref"],
+          "scope_bindings": {"parent_goal_ref": "parent_goal_ref", "scope_ref": "scope_ref", "epoch": "epoch", "input_revision_ref": "input_revision_ref", "episode_ref": "episode_ref", "level_scope_ref": "level_scope_ref", "evidence_revision_ref": "evidence_revision_ref", "model_revision_ref": "model_revision_ref"},
+          "attribute_bindings": {"superseded_commitment_ref": "commitment_claim_ref", "maintained_quantity_intervals": "replacement_preserved_intervals", "restoration_goal": "restoration_goal", "original_terminal_goals": "original_terminal_goals", "replacement_witness": "replacement_witness", "replacement_result_digest": "replacement_result_digest", "frozen_why": "frozen_why", "frame_ref": "frame_ref"},
+          "static_attributes": {"preservation_commitment": true, "terminal_goal_satisfied": false, "execution_authority": false}}
+      ]
+    }
+  ]
+}

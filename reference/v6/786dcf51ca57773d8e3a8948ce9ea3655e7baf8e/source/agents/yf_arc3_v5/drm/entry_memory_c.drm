@@ -1,0 +1,348 @@
+{
+  "module_id": "entry_memory_c",
+  "declarations": [
+    {
+      "id": "policy.entry_memory_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "actual_entry_observation_and_prior_field_provenance_are_separate"
+      ],
+      "applicability": [
+        "entry_rebinding_or_current_hidden_field_ambiguity"
+      ],
+      "invariants": [
+        "previous_successful_state_is_not_current_entry",
+        "neutral_or_missing_drawing_not_empty",
+        "observed_remembered_predicted_fields_separate",
+        "only_relevant_ambiguity_demands_observation",
+        "no_action_release"
+      ],
+      "falsifiers": [
+        "stale_epoch_scope_or_revision",
+        "unobserved_persistence",
+        "identity_not_currently_supported"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "entry.archive_stale_observation",
+        "entry.use_actual_observed_content",
+        "entry.use_currently_evidenced_persistence",
+        "entry.request_actual_entry_observation",
+        "entry.request_only_relevant_ambiguity",
+        "entry.retain_supported_hidden_content_alternatives",
+        "entry.retain_unbound_field_alternatives"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.entry_memory_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "entry.archive_stale_observation"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "entry.archive_stale_observation"
+          }
+        },
+        {
+          "id": "projection.entry_memory_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "entry.use_actual_observed_content"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_field_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_content_evidenced",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "entry.use_actual_observed_content"
+          }
+        },
+        {
+          "id": "projection.entry_memory_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "entry.use_currently_evidenced_persistence"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_content_evidenced",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "persistence_value_unambiguous",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "entry.use_currently_evidenced_persistence"
+          }
+        },
+        {
+          "id": "projection.entry_memory_c.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "entry.request_actual_entry_observation"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_content_evidenced",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "required_at_entry",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "persistence_value_unambiguous",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "entry.request_actual_entry_observation"
+          }
+        },
+        {
+          "id": "projection.entry_memory_c.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "entry.request_only_relevant_ambiguity"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_content_evidenced",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "relevant_to_next_contribution",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "persistence_value_unambiguous",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "entry.request_only_relevant_ambiguity"
+          }
+        },
+        {
+          "id": "projection.entry_memory_c.5",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "entry.retain_supported_hidden_content_alternatives"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "actual_content_evidenced",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_identity_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "supported_memory_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_prediction_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "entry.retain_supported_hidden_content_alternatives"
+          }
+        },
+        {
+          "id": "projection.entry_memory_c.6",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "entry.retain_unbound_field_alternatives"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "entry.retain_unbound_field_alternatives"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.entry_memory_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "entry.archive_stale_observation"
+            }
+          ],
+          "reason_ref": "reason.actual_field_content_or_current_scoped_persistence"
+        },
+        {
+          "id": "tier.entry_memory_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "entry.use_actual_observed_content"
+            }
+          ],
+          "reason_ref": "reason.actual_field_content_or_current_scoped_persistence"
+        },
+        {
+          "id": "tier.entry_memory_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "entry.use_currently_evidenced_persistence"
+            }
+          ],
+          "reason_ref": "reason.actual_field_content_or_current_scoped_persistence"
+        },
+        {
+          "id": "tier.entry_memory_c.3",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "entry.request_actual_entry_observation"
+            }
+          ],
+          "reason_ref": "reason.actual_field_content_or_current_scoped_persistence"
+        },
+        {
+          "id": "tier.entry_memory_c.4",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "entry.request_only_relevant_ambiguity"
+            }
+          ],
+          "reason_ref": "reason.actual_field_content_or_current_scoped_persistence"
+        },
+        {
+          "id": "tier.entry_memory_c.5",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "entry.retain_supported_hidden_content_alternatives"
+            }
+          ],
+          "reason_ref": "reason.actual_field_content_or_current_scoped_persistence"
+        },
+        {
+          "id": "tier.entry_memory_c.6",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "entry.retain_unbound_field_alternatives"
+            }
+          ],
+          "reason_ref": "reason.actual_field_content_or_current_scoped_persistence"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.entry_field_disposition_is_not_identity_tie_breaking",
+      "reason_refs": [
+        "reason.actual_field_content_or_current_scoped_persistence"
+      ]
+    }
+  ]
+}

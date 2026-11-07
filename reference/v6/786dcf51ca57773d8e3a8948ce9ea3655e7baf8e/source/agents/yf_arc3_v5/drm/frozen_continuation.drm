@@ -1,0 +1,332 @@
+{
+  "module_id": "frozen_continuation",
+  "declarations": [
+    {
+      "id": "policy.sealed_continuation_disposition",
+      "kind": "selection_policy", "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason.sealed_contradiction_or_unknown_dependency_requires_requalification"],
+      "invariants": ["absence_preserves_existing_qualified_continuation", "first_divergence_is_not_erased_by_terminal_pose", "no_unknown_or_unexecuted_suffix_is_observed_evidence"],
+      "selection_eligibility_conditions": [{"field": "packet_context_eligible", "operator": "equals", "expected": true}],
+      "declared_alternative_refs": ["continuation.packet.context"],
+      "fact_projections": [
+        {"id": "projection.packet_context.always", "all_conditions": [], "static_facts": {"packet_context_eligible": true}},
+        {"id": "projection.packet_context.divergence", "all_conditions": [{"field": "has_packet_divergence", "operator": "equals", "expected": true}], "static_facts": {"full_metaplan_reprojection_required_after_primitive": true, "verified_workflow_pending": false, "committed_verified_repetition": false, "packet_disposition": "first_causal_divergence"}},
+        {"id": "projection.packet_context.unknown", "all_conditions": [{"field": "has_unknown_comparison", "operator": "equals", "expected": true}], "static_facts": {"full_metaplan_reprojection_required_after_primitive": true, "verified_workflow_pending": false, "committed_verified_repetition": false, "packet_disposition": "missing_frozen_comparison_evidence"}},
+        {"id": "projection.packet_context.unexecuted_without_receipt", "all_conditions": [{"field": "has_unexecuted_suffix_without_boundary", "operator": "equals", "expected": true}], "static_facts": {"full_metaplan_reprojection_required_after_primitive": true, "verified_workflow_pending": false, "committed_verified_repetition": false, "packet_disposition": "unexecuted_suffix_needs_requalification"}},
+        {"id": "projection.packet_context.official_boundary", "all_conditions": [{"field": "official_boundary_receipt", "operator": "equals", "expected": true}], "static_facts": {"full_metaplan_reprojection_required_after_primitive": true, "verified_workflow_pending": false, "committed_verified_repetition": false, "packet_disposition": "old_execution_scope_ended"}}
+      ]
+    },
+    {
+      "id": "policy.frozen_continuation_measurement_contract",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.only_the_prebound_dependency_and_event_domains_are_measured"
+      ],
+      "configuration": {
+        "binding_input_field": "frozen_continuation_contract",
+        "revision_comparison": "typed_dependency_closure",
+        "point_binding_fields_by_kind": {
+          "board_point": ["point", "payload_digest", "primitive_index", "epoch", "scope_ref", "board_ref", "question_ref", "turn_ref", "board_active", "support_ref", "support_pixels", "owner_ref"],
+          "identity_point": ["point", "payload_digest", "primitive_index", "epoch", "scope_ref", "identity_ref", "occlusion_depth", "selection_ref", "palette_revision_ref", "slot_order_revision_ref", "support_ref", "support_pixels", "owner_ref"]
+        },
+        "point_certificate_required_refs": ["certificate_ref", "model_ref", "scope_ref", "point_binding_ref", "grounding_ref", "falsifier_ref", "causal_assumptions_ref"],
+        "relation_type_refs": ["control_channel", "physical_attachment", "temporary_contact", "support", "correspondence", "transport_ownership"],
+        "packet_input_field": "sealed_continuation_packet",
+        "binding_required_fields": [
+          "contract_ref",
+          "parent_goal_ref",
+          "scope_ref",
+          "model_ref",
+          "frozen_before_dispatch_ref"
+        ],
+        "service_required_fields": [
+          "service_ref",
+          "predicate_owner_ref",
+          "temporal_scope_ref",
+          "consumer_event_ref",
+          "deadline_ref",
+          "restoration_debt_ref",
+          "restoration_model_ref"
+        ],
+        "primitive_required_fields": [
+          "action_ref",
+          "payload_digest",
+          "authorization_ref"
+        ],
+        "packet_required_fields": [
+          "packet_ref",
+          "dispatch_ref",
+          "contract_ref",
+          "parent_goal_ref",
+          "scope_ref"
+        ],
+        "packet_phases": [
+          "direct",
+          "automatic",
+          "restoration"
+        ],
+        "official_boundary_kinds": [
+          "level_transition",
+          "official_win",
+          "official_failure"
+        ]
+      }
+    },
+    {
+      "id": "policy.frozen_continuation_binding",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.current_typed_dependency_closure_precedes_commitment"
+      ],
+      "premises": [
+        "dependencies_and_event_domains_are_declared_before_simulation"
+      ],
+      "invariants": [
+        "hidden_and_program_state_are_not_replaced_by_pose_or_action_journal",
+        "relation_types_remain_distinct",
+        "temporary_services_keep_their_named_consumer_deadline_and_restoration_model",
+        "future_observation_choices_are_not_committed_primitives",
+        "domain_narrowing_requires_prior_contract_revision"
+      ],
+      "falsifiers": [
+        "current_dependency_differs",
+        "required_dependency_unknown",
+        "scope_or_revision_changed",
+        "future_payload_or_authorization_unbound"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref",
+        "binding_present"
+      ],
+      "declared_alternative_refs": [
+        "continuation_binding.current_exact",
+        "continuation_binding.requalify"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.continuation_binding.current_exact",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "continuation_binding.current_exact"
+            },
+            {
+              "field": "binding_exact",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "continuation_binding_authorized": true
+          }
+        },
+        {
+          "id": "projection.continuation_binding.requalify",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "continuation_binding.requalify"
+            },
+            {
+              "field": "binding_exact",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "continuation_binding_authorized": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.sealed_continuation_packet",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.actual_indexed_prefix_and_authoritative_receipt_own_reconciliation"
+      ],
+      "premises": [
+        "packet_sealed",
+        "each_retained_sample_keeps_scene_frame_event_and_primitive_identity",
+        "requested_dimensions_and_predicates_are_frozen"
+      ],
+      "invariants": [
+        "later_pose_match_never_cancels_first_internal_divergence",
+        "direct_automatic_and_restoration_evidence_remain_distinct",
+        "only_executed_samples_are_compared_at_official_boundary",
+        "rendered_progress_is_not_a_lifecycle_receipt",
+        "duplicate_rendering_does_not_add_game_transactions",
+        "unknown_dimensions_remain_unknown",
+        "comparison_does_not_repair_adapter_discrepancies"
+      ],
+      "falsifiers": [
+        "sample_owner_missing",
+        "inconsistent_duplicate_sample",
+        "unsealed_packet",
+        "comparison_dimension_not_prebound"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref",
+        "packet_ref",
+        "packet_digest"
+      ],
+      "declared_alternative_refs": [
+        "continuation_packet.retain_causal_evidence"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.continuation_packet.retain_causal_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "continuation_packet.retain_causal_evidence"
+            },
+            {
+              "field": "packet_sealed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "commitment": "revisable"
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "continuation_packet.retain_causal_evidence": "rule.sealed_continuation_packet"
+      }
+    },
+    {
+      "id": "rule.sealed_continuation_packet",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "dynamic",
+      "reason_refs": [
+        "reason.one_packet_one_atomic_causal_publication"
+      ],
+      "invariants": [
+        "immutable_comparison_and_claims_publish_in_one_src_transaction",
+        "repeat_packet_is_idempotent",
+        "canonical_parent_remains_the_existing_parent",
+        "portable_comparison_method_is_separate_from_current_bindings"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "continuation.packet.{packet_token}",
+          "kind": "schema",
+          "label": "sealed causal comparison of one frozen contribution",
+          "required_fields": [
+            "packet_ref",
+            "packet_digest",
+            "packet_token",
+            "parent_goal_ref",
+            "scope_ref"
+          ],
+          "attribute_bindings": {
+            "packet_token": "packet_token",
+            "packet_digest": "packet_digest",
+            "packet_ref": "packet_ref",
+            "dispatch_ref": "dispatch_ref",
+            "contract_ref": "contract_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "dimension_refs": "dimension_refs",
+            "matching_prefix_count": "matching_prefix_count",
+            "first_divergence_window": "first_divergence_window",
+            "comparison_rows": "comparison_rows",
+            "phase_frame_refs": "phase_frame_refs",
+            "unknown_sample_refs": "unknown_sample_refs",
+            "divergent_sample_refs": "divergent_sample_refs",
+            "official_boundary_receipt": "official_boundary_receipt",
+            "unexecuted_prediction_refs": "unexecuted_prediction_refs",
+            "acknowledged_external_count": "acknowledged_external_count",
+            "implementation_missing_refs": "implementation_missing_refs",
+            "observation_missing_refs": "observation_missing_refs"
+          },
+          "static_attributes": {
+            "role": "sealed_continuation_comparison",
+            "commitment": "revisable",
+            "stored_fact_is_not_transfer_proof": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.continuation.packet.{packet_token}",
+          "predicate": "records_sealed_contribution_comparison",
+          "family": "dynamic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "continuation.packet.{packet_token}"
+          ],
+          "required_fields": [
+            "packet_ref",
+            "packet_digest",
+            "packet_token",
+            "parent_goal_ref",
+            "scope_ref"
+          ],
+          "attribute_bindings": {
+            "scope_ref": "scope_ref",
+            "contract_ref": "contract_ref",
+            "dispatch_ref": "dispatch_ref",
+            "has_packet_divergence": "has_packet_divergence",
+            "has_unknown_comparison": "has_unknown_comparison",
+            "official_boundary_receipt": "official_boundary_receipt"
+          },
+          "static_attributes": {
+            "commitment": "revisable",
+            "falsifier": "contradictory_actual_packet_or_changed_contract"
+          }
+        }
+      ]
+    }
+  ]
+}

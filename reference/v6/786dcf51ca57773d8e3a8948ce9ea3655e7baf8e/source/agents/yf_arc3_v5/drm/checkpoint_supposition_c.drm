@@ -1,0 +1,625 @@
+{
+  "module_id": "checkpoint_supposition_c",
+  "declarations": [
+    {
+      "id": "policy.cadenced_rail_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_explicit_checkpoint_evidence"
+      ],
+      "applicability": [
+        "revisable_checkpoint_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_terminal_law",
+        "requested_typed_bays_not_generic_or_spare",
+        "complete_unedited_program",
+        "initial_filter_not_later_placement",
+        "chart_annotation_not_current_item",
+        "physical_adhesion_not_visual_latch",
+        "one_settled_state_for_required_crates",
+        "entire_editable_field_includes_background_and_pockets",
+        "actual_write_and_terminal_contracts_separate",
+        "unknowns_remain_unknown"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_checkpoint",
+        "incomplete_program_supply_or_field",
+        "unproved_object_or_adhesion_identity",
+        "wrong_semantic_boundary_relation",
+        "unqualified_write_or_terminal"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "cadenced_rail.retain_requested_typed_bays_quiescent_question",
+        "cadenced_rail.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.cadenced_rail_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cadenced_rail.retain_requested_typed_bays_quiescent_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_typed_bay_question_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "cadenced_rail.retain_requested_typed_bays_quiescent_question"
+          }
+        },
+        {
+          "id": "projection.policy.cadenced_rail_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cadenced_rail.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "cadenced_rail.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.cadenced_rail_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "cadenced_rail.retain_requested_typed_bays_quiescent_question"
+            }
+          ],
+          "reason_ref": "reason.retain_requested_typed_bays_quiescent_question"
+        },
+        {
+          "id": "tier.policy.cadenced_rail_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "cadenced_rail.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_requested_typed_bays_quiescent_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.checkpoint_question_not_terminal_or_act_selection",
+      "reason_refs": [
+        "reason.retain_requested_typed_bays_quiescent_question"
+      ]
+    },
+    {
+      "id": "policy.fixed_origin_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_explicit_checkpoint_evidence"
+      ],
+      "applicability": [
+        "revisable_checkpoint_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_terminal_law",
+        "requested_typed_bays_not_generic_or_spare",
+        "complete_unedited_program",
+        "initial_filter_not_later_placement",
+        "chart_annotation_not_current_item",
+        "physical_adhesion_not_visual_latch",
+        "one_settled_state_for_required_crates",
+        "entire_editable_field_includes_background_and_pockets",
+        "actual_write_and_terminal_contracts_separate",
+        "unknowns_remain_unknown"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_checkpoint",
+        "incomplete_program_supply_or_field",
+        "unproved_object_or_adhesion_identity",
+        "wrong_semantic_boundary_relation",
+        "unqualified_write_or_terminal"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "fixed_origin.retain_complete_fixed_program_alive_accepting_question",
+        "fixed_origin.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.fixed_origin_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "fixed_origin.retain_complete_fixed_program_alive_accepting_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "whole_fixed_program_origin_question_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "fixed_origin.retain_complete_fixed_program_alive_accepting_question"
+          }
+        },
+        {
+          "id": "projection.policy.fixed_origin_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "fixed_origin.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "fixed_origin.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.fixed_origin_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "fixed_origin.retain_complete_fixed_program_alive_accepting_question"
+            }
+          ],
+          "reason_ref": "reason.retain_complete_fixed_program_alive_accepting_question"
+        },
+        {
+          "id": "tier.policy.fixed_origin_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "fixed_origin.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_complete_fixed_program_alive_accepting_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.checkpoint_question_not_terminal_or_act_selection",
+      "reason_refs": [
+        "reason.retain_complete_fixed_program_alive_accepting_question"
+      ]
+    },
+    {
+      "id": "policy.charted_room_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_explicit_checkpoint_evidence"
+      ],
+      "applicability": [
+        "revisable_checkpoint_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_terminal_law",
+        "requested_typed_bays_not_generic_or_spare",
+        "complete_unedited_program",
+        "initial_filter_not_later_placement",
+        "chart_annotation_not_current_item",
+        "physical_adhesion_not_visual_latch",
+        "one_settled_state_for_required_crates",
+        "entire_editable_field_includes_background_and_pockets",
+        "actual_write_and_terminal_contracts_separate",
+        "unknowns_remain_unknown"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_checkpoint",
+        "incomplete_program_supply_or_field",
+        "unproved_object_or_adhesion_identity",
+        "wrong_semantic_boundary_relation",
+        "unqualified_write_or_terminal"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "charted_room.retain_accepting_room_and_available_objects_question",
+        "charted_room.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.charted_room_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "charted_room.retain_accepting_room_and_available_objects_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "charted_permission_navigation_question_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "charted_room.retain_accepting_room_and_available_objects_question"
+          }
+        },
+        {
+          "id": "projection.policy.charted_room_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "charted_room.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "charted_room.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.charted_room_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "charted_room.retain_accepting_room_and_available_objects_question"
+            }
+          ],
+          "reason_ref": "reason.retain_accepting_room_and_available_objects_question"
+        },
+        {
+          "id": "tier.policy.charted_room_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "charted_room.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_accepting_room_and_available_objects_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.checkpoint_question_not_terminal_or_act_selection",
+      "reason_refs": [
+        "reason.retain_accepting_room_and_available_objects_question"
+      ]
+    },
+    {
+      "id": "policy.gravity_adhesion_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_explicit_checkpoint_evidence"
+      ],
+      "applicability": [
+        "revisable_checkpoint_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_terminal_law",
+        "requested_typed_bays_not_generic_or_spare",
+        "complete_unedited_program",
+        "initial_filter_not_later_placement",
+        "chart_annotation_not_current_item",
+        "physical_adhesion_not_visual_latch",
+        "one_settled_state_for_required_crates",
+        "entire_editable_field_includes_background_and_pockets",
+        "actual_write_and_terminal_contracts_separate",
+        "unknowns_remain_unknown"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_checkpoint",
+        "incomplete_program_supply_or_field",
+        "unproved_object_or_adhesion_identity",
+        "wrong_semantic_boundary_relation",
+        "unqualified_write_or_terminal"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "gravity_adhesion.retain_required_crates_physical_adhesion_question",
+        "gravity_adhesion.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.gravity_adhesion_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "gravity_adhesion.retain_required_crates_physical_adhesion_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "required_crate_physical_adhesion_question_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "gravity_adhesion.retain_required_crates_physical_adhesion_question"
+          }
+        },
+        {
+          "id": "projection.policy.gravity_adhesion_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "gravity_adhesion.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "gravity_adhesion.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.gravity_adhesion_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "gravity_adhesion.retain_required_crates_physical_adhesion_question"
+            }
+          ],
+          "reason_ref": "reason.retain_required_crates_physical_adhesion_question"
+        },
+        {
+          "id": "tier.policy.gravity_adhesion_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "gravity_adhesion.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_required_crates_physical_adhesion_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.checkpoint_question_not_terminal_or_act_selection",
+      "reason_refs": [
+        "reason.retain_required_crates_physical_adhesion_question"
+      ]
+    },
+    {
+      "id": "policy.topological_recolor_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_explicit_checkpoint_evidence"
+      ],
+      "applicability": [
+        "revisable_checkpoint_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_terminal_law",
+        "requested_typed_bays_not_generic_or_spare",
+        "complete_unedited_program",
+        "initial_filter_not_later_placement",
+        "chart_annotation_not_current_item",
+        "physical_adhesion_not_visual_latch",
+        "one_settled_state_for_required_crates",
+        "entire_editable_field_includes_background_and_pockets",
+        "actual_write_and_terminal_contracts_separate",
+        "unknowns_remain_unknown"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_checkpoint",
+        "incomplete_program_supply_or_field",
+        "unproved_object_or_adhesion_identity",
+        "wrong_semantic_boundary_relation",
+        "unqualified_write_or_terminal"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "topological_recolor.retain_entire_derived_field_and_actual_write_question",
+        "topological_recolor.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.topological_recolor_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "topological_recolor.retain_entire_derived_field_and_actual_write_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "whole_topological_field_question_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "topological_recolor.retain_entire_derived_field_and_actual_write_question"
+          }
+        },
+        {
+          "id": "projection.policy.topological_recolor_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "topological_recolor.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "topological_recolor.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.topological_recolor_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "topological_recolor.retain_entire_derived_field_and_actual_write_question"
+            }
+          ],
+          "reason_ref": "reason.retain_entire_derived_field_and_actual_write_question"
+        },
+        {
+          "id": "tier.policy.topological_recolor_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "topological_recolor.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_entire_derived_field_and_actual_write_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.checkpoint_question_not_terminal_or_act_selection",
+      "reason_refs": [
+        "reason.retain_entire_derived_field_and_actual_write_question"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,333 @@
+{
+  "module_id": "support_solving_d",
+  "declarations": [
+    {
+      "id": "policy.support_solving_question_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "full_parent_destination_region_connection_staging_why"
+      ],
+      "applicability": [
+        "goal_owned_support_question"
+      ],
+      "invariants": [
+        "same_k22",
+        "current_sealed_frontier",
+        "no_act"
+      ],
+      "falsifiers": [
+        "unbound_parent",
+        "unsupported_model",
+        "wrong_operation_mode"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "support_solving.calculate",
+        "support_solving.need_evidence"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.support_solving_d.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "support_solving.calculate"
+            },
+            {
+              "field": "parent_question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_status_ref",
+              "operator": "equals",
+              "expected": "ACTIVE"
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "SUPPORT"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reconfigurable_support.support_report"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "MEASURE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.support_solving_d.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "support_solving.calculate"
+            },
+            {
+              "field": "parent_question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_status_ref",
+              "operator": "equals",
+              "expected": "ACTIVE"
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "GEOMETRY"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reconfigurable_support.rigid_geometry"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "FIT"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.support_solving_d.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "support_solving.calculate"
+            },
+            {
+              "field": "parent_question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_status_ref",
+              "operator": "equals",
+              "expected": "ACTIVE"
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "MOVE"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reconfigurable_support.mode_successor"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "STEP_INTERNAL"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.support_solving_d.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "support_solving.calculate"
+            },
+            {
+              "field": "parent_question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_status_ref",
+              "operator": "equals",
+              "expected": "ACTIVE"
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "PERMISSION"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reconfigurable_support.permission_precondition"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "PRECONDITION"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.support_solving_d.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "support_solving.calculate"
+            },
+            {
+              "field": "parent_question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_status_ref",
+              "operator": "equals",
+              "expected": "ACTIVE"
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "CODE"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reconfigurable_support.coded_transfer"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "STEP_INTERNAL"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.support_solving_d.5",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "support_solving.calculate"
+            },
+            {
+              "field": "parent_question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_status_ref",
+              "operator": "equals",
+              "expected": "ACTIVE"
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "RESTORE"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reconfigurable_support.restoration_mask"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "STEP_INTERNAL"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.support_solving_d.6",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "support_solving.calculate"
+            },
+            {
+              "field": "parent_question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_status_ref",
+              "operator": "equals",
+              "expected": "ACTIVE"
+            },
+            {
+              "field": "requested_question",
+              "operator": "equals",
+              "expected": "CONNECTION"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reconfigurable_support.inverse_connection"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "INVERSE_DOMAIN"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.support_solving_d.need",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "support_solving.need_evidence"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {"id": "tier.support_solving_d.calculate", "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "support_solving.calculate"}], "reason_ref": "reason.support_current_parent_configuration_question"},
+        {"id": "tier.support_solving_d.need", "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "support_solving.need_evidence"}], "reason_ref": "reason.support_parent_question_missing_evidence"}
+      ],
+      "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+      "canonical_equivalence_tie_break_debt_ref": "debt.support_solving_actual_use_unverified",
+      "reason_refs": ["reason.support_current_parent_configuration_question", "reason.support_parent_question_missing_evidence"]
+    }
+  ]
+}

@@ -1,0 +1,770 @@
+{
+  "module_id": "arc3.observed_problem_question",
+  "declarations": [
+    {
+      "id": "policy.prepare_observed_peer_composition_access",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "selection_eligibility_conditions": [
+        {
+          "field": "composition_access_admissible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_required_fact_fields": [
+        "composition_relation_count",
+        "total_primitive_distance",
+        "access_distance",
+        "direct_single_input_previously_executed",
+        "conditional_peer_response_exit_upper_bound"
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "selection_tiers": [
+        {
+          "id": "tier.prepare_joint_access_to_observed_peer",
+          "reason_ref": "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+        }
+      ],
+      "selection_precedence_criteria": [
+        {
+          "field": "composition_relation_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.most_complex_accessible_composition",
+          "reason_ref": "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+        },
+        {
+          "field": "conditional_peer_response_exit_upper_bound",
+          "preferred_order": "minimize",
+          "criterion_ref": "criterion.restrict_peer_exits_under_stationary_or_one_cell_responses",
+          "reason_ref": "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+        },
+        {
+          "field": "total_primitive_distance",
+          "preferred_order": "minimize",
+          "criterion_ref": "criterion.shortest_total_access_to_composition",
+          "reason_ref": "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "access_distance",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "direct_single_input_previously_executed",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "grip_row",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "grip_col",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "reason_refs": [
+        "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+      ],
+      "invariants": [
+        "observe_counteracted_approach_before_selecting_a_composed_means",
+        "current_exact_identities_join_the_retained_question_to_geometry",
+        "carrier_part_and_carried_part_peer_contact_are_two_distinct_relations",
+        "maximize_distinct_accessible_relations_then_restrict_local_peer_responses_then_minimize_total_primitive_cost",
+        "equal_geometry_cost_uses_one_declared_row_then_column_traversal_witness_not_a_hash_preference",
+        "attachment_is_a_revisable_experiment_not_an_acquired_law_or_act_permit",
+        "one_straight_obstacle_translation_is_counterfactual_and_each_push_is_reconciled_before_continuation",
+        "translation_cost_includes_contact_access_all_push_primitives_and_remaining_access_to_the_same_complex_composition",
+        "the_observed_reactive_peer_does_not_count_as_a_competing_stationary_part",
+        "contact_with_the_peer_does_not_guarantee_which_body_an_unknown_operator_changes",
+        "no_palette_position_or_creator_action_sequence_selects_the_part",
+        "stationary_part_must_remove_an_exit_and_independent_actor_must_close_the_remaining_domain",
+        "inverse_operator_and_independence_are_experiments_not_acquired_physics",
+        "a_contact_in_a_closed_geometric_domain_remains_an_unknown_terminal_probe",
+        "among_equal_complexity_and_shortest_access_cost_prefer_a_direct_input_not_yet_executed_in_the_same_configuration",
+        "peer_response_contrast_keeps_stationary_and_every_free_one_cell_response_possible_not_a_committed_evasion_law"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.observed_composition_access.defaults",
+          "static_facts": {
+            "composition_access_admissible": false,
+            "composition_relation_count": 0,
+            "conditional_peer_response_exit_upper_bound": 0
+          }
+        },
+        {
+          "id": "projection.observed_composition_access.joint_witness",
+          "all_conditions": [
+            {
+              "field": "question_already_retained",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_identity_binding",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composition_inventory_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "controlled_approach",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "distance_delta",
+              "operator": "greater_than",
+              "expected": -1
+            },
+            {
+              "field": "shared_translation",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "contact_group_count_excluding_peer",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "joint_distance",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "question_evidence_refs",
+              "operator": "is_present"
+            }
+          ],
+          "static_facts": {
+            "composition_access_admissible": true,
+            "acquisition_parent_admissible": true,
+            "composition_relation_count": 2,
+            "prospective_grasp_hypothesis_ref": "hypothesis.rigid_attachment_at_current_contact"
+          }
+        },
+        {
+          "id": "projection.observed_composition_access.bounded_peer_response_contrast",
+          "all_conditions": [
+            {
+              "field": "composition_access_admissible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_bound_pair_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "one_cell_response_exit_count_upper_bound",
+              "operator": "is_present"
+            }
+          ],
+          "bound_facts": {
+            "conditional_peer_response_exit_upper_bound": "one_cell_response_exit_count_upper_bound"
+          }
+        },
+        {
+          "id": "projection.observed_composition_access.connected_escape_partition",
+          "all_conditions": [
+            {
+              "field": "composition_access_admissible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_bound_pair_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "coupling_claim_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "peer_extra_partition_loss",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "composition_relation_count": 3
+          }
+        },
+        {
+          "id": "projection.observed_composition_access.closed_peer_exit_domain",
+          "all_conditions": [
+            {
+              "field": "composition_access_admissible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_bound_pair_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "coupling_claim_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "peer_exit_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "composition_relation_count": 4
+          }
+        },
+        {
+          "id": "projection.observed_composition_access.useful_stationary_part",
+          "all_conditions": [
+            {
+              "field": "question_already_retained",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_identity_binding",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composition_inventory_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_bound_pair_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "coupling_claim_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "prepared_constraint_contract",
+              "operator": "is_present"
+            },
+            {
+              "field": "stationary_part_neighbor_loss",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "peer_exit_count_after_independent_actor",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "joint_terminal_reachable",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "independent_access_distance",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "composition_access_admissible": true,
+            "acquisition_parent_admissible": true,
+            "composition_relation_count": 4,
+            "useful_separation_candidate": true,
+            "prospective_grasp_hypothesis_ref": "hypothesis.inverse_operator_may_preserve_a_stationary_constraint"
+          },
+          "templated_facts": {
+            "prepared_constraint_operator_experiment_ref": "experiment.prepared_constraint_inverse.{prepared_constraint_ref}",
+            "prepared_constraint_claim_ref": "claim.{prepared_constraint_ref}"
+          }
+        },
+        {
+          "id": "projection.observed_composition_access.independent_closure",
+          "all_conditions": [
+            {
+              "field": "question_already_retained",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_identity_binding",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composition_inventory_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "independent_motion_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "proposal_operator_observation_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "prepared_constraint_contract",
+              "operator": "is_present"
+            },
+            {
+              "field": "stationary_part_neighbor_loss",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "peer_exit_count_after_independent_actor",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "composition_access_admissible": true,
+            "acquisition_parent_admissible": true,
+            "composition_relation_count": 4,
+            "prospective_grasp_hypothesis_ref": "hypothesis.independent_actor_closes_peer_domain_while_part_stays"
+          },
+          "any_conditions": [
+            {
+              "field": "conditional_peer_contact",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "actor_translation_with_part_stationary_observed",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "policy.retain_observed_approach_question",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "selection_eligibility_conditions": [
+        {
+          "field": "acquisition_parent_admissible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.retain_observed_approach_question"
+      },
+      "configuration": {
+        "meaning_evidence_refs_field": "question_evidence_refs"
+      },
+      "reason_refs": [
+        "reason.observed_approach_obstruction_remains_an_open_question"
+      ],
+      "invariants": [
+        "observed_obstruction_is_a_question_not_a_capture_goal_or_terminal_law",
+        "missing_current_measurement_does_not_refute_historical_observation",
+        "question_grants_no_act_or_priority_over_validated_continuations",
+        "current_identity_and_original_evidence_are_distinct"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.observed_question.defaults",
+          "static_facts": {
+            "acquisition_parent_admissible": false
+          }
+        },
+        {
+          "id": "projection.observed_question.retain_origin",
+          "all_conditions": [
+            {
+              "field": "question_already_retained",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "acquisition_parent_admissible": true
+          }
+        },
+        {
+          "id": "projection.observed_question.new_obstruction",
+          "all_conditions": [
+            {
+              "field": "question_already_retained",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_identity_binding",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "controlled_approach",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "distance_delta",
+              "operator": "greater_than",
+              "expected": -1
+            },
+            {
+              "field": "shared_translation",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "question_evidence_refs",
+              "operator": "is_present"
+            }
+          ],
+          "static_facts": {
+            "acquisition_parent_admissible": true
+          }
+        },
+        {
+          "id": "projection.observed_question.frontier",
+          "all_conditions": [
+            {
+              "field": "acquisition_parent_admissible",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "lifecycle_status": "proposed",
+            "agenda_entry_state": "unresolved_mechanical_question",
+            "priority_position": 0,
+            "benefit_status": "possible_not_established",
+            "agenda_action_witness_measurement_present": false,
+            "question_only": true
+          },
+          "bound_facts": {
+            "goal_ref": "question_ref",
+            "support_claim_refs": "question_evidence_refs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.publish_new_observed_approach_question",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "selection_eligibility_conditions": [
+        {
+          "field": "acquisition_parent_admissible",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "question_already_retained",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.retain_observed_approach_question"
+      },
+      "configuration": {
+        "meaning_evidence_refs_field": "question_evidence_refs"
+      },
+      "reason_refs": [
+        "reason.observed_approach_obstruction_remains_an_open_question"
+      ],
+      "invariants": [
+        "publish_a_new_question_once_without_recreating_its_canonical_origin",
+        "an_existing_question_continues_through_exact_canonical_binding",
+        "missing_current_identity_evidence_neither_erases_origin_nor_grants_act"
+      ]
+    },
+    {
+      "id": "rule.retain_observed_approach_question",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "reason_refs": [
+        "reason.observed_approach_obstruction_remains_an_open_question"
+      ],
+      "invariants": [
+        "question_does_not_assert_capture_or_a_winning_goal",
+        "origin_not_overwritten_by_missing_measurements"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{question_ref}",
+          "kind": "goal",
+          "label": "revisable question about an observed obstruction to approach",
+          "required_fields": [
+            "question_ref",
+            "question_contract"
+          ],
+          "all_conditions": [
+            {
+              "field": "acquisition_parent_admissible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "question_already_retained",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_attributes": {
+            "role": "relative_approach_question",
+            "status": "proposed",
+            "commitment": "revisable",
+            "question_allows_act": false,
+            "projection_contract": "observed_approach_question.v1"
+          },
+          "attribute_bindings": {
+            "question_contract": "question_contract"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{question_ref}",
+          "predicate": "retains_observed_approach_question",
+          "family": "dynamic",
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "question_ref"
+          ],
+          "all_conditions": [
+            {
+              "field": "acquisition_parent_admissible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "question_already_retained",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "argument_patterns": [
+            "{question_ref}"
+          ],
+          "required_term_patterns": [
+            "{question_ref}"
+          ],
+          "static_attributes": {
+            "question_allows_act": false
+          },
+          "attribute_bindings": {
+            "origin_frame_ref": "question_origin_frame_ref",
+            "observation_evidence_refs": "question_evidence_refs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.publish_prepared_peer_constraint",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "selection_eligibility_conditions": [
+        {
+          "field": "composition_access_admissible",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "useful_separation_candidate",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "access_distance",
+          "operator": "equals",
+          "expected": 0
+        },
+        {
+          "field": "prepared_constraint_already_retained",
+          "operator": "equals",
+          "expected": false
+        },
+        {
+          "field": "coupling_claim_refs",
+          "operator": "is_present"
+        },
+        {
+          "field": "prepared_constraint_contract",
+          "operator": "is_present"
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.retain_prepared_peer_constraint"
+      },
+      "configuration": {
+        "meaning_evidence_refs_field": "question_evidence_refs"
+      },
+      "reason_refs": [
+        "reason.inverse_trial_retains_the_same_observed_peer_question"
+      ]
+    },
+    {
+      "id": "rule.retain_prepared_peer_constraint",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "reason_refs": [
+        "reason.inverse_trial_retains_the_same_observed_peer_question"
+      ],
+      "invariants": [
+        "hypothesis_retains_scope_and_identities_without_granting_act",
+        "only_an_observed_released_operator_can_activate_independent_access"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{prepared_constraint_ref}",
+          "kind": "schema",
+          "label": "revisable prepared stationary constraint and independent access",
+          "required_fields": [
+            "prepared_constraint_ref",
+            "prepared_constraint_contract",
+            "prepared_constraint_operator_experiment_ref",
+            "prepared_constraint_claim_ref"
+          ],
+          "all_conditions": [
+            {
+              "field": "composition_access_admissible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "useful_separation_candidate",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "access_distance",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "prepared_constraint_already_retained",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coupling_claim_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "prepared_constraint_contract",
+              "operator": "is_present"
+            }
+          ],
+          "static_attributes": {
+            "projection_contract": "prepared_peer_constraint.v1",
+            "status": "proposed",
+            "commitment": "revisable",
+            "action_authorization": false
+          },
+          "attribute_bindings": {
+            "prepared_constraint_contract": "prepared_constraint_contract",
+            "operator_experiment_ref": "prepared_constraint_operator_experiment_ref",
+            "support_claim_ref": "prepared_constraint_claim_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{prepared_constraint_claim_ref}",
+          "predicate": "retains_prepared_peer_constraint_hypothesis",
+          "family": "dynamic",
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "prepared_constraint_ref"
+          ],
+          "all_conditions": [
+            {
+              "field": "composition_access_admissible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "useful_separation_candidate",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "access_distance",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "prepared_constraint_already_retained",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "coupling_claim_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "prepared_constraint_contract",
+              "operator": "is_present"
+            }
+          ],
+          "argument_patterns": [
+            "{prepared_constraint_ref}"
+          ],
+          "required_term_patterns": [
+            "{prepared_constraint_ref}"
+          ],
+          "static_attributes": {
+            "status": "proposed",
+            "action_authorization": false
+          }
+        }
+      ]
+    }
+  ]
+}

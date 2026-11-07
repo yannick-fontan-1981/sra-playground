@@ -1,0 +1,438 @@
+{
+  "module_id": "scoped_control_memory_b",
+  "declarations": [
+    {
+      "id": "policy.b_scoped_control_application",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_actual_application_prerequisites_and_initiator_remain_distinct_from_packet_displacement"
+      ],
+      "configuration": {
+        "projection_contract": "control.application_memory.b.v1",
+        "record_predicate": "records_scoped_control_application_result",
+        "record_support_prefix": "claim.control.application_memory.",
+        "current_context_predicate": "supports_current_control_application_context",
+        "acknowledgment_predicate": "supports_acknowledged_control_application",
+        "nominal_predicate": "supports_nominal_control_input",
+        "prerequisite_dimension_refs": [
+          "selection",
+          "capacity",
+          "location",
+          "contact",
+          "phase",
+          "receiver"
+        ],
+        "initiating_phase_ref": "input",
+        "direct_phase_ref": "direct",
+        "dependent_phase_refs": [
+          "automatic",
+          "dependent",
+          "transport"
+        ]
+      },
+      "declared_alternative_refs": [
+        "control_application.ineffective",
+        "control_application.effect_observed",
+        "control_application.unresolved"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.b_scoped_control_application"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.control_application.ineffective",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "control_application.ineffective"
+            },
+            {
+              "field": "effect_closure_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "effect_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_effect_disposition_ref": "control_application.ineffective"
+          }
+        },
+        {
+          "id": "projection.control_application.effect_observed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "control_application.effect_observed"
+            },
+            {
+              "field": "effect_closure_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "effect_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_effect_disposition_ref": "control_application.effect_observed"
+          }
+        },
+        {
+          "id": "projection.control_application.unresolved",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "control_application.unresolved"
+            },
+            {
+              "field": "effect_closure_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "source_effect_disposition_ref": "control_application.unresolved"
+          }
+        }
+      ],
+      "invariants": [
+        "input_identity_is_not_aggregate_displacement",
+        "nominal_direction_requires_its_own_support",
+        "direct_and_dependent_events_keep_their_initiator",
+        "incomplete_closure_never_proves_no_effect",
+        "negative_evidence_is_not_deleted_on_prerequisite_change"
+      ]
+    },
+    {
+      "id": "rule.b_scoped_control_application",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason_actual_application_prerequisites_and_initiator_remain_distinct_from_packet_displacement"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "control.application_memory.{application_identity}.{application_digest}",
+          "kind": "schema",
+          "label": "Scoped input event and observed effect closure",
+          "required_fields": [
+            "application_identity",
+            "application_digest",
+            "parent_goal_ref",
+            "scope_ref"
+          ],
+          "static_attributes": {
+            "projection_contract": "control.application_memory.b.v1",
+            "commitment": "revisable"
+          },
+          "attribute_bindings": {
+            "application_ref": "application_ref",
+            "application_identity": "application_identity",
+            "application_digest": "application_digest",
+            "action_ref": "action_ref",
+            "candidate_ref": "candidate_ref",
+            "payload_digest": "payload_digest",
+            "addressed_control_ref": "addressed_control_ref",
+            "receiver_refs": "receiver_refs",
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "dispatch_ref": "dispatch_ref",
+            "after_frame_ref": "after_frame_ref",
+            "input_event_ref": "input_event_ref",
+            "prerequisite_context": "prerequisite_context",
+            "prerequisite_predicates": "prerequisite_predicates",
+            "prerequisite_statuses": "prerequisite_statuses",
+            "nominal_input_known": "nominal_input_known",
+            "nominal_input": "nominal_input",
+            "direct_event_refs": "direct_event_refs",
+            "dependent_event_refs": "dependent_event_refs",
+            "effect_graph": "effect_graph",
+            "effect_refs": "effect_refs",
+            "source_effect_disposition_ref": "source_effect_disposition_ref",
+            "support_claim_ref": "memory_support_claim_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.control.application_memory.{application_identity}.{application_digest}",
+          "predicate": "records_scoped_control_application_result",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "control.application_memory.{application_identity}.{application_digest}"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref"
+          },
+          "attribute_bindings": {
+            "source_effect_disposition_ref": "source_effect_disposition_ref"
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.b_scoped_control_lookup",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_newly_fulfilled_prerequisite_reopens_only_its_specific_application"
+      ],
+      "configuration": {
+        "projection_contract": "control.application_memory.b.v1",
+        "record_predicate": "records_scoped_control_application_result",
+        "current_context_predicate": "supports_current_control_application_context",
+        "acknowledgment_predicate": "supports_acknowledged_control_application",
+        "nominal_predicate": "supports_nominal_control_input",
+        "prerequisite_dimension_refs": [
+          "selection",
+          "capacity",
+          "location",
+          "contact",
+          "phase",
+          "receiver"
+        ],
+        "initiating_phase_ref": "input",
+        "direct_phase_ref": "direct",
+        "dependent_phase_refs": [
+          "automatic",
+          "dependent",
+          "transport"
+        ]
+      },
+      "declared_alternative_refs": [
+        "control_scope.negative_current",
+        "control_scope.reopened",
+        "control_scope.untried",
+        "control_scope.open"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.b_scoped_control_lookup"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.control_scope.negative_current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "control_scope.negative_current"
+            },
+            {
+              "field": "lookup_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "exact_negative_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "scope_disposition_ref": "control_scope.negative_current"
+          }
+        },
+        {
+          "id": "projection.control_scope.reopened",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "control_scope.reopened"
+            },
+            {
+              "field": "lookup_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "exact_negative_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "newly_satisfied_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "scope_disposition_ref": "control_scope.reopened"
+          }
+        },
+        {
+          "id": "projection.control_scope.untried",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "control_scope.untried"
+            },
+            {
+              "field": "lookup_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "exact_negative_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "newly_satisfied_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "scope_disposition_ref": "control_scope.untried"
+          }
+        },
+        {
+          "id": "projection.control_scope.open",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "control_scope.open"
+            },
+            {
+              "field": "lookup_bindings_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "scope_disposition_ref": "control_scope.open"
+          }
+        }
+      ],
+      "invariants": [
+        "six_prerequisite_dimensions_are_current_and_bound",
+        "no_global_reprobe",
+        "exact_current_negative_overrides_an_older_reopening",
+        "historical_negative_records_are_preserved"
+      ]
+    },
+    {
+      "id": "rule.b_scoped_control_lookup",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason_newly_fulfilled_prerequisite_reopens_only_its_specific_application"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "control.application_scope.{lookup_token}",
+          "kind": "value",
+          "label": "Current scoped application disposition",
+          "required_fields": [
+            "lookup_token",
+            "application_ref",
+            "current_frame_ref"
+          ],
+          "static_attributes": {
+            "projection_contract": "control.application_scope.b.v1"
+          },
+          "attribute_bindings": {
+            "application_ref": "application_ref",
+            "application_identity": "application_identity",
+            "candidate_ref": "candidate_ref",
+            "action_ref": "action_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "current_frame_ref": "current_frame_ref",
+            "scope_disposition_ref": "scope_disposition_ref",
+            "exact_negative_memory_refs": "exact_negative_memory_refs",
+            "reopened_prerequisite_rows": "reopened_prerequisite_rows"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.control.application_scope.{lookup_token}",
+          "predicate": "records_current_control_application_disposition",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{application_ref}",
+            "control.application_scope.{lookup_token}"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "frame_ref": "current_frame_ref"
+          },
+          "attribute_bindings": {
+            "application_ref": "application_ref",
+            "application_identity": "application_identity",
+            "candidate_ref": "candidate_ref",
+            "action_ref": "action_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "current_frame_ref": "current_frame_ref",
+            "scope_disposition_ref": "scope_disposition_ref",
+            "exact_negative_memory_refs": "exact_negative_memory_refs",
+            "reopened_prerequisite_rows": "reopened_prerequisite_rows"
+          }
+        }
+      ]
+    }
+  ]
+}

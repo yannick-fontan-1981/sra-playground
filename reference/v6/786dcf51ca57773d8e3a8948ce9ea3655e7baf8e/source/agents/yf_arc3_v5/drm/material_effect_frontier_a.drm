@@ -1,0 +1,412 @@
+{
+  "module_id": "material_effect_frontier_a",
+  "declarations": [
+    {
+      "id": "policy.material_effect_frontier_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_actual_effect_frontier"
+      ],
+      "declared_alternative_refs": [
+        "material_effect_frontier_a.ownership_transfer",
+        "material_effect_frontier_a.whole_commit_yield",
+        "material_effect_frontier_a.changed_recipe_relation",
+        "material_effect_frontier_a.same_recipe_relation",
+        "material_effect_frontier_a.official_completion_observed",
+        "material_effect_frontier_a.delivery_retrieval_observed",
+        "material_effect_frontier_a.current_delivery_and_operand_state",
+        "material_effect_frontier_a.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_effect_frontier_equivalent",
+      "selection_tiers": [
+        {
+          "id": "tier.material_effect_frontier_a.ownership_transfer",
+          "reason_ref": "reason.material_actual_effect_frontier",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_effect_frontier_a.ownership_transfer"
+            },
+            {
+              "field": "facet",
+              "operator": "equals",
+              "expected": "OWNERSHIP"
+            },
+            {
+              "field": "effect_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "identities_and_materials_retained",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "ownership_transition_observed",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_effect_frontier_a.whole_commit_yield",
+          "reason_ref": "reason.material_actual_effect_frontier",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_effect_frontier_a.whole_commit_yield"
+            },
+            {
+              "field": "facet",
+              "operator": "equals",
+              "expected": "YIELD"
+            },
+            {
+              "field": "effect_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "whole_work_to_stock_commit",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_effect_frontier_a.changed_recipe_relation",
+          "reason_ref": "reason.material_actual_effect_frontier",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_effect_frontier_a.changed_recipe_relation"
+            },
+            {
+              "field": "facet",
+              "operator": "equals",
+              "expected": "RULE_REVISION"
+            },
+            {
+              "field": "effect_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "recipe_graphs_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "recipe_graph_changed",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_effect_frontier_a.same_recipe_relation",
+          "reason_ref": "reason.material_actual_effect_frontier",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_effect_frontier_a.same_recipe_relation"
+            },
+            {
+              "field": "facet",
+              "operator": "equals",
+              "expected": "RULE_REVISION"
+            },
+            {
+              "field": "effect_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "recipe_graphs_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "recipe_graph_changed",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "tier.material_effect_frontier_a.official_completion_observed",
+          "reason_ref": "reason.material_actual_effect_frontier",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_effect_frontier_a.official_completion_observed"
+            },
+            {
+              "field": "facet",
+              "operator": "equals",
+              "expected": "DELIVERY_STATE"
+            },
+            {
+              "field": "effect_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "official_score_increased",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_effect_frontier_a.delivery_retrieval_observed",
+          "reason_ref": "reason.material_actual_effect_frontier",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_effect_frontier_a.delivery_retrieval_observed"
+            },
+            {
+              "field": "facet",
+              "operator": "equals",
+              "expected": "DELIVERY_STATE"
+            },
+            {
+              "field": "effect_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "delivery_retrieval_observed",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_effect_frontier_a.current_delivery_and_operand_state",
+          "reason_ref": "reason.material_actual_effect_frontier",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_effect_frontier_a.current_delivery_and_operand_state"
+            },
+            {
+              "field": "facet",
+              "operator": "equals",
+              "expected": "DELIVERY_STATE"
+            },
+            {
+              "field": "effect_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_occurrence_namespace",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_effect_frontier_a.unknown",
+          "reason_ref": "reason.material_actual_effect_frontier",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_effect_frontier_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {},
+      "configuration": {}
+    },
+    {
+      "id": "policy.material_effect_frontier_publication_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_actual_effect_frontier"
+      ],
+      "declared_alternative_refs": [
+        "material_effect_frontier_publication_a.current",
+        "material_effect_frontier_publication_a.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_effect_frontier_equivalent",
+      "selection_tiers": [
+        {
+          "id": "tier.material_effect_frontier_publication_a.current",
+          "reason_ref": "reason.material_actual_effect_frontier",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_effect_frontier_publication_a.current"
+            },
+            {
+              "field": "publication_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_effect_frontier_publication_a.unknown",
+          "reason_ref": "reason.material_actual_effect_frontier",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_effect_frontier_publication_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "material_effect_frontier_publication_a.current": "rule.material_effect_frontier_qualification_a"
+      },
+      "configuration": {}
+    },
+    {
+      "id": "rule.material_effect_frontier_qualification_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.material_actual_effect_frontier"
+      ],
+      "invariants": [
+        "actual_owned_sealed_command_and_independent_states",
+        "source_declared_facets_only",
+        "unknown_laws_preserved",
+        "whole_observed_yield_not_microevents",
+        "official_score_separate_from_filled_holders",
+        "existing_native_publisher_owns_invalidation"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{packet_term_ref}",
+          "kind": "value",
+          "label": "Exact material accounting responses for the sealed effect",
+          "required_fields": [
+            "publication_ref",
+            "packet_term_ref",
+            "qualification_claim_ref",
+            "frame_ref",
+            "packet_projection_contract_ref",
+            "packet_digest",
+            "interpretation_digest",
+            "exact_request_signature_ref",
+            "parent_goal_ref",
+            "scope_ref",
+            "epoch",
+            "input_revision_ref",
+            "episode_ref",
+            "level_scope_ref"
+          ],
+          "attribute_bindings": {
+            "packet": "packet",
+            "frame_ref": "frame_ref",
+            "packet_projection_contract_ref": "packet_projection_contract_ref",
+            "packet_digest": "packet_digest",
+            "interpretation_digest": "interpretation_digest",
+            "exact_request_signature_ref": "exact_request_signature_ref",
+            "publication_ref": "publication_ref"
+          },
+          "static_attributes": {
+            "projection_contract_ref": "material.frontier.native_response_packet.v1"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{qualification_claim_ref}",
+          "predicate": "qualifies_native_family_sealed_interpretation",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{packet_term_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{packet_term_ref}"
+          ],
+          "required_fields": [
+            "publication_ref",
+            "packet_term_ref",
+            "qualification_claim_ref",
+            "frame_ref",
+            "packet_projection_contract_ref",
+            "packet_digest",
+            "interpretation_digest",
+            "exact_request_signature_ref",
+            "parent_goal_ref",
+            "scope_ref",
+            "epoch",
+            "input_revision_ref",
+            "episode_ref",
+            "level_scope_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref"
+          },
+          "attribute_bindings": {
+            "frame_ref": "frame_ref",
+            "packet_projection_contract_ref": "packet_projection_contract_ref",
+            "packet_digest": "packet_digest",
+            "interpretation_digest": "interpretation_digest",
+            "exact_request_signature_ref": "exact_request_signature_ref",
+            "publication_ref": "publication_ref"
+          },
+          "static_attributes": {
+            "law_truth_promoted": false,
+            "action_release_authorized": false
+          }
+        }
+      ]
+    }
+  ]
+}

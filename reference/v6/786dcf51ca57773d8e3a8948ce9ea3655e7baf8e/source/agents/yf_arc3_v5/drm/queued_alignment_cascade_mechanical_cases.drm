@@ -1,0 +1,642 @@
+{
+  "module_id": "queued_alignment_cascade_mechanical_cases",
+  "declarations": [
+    {
+      "id": "policy.exact_queued_alignment_cascade_operation",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.exact_request_scoped_model_and_actual_bounds_precede_a_pure_case"
+      ],
+      "premises": [
+        "immutable_request_with_caller_parent_epoch_revision_and_return_type"
+      ],
+      "invariants": [
+        "only_selected_operation_runs",
+        "no_external_environment_input",
+        "no_action_release_from_returned_domain",
+        "observations_and_unrejected_model_alternatives_remain_separate",
+        "unknown_prerequisites_are_not_guessed",
+        "exact_domain_exhaustion_is_distinct_from_budget_reached",
+        "direct_automatic_and_acceptance_phases_have_one_owner",
+        "creator_oracle_does_not_enter_request",
+        "caller_resumes_its_existing_contribution_pipeline"
+      ],
+      "falsifiers": [
+        "operation_or_mode_mismatch",
+        "required_input_unknown",
+        "state_or_model_revision_changes",
+        "work_bound_reached"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "declared_alternative_refs": [
+        "queued_alignment_cascade.case.scene_layers",
+        "queued_alignment_cascade.case.control_trigger_fit",
+        "queued_alignment_cascade.case.bundle_order_domain",
+        "queued_alignment_cascade.case.placement_domain",
+        "queued_alignment_cascade.case.equal_line_union",
+        "queued_alignment_cascade.case.column_compaction",
+        "queued_alignment_cascade.case.cascade_closure",
+        "queued_alignment_cascade.case.quota_queue_boundary",
+        "queued_alignment_cascade.case.future_contribution_certificate",
+        "queued_alignment_cascade.case.sealed_cascade_compare",
+        "queued_alignment_cascade.case.external_primitive",
+        "queued_alignment_cascade.needs_input",
+        "queued_alignment_cascade.unmatched"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.queued_alignment_cascade.case.scene_layers",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_alignment_cascade.case.scene_layers"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.queued_alignment_cascade.scene_layers"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "MEASURE"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.queued_alignment_cascade_scene_layers"
+          }
+        },
+        {
+          "id": "projection.queued_alignment_cascade.case.control_trigger_fit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_alignment_cascade.case.control_trigger_fit"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.queued_alignment_cascade.control_trigger_fit"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "FIT"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.queued_alignment_cascade_control_trigger_fit"
+          }
+        },
+        {
+          "id": "projection.queued_alignment_cascade.case.bundle_order_domain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_alignment_cascade.case.bundle_order_domain"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.queued_alignment_cascade.bundle_order_domain"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "DOMAIN"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.queued_alignment_cascade_bundle_order_domain"
+          }
+        },
+        {
+          "id": "projection.queued_alignment_cascade.case.placement_domain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_alignment_cascade.case.placement_domain"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.queued_alignment_cascade.placement_domain"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "INVERSE_DOMAIN"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.queued_alignment_cascade_placement_domain"
+          }
+        },
+        {
+          "id": "projection.queued_alignment_cascade.case.equal_line_union",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_alignment_cascade.case.equal_line_union"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.queued_alignment_cascade.equal_line_union"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "EVALUATE"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.queued_alignment_cascade_equal_line_union"
+          }
+        },
+        {
+          "id": "projection.queued_alignment_cascade.case.column_compaction",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_alignment_cascade.case.column_compaction"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.queued_alignment_cascade.column_compaction"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "STEP_INTERNAL"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.queued_alignment_cascade_column_compaction"
+          }
+        },
+        {
+          "id": "projection.queued_alignment_cascade.case.cascade_closure",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_alignment_cascade.case.cascade_closure"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.queued_alignment_cascade.cascade_closure"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "STEP_INTERNAL"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.queued_alignment_cascade_cascade_closure"
+          }
+        },
+        {
+          "id": "projection.queued_alignment_cascade.case.quota_queue_boundary",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_alignment_cascade.case.quota_queue_boundary"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.queued_alignment_cascade.quota_queue_boundary"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "EVALUATE"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.queued_alignment_cascade_quota_queue_boundary"
+          }
+        },
+        {
+          "id": "projection.queued_alignment_cascade.case.future_contribution_certificate",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_alignment_cascade.case.future_contribution_certificate"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.queued_alignment_cascade.future_contribution_certificate"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "DOMAIN"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.queued_alignment_cascade_future_contribution_certificate"
+          }
+        },
+        {
+          "id": "projection.queued_alignment_cascade.case.sealed_cascade_compare",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_alignment_cascade.case.sealed_cascade_compare"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.queued_alignment_cascade.sealed_cascade_compare"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "COMPARE"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.queued_alignment_cascade_sealed_cascade_compare"
+          }
+        },
+        {
+          "id": "projection.queued_alignment_cascade.case.external_primitive",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_alignment_cascade.case.external_primitive"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.queued_alignment_cascade.external_primitive"
+            },
+            {
+              "field": "mode_ref",
+              "operator": "equals",
+              "expected": "STEP"
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "case_capability_ref": "capability.queued_alignment_cascade_external_primitive"
+          }
+        },
+        {
+          "id": "projection.queued_alignment_cascade.needs_input",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_alignment_cascade.needs_input"
+            },
+            {
+              "field": "signature_registered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "required_inputs_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "cause": "MISSING_OBSERVATION",
+            "propose_game_probe_for_code_absence": false
+          }
+        },
+        {
+          "id": "projection.queued_alignment_cascade.unmatched",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "queued_alignment_cascade.unmatched"
+            },
+            {
+              "field": "signature_registered",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "cause": "SIGNATURE_MISMATCH",
+            "world_domain_exhausted": false
+          }
+        }
+      ],
+      "configuration": {
+        "cases": [
+          {
+            "operation": "scene_layers",
+            "mode": "MEASURE",
+            "state_fields": [
+              "board"
+            ],
+            "model_fields": [],
+            "data_fields": [
+              "entity_masks",
+              "layer_bindings",
+              "required_layer_refs"
+            ],
+            "bound_fields": [],
+            "observations_required": false,
+            "alternatives_required": false
+          },
+          {
+            "operation": "control_trigger_fit",
+            "mode": "FIT",
+            "state_fields": [],
+            "model_fields": [],
+            "data_fields": [],
+            "bound_fields": [
+              "max_waves"
+            ],
+            "observations_required": true,
+            "alternatives_required": true
+          },
+          {
+            "operation": "bundle_order_domain",
+            "mode": "DOMAIN",
+            "state_fields": [
+              "bundle"
+            ],
+            "model_fields": [
+              "cycle_permutation"
+            ],
+            "data_fields": [],
+            "bound_fields": [
+              "max_domain"
+            ],
+            "observations_required": false,
+            "alternatives_required": false
+          },
+          {
+            "operation": "placement_domain",
+            "mode": "INVERSE_DOMAIN",
+            "state_fields": [
+              "board",
+              "bundle",
+              "column"
+            ],
+            "model_fields": [
+              "gravity",
+              "available_column_band",
+              "preparation_rows",
+              "control_bindings",
+              "input_costs"
+            ],
+            "data_fields": [],
+            "bound_fields": [
+              "max_domain"
+            ],
+            "observations_required": false,
+            "alternatives_required": false
+          },
+          {
+            "operation": "equal_line_union",
+            "mode": "EVALUATE",
+            "state_fields": [
+              "board"
+            ],
+            "model_fields": [
+              "directions",
+              "minimum_line"
+            ],
+            "data_fields": [],
+            "bound_fields": [],
+            "observations_required": false,
+            "alternatives_required": false
+          },
+          {
+            "operation": "column_compaction",
+            "mode": "STEP_INTERNAL",
+            "state_fields": [
+              "board"
+            ],
+            "model_fields": [
+              "gravity"
+            ],
+            "data_fields": [
+              "removed_positions"
+            ],
+            "bound_fields": [],
+            "observations_required": false,
+            "alternatives_required": false
+          },
+          {
+            "operation": "cascade_closure",
+            "mode": "STEP_INTERNAL",
+            "state_fields": [
+              "board"
+            ],
+            "model_fields": [
+              "directions",
+              "minimum_line",
+              "gravity"
+            ],
+            "data_fields": [],
+            "bound_fields": [
+              "max_waves"
+            ],
+            "observations_required": false,
+            "alternatives_required": false
+          },
+          {
+            "operation": "quota_queue_boundary",
+            "mode": "EVALUATE",
+            "state_fields": [
+              "credit",
+              "queue_index",
+              "queue"
+            ],
+            "model_fields": [
+              "quota_interval",
+              "acceptance_before_spawn"
+            ],
+            "data_fields": [],
+            "bound_fields": [],
+            "observations_required": false,
+            "alternatives_required": false
+          },
+          {
+            "operation": "future_contribution_certificate",
+            "mode": "DOMAIN",
+            "state_fields": [
+              "board",
+              "bundle",
+              "credit",
+              "queue_index",
+              "queue",
+              "column"
+            ],
+            "model_fields": [
+              "gravity",
+              "directions",
+              "minimum_line",
+              "available_column_band",
+              "preparation_rows",
+              "control_bindings",
+              "input_costs"
+            ],
+            "data_fields": [],
+            "bound_fields": [
+              "max_domain",
+              "max_waves"
+            ],
+            "observations_required": false,
+            "alternatives_required": false
+          },
+          {
+            "operation": "sealed_cascade_compare",
+            "mode": "COMPARE",
+            "state_fields": [],
+            "model_fields": [
+              "action_operators",
+              "gravity",
+              "directions",
+              "minimum_line",
+              "quota_interval",
+              "acceptance_before_spawn"
+            ],
+            "data_fields": [
+              "sealed",
+              "dimension_refs",
+              "observed_epoch"
+            ],
+            "bound_fields": [
+              "max_waves"
+            ],
+            "observations_required": true,
+            "alternatives_required": false
+          },
+          {
+            "operation": "external_primitive",
+            "mode": "STEP",
+            "state_fields": [
+              "board",
+              "bundle",
+              "column",
+              "queue",
+              "queue_index",
+              "credit"
+            ],
+            "model_fields": [
+              "action_operators",
+              "gravity",
+              "directions",
+              "minimum_line",
+              "quota_interval",
+              "acceptance_before_spawn"
+            ],
+            "data_fields": [
+              "action_ref"
+            ],
+            "bound_fields": [
+              "max_waves"
+            ],
+            "observations_required": false,
+            "alternatives_required": false
+          }
+        ],
+        "family_ref": "mechanics.queued_alignment_cascade"
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+MODULE v6.reactive_contact
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP choose
+        CALL contact.select(request=request) -> decision
+        STOP decision
+WORKFLOW bind_control(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP bind
+        CALL contact.control(request=request) -> decision
+        STOP decision
+WORKFLOW reconcile_contact(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP project
+        CALL contact.project(request=request) -> decision
+        STOP decision
+WORKFLOW reconcile_binding(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP project
+        CALL contact.binding(request=request) -> decision
+        STOP decision
+WORKFLOW project_source81_entry(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP project
+        CALL contact.source81_entry(request=request) -> decision
+        STOP decision
+WORKFLOW admit_ready_operator(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP admit
+        CALL contact.ready(facts=request) -> decision
+        STOP decision

@@ -1,0 +1,256 @@
+{
+  "module_id": "v6_outline_service",
+  "declarations": [
+    {
+      "id": "schema.outline_service",
+      "kind": "schema",
+      "premises": [
+        "public_outline_translation_and_current_geometry"
+      ],
+      "applicability": [
+        "current_scope_and_observation"
+      ],
+      "invariants": [
+        "no_oracle",
+        "no_palette_roles",
+        "no_checkpoint_contract",
+        "no_unobserved_terminal_rule"
+      ],
+      "falsifiers": [
+        "different_translation",
+        "ambiguous_outline",
+        "changed_locus",
+        "scope_changed"
+      ],
+      "reason_refs": [
+        "0.1.1-5,19"
+      ],
+      "configuration": {
+        "goal": "G_official_completion",
+        "interface_prior": {
+          "status": "declared_revisable_library_hypothesis_not_acquired_mapping",
+          "directions": {
+            "ACTION1": [
+              0,
+              -1
+            ],
+            "ACTION2": [
+              0,
+              1
+            ],
+            "ACTION3": [
+              -1,
+              0
+            ],
+            "ACTION4": [
+              1,
+              0
+            ]
+          },
+          "interaction": "ACTION5",
+          "falsifier": "first returned displacement, body or local interaction differs from prediction; suspend this contextual offer"
+        },
+        "rules": [
+          {
+            "id": "outline_service.local_intervention",
+            "all_conditions": [
+              {
+                "field": "exact_locus",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "untried_current_context",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "kind": "local_operator_hypothesis",
+              "operation": "OP18",
+              "role": "controlled_outline_at_compatible_locus",
+              "question": "Test the declared local operator at the currently revalidated exact-fit locus; its effect and utility remain unknown.",
+              "mechanism_ref": "principle.controlled_body_at_compatible_zone_cell_invites_local_causal_test"
+            }
+          },
+          {
+            "id": "outline_service.reach_locus",
+            "all_conditions": [
+              {
+                "field": "exact_locus",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "unique_locus_route",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "kind": "locus_access_hypothesis",
+              "operation": "OP28",
+              "role": "controlled_outline_accessing_observed_locus",
+              "question": "Reach the unique compatible framed locus using the measured outline and declared directional hypotheses.",
+              "mechanism_ref": "goal.reach_unique_compatible_control_zone_cell"
+            }
+          },
+          {
+            "id": "outline_service.announced_accompaniment",
+            "all_conditions": [
+              {
+                "field": "unique_locus_route",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "exact_locus",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "unique_mobile_correspondence",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "local_operator_observed",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "immediate_other_contact",
+                "operator": "equals",
+                "expected": false
+              }
+            ],
+            "conclusions": {
+              "kind": "announced_correspondence_hypothesis",
+              "operation": "OP18",
+              "role": "tool_serving_other_corresponding_mobile",
+              "question": "Preserve the corresponding mobile and its currently announced relation to the hollow counterpart; one observed announcement does not establish future policy.",
+              "mechanism_ref": "goal.accompany_mobile_entity_to_compatible_hollow_perimeter"
+            }
+          },
+          {
+            "id": "outline_service.current_obstruction_test",
+            "all_conditions": [
+              {
+                "field": "unique_locus_route",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "exact_locus",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "unique_mobile_correspondence",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "local_operator_observed",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "immediate_other_contact",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "lead_on_announced_cell",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "kind": "local_obstruction_hypothesis",
+              "operation": "OP18",
+              "role": "tool_at_current_announced_contact",
+              "question": "Test whether the observed local operator changes the currently announced encounter; neither threat nor cancellation is treated as universally established.",
+              "mechanism_ref": "subgoal.test_local_obstruction_at_announced_destination"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "schema.outline_control_hypothesis",
+      "kind": "schema",
+      "premises": [
+        "unique_measured_perimeter_translation"
+      ],
+      "applicability": [
+        "current_outline_revalidated"
+      ],
+      "invariants": [
+        "historical_references_are_not_current_transitions",
+        "no_universal_direction_law"
+      ],
+      "falsifiers": [
+        "ambiguous_outline",
+        "current_displacement_contradiction"
+      ],
+      "reason_refs": [
+        "0.1.1-5,19"
+      ],
+      "configuration": {
+        "rules": [
+          {
+            "id": "outline_service.current_control",
+            "all_conditions": [
+              {
+                "field": "current_outline_revalidated",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_transition_evidence",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "interior_contrast_observed",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "role": "provisional_controlled_transparent_outline",
+              "term_ref": "hypothesis.action_conditioned_outline",
+              "authority": "current_measured_relation_only"
+            }
+          },
+          {
+            "id": "outline_service.recalled_control",
+            "all_conditions": [
+              {
+                "field": "current_outline_revalidated",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_transition_evidence",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "recalled_method_current_unique",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "role": "recalled_controlled_outline_hypothesis",
+              "term_ref": "hypothesis.recalled_outline_current_correspondence",
+              "authority": "conditional_revalidation_required"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

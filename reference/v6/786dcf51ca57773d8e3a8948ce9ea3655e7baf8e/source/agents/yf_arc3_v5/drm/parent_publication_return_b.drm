@@ -1,0 +1,65 @@
+{
+  "module_id": "parent_publication_return_b",
+  "declarations": [{
+    "id": "policy.parent_publication_return_b",
+    "kind": "selection_policy",
+    "evaluation": "declared_eligibility_single",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "reason_refs": ["reason_keep_available_publications_and_unresolved_siblings_separate"],
+    "premises": ["exact_source_and_question_publication_returns"],
+    "invariants": ["retain_every_return", "no_action_authority", "publication_does_not_establish_goal_success"],
+    "falsifiers": ["changed_return_population", "lost_refusal", "stale_publication_evidence"],
+    "declared_alternative_refs": ["publication.batch"],
+    "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+    "fact_projections": [
+      {"id": "projection.parent_publication.batch", "all_conditions": [
+        {"field": "publication_kind", "operator": "equals", "expected": "batch"}],
+        "static_facts": {"eligible": false, "no_dispatch_or_action_authority": true}},
+      {"id": "projection.parent_publication.usable_questions", "all_conditions": [
+        {"field": "publication_kind", "operator": "equals", "expected": "batch"},
+        {"field": "complete_question_returns_empty", "operator": "equals", "expected": false}],
+        "static_facts": {"parent_rebinding_required": false,
+          "parent_reason_ref": "reason_use_qualified_questions_with_their_own_dependencies_and_keep_unresolved_siblings"}},
+      {"id": "projection.parent_publication.no_unresolved_return", "all_conditions": [
+        {"field": "publication_kind", "operator": "equals", "expected": "batch"},
+        {"field": "complete_question_returns_empty", "operator": "equals", "expected": true},
+        {"field": "incomplete_returns_empty", "operator": "equals", "expected": true}],
+        "static_facts": {"parent_rebinding_required": false,
+          "parent_reason_ref": "reason_no_unresolved_publication_return_without_implied_goal_success"}},
+      {"id": "projection.parent_publication.unresolved_without_usable_question", "all_conditions": [
+        {"field": "publication_kind", "operator": "equals", "expected": "batch"},
+        {"field": "complete_question_returns_empty", "operator": "equals", "expected": true},
+        {"field": "incomplete_returns_empty", "operator": "equals", "expected": false}],
+        "static_facts": {"parent_rebinding_required": true,
+          "parent_reason_ref": "reason_no_usable_question_return_with_unresolved_publications"}},
+      {"id": "projection.parent_publication.source_available", "all_conditions": [
+        {"field": "publication_kind", "operator": "equals", "expected": "source"},
+        {"field": "canonical_return_equal", "operator": "equals", "expected": true},
+        {"field": "missing_empty", "operator": "equals", "expected": true}],
+        "static_facts": {"eligible": true, "publication_available": true, "requires_rebinding": false,
+          "disposition_ref": "parent_source.publication_recorded", "reason_ref": "reason_source_record_publication_return_is_qualified"}},
+      {"id": "projection.parent_publication.source_unresolved", "all_conditions": [
+        {"field": "publication_kind", "operator": "equals", "expected": "source"}],
+        "any_conditions": [
+          {"field": "canonical_return_equal", "operator": "equals", "expected": false},
+          {"field": "missing_empty", "operator": "equals", "expected": false}],
+        "static_facts": {"eligible": false, "publication_available": false, "requires_rebinding": true,
+          "disposition_ref": "parent_source.publication_unresolved", "reason_ref": "reason_source_publication_requires_current_bindings"}},
+      {"id": "projection.parent_publication.question_available", "all_conditions": [
+        {"field": "publication_kind", "operator": "equals", "expected": "question"},
+        {"field": "canonical_return_equal", "operator": "equals", "expected": true},
+        {"field": "missing_empty", "operator": "equals", "expected": true}],
+        "static_facts": {"eligible": true, "publication_available": true, "requires_rebinding": false,
+          "disposition_ref": "parent_question.publication_recorded", "reason_ref": "reason_question_publication_return_is_qualified"}},
+      {"id": "projection.parent_publication.question_unresolved", "all_conditions": [
+        {"field": "publication_kind", "operator": "equals", "expected": "question"}],
+        "any_conditions": [
+          {"field": "canonical_return_equal", "operator": "equals", "expected": false},
+          {"field": "missing_empty", "operator": "equals", "expected": false}],
+        "static_facts": {"eligible": false, "publication_available": false, "requires_rebinding": true,
+          "disposition_ref": "parent_question.publication_unresolved", "reason_ref": "reason_question_publication_requires_current_bindings"}}
+    ]
+  }]
+}

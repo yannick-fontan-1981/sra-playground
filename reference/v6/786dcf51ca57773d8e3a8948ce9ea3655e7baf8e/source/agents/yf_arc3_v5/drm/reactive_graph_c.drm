@@ -1,0 +1,866 @@
+{
+  "module_id": "reactive_graph_c",
+  "declarations": [
+    {
+      "id": "policy.reactive_graph_operation_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "exact_source_requested_graph_question"
+      ],
+      "applicability": [
+        "bounded_graph_calculation"
+      ],
+      "invariants": [
+        "one_explicit_operation_not_fallback_passes",
+        "current_full_state_model_and_scope",
+        "all_followers_queues_retained",
+        "owned_patrol_service_no_second_tick",
+        "operational_resume_not_action_release"
+      ],
+      "falsifiers": [
+        "unsupported_op_mode",
+        "stale_scope_or_model",
+        "unknown_reaction_or_partial_tick"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "reactive_graph.edge_successor",
+        "reactive_graph.guard_report",
+        "reactive_graph.patrol_successor",
+        "reactive_graph.follower_successor",
+        "reactive_graph.joint_successor",
+        "reactive_graph.phase_calendar",
+        "reactive_graph.state_equivalence",
+        "reactive_graph.detour_report",
+        "reactive_graph.measure",
+        "reactive_graph.precondition",
+        "reactive_graph.fit",
+        "reactive_graph.inverse_domain",
+        "reactive_graph.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.reactive_graph.edge_successor",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.edge_successor"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.edge_successor"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "STEP"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.edge_successor"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.guard_report",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.guard_report"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.guard_report"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "MEASURE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.guard_report"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.patrol_successor",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.patrol_successor"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.patrol_successor"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "STEP"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.patrol_successor"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.follower_successor",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.follower_successor"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.follower_successor"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "STEP"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.follower_successor"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.joint_successor",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.joint_successor"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.joint_successor"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "STEP"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.joint_successor"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.phase_calendar",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.phase_calendar"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.phase_calendar"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "CALENDAR"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.phase_calendar"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.state_equivalence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.state_equivalence"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.state_equivalence"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "COMPARE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.state_equivalence"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.detour_report",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.detour_report"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.detour_report"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "COMPARE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.detour_report"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.measure",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.measure"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.measure"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "MEASURE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.measure"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.precondition",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.precondition"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.precondition"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "CHECK"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.precondition"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.fit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.fit"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.fit"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "FIT"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.fit"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.inverse_domain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.inverse_domain"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.inverse_domain"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "INVERSE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.inverse_domain"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.unknown_operation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.reactive_graph_navigation.edge_successor"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.reactive_graph_navigation.guard_report"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.reactive_graph_navigation.patrol_successor"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.reactive_graph_navigation.follower_successor"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.reactive_graph_navigation.joint_successor"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.reactive_graph_navigation.phase_calendar"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.reactive_graph_navigation.state_equivalence"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.reactive_graph_navigation.detour_report"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.reactive_graph_navigation.measure"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.reactive_graph_navigation.precondition"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.reactive_graph_navigation.fit"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.reactive_graph_navigation.inverse_domain"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.unsupported"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.wrong_mode_edge_successor",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.edge_successor"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "STEP"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.unsupported"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.wrong_mode_guard_report",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.guard_report"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "MEASURE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.unsupported"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.wrong_mode_patrol_successor",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.patrol_successor"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "STEP"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.unsupported"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.wrong_mode_follower_successor",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.follower_successor"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "STEP"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.unsupported"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.wrong_mode_joint_successor",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.joint_successor"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "STEP"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.unsupported"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.wrong_mode_phase_calendar",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.phase_calendar"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "CALENDAR"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.unsupported"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.wrong_mode_state_equivalence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.state_equivalence"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "COMPARE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.unsupported"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.wrong_mode_detour_report",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.detour_report"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "COMPARE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.unsupported"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.wrong_mode_measure",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.measure"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "MEASURE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.unsupported"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.wrong_mode_precondition",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.precondition"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "CHECK"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.unsupported"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.wrong_mode_fit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.fit"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "FIT"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.unsupported"
+          }
+        },
+        {
+          "id": "projection.reactive_graph.wrong_mode_inverse_domain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.reactive_graph_navigation.inverse_domain"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "INVERSE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reactive_graph.unsupported"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.reactive_graph_operation_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.edge_successor"
+            }
+          ],
+          "reason_ref": "reason.exact_declared_graph_question_preserves_laws_scope_and_history"
+        },
+        {
+          "id": "tier.policy.reactive_graph_operation_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.guard_report"
+            }
+          ],
+          "reason_ref": "reason.exact_declared_graph_question_preserves_laws_scope_and_history"
+        },
+        {
+          "id": "tier.policy.reactive_graph_operation_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.patrol_successor"
+            }
+          ],
+          "reason_ref": "reason.exact_declared_graph_question_preserves_laws_scope_and_history"
+        },
+        {
+          "id": "tier.policy.reactive_graph_operation_c.3",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.follower_successor"
+            }
+          ],
+          "reason_ref": "reason.exact_declared_graph_question_preserves_laws_scope_and_history"
+        },
+        {
+          "id": "tier.policy.reactive_graph_operation_c.4",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.joint_successor"
+            }
+          ],
+          "reason_ref": "reason.exact_declared_graph_question_preserves_laws_scope_and_history"
+        },
+        {
+          "id": "tier.policy.reactive_graph_operation_c.5",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.phase_calendar"
+            }
+          ],
+          "reason_ref": "reason.exact_declared_graph_question_preserves_laws_scope_and_history"
+        },
+        {
+          "id": "tier.policy.reactive_graph_operation_c.6",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.state_equivalence"
+            }
+          ],
+          "reason_ref": "reason.exact_declared_graph_question_preserves_laws_scope_and_history"
+        },
+        {
+          "id": "tier.policy.reactive_graph_operation_c.7",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.detour_report"
+            }
+          ],
+          "reason_ref": "reason.exact_declared_graph_question_preserves_laws_scope_and_history"
+        },
+        {
+          "id": "tier.policy.reactive_graph_operation_c.8",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.measure"
+            }
+          ],
+          "reason_ref": "reason.exact_declared_graph_question_preserves_laws_scope_and_history"
+        },
+        {
+          "id": "tier.policy.reactive_graph_operation_c.9",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.precondition"
+            }
+          ],
+          "reason_ref": "reason.exact_declared_graph_question_preserves_laws_scope_and_history"
+        },
+        {
+          "id": "tier.policy.reactive_graph_operation_c.10",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.fit"
+            }
+          ],
+          "reason_ref": "reason.exact_declared_graph_question_preserves_laws_scope_and_history"
+        },
+        {
+          "id": "tier.policy.reactive_graph_operation_c.11",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.inverse_domain"
+            }
+          ],
+          "reason_ref": "reason.exact_declared_graph_question_preserves_laws_scope_and_history"
+        },
+        {
+          "id": "tier.policy.reactive_graph_operation_c.12",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reactive_graph.unsupported"
+            }
+          ],
+          "reason_ref": "reason.graph_requested_operation_or_mode_unsupported"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.graph_calculation_not_game_use_or_transfer",
+      "reason_refs": [
+        "reason.graph_requested_operation_or_mode_unsupported",
+        "reason.exact_declared_graph_question_preserves_laws_scope_and_history"
+      ]
+    }
+  ]
+}

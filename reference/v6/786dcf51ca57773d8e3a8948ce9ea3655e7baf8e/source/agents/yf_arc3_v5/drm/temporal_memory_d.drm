@@ -1,0 +1,47 @@
+{
+  "module_id": "temporal_memory_d",
+  "declarations": [{
+    "id": "policy.d_temporal_memory_scope",
+    "kind": "selection_policy",
+    "evaluation": "declared_lexicographic_order",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "reason_refs": ["reason.d_temporal_memory_exact_dependencies_not_index_familiarity"],
+    "declared_alternative_refs": ["d_temporal_memory.current_scope_candidate", "d_temporal_memory.historical_revalidation", "d_temporal_memory.unknown_scope"],
+    "canonical_equivalence_tie_break_debt_ref": "debt.d_temporal_memory_equivalent_record_scope",
+    "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+    "selection_tiers": [
+      {"id": "tier.d_temporal_memory.current_scope_candidate",
+       "reason_ref": "reason.d_temporal_memory_exact_dependencies_not_index_familiarity",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "d_temporal_memory.current_scope_candidate"},
+         {"field": "native_calculation_complete", "operator": "equals", "expected": true},
+         {"field": "dependencies_present", "operator": "equals", "expected": true},
+         {"field": "dependencies_equal", "operator": "equals", "expected": true},
+         {"field": "raw_photo_scope_current_if_required", "operator": "equals", "expected": true},
+         {"field": "raw_content_matches_if_required", "operator": "equals", "expected": true}]},
+      {"id": "tier.d_temporal_memory.historical_revalidation",
+       "reason_ref": "reason.d_temporal_memory_exact_dependencies_not_index_familiarity",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "d_temporal_memory.historical_revalidation"},
+         {"field": "native_calculation_complete", "operator": "equals", "expected": true},
+         {"field": "dependencies_present", "operator": "equals", "expected": true},
+         {"field": "dependencies_equal", "operator": "equals", "expected": false},
+         {"field": "raw_content_matches_if_required", "operator": "equals", "expected": true}]},
+      {"id": "tier.d_temporal_memory.historical_photo_boundary",
+       "reason_ref": "reason.d_temporal_memory_exact_dependencies_not_index_familiarity",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "d_temporal_memory.historical_revalidation"},
+         {"field": "native_calculation_complete", "operator": "equals", "expected": true},
+         {"field": "dependencies_present", "operator": "equals", "expected": true},
+         {"field": "raw_photo_scope_current_if_required", "operator": "equals", "expected": false},
+         {"field": "raw_content_matches_if_required", "operator": "equals", "expected": true}]},
+      {"id": "tier.d_temporal_memory.unknown_scope",
+       "reason_ref": "reason.d_temporal_memory_exact_dependencies_not_index_familiarity",
+       "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "d_temporal_memory.unknown_scope"}]}
+    ],
+    "configuration": {"index_is_not_film_identity": true, "raw_photo_is_never_overwritten_by_feedback": true,
+      "only_cognitive_owner_publishes_memory": true, "candidate_is_not_use_or_transfer_proof": true}
+  }]
+}

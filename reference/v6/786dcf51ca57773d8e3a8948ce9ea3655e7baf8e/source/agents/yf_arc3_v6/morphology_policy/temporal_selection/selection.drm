@@ -1,0 +1,103 @@
+{
+  "module_id": "v6_temporal_selection",
+  "declarations": [
+    {
+      "id": "schema.temporal_selection",
+      "kind": "schema",
+      "premises": [
+        "returned_animation_has_unique_axial_translation_track",
+        "stationary_compact_occurrence_currently_supported"
+      ],
+      "applicability": [
+        "experiment_on_nearest_stationary_occurrence_to_observed_trace"
+      ],
+      "invariants": [
+        "no_editable_or_terminal_role_claim",
+        "no_orbital_law_or_radius",
+        "current_scope_exact_payload"
+      ],
+      "falsifiers": [
+        "animation_track_ambiguous",
+        "candidate_or_support_changed",
+        "equally_related_candidates"
+      ],
+      "reason_refs": [
+        "0.1.1-5,19"
+      ],
+      "configuration": {
+        "point_action": "ACTION6",
+        "goal": "G_official_completion",
+        "order": "minimum_squared_distance_to_observed_trace_unique_only",
+        "question": "Test whether pointing the unique nearest currently supported stationary occurrence exposes a local control after an observed autonomous trace; selection, editing, mechanical influence and terminal role remain unknown.",
+        "hypotheses": [
+          "pointing_may_select_stationary_occurrence",
+          "local_overlay_will_be_measured_not_assumed"
+        ],
+        "conditions": [
+          {
+            "field": "animation_observed",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_supports",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "untried_current_context",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_input_publicly_available",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "priority": [
+          "launch_changed_arrangement",
+          "lateral_edit_experiment",
+          "point_control",
+          "recalled_launch"
+        ],
+        "questions": {
+          "point_control": "Test whether pointing the unique nearest currently supported stationary occurrence exposes a local control after an observed autonomous trace; selection, editing, mechanical influence and terminal role remain unknown.",
+          "lateral_edit_experiment": "Use the observed point-to-destination edit under current exact mask and overlay correspondence to place this occurrence one measured visual period laterally beside the penultimate observed forward trace sample, on its original side. This offset is a declared experimental hypothesis, not an acquired orbital radius. Preserve the initial complete connected body and other occurrences. When composing the second locus, the half-turn and boundary interruption are explicit competing hypotheses, never an observed type law.",
+          "launch_changed_arrangement": "Reissue the command observed to return an autonomous animation after the measured edit. Compare unchanged trace, contact, and local deviation around the edited locus; no turn angle, orbital table or success predicted.",
+          "recalled_launch": "Recall the command that returned a scoped autonomous trajectory and official boundary, after uniquely revalidating the complete current body template and currently supported compact occurrences. Its effect in this new scope is unknown; acquire the new returned trajectory without carrying prior positions, radius or turn law."
+        },
+        "lateral_experiment": {
+          "offset": "one_current_visual_period",
+          "anchor": "penultimate_distinct_forward_observed_sample",
+          "side": "same_as_original_occurrence",
+          "result_alternatives": [
+            "unchanged_trajectory",
+            "contact",
+            "deviation_near_locus",
+            "unresolved"
+          ]
+        },
+        "second_locus_question": {
+          "diameter_multiplier": 2,
+          "alternatives": [
+            "no_deviation",
+            "quarter_turn",
+            "half_turn",
+            "three_quarter_turn",
+            "other_or_unresolved"
+          ],
+          "meaning": "Observed new corridor and lateral offset permit a conditional geometric half-turn preimage toward a unique measured boundary interruption. The second occurrence type and target terminal role are unknown. Preserve the first edited occurrence and initial body. Choose the least point-edit distance among currently clear placements; equal alternatives abstain."
+        },
+        "stationary_support_question": {
+          "admission": "every_neighbor_explained_by_current_periodic_pattern_or_current_boundary_component; periodic_pattern_present",
+          "does_not_establish": [
+            "editable_domain",
+            "traversable_terrain",
+            "boundary_function"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "module_id": "v6.source81.current_publication_context",
+  "declarations": [
+    {
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "selection_tiers": [
+        {
+          "id": "tier.prepare_joint_access_to_observed_peer",
+          "reason_ref": "reason.prepare_complex_composition_by_shortest_jointly_accessible_means"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "id": "schema.source81_current_publication_context",
+      "fact_projections": [
+        {
+          "id": "projection.source81.materialized_composition_has_its_declared_context",
+          "all_conditions": [
+            {
+              "field": "current_candidate_origin",
+              "operator": "equals",
+              "expected": "source81_materialized_composition"
+            },
+            {
+              "field": "source81_selection_context_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source81_selected_reason_ref",
+              "operator": "is_present"
+            }
+          ],
+          "static_facts": {
+            "contact_pattern_route_inquiry_declared": false,
+            "candidate_is_body_perimeter_marker_rejoin_route_first_action": false,
+            "candidate_matches_compact_body_hollow_perimeter_marker_direction": false
+          },
+          "bound_facts": {
+            "selection_principle_ref": "source81_selected_reason_ref"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.current_selected_composition_context_is_explicit"
+      ]
+    }
+  ]
+}

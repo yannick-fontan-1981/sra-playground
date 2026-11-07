@@ -1,0 +1,193 @@
+{
+  "module_id": "v6_region_intervention",
+  "declarations": [
+    {
+      "id": "schema.region_intervention",
+      "kind": "schema",
+      "premises": [
+        "separator_click_changed_current_passage",
+        "regional_occurrences_changed_after_same_command"
+      ],
+      "applicability": [
+        "conditional_frontier_intervention"
+      ],
+      "invariants": [
+        "no_predation_law_imported",
+        "region_connectivity_not_actor_access",
+        "no_terminal_role_from_palette",
+        "current_epoch"
+      ],
+      "falsifiers": [
+        "separator_support_changed",
+        "frontier_not_linked_to_changed_occurrences",
+        "no_predicted_local_toggle",
+        "response_scope_not_current"
+      ],
+      "reason_refs": [
+        "0.1.1-5,19"
+      ],
+      "configuration": {
+        "goal": "G_official_completion",
+        "point_action": "ACTION6",
+        "priority": [
+          "populated_frontier",
+          "unpopulated_frontier",
+          "recalled_preparation"
+        ],
+        "question": "Test a currently measured separator on the boundary of the connected region containing occurrences changed by a previous separator intervention; measure the local aperture and global autonomous response separately, without assuming a terminal role or predation law.",
+        "hypotheses": [
+          "separator_control_method_applies_to_current_homologous_locus",
+          "connecting_regions_may_change_occurrence_opportunities",
+          "global_response_and_actor_access_unknown"
+        ],
+        "conditions": [
+          {
+            "field": "control_method_supported",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "observed_effect_available",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_separator",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "tie_break": "current_locus_coordinate_for_equal_information_questions",
+        "kind_conditions": {
+          "populated_frontier": [
+            {
+              "field": "frontier_linked",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "unpopulated_frontier": [
+            {
+              "field": "frontier_linked",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "recalled_preparation": [
+            {
+              "field": "profile_relation_revalidated",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_analogy_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "target_cardinality_retained",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "areas_retained",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "control_shape_revalidated",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        "preparation_learning": [
+          {
+            "field": "source_uniform",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "target_uniform",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "source_larger_cardinality",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "source_plural",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "target_present",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "same_area",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "different_values",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "kind_meaning": {
+          "recalled_preparation": "Revalidate a recorded separator intervention between unequal homogeneous populations of equal individual area, retaining the measured target cardinality and control shape; hypothesize a preparatory regional transformation, not predation or terminal necessity."
+        },
+        "preparation_recall": {
+          "source_cardinality": "greater_than_target_and_plural",
+          "target_cardinality": "equal_to_observed_method",
+          "area": "equal_to_observed_method",
+          "palette": "relational_uniform_distinct_not_fixed_values",
+          "controls": "same_axis_radius_and_equality_pattern",
+          "ambiguity": "abstain_if_multiple_homologues",
+          "operational_scope": "new_epoch_requires_current_measurement"
+        },
+        "recall_candidates": [
+          {
+            "field": "control_method_supported",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "observed_effect_available",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_separator",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "profile_relation_revalidated",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "target_cardinality_retained",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "areas_retained",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "control_shape_revalidated",
+            "operator": "equals",
+            "expected": true
+          }
+        ]
+      }
+    }
+  ]
+}

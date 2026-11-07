@@ -1,0 +1,180 @@
+{
+  "module_id": "material_role_formation_a",
+  "declarations": [
+    {
+      "id": "policy.material_role_formation_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_role_from_actual_geometry_remains_proposed",
+        "reason.material_role_missing_current_geometry"
+      ],
+      "declared_alternative_refs": [
+        "material_role_formation_a.proposed",
+        "material_role_formation_a.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_equivalent_proposed_question",
+      "selection_tiers": [
+        {
+          "id": "tier.joystick_acq.mask",
+          "reason_ref": "reason.material_role_from_actual_geometry_remains_proposed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_role_formation_a.proposed"
+            },
+            {
+              "field": "hypothesis_question_measured",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "hypothesis_question_measured",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.joystick_acq.unknown",
+          "reason_ref": "reason.material_role_missing_current_geometry",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_role_formation_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "material_role_formation_a.proposed": "rule.material_role_question_a"
+      },
+      "configuration": {}
+    },
+    {
+      "id": "rule.material_role_question_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.material_role_from_actual_geometry_remains_proposed"
+      ],
+      "invariants": [
+        "actual_geometry_not_role_truth",
+        "proposed_until_causal_support",
+        "frozen_parent_and_falsifier",
+        "no_action_authority"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{proposed_role_term_ref}",
+          "kind": "value",
+          "label": "Revisable material region role question",
+          "required_fields": [
+            "proposed_role_term_ref",
+            "proposed_role_claim_ref",
+            "region_ref",
+            "candidate_role",
+            "question_ref",
+            "parent_goal_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "support_digest",
+            "falsifier_ref"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "material.actual_region_role_question.v1",
+            "role_truth_established": false
+          },
+          "attribute_bindings": {
+            "region_ref": "region_ref",
+            "candidate_role": "candidate_role",
+            "question_ref": "question_ref",
+            "frame_ref": "frame_ref",
+            "support_digest": "support_digest",
+            "component_indices": "component_indices",
+            "shape_bounds": "shape_bounds",
+            "palette_counts": "palette_counts",
+            "visible_support_closed": "visible_support_closed",
+            "falsifier_ref": "falsifier_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{proposed_role_claim_ref}",
+          "predicate": "proposes_material_region_role",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{proposed_role_term_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{proposed_role_term_ref}"
+          ],
+          "required_fields": [
+            "proposed_role_term_ref",
+            "proposed_role_claim_ref",
+            "region_ref",
+            "candidate_role",
+            "question_ref",
+            "parent_goal_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "support_digest",
+            "falsifier_ref"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "region_ref": "region_ref",
+            "candidate_role": "candidate_role",
+            "question_ref": "question_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "frame_ref": "frame_ref",
+            "support_digest": "support_digest",
+            "falsifier_ref": "falsifier_ref"
+          },
+          "static_attributes": {
+            "role_truth_established": false,
+            "no_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "module_id":"device_example_isolation_c",
+  "declarations":[{
+    "id":"policy.device_example_isolation_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+    "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1",
+    "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs":["device.example.isolated"],"selection_required_fact_fields":["alternative_ref"],
+    "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+    "fact_projections":[
+      {"id":"projection.device_example.neutral_controls","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"device.example.isolated"},
+        {"field":"all_other_slots_neutral","operator":"equals","expected":true}],"static_facts":{"eligible":true}},
+      {"id":"projection.device_example.measured_unrelated_controls","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"device.example.isolated"},
+        {"field":"other_slot_actor_unchanged_each_phase","operator":"equals","expected":true}],"static_facts":{"eligible":true}}],
+    "meaning_template_ref_by_alternative":{"device.example.isolated":"rule.device_example_isolation_c"},
+    "premises":["actual_complete_single_execution_without_checkpoint_or_other_actor_effects","unchanged_whole_program","all_other_slots_neutral_or_unchanged_actor_at_every_complete_phase"],
+    "invariants":["endpoint_cancellation_is_not_isolation","whole_word_semantics","no_operator_law_promotion","no_ACT"],
+    "falsifiers":["missing_phase","different_actor_at_unrelated_slot_phase","confounded_execution"],
+    "reason_refs":["reason.complete_other_slot_phases_preserve_focal_actor"]
+  },{
+    "id":"rule.device_example_isolation_c","kind":"rule","evaluation":"project_requested_conclusions",
+    "supported_operators":["DERIVE"],"input_contract":"yf_arc3_v5.authority_input.derivation.v1",
+    "output_contract":"yf_arc3_v5.authority_output.derivation.v1","relation_family":"epistemic",
+    "term_templates":[{"id_pattern":"example.device.isolated.{packet_digest}","kind":"value","label":"Scoped isolated whole instruction example",
+      "required_fields":["packet_digest","parent_goal_ref","focused_slot_ref","whole_program","before_actor","after_actor","frozen_why"],
+      "attribute_bindings":{"parent_goal_ref":"parent_goal_ref","focused_slot_ref":"focused_slot_ref","whole_program":"whole_program",
+        "before_actor":"before_actor","after_actor":"after_actor","frozen_why":"frozen_why","isolation_phase_facts":"isolation_phase_facts"},
+      "static_attributes":{"operator_confirmed":false,"no_action_authority":true}}],
+    "claim_templates":[],"premises":["complete_current_isolation_measurement"],
+    "invariants":["unrelated_is_scoped_to_observed_actor_and_execution"],"falsifiers":["changed_program_or_actor"],
+    "reason_refs":["reason.only_focused_instruction_contributes_observed_actor_change"]
+  }]
+}

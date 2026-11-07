@@ -1,0 +1,759 @@
+{
+  "module_id": "material_role_probe_a",
+  "declarations": [
+    {
+      "id": "policy.material_role_probe_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_actual_probe_matches",
+        "reason.material_actual_probe_refutes",
+        "reason.material_probe_unknown",
+        "reason.material_role_probe_stock_conserved",
+        "reason.material_role_probe_stock_decoration",
+        "reason.material_role_probe_holder_received",
+        "reason.material_role_probe_correspondence_inconclusive"
+      ],
+      "declared_alternative_refs": [
+        "material_role_probe_a.matches",
+        "material_role_probe_a.refutes",
+        "material_role_probe_a.unknown",
+        "material_role_probe_a.stock_conserved",
+        "material_role_probe_a.stock_decoration",
+        "material_role_probe_a.holder_received",
+        "material_role_probe_a.correspondence_inconclusive"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_equivalent_actual_probe_effect",
+      "selection_tiers": [
+        {
+          "id": "tier.material_probe.stock_conserved",
+          "reason_ref": "reason.material_role_probe_stock_conserved",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_role_probe_a.stock_conserved"
+            },
+            {
+              "field": "probe_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "correspondence_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "correspondence_output_distinct",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "correspondence_closed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pointer_inside_proposed_region",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "effect_relation_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_role",
+              "operator": "equals",
+              "expected": "STOCK"
+            },
+            {
+              "field": "proposed_region_is_source",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "single_glyph_conserved",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_probe.stock_decoration",
+          "reason_ref": "reason.material_role_probe_stock_decoration",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_role_probe_a.stock_decoration"
+            },
+            {
+              "field": "probe_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "correspondence_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "correspondence_output_distinct",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "correspondence_closed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pointer_inside_proposed_region",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "effect_relation_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_role",
+              "operator": "equals",
+              "expected": "STOCK"
+            },
+            {
+              "field": "proposed_region_is_source",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_retained_matching_recipient",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_probe.holder_received0",
+          "reason_ref": "reason.material_role_probe_holder_received",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_role_probe_a.holder_received"
+            },
+            {
+              "field": "probe_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "correspondence_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "correspondence_output_distinct",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "correspondence_closed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pointer_inside_proposed_region",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "effect_relation_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_role",
+              "operator": "equals",
+              "expected": "WORK_HOLDER"
+            },
+            {
+              "field": "proposed_region_is_recipient",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "single_glyph_conserved",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_probe.holder_received1",
+          "reason_ref": "reason.material_role_probe_holder_received",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_role_probe_a.holder_received"
+            },
+            {
+              "field": "probe_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "correspondence_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "correspondence_output_distinct",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "correspondence_closed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pointer_inside_proposed_region",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "effect_relation_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_role",
+              "operator": "equals",
+              "expected": "DELIVERY_HOLDER"
+            },
+            {
+              "field": "proposed_region_is_recipient",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "single_glyph_conserved",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_probe.correspondence_inconclusive",
+          "reason_ref": "reason.material_role_probe_correspondence_inconclusive",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_role_probe_a.correspondence_inconclusive"
+            },
+            {
+              "field": "probe_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "correspondence_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "correspondence_output_distinct",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_probe.matches",
+          "reason_ref": "reason.material_actual_probe_matches",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_role_probe_a.matches"
+            },
+            {
+              "field": "probe_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "effect_relation_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_probe.refutes",
+          "reason_ref": "reason.material_actual_probe_refutes",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_role_probe_a.refutes"
+            },
+            {
+              "field": "probe_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "effect_relation_refuted",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_probe.unknown",
+          "reason_ref": "reason.material_probe_unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_role_probe_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "material_role_probe_a.matches": "rule.material_role_probe_effect_a",
+        "material_role_probe_a.refutes": "rule.material_role_probe_effect_a",
+        "material_role_probe_a.stock_conserved": "rule.material_role_probe_correspondence_a",
+        "material_role_probe_a.stock_decoration": "rule.material_role_probe_correspondence_a",
+        "material_role_probe_a.holder_received": "rule.material_role_probe_correspondence_a",
+        "material_role_probe_a.correspondence_inconclusive": "rule.material_role_probe_correspondence_a"
+      },
+      "configuration": {}
+    },
+    {
+      "id": "rule.material_role_probe_effect_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.material_actual_probe_matches",
+        "reason.material_actual_probe_refutes"
+      ],
+      "invariants": [
+        "real_dispatch_not_predicted_state",
+        "exact_before_after_acquisition",
+        "physical_effect_not_role_truth",
+        "no_action_authority"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Actual material role probe region effects",
+          "required_fields": [
+            "output_term_ref",
+            "output_claim_ref",
+            "proposed_role_claim_ref",
+            "dispatch_record_ref",
+            "parent_goal_ref",
+            "question_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "before_frame_ref",
+            "region_effects",
+            "effect_digest",
+            "effect_relation_matches",
+            "effect_relation_refuted"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "material.actual_probe_effect.v1",
+            "role_truth_established": false
+          },
+          "attribute_bindings": {
+            "proposed_role_claim_ref": "proposed_role_claim_ref",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "question_ref": "question_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "before_frame_ref": "before_frame_ref",
+            "region_effects": "region_effects",
+            "effect_digest": "effect_digest",
+            "effect_relation_matches": "effect_relation_matches",
+            "effect_relation_refuted": "effect_relation_refuted"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_claim_ref}",
+          "predicate": "qualifies_material_observed_probe_effect",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{proposed_role_claim_ref}",
+            "{dispatch_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_term_ref",
+            "output_claim_ref",
+            "proposed_role_claim_ref",
+            "dispatch_record_ref",
+            "parent_goal_ref",
+            "question_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "before_frame_ref",
+            "region_effects",
+            "effect_digest",
+            "effect_relation_matches",
+            "effect_relation_refuted"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "proposed_role_claim_ref": "proposed_role_claim_ref",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "question_ref": "question_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "before_frame_ref": "before_frame_ref",
+            "region_effects": "region_effects",
+            "effect_digest": "effect_digest",
+            "effect_relation_matches": "effect_relation_matches",
+            "effect_relation_refuted": "effect_relation_refuted"
+          },
+          "static_attributes": {
+            "role_truth_established": false,
+            "no_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.material_role_probe_correspondence_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.material_role_probe_stock_conserved",
+        "reason.material_role_probe_stock_decoration",
+        "reason.material_role_probe_holder_received",
+        "reason.material_role_probe_correspondence_inconclusive"
+      ],
+      "invariants": [
+        "real_dispatch_not_predicted_state",
+        "exact_before_after_acquisition",
+        "physical_effect_not_role_truth",
+        "no_action_authority",
+        "role_scope_is_this_probe_only",
+        "no_work_delivery_distinction",
+        "no_unit_identity_or_recipe_inferred",
+        "unobserved_regions_remain_unknown"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Actual material role probe region effects",
+          "required_fields": [
+            "output_term_ref",
+            "output_claim_ref",
+            "proposed_role_claim_ref",
+            "dispatch_record_ref",
+            "parent_goal_ref",
+            "question_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "before_frame_ref",
+            "region_effects",
+            "effect_digest",
+            "effect_relation_matches",
+            "effect_relation_refuted"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "material.actual_probe_effect.v1",
+            "role_truth_established": false
+          },
+          "attribute_bindings": {
+            "proposed_role_claim_ref": "proposed_role_claim_ref",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "question_ref": "question_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "before_frame_ref": "before_frame_ref",
+            "region_effects": "region_effects",
+            "effect_digest": "effect_digest",
+            "effect_relation_matches": "effect_relation_matches",
+            "effect_relation_refuted": "effect_relation_refuted"
+          }
+        },
+        {
+          "id_pattern": "{role_evidence_term_ref}",
+          "kind": "value",
+          "label": "Scoped material role reading from actual glyph correspondence",
+          "required_fields": [
+            "role_evidence_term_ref",
+            "role_evidence_claim_ref",
+            "question_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "frame_ref",
+            "before_frame_ref",
+            "proposed_role_claim_ref",
+            "dispatch_record_ref",
+            "parent_goal_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "source_region_ref",
+            "recipient_region_ref",
+            "removed_signatures",
+            "added_signatures",
+            "retained_source_signatures",
+            "effect_digest",
+            "other_observed_regions_unchanged",
+            "correspondence_closed",
+            "pointer_inside_proposed_region",
+            "alternative_ref"
+          ],
+          "attribute_bindings": {
+            "question_ref": "question_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "frame_ref": "frame_ref",
+            "before_frame_ref": "before_frame_ref",
+            "proposed_role_claim_ref": "proposed_role_claim_ref",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "source_region_ref": "source_region_ref",
+            "recipient_region_ref": "recipient_region_ref",
+            "removed_signatures": "removed_signatures",
+            "added_signatures": "added_signatures",
+            "retained_source_signatures": "retained_source_signatures",
+            "effect_digest": "effect_digest",
+            "other_observed_regions_unchanged": "other_observed_regions_unchanged",
+            "correspondence_closed": "correspondence_closed",
+            "pointer_inside_proposed_region": "pointer_inside_proposed_region",
+            "role_reading": "alternative_ref",
+            "source_disposition_ref": "alternative_ref"
+          },
+          "static_attributes": {
+            "source_kind_ref": "material.scoped_role_evidence.v1",
+            "role_truth_established": false,
+            "unit_identity_established": false,
+            "recipe_law_established": false,
+            "unobserved_regions_qualified": false,
+            "portable_method_qualified": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_claim_ref}",
+          "predicate": "qualifies_material_observed_probe_effect",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{proposed_role_claim_ref}",
+            "{dispatch_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_term_ref",
+            "output_claim_ref",
+            "proposed_role_claim_ref",
+            "dispatch_record_ref",
+            "parent_goal_ref",
+            "question_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "before_frame_ref",
+            "region_effects",
+            "effect_digest",
+            "effect_relation_matches",
+            "effect_relation_refuted"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "proposed_role_claim_ref": "proposed_role_claim_ref",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "question_ref": "question_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "before_frame_ref": "before_frame_ref",
+            "region_effects": "region_effects",
+            "effect_digest": "effect_digest",
+            "effect_relation_matches": "effect_relation_matches",
+            "effect_relation_refuted": "effect_relation_refuted"
+          },
+          "static_attributes": {
+            "role_truth_established": false,
+            "no_action_authority": true
+          }
+        },
+        {
+          "id_pattern": "{role_evidence_claim_ref}",
+          "predicate": "qualifies_material_region_role_evidence",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{role_evidence_term_ref}",
+            "{proposed_role_claim_ref}",
+            "{dispatch_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{role_evidence_term_ref}"
+          ],
+          "required_fields": [
+            "role_evidence_term_ref",
+            "role_evidence_claim_ref",
+            "question_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "frame_ref",
+            "before_frame_ref",
+            "proposed_role_claim_ref",
+            "dispatch_record_ref",
+            "parent_goal_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "source_region_ref",
+            "recipient_region_ref",
+            "removed_signatures",
+            "added_signatures",
+            "retained_source_signatures",
+            "effect_digest",
+            "other_observed_regions_unchanged",
+            "correspondence_closed",
+            "pointer_inside_proposed_region",
+            "alternative_ref"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "question_ref": "question_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "frame_ref": "frame_ref",
+            "before_frame_ref": "before_frame_ref",
+            "proposed_role_claim_ref": "proposed_role_claim_ref",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "source_region_ref": "source_region_ref",
+            "recipient_region_ref": "recipient_region_ref",
+            "removed_signatures": "removed_signatures",
+            "added_signatures": "added_signatures",
+            "retained_source_signatures": "retained_source_signatures",
+            "effect_digest": "effect_digest",
+            "other_observed_regions_unchanged": "other_observed_regions_unchanged",
+            "correspondence_closed": "correspondence_closed",
+            "pointer_inside_proposed_region": "pointer_inside_proposed_region",
+            "role_reading": "alternative_ref",
+            "source_disposition_ref": "alternative_ref"
+          },
+          "static_attributes": {
+            "role_truth_established": false,
+            "unit_identity_established": false,
+            "recipe_law_established": false,
+            "unobserved_regions_qualified": false,
+            "portable_method_qualified": false,
+            "no_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "module_id": "v6.ordered_reaction",
+  "declarations": [
+    {
+      "id": "policy.ordered_reaction",
+      "kind": "schema",
+      "premises": [
+        "Current repeated marked squares and unique outline measured by V5; translation observed in current epoch."
+      ],
+      "applicability": [
+        "Bound current action and context, explicit process or cover hypothesis."
+      ],
+      "invariants": [
+        "No imported phase/quota/terminal laws; physical returns retain unknown effects."
+      ],
+      "falsifiers": [
+        "Current scope or unique outline changed",
+        "Declared movement fails",
+        "Observed cover does not preserve useful progress"
+      ],
+      "reason_refs": [
+        "0.3.3.10-2",
+        "0.1.1-5,5"
+      ],
+      "configuration": {
+        "direction_prior": {
+          "ACTION1": [
+            -1,
+            0
+          ],
+          "ACTION2": [
+            1,
+            0
+          ],
+          "ACTION3": [
+            0,
+            -1
+          ],
+          "ACTION4": [
+            0,
+            1
+          ]
+        },
+        "process_prior": "ACTION5",
+        "projections": [
+          "projection.exploration.ordered_tip_process_probe",
+          "projection.exploration.ordered_tip_intervention",
+          "projection.exploration.ordered_tip_achieved_cover_activates_process_test"
+        ],
+        "priority": [
+          "cover",
+          "protected",
+          "continue",
+          "probe"
+        ],
+        "hypotheses": [
+          "interface_action5_is_revisable_local_process_prior_not_unique_unknown_input",
+          "covering_observed_earlier_incidence_may_preserve_later_suffix",
+          "route_uniform_support_is_conditional_not_traversability_law",
+          "marker_changes_do_not_prove_complete_reaction_laws"
+        ],
+        "rules": {
+          "probe": {
+            "projection": "projection.exploration.ordered_tip_process_probe",
+            "conditions": [
+              {
+                "field": "current_control_translation_observed",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_input_bound",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "untried_current_context",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "meaning": "Test nontranslation evolution in a currently measured oriented field after observed control translation."
+          },
+          "cover": {
+            "projection": "projection.exploration.ordered_tip_intervention",
+            "conditions": [
+              {
+                "field": "current_control_translation_observed",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_input_bound",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "untried_current_context",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "meaning": "Conditionally cover the measured earlier incoming chain while retaining the later suffix as parent."
+          },
+          "protected": {
+            "projection": "projection.exploration.ordered_tip_achieved_cover_activates_process_test",
+            "conditions": [
+              {
+                "field": "current_control_translation_observed",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_input_bound",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "untried_current_context",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "meaning": "The currently achieved cover enables the parent process experiment."
+          },
+          "continue": {
+            "conditions": [
+              {
+                "field": "current_control_translation_observed",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_input_bound",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "untried_current_context",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_progress_without_restoration",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "ordered_tip_ring_on_earlier_chain",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "meaning": "Continue the observed process under current retained cover after genuine local progress, without a full law or terminal prediction."
+          }
+        }
+      }
+    }
+  ]
+}

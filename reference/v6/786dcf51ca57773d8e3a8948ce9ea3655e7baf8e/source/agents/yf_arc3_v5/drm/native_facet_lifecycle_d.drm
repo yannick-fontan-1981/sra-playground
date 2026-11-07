@@ -1,0 +1,584 @@
+{
+  "module_id": "native_facet_lifecycle_d",
+  "declarations": [
+    {
+      "id": "policy.d_native_facet_lifecycle",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.d_source_current_owner_opens_and_consumes_only_its_evidenced_facet"
+      ],
+      "declared_alternative_refs": [
+        "d_facet.open",
+        "d_facet.keep_open",
+        "d_facet.already_consumed",
+        "d_facet.consume",
+        "d_facet.blocked"
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.d_facet.open",
+          "reason_ref": "reason.d_source_current_owner_opens_and_consumes_only_its_evidenced_facet",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_facet.open"
+            },
+            {
+              "field": "lifecycle_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "context_record_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "active_execution_context_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "active_execution_intent_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "physical_canonical_packet_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "stage_ref",
+              "operator": "equals",
+              "expected": "OPEN"
+            },
+            {
+              "field": "facet_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "publication_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "owner_selection_terminal_ref",
+              "operator": "member_of_reference_field",
+              "reference_field": "allowed_owner_terminal_refs"
+            },
+            {
+              "field": "physical_disposition_ref",
+              "operator": "member_of_reference_field",
+              "reference_field": "allowed_physical_disposition_refs"
+            }
+          ]
+        },
+        {
+          "id": "tier.d_facet.keep_open",
+          "reason_ref": "reason.d_source_current_owner_opens_and_consumes_only_its_evidenced_facet",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_facet.keep_open"
+            },
+            {
+              "field": "lifecycle_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "context_record_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "active_execution_context_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "active_execution_intent_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "physical_canonical_packet_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "stage_ref",
+              "operator": "equals",
+              "expected": "OPEN"
+            },
+            {
+              "field": "facet_payload_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "facet_state_ref",
+              "operator": "equals",
+              "expected": "OPEN"
+            },
+            {
+              "field": "existing_scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "publication_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "owner_selection_terminal_ref",
+              "operator": "member_of_reference_field",
+              "reference_field": "allowed_owner_terminal_refs"
+            },
+            {
+              "field": "physical_disposition_ref",
+              "operator": "member_of_reference_field",
+              "reference_field": "allowed_physical_disposition_refs"
+            }
+          ]
+        },
+        {
+          "id": "tier.d_facet.already_consumed",
+          "reason_ref": "reason.d_source_current_owner_opens_and_consumes_only_its_evidenced_facet",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_facet.already_consumed"
+            },
+            {
+              "field": "lifecycle_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "context_record_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "active_execution_context_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "active_execution_intent_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "physical_canonical_packet_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "stage_ref",
+              "operator": "equals",
+              "expected": "OPEN"
+            },
+            {
+              "field": "facet_payload_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "facet_state_ref",
+              "operator": "equals",
+              "expected": "CONSUMED"
+            },
+            {
+              "field": "owner_selection_terminal_ref",
+              "operator": "member_of_reference_field",
+              "reference_field": "allowed_owner_terminal_refs"
+            },
+            {
+              "field": "physical_disposition_ref",
+              "operator": "member_of_reference_field",
+              "reference_field": "allowed_physical_disposition_refs"
+            }
+          ]
+        },
+        {
+          "id": "tier.d_facet.consume",
+          "reason_ref": "reason.d_source_current_owner_opens_and_consumes_only_its_evidenced_facet",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_facet.consume"
+            },
+            {
+              "field": "lifecycle_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "context_record_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "active_execution_context_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "active_execution_intent_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "physical_canonical_packet_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "stage_ref",
+              "operator": "equals",
+              "expected": "CONSUME"
+            },
+            {
+              "field": "facet_payload_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "facet_state_ref",
+              "operator": "equals",
+              "expected": "OPEN"
+            },
+            {
+              "field": "publication_payload_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_publication_disposition_ref",
+              "operator": "equals",
+              "expected": "d_native_effect.published"
+            },
+            {
+              "field": "owner_selection_terminal_ref",
+              "operator": "member_of_reference_field",
+              "reference_field": "allowed_owner_terminal_refs"
+            },
+            {
+              "field": "physical_disposition_ref",
+              "operator": "member_of_reference_field",
+              "reference_field": "allowed_physical_disposition_refs"
+            }
+          ]
+        },
+        {
+          "id": "tier.d_facet.blocked",
+          "reason_ref": "reason.d_source_current_owner_opens_and_consumes_only_its_evidenced_facet",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_facet.blocked"
+            }
+          ]
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.d_facet_equivalent_transition_order",
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "configuration": {
+        "facet_projection_contract_ref": "d.native_effect_facet.v1",
+        "facet_state_field": "processing_state_ref",
+        "publication_projection_contract_ref": "family.sealed_effect.publication.b.v1",
+        "facet_attribute_bindings": {
+          "effect_ref": "effect_ref",
+          "parent_goal_ref": "parent_goal_ref",
+          "context_ref": "context_ref",
+          "publication_ref": "publication_ref",
+          "question_ref": "question_ref",
+          "scope_ref": "scope_ref",
+          "epoch": "epoch",
+          "input_revision_ref": "input_revision_ref",
+          "episode_ref": "episode_ref",
+          "level_scope_ref": "level_scope_ref",
+          "packet_term_ref": "packet_term_ref",
+          "packet_digest": "packet_digest",
+          "frame_ref": "frame_ref",
+          "exact_request_signature_ref": "exact_request_signature_ref"
+        },
+        "allowed_owner_terminal_refs": [
+          "d_native_owner.cyclic_configuration_coverage",
+          "d_native_owner.gravity_adhesion",
+          "d_native_owner.reactive_capture",
+          "d_native_owner.fixed_program_origin",
+          "d_native_owner.temporal_fragment_match",
+          "d_native_owner.bounded_joystick",
+          "d_native_owner.neighborhood_pattern_construction",
+          "d_native_owner.visual_sequence",
+          "d_native_owner.topological_region_recolor",
+          "d_native_owner.layered_prefix_construction",
+          "d_native_owner.preview_piece_packing",
+          "d_native_owner.station_profile_workbench",
+          "d_native_owner.axial_field_configuration",
+          "d_native_owner.supported_construction",
+          "d_native_owner.finite_alignment",
+          "d_native_owner.visible_voxel_construction",
+          "d_native_owner.discrete_relay_optics",
+          "d_native_owner.cadenced_rail_transfer"
+        ],
+        "allowed_physical_disposition_refs": [
+          "sealed_interval.publish",
+          "sealed_interval.already_current"
+        ]
+      },
+      "meaning_template_ref_by_alternative": {
+        "d_facet.open": "rule.d_native_facet_open",
+        "d_facet.consume": "rule.d_native_facet_consume"
+      },
+      "invariants": [
+        "current_actual_owner_and_canonical_physical_packet",
+        "consumption_requires_actual_exact_canonical_publication",
+        "no_law_or_goal_confirmation",
+        "no_act_or_concentration_creation",
+        "parent_siblings_and_unaffected_dependencies_preserved"
+      ],
+      "falsifiers": [
+        "stale_or_foreign_facet",
+        "active_execution",
+        "publication_collision_or_refusal"
+      ]
+    },
+    {
+      "id": "rule.d_native_facet_open",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.d_source_current_owner_opens_and_consumes_only_its_evidenced_facet"
+      ],
+      "premises": [
+        "current_source_owner_and_exact_physical_interval"
+      ],
+      "applicability": [
+        "source_selected_native_facet_lifecycle_transition"
+      ],
+      "invariants": [
+        "current_actual_owner_and_canonical_physical_packet",
+        "consumption_requires_actual_exact_canonical_publication",
+        "no_law_or_goal_confirmation",
+        "no_act_or_concentration_creation",
+        "parent_siblings_and_unaffected_dependencies_preserved"
+      ],
+      "falsifiers": [
+        "stale_or_foreign_facet",
+        "active_execution",
+        "publication_collision_or_refusal"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{facet_term_ref}",
+          "kind": "value",
+          "label": "Source-owned native evidence facet",
+          "required_fields": [
+            "facet_term_ref",
+            "effect_ref",
+            "parent_goal_ref",
+            "context_ref",
+            "publication_ref",
+            "question_ref",
+            "scope_ref",
+            "epoch",
+            "input_revision_ref",
+            "episode_ref",
+            "level_scope_ref",
+            "packet_term_ref",
+            "packet_digest",
+            "frame_ref",
+            "exact_request_signature_ref"
+          ],
+          "static_attributes": {
+            "projection_contract_ref": "d.native_effect_facet.v1",
+            "processing_state_ref": "OPEN",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "effect_ref": "effect_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "context_ref": "context_ref",
+            "publication_ref": "publication_ref",
+            "question_ref": "question_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "packet_term_ref": "packet_term_ref",
+            "packet_digest": "packet_digest",
+            "frame_ref": "frame_ref",
+            "exact_request_signature_ref": "exact_request_signature_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{facet_qualification_claim_ref}",
+          "predicate": "qualifies_current_native_unprocessed_sealed_effect_facet",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "{facet_term_ref}",
+            "{packet_term_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "{facet_term_ref}",
+            "{packet_term_ref}"
+          ],
+          "required_fields": [
+            "facet_qualification_claim_ref",
+            "facet_term_ref",
+            "effect_ref",
+            "parent_goal_ref",
+            "context_ref",
+            "publication_ref",
+            "question_ref",
+            "scope_ref",
+            "epoch",
+            "input_revision_ref",
+            "episode_ref",
+            "level_scope_ref",
+            "packet_term_ref",
+            "packet_digest",
+            "frame_ref",
+            "exact_request_signature_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref"
+          },
+          "attribute_bindings": {
+            "effect_ref": "effect_ref",
+            "facet_term_ref": "facet_term_ref",
+            "packet_term_ref": "packet_term_ref",
+            "frame_ref": "frame_ref",
+            "packet_digest": "packet_digest",
+            "exact_request_signature_ref": "exact_request_signature_ref",
+            "selection_record_ref": "selection_record_ref",
+            "context_ref": "context_ref"
+          },
+          "static_attributes": {
+            "processed": false,
+            "known_path_primitive_active": false,
+            "phase_ref": "SEALED_EFFECT",
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.d_native_facet_consume",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.d_source_current_owner_opens_and_consumes_only_its_evidenced_facet"
+      ],
+      "premises": [
+        "current_source_owner_and_exact_physical_interval"
+      ],
+      "applicability": [
+        "source_selected_native_facet_lifecycle_transition"
+      ],
+      "invariants": [
+        "current_actual_owner_and_canonical_physical_packet",
+        "consumption_requires_actual_exact_canonical_publication",
+        "no_law_or_goal_confirmation",
+        "no_act_or_concentration_creation",
+        "parent_siblings_and_unaffected_dependencies_preserved"
+      ],
+      "falsifiers": [
+        "stale_or_foreign_facet",
+        "active_execution",
+        "publication_collision_or_refusal"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{facet_term_ref}",
+          "kind": "value",
+          "label": "Source-owned native evidence facet",
+          "required_fields": [
+            "facet_term_ref",
+            "effect_ref",
+            "parent_goal_ref",
+            "context_ref",
+            "publication_ref",
+            "question_ref",
+            "scope_ref",
+            "epoch",
+            "input_revision_ref",
+            "episode_ref",
+            "level_scope_ref",
+            "packet_term_ref",
+            "packet_digest",
+            "frame_ref",
+            "exact_request_signature_ref"
+          ],
+          "static_attributes": {
+            "projection_contract_ref": "d.native_effect_facet.v1",
+            "processing_state_ref": "CONSUMED",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "effect_ref": "effect_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "context_ref": "context_ref",
+            "publication_ref": "publication_ref",
+            "question_ref": "question_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "packet_term_ref": "packet_term_ref",
+            "packet_digest": "packet_digest",
+            "frame_ref": "frame_ref",
+            "exact_request_signature_ref": "exact_request_signature_ref"
+          }
+        }
+      ]
+    }
+  ]
+}

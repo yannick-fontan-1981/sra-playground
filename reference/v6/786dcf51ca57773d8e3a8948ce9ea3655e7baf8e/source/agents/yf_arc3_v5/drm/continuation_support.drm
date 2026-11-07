@@ -1,0 +1,439 @@
+{
+  "module_id": "continuation_support",
+  "declarations": [
+    {
+      "id": "policy.continuation_support_measurement_contract",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.typed_scope_and_current_named_consumer_own_support_measurement"
+      ],
+      "configuration": {
+        "support_input_field": "current_continuation_support",
+        "temporal_scope_refs": [
+          "current_readiness",
+          "provisional_occupancy",
+          "maintained_interval",
+          "attempt_latched_acquisition",
+          "episode_knowledge",
+          "official_terminal"
+        ],
+        "predicate_required_fields": [
+          "predicate_ref",
+          "owner_ref",
+          "temporal_scope_ref",
+          "evidence_ref",
+          "valid_from_ref",
+          "valid_until_ref",
+          "value"
+        ],
+        "restoration_dimension_refs": [
+          "pose",
+          "selection",
+          "inventory",
+          "map",
+          "acquisitions",
+          "program",
+          "random_process_context",
+          "budgets"
+        ],
+        "adapter_response_kind_refs": [
+          "safe_refusal",
+          "accepted_no_motion_preparation",
+          "failed_proposition",
+          "full_construction_mismatch",
+          "structural_collapse",
+          "rollback",
+          "automatic_reset",
+          "reset_unavailable"
+        ]
+      }
+    },
+    {
+      "id": "policy.current_continuation_support",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.same_parent_requires_only_its_current_missing_contribution_evidence"
+      ],
+      "premises": [
+        "the_current_contribution_is_named_inside_its_existing_parent_contract"
+      ],
+      "invariants": [
+        "different_lifetimes_are_not_equated_by_appearance",
+        "predicted_use_is_not_an_observed_receipt",
+        "unknown_consumption_blocks_only_dependent_release",
+        "unrelated_implementation_debt_does_not_block_available_work",
+        "missing_kernel_is_not_an_experiment_question",
+        "restored_pose_does_not_restore_random_future_or_old_suffix",
+        "adapter_response_categories_are_not_silently_repaired",
+        "no_second_dispatcher_or_parent_graph_is_created"
+      ],
+      "falsifiers": [
+        "frozen_parent_or_scope_changed",
+        "service_consumer_still_needs_support",
+        "restoration_component_unknown",
+        "adapter_outcome_unregistered"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "declared_alternative_refs": [
+        "continuation_support.current",
+        "continuation_support.evidence_request",
+        "continuation_support.implementation_debt"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.current_continuation_support"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.support.binding_default",
+          "all_conditions": [],
+          "static_facts": {
+            "support_currently_bound": false,
+            "support_authorized": false
+          }
+        },
+        {
+          "id": "projection.support.current_without_restore",
+          "all_conditions": [
+            {
+              "field": "same_frozen_parent_pipeline",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "unknown_temporal_predicate_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "adapter_response_registered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "unknown_service_consumer",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_missing_observation",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "restoration_requested",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "support_currently_bound": true
+          }
+        },
+        {
+          "id": "projection.support.current_after_restore",
+          "all_conditions": [
+            {
+              "field": "same_frozen_parent_pipeline",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "unknown_temporal_predicate_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "adapter_response_registered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "unknown_service_consumer",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "has_missing_observation",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "restoration_requested",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "old_suffix_revalidated",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "restoration_has_unknown_components",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "support_currently_bound": true
+          }
+        },
+        {
+          "id": "projection.support.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "continuation_support.current"
+            },
+            {
+              "field": "support_currently_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "selected_contribution_implementation_missing",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "support_authorized": true
+          }
+        },
+        {
+          "id": "projection.support.evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "continuation_support.evidence_request"
+            },
+            {
+              "field": "support_currently_bound",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "selected_contribution_implementation_missing",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "support_authorized": false,
+            "request_scope": "current_named_contribution",
+            "allow_unconstrained_suffix": false
+          },
+          "bound_facts": {
+            "minimal_contribution_evidence_refs": "missing_observation_refs"
+          }
+        },
+        {
+          "id": "projection.support.implementation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "continuation_support.implementation_debt"
+            },
+            {
+              "field": "selected_contribution_implementation_missing",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "support_authorized": false,
+            "allow_game_probe_for_code_absence": false,
+            "debt_scope": "selected_contribution_only"
+          }
+        }
+      ],
+      "configuration": {
+        "meaning_evidence_refs_field": "evidence_refs"
+      }
+    },
+    {
+      "id": "rule.current_continuation_support",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "dynamic",
+      "reason_refs": [
+        "reason.scoped_predicate_consumer_and_restoration_records_keep_their_lifetimes"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "continuation.support.{support_token}.{support_digest}",
+          "kind": "schema",
+          "label": "current typed contribution support",
+          "required_fields": [
+            "support_ref",
+            "support_token",
+            "support_digest",
+            "parent_goal_ref",
+            "scope_ref"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "contract_ref": "contract_ref",
+            "scope_ref": "scope_ref",
+            "predicate_rows": "predicate_rows",
+            "service_rows": "service_rows",
+            "restoration_rows": "restoration_rows",
+            "adapter_response_kind_ref": "adapter_response_kind_ref",
+            "missing_observation_refs": "missing_observation_refs",
+            "missing_implementation_refs": "missing_implementation_refs",
+            "support_authorized": "support_authorized"
+          },
+          "static_attributes": {
+            "role": "typed_continuation_support_record",
+            "commitment": "revisable",
+            "new_dispatcher": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.continuation.support.{support_token}.{support_digest}",
+          "predicate": "records_current_contribution_support",
+          "family": "dynamic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "continuation.support.{support_token}.{support_digest}"
+          ],
+          "required_fields": [
+            "support_ref",
+            "support_token",
+            "support_digest",
+            "parent_goal_ref",
+            "scope_ref"
+          ],
+          "attribute_bindings": {
+            "scope_ref": "scope_ref",
+            "support_authorized": "support_authorized"
+          },
+          "static_attributes": {
+            "commitment": "revisable",
+            "falsifier": "current_support_contract_or_evidence_changes"
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.sealed_concentration_relevance",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.canonical_sealed_relevance_and_external_acknowledgement_own_the_counter"
+      ],
+      "invariants": [
+        "unknown_relevance_never_increments",
+        "no_motion_no_score_or_same_endpoint_is_not_irrelevance",
+        "same_principal_pursuit_keeps_its_counter_across_child_leases",
+        "one_external_intent_is_accounted_once"
+      ],
+      "configuration": {
+        "input_field": "sealed_concentration_relevance",
+        "relevance_claim_predicate": "adjudicates_action_relevance",
+        "classification_field": "relevance_class_ref",
+        "known_classes": [
+          "relevant",
+          "irrelevant"
+        ]
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "declared_alternative_refs": [
+        "concentration.relevant",
+        "concentration.irrelevant"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.sealed_relevance.relevant",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "concentration.relevant"
+            },
+            {
+              "field": "relevance_class_ref",
+              "operator": "equals",
+              "expected": "relevant"
+            },
+            {
+              "field": "accounting_input_ready",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "relevant_to_pursuit": true
+          }
+        },
+        {
+          "id": "projection.sealed_relevance.irrelevant",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "concentration.irrelevant"
+            },
+            {
+              "field": "relevance_class_ref",
+              "operator": "equals",
+              "expected": "irrelevant"
+            },
+            {
+              "field": "accounting_input_ready",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "relevant_to_pursuit": false
+          }
+        }
+      ]
+    }
+  ]
+}

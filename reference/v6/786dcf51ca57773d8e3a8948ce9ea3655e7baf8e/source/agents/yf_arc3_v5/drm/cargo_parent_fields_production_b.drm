@@ -1,0 +1,224 @@
+{
+  "module_id": "arc3.cargo_parent_fields_production_b",
+  "declarations": [
+    {
+      "id": "policy.b_cargo_parent_fields_production",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_current_source_components_and_canonical_terminal_future_can_assemble_a_parent_without_inventing_missing_semantics"
+      ],
+      "configuration": {
+        "memory_correspondence_why_field": "proposed_memory_correspondence_context",
+        "fit_evidence_why_field": "conditional_current_fit_context",
+        "fit_contradicted_models_field": "contradicted_models",
+        "reject_current_fit_contradicted_templates": true,
+        "fit_native_owner_fields": [
+          "parent_goal_ref", "parent_contribution_ref", "epoch", "evidence_revision_ref",
+          "model_revision_ref", "model_status_ref", "event_owner_ref", "input_domain_complete"
+        ],
+        "component_value_path_by_kind": {
+          "MODEL": ["value"],
+          "TEMPLATE": ["value"],
+          "TEMPLATE_BANK": ["value", "templates"],
+          "INVERSE_QUESTION_BANK": ["value", "questions"],
+          "SERVICE_ALLOCATION_BANK": ["value", "allocations"],
+          "PROFILE": ["value"],
+          "QUERY": ["value"],
+          "REQUEST_IDENTITY": ["value"]
+        },
+        "goal_owned_solving_fields": [
+          "required_cargo_refs",
+          "allowed_poses_by_cargo",
+          "parent_why",
+          "next_item_ref"
+        ],
+        "precondition_profiles_parent_field": "precondition_profiles",
+        "published_parent_fields": [
+          "profiles",
+          "solving",
+          "parent_request_ref",
+          "dependency_revision_refs",
+          "preservation_refs"
+        ]
+      },
+      "declared_alternative_refs": [
+        "cargo_components.publish",
+        "cargo_components.missing"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "cargo_components.publish": "rule.b_current_source_cargo_parent_fields"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_components.publish",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_components.publish"
+            },
+            {
+              "field": "parent_components_complete_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_current_source_components_and_canonical_terminal_future_can_assemble_a_parent_without_inventing_missing_semantics",
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_components.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_components.missing"
+            },
+            {
+              "field": "parent_components_complete_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_current_source_components_and_canonical_terminal_future_can_assemble_a_parent_without_inventing_missing_semantics",
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_current_source_cargo_parent_fields",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "current_canonical_individual_profiles_and_components",
+        "current_principal_terminal_future",
+        "same_actual_acquisition_and_owner"
+      ],
+      "applicability": [
+        "source_cargo_parent_field_production"
+      ],
+      "invariants": [
+        "missing_fields_remain_named_dependencies",
+        "retain_original_component_status",
+        "no_model_or_physical_role_invention",
+        "no_parent_invocation_before_canonical_reread"
+      ],
+      "falsifiers": [
+        "component_support_or_goal_changed",
+        "incomplete_typed_parent",
+        "foreign_actual_frame_scope"
+      ],
+      "reason_refs": [
+        "reason_current_source_components_and_canonical_terminal_future_can_assemble_a_parent_without_inventing_missing_semantics"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{field_term_ref}",
+          "kind": "value",
+          "label": "Current Source assembled cargo parent field",
+          "required_fields": [
+            "field_term_ref",
+            "target_field"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "cargo.current_source_parent_field.b.v1",
+            "no_dispatch_or_action_authority": true,
+            "no_physical_truth_promotion": true
+          },
+          "attribute_bindings": {
+            "target_field": "target_field",
+            "component_provenance": "component_provenance",
+            "provenance_digest": "provenance_digest",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "value": "field_value"
+          },
+          "iteration": {
+            "source_field": "parent_fields",
+            "item_bindings": {
+              "target_field": "target_field",
+              "field_value": "field_value",
+              "field_term_ref": "field_term_ref",
+              "field_claim_ref": "field_claim_ref"
+            },
+            "max_items": 5
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{field_claim_ref}",
+          "predicate": "current_source_cargo_parent_field_bound",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{field_term_ref}",
+            "{observation_record_ref}"
+          ],
+          "required_term_patterns": [
+            "{field_term_ref}"
+          ],
+          "required_fields": [
+            "field_claim_ref",
+            "field_term_ref",
+            "observation_record_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "target_field": "target_field",
+            "component_provenance": "component_provenance",
+            "provenance_digest": "provenance_digest",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true,
+            "no_physical_truth_promotion": true
+          },
+          "iteration": {
+            "source_field": "parent_fields",
+            "item_bindings": {
+              "target_field": "target_field",
+              "field_value": "field_value",
+              "field_term_ref": "field_term_ref",
+              "field_claim_ref": "field_claim_ref"
+            },
+            "max_items": 5
+          }
+        }
+      ]
+    }
+  ]
+}

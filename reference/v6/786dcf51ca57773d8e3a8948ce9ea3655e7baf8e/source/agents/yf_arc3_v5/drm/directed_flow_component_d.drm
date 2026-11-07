@@ -1,0 +1,46 @@
+{
+  "module_id": "arc3.directed_flow_component_d",
+  "declarations": [
+    {
+      "id": "policy.directed_flow_component_d", "kind": "selection_policy", "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"], "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1", "reason_refs": ["reason_explicit_current_flow_fields_preserve_unknowns_and_conditional_models"],
+      "configuration": {"required_owner_scope_fields": ["parent_goal_ref", "scope_ref", "epoch", "input_revision_ref", "level_scope_ref", "episode_ref", "caller_ref", "parent_contribution_ref", "model_revision_ref", "event_owner_ref"],
+        "schema_by_component_kind": {"FLOW_MODEL": "FlowModel", "FLOW_RULE": "FlowRule", "FLOW_SCHEDULE": "FlowSchedule", "FLOW_CONTROL_EDGE": "FlowControlEdge", "FLOW_OBJECTIVE": "DirectedFlowObjectiveD"},
+        "support_predicate_ref": "current_source_directed_flow_component_bound", "source_kind_ref": "directed_flow.current_component.v1"},
+      "declared_alternative_refs": ["flow_component.publish", "flow_component.unknown"],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {"id": "projection.flow_component.publish", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "flow_component.publish"},
+          {"field": "native_component_complete_current", "operator": "equals", "expected": true}
+        ], "static_facts": {"eligible": true}},
+        {"id": "projection.flow_component.unknown", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "flow_component.unknown"},
+          {"field": "native_component_complete_current", "operator": "equals", "expected": false}
+        ], "static_facts": {"eligible": true}}
+      ], "meaning_template_ref_by_alternative": {"flow_component.publish": "rule.directed_flow_component_d"},
+      "invariants": ["every_field_explicit_including_unknown_and_absence", "shared_exact_component_measurement", "no_nested_default_or_coercion", "no_model_law_confirmation", "no_action_authority"]
+    },
+    {
+      "id": "rule.directed_flow_component_d", "kind": "rule", "evaluation": "project_requested_conclusions",
+      "supported_operators": ["DERIVE"], "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1", "relation_family": "epistemic",
+      "reason_refs": ["reason_explicit_current_flow_fields_preserve_unknowns_and_conditional_models"],
+      "term_templates": [{"id_pattern": "{output_term_ref}", "kind": "value", "label": "Current Source typed flow component",
+        "required_fields": ["output_term_ref", "component_payload"],
+        "attribute_bindings": {"value": "component_payload", "component_kind_ref": "component_kind_ref", "schema_ref": "schema_ref",
+          "component_digest": "component_digest", "provenance_digest": "provenance_digest", "component_provenance": "component_provenance",
+          "frame_ref": "frame_ref", "observation_record_ref": "observation_record_ref"},
+        "static_attributes": {"source_kind_ref": "directed_flow.current_component.v1", "no_action_authority": true, "flow_laws_confirmed": false}}],
+      "claim_templates": [{"id_pattern": "{output_support_claim_ref}", "predicate": "current_source_directed_flow_component_bound",
+        "family": "epistemic", "epistemic_status": "proposed", "argument_patterns": ["{output_term_ref}", "{observation_record_ref}"],
+        "required_term_patterns": ["{output_term_ref}"], "required_fields": ["output_support_claim_ref", "component_digest", "owner_scope"],
+        "attribute_bindings": {"component_digest": "component_digest", "provenance_digest": "provenance_digest", "owner_scope": "owner_scope"},
+        "scope_bindings": {"parent_goal_ref": "parent_goal_ref", "scope_ref": "scope_ref", "epoch": "epoch",
+          "input_revision_ref": "input_revision_ref", "level_scope_ref": "level_scope_ref", "episode_ref": "episode_ref",
+          "caller_ref": "caller_ref", "parent_contribution_ref": "parent_contribution_ref", "model_revision_ref": "model_revision_ref",
+          "event_owner_ref": "event_owner_ref"}, "static_attributes": {"no_action_authority": true, "no_physical_law_confirmation": true}}]
+    }
+  ]
+}

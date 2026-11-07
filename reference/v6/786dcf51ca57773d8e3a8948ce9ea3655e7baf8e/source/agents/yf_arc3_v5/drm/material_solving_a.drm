@@ -1,0 +1,435 @@
+{
+  "module_id": "material_solving_a",
+  "declarations": [
+    {
+      "id": "policy.material_solving_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_current_consumer_deficit_and_preservation",
+        "reason.material_missing_current_evidence"
+      ],
+      "declared_alternative_refs": [
+        "material_solving_a.STATE",
+        "material_solving_a.ALLOCATE",
+        "material_solving_a.DERIVE",
+        "material_solving_a.QUANTITY",
+        "material_solving_a.RECYCLE",
+        "material_solving_a.LOAD",
+        "material_solving_a.RELAYOUT",
+        "material_solving_a.DELIVERY",
+        "material_solving_a.COMPARE",
+        "material_solving_a.COMPOSE",
+        "material_solving_a.GENERATE_DOMAIN",
+        "material_solving_a.missing"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_equivalent_declared_means",
+      "selection_tiers": [
+        {
+          "id": "tier.material.STATE",
+          "reason_ref": "reason.material_current_consumer_deficit_and_preservation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_solving_a.STATE"
+            },
+            {
+              "field": "requested_facet",
+              "operator": "equals",
+              "expected": "STATE"
+            },
+            {
+              "field": "current_material_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "inventory_accounting"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "MEASURE"
+            }
+          ]
+        },
+        {
+          "id": "tier.material.ALLOCATE",
+          "reason_ref": "reason.material_current_consumer_deficit_and_preservation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_solving_a.ALLOCATE"
+            },
+            {
+              "field": "requested_facet",
+              "operator": "equals",
+              "expected": "ALLOCATE"
+            },
+            {
+              "field": "current_material_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "reservation_composition"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "PRECONDITION"
+            }
+          ]
+        },
+        {
+          "id": "tier.material.DERIVE",
+          "reason_ref": "reason.material_current_consumer_deficit_and_preservation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_solving_a.DERIVE"
+            },
+            {
+              "field": "requested_facet",
+              "operator": "equals",
+              "expected": "DERIVE"
+            },
+            {
+              "field": "current_material_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "material_preimages"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "INVERSE_DOMAIN"
+            }
+          ]
+        },
+        {
+          "id": "tier.material.QUANTITY",
+          "reason_ref": "reason.material_current_consumer_deficit_and_preservation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_solving_a.QUANTITY"
+            },
+            {
+              "field": "requested_facet",
+              "operator": "equals",
+              "expected": "QUANTITY"
+            },
+            {
+              "field": "current_material_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "inventory_accounting"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "MEASURE"
+            }
+          ]
+        },
+        {
+          "id": "tier.material.RECYCLE",
+          "reason_ref": "reason.material_current_consumer_deficit_and_preservation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_solving_a.RECYCLE"
+            },
+            {
+              "field": "requested_facet",
+              "operator": "equals",
+              "expected": "RECYCLE"
+            },
+            {
+              "field": "current_material_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "material_preimages"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "INVERSE_DOMAIN"
+            }
+          ]
+        },
+        {
+          "id": "tier.material.LOAD",
+          "reason_ref": "reason.material_current_consumer_deficit_and_preservation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_solving_a.LOAD"
+            },
+            {
+              "field": "requested_facet",
+              "operator": "equals",
+              "expected": "LOAD"
+            },
+            {
+              "field": "current_material_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "production_transaction"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "STEP"
+            }
+          ]
+        },
+        {
+          "id": "tier.material.RELAYOUT",
+          "reason_ref": "reason.material_current_consumer_deficit_and_preservation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_solving_a.RELAYOUT"
+            },
+            {
+              "field": "requested_facet",
+              "operator": "equals",
+              "expected": "RELAYOUT"
+            },
+            {
+              "field": "current_material_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "selection_transfer"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "STEP"
+            }
+          ]
+        },
+        {
+          "id": "tier.material.DELIVERY",
+          "reason_ref": "reason.material_current_consumer_deficit_and_preservation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_solving_a.DELIVERY"
+            },
+            {
+              "field": "requested_facet",
+              "operator": "equals",
+              "expected": "DELIVERY"
+            },
+            {
+              "field": "current_material_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "production_domain"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "DOMAIN"
+            }
+          ]
+        },
+        {
+          "id": "tier.material.COMPARE",
+          "reason_ref": "reason.material_current_consumer_deficit_and_preservation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_solving_a.COMPARE"
+            },
+            {
+              "field": "requested_facet",
+              "operator": "equals",
+              "expected": "COMPARE"
+            },
+            {
+              "field": "current_material_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "transaction_compare"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "COMPARE"
+            }
+          ]
+        },
+        {
+          "id": "tier.material.COMPOSE",
+          "reason_ref": "reason.material_current_consumer_deficit_and_preservation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_solving_a.COMPOSE"
+            },
+            {
+              "field": "requested_facet",
+              "operator": "equals",
+              "expected": "COMPOSE"
+            },
+            {
+              "field": "current_material_question",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material.GENERATE_DOMAIN",
+          "reason_ref": "reason.material_current_consumer_deficit_and_preservation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_solving_a.GENERATE_DOMAIN"
+            },
+            {
+              "field": "may_request_material_domain",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "production_domain"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "DOMAIN"
+            }
+          ]
+        },
+        {
+          "id": "tier.material.missing",
+          "reason_ref": "reason.material_missing_current_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_solving_a.missing"
+            }
+          ]
+        }
+      ],
+      "configuration": {}
+    },
+    {
+      "id": "policy.material_packet_domain_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_current_atomic_primitive_packets",
+        "reason.material_missing_current_evidence"
+      ],
+      "declared_alternative_refs": [
+        "material_packet_domain_a.current",
+        "material_packet_domain_a.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_equivalent_packet_evidence",
+      "selection_tiers": [
+        {
+          "id": "tier.material_packet.current",
+          "reason_ref": "reason.material_current_atomic_primitive_packets",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_packet_domain_a.current"
+            },
+            {
+              "field": "material_packet_domain_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_packet.unknown",
+          "reason_ref": "reason.material_missing_current_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_packet_domain_a.unknown"
+            }
+          ]
+        }
+      ],
+      "configuration": {}
+    }
+  ]
+}

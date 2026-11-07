@@ -1,0 +1,639 @@
+{
+  "module_id": "arc3.program_solving_d",
+  "declarations": [
+    {
+      "id": "policy.program_calculation_operation_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.exact_program_operation_preserves_shared_definitions"
+      ],
+      "declared_alternative_refs": [
+        "program_calculation.joint_fit",
+        "program_calculation.existing",
+        "program_calculation.compile_edit",
+        "program_calculation.validation"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.program_calculation.exact_operation",
+      "selection_tiers": [
+        {
+          "id": "tier.program_calculation.joint_fit",
+          "reason_ref": "reason.exact_program_operation_preserves_shared_definitions",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_calculation.joint_fit"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.typed_recursive_program.joint_fit"
+            }
+          ]
+        },
+        {
+          "id": "tier.program_calculation.assignment_domains",
+          "reason_ref": "reason.exact_program_operation_preserves_shared_definitions",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_calculation.existing"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.typed_recursive_program.assignment_domains"
+            }
+          ]
+        },
+        {
+          "id": "tier.program_calculation.edit_successor",
+          "reason_ref": "reason.exact_program_operation_preserves_shared_definitions",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_calculation.existing"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.typed_recursive_program.edit_successor"
+            }
+          ]
+        },
+        {
+          "id": "tier.program_calculation.bounded_interpret",
+          "reason_ref": "reason.exact_program_operation_preserves_shared_definitions",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_calculation.existing"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.typed_recursive_program.bounded_interpret"
+            }
+          ]
+        },
+        {
+          "id": "tier.program_calculation.compile_edit",
+          "reason_ref": "reason.exact_program_operation_preserves_shared_definitions",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_calculation.compile_edit"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.typed_recursive_program.compile_edit"
+            }
+          ]
+        },
+        {
+          "id": "tier.program_calculation.validation",
+          "reason_ref": "reason.exact_program_operation_preserves_shared_definitions",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_calculation.validation"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.typed_recursive_program.validation_precondition"
+            }
+          ]
+        }
+      ],
+      "invariants": [
+        "no_assignment_selected_or_action_released",
+        "one_shared_definition_map_for_all_call_sites",
+        "bounded_search_never_proves_impossibility"
+      ]
+    },
+    {
+      "id": "policy.program_solving_question_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.current_exact_native_parent_evidence"
+      ],
+      "declared_alternative_refs": [
+        "program_solving.calculate",
+        "program_solving.missing"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.program_solving.exact_return",
+      "selection_tiers": [
+        {
+          "id": "tier.program_solving.calculate",
+          "reason_ref": "reason.current_exact_native_parent_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_solving.calculate"
+            },
+            {
+              "field": "question_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "no_execution_authority",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.program_solving.missing",
+          "reason_ref": "reason.current_exact_native_parent_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_solving.missing"
+            }
+          ]
+        }
+      ],
+      "configuration": {
+        "required_emission_future_field": "required_emitted_values",
+        "instruction_typing_predicate_ref": "supports_observed_program_instruction_type",
+        "instruction_typing_rule_ref": "rule.effect_frontier_c",
+        "return_predicate_ref": "records_current_exact_program_parent_return",
+        "return_projection_contract_ref": "d.program_solving.parent_return.v1",
+        "prefix_acceptance_predicate_ref": "supports_observed_finite_program_prefix_acceptance",
+        "prefix_acceptance_rule_ref": "rule.effect_frontier_c",
+        "program_kernel_ref": "mechanics.typed_recursive_program",
+        "validation_control_predicate_ref": "records_current_program_validation_control",
+        "validation_point_scope_ref": "probe_scope.access_witness_only",
+        "return_rule_ref": "rule.program_solving_return_d"
+      }
+    },
+    {
+      "id": "policy.program_solving_return_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.current_exact_native_parent_evidence",
+        "reason.shared_calls_reduce_measured_flat_program_resource_deficit",
+        "reason.current_configuration_uses_one_exposed_validation_input"
+      ],
+      "declared_alternative_refs": [
+        "program_solving.validation_ready",
+        "program_solving.factorized_return",
+        "program_solving.return"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.program_solving.exact_return",
+      "selection_tiers": [
+        {
+          "id": "tier.program_solving.validation_ready",
+          "reason_ref": "reason.current_configuration_uses_one_exposed_validation_input",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_solving.validation_ready"
+            },
+            {
+              "field": "calculation_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_validation_configuration_equal",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.program_solving.factorized_stock",
+          "reason_ref": "reason.shared_calls_reduce_measured_flat_program_resource_deficit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_solving.factorized_return"
+            },
+            {
+              "field": "calculation_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_fragment_projection_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_call_fragment_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "program_termination_or_evidenced_prefix_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "program_flat_stock_deficit",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "program_input_domain_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.program_solving.factorized_socket",
+          "reason_ref": "reason.shared_calls_reduce_measured_flat_program_resource_deficit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_solving.factorized_return"
+            },
+            {
+              "field": "calculation_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_fragment_projection_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_call_fragment_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "program_termination_or_evidenced_prefix_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "program_flat_socket_deficit",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "program_input_domain_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.program_solving.return",
+          "reason_ref": "reason.current_exact_native_parent_evidence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_solving.return"
+            },
+            {
+              "field": "calculation_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "program_solving.return": "rule.program_solving_return_d",
+        "program_solving.factorized_return": "rule.program_solving_return_d",
+        "program_solving.validation_ready": "rule.program_solving_return_d"
+      }
+    },
+    {
+      "id": "rule.program_solving_return_d",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.current_exact_native_parent_evidence"
+      ],
+      "invariants": [
+        "exact_current_acquired_inputs_and_original_native_identity",
+        "bounded_is_not_complete_or_official_acceptance",
+        "unchanged_principal_goal_frozen_why_and_siblings",
+        "no_action_authority",
+        "no_goal_or_method_inferred"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{return_term_ref}",
+          "kind": "value",
+          "label": "Exact bounded typed program return to the unchanged parent",
+          "static_attributes": {
+            "projection_contract_ref": "d.program_solving.parent_return.v1",
+            "no_execution_authority": true
+          },
+          "attribute_bindings": {
+            "normalized_return": "normalized_return",
+            "exact_demand": "exact_demand",
+            "frozen_why": "frozen_why",
+            "program_boundary_information_need_refs": "program_boundary_information_need_refs",
+            "program_validation_information_need_refs": "program_validation_information_need_refs",
+            "program_validation_proposal": "program_validation_proposal",
+            "program_validation_release_descriptor": "program_validation_release_descriptor"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{return_claim_ref}",
+          "predicate": "records_current_exact_program_parent_return",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{return_term_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{return_term_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_fields": [
+            "return_term_ref",
+            "return_claim_ref",
+            "parent_goal_ref",
+            "normalized_return",
+            "exact_demand",
+            "frozen_why"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "attribute_bindings": {
+            "normalized_return": "normalized_return",
+            "exact_demand": "exact_demand",
+            "frozen_why": "frozen_why",
+            "program_boundary_information_need_refs": "program_boundary_information_need_refs",
+            "program_validation_information_need_refs": "program_validation_information_need_refs",
+            "program_validation_proposal": "program_validation_proposal",
+            "program_validation_release_descriptor": "program_validation_release_descriptor"
+          },
+          "static_attributes": {
+            "no_execution_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.current_configured_program_uses_one_bound_validation_input"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "id": "policy.program_validation_admission_d",
+      "canonical_equivalence_tie_break_debt_ref": "debt.program_validation.current_admission",
+      "declared_alternative_refs": [
+        "program_validation.ready",
+        "program_validation.missing",
+        "program_validation.absent"
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.program_validation.ready",
+          "reason_ref": "reason.current_configured_program_uses_one_bound_validation_input",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_validation.ready"
+            },
+            {
+              "field": "proposal_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.program_validation.missing",
+          "reason_ref": "reason.current_configured_program_uses_one_bound_validation_input",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_validation.missing"
+            },
+            {
+              "field": "proposal_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.program_validation.absent",
+          "reason_ref": "reason.current_configured_program_uses_one_bound_validation_input",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_validation.absent"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.current_configured_program_uses_one_bound_validation_input"
+      ],
+      "id": "policy.program_validation_action_d",
+      "selection_eligibility_conditions": [
+        {
+          "field": "program_validation_bound",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref",
+        "action_ref",
+        "active_goal_ref",
+        "premise_claim_refs",
+        "expected_configuration_or_goal_delta_ref",
+        "explicit_falsifier_ref"
+      ],
+      "invariants": [
+        "one_input_not_one_input_per_emission",
+        "use_existing_root_wisdom_release_and_series_reconciliation",
+        "no_new_parent_or_forced_concentration",
+        "current_control_payload_and_exact_parent_required"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.program_validation.current_parent",
+          "all_conditions": [
+            {
+              "field": "program_validation_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "candidate_local_goal_context_declared": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.program_composition_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.current_correlated_family_domains_keep_parent_why"
+      ],
+      "declared_alternative_refs": [
+        "program_composition.join",
+        "program_composition.missing",
+        "program_composition.not_requested"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.program_composition.exact_domains",
+      "selection_tiers": [
+        {
+          "id": "tier.program_composition.join",
+          "reason_ref": "reason.current_correlated_family_domains_keep_parent_why",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_composition.join"
+            },
+            {
+              "field": "composition_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.program_composition.missing",
+          "reason_ref": "reason.current_correlated_family_domains_keep_parent_why",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_composition.missing"
+            },
+            {
+              "field": "composition_requested",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.program_composition.not_requested",
+          "reason_ref": "reason.current_correlated_family_domains_keep_parent_why",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program_composition.not_requested"
+            }
+          ]
+        }
+      ],
+      "invariants": [
+        "one_parent_epoch_episode_and_level",
+        "current_exact_peer_receipts_not_proxy_results",
+        "shared_assignments_and_resources_are_equalities",
+        "three_global_program_witnesses",
+        "no_k09_recursion_and_no_puzzle_action"
+      ]
+    }
+  ]
+}

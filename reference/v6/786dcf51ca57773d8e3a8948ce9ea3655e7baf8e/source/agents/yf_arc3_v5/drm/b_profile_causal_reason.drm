@@ -1,0 +1,576 @@
+{
+  "module_id": "b_profile_causal_reason",
+  "declarations": [
+    {
+      "id": "policy.b_profile_causal_reason",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "configuration": {"queued_receipt_contract": {"line_event_kind": "automatic.equal_line_union", "lock_event_kind": "direct.lock", "queue_advance_event_kind": "automatic.queue_advance", "spawn_event_kind": "automatic.spawn"}},
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_intermediate_effect_must_serve_current_parent_demand"
+      ],
+      "premises": [
+        "current_scoped_native_return",
+        "source_owned_delivery_or_alignment_demand"
+      ],
+      "invariants": [
+        "conditional_model_reason_not_confirmed_law",
+        "no_zero_credit_staging_without_named_consumer",
+        "reachable_pose_and_remaining_delivery_stay_open",
+        "no_dispatch_or_action_authority"
+      ],
+      "falsifiers": [
+        "model_revision_changes",
+        "handoff_or_reception_unreachable",
+        "named_consumer_effect_refuted"
+      ],
+      "declared_alternative_refs": [
+        "profile_reason.derive",
+        "profile_reason.blocked"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.profile_reason.handoff",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_reason.derive"
+            },
+            {
+              "field": "current_scope_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_status",
+              "operator": "equals",
+              "expected": "FOUND"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.guarded_transport"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "handoff_domain"
+            },
+            {
+              "field": "pickup_domain_nonempty",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "consumer_named",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "intermediate_kind": "safe_handoff_and_next_pickup",
+            "causal_reason_ref": "reason_safe_handoff_keeps_next_delivery_accessible",
+            "unresolved_dependency_refs": [
+              "dependency.reachable_handoff_pose",
+              "dependency.reachable_next_pickup_pose",
+              "dependency.complete_remaining_delivery"
+            ]
+          }
+        },
+        {
+          "id": "projection.profile_reason.credit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_reason.derive"
+            },
+            {
+              "field": "current_scope_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_status",
+              "operator": "equals",
+              "expected": "FOUND"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.queued_alignment_cascade"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "future_contribution_certificate"
+            },
+            {
+              "field": "candidate_closed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "positive_credit_delta",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "credit_delta_known",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "intermediate_kind": "matching_line_credit",
+            "causal_reason_ref": "reason_matching_lines_contribute_to_parent_quota",
+            "unresolved_dependency_refs": [
+              "dependency.reachable_reception_and_bundle_order",
+              "dependency.remaining_quota_and_queue_boundary"
+            ]
+          }
+        },
+        {
+          "id": "projection.profile_reason.staging",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_reason.derive"
+            },
+            {
+              "field": "current_scope_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_status",
+              "operator": "equals",
+              "expected": "FOUND"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.queued_alignment_cascade"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "future_contribution_certificate"
+            },
+            {
+              "field": "candidate_closed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "positive_credit_delta",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "consumer_named",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "staging_consumer_unbound",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "credit_delta_known",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "intermediate_kind": "named_later_cascade_or_queue_access",
+            "causal_reason_ref": "reason_zero_credit_placement_requires_named_later_consumer",
+            "unresolved_dependency_refs": [
+              "dependency.reachable_reception_and_bundle_order",
+              "dependency.named_later_consumer_effect"
+            ]
+          }
+        },
+        {
+          "id": "projection.profile_reason.stale",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_reason.blocked"
+            },
+            {
+              "field": "current_scope_equal",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile_reason.status",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_reason.blocked"
+            },
+            {
+              "field": "native_status",
+              "operator": "not_equals",
+              "expected": "FOUND"
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile_reason.guard_other",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_reason.blocked"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.guarded_transport"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "not_equals",
+              "expected": "handoff_domain"
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile_reason.guard_no_pickup",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_reason.blocked"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.guarded_transport"
+            },
+            {
+              "field": "pickup_domain_nonempty",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile_reason.guard_no_consumer",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_reason.blocked"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.guarded_transport"
+            },
+            {
+              "field": "consumer_named",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile_reason.queue_other",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_reason.blocked"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.queued_alignment_cascade"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "not_equals",
+              "expected": "future_contribution_certificate"
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile_reason.queue_open",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_reason.blocked"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.queued_alignment_cascade"
+            },
+            {
+              "field": "candidate_closed",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile_reason.queue_staging_unnamed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_reason.blocked"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.queued_alignment_cascade"
+            },
+            {
+              "field": "positive_credit_delta",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "consumer_named",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile_reason.queue_staging_unbound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_reason.blocked"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.queued_alignment_cascade"
+            },
+            {
+              "field": "positive_credit_delta",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "staging_consumer_unbound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile_reason.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_reason.blocked"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "not_equals",
+              "expected": "solving.guarded_transport"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "not_equals",
+              "expected": "solving.queued_alignment_cascade"
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile_reason.credit_unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile_reason.blocked"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.queued_alignment_cascade"
+            },
+            {
+              "field": "credit_delta_known",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_profile_conditional_parent_reason",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "source_selected_current_candidate_serves_parent_demand"
+      ],
+      "applicability": [
+        "qualified_handoff_or_future_matching_contribution"
+      ],
+      "invariants": [
+        "conditional_future_keeps_unresolved_dependencies",
+        "no_candidate_becomes_executable_by_derivation"
+      ],
+      "falsifiers": [
+        "future_or_current_model_refuted"
+      ],
+      "reason_refs": [
+        "reason_intermediate_effect_must_serve_current_parent_demand"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{reason_candidate_ref}",
+          "kind": "value",
+          "label": "Conditional means for the current parent demand",
+          "required_fields": [
+            "reason_candidate_ref",
+            "candidate"
+          ],
+          "static_attributes": {
+            "projection_contract_ref": "mechanical.causal_reason.b.v1",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "candidate": "candidate",
+            "intermediate_kind": "intermediate_kind",
+            "causal_reason_ref": "causal_reason_ref",
+            "unresolved_dependency_refs": "unresolved_dependency_refs",
+            "utility_reason_ref": "utility_reason_ref",
+            "desired_future": "desired_future",
+            "goal_contract": "goal_contract",
+            "consumer_refs": "consumer_refs",
+            "preservation_refs": "preservation_refs",
+            "model_ref": "model_ref",
+            "model_alternatives_ref": "model_alternatives_ref",
+            "native_response_ref": "native_response_ref",
+            "next_item_ref": "next_item_ref",
+            "sibling_item_refs": "sibling_item_refs"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{reason_candidate_ref}",
+          "predicate": "proposes_conditional_means_for_parent_demand",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{reason_candidate_ref}",
+            "{parent_goal_ref}",
+            "{question_ref}"
+          ],
+          "required_term_patterns": [
+            "{reason_candidate_ref}",
+            "{parent_goal_ref}",
+            "{question_ref}"
+          ],
+          "required_fields": [
+            "reason_candidate_ref",
+            "parent_goal_ref",
+            "question_ref",
+            "causal_reason_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "attribute_bindings": {
+            "candidate": "candidate",
+            "intermediate_kind": "intermediate_kind",
+            "causal_reason_ref": "causal_reason_ref",
+            "unresolved_dependency_refs": "unresolved_dependency_refs",
+            "utility_reason_ref": "utility_reason_ref",
+            "desired_future": "desired_future",
+            "goal_contract": "goal_contract",
+            "consumer_refs": "consumer_refs",
+            "preservation_refs": "preservation_refs",
+            "model_ref": "model_ref",
+            "model_alternatives_ref": "model_alternatives_ref",
+            "native_response_ref": "native_response_ref",
+            "next_item_ref": "next_item_ref",
+            "sibling_item_refs": "sibling_item_refs"
+          },
+          "static_attributes": {
+            "conditional_model_only": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

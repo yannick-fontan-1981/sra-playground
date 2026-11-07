@@ -1,0 +1,50 @@
+{
+  "module_id": "alignment_context_d",
+  "declarations": [
+    {
+      "id": "policy.d_alignment_current_context",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason.d_alignment_actual_current_source_context_and_contract"],
+      "declared_alternative_refs": ["d_alignment_context.external_question", "d_alignment_context.blocked"],
+      "canonical_equivalence_tie_break_debt_ref": "debt.d_alignment_context_equivalent_alternative_order",
+      "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+      "selection_tiers": [
+        {
+          "id": "tier.d_alignment_context.external_question",
+          "reason_ref": "reason.d_alignment_actual_current_source_context_and_contract",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "d_alignment_context.external_question"},
+            {"field": "owner_records_match", "operator": "equals", "expected": true},
+            {"field": "active_execution_context_present", "operator": "equals", "expected": false},
+            {"field": "active_execution_intent_count", "operator": "equals", "expected": 0},
+            {"field": "composition_origin_ref", "operator": "equals", "expected": "EXTERNAL_ROOT_QUESTION"}
+          ]
+        },
+        {
+          "id": "tier.d_alignment_context.blocked",
+          "reason_ref": "reason.d_alignment_actual_current_source_context_and_contract",
+          "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "d_alignment_context.blocked"}]
+        }
+      ],
+      "configuration": {
+        "composition_projection_contract_ref": "d.alignment_level_composition.v1",
+        "composition_qualification_predicate_ref": "qualifies_current_alignment_root_composition_contract",
+        "qualification_status_refs": ["supported", "established"],
+        "external_root_workflow_refs": ["select_d_alignment_composition_origin"],
+        "external_root_terminal_refs": ["d_alignment_origin.external_root"],
+        "selection_binding_fields": {
+          "parent_goal_ref": "current_parent_goal_ref",
+          "question_ref": "current_alignment_question_ref",
+          "context_ref": "current_reasoning_context_ref",
+          "native_request_digest": "current_alignment_native_request_digest",
+          "composition_term_ref": "current_alignment_composition_term_ref",
+          "composition_claim_ref": "current_alignment_composition_claim_ref"
+        }
+      }
+    }
+  ]
+}

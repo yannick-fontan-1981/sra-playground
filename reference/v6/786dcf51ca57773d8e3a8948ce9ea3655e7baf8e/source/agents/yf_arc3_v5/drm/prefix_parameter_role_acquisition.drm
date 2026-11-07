@@ -1,0 +1,538 @@
+{
+  "module_id": "arc3.prefix_parameter_role_acquisition",
+  "declarations": [
+    {
+      "id": "policy.acknowledged_prefix_parameter_role",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "capture.prefix_parameter_source",
+        "capture.no_prefix_parameter_role"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.acknowledged_prefix_parameter_source",
+          "all_conditions": [
+            {
+              "field": "acknowledgement_join_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tracking_frame_matches_before",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "measured_layout_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "point_participant_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "point_support_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "same_contour_color_change_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "observed_grid_change_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "capture.prefix_parameter_source"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.no_prefix_parameter_role",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "capture.no_prefix_parameter_role"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "acknowledgement_join_complete",
+              "operator": "not_equals",
+              "expected": true
+            },
+            {
+              "field": "tracking_frame_matches_before",
+              "operator": "not_equals",
+              "expected": true
+            },
+            {
+              "field": "measured_layout_count",
+              "operator": "not_equals",
+              "expected": 1
+            },
+            {
+              "field": "point_participant_count",
+              "operator": "not_equals",
+              "expected": 1
+            },
+            {
+              "field": "point_support_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "same_contour_color_change_count",
+              "operator": "not_equals",
+              "expected": 1
+            },
+            {
+              "field": "observed_grid_change_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "premises": [
+        "exact_acknowledged_effect_and_source_participant"
+      ],
+      "invariants": [
+        "knowledge_admission_never_releases_an_action",
+        "unknowns_are_preserved"
+      ],
+      "falsifiers": [
+        "source_ack_or_causal_join_is_invalid"
+      ],
+      "reason_refs": [
+        "reason.capture_only_the_acknowledged_parameter_participant"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "capture.prefix_parameter_source": "rule.acknowledged_prefix_parameter_role"
+      }
+    },
+    {
+      "id": "rule.acknowledged_prefix_parameter_role",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "acknowledged_point_effect_on_the_same_scoped_parameter_and_grid"
+      ],
+      "invariants": [
+        "participant_is_the_executed_input_bearer_not_the_next_target",
+        "source_coordinates_are_not_portable_knowledge"
+      ],
+      "falsifiers": [
+        "point_effect_is_not_reproducible_in_the_revalidated_scope"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "supposition.prefix.parameter_source.{observation_token}",
+          "kind": "schema",
+          "label": "observed shared-prefix parameter input bearer",
+          "required_fields": [
+            "observation_token",
+            "transition_ref",
+            "action_ref",
+            "participant_entity_ref",
+            "participant_component_ref",
+            "acknowledgement_ref",
+            "observed_interface_binding"
+          ],
+          "static_attributes": {
+            "role": "prefix_parameter_selector",
+            "commitment": "revisable",
+            "canonical_fact_projection_enabled": false,
+            "role_context_requirements": {}
+          },
+          "attribute_bindings": {
+            "entity_ref": "participant_entity_ref",
+            "component_ref": "participant_component_ref",
+            "transition_ref": "transition_ref",
+            "action_ref": "action_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.prefix.parameter_source.{observation_token}",
+          "predicate": "observed_prefix_parameter_source",
+          "family": "control",
+          "argument_patterns": [
+            "{participant_entity_ref}",
+            "supposition.prefix.parameter_source.{observation_token}",
+            "{acknowledgement_ref}"
+          ],
+          "epistemic_status": "supported",
+          "required_fields": [
+            "observation_token",
+            "transition_ref",
+            "action_ref",
+            "participant_entity_ref",
+            "participant_component_ref",
+            "acknowledgement_ref",
+            "observed_interface_binding"
+          ],
+          "static_attributes": {
+            "disposition": "active",
+            "polarity": "positive",
+            "is_universal_operator_law": false
+          },
+          "attribute_bindings": {
+            "action_ref": "action_ref",
+            "transition_ref": "transition_ref",
+            "component_ref": "participant_component_ref",
+            "acknowledgement_ref": "acknowledgement_ref"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.capture_only_the_acknowledged_parameter_participant"
+      ]
+    },
+    {
+      "id": "policy.capture_canonical_prefix_parameter_selector_appearance",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "memory_capture.prefix_parameter"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "learning_rows",
+          "operator": "is_present"
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.capture_prefix_parameter_profile",
+          "static_facts": {
+            "canonical_learning_projection": {
+              "term_attributes": {
+                "role": "prefix_parameter_selector"
+              },
+              "link_predicate": "observed_prefix_parameter_source",
+              "proof_rule": "rule.acknowledged_prefix_parameter_role",
+              "allowed_link_statuses": [
+                "supported"
+              ],
+              "link_disposition": "active",
+              "link_polarity": "positive",
+              "entity_reference_origin": "claim_argument",
+              "claim_entity_argument_index": 0,
+              "claim_required_arguments": {},
+              "transition_reference_origin": "claim",
+              "transition_attribute": "transition_ref",
+              "component_attribute": "component_ref",
+              "action_attribute": "transition_ref",
+              "claim_attributes": {},
+              "nonzero_translation_required": false,
+              "dedup_entry_id_pattern": "supposition.memory.association.{association_token}",
+              "static_learning_facts": {
+                "causal_role_ref": "role.prefix_parameter_selector",
+                "mechanism_schema_refs": [
+                  "rule.acknowledged_prefix_parameter_role"
+                ],
+                "falsifier_refs": [
+                  "falsifier.prefix_parameter_link_is_contradicted"
+                ],
+                "action_conditioned_role_evidence_present": true,
+                "disables_source_entity_role_projection": false,
+                "archives_source_role_fact_projection": false
+              },
+              "claim_action_reference_origin": "transition",
+              "compound_source_entity_attribute": "entity_ref"
+            }
+          },
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "memory_capture.prefix_parameter"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "memory_capture.prefix_parameter": "rule.captured_prefix_parameter_role_appearances"
+      },
+      "premises": [
+        "exact_acknowledged_parameter_role_is_canonical"
+      ],
+      "invariants": [
+        "only_conditioned_parameter_sources",
+        "all_appearance_ties_preserved",
+        "source_coordinates_not_portable"
+      ],
+      "falsifiers": [
+        "source_parameter_effect_link_is_contradicted"
+      ],
+      "reason_refs": [
+        "reason.remember_causally_learned_role_appearance"
+      ]
+    },
+    {
+      "id": "rule.captured_prefix_parameter_role_appearances",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "exact_acknowledged_prefix_parameter_role_and_appearance"
+      ],
+      "invariants": [
+        "same_game_no_level_expiry",
+        "no_scene_handle_in_learned_signature",
+        "source_claim_is_retained",
+        "only_the_conditioned_prefix_parameter_profile_is_admitted"
+      ],
+      "falsifiers": [
+        "source_causal_evidence_falsified"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "supposition.memory.association.{association_token}",
+          "kind": "schema",
+          "label": "learned_role_appearance_association",
+          "required_fields": [
+            "association_token",
+            "causal_role_ref",
+            "source_claim_refs",
+            "signature_keys",
+            "contract_source_hash",
+            "mechanism_schema_refs",
+            "falsifier_refs"
+          ],
+          "static_attributes": {
+            "active": true,
+            "commitment": "revisable",
+            "memory_scope": "same_game",
+            "falsified_signature_digests": []
+          },
+          "attribute_bindings": {
+            "role_ref": "causal_role_ref",
+            "signature_keys": "signature_keys",
+            "normalized_valued_pixels": "normalized_valued_pixels",
+            "orthogonal_band_measurements": "orthogonal_band_measurements",
+            "contract_source_hash": "contract_source_hash",
+            "source_claim_refs": "source_claim_refs",
+            "mechanism_schema_refs": "mechanism_schema_refs",
+            "falsifier_refs": "falsifier_refs",
+            "role_context_requirements": "role_context_requirements"
+          },
+          "iteration": {
+            "source_field": "learning_rows",
+            "max_items": 64,
+            "item_bindings": {
+              "association_token": "association_token",
+              "causal_role_ref": "causal_role_ref",
+              "source_claim_refs": "source_claim_refs",
+              "signature_keys": "signature_keys",
+              "normalized_valued_pixels": "normalized_valued_pixels",
+              "orthogonal_band_measurements": "orthogonal_band_measurements",
+              "contract_source_hash": "contract_source_hash",
+              "mechanism_schema_refs": "mechanism_schema_refs",
+              "falsifier_refs": "falsifier_refs",
+              "role_context_requirements": "role_context_requirements"
+            }
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.memory.association.{association_token}",
+          "predicate": "learned_role_has_appearance_signature",
+          "family": "epistemic",
+          "argument_patterns": [
+            "supposition.memory.association.{association_token}"
+          ],
+          "epistemic_status": "supported",
+          "required_fields": [
+            "association_token"
+          ],
+          "required_term_patterns": [
+            "supposition.memory.association.{association_token}"
+          ],
+          "static_attributes": {
+            "memory_scope": "same_game",
+            "commitment": "revisable"
+          },
+          "iteration": {
+            "source_field": "learning_rows",
+            "max_items": 64,
+            "item_bindings": {
+              "association_token": "association_token"
+            }
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.remember_causally_learned_role_appearance"
+      ]
+    },
+    {
+      "id": "policy.record_captured_prefix_parameter_role_appearances",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "memory_capture.prefix_parameter_rows"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.record_prefix_parameter_rows",
+          "all_conditions": [
+            {
+              "field": "learning_rows",
+              "operator": "is_present"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "premises": [
+        "exact_acknowledged_effect_and_source_participant"
+      ],
+      "invariants": [
+        "knowledge_admission_never_releases_an_action",
+        "unknowns_are_preserved"
+      ],
+      "falsifiers": [
+        "source_ack_or_causal_join_is_invalid"
+      ],
+      "reason_refs": [
+        "reason.capture_only_the_acknowledged_parameter_participant"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "memory_capture.prefix_parameter_rows": "rule.captured_prefix_parameter_role_appearances"
+      }
+    },
+    {
+      "id": "policy.canonical_role_capture_variant",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "capture_variant.existing",
+        "capture_variant.prefix_parameter"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.capture_variant.existing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "capture_variant.existing"
+            },
+            {
+              "field": "learning_policy_ref",
+              "operator": "not_equals",
+              "expected": "policy.capture_canonical_prefix_parameter_selector_appearance"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.capture_variant.prefix_parameter",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "capture_variant.prefix_parameter"
+            },
+            {
+              "field": "learning_policy_ref",
+              "operator": "equals",
+              "expected": "policy.capture_canonical_prefix_parameter_selector_appearance"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "premises": [
+        "exact_acknowledged_effect_and_source_participant"
+      ],
+      "invariants": [
+        "knowledge_admission_never_releases_an_action",
+        "unknowns_are_preserved"
+      ],
+      "falsifiers": [
+        "source_ack_or_causal_join_is_invalid"
+      ],
+      "reason_refs": [
+        "reason.capture_only_the_acknowledged_parameter_participant"
+      ]
+    }
+  ]
+}

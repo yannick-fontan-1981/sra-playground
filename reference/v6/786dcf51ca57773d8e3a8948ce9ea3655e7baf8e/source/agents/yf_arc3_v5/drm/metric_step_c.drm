@@ -1,0 +1,385 @@
+{
+  "module_id": "metric_step_c",
+  "declarations": [
+    {
+      "id": "policy.metric_step_signature_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "source_bound_native_metric_primitive"
+      ],
+      "applicability": [
+        "native_metric_external_step"
+      ],
+      "invariants": [
+        "exact_parent_full_state_model_bounds_and_payload",
+        "phase_order_matches_supplied_cost_acceptance_law",
+        "atomic_step_not_resumed"
+      ],
+      "falsifiers": [
+        "foreign_or_stale_identity",
+        "missing_phase_contract",
+        "native_incomplete_or_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "metric_step.supported",
+        "metric_step.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.metric_step_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_step.supported"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image.external_primitive"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.metric_stack_image"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "STEP"
+            },
+            {
+              "field": "expected_return_type",
+              "operator": "equals",
+              "expected": "metric_stack_image.result.v1"
+            },
+            {
+              "field": "native_identity_aligned",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_initial_state_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_model_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_bounds_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_binding_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_primitive_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "ownership_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_contract_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_clock_scoped",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "atomic_step_has_no_resume",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "metric_step.supported"
+          }
+        },
+        {
+          "id": "projection.policy.metric_step_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_step.unsupported"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "metric_step.unsupported"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.metric_step_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "metric_step.supported"
+            }
+          ],
+          "reason_ref": "reason.native_metric_owned_phase_closure"
+        },
+        {
+          "id": "tier.policy.metric_step_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "metric_step.unsupported"
+            }
+          ],
+          "reason_ref": "reason.native_metric_owned_phase_closure"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.metric_return_disposition_not_action_selection",
+      "reason_refs": [
+        "reason.native_metric_owned_phase_closure"
+      ]
+    },
+    {
+      "id": "policy.metric_step_result_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "source_bound_native_metric_primitive"
+      ],
+      "applicability": [
+        "native_metric_external_step"
+      ],
+      "invariants": [
+        "no_second_automatic_pass_or_cost",
+        "acceptance_distinct_from_budget_terminal",
+        "all_native_missing_fields_retained"
+      ],
+      "falsifiers": [
+        "foreign_or_stale_identity",
+        "missing_phase_contract",
+        "native_incomplete_or_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "metric_step.contradiction",
+        "metric_step.contradiction_model",
+        "metric_step.bound",
+        "metric_step.complete",
+        "metric_step.needs_evidence"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.metric_step_result_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_step.contradiction"
+            },
+            {
+              "field": "identity_exact",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "metric_step.contradiction"
+          }
+        },
+        {
+          "id": "projection.policy.metric_step_result_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_step.contradiction_model"
+            },
+            {
+              "field": "native_model_contradiction",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "metric_step.contradiction"
+          }
+        },
+        {
+          "id": "projection.policy.metric_step_result_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_step.bound"
+            },
+            {
+              "field": "native_bound_reached",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "metric_step.bound"
+          }
+        },
+        {
+          "id": "projection.policy.metric_step_result_c.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_step.complete"
+            },
+            {
+              "field": "complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "identity_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_model_contradiction",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_bound_reached",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "metric_step.complete"
+          }
+        },
+        {
+          "id": "projection.policy.metric_step_result_c.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_step.needs_evidence"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "metric_step.needs_evidence"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.metric_step_result_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "metric_step.contradiction"
+            }
+          ],
+          "reason_ref": "reason.native_metric_owned_phase_closure"
+        },
+        {
+          "id": "tier.policy.metric_step_result_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "metric_step.bound"
+            }
+          ],
+          "reason_ref": "reason.native_metric_owned_phase_closure"
+        },
+        {
+          "id": "tier.policy.metric_step_result_c.3",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "metric_step.complete"
+            }
+          ],
+          "reason_ref": "reason.native_metric_owned_phase_closure"
+        },
+        {
+          "id": "tier.policy.metric_step_result_c.4",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "metric_step.needs_evidence"
+            }
+          ],
+          "reason_ref": "reason.native_metric_owned_phase_closure"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.metric_return_disposition_not_action_selection",
+      "reason_refs": [
+        "reason.native_metric_owned_phase_closure"
+      ]
+    }
+  ]
+}

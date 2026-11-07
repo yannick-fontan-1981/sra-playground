@@ -1,0 +1,372 @@
+{
+  "module_id": "guarded_search_c",
+  "declarations": [
+    {
+      "id": "policy.guarded_search_algorithm_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_explicit_algorithm_and_exact_query"
+      ],
+      "applicability": [
+        "guarded_search_request"
+      ],
+      "invariants": [
+        "source_algorithm_choice",
+        "default_uniform_cost",
+        "exact_bound_query",
+        "no_heuristic_cutoff",
+        "no_physical_release"
+      ],
+      "falsifiers": [
+        "stale_query",
+        "wrong_mode",
+        "unverified_lower_bound",
+        "partial_relation_domain"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "guarded_search.uniform",
+        "guarded_search.astar",
+        "guarded_search.and_or",
+        "guarded_search.minimax",
+        "guarded_search.csp",
+        "guarded_search.dp",
+        "guarded_search.unqualified"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.guarded_search.uniform",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_search.uniform"
+            },
+            {
+              "field": "algorithm_contract_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_algorithm_ref",
+              "operator": "equals",
+              "expected": "UNIFORM_COST"
+            },
+            {
+              "field": "uniform_contract",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "guarded_search.uniform"
+          }
+        },
+        {
+          "id": "projection.guarded_search.astar",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_search.astar"
+            },
+            {
+              "field": "algorithm_contract_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_algorithm_ref",
+              "operator": "equals",
+              "expected": "ASTAR"
+            },
+            {
+              "field": "astar_contract",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "guarded_search.astar"
+          }
+        },
+        {
+          "id": "projection.guarded_search.and_or",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_search.and_or"
+            },
+            {
+              "field": "algorithm_contract_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_algorithm_ref",
+              "operator": "equals",
+              "expected": "AND_OR"
+            },
+            {
+              "field": "universal_contract",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "guarded_search.and_or"
+          }
+        },
+        {
+          "id": "projection.guarded_search.minimax",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_search.minimax"
+            },
+            {
+              "field": "algorithm_contract_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_algorithm_ref",
+              "operator": "equals",
+              "expected": "MINIMAX"
+            },
+            {
+              "field": "universal_contract",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "guarded_search.minimax"
+          }
+        },
+        {
+          "id": "projection.guarded_search.csp",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_search.csp"
+            },
+            {
+              "field": "algorithm_contract_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_algorithm_ref",
+              "operator": "equals",
+              "expected": "CSP"
+            },
+            {
+              "field": "csp_contract",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "guarded_search.csp"
+          }
+        },
+        {
+          "id": "projection.guarded_search.dp",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_search.dp"
+            },
+            {
+              "field": "algorithm_contract_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_algorithm_ref",
+              "operator": "equals",
+              "expected": "DP"
+            },
+            {
+              "field": "dp_contract",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "guarded_search.dp"
+          }
+        },
+        {
+          "id": "projection.guarded_search.default_uniform",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_search.uniform"
+            },
+            {
+              "field": "algorithm_contract_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_algorithm_ref",
+              "operator": "is_absent",
+              "expected": null
+            },
+            {
+              "field": "uniform_contract",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "guarded_search.uniform"
+          }
+        },
+        {
+          "id": "projection.guarded_search.unqualified",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guarded_search.unqualified"
+            },
+            {
+              "field": "algorithm_contract_qualified",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "guarded_search.unqualified"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.guarded_search.uniform",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "guarded_search.uniform"
+            }
+          ],
+          "reason_ref": "reason.current_source_requested_uniform_exact_calculation"
+        },
+        {
+          "id": "tier.guarded_search.astar",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "guarded_search.astar"
+            }
+          ],
+          "reason_ref": "reason.current_source_requested_astar_exact_calculation"
+        },
+        {
+          "id": "tier.guarded_search.and_or",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "guarded_search.and_or"
+            }
+          ],
+          "reason_ref": "reason.current_source_requested_and_or_exact_calculation"
+        },
+        {
+          "id": "tier.guarded_search.minimax",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "guarded_search.minimax"
+            }
+          ],
+          "reason_ref": "reason.current_source_requested_minimax_exact_calculation"
+        },
+        {
+          "id": "tier.guarded_search.csp",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "guarded_search.csp"
+            }
+          ],
+          "reason_ref": "reason.current_source_requested_csp_exact_calculation"
+        },
+        {
+          "id": "tier.guarded_search.dp",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "guarded_search.dp"
+            }
+          ],
+          "reason_ref": "reason.current_source_requested_dp_exact_calculation"
+        },
+        {
+          "id": "tier.guarded_search.unqualified",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "guarded_search.unqualified"
+            }
+          ],
+          "reason_ref": "reason.algorithm_or_current_query_not_qualified"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.guarded_algorithm_does_not_attest_physical_use",
+      "reason_refs": [
+        "reason.current_source_requested_uniform_exact_calculation",
+        "reason.current_source_requested_astar_exact_calculation",
+        "reason.current_source_requested_and_or_exact_calculation",
+        "reason.current_source_requested_minimax_exact_calculation",
+        "reason.current_source_requested_csp_exact_calculation",
+        "reason.current_source_requested_dp_exact_calculation",
+        "reason.algorithm_or_current_query_not_qualified"
+      ]
+    }
+  ]
+}

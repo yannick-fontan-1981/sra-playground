@@ -1,0 +1,409 @@
+{
+  "module_id": "measurement_agenda_publication_b",
+  "declarations": [
+    {
+      "id": "policy.measurement_agenda_publication_b",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.canonical_agenda_requires_exact_source_return_and_current_before_payload"
+      ],
+      "premises": [
+        "current_epistemic_consumer",
+        "source_qualified_exact_measurement_request",
+        "current_canonical_before_agenda"
+      ],
+      "invariants": [
+        "no_physical_goal_or_law_confirmation_gate",
+        "existing_requests_receipts_and_parent_are_preserved",
+        "no_dispatch_or_action_authority",
+        "only_named_canonical_bindings_are_read"
+      ],
+      "falsifiers": [
+        "stale_before_revision",
+        "missing_canonical_evidence",
+        "agenda_identifier_collision",
+        "changed_before_agenda",
+        "unlicensed_source_disposition"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "declared_alternative_refs": [
+        "measurement_agenda.publish",
+        "measurement_agenda.already_current",
+        "measurement_agenda.blocked"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.measurement_agenda.publish",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "measurement_agenda.publish"
+            },
+            {
+              "field": "canonical_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_payload_equal",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.measurement_agenda.already_current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "measurement_agenda.already_current"
+            },
+            {
+              "field": "canonical_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_payload_equal",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.measurement_agenda.blocked",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "measurement_agenda.blocked"
+            },
+            {
+              "field": "canonical_bindings_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "measurement_agenda.publish": "rule.measurement_agenda_publication_b"
+      },
+      "configuration": {
+        "measurement_need_predicate_ref": "requires_exact_specialized_measurement",
+        "need_statuses": [
+          "supported",
+          "established"
+        ],
+        "premise_status_map": {
+          "proposed": "PROVISIONAL",
+          "supported": "SUPPORTED",
+          "established": "SUPPORTED"
+        },
+        "premise_scope_fields": {
+          "epoch": "premise_epoch",
+          "input_revision_ref": "premise_revision_ref",
+          "scope_ref": "premise_scope_ref"
+        },
+        "consumer_scope_fields": {
+          "input_revision_ref": "current_input_revision_ref",
+          "scope_ref": "current_scope_ref"
+        },
+        "extension_policy_ref": "policy.measurement_extension_c",
+        "admitted_disposition_refs": [
+          "measurement_extension.append_exact_request",
+          "measurement_extension.reuse_existing_request"
+        ],
+        "append_disposition_ref": "measurement_extension.append_exact_request",
+        "projection_contract_ref": "family_agenda.canonical_snapshot.v1"
+      }
+    },
+    {
+      "id": "rule.measurement_agenda_publication_b",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "source_admitted_exact_request",
+        "current_canonical_evidence_basis",
+        "unchanged_before_agenda"
+      ],
+      "applicability": [
+        "exact_measurement_dependency_agenda_selected_for_publication"
+      ],
+      "invariants": [
+        "measurement_need_is_distinct_from_physical_confirmation",
+        "stored_request_is_not_a_dispatched_action",
+        "one_scoped_agenda_contains_all_preserved_siblings_and_receipts"
+      ],
+      "falsifiers": [
+        "input_revision_changes",
+        "canonical_agenda_changes_before_update"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{agenda_term_ref}",
+          "kind": "value",
+          "label": "canonical family dependency agenda",
+          "required_fields": [
+            "agenda_term_ref",
+            "proposed_agenda_payload",
+            "frozen_extension_payload"
+          ],
+          "static_attributes": {
+            "projection_contract_ref": "family_agenda.canonical_snapshot.v1"
+          },
+          "attribute_bindings": {
+            "family_agenda": "proposed_agenda_payload",
+            "frozen_extension": "frozen_extension_payload"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.measurement_agenda.{agenda_term_ref}.{decision_digest}",
+          "predicate": "records_source_qualified_measurement_dependency_agenda",
+          "family": "epistemic",
+          "scope_bindings": {
+            "parent_goal_ref": "parent_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "argument_patterns": [
+            "{agenda_term_ref}",
+            "{consumer_ref}"
+          ],
+          "required_term_patterns": [
+            "{agenda_term_ref}",
+            "{consumer_ref}"
+          ],
+          "required_fields": [
+            "agenda_term_ref",
+            "consumer_ref",
+            "decision_digest"
+          ],
+          "epistemic_status": "supported",
+          "attribute_bindings": {
+            "decision_digest": "decision_digest"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true,
+            "falsifier": "a_changed_scope_or_input_cannot_reuse_this_publication_as_current"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.measurement_agenda_publication_records_a_dependency_not_a_physical_result"
+      ]
+    },
+    {
+      "id": "policy.parent_measurement_need_b",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.current_question_declares_exact_epistemic_dependency"
+      ],
+      "premises": [
+        "current_canonical_parent_question",
+        "exact_source_requirement",
+        "current_revisable_morphological_premise"
+      ],
+      "invariants": [
+        "no_family_inference",
+        "no_physical_goal_or_law_confirmation_gate",
+        "siblings_preserved",
+        "no_act_authority"
+      ],
+      "falsifiers": [
+        "changed_frame_or_question",
+        "stale_scope_or_premise",
+        "different_exact_operation"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "declared_alternative_refs": [
+        "measurement_need.license",
+        "measurement_need.blocked"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.measurement_need.license",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "measurement_need.license"
+            },
+            {
+              "field": "need_bindings_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.measurement_need.blocked",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "measurement_need.blocked"
+            },
+            {
+              "field": "need_bindings_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "measurement_need.license": "rule.parent_measurement_need_b"
+      },
+      "configuration": {
+        "measurement_need_predicate_ref": "requires_exact_specialized_measurement",
+        "need_statuses": [
+          "supported",
+          "established"
+        ],
+        "premise_status_map": {
+          "proposed": "PROVISIONAL",
+          "supported": "SUPPORTED",
+          "established": "SUPPORTED"
+        },
+        "premise_scope_fields": {
+          "epoch": "premise_epoch",
+          "input_revision_ref": "premise_revision_ref",
+          "scope_ref": "premise_scope_ref"
+        },
+        "consumer_scope_fields": {
+          "input_revision_ref": "current_input_revision_ref",
+          "scope_ref": "current_scope_ref"
+        },
+        "extension_policy_ref": "policy.measurement_extension_c",
+        "admitted_disposition_refs": [
+          "measurement_extension.append_exact_request",
+          "measurement_extension.reuse_existing_request"
+        ],
+        "append_disposition_ref": "measurement_extension.append_exact_request",
+        "projection_contract_ref": "family_agenda.canonical_snapshot.v1",
+        "question_projection_contract_ref": "projection.parent_dependency_revalidation_question.v1"
+      }
+    },
+    {
+      "id": "rule.parent_measurement_need_b",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "source_licensed_current_question_measurement_need"
+      ],
+      "applicability": [
+        "exact_source_declared_requirement_has_current_bindings"
+      ],
+      "invariants": [
+        "epistemic_need_does_not_confirm_physics_or_release_action"
+      ],
+      "falsifiers": [
+        "question_or_premise_scope_changes"
+      ],
+      "reason_refs": [
+        "reason.acquire_missing_information_required_by_current_question"
+      ],
+      "term_templates": [],
+      "claim_templates": [
+        {
+          "id_pattern": "{need_ref}",
+          "predicate": "requires_exact_specialized_measurement",
+          "family": "epistemic",
+          "argument_patterns": [
+            "{consumer_ref}",
+            "{question_term_ref}"
+          ],
+          "required_term_patterns": [
+            "{consumer_ref}",
+            "{question_term_ref}",
+            "{parent_ref}"
+          ],
+          "required_fields": [
+            "need_ref",
+            "consumer_ref",
+            "question_term_ref",
+            "parent_ref",
+            "exact_request_signature_ref"
+          ],
+          "epistemic_status": "supported",
+          "scope_bindings": {
+            "parent_goal_ref": "parent_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "attribute_bindings": {
+            "exact_request_signature_ref": "exact_request_signature_ref",
+            "declared_requirement": "declared_requirement",
+            "question_ref": "question_ref"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true,
+            "falsifier_ref": "question_or_premise_scope_changes"
+          }
+        }
+      ]
+    }
+  ]
+}

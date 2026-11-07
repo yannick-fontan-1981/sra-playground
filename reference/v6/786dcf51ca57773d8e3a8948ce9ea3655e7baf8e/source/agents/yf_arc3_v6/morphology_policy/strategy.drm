@@ -1,0 +1,635 @@
+{
+  "module_id": "v6_composition_strategy_families",
+  "declarations": [
+    {
+      "id": "schema.v6_composition_strategy_families",
+      "kind": "schema",
+      "premises": [
+        "available_public_observation_and_current_scope"
+      ],
+      "applicability": [
+        "select_a_composition_proposal"
+      ],
+      "invariants": [
+        "preserve_a_validated_goal_continuation",
+        "a_family_cannot_release_physical_actions"
+      ],
+      "falsifiers": [
+        "missing_or_changed_current_evidence"
+      ],
+      "reason_refs": [
+        "reason.validated_continuity_then_measured_hypotheses_then_observed_frontier"
+      ],
+      "configuration": {
+        "goal_access_subquestions": [
+          "observed_composition_services",
+          "coupled_support_composition",
+          "alternating_graph_composition",
+          "scored_relation_access",
+          "observed_support_access",
+          "subset_diagnosis",
+          "preview_packing",
+          "selected_rigid",
+          "invited_reduction",
+          "joint_transport",
+          "observed_feedback_sequence",
+          "animated_contact"
+        ],
+        "support_access_scope": "A body must have actually moved under a measured directional input and remain bound to current support and a unique provisional shape homologue. This spatial composition may precede unrelated motif probes; uncertainty and physical guards remain. An already acquired terminal relation keeps priority.",
+        "window_constraints": {
+          "ordered_subquestions": [
+            "occluded_catalogue_composition",
+            "queued_field_composition",
+            "product_panel_composition",
+            "labeled_sequence_composition",
+            "linked_packet_composition",
+            "trace_field_composition",
+            "cell_patch_composition",
+            "observed_occurrence_recall",
+            "observed_program_composition",
+            "typed_material_flow",
+            "radial_port_composition",
+            "observed_framed_analogy",
+            "field_service_composition",
+            "rooted_quota_composition",
+            "framed_window_composition",
+            "coupled_prefix_reference",
+            "relative_arrangement",
+            "multiscale_constraints",
+            "recurrent_series",
+            "periodic_sums",
+            "reflected_cover"
+          ],
+          "recurrent_series_question": "Continue a geometric series recurring across independent measured fields. Retain its original experimental composition through confirmed partial responses; preserve refutations. No terminal role is presumed.",
+          "point_scope": "One composition-derived measured cell may bind its point independently of the bounded exploratory sampler. Require exact public epoch, observation, full raster, support and coordinate. Preserve sampler and physical budgets.",
+          "prepare_supported_lines": true,
+          "supported_line_reply_plies": 6,
+          "supported_line_question": "After current-epoch ordered insertions and an actual counter-placement blocking a scored-line extension, prepare accessible contributions and their supports by finite alternating-response search. The opponent policy and symmetric adverse goal remain hypotheses. Seal each response; disable the context on refutation.",
+          "coupled_prefix_reference_question": "From a measured field, miniature reference and aligned controller families, test addressed selection/color choices and one-cell contribution compatibility. All colors, addresses and advancing commands come from current pixels or observed effects. Revalidate prior crossing pairs; stop on refutation. No named game or fixed role palette.",
+          "observed_program_composition_question": "From homologous visible members/controls, test edits and link internal public phases to local word-bearer effects. Compose under explicit hypotheses; preserve exact contextual refusals. A matched input-support appearance is a subgoal requiring current-pattern guards and real controls after arrival, never an unconditional edit permission. No named game, preset palette, word or coordinate.",
+          "occurrence_recall": {
+            "roles": [
+              "measured_occurrence",
+              "enclosing_emphasis_hypothesis",
+              "active_antecedent",
+              "chosen_occurrence",
+              "repeated_indicator",
+              "restored_context"
+            ],
+            "reference_families": [
+              "previous_all",
+              "previous_chosen",
+              "previous_unchosen",
+              "any_seen"
+            ],
+            "comparison_families": [
+              "exact_mask_and_color",
+              "exact_mask"
+            ],
+            "minimum_unique_observations": {
+              "singleton_antecedent": 1,
+              "plural_antecedent": 2
+            },
+            "question": "Test one currently measured occurrence using observed emphasis or uniquely agreeing retained correspondence hypotheses. Preserve masks, disjoint parts, current locus, the immediately active antecedent and its chosen occurrence. A prior choice is not a permanent identity ban. Revalidate canonical progression/restoration and retain competing explanations; official completion remains the main goal."
+          },
+          "typed_material_flow": {
+            "roles": [
+              "measured_dense_carrier",
+              "typed_internal_marks",
+              "outer_appearance",
+              "current_point",
+              "unknown_response"
+            ],
+            "flow_roles": [
+              "typed_descendant",
+              "current_request",
+              "prior_association_hypothesis"
+            ],
+            "flow_question": "After a material replacement yields new occurrences preserving measured typed substructures, test a current descendant against a unique framed request under an explicit appearance or retained-association hypothesis. Preserve other occurrences and already changed request sites; require actual consumption plus request change or an official boundary before retaining the association.",
+            "minimum_body_fill": 0.75,
+            "minimum_distinct_internal_marks": 2,
+            "maximum_pixels_per_mark": 1,
+            "minimum_repeated_carriers": 2,
+            "question": "From repeated dense supports with sparse typed internal marks, test one current support and measure whether its selection, appearance or material composition changes. Preserve the anchored marks and rival explanations; no selection, kinship, production or destination rule starts acquired.",
+            "pose_roles": [
+              "selected_typed_role",
+              "oriented_mark_pattern",
+              "uncharacterized_scope_control",
+              "available_request",
+              "conditional_pose_path"
+            ],
+            "pose_question": "Prefer a currently ready contribution. If a remaining typed occurrence only matches retained requests under an unconfirmed orientation relation, select it and test a unique newly observed control outside the known carrier/request scopes. Infer an action-to-pose relation only from the actual selected-role response. A subsequent bounded conditional prefix predicts typed marks and preserves the exterior, cuts on mismatch, and never asserts a universal rotation rule."
+          },
+          "radial_port_composition": {
+            "roles": [
+              "observed_support_site",
+              "radial_interface",
+              "selected_occurrence_hypothesis",
+              "recalled_rotation_method",
+              "neighbor_interface",
+              "unresolved_boundary"
+            ],
+            "question": "Start with no imported action method. Test the effect of one point on a measured radial support while retaining all rotation candidates and an unknown non-rotation alternative. Only a current physical response can bind an input to a rotation. Then conditionally prepare reciprocal interfaces at fixed observed sites, with connectedness, closure and acyclicity as goal hypotheses; official terminal causality remains unknown until protocol evidence.",
+            "use_prior_method": false,
+            "allow_initial_experiment": true
+          },
+          "field_service_composition": {
+            "nested_control_question": {
+              "no_visible_effect_contract": {
+                "disposition": "local_no_visible_effect",
+                "meaning": "An exact point command with no visible pixel change and no official progress closes only this measured probe. Selection and impossibility remain unacquired; an invisible control remains unknown. Retain epoch, observation evidence, full frame, motif, point and payload. Reject the same offer while these premises remain unchanged. Re-examine other declared composition families; no unscoped input fallback is licensed by this return. A click-to-motion experiment needs its own explicit hypothesis, current binding and falsifier.",
+                "decline_unscoped_families": [
+                  "returned_branch_contrast",
+                  "observed_frontier"
+                ]
+              },
+              "roles": [
+                "current_compact_core",
+                "measured_closed_enclosure",
+                "unknown_control",
+                "local_effect",
+                "distant_effect"
+              ],
+              "selection_order": "unique_minimum_measured_enclosure_area",
+              "maximum_extent_fraction": 0.25,
+              "minimum_core_area": 2,
+              "question": "Test the unique smallest measured compact solid core within a measured closed two-value square enclosure. Its control role is hypothetical. Bind one exact point, preserve local and distant changes as separate observations, and close at the first unknown effect before inferring a resource, quantity, relay or terminal role."
+            },
+            "envelope_fill_question": {
+              "roles": [
+                "persistent_envelope",
+                "observed_content_band",
+                "conditional_control",
+                "alternative_framed_control",
+                "unknown_resource_service"
+              ],
+              "question": "Measure current pixel-band extents inside retained public supports. One repeat discriminates accumulation from a one-off effect; an independently framed control with different glyph tests another transformation. Opposed measured changes do not establish a universal inverse. Preserve unknown quantities, capacity, ordering, relay and release laws; seal each first unknown response and retain all evidence."
+            },
+            "field_service_question": {
+              "roles": [
+                "persistent_field",
+                "novel_content_replacement",
+                "correlated_field",
+                "spatially_linked_paired_control",
+                "conditional_service"
+              ],
+              "question": "After measured restoration, test isolation of a correlated field that did not produce the distinct replacement. Prefer the other observed replacement as an exploration target, not a terminal role. A paired mirror motif on its measured axis is only a control hypothesis. Reconcile its local response, then test the previously observed input under changed conditions; all quantities, capacities and passage laws remain unknown."
+            },
+            "field_service_transfer": {
+              "roles": [
+                "retained_shape",
+                "current_service_control",
+                "rebound_receiver",
+                "changed_appearance_hypothesis",
+                "protected_contribution",
+                "unrecognized_intermediate"
+              ],
+              "question": "Rebind the measured relay and receiver shapes from the successful public epoch to current occurrences. Revalidate the retained control orientation and conditional input through current returns. A receiver without its initial background is only a fullness hypothesis; protection is revisable. If receivers match but the intermediate does not, prepare each receiver control under its current measured envelope before testing the known input against the unknown dependency. Reconcile every new field response; do not infer capacity, release threshold, duration or terminal completion from appearance."
+            }
+          },
+          "rooted_quota_composition": {
+            "rooted_quota_question": {
+              "roles": [
+                "measured_lattice",
+                "drawn_chain",
+                "wider_endpoint_hypothesis",
+                "aligned_mark_count",
+                "contextual_edit",
+                "conditional_joint_contribution"
+              ],
+              "question": "Separate selection from material editing. On a measured partition of drawn chains, use a deep point experiment to distinguish local change from rooted-prefix change, then an interior point on the observed long prefix to distinguish truncation from a repeated toggle. Only after actual addition and cut examples, request the existing integer-prefix propagation and indexed-step methods under explicit root and mark-as-quota hypotheses. Retain unknown clue semantics and alternatives; official completion alone closes the goal. Freeze the conditional set before dispatch, guard its observed prefix state and cut on divergence or frontier."
+            }
+          },
+          "framed_window_composition": {
+            "framed_window_question": {
+              "question": "Does pointing inside the unique complete pixel-equal window in the currently observed larger frame contribute to official progress?",
+              "roles": [
+                "small_frame_as_reference_hypothesis",
+                "large_frame_as_current_search_domain_hypothesis",
+                "complete_pixel_equal_window",
+                "current_native_interior_point"
+              ],
+              "scope": "Two uniquely paired disjoint rectangular frames of the same measured border; no fixed palette, size, coordinate, game identifier, or transport semantics. Equality is descriptive; terminal usefulness remains experimental."
+            }
+          },
+          "occluded_catalogue_composition": {
+            "occluded_catalogue_question": {
+              "answer_question": "Does selecting the uniquely compatible measured catalogue member record a useful response, under the observed partial-view constraints?",
+              "select_question": "Does the same-palette upper control select a distinct subject and its catalogue while preserving the measured field?",
+              "roles": [
+                "enclosed_field_hypothesis",
+                "catalogue_masks",
+                "same_palette_subject",
+                "conditional_open_substrate",
+                "unknown_occlusion",
+                "current_response_control"
+              ],
+              "scope": "Finite measured integer-scale/pose domain, current catalogue roles and shape invariance are hypotheses; no fixed palette, scale, depth order, answer index, game identifier or input-direction mapping."
+            }
+          },
+          "queued_field_composition": {
+            "queued_field_question": {
+              "roles": [
+                "measured_repeated_field",
+                "enclosed_ordered_members",
+                "smaller_preview_alternatives",
+                "observed_preparation_input",
+                "received_members",
+                "conditional_line_closure"
+              ],
+              "acquisition_question": "Resolve the effect of a current input on the enclosed ordered members or their receiving field. Distinguish preparation, reception, automatic phases and return to an earlier configuration using the public packet.",
+              "composition_question": "Prepare a bounded conditional reception whose equal-line and future-queue contributions distinguish retained closure alternatives or advance the observed contribution. Preserve order, occurrence identity, unknown line predicates and the possibility of a return. Official completion remains the goal; estimated removal is not a terminal guarantee.",
+              "node_bound": 24000,
+              "depth_bound": 3,
+              "reuse_prior_relations": true,
+              "transfer_question": "Reinstantiate previously observed value-independent preparation and closure relations on the currently measured lattice and controlled-member structure. Preserve acquisition origins and alternatives; test precise current predictions under guards. Do not transfer old boards, poses, queue contents, rejected sites or action authority. Reconcile every actual response and seal on divergence or unknown reception."
+            }
+          },
+          "product_panel_composition": {
+            "factor_product_question": {
+              "roles": [
+                "repeated_control_envelope",
+                "measured_local_vocabulary",
+                "miniature_tuple",
+                "observed_local_transition",
+                "session_visited_tuple",
+                "experimental_coverage_goal"
+              ],
+              "max_factors": 4,
+              "control_question": "Test the current visible control against its homologous miniature factor, preserving all other factor values as a falsifiable local-independence hypothesis. Do not equate a palette value with acceptance or an off value with failure.",
+              "coverage_question": "Use the existing finite product compiler to prepare visits to the remaining measured catalogue configurations. The local cycles and their independence remain conditional; compare each factor projection, close at an unknown edge and reconcile. The compiler's acceptance and reserve describe this experiment, not the unknown game verdict or internal resource law."
+            }
+          },
+          "labeled_sequence_composition": {
+            "labeled_sequence_question": {
+              "roles": [
+                "paired_labeled_panels",
+                "ordered_uniform_token_occurrences",
+                "excluded_nonuniform_anchor",
+                "scale_normalized_current_query",
+                "same_palette_submission_control",
+                "finite_predicate_alternatives"
+              ],
+              "features": [
+                "LENGTH",
+                "ENDPOINT_EQUAL",
+                "ALL_ADJACENT_DIFFERENT",
+                "ONE_CONTIGUOUS_RUN_PER_TYPE"
+              ],
+              "comparisons": [
+                "EQ",
+                "GE"
+              ],
+              "root_bound": 128,
+              "question": "Compare the current ordered sequence with both measured example collections through the existing feature and finite predicate methods. Submit only if every retained predicate in the declared atomic/complement grammar agrees on the current label and its visible control. This is grammar-relative agreement, not a unique universal law. One current query only; seal on its unknown response, preserve errors and do not invent future queries."
+            }
+          },
+          "trace_field_composition": {
+            "trace_field_question": {
+              "question": "Can a point on an adjacent measured cell extend the visible trace toward a simple covering composition ending at the other distinct mark? Reconcile each unknown effect; this is not an acquired terminal law.",
+              "roles": [
+                "repeated cell support",
+                "filled mobile-mark hypothesis",
+                "hollow receiver hypothesis",
+                "observed connecting trace",
+                "conditional separating edge"
+              ]
+            }
+          },
+          "linked_packet_composition": {
+            "linked_packet_question": {
+              "relay_question": "Which currently bound provider must be prepared so its observed or hypothesized output reaches the next visible support on a conditional path? Revalidate current selection and compare the subsequent dated packet; visible boxes are not certified collision volumes.",
+              "selection_question": "Does pointing at this current compact motif co-change one inner support and expose a remote-control binding?",
+              "input_question": "Which available input changes the selected motif or produces a dated public response packet? No input role is presumed.",
+              "packet_question": "What ordered fronts are visible in the response to the current configuration, independently of its canonical return?",
+              "contrast_question": "Can an unmeasured neighboring motif state produce an output nearer the distinct receiver hypothesis? Compare dated fronts and retain contradictory effects.",
+              "roles": [
+                "measured frame support",
+                "compact exterior control hypothesis",
+                "cochanged interior support",
+                "dated growing front",
+                "distinct receiver hypothesis"
+              ]
+            }
+          },
+          "cell_patch_composition": {
+            "cell_placement_question": {
+              "roles": [
+                "current_framed_cell_patch",
+                "uniform_empty_hypothesis",
+                "pointed_local_change",
+                "later_remote_change",
+                "visible_full_span_goal_hypothesis"
+              ],
+              "reply_plies": 6,
+              "free_search_empty_bound": 9,
+              "question": "Test a point on a measured repeated cell, then separate its stable local patch from a later remote patch in the public packet. Reuse finite line search only under these current observed roles and a declared free-placement/full-span hypothesis. Reconcile every reply; no private opponent policy, fixed dimension or terminal rule is supplied."
+            }
+          }
+        },
+        "regular_field_correspondence": {
+          "exclude_observed_control_interface": true,
+          "isometries": [
+            "horizontal",
+            "vertical",
+            "half_turn",
+            "diagonal",
+            "antidiagonal"
+          ],
+          "maximum_hypothetically_omitted_values": 2,
+          "question": "Can this cell be repaired by a local intervention so that its value agrees with the unanimous geometric or repeated-pattern correspondences while intact distinctions are preserved?"
+        },
+        "program_construction": {
+          "ordered_subquestions": [
+            "facet_example",
+            "surface_rewrite",
+            "learned_code_program",
+            "slot_substitution",
+            "typed_word_interface",
+            "rigid_port_assembly",
+            "controlled_constellation_cover",
+            "linked_temporal_preparation",
+            "configured_arrivals",
+            "fixed_origin"
+          ],
+          "scope": "Construct a visible program from observed effects while retaining the actual-world objective",
+          "fixed_origin_meaning": "Revalidate an observed placement that preserved a displayed instruction word. Reuse the prior inert control as a bounded dependency experiment. Then use only observed public execution traces and retained compatible origin/port hypotheses to compose placement followed by the acquired program input. Revalidate current layout and placement after the first primitive; official progress alone closes the objective. No game identifier, fixed coordinates or private program is supplied."
+        },
+        "families": [
+          "goal_access",
+          "window_constraints",
+          "orbit_constraints",
+          "scored_local_rewrite",
+          "containment",
+          "surface",
+          "pre_score_contact",
+          "factored_material_return",
+          "morphology",
+          "attention_parent_return",
+          "returned_branch_contrast",
+          "information_goal",
+          "acquire_control_for_target",
+          "view",
+          "view_continuity",
+          "observed_frontier"
+        ],
+        "scored_local_rewrite": {
+          "minimum_completed_rows_for_visual_continuation": 2,
+          "rebind_scored_local_rewrites": true,
+          "scope": "Revalidate learned local shape and color transitions from a scored compositional approach.",
+          "partial_network_after_score": true
+        },
+        "conditional_transit": {
+          "compare_scored_passage_options": true,
+          "passage_lookahead": 2,
+          "scope": "Conditional access to unvisited observed surfaces following two scored episodes; check role displacement upon physical return."
+        },
+        "factored_material_return": {
+          "ordered_subquestions": [
+            "reactive_contact_continuation",
+            "observed_addressed_material",
+            "observed_rigid_cargo",
+            "observed_ranked_workshop",
+            "observed_symbol_transaction",
+            "observed_object_binding",
+            "observed_inventory_composition",
+            "factored_material_return",
+            "motif_conditioned_access",
+            "parallel_branch_routing",
+            "conserved_band_transfer",
+            "supported_ternary_reduction",
+            "sliding_cavity",
+            "conditional_transit",
+            "observed_outline_service",
+            "ordered_support_transfer",
+            "observed_framed_transfer",
+            "topological_recolor",
+            "axial_question",
+            "window_question",
+            "ordered_recruitment",
+            "reactive_contact",
+            "ordered_reaction",
+            "chart_navigation",
+            "region_intervention",
+            "temporal_selection",
+            "invited_endpoints",
+            "joint_channels",
+            "shared_settlement",
+            "oriented_coupling",
+            "metric_composition",
+            "contextual_compartments",
+            "invited_reduction"
+          ],
+          "scope": "After a real return, guard both complete frame partitions through a learned material progression, then test the unresolved input.",
+          "metric_composition_meaning": "A currently measured metric cell partition and coherent visible raster target may admit a conditional top-occurrence transport composition before an untested compartment intervention on the same surface. Preserve current selection and exposed top constraints; retained control evidence and exposure dependencies must be rebound. Conditional TOP_ONLY/CELL_SUPPORT and input vectors remain hypotheses until observed responses; do not treat a failed bounded search as impossible. Unknown underlay cancels the prefix for reconciliation. No game identifier, private stack or target raster is supplied.",
+          "sliding_cavity_meaning": "A measured moving occurrence, observed stop response and currently fitting open cavity may support a conditional access composition. Revalidate shape, connecting surface, command bindings and exposed supports in the current scene. Retained stop and crossing evidence remain revisable; changed appearance is not identity equality. A measured independently moving mask requires the retained temporal model and full predicted-board guards, never removal from collision constraints. Missing directions are scoped questions only after retained successful access; absence of a route is not impossibility. Preserve the official parent objective and stop on the first contrary response.",
+          "ordered_support_transfer_meaning": "Before a generic image-copy intervention, a current repeated-support geometry with strictly nested unique extents and a symmetric hollow residual reference can admit a conditional ordered-member transfer question. The endpoint role and top-only/smaller-on-larger model remain explicit alternatives, not observed laws. A source point is geometrically bound; destination release requires the current selection response to preserve population and fit the measured selected band. No game-specific constants or routes enter this provider."
+        },
+        "pre_score_contact": {
+          "minimum_passage_positions": 2,
+          "test_alternative_part_arrangements": true,
+          "scope": "A repeated remote rewrite after an observed nonlocal contact supplies a falsifiable interaction question",
+          "initial_contact_question": {
+            "enabled": true,
+            "purpose": "Approach a currently distinct visible material through previously entered surfaces, then observe its response. Obstruction, ordinary entry, nonlocal displacement and remote change remain unknown alternatives.",
+            "selection": "Shortest current geometric access to a distinct nonuniform patch. Keep other compatible targets as alternatives; stable input-reference order only breaks equal-cost geometric ties.",
+            "preconditions": [
+              "current uniquely tracked mobile",
+              "measured displacement directions spanning both axes",
+              "each intermediate passage texture entered from at least two observed positions",
+              "final contact not already tested in the same epoch, role, occurrence, pattern and effect context"
+            ],
+            "release": "At most16 primitives; first unpaired inverse hypothesis or observed nonlocal edge seals the prefix. The final unknown contact is an experiment, not a predicted service.",
+            "falsifier": "Changed role or surface, motion mismatch or unexpected nonlocal effect interrupts continuation. A result does not establish selection, capture or terminal utility without further evidence."
+          }
+        },
+        "information_goal": {
+          "visual_sequences_first": true,
+          "feedback_sequences_first": true,
+          "order": [
+            "distinct_relations",
+            "worst_case_separation",
+            "recovery_cost",
+            "stable_binding"
+          ],
+          "continue_observed_parent": true,
+          "coupled_displays": {
+            "question": "Does this member of the uniform framed row change a local state and a distinct repeated receiver row?"
+          },
+          "preserve_unbound_parent": true,
+          "preserve_current_exposures": [
+            "replicate_translation",
+            "replicate_after_contextual_block"
+          ],
+          "excluded_risks": [
+            "known_deadlock",
+            "destroys_preserved_composition",
+            "unrecoverable_resource_loss"
+          ]
+        },
+        "acquire_control_for_target": {
+          "requires_reason": "control_not_currently_attested",
+          "requires_status": "retained",
+          "experiments": [
+            "replicate_translation",
+            "sample_unused_control",
+            "replicate_after_contextual_block"
+          ],
+          "recall": "prefer_an_unmeasured_axis_of_a_relocated_role",
+          "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input."
+        },
+        "alternating_graph_composition": {
+          "alternating_graph_question": {
+            "question": "Can the action-bound overlay reach the other exceptional uniform occurrence through the currently measured alternating-material graph? Use observed input translations, revalidate each conditional displacement, and close on contact or extra effects. A directional-marker forward exclusion is a precaution hypothesis supplied by the existing library, not a confirmed reaction law.",
+            "roles": [
+              "repeated support material",
+              "alternating connector material",
+              "action-bound overlay",
+              "exceptional uniform occurrence as possible objective",
+              "directional marker with hypothetical forward risk"
+            ],
+            "marker_precaution_hypothesis": true,
+            "instrumental_question": "The measured graph has no current route under the supplied directional precaution. Can a reachable contact, previously followed by revealed ordinary support elsewhere, change the graph so the possible objective becomes accessible? Transfer only as a falsifiable local hypothesis. Stop at contact, inspect the covered support after a safe departure, and preserve occlusion or contradictory reactions instead of supplying a complete reactive order."
+          }
+        },
+        "coupled_support_composition": {
+          "coupled_pair_question": {
+            "exclude_unmatched_floor_mixtures": true,
+            "roles": [
+              "currently measured homologous members",
+              "observed shared controls",
+              "revealed support patterns"
+            ],
+            "question": "Use the observed shared action relation to test a joint meeting composition. Independent collision against non-revealed support and coincidence as useful objective are revisable library hypotheses, not acquired terminal laws. Conservatively exclude contact with a mixture of revealed floor and unmatched material; this precaution is not a wall or hazard law. Preserve member identity across crossing, close on changed appearance or unexpected displacement, and revalidate each primitive. A refuted projection becomes an explicit unknown causal question, never automatic dispersed probing.",
+            "prepare_unmatched_supports": true,
+            "support_question": "When a measured joint path is unavailable, test whether a distinct compact occurrence on a counterfactual path can be selected and repositioned. Virtual removal is only an information question. Revalidate the current point, acquired mode-specific displacements, preservation of pair loci and actual return to the group. Stop on an ambiguous correspondence or refuted parking premise; never import an oracle pose or assume the meaning of a control."
+          }
+        },
+        "reactive_contact_continuation": {
+          "kinds": [
+            "binding_followup",
+            "parent_escape_configuration_access",
+            "parent_capture_contact_question",
+            "source81_composition"
+          ],
+          "conditions": [
+            {
+              "field": "retained_contact_dependency",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_control_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "subject_current_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_scope_and_input",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "meaning": "Continue the presently revalidated pending contact discriminant or its returned parent means before opening unrelated material questions. Existing higher-level goal-access priority remains unchanged; an initial contact experiment has no privileged priority."
+        },
+        "observed_composition_services": {
+          "exposed_reception_question": {
+            "partial": "Conditional preparation after the declared finite-search node limit: retain a nonempty path to a state that strictly improves the ordered geometric residual (number of unmatched current bodies, then minimum compatible receiver assignment distance) under the current observed control and contact models. This is neither a complete solution nor a new terminal law. Preserve current role and orientation bindings, project each step, seal on disagreement or frontier, and reconcile the actual result before revising the remaining reception objective.",
+            "access": "Library hypothesis: align current hollow bodies with compatible corner-marked receivers. Reuse measured occupancy and the V5 push-chain calculator for a conditional geometric prefix; optical, remote and contact effects remain open and seal the prefix on disagreement. This is not a learned universal terminal predicate.",
+            "expose": "Test a currently bound orientation control toward an observed body whose state differs from its receiver. Measure the resulting state and motion; do not assume cone angle, color law or phase order.",
+            "maintain": "Test an available temporal input while preserving the current orientation after an orientation-associated displacement. Distinguish repeated motion from no further effect, without assuming a universal wait law.",
+            "contact": "Test whether an adjacent body accompanies a sideward displacement toward its compatible receiver. Preserve the alternative of independent motion or blockage and reconcile the actual response.",
+            "control": "Acquire a currently available control-to-displacement relation under preserved geometry; the experimental input order does not assert directional meanings.",
+            "probe_order": [
+              "ACTION4",
+              "ACTION1",
+              "ACTION2",
+              "ACTION3"
+            ],
+            "max_search_nodes": 8000
+          },
+          "relational_chamber_question": {
+            "max_variables": 12,
+            "max_states": 4096,
+            "max_checks": 65536,
+            "experiment": "Test a currently measured control between miniature occurrences whose appearance pair matches an observed chamber adjacency. Predict only rows supplied by current and retained public observations; unknown functional rows remain open. The two-state edit is a hypothesis until its actual response. Frame-centering is a library objective hypothesis, not a terminal law. Reconcile the control and every measured axis, including unchanged outputs.",
+            "contribute": "Use the V5 finite relational domain kernel to intersect current target-axis requirements on shared measured relation variables. The kernel enumerates the declared finite candidate model, not unobserved physics. Compile a conditional set only along current edit evidence and known output rows, revalidate point support and all predicted axes after each command, and seal at unknown effect, contradiction or boundary. Recall relational observations, never old layouts or final settings."
+          },
+          "panel_service_question": {
+            "configuration": "Prepare the library hypothesis of material matching a displayed receiver, directly or through a displayed rewrite or room parameter. Match current operator silhouettes between the panel and scene; preserve current material, panel identity and room reference. The compact repeated panel grammar is a structural prior. A highlighted configuration is not an executed job. An unknown edit is an experiment; transfer of selection is provisional and guarded by every current panel projection. Do not click an already selected activity. No reservation, work priority, stock capacity or terminal law is supplied.",
+            "application": "Test the first available non-point control after the current panels are configured toward matching displayed receiver compositions. Its execution semantics are initially unknown. Preserve the configuration evidence; reconcile all canonical and packet effects, new materials, room markers and official progress before another application. Do not infer a separate turn from animation frames, or acquire simultaneous scheduling law from a single success."
+          },
+          "rooted_line_question": {
+            "source_rule": "mechanics.piercing_rooted_order / policy.piercing_order_plan",
+            "probe_order": [
+              "ACTION1",
+              "ACTION4",
+              "ACTION3",
+              "ACTION2"
+            ],
+            "max_microsteps": 32,
+            "max_depth": 88,
+            "max_nodes": 1000,
+            "conditional_model": {
+              "push_enabled": true,
+              "entry_enabled": true,
+              "entry_requires_stop": false,
+              "entry_attaches": true,
+              "carry_on_root_translation": true,
+              "retain_on_retraction": true,
+              "withdraw_requires_reverse_stop": true,
+              "possible_support_mode": "carried"
+            },
+            "control": "Bind an available input to current root translation or axial extent using the homologous rooted reference as the information goal. Input labels carry no direction meaning before the actual response. Current raster geometry, reference order and field extent are measured; physical domain-exit outcome is unknown.",
+            "compose": "Use existing V5 piercing geometry and conditional search to construct the current ordered rooted reference. The supplied contact/entry/carry/withdrawal values are an explicit library hypothesis, not acquired complete physics. Axial entry before push is a prospective alternative while an unknown stopping boundary prevents the stop-dependent model. Freeze each predicted root/tip/piece projection; continue the admitted prefix only while all measured projections match, seal on divergence or official boundary, and retain the counterexample. Observed overlap alone never establishes physical possession, and a predicted ordered support is not official completion."
+          },
+          "reception_service_question": {
+            "source_rule": "policy.hidden_motion_reception / ReceptionWaitBudgetD / current distinct-support supposition",
+            "probe_order": [
+              "ACTION1",
+              "ACTION2",
+              "ACTION3",
+              "ACTION4"
+            ],
+            "wait_batch": 8,
+            "control": "Measure input-conditioned translation of a uniquely bound corner constellation, retaining autonomous co-mobiles and hidden continuation as alternatives. No direction is assigned by action name.",
+            "access": "A request silhouette with a current world counterpart and a distinct member of repeated concave supports motivates an experimental reception composition. Use measured controls on the visible substrate to prepare that support; a useful partial approach may precede missing-control acquisition. Support utility is a library hypothesis, not an acquired terminal law. Preserve current support, request and carrier bindings.",
+            "preserve_other_contacts": "While preparing this reception, prefer visible access that does not enter other measured support occurrences. This is a revisable contact-preservation precaution, not evidence that those occurrences are walls. Failure to find such access leaves a preparation question open.",
+            "wait": "At the candidate reception support, test a bounded stationary service using a current outward control. Keep the cumulative wait ledger and current carrier projection. Observe arrival or request change; no hidden route, phase, collision law or guaranteed reception is supplied. Seal on disagreement, lost identity or official boundary."
+          },
+          "reference_population_question": {
+            "roles": [
+              "measured framed reference",
+              "same-style empty receiving lattice",
+              "current mobile-cell population",
+              "observed selected-body input"
+            ],
+            "selection": "Treat the occupied mask in a disjoint same-style frame as a geometric reference for the current empty lattice. Test a current occupied point to select a contributor; its controlled identity must be verified by displacement. This is a revisable correspondence hypothesis, not a palette role or terminal law.",
+            "control": "Measure an available input on the currently pointed occurrence, preserving the full current population. Acquire its actual displacement, retain all appearance changes and local-neighbor samples without filling any missing color relation from a manual. Seal after the unknown response.",
+            "compose": "Use the existing injective matcher on current reachable slots and measured input effects to prepare the reference occupancy. Preserve other occurrence cells and the visible reference, compare every projected population and stop on divergence or boundary. V5 selected-body step calculations use an explicit conditional collision hypothesis. Appearance equality and terminal meaning remain unknown until actual comparison and official progress; matching is not a globally optimal schedule."
+          }
+        },
+        "shared_settlement_question": {
+          "roles": [
+            "currently framed marked population",
+            "measured boundary appearance",
+            "observed shared displacement",
+            "contact marker hypothesis"
+          ],
+          "control": "Test a still-unqualified available input on the framed population; measure all current members and changed inset markers. No direction mapping is supplied. Same appearance with a boundary is a relational question, not an acquired destination or adhesion law. Seal after the unknown response.",
+          "compose": "Use measured shared directions and current contact-marker evidence with the existing V5 simultaneous-settlement and direct-contact calculus. Matching appearance, bounded occupancy, direct adhesion, and all-members-contact as useful goal are explicit library hypotheses. Compare both contact-phase variants; release only their common conditional path. Retain ambiguity, preserve all member supports, seal at a refuted projection or official boundary, and reconcile once per ensemble. A canonical response fit does not establish microstep timing or universal collision physics."
+        },
+        "selected_rigid_question": {
+          "compose": "Test the library prior that a full rigid body belongs in its homologous receptacle. Prepare occupied destination cells by moving their current occupants into reachable vacancies; preserve full masks and conditional collision constraints. This is a goal hypothesis, not an acquired universal terminal law.",
+          "control": "Discriminate competing selected-receiver cardinal-control hypotheses by their precise current full-mask outcomes. Freeze the hypothesis before dispatch; reconcile the public response and retain alternatives when blocked or ambiguous.",
+          "scope": "Distinct current fill appearances, measured inset lattice and one homologous outlined receptacle. Collision and aperture eligibility are provisional library hypotheses. V5 identity_scoped_support_d supplies rigid offset transformation; Python searches the declared finite conditional configurations, never imports an authored route."
+        },
+        "animated_contact_meaning": "Current unique point invitation or revalidated measured transient curve admits an information question under the existing V5 ballistic contact/disclosure declarations. Source, peer, display and terminal role remain hypotheses with current bindings; ordered public frames provide evidence, never an oracle trajectory. Retain acquired curve/method across epochs but remeasure current bodies, terrain and display. Missing current evidence preserves the pending question rather than inventing authority."
+      }
+    }
+  ]
+}

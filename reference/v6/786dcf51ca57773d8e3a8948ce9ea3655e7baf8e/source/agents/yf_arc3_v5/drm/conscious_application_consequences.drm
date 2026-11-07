@@ -1,0 +1,643 @@
+{
+  "module_id": "conscious_application_consequences",
+  "declarations": [
+    {
+      "id": "policy.conscious_application_consequences",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.compare_predicted_relations_to_the_declared_goal_without_inventing_success"
+      ],
+      "invariants": [
+        "all_predicted_and_uncalculated_candidates_preserved",
+        "no_target_immobility_inferred_from_its_name",
+        "unknown_preservation_is_not_safety",
+        "missing_target_is_not_a_wildcard",
+        "all_unresolved_target_candidates_remain_represented",
+        "a_means_origin_goal_is_not_the_owner_of_every_future_application",
+        "current_goal_owned_relations_take_precedence_over_historical_participants",
+        "ambiguous_or_contradicted_current_bindings_never_fall_back_to_the_origin_goal",
+        "conditional_local_relation_is_not_observed_level_completion",
+        "responsibility_for_an_experiment_does_not_establish_a_possible_goal_benefit",
+        "possible_benefit_requires_a_goal_owned_conditional_contribution_reason",
+        "no_candidate_ranking_or_action_release"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.conscious_application_consequences.unknown",
+          "all_conditions": [],
+          "static_facts": {
+            "eligible": true,
+            "possible_beneficiary_declared": false,
+            "comparison_goal_bound": false,
+            "requirement_declared": false,
+            "conditional_relation_satisfied": null,
+            "relative_progress_predicted": null,
+            "relative_regression_predicted": null,
+            "consequence_disposition_ref": "consequence.goal_requirement_unbound",
+            "question_ref": "question.which_exact_relation_or_state_does_this_goal_require",
+            "preservation_status_ref": "preservation.unverified",
+            "action_release_authorized": false,
+            "observed_goal_achievement": false
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.same_goal_legacy_binding",
+          "all_conditions": [
+            {"field": "goal_relation_evidence_present", "operator": "equals", "expected": false},
+            {"field": "mechanism_goal_matches", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "comparison_goal_bound": true,
+            "comparison_binding_basis_ref": "binding.original_means_and_current_goal_are_identical"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.current_goal_owned_binding",
+          "all_conditions": [
+            {"field": "current_goal_binding_qualified", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "comparison_goal_bound": true,
+            "comparison_binding_basis_ref": "binding.current_goal_owned_relation_independent_of_means_origin"
+          },
+          "bound_facts": {
+            "subject_ref": "current_goal_subject_ref",
+            "target_ref": "current_goal_target_ref",
+            "distinct_participants_bound": "current_goal_distinct_participants_bound",
+            "alignment_axis": "current_goal_alignment_axis",
+            "current_gaps_twice": "current_goal_current_gaps_twice",
+            "predicted_gaps_twice": "current_goal_predicted_gaps_twice",
+            "current_and_predicted_pair_bound": "current_goal_current_and_predicted_pair_bound",
+            "compared_target_bound": "current_goal_compared_target_bound",
+            "declared_target_matches": "current_goal_declared_target_matches",
+            "symbolic_shape_pair_bound": "current_goal_symbolic_shape_pair_bound",
+            "symbolic_appearance_pair_bound": "current_goal_symbolic_appearance_pair_bound",
+            "observed_symbolic_states": "current_goal_observed_symbolic_states",
+            "predicted_symbolic_states": "current_goal_predicted_symbolic_states",
+            "shape_equal_current": "current_goal_shape_equal_current",
+            "shape_equal_predicted": "current_goal_shape_equal_predicted",
+            "appearance_equal_current": "current_goal_appearance_equal_current",
+            "appearance_equal_predicted": "current_goal_appearance_equal_predicted",
+            "row_equal_predicted": "current_goal_row_equal_predicted",
+            "row_gap_smaller": "current_goal_row_gap_smaller",
+            "row_gap_larger": "current_goal_row_gap_larger",
+            "column_equal_predicted": "current_goal_column_equal_predicted",
+            "column_gap_smaller": "current_goal_column_gap_smaller",
+            "column_gap_larger": "current_goal_column_gap_larger",
+            "both_equal_predicted": "current_goal_both_equal_predicted",
+            "both_gaps_no_larger": "current_goal_both_gaps_no_larger",
+            "at_least_one_gap_smaller": "current_goal_at_least_one_gap_smaller"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.goal_owned_target_declaration",
+          "all_conditions": [
+            {"field": "current_goal_binding_qualified", "operator": "equals", "expected": true},
+            {"field": "target_declaration_well_formed", "operator": "equals", "expected": true},
+            {"field": "target_domain_declared", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "target_domain_declared": true,
+            "target_binding_ambiguous": false,
+            "declared_target_matches": true
+          },
+          "bound_facts": {
+            "declared_target_ref": "current_goal_target_ref",
+            "declared_target_domain": "current_goal_target_singleton",
+            "retained_target_candidates": "current_goal_target_singleton"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.unresolved_current_binding",
+          "all_conditions": [
+            {"field": "goal_relation_evidence_present", "operator": "equals", "expected": true},
+            {"field": "current_goal_binding_qualified", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "consequence_disposition_ref": "consequence.current_goal_relation_unresolved",
+            "question_ref": "question.which_current_goal_owned_relation_survives_its_alternatives_and_contradictions"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.invalid_target_declaration",
+          "all_conditions": [
+            {"field": "target_declaration_well_formed", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "consequence_disposition_ref": "consequence.goal_target_declaration_unqualified",
+            "question_ref": "question.what_is_the_complete_declared_goal_target_domain"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.target_unknown",
+          "all_conditions": [
+            {"field": "target_declaration_well_formed", "operator": "equals", "expected": true},
+            {"field": "target_domain_declared", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "consequence_disposition_ref": "consequence.goal_target_unbound",
+            "question_ref": "question.which_target_does_this_goal_concern"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.compared_target_unknown",
+          "all_conditions": [
+            {"field": "target_domain_declared", "operator": "equals", "expected": true},
+            {"field": "compared_target_bound", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "consequence_disposition_ref": "consequence.application_target_unbound",
+            "question_ref": "question.which_current_participant_is_the_application_target"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.target_alternatives",
+          "all_conditions": [
+            {"field": "target_domain_declared", "operator": "equals", "expected": true},
+            {"field": "target_binding_ambiguous", "operator": "equals", "expected": true},
+            {"field": "declared_target_matches", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "consequence_disposition_ref": "consequence.goal_target_alternatives_open",
+            "question_ref": "question.which_retained_target_alternative_is_supported"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.target_outside_domain",
+          "all_conditions": [
+            {"field": "target_domain_declared", "operator": "equals", "expected": true},
+            {"field": "compared_target_bound", "operator": "equals", "expected": true},
+            {"field": "declared_target_matches", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "consequence_disposition_ref": "consequence.application_target_differs_from_goal",
+            "question_ref": "question.can_this_means_address_a_target_in_the_declared_goal_domain"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.row",
+          "all_conditions": [
+            {"field": "target_binding_ambiguous", "operator": "equals", "expected": false},
+            {
+              "field": "comparison_goal_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "distinct_participants_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "declared_target_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "goal_kind",
+              "operator": "equals",
+              "expected": "align.position.row"
+            },
+            {
+              "field": "alignment_axis",
+              "operator": "equals",
+              "expected": "row"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "evidence_contract_ref",
+              "operator": "equals",
+              "expected": "yf_arc3_v5.verified_mechanism_evidence.v1"
+            },
+            {
+              "field": "evidence_contract_ref",
+              "operator": "equals",
+              "expected": "yf_arc3_v5.verified_mechanism_evidence_set.v1"
+            }
+          ],
+          "static_facts": {
+            "requirement_declared": true,
+            "requirement_ref": "requirement.align.position.row.centers_equal",
+            "consequence_disposition_ref": "consequence.predicted_relation_unmeasured",
+            "question_ref": "question.which_current_and_future_participant_poses_bind_the_goal_relation"
+          },
+          "bound_facts": {
+            "conditional_relation_satisfied": "row_equal_predicted",
+            "declared_comparison_bound": "current_and_predicted_pair_bound",
+            "relative_progress_predicted": "row_gap_smaller",
+            "relative_regression_predicted": "row_gap_larger"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.column",
+          "all_conditions": [
+            {"field": "target_binding_ambiguous", "operator": "equals", "expected": false},
+            {
+              "field": "comparison_goal_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "distinct_participants_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "declared_target_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "goal_kind",
+              "operator": "equals",
+              "expected": "align.position.column"
+            },
+            {
+              "field": "alignment_axis",
+              "operator": "equals",
+              "expected": "column"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "evidence_contract_ref",
+              "operator": "equals",
+              "expected": "yf_arc3_v5.verified_mechanism_evidence.v1"
+            },
+            {
+              "field": "evidence_contract_ref",
+              "operator": "equals",
+              "expected": "yf_arc3_v5.verified_mechanism_evidence_set.v1"
+            }
+          ],
+          "static_facts": {
+            "requirement_declared": true,
+            "requirement_ref": "requirement.align.position.column.centers_equal",
+            "consequence_disposition_ref": "consequence.predicted_relation_unmeasured",
+            "question_ref": "question.which_current_and_future_participant_poses_bind_the_goal_relation"
+          },
+          "bound_facts": {
+            "conditional_relation_satisfied": "column_equal_predicted",
+            "declared_comparison_bound": "current_and_predicted_pair_bound",
+            "relative_progress_predicted": "column_gap_smaller",
+            "relative_regression_predicted": "column_gap_larger"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.both",
+          "all_conditions": [
+            {"field": "target_binding_ambiguous", "operator": "equals", "expected": false},
+            {
+              "field": "comparison_goal_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "distinct_participants_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "declared_target_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "goal_kind",
+              "operator": "equals",
+              "expected": "align.position.both"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "evidence_contract_ref",
+              "operator": "equals",
+              "expected": "yf_arc3_v5.verified_mechanism_evidence.v1"
+            },
+            {
+              "field": "evidence_contract_ref",
+              "operator": "equals",
+              "expected": "yf_arc3_v5.verified_mechanism_evidence_set.v1"
+            }
+          ],
+          "static_facts": {
+            "requirement_declared": true,
+            "requirement_ref": "requirement.align.position.both.centers_equal",
+            "consequence_disposition_ref": "consequence.predicted_relation_unmeasured",
+            "question_ref": "question.which_current_and_future_participant_poses_bind_the_goal_relation"
+          },
+          "bound_facts": {
+            "conditional_relation_satisfied": "both_equal_predicted",
+            "declared_comparison_bound": "current_and_predicted_pair_bound"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.both_progress",
+          "all_conditions": [
+            {
+              "field": "requirement_ref",
+              "operator": "equals",
+              "expected": "requirement.align.position.both.centers_equal"
+            },
+            {
+              "field": "both_gaps_no_larger",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "at_least_one_gap_smaller",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "relative_progress_predicted": true
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.shape",
+          "all_conditions": [
+            {
+              "field": "target_binding_ambiguous",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "comparison_goal_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "distinct_participants_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "declared_target_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "goal_kind",
+              "operator": "equals",
+              "expected": "match.shape_exact"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "evidence_contract_ref",
+              "operator": "equals",
+              "expected": "yf_arc3_v5.verified_mechanism_evidence.v1"
+            },
+            {
+              "field": "evidence_contract_ref",
+              "operator": "equals",
+              "expected": "yf_arc3_v5.verified_mechanism_evidence_set.v1"
+            }
+          ],
+          "static_facts": {
+            "requirement_declared": true,
+            "requirement_ref": "requirement.match.shape_exact.observed_state_relation",
+            "consequence_disposition_ref": "consequence.predicted_state_relation_unmeasured",
+            "question_ref": "question.which_observed_and_future_states_bind_the_declared_relation"
+          },
+          "bound_facts": {
+            "declared_comparison_bound": "symbolic_shape_pair_bound",
+            "conditional_relation_satisfied": "shape_equal_predicted",
+            "current_relation_satisfied": "shape_equal_current"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.appearance",
+          "all_conditions": [
+            {
+              "field": "target_binding_ambiguous",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "comparison_goal_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "distinct_participants_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "declared_target_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "goal_kind",
+              "operator": "equals",
+              "expected": "match.color_and_shape"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "evidence_contract_ref",
+              "operator": "equals",
+              "expected": "yf_arc3_v5.verified_mechanism_evidence.v1"
+            },
+            {
+              "field": "evidence_contract_ref",
+              "operator": "equals",
+              "expected": "yf_arc3_v5.verified_mechanism_evidence_set.v1"
+            }
+          ],
+          "static_facts": {
+            "requirement_declared": true,
+            "requirement_ref": "requirement.match.color_and_shape.observed_state_relation",
+            "consequence_disposition_ref": "consequence.predicted_state_relation_unmeasured",
+            "question_ref": "question.which_observed_and_future_states_bind_the_declared_relation"
+          },
+          "bound_facts": {
+            "declared_comparison_bound": "symbolic_appearance_pair_bound",
+            "conditional_relation_satisfied": "appearance_equal_predicted",
+            "current_relation_satisfied": "appearance_equal_current"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.state_relation_regression",
+          "all_conditions": [
+            {
+              "field": "requirement_declared",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "declared_comparison_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_relation_satisfied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "conditional_relation_satisfied",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "relative_regression_predicted": true
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.no_terminal_relation",
+          "all_conditions": [
+            {
+              "field": "requirement_declared",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "declared_comparison_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "conditional_relation_satisfied",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "consequence_disposition_ref": "consequence.goal_relation_not_reached",
+            "question_ref": "question.which_continuation_or_unknown_mechanism_can_complete_the_relation"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.progress",
+          "all_conditions": [
+            {
+              "field": "requirement_declared",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "relative_progress_predicted",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "conditional_relation_satisfied",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "consequence_disposition_ref": "consequence.partial_goal_progress_predicted",
+            "question_ref": "question.can_this_progressing_step_preserve_constraints_and_be_bound_to_current_control"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.both_regression_measurement",
+          "all_conditions": [
+            {"field": "requirement_ref", "operator": "equals", "expected": "requirement.align.position.both.centers_equal"},
+            {"field": "row_gap_smaller", "operator": "equals", "expected": false},
+            {"field": "column_gap_smaller", "operator": "equals", "expected": false}
+          ],
+          "any_conditions": [
+            {"field": "row_gap_larger", "operator": "equals", "expected": true},
+            {"field": "column_gap_larger", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {"relative_regression_predicted": true}
+        },
+        {
+          "id": "projection.conscious_application_consequences.regression",
+          "all_conditions": [
+            {
+              "field": "requirement_declared",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "relative_regression_predicted",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "consequence_disposition_ref": "consequence.goal_relation_regresses",
+            "question_ref": "question.does_a_declared_dependency_justify_this_temporary_regression"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.competing_dimensions",
+          "all_conditions": [
+            {"field": "requirement_ref", "operator": "equals", "expected": "requirement.align.position.both.centers_equal"},
+            {"field": "at_least_one_gap_smaller", "operator": "equals", "expected": true}
+          ],
+          "any_conditions": [
+            {"field": "row_gap_larger", "operator": "equals", "expected": true},
+            {"field": "column_gap_larger", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "consequence_disposition_ref": "consequence.competing_goal_dimensions",
+            "question_ref": "question.which_dependency_or_constraint_justifies_improving_one_dimension_while_degrading_another"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.relation",
+          "all_conditions": [
+            {
+              "field": "requirement_declared",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "conditional_relation_satisfied",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "consequence_disposition_ref": "consequence.local_goal_relation_predicted",
+            "question_ref": "question.are_control_payload_and_declared_preservation_valid_for_this_predicted_relation",
+            "level_completion_established": false
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.possible_progress_beneficiary",
+          "all_conditions": [
+            {"field": "consequence_disposition_ref", "operator": "equals", "expected": "consequence.partial_goal_progress_predicted"}
+          ],
+          "static_facts": {
+            "possible_beneficiary_declared": true,
+            "possible_beneficiary_reason_ref": "reason.conditional_progress_supplies_a_possible_goal_benefit"
+          }
+        },
+        {
+          "id": "projection.conscious_application_consequences.possible_relation_beneficiary",
+          "all_conditions": [
+            {"field": "consequence_disposition_ref", "operator": "equals", "expected": "consequence.local_goal_relation_predicted"}
+          ],
+          "static_facts": {
+            "possible_beneficiary_declared": true,
+            "possible_beneficiary_reason_ref": "reason.conditional_goal_relation_supplies_a_possible_goal_benefit"
+          }
+        }
+      ]
+    }
+  ]
+}

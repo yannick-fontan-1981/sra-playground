@@ -1,0 +1,17 @@
+MODULE v6.framed_transfer
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        measured: Any
+        decision: Any
+    STEP measure
+        CALL framed.measure(request=request) -> measured
+        NEXT choose
+    STEP choose
+        CALL framed.select(measured=measured) -> decision
+        STOP decision
+WORKFLOW record(request: Any) -> Any
+    STATE
+        outcome: Any
+    STEP derive
+        CALL framed.record(request=request) -> outcome
+        STOP outcome

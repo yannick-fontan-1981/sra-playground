@@ -1,0 +1,273 @@
+{
+  "module_id": "complete_owner_c",
+  "declarations": [
+    {
+      "id": "policy.complete_owner_bind_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_prebound_complete_primitive_ownership"
+      ],
+      "applicability": [
+        "calculation_binding_or_reconciliation"
+      ],
+      "invariants": [
+        "source_execution_disposition",
+        "one_native_producer_and_debit",
+        "inherited_unchanged_if_explicit_non_delegation",
+        "trace_constraints_retained",
+        "unknown_or_partial_blocks",
+        "no_physical_sealed_or_act_inference"
+      ],
+      "falsifiers": [
+        "stale_identity_or_model",
+        "missing_owner_registration_or_trace_contract",
+        "packet_not_consumed_or_consumed_twice"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "complete_owner.inherited",
+        "complete_owner.delegated_pending",
+        "complete_owner.binding_unknown"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.complete_owner_bind_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "complete_owner.inherited"
+            },
+            {
+              "field": "inherited_licensed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "complete_owner.inherited"
+          }
+        },
+        {
+          "id": "projection.policy.complete_owner_bind_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "complete_owner.delegated_pending"
+            },
+            {
+              "field": "delegated_licensed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "complete_owner.delegated_pending"
+          }
+        },
+        {
+          "id": "projection.policy.complete_owner_bind_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "complete_owner.binding_unknown"
+            },
+            {
+              "field": "binding_qualified",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "complete_owner.binding_unknown"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.complete_owner_bind_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "complete_owner.inherited"
+            }
+          ],
+          "reason_ref": "reason.explicit_non_delegation_preserves_inherited_composition"
+        },
+        {
+          "id": "tier.policy.complete_owner_bind_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "complete_owner.delegated_pending"
+            }
+          ],
+          "reason_ref": "reason.one_registered_complete_primitive_owner_suppresses_duplicate_phases"
+        },
+        {
+          "id": "tier.policy.complete_owner_bind_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "complete_owner.binding_unknown"
+            }
+          ],
+          "reason_ref": "reason.unknown_ownership_blocks_work_without_arbitrary_owner"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.ownership_return_does_not_release_physical_action",
+      "reason_refs": [
+        "reason.explicit_non_delegation_preserves_inherited_composition",
+        "reason.one_registered_complete_primitive_owner_suppresses_duplicate_phases",
+        "reason.unknown_ownership_blocks_work_without_arbitrary_owner"
+      ]
+    },
+    {
+      "id": "policy.complete_owner_return_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_prebound_complete_primitive_ownership"
+      ],
+      "applicability": [
+        "calculation_binding_or_reconciliation"
+      ],
+      "invariants": [
+        "source_execution_disposition",
+        "one_native_producer_and_debit",
+        "inherited_unchanged_if_explicit_non_delegation",
+        "trace_constraints_retained",
+        "unknown_or_partial_blocks",
+        "no_physical_sealed_or_act_inference"
+      ],
+      "falsifiers": [
+        "stale_identity_or_model",
+        "missing_owner_registration_or_trace_contract",
+        "packet_not_consumed_or_consumed_twice"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "complete_owner.calculation_consumed",
+        "complete_owner.return_unknown"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.complete_owner_return_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "complete_owner.calculation_consumed"
+            },
+            {
+              "field": "calculation_discharge_qualified",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "complete_owner.calculation_consumed"
+          }
+        },
+        {
+          "id": "projection.policy.complete_owner_return_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "complete_owner.return_unknown"
+            },
+            {
+              "field": "calculation_discharge_qualified",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "complete_owner.return_unknown"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.complete_owner_return_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "complete_owner.calculation_consumed"
+            }
+          ],
+          "reason_ref": "reason.exact_owned_packet_and_one_current_collector_receipt"
+        },
+        {
+          "id": "tier.policy.complete_owner_return_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "complete_owner.return_unknown"
+            }
+          ],
+          "reason_ref": "reason.partial_stale_reused_or_unowned_return_has_no_discharge"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.ownership_return_does_not_release_physical_action",
+      "reason_refs": [
+        "reason.exact_owned_packet_and_one_current_collector_receipt",
+        "reason.partial_stale_reused_or_unowned_return_has_no_discharge"
+      ]
+    }
+  ]
+}

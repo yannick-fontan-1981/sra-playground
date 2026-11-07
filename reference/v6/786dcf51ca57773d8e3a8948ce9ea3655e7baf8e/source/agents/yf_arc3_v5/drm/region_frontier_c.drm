@@ -1,0 +1,489 @@
+{
+  "module_id": "region_frontier_c",
+  "declarations": [
+    {
+      "id": "policy.region_binding_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "sealed_facets_and_current_goal_linked_question_are_caller_bound"
+      ],
+      "applicability": [
+        "region_geometry_and_unknown_region_frontier"
+      ],
+      "invariants": [
+        "familiar_raster_is_not_layer_identity",
+        "geometry_not_inventory_openings_palette_or_control",
+        "future_frame_not_earlier_route_support",
+        "one_visible_spawn_not_surrounding_region",
+        "no_canonical_write"
+      ],
+      "falsifiers": [
+        "stale_or_future_observation",
+        "same_image_without_layer_identity",
+        "missing_return_or_resource_constraints"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "region.archive_unqualified_current_facet",
+        "region.merge_observed_geometry",
+        "region.keep_current_geometry_and_alternative_layers"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.region_binding_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "region.archive_unqualified_current_facet"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "current_observation_fenced",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_cell_identity_unique",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "region.archive_unqualified_current_facet"
+          }
+        },
+        {
+          "id": "projection.policy.region_binding_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "region.merge_observed_geometry"
+            },
+            {
+              "field": "current_observation_fenced",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_cell_identity_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "recalled_observation_fenced",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "recalled_cell_identity_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_binding_evidenced",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "identity_indicators_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "identity_indicators_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "explicit_layers_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "explicit_layers_equal",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "region.merge_observed_geometry"
+          }
+        },
+        {
+          "id": "projection.policy.region_binding_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "region.keep_current_geometry_and_alternative_layers"
+            },
+            {
+              "field": "current_observation_fenced",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_cell_identity_unique",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "region.keep_current_geometry_and_alternative_layers"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.region_binding_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "region.archive_unqualified_current_facet"
+            }
+          ],
+          "reason_ref": "reason.current_sealed_layer_identity_before_geometry_binding"
+        },
+        {
+          "id": "tier.policy.region_binding_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "region.merge_observed_geometry"
+            }
+          ],
+          "reason_ref": "reason.current_sealed_layer_identity_before_geometry_binding"
+        },
+        {
+          "id": "tier.policy.region_binding_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "region.keep_current_geometry_and_alternative_layers"
+            }
+          ],
+          "reason_ref": "reason.current_sealed_layer_identity_before_geometry_binding"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.region_disposition_order_is_not_experiment_ranking",
+      "reason_refs": [
+        "reason.current_sealed_layer_identity_before_geometry_binding"
+      ]
+    },
+    {
+      "id": "policy.region_frontier_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "sealed_facets_and_current_goal_linked_question_are_caller_bound"
+      ],
+      "applicability": [
+        "region_geometry_and_unknown_region_frontier"
+      ],
+      "invariants": [
+        "no_unobserved_light_control_requirement",
+        "local_experiments_not_act_release",
+        "recovery_cost_included",
+        "parent_goal_and_question_preserved"
+      ],
+      "falsifiers": [
+        "stale_or_future_observation",
+        "same_image_without_layer_identity",
+        "missing_return_or_resource_constraints"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "region.await_current_observation",
+        "region.retain_bounded_local_experiments",
+        "region.retain_supported_reveal",
+        "region.retain_unknown_region_constraints",
+        "region.continue_current_geometry"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.region_frontier_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "region.await_current_observation"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "current_observation_fenced",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_cell_identity_unique",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "region.await_current_observation"
+          }
+        },
+        {
+          "id": "projection.policy.region_frontier_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "region.retain_bounded_local_experiments"
+            },
+            {
+              "field": "current_observation_fenced",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_cell_identity_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "necessary_unknown_region",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_reveal_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "bounded_local_candidate_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "return_route_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "protected_conditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "recovery_inclusive_budget_fits",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "region.retain_bounded_local_experiments"
+          }
+        },
+        {
+          "id": "projection.policy.region_frontier_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "region.retain_supported_reveal"
+            },
+            {
+              "field": "current_observation_fenced",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_cell_identity_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "necessary_unknown_region",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_reveal_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "region.retain_supported_reveal"
+          }
+        },
+        {
+          "id": "projection.policy.region_frontier_c.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "region.retain_unknown_region_constraints"
+            },
+            {
+              "field": "current_observation_fenced",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_cell_identity_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "necessary_unknown_region",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "region.retain_unknown_region_constraints"
+          }
+        },
+        {
+          "id": "projection.policy.region_frontier_c.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "region.continue_current_geometry"
+            },
+            {
+              "field": "current_observation_fenced",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_cell_identity_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "necessary_unknown_region",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "region.continue_current_geometry"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.region_frontier_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "region.await_current_observation"
+            }
+          ],
+          "reason_ref": "reason.useful_unknown_region_with_return_and_resource_constraints"
+        },
+        {
+          "id": "tier.policy.region_frontier_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "region.retain_bounded_local_experiments"
+            }
+          ],
+          "reason_ref": "reason.useful_unknown_region_with_return_and_resource_constraints"
+        },
+        {
+          "id": "tier.policy.region_frontier_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "region.retain_supported_reveal"
+            }
+          ],
+          "reason_ref": "reason.useful_unknown_region_with_return_and_resource_constraints"
+        },
+        {
+          "id": "tier.policy.region_frontier_c.3",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "region.retain_unknown_region_constraints"
+            }
+          ],
+          "reason_ref": "reason.useful_unknown_region_with_return_and_resource_constraints"
+        },
+        {
+          "id": "tier.policy.region_frontier_c.4",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "region.continue_current_geometry"
+            }
+          ],
+          "reason_ref": "reason.useful_unknown_region_with_return_and_resource_constraints"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.region_disposition_order_is_not_experiment_ranking",
+      "reason_refs": [
+        "reason.useful_unknown_region_with_return_and_resource_constraints"
+      ]
+    }
+  ]
+}

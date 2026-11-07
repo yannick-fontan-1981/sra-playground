@@ -1,0 +1,153 @@
+{
+  "module_id": "arc3.directed_flow_cost_d",
+  "declarations": [
+    {
+      "id": "policy.directed_flow_cost_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_actual_scoped_resource_delta_and_current_cost_method"
+      ],
+      "configuration": {
+        "cost_predicate_ref": "current_scoped_flow_input_cost",
+        "secondary_effect_predicate_ref": "current_no_secondary_flow_resource_effect",
+        "current_method_predicate_ref": "current_applicable_flow_cost_method",
+        "command_parameter_fields": [
+          "operation_kind",
+          "configuration_kind",
+          "object_ref",
+          "control_ref",
+          "delta",
+          "action_ref",
+          "payload"
+        ],
+        "current_proof_scope_fields": [
+          "parent_goal_ref",
+          "epoch",
+          "episode_ref",
+          "level_scope_ref",
+          "model_revision_ref",
+          "input_revision_ref"
+        ]
+      },
+      "declared_alternative_refs": [
+        "flow_cost.publish",
+        "flow_cost.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt_equivalent_current_flow_cost",
+      "selection_tiers": [
+        {
+          "id": "tier.cost.current_delta",
+          "reason_ref": "reason_actual_scoped_resource_delta_and_current_cost_method",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "flow_cost.publish"
+            },
+            {
+              "field": "cost_premises_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observed_net_cost",
+              "operator": "greater_than",
+              "expected": -1
+            },
+            {
+              "field": "observed_net_cost",
+              "operator": "equals_reference_field",
+              "reference_field": "prospective_cost"
+            }
+          ]
+        },
+        {
+          "id": "tier.cost.unknown",
+          "reason_ref": "reason_actual_scoped_resource_delta_and_current_cost_method",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "flow_cost.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "flow_cost.publish": "rule.directed_flow_cost_d"
+      },
+      "invariants": [
+        "actual_dispatched_action_payload",
+        "same_quantity_identity_and_current_level",
+        "secondary_effects_explicitly_excluded",
+        "no_universal_single_observation_rate",
+        "no_action_authority",
+        "exact_current_operator_parameters_not_action_name_only",
+        "no_previous_epoch_or_episode_rate",
+        "no_secondary_effect_from_net_decrease_alone"
+      ]
+    },
+    {
+      "id": "rule.directed_flow_cost_d",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason_actual_scoped_resource_delta_and_current_cost_method"
+      ],
+      "term_templates": [],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_claim_ref}",
+          "predicate": "current_scoped_flow_input_cost",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{input_ref}",
+            "{resource_ref}"
+          ],
+          "required_fields": [
+            "output_claim_ref",
+            "cost",
+            "measurement_digest"
+          ],
+          "attribute_bindings": {
+            "cost": "cost",
+            "measurement_digest": "measurement_digest",
+            "provenance_digest": "provenance_digest",
+            "command_parameter_digest": "command_parameter_digest"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "model_revision_ref": "model_revision_ref",
+            "input_revision_ref": "input_revision_ref"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "universal_rate_not_proved": true
+          }
+        }
+      ]
+    }
+  ]
+}

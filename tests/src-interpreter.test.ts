@@ -174,7 +174,7 @@ test('JSON ingress is detached and immutable while successive identity calls sha
 
 test('validates unreachable branches and workflows before allowing any primitive effect', async () => {
   let calls = 0;
-  const module = moduleFor({ begin: [call('test.effect'), branch(literal(false), [{ id: '', kind: 'WHILE', expression: literal(true) } as unknown as IrStatement]), stop(literal(0))] });
+  const module = moduleFor({ begin: [call('test.effect'), branch(literal(false), [{ id: '', kind: 'TRANSACTION', expression: literal(true) } as unknown as IrStatement]), stop(literal(0))] });
   await assert.rejects(run(module, {}, { 'test.effect': () => { calls++; return null; } }), errorCode('unsupported_ir'));
   assert.equal(calls, 0);
   const unused = structuredClone(moduleFor({ begin: [stop(literal(1))] }));

@@ -1,0 +1,24 @@
+{"module_id":"device_temporal_windows_c","declarations":[{
+  "id":"policy.device_temporal_windows_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+  "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1","output_contract":"yf_arc3_v5.authority_output.selection.v1",
+  "declared_alternative_refs":["device.temporal.safe_conditional","device.temporal.incompatible"],"selection_required_fact_fields":["alternative_ref"],
+  "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+  "fact_projections":[
+    {"id":"projection.device.temporal.safe_conditional","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"device.temporal.safe_conditional"},{"field":"complete_safe_target_trial","operator":"equals","expected":true}],"static_facts":{"eligible":true}},
+    {"id":"projection.device.temporal.incompatible","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"device.temporal.incompatible"},{"field":"complete_safe_target_trial","operator":"equals","expected":false}],"static_facts":{"eligible":true}}],
+  "meaning_template_ref_by_alternative":{"device.temporal.safe_conditional":"rule.device_temporal_windows_c","device.temporal.incompatible":"rule.device_temporal_windows_c"},
+  "premises":["complete_exact_K28_domain","current_supported_clock_hazard_schedule","full_actor_phase_resource_validation"],
+  "invariants":["neutral_code_consumes_clock","start_and_wait_reachability_remain_required","no_ACT"],"falsifiers":["unknown_tick","changed_schedule","unfunded_instruction"],
+  "reason_refs":["reason_safe_temporal_window_depends_on_complete_phase_order_and_body"]
+},{
+  "id":"rule.device_temporal_windows_c","kind":"rule","evaluation":"project_requested_conclusions",
+  "supported_operators":["DERIVE"],"input_contract":"yf_arc3_v5.authority_input.derivation.v1","output_contract":"yf_arc3_v5.authority_output.derivation.v1","relation_family":"epistemic",
+  "term_templates":[{"id_pattern":"goal.device.temporal.{projection_ref}","kind":"goal","label":"Conditional current temporal start contribution",
+    "required_fields":["projection_ref","parent_goal_ref","start_position","start_clock","program","frozen_why"],
+    "attribute_bindings":{"parent_goal_ref":"parent_goal_ref","start_position":"start_position","start_clock":"start_clock","program":"program",
+      "safe_target_trial":"complete_safe_target_trial","start_requires_reachability_or_wait":"start_requires_reachability_or_wait",
+      "typed_target_compatible":"typed_target_compatible","full_program_status":"full_program_status","first_failed_phase":"first_failed_phase",
+      "schedule_digest":"schedule_digest","full_program_events":"full_program_events","frozen_why":"frozen_why"},"static_attributes":{"status":"proposed","execution_authority":false}}],
+  "claim_templates":[],"premises":["conditional_computed_window_not_actual_wait_or_move"],"invariants":["preserved_parent_why"],"falsifiers":["current_premise_changed"],
+  "reason_refs":["reason_only_qualified_start_and_timing_can_serve_target"]
+}]}

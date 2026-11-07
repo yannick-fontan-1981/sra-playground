@@ -229,7 +229,7 @@ export class Kernel {
   readonly sourceDigest: string;
   readonly primitives: Readonly<Record<string, Primitive>>;
 
-  constructor(logos: unknown, drm: unknown, sourceDigest: string) {
+  constructor(logos: unknown, drm: unknown, sourceDigest: string, profile: { maxDeclaredNodes?: number } = {}) {
     this.logos = objectValue(immutableJson(logos), 'Logos declaration');
     this.drm = objectValue(immutableJson(drm), 'DRM declaration');
     this.sourceDigest = stringValue(sourceDigest, 'source digest');
@@ -238,7 +238,9 @@ export class Kernel {
     strings(this.logos.statuses, 'Logos statuses');
     objectValue(this.drm.templates, 'DRM templates');
     const nodeLimit = ownValue(objectValue(this.drm.limits, 'DRM limits'), 'nodes');
-    if (typeof nodeLimit !== 'number' || !Number.isSafeInteger(nodeLimit) || nodeLimit < 1 || nodeLimit > 512) throw new TypeError('Invalid declared node budget (1..512)');
+    const ceiling = profile.maxDeclaredNodes ?? 512;
+    if (!Number.isSafeInteger(ceiling) || ceiling < 1 || ceiling > 1_000_000) throw new TypeError('Invalid explicit kernel node ceiling');
+    if (typeof nodeLimit !== 'number' || !Number.isSafeInteger(nodeLimit) || nodeLimit < 1 || nodeLimit > ceiling) throw new TypeError(`Invalid declared node budget (1..${ceiling})`);
     this.primitives = this.createPrimitives();
   }
 

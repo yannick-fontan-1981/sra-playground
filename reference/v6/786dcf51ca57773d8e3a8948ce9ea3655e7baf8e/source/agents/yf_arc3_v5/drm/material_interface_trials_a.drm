@@ -1,0 +1,442 @@
+{
+  "module_id": "material_interface_trials_a",
+  "declarations": [
+    {
+      "id": "policy.material_interface_trial_row_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_interface_observed_trial"
+      ],
+      "declared_alternative_refs": [
+        "material_interface_trial_row_a.core_contradiction",
+        "material_interface_trial_row_a.core_compatible_layout_unknown",
+        "material_interface_trial_row_a.observed_context_compatible",
+        "material_interface_trial_row_a.binding_disagreement",
+        "material_interface_trial_row_a.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_interface_trial_equivalent",
+      "selection_tiers": [
+        {
+          "id": "tier.material_interface_trial_row_a.core_contradiction",
+          "reason_ref": "reason.material_interface_observed_trial",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_interface_trial_row_a.core_contradiction"
+            },
+            {
+              "field": "row_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "core_effect_matches",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "tier.material_interface_trial_row_a.core_compatible_layout_unknown",
+          "reason_ref": "reason.material_interface_observed_trial",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_interface_trial_row_a.core_compatible_layout_unknown"
+            },
+            {
+              "field": "row_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "core_effect_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "binding_unknown",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_interface_trial_row_a.observed_context_compatible",
+          "reason_ref": "reason.material_interface_observed_trial",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_interface_trial_row_a.observed_context_compatible"
+            },
+            {
+              "field": "row_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "core_effect_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "binding_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_interface_trial_row_a.binding_disagreement",
+          "reason_ref": "reason.material_interface_observed_trial",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_interface_trial_row_a.binding_disagreement"
+            },
+            {
+              "field": "row_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "core_effect_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "binding_matches",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "tier.material_interface_trial_row_a.unknown",
+          "reason_ref": "reason.material_interface_observed_trial",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_interface_trial_row_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {},
+      "configuration": {}
+    },
+    {
+      "id": "policy.material_interface_contrast_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_interface_observed_trial"
+      ],
+      "declared_alternative_refs": [
+        "material_interface_contrast_a.single_field_discrimination",
+        "material_interface_contrast_a.multiple_field_discrimination",
+        "material_interface_contrast_a.same_predicted_effect",
+        "material_interface_contrast_a.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_interface_contrast_equivalent",
+      "selection_tiers": [
+        {
+          "id": "tier.material_interface_contrast_a.single_field_discrimination",
+          "reason_ref": "reason.material_interface_observed_trial",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_interface_contrast_a.single_field_discrimination"
+            },
+            {
+              "field": "both_effects_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "one_field_differs",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "predicted_effects_differ",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "one_core_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_interface_contrast_a.multiple_field_discrimination",
+          "reason_ref": "reason.material_interface_observed_trial",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_interface_contrast_a.multiple_field_discrimination"
+            },
+            {
+              "field": "both_effects_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "one_field_differs",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "predicted_effects_differ",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "one_core_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_interface_contrast_a.same_predicted_effect",
+          "reason_ref": "reason.material_interface_observed_trial",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_interface_contrast_a.same_predicted_effect"
+            },
+            {
+              "field": "both_effects_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "predicted_effects_differ",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "tier.material_interface_contrast_a.unknown",
+          "reason_ref": "reason.material_interface_observed_trial",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_interface_contrast_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {},
+      "configuration": {}
+    },
+    {
+      "id": "policy.material_interface_trial_publication_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_interface_observed_trial"
+      ],
+      "declared_alternative_refs": [
+        "material_interface_trial_publication_a.current",
+        "material_interface_trial_publication_a.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_actual_recipe_fit.equivalent",
+      "selection_tiers": [
+        {
+          "id": "tier.material_interface_trial_publication_a.current",
+          "reason_ref": "reason.material_interface_observed_trial",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_interface_trial_publication_a.current"
+            },
+            {
+              "field": "trial_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_interface_trial_publication_a.unknown",
+          "reason_ref": "reason.material_interface_observed_trial",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_interface_trial_publication_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "material_interface_trial_publication_a.current": "rule.material_interface_trials_a"
+      },
+      "configuration": {}
+    },
+    {
+      "id": "rule.material_interface_trials_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.material_interface_observed_trial"
+      ],
+      "invariants": [
+        "actual_single_command_and_independent_states",
+        "source_declared_models_only",
+        "law_effect_and_layout_gaps_separate",
+        "no_whole_method_truth_or_act"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Actual scoped interface model trials",
+          "required_fields": [
+            "output_term_ref",
+            "output_claim_ref",
+            "epoch",
+            "parent_goal_ref",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "why_digest",
+            "consumer_ref",
+            "next_item_ref",
+            "value_digest"
+          ],
+          "attribute_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "why_digest": "why_digest",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "value_digest": "value_digest",
+            "value": "value"
+          },
+          "static_attributes": {
+            "method_truth_promoted": false,
+            "actual_use_proved": false,
+            "action_release_authorized": false,
+            "invalidate_entire_recipe_language": false,
+            "source_kind_ref": "material.actual_interface_trials.v1"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_claim_ref}",
+          "predicate": "qualifies_material_actual_interface_trials",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_term_ref",
+            "output_claim_ref",
+            "epoch",
+            "parent_goal_ref",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "why_digest",
+            "consumer_ref",
+            "next_item_ref",
+            "value_digest"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "why_digest": "why_digest",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "value_digest": "value_digest",
+            "value": "value"
+          },
+          "static_attributes": {
+            "method_truth_promoted": false,
+            "actual_use_proved": false,
+            "action_release_authorized": false,
+            "invalidate_entire_recipe_language": false
+          }
+        }
+      ]
+    }
+  ]
+}

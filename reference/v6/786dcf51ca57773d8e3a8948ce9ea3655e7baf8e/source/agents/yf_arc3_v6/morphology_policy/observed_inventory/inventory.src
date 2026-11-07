@@ -1,0 +1,11 @@
+MODULE v6.observed_inventory
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        measured: Any
+        decision: Any
+    STEP measure
+        CALL inventory.measure(request=request) -> measured
+        NEXT interpret
+    STEP interpret
+        CALL inventory.interpret(measured=measured) -> decision
+        STOP decision

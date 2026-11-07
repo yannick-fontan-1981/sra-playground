@@ -1,0 +1,202 @@
+{
+  "module_id": "v6_joint_channels",
+  "declarations": [
+    {
+      "id": "schema.joint_channels",
+      "kind": "schema",
+      "premises": [
+        "measured_periodic_cells_and_marker_correspondences",
+        "observed_local_refusal_or_currently_revalidated_point_edit"
+      ],
+      "applicability": [
+        "conditional_joint_channel_question"
+      ],
+      "invariants": [
+        "original_marker_evidence_separate_from_displayed_background",
+        "all_lateral_contacts_in_component_closure",
+        "no_private_mixture_table",
+        "no_terminal_role_claimed"
+      ],
+      "falsifiers": [
+        "current_layout_or_marker_changed",
+        "new_open_cell_outside_predicted_union",
+        "local_edit_refused",
+        "scope_changed",
+        "observed_complete_source_set_output_contradicts_assigned_receiver"
+      ],
+      "reason_refs": [
+        "0.1.1-5,19"
+      ],
+      "configuration": {
+        "goal": "G_official_completion",
+        "point_action": "ACTION6",
+        "priority": [
+          "joint_assignment_experiment",
+          "source_subset_experiment",
+          "current_method",
+          "recalled_method",
+          "contrast_class"
+        ],
+        "conditions": [
+          {
+            "field": "grid_unique",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "joint_feasible",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "currently_bound",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "financed",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "kind_conditions": {
+          "current_method": [
+            {
+              "field": "observed_edit",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "recalled_method": [
+            {
+              "field": "method_revalidated",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "contrast_class": [
+            {
+              "field": "local_refusal_contrast",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "source_subset_experiment": [
+            {
+              "field": "one_current_subset",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "singleton_exclusions_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_point_method",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "joint_assignment_experiment": [
+            {
+              "field": "current_point_method",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "joint_feasible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "portfolio_retained",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        "question": "Test the next cell in a jointly compatible set of color-corresponding cross-to-corner connections. Treat terrain availability, cardinal propagation and correspondence utility as revisable hypotheses; preserve every other marker and lateral separation. A local opening confirms only the point control, not the goal.",
+        "hypotheses": [
+          "cross_and_corner_matching_pigments_may_define_connection_goals",
+          "unrefuted_interior_pattern_may_be_opened_by_pointing",
+          "cardinal_open_components_may_propagate_without_splitting",
+          "different_requested_pigments_require_separate_components_until_mixture_evidence",
+          "observed_singleton_outputs_may_remain_stable_in_current_scope_unknown_subsets_remain_possible",
+          "direct_current_correspondence_preferred_before_unknown_subsets_not_universal_necessity",
+          "nonempty_original_source_subset_is_a_model_not_all_sources_required",
+          "coincident_marker_and_pigment_can_hide_a_cross_but_source_role_unknown"
+        ],
+        "tie_break": "bounded_joint_feasible_plan_then_current_coordinate",
+        "planning": {
+          "work_limit": 16000,
+          "path_limit": 96,
+          "group_work_limit": 32768,
+          "assignment_bound": 64
+        },
+        "perception": {
+          "minimum_repeated_class_count": 4,
+          "square_complete_tiles": true,
+          "marker_cross_and_corners_are_hypotheses": true
+        },
+        "source_subset_experiment": [
+          {
+            "field": "one_current_subset",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "singleton_exclusions_observed",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_point_method",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "kind_meaning": {
+          "source_subset_experiment": "Test the unique remaining original-source subset under observed singleton output exclusions, while preserving all other direct correspondences and lateral separation. Unknown subset output and goal utility are hypotheses; not all sources are universally required.",
+          "joint_assignment_experiment": "Test a jointly admissible occurrence assignment from a bounded model portfolio. Prefer the smallest complete excavation cost among found plans, retain unresolved and alternative assignments; this is not a unique recipe or globally minimal plan. A uniform cell whose pigment coincides with the cross-mark value remains a hypothetical donor, never an observed original source."
+        },
+        "assignment_order": "smallest_remaining_excavations_among_found_plans",
+        "merged_marker_hypothesis": [
+          {
+            "field": "unique_uniform_match",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "unique_current_cross_mark",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_receiver_homologue",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "joint_assignment_experiment": [
+          {
+            "field": "current_point_method",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "joint_feasible",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "portfolio_retained",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "assignment_execution_order": "source_fusion_before_receiver_when_existing_joint_paths_allow"
+      }
+    }
+  ]
+}

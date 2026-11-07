@@ -1,0 +1,911 @@
+{
+  "module_id": "solving_question_d",
+  "declarations": [
+    {
+      "id": "policy.solving_question_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "explicit_current_goal_linked_operation_and_native_typed_scope"
+      ],
+      "applicability": [
+        "one_source_requested_family_question"
+      ],
+      "invariants": [
+        "same_native_kernel",
+        "no_act",
+        "no_controller_replacement",
+        "all_required_dependencies_preserved",
+        "descriptive_dispatch_not_confirmation"
+      ],
+      "falsifiers": [
+        "wrong_signature",
+        "unprocessed_dependency",
+        "unsupported_scoped_law"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "solving_question.reuse_equivalent",
+        "solving_question.calculate",
+        "solving_question.need_evidence"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.solving_question.reuse.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.reuse_equivalent"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "MEASURE"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "equivalent_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.reuse.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.reuse_equivalent"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "FIT"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "equivalent_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.reuse.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.reuse_equivalent"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "CHECK"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "equivalent_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.reuse.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.reuse_equivalent"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "PRECONDITION"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "equivalent_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.reuse.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.reuse_equivalent"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "INVERSE_DOMAIN"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "equivalent_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.reuse.5",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.reuse_equivalent"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "OBSERVE"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "equivalent_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.reuse.6",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.reuse_equivalent"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "RETAIN"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "equivalent_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.reuse.7",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.reuse_equivalent"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "RECONCILE"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "equivalent_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.reuse.8",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.reuse_equivalent"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "SNAPSHOT"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "equivalent_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.reuse.9",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.reuse_equivalent"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DETERMINISTIC"
+            },
+            {
+              "field": "scoped_model_evidence_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_status_ref",
+              "operator": "equals",
+              "expected": "ACTIVE"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "equivalent_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.reuse.10",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.reuse_equivalent"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "CONDITIONAL"
+            },
+            {
+              "field": "scoped_model_evidence_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "retained_model_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "equivalent_inputs_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.descriptive.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.calculate"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "MEASURE"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.descriptive.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.calculate"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "FIT"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.descriptive.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.calculate"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "CHECK"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.descriptive.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.calculate"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "PRECONDITION"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.descriptive.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.calculate"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "INVERSE_DOMAIN"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.descriptive.5",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.calculate"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "OBSERVE"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.descriptive.6",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.calculate"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "RETAIN"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.descriptive.7",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.calculate"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "RECONCILE"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.descriptive.8",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.calculate"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DESCRIPTIVE"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "SNAPSHOT"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.deterministic",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.calculate"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "DETERMINISTIC"
+            },
+            {
+              "field": "scoped_model_evidence_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_status_ref",
+              "operator": "equals",
+              "expected": "ACTIVE"
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.conditional",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.calculate"
+            },
+            {
+              "field": "question_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "calculation_class",
+              "operator": "equals",
+              "expected": "CONDITIONAL"
+            },
+            {
+              "field": "scoped_model_evidence_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "retained_model_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "equivalent_current_return_available",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_question.need",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.need_evidence"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.solving_question.reuse",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.reuse_equivalent"
+            }
+          ],
+          "reason_ref": "reason.reuse_exact_revalidated_current_equivalent_return"
+        },
+        {
+          "id": "tier.solving_question.calculate",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.calculate"
+            }
+          ],
+          "reason_ref": "reason.answer_exact_current_prerequisite_satisfied_family_question"
+        },
+        {
+          "id": "tier.solving_question.need",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_question.need_evidence"
+            }
+          ],
+          "reason_ref": "reason.family_question_requires_current_model_or_prerequisite"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.solving_question_actual_use_unverified",
+      "reason_refs": [
+        "reason.answer_exact_current_prerequisite_satisfied_family_question",
+        "reason.family_question_requires_current_model_or_prerequisite",
+        "reason.reuse_exact_revalidated_current_equivalent_return"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1415 @@
+{
+  "module_id": "experiment_frontier_c",
+  "declarations": [
+{
+  "id": "policy.experiment_admission_obligations_c",
+  "kind": "selection_policy",
+  "evaluation": "declared_eligibility_single",
+  "supported_operators": [
+    "SELECT"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+  "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+  "reason_refs": [
+    "reason.return_every_unresolved_experiment_admission_obligation"
+  ],
+  "invariants": [
+    "obligations_are_future_admission_work_not_a_denial_of_an_observed_response",
+    "all_pending_obligations_are_retained_without_selecting_one_remedy",
+    "no_action_grant_no_claim_that_discovery_is_necessary"
+  ],
+  "declared_alternative_refs": [
+    "experiment.obligation.current_scope",
+    "experiment.obligation.question_binding",
+    "experiment.obligation.timing",
+    "experiment.obligation.continuations",
+    "experiment.obligation.preserve_continuation",
+    "experiment.obligation.revalidate_declared_continuation",
+    "experiment.obligation.preservation",
+    "experiment.obligation.stop_contract",
+    "experiment.obligation.completed_acquisition",
+    "experiment.obligation.preconditions",
+    "experiment.obligation.protected_conditions",
+    "experiment.obligation.cost_evidence",
+    "experiment.obligation.available_budget",
+    "experiment.obligation.understanding_allowance",
+    "experiment.obligation.understanding_cost",
+    "experiment.obligation.destructiveness",
+    "experiment.obligation.unanswered_question"
+  ],
+  "selection_eligibility_conditions": [
+    {
+      "field": "pending",
+      "operator": "equals",
+      "expected": true
+    }
+  ],
+  "fact_projections": [
+    {
+      "id": "projection.experiment_obligation.default",
+      "all_conditions": [],
+      "static_facts": {
+        "pending": false
+      }
+    },
+    {
+  "id": "projection.experiment_obligation.revalidate_declared_continuation",
+  "all_conditions": [
+    {
+      "field": "alternative_ref",
+      "operator": "equals",
+      "expected": "experiment.obligation.revalidate_declared_continuation"
+    },
+    {
+      "field": "continuation_review",
+      "operator": "equals",
+      "expected": "continuation_requires_revalidation"
+    }
+  ],
+  "static_facts": {
+    "pending": true,
+    "reason_ref": "reason.declared_means_require_local_revalidation_before_diversion",
+    "measured_fields": [
+      "continuation_review"
+    ]
+  }
+    },
+    {
+      "id": "projection.experiment_obligation.current_scope",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.current_scope"
+        },
+        {
+          "field": "scope_current",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.experiment_scope_requires_current_evidence",
+        "measured_fields": [
+          "scope_current",
+          "canonical_unavailable_refs"
+        ]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.question_binding",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.question_binding"
+        },
+        {
+          "field": "understanding_goal_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "understanding_binding_current",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.understanding_question_requires_current_binding",
+        "measured_fields": [
+          "understanding_binding_current"
+        ]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.timing",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.timing"
+        },
+        {
+          "field": "understanding_goal_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "understanding_timing",
+          "operator": "equals",
+          "expected": "not_examined"
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.exploration_requires_an_explicit_current_opportunity",
+        "measured_fields": [
+          "understanding_timing"
+        ]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.continuations",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.continuations"
+        },
+        {
+          "field": "understanding_goal_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "continuation_review",
+          "operator": "equals",
+          "expected": "not_examined"
+        },
+        {
+          "field": "understanding_timing",
+          "operator": "not_equals",
+          "expected": "initial_exploration"
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.exploration_requires_review_of_current_continuations",
+        "measured_fields": [
+          "continuation_review",
+          "understanding_timing"
+        ]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.preserve_continuation",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.preserve_continuation"
+        },
+        {
+          "field": "continuation_review",
+          "operator": "equals",
+          "expected": "validated_continuation_available"
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.available_validated_continuation_remains_prioritary",
+        "measured_fields": [
+          "continuation_review"
+        ]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.preservation",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.preservation"
+        },
+        {
+          "field": "understanding_goal_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "understanding_preservations_bound",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.experiment_preservation_requires_bound_evidence",
+        "measured_fields": [
+          "understanding_preservations_bound"
+        ]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.stop_contract",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.stop_contract"
+        },
+        {
+          "field": "understanding_goal_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "understanding_stop_contract_bound",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.acquisition_requires_an_observable_stop_contract",
+        "measured_fields": [
+          "understanding_stop_contract_bound"
+        ]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.completed_acquisition",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.completed_acquisition"
+        },
+        {
+          "field": "understanding_goal_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "understanding_stop_observed",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.observed_stop_requires_closure_or_an_explicit_new_question",
+        "measured_fields": [
+          "understanding_stop_observed"
+        ]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.preconditions",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.preconditions"
+        },
+        {
+          "field": "preconditions_current",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.experiment_preconditions_require_current_evidence",
+        "measured_fields": [
+          "preconditions_current"
+        ]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.protected_conditions",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.protected_conditions"
+        },
+        {
+          "field": "protected_conditions_current",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.protected_conditions_require_current_evidence",
+        "measured_fields": [
+          "protected_conditions_current"
+        ]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.cost_evidence",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.cost_evidence"
+        },
+        {
+          "field": "funding_cost_supported",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.unknown_cost_is_neither_zero_nor_an_unlimited_budget",
+        "measured_fields": [
+          "actual_costs_known",
+          "cost_missing_fields",
+          "cost_declaration_consistent",
+          "prepared_command_cost", "prepared_command_cost_bound",
+          "native_recovery_evidence_present", "native_recovery_evidence_current",
+          "native_recovery_status", "native_recovery_next_evidence_refs",
+          "native_recovery_cost_review_status", "native_recovery_conditional_cost_envelope",
+          "native_recovery_observed_returns", "native_recovery_required_constraint_refs",
+          "native_recovery_missing_refs", "funding_cost_supported", "cost_funding_review"]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.available_budget",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.available_budget"
+        },
+        {
+          "field": "funding_cost_supported",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "funding_cost_fits_budget",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.current_budget_does_not_yet_fund_recovery_inclusive_cost",
+        "measured_fields": [
+          "recovery_inclusive_cost_fits", "recovery_inclusive_cost_exceeds_budget",
+          "recovery_inclusive_budget_ambiguous", "recovery_inclusive_cost",
+          "command_budget_lower", "command_budget_upper", "command_budget_interval_present", "funding_cost_fits_budget", "cost_funding_review"]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.available_budget_proven_shortfall",
+      "all_conditions": [
+        {"field": "alternative_ref", "operator": "equals", "expected": "experiment.obligation.available_budget"},
+        {"field": "recovery_inclusive_cost_exceeds_budget", "operator": "equals", "expected": true}
+      ],
+      "static_facts": {"reason_ref": "reason.measured_recovery_inclusive_cost_exceeds_available_budget"}
+    },
+    {
+      "id": "projection.experiment_obligation.prepared_command_shortfall",
+      "all_conditions": [
+        {"field": "alternative_ref", "operator": "equals", "expected": "experiment.obligation.available_budget"},
+        {"field": "prepared_command_cost_exceeds_budget", "operator": "equals", "expected": true}
+      ],
+      "static_facts": {
+        "pending": true, "reason_ref": "reason.prepared_commands_already_exceed_the_resource_upper_bound",
+        "measured_fields": ["prepared_command_cost", "prepared_command_cost_bound", "prepared_command_cost_exceeds_budget",
+          "command_budget_lower", "command_budget_upper", "command_budget_interval_present", "actual_costs_known", "cost_missing_fields", "funding_cost_supported", "cost_funding_review"]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.understanding_allowance",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.understanding_allowance"
+        },
+        {
+          "field": "understanding_goal_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "understanding_cost_limit_known",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.understanding_requires_an_explicit_cost_allowance",
+        "measured_fields": [
+          "understanding_cost_limit_known", "native_curiosity_allowance"
+        ]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.understanding_cost",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.understanding_cost"
+        },
+        {
+          "field": "understanding_goal_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "understanding_cost_limit_known",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "funding_cost_supported",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "understanding_funding_cost_fits",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.understanding_cost_exceeds_its_explicit_allowance",
+        "measured_fields": [
+          "understanding_cost_fits", "understanding_funding_cost_fits", "cost_funding_review"]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.destructiveness",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.destructiveness"
+        },
+        {
+          "field": "funding_loss_review_complete",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.unexamined_losses_require_a_recovery_review",
+        "measured_fields": [
+          "destructiveness_known",
+          "irreversible_loss_present", "funding_loss_review_complete", "cost_funding_review"]
+      }
+    },
+    {
+      "id": "projection.experiment_obligation.unanswered_question",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "experiment.obligation.unanswered_question"
+        },
+        {
+          "field": "question_answer_status_known",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "pending": true,
+        "reason_ref": "reason.question_novelty_requires_current_evidence",
+        "measured_fields": [
+          "question_currently_unanswered"
+        ]
+      }
+    }
+  ]
+},
+    {
+      "id": "policy.experiment_frontier_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "one_current_instrumental_or_understanding_question_has_an_explicit_response_domain_and_risk"
+      ],
+      "applicability": [
+        "useful_experiment_or_validated_continuation_frontier"
+      ],
+      "invariants": [
+        "private_answer_is_not_observable_evidence",
+        "operation_and_benefit_remain_distinct",
+        "unknown_models_remain_explicit",
+        "overlapping_response_sets_are_not_disjoint_model_partitions",
+        "possible_information_gain_is_not_guaranteed_discrimination",
+        "unlisted_response_does_not_falsify_an_open_outcome_domain",
+        "understanding_does_not_require_a_fabricated_game_beneficiary",
+        "curiosity_preserves_validated_continuations_and_its_explicit_cost_and_stop_contract",
+        "unknown_cost_loss_or_budget_is_not_zero_or_unlimited",
+        "partial_cost_values_remain_obligations_without_authorizing_an_experiment",
+        "no_reset_is_free",
+        "no_action_release"
+      ],
+      "falsifiers": [
+        "stale_or_unsealed_scope",
+        "indistinguishable_observations",
+        "unbounded_recovery_or_missing_manual_contract"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "experiment.end_cost_limited_trial",
+        "experiment.await_current_scope",
+        "experiment.await_observed_result",
+        "experiment.reuse_current_evidence",
+        "experiment.continue_robust_contribution",
+        "experiment.review_observed_result",
+        "experiment.require_scoped_manual_contract",
+        "experiment.retain_recovery_boundary",
+        "experiment.defer_understanding",
+        "experiment.test_observed_whole_code",
+        "experiment.probe_operation",
+        "experiment.probe_usefulness",
+        "experiment.retain_observable_ambiguity"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.experiment_frontier_c.possible_information",
+          "all_conditions": [
+            {"field": "observable_models_distinguishable", "operator": "equals", "expected": true},
+            {"field": "observable_discrimination_guaranteed_within_models", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "information_expectation": "possible_discrimination_with_ambiguous_outcomes_retained",
+            "information_gain_guaranteed": false,
+            "ambiguous_observation_requires_reconsidering_the_question": true
+          }
+        },
+        {
+          "id": "projection.experiment_frontier_c.guaranteed_within_declared_models",
+          "all_conditions": [
+            {"field": "observable_discrimination_guaranteed_within_models", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "information_expectation": "strict_narrowing_for_each_declared_outcome",
+            "information_gain_guaranteed_only_within_declared_models": true,
+            "unpredicted_response_requires_reopening_models": true
+          }
+        },
+        {
+          "id": "projection.experiment_frontier_c.identical_or_unbound_responses",
+          "all_conditions": [
+            {"field": "observable_models_distinguishable", "operator": "equals", "expected": false},
+            {"field": "question_kind", "operator": "equals", "expected": "MODEL_DISCRIMINATION"}
+          ],
+          "static_facts": {
+            "information_expectation": "no_bound_discriminating_outcome",
+            "requires_different_operation_condition_or_observable": true
+          }
+        },
+        {
+          "id": "projection.experiment_frontier_c.end_cost_limited_trial",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "experiment.end_cost_limited_trial"},
+            {"field": "observed_return_current", "operator": "equals", "expected": true},
+            {"field": "observed_understanding_cost_limit_reached", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {"applicable": true, "disposition_ref": "experiment.end_cost_limited_trial"}
+        },
+        {
+          "id": "projection.experiment_frontier_c.await_observed_result",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "experiment.await_observed_result"},
+            {"field": "understanding_observation_incomplete", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {"applicable": true, "disposition_ref": "experiment.await_observed_result"}
+        },
+        {
+          "id": "projection.experiment_frontier_c.review_observed_result",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "experiment.review_observed_result"},
+            {"field": "observed_return_current", "operator": "equals", "expected": true},
+            {"field": "understanding_observation_complete", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {"applicable": true, "disposition_ref": "experiment.review_observed_result"}
+        },
+        {
+          "id": "projection.experiment_frontier_c.defer_understanding",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "experiment.defer_understanding"},
+            {"field": "understanding_goal_present", "operator": "equals", "expected": true}
+          ],
+          "any_conditions": [
+            {"field": "understanding_binding_current", "operator": "equals", "expected": false},
+            {"field": "understanding_preservations_bound", "operator": "equals", "expected": false},
+            {"field": "understanding_stop_contract_bound", "operator": "equals", "expected": false},
+            {"field": "understanding_timing", "operator": "equals", "expected": "not_examined"},
+            {"field": "understanding_stop_observed", "operator": "equals", "expected": true},
+            {"field": "understanding_funding_cost_fits", "operator": "equals", "expected": false},
+            {"field": "continuation_review", "operator": "equals", "expected": "validated_continuation_available"},
+            {"field": "continuation_review", "operator": "equals", "expected": "continuation_requires_revalidation"},
+            {"field": "question_currently_unanswered", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {"applicable": true, "disposition_ref": "experiment.defer_understanding"}
+        },
+        {
+          "id": "projection.experiment_frontier_c.require_curiosity_timing_review",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "experiment.defer_understanding"},
+            {"field": "understanding_goal_present", "operator": "equals", "expected": true},
+            {"field": "continuation_review", "operator": "equals", "expected": "not_examined"},
+            {"field": "understanding_timing", "operator": "not_equals", "expected": "initial_exploration"}
+          ],
+          "static_facts": {"applicable": true, "disposition_ref": "experiment.defer_understanding"}
+        },
+        {
+          "id": "projection.experiment_frontier_c.0",
+          "all_conditions": [
+            {"field": "observed_return_current", "operator": "equals", "expected": false},
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "experiment.await_current_scope"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "preconditions_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "protected_conditions_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "experiment.await_current_scope"
+          }
+        },
+        {
+          "id": "projection.experiment_frontier_c.1",
+          "all_conditions": [
+            {"field": "observed_return_current", "operator": "equals", "expected": false},
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "experiment.reuse_current_evidence"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "preconditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "protected_conditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_recalled_evidence_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "experiment.reuse_current_evidence"
+          }
+        },
+        {
+          "id": "projection.experiment_frontier_c.2",
+          "all_conditions": [
+            {"field": "observed_return_current", "operator": "equals", "expected": false},
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "experiment.continue_robust_contribution"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "preconditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "protected_conditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "robust_contribution_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "necessary_unknowns_absent",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "experiment.continue_robust_contribution"
+          }
+        },
+        {
+          "id": "projection.experiment_frontier_c.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "experiment.require_scoped_manual_contract"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "preconditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "protected_conditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "manual_contract_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "destructive",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "irreversible_loss_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "experiment.require_scoped_manual_contract"
+          }
+        },
+        {
+          "id": "projection.experiment_frontier_c.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "experiment.retain_recovery_boundary"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "preconditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "protected_conditions_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "funding_cost_supported",
+              "operator": "equals",
+              "expected": false
+            },
+            {"field": "funding_loss_review_complete", "operator": "equals", "expected": false},
+            {
+              "field": "funding_cost_fits_budget",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "experiment.retain_recovery_boundary"
+          }
+        },
+        {
+          "id": "projection.experiment_frontier_c.5",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "experiment.test_observed_whole_code"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "preconditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "protected_conditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "funding_cost_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "funding_cost_fits_budget",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_coverage_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observable_contract_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_assumptions_and_falsifiers_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_code_scope",
+              "operator": "equals",
+              "expected": "COMPOSITION"
+            },
+            {
+              "field": "composition_evidence_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "observed_whole_code_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "experiment.test_observed_whole_code"
+          }
+        },
+        {
+          "id": "projection.experiment_frontier_c.6",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "experiment.probe_operation"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "preconditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "protected_conditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "funding_cost_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "funding_cost_fits_budget",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_coverage_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observable_contract_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_assumptions_and_falsifiers_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "purpose",
+              "operator": "equals",
+              "expected": "MECHANISM"
+            },
+            {
+              "field": "question_currently_unanswered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_code_scope",
+              "operator": "equals",
+              "expected": "WHOLE"
+            },
+            {
+              "field": "observable_models_distinguishable",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "question_kind",
+              "operator": "equals",
+              "expected": "MODEL_DISCRIMINATION"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "experiment.probe_operation"
+          }
+        },
+        {
+          "id": "projection.experiment_frontier_c.7",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "experiment.probe_usefulness"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "preconditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "protected_conditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "funding_cost_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "funding_cost_fits_budget",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_coverage_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observable_contract_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_assumptions_and_falsifiers_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "purpose",
+              "operator": "equals",
+              "expected": "USEFULNESS"
+            },
+            {
+              "field": "question_currently_unanswered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_code_scope",
+              "operator": "equals",
+              "expected": "SUPPORTED_SUB_OPERATION"
+            },
+            {
+              "field": "observable_models_distinguishable",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "question_kind",
+              "operator": "equals",
+              "expected": "MODEL_DISCRIMINATION"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "experiment.probe_usefulness"
+          }
+        },
+        {
+          "id": "projection.experiment_frontier_c.8",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "experiment.retain_observable_ambiguity"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "experiment.retain_observable_ambiguity"
+          }
+        },
+        {
+          "id": "projection.experiment_frontier_c.acquire_open_response",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "experiment.probe_operation"},
+            {"field": "scope_current", "operator": "equals", "expected": true},
+            {"field": "preconditions_current", "operator": "equals", "expected": true},
+            {"field": "protected_conditions_current", "operator": "equals", "expected": true},
+            {"field": "funding_cost_supported", "operator": "equals", "expected": true},
+            {"field": "funding_cost_fits_budget", "operator": "equals", "expected": true},
+            {"field": "open_response_domain_bound", "operator": "equals", "expected": true},
+            {"field": "purpose", "operator": "equals", "expected": "MECHANISM"},
+            {"field": "question_currently_unanswered", "operator": "equals", "expected": true},
+            {"field": "requested_code_scope", "operator": "equals", "expected": "WHOLE"},
+            {"field": "question_kind", "operator": "equals", "expected": "RESPONSE_ACQUISITION"}
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "experiment.probe_operation",
+            "information_expectation": "acquire_an_action_conditioned_response_in_a_declared_open_domain",
+            "causal_model_discrimination_established": false,
+            "predicted_response_invented": false
+          }
+        },
+        {
+          "id": "projection.experiment_frontier_c.6Validation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "experiment.probe_operation"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "preconditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "protected_conditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "funding_cost_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "funding_cost_fits_budget",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_coverage_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observable_contract_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_assumptions_and_falsifiers_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "purpose",
+              "operator": "equals",
+              "expected": "MECHANISM"
+            },
+            {
+              "field": "question_currently_unanswered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_code_scope",
+              "operator": "equals",
+              "expected": "WHOLE"
+            },
+            {
+              "field": "question_kind",
+              "operator": "equals",
+              "expected": "OPERATION_VALIDATION"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "experiment.probe_operation"
+          }
+        },
+        {
+          "id": "projection.experiment_frontier_c.7Validation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "experiment.probe_usefulness"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "preconditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "protected_conditions_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "funding_cost_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "funding_cost_fits_budget",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_coverage_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observable_contract_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_assumptions_and_falsifiers_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "purpose",
+              "operator": "equals",
+              "expected": "USEFULNESS"
+            },
+            {
+              "field": "question_currently_unanswered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_code_scope",
+              "operator": "equals",
+              "expected": "SUPPORTED_SUB_OPERATION"
+            },
+            {
+              "field": "question_kind",
+              "operator": "equals",
+              "expected": "BENEFIT_VALIDATION"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "experiment.probe_usefulness"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.experiment_frontier_c.observed_cost_boundary",
+          "all_conditions": [
+            {"field": "disposition_ref", "operator": "equals", "expected": "experiment.end_cost_limited_trial"}
+          ],
+          "reason_ref": "reason.actual_command_cost_can_end_a_trial_without_answering_its_question"
+        },
+        {
+          "id": "tier.experiment_frontier_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "experiment.await_current_scope"
+            }
+          ],
+          "reason_ref": "reason.goal_linked_observable_question_and_actual_recovery_cost"
+        },
+        {
+          "id": "tier.experiment_frontier_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "experiment.reuse_current_evidence"
+            }
+          ],
+          "reason_ref": "reason.goal_linked_observable_question_and_actual_recovery_cost"
+        },
+        {
+          "id": "tier.experiment_frontier_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "experiment.continue_robust_contribution"
+            }
+          ],
+          "reason_ref": "reason.goal_linked_observable_question_and_actual_recovery_cost"
+        },
+        {
+          "id": "tier.experiment_frontier_c.await_observed_result",
+          "all_conditions": [{"field": "disposition_ref", "operator": "equals", "expected": "experiment.await_observed_result"}],
+          "reason_ref": "reason.actual_observation_is_incomplete_without_eliminating_models"
+        },
+        {
+          "id": "tier.experiment_frontier_c.review_observed_result",
+          "all_conditions": [{"field": "disposition_ref", "operator": "equals", "expected": "experiment.review_observed_result"}],
+          "reason_ref": "reason.returned_observation_changes_the_understanding_question"
+        },
+        {
+          "id": "tier.experiment_frontier_c.3",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "experiment.require_scoped_manual_contract"
+            }
+          ],
+          "reason_ref": "reason.goal_linked_observable_question_and_actual_recovery_cost"
+        },
+        {
+          "id": "tier.experiment_frontier_c.4",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "experiment.retain_recovery_boundary"
+            }
+          ],
+          "reason_ref": "reason.goal_linked_observable_question_and_actual_recovery_cost"
+        },
+        {
+          "id": "tier.experiment_frontier_c.defer_understanding",
+          "all_conditions": [
+            {"field": "disposition_ref", "operator": "equals", "expected": "experiment.defer_understanding"}
+          ],
+          "reason_ref": "reason.understanding_requires_a_current_question_and_must_preserve_validated_continuations"
+        },
+        {
+          "id": "tier.experiment_frontier_c.5",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "experiment.test_observed_whole_code"
+            }
+          ],
+          "reason_ref": "reason.goal_linked_observable_question_and_actual_recovery_cost"
+        },
+        {
+          "id": "tier.experiment_frontier_c.6",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "experiment.probe_operation"
+            }
+          ],
+          "reason_ref": "reason.goal_linked_observable_question_and_actual_recovery_cost"
+        },
+        {
+          "id": "tier.experiment_frontier_c.7",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "experiment.probe_usefulness"
+            }
+          ],
+          "reason_ref": "reason.goal_linked_observable_question_and_actual_recovery_cost"
+        },
+        {
+          "id": "tier.experiment_frontier_c.8",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "experiment.retain_observable_ambiguity"
+            }
+          ],
+          "reason_ref": "reason.goal_linked_observable_question_and_actual_recovery_cost"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.experiment_reference_order_is_not_information_gain",
+      "reason_refs": [
+        "reason.goal_linked_observable_question_and_actual_recovery_cost",
+        "reason.actual_command_cost_can_end_a_trial_without_answering_its_question"
+      ]
+    }
+  ]
+}

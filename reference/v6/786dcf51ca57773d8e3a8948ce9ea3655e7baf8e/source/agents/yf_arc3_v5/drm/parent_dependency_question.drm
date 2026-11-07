@@ -1,0 +1,957 @@
+{
+  "module_id": "parent_dependency_question",
+  "declarations": [
+    {
+      "id": "policy.native_parent_question_return",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": ["the_current_source_child_checkpoint_is_returned_with_all_its_question_alternatives"],
+      "applicability": ["a_native_parent_question_selection_has_returned"],
+      "invariants": [
+        "a_refusal_is_not_an_action_release",
+        "an_unresolved_question_domain_keeps_all_native_alternatives",
+        "one_source_receipt_can_reenter_its_parent_only_once",
+        "unknown_or_foreign_returns_preserve_the_frontier_without_granting_act"
+      ],
+      "falsifiers": ["a_foreign_or_stale_return_reenters_the_parent", "a_question_tie_authorizes_a_primitive"],
+      "selection_eligibility_conditions": [{"field": "applicable", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {
+          "id": "projection.native_parent_question_return.default_preservation",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": true,
+            "context_event_ref": "context_stack.return_native_question",
+            "question_allows_act": false,
+            "parent_return_requires_root_reentry": false,
+            "parent_return_requires_local_question": false,
+            "parent_return_disposition_ref": "return.preserve_parent_frontier"
+          }
+        },
+        {
+          "id": "projection.native_parent_question_return.completed_question",
+          "all_conditions": [
+            {"field": "native_parent_receipt_previously_consumed", "operator": "equals", "expected": false},
+            {"field": "native_parent_prior_root_reentry_completed", "operator": "equals", "expected": false},
+            {"field": "native_question_source_matches", "operator": "equals", "expected": true},
+            {"field": "native_question_status", "operator": "equals", "expected": "completed"},
+            {"field": "native_question_selected_frame_matches", "operator": "equals", "expected": true},
+            {"field": "native_question_selected_scope_matches", "operator": "equals", "expected": true},
+            {"field": "native_question_selected_present", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "parent_return_requires_root_reentry": false,
+            "parent_return_requires_local_question": true,
+            "parent_return_strategy_ref": "strategy.run_discriminating_experiment",
+            "parent_return_disposition_ref": "return.resume_parent_with_declared_question"
+          }
+        },
+        {
+          "id": "projection.native_parent_question_return.unresolved_current_domain",
+          "all_conditions": [
+            {"field": "native_parent_receipt_previously_consumed", "operator": "equals", "expected": false},
+            {"field": "native_parent_prior_root_reentry_completed", "operator": "equals", "expected": false},
+            {"field": "native_question_source_matches", "operator": "equals", "expected": true},
+            {"field": "native_question_status", "operator": "equals", "expected": "blocked"},
+            {"field": "native_question_failure_cause_kind", "operator": "equals", "expected": "operator_result"},
+            {"field": "native_question_failure_operator_ref", "operator": "equals", "expected": "SELECT"},
+            {"field": "native_question_parent_ref_count", "operator": "equals", "expected": 1},
+            {"field": "native_question_domain_count", "operator": "greater_than", "expected": 0},
+            {"field": "native_question_current_parent_match_count", "operator": "equals_reference_field", "reference_field": "native_question_domain_count"}
+          ],
+          "static_facts": {
+            "parent_return_requires_root_reentry": true,
+            "parent_return_disposition_ref": "return.reenter_parent_with_unresolved_question_domain",
+            "parent_question_choice_unresolved": true
+          }
+        },
+        {
+          "id": "projection.native_parent_question_return.qualify_unreceived_strategy_inputs",
+          "all_conditions": [
+            {"field": "received_strategy_evidence_present", "operator": "equals", "expected": false},
+            {"field": "native_parent_receipt_previously_consumed", "operator": "equals", "expected": false},
+            {"field": "native_parent_prior_root_reentry_completed", "operator": "equals", "expected": false},
+            {"field": "native_question_source_matches", "operator": "equals", "expected": true},
+            {"field": "native_question_status", "operator": "equals", "expected": "completed"},
+            {"field": "native_question_selected_frame_matches", "operator": "equals", "expected": true},
+            {"field": "native_question_selected_scope_matches", "operator": "equals", "expected": true},
+            {"field": "native_question_selected_present", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "parent_return_requires_root_reentry": true,
+            "parent_return_disposition_ref": "return.reenter_parent_to_qualify_unreceived_strategy_inputs"
+          }
+        },
+        {
+          "id": "projection.native_parent_question_return.qualify_unreceived_inputs_after_domain_absence",
+          "all_conditions": [
+            {"field": "received_strategy_evidence_present", "operator": "equals", "expected": false},
+            {"field": "native_parent_receipt_previously_consumed", "operator": "equals", "expected": false},
+            {"field": "native_parent_prior_root_reentry_completed", "operator": "equals", "expected": false},
+            {"field": "native_question_source_matches", "operator": "equals", "expected": true},
+            {"field": "native_question_status", "operator": "equals", "expected": "completed"},
+            {"field": "native_question_outcome_ref", "operator": "equals", "expected": "question_frontier_contains_no_current_question"},
+            {"field": "native_question_domain_proves_absence", "operator": "equals", "expected": true},
+            {"field": "native_question_parent_ref_count", "operator": "equals", "expected": 1},
+            {"field": "native_question_domain_count", "operator": "greater_than", "expected": 0},
+            {"field": "native_question_current_parent_match_count", "operator": "equals_reference_field", "reference_field": "native_question_domain_count"}
+          ],
+          "static_facts": {
+            "parent_return_requires_root_reentry": true,
+            "parent_return_disposition_ref": "return.reenter_parent_to_qualify_unreceived_strategy_inputs"
+          }
+        },
+        {
+          "id": "projection.native_parent_question_return.unresolved_measurement_publications",
+          "all_conditions": [
+            {"field": "native_question_source_matches", "operator": "equals", "expected": true},
+            {"field": "parent_publication_requires_rebinding", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "parent_return_requires_root_reentry": false,
+            "parent_return_requires_local_question": false,
+            "parent_return_disposition_ref": "return.preserve_parent_until_measurement_publications_are_rebound"
+          }
+        },
+        {
+          "id": "projection.native_parent_question_return.exhausted_composition",
+          "all_conditions": [
+            {"field": "native_parent_reentry_budget_qualified", "operator": "equals", "expected": true},
+            {"field": "native_parent_reentry_remaining_occurrences", "operator": "equals", "expected": 0}
+          ],
+          "static_facts": {
+            "parent_return_requires_root_reentry": false,
+            "parent_return_requires_local_question": false,
+            "parent_return_disposition_ref": "return.preserve_parent_at_exhausted_composition_bound"
+          }
+        },
+        {
+          "id": "projection.native_parent_question_return.unqualified_composition",
+          "all_conditions": [],
+          "any_conditions": [
+            {"field": "native_parent_reentry_budget_qualified", "operator": "is_absent"},
+            {"field": "native_parent_reentry_budget_qualified", "operator": "not_equals", "expected": true}
+          ],
+          "static_facts": {
+            "parent_return_requires_root_reentry": false,
+            "parent_return_requires_local_question": false,
+            "parent_return_disposition_ref": "return.preserve_parent_until_composition_bound_is_qualified"
+          }
+        }
+      ],
+      "reason_refs": ["reason.native_refusal_returns_to_its_parent_without_selecting_a_question_or_action", "reason.parent_reentry_preserves_declared_composition_bounds"]
+    },
+    {
+      "id": "policy.parent_dependency_revalidation_question",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "a_native_source_child_return_carries_parent_revalidation_facts"
+      ],
+      "applicability": [
+        "root_received_parent_scoped_revalidation_request"
+      ],
+      "invariants": [
+        "question_keeps_the_dispatched_parent_and_declared_dependency_edges",
+        "expected_signatures_are_not_observed_answers",
+        "a_missing_condition_stays_unknown",
+        "question_selection_never_releases_act",
+        "a_copied_parent_ref_is_not_probe_contribution",
+        "only_source_declared_equal_causal_domains_coalesce_and_all_native_origins_remain_explicit"
+      ],
+      "falsifiers": [
+        "receipt_parent_differs_from_requested_source_root",
+        "probe_has_no_declared_answer_to_condition_to_parent_delta_link"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "parent_question_present",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.parent_question.default",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": false,
+            "parent_question_present": false,
+            "question_allows_act": false,
+            "question_condition_known": false,
+            "question_influence_revalidation_present": false
+          }
+        },
+        {
+          "id": "projection.parent_question.no_receipt",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "question.no_parent_revalidation_receipt"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_question_present": null,
+            "parent_question_missing_requirement_ref": "requirement.current_parent_revalidation_receipt",
+            "question_allows_act": false,
+            "question_condition_known": false
+          }
+        },
+        {
+          "id": "projection.parent_question.qualified_no_engaged_parent",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "question.no_parent_revalidation_receipt"},
+            {"field": "parent_context_qualification_ref", "operator": "equals", "expected": "parent_lineage.absent"},
+            {"field": "parent_context_scope_matches", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_question_present": false,
+            "parent_question_missing_requirement_ref": null,
+            "question_allows_act": false,
+            "question_condition_known": false
+          }
+        },
+        {
+          "id": "projection.parent_question.native_parent_request",
+          "all_conditions": [
+            {
+              "field": "parent_workflow_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "receipt_ref_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "receipt_source_hash",
+              "operator": "is_present"
+            },
+            {
+              "field": "source_qualification_origin_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_question_present": true,
+            "question_allows_act": false,
+            "question_condition_known": false,
+            "question_epistemic_status": "missing_condition_unknown",
+            "instrumental_node_kind_ref": "mechanism_discrimination",
+            "reason_ref": "reason.received_parent_rejection_requires_dependency_condition_question",
+            "static_knowledge_graph_ref": "knowledge.graph.arc3.generic",
+            "guiding_principle_ref": "principle.parent_dependency_question_preserves_root",
+            "question_falsifier_ref": "falsifier.probe_does_not_answer_parent_dependency_condition"
+          },
+          "templated_facts": {
+            "question_ref": "question.parent_dependency_revalidation::{parent_goal_ref}::{causal_domain_ref}",
+            "question_goal_ref": "goal.parent_dependency_revalidation::{parent_goal_ref}::{causal_domain_ref}"
+          }
+        },
+        {
+          "id": "projection.parent_question.declared_named_condition",
+          "all_conditions": [
+            {
+              "field": "parent_workflow_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "dependency_linked_to_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "condition_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "source_declaration_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "source_qualification_origin_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "question_condition_known": true,
+            "question_epistemic_status": "declared_required_condition_has_no_observed_response",
+            "question_allows_act": false
+          }
+        },
+        {
+          "id": "projection.parent_question.exclude_question_as_dependency",
+          "all_conditions": [
+            {
+              "field": "dependency_is_question",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": false
+          }
+        },
+        {
+          "id": "projection.parent_question.exclude_foreign_dependency",
+          "all_conditions": [
+            {
+              "field": "dependency_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "dependency_linked_to_parent",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": false
+          }
+        },
+        {
+          "id": "projection.parent_question.exclude_foreign_declaration_terminal",
+          "all_conditions": [
+            {"field": "dependency_goal_ref", "operator": "is_present"},
+            {"field": "declaration_terminal_matches_parent", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {"applicable": false}
+        },
+        {
+          "id": "projection.parent_question.missing_parent_dependency_declaration",
+          "all_conditions": [
+            {
+              "field": "parent_workflow_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_qualification_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_goal_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "receipt_ref_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "receipt_source_hash",
+              "operator": "is_present"
+            },
+            {
+              "field": "dependency_goal_ref",
+              "operator": "is_absent"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_question_present": false,
+            "question_allows_act": false,
+            "question_condition_known": false,
+            "question_epistemic_status": "declared_parent_dependency_unknown",
+            "missing_fact_refs": [
+              "declared_dependency_parent_edge",
+              "parent_dependency_condition_ref"
+            ],
+            "reason_ref": "reason.parent_receipt_does_not_supply_a_declared_parent_dependency"
+          }
+        },
+        {
+          "id": "projection.parent_question.exact_source_influence_condition",
+          "all_conditions": [
+            {
+              "field": "parent_workflow_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_qualification_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "dependency_linked_to_parent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_declaration_ref",
+              "operator": "is_present"
+            },
+            {
+              "field": "received_influence_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "received_influence_requires_revalidation",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "received_influence_condition_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "parent_question_present": true,
+            "question_condition_known": false,
+            "question_allows_act": false,
+            "question_epistemic_status": "source_step_and_path_condition_has_no_observed_answer",
+            "question_condition_truth": "unknown",
+            "question_influence_revalidation_present": true
+          }
+        },
+        {
+          "id": "projection.parent_question.preserve_positive_parent_qualification",
+          "all_conditions": [
+            {"field": "source_qualification_parent_continuity_allows_candidate", "operator": "equals", "expected": true},
+            {"field": "source_qualification_parent_continuity_requires_revalidation", "operator": "equals", "expected": false},
+            {"field": "received_influence_present", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_question_present": false,
+            "question_allows_act": false,
+            "reason_ref": "reason.failed_child_selection_does_not_reverse_positive_parent_qualification"
+          }
+        },
+        {
+          "id": "projection.parent_question.reject_foreign_candidate_attribution",
+          "all_conditions": [
+            {"field": "source_qualification_candidate_intent_ref", "operator": "is_present"},
+            {"field": "source_qualification_candidate_dependency_chain_contains_parent", "operator": "equals", "expected": false},
+            {"field": "source_qualification_candidate_ancestry_contains_parent", "operator": "equals", "expected": false},
+            {"field": "source_qualification_candidate_terminal_equals_parent", "operator": "equals", "expected": false},
+            {"field": "source_qualification_candidate_goal_equals_parent", "operator": "equals", "expected": false},
+            {"field": "source_qualification_candidate_is_parent_declared_successor", "operator": "equals", "expected": false},
+            {"field": "received_influence_present", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_question_present": false,
+            "question_allows_act": false,
+            "reason_ref": "reason.foreign_candidate_rejection_does_not_falsify_engaged_dependency"
+          }
+        },
+        {
+          "id": "projection.parent_question.reject_unattested_influence",
+          "all_conditions": [
+            {
+              "field": "received_influence_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "received_influence_origin_matches",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": false,
+            "parent_question_present": false,
+            "question_allows_act": false
+          }
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "source_rejected_subgoal_match_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.parent_question.revalidate_source_rejected_leaf",
+          "reason_ref": "reason.source_rejected_leaf_names_the_current_influence_dependency"
+        },
+        {
+          "field": "prior_subgoal_match_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.parent_question.revalidate_engaged_leaf_before_its_container",
+          "reason_ref": "reason.dispatched_instrumental_leaf_is_current_parent_dependency"
+        },
+        {
+          "field": "prior_dependency_match_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.parent_question.prior_dependency_match_count",
+          "reason_ref": "reason.parent_question.prior_dependency_match_count"
+        },
+        {
+          "field": "declaration_exact_parent_terminal_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.parent_question.current_parent_scope_before_family_scope",
+          "reason_ref": "reason.current_parent_declaration_precedes_generic_family_declaration"
+        },
+        {
+          "field": "dependency_link_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.parent_question.dependency_link_count",
+          "reason_ref": "reason.parent_question.dependency_link_count"
+        },
+        {
+          "field": "receipt_frame_match_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.parent_question.receipt_frame_match_count",
+          "reason_ref": "reason.parent_question.receipt_frame_match_count"
+        },
+        {
+          "field": "condition_ref_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.parent_question.condition_ref_count",
+          "reason_ref": "reason.parent_question.condition_ref_count"
+        },
+        {
+          "field": "receipt_revision",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.parent_question.receipt_revision",
+          "reason_ref": "reason.parent_question.receipt_revision"
+        },
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize",
+          "criterion_ref": "criterion.parent_question.alternative_ref",
+          "reason_ref": "reason.parent_question.alternative_ref"
+        }
+      ],
+      "reason_refs": [
+        "reason.received_parent_rejection_requires_dependency_condition_question"
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.parent_dependency_question.received_scope",
+          "all_conditions": [],
+          "reason_ref": "reason.question_current_dependency_precedes_unknown_root_condition"
+        }
+      ]
+    },
+    {
+      "id": "rule.parent_dependency_revalidation_question_meaning",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "question_ref",
+        "parent_goal_ref",
+        "receipt_refs",
+        "scene_support_claim_refs"
+      ],
+      "applicability": [
+        "received_parent_request_requires_condition_revalidation"
+      ],
+      "invariants": [
+        "supported_question_existence_is_not_supported_physical_condition",
+        "provenance_and_predicted_effects_remain_separate_from_actual_answers",
+        "question_does_not_replace_terminal_parent"
+      ],
+      "falsifiers": [
+        "received_source_parent_identity_changed",
+        "question_has_no_receipt_or_parent_provenance"
+      ],
+      "reason_refs": [
+        "reason.parent_dependency_condition_remains_open"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "request.{question_ref}",
+          "kind": "event",
+          "label": "parent dependency condition revalidation question",
+          "required_fields": [
+            "question_ref",
+            "parent_goal_ref",
+            "receipt_refs"
+          ],
+          "static_attributes": {
+            "event_kind": "parent_dependency_revalidation_question",
+            "question_allows_act": false,
+            "projection_contract": "projection.parent_dependency_revalidation_question.v1"
+          },
+          "attribute_bindings": {
+            "question_ref": "question_ref",
+            "question_goal_ref": "question_goal_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "dependency_goal_ref": "dependency_goal_ref",
+            "condition_ref": "condition_ref",
+            "parent_preservation_condition_ref": "parent_preservation_condition_ref",
+            "observation_requirement_refs": "observation_requirement_refs",
+            "observation_does_not_prove_parent_invariant": "observation_does_not_prove_parent_invariant",
+            "condition_subject_binding": "condition_subject_binding",
+            "condition_target_candidate_refs": "condition_target_candidate_refs",
+            "condition_target_binding_claim_refs": "condition_target_binding_claim_refs",
+            "condition_subject_source_qualified": "condition_subject_source_qualified",
+            "question_condition_known": "question_condition_known",
+            "question_epistemic_status": "question_epistemic_status",
+            "source_declaration_ref": "source_declaration_ref",
+            "source_declaration_refs": "source_declaration_refs",
+            "source_declaration_facts": "source_declaration_facts",
+            "receipt_ref": "receipt_ref",
+            "receipt_refs": "receipt_refs",
+            "receipt_checkpoint_refs": "receipt_checkpoint_refs",
+            "causal_domain_ref": "causal_domain_ref",
+            "receipt_checkpoint_ref": "receipt_checkpoint_ref",
+            "receipt_source_hash": "receipt_source_hash",
+            "current_frame_ref": "current_frame_ref",
+            "scene_support_claim_refs": "scene_support_claim_refs",
+            "source_provenance_refs": "source_provenance_refs",
+            "parent_falsifier_refs": "parent_falsifier_refs",
+            "dependency_falsifier_refs": "dependency_falsifier_refs",
+            "expected_effect_signature_refs": "expected_effect_signature_refs",
+            "expected_goal_delta_refs": "expected_goal_delta_refs",
+            "answer_to_condition_goal_delta_pairs": "answer_to_condition_goal_delta_pairs",
+            "received_influence_qualification": "received_influence_qualification",
+            "received_influence_origin_refs": "received_influence_origin_refs",
+            "received_influence_checkpoint_ref": "received_influence_checkpoint_ref",
+            "received_influence_class_ref": "received_influence_class_ref",
+            "received_influence_reason_ref": "received_influence_reason_ref",
+            "received_influence_requires_revalidation": "received_influence_requires_revalidation",
+            "question_influence_revalidation_present": "question_influence_revalidation_present",
+            "question_condition_truth": "question_condition_truth",
+            "received_influence_snapshot_digest": "received_influence_snapshot_digest"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.parent_dependency_question.{question_ref}",
+          "predicate": "parent_dependency_revalidation_question_is_open",
+          "family": "control",
+          "argument_patterns": [
+            "{question_ref}",
+            "{parent_goal_ref}"
+          ],
+          "epistemic_status": "supported",
+          "required_fields": [
+            "question_ref",
+            "parent_goal_ref",
+            "receipt_refs"
+          ],
+          "static_attributes": {
+            "projection_contract": "projection.parent_dependency_revalidation_question.v1",
+            "condition_truth": "unknown",
+            "question_allows_act": false
+          },
+          "attribute_bindings": {
+            "question_ref": "question_ref",
+            "question_goal_ref": "question_goal_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "dependency_goal_ref": "dependency_goal_ref",
+            "condition_ref": "condition_ref",
+            "parent_preservation_condition_ref": "parent_preservation_condition_ref",
+            "observation_requirement_refs": "observation_requirement_refs",
+            "observation_does_not_prove_parent_invariant": "observation_does_not_prove_parent_invariant",
+            "condition_subject_binding": "condition_subject_binding",
+            "condition_target_candidate_refs": "condition_target_candidate_refs",
+            "condition_target_binding_claim_refs": "condition_target_binding_claim_refs",
+            "condition_subject_source_qualified": "condition_subject_source_qualified",
+            "question_condition_known": "question_condition_known",
+            "question_epistemic_status": "question_epistemic_status",
+            "source_declaration_ref": "source_declaration_ref",
+            "source_declaration_refs": "source_declaration_refs",
+            "source_declaration_facts": "source_declaration_facts",
+            "receipt_ref": "receipt_ref",
+            "receipt_refs": "receipt_refs",
+            "receipt_checkpoint_refs": "receipt_checkpoint_refs",
+            "causal_domain_ref": "causal_domain_ref",
+            "receipt_checkpoint_ref": "receipt_checkpoint_ref",
+            "receipt_source_hash": "receipt_source_hash",
+            "current_frame_ref": "current_frame_ref",
+            "scene_support_claim_refs": "scene_support_claim_refs",
+            "source_provenance_refs": "source_provenance_refs",
+            "parent_falsifier_refs": "parent_falsifier_refs",
+            "dependency_falsifier_refs": "dependency_falsifier_refs",
+            "expected_effect_signature_refs": "expected_effect_signature_refs",
+            "expected_goal_delta_refs": "expected_goal_delta_refs",
+            "answer_to_condition_goal_delta_pairs": "answer_to_condition_goal_delta_pairs",
+            "received_influence_qualification": "received_influence_qualification",
+            "received_influence_origin_refs": "received_influence_origin_refs",
+            "received_influence_checkpoint_ref": "received_influence_checkpoint_ref",
+            "received_influence_class_ref": "received_influence_class_ref",
+            "received_influence_reason_ref": "received_influence_reason_ref",
+            "received_influence_requires_revalidation": "received_influence_requires_revalidation",
+            "question_influence_revalidation_present": "question_influence_revalidation_present",
+            "question_condition_truth": "question_condition_truth",
+            "received_influence_snapshot_digest": "received_influence_snapshot_digest"
+          }
+        }
+      ]
+    },
+    {
+      "id": "principle.parent_dependency_question_preserves_root",
+      "kind": "principle",
+      "evaluation": "declarative_only",
+      "supported_operators": [],
+      "premises": [
+        "an_engaged_source_parent_has_an_unresolved_declared_dependency"
+      ],
+      "applicability": [
+        "a_source_child_returns_parent_revalidation_request"
+      ],
+      "invariants": [
+        "preserve_parent_and_unfinished_dependency_edges",
+        "name_a_missing_condition_without_asserting_its_truth",
+        "an_unknown_answer_map_never_authorizes_act"
+      ],
+      "falsifiers": [
+        "the_proposed_probe_does_not_change_the_named_dependency_condition"
+      ],
+      "reason_refs": [
+        "reason.parent_dependency_condition_remains_open"
+      ]
+    },
+    {
+      "id": "policy.parent_observed_condition_answer",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": ["parent.observed_condition_answer"],
+      "meaning_template_ref_by_alternative": {"*": "rule.parent_question_answer_lifecycle"},
+      "selection_eligibility_conditions": [{"field": "applicable", "operator": "equals", "expected": true}],
+      "invariants": ["prediction_is_not_observation", "answer_requires_exact_subjects_and_observed_action", "answer_never_grants_act", "condition_truth_does_not_complete_parent_goal"],
+      "configuration": {
+        "observation_contract": {
+          "target_binding_predicate_ref": "goal_target_binding",
+          "target_binding_candidates_field_ref": "candidate_target_refs",
+          "active_disposition_ref": "active", "positive_polarity_ref": "positive",
+          "epistemic_status_refs": ["supported", "established"],
+          "successful_operation_status_ref": "completed",
+          "scope_field_refs": {"game_ref": "game_ref", "level_ref": "level_ref", "session_ref": "session_ref"},
+          "positive_partition_ref": "support_preserved", "negative_partition_ref": "support_removed",
+          "models": [
+            {"condition_ref": "condition.contact.retains_required_support", "predicate_ref": "piercing_observed_model_revision",
+             "target_field_ref": "piece_ref", "receiver_field_ref": "rod_ref", "parent_field_ref": "retained_parent_goal_ref",
+             "class_field_ref": "observation_class_ref", "class_refs": ["observation.entry_and_transport_support_discriminated", "observation.controlled_relative_transport_support_discriminated"],
+             "principle_refs": ["principle.oriented_protrusion_boundary_crossing_is_discriminating"],
+             "pair_field_ref": "support_known_pairs", "evidence_partition_ref": "support_preserved"},
+            {"condition_ref": "condition.withdrawal.preserves_required_support", "predicate_ref": "piercing_observed_model_revision",
+             "target_field_ref": "piece_ref", "receiver_field_ref": "rod_ref", "parent_field_ref": "retained_parent_goal_ref",
+             "class_field_ref": "observation_class_ref", "class_refs": ["observation.controlled_relative_transport_support_discriminated"],
+             "principle_refs": ["principle.geometric_retraction_does_not_undo_observed_dependency"],
+             "pair_field_ref": "support_known_pairs", "evidence_partition_ref": "support_preserved"},
+            {"condition_ref": "condition.withdrawal.preserves_required_support", "predicate_ref": "piercing_observed_model_revision",
+             "target_field_ref": "piece_ref", "receiver_field_ref": "rod_ref", "parent_field_ref": "retained_parent_goal_ref",
+             "class_field_ref": "observation_class_ref", "class_refs": ["observation.withdrawal_release_discriminated"],
+             "principle_refs": ["principle.geometric_retraction_does_not_undo_observed_dependency"],
+             "pair_field_ref": "support_independent_pairs", "evidence_partition_ref": "support_removed"}
+          ]
+        },
+        "information_goal_contract": {"lifecycle_predicate_ref": "goal_lifecycle_status"},
+        "target_binding_contract": {"predicate_ref": "goal_target_binding", "candidate_refs_field": "candidate_target_refs",
+          "active_disposition_ref": "active", "positive_polarity_ref": "positive", "epistemic_status_refs": ["supported", "established"]}
+      },
+      "fact_projections": [
+        {"id": "projection.parent_answer.unknown", "all_conditions": [],
+         "static_facts": {"applicable": true, "answer_truth_ref": "unknown", "answer_consumption_accepted": false, "answer_grants_act": false, "answer_supports_continuation": false, "answer_refutes_continuation": false, "answer_conflicting": false, "answer_information_goal_update_allowed": false, "answer_information_goal_status": "pursuing", "answer_disposition_ref": "answer.current_evidence_incomplete"}},
+        {"id": "projection.parent_answer.exact_information_goal", "all_conditions": [
+          {"field": "question_goal_is_distinct_information_goal", "operator": "equals", "expected": true}],
+         "static_facts": {"answer_information_goal_update_allowed": true}},
+        {"id": "projection.parent_answer.satisfied", "all_conditions": [
+          {"field": "question_origin_count", "operator": "greater_than", "expected": 0},
+          {"field": "question_subject_origin_qualified", "operator": "equals", "expected": true},
+          {"field": "positive_evidence_count", "operator": "greater_than", "expected": 0},
+          {"field": "negative_evidence_count", "operator": "equals", "expected": 0},
+          {"field": "contradictory_evidence_count", "operator": "equals", "expected": 0}],
+         "static_facts": {"answer_truth_ref": "satisfied", "answer_consumption_accepted": true, "answer_supports_continuation": true, "answer_information_goal_status": "locally_satisfied", "answer_disposition_ref": "answer.observed_condition_satisfied"}},
+        {"id": "projection.parent_answer.refuted", "all_conditions": [
+          {"field": "question_origin_count", "operator": "greater_than", "expected": 0},
+          {"field": "question_subject_origin_qualified", "operator": "equals", "expected": true},
+          {"field": "negative_evidence_count", "operator": "greater_than", "expected": 0},
+          {"field": "positive_evidence_count", "operator": "equals", "expected": 0},
+          {"field": "contradictory_evidence_count", "operator": "equals", "expected": 0}],
+         "static_facts": {"answer_truth_ref": "refuted", "answer_consumption_accepted": true, "answer_supports_continuation": false, "answer_refutes_continuation": true, "answer_information_goal_status": "locally_satisfied", "answer_disposition_ref": "answer.observed_condition_refuted"}},
+        {"id": "projection.parent_answer.conflicting_partitions", "all_conditions": [
+          {"field": "positive_evidence_count", "operator": "greater_than", "expected": 0},
+          {"field": "negative_evidence_count", "operator": "greater_than", "expected": 0}],
+         "static_facts": {"answer_truth_ref": "contradictory", "answer_consumption_accepted": false, "answer_supports_continuation": false, "answer_conflicting": true, "answer_information_goal_status": "pursuing", "answer_disposition_ref": "answer.conflicting_current_evidence"}},
+        {"id": "projection.parent_answer.contradicted_claim", "all_conditions": [
+          {"field": "contradictory_evidence_count", "operator": "greater_than", "expected": 0}],
+         "static_facts": {"answer_truth_ref": "contradictory", "answer_consumption_accepted": false, "answer_supports_continuation": false, "answer_conflicting": true, "answer_information_goal_status": "pursuing", "answer_disposition_ref": "answer.conflicting_current_evidence"}}
+      ],
+      "reason_refs": ["reason.consume_observed_condition_without_completing_parent"]
+    },
+    {
+      "id": "rule.parent_question_answer_lifecycle",
+      "kind": "rule", "evaluation": "project_requested_conclusions", "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "invariants": ["answering_information_goal_never_completes_physical_dependency_or_parent", "unknown_or_conflicting_answer_keeps_information_goal_open"],
+      "claim_templates": [{
+        "id_pattern": "claim.question_answer.{consumption_receipt_ref}.{version_slot_ref}",
+        "predicate": "goal_lifecycle_status", "family": "control", "epistemic_status": "supported",
+        "argument_patterns": ["{question_goal_ref}", "{answer_information_goal_status}"],
+        "required_fields": ["question_goal_ref", "consumption_receipt_ref", "version_slot_ref"],
+        "all_conditions": [{"field": "answer_information_goal_update_allowed", "operator": "equals", "expected": true}],
+        "iteration": {"source_field": "question_lifecycle_targets", "max_items": 4096,
+          "item_bindings": {"prior_status_ref": "prior_status_ref", "version_slot_ref": "version_slot_ref", "status_history_refs": "status_history_refs"}},
+        "attribute_bindings": {
+          "lifecycle_status": "answer_information_goal_status", "question_ref": "question_ref",
+          "condition_ref": "condition_ref", "condition_truth": "answer_truth_ref",
+          "parent_goal_ref": "parent_goal_ref", "dependency_goal_ref": "dependency_goal_ref",
+          "consumption_receipt_ref": "consumption_receipt_ref", "question_product_ref": "question_product_ref",
+          "superseded_lifecycle_claim_ref": "prior_status_ref", "status_history_refs": "status_history_refs"
+        }
+      }],
+      "reason_refs": ["reason.return_answered_information_child_without_assuming_parent_success"]
+    },
+    {
+      "id": "policy.declared_parent_dependency_probe_models",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "source_grounded_contact_or_withdrawal_probe_names_the_parent_required_condition"
+      ],
+      "applicability": [
+        "predicted_responses_discriminate_a_current_parent_dependency_disposition"
+      ],
+      "invariants": [
+        "response_tables_are_hypotheses_not_observed_results",
+        "condition_truth_may_remain_unknown_before_the_trial",
+        "model_ref_alone_does_not_bind_an_unrelated_probe",
+        "scope_and_named_condition_must_match_the_open_question"
+      ],
+      "declared_alternative_refs": [
+        "models.parent_dependency"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.parent_dependency.declared_prediction_models",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": true,
+            "probe_models": [
+              {
+                "model_ref": "model.parent_dependency.contact_retention",
+                "target_refs_field": "contact_target_refs",
+                "target_complete_field": "contact_binding_complete",
+                "source_declaration_ref": "policy.declared_parent_dependency_probe_models",
+                "condition_ref": "condition.contact.retains_required_support",
+                "selection_principle_ref": "principle.oriented_protrusion_boundary_crossing_is_discriminating",
+                "source_selection_policy_ref": "policy.declared_initial_interaction_exploration",
+                "responses": [
+                  {
+                    "answer_ref": "outcome.contact.free_push",
+                    "observable_signature_refs": [
+                      "outcome.contact.free_push"
+                    ],
+                    "hypothesis_refs": [
+                      "hypothesis.contact.push_without_attachment"
+                    ],
+                    "condition_disposition_ref": "condition.unsatisfied",
+                    "parent_plan_disposition_ref": "plan.continue_unfinished_acquisition",
+                    "falsifier_refs": [
+                      "falsifier.response_does_not_match_declared_partition"
+                    ]
+                  },
+                  {
+                    "answer_ref": "outcome.contact.penetration_with_retained_support",
+                    "observable_signature_refs": [
+                      "outcome.contact.penetration_with_retained_support"
+                    ],
+                    "hypothesis_refs": [
+                      "hypothesis.contact.arrest_permits_penetration"
+                    ],
+                    "condition_disposition_ref": "condition.satisfied",
+                    "parent_plan_disposition_ref": "plan.reconcile_acquisition_before_next_dependency",
+                    "falsifier_refs": [
+                      "falsifier.response_does_not_match_declared_partition"
+                    ]
+                  }
+                ]
+              },
+              {
+                "model_ref": "model.parent_dependency.withdrawal_retention",
+                "target_refs_field": "support_target_refs",
+                "target_complete_field": "support_binding_complete",
+                "source_declaration_ref": "policy.declared_parent_dependency_probe_models",
+                "condition_ref": "condition.withdrawal.preserves_required_support",
+                "selection_principle_ref": "principle.geometric_retraction_does_not_undo_observed_dependency",
+                "source_selection_policy_ref": "policy.declared_initial_interaction_exploration",
+                "responses": [
+                  {
+                    "answer_ref": "outcome.withdrawal.unblocked_carry",
+                    "observable_signature_refs": [
+                      "outcome.withdrawal.unblocked_carry"
+                    ],
+                    "hypothesis_refs": [
+                      "hypothesis.withdrawal.unblocked_piece_is_carried"
+                    ],
+                    "condition_disposition_ref": "condition.satisfied",
+                    "parent_plan_disposition_ref": "plan.continue_clearance_with_retained_dependency",
+                    "falsifier_refs": [
+                      "falsifier.response_does_not_match_declared_partition"
+                    ]
+                  },
+                  {
+                    "answer_ref": "outcome.withdrawal.stopped_piece_support_release",
+                    "observable_signature_refs": [
+                      "outcome.withdrawal.stopped_piece_support_release"
+                    ],
+                    "hypothesis_refs": [
+                      "hypothesis.withdrawal.stopped_piece_releases_support"
+                    ],
+                    "condition_disposition_ref": "condition.unsatisfied",
+                    "parent_plan_disposition_ref": "plan.revalidate_acquisition_before_continuing_clearance",
+                    "falsifier_refs": [
+                      "falsifier.response_does_not_match_declared_partition"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.predicted_responses_change_parent_dependency_dispositions"
+      ]
+    }
+  ]
+}

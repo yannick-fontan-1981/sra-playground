@@ -1,0 +1,1120 @@
+{
+  "module_id": "device_evidence_c",
+  "declarations": [
+    {
+      "id": "policy.device_evidence_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "device.evidence.code_read",
+        "device.evidence.edit_difference",
+        "device.evidence.demo_fit",
+        "device.evidence.instruction_successor",
+        "device.evidence.program_successor",
+        "device.evidence.checkpoint_transition",
+        "device.evidence.stage_domains",
+        "device.evidence.typed_match"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.device.evidence.code_read",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "device.evidence.code_read"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.finite_instruction_device.code_read"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.device.evidence.edit_difference",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "device.evidence.edit_difference"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.finite_instruction_device.edit_difference"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.device.evidence.demo_fit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "device.evidence.demo_fit"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.finite_instruction_device.demo_fit"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.device.evidence.instruction_successor",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "device.evidence.instruction_successor"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.finite_instruction_device.instruction_successor"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.device.evidence.program_successor",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "device.evidence.program_successor"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.finite_instruction_device.program_successor"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.device.evidence.checkpoint_transition",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "device.evidence.checkpoint_transition"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.finite_instruction_device.checkpoint_transition"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.device.evidence.stage_domains",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "device.evidence.stage_domains"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.finite_instruction_device.stage_domains"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.device.evidence.typed_match",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "device.evidence.typed_match"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.finite_instruction_device.typed_match"
+            },
+            {
+              "field": "evidence_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "device.evidence.code_read": "rule.device_evidence_c.code_read",
+        "device.evidence.edit_difference": "rule.device_evidence_c.edit_difference",
+        "device.evidence.demo_fit": "rule.device_evidence_c.demo_fit",
+        "device.evidence.instruction_successor": "rule.device_evidence_c.instruction_successor",
+        "device.evidence.program_successor": "rule.device_evidence_c.program_successor",
+        "device.evidence.checkpoint_transition": "rule.device_evidence_c.checkpoint_transition",
+        "device.evidence.stage_domains": "rule.device_evidence_c.stage_domains",
+        "device.evidence.typed_match": "rule.device_evidence_c.typed_match"
+      },
+      "premises": [
+        "complete_current_K28_receipt",
+        "same_parent_why_and_native_scope"
+      ],
+      "invariants": [
+        "retain_all_operator_alternatives",
+        "whole_word_semantics",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_receipt",
+        "partial_domain",
+        "demo_mistaken_for_real_progress"
+      ],
+      "reason_refs": [
+        "reason.device_calculation_updates_the_means_of_the_preserved_goal"
+      ]
+    },
+    {
+      "id": "rule.device_evidence_c.code_read",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.device.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain acquired whole trait words and their interface geometry",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          },
+          "static_attributes": {
+            "contribution_kind": "WHOLE_WORD_MEASUREMENT",
+            "status": "proposed",
+            "no_action_authority": true,
+            "staged_cost_measured": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.device.evidence.{projection_ref}",
+          "predicate": "proposes_device_code_read_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K28_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "principal_goal_preserved",
+        "calculation_not_actual_execution",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_native_receipt",
+        "operator_promoted_without_evidence",
+        "unknown_cost_assumed_zero"
+      ],
+      "reason_refs": [
+        "reason.device_code_read_contribution_retains_its_causal_premises"
+      ]
+    },
+    {
+      "id": "rule.device_evidence_c.edit_difference",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.device.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain exact edits in both directions under the current interface",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          },
+          "static_attributes": {
+            "contribution_kind": "DIFFERENTIAL_EDIT_REQUIREMENT",
+            "status": "proposed",
+            "no_action_authority": true,
+            "staged_cost_measured": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.device.evidence.{projection_ref}",
+          "predicate": "proposes_device_edit_difference_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K28_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "principal_goal_preserved",
+        "calculation_not_actual_execution",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_native_receipt",
+        "operator_promoted_without_evidence",
+        "unknown_cost_assumed_zero"
+      ],
+      "reason_refs": [
+        "reason.device_edit_difference_contribution_retains_its_causal_premises"
+      ]
+    },
+    {
+      "id": "rule.device_evidence_c.demo_fit",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.device.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain whole operator alternatives compatible with the isolated example",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          },
+          "static_attributes": {
+            "contribution_kind": "CONDITIONAL_WHOLE_OPERATOR_FIT",
+            "status": "proposed",
+            "no_action_authority": true,
+            "staged_cost_measured": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.device.evidence.{projection_ref}",
+          "predicate": "proposes_device_demo_fit_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K28_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "principal_goal_preserved",
+        "calculation_not_actual_execution",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_native_receipt",
+        "operator_promoted_without_evidence",
+        "unknown_cost_assumed_zero"
+      ],
+      "reason_refs": [
+        "reason.device_demo_fit_contribution_retains_its_causal_premises"
+      ]
+    },
+    {
+      "id": "rule.device_evidence_c.instruction_successor",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.device.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain the conditional internal instruction and ordered phases",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          },
+          "static_attributes": {
+            "contribution_kind": "CONDITIONAL_INTERNAL_EFFECT",
+            "status": "proposed",
+            "no_action_authority": true,
+            "staged_cost_measured": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.device.evidence.{projection_ref}",
+          "predicate": "proposes_device_instruction_successor_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K28_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "principal_goal_preserved",
+        "calculation_not_actual_execution",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_native_receipt",
+        "operator_promoted_without_evidence",
+        "unknown_cost_assumed_zero"
+      ],
+      "reason_refs": [
+        "reason.device_instruction_successor_contribution_retains_its_causal_premises"
+      ]
+    },
+    {
+      "id": "rule.device_evidence_c.program_successor",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.device.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain the whole program including its neutral suffix and phase reactions",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          },
+          "static_attributes": {
+            "contribution_kind": "CONDITIONAL_FULL_PROGRAM_EFFECT",
+            "status": "proposed",
+            "no_action_authority": true,
+            "staged_cost_measured": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.device.evidence.{projection_ref}",
+          "predicate": "proposes_device_program_successor_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K28_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "principal_goal_preserved",
+        "calculation_not_actual_execution",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_native_receipt",
+        "operator_promoted_without_evidence",
+        "unknown_cost_assumed_zero"
+      ],
+      "reason_refs": [
+        "reason.device_program_successor_contribution_retains_its_causal_premises"
+      ]
+    },
+    {
+      "id": "rule.device_evidence_c.checkpoint_transition",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.device.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Distinguish saved properties, restored properties and retained edited code",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          },
+          "static_attributes": {
+            "contribution_kind": "CONDITIONAL_CHECKPOINT_EFFECT",
+            "status": "proposed",
+            "no_action_authority": true,
+            "staged_cost_measured": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.device.evidence.{projection_ref}",
+          "predicate": "proposes_device_checkpoint_transition_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K28_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "principal_goal_preserved",
+        "calculation_not_actual_execution",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_native_receipt",
+        "operator_promoted_without_evidence",
+        "unknown_cost_assumed_zero"
+      ],
+      "reason_refs": [
+        "reason.device_checkpoint_transition_contribution_retains_its_causal_premises"
+      ]
+    },
+    {
+      "id": "rule.device_evidence_c.stage_domains",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.device.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Retain preparatory stages and their required next start without inventing a cost",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          },
+          "static_attributes": {
+            "contribution_kind": "CONDITIONAL_STAGE_DOMAIN",
+            "status": "proposed",
+            "no_action_authority": true,
+            "staged_cost_measured": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.device.evidence.{projection_ref}",
+          "predicate": "proposes_device_stage_domains_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K28_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "principal_goal_preserved",
+        "calculation_not_actual_execution",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_native_receipt",
+        "operator_promoted_without_evidence",
+        "unknown_cost_assumed_zero"
+      ],
+      "reason_refs": [
+        "reason.device_stage_domains_contribution_retains_its_causal_premises"
+      ]
+    },
+    {
+      "id": "rule.device_evidence_c.typed_match",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "question.device.evidence.{projection_ref}",
+          "kind": "goal",
+          "label": "Compare all requested target properties without inferring official acceptance",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          },
+          "static_attributes": {
+            "contribution_kind": "TYPED_TARGET_COMPARISON",
+            "status": "proposed",
+            "no_action_authority": true,
+            "staged_cost_measured": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.device.evidence.{projection_ref}",
+          "predicate": "proposes_device_typed_match_contribution",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "question.device.evidence.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "payload"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "operation_ref": "operation_ref",
+            "native_scope": "native_scope",
+            "native_result_digest": "native_result_digest",
+            "payload": "payload",
+            "frozen_why": "frozen_why",
+            "real_region_ref": "real_region_ref",
+            "demo_region_ref": "demo_region_ref",
+            "whole_operator_alternatives": "whole_operator_alternatives",
+            "whole_program": "whole_program",
+            "typed_target": "typed_target",
+            "phase_order": "phase_order",
+            "checkpoint_contract": "checkpoint_contract",
+            "preservation_refs": "preservation_refs",
+            "principal_goal_changed": "principal_goal_changed",
+            "demo_is_real_progress": "demo_is_real_progress",
+            "operator_confirmed": "operator_confirmed",
+            "official_success_inferred": "official_success_inferred",
+            "action_authority": "action_authority"
+          }
+        }
+      ],
+      "premises": [
+        "actual_complete_K28_result",
+        "exact_current_parent_scope"
+      ],
+      "invariants": [
+        "principal_goal_preserved",
+        "calculation_not_actual_execution",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "stale_native_receipt",
+        "operator_promoted_without_evidence",
+        "unknown_cost_assumed_zero"
+      ],
+      "reason_refs": [
+        "reason.device_typed_match_contribution_retains_its_causal_premises"
+      ]
+    }
+  ]
+}

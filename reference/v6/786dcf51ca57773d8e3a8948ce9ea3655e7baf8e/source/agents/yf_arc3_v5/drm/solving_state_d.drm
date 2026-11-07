@@ -1,0 +1,114 @@
+{
+  "module_id": "solving_state_d",
+  "declarations": [
+    {
+      "id": "policy.solving_state_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_sealed_complete_native_dependency_inventory"
+      ],
+      "applicability": [
+        "source_requested_full_native_state_closure"
+      ],
+      "invariants": [
+        "no_act",
+        "no_creator_defaults",
+        "observed_conditional_missing_separate",
+        "no_second_world_state"
+      ],
+      "falsifiers": [
+        "missing_leaf",
+        "overlapping_provenance",
+        "recalled_state_as_observation"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "solving_state.current",
+        "solving_state.need_evidence"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.solving_state.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_state.current"
+            },
+            {
+              "field": "state_closure_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.solving_state.need",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_state.need_evidence"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.solving_state.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_state.current"
+            }
+          ],
+          "reason_ref": "reason.full_current_native_dependency_provenance_preserved"
+        },
+        {
+          "id": "tier.solving_state.need",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "solving_state.need_evidence"
+            }
+          ],
+          "reason_ref": "reason.native_state_closure_requires_exact_current_evidence"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.solving_state_actual_use_unverified",
+      "reason_refs": [
+        "reason.full_current_native_dependency_provenance_preserved",
+        "reason.native_state_closure_requires_exact_current_evidence"
+      ]
+    }
+  ]
+}

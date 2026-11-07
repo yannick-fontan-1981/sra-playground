@@ -1,0 +1,27 @@
+{
+  "module_id":"device_stage_cost_c",
+  "declarations":[{
+    "id":"policy.device_stage_cost_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+    "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1",
+    "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs":["device_cost.dp","device_cost.csp","device_cost.missing"],
+    "selection_required_fact_fields":["alternative_ref"],
+    "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+    "fact_projections":[
+      {"id":"projection.device_cost.dp","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"device_cost.dp"},
+        {"field":"stage_cost_bound","operator":"equals","expected":true},
+        {"field":"requested_cost_algorithm","operator":"equals","expected":"DP"}],"static_facts":{"eligible":true}},
+      {"id":"projection.device_cost.csp","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"device_cost.csp"},
+        {"field":"stage_cost_bound","operator":"equals","expected":true},
+        {"field":"requested_cost_algorithm","operator":"equals","expected":"CSP"}],"static_facts":{"eligible":true}},
+      {"id":"projection.device_cost.missing","all_conditions":[
+        {"field":"alternative_ref","operator":"equals","expected":"device_cost.missing"},
+        {"field":"stage_cost_bound","operator":"equals","expected":false}],"static_facts":{"eligible":true}}],
+    "premises":["current_supported_complete_plan_and_domain","exact_native_edit_difference","all_primitive_cost_components_bound"],
+    "invariants":["count_every_primitive_in_each_phase","unknown_cost_is_not_zero","retain_at_most_three_K09_assignments","no_ACT"],
+    "falsifiers":["omitted_turn_off_edit","unknown_discovery_or_launch_phase","missing_alternative_cost","next_checkpoint_start_only_assumed_feasible"],
+    "reason_refs":["reason.complete_stage_primitive_costs_permit_current_K09_comparison"]
+  }]
+}

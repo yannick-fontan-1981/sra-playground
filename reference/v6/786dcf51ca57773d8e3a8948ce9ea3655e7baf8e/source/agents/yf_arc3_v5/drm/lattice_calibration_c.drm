@@ -1,0 +1,286 @@
+{
+  "module_id": "lattice_calibration_c",
+  "declarations": [
+    {
+      "id": "policy.lattice_calibration_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "explicit_current_native_geometry_and_calibrating_evidence"
+      ],
+      "applicability": [
+        "playable_lattice_and_coordinate_binding"
+      ],
+      "invariants": [
+        "pitch_not_glyph_bbox_border_texture_or_overhang",
+        "whole_body_camera_corrected_translation_not_cropped_component",
+        "divisibility_does_not_prove_one_cell",
+        "known_logical_quantum_or_current_prior_binding_required",
+        "clipped_cells_metric_boundaries_and_depth_preserved",
+        "no_smallest_pitch_or_reference_priority",
+        "native_frame_scene_scoped_conversion",
+        "no_cell_roles_route_or_act"
+      ],
+      "falsifiers": [
+        "stale_native_geometry",
+        "contrary_current_quantum",
+        "unknown_camera_or_whole_support",
+        "incomplete_enumeration",
+        "actual_measurement_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "lattice.retain_unqualified_geometry",
+        "lattice.retain_bounded_measurement",
+        "lattice.continue_revalidated_binding",
+        "lattice.bind_unique_quantum_supported",
+        "lattice.retain_metric_and_lattice_alternatives"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.lattice_calibration_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "lattice.retain_unqualified_geometry"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "current_observation_evidenced",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "candidate_refs_unique",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "lattice.retain_unqualified_geometry"
+          }
+        },
+        {
+          "id": "projection.lattice_calibration_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "lattice.retain_bounded_measurement"
+            },
+            {
+              "field": "current_observation_evidenced",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "lattice.retain_bounded_measurement"
+          }
+        },
+        {
+          "id": "projection.lattice_calibration_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "lattice.continue_revalidated_binding"
+            },
+            {
+              "field": "current_observation_evidenced",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "retained_lattice_currently_revalidated",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "lattice.continue_revalidated_binding"
+          }
+        },
+        {
+          "id": "projection.lattice_calibration_c.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "lattice.bind_unique_quantum_supported"
+            },
+            {
+              "field": "current_observation_evidenced",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "retained_lattice_currently_revalidated",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "enumeration_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "one_admissible_quantum_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "lattice.bind_unique_quantum_supported"
+          }
+        },
+        {
+          "id": "projection.lattice_calibration_c.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "lattice.retain_metric_and_lattice_alternatives"
+            },
+            {
+              "field": "current_observation_evidenced",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "lattice.retain_metric_and_lattice_alternatives"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.lattice_calibration_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "lattice.retain_unqualified_geometry"
+            }
+          ],
+          "reason_ref": "reason.current_logical_pitch_evidence_independent_of_raster_decoration"
+        },
+        {
+          "id": "tier.lattice_calibration_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "lattice.retain_bounded_measurement"
+            }
+          ],
+          "reason_ref": "reason.current_logical_pitch_evidence_independent_of_raster_decoration"
+        },
+        {
+          "id": "tier.lattice_calibration_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "lattice.continue_revalidated_binding"
+            }
+          ],
+          "reason_ref": "reason.current_logical_pitch_evidence_independent_of_raster_decoration"
+        },
+        {
+          "id": "tier.lattice_calibration_c.3",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "lattice.bind_unique_quantum_supported"
+            }
+          ],
+          "reason_ref": "reason.current_logical_pitch_evidence_independent_of_raster_decoration"
+        },
+        {
+          "id": "tier.lattice_calibration_c.4",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "lattice.retain_metric_and_lattice_alternatives"
+            }
+          ],
+          "reason_ref": "reason.current_logical_pitch_evidence_independent_of_raster_decoration"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.disposition_order_not_lattice_preference",
+      "reason_refs": [
+        "reason.current_logical_pitch_evidence_independent_of_raster_decoration"
+      ]
+    }
+  ]
+}

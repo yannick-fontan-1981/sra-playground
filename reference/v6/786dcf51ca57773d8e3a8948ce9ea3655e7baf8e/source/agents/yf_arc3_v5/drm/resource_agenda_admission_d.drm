@@ -1,0 +1,28 @@
+{
+  "module_id":"resource_agenda_admission_d",
+  "declarations":[{
+    "id":"policy.resource_agenda_admission_d","kind":"selection_policy",
+    "evaluation":"declared_lexicographic_order","supported_operators":["SELECT"],
+    "input_contract":"yf_arc3_v5.authority_input.selection.v1",
+    "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "reason_refs":["reason.actual_resource_relation_requires_discriminating_evidence"],
+    "declared_alternative_refs":["resource_agenda_admission.call","resource_agenda_admission.defer"],
+    "selection_tie_breakers":[{"field":"alternative_ref","preferred_order":"minimize"}],
+    "canonical_equivalence_tie_break_debt_ref":"debt.resource_agenda_admission_equivalent",
+    "selection_tiers":[
+      {"id":"tier.resource_agenda_admission.call",
+       "reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence",
+       "all_conditions":[
+         {"field":"alternative_ref","operator":"equals","expected":"resource_agenda_admission.call"},
+         {"field":"agenda_projection_complete","operator":"equals","expected":true},
+         {"field":"declared_demand_row_count","operator":"equals","expected":1},
+         {"field":"owner_current","operator":"equals","expected":true},
+         {"field":"current_inputs_bound","operator":"equals","expected":true},
+         {"field":"prerequisites_current","operator":"equals","expected":true},
+         {"field":"consumed_current_signature","operator":"equals","expected":false},
+         {"field":"conflicting_current_returns","operator":"equals","expected":false}]},
+      {"id":"tier.resource_agenda_admission.defer",
+       "reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence",
+       "all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_agenda_admission.defer"}]}]
+  }]
+}

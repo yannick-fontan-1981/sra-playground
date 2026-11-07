@@ -1,0 +1,765 @@
+{
+  "module_id": "piercing_body_manifest",
+  "declarations": [
+    {
+      "id": "policy.declared_piercing_body_manifest",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "source_declared_local_rendered_body_masks_and_exact_returned_response"
+      ],
+      "applicability": [
+        "current_scope_command_shape_correspondence"
+      ],
+      "invariants": [
+        "local_rendered_signature_is_not_physical_whole_body",
+        "border_or_overlap_or_missing_identity_remains_unknown",
+        "no_manifest_authorizes_ACT_or_world_WHO"
+      ],
+      "falsifiers": [
+        "normalized_local_rendered_footprint_changes_or_is_occluded"
+      ],
+      "configuration": {
+        "body_manifest_profile": {
+          "body_scope_ref": "body.local_rendered_component",
+          "profile_ref": "profile.local_rendered_footprints_under_captured_source_transition",
+          "epoch_fields": [
+            "game_ref",
+            "level_ref",
+            "session_ref"
+          ]
+        },
+        "measurement_contract": {
+          "signature_predicate": "piercing_body_footprint_signature_revision",
+          "model_predicate": "piercing_local_body_manifest_revision"
+        }
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.local_rendered_body_evidence",
+          "all_conditions": [],
+          "reason_ref": "reason.source_local_rendered_signature_is_not_physical_whole_body"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "manifest_body_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.exact_source_body_evidence",
+          "reason_ref": "reason.source_local_rendered_signature_is_not_physical_whole_body"
+        }
+      ],
+      "reason_refs": [
+        "reason.source_local_rendered_signature_is_not_physical_whole_body"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.piercing_local_body_manifest_revision"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.body_manifest.unknown",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": true,
+            "body_manifest_needs_commit": false,
+            "required_body_manifest_closed": false,
+            "manifest_local_rendered_complete": false,
+            "physical_whole_shape_known": false,
+            "whole_influence_prediction_complete": false,
+            "body_manifest_class_ref": "manifest.local_rendered_proof_missing",
+            "requires_revalidation": true,
+            "missing_premise_refs": [
+              "premise.supported_local_rendered_body_signatures"
+            ]
+          },
+          "bound_facts": {
+            "required_body_refs": "required_body_refs",
+            "body_footprint_pairs": "body_footprint_pairs",
+            "normalized_body_footprint_pairs": "normalized_body_footprint_pairs",
+            "body_signature_refs": "body_signature_refs",
+            "source_signature_packets": "source_signature_packets",
+            "manifest_body_count": "manifest_body_count",
+            "manifest_reference_alias_pairs": "manifest_reference_alias_pairs",
+            "manifest_material_body_count": "manifest_material_body_count",
+            "manifest_alias_binding_matches": "manifest_alias_binding_matches",
+            "manifest_unadmitted_body_refs": "manifest_unadmitted_body_refs",
+            "manifest_unadmitted_body_count": "manifest_unadmitted_body_count",
+            "manifest_missing_body_refs": "manifest_missing_body_refs",
+            "manifest_clipped_body_refs": "manifest_clipped_body_refs",
+            "manifest_overlapping_body_refs": "manifest_overlapping_body_refs",
+            "raw_scene_epoch_ref": "raw_scene_epoch_ref",
+            "body_manifest_revision_ref": "body_manifest_revision_ref",
+            "current_frame_ref": "current_frame_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref"
+          }
+        },
+        {
+          "id": "projection.body_manifest.persist_current_inventory",
+          "all_conditions": [
+            {
+              "field": "manifest_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "manifest_packet_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "manifest_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "manifest_packet_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "manifest_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "manifest_revision_already_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "body_manifest_needs_commit": true
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.body_manifest.closed_local_rendered",
+          "all_conditions": [
+            {"field": "manifest_alias_binding_matches", "operator": "equals", "expected": true},
+            {
+              "field": "manifest_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "manifest_packet_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "manifest_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "manifest_packet_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "manifest_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "manifest_body_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "manifest_unadmitted_body_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "manifest_missing_body_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "manifest_clipped_body_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "manifest_overlapping_body_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "required_body_manifest_closed": true,
+            "manifest_local_rendered_complete": true,
+            "body_manifest_class_ref": "manifest.supported_local_rendered_bodies",
+            "requires_revalidation": false,
+            "missing_premise_refs": []
+          },
+          "bound_facts": {}
+        }
+      ]
+    },
+    {
+      "id": "policy.declared_piercing_body_signature",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "source_declared_local_rendered_body_masks_and_exact_returned_response"
+      ],
+      "applicability": [
+        "current_scope_command_shape_correspondence"
+      ],
+      "invariants": [
+        "local_rendered_signature_is_not_physical_whole_body",
+        "border_or_overlap_or_missing_identity_remains_unknown",
+        "no_manifest_authorizes_ACT_or_world_WHO"
+      ],
+      "falsifiers": [
+        "normalized_local_rendered_footprint_changes_or_is_occluded"
+      ],
+      "configuration": {},
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.local_rendered_body_evidence",
+          "all_conditions": [],
+          "reason_ref": "reason.source_local_rendered_signature_is_not_physical_whole_body"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "signature_identity_pair_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.exact_source_body_evidence",
+          "reason_ref": "reason.source_local_rendered_signature_is_not_physical_whole_body"
+        }
+      ],
+      "reason_refs": [
+        "reason.source_local_rendered_signature_is_not_physical_whole_body"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.piercing_body_footprint_signature_revision"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.body_signature.unknown",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": true,
+            "signature_admitted": false,
+            "signature_needs_commit": false,
+            "signature_mask_class_ref": "signature.local_rendered_conditional",
+            "whole_footprint_known": false,
+            "physical_whole_shape_known": false,
+            "whole_influence_prediction_complete": false,
+            "body_signature_scope_ref": "body.local_rendered_component"
+          },
+          "bound_facts": {
+            "body_ref": "body_ref",
+            "normalized_occupied_positions": "normalized_occupied_positions",
+            "normalized_valued_pixels": "normalized_valued_pixels",
+            "scene_epoch_ref": "scene_epoch_ref",
+            "current_frame_ref": "current_frame_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "signature_revision_ref": "signature_revision_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref"
+          }
+        },
+        {
+          "id": "projection.body_signature.capture_candidate",
+          "all_conditions": [
+            {
+              "field": "signature_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_packet_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_revision_already_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "signature_needs_commit": true
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.body_signature.supported_local_rendered",
+          "all_conditions": [
+            {"field": "signature_alias_binding_matches", "operator": "equals", "expected": true},
+            {
+              "field": "signature_profile_scope_ref",
+              "operator": "equals",
+              "expected": "body.local_rendered_component"
+            },
+            {
+              "field": "signature_capture_closed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_capture_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_capture_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_capture_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_packet_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_identity_pair_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "signature_normalized_footprint_stable",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_normalized_pixels_stable",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_interior_mask",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_nonoverlapping_mask",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_missing_body_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "signature_admitted": true,
+            "whole_footprint_known": true,
+            "signature_mask_class_ref": "signature.supported_local_rendered"
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.body_signature.canonical_supported",
+          "all_conditions": [
+            {"field": "signature_alias_binding_matches", "operator": "equals", "expected": true},
+            {
+              "field": "signature_canonical",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_scene_epoch_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_footprint_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_whole_footprint_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_body_scope_ref",
+              "operator": "equals",
+              "expected": "body.local_rendered_component"
+            },
+            {
+              "field": "signature_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "signature_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "signature_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "signature_defeated_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "signature_epistemic_status",
+              "operator": "equals",
+              "expected": "supported"
+            }
+          ],
+          "static_facts": {
+            "signature_admitted": true,
+            "whole_footprint_known": true,
+            "signature_mask_class_ref": "signature.supported_local_rendered"
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.body_signature.canonical_established",
+          "all_conditions": [
+            {"field": "signature_alias_binding_matches", "operator": "equals", "expected": true},
+            {
+              "field": "signature_canonical",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_scene_epoch_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_footprint_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_whole_footprint_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_body_scope_ref",
+              "operator": "equals",
+              "expected": "body.local_rendered_component"
+            },
+            {
+              "field": "signature_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "signature_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "signature_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "signature_defeated_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "signature_epistemic_status",
+              "operator": "equals",
+              "expected": "established"
+            }
+          ],
+          "static_facts": {
+            "signature_admitted": true,
+            "whole_footprint_known": true,
+            "signature_mask_class_ref": "signature.supported_local_rendered"
+          },
+          "bound_facts": {}
+        }
+      ]
+    },
+    {
+      "id": "rule.piercing_local_body_manifest_revision",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "source_declared_local_rendered_body_masks_and_exact_returned_response"
+      ],
+      "applicability": [
+        "current_scope_command_shape_correspondence"
+      ],
+      "invariants": [
+        "local_rendered_signature_is_not_physical_whole_body",
+        "border_or_overlap_or_missing_identity_remains_unknown",
+        "no_manifest_authorizes_ACT_or_world_WHO"
+      ],
+      "falsifiers": [
+        "normalized_local_rendered_footprint_changes_or_is_occluded"
+      ],
+      "reason_refs": [
+        "reason.source_local_rendered_signature_is_not_physical_whole_body"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{body_manifest_revision_ref}",
+          "kind": "schema",
+          "label": "revisable Source local rendered body evidence",
+          "required_fields": [
+            "body_manifest_revision_ref"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "action_authorization": false
+          },
+          "attribute_bindings": {}
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{body_manifest_revision_ref}",
+          "predicate": "piercing_local_body_manifest_revision",
+          "family": "control",
+          "argument_patterns": [
+            "{body_manifest_revision_ref}"
+          ],
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "body_manifest_revision_ref"
+          ],
+          "static_attributes": {
+            "physical_whole_shape_known": false,
+            "whole_influence_prediction_complete": false
+          },
+          "attribute_bindings": {
+            "required_body_refs": "required_body_refs",
+            "body_footprint_pairs": "body_footprint_pairs",
+            "normalized_body_footprint_pairs": "normalized_body_footprint_pairs",
+            "body_signature_refs": "body_signature_refs",
+            "source_signature_packets": "source_signature_packets",
+            "manifest_body_count": "manifest_body_count",
+            "manifest_unadmitted_body_refs": "manifest_unadmitted_body_refs",
+            "manifest_unadmitted_body_count": "manifest_unadmitted_body_count",
+            "manifest_missing_body_refs": "manifest_missing_body_refs",
+            "manifest_clipped_body_refs": "manifest_clipped_body_refs",
+            "manifest_overlapping_body_refs": "manifest_overlapping_body_refs",
+            "raw_scene_epoch_ref": "raw_scene_epoch_ref",
+            "body_manifest_revision_ref": "body_manifest_revision_ref",
+            "current_frame_ref": "current_frame_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "body_manifest_class_ref": "body_manifest_class_ref",
+            "manifest_reference_alias_pairs": "manifest_reference_alias_pairs",
+            "manifest_material_body_count": "manifest_material_body_count",
+            "manifest_alias_binding_matches": "manifest_alias_binding_matches",
+            "required_body_manifest_closed": "required_body_manifest_closed",
+            "manifest_local_rendered_complete": "manifest_local_rendered_complete",
+            "requires_revalidation": "requires_revalidation",
+            "missing_premise_refs": "missing_premise_refs"
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.piercing_body_footprint_signature_revision",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "source_declared_local_rendered_body_masks_and_exact_returned_response"
+      ],
+      "applicability": [
+        "current_scope_command_shape_correspondence"
+      ],
+      "invariants": [
+        "local_rendered_signature_is_not_physical_whole_body",
+        "border_or_overlap_or_missing_identity_remains_unknown",
+        "no_manifest_authorizes_ACT_or_world_WHO"
+      ],
+      "falsifiers": [
+        "normalized_local_rendered_footprint_changes_or_is_occluded"
+      ],
+      "reason_refs": [
+        "reason.source_local_rendered_signature_is_not_physical_whole_body"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{signature_revision_ref}",
+          "kind": "schema",
+          "label": "revisable Source local rendered body evidence",
+          "required_fields": [
+            "signature_revision_ref"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "action_authorization": false
+          },
+          "attribute_bindings": {}
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{signature_revision_ref}.proposed",
+          "predicate": "piercing_body_footprint_signature_revision",
+          "family": "control",
+          "argument_patterns": [
+            "{signature_revision_ref}"
+          ],
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "signature_revision_ref"
+          ],
+          "static_attributes": {
+            "physical_whole_shape_known": false,
+            "whole_influence_prediction_complete": false
+          },
+          "attribute_bindings": {
+            "body_ref": "body_ref",
+            "normalized_occupied_positions": "normalized_occupied_positions",
+            "normalized_valued_pixels": "normalized_valued_pixels",
+            "scene_epoch_ref": "scene_epoch_ref",
+            "current_frame_ref": "current_frame_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "signature_revision_ref": "signature_revision_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "signature_mask_class_ref": "signature_mask_class_ref",
+            "body_signature_scope_ref": "body_signature_scope_ref",
+            "whole_footprint_known": "whole_footprint_known"
+          },
+          "all_conditions": [
+            {
+              "field": "signature_admitted",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id_pattern": "claim.{signature_revision_ref}.supported",
+          "predicate": "piercing_body_footprint_signature_revision",
+          "family": "control",
+          "argument_patterns": [
+            "{signature_revision_ref}"
+          ],
+          "epistemic_status": "supported",
+          "required_fields": [
+            "signature_revision_ref"
+          ],
+          "static_attributes": {
+            "physical_whole_shape_known": false,
+            "whole_influence_prediction_complete": false
+          },
+          "attribute_bindings": {
+            "body_ref": "body_ref",
+            "normalized_occupied_positions": "normalized_occupied_positions",
+            "normalized_valued_pixels": "normalized_valued_pixels",
+            "scene_epoch_ref": "scene_epoch_ref",
+            "current_frame_ref": "current_frame_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "signature_revision_ref": "signature_revision_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "signature_mask_class_ref": "signature_mask_class_ref",
+            "body_signature_scope_ref": "body_signature_scope_ref",
+            "whole_footprint_known": "whole_footprint_known"
+          },
+          "all_conditions": [
+            {
+              "field": "signature_admitted",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

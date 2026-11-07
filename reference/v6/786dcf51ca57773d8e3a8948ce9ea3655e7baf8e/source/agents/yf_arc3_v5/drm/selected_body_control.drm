@@ -1,0 +1,152 @@
+{
+  "module_id": "selected_body_control",
+  "declarations": [
+    {
+      "id": "principle.selected_body_motion_requires_current_selection",
+      "kind": "principle",
+      "premises": [
+        "the_applicable_control_model_is_selection_then_motion"
+      ],
+      "applicability": [
+        "selected_body_control"
+      ],
+      "invariants": [
+        "a_direction_requires_an_identified_current_selection",
+        "measure_none_selected_or_identified_selected_body_at_each_scene_boundary",
+        "do_not_derive_selection_from_a_previous_level_pose",
+        "prefer_point_selection_when_both_known_selection_modes_are_available",
+        "the_principle_does_not_depend_on_historical_workflow_survival"
+      ],
+      "falsifiers": [
+        "observed_motion_without_selection_refutes_the_selection_first_model",
+        "a_current_indicator_contradiction_requires_control_model_revalidation"
+      ],
+      "reason_refs": [
+        "reason.control_selection_is_revalidated_before_directional_application"
+      ]
+    },
+    {
+      "id": "policy.acquire_rigid_control_contract",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "declared_alternative_refs": [
+        "control_contract.acquire"
+      ],
+      "reason_refs": [
+        "principle.selected_body_motion_requires_current_selection"
+      ],
+      "configuration": {
+        "measurement_contract": {
+          "model_term_pattern": "model.control.selected_body.{model_token}",
+          "model_claim_pattern": "claim.control.selected_body.{model_token}"
+        }
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "control_contract.acquire": "rule.acquire_rigid_control_contract"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.control_contract.acquire",
+          "all_conditions": [
+            {
+              "field": "has_measurements",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "unique_body_border_occurrence",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "selection_first_model_declared",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1"
+    },
+    {
+      "id": "rule.acquire_rigid_control_contract",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "reason_refs": [
+        "principle.selected_body_motion_requires_current_selection"
+      ],
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "model.control.selected_body.{model_token}",
+          "kind": "schema",
+          "label": "explicit selected-body control contract",
+          "required_fields": [
+            "model_token",
+            "control_parameters",
+            "source_observation",
+            "model_claim_ref"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.known_selected_body_control.v1",
+            "canonical_fact_projection_enabled": true,
+            "commitment": "revisable",
+            "memory_scope": "same_game",
+            "movement_requires_selected_body": true,
+            "current_selection_must_be_measured": true,
+            "prefer_available_point_selection": true,
+            "principle_ref": "principle.selected_body_motion_requires_current_selection"
+          },
+          "attribute_bindings": {
+            "control_parameters": "control_parameters",
+            "source_observation": "source_observation",
+            "model_claim_ref": "model_claim_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.control.selected_body.{model_token}",
+          "predicate": "declared_selected_body_control_model_requires_selection",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "model.control.selected_body.{model_token}"
+          ],
+          "required_fields": [
+            "model_token",
+            "control_parameters",
+            "source_observation"
+          ],
+          "required_term_patterns": [
+            "model.control.selected_body.{model_token}"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "scope": "observed_selected_body_control_family",
+            "falsifier": "current_selection_indicator_or_motion_disagrees_with_control_contract"
+          }
+        }
+      ],
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1"
+    }
+  ]
+}

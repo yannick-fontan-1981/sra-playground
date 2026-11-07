@@ -1,0 +1,335 @@
+{
+  "module_id": "typed_mask_relation_c",
+  "declarations": [
+    {
+      "id": "policy.typed_mask_relation_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "requested_relation_has_separate_typed_masks"
+      ],
+      "applicability": [
+        "mask_geometry_under_current_scene_and_coordinate_basis"
+      ],
+      "invariants": [
+        "recognition_body_collision_hit_selection_hole_aperture_score_distinct",
+        "no_collision_law_from_raster_or_transparent_interior",
+        "legal_off_window_pane_not_illegal_by_scored_window",
+        "geometry_not_terminal_acceptance",
+        "hidden_support_and_model_branches_retained",
+        "no_action_release"
+      ],
+      "falsifiers": [
+        "wrong_mask_kind",
+        "foreign_or_stale_frame_basis",
+        "missing_semantic_or_prediction_support",
+        "unknown_hidden_support",
+        "actual_input_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "mask.archive_noncurrent_geometry",
+        "mask.retain_input_support_bound",
+        "mask.request_the_explicit_mask_kind",
+        "mask.retain_unvalidated_prediction_or_semantics",
+        "mask.retain_unknown_geometric_relation",
+        "mask.use_requested_typed_geometry"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.typed_mask_relation_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mask.archive_noncurrent_geometry"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "mask.archive_noncurrent_geometry"
+          }
+        },
+        {
+          "id": "projection.typed_mask_relation_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mask.retain_input_support_bound"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "mask.retain_input_support_bound"
+          }
+        },
+        {
+          "id": "projection.typed_mask_relation_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mask.request_the_explicit_mask_kind"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "requested_mask_kinds_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "mask.request_the_explicit_mask_kind"
+          }
+        },
+        {
+          "id": "projection.typed_mask_relation_c.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mask.retain_unvalidated_prediction_or_semantics"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "requested_mask_kinds_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "prediction_support_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "requested_semantic_support_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "mask.retain_unvalidated_prediction_or_semantics"
+          }
+        },
+        {
+          "id": "projection.typed_mask_relation_c.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mask.retain_unknown_geometric_relation"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "requested_mask_kinds_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_support_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_semantic_support_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometric_relation_known",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "mask.retain_unknown_geometric_relation"
+          }
+        },
+        {
+          "id": "projection.typed_mask_relation_c.5",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "mask.use_requested_typed_geometry"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_mask_kinds_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "prediction_support_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_semantic_support_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "geometric_relation_known",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "mask.use_requested_typed_geometry"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.typed_mask_relation_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "mask.archive_noncurrent_geometry"
+            }
+          ],
+          "reason_ref": "reason.requested_typed_mask_relation_without_semantic_inheritance"
+        },
+        {
+          "id": "tier.typed_mask_relation_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "mask.retain_input_support_bound"
+            }
+          ],
+          "reason_ref": "reason.requested_typed_mask_relation_without_semantic_inheritance"
+        },
+        {
+          "id": "tier.typed_mask_relation_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "mask.request_the_explicit_mask_kind"
+            }
+          ],
+          "reason_ref": "reason.requested_typed_mask_relation_without_semantic_inheritance"
+        },
+        {
+          "id": "tier.typed_mask_relation_c.3",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "mask.retain_unvalidated_prediction_or_semantics"
+            }
+          ],
+          "reason_ref": "reason.requested_typed_mask_relation_without_semantic_inheritance"
+        },
+        {
+          "id": "tier.typed_mask_relation_c.4",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "mask.retain_unknown_geometric_relation"
+            }
+          ],
+          "reason_ref": "reason.requested_typed_mask_relation_without_semantic_inheritance"
+        },
+        {
+          "id": "tier.typed_mask_relation_c.5",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "mask.use_requested_typed_geometry"
+            }
+          ],
+          "reason_ref": "reason.requested_typed_mask_relation_without_semantic_inheritance"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.mask_projection_order_not_role_identity",
+      "reason_refs": [
+        "reason.requested_typed_mask_relation_without_semantic_inheritance"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5387 @@
+{
+  "schema": "sra.v6.drm-reference.v1",
+  "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceHashes": {
+    "agents/yf_arc3_v5/drm/meaning.py": "d0e5e9583240cc74b8cc70fefb25700464b5e588c7009ca277b5615378557c40",
+    "agents/yf_arc3_v5/drm/fact_conditions.py": "7d4220d8dfc334117e54857786b00f4a5c78ae1a8d83ca6826e03632ba859aac",
+    "agents/yf_arc3_v5/drm/fact_contracts.py": "a85766fde628aecfa31459c87f602f7b38fbfab9704e1377d92b248fd005b8bd",
+    "agents/yf_arc3_v5/drm/registry.py": "99f3cf0efea0d9b4467fc6ad2018a0aec8884f9f97719c61fece6554b2403d43",
+    "agents/yf_arc3_v5/drm/runtime.py": "432ff6f16b906b92af50516a6ace08987994cd07a89b5e313da7c89cacaebeea",
+    "agents/yf_arc3_v6/morphology_policy/policy.py": "0f630d43f67054b8b3a82ae32cf2f2e522de6679fa726b64ed4fc853a278a39e"
+  },
+  "document": {
+    "text": "{\n  \"module_id\": \"test.native_projection\",\n  \"declarations\": [\n    {\n      \"kind\": \"selection_policy\",\n      \"evaluation\": \"declared_eligibility_single\",\n      \"supported_operators\": [\n        \"SELECT\"\n      ],\n      \"input_contract\": \"yf_arc3_v5.authority_input.selection.v1\",\n      \"output_contract\": \"yf_arc3_v5.authority_output.selection.v1\",\n      \"declared_alternative_refs\": [\n        \"left\",\n        \"right\"\n      ],\n      \"selection_required_fact_fields\": [\n        \"alternative_ref\"\n      ],\n      \"reason_refs\": [\n        \"reason.test\"\n      ],\n      \"selection_eligibility_conditions\": [\n        {\n          \"field\": \"ok\",\n          \"operator\": \"equals\",\n          \"expected\": true\n        }\n      ],\n      \"id\": \"policy.test.conditions\",\n      \"fact_projections\": [\n        {\n          \"id\": \"projection.test.condition_0\",\n          \"all_conditions\": [\n            {\n              \"field\": \"flag\",\n              \"operator\": \"equals\",\n              \"expected\": true\n            }\n          ],\n          \"static_facts\": {\n            \"match_0\": true\n          }\n        },\n        {\n          \"id\": \"projection.test.condition_1\",\n          \"all_conditions\": [\n            {\n              \"field\": \"flag\",\n              \"operator\": \"not_equals\",\n              \"expected\": true\n            }\n          ],\n          \"static_facts\": {\n            \"match_1\": true\n          }\n        },\n        {\n          \"id\": \"projection.test.condition_2\",\n          \"all_conditions\": [\n            {\n              \"field\": \"number\",\n              \"operator\": \"equals_reference_field\",\n              \"reference_field\": \"reference\"\n            }\n          ],\n          \"static_facts\": {\n            \"match_2\": true\n          }\n        },\n        {\n          \"id\": \"projection.test.condition_3\",\n          \"all_conditions\": [\n            {\n              \"field\": \"number\",\n              \"operator\": \"not_equals_reference_field\",\n              \"reference_field\": \"reference\"\n            }\n          ],\n          \"static_facts\": {\n            \"match_3\": true\n          }\n        },\n        {\n          \"id\": \"projection.test.condition_4\",\n          \"all_conditions\": [\n            {\n              \"field\": \"number\",\n              \"operator\": \"greater_than_reference_field\",\n              \"reference_field\": \"reference\"\n            }\n          ],\n          \"static_facts\": {\n            \"match_4\": true\n          }\n        },\n        {\n          \"id\": \"projection.test.condition_5\",\n          \"all_conditions\": [\n            {\n              \"field\": \"item\",\n              \"operator\": \"member_of_reference_field\",\n              \"reference_field\": \"items\"\n            }\n          ],\n          \"static_facts\": {\n            \"match_5\": true\n          }\n        },\n        {\n          \"id\": \"projection.test.condition_6\",\n          \"all_conditions\": [\n            {\n              \"field\": \"present\",\n              \"operator\": \"is_present\"\n            }\n          ],\n          \"static_facts\": {\n            \"match_6\": true\n          }\n        },\n        {\n          \"id\": \"projection.test.condition_7\",\n          \"all_conditions\": [\n            {\n              \"field\": \"absent\",\n              \"operator\": \"is_absent\"\n            }\n          ],\n          \"static_facts\": {\n            \"match_7\": true\n          }\n        },\n        {\n          \"id\": \"projection.test.condition_8\",\n          \"all_conditions\": [\n            {\n              \"field\": \"number\",\n              \"operator\": \"greater_than\",\n              \"expected\": 1\n            }\n          ],\n          \"static_facts\": {\n            \"match_8\": true\n          }\n        },\n        {\n          \"id\": \"projection.test.condition_9\",\n          \"all_conditions\": [\n            {\n              \"field\": \"number\",\n              \"operator\": \"between_inclusive\",\n              \"lower\": -2,\n              \"upper\": 4\n            }\n          ],\n          \"static_facts\": {\n            \"match_9\": true\n          }\n        },\n        {\n          \"id\": \"projection.test.condition_10\",\n          \"all_conditions\": [\n            {\n              \"field\": \"number\",\n              \"operator\": \"at_most_multiple_of_field\",\n              \"reference_field\": \"reference\",\n              \"factor\": 2\n            }\n          ],\n          \"static_facts\": {\n            \"match_10\": true\n          }\n        },\n        {\n          \"id\": \"projection.test.alias_gate\",\n          \"all_conditions\": [\n            {\n              \"field\": \"interaction_kind\",\n              \"operator\": \"equals\",\n              \"expected\": \"point\"\n            }\n          ],\n          \"static_facts\": {\n            \"alias_matches\": true\n          }\n        },\n        {\n          \"id\": \"projection.test.any\",\n          \"any_conditions\": [\n            {\n              \"field\": \"flag\",\n              \"operator\": \"equals\",\n              \"expected\": true\n            },\n            {\n              \"field\": \"number\",\n              \"operator\": \"equals\",\n              \"expected\": 3\n            }\n          ],\n          \"static_facts\": {\n            \"any_matches\": true\n          }\n        }\n      ]\n    },\n    {\n      \"kind\": \"selection_policy\",\n      \"evaluation\": \"declared_eligibility_single\",\n      \"supported_operators\": [\n        \"SELECT\"\n      ],\n      \"input_contract\": \"yf_arc3_v5.authority_input.selection.v1\",\n      \"output_contract\": \"yf_arc3_v5.authority_output.selection.v1\",\n      \"declared_alternative_refs\": [\n        \"left\",\n        \"right\"\n      ],\n      \"selection_required_fact_fields\": [\n        \"alternative_ref\"\n      ],\n      \"reason_refs\": [\n        \"reason.test\"\n      ],\n      \"selection_eligibility_conditions\": [\n        {\n          \"field\": \"ok\",\n          \"operator\": \"equals\",\n          \"expected\": true\n        }\n      ],\n      \"id\": \"policy.test.sequence\",\n      \"fact_contracts\": [\n        {\n          \"id\": \"contract.test.receipt\",\n          \"required_fields\": [\n            \"combined\",\n            \"value\"\n          ],\n          \"producer_owned_fields\": [\n            \"combined\",\n            \"value\"\n          ],\n          \"preserved_fields\": [\n            \"combined\",\n            \"value\"\n          ],\n          \"preservation_modes\": {\n            \"combined\": \"contains_all\"\n          },\n          \"validity_field\": \"contract_valid\",\n          \"receipt_field\": \"contract_receipts\"\n        }\n      ],\n      \"fact_projections\": [\n        {\n          \"id\": \"projection.test.producer\",\n          \"static_facts\": {\n            \"value\": 2\n          },\n          \"bound_facts\": {\n            \"copy\": \"flag\",\n            \"swap_a\": \"swap_b\",\n            \"swap_b\": \"swap_a\"\n          },\n          \"templated_facts\": {\n            \"label\": \"candidate:{alternative_ref}:{flag}:{nested}\",\n            \"opaque\": {\n              \"$fact\": \"first\"\n            },\n            \"tree\": {\n              \"payload\": [\n                \"{alternative_ref}\",\n                {\n                  \"$fact\": \"first\"\n                }\n              ]\n            }\n          },\n          \"sequence_compositions\": [\n            {\n              \"output_field\": \"combined\",\n              \"source_fields\": [\n                \"first\",\n                \"second\"\n              ],\n              \"max_items\": 4,\n              \"unique_items\": true\n            }\n          ],\n          \"affine_expressions\": [\n            {\n              \"output_field\": \"scaled\",\n              \"terms\": [\n                {\n                  \"field\": \"number\",\n                  \"coefficient\": 3\n                }\n              ],\n              \"constant\": -1,\n              \"divisor\": 2,\n              \"max_abs_value\": 100\n            },\n            {\n              \"output_field\": \"shifted\",\n              \"terms\": [\n                {\n                  \"field\": \"scaled\"\n                }\n              ],\n              \"constant\": 1\n            }\n          ],\n          \"fact_contract_refs\": [\n            \"contract.test.receipt\"\n          ]\n        },\n        {\n          \"id\": \"projection.test.extension\",\n          \"all_conditions\": [\n            {\n              \"field\": \"extend\",\n              \"operator\": \"equals\",\n              \"expected\": true\n            }\n          ],\n          \"sequence_compositions\": [\n            {\n              \"output_field\": \"combined\",\n              \"source_fields\": [\n                \"combined\",\n                \"extra\"\n              ],\n              \"max_items\": 8,\n              \"unique_items\": true\n            }\n          ]\n        },\n        {\n          \"id\": \"projection.test.changed\",\n          \"all_conditions\": [\n            {\n              \"field\": \"replace\",\n              \"operator\": \"equals\",\n              \"expected\": true\n            }\n          ],\n          \"static_facts\": {\n            \"value\": 7\n          }\n        },\n        {\n          \"id\": \"projection.test.pairs\",\n          \"all_conditions\": [\n            {\n              \"field\": \"pair_mode\",\n              \"operator\": \"equals\",\n              \"expected\": true\n            }\n          ],\n          \"sequence_compositions\": [\n            {\n              \"output_field\": \"pair_output\",\n              \"source_fields\": [\n                \"pairs\",\n                \"pairs\"\n              ],\n              \"item_arity\": 2,\n              \"max_items\": 4,\n              \"unique_items\": true\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"kind\": \"selection_policy\",\n      \"evaluation\": \"declared_eligibility_single\",\n      \"supported_operators\": [\n        \"SELECT\"\n      ],\n      \"input_contract\": \"yf_arc3_v5.authority_input.selection.v1\",\n      \"output_contract\": \"yf_arc3_v5.authority_output.selection.v1\",\n      \"declared_alternative_refs\": [],\n      \"selection_required_fact_fields\": [\n        \"alternative_ref\"\n      ],\n      \"reason_refs\": [\n        \"reason.test\"\n      ],\n      \"selection_eligibility_conditions\": [\n        {\n          \"field\": \"ok\",\n          \"operator\": \"equals\",\n          \"expected\": true\n        }\n      ],\n      \"id\": \"policy.test.empty\",\n      \"configuration\": {\n        \"empty_inventory_projection_ref\": \"projection.test.empty\"\n      }\n    }\n  ]\n}\n",
+    "sha256": "b95d0228f699703153e72824e58a74daf1e253b799f28d568f7400582bc7d267"
+  },
+  "projections": [
+    {
+      "id": "scalar_types",
+      "policy": "policy.test.conditions",
+      "alternatives": [],
+      "facts": {
+        "flag": true,
+        "number": 3,
+        "reference": 2,
+        "item": 1,
+        "items": [
+          true,
+          1,
+          "1"
+        ],
+        "present": false,
+        "ok": true,
+        "interaction_measurement_kind": "point"
+      },
+      "expected": {
+        "alternative_refs": [
+          "left",
+          "right"
+        ],
+        "alternative_facts": {
+          "left": {
+            "alternative_ref": "left",
+            "any_matches": true,
+            "flag": true,
+            "interaction_measurement_kind": "point",
+            "item": 1,
+            "items": [
+              true,
+              1,
+              "1"
+            ],
+            "match_0": true,
+            "match_10": true,
+            "match_3": true,
+            "match_4": true,
+            "match_5": true,
+            "match_6": true,
+            "match_7": true,
+            "match_8": true,
+            "match_9": true,
+            "number": 3,
+            "ok": true,
+            "present": false,
+            "reference": 2
+          },
+          "right": {
+            "alternative_ref": "right",
+            "any_matches": true,
+            "flag": true,
+            "interaction_measurement_kind": "point",
+            "item": 1,
+            "items": [
+              true,
+              1,
+              "1"
+            ],
+            "match_0": true,
+            "match_10": true,
+            "match_3": true,
+            "match_4": true,
+            "match_5": true,
+            "match_6": true,
+            "match_7": true,
+            "match_8": true,
+            "match_9": true,
+            "number": 3,
+            "ok": true,
+            "present": false,
+            "reference": 2
+          }
+        },
+        "projection_refs": [
+          "projection.test.condition_0",
+          "projection.test.condition_3",
+          "projection.test.condition_4",
+          "projection.test.condition_5",
+          "projection.test.condition_6",
+          "projection.test.condition_7",
+          "projection.test.condition_8",
+          "projection.test.condition_9",
+          "projection.test.condition_10",
+          "projection.test.any"
+        ],
+        "declared_eligibility_match_count": 2,
+        "has_declared_eligibility_matches": true,
+        "schema_version": "yf_arc3_v5.declared_alternative_facts.v1"
+      }
+    },
+    {
+      "id": "false_vs_zero",
+      "policy": "policy.test.conditions",
+      "alternatives": [],
+      "facts": {
+        "flag": 0,
+        "number": true,
+        "reference": true,
+        "item": false,
+        "items": [
+          true,
+          1,
+          "1"
+        ],
+        "present": false,
+        "ok": true,
+        "interaction_measurement_kind": "point"
+      },
+      "expected": {
+        "alternative_refs": [
+          "left",
+          "right"
+        ],
+        "alternative_facts": {
+          "left": {
+            "alternative_ref": "left",
+            "flag": 0,
+            "interaction_measurement_kind": "point",
+            "item": false,
+            "items": [
+              true,
+              1,
+              "1"
+            ],
+            "match_1": true,
+            "match_2": true,
+            "match_6": true,
+            "match_7": true,
+            "number": true,
+            "ok": true,
+            "present": false,
+            "reference": true
+          },
+          "right": {
+            "alternative_ref": "right",
+            "flag": 0,
+            "interaction_measurement_kind": "point",
+            "item": false,
+            "items": [
+              true,
+              1,
+              "1"
+            ],
+            "match_1": true,
+            "match_2": true,
+            "match_6": true,
+            "match_7": true,
+            "number": true,
+            "ok": true,
+            "present": false,
+            "reference": true
+          }
+        },
+        "projection_refs": [
+          "projection.test.condition_1",
+          "projection.test.condition_2",
+          "projection.test.condition_6",
+          "projection.test.condition_7"
+        ],
+        "declared_eligibility_match_count": 2,
+        "has_declared_eligibility_matches": true,
+        "schema_version": "yf_arc3_v5.declared_alternative_facts.v1"
+      }
+    },
+    {
+      "id": "missing_and_none",
+      "policy": "policy.test.conditions",
+      "alternatives": [],
+      "facts": {
+        "flag": false,
+        "number": -2,
+        "reference": 0,
+        "present": null
+      },
+      "expected": {
+        "alternative_refs": [
+          "left",
+          "right"
+        ],
+        "alternative_facts": {
+          "left": {
+            "alternative_ref": "left",
+            "flag": false,
+            "match_1": true,
+            "match_10": true,
+            "match_3": true,
+            "match_7": true,
+            "match_9": true,
+            "number": -2,
+            "present": null,
+            "reference": 0
+          },
+          "right": {
+            "alternative_ref": "right",
+            "flag": false,
+            "match_1": true,
+            "match_10": true,
+            "match_3": true,
+            "match_7": true,
+            "match_9": true,
+            "number": -2,
+            "present": null,
+            "reference": 0
+          }
+        },
+        "projection_refs": [
+          "projection.test.condition_1",
+          "projection.test.condition_3",
+          "projection.test.condition_7",
+          "projection.test.condition_9",
+          "projection.test.condition_10"
+        ],
+        "declared_eligibility_match_count": 0,
+        "has_declared_eligibility_matches": false,
+        "schema_version": "yf_arc3_v5.declared_alternative_facts.v1"
+      }
+    },
+    {
+      "id": "keyed_evidence",
+      "policy": "policy.test.conditions",
+      "alternatives": [
+        "left",
+        "right"
+      ],
+      "facts": {
+        "left": {
+          "flag": true,
+          "number": 3,
+          "reference": 2,
+          "item": 1,
+          "items": [
+            true,
+            1,
+            "1"
+          ],
+          "present": false,
+          "ok": true,
+          "interaction_measurement_kind": "point"
+        },
+        "right": {
+          "flag": true,
+          "number": 3,
+          "reference": 3,
+          "item": 1,
+          "items": [
+            true,
+            1,
+            "1"
+          ],
+          "present": false,
+          "ok": false,
+          "interaction_measurement_kind": "point"
+        }
+      },
+      "expected": {
+        "alternative_refs": [
+          "left",
+          "right"
+        ],
+        "alternative_facts": {
+          "left": {
+            "alternative_ref": "left",
+            "any_matches": true,
+            "flag": true,
+            "interaction_measurement_kind": "point",
+            "item": 1,
+            "items": [
+              true,
+              1,
+              "1"
+            ],
+            "match_0": true,
+            "match_10": true,
+            "match_3": true,
+            "match_4": true,
+            "match_5": true,
+            "match_6": true,
+            "match_7": true,
+            "match_8": true,
+            "match_9": true,
+            "number": 3,
+            "ok": true,
+            "present": false,
+            "reference": 2
+          },
+          "right": {
+            "alternative_ref": "right",
+            "any_matches": true,
+            "flag": true,
+            "interaction_measurement_kind": "point",
+            "item": 1,
+            "items": [
+              true,
+              1,
+              "1"
+            ],
+            "match_0": true,
+            "match_10": true,
+            "match_2": true,
+            "match_5": true,
+            "match_6": true,
+            "match_7": true,
+            "match_8": true,
+            "match_9": true,
+            "number": 3,
+            "ok": false,
+            "present": false,
+            "reference": 3
+          }
+        },
+        "projection_refs": [
+          "projection.test.condition_0",
+          "projection.test.condition_3",
+          "projection.test.condition_4",
+          "projection.test.condition_5",
+          "projection.test.condition_6",
+          "projection.test.condition_7",
+          "projection.test.condition_8",
+          "projection.test.condition_9",
+          "projection.test.condition_10",
+          "projection.test.any",
+          "projection.test.condition_2"
+        ],
+        "declared_eligibility_match_count": 1,
+        "has_declared_eligibility_matches": true,
+        "schema_version": "yf_arc3_v5.declared_alternative_facts.v1"
+      }
+    },
+    {
+      "id": "sequence_affine_template_contract",
+      "policy": "policy.test.sequence",
+      "alternatives": [],
+      "facts": {
+        "flag": false,
+        "number": 3,
+        "first": [
+          "a",
+          "b"
+        ],
+        "second": [
+          "b",
+          "c"
+        ],
+        "extra": [
+          "d"
+        ],
+        "swap_a": "a",
+        "swap_b": "b",
+        "nested": "{tail}",
+        "tail": "done",
+        "ok": true
+      },
+      "expected": {
+        "alternative_refs": [
+          "left",
+          "right"
+        ],
+        "alternative_facts": {
+          "left": {
+            "alternative_ref": "left",
+            "combined": [
+              "a",
+              "b",
+              "c"
+            ],
+            "contract_receipts": [
+              {
+                "alternative_ref": "left",
+                "changed_fields": [],
+                "contract_ref": "contract.test.receipt",
+                "current_missing_fields": [],
+                "preserved_values": {
+                  "combined": [
+                    "a",
+                    "b",
+                    "c"
+                  ],
+                  "value": 2
+                },
+                "producer_ref": "projection.test.producer",
+                "production_missing_fields": [],
+                "production_preserved_values": {
+                  "combined": [
+                    "a",
+                    "b",
+                    "c"
+                  ],
+                  "value": 2
+                },
+                "production_unowned_fields": [],
+                "valid": true
+              }
+            ],
+            "contract_valid": true,
+            "copy": false,
+            "extra": [
+              "d"
+            ],
+            "first": [
+              "a",
+              "b"
+            ],
+            "flag": false,
+            "label": "candidate:left:False:done",
+            "nested": "{tail}",
+            "number": 3,
+            "ok": true,
+            "opaque": [
+              "a",
+              "b"
+            ],
+            "scaled": 4,
+            "second": [
+              "b",
+              "c"
+            ],
+            "shifted": 5,
+            "swap_a": "b",
+            "swap_b": "a",
+            "tail": "done",
+            "tree": {
+              "payload": [
+                "left",
+                [
+                  "a",
+                  "b"
+                ]
+              ]
+            },
+            "value": 2
+          },
+          "right": {
+            "alternative_ref": "right",
+            "combined": [
+              "a",
+              "b",
+              "c"
+            ],
+            "contract_receipts": [
+              {
+                "alternative_ref": "right",
+                "changed_fields": [],
+                "contract_ref": "contract.test.receipt",
+                "current_missing_fields": [],
+                "preserved_values": {
+                  "combined": [
+                    "a",
+                    "b",
+                    "c"
+                  ],
+                  "value": 2
+                },
+                "producer_ref": "projection.test.producer",
+                "production_missing_fields": [],
+                "production_preserved_values": {
+                  "combined": [
+                    "a",
+                    "b",
+                    "c"
+                  ],
+                  "value": 2
+                },
+                "production_unowned_fields": [],
+                "valid": true
+              }
+            ],
+            "contract_valid": true,
+            "copy": false,
+            "extra": [
+              "d"
+            ],
+            "first": [
+              "a",
+              "b"
+            ],
+            "flag": false,
+            "label": "candidate:right:False:done",
+            "nested": "{tail}",
+            "number": 3,
+            "ok": true,
+            "opaque": [
+              "a",
+              "b"
+            ],
+            "scaled": 4,
+            "second": [
+              "b",
+              "c"
+            ],
+            "shifted": 5,
+            "swap_a": "b",
+            "swap_b": "a",
+            "tail": "done",
+            "tree": {
+              "payload": [
+                "right",
+                [
+                  "a",
+                  "b"
+                ]
+              ]
+            },
+            "value": 2
+          }
+        },
+        "projection_refs": [
+          "projection.test.producer"
+        ],
+        "declared_eligibility_match_count": 2,
+        "has_declared_eligibility_matches": true,
+        "schema_version": "yf_arc3_v5.declared_alternative_facts.v1"
+      }
+    },
+    {
+      "id": "preserve_contains_all",
+      "policy": "policy.test.sequence",
+      "alternatives": [],
+      "facts": {
+        "flag": false,
+        "number": 3,
+        "first": [
+          "a",
+          "b"
+        ],
+        "second": [
+          "b",
+          "c"
+        ],
+        "extra": [
+          "d"
+        ],
+        "swap_a": "a",
+        "swap_b": "b",
+        "nested": "{tail}",
+        "tail": "done",
+        "ok": true,
+        "extend": true,
+        "pair_mode": true,
+        "pairs": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      },
+      "expected": {
+        "alternative_refs": [
+          "left",
+          "right"
+        ],
+        "alternative_facts": {
+          "left": {
+            "alternative_ref": "left",
+            "combined": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "contract_receipts": [
+              {
+                "alternative_ref": "left",
+                "changed_fields": [],
+                "contract_ref": "contract.test.receipt",
+                "current_missing_fields": [],
+                "preserved_values": {
+                  "combined": [
+                    "a",
+                    "b",
+                    "c",
+                    "d"
+                  ],
+                  "value": 2
+                },
+                "producer_ref": "projection.test.producer",
+                "production_missing_fields": [],
+                "production_preserved_values": {
+                  "combined": [
+                    "a",
+                    "b",
+                    "c"
+                  ],
+                  "value": 2
+                },
+                "production_unowned_fields": [],
+                "valid": true
+              }
+            ],
+            "contract_valid": true,
+            "copy": false,
+            "extend": true,
+            "extra": [
+              "d"
+            ],
+            "first": [
+              "a",
+              "b"
+            ],
+            "flag": false,
+            "label": "candidate:left:False:done",
+            "nested": "{tail}",
+            "number": 3,
+            "ok": true,
+            "opaque": [
+              "a",
+              "b"
+            ],
+            "pair_mode": true,
+            "pair_output": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "c",
+                "d"
+              ]
+            ],
+            "pairs": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "c",
+                "d"
+              ]
+            ],
+            "scaled": 4,
+            "second": [
+              "b",
+              "c"
+            ],
+            "shifted": 5,
+            "swap_a": "b",
+            "swap_b": "a",
+            "tail": "done",
+            "tree": {
+              "payload": [
+                "left",
+                [
+                  "a",
+                  "b"
+                ]
+              ]
+            },
+            "value": 2
+          },
+          "right": {
+            "alternative_ref": "right",
+            "combined": [
+              "a",
+              "b",
+              "c",
+              "d"
+            ],
+            "contract_receipts": [
+              {
+                "alternative_ref": "right",
+                "changed_fields": [],
+                "contract_ref": "contract.test.receipt",
+                "current_missing_fields": [],
+                "preserved_values": {
+                  "combined": [
+                    "a",
+                    "b",
+                    "c",
+                    "d"
+                  ],
+                  "value": 2
+                },
+                "producer_ref": "projection.test.producer",
+                "production_missing_fields": [],
+                "production_preserved_values": {
+                  "combined": [
+                    "a",
+                    "b",
+                    "c"
+                  ],
+                  "value": 2
+                },
+                "production_unowned_fields": [],
+                "valid": true
+              }
+            ],
+            "contract_valid": true,
+            "copy": false,
+            "extend": true,
+            "extra": [
+              "d"
+            ],
+            "first": [
+              "a",
+              "b"
+            ],
+            "flag": false,
+            "label": "candidate:right:False:done",
+            "nested": "{tail}",
+            "number": 3,
+            "ok": true,
+            "opaque": [
+              "a",
+              "b"
+            ],
+            "pair_mode": true,
+            "pair_output": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "c",
+                "d"
+              ]
+            ],
+            "pairs": [
+              [
+                "a",
+                "b"
+              ],
+              [
+                "c",
+                "d"
+              ]
+            ],
+            "scaled": 4,
+            "second": [
+              "b",
+              "c"
+            ],
+            "shifted": 5,
+            "swap_a": "b",
+            "swap_b": "a",
+            "tail": "done",
+            "tree": {
+              "payload": [
+                "right",
+                [
+                  "a",
+                  "b"
+                ]
+              ]
+            },
+            "value": 2
+          }
+        },
+        "projection_refs": [
+          "projection.test.producer",
+          "projection.test.extension",
+          "projection.test.pairs"
+        ],
+        "declared_eligibility_match_count": 2,
+        "has_declared_eligibility_matches": true,
+        "schema_version": "yf_arc3_v5.declared_alternative_facts.v1"
+      }
+    },
+    {
+      "id": "contract_refuted",
+      "policy": "policy.test.sequence",
+      "alternatives": [],
+      "facts": {
+        "flag": false,
+        "number": 3,
+        "first": [
+          "a",
+          "b"
+        ],
+        "second": [
+          "b",
+          "c"
+        ],
+        "extra": [
+          "d"
+        ],
+        "swap_a": "a",
+        "swap_b": "b",
+        "nested": "{tail}",
+        "tail": "done",
+        "ok": true,
+        "replace": true
+      },
+      "expected": {
+        "alternative_refs": [
+          "left",
+          "right"
+        ],
+        "alternative_facts": {
+          "left": {
+            "alternative_ref": "left",
+            "combined": [
+              "a",
+              "b",
+              "c"
+            ],
+            "contract_receipts": [
+              {
+                "alternative_ref": "left",
+                "changed_fields": [
+                  "value"
+                ],
+                "contract_ref": "contract.test.receipt",
+                "current_missing_fields": [],
+                "preserved_values": {
+                  "combined": [
+                    "a",
+                    "b",
+                    "c"
+                  ],
+                  "value": 7
+                },
+                "producer_ref": "projection.test.producer",
+                "production_missing_fields": [],
+                "production_preserved_values": {
+                  "combined": [
+                    "a",
+                    "b",
+                    "c"
+                  ],
+                  "value": 2
+                },
+                "production_unowned_fields": [],
+                "valid": false
+              }
+            ],
+            "contract_valid": false,
+            "copy": false,
+            "extra": [
+              "d"
+            ],
+            "first": [
+              "a",
+              "b"
+            ],
+            "flag": false,
+            "label": "candidate:left:False:done",
+            "nested": "{tail}",
+            "number": 3,
+            "ok": true,
+            "opaque": [
+              "a",
+              "b"
+            ],
+            "replace": true,
+            "scaled": 4,
+            "second": [
+              "b",
+              "c"
+            ],
+            "shifted": 5,
+            "swap_a": "b",
+            "swap_b": "a",
+            "tail": "done",
+            "tree": {
+              "payload": [
+                "left",
+                [
+                  "a",
+                  "b"
+                ]
+              ]
+            },
+            "value": 7
+          },
+          "right": {
+            "alternative_ref": "right",
+            "combined": [
+              "a",
+              "b",
+              "c"
+            ],
+            "contract_receipts": [
+              {
+                "alternative_ref": "right",
+                "changed_fields": [
+                  "value"
+                ],
+                "contract_ref": "contract.test.receipt",
+                "current_missing_fields": [],
+                "preserved_values": {
+                  "combined": [
+                    "a",
+                    "b",
+                    "c"
+                  ],
+                  "value": 7
+                },
+                "producer_ref": "projection.test.producer",
+                "production_missing_fields": [],
+                "production_preserved_values": {
+                  "combined": [
+                    "a",
+                    "b",
+                    "c"
+                  ],
+                  "value": 2
+                },
+                "production_unowned_fields": [],
+                "valid": false
+              }
+            ],
+            "contract_valid": false,
+            "copy": false,
+            "extra": [
+              "d"
+            ],
+            "first": [
+              "a",
+              "b"
+            ],
+            "flag": false,
+            "label": "candidate:right:False:done",
+            "nested": "{tail}",
+            "number": 3,
+            "ok": true,
+            "opaque": [
+              "a",
+              "b"
+            ],
+            "replace": true,
+            "scaled": 4,
+            "second": [
+              "b",
+              "c"
+            ],
+            "shifted": 5,
+            "swap_a": "b",
+            "swap_b": "a",
+            "tail": "done",
+            "tree": {
+              "payload": [
+                "right",
+                [
+                  "a",
+                  "b"
+                ]
+              ]
+            },
+            "value": 7
+          }
+        },
+        "projection_refs": [
+          "projection.test.producer",
+          "projection.test.changed"
+        ],
+        "declared_eligibility_match_count": 2,
+        "has_declared_eligibility_matches": true,
+        "schema_version": "yf_arc3_v5.declared_alternative_facts.v1"
+      }
+    },
+    {
+      "id": "no_truncation",
+      "policy": "policy.test.sequence",
+      "alternatives": [],
+      "facts": {
+        "flag": false,
+        "number": 3,
+        "first": [
+          "a",
+          "b"
+        ],
+        "second": [
+          "b",
+          "c",
+          "d"
+        ],
+        "extra": [
+          "d"
+        ],
+        "swap_a": "a",
+        "swap_b": "b",
+        "nested": "{tail}",
+        "tail": "done",
+        "ok": true
+      },
+      "error": "declared sequence composition bound exceeded; no items truncated"
+    },
+    {
+      "id": "affine_indivisible",
+      "policy": "policy.test.sequence",
+      "alternatives": [],
+      "facts": {
+        "flag": false,
+        "number": 2,
+        "first": [
+          "a",
+          "b"
+        ],
+        "second": [
+          "b",
+          "c"
+        ],
+        "extra": [
+          "d"
+        ],
+        "swap_a": "a",
+        "swap_b": "b",
+        "nested": "{tail}",
+        "tail": "done",
+        "ok": true
+      },
+      "error": "declared affine result is not exactly divisible"
+    },
+    {
+      "id": "affine_bounded",
+      "policy": "policy.test.sequence",
+      "alternatives": [],
+      "facts": {
+        "flag": false,
+        "number": 99,
+        "first": [
+          "a",
+          "b"
+        ],
+        "second": [
+          "b",
+          "c"
+        ],
+        "extra": [
+          "d"
+        ],
+        "swap_a": "a",
+        "swap_b": "b",
+        "nested": "{tail}",
+        "tail": "done",
+        "ok": true
+      },
+      "error": "declared affine intermediate bound exceeded"
+    },
+    {
+      "id": "affine_rejects_boolean",
+      "policy": "policy.test.sequence",
+      "alternatives": [],
+      "facts": {
+        "flag": false,
+        "number": true,
+        "first": [
+          "a",
+          "b"
+        ],
+        "second": [
+          "b",
+          "c"
+        ],
+        "extra": [
+          "d"
+        ],
+        "swap_a": "a",
+        "swap_b": "b",
+        "nested": "{tail}",
+        "tail": "done",
+        "ok": true
+      },
+      "error": "declared affine input is not an exact integer: number"
+    },
+    {
+      "id": "template_unbound",
+      "policy": "policy.test.sequence",
+      "alternatives": [],
+      "facts": {
+        "flag": false,
+        "number": 3,
+        "first": [
+          "a",
+          "b"
+        ],
+        "second": [
+          "b",
+          "c"
+        ],
+        "extra": [
+          "d"
+        ],
+        "swap_a": "a",
+        "swap_b": "b",
+        "nested": "{tail}",
+        "ok": true
+      },
+      "error": "unbound DRM meaning template: candidate:{alternative_ref}:{flag}:{nested}"
+    },
+    {
+      "id": "declared_empty_domain",
+      "policy": "policy.test.empty",
+      "alternatives": [],
+      "facts": {},
+      "expected": {
+        "alternative_refs": [],
+        "alternative_facts": {},
+        "projection_refs": [
+          "projection.test.empty"
+        ],
+        "empty_inventory_projection_ref": "projection.test.empty",
+        "declared_eligibility_match_count": 0,
+        "has_declared_eligibility_matches": false,
+        "schema_version": "yf_arc3_v5.declared_alternative_facts.v1"
+      }
+    },
+    {
+      "id": "undeclared_empty_with_evidence",
+      "policy": "policy.test.empty",
+      "alternatives": [],
+      "facts": {
+        "unexpected": true
+      },
+      "error": "policy.test.empty declares no alternatives to project"
+    }
+  ],
+  "morphology": [
+    {
+      "id": "empty_measurement",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1
+      },
+      "expected": {
+        "role": "unassigned",
+        "composition": null,
+        "operation": null,
+        "route_key": null,
+        "status": "deferred",
+        "reason": "insufficient_correspondence",
+        "alternatives": [
+          "decoration",
+          "independent_objects"
+        ],
+        "falsifiers": [
+          "correspondence_absent",
+          "independent_motion"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "retained_no_route",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ]
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "peer_access_unbound",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "modifier_bound",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "different",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "modifier_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "modifier": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": "OP18",
+        "route_key": "modifier",
+        "status": "proposed",
+        "reason": "change_one_pattern_to_test_alignment",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "contact_does_not_change_the_chosen_pattern",
+          "other_pattern_changes_as_well",
+          "control_or_epoch_changes"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.action_conditioned_morphology_revision",
+          "principle.no_effect_preserves_unresolved_meaning"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.probe_modifier"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.action_conditioned_morphology_revision",
+            "falsifiers": [
+              "transition_has_no_action_or_component_lineage"
+            ]
+          },
+          {
+            "id": "principle.no_effect_preserves_unresolved_meaning",
+            "falsifiers": [
+              "later_action_conditioned_change_is_observed"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "bound",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "modifier_no_forecast_reserve",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "different",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "modifier_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "modifier": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        },
+        "meter_forecast": {
+          "steps_before_empty": 0
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "contact_does_not_change_the_chosen_pattern",
+          "other_pattern_changes_as_well",
+          "control_or_epoch_changes"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.action_conditioned_morphology_revision",
+          "principle.no_effect_preserves_unresolved_meaning"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.probe_modifier",
+          "projection.morph.modifier_before_meter_exhaustion"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.action_conditioned_morphology_revision",
+            "falsifiers": [
+              "transition_has_no_action_or_component_lineage"
+            ]
+          },
+          {
+            "id": "principle.no_effect_preserves_unresolved_meaning",
+            "falsifiers": [
+              "later_action_conditioned_change_is_observed"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "bound",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "modifier_stale",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "different",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "modifier_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "modifier": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 2,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "modifier_access_unbound",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_modifier_access"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "stale_scope",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "peer_bound",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "peer_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "peer": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": "OP18",
+        "route_key": "peer",
+        "status": "proposed",
+        "reason": "test_peer_contact_after_measured_selective_alignment",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "aligned_contact_has_no_predicted_effect",
+          "other_pattern_changes",
+          "control_or_epoch_changes"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.action_conditioned_morphology_revision",
+          "principle.observed_causality_dominates_morphological_similarity"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.contact_aligned_peer"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.action_conditioned_morphology_revision",
+            "falsifiers": [
+              "transition_has_no_action_or_component_lineage"
+            ]
+          },
+          {
+            "id": "principle.observed_causality_dominates_morphological_similarity",
+            "falsifiers": [
+              "causal_lineage_is_contradicted"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "bound",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "peer_no_forecast_reserve",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "peer_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "peer": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        },
+        "meter_forecast": {
+          "steps_before_empty": 0
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "aligned_contact_has_no_predicted_effect",
+          "other_pattern_changes",
+          "control_or_epoch_changes"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.action_conditioned_morphology_revision",
+          "principle.observed_causality_dominates_morphological_similarity"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.contact_aligned_peer",
+          "projection.morph.peer_before_meter_exhaustion"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.action_conditioned_morphology_revision",
+            "falsifiers": [
+              "transition_has_no_action_or_component_lineage"
+            ]
+          },
+          {
+            "id": "principle.observed_causality_dominates_morphological_similarity",
+            "falsifiers": [
+              "causal_lineage_is_contradicted"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "bound",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "peer_stale",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "peer_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "peer": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 2,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "peer_access_unbound",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "stale_scope",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "peer_access_probe_bound",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "peer_discrimination_bound": true,
+        "peer_access_probe_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "peer_access_probe": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": "OP18",
+        "route_key": "peer_access_probe",
+        "status": "proposed",
+        "reason": "discriminate_missing_control_for_peer_access",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "displacement_differs_at_probe",
+          "reference_or_peer_changes",
+          "repeatable_access_not_observed_at_a_second_origin"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.action_conditioned_morphology_revision",
+          "principle.no_effect_preserves_unresolved_meaning"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access",
+          "projection.morph.discriminate_peer_access"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.action_conditioned_morphology_revision",
+            "falsifiers": [
+              "transition_has_no_action_or_component_lineage"
+            ]
+          },
+          {
+            "id": "principle.no_effect_preserves_unresolved_meaning",
+            "falsifiers": [
+              "later_action_conditioned_change_is_observed"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "bound",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "peer_access_probe_no_forecast_reserve",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "peer_discrimination_bound": true,
+        "peer_access_probe_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "peer_access_probe": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        },
+        "meter_forecast": {
+          "steps_before_empty": 0
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "access_exceeds_observed_meter_seek_affordable_effect",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "displacement_differs_at_probe",
+          "reference_or_peer_changes",
+          "repeatable_access_not_observed_at_a_second_origin"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.action_conditioned_morphology_revision",
+          "principle.no_effect_preserves_unresolved_meaning"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access",
+          "projection.morph.discriminate_peer_access",
+          "projection.morph.peer_access_probe_before_meter_exhaustion"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.action_conditioned_morphology_revision",
+            "falsifiers": [
+              "transition_has_no_action_or_component_lineage"
+            ]
+          },
+          {
+            "id": "principle.no_effect_preserves_unresolved_meaning",
+            "falsifiers": [
+              "later_action_conditioned_change_is_observed"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "bound",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "peer_access_probe_stale",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "peer_discrimination_bound": true,
+        "peer_access_probe_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "peer_access_probe": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 2,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "peer_access_unbound",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "stale_scope",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "feature_probe_bound",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "different",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "extension_route": "feature_probe",
+        "feature_probe_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "feature_probe": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": "OP18",
+        "route_key": "feature_probe",
+        "status": "proposed",
+        "reason": "discriminate_color_change_at_persistent_multivalue_site",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "palette_unchanged_after_bound_entry",
+          "orientation_or_shape_also_changes",
+          "peer_changes",
+          "unseen_contact"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.parameterwise_color_contrast",
+          "projection.morph.missing_peer_access",
+          "projection.morph.probe_independent_pigment_contact"
+        ],
+        "release_authority": false,
+        "feature_hypotheses": [
+          "a_local_input_changes_only_one_pattern_pigment",
+          "orientation_changes_without_a_color_change",
+          "color_is_decorative",
+          "one_contact_changes_multiple_features",
+          "an_apparent_color_change_is_occlusion"
+        ],
+        "feature_falsifiers": [
+          "no_candidate_reached",
+          "another_mask_or_pose_changes",
+          "peer_changes",
+          "ambiguous_visibility"
+        ],
+        "preserve_features": [
+          "normalized_shape",
+          "visible_oriented_masks",
+          "stable_peer_appearance",
+          "movement_frame",
+          "remaining_capacity"
+        ],
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "bound",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "feature_probe_no_forecast_reserve",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "different",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "extension_route": "feature_probe",
+        "feature_probe_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "feature_probe": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        },
+        "meter_forecast": {
+          "steps_before_empty": 0
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "peer_access_unbound",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.parameterwise_color_contrast",
+          "projection.morph.missing_peer_access"
+        ],
+        "release_authority": false,
+        "feature_hypotheses": [
+          "a_local_input_changes_only_one_pattern_pigment",
+          "orientation_changes_without_a_color_change",
+          "color_is_decorative",
+          "one_contact_changes_multiple_features",
+          "an_apparent_color_change_is_occlusion"
+        ],
+        "feature_falsifiers": [
+          "no_candidate_reached",
+          "another_mask_or_pose_changes",
+          "peer_changes",
+          "ambiguous_visibility"
+        ],
+        "preserve_features": [
+          "normalized_shape",
+          "visible_oriented_masks",
+          "stable_peer_appearance",
+          "movement_frame",
+          "remaining_capacity"
+        ],
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "bound",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "feature_probe_stale",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "different",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "extension_route": "feature_probe",
+        "feature_probe_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "feature_probe": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 2,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "color_residual_access_unbound",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.parameterwise_color_contrast",
+          "projection.morph.missing_peer_access",
+          "projection.morph.retain_separate_feature_gap"
+        ],
+        "release_authority": false,
+        "feature_hypotheses": [
+          "a_local_input_changes_only_one_pattern_pigment",
+          "orientation_changes_without_a_color_change",
+          "color_is_decorative",
+          "one_contact_changes_multiple_features",
+          "an_apparent_color_change_is_occlusion"
+        ],
+        "feature_falsifiers": [
+          "no_candidate_reached",
+          "another_mask_or_pose_changes",
+          "peer_changes",
+          "ambiguous_visibility"
+        ],
+        "preserve_features": [
+          "normalized_shape",
+          "visible_oriented_masks",
+          "stable_peer_appearance",
+          "movement_frame",
+          "remaining_capacity"
+        ],
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "stale_scope",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "capacity_probe_bound",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "capacity_needed": true,
+        "capacity_probe_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "capacity_probe": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": "OP18",
+        "route_key": "capacity_probe",
+        "status": "proposed",
+        "reason": "probe_shared_appearance_to_restore_diminishing_capacity",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access",
+          "projection.morph.probe_gauge_mark"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "bound",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "capacity_probe_no_forecast_reserve",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "capacity_needed": true,
+        "capacity_probe_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "capacity_probe": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        },
+        "meter_forecast": {
+          "steps_before_empty": 0
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "peer_access_unbound",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "bound",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "capacity_probe_stale",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "capacity_needed": true,
+        "capacity_probe_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "capacity_probe": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 2,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "peer_access_unbound",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "stale_scope",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "capacity_access_probe_bound",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "capacity_needed": true,
+        "capacity_access_probe_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "capacity_access_probe": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": "OP18",
+        "route_key": "capacity_access_probe",
+        "status": "proposed",
+        "reason": "test_missing_access_to_possible_capacity_source",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access",
+          "projection.morph.rebind_input_for_gauge_mark"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "bound",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "capacity_access_probe_no_forecast_reserve",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "capacity_needed": true,
+        "capacity_access_probe_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "capacity_access_probe": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        },
+        "meter_forecast": {
+          "steps_before_empty": 0
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "peer_access_unbound",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "bound",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "capacity_access_probe_stale",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "capacity_needed": true,
+        "capacity_access_probe_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "capacity_access_probe": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 2,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "peer_access_unbound",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "stale_scope",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "managed_access_bound",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "managed_capacity_bound": true,
+        "managed_access_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "managed_access": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": "OP18",
+        "route_key": "managed_access",
+        "status": "proposed",
+        "reason": "test_next_dependency_of_a_capacity_feasible_composition",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access",
+          "projection.morph.combine_capacity_orientation_and_access"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "bound",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "managed_access_no_forecast_reserve",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "managed_capacity_bound": true,
+        "managed_access_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "managed_access": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        },
+        "meter_forecast": {
+          "steps_before_empty": 0
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": "OP18",
+        "route_key": "managed_access",
+        "status": "proposed",
+        "reason": "test_next_dependency_of_a_capacity_feasible_composition",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access",
+          "projection.morph.combine_capacity_orientation_and_access"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "bound",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "managed_access_stale",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "managed_capacity_bound": true,
+        "managed_access_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "managed_access": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 2,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "peer_access_unbound",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "stale_scope",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "entry_rebind_bound",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": false,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "entry_rebind_bound": true,
+        "entry_rebind_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "entry_rebind": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": "OP18",
+        "route_key": "entry_rebind",
+        "status": "proposed",
+        "reason": "check_relocated_control_along_a_measured_axis_towards_visible_targets",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "participant_footprint_or_predicted_position_changes",
+          "entry_surface_changes",
+          "unanticipated_nonlocal_effect",
+          "epoch_changes"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.control_unbound",
+          "projection.morph.follow_revalidated_axis_towards_visible_goal"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "bound",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "entry_rebind_no_forecast_reserve",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": false,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "entry_rebind_bound": true,
+        "entry_rebind_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "entry_rebind": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        },
+        "meter_forecast": {
+          "steps_before_empty": 0
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": "OP18",
+        "route_key": "entry_rebind",
+        "status": "proposed",
+        "reason": "check_relocated_control_along_a_measured_axis_towards_visible_targets",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "participant_footprint_or_predicted_position_changes",
+          "entry_surface_changes",
+          "unanticipated_nonlocal_effect",
+          "epoch_changes"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.control_unbound",
+          "projection.morph.follow_revalidated_axis_towards_visible_goal"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "bound",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "entry_rebind_stale",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": false,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "entry_rebind_bound": true,
+        "entry_rebind_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "entry_rebind": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 2,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.control_unbound"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "stale_scope",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "entry_probe_bound",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "entry_probe_bound": true,
+        "entry_probe_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "entry_probe": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": "OP18",
+        "route_key": "entry_probe",
+        "status": "proposed",
+        "reason": "discriminate_local_transition_after_observed_access_child_return",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "contour_or_departure_changes",
+          "nonlocal_effect",
+          "role_or_epoch_changes",
+          "resource_loss"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access",
+          "projection.morph.probe_unseen_contour_after_access"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "bound"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "entry_probe_no_forecast_reserve",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "entry_probe_bound": true,
+        "entry_probe_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "entry_probe": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 1,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        },
+        "meter_forecast": {
+          "steps_before_empty": 0
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": "OP18",
+        "route_key": "entry_probe",
+        "status": "proposed",
+        "reason": "discriminate_local_transition_after_observed_access_child_return",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "contour_or_departure_changes",
+          "nonlocal_effect",
+          "role_or_epoch_changes",
+          "resource_loss"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access",
+          "projection.morph.probe_unseen_contour_after_access"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "bound"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "entry_probe_stale",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ],
+        "entry_probe_bound": true,
+        "entry_probe_xy": [
+          4,
+          5
+        ],
+        "routes": {
+          "entry_probe": {
+            "observation_ref": "reference:epoch:1:revision:1",
+            "level_epoch": 2,
+            "start_xy": [
+              4,
+              4
+            ],
+            "end_xy": [
+              4,
+              5
+            ],
+            "actions": [
+              {
+                "action_ref": "ACTION2",
+                "data": {}
+              }
+            ],
+            "contact_in_prefix": true
+          }
+        }
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "peer_access_unbound",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.missing_peer_access"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "stale_scope"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "refuted",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": true,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ]
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": null,
+        "operation": null,
+        "route_key": null,
+        "status": "refuted",
+        "reason": "observed_counterexample_to_alignment",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.observed_causality_dominates_morphological_similarity"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.withdraw_alignment"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.observed_causality_dominates_morphological_similarity",
+            "falsifiers": [
+              "causal_lineage_is_contradicted"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "ambiguous_orientation",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "ambiguous",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ]
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "pose_not_discriminated",
+        "alternatives": [
+          "reference_and_target",
+          "two_markers",
+          "decoration"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.framed_homologues",
+          "projection.morph.keep_alignment",
+          "projection.morph.ambiguous_pose"
+        ],
+        "release_authority": false,
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "chromatic_nonunique_pose",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": false,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "different",
+        "controlled_xy": [
+          4,
+          4
+        ]
+      },
+      "expected": {
+        "role": "possible_reference_and_target_pair",
+        "composition": "alignment_of_homologous_patterns",
+        "operation": null,
+        "route_key": null,
+        "status": "retained",
+        "reason": "color_residual_access_unbound",
+        "alternatives": [
+          "decoration",
+          "independent_objects"
+        ],
+        "falsifiers": [
+          "alignment_falsified_by_discriminating_contact",
+          "patterns_not_homologous"
+        ],
+        "principle_refs": [
+          "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+          "principle.directional_relations_require_explicit_reference_frames",
+          "principle.peer_continuity_supports_alignment_supposition",
+          "principle.supposition_cascade_preserves_alternatives"
+        ],
+        "projection_refs": [
+          "projection.morph.scope",
+          "projection.morph.ambiguous_pose_measured_chromatic_difference",
+          "projection.morph.keep_alignment",
+          "projection.morph.parameterwise_color_contrast",
+          "projection.morph.missing_peer_access",
+          "projection.morph.retain_separate_feature_gap"
+        ],
+        "release_authority": false,
+        "feature_hypotheses": [
+          "a_local_input_changes_only_one_pattern_pigment",
+          "orientation_changes_without_a_color_change",
+          "color_is_decorative",
+          "one_contact_changes_multiple_features",
+          "an_apparent_color_change_is_occlusion"
+        ],
+        "feature_falsifiers": [
+          "no_candidate_reached",
+          "another_mask_or_pose_changes",
+          "peer_changes",
+          "ambiguous_visibility"
+        ],
+        "preserve_features": [
+          "normalized_shape",
+          "visible_oriented_masks",
+          "stable_peer_appearance",
+          "movement_frame",
+          "remaining_capacity"
+        ],
+        "workflow": "v6.morphology.evaluate",
+        "src_hash": "8ee0d56faf9deb4da190b07a1ab5de12d01d263ab185e79ec4dd555d85d12750",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.morphology.evaluate.measure.s0000",
+          "v6.morphology.evaluate.measure.s0001",
+          "v6.morphology.evaluate.infer_role.s0000",
+          "v6.morphology.evaluate.infer_role.s0001",
+          "v6.morphology.evaluate.hypothesize_composition.s0000",
+          "v6.morphology.evaluate.hypothesize_composition.s0001",
+          "v6.morphology.evaluate.qualify_access.s0000",
+          "v6.morphology.evaluate.qualify_access.s0001"
+        ],
+        "drm_hash": "8613752708f4c2f2e3186b1f8051eec34053f81f65df6ada7e84e4e5616416f2",
+        "principles_hash": "43bb04c2f0afbcf9f09166638f3ed3350657e14ed056bcbc442c973f355b00ea",
+        "principle_evidence": [
+          {
+            "id": "principle.measured_morphological_aspect_opens_revisable_semantic_supposition",
+            "falsifiers": [
+              "the_named_aspect_is_not_measured",
+              "a_role_is_reported_as_established_from_morphology_alone"
+            ]
+          },
+          {
+            "id": "principle.directional_relations_require_explicit_reference_frames",
+            "falsifiers": [
+              "support_direction_is_unresolved",
+              "the_proposed_transform_changes_entity_or_interface_incidence"
+            ]
+          },
+          {
+            "id": "principle.peer_continuity_supports_alignment_supposition",
+            "falsifiers": [
+              "peer_correspondence_is_ambiguous",
+              "later_evidence_rejects_alignment_utility"
+            ]
+          },
+          {
+            "id": "principle.supposition_cascade_preserves_alternatives",
+            "falsifiers": [
+              "a_child_is_committed_as_a_role_without_action_conditioned_evidence"
+            ]
+          }
+        ],
+        "route_bindings": {
+          "modifier": "missing",
+          "peer": "missing",
+          "peer_access_probe": "missing",
+          "feature_probe": "missing",
+          "capacity_probe": "missing",
+          "capacity_access_probe": "missing",
+          "managed_access": "missing",
+          "entry_rebind": "missing",
+          "entry_probe": "missing"
+        },
+        "level_epoch": 1,
+        "observation_ref": "reference:epoch:1:revision:1"
+      }
+    },
+    {
+      "id": "invalid_numeric_boolean",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": 1,
+        "framed_pair": 1,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ]
+      },
+      "error": "Boolean measurement required: framed_pair"
+    },
+    {
+      "id": "invalid_scope_boolean",
+      "facts": {
+        "observation_ref": "reference:epoch:1:revision:1",
+        "level_epoch": true,
+        "framed_pair": true,
+        "homologous": true,
+        "asymmetric": true,
+        "control_attested": true,
+        "single_pattern_contact_change": true,
+        "alignment_refuted": false,
+        "orientation_relation": "aligned",
+        "color_relation": "equal",
+        "controlled_xy": [
+          4,
+          4
+        ]
+      },
+      "error": "Current observation and epoch required"
+    }
+  ]
+}

@@ -1,0 +1,206 @@
+{
+  "module_id": "arc3.cargo_memory_correspondence_b",
+  "declarations": [
+    {
+      "id": "policy.b_cargo_memory_correspondence",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_recalled_content_and_current_canonical_fields_can_propose_correspondence_without_confirming_applicability_or_use"
+      ],
+      "configuration": {
+        "memory_kind_ref": "MODEL_EVIDENCE",
+        "additional_owner_fields_when_present": [
+          "caller_ref", "parent_consumer_ref", "parent_contribution_ref", "caller_next_item_ref",
+          "model_revision_ref", "model_status_ref", "event_owner_ref", "input_domain_complete", "assumption_refs"
+        ],
+        "admitted_source_operations": [
+          "mechanics.oriented_cargo_handoffs.autonomous_fit"
+        ],
+        "current_component_kind_ref": "MODEL",
+        "portable_field_paths": [
+          [
+            "free_facing"
+          ],
+          [
+            "joint_order"
+          ],
+          [
+            "phase_modulus"
+          ],
+          [
+            "clock_inputs"
+          ]
+        ]
+      },
+      "declared_alternative_refs": [
+        "cargo_memory.correspondence",
+        "cargo_memory.missing"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "cargo_memory.correspondence": "rule.b_proposed_current_cargo_memory_correspondence"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.cargo_memory.correspondence",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_memory.correspondence"
+            },
+            {
+              "field": "recalled_correspondence_domain_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_recalled_content_and_current_canonical_fields_can_propose_correspondence_without_confirming_applicability_or_use",
+            "current_applicability_not_confirmed": true,
+            "actual_use_not_proved": true,
+            "no_dispatch_or_action_authority": true
+          }
+        },
+        {
+          "id": "projection.cargo_memory.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "cargo_memory.missing"
+            },
+            {
+              "field": "recalled_correspondence_domain_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "reason_ref": "reason_recalled_content_and_current_canonical_fields_can_propose_correspondence_without_confirming_applicability_or_use",
+            "current_applicability_not_confirmed": true,
+            "actual_use_not_proved": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.b_proposed_current_cargo_memory_correspondence",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "current_canonical_acquired_memory_content",
+        "current_canonical_model_fields",
+        "complete_bounded_portable_field_comparison"
+      ],
+      "applicability": [
+        "recalled_cargo_correspondence_candidate"
+      ],
+      "invariants": [
+        "no_second_memory_store",
+        "preserve_all_matching_and_discriminating_models",
+        "correspondence_is_not_use_or_law_confirmation"
+      ],
+      "falsifiers": [
+        "current_field_disagrees",
+        "memory_provenance_changes",
+        "foreign_owner_scope"
+      ],
+      "reason_refs": [
+        "reason_recalled_content_and_current_canonical_fields_can_propose_correspondence_without_confirming_applicability_or_use"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Proposed current recalled cargo correspondence",
+          "required_fields": [
+            "output_term_ref",
+            "memory_term_ref",
+            "current_component_ref"
+          ],
+          "static_attributes": {
+            "source_kind_ref": "cargo.proposed_memory_correspondence.b.v1",
+            "current_applicability_not_confirmed": true,
+            "actual_use_not_proved": true,
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "matching_models": "matching_models",
+            "discriminating_models": "discriminating_models",
+            "memory_term_digest": "memory_term_digest",
+            "memory_claim_digest": "memory_claim_digest",
+            "recalled_content_digest": "recalled_content_digest",
+            "current_component_digest": "current_component_digest",
+            "current_component_claim_digest": "current_component_claim_digest",
+            "frame_ref": "frame_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_support_claim_ref}",
+          "predicate": "proposes_current_cargo_memory_correspondence",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{memory_term_ref}",
+            "{current_component_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}",
+            "{memory_term_ref}",
+            "{current_component_ref}"
+          ],
+          "required_fields": [
+            "output_support_claim_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "scope_ref": "scope_ref",
+            "epoch": "epoch",
+            "input_revision_ref": "input_revision_ref",
+            "frame_ref": "frame_ref"
+          },
+          "attribute_bindings": {
+            "matching_models": "matching_models",
+            "discriminating_models": "discriminating_models",
+            "memory_term_digest": "memory_term_digest",
+            "memory_claim_digest": "memory_claim_digest",
+            "recalled_content_digest": "recalled_content_digest",
+            "current_component_digest": "current_component_digest",
+            "current_component_claim_digest": "current_component_claim_digest",
+            "frame_ref": "frame_ref"
+          },
+          "static_attributes": {
+            "current_applicability_not_confirmed": true,
+            "actual_use_not_proved": true,
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+ "module_id":"arc3.directed_flow_failure_d","declarations":[
+ {"id":"policy.directed_flow_failure_d","kind":"selection_policy","evaluation":"declared_lexicographic_order","supported_operators":["SELECT"],
+ "input_contract":"yf_arc3_v5.authority_input.selection.v1","output_contract":"yf_arc3_v5.authority_output.selection.v1",
+ "reason_refs":["reason_terminal_release_violates_current_contract"],"configuration":{"failure_predicate_ref":"observed_failed_directed_flow_release"},
+ "declared_alternative_refs":["flow_failure.publish","flow_failure.unknown"],"selection_tie_breakers":[{"field":"alternative_ref","preferred_order":"minimize"}],
+ "canonical_equivalence_tie_break_debt_ref":"debt_equivalent_scoped_failure_evidence","selection_tiers":[
+ {"id":"tier.failure.missing_capture","reason_ref":"reason_terminal_release_violates_current_contract","all_conditions":[
+ {"field":"alternative_ref","operator":"equals","expected":"flow_failure.publish"},{"field":"failure_premises_current","operator":"equals","expected":true},
+ {"field":"command_operation_kind","operator":"equals","expected":"RELEASE"},{"field":"failed_phase","operator":"equals","expected":"STOPPED"},
+ {"field":"failed_front_count","operator":"equals","expected":0},{"field":"missing_required_capture_count","operator":"greater_than","expected":0}]},
+ {"id":"tier.failure.leak","reason_ref":"reason_terminal_release_violates_current_contract","all_conditions":[
+ {"field":"alternative_ref","operator":"equals","expected":"flow_failure.publish"},{"field":"failure_premises_current","operator":"equals","expected":true},
+ {"field":"command_operation_kind","operator":"equals","expected":"RELEASE"},{"field":"failed_phase","operator":"equals","expected":"STOPPED"},
+ {"field":"failed_front_count","operator":"equals","expected":0},{"field":"forbidden_leak","operator":"equals","expected":true},
+ {"field":"observed_leak_count","operator":"greater_than","expected":0}]},
+ {"id":"tier.failure.unknown","reason_ref":"reason_terminal_release_violates_current_contract","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"flow_failure.unknown"}]}],
+ "meaning_template_ref_by_alternative":{"flow_failure.publish":"rule.directed_flow_failure_d"},"invariants":["single_actual_release","current_scoped_goal_failure_not_official_game_over","no_reset_law","no_action_authority"]},
+ {"id":"rule.directed_flow_failure_d","kind":"rule","evaluation":"project_requested_conclusions","supported_operators":["DERIVE"],
+ "input_contract":"yf_arc3_v5.authority_input.derivation.v1","output_contract":"yf_arc3_v5.authority_output.derivation.v1","relation_family":"epistemic",
+ "reason_refs":["reason_terminal_release_violates_current_contract"],"term_templates":[],"claim_templates":[
+ {"id_pattern":"{output_claim_ref}","predicate":"observed_failed_directed_flow_release","family":"epistemic","epistemic_status":"supported",
+ "argument_patterns":["{before_state_ref}","{failed_state_ref}"],"required_term_patterns":["{before_state_ref}","{failed_state_ref}"],
+ "required_fields":["output_claim_ref","failure_measurement_digest","objective_digest"],
+ "attribute_bindings":{"failure_measurement_digest":"failure_measurement_digest","objective_digest":"objective_digest","missing_required_capture_count":"missing_required_capture_count","forbidden_leak":"forbidden_leak","observed_leak_count":"observed_leak_count"},
+ "scope_bindings":{"parent_goal_ref":"parent_goal_ref","epoch":"epoch","episode_ref":"episode_ref","level_scope_ref":"level_scope_ref","input_revision_ref":"input_revision_ref","model_revision_ref":"model_revision_ref"},
+ "static_attributes":{"no_action_authority":true,"official_game_over_not_proved":true,"recovery_law_not_proved":true}}]}]}

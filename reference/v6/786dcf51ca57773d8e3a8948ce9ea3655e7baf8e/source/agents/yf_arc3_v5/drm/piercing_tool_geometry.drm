@@ -1,0 +1,1264 @@
+{
+  "module_id": "piercing_tool_geometry",
+  "declarations": [
+    {
+      "id": "policy.declared_piercing_tool_geometry",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "canonical_cursor_role_and_exact_cardinal_geometry"
+      ],
+      "applicability": [
+        "current_scoped_provisional_tool_geometry"
+      ],
+      "invariants": [
+        "morphology_assigns_a_revisable_hypothesis_only",
+        "ambiguous_orientations_are_preserved",
+        "no_bbox_or_frame_boundary_implies_whole_tool_or_world_domain",
+        "source_root_mask_remains_entire_and_disjoint_from_external_band",
+        "spine_is_a_section_representative_not_the_complete_collision_body",
+        "contact_never_confirms_tool_binding_or_cargo_attachment",
+        "logical_root_contact_anchor_is_not_rod_material_or_a_known_physical_extent_limit",
+        "rendered_relative_motion_discriminates_body_hypotheses_without_confirming_attachment_or_independence"
+      ],
+      "falsifiers": [
+        "observed_command_breaks_the_declared_root_and_axis_geometry"
+      ],
+      "configuration": {
+        "measurement_contract": {
+          "model_predicate": "piercing_tool_geometry_hypothesis",
+          "control_query_attribute": "role",
+          "control_query_value": "cursor_supposition",
+          "root_motion_claim_predicate": "action_conditions_translation"
+        },
+        "existing_extent_command_policy_ref": "policy.remember_observed_scoped_extent_command",
+        "existing_axis_transport_policy_ref": "policy.remember_observed_axis_transport_graph",
+        "body_motion_model_ref": "model.rigid_relative_rendered_tool_body",
+        "body_motion_comparison_scope_ref": "scope.paired_local_rendered_masks_not_physical_support"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.piercing_geometry.provisional",
+          "all_conditions": [],
+          "reason_ref": "reason.canonical_cursor_and_cardinal_root_geometry_support_provisional_tool"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "geometry_qualification_rank",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.piercing_geometry.geometry_qualification_rank",
+          "reason_ref": "reason.canonical_cursor_and_cardinal_root_geometry_support_provisional_tool"
+        },
+        {
+          "field": "axis_run_length",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.piercing_geometry.axis_run_length",
+          "reason_ref": "reason.canonical_cursor_and_cardinal_root_geometry_support_provisional_tool"
+        },
+        {
+          "field": "rod_mask_cell_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.piercing_geometry.complete_band_cell_count",
+          "reason_ref": "reason.canonical_cursor_and_cardinal_root_geometry_support_provisional_tool"
+        },
+        {
+          "field": "root_neighbor_surplus",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.piercing_geometry.root_neighbor_surplus",
+          "reason_ref": "reason.canonical_cursor_and_cardinal_root_geometry_support_provisional_tool"
+        }
+      ],
+      "reason_refs": [
+        "reason.canonical_cursor_and_cardinal_root_geometry_support_provisional_tool"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.piercing_tool_geometry_hypothesis"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.piercing_geometry.default",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": false,
+            "geometry_qualification_rank": 0,
+            "tool_geometry_class_ref": "geometry.tool_role_unknown",
+            "tool_geometry_needs_commit": false,
+            "whole_tool_shape_known": false,
+            "whole_influence_prediction_complete": false,
+            "tool_geometry_requires_revalidation": true,
+            "domain_declared": false,
+            "rail_declared": false,
+            "observed_command_model_complete": false
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "qualified_parent_goal_ref",
+            "geometry_candidate_domain_refs": "geometry_candidate_domain_refs",
+            "geometry_candidate_domain_rows": "geometry_candidate_domain_rows"
+          }
+        },
+        {
+          "id": "projection.piercing_geometry.unknown",
+          "all_conditions": [
+            {
+              "field": "is_unknown_alternative",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.piercing_geometry.provisional",
+          "all_conditions": [
+            {
+              "field": "is_unknown_alternative",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "canonical_cursor_role_match_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "canonical_control_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_control_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_control_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cardinal_axis_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "ordered_axis_cells_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cardinal_run_length",
+              "operator": "greater_than",
+              "expected": 1
+            },
+            {
+              "field": "root_neighbor_surplus",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "root_footprint_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometry_is_external_cardinal_band",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "historical_pose_requested",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "geometry_qualification_rank": 1,
+            "tool_geometry_class_ref": "geometry.provisional_rooted_cardinal_tool",
+            "tool_geometry_needs_commit": true,
+            "tool_role_ref": "role.rooted_protrusion_tool_supposition",
+            "tool_geometry_falsifier_refs": [
+              "falsifier.command_breaks_rooted_axis_geometry"
+            ],
+            "tool_geometry_condition_ref": "condition.root_and_axis_persist_under_declared_command_effects"
+          },
+          "bound_facts": {
+            "root_to_tip_positions": "root_to_tip_positions",
+            "occupied_positions": "occupied_positions",
+            "root_footprint_positions": "root_footprint_positions",
+            "axis_direction": "axis_direction",
+            "raw_tool_geometry_packet": "raw_tool_geometry_packet",
+            "tool_geometry_revision_ref": "tool_geometry_revision_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "observed_command_evidence_refs": "observed_command_evidence_refs",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "root_ref": "root_candidate_ref",
+            "rod_ref": "rod_candidate_ref",
+            "entity_ref": "entity_ref",
+            "rod_footprint_positions": "rod_footprint_positions",
+            "rod_cross_section_offsets": "rod_cross_section_offsets",
+            "geometry_is_external_cardinal_band": "geometry_is_external_cardinal_band",
+            "band_component_refs": "band_component_refs",
+            "root_band_contact_pairs": "root_band_contact_pairs",
+            "band_cross_section_width": "band_cross_section_width",
+            "axis_spine_representation_ref": "axis_spine_representation_ref",
+            "band_constant_cross_section": "band_constant_cross_section"
+          }
+        },
+        {
+          "id": "projection.piercing_geometry.external_cardinal_band",
+          "all_conditions": [
+            {
+              "field": "is_unknown_alternative",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "canonical_cursor_role_match_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "canonical_control_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_control_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_control_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cardinal_axis_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "ordered_axis_cells_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cardinal_run_length",
+              "operator": "greater_than",
+              "expected": 1
+            },
+            {
+              "field": "root_neighbor_surplus",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "root_footprint_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometry_is_external_cardinal_band",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composed_root_matches_source_mask",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composed_body_partition_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composed_geometry_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "band_constant_cross_section",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composed_band_component_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "composed_root_contact_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "band_axial_transverse_surplus",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "composed_logical_anchor_in_root",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "historical_pose_requested",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "geometry_qualification_rank": 2,
+            "tool_geometry_class_ref": "geometry.provisional_root_with_external_cardinal_band",
+            "tool_geometry_needs_commit": true,
+            "tool_role_ref": "role.rooted_protrusion_tool_supposition",
+            "tool_geometry_falsifier_refs": [
+              "falsifier.command_breaks_rooted_axis_geometry",
+              "falsifier.adjacent_band_does_not_follow_root",
+              "falsifier.extent_changes_the_proposed_cross_section",
+              "falsifier.logical_anchor_does_not_establish_the_physical_retraction_limit"
+            ],
+            "tool_geometry_condition_ref": "condition.adjacent_rendered_band_and_constant_section_follow_root_under_tested_effects",
+            "body_composition_is_proposed": true,
+            "physical_attachment_confirmed": false,
+            "primitive_action_release_authorized": false,
+            "logical_anchor_is_material_rod": false,
+            "physical_minimum_extent_known": false,
+            "body_motion_qualification_ref": "body_motion.unobserved_rendered_composition"
+          },
+          "bound_facts": {
+            "root_to_tip_positions": "root_to_tip_positions",
+            "occupied_positions": "occupied_positions",
+            "root_footprint_positions": "root_footprint_positions",
+            "axis_direction": "axis_direction",
+            "raw_tool_geometry_packet": "raw_tool_geometry_packet",
+            "tool_geometry_revision_ref": "tool_geometry_revision_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "observed_command_evidence_refs": "observed_command_evidence_refs",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "root_ref": "root_candidate_ref",
+            "rod_ref": "rod_candidate_ref",
+            "entity_ref": "entity_ref",
+            "rod_footprint_positions": "rod_footprint_positions",
+            "rod_cross_section_offsets": "rod_cross_section_offsets",
+            "geometry_is_external_cardinal_band": "geometry_is_external_cardinal_band",
+            "band_component_refs": "band_component_refs",
+            "root_band_contact_pairs": "root_band_contact_pairs",
+            "band_cross_section_width": "band_cross_section_width",
+            "axis_spine_representation_ref": "axis_spine_representation_ref",
+            "band_constant_cross_section": "band_constant_cross_section",
+            "proposed_extent_cross_section_offsets": "rod_cross_section_offsets",
+            "body_motion_claim_ref": "body_motion_claim_ref",
+            "body_motion_transition_ref": "body_motion_transition_ref",
+            "body_motion_action_ref": "body_motion_action_ref",
+            "body_motion_before_frame_ref": "body_motion_before_frame_ref",
+            "body_motion_delta": "body_motion_delta",
+            "body_motion_source_evidence_refs": "body_motion_source_evidence_refs",
+            "body_motion_relative_mask_match": "body_motion_relative_mask_match",
+            "body_motion_static_mask_match": "body_motion_static_mask_match",
+            "body_motion_root_rendered_signature_match": "body_motion_root_rendered_signature_match"
+          }
+        },
+        {
+          "id": "projection.piercing_geometry.body_transition_unresolved",
+          "all_conditions": [
+            {
+              "field": "geometry_is_external_cardinal_band",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_transition_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "historical_pose_requested",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": false,
+            "tool_geometry_needs_commit": false,
+            "body_motion_qualification_ref": "body_motion.unresolved_rendered_composition",
+            "tool_geometry_requires_revalidation": true
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.piercing_geometry.body_transition_compatible",
+          "all_conditions": [
+            {
+              "field": "is_unknown_alternative",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "canonical_cursor_role_match_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "canonical_control_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_control_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_control_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cardinal_axis_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "ordered_axis_cells_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cardinal_run_length",
+              "operator": "greater_than",
+              "expected": 1
+            },
+            {
+              "field": "root_neighbor_surplus",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "root_footprint_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometry_is_external_cardinal_band",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composed_root_matches_source_mask",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composed_body_partition_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composed_geometry_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "band_constant_cross_section",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composed_band_component_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "composed_root_contact_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "band_axial_transverse_surplus",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "composed_logical_anchor_in_root",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_transition_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometry_is_external_cardinal_band",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_claim_predicate",
+              "operator": "equals",
+              "expected": "action_conditions_translation"
+            },
+            {
+              "field": "body_motion_claim_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "body_motion_claim_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "body_motion_claim_epistemic_status",
+              "operator": "equals",
+              "expected": "supported"
+            },
+            {
+              "field": "body_motion_claim_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "body_motion_claim_defeated_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "body_motion_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_root_pose_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_root_rendered_signature_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_root_nonzero",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_mask_comparison_in_frame",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_relative_mask_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_static_mask_match",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "historical_pose_requested",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "geometry_qualification_rank": 3,
+            "tool_geometry_class_ref": "geometry.provisional_root_with_external_cardinal_band",
+            "tool_geometry_needs_commit": true,
+            "tool_role_ref": "role.rooted_protrusion_tool_supposition",
+            "tool_geometry_falsifier_refs": [
+              "falsifier.command_breaks_rooted_axis_geometry",
+              "falsifier.adjacent_band_does_not_follow_root",
+              "falsifier.extent_changes_the_proposed_cross_section",
+              "falsifier.logical_anchor_does_not_establish_the_physical_retraction_limit",
+              "falsifier.rendered_band_relative_pose_or_signature_changes_under_root_translation"
+            ],
+            "tool_geometry_condition_ref": "condition.rigid_relative_rendered_body_pose_remains_compatible_under_observed_translation",
+            "body_composition_is_proposed": true,
+            "physical_attachment_confirmed": false,
+            "primitive_action_release_authorized": false,
+            "logical_anchor_is_material_rod": false,
+            "physical_minimum_extent_known": false,
+            "body_motion_qualification_ref": "body_motion.compatible_rigid_relative_rendered_composition"
+          },
+          "bound_facts": {
+            "root_to_tip_positions": "root_to_tip_positions",
+            "occupied_positions": "occupied_positions",
+            "root_footprint_positions": "root_footprint_positions",
+            "axis_direction": "axis_direction",
+            "raw_tool_geometry_packet": "raw_tool_geometry_packet",
+            "tool_geometry_revision_ref": "tool_geometry_revision_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "observed_command_evidence_refs": "observed_command_evidence_refs",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "root_ref": "root_candidate_ref",
+            "rod_ref": "rod_candidate_ref",
+            "entity_ref": "entity_ref",
+            "rod_footprint_positions": "rod_footprint_positions",
+            "rod_cross_section_offsets": "rod_cross_section_offsets",
+            "geometry_is_external_cardinal_band": "geometry_is_external_cardinal_band",
+            "band_component_refs": "band_component_refs",
+            "root_band_contact_pairs": "root_band_contact_pairs",
+            "band_cross_section_width": "band_cross_section_width",
+            "axis_spine_representation_ref": "axis_spine_representation_ref",
+            "band_constant_cross_section": "band_constant_cross_section",
+            "proposed_extent_cross_section_offsets": "rod_cross_section_offsets",
+            "body_motion_claim_ref": "body_motion_claim_ref",
+            "body_motion_transition_ref": "body_motion_transition_ref",
+            "body_motion_action_ref": "body_motion_action_ref",
+            "body_motion_before_frame_ref": "body_motion_before_frame_ref",
+            "body_motion_delta": "body_motion_delta",
+            "body_motion_source_evidence_refs": "body_motion_source_evidence_refs",
+            "body_motion_relative_mask_match": "body_motion_relative_mask_match",
+            "body_motion_static_mask_match": "body_motion_static_mask_match",
+            "body_motion_root_rendered_signature_match": "body_motion_root_rendered_signature_match"
+          }
+        },
+        {
+          "id": "projection.piercing_geometry.body_transition_falsified",
+          "all_conditions": [
+            {
+              "field": "body_transition_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometry_is_external_cardinal_band",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_claim_predicate",
+              "operator": "equals",
+              "expected": "action_conditions_translation"
+            },
+            {
+              "field": "body_motion_claim_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "body_motion_claim_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "body_motion_claim_epistemic_status",
+              "operator": "equals",
+              "expected": "supported"
+            },
+            {
+              "field": "body_motion_claim_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "body_motion_claim_defeated_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "body_motion_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_root_pose_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_root_rendered_signature_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_root_nonzero",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_mask_comparison_in_frame",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_relative_mask_match",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "historical_pose_requested",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": false,
+            "tool_geometry_needs_commit": false,
+            "body_motion_qualification_ref": "body_motion.falsified_rigid_relative_rendered_composition",
+            "tool_geometry_requires_revalidation": true
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.piercing_geometry.historical_rigid_rendered_pose",
+          "all_conditions": [
+            {
+              "field": "is_unknown_alternative",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "canonical_cursor_role_match_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "canonical_control_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_control_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_control_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cardinal_axis_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "ordered_axis_cells_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cardinal_run_length",
+              "operator": "greater_than",
+              "expected": 1
+            },
+            {
+              "field": "root_neighbor_surplus",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "root_footprint_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometry_is_external_cardinal_band",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composed_root_matches_source_mask",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composed_body_partition_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composed_geometry_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "band_constant_cross_section",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "composed_band_component_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "composed_root_contact_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "band_axial_transverse_surplus",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "composed_logical_anchor_in_root",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_transition_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "geometry_is_external_cardinal_band",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_claim_predicate",
+              "operator": "equals",
+              "expected": "action_conditions_translation"
+            },
+            {
+              "field": "body_motion_claim_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "body_motion_claim_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "body_motion_claim_epistemic_status",
+              "operator": "equals",
+              "expected": "supported"
+            },
+            {
+              "field": "body_motion_claim_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "body_motion_claim_defeated_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "body_motion_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_root_pose_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_root_rendered_signature_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_root_nonzero",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_mask_comparison_in_frame",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_relative_mask_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_motion_static_mask_match",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "historical_pose_requested",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "historical_tool_claim_match_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "historical_tool_claim_epistemic_status",
+              "operator": "equals",
+              "expected": "proposed"
+            },
+            {
+              "field": "historical_tool_claim_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "historical_tool_claim_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "historical_tool_claim_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "historical_tool_claim_defeated_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "historical_tool_claim_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "historical_tool_claim_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "historical_tool_frame_pair_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "geometry_qualification_rank": 3,
+            "tool_geometry_class_ref": "geometry.provisional_root_with_external_cardinal_band",
+            "tool_geometry_needs_commit": true,
+            "tool_role_ref": "role.rooted_protrusion_tool_supposition",
+            "tool_geometry_falsifier_refs": [
+              "falsifier.command_breaks_rooted_axis_geometry",
+              "falsifier.adjacent_band_does_not_follow_root",
+              "falsifier.extent_changes_the_proposed_cross_section",
+              "falsifier.logical_anchor_does_not_establish_the_physical_retraction_limit",
+              "falsifier.rendered_band_relative_pose_or_signature_changes_under_root_translation",
+              "falsifier.historical_rendered_pose_or_transition_lineage_disagrees"
+            ],
+            "tool_geometry_condition_ref": "condition.rigid_relative_rendered_body_pose_remains_compatible_under_observed_translation",
+            "body_composition_is_proposed": true,
+            "physical_attachment_confirmed": false,
+            "primitive_action_release_authorized": false,
+            "logical_anchor_is_material_rod": false,
+            "physical_minimum_extent_known": false,
+            "body_motion_qualification_ref": "body_motion.compatible_rigid_relative_rendered_composition",
+            "historical_rendered_pose_is_proposed": true,
+            "historical_physical_identity_confirmed": false
+          },
+          "bound_facts": {
+            "root_to_tip_positions": "root_to_tip_positions",
+            "occupied_positions": "occupied_positions",
+            "root_footprint_positions": "root_footprint_positions",
+            "axis_direction": "axis_direction",
+            "raw_tool_geometry_packet": "raw_tool_geometry_packet",
+            "tool_geometry_revision_ref": "tool_geometry_revision_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "observed_command_evidence_refs": "observed_command_evidence_refs",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "root_ref": "root_candidate_ref",
+            "rod_ref": "rod_candidate_ref",
+            "entity_ref": "entity_ref",
+            "rod_footprint_positions": "rod_footprint_positions",
+            "rod_cross_section_offsets": "rod_cross_section_offsets",
+            "geometry_is_external_cardinal_band": "geometry_is_external_cardinal_band",
+            "band_component_refs": "band_component_refs",
+            "root_band_contact_pairs": "root_band_contact_pairs",
+            "band_cross_section_width": "band_cross_section_width",
+            "axis_spine_representation_ref": "axis_spine_representation_ref",
+            "band_constant_cross_section": "band_constant_cross_section",
+            "proposed_extent_cross_section_offsets": "rod_cross_section_offsets",
+            "body_motion_claim_ref": "body_motion_claim_ref",
+            "body_motion_transition_ref": "body_motion_transition_ref",
+            "body_motion_action_ref": "body_motion_action_ref",
+            "body_motion_before_frame_ref": "body_motion_before_frame_ref",
+            "body_motion_delta": "body_motion_delta",
+            "body_motion_source_evidence_refs": "body_motion_source_evidence_refs",
+            "body_motion_relative_mask_match": "body_motion_relative_mask_match",
+            "body_motion_static_mask_match": "body_motion_static_mask_match",
+            "body_motion_root_rendered_signature_match": "body_motion_root_rendered_signature_match",
+            "historical_tool_claim_ref": "historical_tool_claim_ref",
+            "historical_tool_after_frame_ref": "historical_tool_after_frame_ref"
+          }
+        },
+        {
+          "id": "projection.piercing_geometry.already_present",
+          "all_conditions": [
+            {
+              "field": "tool_geometry_revision_already_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "tool_geometry_needs_commit": false
+          },
+          "bound_facts": {}
+        }
+      ]
+    },
+    {
+      "id": "rule.piercing_tool_geometry_hypothesis",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "canonical_cursor_role_and_exact_cardinal_geometry"
+      ],
+      "applicability": [
+        "current_scoped_provisional_tool_geometry"
+      ],
+      "invariants": [
+        "morphology_assigns_a_revisable_hypothesis_only",
+        "ambiguous_orientations_are_preserved",
+        "no_bbox_or_frame_boundary_implies_whole_tool_or_world_domain"
+      ],
+      "falsifiers": [
+        "observed_command_breaks_the_declared_root_and_axis_geometry"
+      ],
+      "reason_refs": [
+        "reason.canonical_cursor_and_cardinal_root_geometry_support_provisional_tool"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{root_ref}",
+          "kind": "entity",
+          "label": "provisional rooted tool root",
+          "required_fields": [
+            "root_ref",
+            "entity_ref"
+          ],
+          "static_attributes": {
+            "role_supposition": "rooted_tool_root",
+            "commitment": "revisable",
+            "action_authorization": false
+          },
+          "attribute_bindings": {
+            "entity_ref": "entity_ref",
+            "historical_tool_claim_ref": "historical_tool_claim_ref",
+            "historical_tool_after_frame_ref": "historical_tool_after_frame_ref",
+            "historical_rendered_pose_is_proposed": "historical_rendered_pose_is_proposed",
+            "historical_physical_identity_confirmed": "historical_physical_identity_confirmed"
+          }
+        },
+        {
+          "id_pattern": "{rod_ref}",
+          "kind": "entity",
+          "label": "provisional rooted tool protrusion",
+          "required_fields": [
+            "rod_ref",
+            "root_ref",
+            "entity_ref"
+          ],
+          "static_attributes": {
+            "role_supposition": "rooted_tool_protrusion",
+            "commitment": "revisable",
+            "action_authorization": false
+          },
+          "attribute_bindings": {
+            "root_ref": "root_ref",
+            "entity_ref": "entity_ref",
+            "historical_tool_claim_ref": "historical_tool_claim_ref",
+            "historical_tool_after_frame_ref": "historical_tool_after_frame_ref",
+            "historical_rendered_pose_is_proposed": "historical_rendered_pose_is_proposed",
+            "historical_physical_identity_confirmed": "historical_physical_identity_confirmed"
+          }
+        },
+        {
+          "id_pattern": "{tool_geometry_revision_ref}",
+          "kind": "schema",
+          "label": "revisable rendered rooted tool geometry snapshot",
+          "required_fields": [
+            "tool_geometry_revision_ref",
+            "root_ref",
+            "rod_ref"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "physical_attachment_confirmed": false,
+            "whole_tool_shape_known": false,
+            "whole_influence_prediction_complete": false,
+            "action_authorization": false,
+            "physical_minimum_extent_known": false
+          },
+          "attribute_bindings": {
+            "root_ref": "root_ref",
+            "rod_ref": "rod_ref",
+            "entity_ref": "entity_ref",
+            "root_to_tip_positions": "root_to_tip_positions",
+            "root_footprint_positions": "root_footprint_positions",
+            "rod_footprint_positions": "rod_footprint_positions",
+            "occupied_positions": "occupied_positions",
+            "axis_direction": "axis_direction",
+            "proposed_extent_cross_section_offsets": "proposed_extent_cross_section_offsets",
+            "tool_geometry_condition_ref": "tool_geometry_condition_ref",
+            "tool_geometry_falsifier_refs": "tool_geometry_falsifier_refs",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "axis_spine_representation_ref": "axis_spine_representation_ref",
+            "body_motion_qualification_ref": "body_motion_qualification_ref",
+            "body_motion_claim_ref": "body_motion_claim_ref",
+            "body_motion_transition_ref": "body_motion_transition_ref",
+            "body_motion_action_ref": "body_motion_action_ref",
+            "body_motion_before_frame_ref": "body_motion_before_frame_ref",
+            "body_motion_delta": "body_motion_delta",
+            "body_motion_source_evidence_refs": "body_motion_source_evidence_refs",
+            "body_motion_relative_mask_match": "body_motion_relative_mask_match",
+            "body_motion_static_mask_match": "body_motion_static_mask_match",
+            "body_motion_root_rendered_signature_match": "body_motion_root_rendered_signature_match",
+            "historical_tool_claim_ref": "historical_tool_claim_ref",
+            "historical_tool_after_frame_ref": "historical_tool_after_frame_ref",
+            "historical_rendered_pose_is_proposed": "historical_rendered_pose_is_proposed",
+            "historical_physical_identity_confirmed": "historical_physical_identity_confirmed"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{tool_geometry_revision_ref}",
+          "predicate": "piercing_tool_geometry_hypothesis",
+          "family": "control",
+          "argument_patterns": [
+            "{entity_ref}"
+          ],
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "tool_geometry_revision_ref",
+            "entity_ref",
+            "root_ref",
+            "rod_ref",
+            "root_to_tip_positions",
+            "root_footprint_positions"
+          ],
+          "static_attributes": {
+            "whole_tool_shape_known": false,
+            "whole_influence_prediction_complete": false,
+            "physical_attachment_confirmed": false,
+            "primitive_action_release_authorized": false,
+            "physical_minimum_extent_known": false
+          },
+          "attribute_bindings": {
+            "root_ref": "root_ref",
+            "rod_ref": "rod_ref",
+            "entity_ref": "entity_ref",
+            "tool_role_ref": "tool_role_ref",
+            "root_to_tip_positions": "root_to_tip_positions",
+            "occupied_positions": "occupied_positions",
+            "root_footprint_positions": "root_footprint_positions",
+            "axis_direction": "axis_direction",
+            "raw_tool_geometry_packet": "raw_tool_geometry_packet",
+            "tool_geometry_revision_ref": "tool_geometry_revision_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "observed_command_evidence_refs": "observed_command_evidence_refs",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "tool_geometry_condition_ref": "tool_geometry_condition_ref",
+            "tool_geometry_falsifier_refs": "tool_geometry_falsifier_refs",
+            "rod_footprint_positions": "rod_footprint_positions",
+            "rod_cross_section_offsets": "rod_cross_section_offsets",
+            "geometry_is_external_cardinal_band": "geometry_is_external_cardinal_band",
+            "band_component_refs": "band_component_refs",
+            "root_band_contact_pairs": "root_band_contact_pairs",
+            "band_cross_section_width": "band_cross_section_width",
+            "axis_spine_representation_ref": "axis_spine_representation_ref",
+            "band_constant_cross_section": "band_constant_cross_section",
+            "proposed_extent_cross_section_offsets": "proposed_extent_cross_section_offsets",
+            "body_motion_qualification_ref": "body_motion_qualification_ref",
+            "body_motion_claim_ref": "body_motion_claim_ref",
+            "body_motion_transition_ref": "body_motion_transition_ref",
+            "body_motion_action_ref": "body_motion_action_ref",
+            "body_motion_before_frame_ref": "body_motion_before_frame_ref",
+            "body_motion_delta": "body_motion_delta",
+            "body_motion_source_evidence_refs": "body_motion_source_evidence_refs",
+            "body_motion_relative_mask_match": "body_motion_relative_mask_match",
+            "body_motion_static_mask_match": "body_motion_static_mask_match",
+            "body_motion_root_rendered_signature_match": "body_motion_root_rendered_signature_match",
+            "historical_tool_claim_ref": "historical_tool_claim_ref",
+            "historical_tool_after_frame_ref": "historical_tool_after_frame_ref",
+            "historical_rendered_pose_is_proposed": "historical_rendered_pose_is_proposed",
+            "historical_physical_identity_confirmed": "historical_physical_identity_confirmed"
+          }
+        }
+      ]
+    }
+  ]
+}

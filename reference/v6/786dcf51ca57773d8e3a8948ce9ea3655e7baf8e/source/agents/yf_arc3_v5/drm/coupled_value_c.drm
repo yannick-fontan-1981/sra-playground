@@ -1,0 +1,974 @@
+{
+  "module_id": "coupled_value_c",
+  "declarations": [
+    {
+      "id": "policy.coupled_value_operation_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "exact_source_requested_value_constraint_question"
+      ],
+      "applicability": [
+        "bounded_current_carrier_model"
+      ],
+      "invariants": [
+        "all_supports_and_correlations_retained",
+        "scoped_affine_shortcut_only",
+        "no_majority_vote",
+        "no_k03_recursive_planning",
+        "source_k10_k11_repair_purpose",
+        "no_action_release"
+      ],
+      "falsifiers": [
+        "wrong_op_mode",
+        "unsupported_projection",
+        "stale_certificate_or_checkpoint",
+        "protected_state_changed"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "coupled_value.projection",
+        "coupled_value.intersection",
+        "coupled_value.effect_columns",
+        "coupled_value.successor",
+        "coupled_value.affine_certificate",
+        "coupled_value.binary_solver",
+        "coupled_value.directional_solver",
+        "coupled_value.nonbinary_dp",
+        "coupled_value.nonbinary_csp",
+        "coupled_value.certificate",
+        "coupled_value.measure",
+        "coupled_value.precondition",
+        "coupled_value.fit",
+        "coupled_value.inverse_domain",
+        "coupled_value.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.coupled_value.projection",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.projection"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.projection"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "MEASURE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.projection"
+          }
+        },
+        {
+          "id": "projection.coupled_value.intersection",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.intersection"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.intersection"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "MEASURE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.intersection"
+          }
+        },
+        {
+          "id": "projection.coupled_value.effect_columns",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.effect_columns"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.effect_columns"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "MEASURE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.effect_columns"
+          }
+        },
+        {
+          "id": "projection.coupled_value.successor",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.successor"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.successor"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "STEP"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.successor"
+          }
+        },
+        {
+          "id": "projection.coupled_value.affine_certificate",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.affine_certificate"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.affine_certificate"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "CHECK"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.affine_certificate"
+          }
+        },
+        {
+          "id": "projection.coupled_value.binary_solver",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.binary_solver"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.binary_solver"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "SOLVE_GF2"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.binary_solver"
+          }
+        },
+        {
+          "id": "projection.coupled_value.directional_solver",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.directional_solver"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.directional_solver"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "SOLVE_TRIANGULAR"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.directional_solver"
+          }
+        },
+        {
+          "id": "projection.coupled_value.nonbinary_dp",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.nonbinary_dp"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.nonbinary_paths"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "PATH_DP"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.nonbinary_dp"
+          }
+        },
+        {
+          "id": "projection.coupled_value.nonbinary_csp",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.nonbinary_csp"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.nonbinary_paths"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "PATH_CSP"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.nonbinary_csp"
+          }
+        },
+        {
+          "id": "projection.coupled_value.certificate",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.certificate"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.certificate"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "VERIFY"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.certificate"
+          }
+        },
+        {
+          "id": "projection.coupled_value.measure",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.measure"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.measure"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "MEASURE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.measure"
+          }
+        },
+        {
+          "id": "projection.coupled_value.precondition",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.precondition"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.precondition"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "CHECK"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.precondition"
+          }
+        },
+        {
+          "id": "projection.coupled_value.fit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.fit"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.fit"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "FIT"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.fit"
+          }
+        },
+        {
+          "id": "projection.coupled_value.inverse_domain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.inverse_domain"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.inverse_domain"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "equals",
+              "expected": "INVERSE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.inverse_domain"
+          }
+        },
+        {
+          "id": "projection.coupled_value.unknown_operation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.coupled_value_constraints.projection"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.coupled_value_constraints.intersection"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.coupled_value_constraints.effect_columns"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.coupled_value_constraints.successor"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.coupled_value_constraints.affine_certificate"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.coupled_value_constraints.binary_solver"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.coupled_value_constraints.directional_solver"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.coupled_value_constraints.nonbinary_paths"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.coupled_value_constraints.certificate"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.coupled_value_constraints.measure"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.coupled_value_constraints.precondition"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.coupled_value_constraints.fit"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.coupled_value_constraints.inverse_domain"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.unsupported"
+          }
+        },
+        {
+          "id": "projection.coupled_value.wrong_mode_projection",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.projection"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "MEASURE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.unsupported"
+          }
+        },
+        {
+          "id": "projection.coupled_value.wrong_mode_intersection",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.intersection"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "MEASURE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.unsupported"
+          }
+        },
+        {
+          "id": "projection.coupled_value.wrong_mode_effect_columns",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.effect_columns"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "MEASURE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.unsupported"
+          }
+        },
+        {
+          "id": "projection.coupled_value.wrong_mode_successor",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.successor"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "STEP"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.unsupported"
+          }
+        },
+        {
+          "id": "projection.coupled_value.wrong_mode_affine_certificate",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.affine_certificate"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "CHECK"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.unsupported"
+          }
+        },
+        {
+          "id": "projection.coupled_value.wrong_mode_binary_solver",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.binary_solver"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "SOLVE_GF2"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.unsupported"
+          }
+        },
+        {
+          "id": "projection.coupled_value.wrong_mode_directional_solver",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.directional_solver"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "SOLVE_TRIANGULAR"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.unsupported"
+          }
+        },
+        {
+          "id": "projection.coupled_value.wrong_mode_nonbinary_paths",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.nonbinary_paths"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "PATH_DP"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "PATH_CSP"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.unsupported"
+          }
+        },
+        {
+          "id": "projection.coupled_value.wrong_mode_certificate",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.certificate"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "VERIFY"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.unsupported"
+          }
+        },
+        {
+          "id": "projection.coupled_value.wrong_mode_measure",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.measure"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "MEASURE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.unsupported"
+          }
+        },
+        {
+          "id": "projection.coupled_value.wrong_mode_precondition",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.precondition"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "CHECK"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.unsupported"
+          }
+        },
+        {
+          "id": "projection.coupled_value.wrong_mode_fit",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.fit"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "FIT"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.unsupported"
+          }
+        },
+        {
+          "id": "projection.coupled_value.wrong_mode_inverse_domain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "coupled_value.unsupported"
+            },
+            {
+              "field": "requested_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_value_constraints.inverse_domain"
+            },
+            {
+              "field": "requested_mode_ref",
+              "operator": "not_equals",
+              "expected": "INVERSE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "coupled_value.unsupported"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.coupled_value_operation_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "coupled_value.projection"
+            }
+          ],
+          "reason_ref": "reason.exact_source_coupled_question_preserves_scope_constraints_and_purpose"
+        },
+        {
+          "id": "tier.policy.coupled_value_operation_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "coupled_value.intersection"
+            }
+          ],
+          "reason_ref": "reason.exact_source_coupled_question_preserves_scope_constraints_and_purpose"
+        },
+        {
+          "id": "tier.policy.coupled_value_operation_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "coupled_value.effect_columns"
+            }
+          ],
+          "reason_ref": "reason.exact_source_coupled_question_preserves_scope_constraints_and_purpose"
+        },
+        {
+          "id": "tier.policy.coupled_value_operation_c.3",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "coupled_value.successor"
+            }
+          ],
+          "reason_ref": "reason.exact_source_coupled_question_preserves_scope_constraints_and_purpose"
+        },
+        {
+          "id": "tier.policy.coupled_value_operation_c.4",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "coupled_value.affine_certificate"
+            }
+          ],
+          "reason_ref": "reason.exact_source_coupled_question_preserves_scope_constraints_and_purpose"
+        },
+        {
+          "id": "tier.policy.coupled_value_operation_c.5",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "coupled_value.binary_solver"
+            }
+          ],
+          "reason_ref": "reason.exact_source_coupled_question_preserves_scope_constraints_and_purpose"
+        },
+        {
+          "id": "tier.policy.coupled_value_operation_c.6",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "coupled_value.directional_solver"
+            }
+          ],
+          "reason_ref": "reason.exact_source_coupled_question_preserves_scope_constraints_and_purpose"
+        },
+        {
+          "id": "tier.policy.coupled_value_operation_c.7",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "coupled_value.nonbinary_dp"
+            }
+          ],
+          "reason_ref": "reason.exact_source_coupled_question_preserves_scope_constraints_and_purpose"
+        },
+        {
+          "id": "tier.policy.coupled_value_operation_c.8",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "coupled_value.nonbinary_csp"
+            }
+          ],
+          "reason_ref": "reason.exact_source_coupled_question_preserves_scope_constraints_and_purpose"
+        },
+        {
+          "id": "tier.policy.coupled_value_operation_c.9",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "coupled_value.certificate"
+            }
+          ],
+          "reason_ref": "reason.exact_source_coupled_question_preserves_scope_constraints_and_purpose"
+        },
+        {
+          "id": "tier.policy.coupled_value_operation_c.10",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "coupled_value.measure"
+            }
+          ],
+          "reason_ref": "reason.exact_source_coupled_question_preserves_scope_constraints_and_purpose"
+        },
+        {
+          "id": "tier.policy.coupled_value_operation_c.11",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "coupled_value.precondition"
+            }
+          ],
+          "reason_ref": "reason.exact_source_coupled_question_preserves_scope_constraints_and_purpose"
+        },
+        {
+          "id": "tier.policy.coupled_value_operation_c.12",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "coupled_value.fit"
+            }
+          ],
+          "reason_ref": "reason.exact_source_coupled_question_preserves_scope_constraints_and_purpose"
+        },
+        {
+          "id": "tier.policy.coupled_value_operation_c.13",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "coupled_value.inverse_domain"
+            }
+          ],
+          "reason_ref": "reason.exact_source_coupled_question_preserves_scope_constraints_and_purpose"
+        },
+        {
+          "id": "tier.policy.coupled_value_operation_c.14",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "coupled_value.unsupported"
+            }
+          ],
+          "reason_ref": "reason.coupled_requested_question_not_supported"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.coupled_method_not_game_use_or_transfer",
+      "reason_refs": [
+        "reason.coupled_requested_question_not_supported",
+        "reason.exact_source_coupled_question_preserves_scope_constraints_and_purpose"
+      ]
+    }
+  ]
+}

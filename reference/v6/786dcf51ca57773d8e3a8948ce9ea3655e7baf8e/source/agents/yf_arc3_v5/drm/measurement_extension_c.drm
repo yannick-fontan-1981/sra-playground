@@ -1,0 +1,396 @@
+{
+  "module_id": "measurement_extension_c",
+  "declarations": [
+    {
+      "id": "policy.measurement_extension_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_epistemic_consumer_and_revisable_morphological_support"
+      ],
+      "applicability": [
+        "specialized_measurement_dependency"
+      ],
+      "invariants": [
+        "exact_operation_mode_models_parent_and_bounds_unchanged",
+        "same_dependency_agenda_and_receipts",
+        "provisional_premise_does_not_require_confirmed_physical_law",
+        "generic_k01_not_forced_substitute",
+        "no_family_dispatch_or_act",
+        "siblings_and_local_refusals_retained"
+      ],
+      "falsifiers": [
+        "stale_epoch_revision_scope",
+        "falsified_premise",
+        "request_identity_collision",
+        "dependency_invalidation"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "measurement_extension.defer_noncurrent_need",
+        "measurement_extension.retain_identity_collision",
+        "measurement_extension.retain_premise_question",
+        "measurement_extension.reuse_existing_request",
+        "measurement_extension.defer_agenda_capacity",
+        "measurement_extension.append_exact_request"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.measurement_extension_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "measurement_extension.defer_noncurrent_need"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "owner_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "inputs_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "consumer_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "measurement_extension.defer_noncurrent_need"
+          }
+        },
+        {
+          "id": "projection.measurement_extension_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "measurement_extension.retain_identity_collision"
+            },
+            {
+              "field": "owner_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "inputs_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "consumer_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_identity_collision",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "measurement_extension.retain_identity_collision"
+          }
+        },
+        {
+          "id": "projection.measurement_extension_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "measurement_extension.retain_premise_question"
+            },
+            {
+              "field": "owner_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "inputs_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "consumer_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "premise_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "premise_revisable_or_supported",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "measurement_extension.retain_premise_question"
+          }
+        },
+        {
+          "id": "projection.measurement_extension_c.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "measurement_extension.reuse_existing_request"
+            },
+            {
+              "field": "owner_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "inputs_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "consumer_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "premise_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "premise_revisable_or_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_identity_collision",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "equivalent_current_request_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "measurement_extension.reuse_existing_request"
+          }
+        },
+        {
+          "id": "projection.measurement_extension_c.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "measurement_extension.defer_agenda_capacity"
+            },
+            {
+              "field": "owner_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "inputs_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "consumer_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "premise_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "premise_revisable_or_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_identity_collision",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "equivalent_current_request_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "agenda_capacity_available",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "measurement_extension.defer_agenda_capacity"
+          }
+        },
+        {
+          "id": "projection.measurement_extension_c.5",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "measurement_extension.append_exact_request"
+            },
+            {
+              "field": "owner_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "inputs_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "consumer_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "premise_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "premise_revisable_or_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "request_identity_collision",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "equivalent_current_request_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "agenda_capacity_available",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "measurement_extension.append_exact_request"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.measurement_extension_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "measurement_extension.defer_noncurrent_need"
+            }
+          ],
+          "reason_ref": "reason.current_epistemic_need_for_exact_specialized_measurement"
+        },
+        {
+          "id": "tier.measurement_extension_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "measurement_extension.retain_identity_collision"
+            }
+          ],
+          "reason_ref": "reason.current_epistemic_need_for_exact_specialized_measurement"
+        },
+        {
+          "id": "tier.measurement_extension_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "measurement_extension.retain_premise_question"
+            }
+          ],
+          "reason_ref": "reason.current_epistemic_need_for_exact_specialized_measurement"
+        },
+        {
+          "id": "tier.measurement_extension_c.3",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "measurement_extension.reuse_existing_request"
+            }
+          ],
+          "reason_ref": "reason.current_epistemic_need_for_exact_specialized_measurement"
+        },
+        {
+          "id": "tier.measurement_extension_c.4",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "measurement_extension.defer_agenda_capacity"
+            }
+          ],
+          "reason_ref": "reason.current_epistemic_need_for_exact_specialized_measurement"
+        },
+        {
+          "id": "tier.measurement_extension_c.5",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "measurement_extension.append_exact_request"
+            }
+          ],
+          "reason_ref": "reason.current_epistemic_need_for_exact_specialized_measurement"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.equivalent_demand_refs_not_semantic_priority",
+      "reason_refs": [
+        "reason.current_epistemic_need_for_exact_specialized_measurement"
+      ]
+    }
+  ]
+}

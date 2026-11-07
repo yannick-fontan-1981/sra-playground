@@ -1,0 +1,159 @@
+{
+  "module_id": "arc3.directed_flow_release_grounding_d",
+  "declarations": [
+    {
+      "id": "policy.directed_flow_release_grounding_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_current_response_domain_requires_evidence_for_each_used_law"
+      ],
+      "configuration": {
+        "grounding_predicate_ref": "current_scoped_flow_release_grounding",
+        "release_evidence_fields": [
+          "trigger_evidence_ref"
+        ],
+        "advance_event_kind": "ADVANCE",
+        "tick_event_kind": "FLOW_TICK",
+        "leak_event_kind": "LEAK",
+        "extinction_event_kind": "SAFE_EXTINCTION",
+        "leak_stop_event_kind": "STOP_ON_LEAK_FRONT_CLEARED",
+        "non_spatial_event_kinds": [
+          "EXTERNAL_INPUT_DEBIT",
+          "NO_ACTIVE_PROPAGATION_SOURCES"
+        ],
+        "conditional_port_domain_requires_complete_response": true,
+        "accounted_terminal_event_kinds": [
+          "CAPTURE",
+          "SAFE_EXTINCTION",
+          "NONCAPTURE_COLLISION",
+          "LEAK",
+          "STOP_ON_LEAK_FRONT_CLEARED"
+        ],
+        "configuration_collision_kinds": [
+          "MOVE",
+          "POSE"
+        ]
+      },
+      "declared_alternative_refs": [
+        "flow_grounding.publish",
+        "flow_grounding.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt_equivalent_current_flow_release_grounding",
+      "selection_tiers": [
+        {
+          "id": "tier.grounding.current",
+          "reason_ref": "reason_current_response_domain_requires_evidence_for_each_used_law",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "flow_grounding.publish"
+            },
+            {
+              "field": "grounding_premises_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.grounding.unknown",
+          "reason_ref": "reason_current_response_domain_requires_evidence_for_each_used_law",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "flow_grounding.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "flow_grounding.publish": "rule.directed_flow_release_grounding_d"
+      },
+      "invariants": [
+        "current_source_inverse_receipt",
+        "exact_current_model_and_candidates",
+        "every_used_law_currently_evidenced",
+        "assumptions_not_evidence",
+        "no_action_authority",
+        "route_safety_not_proved",
+        "conditional_port_proposal_not_a_physical_law",
+        "every_conditional_branch_has_actual_native_child_edges",
+        "complete_capture_connections_and_no_forbidden_leak_under_current_positive_laws"
+      ]
+    },
+    {
+      "id": "rule.directed_flow_release_grounding_d",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason_current_response_domain_requires_evidence_for_each_used_law"
+      ],
+      "term_templates": [],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_claim_ref}",
+          "predicate": "current_scoped_flow_release_grounding",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{model_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}"
+          ],
+          "required_fields": [
+            "output_claim_ref",
+            "model_digest",
+            "candidate_domain_digest",
+            "inverse_receipt_digest",
+            "relevant_law_digest",
+            "response_branch_accounting_digest"
+          ],
+          "attribute_bindings": {
+            "model_digest": "model_digest",
+            "candidate_domain_digest": "candidate_domain_digest",
+            "inverse_receipt_digest": "inverse_receipt_digest",
+            "relevant_law_digest": "relevant_law_digest",
+            "response_rows_digest": "response_rows_digest",
+            "response_branch_accounting": "response_branch_accounting",
+            "response_branch_accounting_digest": "response_branch_accounting_digest"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "universal_law_not_proved": true,
+            "route_safety_not_proved": true
+          }
+        }
+      ]
+    }
+  ]
+}

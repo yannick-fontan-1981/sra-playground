@@ -1,0 +1,7 @@
+MODULE v6.temporal_selection
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP select
+        CALL selection.select(request=request) -> decision
+        STOP decision

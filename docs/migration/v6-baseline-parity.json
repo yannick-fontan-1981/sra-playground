@@ -1,0 +1,1989 @@
+{
+  "schema": "logos.v6.original-main-native-family-baseline.v1",
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceSha256": {
+    "common_frontier_runtime.py": "bcc9bc79d04287c830efedce48b4cc2ab89b5600b8a77fe09782c35d1c05c064",
+    "common_ordered_support.py": "16d15b134abccb73d7201b284eb0878b0906d4ad8250f59dc59f9d0c2189d0f4",
+    "common_multiscale_constraints.py": "01da7c7f636ed2039a364188c7f4fedb2c4c0a0e8bb6b2ba7f22b1c259eaaf12",
+    "common_symmetric_field.py": "4251502e06ff936495ebcd2b9048c67232e910c9b41653083a49565fc2a69fb4",
+    "common_support_navigation.py": "952a107336de688a32aa0db364cfcffe1422e4aa2e0ba49b403862aa3f990457",
+    "custom_bridge.py": "55e1f26c1bdf2db77aca1b8c6a6f11b26a402639b62398dec87894b7858cb943",
+    "neutral_observer.py": "9b09085eb708c084d82682b13848666ef1ca5f3fc6c10861d96e139228af927a",
+    "geometric_observer.py": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac",
+    "common_frontier_policy.drm.json": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+  },
+  "originalMain": "Executed without AST transformation; source manifest, session lease, active clock and public transport are explicit host bindings",
+  "admission": {
+    "targetLevelsPerGame": 3,
+    "levelActionCaps": [
+      160,
+      160,
+      160
+    ],
+    "globalActionCap": 480,
+    "clock": "active compute plus measured host execution",
+    "budgetQualification": "Diagnostic equal limits; not oracle-qualified competition limits"
+  },
+  "scope": {
+    "verified": "Full original MAIN completed nine actual levels. Its public commands and all resulting frames/animations exactly match the native-family fixtures.",
+    "notClaimed": "This evidence does not establish full native router, memory, every V6 capability, all levels, competition score, or arbitrary-game parity.",
+    "pythonUse": "Development oracle only; no Python agent ships in the site",
+    "gameSourceAccess": "Native game engines remain host-side; solvers receive public packets only"
+  },
+  "aggregate": {
+    "games": 3,
+    "actualLevelsCompleted": 9,
+    "actualActions": 83
+  },
+  "cases": [
+    {
+      "game": "HANO",
+      "status": "L3_passed",
+      "actualLevelsCompleted": 3,
+      "actualActions": 30,
+      "levelActions": {
+        "1": 6,
+        "2": 10,
+        "3": 14
+      },
+      "decisionCount": 15,
+      "selectedProposalKinds": [
+        "conditional_ordered_support_transfer"
+      ],
+      "selectedStrategyFamilies": [
+        "factored_material_return"
+      ],
+      "allCommandsAndPublicPacketsExactlyMatchNativeFamilyFixture": true,
+      "nativeFixture": "tests/fixtures/v6-ordered-support-reference.json",
+      "nativeFixtureSha256": "592de5b4eac271df8d3bdf9addea962380885b59c0f4b7508ea1ca7c9f6eb863",
+      "originalPublicTraceSha256": "9e56db51cab36cf33c987307857b08838cac63d7e8d7006468fb0c298638c2e2",
+      "originalReportSha256": "c89a641342f115bf98fc75b0251d2fc70596422e1a3db07438edf1b4662e9702",
+      "observations": [
+        {
+          "event": "reset",
+          "ordinal": 0,
+          "command": null,
+          "publicPacketSha256": "802d2fc62cb254a44ba94c10d364bef09875dcc8262b0853401cb1f2788579f3",
+          "frameSha256": "b98de996d71bd15851a87548cec2dfe58106d84aa35339aad5963407bdbaaf2e",
+          "animationPacketSha256": "507ea567747b2b6afdf408ef326f05327917e08d5bf472777bfa17814a77c217",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 0,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 1,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 51
+            }
+          },
+          "publicPacketSha256": "8807c8b99b2e9df093412c473d23a2b86c38dd6da42ad256f6a219fba0e56f1e",
+          "frameSha256": "dd9089663f52e835c057b0c0fd48890012ea0314666ff06fe96ad302688399ff",
+          "animationPacketSha256": "223191c4f8ecba6ab291211e0dc77e97d6aa9ccba82edfcb720016a14212a670",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 1,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 2,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 31,
+              "y": 51
+            }
+          },
+          "publicPacketSha256": "e487cab8e28eec8850f4e9e764f87863d9533b2f97760297add3cb1c317a3be8",
+          "frameSha256": "b4d48b14e12cfd69d29a9adc8f1c6e4d4ab66911860152eaabe46af8c636cc94",
+          "animationPacketSha256": "c08af926a6196107a36488119cf2bf300c101ede8d6bd0eabcbb7348808cd48e",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 2,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 3,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 51
+            }
+          },
+          "publicPacketSha256": "49304bc721fccf8f15226df5705057bb300d7a04f6a4f8af8a28cddfec452e95",
+          "frameSha256": "4bb62ad2067a6d80729fe505d1c8af8f34d43d954194cf2267716832795cf0bb",
+          "animationPacketSha256": "6256edc5dce304a60f1683d29c35ae69973e73caf5e0698795a3824791590261",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 3,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 4,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 49,
+              "y": 51
+            }
+          },
+          "publicPacketSha256": "d35646ef8bcb6b4abedb301e0d7c6b409652d578a19f608e6d0e96c93f02561f",
+          "frameSha256": "870420dc2eeb5a0af13bdfdb69420381d51168baef1403dd28fcc355496559bb",
+          "animationPacketSha256": "21b312c3de21e07b509c52f9ce52c0236a951e4ad31b1e69325d635d60e61fa3",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 4,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 5,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 31,
+              "y": 51
+            }
+          },
+          "publicPacketSha256": "21a05cee099ea14e4eb5b6a06e03fa25910a52d8783aaa1cc180f27659223fce",
+          "frameSha256": "44349205efdd03cc182ff2a4f68eeebbde0bb74b101e1da800b73d5d626b14a7",
+          "animationPacketSha256": "4d71334c773956bc02fd0c68fc7757d659b6df28c8b6cd8c6a87416202ba48d5",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 5,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 6,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 49,
+              "y": 51
+            }
+          },
+          "publicPacketSha256": "a4a8fbb239046e61abf913461fe4c76aa9b498cbf31da24d15c1ea327ae260ee",
+          "frameSha256": "cfd429328644402d9b6b74ea4e773b82950db224ec2ef54b1c3b27b1bac630bb",
+          "animationPacketSha256": "4130ee1fde6bef8cf7432ccfd1cb9003fa1dad2034d335ca4d1c7e9947d5a5d6",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 6,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 7,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 11,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "1c7b0cda1cba556722a695fc963c92579c5959003cbbead406e9f7a33d1854ac",
+          "frameSha256": "c7162b79b3d9a83193ba71d876114f3b2a8b2354e48c38a19937bd186abd359a",
+          "animationPacketSha256": "32f0b247dd97be3faf3fe184d7a19b0864dbd53ef218986fbc6f48a8c96020b7",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 7,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 8,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 25,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "b300cc0f106d8e1a1e7c72dfefcea8050edee49cc77c90383795c1e21c3422a9",
+          "frameSha256": "736c5dbe124ac5d9f2064e6cb9a242e3295ff197d129ca0d62ab36d691f06fdd",
+          "animationPacketSha256": "cdb5d4c74aceb02689cd8a73da0c68eaa285c4496ac3dbb790a4afce05209b02",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 8,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 9,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 11,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "9e33e5f3e3df32cd74290c022be7fe35c606237d6f668e47ecf4fae9e457f1e7",
+          "frameSha256": "ba7ac8901d3713506e07924480e22ce7b2e2b28114087ce5e92a87a11e2a3eb9",
+          "animationPacketSha256": "c0c39e280e42802f265e6c572f5771465ece3eb9a74471e9764f13eaf1dbc3ab",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 9,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 10,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 39,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "bcb5cd28c13817862ce948d6a8124c4c593c045a7ae2fa7177ef4e78ed0e4343",
+          "frameSha256": "3024caf200eb54ddcdffe094c05bc0c61ad4410bad4e0219036dc94570549af6",
+          "animationPacketSha256": "e1eb3f9eea4262b980f3686959f87d086b694455a8b75c33f08045a05b29d751",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 10,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 11,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 11,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "9c886b883d9447b9d3eb6005448dcacf7ba12bae4e8a380086919076aca4008c",
+          "frameSha256": "fc9d2b9fa344bea099a12a08419bc0f72ed1057c682e1a226be0f51c0cd40039",
+          "animationPacketSha256": "967fae23ff7ab1992ef7480f4b503322ca2d3ac3e390d37ec5c2ba5468da888d",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 11,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 12,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 53,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "538ae4667f3daba06ab1181a309c8d84986248ff589e80ef5553692cdaca25eb",
+          "frameSha256": "0dab6a1b22bed80470f8204f1d936837372618f2f0668e8e7730d86ec5fabbca",
+          "animationPacketSha256": "ec3177d558f537b7c869edc8ef385835523ee94d36ac13ba8783d3a03cc87492",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 12,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 13,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 39,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "56a7df493e06676a69616f3d2bd91bd067700dccb1a2e4a9fa75704acdad4fb3",
+          "frameSha256": "25b172b5ff090fbc279a3032aa76d0eabfa36042ca5d029542273469c6a0d6d0",
+          "animationPacketSha256": "4090656707afa231b481587cead19f165da9c2b7a0db3726fc2c1c3a621e565d",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 13,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 14,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 53,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "c5d7e02a5a7c5f0ab9817fd872be412e0c1c45bd804a3f38ec4bed195c0b4bb5",
+          "frameSha256": "f9c32f360ec9aee6befc36163277dd2a9b80f3db306dac60647a9fe62cad0866",
+          "animationPacketSha256": "e617b72ad2265d16b17d38a4552f4546f4aa50f9e543c628dce56f40e4f33303",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 14,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 15,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 25,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "c2e610d30c1e29bfd2d8c2eda3f1ec63caaf7e0b37bd957e0b819832a6d86cb5",
+          "frameSha256": "0f1a1dfaf9b02819ccc034701165acc3f581cf502548d1ebdda9a1945efd3a00",
+          "animationPacketSha256": "05002dbaefcdd85765e21f11a4080508c1e6d807cc67505ba9d1a6730bce470c",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 15,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 16,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 53,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "37951611adbe6f6cc00ccd685407debea63f426fd514940cf441e10944d0cc09",
+          "frameSha256": "ca029196f99cec8925afb993c0a97e4089142d5447c992ec9452bcfda5e5ab42",
+          "animationPacketSha256": "1d48ed782619b33bbcda8ebe91ed80b13eae1785913ddba8fc1f9dae8107a6d9",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 16,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 17,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "8702c27c9af7e95cc60ca341de91459372d40bea204f7ecc328bd480f5557b20",
+          "frameSha256": "32d5a0988c8dcb1d870e1e885d2c63cacc4e3283150aa84014682a66477b0a93",
+          "animationPacketSha256": "230a0d56e3c9aa3d0d2956cae5952422104145b4cad87b3df15fff9705b9fc02",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 17,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 18,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 49,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "fc2566fba1b485b7d8fbe94256850d3d608433714823ea95c67a37b6354c4ce4",
+          "frameSha256": "33483bf0647fb46bf6a3ca3c2d7573bae9fbdd204a0d668bb62a850bf812095b",
+          "animationPacketSha256": "0cc8ecb4d481b4792f364b199def0c0cb3d85e54be31d3ff68588d0aaa11e43a",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 18,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 19,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "60e439b6685cfd54ebd3480869cc93656fb99bddd88473915581130392fd2c73",
+          "frameSha256": "3e741a494990865f5f1056a31cfe5378def22bdaa68ef6c89f6dc1fcb218f621",
+          "animationPacketSha256": "16f4fe1147ef480040867f13a280df205c789efe8ebd81b244d420c77514be25",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 19,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 20,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 31,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "17a3fd470b98e86a6fa3997f5935edefff69d45d7697fdf1a2a1f762885140ab",
+          "frameSha256": "8d46312327e31b29c0c30c7d691d517b431b4af8821fec1d38f897a8127caa09",
+          "animationPacketSha256": "2d1478df10213d395da98d7fe39135fc4b03b22e9d9937308ab07c39db685c0f",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 20,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 21,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 49,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "a16dd0dced23e4705881d00d242f2f9d38d09406388bad623911abed14d44e0b",
+          "frameSha256": "9b4f4db2a55817349a6ad8ddc626f13376474643c8f04122624d1aca5ce9342e",
+          "animationPacketSha256": "89d21779f806161f8bb1d79bd234d11551fad7cbce46f9dd4a1b56b3624390b0",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 21,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 22,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 31,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "689817cab5a5902c5e243806d08945b79120af2aa5e2b47d297ae4f800772977",
+          "frameSha256": "925ee6b7a193416e5746a35b36eef00a5dbf454d4734d84c7a4e6e6207ec70f2",
+          "animationPacketSha256": "bbec9823069380aa5ceccede8179f583878cb44ee093524e720dee95ab029d20",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 22,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 23,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "7985cb71499de15a75b927fb79e9f7dc11378c0d8aa644d4d11e44ded304dd50",
+          "frameSha256": "8bada7771101d918a0f3c00b63f1a494f3290662202918ac3a90275ad2d17925",
+          "animationPacketSha256": "2b87c5eda5ae37b41a8e121e8bd93d7b849b2bf112fc686538fb05234b042fcb",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 23,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 24,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 49,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "299ffbd7b928781683de1ae0901870771ade062f25ee03790ccfe025bfd174b3",
+          "frameSha256": "9a577082c5b85fdd800a0f6aaa902f6bce3a46c6c38b32d9c9345f52347822f3",
+          "animationPacketSha256": "773131e3ded9c987e8aef67f360cf9e748a37d82db34b322d87c83fca712f5c9",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 24,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 25,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 31,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "1bd6b7045446efd405881457d2d80ec7d4ecd3d3ffde2432f7dfa9d3499502ab",
+          "frameSha256": "a4f17fa643bf871071c71d0b861d55a33755f4d110eca59f94a4991d285bf528",
+          "animationPacketSha256": "286ac9be17a6686bc181b6c31eea14abd8b84ba96662f6b518c4deec89e12a1f",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 25,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 26,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "b04f88b8ec61d797e1b80f7a491ff44c6e79e3738bb5ab3443ef122c32d93c6f",
+          "frameSha256": "486a67beedb97fd961b17b19a097ca0812d7f085ab0b62ac93604bea2746bdd4",
+          "animationPacketSha256": "f4f69c29008e9dc6dcfbdd0d939a2f7c1621a62a1a734e7cbb0c2ac6d0e69384",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 26,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 27,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 31,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "3f76edd03206bf585a123d82489b7a6f74e87ebe1c5443249cbcc0da97a3823e",
+          "frameSha256": "49b29735da07dcb69d51f8e8ed0b0e2901700633a2f74d733ccb824397c882ca",
+          "animationPacketSha256": "940fc0f3a13e285910b5c027e439b8f34728f3fa8de2c86b7c59ca93cfce54e2",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 27,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 28,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 49,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "2f7183a00877b0c7d9f9a3028a331e50cc15d9980c54f218ab6b5c8c3d871dd9",
+          "frameSha256": "6d7f71b5af4a5e15ca3450e98a3b8381af4f9d3799eec38c7818fb9b3aa4c2ad",
+          "animationPacketSha256": "2aab375e2bb08c1ed1c7234692c76207ebb76adf85a39a6442ceeb65c0bb251d",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 28,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 29,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "b77911f7ec45828818bf4a716c184e164e04dd2a9af03fc194692840ff634160",
+          "frameSha256": "fbde2994d14939dd85b72e3b6337840e92cbb1328557b0a860057be4ffdc33ed",
+          "animationPacketSha256": "44243c58bdf82aa0df55ff281b8634db0be94076100b93784b153997bbfa3714",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 29,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 30,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 49,
+              "y": 50
+            }
+          },
+          "publicPacketSha256": "8527f0104ac21dd9e7291fdf4154549bf9717f2cfa019543469d406472623fd0",
+          "frameSha256": "385d72e7faae2e25a28d492cdd37b0dd86b7cc12f70cf76a8f4c63cf2372a399",
+          "animationPacketSha256": "9635ae9d5829a83026d61baf36668d2d10d87129801ae802eac97568e1485cd3",
+          "state": "NOT_FINISHED",
+          "level": 4,
+          "levelsCompleted": 3,
+          "stepIndex": 30,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "game": "SYME",
+      "status": "L3_passed",
+      "actualLevelsCompleted": 3,
+      "actualActions": 36,
+      "levelActions": {
+        "1": 9,
+        "2": 12,
+        "3": 15
+      },
+      "decisionCount": 14,
+      "selectedProposalKinds": [
+        "public_symmetric_field"
+      ],
+      "selectedStrategyFamilies": [
+        "window_constraints"
+      ],
+      "allCommandsAndPublicPacketsExactlyMatchNativeFamilyFixture": true,
+      "nativeFixture": "tests/fixtures/v6-field-reference.json",
+      "nativeFixtureSha256": "0bceb91dc54c053e41f7ecfe1b03bb53a8d5a0c1712407a9b96e06715f425aba",
+      "originalPublicTraceSha256": "382319a6b0beb2f2caa9a9df81f18ed1b751e6796d69441dbbc63b318f0e1365",
+      "originalReportSha256": "58ac557ecfa72a888dc1db8a9e701537161fae8f4c4a4a13ae6504abaa2d74e4",
+      "observations": [
+        {
+          "event": "reset",
+          "ordinal": 0,
+          "command": null,
+          "publicPacketSha256": "7898ab9fe5230a878deeac5cd630d10da33ac8d7055fe3f670a8787767c72798",
+          "frameSha256": "a8e7722fbd6f8241e802a54867e6428e28e7f7178ce3a114ddc3c7302f7294ef",
+          "animationPacketSha256": "d1bc0551ba82f36f2b73c0712207397bdc7273556229168e855660318e17ddf7",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 0,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 1,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 7,
+              "y": 35
+            }
+          },
+          "publicPacketSha256": "6ed7d548801cfc9ad0e14401e0e880b0871b384fef59e9684b8a65992378cd7c",
+          "frameSha256": "22b0e18f8bbcf334c11c79f9be3988069f2a247974bd35d14d4418899d59bfb9",
+          "animationPacketSha256": "03bfbe8bca8ed61e8c16c78221d3cad4c5ee2b8ab11d9eb1ee5425a68179d58d",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 1,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 2,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 23
+            }
+          },
+          "publicPacketSha256": "49793f35a395bfc6019e396cba823ed36a72c1f8c7112abe7a7809f02370093b",
+          "frameSha256": "c3a4f5719a73eaa25c2bd3fe7cf980ff245a2f668f3b54ee90604d6eca11bbb0",
+          "animationPacketSha256": "144584101bad05e3b79a4ecffd77d3032f92fde09f58806e3f2e186fc47051b7",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 2,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 3,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 35
+            }
+          },
+          "publicPacketSha256": "c3ffee4516e7dbfac973f2f6c85d0e301907381e9ec314ca33809e4c4689f0f4",
+          "frameSha256": "558e80b9cd7ede94c65dad46d39651adb0d0b55266288174c53b555d470dd2a9",
+          "animationPacketSha256": "84f7a3504346153a52cbdd9993bc52d88ebb59a8a320cef28824ffcd5fc4ab7e",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 3,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 4,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 19,
+              "y": 53
+            }
+          },
+          "publicPacketSha256": "1f48843c2a8d3c9ea48ec8108e95ffd243ee65348349b75539d41b2b616d4a9e",
+          "frameSha256": "20d6ee16aad535681725981e75a14a654d03a831b2e2ca30c11963cd5acd3cd5",
+          "animationPacketSha256": "01a4d239e93c6d69048813d46f189ae11f30bb10efe1f9a41ff55caab0c633e8",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 4,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 5,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 37,
+              "y": 5
+            }
+          },
+          "publicPacketSha256": "12e9706559f964b9350fd8a88c09b85edeff87ced2895064471a951bc6cd2a35",
+          "frameSha256": "68a48b79f28f6a2c60da06a12efe5e2c7bd495c0659d532c72fe8e236af043a9",
+          "animationPacketSha256": "43b175e9c9429aec471d9aaf92676035673a2f91a41b1a7ef4d62395c918de3e",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 5,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 6,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 37,
+              "y": 53
+            }
+          },
+          "publicPacketSha256": "ecbf55ab651a766422dde0fcb9b524a2b193963cb14c645bc83aedc84054704d",
+          "frameSha256": "d9fa8a7a326a1f0c8346ac581959dc6dff1d60a3e035ee8897ad61f826a6e039",
+          "animationPacketSha256": "1bd22df1468bb80c69189d6a0014a67d4eb33664b92174ac9c684be222280637",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 6,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 7,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 43,
+              "y": 41
+            }
+          },
+          "publicPacketSha256": "a7dd979253c7b029cac780bb1a14d5bc61f05aa3f64eae7e0067d87da8e45aa9",
+          "frameSha256": "cb76f3780410025c2e500648b715512aa8b42c75197fa5c5b6105d7792c45da0",
+          "animationPacketSha256": "27573b27700e008ad16e51f011359dd5ade337dd882ab8098fbab614bc8b0029",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 7,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 8,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 49,
+              "y": 29
+            }
+          },
+          "publicPacketSha256": "96a58da6adf86d5a66191618095f4a0259979054eaff2306b401f8c8e2b1eafb",
+          "frameSha256": "bcab5c1217b95e45d2cb0390570a821ecbf12c7a4c3aea8bbc67f8e0dd0f7654",
+          "animationPacketSha256": "9c08fae7a9dcb1a4b7036019cc526bbbf4971152451b39d3b6a182e9b4fe1354",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 8,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 9,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 55,
+              "y": 29
+            }
+          },
+          "publicPacketSha256": "d81ab9ccb859b9c4f532b5bc2d2b6ec56ac6b6abef6ad7a18c4b0c67ecf0109a",
+          "frameSha256": "e302d748a528559b47eb5d7b33341bf5f9a6d203b3a401476cb211df4b9642c5",
+          "animationPacketSha256": "700d4de720d55d461c556be5cc48809a2ed3245832e543223246ef8f984a89d7",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 9,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 10,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 9,
+              "y": 27
+            }
+          },
+          "publicPacketSha256": "fe5cbfc8fbf3dbe64f78f49810f524a6a65e6f3ba166f534d8c8277da9bf6ec9",
+          "frameSha256": "304854df825da73a8fad9086f50d8e239f638672b57e1697d80d3ba62fa3c64b",
+          "animationPacketSha256": "3c24673120ed6d08168273529af7e12ad017064670553817e1985ee7d4ef8970",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 10,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 11,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 17,
+              "y": 23
+            }
+          },
+          "publicPacketSha256": "73f18ebf4b1b77f437d1053a5eff51ebf8020bfd749bff8772dde507fa0309ef",
+          "frameSha256": "79a34a332e5953d6702c9abb74c8b507000d133d6b16f39c09267b2ebd3d9b40",
+          "animationPacketSha256": "9e463fb8e7e6fe8824ccdbb083cbdda9eec45cae34cc9f6ca4ad781081596521",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 11,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 12,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 17,
+              "y": 39
+            }
+          },
+          "publicPacketSha256": "b62c2823778d7754383b3d1cdb7993399831962ca377255ffca5709638dc6de5",
+          "frameSha256": "1186f964e084efe31c15da409cd08a0ef67477176ac154a064180182b7c951eb",
+          "animationPacketSha256": "496c8c0075c3d65d15dfd2e9fbb0700427fc52ee4ef1633fd3ed594edfafa07b",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 12,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 13,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 21,
+              "y": 35
+            }
+          },
+          "publicPacketSha256": "4a63ba657f486abe8dacb5db32e2ca4d975d35d17549cbbad0524f0038cd62f7",
+          "frameSha256": "3e6a9f717798441183f190c91443053355dca032326b859c0ecc283815a8e3dd",
+          "animationPacketSha256": "9fdc83bbbd5fb14cdf3fab6ea9bef1fbf0981978836e224d30bc841e7d54f78f",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 13,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 14,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 29,
+              "y": 47
+            }
+          },
+          "publicPacketSha256": "bf7a0811d5365c6748c8ed5366bf0ffa5f4e73ef722ac0522d08770f21a09e31",
+          "frameSha256": "df2d73b96fed8e956e1a3ee2523a91bee20c6ffecc49a9d8df6345d11f822b9b",
+          "animationPacketSha256": "84713137c30dc130bf0876daf2937815c09f66e2bc40dd773d5627930a4e5209",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 14,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 15,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 29,
+              "y": 51
+            }
+          },
+          "publicPacketSha256": "d6aaed1ae27224b0a62c4ab0c979b9f1447a66a637faaf697d2ea676b42ead41",
+          "frameSha256": "d08ad02d904a65ae0327b2189c04d4978e4a0d63507ad249422210e0fadb4883",
+          "animationPacketSha256": "153ae161a9a9dc7b132cda5408d24ad29f3fe599855dd9685d4da9a269dd9f94",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 15,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 16,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 33,
+              "y": 15
+            }
+          },
+          "publicPacketSha256": "5113646a93f997c14c2ac229a18d471802a71c0581ee5ea36e094ce48c1c3c66",
+          "frameSha256": "d42d1ae17ea9d32a907b453089f0e9dbc71bd834905d6cd40e0240ac5af98099",
+          "animationPacketSha256": "c46282153a7711f10dad3b0acad3931c3d62f52595b05f2dd3134b4ee6d36f8d",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 16,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 17,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 33,
+              "y": 35
+            }
+          },
+          "publicPacketSha256": "a010a1cebf85a5ae77185d41495e8c153672b7653af5ac0f614af773ce378234",
+          "frameSha256": "41f38cfba6ba438e722976ef08e1b937990ed6c321487003181519c7232e368f",
+          "animationPacketSha256": "36252ef69f4e17e2262e1e624e876d3fca18b99ba620923a2db5382934ad3455",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 17,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 18,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 37,
+              "y": 43
+            }
+          },
+          "publicPacketSha256": "fe7f09f748959db3a68b757bd21c3bfa46322bdf5669d596f5b3d10bbe20d282",
+          "frameSha256": "bcc990f29ea97b2e3a60c4df3a7ac382bba67d68499998c28073db04e5c90d6b",
+          "animationPacketSha256": "a4d19bfdace5c288b73f9cf686ac68e8c1b2604ea562fb55567028c7f6a5c33b",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 18,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 19,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 45,
+              "y": 43
+            }
+          },
+          "publicPacketSha256": "ccb5ba7c1d4b52e65c67eec1af8dcc5c02fd77d109a77673f7aa7008578aba4f",
+          "frameSha256": "4b8832d842b39b4e06124a5217b3929e6232d15c1a606292ef58c7dacf202cf6",
+          "animationPacketSha256": "73b81514b9295ced71d030a2eabb113ad2e748d1cf3edfb1c140be107712576e",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 19,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 20,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 45,
+              "y": 51
+            }
+          },
+          "publicPacketSha256": "24db671a2288418ad8ea491f520aad978b4bfdac47300a4b126b06a681bf17da",
+          "frameSha256": "ec5e01ae2f9180b71920384000aaeac610aafe569844e58009ffe27e494935e5",
+          "animationPacketSha256": "b607058fef45d85982d59b5e43123b37e9c8623e5e98e582f1babf2df9056080",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 20,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 21,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 49,
+              "y": 35
+            }
+          },
+          "publicPacketSha256": "20555bbf765a043cdbbab34ce24650efd39d9f529e56e3655aea2d7c4a43c210",
+          "frameSha256": "9b3ff5fb772ab0066667b803ce75265c1ecac660c9d554fa415b07d72a57c7e0",
+          "animationPacketSha256": "90d69baff2035f3c2b03e347fa296105ca4ae4b6a589c5a84524f1409773384d",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 21,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 22,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 9,
+              "y": 15
+            }
+          },
+          "publicPacketSha256": "265d2878b41bb46465196b3f07dba68f4746cf9339b2db93ed3ff26d37e51b64",
+          "frameSha256": "4d00738c1a75685e23e0c8b54b1a49ac537acca956c806cd5e63c18cce891cae",
+          "animationPacketSha256": "b28d31a4083e50176ea5b9deea3956578f68058f2353d8eeb5b6160d8d752c00",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 22,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 23,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 23
+            }
+          },
+          "publicPacketSha256": "00ff86da682d4bf67bff095c1d72856825f0387a6365bfda1b2f1c0f914a2352",
+          "frameSha256": "bbef121c9be0d3665b3058c20d6ea976ef798ece61e464af6f1c72e8f4dcb5f6",
+          "animationPacketSha256": "eac6847947e6638ed1d83a80b745a0dca2d118df108013a677d90bbc2a52c106",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 23,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 24,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 27
+            }
+          },
+          "publicPacketSha256": "b96b0d9b9d459843d14f0331b45b321fafadaa10248ae190ef963a41bf983f0c",
+          "frameSha256": "c1f85032ca0c2f94c4028f7ae9148a7e67fbd683c49a0b77a4f8dcc6dabd2c2e",
+          "animationPacketSha256": "15694368ddad6db22b479e0dd7ca87f466182833a20854dc97952b6bb6fc16f3",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 24,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 25,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 17,
+              "y": 7
+            }
+          },
+          "publicPacketSha256": "84d203ae759c1c440893f34ce3bb887af3e082452dca2e34510a17d4392e1422",
+          "frameSha256": "f3899919e955e199d1ef0ebe01d129f9dd0534ccd66aa305c2026129c507c11e",
+          "animationPacketSha256": "6a3e9c4f384937392565e2213ee038400a10da0650301220bc34a04806f11f6a",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 25,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 26,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 17,
+              "y": 23
+            }
+          },
+          "publicPacketSha256": "4c494d72677156563db53ac95acd7b4736f9cffa04e99c33e167a219979ea6ae",
+          "frameSha256": "e2ab68a790773fee8ba33c39da7e127d19ba6e24ab15b241d4deacad080a08ab",
+          "animationPacketSha256": "95be478cc408b3a8611e82a19b3b094e4bf86b9257994b1c3883444cfc25983c",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 26,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 27,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 17,
+              "y": 31
+            }
+          },
+          "publicPacketSha256": "868a586ce1420830d1eabbdab939859f2ad953112fd383c7de9c82a316c8f441",
+          "frameSha256": "2c7e008585c3f74c8aac9cdafc1500e7c7b6ac3435587db3614c31fb7701ee6c",
+          "animationPacketSha256": "6c4b706e8216966313debd40255193d91c644a80b2280ad351189a2f7e3c06d1",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 27,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 28,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 21,
+              "y": 35
+            }
+          },
+          "publicPacketSha256": "ac28aefce1badd65cd41826d2344e5fb1cf6bd00c67c85a23991113bbb189fc5",
+          "frameSha256": "c40cb9619e4acee8b4adb18b854cc365dada64119a7ce75c1173c05d038d03b2",
+          "animationPacketSha256": "3cda99ce536ae62a3c45801aec53f26e35c19a578a089142e134bea9389a4e8a",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 28,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 29,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 25,
+              "y": 31
+            }
+          },
+          "publicPacketSha256": "1bfbe2eefc499c55b98a3371bfefc95407edf7e1707080c1f61e0aa715c25811",
+          "frameSha256": "d6ef959c2ff4e43b793717395275a0cb067754b37f733fda05c761cd3f758745",
+          "animationPacketSha256": "712b0258c69506dedd92f6649446b96819b3cfb06f480bb4a34bcae98a3a524b",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 29,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 30,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 33,
+              "y": 15
+            }
+          },
+          "publicPacketSha256": "3433dee94d25e006d330f9430e3c18e6250a91c94a9c6643124717a00b2b9b4e",
+          "frameSha256": "5cac08dda2264d3e3f4e211f9be09d6605c40c553c3f6ae7a6217e918cd6698e",
+          "animationPacketSha256": "d15a1a8f36c92861fcd8786c4d96a2f9883eff298d230d2a491971fed670a44d",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 30,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 31,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 37,
+              "y": 23
+            }
+          },
+          "publicPacketSha256": "b0129af12b6013e6ee18fe959efb3f02aa9c8c07b460df1acf45e532c8e58df8",
+          "frameSha256": "430110c962037260db8416415180e6dfd7b97944f2c81595c883e08bb0188f0a",
+          "animationPacketSha256": "ee09d03ab2f55c14e9494e22438049722589272aac4d5ed24984b87c1ce06e46",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 31,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 32,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 41,
+              "y": 27
+            }
+          },
+          "publicPacketSha256": "d546b0114faaec2a099d6f1381e868bdb8c3a8527ca14203de8d33ae0d011924",
+          "frameSha256": "65d2e26e0b480fa98f5489cc0cb1b25c1b85e832c9cc0f4230bfc418ee843c0c",
+          "animationPacketSha256": "5299aec3420596423127d7be72689ad14955bdbdcae7c00de7c385cd2fcbf420",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 32,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 33,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 45,
+              "y": 15
+            }
+          },
+          "publicPacketSha256": "3da33dd24e185872b4b251bd93de86d0b6e83e0358586999c1bf1172c4cdcffb",
+          "frameSha256": "c7318387f2cc25436572c5edf7937bb66856a9baf251abd34a5e4ff0ccec4295",
+          "animationPacketSha256": "dcbbe48841b4d8a95c075ae8855b61cd1f5814097ff45b8e0c7cfebb50cba1d7",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 33,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 34,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 45,
+              "y": 19
+            }
+          },
+          "publicPacketSha256": "09d762f485b2b6601990ed269e4f72a5d3fd9b549e36f92ca88e40d15b62da16",
+          "frameSha256": "e507b4b845a5b4e347fc6fa764ca6f0fe54c641cb25122a16521585255ee2f36",
+          "animationPacketSha256": "a4b030053c68d5fb19bc66f7459fcca7fec27d4d12bbd02a62fbec447e7e5660",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 34,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 35,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 45,
+              "y": 47
+            }
+          },
+          "publicPacketSha256": "afb372ca464773af7643d8d394c109af8bb97f1e79a43ce562ea90c8b36b4022",
+          "frameSha256": "01351961344d04e4ad43d3ceb20a31915fb6d7a5d12e35fcc8f609b50584c0dd",
+          "animationPacketSha256": "c0f0e254a6651f02597a9e420537405c6efc47a4e557705923478534d1c8007f",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 35,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 36,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 49,
+              "y": 39
+            }
+          },
+          "publicPacketSha256": "978f1ab559fe5dc60535faa5fc149e772b3ff13216637e2096bce05345a49883",
+          "frameSha256": "d800ff491e7d0520dc06d823ec163664a7b4891796711941eac13e509031ca96",
+          "animationPacketSha256": "75bc1326889b19b51737091852d854069af3b730e21daaf8058e565100bbcb1d",
+          "state": "NOT_FINISHED",
+          "level": 4,
+          "levelsCompleted": 3,
+          "stepIndex": 36,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "game": "DNOI",
+      "status": "L3_passed",
+      "actualLevelsCompleted": 3,
+      "actualActions": 17,
+      "levelActions": {
+        "1": 3,
+        "2": 6,
+        "3": 8
+      },
+      "decisionCount": 17,
+      "selectedProposalKinds": [
+        "public_symmetric_field"
+      ],
+      "selectedStrategyFamilies": [
+        "window_constraints"
+      ],
+      "allCommandsAndPublicPacketsExactlyMatchNativeFamilyFixture": true,
+      "nativeFixture": "tests/fixtures/v6-field-reference.json",
+      "nativeFixtureSha256": "0bceb91dc54c053e41f7ecfe1b03bb53a8d5a0c1712407a9b96e06715f425aba",
+      "originalPublicTraceSha256": "98b4f09c7f4386499833334902f9628d25c32a46a2a84c24efba6e29c5ede742",
+      "originalReportSha256": "9c745840c7b558c7a14a4a63cbdb4d61f8f75b97e4b4c842e1fa87578ba135b5",
+      "observations": [
+        {
+          "event": "reset",
+          "ordinal": 0,
+          "command": null,
+          "publicPacketSha256": "85abe4344c68e7d10a0c140fc0fb238b07179a3b9b3d7883d6fc8965f83cacce",
+          "frameSha256": "fe8185baa681f8b64efdc63295c621b807d85c690745d8d564aa59e0d6c192f1",
+          "animationPacketSha256": "4e41e640c2ef63b17c6dfe2d220a234bc2ab5056b8700a1351c0ed7745ff1af4",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 0,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 1,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 25,
+              "y": 5
+            }
+          },
+          "publicPacketSha256": "eae8195ae4eba3d8c94eb667eb9900a057094f159c087e7fb3e3e1a801539d59",
+          "frameSha256": "6f54e4c651d7c496084be73189178b836c133f5f620144250ee91ee9eaa1dc19",
+          "animationPacketSha256": "aaff2167bd5a24d8c7f0d18be6a5d6938c5698ea50370e2826c107057b804cfc",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 1,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 2,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 49,
+              "y": 11
+            }
+          },
+          "publicPacketSha256": "d1430677e402197245b9455f3cab92609abe931ca06e42b0bc0445ad192cbcd2",
+          "frameSha256": "b1e0e312953b5830fadff28938d603beb97a012c179f60a57d9da08a1595be2b",
+          "animationPacketSha256": "8f54f01a80a1a429b242d55776d85246100789cb334863ecf734fae303d49d96",
+          "state": "NOT_FINISHED",
+          "level": 1,
+          "levelsCompleted": 0,
+          "stepIndex": 2,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 3,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 31,
+              "y": 35
+            }
+          },
+          "publicPacketSha256": "b9b01b85fa5979dd0be7cea97b7e457d8de06bf4332b90237611fba60107665d",
+          "frameSha256": "4113971323c1221c49917a7c3a1465d034133387fa26ec56070292b0787cafa1",
+          "animationPacketSha256": "0d041bdb8057d7bb598d0a37f89f96de49d3bebd9b675b928ae924154a73eeb4",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 3,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 4,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 23
+            }
+          },
+          "publicPacketSha256": "b15c082a9b6ca69b02b52e7b3bca6e07647af674cd9565bb722f3badaed2bf97",
+          "frameSha256": "5f36fabf5c27680060cca0f46e14759905e61ca6a80b01ef9ad7d091b15ad6c9",
+          "animationPacketSha256": "0b47b98a383a38cdc2081358a77eef50e9d54525989dd456c5c7d79c2a2d4e92",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 4,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 5,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 25,
+              "y": 11
+            }
+          },
+          "publicPacketSha256": "d3d0803617aa67fdf6a7a74459ea167df2e894b551a9a6041f4169bf892f13bf",
+          "frameSha256": "9a2fafb17b8e3f324de7198f8191cd9e404189207f31de80012475b0ada0b611",
+          "animationPacketSha256": "ec653b156c3e213cf1074e148ff29a5ff4da456ca18e40a2851371cb559679bd",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 5,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 6,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 43,
+              "y": 23
+            }
+          },
+          "publicPacketSha256": "27903d3059249062e26706b674550891bd7292b7c64da8c58ea38af1e7abd4a5",
+          "frameSha256": "5c71db92a21f1f4fd5608b7af14d86ddc8fec9203f694ca68eebfc4d8d6c972f",
+          "animationPacketSha256": "a650a3e663ec7cfad041345635dc4d966ab4ca60b1c4c0917b6b9847b4f610ff",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 6,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 7,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 49,
+              "y": 29
+            }
+          },
+          "publicPacketSha256": "5d97aabbd7b9a53bff586352b9b40ca85cbfe66b4ddc803060b6d3fd0334f527",
+          "frameSha256": "8a3710fe333690765437390e1d0f69c0377fb3324bd150f46a01e213f32802e8",
+          "animationPacketSha256": "639ff7011a2dc43dffc581dfde9caf2c1ebb5f908027f62065e285f77d2d3f6a",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 7,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 8,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 25,
+              "y": 53
+            }
+          },
+          "publicPacketSha256": "6040bdd621db33c3c8b4fe162c85d6fb0bea7ec5896800144584cfd7f9903a7f",
+          "frameSha256": "a96b40b575d29eccdaef5dc59a0e60e02152477f01d1d48d4e957e1cf8df1fb2",
+          "animationPacketSha256": "5059fc91ad177127e9034ed8cfae57dfaadec6928f40b1e545ad088fcd795038",
+          "state": "NOT_FINISHED",
+          "level": 2,
+          "levelsCompleted": 1,
+          "stepIndex": 8,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 9,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 43,
+              "y": 53
+            }
+          },
+          "publicPacketSha256": "45b4bba5b4d334168cd94df15c0d1b68273ec6b7128fea21aa5eeed7d179475e",
+          "frameSha256": "3cbbb1dee0fe6c8f7c9c8599bcda1ec84b24ed3ad0625cf4fa095fd013aef99b",
+          "animationPacketSha256": "232e26434e4efb6282f835215243fe223802f2a8e1ff171e63d8cfde8aaed271",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 9,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 10,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 51
+            }
+          },
+          "publicPacketSha256": "1984b8283a2521b5b97415f30689f4af1cd0ab76bea71488906afe7f9ebc81e0",
+          "frameSha256": "0b9d52e1abf622db146e1e321146ab67fa0e78a7be262743135f7b9d2025d8a4",
+          "animationPacketSha256": "d4c2e43932e5bea0be8f283b0e48592f3bddeaa91729c21c0d81dac2a4da04ed",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 10,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 11,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 29,
+              "y": 27
+            }
+          },
+          "publicPacketSha256": "cac78af2d4c32a550de3a2fb12b91a6fcc0b7329820c1bc551bfc3caf77c71b5",
+          "frameSha256": "9147f0cfa4a74be2b8860129b47f13168fb38e15bddfcc5434fa37b74210c5af",
+          "animationPacketSha256": "8627abda21b00ecd673c1a02b59c03888455376767ffb47c4e1ead2a8870f65f",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 11,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 12,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 45,
+              "y": 23
+            }
+          },
+          "publicPacketSha256": "3361ccef6e9a82be90107a85b49f9898d736d0938995320d8003c6b23780c182",
+          "frameSha256": "4b60065aacd06ed785ed31f916d8e9d4e722d4682e6f524147e888fc76d25579",
+          "animationPacketSha256": "aca36962a78718e4eaac745d0392632dd841517ab33f10f6d6e5f085bf8cda91",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 12,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 13,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 45,
+              "y": 43
+            }
+          },
+          "publicPacketSha256": "e4c022de2035b018b07b2ba018eba9965acc62f652ebf5d6d10d46b36df5b916",
+          "frameSha256": "779a28ea4be06ad8a3654a0b269a8109be0f469a4c974a7d168be94c98ee880f",
+          "animationPacketSha256": "10b753b854a6c1eca4b2922bd4d901cc754efea0ec431f546bda860026ab0577",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 13,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 14,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 9,
+              "y": 51
+            }
+          },
+          "publicPacketSha256": "d50eebbcb63abc42acba773e4dd4bf8fb6a96a7c954732f14faca440c500f48e",
+          "frameSha256": "69ee814f278858ff3cc9dfd3d028f1658f454418becee8e8874141aa413474f2",
+          "animationPacketSha256": "f7bda22a949a31a52f5e63b6bef9f18fa3c9923aef85ae9706a549244d97d504",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 14,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 15,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 45,
+              "y": 15
+            }
+          },
+          "publicPacketSha256": "6b9a3eff74f8aa93943e10e7792cb0900d262b6e098804365409f2a5d12c307f",
+          "frameSha256": "7ac33a79a2a10c620ee4d4cb6d056a88da5fe86746e0f55a27eacf20457a877b",
+          "animationPacketSha256": "3c1156c7a08fc002d93ab9baeb1a785dee35cef6e12a8233e2f72f0c743c327c",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 15,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 16,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 13,
+              "y": 47
+            }
+          },
+          "publicPacketSha256": "157e0ffa493a2fe7f09b9b1e9b86fc08db422de8cabb1b1d5bfdf0504f0010d9",
+          "frameSha256": "5595a1e3538fc1bbed45b4cfb535da50de4a26ff30ebbf9b6c8792ec272f433e",
+          "animationPacketSha256": "328ad69e1d053df9c4ee988cb3816f8c5a2021179d43ec572910e5b009bf472f",
+          "state": "NOT_FINISHED",
+          "level": 3,
+          "levelsCompleted": 2,
+          "stepIndex": 16,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        },
+        {
+          "event": "step",
+          "ordinal": 17,
+          "command": {
+            "actionRef": "ACTION6",
+            "data": {
+              "x": 49,
+              "y": 11
+            }
+          },
+          "publicPacketSha256": "96a66324f1170dd773b202e6ff24111d36b009ece51d123c2340205aac3b2cfe",
+          "frameSha256": "27483354b8630a0204ae2cf85f1ebce33fb1114ac4a6a338838be653e4e4392a",
+          "animationPacketSha256": "b1accf9672b81589aee804792e3ce1c0711d765029ffaf5ffe58da434afc4c56",
+          "state": "NOT_FINISHED",
+          "level": 4,
+          "levelsCompleted": 3,
+          "stepIndex": 17,
+          "availableActionIds": [
+            6,
+            7
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+ "module_id":"arc3.directed_flow_model_support_d","declarations":[
+ {"id":"policy.directed_flow_model_support_d","kind":"selection_policy","evaluation":"declared_lexicographic_order","supported_operators":["SELECT"],
+ "input_contract":"yf_arc3_v5.authority_input.selection.v1","output_contract":"yf_arc3_v5.authority_output.selection.v1",
+ "reason_refs":["reason_local_fit_and_current_release_domain_grounding_are_distinct"],
+ "configuration":{"grounding_predicate_ref":"current_scoped_flow_release_grounding","model_support_predicate_ref":"current_scoped_flow_model_supported"},
+ "declared_alternative_refs":["flow_model.publish","flow_model.unknown"],"selection_tie_breakers":[{"field":"alternative_ref","preferred_order":"minimize"}],
+ "canonical_equivalence_tie_break_debt_ref":"debt_equivalent_current_flow_fit_support","selection_tiers":[
+ {"id":"tier.model.current_fit_and_grounding","reason_ref":"reason_local_fit_and_current_release_domain_grounding_are_distinct","all_conditions":[
+ {"field":"alternative_ref","operator":"equals","expected":"flow_model.publish"},{"field":"model_fit_premises_current","operator":"equals","expected":true},
+ {"field":"local_fit_compatible","operator":"equals","expected":true},{"field":"grounding_current","operator":"equals","expected":true}]},
+ {"id":"tier.model.unknown","reason_ref":"reason_local_fit_and_current_release_domain_grounding_are_distinct","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"flow_model.unknown"}]}],
+ "meaning_template_ref_by_alternative":{"flow_model.publish":"rule.directed_flow_model_support_d"},"invariants":["actual_canonical_fit_return","current_source_model_scope","all_fit_alternatives_retained","local_fit_not_universal_law","release_grounding_separate","no_action_authority"]},
+ {"id":"rule.directed_flow_model_support_d","kind":"rule","evaluation":"project_requested_conclusions","supported_operators":["DERIVE"],
+ "input_contract":"yf_arc3_v5.authority_input.derivation.v1","output_contract":"yf_arc3_v5.authority_output.derivation.v1","relation_family":"epistemic",
+ "reason_refs":["reason_local_fit_and_current_release_domain_grounding_are_distinct"],"term_templates":[],"claim_templates":[
+ {"id_pattern":"{output_claim_ref}","predicate":"current_scoped_flow_model_supported","family":"epistemic","epistemic_status":"supported",
+ "argument_patterns":["{model_ref}","{parent_goal_ref}"],"required_term_patterns":["{parent_goal_ref}"],
+ "required_fields":["output_claim_ref","model_digest","fit_receipt_digest","grounding_digest"],
+ "attribute_bindings":{"model_digest":"model_digest","fit_receipt_digest":"fit_receipt_digest","grounding_digest":"grounding_digest","retained_model_results":"retained_model_results"},
+ "scope_bindings":{"parent_goal_ref":"parent_goal_ref","epoch":"epoch","episode_ref":"episode_ref","level_scope_ref":"level_scope_ref","input_revision_ref":"input_revision_ref","model_revision_ref":"model_revision_ref"},
+ "static_attributes":{"no_action_authority":true,"universal_law_not_proved":true}}]}]}

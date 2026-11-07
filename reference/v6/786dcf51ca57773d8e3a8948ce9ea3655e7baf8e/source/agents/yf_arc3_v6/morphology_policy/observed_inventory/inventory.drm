@@ -1,0 +1,795 @@
+{
+  "module_id": "v6_observed_inventory",
+  "declarations": [
+    {
+      "id": "schema.observed_inventory_composition",
+      "kind": "schema",
+      "premises": [
+        "current_action_conditioned_cell_measurements"
+      ],
+      "applicability": [
+        "current_scope_and_observation"
+      ],
+      "invariants": [
+        "no_oracle",
+        "no_hidden_capacity",
+        "no_unobserved_consumption_rule",
+        "no_previous_local_permit"
+      ],
+      "falsifiers": [
+        "changed_control",
+        "ambiguous_identity",
+        "visible_shape_contradiction",
+        "scope_changed"
+      ],
+      "reason_refs": [
+        "0.4.2-2,5",
+        "0.1.1-5,19"
+      ],
+      "configuration": {
+        "rules": [
+          {
+            "id": "inventory.corresponding_display_transfer",
+            "all_conditions": [
+              {
+                "field": "display_transfer_current",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "display_complement_unique",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "role": "possessed_signature_hypothesis",
+              "composition": "controlled_body_with_matching_signature_at_complementary_partition",
+              "operation": "OP18",
+              "question": "Test whether this currently held visual signature changes admission at its measured complement.",
+              "preserve": [
+                "current_displayed_signature",
+                "other_world_objects"
+              ],
+              "unknown": [
+                "consumption",
+                "capacity",
+                "terminal_rule"
+              ],
+              "status": "access_probe_candidate"
+            }
+          },
+          {
+            "id": "inventory.local_supplier",
+            "all_conditions": [
+              {
+                "field": "local_source_retained",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "display_transfer_current",
+                "operator": "equals",
+                "expected": false
+              }
+            ],
+            "conclusions": {
+              "role": "local_supplier_hypothesis",
+              "composition": "signature_transferred_from_current_source_to_peripheral_display",
+              "operation": "OP18",
+              "question": "Test an admitted interaction at the retained source and compare local and peripheral effects.",
+              "preserve": [
+                "current_source_identity",
+                "other_objects"
+              ],
+              "unknown": [
+                "interaction_command",
+                "capacity",
+                "pickup_rule"
+              ],
+              "status": "acquisition_probe_candidate"
+            }
+          },
+          {
+            "id": "inventory.approach_supplier",
+            "all_conditions": [
+              {
+                "field": "world_complement_unique",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "local_source_retained",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "display_transfer_current",
+                "operator": "equals",
+                "expected": false
+              }
+            ],
+            "conclusions": {
+              "role": "potential_access_supplier",
+              "composition": "controlled_body_at_measured_matching_source",
+              "operation": "OP18",
+              "question": "Approach the measured source to discriminate its potential contribution to access.",
+              "preserve": [
+                "source_and_partition",
+                "other_objects"
+              ],
+              "unknown": [
+                "pickup",
+                "access_rule"
+              ],
+              "status": "approach_candidate"
+            }
+          },
+          {
+            "id": "inventory.local_access_return",
+            "all_conditions": [
+              {
+                "field": "entered_bound_partition",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "partition_changed_outside_control",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "display_signature_disappeared",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "status": "local_access_return",
+              "scope": "this exact contact only",
+              "unknown": [
+                "universal_consumption",
+                "capacity",
+                "terminal_rule"
+              ]
+            }
+          },
+          {
+            "id": "inventory.parent_capacity_question",
+            "all_conditions": [
+              {
+                "field": "local_access_return_present",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_gauge_related_mark",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "role": "gauge_related_occurrence_hypothesis",
+              "composition": "controlled_body_at_current_gauge_related_occurrence",
+              "operation": "OP18",
+              "question": "The witnessed access is complete; test whether this newly accessible occurrence changes the measured reserve before pursuing other remaining compositions.",
+              "preserve": [
+                "other_objects",
+                "current_body_identity"
+              ],
+              "unknown": [
+                "effect_of_contact",
+                "gain",
+                "capacity",
+                "terminal_rule"
+              ],
+              "status": "capacity_probe_candidate"
+            }
+          },
+          {
+            "id": "inventory.reopened_unknown_endpoint",
+            "all_conditions": [
+              {
+                "field": "unassigned_endpoint_measured",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "role": "unassigned_observed_occurrence",
+              "composition": "controlled_body_at_newly_accessible_unassigned_occurrence",
+              "operation": "OP18",
+              "question": "Continue the unchanged parent through an observed reachable occurrence whose contribution is still unknown; preserve any current signature during the approach.",
+              "preserve": [
+                "current_displayed_signature",
+                "other_objects"
+              ],
+              "unknown": [
+                "endpoint_role",
+                "contact_effect",
+                "terminal_rule"
+              ],
+              "status": "endpoint_approach_candidate"
+            }
+          },
+          {
+            "id": "inventory.recalled_transfer_experiment",
+            "all_conditions": [
+              {
+                "field": "retained_endpoint_current",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "observed_method_revalidated",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "role": "possible_source_under_current_control",
+              "composition": "test_previous_transfer_method_at_new_retained_occurrence",
+              "operation": "OP18",
+              "question": "Test the already witnessed transfer command at this other retained occurrence and compare source and peripheral display; applicability and utility remain unknown.",
+              "preserve": [
+                "other_world_objects",
+                "current_source_identity"
+              ],
+              "unknown": [
+                "transfer_applicability",
+                "capacity",
+                "terminal_rule"
+              ],
+              "status": "method_probe_candidate"
+            }
+          },
+          {
+            "id": "inventory.remembered_signature_under_changed_presentation",
+            "all_conditions": [
+              {
+                "field": "remembered_correspondence_unique",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "prior_boundary_target_revalidated",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "role": "historical_signature_persistence_hypothesis",
+              "composition": "test_access_dependency_for_current_revalidated_boundary_goal",
+              "operation": "OP18",
+              "question": "The current presentation does not reveal its content. Test the uniquely matching current partition under the historically witnessed signature hypothesis, toward the currently revalidated scoring-goal hypothesis.",
+              "preserve": [
+                "current_indicator",
+                "other_objects"
+              ],
+              "unknown": [
+                "persistence_across_boundary",
+                "replacement",
+                "current_indicator_meaning",
+                "access_applicability",
+                "terminal_conditions"
+              ],
+              "status": "access_probe_candidate"
+            }
+          },
+          {
+            "id": "inventory.recalled_gain_for_unmet_access",
+            "all_conditions": [
+              {
+                "field": "recalled_gain_occurrence_current",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "unmet_access_dependency_current",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "role": "recalled_gain_hypothesis",
+              "composition": "locally_revalidated_gain_occurrence_for_access_dependency",
+              "operation": "OP18",
+              "question": "Test the current occurrence matching a previously observed local gain while keeping the access dependency.",
+              "preserve": [
+                "other_world_objects",
+                "named_future_consumer"
+              ],
+              "unknown": [
+                "allocation_capacity",
+                "reverse_transfer_applicability",
+                "future_retrievability",
+                "new_occurrence_effect"
+              ],
+              "status": "capacity_probe_candidate"
+            }
+          },
+          {
+            "id": "inventory.reach_unmet_access_frontier",
+            "all_conditions": [
+              {
+                "field": "unmet_access_dependency_current",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "frontier_not_current",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_corresponding_signature",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "role": "intermediate_access_dependency",
+              "composition": "held_signature_at_accessible_front_of_unmet_partition",
+              "operation": "OP18",
+              "question": "Reach the measured frontier that connects the missing supplier and the named future consumer.",
+              "preserve": [
+                "other_world_objects",
+                "named_future_consumer"
+              ],
+              "unknown": [
+                "allocation_capacity",
+                "reverse_transfer_applicability",
+                "future_retrievability",
+                "new_occurrence_effect"
+              ],
+              "status": "dependency_frontier_candidate"
+            }
+          },
+          {
+            "id": "inventory.temporary_allocation_contrast",
+            "all_conditions": [
+              {
+                "field": "unmet_access_dependency_current",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "frontier_current",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_corresponding_signature",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "allocation_command_observed",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "role": "conditional_temporary_allocation",
+              "composition": "current_signature_externally_recoverable_near_named_future_use",
+              "operation": "OP18",
+              "question": "Test the observed transaction command as a reverse transfer at the accessible frontier; capacity and recovery remain unknown.",
+              "preserve": [
+                "other_world_objects",
+                "named_future_consumer"
+              ],
+              "unknown": [
+                "allocation_capacity",
+                "reverse_transfer_applicability",
+                "future_retrievability",
+                "new_occurrence_effect"
+              ],
+              "status": "allocation_probe_candidate"
+            }
+          },
+          {
+            "id": "inventory.changed_endpoint_local_operator_hypothesis",
+            "all_conditions": [
+              {
+                "field": "current_changed_endpoint",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "declared_local_operator_available",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "role": "unassigned_current_contact",
+              "composition": "test_local_operator_at_observed_changed_endpoint",
+              "operation": "OP18",
+              "question": "Compare the declared revisable local operator at a newly reached changed endpoint; other nondirectional inputs remain unknown.",
+              "preserve": [
+                "current_control",
+                "other_world_objects"
+              ],
+              "unknown": [
+                "local_operator_effect",
+                "object_role",
+                "utility",
+                "terminal_rule",
+                "other_nondirectional_input_effects"
+              ],
+              "status": "local_contact_probe_candidate"
+            }
+          },
+          {
+            "id": "inventory.changed_endpoint_local_operator_recall",
+            "all_conditions": [
+              {
+                "field": "current_changed_endpoint",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "observed_local_operator_revalidated",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "role": "unassigned_current_contact",
+              "composition": "test_local_operator_at_observed_changed_endpoint",
+              "operation": "OP18",
+              "question": "Revalidate the previously effectful local operator at this currently reached changed endpoint; effect and utility may differ.",
+              "preserve": [
+                "current_control",
+                "other_world_objects"
+              ],
+              "unknown": [
+                "local_operator_effect",
+                "object_role",
+                "utility",
+                "terminal_rule",
+                "other_nondirectional_input_effects"
+              ],
+              "status": "local_contact_recall_candidate"
+            }
+          },
+          {
+            "id": "inventory.local_reconciliation_with_unexplained_remote_effect",
+            "all_conditions": [
+              {
+                "field": "bound_endpoint_or_local_operator",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_control_effect_matched",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "measured_support_domain_revalidated",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "other_domain_compositions_preserved",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "explicit_preservation_satisfied",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "unexplained_remote_effect_observed",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "status": "conditional_local_reconciliation",
+              "role": "current_contact_with_unexplained_remote_effects",
+              "composition": "retain_local_arrival_and_remote_unknown_separately",
+              "operation": "OP18",
+              "question": "Retain the measured local effect while keeping the concurrent remote change unexplained; do not assign HUD, terminal or object utility.",
+              "preserve": [
+                "other_compositions_in_revalidated_support_domain",
+                "all_explicit_current_obligations"
+              ],
+              "unknown": [
+                "remote_effect_role",
+                "remote_effect_necessity",
+                "goal_relation"
+              ]
+            }
+          },
+          {
+            "id": "inventory.current_scope_quantum_revalidation",
+            "all_conditions": [
+              {
+                "field": "prior_is_foreign_scope_hypothesis",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_unique_axial_body_translation",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_direction_concordant",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_entry_underlay_unique",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "forward_boundary_unindicated",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_quantum_differs",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "status": "current_quantum_revalidation_candidate",
+              "role": "current_scoped_control_hypothesis",
+              "composition": "revalidate_current_quantum_preserving_prior_method",
+              "operation": "OP18",
+              "question": "Test the newly measured scoped displacement instead of treating a foreign-scope quantum as confirmed; preserve old method and uncertainty.",
+              "preserve": [
+                "current_body",
+                "prior_scoped_method_provenance"
+              ],
+              "unknown": [
+                "collision_law",
+                "universality_of_new_quantum",
+                "unobserved_directions"
+              ]
+            }
+          },
+          {
+            "id": "inventory.foreign_metric_unresolved_not_channel_refuted",
+            "all_conditions": [
+              {
+                "field": "prior_is_foreign_scope_hypothesis",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_unique_axial_body_translation",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_quantum_differs",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "current_quantum_candidate_supported",
+                "operator": "equals",
+                "expected": false
+              },
+              {
+                "field": "current_direction_concordant",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "status": "foreign_metric_withdrawn_current_input_unresolved",
+              "role": "unresolved_current_control",
+              "composition": "withhold_foreign_metric_without_refuting_channel",
+              "operation": "OP18",
+              "question": "Current effect differs from an unvalidated foreign metric; withhold that metric while keeping only declared conditional interface hypotheses.",
+              "preserve": [
+                "current_control_geometry",
+                "prior_method_evidence"
+              ],
+              "unknown": [
+                "current_quantum",
+                "collision_law",
+                "current_input_effect"
+              ]
+            }
+          },
+          {
+            "id": "inventory.nonreactive_selected_region_operator_probe",
+            "all_conditions": [
+              {
+                "field": "current_nonreactive_selected_endpoint",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "declared_local_operator_available",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "status": "local_contact_probe_candidate",
+              "role": "unassigned_current_contact",
+              "composition": "test_local_operator_at_nonreactive_selected_distinct_region",
+              "operation": "OP18",
+              "question": "The selected distinct region was reached unchanged outside the body; test one declared local operator without presuming function, no-effect or absence of hidden effects.",
+              "preserve": [
+                "current_control",
+                "other_world_objects"
+              ],
+              "unknown": [
+                "local_operator_effect",
+                "effect_under_control",
+                "nonlocal_effect",
+                "object_role",
+                "utility",
+                "terminal_rule"
+              ]
+            }
+          },
+          {
+            "id": "inventory.nonreactive_selected_region_operator_recall",
+            "all_conditions": [
+              {
+                "field": "current_nonreactive_selected_endpoint",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "observed_local_operator_revalidated",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "status": "local_contact_recall_candidate",
+              "role": "unassigned_current_contact",
+              "composition": "test_local_operator_at_nonreactive_selected_distinct_region",
+              "operation": "OP18",
+              "question": "The selected distinct region was reached unchanged outside the body; test one declared local operator without presuming function, no-effect or absence of hidden effects.",
+              "preserve": [
+                "current_control",
+                "other_world_objects"
+              ],
+              "unknown": [
+                "local_operator_effect",
+                "effect_under_control",
+                "nonlocal_effect",
+                "object_role",
+                "utility",
+                "terminal_rule"
+              ]
+            }
+          },
+          {
+            "id": "inventory.observed_context_reconfiguration_question",
+            "all_conditions": [
+              {
+                "field": "observed_context_association_current",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "unexamined_prior_regions_currently_different",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "no_current_ordinary_contribution",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "conclusions": {
+              "status": "context_reconfiguration_candidate",
+              "role": "context_information_question",
+              "composition": "currently_bound_intervention_site_with_unresolved_prior_regional_appearances",
+              "operation": "OP18",
+              "question": "Reach the revalidated intervention site, then test whether it exposes previously unexamined appearances. The current examined frontier has no available ordinary contribution; neither inverse, reversibility nor terminal necessity is assumed.",
+              "preserve": [
+                "current_control",
+                "explicit_current_composition_obligations"
+              ],
+              "unknown": [
+                "segmentation_or_appearance_change",
+                "mechanical_identity",
+                "new_configuration",
+                "operator_conditions",
+                "reversibility",
+                "terminal_necessity"
+              ]
+            }
+          }
+        ],
+        "interface_prior": {
+          "status": "declared_revisable_library_hypothesis_not_acquired_mapping",
+          "directions": {
+            "ACTION1": [
+              0,
+              -1
+            ],
+            "ACTION2": [
+              0,
+              1
+            ],
+            "ACTION3": [
+              -1,
+              0
+            ],
+            "ACTION4": [
+              1,
+              0
+            ]
+          },
+          "interaction": "ACTION5",
+          "falsifier": "first returned displacement, body or local interaction differs from prediction; suspend this contextual offer"
+        },
+        "choice_order": [
+          "access_probe_candidate",
+          "capacity_probe_candidate",
+          "allocation_probe_candidate",
+          "dependency_frontier_candidate",
+          "acquisition_probe_candidate",
+          "approach_candidate",
+          "method_probe_candidate",
+          "local_contact_recall_candidate",
+          "local_contact_probe_candidate",
+          "endpoint_approach_candidate",
+          "context_reconfiguration_candidate"
+        ],
+        "choice_fields": [
+          "path_length",
+          "primitive_count"
+        ],
+        "goal": "G_official_completion",
+        "admitted_financing_statuses": [
+          "lower_bound_inside_margin",
+          "unmeasured"
+        ],
+        "financing_rule": "Affordability belongs to the complete declared composition, including its necessary local interaction; a one-step prefix is never evidence that the target is reachable. Unmeasured cost permits a bounded falsifiable discovery, not a guarantee.",
+        "equivalent_contact_offers": {
+          "id": "inventory.same_current_regional_continuation",
+          "kinds": [
+            "local_contact_probe_candidate",
+            "local_contact_recall_candidate"
+          ],
+          "descriptive_fields": [
+            "source_entity",
+            "source_entities",
+            "observed_at",
+            "route_actions"
+          ],
+          "meaning": "same current regional continuation; historical segmentation descriptions are preserved, not asserted to be one physical object",
+          "requires": "exact equality of all other option fields including current scope/footprint/arrival/effects/method/actions/preservation/resources; current arrival revalidated",
+          "preserve": [
+            "all_original_descriptions",
+            "all_provenance",
+            "contradictory_roles_effects_and_obligations_as_separate_alternatives"
+          ]
+        },
+        "maximum_context_regions": 16,
+        "equivalent_departure_witnesses": {
+          "id": "inventory.identical_current_departure_witnesses",
+          "mode": "identical_current_support_witnesses",
+          "meaning": "Multiple descriptions of exactly the same current scoped support facts do not create competing continuations; descriptions remain in memory and physical identity is not asserted. Original measurement images are superseded only for this current departure by the exact reconciled arrival/attempt pixels; all other fields including resources, roles, persistent effects and obligations remain in the comparison.",
+          "descriptive_fields": [
+            "source_entity",
+            "source_entities",
+            "observed_at",
+            "route_actions",
+            "route_ref",
+            "cell_pixels"
+          ]
+        }
+      }
+    }
+  ]
+}

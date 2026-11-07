@@ -20,7 +20,7 @@ app.innerHTML = `
 
     <section class="lab-session" aria-labelledby="session-title">
       <div class="lab-section-heading"><h2 id="session-title">A small, inspectable experiment</h2><span id="lab-status" class="lab-status" role="status">Loading the V7 program…</span></div>
-      <p class="lab-description">These synthetic transitions exercise the original V7 rules. Use SRA Agent in the Playground to explore observations from a real game.</p>
+      <p class="lab-description">These synthetic transitions exercise the original V7 rules. Use SRA Agent in the Playground for the native V6 transfer on real game observations.</p>
       <div class="lab-controls">
         <label for="lab-scenario">Experiment<select id="lab-scenario" disabled><option>Loading…</option></select></label>
         <div class="lab-actions"><button id="lab-run" class="lab-primary" disabled>Run experiment</button><button id="lab-next" disabled>Next observation</button><button id="lab-stop" disabled>Stop</button><button id="lab-reset" disabled>Reset</button></div>
@@ -58,7 +58,7 @@ app.innerHTML = `
       <details class="lab-observation"><summary>Inspect the latest observation</summary><pre id="lab-observation-json">No observation yet.</pre></details>
     </section>
 
-    <footer class="lab-footer"><p><strong>A foundation for editable reasoning.</strong> This lab displays the compiled program that actually executes. The Playground's SRA Agent mode now explores real game observations. Editable nodes and goal-directed planning are subsequent capabilities.</p><p>Python reference: V7 at <a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/tree/${V7_SOURCE_COMMIT}/agents/yf_arc3_v7" target="_blank" rel="noopener noreferrer">${V7_SOURCE_COMMIT.slice(0, 10)}</a>. <a href="/">Return to the Playground →</a></p></footer>
+    <footer class="lab-footer"><p><strong>A foundation for editable reasoning.</strong> This lab displays the compiled program that actually executes. The Playground's SRA Agent mode uses this shared interpreter for the ongoing native V6 transfer. Full capability parity and a common editable program-and-knowledge model remain migration requirements.</p><p>Python reference: V7 at <a href="https://github.com/yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan/tree/${V7_SOURCE_COMMIT}/agents/yf_arc3_v7" target="_blank" rel="noopener noreferrer">${V7_SOURCE_COMMIT.slice(0, 10)}</a>. <a href="/">Return to the Playground →</a></p></footer>
   </main>`;
 
 const query = <T extends HTMLElement>(selector: string): T => document.querySelector<T>(selector)!;

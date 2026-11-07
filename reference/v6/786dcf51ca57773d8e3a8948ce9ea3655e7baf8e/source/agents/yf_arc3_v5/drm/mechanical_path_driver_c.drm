@@ -1,0 +1,329 @@
+{
+  "module_id": "mechanical_path_driver_c",
+  "declarations": [
+    {
+      "id": "policy.path_driver_signature_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "the_finite_word_and_current_immutable_prefix_are_supplied"
+      ],
+      "applicability": [
+        "source_driven_path_calculation"
+      ],
+      "invariants": [
+        "one_registered_step_per_external_primitive",
+        "preserve_parent_request_and_actual_bounds",
+        "no_act_or_oracle",
+        "stop_at_unknown_or_interruption"
+      ],
+      "falsifiers": [
+        "unbound_provider_or_word",
+        "unsafe_or_incomplete_prefix",
+        "model_interruption"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "path_driver.supported",
+        "path_driver.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.path_driver_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "path_driver.supported"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_simulation"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_simulation"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "PATH"
+            },
+            {
+              "field": "expected_return_type",
+              "operator": "equals",
+              "expected": "EventCompositionResultC"
+            },
+            {
+              "field": "word_aligned",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "existing_packets_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "word_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "provider_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "provider_initial_state_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "provider_provenance_equal",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "path_driver.supported"
+          }
+        },
+        {
+          "id": "projection.policy.path_driver_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "path_driver.supported"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_simulation"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_simulation"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "PATH"
+            },
+            {
+              "field": "expected_return_type",
+              "operator": "equals",
+              "expected": "EventCompositionResultC"
+            },
+            {
+              "field": "word_aligned",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "existing_packets_present",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "word_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "path_driver.supported"
+          }
+        },
+        {
+          "id": "projection.policy.path_driver_signature_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "path_driver.unsupported"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "path_driver.unsupported"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.path_driver_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "path_driver.supported"
+            }
+          ],
+          "reason_ref": "reason.one_bound_step_and_one_current_prefix"
+        },
+        {
+          "id": "tier.policy.path_driver_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "path_driver.unsupported"
+            }
+          ],
+          "reason_ref": "reason.one_bound_step_and_one_current_prefix"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.path_driver_reference_order_does_not_license_a_step",
+      "reason_refs": [
+        "reason.one_bound_step_and_one_current_prefix"
+      ]
+    },
+    {
+      "id": "policy.path_driver_progress_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "the_finite_word_and_current_immutable_prefix_are_supplied"
+      ],
+      "applicability": [
+        "source_driven_path_calculation"
+      ],
+      "invariants": [
+        "one_registered_step_per_external_primitive",
+        "preserve_parent_request_and_actual_bounds",
+        "no_act_or_oracle",
+        "stop_at_unknown_or_interruption"
+      ],
+      "falsifiers": [
+        "unbound_provider_or_word",
+        "unsafe_or_incomplete_prefix",
+        "model_interruption"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "path_driver.continue",
+        "path_driver.stop"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.path_driver_progress_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "path_driver.continue"
+            },
+            {
+              "field": "prefix_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "remaining_word_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "interrupted",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "path_driver.continue"
+          }
+        },
+        {
+          "id": "projection.policy.path_driver_progress_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "path_driver.stop"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "path_driver.stop"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.path_driver_progress_c.0",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "path_driver.continue"
+            }
+          ],
+          "reason_ref": "reason.one_bound_step_and_one_current_prefix"
+        },
+        {
+          "id": "tier.policy.path_driver_progress_c.1",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "path_driver.stop"
+            }
+          ],
+          "reason_ref": "reason.one_bound_step_and_one_current_prefix"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.path_driver_reference_order_does_not_license_a_step",
+      "reason_refs": [
+        "reason.one_bound_step_and_one_current_prefix"
+      ]
+    }
+  ]
+}

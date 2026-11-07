@@ -1,0 +1,696 @@
+{
+  "module_id": "mechanical_common_c",
+  "declarations": [
+    {
+      "id": "policy.common_events_signature",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "the_exact_request_and_current_measurement_are_supplied"
+      ],
+      "applicability": [
+        "common_mechanical_library"
+      ],
+      "invariants": [
+        "no_action_release",
+        "preserve_unknown_bounds_and_model_alternatives",
+        "explicit_empty_action_domain_is_not_missing_actions",
+        "empty_action_domain_does_not_imply_goal_acceptance",
+        "unknown_response_domain_never_closed_by_vacuity"
+      ],
+      "falsifiers": [
+        "identity_or_signature_mismatch",
+        "incomplete_domain"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "common.events.supported",
+        "common.events.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.common.events.COMPOSE",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.events.supported"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "COMPOSE"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.composition.event_ownership"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.composition"
+            },
+            {
+              "field": "expected_return_type",
+              "operator": "equals",
+              "expected": "EventCompositionResultC"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "supported": true
+          }
+        },
+        {
+          "id": "projection.common.events.unsupported",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.events.unsupported"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.common.events.exact_signature",
+          "all_conditions": [
+            {
+              "field": "supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.common_mechanical_current_contract"
+        }
+      ],
+      "reason_refs": [
+        "reason.common_mechanical_current_contract"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.common_c_equivalent_signature_order_never_proves_meaning"
+    },
+    {
+      "id": "policy.common_path_signature",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "the_exact_request_and_current_measurement_are_supplied"
+      ],
+      "applicability": [
+        "common_mechanical_library"
+      ],
+      "invariants": [
+        "no_action_release",
+        "preserve_unknown_bounds_and_model_alternatives",
+        "empty_result_requires_current_named_exhausted_domain",
+        "initial_goal_acceptance_is_independent_of_action_domain_cardinality"
+      ],
+      "falsifiers": [
+        "identity_or_signature_mismatch",
+        "incomplete_domain"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "common.path.supported",
+        "common.path.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.common.path.STEP",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.path.supported"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "STEP"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_simulation"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_simulation"
+            },
+            {
+              "field": "expected_return_type",
+              "operator": "equals",
+              "expected": "EventCompositionResultC"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "supported": true
+          }
+        },
+        {
+          "id": "projection.common.path.PATH",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.path.supported"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "PATH"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_simulation"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_simulation"
+            },
+            {
+              "field": "expected_return_type",
+              "operator": "equals",
+              "expected": "EventCompositionResultC"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "supported": true
+          }
+        },
+        {
+          "id": "projection.common.path.unsupported",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.path.unsupported"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.common.path.exact_signature",
+          "all_conditions": [
+            {
+              "field": "supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.common_mechanical_current_contract"
+        }
+      ],
+      "reason_refs": [
+        "reason.common_mechanical_current_contract"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.common_c_equivalent_signature_order_never_proves_meaning"
+    },
+    {
+      "id": "policy.common_search_signature",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "the_exact_request_and_current_measurement_are_supplied"
+      ],
+      "applicability": [
+        "common_mechanical_library"
+      ],
+      "invariants": [
+        "no_action_release",
+        "preserve_unknown_bounds_and_model_alternatives"
+      ],
+      "falsifiers": [
+        "identity_or_signature_mismatch",
+        "incomplete_domain"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "common.search.supported",
+        "common.search.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.common.search.ROUTE",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.search.supported"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "ROUTE"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_route_search"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_route_search"
+            },
+            {
+              "field": "expected_return_type",
+              "operator": "equals",
+              "expected": "SearchResultC"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "supported": true
+          }
+        },
+        {
+          "id": "projection.common.search.POLICY",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.search.supported"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "POLICY"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_route_search"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_route_search"
+            },
+            {
+              "field": "expected_return_type",
+              "operator": "equals",
+              "expected": "SearchResultC"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "supported": true
+          }
+        },
+        {
+          "id": "projection.common.search.BELIEF",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.search.supported"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "BELIEF"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_route_search"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_route_search"
+            },
+            {
+              "field": "expected_return_type",
+              "operator": "equals",
+              "expected": "SearchResultC"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "supported": true
+          }
+        },
+        {
+          "id": "projection.common.search.unsupported",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.search.unsupported"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.common.search.exact_signature",
+          "all_conditions": [
+            {
+              "field": "supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.common_mechanical_current_contract"
+        }
+      ],
+      "reason_refs": [
+        "reason.common_mechanical_current_contract"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.common_c_equivalent_signature_order_never_proves_meaning"
+    },
+    {
+      "id": "policy.common_result_status",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "the_exact_request_and_current_measurement_are_supplied"
+      ],
+      "applicability": [
+        "common_mechanical_library"
+      ],
+      "invariants": [
+        "no_action_release",
+        "preserve_unknown_bounds_and_model_alternatives"
+      ],
+      "falsifiers": [
+        "identity_or_signature_mismatch",
+        "incomplete_domain"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "common.return.NOT_APPLICABLE",
+        "common.return.MODEL_CONTRADICTION",
+        "common.return.BUDGET_REACHED",
+        "common.return.NEEDS_EVIDENCE",
+        "common.return.EMPTY_DECLARED_DOMAIN",
+        "common.return.FOUND"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.common.status.NOT_APPLICABLE",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.return.NOT_APPLICABLE"
+            },
+            {
+              "field": "unsupported_signature",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "is_NOT_APPLICABLE": true
+          }
+        },
+        {
+          "id": "projection.common.status.MODEL_CONTRADICTION",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.return.MODEL_CONTRADICTION"
+            },
+            {
+              "field": "contradictory",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "is_MODEL_CONTRADICTION": true
+          }
+        },
+        {
+          "id": "projection.common.status.BUDGET_REACHED",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.return.BUDGET_REACHED"
+            },
+            {
+              "field": "bounded",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "is_BUDGET_REACHED": true
+          }
+        },
+        {
+          "id": "projection.common.status.NEEDS_EVIDENCE",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.return.NEEDS_EVIDENCE"
+            },
+            {
+              "field": "missing_measurement",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "is_NEEDS_EVIDENCE": true
+          }
+        },
+        {
+          "id": "projection.common.status.EMPTY_DECLARED_DOMAIN",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.return.EMPTY_DECLARED_DOMAIN"
+            },
+            {
+              "field": "complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "named_domain_exhausted",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "is_EMPTY_DECLARED_DOMAIN": true
+          }
+        },
+        {
+          "id": "projection.common.status.FOUND",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.return.FOUND"
+            },
+            {
+              "field": "complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "is_FOUND": true
+          }
+        },
+        {
+          "id": "projection.common.status.fallback",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "common.return.NEEDS_EVIDENCE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.common.status.NOT_APPLICABLE",
+          "all_conditions": [
+            {
+              "field": "is_NOT_APPLICABLE",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.common_mechanical_current_contract"
+        },
+        {
+          "id": "tier.common.status.MODEL_CONTRADICTION",
+          "all_conditions": [
+            {
+              "field": "is_MODEL_CONTRADICTION",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.common_mechanical_current_contract"
+        },
+        {
+          "id": "tier.common.status.BUDGET_REACHED",
+          "all_conditions": [
+            {
+              "field": "is_BUDGET_REACHED",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.common_mechanical_current_contract"
+        },
+        {
+          "id": "tier.common.status.NEEDS_EVIDENCE",
+          "all_conditions": [
+            {
+              "field": "is_NEEDS_EVIDENCE",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.common_mechanical_current_contract"
+        },
+        {
+          "id": "tier.common.status.EMPTY_DECLARED_DOMAIN",
+          "all_conditions": [
+            {
+              "field": "is_EMPTY_DECLARED_DOMAIN",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.common_mechanical_current_contract"
+        },
+        {
+          "id": "tier.common.status.FOUND",
+          "all_conditions": [
+            {
+              "field": "is_FOUND",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.common_mechanical_current_contract"
+        }
+      ],
+      "reason_refs": [
+        "reason.common_mechanical_current_contract"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.common_c_equivalent_signature_order_never_proves_meaning"
+    }
+  ]
+}

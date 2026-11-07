@@ -1,0 +1,43 @@
+{
+  "module_id":"latent_actual_metrics_c",
+  "declarations":[{
+    "id":"policy.latent_actual_metrics_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+    "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1",
+    "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "declared_alternative_refs":["latent.actual_metrics.retain"],"selection_required_fact_fields":["alternative_ref"],
+    "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+    "fact_projections":[{"id":"projection.latent.actual_metrics","all_conditions":[
+      {"field":"alternative_ref","operator":"equals","expected":"latent.actual_metrics.retain"},
+      {"field":"actual_measurement","operator":"equals","expected":true}],"static_facts":{"eligible":true}}],
+    "meaning_template_ref_by_alternative":{"latent.actual_metrics.retain":"rule.latent_actual_metrics_c"},
+    "premises":["actual_current_terminal_field","same_reference_and_declared_correspondence_domain"],
+    "invariants":["reference_errors_pairs_commands_are_distinct","unknown_structural_measure_stays_unknown",
+      "indicator_interval_saturation_preserved","official_completion_independent","no_ACT"],
+    "falsifiers":["field_or_reference_scope_changed","unlicensed_indicator_calibration"],
+    "reason_refs":["reason.zero_structural_disagreement_or_full_indicator_does_not_prove_the_reference"]
+  },{
+    "id":"rule.latent_actual_metrics_c","kind":"rule","evaluation":"project_requested_conclusions",
+    "supported_operators":["DERIVE"],"input_contract":"yf_arc3_v5.authority_input.derivation.v1",
+    "output_contract":"yf_arc3_v5.authority_output.derivation.v1","relation_family":"epistemic",
+    "term_templates":[{"id_pattern":"measure.latent.actual.{projection_ref}","kind":"value",
+      "label":"Distinct residuals under the preserved reference on the actual field",
+      "required_fields":["projection_ref","parent_goal_ref","reference_ref","actual_field_digest"],
+      "attribute_bindings":{"parent_goal_ref":"parent_goal_ref","reference_ref":"reference_ref",
+        "actual_field_digest":"actual_field_digest","reference_status":"reference_status",
+        "fixed_reference_error_count":"fixed_reference_error_count","unequal_homologous_pair_count":"unequal_homologous_pair_count",
+        "structural_disagreement_classes":"structural_disagreement_classes","singleton_homology_positions":"singleton_homology_positions",
+        "structural_missing_refs":"structural_missing_refs","actual_external_command_count":"actual_external_command_count",
+        "indicator_comparisons":"indicator_comparisons","reference_match":"reference_match",
+        "official_success":"official_success","official_outcome":"official_outcome","frozen_why":"frozen_why"},
+      "static_attributes":{"no_action_authority":true,"no_reference_status_promotion":true}}],
+    "claim_templates":[{"id_pattern":"claim.latent.actual.{projection_ref}",
+      "predicate":"records_conditional_latent_actual_residual_measures","family":"epistemic","epistemic_status":"proposed",
+      "argument_patterns":["{parent_goal_ref}","measure.latent.actual.{projection_ref}"],
+      "required_term_patterns":["{parent_goal_ref}","measure.latent.actual.{projection_ref}"],
+      "required_fields":["projection_ref","parent_goal_ref","reference_ref"],
+      "attribute_bindings":{"reference_status":"reference_status","frozen_why":"frozen_why"}}],
+    "premises":["measures_are_conditional_on_the_retained_reference_model"],
+    "invariants":["keep_unknown_and_saturated_counts","no_global_uniformity_goal"],
+    "falsifiers":["actual_measurement_contradicted"],"reason_refs":["reason.each_measure_answers_a_different_goal_question"]
+  }]
+}

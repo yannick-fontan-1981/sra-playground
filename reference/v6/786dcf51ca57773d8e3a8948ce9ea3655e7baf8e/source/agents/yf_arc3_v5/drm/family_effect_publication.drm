@@ -1,0 +1,211 @@
+{
+  "module_id": "family_effect_publication",
+  "declarations": [
+    {
+      "id": "policy.native_effect_publication",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_original_native_owner_and_current_epoch_precede_publication"
+      ],
+      "premises": [
+        "current_sealed_packet",
+        "exact_return_identity",
+        "explicit_current_affected_dependencies"
+      ],
+      "invariants": [
+        "no_live_world_action",
+        "observation_is_distinct_from_model_projection",
+        "sibling_facets_preserved"
+      ],
+      "falsifiers": [
+        "changed_packet_scope",
+        "different_return_identity",
+        "publication_reference_collision"
+      ],
+      "declared_alternative_refs": [
+        "native_effect.publish",
+        "native_effect.already_current",
+        "native_effect.blocked"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.native_effect.publish",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "native_effect.publish"
+            },
+            {
+              "field": "publication_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_publication_equal",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.native_effect.already_current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "native_effect.already_current"
+            },
+            {
+              "field": "publication_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_publication_equal",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.native_effect.blocked",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "native_effect.blocked"
+            },
+            {
+              "field": "publication_bindings_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "native_effect.publish": "rule.native_effect_publication"
+      },
+      "configuration": {
+        "qualification_predicate_refs": [
+          "records_source_interpretation_of_sealed_family_response",
+          "qualifies_native_family_sealed_interpretation"
+        ],
+        "qualification_status_refs": [
+          "supported",
+          "established"
+        ],
+        "publication_projection_contract_ref": "family.sealed_effect.publication.b.v1"
+      }
+    },
+    {
+      "id": "rule.native_effect_publication",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "exact_source_selected_scoped_interpretation"
+      ],
+      "applicability": [
+        "current_sealed_facet_result_ready_for_publication"
+      ],
+      "invariants": [
+        "measurement_record_never_confirms_a_law_or_terminal_goal",
+        "all_model_alternatives_and_native_refusals_are_retained"
+      ],
+      "falsifiers": [
+        "packet_scope_or_signature_changes"
+      ],
+      "reason_refs": [
+        "reason_return_the_observed_family_interpretation_to_its_parent"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{publication_ref}",
+          "kind": "value",
+          "label": "Source interpretation of one sealed family facet",
+          "required_fields": [
+            "publication_ref",
+            "interpretation"
+          ],
+          "static_attributes": {
+            "projection_contract_ref": "family.sealed_effect.publication.b.v1",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "interpretation": "interpretation"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.shared.{publication_ref}",
+          "predicate": "records_native_family_sealed_interpretation_publication",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{publication_ref}",
+            "{parent_goal_ref}",
+            "{packet_term_ref}"
+          ],
+          "required_term_patterns": [
+            "{publication_ref}",
+            "{parent_goal_ref}",
+            "{packet_term_ref}"
+          ],
+          "required_fields": [
+            "publication_ref",
+            "parent_goal_ref",
+            "packet_term_ref",
+            "exact_request_signature_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "attribute_bindings": {
+            "packet_digest": "packet_digest",
+            "frame_ref": "frame_ref",
+            "exact_request_signature_ref": "exact_request_signature_ref",
+            "affected_dependency_refs": "affected_dependency_refs"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

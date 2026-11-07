@@ -1,0 +1,312 @@
+{
+  "module_id": "metric_search_c",
+  "declarations": [
+    {
+      "id": "policy.metric_search_signature_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_native_k63_provider_and_source_goal_contract_are_explicit"
+      ],
+      "applicability": [
+        "common_k09_native_k63_route"
+      ],
+      "invariants": [
+        "reuse_common_k09_not_native_bfs",
+        "no_b_dto_conversion",
+        "stable_parent_goal_contract",
+        "mono_model_route_scope_explicit_policy_belief_not_claimed",
+        "empty_actions_distinct_from_unknown_models",
+        "no_action_release"
+      ],
+      "falsifiers": [
+        "wrong_scope_signature_or_goal",
+        "incomplete_native_step",
+        "actual_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "metric_search.supported",
+        "metric_search.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.metric_search_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_search.supported"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_route_search"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_route_search"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "ROUTE"
+            },
+            {
+              "field": "expected_return_type",
+              "operator": "equals",
+              "expected": "SearchResultC"
+            },
+            {
+              "field": "primitive_domain_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "provider_domain_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "single_route_model",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "provider_parent_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_goal_contract_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "deterministic_response_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "initial_predicates_external",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_provider_inputs_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "primitive_payload_refs_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "initial_joint_state_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "resume_qualified",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "metric_search.supported"
+          }
+        },
+        {
+          "id": "projection.policy.metric_search_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_search.unsupported"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "metric_search.unsupported"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.metric_search_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "metric_search.supported"
+            }
+          ],
+          "reason_ref": "reason.exact_native_route_signature_and_parent_goal"
+        },
+        {
+          "id": "tier.policy.metric_search_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "metric_search.unsupported"
+            }
+          ],
+          "reason_ref": "reason.exact_native_route_signature_and_parent_goal"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.native_route_disposition_not_model_selection",
+      "reason_refs": [
+        "reason.exact_native_route_signature_and_parent_goal"
+      ]
+    },
+    {
+      "id": "policy.metric_search_acceptance_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_native_k63_provider_and_source_goal_contract_are_explicit"
+      ],
+      "applicability": [
+        "common_k09_native_k63_route"
+      ],
+      "invariants": [
+        "native_acceptance_not_parent_goal_without_exact_source_contract",
+        "termination_and_appearance_not_acceptance",
+        "native_outcome_preserved_separately",
+        "goal_definition_and_checkpoint_not_rewritten_per_step"
+      ],
+      "falsifiers": [
+        "wrong_scope_signature_or_goal",
+        "incomplete_native_step",
+        "actual_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "metric_search.accept_goal",
+        "metric_search.retain_native_outcome"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.metric_search_acceptance_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_search.accept_goal"
+            },
+            {
+              "field": "source_goal_contract_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "complete_native_acceptance",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "complete_native_return",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "accepted_state_terminal",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "metric_search.accept_goal"
+          }
+        },
+        {
+          "id": "projection.policy.metric_search_acceptance_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "metric_search.retain_native_outcome"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "metric_search.retain_native_outcome"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.metric_search_acceptance_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "metric_search.accept_goal"
+            }
+          ],
+          "reason_ref": "reason.complete_native_acceptance_under_unchanged_source_goal"
+        },
+        {
+          "id": "tier.policy.metric_search_acceptance_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "metric_search.retain_native_outcome"
+            }
+          ],
+          "reason_ref": "reason.complete_native_acceptance_under_unchanged_source_goal"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.native_route_disposition_not_model_selection",
+      "reason_refs": [
+        "reason.complete_native_acceptance_under_unchanged_source_goal"
+      ]
+    }
+  ]
+}

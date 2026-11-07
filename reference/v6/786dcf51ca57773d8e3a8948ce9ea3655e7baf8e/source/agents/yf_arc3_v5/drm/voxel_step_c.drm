@@ -1,0 +1,370 @@
+{
+  "module_id": "voxel_step_c",
+  "declarations": [
+    {
+      "id": "policy.voxel_step_signature_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "source_bound_single_native_external_primitive"
+      ],
+      "applicability": [
+        "native_discrete_relay_voxel_step"
+      ],
+      "invariants": [
+        "one_native_call_and_debit",
+        "all_native_view_retained",
+        "single_prebound_event_owner",
+        "no_act_or_second_automatic_pass"
+      ],
+      "falsifiers": [
+        "wrong_scope_or_model",
+        "partial_native_closure",
+        "uncertain_view_check"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "voxel_step.supported",
+        "voxel_step.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.voxel_step_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "voxel_step.supported"
+            },
+            {
+              "field": "exact_native_signature",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_native_scope_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "exact_single_model_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_inputs_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "exact_native_bounds",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_provenance_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "current_ownership_and_phase_contract",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "complete_adapter_prebound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "goal_contract_bound_or_absent",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "voxel_step.supported"
+          }
+        },
+        {
+          "id": "projection.policy.voxel_step_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "voxel_step.unsupported"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "exact_native_signature",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_native_scope_equal",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "exact_single_model_bound",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_inputs_bound",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "exact_native_bounds",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "parent_provenance_equal",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_ownership_and_phase_contract",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "complete_adapter_prebound",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "goal_contract_bound_or_absent",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "voxel_step.unsupported"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.voxel_step_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "voxel_step.supported"
+            }
+          ],
+          "reason_ref": "reason.exact_native_voxel_primitive_identity_and_owner"
+        },
+        {
+          "id": "tier.policy.voxel_step_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "voxel_step.unsupported"
+            }
+          ],
+          "reason_ref": "reason.exact_native_voxel_primitive_identity_and_owner"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.voxel_packet_not_live_action_release",
+      "reason_refs": [
+        "reason.exact_native_voxel_primitive_identity_and_owner"
+      ]
+    },
+    {
+      "id": "policy.voxel_step_result_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "source_bound_single_native_external_primitive"
+      ],
+      "applicability": [
+        "native_discrete_relay_voxel_step"
+      ],
+      "invariants": [
+        "one_native_call_and_debit",
+        "all_native_view_retained",
+        "single_prebound_event_owner",
+        "no_act_or_second_automatic_pass"
+      ],
+      "falsifiers": [
+        "wrong_scope_or_model",
+        "partial_native_closure",
+        "uncertain_view_check"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "voxel_step.complete",
+        "voxel_step.bound",
+        "voxel_step.missing"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.voxel_step_result_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "voxel_step.complete"
+            },
+            {
+              "field": "packet_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "voxel_step.complete"
+          }
+        },
+        {
+          "id": "projection.policy.voxel_step_result_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "voxel_step.bound"
+            },
+            {
+              "field": "packet_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "voxel_step.bound"
+          },
+          "any_conditions": [
+            {
+              "field": "native_bound_reached",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_transport_bound_reached",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "projection.policy.voxel_step_result_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "voxel_step.missing"
+            },
+            {
+              "field": "packet_complete",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_bound_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "packet_transport_bound_reached",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "voxel_step.missing"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.voxel_step_result_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "voxel_step.complete"
+            }
+          ],
+          "reason_ref": "reason.native_voxel_snapshots_hops_debit_and_unknown_boundary"
+        },
+        {
+          "id": "tier.policy.voxel_step_result_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "voxel_step.bound"
+            }
+          ],
+          "reason_ref": "reason.native_voxel_snapshots_hops_debit_and_unknown_boundary"
+        },
+        {
+          "id": "tier.policy.voxel_step_result_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "voxel_step.missing"
+            }
+          ],
+          "reason_ref": "reason.native_voxel_snapshots_hops_debit_and_unknown_boundary"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.voxel_packet_not_live_action_release",
+      "reason_refs": [
+        "reason.native_voxel_snapshots_hops_debit_and_unknown_boundary"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1046 @@
+{
+  "module_id": "control_evidence_binding",
+  "declarations": [
+    {
+      "id": "principle.control_evidence_is_receiver_scoped",
+      "kind": "principle",
+      "invariants": [
+        "a_control_binding_includes_modality_action_address_subpart_receivers_mode_and_local_frame",
+        "receiver_order_is_not_receiver_identity",
+        "appearance_and_action_name_alone_do_not_transport_control_evidence",
+        "portable_methods_do_not_retain_scene_local_execution_bindings",
+        "unannotated_legacy_actions_are_not_attested_control_scope_reuse"
+      ],
+      "falsifiers": [
+        "a_changed_receiver_mode_address_or_frame_keeps_the_old_execution_binding"
+      ],
+      "reason_refs": [
+        "reason.control_evidence_requires_current_receiver_binding"
+      ]
+    },
+    {
+      "id": "policy.current_control_evidence_binding",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "control_binding.unannotated",
+        "control_binding.current",
+        "control_binding.reject"
+      ],
+      "premises": [
+        "principle.control_evidence_is_receiver_scoped"
+      ],
+      "applicability": [
+        "source_release_of_a_declared_scene_local_control_binding"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.control_binding.proof_status_domain",
+          "static_facts": {
+            "admitted_control_proof_statuses": [
+              "supported",
+              "established"
+            ],
+            "admitted_control_proof_predicates": [
+              "current_control_binding"
+            ]
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.control_binding.unannotated",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "control_binding.unannotated"
+            },
+            {
+              "field": "binding_required",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "binding_payload_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "reason_ref": "reason.unannotated_control_is_not_scope_transfer_proof"
+        },
+        {
+          "id": "tier.control_binding.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "control_binding.current"
+            },
+            {
+              "field": "binding_required",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observation_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "action_kind_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "action_payload_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "proof_version_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "proof_in_frozen_why",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "proof_is_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "proof_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "proof_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "proof_status",
+              "operator": "member_of_reference_field",
+              "reference_field": "admitted_control_proof_statuses"
+            },
+            {
+              "field": "proof_predicate",
+              "operator": "member_of_reference_field",
+              "reference_field": "admitted_control_proof_predicates"
+            },
+            {
+              "field": "proof_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "proof_defeat_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "reason_ref": "reason.control_evidence_requires_current_receiver_binding"
+        },
+        {
+          "id": "tier.control_binding.reject",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "control_binding.reject"
+            }
+          ],
+          "reason_ref": "reason.control_evidence_binding_needs_new_current_evidence"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "invariants": [
+        "only_the_affected_action_binding_is_blocked",
+        "direct_goals_and_valid_inherited_work_are_preserved",
+        "a_missing_binding_cannot_silently_become_an_unscoped_control_probe",
+        "current_and_historical_control_proofs_remain_distinct"
+      ],
+      "falsifiers": [
+        "a_changed_or_missing_control_scope_is_accepted",
+        "a_proof_missing_from_the_frozen_why_is_accepted",
+        "an_unannotated_action_is_counted_as_scope_revalidation"
+      ],
+      "reason_refs": [
+        "reason.control_evidence_requires_current_receiver_binding"
+      ]
+    },
+    {
+      "id": "policy.acquire_current_selected_control_binding",
+      "kind": "selection_policy",
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "control_binding.acquire",
+        "control_binding.reject"
+      ],
+      "premises": [
+        "the_selected_DRM_candidate_declares_a_current_receiver_scope"
+      ],
+      "configuration": {
+        "meaning_evidence_refs_field": "control_binding_evidence_refs"
+      },
+      "meaning_template_ref_by_alternative": {
+        "control_binding.acquire": "rule.acquire_current_selected_control_binding"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.binding.registered_scope_producers",
+          "static_facts": {
+            "control_binding_producer_refs": [
+              "policy.declared_initial_interaction_exploration",
+              "policy.declared_observed_axis_configuration_frontier"
+            ]
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.binding.acquire",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "control_binding.acquire"
+            },
+            {
+              "field": "binding_required",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_action_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "proof_in_frozen_why",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "control_binding_producer_ref",
+              "operator": "member_of_reference_field",
+              "reference_field": "control_binding_producer_refs"
+            },
+            {
+              "field": "support_claim_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "support_missing_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "support_inactive_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "support_negative_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "support_contested_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "support_unindexed_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "support_partition_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "support_unresolved_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "support_stale_term_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "support_stale_provenance_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "reason_ref": "reason.selected_current_receiver_scope_has_its_current_canonical_basis"
+        },
+        {
+          "id": "tier.binding.reject",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "control_binding.reject"
+            }
+          ],
+          "reason_ref": "reason.binding_acquisition_cannot_manufacture_missing_current_support"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "invariants": [
+        "the_binding_preserves_the_existing_goal_and_action",
+        "binding_support_is_not_a_confirmed_universal_effect_law"
+      ],
+      "falsifiers": [
+        "missing_or_contested_support_is_promoted_to_a_current_binding"
+      ],
+      "reason_refs": [
+        "reason.selected_current_receiver_scope_has_its_current_canonical_basis"
+      ]
+    },
+    {
+      "id": "rule.acquire_current_selected_control_binding",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "dynamic",
+      "premises": [
+        "the_selected_current_scope_is_supported_and_exactly_preserved"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "term.control-scope.{control_evidence_claim_ref}",
+          "kind": "schema",
+          "label": "revisable_current_control_evidence_scope",
+          "required_fields": [
+            "control_evidence_claim_ref",
+            "control_evidence_signature",
+            "control_binding_scope_frame_ref",
+            "control_binding_term_dependencies",
+            "control_binding_claim_dependencies",
+            "control_binding_provenance_records"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "portable_authorization": false
+          },
+          "attribute_bindings": {
+            "control_evidence_signature": "control_evidence_signature",
+            "operational_scene_ref": "control_binding_scope_frame_ref",
+            "canonical_term_dependency_revisions": "control_binding_term_dependencies",
+            "canonical_claim_dependency_digests": "control_binding_claim_dependencies",
+            "control_support_provenance_records": "control_binding_provenance_records"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{control_evidence_claim_ref}",
+          "predicate": "current_control_binding",
+          "family": "dynamic",
+          "argument_patterns": [
+            "term.control-scope.{control_evidence_claim_ref}"
+          ],
+          "epistemic_status": "supported",
+          "required_fields": [
+            "control_evidence_signature",
+            "control_evidence_action_data",
+            "control_binding_support_claim_refs",
+            "control_evidence_claim_ref"
+          ],
+          "static_attributes": {
+            "binding_scope": "selected_current_provisional_receiver",
+            "commitment": "revisable",
+            "portable_authorization": false
+          },
+          "attribute_bindings": {
+            "control_evidence_signature": "control_evidence_signature",
+            "control_evidence_action_data": "control_evidence_action_data",
+            "control_evidence_support_claim_refs": "control_binding_support_claim_refs"
+          }
+        }
+      ],
+      "invariants": [
+        "a_binding_is_not_transfer_or_victory_proof",
+        "a_new_frame_requires_rebinding"
+      ],
+      "falsifiers": [
+        "a_new_receiver_or_mode_is_released_under_the_previous_binding"
+      ],
+      "reason_refs": [
+        "reason.selected_current_receiver_scope_has_its_current_canonical_basis"
+      ]
+    },
+    {
+      "id": "policy.current_selected_probe_preconditions",
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "kind": "selection_policy",
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "probe_preconditions.acquire",
+        "probe_preconditions.reject"
+      ],
+      "configuration": {
+        "meaning_evidence_refs_field": "support_evidence_refs"
+      },
+      "meaning_template_ref_by_alternative": {
+        "probe_preconditions.acquire": "rule.current_selected_probe_preconditions"
+      },
+      "selection_tiers": [
+        {
+          "id": "tier.probe_preconditions.acquire",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "probe_preconditions.acquire"
+            },
+            {
+              "field": "support_required",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "support_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "selected_declared_eligibility",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "selected_candidate_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.current_measured_preconditions_are_complete"
+        },
+        {
+          "id": "tier.probe_preconditions.reject",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "probe_preconditions.reject"
+            }
+          ],
+          "reason_ref": "reason.current_measured_preconditions_are_incomplete"
+        }
+      ],
+      "invariants": [
+        "current_eligibility_is_not_a_future_effect_or_a_portable_permission"
+      ],
+      "falsifiers": [
+        "a_new_frame_or_new_selected_candidate_reuses_this_measurement"
+      ],
+      "reason_refs": [
+        "reason.current_measured_preconditions_preserve_uncertain_future_effect"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.memory.consult_contextual_recipe_with_current_source_support",
+          "all_conditions": [
+            {
+              "field": "memory_reuse_requested",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "memory_current_support_from_selected_preconditions",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "selected_probe_preconditions_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "memory_reuse_contract_ref",
+              "operator": "equals",
+              "expected": "memory_reuse.consult_contextual_part_recipe_at_current_contact"
+            }
+          ],
+          "static_facts": {
+            "memory_reuse_required": true,
+            "memory_reuse_contract_ref": "memory_reuse.consult_contextual_part_recipe_at_current_contact"
+          },
+          "bound_facts": {
+            "memory_recalled_claim_refs": "recipe_contact_recalled_claim_refs",
+            "memory_current_support_claim_refs": "selected_probe_current_support_claim_refs"
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "premise_claim_refs",
+              "source_fields": [
+                "premise_claim_refs",
+                "memory_recalled_claim_refs",
+                "memory_current_support_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            },
+            {
+              "output_field": "canonical_premise_claim_refs",
+              "source_fields": [
+                "canonical_premise_claim_refs",
+                "memory_recalled_claim_refs",
+                "memory_current_support_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            },
+            {
+              "output_field": "release_premise_claim_refs",
+              "source_fields": [
+                "release_premise_claim_refs",
+                "memory_recalled_claim_refs",
+                "memory_current_support_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.memory.nested_region_workflow_with_current_source_support",
+          "all_conditions": [
+            {
+              "field": "region_configuration_locus_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "region_configuration_current_step_geometry_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "region_configuration_recalled_method_claim_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "transmitted_hot_workflow_schema_revalidated_for_current_scene",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "selected_probe_preconditions_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "active_terminal_goal_ref",
+              "operator": "equals",
+              "expected": "goal.reach_scene_terminal_configuration"
+            }
+          ],
+          "static_facts": {
+            "memory_reuse_required": true,
+            "memory_reuse_contract_ref": "memory_reuse.revalidated_nested_region_configuration_method"
+          },
+          "bound_facts": {
+            "memory_recalled_claim_refs": "region_configuration_recalled_method_claim_refs",
+            "memory_current_support_claim_refs": "selected_probe_current_support_claim_refs"
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "premise_claim_refs",
+              "source_fields": [
+                "premise_claim_refs",
+                "memory_recalled_claim_refs",
+                "memory_current_support_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            },
+            {
+              "output_field": "canonical_premise_claim_refs",
+              "source_fields": [
+                "canonical_premise_claim_refs",
+                "memory_recalled_claim_refs",
+                "memory_current_support_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            },
+            {
+              "output_field": "release_premise_claim_refs",
+              "source_fields": [
+                "release_premise_claim_refs",
+                "memory_recalled_claim_refs",
+                "memory_current_support_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.memory_reuse.consult_recalled_peer_assignment_hypotheses.with_current_source_support",
+          "all_conditions": [
+            {
+              "field": "memory_reuse_requested",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "memory_current_support_from_selected_preconditions",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "selected_probe_preconditions_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "memory_reuse_contract_ref",
+              "operator": "equals",
+              "expected": "memory_reuse.consult_recalled_peer_assignment_hypotheses"
+            }
+          ],
+          "static_facts": {
+            "memory_reuse_required": true,
+            "memory_reuse_contract_ref": "memory_reuse.consult_recalled_peer_assignment_hypotheses"
+          },
+          "bound_facts": {
+            "memory_recalled_claim_refs": "memorial_peer_premise_refs",
+            "memory_current_support_claim_refs": "selected_probe_current_support_claim_refs"
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "premise_claim_refs",
+              "source_fields": [
+                "premise_claim_refs",
+                "memory_recalled_claim_refs",
+                "memory_current_support_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            },
+            {
+              "output_field": "canonical_premise_claim_refs",
+              "source_fields": [
+                "canonical_premise_claim_refs",
+                "memory_recalled_claim_refs",
+                "memory_current_support_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            },
+            {
+              "output_field": "release_premise_claim_refs",
+              "source_fields": [
+                "release_premise_claim_refs",
+                "memory_recalled_claim_refs",
+                "memory_current_support_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.memory_reuse.revalidated_coupled_peer_route_in_current_scene.with_current_source_support",
+          "all_conditions": [
+            {
+              "field": "memory_reuse_requested",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "memory_current_support_from_selected_preconditions",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "selected_probe_preconditions_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "memory_reuse_contract_ref",
+              "operator": "equals",
+              "expected": "memory_reuse.revalidated_coupled_peer_route_in_current_scene"
+            }
+          ],
+          "static_facts": {
+            "memory_reuse_required": true,
+            "memory_reuse_contract_ref": "memory_reuse.revalidated_coupled_peer_route_in_current_scene"
+          },
+          "bound_facts": {
+            "memory_recalled_claim_refs": "peer_method_premise_refs",
+            "memory_current_support_claim_refs": "selected_probe_current_support_claim_refs"
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "premise_claim_refs",
+              "source_fields": [
+                "premise_claim_refs",
+                "memory_recalled_claim_refs",
+                "memory_current_support_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            },
+            {
+              "output_field": "canonical_premise_claim_refs",
+              "source_fields": [
+                "canonical_premise_claim_refs",
+                "memory_recalled_claim_refs",
+                "memory_current_support_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            },
+            {
+              "output_field": "release_premise_claim_refs",
+              "source_fields": [
+                "release_premise_claim_refs",
+                "memory_recalled_claim_refs",
+                "memory_current_support_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.memory_reuse.consult_coupled_peer_method_for_blocker_test.with_current_source_support",
+          "all_conditions": [
+            {
+              "field": "memory_reuse_requested",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "memory_current_support_from_selected_preconditions",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "selected_probe_preconditions_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "memory_reuse_contract_ref",
+              "operator": "equals",
+              "expected": "memory_reuse.consult_coupled_peer_method_for_blocker_test"
+            }
+          ],
+          "static_facts": {
+            "memory_reuse_required": true,
+            "memory_reuse_contract_ref": "memory_reuse.consult_coupled_peer_method_for_blocker_test"
+          },
+          "bound_facts": {
+            "memory_recalled_claim_refs": "peer_method_premise_refs",
+            "memory_current_support_claim_refs": "selected_probe_current_support_claim_refs"
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "premise_claim_refs",
+              "source_fields": [
+                "premise_claim_refs",
+                "memory_recalled_claim_refs",
+                "memory_current_support_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            },
+            {
+              "output_field": "canonical_premise_claim_refs",
+              "source_fields": [
+                "canonical_premise_claim_refs",
+                "memory_recalled_claim_refs",
+                "memory_current_support_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            },
+            {
+              "output_field": "release_premise_claim_refs",
+              "source_fields": [
+                "release_premise_claim_refs",
+                "memory_recalled_claim_refs",
+                "memory_current_support_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rule.current_selected_probe_preconditions",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "dynamic",
+      "premises": [
+        "the_source_frontier_reports_current_measured_candidate_preconditions"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "term.probe-preconditions.{support_digest}",
+          "kind": "schema",
+          "label": "current_measured_probe_preconditions",
+          "required_fields": [
+            "support_digest",
+            "support_preconditions",
+            "support_frontier_digest",
+            "support_frame_ref",
+            "support_candidate_ref",
+            "support_action_ref",
+            "support_source_ref",
+            "support_source_hash",
+            "support_identity"
+          ],
+          "static_attributes": {
+            "future_effect_status": "unconfirmed",
+            "portable_authorization": false
+          },
+          "attribute_bindings": {
+            "support_preconditions": "support_preconditions",
+            "support_frontier_digest": "support_frontier_digest",
+            "support_frame_ref": "support_frame_ref",
+            "support_candidate_ref": "support_candidate_ref",
+            "support_action_ref": "support_action_ref",
+            "support_source_ref": "support_source_ref",
+            "support_source_hash": "support_source_hash",
+            "support_identity": "support_identity"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{support_claim_ref}",
+          "predicate": "records_current_measured_probe_preconditions",
+          "family": "dynamic",
+          "argument_patterns": [
+            "term.probe-preconditions.{support_digest}"
+          ],
+          "epistemic_status": "supported",
+          "required_fields": [
+            "support_claim_ref",
+            "support_digest",
+            "support_preconditions",
+            "support_frontier_digest",
+            "support_frame_ref",
+            "support_candidate_ref",
+            "support_action_ref",
+            "support_source_ref",
+            "support_source_hash",
+            "support_identity"
+          ],
+          "static_attributes": {
+            "future_effect_status": "unconfirmed",
+            "portable_authorization": false
+          },
+          "attribute_bindings": {
+            "support_preconditions": "support_preconditions",
+            "support_frontier_digest": "support_frontier_digest",
+            "support_frame_ref": "support_frame_ref",
+            "support_candidate_ref": "support_candidate_ref",
+            "support_action_ref": "support_action_ref",
+            "support_source_ref": "support_source_ref",
+            "support_source_hash": "support_source_hash",
+            "support_identity": "support_identity",
+            "memory_revalidation_observation_ref": "support_frame_ref"
+          }
+        }
+      ],
+      "invariants": [
+        "measurement_support_does_not_claim_residual_reduction_or_operator_effect"
+      ],
+      "falsifiers": [
+        "projected_expected_output_is_reported_as_observed_input"
+      ],
+      "reason_refs": [
+        "reason.current_measured_preconditions_preserve_uncertain_future_effect"
+      ]
+    },
+    {
+      "id": "policy.bind_current_selected_probe_scene_activation_support",
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "kind": "selection_policy",
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [],
+      "configuration": {
+        "meaning_evidence_refs_field": "support_evidence_refs"
+      },
+      "meaning_template_ref_by_alternative": {},
+      "selection_tiers": [
+        {
+          "id": "tier.current_selected_scene_support_transport",
+          "all_conditions": [
+            {
+              "field": "post_selected_support_scene_projection_required",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "selected_probe_preconditions_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_ref",
+              "operator": "equals_reference_field",
+              "reference_field": "selected_probe_supported_candidate_ref"
+            },
+            {
+              "field": "canonical_premise_claim_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "scene_support_claim_refs",
+              "operator": "is_present"
+            }
+          ],
+          "reason_ref": "reason.current_selected_support_must_reach_its_declared_scene_activation"
+        }
+      ],
+      "invariants": [
+        "Source has already acquired and currently revalidated the complete selected probe support.",
+        "Project only the explicitly requested selected candidate; keep other candidates and all existing premises unchanged.",
+        "Scene activation consumes canonical evidence; never insert a missing or merely proposed control claim."
+      ],
+      "falsifiers": [
+        "Canonical selected support is missing or no longer current.",
+        "Requested projection candidate differs from the actually supported selection."
+      ],
+      "reason_refs": [
+        "reason.current_selected_support_must_reach_its_declared_scene_activation"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.current_selected_probe_support_enters_declared_scene_activation",
+          "all_conditions": [
+            {
+              "field": "post_selected_support_scene_projection_required",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "selected_probe_preconditions_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "candidate_ref",
+              "operator": "equals_reference_field",
+              "reference_field": "selected_probe_supported_candidate_ref"
+            },
+            {
+              "field": "canonical_premise_claim_refs",
+              "operator": "is_present"
+            },
+            {
+              "field": "scene_support_claim_refs",
+              "operator": "is_present"
+            }
+          ],
+          "sequence_compositions": [
+            {
+              "output_field": "scene_support_claim_refs",
+              "source_fields": [
+                "scene_support_claim_refs",
+                "canonical_premise_claim_refs"
+              ],
+              "max_items": 256,
+              "unique_items": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

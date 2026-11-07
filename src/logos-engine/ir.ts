@@ -29,7 +29,13 @@ export interface IrBinding {
   readonly type_spec: TypeSpec;
   readonly default?: IrExpression | null;
 }
-export type StatementKind = 'CALL' | 'IF' | 'FOR_EACH' | 'NEXT' | 'STOP';
+export interface IrLoopContract {
+  readonly progress_witness: IrExpression;
+  readonly stop_condition: IrExpression;
+  readonly maximum_symbolic_depth: number;
+  readonly limit_result: IrExpression;
+}
+export type StatementKind = 'CALL' | 'IF' | 'FOR_EACH' | 'WHILE' | 'NEXT' | 'STOP';
 export interface IrStatement {
   readonly id: string;
   readonly kind: StatementKind;
@@ -40,10 +46,10 @@ export interface IrStatement {
   readonly body?: readonly IrStatement[];
   readonly else_body?: readonly IrStatement[];
   readonly iterator?: string | null;
-  // These full-IR fields must be empty in the supported V7 subset.
+  // Clauses/match arms remain outside the presently transferred SRC subset.
   readonly clauses?: readonly JsonValue[];
   readonly match_arms?: readonly JsonValue[];
-  readonly loop_contract?: JsonObject | null;
+  readonly loop_contract?: IrLoopContract | null;
 }
 export interface IrStep {
   readonly id: string;
@@ -110,7 +116,7 @@ export interface TraceEvent {
   readonly kind: StatementKind | 'STEP';
   readonly phase: 'statement' | 'frame_complete';
   readonly depth: number;
-  readonly status: 'running' | 'completed' | 'failed';
+  readonly status: 'running' | 'completed' | 'deferred' | 'failed';
   readonly target?: string;
   readonly resultBinding?: string;
   readonly summary?: string;

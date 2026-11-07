@@ -1,0 +1,317 @@
+{
+  "module_id": "arc3.point_state_role_acquisition",
+  "declarations": [
+    {
+      "id": "policy.acknowledged_point_state_role",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "capture.point_state_source",
+        "capture.no_point_state_role"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.acknowledged_point_state_source",
+          "all_conditions": [
+            {
+              "field": "acknowledgement_join_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_level_observation",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "tracking_frame_matches_before",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "frame_domain_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "fixed_frame_support_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "inner_changed_pixel_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "external_changed_pixel_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "capture.point_state_source"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.no_point_state_role",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "capture.no_point_state_role"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "acknowledgement_join_complete",
+              "operator": "not_equals",
+              "expected": true
+            },
+            {
+              "field": "same_level_observation",
+              "operator": "not_equals",
+              "expected": true
+            },
+            {
+              "field": "tracking_frame_matches_before",
+              "operator": "not_equals",
+              "expected": true
+            },
+            {
+              "field": "frame_domain_complete",
+              "operator": "not_equals",
+              "expected": true
+            },
+            {
+              "field": "fixed_frame_support_count",
+              "operator": "not_equals",
+              "expected": 1
+            },
+            {
+              "field": "inner_changed_pixel_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "external_changed_pixel_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "premises": [
+        "exact_acknowledged_effect_and_source_participant"
+      ],
+      "invariants": [
+        "knowledge_admission_never_releases_an_action",
+        "unknowns_are_preserved"
+      ],
+      "falsifiers": [
+        "source_ack_or_causal_join_is_invalid"
+      ],
+      "reason_refs": [
+        "reason.remember_causally_learned_role_appearance"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "capture.point_state_source": "rule.acknowledged_point_state_role"
+      },
+      "configuration": {
+        "maximum_frame_pixels": 262144,
+        "maximum_components": 4096,
+        "maximum_supports": 64
+      }
+    },
+    {
+      "id": "rule.acknowledged_point_state_role",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "one_exact_ACK_pair_keeps_one_enclosing_perimeter_fixed_while_inner_and_external_pixels_change"
+      ],
+      "invariants": [
+        "role_is_revisable_and_does_not_establish_a_binary_or_circuit_law",
+        "source_coordinates_are_not_current_authority"
+      ],
+      "falsifiers": [
+        "matching_current_bearer_does_not_reproduce_an_action_conditioned_effect"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "supposition.point.state_source.{observation_token}",
+          "kind": "schema",
+          "label": "observed fixed-perimeter point state control",
+          "required_fields": [
+            "observation_token",
+            "transition_ref",
+            "action_ref",
+            "participant_entity_ref",
+            "participant_component_ref",
+            "acknowledgement_ref",
+            "observed_interface_binding"
+          ],
+          "static_attributes": {
+            "role": "point_state_control",
+            "commitment": "revisable",
+            "canonical_fact_projection_enabled": false,
+            "role_context_requirements": {}
+          },
+          "attribute_bindings": {
+            "entity_ref": "participant_entity_ref",
+            "component_ref": "participant_component_ref",
+            "transition_ref": "transition_ref",
+            "action_ref": "action_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.point.state_source.{observation_token}",
+          "predicate": "observed_point_state_source",
+          "family": "control",
+          "argument_patterns": [
+            "{participant_entity_ref}",
+            "supposition.point.state_source.{observation_token}",
+            "{acknowledgement_ref}"
+          ],
+          "epistemic_status": "supported",
+          "required_fields": [
+            "observation_token",
+            "transition_ref",
+            "action_ref",
+            "participant_entity_ref",
+            "participant_component_ref",
+            "acknowledgement_ref",
+            "observed_interface_binding"
+          ],
+          "static_attributes": {
+            "disposition": "active",
+            "polarity": "positive",
+            "is_universal_operator_law": false
+          },
+          "attribute_bindings": {
+            "action_ref": "action_ref",
+            "transition_ref": "transition_ref",
+            "component_ref": "participant_component_ref",
+            "acknowledgement_ref": "acknowledgement_ref"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.remember_causally_learned_role_appearance"
+      ]
+    },
+    {
+      "id": "policy.capture_canonical_point_state_control_appearance",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "memory_capture.point_state"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "learning_rows",
+          "operator": "is_present"
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.capture_point_state_profile",
+          "static_facts": {
+            "canonical_learning_projection": {
+              "term_attributes": {
+                "role": "point_state_control"
+              },
+              "link_predicate": "observed_point_state_source",
+              "proof_rule": "rule.acknowledged_point_state_role",
+              "allowed_link_statuses": [
+                "supported"
+              ],
+              "link_disposition": "active",
+              "link_polarity": "positive",
+              "entity_reference_origin": "claim_argument",
+              "claim_entity_argument_index": 0,
+              "claim_required_arguments": {},
+              "transition_reference_origin": "claim",
+              "transition_attribute": "transition_ref",
+              "component_attribute": "component_ref",
+              "action_attribute": "transition_ref",
+              "claim_attributes": {},
+              "nonzero_translation_required": false,
+              "dedup_entry_id_pattern": "supposition.memory.association.{association_token}",
+              "static_learning_facts": {
+                "causal_role_ref": "role.point_state_control",
+                "mechanism_schema_refs": [
+                  "rule.acknowledged_point_state_role"
+                ],
+                "falsifier_refs": [
+                  "falsifier.point_state_link_is_contradicted"
+                ],
+                "action_conditioned_role_evidence_present": true,
+                "disables_source_entity_role_projection": false,
+                "archives_source_role_fact_projection": false
+              },
+              "claim_action_reference_origin": "transition",
+              "compound_source_entity_attribute": "entity_ref"
+            }
+          },
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "memory_capture.point_state"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "memory_capture.point_state": "rule.captured_canonical_role_appearances"
+      },
+      "premises": [
+        "exact_current_ACK_and_same_level_covariation_ground_the_source_support"
+      ],
+      "invariants": [
+        "old_coordinates_are_not_portable_knowledge",
+        "one_recolouring_does_not_establish_a_truth_table"
+      ],
+      "falsifiers": [
+        "source_parameter_effect_link_is_contradicted"
+      ],
+      "reason_refs": [
+        "reason.remember_causally_learned_role_appearance"
+      ]
+    }
+  ]
+}

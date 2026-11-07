@@ -1,0 +1,15 @@
+MODULE v6.visual_sequences
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        measured: Any
+        inferred: Any
+        answer: Any
+    STEP measure
+        CALL sequence.measure(request=request) -> measured
+        NEXT infer
+    STEP infer
+        CALL sequence.infer(measured=measured) -> inferred
+        NEXT bind
+    STEP bind
+        CALL sequence.bind(inferred=inferred) -> answer
+        STOP answer

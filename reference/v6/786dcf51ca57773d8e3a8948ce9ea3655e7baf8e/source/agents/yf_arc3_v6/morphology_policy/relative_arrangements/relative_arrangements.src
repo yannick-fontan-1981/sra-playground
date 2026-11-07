@@ -1,0 +1,15 @@
+MODULE v6.relative_arrangements
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        measured: Any
+        composed: Any
+        answer: Any
+    STEP measure
+        CALL arrangement.measure(request=request) -> measured
+        NEXT compose
+    STEP compose
+        CALL arrangement.compose(measured=measured) -> composed
+        NEXT bind
+    STEP bind
+        CALL arrangement.bind(composed=composed) -> answer
+        STOP answer

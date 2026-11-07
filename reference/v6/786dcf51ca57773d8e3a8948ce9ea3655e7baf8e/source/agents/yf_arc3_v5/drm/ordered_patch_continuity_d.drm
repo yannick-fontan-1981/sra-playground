@@ -1,0 +1,27 @@
+{
+  "module_id": "drm.ordered_patch_continuity_d",
+  "declarations": [
+    {
+      "id": "principle.ordered_patch_return_opens_different_local_destination_question",
+      "kind": "principle",
+      "family_ref": "family.interaction_configuration",
+      "abstraction_level": "causal_variant",
+      "premises": [
+        "one_unique_complete_striped_patch_has_a_nonzero_cardinal_motion_prefix_in_the_actual_point_response",
+        "the_same_patch_becomes_unobservable_then_reappears_at_its_original_anchor",
+        "a_distinct_equal_histogram_orthogonal_patch_and_a_common_perimeter_surface_are_currently_measured",
+        "an_adjacent_complete_patch_of_that_surface_reduces_distance_without_repeating_the_failed_prefix_direction"
+      ],
+      "applicability": ["bounded_revisable_destination_and_control_experiment_after_a_transient_return"],
+      "invariants": [
+        "a_restored_terminal_image_does_not_erase_the_observed_motion_prefix",
+        "the_measured_return_is_not_yet_a_proved_detection_or_clock_reset",
+        "the_common_surface_and_patch_extent_are_hypotheses_not_a_universally_confirmed_grid",
+        "neither_the_neighbor_nor_the_complete_future_route_is_declared_safe_from_endpoint_samples",
+        "parent_goal_and_ordinary_evidence_remain_intact_and_current_preconditions_are_revalidated",
+        "the_point_is_one_experiment_with_an_inspectable_why_and_an_actual_action_permit"
+      ],
+      "reason_refs": ["reason.observed_motion_then_return_requires_an_alternative_to_the_repeated_destination"]
+    }
+  ]
+}

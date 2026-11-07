@@ -1,0 +1,20 @@
+{
+  "module_id":"joystick_solving_d",
+  "declarations":[{
+    "id":"policy.joystick_solving_d","kind":"selection_policy","evaluation":"declared_lexicographic_order",
+    "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1",
+    "output_contract":"yf_arc3_v5.authority_output.selection.v1",
+    "reason_refs":["reason.actual_resource_relation_requires_discriminating_evidence"],
+    "declared_alternative_refs":["joystick_solving.calculate","joystick_solving.need"],
+    "selection_tie_breakers":[{"field":"alternative_ref","preferred_order":"minimize"}],
+    "canonical_equivalence_tie_break_debt_ref":"debt.joystick_solving_equivalent",
+    "invariants":["whole_population_nonwrapping_image","advisory_is_not_required_destination",
+      "all_retained_models_and_replies","preimage_is_not_access_route","same_K03_K09","no_internal_recursive_search","no_act"],
+    "selection_tiers":[
+      {"id":"tier.joystick_solving.calculate","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence",
+       "all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"joystick_solving.calculate"},
+         {"field":"current_question","operator":"equals","expected":true}]},
+      {"id":"tier.joystick_solving.need","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence",
+       "all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"joystick_solving.need"}]}]
+  }]
+}

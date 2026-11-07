@@ -1,0 +1,27 @@
+{
+  "module_id": "conscious_continuation_debt_replacement",
+  "declarations": [{
+    "id": "policy.conscious_continuation_debt_replacement",
+    "kind": "selection_policy", "evaluation": "declared_eligibility_single",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "reason_refs": ["reason.current_consumed_review_replaces_only_the_same_responsibility"],
+    "invariants": ["a_later_date_alone_never_resolves_a_debt", "historical_refusals_are_preserved",
+      "replacement_grants_no_action", "stale_replacements_reactivate_the_original_debt"],
+    "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+    "fact_projections": [
+      {"id": "projection.review_replacement.unproved", "all_conditions": [],
+       "static_facts": {"eligible": true, "replace_retained_review": false}},
+      {"id": "projection.review_replacement.same_current_responsibility",
+       "all_conditions": [
+         {"field": "previous_contract_readable", "operator": "equals", "expected": true},
+         {"field": "current_proof_bound", "operator": "equals", "expected": true},
+         {"field": "same_candidate", "operator": "equals", "expected": true},
+         {"field": "same_question_contract", "operator": "equals", "expected": true},
+         {"field": "same_responsibility", "operator": "equals", "expected": true},
+         {"field": "strictly_later", "operator": "equals", "expected": true}
+       ], "static_facts": {"replace_retained_review": true}}
+    ]
+  }]
+}

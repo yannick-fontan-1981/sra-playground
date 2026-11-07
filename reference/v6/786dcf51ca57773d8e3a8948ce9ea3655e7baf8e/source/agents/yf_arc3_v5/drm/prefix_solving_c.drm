@@ -1,0 +1,163 @@
+{
+  "module_id": "prefix_solving_c",
+  "declarations": [
+    {
+      "id": "policy.prefix_solving_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "complete_grounded_parent_prefix_goal"
+      ],
+      "applicability": [
+        "current_K79_question"
+      ],
+      "invariants": [
+        "coverage_AND_projection",
+        "irreversible_prefix_and_partner_layer",
+        "one_exact_case",
+        "all_models",
+        "no_action_release"
+      ],
+      "falsifiers": [
+        "stale_agenda",
+        "incomplete_terminal_contract",
+        "prefix_contradiction"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "prefix_solving.missing",
+        "prefix_solving.query",
+        "prefix_solving.profile"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.prefix_solving.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "prefix_solving.missing"
+            },
+            {
+              "field": "current_prefix_question",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "prefix_solving.missing"
+          }
+        },
+        {
+          "id": "projection.prefix_solving.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "prefix_solving.query"
+            },
+            {
+              "field": "current_prefix_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "query_bridge_case",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "prefix_solving.query"
+          }
+        },
+        {
+          "id": "projection.prefix_solving.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "prefix_solving.profile"
+            },
+            {
+              "field": "current_prefix_question",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "query_bridge_case",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "prefix_solving.profile"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.prefix_solving.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "prefix_solving.missing"
+            }
+          ],
+          "reason_ref": "reason.prefix_parent_question_requires_current_evidence"
+        },
+        {
+          "id": "tier.prefix_solving.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "prefix_solving.query"
+            }
+          ],
+          "reason_ref": "reason.prefix_colors_layers_and_order_serve_complete_visible_goal"
+        },
+        {
+          "id": "tier.prefix_solving.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "prefix_solving.profile"
+            }
+          ],
+          "reason_ref": "reason.prefix_colors_layers_and_order_serve_complete_visible_goal"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.prefix_solving_activation_unverified",
+      "reason_refs": [
+        "reason.prefix_colors_layers_and_order_serve_complete_visible_goal",
+        "reason.prefix_parent_question_requires_current_evidence"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "module_id": "arc3.seating_caller_d",
+  "declarations": [
+    {
+      "id": "policy.acquired_seating_caller_d", "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single", "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason.current_seating_condition_requires_exact_injective_measurement"],
+      "configuration": {"need_predicate_ref": "requires_exact_specialized_measurement"},
+      "declared_alternative_refs": ["seating_caller.publish_need", "seating_caller.unknown"],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {"id": "projection.seating_caller.publish_need", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "seating_caller.publish_need"},
+          {"field": "acquired_request_current", "operator": "equals", "expected": true},
+          {"field": "requested_operation_ref", "operator": "equals", "expected": "mechanics.typed_seating.injective_conjunction"},
+          {"field": "requested_mode_ref", "operator": "equals", "expected": "EVALUATE"},
+          {"field": "parent_condition_kind_ref", "operator": "equals", "expected": "condition.injective_typed_seating_conjunction"}
+        ], "static_facts": {"eligible": true}},
+        {"id": "projection.seating_caller.unknown.missing", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "seating_caller.unknown"},
+          {"field": "acquired_request_current", "operator": "equals", "expected": false}
+        ], "static_facts": {"eligible": true}},
+        {"id": "projection.seating_caller.unknown.other_condition", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "seating_caller.unknown"},
+          {"field": "parent_condition_kind_ref", "operator": "not_equals", "expected": "condition.injective_typed_seating_conjunction"}
+        ], "static_facts": {"eligible": true}}
+      ],
+      "meaning_template_ref_by_alternative": {"seating_caller.publish_need": "rule.acquired_seating_exact_need_d"},
+      "invariants": ["acquire_before_native_request_construction", "current_instrumental_parent_why",
+        "source_necessity_not_supplied_boolean", "preserve_sibling_requests_and_receipts",
+        "no_physical_goal_confirmation", "no_action_authority"]
+    },
+    {
+      "id": "rule.acquired_seating_exact_need_d", "kind": "rule",
+      "evaluation": "project_requested_conclusions", "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": ["reason.current_seating_condition_requires_exact_injective_measurement"],
+      "term_templates": [],
+      "claim_templates": [{
+        "id_pattern": "{need_claim_ref}", "predicate": "requires_exact_specialized_measurement",
+        "family": "epistemic", "epistemic_status": "supported",
+        "argument_patterns": ["{parent_goal_ref}", "{consumer_ref}", "{desired_condition_ref}"],
+        "required_term_patterns": ["{parent_goal_ref}", "{consumer_ref}"],
+        "required_fields": ["need_claim_ref", "exact_request_signature_ref", "desired_condition_ref"],
+        "scope_bindings": {"parent_goal_ref": "parent_goal_ref", "epoch": "epoch",
+          "episode_ref": "episode_ref", "level_scope_ref": "level_scope_ref",
+          "input_revision_ref": "input_revision_ref", "scope_ref": "scope_ref"},
+        "attribute_bindings": {"exact_request_signature_ref": "exact_request_signature_ref",
+          "question_ref": "question_ref", "utility_reason_ref": "utility_reason_ref",
+          "falsifier_ref": "falsifier_ref"},
+        "static_attributes": {"no_action_authority": true, "no_physical_goal_confirmation": true}
+      }]
+    }
+  ]
+}

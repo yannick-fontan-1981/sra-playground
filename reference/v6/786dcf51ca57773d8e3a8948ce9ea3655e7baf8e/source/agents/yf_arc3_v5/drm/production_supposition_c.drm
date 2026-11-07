@@ -1,0 +1,630 @@
+{
+  "module_id": "production_supposition_c",
+  "declarations": [
+    {
+      "id": "policy.reaction_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_production_interface_evidence"
+      ],
+      "applicability": [
+        "revisable_production_or_restoration_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_law",
+        "native_descriptive_measure_only",
+        "walking_not_transmission",
+        "white_point_role_unresolved",
+        "static_foreign_tokens_not_opponent",
+        "emphasized_control_not_answer",
+        "rarity_not_corruption",
+        "unobserved_edit_not_known_repair",
+        "all_examples_and_alternatives_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_owner",
+        "missing_actual_transaction",
+        "unqualified_identity_or_normalization",
+        "incomplete_domain",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "reaction.retain_reaction_separate_from_walking_question",
+        "reaction.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.reaction_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reaction.retain_reaction_separate_from_walking_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "directed_reaction_question_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reaction.retain_reaction_separate_from_walking_question"
+          }
+        },
+        {
+          "id": "projection.policy.reaction_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "reaction.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "reaction.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.reaction_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reaction.retain_reaction_separate_from_walking_question"
+            }
+          ],
+          "reason_ref": "reason.retain_reaction_separate_from_walking_question"
+        },
+        {
+          "id": "tier.policy.reaction_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "reaction.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_reaction_separate_from_walking_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.production_question_not_action_or_terminal_selection",
+      "reason_refs": [
+        "reason.retain_reaction_separate_from_walking_question"
+      ]
+    },
+    {
+      "id": "policy.chromatic_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_production_interface_evidence"
+      ],
+      "applicability": [
+        "revisable_production_or_restoration_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_law",
+        "native_descriptive_measure_only",
+        "walking_not_transmission",
+        "white_point_role_unresolved",
+        "static_foreign_tokens_not_opponent",
+        "emphasized_control_not_answer",
+        "rarity_not_corruption",
+        "unobserved_edit_not_known_repair",
+        "all_examples_and_alternatives_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_owner",
+        "missing_actual_transaction",
+        "unqualified_identity_or_normalization",
+        "incomplete_domain",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "chromatic.retain_window_composition_and_white_point_question",
+        "chromatic.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.chromatic_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "chromatic.retain_window_composition_and_white_point_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "framed_reference_panes_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pane_overlap_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "repeatable_mixture_observed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "chromatic.retain_window_composition_and_white_point_question"
+          }
+        },
+        {
+          "id": "projection.policy.chromatic_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "chromatic.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "chromatic.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.chromatic_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "chromatic.retain_window_composition_and_white_point_question"
+            }
+          ],
+          "reason_ref": "reason.retain_window_composition_and_white_point_question"
+        },
+        {
+          "id": "tier.policy.chromatic_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "chromatic.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_window_composition_and_white_point_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.production_question_not_action_or_terminal_selection",
+      "reason_refs": [
+        "reason.retain_window_composition_and_white_point_question"
+      ]
+    },
+    {
+      "id": "policy.adversarial_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_production_interface_evidence"
+      ],
+      "applicability": [
+        "revisable_production_or_restoration_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_law",
+        "native_descriptive_measure_only",
+        "walking_not_transmission",
+        "white_point_role_unresolved",
+        "static_foreign_tokens_not_opponent",
+        "emphasized_control_not_answer",
+        "rarity_not_corruption",
+        "unobserved_edit_not_known_repair",
+        "all_examples_and_alternatives_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_owner",
+        "missing_actual_transaction",
+        "unqualified_identity_or_normalization",
+        "incomplete_domain",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "adversarial.retain_alignment_and_observed_response_question",
+        "adversarial.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.adversarial_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "adversarial.retain_alignment_and_observed_response_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "supported_alignment_board_question",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "adversarial.retain_alignment_and_observed_response_question"
+          }
+        },
+        {
+          "id": "projection.policy.adversarial_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "adversarial.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "adversarial.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.adversarial_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "adversarial.retain_alignment_and_observed_response_question"
+            }
+          ],
+          "reason_ref": "reason.retain_alignment_and_observed_response_question"
+        },
+        {
+          "id": "tier.policy.adversarial_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "adversarial.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_alignment_and_observed_response_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.production_question_not_action_or_terminal_selection",
+      "reason_refs": [
+        "reason.retain_alignment_and_observed_response_question"
+      ]
+    },
+    {
+      "id": "policy.workbench_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_production_interface_evidence"
+      ],
+      "applicability": [
+        "revisable_production_or_restoration_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_law",
+        "native_descriptive_measure_only",
+        "walking_not_transmission",
+        "white_point_role_unresolved",
+        "static_foreign_tokens_not_opponent",
+        "emphasized_control_not_answer",
+        "rarity_not_corruption",
+        "unobserved_edit_not_known_repair",
+        "all_examples_and_alternatives_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_owner",
+        "missing_actual_transaction",
+        "unqualified_identity_or_normalization",
+        "incomplete_domain",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "workbench.retain_production_delivery_and_control_lesson_question",
+        "workbench.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.workbench_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "workbench.retain_production_delivery_and_control_lesson_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "stock_holders_diagram_slots_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "workbench.retain_production_delivery_and_control_lesson_question"
+          }
+        },
+        {
+          "id": "projection.policy.workbench_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "workbench.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "workbench.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.workbench_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "workbench.retain_production_delivery_and_control_lesson_question"
+            }
+          ],
+          "reason_ref": "reason.retain_production_delivery_and_control_lesson_question"
+        },
+        {
+          "id": "tier.policy.workbench_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "workbench.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_production_delivery_and_control_lesson_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.production_question_not_action_or_terminal_selection",
+      "reason_refs": [
+        "reason.retain_production_delivery_and_control_lesson_question"
+      ]
+    },
+    {
+      "id": "policy.latent_restoration_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_production_interface_evidence"
+      ],
+      "applicability": [
+        "revisable_production_or_restoration_question"
+      ],
+      "invariants": [
+        "source_selects_question_only",
+        "no_act_or_confirmed_law",
+        "native_descriptive_measure_only",
+        "walking_not_transmission",
+        "white_point_role_unresolved",
+        "static_foreign_tokens_not_opponent",
+        "emphasized_control_not_answer",
+        "rarity_not_corruption",
+        "unobserved_edit_not_known_repair",
+        "all_examples_and_alternatives_retained"
+      ],
+      "falsifiers": [
+        "foreign_scope_or_owner",
+        "missing_actual_transaction",
+        "unqualified_identity_or_normalization",
+        "incomplete_domain",
+        "work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "latent_restoration.retain_latent_reference_and_local_edit_question",
+        "latent_restoration.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.latent_restoration_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent_restoration.retain_latent_reference_and_local_edit_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "localized_repetition_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "latent_restoration.retain_latent_reference_and_local_edit_question"
+          }
+        },
+        {
+          "id": "projection.policy.latent_restoration_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "latent_restoration.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "latent_restoration.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.latent_restoration_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "latent_restoration.retain_latent_reference_and_local_edit_question"
+            }
+          ],
+          "reason_ref": "reason.retain_latent_reference_and_local_edit_question"
+        },
+        {
+          "id": "tier.policy.latent_restoration_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "latent_restoration.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retain_latent_reference_and_local_edit_question"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.production_question_not_action_or_terminal_selection",
+      "reason_refs": [
+        "reason.retain_latent_reference_and_local_edit_question"
+      ]
+    }
+  ]
+}

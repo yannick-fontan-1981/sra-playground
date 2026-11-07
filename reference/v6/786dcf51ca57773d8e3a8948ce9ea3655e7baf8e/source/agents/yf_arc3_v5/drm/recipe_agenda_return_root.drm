@@ -1,0 +1,50 @@
+{
+  "module_id": "arc3.recipe_agenda_return_root",
+  "declarations": [
+    {
+      "id": "policy.recipe_agenda_return_root", "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single", "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason.current_frontier_return_belongs_to_exact_parent_demand"],
+      "declared_alternative_refs": ["recipe_agenda.publish", "recipe_agenda.blocked"],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {"id": "projection.recipe_agenda.publish", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "recipe_agenda.publish"},
+          {"field": "canonical_bindings_current", "operator": "equals", "expected": true}
+        ], "static_facts": {"eligible": true}},
+        {"id": "projection.recipe_agenda.blocked", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "recipe_agenda.blocked"},
+          {"field": "canonical_bindings_current", "operator": "equals", "expected": false}
+        ], "static_facts": {"eligible": true}}
+      ],
+      "meaning_template_ref_by_alternative": {"recipe_agenda.publish": "rule.recipe_agenda_return_root"},
+      "invariants": ["original_parent_why_preserved", "no_physical_goal_confirmation",
+        "current_native_request_identity_and_dependencies", "no_action_authority"]
+    },
+    {
+      "id": "rule.recipe_agenda_return_root", "kind": "rule",
+      "evaluation": "project_requested_conclusions", "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": ["reason.current_frontier_return_belongs_to_exact_parent_demand"],
+      "term_templates": [],
+      "claim_templates": [{
+        "id_pattern": "{source_return_claim_ref}", "predicate": "supports_exact_recipe_frontier_computational_return",
+        "family": "epistemic", "epistemic_status": "supported",
+        "argument_patterns": ["{agenda_term_ref}", "{consumer_ref}"],
+        "required_term_patterns": ["{agenda_term_ref}", "{consumer_ref}"],
+        "required_fields": ["source_return_claim_ref", "exact_demand", "normalized_return", "payload_digest"],
+        "scope_bindings": {"parent_goal_ref": "parent_goal_ref", "epoch": "epoch",
+          "episode_ref": "episode_ref", "level_scope_ref": "level_scope_ref",
+          "input_revision_ref": "input_revision_ref", "scope_ref": "scope_ref"},
+        "attribute_bindings": {"exact_demand": "exact_demand", "normalized_return": "normalized_return",
+          "original_parent_why": "original_parent_why", "payload_digest": "payload_digest"},
+        "static_attributes": {"no_action_authority": true, "no_physical_goal_confirmation": true,
+          "falsifier": "changed_native_identity_parent_why_interpretation_or_dependency"}
+      }]
+    }
+  ]
+}

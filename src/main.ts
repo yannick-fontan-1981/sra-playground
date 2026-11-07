@@ -3,7 +3,8 @@ import './sra-agent.css';
 import { renderSiteHeader } from './site-header';
 import { BrowserGameRuntime, type GameObservation } from './runtime/browser-games';
 import { AGENT_STATUS } from './runtime/contracts';
-import { BrowserSraAgent, type SraAgentSnapshot } from './runtime/sra-agent.ts';
+import { BrowserV6Agent, type V6AgentSnapshot } from './runtime/v6-agent.ts';
+import { AgentKnowledgePanel } from './agent-knowledge-panel.ts';
 import { GAME_CATALOG, getGameByCode, type GameCatalogEntry } from './games/catalog';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
@@ -103,7 +104,7 @@ app.innerHTML = `
         <div class="mode-bar">
           <div class="mode-tabs" role="tablist" aria-label="Play mode">
             <button type="button" id="manual-tab" role="tab" aria-selected="true" aria-controls="manual-panel" tabindex="0">${icon('hand')}Manual</button>
-            <button type="button" id="agent-tab" role="tab" aria-selected="false" aria-controls="agent-panel" tabindex="-1">${icon('robot')}SRA Agent<span class="agent-mode-label">Exploration</span></button>
+            <button type="button" id="agent-tab" role="tab" aria-selected="false" aria-controls="agent-panel" tabindex="-1">${icon('robot')}SRA Agent<span class="agent-mode-label">Native TS</span></button>
           </div>
           <span class="local-label"><span class="status-dot"></span> In your browser</span>
         </div>
@@ -153,23 +154,24 @@ app.innerHTML = `
               <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level.</p>
             </div>
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}" hidden>
-              <p class="agent-engine-name">LOGOS ENGINE / V7</p>
-              <h3>Explore with SRA.</h3>
-              <p class="agent-introduction">SRA tries an input, observes its visible effects, and builds or revises hypotheses.</p>
-              <p id="agent-message" class="agent-message" role="status" aria-live="polite">Choose one action or run a short experiment.</p>
+              <p class="agent-engine-name">LOGOS ENGINE / NATIVE SRA</p>
+              <h3>Solve with SRA.</h3>
+              <p class="agent-introduction">V6 reasoning is being transferred into the common V7 engine. The native agent observes the game, prepares action sequences and checks their effects.</p>
+              <p id="agent-message" class="agent-message" role="status" aria-live="polite">Start from level 1, then run toward the next completed level.</p>
               <div class="agent-run-controls">
-                <button id="agent-run" type="button" class="primary-button">Run 4 actions</button>
+                <button id="agent-run" type="button" class="primary-button">Run to next level</button>
+                <button id="agent-batch" type="button" class="secondary-button">Run 16 actions</button>
                 <button id="agent-step" type="button" class="secondary-button">One action</button>
-                <button id="agent-pause" type="button" class="secondary-button" disabled>Pause</button>
+                <button id="agent-pause" type="button" class="secondary-button agent-pause-wide" disabled>Pause</button>
               </div>
               <div class="agent-live-stats" aria-label="Agent session">
                 <div><strong id="agent-action-count">0</strong><span>actions</span></div>
-                <div><strong id="agent-hypothesis-count">0</strong><span>hypotheses</span></div>
-                <div><strong id="agent-node-count">0</strong><span>nodes</span></div>
+                <div><strong id="agent-level-count">0</strong><span>levels solved</span></div>
+                <div><strong id="agent-prefix-count">0</strong><span>completed plans</span></div>
               </div>
-              <p id="agent-decision" class="agent-decision">The next action will be selected by the V7 experiment program.</p>
-              <div id="agent-unsupported" hidden><p>This first mode needs a directional or Space input. Coordinate-based exploration is the next extension.</p><button id="agent-example" type="button" class="secondary-button">Try BP35</button></div>
-              <p class="agent-scope">Experimental exploration of action effects. Goal-directed level solving is a later step.</p>
+              <p id="agent-decision" class="agent-decision">The transferred reasoning programs will select the next action sequence.</p>
+              <div id="agent-unsupported" hidden><p>The V6 campaign begins at level 1 and carries its acquired knowledge into later levels.</p><button id="agent-restart" type="button" class="secondary-button">Restart game at level 1</button></div>
+              <p class="agent-scope">Runs locally, without a model server. Up to 600 actions and 6 minutes of active solving per level. Pause keeps the current reasoning session.</p>
               <button id="agent-new-session" type="button" class="agent-text-button">New reasoning session</button>
               <button id="return-manual" type="button" class="agent-text-button">Return to Manual ${icon('arrow')}</button>
             </div>
@@ -177,10 +179,12 @@ app.innerHTML = `
         </div>
 
         <section id="agent-inspection" class="agent-inspection" aria-label="Agent reasoning" hidden>
-          <div class="agent-inspection-header"><div><p class="eyebrow">LIVE REASONING</p><h3>From observation to action</h3></div><a class="text-link" href="/reasoning-lab.html">Open the Reasoning Lab ${icon('arrow')}</a></div>
+          <div class="agent-inspection-header"><div><p class="eyebrow">LIVE REASONING</p><h3>The current action sequence</h3></div><a class="text-link" href="/reasoning-lab.html">V7 Reasoning Lab ${icon('arrow')}</a></div>
           <p id="agent-cycle-summary">The engine will read the current visible frame when you start.</p>
-          <details id="agent-trace-details"><summary>Inspect the latest SRC trace <span id="agent-trace-count"></span></summary><div id="agent-trace" class="agent-trace"><p>No reasoning cycle yet.</p></div></details>
-          <p class="agent-boundary-note">Pause finishes an action already sent to the game. Returning to Manual starts a new reasoning session next time.</p>
+          <div id="agent-plan" class="agent-plan"><p>No action sequence selected yet.</p></div>
+          <details id="agent-trace-details"><summary>Inspect the V6 reasoning trace <span id="agent-trace-count"></span></summary><div id="agent-trace" class="agent-trace"><p>No reasoning cycle yet.</p></div></details>
+          <div id="agent-knowledge"></div>
+          <p class="agent-boundary-note">The agent runs entirely in TypeScript, using the common SRC interpreter from V7. Pause preserves the pending action sequence. The complete V6 migration is in progress; verified paths currently include ordered-support transfers and repairs of regular visual fields.</p>
         </section>
 
         <p id="game-feedback" class="sr-only" aria-live="polite"></p>
@@ -189,7 +193,7 @@ app.innerHTML = `
 
     <section class="about-section wrap" id="about" aria-labelledby="about-title">
       <div class="about-heading"><p class="eyebrow">THE PROJECT</p><h2 id="about-title">About SRA</h2><div class="about-links"><a class="text-link" href="/architecture.html">Architecture ${icon('arrow')}</a><a class="text-link" href="/videos.html">Video series ${icon('arrow')}</a></div></div>
-      <div class="about-content"><p><strong>Symbolic Reasoning Agent</strong> is Yannick Fontan’s research project for interactive games. The Python agent uses explicit representations of observations, mechanisms, and goals to organize its reasoning.</p><p>The 100 games on this page run locally in your browser. The experimental SRA Agent mode uses Logos Engine to explore visible action effects in games with directional or Space inputs. Inspect its reasoning here or study controlled examples in the <a class="text-link" href="/reasoning-lab.html">Logos Engine Reasoning Lab</a>.</p></div>
+      <div class="about-content"><p><strong>Symbolic Reasoning Agent</strong> is Yannick Fontan’s research project for interactive games. The agent uses explicit representations of observations, mechanisms, and goals to organize its reasoning.</p><p>The 100 games on this page run locally in your browser. The ongoing SRA Agent migration transfers V6 capabilities into native TypeScript and the common V7 reasoning architecture. Coordinate inputs, guarded action sequences and memory across levels are connected. The original Python game engines remain isolated from the agent. Explore the shared reasoning syntax in the <a class="text-link" href="/reasoning-lab.html">Logos Engine Reasoning Lab</a>.</p></div>
     </section>
   </main>
   <footer class="site-footer wrap"><span><strong>SRA Playground</strong><span class="footer-separator">/</span>Independent research by Yannick Fontan</span><div><a href="/contact.html">Contact ${icon('arrow')}</a><a href="https://arcprize.org/arc-agi/3" target="_blank" rel="noopener noreferrer">ARC Prize ${icon('external')}</a><a href="${websiteRepo}/blob/main/THIRD_PARTY_NOTICES.md" target="_blank" rel="noopener noreferrer">Licenses & notices ${icon('external')}</a></div></footer>
@@ -217,60 +221,83 @@ let presentationGeneration = 0;
 let renderedLevelCount = -1;
 let renderedPalette = '';
 let colors: number[][] = [];
-let agentState: SraAgentSnapshot | null = null;
-const agent = new BrowserSraAgent({
+let agentState: V6AgentSnapshot | null = null;
+let knowledgePanel: AgentKnowledgePanel | null = null;
+const agent = new BrowserV6Agent({
   getObservation: () => observation,
   canDispatch: () => ready() && mode === 'agent',
-  dispatch: async actionId => {
-    if (!ready() || mode !== 'agent' || !observation?.availableActionIds.includes(actionId)) {
+  dispatch: async action => {
+    if (!ready() || mode !== 'agent' || !observation?.availableActionIds.includes(action.id)) {
       throw new Error('The game changed before the action could be sent.');
     }
     const generation = selectionGeneration;
     busy = true;
     updateInterface();
     try {
-      const next = await runtime.action(actionId);
+      const actionStarted = performance.now();
+      const next = await runtime.action(action.id, action.id === 6 ? action.data : undefined);
+      const executionMs = performance.now() - actionStarted;
       await present(next, generation);
       if (generation !== selectionGeneration || next.gameCode !== selectedGame.code) {
         throw new Error('The action belongs to an earlier game session.');
       }
-      return next;
+      return { observation: next, executionMs };
     } catch (error) {
       showFailure(error, generation);
       throw error;
     }
   },
-  onState: state => { agentState = state; updateInterface(); },
+  onState: state => { agentState = state; knowledgePanel?.update(state); updateInterface(); },
 });
+knowledgePanel = new AgentKnowledgePanel(element('#agent-knowledge'), agent);
 
 function updateAgentInterface(): void {
   const state = agentState;
   const terminal = Boolean(observation && ['WIN', 'LEVEL_COMPLETE', 'GAME_OVER', 'GAMEOVER'].includes(observation.state));
-  const grounded = Boolean(observation?.availableActionIds.some(id => id >= 1 && id <= 5));
-  const available = mode === 'agent' && ready() && !terminal && grounded;
+  const grounded = Boolean(observation?.availableActionIds.some(id => id >= 1 && id <= 7));
+  const needsRestart = Boolean(observation && !state?.sessionId && (observation.level !== 1 || observation.levelsCompleted !== 0));
+  const available = mode === 'agent' && ready() && !terminal && grounded && !needsRestart;
   element<HTMLButtonElement>('#agent-step').disabled = !available || !(state?.canStep ?? true);
   element<HTMLButtonElement>('#agent-run').disabled = !available || !(state?.canRun ?? true);
+  element<HTMLButtonElement>('#agent-batch').disabled = !available || !(state?.canRun ?? true);
   element<HTMLButtonElement>('#agent-pause').disabled = !state?.busy;
   element<HTMLButtonElement>('#agent-new-session').disabled = !ready() || Boolean(state?.busy);
-  element<HTMLButtonElement>('#agent-example').disabled = !ready() || Boolean(state?.busy);
-  element('#agent-unsupported').hidden = !observation || grounded || terminal;
+  element<HTMLButtonElement>('#agent-restart').disabled = !ready() || Boolean(state?.busy);
+  element('#agent-unsupported').hidden = !needsRestart;
   const message = loading ? 'Waiting for the game to load…' : failed ? 'Reload the game to continue.'
-    : terminal ? 'This level has ended. Use Manual to reset it or continue.'
-    : observation && !grounded ? 'No fully grounded input is available in this game yet.'
-    : state?.message ?? 'Choose one action or run a short experiment.';
+    : state?.sessionId ? state.message
+    : needsRestart ? 'Restart this game at level 1 to begin a V6 campaign.'
+    : terminal ? 'This game has ended. Use Manual to reset or restart it.'
+    : observation && !grounded ? 'The game offers no action in its current public state.'
+    : state?.message ?? 'Start from level 1, then run toward the next completed level.';
   element('#agent-message').textContent = message;
   element('#agent-message').setAttribute('data-status', state?.status ?? 'idle');
   element('#agent-action-count').textContent = String(state?.actionCount ?? 0);
-  element('#agent-hypothesis-count').textContent = String(state?.hypothesisCount ?? 0);
-  element('#agent-node-count').textContent = String(state?.nodeCount ?? 0);
-  element('#agent-decision').textContent = state?.lastDecision ?? 'The next action will be selected by the V7 experiment program.';
+  element('#agent-level-count').textContent = String(state?.sessionId ? state.levelsCompleted : 0);
+  element('#agent-prefix-count').textContent = String(state?.cycles ?? 0);
+  element('#agent-decision').textContent = state?.lastDecision ?? 'The transferred reasoning programs will select the next action sequence.';
   element('#agent-cycle-summary').textContent = state?.sessionId
-    ? `${state.cycles} observation cycles · ${state.nodeCount} knowledge nodes · ${state.compositionCount} compositions · ${state.actionCount} game actions`
+    ? `${state.actionCount} actions · ${state.levelsCompleted} completed levels · ${state.cycles ?? 0} completed plans · ${state.activeSeconds.toFixed(1)} s active solving`
     : 'The engine will read the current visible frame when you start.';
+  const record = (value: unknown): Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {};
+  const proposal = record(state?.proposal);
+  const question = record(proposal.question);
+  const actions = Array.isArray(proposal.actions) ? proposal.actions.slice(0, 16) : [];
+  const steps = Array.isArray(proposal.steps) ? proposal.steps : [];
+  const why = typeof question.reason === 'string' ? question.reason : '';
+  element('#agent-plan').innerHTML = actions.length
+    ? `<p class="agent-plan-purpose">${escapeHtml(why || String(proposal.kind ?? 'Committed V6 action sequence'))}</p><ol>${actions.map((value, index) => {
+      const command = record(value);
+      const data = record(command.data);
+      const expected = record(steps[index]).expected_after;
+      const label = String(command.action_ref ?? 'Action') + (command.action_ref === 'ACTION6' ? ` (${data.x}, ${data.y})` : '');
+      return `<li><code>${escapeHtml(label)}</code><span>${expected === null || expected === undefined ? 'Effect to observe' : escapeHtml(JSON.stringify(expected))}</span></li>`;
+    }).join('')}</ol><p class="agent-plan-note">Selected by V6 from the current public observations. Each action is checked against its retained conditions before execution.</p>`
+    : '<p>No action sequence selected yet.</p>';
   const trace = state?.trace ?? [];
   element('#agent-trace-count').textContent = trace.length ? `(${trace.length} events)` : '';
   element('#agent-trace').innerHTML = trace.length
-    ? `${trace.length > 120 ? '<p>Showing the last 120 retained execution events.</p>' : ''}<table><thead><tr><th>Instruction</th><th>Operation</th><th>Outcome</th></tr></thead><tbody>${trace.slice(-120).map(event => `<tr><td><code>${escapeHtml(String(event.statementId))}</code></td><td>${escapeHtml(String(event.kind))} ${escapeHtml(String(event.target ?? ''))}</td><td>${escapeHtml(String(event.summary ?? event.status))}</td></tr>`).join('')}</tbody></table>`
+    ? `${trace.length > 64 ? '<p>Showing the last 64 retained execution events.</p>' : ''}<ol>${trace.slice(-64).map(event => `<li><pre>${escapeHtml(JSON.stringify(event, null, 2))}</pre></li>`).join('')}</ol>`
     : '<p>No reasoning cycle yet.</p>';
 }
 
@@ -436,7 +463,7 @@ function setMode(next: 'manual' | 'agent', focusTab = false): void {
 }
 
 async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none' = 'push', level?: number): Promise<void> {
-  agent.invalidate('A new game observation is ready for exploration.');
+  agent.invalidate('A new game observation is ready for native reasoning.');
   const game = getGameByCode(code) ?? defaultGame!;
   const generation = ++selectionGeneration;
   presentationGeneration += 1;
@@ -484,15 +511,17 @@ element('#manual-tab').addEventListener('click', () => setMode('manual'));
 element('#agent-tab').addEventListener('click', () => setMode('agent'));
 element('#return-manual').addEventListener('click', () => { setMode('manual'); focusCanvas(); });
 element('#agent-step').addEventListener('click', () => { void agent.step(); });
-element('#agent-run').addEventListener('click', () => { void agent.run(4); });
+element('#agent-run').addEventListener('click', () => { void agent.run(600); });
+element('#agent-batch').addEventListener('click', () => { void agent.run(16); });
 element('#agent-pause').addEventListener('click', () => agent.pause());
 element('#agent-new-session').addEventListener('click', () => agent.invalidate('New reasoning session. The current game position is preserved.'));
-element('#agent-example').addEventListener('click', () => {
+element('#agent-restart').addEventListener('click', () => {
   const generation = selectionGeneration + 1;
-  const load = selectGame('BP35');
+  const code = selectedGame.code;
+  const load = selectGame(code, 'replace', 1);
   const requestedMode = modeGeneration;
   void load.then(() => {
-    if (selectionGeneration === generation && modeGeneration === requestedMode && selectedGame.code === 'BP35' && ready()) setMode('agent');
+    if (selectionGeneration === generation && modeGeneration === requestedMode && selectedGame.code === code && ready()) setMode('agent');
   });
 });
 element('.mode-tabs').addEventListener('keydown', (event: KeyboardEvent) => {

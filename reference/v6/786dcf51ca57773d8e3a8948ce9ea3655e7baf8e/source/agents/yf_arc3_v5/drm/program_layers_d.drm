@@ -1,0 +1,52 @@
+{
+  "module_id": "program_layers_d",
+  "declarations": [{
+    "id": "policy.d_program_layers",
+    "kind": "selection_policy",
+    "evaluation": "declared_lexicographic_order",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "reason_refs": ["reason.d_current_graph_word_layers_are_separate_descriptive_samples",
+      "reason.d_obscured_graph_word_content_remains_unresolved",
+      "reason.d_program_layer_scope_or_support_not_qualified"],
+    "selection_required_fact_fields": ["layer_bindings_match", "unknown_pixel_count",
+      "unresolved_content_count", "incompatible_sampling_count", "directed_ports_not_inferred_from_centers"],
+    "declared_alternative_refs": ["d_program_layers.current_visible", "d_program_layers.current_obscured", "d_program_layers.unknown"],
+    "canonical_equivalence_tie_break_debt_ref": "debt.d_program_layers_equivalent_scope",
+    "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+    "selection_tiers": [
+      {"id": "tier.d_program_layers.visible", "reason_ref": "reason.d_current_graph_word_layers_are_separate_descriptive_samples",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "d_program_layers.current_visible"},
+         {"field": "layer_bindings_match", "operator": "equals", "expected": true},
+         {"field": "directed_ports_not_inferred_from_centers", "operator": "equals", "expected": true},
+         {"field": "unknown_pixel_count", "operator": "equals", "expected": 0},
+         {"field": "unresolved_content_count", "operator": "equals", "expected": 0},
+         {"field": "incompatible_sampling_count", "operator": "equals", "expected": 0}]},
+      {"id": "tier.d_program_layers.obscured", "reason_ref": "reason.d_obscured_graph_word_content_remains_unresolved",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "d_program_layers.current_obscured"},
+         {"field": "layer_bindings_match", "operator": "equals", "expected": true},
+         {"field": "directed_ports_not_inferred_from_centers", "operator": "equals", "expected": true},
+         {"field": "unknown_pixel_count", "operator": "greater_than", "expected": 0}]},
+      {"id": "tier.d_program_layers.unprovided", "reason_ref": "reason.d_obscured_graph_word_content_remains_unresolved",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "d_program_layers.current_obscured"},
+         {"field": "layer_bindings_match", "operator": "equals", "expected": true},
+         {"field": "directed_ports_not_inferred_from_centers", "operator": "equals", "expected": true},
+         {"field": "unresolved_content_count", "operator": "greater_than", "expected": 0}]},
+      {"id": "tier.d_program_layers.unknown", "reason_ref": "reason.d_program_layer_scope_or_support_not_qualified",
+       "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "d_program_layers.unknown"}]}
+    ],
+    "configuration": {
+      "operation_ref": "mechanics.fixed_program_origin.display_layers", "mode_ref": "MEASURE",
+      "admitted_native_return_ref": "d_effect_request.descriptive_return",
+      "qualification_status_refs": ["supported", "established"],
+      "frame_field": "program_layer_frame_ref", "frame_digest_field": "program_layer_frame_digest",
+      "layout_digest_field": "program_layer_layout_digest",
+      "pixel_nearest_centers_are_not_directed_ports": true, "unknown_is_not_empty": true,
+      "no_transfer_or_model_confirmation": true, "no_action_authority": true
+    }
+  }]
+}

@@ -1,0 +1,7 @@
+MODULE v6.topological_recolor
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP select
+        CALL recolor.select(request=request) -> decision
+        STOP decision

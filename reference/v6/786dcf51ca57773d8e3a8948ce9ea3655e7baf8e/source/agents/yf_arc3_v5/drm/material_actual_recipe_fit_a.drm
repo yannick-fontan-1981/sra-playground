@@ -1,0 +1,236 @@
+{
+  "module_id": "material_actual_recipe_fit_a",
+  "declarations": [
+    {
+      "id": "policy.material_actual_recipe_fit_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_actual_recipe_refuted",
+        "reason.material_actual_recipe_compatible",
+        "reason.material_actual_recipe_unresolved",
+        "reason.material_actual_recipe_unknown"
+      ],
+      "declared_alternative_refs": [
+        "material_actual_recipe_fit_a.refuted",
+        "material_actual_recipe_fit_a.compatible",
+        "material_actual_recipe_fit_a.unresolved",
+        "material_actual_recipe_fit_a.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_actual_recipe_fit.equivalent",
+      "selection_tiers": [
+        {
+          "id": "tier.material_actual_recipe_fit_a.refuted",
+          "reason_ref": "reason.material_actual_recipe_refuted",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_actual_recipe_fit_a.refuted"
+            },
+            {
+              "field": "fit_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_recipe_refuted",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_actual_recipe_fit_a.compatible",
+          "reason_ref": "reason.material_actual_recipe_compatible",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_actual_recipe_fit_a.compatible"
+            },
+            {
+              "field": "fit_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "requested_recipe_compatible",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_actual_recipe_fit_a.unresolved",
+          "reason_ref": "reason.material_actual_recipe_unresolved",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_actual_recipe_fit_a.unresolved"
+            },
+            {
+              "field": "fit_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_actual_recipe_fit_a.unknown",
+          "reason_ref": "reason.material_actual_recipe_unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_actual_recipe_fit_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "material_actual_recipe_fit_a.refuted": "rule.material_actual_recipe_fit_a",
+        "material_actual_recipe_fit_a.compatible": "rule.material_actual_recipe_fit_a",
+        "material_actual_recipe_fit_a.unresolved": "rule.material_actual_recipe_fit_a"
+      },
+      "configuration": {}
+    },
+    {
+      "id": "rule.material_actual_recipe_fit_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.material_actual_recipe_refuted",
+        "reason.material_actual_recipe_compatible",
+        "reason.material_actual_recipe_unresolved"
+      ],
+      "invariants": [
+        "one_actual_commit_only",
+        "independent_before_and_after_acquisitions",
+        "whole_unit_domains",
+        "native_recipe_grammar_reused",
+        "retained_refuted_unknown_stay_separate",
+        "no_whole_method_truth_or_act"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{output_term_ref}",
+          "kind": "value",
+          "label": "Actual acquired scoped recipe grammar fit",
+          "required_fields": [
+            "output_term_ref",
+            "output_claim_ref",
+            "parent_goal_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "why_digest",
+            "requested_recipe_ref",
+            "value_digest"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "why_digest": "why_digest",
+            "requested_recipe_ref": "requested_recipe_ref",
+            "value_digest": "value_digest",
+            "value": "value",
+            "source_disposition_ref": "alternative_ref"
+          },
+          "static_attributes": {
+            "method_truth_promoted": false,
+            "actual_use_proved": false,
+            "action_release_authorized": false,
+            "invalidate_entire_recipe_language": false,
+            "source_kind_ref": "material.actual_scoped_recipe_fit.v1"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_claim_ref}",
+          "predicate": "qualifies_material_actual_scoped_recipe_fit",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{output_term_ref}",
+            "{requested_recipe_ref}"
+          ],
+          "required_term_patterns": [
+            "{output_term_ref}"
+          ],
+          "required_fields": [
+            "output_term_ref",
+            "output_claim_ref",
+            "parent_goal_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "why_digest",
+            "requested_recipe_ref",
+            "value_digest"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "why_digest": "why_digest",
+            "requested_recipe_ref": "requested_recipe_ref",
+            "value_digest": "value_digest",
+            "value": "value",
+            "source_disposition_ref": "alternative_ref"
+          },
+          "static_attributes": {
+            "method_truth_promoted": false,
+            "actual_use_proved": false,
+            "action_release_authorized": false,
+            "invalidate_entire_recipe_language": false
+          }
+        }
+      ]
+    }
+  ]
+}

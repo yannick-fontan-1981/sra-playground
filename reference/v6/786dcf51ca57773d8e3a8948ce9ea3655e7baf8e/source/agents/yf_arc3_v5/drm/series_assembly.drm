@@ -1,0 +1,285 @@
+{
+  "module_id": "series_assembly",
+  "declarations": [
+    {
+      "id": "policy.record_captured_series_assembly",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "series_assembly.retain",
+        "series_assembly.unknown"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "series_assembly.retain": "rule.captured_series_control_assembly"
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.series_assembly.default",
+          "all_conditions": [],
+          "static_facts": {
+            "eligible": false,
+            "series_assembly_qualified": false
+          }
+        },
+        {
+          "id": "projection.series_assembly.exact",
+          "all_conditions": [
+            {
+              "field": "all_member_samples_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "connected_disjoint_supports",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "root_existing_control_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "moved_sample_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "member_count",
+              "operator": "greater_than",
+              "expected": 1
+            }
+          ],
+          "static_facts": {
+            "series_assembly_qualified": true
+          }
+        },
+        {
+          "id": "projection.series_assembly.retain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "series_assembly.retain"
+            },
+            {
+              "field": "series_assembly_qualified",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.series_assembly.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "series_assembly.unknown"
+            },
+            {
+              "field": "series_assembly_qualified",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.captured_common_motion_supports_revisable_control_assembly"
+      ],
+      "invariants": [
+        "covariance_is_not_attachment_or_a_universal_action_law",
+        "ambiguity_preserves_unknown",
+        "no_per_primitive_cognitive_replay"
+      ]
+    },
+    {
+      "id": "rule.captured_series_control_assembly",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "dynamic",
+      "premises": [
+        "distinct_connected_members_preserve_exact_support_at_every_captured_endpoint",
+        "existing_control_is_a_member",
+        "at_least_one_nonzero_observed_translation"
+      ],
+      "invariants": [
+        "preserve_existing_control_identity",
+        "members_remain_distinct",
+        "one_terminal_reconciliation",
+        "series_ref_is_not_the_last_primitive",
+        "no_attachment_law_from_covariance_alone"
+      ],
+      "falsifiers": [
+        "observed_relative_motion_breaks_the_declared_rigid_group"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "supposition.controlled_assembly.captured_series_group.{group_token}",
+          "kind": "schema",
+          "label": "revisable controlled assembly around an existing cursor",
+          "required_fields": [
+            "group_token",
+            "member_refs",
+            "member_count",
+            "action_ref",
+            "transition_ref"
+          ],
+          "static_attributes": {
+            "role": "controlled_assembly_supposition",
+            "morphology_mode": "exact_captured_series_group",
+            "commitment": "revisable",
+            "requires_enclosing_anchor": false,
+            "canonical_fact_projection_enabled": false
+          },
+          "attribute_bindings": {
+            "member_refs": "member_refs",
+            "delta_row": "delta_row",
+            "delta_col": "delta_col",
+            "action_ref": "action_ref",
+            "transition_ref": "transition_ref",
+            "context_epoch": "context_epoch",
+            "sample_count": "sample_count",
+            "moved_sample_count": "moved_sample_count"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.role.candidate.controlled_assembly.captured_series_group.{group_token}.{transition_ref}",
+          "predicate": "proposes_role_candidate",
+          "family": "dynamic",
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "group_token",
+            "action_ref",
+            "transition_ref"
+          ],
+          "argument_patterns": [
+            "supposition.controlled_assembly.captured_series_group.{group_token}",
+            "role.controlled_assembly_supposition"
+          ],
+          "required_term_patterns": [
+            "supposition.controlled_assembly.captured_series_group.{group_token}"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "is_frozen_action_contract": false
+          },
+          "attribute_bindings": {
+            "action_ref": "action_ref",
+            "transition_ref": "transition_ref"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.new_cotranslated_members_extend_control_assembly_without_replacing_existing_actor"
+      ]
+    },
+    {
+      "id": "policy.capture_series_assembly_appearance",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "memory_capture.canonical_cursor"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "learning_rows",
+          "operator": "is_present"
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.memory_capture.captured_series_assembly",
+          "all_conditions": [],
+          "static_facts": {
+            "canonical_learning_projection": {
+              "term_attributes": {
+                "role": "controlled_assembly_supposition",
+                "morphology_mode": "exact_captured_series_group"
+              },
+              "member_entity_refs_attribute": "member_refs",
+            "require_common_nonzero_member_translation": false,
+            "claim_action_reference_origin": "transition",
+              "link_predicate": "proposes_role_candidate",
+              "proof_rule": "rule.captured_series_control_assembly",
+              "allowed_link_statuses": [
+                "proposed",
+                "supported",
+                "established"
+              ],
+              "link_disposition": "active",
+              "link_polarity": "positive",
+              "entity_attribute": "entity_ref",
+              "component_attribute": null,
+              "transition_attribute": "transition_ref",
+              "action_attribute": "action_ref",
+              "claim_entity_argument_index": 0,
+              "dedup_entry_id_pattern": "supposition.memory.association.{association_token}",
+              "static_learning_facts": {
+                "causal_role_ref": "role.controlled_assembly_supposition",
+                "mechanism_schema_refs": [
+                  "rule.captured_series_control_assembly"
+                ],
+                "disables_source_entity_role_projection": false,
+                "archives_source_role_fact_projection": false,
+                "falsifier_refs": [
+                  "falsifier.member_cotranslation_breaks_rigid_support"
+                ],
+                "action_conditioned_role_evidence_present": true
+              }
+            }
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "memory_capture.canonical_cursor": "rule.captured_canonical_role_appearances"
+      },
+      "premises": [
+        "source_committed_exact_covariance_across_captured_series",
+        "common_nonzero_sample_proved_even_when_terminal_net_displacement_is_zero"
+      ],
+      "invariants": [
+        "capture_the_complete_valued_union",
+        "no_single_temporal_anchor_required",
+        "do_not_reset_retractions"
+      ],
+      "falsifiers": [
+        "canonical_group_link_is_defeated_or_members_are_stale"
+      ],
+      "reason_refs": [
+        "reason.remember_causally_learned_role_appearance"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "module_id": "material_goal_projection_a",
+  "declarations": [
+    {
+      "id": "policy.material_goal_projection_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_current_goal_and_observed_requests",
+        "reason.material_goal_projection_missing"
+      ],
+      "declared_alternative_refs": [
+        "material_goal_projection_a.current",
+        "material_goal_projection_a.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_goal_projection_equivalent",
+      "selection_tiers": [
+        {
+          "id": "tier.material_consumer.current",
+          "reason_ref": "reason.material_current_goal_and_observed_requests",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_goal_projection_a.current"
+            },
+            {
+              "field": "goal_projection_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_consumer.unknown",
+          "reason_ref": "reason.material_goal_projection_missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_goal_projection_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "material_goal_projection_a.current": "rule.material_goal_projection_a"
+      },
+      "configuration": {}
+    },
+    {
+      "id": "rule.material_goal_projection_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.material_current_goal_and_observed_requests"
+      ],
+      "invariants": [
+        "actual_principal_goal_and_closed_observed_roles",
+        "proposed_family_interpretation_only",
+        "principal_goal_term_unchanged",
+        "no_goal_completion_or_action_authority"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "value.material.proposed_goal_contract.{request_ref}",
+          "kind": "value",
+          "label": "Proposed material requests linked to unchanged principal goal",
+          "required_fields": [
+            "request_ref",
+            "parent_goal_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "level_scope_ref",
+            "frame_ref",
+            "why_digest",
+            "principal_goal_digest",
+            "contract",
+            "contract_digest",
+            "support_digests"
+          ],
+          "attribute_bindings": {
+            "request_ref": "request_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "frame_ref": "frame_ref",
+            "why_digest": "why_digest",
+            "principal_goal_digest": "principal_goal_digest",
+            "contract": "contract",
+            "contract_digest": "contract_digest",
+            "support_digests": "support_digests"
+          },
+          "static_attributes": {
+            "source_kind_ref": "material.proposed_terminal_contract.v1",
+            "goal_truth_promoted": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.material.proposed_goal_contract.{request_ref}",
+          "predicate": "proposes_material_terminal_goal_contract",
+          "family": "epistemic",
+          "epistemic_status": "proposed",
+          "argument_patterns": [
+            "value.material.proposed_goal_contract.{request_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "value.material.proposed_goal_contract.{request_ref}"
+          ],
+          "required_fields": [
+            "request_ref",
+            "parent_goal_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "level_scope_ref",
+            "frame_ref",
+            "why_digest",
+            "principal_goal_digest",
+            "contract",
+            "contract_digest",
+            "support_digests"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "level_scope_ref": "level_scope_ref"
+          },
+          "attribute_bindings": {
+            "request_ref": "request_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "level_scope_ref": "level_scope_ref",
+            "frame_ref": "frame_ref",
+            "why_digest": "why_digest",
+            "principal_goal_digest": "principal_goal_digest",
+            "contract": "contract",
+            "contract_digest": "contract_digest",
+            "support_digests": "support_digests"
+          },
+          "static_attributes": {
+            "goal_truth_promoted": false,
+            "no_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

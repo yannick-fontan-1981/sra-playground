@@ -1,0 +1,1195 @@
+{
+  "module_id": "b_mechanical_profile",
+  "declarations": [
+    {
+      "id": "policy.b_goal_owned_mechanical_profile",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.wanted_future_utility_and_current_hypotheses_precede_the_named_calculation"
+      ],
+      "premises": [
+        "caller_owns_current_parent_question_and_next_item"
+      ],
+      "invariants": [
+        "no_new_goal_or_action_authority",
+        "hypothesis_with_falsifier_is_not_confirmed_law",
+        "unrelated_siblings_are_retained",
+        "only_current_required_closure_gates_prediction",
+        "measure_fit_can_answer_missing_model_inputs",
+        "sealed_effect_interpretation_does_not_change_live_world",
+        "only_explicit_current_affected_dependencies_are_invalidated"
+      ],
+      "falsifiers": [
+        "closure_or_epoch_changes",
+        "signature_unavailable",
+        "goal_contract_not_grounded"
+      ],
+      "declared_alternative_refs": [
+        "profile.guarded_transport.current",
+        "profile.queued_alignment_cascade.current",
+        "profile.needs_prerequisite",
+        "profile.guarded_transport.sealed",
+        "profile.queued_alignment_cascade.sealed",
+        "profile.reuse_current_return"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.profile.guarded_transport.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.guarded_transport.current"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.guarded_transport"
+            },
+            {
+              "field": "profile_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_is_solving",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "wanted_future_supplied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_signature_registered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "goal_contract_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "closure_current_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_owner_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_demand_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "agenda_prerequisites_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_current_inputs_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_returns_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_agenda_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile.guarded_transport.current.measurement",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.guarded_transport.current"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.guarded_transport"
+            },
+            {
+              "field": "profile_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_is_solving",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "wanted_future_supplied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_signature_registered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "is_measurement_or_fit",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_owner_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_demand_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "agenda_prerequisites_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_current_inputs_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_returns_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_agenda_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile.queued_alignment_cascade.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.queued_alignment_cascade.current"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.queued_alignment_cascade"
+            },
+            {
+              "field": "profile_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_is_solving",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "wanted_future_supplied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_signature_registered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "goal_contract_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "closure_current_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_owner_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_demand_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "agenda_prerequisites_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_current_inputs_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_returns_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_agenda_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile.queued_alignment_cascade.current.measurement",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.queued_alignment_cascade.current"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.queued_alignment_cascade"
+            },
+            {
+              "field": "profile_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_is_solving",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "wanted_future_supplied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_signature_registered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "is_measurement_or_fit",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_owner_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_demand_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "agenda_prerequisites_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_current_inputs_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_returns_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_agenda_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile.needs_prerequisite",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.needs_prerequisite"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "profile_known",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "phase_supported",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "wanted_future_required_and_missing",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_signature_registered",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile.predictive_closure_missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.needs_prerequisite"
+            },
+            {
+              "field": "is_measurement_or_fit",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "closure_current_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile.predictive_goal_unbound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.needs_prerequisite"
+            },
+            {
+              "field": "is_measurement_or_fit",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "goal_contract_bound",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile.agenda_prerequisite",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.needs_prerequisite"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "agenda_owner_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "agenda_prerequisites_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "agenda_current_inputs_bound",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "agenda_returns_consistent",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile.guarded_transport.sealed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.guarded_transport.sealed"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.guarded_transport"
+            },
+            {
+              "field": "profile_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_is_solving",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_signature_registered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "sealed_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "sealed_evidence_mode",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_owner_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_demand_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "agenda_prerequisites_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_current_inputs_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_returns_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_agenda_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          },
+          "any_conditions": [
+            {
+              "field": "is_measurement_or_fit",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "closure_current_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "projection.profile.queued_alignment_cascade.sealed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.queued_alignment_cascade.sealed"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.queued_alignment_cascade"
+            },
+            {
+              "field": "profile_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_is_solving",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_signature_registered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "sealed_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "sealed_evidence_mode",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_owner_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_demand_consumed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "agenda_prerequisites_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_current_inputs_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_returns_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_agenda_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          },
+          "any_conditions": [
+            {
+              "field": "is_measurement_or_fit",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "closure_current_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "projection.profile.missing_sealed_bindings_current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.needs_prerequisite"
+            },
+            {
+              "field": "phase_is_solving",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "sealed_bindings_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile.missing_sealed_evidence_mode",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.needs_prerequisite"
+            },
+            {
+              "field": "phase_is_solving",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "sealed_evidence_mode",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile.reuse_current_return.measurement",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.reuse_current_return"
+            },
+            {
+              "field": "profile_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_is_solving",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "wanted_future_supplied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_signature_registered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_agenda_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_owner_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_demand_consumed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_prerequisites_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_current_inputs_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_returns_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "is_measurement_or_fit",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile.reuse_current_return.prediction",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.reuse_current_return"
+            },
+            {
+              "field": "profile_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_is_solving",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "wanted_future_supplied",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_signature_registered",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_agenda_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_owner_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_demand_consumed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_prerequisites_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_current_inputs_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "agenda_returns_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "is_measurement_or_fit",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "closure_current_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "goal_contract_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile.canonical_agenda_missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.needs_prerequisite"
+            },
+            {
+              "field": "canonical_agenda_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.profile.consumed_effect_requires_its_interpretation",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "profile.needs_prerequisite"
+            },
+            {
+              "field": "phase_is_solving",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "agenda_demand_consumed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "configuration": {
+        "agenda_question_dependencies": {
+          "question_contract": "projection.parent_dependency_revalidation_question.v1",
+          "question_predicate": "parent_dependency_revalidation_question_is_open",
+          "question_claim_pattern": "claim.parent_dependency_question.{question_ref}",
+          "consumer_field": "dependency_goal_ref",
+          "known_field": "question_condition_known",
+          "explicit_dependency_field": "commitment_fact_dependencies",
+          "max_links_per_question": 128,
+          "max_relevant_questions": 128,
+          "provisional_binding_status_refs": ["SUPPORTED_HYPOTHESIS"]
+        },
+        "profiles": {
+          "solving.guarded_transport": {
+            "case_policy_ref": "policy.exact_guarded_transport_operation",
+            "native_goal_fields": {
+              "terminal_assignments": "beneficiary_sides",
+              "terminal_carrier_side": "carrier_side",
+              "terminal_carried_refs": "carried_refs"
+            },
+            "goal_contract_fields": [
+              "quantifiers",
+              "persistence",
+              "event_scope",
+              "support_kind",
+              "falsifier_ref",
+              "evidence_refs"
+            ],
+            "portable_method_ref": "method.scoped_guarded_transport_contribution",
+            "phase_ref": "SOLVING",
+            "native_alias_prefix": "capability.guarded_transport_"
+          },
+          "solving.queued_alignment_cascade": {
+            "case_policy_ref": "policy.exact_queued_alignment_cascade_operation",
+            "native_goal_fields": {
+              "quota_interval": "quota_interval",
+              "acceptance_before_spawn": "acceptance_before_spawn"
+            },
+            "goal_contract_fields": [
+              "quantifiers",
+              "persistence",
+              "event_scope",
+              "support_kind",
+              "falsifier_ref",
+              "evidence_refs"
+            ],
+            "portable_method_ref": "method.scoped_queued_alignment_cascade_contribution",
+            "phase_ref": "SOLVING",
+            "native_alias_prefix": "capability.queued_alignment_cascade_"
+          },
+          "frontier.effect.guarded_transport": {
+            "case_policy_ref": "policy.exact_guarded_transport_operation",
+            "native_goal_fields": {},
+            "goal_contract_fields": [],
+            "portable_method_ref": "method.scoped_guarded_transport_contribution",
+            "phase_ref": "SEALED_EFFECT",
+            "native_alias_prefix": "capability.guarded_transport_"
+          },
+          "frontier.effect.queued_alignment_cascade": {
+            "case_policy_ref": "policy.exact_queued_alignment_cascade_operation",
+            "native_goal_fields": {},
+            "goal_contract_fields": [],
+            "portable_method_ref": "method.scoped_queued_alignment_cascade_contribution",
+            "phase_ref": "SEALED_EFFECT",
+            "native_alias_prefix": "capability.queued_alignment_cascade_"
+          }
+        },
+        "sealed_effect": {
+          "packet_projection_contract_ref": "mechanical.sealed_interval.b.v1",
+          "state_projection_contract_ref": "mechanical.observed_state.b.v1",
+          "pure_mode_refs": [
+            "MEASURE",
+            "FIT",
+            "CORRESPOND",
+            "COMPARE",
+            "RECONCILE",
+            "OBSERVE",
+            "RETAIN",
+            "UPDATE"
+          ]
+        }
+      }
+    },
+    {
+      "id": "policy.b_sealed_effect_publication",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.one_scoped_interpretation_of_the_sealed_family_response"
+      ],
+      "premises": [
+        "current_sealed_packet",
+        "exact_return_identity",
+        "explicit_current_affected_dependencies"
+      ],
+      "invariants": [
+        "no_live_world_action",
+        "observation_is_distinct_from_model_projection",
+        "sibling_facets_preserved"
+      ],
+      "falsifiers": [
+        "changed_packet_scope",
+        "different_return_identity",
+        "publication_reference_collision"
+      ],
+      "declared_alternative_refs": [
+        "sealed_effect.publish",
+        "sealed_effect.already_current",
+        "sealed_effect.blocked"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.sealed_effect.publish",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "sealed_effect.publish"
+            },
+            {
+              "field": "publication_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_publication_equal",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.sealed_effect.already_current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "sealed_effect.already_current"
+            },
+            {
+              "field": "publication_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "canonical_publication_equal",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.sealed_effect.blocked",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "sealed_effect.blocked"
+            },
+            {
+              "field": "publication_bindings_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "sealed_effect.publish": "rule.b_sealed_effect_interpretation"
+      }
+    },
+    {
+      "id": "rule.b_sealed_effect_interpretation",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "exact_source_selected_scoped_interpretation"
+      ],
+      "applicability": [
+        "current_sealed_facet_result_ready_for_publication"
+      ],
+      "invariants": [
+        "measurement_record_never_confirms_a_law_or_terminal_goal",
+        "all_model_alternatives_and_native_refusals_are_retained"
+      ],
+      "falsifiers": [
+        "packet_scope_or_signature_changes"
+      ],
+      "reason_refs": [
+        "reason_return_the_observed_family_interpretation_to_its_parent"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{publication_ref}",
+          "kind": "value",
+          "label": "Source interpretation of one sealed family facet",
+          "required_fields": [
+            "publication_ref",
+            "interpretation"
+          ],
+          "static_attributes": {
+            "projection_contract_ref": "family.sealed_effect.publication.b.v1",
+            "no_dispatch_or_action_authority": true
+          },
+          "attribute_bindings": {
+            "interpretation": "interpretation"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{publication_ref}",
+          "predicate": "records_source_interpretation_of_sealed_family_response",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{publication_ref}",
+            "{parent_goal_ref}",
+            "{packet_term_ref}"
+          ],
+          "required_term_patterns": [
+            "{publication_ref}",
+            "{parent_goal_ref}",
+            "{packet_term_ref}"
+          ],
+          "required_fields": [
+            "publication_ref",
+            "parent_goal_ref",
+            "packet_term_ref",
+            "exact_request_signature_ref"
+          ],
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "attribute_bindings": {
+            "packet_digest": "packet_digest",
+            "facet_ref": "facet_ref",
+            "exact_request_signature_ref": "exact_request_signature_ref",
+            "affected_dependency_refs": "affected_dependency_refs",
+            "interpretation_digest": "interpretation_digest",
+            "frame_ref": "frame_ref",
+            "publication_ref": "publication_ref",
+            "packet_projection_contract_ref": "packet_projection_contract_ref"
+          },
+          "static_attributes": {
+            "no_dispatch_or_action_authority": true
+          }
+        }
+      ]
+    }
+    ,{
+      "id": "policy.b_agenda_question_eligibility", "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single", "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1", "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason_missing_fact_blocks_only_its_named_consumer_or_branch"],
+      "declared_alternative_refs": ["question_dependency.known", "question_dependency.provisional", "question_dependency.unresolved"],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {"id": "projection.question_dependency.known", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "question_dependency.known"},
+          {"field": "required_fact_known", "operator": "equals", "expected": true}],
+          "static_facts": {"eligible": true, "blocks_current_contribution": false, "reason_ref": "reason_current_source_fact_answers_this_consumers_question"}},
+        {"id": "projection.question_dependency.provisional", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "question_dependency.provisional"},
+          {"field": "required_fact_known", "operator": "equals", "expected": false},
+          {"field": "provisional_scope_bound", "operator": "equals", "expected": true},
+          {"field": "explicitly_requires_known", "operator": "equals", "expected": false}],
+          "static_facts": {"eligible": true, "blocks_current_contribution": false, "reason_ref": "reason_scoped_supposition_with_falsifier_allows_revisable_calculation_without_confirming_the_fact"}},
+        {"id": "projection.question_dependency.unresolved_without_model", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "question_dependency.unresolved"},
+          {"field": "required_fact_known", "operator": "equals", "expected": false},
+          {"field": "provisional_scope_bound", "operator": "equals", "expected": false}],
+          "static_facts": {"eligible": true, "blocks_current_contribution": true, "reason_ref": "reason_required_fact_is_unknown_for_this_contribution_only"}},
+        {"id": "projection.question_dependency.unresolved_requires_observation", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "question_dependency.unresolved"},
+          {"field": "required_fact_known", "operator": "equals", "expected": false},
+          {"field": "provisional_scope_bound", "operator": "equals", "expected": true},
+          {"field": "explicitly_requires_known", "operator": "equals", "expected": true}],
+          "static_facts": {"eligible": true, "blocks_current_contribution": true, "reason_ref": "reason_this_declared_commitment_requires_current_knowledge_not_just_a_model"}}
+      ]
+    }
+  ]
+}

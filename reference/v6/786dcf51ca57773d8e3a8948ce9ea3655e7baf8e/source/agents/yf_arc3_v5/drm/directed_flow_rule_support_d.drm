@@ -1,0 +1,917 @@
+{
+  "module_id": "arc3.directed_flow_rule_support_d",
+  "declarations": [
+    {
+      "id": "policy.directed_flow_rule_support_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_single_observed_front_tick_supports_only_its_exact_incidence_response"
+      ],
+      "configuration": {
+        "rule_predicate_ref": "current_scoped_flow_incidence_rule_supported",
+        "receiver_ownership_predicate_ref": "current_scoped_flow_receiver_ownership_supported",
+        "medium_predicate_ref": "current_scoped_flow_medium_admissible",
+        "empty_contact_kind": "EMPTY",
+        "collider_contact_kind": "COLLIDER",
+        "trace_contact_kind": "TRACE"
+      },
+      "declared_alternative_refs": [
+        "flow_rule.advance_medium",
+        "flow_rule.advance",
+        "flow_rule.turn",
+        "flow_rule.split",
+        "flow_rule.capture",
+        "flow_rule.extinction",
+        "flow_rule.non_capture_stop",
+        "flow_rule.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt_equivalent_observed_flow_incidence",
+      "selection_tiers": [
+        {
+          "id": "tier.rule.advance_medium",
+          "reason_ref": "reason_actual_advance_qualifies_only_the_entered_free_medium_cell",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "flow_rule.advance_medium"
+            },
+            {
+              "field": "rule_premises_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "medium_publication_requested",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "medium_output_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "medium_admissible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "contact_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "contact_kind",
+              "operator": "equals",
+              "expected": "EMPTY"
+            },
+            {
+              "field": "receiver_absent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "captures_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_after",
+              "operator": "equals",
+              "expected": "RUNNING"
+            },
+            {
+              "field": "effect_kind",
+              "operator": "equals",
+              "expected": "ADVANCE"
+            },
+            {
+              "field": "advance_exact",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.rule.advance",
+          "reason_ref": "reason_single_observed_front_tick_supports_only_its_exact_incidence_response",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "flow_rule.advance"
+            },
+            {
+              "field": "rule_premises_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "contact_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_absent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "captures_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_after",
+              "operator": "equals",
+              "expected": "RUNNING"
+            },
+            {
+              "field": "successors_cardinal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "effect_kind",
+              "operator": "equals",
+              "expected": "ADVANCE"
+            },
+            {
+              "field": "advance_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "medium_publication_requested",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "tier.rule.turn",
+          "reason_ref": "reason_single_observed_front_tick_supports_only_its_exact_incidence_response",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "flow_rule.turn"
+            },
+            {
+              "field": "rule_premises_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "contact_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_absent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "captures_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_after",
+              "operator": "equals",
+              "expected": "RUNNING"
+            },
+            {
+              "field": "successors_cardinal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "effect_kind",
+              "operator": "equals",
+              "expected": "TURN"
+            },
+            {
+              "field": "turn_single_changed_heading",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "medium_publication_requested",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "tier.rule.split",
+          "reason_ref": "reason_single_observed_front_tick_supports_only_its_exact_incidence_response",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "flow_rule.split"
+            },
+            {
+              "field": "rule_premises_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "contact_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_absent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "captures_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_after",
+              "operator": "equals",
+              "expected": "RUNNING"
+            },
+            {
+              "field": "successors_cardinal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "effect_kind",
+              "operator": "equals",
+              "expected": "SPLIT"
+            },
+            {
+              "field": "split_lateral_unit",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "medium_publication_requested",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "tier.rule.capture.without_visual",
+          "reason_ref": "reason_single_observed_front_tick_supports_only_its_exact_incidence_response",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "flow_rule.capture"
+            },
+            {
+              "field": "rule_premises_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "effect_kind",
+              "operator": "equals",
+              "expected": "CAPTURE"
+            },
+            {
+              "field": "contact_kind",
+              "operator": "equals",
+              "expected": "CAVITY"
+            },
+            {
+              "field": "capture_section_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_boundary_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_entry_unambiguous",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_unique_owner",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_unanchored",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_no_assumption",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_ownership_output_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_exact_increment",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_fill_premise_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "no_surviving_fronts",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "trace_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_after",
+              "operator": "equals",
+              "expected": "STOPPED"
+            },
+            {
+              "field": "medium_publication_requested",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "receiver_visual_requested",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "tier.rule.capture.with_visual",
+          "reason_ref": "reason_single_observed_front_tick_supports_only_its_exact_incidence_response",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "flow_rule.capture"
+            },
+            {
+              "field": "rule_premises_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "effect_kind",
+              "operator": "equals",
+              "expected": "CAPTURE"
+            },
+            {
+              "field": "contact_kind",
+              "operator": "equals",
+              "expected": "CAVITY"
+            },
+            {
+              "field": "capture_section_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_boundary_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_entry_unambiguous",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_unique_owner",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_unanchored",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_no_assumption",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_ownership_output_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_exact_increment",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capture_fill_premise_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "no_surviving_fronts",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "trace_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_after",
+              "operator": "equals",
+              "expected": "STOPPED"
+            },
+            {
+              "field": "medium_publication_requested",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "receiver_visual_requested",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_visual_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_boundary_pixels_unchanged",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.rule.extinction",
+          "reason_ref": "reason_actual_stopped_collider_incidence_without_capture_or_new_leak",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "flow_rule.extinction"
+            },
+            {
+              "field": "rule_premises_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "official_state_before",
+              "operator": "equals",
+              "expected": "NOT_FINISHED"
+            },
+            {
+              "field": "official_state_after",
+              "operator": "equals",
+              "expected": "NOT_FINISHED"
+            },
+            {
+              "field": "official_score_delta",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "effect_kind",
+              "operator": "equals",
+              "expected": "SAFE_EXTINCTION"
+            },
+            {
+              "field": "contact_kind",
+              "operator": "equals",
+              "expected": "COLLIDER"
+            },
+            {
+              "field": "contact_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_absent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "captures_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "leaks_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "no_surviving_fronts",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "trace_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_after",
+              "operator": "equals",
+              "expected": "STOPPED"
+            },
+            {
+              "field": "medium_publication_requested",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "tier.rule.non_capture_stop",
+          "reason_ref": "reason_actual_stopped_collider_incidence_without_capture_or_new_leak",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "flow_rule.non_capture_stop"
+            },
+            {
+              "field": "rule_premises_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "official_state_before",
+              "operator": "equals",
+              "expected": "NOT_FINISHED"
+            },
+            {
+              "field": "official_state_after",
+              "operator": "equals",
+              "expected": "NOT_FINISHED"
+            },
+            {
+              "field": "official_score_delta",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "effect_kind",
+              "operator": "equals",
+              "expected": "NONCAPTURE_COLLISION"
+            },
+            {
+              "field": "contact_kind",
+              "operator": "equals",
+              "expected": "COLLIDER"
+            },
+            {
+              "field": "contact_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_absent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "captures_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "leaks_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "no_surviving_fronts",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "trace_unchanged",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "phase_after",
+              "operator": "equals",
+              "expected": "STOPPED"
+            },
+            {
+              "field": "medium_publication_requested",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "tier.rule.unknown",
+          "reason_ref": "reason_single_observed_front_tick_supports_only_its_exact_incidence_response",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "flow_rule.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "flow_rule.advance": "rule.directed_flow_rule_support_d",
+        "flow_rule.turn": "rule.directed_flow_rule_support_d",
+        "flow_rule.split": "rule.directed_flow_rule_support_d",
+        "flow_rule.capture": "rule.directed_flow_capture_support_d",
+        "flow_rule.extinction": "rule.directed_flow_rule_support_d",
+        "flow_rule.non_capture_stop": "rule.directed_flow_rule_support_d",
+        "flow_rule.advance_medium": "rule.directed_flow_advance_medium_support_d"
+      },
+      "invariants": [
+        "actual_sealed_state_pair",
+        "one_front_one_tick",
+        "exact_source_and_successor_domain",
+        "no_secondary_changes",
+        "current_incidence_only",
+        "no_suffix_genealogy",
+        "no_universal_turn_rule",
+        "no_action_authority",
+        "optional_actual_boundary_pixels_compared",
+        "observed_stability_not_permanence_or_periodicity",
+        "changed_visual_boundary_keeps_capture_geometry_unknown"
+      ]
+    },
+    {
+      "id": "rule.directed_flow_rule_support_d",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason_single_observed_front_tick_supports_only_its_exact_incidence_response"
+      ],
+      "term_templates": [],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_claim_ref}",
+          "predicate": "current_scoped_flow_incidence_rule_supported",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{rule_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}"
+          ],
+          "required_fields": [
+            "output_claim_ref",
+            "law_digest",
+            "observed_tick_digest",
+            "frontier_digest"
+          ],
+          "attribute_bindings": {
+            "law_digest": "law_digest",
+            "observed_tick_digest": "observed_tick_digest",
+            "frontier_digest": "frontier_digest",
+            "receiver_visual_digest": "receiver_visual_digest",
+            "receiver_visual_measurements": "receiver_visual_measurements"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "universal_law_not_proved": true,
+            "single_observed_incidence_only": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.directed_flow_capture_support_d",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason_oriented_aperture_fill_increment_and_front_end_jointly_support_capture"
+      ],
+      "term_templates": [],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_claim_ref}",
+          "predicate": "current_scoped_flow_incidence_rule_supported",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{rule_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}"
+          ],
+          "required_fields": [
+            "output_claim_ref",
+            "law_digest",
+            "observed_tick_digest",
+            "frontier_digest"
+          ],
+          "attribute_bindings": {
+            "law_digest": "law_digest",
+            "observed_tick_digest": "observed_tick_digest",
+            "frontier_digest": "frontier_digest",
+            "capture_geometry": "capture_geometry",
+            "receiver_visual_digest": "receiver_visual_digest",
+            "receiver_visual_measurements": "receiver_visual_measurements"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "universal_law_not_proved": true,
+            "single_observed_incidence_only": true
+          }
+        },
+        {
+          "id_pattern": "{receiver_ownership_claim_ref}",
+          "predicate": "current_scoped_flow_receiver_ownership_supported",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{receiver_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}"
+          ],
+          "required_fields": [
+            "receiver_ownership_claim_ref",
+            "receiver_law_digest",
+            "observed_tick_digest"
+          ],
+          "attribute_bindings": {
+            "law_digest": "receiver_law_digest",
+            "observed_tick_digest": "observed_tick_digest",
+            "capture_geometry": "capture_geometry"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "universal_receiver_ownership_not_proved": true,
+            "single_observed_source_incidence_only": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "rule.directed_flow_advance_medium_support_d",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason_actual_advance_qualifies_only_the_entered_free_medium_cell"
+      ],
+      "term_templates": [],
+      "claim_templates": [
+        {
+          "id_pattern": "{output_claim_ref}",
+          "predicate": "current_scoped_flow_incidence_rule_supported",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{rule_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}"
+          ],
+          "required_fields": [
+            "output_claim_ref",
+            "law_digest",
+            "observed_tick_digest",
+            "frontier_digest"
+          ],
+          "attribute_bindings": {
+            "law_digest": "law_digest",
+            "observed_tick_digest": "observed_tick_digest",
+            "frontier_digest": "frontier_digest",
+            "receiver_visual_digest": "receiver_visual_digest",
+            "receiver_visual_measurements": "receiver_visual_measurements"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "universal_law_not_proved": true,
+            "single_observed_incidence_only": true
+          }
+        },
+        {
+          "id_pattern": "{medium_claim_ref}",
+          "predicate": "current_scoped_flow_medium_admissible",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}"
+          ],
+          "required_fields": [
+            "medium_claim_ref",
+            "medium_law_digest",
+            "medium_position",
+            "observed_tick_digest"
+          ],
+          "attribute_bindings": {
+            "law_digest": "medium_law_digest",
+            "position": "medium_position",
+            "observed_tick_digest": "observed_tick_digest"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "static_attributes": {
+            "no_action_authority": true,
+            "universal_medium_law_not_proved": true,
+            "single_observed_entry_only": true
+          }
+        }
+      ]
+    }
+  ]
+}

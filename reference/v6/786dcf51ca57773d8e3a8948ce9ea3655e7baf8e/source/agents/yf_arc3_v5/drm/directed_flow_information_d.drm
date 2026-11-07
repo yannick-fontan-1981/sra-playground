@@ -1,0 +1,10 @@
+{"module_id":"arc3.directed_flow_information_d","declarations":[
+ {"id":"policy.directed_flow_information_d","kind":"selection_policy","evaluation":"declared_lexicographic_order","supported_operators":["SELECT"],
+ "input_contract":"yf_arc3_v5.authority_input.selection.v1","output_contract":"yf_arc3_v5.authority_output.selection.v1",
+ "reason_refs":["reason_current_missing_flow_inputs_require_exact_parent_owned_information"],
+ "configuration":{"question_projection_contract_ref":"projection.parent_dependency_revalidation_question.v1","question_predicate_ref":"parent_dependency_revalidation_question_is_open","missing_refs_binding_field":"directed_flow_missing_refs"},
+ "declared_alternative_refs":["flow_information.publish","flow_information.unknown"],"selection_tie_breakers":[{"field":"alternative_ref","preferred_order":"minimize"}],
+ "canonical_equivalence_tie_break_debt_ref":"debt_equivalent_current_flow_information","selection_tiers":[
+ {"id":"tier.information.current_exact_question","reason_ref":"reason_current_missing_flow_inputs_require_exact_parent_owned_information","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"flow_information.publish"},{"field":"information_context_current","operator":"equals","expected":true}]},
+ {"id":"tier.information.unknown","reason_ref":"reason_current_missing_flow_inputs_require_exact_parent_owned_information","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"flow_information.unknown"}]}],
+ "invariants":["actual_current_missing_inputs","canonical_parent_question","exact_source_declared_need_mapping","shared_information_publisher_only","parent_why_and_siblings_preserved","no_action_authority"]}]}

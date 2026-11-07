@@ -1,0 +1,19 @@
+{
+  "module_id": "v6_feedback_sequence_experiments",
+  "declarations": [{
+    "id": "schema.v6_feedback_sequence_experiments", "kind": "schema",
+    "premises": ["public_palette_and_ordered_slots_are_bound"],
+    "applicability": ["information_goal"],
+    "invariants": ["preserve_active_prefix", "never_use_unobserved_secret", "seal_unknown_submission"],
+    "falsifiers": ["slot_or_palette_mapping_changes", "feedback_model_contradiction", "scope_changed"],
+    "reason_refs": ["reason.distinguish_plausible_ordered_compositions_by_observed_feedback"],
+    "configuration": {
+      "stages": ["continue_bound_trial", "test_complete_proposal", "discriminate_codes", "acquire_append"],
+      "allocation_orders": ["LEFT_TO_RIGHT", "RIGHT_TO_LEFT"],
+      "measures": ["WORST_NONWINNING_RESIDUAL", "SUM_SQUARED_RESIDUALS", "NONWINNING_BRANCHES"],
+      "maximum_candidates": 4096, "maximum_trials": 256, "maximum_evaluations": 65536,
+      "maximum_bundle": 16,
+      "question": "Which complete ordered proposal distinguishes the remaining feedback-compatible compositions while preserving the active prefix?"
+    }
+  }]
+}

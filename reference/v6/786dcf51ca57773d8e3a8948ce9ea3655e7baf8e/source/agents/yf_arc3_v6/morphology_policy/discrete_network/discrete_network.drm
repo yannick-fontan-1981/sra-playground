@@ -1,0 +1,59 @@
+{
+  "module_id": "v6_discrete_network",
+  "declarations": [
+    {
+      "id": "schema.discrete_network",
+      "kind": "schema",
+      "premises": [
+        "observed_terminal_receiver_configuration",
+        "current_distinct_controls_and_receivers",
+        "measured_orthogonal_ports_with_explicit_occlusion_hypotheses",
+        "observed_mutable_channels_and_partial_relations"
+      ],
+      "applicability": [
+        "scored_local_rewrite"
+      ],
+      "invariants": [
+        "shared_variables_remain_shared_and_ports_keep_aliases",
+        "unknown_rows_remain_unknown",
+        "do_not_preload_gate_semantics_or_signal_polarity",
+        "one_unverified_control_effect_then_reconcile",
+        "contradiction_disables_unreconciled_relation",
+        "no_goal_inferred_from_only_the_pre_action_frame",
+        "ambiguous_port_recall_requires_discriminating_observed_signal_contrast_and_current_geometry_revalidation"
+      ],
+      "falsifiers": [
+        "route_or_channel_changes",
+        "multiple_current_predecessors_for_one_port",
+        "third_value_in_binary_domain",
+        "different_command_effect",
+        "relation_contradiction",
+        "changed_field_or_epoch",
+        "changed_ports_or_static_pattern",
+        "contradictory_current_port_signal"
+      ],
+      "reason_refs": [
+        "reason.observed_dependencies_and_discriminating_composition"
+      ],
+      "configuration": {
+        "max_sources": 8,
+        "question": "Which source composition can satisfy the observed terminal receivers, and which still-unknown local relation does its next control change distinguish?",
+        "order": [
+          "prefer_goal_common_to_all_compatible_relations",
+          "minimize_required_control_changes",
+          "maximize_next_goal_relation_contrasts",
+          "maximize_next_observable_alternatives",
+          "stable_source_identity"
+        ],
+        "limits": "Upward acyclic binary network, orthogonal route hypotheses with bounded covered pixels, shared shape channel hypothesis. No arbitrary truth function is declared known before its tuple is observed; no causal graph proof from matching palette alone.",
+        "port_transport_recall": "observed_discriminating_contrast_same_scope",
+        "experiment_scope": "Choose the next control within the proposed target composition by contrasts on its still-unknown relation rows, then currently predicted observable outcomes. Reconcile the one control before releasing another. No probability or distant-outcome count is used as immediate information.",
+        "control_order": [
+          "maximize_goal_relation_contrasts",
+          "maximize_observable_alternatives",
+          "stable_source_identity"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,1991 @@
+{
+  "module_id": "mechanism_application_questions",
+  "declarations": [
+    {
+      "id": "policy.conscious_native_recovery_evidence",
+      "kind": "selection_policy", "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": ["native_recovery.observed_return_domain"],
+      "configuration": {"recovery_budget_endpoint_mode": "all_declared_endpoint_predicates_true"},
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "reason_refs": ["reason.observed_return_is_a_recovery_candidate_not_a_future_cost_guarantee"],
+      "invariants": ["retain_matching_return_alternatives_and_conflicts", "no_observed_path_is_not_proven_impossibility", "no_future_zero_cost_from_missing_evidence", "no_action_authority"],
+      "fact_projections": [
+        {"id": "projection.native_recovery.default", "all_conditions": [], "static_facts": {
+          "eligible": true, "recovery_status": "needs_current_native_review", "future_recovery_established": false,
+          "cost_review_status": "unqualified_conditional_costs",
+          "conditional_cost_admission_supported": false,
+          "conditional_admission_upper_bound": null, "conditional_admission_scope_ref": null,
+          "conditional_admission_scope_digest": null, "conditional_admission_unknown_outside_cost_refs": [],
+          "next_evidence_refs": ["recovery.current_native_review_and_control_binding"]}},
+        {"id": "projection.native_recovery.incomplete", "all_conditions": [
+          {"field": "native_review_current", "operator": "equals", "expected": true},
+          {"field": "nomination_bound", "operator": "equals", "expected": true}
+        ], "static_facts": {"recovery_status": "observed_domain_incomplete",
+          "next_evidence_refs": ["recovery.complete_observation_domain", "recovery.current_conditional_route_model", "recovery.current_route_preservation_and_cost"]}},
+        {"id": "projection.native_recovery.no_return", "all_conditions": [
+          {"field": "native_review_current", "operator": "equals", "expected": true},
+          {"field": "nomination_bound", "operator": "equals", "expected": true},
+          {"field": "observation_domain_complete", "operator": "equals", "expected": true},
+          {"field": "observed_return_count", "operator": "equals", "expected": 0}
+        ], "static_facts": {"recovery_status": "no_return_in_reviewed_observations",
+          "next_evidence_refs": ["recovery.return_mechanism_or_alternative_means", "recovery.current_route_preservation_and_cost"]}},
+        {"id": "projection.native_recovery.unchanged_projection", "all_conditions": [
+          {"field": "native_review_current", "operator": "equals", "expected": true},
+          {"field": "nomination_bound", "operator": "equals", "expected": true},
+          {"field": "observed_unchanged_projection_count", "operator": "greater_than", "expected": 0}
+        ], "static_facts": {"recovery_status": "observed_projection_unchanged_requires_current_model_qualification",
+          "next_evidence_refs": ["recovery.projected_state_sufficient_for_transition", "recovery.future_outcomes_covered_by_observed_relation", "recovery.current_route_preservation_and_cost"]}},
+        {"id": "projection.native_recovery.return", "all_conditions": [
+          {"field": "native_review_current", "operator": "equals", "expected": true},
+          {"field": "nomination_bound", "operator": "equals", "expected": true},
+          {"field": "observation_domain_complete", "operator": "equals", "expected": true},
+          {"field": "observed_return_count", "operator": "greater_than", "expected": 0}
+        ], "static_facts": {"recovery_status": "observed_return_requires_current_route_qualification",
+          "next_evidence_refs": ["recovery.current_conditional_route_model", "recovery.current_route_controls", "recovery.current_route_preservation_and_cost"]}},
+        {"id": "projection.native_recovery.conflicts", "all_conditions": [
+          {"field": "native_review_current", "operator": "equals", "expected": true},
+          {"field": "nomination_bound", "operator": "equals", "expected": true},
+          {"field": "conflicting_query_count", "operator": "greater_than", "expected": 0}
+        ], "static_facts": {"recovery_status": "conflicting_observed_outcomes",
+          "next_evidence_refs": ["recovery.discriminate_conflicting_outcomes", "recovery.current_conditional_route_model", "recovery.current_route_controls", "recovery.current_route_preservation_and_cost"]}},
+        {"id": "projection.native_recovery.conditional_policy", "all_conditions": [
+          {"field": "native_review_current", "operator": "equals", "expected": true},
+          {"field": "nomination_bound", "operator": "equals", "expected": true},
+          {"field": "conditional_return_model_count", "operator": "greater_than", "expected": 0}
+        ], "static_facts": {"recovery_status": "conditional_return_policy_requires_current_model_qualification",
+          "next_evidence_refs": ["recovery.projected_state_sufficient_for_transition", "recovery.future_outcomes_covered_by_observed_relation", "recovery.current_route_controls", "recovery.current_route_preservation_and_cost"]}},
+        {"id": "projection.native_recovery.cost_incomplete", "all_conditions": [
+          {"field": "native_review_current", "operator": "equals", "expected": true},
+          {"field": "nomination_bound", "operator": "equals", "expected": true},
+          {"field": "retained_recovery_models_complete", "operator": "equals", "expected": true}
+        ], "static_facts": {"cost_review_status": "conditional_cost_or_funding_still_incomplete"}},
+        {"id": "projection.native_recovery.cost_funded", "all_conditions": [
+          {"field": "native_review_current", "operator": "equals", "expected": true},
+          {"field": "nomination_bound", "operator": "equals", "expected": true},
+          {"field": "conditional_recovery_models_all_funded", "operator": "equals", "expected": true}
+        ], "static_facts": {"cost_review_status": "funded_under_all_retained_models"}},
+        {"id": "projection.native_recovery.cost_shortfall", "all_conditions": [
+          {"field": "native_review_current", "operator": "equals", "expected": true},
+          {"field": "nomination_bound", "operator": "equals", "expected": true},
+          {"field": "conditional_recovery_model_bounds_all_exceed_budget", "operator": "equals", "expected": true}
+        ], "static_facts": {"cost_review_status": "no_retained_model_guarantees_a_funded_return"}},
+        {"id": "projection.native_recovery.cost_model_disagreement", "all_conditions": [
+          {"field": "native_review_current", "operator": "equals", "expected": true},
+          {"field": "nomination_bound", "operator": "equals", "expected": true},
+          {"field": "conditional_recovery_models_disagree_on_budget", "operator": "equals", "expected": true}
+        ], "static_facts": {"cost_review_status": "funding_depends_on_recovery_model"}},
+        {"id": "projection.native_recovery.cost_resource_ambiguity", "all_conditions": [
+          {"field": "native_review_current", "operator": "equals", "expected": true},
+          {"field": "nomination_bound", "operator": "equals", "expected": true},
+          {"field": "conditional_recovery_resource_models_ambiguous", "operator": "equals", "expected": true}
+        ], "static_facts": {"cost_review_status": "funding_depends_on_resource_model"}},
+        {"id": "projection.native_recovery.cost_combined_ambiguity", "all_conditions": [
+          {"field": "native_review_current", "operator": "equals", "expected": true},
+          {"field": "nomination_bound", "operator": "equals", "expected": true},
+          {"field": "conditional_recovery_models_disagree_on_budget", "operator": "equals", "expected": true},
+          {"field": "conditional_recovery_resource_models_ambiguous", "operator": "equals", "expected": true}
+        ], "static_facts": {"cost_review_status": "funding_depends_on_recovery_and_resource_models"}},
+        {"id": "projection.native_recovery.known_component_shortfall", "all_conditions": [
+          {"field": "native_review_current", "operator": "equals", "expected": true},
+          {"field": "nomination_bound", "operator": "equals", "expected": true},
+          {"field": "known_trial_component_cost_exceeds_budget", "operator": "equals", "expected": true}
+        ], "static_facts": {"cost_review_status": "known_required_trial_cost_exceeds_available_budget"}},
+        {"id": "projection.native_recovery.funded_scoped_restoration", "all_conditions": [
+          {"field": "native_review_current", "operator": "equals", "expected": true},
+          {"field": "nomination_bound", "operator": "equals", "expected": true},
+          {"field": "scoped_restoration_complete", "operator": "equals", "expected": true},
+          {"field": "scoped_restoration_fits_budgets", "operator": "equals", "expected": true},
+          {"field": "scoped_restoration_known_outside_cost_positive", "operator": "equals", "expected": false}
+        ], "static_facts": {
+          "conditional_cost_admission_supported": true,
+          "conditional_cost_admission_reason_ref": "reason.bound_the_complete_restoration_of_the_declared_projection_without_claiming_world_recovery",
+          "conditional_admission_scope_ref": "recovery.cost_scope.recorded_joint_projection",
+          "cost_review_status": "funded_scoped_restoration_with_outside_cost_debt",
+          "actual_future_cost_established": false, "grants_action": false
+        }, "bound_facts": {
+          "conditional_admission_upper_bound": "scoped_restoration_upper_bound",
+          "conditional_admission_scope_digest": "scoped_restoration_cost_digest",
+          "conditional_admission_unknown_outside_cost_refs": "scoped_restoration_unknown_outside_cost_refs"
+        }},
+        {"id": "projection.native_recovery.funded_preserving_conditional_admission", "all_conditions": [
+          {"field": "native_review_current", "operator": "equals", "expected": true},
+          {"field": "nomination_bound", "operator": "equals", "expected": true},
+          {"field": "retained_recovery_models_complete", "operator": "equals", "expected": true},
+          {"field": "conditional_recovery_costs_include_progress", "operator": "equals", "expected": true},
+          {"field": "conditional_recovery_models_all_funded", "operator": "equals", "expected": true},
+          {"field": "conditional_recovery_models_fit_solver_bound", "operator": "equals", "expected": true},
+          {"field": "conditional_recovery_losses_zero", "operator": "equals", "expected": true}
+        ], "static_facts": {
+          "conditional_cost_admission_supported": true,
+          "conditional_cost_admission_reason_ref": "reason.complete_retained_recovery_bounds_fit_resources_and_preserve_irreversible_stocks",
+          "conditional_admission_scope_ref": "recovery.cost_scope.declared_loss_components",
+          "conditional_admission_unknown_outside_cost_refs": [],
+          "cost_review_status": "funded_under_all_retained_models",
+          "actual_future_cost_established": false,
+          "grants_action": false}, "bound_facts": {
+          "conditional_admission_upper_bound": "conditional_global_upper_bound",
+          "conditional_admission_scope_digest": "conditional_cost_envelope_digest"
+        }}
+      ]
+    },
+    {
+      "id": "policy.conscious_native_response_question",
+      "kind": "selection_policy", "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": ["native_question.scoped_response_availability"],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "configuration": {"maximum_observation_records": 128},
+      "reason_refs": ["reason.response_availability_is_distinct_from_a_proven_causal_law"],
+      "invariants": ["only_the_declared_scoped_question_is_examined", "source_open_question_is_not_global_ignorance", "bounded_incomplete_review_is_not_absence", "retain_competing_responses", "no_action_authority"],
+      "fact_projections": [
+        {"id": "projection.native_question.default", "all_conditions": [], "static_facts": {
+          "eligible": true, "question_currently_unanswered": null, "response_status": "needs_requalification", "proves_causal_law": false}},
+        {"id": "projection.native_question.open", "all_conditions": [
+          {"field": "producer_current", "operator": "equals", "expected": true},
+          {"field": "source_question_open", "operator": "equals", "expected": true},
+          {"field": "observation_domain_complete", "operator": "equals", "expected": true},
+          {"field": "available_response_count", "operator": "equals", "expected": 0},
+          {"field": "unqualified_response_count", "operator": "equals", "expected": 0}
+        ], "static_facts": {"question_currently_unanswered": true, "response_status": "source_question_still_requires_response"}},
+        {"id": "projection.native_question.observed", "all_conditions": [
+          {"field": "producer_current", "operator": "equals", "expected": true},
+          {"field": "observation_domain_complete", "operator": "equals", "expected": true},
+          {"field": "available_response_count", "operator": "greater_than", "expected": 0},
+          {"field": "distinct_response_count", "operator": "equals", "expected": 1}
+        ], "static_facts": {"question_currently_unanswered": false, "response_status": "matching_observed_response_available"}},
+        {"id": "projection.native_question.competing", "all_conditions": [
+          {"field": "producer_current", "operator": "equals", "expected": true},
+          {"field": "observation_domain_complete", "operator": "equals", "expected": true},
+          {"field": "distinct_response_count", "operator": "greater_than", "expected": 1}
+        ], "static_facts": {"question_currently_unanswered": null, "response_status": "competing_observed_responses"}}
+      ]
+    },
+    {
+      "id": "policy.conscious_native_preparation_evidence",
+      "kind": "selection_policy", "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason.reuse_current_source_preparation_without_inventing_future_effects"],
+      "configuration": {"response_uncertainty_condition_refs": ["condition.effect_not_yet_observed"]},
+      "declared_alternative_refs": ["native_preparation.current_evidence"],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "invariants": ["missing_premises_are_not_satisfied", "conditional_viability_is_not_complete_preservation", "unknown_response_belongs_to_the_exact_acquisition_question", "declared_constraints_do_not_exhaust_world_preservation", "empty_declared_constraint_conjunction_does_not_establish_world_safety", "no_cost_or_recovery_claim", "no_action_authority"],
+      "fact_projections": [
+        {"id": "projection.native_preparation.default", "all_conditions": [],
+         "static_facts": {"eligible": true, "preconditions_current": false, "protected_conditions_current": false, "source_conditions_ready": false, "preservation_scope_ref": "preservation.declared_preparation_constraints", "world_preservation_established": false, "response_established": false, "grants_action": false}},
+        {"id": "projection.native_preparation.current_premises", "all_conditions": [
+          {"field": "producer_current", "operator": "equals", "expected": true},
+          {"field": "control_bound", "operator": "equals", "expected": true},
+          {"field": "premise_count", "operator": "greater_than", "expected": 0},
+          {"field": "invalid_premise_count", "operator": "equals", "expected": 0}
+        ], "static_facts": {"preconditions_current": true}},
+        {"id": "projection.native_preparation.viable_source_conditions", "all_conditions": [
+          {"field": "source_viability_current", "operator": "equals", "expected": true},
+          {"field": "source_viability_status", "operator": "equals", "expected": "viable"},
+          {"field": "source_unresolved_count", "operator": "equals", "expected": 0},
+          {"field": "source_missing_evidence_count", "operator": "equals", "expected": 0}
+        ], "static_facts": {"source_conditions_ready": true}},
+        {"id": "projection.native_preparation.question_owned_response_uncertainty", "all_conditions": [
+          {"field": "source_viability_current", "operator": "equals", "expected": true},
+          {"field": "source_viability_status", "operator": "equals", "expected": "conditional"},
+          {"field": "response_question_bound", "operator": "equals", "expected": true},
+          {"field": "response_uncertainty_count", "operator": "greater_than", "expected": 0},
+          {"field": "other_unresolved_condition_count", "operator": "equals", "expected": 0},
+          {"field": "source_missing_evidence_count", "operator": "equals", "expected": 0}
+        ], "static_facts": {"source_conditions_ready": true}},
+        {"id": "projection.native_preparation.complete_source_preservation", "all_conditions": [
+          {"field": "preconditions_current", "operator": "equals", "expected": true},
+          {"field": "source_conditions_ready", "operator": "equals", "expected": true},
+          {"field": "uncovered_constraint_count", "operator": "equals", "expected": 0},
+          {"field": "violated_constraint_count", "operator": "equals", "expected": 0}
+        ], "static_facts": {"protected_conditions_current": true}}
+      ]
+    },
+{
+  "id": "policy.conscious_native_continuation_review",
+  "kind": "selection_policy",
+  "evaluation": "declared_eligibility_single",
+  "supported_operators": [
+    "SELECT"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+  "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+  "declared_alternative_refs": [
+    "continuation_review.current_source_selection"
+  ],
+  "selection_eligibility_conditions": [
+    {
+      "field": "eligible",
+      "operator": "equals",
+      "expected": true
+    }
+  ],
+  "reason_refs": [
+    "reason.examine_current_source_means_without_claiming_global_infeasibility"
+  ],
+  "configuration": {
+    "maximum_engagement_members": 512,
+    "continuation_boolean_fields": [
+      "declared_complete_plan_present",
+      "committed_verified_repetition",
+      "declared_complete_series_authorized",
+      "declared_conditional_series_authorized"
+    ],
+    "continuation_reference_fields": [
+      "committed_plan_ref",
+      "declared_plan_ref"
+    ]
+  },
+  "invariants": [
+    "a_declared_plan_requires_local_revalidation_not_automatic_exploration",
+    "absence_is_limited_to_the_exact_current_source_candidate_domain",
+    "an_opportunity_does_not_prove_discovery_necessary",
+    "no_action_authority"
+  ],
+  "fact_projections": [
+    {
+      "id": "projection.native_continuation.default",
+      "all_conditions": [],
+      "static_facts": {
+        "eligible": true,
+        "understanding_timing": "not_examined",
+        "continuation_review": "not_examined",
+        "incoming_engagement_disposition_ref": "engagement.not_examined",
+        "incoming_engagement_reason_ref": null,
+        "incoming_engagement_resume_condition_ref": null,
+        "principal_goal_preserved": true,
+        "requires_prior_continuation_revalidation": false,
+        "grants_action": false
+      }
+    },
+    {
+      "id": "projection.native_continuation.declared_means",
+      "all_conditions": [
+        {
+          "field": "selection_domain_current",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "nonexcluded_marked_candidate_count",
+          "operator": "greater_than",
+          "expected": 0
+        }
+      ],
+      "static_facts": {
+        "continuation_review": "continuation_requires_revalidation",
+        "requires_prior_continuation_revalidation": true
+      }
+    },
+    {
+      "id": "projection.native_continuation.engaged",
+      "all_conditions": [
+        {
+          "field": "selection_domain_current",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "incoming_engagement_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "incoming_engagement_consumption_proved",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "continuation_review": "continuation_requires_revalidation",
+        "requires_prior_continuation_revalidation": true
+      }
+    },
+    {
+      "id": "projection.native_continuation.suspend_unexamined_premises",
+      "all_conditions": [
+        {
+          "field": "selection_domain_current",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "incoming_engagement_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "incoming_engagement_consumption_proved",
+          "operator": "equals",
+          "expected": false
+        },
+        {
+          "field": "incoming_dependency_domain_complete",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "continuation_review": "continuation_requires_revalidation",
+        "requires_prior_continuation_revalidation": true,
+        "incoming_engagement_disposition_ref": "engagement.suspended_unexamined_premises",
+        "incoming_engagement_reason_ref": "reason.requalify_unexamined_premises_before_reusing_engagement",
+        "incoming_engagement_resume_condition_ref": "condition.named_dependencies_changed_then_current_continuation_requalified",
+        "principal_goal_preserved": true
+      }
+    },
+    {
+      "id": "projection.native_continuation.suspend_missing_premises",
+      "all_conditions": [
+        {
+          "field": "selection_domain_current",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "incoming_engagement_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "incoming_engagement_consumption_proved",
+          "operator": "equals",
+          "expected": false
+        },
+        {
+          "field": "incoming_missing_premise_count",
+          "operator": "greater_than",
+          "expected": 0
+        }
+      ],
+      "static_facts": {
+        "continuation_review": "continuation_requires_revalidation",
+        "requires_prior_continuation_revalidation": true,
+        "incoming_engagement_disposition_ref": "engagement.suspended_missing_premises",
+        "incoming_engagement_reason_ref": "reason.requalify_missing_premises_before_reusing_engagement",
+        "incoming_engagement_resume_condition_ref": "condition.named_dependencies_changed_then_current_continuation_requalified",
+        "principal_goal_preserved": true
+      }
+    },
+    {
+      "id": "projection.native_continuation.suspend_expired_premises",
+      "all_conditions": [
+        {
+          "field": "selection_domain_current",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "incoming_engagement_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "incoming_engagement_consumption_proved",
+          "operator": "equals",
+          "expected": false
+        },
+        {
+          "field": "incoming_expired_premise_count",
+          "operator": "greater_than",
+          "expected": 0
+        }
+      ],
+      "static_facts": {
+        "continuation_review": "continuation_requires_revalidation",
+        "requires_prior_continuation_revalidation": true,
+        "incoming_engagement_disposition_ref": "engagement.suspended_expired_premises",
+        "incoming_engagement_reason_ref": "reason.requalify_expired_premises_before_reusing_engagement",
+        "incoming_engagement_resume_condition_ref": "condition.named_dependencies_changed_then_current_continuation_requalified",
+        "principal_goal_preserved": true
+      }
+    },
+    {
+      "id": "projection.native_continuation.suspend_inactive_premises",
+      "all_conditions": [
+        {
+          "field": "selection_domain_current",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "incoming_engagement_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "incoming_engagement_consumption_proved",
+          "operator": "equals",
+          "expected": false
+        },
+        {
+          "field": "incoming_inactive_premise_count",
+          "operator": "greater_than",
+          "expected": 0
+        }
+      ],
+      "static_facts": {
+        "continuation_review": "continuation_requires_revalidation",
+        "requires_prior_continuation_revalidation": true,
+        "incoming_engagement_disposition_ref": "engagement.suspended_inactive_premises",
+        "incoming_engagement_reason_ref": "reason.requalify_inactive_premises_before_reusing_engagement",
+        "incoming_engagement_resume_condition_ref": "condition.named_dependencies_changed_then_current_continuation_requalified",
+        "principal_goal_preserved": true
+      }
+    },
+    {
+      "id": "projection.native_continuation.suspend_contested_premises",
+      "all_conditions": [
+        {
+          "field": "selection_domain_current",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "incoming_engagement_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "incoming_engagement_consumption_proved",
+          "operator": "equals",
+          "expected": false
+        },
+        {
+          "field": "incoming_contested_premise_count",
+          "operator": "greater_than",
+          "expected": 0
+        }
+      ],
+      "static_facts": {
+        "continuation_review": "continuation_requires_revalidation",
+        "requires_prior_continuation_revalidation": true,
+        "incoming_engagement_disposition_ref": "engagement.suspended_contested_premises",
+        "incoming_engagement_reason_ref": "reason.requalify_contested_premises_before_reusing_engagement",
+        "incoming_engagement_resume_condition_ref": "condition.named_dependencies_changed_then_current_continuation_requalified",
+        "principal_goal_preserved": true
+      }
+    },
+    {
+      "id": "projection.native_continuation.selected_means_under_local_validation",
+      "all_conditions": [
+        {"field": "selection_domain_current", "operator": "equals", "expected": true},
+        {"field": "selected_eligibility_current", "operator": "equals", "expected": true},
+        {"field": "selected_affirmative_marker_count", "operator": "greater_than", "expected": 0}
+      ],
+      "static_facts": {"requires_prior_continuation_revalidation": false}
+    },
+    {
+      "id": "projection.native_continuation.selected_opportunity_0",
+      "all_conditions": [
+        {
+          "field": "selection_domain_current",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "selected_eligibility_current",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "selected_effect_class",
+          "operator": "equals",
+          "expected": "experimental_unknown"
+        },
+        {
+          "field": "selected_question_named",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "unexamined_eligibility_count",
+          "operator": "equals",
+          "expected": 0
+        },
+        {
+          "field": "nonexcluded_marked_candidate_count",
+          "operator": "equals",
+          "expected": 0
+        },
+        {
+          "field": "incoming_engagement_present",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "understanding_timing": "selected_information_opportunity",
+        "continuation_review": "no_declared_continuation_in_source_domain"
+      }
+    },
+    {
+      "id": "projection.native_continuation.selected_opportunity_1",
+      "all_conditions": [
+        {
+          "field": "selection_domain_current",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "selected_eligibility_current",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "selected_effect_class",
+          "operator": "equals",
+          "expected": "experimental_unknown"
+        },
+        {
+          "field": "selected_question_named",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "unexamined_eligibility_count",
+          "operator": "equals",
+          "expected": 0
+        },
+        {
+          "field": "nonexcluded_marked_candidate_count",
+          "operator": "equals",
+          "expected": 0
+        },
+        {
+          "field": "incoming_engagement_present",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "incoming_engagement_consumption_proved",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "static_facts": {
+        "understanding_timing": "selected_information_opportunity",
+        "continuation_review": "no_declared_continuation_in_source_domain"
+      }
+    }
+  ]
+},
+    {
+      "id": "policy.conscious_native_experiment_request",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "configuration": {
+        "empty_inventory_projection_ref": "projection.native_experiment_request.empty_inventory"
+      },
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason.native_response_question_requires_its_own_frontier_assessment"],
+      "invariants": [
+        "only_a_source_declared_experimental_unknown_opens_this_assessment",
+        "an_explicit_understanding_objective_may_have_no_known_resolution_beneficiary",
+        "the_acquisition_owner_remains_responsible_for_costs_preservation_and_consumption",
+        "ordinary_validated_actions_are_not_replanned",
+        "native_review_revision_is_the_question_epoch_not_a_fabricated_game_epoch",
+        "missing_admission_bindings_remain_explicit",
+        "an_accompanying_action_is_not_authorized_by_this_assessment"
+      ],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {"id": "projection.native_experiment_request.default", "all_conditions": [],
+         "static_facts": {"eligible": true, "prepare_response_request": false}},
+        {"id": "projection.native_experiment_request.response", "all_conditions": [
+          {"field": "declared_effect_class", "operator": "equals", "expected": "experimental_unknown"},
+          {"field": "current_control_bound", "operator": "equals", "expected": true},
+          {"field": "open_acquisition_domain_present", "operator": "equals", "expected": true},
+          {"field": "nomination_disposition_ref", "operator": "equals", "expected": "conscious_experiment.acquire_response"}
+        ], "static_facts": {
+          "prepare_response_request": true,
+          "information_reason_ref": "reason.native_response_question_requires_its_own_frontier_assessment",
+          "purpose": "MECHANISM", "question_kind": "RESPONSE_ACQUISITION",
+          "stop_condition_refs": ["condition.response_acquisition_observed"],
+          "understanding_timing": "not_examined", "continuation_review": "not_examined"
+        }}
+      ]
+    },
+{
+  "id": "policy.conscious_experiment_commitment",
+  "kind": "selection_policy",
+  "evaluation": "declared_eligibility_single",
+  "supported_operators": [
+    "SELECT"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+  "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+  "reason_refs": [
+    "reason_experiment_obligations_must_change_commitment_before_action"
+  ],
+  "invariants": [
+    "known_violations_are_not_erased_by_an_experiment_label",
+    "conditional_resource_exhaustion_requires_reconciliation",
+    "unexamined_constraints_remain_obligations_not_claims_of_preservation",
+    "reversible_status_without_a_return_route_does_not_prove_recovery",
+    "this_review_never_upgrades_viability_or_grants_action",
+    "existing_conditional_exploration_remains_subject_to_its_release_guards"
+  ],
+  "selection_eligibility_conditions": [
+    {
+      "field": "eligible",
+      "operator": "equals",
+      "expected": true
+    }
+  ],
+  "fact_projections": [
+    {
+      "id": "projection.experiment_commitment.preserve_source",
+      "static_facts": {
+        "eligible": true,
+        "viability_status_override": null,
+        "additional_unresolved_condition_refs": [],
+        "preservation_condition_refs": [],
+        "additional_missing_evidence_refs": [],
+        "disposition_ref": "experiment_commitment.retain_source_viability",
+        "grants_action": false,
+        "recovery_proven": false,
+        "preservation_proven": false
+      }
+    },
+    {
+      "id": "projection.experiment_commitment.observed_return_budget",
+      "all_conditions": [
+        {"field": "observed_recovery_budget_comparison_count", "operator": "greater_than", "expected": 0}
+      ],
+      "static_facts": {
+        "recovery_budget_comparison_status": "nominal_observed_lengths_compared_with_current_conditional_budget",
+        "recovery_budget_question_ref": "question.do_current_controls_constraints_and_resource_laws_support_the_observed_return",
+        "observed_path_length_is_a_future_cost_guarantee": false,
+        "recovery_proven": false
+      }
+    },
+    {
+      "id": "projection.experiment_commitment.observed_return_budget_shortfall",
+      "all_conditions": [
+        {"field": "observed_recovery_length_exceeds_budget_count", "operator": "greater_than", "expected": 0}
+      ],
+      "static_facts": {
+        "recovery_budget_comparison_status": "at_least_one_observed_return_exceeds_current_conditional_budget",
+        "recovery_budget_question_ref": "question.is_another_supported_return_or_a_changed_resource_model_available",
+        "one_observed_return_shortfall_proves_global_impossibility": false,
+        "recovery_proven": false
+      }
+    },
+    {
+      "id": "projection.experiment_commitment.goal_constraints_not_frozen",
+      "all_conditions": [
+        {"field": "goal_constraint_transport_gap_count", "operator": "greater_than", "expected": 0}
+      ],
+      "static_facts": {
+        "viability_status_override": "undetermined",
+        "goal_constraint_condition_refs": ["condition.current_goal_preservation_missing_from_frozen_responsibility"],
+        "disposition_ref": "experiment_commitment.reconcile_goal_constraint_transport"
+      }
+    },
+    {
+      "id": "projection.experiment_commitment.unexamined_constraints",
+      "all_conditions": [
+        {
+          "field": "prepared_binding_current",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "unexamined_constraint_count",
+          "operator": "greater_than",
+          "expected": 0
+        }
+      ],
+      "static_facts": {
+        "preservation_condition_refs": [
+          "condition.experiment_preservation_needs_evidence"
+        ],
+        "disposition_ref": "experiment_commitment.preserve_open_constraints"
+      }
+    },
+    {
+      "id": "projection.experiment_commitment.resource_overrun",
+      "all_conditions": [
+        {
+          "field": "prepared_binding_current",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "resource_overrun_count",
+          "operator": "greater_than",
+          "expected": 0
+        }
+      ],
+      "static_facts": {
+        "viability_status_override": "undetermined",
+        "additional_unresolved_condition_refs": [
+          "condition.experiment_resource_model_requires_reconciliation"
+        ],
+        "disposition_ref": "experiment_commitment.reconcile_resource_before_commitment"
+      }
+    },
+    {
+      "id": "projection.experiment_commitment.stale_binding",
+      "all_conditions": [
+        {
+          "field": "prepared_binding_current",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "viability_status_override": "undetermined",
+        "additional_missing_evidence_refs": [
+          "experiment.current_prepared_viability_binding"
+        ],
+        "disposition_ref": "experiment_commitment.rebind_viability"
+      }
+    },
+    {
+      "id": "projection.experiment_commitment.violation",
+      "all_conditions": [
+        {
+          "field": "declared_violation_count",
+          "operator": "greater_than",
+          "expected": 0
+        }
+      ],
+      "static_facts": {
+        "viability_status_override": "blocked",
+        "disposition_ref": "experiment_commitment.preserve_declared_violation"
+      }
+    },
+    {
+      "id": "projection.experiment_commitment.already_blocked",
+      "all_conditions": [
+        {
+          "field": "original_status",
+          "operator": "equals",
+          "expected": "blocked"
+        }
+      ],
+      "static_facts": {
+        "viability_status_override": "blocked",
+        "disposition_ref": "experiment_commitment.preserve_existing_block"
+      }
+    }
+  ]
+},
+{
+  "id": "policy.conscious_experiment_resource_obligation",
+  "kind": "selection_policy",
+  "evaluation": "declared_eligibility_single",
+  "supported_operators": [
+    "SELECT"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+  "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+  "reason_refs": [
+    "reason_current_resource_models_bound_a_prepared_primitive_without_proving_recovery"
+  ],
+  "configuration": {
+    "empty_inventory_projection_ref": "projection.experiment_resource_obligation.empty_inventory",
+    "measurement_kind": "rounded_finite_counter_intervals",
+    "quantity_predicate": "describes_rendered_resource_quantity_intervals",
+    "maximum_resource_measurements": 64,
+    "admitted_quantity_statuses": [
+      "supported",
+      "established"
+    ]
+  },
+  "invariants": [
+    "solver_action_allowance_is_not_an_observed_game_resource",
+    "all_compatible_render_models_are_retained",
+    "bounds_are_conditional_on_the_observed_resource_model",
+    "one_prepared_primitive_is_not_the_complete_experiment",
+    "recovery_and_preservation_require_separate_evidence",
+    "no_resource_observation_is_not_proof_of_unlimited_resources"
+  ],
+  "selection_eligibility_conditions": [
+    {
+      "field": "eligible",
+      "operator": "equals",
+      "expected": true
+    }
+  ],
+  "fact_projections": [
+    {
+      "id": "projection.experiment_resource.unbound",
+      "static_facts": {
+        "eligible": true,
+        "budget_current": false,
+        "prepared_primitive_conditionally_funded": false,
+        "disposition_ref": "experiment_resource.acquire_current_budget",
+        "executable_experiment_bound": false,
+        "grants_action": false,
+        "recovery_cost_known": false,
+        "preservation_proven": false
+      }
+    },
+    {
+      "id": "projection.experiment_resource.current",
+      "all_conditions": [
+        {
+          "field": "observation_frame_matches",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "observation_timeline_matches",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "all_proofs_active_positive_supported",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "proof_contest_count",
+          "operator": "equals",
+          "expected": 0
+        },
+        {
+          "field": "proof_expired_count",
+          "operator": "equals",
+          "expected": 0
+        },
+        {
+          "field": "primitive_consumption_basis",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "unit_debit_per_primitive",
+          "operator": "equals",
+          "expected": 1
+        },
+        {
+          "field": "intervals_numeric",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "stored_bounds_match_models",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "model_status",
+          "operator": "equals",
+          "expected": "supported_uniform_initial_stock_model"
+        }
+      ],
+      "static_facts": {
+        "budget_current": true,
+        "disposition_ref": "experiment_resource.command_budget_uncertain"
+      }
+    },
+    {
+      "id": "projection.experiment_resource.funded_primitive",
+      "all_conditions": [
+        {
+          "field": "observation_frame_matches",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "observation_timeline_matches",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "all_proofs_active_positive_supported",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "proof_contest_count",
+          "operator": "equals",
+          "expected": 0
+        },
+        {
+          "field": "proof_expired_count",
+          "operator": "equals",
+          "expected": 0
+        },
+        {
+          "field": "primitive_consumption_basis",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "unit_debit_per_primitive",
+          "operator": "equals",
+          "expected": 1
+        },
+        {
+          "field": "intervals_numeric",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "stored_bounds_match_models",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "model_status",
+          "operator": "equals",
+          "expected": "supported_uniform_initial_stock_model"
+        },
+        {
+          "field": "prepared_primitive_fits_lower",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "static_facts": {
+        "prepared_primitive_conditionally_funded": true,
+        "disposition_ref": "experiment_resource.bind_recovery_and_preservation"
+      }
+    },
+    {
+      "id": "projection.experiment_resource.exhausted",
+      "all_conditions": [
+        {
+          "field": "observation_frame_matches",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "observation_timeline_matches",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "all_proofs_active_positive_supported",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "proof_contest_count",
+          "operator": "equals",
+          "expected": 0
+        },
+        {
+          "field": "proof_expired_count",
+          "operator": "equals",
+          "expected": 0
+        },
+        {
+          "field": "primitive_consumption_basis",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "unit_debit_per_primitive",
+          "operator": "equals",
+          "expected": 1
+        },
+        {
+          "field": "intervals_numeric",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "stored_bounds_match_models",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "model_status",
+          "operator": "equals",
+          "expected": "supported_uniform_initial_stock_model"
+        },
+        {
+          "field": "prepared_primitive_exceeds_upper",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "static_facts": {
+        "disposition_ref": "experiment_resource.prepared_primitive_exceeds_budget"
+      }
+    }
+  ]
+},
+  {
+    "id": "policy.declared_unobserved_joint_application",
+    "kind": "selection_policy",
+    "evaluation": "declared_eligibility_single",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "premises": ["a_current_known_operator_has_an_unanswered_joint_application"],
+    "applicability": ["a_discriminating_finite_probe_changes_a_current_decision"],
+    "invariants": [
+      "unobserved_combinations_remain_hypotheses",
+      "two_participants_are_not_a_certified_fusion",
+      "question_selection_does_not_release_an_action"
+    ],
+    "declared_alternative_refs": ["experiment.unobserved_joint_application"],
+    "selection_eligibility_conditions": [{"field": "applicable", "operator": "equals", "expected": true}],
+    "fact_projections": [{
+      "id": "projection.mechanism_application_questions.unobserved_joint_application",
+      "all_conditions": [
+        {"field": "alternative_ref", "operator": "equals", "expected": "experiment.unobserved_joint_application"},
+        {"field": "mechanism_application_question_requested", "operator": "equals", "expected": true},
+        {"field": "current_operator_evidence_rebound", "operator": "equals", "expected": true},
+        {"field": "candidate_measurement_complete", "operator": "equals", "expected": true},
+        {"field": "all_participants_current", "operator": "equals", "expected": true},
+        {"field": "participant_count", "operator": "greater_than", "expected": 1},
+        {"field": "matching_observation_count", "operator": "equals", "expected": 0},
+        {"field": "declared_competing_effect_count", "operator": "greater_than", "expected": 1},
+        {"field": "question_changes_current_decision", "operator": "equals", "expected": true},
+        {"field": "probe_continuation_or_discovery_risk_declared", "operator": "equals", "expected": true}
+      ],
+      "static_facts": {
+        "applicable": true,
+        "question_ref": "question.effect_of_unobserved_joint_operator_application",
+        "instrumental_goal_ref": "goal.characterize_unobserved_joint_operator_application",
+        "epistemic_status": "proposed_requires_action_conditioned_comparison",
+        "reason_ref": "reason.known_operator_has_decision_relevant_unobserved_joint_application",
+        "hypothesis_refs": ["hypothesis.participants_preserved", "hypothesis.participants_consumed_into_new_output", "hypothesis.other_joint_effect"],
+        "falsifier_refs": ["falsifier.participant_binding_changed", "falsifier.influence_domain_incomplete", "falsifier.effect_differs_from_proposed_composition"],
+        "reconciliation_required": true,
+        "selection_releases_action": false,
+        "experiment_workflow_ref": "arc3.test_mechanism.test_mechanism",
+        "reasoning_tree_node_id": "frontier.experiment.mechanism_or_usefulness"
+      }
+    }],
+    "reason_refs": ["reason.known_operator_has_decision_relevant_unobserved_joint_application"]
+  },
+    {
+      "id": "policy.conscious_application_enumeration",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_declared_application_bindings_are_questions_before_effect_measurement"
+      ],
+      "invariants": [
+        "candidate_is_not_known_effect",
+        "no_exchangeability_without_declaration",
+        "no_truncated_domain_reported_complete",
+        "no_current_observation_inferred_from_retained_identity",
+        "no_action_release"
+      ],
+      "configuration": {
+        "symbolic_observation_fields": ["observed_value", "relative_shape_digest", "pixel_area"],
+        "maximum_symbolic_transition_edges": 64,
+        "recovery_observation_fields": ["bounds", "observed_value", "relative_shape_digest", "pixel_area"],
+        "maximum_recovery_transition_edges": 64,
+        "maximum_goal_recovery_transition_edges": 256,
+        "conditional_recovery_policy_required": true,
+        "recovery_search_bounds": {
+          "max_states": 512, "max_edges": 256, "max_queries": 4096,
+          "max_evaluations": 65536, "max_depth": 256
+        },
+        "maximum_preservation_predicate_evaluations": 65536,
+        "preservation_endpoint_admission_modes": {
+          "all_declared_endpoint_predicates_true": [true],
+          "no_declared_endpoint_predicate_false": [true, null]
+        },
+        "preservation_projection_rules": {
+          "marker_compartment": {
+            "subject_attribute": "moving_entity_ref", "field_refs": ["marker_compartment"]
+          },
+          "material_quantity_vector": {
+            "subject_attribute": "moving_entity_ref", "field_refs": ["material_quantity_vector"]
+          },
+          "marker_visual_identity": {
+            "subject_attribute": "moving_entity_ref",
+            "field_refs": ["observed_value", "relative_shape_digest"]
+          },
+          "bounds": {"subject_attribute": "moving_entity_ref", "field_refs": ["bounds"]},
+          "observed_value": {"subject_attribute": "moving_entity_ref", "field_refs": ["observed_value"]},
+          "relative_shape_digest": {"subject_attribute": "moving_entity_ref", "field_refs": ["relative_shape_digest"]},
+          "pixel_area": {"subject_attribute": "moving_entity_ref", "field_refs": ["pixel_area"]}
+        },
+        "maximum_observed_inverse_pairs": 4096,
+        "maximum_symbolic_prediction_variants": 256,
+        "experiment_nomination_required": true,
+        "late_experiment_control_required": true,
+        "current_control_binding_predicates": ["current_control_binding"],
+        "maximum_current_control_bindings": 64,
+        "participant_measurement_workflow_refs": ["arc3.track_scene.track_scene", "arc3.answer_acquired_resource_request_a.answer_acquired_resource_request_a"],
+        "native_acquisition_required": true,
+        "native_acquisition_fields": ["bounds", "observed_value", "relative_shape_digest", "pixel_area"],
+        "maximum_native_acquisition_fields": 256,
+        "open_response_falsifier_refs": [
+          "falsifier.prior_action_context_or_observation_binding_changed",
+          "falsifier.declared_response_fields_not_observable"
+        ],
+        "addressed_control_attributes": ["actuator_entity_ref", "addressed_control_ref", "control_ref"],
+        "participant_reference_attributes": [
+          "actuator_entity_ref",
+          "moving_entity_ref",
+          "fixed_entity_ref",
+          "full_entity_ref",
+          "derived_entity_ref",
+          "carrier_entity_ref",
+          "moving_support_ref",
+          "terminal_support_ref",
+          "negative_support_ref",
+          "positive_support_ref",
+          "contributor_entity_refs",
+          "active_contributor_entity_ref",
+          "connector_entity_ref",
+          "source_entity_ref",
+          "destination_entity_ref"
+        ],
+        "goal_relation_queries": [{
+          "predicate_ref": "goal_hypothesis_alignment",
+          "goal_argument_index": 0,
+          "subject_attribute": "moving_entity_ref",
+          "target_attribute": "fixed_entity_ref",
+          "axis_attribute": "axis",
+          "scope_attribute_bindings": {
+            "context_epoch": {"scope_field": "level_ref", "value_prefix": "scope.level:"}
+          },
+          "epistemic_status_refs": ["proposed", "supported", "established"],
+          "condition_epistemic_status_refs": ["supported", "established"]
+        }],
+        "goal_target_attributes": [
+          "concrete_target_ref",
+          "concrete_target_candidates"
+        ],
+        "operator_reference_attributes": [
+          "action_ref"
+        ],
+        "requested_cardinalities": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "exchangeable_slots_declared": false,
+        "maximum_bindings": 256,
+        "maximum_participants": 64
+      },
+      "declared_alternative_refs": [
+        "conscious_application.bind_domain",
+        "conscious_application.narrow_domain",
+        "conscious_application.measure_effect"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.conscious_application.calculation_default",
+          "all_conditions": [],
+          "static_facts": {"calculate_conditional_translation": false, "calculate_symbolic_state_transition": false}
+        },
+        {
+          "id": "projection.conscious_application.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "conscious_application.bind_domain"
+            },
+            {
+              "field": "declared_domain_bound",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "participant_domain_exceeds_bound",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "question_ref": "question.which_current_participants_and_operator_define_the_application",
+            "requires_current_participant_measurement": true,
+            "requires_influence_measurement": true,
+            "requires_effect_measurement": true,
+            "action_release_authorized": false
+          }
+        },
+        {
+          "id": "projection.conscious_application.participants_bounded",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "conscious_application.narrow_domain"
+            },
+            {
+              "field": "participant_domain_exceeds_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "question_ref": "question.which_influence_domain_bounds_the_candidate_application",
+            "requires_current_participant_measurement": true,
+            "requires_influence_measurement": true,
+            "requires_effect_measurement": true,
+            "action_release_authorized": false
+          }
+        },
+        {
+          "id": "projection.conscious_application.bindings_bounded",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "conscious_application.narrow_domain"
+            },
+            {
+              "field": "declared_domain_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "enumeration_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "question_ref": "question.which_influence_domain_bounds_the_candidate_application",
+            "requires_current_participant_measurement": true,
+            "requires_influence_measurement": true,
+            "requires_effect_measurement": true,
+            "action_release_authorized": false
+          }
+        },
+        {
+          "id": "projection.conscious_application.enumerated",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "conscious_application.measure_effect"
+            },
+            {
+              "field": "declared_domain_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "enumeration_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "question_ref": "question.what_effect_the_declared_application_has_on_its_participants",
+            "requires_current_participant_measurement": true,
+            "requires_influence_measurement": true,
+            "requires_effect_measurement": true,
+            "action_release_authorized": false
+          }
+        },
+        {
+          "id": "projection.conscious_application.observed_return",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "conscious_application.measure_effect"},
+            {"field": "enumeration_complete", "operator": "equals", "expected": true},
+            {"field": "observed_candidate_count", "operator": "greater_than", "expected": 0},
+            {"field": "observed_physical_return_present", "operator": "equals", "expected": true},
+            {"field": "observed_physical_packet_consistent", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "question_ref": "question.which_participants_and_conditions_explain_the_observed_response",
+            "requires_conditioning_revalidation": true,
+            "observed_scene_change_establishes_participant_causality": false
+          }
+        },
+        {
+          "id": "projection.conscious_application.observed_transient_return",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "conscious_application.measure_effect"},
+            {"field": "enumeration_complete", "operator": "equals", "expected": true},
+            {"field": "observed_candidate_count", "operator": "greater_than", "expected": 0},
+            {"field": "observed_physical_return_present", "operator": "equals", "expected": true},
+            {"field": "observed_physical_packet_consistent", "operator": "equals", "expected": true},
+            {"field": "observed_transient_only_change", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "question_ref": "question.which_participants_and_conditions_explain_the_observed_transient_change",
+            "requires_conditioning_revalidation": true,
+            "observed_scene_change_establishes_participant_causality": false
+          }
+        },
+        {
+          "id": "projection.conscious_application.recalled_interval",
+          "all_conditions": [
+            {"field": "eligible", "operator": "equals", "expected": true},
+            {"field": "observed_return_from_prior_frame", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "requires_conditioning_revalidation": true,
+            "historical_observation_is_current_application_proof": false
+          }
+        },
+        {
+          "id": "projection.conscious_application.later_binding_unavailable",
+          "all_conditions": [
+            {"field": "eligible", "operator": "equals", "expected": true},
+            {"field": "later_application_inspection_unbound", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "question_ref": "question.which_current_binding_is_missing_despite_the_preserved_observation",
+            "requires_conditioning_revalidation": true,
+            "missing_current_binding_refutes_prior_observation": false
+          }
+        },
+        {
+          "id": "projection.conscious_application.changed_observation_source",
+          "all_conditions": [
+            {"field": "eligible", "operator": "equals", "expected": true},
+            {"field": "observed_return_source_current", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "question_ref": "question.how_to_requalify_the_preserved_observation_under_current_source",
+            "requires_source_requalification": true,
+            "requires_conditioning_revalidation": true,
+            "historical_observation_is_current_application_proof": false
+          }
+        },
+        {
+          "id": "projection.conscious_application.competing_participant_geometry",
+          "all_conditions": [
+            {"field": "eligible", "operator": "equals", "expected": true},
+            {"field": "participant_geometry_ambiguous", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "question_ref": "question.which_current_participant_pose_binds_the_physical_prediction",
+            "requires_current_participant_measurement": true,
+            "competing_participant_measurements_must_be_preserved": true
+          }
+        },
+        {
+          "id": "projection.conscious_application.unresolved_participant_predecessors",
+          "all_conditions": [
+            {"field": "eligible", "operator": "equals", "expected": true},
+            {"field": "participant_predecessors_unresolved", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "question_ref": "question.which_observed_identity_carries_the_recalled_participant_role",
+            "requires_current_participant_measurement": true,
+            "competing_participant_measurements_must_be_preserved": true
+          }
+        },
+        {
+          "id": "projection.conscious_application.repeated_observed_translation",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "conscious_application.measure_effect"},
+            {"field": "eligible", "operator": "equals", "expected": true},
+            {"field": "translation_computable_count", "operator": "greater_than", "expected": 0},
+            {"field": "observed_return_source_current", "operator": "equals", "expected": true},
+            {"field": "later_application_inspection_unbound", "operator": "equals", "expected": false},
+            {"field": "participant_geometry_ambiguous", "operator": "equals", "expected": false},
+            {"field": "participant_predecessors_unresolved", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "calculate_conditional_translation": true,
+            "hypothesis_ref": "hypothesis.same_participant_translation_under_revalidated_conditions",
+            "question_ref": "question.does_the_predicted_application_advance_the_goal_and_preserve_constraints",
+            "condition_refs": [
+              "condition.same_control_mode_receivers_and_payload",
+              "condition.observed_joint_response_repeats",
+              "condition.current_occupancy_and_mechanism_context_allow_response",
+              "condition.goal_and_preservation_predicates_revalidated"
+            ],
+            "falsifier_refs": [
+              "falsifier.participant_identity_shape_or_response_changed",
+              "falsifier.control_payload_or_context_changed",
+              "falsifier.collision_or_preservation_failure"
+            ],
+            "requires_conditioning_revalidation": true,
+            "prediction_establishes_causal_law": false,
+            "action_release_authorized": false
+          }
+        },
+        {
+          "id": "projection.conscious_application.symbolic_precondition_not_repeated",
+          "all_conditions": [
+            {"field": "eligible", "operator": "equals", "expected": true},
+            {"field": "observed_changed_state_count", "operator": "greater_than", "expected": 0},
+            {"field": "symbolic_transition_computable_count", "operator": "equals", "expected": 0},
+            {"field": "calculate_conditional_translation", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "question_ref": "question.which_transition_is_possible_from_the_current_observed_state",
+            "observed_forward_transition_establishes_inverse_or_cycle": false
+          }
+        },
+        {
+          "id": "projection.conscious_application.symbolic_state_transition",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "conscious_application.measure_effect"},
+            {"field": "eligible", "operator": "equals", "expected": true},
+            {"field": "symbolic_transition_computable_count", "operator": "greater_than", "expected": 0},
+            {"field": "observed_return_source_current", "operator": "equals", "expected": true},
+            {"field": "later_application_inspection_unbound", "operator": "equals", "expected": false},
+            {"field": "participant_geometry_ambiguous", "operator": "equals", "expected": false},
+            {"field": "participant_predecessors_unresolved", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "calculate_symbolic_state_transition": true,
+            "hypothesis_ref": "hypothesis.same_observed_response_under_current_conditions",
+            "question_ref": "question.does_the_predicted_state_response_satisfy_the_goal_and_preserve_constraints",
+            "condition_refs": [
+              "condition.same_control_mode_receivers_and_payload",
+              "condition.observed_response_has_no_changed_hidden_dependency",
+              "condition.current_mechanism_context_allows_response",
+              "condition.goal_and_preservation_predicates_revalidated"
+            ],
+            "falsifier_refs": [
+              "falsifier.observed_starting_state_or_identity_differs",
+              "falsifier.control_payload_or_context_changed",
+              "falsifier.predicted_response_or_preservation_contradicted"
+            ],
+            "observed_forward_transition_establishes_inverse_or_cycle": false,
+            "prediction_establishes_causal_law": false,
+            "action_release_authorized": false
+          }
+        },
+        {
+          "id": "projection.conscious_application.symbolic_memory_incomplete",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "conscious_application.measure_effect"},
+            {"field": "eligible", "operator": "equals", "expected": true},
+            {"field": "observed_candidate_count", "operator": "greater_than", "expected": 0},
+            {"field": "symbolic_history_incomplete", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "question_ref": "question.which_observed_edges_remain_unbound_or_exceed_the_declared_memory_scope",
+            "calculate_symbolic_state_transition": false,
+            "requires_complete_scoped_response_memory": true,
+            "action_release_authorized": false
+          }
+        },
+        {
+          "id": "projection.conscious_application.symbolic_variants_bounded",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "conscious_application.measure_effect"},
+            {"field": "eligible", "operator": "equals", "expected": true},
+            {"field": "symbolic_variants_exceed_bound", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "question_ref": "question.which_evidenced_condition_can_partition_the_response_variants",
+            "calculate_symbolic_state_transition": false,
+            "partial_response_set_is_complete": false,
+            "action_release_authorized": false
+          }
+        },
+        {
+          "id": "projection.conscious_application.symbolic_competing_responses",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "conscious_application.measure_effect"},
+            {"field": "calculate_symbolic_state_transition", "operator": "equals", "expected": true},
+            {"field": "symbolic_competing_response_count", "operator": "greater_than", "expected": 0}
+          ],
+          "static_facts": {
+            "question_ref": "question.which_missing_condition_distinguishes_the_observed_responses",
+            "retain_all_conditional_responses": true,
+            "competing_responses_establish_randomness": false,
+            "action_release_authorized": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.conscious_native_experiment_nomination",
+      "configuration": {
+        "maximum_feedback_commands": 64,
+        "noncommitted_decisions": ["reject", "defer", "revise"]
+      },
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason_native_application_uncertainty_requires_an_explicit_observable_question"],
+      "invariants": [
+        "observed_responses_are_not_exclusive_causal_models",
+        "historical_payload_does_not_revalidate_current_control",
+        "a_nominated_question_does_not_interrupt_a_validated_continuation",
+        "missing_cost_or_preservation_is_not_zero_or_safe",
+        "nomination_never_releases_an_action",
+        "a_current_refusal_returns_to_its_exact_control_and_native_question",
+        "one_refused_command_does_not_suspend_other_application_options",
+        "identical_refusals_without_changed_dependencies_are_not_new_information",
+        "a_path_in_observed_projections_is_a_possible_return_not_a_complete_world_model",
+        "all_shortest_return_controls_and_their_observed_conflicts_remain_explicit"
+      ],
+      "declared_alternative_refs": [
+        "conscious_experiment.bind_application", "conscious_experiment.explain_competing_responses",
+        "conscious_experiment.acquire_response", "conscious_experiment.reconcile_commitment"
+      ],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {
+          "id": "projection.conscious_experiment.execution_bindings",
+          "all_conditions": [],
+          "static_facts": {
+            "required_binding_refs": [
+              "experiment.current_control_payload_and_receivers",
+              "experiment.current_scope_and_supported_hypotheses_or_explicit_unknown_domain",
+              "experiment.action_conditioned_observation_contract",
+              "experiment.current_preservation_and_recovery_evidence",
+              "experiment.measured_budget_and_recovery_inclusive_cost",
+              "experiment.validated_continuation_or_discovery_necessity"
+            ],
+            "executable_experiment_bound": false,
+            "causal_hypotheses_established": false,
+            "hypothesis_discrimination_established": false,
+            "selection_releases_action": false
+          }
+        },
+        {
+          "id": "projection.conscious_experiment.bind_application",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "conscious_experiment.bind_application"},
+            {"field": "application_domain_bound", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "eligible": true,
+            "question_ref": "question.which_current_operator_and_complete_participant_domain_can_be_examined"
+          }
+        },
+        {
+          "id": "projection.conscious_experiment.explain_competing_responses",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "conscious_experiment.explain_competing_responses"},
+            {"field": "all_current_application_options_refused", "operator": "equals", "expected": false},
+            {"field": "application_domain_bound", "operator": "equals", "expected": true},
+            {"field": "responses_differ_on_bound_observables", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "eligible": true,
+            "question_ref": "question.which_current_condition_explains_the_distinct_observed_responses",
+            "requires_action_conditioned_hypothesis_predictions": true,
+            "repeating_an_operation_establishes_causal_discrimination": false
+          }
+        },
+        {
+          "id": "projection.conscious_experiment.acquire_response",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "conscious_experiment.acquire_response"},
+            {"field": "all_current_application_options_refused", "operator": "equals", "expected": false},
+            {"field": "application_domain_bound", "operator": "equals", "expected": true},
+            {"field": "responses_differ_on_bound_observables", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {
+            "eligible": true,
+            "question_ref": "question.what_response_does_this_application_produce_under_current_conditions",
+            "exhaustive_prior_command_exploration_required": false
+          }
+        },
+        {
+          "id": "projection.conscious_experiment.reconcile_commitment",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "conscious_experiment.reconcile_commitment"},
+            {"field": "application_domain_bound", "operator": "equals", "expected": true},
+            {"field": "all_current_application_options_refused", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "eligible": true,
+            "question_ref": "question.which_current_evidence_can_reconcile_the_refused_commitment",
+            "commitment_feedback_requires_dependency_review": true,
+            "repeating_the_refused_effect_is_new_evidence": false
+          }
+        },
+        {
+          "id": "projection.conscious_experiment.native_acquisition_return",
+          "all_conditions": [
+            {"field": "native_acquisition_count", "operator": "greater_than", "expected": 0}
+          ],
+          "static_facts": {
+            "native_acquisition_status": "response_bound_to_the_prior_question_and_observation_contract",
+            "observed_response_establishes_a_causal_law": false,
+            "unchanged_tracked_fields_prove_no_scene_effect": false,
+            "accompanying_an_action_admits_independent_curiosity": false
+          }
+        },
+        {
+          "id": "projection.conscious_experiment.native_acquisition_incomplete",
+          "all_conditions": [
+            {"field": "native_acquisition_incomplete_count", "operator": "greater_than", "expected": 0}
+          ],
+          "static_facts": {
+            "native_acquisition_status": "observation_or_identity_binding_remains_incomplete",
+            "native_acquisition_question_ref": "question.which_missing_measurement_or_identity_can_complete_the_prior_observation_contract"
+          }
+        },
+        {
+          "id": "projection.conscious_experiment.native_acquisition_transient",
+          "all_conditions": [
+            {"field": "native_acquisition_transient_count", "operator": "greater_than", "expected": 0}
+          ],
+          "static_facts": {
+            "native_acquisition_temporal_question_ref": "question.which_intermediate_effect_explains_the_unchanged_final_scene",
+            "unchanged_final_scene_proves_no_effect": false
+          }
+        },
+        {
+          "id": "projection.conscious_experiment.observed_preservation_unknown",
+          "all_conditions": [
+            {"field": "observed_recovery_unknown_query_count", "operator": "greater_than", "expected": 0}
+          ],
+          "static_facts": {
+            "recovery_preservation_status": "some_declared_endpoint_constraints_remain_unmeasured",
+            "recovery_preservation_question_ref": "question.which_observable_or_binding_can_measure_the_open_preservation_constraint",
+            "unknown_preservation_is_a_violation": false,
+            "sampled_endpoints_prove_all_intermediate_preservation": false
+          }
+        },
+        {
+          "id": "projection.conscious_experiment.observed_preservation_contradicted",
+          "all_conditions": [
+            {"field": "observed_recovery_contradicted_query_count", "operator": "greater_than", "expected": 0}
+          ],
+          "static_facts": {
+            "recovery_preservation_status": "a_shortest_return_relation_contains_a_measured_constraint_violation",
+            "recovery_preservation_question_ref": "question.does_an_alternative_observed_return_preserve_the_declared_constraints",
+            "one_violating_return_excludes_every_other_return": false,
+            "sampled_endpoints_prove_all_intermediate_preservation": false
+          }
+        },
+        {
+          "id": "projection.conscious_experiment.observed_inverse_requires_revalidation",
+          "all_conditions": [
+            {"field": "observed_inverse_count", "operator": "greater_than", "expected": 0}
+          ],
+          "static_facts": {
+            "recovery_evidence_status": "inverse_observed_in_declared_projection",
+            "complete_world_recovery_established": false,
+            "future_recovery_cost_known": false,
+            "current_return_control_revalidation_required": true,
+            "required_binding_refs": [
+              "experiment.current_control_payload_and_receivers",
+              "experiment.current_scope_and_supported_hypotheses_or_explicit_unknown_domain",
+              "experiment.action_conditioned_observation_contract",
+              "experiment.current_preservation_and_recovery_evidence",
+              "experiment.measured_budget_and_recovery_inclusive_cost",
+              "experiment.validated_continuation_or_discovery_necessity",
+              "experiment.current_binding_of_witnessed_return",
+              "experiment.sufficiency_of_restored_observables_for_goal"
+            ]
+          }
+        },
+        {
+          "id": "projection.conscious_experiment.observed_composition_requires_revalidation",
+          "all_conditions": [
+            {"field": "observed_composed_return_count", "operator": "greater_than", "expected": 0}
+          ],
+          "static_facts": {
+            "recovery_evidence_status": "composed_return_in_observed_projection",
+            "complete_world_recovery_established": false,
+            "future_recovery_cost_known": false,
+            "current_return_control_revalidation_required": true,
+            "required_binding_refs": [
+              "experiment.current_control_payload_and_receivers",
+              "experiment.current_scope_and_supported_hypotheses_or_explicit_unknown_domain",
+              "experiment.action_conditioned_observation_contract",
+              "experiment.current_preservation_and_recovery_evidence",
+              "experiment.measured_budget_and_recovery_inclusive_cost",
+              "experiment.validated_continuation_or_discovery_necessity",
+              "experiment.current_binding_of_each_return_edge",
+              "experiment.sufficiency_of_restored_observables_for_goal",
+              "experiment.preservation_at_each_return_state",
+              "experiment.discrimination_of_conflicting_return_responses"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "policy.conscious_experiment_current_controls",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "configuration": {
+        "empty_inventory_projection_ref": "projection.experiment_current_controls.empty_inventory"
+      },
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason_existing_control_proofs_must_be_current_before_becoming_experiment_options"],
+      "invariants": [
+        "all_current_control_options_are_preserved_without_choosing_one",
+        "historical_control_signature_never_substitutes_for_current_proof",
+        "current_control_is_not_cost_preservation_or_action_authority"
+      ],
+      "selection_eligibility_conditions": [{"field": "current_control_option", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {
+          "id": "projection.conscious_experiment.controls_default",
+          "all_conditions": [],
+          "static_facts": {
+            "current_control_option": false,
+            "admitted_control_proof_statuses": ["supported", "established"],
+            "action_release_authorized": false
+          }
+        },
+        {
+          "id": "projection.conscious_experiment.current_control",
+          "all_conditions": [
+            {"field": "signature_complete", "operator": "equals", "expected": true},
+            {"field": "signature_frame_matches", "operator": "equals", "expected": true},
+            {"field": "action_data_present", "operator": "equals", "expected": true},
+            {"field": "proof_disposition", "operator": "equals", "expected": "active"},
+            {"field": "proof_polarity", "operator": "equals", "expected": "positive"},
+            {"field": "proof_status", "operator": "member_of_reference_field", "reference_field": "admitted_control_proof_statuses"},
+            {"field": "proof_contested_count", "operator": "equals", "expected": 0},
+            {"field": "proof_expired", "operator": "equals", "expected": false},
+            {"field": "support_count", "operator": "greater_than", "expected": 0},
+            {"field": "support_missing_count", "operator": "equals", "expected": 0},
+            {"field": "support_inactive_count", "operator": "equals", "expected": 0},
+            {"field": "support_negative_count", "operator": "equals", "expected": 0},
+            {"field": "support_contested_count", "operator": "equals", "expected": 0},
+            {"field": "support_expired_count", "operator": "equals", "expected": 0},
+            {"field": "scope_term_bindings_current", "operator": "equals", "expected": true},
+            {"field": "stale_provenance_count", "operator": "equals", "expected": 0}
+          ],
+          "static_facts": {"current_control_option": true}
+        }
+      ]
+    },
+    {
+      "id": "policy.conscious_prepared_experiment_control",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "configuration": {
+        "empty_inventory_projection_ref": "projection.prepared_experiment_control.empty_inventory"
+      },
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_late_control_qualification_returns_to_the_exact_native_question"
+      ],
+      "invariants": [
+        "prepared_action_is_not_reselected_by_its_experiment_question",
+        "the_same_intent_consumes_its_exact_control_return",
+        "unbound_and_unrelated_questions_remain_distinct",
+        "receiver_permutations_remain_explicit",
+        "qualified_control_is_not_an_executable_experiment_or_action_permit"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.prepared_experiment_control.unbound",
+          "all_conditions": [],
+          "static_facts": {
+            "eligible": true,
+            "current_control_bound": false,
+            "unrelated_application": false,
+            "disposition_ref": "experiment_control.await_current_binding",
+            "admitted_control_proof_statuses": [
+              "supported",
+              "established"
+            ],
+            "admitted_control_proof_predicates": [
+              "current_control_binding"
+            ],
+            "action_release_authorized": false
+          }
+        },
+        {
+          "id": "projection.prepared_experiment_control.other_operator",
+          "all_conditions": [
+            {
+              "field": "review_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operator_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operator_matches",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "unrelated_application": true,
+            "disposition_ref": "experiment_control.other_application"
+          }
+        },
+        {
+          "id": "projection.prepared_experiment_control.other_control",
+          "all_conditions": [
+            {
+              "field": "review_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operator_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "addressed_control_matches",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "unrelated_application": true,
+            "disposition_ref": "experiment_control.other_application"
+          }
+        },
+        {
+          "id": "projection.prepared_experiment_control.bound",
+          "all_conditions": [
+            {
+              "field": "review_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operator_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "addressed_control_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "receiver_binding_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "observation_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "action_kind_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "action_payload_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "proof_version_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "proof_in_frozen_why",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "proof_is_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "proof_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "proof_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "proof_status",
+              "operator": "member_of_reference_field",
+              "reference_field": "admitted_control_proof_statuses"
+            },
+            {
+              "field": "proof_predicate",
+              "operator": "member_of_reference_field",
+              "reference_field": "admitted_control_proof_predicates"
+            },
+            {
+              "field": "proof_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "proof_defeat_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "current_control_bound": true,
+            "unrelated_application": false,
+            "disposition_ref": "experiment_control.current_binding_consumed",
+            "remaining_experiment_conditions_require_separate_evidence": true
+          }
+        }
+      ]
+    }
+  ]
+}

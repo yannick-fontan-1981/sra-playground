@@ -1,0 +1,138 @@
+{
+  "module_id": "blocked_goal_acquisition",
+  "declarations": [{
+    "id": "policy.declared_blocked_goal_acquisition_parent",
+    "kind": "selection_policy",
+    "evaluation": "declared_lexicographic_order",
+    "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "premises": ["current_declared_goal_frontier_has_no_admissible_direct_continuation"],
+    "invariants": ["blocked_means_do_not_delete_open_goals", "retain_all_admitted_branches_without_selecting_a_parent", "potential_benefit_is_not_a_confirmed_instrumental_edge", "undeclared_goal_relationships_remain_unknown", "retention_is_not_ACT_or_a_mechanical_answer", "uninstantiated_templates_are_not_parents"],
+    "falsifiers": ["goal_has_been_achieved_or_contradicted", "parent_scope_or_grounding_is_missing"],
+    "reason_refs": ["reason.blocked_goal_requires_acquisition_of_currently_unknown_means"],
+    "fact_projections": [{
+      "id": "projection.acquisition.retain_grounded_blocked_parent",
+      "all_conditions": [
+        {"field": "contextual_nonprogress_proven", "operator": "equals", "expected": true},
+        {"field": "agenda_action_witness_measurement_present", "operator": "equals", "expected": true},
+        {"field": "declared_goal_grounding_present", "operator": "equals", "expected": true},
+        {"field": "support_claim_refs", "operator": "is_present"},
+        {"field": "priority_position", "operator": "is_present"}
+      ],
+      "any_conditions": [
+        {"field": "lifecycle_status", "operator": "equals", "expected": "proposed"},
+        {"field": "lifecycle_status", "operator": "equals", "expected": "accessible"},
+        {"field": "lifecycle_status", "operator": "equals", "expected": "pursuing"},
+        {"field": "lifecycle_status", "operator": "equals", "expected": "enabled"},
+        {"field": "lifecycle_status", "operator": "equals", "expected": "blocked"},
+        {"field": "lifecycle_status", "operator": "equals", "expected": "reopened_after_context_change"}
+      ],
+      "static_facts": {"acquisition_parent_admissible": true},
+      "bound_facts": {
+        "acquisition_parent_goal_ref": "goal_ref",
+        "acquisition_parent_support_claim_refs": "support_claim_refs",
+        "acquisition_parent_blockage_ref": "agenda_entry_state"
+      }
+    }],
+    "selection_eligibility_conditions": [{"field": "acquisition_parent_admissible", "operator": "equals", "expected": true}],
+    "selection_tiers": [{"id": "tier.acquisition.current_grounded_blocked_parent", "all_conditions": [{"field": "acquisition_parent_admissible", "operator": "equals", "expected": true}], "reason_ref": "reason.blocked_goal_requires_acquisition_of_currently_unknown_means"}],
+    "selection_tie_breakers": [{"field": "priority_position", "preferred_order": "minimize"}, {"field": "alternative_ref", "preferred_order": "minimize"}]
+  }, {
+    "id": "policy.goal_acquisition_frontier_review",
+    "kind": "selection_policy",
+    "evaluation": "declared_eligibility_single",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "selection_eligibility_conditions": [{"field": "current_goal_present", "operator": "is_present"}],
+    "fact_projections": [
+      {"id": "projection.acquisition_review.unresolved",
+       "static_facts": {"disposition_ref": "goal_review.current_grounding_unavailable", "direct_continuation_requires_revalidation": false, "dependency_reassessment_required": false}},
+      {"id": "projection.acquisition_review.application_association_unmatched",
+       "static_facts": {"application_association_disposition_ref": "application_association.no_frozen_candidate_bound"}},
+      {"id": "projection.acquisition_review.physical_measurement_absent",
+       "static_facts": {"physical_return_disposition_ref": "physical_return.measurement_requires_evidence"}},
+      {"id": "projection.acquisition_review.physical_pixels_unchanged",
+       "all_conditions": [
+         {"field": "physical_effect_present", "operator": "equals", "expected": true},
+         {"field": "physical_packet_dimensions_consistent", "operator": "equals", "expected": true},
+         {"field": "physical_final_changed_count", "operator": "equals", "expected": 0},
+         {"field": "physical_transient_only_change", "operator": "equals", "expected": false}],
+       "static_facts": {"physical_return_disposition_ref": "physical_return.observed_pixels_unchanged"}},
+      {"id": "projection.acquisition_review.physical_final_change",
+       "all_conditions": [
+         {"field": "physical_effect_present", "operator": "equals", "expected": true},
+         {"field": "physical_packet_dimensions_consistent", "operator": "equals", "expected": true},
+         {"field": "physical_final_changed_count", "operator": "greater_than", "expected": 0}],
+       "static_facts": {"physical_return_disposition_ref": "physical_return.observed_final_pixel_change"}},
+      {"id": "projection.acquisition_review.physical_transient_change",
+       "all_conditions": [
+         {"field": "physical_effect_present", "operator": "equals", "expected": true},
+         {"field": "physical_packet_dimensions_consistent", "operator": "equals", "expected": true},
+         {"field": "physical_transient_only_change", "operator": "equals", "expected": true}],
+       "static_facts": {"physical_return_disposition_ref": "physical_return.observed_transient_change_despite_equal_endpoints"}},
+      {"id": "projection.acquisition_review.physical_dimensions_changed",
+       "all_conditions": [
+         {"field": "physical_effect_present", "operator": "equals", "expected": true},
+         {"field": "physical_packet_dimensions_consistent", "operator": "equals", "expected": false}],
+       "static_facts": {"physical_return_disposition_ref": "physical_return.incompatible_packet_dimensions"}},
+      {"id": "projection.acquisition_review.application_association_unique",
+       "all_conditions": [
+         {"field": "application_association_count", "operator": "equals", "expected": 1},
+         {"field": "application_association_incomplete", "operator": "equals", "expected": false}],
+       "static_facts": {"application_association_disposition_ref": "application_association.control_and_receivers_bound_effect_unproved"}},
+      {"id": "projection.acquisition_review.application_association_ambiguous",
+       "all_conditions": [{"field": "application_association_ambiguous", "operator": "equals", "expected": true}],
+       "static_facts": {"application_association_disposition_ref": "application_association.preserve_competing_bindings"}},
+      {"id": "projection.acquisition_review.application_association_incomplete",
+       "all_conditions": [{"field": "application_association_incomplete", "operator": "equals", "expected": true}],
+       "static_facts": {"application_association_disposition_ref": "application_association.binding_requires_evidence"}},
+      {"id": "projection.acquisition_review.unchanged",
+       "all_conditions": [
+         {"field": "current_goal_present", "operator": "equals", "expected": true},
+         {"field": "goal_fact_comparison_complete", "operator": "equals", "expected": true},
+         {"field": "goal_facts_changed", "operator": "equals", "expected": false}],
+       "static_facts": {"disposition_ref": "goal_review.retained_without_new_means_proof"}},
+      {"id": "projection.acquisition_review.changed",
+       "all_conditions": [
+         {"field": "current_goal_present", "operator": "equals", "expected": true},
+         {"field": "goal_facts_changed", "operator": "equals", "expected": true}],
+       "static_facts": {"disposition_ref": "goal_review.current_facts_require_local_selection"}},
+      {"id": "projection.acquisition_review.changed_declared_dependency",
+       "all_conditions": [
+         {"field": "current_goal_present", "operator": "equals", "expected": true},
+         {"field": "dependency_evidence_changed", "operator": "equals", "expected": true},
+         {"field": "lifecycle_status", "operator": "is_present"},
+         {"field": "lifecycle_status", "operator": "not_equals", "expected": "achieved"},
+         {"field": "lifecycle_status", "operator": "not_equals", "expected": "level_achieved"}],
+       "static_facts": {"disposition_ref": "goal_review.declared_dependency_requires_current_admission_review", "dependency_reassessment_required": true}},
+      {"id": "projection.acquisition_review.direct_witness_became_available",
+       "all_conditions": [
+         {"field": "current_goal_present", "operator": "equals", "expected": true},
+         {"field": "agenda_action_witness_measurement_present", "operator": "equals", "expected": true},
+         {"field": "current_context_untried_declared_action_witness_count", "operator": "greater_than", "expected": 0},
+         {"field": "lifecycle_status", "operator": "not_equals", "expected": "achieved"},
+         {"field": "lifecycle_status", "operator": "not_equals", "expected": "level_achieved"}],
+       "static_facts": {"disposition_ref": "goal_review.direct_witness_requires_current_release_checks", "direct_continuation_requires_revalidation": true}},
+        {
+          "id": "projection.acquisition_review.unbound_observed_application",
+          "all_conditions": [
+            {
+              "field": "observed_application_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "disposition_ref": "goal_review.observation_chain_requires_evidence",
+            "direct_continuation_requires_revalidation": true,
+            "dependency_reassessment_required": false
+          }
+        }
+    ],
+    "invariants": ["review_is_not_achievement", "no_instrumental_relation_without_its_own_evidence", "ordinary_goal_selection_revalidates_action_release"],
+    "reason_refs": ["reason.observed_acquisition_requires_review_of_retained_branches"]
+  }]
+}

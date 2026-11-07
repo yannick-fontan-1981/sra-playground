@@ -1,0 +1,193 @@
+{
+  "module_id": "destination_stability_observation",
+  "declarations": [
+    {
+      "id": "policy.destination_stability_observation_basis",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_contact_receipt_and_complete_observed_packet"
+      ],
+      "applicability": [
+        "destination_support_stability_filter_only"
+      ],
+      "invariants": [
+        "full_transition_union_retained_as_phenomenon_evidence",
+        "no_hidden_world_stability_claim",
+        "no_goal_or_contact_success_claim",
+        "unchanged_default_outside_exact_guard"
+      ],
+      "falsifiers": [
+        "missing_current_receipt",
+        "incomplete_packet",
+        "durable_pixel_change",
+        "latest_transition_not_current"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "destination_stability.observed_packet_boundary",
+        "destination_stability.transition_union"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.packet_boundary_observations_do_not_prove_latent_state_stability",
+      "reason_refs": [
+        "reason.current_returned_contact_packet_separates_durable_support_from_transient_coverage"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.destination_stability.current_returned_contact_packet",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "destination_stability.observed_packet_boundary"
+            },
+            {
+              "field": "packet_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_same_shape",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_has_intermediate_frame",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_boundary_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_last_is_current_frame",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "latest_transition_after_is_current_frame",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_intermediate_difference_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "current_transition_contact_receipt_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "current_packet_reconciliation_seal_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "current_packet_crossed_episode_boundary",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "released_dispatch_acquisition_bound",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "released_packet_digest_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "released_packet_dimensions_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "released_packet_after_raw_is_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "released_physical_evidence_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "destination_stability_support_ref": "support.observed_packet_boundary",
+            "reasoning_tree_node_id": "composition.family.oriented_topology.current_returned_contact_packet_preserves_boundary_stable_destinations",
+            "reasoning_tree_node_address": "2.6.7.1",
+            "reasoning_tree_parent_key": "composition.family.oriented_topology.scoped_contact_outcome_guides_subordinate_object_relation",
+            "reasoning_tree_parent_address": "2.6.7",
+            "reasoning_tree_version": "composition-target-tree_v-1.0",
+            "reasoning_tree_creator_alert": "observed_packet_boundary_support_only_not_full_topology_goal_or_transfer",
+            "normative_reasoning_extension_key": "continuation.reconciliation.separate_boundary_stability_from_transient_packet_changes"
+          }
+        },
+        {
+          "id": "projection.destination_stability.preserve_transition_union",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "destination_stability.transition_union"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "destination_stability_support_ref": "support.transition_union"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.destination_stability.current_returned_contact_packet",
+          "all_conditions": [
+            {
+              "field": "destination_stability_support_ref",
+              "operator": "equals",
+              "expected": "support.observed_packet_boundary"
+            }
+          ],
+          "reason_ref": "reason.current_returned_contact_packet_separates_durable_support_from_transient_coverage"
+        },
+        {
+          "id": "tier.destination_stability.preserve_transition_union",
+          "all_conditions": [
+            {
+              "field": "destination_stability_support_ref",
+              "operator": "equals",
+              "expected": "support.transition_union"
+            }
+          ],
+          "reason_ref": "reason.current_returned_contact_packet_separates_durable_support_from_transient_coverage"
+        }
+      ]
+    }
+  ]
+}

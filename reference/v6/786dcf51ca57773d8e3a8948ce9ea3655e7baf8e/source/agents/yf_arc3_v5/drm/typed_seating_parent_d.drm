@@ -1,0 +1,22 @@
+{
+  "module_id": "arc3.typed_seating_parent_d",
+  "declarations": [{
+    "id": "policy.acquired_typed_seating_parent_d", "kind": "selection_policy",
+    "evaluation": "declared_lexicographic_order", "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "reason_refs": ["reason.current_acquired_seating_contributes_to_parent", "reason.seating_parent_evidence_missing"],
+    "declared_alternative_refs": ["typed_seating.calculate", "typed_seating.unknown"],
+    "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+    "canonical_equivalence_tie_break_debt_ref": "debt.typed_seating_equivalent_parent_request",
+    "selection_tiers": [
+      {"id": "tier.typed_seating.calculate", "reason_ref": "reason.current_acquired_seating_contributes_to_parent",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "typed_seating.calculate"},
+         {"field": "current_seating_parent_and_acquisition", "operator": "equals", "expected": true}
+       ]},
+      {"id": "tier.typed_seating.unknown", "reason_ref": "reason.seating_parent_evidence_missing",
+       "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "typed_seating.unknown"}]}
+    ]
+  }]
+}

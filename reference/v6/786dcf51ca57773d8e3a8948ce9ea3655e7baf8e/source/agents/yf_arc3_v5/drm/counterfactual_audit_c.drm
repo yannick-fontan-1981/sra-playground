@@ -1,0 +1,182 @@
+{
+  "module_id": "counterfactual_audit_c",
+  "declarations": [
+    {
+      "id": "policy.counterfactual_audit_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "two_caller_supplied_bounded_path_ledgers"
+      ],
+      "applicability": [
+        "explicit_counterfactual_suffix_audit"
+      ],
+      "invariants": [
+        "same_initial_model_scope_for_comparison",
+        "only_re_evaluated_predicates_reported",
+        "no_action_or_universal_safety_claim"
+      ],
+      "falsifiers": [
+        "foreign_parent_or_bounds",
+        "partial_or_contradictory_path",
+        "unre_evaluated_constraint"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "audit.report_re_evaluated_scope",
+        "audit.retain_noncomparable_scope",
+        "audit.retain_partial_paths"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.counterfactual_audit_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "audit.report_re_evaluated_scope"
+            },
+            {
+              "field": "comparison_scope_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "both_paths_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "both_paths_unbounded",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "both_paths_noncontradictory",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "audit.report_re_evaluated_scope"
+          }
+        },
+        {
+          "id": "projection.counterfactual_audit_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "audit.retain_noncomparable_scope"
+            },
+            {
+              "field": "comparison_scope_equal",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "audit.retain_noncomparable_scope"
+          }
+        },
+        {
+          "id": "projection.counterfactual_audit_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "audit.retain_partial_paths"
+            },
+            {
+              "field": "comparison_scope_equal",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "both_paths_complete",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "both_paths_unbounded",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "both_paths_noncontradictory",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "audit.retain_partial_paths"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.counterfactual_audit_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "audit.report_re_evaluated_scope"
+            }
+          ],
+          "reason_ref": "reason.scoped_supplied_path_comparison_only"
+        },
+        {
+          "id": "tier.counterfactual_audit_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "audit.retain_noncomparable_scope"
+            }
+          ],
+          "reason_ref": "reason.scoped_supplied_path_comparison_only"
+        },
+        {
+          "id": "tier.counterfactual_audit_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "audit.retain_partial_paths"
+            }
+          ],
+          "reason_ref": "reason.scoped_supplied_path_comparison_only"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.audit_disposition_never_universal_safety",
+      "reason_refs": [
+        "reason.scoped_supplied_path_comparison_only"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,311 @@
+{
+  "module_id": "piercing_target_scene",
+  "declarations": [
+    {
+      "id": "policy.declared_piercing_target_scene",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "source_declared_order_and_stock_identity_with_current_raw_pose"
+      ],
+      "applicability": [
+        "current_source_prepared_stock_refs"
+      ],
+      "invariants": [
+        "morphology_assigns_a_revisable_hypothesis_only",
+        "ambiguous_orientations_are_preserved",
+        "no_bbox_or_frame_boundary_implies_whole_tool_or_world_domain"
+      ],
+      "falsifiers": [
+        "observed_command_breaks_the_declared_root_and_axis_geometry"
+      ],
+      "configuration": {
+        "measurement_contract": {
+          "model_predicate": "piercing_target_scene_hypothesis"
+        }
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.piercing_targets.current_scene",
+          "all_conditions": [],
+          "reason_ref": "reason.source_declared_stock_and_reference_order_bind_observed_symbols"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "target_stock_reference_count",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.source_stock_coverage",
+          "reason_ref": "reason.source_declared_stock_and_reference_order_bind_observed_symbols"
+        }
+      ],
+      "reason_refs": [
+        "reason.source_declared_stock_and_reference_order_bind_observed_symbols"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.piercing_target_scene_hypothesis"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.piercing_targets.unknown",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": true,
+            "target_scene_class_ref": "scene.stock_identity_or_pose_unknown",
+            "target_scene_needs_commit": false,
+            "target_scene_requires_revalidation": true,
+            "whole_influence_prediction_complete": false,
+            "target_source_facts": [],
+            "requested_type_order": [],
+            "possible_support_pairs": []
+          },
+          "bound_facts": {
+            "retained_parent_goal_ref": "qualified_parent_goal_ref"
+          }
+        },
+        {
+          "id": "projection.piercing_targets.qualified",
+          "all_conditions": [
+            {
+              "field": "target_prepared_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "target_scope_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "target_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "target_stock_reference_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "target_order_value_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "target_unmatched_stock_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "target_missing_pose_or_value_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "target_duplicate_reference_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "source_support_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_support_aggregate_origin_matches",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "target_scene_class_ref": "scene.source_declared_current_stock_and_reference_order",
+            "target_scene_needs_commit": true,
+            "target_scene_requires_revalidation": false
+          },
+          "bound_facts": {
+            "target_source_facts": "raw_target_source_facts",
+            "requested_type_order": "raw_requested_type_order",
+            "possible_support_pairs": "raw_possible_support_pairs",
+            "source_target_origin_refs": "source_target_origin_refs",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "target_scene_revision_ref": "target_scene_revision_ref",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "requested_root_ref": "source_requested_root_ref"
+          }
+        },
+        {
+          "id": "projection.piercing_targets.support_unknown",
+          "all_conditions": [
+            {
+              "field": "target_prepared_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "target_scope_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "target_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "target_stock_reference_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "target_order_value_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "target_unmatched_stock_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "target_missing_pose_or_value_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "target_duplicate_reference_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "source_support_model_absent",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "target_scene_class_ref": "scene.source_declared_current_stock_and_reference_order",
+            "target_scene_needs_commit": true,
+            "target_scene_requires_revalidation": false,
+            "support_state_truth": "unknown"
+          },
+          "bound_facts": {
+            "target_source_facts": "raw_unknown_target_source_facts",
+            "requested_type_order": "raw_requested_type_order",
+            "possible_support_pairs": "raw_unknown_possible_support_pairs",
+            "source_target_origin_refs": "source_target_origin_refs",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "target_scene_revision_ref": "target_scene_revision_ref",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "requested_root_ref": "source_requested_root_ref"
+          }
+        },
+        {
+          "id": "projection.piercing_targets.already_present",
+          "all_conditions": [
+            {
+              "field": "target_scene_revision_already_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "target_scene_needs_commit": false
+          },
+          "bound_facts": {}
+        }
+      ]
+    },
+    {
+      "id": "rule.piercing_target_scene_hypothesis",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "source_declared_order_and_stock_identity_with_current_raw_pose"
+      ],
+      "applicability": [
+        "current_source_prepared_stock_refs"
+      ],
+      "invariants": [
+        "morphology_assigns_a_revisable_hypothesis_only",
+        "ambiguous_orientations_are_preserved",
+        "no_bbox_or_frame_boundary_implies_whole_tool_or_world_domain"
+      ],
+      "falsifiers": [
+        "observed_command_breaks_the_declared_root_and_axis_geometry"
+      ],
+      "reason_refs": [
+        "reason.source_declared_stock_and_reference_order_bind_observed_symbols"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{target_scene_revision_ref}",
+          "kind": "schema",
+          "label": "revisable Source-qualified stock scene",
+          "required_fields": [
+            "target_scene_revision_ref"
+          ],
+          "static_attributes": {
+            "role_supposition": "source_declared_stock_scene",
+            "commitment": "revisable"
+          },
+          "attribute_bindings": {}
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{target_scene_revision_ref}",
+          "predicate": "piercing_target_scene_hypothesis",
+          "family": "control",
+          "argument_patterns": [
+            "{target_scene_revision_ref}"
+          ],
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "target_scene_revision_ref",
+            "target_source_facts"
+          ],
+          "static_attributes": {
+            "whole_influence_prediction_complete": false
+          },
+          "attribute_bindings": {
+            "target_source_facts": "target_source_facts",
+            "requested_type_order": "requested_type_order",
+            "possible_support_pairs": "possible_support_pairs",
+            "source_target_origin_refs": "source_target_origin_refs",
+            "target_scene_revision_ref": "target_scene_revision_ref",
+            "current_frame_ref": "current_frame_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "requested_root_ref": "requested_root_ref"
+          }
+        }
+      ]
+    }
+  ]
+}

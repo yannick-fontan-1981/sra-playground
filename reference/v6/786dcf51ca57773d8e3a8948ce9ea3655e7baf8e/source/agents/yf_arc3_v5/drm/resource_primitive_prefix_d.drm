@@ -1,0 +1,26 @@
+{
+ "module_id":"resource_primitive_prefix_d",
+ "declarations":[
+  {"id":"policy.resource_prefix_input_d","kind":"selection_policy","evaluation":"declared_lexicographic_order",
+   "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1","output_contract":"yf_arc3_v5.authority_output.selection.v1",
+   "reason_refs":["reason.actual_resource_relation_requires_discriminating_evidence"],
+   "declared_alternative_refs":["resource_prefix.not_requested","resource_prefix.direct","resource_prefix.macro","resource_prefix.blocked"],
+   "selection_tie_breakers":[{"field":"alternative_ref","preferred_order":"minimize"}],
+   "canonical_equivalence_tie_break_debt_ref":"debt.resource_prefix_input_equivalent",
+   "selection_tiers":[
+    {"id":"tier.resource_prefix.not_requested","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_prefix.not_requested"},{"field":"prefix_requested","operator":"equals","expected":false}]},
+    {"id":"tier.resource_prefix.direct","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_prefix.direct"},{"field":"prefix_requested","operator":"equals","expected":true},{"field":"prefix_binding_current","operator":"equals","expected":true},{"field":"macro_requested","operator":"equals","expected":false} ,{"field":"unnecessary_requested_rotation_count","operator":"equals","expected":0}]},
+    {"id":"tier.resource_prefix.macro","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_prefix.macro"},{"field":"prefix_requested","operator":"equals","expected":true},{"field":"prefix_binding_current","operator":"equals","expected":true},{"field":"macro_requested","operator":"equals","expected":true} ,{"field":"unnecessary_requested_rotation_count","operator":"equals","expected":0}]},
+    {"id":"tier.resource_prefix.blocked","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_prefix.blocked"}]}]},
+  {"id":"policy.resource_prefix_return_d","kind":"selection_policy","evaluation":"declared_lexicographic_order",
+   "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1","output_contract":"yf_arc3_v5.authority_output.selection.v1",
+   "reason_refs":["reason.actual_resource_relation_requires_discriminating_evidence"],
+   "declared_alternative_refs":["resource_prefix.compiled_direct","resource_prefix.compiled_macro","resource_prefix.unqualified"],
+   "selection_tie_breakers":[{"field":"alternative_ref","preferred_order":"minimize"}],
+   "canonical_equivalence_tie_break_debt_ref":"debt.resource_prefix_return_equivalent",
+   "selection_tiers":[
+    {"id":"tier.resource_prefix.compiled_direct","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_prefix.compiled_direct"},{"field":"prefix_projection_complete","operator":"equals","expected":true},{"field":"macro_requested","operator":"equals","expected":false}]},
+    {"id":"tier.resource_prefix.compiled_macro","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_prefix.compiled_macro"},{"field":"prefix_projection_complete","operator":"equals","expected":true},{"field":"macro_requested","operator":"equals","expected":true},{"field":"macro_source_disposition_ref","operator":"equals","expected":"macro_expansion.qualified"}]},
+    {"id":"tier.resource_prefix.unqualified","reason_ref":"reason.actual_resource_relation_requires_discriminating_evidence","all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"resource_prefix.unqualified"}]}]}
+ ]
+}

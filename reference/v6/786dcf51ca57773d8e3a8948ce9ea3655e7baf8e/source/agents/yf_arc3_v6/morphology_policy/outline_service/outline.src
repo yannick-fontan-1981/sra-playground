@@ -1,0 +1,18 @@
+MODULE v6.outline_service
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        measured: Any
+        decision: Any
+    STEP measure
+        CALL outline.measure(request=request) -> measured
+        NEXT interpret
+    STEP interpret
+        CALL outline.interpret(measured=measured) -> decision
+        STOP decision
+
+WORKFLOW bind_control(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP interpret
+        CALL outline.control(measured=request) -> decision
+        STOP decision

@@ -1,0 +1,100 @@
+{
+  "module_id": "v6_topological_recolor",
+  "declarations": [
+    {
+      "id": "schema.topological_recolor",
+      "kind": "schema",
+      "premises": [
+        "current_disjoint_palette_legend_field",
+        "bounded_v5_pocket_measurement"
+      ],
+      "applicability": [
+        "current_point_input"
+      ],
+      "invariants": [
+        "no_oracle",
+        "no_hidden_partition",
+        "no_unobserved_write_law"
+      ],
+      "falsifiers": [
+        "selection_does_not_follow_point",
+        "write_scope_differs",
+        "legend_relation_not_accepted",
+        "outside_declared_region_changes"
+      ],
+      "reason_refs": [
+        "0.1.1-5,19"
+      ],
+      "configuration": {
+        "point_action": "ACTION6",
+        "goal": "G_official_completion",
+        "priority": [
+          "paint_region",
+          "select_pigment"
+        ],
+        "conditions": {
+          "select_pigment": [
+            {
+              "field": "target_differs",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "selection_needed",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "paint_region": [
+            {
+              "field": "target_differs",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "selection_needed",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "selection_method_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        "meaning": {
+          "select_pigment": "test_palette_selection_for_current_legend_correspondence",
+          "paint_region": "test_current_legend_topology_correspondence_on_one_region"
+        },
+        "hypotheses": [
+          "legend_sample_pocket_count_indexes_pigment",
+          "point_input_selects_well",
+          "point_input_recolors_current_region"
+        ],
+        "falsifiers": [
+          "selection_does_not_follow_point",
+          "write_scope_differs",
+          "legend_relation_not_accepted",
+          "outside_declared_region_changes"
+        ],
+        "correspondences": {
+          "shell": {
+            "conditions": [],
+            "hypothesis": "visible_closed_pocket_count_indexes_current_shell_sample; hidden_extra_pockets_remain_unknown"
+          },
+          "surround": {
+            "conditions": [
+              {
+                "field": "shells_currently_match",
+                "operator": "equals",
+                "expected": true
+              }
+            ],
+            "hypothesis": "after_shell_correspondence_test_current_legend_surround_pigment_on_field_surround"
+          }
+        }
+      }
+    }
+  ]
+}

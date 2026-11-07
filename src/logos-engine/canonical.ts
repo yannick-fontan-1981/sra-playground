@@ -14,6 +14,9 @@ import type { JsonObject, JsonValue } from './ir.ts';
 export const PORTABLE_SCALAR_DOMAIN = 'strings, booleans and safe integers (no negative zero); structural null';
 
 const immutableObjects = new WeakSet<object>();
+// Only deeply immutable, fully validated trees enter this cache. Size and
+// height are retained so reuse cannot evade the original structural limits.
+const canonicalObjects = new WeakMap<object, { text: string; nodes: number; height: number }>();
 const MAX_DEPTH = 128;
 const MAX_NODES = 1_000_000;
 
@@ -34,6 +37,8 @@ function jsonDescriptors(item: object): readonly (readonly [string, PropertyDesc
 }
 
 export function compareUnicode(left: string, right: string): number {
+  if (left === right) return 0;
+  if (!/[\ud800-\udbff]/.test(left) && !/[\ud800-\udbff]/.test(right)) return left < right ? -1 : 1;
   const a = Array.from(left, character => character.codePointAt(0)!);
   const b = Array.from(right, character => character.codePointAt(0)!);
   for (let index = 0; index < Math.min(a.length, b.length); index += 1) {
@@ -138,25 +143,42 @@ export function immutableJson(value: unknown): JsonValue {
 export function canonical(value: unknown): string {
   const ancestors = new WeakSet<object>();
   let nodes = 0;
+  let lastHeight = 0, lastImmutable = true;
   function encode(item: unknown, depth: number): string {
     if (++nodes > MAX_NODES || depth > MAX_DEPTH) throw new TypeError('JSON size/nesting limit exceeded');
+    lastHeight = 0; lastImmutable = true;
     if (item === null) return 'null';
     if (typeof item === 'boolean') return item ? 'true' : 'false';
     if (typeof item === 'number') { assertPortableNumber(item); return String(item); }
     if (typeof item === 'string') { assertUnicode(item); return JSON.stringify(item); }
     if (typeof item !== 'object') throw new TypeError('Only explicit JSON values can be canonicalized');
+    const cached = canonicalObjects.get(item);
+    if (cached) {
+      nodes += cached.nodes - 1;
+      if (nodes > MAX_NODES || depth + cached.height > MAX_DEPTH) throw new TypeError('JSON size/nesting limit exceeded');
+      lastHeight = cached.height; return cached.text;
+    }
     if (ancestors.has(item)) throw new TypeError('Cyclic JSON value');
     ancestors.add(item);
+    const initialNodes = nodes;
     const descriptors = jsonDescriptors(item);
+    let height = 0, deeplyImmutable = Object.isFrozen(item);
+    const child = (value: unknown): string => {
+      const text = encode(value, depth + 1);
+      height = Math.max(height, lastHeight + 1); deeplyImmutable &&= lastImmutable;
+      return text;
+    };
     let encoded: string;
     if (Array.isArray(item)) {
-      encoded = `[${descriptors.map(([, descriptor]) => encode(descriptor.value, depth + 1)).join(',')}]`;
+      encoded = `[${descriptors.map(([, descriptor]) => child(descriptor.value)).join(',')}]`;
     } else {
       encoded = `{${[...descriptors].sort(([a], [b]) => compareUnicode(a, b)).map(([key, descriptor]) => {
-        return `${JSON.stringify(key)}:${encode(descriptor.value, depth + 1)}`;
+        return `${JSON.stringify(key)}:${child(descriptor.value)}`;
       }).join(',')}}`;
     }
     ancestors.delete(item);
+    lastHeight = height; lastImmutable = deeplyImmutable;
+    if (deeplyImmutable) canonicalObjects.set(item, { text: encoded, nodes: nodes - initialNodes + 1, height });
     return encoded;
   }
   return encode(value, 0);

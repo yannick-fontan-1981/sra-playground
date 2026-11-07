@@ -1,0 +1,268 @@
+{
+  "module_id": "gravity_acquisition_a",
+  "declarations": [
+    {
+      "id": "policy.gravity_acquisition_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.gravity_acquisition_from_actual_observations",
+        "reason.gravity_observed_acquisition_unknown"
+      ],
+      "declared_alternative_refs": [
+        "gravity_acquisition_a.current",
+        "gravity_acquisition_a.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.gravity_acquisition_equivalent_observed_support",
+      "selection_tiers": [
+        {
+          "id": "tier.gravity_acq.mask",
+          "reason_ref": "reason.gravity_acquisition_from_actual_observations",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "gravity_acquisition_a.current"
+            },
+            {
+              "field": "acquisition_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "owner_bindings_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.gravity_acq.unknown",
+          "reason_ref": "reason.gravity_observed_acquisition_unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "gravity_acquisition_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "gravity_acquisition_a.current": "rule.gravity_acquired_geometry_and_state_a"
+      },
+      "configuration": {}
+    },
+    {
+      "id": "rule.gravity_acquired_geometry_and_state_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.gravity_acquisition_from_actual_observations"
+      ],
+      "invariants": [
+        "repository_frame_is_authority",
+        "observed_flag_is_not_evidence",
+        "unknown_and_hypotheses_preserved",
+        "no_action_authority"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{geometry_term_ref}",
+          "kind": "value",
+          "label": "Acquired gravity geometry",
+          "required_fields": [
+            "geometry_term_ref",
+            "geometry",
+            "geometry_digest",
+            "request_ref",
+            "caller_ref",
+            "parent_goal_ref",
+            "question_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "source_identity_ref"
+          ],
+          "static_attributes": {
+            "projection_contract_ref": "gravity.acquired_geometry_a.v1"
+          },
+          "attribute_bindings": {
+            "geometry": "geometry",
+            "geometry_digest": "geometry_digest",
+            "request_ref": "request_ref",
+            "caller_ref": "caller_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "question_ref": "question_ref",
+            "next_item_ref": "next_item_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "source_identity_ref": "source_identity_ref"
+          }
+        },
+        {
+          "id_pattern": "{state_term_ref}",
+          "kind": "value",
+          "label": "Acquired gravity state",
+          "required_fields": [
+            "state_term_ref",
+            "state",
+            "state_digest",
+            "request_ref",
+            "caller_ref",
+            "parent_goal_ref",
+            "question_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "source_identity_ref"
+          ],
+          "static_attributes": {
+            "projection_contract_ref": "gravity.acquired_state_a.v1"
+          },
+          "attribute_bindings": {
+            "state": "state",
+            "state_digest": "state_digest",
+            "request_ref": "request_ref",
+            "caller_ref": "caller_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "question_ref": "question_ref",
+            "next_item_ref": "next_item_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "source_identity_ref": "source_identity_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "{geometry_claim_ref}",
+          "predicate": "qualifies_acquired_gravity_geometry_a",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{geometry_term_ref}"
+          ],
+          "required_term_patterns": [
+            "{geometry_term_ref}"
+          ],
+          "required_fields": [
+            "geometry_claim_ref",
+            "geometry_term_ref",
+            "geometry_digest",
+            "request_ref",
+            "caller_ref",
+            "parent_goal_ref",
+            "question_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "source_identity_ref"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref"
+          },
+          "attribute_bindings": {
+            "geometry_digest": "geometry_digest",
+            "request_ref": "request_ref",
+            "caller_ref": "caller_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "question_ref": "question_ref",
+            "next_item_ref": "next_item_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "source_identity_ref": "source_identity_ref"
+          },
+          "static_attributes": {
+            "no_action_authority": true
+          }
+        },
+        {
+          "id_pattern": "{state_claim_ref}",
+          "predicate": "qualifies_acquired_gravity_state_a",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{state_term_ref}"
+          ],
+          "required_term_patterns": [
+            "{state_term_ref}"
+          ],
+          "required_fields": [
+            "state_claim_ref",
+            "state_term_ref",
+            "state_digest",
+            "request_ref",
+            "caller_ref",
+            "parent_goal_ref",
+            "question_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "observation_record_ref",
+            "source_identity_ref"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref"
+          },
+          "attribute_bindings": {
+            "state_digest": "state_digest",
+            "request_ref": "request_ref",
+            "caller_ref": "caller_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "question_ref": "question_ref",
+            "next_item_ref": "next_item_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "observation_record_ref": "observation_record_ref",
+            "source_identity_ref": "source_identity_ref"
+          },
+          "static_attributes": {
+            "no_action_authority": true
+          }
+        }
+      ]
+    }
+  ]
+}

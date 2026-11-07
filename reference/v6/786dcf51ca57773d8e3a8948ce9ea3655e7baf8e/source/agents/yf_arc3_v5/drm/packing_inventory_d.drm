@@ -1,0 +1,58 @@
+{
+  "module_id": "packing_inventory_d",
+  "declarations": [{
+    "id": "policy.d_packing_inventory",
+    "kind": "selection_policy",
+    "evaluation": "declared_lexicographic_order",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "reason_refs": ["reason.d_current_full_piece_masks_and_drawings_are_separate",
+      "reason.d_masked_piece_cells_remain_unresolved_without_notch_fill",
+      "reason.d_current_filled_samples_contradict_the_bound_mask_signature",
+      "reason.d_packing_inventory_scope_or_support_not_qualified"],
+    "selection_required_fact_fields": ["layer_bindings_match", "missing_cell_count",
+      "filled_sample_mismatch_count", "notch_cells_not_added", "held_preview_does_not_increment_occurrence_count"],
+    "declared_alternative_refs": ["d_packing_inventory.current_visible", "d_packing_inventory.current_obscured",
+      "d_packing_inventory.contradictory_samples", "d_packing_inventory.unknown"],
+    "canonical_equivalence_tie_break_debt_ref": "debt.d_packing_inventory_equivalent_scope",
+    "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+    "selection_tiers": [
+      {"id": "tier.d_packing_inventory.visible", "reason_ref": "reason.d_current_full_piece_masks_and_drawings_are_separate",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "d_packing_inventory.current_visible"},
+         {"field": "layer_bindings_match", "operator": "equals", "expected": true},
+         {"field": "notch_cells_not_added", "operator": "equals", "expected": true},
+         {"field": "held_preview_does_not_increment_occurrence_count", "operator": "equals", "expected": true},
+         {"field": "missing_cell_count", "operator": "equals", "expected": 0},
+         {"field": "filled_sample_mismatch_count", "operator": "equals", "expected": 0}]},
+      {"id": "tier.d_packing_inventory.obscured", "reason_ref": "reason.d_masked_piece_cells_remain_unresolved_without_notch_fill",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "d_packing_inventory.current_obscured"},
+         {"field": "layer_bindings_match", "operator": "equals", "expected": true},
+         {"field": "notch_cells_not_added", "operator": "equals", "expected": true},
+         {"field": "held_preview_does_not_increment_occurrence_count", "operator": "equals", "expected": true},
+         {"field": "filled_sample_mismatch_count", "operator": "equals", "expected": 0},
+         {"field": "missing_cell_count", "operator": "greater_than", "expected": 0}]},
+      {"id": "tier.d_packing_inventory.contradictory", "reason_ref": "reason.d_current_filled_samples_contradict_the_bound_mask_signature",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "d_packing_inventory.contradictory_samples"},
+         {"field": "layer_bindings_match", "operator": "equals", "expected": true},
+         {"field": "notch_cells_not_added", "operator": "equals", "expected": true},
+         {"field": "filled_sample_mismatch_count", "operator": "greater_than", "expected": 0}]},
+      {"id": "tier.d_packing_inventory.unknown", "reason_ref": "reason.d_packing_inventory_scope_or_support_not_qualified",
+       "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "d_packing_inventory.unknown"}]}
+    ],
+    "configuration": {
+      "operation_ref": "mechanics.preview_piece_packing.inventory_measure", "mode_ref": "MEASURE",
+      "admitted_native_return_ref": "d_effect_request.descriptive_return",
+      "qualification_status_refs": ["supported", "established"],
+      "frame_field": "packing_inventory_frame_ref", "frame_digest_field": "packing_inventory_frame_digest",
+      "layout_digest_field": "packing_inventory_layout_digest",
+      "piece_identity_field": "piece_identity_ref", "drawing_identity_field": "drawing_refs",
+      "mask_drawing_field": "drawing_ref", "mask_digest_field": "full_mask_digest",
+      "filled_cells_are_not_texture_or_decoration": true, "unknown_is_not_empty": true,
+      "no_transfer_or_model_confirmation": true, "no_action_authority": true
+    }
+  }]
+}

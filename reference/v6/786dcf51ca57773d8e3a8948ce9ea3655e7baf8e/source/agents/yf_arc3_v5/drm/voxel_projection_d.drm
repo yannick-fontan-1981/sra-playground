@@ -1,0 +1,53 @@
+{
+  "module_id": "voxel_projection_d",
+  "declarations": [{
+    "id": "policy.d_voxel_projection",
+    "kind": "selection_policy",
+    "evaluation": "declared_lexicographic_order",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "reason_refs": ["reason.d_projected_axis_and_contour_samples_keep_calibration_metrics_distinct",
+      "reason.d_partial_projected_faces_keep_hidden_support_hypothetical",
+      "reason.d_voxel_projection_scope_or_support_not_qualified"],
+    "selection_required_fact_fields": ["layer_bindings_match", "unknown_pixel_count",
+      "partial_face_count", "unobserved_vertex_count", "unprovided_metric_count", "hidden_contours_not_promoted_to_observation"],
+    "declared_alternative_refs": ["d_voxel_projection.current_visible", "d_voxel_projection.current_obscured", "d_voxel_projection.unknown"],
+    "canonical_equivalence_tie_break_debt_ref": "debt.d_voxel_projection_equivalent_scope",
+    "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+    "selection_tiers": [
+      {"id": "tier.d_voxel_projection.visible", "reason_ref": "reason.d_projected_axis_and_contour_samples_keep_calibration_metrics_distinct",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "d_voxel_projection.current_visible"},
+         {"field": "layer_bindings_match", "operator": "equals", "expected": true},
+         {"field": "hidden_contours_not_promoted_to_observation", "operator": "equals", "expected": true},
+         {"field": "unknown_pixel_count", "operator": "equals", "expected": 0},
+         {"field": "partial_face_count", "operator": "equals", "expected": 0},
+         {"field": "unobserved_vertex_count", "operator": "equals", "expected": 0},
+         {"field": "unprovided_metric_count", "operator": "equals", "expected": 0}]},
+      {"id": "tier.d_voxel_projection.obscured", "reason_ref": "reason.d_partial_projected_faces_keep_hidden_support_hypothetical",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "d_voxel_projection.current_obscured"},
+         {"field": "layer_bindings_match", "operator": "equals", "expected": true},
+         {"field": "hidden_contours_not_promoted_to_observation", "operator": "equals", "expected": true},
+         {"field": "unknown_pixel_count", "operator": "greater_than", "expected": 0}]},
+      {"id": "tier.d_voxel_projection.unprovided", "reason_ref": "reason.d_partial_projected_faces_keep_hidden_support_hypothetical",
+       "all_conditions": [
+         {"field": "alternative_ref", "operator": "equals", "expected": "d_voxel_projection.current_obscured"},
+         {"field": "layer_bindings_match", "operator": "equals", "expected": true},
+         {"field": "hidden_contours_not_promoted_to_observation", "operator": "equals", "expected": true},
+         {"field": "partial_face_count", "operator": "greater_than", "expected": 0}]},
+      {"id": "tier.d_voxel_projection.unknown", "reason_ref": "reason.d_voxel_projection_scope_or_support_not_qualified",
+       "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "d_voxel_projection.unknown"}]}
+    ],
+    "configuration": {
+      "operation_ref": "mechanics.visible_voxel_construction.projected_unit_measure", "mode_ref": "MEASURE",
+      "admitted_native_return_ref": "d_effect_request.descriptive_return",
+      "qualification_status_refs": ["supported", "established"],
+      "frame_field": "voxel_projection_frame_ref", "frame_digest_field": "voxel_projection_frame_digest",
+      "layout_digest_field": "voxel_projection_layout_digest",
+      "hidden_contours_are_not_observed_occupancy": true, "unknown_is_not_empty": true,
+      "no_transfer_or_model_confirmation": true, "no_action_authority": true
+    }
+  }]
+}

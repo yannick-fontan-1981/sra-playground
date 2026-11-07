@@ -1,0 +1,160 @@
+{
+  "module_id": "material_means_a",
+  "declarations": [
+    {
+      "id": "policy.material_means_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_existing_whole_finance_preserves_future",
+        "reason.material_needed_production_from_named_quantity_deficit",
+        "reason.material_supported_recycling_benefit",
+        "reason.material_means_missing_current_support"
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.material.existing",
+          "reason_ref": "reason.material_existing_whole_finance_preserves_future",
+          "all_conditions": [
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "finance_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "preservation_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "kind_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "kind",
+              "operator": "equals",
+              "expected": "EXISTING"
+            }
+          ]
+        },
+        {
+          "id": "tier.material.production",
+          "reason_ref": "reason.material_needed_production_from_named_quantity_deficit",
+          "all_conditions": [
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "finance_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "preservation_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "kind_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "kind",
+              "operator": "equals",
+              "expected": "PRODUCTION"
+            },
+            {
+              "field": "named_stock_deficit",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "benefit_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material.recycle",
+          "reason_ref": "reason.material_supported_recycling_benefit",
+          "all_conditions": [
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "finance_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "preservation_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "kind_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "kind",
+              "operator": "equals",
+              "expected": "RECYCLE"
+            },
+            {
+              "field": "binary_unfinanced_proved",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "named_stock_deficit",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "benefit_current",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material.unknown",
+          "reason_ref": "reason.material_means_missing_current_support",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_means_a.unknown"
+            }
+          ]
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_equivalent_financed_means",
+      "configuration": {}
+    }
+  ]
+}

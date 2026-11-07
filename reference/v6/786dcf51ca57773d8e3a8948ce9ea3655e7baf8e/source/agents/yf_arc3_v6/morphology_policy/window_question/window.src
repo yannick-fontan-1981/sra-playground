@@ -1,0 +1,7 @@
+MODULE v6.window_question
+WORKFLOW choose(request: Any) -> Any
+    STATE
+        decision: Any
+    STEP select
+        CALL window.select(request=request) -> decision
+        STOP decision

@@ -1,0 +1,685 @@
+{
+  "module_id": "parent_influence_conservation",
+  "declarations": [
+    {
+      "id": "policy.parent_influence_conservation",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "parent_source_declaration_requires_preserving_ordered_access_dependencies",
+        "rendered_collinear_material_supports_possible_carry_and_independent_or_stopped_alternatives"
+      ],
+      "applicability": [
+        "common_step_release_and_rectilinear_path_before_next_observation"
+      ],
+      "invariants": [
+        "partial_fragment_zero_contact_is_not_whole_influence_proof",
+        "conditional_push_successor_is_not_exhaustive_physical_truth",
+        "rendered_connectivity_does_not_assert_attachment",
+        "constructive_push_is_not_globally_forbidden",
+        "unknown_parent_relevant_domain_requires_revalidation"
+      ],
+      "falsifiers": [
+        "conditional_push_collapses_required_transverse_separation",
+        "unrepresented_load_changes_the_predicted_envelope",
+        "withdrawal_observation_disagrees_with_the_declared_response_partition"
+      ],
+      "declared_alternative_refs": [
+        "influence.parent_candidate"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.parent_influence.default",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": true,
+            "observation_requirements": [],
+            "parent_influence_allows_candidate": true,
+            "parent_influence_requires_revalidation": false,
+            "whole_influence_prediction_complete": false,
+            "influence_prediction_scope_ref": "prediction.conditional_rendered_envelope_rectilinear_path",
+            "parent_influence_class_ref": "influence.not_declared_applicable"
+          }
+        },
+        {
+          "id": "projection.parent_influence.require.subgoal.align_protrusion_axis_with_first_unmatched_member",
+          "all_conditions": [
+            {
+              "field": "candidate_subgoal_ref",
+              "operator": "equals",
+              "expected": "subgoal.align_protrusion_axis_with_first_unmatched_member"
+            }
+          ],
+          "static_facts": {
+            "parent_influence_allows_candidate": false,
+            "parent_influence_requires_revalidation": true,
+            "whole_influence_prediction_complete": false,
+            "parent_influence_class_ref": "influence.unresolved_parent_access",
+            "reason_ref": "reason.incomplete_fragment_cannot_prove_parent_influence_preservation",
+            "influence_condition_ref": "condition.step_and_path_preserve_parent_access_dependencies",
+            "influence_condition_truth": "unknown"
+          }
+        },
+        {
+          "id": "projection.parent_influence.require.subgoal.retract_geometry_without_semantic_undo",
+          "all_conditions": [
+            {
+              "field": "candidate_subgoal_ref",
+              "operator": "equals",
+              "expected": "subgoal.retract_geometry_without_semantic_undo"
+            }
+          ],
+          "static_facts": {
+            "parent_influence_allows_candidate": false,
+            "parent_influence_requires_revalidation": true,
+            "whole_influence_prediction_complete": false,
+            "parent_influence_class_ref": "influence.unresolved_parent_access",
+            "reason_ref": "reason.incomplete_fragment_cannot_prove_parent_influence_preservation",
+            "influence_condition_ref": "condition.step_and_path_preserve_parent_access_dependencies",
+            "influence_condition_truth": "unknown"
+          }
+        },
+        {
+          "id": "projection.parent_influence.require.subgoal.measure_selective_contact_response",
+          "all_conditions": [
+            {
+              "field": "candidate_subgoal_ref",
+              "operator": "equals",
+              "expected": "subgoal.measure_selective_contact_response"
+            }
+          ],
+          "static_facts": {
+            "parent_influence_allows_candidate": false,
+            "parent_influence_requires_revalidation": true,
+            "whole_influence_prediction_complete": false,
+            "parent_influence_class_ref": "influence.unresolved_parent_access",
+            "reason_ref": "reason.incomplete_fragment_cannot_prove_parent_influence_preservation",
+            "influence_condition_ref": "condition.step_and_path_preserve_parent_access_dependencies",
+            "influence_condition_truth": "unknown"
+          }
+        },
+        {
+          "id": "projection.parent_influence.require_parent",
+          "all_conditions": [
+            {
+              "field": "parent_guiding_principle_ref",
+              "operator": "equals",
+              "expected": "principle.cross_axis_compact_correspondence_opens_ordered_reference_supposition"
+            },
+            {
+              "field": "qualified_parent_class_ref",
+              "operator": "not_equals",
+              "expected": "continuity.explicit_closure_handoff"
+            },
+            {
+              "field": "qualified_parent_class_ref",
+              "operator": "not_equals",
+              "expected": "continuity.legacy_without_parent"
+            }
+          ],
+          "static_facts": {
+            "parent_influence_allows_candidate": false,
+            "parent_influence_requires_revalidation": true,
+            "whole_influence_prediction_complete": false,
+            "parent_influence_class_ref": "influence.unresolved_parent_access",
+            "reason_ref": "reason.incomplete_fragment_cannot_prove_parent_influence_preservation",
+            "influence_condition_ref": "condition.step_and_path_preserve_parent_access_dependencies",
+            "influence_condition_truth": "unknown"
+          }
+        },
+        {
+          "id": "projection.parent_influence.disjoint_conditional_domain",
+          "all_conditions": [
+            {
+              "field": "geometry_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "measurement_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "enumeration_truncated",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "raster_position_outside_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "required_region_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "primitive_contact_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "path_contact_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "parent_influence_allows_candidate": true,
+            "parent_influence_requires_revalidation": false,
+            "whole_influence_prediction_complete": false,
+            "influence_prediction_scope_ref": "prediction.conditional_rendered_envelope_rectilinear_path",
+            "parent_influence_class_ref": "influence.rendered_conditional_envelope_disjoint"
+          }
+        },
+        {
+          "id": "projection.parent_influence.withdrawal_discriminates_and_repairs",
+          "all_conditions": [
+            {
+              "field": "geometry_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "measurement_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "enumeration_truncated",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "raster_position_outside_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "required_region_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "candidate_subgoal_ref",
+              "operator": "equals",
+              "expected": "subgoal.retract_geometry_without_semantic_undo"
+            },
+            {
+              "field": "primitive_contact_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "extent_reduction_amount",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "response_partition_count",
+              "operator": "equals",
+              "expected": 2
+            },
+            {
+              "field": "reduced_path_contact_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "parent_influence_allows_candidate": true,
+            "parent_influence_requires_revalidation": false,
+            "whole_influence_prediction_complete": false,
+            "influence_prediction_scope_ref": "prediction.conditional_rendered_envelope_rectilinear_path",
+            "parent_influence_class_ref": "influence.withdrawal_is_bounded_discriminating_experiment",
+            "mechanism_question_ref": "question.withdrawal_preserves_load_and_required_access_relations",
+            "information_outcome_refs": [
+              "outcome.withdrawal.unblocked_carry",
+              "outcome.withdrawal.stopped_piece_support_release"
+            ],
+            "mechanism_effect_observation_required": true
+          }
+        },
+        {
+          "id": "projection.parent_influence.single_withdrawal_before_future_path_clearance",
+          "all_conditions": [
+            {"field": "geometry_present", "operator": "equals", "expected": true},
+            {"field": "measurement_frame_matches", "operator": "equals", "expected": true},
+            {"field": "enumeration_truncated", "operator": "equals", "expected": false},
+            {"field": "raster_position_outside_count", "operator": "equals", "expected": 0},
+            {"field": "required_region_count", "operator": "greater_than", "expected": 0},
+            {"field": "qualified_parent_scope_matches", "operator": "equals", "expected": true},
+            {"field": "loaded_model_inventory_complete", "operator": "equals", "expected": true},
+            {"field": "candidate_subgoal_ref", "operator": "equals", "expected": "subgoal.retract_geometry_without_semantic_undo"},
+            {"field": "candidate_remaining_action_bound", "operator": "equals", "expected": 1},
+            {"field": "candidate_reconciliation_checkpoint_ref", "operator": "is_present"},
+            {"field": "primitive_contact_count", "operator": "equals", "expected": 0},
+            {"field": "primitive_collapsed_projection_count", "operator": "equals", "expected": 0},
+            {"field": "extent_reduction_amount", "operator": "greater_than", "expected": 0},
+            {"field": "response_partition_count", "operator": "equals", "expected": 2},
+            {"field": "reduced_path_contact_count", "operator": "greater_than", "expected": 0}
+          ],
+          "static_facts": {
+            "parent_influence_allows_candidate": true,
+            "parent_influence_requires_revalidation": false,
+            "whole_influence_prediction_complete": false,
+            "influence_prediction_scope_ref": "prediction.conditional_rendered_envelope_single_primitive",
+            "parent_influence_class_ref": "influence.withdrawal_is_bounded_discriminating_experiment",
+            "reason_ref": "reason.safe_withdrawal_step_precedes_future_path_clearance",
+            "mechanism_question_ref": "question.withdrawal_preserves_load_and_required_access_relations",
+            "information_outcome_refs": ["outcome.withdrawal.unblocked_carry", "outcome.withdrawal.stopped_piece_support_release"],
+            "mechanism_effect_observation_required": true
+          }
+        },
+        {
+          "id": "projection.parent_influence.single_contact_free_span_preparation",
+          "all_conditions": [
+            {"field": "geometry_present", "operator": "equals", "expected": true},
+            {"field": "measurement_frame_matches", "operator": "equals", "expected": true},
+            {"field": "enumeration_truncated", "operator": "equals", "expected": false},
+            {"field": "raster_position_outside_count", "operator": "equals", "expected": 0},
+            {"field": "required_region_count", "operator": "greater_than", "expected": 0},
+            {"field": "qualified_parent_scope_matches", "operator": "equals", "expected": true},
+            {"field": "loaded_model_inventory_complete", "operator": "equals", "expected": true},
+            {"field": "candidate_subgoal_ref", "operator": "equals", "expected": "subgoal.cover_interpositions_without_wanted_contact"},
+            {"field": "candidate_remaining_action_bound", "operator": "equals", "expected": 1},
+            {"field": "candidate_reconciliation_checkpoint_ref", "operator": "is_present"},
+            {"field": "primitive_axial_delta", "operator": "greater_than", "expected": 0},
+            {"field": "primitive_transverse_delta", "operator": "equals", "expected": 0},
+            {"field": "primitive_contact_count", "operator": "equals", "expected": 0},
+            {"field": "primitive_collapsed_projection_count", "operator": "equals", "expected": 0},
+            {"field": "path_contact_count", "operator": "greater_than", "expected": 0}
+          ],
+          "static_facts": {
+            "parent_influence_allows_candidate": true,
+            "parent_influence_requires_revalidation": false,
+            "whole_influence_prediction_complete": false,
+            "influence_prediction_scope_ref": "prediction.conditional_rendered_envelope_single_primitive",
+            "parent_influence_class_ref": "influence.contact_free_span_preparation_preserves_current_dependencies",
+            "reason_ref": "reason.contact_free_support_preparation_precedes_future_contact_qualification",
+            "mechanism_effect_observation_required": true
+          }
+        },
+        {
+          "id": "projection.parent_influence.constructive_contact_preserves_separation",
+          "all_conditions": [
+            {
+              "field": "geometry_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "measurement_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "enumeration_truncated",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "raster_position_outside_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "required_region_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "candidate_subgoal_ref",
+              "operator": "equals",
+              "expected": "subgoal.measure_selective_contact_response"
+            },
+            {
+              "field": "primitive_collapsed_projection_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "path_collapsed_projection_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "parent_influence_allows_candidate": true,
+            "parent_influence_requires_revalidation": false,
+            "whole_influence_prediction_complete": false,
+            "influence_prediction_scope_ref": "prediction.conditional_rendered_envelope_rectilinear_path",
+            "parent_influence_class_ref": "influence.constructive_contact_preserves_declared_separation",
+            "mechanism_effect_observation_required": true
+          }
+        },
+        {
+          "id": "projection.parent_influence.declared_axial_entry",
+          "all_conditions": [
+            {
+              "field": "geometry_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "measurement_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "enumeration_truncated",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "raster_position_outside_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "required_region_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "candidate_subgoal_ref",
+              "operator": "equals",
+              "expected": "subgoal.reach_first_compact_near_face_crossing"
+            },
+            {
+              "field": "primitive_transverse_delta",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "primitive_axial_delta",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "primitive_collapsed_projection_count",
+              "operator": "equals",
+              "expected": 0
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "parent_influence_allows_candidate": true,
+            "parent_influence_requires_revalidation": false,
+            "whole_influence_prediction_complete": false,
+            "influence_prediction_scope_ref": "prediction.conditional_rendered_envelope_rectilinear_path",
+            "parent_influence_class_ref": "influence.axial_entry_is_declared_contact_experiment",
+            "mechanism_effect_observation_required": true
+          }
+        },
+        {
+          "id": "projection.parent_influence.missing_inventory.0",
+          "all_conditions": [
+            {
+              "field": "candidate_subgoal_ref",
+              "operator": "equals",
+              "expected": "subgoal.align_protrusion_axis_with_first_unmatched_member"
+            },
+            {
+              "field": "loaded_model_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "loaded_model_inventory_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "parent_influence_allows_candidate": false,
+            "parent_influence_requires_revalidation": true,
+            "whole_influence_prediction_complete": false,
+            "parent_influence_class_ref": "influence.retained_member_footprint_unresolved",
+            "reason_ref": "reason.missing_load_membership_cannot_prove_parent_influence",
+            "influence_question_kind_ref": "mechanism_discrimination",
+            "influence_question_allows_act": false,
+            "influence_condition_ref": "condition.step_and_path_preserve_parent_access_dependencies",
+            "influence_condition_truth": "unknown"
+          }
+        },
+        {
+          "id": "projection.parent_influence.missing_inventory.1",
+          "all_conditions": [
+            {
+              "field": "candidate_subgoal_ref",
+              "operator": "equals",
+              "expected": "subgoal.retract_geometry_without_semantic_undo"
+            },
+            {
+              "field": "loaded_model_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "loaded_model_inventory_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "parent_influence_allows_candidate": false,
+            "parent_influence_requires_revalidation": true,
+            "whole_influence_prediction_complete": false,
+            "parent_influence_class_ref": "influence.retained_member_footprint_unresolved",
+            "reason_ref": "reason.missing_load_membership_cannot_prove_parent_influence",
+            "influence_question_kind_ref": "mechanism_discrimination",
+            "influence_question_allows_act": false,
+            "influence_condition_ref": "condition.step_and_path_preserve_parent_access_dependencies",
+            "influence_condition_truth": "unknown"
+          }
+        },
+        {
+          "id": "projection.parent_influence.missing_inventory.2",
+          "all_conditions": [
+            {
+              "field": "candidate_subgoal_ref",
+              "operator": "equals",
+              "expected": "subgoal.measure_selective_contact_response"
+            },
+            {
+              "field": "loaded_model_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "loaded_model_inventory_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "parent_influence_allows_candidate": false,
+            "parent_influence_requires_revalidation": true,
+            "whole_influence_prediction_complete": false,
+            "parent_influence_class_ref": "influence.retained_member_footprint_unresolved",
+            "reason_ref": "reason.missing_load_membership_cannot_prove_parent_influence",
+            "influence_question_kind_ref": "mechanism_discrimination",
+            "influence_question_allows_act": false,
+            "influence_condition_ref": "condition.step_and_path_preserve_parent_access_dependencies",
+            "influence_condition_truth": "unknown"
+          }
+        },
+        {
+          "id": "projection.parent_influence.missing_inventory.3",
+          "all_conditions": [
+            {
+              "field": "parent_guiding_principle_ref",
+              "operator": "equals",
+              "expected": "principle.cross_axis_compact_correspondence_opens_ordered_reference_supposition"
+            },
+            {
+              "field": "qualified_parent_class_ref",
+              "operator": "not_equals",
+              "expected": "continuity.explicit_closure_handoff"
+            },
+            {
+              "field": "qualified_parent_class_ref",
+              "operator": "not_equals",
+              "expected": "continuity.legacy_without_parent"
+            },
+            {
+              "field": "loaded_model_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "loaded_model_inventory_complete",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "parent_influence_allows_candidate": false,
+            "parent_influence_requires_revalidation": true,
+            "whole_influence_prediction_complete": false,
+            "parent_influence_class_ref": "influence.retained_member_footprint_unresolved",
+            "reason_ref": "reason.missing_load_membership_cannot_prove_parent_influence",
+            "influence_question_kind_ref": "mechanism_discrimination",
+            "influence_question_allows_act": false,
+            "influence_condition_ref": "condition.step_and_path_preserve_parent_access_dependencies",
+            "influence_condition_truth": "unknown"
+          }
+        },
+        {
+          "id": "projection.parent_influence.source_complete_conditional_plan",
+          "all_conditions": [
+            {
+              "field": "source_plan_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_plan_claim_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "source_plan_claim_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "source_plan_claim_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "source_plan_claim_defeated_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "source_plan_admissible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_plan_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_plan_scope_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_plan_parent_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "source_plan_next_effect_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "loaded_model_inventory_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "parent_influence_allows_candidate": true,
+            "parent_influence_requires_revalidation": false,
+            "whole_influence_prediction_complete": false,
+            "parent_influence_class_ref": "influence.source_conditional_path_preserves_parent",
+            "reason_ref": "reason.source_complete_conditional_path_retains_parent_and_inventory",
+            "influence_condition_ref": "condition.executed_step_matches_current_source_conditional_plan",
+            "influence_condition_truth": "conditional",
+            "influence_question_allows_act": false
+          }
+        },
+        {
+          "id": "projection.parent_influence.request_contact_support_observation",
+          "all_conditions": [
+            {"field": "influence_condition_ref", "operator": "is_present"},
+            {"field": "parent_influence_requires_revalidation", "operator": "equals", "expected": true},
+            {"field": "measurement_frame_matches", "operator": "equals", "expected": true},
+            {"field": "enumeration_truncated", "operator": "equals", "expected": false},
+            {"field": "candidate_subgoal_ref", "operator": "is_present"},
+            {"field": "candidate_principle_ref", "operator": "equals", "expected": "principle.oriented_protrusion_boundary_crossing_is_discriminating"},
+            {"field": "primitive_contact_count", "operator": "greater_than", "expected": 0},
+            {"field": "unbound_contact_region_count", "operator": "equals", "expected": 0},
+            {"field": "ambiguous_contact_region_count", "operator": "equals", "expected": 0}
+          ],
+          "templated_facts": {
+            "observation_requirements": [{
+              "requirement_ref": "requirement.contact_support_for.{candidate_subgoal_ref}",
+              "parent_invariant_ref": "{influence_condition_ref}",
+              "observation_condition_ref": "condition.contact.retains_required_support",
+              "target_quantifier": "each",
+              "dependency_goal_ref": "{candidate_subgoal_ref}",
+              "candidate_target_refs": {"$fact": "primitive_contact_target_refs"}
+            }]
+          }
+        },
+        {
+          "id": "projection.parent_influence.request_withdrawal_support_observation",
+          "all_conditions": [
+            {"field": "influence_condition_ref", "operator": "is_present"},
+            {"field": "parent_influence_requires_revalidation", "operator": "equals", "expected": true},
+            {"field": "measurement_frame_matches", "operator": "equals", "expected": true},
+            {"field": "enumeration_truncated", "operator": "equals", "expected": false},
+            {"field": "loaded_model_present", "operator": "equals", "expected": true},
+            {"field": "candidate_subgoal_ref", "operator": "is_present"},
+            {"field": "candidate_principle_ref", "operator": "equals", "expected": "principle.geometric_retraction_does_not_undo_observed_dependency"}
+          ],
+          "templated_facts": {
+            "observation_requirements": [{
+              "requirement_ref": "requirement.withdrawal_support_for.{candidate_subgoal_ref}",
+              "parent_invariant_ref": "{influence_condition_ref}",
+              "observation_condition_ref": "condition.withdrawal.preserves_required_support",
+              "target_quantifier": "each",
+              "dependency_goal_ref": "{candidate_subgoal_ref}",
+              "candidate_target_refs": {"$fact": "loaded_model_member_candidate_refs"}
+            }]
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.incomplete_fragment_cannot_prove_parent_influence_preservation"
+      ]
+    }
+  ]
+}

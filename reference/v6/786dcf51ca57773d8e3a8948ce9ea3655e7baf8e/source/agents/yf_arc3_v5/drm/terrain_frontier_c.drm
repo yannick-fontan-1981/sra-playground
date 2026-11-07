@@ -1,0 +1,298 @@
+{
+  "module_id": "terrain_frontier_c",
+  "declarations": [
+    {
+      "id": "policy.terrain_scope_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "source_bound_full_terrain_edit_packet"
+      ],
+      "applicability": [
+        "terrain_edit_post_settlement_frontier"
+      ],
+      "invariants": [
+        "post_edit_route_starts_at_complete_successor",
+        "same_parent_goal_model_and_preservation",
+        "no_physics_duplication_or_commit"
+      ],
+      "falsifiers": [
+        "wrong_pre_snapshot",
+        "missing_forced_phase",
+        "unsafe_support_hazard_effect",
+        "unknown_route"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "terrain.scope_supported",
+        "terrain.retain_unqualified_scope"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.terrain_scope_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "terrain.scope_supported"
+            },
+            {
+              "field": "current_packet_scope",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "packet_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "post_settlement_route_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_not_already_terminal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "direct_and_settlement_contracts_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "route_preservation_predicates_retained",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "cell_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "route_operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_route_search"
+            },
+            {
+              "field": "route_kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_route_search"
+            },
+            {
+              "field": "route_mode",
+              "operator": "equals",
+              "expected": "ROUTE"
+            },
+            {
+              "field": "route_return_type",
+              "operator": "equals",
+              "expected": "SearchResultC"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "terrain.scope_supported"
+          }
+        },
+        {
+          "id": "projection.policy.terrain_scope_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "terrain.retain_unqualified_scope"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "terrain.retain_unqualified_scope"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.terrain_scope_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "terrain.scope_supported"
+            }
+          ],
+          "reason_ref": "reason.current_edit_and_settled_route_scope"
+        },
+        {
+          "id": "tier.policy.terrain_scope_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "terrain.retain_unqualified_scope"
+            }
+          ],
+          "reason_ref": "reason.current_edit_and_settled_route_scope"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.terrain_disposition_not_surface_role_choice",
+      "reason_refs": [
+        "reason.current_edit_and_settled_route_scope"
+      ]
+    },
+    {
+      "id": "policy.terrain_settlement_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "source_bound_full_terrain_edit_packet"
+      ],
+      "applicability": [
+        "terrain_edit_post_settlement_frontier"
+      ],
+      "invariants": [
+        "direct_edit_and_gravity_contacts_inversions_camera_distinct",
+        "all_remove_recreate_neighbors_read_same_pre_snapshot",
+        "neighbor_creation_not_xor_unless_supported",
+        "support_blocker_hazard_alternatives_retained",
+        "new_open_cell_not_route_proof",
+        "no_action_release"
+      ],
+      "falsifiers": [
+        "wrong_pre_snapshot",
+        "missing_forced_phase",
+        "unsafe_support_hazard_effect",
+        "unknown_route"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "terrain.calculate_post_edit_route",
+        "terrain.retain_unsettled_or_unsafe_edit"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.terrain_settlement_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "terrain.calculate_post_edit_route"
+            },
+            {
+              "field": "full_settlement_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_pre_action_snapshot",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "declared_edits_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "declared_edits_hold",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "preservation_holds",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "terrain.calculate_post_edit_route"
+          }
+        },
+        {
+          "id": "projection.policy.terrain_settlement_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "terrain.retain_unsettled_or_unsafe_edit"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "terrain.retain_unsettled_or_unsafe_edit"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.terrain_settlement_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "terrain.calculate_post_edit_route"
+            }
+          ],
+          "reason_ref": "reason.fully_settled_edit_with_support_hazard_constraints"
+        },
+        {
+          "id": "tier.policy.terrain_settlement_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "terrain.retain_unsettled_or_unsafe_edit"
+            }
+          ],
+          "reason_ref": "reason.fully_settled_edit_with_support_hazard_constraints"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.terrain_disposition_not_surface_role_choice",
+      "reason_refs": [
+        "reason.fully_settled_edit_with_support_hazard_constraints"
+      ]
+    }
+  ]
+}

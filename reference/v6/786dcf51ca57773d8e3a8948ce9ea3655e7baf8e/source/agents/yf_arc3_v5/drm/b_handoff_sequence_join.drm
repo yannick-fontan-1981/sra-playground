@@ -1,0 +1,21 @@
+{
+  "module_id": "b_handoff_sequence_join",
+  "declarations": [{
+    "id": "policy.b_handoff_sequence_join",
+    "kind": "selection_policy",
+    "evaluation": "declared_eligibility_single",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "reason_refs": ["reason_complete_current_paths_join_across_one_deposit_within_original_budget"],
+    "premises": ["source_selected_full_path_returns", "all_retained_models_covered"],
+    "invariants": ["no_second_simulation_or_deposit", "no_physical_seal_inferred", "no_act_authority", "no_bound_renewal_between_phases"],
+    "falsifiers": ["state_scope_or_payload_discontinuity", "incomplete_model_coverage", "total_budget_exceeded"],
+    "declared_alternative_refs": ["handoff_sequence.joined", "handoff_sequence.unresolved"],
+    "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+    "fact_projections": [
+      {"id": "projection.handoff_sequence.joined", "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "handoff_sequence.joined"}, {"field": "sequence_bindings_current", "operator": "equals", "expected": true}], "static_facts": {"eligible": true}},
+      {"id": "projection.handoff_sequence.unresolved", "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "handoff_sequence.unresolved"}, {"field": "sequence_bindings_current", "operator": "equals", "expected": false}], "static_facts": {"eligible": true}}
+    ]
+  }]
+}

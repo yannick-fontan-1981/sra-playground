@@ -1,0 +1,118 @@
+{
+  "module_id": "v6_invited_endpoints",
+  "declarations": [
+    {
+      "id": "schema.invited_endpoints",
+      "kind": "schema",
+      "premises": [
+        "current_unique_grid_actor_frame_and_uniform_invitation_relation"
+      ],
+      "applicability": [
+        "conditional_endpoint_access"
+      ],
+      "invariants": [
+        "invitation_is_not_full_route_certificate",
+        "no_intermediate_walk_collision_claim",
+        "observed_offsets_distinct_from_symmetry_hypothesis",
+        "unknown_refusal_not_global_wall",
+        "old_scope_not_new_permit"
+      ],
+      "falsifiers": [
+        "current_invitation_changed",
+        "actor_or_grid_ambiguous",
+        "unexpected_landing",
+        "scope_changed"
+      ],
+      "reason_refs": [
+        "0.1.1-5,19"
+      ],
+      "configuration": {
+        "goal": "G_official_completion",
+        "point_action": "ACTION6",
+        "offset_hypothesis": "signed_axis_permutations_of_current_invitation_metric",
+        "selection_order": "shortest_found_route_then_current_destination_order",
+        "priority": [
+          "current_method",
+          "recalled_method",
+          "invitation_experiment",
+          "context_question"
+        ],
+        "question": "Reach a currently invited endpoint under the measured relation; when the frame carries a matching interior mark, test visiting all homologous occurrences before that frame. Neither visit credit nor collective necessity is acquired.",
+        "hypotheses": [
+          "current_uniform_invitations_license_endpoint_probe",
+          "signed_axis_permutations_of_measured_invitation_offsets",
+          "floor_background_supports_future_endpoint_hypothesis",
+          "hollow_corresponding_glyph_is_goal_candidate",
+          "frame_interior_matching_glyphs_may_be_joint_prerequisites",
+          "visit_does_not_confirm_credit_until_current_evidence",
+          "composite_marker_may_reconfigure_related_endpoint_admission",
+          "reconfiguration_is_question_not_toggle_or_opening_law",
+          "residual_cost_in_expanded_domain_is_selection_model_not_permission"
+        ],
+        "conditions": [
+          {
+            "field": "grid_unique",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "current_invitation",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "route_found",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "financed",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "context_untried",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "entry_evidence",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "kind_conditions": {
+          "current_method": [
+            {
+              "field": "observed_jump",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "recalled_method": [
+            {
+              "field": "method_revalidated",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "invitation_experiment": [],
+          "context_question": [
+            {
+              "field": "observed_jump",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        "goal_badge_hypothesis": "visit_all_current_homologues_before_framed_candidate",
+        "joint_search_bound": 8192,
+        "blocked_frontier_question": "shared_marker_between_excluded_region_and_accessible_support",
+        "context_order": "current_access_then_hypothetical_parent_residual_unique",
+        "kind_meaning": {
+          "context_question": "The current parent route is unavailable. Reach a currently invited endpoint toward a composite marker linked to accessible and excluded regions, then measure its unknown effect; preserve the parent frame/visit goal."
+        }
+      }
+    }
+  ]
+}

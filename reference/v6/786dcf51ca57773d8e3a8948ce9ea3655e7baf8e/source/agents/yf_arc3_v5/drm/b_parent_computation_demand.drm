@@ -1,0 +1,263 @@
+{
+  "module_id": "b_parent_computation_demand",
+  "declarations": [
+    {
+      "id": "policy.b_parent_computation_demand",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "configuration": {
+        "native_goal_field_maps": {
+          "mechanics.guarded_transport": {
+            "terminal_assignments": "beneficiary_sides",
+            "terminal_carrier_side": "carrier_side",
+            "terminal_carried_refs": "carried_refs"
+          },
+          "mechanics.queued_alignment_cascade": {
+            "quota_interval": "quota_interval",
+            "acceptance_before_spawn": "acceptance_before_spawn"
+          }
+        }
+      },
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason_current_parent_future_declares_the_required_calculation"
+      ],
+      "premises": [
+        "canonical_parent_goal_kind",
+        "source_owned_bounded_current_method_inputs"
+      ],
+      "invariants": [
+        "no_family_discovery_from_python_field_names",
+        "legacy_exact_request_preserved",
+        "no_unknown_goal_kind_fallback",
+        "no_overwrite_of_another_operation_or_mode",
+        "calculation_need_not_confirmed_physics_or_action_authority"
+      ],
+      "falsifiers": [
+        "parent_kind_or_scope_changes",
+        "incompatible_kernel_or_operation",
+        "required_current_inputs_missing"
+      ],
+      "declared_alternative_refs": [
+        "parent_computation.unchanged",
+        "parent_computation.derive",
+        "parent_computation.blocked"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.parent_computation.existing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "parent_computation.unchanged"
+            },
+            {
+              "field": "derive_from_parent_demand",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.parent_computation.delivery",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "parent_computation.derive"
+            },
+            {
+              "field": "derive_from_parent_demand",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_goal_kind_ref",
+              "operator": "equals",
+              "expected": "goal.delivered_named_beneficiaries"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.guarded_transport"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "derived_operation_ref": "mechanics.guarded_transport.handoff_domain",
+            "derived_mode_ref": "INVERSE_DOMAIN",
+            "derived_native_data_bindings": {"requires_generic_search": true, "requires_full_path_simulation": true},
+            "parent_computation_reason_ref": "reason_safe_delivery_requires_handoff_and_next_pickup_domain"
+          }
+        },
+        {
+          "id": "projection.parent_computation.delivery_wrong_kernel",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "parent_computation.blocked"
+            },
+            {
+              "field": "derive_from_parent_demand",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_goal_kind_ref",
+              "operator": "equals",
+              "expected": "goal.delivered_named_beneficiaries"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.guarded_transport"
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.parent_computation.lines",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "parent_computation.derive"
+            },
+            {
+              "field": "derive_from_parent_demand",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_bindings_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_goal_kind_ref",
+              "operator": "equals",
+              "expected": "goal.credited_matching_lines"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.queued_alignment_cascade"
+            }
+          ],
+          "static_facts": {
+            "eligible": true,
+            "derived_operation_ref": "mechanics.queued_alignment_cascade.future_contribution_certificate",
+            "derived_mode_ref": "DOMAIN",
+            "parent_computation_reason_ref": "reason_parent_matching_credit_requires_reception_and_future_contribution_domain",
+            "derived_native_data_bindings": {
+              "requires_generic_search": true,
+              "requires_full_path_simulation": true
+            }
+          }
+        },
+        {
+          "id": "projection.parent_computation.lines_wrong_kernel",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "parent_computation.blocked"
+            },
+            {
+              "field": "derive_from_parent_demand",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_goal_kind_ref",
+              "operator": "equals",
+              "expected": "goal.credited_matching_lines"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.queued_alignment_cascade"
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.parent_computation.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "parent_computation.blocked"
+            },
+            {
+              "field": "derive_from_parent_demand",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_bindings_current",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.parent_computation.unknown",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "parent_computation.blocked"
+            },
+            {
+              "field": "derive_from_parent_demand",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "parent_goal_kind_ref",
+              "operator": "not_equals",
+              "expected": "goal.delivered_named_beneficiaries"
+            },
+            {
+              "field": "parent_goal_kind_ref",
+              "operator": "not_equals",
+              "expected": "goal.credited_matching_lines"
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ]
+    }
+  ]
+}

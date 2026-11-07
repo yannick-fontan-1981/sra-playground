@@ -1,0 +1,40 @@
+{
+  "module_id": "arc3.cargo_join_measurement_b",
+  "declarations": [{
+    "id": "policy.b_cargo_join_measurement_context",
+    "kind": "selection_policy",
+    "evaluation": "declared_eligibility_single",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "reason_refs": ["reason_missing_join_groups_require_exact_current_parent_measurement_demands"],
+    "configuration": {
+      "question_term_pattern": "request.{question_ref}",
+      "question_claim_pattern": "claim.parent_dependency_question.{question_ref}",
+      "question_projection_contract_ref": "projection.parent_dependency_revalidation_question.v1",
+      "question_predicate_ref": "parent_dependency_revalidation_question_is_open",
+      "join_group_binding_field": "source_family_join_group_ref",
+      "parent_why_binding_field": "cargo_parent_why"
+    },
+    "declared_alternative_refs": ["cargo_join_information.current", "cargo_join_information.missing"],
+    "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+    "fact_projections": [
+      {
+        "id": "projection.cargo_join_information.current",
+        "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "cargo_join_information.current"},
+          {"field": "information_context_current", "operator": "equals", "expected": true}
+        ],
+        "static_facts": {"eligible": true, "reason_ref": "reason_missing_join_groups_require_exact_current_parent_measurement_demands", "no_dispatch_or_action_authority": true}
+      },
+      {
+        "id": "projection.cargo_join_information.missing",
+        "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "cargo_join_information.missing"},
+          {"field": "information_context_current", "operator": "equals", "expected": false}
+        ],
+        "static_facts": {"eligible": true, "reason_ref": "reason_current_parent_question_or_exact_group_demand_is_still_missing", "no_dispatch_or_action_authority": true}
+      }
+    ]
+  }]
+}

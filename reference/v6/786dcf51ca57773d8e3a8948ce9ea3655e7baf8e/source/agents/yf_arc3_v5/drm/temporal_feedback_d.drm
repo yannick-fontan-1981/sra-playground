@@ -1,0 +1,280 @@
+{
+  "module_id": "temporal_feedback_d",
+  "declarations": [
+    {
+      "id": "policy.d_temporal_feedback",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.d_one_sealed_attempt_preserves_all_feedback_and_official_authority"
+      ],
+      "declared_alternative_refs": [
+        "d_temporal_feedback.official_completion",
+        "d_temporal_feedback.new_scene",
+        "d_temporal_feedback.contradictory_cues",
+        "d_temporal_feedback.rejected_proposal",
+        "d_temporal_feedback.accepted_region",
+        "d_temporal_feedback.ignored_click",
+        "d_temporal_feedback.unknown"
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.d_temporal_feedback_equivalent_observation_scope",
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.d_feedback.complete",
+          "reason_ref": "reason.d_one_sealed_attempt_preserves_all_feedback_and_official_authority",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_temporal_feedback.official_completion"
+            },
+            {
+              "field": "feedback_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "official_evidence_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "official_completion",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_feedback.changed.0",
+          "reason_ref": "reason.d_one_sealed_attempt_preserves_all_feedback_and_official_authority",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_temporal_feedback.new_scene"
+            },
+            {
+              "field": "feedback_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_scene",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "tier.d_feedback.changed.1",
+          "reason_ref": "reason.d_one_sealed_attempt_preserves_all_feedback_and_official_authority",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_temporal_feedback.new_scene"
+            },
+            {
+              "field": "feedback_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_film",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "tier.d_feedback.changed.2",
+          "reason_ref": "reason.d_one_sealed_attempt_preserves_all_feedback_and_official_authority",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_temporal_feedback.new_scene"
+            },
+            {
+              "field": "feedback_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "same_reference",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "tier.d_feedback.conflict",
+          "reason_ref": "reason.d_one_sealed_attempt_preserves_all_feedback_and_official_authority",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_temporal_feedback.contradictory_cues"
+            },
+            {
+              "field": "feedback_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "rejection_evidence_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "accepted_region_evidence_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_feedback.rejected",
+          "reason_ref": "reason.d_one_sealed_attempt_preserves_all_feedback_and_official_authority",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_temporal_feedback.rejected_proposal"
+            },
+            {
+              "field": "feedback_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "rejection_evidence_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_feedback.accepted",
+          "reason_ref": "reason.d_one_sealed_attempt_preserves_all_feedback_and_official_authority",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_temporal_feedback.accepted_region"
+            },
+            {
+              "field": "feedback_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "accepted_region_evidence_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_feedback.accepted_counter",
+          "reason_ref": "reason.d_one_sealed_attempt_preserves_all_feedback_and_official_authority",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_temporal_feedback.accepted_region"
+            },
+            {
+              "field": "feedback_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "accepted_counter_delta",
+              "operator": "equals",
+              "expected": 1
+            }
+          ]
+        },
+        {
+          "id": "tier.d_feedback.ignored",
+          "reason_ref": "reason.d_one_sealed_attempt_preserves_all_feedback_and_official_authority",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_temporal_feedback.ignored_click"
+            },
+            {
+              "field": "feedback_bindings_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "ignored_click_evidence_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "attempt_counter_delta",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "accepted_counter_delta",
+              "operator": "equals",
+              "expected": 0
+            }
+          ]
+        },
+        {
+          "id": "tier.d_feedback.unknown",
+          "reason_ref": "reason.d_one_sealed_attempt_preserves_all_feedback_and_official_authority",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_temporal_feedback.unknown"
+            }
+          ]
+        }
+      ],
+      "configuration": {
+        "admitted_native_return_ref": "d_effect_request.descriptive_return",
+        "operation_ref": "mechanics.temporal_fragment_match.reconcile_feedback",
+        "mode_ref": "RECONCILE",
+        "qualification_status_refs": ["supported", "established"],
+        "feedback_field_bindings": {
+          "ignored_click_evidence_present": "ignored_click_evidence_present",
+          "rejection_evidence_present": "rejection_evidence_present",
+          "accepted_region_evidence_present": "accepted_region_evidence_present",
+          "new_scene_evidence_present": "new_scene_evidence_present",
+          "completion_evidence_present": "completion_evidence_present",
+          "attempt_counter_delta": "attempt_counter_delta",
+          "accepted_counter_delta": "accepted_counter_delta",
+          "same_scene": "same_scene",
+          "same_film": "same_film",
+          "same_reference": "same_reference",
+          "official_evidence_present": "official_evidence_present",
+          "official_completion": "official_completion"
+        },
+        "final_ready_does_not_erase_prior_rejection": true,
+        "raw_photo_archive_is_immutable": true,
+        "flashes_are_not_independent_attempts": true,
+        "no_action_or_canonical_mutation_authority": true
+      }
+    }
+  ]
+}

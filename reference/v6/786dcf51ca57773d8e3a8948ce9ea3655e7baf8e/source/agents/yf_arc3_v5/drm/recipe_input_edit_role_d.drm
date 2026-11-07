@@ -1,0 +1,53 @@
+{
+  "module_id": "arc3.recipe_input_edit_role_d",
+  "declarations": [
+    {
+      "id": "policy.recipe_input_edit_role_d", "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order", "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason.each_input_slot_has_observed_addressed_edit", "reason.input_edit_evidence_missing"],
+      "declared_alternative_refs": ["input_edit.publish_complete", "input_edit.unknown"],
+      "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+      "canonical_equivalence_tie_break_debt_ref": "debt.input_edit_equivalent_evidence",
+      "selection_tiers": [
+        {"id": "tier.input_edit.complete", "reason_ref": "reason.each_input_slot_has_observed_addressed_edit",
+         "all_conditions": [
+           {"field": "alternative_ref", "operator": "equals", "expected": "input_edit.publish_complete"},
+           {"field": "input_edit_role_complete", "operator": "equals", "expected": true}
+         ]},
+        {"id": "tier.input_edit.unknown", "reason_ref": "reason.input_edit_evidence_missing",
+         "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "input_edit.unknown"}]}
+      ],
+      "meaning_template_ref_by_alternative": {"input_edit.publish_complete": "rule.observed_recipe_binary_input_role_d"},
+      "configuration": {"role_predicate_ref": "qualifies_observed_recipe_binary_input_role"}
+    },
+    {
+      "id": "rule.observed_recipe_binary_input_role_d", "kind": "rule",
+      "evaluation": "project_requested_conclusions", "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic", "reason_refs": ["reason.each_input_slot_has_observed_addressed_edit"],
+      "invariants": ["each_requested_slot_has_own_actual_edit", "one_probe_not_all_peers",
+                     "binary_edit_not_recipe_operator_or_automatic_trigger", "no_action_authority"],
+      "claim_templates": [{
+        "id_pattern": "{input_role_claim_ref}", "predicate": "qualifies_observed_recipe_binary_input_role",
+        "family": "epistemic", "epistemic_status": "supported",
+        "argument_patterns": ["{input_lattice_ref}", "{catalogue_term_ref}"],
+        "required_term_patterns": ["{input_lattice_ref}", "{catalogue_term_ref}"],
+        "required_fields": ["input_role_claim_ref", "input_lattice_ref", "catalogue_term_ref", "slot_cell_bindings", "edit_evidence_digest"],
+        "attribute_bindings": {"slot_cell_bindings": "slot_cell_bindings", "edit_evidence_digest": "edit_evidence_digest"},
+        "static_attributes": {"input_slot_role_supported": true, "binary_edit_only": true,
+                              "recipe_operator_confirmed": false, "automatic_trigger_confirmed": false, "no_action_authority": true},
+        "scope_bindings": {
+          "frame_ref": "frame_ref", "raw_input_ref": "raw_input_ref", "timeline_ref": "timeline_ref",
+          "observation_record_ref": "observation_record_ref", "parent_goal_ref": "parent_goal_ref",
+          "parent_contribution_ref": "parent_contribution_ref", "consumer_ref": "consumer_ref", "caller_ref": "caller_ref",
+          "scope_ref": "scope_ref", "episode_ref": "episode_ref", "level_scope_ref": "level_scope_ref", "epoch": "epoch",
+          "input_revision_ref": "input_revision_ref", "evidence_revision_ref": "evidence_revision_ref",
+          "model_revision_ref": "model_revision_ref", "event_owner_ref": "event_owner_ref"
+        }
+      }]
+    }
+  ]
+}

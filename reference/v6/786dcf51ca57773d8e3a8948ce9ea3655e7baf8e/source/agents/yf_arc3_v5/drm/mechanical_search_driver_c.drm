@@ -1,0 +1,318 @@
+{
+  "module_id": "mechanical_search_driver_c",
+  "declarations": [
+    {
+      "id": "policy.search_driver_signature_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "exact_model_domain_and_current_source_request_are_supplied"
+      ],
+      "applicability": [
+        "bounded_on_demand_route_search"
+      ],
+      "invariants": [
+        "no_family_bfs",
+        "no_false_domain_exhaustion",
+        "preserve_unknown_and_bounds",
+        "no_action_release"
+      ],
+      "falsifiers": [
+        "mismatched_model_or_payload",
+        "missing_closure_or_goal_predicate",
+        "bound_reached"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "search_driver.supported",
+        "search_driver.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.search_driver_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "search_driver.supported"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_route_search"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.bounded_route_search"
+            },
+            {
+              "field": "mode",
+              "operator": "equals",
+              "expected": "ROUTE"
+            },
+            {
+              "field": "expected_return_type",
+              "operator": "equals",
+              "expected": "SearchResultC"
+            },
+            {
+              "field": "primitive_domain_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "primitive_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "provider_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "provider_domain_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "provider_model_binding_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "provider_provenance_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "deterministic_response_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "search_driver.supported"
+          }
+        },
+        {
+          "id": "projection.policy.search_driver_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "search_driver.unsupported"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "search_driver.unsupported"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.search_driver_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "search_driver.supported"
+            }
+          ],
+          "reason_ref": "reason.current_exact_route_domain_and_step_closure"
+        },
+        {
+          "id": "tier.policy.search_driver_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "search_driver.unsupported"
+            }
+          ],
+          "reason_ref": "reason.current_exact_route_domain_and_step_closure"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.search_driver_equivalent_ref_order_has_no_model_authority",
+      "reason_refs": [
+        "reason.current_exact_route_domain_and_step_closure"
+      ]
+    },
+    {
+      "id": "policy.search_driver_closure_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "exact_model_domain_and_current_source_request_are_supplied"
+      ],
+      "applicability": [
+        "bounded_on_demand_route_search"
+      ],
+      "invariants": [
+        "no_family_bfs",
+        "no_false_domain_exhaustion",
+        "preserve_unknown_and_bounds",
+        "no_action_release"
+      ],
+      "falsifiers": [
+        "mismatched_model_or_payload",
+        "missing_closure_or_goal_predicate",
+        "bound_reached"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "search_driver.seal_first_shortest",
+        "search_driver.seal",
+        "search_driver.retain"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.search_driver_closure_c.0",
+          "all_conditions": [
+            {"field":"first_shortest_witness_settled","operator":"equals","expected":false},
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "search_driver.seal"
+            },
+            {
+              "field": "metadata_only_missing",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pending_steps_absent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "computation_unbounded",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "model_consistent",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "deterministic_response_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "search_driver.seal"
+          }
+        },
+        {
+          "id":"projection.search_driver.first_shortest_certificate",
+          "all_conditions":[
+            {"field":"alternative_ref","operator":"equals","expected":"search_driver.seal_first_shortest"},
+            {"field":"first_shortest_witness_settled","operator":"equals","expected":true},
+            {"field":"single_witness_present","operator":"equals","expected":true},
+            {"field":"source_first_shortest_bound","operator":"equals","expected":true},
+            {"field":"uniform_unit_primitive_costs","operator":"equals","expected":true},
+            {"field":"metadata_only_missing","operator":"equals","expected":true},
+            {"field":"pending_steps_absent","operator":"equals","expected":true},
+            {"field":"computation_unbounded","operator":"equals","expected":true},
+            {"field":"model_consistent","operator":"equals","expected":true},
+            {"field":"deterministic_response_bound","operator":"equals","expected":true}],
+          "static_facts":{"applicable":true,"case_ref":"search_driver.seal_first_shortest"}
+        },
+        {
+          "id": "projection.policy.search_driver_closure_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "search_driver.retain"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "case_ref": "search_driver.retain"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id":"tier.search_driver.first_shortest_certificate",
+          "all_conditions":[{"field":"case_ref","operator":"equals","expected":"search_driver.seal_first_shortest"}],
+          "reason_ref":"reason.first_shortest_witness_has_no_cheaper_unknown_frontier"
+        },
+        {
+          "id": "tier.policy.search_driver_closure_c.0",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "search_driver.seal"
+            }
+          ],
+          "reason_ref": "reason.current_exact_route_domain_and_step_closure"
+        },
+        {
+          "id": "tier.policy.search_driver_closure_c.1",
+          "all_conditions": [
+            {
+              "field": "case_ref",
+              "operator": "equals",
+              "expected": "search_driver.retain"
+            }
+          ],
+          "reason_ref": "reason.current_exact_route_domain_and_step_closure"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.search_driver_equivalent_ref_order_has_no_model_authority",
+      "reason_refs": [
+        "reason.current_exact_route_domain_and_step_closure",
+        "reason.first_shortest_witness_has_no_cheaper_unknown_frontier"
+      ]
+    }
+  ]
+}

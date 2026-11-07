@@ -1,0 +1,456 @@
+{
+  "module_id": "structural_supposition_c",
+  "declarations": [
+    {
+      "id": "policy.transit_shape_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_scoped_structural_evidence"
+      ],
+      "applicability": [
+        "revisable_structural_supposition"
+      ],
+      "invariants": [
+        "parent_terminal_contract_unchanged",
+        "temporary_shape_not_terminal_shape",
+        "geometry_not_traversal_or_acceptance",
+        "restoration_dependency_and_method_distinct"
+      ],
+      "falsifiers": [
+        "foreign_or_stale_scope",
+        "missing_or_contradictory_typed_relation",
+        "actual_work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "shape.keep_current_shape_question",
+        "shape.retain_transit_then_restoration_hypothesis",
+        "shape.retain_shape_and_restoration_questions"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.transit_shape_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "shape.keep_current_shape_question"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "typed_relations_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_fits_opening",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "shape.keep_current_shape_question"
+          }
+        },
+        {
+          "id": "projection.policy.transit_shape_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "shape.retain_transit_then_restoration_hypothesis"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "typed_relations_qualified",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_fits_opening",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "transit_fits_opening",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "transit_equals_terminal",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "restoration_dependency_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "shape.retain_transit_then_restoration_hypothesis"
+          }
+        },
+        {
+          "id": "projection.policy.transit_shape_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "shape.retain_shape_and_restoration_questions"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "shape.retain_shape_and_restoration_questions"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.transit_shape_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "shape.keep_current_shape_question"
+            }
+          ],
+          "reason_ref": "reason.transit_morphology_is_only_an_intermediate_means"
+        },
+        {
+          "id": "tier.policy.transit_shape_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "shape.retain_transit_then_restoration_hypothesis"
+            }
+          ],
+          "reason_ref": "reason.transit_morphology_is_only_an_intermediate_means"
+        },
+        {
+          "id": "tier.policy.transit_shape_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "shape.retain_shape_and_restoration_questions"
+            }
+          ],
+          "reason_ref": "reason.transit_morphology_is_only_an_intermediate_means"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.structural_disposition_not_identity_law_edge_or_action",
+      "reason_refs": [
+        "reason.transit_morphology_is_only_an_intermediate_means"
+      ]
+    },
+    {
+      "id": "policy.layer_contact_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_scoped_structural_evidence"
+      ],
+      "applicability": [
+        "revisable_structural_supposition"
+      ],
+      "invariants": [
+        "original_mask_and_attributes_frozen",
+        "partial_visibility_never_overwrites_original",
+        "pixel_ownership_distinct_from_appearance",
+        "independent_cause_evidence_before_attachment"
+      ],
+      "falsifiers": [
+        "foreign_or_stale_scope",
+        "missing_or_contradictory_typed_relation",
+        "actual_work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "layer.preserve_originals_with_current_open_bindings",
+        "layer.preserve_originals_with_unqualified_bindings"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.layer_contact_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "layer.preserve_originals_with_current_open_bindings"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "unique_memory_refs",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "memory_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "original_masks_and_attributes_retained",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "common_motion_never_attachment_by_itself",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "layer.preserve_originals_with_current_open_bindings"
+          }
+        },
+        {
+          "id": "projection.policy.layer_contact_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "layer.preserve_originals_with_unqualified_bindings"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "layer.preserve_originals_with_unqualified_bindings"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.layer_contact_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "layer.preserve_originals_with_current_open_bindings"
+            }
+          ],
+          "reason_ref": "reason.contact_changes_visibility_without_erasing_prior_identity"
+        },
+        {
+          "id": "tier.policy.layer_contact_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "layer.preserve_originals_with_unqualified_bindings"
+            }
+          ],
+          "reason_ref": "reason.contact_changes_visibility_without_erasing_prior_identity"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.structural_disposition_not_identity_law_edge_or_action",
+      "reason_refs": [
+        "reason.contact_changes_visibility_without_erasing_prior_identity"
+      ]
+    },
+    {
+      "id": "policy.visible_graph_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_scoped_structural_evidence"
+      ],
+      "applicability": [
+        "revisable_structural_supposition"
+      ],
+      "invariants": [
+        "endpoint_candidates_from_trace_ports_roots_and_channel",
+        "all_ambiguous_endpoint_pairs_retained",
+        "separators_and_direction_need_their_own_evidence",
+        "no_proximity_causal_edge"
+      ],
+      "falsifiers": [
+        "foreign_or_stale_scope",
+        "missing_or_contradictory_typed_relation",
+        "actual_work_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "graph.retain_visible_endpoint_and_channel_hypotheses",
+        "graph.retain_unqualified_topology_questions"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.visible_graph_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "graph.retain_visible_endpoint_and_channel_hypotheses"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "unique_port_and_stroke_refs",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "explicit_endpoint_or_channel_evidence_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "adjacency_alone_never_creates_causal_edge",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "graph.retain_visible_endpoint_and_channel_hypotheses"
+          }
+        },
+        {
+          "id": "projection.policy.visible_graph_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "graph.retain_unqualified_topology_questions"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "graph.retain_unqualified_topology_questions"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.visible_graph_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "graph.retain_visible_endpoint_and_channel_hypotheses"
+            }
+          ],
+          "reason_ref": "reason.visible_topology_and_homology_are_scoped_relation_evidence"
+        },
+        {
+          "id": "tier.policy.visible_graph_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "graph.retain_unqualified_topology_questions"
+            }
+          ],
+          "reason_ref": "reason.visible_topology_and_homology_are_scoped_relation_evidence"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.structural_disposition_not_identity_law_edge_or_action",
+      "reason_refs": [
+        "reason.visible_topology_and_homology_are_scoped_relation_evidence"
+      ]
+    }
+  ]
+}

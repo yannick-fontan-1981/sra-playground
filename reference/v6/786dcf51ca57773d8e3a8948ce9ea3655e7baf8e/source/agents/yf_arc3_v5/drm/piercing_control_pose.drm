@@ -1,0 +1,664 @@
+{
+  "module_id": "piercing_control_pose",
+  "declarations": [
+    {
+      "id": "policy.declared_piercing_control_pose",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "canonical_source_role_binding_association_and_current_scoped_perception"
+      ],
+      "applicability": [
+        "current_scope_command_shape_correspondence"
+      ],
+      "invariants": [
+        "current_pose_does_not_reclassify_role_truth",
+        "current_source_role_or_single_compatible_memorial_association_required",
+        "no_mask_from_bbox_or_arbitrary_identity_choice"
+      ],
+      "falsifiers": [
+        "current_normalized_footprint_no_longer_matches_source_association"
+      ],
+      "configuration": {
+        "measurement_contract": {
+          "role_query_attribute": "role",
+          "role_query_value": "cursor_supposition",
+          "binding_query_attribute": "projection_contract",
+          "binding_query_value": "yf_arc3_v5.current_memorial_role_binding.v1",
+          "association_query_attribute": "role_ref",
+          "association_query_value": "role.cursor_supposition",
+          "model_predicate": "piercing_control_pose_revision",
+          "role_claim_predicate": "proposes_role_candidate",
+          "binding_join_scope_ref": "pose_join.current_member_equality",
+          "direct_claim_scope_ref": "pose_claim.current_origin",
+          "binding_join_guard_refs": [
+            "projection.control_pose.exact_source_correspondence"
+          ]
+        }
+      },
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.exact_current_pose",
+          "all_conditions": [],
+          "reason_ref": "reason.exact_current_memorial_association_and_perception_qualify_rendered_pose"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "pose_selection_rank",
+          "preferred_order": "maximize",
+          "criterion_ref": "criterion.unique_source_current_pose",
+          "reason_ref": "reason.exact_current_memorial_association_and_perception_qualify_rendered_pose"
+        }
+      ],
+      "reason_refs": [
+        "reason.exact_current_memorial_association_and_perception_qualify_rendered_pose"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.piercing_control_pose_revision"
+      },
+      "fact_projections": [
+        {
+          "id": "projection.control_pose.default",
+          "all_conditions": [],
+          "static_facts": {
+            "applicable": false,
+            "pose_selection_rank": 0,
+            "control_pose_present": false,
+            "control_pose_needs_commit": false,
+            "whole_tool_shape_known": false,
+            "physical_whole_shape_known": false,
+            "whole_influence_prediction_complete": false,
+            "control_pose_class_ref": "pose.current_correspondence_unknown",
+            "missing_premise_refs": [
+              "premise.current_source_role_or_recalled_role_with_exact_current_mask"
+            ],
+            "requires_revalidation": true
+          },
+          "bound_facts": {
+            "entity_ref": "entity_ref",
+            "member_refs": "member_refs",
+            "current_member_entity_refs": "current_member_entity_refs",
+            "occupied_positions": "occupied_positions",
+            "normalized_valued_pixels": "normalized_valued_pixels",
+            "bbox_top": "bbox_top",
+            "bbox_left": "bbox_left",
+            "bbox_height": "bbox_height",
+            "bbox_width": "bbox_width",
+            "shape_digest": "shape_digest",
+            "association_ref": "association_ref",
+            "existing_role_ref": "existing_role_ref",
+            "binding_ref": "binding_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "current_frame_ref": "current_frame_ref",
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "pose_revision_ref": "pose_revision_ref",
+            "pose_candidate_count": "pose_candidate_count",
+            "pose_direct_current_role_count": "pose_direct_current_role_count",
+            "pose_direct_claim_count": "pose_direct_claim_count",
+            "pose_role_count": "pose_role_count",
+            "pose_binding_count": "pose_binding_count"
+          }
+        },
+        {
+          "id": "projection.control_pose.unknown",
+          "all_conditions": [
+            {
+              "field": "is_unknown_alternative",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.control_pose.exact_source_correspondence",
+          "all_conditions": [
+            {"field": "pose_current_binding_premise_claim_count", "operator": "greater_than", "expected": 0},
+            {
+              "field": "is_unknown_alternative",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "pose_role_binding_members_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_association_role_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_binding_role_ref",
+              "operator": "equals",
+              "expected": "role.cursor_supposition"
+            },
+            {
+              "field": "pose_binding_projection_contract",
+              "operator": "equals",
+              "expected": "yf_arc3_v5.current_memorial_role_binding.v1"
+            },
+            {
+              "field": "pose_binding_operational",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_binding_scene_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_current_members_missing_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "pose_ambiguous_tracking_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "pose_normalized_signature_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_scope_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_pixels_in_frame",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_compatible_association_count",
+              "operator": "equals",
+              "expected": 1
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "pose_selection_rank": 2,
+            "control_pose_present": true,
+            "control_pose_class_ref": "pose.source_current_rendered_hypothesis",
+            "requires_revalidation": false,
+            "missing_premise_refs": [],
+            "role": "cursor_supposition",
+            "canonical_fact_projection_enabled": true
+          },
+          "bound_facts": {
+            "role_premise_claim_refs": "pose_current_binding_premise_claim_refs"
+          }
+        },
+        {
+          "id": "projection.control_pose.new_revision",
+          "all_conditions": [
+            {
+              "field": "is_unknown_alternative",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "pose_role_binding_members_match",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_association_role_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_binding_role_ref",
+              "operator": "equals",
+              "expected": "role.cursor_supposition"
+            },
+            {
+              "field": "pose_binding_projection_contract",
+              "operator": "equals",
+              "expected": "yf_arc3_v5.current_memorial_role_binding.v1"
+            },
+            {
+              "field": "pose_binding_operational",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_binding_scene_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_current_members_missing_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "pose_ambiguous_tracking_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "pose_normalized_signature_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_scope_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_pixels_in_frame",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_compatible_association_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "pose_revision_already_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "control_pose_needs_commit": true
+          },
+          "bound_facts": {}
+        },
+        {
+          "id": "projection.control_pose.direct_source_current_role",
+          "all_conditions": [
+            {
+              "field": "is_unknown_alternative",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "pose_derivation_route_ref",
+              "operator": "equals",
+              "expected": "pose.direct_source_current_role"
+            },
+            {
+              "field": "pose_direct_claim_predicate",
+              "operator": "equals",
+              "expected": "proposes_role_candidate"
+            },
+            {
+              "field": "pose_direct_claim_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "pose_direct_claim_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "pose_direct_claim_epistemic_status",
+              "operator": "equals",
+              "expected": "proposed"
+            },
+            {
+              "field": "pose_direct_claim_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "pose_direct_claim_defeated_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "pose_direct_current_origin_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "pose_direct_members_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "pose_direct_current_role_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "pose_current_members_missing_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "pose_current_component_conflict_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "pose_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_scope_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_pixels_in_frame",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "pose_selection_rank": 3,
+            "control_pose_present": true,
+            "control_pose_class_ref": "pose.direct_source_current_rendered_hypothesis",
+            "requires_revalidation": false,
+            "missing_premise_refs": [],
+            "role": "cursor_supposition",
+            "canonical_fact_projection_enabled": true,
+            "primitive_action_release_authorized": false,
+            "historical_ownership_unknown": true,
+            "historical_ownership_falsifier_refs": [
+              "falsifier.rendered_pose_does_not_establish_historical_stock_or_support_ownership"
+            ]
+          },
+          "bound_facts": {
+            "role_premise_claim_refs": "source_observation_origin_refs",
+            "pose_direct_claim_ref": "pose_direct_claim_ref",
+            "pose_direct_origin_rows": "pose_direct_origin_rows",
+            "pose_derivation_route_ref": "pose_derivation_route_ref",
+            "pose_current_component_conflict_count": "pose_current_component_conflict_count",
+            "pose_temporal_identity_ambiguity_count": "pose_temporal_identity_ambiguity_count",
+            "pose_provisional_member_refs": "pose_provisional_member_refs"
+          }
+        },
+        {
+          "id": "projection.control_pose.direct_source_revision",
+          "all_conditions": [
+            {
+              "field": "is_unknown_alternative",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "pose_derivation_route_ref",
+              "operator": "equals",
+              "expected": "pose.direct_source_current_role"
+            },
+            {
+              "field": "pose_direct_claim_predicate",
+              "operator": "equals",
+              "expected": "proposes_role_candidate"
+            },
+            {
+              "field": "pose_direct_claim_disposition",
+              "operator": "equals",
+              "expected": "active"
+            },
+            {
+              "field": "pose_direct_claim_polarity",
+              "operator": "equals",
+              "expected": "positive"
+            },
+            {
+              "field": "pose_direct_claim_epistemic_status",
+              "operator": "equals",
+              "expected": "proposed"
+            },
+            {
+              "field": "pose_direct_claim_contradiction_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "pose_direct_claim_defeated_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "pose_direct_current_origin_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "pose_direct_members_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "pose_direct_current_role_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "pose_current_members_missing_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "pose_current_component_conflict_count",
+              "operator": "equals",
+              "expected": 0
+            },
+            {
+              "field": "pose_frame_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_scope_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_origin_matches",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_pixels_in_frame",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "pose_revision_already_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "control_pose_needs_commit": true
+          },
+          "bound_facts": {}
+        }
+      ]
+    },
+    {
+      "id": "rule.piercing_control_pose_revision",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "premises": [
+        "canonical_source_role_binding_association_and_current_scoped_perception"
+      ],
+      "applicability": [
+        "current_scope_command_shape_correspondence"
+      ],
+      "invariants": [
+        "current_pose_does_not_reclassify_role_truth",
+        "current_source_role_or_single_compatible_memorial_association_required",
+        "no_mask_from_bbox_or_arbitrary_identity_choice"
+      ],
+      "falsifiers": [
+        "current_normalized_footprint_no_longer_matches_source_association"
+      ],
+      "reason_refs": [
+        "reason.exact_current_memorial_association_and_perception_qualify_rendered_pose"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "{pose_revision_ref}",
+          "kind": "schema",
+          "label": "exact rendered pose of an existing proposed control role",
+          "required_fields": [
+            "pose_revision_ref",
+            "occupied_positions"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "role": "cursor_supposition",
+            "requires_enclosing_anchor": false,
+            "canonical_fact_projection_enabled": true,
+            "whole_tool_shape_known": false,
+            "physical_whole_shape_known": false,
+            "primitive_action_release_authorized": false
+          },
+          "attribute_bindings": {
+            "entity_ref": "entity_ref",
+            "member_refs": "member_refs",
+            "current_member_entity_refs": "current_member_entity_refs",
+            "occupied_positions": "occupied_positions",
+            "normalized_valued_pixels": "normalized_valued_pixels",
+            "bbox_top": "bbox_top",
+            "bbox_left": "bbox_left",
+            "bbox_height": "bbox_height",
+            "bbox_width": "bbox_width",
+            "shape_digest": "shape_digest",
+            "association_ref": "association_ref",
+            "existing_role_ref": "existing_role_ref",
+            "binding_ref": "binding_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "current_frame_ref": "current_frame_ref",
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "pose_revision_ref": "pose_revision_ref",
+            "operational_scene_ref": "current_frame_ref",
+            "role_premise_claim_refs": "role_premise_claim_refs",
+            "pose_direct_claim_ref": "pose_direct_claim_ref",
+            "pose_direct_origin_rows": "pose_direct_origin_rows",
+            "pose_derivation_route_ref": "pose_derivation_route_ref",
+            "pose_current_component_conflict_count": "pose_current_component_conflict_count",
+            "pose_temporal_identity_ambiguity_count": "pose_temporal_identity_ambiguity_count",
+            "pose_provisional_member_refs": "pose_provisional_member_refs",
+            "historical_ownership_unknown": "historical_ownership_unknown",
+            "historical_ownership_falsifier_refs": "historical_ownership_falsifier_refs"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.{pose_revision_ref}",
+          "predicate": "piercing_control_pose_revision",
+          "family": "control",
+          "argument_patterns": [
+            "{pose_revision_ref}"
+          ],
+          "epistemic_status": "proposed",
+          "required_fields": [
+            "pose_revision_ref",
+            "occupied_positions"
+          ],
+          "static_attributes": {
+            "whole_tool_shape_known": false,
+            "physical_whole_shape_known": false,
+            "whole_influence_prediction_complete": false,
+            "primitive_action_release_authorized": false
+          },
+          "attribute_bindings": {
+            "entity_ref": "entity_ref",
+            "member_refs": "member_refs",
+            "current_member_entity_refs": "current_member_entity_refs",
+            "occupied_positions": "occupied_positions",
+            "normalized_valued_pixels": "normalized_valued_pixels",
+            "bbox_top": "bbox_top",
+            "bbox_left": "bbox_left",
+            "bbox_height": "bbox_height",
+            "bbox_width": "bbox_width",
+            "shape_digest": "shape_digest",
+            "association_ref": "association_ref",
+            "existing_role_ref": "existing_role_ref",
+            "binding_ref": "binding_ref",
+            "source_observation_origin_refs": "source_observation_origin_refs",
+            "current_frame_ref": "current_frame_ref",
+            "retained_parent_goal_ref": "retained_parent_goal_ref",
+            "game_ref": "game_ref",
+            "level_ref": "level_ref",
+            "session_ref": "session_ref",
+            "pose_revision_ref": "pose_revision_ref",
+            "control_pose_class_ref": "control_pose_class_ref",
+            "control_pose_present": "control_pose_present",
+            "pose_direct_claim_ref": "pose_direct_claim_ref",
+            "pose_direct_origin_rows": "pose_direct_origin_rows",
+            "pose_derivation_route_ref": "pose_derivation_route_ref",
+            "pose_current_component_conflict_count": "pose_current_component_conflict_count",
+            "pose_temporal_identity_ambiguity_count": "pose_temporal_identity_ambiguity_count",
+            "pose_provisional_member_refs": "pose_provisional_member_refs",
+            "historical_ownership_unknown": "historical_ownership_unknown",
+            "historical_ownership_falsifier_refs": "historical_ownership_falsifier_refs"
+          }
+        }
+      ]
+    }
+  ]
+}

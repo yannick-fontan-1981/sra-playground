@@ -1,0 +1,86 @@
+{
+  "module_id": "reset_component_memory_b",
+  "declarations": [
+    {
+      "id": "policy.b_reset_component_memory",
+      "kind": "selection_policy", "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason_reset_scope_and_sampling_independence_require_separate_evidence"],
+      "configuration": {
+        "projection_contract": "continuation.reset_memory.b.v1",
+        "acknowledgment_predicate": "supports_acknowledged_reset_component_packet",
+        "baseline_predicate": "supports_reset_component_baseline",
+        "sequence_predicate": "supports_acknowledged_reset_response_sequence",
+        "record_predicate": "records_observed_reset_component_scope",
+        "independence_predicate": "supports_independent_reset_sampling",
+        "private_observation_predicate": "supports_observed_private_reset_component",
+        "private_alternatives_predicate": "supports_reset_private_alternative_population",
+        "private_component_kind_refs": ["private_random_state"],
+        "component_kind_refs": ["physical_pose", "controls", "selection", "profiles", "private_random_state", "counters", "acquired_receipts", "knowledge", "inventory", "program", "map", "budgets"],
+        "mandatory_component_specs": [
+          {"component_ref": "reset.scope.physical_pose", "kind_ref": "physical_pose"},
+          {"component_ref": "reset.scope.controls", "kind_ref": "controls"},
+          {"component_ref": "reset.scope.selection", "kind_ref": "selection"},
+          {"component_ref": "reset.scope.profiles", "kind_ref": "profiles"},
+          {"component_ref": "reset.scope.private_random_state", "kind_ref": "private_random_state"},
+          {"component_ref": "reset.scope.counters", "kind_ref": "counters"},
+          {"component_ref": "reset.scope.acquired_receipts", "kind_ref": "acquired_receipts"},
+          {"component_ref": "reset.scope.knowledge", "kind_ref": "knowledge"}
+        ]
+      },
+      "invariants": ["reset_does_not_imply_every_component_restored", "unknown_private_state_remains_unknown",
+        "prior_private_alternatives_are_not_discarded_without_reconciliation", "repeat_is_not_independent_sampling",
+        "equal_before_and_after_may_be_restore_or_retention", "no_action_or_reset_authority"],
+      "declared_alternative_refs": ["reset_memory.independence_supported", "reset_memory.repeated_sequence", "reset_memory.independence_unproved"],
+      "selection_eligibility_conditions": [{"field": "eligible", "operator": "equals", "expected": true}],
+      "meaning_template_ref_by_alternative": {"*": "rule.b_reset_component_memory"},
+      "fact_projections": [
+        {"id": "projection.reset_memory.independence_supported", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "reset_memory.independence_supported"},
+          {"field": "independent_sampling_supported", "operator": "equals", "expected": true}],
+          "static_facts": {"eligible": true, "sampling_status_ref": "independence_supported_for_declared_scope"}},
+        {"id": "projection.reset_memory.repeated_sequence", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "reset_memory.repeated_sequence"},
+          {"field": "independent_sampling_supported", "operator": "equals", "expected": false},
+          {"field": "same_response_sequence_observed", "operator": "equals", "expected": true}],
+          "static_facts": {"eligible": true, "sampling_status_ref": "same_scoped_sequence_observed_independence_unproved"}},
+        {"id": "projection.reset_memory.independence_unproved", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "reset_memory.independence_unproved"},
+          {"field": "independent_sampling_supported", "operator": "equals", "expected": false},
+          {"field": "same_response_sequence_observed", "operator": "equals", "expected": false}],
+          "static_facts": {"eligible": true, "sampling_status_ref": "independence_unproved"}}
+      ]
+    },
+    {
+      "id": "rule.b_reset_component_memory", "kind": "rule",
+      "evaluation": "project_requested_conclusions", "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": ["reason_reset_scope_and_sampling_independence_require_separate_evidence"],
+      "term_templates": [{
+        "id_pattern": "continuation.reset_memory.{reset_token}.{reset_digest}",
+        "kind": "schema", "label": "Observed reset components and scoped response repetition",
+        "required_fields": ["reset_ref", "packet_ref", "reset_token", "reset_digest", "parent_goal_ref", "scope_ref"],
+        "static_attributes": {"projection_contract": "continuation.reset_memory.b.v1", "commitment": "revisable", "global_determinism_proved": false},
+        "attribute_bindings": {
+          "reset_ref": "reset_ref", "packet_ref": "packet_ref", "parent_goal_ref": "parent_goal_ref", "scope_ref": "scope_ref",
+          "dispatch_ref": "dispatch_ref", "before_frame_ref": "before_frame_ref", "after_frame_ref": "after_frame_ref",
+          "component_rows": "component_rows", "component_population": "component_population", "unknown_component_refs": "unknown_component_refs",
+          "sequence_known": "sequence_known", "acknowledged_input_word": "acknowledged_input_word", "acknowledged_response_sequence": "acknowledged_response_sequence",
+          "reference_reset_memory_ref": "reference_reset_memory_ref", "same_input_word_observed": "same_input_word_observed",
+          "same_response_sequence_observed": "same_response_sequence_observed", "sampling_status_ref": "sampling_status_ref"
+        }
+      }],
+      "claim_templates": [{
+        "id_pattern": "claim.continuation.reset_memory.{reset_token}.{reset_digest}",
+        "predicate": "records_observed_reset_component_scope", "family": "epistemic", "epistemic_status": "supported",
+        "argument_patterns": ["{parent_goal_ref}", "continuation.reset_memory.{reset_token}.{reset_digest}"],
+        "scope_bindings": {"parent_goal_ref": "parent_goal_ref", "scope_ref": "scope_ref", "dispatch_ref": "dispatch_ref"},
+        "attribute_bindings": {"sampling_status_ref": "sampling_status_ref", "unknown_component_refs": "unknown_component_refs"}
+      }]
+    }
+  ]
+}

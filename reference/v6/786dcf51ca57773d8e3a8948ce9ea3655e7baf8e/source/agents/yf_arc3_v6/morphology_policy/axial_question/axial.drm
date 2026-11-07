@@ -1,0 +1,116 @@
+{
+  "module_id": "v6_axial_question",
+  "declarations": [
+    {
+      "id": "schema.axial_question",
+      "kind": "schema",
+      "premises": [
+        "opposed_bars_current",
+        "selection_changed_under_input",
+        "unique_target_marker"
+      ],
+      "applicability": [
+        "conditional_rotation_question"
+      ],
+      "invariants": [
+        "no_numeric_force_law",
+        "no_oracle",
+        "no_assumed_wall_transmission",
+        "no_intermediate_score"
+      ],
+      "falsifiers": [
+        "selected_marker_or_pose_changed",
+        "rotation_differs_from_declared_prior",
+        "remote_or_target_effect_unexpected",
+        "partial_animation_not_completion"
+      ],
+      "reason_refs": [
+        "0.1.1-5,19"
+      ],
+      "configuration": {
+        "goal": "G_official_completion",
+        "point_action": "ACTION6",
+        "cycle": [
+          [
+            -1,
+            0
+          ],
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            0
+          ],
+          [
+            0,
+            -1
+          ]
+        ],
+        "rotation_priors": [
+          {
+            "action": "ACTION3",
+            "turn": -1
+          },
+          {
+            "action": "ACTION4",
+            "turn": 1
+          }
+        ],
+        "priority": [
+          "between",
+          "outside",
+          "transverse_dependency"
+        ],
+        "kind_meaning": {
+          "between": "test_cooriented_axial_pair_toward_intermediate_target",
+          "outside": "test_opposed_axial_pair_toward_external_target",
+          "transverse_dependency": "prepare_axial_alignment_with_a_target_aligned_partner"
+        },
+        "conditions": [
+          {
+            "field": "selection_attested_current",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "goal_marker_unique",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "scope_current",
+            "operator": "equals",
+            "expected": true
+          }
+        ],
+        "falsifiers": [
+          "selected_marker_or_pose_changed",
+          "rotation_differs_from_declared_prior",
+          "remote_or_target_effect_unexpected",
+          "partial_animation_not_completion"
+        ],
+        "tie_break": [
+          "quarter_distance",
+          "recalled_control_first",
+          "action"
+        ],
+        "desired_axis_relation": {
+          "between": {
+            "multiplier": 1,
+            "hypothesis": "cooriented_pair_may_approach_intermediate_marker"
+          },
+          "outside": {
+            "multiplier": -1,
+            "hypothesis": "opposed_pair_may_separate_toward_external_marker"
+          },
+          "transverse_dependency": {
+            "multiplier": 1,
+            "hypothesis": "cooriented_pair_may_prepare_transverse_alignment"
+          }
+        }
+      }
+    }
+  ]
+}

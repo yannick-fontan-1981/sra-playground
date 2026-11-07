@@ -1,0 +1,292 @@
+{
+  "module_id": "material_binary_failure_a",
+  "declarations": [
+    {
+      "id": "policy.material_binary_question_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_compare_binary_domain_before_recycle",
+        "reason.material_binary_question_not_needed"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_loading_equivalent",
+      "configuration": {},
+      "declared_alternative_refs": [
+        "material_binary_question_a.needed",
+        "material_binary_question_a.absent"
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.material_binary_question.needed",
+          "reason_ref": "reason.material_compare_binary_domain_before_recycle",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_binary_question_a.needed"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_named_deficit",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_financed_recycle",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "has_financed_existing_or_production",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "current_binary_failure",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "declared_binary_failure_proved",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id": "tier.material_binary_question.absent",
+          "reason_ref": "reason.material_binary_question_not_needed",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_binary_question_a.absent"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "policy.material_binary_failure_a",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.material_closed_optimistic_fabrication_domain",
+        "reason.material_loading_missing"
+      ],
+      "declared_alternative_refs": [
+        "material_binary_failure_a.current",
+        "material_binary_failure_a.unknown"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.material_loading_equivalent",
+      "selection_tiers": [
+        {
+          "id": "tier.material_binary_failure.current",
+          "reason_ref": "reason.material_closed_optimistic_fabrication_domain",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_binary_failure_a.current"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "exact_return",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "complete_recipe_domain",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_domain_complete",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "native_not_bounded",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "nodes_exact",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "optimistic_financeable_node_absent",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.material_consumer.unknown",
+          "reason_ref": "reason.material_loading_missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "material_binary_failure_a.unknown"
+            }
+          ]
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "material_binary_failure_a.current": "rule.material_binary_failure_a"
+      },
+      "configuration": {}
+    },
+    {
+      "id": "rule.material_binary_failure_a",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "reason_refs": [
+        "reason.material_closed_optimistic_fabrication_domain"
+      ],
+      "invariants": [
+        "known_complete_current_recipe_domain",
+        "fabrication_projection_changes_no_recipe_law",
+        "optimistic_stock_includes_delivered_protected_and_loaded_units_with_whole_demands",
+        "complete_inverse_hypergraph_no_computation_cut",
+        "all_requirement_nodes_have_positive_exact_stock_deficit",
+        "no_universal_impossibility_or_physical_authority"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "value.material.binary_quantity_impossibility.{request_ref}",
+          "kind": "value",
+          "label": "Source closed optimistic fabrication quantity domain",
+          "required_fields": [
+            "request_ref",
+            "parent_goal_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "why_digest",
+            "payload",
+            "payload_digest",
+            "native_request_digest"
+          ],
+          "attribute_bindings": {
+            "request_ref": "request_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "why_digest": "why_digest",
+            "payload": "payload",
+            "payload_digest": "payload_digest",
+            "native_request_digest": "native_request_digest"
+          },
+          "static_attributes": {
+            "source_kind_ref": "material.binary_quantity_impossibility.v1",
+            "action_release_authorized": false,
+            "physical_execution_observed": false,
+            "physical_reconciliation_complete": false
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.material.binary_quantity_impossibility.{request_ref}",
+          "predicate": "qualifies_material_binary_quantity_impossibility",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "value.material.binary_quantity_impossibility.{request_ref}",
+            "{parent_goal_ref}"
+          ],
+          "required_term_patterns": [
+            "value.material.binary_quantity_impossibility.{request_ref}"
+          ],
+          "required_fields": [
+            "request_ref",
+            "parent_goal_ref",
+            "consumer_ref",
+            "next_item_ref",
+            "epoch",
+            "evidence_revision_ref",
+            "model_revision_ref",
+            "frame_ref",
+            "why_digest",
+            "payload",
+            "payload_digest",
+            "native_request_digest"
+          ],
+          "scope_bindings": {
+            "epoch": "epoch",
+            "parent_goal_ref": "parent_goal_ref",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref"
+          },
+          "attribute_bindings": {
+            "request_ref": "request_ref",
+            "parent_goal_ref": "parent_goal_ref",
+            "consumer_ref": "consumer_ref",
+            "next_item_ref": "next_item_ref",
+            "epoch": "epoch",
+            "evidence_revision_ref": "evidence_revision_ref",
+            "model_revision_ref": "model_revision_ref",
+            "frame_ref": "frame_ref",
+            "why_digest": "why_digest",
+            "payload": "payload",
+            "payload_digest": "payload_digest",
+            "native_request_digest": "native_request_digest"
+          },
+          "static_attributes": {
+            "action_release_authorized": false,
+            "physical_execution_observed": false,
+            "physical_reconciliation_complete": false,
+          "binary_quantity_impossible": true,
+          "conditional_to_declared_model": true
+          }
+        }
+      ]
+    }
+  ]
+}

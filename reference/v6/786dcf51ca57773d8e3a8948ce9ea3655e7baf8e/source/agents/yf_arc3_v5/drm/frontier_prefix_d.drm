@@ -1,0 +1,263 @@
+{
+  "module_id": "frontier_prefix_d",
+  "declarations": [
+    {
+      "id": "policy.frontier_prefix_input_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_native_word_payload_and_observed_initial"
+      ],
+      "applicability": [
+        "source_requested_native_prefix"
+      ],
+      "invariants": [
+        "exact_current_observed_initial",
+        "no_act",
+        "all_models_responses_preserved"
+      ],
+      "falsifiers": [
+        "stale_binding",
+        "uncorrelated_model",
+        "unbound_payload"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "frontier_prefix.direct",
+        "frontier_prefix.macro",
+        "frontier_prefix.need_evidence"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.frontier_prefix.direct",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "frontier_prefix.direct"
+            },
+            {
+              "field": "prefix_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "macro_requested",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.frontier_prefix.macro",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "frontier_prefix.macro"
+            },
+            {
+              "field": "prefix_binding_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "macro_requested",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.frontier_prefix.need",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "frontier_prefix.need_evidence"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.frontier_prefix.direct",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "frontier_prefix.direct"
+            }
+          ],
+          "reason_ref": "reason.current_exact_primitive_word_binding"
+        },
+        {
+          "id": "tier.frontier_prefix.macro",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "frontier_prefix.macro"
+            }
+          ],
+          "reason_ref": "reason.certify_current_full_correlated_macro"
+        },
+        {
+          "id": "tier.frontier_prefix.need",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "frontier_prefix.need_evidence"
+            }
+          ],
+          "reason_ref": "reason.native_prefix_requires_current_evidence"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.frontier_prefix_actual_use_unverified",
+      "reason_refs": [
+        "reason.current_exact_primitive_word_binding",
+        "reason.certify_current_full_correlated_macro",
+        "reason.native_prefix_requires_current_evidence"
+      ]
+    },
+    {
+      "id": "policy.frontier_prefix_return_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_native_word_payload_and_observed_initial"
+      ],
+      "applicability": [
+        "source_requested_native_prefix"
+      ],
+      "invariants": [
+        "no_act",
+        "common_payload_prefix",
+        "current_frozen_why",
+        "bounded_projection"
+      ],
+      "falsifiers": [
+        "stale_binding",
+        "uncorrelated_model",
+        "unbound_payload"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "frontier_prefix.compiled",
+        "frontier_prefix.return_need"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.frontier_prefix.compiled",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "frontier_prefix.compiled"
+            },
+            {
+              "field": "prefix_projection_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.frontier_prefix.return_need",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "frontier_prefix.return_need"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.frontier_prefix.compiled",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "frontier_prefix.compiled"
+            }
+          ],
+          "reason_ref": "reason.common_known_primitive_prefix_before_observation_boundary"
+        },
+        {
+          "id": "tier.frontier_prefix.return_need",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "frontier_prefix.return_need"
+            }
+          ],
+          "reason_ref": "reason.current_native_prefix_not_fully_bound"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.frontier_prefix_actual_use_unverified",
+      "reason_refs": [
+        "reason.common_known_primitive_prefix_before_observation_boundary",
+        "reason.current_native_prefix_not_fully_bound"
+      ]
+    }
+  ]
+}

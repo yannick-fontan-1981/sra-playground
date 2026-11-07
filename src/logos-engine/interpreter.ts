@@ -5,7 +5,7 @@ import type {
   IrStatement, IrStep, JsonObject, JsonValue, Primitive, TraceEvent, TypeSpec,
 } from './ir.ts';
 
-/** Validation is intentionally scoped to V7; it is not the full V5 authority gate. */
+/** Transport validation covers the transferred SRC subset, not the full V5 authority gate. */
 export class SrcExecutionError extends Error {
   readonly code: string;
   trace: readonly TraceEvent[] = [];
@@ -17,12 +17,24 @@ export class SrcExecutionError extends Error {
   }
 }
 
+/** The original scheduler's DEFERRED checkpoint must never authorize an action. */
+export class SrcDeferredError extends SrcExecutionError {
+  readonly result: string;
+  readonly bindings: JsonObject;
+  constructor(result: string, bindings: JsonObject) {
+    super('deferred', result);
+    this.name = 'SrcDeferredError';
+    this.result = result;
+    this.bindings = bindings;
+  }
+}
+
 const EMPTY: readonly never[] = Object.freeze([]);
 const own = (value: object, key: string) => Object.prototype.hasOwnProperty.call(value, key);
 function fail(code: string, message: string): never { throw new SrcExecutionError(code, message); }
 const pathPattern = /^[\p{L}_][\p{L}\p{N}_-]*(?:\.[\p{L}\p{N}_-]+)*$/u;
 const namePattern = /^[\p{L}_][\p{L}\p{N}_-]*$/u;
-const supported = new Set(['CALL', 'IF', 'FOR_EACH', 'NEXT', 'STOP']);
+const supported = new Set(['CALL', 'IF', 'FOR_EACH', 'WHILE', 'NEXT', 'STOP']);
 
 /** The kernel and interpreter share one immutable-value registry. */
 function snapshotJson(value: unknown, location: string): JsonValue {
@@ -173,19 +185,26 @@ export function validateCompiledModule(value: unknown, primitives?: Readonly<Rec
         unique(statementId, allStatementIds, where);
         const kind = String(statement.kind);
         if (!supported.has(kind)) fail('unsupported_ir', `${statementId}: unsupported statement ${kind}`);
-        for (const field of ['target', 'type_annotation', 'loop_contract']) {
+        for (const field of ['target', 'type_annotation']) {
           if (statement[field] != null) fail('unsupported_ir', `${statementId}: ${kind} cannot use ${field}`);
         }
         for (const field of ['clauses', 'match_arms']) {
           if (sequence(statement[field], `${where}.${field}`, true).length) fail('unsupported_ir', `${statementId}: ${field} is outside the supported subset`);
         }
         expression(statement.expression, `${where}.expression`, primitives);
+        if (kind === 'WHILE') {
+          const loop = record(statement.loop_contract, `${where}.loop_contract`);
+          keys(loop, ['progress_witness', 'stop_condition', 'maximum_symbolic_depth', 'limit_result'], `${where}.loop_contract`);
+          const maximum = loop.maximum_symbolic_depth;
+          if (typeof maximum !== 'number' || !Number.isSafeInteger(maximum) || maximum < 1) fail('invalid_ir', `${statementId}: WHILE requires a positive symbolic depth`);
+          for (const field of ['progress_witness', 'stop_condition', 'limit_result']) expression(loop[field], `${where}.loop_contract.${field}`, primitives);
+        } else if (statement.loop_contract != null) fail('unsupported_ir', `${statementId}: only WHILE can use a loop contract`);
         const expr = record(statement.expression, `${where}.expression`);
         const body = sequence(statement.body, `${where}.body`, true);
         const otherwise = sequence(statement.else_body, `${where}.else_body`, true);
-        if (kind !== 'IF' && kind !== 'FOR_EACH' && body.length) fail('invalid_ir', `${statementId}: unexpected body`);
+        if (kind !== 'IF' && kind !== 'FOR_EACH' && kind !== 'WHILE' && body.length) fail('invalid_ir', `${statementId}: unexpected body`);
         if (kind !== 'IF' && otherwise.length) fail('invalid_ir', `${statementId}: unexpected else_body`);
-        if ((kind === 'IF' || kind === 'FOR_EACH') && !body.length) fail('invalid_ir', `${statementId}: ${kind} requires a body`);
+        if ((kind === 'IF' || kind === 'FOR_EACH' || kind === 'WHILE') && !body.length) fail('invalid_ir', `${statementId}: ${kind} requires a body`);
         if (kind === 'CALL') {
           if (expr.kind !== 'call') fail('invalid_ir', `${statementId}: CALL requires a call expression`);
           if (statement.result_binding != null) ref(statement.result_binding, `${where}.result_binding`, true);
@@ -277,6 +296,17 @@ function summary(value: JsonValue): string {
   return text.length > 100 ? `${text.slice(0, 97)}…` : text;
 }
 
+function pythonString(value: JsonValue): string {
+  // All transferred V6 ON LIMIT clauses return symbolic/string references.
+  // Python scalar spellings remain explicit; unsupported container repr must
+  // fail instead of inventing a completed or differently worded checkpoint.
+  if (typeof value === 'string') return value;
+  if (value === null) return 'None';
+  if (typeof value === 'boolean') return value ? 'True' : 'False';
+  if (typeof value === 'number' && Number.isSafeInteger(value) && !Object.is(value, -0)) return String(value);
+  return fail('unsupported_defer_value', 'The transferred SRC ON LIMIT result must be a string or exact scalar');
+}
+
 interface Frame {
   readonly step: IrStep;
   readonly body: readonly IrStatement[];
@@ -290,6 +320,7 @@ interface Frame {
     readonly hadPrevious: boolean;
     readonly previous: JsonValue | undefined;
   };
+  readonly whileLoop?: { iteration: number; progressIdentity: string };
 }
 
 export async function executeWorkflow(
@@ -431,6 +462,33 @@ export async function executeWorkflow(
             : `${frame.blockKind ?? 'step'} complete`,
         };
         trace.push(Object.freeze(event));
+        if (frame.whileLoop) {
+          // Exact Python order: STOP and PROGRESS are evaluated first; STOP
+          // wins, then no-progress, then depth, and only then WHILE condition.
+          const owner = frame.owner!, contract = owner.loop_contract!;
+          const context: CallContext = Object.freeze({ workflowId, stepId: frame.step.id,
+            statementId: owner.id, signal: cancellation.signal });
+          const stop = await evaluate(contract.stop_condition, context);
+          const witness = await evaluate(contract.progress_witness, context);
+          if (stop === true) stack.pop();
+          else {
+            const identity = canonicalIdentity(witness);
+            const defer = (result: string): never => {
+              trace[trace.length - 1] = Object.freeze({ ...event, status: 'deferred', summary: result });
+              throw new SrcDeferredError(result, Object.freeze({ ...bindings }));
+            };
+            if (identity === frame.whileLoop.progressIdentity) defer(`unresolved:no_progress:${owner.id}`);
+            const next = frame.whileLoop.iteration + 1;
+            if (next >= contract.maximum_symbolic_depth) {
+              const result = await evaluate(contract.limit_result, context);
+              defer(pythonString(result));
+            }
+            const condition = await evaluate(owner.expression, context);
+            if (condition !== true) stack.pop();
+            else { frame.index = 0; frame.whileLoop.iteration = next; frame.whileLoop.progressIdentity = identity; }
+          }
+          continue;
+        }
         if (frame.loop && frame.loop.next < frame.loop.items.length) {
           bindings[frame.loop.iterator] = frame.loop.items[frame.loop.next++]!;
           frame.index = 0;
@@ -488,6 +546,19 @@ export async function executeWorkflow(
             const loop = { iterator, items, next: 1, hadPrevious: own(bindings, iterator), previous: bindings[iterator] };
             bindings[iterator] = items[0]!;
             stack.push({ step: frame.step, body: statement.body!, index: 0, owner: statement, loop });
+          }
+          break;
+        }
+        case 'WHILE': {
+          const contract = statement.loop_contract!;
+          const stop = await evaluate(contract.stop_condition, context);
+          const condition = await evaluate(statement.expression, context);
+          if (typeof stop !== 'boolean' || typeof condition !== 'boolean') fail('invalid_condition', `${statement.id}: WHILE condition/stop must be Boolean`);
+          complete({ summary: condition && !stop ? 'while → body' : 'while → complete' });
+          if (condition && !stop) {
+            const witness = await evaluate(contract.progress_witness, context);
+            stack.push({ step: frame.step, body: statement.body!, index: 0, owner: statement,
+              whileLoop: { iteration: 0, progressIdentity: canonicalIdentity(witness) } });
           }
           break;
         }

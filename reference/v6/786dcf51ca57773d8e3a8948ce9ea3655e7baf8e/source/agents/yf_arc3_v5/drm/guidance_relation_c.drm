@@ -1,0 +1,369 @@
+{
+  "module_id": "guidance_relation_c",
+  "declarations": [
+    {
+      "id": "policy.guidance_relation_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "supported_invitation_and_real_examples_of_the_same_learned_task"
+      ],
+      "applicability": [
+        "tutorial_relational_explanation"
+      ],
+      "invariants": [
+        "supported_contour_invites_only_bounded_content_experiment",
+        "refusal_nonwinning_and_unknown_outcomes_distinct",
+        "required_next_fields_need_source_action_or_effect_relation",
+        "contour_disappearance_not_task_deletion",
+        "consistency_not_causal_or_victory_proof",
+        "no_action_release"
+      ],
+      "falsifiers": [
+        "future_unsealed_or_foreign_task_example",
+        "missing_relational_coverage",
+        "contrary_observed_effect",
+        "actual_evaluation_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "guidance.retain_noncurrent_or_ambiguous_examples",
+        "guidance.retain_bounded_explanation_frontier",
+        "guidance.continue_learned_task_without_contour",
+        "guidance.require_bounded_invitation_contract",
+        "guidance.retain_relation_and_bounded_invitation",
+        "guidance.retain_examples_and_relation_questions"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.guidance_relation_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guidance.retain_noncurrent_or_ambiguous_examples"
+            }
+          ],
+          "any_conditions": [
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "example_refs_unique",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "method_refs_unique",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "guidance.retain_noncurrent_or_ambiguous_examples"
+          }
+        },
+        {
+          "id": "projection.guidance_relation_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guidance.retain_bounded_explanation_frontier"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "example_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "method_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "guidance.retain_bounded_explanation_frontier"
+          }
+        },
+        {
+          "id": "projection.guidance_relation_c.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guidance.continue_learned_task_without_contour"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "example_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "method_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "consistent_relations_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "invitation_currently_visible",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "guidance.continue_learned_task_without_contour"
+          }
+        },
+        {
+          "id": "projection.guidance_relation_c.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guidance.require_bounded_invitation_contract"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "example_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "method_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "invitation_currently_visible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "bounded_invitation_contract_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "guidance.require_bounded_invitation_contract"
+          }
+        },
+        {
+          "id": "projection.guidance_relation_c.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guidance.retain_relation_and_bounded_invitation"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "example_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "method_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "consistent_relations_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "invitation_currently_visible",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "bounded_invitation_contract_present",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "guidance.retain_relation_and_bounded_invitation"
+          }
+        },
+        {
+          "id": "projection.guidance_relation_c.5",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "guidance.retain_examples_and_relation_questions"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "example_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "method_refs_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "guidance.retain_examples_and_relation_questions"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.guidance_relation_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "guidance.retain_noncurrent_or_ambiguous_examples"
+            }
+          ],
+          "reason_ref": "reason_real_tutorial_examples_explain_next_designation_without_erasing_task"
+        },
+        {
+          "id": "tier.guidance_relation_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "guidance.retain_bounded_explanation_frontier"
+            }
+          ],
+          "reason_ref": "reason_real_tutorial_examples_explain_next_designation_without_erasing_task"
+        },
+        {
+          "id": "tier.guidance_relation_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "guidance.continue_learned_task_without_contour"
+            }
+          ],
+          "reason_ref": "reason_real_tutorial_examples_explain_next_designation_without_erasing_task"
+        },
+        {
+          "id": "tier.guidance_relation_c.3",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "guidance.require_bounded_invitation_contract"
+            }
+          ],
+          "reason_ref": "reason_real_tutorial_examples_explain_next_designation_without_erasing_task"
+        },
+        {
+          "id": "tier.guidance_relation_c.4",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "guidance.retain_relation_and_bounded_invitation"
+            }
+          ],
+          "reason_ref": "reason_real_tutorial_examples_explain_next_designation_without_erasing_task"
+        },
+        {
+          "id": "tier.guidance_relation_c.5",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "guidance.retain_examples_and_relation_questions"
+            }
+          ],
+          "reason_ref": "reason_real_tutorial_examples_explain_next_designation_without_erasing_task"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.guidance_disposition_not_relation_priority",
+      "reason_refs": [
+        "reason_real_tutorial_examples_explain_next_designation_without_erasing_task"
+      ]
+    }
+  ]
+}

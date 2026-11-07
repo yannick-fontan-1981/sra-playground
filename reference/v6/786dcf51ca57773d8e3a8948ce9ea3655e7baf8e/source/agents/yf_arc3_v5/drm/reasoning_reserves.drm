@@ -1,0 +1,89 @@
+{
+  "module_id": "reasoning_reserves",
+  "declarations": [{
+    "id": "policy.reasoning_reserve_continuation",
+    "kind": "selection_policy",
+    "evaluation": "declared_lexicographic_order",
+    "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "premises": ["native_child_return_has_no_released_action"],
+    "applicability": ["a_current_native_child_receipt_is_consumed_once"],
+    "invariants": ["parent_objective_is_preserved", "reentry_is_not_action_authority", "same_premises_attempts_cannot_repeat", "new_premises_reopen_revisable_attempts"],
+    "falsifiers": ["reentry_repeats_an_unchanged_exhausted_strategy", "exhaustion_hides_an_admitted_reserve"],
+    "reason_refs": ["reason.preserve_parent_and_consider_remaining_admitted_strategies", "reason.unqualified_return_requires_identified_attempt_and_bounded_reentry", "reason.consumed_selection_refusal_requires_bounded_local_parent_question", "reason.canonical_primary_failure_requires_current_parent_dependency_question"],
+    "declared_alternative_refs": ["continuation.reenter_reserved_reasoning", "continuation.reasoning_reserves_exhausted", "continuation.inspect_parent_question", "continuation.preserve_current_frontier"],
+    "fact_projections": [
+      {"id": "projection.reserve.return_scope_default", "static_facts": {"parent_return_reentry_admissible": true}},
+      {"id": "projection.reserve.unqualified_return_requires_scope", "all_conditions": [
+        {"field": "unqualified_child_return_present", "operator": "equals", "expected": true}
+      ], "static_facts": {"parent_return_reentry_admissible": false}},
+      {"id": "projection.reserve.unqualified_return_bounded_attempt", "all_conditions": [
+        {"field": "unqualified_child_return_present", "operator": "equals", "expected": true},
+        {"field": "reserve_current_attempt_present", "operator": "equals", "expected": true},
+        {"field": "parent_return_composition_budget_qualified", "operator": "equals", "expected": true},
+        {"field": "parent_return_composition_remaining_occurrences", "operator": "greater_than", "expected": 0}
+      ], "static_facts": {"parent_return_reentry_admissible": true}},
+      {"id": "projection.reserve.normal_primary_frontier_yields_to_first_strategy", "all_conditions": [
+        {"field": "unqualified_child_return_present", "operator": "equals", "expected": true},
+        {"field": "current_native_source_return", "operator": "equals", "expected": "grounding_frontier_exhausted"},
+        {"field": "reserve_current_attempt_present", "operator": "equals", "expected": false},
+        {"field": "parent_return_composition_budget_qualified", "operator": "equals", "expected": true},
+        {"field": "parent_return_composition_remaining_occurrences", "operator": "greater_than", "expected": 0},
+        {"field": "reserve_eligible_count", "operator": "greater_than", "expected": 0}
+      ], "static_facts": {"parent_return_reentry_admissible": true}},
+      {"id": "projection.reserve.reopen", "all_conditions": [
+        {"field": "parent_return_reentry_admissible", "operator": "equals", "expected": true},
+        {"field": "reserve_eligible_count", "operator": "greater_than", "expected": 0}
+      ], "static_facts": {"continuation_ref": "continuation.reenter_reserved_reasoning"}},
+      {"id": "projection.reserve.exhausted", "all_conditions": [
+        {"field": "reserve_current_attempt_present", "operator": "equals", "expected": true},
+        {"field": "reserve_eligible_count", "operator": "equals", "expected": 0}
+      ], "static_facts": {"continuation_ref": "continuation.reasoning_reserves_exhausted"}},
+      {"id": "projection.reserve.parent_question", "all_conditions": [
+        {"field": "reserve_current_attempt_present", "operator": "equals", "expected": false},
+        {"field": "reserve_eligible_count", "operator": "equals", "expected": 0}
+      ], "static_facts": {"continuation_ref": "continuation.inspect_parent_question"}},
+      {"id": "projection.reserve.preserve_unqualified_return", "all_conditions": [
+        {"field": "unqualified_child_return_present", "operator": "equals", "expected": true},
+        {"field": "parent_return_reentry_admissible", "operator": "equals", "expected": false}
+      ], "static_facts": {"continuation_ref": "continuation.preserve_current_frontier"}},
+      {"id": "projection.reserve.consumed_empty_selection_requires_local_parent_question", "all_conditions": [
+        {"field": "consumed_child_selection_has_no_eligible_alternatives", "operator": "equals", "expected": true},
+        {"field": "parent_question_consumption_present", "operator": "equals", "expected": false},
+        {"field": "parent_root_reentry_completed", "operator": "equals", "expected": false},
+        {"field": "parent_return_reentry_admissible", "operator": "equals", "expected": true},
+        {"field": "parent_return_composition_budget_qualified", "operator": "equals", "expected": true},
+        {"field": "parent_return_composition_remaining_occurrences", "operator": "greater_than", "expected": 0},
+        {"field": "reserve_eligible_count", "operator": "equals", "expected": 0}
+      ], "static_facts": {"continuation_ref": "continuation.inspect_parent_question"}},
+      {"id": "projection.reserve.canonical_primary_failure_requires_parent_question", "all_conditions": [
+        {"field": "unqualified_child_return_present", "operator": "equals", "expected": true},
+        {"field": "reserve_current_attempt_present", "operator": "equals", "expected": false},
+        {"field": "consumed_child_failure_accepted", "operator": "equals", "expected": true},
+        {"field": "consumed_parent_context_accepted", "operator": "equals", "expected": true},
+        {"field": "parent_question_consumption_present", "operator": "equals", "expected": false},
+        {"field": "parent_root_reentry_completed", "operator": "equals", "expected": false},
+        {"field": "parent_return_composition_budget_qualified", "operator": "equals", "expected": true},
+        {"field": "parent_return_composition_remaining_occurrences", "operator": "greater_than", "expected": 0},
+        {"field": "reserve_eligible_count", "operator": "greater_than", "expected": 0}
+      ], "static_facts": {"continuation_ref": "continuation.inspect_parent_question"}}
+    ],
+    "selection_eligibility_conditions": [{"field": "alternative_ref", "operator": "equals_reference_field", "reference_field": "continuation_ref"}],
+    "selection_tiers": [
+      {"id": "tier.source_canonical_primary_parent_question", "all_conditions": [
+        {"field": "unqualified_child_return_present", "operator": "equals", "expected": true},
+        {"field": "reserve_current_attempt_present", "operator": "equals", "expected": false},
+        {"field": "continuation_ref", "operator": "equals", "expected": "continuation.inspect_parent_question"}
+      ], "reason_ref": "reason.canonical_primary_failure_requires_current_parent_dependency_question"},
+      {"id": "tier.source_unqualified_return_preservation", "all_conditions": [
+        {"field": "continuation_ref", "operator": "equals", "expected": "continuation.preserve_current_frontier"},
+        {"field": "unqualified_child_return_present", "operator": "equals", "expected": true},
+        {"field": "parent_return_reentry_admissible", "operator": "equals", "expected": false}
+      ], "reason_ref": "reason.unqualified_return_requires_identified_attempt_and_bounded_reentry"},
+      {"id": "tier.source_reserve_disposition", "all_conditions": [{"field": "continuation_ref", "operator": "is_present"}], "reason_ref": "reason.preserve_parent_and_consider_remaining_admitted_strategies"}
+    ],
+    "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}]
+  }]
+}

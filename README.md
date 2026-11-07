@@ -24,12 +24,14 @@ Fontan's **Symbolic Reasoning Agent** research.
   yellow accents retain the ARC-inspired appearance. The patchwork shows 18
   real initial levels from the latest Custom Wave 3, in their original colors
   at full opacity. `scripts/generate-game-mosaic.py` reproduces the asset.
-- **SRA Agent:** an experimental exploration mode connected to live game
-  observations. The V7 SRC experiment program selects grounded directional or
-  Space inputs, observes their effects and updates its knowledge. Use **One
-  action**, **Run 4 actions**, and **Pause**; opening the tab alone does not move
-  the game. Coordinate inputs and goal-directed solving are future extensions.
-  See [the browser agent notes](docs/sra-agent-browser.md).
+- **SRA Agent:** the complete V6 capability transfer into native TypeScript and
+  the V7 common reasoning architecture is in progress. The connected native
+  path supports guarded coordinate actions, committed sequences, Pause and
+  cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
+  level**; opening the tab does not move the game. HANO, SYME and DNOI reproduce
+  three original V6 level completions each, with 30, 36 and 17 actions. These
+  checks do not establish complete V6 coverage. See [the transfer requirements
+  and measured status](docs/migration/v6-native-transfer.md).
 - **Logos Engine Reasoning Lab:** `/reasoning-lab.html` runs the first native
   TypeScript V7 kernel on controlled observations. Inspect the executed program,
   hypotheses, compositions, revisions and counterexamples. See
@@ -55,10 +57,11 @@ The 100 games use their original Python engines. They have not all been rewritte
 in TypeScript. The independent TypeScript PIPE implementation is retained for
 parity tests and future porting work.
 
-The Python runtime, dependencies, and game bundles are loaded from the site's
+The Python game runtime, dependencies, and game bundles are loaded from the site's
 own origin. After initialization, game actions require no server round trip,
 remote inference, or external CDN request. Static hosting serves the initial
-files; the game worker performs the computation on the user's device.
+files; the game worker performs the computation on the user's device. The agent
+has its own native TypeScript worker and loads no Python agent or model server.
 
 ### Controls and session state
 
@@ -238,19 +241,32 @@ Python mechanics through `game_bridge.py` and `official_adapter.py`.
 `custom_level_navigation.py` adapts direct manual entry to the custom engines'
 level loaders without changing their source archives or puzzle mechanics.
 
-## Bringing the genuine SRA to the browser
+## Transferring the complete SRA into native TypeScript
 
 `src/runtime/browser-games.ts` and `src/runtime/game-worker.ts` implement the
-current game worker. This worker runs game engines, not SRA reasoning.
+separate game worker. `v6-agent.ts`, `v6-agent-service.ts` and
+`v6-agent-worker.ts` connect native TypeScript reasoning to the real games.
+All game actions pass through a current, immutable proposal ticket. Public
+outcomes are acquired before a prefix is reconciled. Pause retains its pending
+command; manual intervention closes that reasoning session.
 
-`src/runtime/contracts.ts` retains a prepared public observation/action contract
-from the PIPE integration work. Connecting the actual SRA requires a complete
-cross-game observation contract, an agent lifecycle, faithful reasoning
-execution, and comparison against the pinned Python agent.
+The 33 exported V6 SRC entry programs execute in the same TypeScript interpreter
+as V7. Their original source and semantic hashes are checked, and a missing
+native callback is refused. The initial family ports preserve observations,
+geometry, hypotheses, bounds, guards and counterexamples. Python reference
+scripts are development tools only.
 
-See [the browser architecture and integration plan](docs/architecture.md) for
-runtime boundaries, Undo and Reset semantics, session limits, parity
-requirements, and the next SRA milestones.
+**Full migration is not complete.** The target includes every V6 reasoning family,
+its inherited V5 primitives, full WHY/ACT authority, composition/evidence memory,
+parent continuations and cross-level transfer. A working subset is not accepted
+as that target. `migration/v6-transfer-map.json` and
+`docs/migration/v6-coverage.json` track the remaining work; the explicit
+`--require-complete` audit cannot pass while required capabilities are missing.
+
+See [the browser architecture notes](docs/architecture.md) for runtime boundaries,
+Undo and Reset semantics and session limits. The [current native migration
+document](docs/migration/v6-native-transfer.md) takes precedence for the agent
+implementation and completion requirements.
 
 ## License
 

@@ -1,0 +1,945 @@
+{
+  "module_id": "shape_solving_c",
+  "declarations": [
+    {
+      "id": "policy.shape_solving_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_complete_contour_parent_question"
+      ],
+      "applicability": [
+        "K26_requested_operation"
+      ],
+      "invariants": [
+        "supported_contact_shape_law",
+        "complete_internal_geometry_and_layer_collision",
+        "current_shape_body_state",
+        "current_contact_and_aspect_phase_scope",
+        "no_act"
+      ],
+      "falsifiers": [
+        "unbound_complete_contour",
+        "wrong_transit_or_restoration_receipt",
+        "ungrounded_contact_or_colour"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "shape_solving.native",
+        "shape_solving.missing"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.shape_solving.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "shape_solving.native"
+            },
+            {
+              "field": "current_shape_question",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "shape_solving.native"
+          }
+        },
+        {
+          "id": "projection.shape_solving.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "shape_solving.missing"
+            },
+            {
+              "field": "current_shape_question",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "shape_solving.missing"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.shape_solving.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "shape_solving.native"
+            }
+          ],
+          "reason_ref": "reason.supported_contact_supplies_final_contour_and_aspect"
+        },
+        {
+          "id": "tier.shape_solving.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "shape_solving.missing"
+            }
+          ],
+          "reason_ref": "reason.shape_question_requires_current_evidence"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.shape_solving_activation_unverified",
+      "reason_refs": [
+        "reason.supported_contact_supplies_final_contour_and_aspect",
+        "reason.shape_question_requires_current_evidence"
+      ]
+    },
+    {
+      "id":"policy.shape_binding_publication_c","kind":"selection_policy","evaluation":"declared_eligibility_single",
+      "supported_operators":["SELECT"],"input_contract":"yf_arc3_v5.authority_input.selection.v1",
+      "output_contract":"yf_arc3_v5.authority_output.selection.v1","declared_alternative_refs":["shape_binding.publish"],
+      "selection_required_fact_fields":["alternative_ref"],
+      "selection_eligibility_conditions":[{"field":"eligible","operator":"equals","expected":true}],
+      "fact_projections":[{"id":"projection.shape_binding.current",
+        "all_conditions":[{"field":"alternative_ref","operator":"equals","expected":"shape_binding.publish"},
+          {"field":"binding_publication_current","operator":"equals","expected":true}],"static_facts":{"eligible":true}}],
+      "meaning_template_ref_by_alternative":{"shape_binding.publish":"rule.shape_native_field_binding_c"},
+      "premises":["actual_acquired_canonical_source","exact_native_field_and_current_scope"],
+      "invariants":["binding_is_not_new_physical_law","no_action_authority"],
+      "falsifiers":["source_revision_changes","unsupported_or_wrong_polarity_source"],
+      "reason_refs":["reason.current_acquired_shape_field_binds_requested_calculation"]
+    },
+    {
+      "id":"rule.shape_native_field_binding_c","kind":"rule","evaluation":"project_requested_conclusions",
+      "supported_operators":["DERIVE"],"input_contract":"yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract":"yf_arc3_v5.authority_output.derivation.v1","relation_family":"epistemic",
+      "term_templates":[{"id_pattern":"{term_ref}","kind":"value","label":"Current Source shape native field binding",
+        "required_fields":["term_ref","native_field_ref","bound_value"],
+        "attribute_bindings":{"native_field_ref":"native_field_ref","bound_value":"bound_value",
+          "evidence_revision_ref":"evidence_revision_ref","model_revision_ref":"model_revision_ref"},
+        "static_attributes":{"projection_contract_ref":"shape.native_field_binding.c.v1"}}],
+      "claim_templates":[{"id_pattern":"{claim_ref}","predicate":"records_current_shape_native_field_binding",
+        "family":"epistemic","epistemic_status":"supported","argument_patterns":["{term_ref}","{parent_goal_ref}"],
+        "required_term_patterns":["{term_ref}","{parent_goal_ref}"],
+        "required_fields":["claim_ref","term_ref","parent_goal_ref"],
+        "scope_bindings":{"parent_goal_ref":"parent_goal_ref","epoch":"epoch",
+          "evidence_revision_ref":"evidence_revision_ref","model_revision_ref":"model_revision_ref"},
+        "attribute_bindings":{"native_field_ref":"native_field_ref"},
+        "static_attributes":{"projection_contract_ref":"shape.native_field_binding.c.v1"}}],
+      "premises":["supported_actual_acquired_field"],"invariants":["exact_scope_and_value","no_dispatch_authority"],
+      "falsifiers":["canonical_source_changes"],"reason_refs":["reason.current_acquired_shape_field_binds_requested_calculation"]
+    },
+{
+  "id": "policy.shape_geometry_publication_c",
+  "kind": "selection_policy",
+  "evaluation": "declared_eligibility_single",
+  "supported_operators": [
+    "SELECT"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+  "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+  "declared_alternative_refs": [
+    "shape_geometry.publish"
+  ],
+  "selection_required_fact_fields": [
+    "alternative_ref"
+  ],
+  "selection_eligibility_conditions": [
+    {
+      "field": "eligible",
+      "operator": "equals",
+      "expected": true
+    }
+  ],
+  "fact_projections": [
+    {
+      "id": "projection.shape_geometry.current",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "shape_geometry.publish"
+        },
+        {
+          "field": "binding_publication_current",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "static_facts": {
+        "eligible": true
+      }
+    }
+  ],
+  "meaning_template_ref_by_alternative": {
+    "shape_geometry.publish": "rule.shape_observed_geometry_field_c"
+  },
+  "premises": [
+    "actual_repository_acquisition",
+    "current_canonical_role_associations",
+    "complete_observed_support_matches_existing_K26"
+  ],
+  "invariants": [
+    "pixels_do_not_assign_roles",
+    "unknown_geometry_remains_explicit",
+    "no_action_authority"
+  ],
+  "falsifiers": [
+    "source_or_frame_changes",
+    "clipped_or_occluded_support"
+  ],
+  "reason_refs": [
+    "reason.publish_observed_shape_geometry_from_real_acquisition"
+  ]
+},
+{
+  "id": "rule.shape_observed_geometry_field_c",
+  "kind": "rule",
+  "evaluation": "project_requested_conclusions",
+  "supported_operators": [
+    "DERIVE"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+  "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+  "relation_family": "epistemic",
+  "term_templates": [
+    {
+      "id_pattern": "{term_ref}",
+      "kind": "value",
+      "label": "Current geometry projected from acquired observations",
+      "required_fields": [
+        "term_ref",
+        "native_field_ref",
+        "bound_value",
+        "geometry_digest"
+      ],
+      "attribute_bindings": {
+        "native_field_ref": "native_field_ref",
+        "bound_value": "bound_value",
+        "geometry_digest": "geometry_digest",
+        "plan_digest": "plan_digest",
+        "frame_ref": "frame_ref",
+        "observation_record_ref": "observation_record_ref",
+        "raw_input_ref": "raw_input_ref",
+        "source_identity_ref": "source_identity_ref",
+        "target_display_kinds": "target_display_kinds",
+        "evidence_revision_ref": "evidence_revision_ref",
+        "model_revision_ref": "model_revision_ref"
+      },
+      "static_attributes": {
+        "projection_contract_ref": "shape.observed_geometry.c.v1",
+        "source_kind_ref": "shape.observed_geometry.c.v1"
+      }
+    }
+  ],
+  "claim_templates": [
+    {
+      "id_pattern": "{claim_ref}",
+      "predicate": "records_acquired_shape_geometry_field",
+      "family": "epistemic",
+      "epistemic_status": "supported",
+      "argument_patterns": [
+        "{term_ref}",
+        "{observation_record_ref}"
+      ],
+      "required_term_patterns": [
+        "{term_ref}",
+        "{parent_goal_ref}"
+      ],
+      "required_fields": [
+        "claim_ref",
+        "term_ref",
+        "parent_goal_ref",
+        "geometry_digest"
+      ],
+      "scope_bindings": {
+        "parent_goal_ref": "parent_goal_ref",
+        "epoch": "epoch",
+        "episode_ref": "episode_ref",
+        "level_scope_ref": "level_scope_ref",
+        "evidence_revision_ref": "evidence_revision_ref",
+        "model_revision_ref": "model_revision_ref"
+      },
+      "attribute_bindings": {
+        "native_field_ref": "native_field_ref",
+        "bound_value": "bound_value",
+        "geometry_digest": "geometry_digest",
+        "plan_digest": "plan_digest",
+        "frame_ref": "frame_ref",
+        "observation_record_ref": "observation_record_ref",
+        "raw_input_ref": "raw_input_ref",
+        "source_identity_ref": "source_identity_ref",
+        "target_display_kinds": "target_display_kinds",
+        "evidence_revision_ref": "evidence_revision_ref",
+        "model_revision_ref": "model_revision_ref"
+      },
+      "static_attributes": {
+        "projection_contract_ref": "shape.observed_geometry.c.v1",
+        "source_kind_ref": "shape.observed_geometry.c.v1"
+      }
+    }
+  ],
+  "premises": [
+    "repository_observation_and_canonical_associations"
+  ],
+  "invariants": [
+    "complete_observation_is_not_prediction",
+    "no_native_mask_from_request",
+    "no_ACT"
+  ],
+  "falsifiers": [
+    "acquired_frame_or_plan_changes"
+  ],
+  "reason_refs": [
+    "reason.publish_observed_shape_geometry_from_real_acquisition"
+  ]
+},
+{
+  "id": "policy.shape_observation_plan_publication_c",
+  "kind": "selection_policy",
+  "evaluation": "declared_eligibility_single",
+  "supported_operators": [
+    "SELECT"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+  "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+  "declared_alternative_refs": [
+    "shape_plan.publish"
+  ],
+  "selection_required_fact_fields": [
+    "alternative_ref"
+  ],
+  "selection_eligibility_conditions": [
+    {
+      "field": "eligible",
+      "operator": "equals",
+      "expected": true
+    }
+  ],
+  "fact_projections": [
+    {
+      "id": "projection.shape_plan.current",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "shape_plan.publish"
+        },
+        {
+          "field": "binding_publication_current",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "static_facts": {
+        "eligible": true
+      }
+    }
+  ],
+  "meaning_template_ref_by_alternative": {
+    "shape_plan.publish": "rule.shape_observation_plan_c"
+  },
+  "premises": [
+    "exact_current_acquired_scene_and_object_fields"
+  ],
+  "invariants": [
+    "all_associations_retained",
+    "no_role_guess",
+    "no_ACT"
+  ],
+  "falsifiers": [
+    "missing_ambiguous_or_stale_field"
+  ],
+  "reason_refs": [
+    "reason.assemble_shape_plan_from_supported_acquired_fields"
+  ]
+},
+{
+  "id": "rule.shape_observation_plan_c",
+  "kind": "rule",
+  "evaluation": "project_requested_conclusions",
+  "supported_operators": [
+    "DERIVE"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+  "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+  "relation_family": "epistemic",
+  "term_templates": [
+    {
+      "id_pattern": "{term_ref}",
+      "kind": "value",
+      "label": "Current Source shape observation plan assembled from acquired fields",
+      "required_fields": [
+        "term_ref",
+        "shape_observation_plan",
+        "plan_digest"
+      ],
+      "attribute_bindings": {
+        "shape_observation_plan": "shape_observation_plan",
+        "plan_digest": "plan_digest",
+        "field_bindings_digest": "field_bindings_digest",
+        "field_values_digest": "field_values_digest",
+        "frame_ref": "frame_ref",
+        "observation_record_ref": "observation_record_ref",
+        "raw_input_ref": "raw_input_ref"
+      },
+      "static_attributes": {
+        "projection_contract_ref": "shape.observation_plan.c.v1"
+      }
+    }
+  ],
+  "claim_templates": [
+    {
+      "id_pattern": "{claim_ref}",
+      "predicate": "records_current_shape_observation_plan",
+      "family": "epistemic",
+      "epistemic_status": "supported",
+      "argument_patterns": [
+        "{term_ref}",
+        "{observation_record_ref}"
+      ],
+      "required_term_patterns": [
+        "{term_ref}",
+        "{parent_goal_ref}"
+      ],
+      "required_fields": [
+        "claim_ref",
+        "term_ref",
+        "observation_record_ref"
+      ],
+      "scope_bindings": {
+        "parent_goal_ref": "parent_goal_ref",
+        "epoch": "epoch",
+        "episode_ref": "episode_ref",
+        "level_scope_ref": "level_scope_ref",
+        "evidence_revision_ref": "evidence_revision_ref",
+        "model_revision_ref": "model_revision_ref"
+      },
+      "attribute_bindings": {
+        "shape_observation_plan": "shape_observation_plan",
+        "plan_digest": "plan_digest",
+        "field_bindings_digest": "field_bindings_digest",
+        "field_values_digest": "field_values_digest",
+        "frame_ref": "frame_ref",
+        "observation_record_ref": "observation_record_ref",
+        "raw_input_ref": "raw_input_ref"
+      },
+      "static_attributes": {
+        "projection_contract_ref": "shape.observation_plan.c.v1"
+      }
+    }
+  ],
+  "premises": [
+    "actual_acquisition_and_supported_role_fields"
+  ],
+  "invariants": [
+    "assembly_does_not_confirm_unknown_roles",
+    "current_parent_and_level"
+  ],
+  "falsifiers": [
+    "acquired_field_or_frame_changes"
+  ],
+  "reason_refs": [
+    "reason.assemble_shape_plan_from_supported_acquired_fields"
+  ]
+},
+{
+  "id": "policy.shape_association_publication_c",
+  "kind": "selection_policy",
+  "evaluation": "declared_eligibility_single",
+  "supported_operators": [
+    "SELECT"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+  "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+  "declared_alternative_refs": [
+    "shape_association.publish"
+  ],
+  "selection_required_fact_fields": [
+    "alternative_ref"
+  ],
+  "selection_eligibility_conditions": [
+    {
+      "field": "eligible",
+      "operator": "equals",
+      "expected": true
+    }
+  ],
+  "fact_projections": [
+    {
+      "id": "projection.shape_association.current",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "shape_association.publish"
+        },
+        {
+          "field": "binding_publication_current",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "static_facts": {
+        "eligible": true
+      }
+    }
+  ],
+  "meaning_template_ref_by_alternative": {
+    "shape_association.publish": "rule.shape_association_field_c"
+  },
+  "premises": [
+    "actual_geometry_matches_supported_method",
+    "independent_current_roles",
+    "complete_supported_population"
+  ],
+  "invariants": [
+    "geometry_does_not_assign_roles",
+    "no_ACT"
+  ],
+  "falsifiers": [
+    "role_or_geometry_contradiction"
+  ],
+  "reason_refs": [
+    "reason.acquire_shape_associations_by_actual_scene_reconciliation"
+  ]
+},
+{
+  "id": "rule.shape_association_field_c",
+  "kind": "rule",
+  "evaluation": "project_requested_conclusions",
+  "supported_operators": [
+    "DERIVE"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+  "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+  "relation_family": "epistemic",
+  "term_templates": [
+    {
+      "id_pattern": "{term_ref}",
+      "kind": "value",
+      "label": "Association reconciled with actual shape observations",
+      "required_fields": [
+        "term_ref",
+        "value",
+        "value_digest"
+      ],
+      "attribute_bindings": {
+        "value": "value",
+        "value_digest": "value_digest",
+        "frame_ref": "frame_ref",
+        "observation_record_ref": "observation_record_ref",
+        "raw_input_ref": "raw_input_ref",
+        "source_kind_ref": "source_kind_ref",
+        "field_kind_ref": "field_kind_ref",
+        "method_term_ref": "method_term_ref",
+        "method_digest": "method_digest"
+      },
+      "static_attributes": {
+        "projection_contract_ref": "shape.association_acquisition.c.v1"
+      }
+    }
+  ],
+  "claim_templates": [
+    {
+      "id_pattern": "{scene_claim_ref}",
+      "predicate": "records_acquired_shape_scene_question",
+      "family": "epistemic",
+      "epistemic_status": "supported",
+      "argument_patterns": [
+        "{term_ref}",
+        "{observation_record_ref}"
+      ],
+      "required_term_patterns": [
+        "{term_ref}",
+        "{parent_goal_ref}"
+      ],
+      "required_fields": [
+        "claim_ref",
+        "term_ref",
+        "observation_record_ref",
+        "value_digest"
+      ],
+      "all_conditions": [
+        {
+          "field": "field_kind_ref",
+          "operator": "equals",
+          "expected": "SCENE"
+        }
+      ],
+      "scope_bindings": {
+        "parent_goal_ref": "parent_goal_ref",
+        "epoch": "epoch",
+        "episode_ref": "episode_ref",
+        "level_scope_ref": "level_scope_ref",
+        "evidence_revision_ref": "evidence_revision_ref",
+        "model_revision_ref": "model_revision_ref"
+      },
+      "attribute_bindings": {
+        "value": "value",
+        "value_digest": "value_digest",
+        "frame_ref": "frame_ref",
+        "observation_record_ref": "observation_record_ref",
+        "raw_input_ref": "raw_input_ref",
+        "source_kind_ref": "source_kind_ref",
+        "field_kind_ref": "field_kind_ref",
+        "method_term_ref": "method_term_ref",
+        "method_digest": "method_digest"
+      }
+    },
+    {
+      "id_pattern": "{population_claim_ref}",
+      "predicate": "records_acquired_shape_object_population",
+      "family": "epistemic",
+      "epistemic_status": "supported",
+      "argument_patterns": [
+        "{term_ref}",
+        "{observation_record_ref}"
+      ],
+      "required_term_patterns": [
+        "{term_ref}",
+        "{parent_goal_ref}"
+      ],
+      "required_fields": [
+        "claim_ref",
+        "term_ref",
+        "observation_record_ref",
+        "value_digest"
+      ],
+      "all_conditions": [
+        {
+          "field": "field_kind_ref",
+          "operator": "equals",
+          "expected": "POPULATION"
+        }
+      ],
+      "scope_bindings": {
+        "parent_goal_ref": "parent_goal_ref",
+        "epoch": "epoch",
+        "episode_ref": "episode_ref",
+        "level_scope_ref": "level_scope_ref",
+        "evidence_revision_ref": "evidence_revision_ref",
+        "model_revision_ref": "model_revision_ref"
+      },
+      "attribute_bindings": {
+        "value": "value",
+        "value_digest": "value_digest",
+        "frame_ref": "frame_ref",
+        "observation_record_ref": "observation_record_ref",
+        "raw_input_ref": "raw_input_ref",
+        "source_kind_ref": "source_kind_ref",
+        "field_kind_ref": "field_kind_ref",
+        "method_term_ref": "method_term_ref",
+        "method_digest": "method_digest"
+      }
+    },
+    {
+      "id_pattern": "{object_claim_ref}",
+      "predicate": "records_acquired_shape_object_association",
+      "family": "epistemic",
+      "epistemic_status": "supported",
+      "argument_patterns": [
+        "{term_ref}",
+        "{observation_record_ref}"
+      ],
+      "required_term_patterns": [
+        "{term_ref}",
+        "{parent_goal_ref}"
+      ],
+      "required_fields": [
+        "claim_ref",
+        "term_ref",
+        "observation_record_ref",
+        "value_digest"
+      ],
+      "all_conditions": [
+        {
+          "field": "field_kind_ref",
+          "operator": "equals",
+          "expected": "OBJECT"
+        }
+      ],
+      "scope_bindings": {
+        "parent_goal_ref": "parent_goal_ref",
+        "epoch": "epoch",
+        "episode_ref": "episode_ref",
+        "level_scope_ref": "level_scope_ref",
+        "evidence_revision_ref": "evidence_revision_ref",
+        "model_revision_ref": "model_revision_ref"
+      },
+      "attribute_bindings": {
+        "value": "value",
+        "value_digest": "value_digest",
+        "frame_ref": "frame_ref",
+        "observation_record_ref": "observation_record_ref",
+        "raw_input_ref": "raw_input_ref",
+        "source_kind_ref": "source_kind_ref",
+        "field_kind_ref": "field_kind_ref",
+        "method_term_ref": "method_term_ref",
+        "method_digest": "method_digest"
+      }
+    }
+  ],
+  "premises": [
+    "actual_acquisition_and_current_independent_role_proofs"
+  ],
+  "invariants": [
+    "same_parent_level_model_and_frame",
+    "no_shape_label_as_causal_proof"
+  ],
+  "falsifiers": [
+    "acquired_geometry_or_role_evidence_changes"
+  ],
+  "reason_refs": [
+    "reason.acquire_shape_associations_by_actual_scene_reconciliation"
+  ]
+},
+{
+  "id": "policy.shape_hypothesis_publication_c",
+  "kind": "selection_policy",
+  "evaluation": "declared_eligibility_single",
+  "supported_operators": [
+    "SELECT"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+  "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+  "declared_alternative_refs": [
+    "shape_hypothesis.publish"
+  ],
+  "selection_required_fact_fields": [
+    "alternative_ref"
+  ],
+  "selection_eligibility_conditions": [
+    {
+      "field": "eligible",
+      "operator": "equals",
+      "expected": true
+    }
+  ],
+  "fact_projections": [
+    {
+      "id": "projection.shape_hypothesis.current",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "shape_hypothesis.publish"
+        },
+        {
+          "field": "binding_publication_current",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "static_facts": {
+        "eligible": true
+      }
+    }
+  ],
+  "meaning_template_ref_by_alternative": {
+    "shape_hypothesis.publish": "rule.shape_retained_hypothesis_c"
+  },
+  "premises": [
+    "revalidated_unknown_geometry",
+    "explicit_scope_assumption"
+  ],
+  "invariants": [
+    "hypothesis_stays_proposed",
+    "no_ACT"
+  ],
+  "falsifiers": [
+    "current_visible_support_contradicts_hypothesis"
+  ],
+  "reason_refs": [
+    "reason.retained_shape_is_qualified_for_conditional_math_only"
+  ]
+},
+{
+  "id": "rule.shape_retained_hypothesis_c",
+  "kind": "rule",
+  "evaluation": "project_requested_conclusions",
+  "supported_operators": [
+    "DERIVE"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+  "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+  "relation_family": "epistemic",
+  "term_templates": [
+    {
+      "id_pattern": "{term_ref}",
+      "kind": "value",
+      "label": "Retained geometry hypothesis with unknown cells",
+      "required_fields": [
+        "term_ref",
+        "body_ref",
+        "body_digest",
+        "unknown_cells"
+      ],
+      "attribute_bindings": {
+        "body_ref": "body_ref",
+        "body_digest": "body_digest",
+        "unknown_cells": "unknown_cells",
+        "frame_ref": "frame_ref"
+      },
+      "static_attributes": {
+        "projection_contract_ref": "shape.retained_hypothesis.c.v1",
+        "geometry_status": "SUPPORTED_HYPOTHESIS",
+        "actual_geometry_confirmed": false
+      }
+    }
+  ],
+  "claim_templates": [
+    {
+      "id_pattern": "{claim_ref}",
+      "predicate": "hypothesizes_current_shape_geometry",
+      "family": "epistemic",
+      "epistemic_status": "proposed",
+      "argument_patterns": [
+        "{term_ref}",
+        "{parent_goal_ref}"
+      ],
+      "required_term_patterns": [
+        "{term_ref}",
+        "{parent_goal_ref}"
+      ],
+      "required_fields": [
+        "claim_ref",
+        "term_ref",
+        "parent_goal_ref"
+      ],
+      "scope_bindings": {
+        "parent_goal_ref": "parent_goal_ref",
+        "epoch": "epoch",
+        "episode_ref": "episode_ref",
+        "level_scope_ref": "level_scope_ref",
+        "evidence_revision_ref": "evidence_revision_ref",
+        "model_revision_ref": "model_revision_ref"
+      },
+      "attribute_bindings": {
+        "body_ref": "body_ref",
+        "body_digest": "body_digest",
+        "unknown_cells": "unknown_cells",
+        "frame_ref": "frame_ref"
+      },
+      "static_attributes": {
+        "actual_geometry_confirmed": false,
+        "no_action_authority": true
+      }
+    }
+  ],
+  "premises": [
+    "real_prior_geometry_revalidated_against_current_visibility"
+  ],
+  "invariants": [
+    "unknown_cells_not_observed",
+    "hypothesis_not_role_or_lease"
+  ],
+  "falsifiers": [
+    "visible_geometry_or_source_scope_changes"
+  ],
+  "reason_refs": [
+    "reason.retained_shape_is_qualified_for_conditional_math_only"
+  ]
+},
+{
+  "id": "policy.shape_conditional_c",
+  "kind": "selection_policy",
+  "evaluation": "declared_eligibility_single",
+  "supported_operators": [
+    "SELECT"
+  ],
+  "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+  "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+  "declared_alternative_refs": [
+    "shape_conditional.native",
+    "shape_conditional.missing"
+  ],
+  "selection_required_fact_fields": [
+    "alternative_ref"
+  ],
+  "selection_eligibility_conditions": [
+    {
+      "field": "eligible",
+      "operator": "equals",
+      "expected": true
+    }
+  ],
+  "fact_projections": [
+    {
+      "id": "projection.shape_conditional.true",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "shape_conditional.native"
+        },
+        {
+          "field": "conditional_question_qualified",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "static_facts": {
+        "eligible": true
+      }
+    },
+    {
+      "id": "projection.shape_conditional.false",
+      "all_conditions": [
+        {
+          "field": "alternative_ref",
+          "operator": "equals",
+          "expected": "shape_conditional.missing"
+        },
+        {
+          "field": "conditional_question_qualified",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "eligible": true
+      }
+    }
+  ],
+  "premises": [
+    "current_explicit_hypotheses",
+    "other_fields_and_goal_qualified"
+  ],
+  "invariants": [
+    "conditional_result_not_observation",
+    "no_ACT"
+  ],
+  "falsifiers": [
+    "expired_assumption_or_unbound_premise"
+  ],
+  "reason_refs": [
+    "reason.measure_conditional_domain_without_claiming_physical_success"
+  ]
+}
+  ]
+}

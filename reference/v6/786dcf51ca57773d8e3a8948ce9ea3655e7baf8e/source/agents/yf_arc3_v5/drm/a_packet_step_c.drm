@@ -1,0 +1,1203 @@
+{
+  "module_id": "a_packet_step_c",
+  "declarations": [
+    {
+      "id": "policy.oriented_passage_packet_signature_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_source_prebound_complete_native_packet"
+      ],
+      "applicability": [
+        "one_family_step"
+      ],
+      "invariants": [
+        "one_native_owner",
+        "native_cost_once",
+        "retained_unknowns",
+        "no_physical_release"
+      ],
+      "falsifiers": [
+        "wrong_identity",
+        "stale_model",
+        "missing_native_ledger"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "oriented_passage_packet.supported",
+        "oriented_passage_packet.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.oriented_passage_packet_signature_c.supported",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "oriented_passage_packet.supported"
+            },
+            {
+              "field": "exact_prebound_native_signature",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.oriented_passage.external_primitive"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.oriented_passage"
+            },
+            {
+              "field": "model_assignment_ref",
+              "operator": "equals",
+              "expected": "endpoint_model_ref"
+            },
+            {
+              "field": "native_status_ref",
+              "operator": "equals",
+              "expected": "ACTIVE"
+            },
+            {
+              "field": "native_packet_field_ref",
+              "operator": "equals",
+              "expected": "primitive_packet"
+            },
+            {
+              "field": "native_cost_field_ref",
+              "operator": "equals",
+              "expected": "actual_primitive_cost"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "oriented_passage_packet.supported"
+          }
+        },
+        {
+          "id": "projection.policy.oriented_passage_packet_signature_c.unsupported.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "oriented_passage_packet.unsupported"
+            },
+            {
+              "field": "exact_prebound_native_signature",
+              "operator": "not_equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "oriented_passage_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.oriented_passage_packet_signature_c.unsupported.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "oriented_passage_packet.unsupported"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.oriented_passage.external_primitive"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "oriented_passage_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.oriented_passage_packet_signature_c.unsupported.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "oriented_passage_packet.unsupported"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.oriented_passage"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "oriented_passage_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.oriented_passage_packet_signature_c.unsupported.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "oriented_passage_packet.unsupported"
+            },
+            {
+              "field": "model_assignment_ref",
+              "operator": "not_equals",
+              "expected": "endpoint_model_ref"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "oriented_passage_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.oriented_passage_packet_signature_c.unsupported.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "oriented_passage_packet.unsupported"
+            },
+            {
+              "field": "native_status_ref",
+              "operator": "not_equals",
+              "expected": "ACTIVE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "oriented_passage_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.oriented_passage_packet_signature_c.field_unsupported.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "oriented_passage_packet.unsupported"
+            },
+            {
+              "field": "native_packet_field_ref",
+              "operator": "not_equals",
+              "expected": "primitive_packet"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "oriented_passage_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.oriented_passage_packet_signature_c.field_unsupported.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "oriented_passage_packet.unsupported"
+            },
+            {
+              "field": "native_cost_field_ref",
+              "operator": "not_equals",
+              "expected": "actual_primitive_cost"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "oriented_passage_packet.unsupported"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.oriented_passage_packet_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "oriented_passage_packet.supported"
+            }
+          ],
+          "reason_ref": "reason.oriented_passage_current_native_packet_identity_and_owner"
+        },
+        {
+          "id": "tier.policy.oriented_passage_packet_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "oriented_passage_packet.unsupported"
+            }
+          ],
+          "reason_ref": "reason.oriented_passage_packet_signature_unqualified"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.a_packet_calculation_is_not_physical_execution",
+      "reason_refs": [
+        "reason.oriented_passage_current_native_packet_identity_and_owner",
+        "reason.oriented_passage_packet_signature_unqualified"
+      ]
+    },
+    {
+      "id": "policy.charted_room_navigation_packet_signature_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_source_prebound_complete_native_packet"
+      ],
+      "applicability": [
+        "one_family_step"
+      ],
+      "invariants": [
+        "one_native_owner",
+        "native_cost_once",
+        "retained_unknowns",
+        "no_physical_release"
+      ],
+      "falsifiers": [
+        "wrong_identity",
+        "stale_model",
+        "missing_native_ledger"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "charted_room_navigation_packet.supported",
+        "charted_room_navigation_packet.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.charted_room_navigation_packet_signature_c.supported",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "charted_room_navigation_packet.supported"
+            },
+            {
+              "field": "exact_prebound_native_signature",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.charted_room_navigation.external_primitive"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.charted_room_navigation"
+            },
+            {
+              "field": "model_assignment_ref",
+              "operator": "equals",
+              "expected": "navigation_model_ref"
+            },
+            {
+              "field": "native_status_ref",
+              "operator": "equals",
+              "expected": "ACTIVE"
+            },
+            {
+              "field": "native_packet_field_ref",
+              "operator": "equals",
+              "expected": "primitive_packet"
+            },
+            {
+              "field": "native_cost_field_ref",
+              "operator": "equals",
+              "expected": "actual_primitive_cost"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "charted_room_navigation_packet.supported"
+          }
+        },
+        {
+          "id": "projection.policy.charted_room_navigation_packet_signature_c.unsupported.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "charted_room_navigation_packet.unsupported"
+            },
+            {
+              "field": "exact_prebound_native_signature",
+              "operator": "not_equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "charted_room_navigation_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.charted_room_navigation_packet_signature_c.unsupported.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "charted_room_navigation_packet.unsupported"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.charted_room_navigation.external_primitive"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "charted_room_navigation_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.charted_room_navigation_packet_signature_c.unsupported.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "charted_room_navigation_packet.unsupported"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.charted_room_navigation"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "charted_room_navigation_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.charted_room_navigation_packet_signature_c.unsupported.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "charted_room_navigation_packet.unsupported"
+            },
+            {
+              "field": "model_assignment_ref",
+              "operator": "not_equals",
+              "expected": "navigation_model_ref"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "charted_room_navigation_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.charted_room_navigation_packet_signature_c.unsupported.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "charted_room_navigation_packet.unsupported"
+            },
+            {
+              "field": "native_status_ref",
+              "operator": "not_equals",
+              "expected": "ACTIVE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "charted_room_navigation_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.charted_room_navigation_packet_signature_c.field_unsupported.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "charted_room_navigation_packet.unsupported"
+            },
+            {
+              "field": "native_packet_field_ref",
+              "operator": "not_equals",
+              "expected": "primitive_packet"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "charted_room_navigation_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.charted_room_navigation_packet_signature_c.field_unsupported.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "charted_room_navigation_packet.unsupported"
+            },
+            {
+              "field": "native_cost_field_ref",
+              "operator": "not_equals",
+              "expected": "actual_primitive_cost"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "charted_room_navigation_packet.unsupported"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.charted_room_navigation_packet_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "charted_room_navigation_packet.supported"
+            }
+          ],
+          "reason_ref": "reason.charted_room_navigation_current_native_packet_identity_and_owner"
+        },
+        {
+          "id": "tier.policy.charted_room_navigation_packet_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "charted_room_navigation_packet.unsupported"
+            }
+          ],
+          "reason_ref": "reason.charted_room_navigation_packet_signature_unqualified"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.a_packet_calculation_is_not_physical_execution",
+      "reason_refs": [
+        "reason.charted_room_navigation_current_native_packet_identity_and_owner",
+        "reason.charted_room_navigation_packet_signature_unqualified"
+      ]
+    },
+    {
+      "id": "policy.station_gated_cargo_packet_signature_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_source_prebound_complete_native_packet"
+      ],
+      "applicability": [
+        "one_family_step"
+      ],
+      "invariants": [
+        "one_native_owner",
+        "native_cost_once",
+        "retained_unknowns",
+        "no_physical_release"
+      ],
+      "falsifiers": [
+        "wrong_identity",
+        "stale_model",
+        "missing_native_ledger"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "station_gated_cargo_packet.supported",
+        "station_gated_cargo_packet.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.station_gated_cargo_packet_signature_c.supported",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "station_gated_cargo_packet.supported"
+            },
+            {
+              "field": "exact_prebound_native_signature",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.station_gated_cargo.external_primitive"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.oriented_cargo_handoffs"
+            },
+            {
+              "field": "model_assignment_ref",
+              "operator": "equals",
+              "expected": "station_cargo_model_ref"
+            },
+            {
+              "field": "native_status_ref",
+              "operator": "equals",
+              "expected": "ACTIVE"
+            },
+            {
+              "field": "native_packet_field_ref",
+              "operator": "equals",
+              "expected": "external_primitive_packet"
+            },
+            {
+              "field": "native_cost_field_ref",
+              "operator": "equals",
+              "expected": "primitive_cost"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "station_gated_cargo_packet.supported"
+          }
+        },
+        {
+          "id": "projection.policy.station_gated_cargo_packet_signature_c.unsupported.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "station_gated_cargo_packet.unsupported"
+            },
+            {
+              "field": "exact_prebound_native_signature",
+              "operator": "not_equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "station_gated_cargo_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.station_gated_cargo_packet_signature_c.unsupported.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "station_gated_cargo_packet.unsupported"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.station_gated_cargo.external_primitive"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "station_gated_cargo_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.station_gated_cargo_packet_signature_c.unsupported.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "station_gated_cargo_packet.unsupported"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.oriented_cargo_handoffs"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "station_gated_cargo_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.station_gated_cargo_packet_signature_c.unsupported.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "station_gated_cargo_packet.unsupported"
+            },
+            {
+              "field": "model_assignment_ref",
+              "operator": "not_equals",
+              "expected": "station_cargo_model_ref"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "station_gated_cargo_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.station_gated_cargo_packet_signature_c.unsupported.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "station_gated_cargo_packet.unsupported"
+            },
+            {
+              "field": "native_status_ref",
+              "operator": "not_equals",
+              "expected": "ACTIVE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "station_gated_cargo_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.station_gated_cargo_packet_signature_c.field_unsupported.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "station_gated_cargo_packet.unsupported"
+            },
+            {
+              "field": "native_packet_field_ref",
+              "operator": "not_equals",
+              "expected": "external_primitive_packet"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "station_gated_cargo_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.station_gated_cargo_packet_signature_c.field_unsupported.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "station_gated_cargo_packet.unsupported"
+            },
+            {
+              "field": "native_cost_field_ref",
+              "operator": "not_equals",
+              "expected": "primitive_cost"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "station_gated_cargo_packet.unsupported"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.station_gated_cargo_packet_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "station_gated_cargo_packet.supported"
+            }
+          ],
+          "reason_ref": "reason.station_gated_cargo_current_native_packet_identity_and_owner"
+        },
+        {
+          "id": "tier.policy.station_gated_cargo_packet_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "station_gated_cargo_packet.unsupported"
+            }
+          ],
+          "reason_ref": "reason.station_gated_cargo_packet_signature_unqualified"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.a_packet_calculation_is_not_physical_execution",
+      "reason_refs": [
+        "reason.station_gated_cargo_current_native_packet_identity_and_owner",
+        "reason.station_gated_cargo_packet_signature_unqualified"
+      ]
+    },
+    {
+      "id": "policy.wrap_slide_packet_signature_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_source_prebound_complete_native_packet"
+      ],
+      "applicability": [
+        "one_family_step"
+      ],
+      "invariants": [
+        "one_native_owner",
+        "native_cost_once",
+        "retained_unknowns",
+        "no_physical_release"
+      ],
+      "falsifiers": [
+        "wrong_identity",
+        "stale_model",
+        "missing_native_ledger"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "wrap_slide_packet.supported",
+        "wrap_slide_packet.unsupported"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.wrap_slide_packet_signature_c.supported",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "wrap_slide_packet.supported"
+            },
+            {
+              "field": "exact_prebound_native_signature",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "operation_ref",
+              "operator": "equals",
+              "expected": "mechanics.wrap_slide.external_primitive"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "equals",
+              "expected": "mechanics.coupled_member_control"
+            },
+            {
+              "field": "model_assignment_ref",
+              "operator": "equals",
+              "expected": "wrap_slide_model_ref"
+            },
+            {
+              "field": "native_status_ref",
+              "operator": "equals",
+              "expected": "ACTIVE"
+            },
+            {
+              "field": "native_packet_field_ref",
+              "operator": "equals",
+              "expected": "primitive_packet"
+            },
+            {
+              "field": "native_cost_field_ref",
+              "operator": "equals",
+              "expected": "primitive_cost"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "wrap_slide_packet.supported"
+          }
+        },
+        {
+          "id": "projection.policy.wrap_slide_packet_signature_c.unsupported.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "wrap_slide_packet.unsupported"
+            },
+            {
+              "field": "exact_prebound_native_signature",
+              "operator": "not_equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "wrap_slide_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.wrap_slide_packet_signature_c.unsupported.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "wrap_slide_packet.unsupported"
+            },
+            {
+              "field": "operation_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.wrap_slide.external_primitive"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "wrap_slide_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.wrap_slide_packet_signature_c.unsupported.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "wrap_slide_packet.unsupported"
+            },
+            {
+              "field": "kernel_ref",
+              "operator": "not_equals",
+              "expected": "mechanics.coupled_member_control"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "wrap_slide_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.wrap_slide_packet_signature_c.unsupported.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "wrap_slide_packet.unsupported"
+            },
+            {
+              "field": "model_assignment_ref",
+              "operator": "not_equals",
+              "expected": "wrap_slide_model_ref"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "wrap_slide_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.wrap_slide_packet_signature_c.unsupported.4",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "wrap_slide_packet.unsupported"
+            },
+            {
+              "field": "native_status_ref",
+              "operator": "not_equals",
+              "expected": "ACTIVE"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "wrap_slide_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.wrap_slide_packet_signature_c.field_unsupported.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "wrap_slide_packet.unsupported"
+            },
+            {
+              "field": "native_packet_field_ref",
+              "operator": "not_equals",
+              "expected": "primitive_packet"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "wrap_slide_packet.unsupported"
+          }
+        },
+        {
+          "id": "projection.policy.wrap_slide_packet_signature_c.field_unsupported.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "wrap_slide_packet.unsupported"
+            },
+            {
+              "field": "native_cost_field_ref",
+              "operator": "not_equals",
+              "expected": "primitive_cost"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "wrap_slide_packet.unsupported"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.wrap_slide_packet_signature_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "wrap_slide_packet.supported"
+            }
+          ],
+          "reason_ref": "reason.wrap_slide_current_native_packet_identity_and_owner"
+        },
+        {
+          "id": "tier.policy.wrap_slide_packet_signature_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "wrap_slide_packet.unsupported"
+            }
+          ],
+          "reason_ref": "reason.wrap_slide_packet_signature_unqualified"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.a_packet_calculation_is_not_physical_execution",
+      "reason_refs": [
+        "reason.wrap_slide_current_native_packet_identity_and_owner",
+        "reason.wrap_slide_packet_signature_unqualified"
+      ]
+    },
+    {
+      "id": "policy.a_packet_step_result_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_source_prebound_complete_native_packet"
+      ],
+      "applicability": [
+        "one_family_step"
+      ],
+      "invariants": [
+        "one_native_owner",
+        "native_cost_once",
+        "retained_unknowns",
+        "no_physical_release"
+      ],
+      "falsifiers": [
+        "wrong_identity",
+        "stale_model",
+        "missing_native_ledger"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "a_packet_step.complete",
+        "a_packet_step.bound",
+        "a_packet_step.missing"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.a_packet_step.complete",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "a_packet_step.complete"
+            },
+            {
+              "field": "packet_complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "a_packet_step.complete"
+          }
+        },
+        {
+          "id": "projection.a_packet_step.bound",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "a_packet_step.bound"
+            },
+            {
+              "field": "packet_complete",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "a_packet_step.bound"
+          }
+        },
+        {
+          "id": "projection.a_packet_step.missing",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "a_packet_step.missing"
+            },
+            {
+              "field": "packet_complete",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "native_bound",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "a_packet_step.missing"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.a_packet_step_result_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "a_packet_step.complete"
+            }
+          ],
+          "reason_ref": "reason.exact_owned_native_a_packet_ready_for_collector"
+        },
+        {
+          "id": "tier.policy.a_packet_step_result_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "a_packet_step.bound"
+            }
+          ],
+          "reason_ref": "reason.native_a_packet_computation_bound_retained"
+        },
+        {
+          "id": "tier.policy.a_packet_step_result_c.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "a_packet_step.missing"
+            }
+          ],
+          "reason_ref": "reason.native_a_packet_partial_or_missing_retained"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.a_packet_calculation_is_not_physical_execution",
+      "reason_refs": [
+        "reason.exact_owned_native_a_packet_ready_for_collector",
+        "reason.native_a_packet_computation_bound_retained",
+        "reason.native_a_packet_partial_or_missing_retained"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,210 @@
+{
+  "module_id": "understanding_observation",
+  "declarations": [
+    {
+      "id": "policy.understanding_observation",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "reason_refs": ["reason.actual_observation_partitions_the_declared_models_without_inventing_a_law"],
+      "selection_tie_breakers": [{"field": "alternative_ref", "preferred_order": "minimize"}],
+      "canonical_equivalence_tie_break_debt_ref": "debt.understanding_observation_requires_mutually_exclusive_measured_outcomes",
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "an_explicit_understanding_question_has_a_prior_execution_and_observation_contract"
+      ],
+      "applicability": [
+        "observed_understanding_question_return"
+      ],
+      "invariants": [
+        "predictions_are_never_actual_observations",
+        "all_actual_actions_match_the_prior_contract",
+        "missing_fields_eliminate_no_model",
+        "indistinguishable_models_remain_explicit",
+        "zero_matches_among_declared_models_reopens_the_model_set",
+        "an_open_response_acquisition_does_not_assert_a_causal_model",
+        "a_single_match_is_scoped_to_the_observed_interval",
+        "no_action_release"
+      ],
+      "falsifiers": [
+        "unsealed_or_wrong_action_interval",
+        "changed_observation_contract",
+        "unbacked_canonical_field"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "understanding.await_actual_observation",
+        "understanding.reopen_models",
+        "understanding.retain_observed_ambiguity",
+        "understanding.retain_observed_distinction"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.understanding_observation.open_response_acquired",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "understanding.retain_observed_ambiguity"},
+            {"field": "observed_open_response", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "response_acquisition_complete": true,
+            "observed_stop_condition_refs": ["condition.response_acquisition_observed"],
+            "causal_model_confirmed": false,
+            "causal_model_rejected": false,
+            "understanding_question_ref": "question.which_conditions_explain_or_change_this_observed_response",
+            "understanding_followup_required": true
+          }
+        },
+        {
+          "id": "projection.understanding_observation.open_prediction_domains",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "understanding.retain_observed_ambiguity"},
+            {"field": "observed_prediction_domains_open", "operator": "equals", "expected": true}
+          ],
+          "static_facts": {
+            "unlisted_response_establishes_falsification": false,
+            "understanding_question_ref": "question.which_additional_outcomes_or_conditions_remain_possible",
+            "understanding_followup_required": true
+          }
+        },
+        {
+          "id": "projection.understanding_observation.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "understanding.await_actual_observation"
+            },
+            {
+              "field": "observation_incomplete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "understanding.await_actual_observation",
+            "understanding_followup_required": true
+          }
+        },
+        {
+          "id": "projection.understanding_observation.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "understanding.reopen_models"
+            },
+            {
+              "field": "observed_model_gap",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "understanding.reopen_models",
+            "understanding_followup_required": true
+          }
+        },
+        {
+          "id": "projection.understanding_observation.2",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "understanding.retain_observed_ambiguity"
+            },
+            {
+              "field": "observed_model_ambiguity",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "understanding.retain_observed_ambiguity",
+            "understanding_followup_required": true
+          }
+        },
+        {
+          "id": "projection.understanding_observation.3",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "understanding.retain_observed_distinction"
+            },
+            {
+              "field": "observed_model_distinction",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "understanding.retain_observed_distinction",
+            "understanding_followup_required": false
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.understanding_observation.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "understanding.await_actual_observation"
+            }
+          ],
+          "reason_ref": "reason.actual_observation_partitions_the_declared_models_without_inventing_a_law"
+        },
+        {
+          "id": "tier.understanding_observation.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "understanding.reopen_models"
+            }
+          ],
+          "reason_ref": "reason.actual_observation_partitions_the_declared_models_without_inventing_a_law"
+        },
+        {
+          "id": "tier.understanding_observation.2",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "understanding.retain_observed_ambiguity"
+            }
+          ],
+          "reason_ref": "reason.actual_observation_partitions_the_declared_models_without_inventing_a_law"
+        },
+        {
+          "id": "tier.understanding_observation.3",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "understanding.retain_observed_distinction"
+            }
+          ],
+          "reason_ref": "reason.actual_observation_partitions_the_declared_models_without_inventing_a_law"
+        }
+      ]
+    }
+  ]
+}

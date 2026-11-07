@@ -1,0 +1,53 @@
+{
+  "module_id": "v6_facet_examples",
+  "declarations": [
+    {
+      "id": "schema.facet_examples",
+      "kind": "schema",
+      "premises": [
+        "current_congruent_empty_and_filled_faces",
+        "shared_parts_with_separate_reference"
+      ],
+      "applicability": [
+        "program_construction"
+      ],
+      "invariants": [
+        "retain_raw_faces_and_sampling_uncertainty",
+        "do_not_equate_visible_face_with_complete_cube",
+        "one_unknown_edit_then_measure",
+        "preserve_reference_and_other_interfaces"
+      ],
+      "falsifiers": [
+        "no_edit",
+        "reference_changes",
+        "multiple_possible_caps",
+        "unexpected_local_effect"
+      ],
+      "reason_refs": [
+        "reason.relative_visible_contributions_and_current_ports"
+      ],
+      "configuration": {
+        "question": "Does this congruent bounded interior create a visible contribution, or does this current cap extend the still-short side contributions toward the separate reference?",
+        "order": [
+          "measure_example_reference_and_empty_ports",
+          "retain_current_visible_height_residual",
+          "bind_one_interior_experiment"
+        ],
+        "limits": "A visible cap above vertically extended side contributions only; no unobserved 3D reconstruction, exact bitmap scaling, erasure or hidden owner claim.",
+        "compound": {
+          "maximum_units": 5,
+          "maximum_states": 1024,
+          "lateral_rule": "conditional_stencil_sharing_measured_face_edges",
+          "requires_observed_seed_and_vertical_effect_and_boundary": true,
+          "question": "Revalidate the observed seed and local extension method, then test the current exposed port contributing to the same compound reference while preserving already-built contributions.",
+          "maximum_sample_denominator": 8,
+          "sample_offsets": [
+            -0.5,
+            0,
+            0.5
+          ]
+        }
+      }
+    }
+  ]
+}

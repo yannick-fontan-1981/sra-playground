@@ -1,0 +1,634 @@
+{
+  "module_id": "component_network",
+  "declarations": [
+    {
+      "id": "principle.action_conditioned_openings_license_revisable_component_network",
+      "kind": "principle",
+      "family_ref": "family.interaction_evidence",
+      "abstraction_level": "causal_variant",
+      "premises": [
+        "persistent_unit_openings_are_observed",
+        "recoloring_beyond_the_clicked_unit_is_observed_or_remains_a_declared_alternative"
+      ],
+      "applicability": [
+        "conditional_topology_and_origin_provenance_after_local_editing"
+      ],
+      "invariants": [
+        "test_roles_and_forward_effects_before_model_admission",
+        "keep_origins_separate_from_displayed_mixed_values",
+        "simulate_requests_together_and_preserve_budget_and_other_requests",
+        "unacquired_mixtures_remain_unknown",
+        "conditional_fit_does_not_assert_a_universal_world_law",
+        "source_selects_roles_goals_models_and_actions"
+      ],
+      "falsifiers": [
+        "the_model_disagrees_with_current_scene_or_next_observed_effect",
+        "a_role_assignment_or_goal_is_not_supported_by_its_markers_and_effects"
+      ],
+      "reason_refs": [
+        "reason.action_conditioned_unit_and_budget_license_conditional_network_test"
+      ]
+    },
+    {
+      "id": "policy.component_network_geometry_scope",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "component_network.calculate_conditional_models",
+        "component_network.retain_unknown"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.component_network.geometry_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "component_network.calculate_conditional_models"
+            },
+            {
+              "field": "network_geometry_scope_unique",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "network_resource_measurement_present",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "committed_plan_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "network_contract": {
+              "model_ref": "hypothesis.revisable_component_origin_network",
+              "model_kind": "monotone_component_union_pure_domain",
+              "empty_content_query": "common_receiver_background_or_retained_value",
+              "domain_query": "bbox_of_observed_editable_signature",
+              "neighbor_deltas": [
+                [
+                  -1,
+                  0
+                ],
+                [
+                  0,
+                  1
+                ],
+                [
+                  1,
+                  0
+                ],
+                [
+                  0,
+                  -1
+                ]
+              ],
+              "role_profiles": [
+                {
+                  "alternative_ref": "component_network.radial_emitters",
+                  "emitter_query": {
+                    "mask": "cardinal",
+                    "value_field": "center_value"
+                  },
+                  "receiver_query": {
+                    "mask": "diagonal",
+                    "value_field": "marker_value"
+                  }
+                },
+                {
+                  "alternative_ref": "component_network.corner_emitters",
+                  "emitter_query": {
+                    "mask": "diagonal",
+                    "value_field": "marker_value"
+                  },
+                  "receiver_query": {
+                    "mask": "cardinal",
+                    "value_field": "center_value"
+                  }
+                }
+              ],
+              "maximum_cell_count": 1024,
+              "maximum_marker_radius": 8,
+              "maximum_expansions": 32768,
+              "maximum_path_length": 256,
+              "maximum_admitted_point_additions": 1,
+              "route_descriptions": [
+                "increasing_separation",
+                "decreasing_separation",
+                "measurement_order"
+              ],
+              "cost_measure": "new_cells_then_edges",
+              "resource_cost_normalization": "one_observed_debit_per_new_unit",
+              "mixed_origin_values": "unknown",
+              "unacquired_union_binding": "two_unreserved_unique_originals",
+              "route_dependency": "singleton_demands_precede_unacquired_origin_union",
+              "maximum_opened_set_states": 32768,
+              "previous_scene_is_not_current_transition_across_instance_boundary": true,
+              "one_original_preserves_its_value": true,
+              "empty_components_have_no_origin": true,
+              "all_induced_contacts_are_included": true,
+              "pure_demand_components_must_remain_compatible": true,
+              "world_impossibility_from_failed_orders": false,
+              "point_action_ref": "ACTION6",
+              "unknown_model_ref": "component_network.model_unknown",
+              "unknown_route_ref": "component_network.route_unknown"
+            }
+          }
+        },
+        {
+          "id": "projection.component_network.unknown_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "component_network.retain_unknown"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.component_network.measured_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "component_network.calculate_conditional_models"
+            }
+          ],
+          "reason_ref": "reason.action_conditioned_unit_and_budget_license_conditional_network_test"
+        },
+        {
+          "id": "tier.component_network.unknown_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "component_network.retain_unknown"
+            }
+          ],
+          "reason_ref": "reason.incomplete_network_scope_preserves_other_questions"
+        }
+      ],
+      "premises": [
+        "persistent_complete_unit_replacement_with_repeated_preimage_or_current_revalidated_model",
+        "current_measured_resource_quantity"
+      ],
+      "invariants": [
+        "roles_remain_hypotheses_until_full_scene_and_transition_fit",
+        "origin_sets_are_not_visible_color_names",
+        "no_hard_coded_game_palette_coordinate_or_count",
+        "three_route_descriptions_are_not_exhaustive_path_enumeration",
+        "unknown_is_not_world_impossibility"
+      ],
+      "falsifiers": [
+        "scene_transition_or_resource_contradicts_model"
+      ],
+      "reason_refs": [
+        "reason.current_conditional_component_network_witness"
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "network_resource_measurement_present",
+          "preferred_order": "minimize"
+        }
+      ]
+    },
+    {
+      "id": "policy.component_network_model",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.network.model_fit",
+          "all_conditions": [
+            {
+              "field": "network_model_fits",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "network_model_positive_count",
+              "operator": "equals",
+              "expected": 1
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "network_model_admitted": true
+          }
+        },
+        {
+          "id": "projection.network.model_unknown",
+          "all_conditions": [
+            {
+              "field": "network_model_unknown",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "network_model_admitted": false
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.network.unique_current_fit",
+          "all_conditions": [
+            {
+              "field": "network_model_admitted",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.current_conditional_component_network_witness"
+        },
+        {
+          "id": "tier.network.unknown_model",
+          "all_conditions": [
+            {
+              "field": "network_model_unknown",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.current_conditional_component_network_witness"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "network_model_positive_count",
+          "preferred_order": "minimize"
+        }
+      ],
+      "invariants": [
+        "source_owns_conditional_meaning_and_selection",
+        "all_alternatives_preserved",
+        "unknown_is_not_impossibility"
+      ],
+      "reason_refs": [
+        "reason.current_conditional_component_network_witness"
+      ]
+    },
+    {
+      "id": "policy.component_network_word",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.network.word_fit",
+          "all_conditions": [
+            {
+              "field": "network_complete_word",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "network_all_prefixes_valid",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "network_word_admitted": true
+          },
+          "templated_facts": {
+            "component_network_model_term_ref": "model.component_network.{level_index}.{geometry_token}",
+            "component_network_model_claim_ref": "claim.component_network.{level_index}.{geometry_token}",
+            "component_network_witness_term_ref": "witness.component_network.{frame_token}.{word_token}",
+            "component_network_witness_claim_ref": "claim.component_network.witness.{frame_token}.{word_token}",
+            "component_network_expectation_ref": "expectation.component_network.{frame_token}.{word_token}",
+            "component_network_experiment_ref": "experiment.component_network.{frame_token}.{word_token}",
+            "component_network_model_claim_refs": [
+              "claim.component_network.{level_index}.{geometry_token}"
+            ],
+            "component_network_witness_claim_refs": [
+              "claim.component_network.witness.{frame_token}.{word_token}"
+            ]
+          },
+          "sequence_compositions": [
+            {
+              "output_field": "component_network_premise_claim_refs",
+              "source_fields": [
+                "component_network_model_claim_refs",
+                "component_network_witness_claim_refs",
+                "resource_claim_refs"
+              ],
+              "max_items": 64,
+              "unique_items": true
+            }
+          ]
+        },
+        {
+          "id": "projection.network.word_unknown",
+          "all_conditions": [
+            {
+              "field": "network_word_unknown",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "network_word_admitted": false
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.network.complete_witness",
+          "all_conditions": [
+            {
+              "field": "network_word_admitted",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.current_conditional_component_network_witness"
+        },
+        {
+          "id": "tier.network.unknown_word",
+          "all_conditions": [
+            {
+              "field": "network_word_unknown",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "reason_ref": "reason.current_conditional_component_network_witness"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "network_word_primitive_count",
+          "preferred_order": "minimize"
+        },
+        {
+          "field": "network_word_description_ordinal",
+          "preferred_order": "minimize"
+        }
+      ],
+      "invariants": [
+        "source_owns_conditional_meaning_and_selection",
+        "all_alternatives_preserved",
+        "unknown_is_not_impossibility"
+      ],
+      "reason_refs": [
+        "reason.current_conditional_component_network_witness"
+      ],
+      "meaning_template_ref_by_alternative": {
+        "*": "rule.revisable_component_network_memory"
+      }
+    },
+    {
+      "id": "rule.revisable_component_network_memory",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "relation_family": "structural",
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "premises": [
+        "unique_current_role_assignment_and_full_scene_transition_fit",
+        "measured_resource_debit_anchors_action_conditioned_opening"
+      ],
+      "invariants": [
+        "original_values_and_demands_survive_recoloring",
+        "model_acquisition_is_same_game_and_current_witness_is_level_scoped",
+        "model_term_never_authorizes_an_action"
+      ],
+      "falsifiers": [
+        "current_or_next_scene_contradicts_conditional_model"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "model.component_network.{level_index}.{geometry_token}",
+          "kind": "schema",
+          "label": "revisable component origin network",
+          "required_fields": [
+            "model",
+            "level_index",
+            "geometry_token",
+            "frame_ref"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.revisable_component_network.v1",
+            "commitment": "revisable",
+            "action_authorization": false,
+            "canonical_fact_projection_enabled": true
+          },
+          "attribute_bindings": {
+            "model": "model",
+            "level_index": "level_index",
+            "measurement_ref": "measurement_ref",
+            "scope_counter": "scope_counter",
+            "model_signature": "model_token",
+            "acquisition_observation_ref": "frame_ref"
+          },
+          "all_conditions": [
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id_pattern": "goal.satisfy_current_component_demands",
+          "kind": "schema",
+          "label": "satisfy current component demands together",
+          "required_fields": [
+            "model"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.component_network_goal.v1",
+            "goal_ref": "goal.satisfy_current_component_demands",
+            "commitment": "revisable",
+            "action_authorization": false
+          },
+          "attribute_bindings": {
+            "model": "model",
+            "level_index": "level_index",
+            "scope_counter": "scope_counter"
+          },
+          "all_conditions": [
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id_pattern": "witness.component_network.{frame_token}.{word_token}",
+          "kind": "schema",
+          "label": "current conditional component word and resource witness",
+          "required_fields": [
+            "model",
+            "frame_ref",
+            "word_cells",
+            "scope_counter",
+            "component_network_model_term_ref",
+            "resource_claim_refs"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.current_component_network_witness.v1",
+            "action_authorization": false,
+            "conditional_model_not_world_law": true
+          },
+          "attribute_bindings": {
+            "model_ref": "component_network_model_term_ref",
+            "model_claim_ref": "component_network_model_claim_ref",
+            "model_signature": "model_token",
+            "scope_counter": "scope_counter",
+            "observation_ref": "frame_ref",
+            "measurement_ref": "measurement_ref",
+            "word_ref": "word_ref",
+            "word_cells": "word_cells",
+            "resource_premise_claim_refs": "resource_claim_refs",
+            "remaining_quantity": "remaining_quantity",
+            "all_prefixes_valid": "network_all_prefixes_valid",
+            "operational_scene_ref": "frame_ref"
+          }
+        },
+        {
+          "id_pattern": "expectation.component_network.{frame_token}.{word_token}",
+          "kind": "schema",
+          "label": "next new component unit preserves current conditional full witness",
+          "required_fields": [
+            "word_cells",
+            "frame_ref"
+          ],
+          "static_attributes": {
+            "conditional": true,
+            "requires_sealed_response": true
+          },
+          "attribute_bindings": {
+            "model_ref": "component_network_model_term_ref",
+            "current_witness_ref": "component_network_witness_term_ref",
+            "word_cells": "word_cells",
+            "observation_ref": "frame_ref"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.current_conditional_component_network_witness"
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.component_network.{level_index}.{geometry_token}",
+          "predicate": "conditional_component_origin_model_fits_observed_scene",
+          "family": "structural",
+          "epistemic_status": "supported",
+          "required_fields": [
+            "model",
+            "level_index",
+            "geometry_token"
+          ],
+          "required_term_patterns": [
+            "model.component_network.{level_index}.{geometry_token}"
+          ],
+          "argument_patterns": [
+            "model.component_network.{level_index}.{geometry_token}"
+          ],
+          "static_attributes": {
+            "authorizes_action": false,
+            "universal_world_law": false,
+            "mixed_origins_acquired": false,
+            "requires_current_revalidation": true
+          },
+          "all_conditions": [
+            {
+              "field": "prior_model_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ]
+        },
+        {
+          "id_pattern": "claim.component_network.witness.{frame_token}.{word_token}",
+          "predicate": "current_component_word_model_and_resource_validated",
+          "family": "structural",
+          "epistemic_status": "supported",
+          "required_fields": [
+            "component_network_witness_term_ref",
+            "component_network_model_term_ref",
+            "frame_ref",
+            "network_all_prefixes_valid"
+          ],
+          "required_term_patterns": [
+            "witness.component_network.{frame_token}.{word_token}"
+          ],
+          "argument_patterns": [
+            "{component_network_witness_term_ref}",
+            "{component_network_model_term_ref}",
+            "{frame_ref}"
+          ],
+          "static_attributes": {
+            "conditional_model_not_world_law": true,
+            "authorizes_action": false,
+            "requires_current_revalidation": true
+          },
+          "attribute_bindings": {
+            "model_signature": "model_token",
+            "scope_counter": "scope_counter",
+            "observation_ref": "frame_ref",
+            "word_ref": "word_ref",
+            "resource_premise_claim_refs": "resource_claim_refs",
+            "all_prefixes_valid": "network_all_prefixes_valid"
+          }
+        }
+      ]
+    }
+  ]
+}

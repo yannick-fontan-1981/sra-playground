@@ -1,0 +1,300 @@
+{
+  "module_id": "arc3.prefix_mechanism_memory",
+  "declarations": [
+    {
+      "id": "policy.current_prefix_mechanism_memory",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "prefix_memory.acquire",
+        "prefix_memory.revalidate",
+        "prefix_memory.none"
+      ],
+      "reason_refs": [
+        "reason.actual_prefix_effect_parameters_are_portable_but_instance_state_is_not"
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.prefix_memory.alternatives",
+          "all_conditions": [],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.prefix_memory.acquire_acknowledged_unique_parameters",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "prefix_memory.acquire"
+            },
+            {
+              "field": "local_parameter_count",
+              "operator": "equals",
+              "expected": 4
+            },
+            {
+              "field": "acknowledged_command_count",
+              "operator": "equals",
+              "expected": 4
+            },
+            {
+              "field": "causal_parameter_source_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "occlusion_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "refusal_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "acquisition_already_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "reason_ref": "reason.actual_prefix_effect_parameters_are_portable_but_instance_state_is_not"
+        },
+        {
+          "id": "tier.prefix_memory.revalidate_current_selection_and_layout",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "prefix_memory.revalidate"
+            },
+            {
+              "field": "recalled_scope_count",
+              "operator": "equals",
+              "expected": 1
+            },
+            {
+              "field": "selected_parameter_support_count",
+              "operator": "greater_than",
+              "expected": 0
+            },
+            {
+              "field": "current_binding_already_present",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "reason_ref": "reason.recalled_parameters_require_current_selection_and_material_reconstruction"
+        },
+        {
+          "id": "tier.prefix_memory.preserve_unknown_or_already_recorded",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "prefix_memory.none"
+            }
+          ],
+          "reason_ref": "reason.no_new_memory_without_its_own_causal_evidence"
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "prefix_memory.acquire": "rule.acquired_prefix_mechanism_memory",
+        "prefix_memory.revalidate": "rule.current_prefix_mechanism_memory"
+      },
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.canonical_lexicographic_equivalence_tie_break"
+    },
+    {
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "invariants": [
+        "no_game_identity_palette_or_old_coordinate_defines_a_role",
+        "knowledge_admission_never_releases_an_action",
+        "calculation_receipt_is_not_experimental_truth",
+        "all_ambiguous_parameter_models_remain_alternatives"
+      ],
+      "falsifiers": [
+        "current_observed_effect_contradicts_the_recalled_parameters"
+      ],
+      "id": "rule.acquired_prefix_mechanism_memory",
+      "premises": [
+        "exact_ACKs_for_all_parameterized_commands",
+        "unique_parameter_table_with_observed_refusal_and_occlusion",
+        "acknowledged_parameter_recoloring_has_canonical_causal_origin"
+      ],
+      "reason_refs": [
+        "reason.actual_prefix_effect_parameters_are_portable_but_instance_state_is_not"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "memory.prefix_mechanism.{model_token}",
+          "kind": "schema",
+          "label": "revisable observed axial prefix command parameters",
+          "required_fields": [
+            "model_token",
+            "game_id",
+            "parameter_table",
+            "forward_signs",
+            "layer_law_ref",
+            "source_claim_refs"
+          ],
+          "static_attributes": {
+            "projection_contract": "yf_arc3_v5.prefix_mechanism_parameters.v1",
+            "canonical_fact_projection_enabled": true,
+            "memory_scope": "same_game",
+            "commitment": "revisable",
+            "parameter_role_ref": "role.prefix_parameter_selector",
+            "is_universal_operator_law": false,
+            "drop_scene_local_bindings": true
+          },
+          "attribute_bindings": {
+            "game_id": "game_id",
+            "parameter_table": "parameter_table",
+            "forward_signs": "forward_signs",
+            "layer_law_ref": "layer_law_ref",
+            "source_claim_refs": "source_claim_refs",
+            "model_claim_ref": "model_claim_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.memory.prefix_mechanism.{model_token}",
+          "predicate": "supports_revisable_prefix_mechanism_parameters",
+          "family": "control",
+          "argument_patterns": [
+            "memory.prefix_mechanism.{model_token}"
+          ],
+          "epistemic_status": "supported",
+          "required_fields": [
+            "model_token"
+          ],
+          "required_term_patterns": [
+            "memory.prefix_mechanism.{model_token}"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "polarity": "positive",
+            "disposition": "active"
+          },
+          "attribute_bindings": {
+            "source_claim_refs": "source_claim_refs"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "control",
+      "invariants": [
+        "no_game_identity_palette_or_old_coordinate_defines_a_role",
+        "knowledge_admission_never_releases_an_action",
+        "calculation_receipt_is_not_experimental_truth",
+        "all_ambiguous_parameter_models_remain_alternatives"
+      ],
+      "falsifiers": [
+        "current_observed_effect_contradicts_the_recalled_parameters"
+      ],
+      "id": "rule.current_prefix_mechanism_memory",
+      "premises": [
+        "supported_historical_parameter_model",
+        "current_measured_geometry_and_replayed_material_are_compatible",
+        "current_selected_parameter_has_relocated_role_or_exact_ACK_origin"
+      ],
+      "reason_refs": [
+        "reason.recalled_parameters_require_current_selection_and_material_reconstruction"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "binding.prefix_mechanism.{binding_token}",
+          "kind": "schema",
+          "label": "current observed binding of recalled prefix parameters",
+          "required_fields": [
+            "binding_token",
+            "model_term_ref",
+            "model_claim_ref",
+            "observation_ref",
+            "canonical_claim_dependency_digests",
+            "canonical_term_dependency_revisions"
+          ],
+          "static_attributes": {
+            "canonical_fact_projection_enabled": true,
+            "commitment": "revisable"
+          },
+          "attribute_bindings": {
+            "model_term_ref": "model_term_ref",
+            "model_claim_ref": "model_claim_ref",
+            "observation_ref": "observation_ref",
+            "canonical_claim_dependency_digests": "canonical_claim_dependency_digests",
+            "canonical_term_dependency_revisions": "canonical_term_dependency_revisions",
+            "binding_source_claim_refs": "binding_source_claim_refs",
+            "operational_scene_ref": "observation_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.memory.prefix_mechanism.current.{binding_token}",
+          "predicate": "current_prefix_parameters_have_compatible_selected_support",
+          "family": "control",
+          "argument_patterns": [
+            "binding.prefix_mechanism.{binding_token}",
+            "{model_term_ref}"
+          ],
+          "epistemic_status": "supported",
+          "required_fields": [
+            "binding_token",
+            "model_term_ref",
+            "observation_ref"
+          ],
+          "required_term_patterns": [
+            "binding.prefix_mechanism.{binding_token}"
+          ],
+          "static_attributes": {
+            "commitment": "revisable",
+            "polarity": "positive",
+            "disposition": "active"
+          },
+          "attribute_bindings": {
+            "memory_revalidation_observation_ref": "observation_ref",
+            "source_claim_refs": "binding_source_claim_refs"
+          }
+        }
+      ]
+    }
+  ]
+}

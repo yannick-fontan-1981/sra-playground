@@ -1,0 +1,395 @@
+{
+  "module_id": "endpoint_supposition_c",
+  "declarations": [
+    {
+      "id": "policy.articulated_channel_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_structural_evidence"
+      ],
+      "applicability": [
+        "revisable_endpoint_role_question"
+      ],
+      "invariants": [
+        "physical_propagation_control_and_goals_distinct",
+        "identity_independent_from_geometry_or_rendering",
+        "all_raw_descriptions_and_hypotheses_retained",
+        "no_confirmed_law_or_act"
+      ],
+      "falsifiers": [
+        "foreign_or_stale_scope",
+        "unsupported_feature_or_identity_relation",
+        "typed_mask_or_joint_model_mismatch"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "articulated_channel.retained_extension_and_separate_attachment_channel_questions",
+        "articulated_channel.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.articulated_channel_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "articulated_channel.retained_extension_and_separate_attachment_channel_questions"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "body_geometry_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "capped_variable_extent_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "endpoint_marker_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "mechanical_and_channel_relations_kept_separate",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "articulated_channel.retained_extension_and_separate_attachment_channel_questions"
+          }
+        },
+        {
+          "id": "projection.policy.articulated_channel_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "articulated_channel.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "articulated_channel.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.articulated_channel_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "articulated_channel.retained_extension_and_separate_attachment_channel_questions"
+            }
+          ],
+          "reason_ref": "reason.retained_extension_and_separate_attachment_channel_questions"
+        },
+        {
+          "id": "tier.policy.articulated_channel_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "articulated_channel.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retained_extension_and_separate_attachment_channel_questions"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.endpoint_disposition_not_goal_or_physical_action_choice",
+      "reason_refs": [
+        "reason.retained_extension_and_separate_attachment_channel_questions"
+      ]
+    },
+    {
+      "id": "policy.inverse_anchor_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_structural_evidence"
+      ],
+      "applicability": [
+        "revisable_endpoint_role_question"
+      ],
+      "invariants": [
+        "physical_propagation_control_and_goals_distinct",
+        "identity_independent_from_geometry_or_rendering",
+        "all_raw_descriptions_and_hypotheses_retained",
+        "no_confirmed_law_or_act"
+      ],
+      "falsifiers": [
+        "foreign_or_stale_scope",
+        "unsupported_feature_or_identity_relation",
+        "typed_mask_or_joint_model_mismatch"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "inverse_anchor.retained_joint_anchor_and_beacon_goal_questions",
+        "inverse_anchor.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.inverse_anchor_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "inverse_anchor.retained_joint_anchor_and_beacon_goal_questions"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "joint_wire_dependence_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "hollow_multicolour_ensemble_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "signature_and_destination_receivers_retained",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "inverse_anchor.retained_joint_anchor_and_beacon_goal_questions"
+          }
+        },
+        {
+          "id": "projection.policy.inverse_anchor_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "inverse_anchor.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "inverse_anchor.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.inverse_anchor_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "inverse_anchor.retained_joint_anchor_and_beacon_goal_questions"
+            }
+          ],
+          "reason_ref": "reason.retained_joint_anchor_and_beacon_goal_questions"
+        },
+        {
+          "id": "tier.policy.inverse_anchor_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "inverse_anchor.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retained_joint_anchor_and_beacon_goal_questions"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.endpoint_disposition_not_goal_or_physical_action_choice",
+      "reason_refs": [
+        "reason.retained_joint_anchor_and_beacon_goal_questions"
+      ]
+    },
+    {
+      "id": "policy.contact_shape_supposition_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_consumer_and_independent_structural_evidence"
+      ],
+      "applicability": [
+        "revisable_endpoint_role_question"
+      ],
+      "invariants": [
+        "physical_propagation_control_and_goals_distinct",
+        "identity_independent_from_geometry_or_rendering",
+        "all_raw_descriptions_and_hypotheses_retained",
+        "no_confirmed_law_or_act"
+      ],
+      "falsifiers": [
+        "foreign_or_stale_scope",
+        "unsupported_feature_or_identity_relation",
+        "typed_mask_or_joint_model_mismatch"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "contact_shape.retained_whole_contour_and_identity_preserving_contact_questions",
+        "contact_shape.retain_unqualified_question"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.policy.contact_shape_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "contact_shape.retained_whole_contour_and_identity_preserving_contact_questions"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "marker_constellation_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "contour_relation_scope_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "contact_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "stop_or_palette_supported",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "independent_identity_supported",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "contact_shape.retained_whole_contour_and_identity_preserving_contact_questions"
+          }
+        },
+        {
+          "id": "projection.policy.contact_shape_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "contact_shape.retain_unqualified_question"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "contact_shape.retain_unqualified_question"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.policy.contact_shape_supposition_c.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "contact_shape.retained_whole_contour_and_identity_preserving_contact_questions"
+            }
+          ],
+          "reason_ref": "reason.retained_whole_contour_and_identity_preserving_contact_questions"
+        },
+        {
+          "id": "tier.policy.contact_shape_supposition_c.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "contact_shape.retain_unqualified_question"
+            }
+          ],
+          "reason_ref": "reason.retained_whole_contour_and_identity_preserving_contact_questions"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.endpoint_disposition_not_goal_or_physical_action_choice",
+      "reason_refs": [
+        "reason.retained_whole_contour_and_identity_preserving_contact_questions"
+      ]
+    }
+  ]
+}

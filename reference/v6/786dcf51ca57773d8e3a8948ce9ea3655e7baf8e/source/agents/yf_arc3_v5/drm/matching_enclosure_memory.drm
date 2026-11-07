@@ -1,0 +1,115 @@
+{
+  "module_id": "matching_enclosure_memory",
+  "declarations": [
+    {
+      "id": "policy.remember_stationary_matching_enclosure",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "enclosure.remember_current_geometry"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "exact_stationary_perimeter_present",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "enclosure.remember_current_geometry": "rule.stationary_matching_enclosure_geometry"
+      },
+      "premises": [
+        "matching_body_and_enclosure_measured_before_action",
+        "same_perimeter_visible_at_same_pose_after_action"
+      ],
+      "invariants": [
+        "historical_layout_requires_current_revalidation",
+        "only_currently_justified_occluding_supports_can_explain_missing_pixels",
+        "no_colour_alone_certifies_receiving_effect"
+      ],
+      "falsifiers": [
+        "unexplained_missing_pixel_or_changed_pose"
+      ],
+      "reason_refs": [
+        "reason.stationary_matching_enclosure_layout_should_survive_an_actor_overflight"
+      ]
+    },
+    {
+      "id": "rule.stationary_matching_enclosure_geometry",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "premises": [
+        "source_selected_exact_stationary_enclosure_measurement"
+      ],
+      "invariants": [
+        "remember_original_layout_distinct_from_current_occluders",
+        "memory_is_not_current_action_authority"
+      ],
+      "falsifiers": [
+        "current_perimeter_cannot_be_revalidated_under_known_occlusion"
+      ],
+      "term_templates": [
+        {
+          "id_pattern": "memory.matching_enclosure.{enclosure_token}",
+          "kind": "schema",
+          "label": "original stationary matching enclosure geometry",
+          "required_fields": [
+            "enclosure_token",
+            "bbox",
+            "value",
+            "relative_pixels",
+            "context_epoch"
+          ],
+          "static_attributes": {
+            "role": "matching_enclosure_geometry_memory",
+            "commitment": "revisable",
+            "canonical_fact_projection_enabled": false,
+            "current_revalidation_required": true
+          },
+          "attribute_bindings": {
+            "bbox": "bbox",
+            "value": "value",
+            "relative_pixels": "relative_pixels",
+            "context_epoch": "context_epoch",
+            "transition_ref": "transition_ref"
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.memory.matching_enclosure.{enclosure_token}.{transition_ref}",
+          "predicate": "observed_stationary_matching_enclosure",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "required_fields": [
+            "enclosure_token",
+            "transition_ref"
+          ],
+          "argument_patterns": [
+            "memory.matching_enclosure.{enclosure_token}"
+          ],
+          "required_term_patterns": [
+            "memory.matching_enclosure.{enclosure_token}"
+          ],
+          "static_attributes": {
+            "commitment": "revisable"
+          }
+        }
+      ],
+      "reason_refs": [
+        "reason.stationary_matching_enclosure_layout_should_survive_an_actor_overflight"
+      ]
+    }
+  ]
+}

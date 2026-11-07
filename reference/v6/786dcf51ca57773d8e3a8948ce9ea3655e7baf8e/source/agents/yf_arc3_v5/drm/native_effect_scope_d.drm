@@ -1,0 +1,644 @@
+{
+  "module_id": "native_effect_scope_d",
+  "declarations": [
+    {
+      "id": "policy.d_native_effect_scope",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": [
+        "reason.d_current_owner_sealed_native_evidence_scope"
+      ],
+      "declared_alternative_refs": [
+        "d_effect_scope.cyclic_configuration_coverage",
+        "d_effect_scope.gravity_adhesion",
+        "d_effect_scope.reactive_capture",
+        "d_effect_scope.fixed_program_origin",
+        "d_effect_scope.temporal_fragment_match",
+        "d_effect_scope.bounded_joystick",
+        "d_effect_scope.neighborhood_pattern_construction",
+        "d_effect_scope.visual_sequence",
+        "d_effect_scope.topological_region_recolor",
+        "d_effect_scope.layered_prefix_construction",
+        "d_effect_scope.preview_piece_packing",
+        "d_effect_scope.station_profile_workbench",
+        "d_effect_scope.axial_field_configuration",
+        "d_effect_scope.supported_construction",
+        "d_effect_scope.finite_alignment",
+        "d_effect_scope.visible_voxel_construction",
+        "d_effect_scope.discrete_relay_optics",
+        "d_effect_scope.cadenced_rail_transfer",
+        "d_effect_scope.blocked"
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.d_scope_equivalent_alternative_order",
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.d_effect_scope.cyclic_configuration_coverage",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.cyclic_configuration_coverage"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.cyclic_configuration_coverage"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.cyclic_configuration_coverage"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "CyclicCoverageRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.gravity_adhesion",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.gravity_adhesion"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.gravity_adhesion"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.gravity_adhesion"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "CoupledMemberRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.reactive_capture",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.reactive_capture"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.reactive_capture"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.reactive_capture"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "ReactiveCaptureRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.fixed_program_origin",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.fixed_program_origin"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.fixed_program_origin"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.fixed_program_origin"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "FixedProgramRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.temporal_fragment_match",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.temporal_fragment_match"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.temporal_fragment_match"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.temporal_fragment_match"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "TemporalFragmentRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.bounded_joystick",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.bounded_joystick"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.bounded_joystick"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.bounded_joystick"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "BoundedJoystickRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.neighborhood_pattern_construction",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.neighborhood_pattern_construction"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.neighborhood_pattern_construction"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.neighborhood_pattern_construction"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "NeighborhoodPatternRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.visual_sequence",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.visual_sequence"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.visual_sequence"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.visual_sequence"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "VisualSequenceRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.topological_region_recolor",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.topological_region_recolor"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.topological_region_recolor"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.topological_region_recolor"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "TopologicalRecolorRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.layered_prefix_construction",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.layered_prefix_construction"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.layered_prefix_construction"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.layered_prefix_construction"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "LayeredPrefixRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.preview_piece_packing",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.preview_piece_packing"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.preview_piece_packing"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.preview_piece_packing"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "PreviewPackingRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.station_profile_workbench",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.station_profile_workbench"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.station_profile_workbench"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.station_profile_workbench"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "StationWorkbenchRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.axial_field_configuration",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.axial_field_configuration"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.axial_field_configuration"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.axial_field_configuration"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "AxialFieldRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.supported_construction",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.supported_construction"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.supported_construction"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.supported_construction"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "SupportedConstructionRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.finite_alignment",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.finite_alignment"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.finite_alignment_game"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.finite_alignment_game"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "FiniteAlignmentRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.visible_voxel_construction",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.visible_voxel_construction"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.visible_voxel_construction"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.visible_voxel_construction"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "VisibleVoxelRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.discrete_relay_optics",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.discrete_relay_optics"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.discrete_relay_optics"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.discrete_relay_optics"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "DiscreteOpticsRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.cadenced_rail_transfer",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.cadenced_rail_transfer"
+            },
+            {
+              "field": "effect_ref",
+              "operator": "equals",
+              "expected": "frontier.effect.cadenced_rail_transfer"
+            },
+            {
+              "field": "profile_ref",
+              "operator": "equals",
+              "expected": "solving.cadenced_rail_transfer"
+            },
+            {
+              "field": "native_type_ref",
+              "operator": "equals",
+              "expected": "CadencedRailRequest"
+            },
+            {
+              "field": "current_native_sealed_scope",
+              "operator": "equals",
+              "expected": true
+            }
+          ]
+        },
+        {
+          "id": "tier.d_effect_scope.blocked",
+          "reason_ref": "reason.d_current_owner_sealed_native_evidence_scope",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "d_effect_scope.blocked"
+            }
+          ]
+        }
+      ],
+      "configuration": {
+        "phase_ref": "SEALED_EFFECT",
+        "qualification_predicate_ref": "qualifies_current_native_unprocessed_sealed_effect_facet",
+        "qualification_status_refs": [
+          "supported",
+          "established"
+        ],
+        "facet_projection_contract_ref": "d.native_effect_facet.v1",
+        "facet_state_field": "processing_state_ref",
+        "facet_open_state_ref": "OPEN"
+      },
+      "invariants": [
+        "real_canonical_transaction_basis",
+        "exact_native_owner_and_model_scope",
+        "no_external_input_adapter",
+        "no_partial_or_active_known_path_facet",
+        "no_qualifier_or_physical_packet_fabrication",
+        "parent_and_siblings_preserved"
+      ],
+      "falsifiers": [
+        "stale_or_wrong_signature",
+        "missing_real_dispatch_or_acquisition",
+        "partial_packet",
+        "processed_facet",
+        "different_model_domain",
+        "foreign_dependency"
+      ]
+    }
+  ]
+}

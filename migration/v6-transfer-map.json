@@ -1,0 +1,505 @@
+{
+  "schema": "logos-engine.native-migration.v1",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "target": "Every capability of the published V6 common symbolic solver, executed in native TypeScript through the V7 common reasoning architecture",
+  "requirements": {
+    "pythonAgentAtRuntime": false,
+    "coverageRequired": 1,
+    "preserveAllReasoningFamilies": true,
+    "preserveLearningAndCounterexamples": true,
+    "preserveCrossLevelMemory": true,
+    "preserveWhyActAndPerPrimitiveGuards": true,
+    "preserveSealedPrefixReconciliation": true,
+    "commonProgramAndKnowledgeTree": true,
+    "inspectableAndRevisionedNodes": true,
+    "actualExecutionUsesPresentedTree": true,
+    "gameEngineRuntimeIsSeparate": true
+  },
+  "mappings": [
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_multiscale_constraints.py",
+        "agents/yf_arc3_v6/laya_proto/common_symmetric_field.py",
+        "agents/yf_arc3_v6/laya_proto/periodic_correspondence.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-field-constraints.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-field-reference.py",
+        "tests/fixtures/v6-field-reference.json",
+        "tests/v6-field-parity.test.ts"
+      ],
+      "notes": "Entire modules transferred. Complete-caller public trajectories verified on SYME and DNOI; the complete native router and all alternatives remain subject to integration verification."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_ordered_support.py",
+        "agents/yf_arc3_v5/capabilities/ordered_supports.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-ordered-support.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-ordered-support-reference.py",
+        "tests/fixtures/v6-ordered-support-reference.json",
+        "tests/v6-ordered-support-parity.test.ts",
+        "tests/fixtures/v6-ordered-support-main-reference.json"
+      ],
+      "notes": "Entire modules transferred, including bounded search and guards. All 15 HANO proposals and 30 public actions match the unchanged complete common caller."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/visual_sequences/family.py",
+        "agents/yf_arc3_v6/morphology_policy/visual_sequences/measure.py",
+        "agents/yf_arc3_v6/morphology_policy/visual_sequences/programs.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-visual-sequences.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-sequence-reference.py",
+        "tests/fixtures/v6-sequence-reference.json",
+        "tests/v6-visual-sequences.test.ts"
+      ],
+      "notes": "Entire V6 family transferred with actual SRC IR. Synthetic positive, ambiguity and refutation fixtures; the original refusal on the initial real SEQN scene is retained."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/visual_sequence.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-visual-sequences.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-sequence-reference.py",
+        "tests/fixtures/v6-sequence-reference.json",
+        "tests/v6-visual-sequences.test.ts"
+      ],
+      "notes": "Only the feature-value evaluator required by the V6 family is transferred; this mapping does not claim the entire inherited module."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/neutral_observer.py",
+        "agents/yf_arc3_v6/laya_proto/observed_input_domain.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-native-observer.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-observer-reference.py",
+        "tests/fixtures/v6-observer-reference.json",
+        "tests/v6-native-observer.test.ts"
+      ],
+      "notes": "Native public-frame measurement, domain and locus guards. Wider observer composition is tracked separately."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/geometric_observer.py",
+        "agents/yf_arc3_v5/capabilities/components.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-native-observer.ts",
+        "src/logos-engine/v6-geometric-scene.ts",
+        "src/logos-engine/v6-component-matches.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-observer-reference.py",
+        "tests/fixtures/v6-observer-reference.json",
+        "tests/v6-native-observer.test.ts",
+        "scripts/export-v6-geometry-reference.py",
+        "tests/fixtures/v6-geometry-reference.json",
+        "tests/v6-geometric-scene.test.ts"
+      ],
+      "notes": "Full geometric_observer and V5 components modules now transferred, including compact/framed-pattern/alignment/motion/lattice projections and ambiguity-preserving component matching. Positive framed alignments and both correspondence ambiguity directions are source-compared."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_mechanisms.py",
+        "agents/yf_arc3_v6/laya_proto/common_property_rewrites.py",
+        "agents/yf_arc3_v6/laya_proto/common_control_dependencies.py",
+        "agents/yf_arc3_v6/laya_proto/common_preservation.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-transition-learning.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-transition-reference.py",
+        "tests/fixtures/v6-transition-reference.json",
+        "tests/v6-transition-learning.test.ts"
+      ],
+      "notes": "Entire four empirical transition modules transferred; invalidation, acquired effects, precedence and preservation compared with source."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/terminal_composition.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-composition-memory.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-composition-reference.py",
+        "tests/fixtures/v6-composition-reference.json",
+        "tests/v6-composition-memory.test.ts"
+      ],
+      "notes": "Entire terminal composition memory module, with registration, repeated local changes, scored relations and retained state."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/operations.py",
+        "agents/yf_arc3_v6/laya_proto/memory.py",
+        "agents/yf_arc3_v6/laya_proto/catalog.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-operations.ts",
+        "src/logos-engine/v6-reasoning-memory.ts",
+        "src/logos-engine/v6/catalog.json"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-operations-reference.py",
+        "tests/fixtures/v6-operations-reference.json",
+        "tests/v6-operations.test.ts"
+      ],
+      "notes": "All 31 operations and normative catalog transferred. SQLite persistence is represented by native state and V7 versioned nodes; timing is injected. Arbitrary Python int/float identity is a remaining global gate."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_frontier.py",
+        "agents/yf_arc3_v6/laya_proto/return_fork.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-observed-frontier.ts",
+        "src/logos-engine/v6/frontier-policy.json"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-frontier-reference.py",
+        "tests/fixtures/v6-frontier-reference.json",
+        "tests/v6-observed-frontier.test.ts"
+      ],
+      "notes": "Entire observed frontier and closed-return contrast modules, including every delta and replayed state, local/nonlocal access, attempt ledgers and source-bound guards."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/goal_access_adapter.py",
+        "agents/yf_arc3_v6/laya_proto/attention_memory.py",
+        "agents/yf_arc3_v6/laya_proto/composition_curiosity.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-goal-access.ts",
+        "src/logos-engine/v6-attention-memory.ts",
+        "src/logos-engine/v6-information-goals.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-goal-attention-reference.py",
+        "tests/fixtures/v6-goal-attention-reference.json",
+        "tests/v6-goal-attention.test.ts"
+      ],
+      "notes": "Entire base adapter, scoped attention and information-goal election/reconciliation modules. The common caller uses the ProspectiveContact subclass, whose closure is tracked separately."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_view_frontier.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-view-frontier.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-view-reference.py",
+        "tests/fixtures/v6-view-reference.json",
+        "tests/v6-view-frontier.test.ts"
+      ],
+      "notes": "Entire public view-frontier module. Camera shifts, obstructed entry and point retest sequences retain full state through restore."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_orbit_constraints.py",
+        "agents/yf_arc3_v6/laya_proto/common_containment.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-orbit-constraints.ts",
+        "src/logos-engine/v6-containment.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-orbit-containment-reference.py",
+        "tests/fixtures/v6-orbit-containment-reference.json",
+        "tests/v6-orbit-containment.test.ts"
+      ],
+      "notes": "Entire two families. Includes Python/NumPy uint16 wrap, search, point bounds, caches, failures and state restoration."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_surface_program.py",
+        "agents/yf_arc3_v6/laya_proto/common_code_program.py",
+        "agents/yf_arc3_v6/laya_proto/common_band_transfer.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-surface-program.ts",
+        "src/logos-engine/v6-code-program.ts",
+        "src/logos-engine/v6-band-transfer.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-program-families-reference.py",
+        "tests/fixtures/v6-program-families-reference.json",
+        "tests/v6-program-families.test.ts"
+      ],
+      "notes": "All 48 source routines transferred; positive public packet hypotheses, wrong-outcome refutation and retained state. Wide integer masks use explicit decimal encodings."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_point_contrasts.py",
+        "agents/yf_arc3_v6/laya_proto/coupled_displays.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-point-contrasts.ts",
+        "src/logos-engine/v6-coupled-displays.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-point-display-reference.py",
+        "tests/fixtures/v6-point-display-reference.json",
+        "tests/v6-point-display.test.ts"
+      ],
+      "notes": "Entire two empirical-memory modules. Selected frozen witnesses, rival contrasts, distinct display effects and score-qualified reuse are source-compared."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/target_tree.py",
+        "agents/yf_arc3_v6/morphology_policy/observed_derivations.py",
+        "agents/yf_arc3_v6/morphology_policy/derive.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-target-binding.ts",
+        "src/logos-engine/v6-observed-derivations.ts",
+        "src/logos-engine/v6-derive.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-target-reference.py",
+        "tests/fixtures/v6-target-reference.json",
+        "tests/v6-target-binding.test.ts"
+      ],
+      "notes": "Entire target binding and derivation modules on the documented portable scalar domain; resource/depth/state limits and failure paths compared."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_frontier_runtime.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-target-binding.ts",
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-native-authority.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-target-reference.py",
+        "tests/fixtures/v6-target-reference.json",
+        "tests/v6-target-binding.test.ts",
+        "tests/v6-native-runtime.test.ts"
+      ],
+      "notes": "Caller projection helpers are transferred; the complete caller orchestration remains in progress."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/engine.py",
+        "agents/yf_arc3_v6/laya_proto/composition.py",
+        "agents/yf_arc3_v6/laya_proto/src_bridge.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-composition-engine.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-composition-engine-reference.py",
+        "tests/fixtures/v6-composition-engine-reference.json",
+        "tests/v6-composition-engine.test.ts"
+      ],
+      "notes": "Code-only common-caller WHY/ACT route and bridge transferred; actual router.src executes through V7 IR. The reference common caller selects code_only. Absent model-service branches produce an explicit error, never a fabricated decision."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/neutral_probe_runtime.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-composition-engine.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-composition-engine-reference.py",
+        "tests/fixtures/v6-composition-engine-reference.json",
+        "tests/v6-composition-engine.test.ts"
+      ],
+      "notes": "Only NeutralEngine.prepare used by the common composition caller is transferred. The separate experimental CLI/runtime is not claimed."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/policy.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-morphology-policy.ts",
+        "src/logos-engine/v6-drm-projector.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-drm-reference.py",
+        "tests/fixtures/v6-drm-reference.json",
+        "tests/v6-drm-projector.test.ts"
+      ],
+      "notes": "Policy projection and DRM closure verified independently; complete morphology family integration remains pending."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/drm/meaning.py",
+        "agents/yf_arc3_v5/drm/fact_conditions.py",
+        "agents/yf_arc3_v5/drm/fact_contracts.py",
+        "agents/yf_arc3_v5/drm/registry.py",
+        "agents/yf_arc3_v5/drm/runtime.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-drm-projector.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-drm-reference.py",
+        "tests/fixtures/v6-drm-reference.json",
+        "tests/v6-drm-projector.test.ts"
+      ],
+      "notes": "Only the generic projection/condition paths used in the current V6 morphology port are transferred; unported source claims/term-delta semantics remain explicit."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/src_runtime.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-src-program.ts",
+        "src/logos-engine/interpreter.ts",
+        "src/logos-engine/v6/programs.json"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-programs.py",
+        "tests/v6-src-program.test.ts",
+        "tests/src-while.test.ts"
+      ],
+      "notes": "Original declarative entry programs and V6 WHILE semantics execute natively. The development compiler remains Python; a full V5 source compiler port is not claimed."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/strategy.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "tests/v6-native-runtime.test.ts"
+      ],
+      "notes": "Sixteen outer strategy groups and implemented subgroup ordering are retained. All remaining providers, parent returns and cross-family interactions remain pending."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/target_method.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-target-method.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-geometry-reference.py",
+        "tests/fixtures/v6-geometry-reference.json",
+        "tests/v6-geometric-scene.test.ts"
+      ],
+      "notes": "Both helpers transferred: a truly scored same-source boundary can qualify a method; new-epoch recall requires all measured geometric premises and current role bindings."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/effect_access.py",
+        "agents/yf_arc3_v6/laya_proto/factored_return.py",
+        "agents/yf_arc3_v6/laya_proto/scored_local_rewrite.py",
+        "agents/yf_arc3_v6/laya_proto/passage_options.py",
+        "agents/yf_arc3_v6/laya_proto/prospective_contact_adapter.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-effect-access.ts",
+        "src/logos-engine/v6-factored-return.ts",
+        "src/logos-engine/v6-scored-rewrite.ts",
+        "src/logos-engine/v6-passage-options.ts",
+        "src/logos-engine/v6-prospective-contact.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-prospective-reference.py",
+        "tests/fixtures/v6-prospective-reference.json",
+        "tests/v6-prospective.test.ts"
+      ],
+      "notes": "Full ProspectiveContact inheritance closure: 46 declared functions exercised, full proposals/guards/events/cache replay compared. Integrated record(effect_plan) to actual score to retained terminal model to next-epoch public_goal_access is compared with unchanged source. This is component evidence, not yet the entire native common caller."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_slot_substitution.py",
+        "agents/yf_arc3_v6/laya_proto/common_word_interface.py",
+        "agents/yf_arc3_v6/laya_proto/common_port_assembly.py",
+        "agents/yf_arc3_v6/laya_proto/common_constellation_cover.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-slot-substitution.ts",
+        "src/logos-engine/v6-word-interface.ts",
+        "src/logos-engine/v6-port-assembly.ts",
+        "src/logos-engine/v6-constellation-cover.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-interface-families-reference.py",
+        "tests/fixtures/v6-interface-families-reference.json",
+        "tests/v6-interface-families.test.ts"
+      ],
+      "notes": "Four complete family modules transferred and compared through235operations with restoration after every operation. Includes learned controls and ownership, exact proposals and counterexamples. Not yet registered in the native caller at this checkpoint."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/typed_word_transduction.py",
+        "agents/yf_arc3_v5/capabilities/rigid_marker_pose.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-word-interface.ts",
+        "src/logos-engine/v6-rigid-marker-pose.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-interface-families-reference.py",
+        "tests/fixtures/v6-interface-families-reference.json",
+        "tests/v6-interface-families.test.ts"
+      ],
+      "notes": "The complete functions actually called here (_WordBudget/parse_typed_word and measure_rigid_marker_poses) are transferred. The other functions of these inherited modules are not claimed as ported."
+    }
+  ],
+  "scopeNotes": [
+    "The completion gate includes the published common symbolic caller and every transitive reasoning capability it requires, including inherited V5 implementations.",
+    "The original Python sources are development references. Shipping them as an executable agent, or calling a Python backend, does not satisfy the migration requirement.",
+    "The legacy neural benchmark launcher is separately identified by the V6 README. Its unpublished upstream harness and local model weights are not present in this reference. No equivalence with that absent artifact is claimed.",
+    "A source copied into the reference directory is not a transferred capability. A TypeScript file is not verified until differential evidence is recorded.",
+    "Standalone family parity does not establish parity of StrategyRouter, WHY/ACT, composition reconciliation or the complete campaign.",
+    "component_verified records differential evidence for a bounded component; it never passes the complete-port gate or implies integrated campaign parity."
+  ],
+  "completionGates": {
+    "allRequiredCapabilitiesTransferred": false,
+    "fullCommonCallerDifferentialParity": false,
+    "allDeclaredFamiliesIntegrated": false,
+    "commonGraphEditingCoversExecutedPrograms": false,
+    "pythonNumericSemanticsCovered": false,
+    "fullCampaignRegression": false
+  }
+}

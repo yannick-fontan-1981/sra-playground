@@ -1,0 +1,64 @@
+{
+  "module_id": "feedback_trial_choice_d",
+  "declarations": [{
+    "id": "policy.feedback_trial_choice_d",
+    "kind": "selection_policy",
+    "evaluation": "declared_lexicographic_order",
+    "supported_operators": ["SELECT"],
+    "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+    "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+    "premises": ["current_complete_joint_history_partitions_and_source_supported_trial_costs"],
+    "applicability": ["choose_one_current_trial_not_a_fixed_future_trial_series"],
+    "invariants": ["observed_feedback_before_next_choice", "preserve_exact_ranks_when_required", "known_code_still_requires_preparation_and_submission", "no_python_ranking_or_action_release"],
+    "falsifiers": ["stale_or_partial_partition", "missing_cost_support", "unfunded_trial", "violated_exact_rank", "empty_candidate_contradiction"],
+    "selection_required_fact_fields": ["alternative_ref"],
+    "selection_eligibility_conditions": [{"field":"applicable","operator":"equals","expected":true}],
+    "fact_projections": [
+      {
+        "id":"projection.feedback_trial_choice_d.current_trial",
+        "all_conditions":[
+          {"field":"need_row","operator":"equals","expected":false},
+          {"field":"native_partition_current","operator":"equals","expected":true},
+          {"field":"cost_support_current","operator":"equals","expected":true},
+          {"field":"resource_funded","operator":"equals","expected":true},
+          {"field":"preservation_ok","operator":"equals","expected":true}
+        ],
+        "any_conditions":[
+          {"field":"trial_equals_unique_code","operator":"equals","expected":true},
+          {"field":"information_has_multiple_branches","operator":"equals","expected":true}
+        ],
+        "static_facts":{"applicable":true}
+      },
+      {
+        "id":"projection.feedback_trial_choice_d.need",
+        "all_conditions":[{"field":"need_row","operator":"equals","expected":true}],
+        "static_facts":{"applicable":true}
+      }
+    ],
+    "selection_tiers":[
+      {
+        "id":"tier.feedback_trial_choice_d.realize_known_code",
+        "all_conditions":[{"field":"trial_equals_unique_code","operator":"equals","expected":true}],
+        "reason_ref":"reason.complete_current_code_requires_an_accepted_submission"
+      },
+      {
+        "id":"tier.feedback_trial_choice_d.resolve_observed_ambiguity",
+        "all_conditions":[{"field":"information_has_multiple_branches","operator":"equals","expected":true}],
+        "reason_ref":"reason.funded_trial_partitions_current_joint_feedback_accounts"
+      },
+      {
+        "id":"tier.feedback_trial_choice_d.retain_need",
+        "all_conditions":[{"field":"need_row","operator":"equals","expected":true}],
+        "reason_ref":"reason.retain_history_and_measure_missing_current_trial_premises"
+      }
+    ],
+    "selection_tie_breakers":[
+      {"field":"worst_residual","preferred_order":"minimize"},
+      {"field":"sum_squared_residuals","preferred_order":"minimize"},
+      {"field":"input_cost","preferred_order":"minimize"},
+      {"field":"alternative_ref","preferred_order":"minimize"}
+    ],
+    "canonical_equivalence_tie_break_debt_ref":"debt.equivalent_trial_reference_never_hidden_law_uniqueness",
+    "reason_refs":["reason.complete_current_code_requires_an_accepted_submission","reason.funded_trial_partitions_current_joint_feedback_accounts","reason.retain_history_and_measure_missing_current_trial_premises"]
+  }]
+}

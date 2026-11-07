@@ -1,0 +1,155 @@
+{
+  "module_id": "terminal_scope_d",
+  "declarations": [
+    {
+      "id": "policy.terminal_scope_d",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "current_source_declared_terminal_contract_and_actual_stages"
+      ],
+      "applicability": [
+        "explicit_quantified_terminal_scope"
+      ],
+      "invariants": [
+        "no_act",
+        "measurement_not_official_completion",
+        "candidate_not_confirmation",
+        "full_quantifiers_and_event_scope"
+      ],
+      "falsifiers": [
+        "unsupported_quantifier",
+        "old_receipt_as_new_submission",
+        "partial_population"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "terminal_scope.grounded",
+        "terminal_scope.candidate",
+        "terminal_scope.need_evidence"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.terminal_scope.grounded",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "terminal_scope.grounded"
+            },
+            {
+              "field": "terminal_contract_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "independent_goal_scope_grounded",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.terminal_scope.candidate",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "terminal_scope.candidate"
+            },
+            {
+              "field": "terminal_contract_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "independent_goal_scope_grounded",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        },
+        {
+          "id": "projection.terminal_scope.need",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "terminal_scope.need_evidence"
+            }
+          ],
+          "static_facts": {
+            "applicable": true
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.terminal_scope.grounded",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "terminal_scope.grounded"
+            }
+          ],
+          "reason_ref": "reason.independently_grounded_exact_terminal_scope"
+        },
+        {
+          "id": "tier.terminal_scope.candidate",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "terminal_scope.candidate"
+            }
+          ],
+          "reason_ref": "reason.revisable_candidate_terminal_scope_not_confirmed"
+        },
+        {
+          "id": "tier.terminal_scope.need",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "terminal_scope.need_evidence"
+            }
+          ],
+          "reason_ref": "reason.terminal_quantifier_and_event_scope_need_evidence"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.terminal_scope_actual_use_unverified",
+      "reason_refs": [
+        "reason.independently_grounded_exact_terminal_scope",
+        "reason.revisable_candidate_terminal_scope_not_confirmed",
+        "reason.terminal_quantifier_and_event_scope_need_evidence"
+      ]
+    }
+  ]
+}

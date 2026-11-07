@@ -1,0 +1,1306 @@
+{
+  "module_id": "effect_frontier_c",
+  "declarations": [
+    {
+      "id": "policy.program_effect_return_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "program.effect.complete",
+        "program.effect.bounded"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.program.effect.complete",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program.effect.complete"
+            },
+            {
+              "field": "complete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.program.effect.bounded",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "program.effect.bounded"
+            },
+            {
+              "field": "bounded",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "premises": [
+        "existing_typed_K27_output_preserved"
+      ],
+      "invariants": [
+        "no_synthetic_native_family_result",
+        "computed_prefix_not_acceptance",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "wrong_typed_output",
+        "wrong_declared_operation"
+      ],
+      "reason_refs": [
+        "reason_program_scope_boundary_retains_its_actual_type"
+      ]
+    },
+    {
+      "id": "policy.effect_frontier_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": [
+        "effect.frontier.current",
+        "effect.frontier.incomplete"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "eligible",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.effect.frontier.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "effect.frontier.current"
+            },
+            {
+              "field": "calculation_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        },
+        {
+          "id": "projection.effect.frontier.incomplete",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "effect.frontier.incomplete"
+            },
+            {
+              "field": "incomplete_calculation_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "static_facts": {
+            "eligible": true
+          }
+        }
+      ],
+      "meaning_template_ref_by_alternative": {
+        "effect.frontier.current": "rule.effect_frontier_c",
+        "effect.frontier.incomplete": "rule.effect_frontier_c"
+      },
+      "premises": [
+        "actual_sealed_acquisition",
+        "current_exact_native_scope"
+      ],
+      "invariants": [
+        "retain_native_specialized_return",
+        "no_ACT",
+        "observation_not_universal_law"
+      ],
+      "falsifiers": [
+        "stale_acquisition",
+        "wrong_native_return"
+      ],
+      "reason_refs": [
+        "reason_effect_frontier_interpretation_requires_real_acquisition"
+      ]
+    },
+    {
+      "id": "rule.effect_frontier_c",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": [
+        "DERIVE"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "epistemic",
+      "term_templates": [
+        {
+          "id_pattern": "effect.frontier.{projection_ref}",
+          "kind": "value",
+          "label": "Current observed mechanical effect and exact native calculation",
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "kernel_ref",
+            "observed_family_delta",
+            "native_values",
+            "frozen_why"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "kernel_ref": "kernel_ref",
+            "observed_family_delta": "observed_family_delta",
+            "native_values": "native_values",
+            "frozen_why": "frozen_why",
+            "ordered_intermediate_scenes": "ordered_intermediate_scenes",
+            "dispatch_record_ref": "dispatch_record_ref",
+            "acceptance": "acceptance",
+            "support_onward_route_absent": "support_onward_route_absent",
+            "articulated_remaining_limiting_component_refs": "articulated_remaining_limiting_component_refs",
+            "shape_assignment_invalidated": "shape_assignment_invalidated",
+            "coupled_constraints_hold_without_acceptance": "coupled_constraints_hold_without_acceptance"
+          },
+          "static_attributes": {
+            "execution_authority": false,
+            "universal_law_proved": false
+          }
+        },
+        {
+          "id_pattern": "effect.frontier.need.{projection_ref}",
+          "kind": "goal",
+          "label": "Complete the current acquired mechanical evidence",
+          "all_conditions": [
+            {
+              "field": "incomplete_calculation_bound",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why",
+            "missing_refs"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "missing_refs": "missing_refs",
+            "native_result": "native_result"
+          },
+          "static_attributes": {
+            "requires_current_evidence": true,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "effect.support.utility.need.{projection_ref}",
+          "kind": "goal",
+          "label": "Reconsider the onward support connection while preserving the observed transformation",
+          "all_conditions": [
+            {
+              "field": "support_onward_route_absent",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why",
+            "current_configuration_connection_rows"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "observed_family_delta": "observed_family_delta",
+            "native_values": "native_values",
+            "current_configuration_connection_rows": "current_configuration_connection_rows"
+          },
+          "static_attributes": {
+            "requires_parent_means_revalidation": true,
+            "execution_authority": false,
+            "observed_transform_preserved": true,
+            "open_explanations": [
+              "support_connection",
+              "staging_utility"
+            ]
+          }
+        },
+        {
+          "id_pattern": "effect.articulated.clearance.need.{projection_ref}",
+          "kind": "goal",
+          "label": "Keep channel clearance open for the actual remaining limiting components",
+          "all_conditions": [
+            {
+              "field": "articulated_parent_clearance_still_open",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why",
+            "articulated_remaining_limiting_component_refs"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "observed_family_delta": "observed_family_delta",
+            "native_values": "native_values",
+            "articulated_remaining_limiting_component_refs": "articulated_remaining_limiting_component_refs"
+          },
+          "static_attributes": {
+            "requires_parent_means_revalidation": true,
+            "execution_authority": false,
+            "partial_progress_preserved": true,
+            "shared_control_proves_attachment": false
+          }
+        },
+        {
+          "id_pattern": "effect.shape.assignment.need.{projection_ref}",
+          "kind": "goal",
+          "label": "Reconsider the target assignment after the observed deformation",
+          "all_conditions": [
+            {
+              "field": "shape_assignment_invalidated",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why",
+            "current_shape_assignment_rows"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "observed_family_delta": "observed_family_delta",
+            "native_values": "native_values",
+            "current_shape_assignment_rows": "current_shape_assignment_rows"
+          },
+          "static_attributes": {
+            "requires_parent_means_revalidation": true,
+            "execution_authority": false,
+            "supported_contact_law_preserved": true,
+            "open_explanations": [
+              "target_assignment",
+              "candidate_domain"
+            ]
+          }
+        },
+        {
+          "id_pattern": "effect.coupled.terminal.need.{projection_ref}",
+          "kind": "goal",
+          "label": "Reconsider mapping or terminal scope when predicted constraints hold without acceptance",
+          "all_conditions": [
+            {
+              "field": "coupled_constraints_hold_without_acceptance",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why",
+            "current_coupled_allowed_sets"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "observed_family_delta": "observed_family_delta",
+            "native_values": "native_values",
+            "current_coupled_allowed_sets": "current_coupled_allowed_sets"
+          },
+          "static_attributes": {
+            "requires_parent_means_revalidation": true,
+            "execution_authority": false,
+            "contrary_acceptance_preserved": true,
+            "open_explanations": [
+              "carrier_mapping",
+              "terminal_scope"
+            ],
+            "arbitrary_value_edit_authorized": false
+          }
+        },
+        {
+          "id_pattern": "effect.program.repair.need.{projection_ref}",
+          "kind": "goal",
+          "label": "Repair the actual first mismatch at its definition and call sites",
+          "all_conditions": [
+            {
+              "field": "program_repair_required",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why",
+            "program_repair_scope"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "program_repair_scope": "program_repair_scope",
+            "observed_family_delta": "observed_family_delta"
+          },
+          "static_attributes": {
+            "requires_parent_means_revalidation": true,
+            "shared_definition_dependencies_preserved": true,
+            "nearest_socket_is_not_repair_authority": true,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "effect.program.observation.need.{projection_ref}",
+          "kind": "goal",
+          "label": "Resolve the actual validation focus and emission observations",
+          "all_conditions": [
+            {
+              "field": "program_observation_incomplete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why",
+            "observed_family_delta"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "observed_family_delta": "observed_family_delta"
+          },
+          "static_attributes": {
+            "requires_current_evidence": true,
+            "candidate_execution_is_not_actual_packet": true,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "effect.program.edit.observation.need.{projection_ref}",
+          "kind": "goal",
+          "label": "Reconcile the recorded token/socket edit before using its predicted result",
+          "all_conditions": [
+            {
+              "field": "program_edit_observation_incomplete",
+              "operator": "equals",
+              "expected": true
+            }
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "frozen_why"
+          ],
+          "attribute_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "frozen_why": "frozen_why",
+            "observed_family_delta": "observed_family_delta"
+          },
+          "static_attributes": {
+            "requires_current_evidence": true,
+            "execution_authority": false,
+            "predicted_edit_is_not_observed_edit": true
+          }
+        }
+      ],
+      "claim_templates": [
+        {
+          "id_pattern": "claim.effect.frontier.{projection_ref}",
+          "predicate": "records_current_scoped_effect_frontier_evidence",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "native_values"
+          ],
+          "attribute_bindings": {
+            "native_values": "native_values",
+            "observed_family_delta": "observed_family_delta",
+            "frozen_why": "frozen_why",
+            "exact_demand": "exact_demand"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          }
+        },
+        {
+          "id_pattern": "claim.program.observed.literal.{projection_ref}.{event_index}",
+          "predicate": "correlates_observed_program_literal_emission",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_index"
+          ],
+          "all_conditions": [
+            {
+              "field": "kernel_kind",
+              "operator": "equals",
+              "expected": "program"
+            }
+          ],
+          "static_attributes": {
+            "model_role_confirmation": false,
+            "external_input_authority": false
+          },
+          "attribute_bindings": {
+            "packet_index": "event_index",
+            "focus_before": "event_focus_before",
+            "focus_after": "event_focus_after",
+            "emitted_delta": "event_emitted_delta",
+            "instruction_ref": "event_instruction_ref",
+            "caller_continuations": "event_caller_continuations",
+            "caller_prefix_observed": "event_prefix_observed",
+            "caller_stack_known_empty": "event_stack_known_empty",
+            "validation_control_observed": "event_validation",
+            "focus_changed": "event_focus_changed",
+            "frozen_why": "frozen_why",
+            "exact_demand": "exact_demand"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "iteration": {
+            "source_field": "program_observation_rows",
+            "item_bindings": {
+              "event_index": "packet_index",
+              "event_focus_before": "focus_before",
+              "event_focus_after": "focus_after",
+              "event_emitted_delta": "observed_emitted_delta",
+              "event_instruction_ref": "instruction_ref",
+              "event_caller_continuations": "retained_caller_continuations",
+              "event_prefix_observed": "caller_prefix_observed",
+              "event_stack_known_empty": "caller_stack_known_empty",
+              "event_validation": "validation_control_observed",
+              "event_focus_changed": "focus_changed",
+              "event_match": "literal_template_matches"
+            },
+            "max_items": 65,
+            "all_conditions": [
+              {
+                "field": "event_match",
+                "operator": "equals",
+                "expected": true
+              }
+            ]
+          }
+        },
+        {
+          "id_pattern": "claim.program.observed.entry.{projection_ref}.{event_index}",
+          "predicate": "correlates_observed_program_call_entry",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_index"
+          ],
+          "all_conditions": [
+            {
+              "field": "kernel_kind",
+              "operator": "equals",
+              "expected": "program"
+            }
+          ],
+          "static_attributes": {
+            "model_role_confirmation": false,
+            "external_input_authority": false
+          },
+          "attribute_bindings": {
+            "packet_index": "event_index",
+            "focus_before": "event_focus_before",
+            "focus_after": "event_focus_after",
+            "emitted_delta": "event_emitted_delta",
+            "instruction_ref": "event_instruction_ref",
+            "caller_continuations": "event_caller_continuations",
+            "caller_prefix_observed": "event_prefix_observed",
+            "caller_stack_known_empty": "event_stack_known_empty",
+            "validation_control_observed": "event_validation",
+            "focus_changed": "event_focus_changed",
+            "frozen_why": "frozen_why",
+            "exact_demand": "exact_demand"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "iteration": {
+            "source_field": "program_observation_rows",
+            "item_bindings": {
+              "event_index": "packet_index",
+              "event_focus_before": "focus_before",
+              "event_focus_after": "focus_after",
+              "event_emitted_delta": "observed_emitted_delta",
+              "event_instruction_ref": "instruction_ref",
+              "event_caller_continuations": "retained_caller_continuations",
+              "event_prefix_observed": "caller_prefix_observed",
+              "event_stack_known_empty": "caller_stack_known_empty",
+              "event_validation": "validation_control_observed",
+              "event_focus_changed": "focus_changed",
+              "event_match": "call_entry_template_matches"
+            },
+            "max_items": 65,
+            "all_conditions": [
+              {
+                "field": "event_match",
+                "operator": "equals",
+                "expected": true
+              }
+            ]
+          }
+        },
+        {
+          "id_pattern": "claim.program.observed.return.{projection_ref}.{event_index}",
+          "predicate": "correlates_observed_program_caller_return",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_index"
+          ],
+          "all_conditions": [
+            {
+              "field": "kernel_kind",
+              "operator": "equals",
+              "expected": "program"
+            }
+          ],
+          "static_attributes": {
+            "model_role_confirmation": false,
+            "external_input_authority": false
+          },
+          "attribute_bindings": {
+            "packet_index": "event_index",
+            "focus_before": "event_focus_before",
+            "focus_after": "event_focus_after",
+            "emitted_delta": "event_emitted_delta",
+            "instruction_ref": "event_instruction_ref",
+            "caller_continuations": "event_caller_continuations",
+            "caller_prefix_observed": "event_prefix_observed",
+            "caller_stack_known_empty": "event_stack_known_empty",
+            "validation_control_observed": "event_validation",
+            "focus_changed": "event_focus_changed",
+            "frozen_why": "frozen_why",
+            "exact_demand": "exact_demand"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "iteration": {
+            "source_field": "program_observation_rows",
+            "item_bindings": {
+              "event_index": "packet_index",
+              "event_focus_before": "focus_before",
+              "event_focus_after": "focus_after",
+              "event_emitted_delta": "observed_emitted_delta",
+              "event_instruction_ref": "instruction_ref",
+              "event_caller_continuations": "retained_caller_continuations",
+              "event_prefix_observed": "caller_prefix_observed",
+              "event_stack_known_empty": "caller_stack_known_empty",
+              "event_validation": "validation_control_observed",
+              "event_focus_changed": "focus_changed",
+              "event_match": "caller_return_template_matches"
+            },
+            "max_items": 65,
+            "all_conditions": [
+              {
+                "field": "event_match",
+                "operator": "equals",
+                "expected": true
+              }
+            ]
+          }
+        },
+        {
+          "id_pattern": "claim.program.observed.unknown_prefix.{projection_ref}.{event_index}",
+          "predicate": "retains_unknown_observed_program_caller_prefix",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_index"
+          ],
+          "all_conditions": [
+            {
+              "field": "kernel_kind",
+              "operator": "equals",
+              "expected": "program"
+            }
+          ],
+          "static_attributes": {
+            "model_role_confirmation": false,
+            "external_input_authority": false
+          },
+          "attribute_bindings": {
+            "packet_index": "event_index",
+            "focus_before": "event_focus_before",
+            "focus_after": "event_focus_after",
+            "emitted_delta": "event_emitted_delta",
+            "instruction_ref": "event_instruction_ref",
+            "caller_continuations": "event_caller_continuations",
+            "caller_prefix_observed": "event_prefix_observed",
+            "caller_stack_known_empty": "event_stack_known_empty",
+            "validation_control_observed": "event_validation",
+            "focus_changed": "event_focus_changed",
+            "frozen_why": "frozen_why",
+            "exact_demand": "exact_demand"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "iteration": {
+            "source_field": "program_observation_rows",
+            "item_bindings": {
+              "event_index": "packet_index",
+              "event_focus_before": "focus_before",
+              "event_focus_after": "focus_after",
+              "event_emitted_delta": "observed_emitted_delta",
+              "event_instruction_ref": "instruction_ref",
+              "event_caller_continuations": "retained_caller_continuations",
+              "event_prefix_observed": "caller_prefix_observed",
+              "event_stack_known_empty": "caller_stack_known_empty",
+              "event_validation": "validation_control_observed",
+              "event_focus_changed": "focus_changed",
+              "event_match": "caller_prefix_observed"
+            },
+            "max_items": 65,
+            "all_conditions": [
+              {
+                "field": "event_match",
+                "operator": "equals",
+                "expected": false
+              }
+            ]
+          }
+        },
+        {
+          "id_pattern": "claim.program.observed.edit.selection_changed.{projection_ref}",
+          "predicate": "correlates_observed_program_edit_selection_changed",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "program_edit_control_ref",
+            "program_edit_control_kind"
+          ],
+          "all_conditions": [
+            {
+              "field": "kernel_kind",
+              "operator": "equals",
+              "expected": "program"
+            },
+            {
+              "field": "program_edit_result_matches_observation",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_edit_status",
+              "operator": "equals",
+              "expected": "selection_changed"
+            }
+          ],
+          "attribute_bindings": {
+            "original_selection_ref": "program_edit_original_selection_ref",
+            "displaced_token_ref": "program_edit_displaced_token_ref",
+            "source_locations": "program_edit_source_locations",
+            "result_locations": "program_edit_result_locations",
+            "result_sockets": "program_edit_result_sockets",
+            "edit_ref": "program_edit_control_ref",
+            "edit_kind": "program_edit_control_kind",
+            "frozen_why": "frozen_why",
+            "exact_demand": "exact_demand"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "static_attributes": {
+            "execution_authority": false,
+            "world_input_executed": false,
+            "unchanged_socket_is_not_inert": false
+          }
+        },
+        {
+          "id_pattern": "claim.program.observed.edit.unchanged_without_selection.{projection_ref}",
+          "predicate": "correlates_observed_program_edit_unchanged_without_selection",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "program_edit_control_ref",
+            "program_edit_control_kind"
+          ],
+          "all_conditions": [
+            {
+              "field": "kernel_kind",
+              "operator": "equals",
+              "expected": "program"
+            },
+            {
+              "field": "program_edit_result_matches_observation",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_edit_status",
+              "operator": "equals",
+              "expected": "unchanged_without_selection"
+            }
+          ],
+          "attribute_bindings": {
+            "original_selection_ref": "program_edit_original_selection_ref",
+            "displaced_token_ref": "program_edit_displaced_token_ref",
+            "source_locations": "program_edit_source_locations",
+            "result_locations": "program_edit_result_locations",
+            "result_sockets": "program_edit_result_sockets",
+            "edit_ref": "program_edit_control_ref",
+            "edit_kind": "program_edit_control_kind",
+            "frozen_why": "frozen_why",
+            "exact_demand": "exact_demand"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "static_attributes": {
+            "execution_authority": false,
+            "world_input_executed": false,
+            "unchanged_socket_is_not_inert": true
+          }
+        },
+        {
+          "id_pattern": "claim.program.observed.edit.transferred.{projection_ref}",
+          "predicate": "correlates_observed_program_edit_transferred",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "program_edit_control_ref",
+            "program_edit_control_kind"
+          ],
+          "all_conditions": [
+            {
+              "field": "kernel_kind",
+              "operator": "equals",
+              "expected": "program"
+            },
+            {
+              "field": "program_edit_result_matches_observation",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_edit_status",
+              "operator": "equals",
+              "expected": "transferred"
+            }
+          ],
+          "attribute_bindings": {
+            "original_selection_ref": "program_edit_original_selection_ref",
+            "displaced_token_ref": "program_edit_displaced_token_ref",
+            "source_locations": "program_edit_source_locations",
+            "result_locations": "program_edit_result_locations",
+            "result_sockets": "program_edit_result_sockets",
+            "edit_ref": "program_edit_control_ref",
+            "edit_kind": "program_edit_control_kind",
+            "frozen_why": "frozen_why",
+            "exact_demand": "exact_demand"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "static_attributes": {
+            "execution_authority": false,
+            "world_input_executed": false,
+            "unchanged_socket_is_not_inert": false
+          }
+        },
+        {
+          "id_pattern": "claim.program.observed.edit.exchanged.{projection_ref}",
+          "predicate": "correlates_observed_program_edit_exchanged",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "program_edit_control_ref",
+            "program_edit_control_kind"
+          ],
+          "all_conditions": [
+            {
+              "field": "kernel_kind",
+              "operator": "equals",
+              "expected": "program"
+            },
+            {
+              "field": "program_edit_result_matches_observation",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_edit_status",
+              "operator": "equals",
+              "expected": "exchanged"
+            }
+          ],
+          "attribute_bindings": {
+            "original_selection_ref": "program_edit_original_selection_ref",
+            "displaced_token_ref": "program_edit_displaced_token_ref",
+            "source_locations": "program_edit_source_locations",
+            "result_locations": "program_edit_result_locations",
+            "result_sockets": "program_edit_result_sockets",
+            "edit_ref": "program_edit_control_ref",
+            "edit_kind": "program_edit_control_kind",
+            "frozen_why": "frozen_why",
+            "exact_demand": "exact_demand"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "static_attributes": {
+            "execution_authority": false,
+            "world_input_executed": false,
+            "unchanged_socket_is_not_inert": false
+          }
+        },
+        {
+          "id_pattern": "claim.program.observed.prefix_acceptance.{projection_ref}",
+          "predicate": "supports_observed_finite_program_prefix_acceptance",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "program_reference_values",
+            "program_model_revision_ref"
+          ],
+          "all_conditions": [
+            {
+              "field": "kernel_kind",
+              "operator": "equals",
+              "expected": "program"
+            },
+            {
+              "field": "program_validation_input_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_effect_acceptance_observed",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_observed_caller_prefix_known",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_actual_reference_equal",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "program_observation_incomplete",
+              "operator": "equals",
+              "expected": false
+            },
+            {
+              "field": "program_observed_open_caller_count",
+              "operator": "greater_than",
+              "expected": 0
+            }
+          ],
+          "attribute_bindings": {
+            "reference_values": "program_reference_values",
+            "model_revision_ref": "program_model_revision_ref",
+            "open_caller_count": "program_observed_open_caller_count",
+            "frozen_why": "frozen_why",
+            "dispatch_record_ref": "dispatch_record_ref"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "static_attributes": {
+            "acceptance_observed": true,
+            "validation_input_observed": true,
+            "candidate_simulation_is_not_acceptance": true,
+            "universal_law_proved": false,
+            "execution_authority": false
+          }
+        },
+        {
+          "id_pattern": "claim.program.observed.type.literal.{projection_ref}.{event_index}",
+          "predicate": "supports_observed_program_instruction_type",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_index"
+          ],
+          "all_conditions": [
+            {
+              "field": "kernel_kind",
+              "operator": "equals",
+              "expected": "program"
+            }
+          ],
+          "static_attributes": {
+            "instruction_kind": "literal",
+            "morphology_and_execution_observed": true,
+            "universal_instruction_law": false,
+            "external_input_authority": false
+          },
+          "attribute_bindings": {
+            "instruction_ref": "event_instruction_ref",
+            "value_ref": "event_value_ref",
+            "target_definition_ref": "event_target_ref",
+            "normalized_support": "event_shape_support",
+            "model_revision_ref": "program_model_revision_ref",
+            "dispatch_record_ref": "dispatch_record_ref"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "iteration": {
+            "source_field": "program_observation_rows",
+            "item_bindings": {
+              "event_index": "packet_index",
+              "event_focus_before": "focus_before",
+              "event_focus_after": "focus_after",
+              "event_emitted_delta": "observed_emitted_delta",
+              "event_instruction_ref": "instruction_ref",
+              "event_caller_continuations": "retained_caller_continuations",
+              "event_prefix_observed": "caller_prefix_observed",
+              "event_stack_known_empty": "caller_stack_known_empty",
+              "event_validation": "validation_control_observed",
+              "event_focus_changed": "focus_changed",
+              "event_match": "literal_template_matches",
+              "event_shape_complete": "instruction_shape_complete",
+              "event_shape_match": "instruction_rectangle_filled",
+              "event_shape_support": "instruction_normalized_support",
+              "event_value_ref": "instruction_value_ref",
+              "event_target_ref": "instruction_target_definition_ref"
+            },
+            "max_items": 65,
+            "all_conditions": [
+              {
+                "field": "event_match",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "event_shape_complete",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "event_shape_match",
+                "operator": "equals",
+                "expected": true
+              }
+            ]
+          }
+        },
+        {
+          "id_pattern": "claim.program.observed.type.call.{projection_ref}.{event_index}",
+          "predicate": "supports_observed_program_instruction_type",
+          "family": "epistemic",
+          "epistemic_status": "supported",
+          "argument_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_term_patterns": [
+            "{parent_goal_ref}",
+            "effect.frontier.{projection_ref}"
+          ],
+          "required_fields": [
+            "projection_ref",
+            "parent_goal_ref",
+            "event_index"
+          ],
+          "all_conditions": [
+            {
+              "field": "kernel_kind",
+              "operator": "equals",
+              "expected": "program"
+            }
+          ],
+          "static_attributes": {
+            "instruction_kind": "call",
+            "morphology_and_execution_observed": true,
+            "universal_instruction_law": false,
+            "external_input_authority": false
+          },
+          "attribute_bindings": {
+            "instruction_ref": "event_instruction_ref",
+            "value_ref": "event_value_ref",
+            "target_definition_ref": "event_target_ref",
+            "normalized_support": "event_shape_support",
+            "model_revision_ref": "program_model_revision_ref",
+            "dispatch_record_ref": "dispatch_record_ref"
+          },
+          "scope_bindings": {
+            "parent_goal_ref": "parent_goal_ref",
+            "epoch": "epoch",
+            "episode_ref": "episode_ref",
+            "level_scope_ref": "level_scope_ref",
+            "input_revision_ref": "input_revision_ref",
+            "scope_ref": "scope_ref"
+          },
+          "iteration": {
+            "source_field": "program_observation_rows",
+            "item_bindings": {
+              "event_index": "packet_index",
+              "event_focus_before": "focus_before",
+              "event_focus_after": "focus_after",
+              "event_emitted_delta": "observed_emitted_delta",
+              "event_instruction_ref": "instruction_ref",
+              "event_caller_continuations": "retained_caller_continuations",
+              "event_prefix_observed": "caller_prefix_observed",
+              "event_stack_known_empty": "caller_stack_known_empty",
+              "event_validation": "validation_control_observed",
+              "event_focus_changed": "focus_changed",
+              "event_match": "call_entry_template_matches",
+              "event_shape_complete": "instruction_shape_complete",
+              "event_shape_match": "instruction_rectangle_border_only",
+              "event_shape_support": "instruction_normalized_support",
+              "event_value_ref": "instruction_value_ref",
+              "event_target_ref": "instruction_target_definition_ref"
+            },
+            "max_items": 65,
+            "all_conditions": [
+              {
+                "field": "event_match",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "event_shape_complete",
+                "operator": "equals",
+                "expected": true
+              },
+              {
+                "field": "event_shape_match",
+                "operator": "equals",
+                "expected": true
+              }
+            ]
+          }
+        }
+      ],
+      "premises": [
+        "actual_acquired_observation_and_exact_native_result"
+      ],
+      "invariants": [
+        "preserve_parent_goal",
+        "keep_unknowns_explicit",
+        "no_ACT"
+      ],
+      "falsifiers": [
+        "changed_owner_or_evidence_revision",
+        "contrary_observed_effect"
+      ],
+      "reason_refs": [
+        "reason_native_measurement_preserves_its_causal_scope"
+      ]
+    }
+  ]
+}

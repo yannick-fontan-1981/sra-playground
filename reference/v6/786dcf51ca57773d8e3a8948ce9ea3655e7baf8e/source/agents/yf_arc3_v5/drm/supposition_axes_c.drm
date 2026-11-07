@@ -1,0 +1,133 @@
+{
+  "module_id": "supposition_axes_c",
+  "declarations": [
+    {
+      "id": "policy.supposition_axes_c",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": [
+        "SELECT"
+      ],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": [
+        "source_declared_scoped_reference_space_and_beneficiary_candidates"
+      ],
+      "applicability": [
+        "revisable_supposition_axes"
+      ],
+      "invariants": [
+        "unchanged_operation_not_immutable_reference",
+        "mutable_reference_preserves_relation_definitions",
+        "negative_space_geometry_not_acceptance",
+        "equal_counts_not_quantifier",
+        "all_examples_and_open_models_retained",
+        "no_action_release"
+      ],
+      "falsifiers": [
+        "foreign_scope",
+        "nonisolated_refusal",
+        "missing_relation_contract",
+        "actual_evaluation_bound"
+      ],
+      "selection_required_fact_fields": [
+        "alternative_ref"
+      ],
+      "declared_alternative_refs": [
+        "supposition.retain_scoped_compared_hypotheses",
+        "supposition.retain_unqualified_or_bounded_evidence"
+      ],
+      "selection_eligibility_conditions": [
+        {
+          "field": "applicable",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "fact_projections": [
+        {
+          "id": "projection.supposition_axes.current",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "supposition.retain_scoped_compared_hypotheses"
+            },
+            {
+              "field": "scope_current",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "unique_candidate_refs",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "relation_rows_retained",
+              "operator": "equals",
+              "expected": true
+            },
+            {
+              "field": "budget_reached",
+              "operator": "equals",
+              "expected": false
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "supposition.retain_scoped_compared_hypotheses"
+          }
+        },
+        {
+          "id": "projection.supposition_axes.unqualified",
+          "all_conditions": [
+            {
+              "field": "alternative_ref",
+              "operator": "equals",
+              "expected": "supposition.retain_unqualified_or_bounded_evidence"
+            }
+          ],
+          "static_facts": {
+            "applicable": true,
+            "disposition_ref": "supposition.retain_unqualified_or_bounded_evidence"
+          }
+        }
+      ],
+      "selection_tiers": [
+        {
+          "id": "tier.supposition_axes.0",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "supposition.retain_scoped_compared_hypotheses"
+            }
+          ],
+          "reason_ref": "reason.scoped_examples_preserve_revisable_suppositions"
+        },
+        {
+          "id": "tier.supposition_axes.1",
+          "all_conditions": [
+            {
+              "field": "disposition_ref",
+              "operator": "equals",
+              "expected": "supposition.retain_unqualified_or_bounded_evidence"
+            }
+          ],
+          "reason_ref": "reason.scoped_examples_preserve_revisable_suppositions"
+        }
+      ],
+      "selection_tie_breakers": [
+        {
+          "field": "alternative_ref",
+          "preferred_order": "minimize"
+        }
+      ],
+      "canonical_equivalence_tie_break_debt_ref": "debt.supposition_disposition_not_role_or_quantifier_choice",
+      "reason_refs": [
+        "reason.scoped_examples_preserve_revisable_suppositions"
+      ]
+    }
+  ]
+}

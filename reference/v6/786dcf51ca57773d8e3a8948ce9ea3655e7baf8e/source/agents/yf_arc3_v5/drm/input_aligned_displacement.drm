@@ -1,0 +1,84 @@
+{
+  "module_id": "drm.input_aligned_displacement",
+  "declarations": [
+    {
+      "id": "policy.refresh_input_aligned_displacement",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "premises": ["temporal_identity", "current_action_conditioned_measurement"],
+      "declared_alternative_refs": ["input_displacement.current", "input_displacement.unavailable"],
+      "fact_projections": [
+        {
+          "id": "projection.input_displacement.current",
+          "all_conditions": [
+            {"field": "alternative_ref", "operator": "equals", "expected": "input_displacement.current"},
+            {"field": "executed_action_is_directional_interface_action", "operator": "equals", "expected": true},
+            {"field": "executed_action_interface_delta_present", "operator": "equals", "expected": true},
+            {"field": "canonical_provisional_control_term_count", "operator": "greater_than", "expected": 0},
+            {"field": "unique_input_aligned_entity_ref", "operator": "is_present"},
+            {"field": "unique_input_aligned_delta_row", "operator": "is_present"},
+            {"field": "unique_input_aligned_delta_col", "operator": "is_present"}
+          ],
+          "static_facts": {"input_displacement_available": true},
+          "bound_facts": {
+            "action_ref": "action_ref", "transition_ref": "transition_ref",
+            "context_epoch": "context_epoch", "candidate_ref": "candidate_ref",
+            "moving_entity_ref": "unique_input_aligned_entity_ref",
+            "member_refs": "unique_input_aligned_member_refs",
+            "delta_row": "unique_input_aligned_delta_row",
+            "delta_col": "unique_input_aligned_delta_col"
+          }
+        },
+        {
+          "id": "projection.input_displacement.unavailable",
+          "all_conditions": [{"field": "alternative_ref", "operator": "equals", "expected": "input_displacement.unavailable"}],
+          "static_facts": {"input_displacement_available": false}
+        }
+      ],
+      "selection_tiers": [
+        {"id": "tier.input_displacement.current", "all_conditions": [{"field": "input_displacement_available", "operator": "equals", "expected": true}], "reason_ref": "reason.current_body_displacement_is_independent_of_first_role_acquisition"},
+        {"id": "tier.input_displacement.unavailable", "all_conditions": [{"field": "input_displacement_available", "operator": "equals", "expected": false}], "reason_ref": "reason.missing_unique_body_measurement_does_not_authorize_displacement"}
+      ],
+      "selection_tie_breakers": [{"field": "input_displacement_available", "preferred_order": "maximize"}],
+      "meaning_template_ref_by_alternative": {"input_displacement.current": "rule.current_input_aligned_displacement"},
+      "invariants": ["existing_role_is_not_recreated", "alignment_peer_displacement_remains_separate", "ambiguous_footprints_do_not_produce_a_unique_measurement"],
+      "falsifiers": ["tracking_lineage_missing", "body_measurement_not_unique"],
+      "reason_refs": ["reason.current_body_displacement_is_independent_of_first_role_acquisition"]
+    },
+    {
+      "id": "rule.current_input_aligned_displacement",
+      "kind": "rule",
+      "evaluation": "project_requested_conclusions",
+      "supported_operators": ["DERIVE"],
+      "input_contract": "yf_arc3_v5.authority_input.derivation.v1",
+      "output_contract": "yf_arc3_v5.authority_output.derivation.v1",
+      "relation_family": "dynamic",
+      "premises": ["unique_current_input_aligned_footprint", "existing_provisional_control_context"],
+      "claim_templates": [{
+        "id_pattern": "claim.effect.current_input_displacement.{action_ref}.{transition_ref}",
+        "predicate": "action_conditions_translation", "family": "dynamic",
+        "argument_patterns": ["{action_ref}", "{transition_ref}", "{moving_entity_ref}"],
+        "epistemic_status": "supported",
+        "required_fields": ["action_ref", "transition_ref", "moving_entity_ref", "delta_row", "delta_col"],
+        "attribute_bindings": {
+          "action_ref": "action_ref", "transition_ref": "transition_ref",
+          "moving_entity_ref": "moving_entity_ref", "member_refs": "member_refs",
+          "delta_row": "delta_row", "delta_col": "delta_col",
+          "context_epoch": "context_epoch", "candidate_ref": "candidate_ref"
+        },
+        "static_attributes": {
+          "action_delta_frame": "input_aligned_controller", "delta_unit": "pixel",
+          "measurement_basis": "unique_input_aligned_footprint", "commitment": "revisable",
+          "global_transition_meaning_preserved": true,
+          "falsifier": "later_directional_command_breaks_footprint_covariation"
+        }
+      }],
+      "invariants": ["observed_body_delta_is_not_an_alignment_peer_delta", "action_effect_update_does_not_reacquire_role"],
+      "falsifiers": ["later_directional_command_breaks_footprint_covariation", "tracking_lineage_missing"],
+      "reason_refs": ["reason.current_body_displacement_is_independent_of_first_role_acquisition"]
+    }
+  ]
+}

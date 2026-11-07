@@ -1,0 +1,168 @@
+{
+  "module_id": "rigid_grasp_geometry",
+  "declarations": [
+    {
+      "id": "policy.interpret_rigid_grasp_geometry",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": ["grasp_geometry.measured"],
+      "reason_refs": ["reason.measure_exact_occupied_support_before_proposing_carrying_actions"],
+      "fact_projections": [
+        {
+          "id": "projection.grasp_geometry.descriptive_scope",
+          "all_conditions": [],
+          "static_facts": {
+            "action_authorization": false,
+            "operator_law_inferred": false,
+            "legal_grasp_is_viable_delivery_proof": false,
+            "carrier_and_part_are_distinct": true,
+            "collision_uses_exact_occupied_cells": true,
+            "extent_rectangle_is_not_a_collision_mask": true,
+            "geometry_status": "needs_evidence"
+          }
+        },
+        {
+          "id": "projection.grasp_geometry.supplied_path_clear",
+          "all_conditions": [
+            {"field": "geometry_complete", "operator": "equals", "expected": true},
+            {"field": "trajectory_complete", "operator": "equals", "expected": true},
+            {"field": "computation_bound_reached", "operator": "equals", "expected": false}
+          ],
+          "static_facts": {"geometry_status": "clear_under_supplied_model"}
+        },
+        {
+          "id": "projection.grasp_geometry.obstructed",
+          "all_conditions": [{"field": "first_blocked_step", "operator": "is_present"}],
+          "static_facts": {"geometry_status": "blocked_under_supplied_model"}
+        },
+        {
+          "id": "projection.grasp_geometry.bounded",
+          "all_conditions": [{"field": "computation_bound_reached", "operator": "equals", "expected": true}],
+          "static_facts": {"geometry_status": "bounded_incomplete"}
+        }
+      ],
+      "invariants": [
+        "an_acquired_grasp_recipe_must_be_revalidated_before_using_current_part_offsets",
+        "a_carrier_can_have_multiple_occupied_cells_and_holes",
+        "grasp_contact_scope_requires_its_own_observed_or_provisional_law",
+        "station_pivot_is_supplied_not_a_shape_barycenter",
+        "delivery_tests_the_part_mask_and_translation_tests_the_full_union",
+        "future_grasp_viability_requires_a_separate_source_owned_question",
+        "simulation_does_not_authorize_world_actions"
+      ],
+      "falsifiers": ["current_observation_contradicts_supplied_mask_or_collision_model"]
+    },
+    {
+      "id": "policy.rigid_grasp_requested_question",
+      "kind": "selection_policy",
+      "evaluation": "declared_eligibility_single",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "declared_alternative_refs": ["grasp_question.trajectory", "grasp_question.delivery_comparison"],
+      "reason_refs": ["reason.grasp_question_retains_actual_source_operation"],
+      "selection_eligibility_conditions": [{"field": "question_case_matches", "operator": "equals", "expected": true}],
+      "fact_projections": [
+        {"id": "projection.grasp_question.default", "all_conditions": [], "static_facts": {"question_case_matches": false}},
+        {"id": "projection.grasp_question.trajectory", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "grasp_question.trajectory"},
+          {"field": "delivery_comparison_requested", "operator": "equals", "expected": false}
+        ], "static_facts": {"question_case_matches": true}},
+        {"id": "projection.grasp_question.delivery", "all_conditions": [
+          {"field": "alternative_ref", "operator": "equals", "expected": "grasp_question.delivery_comparison"},
+          {"field": "delivery_comparison_requested", "operator": "equals", "expected": true}
+        ], "static_facts": {"question_case_matches": true}}
+      ]
+    },
+    {
+      "id": "policy.rigid_grasp_delivery_consequences",
+      "kind": "selection_policy",
+      "evaluation": "declared_lexicographic_order",
+      "supported_operators": ["SELECT"],
+      "input_contract": "yf_arc3_v5.authority_input.selection.v1",
+      "output_contract": "yf_arc3_v5.authority_output.selection.v1",
+      "reason_refs": ["reason.supplied_delivery_word_satisfies_whole_mask_and_preservation", "reason.no_supplied_delivery_word_has_qualified_complete_consequences"],
+      "selection_required_fact_fields": ["delivery_candidate", "delivery_disposition"],
+      "selection_tiers": [
+        {"id": "tier.grasp_delivery.full_consequences", "all_conditions": [
+          {"field": "delivery_candidate", "operator": "equals", "expected": true}
+        ], "any_conditions": [
+          {"field": "delivery_disposition", "operator": "equals", "expected": "delivery_witness_under_all_supplied_models"},
+          {"field": "delivery_disposition", "operator": "equals", "expected": "interface_access_witness_under_all_supplied_models"}
+        ], "reason_ref": "reason.supplied_delivery_word_satisfies_whole_mask_and_preservation"},
+        {"id": "tier.grasp_delivery.unresolved", "all_conditions": [
+          {"field": "delivery_candidate", "operator": "equals", "expected": false}
+        ], "reason_ref": "reason.no_supplied_delivery_word_has_qualified_complete_consequences"}
+      ],
+      "selection_tie_breakers": [{"field": "primitive_count", "preferred_order": "minimize"}],
+      "preserves_alternatives": true,
+      "fact_projections": [
+        {"id": "projection.grasp_delivery.default", "all_conditions": [], "static_facts": {
+          "delivery_disposition": "not_a_qualified_delivery_witness", "action_authorization": false,
+          "actual_family_activation_proved": false, "global_optimality_proved": false
+        }},
+        {"id": "projection.grasp_delivery.full_consequences", "all_conditions": [
+          {"field": "requested_question_kind", "operator": "equals", "expected": "DELIVERY"},
+          {"field": "all_terminal_statuses_active_or_win", "operator": "equals", "expected": true},
+          {"field": "delivery_candidate", "operator": "equals", "expected": true},
+          {"field": "same_current_geometry_header", "operator": "equals", "expected": true},
+          {"field": "all_model_primitives_complete", "operator": "equals", "expected": true},
+          {"field": "computation_bound_reached", "operator": "equals", "expected": false},
+          {"field": "all_cargo_delivered", "operator": "equals", "expected": true},
+          {"field": "all_carriers_free", "operator": "equals", "expected": true},
+          {"field": "all_receiver_types_match", "operator": "equals", "expected": true},
+          {"field": "all_receiver_masks_contained", "operator": "equals", "expected": true},
+          {"field": "all_receiver_masks_evidenced", "operator": "equals", "expected": true},
+          {"field": "all_cargo_masks_evidenced", "operator": "equals", "expected": true},
+          {"field": "all_protected_cargo_equal", "operator": "equals", "expected": true},
+          {"field": "all_required_effects_match", "operator": "equals", "expected": true},
+          {"field": "all_budget_constraints_match", "operator": "equals", "expected": true},
+          {"field": "all_clock_constraints_match", "operator": "equals", "expected": true}
+        ], "static_facts": {"delivery_disposition": "delivery_witness_under_all_supplied_models"}},
+        {"id": "projection.grasp_delivery.interface_access", "all_conditions": [
+          {"field": "requested_question_kind", "operator": "equals", "expected": "INTERFACE_ACCESS"},
+          {"field": "all_terminal_statuses_active", "operator": "equals", "expected": true},
+          {"field": "delivery_candidate", "operator": "equals", "expected": true},
+          {"field": "same_current_geometry_header", "operator": "equals", "expected": true},
+          {"field": "all_model_primitives_complete", "operator": "equals", "expected": true},
+          {"field": "computation_bound_reached", "operator": "equals", "expected": false},
+          {"field": "all_requested_cargo_attached", "operator": "equals", "expected": true},
+          {"field": "all_carriers_at_requested_interface", "operator": "equals", "expected": true},
+          {"field": "all_cargo_masks_evidenced", "operator": "equals", "expected": true},
+          {"field": "all_protected_cargo_equal", "operator": "equals", "expected": true},
+          {"field": "all_required_effects_match", "operator": "equals", "expected": true},
+          {"field": "all_budget_constraints_match", "operator": "equals", "expected": true},
+          {"field": "all_clock_constraints_match", "operator": "equals", "expected": true}
+        ], "static_facts": {"delivery_disposition": "interface_access_witness_under_all_supplied_models",
+          "interface_arrival_confirms_station_law": false, "interface_access_is_delivery_completion": false}},
+        {"id": "projection.grasp_delivery.unknown", "all_conditions": [
+          {"field": "delivery_candidate", "operator": "equals", "expected": false},
+          {"field": "unresolved_model_effects", "operator": "equals", "expected": true}
+        ], "static_facts": {"delivery_disposition": "needs_current_evidence"}},
+        {"id": "projection.grasp_delivery.no_witness", "all_conditions": [
+          {"field": "delivery_candidate", "operator": "equals", "expected": false},
+          {"field": "all_model_primitives_complete", "operator": "equals", "expected": true},
+          {"field": "unresolved_model_effects", "operator": "equals", "expected": false},
+          {"field": "computation_bound_reached", "operator": "equals", "expected": false}
+        ], "static_facts": {"delivery_disposition": "no_witness_in_supplied_words_not_global_impossibility"}},
+        {"id": "projection.grasp_delivery.bounded", "all_conditions": [
+          {"field": "computation_bound_reached", "operator": "equals", "expected": true}
+        ], "static_facts": {"delivery_disposition": "comparison_incomplete_at_bound"}}
+      ],
+      "invariants": [
+        "every_candidate_and_model_start_at_one_immutable_current_state",
+        "accessible_grasp_is_not_a_delivery_witness",
+        "transformations_feed_the_following_primitive_once",
+        "unknown_effects_remain_unknown_not_favorable",
+        "delivery_compares_the_whole_part_mask_not_the_carrier_center",
+        "resource_clock_and_protected_cargo_constraints_remain_current",
+        "at_most_three_source_words_globally_not_per_model",
+        "selection_is_comparison_only_not_world_action_authority"
+      ],
+      "falsifiers": ["current_frame_model_or_part_mask_contradicts_the_frozen_comparison", "actual_dispatch_does_not_consume_the_selected_candidate_consequences"]
+    }
+  ]
+}
