@@ -25,15 +25,24 @@ const canonicalObjects = new BoundedWeakCache<{ text: string; nodes: number; hei
 const MAX_DEPTH = 128;
 const MAX_NODES = 1_000_000;
 
-function jsonDescriptors(item: object): readonly (readonly [string, PropertyDescriptor])[] {
+function jsonEntries(item: object): readonly (readonly [string, unknown])[] {
+  // Only immutableJson's own closed, deeply frozen results enter this set.
+  // Their keys and enumerable data properties have already been validated at
+  // ingress. A canonical-text eviction must not make us allocate and validate
+  // another descriptor object for every unchanged member. Scalar canonical
+  // validation and structural size/depth accounting still happen in encode.
+  // Foreign frozen inputs, including shallow freezes, use the full check below.
+  if (immutableObjects.has(item)) return Object.entries(item);
   if (Object.getOwnPropertySymbols(item).length) throw new TypeError('JSON symbol properties are unsupported');
   const array = Array.isArray(item);
   if (!array && !isJsonObject(item)) throw new TypeError('Only plain JSON objects are accepted');
   const descriptors = Object.getOwnPropertyDescriptors(item);
-  const entries = Object.entries(descriptors).filter(([key]) => !array || key !== 'length');
-  for (const [key, descriptor] of entries) {
+  const entries: [string, unknown][] = Object.entries(descriptors).filter(([key]) => !array || key !== 'length');
+  for (const entry of entries) {
+    const [key, descriptor] = entry as [string, PropertyDescriptor];
     assertUnicode(key);
     if (!('value' in descriptor) || !descriptor.enumerable) throw new TypeError('JSON requires enumerable data properties');
+    entry[1] = descriptor.value;
   }
   if (array && (entries.length !== item.length || entries.some(([key], index) => key !== String(index)))) {
     throw new TypeError('Sparse or decorated arrays are unsupported');
@@ -126,15 +135,15 @@ export function immutableJson(value: unknown): JsonValue {
     if (immutableObjects.has(item)) return item as JsonValue;
     if (ancestors.has(item)) throw new TypeError('Cyclic JSON value');
     ancestors.add(item);
-    const descriptors = jsonDescriptors(item);
+    const entries = jsonEntries(item);
     let result: JsonValue;
     if (Array.isArray(item)) {
-      result = descriptors.map(([, descriptor]) => visit(descriptor.value, depth + 1));
+      result = entries.map(([, child]) => visit(child, depth + 1));
     } else {
-      const entries = [...descriptors].sort(([a], [b]) => compareUnicode(a, b)).map(([key, descriptor]) => {
-        return [key, visit(descriptor.value, depth + 1)] as const;
+      const members = [...entries].sort(([a], [b]) => compareUnicode(a, b)).map(([key, child]) => {
+        return [key, visit(child, depth + 1)] as const;
       });
-      result = Object.fromEntries(entries) as JsonObject;
+      result = Object.fromEntries(members) as JsonObject;
     }
     ancestors.delete(item);
     Object.freeze(result);
@@ -166,7 +175,7 @@ export function canonical(value: unknown): string {
     if (ancestors.has(item)) throw new TypeError('Cyclic JSON value');
     ancestors.add(item);
     const initialNodes = nodes;
-    const descriptors = jsonDescriptors(item);
+    const entries = jsonEntries(item);
     let height = 0, deeplyImmutable = Object.isFrozen(item);
     const child = (value: unknown): string => {
       const text = encode(value, depth + 1);
@@ -175,10 +184,10 @@ export function canonical(value: unknown): string {
     };
     let encoded: string;
     if (Array.isArray(item)) {
-      encoded = `[${descriptors.map(([, descriptor]) => child(descriptor.value)).join(',')}]`;
+      encoded = `[${entries.map(([, value]) => child(value)).join(',')}]`;
     } else {
-      encoded = `{${[...descriptors].sort(([a], [b]) => compareUnicode(a, b)).map(([key, descriptor]) => {
-        return `${JSON.stringify(key)}:${child(descriptor.value)}`;
+      encoded = `{${[...entries].sort(([a], [b]) => compareUnicode(a, b)).map(([key, value]) => {
+        return `${JSON.stringify(key)}:${child(value)}`;
       }).join(',')}}`;
     }
     ancestors.delete(item);

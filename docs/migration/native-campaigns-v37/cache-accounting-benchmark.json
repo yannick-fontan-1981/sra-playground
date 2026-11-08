@@ -1,0 +1,83 @@
+{
+  "schema": "logos-engine.cache-accounting-benchmark.v1",
+  "node": "v24.22.1",
+  "baselineCommit": "f55f3b514658c5228f118bb5891f0bebf52c8832",
+  "baselineSourceSha256": "b04ce3e0a2c51044840ee45778d5e73f4cf445c90524ed5977865fe24b84d39a",
+  "nativeSourceSha256": "01b7df58a9425f8beb4b61ad77a994d37decf63645aa87d99f5877738b251804",
+  "bounds": {
+    "maxWeight": 16777216,
+    "maxEntries": 4096
+  },
+  "qualification": "Synthetic cache-accounting workloads with live keys and numeric values. Weights model accounting, not allocated string bytes. Five alternating-order rounds after warm-up; no forced GC or timing assertion. This does not establish game speed, bounded decision time or a causal end-to-end gain.",
+  "cases": [
+    {
+      "id": "promote_live_entries",
+      "operations": 120000,
+      "operationsSha256": "347f89add38ff77c229451ca4033b79935d6ea68b32ec4338cdc1b86592a49f8",
+      "baselineMs": [
+        17.983630000000005,
+        19.163171000000006,
+        17.52104699999998,
+        16.93843899999996,
+        15.545503999999994
+      ],
+      "nativeMs": [
+        17.678890999999993,
+        5.3681259999999895,
+        5.865218999999996,
+        4.738868999999994,
+        5.45103899999998
+      ],
+      "baselineMedianMs": 17.52104699999998,
+      "nativeMedianMs": 5.45103899999998,
+      "medianRatio": 3.214258235906961,
+      "matchingPublicOutcomes": true
+    },
+    {
+      "id": "evict_oldest_live_entries",
+      "operations": 120000,
+      "operationsSha256": "7308a691d89c62c9e5ec74b3827f8290b685d2a34f32db4fe117c0cf8dcbd645",
+      "baselineMs": [
+        241.09165300000006,
+        241.64464799999996,
+        236.32399199999986,
+        244.97554999999988,
+        236.32165899999995
+      ],
+      "nativeMs": [
+        57.23540400000002,
+        40.22404800000004,
+        45.971082000000024,
+        34.324298,
+        33.681569999999965
+      ],
+      "baselineMedianMs": 241.09165300000006,
+      "nativeMedianMs": 40.22404800000004,
+      "medianRatio": 5.993719304432012,
+      "matchingPublicOutcomes": true
+    },
+    {
+      "id": "mixed_weighted_replacements",
+      "operations": 120000,
+      "operationsSha256": "592d129db74f37425012da8048cfab0115bf815d580a91a20e16891ef50006bb",
+      "baselineMs": [
+        140.70044700000017,
+        131.26820300000009,
+        132.9071960000001,
+        164.67480399999977,
+        148.24283000000014
+      ],
+      "nativeMs": [
+        46.5590709999999,
+        45.38719100000003,
+        44.786645000000135,
+        49.50273700000025,
+        48.585999000000356
+      ],
+      "baselineMedianMs": 140.70044700000017,
+      "nativeMedianMs": 46.5590709999999,
+      "medianRatio": 3.0219771137615794,
+      "matchingPublicOutcomes": true
+    }
+  ]
+}
