@@ -333,9 +333,16 @@
         "tests/v6-native-transition-domain.test.ts",
         "tests/v6-native-transition-domain-integration.test.ts",
         "docs/migration/v35-coupled-support.md",
-        "docs/migration/native-campaigns-v35/dico-domain-witness-diagnostic.json"
+        "docs/migration/native-campaigns-v35/dico-domain-witness-diagnostic.json",
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts",
+        "tests/v6-program-composition-integration.test.ts",
+        "tests/v6-program-priority.test.ts",
+        "tests/fixtures/v6-program-priority-public.json.gz",
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
       ],
-      "notes": "The native common coordinator is connected to the product runtime and shares the WHY/ACT memory. Every witnessed primitive is acquired once at its sealed prefix; Goal/Frontier evidence is replayed across natural level boundaries. First-prefix HANO, MEMO and ONDE comparisons match all eight caller components without loading oracle state. SupportNavigation and all 13 acquired children are connected. Shared RepeatedSeries acquisition currently covers occurrence recall, its ancestor reducers and coupled-pair anchors/response evidence. AddressedMaterial, FramedTransfer, TemporalSelection and other series producers remain pending, along with Morphology/control-target/parent-attention providers. Bounded campaigns do not establish all-game V6 parity. v35 adds coupled support planning and auxiliary continuation in the single shared journal. Explicit V7 extension: the unchanged neutral entity-domain refusal becomes a retained unknown with complete public witnesses and no rule-registry update; this differs from the original caller fatal exception and is not exact out-of-domain parity."
+      "notes": "The native common coordinator is connected to the product runtime and shares the WHY/ACT memory. Every witnessed primitive is acquired once at its sealed prefix; Goal/Frontier evidence is replayed across natural level boundaries. First-prefix HANO, MEMO and ONDE comparisons match all eight caller components without loading oracle state. SupportNavigation and all 13 acquired children are connected. Shared RepeatedSeries acquisition currently covers occurrence recall, its ancestor reducers and coupled-pair anchors/response evidence. AddressedMaterial, FramedTransfer, TemporalSelection and other series producers remain pending, along with Morphology/control-target/parent-attention providers. Bounded campaigns do not establish all-game V6 parity. v35 adds coupled support planning and auxiliary continuation in the single shared journal. Explicit V7 extension: the unchanged neutral entity-domain refusal becomes a retained unknown with complete public witnesses and no rule-registry update; this differs from the original caller fatal exception and is not exact out-of-domain parity. v39 adds observed-program acquisition in the same shared series owner and original post-acquisition stop/refutation checks. A second explicit native coordinator evolution defers only an unlearned animated invitation when the active shared family supplies a current, model-bearing program proposal admitted by its primitive guard. The offer is cached for its ordinary window entry; physical binding, point guards, preservation, budgets and WHY/ACT still run normally. The unchanged original caller reproduces the measured invitation collision, so this extension is not described as source selection parity."
     },
     {
       "sources": [
@@ -430,9 +437,12 @@
       ],
       "status": "partial_transfer",
       "proof": [
-        "tests/v6-native-runtime.test.ts"
+        "tests/v6-native-runtime.test.ts",
+        "tests/v6-program-priority.test.ts",
+        "tests/fixtures/v6-program-priority-public.json.gz",
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
       ],
-      "notes": "Sixteen outer strategy groups and implemented subgroup ordering are retained. All remaining providers, parent returns and cross-family interactions remain pending."
+      "notes": "Sixteen outer strategy groups and implemented subgroup ordering are retained. All remaining providers, parent returns and cross-family interactions remain pending. Declared order remains unchanged, but retained_program_preparation_before_unlearned_invitation explicitly changes native cross-family coordination: a read-only guarded program offer can defer a previously unlearned invitation. Its receipt is labeled native evolution; no complete original selection parity is claimed."
     },
     {
       "sources": [
@@ -629,21 +639,15 @@
         "tests/v6-support-caller-integration.test.ts",
         "tests/fixtures/v6-native-caller/memo-first-prefix.json"
       ],
-      "notes": "Native public_occurrence_recall including exact event reducers/digests of its inherited recall closure. Original priority before SlotSubstitution is tested through the real common caller. The production SharedSeriesConstraint also acquires cell-placement, alternating-graph, coupled-pair and auxiliary evidence in the source record chain before occurrence and cell packet observation; those added producers have separate qualified mappings. Other ObservedCompositionConstraint providers and the full inheritance digest remain pending; their absence is explicit in the native digest scope."
+      "notes": "Native public_occurrence_recall including exact event reducers/digests of its inherited recall closure. Original priority before SlotSubstitution is tested through the real common caller. The production SharedSeriesConstraint now acquires marked/program/respondent evidence before higher occurrence/cell/graph/pair/support layers and then the program/cell packet evidence in source order, with one state owner and one acquisition per actual primitive. Those added producers have separate qualified mappings. Other ObservedCompositionConstraint providers and the full inheritance digest remain pending; their absence is explicit in the native digest scope."
     },
     {
       "sources": [
-        "agents/yf_arc3_v6/laya_proto/common_program_composition.py",
-        "agents/yf_arc3_v6/laya_proto/program_respondent_access.py",
-        "agents/yf_arc3_v6/laya_proto/program_composition_access.py",
-        "agents/yf_arc3_v6/laya_proto/marked_collection_access.py",
-        "agents/yf_arc3_v6/laya_proto/observed_program_effects.py",
         "agents/yf_arc3_v6/laya_proto/common_crossed_prefix.py",
         "agents/yf_arc3_v6/laya_proto/common_repeated_lines.py"
       ],
       "targets": [
-        "src/logos-engine/v6-occurrence-recall.ts",
-        "src/logos-engine/v6-occurrence-program-observer.ts"
+        "src/logos-engine/v6-occurrence-recall.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -653,7 +657,174 @@
         "tests/v6-support-caller-integration.test.ts",
         "tests/fixtures/v6-native-caller/memo-first-prefix.json"
       ],
-      "notes": "Only the event reduction/digest and public animation observation closure required by occurrence recall is transferred. Their other proposal/planning methods and the full shared series producer chain remain pending."
+      "notes": "Only the event reduction/digest ancestry required by occurrence recall and observed-program state is transferred. Crossed-prefix and repeated-line proposal/planning/acquisition producers remain pending; their absence is not hidden by the shared native journal. Existing occurrence fixtures retain the previously compared ancestry contract."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/marked_collection_access.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-occurrence-program-observer.ts",
+        "src/logos-engine/v6-program-composition-access.ts",
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts",
+        "tests/v6-program-composition-integration.test.ts",
+        "tests/v6-program-priority.test.ts",
+        "tests/fixtures/v6-program-priority-public.json.gz",
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
+      ],
+      "notes": "The own border/control/member/collection measurements, marked_question, before/after guards, selected-action record and ordered public-packet alignment are transferred into the existing occurrence ancestor owner. Exact raw proposal envelopes, retained events, refutations and source-parent-bound digests are differential; the shared selected owner acquires each real transition once after sealing. The source input_candidates route through crossed_candidates and general inherited propose fallback are not transferred. Controlled fixtures and the recorded first-level public prefix do not establish complete inherited producer or combined caller parity."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/program_composition_access.py",
+        "agents/yf_arc3_v6/laya_proto/program_respondent_access.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-program-composition-access.ts",
+        "src/logos-engine/v6-program-input-access.ts",
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-program-identity.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts",
+        "tests/v6-program-composition-integration.test.ts",
+        "tests/v6-program-priority.test.ts",
+        "tests/fixtures/v6-program-priority-public.json.gz",
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
+      ],
+      "notes": "Transfers editor/world rebinding, fitted-program questions and continuation, observed respondent probes/order, robust four-hypothesis composition, input-support/replacement questions, exact-context extension refusals, primitive guards and own record/packet acquisition into the one existing shared journal. Raw ancestor returns are retained separately; complete own events, program-bearing ancestor projections/digests and source-emitted proposal/point-support identities are compared, including typed glyph floats. Proposal evaluation is read-only and actual outcomes are acquired only at sealed prefixes. General inherited propose paths and unported crossed/repeated/other series producers remain outside this transfer; the full original ObservedCompositionConstraint retained digest and complete caller selection parity are not claimed."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_program_composition.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-program-identity.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts",
+        "tests/v6-program-composition-integration.test.ts",
+        "tests/v6-program-priority.test.ts",
+        "tests/fixtures/v6-program-priority-public.json.gz",
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json",
+        "docs/migration/native-campaigns-v39/stck-three-levels.json"
+      ],
+      "notes": "The common program_propose wrapper, deadline/action-budget preconditions, prefix ceiling, current measured point_support and bind behavior are compared to unchanged Python without normalizing proposal hashes or metadata. The actual observed_program_composition entry shares one acquisition owner with cell placement and occurrence recall, and full program refutation/stop checks occur after sealed OP29/30/31 acquisition. Native replay verifies native_observed_program_recall_cell_placement_alternating_graph_and_coupled_support_v6, not the complete original inherited digest. The separately declared retained_program_preparation_before_unlearned_invitation coordinator rule is a native evolution demonstrated against an original-caller collision, not original Python selection parity. Separately, the fresh native common campaign completes STCK levels 1-3 in 35 physical actions (3, 7, 25), stops at the requested target on entry to level 4 with NOT_FINISHED, and verifies an unchanged 0.9.0 source manifest. This is bounded integrated success, not complete STCK victory or original caller parity."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/observed_program_effects.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-occurrence-program-observer.ts",
+        "src/logos-engine/v6-native-observer.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-occurrence-reference.py",
+        "tests/fixtures/v6-occurrence-reference.json",
+        "tests/v6-occurrence-recall.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json",
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts"
+      ],
+      "notes": "Transfers the consumed patch/world_parts/residual_effect/align_program_packet measurements and translation_candidates, retaining exact public phase indices, correspondence ambiguity, evidence and conditional rule IDs. Existing occurrence packet tests and the source-fitted program model fixtures cover this closure. predict_operator, compare_operator_prediction and predict_program_prefix remain unported; public phase alignment alone is not execution permission or proof of a universal operator law."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/program_geometry.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-program-geometry.ts",
+        "src/logos-engine/v6-program-identity.ts",
+        "src/logos-engine/v6-point-set.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts"
+      ],
+      "notes": "All own render_layers, fit_layer_offset, fit_glyph_vectors and decode_stacks functions are transferred. Differential evidence includes public edit/phase fitting, exact masks and decoded body order, negative/ambiguous cases and fractional glyph parameters. The existing CPython 3.12/64 coordinate-set ABI preserves exposed set ordering. Scoped source identities preserve matrix/center float spellings, including integral-valued floats; native persistence uses the existing finite IEEE64 codec. These bounded public-raster component contracts do not claim arbitrary Python numeric semantics or game success."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/program_compositions.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-program-compositions.ts",
+        "src/logos-engine/v6-program-identity.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts"
+      ],
+      "notes": "All own pixels, fit_composition_model, coordinates, surface, simulate_word and search_program functions are transferred. Tests fit complete original models from controlled and actual first-level public packets, and compare lattice/occlusion measurements, conditional simulation, full ranked search result, lexicographic ties, node counts and deadline outputs. Surface blocking and repeated reductions remain explicit conditional hypotheses; a model ID or predicted reduction is not an official completion claim."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/program_respondent_search.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-program-respondent-search.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts"
+      ],
+      "notes": "All own simulate, search and search_replacement functions are transferred with observed bearer order, four explicit reduction/interaction hypotheses, first-feasible and minimum-cost modes, exact node counts/deadlines, access-site goals and conservative member-count bounds. Differential search outputs retain failure and unknown cases; no additional respondent behavior, capacity, target word or hidden board is supplied."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/program_respondent_observations.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-program-respondent-observations.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts"
+      ],
+      "notes": "All own support_match, full_match and observe_respondent_packet functions are transferred. Exact local supports, visible/hidden counts, stationary/translated packet indices, epoch exclusion and retrospective revealed-word candidates are compared to source. Retrospective occlusion evidence remains separate from prior forecasts and never grants input permission."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/program_input_access.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-program-input-access.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts"
+      ],
+      "notes": "Both own learn_input_support and candidate_sites functions are transferred. Tests require witnessed departure, disappearance and actual restoration of measured controls, then compare appearance-matched candidate supports including bounds and origin exclusion. Similar appearance is retained as an experiment, not a guaranteed permission at a different support."
     },
     {
       "sources": [
@@ -1328,7 +1499,7 @@
         "tests/v6-cell-placement-integration.test.ts",
         "tests/v6-source-entry-routing.test.ts"
       ],
-      "notes": "cell_propose, original deadline/remaining-action preconditions, the 16-action prefix ceiling, current center-pixel point evidence and binding are compared to the unchanged raw common wrapper. Strategy metadata is added by the actual native adapter at the source selection stage. The explicit window entry is ordered before occurrence recall while both use one acquisition owner. Controlled product-runtime tests begin with fresh memory, release through SRC/WHY-ACT, acquire local/remote evidence once at the sealed boundary, retain repeated_series_state and resume from it; checkpoint mutation and rejected reconstruction preserve prior acquired state. Native restoration verifies native_recall_ancestors_cell_placement_alternating_graph_and_coupled_support_v5, not every CombinedCellPlacementMemory ancestor or the full original digest. No completion gate or complete-game claim follows from these controlled fixtures."
+      "notes": "cell_propose, original deadline/remaining-action preconditions, the 16-action prefix ceiling, current center-pixel point evidence and binding are compared to the unchanged raw common wrapper. Strategy metadata is added by the actual native adapter at the source selection stage. The explicit window entry is ordered before occurrence recall while both use one acquisition owner. Controlled product-runtime tests begin with fresh memory, release through SRC/WHY-ACT, acquire local/remote evidence once at the sealed boundary, retain repeated_series_state and resume from it; checkpoint mutation and rejected reconstruction preserve prior acquired state. Native restoration verifies native_observed_program_recall_cell_placement_alternating_graph_and_coupled_support_v6, not every CombinedCellPlacementMemory ancestor or the full original digest. No completion gate or complete-game claim follows from these controlled fixtures."
     }
   ],
   "scopeNotes": [
@@ -1341,7 +1512,8 @@
     "The separately reported declared-entry progress is provider connection coverage over the four ordered DRM subquestion lists. It is not a game score, a code-volume percentage, or certification of complete V6 parity.",
     "AnimatedContact exports the exact id/all_conditions of the two interaction.drm rules it consumes (ballistic contact solution and ballistic curve disclosure); this is not a transfer of every rule in that inherited DRM document.",
     "Alternating graph compares complete measurement and topology/contact outputs plus the graph-owned access layer. Its scene description is explicitly the consumed sprite projection, and its shared journal digest names the supported native closure. Public gallery rasters and controlled helper inputs are not complete-game or full-inheritance evidence.",
-    "Cell-patch transfer distinguishes exact framed-patch measurement from its geometry-only queued-field dependency and the own CellPlacementAccess layer from unported ancestors. Conditional line search is compared only in the native exact-integer domain; larger Python integer scores are explicitly refused without recording a source-law counterexample. Full original common envelopes are compared on controlled public rasters, separately from the fresh native SRC/WHY-ACT/checkpoint integration tests. None of these fixture counts establishes a completed game or complete V6 inheritance parity."
+    "Cell-patch transfer distinguishes exact framed-patch measurement from its geometry-only queued-field dependency and the own CellPlacementAccess layer from unported ancestors. Conditional line search is compared only in the native exact-integer domain; larger Python integer scores are explicitly refused without recording a source-law counterexample. Full original common envelopes are compared on controlled public rasters, separately from the fresh native SRC/WHY-ACT/checkpoint integration tests. None of these fixture counts establishes a completed game or complete V6 inheritance parity.",
+    "Observed-program transfer compares complete source helper outputs, program-bearing ancestor states/digests, acquisition suffixes, raw common proposal/point envelopes and typed glyph float identities. Unported crossed/repeated producers and general input-candidate/propose inheritance remain partial, and the shared native journal names its own digest closure. The retained_program_preparation_before_unlearned_invitation rule is an explicitly recorded native coordinator evolution following a reproduced original-caller collision; retaining DRM list order does not imply original cross-family selection parity. Component fixtures and recorded-prefix replay remain distinct from fresh common-caller game campaigns."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,

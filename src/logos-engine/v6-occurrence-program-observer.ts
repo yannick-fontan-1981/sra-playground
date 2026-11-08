@@ -19,7 +19,7 @@ export function occurrenceCollectionBorder(rows: NativeRows, box: readonly numbe
   return colors.size === 1 ? [...colors][0]! : null;
 }
 
-function rectangularMembers(rows: NativeRows, examples: readonly R[], palette: Set<number>, limit: number): R[] {
+export function occurrenceRectangularMembers(rows: NativeRows, examples: readonly R[], palette: Set<number>, limit: number): R[] {
   const [x, y, right, bottom] = examples[0]!.bbox, width = right - x + 1, height = bottom - y + 1;
   const result: R[] = []; let v = 0;
   while (v < limit) {
@@ -60,7 +60,7 @@ export function occurrenceCollectionScene(rows: NativeRows): R | null {
     const markedControls = cs.filter(part => occurrenceCollectionBorder(rows, part.bbox) !== null); if (markedControls.length > 1) continue;
     for (const originals of members) {
       if (!originals.every(part => palette.has(part.color))) continue;
-      const ms = rectangularMembers(rows, originals, palette, Math.min(...cs.map(part => part.bbox[1])));
+      const ms = occurrenceRectangularMembers(rows, originals, palette, Math.min(...cs.map(part => part.bbox[1])));
       const markedMembers = ms.filter(part => occurrenceCollectionBorder(rows, part.bbox) !== null); if (markedMembers.length > 1) continue;
       if (markedMembers.length && markedControls.length && occurrenceCollectionBorder(rows, markedMembers[0]!.bbox) !== occurrenceCollectionBorder(rows, markedControls[0]!.bbox)) continue;
       layouts.push({ controls: cs, members: ms, marked_controls: markedControls, marked_members: markedMembers, palette: [...palette].sort((a, b) => a - b) });
@@ -69,7 +69,28 @@ export function occurrenceCollectionScene(rows: NativeRows): R | null {
   return layouts.length === 1 ? layouts[0]! : null;
 }
 
-function worldParts(rows: NativeRows, exclusions: readonly number[][]): Map<string, R[]> {
+/** The measured control row is observable even with no current collection. */
+export function occurrenceMeasuredControls(rows: NativeRows): R[] {
+  const groups = new Map<string, { width: number; parts: R[] }>();
+  for (const raw of geometricComponents(rows)) {
+    const part = { bbox: raw.bbox, color: raw.color, area: raw.area }, [x, y, right, bottom] = raw.bbox;
+    const width = right - x + 1, height = bottom - y + 1;
+    if (Math.min(width, height) < 2 || part.area < width * height / 2 || part.area >= width * height) continue;
+    const key = JSON.stringify([width, height, part.area, y]);
+    if (!groups.has(key)) groups.set(key, { width, parts: [] });
+    groups.get(key)!.parts.push(part);
+  }
+  const families: R[][] = [];
+  for (const { width, parts } of groups.values()) {
+    if (parts.length < 3 || new Set(parts.map(part => part.color)).size < 3) continue;
+    const ordered = [...parts].sort((a, b) => a.bbox[0] - b.bbox[0]);
+    const steps = new Set(ordered.slice(1).map((part, index) => part.bbox[0] - ordered[index]!.bbox[0]));
+    if (steps.size === 1 && Math.min(...steps) > width) families.push(ordered);
+  }
+  return families.length === 1 ? families[0]! : [];
+}
+
+export function occurrenceProgramWorldParts(rows: NativeRows, exclusions: readonly (readonly number[])[]): Map<string, R[]> {
   const out = new Map<string, R[]>();
   for (const part of geometricComponents(rows)) {
     const [x, y, right, bottom] = part.bbox;
@@ -82,7 +103,7 @@ function worldParts(rows: NativeRows, exclusions: readonly number[][]): Map<stri
 }
 
 export function occurrenceProgramResidual(before: NativeRows, after: NativeRows, exclusions: readonly number[][]): R {
-  const a = worldParts(before, exclusions), b = worldParts(after, exclusions), translations: R[] = [], changes: R[] = [];
+  const a = occurrenceProgramWorldParts(before, exclusions), b = occurrenceProgramWorldParts(after, exclusions), translations: R[] = [], changes: R[] = [];
   for (const signature of [...new Set([...a.keys(), ...b.keys()])].sort()) {
     const left = new Map((a.get(signature) ?? []).map(part => [JSON.stringify(part.position), part]));
     const right = new Map((b.get(signature) ?? []).map(part => [JSON.stringify(part.position), part]));
@@ -149,4 +170,28 @@ export function observeOccurrenceProgramPacket(before: R, command: R, after: R, 
   const alignment = alignOccurrenceProgramPacket(rows, frames, { members: scene.members, controls: scene.controls,
     observation_ref: before.observation_ref, epoch: before.level_epoch, command_ref: command.action_ref, after_observation_ref: after.observation_ref });
   return alignment.status === 'phase_aligned_candidates' ? [{ kind: 'public_program_phase_alignment', alignment, evidence: [before.observation_ref, after.observation_ref] }] : [];
+}
+
+/** Conditional rules extracted from unique public phase correspondences. */
+export function occurrenceProgramTranslationCandidates(alignment: R): R[] {
+  if (alignment.status !== 'phase_aligned_candidates') return [];
+  const roles = new Set<string>((alignment.candidate_roles as R[]).filter(role => role.supporting_phase_count >= 2).map(role => role.signature));
+  const members: R[] = alignment.initial_members, result: R[] = [];
+  for (const phase of alignment.phases as R[]) {
+    const motions = (phase.effect.translations ?? []).filter((motion: R) => roles.has(motion.signature));
+    if (motions.length !== 1) continue;
+    const motion = motions[0]!, bindings = members.flatMap((member, index) => member.color === motion.palette ? [index] : []);
+    if (bindings.length !== 1) continue;
+    const controls = (alignment.editor_geometry.controls as R[]).filter(control => control.color === phase.label);
+    if (controls.length !== 1) continue;
+    const binding = bindings[0] === 0 ? 'first_member' : bindings[0] === members.length - 1 ? 'last_member' : null;
+    if (binding === null) continue;
+    const rule: R = { kind: 'observed_program_translation', acquisition_epoch: alignment.epoch, label: phase.label,
+      glyph_patch: controls[0]!.patch, command_ref: alignment.command_ref, vector: motion.vector,
+      operand_shape: motion.shape, operand_area: motion.area, operand_palette_binding: binding,
+      phase_binding: 'one changed collection-member patch', source_refs: phase.evidence, status: 'candidate', predictive_use_allowed: false,
+      scope: 'Conditional experiment after exact glyph and structural operand rebinding; local supports and blocking remain unknown.' };
+    rule.rule_id = `program-translation:${identity(rule).slice(0, 20)}`; result.push(rule);
+  }
+  return result;
 }

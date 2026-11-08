@@ -45,7 +45,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.8.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.9.0';
 const SELECTION_PROGRAM = 'v6.composition_strategy.choose';
 type R = Record<string, any>;
 const EPISODE = 'common-observation-frontier';
@@ -128,7 +128,9 @@ export class NativeV6Runtime implements NativeV6Backend {
   private executionDigest: string | null = null;
   private selectionProgram: StoredNativeProgram | null = null;
   private selectionReceipt: NativeSrcReceipt | null = null;
-  private planning: { execution: NativeExecution; inputs: readonly NativeCommand[]; offers: Map<string, { family: NativeFamily; proposal: NativeProposal } | null> } | null = null;
+  private planning: { execution: NativeExecution; inputs: readonly NativeCommand[];
+    offers: Map<string, { family: NativeFamily; proposal: NativeProposal } | null>;
+    entryOffers: Map<string, NativeProposal | null>; coordination: R[] } | null = null;
 
   constructor(configuration: NativeV6RuntimeConfiguration) {
     if (!configuration.sourceDigest || !configuration.families.length
@@ -278,7 +280,8 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (!this.current || !this.observation) throw new Error('Missing current selection context');
     this.caller?.prepare(this.observation, this.remaining());
     const remainingActiveMs = Math.max(0, 360_000 - (this.levelMs.get(this.current.level) ?? 0) - this.runningMs(this.current.level));
-    this.planning = { execution: { ...execution, now: this.now, deadlineMs: this.now() + remainingActiveMs }, inputs, offers: new Map() };
+    this.planning = { execution: { ...execution, now: this.now, deadlineMs: this.now() + remainingActiveMs },
+      inputs, offers: new Map(), entryOffers: new Map(), coordination: [] };
     try {
       if (!this.knowledge) throw new Error('Native knowledge store is not initialized');
       this.selectionProgram ??= await this.knowledge.registerProgram(SELECTION_PROGRAM, {
@@ -293,12 +296,15 @@ export class NativeV6Runtime implements NativeV6Backend {
             const family = this.families.find(candidate => candidate.id === id)!;
             const enabled = objectValue(this.knowledge!.value(`family_activation:${family.id}`)).enabled === true;
             const entry = group.entryPoints?.[entryIndex];
-            const proposal = !enabled ? null : entry
+            const entryKey = `${group.id}:${entry}`;
+            const proposal = !enabled ? null : entry && this.planning.entryOffers.has(entryKey)
+              ? this.planning.entryOffers.get(entryKey)! : entry
               ? await family.proposeInSubquestion!(group.id, entry, this.observation, this.current.frame_rows,
                 this.planning.inputs, this.remaining(), this.planning.execution)
               : family.proposeInGroup
               ? await family.proposeInGroup(group.id, this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution)
               : await family.propose(this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution);
+            if (proposal && group.id === 'goal_access' && await this.deferUnlearnedInvitation(proposal)) continue;
             if (proposal) { offered = { family, proposal }; break; }
           }
           this.planning.offers.set(group.id, offered);
@@ -328,11 +334,46 @@ export class NativeV6Runtime implements NativeV6Backend {
       if (!offered) throw new Error('The SRC selection does not bind an offered native family');
       if (this.caller) {
         offered.proposal.strategy_receipt = { ...selected.receipt, visited: result.visited, selected: result.selected, deferred_curiosity: [],
+          ...(this.planning.coordination.length ? { native_coordination: this.planning.coordination } : {}),
           ...(this.caller.returnedAttention ? { attention_return: Object.fromEntries(['id', 'status', 'parent', 'pair_ref', 'returned_at'].map(key => [key, this.caller!.returnedAttention![key]])) } : {}) };
         offered.proposal.morphology = { status: 'not_evaluated', reason: 'prior_family_selected' };
       }
       return offered;
     } finally { this.planning = null; }
+  }
+
+  /**
+   * Explicit native coordination extension. The unchanged Python caller can
+   * mistake a current cross for an unrelated invitation after learning a
+   * program, then block every other family after its no-effect response.
+   * A currently guarded, acquired program model supplies a stronger question.
+   * Defer only that unlearned invitation and retain the ordinary SRC/window
+   * order. No game identity, preferred command or expected victory is supplied.
+   */
+  private async deferUnlearnedInvitation(invitation: NativeProposal): Promise<boolean> {
+    if (invitation.kind !== 'measured_animated_contact' || (invitation as R).animated_contact_plan?.mode !== 'invitation'
+      || !this.planning || !this.knowledge || !this.current || !this.observation) return false;
+    const group = this.groups.find(candidate => candidate.id === 'window_constraints');
+    const index = group?.entryPoints?.indexOf('observed_program_composition') ?? -1;
+    if (!group || index < 0) return false;
+    const family = this.families.find(candidate => candidate.id === group.families[index]);
+    if (!family?.proposeInSubquestion || objectValue(this.knowledge.value(`family_activation:${family.id}`)).enabled !== true) return false;
+    const key = 'window_constraints:observed_program_composition';
+    if (!this.planning.entryOffers.has(key)) this.planning.entryOffers.set(key,
+      await family.proposeInSubquestion('window_constraints', 'observed_program_composition', this.observation,
+        this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution));
+    const candidate = this.planning.entryOffers.get(key);
+    if (!candidate || candidate.status !== 'proposed' || !['public_program_composition', 'public_program_respondent_probe'].includes(candidate.kind)) return false;
+    const model = (candidate as R).program_composition_plan?.model ?? (candidate as R).respondent_probe_plan?.model;
+    if (model?.status !== 'conditional_program_composition_model' || !model.model_id || !model.evidence_refs?.length) return false;
+    const guard = await family.before(candidate, 0, this.current, this.observation);
+    if (!guard.admitted) return false;
+    const evidence = { rule: 'retained_program_preparation_before_unlearned_invitation', observation_ref: this.observation.observation_ref,
+      deferred_proposal_id: invitation.proposal_id, preferred_proposal_id: candidate.proposal_id,
+      model_id: model.model_id, guard_reason: guard.reason,
+      scope: 'Native coordination extension; conditional learned preparation, not an original Python selection rule.' };
+    this.planning.coordination.push(evidence); this.note({ kind: 'native_coordination', ...evidence });
+    return true;
   }
 
   private async authorize(execution: NativeExecution): Promise<boolean> {
@@ -420,6 +461,14 @@ export class NativeV6Runtime implements NativeV6Backend {
         boundaryWitness: transition => this.caller!.boundaryWitness(transition, prefix.proposal, prefix.revision),
       } : undefined) : null;
     this.cycles += 1;
+    // common_frontier_runtime.py checks observed program refutations after
+    // OP29/30/31 and before replaying a natural boundary. Official completion
+    // and GAME_OVER take precedence over an experimental stop request.
+    const officialStop = this.current!.levels_completed >= this.budgets!.targetLevels
+      || ['WIN', 'GAME_OVER'].includes(this.current!.state);
+    const sourceStop = this.families.map(family => family.requestedStopReason?.(this.observation!) ?? null)
+      .find(reason => reason !== null) ?? null;
+    const stopReason = officialStop ? this.budgetReason() : sourceStop ?? this.budgetReason();
     let transfer: R | null = null;
     if (this.caller) {
       this.callerAcquisitions += prefix.witnessed.length;
@@ -427,10 +476,10 @@ export class NativeV6Runtime implements NativeV6Backend {
       const boundary = last.after.level_epoch !== last.before.level_epoch || last.after.levels_completed > last.before.levels_completed || ['WIN', 'GAME_OVER'].includes(last.after.state);
       // The source stops immediately after the requested score / GAME_OVER.
       // Replay is for continuation into the next natural level only.
-      if (boundary && last.after.state !== 'GAME_OVER' && last.after.levels_completed < this.budgets!.targetLevels) {
+      if (boundary && !sourceStop && last.after.state !== 'GAME_OVER' && last.after.levels_completed < this.budgets!.targetLevels) {
         transfer = await this.caller.replayBoundary(last.after); this.callerBoundaryReplays += 1;
       }
-      const reason = this.budgetReason(); if (reason) this.caller.close(last.after, reason);
+      if (stopReason) this.caller.close(last.after, stopReason);
     }
     this.note({ kind: 'sealed_prefix', family: prefix.family.id, revision: prefix.revision, acquired_actions: prefix.witnessed.length });
     const evidenceId = `prefix_evidence:${prefix.revision}`;
@@ -444,7 +493,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     }, ...(this.authority?.checkpointWrites() ?? [])], evidenceId);
     this.restoreFamilies();
     this.kind = 'boundary'; this.reason = null;
-    const reason = this.budgetReason(); if (reason) this.stop(reason);
+    const reason = stopReason ?? this.budgetReason(); if (reason) this.stop(reason);
   }
 
   private retainSelectedAcquisition(family: NativeFamily, record: NativeRecordResult, transition: WitnessedTransition): void {
@@ -607,9 +656,10 @@ export class NativeV6Runtime implements NativeV6Backend {
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id),
-        sharedSeriesMemory: 'occurrence_recall_ancestors_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
+        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
         sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,
-        nativeCallerExtensions: ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update'],
+        nativeCallerExtensions: ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
+          'retained_program_preparation_before_unlearned_invitation'],
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
       srcDecision: this.selectionReceipt,
       whyAct: this.authority?.snapshot() ?? { enabled: false, scope: 'injected_family_test_runtime' },
@@ -808,10 +858,11 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, recall, supports, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
   const registeredSubquestions = (order: readonly string[], registered: Record<string, NativeFamily>): string[] =>
     order.flatMap(question => registered[question] ? [registered[question].id] : []);
-  // The cell and occurrence source entries share one acquired journal, but
+  // The cell, occurrence and program source entries share one acquired journal, but
   // each is consulted only at its own position in the original DRM order.
   const windowProviders: Record<string, NativeFamily> = {
-    multiscale_constraints: windows, cell_patch_composition: recall, observed_occurrence_recall: recall, ...supportChildren,
+    multiscale_constraints: windows, cell_patch_composition: recall, observed_occurrence_recall: recall,
+    observed_program_composition: recall, ...supportChildren,
   };
   const windowEntries = (configuration.window_constraints.ordered_subquestions as string[])
     .filter(question => windowProviders[question]);
@@ -850,7 +901,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const manifest = { sourceEncoding: 'json-stringify-v1', implementation: NATIVE_V6_IMPLEMENTATION, referenceCommit: NATIVE_V6_REFERENCE_COMMIT,
     declarations: loaded, families: [...families.map(f => f.id), ...CALLER_PROVIDERS], groups, authority: 'native_original_why_act', caller: 'native_common_coordinator',
     selectionProgram: nativeProgramDescriptions().find(program => program.id === 'v6.composition_strategy.choose')?.transitiveSourceHash ?? null,
-    nativeCallerExtensions: ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update'],
+    nativeCallerExtensions: ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
+      'retained_program_preparation_before_unlearned_invitation'],
     fullV6Parity: false };
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');

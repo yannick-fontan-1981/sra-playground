@@ -12,6 +12,7 @@ import type { ObservedInputDomain } from './v6-native-observer.ts';
 import type { NativeFamily, NativePublicObservation, NativeRows, NativeProposal, NativeBeforeResult, NativeAfterResult } from './v6-native-types.ts';
 import { pythonEqual } from './v6-operations.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
+import { programIdentity } from './v6-program-identity.ts';
 import { measureOccurrenceScene, occurrenceCandidates, occurrenceContextScope } from './v6-occurrence-scene.ts';
 import type { OccurrenceRecord as R } from './v6-occurrence-scene.ts';
 import { observeOccurrenceProgramPacket } from './v6-occurrence-program-observer.ts';
@@ -77,9 +78,9 @@ class SeriesEventMemory {
     digest = identity([digest, this.crossState, this.crossPairs,
       Object.fromEntries([...this.crossAxisInputs].map(([key, values]) => [key, [...values].sort()])), this.crossEvents]);
     digest = identity([digest, this.markedEvents, this.programEvents]);
-    digest = identity([digest, this.programEditSamples, this.compositionModels, this.compositionContinuation,
+    digest = programIdentity([digest, this.programEditSamples, this.compositionModels, this.compositionContinuation,
       [...this.compositionRefutedEpochs].sort((a, b) => a - b), this.compositionEvents, this.respondentPending, this.requestedStopReason]);
-    return identity([digest, this.respondentModels, this.respondentEvents, this.extensionRefusals, this.inputSupports]);
+    return programIdentity([digest, this.respondentModels, this.respondentEvents, this.extensionRefusals, this.inputSupports]);
   }
 }
 

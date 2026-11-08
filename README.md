@@ -28,10 +28,18 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **TICT now completes all six
-  levels with official `WIN` in 55 actions**, through a fresh common-agent
-  session and the transferred cell-patch composition. See the
-  [v38 transfer and validation report](docs/migration/v38-cell-placement.md).
+  level**; opening the tab does not move the game. **STCK now completes its
+  first three levels in 35 actions (3, 7 and 25)** through one fresh common
+  Logos Engine session. The run stops at its declared target on entry to
+  level 4 with `NOT_FINISHED`. The
+  [v39 transfer and validation report](docs/migration/v39-observed-program.md)
+  covers observed-program composition and an explicit native coordination
+  evolution that differs from the original Python caller's selection.
+  **Previous v38 milestone: TICT completes all six levels with official `WIN`
+  in 55 actions**, using the transferred cell-patch composition. See the
+  [v38 report](docs/migration/v38-cell-placement.md).
+  The current entry audit connects **31 of 76 explicit DRM subquestions
+  (40.8%)**; complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These
   checks do not establish complete V6 coverage. See [the transfer requirements

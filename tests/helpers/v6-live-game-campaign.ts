@@ -22,6 +22,8 @@ export interface NativeGameCampaignOptions {
   gameCode: string;
   targetLevels: number;
   progress?: (event: R) => void;
+  /** Evidence sink only; returned values never enter the production agent. */
+  publicTrace?: (packet: NativePublicObservation, command: NativeCommand | null) => void;
 }
 
 async function nativeSourceManifest(): Promise<R> {
@@ -139,11 +141,20 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const alternating = (series.events as R[]).filter(event => event.kind === 'alternating_graph_evidence');
           const graphEvidence = alternating.at(-1);
           const cells = (series.events as R[]).filter(event => event.kind === 'cell_patch_placement_evidence');
+          const programModels = (series.events as R[]).filter(event => event.kind === 'fitted_program_composition');
+          const programReconciliations = (series.events as R[]).filter(event => event.kind === 'program_composition_reconciled');
+          const programRefutedEpochs = new Set<number>();
+          for (const event of series.events as R[]) {
+            if (event.kind === 'program_composition_reconciled' && event.refuted) programRefutedEpochs.add(event.epoch);
+            else if (event.kind === 'exact_program_extension_refusal') programRefutedEpochs.delete(event.epoch);
+          }
           assert.deepEqual(anchors.map(event => event.epoch), [...new Set(report.actions.map((action: R) => action.levelBefore))],
             'One anchor belongs to each publicly witnessed before-epoch, including natural boundary transitions');
           report.prefixes.push({ id: evidenceId, decisionRevision: evidence.decision_revision,
             acquiredActions: evidence.transitions.length, family: snapshot.lastDecision, operations: ['OP29', 'OP30', 'OP31'],
             proposalKind: evidence.proposal.kind ?? null, fieldSubquestion: evidence.proposal.field_subquestion ?? null,
+            ...(evidence.proposal.strategy_receipt?.native_coordination?.length
+              ? { nativeCoordination: evidence.proposal.strategy_receipt.native_coordination } : {}),
             supportMode: evidence.proposal.support_preparation_plan?.mode ?? null,
             graphChain: graph.chain, graphRevision: snapshot.graphRevision, callerAcquiredTransitions: snapshot.caller.acquiredTransitions,
             sharedSeries: { digestScope: snapshot.coverage.sharedSeriesDigestScope, digest: series.digest,
@@ -151,6 +162,18 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               cellPlacementEvidenceCount: cells.length,
               cellPlacementModels: cells.at(-1)?.models ?? {},
               cellPlacementRefusals: cells.at(-1)?.refused ?? [],
+              markedCollectionResultCount: series.events.filter((event: R) => event.kind === 'marked_collection_result').length,
+              programEditSampleCount: series.events.filter((event: R) => event.kind === 'program_edit_sample').length,
+              programPhaseAlignmentCount: series.events.filter((event: R) => event.kind === 'public_program_phase_alignment').length,
+              programModels: programModels.map(event => ({ modelId: event.model.model_id, epoch: event.model.acquisition_epoch,
+                evidence: event.evidence, observedMoves: event.model.moves.filter((move: R) => move.status === 'phase_observed_translation').length,
+                inferredMoves: event.model.moves.filter((move: R) => move.status !== 'phase_observed_translation').length })),
+              programReconciliationCount: programReconciliations.length,
+              programRefutedEpochs: [...programRefutedEpochs].sort((left, right) => left - right),
+              respondentProbeCount: series.events.filter((event: R) => event.kind === 'respondent_probe_result').length,
+              respondentModelCount: series.events.filter((event: R) => event.kind === 'observed_respondent_order').length,
+              programExtensionRefusalCount: series.events.filter((event: R) => event.kind === 'exact_program_extension_refusal').length,
+              programInputSupportCount: series.events.filter((event: R) => event.kind === 'observed_input_support').length,
               alternatingGraphEvidenceCount: alternating.length,
               alternatingGraphSampleCount: graphEvidence?.samples?.length ?? 0,
               alternatingGraphContactCount: graphEvidence?.contacts?.length ?? 0,
@@ -189,6 +212,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     }
     current = game({ type: 'load', code: gameCode, level: 1 });
     const initial = publicPacket(toV6PublicObservation(current, 0));
+    options.publicTrace?.(structuredClone(initial), null);
     report.initial = { publicPacketSha256: packetHash(initial), state: current.state, level: current.level, levelsCompleted: current.levelsCompleted };
     if (baseline) {
       assert.equal(packetHash(initial), packetHash(baseline.fixture.initial.public), 'The initial real game matches the original public scene');
@@ -207,6 +231,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
         current = game({ type: 'action', actionId: action.id, ...(action.id === 6 ? { data: action.data } : {}) });
         const executionMs = performance.now() - executionStart;
         const packet = publicPacket(toV6PublicObservation(current, report.actions.length + 1));
+        options.publicTrace?.(structuredClone(packet), structuredClone(command));
         report.actions.push({ sequence: report.actions.length + 1, command, levelBefore, completedBefore,
           levelAfter: current.level, completedAfter: current.levelsCompleted, state: current.state,
           publicPacketSha256: packetHash(packet), frameHash: packet.frame_hash, animationFrames: packet.frame_packet.length,

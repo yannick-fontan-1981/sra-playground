@@ -11,20 +11,44 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone:** see [the v38 cell-patch transfer and complete TICT campaign
-report](v38-cell-placement.md), following [the v37 memory-cost and ELAS campaign
+**Current integrated milestone:** see [the v39 observed-program transfer and STCK
+three-level campaign report](v39-observed-program.md), following [the v38 cell-patch
+transfer and complete TICT campaign report](v38-cell-placement.md), [the v37 memory-cost and ELAS campaign
 report](v37-memory-performance.md), [the v36 alternating graph and common
 acquisition report](v36-alternating-graph.md), [the v35 coupled planning,
 auxiliary support and native checkpoint report](v35-coupled-support.md), [the v34 coupled-pair
 response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 30 of 76
-explicit DRM subquestions are connected (39.5%). This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 31 of 76
+explicit DRM subquestions are connected (40.8%). This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
-The v38 cell composition adds one source entry; the v37 performance step added none.
+The v39 observed-program composition adds one source entry, following the v38
+cell-composition entry; the v37 performance step added none. All six conditions
+for a complete migration remain false.
 
-**New v38 result:** TICT is completely solved through the fresh native common
+**New v39 result:** STCK's first three levels are completed through the fresh
+native common Logos Engine caller in one session: **3, 7 and 25 actions**, **35
+total**. The [bounded campaign](native-campaigns-v39/stck-three-levels.json)
+stops at its declared three-level target on entry to level 4 with the game's
+state still **`NOT_FINISHED`**. It uses implementation
+`logos-engine.typescript.v6.native-migration/0.9.0`, with unchanged native source
+throughout the run, acquired real effects and retained cross-level memory.
+This establishes the requested three level completions, without claiming a
+complete-game `WIN` for STCK.
+
+The transferred program capability learns collection edits and conditional
+operators from public animation phases, composes their effects, reconciles
+respondent behavior and revalidates current input supports. It shares the
+existing occurrence journal. A separate, explicitly recorded **native
+coordination evolution** defers an unlearned geometric invitation when the
+shared family has an acquired, currently guarded program proposal. The declared
+DRM lists retain their order and the selected proposal still passes ordinary
+point, preservation, budget and WHY/ACT checks. The unchanged original Python
+caller reproduces the invitation collision; this coordination change is
+therefore identified as a native extension, not original selection parity.
+
+**Previous v38 result:** TICT is completely solved through the fresh native common
 caller: **six levels, official `WIN`, 55 actions** distributed as **3, 12, 7,
 7, 12 and 14**. All 55 prefixes use the transferred cell-patch composition,
 acquire their real public effects and retain one session across the game.
@@ -33,7 +57,7 @@ packet hashes, commands, source identity and acquisition checks. The source
 transfer and native integration add 121 passing focused checks. The old v37
 baseline completed two levels and stopped at the third level's time budget.
 
-**New v37 result:** the existing metric-composition capability solves ELAS's
+**Previous v37 result:** the existing metric-composition capability solves ELAS's
 first three levels through the full native common caller in one fresh session:
 **2, 9 and 22 actions**, 33 total, nine sealed prefixes. It stops at the declared
 target on entry to level 4. The [campaign](native-campaigns-v37/elas-three-levels.json)

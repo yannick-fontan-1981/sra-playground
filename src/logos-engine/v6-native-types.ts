@@ -122,6 +122,8 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   record(before: NativeObservation, after: NativeObservation, command: NativeCommand,
     firstRows: NativeRows, secondRows: NativeRows, proposal: P, index: number,
     frames: readonly NativeRows[]): NativeMaybePromise<NativeRecordResult>;
+  /** Source refusal, read only after the real prefix has been fully acquired. */
+  requestedStopReason?(observation: NativeObservation): string | null;
   state(): NativeRecord;
   /** All persistent state is reconstructed from the authoritative shared nodes. */
   restore(state: NativeRecord): void;

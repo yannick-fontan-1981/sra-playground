@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 83,
+    "componentVerifiedModules": 88,
     "partiallyTransferredModules": 59,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1227,
+    "pendingModules": 1222,
     "strategyFamilies": 16
   },
   "families": [
@@ -74428,8 +74428,7 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-occurrence-recall.ts",
-        "src/logos-engine/v6-occurrence-program-observer.ts"
+        "src/logos-engine/v6-occurrence-recall.ts"
       ],
       "proof": [
         "scripts/export-v6-occurrence-reference.py",
@@ -75145,7 +75144,14 @@
         "tests/v6-native-transition-domain.test.ts",
         "tests/v6-native-transition-domain-integration.test.ts",
         "docs/migration/v35-coupled-support.md",
-        "docs/migration/native-campaigns-v35/dico-domain-witness-diagnostic.json"
+        "docs/migration/native-campaigns-v35/dico-domain-witness-diagnostic.json",
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts",
+        "tests/v6-program-composition-integration.test.ts",
+        "tests/v6-program-priority.test.ts",
+        "tests/fixtures/v6-program-priority-public.json.gz",
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
       ]
     },
     {
@@ -77522,15 +77528,19 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-occurrence-recall.ts",
-        "src/logos-engine/v6-occurrence-program-observer.ts"
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-program-identity.ts"
       ],
       "proof": [
-        "scripts/export-v6-occurrence-reference.py",
-        "tests/fixtures/v6-occurrence-reference.json",
-        "tests/v6-occurrence-recall.test.ts",
-        "tests/v6-support-caller-integration.test.ts",
-        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts",
+        "tests/v6-program-composition-integration.test.ts",
+        "tests/v6-program-priority.test.ts",
+        "tests/fixtures/v6-program-priority-public.json.gz",
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json",
+        "docs/migration/native-campaigns-v39/stck-three-levels.json"
       ]
     },
     {
@@ -78120,8 +78130,7 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-occurrence-recall.ts",
-        "src/logos-engine/v6-occurrence-program-observer.ts"
+        "src/logos-engine/v6-occurrence-recall.ts"
       ],
       "proof": [
         "scripts/export-v6-occurrence-reference.py",
@@ -81486,15 +81495,19 @@
       ],
       "status": "partial_transfer",
       "targets": [
+        "src/logos-engine/v6-occurrence-program-observer.ts",
+        "src/logos-engine/v6-program-composition-access.ts",
         "src/logos-engine/v6-occurrence-recall.ts",
-        "src/logos-engine/v6-occurrence-program-observer.ts"
+        "src/logos-engine/v6-shared-series.ts"
       ],
       "proof": [
-        "scripts/export-v6-occurrence-reference.py",
-        "tests/fixtures/v6-occurrence-reference.json",
-        "tests/v6-occurrence-recall.test.ts",
-        "tests/v6-support-caller-integration.test.ts",
-        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts",
+        "tests/v6-program-composition-integration.test.ts",
+        "tests/v6-program-priority.test.ts",
+        "tests/fixtures/v6-program-priority-public.json.gz",
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
       ]
     },
     {
@@ -81875,15 +81888,18 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-occurrence-recall.ts",
-        "src/logos-engine/v6-occurrence-program-observer.ts"
+        "src/logos-engine/v6-occurrence-program-observer.ts",
+        "src/logos-engine/v6-native-observer.ts"
       ],
       "proof": [
         "scripts/export-v6-occurrence-reference.py",
         "tests/fixtures/v6-occurrence-reference.json",
         "tests/v6-occurrence-recall.test.ts",
         "tests/v6-support-caller-integration.test.ts",
-        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json",
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts"
       ]
     },
     {
@@ -82881,15 +82897,20 @@
       ],
       "status": "partial_transfer",
       "targets": [
+        "src/logos-engine/v6-program-composition-access.ts",
+        "src/logos-engine/v6-program-input-access.ts",
         "src/logos-engine/v6-occurrence-recall.ts",
-        "src/logos-engine/v6-occurrence-program-observer.ts"
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-program-identity.ts"
       ],
       "proof": [
-        "scripts/export-v6-occurrence-reference.py",
-        "tests/fixtures/v6-occurrence-reference.json",
-        "tests/v6-occurrence-recall.test.ts",
-        "tests/v6-support-caller-integration.test.ts",
-        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts",
+        "tests/v6-program-composition-integration.test.ts",
+        "tests/v6-program-priority.test.ts",
+        "tests/fixtures/v6-program-priority-public.json.gz",
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
       ]
     },
     {
@@ -82935,9 +82956,16 @@
           "endLine": 131
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-program-compositions.ts",
+        "src/logos-engine/v6-program-identity.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/program_geometry.py",
@@ -82970,9 +82998,17 @@
           "endLine": 94
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-program-geometry.ts",
+        "src/logos-engine/v6-program-identity.ts",
+        "src/logos-engine/v6-point-set.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/program_input_access.py",
@@ -82993,9 +83029,15 @@
           "endLine": 26
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-program-input-access.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/program_respondent_access.py",
@@ -83060,15 +83102,20 @@
       ],
       "status": "partial_transfer",
       "targets": [
+        "src/logos-engine/v6-program-composition-access.ts",
+        "src/logos-engine/v6-program-input-access.ts",
         "src/logos-engine/v6-occurrence-recall.ts",
-        "src/logos-engine/v6-occurrence-program-observer.ts"
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-program-identity.ts"
       ],
       "proof": [
-        "scripts/export-v6-occurrence-reference.py",
-        "tests/fixtures/v6-occurrence-reference.json",
-        "tests/v6-occurrence-recall.test.ts",
-        "tests/v6-support-caller-integration.test.ts",
-        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts",
+        "tests/v6-program-composition-integration.test.ts",
+        "tests/v6-program-priority.test.ts",
+        "tests/fixtures/v6-program-priority-public.json.gz",
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
       ]
     },
     {
@@ -83096,9 +83143,15 @@
           "endLine": 51
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-program-respondent-observations.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/program_respondent_search.py",
@@ -83125,9 +83178,15 @@
           "endLine": 81
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-program-respondent-search.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/prospective_contact_adapter.py",
@@ -92469,7 +92528,10 @@
         "src/logos-engine/v6-native-runtime.ts"
       ],
       "proof": [
-        "tests/v6-native-runtime.test.ts"
+        "tests/v6-native-runtime.test.ts",
+        "tests/v6-program-priority.test.ts",
+        "tests/fixtures/v6-program-priority-public.json.gz",
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
       ]
     },
     {
@@ -96478,6 +96540,7 @@
     "The separately reported declared-entry progress is provider connection coverage over the four ordered DRM subquestion lists. It is not a game score, a code-volume percentage, or certification of complete V6 parity.",
     "AnimatedContact exports the exact id/all_conditions of the two interaction.drm rules it consumes (ballistic contact solution and ballistic curve disclosure); this is not a transfer of every rule in that inherited DRM document.",
     "Alternating graph compares complete measurement and topology/contact outputs plus the graph-owned access layer. Its scene description is explicitly the consumed sprite projection, and its shared journal digest names the supported native closure. Public gallery rasters and controlled helper inputs are not complete-game or full-inheritance evidence.",
-    "Cell-patch transfer distinguishes exact framed-patch measurement from its geometry-only queued-field dependency and the own CellPlacementAccess layer from unported ancestors. Conditional line search is compared only in the native exact-integer domain; larger Python integer scores are explicitly refused without recording a source-law counterexample. Full original common envelopes are compared on controlled public rasters, separately from the fresh native SRC/WHY-ACT/checkpoint integration tests. None of these fixture counts establishes a completed game or complete V6 inheritance parity."
+    "Cell-patch transfer distinguishes exact framed-patch measurement from its geometry-only queued-field dependency and the own CellPlacementAccess layer from unported ancestors. Conditional line search is compared only in the native exact-integer domain; larger Python integer scores are explicitly refused without recording a source-law counterexample. Full original common envelopes are compared on controlled public rasters, separately from the fresh native SRC/WHY-ACT/checkpoint integration tests. None of these fixture counts establishes a completed game or complete V6 inheritance parity.",
+    "Observed-program transfer compares complete source helper outputs, program-bearing ancestor states/digests, acquisition suffixes, raw common proposal/point envelopes and typed glyph float identities. Unported crossed/repeated producers and general input-candidate/propose inheritance remain partial, and the shared native journal names its own digest closure. The retained_program_preparation_before_unlearned_invitation rule is an explicitly recorded native coordinator evolution following a reproduced original-caller collision; retaining DRM list order does not imply original cross-family selection parity. Component fixtures and recorded-prefix replay remain distinct from fresh common-caller game campaigns."
   ]
 }

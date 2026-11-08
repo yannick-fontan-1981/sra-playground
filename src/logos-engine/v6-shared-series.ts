@@ -2,7 +2,7 @@
  * Supported acquisition closure of the original ObservedCompositionConstraint.
  *
  * The source calls the inherited record chain before record_packet. At this
- * migration stage that chain contains occurrence recall, cell-patch placement,
+ * migration stage that chain contains observed-program composition, occurrence recall, cell-patch placement,
  * coupled-pair epoch anchors, alternating graph evidence, pair-response evidence
  * and coupled support planning/acquisition.
  * Other providers remain pending. The retained digest describes this native closure, not the
@@ -15,7 +15,10 @@ import { proposeCoupledPairGraph, coupledPairBefore } from './v6-coupled-pair-pl
 import { AuxiliarySupportMemory, auxiliarySupportBefore, auxiliarySupportAfter } from './v6-auxiliary-support.ts';
 import { AlternatingGraphMemory, alternatingGraphBefore, alternatingGraphAfter } from './v6-alternating-graph-access.ts';
 import { CellPlacementMemory, cellPlacementBefore } from './v6-cell-placement.ts';
-import { rowsDigest } from './v6-native-observer.ts';
+import { markedCollectionQuestion, observedProgramQuestion, observedProgramBefore, observedProgramAfter,
+  recordObservedProgram, recordObservedProgramPacket } from './v6-program-composition-access.ts';
+import { programIdentity } from './v6-program-identity.ts';
+import { projection, rowsDigest } from './v6-native-observer.ts';
 import type { ObservedInputDomain } from './v6-native-observer.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
@@ -23,7 +26,7 @@ import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts'
 import type { OccurrenceRecord as R } from './v6-occurrence-scene.ts';
 import type { NativeFamily, NativeRows, NativePublicObservation, NativeProposal } from './v6-native-types.ts';
 
-export const SHARED_SERIES_DIGEST_SCOPE = 'native_recall_ancestors_cell_placement_alternating_graph_and_coupled_support_v5';
+export const SHARED_SERIES_DIGEST_SCOPE = 'native_observed_program_recall_cell_placement_alternating_graph_and_coupled_support_v6';
 
 /** The inherited public reducer participates in the native mutation guard. */
 class SharedOccurrenceMemory extends OccurrenceRecallAccess {
@@ -185,6 +188,43 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     return proposal;
   }
 
+  /** ProgramCompositionConstraint's declared question on the same ancestor memory. */
+  async programPropose(observation: R, rows: NativeRows, inputs: readonly R[], remaining: number,
+    levelDeadline: number | null, now?: () => number): Promise<R | null> {
+    if (remaining < 1) return null;
+    if (this.memory.compositionModels.length && (levelDeadline === null || levelDeadline === undefined)) {
+      throw new TypeError('Program search requires the current level deadline');
+    }
+    const config = { remaining_level_actions: remaining, level_deadline: levelDeadline === null ? null : levelDeadline / 1000,
+      ...(now ? { now: () => now() / 1000 } : {}) };
+    const proposal = observedProgramQuestion(this.memory, observation, rows, Math.min(16, remaining), config)
+      ?? markedCollectionQuestion(this.memory, observation, rows, inputs);
+    if (!proposal) return null;
+    proposal.steps[0].expected_before = Object.fromEntries(['level_epoch', 'frame_hash', 'levels_completed', 'state'].map(key => [key, observation[key]]));
+    for (const [index, action] of (proposal.actions as R[]).entries()) {
+      if (action.action_ref !== 'ACTION6') continue;
+      const { x, y } = action.data;
+      const plan = [proposal.program_composition_plan, proposal.respondent_probe_plan, proposal.marked_collection_plan].find(candidate => truth(candidate));
+      if (!plan || y < 0 || y >= rows.length || x < 0 || x >= rows[0]!.length) throw new TypeError('Program point lacks public composition');
+      let box = [x, y, x, y];
+      if (Object.hasOwn(plan, 'entity') && truth(plan.entity)) box = plan.entity.bbox;
+      else if (truth(proposal.program_composition_plan) && plan.steps[index].mode === 'remove') box = plan.steps[index].member_box;
+      else if (truth(plan.layout)) {
+        const matches = (plan.layout.controls as R[]).filter(control => control.bbox[0] <= x && x <= control.bbox[2]
+          && control.bbox[1] <= y && y <= control.bbox[3]);
+        if (matches.length !== 1) throw new TypeError('Program input is not one current measured control');
+        box = matches[0]!.bbox;
+      }
+      const digest = await rowsDigest(projection(rows, box));
+      proposal.steps[index].point_support = { level_epoch: observation.level_epoch, observation_ref: observation.observation_ref,
+        frame_hash: observation.frame_hash, point: [x, y], palette_value: rows[y]![x], projection_bbox: box,
+        projected_rows_digest: digest, entity_ref: 'measured-program-input:' + identity([box, [x, y], digest]),
+        signature: programIdentity([plan, action, index]),
+        scope: 'Composition-derived observed control/member support, rechecked before this primitive; program/prefix guards are additional.' };
+    }
+    return proposal;
+  }
+
   private sourceGraphProposal(observation: R, rows: NativeRows, inputs: readonly R[], maxPrefix: number, config: R): R {
     const pair = this.pairs.currentState();
     const ordinary = (): R => proposeCoupledPairGraph(pair, observation, rows, inputs, maxPrefix, config)
@@ -201,6 +241,16 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
           const step = proposal.steps[index], support = step.point_support;
           if (!equal(support.point, [action.data.x, action.data.y])) throw new TypeError('Current cell point changed');
           step.point_binding = { ...support };
+        }
+      } else if (Object.hasOwn(proposal, 'occurrence_recall_plan')) super.bind(proposal, domain);
+      else if (['marked_collection_plan', 'program_composition_plan', 'respondent_probe_plan'].some(key => Object.hasOwn(proposal, key))) {
+        const first = proposal.steps[0].expected_before;
+        if (!domain.bindings.has(`${first.level_epoch}:${first.frame_hash}`)) throw new TypeError('Program input domain not currently observed');
+        for (const [index, action] of (proposal.actions as R[]).entries()) {
+          if (action.action_ref !== 'ACTION6') continue;
+          const support = proposal.steps[index].point_support;
+          if (!equal(support.point, [action.data.x, action.data.y])) throw new TypeError('Program payload differs from its current public support');
+          proposal.steps[index].point_binding = { ...support };
         }
       } else super.bind(proposal, domain);
       return;
@@ -223,6 +273,10 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
     if (truth(proposal.cell_placement_plan)) return cellPlacementBefore(proposal, index, packet.frame_rows,
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
+    if (!truth(proposal.occurrence_recall_plan) && ['marked_collection_plan', 'program_composition_plan', 'respondent_probe_plan'].some(key => truth(proposal[key]))) {
+      return observedProgramBefore(this.memory, proposal, index, packet.frame_rows,
+        { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
+    }
     return super.before(proposal, index, packet, observation);
   }
   override after(proposal: R, index: number, before: R, after: R, first: NativeRows, second: NativeRows): R {
@@ -234,6 +288,10 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
     if (truth(proposal.cell_placement_plan)) return this.cells.after(proposal, index, first, second,
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
+    if (!truth(proposal.occurrence_recall_plan) && ['marked_collection_plan', 'program_composition_plan', 'respondent_probe_plan'].some(key => truth(proposal[key]))) {
+      return observedProgramAfter(this.memory, proposal, index, first, second,
+        { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
+    }
     return super.after(proposal, index, before, after, first, second);
   }
 
@@ -241,7 +299,15 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     proposal: R, index: number, frames: readonly NativeRows[] = []): R {
     const certified = this.certified !== null && this.unchanged(this.certified);
     this.certified = null;
-    const events = this.memory.record(before, command, after, first, second, proposal, index);
+    // Program ancestors acquire before the higher occurrence/cell layers.
+    // Their source record methods dispatch self.before/self.after through the
+    // complete inherited guard chain, including mixed-key test envelopes.
+    const events = recordObservedProgram(this.memory, before, command, after, first, second, proposal, index, {
+      before: (p, i, rows, meta) => this.before(p, i, { frame_rows: rows, level: meta.epoch,
+        levels_completed: meta.score, available_action_refs: meta.available } as NativePublicObservation, before),
+      after: (p, i, rows, later) => this.after(p, i, before, after, rows, later),
+    });
+    events.push(...this.memory.record(before, command, after, first, second, proposal, index));
     events.push(...this.cells.record(before, command, after, first, second, proposal, index));
     events.push(...this.graph.record(before, command, after, first, second, proposal, index));
     // The source pair layer first acquires the before-epoch anchor, then its
@@ -250,7 +316,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     const supportEvents = this.auxiliary.record(this.pairs.currentState(), before, command, after, first, second, proposal, index);
     for (const event of supportEvents) if (event.kind === 'coupled_pair_evidence') this.pairs.applyEvent(event);
     events.push(...supportEvents);
-    events.push(...this.memory.recordPacket(before, command, after, first, frames));
+    events.push(...recordObservedProgramPacket(this.memory, before, command, after, first, frames));
     events.push(...this.cells.recordPacket(before, command, after, first, frames));
     // Keep returned source envelopes independently mutable. Only the retained
     // journal owns these frozen copies; old entries keep their identities.
@@ -326,6 +392,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
 export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, coupledConfig?: R, graphConfig?: R, cellConfig?: R): NativeFamily {
   const family = new SharedSeriesConstraint(config), adapter = asNativeOccurrenceRecallFamily(family);
   return { ...adapter, nativeState: () => family.nativeState(), restoreNative: state => family.restoreNative(state),
+    requestedStopReason: observation => family.memory.compositionRefutedEpochs.has(observation.level_epoch)
+      ? 'program_composition_projection_refuted' : family.memory.requestedStopReason,
     proposeInSubquestion: async (group, subquestion, observation, rows, inputs, remaining, execution) => {
       if (group === 'window_constraints') {
         if (subquestion === 'cell_patch_composition') {
@@ -334,6 +402,11 @@ export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, c
           return proposal as NativeProposal | null;
         }
         if (subquestion === 'observed_occurrence_recall') return adapter.propose(observation, rows, inputs, remaining, execution);
+        if (subquestion === 'observed_program_composition') {
+          const proposal = await family.programPropose(observation, rows, inputs, remaining, execution?.deadlineMs ?? null, execution?.now);
+          if (proposal) proposal.field_subquestion = 'observed_program_composition';
+          return proposal as NativeProposal | null;
+        }
         throw new TypeError('Unsupported shared-series source subquestion');
       }
       if (group !== 'goal_access') return null;
@@ -352,7 +425,12 @@ export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, c
     if (group === 'window_constraints') {
       const cell = cellConfig ? await family.cellPropose(observation, rows, inputs, remaining, cellConfig, execution?.deadlineMs ?? null) : null;
       if (cell) cell.field_subquestion = 'cell_patch_composition';
-      return cell as NativeProposal | null ?? adapter.propose(observation, rows, inputs, remaining, execution);
+      if (cell) return cell as NativeProposal;
+      const recall = await adapter.propose(observation, rows, inputs, remaining, execution);
+      if (recall) return recall;
+      const program = await family.programPropose(observation, rows, inputs, remaining, execution?.deadlineMs ?? null, execution?.now);
+      if (program) program.field_subquestion = 'observed_program_composition';
+      return program as NativeProposal | null;
     }
     return null;
   } };
