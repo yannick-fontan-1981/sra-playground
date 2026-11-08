@@ -2,11 +2,11 @@
   "schema": "logos-engine.v6.declared-entry-coverage.v1",
   "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
   "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
-  "implementation": "logos-engine.typescript.v6.native-migration/0.10.0",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.11.0",
   "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
-  "connected": 31,
+  "connected": 32,
   "declared": 76,
-  "percent": 40.8,
+  "percent": 42.1,
   "groups": [
     {
       "id": "goal_access",
@@ -78,7 +78,7 @@
     {
       "id": "window_constraints",
       "declared": 21,
-      "connected": 6,
+      "connected": 7,
       "entries": [
         {
           "question": "occluded_catalogue_composition",
@@ -132,8 +132,8 @@
         },
         {
           "question": "radial_port_composition",
-          "family": null,
-          "status": "pending"
+          "family": "public_occurrence_recall",
+          "status": "connected"
         },
         {
           "question": "observed_framed_analogy",
@@ -448,6 +448,7 @@
         "public_occurrence_recall",
         "public_occurrence_recall",
         "public_occurrence_recall",
+        "public_occurrence_recall",
         "window_constraints",
         "periodic_sums",
         "reflected_cover",
@@ -457,6 +458,7 @@
         "cell_patch_composition",
         "observed_occurrence_recall",
         "observed_program_composition",
+        "radial_port_composition",
         null,
         null,
         null,
@@ -560,7 +562,7 @@
     }
   ],
   "pendingSupportSubcompositions": [],
-  "sharedSeriesMemory": "occurrence_recall_ancestors_observed_program_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending",
-  "sharedSeriesDigestScope": "native_observed_program_recall_cell_placement_alternating_graph_and_coupled_support_v6",
+  "sharedSeriesMemory": "occurrence_recall_ancestors_observed_program_native_control_discovery_radial_ports_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending",
+  "sharedSeriesDigestScope": "native_program_discovery_recall_radial_ports_cell_placement_alternating_graph_and_coupled_support_v6",
   "fullV6Parity": false
 }

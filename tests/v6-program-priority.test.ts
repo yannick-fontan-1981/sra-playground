@@ -106,7 +106,7 @@ test('a newly acquired and currently guarded program defers an unlearned invitat
   const configuration = declarations.strategy.declarations[0]!.configuration, groups = (result.snapshot.coverage as R).sourceGroups;
   assert.deepEqual(groups.map((group: R) => group.id), configuration.families, 'The declared outer SRC family order is unchanged');
   const entries = groups.find((group: R) => group.id === 'window_constraints').entryPoints.filter((entry: string | null) => entry !== null);
-  assert.deepEqual(entries, ['cell_patch_composition', 'observed_occurrence_recall', 'observed_program_composition']);
+  assert.deepEqual(entries, ['cell_patch_composition', 'observed_occurrence_recall', 'observed_program_composition', 'radial_port_composition']);
 
   const coordination = proposal.strategy_receipt.native_coordination;
   assert.equal(coordination.length, 1);

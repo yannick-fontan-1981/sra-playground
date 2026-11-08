@@ -1,0 +1,34 @@
+{
+  "schema": "logos-engine.v41.browser-verification.v1",
+  "game": "PIPE",
+  "surface": "managed development preview from the same frozen checkout",
+  "nativeSourceManifestDigest": "377300aa01f2c942b6150033c61520a7c62292871ee62083ec6b78dde1fc6605",
+  "observedUrl": "http://127.0.0.1:4173/?game=PIPE&level=4",
+  "mode": "SRA Agent Native TS",
+  "initialLevel": 1,
+  "initialActions": 0,
+  "initialSolvedLevels": 0,
+  "controlsUsed": [
+    "Choose PIPE",
+    "SRA Agent Native TS",
+    "Run to next level (three successive natural boundaries)"
+  ],
+  "cumulativeActionsAtBoundaries": [
+    4,
+    12,
+    23
+  ],
+  "solvedLevels": 3,
+  "completedPlans": 20,
+  "finalVisibleLevel": 4,
+  "visibleStatus": "Level completed. V6 acquired the outcome and retained its transfer memory. Continue when ready.",
+  "visibleVictoryHeading": null,
+  "inspectionClosedAtStart": true,
+  "inspectionOpenedDuringRun": false,
+  "manualGameActions": 0,
+  "agentSessionResets": 0,
+  "levelJumps": 0,
+  "screenshot": "pipe-browser-three-levels.png",
+  "screenshotSha256": "8f84d8f99258c30901ed6766a02051d8de1e83433ae174b0976b1f2d207a4d6f",
+  "qualification": "Observed in the real browser interface on the managed preview. Three levels completed, not a full-game WIN. The UI pauses at each natural boundary with the session retained; the bounded smoke campaign stops at its declared target. Production publication is verified separately by the Sites deployment result."
+}

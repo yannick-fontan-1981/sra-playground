@@ -8,11 +8,57 @@ import type { OccurrenceRecallAccess, OccurrenceRecallPolicy } from './v6-occurr
 import { occurrenceCandidates, occurrenceContextScope } from './v6-occurrence-scene.ts';
 import { pythonEqual as equal } from './v6-operations.ts';
 import { symbolicDigest } from './v6-hash.ts';
+import type { RadialPortState } from './v6-radial-port-access.ts';
+import { rotateRadialPorts } from './v6-radial-port-observation.ts';
 import type { NativeLearnedPreparationWitness, NativeObservation, NativeProposal } from './v6-native-types.ts';
 
 type R = Record<string, any>;
 const references = (values: unknown[]): string[] => [...new Set(values.flat(Infinity)
   .filter((value): value is string => typeof value === 'string' && value.length > 0))];
+
+/** A measured point method or its bounded revalidation, never a terminal rule. */
+export function radialLearnedPreparationWitness(state: RadialPortState, proposal: NativeProposal,
+  observation: NativeObservation): NativeLearnedPreparationWitness | null {
+  if (proposal.status !== 'proposed' || proposal.kind !== 'radial_port_composition') return null;
+  const plan = (proposal as R).radial_port_plan, rule = state.port_point_rule;
+  if (!plan || !rule || rule.status !== 'conditional_observed_point_method' || rule.action_ref !== 'ACTION6'
+    || ![1, 2, 3].includes(rule.turn) || !Number.isInteger(rule.epoch) || rule.epoch > observation.level_epoch
+    || plan.observation_ref !== observation.observation_ref || plan.epoch !== observation.level_epoch
+    || plan.score !== observation.levels_completed || plan.sign !== rule.turn || !plan.scene?.geometry_ref
+    || state.port_rejected.includes(plan.context) || !Array.isArray(plan.steps) || !plan.steps.length) return null;
+  const current = rule.epoch === observation.level_epoch && rule.geometry_ref === plan.scene.geometry_ref;
+  const revalidation = !current && plan.point_method_revalidated === false
+    && plan.steps.length === 1 && proposal.actions.length === 1
+    && (proposal as R).question?.reason === 'test_point_binding_of_recalled_rotation'
+    && plan.steps[0].prediction_status === 'unconfirmed_point_binding_to_recalled_rotation';
+  if (!(current && plan.point_method_revalidated === true) && !revalidation) return null;
+  // Re-read the actual event suffix. A proposal or a rule-shaped object alone
+  // cannot manufacture a witnessed transition or erase a later refutation.
+  let retained: R | null = null, supporting: R | null = null;
+  for (const event of state.port_events) if (event.kind === 'radial_port_effect') {
+    if (event.rule) { retained = event.rule; supporting = event; }
+    if (event.refuted) { retained = null; supporting = null; }
+  }
+  if (!equal(retained, rule) || !supporting || supporting.refuted !== false || supporting.selection_observed !== true
+    || !equal(supporting.evidence, rule.evidence) || !Array.isArray(rule.evidence)) return null;
+  const evidence = references(rule.evidence);
+  if (evidence.length !== 2) return null;
+  let ports: number[][] = plan.scene.cells.map((cell: R) => [...cell.ports]);
+  if (!equal(proposal.actions, plan.steps.map((step: R) => step.action))) return null;
+  for (const step of plan.steps as R[]) {
+    if (!Number.isInteger(step.cell) || step.cell < 0 || step.cell >= ports.length
+      || !equal(step.ports_before, ports)) return null;
+    const cell = plan.scene.cells[step.cell];
+    if (!equal(step.action, { action_ref: 'ACTION6', data: { x: cell.point[0], y: cell.point[1] } })) return null;
+    ports = ports.map((value, index) => index === step.cell ? rotateRadialPorts(value, rule.turn) : value);
+    if (!equal(step.ports_after, ports) || !equal(step.candidate_turns, [rule.turn])) return null;
+  }
+  return { status: 'conditional_acquired_preparation', kind: revalidation ? 'radial_point_method_revalidation' : 'radial_point_method', observation_ref: observation.observation_ref,
+    model_ids: [`radial-point-method:${symbolicDigest(rule).slice(0, 20)}`], evidence_refs: evidence,
+    qualification: revalidation
+      ? 'A retained point rotation was acquired from a uniquely selected public response without later refutation. Its applicability to the current epoch or geometry is unknown. This single real action revalidates the current binding under the source guard; no current method or official outcome is assumed.'
+      : 'Current-epoch point rotation acquired from a uniquely selected public response and retained without later refutation. Each proposed rotation uses that measured method; point guards, assembly goal hypotheses and official completion remain separate.' };
+}
 
 export function sharedLearnedPreparationWitness(memory: OccurrenceRecallAccess, policy: OccurrenceRecallPolicy,
   proposal: NativeProposal, observation: NativeObservation): NativeLearnedPreparationWitness | null {

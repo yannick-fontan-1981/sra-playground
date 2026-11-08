@@ -28,25 +28,28 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **MEMO now completes its
-  first three levels in 30 actions (10 per level)** through one fresh common
-  Logos Engine session, retaining and acquiring evidence across all 30 prefixes.
+  level**; opening the tab does not move the game. **PIPE now completes its
+  first three levels in 23 actions (4, 8 and 11)** through one fresh common
+  Logos Engine session, acquiring all 23 transitions across 20 prefixes.
   The run stops at its declared target on entry to level 4 with `NOT_FINISHED`.
-  The [v40 acquired-preparation report](docs/migration/v40-acquired-preparation.md)
-  describes two explicit native evolutions: priority for the first currently
-  guarded, learned window preparation over an unlearned invitation, and partial
-  rebinding of learned program controls from current pixels. Acquired state and
+  The [v41 radial-port and control-discovery report](docs/migration/v41-radial-ports-control-discovery.md)
+  documents the original radial component transfer, current-context
+  revalidation of an acquired rotation, and two real experiments discovering
+  an unknown editor control. Acquired state and
   proposal evidence use the actual Kernel graph; observation, search and guard
   algorithms still run as native TypeScript callbacks.
+  **Previous v40 milestone: MEMO completes its first three levels in 30 actions
+  (10 per level)**; see the [v40 report](docs/migration/v40-acquired-preparation.md).
   **Previous v39 milestone: STCK completes its first three levels in 35 actions
   (3, 7 and 25)**; see the [v39 report](docs/migration/v39-observed-program.md).
-  The v40 STCK diagnostic exercises partial control access at level 4 but stops
-  there without another completion.
+  The v41 STCK diagnostic reaches level 4, acquires a new control binding and
+  an isolated public effect, then stops after 39 actions without another
+  completion. No new operator law or fourth-level success is claimed.
   **Previous v38 milestone: TICT completes all six levels with official `WIN`
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
-  The current entry audit connects **31 of 76 explicit DRM subquestions
-  (40.8%)**, unchanged by the v40 native extensions; complete V6 migration
+  The current entry audit connects **32 of 76 explicit DRM subquestions
+  (42.1%)**, with one newly connected radial entry; complete V6 migration
   remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These

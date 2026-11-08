@@ -1,0 +1,466 @@
+{
+  "schema": "logos-engine.v6.original-public-caller-collision.v1",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "qualification": "Development-only replay of already witnessed public packets through the unchanged full original caller. Outcomes were returned only for exactly matching proposed commands. This is neither a live success nor a solver feeding the native production agent. Trace instrumentation timing is not a performance comparison.",
+  "sourceVerification": {
+    "sourceManifestSha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6",
+    "verifiedOriginalFiles": 1786,
+    "beforeOriginalMain": true,
+    "afterOriginalMain": true,
+    "method": "Existing v6-caller-host-boundary.verify_source_manifest called before and after unchanged original main; after flag requires child success.",
+    "sourceHashes": {
+      "agents/yf_arc3_v6/laya_proto/common_frontier_runtime.py": "bcc9bc79d04287c830efedce48b4cc2ab89b5600b8a77fe09782c35d1c05c064",
+      "agents/yf_arc3_v6/laya_proto/common_radial_ports.py": "e9e2f86fa3f47d9df8a24d8607b4eb9a9ddd55c03d0250cf8ef25e0c294613c3",
+      "agents/yf_arc3_v6/laya_proto/radial_ports_access.py": "371a58557394bb0a89dd69f8c5f3d3de79611635f0975a295a3c73410f578e61",
+      "agents/yf_arc3_v6/laya_proto/radial_ports_observation.py": "f670a8ca59689212a4b316f6ded392d76f9ee12153e32d0a34dfbbaf14564528",
+      "agents/yf_arc3_v6/laya_proto/common_animated_contact.py": "a224e77adc32343bc107b2dc5e9ee138ccc2de98c74262e71da423a04c0ec69c"
+    }
+  },
+  "generator": {
+    "path": "scripts/replay-v6-original-public-caller.py",
+    "sha256": "f8c0c94c19819da07e543348173e65ee1b20d48bb29fc182e5f3f41d6f5db58e"
+  },
+  "input": {
+    "path": "docs/migration/native-campaigns-v41/diagnostics/pipe-first-public.json.gz",
+    "sha256": "767a0d2a235c28a0a0c9acb6f7e8e54fa23fc2c0c0c33c49bf629a3357c959c7",
+    "publicPackets": 8,
+    "nativeSourceDigest": "22fd3f5cd82ece46604ab106531580c40c6ae2dc2a899be2776ecd2f26820054"
+  },
+  "matchedActions": 7,
+  "childExitCode": 0,
+  "stop": {
+    "events": 288,
+    "kind": "stopped",
+    "oracle": "/workspace/scratch/1cef09f3652c/pipe-original-public-replay-v41/oracle.json",
+    "prefixes": 7,
+    "reason": "diagnostic_sealed_prefix_boundary",
+    "runDir": "/workspace/scratch/1cef09f3652c/pipe-original-public-replay-v41/public-replay/run",
+    "snapshots": 29
+  },
+  "original": {
+    "status": "unresolved",
+    "reason": "frontier_unknown",
+    "actions": 7,
+    "levelActions": {
+      "1": 4,
+      "2": 3
+    },
+    "final": {
+      "backend": "browser_public_bridge",
+      "game_id": "browser-public",
+      "level": 2,
+      "levels_completed": 1,
+      "state": "NOT_FINISHED",
+      "step_index": 7,
+      "available_action_refs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "frame_hash": "fd8330f80b6e37f7"
+    },
+    "elapsedSeconds": 81.62922161499591
+  },
+  "proposals": [
+    {
+      "revision": 1,
+      "kind": "radial_port_composition",
+      "supportPlan": null,
+      "actions": [
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 16,
+            "y": 28
+          }
+        }
+      ],
+      "question": {
+        "reason": "initial_radial_interface_experiment",
+        "hypothesis_refs": []
+      },
+      "strategyReceipt": {
+        "workflow": "v6.composition_strategy.choose",
+        "src_hash": "80ef231352527fa731c65fad400256a61ffcf9cff4dbd8615204d8d9a0b4e84d",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.composition_strategy.choose.open.s0000",
+          "v6.composition_strategy.choose.open.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0001"
+        ],
+        "drm_hash": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+        "visited": [
+          "goal_access",
+          "window_constraints"
+        ],
+        "selected": "window_constraints",
+        "deferred_curiosity": []
+      }
+    },
+    {
+      "revision": 2,
+      "kind": "radial_port_composition",
+      "supportPlan": null,
+      "actions": [
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 48,
+            "y": 28
+          }
+        },
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 16,
+            "y": 44
+          }
+        },
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 48,
+            "y": 44
+          }
+        }
+      ],
+      "question": {
+        "reason": "conditional_port_assembly",
+        "hypothesis_refs": []
+      },
+      "strategyReceipt": {
+        "workflow": "v6.composition_strategy.choose",
+        "src_hash": "80ef231352527fa731c65fad400256a61ffcf9cff4dbd8615204d8d9a0b4e84d",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.composition_strategy.choose.open.s0000",
+          "v6.composition_strategy.choose.open.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0001"
+        ],
+        "drm_hash": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+        "visited": [
+          "goal_access",
+          "window_constraints"
+        ],
+        "selected": "window_constraints",
+        "deferred_curiosity": []
+      }
+    },
+    {
+      "revision": 3,
+      "kind": "radial_port_composition",
+      "supportPlan": null,
+      "actions": [
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 16,
+            "y": 44
+          }
+        },
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 48,
+            "y": 44
+          }
+        }
+      ],
+      "question": {
+        "reason": "conditional_port_assembly",
+        "hypothesis_refs": []
+      },
+      "strategyReceipt": {
+        "workflow": "v6.composition_strategy.choose",
+        "src_hash": "80ef231352527fa731c65fad400256a61ffcf9cff4dbd8615204d8d9a0b4e84d",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.composition_strategy.choose.open.s0000",
+          "v6.composition_strategy.choose.open.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0001"
+        ],
+        "drm_hash": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+        "visited": [
+          "goal_access",
+          "window_constraints"
+        ],
+        "selected": "window_constraints",
+        "deferred_curiosity": []
+      }
+    },
+    {
+      "revision": 4,
+      "kind": "radial_port_composition",
+      "supportPlan": null,
+      "actions": [
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 48,
+            "y": 44
+          }
+        }
+      ],
+      "question": {
+        "reason": "conditional_port_assembly",
+        "hypothesis_refs": []
+      },
+      "strategyReceipt": {
+        "workflow": "v6.composition_strategy.choose",
+        "src_hash": "80ef231352527fa731c65fad400256a61ffcf9cff4dbd8615204d8d9a0b4e84d",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.composition_strategy.choose.open.s0000",
+          "v6.composition_strategy.choose.open.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0001"
+        ],
+        "drm_hash": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+        "visited": [
+          "goal_access",
+          "window_constraints"
+        ],
+        "selected": "window_constraints",
+        "deferred_curiosity": []
+      }
+    },
+    {
+      "revision": 5,
+      "kind": "radial_port_composition",
+      "supportPlan": null,
+      "actions": [
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 32,
+            "y": 12
+          }
+        }
+      ],
+      "question": {
+        "reason": "test_point_binding_of_recalled_rotation",
+        "hypothesis_refs": []
+      },
+      "strategyReceipt": {
+        "workflow": "v6.composition_strategy.choose",
+        "src_hash": "80ef231352527fa731c65fad400256a61ffcf9cff4dbd8615204d8d9a0b4e84d",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.composition_strategy.choose.open.s0000",
+          "v6.composition_strategy.choose.open.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0001"
+        ],
+        "drm_hash": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+        "visited": [
+          "goal_access",
+          "window_constraints"
+        ],
+        "selected": "window_constraints",
+        "deferred_curiosity": []
+      }
+    },
+    {
+      "revision": 6,
+      "kind": "radial_port_composition",
+      "supportPlan": null,
+      "actions": [
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 32,
+            "y": 12
+          }
+        },
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 48,
+            "y": 12
+          }
+        },
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 16,
+            "y": 28
+          }
+        },
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 48,
+            "y": 28
+          }
+        },
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 16,
+            "y": 44
+          }
+        },
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 48,
+            "y": 44
+          }
+        },
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 48,
+            "y": 44
+          }
+        }
+      ],
+      "question": {
+        "reason": "conditional_port_assembly",
+        "hypothesis_refs": []
+      },
+      "strategyReceipt": {
+        "workflow": "v6.composition_strategy.choose",
+        "src_hash": "80ef231352527fa731c65fad400256a61ffcf9cff4dbd8615204d8d9a0b4e84d",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.composition_strategy.choose.open.s0000",
+          "v6.composition_strategy.choose.open.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0001"
+        ],
+        "drm_hash": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+        "visited": [
+          "goal_access",
+          "window_constraints"
+        ],
+        "selected": "window_constraints",
+        "deferred_curiosity": []
+      }
+    },
+    {
+      "revision": 7,
+      "kind": "measured_animated_contact",
+      "supportPlan": {
+        "animated_contact": true
+      },
+      "actions": [
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 24,
+            "y": 20
+          }
+        }
+      ],
+      "question": {
+        "reason": "Does addressing the unique current symmetric cross reveal a transient relation useful for official completion? Its physical role remains unknown.",
+        "hypothesis_refs": [
+          "run:epoch:2:revision:7:frame:6d26b4862bd4c7bb"
+        ]
+      },
+      "strategyReceipt": {
+        "workflow": "v6.composition_strategy.choose",
+        "src_hash": "80ef231352527fa731c65fad400256a61ffcf9cff4dbd8615204d8d9a0b4e84d",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.composition_strategy.choose.open.s0000",
+          "v6.composition_strategy.choose.open.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0001"
+        ],
+        "drm_hash": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+        "visited": [
+          "goal_access"
+        ],
+        "selected": "goal_access",
+        "deferred_curiosity": []
+      }
+    }
+  ],
+  "evidence": {
+    "pipe-original-caller-oracle.json.gz": {
+      "sha256": "5175dd7d08a45ed0b6c4b5649c51395ab8e85a0f2614908c98d9be600428280a",
+      "uncompressedSha256": "4821a738246d9e0c44923527796db11437c91ed0c016e3df630afdb7412d4593",
+      "bytes": 2141089
+    },
+    "pipe-original-caller-report.json.gz": {
+      "sha256": "adbd0b94bc64596cdf86e55de4f1ffffb5cae296783709ac3f9659333f7b4f9e",
+      "uncompressedSha256": "e797bd18af083dff62961c2803748822bc82312d4b746964b962368c1eb16b38",
+      "bytes": 3175
+    }
+  },
+  "wallSeconds": 87.47774620600103
+}

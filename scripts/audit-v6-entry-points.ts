@@ -18,6 +18,7 @@ const aliases: Record<string, string> = {
   alternating_graph_composition: 'public_occurrence_recall',
   cell_patch_composition: 'public_occurrence_recall',
   observed_program_composition: 'public_occurrence_recall',
+  radial_port_composition: 'public_occurrence_recall',
   observed_occurrence_recall: 'public_occurrence_recall', multiscale_constraints: 'window_constraints',
   surface_rewrite: 'surface_program', learned_code_program: 'code_program', typed_word_interface: 'word_interface',
   rigid_port_assembly: 'port_assembly', controlled_constellation_cover: 'constellation_cover', conserved_band_transfer: 'band_transfer',

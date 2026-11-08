@@ -11,8 +11,11 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone:** see [the v40 acquired-preparation and MEMO
-three-level campaign report](v40-acquired-preparation.md), following [the v39
+**Current integrated milestone (v41):** the radial entry is connected to the
+native common caller, with a [fresh PIPE three-level campaign](native-campaigns-v41/pipe-three-levels.json)
+and an [exact public-trajectory comparison to the original isolated component](native-campaigns-v41/pipe-original-component-comparison.json).
+Earlier milestones include [the v40 acquired-preparation and MEMO
+three-level campaign report](v40-acquired-preparation.md), [the v39
 observed-program transfer and STCK three-level campaign report](v39-observed-program.md), [the v38 cell-patch
 transfer and complete TICT campaign report](v38-cell-placement.md), [the v37 memory-cost and ELAS campaign
 report](v37-memory-performance.md), [the v36 alternating graph and common
@@ -21,16 +24,50 @@ auxiliary support and native checkpoint report](v35-coupled-support.md), [the v3
 response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 31 of 76
-explicit DRM subquestions are connected (40.8%). This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 32 of 76
+explicit DRM subquestions are connected (42.1%) in implementation
+`logos-engine.typescript.v6.native-migration/0.11.0`. This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
-The v40 changes are explicit native evolutions: they add no Python module to
+The v41 radial-port connection adds one source entry; the native control-discovery
+and refusal-scope extensions add none. The v40 changes are explicit native evolutions: they add no Python module to
 the transferred inventory and no source entry. The v39 observed-program
 composition added one source entry, following the v38 cell-composition entry;
 the v37 performance step added none. All six conditions for a complete
 migration remain false.
 
-**New v40 result:** MEMO's first three levels are completed through the fresh
+**New v41 result:** PIPE's first three levels are completed through the fresh
+native common Logos Engine caller in one session: **4, 8 and 11 actions, 23
+total**, with 20 sealed prefixes, 23 acquired transitions and two natural
+boundary replays. The [bounded campaign](native-campaigns-v41/pipe-three-levels.json)
+stops at its declared target on entry to level 4 with **`NOT_FINISHED`**. All
+135 native source files remain unchanged during this `0.11.0` run, and no
+Python agent module is loaded. This establishes three completed levels, not
+a full-game `WIN`.
+
+The [saved-evidence comparison](native-campaigns-v41/pipe-original-component-comparison.json)
+matches all **23 commands, 24 complete public packets and 33 animation frames**
+to the unchanged isolated Python radial component. All public action domains,
+their ordering, official boundaries and 20 executed prefix lengths also match
+exactly. No pixel, animation, score or action-domain projection is applied.
+This is bounded public-trajectory agreement with a component, not original
+full-caller selection parity: the [unchanged original caller replay](native-campaigns-v41/diagnostics/pipe-original-caller-collision.json)
+reproduces an unlearned invitation collision after one level. Native acquired
+preparation coordination is explicitly separate from the radial source
+translation and still requires the current primitive guard.
+
+The [v41 report](v41-radial-ports-control-discovery.md) also documents bounded
+revalidation of an acquired rotation on changed geometry. It keeps a previous
+method conditional and requires one real current return before confirming its
+new binding. The [STCK diagnostic](native-campaigns-v41/diagnostics/stck-control-discovery-six-level-attempt.json)
+now reaches two further real experiments at level 4: insertion of an unknown
+control member, followed by execution and an isolated public-effect measure.
+It retains two trials, one binding and one measured effect, then stops after
+39 actions. No new operator law is promoted, and STCK level 4 remains unsolved.
+The actual Kernel records the limited scope of a stationary unlearned contact
+invitation; a separately grounded question still needs its own current guard
+and ordinary WHY/ACT authorization. These are explicit native extensions.
+
+**Previous v40 result:** MEMO's first three levels are completed through the fresh
 native common Logos Engine caller in one session: **10 actions per level, 30
 total**, with 30 sealed prefixes, 30 acquired transitions and two natural
 boundary replays. The [bounded campaign](native-campaigns-v40/memo-three-levels.json)
@@ -41,7 +78,7 @@ throughout the run, and no Python agent module is loaded. The
 and stopped after seven actions with `frontier_unknown`. This comparison
 establishes three new level completions, without claiming a complete MEMO win.
 
-The native coordinator now considers the **first non-null window proposal in
+At v40, the native coordinator was extended to consider the **first non-null window proposal in
 declared order** when an unlearned animated invitation would otherwise be
 selected. Its provider must explicitly supply a learned-preparation witness:
 either a retained fitted program model or a unique, convergent occurrence
@@ -401,6 +438,7 @@ test names, fixtures, generators and exact source mapping are recorded in
 | Remaining geometry and target methods | Framed alignment, occlusion, lattice paths, ambiguous component matches and scored-boundary method recall |
 | Common caller coordinator | Two unchanged-main acquisition scenarios, actual runtime integration and eight-component state comparison, then nine real levels with transition acquisition and cross-level replay |
 | Native persistence | Atomic revisions, real program replacement, immutable fragments, integrity, independent leaf revisions, cache invalidation and lossless episodes larger than a single V7 value |
+| Radial interfaces | 383 unchanged-source cases and 387 passing focused checks: repeated support geometry, finite assembly domains and node counts, questions, current point bindings, guards, acquired rotations, refutation, replay and own-layer digests; colour, reflection, translation and missing/ambiguous-support variants are controlled public-raster contracts |
 
 Unit fixtures deliberately include positive proposals and state-changing
 sequences, alongside refusals. A component marked `component_verified` has
@@ -437,10 +475,44 @@ modules and therefore exceeds the minimum semantic dependency closure. This
 upper bound must be refined through documented dependency analysis, not by
 silently dropping unimplemented capabilities.
 
-The v40 inventory remains **88 component-verified modules, 59 partially
-transferred modules and 1,222 pending modules**, with zero modules marked
-fully verified. The native preparation and partial-access extensions
-do not increase these Python transfer counts or the 31/76 entry metric.
+The v41 inventory contains **89 component-verified modules, 61 partially
+transferred modules and 1,219 pending modules**, with zero modules marked
+fully verified. This adds three mapped Python sources: radial observation,
+radial access and the common radial wrapper. The latter two remain partial.
+
+The observation helper has complete bounded component comparisons. The radial
+access transfer covers the original common policy's public initial experiment,
+acquired point-rotation relation, conditional assembly, guards and own event
+reducer. Imported methods from files are excluded, as required by
+`use_prior_method=false` in the common policy. The complete TypedPoseAccess,
+TypedMaterialConstraint and other inherited proposal/acquisition producers,
+as well as the full original restoration closure, remain unported. The shared
+native journal verifies its named closure,
+`native_program_discovery_recall_radial_ports_cell_placement_alternating_graph_and_coupled_support_v6`,
+and does not substitute that digest for the complete Python inheritance digest.
+
+The radial fixture includes a new, unprimed run of the unchanged **isolated
+Python component**: three public levels in 23 actions, with official boundaries
+at actions 4, 12 and 23. This is not native common-caller success. A separate
+[replay diagnostic](native-campaigns-v41/diagnostics/pipe-original-caller-collision.json)
+reproduces all seven recorded commands through the unchanged full original
+caller, then its `frontier_unknown` at level 2. Each recorded response is
+returned only after an exact command match. These results, component parity
+and any later native campaign have different scopes.
+
+The manifest's `measured_program_control_discovery` and
+`stationary_unlearned_contact_refusal_scope` are explicit **native extensions**.
+The first measures a new control's actual collection insertion and a subsequent
+public execution phase as separate unknown-effect questions. It retains the
+learned source model and assigns no operator law from visual similarity or a
+missing control. The second records the actual stationary unlearned invitation
+return as revisioned evidence and permits an independently grounded inquiry
+only with that candidate's current guard. Radial preparation also contributes
+acquired evidence to the existing native coordination extension. These changes
+add no source module or declared entry beyond the radial transfer, and do not
+establish original cross-family selection parity. Reasoning/search/guards still
+include TypeScript callbacks; graph evidence does not make every algorithm an
+independently editable declarative rule.
 
 A copied reference file is not a transfer. An exported SRC tree is not an
 implemented callback. A passing test on one scene is not complete campaign

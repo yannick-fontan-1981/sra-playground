@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 88,
-    "partiallyTransferredModules": 59,
+    "componentVerifiedModules": 89,
+    "partiallyTransferredModules": 61,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1222,
+    "pendingModules": 1219,
     "strategyFamilies": 16
   },
   "families": [
@@ -73932,7 +73932,10 @@
         "tests/fixtures/v6-interface-families-reference.json",
         "tests/v6-interface-families.test.ts",
         "tests/v6-native-interface-families.test.ts",
-        "tests/v6-native-family-registration.test.ts"
+        "tests/v6-native-family-registration.test.ts",
+        "scripts/export-v6-radial-port-reference.py",
+        "tests/fixtures/v6-radial-port-reference.json.gz",
+        "tests/v6-radial-port-parity.test.ts"
       ]
     },
     {
@@ -75118,7 +75121,8 @@
         "src/logos-engine/v6-native-authority.ts",
         "src/logos-engine/v6-native-caller.ts",
         "src/logos-engine/v6-native-transition-domain.ts",
-        "src/logos-engine/v6-learned-preparation.ts"
+        "src/logos-engine/v6-learned-preparation.ts",
+        "src/logos-engine/v6-program-control-discovery.ts"
       ],
       "proof": [
         "scripts/export-v6-target-reference.py",
@@ -75157,7 +75161,18 @@
         "tests/v6-program-current-access-integration.test.ts",
         "docs/migration/native-campaigns-v40/memo-three-levels.json",
         "docs/migration/native-campaigns-v40/memo-v39-baseline.json",
-        "docs/migration/native-campaigns-v40/diagnostics/stck-current-access-six-level-attempt.json"
+        "docs/migration/native-campaigns-v40/diagnostics/stck-current-access-six-level-attempt.json",
+        "tests/v6-radial-port-integration.test.ts",
+        "tests/v6-program-control-discovery.test.ts",
+        "tests/v6-program-control-discovery-integration.test.ts",
+        "scripts/replay-v6-original-public-caller.py",
+        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-collision.json",
+        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-oracle.json.gz",
+        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-report.json.gz",
+        "docs/migration/native-campaigns-v41/pipe-three-levels.json",
+        "docs/migration/native-campaigns-v41/pipe-public-trace.json.gz",
+        "scripts/compare-v41-radial-component.py",
+        "docs/migration/native-campaigns-v41/pipe-original-component-comparison.json"
       ]
     },
     {
@@ -77408,7 +77423,10 @@
         "tests/fixtures/v6-interface-families-reference.json",
         "tests/v6-interface-families.test.ts",
         "tests/v6-native-interface-families.test.ts",
-        "tests/v6-native-family-registration.test.ts"
+        "tests/v6-native-family-registration.test.ts",
+        "scripts/export-v6-radial-port-reference.py",
+        "tests/fixtures/v6-radial-port-reference.json.gz",
+        "tests/v6-radial-port-parity.test.ts"
       ]
     },
     {
@@ -77543,7 +77561,8 @@
         "src/logos-engine/v6-shared-series.ts",
         "src/logos-engine/v6-native-runtime.ts",
         "src/logos-engine/v6-program-identity.ts",
-        "src/logos-engine/v6-program-current-access.ts"
+        "src/logos-engine/v6-program-current-access.ts",
+        "src/logos-engine/v6-program-control-discovery.ts"
       ],
       "proof": [
         "scripts/export-v6-program-composition-reference.py",
@@ -77557,7 +77576,9 @@
         "tests/v6-program-current-access.test.ts",
         "tests/v6-program-current-access-integration.test.ts",
         "tests/v6-learned-preparation-priority.test.ts",
-        "docs/migration/native-campaigns-v40/diagnostics/stck-current-access-six-level-attempt.json"
+        "docs/migration/native-campaigns-v40/diagnostics/stck-current-access-six-level-attempt.json",
+        "tests/v6-program-control-discovery.test.ts",
+        "tests/v6-program-control-discovery-integration.test.ts"
       ]
     },
     {
@@ -77741,9 +77762,28 @@
           "endLine": 29
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-radial-port-access.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-radial-port-reference.py",
+        "tests/fixtures/v6-radial-port-reference.json.gz",
+        "tests/v6-radial-port-parity.test.ts",
+        "tests/v6-radial-port-integration.test.ts",
+        "scripts/audit-v6-entry-points.ts",
+        "docs/migration/v6-entry-point-progress.json",
+        "scripts/replay-v6-original-public-caller.py",
+        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-collision.json",
+        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-oracle.json.gz",
+        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-report.json.gz",
+        "docs/migration/native-campaigns-v41/pipe-three-levels.json",
+        "docs/migration/native-campaigns-v41/pipe-public-trace.json.gz",
+        "scripts/compare-v41-radial-component.py",
+        "docs/migration/native-campaigns-v41/pipe-original-component-comparison.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_reduction_transport.py",
@@ -78412,7 +78452,10 @@
         "tests/fixtures/v6-interface-families-reference.json",
         "tests/v6-interface-families.test.ts",
         "tests/v6-native-interface-families.test.ts",
-        "tests/v6-native-family-registration.test.ts"
+        "tests/v6-native-family-registration.test.ts",
+        "scripts/export-v6-radial-port-reference.py",
+        "tests/fixtures/v6-radial-port-reference.json.gz",
+        "tests/v6-radial-port-parity.test.ts"
       ]
     },
     {
@@ -79471,7 +79514,10 @@
         "tests/fixtures/v6-interface-families-reference.json",
         "tests/v6-interface-families.test.ts",
         "tests/v6-native-interface-families.test.ts",
-        "tests/v6-native-family-registration.test.ts"
+        "tests/v6-native-family-registration.test.ts",
+        "scripts/export-v6-radial-port-reference.py",
+        "tests/fixtures/v6-radial-port-reference.json.gz",
+        "tests/v6-radial-port-parity.test.ts"
       ]
     },
     {
@@ -83609,9 +83655,21 @@
           "endLine": 80
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-radial-port-access.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-radial-port-reference.py",
+        "tests/fixtures/v6-radial-port-reference.json.gz",
+        "tests/v6-radial-port-parity.test.ts",
+        "tests/v6-radial-port-integration.test.ts",
+        "docs/migration/native-campaigns-v41/pipe-three-levels.json",
+        "docs/migration/native-campaigns-v41/pipe-public-trace.json.gz",
+        "scripts/compare-v41-radial-component.py",
+        "docs/migration/native-campaigns-v41/pipe-original-component-comparison.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/radial_ports_observation.py",
@@ -83650,9 +83708,15 @@
           "endLine": 51
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-radial-port-observation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-radial-port-reference.py",
+        "tests/fixtures/v6-radial-port-reference.json.gz",
+        "tests/v6-radial-port-parity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/reception_lattice_projection.py",
@@ -92568,7 +92632,13 @@
         "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json",
         "tests/v6-learned-preparation-priority.test.ts",
         "docs/migration/native-campaigns-v40/memo-three-levels.json",
-        "docs/migration/native-campaigns-v40/memo-v39-baseline.json"
+        "docs/migration/native-campaigns-v40/memo-v39-baseline.json",
+        "tests/v6-radial-port-integration.test.ts",
+        "tests/v6-program-control-discovery-integration.test.ts",
+        "scripts/replay-v6-original-public-caller.py",
+        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-collision.json",
+        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-oracle.json.gz",
+        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-report.json.gz"
       ]
     },
     {
@@ -96580,6 +96650,9 @@
     "Cell-patch transfer distinguishes exact framed-patch measurement from its geometry-only queued-field dependency and the own CellPlacementAccess layer from unported ancestors. Conditional line search is compared only in the native exact-integer domain; larger Python integer scores are explicitly refused without recording a source-law counterexample. Full original common envelopes are compared on controlled public rasters, separately from the fresh native SRC/WHY-ACT/checkpoint integration tests. None of these fixture counts establishes a completed game or complete V6 inheritance parity.",
     "Observed-program transfer compares complete source helper outputs, program-bearing ancestor states/digests, acquisition suffixes, raw common proposal/point envelopes and typed glyph float identities. Unported crossed/repeated producers and general input-candidate/propose inheritance remain partial, and the shared native journal names its own digest closure. The v39 retained_program_preparation_before_unlearned_invitation rule is an explicitly recorded native coordinator evolution following a reproduced original-caller collision; retaining DRM list order does not imply original cross-family selection parity. Component fixtures and recorded-prefix replay remain distinct from fresh common-caller game campaigns.",
     "v40 adds two explicit native evolutions, not new Python transfers: current_program_access_revalidation separates the complete acquired operator model from controls currently attested by exact pixel appearance, and retained_learned_preparation_before_unlearned_invitation requires acquired evidence plus the current guard of the first non-null window candidate in declared order. Unknown additional appearances receive no operator role. MEMO completes its first three levels in a fresh frozen common-caller session in 30 actions; STCK still completes only three levels in the six-level diagnostic. These campaigns, controlled extension tests and unchanged source-path parity fixtures have different evidential scopes. The 31/76 declared-entry metric and Python module status counts are unchanged, and all six complete-migration gates remain false.",
-    "Learned state is restored from actual revisioned family_state nodes, control-access proofs travel with executed proposals and continuations, and coordination receipts name the real source state revision. Registered SRC modules are executed from the Kernel graph. Observation, fitting, simulation, search, guards and native coordination still use TypeScript functions/callbacks; fragmented state and proof records do not make every reasoning algorithm an independently editable declarative rule."
+    "Learned state is restored from actual revisioned family_state nodes, control-access proofs travel with executed proposals and continuations, and coordination receipts name the real source state revision. Registered SRC modules are executed from the Kernel graph. Observation, fitting, simulation, search, guards and native coordination still use TypeScript functions/callbacks; fragmented state and proof records do not make every reasoning algorithm an independently editable declarative rule.",
+    "v41 adds one source-declared window entry, radial_port_composition, at its actual DRM position: 32 of 76 entries connected (42.1%). Its observation module is component_verified; its own access and common wrapper remain partial_transfer because imported-file methods and unported TypedPose/TypedMaterial/inherited producer and restore paths are excluded. Source-only tests compare 383 cases and pass 387 checks against unchanged Python with 746 loaded reference files verified. The original isolated radial component completes three public levels in 23 actions; this is expressly not a native common-caller victory. The unchanged full original caller separately reproduces the seven-command invitation collision. Full V6 parity and all six completion gates remain false.",
+    "v41 also exposes measured_program_control_discovery and stationary_unlearned_contact_refusal_scope as native evolutions, not additional Python transfers. New control insertions, input roles and unknown operator phases are distinguished; every question requires an actual public return and current guards. A failed stationary unlearned invitation remains acquired evidence and can be scoped locally only for an independently grounded guarded inquiry. Acquired radial preparation expands the existing native priority witness, separately from source algorithm parity. These algorithms and guards are still TypeScript callbacks; their revisioned graph evidence is not a claim that all reasoning rules are declaratively editable.",
+    "The frozen native 0.11.0 PIPE campaign is separately successful for three levels: 23 actions (4/8/11), one session, 20 sealed prefixes, 23 acquired transitions and two boundary replays, stopping at level 4 with NOT_FINISHED. A saved-evidence-only structural comparison to the unchanged isolated radial component matches every command, every complete public packet and animation, available-action order, official boundary and executed prefix length. No game/agent is rerun by that comparison and no field is projected or normalized. This exact bounded trajectory does not compare the full original caller selection, complete retained memory, budgets or performance."
   ]
 }

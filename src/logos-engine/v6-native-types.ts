@@ -83,9 +83,18 @@ export interface NativeRecordResult extends NativeRecord {
 /** A conditional justification from actual acquired state, never an action ticket. */
 export interface NativeLearnedPreparationWitness {
   readonly status: 'conditional_acquired_preparation';
-  readonly kind: 'program_model' | 'occurrence_correspondence';
+  readonly kind: 'program_model' | 'occurrence_correspondence' | 'radial_point_method' | 'radial_point_method_revalidation';
   readonly observation_ref: string;
   readonly model_ids: readonly string[];
+  readonly evidence_refs: readonly string[];
+  readonly qualification: string;
+}
+
+/** Acquired context can support a new question without claiming its effect. */
+export interface NativeGroundedInquiryWitness {
+  readonly status: 'acquired_context_for_unknown_effect';
+  readonly observation_ref: string;
+  readonly context_model_ids: readonly string[];
   readonly evidence_refs: readonly string[];
   readonly qualification: string;
 }
@@ -136,6 +145,7 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   requestedStopReason?(observation: NativeObservation): string | null;
   /** Read-only: proves acquisition separately from the current before-action guard. */
   learnedPreparationWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeLearnedPreparationWitness | null>;
+  groundedInquiryWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeGroundedInquiryWitness | null>;
   state(): NativeRecord;
   /** All persistent state is reconstructed from the authoritative shared nodes. */
   restore(state: NativeRecord): void;

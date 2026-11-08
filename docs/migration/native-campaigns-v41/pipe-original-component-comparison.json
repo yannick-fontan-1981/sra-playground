@@ -1,0 +1,1260 @@
+{
+  "schema": "logos-engine.v41.original-radial-component-comparison.v1",
+  "status": "passed_exact_public_trajectory",
+  "inputs": {
+    "originalComponentFixture": {
+      "path": "tests/fixtures/v6-radial-port-reference.json.gz",
+      "sha256": "0e4ce04594d06648ec91c8cb3ab9febd8e2c3dba89ad7f02df197b7c731244f1",
+      "bytes": 432057
+    },
+    "nativeCampaign": {
+      "path": "docs/migration/native-campaigns-v41/pipe-three-levels.json",
+      "sha256": "cd9a0d30b058420597d59072896188717d434b91929ec7d7270203c44c1952af",
+      "bytes": 188293
+    },
+    "nativePublicTrace": {
+      "path": "docs/migration/native-campaigns-v41/pipe-public-trace.json.gz",
+      "sha256": "ea1151e123f79ab93e65712d058ef136f22f77c5094eb582354d83de8c9d1303",
+      "bytes": 11877
+    }
+  },
+  "generator": {
+    "path": "scripts/compare-v41-radial-component.py",
+    "sha256": "16a6ae531de52225c1ee84cd2d53e082030278a5508ab2942ce6539b9a49ae3e",
+    "bytes": 11507
+  },
+  "comparisonMethod": {
+    "commands": "Exact command JSON structure including action_ref and complete data; cross-checked against every campaign action. No substitution or command normalization.",
+    "exactPublicFields": [
+      "frame_rows",
+      "frame_packet",
+      "level",
+      "levels_completed",
+      "state",
+      "step_index",
+      "available_action_refs",
+      "frame_hash"
+    ],
+    "pixelAndAnimationPolicy": "Every pixel value, row width, image height, animation length and frame ordering is compared exactly. No raster, animation, score or state normalization.",
+    "objectKeyOrder": "Only JSON object member order is immaterial. Arrays and scalar representations are retained. Equality is checked on complete canonical JSON values, not just hashes.",
+    "publicActionDomain": "All 24 available_action_refs arrays match exactly, including order. No action-domain extension or projection is required.",
+    "campaignPacketHashes": "The native report JSON.stringify-style insertion-order packet hashes are separately reconstructed from the saved native trace and checked at all 24 checkpoints.",
+    "boundaries": "Exact official completed-level/action projections, independently rederived from consecutive public score packets.",
+    "prefixes": "Exact executed action counts for all 20 sealed prefixes and radial proposal kind. Full proposal metadata and retained caller states are outside this comparison.",
+    "excludedSourceSuffix": null
+  },
+  "sourceVerification": {
+    "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "sourceModified": false,
+    "originalLoadedSourceFilesReverified": 746,
+    "originalGeneratorSha256Verified": "2098ec29d7c96c4d009fb7bb9f337e2fbcf429eec4468e1a85b129b520d2d91a",
+    "nativeSourceFilesReverified": 135,
+    "nativeSourceDigest": "377300aa01f2c942b6150033c61520a7c62292871ee62083ec6b78dde1fc6605",
+    "nativeSourceUnchangedDuringRun": true,
+    "identicalOpaqueHostAssetHashes": {
+      "custom-games.zip": "44d108fe4feed3ce0c9587e90f071876b13730af8136cd54cbfa5c1562d87822",
+      "official-games.zip": "90b5aeaee21ec11285799287445b33d3c19f4ea4894a8a60964117f7757f59ed",
+      "game_bridge.py": "cc9df3ea6eae0057898fa01fd949322c6af0b481030f4c271b9a719f0a07983e",
+      "official_adapter.py": "efead273b89ffe8cf595e41b9f4b25a6106e6cb6e5a7d1013ebc887cfc646837",
+      "custom_level_navigation.py": "8cc1716619aff08915135ebfa093fc305b211e28fabdff2c027d994d84f82c9b"
+    }
+  },
+  "summary": {
+    "actionsCompared": 23,
+    "completePublicPacketsCompared": 24,
+    "animationFramesCompared": 33,
+    "commandsExact": true,
+    "imagesExact": true,
+    "completeAnimationsExact": true,
+    "availableActionDomainsExact": true,
+    "officialBoundariesExact": true,
+    "executedPrefixLengthsExact": true,
+    "boundaries": [
+      {
+        "levelsCompleted": 1,
+        "actions": 4
+      },
+      {
+        "levelsCompleted": 2,
+        "actions": 12
+      },
+      {
+        "levelsCompleted": 3,
+        "actions": 23
+      }
+    ],
+    "actionsPerLevel": [
+      4,
+      8,
+      11
+    ],
+    "sealedPrefixes": 20,
+    "prefixActionCounts": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      2,
+      1,
+      1,
+      2,
+      1
+    ],
+    "levelsCompleted": 3,
+    "finalLevel": 4,
+    "finalState": "NOT_FINISHED"
+  },
+  "qualification": {
+    "referenceScope": "Original isolated radial component, not full common caller selection",
+    "nativeScope": "Fresh native common caller with original radial transfer and explicitly recorded native coordination extensions.",
+    "fullOriginalCallerParity": false,
+    "reason": "The unchanged full original caller separately reproduces an invitation collision after one level. The matching reference here is the isolated radial component, not original cross-family selection.",
+    "newAgentOrGameRunDuringComparison": false,
+    "savedEvidenceOnly": true,
+    "originalManualPrimingActions": 0,
+    "originalSessions": 1,
+    "nativeSessions": 1,
+    "nativePythonAgentModules": [],
+    "hiddenStateOrGameSourceRead": false,
+    "fullRetainedMemoryCompared": false,
+    "fullProposalsCompared": false,
+    "identicalBudgetsClaimed": false,
+    "performanceComparisonClaimed": false,
+    "completeGameWinClaimed": false
+  },
+  "checkpoints": [
+    {
+      "actionIndex": 0,
+      "command": null,
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "2157acd66d688d442dfd73be840466059378787d4e5da268952826b31156c22a",
+      "nativeStructuralSha256": "2157acd66d688d442dfd73be840466059378787d4e5da268952826b31156c22a",
+      "nativeCampaignPacketSha256": "4e773a85bef706b37c6d2e88cef2ae2666e7dbf0b8e9bf6aa5e87a8eb100d0f1",
+      "animationFrames": 1,
+      "level": 1,
+      "levelsCompleted": 0,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 1,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 16,
+          "y": 28
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "7e6329cc49d4517020aaca24420c255bd69a3f93e2c065e29f5a798222319603",
+      "nativeStructuralSha256": "7e6329cc49d4517020aaca24420c255bd69a3f93e2c065e29f5a798222319603",
+      "nativeCampaignPacketSha256": "f366f841bde024dd0baf1cf460a6a30b77d4c8b4e788ee3a3255c1b2849ae6db",
+      "animationFrames": 1,
+      "level": 1,
+      "levelsCompleted": 0,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 2,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 48,
+          "y": 28
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "6ad3098482349732ae2c3355128a00748e034a33d4d6c8f065de7969d19f580d",
+      "nativeStructuralSha256": "6ad3098482349732ae2c3355128a00748e034a33d4d6c8f065de7969d19f580d",
+      "nativeCampaignPacketSha256": "c2be1413051214d0df4e2708c527c8486e381712fdfc8e965c2e3b80f787e05f",
+      "animationFrames": 1,
+      "level": 1,
+      "levelsCompleted": 0,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 3,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 16,
+          "y": 44
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "4b5185456b4be2d98abb8019542ee6c40de56f69d68f5a1ef5c932e327858ed8",
+      "nativeStructuralSha256": "4b5185456b4be2d98abb8019542ee6c40de56f69d68f5a1ef5c932e327858ed8",
+      "nativeCampaignPacketSha256": "577ada69fa54bb535f790a45438bdc73cafddd2fbf625208d188d747be7ca4e5",
+      "animationFrames": 1,
+      "level": 1,
+      "levelsCompleted": 0,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 4,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 48,
+          "y": 44
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "b1a25e9531ecf4f3d583c5e25fc8ccd7148c9288c553be772c0ab93a719566b4",
+      "nativeStructuralSha256": "b1a25e9531ecf4f3d583c5e25fc8ccd7148c9288c553be772c0ab93a719566b4",
+      "nativeCampaignPacketSha256": "e4d775334991d104619608ec3c9f5a7d617863e5b2ffb74afdbc5ac65aa4f9c8",
+      "animationFrames": 4,
+      "level": 2,
+      "levelsCompleted": 1,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 5,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 32,
+          "y": 12
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "8e1704df58b47dfe8a5aee83fc3bf4727e87123cb60aadf333c2399e8020e8f9",
+      "nativeStructuralSha256": "8e1704df58b47dfe8a5aee83fc3bf4727e87123cb60aadf333c2399e8020e8f9",
+      "nativeCampaignPacketSha256": "f47c2af08af86620f2a0028d913e16f044cc781e50aee67a51e66431dd20837a",
+      "animationFrames": 1,
+      "level": 2,
+      "levelsCompleted": 1,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 6,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 32,
+          "y": 12
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "df758d3867022682ae2db31d41d720d4bdc0b4c6cc89c35fa0d6cdb0ae675c95",
+      "nativeStructuralSha256": "df758d3867022682ae2db31d41d720d4bdc0b4c6cc89c35fa0d6cdb0ae675c95",
+      "nativeCampaignPacketSha256": "ba654d8000b0b9e339a6aadd11f4d7b0d831f90365ac8185ff8ec383f3a4dcfa",
+      "animationFrames": 1,
+      "level": 2,
+      "levelsCompleted": 1,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 7,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 48,
+          "y": 12
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "93b9e786ba28ca1e7aa0c8edd9d83f739b72828054270bd621b750717e2013a3",
+      "nativeStructuralSha256": "93b9e786ba28ca1e7aa0c8edd9d83f739b72828054270bd621b750717e2013a3",
+      "nativeCampaignPacketSha256": "78bfb39d375e758ae12bc26ed91e7ebdf1cc1b3af78b491e4f8824ac8977c6ae",
+      "animationFrames": 1,
+      "level": 2,
+      "levelsCompleted": 1,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 8,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 16,
+          "y": 28
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "efb34ab29a82def9ba1e0200e6cb8c4398d76616b08d5dd192faa52b0e364b65",
+      "nativeStructuralSha256": "efb34ab29a82def9ba1e0200e6cb8c4398d76616b08d5dd192faa52b0e364b65",
+      "nativeCampaignPacketSha256": "6b31379ef574d1956b8acba82990e1211181fec15b450abf50887a2117df499e",
+      "animationFrames": 1,
+      "level": 2,
+      "levelsCompleted": 1,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 9,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 48,
+          "y": 28
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "07e432dcfe40ea580bf4c27ba6b98e1c07c9403be02a963500af5b74c696c528",
+      "nativeStructuralSha256": "07e432dcfe40ea580bf4c27ba6b98e1c07c9403be02a963500af5b74c696c528",
+      "nativeCampaignPacketSha256": "89c059000a9269ff72dc4743dd0981cd3a324555770f8b61da2a9d7f21d533a0",
+      "animationFrames": 1,
+      "level": 2,
+      "levelsCompleted": 1,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 10,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 16,
+          "y": 44
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "88f59024d48427268d9d2266da6ed92a17bbed7f7bcb5459a8c9710df6c147d3",
+      "nativeStructuralSha256": "88f59024d48427268d9d2266da6ed92a17bbed7f7bcb5459a8c9710df6c147d3",
+      "nativeCampaignPacketSha256": "8cfcd97ae82f93158c775280e21abacbe67ccbed1c2b0aa1f958fe02f9142c24",
+      "animationFrames": 1,
+      "level": 2,
+      "levelsCompleted": 1,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 11,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 48,
+          "y": 44
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "461740d8000f6e869d52ea8106c81624d2896232a1710b7af3c5eeb4aa5c24b1",
+      "nativeStructuralSha256": "461740d8000f6e869d52ea8106c81624d2896232a1710b7af3c5eeb4aa5c24b1",
+      "nativeCampaignPacketSha256": "30ca98ad5ad78a01f947f87b4078102d780e275c0592cb9a87e360ffd12e915f",
+      "animationFrames": 1,
+      "level": 2,
+      "levelsCompleted": 1,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 12,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 48,
+          "y": 44
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "1a7d166ae131dc84f3961b58c9bdc4f8f83d19383531aac3a1005d9723d7f77c",
+      "nativeStructuralSha256": "1a7d166ae131dc84f3961b58c9bdc4f8f83d19383531aac3a1005d9723d7f77c",
+      "nativeCampaignPacketSha256": "c1a1f41282f1c1ebe82963e52a849f84d7ac29023c672060d9d80651bcee3632",
+      "animationFrames": 4,
+      "level": 3,
+      "levelsCompleted": 2,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 13,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 50,
+          "y": 10
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "e91cffcb31dc555ed1a78410979d58387351165f7a238b81b0706c14627796e8",
+      "nativeStructuralSha256": "e91cffcb31dc555ed1a78410979d58387351165f7a238b81b0706c14627796e8",
+      "nativeCampaignPacketSha256": "a75c52ebbe3b85c99e87fbe91a5a44fe61d5492a3ead037c28a4345b8f0c99c1",
+      "animationFrames": 1,
+      "level": 3,
+      "levelsCompleted": 2,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 14,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 50,
+          "y": 10
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "2bdfd3f5d5a111741cdf812015a4e74254df2c1d7221b3d96bff83d3a420b1f2",
+      "nativeStructuralSha256": "2bdfd3f5d5a111741cdf812015a4e74254df2c1d7221b3d96bff83d3a420b1f2",
+      "nativeCampaignPacketSha256": "47397e3c22c49e7b20cca300355aa084171c7498a9608ddbf66217c8a42e3b7a",
+      "animationFrames": 1,
+      "level": 3,
+      "levelsCompleted": 2,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 15,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 14,
+          "y": 22
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "1d591059e6ad6c0c549cc891cee6648624ee5959308bd691ea55e848227fc75f",
+      "nativeStructuralSha256": "1d591059e6ad6c0c549cc891cee6648624ee5959308bd691ea55e848227fc75f",
+      "nativeCampaignPacketSha256": "b746c8e806b0580813ff62fcefe9275910146955a987530e4821ca8355e807a9",
+      "animationFrames": 1,
+      "level": 3,
+      "levelsCompleted": 2,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 16,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 26,
+          "y": 34
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "edd20d9737c419244d56a51ca41d3b69e8d1ef75eaf8f75108ab741eeef68ab2",
+      "nativeStructuralSha256": "edd20d9737c419244d56a51ca41d3b69e8d1ef75eaf8f75108ab741eeef68ab2",
+      "nativeCampaignPacketSha256": "cb4c769d6fd2f3c6c9e93fdcc8eda28956b87f6ff46063509c450afa89b51f4d",
+      "animationFrames": 1,
+      "level": 3,
+      "levelsCompleted": 2,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 17,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 26,
+          "y": 34
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "5329c0f484d2e919dd29cfc651d951a29cad356fa9ce8e93e321854bf3d610d8",
+      "nativeStructuralSha256": "5329c0f484d2e919dd29cfc651d951a29cad356fa9ce8e93e321854bf3d610d8",
+      "nativeCampaignPacketSha256": "e615692c579344336599c81cd033dc576a1df1cc0e9092184cced39c5d103510",
+      "animationFrames": 1,
+      "level": 3,
+      "levelsCompleted": 2,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 18,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 38,
+          "y": 34
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "9ada7e7d4a92bb45b9b4f43d727e89ef8c2c98a4ef23e90d35199132ae52fb28",
+      "nativeStructuralSha256": "9ada7e7d4a92bb45b9b4f43d727e89ef8c2c98a4ef23e90d35199132ae52fb28",
+      "nativeCampaignPacketSha256": "fe2f479304e855296751a82100ae1ad1eee829bb0e16dd9f338432f9a3b14b71",
+      "animationFrames": 1,
+      "level": 3,
+      "levelsCompleted": 2,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 19,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 50,
+          "y": 34
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "57fba34884d7358378d6edecf21f28c39dc7f7c3c05195744f4b1da0b6ccff30",
+      "nativeStructuralSha256": "57fba34884d7358378d6edecf21f28c39dc7f7c3c05195744f4b1da0b6ccff30",
+      "nativeCampaignPacketSha256": "2e554bdd8ee2f35534b4d9b86caeaff6fd5975e69e2716d035ddab92727bca2a",
+      "animationFrames": 1,
+      "level": 3,
+      "levelsCompleted": 2,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 20,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 14,
+          "y": 46
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "9e1a3bdee349d5ae23c1638c3f82c4aec979eb0dfb1da986e5aa14de566960bb",
+      "nativeStructuralSha256": "9e1a3bdee349d5ae23c1638c3f82c4aec979eb0dfb1da986e5aa14de566960bb",
+      "nativeCampaignPacketSha256": "bdabbc84eb04eee564ff9f5d30d3e745c645188593ec8e5207fa7fdc6f4763eb",
+      "animationFrames": 1,
+      "level": 3,
+      "levelsCompleted": 2,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 21,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 14,
+          "y": 46
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "96226459ad00d722dcc013c5151caf5dcacd215df6f05268b54dc545491464ab",
+      "nativeStructuralSha256": "96226459ad00d722dcc013c5151caf5dcacd215df6f05268b54dc545491464ab",
+      "nativeCampaignPacketSha256": "04309ffc8dfcf9bb007ac7eed29eec9bc3f31a2f446093efbb4e524c78540f5f",
+      "animationFrames": 1,
+      "level": 3,
+      "levelsCompleted": 2,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 22,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 26,
+          "y": 46
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "a0fc380e4fe7c04bc2b099e6c18aa19859fe4987912f615a6d6957bbb0f83418",
+      "nativeStructuralSha256": "a0fc380e4fe7c04bc2b099e6c18aa19859fe4987912f615a6d6957bbb0f83418",
+      "nativeCampaignPacketSha256": "d537db26a72a2c7fcb9b6ac95b97ca54d3c10c61a31bca0f7f0fc51582b52eaf",
+      "animationFrames": 1,
+      "level": 3,
+      "levelsCompleted": 2,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    },
+    {
+      "actionIndex": 23,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 38,
+          "y": 46
+        }
+      },
+      "commandExact": true,
+      "fieldsExact": {
+        "frame_rows": true,
+        "frame_packet": true,
+        "level": true,
+        "levels_completed": true,
+        "state": true,
+        "step_index": true,
+        "available_action_refs": true,
+        "frame_hash": true
+      },
+      "completePublicPacketExact": true,
+      "originalStructuralSha256": "d8dee5476bf3e749c935a5dd27239c4ef3a4bab4dbccd15251aae6a38e4dac0b",
+      "nativeStructuralSha256": "d8dee5476bf3e749c935a5dd27239c4ef3a4bab4dbccd15251aae6a38e4dac0b",
+      "nativeCampaignPacketSha256": "65543064afe344e89dbde92e9201ad51c7ff24badf49a727c3df758890e12db6",
+      "animationFrames": 4,
+      "level": 4,
+      "levelsCompleted": 3,
+      "publicState": "NOT_FINISHED",
+      "originalAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "nativeAvailableActions": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ]
+    }
+  ]
+}
