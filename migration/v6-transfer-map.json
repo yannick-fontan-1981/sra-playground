@@ -305,7 +305,8 @@
         "src/logos-engine/v6-native-runtime.ts",
         "src/logos-engine/v6-native-authority.ts",
         "src/logos-engine/v6-native-caller.ts",
-        "src/logos-engine/v6-native-transition-domain.ts"
+        "src/logos-engine/v6-native-transition-domain.ts",
+        "src/logos-engine/v6-learned-preparation.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -340,9 +341,14 @@
         "tests/v6-program-composition-integration.test.ts",
         "tests/v6-program-priority.test.ts",
         "tests/fixtures/v6-program-priority-public.json.gz",
-        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json",
+        "tests/v6-learned-preparation-priority.test.ts",
+        "tests/v6-program-current-access-integration.test.ts",
+        "docs/migration/native-campaigns-v40/memo-three-levels.json",
+        "docs/migration/native-campaigns-v40/memo-v39-baseline.json",
+        "docs/migration/native-campaigns-v40/diagnostics/stck-current-access-six-level-attempt.json"
       ],
-      "notes": "The native common coordinator is connected to the product runtime and shares the WHY/ACT memory. Every witnessed primitive is acquired once at its sealed prefix; Goal/Frontier evidence is replayed across natural level boundaries. First-prefix HANO, MEMO and ONDE comparisons match all eight caller components without loading oracle state. SupportNavigation and all 13 acquired children are connected. Shared RepeatedSeries acquisition currently covers occurrence recall, its ancestor reducers and coupled-pair anchors/response evidence. AddressedMaterial, FramedTransfer, TemporalSelection and other series producers remain pending, along with Morphology/control-target/parent-attention providers. Bounded campaigns do not establish all-game V6 parity. v35 adds coupled support planning and auxiliary continuation in the single shared journal. Explicit V7 extension: the unchanged neutral entity-domain refusal becomes a retained unknown with complete public witnesses and no rule-registry update; this differs from the original caller fatal exception and is not exact out-of-domain parity. v39 adds observed-program acquisition in the same shared series owner and original post-acquisition stop/refutation checks. A second explicit native coordinator evolution defers only an unlearned animated invitation when the active shared family supplies a current, model-bearing program proposal admitted by its primitive guard. The offer is cached for its ordinary window entry; physical binding, point guards, preservation, budgets and WHY/ACT still run normally. The unchanged original caller reproduces the measured invitation collision, so this extension is not described as source selection parity."
+      "notes": "The native common coordinator is connected to the product runtime and shares the WHY/ACT memory. Every witnessed primitive is acquired once at its sealed prefix; Goal/Frontier evidence is replayed across natural level boundaries. First-prefix HANO, MEMO and ONDE comparisons match all eight caller components without loading oracle state. SupportNavigation and all 13 acquired children are connected. Shared RepeatedSeries acquisition currently covers occurrence recall, its ancestor reducers and coupled-pair anchors/response evidence. AddressedMaterial, FramedTransfer, TemporalSelection and other series producers remain pending, along with Morphology/control-target/parent-attention providers. Bounded campaigns do not establish all-game V6 parity. v35 adds coupled support planning and auxiliary continuation in the single shared journal. Explicit V7 extension: the unchanged neutral entity-domain refusal becomes a retained unknown with complete public witnesses and no rule-registry update; this differs from the original caller fatal exception and is not exact out-of-domain parity. v39 adds observed-program acquisition in the same shared series owner and original post-acquisition stop/refutation checks. The v39 program-priority extension is generalized at v40 as retained_learned_preparation_before_unlearned_invitation. Only the first non-null window candidate in declared order may supply priority, and its provider must expose an acquired preparation witness: a retained fitted program or source-threshold, convergent occurrence correspondence without counterexamples. The current primitive guard must admit that same candidate. Read-only offers are cached for ordinary selection; the receipt references the real family_state node and revision. Physical binding, point guards, preservation, budgets and WHY/ACT still run normally. The fresh frozen 0.10.0 MEMO campaign completes three levels in 30 actions, one session, with 30 acquired prefixes and two boundary replays; the v39 baseline completes no level in seven actions. These are explicit native coordination evolutions and bounded integrated evidence, not original Python selection parity or additional transferred Python modules."
     },
     {
       "sources": [
@@ -433,16 +439,20 @@
         "agents/yf_arc3_v6/morphology_policy/strategy.py"
       ],
       "targets": [
-        "src/logos-engine/v6-native-runtime.ts"
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-learned-preparation.ts"
       ],
       "status": "partial_transfer",
       "proof": [
         "tests/v6-native-runtime.test.ts",
         "tests/v6-program-priority.test.ts",
         "tests/fixtures/v6-program-priority-public.json.gz",
-        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json",
+        "tests/v6-learned-preparation-priority.test.ts",
+        "docs/migration/native-campaigns-v40/memo-three-levels.json",
+        "docs/migration/native-campaigns-v40/memo-v39-baseline.json"
       ],
-      "notes": "Sixteen outer strategy groups and implemented subgroup ordering are retained. All remaining providers, parent returns and cross-family interactions remain pending. Declared order remains unchanged, but retained_program_preparation_before_unlearned_invitation explicitly changes native cross-family coordination: a read-only guarded program offer can defer a previously unlearned invitation. Its receipt is labeled native evolution; no complete original selection parity is claimed."
+      "notes": "Sixteen outer strategy groups and implemented subgroup ordering are retained. All remaining providers, parent returns and cross-family interactions remain pending. The v39 retained_program_preparation_before_unlearned_invitation extension is broadened in v40 to retained_learned_preparation_before_unlearned_invitation. A read-only acquired witness and current guard must belong to the first non-null window candidate in declared order; an earlier unsupported candidate cannot borrow a later model. Unsupported providers are not speculatively crossed. The candidate remains subject to ordinary selection and WHY/ACT, and the receipt identifies its actual source family_state revision. Declared list order is preserved, but these native coordination extensions deliberately change selection relative to the original Python caller; no complete original selection parity is claimed."
     },
     {
       "sources": [
@@ -637,9 +647,12 @@
         "tests/fixtures/v6-occurrence-reference.json",
         "tests/v6-occurrence-recall.test.ts",
         "tests/v6-support-caller-integration.test.ts",
-        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json",
+        "tests/v6-learned-preparation-priority.test.ts",
+        "docs/migration/native-campaigns-v40/memo-three-levels.json",
+        "docs/migration/native-campaigns-v40/memo-v39-baseline.json"
       ],
-      "notes": "Native public_occurrence_recall including exact event reducers/digests of its inherited recall closure. Original priority before SlotSubstitution is tested through the real common caller. The production SharedSeriesConstraint now acquires marked/program/respondent evidence before higher occurrence/cell/graph/pair/support layers and then the program/cell packet evidence in source order, with one state owner and one acquisition per actual primitive. Those added producers have separate qualified mappings. Other ObservedCompositionConstraint providers and the full inheritance digest remain pending; their absence is explicit in the native digest scope."
+      "notes": "Native public_occurrence_recall including exact event reducers/digests of its inherited recall closure. Original priority before SlotSubstitution is tested through the real common caller. The production SharedSeriesConstraint now acquires marked/program/respondent evidence before higher occurrence/cell/graph/pair/support layers and then the program/cell packet evidence in source order, with one state owner and one acquisition per actual primitive. Those added producers have separate qualified mappings. Other ObservedCompositionConstraint providers and the full inheritance digest remain pending; their absence is explicit in the native digest scope. The v40 native coordination adapter reads the retained source-threshold models, actual evidence, current context, absence of counterexamples and convergent unique prediction to emit a conditional preparation witness. It introduces no new occurrence model or source entry. The separate native MEMO campaign completes three levels in 30 actions; its success demonstrates integrated reuse under the native extension, not unchanged Python caller selection parity or a complete MEMO win."
     },
     {
       "sources": [
@@ -691,28 +704,8 @@
         "src/logos-engine/v6-program-input-access.ts",
         "src/logos-engine/v6-occurrence-recall.ts",
         "src/logos-engine/v6-shared-series.ts",
-        "src/logos-engine/v6-program-identity.ts"
-      ],
-      "status": "partial_transfer",
-      "proof": [
-        "scripts/export-v6-program-composition-reference.py",
-        "tests/fixtures/v6-program-composition-reference.json.gz",
-        "tests/v6-program-composition-parity.test.ts",
-        "tests/v6-program-composition-integration.test.ts",
-        "tests/v6-program-priority.test.ts",
-        "tests/fixtures/v6-program-priority-public.json.gz",
-        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
-      ],
-      "notes": "Transfers editor/world rebinding, fitted-program questions and continuation, observed respondent probes/order, robust four-hypothesis composition, input-support/replacement questions, exact-context extension refusals, primitive guards and own record/packet acquisition into the one existing shared journal. Raw ancestor returns are retained separately; complete own events, program-bearing ancestor projections/digests and source-emitted proposal/point-support identities are compared, including typed glyph floats. Proposal evaluation is read-only and actual outcomes are acquired only at sealed prefixes. General inherited propose paths and unported crossed/repeated/other series producers remain outside this transfer; the full original ObservedCompositionConstraint retained digest and complete caller selection parity are not claimed."
-    },
-    {
-      "sources": [
-        "agents/yf_arc3_v6/laya_proto/common_program_composition.py"
-      ],
-      "targets": [
-        "src/logos-engine/v6-shared-series.ts",
-        "src/logos-engine/v6-native-runtime.ts",
-        "src/logos-engine/v6-program-identity.ts"
+        "src/logos-engine/v6-program-identity.ts",
+        "src/logos-engine/v6-program-current-access.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -723,9 +716,38 @@
         "tests/v6-program-priority.test.ts",
         "tests/fixtures/v6-program-priority-public.json.gz",
         "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json",
-        "docs/migration/native-campaigns-v39/stck-three-levels.json"
+        "tests/v6-program-current-access.test.ts",
+        "tests/v6-program-current-access-integration.test.ts",
+        "docs/migration/native-campaigns-v40/diagnostics/stck-current-access-six-level-attempt.json"
       ],
-      "notes": "The common program_propose wrapper, deadline/action-budget preconditions, prefix ceiling, current measured point_support and bind behavior are compared to unchanged Python without normalizing proposal hashes or metadata. The actual observed_program_composition entry shares one acquisition owner with cell placement and occurrence recall, and full program refutation/stop checks occur after sealed OP29/30/31 acquisition. Native replay verifies native_observed_program_recall_cell_placement_alternating_graph_and_coupled_support_v6, not the complete original inherited digest. The separately declared retained_program_preparation_before_unlearned_invitation coordinator rule is a native evolution demonstrated against an original-caller collision, not original Python selection parity. Separately, the fresh native common campaign completes STCK levels 1-3 in 35 physical actions (3, 7, 25), stops at the requested target on entry to level 4 with NOT_FINISHED, and verifies an unchanged 0.9.0 source manifest. This is bounded integrated success, not complete STCK victory or original caller parity."
+      "notes": "Transfers editor/world rebinding, fitted-program questions and continuation, observed respondent probes/order, robust four-hypothesis composition, input-support/replacement questions, exact-context extension refusals, primitive guards and own record/packet acquisition into the one existing shared journal. Raw ancestor returns are retained separately; complete own events, program-bearing ancestor projections/digests and source-emitted proposal/point-support identities are compared, including typed glyph floats. Proposal evaluation is read-only and actual outcomes are acquired only at sealed prefixes. General inherited propose paths and unported crossed/repeated/other series producers remain outside this transfer; the full original ObservedCompositionConstraint retained digest and complete caller selection parity are not claimed. Native v40 adds opt-in current-access rebinding in a separate module while preserving the default source programEditor and source-path behavior. Exact currently observed patches determine a common translation and a partial set of available controls, with interior or end gaps, explicit unavailable controls and unassigned new appearances. The full model and member palette remain intact; only new insertions are filtered. Binding evidence is included in real plans and continuations and revalidated before primitives. This is native evolution rather than a new Python transfer or a relaxation of source-parity claims. The actual STCK diagnostic confirms partial access at action 36 but stops after action 37 at level 4, with only three levels completed."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_program_composition.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-program-identity.ts",
+        "src/logos-engine/v6-program-current-access.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-program-composition-reference.py",
+        "tests/fixtures/v6-program-composition-reference.json.gz",
+        "tests/v6-program-composition-parity.test.ts",
+        "tests/v6-program-composition-integration.test.ts",
+        "tests/v6-program-priority.test.ts",
+        "tests/fixtures/v6-program-priority-public.json.gz",
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json",
+        "docs/migration/native-campaigns-v39/stck-three-levels.json",
+        "tests/v6-program-current-access.test.ts",
+        "tests/v6-program-current-access-integration.test.ts",
+        "tests/v6-learned-preparation-priority.test.ts",
+        "docs/migration/native-campaigns-v40/diagnostics/stck-current-access-six-level-attempt.json"
+      ],
+      "notes": "The common program_propose wrapper, deadline/action-budget preconditions, prefix ceiling, current measured point_support and bind behavior are compared to unchanged Python without normalizing proposal hashes or metadata. The actual observed_program_composition entry shares one acquisition owner with cell placement and occurrence recall, and full program refutation/stop checks occur after sealed OP29/30/31 acquisition. Native replay verifies native_observed_program_recall_cell_placement_alternating_graph_and_coupled_support_v6, not the complete original inherited digest. The separately declared retained_program_preparation_before_unlearned_invitation coordinator rule is a native evolution demonstrated against an original-caller collision, not original Python selection parity. Separately, the fresh native common campaign completes STCK levels 1-3 in 35 physical actions (3, 7, 25), stops at the requested target on entry to level 4 with NOT_FINISHED, and verifies an unchanged 0.9.0 source manifest. This is bounded integrated success, not complete STCK victory or original caller parity. At v40 the native common wrapper explicitly enables current_program_access_revalidation and carries its exact-current-control proof through point binding, primitive guards, acquired continuation and checkpoint restoration. The coordination rule is broadened to acquired preparation, including occurrence correspondence, with the same first-candidate and current-guard requirement. The separate 0.10.0 STCK six-level diagnostic preserves the three earlier completions and performs a partial-access binding at level 4, then stops frontier_unknown after 37 actions. This is not level-four success, a full-game win or additional source transfer."
     },
     {
       "sources": [
@@ -777,9 +799,10 @@
       "proof": [
         "scripts/export-v6-program-composition-reference.py",
         "tests/fixtures/v6-program-composition-reference.json.gz",
-        "tests/v6-program-composition-parity.test.ts"
+        "tests/v6-program-composition-parity.test.ts",
+        "tests/v6-program-current-access-integration.test.ts"
       ],
-      "notes": "All own pixels, fit_composition_model, coordinates, surface, simulate_word and search_program functions are transferred. Tests fit complete original models from controlled and actual first-level public packets, and compare lattice/occlusion measurements, conditional simulation, full ranked search result, lexicographic ties, node counts and deadline outputs. Surface blocking and repeated reductions remain explicit conditional hypotheses; a model ID or predicted reduction is not an official completion claim."
+      "notes": "All own pixels, fit_composition_model, coordinates, surface, simulate_word and search_program functions are transferred. Tests fit complete original models from controlled and actual first-level public packets, and compare lattice/occlusion measurements, conditional simulation, full ranked search result, lexicographic ties, node counts and deadline outputs. Surface blocking and repeated reductions remain explicit conditional hypotheses; a model ID or predicted reduction is not an official completion claim. Native v40 optionally restricts newly inserted labels to currently attested controls; retained operators and existing word semantics remain complete. Its no_insertable_or_retained_reduction_operator refusal is limited to this stationary-target conditional simulator, not a claim of game impossibility. These optional native branches are separate from the source defaults and their differential comparison."
     },
     {
       "sources": [
@@ -792,9 +815,10 @@
       "proof": [
         "scripts/export-v6-program-composition-reference.py",
         "tests/fixtures/v6-program-composition-reference.json.gz",
-        "tests/v6-program-composition-parity.test.ts"
+        "tests/v6-program-composition-parity.test.ts",
+        "tests/v6-program-current-access-integration.test.ts"
       ],
-      "notes": "All own simulate, search and search_replacement functions are transferred with observed bearer order, four explicit reduction/interaction hypotheses, first-feasible and minimum-cost modes, exact node counts/deadlines, access-site goals and conservative member-count bounds. Differential search outputs retain failure and unknown cases; no additional respondent behavior, capacity, target word or hidden board is supplied."
+      "notes": "All own simulate, search and search_replacement functions are transferred with observed bearer order, four explicit reduction/interaction hypotheses, first-feasible and minimum-cost modes, exact node counts/deadlines, access-site goals and conservative member-count bounds. Differential search outputs retain failure and unknown cases; no additional respondent behavior, capacity, target word or hidden board is supplied. Native v40 optionally restricts new insertions to currently attested labels while preserving all retained word/operator semantics and respondent hypotheses. Source defaults remain unchanged. The stationary-target reduction precondition from search_program is not imposed on this respondent simulator."
     },
     {
       "sources": [
@@ -1189,9 +1213,12 @@
         "tests/fixtures/v6-cell-placement-reference.json.gz",
         "tests/v6-cell-placement.test.ts",
         "tests/v6-cell-placement-integration.test.ts",
-        "tests/v6-source-entry-routing.test.ts"
+        "tests/v6-source-entry-routing.test.ts",
+        "tests/v6-program-current-access-integration.test.ts",
+        "tests/v6-learned-preparation-priority.test.ts",
+        "docs/migration/native-campaigns-v40/memo-three-levels.json"
       ],
-      "notes": "The supported common closure integrates occurrence recall, cell placement, alternating graph, pair acquisition/planning and auxiliary support in one authoritative public_occurrence_recall family. Separate source entries preserve coupled/graph goal-access priority and cell-before-recall window order. Selected and passive acquisition follow the source record chain before occurrence/cell packet observation; native checkpoint reconstruction includes every transferred reducer. Two unchanged ObservedCompositionConstraint journals compare complete unfiltered common envelopes, including nonempty cell evidence, observed return and official terminal cases. Product-runtime checks separately verify fresh SRC/WHY-ACT selection, single acquisition ownership, causal facts and atomic rollback. The current digest is native_recall_ancestors_cell_placement_alternating_graph_and_coupled_support_v5; remaining ObservedCompositionConstraint providers and the full inherited digest are still pending. Controlled observations do not establish full-caller or game-campaign parity."
+      "notes": "The supported common closure integrates occurrence recall, cell placement, alternating graph, pair acquisition/planning and auxiliary support in one authoritative public_occurrence_recall family. Separate source entries preserve coupled/graph goal-access priority and cell-before-recall window order. Selected and passive acquisition follow the source record chain before occurrence/cell packet observation; native checkpoint reconstruction includes every transferred reducer. Two unchanged ObservedCompositionConstraint journals compare complete unfiltered common envelopes, including nonempty cell evidence, observed return and official terminal cases. Product-runtime checks separately verify fresh SRC/WHY-ACT selection, single acquisition ownership, causal facts and atomic rollback. The current digest is native_observed_program_recall_cell_placement_alternating_graph_and_coupled_support_v6; remaining ObservedCompositionConstraint providers and the full inherited digest are still pending. Controlled observations do not establish full-caller or game-campaign parity. The v39 program acquisition and v40 control-access proofs use that same authoritative shared state. The v40 preparation witness reads acquired state without adding events during lookahead; the actual proposal, source state revision and continuation proof are retained through the Kernel. Native coordination and access remain explicit extensions, not additional completed Python providers."
     },
     {
       "sources": [
@@ -1513,7 +1540,9 @@
     "AnimatedContact exports the exact id/all_conditions of the two interaction.drm rules it consumes (ballistic contact solution and ballistic curve disclosure); this is not a transfer of every rule in that inherited DRM document.",
     "Alternating graph compares complete measurement and topology/contact outputs plus the graph-owned access layer. Its scene description is explicitly the consumed sprite projection, and its shared journal digest names the supported native closure. Public gallery rasters and controlled helper inputs are not complete-game or full-inheritance evidence.",
     "Cell-patch transfer distinguishes exact framed-patch measurement from its geometry-only queued-field dependency and the own CellPlacementAccess layer from unported ancestors. Conditional line search is compared only in the native exact-integer domain; larger Python integer scores are explicitly refused without recording a source-law counterexample. Full original common envelopes are compared on controlled public rasters, separately from the fresh native SRC/WHY-ACT/checkpoint integration tests. None of these fixture counts establishes a completed game or complete V6 inheritance parity.",
-    "Observed-program transfer compares complete source helper outputs, program-bearing ancestor states/digests, acquisition suffixes, raw common proposal/point envelopes and typed glyph float identities. Unported crossed/repeated producers and general input-candidate/propose inheritance remain partial, and the shared native journal names its own digest closure. The retained_program_preparation_before_unlearned_invitation rule is an explicitly recorded native coordinator evolution following a reproduced original-caller collision; retaining DRM list order does not imply original cross-family selection parity. Component fixtures and recorded-prefix replay remain distinct from fresh common-caller game campaigns."
+    "Observed-program transfer compares complete source helper outputs, program-bearing ancestor states/digests, acquisition suffixes, raw common proposal/point envelopes and typed glyph float identities. Unported crossed/repeated producers and general input-candidate/propose inheritance remain partial, and the shared native journal names its own digest closure. The v39 retained_program_preparation_before_unlearned_invitation rule is an explicitly recorded native coordinator evolution following a reproduced original-caller collision; retaining DRM list order does not imply original cross-family selection parity. Component fixtures and recorded-prefix replay remain distinct from fresh common-caller game campaigns.",
+    "v40 adds two explicit native evolutions, not new Python transfers: current_program_access_revalidation separates the complete acquired operator model from controls currently attested by exact pixel appearance, and retained_learned_preparation_before_unlearned_invitation requires acquired evidence plus the current guard of the first non-null window candidate in declared order. Unknown additional appearances receive no operator role. MEMO completes its first three levels in a fresh frozen common-caller session in 30 actions; STCK still completes only three levels in the six-level diagnostic. These campaigns, controlled extension tests and unchanged source-path parity fixtures have different evidential scopes. The 31/76 declared-entry metric and Python module status counts are unchanged, and all six complete-migration gates remain false.",
+    "Learned state is restored from actual revisioned family_state nodes, control-access proofs travel with executed proposals and continuations, and coordination receipts name the real source state revision. Registered SRC modules are executed from the Kernel graph. Observation, fitting, simulation, search, guards and native coordination still use TypeScript functions/callbacks; fragmented state and proof records do not make every reasoning algorithm an independently editable declarative rule."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,

@@ -75117,7 +75117,8 @@
         "src/logos-engine/v6-native-runtime.ts",
         "src/logos-engine/v6-native-authority.ts",
         "src/logos-engine/v6-native-caller.ts",
-        "src/logos-engine/v6-native-transition-domain.ts"
+        "src/logos-engine/v6-native-transition-domain.ts",
+        "src/logos-engine/v6-learned-preparation.ts"
       ],
       "proof": [
         "scripts/export-v6-target-reference.py",
@@ -75151,7 +75152,12 @@
         "tests/v6-program-composition-integration.test.ts",
         "tests/v6-program-priority.test.ts",
         "tests/fixtures/v6-program-priority-public.json.gz",
-        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json",
+        "tests/v6-learned-preparation-priority.test.ts",
+        "tests/v6-program-current-access-integration.test.ts",
+        "docs/migration/native-campaigns-v40/memo-three-levels.json",
+        "docs/migration/native-campaigns-v40/memo-v39-baseline.json",
+        "docs/migration/native-campaigns-v40/diagnostics/stck-current-access-six-level-attempt.json"
       ]
     },
     {
@@ -76323,7 +76329,10 @@
         "tests/fixtures/v6-cell-placement-reference.json.gz",
         "tests/v6-cell-placement.test.ts",
         "tests/v6-cell-placement-integration.test.ts",
-        "tests/v6-source-entry-routing.test.ts"
+        "tests/v6-source-entry-routing.test.ts",
+        "tests/v6-program-current-access-integration.test.ts",
+        "tests/v6-learned-preparation-priority.test.ts",
+        "docs/migration/native-campaigns-v40/memo-three-levels.json"
       ]
     },
     {
@@ -76421,7 +76430,10 @@
         "tests/fixtures/v6-occurrence-reference.json",
         "tests/v6-occurrence-recall.test.ts",
         "tests/v6-support-caller-integration.test.ts",
-        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json",
+        "tests/v6-learned-preparation-priority.test.ts",
+        "docs/migration/native-campaigns-v40/memo-three-levels.json",
+        "docs/migration/native-campaigns-v40/memo-v39-baseline.json"
       ]
     },
     {
@@ -77530,7 +77542,8 @@
       "targets": [
         "src/logos-engine/v6-shared-series.ts",
         "src/logos-engine/v6-native-runtime.ts",
-        "src/logos-engine/v6-program-identity.ts"
+        "src/logos-engine/v6-program-identity.ts",
+        "src/logos-engine/v6-program-current-access.ts"
       ],
       "proof": [
         "scripts/export-v6-program-composition-reference.py",
@@ -77540,7 +77553,11 @@
         "tests/v6-program-priority.test.ts",
         "tests/fixtures/v6-program-priority-public.json.gz",
         "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json",
-        "docs/migration/native-campaigns-v39/stck-three-levels.json"
+        "docs/migration/native-campaigns-v39/stck-three-levels.json",
+        "tests/v6-program-current-access.test.ts",
+        "tests/v6-program-current-access-integration.test.ts",
+        "tests/v6-learned-preparation-priority.test.ts",
+        "docs/migration/native-campaigns-v40/diagnostics/stck-current-access-six-level-attempt.json"
       ]
     },
     {
@@ -82091,7 +82108,10 @@
         "tests/fixtures/v6-occurrence-reference.json",
         "tests/v6-occurrence-recall.test.ts",
         "tests/v6-support-caller-integration.test.ts",
-        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json",
+        "tests/v6-learned-preparation-priority.test.ts",
+        "docs/migration/native-campaigns-v40/memo-three-levels.json",
+        "docs/migration/native-campaigns-v40/memo-v39-baseline.json"
       ]
     },
     {
@@ -82130,7 +82150,10 @@
         "tests/fixtures/v6-occurrence-reference.json",
         "tests/v6-occurrence-recall.test.ts",
         "tests/v6-support-caller-integration.test.ts",
-        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json",
+        "tests/v6-learned-preparation-priority.test.ts",
+        "docs/migration/native-campaigns-v40/memo-three-levels.json",
+        "docs/migration/native-campaigns-v40/memo-v39-baseline.json"
       ]
     },
     {
@@ -82901,7 +82924,8 @@
         "src/logos-engine/v6-program-input-access.ts",
         "src/logos-engine/v6-occurrence-recall.ts",
         "src/logos-engine/v6-shared-series.ts",
-        "src/logos-engine/v6-program-identity.ts"
+        "src/logos-engine/v6-program-identity.ts",
+        "src/logos-engine/v6-program-current-access.ts"
       ],
       "proof": [
         "scripts/export-v6-program-composition-reference.py",
@@ -82910,7 +82934,10 @@
         "tests/v6-program-composition-integration.test.ts",
         "tests/v6-program-priority.test.ts",
         "tests/fixtures/v6-program-priority-public.json.gz",
-        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json",
+        "tests/v6-program-current-access.test.ts",
+        "tests/v6-program-current-access-integration.test.ts",
+        "docs/migration/native-campaigns-v40/diagnostics/stck-current-access-six-level-attempt.json"
       ]
     },
     {
@@ -82964,7 +82991,8 @@
       "proof": [
         "scripts/export-v6-program-composition-reference.py",
         "tests/fixtures/v6-program-composition-reference.json.gz",
-        "tests/v6-program-composition-parity.test.ts"
+        "tests/v6-program-composition-parity.test.ts",
+        "tests/v6-program-current-access-integration.test.ts"
       ]
     },
     {
@@ -83106,7 +83134,8 @@
         "src/logos-engine/v6-program-input-access.ts",
         "src/logos-engine/v6-occurrence-recall.ts",
         "src/logos-engine/v6-shared-series.ts",
-        "src/logos-engine/v6-program-identity.ts"
+        "src/logos-engine/v6-program-identity.ts",
+        "src/logos-engine/v6-program-current-access.ts"
       ],
       "proof": [
         "scripts/export-v6-program-composition-reference.py",
@@ -83115,7 +83144,10 @@
         "tests/v6-program-composition-integration.test.ts",
         "tests/v6-program-priority.test.ts",
         "tests/fixtures/v6-program-priority-public.json.gz",
-        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json",
+        "tests/v6-program-current-access.test.ts",
+        "tests/v6-program-current-access-integration.test.ts",
+        "docs/migration/native-campaigns-v40/diagnostics/stck-current-access-six-level-attempt.json"
       ]
     },
     {
@@ -83185,7 +83217,8 @@
       "proof": [
         "scripts/export-v6-program-composition-reference.py",
         "tests/fixtures/v6-program-composition-reference.json.gz",
-        "tests/v6-program-composition-parity.test.ts"
+        "tests/v6-program-composition-parity.test.ts",
+        "tests/v6-program-current-access-integration.test.ts"
       ]
     },
     {
@@ -92525,13 +92558,17 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-native-runtime.ts"
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-learned-preparation.ts"
       ],
       "proof": [
         "tests/v6-native-runtime.test.ts",
         "tests/v6-program-priority.test.ts",
         "tests/fixtures/v6-program-priority-public.json.gz",
-        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json"
+        "docs/migration/native-campaigns-v39/diagnostics/stck-original-caller-collision.json",
+        "tests/v6-learned-preparation-priority.test.ts",
+        "docs/migration/native-campaigns-v40/memo-three-levels.json",
+        "docs/migration/native-campaigns-v40/memo-v39-baseline.json"
       ]
     },
     {
@@ -96541,6 +96578,8 @@
     "AnimatedContact exports the exact id/all_conditions of the two interaction.drm rules it consumes (ballistic contact solution and ballistic curve disclosure); this is not a transfer of every rule in that inherited DRM document.",
     "Alternating graph compares complete measurement and topology/contact outputs plus the graph-owned access layer. Its scene description is explicitly the consumed sprite projection, and its shared journal digest names the supported native closure. Public gallery rasters and controlled helper inputs are not complete-game or full-inheritance evidence.",
     "Cell-patch transfer distinguishes exact framed-patch measurement from its geometry-only queued-field dependency and the own CellPlacementAccess layer from unported ancestors. Conditional line search is compared only in the native exact-integer domain; larger Python integer scores are explicitly refused without recording a source-law counterexample. Full original common envelopes are compared on controlled public rasters, separately from the fresh native SRC/WHY-ACT/checkpoint integration tests. None of these fixture counts establishes a completed game or complete V6 inheritance parity.",
-    "Observed-program transfer compares complete source helper outputs, program-bearing ancestor states/digests, acquisition suffixes, raw common proposal/point envelopes and typed glyph float identities. Unported crossed/repeated producers and general input-candidate/propose inheritance remain partial, and the shared native journal names its own digest closure. The retained_program_preparation_before_unlearned_invitation rule is an explicitly recorded native coordinator evolution following a reproduced original-caller collision; retaining DRM list order does not imply original cross-family selection parity. Component fixtures and recorded-prefix replay remain distinct from fresh common-caller game campaigns."
+    "Observed-program transfer compares complete source helper outputs, program-bearing ancestor states/digests, acquisition suffixes, raw common proposal/point envelopes and typed glyph float identities. Unported crossed/repeated producers and general input-candidate/propose inheritance remain partial, and the shared native journal names its own digest closure. The v39 retained_program_preparation_before_unlearned_invitation rule is an explicitly recorded native coordinator evolution following a reproduced original-caller collision; retaining DRM list order does not imply original cross-family selection parity. Component fixtures and recorded-prefix replay remain distinct from fresh common-caller game campaigns.",
+    "v40 adds two explicit native evolutions, not new Python transfers: current_program_access_revalidation separates the complete acquired operator model from controls currently attested by exact pixel appearance, and retained_learned_preparation_before_unlearned_invitation requires acquired evidence plus the current guard of the first non-null window candidate in declared order. Unknown additional appearances receive no operator role. MEMO completes its first three levels in a fresh frozen common-caller session in 30 actions; STCK still completes only three levels in the six-level diagnostic. These campaigns, controlled extension tests and unchanged source-path parity fixtures have different evidential scopes. The 31/76 declared-entry metric and Python module status counts are unchanged, and all six complete-migration gates remain false.",
+    "Learned state is restored from actual revisioned family_state nodes, control-access proofs travel with executed proposals and continuations, and coordination receipts name the real source state revision. Registered SRC modules are executed from the Kernel graph. Observation, fitting, simulation, search, guards and native coordination still use TypeScript functions/callbacks; fragmented state and proof records do not make every reasoning algorithm an independently editable declarative rule."
   ]
 }

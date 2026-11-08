@@ -110,7 +110,7 @@ test('a newly acquired and currently guarded program defers an unlearned invitat
 
   const coordination = proposal.strategy_receipt.native_coordination;
   assert.equal(coordination.length, 1);
-  assert.equal(coordination[0].rule, 'retained_program_preparation_before_unlearned_invitation');
+  assert.equal(coordination[0].rule, 'retained_learned_preparation_before_unlearned_invitation');
   assert.equal(coordination[0].observation_ref, plan.observation_ref);
   assert.equal(coordination[0].preferred_proposal_id, proposal.proposal_id);
   assert.equal(coordination[0].model_id, model.model_id);

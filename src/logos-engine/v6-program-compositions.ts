@@ -185,13 +185,27 @@ export function* programProducts(labels: readonly number[], repeat: number): Ite
   }
 }
 
-export interface ProgramSearchOptions { max_new_actions: number; deadline: number; now?: () => number }
+export interface ProgramSearchOptions {
+  max_new_actions: number;
+  deadline: number;
+  now?: () => number;
+  /** Explicit native extension: only newly inserted labels are restricted.
+   * The learned model and the operators already present in any word remain
+   * unchanged. Omission preserves the original Python search domain. */
+  insertable_labels?: readonly number[];
+}
 
 export function searchProgram(existing: readonly number[], ownBase: readonly number[], targets: readonly R[], model: R, field: R, options: ProgramSearchOptions): R {
   if (targets.some(target => (target.word as number[]).some(label => label !== model.interaction.label))) {
     return { status: 'unknown', reason: 'unvalidated_respondent_operator', nodes: 0, plan: null };
   }
-  const prefix = [...existing].reverse(), labels = [...new Set<number>([...(model.moves as R[]).map(operator => operator.label), model.interaction.label])].sort((a, b) => a - b);
+  const prefix = [...existing].reverse(), labels = [...new Set<number>([...(model.moves as R[]).map(operator => operator.label), model.interaction.label])]
+    .sort((a, b) => a - b).filter(label => options.insertable_labels === undefined || options.insertable_labels.includes(label));
+  if (options.insertable_labels !== undefined && targets.some(target => target.word.length > 0)
+    && !prefix.includes(model.interaction.label) && !labels.includes(model.interaction.label)) {
+    return { status: 'unknown', reason: 'no_insertable_or_retained_reduction_operator', nodes: 0, plan: null,
+      scope: 'Native current-input search bound: the retained own word and all available insertions lack the only operator that can reduce these stationary target words under this simulator. No game-level impossibility is inferred.' };
+  }
   const now = options.now ?? (() => performance.now() / 1000);
   let best: R | null = null, nodes = 0;
   for (let length = Math.max(1, prefix.length); length <= prefix.length + Math.min(15, options.max_new_actions - 1); length++) {

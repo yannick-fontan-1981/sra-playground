@@ -11,8 +11,9 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone:** see [the v39 observed-program transfer and STCK
-three-level campaign report](v39-observed-program.md), following [the v38 cell-patch
+**Current integrated milestone:** see [the v40 acquired-preparation and MEMO
+three-level campaign report](v40-acquired-preparation.md), following [the v39
+observed-program transfer and STCK three-level campaign report](v39-observed-program.md), [the v38 cell-patch
 transfer and complete TICT campaign report](v38-cell-placement.md), [the v37 memory-cost and ELAS campaign
 report](v37-memory-performance.md), [the v36 alternating graph and common
 acquisition report](v36-alternating-graph.md), [the v35 coupled planning,
@@ -23,11 +24,49 @@ occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connec
 is [v6-entry-point-progress.json](v6-entry-point-progress.json): 31 of 76
 explicit DRM subquestions are connected (40.8%). This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
-The v39 observed-program composition adds one source entry, following the v38
-cell-composition entry; the v37 performance step added none. All six conditions
-for a complete migration remain false.
+The v40 changes are explicit native evolutions: they add no Python module to
+the transferred inventory and no source entry. The v39 observed-program
+composition added one source entry, following the v38 cell-composition entry;
+the v37 performance step added none. All six conditions for a complete
+migration remain false.
 
-**New v39 result:** STCK's first three levels are completed through the fresh
+**New v40 result:** MEMO's first three levels are completed through the fresh
+native common Logos Engine caller in one session: **10 actions per level, 30
+total**, with 30 sealed prefixes, 30 acquired transitions and two natural
+boundary replays. The [bounded campaign](native-campaigns-v40/memo-three-levels.json)
+stops at its declared target on entry to level 4 with **`NOT_FINISHED`**. The
+`logos-engine.typescript.v6.native-migration/0.10.0` source stays unchanged
+throughout the run, and no Python agent module is loaded. The
+[v39 baseline](native-campaigns-v40/memo-v39-baseline.json) completed no level
+and stopped after seven actions with `frontier_unknown`. This comparison
+establishes three new level completions, without claiming a complete MEMO win.
+
+The native coordinator now considers the **first non-null window proposal in
+declared order** when an unlearned animated invitation would otherwise be
+selected. Its provider must explicitly supply a learned-preparation witness:
+either a retained fitted program model or a unique, convergent occurrence
+correspondence meeting the source policy's support thresholds with no
+counterexamples. The current primitive guard must admit that same proposal.
+An unsupported earlier candidate cannot borrow evidence from a later one.
+The proposal is cached for ordinary selection, and the receipt names the real
+`family_state` node and its revision. Point binding, preservation, budgets and
+WHY/ACT still run normally. This expands the v39 coordination extension; it
+is not a claim of original Python caller selection parity.
+
+A separate native access rule rebinds any uniquely attested subset of learned
+program controls using exact current patches and one common translation. It
+accepts gaps inside a row as well as at its ends, keeps the full learned model
+and member palette, and permits new insertions only through currently
+attested controls. Additional appearances receive no operator meaning.
+The binding proof is retained in the actual proposal and continuation and
+rechecked before actions; source-parity `programEditor` remains unchanged.
+The [v40 STCK diagnostic](native-campaigns-v40/diagnostics/stck-current-access-six-level-attempt.json)
+again completes three levels in 3, 7 and 25 actions, then performs a real
+partial-access binding as action 36. An invitation at action 37 is followed
+by `frontier_unknown` at level 4. **STCK level 4 remains unsolved in this run**;
+the new access rule alone does not establish a new interaction or objective.
+
+**Previous v39 result:** STCK's first three levels are completed through the fresh
 native common Logos Engine caller in one session: **3, 7 and 25 actions**, **35
 total**. The [bounded campaign](native-campaigns-v39/stck-three-levels.json)
 stops at its declared three-level target on entry to level 4 with the game's
@@ -37,12 +76,12 @@ throughout the run, acquired real effects and retained cross-level memory.
 This establishes the requested three level completions, without claiming a
 complete-game `WIN` for STCK.
 
-The transferred program capability learns collection edits and conditional
+The v39 transferred program capability learns collection edits and conditional
 operators from public animation phases, composes their effects, reconciles
 respondent behavior and revalidates current input supports. It shares the
 existing occurrence journal. A separate, explicitly recorded **native
-coordination evolution** defers an unlearned geometric invitation when the
-shared family has an acquired, currently guarded program proposal. The declared
+coordination evolution** deferred an unlearned geometric invitation when the
+shared family had an acquired, currently guarded program proposal. The declared
 DRM lists retain their order and the selected proposal still passes ordinary
 point, preservation, budget and WHY/ACT checks. The unchanged original Python
 caller reproduces the invitation collision; this coordination change is
@@ -172,6 +211,17 @@ so an independent fact or trace revision cannot be hidden by an unchanged
 index. A checkpoint refuses a stale graph base; only a successfully committed
 and verified prepared batch can update the read cache. Failed transactions and
 unrelated commits do not mark unread revisions as acquired.
+
+At v40, learned program models and occurrence relations remain in the actual
+family state restored from this graph. Current control bindings and
+coordination witnesses are retained with the proposals and their evidence;
+the witness identifies the source state revision used for selection. These
+are inputs and records used by the running agent, with larger structures stored in
+fragments. The observation, fitting, simulation, search and guard algorithms,
+including the native coordination extension, still run as TypeScript
+functions. Registered SRC programs execute from the graph and invoke those
+callbacks. This does not mean that every reasoning algorithm has already
+become an individually editable declarative graph rule.
 
 ### Connected common coordinator at v31
 
@@ -386,6 +436,11 @@ and differential evidence. `scripts/audit-v6-migration.py` regenerates
 modules and therefore exceeds the minimum semantic dependency closure. This
 upper bound must be refined through documented dependency analysis, not by
 silently dropping unimplemented capabilities.
+
+The v40 inventory remains **88 component-verified modules, 59 partially
+transferred modules and 1,222 pending modules**, with zero modules marked
+fully verified. The native preparation and partial-access extensions
+do not increase these Python transfer counts or the 31/76 entry metric.
 
 A copied reference file is not a transfer. An exported SRC tree is not an
 implemented callback. A passing test on one scene is not complete campaign

@@ -1,0 +1,1661 @@
+{
+  "schema": "logos-engine.v6.integrated-game-campaign.v1",
+  "game": "MEMO",
+  "targetLevels": 3,
+  "status": "failed",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "budget": {
+    "levelActionCaps": [
+      600,
+      600,
+      600
+    ],
+    "activeSecondsPerLevel": 360,
+    "clock": "real active compute and native execution"
+  },
+  "source": {
+    "digest": "67c248a865bcd079855367624a39a53027c92611275e8fd2802c637a2a4e56cf",
+    "fileCount": 130,
+    "files": {
+      "src/logos-engine/bounded-weak-cache.ts": "01b7df58a9425f8beb4b61ad77a994d37decf63645aa87d99f5877738b251804",
+      "src/logos-engine/bundle.ts": "e632ee85571bc3e4ab226bb3e8ebe4f67b178400fe16faedd2eb26bcff332a85",
+      "src/logos-engine/canonical.ts": "89a1db87d02a17110d256e95d64d8e80647eaee11f66f41ad098c8366f3fdc6c",
+      "src/logos-engine/create-runtime.ts": "56c62442bb09bdcda9fd388b5ee2555ff56b7771335208c1b930c304dc901a77",
+      "src/logos-engine/interpreter.ts": "2cbbdebec1e2c0c281eaa1ce3353ce33e970d90274f5fa8d4301b3684d87718e",
+      "src/logos-engine/ir.ts": "136370dd6c5ecd957d1a48261033a8945375e13b2eb0070e7922c997e04cc9d5",
+      "src/logos-engine/kernel.ts": "9c7fb668e85bf101f88de439ff43b42bba9566917a2c2b8fb8f13e2ee00e247b",
+      "src/logos-engine/lab-protocol.ts": "d2cc13ebc9c0b9027ca4d279e7f0fdb193714a5d7023473cbb1a2cdfdcbdced1",
+      "src/logos-engine/lab-worker.ts": "28912219793e9d3f5183a30c0ff5c1430682a8e527bba7f45c351222b3e8c433",
+      "src/logos-engine/public-observer.ts": "be263a0f75b2b34d73d9e11a38d2a71ec4c2b443bcca4595496335b5f8103851",
+      "src/logos-engine/v6-alternating-graph-access.ts": "22961c2d6f991e684daa02ff2ed3dae57ee5538b1c3820c4528afea84e221856",
+      "src/logos-engine/v6-alternating-graph-observation.ts": "3dd828b8093f2b3d5aa8164ee40c450f32f6a6ba9f001fe2e40e6aeed91de8ca",
+      "src/logos-engine/v6-alternating-graph-questions.ts": "7765ce9e630a3f96fe6eb53d8ea83f3768ba30bf5bff586895400716153aa31f",
+      "src/logos-engine/v6-animated-contact.ts": "20cc29f5300ca1cfcbe791cb12cbf46d97e6028eb2101578216d8da1b77bf600",
+      "src/logos-engine/v6-arrival-mechanics.ts": "b5199c91625a8b5e72de4965292e4adfcf3e9108a9afbf22fc7c47ab605c753e",
+      "src/logos-engine/v6-attention-memory.ts": "c687af1934bea6ad573783bd2a6fbd88d1c669051a715d412d7c3346098589ad",
+      "src/logos-engine/v6-auxiliary-support-continuation.ts": "07ac7f7c29c4a13e5f8fbe8079f5669a6837e47d4f8826c983167ef5ea245780",
+      "src/logos-engine/v6-auxiliary-support-preparation.ts": "8a74ed9b47754e3e9bd0370a2d6cd7c33ffe7a59f4163070362aee7b893a7345",
+      "src/logos-engine/v6-auxiliary-support.ts": "6df9c42610bb7bd0e3e86333a659fbceb8780b0003696f92c3866ff033c25bef",
+      "src/logos-engine/v6-band-transfer.ts": "9a418ef2fe0563f34845e02fd182ad0414afde093bb1fcc971641a578fb800f8",
+      "src/logos-engine/v6-cavity-clock.ts": "b3da03b69e1655e98094ecef39f12e59bac353bd15a7aa49affcb31f0ca539e2",
+      "src/logos-engine/v6-cavity-kinematics.ts": "a72afe56c453515572478bd86952403391299e0f63b0ee942dec4e2157f2345e",
+      "src/logos-engine/v6-cavity-measurements.ts": "671feab5e9eda5dba9be4ead65345d6f43f5b6b8dc01b9d5d73dd4aef06302a9",
+      "src/logos-engine/v6-cell-patch-observation.ts": "c64981bb7cf091857f0ff1bea5fcc03e22c41e03d93cbde97c14ef0d34de4e12",
+      "src/logos-engine/v6-cell-placement.ts": "143086770cc753c74ef2354161c6fb1cc6e487798a56880312d70916ef7b5830",
+      "src/logos-engine/v6-code-program.ts": "dd2de515b02a331b812608b9cbf69b5ba55856e83773a070e471d7452490f70e",
+      "src/logos-engine/v6-component-matches.ts": "41d4674f343e5a1ba3d4f9e368e238ffd40c67ef5e41e74f9def8ffd6e2a739c",
+      "src/logos-engine/v6-composition-engine.ts": "c259548ad4b74b6aa9eaa589da3856469b73c4e1e1104ccfac55f00e8e1ead56",
+      "src/logos-engine/v6-composition-memory.ts": "567e69aaf134217c15101c3fc4b732df57fabeb3f51156193a82acba8d9a4cc5",
+      "src/logos-engine/v6-configured-arrivals.ts": "85228ebf0f5aaa914be9864bc08de4d7064c020f9beb2388e5aa1571a92b11d7",
+      "src/logos-engine/v6-constellation-cover.ts": "a7c1ac659e38ced3628a614e90c452c82b62b02cc9b6208aa651a7ffa6ab7e95",
+      "src/logos-engine/v6-containment.ts": "db66da09eecc18636440007b9f54ee49266e5aa018082389bcab2834376be21a",
+      "src/logos-engine/v6-contextual-compartments.ts": "07f4e9a56a8c51a75aba8d487916e6fe1a7b350872f3138223f9f1629a047687",
+      "src/logos-engine/v6-coupled-displays.ts": "c29561fab41c12481e41e3b2e51543b920f3ab87139840ed07a677aab053de72",
+      "src/logos-engine/v6-coupled-pair-epoch-anchor.ts": "dc7c2bb0cdf1e1ea6794339ceb209b110fc1b013e49671f8e11ac6bc4b26747f",
+      "src/logos-engine/v6-coupled-pair-evidence.ts": "eccadc2f8e0f24d98bf2bf6f2a0a879d862f6213bfbc02298d2fe28362ee5a17",
+      "src/logos-engine/v6-coupled-pair-observation.ts": "73635ee7efcc4084058a6cfa914a0db1d8c47c51abbc707056042eff76aa24ca",
+      "src/logos-engine/v6-coupled-pair-planning.ts": "6f02ece78e3ccbd28b795c29d607ea980154545ce014cf0a42f92d38dd905a5c",
+      "src/logos-engine/v6-coupled-pair-route.ts": "bf979bb8b33a798f21ffeb484579a5c9fc322be0fcbf67a16cce58fcbe7cfcd1",
+      "src/logos-engine/v6-derive.ts": "4aee722385293266f34f95bca0ab57717df1aceb1b093cce1646fc56610a4189",
+      "src/logos-engine/v6-drm-projector.ts": "d33803653b1c39ff3c38169e0a27a0d5f385e08d1e035845483b4a5b53fa598b",
+      "src/logos-engine/v6-effect-access.ts": "7972704e27c074c8bfbc4a6db1f5f43cf04a08e2dde9da50b092ffbf41e61ec0",
+      "src/logos-engine/v6-factored-return.ts": "a21a0c1adf82768fa31ef3758ec8dbedc509f4b4f9798fa05d6d5a8885b4143b",
+      "src/logos-engine/v6-field-constraints.ts": "b7f5d309a44001ff8cfc9c292f04229f7532daa41da2cd63340fdfd57edb4fa4",
+      "src/logos-engine/v6-fixed-origin.ts": "c0ed190865b69436da80ba005775467917e826bb1f910c23c2a33f2c2fb547a6",
+      "src/logos-engine/v6-fixed-program-calculation.ts": "21e6cfeb51f1ebc8eab82dad568fc2f65c702d398279a5629118fd3fd83b5c82",
+      "src/logos-engine/v6-geometric-scene.ts": "2c2876afbbf615ab4b1119fcfbb484cfab22f95951ec774b1596c1562da68aba",
+      "src/logos-engine/v6-goal-access.ts": "1a52b96bf2ed27170c1c74090a814e9d955329d6e65d48d89bf53f08c532820e",
+      "src/logos-engine/v6-hash.ts": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5",
+      "src/logos-engine/v6-information-goals.ts": "7ad4f42e977c1e8b997c23d01340ec51a5b58cafb3494853de1b5987a59031b8",
+      "src/logos-engine/v6-invited-reduction.ts": "a3433583cbd83d668e736e781c8730f27cc7c337aca4ef87dd3bc22d501115c9",
+      "src/logos-engine/v6-joint-transport.ts": "8cfc3ec9ad1185d9ab2ee43e00baebcdd5f8bb4ff699f7ecd423d7cf4b7dd710",
+      "src/logos-engine/v6-knowledge-store.ts": "e0c6ad4b251719f30668e572cf72a6253fce247ad8de3dae3afd824ef7ca4ffe",
+      "src/logos-engine/v6-metric-composition.ts": "1fcfcfe780ef6599756785392159040cc7f2acfa6356376275778a58e086018d",
+      "src/logos-engine/v6-metric-stack-mechanics.ts": "a114e116a7c401f7ddfde803521990468c825684888b491c61d697c9712bb121",
+      "src/logos-engine/v6-morphology-policy.ts": "a370efb8581356c2dbdb5f322df29ba9fa7a656429ecdb7d629f57b693c97be6",
+      "src/logos-engine/v6-native-authority.ts": "b7b871e09a39004fb0a3b6a784c49f6a6f67b92a9a99ff886eefc4f5cba4018b",
+      "src/logos-engine/v6-native-caller.ts": "107e7cd8d8aad7ccb7205be98d3f28abc9efe3f279861f10b8387e3b5bc992db",
+      "src/logos-engine/v6-native-interface-families.ts": "1434f49f81f5b6c8707db2dafe4f97a2dff7b54cb1b2505064d085d8bb309fe0",
+      "src/logos-engine/v6-native-observer.ts": "87dffa7cf8d7f5b8f645d29ba2996844a604fb846286378503fd16a911c54882",
+      "src/logos-engine/v6-native-owned.ts": "0ea8f174f0af66b3a37cf3bacf47ef8a9e2f7b26f43b645e955b0a5a23130ada",
+      "src/logos-engine/v6-native-runtime.ts": "e0d3ecce3b453290cd06d0c2932951cc85460b9c984fb4f946e576df5db94d24",
+      "src/logos-engine/v6-native-state-graph.ts": "ffeb654334e1c809785ca8c1920fb1e39a4b848265abcaade97406120bc93d5d",
+      "src/logos-engine/v6-native-transition-domain.ts": "e96f781bed5d88204cd347b61ee87b7dd3447b3f57b2ec6a4aba2e023fbe1621",
+      "src/logos-engine/v6-native-types.ts": "4abc1c3af7b869b8e35b369e31cf3c9f1509bc1bc4eec247eef5903b6895292d",
+      "src/logos-engine/v6-observed-derivations.ts": "c48b5601f0895c8cad913690a9216138ec08985aee4e7c7b1e7d0189964f05d6",
+      "src/logos-engine/v6-observed-frontier.ts": "1812e3b6209271420a776d3ff823090488cef4ab19b08f173d2b3a80a2e2c5e0",
+      "src/logos-engine/v6-occurrence-program-observer.ts": "559f7bf2ed94031304bd483efb8ee71015f9b9787345f2a4c193f40facc9cb47",
+      "src/logos-engine/v6-occurrence-recall.ts": "e89ccc130a4a6ad1a19a8c3092684364fb3f5222b8ccbac889d69a5302f85042",
+      "src/logos-engine/v6-occurrence-scene.ts": "ea76d01aa56f560c0ae4831ca8901ed5ee0a7d064dbc1590b547aaaebfc5447f",
+      "src/logos-engine/v6-operations.ts": "4aad959893595a1844721b93ec8897479536f95ccfa890be045656fa1e96fa06",
+      "src/logos-engine/v6-orbit-constraints.ts": "408a175132ab9869db4150dcecabb20d6eafeccfd301f12294eb6de1df57cc5f",
+      "src/logos-engine/v6-ordered-support.ts": "899d3784ac80ad83e113c8e0ad44a1b380bec5d5c6b552b66a1b7c3543b03c79",
+      "src/logos-engine/v6-oriented-coupling.ts": "87b682dab1406d4bcef59095bd3422509f3d13338f81ffc9c1972db6c0e682b8",
+      "src/logos-engine/v6-oriented-handoff-mechanics.ts": "1e0e1392560f7afca9a7988e994da2e321e2ea2dfb8a0fcda2c67095b616b0ca",
+      "src/logos-engine/v6-passage-options.ts": "bf4691d0447e39263bc7f793f5b8577a63e41574a48a6a426fd5e6f3449e8d36",
+      "src/logos-engine/v6-periodic-cell-grids.ts": "20c1b31854eb82118777f213fe4f7478ed3a373a2b20e82d4caef54a7ddb4d70",
+      "src/logos-engine/v6-periodic-sums.ts": "51e3932eb2f0fc141311f8d2bd31d9a49e34c95cc12085e24a37966305bff48f",
+      "src/logos-engine/v6-point-contrasts.ts": "3984da390831630edcc8dcb78e5178d92d8d78df2941d63cd6d8409e0fd2ae90",
+      "src/logos-engine/v6-point-set.ts": "93ed8442779a022e5fd6534ea6eb140c81f08c2f010e2ad1f22a270a70af4268",
+      "src/logos-engine/v6-port-assembly.ts": "fd41bf045465287af77c5bb68497e79c97357250501bd75cfe62e166f5b5694d",
+      "src/logos-engine/v6-program-composition-access.ts": "aace9b089a692adcc47e688cbca7fb9df94f564b5624b5d1ea53045cb37841a9",
+      "src/logos-engine/v6-program-compositions.ts": "78b1ac11775c9c7fccd11756d9e454c883b554adbc162b29142c32817bbc2a26",
+      "src/logos-engine/v6-program-geometry.ts": "2d05fbc64dc83ef4440340193d19a08b5ee15fd40e9f39d0709f019d7fe7a0ed",
+      "src/logos-engine/v6-program-identity.ts": "28f5ef405f24d1994a55df6e7aac20b00a41ddb59f111605e104e5a55f802d35",
+      "src/logos-engine/v6-program-input-access.ts": "6d6020068c41aff129a224c37ce12267cfec968d9ccd31714a8bfa9315b4994b",
+      "src/logos-engine/v6-program-respondent-observations.ts": "6e336609e2aad6f5eb710408c5baf61a34abe4592ce1102d44fd5f22f6498def",
+      "src/logos-engine/v6-program-respondent-search.ts": "4b6139b623c6426fa662e4729c1b124a624317d32240b13d1c2849aa427a13b2",
+      "src/logos-engine/v6-prospective-contact.ts": "6e9028332c46b3baf43a3cc78c961845df6f38b010a6dc68bbe0ece9878076fb",
+      "src/logos-engine/v6-ray-capture-domain.ts": "7996e8baf69eaa1748af50c45489f5cd66de7a12a3739731bfd19679267debb5",
+      "src/logos-engine/v6-reasoning-memory.ts": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a",
+      "src/logos-engine/v6-reflected-cover.ts": "55977d7424fff5e27a4ab70da4afc97992c169fda199030856c0f63111d07a8e",
+      "src/logos-engine/v6-reflection-audit.ts": "3be81a699abc466413d479aaf92afc536f7f34612b4efa3f3bec1a40cc51e43f",
+      "src/logos-engine/v6-rigid-marker-pose.ts": "8c1f67959c4f17f51333a0eec267697332257906649e74f5dfed11a9c1371daf",
+      "src/logos-engine/v6-scored-rewrite.ts": "55969fca1910b4db246392bc80262f12de1328c50938ed31aa1ee5a2b48895ac",
+      "src/logos-engine/v6-shared-series.ts": "4c110a1497abf83b69080c1b61f2afcd44ce83a8a6b295f77ef76014ed37fdf1",
+      "src/logos-engine/v6-sliding-cavity.ts": "93d614ecb1e058cba26739be9d44c2f115a51ad134055c851351a8929d6134e2",
+      "src/logos-engine/v6-slot-substitution.ts": "d9cbf60eab3d9e8672ddb5dd47b3eb8d02faccbb671b011de72a569959550424",
+      "src/logos-engine/v6-src-program.ts": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77",
+      "src/logos-engine/v6-subset-diagnosis.ts": "ba72f80a8ba613cc3590d8c47881555b12a048ba2379d5d5bbaa569f83af0e25",
+      "src/logos-engine/v6-support-measurements.ts": "553f8f62503385bb7364b87923962fa8dd3776c8eab71d2352f765667a33012e",
+      "src/logos-engine/v6-support-navigation-domain.ts": "5229223b7c4a30609d933fe90d379529192599c59a915eb47e279cd0eebde324",
+      "src/logos-engine/v6-support-navigation.ts": "13c9baea9395c4b82d7512e79b57e15aa59d2d04460e16ba3087a57c611c769a",
+      "src/logos-engine/v6-supported-lines.ts": "df989977538936a36c56ff059ae60c3185b4cc623c485fa57c53a85291c9f9b7",
+      "src/logos-engine/v6-surface-program.ts": "705aae0acc4e85ab52e8255fe0b0705a3258a2dfa03dfd2f89d00af9351821e1",
+      "src/logos-engine/v6-target-binding.ts": "c3767ea64e21422a55b5b80ed3830171805f6bfda7db5b3a81d094d344b6eb00",
+      "src/logos-engine/v6-target-method.ts": "bbee49ae3ad55ecc07148ffbb131e7f9ac8ce0847a0b1bbd6747805a992de7dd",
+      "src/logos-engine/v6-transient-contact-memory.ts": "b824a89828e2601888f266e711a03becd7694ad2eacb7198535a27f0e0d6239f",
+      "src/logos-engine/v6-transient-measurements.ts": "6c363563d1e588504dffa3eb6667ea1bbbb69d91ef0177ab52b1c09fcf5ef0d0",
+      "src/logos-engine/v6-transition-learning.ts": "d086cfd9ad9601c8e6f8e627d8a34c1768f7408a0ea2c70fa1b2cc72a517e668",
+      "src/logos-engine/v6-view-frontier.ts": "b2024b93cf43f5426c3d75e90ba452205ece31c86f3bda55960627e5f00d7be3",
+      "src/logos-engine/v6-visual-sequences.ts": "64927ccf8622b5c863bec64bd603f99ae096b12f6687d7548df4c19073186196",
+      "src/logos-engine/v6-word-interface.ts": "039a0a2984a9c036c29f5865b5e8dc9281d836873b064f700965485b21e6ab1a",
+      "src/logos-engine/v6/animated-contact-rules.json": "5bca3105873cd5617d017d29dc775d6ffe3b8ba9386f681b712cf16131e7bc06",
+      "src/logos-engine/v6/catalog.json": "fce784714987c370c604a09d4622ef39665948b2365c656cde80295c6c94c939",
+      "src/logos-engine/v6/frontier-policy.json": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "src/logos-engine/v6/programs.json": "2accc1e89dda42d662fa4a2051345bc8ce7e146c93be307479538c68ab364a28",
+      "src/logos-engine/v7-runtime.ts": "fc87928c00a6cda1e3bb7d22d5411135314f2c7f4676e4495cc5e8929624729b",
+      "src/runtime/browser-games.ts": "4127cafea3717e627885f318eac9650452b7cea8dfd267f945a2af56c6e895da",
+      "src/runtime/contracts.ts": "7e3bbd9e7951b1249622961bc801bdf789fb3538a85a7fb4fdc4befccf0e48bc",
+      "src/runtime/game-worker.ts": "52f62b68c23b2c70c2b18461da042bf08f7fe44f7be068d5fc0e3e2942ac7159",
+      "src/runtime/sra-agent-protocol.ts": "0c755574e90b79202147e98c150c7167386c121b16ac8b554d98ed372e3cd131",
+      "src/runtime/sra-agent-service.ts": "e2c65fd373784b1757f04ba7439041e9f49e85e52bfeb0da80787bddaa1c8e60",
+      "src/runtime/sra-agent-worker.ts": "fa3efa5f1ff5d82dd0ad7b599961e15c68c36512e6085d7e5d7f4ea1734156a8",
+      "src/runtime/sra-agent.ts": "1127bad3109f1450e9a5b0939f2fa7d204989361229892c72e05831ecb56d64f",
+      "src/runtime/v6-agent-client.ts": "6907afe159d13966a77fe1e017bca093e8dda6a9108ace8d9f2a9a3fd356b9dd",
+      "src/runtime/v6-agent-protocol.ts": "597b4d4ab19882a37048e1fa9caeaebea2112b66e25f6294f428bb7916818aa4",
+      "src/runtime/v6-agent-service.ts": "9a2ab7498f0c7ddeb9d3372dd14cf951e817fef42701373f377e3e7263d66780",
+      "src/runtime/v6-agent-worker.ts": "dc46fd485102080ee0fa41b559760769f2f707c7adaf8768a0b7306f308407fc",
+      "src/runtime/v6-agent.ts": "cb01061771a29a2ad59b02560431be8adc8dae0ba3933a81358ba29dcb7789af"
+    }
+  },
+  "gameAssets": {
+    "custom-games.zip": "44d108fe4feed3ce0c9587e90f071876b13730af8136cd54cbfa5c1562d87822",
+    "official-games.zip": "90b5aeaee21ec11285799287445b33d3c19f4ea4894a8a60964117f7757f59ed",
+    "game_bridge.py": "cc9df3ea6eae0057898fa01fd949322c6af0b481030f4c271b9a719f0a07983e",
+    "official_adapter.py": "efead273b89ffe8cf595e41b9f4b25a6106e6cb6e5a7d1013ebc887cfc646837",
+    "custom_level_navigation.py": "8cc1716619aff08915135ebfa093fc305b211e28fabdff2c027d994d84f82c9b"
+  },
+  "actions": [
+    {
+      "sequence": 1,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 31,
+          "y": 30
+        }
+      },
+      "levelBefore": 1,
+      "completedBefore": 0,
+      "levelAfter": 1,
+      "completedAfter": 0,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "16e326b657b5b30544d4e3d0de69cbe2ba728eeaba95a76afffb2994c68926a2",
+      "frameHash": "f48aeb384f365c2a",
+      "animationFrames": 3,
+      "decisionRevision": 1,
+      "actionIndex": 0,
+      "family": "public_occurrence_recall",
+      "executionMs": 6.916662000000542
+    },
+    {
+      "sequence": 2,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 47,
+          "y": 22
+        }
+      },
+      "levelBefore": 1,
+      "completedBefore": 0,
+      "levelAfter": 1,
+      "completedAfter": 0,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "c9da3aaf63aa8a73e58684073e1f9deecdd74ccc6d64df9632d8be3c028dbe0f",
+      "frameHash": "786843d467525a9e",
+      "animationFrames": 3,
+      "decisionRevision": 2,
+      "actionIndex": 0,
+      "family": "public_occurrence_recall",
+      "executionMs": 6.162379000000328
+    },
+    {
+      "sequence": 3,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 48,
+          "y": 37
+        }
+      },
+      "levelBefore": 1,
+      "completedBefore": 0,
+      "levelAfter": 1,
+      "completedAfter": 0,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "daba64b83cd5da24b37e3f916b92dcb3582a498b63cbb484e684d6d379ad9f75",
+      "frameHash": "a9883a56e9c80766",
+      "animationFrames": 3,
+      "decisionRevision": 3,
+      "actionIndex": 0,
+      "family": "public_occurrence_recall",
+      "executionMs": 5.962403999999879
+    },
+    {
+      "sequence": 4,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 17,
+          "y": 40
+        }
+      },
+      "levelBefore": 1,
+      "completedBefore": 0,
+      "levelAfter": 1,
+      "completedAfter": 0,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "24c4a2466c3d420af20601acab9befb4f38a8ffc49ec0274422d04598b715bf2",
+      "frameHash": "2bf57aeaf6d81911",
+      "animationFrames": 3,
+      "decisionRevision": 4,
+      "actionIndex": 0,
+      "family": "public_occurrence_recall",
+      "executionMs": 5.628389999999854
+    },
+    {
+      "sequence": 5,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 15,
+          "y": 23
+        }
+      },
+      "levelBefore": 1,
+      "completedBefore": 0,
+      "levelAfter": 1,
+      "completedAfter": 0,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "e24528586562c8004c0b638a93eb2ccf080d2a39187bf908d938cd183a288ffb",
+      "frameHash": "0454a8cfe43f777b",
+      "animationFrames": 3,
+      "decisionRevision": 5,
+      "actionIndex": 0,
+      "family": "public_occurrence_recall",
+      "executionMs": 5.950234999998429
+    },
+    {
+      "sequence": 6,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 34,
+          "y": 12
+        }
+      },
+      "levelBefore": 1,
+      "completedBefore": 0,
+      "levelAfter": 1,
+      "completedAfter": 0,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "f297b17066ef4f227c2ccf0ad53367509e4003f2e9d3463794006aa7007018e1",
+      "frameHash": "ed6639d6b8ac62c7",
+      "animationFrames": 3,
+      "decisionRevision": 6,
+      "actionIndex": 0,
+      "family": "public_occurrence_recall",
+      "executionMs": 5.925660000000789
+    },
+    {
+      "sequence": 7,
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 37,
+          "y": 13
+        }
+      },
+      "levelBefore": 1,
+      "completedBefore": 0,
+      "levelAfter": 1,
+      "completedAfter": 0,
+      "state": "NOT_FINISHED",
+      "publicPacketSha256": "101a123e2a5eabdcc2c55e552e461b54842a0b1786fdf179aab66d91c551077e",
+      "frameHash": "2a3d4526501f6a7f",
+      "animationFrames": 5,
+      "decisionRevision": 7,
+      "actionIndex": 0,
+      "family": "animated_contact",
+      "executionMs": 24.237103999999817
+    }
+  ],
+  "boundaries": [],
+  "prefixes": [
+    {
+      "id": "prefix_evidence:1",
+      "decisionRevision": 1,
+      "acquiredActions": 1,
+      "family": "public_occurrence_recall",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "proposalKind": "public_occurrence_recall",
+      "fieldSubquestion": "observed_occurrence_recall",
+      "supportMode": null,
+      "graphChain": "40112d07abbf71f028464a8d9b255c275ff38d09cfd28f0bb7c8fe10f57a0d1e",
+      "graphRevision": 210,
+      "callerAcquiredTransitions": 1,
+      "sharedSeries": {
+        "digestScope": "native_observed_program_recall_cell_placement_alternating_graph_and_coupled_support_v6",
+        "digest": "f6f8dc239ce6749f4a7ba84b9ec90226d570f50e9168d1518edf5c5f91e2aa0b",
+        "eventCount": 2,
+        "epochAnchors": [
+          {
+            "epoch": 1,
+            "frame_digest": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+            "interior_digest": "26664aa1ad27ec9dea03d6de024860ab136e541bb17325bbc27ada0fcee009b7",
+            "kind": "coupled_pair_epoch_anchor",
+            "observation_ref": "sra-v6-d2dbaa89-0ee0-49be-ab39-96c949aed3f7:epoch:1:revision:1:frame:27ba4cd855a64b3d",
+            "score": 0
+          }
+        ],
+        "cellPlacementEvidenceCount": 0,
+        "cellPlacementModels": {},
+        "cellPlacementRefusals": [],
+        "markedCollectionResultCount": 0,
+        "programEditSampleCount": 0,
+        "programPhaseAlignmentCount": 0,
+        "programModels": [],
+        "programReconciliationCount": 0,
+        "programRefutedEpochs": [],
+        "respondentProbeCount": 0,
+        "respondentModelCount": 0,
+        "programExtensionRefusalCount": 0,
+        "programInputSupportCount": 0,
+        "alternatingGraphEvidenceCount": 0,
+        "alternatingGraphSampleCount": 0,
+        "alternatingGraphContactCount": 0,
+        "alternatingGraphRemovalCount": 0,
+        "pairEvidenceCount": 0,
+        "supportPreparationCount": 0,
+        "supportControlModelCount": 0
+      }
+    },
+    {
+      "id": "prefix_evidence:2",
+      "decisionRevision": 2,
+      "acquiredActions": 1,
+      "family": "public_occurrence_recall",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "proposalKind": "public_occurrence_recall",
+      "fieldSubquestion": "observed_occurrence_recall",
+      "supportMode": null,
+      "graphChain": "263b973df06fa7ced2d05db8bb7dc0512c33bdddca120af11afa3f76b9bd87ca",
+      "graphRevision": 300,
+      "callerAcquiredTransitions": 2,
+      "sharedSeries": {
+        "digestScope": "native_observed_program_recall_cell_placement_alternating_graph_and_coupled_support_v6",
+        "digest": "a0db89a90967a25382ff993692dd2e15e84aa01eabe6614fcd342bed14ed34ea",
+        "eventCount": 3,
+        "epochAnchors": [
+          {
+            "epoch": 1,
+            "frame_digest": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+            "interior_digest": "26664aa1ad27ec9dea03d6de024860ab136e541bb17325bbc27ada0fcee009b7",
+            "kind": "coupled_pair_epoch_anchor",
+            "observation_ref": "sra-v6-d2dbaa89-0ee0-49be-ab39-96c949aed3f7:epoch:1:revision:1:frame:27ba4cd855a64b3d",
+            "score": 0
+          }
+        ],
+        "cellPlacementEvidenceCount": 0,
+        "cellPlacementModels": {},
+        "cellPlacementRefusals": [],
+        "markedCollectionResultCount": 0,
+        "programEditSampleCount": 0,
+        "programPhaseAlignmentCount": 0,
+        "programModels": [],
+        "programReconciliationCount": 0,
+        "programRefutedEpochs": [],
+        "respondentProbeCount": 0,
+        "respondentModelCount": 0,
+        "programExtensionRefusalCount": 0,
+        "programInputSupportCount": 0,
+        "alternatingGraphEvidenceCount": 0,
+        "alternatingGraphSampleCount": 0,
+        "alternatingGraphContactCount": 0,
+        "alternatingGraphRemovalCount": 0,
+        "pairEvidenceCount": 0,
+        "supportPreparationCount": 0,
+        "supportControlModelCount": 0
+      }
+    },
+    {
+      "id": "prefix_evidence:3",
+      "decisionRevision": 3,
+      "acquiredActions": 1,
+      "family": "public_occurrence_recall",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "proposalKind": "public_occurrence_recall",
+      "fieldSubquestion": "observed_occurrence_recall",
+      "supportMode": null,
+      "graphChain": "bba50d7f294291ad37e71e3138f596acd75cb4476ea0f6876a2f2cae2b8c05a6",
+      "graphRevision": 390,
+      "callerAcquiredTransitions": 3,
+      "sharedSeries": {
+        "digestScope": "native_observed_program_recall_cell_placement_alternating_graph_and_coupled_support_v6",
+        "digest": "e08c332b3df4b06304a1397313b67f69e05d7fea8a93ad6226c522732e183110",
+        "eventCount": 4,
+        "epochAnchors": [
+          {
+            "epoch": 1,
+            "frame_digest": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+            "interior_digest": "26664aa1ad27ec9dea03d6de024860ab136e541bb17325bbc27ada0fcee009b7",
+            "kind": "coupled_pair_epoch_anchor",
+            "observation_ref": "sra-v6-d2dbaa89-0ee0-49be-ab39-96c949aed3f7:epoch:1:revision:1:frame:27ba4cd855a64b3d",
+            "score": 0
+          }
+        ],
+        "cellPlacementEvidenceCount": 0,
+        "cellPlacementModels": {},
+        "cellPlacementRefusals": [],
+        "markedCollectionResultCount": 0,
+        "programEditSampleCount": 0,
+        "programPhaseAlignmentCount": 0,
+        "programModels": [],
+        "programReconciliationCount": 0,
+        "programRefutedEpochs": [],
+        "respondentProbeCount": 0,
+        "respondentModelCount": 0,
+        "programExtensionRefusalCount": 0,
+        "programInputSupportCount": 0,
+        "alternatingGraphEvidenceCount": 0,
+        "alternatingGraphSampleCount": 0,
+        "alternatingGraphContactCount": 0,
+        "alternatingGraphRemovalCount": 0,
+        "pairEvidenceCount": 0,
+        "supportPreparationCount": 0,
+        "supportControlModelCount": 0
+      }
+    },
+    {
+      "id": "prefix_evidence:4",
+      "decisionRevision": 4,
+      "acquiredActions": 1,
+      "family": "public_occurrence_recall",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "proposalKind": "public_occurrence_recall",
+      "fieldSubquestion": "observed_occurrence_recall",
+      "supportMode": null,
+      "graphChain": "f433835f5a98f732511fc9a438b5a781ecb04e9d4fbf8a15ee789066ce732ddf",
+      "graphRevision": 480,
+      "callerAcquiredTransitions": 4,
+      "sharedSeries": {
+        "digestScope": "native_observed_program_recall_cell_placement_alternating_graph_and_coupled_support_v6",
+        "digest": "d209c6d776794188f0b641ec31d44044522cb9b3bdefb1a9dc3a4e41702660d5",
+        "eventCount": 5,
+        "epochAnchors": [
+          {
+            "epoch": 1,
+            "frame_digest": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+            "interior_digest": "26664aa1ad27ec9dea03d6de024860ab136e541bb17325bbc27ada0fcee009b7",
+            "kind": "coupled_pair_epoch_anchor",
+            "observation_ref": "sra-v6-d2dbaa89-0ee0-49be-ab39-96c949aed3f7:epoch:1:revision:1:frame:27ba4cd855a64b3d",
+            "score": 0
+          }
+        ],
+        "cellPlacementEvidenceCount": 0,
+        "cellPlacementModels": {},
+        "cellPlacementRefusals": [],
+        "markedCollectionResultCount": 0,
+        "programEditSampleCount": 0,
+        "programPhaseAlignmentCount": 0,
+        "programModels": [],
+        "programReconciliationCount": 0,
+        "programRefutedEpochs": [],
+        "respondentProbeCount": 0,
+        "respondentModelCount": 0,
+        "programExtensionRefusalCount": 0,
+        "programInputSupportCount": 0,
+        "alternatingGraphEvidenceCount": 0,
+        "alternatingGraphSampleCount": 0,
+        "alternatingGraphContactCount": 0,
+        "alternatingGraphRemovalCount": 0,
+        "pairEvidenceCount": 0,
+        "supportPreparationCount": 0,
+        "supportControlModelCount": 0
+      }
+    },
+    {
+      "id": "prefix_evidence:5",
+      "decisionRevision": 5,
+      "acquiredActions": 1,
+      "family": "public_occurrence_recall",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "proposalKind": "public_occurrence_recall",
+      "fieldSubquestion": "observed_occurrence_recall",
+      "supportMode": null,
+      "graphChain": "0011a8a91bdfa1b98d83c1c4bb839fa8fe9d9f6520bf64b141fa2e37a8dad855",
+      "graphRevision": 569,
+      "callerAcquiredTransitions": 5,
+      "sharedSeries": {
+        "digestScope": "native_observed_program_recall_cell_placement_alternating_graph_and_coupled_support_v6",
+        "digest": "fe0bb7b4e0184f037e2d96d16b81d23102da60d7d6e8c10d202cd64c4798082a",
+        "eventCount": 6,
+        "epochAnchors": [
+          {
+            "epoch": 1,
+            "frame_digest": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+            "interior_digest": "26664aa1ad27ec9dea03d6de024860ab136e541bb17325bbc27ada0fcee009b7",
+            "kind": "coupled_pair_epoch_anchor",
+            "observation_ref": "sra-v6-d2dbaa89-0ee0-49be-ab39-96c949aed3f7:epoch:1:revision:1:frame:27ba4cd855a64b3d",
+            "score": 0
+          }
+        ],
+        "cellPlacementEvidenceCount": 0,
+        "cellPlacementModels": {},
+        "cellPlacementRefusals": [],
+        "markedCollectionResultCount": 0,
+        "programEditSampleCount": 0,
+        "programPhaseAlignmentCount": 0,
+        "programModels": [],
+        "programReconciliationCount": 0,
+        "programRefutedEpochs": [],
+        "respondentProbeCount": 0,
+        "respondentModelCount": 0,
+        "programExtensionRefusalCount": 0,
+        "programInputSupportCount": 0,
+        "alternatingGraphEvidenceCount": 0,
+        "alternatingGraphSampleCount": 0,
+        "alternatingGraphContactCount": 0,
+        "alternatingGraphRemovalCount": 0,
+        "pairEvidenceCount": 0,
+        "supportPreparationCount": 0,
+        "supportControlModelCount": 0
+      }
+    },
+    {
+      "id": "prefix_evidence:6",
+      "decisionRevision": 6,
+      "acquiredActions": 1,
+      "family": "public_occurrence_recall",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "proposalKind": "public_occurrence_recall",
+      "fieldSubquestion": "observed_occurrence_recall",
+      "supportMode": null,
+      "graphChain": "c6446ca399aea8fb77122affe332a74c68bbea3e2d615f9feb06b1cf157d7f73",
+      "graphRevision": 663,
+      "callerAcquiredTransitions": 6,
+      "sharedSeries": {
+        "digestScope": "native_observed_program_recall_cell_placement_alternating_graph_and_coupled_support_v6",
+        "digest": "69a788ab9ec31509e93faf1e9d96399068eb593e0bd989f21013f3bcf48e03b2",
+        "eventCount": 7,
+        "epochAnchors": [
+          {
+            "epoch": 1,
+            "frame_digest": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+            "interior_digest": "26664aa1ad27ec9dea03d6de024860ab136e541bb17325bbc27ada0fcee009b7",
+            "kind": "coupled_pair_epoch_anchor",
+            "observation_ref": "sra-v6-d2dbaa89-0ee0-49be-ab39-96c949aed3f7:epoch:1:revision:1:frame:27ba4cd855a64b3d",
+            "score": 0
+          }
+        ],
+        "cellPlacementEvidenceCount": 0,
+        "cellPlacementModels": {},
+        "cellPlacementRefusals": [],
+        "markedCollectionResultCount": 0,
+        "programEditSampleCount": 0,
+        "programPhaseAlignmentCount": 0,
+        "programModels": [],
+        "programReconciliationCount": 0,
+        "programRefutedEpochs": [],
+        "respondentProbeCount": 0,
+        "respondentModelCount": 0,
+        "programExtensionRefusalCount": 0,
+        "programInputSupportCount": 0,
+        "alternatingGraphEvidenceCount": 0,
+        "alternatingGraphSampleCount": 0,
+        "alternatingGraphContactCount": 0,
+        "alternatingGraphRemovalCount": 0,
+        "pairEvidenceCount": 0,
+        "supportPreparationCount": 0,
+        "supportControlModelCount": 0
+      }
+    },
+    {
+      "id": "prefix_evidence:7",
+      "decisionRevision": 7,
+      "acquiredActions": 1,
+      "family": "animated_contact",
+      "operations": [
+        "OP29",
+        "OP30",
+        "OP31"
+      ],
+      "proposalKind": "measured_animated_contact",
+      "fieldSubquestion": null,
+      "supportMode": null,
+      "graphChain": "b762bb83e9a940b662173f448be6f303f199a7e6c9593cd4432a12aa56df0b35",
+      "graphRevision": 751,
+      "callerAcquiredTransitions": 7,
+      "sharedSeries": {
+        "digestScope": "native_observed_program_recall_cell_placement_alternating_graph_and_coupled_support_v6",
+        "digest": "69a788ab9ec31509e93faf1e9d96399068eb593e0bd989f21013f3bcf48e03b2",
+        "eventCount": 7,
+        "epochAnchors": [
+          {
+            "epoch": 1,
+            "frame_digest": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+            "interior_digest": "26664aa1ad27ec9dea03d6de024860ab136e541bb17325bbc27ada0fcee009b7",
+            "kind": "coupled_pair_epoch_anchor",
+            "observation_ref": "sra-v6-d2dbaa89-0ee0-49be-ab39-96c949aed3f7:epoch:1:revision:1:frame:27ba4cd855a64b3d",
+            "score": 0
+          }
+        ],
+        "cellPlacementEvidenceCount": 0,
+        "cellPlacementModels": {},
+        "cellPlacementRefusals": [],
+        "markedCollectionResultCount": 0,
+        "programEditSampleCount": 0,
+        "programPhaseAlignmentCount": 0,
+        "programModels": [],
+        "programReconciliationCount": 0,
+        "programRefutedEpochs": [],
+        "respondentProbeCount": 0,
+        "respondentModelCount": 0,
+        "programExtensionRefusalCount": 0,
+        "programInputSupportCount": 0,
+        "alternatingGraphEvidenceCount": 0,
+        "alternatingGraphSampleCount": 0,
+        "alternatingGraphContactCount": 0,
+        "alternatingGraphRemovalCount": 0,
+        "pairEvidenceCount": 0,
+        "supportPreparationCount": 0,
+        "supportControlModelCount": 0
+      }
+    }
+  ],
+  "requests": [
+    {
+      "operation": "init",
+      "sequence": 0,
+      "kind": "action",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 0,
+      "cycles": 0,
+      "activeSeconds": 0.9616266160000004,
+      "elapsedMs": 998.8650690000004,
+      "family": "public_occurrence_recall",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 0,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 1,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 1
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 1
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 1
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 1
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 1
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 2
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 1,
+      "kind": "boundary",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 1,
+      "cycles": 1,
+      "activeSeconds": 1.497315472000001,
+      "elapsedMs": 533.6221820000001,
+      "family": "public_occurrence_recall",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 1,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 3,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 2
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 2
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 2
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 2
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 3
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "resume",
+      "sequence": 1,
+      "kind": "action",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 1,
+      "cycles": 1,
+      "activeSeconds": 1.8392965720000012,
+      "elapsedMs": 343.18589599999996,
+      "family": "public_occurrence_recall",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 1,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 3,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 2
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 2
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 2
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 2
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 2
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 3
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 2,
+      "kind": "boundary",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 2,
+      "cycles": 2,
+      "activeSeconds": 2.310942492000002,
+      "elapsedMs": 469.6283139999996,
+      "family": "public_occurrence_recall",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 2,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 5,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 3
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 3
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 3
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 3
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 4
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "resume",
+      "sequence": 2,
+      "kind": "action",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 2,
+      "cycles": 2,
+      "activeSeconds": 2.623374441000002,
+      "elapsedMs": 313.3108149999998,
+      "family": "public_occurrence_recall",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 2,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 5,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 3
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 3
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 3
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 3
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 3
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 4
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 3,
+      "kind": "boundary",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 3,
+      "cycles": 3,
+      "activeSeconds": 3.1068601290000015,
+      "elapsedMs": 482.1122719999994,
+      "family": "public_occurrence_recall",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 3,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 7,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 4
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 4
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 4
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 4
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 4
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 5
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "resume",
+      "sequence": 3,
+      "kind": "action",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 3,
+      "cycles": 3,
+      "activeSeconds": 3.4831466060000014,
+      "elapsedMs": 377.303406,
+      "family": "public_occurrence_recall",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 3,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 7,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 4
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 4
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 4
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 4
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 4
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 5
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 4,
+      "kind": "boundary",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 4,
+      "cycles": 4,
+      "activeSeconds": 4.022833632000001,
+      "elapsedMs": 537.8014760000005,
+      "family": "public_occurrence_recall",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 4,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 9,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 5
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "resume",
+      "sequence": 4,
+      "kind": "action",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 4,
+      "cycles": 4,
+      "activeSeconds": 4.391424408,
+      "elapsedMs": 369.5684880000008,
+      "family": "public_occurrence_recall",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 4,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 9,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 5
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 5
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 5
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 5
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 5
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 6
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 5,
+      "kind": "boundary",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 5,
+      "cycles": 5,
+      "activeSeconds": 4.886832082999998,
+      "elapsedMs": 493.4879839999994,
+      "family": "public_occurrence_recall",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 5,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 11,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 6
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 6
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 6
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 6
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 6
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 7
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "resume",
+      "sequence": 5,
+      "kind": "action",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 5,
+      "cycles": 5,
+      "activeSeconds": 5.3373596759999975,
+      "elapsedMs": 451.5999350000002,
+      "family": "public_occurrence_recall",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 5,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 11,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 6
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 6
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 6
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 6
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 6
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 7
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 6,
+      "kind": "boundary",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 6,
+      "cycles": 6,
+      "activeSeconds": 5.954336451999999,
+      "elapsedMs": 615.2851809999993,
+      "family": "public_occurrence_recall",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 7
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 7
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 7
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 7
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 7
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 8
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "resume",
+      "sequence": 6,
+      "kind": "action",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 6,
+      "cycles": 6,
+      "activeSeconds": 6.4970149909999995,
+      "elapsedMs": 543.6520839999994,
+      "family": "animated_contact",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 6,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 13,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 7
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 7
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 7
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 7
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 7
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 8
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "advance",
+      "sequence": 7,
+      "kind": "boundary",
+      "reason": null,
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 7,
+      "cycles": 7,
+      "activeSeconds": 7.002335316999998,
+      "elapsedMs": 485.87325600000077,
+      "family": "animated_contact",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 7,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 15,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 8
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 8
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 8
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    },
+    {
+      "operation": "resume",
+      "sequence": 7,
+      "kind": "stopped",
+      "reason": "frontier_unknown",
+      "level": 1,
+      "levelsCompleted": 0,
+      "actions": 7,
+      "cycles": 7,
+      "activeSeconds": 7.346829669,
+      "elapsedMs": 345.46743699999934,
+      "family": "animated_contact",
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 7,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 15,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 8
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 8
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 8
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 8
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 8
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 9
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      }
+    }
+  ],
+  "domainAssessments": [],
+  "baseline": null,
+  "pythonAgentModules": [],
+  "failure": "Did not complete MEMO level 1: V6 stopped: frontier_unknown. Its acquired evidence is retained for inspection.",
+  "initial": {
+    "publicPacketSha256": "fd3b0340c7237bcd73764456732c720c18f87c33509ab7d4aaba9dd4936c1e3a",
+    "state": "NOT_FINISHED",
+    "level": 1,
+    "levelsCompleted": 0
+  },
+  "sourceUnchangedDuringRun": true,
+  "final": {
+    "actions": 7,
+    "levelsCompleted": 0,
+    "level": 1,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "frontier_unknown",
+    "activeSeconds": 7.346829669,
+    "prefixes": 7,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 7,
+      "boundaryReplays": 0,
+      "goalEvents": 0,
+      "frontierDeltas": 15,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 8
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 8
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 8
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 8
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 8
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 9
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 7,
+      "resume": 7
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.9.0"
+  },
+  "elapsedSeconds": 11.273333348
+}

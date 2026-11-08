@@ -45,7 +45,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.9.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.10.0';
 const SELECTION_PROGRAM = 'v6.composition_strategy.choose';
 type R = Record<string, any>;
 const EPISODE = 'common-observation-frontier';
@@ -344,36 +344,53 @@ export class NativeV6Runtime implements NativeV6Backend {
 
   /**
    * Explicit native coordination extension. The unchanged Python caller can
-   * mistake a current cross for an unrelated invitation after learning a
-   * program, then block every other family after its no-effect response.
-   * A currently guarded, acquired program model supplies a stronger question.
-   * Defer only that unlearned invitation and retain the ordinary SRC/window
-   * order. No game identity, preferred command or expected victory is supplied.
+   * select a visual invitation despite an independently acquired preparation.
+   * Inspect the next window choice in declared order. Its family must attest
+   * actual acquired evidence and pass its current guard. No later learned
+   * candidate can lend its priority to an earlier unsupported proposal.
+   * Neither the evidence nor this deferral is an execution authorization.
    */
   private async deferUnlearnedInvitation(invitation: NativeProposal): Promise<boolean> {
     if (invitation.kind !== 'measured_animated_contact' || (invitation as R).animated_contact_plan?.mode !== 'invitation'
       || !this.planning || !this.knowledge || !this.current || !this.observation) return false;
     const group = this.groups.find(candidate => candidate.id === 'window_constraints');
-    const index = group?.entryPoints?.indexOf('observed_program_composition') ?? -1;
-    if (!group || index < 0) return false;
-    const family = this.families.find(candidate => candidate.id === group.families[index]);
-    if (!family?.proposeInSubquestion || objectValue(this.knowledge.value(`family_activation:${family.id}`)).enabled !== true) return false;
-    const key = 'window_constraints:observed_program_composition';
-    if (!this.planning.entryOffers.has(key)) this.planning.entryOffers.set(key,
-      await family.proposeInSubquestion('window_constraints', 'observed_program_composition', this.observation,
-        this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution));
-    const candidate = this.planning.entryOffers.get(key);
-    if (!candidate || candidate.status !== 'proposed' || !['public_program_composition', 'public_program_respondent_probe'].includes(candidate.kind)) return false;
-    const model = (candidate as R).program_composition_plan?.model ?? (candidate as R).respondent_probe_plan?.model;
-    if (model?.status !== 'conditional_program_composition_model' || !model.model_id || !model.evidence_refs?.length) return false;
-    const guard = await family.before(candidate, 0, this.current, this.observation);
-    if (!guard.admitted) return false;
-    const evidence = { rule: 'retained_program_preparation_before_unlearned_invitation', observation_ref: this.observation.observation_ref,
-      deferred_proposal_id: invitation.proposal_id, preferred_proposal_id: candidate.proposal_id,
-      model_id: model.model_id, guard_reason: guard.reason,
-      scope: 'Native coordination extension; conditional learned preparation, not an original Python selection rule.' };
-    this.planning.coordination.push(evidence); this.note({ kind: 'native_coordination', ...evidence });
-    return true;
+    if (!group) return false;
+    for (const [index, id] of group.families.entries()) {
+      const family = this.families.find(candidate => candidate.id === id);
+      if (!family || objectValue(this.knowledge.value(`family_activation:${id}`)).enabled !== true) continue;
+      // A provider without this read-only contract remains in normal source
+      // order; do not speculate past it or execute its question for arbitration.
+      if (!family.learnedPreparationWitness) return false;
+      const entry = group.entryPoints?.[index], key = `${group.id}:${entry}`;
+      let candidate: NativeProposal | null;
+      if (entry && this.planning.entryOffers.has(key)) candidate = this.planning.entryOffers.get(key)!;
+      else {
+        candidate = entry ? await family.proposeInSubquestion!(group.id, entry, this.observation,
+          this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution)
+          : family.proposeInGroup ? await family.proposeInGroup(group.id, this.observation,
+            this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution)
+          : await family.propose(this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution);
+        if (entry) this.planning.entryOffers.set(key, candidate);
+      }
+      if (!candidate) continue;
+      if (candidate.status !== 'proposed') return false;
+      const witness = await family.learnedPreparationWitness(candidate, this.observation);
+      if (!witness || witness.status !== 'conditional_acquired_preparation'
+        || witness.observation_ref !== this.observation.observation_ref
+        || !witness.model_ids.length || !witness.evidence_refs.length) return false;
+      const guard = await family.before(candidate, 0, this.current, this.observation);
+      if (!guard.admitted) return false;
+      const stateRef = `family_state:${family.id}`;
+      const evidence = { rule: 'retained_learned_preparation_before_unlearned_invitation', observation_ref: this.observation.observation_ref,
+        deferred_proposal_id: invitation.proposal_id, preferred_proposal_id: candidate.proposal_id,
+        model_id: witness.model_ids[0], learned_preparation: witness,
+        source_state_ref: stateRef, source_state_revision: this.knowledge.node(stateRef).revision,
+        guard_reason: guard.reason,
+        scope: 'Native coordination extension; conditional learned preparation, not an original Python selection rule.' };
+      this.planning.coordination.push(evidence); this.note({ kind: 'native_coordination', ...evidence });
+      return true;
+    }
+    return false;
   }
 
   private async authorize(execution: NativeExecution): Promise<boolean> {
@@ -659,7 +676,7 @@ export class NativeV6Runtime implements NativeV6Backend {
         sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
         sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,
         nativeCallerExtensions: ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
-          'retained_program_preparation_before_unlearned_invitation'],
+          'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation'],
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
       srcDecision: this.selectionReceipt,
       whyAct: this.authority?.snapshot() ?? { enabled: false, scope: 'injected_family_test_runtime' },
@@ -837,7 +854,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const interfaces = createNativeInterfaceFamilies();
   const recall = createNativeSharedSeriesFamily((configuration.window_constraints as R).occurrence_recall,
     configuration.coupled_support_composition, configuration.alternating_graph_composition,
-    (configuration.window_constraints as R).cell_patch_composition);
+    (configuration.window_constraints as R).cell_patch_composition, { currentProgramAccess: true });
   const policy = loaded.common as R;
   const supportChildren: Record<string, NativeFamily<any>> = {
     ordered_support_transfer: ordered,
@@ -902,7 +919,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     declarations: loaded, families: [...families.map(f => f.id), ...CALLER_PROVIDERS], groups, authority: 'native_original_why_act', caller: 'native_common_coordinator',
     selectionProgram: nativeProgramDescriptions().find(program => program.id === 'v6.composition_strategy.choose')?.transitiveSourceHash ?? null,
     nativeCallerExtensions: ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
-      'retained_program_preparation_before_unlearned_invitation'],
+      'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation'],
     fullV6Parity: false };
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');

@@ -155,6 +155,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             proposalKind: evidence.proposal.kind ?? null, fieldSubquestion: evidence.proposal.field_subquestion ?? null,
             ...(evidence.proposal.strategy_receipt?.native_coordination?.length
               ? { nativeCoordination: evidence.proposal.strategy_receipt.native_coordination } : {}),
+            ...((evidence.proposal.program_composition_plan ?? evidence.proposal.respondent_probe_plan)?.current_program_access
+              ? { currentProgramAccess: (evidence.proposal.program_composition_plan ?? evidence.proposal.respondent_probe_plan).current_program_access } : {}),
             supportMode: evidence.proposal.support_preparation_plan?.mode ?? null,
             graphChain: graph.chain, graphRevision: snapshot.graphRevision, callerAcquiredTransitions: snapshot.caller.acquiredTransitions,
             sharedSeries: { digestScope: snapshot.coverage.sharedSeriesDigestScope, digest: series.digest,

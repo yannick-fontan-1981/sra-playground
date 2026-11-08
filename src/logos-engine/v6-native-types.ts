@@ -80,6 +80,16 @@ export interface NativeRecordResult extends NativeRecord {
   readonly events: readonly unknown[];
 }
 
+/** A conditional justification from actual acquired state, never an action ticket. */
+export interface NativeLearnedPreparationWitness {
+  readonly status: 'conditional_acquired_preparation';
+  readonly kind: 'program_model' | 'occurrence_correspondence';
+  readonly observation_ref: string;
+  readonly model_ids: readonly string[];
+  readonly evidence_refs: readonly string[];
+  readonly qualification: string;
+}
+
 /** Cooperative scheduling does not authorize extra actions or clear memory. */
 export interface NativeExecution {
   readonly signal?: AbortSignal;
@@ -124,6 +134,8 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
     frames: readonly NativeRows[]): NativeMaybePromise<NativeRecordResult>;
   /** Source refusal, read only after the real prefix has been fully acquired. */
   requestedStopReason?(observation: NativeObservation): string | null;
+  /** Read-only: proves acquisition separately from the current before-action guard. */
+  learnedPreparationWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeLearnedPreparationWitness | null>;
   state(): NativeRecord;
   /** All persistent state is reconstructed from the authoritative shared nodes. */
   restore(state: NativeRecord): void;

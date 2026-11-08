@@ -18,6 +18,7 @@ import { CellPlacementMemory, cellPlacementBefore } from './v6-cell-placement.ts
 import { markedCollectionQuestion, observedProgramQuestion, observedProgramBefore, observedProgramAfter,
   recordObservedProgram, recordObservedProgramPacket } from './v6-program-composition-access.ts';
 import { programIdentity } from './v6-program-identity.ts';
+import { sharedLearnedPreparationWitness } from './v6-learned-preparation.ts';
 import { projection, rowsDigest } from './v6-native-observer.ts';
 import type { ObservedInputDomain } from './v6-native-observer.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
@@ -27,6 +28,11 @@ import type { OccurrenceRecord as R } from './v6-occurrence-scene.ts';
 import type { NativeFamily, NativeRows, NativePublicObservation, NativeProposal } from './v6-native-types.ts';
 
 export const SHARED_SERIES_DIGEST_SCOPE = 'native_observed_program_recall_cell_placement_alternating_graph_and_coupled_support_v6';
+
+export interface NativeSharedSeriesOptions {
+  /** Native current-control revalidation; the default preserves source contracts. */
+  currentProgramAccess?: boolean;
+}
 
 /** The inherited public reducer participates in the native mutation guard. */
 class SharedOccurrenceMemory extends OccurrenceRecallAccess {
@@ -111,8 +117,13 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   private certified: SharedWorkingStamp | null = null;
   private checkpoint: { value: R; stamp: SharedWorkingStamp; certified: boolean } | null = null;
   private accepted: { value: Readonly<R>; stamp: SharedWorkingStamp } | null = null;
+  private readonly currentProgramAccess: boolean;
 
-  constructor(config: OccurrenceRecallPolicy) { super(config); this.certified = this.workingStamp(); }
+  constructor(config: OccurrenceRecallPolicy, options: NativeSharedSeriesOptions = {}) {
+    super(config);
+    this.currentProgramAccess = options.currentProgramAccess === true;
+    this.certified = this.workingStamp();
+  }
 
   private workingStamp(): SharedWorkingStamp {
     return { memory: this.memory, memoryRevision: this.memory.nativeRevision, memoryWitness: workingWitness(this.memory),
@@ -196,6 +207,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       throw new TypeError('Program search requires the current level deadline');
     }
     const config = { remaining_level_actions: remaining, level_deadline: levelDeadline === null ? null : levelDeadline / 1000,
+      ...(this.currentProgramAccess ? { native_current_program_access: true } : {}),
       ...(now ? { now: () => now() / 1000 } : {}) };
     const proposal = observedProgramQuestion(this.memory, observation, rows, Math.min(16, remaining), config)
       ?? markedCollectionQuestion(this.memory, observation, rows, inputs);
@@ -389,9 +401,11 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   }
 }
 
-export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, coupledConfig?: R, graphConfig?: R, cellConfig?: R): NativeFamily {
-  const family = new SharedSeriesConstraint(config), adapter = asNativeOccurrenceRecallFamily(family);
+export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, coupledConfig?: R, graphConfig?: R, cellConfig?: R,
+  options: NativeSharedSeriesOptions = {}): NativeFamily {
+  const family = new SharedSeriesConstraint(config, options), adapter = asNativeOccurrenceRecallFamily(family);
   return { ...adapter, nativeState: () => family.nativeState(), restoreNative: state => family.restoreNative(state),
+    learnedPreparationWitness: (proposal, observation) => sharedLearnedPreparationWitness(family.memory, config, proposal, observation),
     requestedStopReason: observation => family.memory.compositionRefutedEpochs.has(observation.level_epoch)
       ? 'program_composition_projection_refuted' : family.memory.requestedStopReason,
     proposeInSubquestion: async (group, subquestion, observation, rows, inputs, remaining, execution) => {

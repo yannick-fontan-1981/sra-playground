@@ -66,7 +66,8 @@ export interface RespondentSearchOptions extends ProgramSearchOptions {
 
 export function searchRespondentProgram(existing: readonly number[], ownBase: readonly number[], targets: readonly R[], model: R, field: R,
   options: RespondentSearchOptions): R {
-  const prefix = [...existing].reverse(), labels = [...new Set<number>([...(model.moves as R[]).map(move => move.label), model.interaction.label])].sort((a, b) => a - b);
+  const prefix = [...existing].reverse(), labels = [...new Set<number>([...(model.moves as R[]).map(move => move.label), model.interaction.label])]
+    .sort((a, b) => a - b).filter(label => options.insertable_labels === undefined || options.insertable_labels.includes(label));
   const hypotheses: RespondentHypothesis[] = (['top', 'bottom'] as const).flatMap(removed_end =>
     (['own_bearer_only', 'all_other_bearers'] as const).map(interaction_scope => ({ removed_end, interaction_scope })));
   const now = options.now ?? (() => performance.now() / 1000);

@@ -16,9 +16,11 @@ import { occurrenceCollectionScene as collectionScene, occurrenceMeasuredControl
   occurrenceRectangularMembers as rectangularMembers, occurrenceProgramTranslationCandidates as translationCandidates } from './v6-occurrence-program-observer.ts';
 import { decodeProgramStacks, renderProgramLayers } from './v6-program-geometry.ts';
 import { fitProgramCompositionModel, programSurface, searchProgram } from './v6-program-compositions.ts';
+import type { ProgramSearchOptions } from './v6-program-compositions.ts';
 import { searchRespondentProgram, searchRespondentReplacement } from './v6-program-respondent-search.ts';
 import { observeRespondentProgramPacket } from './v6-program-respondent-observations.ts';
 import { learnProgramInputSupport, candidateProgramInputSites } from './v6-program-input-access.ts';
+import { bindCurrentProgramAccess, currentProgramAccessMatches } from './v6-program-current-access.ts';
 
 type Memory = OccurrenceRecallAccess;
 type GuardBefore = (proposal: R, index: number, rows: NativeRows, meta: R) => R;
@@ -42,6 +44,38 @@ export function programEditor(rows: NativeRows, model: R): R | null {
   const members = rectangularMembers(rows, [{ bbox: [x, 0, x + width - 1, height - 1] }], palette(current), limit);
   return { controls: current.map(control => ({ ...control, patch: patch(rows, control.bbox) })), members,
     member_box: [x, 0, x + width - 1, limit - 1], member_size: [width, height], offset: [dx, dy], limit };
+}
+
+/**
+ * The original editor remains the default. The native caller may explicitly
+ * revalidate a partial current control set when that source premise fails.
+ * This changes available editing inputs, never the acquired operator model.
+ */
+function questionProgramEditor(rows: NativeRows, model: R, observation: R, config: R): R | null {
+  const source = programEditor(rows, model);
+  if (source !== null || config.native_current_program_access !== true) return source;
+  const current = bindCurrentProgramAccess(rows, model, observation);
+  return current.status === 'bound' ? current.layout : null;
+}
+
+function currentAccessPlan(plan: R): R {
+  return truth(plan.layout?.current_access) ? { ...plan, current_program_access: plan.layout.current_access } : plan;
+}
+
+function memberPalette(layout: R, model: R): Set<number> {
+  // A missing insertion control does not erase a learned label from an
+  // existing collection, including the collection carried by another object.
+  return palette(truth(layout.current_access) ? model.editor_geometry.controls : layout.controls);
+}
+
+function currentProgramPlanMatches(rows: NativeRows, plan: R): boolean {
+  const access = plan.current_program_access, layout = plan.layout;
+  if (!equal(access, layout?.current_access) || !currentProgramAccessMatches(rows, plan.model, access)) return false;
+  const geometry = access.geometry, controls: R[] = layout.controls;
+  if (!['member_box', 'member_size', 'offset', 'limit'].every(key => equal(layout[key], geometry[key]))
+    || !Array.isArray(controls) || controls.length !== geometry.matches.length) return false;
+  return (geometry.matches as R[]).every(match => controls.filter(control => control.color === match.label
+    && equal(control.bbox, match.current_bbox) && control.area === match.area && identity(control.patch) === match.patch_digest).length === 1);
 }
 
 export function projectedProgramMembers(rows: NativeRows, layout: R, values: Set<number>): R[] {
@@ -99,6 +133,8 @@ export function markedCollectionQuestion(memory: Memory, observation: R, rows: N
 }
 
 export function packageObservedProgram(observation: R, plan: R, why: string): R | null {
+  plan = currentAccessPlan(plan);
+  if (truth(plan.current_program_access)) why += ' Native current-control revalidation binds only the currently attested insertion inputs; retained operators in existing words remain known, and every projection still requires physical confirmation.';
   const actions = (plan.steps as R[]).map(step => step.action);
   if (actions.some(action => !observation.available_action_refs.includes(action.action_ref))) return null;
   const ref = 'C_program_composition_' + identity(plan).slice(0, 18);
@@ -139,9 +175,9 @@ export function respondentProgramQuestion(observation: R, rows: NativeRows, mode
     expected_first_base: [owner.base[0] + ownVector[0]!, owner.base[1] + ownVector[1]!],
     scope: 'Two phase-observed opposite translations, conditional on traversability. Expected final return to the input-bearing composition; input availability is not guaranteed.' };
   const command = { action_ref: model.command_ref }, actions = [insert, command];
-  const plan = { epoch: observation.level_epoch, score: observation.levels_completed, observation_ref: observation.observation_ref,
+  const plan = currentAccessPlan({ epoch: observation.level_epoch, score: observation.levels_completed, observation_ref: observation.observation_ref,
     frame_digest: identity(rows), model, layout, candidates, own_prediction: ownPrediction, owner_before: owner, insert_control: control,
-    prepared_word: word, actions, command, own_collection_empty: false, stop_after_sealed_probe: true, expected_final_own_base: owner.base };
+    prepared_word: word, actions, command, own_collection_empty: false, stop_after_sealed_probe: true, expected_final_own_base: owner.base });
   const ref = 'C_respondent_operator_' + identity(plan).slice(0, 18);
   const why = 'Preserve the composition that exposes editing controls while testing another bearer: append a measured opposite operator, verify that edit, then execute the reversible pair. Separate own return, input restoration, and other-bearer translations are falsifiable hypotheses; stop after public reconciliation.';
   const facts = { public_other_word_contains_motion: true, own_collection_observed_single: true,
@@ -158,9 +194,10 @@ export function respondentProgramQuestion(observation: R, rows: NativeRows, mode
 }
 
 /** Source search clocks are seconds; only the common native wrapper converts ms. */
-function searchOptions(config: R, maxPrefix: number): { max_new_actions: number; deadline: number; now?: () => number } {
+function searchOptions(config: R, maxPrefix: number, layout?: R): ProgramSearchOptions {
   const now: () => number = config.now ?? (() => performance.now() / 1000);
   return { max_new_actions: config.remaining_level_actions ?? maxPrefix, deadline: config.level_deadline ?? now() + 360,
+    ...(truth(layout?.current_access) ? { insertable_labels: colors(layout!.controls) } : {}),
     ...(config.now ? { now } : {}) };
 }
 
@@ -169,18 +206,22 @@ export function programCompositionQuestion(memory: Memory, observation: R, rows:
   if (!memory.compositionModels.length || memory.compositionRefutedEpochs.has(observation.level_epoch)) return null;
   const model = memory.compositionModels.at(-1)!, continuation = memory.compositionContinuation;
   if (truth(continuation) && continuation!.epoch === observation.level_epoch && continuation!.frame_digest === identity(rows)) {
+    if (truth(continuation!.current_program_access) && config.native_current_program_access !== true) return null;
     const turn = continuation!.turns[0], plan = { ...continuation, model, mode: 'execute', turns: continuation!.turns,
       frame_digest: identity(rows), observation_ref: observation.observation_ref, score: observation.levels_completed,
       steps: [{ mode: 'execute', before_word: continuation!.word, after_word: continuation!.word, action: { action_ref: model.command_ref }, turn }] };
     return packageObservedProgram(observation, plan, 'Continue the previously composed program after its entire expected public projection was matched; no new path search.');
   }
-  const layout = programEditor(rows, model);
+  const layout = questionProgramEditor(rows, model, observation, config);
   if (!layout) return null;
   const controls: R[] = layout.controls, existing = colors(layout.members);
   if (!existing.length) {
     const learned = (model.moves as R[]).find(move => move.status === 'phase_observed_translation');
     const observed = memory.programEvents.length ? translationCandidates(memory.programEvents.at(-1)!.alignment) : [];
-    const label = observed.length ? observed[0]!.label : learned ? learned.label : null;
+    const label = truth(layout.current_access)
+      ? [...observed, ...(model.moves as R[]).filter(move => move.status === 'phase_observed_translation')]
+        .find(move => controls.some(control => control.color === move.label))?.label ?? null
+      : observed.length ? observed[0]!.label : learned ? learned.label : null;
     const control = controls.find(candidate => candidate.color === label);
     if (!control) return null;
     const action = pointAction(control.bbox);
@@ -199,7 +240,7 @@ export function programCompositionQuestion(memory: Memory, observation: R, rows:
   }
   const field = programSurface(rows, model, objects, owner.base);
   if (!field) return null;
-  const found = searchProgram(existing, owner.base, targets, model, field, searchOptions(config, maxPrefix));
+  const found = searchProgram(existing, owner.base, targets, model, field, searchOptions(config, maxPrefix, layout));
   if (found.status !== 'proposed') return null;
   const selected = found.plan, steps: R[] = []; let current = [...existing];
   for (const label of selected.edits as number[]) {
@@ -220,6 +261,7 @@ export function programCompositionQuestion(memory: Memory, observation: R, rows:
 export function observedProgramQuestion(memory: Memory, observation: R, rows: NativeRows, maxPrefix: number, config: R): R | null {
   const continuation = memory.compositionContinuation;
   if (truth(continuation) && truth(continuation!.respondent_predictions)) {
+    if (truth(continuation!.current_program_access) && config.native_current_program_access !== true) return null;
     if (continuation!.epoch !== observation.level_epoch || continuation!.frame_digest !== identity(rows)) return null;
     const model = memory.compositionModels.at(-1)!;
     const plan = { ...continuation, model, mode: 'execute', observation_ref: observation.observation_ref, score: observation.levels_completed,
@@ -228,7 +270,7 @@ export function observedProgramQuestion(memory: Memory, observation: R, rows: Na
   }
   const models = memory.respondentModels.filter(model => model.epoch === observation.level_epoch);
   if (!models.length || !memory.compositionModels.length) return programCompositionQuestion(memory, observation, rows, maxPrefix, config);
-  const model = memory.compositionModels.at(-1)!, learned = models.at(-1)!, layout = programEditor(rows, model);
+  const model = memory.compositionModels.at(-1)!, learned = models.at(-1)!, layout = questionProgramEditor(rows, model, observation, config);
   if (!layout) return null;
   const word = colors(layout.members), objects = programWorld(rows, model), owners = objects.filter(object => equal(object.word, word));
   if (owners.length !== 1) return null;
@@ -238,7 +280,7 @@ export function observedProgramQuestion(memory: Memory, observation: R, rows: Na
   targets.sort((a, b) => ordering.get(JSON.stringify(a.word))! - ordering.get(JSON.stringify(b.word))!);
   const field = programSurface(rows, model, objects, owner.base);
   if (!field) return null;
-  const options = searchOptions(config, maxPrefix), refusals = memory.extensionRefusals.filter(refusal => refusal.epoch === observation.level_epoch);
+  const options = searchOptions(config, maxPrefix, layout), refusals = memory.extensionRefusals.filter(refusal => refusal.epoch === observation.level_epoch);
   let access: R | null = null, result: R;
   if (refusals.length) {
     const count = refusals.at(-1)!.word.length;
@@ -294,7 +336,7 @@ function compositionBefore(proposal: R, index: number, rows: NativeRows, meta: R
       && meta.available.includes(probe.actions[index].action_ref);
     if (index === 0) admitted = admitted && meta.observation_ref === probe.observation_ref && identity(rows) === probe.frame_digest;
     else {
-      const members = projectedProgramMembers(rows, probe.layout, palette(probe.layout.controls));
+      const members = projectedProgramMembers(rows, probe.layout, memberPalette(probe.layout, probe.model));
       admitted = admitted && equal(colors(members), probe.prepared_word)
         && programWordAt(rows, probe.model, probe.owner_before.base, probe.prepared_word)
         && (probe.layout.controls as R[]).every(control => equal(patch(rows, control.bbox), control.patch))
@@ -324,6 +366,10 @@ function compositionBefore(proposal: R, index: number, rows: NativeRows, meta: R
 
 /** Respondent guard follows its parent's binding, exactly as in source MRO. */
 export function observedProgramBefore(memory: Memory, proposal: R, index: number, rows: NativeRows, meta: R): R {
+  const currentPlan = proposal.program_composition_plan ?? proposal.respondent_probe_plan;
+  if (truth(currentPlan?.current_program_access) && !currentProgramPlanMatches(rows, currentPlan)) {
+    return { admitted: false, reason: 'current_program_controls_changed' };
+  }
   const result = compositionBefore(proposal, index, rows, meta);
   if (!result.admitted) return result;
   const action = (proposal.actions as R[]).at(index)!;
@@ -376,7 +422,7 @@ function compositionAfter(proposal: R, index: number, rows: NativeRows, later: N
   const probe = proposal.respondent_probe_plan;
   if (truth(probe)) {
     if (index === 0) {
-      const members = projectedProgramMembers(later, probe.layout, palette(probe.layout.controls));
+      const members = projectedProgramMembers(later, probe.layout, memberPalette(probe.layout, probe.model));
       const matched = meta.epoch === probe.epoch && meta.score === probe.score && equal(colors(members), probe.prepared_word)
         && programWordAt(later, probe.model, probe.owner_before.base, probe.prepared_word);
       return { matched, seal_prefix: !matched, reason: matched ? 'return_operator_inserted' : 'return_operator_edit_refuted' };
@@ -410,7 +456,7 @@ function compositionAfter(proposal: R, index: number, rows: NativeRows, later: N
 export function observedProgramAfter(_memory: Memory, proposal: R, index: number, rows: NativeRows, later: NativeRows, meta: R): R {
   const plan = proposal.program_composition_plan, step: R | undefined = truth(plan) ? (plan.steps as R[]).at(index) : undefined;
   if (truth(plan) && step!.mode === 'remove') {
-    const members = projectedProgramMembers(later, plan.layout, palette(plan.layout.controls));
+    const members = projectedProgramMembers(later, plan.layout, memberPalette(plan.layout, plan.model));
     const matched = meta.epoch === plan.epoch && meta.score === plan.score && equal(colors(members), step!.after_word)
       && (!truth(step!.after_word) || programWordAt(later, plan.model, plan.own_base, step!.after_word));
     return { matched, seal_prefix: !matched, reason: matched ? 'member_removal_projected' : 'member_removal_refuted', observed_member_count: members.length };
@@ -459,6 +505,7 @@ export function recordObservedProgram(memory: Memory, before: R, command: R, aft
       const turn = plan.turns[0];
       continuation = Object.fromEntries(['epoch', 'layout', 'word', 'targets'].map(key => [key, plan[key]]));
       Object.assign(continuation, { frame_digest: identity(later), own_base: turn.base, turns: plan.turns.slice(1), target_counts: turn.remaining });
+      if (truth(plan.current_program_access)) continuation.current_program_access = plan.current_program_access;
     }
     add({ kind: 'program_composition_reconciled', epoch: before.level_epoch, outcome, refuted: outcome.matched === false,
       continuation, evidence: [before.observation_ref, after.observation_ref] });
@@ -488,8 +535,10 @@ export function recordObservedProgram(memory: Memory, before: R, command: R, aft
       continuation = Object.fromEntries(['epoch', 'layout', 'word', 'respondent_order_evidence'].map(key => [key, plan[key]]));
       Object.assign(continuation, { frame_digest: identity(later), own_base: turn.base, targets: turn.targets,
         respondent_predictions: remaining, input_access: plan.input_access ?? null });
+      if (truth(plan.current_program_access)) continuation.current_program_access = plan.current_program_access;
     } else if (truth(plan.input_access)) {
-      if (programEditor(later, plan.model) === null) stop = 'input_access_hypothesis_refuted';
+      if (questionProgramEditor(later, plan.model, after,
+        { native_current_program_access: truth(plan.current_program_access) }) === null) stop = 'input_access_hypothesis_refuted';
     } else stop = 'conditional_respondent_projection_complete_without_official_score';
   }
   add({ kind: 'respondent_composition_reconciled', epoch: before.level_epoch, continuation, outcome, stop_reason: stop,
