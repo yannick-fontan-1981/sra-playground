@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.v42.captured-node-test-result.v1",
+  "command": "node --test --test-name-pattern='^(?!cold common runtime)' tests/v6-program-control-relation.test.ts",
+  "cwd": "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout",
+  "executionSessionId": 38325,
+  "exitCode": 0,
+  "tests": 32,
+  "passed": 32,
+  "failed": 0,
+  "cancelled": 0,
+  "skipped": 0,
+  "todo": 0,
+  "durationMs": 73573.95424,
+  "coldReplayDurationMs": 70147.662784,
+  "testFile": "tests/v6-program-control-relation.test.ts",
+  "testFileSha256": "25c57b166d4acb43dc6f3a764bc06ca1c86e4ee45f1ffd3d44fda0e9abf158e3",
+  "log": "docs/migration/native-campaigns-v42/validation/program-relation-tests.log",
+  "logSha256": "8a519127ff5f806ddfdcae7072829936051a2809a9b528c538280fedc0b275dc",
+  "canonicalCampaignSourceDigest": "6567be12230880198a7b4b085999ecda9354487599e728ee1ae27455f7056d04",
+  "capture": {
+    "method": "Concatenation of the stdout text blocks returned by exec_command/write_stdin; no initial shell redirection.",
+    "outputChunks": [
+      "7da05f",
+      "fe34bb",
+      "1739fb",
+      "b4729b"
+    ],
+    "qualification": "The negative name filter did not exclude the cold test in this runner. The completed runner explicitly reports all 32 tests passed and 0 skipped; the single 45-action cold replay was executed."
+  },
+  "scope": "Cold runtime receives only the recorded public packets. No game engine, private state or oracle is loaded; expected commands and retained-event payloads are assertions, not planning inputs."
+}

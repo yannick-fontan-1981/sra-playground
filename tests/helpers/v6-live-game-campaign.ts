@@ -147,6 +147,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const controlTrials = (series.events as R[]).filter(event => event.kind === 'native_program_control_trial');
           const controlBindings = (series.events as R[]).filter(event => event.kind === 'native_program_control_binding');
           const controlEffects = (series.events as R[]).filter(event => event.kind === 'native_program_control_effect');
+          const rootedStates = (series.events as R[]).filter(event => event.kind === 'rooted_quota_state');
+          const relationModels = (series.events as R[]).filter(event => event.kind === 'native_program_relation_model');
+          const relationTrials = (series.events as R[]).filter(event => event.kind === 'native_program_relation_trial');
+          const relationRefutations = (series.events as R[]).filter(event => event.kind === 'native_program_relation_refutation');
           const programRefutedEpochs = new Set<number>();
           for (const event of series.events as R[]) {
             if (event.kind === 'program_composition_reconciled' && event.refuted) programRefutedEpochs.add(event.epoch);
@@ -163,6 +167,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               ? { currentProgramAccess: (evidence.proposal.program_composition_plan ?? evidence.proposal.respondent_probe_plan).current_program_access } : {}),
             ...(evidence.proposal.program_control_probe_plan
               ? { programControlProbeMode: evidence.proposal.program_control_probe_plan.mode } : {}),
+            ...(evidence.proposal.program_relation_plan
+              ? { programRelationMode: evidence.proposal.program_relation_plan.mode } : {}),
+            ...(evidence.proposal.rooted_quota_plan
+              ? { rootedQuotaPhase: evidence.proposal.rooted_quota_plan.phase } : {}),
             supportMode: evidence.proposal.support_preparation_plan?.mode ?? null,
             graphChain: graph.chain, graphRevision: snapshot.graphRevision, callerAcquiredTransitions: snapshot.caller.acquiredTransitions,
             sharedSeries: { digestScope: snapshot.coverage.sharedSeriesDigestScope, digest: series.digest,
@@ -186,6 +194,11 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               radialPortLatestEffect: radialEffects.at(-1) ?? null,
               nativeControlDiscovery: { trialCount: controlTrials.length, bindingCount: controlBindings.length, effectCount: controlEffects.length,
                 latestTrial: controlTrials.at(-1) ?? null, latestBinding: controlBindings.at(-1) ?? null, latestEffect: controlEffects.at(-1) ?? null },
+              rootedQuotaStateCount: rootedStates.length,
+              rootedQuotaLatestState: rootedStates.at(-1) ?? null,
+              nativeProgramRelations: { modelCount: relationModels.length, trialCount: relationTrials.length,
+                refutationCount: relationRefutations.length, latestModel: relationModels.at(-1) ?? null,
+                latestTrial: relationTrials.at(-1) ?? null, latestRefutation: relationRefutations.at(-1) ?? null },
               alternatingGraphEvidenceCount: alternating.length,
               alternatingGraphSampleCount: graphEvidence?.samples?.length ?? 0,
               alternatingGraphContactCount: graphEvidence?.contacts?.length ?? 0,

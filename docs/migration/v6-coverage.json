@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 89,
-    "partiallyTransferredModules": 61,
+    "componentVerifiedModules": 91,
+    "partiallyTransferredModules": 65,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1219,
+    "pendingModules": 1213,
     "strategyFamilies": 16
   },
   "families": [
@@ -22566,9 +22566,15 @@
           "endLine": 72
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-rooted-quota-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-rooted-quota-reference.py",
+        "tests/fixtures/v6-rooted-quota-reference.json.gz",
+        "tests/v6-rooted-quota-parity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/indexed_sequence_c.py",
@@ -29607,7 +29613,8 @@
       "status": "partial_transfer",
       "targets": [
         "src/logos-engine/v6-arrival-mechanics.ts",
-        "src/logos-engine/v6-ray-capture-domain.ts"
+        "src/logos-engine/v6-ray-capture-domain.ts",
+        "src/logos-engine/v6-rooted-quota-mechanics.ts"
       ],
       "proof": [
         "scripts/export-v6-configured-arrivals-reference.py",
@@ -29615,7 +29622,10 @@
         "tests/v6-configured-arrivals.test.ts",
         "scripts/export-v6-support-extensions-reference.py",
         "tests/fixtures/v6-support-extensions-reference.json.gz",
-        "tests/v6-support-extensions.test.ts"
+        "tests/v6-support-extensions.test.ts",
+        "scripts/export-v6-rooted-quota-reference.py",
+        "tests/fixtures/v6-rooted-quota-reference.json.gz",
+        "tests/v6-rooted-quota-parity.test.ts"
       ]
     },
     {
@@ -49417,9 +49427,15 @@
           "endLine": 45
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-rooted-quota-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-rooted-quota-reference.py",
+        "tests/fixtures/v6-rooted-quota-reference.json.gz",
+        "tests/v6-rooted-quota-parity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/rooted_prefix_observation.py",
@@ -78234,9 +78250,23 @@
           "endLine": 29
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-rooted-quota-access.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-rooted-quota-reference.py",
+        "tests/fixtures/v6-rooted-quota-reference.json.gz",
+        "tests/v6-rooted-quota-parity.test.ts",
+        "scripts/probe-v6-rooted-quota-original.py",
+        "tests/fixtures/v6-rooted-quota-original-public.json.gz",
+        "docs/migration/native-campaigns-v42/ther-four-levels.json",
+        "docs/migration/native-campaigns-v42/ther-three-levels.json",
+        "docs/migration/native-campaigns-v42/ther-original-component-comparison.json",
+        "scripts/compare-v42-rooted-component.py"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_sliding_cavity.py",
@@ -84358,9 +84388,15 @@
           "endLine": 36
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-rooted-quota-observation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-rooted-quota-reference.py",
+        "tests/fixtures/v6-rooted-quota-reference.json.gz",
+        "tests/v6-rooted-quota-parity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/rooted_line_access.py",
@@ -84558,9 +84594,22 @@
           "endLine": 84
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-rooted-quota-access.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-rooted-quota-reference.py",
+        "tests/fixtures/v6-rooted-quota-reference.json.gz",
+        "tests/v6-rooted-quota-parity.test.ts",
+        "scripts/probe-v6-rooted-quota-original.py",
+        "tests/fixtures/v6-rooted-quota-original-public.json.gz",
+        "docs/migration/native-campaigns-v42/ther-four-levels.json",
+        "docs/migration/native-campaigns-v42/ther-three-levels.json",
+        "docs/migration/native-campaigns-v42/ther-original-component-comparison.json",
+        "scripts/compare-v42-rooted-component.py"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/rooted_quota_methods.py",
@@ -84611,9 +84660,15 @@
           "endLine": 22
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-rooted-quota-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-rooted-quota-reference.py",
+        "tests/fixtures/v6-rooted-quota-reference.json.gz",
+        "tests/v6-rooted-quota-parity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/scored_local_rewrite.py",
@@ -96653,6 +96708,8 @@
     "Learned state is restored from actual revisioned family_state nodes, control-access proofs travel with executed proposals and continuations, and coordination receipts name the real source state revision. Registered SRC modules are executed from the Kernel graph. Observation, fitting, simulation, search, guards and native coordination still use TypeScript functions/callbacks; fragmented state and proof records do not make every reasoning algorithm an independently editable declarative rule.",
     "v41 adds one source-declared window entry, radial_port_composition, at its actual DRM position: 32 of 76 entries connected (42.1%). Its observation module is component_verified; its own access and common wrapper remain partial_transfer because imported-file methods and unported TypedPose/TypedMaterial/inherited producer and restore paths are excluded. Source-only tests compare 383 cases and pass 387 checks against unchanged Python with 746 loaded reference files verified. The original isolated radial component completes three public levels in 23 actions; this is expressly not a native common-caller victory. The unchanged full original caller separately reproduces the seven-command invitation collision. Full V6 parity and all six completion gates remain false.",
     "v41 also exposes measured_program_control_discovery and stationary_unlearned_contact_refusal_scope as native evolutions, not additional Python transfers. New control insertions, input roles and unknown operator phases are distinguished; every question requires an actual public return and current guards. A failed stationary unlearned invitation remains acquired evidence and can be scoped locally only for an independently grounded guarded inquiry. Acquired radial preparation expands the existing native priority witness, separately from source algorithm parity. These algorithms and guards are still TypeScript callbacks; their revisioned graph evidence is not a claim that all reasoning rules are declaratively editable.",
-    "The frozen native 0.11.0 PIPE campaign is separately successful for three levels: 23 actions (4/8/11), one session, 20 sealed prefixes, 23 acquired transitions and two boundary replays, stopping at level 4 with NOT_FINISHED. A saved-evidence-only structural comparison to the unchanged isolated radial component matches every command, every complete public packet and animation, available-action order, official boundary and executed prefix length. No game/agent is rerun by that comparison and no field is projected or normalized. This exact bounded trajectory does not compare the full original caller selection, complete retained memory, budgets or performance."
+    "The frozen native 0.11.0 PIPE campaign is separately successful for three levels: 23 actions (4/8/11), one session, 20 sealed prefixes, 23 acquired transitions and two boundary replays, stopping at level 4 with NOT_FINISHED. A saved-evidence-only structural comparison to the unchanged isolated radial component matches every command, every complete public packet and animation, available-action order, official boundary and executed prefix length. No game/agent is rerun by that comparison and no field is projected or normalized. This exact bounded trajectory does not compare the full original caller selection, complete retained memory, budgets or performance.",
+    "v42 adds the source-declared rooted_quota_composition window provider with six explicit source mappings. Rooted-chain observation and the bounded caller helpers are component_verified; own access/common inheritance and both mechanical V5 modules remain partial_transfer. The source-only fixture contains 176 cases, 18 scenes and five true CombinedObservedCompositionMemory envelopes, and its 181 focused tests verify 825 loaded source-file hashes. The original rooted record cutoff suppresses older Program/Occurrence/Radial acquisition, preserves outer Cell/Graph/Pair/Auxiliary acquisition and still runs record_packet. Every actual public return and boundary in the isolated 11-action component trajectory is covered by source-family envelope and native checkpoint checks. Safe JavaScript integer limits, missing Pydantic/general inherited transport and the narrower native digest are explicit. The unchanged isolated component reaches three THER levels in 11 actions (4/3/4); this is separate from a fresh native common-caller campaign, which is not claimed by these fixture proofs. No additional complete-migration gate is passed.",
+    "At v42, the current native shared closure is native_program_relations_recall_radial_ports_rooted_quota_cell_placement_alternating_graph_and_coupled_support_v6. Earlier closure names in historical campaign notes remain historical. Conditional program relation acquisition, inverse-return preparation and transport validation are explicit native extensions, not claims of unchanged Python behavior. Four native THER levels and four STCK levels are completed; STCK terminal progress does not add a second relation sample or a terminal law. Mixed retained native derivations are outside the source-only quota envelope parity."
   ]
 }

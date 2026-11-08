@@ -11,10 +11,17 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v41):** the radial entry is connected to the
-native common caller, with a [fresh PIPE three-level campaign](native-campaigns-v41/pipe-three-levels.json)
-and an [exact public-trajectory comparison to the original isolated component](native-campaigns-v41/pipe-original-component-comparison.json).
-Earlier milestones include [the v40 acquired-preparation and MEMO
+**Current integrated milestone (v42):** rooted-quota composition is connected
+at its declared native common entry. [THER completes four levels in 15 actions](native-campaigns-v42/ther-four-levels.json),
+and [STCK completes four levels in 45 actions](native-campaigns-v42/stck-four-levels.json)
+through an explicit native conditional-relation experiment. Both are fresh,
+continuous common-caller campaigns with actual Kernel acquisition and WHY/ACT.
+The [v42 report](v42-rooted-quota-program-relations.md) distinguishes source
+component parity, native extensions, official success and remaining uncertainty.
+The [exact original-component comparison](native-campaigns-v42/ther-original-component-comparison.json)
+covers THER's first three levels: 11 commands, 12 complete public packets,
+21 animation frames and five prefixes, without field projection.
+Earlier milestones include [the v41 radial-port and PIPE report](v41-radial-ports-control-discovery.md), [the v40 acquired-preparation and MEMO
 three-level campaign report](v40-acquired-preparation.md), [the v39
 observed-program transfer and STCK three-level campaign report](v39-observed-program.md), [the v38 cell-patch
 transfer and complete TICT campaign report](v38-cell-placement.md), [the v37 memory-cost and ELAS campaign
@@ -24,18 +31,49 @@ auxiliary support and native checkpoint report](v35-coupled-support.md), [the v3
 response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 32 of 76
-explicit DRM subquestions are connected (42.1%) in implementation
-`logos-engine.typescript.v6.native-migration/0.11.0`. This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 33 of 76
+explicit DRM subquestions are connected (43.4%) in implementation
+`logos-engine.typescript.v6.native-migration/0.12.0`. This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
-The v41 radial-port connection adds one source entry; the native control-discovery
+The v42 rooted-quota connection adds one source entry; its conditional relation and return-preparation extensions add none. The v41 radial-port connection added one source entry; the native control-discovery
 and refusal-scope extensions add none. The v40 changes are explicit native evolutions: they add no Python module to
 the transferred inventory and no source entry. The v39 observed-program
 composition added one source entry, following the v38 cell-composition entry;
 the v37 performance step added none. All six conditions for a complete
 migration remain false.
 
-**New v41 result:** PIPE's first three levels are completed through the fresh
+**New v42 result:** THER completes levels 1–4 in **4, 3, 4 and 4 actions**,
+15 total, six sealed prefixes and one retained session. The first two real
+experiments discriminate addition and truncation before bounded integer-prefix
+propagation prepares later actions under explicit root and quota hypotheses.
+The [previous v41 baseline](native-campaigns-v42/ther-v41-baseline.json)
+completed two levels in 170 total actions and stopped on the third level's
+active-time budget. This establishes additional bounded success, not a speed benchmark.
+
+STCK's [four-level campaign](native-campaigns-v42/stck-four-levels.json)
+completes levels 1–4 in **3, 7, 25 and 10 actions**, 45 total and 25 prefixes.
+Its new discovery question first prepares an already observed inverse, then
+measures the unknown phase and its actual return to editor access. The native
+journal retains one conditional other-bearer translation relation, separately
+from the unchanged original reduction model. Four real edits prepare a new
+transport test; the next execution crosses the official fourth-level boundary.
+The final packet is excluded from relation attribution: **support remains one**,
+with fixed displacement, radial displacement and delayed response still open.
+There is no universal operator, deletion rule or terminal law inferred from
+this success. The [six-level attempt](native-campaigns-v42/diagnostics/stck-relation-six-level-attempt.json)
+stops at level 5 with `frontier_unknown` after those same 45 actions.
+
+The native implementation has **139 source files**, all unchanged during
+these campaigns, with manifest digest
+`6567be12230880198a7b4b085999ecda9354487599e728ee1ae27455f7056d04`.
+No Python agent module is loaded. No game identifier, fixed role palette,
+level-specific sequence or solution is added to production reasoning.
+Rooted source access retains its actual record-chain cut and its passive
+outer acquisitions; its incomplete inheritance and exact-integer numerical
+domain remain documented limitations. The native relation journal is an
+explicit extension, not an original Python behavior claim.
+
+**Previous v41 result:** PIPE's first three levels are completed through the fresh
 native common Logos Engine caller in one session: **4, 8 and 11 actions, 23
 total**, with 20 sealed prefixes, 23 acquired transitions and two natural
 boundary replays. The [bounded campaign](native-campaigns-v41/pipe-three-levels.json)
@@ -59,10 +97,10 @@ The [v41 report](v41-radial-ports-control-discovery.md) also documents bounded
 revalidation of an acquired rotation on changed geometry. It keeps a previous
 method conditional and requires one real current return before confirming its
 new binding. The [STCK diagnostic](native-campaigns-v41/diagnostics/stck-control-discovery-six-level-attempt.json)
-now reaches two further real experiments at level 4: insertion of an unknown
+at v41 reached two further real experiments at level 4: insertion of an unknown
 control member, followed by execution and an isolated public-effect measure.
 It retains two trials, one binding and one measured effect, then stops after
-39 actions. No new operator law is promoted, and STCK level 4 remains unsolved.
+39 actions. At that historical checkpoint, no new operator law was promoted and STCK level 4 remained unsolved.
 The actual Kernel records the limited scope of a stationary unlearned contact
 invitation; a separately grounded question still needs its own current guard
 and ordinary WHY/ACT authorization. These are explicit native extensions.
@@ -488,7 +526,7 @@ reducer. Imported methods from files are excluded, as required by
 TypedMaterialConstraint and other inherited proposal/acquisition producers,
 as well as the full original restoration closure, remain unported. The shared
 native journal verifies its named closure,
-`native_program_discovery_recall_radial_ports_cell_placement_alternating_graph_and_coupled_support_v6`,
+`native_program_relations_recall_radial_ports_rooted_quota_cell_placement_alternating_graph_and_coupled_support_v6`,
 and does not substitute that digest for the complete Python inheritance digest.
 
 The radial fixture includes a new, unprimed run of the unchanged **isolated

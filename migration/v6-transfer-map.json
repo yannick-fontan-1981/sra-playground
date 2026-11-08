@@ -995,7 +995,8 @@
       ],
       "targets": [
         "src/logos-engine/v6-arrival-mechanics.ts",
-        "src/logos-engine/v6-ray-capture-domain.ts"
+        "src/logos-engine/v6-ray-capture-domain.ts",
+        "src/logos-engine/v6-rooted-quota-mechanics.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -1004,9 +1005,12 @@
         "tests/v6-configured-arrivals.test.ts",
         "scripts/export-v6-support-extensions-reference.py",
         "tests/fixtures/v6-support-extensions-reference.json.gz",
-        "tests/v6-support-extensions.test.ts"
+        "tests/v6-support-extensions.test.ts",
+        "scripts/export-v6-rooted-quota-reference.py",
+        "tests/fixtures/v6-rooted-quota-reference.json.gz",
+        "tests/v6-rooted-quota-parity.test.ts"
       ],
-      "notes": "Called WorkBudget/result/request-validation contracts only, not the full inherited generic module."
+      "notes": "Called WorkBudget/result/request-validation contracts only, not the full inherited generic module. The rooted-quota transfer additionally uses bounded work accounting, incomplete receipts and the canonical input-digest contract for complete-round resume; these outputs are compared to unchanged Python on the supported request domain. General FrozenModel/Ref transport, all Pydantic coercions and arbitrary Python integer semantics remain unported. This mapping remains partial_transfer and is not duplicated by the new mechanical providers."
     },
     {
       "sources": [
@@ -1615,6 +1619,111 @@
         "docs/migration/native-campaigns-v41/pipe-original-component-comparison.json"
       ],
       "notes": "radial_propose and radial point bind preserve the unchanged common wrapper: no imported method, original remaining-action and ACTION6 preconditions, maximum 16-action prefix, current center-pixel support, exact payload and observed-domain binding. radial_port_composition is an actual registered window entry in its declared DRM position; it shares the existing acquisition owner with occurrence/program/cell/graph/coupled support. The inherited TypedMaterialConstraint providers and complete original restoration closure remain unported, so this is partial_transfer rather than a full common-class transfer. Native checkpoint restoration verifies the explicitly named supported journal closure. Native learned-preparation coordination uses separately identified acquired radial evidence and an admitted current guard; it is not a Python selection rule. Replaying the seven recorded public commands through the unchanged original full caller reproduces the seventh animated invitation and frontier_unknown after one level, with every returned outcome conditioned on exact command equality. This diagnostic, isolated component success and native common campaigns are distinct forms of evidence. The separate fresh frozen native 0.11.0 common campaign completes three PIPE levels in 23 actions (4, 8, 11), with 20 sealed prefixes, 23 acquisitions and two natural boundary replays. The saved-evidence comparison matches all 23 commands, 24 complete public packets, 33 animation frames, public action domains, official boundaries and 20 executed prefix lengths to the unchanged isolated radial component, without normalization or action-domain projection. This is bounded native success and exact public-trajectory agreement with a component, not full original caller or all-game parity."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/rooted_chain_observation.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-rooted-quota-observation.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-rooted-quota-reference.py",
+        "tests/fixtures/v6-rooted-quota-reference.json.gz",
+        "tests/v6-rooted-quota-parity.test.ts"
+      ],
+      "notes": "Complete called observation outputs are compared to unchanged pinned Python: measured regular lattice, drawn chain graph, wider-endpoint hypothesis, aligned mark counts and prefix-length projection. The 176-case rooted fixture contains 18 public or controlled scenes; its 181 focused tests verify 825 loaded reference-file hashes. Geometry identities preserve the source-visible CPython point-set iteration and Counter tie order. Recolouring, translation, reflection refusal, ambiguous or missing support, unknown fill and non-prefix refusals are compared as actual source results. Measured colours identify equality only; root, clue and edit semantics remain conditional hypotheses. This is bounded component evidence, not full-caller or all-game parity."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/rooted_quota_methods.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-rooted-quota-mechanics.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-rooted-quota-reference.py",
+        "tests/fixtures/v6-rooted-quota-reference.json.gz",
+        "tests/v6-rooted-quota-parity.test.ts"
+      ],
+      "notes": "The called plain-output, scope, cells, quotas, request-base, propagate and indexed-step helpers are transferred for the canonical observed JSON domain with exact safe JavaScript integers. Source request/result fields, conditional model references, evidence scope, work bounds and complete or incomplete mechanical receipts are compared without projecting their payloads. Indexed actions require actual acquired addition and cut examples. The native clock uses a monotonic millisecond deadline and preserves the source bound rules; source/native elapsed work counts are not claimed equal. The two underlying V5 mechanical modules and their generic transport contracts remain separately partial_transfer, so this component status does not close inherited numeric or runtime parity."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/rooted_quota_access.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-rooted-quota-access.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-rooted-quota-reference.py",
+        "tests/fixtures/v6-rooted-quota-reference.json.gz",
+        "tests/v6-rooted-quota-parity.test.ts",
+        "scripts/probe-v6-rooted-quota-original.py",
+        "tests/fixtures/v6-rooted-quota-original-public.json.gz",
+        "docs/migration/native-campaigns-v42/ther-four-levels.json",
+        "docs/migration/native-campaigns-v42/ther-three-levels.json",
+        "docs/migration/native-campaigns-v42/ther-original-component-comparison.json",
+        "scripts/compare-v42-rooted-component.py"
+      ],
+      "notes": "Own rooted-quota questions, conditional propagation and indexed editing, current-state guards, acquired addition/cut evidence, refutations, stop requests, event replay and retained own-layer digest are transferred. Full raw proposals, guard outputs, events and state/digest suffixes are compared to unchanged Python; original ancestor digests remain separately retained. The first two one-action questions distinguish local change from rooted-prefix addition, then truncation from a repeated toggle, before a conditional joint plan can be released. A rooted_quota_plan cuts the original older record chain: Program/Occurrence/Radial acquisition is skipped, while outer Cell/Graph/Pair/Auxiliary layers and subsequent record_packet still execute. Five real CombinedObservedCompositionMemory envelopes cover all 11 recorded returns and three official boundaries, including rooted_quota_state on each return and coupled_pair_epoch_anchor at actions 1, 5 and 8; no absent ancestor return is fabricated. Native checkpoint reconstruction after every return, atomic tamper refusal and requested-stop forwarding are checked. The inherited ServiceTransfer and other unported producer paths are excluded, so this remains partial_transfer. Separately, the unchanged isolated original component completes the first three THER levels in a single cold public session, 11 actions (4/3/4), five prefixes and zero manual priming actions, ending NOT_FINISHED; this is not a native common-caller campaign or a full original-caller selection proof. The separate frozen native 0.12.0 common campaign completes four THER levels in 15 actions (4/3/4/4), six prefixes and one cold session. Exact saved-trajectory comparison with the original isolated component covers the first three levels: 11 commands, 12 complete public packets and 21 animation frames, without projection. This is bounded success, not full-game WIN or full original caller parity."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_rooted_quota.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-rooted-quota-access.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-rooted-quota-reference.py",
+        "tests/fixtures/v6-rooted-quota-reference.json.gz",
+        "tests/v6-rooted-quota-parity.test.ts",
+        "scripts/probe-v6-rooted-quota-original.py",
+        "tests/fixtures/v6-rooted-quota-original-public.json.gz",
+        "docs/migration/native-campaigns-v42/ther-four-levels.json",
+        "docs/migration/native-campaigns-v42/ther-three-levels.json",
+        "docs/migration/native-campaigns-v42/ther-original-component-comparison.json",
+        "scripts/compare-v42-rooted-component.py"
+      ],
+      "notes": "rooted_propose and point binding preserve the called common contract: remaining-action and ACTION6 preconditions, required current level deadline, at most 16 frozen actions, first full-frame expectation, measured cell support and observed-domain binding. rooted_quota_composition is connected at its declared DRM window position and uses the shared acquisition owner. Full original common-family envelopes are compared on the saved real public trajectory, separately from original caller selection; they include the source record-chain cutoff and the passive outer-layer records. Native replay covers the supported journal closure native_program_relations_recall_radial_ports_rooted_quota_cell_placement_alternating_graph_and_coupled_support_v6. Its digest is explicitly not the full original inherited digest. FieldServiceConstraint and its unported provider ancestry, complete original restoration closure and cross-family caller selection remain incomplete, so this module stays partial_transfer. Source fixture agreement and the isolated original component trajectory do not establish a fresh native common-caller success. The separate frozen native 0.12.0 common campaign completes four THER levels in 15 actions (4/3/4/4), six prefixes and one cold session. Exact saved-trajectory comparison with the original isolated component covers the first three levels: 11 commands, 12 complete public packets and 21 animation frames, without projection. This is bounded success, not full-game WIN or full original caller parity."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/rooted_prefix_marginals_d.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-rooted-quota-mechanics.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-rooted-quota-reference.py",
+        "tests/fixtures/v6-rooted-quota-reference.json.gz",
+        "tests/v6-rooted-quota-parity.test.ts"
+      ],
+      "notes": "The called finite rooted-prefix marginal algorithms are transferred in the canonical safe-integer request domain: PROPAGATE and EVALUATE, exact retained domains and removal certificates, contradiction/fixed-point/complete results, work receipts and node/domain/depth bounds. Complete-round resume binds the canonical input digest and refuses changed inputs or unsupported resume domains; incomplete receipts retain the unfinished frontier without authorizing a primitive. Deterministic source outputs and counters are compared, while a separate native fake-clock check verifies time interruption without claiming equal wall-time counts. General Pydantic model transport/coercion and arbitrary Python integers are not implemented, so this whole-module mapping remains partial_transfer despite bounded algorithm evidence."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/indexed_prefix_primitive_d.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-rooted-quota-mechanics.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-rooted-quota-reference.py",
+        "tests/fixtures/v6-rooted-quota-reference.json.gz",
+        "tests/v6-rooted-quota-parity.test.ts"
+      ],
+      "notes": "The canonical safe-integer indexed-prefix contract is transferred with full descriptive receipts: CLICK, FOCUS, ACTIVATE and RESET mechanics, selection and mutation costs, focus boundaries, quota acceptance, invalid identities/ranks and bounded incomplete results. Controlled FOCUS/CLAMP/WRAP/RESET/ACTIVATE cases are pure mechanical comparisons, not manually executed game actions. The original live rooted component selects its own CLICK commands only after observed addition and cut examples. General Pydantic coercion/transport, arbitrary Python integers and source/native wall-time work-count equivalence remain outside this transfer, so the module remains partial_transfer."
     }
   ],
   "scopeNotes": [
@@ -1633,7 +1742,9 @@
     "Learned state is restored from actual revisioned family_state nodes, control-access proofs travel with executed proposals and continuations, and coordination receipts name the real source state revision. Registered SRC modules are executed from the Kernel graph. Observation, fitting, simulation, search, guards and native coordination still use TypeScript functions/callbacks; fragmented state and proof records do not make every reasoning algorithm an independently editable declarative rule.",
     "v41 adds one source-declared window entry, radial_port_composition, at its actual DRM position: 32 of 76 entries connected (42.1%). Its observation module is component_verified; its own access and common wrapper remain partial_transfer because imported-file methods and unported TypedPose/TypedMaterial/inherited producer and restore paths are excluded. Source-only tests compare 383 cases and pass 387 checks against unchanged Python with 746 loaded reference files verified. The original isolated radial component completes three public levels in 23 actions; this is expressly not a native common-caller victory. The unchanged full original caller separately reproduces the seven-command invitation collision. Full V6 parity and all six completion gates remain false.",
     "v41 also exposes measured_program_control_discovery and stationary_unlearned_contact_refusal_scope as native evolutions, not additional Python transfers. New control insertions, input roles and unknown operator phases are distinguished; every question requires an actual public return and current guards. A failed stationary unlearned invitation remains acquired evidence and can be scoped locally only for an independently grounded guarded inquiry. Acquired radial preparation expands the existing native priority witness, separately from source algorithm parity. These algorithms and guards are still TypeScript callbacks; their revisioned graph evidence is not a claim that all reasoning rules are declaratively editable.",
-    "The frozen native 0.11.0 PIPE campaign is separately successful for three levels: 23 actions (4/8/11), one session, 20 sealed prefixes, 23 acquired transitions and two boundary replays, stopping at level 4 with NOT_FINISHED. A saved-evidence-only structural comparison to the unchanged isolated radial component matches every command, every complete public packet and animation, available-action order, official boundary and executed prefix length. No game/agent is rerun by that comparison and no field is projected or normalized. This exact bounded trajectory does not compare the full original caller selection, complete retained memory, budgets or performance."
+    "The frozen native 0.11.0 PIPE campaign is separately successful for three levels: 23 actions (4/8/11), one session, 20 sealed prefixes, 23 acquired transitions and two boundary replays, stopping at level 4 with NOT_FINISHED. A saved-evidence-only structural comparison to the unchanged isolated radial component matches every command, every complete public packet and animation, available-action order, official boundary and executed prefix length. No game/agent is rerun by that comparison and no field is projected or normalized. This exact bounded trajectory does not compare the full original caller selection, complete retained memory, budgets or performance.",
+    "v42 adds the source-declared rooted_quota_composition window provider with six explicit source mappings. Rooted-chain observation and the bounded caller helpers are component_verified; own access/common inheritance and both mechanical V5 modules remain partial_transfer. The source-only fixture contains 176 cases, 18 scenes and five true CombinedObservedCompositionMemory envelopes, and its 181 focused tests verify 825 loaded source-file hashes. The original rooted record cutoff suppresses older Program/Occurrence/Radial acquisition, preserves outer Cell/Graph/Pair/Auxiliary acquisition and still runs record_packet. Every actual public return and boundary in the isolated 11-action component trajectory is covered by source-family envelope and native checkpoint checks. Safe JavaScript integer limits, missing Pydantic/general inherited transport and the narrower native digest are explicit. The unchanged isolated component reaches three THER levels in 11 actions (4/3/4); this is separate from a fresh native common-caller campaign, which is not claimed by these fixture proofs. No additional complete-migration gate is passed.",
+    "At v42, the current native shared closure is native_program_relations_recall_radial_ports_rooted_quota_cell_placement_alternating_graph_and_coupled_support_v6. Earlier closure names in historical campaign notes remain historical. Conditional program relation acquisition, inverse-return preparation and transport validation are explicit native extensions, not claims of unchanged Python behavior. Four native THER levels and four STCK levels are completed; STCK terminal progress does not add a second relation sample or a terminal law. Mixed retained native derivations are outside the source-only quota envelope parity."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,

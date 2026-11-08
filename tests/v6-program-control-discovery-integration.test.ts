@@ -292,7 +292,7 @@ test('contact scope acquisition checks every returned image and the public proto
   });
 });
 
-test('cold common acquisition scopes a stationary contact refusal and acquires two distinct unknown-control questions', async context => {
+test('cold common acquisition scopes a contact refusal and measures a conditional return preparation', async context => {
   const runtime = await createNativeV6Runtime(declarations, { now: () => 0 });
   const family = (runtime as unknown as { families: NativeFamily[] }).families.find(item => item.id === 'public_occurrence_recall')!;
   assert.deepEqual((family.state() as R).events, []);
@@ -438,7 +438,8 @@ test('cold common acquisition scopes a stationary contact refusal and acquires t
   assert.equal(result.kind, 'action', result.reason);
   const execute = result.snapshot.proposal as R;
   assert.equal(execute.kind, 'public_program_control_probe');
-  assert.equal(execute.program_control_probe_plan.mode, 'probe_execute');
+  assert.equal(execute.program_control_probe_plan.mode, 'probe_prepare_return');
+  assert.equal(execute.program_control_probe_plan.return_status, 'conditional_known_inverse_after_unknown_phase');
   assert.equal(execute.strategy_receipt.native_coordination[0].rule, 'stationary_unlearned_contact_refusal_is_local');
   assert.equal(execute.strategy_receipt.native_coordination[0].contact_scope_revision, graphBefore.nodes[scopeRef]!.revision,
     'The old refusal remains local while the next question revalidates the current changed image');
@@ -453,10 +454,12 @@ test('cold common acquisition scopes a stationary contact refusal and acquires t
   const graph = runtime.inspectKnowledge(), read = (id: string): R => hydrateNativeState(graph.nodes[id]!.value, ref => graph.nodes[ref]!.value) as R;
   const retained = read('family_state:public_occurrence_recall'), native = retained.events.filter(hasNativeEvent);
   assert.deepEqual(native.map((event: R) => event.kind), ['native_program_control_trial', 'native_program_control_binding',
-    'native_program_control_trial', 'native_program_control_effect'], 'Selected and passive registration acquire each distinct response exactly once');
+    'native_program_control_trial'], 'Selected and passive registration acquire each distinct response exactly once');
   assert.equal(native[0].public_changed, true);
   assert.equal(native[2].public_changed, false);
-  assert.equal(native[3].operator_model_created, false);
+  assert.equal(native[2].outcome, 'known_return_preparation_unresolved');
+  assert.equal(native[2].return_preparation, null, 'An unchanged controlled return cannot acquire the proposed inverse insertion');
+  assert.equal(retained.events.some((event: R) => event.kind === 'native_program_control_effect'), false);
   assert.deepEqual(retained.events.filter((event: R) => event.kind === 'fitted_program_composition'), models);
   assert.deepEqual(retained, family.state());
   const facts = (read('reasoning:memory').facts as string[]).map(read);

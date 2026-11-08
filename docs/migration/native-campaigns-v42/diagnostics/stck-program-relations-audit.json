@@ -1,0 +1,1211 @@
+{
+  "schema": "logos-engine.v42.public-program-relation-audit.v1",
+  "auditStatus": "passed",
+  "scope": "Offline audit of saved public packets, pixel masks and retained event projections. No agent, fitted planner or game engine executed; no private state or game implementation read.",
+  "inputs": {
+    "report": {
+      "path": "docs/migration/native-campaigns-v42/diagnostics/stck-relation-six-level-attempt.json",
+      "sha256": "48e097aa338778eff0707ecdcba536874951ae6bd09e5a9e27b676c9e9ae8538",
+      "bytes": 672355
+    },
+    "publicTrace": {
+      "path": "docs/migration/native-campaigns-v42/diagnostics/stck-relation-public.json.gz",
+      "sha256": "a28d9f1e4d897fc69b9860c219632d68af04f72e5711a9a8bde02d8eed0340ff",
+      "bytes": 62949,
+      "uncompressedSha256": "43ff7ff5bd78387fe26817114fb302b9d137d68a11f4811493d3fb0282655e08",
+      "uncompressedBytes": 3444688
+    },
+    "v41Report": {
+      "path": "docs/migration/native-campaigns-v41/diagnostics/stck-control-discovery-six-level-attempt.json",
+      "sha256": "26c3b383ae3bb08f1ef024ba62a978b2dc03770a66a0c8cb79616504002a3f81",
+      "bytes": 275574
+    },
+    "v41PublicTrace": {
+      "path": "docs/migration/native-campaigns-v41/diagnostics/stck-control-discovery-public.json.gz",
+      "sha256": "13f430ea562ec28234c1812bd3b24e2ef793b02f48d22be055a8ae2c251d1cef",
+      "bytes": 57577,
+      "uncompressedSha256": "d97dade11c0fd6d6982254b36e32f4d136ef029015c6e78d523e91eea13aef6a",
+      "uncompressedBytes": 3169099
+    },
+    "acquiredSourceModelDiagnostic": {
+      "path": "docs/migration/native-campaigns-v39/diagnostics/stck-level-four-program-diagnosis.json",
+      "sha256": "605a96d99548c5c441f77530a15ce34f0607574ad190e98fda671e355a121dbb",
+      "bytes": 1236147
+    }
+  },
+  "hashVerification": {
+    "sourceDigest": "6567be12230880198a7b4b085999ecda9354487599e728ee1ae27455f7056d04",
+    "sourceManifestFilesVerified": 139,
+    "canonicalPublicPacketsVerified": 46,
+    "physicalCommandsVerified": 45,
+    "execution40AnimationFrameDigestsVerified": 24,
+    "execution45RawAnimationFramesAudited": 18,
+    "sourceUnchangedDuringRun": true,
+    "pythonAgentModules": [],
+    "qualification": "Packet and manifest digests are recomputed. Reported Kernel projections are cross-checked; this is not an external signature or a reconstruction of the entire internal graph."
+  },
+  "officialProgress": {
+    "completedLevels": 4,
+    "targetLevels": 6,
+    "sixLevelTargetMet": false,
+    "levelFourCompleted": true,
+    "boundariesRecomputedFromPublicScores": [
+      {
+        "completedLevel": 1,
+        "levelActions": 3,
+        "cumulativeActions": 3,
+        "publicPacketSha256": "5a833738ffeec6fe724c506da7d3b97693eeb758f6f696c3c12fe6c1ba9d9c47"
+      },
+      {
+        "completedLevel": 2,
+        "levelActions": 7,
+        "cumulativeActions": 10,
+        "publicPacketSha256": "1dabcb56c7639a4bd7a63b0b0b3c5380265e9ee120229ff93779f13caa5a4ca4"
+      },
+      {
+        "completedLevel": 3,
+        "levelActions": 25,
+        "cumulativeActions": 35,
+        "publicPacketSha256": "f564c8119068434b2781b56418caea68f701c0c5dcd74af0b0d07464269b64e0"
+      },
+      {
+        "completedLevel": 4,
+        "levelActions": 10,
+        "cumulativeActions": 45,
+        "publicPacketSha256": "87a149ada511940bd7043c9f6244c39beb1b813d531c5c8f82e8f59c57525d9d"
+      }
+    ],
+    "finalLevel": 5,
+    "stopReason": "frontier_unknown",
+    "actions": 45,
+    "sessions": 1,
+    "fullV6Parity": false
+  },
+  "v41Comparison": {
+    "initialAndFirst38ReturnsExactlyIdentical": true,
+    "identicalPhysicalCommands": 38,
+    "identicalCompletePublicPacketsIncludingInitial": 39,
+    "firstChangedCommand": 39,
+    "sameOpaqueGameAssetHashes": true,
+    "qualification": "Recorded command/packet equality only; no replayed action was injected into the physical campaign by this audit."
+  },
+  "retainedEventChronology": [
+    {
+      "actionSequence": 38,
+      "kind": "native_program_control_trial",
+      "mode": "probe_edit",
+      "outcome": "collection_insertion_measured",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 56,
+          "y": 56
+        }
+      },
+      "eventSha256": "31809c0e1fa80b91515af55787f78a66643049c64be863a0d13ef0f237314bc2",
+      "evidence": [
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:4:revision:38:frame:0cc68f4612038591",
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:4:revision:39:frame:e3d95afbdf6dab45"
+      ]
+    },
+    {
+      "actionSequence": 39,
+      "kind": "native_program_control_trial",
+      "mode": "probe_prepare_return",
+      "outcome": "known_return_member_inserted",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 36,
+          "y": 56
+        }
+      },
+      "eventSha256": "267bc874e5f24dba842d425a07585c45b496409c3cd8315a2db21622e4c3e623",
+      "evidence": [
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:4:revision:39:frame:e3d95afbdf6dab45",
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:4:revision:40:frame:0b832e337681bcf5"
+      ]
+    },
+    {
+      "actionSequence": 40,
+      "kind": "native_program_control_trial",
+      "mode": "probe_execute",
+      "outcome": "isolated_public_phase_measured",
+      "command": {
+        "action_ref": "ACTION5"
+      },
+      "eventSha256": "a1404df75e37a1549f0921303ce404d0d45bc61ade3599a57b38847209e584cf",
+      "evidence": [
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:4:revision:40:frame:0b832e337681bcf5",
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:4:revision:41:frame:aca46eb6f7cf57ee"
+      ]
+    },
+    {
+      "actionSequence": 41,
+      "kind": "native_program_relation_trial",
+      "mode": "remove",
+      "outcome": "relation_edit_matched",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 4,
+          "y": 38
+        }
+      },
+      "eventSha256": "c10f8deb289dd9444a82286d199dcc94e2d1d53dff7009369ac55d150cc90a29",
+      "evidence": [
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:4:revision:41:frame:aca46eb6f7cf57ee",
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:4:revision:42:frame:fb948f9c4d942ece"
+      ]
+    },
+    {
+      "actionSequence": 42,
+      "kind": "native_program_relation_trial",
+      "mode": "remove",
+      "outcome": "relation_edit_matched",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 4,
+          "y": 44
+        }
+      },
+      "eventSha256": "6e9b67e50af1fa3d2e043058412053701710ee737fc99e0ec7b7c288dba97f77",
+      "evidence": [
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:4:revision:42:frame:fb948f9c4d942ece",
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:4:revision:43:frame:0bcefa8545809876"
+      ]
+    },
+    {
+      "actionSequence": 43,
+      "kind": "native_program_relation_trial",
+      "mode": "insert",
+      "outcome": "relation_edit_matched",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 26,
+          "y": 56
+        }
+      },
+      "eventSha256": "3788ec71c3c7eebc32cd65af87d5f72f9410a1854c7d915e452b974e08d1f66b",
+      "evidence": [
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:4:revision:43:frame:0bcefa8545809876",
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:4:revision:44:frame:87538dab97646efb"
+      ]
+    },
+    {
+      "actionSequence": 44,
+      "kind": "native_program_relation_trial",
+      "mode": "insert",
+      "outcome": "relation_edit_matched",
+      "command": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 56,
+          "y": 56
+        }
+      },
+      "eventSha256": "8059b0e77e7920b102bea89839bdfaeeb29f43e7eef5623521c01bee76c188bc",
+      "evidence": [
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:4:revision:44:frame:87538dab97646efb",
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:4:revision:45:frame:a92dbcc1325aa692"
+      ]
+    },
+    {
+      "actionSequence": 45,
+      "kind": "native_program_relation_trial",
+      "mode": "execute",
+      "outcome": "relation_measurement_unresolved",
+      "command": {
+        "action_ref": "ACTION5"
+      },
+      "eventSha256": "cde21fda376824fd65c12c685489a8910c2581444d24773a543f7499c42ffb13",
+      "evidence": [
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:4:revision:45:frame:a92dbcc1325aa692",
+        "sra-v6-e07d62f9-1076-4191-85a9-76e6d9a4c7b2:epoch:5:revision:46:frame:832834cb21d500fe"
+      ]
+    }
+  ],
+  "independentEditMeasurements": [
+    {
+      "actionSequence": 38,
+      "beforeWord": [
+        9
+      ],
+      "afterWord": [
+        7,
+        9
+      ],
+      "beforeRectangles": [
+        {
+          "bbox": [
+            1,
+            48,
+            8,
+            52
+          ],
+          "color": 9,
+          "area": 40
+        }
+      ],
+      "afterRectangles": [
+        {
+          "bbox": [
+            1,
+            42,
+            8,
+            46
+          ],
+          "color": 7,
+          "area": 40
+        },
+        {
+          "bbox": [
+            1,
+            48,
+            8,
+            52
+          ],
+          "color": 9,
+          "area": 40
+        }
+      ],
+      "matchesRetainedTrial": true
+    },
+    {
+      "actionSequence": 39,
+      "beforeWord": [
+        7,
+        9
+      ],
+      "afterWord": [
+        11,
+        7,
+        9
+      ],
+      "beforeRectangles": [
+        {
+          "bbox": [
+            1,
+            42,
+            8,
+            46
+          ],
+          "color": 7,
+          "area": 40
+        },
+        {
+          "bbox": [
+            1,
+            48,
+            8,
+            52
+          ],
+          "color": 9,
+          "area": 40
+        }
+      ],
+      "afterRectangles": [
+        {
+          "bbox": [
+            1,
+            36,
+            8,
+            40
+          ],
+          "color": 11,
+          "area": 40
+        },
+        {
+          "bbox": [
+            1,
+            42,
+            8,
+            46
+          ],
+          "color": 7,
+          "area": 40
+        },
+        {
+          "bbox": [
+            1,
+            48,
+            8,
+            52
+          ],
+          "color": 9,
+          "area": 40
+        }
+      ],
+      "matchesRetainedTrial": true
+    },
+    {
+      "actionSequence": 41,
+      "beforeWord": [
+        11,
+        7,
+        9
+      ],
+      "afterWord": [
+        7,
+        9
+      ],
+      "beforeRectangles": [
+        {
+          "bbox": [
+            1,
+            36,
+            8,
+            40
+          ],
+          "color": 11,
+          "area": 40
+        },
+        {
+          "bbox": [
+            1,
+            42,
+            8,
+            46
+          ],
+          "color": 7,
+          "area": 40
+        },
+        {
+          "bbox": [
+            1,
+            48,
+            8,
+            52
+          ],
+          "color": 9,
+          "area": 40
+        }
+      ],
+      "afterRectangles": [
+        {
+          "bbox": [
+            1,
+            42,
+            8,
+            46
+          ],
+          "color": 7,
+          "area": 40
+        },
+        {
+          "bbox": [
+            1,
+            48,
+            8,
+            52
+          ],
+          "color": 9,
+          "area": 40
+        }
+      ],
+      "matchesRetainedTrial": true
+    },
+    {
+      "actionSequence": 42,
+      "beforeWord": [
+        7,
+        9
+      ],
+      "afterWord": [
+        9
+      ],
+      "beforeRectangles": [
+        {
+          "bbox": [
+            1,
+            42,
+            8,
+            46
+          ],
+          "color": 7,
+          "area": 40
+        },
+        {
+          "bbox": [
+            1,
+            48,
+            8,
+            52
+          ],
+          "color": 9,
+          "area": 40
+        }
+      ],
+      "afterRectangles": [
+        {
+          "bbox": [
+            1,
+            48,
+            8,
+            52
+          ],
+          "color": 9,
+          "area": 40
+        }
+      ],
+      "matchesRetainedTrial": true
+    },
+    {
+      "actionSequence": 43,
+      "beforeWord": [
+        9
+      ],
+      "afterWord": [
+        14,
+        9
+      ],
+      "beforeRectangles": [
+        {
+          "bbox": [
+            1,
+            48,
+            8,
+            52
+          ],
+          "color": 9,
+          "area": 40
+        }
+      ],
+      "afterRectangles": [
+        {
+          "bbox": [
+            1,
+            42,
+            8,
+            46
+          ],
+          "color": 14,
+          "area": 40
+        },
+        {
+          "bbox": [
+            1,
+            48,
+            8,
+            52
+          ],
+          "color": 9,
+          "area": 40
+        }
+      ],
+      "matchesRetainedTrial": true
+    },
+    {
+      "actionSequence": 44,
+      "beforeWord": [
+        14,
+        9
+      ],
+      "afterWord": [
+        7,
+        14,
+        9
+      ],
+      "beforeRectangles": [
+        {
+          "bbox": [
+            1,
+            42,
+            8,
+            46
+          ],
+          "color": 14,
+          "area": 40
+        },
+        {
+          "bbox": [
+            1,
+            48,
+            8,
+            52
+          ],
+          "color": 9,
+          "area": 40
+        }
+      ],
+      "afterRectangles": [
+        {
+          "bbox": [
+            1,
+            36,
+            8,
+            40
+          ],
+          "color": 7,
+          "area": 40
+        },
+        {
+          "bbox": [
+            1,
+            42,
+            8,
+            46
+          ],
+          "color": 14,
+          "area": 40
+        },
+        {
+          "bbox": [
+            1,
+            48,
+            8,
+            52
+          ],
+          "color": 9,
+          "area": 40
+        }
+      ],
+      "matchesRetainedTrial": true
+    }
+  ],
+  "returnPreparation": {
+    "wordBefore": [
+      7,
+      9
+    ],
+    "wordAfter": [
+      11,
+      7,
+      9
+    ],
+    "inverseLabel": 11,
+    "inverseVector": [
+      -4,
+      2
+    ],
+    "returnMeasuredAtSameBase": [
+      30,
+      22
+    ],
+    "sameExactColoredBearerAppearance": true,
+    "restoredControlPatches": [
+      {
+        "label": 10,
+        "bbox": [
+          2,
+          54,
+          10,
+          58
+        ],
+        "exactPatchRestored": true
+      },
+      {
+        "label": 9,
+        "bbox": [
+          12,
+          54,
+          20,
+          58
+        ],
+        "exactPatchRestored": true
+      },
+      {
+        "label": 14,
+        "bbox": [
+          22,
+          54,
+          30,
+          58
+        ],
+        "exactPatchRestored": true
+      },
+      {
+        "label": 11,
+        "bbox": [
+          32,
+          54,
+          40,
+          58
+        ],
+        "exactPatchRestored": true
+      },
+      {
+        "label": 7,
+        "bbox": [
+          52,
+          54,
+          60,
+          58
+        ],
+        "exactPatchRestored": true
+      }
+    ],
+    "qualification": "The return was observed in this execution. It is not a universal preservation law for the new input."
+  },
+  "execution40PublicPhases": [
+    {
+      "label": 9,
+      "memberIndex": 2,
+      "newControlLabel": false,
+      "packetFrameIndicesZeroBased": [
+        1,
+        4
+      ],
+      "translations": [
+        {
+          "word": [
+            11,
+            7,
+            9
+          ],
+          "reportedBeforeBase": [
+            30,
+            22
+          ],
+          "reportedAfterBase": [
+            34,
+            20
+          ],
+          "pixelVector": [
+            4,
+            -2
+          ],
+          "beforeBbox": [
+            30,
+            19,
+            32,
+            23
+          ],
+          "afterBbox": [
+            34,
+            17,
+            36,
+            21
+          ],
+          "area": 11,
+          "coloredMaskSha256": "5e66722f6cf33167c88dd8bebd94649bdd6046bd513ab846fc41b394d308cfbc",
+          "exactColoredShapePreserved": true
+        }
+      ],
+      "preserved": [
+        {
+          "word": [
+            8,
+            8,
+            8
+          ],
+          "reportedBase": [
+            38,
+            22
+          ],
+          "bbox": [
+            38,
+            19,
+            40,
+            23
+          ],
+          "area": 11,
+          "samePixelsAtSamePosition": true
+        }
+      ],
+      "otherPublicChangesRetained": [
+        {
+          "after_count": 0,
+          "after_positions": [],
+          "before_count": 1,
+          "before_positions": [
+            [
+              59,
+              1
+            ]
+          ],
+          "identity_status": "appearance_change_not_object_death_proof",
+          "signature": "5ad9c4fc42d547927085310a7aed639a7e5542989a0eacb150a9dbe7b6bed676"
+        },
+        {
+          "after_count": 1,
+          "after_positions": [
+            [
+              59,
+              1
+            ]
+          ],
+          "before_count": 0,
+          "before_positions": [],
+          "identity_status": "appearance_change_not_object_death_proof",
+          "signature": "75ae58048d61de9a6e3d0e9ee5ef33cffea8754ea86d4111dbd9940c3ab0aabd"
+        },
+        {
+          "after_count": 1,
+          "after_positions": [
+            [
+              28,
+              22
+            ]
+          ],
+          "before_count": 0,
+          "before_positions": [],
+          "identity_status": "appearance_change_not_object_death_proof",
+          "signature": "fde247f565cf51d523afd3f24d0bb3ede851c69fd8dd1e648d2fa9df7ee993dc"
+        }
+      ]
+    },
+    {
+      "label": 7,
+      "memberIndex": 1,
+      "newControlLabel": true,
+      "packetFrameIndicesZeroBased": [
+        4,
+        8
+      ],
+      "translations": [
+        {
+          "word": [
+            8,
+            8,
+            8
+          ],
+          "reportedBeforeBase": [
+            38,
+            22
+          ],
+          "reportedAfterBase": [
+            42,
+            24
+          ],
+          "pixelVector": [
+            4,
+            2
+          ],
+          "beforeBbox": [
+            38,
+            19,
+            40,
+            23
+          ],
+          "afterBbox": [
+            42,
+            21,
+            44,
+            25
+          ],
+          "area": 11,
+          "coloredMaskSha256": "e2101bb557c1ca46c7d06b27efaf557191463d4ac2405b081a7f4a271dcddc0f",
+          "exactColoredShapePreserved": true
+        }
+      ],
+      "preserved": [
+        {
+          "word": [
+            11,
+            7,
+            9
+          ],
+          "reportedBase": [
+            34,
+            20
+          ],
+          "bbox": [
+            34,
+            17,
+            36,
+            21
+          ],
+          "area": 11,
+          "samePixelsAtSamePosition": true
+        }
+      ],
+      "otherPublicChangesRetained": [
+        {
+          "after_count": 1,
+          "after_positions": [
+            [
+              59,
+              1
+            ]
+          ],
+          "before_count": 0,
+          "before_positions": [],
+          "identity_status": "appearance_change_not_object_death_proof",
+          "signature": "5ad9c4fc42d547927085310a7aed639a7e5542989a0eacb150a9dbe7b6bed676"
+        },
+        {
+          "after_count": 0,
+          "after_positions": [],
+          "before_count": 1,
+          "before_positions": [
+            [
+              59,
+              1
+            ]
+          ],
+          "identity_status": "appearance_change_not_object_death_proof",
+          "signature": "75ae58048d61de9a6e3d0e9ee5ef33cffea8754ea86d4111dbd9940c3ab0aabd"
+        }
+      ]
+    },
+    {
+      "label": 11,
+      "memberIndex": 0,
+      "newControlLabel": false,
+      "packetFrameIndicesZeroBased": [
+        8,
+        11
+      ],
+      "translations": [
+        {
+          "word": [
+            11,
+            7,
+            9
+          ],
+          "reportedBeforeBase": [
+            34,
+            20
+          ],
+          "reportedAfterBase": [
+            30,
+            22
+          ],
+          "pixelVector": [
+            -4,
+            2
+          ],
+          "beforeBbox": [
+            34,
+            17,
+            36,
+            21
+          ],
+          "afterBbox": [
+            30,
+            19,
+            32,
+            23
+          ],
+          "area": 11,
+          "coloredMaskSha256": "5e66722f6cf33167c88dd8bebd94649bdd6046bd513ab846fc41b394d308cfbc",
+          "exactColoredShapePreserved": true
+        }
+      ],
+      "preserved": [
+        {
+          "word": [
+            8,
+            8,
+            8
+          ],
+          "reportedBase": [
+            42,
+            24
+          ],
+          "bbox": [
+            42,
+            21,
+            44,
+            25
+          ],
+          "area": 11,
+          "samePixelsAtSamePosition": true
+        }
+      ],
+      "otherPublicChangesRetained": [
+        {
+          "after_count": 1,
+          "after_positions": [
+            [
+              59,
+              1
+            ]
+          ],
+          "before_count": 0,
+          "before_positions": [],
+          "identity_status": "appearance_change_not_object_death_proof",
+          "signature": "5679bd41370810806cadbb2d4783692a0548506f91c940087687e80017386006"
+        },
+        {
+          "after_count": 0,
+          "after_positions": [],
+          "before_count": 1,
+          "before_positions": [
+            [
+              59,
+              1
+            ]
+          ],
+          "identity_status": "appearance_change_not_object_death_proof",
+          "signature": "5ad9c4fc42d547927085310a7aed639a7e5542989a0eacb150a9dbe7b6bed676"
+        },
+        {
+          "after_count": 0,
+          "after_positions": [],
+          "before_count": 1,
+          "before_positions": [
+            [
+              28,
+              22
+            ]
+          ],
+          "identity_status": "appearance_change_not_object_death_proof",
+          "signature": "fde247f565cf51d523afd3f24d0bb3ede851c69fd8dd1e648d2fa9df7ee993dc"
+        }
+      ]
+    }
+  ],
+  "relationModel": {
+    "relationId": "program-relation:dd3b9a7b390b12cfa65e5c42",
+    "sourceModelId": "program-model:a477c42df36f260dee11",
+    "sourceModelDigest": "893b18f8cec15026a6bdf970800dc29113aff610456ceb73b213f27407da90fb",
+    "supportCount": 1,
+    "acquiredAtAction": 40,
+    "reusedByRealActions": [
+      41,
+      42,
+      43,
+      44,
+      45
+    ],
+    "offset": [
+      4,
+      2
+    ],
+    "displacement": [
+      4,
+      2
+    ],
+    "respondentWord": [
+      8,
+      8,
+      8
+    ],
+    "candidatesRetained": [
+      {
+        "delta": [
+          4,
+          2
+        ],
+        "kind": "fixed_delta"
+      },
+      {
+        "coefficient": 1,
+        "kind": "radial_delta"
+      }
+    ],
+    "observedPrecedingLabels": [
+      9
+    ],
+    "causalStatus": "phase_association_not_causal_identification",
+    "uncertaintiesPreserved": [
+      "A delayed response to preceding motion is still possible.",
+      "Fixed and relative displacement are not distinguished by equal-offset transport.",
+      "Applicability to other offsets, words, object counts, supports or execution prefixes is unestablished.",
+      "Only the decoded bearer/respondent projection is modeled; other public changes and terminal meaning remain unknown."
+    ],
+    "unchangedThroughOfficialBoundary": true
+  },
+  "execution45BoundaryTreatment": {
+    "beforeWord": [
+      7,
+      14,
+      9
+    ],
+    "destinationSupport": "uncharacterized_support_extension",
+    "preparationProjection": {
+      "executionPrefix": [
+        9,
+        14
+      ],
+      "observedSourceVectors": [
+        [
+          4,
+          -2
+        ],
+        [
+          4,
+          2
+        ]
+      ],
+      "projectedBearerBase": [
+        38,
+        22
+      ],
+      "respondentBaseBefore": [
+        42,
+        24
+      ],
+      "projectedRelativeOffset": [
+        4,
+        2
+      ],
+      "pairTransportFromFirstSample": [
+        4,
+        2
+      ],
+      "prefixMatchesFirstSample": false,
+      "qualification": "Geometry recomputed from observed source movements only. The new prefix and destination support are validation questions; this projection is not an additional measured relation sample."
+    },
+    "officialScoreBefore": 3,
+    "officialScoreAfter": 4,
+    "measurement": {
+      "official_outcome": "official_progress_observed",
+      "reason": "official_boundary_excluded_from_relation_attribution",
+      "sample": null,
+      "status": "unresolved"
+    },
+    "newConservativeSampleCreated": false,
+    "relationSupportAfter": 1,
+    "relationModelCountAfter": 1,
+    "relationRefutationCountAfter": 0,
+    "removalReductionOrTerminalLawPromoted": false,
+    "rawAppearanceTimeline": [
+      {
+        "packetFrameIndexZeroBased": 0,
+        "exactRespondentAppearanceBboxes": [
+          [
+            42,
+            21,
+            44,
+            25
+          ]
+        ],
+        "frameSha256": "a92dbcc1325aa692be61560f945a83d0b3e2f679ce9e282dbac947db06d18df6"
+      },
+      {
+        "packetFrameIndexZeroBased": 1,
+        "exactRespondentAppearanceBboxes": [
+          [
+            42,
+            21,
+            44,
+            25
+          ]
+        ],
+        "frameSha256": "0ea017ebaf9f76af1ad9752d2c24093875327e32bc385e48b8258c36fb7dcebc"
+      },
+      {
+        "packetFrameIndexZeroBased": 2,
+        "exactRespondentAppearanceBboxes": [
+          [
+            42,
+            21,
+            44,
+            25
+          ]
+        ],
+        "frameSha256": "5cc1d1d543c7dfbe65278dcefffbb7aca3b81e58952f1cd4b65c5b463f26b21d"
+      },
+      {
+        "packetFrameIndexZeroBased": 3,
+        "exactRespondentAppearanceBboxes": [
+          [
+            42,
+            21,
+            44,
+            25
+          ]
+        ],
+        "frameSha256": "9944558f6bbca877255a81bd7c3b526211e6a1aa661e2da3cb974428d6943350"
+      },
+      {
+        "packetFrameIndexZeroBased": 4,
+        "exactRespondentAppearanceBboxes": [
+          [
+            42,
+            21,
+            44,
+            25
+          ]
+        ],
+        "frameSha256": "7fcc591b27e45576fc46c981c569b64e84feeebc7126433cbc0f290d104e650b"
+      },
+      {
+        "packetFrameIndexZeroBased": 5,
+        "exactRespondentAppearanceBboxes": [],
+        "frameSha256": "0cb772bfb0207ae943904de8982babe182c5e940c3dddf3b2f89161c686bb4de"
+      },
+      {
+        "packetFrameIndexZeroBased": 6,
+        "exactRespondentAppearanceBboxes": [
+          [
+            42,
+            21,
+            44,
+            25
+          ]
+        ],
+        "frameSha256": "71bdae18a9602938beffeaa98a094a9dd7cdd9044ea9a3de1bd3aac81547cc6a"
+      },
+      {
+        "packetFrameIndexZeroBased": 7,
+        "exactRespondentAppearanceBboxes": [
+          [
+            42,
+            21,
+            44,
+            25
+          ]
+        ],
+        "frameSha256": "985046575e0ba718c8c4b335d50a95905d2442530f961fa686d054cf8f94eaae"
+      },
+      {
+        "packetFrameIndexZeroBased": 8,
+        "exactRespondentAppearanceBboxes": [],
+        "frameSha256": "3f359eefa88314abe364df312b57e68fea7095d930853f749d42adf35080e15e"
+      },
+      {
+        "packetFrameIndexZeroBased": 9,
+        "exactRespondentAppearanceBboxes": [],
+        "frameSha256": "f4b4b693963310e025ca592036742e03dd35775f85f78bda2c402ba59fa11e88"
+      },
+      {
+        "packetFrameIndexZeroBased": 10,
+        "exactRespondentAppearanceBboxes": [],
+        "frameSha256": "19d5be02049ddcaf1015f64235bb59acd3d82bcf2331e039cf1aadcfdc5ed37e"
+      },
+      {
+        "packetFrameIndexZeroBased": 11,
+        "exactRespondentAppearanceBboxes": [],
+        "frameSha256": "587b0f2f341fdb106e907779f60bb41b37f2d81a1252a7649be4a2b89accaa37"
+      },
+      {
+        "packetFrameIndexZeroBased": 12,
+        "exactRespondentAppearanceBboxes": [],
+        "frameSha256": "3df49f05fb8f8d137e61aca1444ef4f414190e0559eff9674a860a655e6e1c45"
+      },
+      {
+        "packetFrameIndexZeroBased": 13,
+        "exactRespondentAppearanceBboxes": [],
+        "frameSha256": "587b0f2f341fdb106e907779f60bb41b37f2d81a1252a7649be4a2b89accaa37"
+      },
+      {
+        "packetFrameIndexZeroBased": 14,
+        "exactRespondentAppearanceBboxes": [],
+        "frameSha256": "3df49f05fb8f8d137e61aca1444ef4f414190e0559eff9674a860a655e6e1c45"
+      },
+      {
+        "packetFrameIndexZeroBased": 15,
+        "exactRespondentAppearanceBboxes": [],
+        "frameSha256": "587b0f2f341fdb106e907779f60bb41b37f2d81a1252a7649be4a2b89accaa37"
+      },
+      {
+        "packetFrameIndexZeroBased": 16,
+        "exactRespondentAppearanceBboxes": [],
+        "frameSha256": "3df49f05fb8f8d137e61aca1444ef4f414190e0559eff9674a860a655e6e1c45"
+      },
+      {
+        "packetFrameIndexZeroBased": 17,
+        "exactRespondentAppearanceBboxes": [],
+        "frameSha256": "832834cb21d500fecccb01828fbad93363f0bac1b067d41aecfa6168fdfe9b33"
+      }
+    ],
+    "qualification": "The public score proves the fourth completion. The boundary prevents attribution of the full rewrite to one operator. Raw mask presence/absence is retained for audit only and is not a general disappearance, reduction or terminal rule."
+  },
+  "originalModelPreservation": {
+    "fullReconstructedModelMatchesAcquiredDigest": true,
+    "reportedModelSummariesUnchanged": true,
+    "refutedEpochsBeforeAndAfter": [],
+    "phaseAlignmentCount": 2,
+    "reconciliationCount": 31,
+    "operatorAliasCreated": false,
+    "qualification": "The complete recorded source-model payload is verified against the acquired digest. Its reported summaries and source guards remain unchanged throughout the new trials; the separate native relation retains its own uncertainty."
+  },
+  "conclusion": "Four STCK levels are officially completed in 3, 7, 25 and 10 actions. A real conditional return restores editing access. One acquired phase relation then guides four verified edits and one execution through the common caller. The final official boundary is not counted as confirmation of conservative translation: support stays one, both displacement explanations and delayed-response ambiguity remain open.",
+  "nextEvidenceNeeded": "Characterize a nonterminal transported phase or an independently controlled prefix/offset/support contrast. Keep official success separate from which operation or disappearance caused it."
+}

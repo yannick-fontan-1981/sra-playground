@@ -319,14 +319,14 @@ test('the revalidation question still requires the exact current frame and avail
   assert.deepEqual(family.state(), retained, 'Neither admission nor refusal acquires a current method');
 });
 
-test('the radial entry preserves declared order and makes exactly 32 of 76 source entries connected', async () => {
+test('the radial and rooted entries preserve declared order with exactly 33 of 76 source entries connected', async () => {
   const runtime = await createNativeV6Runtime(declarations, { now: () => 0 });
   const coverage = runtime.snapshot().coverage as R, groups = coverage.sourceGroups as R[];
   const configuration = declarations.strategy.declarations[0]!.configuration as R;
   assert.deepEqual(groups.map(group => group.id), configuration.families);
   const windows = groups.find(group => group.id === 'window_constraints')!;
   assert.deepEqual(windows.entryPoints.filter((entry: string | null) => entry !== null),
-    ['cell_patch_composition', 'observed_occurrence_recall', 'observed_program_composition', 'radial_port_composition']);
+    ['cell_patch_composition', 'observed_occurrence_recall', 'observed_program_composition', 'radial_port_composition', 'rooted_quota_composition']);
   const radialIndex = windows.entryPoints.indexOf('radial_port_composition');
   assert.equal(windows.families[radialIndex], 'public_occurrence_recall');
   assert.equal(coverage.registeredFamilies.filter((family: string) => family === 'public_occurrence_recall').length, 1);
@@ -337,7 +337,7 @@ test('the radial entry preserves declared order and makes exactly 32 of 76 sourc
     scored_relation_access: 'goal_access', observed_support_access: 'support_navigation',
     coupled_support_composition: 'public_occurrence_recall', alternating_graph_composition: 'public_occurrence_recall',
     cell_patch_composition: 'public_occurrence_recall', observed_program_composition: 'public_occurrence_recall',
-    radial_port_composition: 'public_occurrence_recall', observed_occurrence_recall: 'public_occurrence_recall',
+    radial_port_composition: 'public_occurrence_recall', rooted_quota_composition: 'public_occurrence_recall', observed_occurrence_recall: 'public_occurrence_recall',
     multiscale_constraints: 'window_constraints', surface_rewrite: 'surface_program', learned_code_program: 'code_program',
     typed_word_interface: 'word_interface', rigid_port_assembly: 'port_assembly',
     controlled_constellation_cover: 'constellation_cover', conserved_band_transfer: 'band_transfer',
@@ -357,8 +357,8 @@ test('the radial entry preserves declared order and makes exactly 32 of 76 sourc
     });
     return [connected.length, declared.length];
   });
-  assert.deepEqual(counts, [[8, 12], [7, 21], [8, 10], [9, 33]]);
-  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 32);
+  assert.deepEqual(counts, [[8, 12], [8, 21], [8, 10], [9, 33]]);
+  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 33);
   assert.equal(counts.reduce((sum, count) => sum + count[1]!, 0), 76);
   assert.equal(coverage.fullV6Parity, false);
 });

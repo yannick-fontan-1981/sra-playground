@@ -28,29 +28,34 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **PIPE now completes its
-  first three levels in 23 actions (4, 8 and 11)** through one fresh common
-  Logos Engine session, acquiring all 23 transitions across 20 prefixes.
-  The run stops at its declared target on entry to level 4 with `NOT_FINISHED`.
-  The [v41 radial-port and control-discovery report](docs/migration/v41-radial-ports-control-discovery.md)
-  documents the original radial component transfer, current-context
-  revalidation of an acquired rotation, and two real experiments discovering
-  an unknown editor control. Acquired state and
-  proposal evidence use the actual Kernel graph; observation, search and guard
-  algorithms still run as native TypeScript callbacks.
+  level**; opening the tab does not move the game. **THER now completes its
+  first four levels in 15 actions (4, 3, 4 and 4)** through one fresh common
+  Logos Engine session, acquiring all 15 transitions across six prefixes.
+  **STCK now also completes level 4**, reaching four completed levels in
+  **45 actions (3, 7, 25 and 10)** through a separate cold common session.
+  Both bounded campaigns stop at their declared target on entry to level 5
+  with `NOT_FINISHED`, without claiming a full-game win.
+  The [v42 rooted-quota and conditional-relation report](docs/migration/v42-rooted-quota-program-relations.md)
+  documents the original quota component transfer, conditional return
+  preparation, acquisition of a phase-associated relation and a real guarded
+  transport experiment. The official fourth-level completion does not
+  strengthen that relation: its terminal packet excludes phase attribution,
+  so fixed/relative displacement and delayed-response alternatives remain open.
+  Acquired state and proposal evidence use the actual Kernel graph;
+  observation, search and guard algorithms still run as native TypeScript callbacks.
+  **Previous v41 milestone: PIPE completes its first three levels in 23 actions
+  (4, 8 and 11)**; see the [v41 report](docs/migration/v41-radial-ports-control-discovery.md).
   **Previous v40 milestone: MEMO completes its first three levels in 30 actions
   (10 per level)**; see the [v40 report](docs/migration/v40-acquired-preparation.md).
-  **Previous v39 milestone: STCK completes its first three levels in 35 actions
-  (3, 7 and 25)**; see the [v39 report](docs/migration/v39-observed-program.md).
-  The v41 STCK diagnostic reaches level 4, acquires a new control binding and
-  an isolated public effect, then stops after 39 actions without another
-  completion. No new operator law or fourth-level success is claimed.
+  **Previous v39 milestone: STCK completed its first three levels in 35 actions**;
+  see the [v39 report](docs/migration/v39-observed-program.md).
   **Previous v38 milestone: TICT completes all six levels with official `WIN`
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
-  The current entry audit connects **32 of 76 explicit DRM subquestions
-  (42.1%)**, with one newly connected radial entry; complete V6 migration
-  remains in progress.
+  The current entry audit connects **33 of 76 explicit DRM subquestions
+  (43.4%)**, with one newly connected rooted-quota entry. Conditional program
+  relations are explicit native extensions and add no source entry.
+  Complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These
   checks do not establish complete V6 coverage. See [the transfer requirements

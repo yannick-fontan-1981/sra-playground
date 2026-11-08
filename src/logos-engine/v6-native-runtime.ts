@@ -46,7 +46,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.11.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.12.0';
 const SELECTION_PROGRAM = 'v6.composition_strategy.choose';
 type R = Record<string, any>;
 const EPISODE = 'common-observation-frontier';
@@ -754,10 +754,10 @@ export class NativeV6Runtime implements NativeV6Backend {
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id),
-        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_native_control_discovery_radial_ports_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
+        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_native_relations_radial_ports_rooted_quota_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
         sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,
         nativeCallerExtensions: ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
-          'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery',
+          'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery', 'conditional_program_relation_acquisition_and_validation',
           'stationary_unlearned_contact_refusal_scope'],
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
       srcDecision: this.selectionReceipt,
@@ -936,8 +936,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const interfaces = createNativeInterfaceFamilies();
   const recall = createNativeSharedSeriesFamily((configuration.window_constraints as R).occurrence_recall,
     configuration.coupled_support_composition, configuration.alternating_graph_composition,
-    (configuration.window_constraints as R).cell_patch_composition, { currentProgramAccess: true, programControlDiscovery: true },
-    (configuration.window_constraints as R).radial_port_composition);
+    (configuration.window_constraints as R).cell_patch_composition, { currentProgramAccess: true, programControlDiscovery: true, programRelationLearning: true },
+    (configuration.window_constraints as R).radial_port_composition, (configuration.window_constraints as R).rooted_quota_composition);
   const policy = loaded.common as R;
   const supportChildren: Record<string, NativeFamily<any>> = {
     ordered_support_transfer: ordered,
@@ -962,7 +962,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   // each is consulted only at its own position in the original DRM order.
   const windowProviders: Record<string, NativeFamily> = {
     multiscale_constraints: windows, cell_patch_composition: recall, observed_occurrence_recall: recall,
-    observed_program_composition: recall, radial_port_composition: recall, ...supportChildren,
+    observed_program_composition: recall, radial_port_composition: recall, rooted_quota_composition: recall, ...supportChildren,
   };
   const windowEntries = (configuration.window_constraints.ordered_subquestions as string[])
     .filter(question => windowProviders[question]);
@@ -1002,7 +1002,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     declarations: loaded, families: [...families.map(f => f.id), ...CALLER_PROVIDERS], groups, authority: 'native_original_why_act', caller: 'native_common_coordinator',
     selectionProgram: nativeProgramDescriptions().find(program => program.id === 'v6.composition_strategy.choose')?.transitiveSourceHash ?? null,
     nativeCallerExtensions: ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
-      'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery',
+      'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery', 'conditional_program_relation_acquisition_and_validation',
       'stationary_unlearned_contact_refusal_scope'],
     fullV6Parity: false };
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));

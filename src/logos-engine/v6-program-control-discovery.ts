@@ -106,7 +106,8 @@ export function programControlDiscoveryBlocksOrdinaryPlan(model: R, events: read
  * similarity assigns an operator. The execution question requires a binding
  * present in acquired events and exactly one occurrence of its new label.
  */
-export function programControlDiscoveryQuestion(model: R, events: readonly R[], observation: R, rows: NativeRows): R | null {
+export function programControlDiscoveryQuestion(model: R, events: readonly R[], observation: R, rows: NativeRows,
+  options: { prepareReturn?: boolean } = {}): R | null {
   if (!baseValid(model) || !Array.isArray(observation.available_action_refs) || ['WIN', 'GAME_OVER'].includes(observation.state)) return null;
   const access = bindCurrentProgramAccess(rows, model, observation);
   if (access.status !== 'bound' || !access.unknown_controls.length) return null;
@@ -123,14 +124,44 @@ export function programControlDiscoveryQuestion(model: R, events: readonly R[], 
     if (candidates.length) {
       const binding = candidates.at(-1)!;
       if (new Set(candidates.map(candidate => candidate.label)).size !== 1 || !scene.owner
-        || !equal(scene.word, binding.after_word) || scene.word.filter((label: number) => label === binding.label).length !== 1
+        || scene.word.filter((label: number) => label === binding.label).length !== 1
         || scene.word.some((label: number) => label !== binding.label && !knownLabels(model).has(label))
-        || !equal(scene.owner.base, binding.owner_after.base) || !equal(scene.objects, binding.objects_after)
+        || !equal(scene.owner.base, binding.owner_after.base)
         || !observation.available_action_refs.includes(model.command_ref)) continue;
+      const original = equal(scene.word, binding.after_word) && equal(scene.objects, binding.objects_after);
+      const preparation = options.prepareReturn ? events.filter(event => event.kind === 'native_program_control_trial'
+        && event.schema === schema && event.mode === 'probe_prepare_return' && event.outcome === 'known_return_member_inserted'
+        && event.binding_id === binding.binding_id && event.model_id === model.model_id && event.model_digest === modelDigest(model)
+        && event.epoch === observation.level_epoch && equal(event.return_preparation?.after_word, scene.word)
+        && equal(event.return_preparation?.objects_after, scene.objects)).at(-1) : null;
+      if (!original && !preparation) continue;
+      if (options.prepareReturn && original) {
+        // The unknown member is never assumed to preserve its bearer. This
+        // known inverse is a bounded attempt to recover the measured input
+        // site if the unknown middle phase leaves the bearer intact.
+        const execution: number[] = [...scene.word].reverse(), unknownIndex = execution.indexOf(binding.label);
+        const moves = new Map<number, R>((model.moves as R[]).filter(move => move.status === 'phase_observed_translation'
+          && move.vectors.length === 1).map(move => [move.label, move]));
+        if (unknownIndex !== execution.length - 1 || !unknownIndex || execution.slice(0, unknownIndex).some(label => !moves.has(label))) continue;
+        const sum = execution.slice(0, unknownIndex).reduce<number[]>((value, label) => value.map((v, i) => v + moves.get(label)!.vectors[0][i]), [0, 0]);
+        const inverses = [...moves.values()].filter(move => equal(move.vectors[0], sum.map(value => -value || 0)));
+        const choices = access.layout.controls.filter((item: R) => inverses.some(move => move.label === item.color));
+        if (choices.length !== 1 || !observation.available_action_refs.includes('ACTION6')) continue;
+        const returnControl = choices[0], trial = trialKey('probe_prepare_return', model, observation.level_epoch, control, access.layout, scene);
+        if (tried(events, trial)) continue;
+        return packageProbe(observation, { ...common, mode: 'probe_prepare_return', control, entity: returnControl, control_key: key, binding,
+          binding_digest: identity(binding), trial_key: trial, return_control: returnControl, return_label: returnControl.color,
+          prepared_word: [returnControl.color, ...scene.word], expected_return_base: scene.owner.base,
+          return_status: 'conditional_known_inverse_after_unknown_phase', action: { action_ref: 'ACTION6',
+            data: { x: center(returnControl.bbox)[0], y: center(returnControl.bbox)[1] } } },
+        'Insert one already phase-observed inverse after the unknown program phase. This tests a conditional return to the acquired input-bearing site; it does not assume the unknown effect preserves the bearer or guarantees editing access. Observe this edit before execution.');
+      }
       const trial = trialKey('probe_execute', model, observation.level_epoch, control, access.layout, scene);
       if (tried(events, trial)) continue;
       return packageProbe(observation, { ...common, mode: 'probe_execute', control, control_key: key, binding,
-        binding_digest: identity(binding), trial_key: trial, action: { action_ref: model.command_ref } },
+        binding_digest: identity(binding), trial_key: trial, ...(preparation ? { return_preparation: preparation.return_preparation,
+          return_preparation_evidence: preparation.evidence, expected_return_base: preparation.return_preparation.expected_return_base } : {}),
+        action: { action_ref: model.command_ref } },
       'Execute the freshly observed collection once to measure the new member’s public phase. The insertion binding is acquired; its operator effect, preservation and terminal meaning remain unknown. Stop after this real return.');
     }
   }
@@ -158,7 +189,7 @@ export function programControlDiscoveryBefore(proposal: R, index: number, rows: 
     || identity(rows) !== plan.frame_digest || !Array.isArray(meta.available) || !meta.available.includes(plan.action?.action_ref)
     || !equal(proposal.actions, [plan.action])) return reject('control_probe_context_changed');
   const current = programControlDiscoveryQuestion(model, events, { level_epoch: meta.epoch, levels_completed: meta.score,
-    observation_ref: meta.observation_ref, available_action_refs: meta.available, state: meta.state }, rows);
+    observation_ref: meta.observation_ref, available_action_refs: meta.available, state: meta.state }, rows, { prepareReturn: meta.prepareReturn === true });
   if (!current || !equal(current.program_control_probe_plan, plan)) return reject('control_probe_evidence_or_binding_changed');
   return { admitted: true, reason: 'current_unattributed_input_experiment_bound' };
 }
@@ -246,7 +277,7 @@ function measureExecution(plan: R, rows: NativeRows, frames: readonly NativeRows
 
 /** Only actual, currently admitted command/return pairs create acquired facts. */
 export function recordProgramControlDiscovery(before: R, command: R, after: R, rows: NativeRows, later: NativeRows,
-  frames: readonly NativeRows[], proposal: R, context: { model?: R | null; events: readonly R[] }): R[] {
+  frames: readonly NativeRows[], proposal: R, context: { model?: R | null; events: readonly R[]; prepareReturn?: boolean }): R[] {
   const plan = proposal.program_control_probe_plan;
   if (!plan || !sameCommand(command, plan.action)) return [];
   const admitted = programControlDiscoveryBefore(proposal, 0, rows, { epoch: before.level_epoch, score: before.levels_completed,
@@ -272,8 +303,31 @@ export function recordProgramControlDiscovery(before: R, command: R, after: R, r
       binding.binding_id = 'program-control-binding:' + identity(binding).slice(0, 24);
       events.push(binding);
     }
+  } else if (plan.mode === 'probe_prepare_return') {
+    const sameEpoch = before.level_epoch === after.level_epoch && before.levels_completed === after.levels_completed
+      && !['WIN', 'GAME_OVER'].includes(after.state);
+    const measured = sameEpoch ? insertedMember(plan, later) : null;
+    const matched = measured && measured.label === plan.return_label && measured.insertion_index === 0
+      && equal(measured.after_word, plan.prepared_word);
+    trial.binding_id = plan.binding.binding_id;
+    trial.outcome = matched ? 'known_return_member_inserted' : 'known_return_preparation_unresolved';
+    trial.return_preparation = matched ? { ...measured, expected_return_base: plan.expected_return_base,
+      unknown_label: plan.binding.label, return_label: plan.return_label, return_control: plan.return_control,
+      status: 'observed_known_member_edit_return_still_conditional' } : null;
   } else if (plan.mode === 'probe_execute') {
     const measurement = measureExecution(plan, rows, frames, after);
+    if (plan.return_preparation) {
+      const current = bindCurrentProgramAccess(later, plan.model, after);
+      const members = current.status === 'bound' ? collection(later, current.layout, new Set(plan.palette)) : [];
+      const objects = world(later, plan.model, new Set(plan.palette));
+      const returned = equal(words(members), plan.before_word) && objects.some(object => equal(object.word, plan.before_word)
+        && equal(object.base, plan.expected_return_base));
+      measurement.return_preparation_evidence = plan.return_preparation_evidence;
+      measurement.return_measurement = { expected_base: plan.expected_return_base, observed_same_base: returned,
+        current_editor_access: current.status, status: returned && current.status === 'bound'
+          ? 'observed_return_and_current_editor_access' : 'conditional_return_not_observed',
+        scope: 'A measured return in this execution, not a preservation guarantee for the unknown control.' };
+    }
     trial.outcome = measurement.status;
     events.push({ ...common, ...measurement, kind: 'native_program_control_effect', trial_key: plan.trial_key, command });
   }

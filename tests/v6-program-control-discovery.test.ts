@@ -212,3 +212,68 @@ test('the execution command must still be available and retain its learned paylo
   assert.deepEqual(recordProgramControlDiscovery(before, { action_ref: 'ACTION5', data: { x: 2 } }, observation(rows, 3), rows, rows, [rows], proposal,
     { model: f.model, events }), []);
 });
+
+test('explicit return preparation inserts only a phase-observed inverse and does not claim the unknown phase preserves its bearer', () => {
+  const { f, events, later, after } = acquireEdit(), previous = copy(events), model = copy(f.model);
+  assert.equal(programControlDiscoveryQuestion(f.model, events, after, later)!.program_control_probe_plan.mode, 'probe_execute');
+  const proposal = programControlDiscoveryQuestion(f.model, events, after, later, { prepareReturn: true })!;
+  assert.equal(proposal.program_control_probe_plan.mode, 'probe_prepare_return');
+  assert.deepEqual(proposal.program_control_probe_plan.prepared_word, [f.labels[1], f.emitted, f.labels[0]]);
+  assert.deepEqual(proposal.program_control_probe_plan.expected_return_base, f.ownBase);
+  assert.equal(proposal.program_control_probe_plan.return_status, 'conditional_known_inverse_after_unknown_phase');
+  assert.equal(proposal.program_control_probe_plan.operator_status, 'unknown');
+  assert.equal(proposal.actions.length, 1);
+  assert.equal(programControlDiscoveryBefore(proposal, 0, later, { ...meta(f.model, events, after), prepareReturn: true }).admitted, true);
+  assert.equal(programControlDiscoveryBefore(proposal, 0, later, meta(f.model, events, after)).admitted, false,
+    'The plan cannot enable a native return-preparation option on its own');
+  assert.deepEqual(f.model, model); assert.deepEqual(events, previous);
+});
+
+test('execution after a controlled return edit requires the actual retained preparation trial', () => {
+  const { f, events, later, after, binding } = acquireEdit();
+  const proposal = programControlDiscoveryQuestion(f.model, events, after, later, { prepareReturn: true })!;
+  const returned = f.draw(proposal.program_control_probe_plan.prepared_word), observationAfter = observation(returned, 3);
+  assert.equal(programControlDiscoveryQuestion(f.model, events, observationAfter, returned, { prepareReturn: true }), null,
+    'The visible prepared word does not manufacture its own insertion evidence');
+  const acquired = recordProgramControlDiscovery(after, proposal.actions[0], observationAfter, later, returned, [returned], proposal,
+    { model: f.model, events, prepareReturn: true });
+  assert.equal(acquired.length, 1);
+  assert.equal(acquired[0].kind, 'native_program_control_trial');
+  assert.equal(acquired[0].mode, 'probe_prepare_return');
+  assert.equal(acquired[0].outcome, 'known_return_member_inserted');
+  assert.equal(acquired[0].binding_id, binding.binding_id);
+  assert.equal(acquired[0].return_preparation.status, 'observed_known_member_edit_return_still_conditional');
+  events.push(...acquired);
+  const execute = programControlDiscoveryQuestion(f.model, events, observationAfter, returned, { prepareReturn: true })!;
+  assert.equal(execute.program_control_probe_plan.mode, 'probe_execute');
+  assert.deepEqual(execute.program_control_probe_plan.before_word, [f.labels[1], f.emitted, f.labels[0]]);
+  assert.deepEqual(execute.program_control_probe_plan.return_preparation_evidence, acquired[0].evidence);
+  assert.equal(programControlDiscoveryBefore(execute, 0, returned, { ...meta(f.model, events, observationAfter), prepareReturn: true }).admitted, true);
+  assert.equal(programControlDiscoveryBefore(execute, 0, returned,
+    { ...meta(f.model, events.slice(0, -1), observationAfter), prepareReturn: true }).admitted, false);
+  assert.deepEqual(recordProgramControlDiscovery(after, { action_ref: 'ACTION5' }, observationAfter, later, returned, [returned], proposal,
+    { model: f.model, events: events.slice(0, -1), prepareReturn: true }), [], 'An unissued insertion cannot acquire the return binding');
+});
+
+test('a stationary return-preparation edit remains a local unresolved trial and cannot authorize execution', () => {
+  const { f, events, later, after, binding } = acquireEdit();
+  const proposal = programControlDiscoveryQuestion(f.model, events, after, later, { prepareReturn: true })!;
+  const stationary = observation(later, 3);
+  const acquired = recordProgramControlDiscovery(after, proposal.actions[0], stationary, later, later, [later], proposal,
+    { model: f.model, events, prepareReturn: true });
+  assert.equal(acquired.length, 1);
+  assert.equal(acquired[0].outcome, 'known_return_preparation_unresolved');
+  assert.equal(acquired[0].return_preparation, null);
+  events.push(...acquired);
+  assert.equal(programControlDiscoveryQuestion(f.model, events, stationary, later, { prepareReturn: true }), null);
+  assert.equal(events.filter(event => event.kind === 'native_program_control_binding').length, 1);
+  assert.deepEqual(events.find(event => event.kind === 'native_program_control_binding'), binding);
+});
+
+test('glyph resemblance without an observed inverse is insufficient for return preparation', () => {
+  const f = fixture(); f.model.moves[1].status = 'glyph_extrapolation_candidate';
+  const { events, later, after } = acquireEdit(f);
+  assert.equal(programControlDiscoveryQuestion(f.model, events, after, later, { prepareReturn: true }), null);
+  assert.equal(programControlDiscoveryQuestion(f.model, events, after, later)!.program_control_probe_plan.mode, 'probe_execute',
+    'The separate native option does not silently change the original discovery contract');
+});
