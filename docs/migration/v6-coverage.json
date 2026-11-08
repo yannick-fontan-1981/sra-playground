@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 82,
-    "partiallyTransferredModules": 56,
+    "componentVerifiedModules": 83,
+    "partiallyTransferredModules": 59,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1231,
+    "pendingModules": 1227,
     "strategyFamilies": 16
   },
   "families": [
@@ -72790,9 +72790,15 @@
           "endLine": 58
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-cell-patch-observation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-cell-placement-reference.py",
+        "tests/fixtures/v6-cell-placement-reference.json.gz",
+        "tests/v6-cell-placement.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/cell_placement_access.py",
@@ -72861,9 +72867,18 @@
           "endLine": 93
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-cell-placement.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-cell-placement-reference.py",
+        "tests/fixtures/v6-cell-placement-reference.json.gz",
+        "tests/v6-cell-placement.test.ts",
+        "tests/v6-cell-placement-integration.test.ts",
+        "tests/v6-source-entry-routing.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_addressed_field.py",
@@ -73516,9 +73531,18 @@
           "endLine": 31
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-cell-placement-reference.py",
+        "tests/fixtures/v6-cell-placement-reference.json.gz",
+        "tests/v6-cell-placement.test.ts",
+        "tests/v6-cell-placement-integration.test.ts",
+        "tests/v6-source-entry-routing.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_code_program.py",
@@ -76273,7 +76297,9 @@
         "src/logos-engine/v6-shared-series.ts",
         "src/logos-engine/v6-native-runtime.ts",
         "src/logos-engine/v6-coupled-pair-evidence.ts",
-        "src/logos-engine/v6-auxiliary-support.ts"
+        "src/logos-engine/v6-auxiliary-support.ts",
+        "src/logos-engine/v6-alternating-graph-access.ts",
+        "src/logos-engine/v6-cell-placement.ts"
       ],
       "proof": [
         "tests/v6-shared-series.test.ts",
@@ -76286,7 +76312,12 @@
         "tests/v6-coupled-pair-planning.test.ts",
         "docs/migration/v35-coupled-support.md",
         "tests/v6-shared-series-native.test.ts",
-        "tests/v6-native-checkpoint-integration.test.ts"
+        "tests/v6-native-checkpoint-integration.test.ts",
+        "scripts/export-v6-cell-placement-reference.py",
+        "tests/fixtures/v6-cell-placement-reference.json.gz",
+        "tests/v6-cell-placement.test.ts",
+        "tests/v6-cell-placement-integration.test.ts",
+        "tests/v6-source-entry-routing.test.ts"
       ]
     },
     {
@@ -78800,14 +78831,17 @@
       "status": "partial_transfer",
       "targets": [
         "src/logos-engine/v6-occurrence-recall.ts",
-        "src/logos-engine/v6-occurrence-program-observer.ts"
+        "src/logos-engine/v6-supported-lines.ts"
       ],
       "proof": [
         "scripts/export-v6-occurrence-reference.py",
         "tests/fixtures/v6-occurrence-reference.json",
         "tests/v6-occurrence-recall.test.ts",
         "tests/v6-support-caller-integration.test.ts",
-        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json",
+        "scripts/export-v6-cell-placement-reference.py",
+        "tests/fixtures/v6-cell-placement-reference.json.gz",
+        "tests/v6-cell-placement.test.ts"
       ]
     },
     {
@@ -83383,9 +83417,15 @@
           "endLine": 73
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-cell-patch-observation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-cell-placement-reference.py",
+        "tests/fixtures/v6-cell-placement-reference.json.gz",
+        "tests/v6-cell-placement.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/queued_field_search.py",
@@ -96437,6 +96477,7 @@
     "component_verified records differential evidence for a bounded component; it never passes the complete-port gate or implies integrated campaign parity.",
     "The separately reported declared-entry progress is provider connection coverage over the four ordered DRM subquestion lists. It is not a game score, a code-volume percentage, or certification of complete V6 parity.",
     "AnimatedContact exports the exact id/all_conditions of the two interaction.drm rules it consumes (ballistic contact solution and ballistic curve disclosure); this is not a transfer of every rule in that inherited DRM document.",
-    "Alternating graph compares complete measurement and topology/contact outputs plus the graph-owned access layer. Its scene description is explicitly the consumed sprite projection, and its shared journal digest names the supported native closure. Public gallery rasters and controlled helper inputs are not complete-game or full-inheritance evidence."
+    "Alternating graph compares complete measurement and topology/contact outputs plus the graph-owned access layer. Its scene description is explicitly the consumed sprite projection, and its shared journal digest names the supported native closure. Public gallery rasters and controlled helper inputs are not complete-game or full-inheritance evidence.",
+    "Cell-patch transfer distinguishes exact framed-patch measurement from its geometry-only queued-field dependency and the own CellPlacementAccess layer from unported ancestors. Conditional line search is compared only in the native exact-integer domain; larger Python integer scores are explicitly refused without recording a source-law counterexample. Full original common envelopes are compared on controlled public rasters, separately from the fresh native SRC/WHY-ACT/checkpoint integration tests. None of these fixture counts establishes a completed game or complete V6 inheritance parity."
   ]
 }

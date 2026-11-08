@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.v38.browser-verification.v1",
+  "game": "TICT",
+  "surface": "managed development preview from the same frozen checkout",
+  "observedUrl": "http://127.0.0.1:4173/?game=TICT&level=6",
+  "mode": "SRA Agent Native TS",
+  "initialLevel": 1,
+  "initialActions": 0,
+  "initialSolvedLevels": 0,
+  "controlsUsed": [
+    "Choose TICT",
+    "SRA Agent Native TS",
+    "Run to next level (six successive boundaries)"
+  ],
+  "cumulativeActionsAtBoundaries": [
+    3,
+    15,
+    22,
+    29,
+    41,
+    55
+  ],
+  "solvedLevels": 6,
+  "completedPlans": 55,
+  "finalGameState": "WIN",
+  "visibleVictoryHeading": "VICTORY",
+  "inspectionClosedAtStart": true,
+  "manualGameActions": 0,
+  "agentSessionResets": 0,
+  "screenshot": "tict-browser-victory.png",
+  "screenshotSha256": "03b37b0259b93231bd9554c85e0cd69a3a5aec67bc79218cb3c8efe64c3841c7",
+  "qualification": "Observed in the real browser interface on the managed preview. Production publication is verified separately by the Sites deployment result."
+}

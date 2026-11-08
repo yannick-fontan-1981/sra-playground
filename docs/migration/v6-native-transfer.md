@@ -11,17 +11,27 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone:** see [the v37 memory-cost and ELAS campaign
-report](v37-memory-performance.md), following [the v36 alternating graph and common
+**Current integrated milestone:** see [the v38 cell-patch transfer and complete TICT campaign
+report](v38-cell-placement.md), following [the v37 memory-cost and ELAS campaign
+report](v37-memory-performance.md), [the v36 alternating graph and common
 acquisition report](v36-alternating-graph.md), [the v35 coupled planning,
 auxiliary support and native checkpoint report](v35-coupled-support.md), [the v34 coupled-pair
 response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 29 of 76
-explicit DRM subquestions are connected (38.2%). This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 30 of 76
+explicit DRM subquestions are connected (39.5%). This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
-The v37 optimization adds no source entry, so this denominator and count remain unchanged.
+The v38 cell composition adds one source entry; the v37 performance step added none.
+
+**New v38 result:** TICT is completely solved through the fresh native common
+caller: **six levels, official `WIN`, 55 actions** distributed as **3, 12, 7,
+7, 12 and 14**. All 55 prefixes use the transferred cell-patch composition,
+acquire their real public effects and retain one session across the game.
+The [campaign](native-campaigns-v38/tict-six-levels.json) preserves all public
+packet hashes, commands, source identity and acquisition checks. The source
+transfer and native integration add 121 passing focused checks. The old v37
+baseline completed two levels and stopped at the third level's time budget.
 
 **New v37 result:** the existing metric-composition capability solves ELAS's
 first three levels through the full native common caller in one fresh session:

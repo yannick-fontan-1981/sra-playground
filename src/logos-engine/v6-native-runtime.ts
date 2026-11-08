@@ -45,7 +45,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.7.1';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.8.0';
 const SELECTION_PROGRAM = 'v6.composition_strategy.choose';
 type R = Record<string, any>;
 const EPISODE = 'common-observation-frontier';
@@ -607,7 +607,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id),
-        sharedSeriesMemory: 'occurrence_recall_ancestors_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
+        sharedSeriesMemory: 'occurrence_recall_ancestors_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
         sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,
         nativeCallerExtensions: ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update'],
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
@@ -786,7 +786,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const visual = visualFirst || visualContinuation ? visualSequenceFamily(new VisualSequences(), visualContinuation) : null;
   const interfaces = createNativeInterfaceFamilies();
   const recall = createNativeSharedSeriesFamily((configuration.window_constraints as R).occurrence_recall,
-    configuration.coupled_support_composition, configuration.alternating_graph_composition);
+    configuration.coupled_support_composition, configuration.alternating_graph_composition,
+    (configuration.window_constraints as R).cell_patch_composition);
   const policy = loaded.common as R;
   const supportChildren: Record<string, NativeFamily<any>> = {
     ordered_support_transfer: ordered,
@@ -807,6 +808,13 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, recall, supports, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
   const registeredSubquestions = (order: readonly string[], registered: Record<string, NativeFamily>): string[] =>
     order.flatMap(question => registered[question] ? [registered[question].id] : []);
+  // The cell and occurrence source entries share one acquired journal, but
+  // each is consulted only at its own position in the original DRM order.
+  const windowProviders: Record<string, NativeFamily> = {
+    multiscale_constraints: windows, cell_patch_composition: recall, observed_occurrence_recall: recall, ...supportChildren,
+  };
+  const windowEntries = (configuration.window_constraints.ordered_subquestions as string[])
+    .filter(question => windowProviders[question]);
   const groupMembers: Record<string, readonly string[]> = {
     goal_access: (configuration.goal_access_subquestions as string[]).flatMap(question => {
       if (question === 'coupled_support_composition' || question === 'alternating_graph_composition') return [recall.id];
@@ -814,7 +822,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       if (question === 'observed_support_access') return [supports.id];
       return supportChildren[question] ? [supportChildren[question]!.id] : [];
     }),
-    window_constraints: [...registeredSubquestions(configuration.window_constraints.ordered_subquestions, { multiscale_constraints: windows, observed_occurrence_recall: recall, ...supportChildren }), symmetric.id],
+    window_constraints: [...windowEntries.map(question => windowProviders[question]!.id), symmetric.id],
     orbit_constraints: [orbit.id], containment: [containment.id],
     surface: registeredSubquestions(configuration.program_construction.ordered_subquestions, { surface_rewrite: surface, learned_code_program: code, ...interfaces, ...supportChildren }),
     pre_score_contact: ['pre_score_contact'],
@@ -833,7 +841,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     return ['scored_relation_access', 'observed_support_access'].includes(question) || supportChildren[question] ? [null] : [];
   });
   const groups: NativeSelectionGroup[] = loaded.strategy.declarations[0]!.configuration.families.map(id => ({
-    id, families: groupMembers[id] ?? [], ...(id === 'goal_access' ? { entryPoints: goalEntryPoints } : {}),
+    id, families: groupMembers[id] ?? [], ...(id === 'goal_access' ? { entryPoints: goalEntryPoints }
+      : id === 'window_constraints' ? { entryPoints: [...windowEntries.map(question => windowProviders[question] === recall ? question : null), null] } : {}),
   }));
   // Some original policy declarations contain non-integer thresholds. This
   // implementation manifest uses explicit JSON.stringify encoding, as does the

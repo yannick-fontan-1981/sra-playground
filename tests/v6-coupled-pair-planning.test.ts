@@ -159,7 +159,9 @@ test('production source groups reference one retained public_occurrence_recall i
   assert.equal(goal.families.filter((id: string) => id === 'public_occurrence_recall').length, 2);
   assert.deepEqual(goal.entryPoints.filter((entry: string | null) => entry !== null),
     ['coupled_support_composition', 'alternating_graph_composition']);
-  assert.equal(window.families.filter((id: string) => id === 'public_occurrence_recall').length, 1);
+  assert.equal(window.families.filter((id: string) => id === 'public_occurrence_recall').length, 2);
+  assert.deepEqual(window.entryPoints.filter((entry: string | null) => entry !== null),
+    ['cell_patch_composition', 'observed_occurrence_recall']);
   assert.ok(coverage.sourceGroups.indexOf(goal) < coverage.sourceGroups.indexOf(window));
   assert.equal(coverage.fullV6Parity, false);
 });

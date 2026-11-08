@@ -2,8 +2,9 @@
  * Supported acquisition closure of the original ObservedCompositionConstraint.
  *
  * The source calls the inherited record chain before record_packet. At this
- * migration stage that chain contains occurrence recall, coupled-pair epoch
- * anchors, alternating graph evidence, pair-response evidence and coupled support planning/acquisition.
+ * migration stage that chain contains occurrence recall, cell-patch placement,
+ * coupled-pair epoch anchors, alternating graph evidence, pair-response evidence
+ * and coupled support planning/acquisition.
  * Other providers remain pending. The retained digest describes this native closure, not the
  * original full ObservedCompositionConstraint inheritance chain.
  */
@@ -13,6 +14,7 @@ import { CoupledPairEvidenceMemory, coupledPairAfter } from './v6-coupled-pair-e
 import { proposeCoupledPairGraph, coupledPairBefore } from './v6-coupled-pair-planning.ts';
 import { AuxiliarySupportMemory, auxiliarySupportBefore, auxiliarySupportAfter } from './v6-auxiliary-support.ts';
 import { AlternatingGraphMemory, alternatingGraphBefore, alternatingGraphAfter } from './v6-alternating-graph-access.ts';
+import { CellPlacementMemory, cellPlacementBefore } from './v6-cell-placement.ts';
 import { rowsDigest } from './v6-native-observer.ts';
 import type { ObservedInputDomain } from './v6-native-observer.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
@@ -21,7 +23,7 @@ import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts'
 import type { OccurrenceRecord as R } from './v6-occurrence-scene.ts';
 import type { NativeFamily, NativeRows, NativePublicObservation, NativeProposal } from './v6-native-types.ts';
 
-export const SHARED_SERIES_DIGEST_SCOPE = 'native_recall_ancestors_alternating_graph_and_coupled_support_v4';
+export const SHARED_SERIES_DIGEST_SCOPE = 'native_recall_ancestors_cell_placement_alternating_graph_and_coupled_support_v5';
 
 /** The inherited public reducer participates in the native mutation guard. */
 class SharedOccurrenceMemory extends OccurrenceRecallAccess {
@@ -89,6 +91,7 @@ function witnessMatches(witness: WorkingWitness, value: unknown): boolean {
 
 interface SharedWorkingStamp {
   memory: SharedOccurrenceMemory; memoryRevision: number; memoryWitness: WorkingWitness;
+  cells: CellPlacementMemory; cellRevision: number;
   graph: AlternatingGraphMemory; graphRevision: number;
   pairs: CoupledPairEvidenceMemory; pairRevision: number;
   auxiliary: AuxiliarySupportMemory; auxiliaryRevision: number;
@@ -98,6 +101,7 @@ interface SharedWorkingStamp {
 /** One journal is owned by the already registered public-occurrence provider. */
 export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   override memory = new SharedOccurrenceMemory();
+  cells = new CellPlacementMemory();
   graph = new AlternatingGraphMemory();
   pairs = new CoupledPairEvidenceMemory();
   auxiliary = new AuxiliarySupportMemory();
@@ -109,12 +113,14 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
 
   private workingStamp(): SharedWorkingStamp {
     return { memory: this.memory, memoryRevision: this.memory.nativeRevision, memoryWitness: workingWitness(this.memory),
+      cells: this.cells, cellRevision: this.cells.nativeRevision,
       graph: this.graph, graphRevision: this.graph.nativeRevision,
       pairs: this.pairs, pairRevision: this.pairs.nativeRevision,
       auxiliary: this.auxiliary, auxiliaryRevision: this.auxiliary.nativeRevision, events: workingWitness(this.events) };
   }
   private unchanged(stamp: SharedWorkingStamp): boolean {
     return this.memory === stamp.memory && this.memory.nativeRevision === stamp.memoryRevision
+      && this.cells === stamp.cells && this.cells.nativeRevision === stamp.cellRevision
       && this.graph === stamp.graph && this.graph.nativeRevision === stamp.graphRevision
       && this.pairs === stamp.pairs && this.pairs.nativeRevision === stamp.pairRevision
       && this.auxiliary === stamp.auxiliary && this.auxiliary.nativeRevision === stamp.auxiliaryRevision
@@ -160,6 +166,25 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     return proposal;
   }
 
+  /** CellPlacementConstraint's separate declared window-constraint entry. */
+  async cellPropose(observation: R, rows: NativeRows, inputs: readonly R[], remaining: number,
+    config: R, levelDeadline: number | null): Promise<R | null> {
+    if (remaining < 1) return null;
+    if (levelDeadline === null || levelDeadline === undefined) throw new TypeError('Cell experiment requires current level deadline');
+    const proposal = this.cells.proposeCell(observation, rows, inputs, Math.min(16, remaining),
+      { ...config, level_deadline: levelDeadline, remaining_level_actions: remaining });
+    if (!proposal || !Object.hasOwn(proposal, 'cell_placement_plan')) return null;
+    const plan = proposal.cell_placement_plan, [x, y] = plan.pixel, value = rows[y]![x]!;
+    for (const step of proposal.steps as R[]) {
+      step.expected_before = Object.fromEntries(['level_epoch', 'frame_hash', 'levels_completed', 'state'].map(key => [key, observation[key]]));
+      step.point_support = { level_epoch: observation.level_epoch, observation_ref: observation.observation_ref, frame_hash: observation.frame_hash,
+        point: [x, y], palette_value: value, projection_bbox: [x, y, x, y], projected_rows_digest: await rowsDigest([[value]]),
+        entity_ref: `measured-cell:${identity([plan.field.ref, plan.point])}`, signature: identity([plan.field.ref, plan.point, value]),
+        scope: 'Current cell point and actual center pixel, distinct from predicted patch identity. No old-epoch point authority or acquired terminal role.' };
+    }
+    return proposal;
+  }
+
   private sourceGraphProposal(observation: R, rows: NativeRows, inputs: readonly R[], maxPrefix: number, config: R): R {
     const pair = this.pairs.currentState();
     const ordinary = (): R => proposeCoupledPairGraph(pair, observation, rows, inputs, maxPrefix, config)
@@ -171,6 +196,12 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     if (!['pair_access_plan', 'support_preparation_plan'].some(key => Object.hasOwn(proposal, key))) {
       if (Object.hasOwn(proposal, 'graph_access_plan')) {
         if ((proposal.actions as R[]).some(action => truth(action.data))) throw new TypeError('Graph input payload changed');
+      } else if (Object.hasOwn(proposal, 'cell_placement_plan')) {
+        for (const [index, action] of (proposal.actions as R[]).entries()) {
+          const step = proposal.steps[index], support = step.point_support;
+          if (!equal(support.point, [action.data.x, action.data.y])) throw new TypeError('Current cell point changed');
+          step.point_binding = { ...support };
+        }
       } else super.bind(proposal, domain);
       return;
     }
@@ -190,6 +221,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
     if (truth(proposal.graph_access_plan)) return alternatingGraphBefore(proposal, index, packet.frame_rows,
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
+    if (truth(proposal.cell_placement_plan)) return cellPlacementBefore(proposal, index, packet.frame_rows,
+      { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
     return super.before(proposal, index, packet, observation);
   }
   override after(proposal: R, index: number, before: R, after: R, first: NativeRows, second: NativeRows): R {
@@ -199,6 +232,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
     if (truth(proposal.graph_access_plan)) return alternatingGraphAfter(proposal, index, first, second,
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
+    if (truth(proposal.cell_placement_plan)) return this.cells.after(proposal, index, first, second,
+      { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
     return super.after(proposal, index, before, after, first, second);
   }
 
@@ -207,6 +242,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     const certified = this.certified !== null && this.unchanged(this.certified);
     this.certified = null;
     const events = this.memory.record(before, command, after, first, second, proposal, index);
+    events.push(...this.cells.record(before, command, after, first, second, proposal, index));
     events.push(...this.graph.record(before, command, after, first, second, proposal, index));
     // The source pair layer first acquires the before-epoch anchor, then its
     // measured response evidence. Packet observation follows the whole chain.
@@ -215,6 +251,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     for (const event of supportEvents) if (event.kind === 'coupled_pair_evidence') this.pairs.applyEvent(event);
     events.push(...supportEvents);
     events.push(...this.memory.recordPacket(before, command, after, first, frames));
+    events.push(...this.cells.recordPacket(before, command, after, first, frames));
     // Keep returned source envelopes independently mutable. Only the retained
     // journal owns these frozen copies; old entries keep their identities.
     this.events.push(...events.map(event => retainNativeJson(event)));
@@ -228,7 +265,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   }
 
   private sharedDigest(): string {
-    return this.auxiliary.retainedDigest(this.pairs.retainedDigest(this.graph.retainedDigest(this.memory.retainedDigest())));
+    return this.auxiliary.retainedDigest(this.pairs.retainedDigest(this.graph.retainedDigest(this.cells.retainedDigest(this.memory.retainedDigest()))));
   }
 
   /** Internal checkpoint only: public state() still returns an independent copy. */
@@ -237,7 +274,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     const certified = this.certified !== null && this.unchanged(this.certified);
     const owned = this.events.map(event => retainNativeJson(event));
     // Direct public journal edits are also owned before entering persistence,
-    // but cannot certify agreement with all four reducers on their own.
+    // but cannot certify agreement with the acquired reducers on their own.
     if (owned.some((event, index) => event !== this.events[index])) this.events = owned;
     const value = retainNativeJson({ events: this.events,
       digest: this.sharedDigest() });
@@ -267,28 +304,38 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
 
   private restoreOwned(state: Readonly<R>): void {
     if (!Array.isArray(state.events) || typeof state.digest !== 'string') throw new TypeError('Incomplete shared series memory');
-    const events = [...state.events] as R[], memory = new SharedOccurrenceMemory(), graph = new AlternatingGraphMemory(),
+    const events = [...state.events] as R[], memory = new SharedOccurrenceMemory(), cells = new CellPlacementMemory(), graph = new AlternatingGraphMemory(),
       pairs = new CoupledPairEvidenceMemory(), auxiliary = new AuxiliarySupportMemory();
     for (const event of events) {
-      if (event.kind === 'alternating_graph_evidence') graph.applyEvent(event);
+      if (event.kind === 'cell_patch_placement_evidence') cells.applyEvent(event);
+      else if (event.kind === 'alternating_graph_evidence') graph.applyEvent(event);
       else if (event.kind === 'coupled_pair_epoch_anchor' || event.kind === 'coupled_pair_evidence') pairs.applyEvent(event);
       else if (event.kind === 'coupled_support_control_model' || event.kind === 'coupled_support_preparation') auxiliary.applyEvent(event);
       else memory.applyEvent(event);
     }
-    if (auxiliary.retainedDigest(pairs.retainedDigest(graph.retainedDigest(memory.retainedDigest()))) !== state.digest) throw new TypeError('Shared series memory changed during recall');
+    if (auxiliary.retainedDigest(pairs.retainedDigest(graph.retainedDigest(cells.retainedDigest(memory.retainedDigest())))) !== state.digest) throw new TypeError('Shared series memory changed during recall');
     // Only publish the reconstructed working copies after the complete journal
     // has passed integrity checks. A rejected edit cannot clear learned state.
-    this.memory = memory; this.graph = graph; this.pairs = pairs; this.auxiliary = auxiliary; this.events = events;
+    this.memory = memory; this.cells = cells; this.graph = graph; this.pairs = pairs; this.auxiliary = auxiliary; this.events = events;
     const stamp = this.workingStamp();
     this.certified = stamp; this.accepted = { value: state, stamp };
     this.checkpoint = { value: retainNativeJson({ events: this.events, digest: state.digest }), stamp, certified: true };
   }
 }
 
-export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, coupledConfig?: R, graphConfig?: R): NativeFamily {
+export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, coupledConfig?: R, graphConfig?: R, cellConfig?: R): NativeFamily {
   const family = new SharedSeriesConstraint(config), adapter = asNativeOccurrenceRecallFamily(family);
   return { ...adapter, nativeState: () => family.nativeState(), restoreNative: state => family.restoreNative(state),
     proposeInSubquestion: async (group, subquestion, observation, rows, inputs, remaining, execution) => {
+      if (group === 'window_constraints') {
+        if (subquestion === 'cell_patch_composition') {
+          const proposal = cellConfig ? await family.cellPropose(observation, rows, inputs, remaining, cellConfig, execution?.deadlineMs ?? null) : null;
+          if (proposal) proposal.field_subquestion = 'cell_patch_composition';
+          return proposal as NativeProposal | null;
+        }
+        if (subquestion === 'observed_occurrence_recall') return adapter.propose(observation, rows, inputs, remaining, execution);
+        throw new TypeError('Unsupported shared-series source subquestion');
+      }
       if (group !== 'goal_access') return null;
       if (subquestion === 'coupled_support_composition') return coupledConfig
         ? await family.coupledPropose(observation, rows, inputs, remaining, coupledConfig, execution?.deadlineMs ?? null) as NativeProposal | null : null;
@@ -302,7 +349,11 @@ export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, c
       if (coupled) return coupled as NativeProposal;
       return graphConfig ? family.graphPropose(observation, rows, inputs, remaining, graphConfig, execution?.deadlineMs ?? null) as NativeProposal | null : null;
     }
-    if (group === 'window_constraints') return adapter.propose(observation, rows, inputs, remaining, execution);
+    if (group === 'window_constraints') {
+      const cell = cellConfig ? await family.cellPropose(observation, rows, inputs, remaining, cellConfig, execution?.deadlineMs ?? null) : null;
+      if (cell) cell.field_subquestion = 'cell_patch_composition';
+      return cell as NativeProposal | null ?? adapter.propose(observation, rows, inputs, remaining, execution);
+    }
     return null;
   } };
 }

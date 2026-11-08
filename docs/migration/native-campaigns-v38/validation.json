@@ -1,0 +1,554 @@
+{
+  "schema": "logos-engine.v6.v38-validation.v1",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "previousSiteSourceCommit": "00aeb80f4085863ce110b4987c96a369292e13a7",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.8.0",
+  "nativeSourceManifestDigest": "9cc53ae5b79cdbd6a751ecea4d25698c6eca46a0f84d44ae79a6b325635483d5",
+  "nativeSourceFiles": 123,
+  "fullV6Parity": false,
+  "tests": {
+    "command": [
+      "node",
+      "--test",
+      "--test-concurrency=1",
+      "tests/*.test.ts"
+    ],
+    "testFiles": 68,
+    "tests": 3177,
+    "pass": 3177,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "durationMs": 168495.261632,
+    "capturedOutput": "regression-output.log.gz",
+    "capturedOutputSha256": "1b8736094f5b975e1dca701805f581333991a93be1548947b854016f6d62bd55",
+    "testFileSha256": {
+      "tests/bounded-weak-cache.test.ts": "76efd3c1489f00a7b76dd0f9ba7fa210a5baf079aed954e8dc1a3db54296f24f",
+      "tests/canonical-cache.test.ts": "c58b4eb526a94cf87e457d2f526bff3fcf05bf8b6cbf7b536170670315028e26",
+      "tests/pipes-parity.test.ts": "4a9f27a8e230bef20bcade9603b94ac450c7689af96b4c6b9e2b66012e4cc3e0",
+      "tests/public-observer.test.ts": "5372033c2d4e0d34f2b4bb7e5d555d18c1e04436e76c1195ccda7c8ea7a2fb48",
+      "tests/sra-agent.test.ts": "e1e480ce8c1f04e3584d2dd99fe1a9c7d325453072c9aa300d511cc2aa854b08",
+      "tests/src-interpreter.test.ts": "620cbe04258c3e3342470f6830031c4dac508822b1ade90a21b2ae736e8f47f8",
+      "tests/src-while.test.ts": "71e02587795bd497febc0c4dce0f206b61ffdfc3238522ef1c27f3136e22e5eb",
+      "tests/v6-agent.test.ts": "be0b63b7cb74bbfc1e7345fa7dc2d09ca78ad3b4d046f28fa671e771dcb68cc2",
+      "tests/v6-alternating-graph-access.test.ts": "d7b53577ee8037b8c8736064db212d0d3f9959f1f04ddeec1399b28de4abbd48",
+      "tests/v6-alternating-graph-integration.test.ts": "b5444ee2923b77f44f57f7ea8ea0b7249f728bbb5c826893136252107909c901",
+      "tests/v6-alternating-graph-measurement.test.ts": "a2db0e691344509bdbdd7f708ac74af8a6bf3fd31d184f2b89add117ab61ca45",
+      "tests/v6-animated-contact.test.ts": "2b62da2c3ecbc75c652210060422fa20a2da7a361bab0915f7cbcac4f07fd0a5",
+      "tests/v6-auxiliary-support.test.ts": "b9a999601d6e7216eec714b4b4792314bf0f6dc09001d81c63ed501405c40c3e",
+      "tests/v6-caller-integration.test.ts": "72597754574bcfed663ae33d695e3ed75a69dca6a5cbd0e1228200230b92eade",
+      "tests/v6-cell-placement-integration.test.ts": "39310f52a96559e45066a5d8ef94c8a0e48bc61fe7cb1d1328631b1555be9b4f",
+      "tests/v6-cell-placement.test.ts": "81a4bf7632f4bc8be63e94d176747bffa32afc63f1814ae2175b08d420d351a4",
+      "tests/v6-composition-engine.test.ts": "0187100f971133ea86982e3f1fb71c86af8db32ac549fa6e92c44a45ff961d17",
+      "tests/v6-composition-memory.test.ts": "e7123c3e47a9a7617028925b8e3bd155621552cd7d1261a38b2ab88ce9421252",
+      "tests/v6-configured-arrivals.test.ts": "805e00966544b88198b6025d77c9f29c2f9f11adead1117a5cb8f15f346ec8ea",
+      "tests/v6-coupled-pair-epoch-anchor.test.ts": "45dc52f4e72390c31b54eb8c0ab97c61490b6a164d47405918f32a2c7bbbce20",
+      "tests/v6-coupled-pair-evidence.test.ts": "e7292253d5052c0abdf6e03a5a0edecd4e41b91874cdbc26b21e6b3a16e136bb",
+      "tests/v6-coupled-pair-observation.test.ts": "ecedf3968b49fb8d3edab9f9e6d40f40a051e30b6a5e273b4c90a5d0b02c1fdb",
+      "tests/v6-coupled-pair-planning.test.ts": "beafa7b8ff31e7ffb67ef757de7685352e0f3eac0a5d65236c47da3e67ebf01d",
+      "tests/v6-coupled-pair-route.test.ts": "ce797a50e3440ae529be6fc7ce40e728168d310ceac86b0b668da7df7da7ccff",
+      "tests/v6-coupling-metric.test.ts": "8790b41b8f40140ed4cb7f0b852e842e88dd1cff0067ccb8bc80ac0b38996a4d",
+      "tests/v6-drm-projector.test.ts": "8e90b5e2fc0f73bad14d0a9c1fab26799d5ce87904308158176f1baf70a21b87",
+      "tests/v6-field-parity.test.ts": "1b52a138d4c740bfadbd0e53e33fceabe5a08043ff89d589195ca8ccdd2adac6",
+      "tests/v6-geometric-scene.test.ts": "84e9759eb26f7840d0674dd2fb136dae4513aaaf174d2757893b36c50e341acb",
+      "tests/v6-goal-attention.test.ts": "22acd80e35d54cfddbbc597acc0d979efc7f4003fa964fb2d2caeae9bb1f6e59",
+      "tests/v6-incremental-memory.test.ts": "fc89b6425b901c7dd1212f4d515977562d2b6ec549e6d2676fdb126770dd6870",
+      "tests/v6-interface-families.test.ts": "7d6aaa18ce6dfb07cc2290b82fef27ab90f4792e8abd295aa8b1f0fa051e2f90",
+      "tests/v6-knowledge-store.test.ts": "ac4e5f62adf2533d7e7499627802bb3003a51f87a8f6b1d65320b31f54800230",
+      "tests/v6-native-authority.test.ts": "6b35c231916ee37a07ed2c8505a5cdd71b35f305bc93d1a411fdbcc98a58697d",
+      "tests/v6-native-caller.test.ts": "1285ae419fa7282e9c5bde8c7873a5a5db8dfa2c817a2f3850a0e34e0ccf5334",
+      "tests/v6-native-checkpoint-integration.test.ts": "1e17fafacf64e79dbb540ff4b9740b30f733c444d0d167d40e7ce56cc9f3abfe",
+      "tests/v6-native-family-registration.test.ts": "12082a8c4ceaa0c221d87fd4d24b5971e4db59c0b42bff3dc4a4eeb0a0b405d8",
+      "tests/v6-native-interface-families.test.ts": "ffaa56bc8ca98a2f100b109fc6bf023add516e1368d24933959270230fd07904",
+      "tests/v6-native-observer.test.ts": "ca970731cc2b5d7b3648823a5bc35687e31b79dce19904ae28feeb89cda9f92f",
+      "tests/v6-native-persistence.test.ts": "d44e341647dce5f9c5fc7333fe821ef8e851cdd47a40e2e57696b183e05b4a0d",
+      "tests/v6-native-runtime.test.ts": "1155e102d4a767b1bb38c1798dc96187dc6c3ae966617e3c760af906f98bb2f4",
+      "tests/v6-native-state-graph.test.ts": "0ce9a7cc799f2304bb7ca9892ab651c1cdd56f547c4df69e88c10db03a80f256",
+      "tests/v6-native-transition-domain-integration.test.ts": "d20a3565b85d908ff27a15ac5e808fc754cc6c33f048dd6fb636dd45fa8421cc",
+      "tests/v6-native-transition-domain.test.ts": "cf885b68ce37924bae11b859769ece813c46ea0cb66ea7f0c2bb64c4d3d51462",
+      "tests/v6-observed-frontier.test.ts": "9ad30c4e5129ad045294846c7fc34ccfba5992c9fceca214c60e00ff8125367b",
+      "tests/v6-occurrence-recall.test.ts": "9a3e5be15d07c036bbee9b05f46240b60edeb9fb2493a1a31645025aa83bba8a",
+      "tests/v6-operations.test.ts": "6424335ea5704bb8406372ecbeeb5d90c474b0113f257dd807b570a6af07e705",
+      "tests/v6-orbit-containment.test.ts": "52522f2bf2fecf22f7d8a31033c7119423f678062ede4e85e7cfb09457c525af",
+      "tests/v6-ordered-support-parity.test.ts": "6225c48b326ddac0fda5b296359afba43e151dc8d7dd429893efcc77620c041a",
+      "tests/v6-point-display.test.ts": "25da80929ee69628b6d90dc95e9a12c79ef6c89594c466a15763eb73a7d1a578",
+      "tests/v6-point-set.test.ts": "494e7fc1b37f08674efd049cee83957346dcf20dc6a31c7486a774da5a730821",
+      "tests/v6-program-families.test.ts": "541ef5ee97a924c066f9cb6cd403294dc7a7c869c311cfdc46e4f5dccd579fe9",
+      "tests/v6-prospective.test.ts": "a25bf2a38a09a2c5b55beb0f29c739b3ee224edced1a057278867ff8c27069d3",
+      "tests/v6-shared-series-native.test.ts": "984863ea3a73acbc136470e007363e86c501fe8eb793f9de312251acc1ca4090",
+      "tests/v6-shared-series.test.ts": "50f5d5289a3b0aa930c8030cc3118d0df0fa6b1b36927b337649766fa5c01688",
+      "tests/v6-sliding-cavity.test.ts": "ac3d396376588409dea4db973db2ed742164d88c1995dfaba7d5268cc5e0d39a",
+      "tests/v6-source-entry-routing.test.ts": "ef5e39698c27da5c0596f351483bbf7ab3553c81b9180df3b10f1c2ac23dd47d",
+      "tests/v6-src-program.test.ts": "75b942da9390981c36c9a85308b2da9bf051e8e439c3ec2c79d7e6176497344f",
+      "tests/v6-support-caller-integration.test.ts": "7813ec0791ac219356a94f1e97c6d8feea3d961bb6cfec01822fd74b2830322e",
+      "tests/v6-support-extensions.test.ts": "0aafcedde8fa90cbd7b6592461827fa967782ee3ca389ce1f04e77c7e2272952",
+      "tests/v6-support-navigation.test.ts": "74cc87f14be3df74294939ca1b603b9743322b99c931ca70c82d9ab5bbb9a299",
+      "tests/v6-support-procedures.test.ts": "25a72872cf3ca44fe2267da7ac4d2927ef2f9f1488966c5dde0a46450f24a554",
+      "tests/v6-target-binding.test.ts": "c9760aa0f65ebaf7349c571e16854263dd38f76f354acf4c5cbe73487e457a66",
+      "tests/v6-transition-learning.test.ts": "73124db5ddebd06c38b0627f00ddf7383eec613b885e2cfb27bdea56ca8a2140",
+      "tests/v6-view-frontier.test.ts": "54b51e69720008db3ba76bcf818d8c6034948f3d8721fda0d987bd5848ce848e",
+      "tests/v6-visual-sequences.test.ts": "44daf171fb2740d46eafb6e14abb705ac6c2aec8b97b202fdc67ae007d13b5a3",
+      "tests/v7-choice.test.ts": "894a106943e7be7bedc3aa340ae7bdfeb8ce92dcf9c3a609677ee7a66a8253fc",
+      "tests/v7-kernel.test.ts": "d718d6bff6e5f6f911e468e0b36bbe18054dc007ec5400ff00a802c1e37f24de",
+      "tests/v7-parity.test.ts": "84a0eb0179e99cf0c31961c0f9d53a7b26124e1762bc56e7c9126e9483e9fcb3"
+    },
+    "focusedCellTests": {
+      "sourceContractComparisons": 119,
+      "nativeIntegrationTests": 2,
+      "allPassed": true
+    },
+    "typecheck": {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "passed": true
+    },
+    "build": {
+      "command": [
+        "node",
+        "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.4/scripts/build-site.mjs"
+      ],
+      "passed": true,
+      "includesTypecheck": true,
+      "campaignGameAssetsMatchBuiltAssets": true,
+      "capturedOutput": "build-output.log.gz",
+      "capturedOutputSha256": "5f2f7d78f3cb78e3fd0d6df33324c09c610ac6fe05708bfb06c7665a0b188b99"
+    },
+    "diffCheck": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "passed": true
+    }
+  },
+  "campaigns": [
+    {
+      "path": "tict-six-levels.json",
+      "sha256": "3624cb0ed61198b220e212d635e358d10f0fac6125950f0644411f578306e796",
+      "status": "passed",
+      "game": "TICT",
+      "targetLevels": 6,
+      "final": {
+        "actions": 55,
+        "levelsCompleted": 6,
+        "level": 6,
+        "state": "WIN",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 105.41610795000003,
+        "prefixes": 55,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 55,
+          "boundaryReplays": 5,
+          "goalEvents": 6,
+          "frontierDeltas": 111,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 56
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 56
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 15
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 50
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 56
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 57
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 55,
+          "resume": 54
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.8.0"
+      },
+      "levelActions": [
+        3,
+        12,
+        7,
+        7,
+        12,
+        14
+      ],
+      "activeSeconds": [
+        3.0040341010000002,
+        12.283817659999999,
+        9.287784024999997,
+        10.743840146999982,
+        26.443557256000027,
+        43.65307476100002
+      ],
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "qualification": "Fresh common native session from level 1. The target is the complete game with official WIN."
+    },
+    {
+      "path": "elas-three-levels.json",
+      "sha256": "eb790b3417414f23aa7df89ba437317a763e8f46b773fc0e0b25eada1770474a",
+      "status": "passed",
+      "game": "ELAS",
+      "targetLevels": 3,
+      "final": {
+        "actions": 33,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 19.009935928,
+        "prefixes": 9,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 33,
+          "boundaryReplays": 2,
+          "goalEvents": 3,
+          "frontierDeltas": 67,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 9
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 10
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 10
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 6
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 11
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 33,
+          "resume": 8
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.8.0"
+      },
+      "levelActions": [
+        2,
+        9,
+        22
+      ],
+      "activeSeconds": [
+        2.0509990190000007,
+        6.702245507999995,
+        10.256691401000005
+      ],
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "qualification": "Fresh common native session from level 1. The target is three levels, stopping on entry to level 4. Further levels are not claimed."
+    },
+    {
+      "path": "tu93-three-levels.json",
+      "sha256": "2d19bf4a0868efd8b380b8159ebcc7537dc5bf6f2dfa760a6cebd25c28259f8c",
+      "status": "passed",
+      "game": "TU93",
+      "targetLevels": 3,
+      "final": {
+        "actions": 67,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 47.636753639999995,
+        "prefixes": 25,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 67,
+          "boundaryReplays": 2,
+          "goalEvents": 15,
+          "frontierDeltas": 149,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 26
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 40
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 27
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 12
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 41
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 67,
+          "resume": 24
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.8.0"
+      },
+      "levelActions": [
+        32,
+        10,
+        25
+      ],
+      "activeSeconds": [
+        19.602258428,
+        5.077118537999997,
+        22.957376674
+      ],
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "qualification": "Fresh common native session from level 1. The target is three levels, stopping on entry to level 4. Further levels are not claimed."
+    },
+    {
+      "path": "hano-four-levels.json",
+      "sha256": "adb4c37f07eb3c417da1ca9106dd8073672ca763437447f4409a2c18913fac64",
+      "status": "passed",
+      "game": "HANO",
+      "targetLevels": 4,
+      "final": {
+        "actions": 60,
+        "levelsCompleted": 4,
+        "level": 4,
+        "state": "WIN",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 73.67476470200003,
+        "prefixes": 30,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 60,
+          "boundaryReplays": 3,
+          "goalEvents": 4,
+          "frontierDeltas": 121,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 31
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 31
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 31
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 31
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 32
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 60,
+          "resume": 29
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.8.0"
+      },
+      "levelActions": [
+        6,
+        10,
+        14,
+        30
+      ],
+      "activeSeconds": [
+        4.699767518999999,
+        7.486987649999997,
+        13.834997556999985,
+        47.65301197600005
+      ],
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "qualification": "Fresh common native session from level 1. The target is the complete game with official WIN."
+    }
+  ],
+  "regressionComparisons": [
+    {
+      "path": "elas-comparison.json",
+      "sha256": "f68d2970190aba582cfec07562264a1bdb9a27b3a174042a30241b9c38a371a5",
+      "passed": true,
+      "checksPassed": 11,
+      "compared": {
+        "commands": 33,
+        "completePublicPackets": 34,
+        "prefixes": 9
+      },
+      "qualification": "Explicitly compares public behavior, source prefix descriptions, acquisition counters and reported ancestral projections. Native graph chains/revisions and the shared inherited digest/scope change with the new implementation and are not compared. New cell projections are independently checked empty for these regression games. Timings are excluded; this is not a speed comparison or full internal-state parity."
+    },
+    {
+      "path": "tu93-comparison.json",
+      "sha256": "df107dbb244cb29ebd3c5a884bcf4f0e59b2ce8cdd20d295f4e26d158ba72b5e",
+      "passed": true,
+      "checksPassed": 11,
+      "compared": {
+        "commands": 67,
+        "completePublicPackets": 68,
+        "prefixes": 25
+      },
+      "qualification": "Explicitly compares public behavior, source prefix descriptions, acquisition counters and reported ancestral projections. Native graph chains/revisions and the shared inherited digest/scope change with the new implementation and are not compared. New cell projections are independently checked empty for these regression games. Timings are excluded; this is not a speed comparison or full internal-state parity."
+    }
+  ],
+  "browserVerification": {
+    "path": "browser-verification.json",
+    "sha256": "374926623dee8cf863ef5b8c2d747a7451f54569b43d15499198f6f739d71d7e",
+    "sixLevelsWon": true
+  },
+  "previousVersionBaseline": {
+    "path": "tict-v37-baseline.json",
+    "sha256": "41807a9a21f125105b4d8aa38ffc29dc2ee842e15e3438fa7850fb1f1f462bf8",
+    "targetLevels": 3,
+    "completedLevels": 2,
+    "actions": 145,
+    "stop": "level_active_time_budget",
+    "qualification": "Independent previous-version campaign. Different solved workload and concurrent host load exclude a matched timing or speedup claim."
+  },
+  "sourceOracle": {
+    "fixture": "tests/fixtures/v6-cell-placement-reference.json.gz",
+    "sha256": "d374918216470a5e7a0237332dd5aeb5ac82e06bd2efec38858bc12aa886bc02",
+    "sourceModified": false,
+    "verifiedImportedReferenceFiles": 823,
+    "githubCellPlacementBlob": "b2efb69fc802b61afe152e265a506fad1f5a65df"
+  },
+  "progress": {
+    "connected": 30,
+    "declared": 76,
+    "percent": 39.5,
+    "fullV6Parity": false
+  },
+  "moduleAudit": {
+    "complete": false,
+    "summary": {
+      "pythonModules": 1369,
+      "pythonLines": 320375,
+      "declaredClassesAndFunctions": 12857,
+      "dataFiles": 417,
+      "verifiedModules": 0,
+      "componentVerifiedModules": 83,
+      "partiallyTransferredModules": 59,
+      "transferredUnverifiedModules": 0,
+      "pendingModules": 1227,
+      "strategyFamilies": 16
+    },
+    "failures": []
+  },
+  "limitations": [
+    "Full original inherited planner and digest closure remain incomplete.",
+    "Large line-search scores beyond the native exact-integer domain are explicitly refused.",
+    "Run timings are measurements under shared host load, not isolated benchmarks."
+  ],
+  "nextStep": "Transfer observed_program_composition in the shared owner; STCK is a public-fixture-supported candidate for a fresh campaign, not a solved-level claim."
+}
