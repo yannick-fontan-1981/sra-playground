@@ -149,6 +149,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const controlEffects = (series.events as R[]).filter(event => event.kind === 'native_program_control_effect');
           const rootedStates = (series.events as R[]).filter(event => event.kind === 'rooted_quota_state');
           const productStates = (series.events as R[]).filter(event => event.kind === 'observed_factor_product');
+          const labeledSubmissions = (series.events as R[]).filter(event => event.kind === 'labeled_sequence_submission');
           const relationModels = (series.events as R[]).filter(event => event.kind === 'native_program_relation_model');
           const relationTrials = (series.events as R[]).filter(event => event.kind === 'native_program_relation_trial');
           const relationRefutations = (series.events as R[]).filter(event => event.kind === 'native_program_relation_refutation');
@@ -176,6 +177,13 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               ? { productPanelFactors: evidence.proposal.product_panel_plan.scene.controls.length,
                   productPanelEstimated: evidence.proposal.product_panel_plan.estimate !== null,
                   productPanelObservedSteps: evidence.proposal.steps.map((step: R) => step.relation_observed) } : {}),
+            ...(evidence.proposal.labeled_sequence_plan
+              ? { labeledSequenceLabel: evidence.proposal.labeled_sequence_plan.label,
+                  labeledSequenceQuery: evidence.proposal.labeled_sequence_plan.scene.query.words[0].values,
+                  labeledSequenceTrainingReused: evidence.proposal.labeled_sequence_plan.inference.training_reused,
+                  labeledSequenceCompatiblePredicates: evidence.proposal.labeled_sequence_plan.inference.induction.values.observation_compatible_version_space,
+                  labeledSequenceAgreement: evidence.proposal.labeled_sequence_plan.inference.induction.values.robust_answer_and_submission_agreement,
+                  labeledSequenceGrammarSize: evidence.proposal.labeled_sequence_plan.inference.grammar.length } : {}),
             supportMode: evidence.proposal.support_preparation_plan?.mode ?? null,
             graphChain: graph.chain, graphRevision: snapshot.graphRevision, callerAcquiredTransitions: snapshot.caller.acquiredTransitions,
             sharedSeries: { digestScope: snapshot.coverage.sharedSeriesDigestScope, digest: series.digest,
@@ -203,6 +211,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               rootedQuotaLatestState: rootedStates.at(-1) ?? null,
               productPanelStateCount: productStates.length,
               productPanelLatestState: productStates.at(-1) ?? null,
+              labeledSequenceSubmissionCount: labeledSubmissions.length,
+              labeledSequenceLatestSubmission: labeledSubmissions.at(-1) ?? null,
               nativeProgramRelations: { modelCount: relationModels.length, trialCount: relationTrials.length,
                 refutationCount: relationRefutations.length, latestModel: relationModels.at(-1) ?? null,
                 latestTrial: relationTrials.at(-1) ?? null, latestRefutation: relationRefutations.at(-1) ?? null },

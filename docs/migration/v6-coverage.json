@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 93,
-    "partiallyTransferredModules": 68,
+    "componentVerifiedModules": 95,
+    "partiallyTransferredModules": 72,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1208,
+    "pendingModules": 1202,
     "strategyFamilies": 16
   },
   "families": [
@@ -26512,9 +26512,17 @@
           "endLine": 84
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-labeled-sequence-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-labeled-sequence-reference.py",
+        "tests/fixtures/v6-labeled-sequence-reference.json.gz",
+        "tests/v6-labeled-sequence-parity.test.ts",
+        "scripts/probe-v6-labeled-sequence-original.py",
+        "tests/fixtures/v6-labeled-sequence-original-public.json.gz"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/labeled_sequence_observation_d.py",
@@ -29621,7 +29629,8 @@
         "src/logos-engine/v6-arrival-mechanics.ts",
         "src/logos-engine/v6-ray-capture-domain.ts",
         "src/logos-engine/v6-rooted-quota-mechanics.ts",
-        "src/logos-engine/v6-product-panel-mechanics.ts"
+        "src/logos-engine/v6-product-panel-mechanics.ts",
+        "src/logos-engine/v6-labeled-sequence-mechanics.ts"
       ],
       "proof": [
         "scripts/export-v6-configured-arrivals-reference.py",
@@ -29635,7 +29644,10 @@
         "tests/v6-rooted-quota-parity.test.ts",
         "scripts/export-v6-product-panel-reference.py",
         "tests/fixtures/v6-product-panel-reference.json.gz",
-        "tests/v6-product-panel-parity.test.ts"
+        "tests/v6-product-panel-parity.test.ts",
+        "scripts/export-v6-labeled-sequence-reference.py",
+        "tests/fixtures/v6-labeled-sequence-reference.json.gz",
+        "tests/v6-labeled-sequence-parity.test.ts"
       ]
     },
     {
@@ -35994,9 +36006,17 @@
           "endLine": 48
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-labeled-sequence-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-labeled-sequence-reference.py",
+        "tests/fixtures/v6-labeled-sequence-reference.json.gz",
+        "tests/v6-labeled-sequence-parity.test.ts",
+        "scripts/probe-v6-labeled-sequence-original.py",
+        "tests/fixtures/v6-labeled-sequence-original-public.json.gz"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/ordered_relief_writing.py",
@@ -75478,9 +75498,20 @@
           "endLine": 29
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-labeled-sequence-access.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-labeled-sequence-reference.py",
+        "tests/fixtures/v6-labeled-sequence-reference.json.gz",
+        "tests/v6-labeled-sequence-parity.test.ts",
+        "scripts/probe-v6-labeled-sequence-original.py",
+        "tests/fixtures/v6-labeled-sequence-original-public.json.gz",
+        "tests/v6-labeled-sequence-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_linked_contact.py",
@@ -81277,9 +81308,18 @@
           "endLine": 35
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-labeled-sequence-access.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-labeled-sequence-reference.py",
+        "tests/fixtures/v6-labeled-sequence-reference.json.gz",
+        "tests/v6-labeled-sequence-parity.test.ts",
+        "scripts/probe-v6-labeled-sequence-original.py",
+        "tests/fixtures/v6-labeled-sequence-original-public.json.gz",
+        "tests/v6-labeled-sequence-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/labeled_sequence_methods.py",
@@ -81306,9 +81346,19 @@
           "endLine": 44
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-labeled-sequence-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-labeled-sequence-reference.py",
+        "tests/fixtures/v6-labeled-sequence-reference.json.gz",
+        "tests/v6-labeled-sequence-parity.test.ts",
+        "scripts/probe-v6-labeled-sequence-original.py",
+        "tests/fixtures/v6-labeled-sequence-original-public.json.gz",
+        "scripts/diagnose-v44-labeled-boundary.ts",
+        "docs/migration/native-campaigns-v44/catl-next-level-diagnosis.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/labeled_sequence_observation.py",
@@ -81335,9 +81385,17 @@
           "endLine": 66
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-labeled-sequence-observation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-labeled-sequence-reference.py",
+        "tests/fixtures/v6-labeled-sequence-reference.json.gz",
+        "tests/v6-labeled-sequence-parity.test.ts",
+        "scripts/probe-v6-labeled-sequence-original.py",
+        "tests/fixtures/v6-labeled-sequence-original-public.json.gz"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/level_action_budget.py",
@@ -96758,6 +96816,7 @@
     "v42 adds the source-declared rooted_quota_composition window provider with six explicit source mappings. Rooted-chain observation and the bounded caller helpers are component_verified; own access/common inheritance and both mechanical V5 modules remain partial_transfer. The source-only fixture contains 176 cases, 18 scenes and five true CombinedObservedCompositionMemory envelopes, and its 181 focused tests verify 825 loaded source-file hashes. The original rooted record cutoff suppresses older Program/Occurrence/Radial acquisition, preserves outer Cell/Graph/Pair/Auxiliary acquisition and still runs record_packet. Every actual public return and boundary in the isolated 11-action component trajectory is covered by source-family envelope and native checkpoint checks. Safe JavaScript integer limits, missing Pydantic/general inherited transport and the narrower native digest are explicit. The unchanged isolated component reaches three THER levels in 11 actions (4/3/4); this is separate from a fresh native common-caller campaign, which is not claimed by these fixture proofs. No additional complete-migration gate is passed.",
     "At v42, the current native shared closure is native_program_relations_recall_radial_ports_rooted_quota_cell_placement_alternating_graph_and_coupled_support_v6. Earlier closure names in historical campaign notes remain historical. Conditional program relation acquisition, inverse-return preparation and transport validation are explicit native extensions, not claims of unchanged Python behavior. Four native THER levels and four STCK levels are completed; STCK terminal progress does not add a second relation sample or a terminal law. Mixed retained native derivations are outside the source-only quota envelope parity.",
     "v43 connects product_panel_composition at its original window position, giving 34 of 76 declared entries (44.7%). Its four V6 modules and one V5 mechanical module have distinct component/partial qualifications; no complete migration gate is passed. Product acquisition belongs after Rooted and before Cell/Graph/Pair/Auxiliary, remains passive for measurable public returns and participates in one actual Kernel journal with atomic restoration.",
-    "v43 separately adds complete_homologous_aligned_mark_support as an explicit native extension. The faithful source observer remains unchanged. Pixel-only homology, alignment, palette, spacing, anchors and visible termination determine an extended mark reading; downstream quota satisfiability never selects counts. Ambiguous support abstains. Every dispatched continuation revalidates geometry and mark support; a real acquired return retains the descriptive evidence. Native mark support adds no source entry. The current shared digest closure is native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_cell_placement_alternating_graph_and_coupled_support_v6; historical closure names above remain historical."
+    "v43 separately adds complete_homologous_aligned_mark_support as an explicit native extension. The faithful source observer remains unchanged. Pixel-only homology, alignment, palette, spacing, anchors and visible termination determine an extended mark reading; downstream quota satisfiability never selects counts. Ambiguous support abstains. Every dispatched continuation revalidates geometry and mark support; a real acquired return retains the descriptive evidence. Native mark support adds no source entry. The current shared digest closure is native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_cell_placement_alternating_graph_and_coupled_support_v6; historical closure names above remain historical.",
+    "v44 connects labeled_sequence_composition at its original DRM position after Product, giving 35 of 76 explicit entries (46.1%). Its two own observation/method modules are component_verified; own access/common wrappers and the two V5 mechanical modules retain partial_transfer qualifications. The current shared digest scope is native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_labeled_sequence_cell_placement_alternating_graph_and_coupled_support_v6. Source guard/binder dispatch now preserves the supported inherited priority Auxiliary > Pair > Graph > Cell > Labeled > Product > Rooted > Radial > Occurrence/Program, verified on mixed envelopes. Historical closure names remain historical. No complete migration gate is passed."
   ]
 }

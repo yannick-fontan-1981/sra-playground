@@ -997,7 +997,8 @@
         "src/logos-engine/v6-arrival-mechanics.ts",
         "src/logos-engine/v6-ray-capture-domain.ts",
         "src/logos-engine/v6-rooted-quota-mechanics.ts",
-        "src/logos-engine/v6-product-panel-mechanics.ts"
+        "src/logos-engine/v6-product-panel-mechanics.ts",
+        "src/logos-engine/v6-labeled-sequence-mechanics.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -1012,9 +1013,12 @@
         "tests/v6-rooted-quota-parity.test.ts",
         "scripts/export-v6-product-panel-reference.py",
         "tests/fixtures/v6-product-panel-reference.json.gz",
-        "tests/v6-product-panel-parity.test.ts"
+        "tests/v6-product-panel-parity.test.ts",
+        "scripts/export-v6-labeled-sequence-reference.py",
+        "tests/fixtures/v6-labeled-sequence-reference.json.gz",
+        "tests/v6-labeled-sequence-parity.test.ts"
       ],
-      "notes": "Called WorkBudget/result/request-validation contracts only, not the full inherited generic module. The rooted-quota transfer additionally uses bounded work accounting, incomplete receipts and the canonical input-digest contract for complete-round resume; these outputs are compared to unchanged Python on the supported request domain. General FrozenModel/Ref transport, all Pydantic coercions and arbitrary Python integer semantics remain unported. This mapping remains partial_transfer and is not duplicated by the new mechanical providers. v43 additionally transfers the called cyclic-product request/result validation and complete-model-prefix resume contract on the canonical safe-integer domain; this adds no duplicate source mapping."
+      "notes": "Called WorkBudget/result/request-validation contracts only, not the full inherited generic module. The rooted-quota transfer additionally uses bounded work accounting, incomplete receipts and the canonical input-digest contract for complete-round resume; these outputs are compared to unchanged Python on the supported request domain. General FrozenModel/Ref transport, all Pydantic coercions and arbitrary Python integer semantics remain unported. This mapping remains partial_transfer and is not duplicated by the new mechanical providers. v43 additionally transfers the called cyclic-product request/result validation and complete-model-prefix resume contract on the canonical safe-integer domain; this adds no duplicate source mapping. v44 additionally covers the ordered-feature and finite labeled-induction request/result and work-budget subset in canonical exact-integer JSON. This adds no duplicate source mapping and does not claim general Pydantic coercion."
     },
     {
       "sources": [
@@ -1815,6 +1819,114 @@
         "tests/v6-product-panel-parity.test.ts"
       ],
       "notes": "Only the called product_sweep / COMPILE branch and its required finite-product, seed-credit, owned press, bounded work, descriptor and resumable-prefix contracts are transferred. Exact canonical JSON receipts, work/depth/domain bounds, ambiguous models, revision mismatches and incomplete results are compared with the unchanged source. The remaining ten advertised operation families, Pydantic coercions and arbitrary Python integers are not implemented; safe JavaScript integers, including derived product cardinalities, are required."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/labeled_sequence_observation.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-labeled-sequence-observation.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-labeled-sequence-reference.py",
+        "tests/fixtures/v6-labeled-sequence-reference.json.gz",
+        "tests/v6-labeled-sequence-parity.test.ts",
+        "scripts/probe-v6-labeled-sequence-original.py",
+        "tests/fixtures/v6-labeled-sequence-original-public.json.gz"
+      ],
+      "notes": "Complete own observation module on public raster contracts: paired geometric panels, largest uniform square token scale, ordered occurrences, unique query, measured same-palette label controls and fully revalidated retained control envelopes. Palette and coordinates have no fixed meaning. The consumed nonoccluded frame revalidation branch is compared, including merged components, altered corners/interiors, ambiguity, missing controls and foreign tokens."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/labeled_sequence_methods.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-labeled-sequence-mechanics.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-labeled-sequence-reference.py",
+        "tests/fixtures/v6-labeled-sequence-reference.json.gz",
+        "tests/v6-labeled-sequence-parity.test.ts",
+        "scripts/probe-v6-labeled-sequence-original.py",
+        "tests/fixtures/v6-labeled-sequence-original-public.json.gz",
+        "scripts/diagnose-v44-labeled-boundary.ts",
+        "docs/migration/native-campaigns-v44/catl-next-level-diagnosis.json"
+      ],
+      "notes": "Readonly scope/features/infer helpers transferred on canonical exact-integer JSON. Training features are reused only for equal epoch, measured context and requested feature grammar; the current query is always measured. The source caller generates only atomic predicates and complements with constants from measured examples. Complete inference objects, finite alternatives and abstention match the source on all 40 CATL submissions; a separate saved public boundary proves source/native MODEL_CONTRADICTION when all 80 roots are refuted. No composite grammar extension is introduced."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/labeled_sequence_access.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-labeled-sequence-access.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-labeled-sequence-reference.py",
+        "tests/fixtures/v6-labeled-sequence-reference.json.gz",
+        "tests/v6-labeled-sequence-parity.test.ts",
+        "scripts/probe-v6-labeled-sequence-original.py",
+        "tests/fixtures/v6-labeled-sequence-original-public.json.gz",
+        "tests/v6-labeled-sequence-integration.test.ts"
+      ],
+      "notes": "Own current-query proposal, duplicate-context refusal, exact before guard, unknown-response sealing, actual submission event, cache reducer and retained digest are transferred. The source first acquires Product and its ancestors, then this layer; higher supported Cell/Graph/Pair/Auxiliary layers and record_packet follow. Current agreement is descriptive, not a universal law or a mechanical action authorization. Unported ancestor providers and complete Python inheritance are not asserted."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_labeled_sequence.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-labeled-sequence-access.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-labeled-sequence-reference.py",
+        "tests/fixtures/v6-labeled-sequence-reference.json.gz",
+        "tests/v6-labeled-sequence-parity.test.ts",
+        "scripts/probe-v6-labeled-sequence-original.py",
+        "tests/fixtures/v6-labeled-sequence-original-public.json.gz",
+        "tests/v6-labeled-sequence-integration.test.ts"
+      ],
+      "notes": "labeled_sequence_composition is connected at its declared DRM position after Product and before the later supported Cell entry. Current visible button support, deadline/remaining budget, source binder and real runtime WHY/ACT authority remain distinct. One actual Kernel journal owns acquired submissions; mutation guards and atomic restoration are verified. Forty complete CombinedObserved source envelopes and eighteen mixed-family bind/before/after cases are compared for the supported closure, separately from full original caller selection and unported inherited state."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/ordered_predicate_features_d.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-labeled-sequence-mechanics.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-labeled-sequence-reference.py",
+        "tests/fixtures/v6-labeled-sequence-reference.json.gz",
+        "tests/v6-labeled-sequence-parity.test.ts",
+        "scripts/probe-v6-labeled-sequence-original.py",
+        "tests/fixtures/v6-labeled-sequence-original-public.json.gz"
+      ],
+      "notes": "All eight requested ordered descriptor kinds and the EVALUATE calculation are transferred on canonical safe-integer requests, with partial visibility, order completeness, occurrence identity, count bounds, witnesses and noncommitting work interruptions. Whole-module Pydantic transport/coercion and arbitrary Python integers remain outside the native contract, so the mapping remains partial despite complete bounded algorithm evidence."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/labeled_predicate_induction_d.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-labeled-sequence-mechanics.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-labeled-sequence-reference.py",
+        "tests/fixtures/v6-labeled-sequence-reference.json.gz",
+        "tests/v6-labeled-sequence-parity.test.ts",
+        "scripts/probe-v6-labeled-sequence-original.py",
+        "tests/fixtures/v6-labeled-sequence-original-public.json.gz"
+      ],
+      "notes": "FIT, PREDICT and PARTITION calculations on supplied finite ATOM/AND/OR/NOT expression graphs are transferred, including actual sealed receipts, typed comparisons, three-valued evaluation, elimination certificates, nonvacuous agreement, contrasts, incomplete domains and budgets. The descriptive agreement flag faithfully includes unanimous false submission preconditions; it is never physical authority. This evaluator can consume declared AND/OR expressions but the connected source helper only generates atoms/complements. General Pydantic coercions and arbitrary Python integers remain outside the canonical native domain."
     }
   ],
   "scopeNotes": [
@@ -1837,7 +1949,8 @@
     "v42 adds the source-declared rooted_quota_composition window provider with six explicit source mappings. Rooted-chain observation and the bounded caller helpers are component_verified; own access/common inheritance and both mechanical V5 modules remain partial_transfer. The source-only fixture contains 176 cases, 18 scenes and five true CombinedObservedCompositionMemory envelopes, and its 181 focused tests verify 825 loaded source-file hashes. The original rooted record cutoff suppresses older Program/Occurrence/Radial acquisition, preserves outer Cell/Graph/Pair/Auxiliary acquisition and still runs record_packet. Every actual public return and boundary in the isolated 11-action component trajectory is covered by source-family envelope and native checkpoint checks. Safe JavaScript integer limits, missing Pydantic/general inherited transport and the narrower native digest are explicit. The unchanged isolated component reaches three THER levels in 11 actions (4/3/4); this is separate from a fresh native common-caller campaign, which is not claimed by these fixture proofs. No additional complete-migration gate is passed.",
     "At v42, the current native shared closure is native_program_relations_recall_radial_ports_rooted_quota_cell_placement_alternating_graph_and_coupled_support_v6. Earlier closure names in historical campaign notes remain historical. Conditional program relation acquisition, inverse-return preparation and transport validation are explicit native extensions, not claims of unchanged Python behavior. Four native THER levels and four STCK levels are completed; STCK terminal progress does not add a second relation sample or a terminal law. Mixed retained native derivations are outside the source-only quota envelope parity.",
     "v43 connects product_panel_composition at its original window position, giving 34 of 76 declared entries (44.7%). Its four V6 modules and one V5 mechanical module have distinct component/partial qualifications; no complete migration gate is passed. Product acquisition belongs after Rooted and before Cell/Graph/Pair/Auxiliary, remains passive for measurable public returns and participates in one actual Kernel journal with atomic restoration.",
-    "v43 separately adds complete_homologous_aligned_mark_support as an explicit native extension. The faithful source observer remains unchanged. Pixel-only homology, alignment, palette, spacing, anchors and visible termination determine an extended mark reading; downstream quota satisfiability never selects counts. Ambiguous support abstains. Every dispatched continuation revalidates geometry and mark support; a real acquired return retains the descriptive evidence. Native mark support adds no source entry. The current shared digest closure is native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_cell_placement_alternating_graph_and_coupled_support_v6; historical closure names above remain historical."
+    "v43 separately adds complete_homologous_aligned_mark_support as an explicit native extension. The faithful source observer remains unchanged. Pixel-only homology, alignment, palette, spacing, anchors and visible termination determine an extended mark reading; downstream quota satisfiability never selects counts. Ambiguous support abstains. Every dispatched continuation revalidates geometry and mark support; a real acquired return retains the descriptive evidence. Native mark support adds no source entry. The current shared digest closure is native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_cell_placement_alternating_graph_and_coupled_support_v6; historical closure names above remain historical.",
+    "v44 connects labeled_sequence_composition at its original DRM position after Product, giving 35 of 76 explicit entries (46.1%). Its two own observation/method modules are component_verified; own access/common wrappers and the two V5 mechanical modules retain partial_transfer qualifications. The current shared digest scope is native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_labeled_sequence_cell_placement_alternating_graph_and_coupled_support_v6. Source guard/binder dispatch now preserves the supported inherited priority Auxiliary > Pair > Graph > Cell > Labeled > Product > Rooted > Radial > Occurrence/Program, verified on mixed envelopes. Historical closure names remain historical. No complete migration gate is passed."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,

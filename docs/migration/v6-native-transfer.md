@@ -11,7 +11,18 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v43):** the native common caller completes all
+**Current integrated milestone (v44):** the native common caller completes
+CATL's first five levels in **40 actions, eight per level**, through one cold
+continuous session and 40 acquired prefixes. The first three levels use
+24 actions. The [v44 report](v44-labeled-sequences.md) records the transfer of
+finite labeled-query agreement, 35 training-feature cache reuses, exact
+original-component trajectory parity and actual Kernel/WHY-ACT integration.
+The official state remains `NOT_FINISHED`. At the sixth-level public packet,
+the unchanged source/native components both refute all 80 atomic/complement
+roots against the 20 measured examples. A richer bounded grammar remains a
+future native extension; no complete CATL victory is claimed.
+
+**Previous integrated milestone (v43):** the native common caller completes all
 six THER levels with official **`WIN` in 26 actions (4, 3, 4, 4, 5, 6)**,
 and adds **COMB's complete six-level `WIN` in 104 actions
 (3, 7, 14, 19, 30, 31)**. Its separately checked first three levels use
@@ -41,11 +52,11 @@ auxiliary support and native checkpoint report](v35-coupled-support.md), [the v3
 response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 34 of 76
-explicit DRM subquestions are connected (44.7%) in implementation
-`logos-engine.typescript.v6.native-migration/0.13.0`. This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 35 of 76
+explicit DRM subquestions are connected (46.1%) in implementation
+`logos-engine.typescript.v6.native-migration/0.14.0`. This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
-The v43 product-panel connection adds one source entry; its native mark-support extension adds none. The v42 rooted-quota connection adds one source entry; its conditional relation and return-preparation extensions add none. The v41 radial-port connection added one source entry; the native control-discovery
+The v44 labeled-sequence connection adds one source entry. The v43 product-panel connection adds one source entry; its native mark-support extension adds none. The v42 rooted-quota connection adds one source entry; its conditional relation and return-preparation extensions add none. The v41 radial-port connection added one source entry; the native control-discovery
 and refusal-scope extensions add none. The v40 changes are explicit native evolutions: they add no Python module to
 the transferred inventory and no source entry. The v39 observed-program
 composition added one source entry, following the v38 cell-composition entry;

@@ -28,7 +28,14 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **COMB now completes all
+  level**; opening the tab does not move the game. **CATL now completes its
+  first five levels in 40 actions (eight per level)** through one cold native
+  common session. Its first three levels use 24 actions. The current labeled
+  query is classified from measured examples, with 35 training-feature cache
+  reuses and actual Kernel acquisition. The [v44 labeled-sequence report](docs/migration/v44-labeled-sequences.md)
+  records exact component parity and the remaining sixth-level grammar limit;
+  the official state is `NOT_FINISHED`, with no complete victory claimed.
+  **Previous v43 milestone: COMB completes all
   six levels with official `WIN` in 104 actions (3, 7, 14, 19, 30 and 31)**,
   through one cold common Logos Engine session and 45 acquired prefixes.
   **THER also completes all six levels with official `WIN` in 26 actions
@@ -52,8 +59,8 @@ Fontan's **Symbolic Reasoning Agent** research.
   **Previous v38 milestone: TICT completes all six levels with official `WIN`
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
-  The current entry audit connects **34 of 76 explicit DRM subquestions
-  (44.7%)**, with one newly connected product-panel entry. Complete aligned-mark
+  The current entry audit connects **35 of 76 explicit DRM subquestions
+  (46.1%)**, with one newly connected labeled-sequence entry. Complete aligned-mark
   support is an explicit native extension and adds no source entry.
   Complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
