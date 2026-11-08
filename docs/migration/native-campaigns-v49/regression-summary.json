@@ -1,0 +1,147 @@
+{
+  "schema": "logos-engine.v49.regression-summary.v1",
+  "passed": true,
+  "verification": {
+    "path": "docs/migration/native-campaigns-v49/regression-verification.json",
+    "sha256": "6e20452916e804cd56575f81d08584fbf8596418bc8a5837187f50357cc3d4da",
+    "bytes": 508873
+  },
+  "plan": {
+    "path": "docs/migration/native-campaigns-v49/regression-plan.json",
+    "sha256": "2f03b8fdceee99cca289eb7f2d1b1ad57ff4594a7afc7b1d80a2ca3ab31675a0",
+    "bytes": 9582
+  },
+  "sourceDigest": "e5a7fc15461fd1ddbc9019b3749dad98a2235fc38df40898778d6c089cc13a5a",
+  "nativeSourceFiles": 166,
+  "qualification": "Five cold native common-caller replays recalculate commands before consuming complete public returns from prior actual campaigns. These affected shared-owner regressions cover observed programs, composed predicates, dated linked packets, queued fields and the acquired trace continuation. They are not new live games or speed comparisons. Catalogue observation and view-event state must remain empty on these trajectories. The separate current GRIL campaign uses the opaque game host. No Python agent modules are authorized.",
+  "groups": [
+    {
+      "mode": "recorded-public-replay",
+      "runs": 5,
+      "passed": true,
+      "commands": 273,
+      "completePublicPackets": 278,
+      "prefixes": 168,
+      "comparisonChecks": 85,
+      "games": [
+        "STCK",
+        "CATL",
+        "SELE",
+        "COLM",
+        "ZIPP"
+      ]
+    },
+    {
+      "mode": "actual-game-campaign",
+      "runs": 0,
+      "passed": true,
+      "commands": 0,
+      "completePublicPackets": 0,
+      "prefixes": 0,
+      "comparisonChecks": 0,
+      "games": []
+    }
+  ],
+  "results": [
+    {
+      "game": "STCK",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 35,
+      "levelsCompleted": 3,
+      "state": "NOT_FINISHED",
+      "prefixes": 15,
+      "report": {
+        "path": "docs/migration/native-campaigns-v49/stck-recorded-public-replay.json",
+        "sha256": "8e28c7f7eb648b264172b76593e3c7838b8bf882a9a8eaded108e4374baa151b",
+        "bytes": 198690
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v49/stck-regression-comparison.json",
+        "sha256": "82003dc41460ff72e1f464bf12e27b3ab81093585334a64826089a6ac5f9cef3",
+        "bytes": 3810
+      }
+    },
+    {
+      "game": "CATL",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 48,
+      "levelsCompleted": 6,
+      "state": "WIN",
+      "prefixes": 48,
+      "report": {
+        "path": "docs/migration/native-campaigns-v49/catl-recorded-public-replay.json",
+        "sha256": "7e3c39ea5a55c8aae6a3e2f8bcce9bbff9faa73677133880271679c410774b2f",
+        "bytes": 3894489
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v49/catl-regression-comparison.json",
+        "sha256": "204c205bd2abd296e15a645f1080b656173f685d51b6df7ce31c134733abfe65",
+        "bytes": 3808
+      }
+    },
+    {
+      "game": "SELE",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 44,
+      "levelsCompleted": 3,
+      "state": "NOT_FINISHED",
+      "prefixes": 44,
+      "report": {
+        "path": "docs/migration/native-campaigns-v49/sele-recorded-public-replay.json",
+        "sha256": "0c61fbfe4c1b6c643b3eafe7265bb967fc962ad12b5dabace6023a5bb806dc98",
+        "bytes": 3973880
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v49/sele-regression-comparison.json",
+        "sha256": "2e26d0a84d30174ae5555bd1eaf043b2382896e69a116a6f48e143a23ce2ce0d",
+        "bytes": 3810
+      }
+    },
+    {
+      "game": "COLM",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 45,
+      "levelsCompleted": 3,
+      "state": "NOT_FINISHED",
+      "prefixes": 21,
+      "report": {
+        "path": "docs/migration/native-campaigns-v49/colm-recorded-public-replay.json",
+        "sha256": "a1b85b98d325aa240d8a29dcae2c771800c7d5a2232797ca62ce20bcc9746778",
+        "bytes": 1528005
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v49/colm-regression-comparison.json",
+        "sha256": "6b4bd7d98ad3ba8326ef5e2179227bc555f03740de8556a47f1dad4db1135c8d",
+        "bytes": 14805
+      }
+    },
+    {
+      "game": "ZIPP",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 101,
+      "levelsCompleted": 6,
+      "state": "WIN",
+      "prefixes": 40,
+      "report": {
+        "path": "docs/migration/native-campaigns-v49/zipp-recorded-public-replay.json",
+        "sha256": "9c36d2b69b13bb09e536d191694bfdd2e0ff987a4b98f8c115f9aa0ec0b2ef66",
+        "bytes": 2576934
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v49/zipp-regression-comparison.json",
+        "sha256": "24a34ee203e89e2e844cbab5c2f6336efece609364cee1dc9e8b76b4b0900d85",
+        "bytes": 15402
+      }
+    }
+  ]
+}

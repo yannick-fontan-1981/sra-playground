@@ -1,0 +1,323 @@
+{
+  "measurements": [
+    {
+      "label": "level-1-ready",
+      "actions": 0,
+      "inspectionOpen": false,
+      "levels": 0,
+      "prefixes": 0,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Ready to run from level 1.",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      }
+    },
+    {
+      "label": "level-1-running",
+      "actions": 0,
+      "inspectionOpen": false,
+      "levels": 0,
+      "prefixes": 0,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Preparing the agent…",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      }
+    },
+    {
+      "label": "level-1-completed",
+      "actions": 5,
+      "inspectionOpen": false,
+      "levels": 1,
+      "prefixes": 5,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Level completed.",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      }
+    },
+    {
+      "label": "level-2-running",
+      "actions": 5,
+      "inspectionOpen": false,
+      "levels": 1,
+      "prefixes": 5,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Reading the board and planning…",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      }
+    },
+    {
+      "label": "level-2-completed",
+      "actions": 10,
+      "inspectionOpen": false,
+      "levels": 2,
+      "prefixes": 10,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Level completed.",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      }
+    },
+    {
+      "label": "level-3-running",
+      "actions": 10,
+      "inspectionOpen": false,
+      "levels": 2,
+      "prefixes": 10,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Reading the board and planning…",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      }
+    },
+    {
+      "label": "level-3-completed",
+      "actions": 19,
+      "inspectionOpen": false,
+      "levels": 3,
+      "prefixes": 19,
+      "rects": {
+        "#agent-message": {
+          "height": 98,
+          "width": 265,
+          "x": 986,
+          "y": 948.671875
+        },
+        "#agent-run": {
+          "height": 44,
+          "width": 265,
+          "x": 986,
+          "y": 1062.671875
+        },
+        "#canvas-stage": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        "#game-canvas": {
+          "height": 384,
+          "width": 384,
+          "x": 327,
+          "y": 907.671875
+        },
+        ".board-column": {
+          "height": 442,
+          "width": 888,
+          "x": 75,
+          "y": 878.671875
+        }
+      },
+      "status": "Level completed.",
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      }
+    }
+  ],
+  "uiActions": [
+    "select GRIL from game selector",
+    "select SRA Agent tab",
+    "Run to next level",
+    "Run to next level",
+    "Run to next level"
+  ],
+  "manualGameActions": 0,
+  "sessionResets": 0,
+  "levelJumps": 0,
+  "finalUrl": "http://127.0.0.1:4173/?game=GRIL&level=4"
+}

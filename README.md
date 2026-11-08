@@ -28,7 +28,20 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **The v48 milestone completes
+  level**; opening the tab does not move the game. **The v49 milestone completes
+  GRIL's first three levels in 19 actions (5, 5 and 9)** through one cold
+  native common session, 19 prefixes and 19 actual Kernel acquisitions. The
+  connected `occluded_catalogue_composition` preserves unknown pixels,
+  acquires reciprocal substrate evidence and compares current catalogue poses.
+  Another view can be requested only from an actually observed field-changing
+  input; other common providers supply the initial experiments. The 34 own
+  catalogue events share the existing memory owner. A separate original
+  subset coordinator uses 18 actions; the native caller's different choices,
+  including one extra occurrence-recall question, are retained explicitly.
+  The target stops on entry to level 4 with `NOT_FINISHED`, without a complete
+  GRIL victory claim. The compact panel and stable board layout are preserved.
+  See the [v49 report](docs/migration/v49-occluded-catalogues-and-acquired-views.md).
+  **The previous v48 milestone completes
   COLM's first three levels in 45 actions (17, 17 and 11)** through one cold
   native common session, 21 prefixes and 45 actual Kernel acquisitions. It
   connects `queued_field_composition`: current scalar control effects are
@@ -109,14 +122,14 @@ Fontan's **Symbolic Reasoning Agent** research.
   **Previous v38 milestone: TICT completes all six levels with official `WIN`
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
-  The current entry audit connects **39 of 76 explicit DRM subquestions
-  (51.3%)** in implementation `logos-engine.typescript.v6.native-migration/0.18.0`,
-  with the newly connected `queued_field_composition` entry. Corroborating a
-  retained success against the actual Kernel is an explicit native coordination
-  extension and adds no source entry. The next step is to transfer
-  `occluded_catalogue_composition` together with acquisition of useful current
-  views, then test a cold three-level GRIL campaign. Its initial public view
-  is a candidate-selection result, not a demonstrated level completion.
+  The current entry audit connects **40 of 76 explicit DRM subquestions
+  (52.6%)** in implementation `logos-engine.typescript.v6.native-migration/0.19.0`,
+  with the newly connected `occluded_catalogue_composition` entry. Its acquired
+  view fallback joins a direct common group outside that denominator. The
+  next step is to transfer `typed_material_flow`, including acquisition of
+  typed selections and replacements, then test a cold three-level LIFE
+  campaign. LIFE's initial public view is a candidate-selection result,
+  not a demonstrated level completion.
   Complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These

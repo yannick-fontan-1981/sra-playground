@@ -160,6 +160,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const controlEffects = (series.events as R[]).filter(event => event.kind === 'native_program_control_effect');
           const rootedStates = (series.events as R[]).filter(event => event.kind === 'rooted_quota_state');
           const queuedModels = (series.events as R[]).filter(event => event.kind === 'observed_queue_field_model');
+          const catalogueEvents = (series.events as R[]).filter(event =>
+            ['catalogue_observation', 'catalogue_response', 'catalogue_field_input_observed'].includes(event.kind));
           const productStates = (series.events as R[]).filter(event => event.kind === 'observed_factor_product');
           const labeledSubmissions = (series.events as R[]).filter(event => event.kind === 'labeled_sequence_submission');
           const traceExtensions = (series.events as R[]).filter(event => event.kind === 'observed_trace_extension');
@@ -177,6 +179,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           report.prefixes.push({ id: evidenceId, decisionRevision: evidence.decision_revision,
             acquiredActions: evidence.transitions.length, family: snapshot.lastDecision, operations: ['OP29', 'OP30', 'OP31'],
             proposalKind: evidence.proposal.kind ?? null, fieldSubquestion: evidence.proposal.field_subquestion ?? null,
+            selectionGroup: evidence.proposal.strategy_receipt?.selected ?? null,
             ...(evidence.proposal.strategy_receipt?.native_coordination?.length
               ? { nativeCoordination: evidence.proposal.strategy_receipt.native_coordination } : {}),
             ...((evidence.proposal.program_composition_plan ?? evidence.proposal.respondent_probe_plan)?.current_program_access
@@ -193,6 +196,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
                   productPanelObservedSteps: evidence.proposal.steps.map((step: R) => step.relation_observed) } : {}),
             ...(evidence.proposal.queued_field_plan
               ? { queuedField: { plan: evidence.proposal.queued_field_plan,
+                    stateNode: 'family_state:public_occurrence_recall' } } : {}),
+            ...(evidence.proposal.occluded_catalogue_plan
+              ? { occludedCatalogue: { plan: evidence.proposal.occluded_catalogue_plan, proposal: evidence.proposal,
                     stateNode: 'family_state:public_occurrence_recall' } } : {}),
             ...(evidence.proposal.labeled_sequence_plan
               ? { labeledSequenceLabel: evidence.proposal.labeled_sequence_plan.label,
@@ -243,6 +249,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               queuedFieldModelCount: queuedModels.length,
               queuedFieldLatestModel: queuedModels.at(-1) ?? null,
               queuedFieldAcquiredModels: queuedModels.filter(event => evidence.transitions.some((transition: R) => transition.before === event.evidence?.[0])),
+              catalogueEventCount: catalogueEvents.length,
+              catalogueLatestEvent: catalogueEvents.at(-1) ?? null,
+              catalogueAcquiredEvents: catalogueEvents.filter(event => evidence.transitions.some((transition: R) => transition.before === event.evidence?.[0])),
               productPanelStateCount: productStates.length,
               productPanelLatestState: productStates.at(-1) ?? null,
               labeledSequenceSubmissionCount: labeledSubmissions.length,

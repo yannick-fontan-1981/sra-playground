@@ -11,7 +11,45 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v48):** the native common Logos Engine caller
+**Current integrated milestone (v49):** the native common Logos Engine caller
+completes **GRIL's first three levels in 19 actions (5, 5, 9)**, through one
+cold continuous session, 19 acquired prefixes and two natural boundary
+replays. The [actual campaign](native-campaigns-v49/gril-three-levels.json)
+stops at its declared target on entry to level 4 with `NOT_FINISHED`. Its
+20 complete public packets contain 23 frames. The newly connected
+`occluded_catalogue_composition` measures catalogue/field roles as hypotheses,
+acquires reciprocal substrate evidence, preserves all remaining unknown
+pixels and intersects finite current pose alternatives. A submitted response
+is not treated as individual correctness feedback.
+
+A current ambiguous catalogue can ask for a new view only after an actual
+field-changing input has been acquired under the same field structure. The
+same common owner records these effects even when another provider chose
+the action. No first-view command or prior success is inserted into cold
+memory. Fourteen catalogue proposals and 34 own acquired events are retained.
+The source common ViewFrontier remains first in the direct `view` group;
+the catalogue-view provider is its explicit source fallback.
+
+The unchanged original catalogue/view/frontier subset completes three levels
+in 18 actions (5, 5, 8). Its selection differs from the native common caller
+at action 9, and the native caller also performs an occurrence-recall question
+at action 14 in level 3. The
+[independent comparison](native-campaigns-v49/gril-original-component-comparison.json)
+replays all 19 actual native transitions through the original component:
+14 selected catalogue/view proposals, 34 own events and 19 own-state
+comparisons agree exactly, with zero numeric tolerance. For each transition,
+the Python own state recomputed from public returns matches the state
+reconstructed from retained native own events; the full inherited/global
+digest is outside this scope. The first eight
+commands and nine packets match between campaigns before the explicit
+selection divergence. Full original-caller equivalence remains outside this
+comparison. The
+[v49 report](v49-occluded-catalogues-and-acquired-views.md) explains these
+scopes, current guards, numerical limits and evidence. Python remains the
+opaque game host in the native campaign, with no manual priming, reset or
+level jump.
+
+**Previous integrated milestone (v48):** the native common Logos Engine caller
 completes **COLM's first three levels in 45 actions (17, 17, 11)** through one
 cold continuous session, 21 sealed prefixes, 45 actual Kernel acquisitions and
 two natural boundary replays. The [actual campaign](native-campaigns-v48/colm-three-levels.json)
@@ -177,10 +215,13 @@ auxiliary support and native checkpoint report](v35-coupled-support.md), [the v3
 response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 39 of 76
-explicit DRM subquestions are connected (51.3%) in implementation
-`logos-engine.typescript.v6.native-migration/0.18.0`. This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 40 of 76
+explicit DRM subquestions are connected (52.6%) in implementation
+`logos-engine.typescript.v6.native-migration/0.19.0`. This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
+The v49 occluded-catalogue connection adds one source entry. Its acquired-view
+fallback also connects the existing direct `view` group; direct groups remain
+outside this four-list denominator.
 The v48 queued-field connection adds one source entry. Corroborating a retained
 success against acquired Kernel boundary scores and exact provider identity is
 an explicit native coordination extension and adds none.
@@ -198,14 +239,16 @@ composition added one source entry, following the v38 cell-composition entry;
 the v37 performance step added none. All six conditions for a complete
 migration remain false.
 
-The next step is **`occluded_catalogue_composition` and acquisition of useful
-current views**, followed by a cold GRIL campaign targeting its first three
-levels. On the retained set of 100 untouched public initial screens, the
-original observer accepts only GRIL. That discovery identifies a candidate;
-it establishes no successful action or level. The missing initial view effect
-must be acquired from actual public returns before navigation or background
-absence can be treated as evidence. The [candidate-selection note](native-campaigns-v48/candidate-selection.md)
-records the source files, measured structures and unresolved acquisition task.
+The next step is **`typed_material_flow`**, including acquisition of selection,
+material replacement, typed descendants and current request associations,
+followed by a cold LIFE campaign targeting its first three levels. A bounded
+read-only selection on the retained 100 public initial screens finds LIFE as
+the sole view accepted by the original typed-carrier observer, with four
+measured supports. This establishes no executed action, solved level or game
+victory. The [candidate-selection note](native-campaigns-v49/candidate-selection.md)
+records the exact source functions, retained measurements and acquisition
+questions. No first selection, production, delivery or rotation law starts
+acquired.
 
 **Previous v42 result:** THER completes levels 1–4 in **4, 3, 4 and 4 actions**,
 15 total, six sealed prefixes and one retained session. The first two real

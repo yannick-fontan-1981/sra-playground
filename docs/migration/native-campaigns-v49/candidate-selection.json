@@ -1,0 +1,3319 @@
+{
+  "schema": "logos-engine.v49.readonly-candidate-selection.v1",
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceFilesVerified": 1786,
+  "corpus": {
+    "path": "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+    "sha256": "3f82fb0b60a104095623216023054ef438ca4cc516941c671c385ebcbf1e54f2",
+    "games": 100,
+    "actions": 0,
+    "levelJumps": 0
+  },
+  "sourceHashes": {
+    "typed_carrier_scene.py": "32d1cdbad550563f82a5567fdfa0e41902ba4cc105de730637fdaa8f941c8bcc",
+    "nested_control_access.py": "0dd84832e0b864bbd1614c86fbf32861288c922969051321b9741b202ff0e7e5",
+    "field_service_access.py": "cf62c7c8909c29452eb47b8735b50030a570d2c83dc645a0fe5568409e666840",
+    "typed_material_flow.py": "3c96cf96f10ad9a9a9595d4a43073da801d4523ce6fd2db9c4d0febc2eb15778",
+    "typed_pose_access.py": "1be7fa2ef498a1d5952117e7d4a74a1763152340007a63f1e73a4ee93eb3fd92",
+    "typed_material_observations.py": "423d0c2f70192a914feae4ac99144c832b08373acf08a8c488510338197fb565",
+    "common_typed_material_flow.py": "0ba413bf01220a53f8d4eed62c8a046c4c6b42573af114a3bb18a4fb26fff4cc",
+    "common_field_service.py": "9267697433245dc3c41014385ac64c0d07bdaf30a9e5daaca9bb8fa37efccaac"
+  },
+  "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+  "functions": [
+    "typed_carrier_scene.measure",
+    "NestedControlAccess.nested_question",
+    "field_service_access.paired_controls"
+  ],
+  "counts": {
+    "typedMaterial": 1,
+    "nestedControl": 11,
+    "pairedControls": 22
+  },
+  "results": [
+    {
+      "game": "AR25",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "BP35",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            13,
+            1,
+            23,
+            5
+          ],
+          "point": [
+            18,
+            3
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-5",
+            "component-8"
+          ]
+        },
+        {
+          "bbox": [
+            19,
+            1,
+            29,
+            5
+          ],
+          "point": [
+            24,
+            3
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-8",
+            "component-11"
+          ]
+        },
+        {
+          "bbox": [
+            31,
+            13,
+            41,
+            17
+          ],
+          "point": [
+            36,
+            15
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-54",
+            "component-57"
+          ]
+        },
+        {
+          "bbox": [
+            37,
+            13,
+            47,
+            17
+          ],
+          "point": [
+            42,
+            15
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-57",
+            "component-60"
+          ]
+        },
+        {
+          "bbox": [
+            43,
+            13,
+            53,
+            17
+          ],
+          "point": [
+            48,
+            15
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-60",
+            "component-63"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "CD82",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            35,
+            2,
+            45,
+            6
+          ],
+          "point": [
+            40,
+            4
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-3",
+            "component-4"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "CN04",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "DC22",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "FT09",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "G50T",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "KA59",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "LF52",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "LP85",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "LS20",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "M0R0",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "R11L",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "RE86",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "S5I5",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            37,
+            19,
+            47,
+            23
+          ],
+          "point": [
+            42,
+            21
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-10",
+            "component-12"
+          ]
+        },
+        {
+          "bbox": [
+            22,
+            36,
+            26,
+            46
+          ],
+          "point": [
+            24,
+            41
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-19",
+            "component-22"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "SB26",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "SC25",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "SK48",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "SP80",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "SU15",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "TN36",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "TR87",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "TU93",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "VC33",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "WA30",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "SKBN",
+      "typedMaterialScene": null,
+      "nestedControlPlan": {
+        "epoch": 1,
+        "score": 0,
+        "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:397457b492afea44",
+        "frame_digest": "397457b492afea44a57c288c30be2deca0273bea7b0e1478c8a0050994c69316",
+        "selected": {
+          "frame_ref": "component-102",
+          "bbox": [
+            21,
+            18,
+            26,
+            23
+          ],
+          "point": [
+            23,
+            20
+          ],
+          "core_area": 4,
+          "core_scale": 2,
+          "core_palette": 12
+        },
+        "alternative_enclosures": [],
+        "action": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 23,
+            "y": 20
+          }
+        },
+        "expected_effect": "unknown",
+        "scope": "Unique smallest measured compact two-value enclosure; other enclosures retain unknown roles. Action semantics and distant effects unconfirmed."
+      },
+      "pairedControls": []
+    },
+    {
+      "game": "CLRS",
+      "typedMaterialScene": null,
+      "nestedControlPlan": {
+        "epoch": 1,
+        "score": 0,
+        "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:e2b4355c3cbb57a2",
+        "frame_digest": "e2b4355c3cbb57a22e040fe0acfb5ae7a6f7b71c73584dac7a1b1b14efa03c88",
+        "selected": {
+          "frame_ref": "component-6",
+          "bbox": [
+            26,
+            17,
+            37,
+            28
+          ],
+          "point": [
+            31,
+            22
+          ],
+          "core_area": 100,
+          "core_scale": 10,
+          "core_palette": 5
+        },
+        "alternative_enclosures": [],
+        "action": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 31,
+            "y": 22
+          }
+        },
+        "expected_effect": "unknown",
+        "scope": "Unique smallest measured compact two-value enclosure; other enclosures retain unknown roles. Action semantics and distant effects unconfirmed."
+      },
+      "pairedControls": []
+    },
+    {
+      "game": "SWCH",
+      "typedMaterialScene": null,
+      "nestedControlPlan": {
+        "epoch": 1,
+        "score": 0,
+        "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:2a01379c598b3d70",
+        "frame_digest": "2a01379c598b3d702d63422050272988fe3438f432111386b085561b5c32d65d",
+        "selected": {
+          "frame_ref": "component-7",
+          "bbox": [
+            39,
+            32,
+            43,
+            36
+          ],
+          "point": [
+            41,
+            34
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 5
+        },
+        "alternative_enclosures": [],
+        "action": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 41,
+            "y": 34
+          }
+        },
+        "expected_effect": "unknown",
+        "scope": "Unique smallest measured compact two-value enclosure; other enclosures retain unknown roles. Action semantics and distant effects unconfirmed."
+      },
+      "pairedControls": []
+    },
+    {
+      "game": "STCK",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "HANO",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            43,
+            46,
+            55,
+            56
+          ],
+          "point": [
+            49,
+            51
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-7",
+            "component-9"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "SEQN",
+      "typedMaterialScene": null,
+      "nestedControlPlan": {
+        "epoch": 1,
+        "score": 0,
+        "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:90b98f0d2993a933",
+        "frame_digest": "90b98f0d2993a9338e5446a775a38e880770aabbdf7f5ff297aed6f6c14252bc",
+        "selected": {
+          "frame_ref": "component-9",
+          "bbox": [
+            33,
+            27,
+            37,
+            31
+          ],
+          "point": [
+            35,
+            29
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 5
+        },
+        "alternative_enclosures": [],
+        "action": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 35,
+            "y": 29
+          }
+        },
+        "expected_effect": "unknown",
+        "scope": "Unique smallest measured compact two-value enclosure; other enclosures retain unknown roles. Action semantics and distant effects unconfirmed."
+      },
+      "pairedControls": []
+    },
+    {
+      "game": "MIND",
+      "typedMaterialScene": null,
+      "nestedControlPlan": {
+        "epoch": 1,
+        "score": 0,
+        "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:38a98b347eb0eff5",
+        "frame_digest": "38a98b347eb0eff5c6715e6e34925f0a95bc1cb499c9865f1ddfb7fbc2011e19",
+        "selected": {
+          "frame_ref": "component-8",
+          "bbox": [
+            1,
+            51,
+            7,
+            57
+          ],
+          "point": [
+            4,
+            54
+          ],
+          "core_area": 25,
+          "core_scale": 5,
+          "core_palette": 8
+        },
+        "alternative_enclosures": [],
+        "action": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 4,
+            "y": 54
+          }
+        },
+        "expected_effect": "unknown",
+        "scope": "Unique smallest measured compact two-value enclosure; other enclosures retain unknown roles. Action semantics and distant effects unconfirmed."
+      },
+      "pairedControls": []
+    },
+    {
+      "game": "MEMO",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "REGN",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            1,
+            60,
+            11,
+            62
+          ],
+          "point": [
+            6,
+            61
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-41",
+            "component-43"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "CONN",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "DNOI",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "SYME",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "GORI",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "KEYD",
+      "typedMaterialScene": null,
+      "nestedControlPlan": {
+        "epoch": 1,
+        "score": 0,
+        "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:1968dffaf6bef933",
+        "frame_digest": "1968dffaf6bef93353bc2796ce9df0ebb70698d8baf58f7da9b0783c6aa7f5ee",
+        "selected": {
+          "frame_ref": "component-76",
+          "bbox": [
+            43,
+            58,
+            47,
+            62
+          ],
+          "point": [
+            45,
+            60
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 4
+        },
+        "alternative_enclosures": [],
+        "action": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 45,
+            "y": 60
+          }
+        },
+        "expected_effect": "unknown",
+        "scope": "Unique smallest measured compact two-value enclosure; other enclosures retain unknown roles. Action semantics and distant effects unconfirmed."
+      },
+      "pairedControls": [
+        {
+          "bbox": [
+            19,
+            26,
+            20,
+            30
+          ],
+          "point": [
+            19,
+            28
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-33",
+            "component-42"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "LOGI",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "PORT",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "FOGW",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "LIFE",
+      "typedMaterialScene": {
+        "carriers": [
+          {
+            "id": "45eddef78c540e12a68a9a97e32c9c0d2b5d78d1f020232c8d53a44ad03a7727",
+            "bbox": [
+              4,
+              46,
+              8,
+              50
+            ],
+            "center": [
+              6.0,
+              48.0
+            ],
+            "point": [
+              6,
+              48
+            ],
+            "body_palette": 10,
+            "marks": [
+              [
+                0,
+                -1.0,
+                -1.0
+              ],
+              [
+                5,
+                1.0,
+                1.0
+              ]
+            ],
+            "signature": "b12bf8909dd5eef60d9cc537d51e0c1d718d46478e294ae6e2985f4fe2e1932c",
+            "fringe": [
+              [
+                -3.0,
+                -3.0,
+                15
+              ],
+              [
+                -2.0,
+                -3.0,
+                15
+              ],
+              [
+                -1.0,
+                -3.0,
+                15
+              ],
+              [
+                0.0,
+                -3.0,
+                15
+              ],
+              [
+                1.0,
+                -3.0,
+                15
+              ],
+              [
+                2.0,
+                -3.0,
+                15
+              ],
+              [
+                3.0,
+                -3.0,
+                15
+              ],
+              [
+                -3.0,
+                -2.0,
+                15
+              ],
+              [
+                3.0,
+                -2.0,
+                15
+              ],
+              [
+                -3.0,
+                -1.0,
+                15
+              ],
+              [
+                3.0,
+                -1.0,
+                0
+              ],
+              [
+                -3.0,
+                0.0,
+                15
+              ],
+              [
+                3.0,
+                0.0,
+                0
+              ],
+              [
+                -3.0,
+                1.0,
+                15
+              ],
+              [
+                3.0,
+                1.0,
+                0
+              ],
+              [
+                -3.0,
+                2.0,
+                15
+              ],
+              [
+                3.0,
+                2.0,
+                15
+              ],
+              [
+                -3.0,
+                3.0,
+                15
+              ],
+              [
+                -2.0,
+                3.0,
+                15
+              ],
+              [
+                -1.0,
+                3.0,
+                15
+              ],
+              [
+                0.0,
+                3.0,
+                15
+              ],
+              [
+                1.0,
+                3.0,
+                15
+              ],
+              [
+                2.0,
+                3.0,
+                15
+              ],
+              [
+                3.0,
+                3.0,
+                15
+              ]
+            ],
+            "fringe_signature": "623af0b4e66d9d3795509f3e63f43754eec9994c64280f08d5193e697334f32c",
+            "body_ref": "component-25",
+            "support_source": "component",
+            "calibration_refs": []
+          },
+          {
+            "id": "31adb475cf47e2ccb03e9d33ce041c770ca949ddc031230b850be8e9733276a8",
+            "bbox": [
+              21,
+              46,
+              25,
+              50
+            ],
+            "center": [
+              23.0,
+              48.0
+            ],
+            "point": [
+              23,
+              48
+            ],
+            "body_palette": 6,
+            "marks": [
+              [
+                0,
+                0.0,
+                -1.0
+              ],
+              [
+                5,
+                0.0,
+                1.0
+              ]
+            ],
+            "signature": "8c0be7185449c4dc7d02468329877fa9a4482ee7384267c90376e7925061bf15",
+            "fringe": [
+              [
+                -3.0,
+                -3.0,
+                10
+              ],
+              [
+                -2.0,
+                -3.0,
+                10
+              ],
+              [
+                -1.0,
+                -3.0,
+                10
+              ],
+              [
+                0.0,
+                -3.0,
+                10
+              ],
+              [
+                1.0,
+                -3.0,
+                10
+              ],
+              [
+                2.0,
+                -3.0,
+                10
+              ],
+              [
+                3.0,
+                -3.0,
+                10
+              ],
+              [
+                -3.0,
+                -2.0,
+                10
+              ],
+              [
+                3.0,
+                -2.0,
+                10
+              ],
+              [
+                -3.0,
+                -1.0,
+                10
+              ],
+              [
+                3.0,
+                -1.0,
+                0
+              ],
+              [
+                -3.0,
+                0.0,
+                10
+              ],
+              [
+                3.0,
+                0.0,
+                0
+              ],
+              [
+                -3.0,
+                1.0,
+                10
+              ],
+              [
+                3.0,
+                1.0,
+                0
+              ],
+              [
+                -3.0,
+                2.0,
+                10
+              ],
+              [
+                3.0,
+                2.0,
+                10
+              ],
+              [
+                -3.0,
+                3.0,
+                10
+              ],
+              [
+                -2.0,
+                3.0,
+                10
+              ],
+              [
+                -1.0,
+                3.0,
+                10
+              ],
+              [
+                0.0,
+                3.0,
+                10
+              ],
+              [
+                1.0,
+                3.0,
+                10
+              ],
+              [
+                2.0,
+                3.0,
+                10
+              ],
+              [
+                3.0,
+                3.0,
+                10
+              ]
+            ],
+            "fringe_signature": "26f4441c00042f878fe16603666ccbb55769ddb5e82f575ebfcbfcce417294ef",
+            "body_ref": "component-26",
+            "support_source": "component",
+            "calibration_refs": []
+          },
+          {
+            "id": "29cf8603f1e5e8dba2f11f756b918842382e87ed0864c6c22458b8c147deba8a",
+            "bbox": [
+              39,
+              46,
+              43,
+              50
+            ],
+            "center": [
+              41.0,
+              48.0
+            ],
+            "point": [
+              41,
+              48
+            ],
+            "body_palette": 12,
+            "marks": [
+              [
+                0,
+                1.0,
+                -1.0
+              ],
+              [
+                5,
+                -1.0,
+                1.0
+              ]
+            ],
+            "signature": "d7ed45e6ee558317050e75cb7eb5f13f1c2d4c94123669d6c16eee4957a504fb",
+            "fringe": [
+              [
+                -3.0,
+                -3.0,
+                15
+              ],
+              [
+                -2.0,
+                -3.0,
+                15
+              ],
+              [
+                -1.0,
+                -3.0,
+                15
+              ],
+              [
+                0.0,
+                -3.0,
+                15
+              ],
+              [
+                1.0,
+                -3.0,
+                15
+              ],
+              [
+                2.0,
+                -3.0,
+                15
+              ],
+              [
+                3.0,
+                -3.0,
+                15
+              ],
+              [
+                -3.0,
+                -2.0,
+                15
+              ],
+              [
+                3.0,
+                -2.0,
+                15
+              ],
+              [
+                -3.0,
+                -1.0,
+                0
+              ],
+              [
+                3.0,
+                -1.0,
+                15
+              ],
+              [
+                -3.0,
+                0.0,
+                0
+              ],
+              [
+                3.0,
+                0.0,
+                15
+              ],
+              [
+                -3.0,
+                1.0,
+                0
+              ],
+              [
+                3.0,
+                1.0,
+                15
+              ],
+              [
+                -3.0,
+                2.0,
+                15
+              ],
+              [
+                3.0,
+                2.0,
+                15
+              ],
+              [
+                -3.0,
+                3.0,
+                15
+              ],
+              [
+                -2.0,
+                3.0,
+                15
+              ],
+              [
+                -1.0,
+                3.0,
+                15
+              ],
+              [
+                0.0,
+                3.0,
+                15
+              ],
+              [
+                1.0,
+                3.0,
+                15
+              ],
+              [
+                2.0,
+                3.0,
+                15
+              ],
+              [
+                3.0,
+                3.0,
+                15
+              ]
+            ],
+            "fringe_signature": "b76bc7847bebd84cff2a4379827c30d3a7b162cd2eef86a6e1b9e7568633eba5",
+            "body_ref": "component-27",
+            "support_source": "component",
+            "calibration_refs": []
+          },
+          {
+            "id": "cce0b658c87940e16fb8b39bf6630078474f5881c85c8f50ec50ff1418dc3f9e",
+            "bbox": [
+              56,
+              46,
+              60,
+              50
+            ],
+            "center": [
+              58.0,
+              48.0
+            ],
+            "point": [
+              58,
+              48
+            ],
+            "body_palette": 14,
+            "marks": [
+              [
+                0,
+                -1.0,
+                0.0
+              ],
+              [
+                5,
+                1.0,
+                0.0
+              ]
+            ],
+            "signature": "652b57a14c59a45ce5c297fbb5bb7114dfb221a0d4038b0d8c250f3f4a9ab05b",
+            "fringe": [
+              [
+                -3.0,
+                -3.0,
+                10
+              ],
+              [
+                -2.0,
+                -3.0,
+                10
+              ],
+              [
+                -1.0,
+                -3.0,
+                10
+              ],
+              [
+                0.0,
+                -3.0,
+                10
+              ],
+              [
+                1.0,
+                -3.0,
+                10
+              ],
+              [
+                2.0,
+                -3.0,
+                10
+              ],
+              [
+                3.0,
+                -3.0,
+                10
+              ],
+              [
+                -3.0,
+                -2.0,
+                10
+              ],
+              [
+                3.0,
+                -2.0,
+                10
+              ],
+              [
+                -3.0,
+                -1.0,
+                0
+              ],
+              [
+                3.0,
+                -1.0,
+                10
+              ],
+              [
+                -3.0,
+                0.0,
+                0
+              ],
+              [
+                3.0,
+                0.0,
+                10
+              ],
+              [
+                -3.0,
+                1.0,
+                0
+              ],
+              [
+                3.0,
+                1.0,
+                10
+              ],
+              [
+                -3.0,
+                2.0,
+                10
+              ],
+              [
+                3.0,
+                2.0,
+                10
+              ],
+              [
+                -3.0,
+                3.0,
+                10
+              ],
+              [
+                -2.0,
+                3.0,
+                10
+              ],
+              [
+                -1.0,
+                3.0,
+                10
+              ],
+              [
+                0.0,
+                3.0,
+                10
+              ],
+              [
+                1.0,
+                3.0,
+                10
+              ],
+              [
+                2.0,
+                3.0,
+                10
+              ],
+              [
+                3.0,
+                3.0,
+                10
+              ]
+            ],
+            "fringe_signature": "beac4ed18d0d523d519c964a9a98c8f637825e2ddd38b25f1e884caf74a6b279",
+            "body_ref": "component-28",
+            "support_source": "component",
+            "calibration_refs": []
+          }
+        ],
+        "background_hypothesis": 4,
+        "source_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:9cf0321c97cd4ec7",
+        "frame_digest": "9cf0321c97cd4ec754393e834b157de7e7cde599fe0974595ae4ffdba7d8ab3c",
+        "scope": "Dense supports and typed holes are measured. Selection, compatibility and production are unconfirmed hypotheses."
+      },
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "VALV",
+      "typedMaterialScene": null,
+      "nestedControlPlan": {
+        "epoch": 1,
+        "score": 0,
+        "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:cde1b5db276f7597",
+        "frame_digest": "cde1b5db276f7597a9cd17df4a7fd8b23aa162a91794fdd6d9b1d33233614cb4",
+        "selected": {
+          "frame_ref": "component-37",
+          "bbox": [
+            30,
+            48,
+            34,
+            52
+          ],
+          "point": [
+            32,
+            50
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 0
+        },
+        "alternative_enclosures": [
+          {
+            "frame_ref": "component-11",
+            "bbox": [
+              10,
+              20,
+              18,
+              28
+            ],
+            "point": [
+              14,
+              24
+            ],
+            "core_area": 49,
+            "core_scale": 7,
+            "core_palette": 3
+          }
+        ],
+        "action": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 32,
+            "y": 50
+          }
+        },
+        "expected_effect": "unknown",
+        "scope": "Unique smallest measured compact two-value enclosure; other enclosures retain unknown roles. Action semantics and distant effects unconfirmed."
+      },
+      "pairedControls": [
+        {
+          "bbox": [
+            27,
+            2,
+            37,
+            11
+          ],
+          "point": [
+            32,
+            6
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-2",
+            "component-4"
+          ]
+        },
+        {
+          "bbox": [
+            13,
+            31,
+            15,
+            35
+          ],
+          "point": [
+            14,
+            33
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-20",
+            "component-32"
+          ]
+        },
+        {
+          "bbox": [
+            49,
+            31,
+            51,
+            35
+          ],
+          "point": [
+            50,
+            33
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-21",
+            "component-33"
+          ]
+        },
+        {
+          "bbox": [
+            1,
+            59,
+            11,
+            62
+          ],
+          "point": [
+            6,
+            60
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-44",
+            "component-45"
+          ]
+        },
+        {
+          "bbox": [
+            7,
+            59,
+            17,
+            62
+          ],
+          "point": [
+            12,
+            60
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-45",
+            "component-46"
+          ]
+        },
+        {
+          "bbox": [
+            13,
+            59,
+            23,
+            62
+          ],
+          "point": [
+            18,
+            60
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-46",
+            "component-47"
+          ]
+        },
+        {
+          "bbox": [
+            19,
+            59,
+            29,
+            62
+          ],
+          "point": [
+            24,
+            60
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-47",
+            "component-48"
+          ]
+        },
+        {
+          "bbox": [
+            25,
+            59,
+            35,
+            62
+          ],
+          "point": [
+            30,
+            60
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-48",
+            "component-49"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "SIGN",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "CASC",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "CRAF",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            16,
+            6,
+            35,
+            22
+          ],
+          "point": [
+            25,
+            14
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-9",
+            "component-32"
+          ]
+        },
+        {
+          "bbox": [
+            47,
+            20,
+            53,
+            22
+          ],
+          "point": [
+            50,
+            21
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-41",
+            "component-42"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "ESCT",
+      "typedMaterialScene": null,
+      "nestedControlPlan": {
+        "epoch": 1,
+        "score": 0,
+        "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:cb790f27dc27d7dc",
+        "frame_digest": "cb790f27dc27d7dcc8a3d1628c47b76477a44340e54c5639fb6dee4e7c8b7bee",
+        "selected": {
+          "frame_ref": "component-15",
+          "bbox": [
+            17,
+            15,
+            22,
+            20
+          ],
+          "point": [
+            19,
+            17
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 3
+        },
+        "alternative_enclosures": [],
+        "action": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 19,
+            "y": 17
+          }
+        },
+        "expected_effect": "unknown",
+        "scope": "Unique smallest measured compact two-value enclosure; other enclosures retain unknown roles. Action semantics and distant effects unconfirmed."
+      },
+      "pairedControls": []
+    },
+    {
+      "game": "LS19",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "FITE",
+      "typedMaterialScene": null,
+      "nestedControlPlan": {
+        "epoch": 1,
+        "score": 0,
+        "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:d87fbc49803097ac",
+        "frame_digest": "d87fbc49803097ac0ba44180e25bdb74e570f659e14320faedc958eaeb4385d1",
+        "selected": {
+          "frame_ref": "component-2",
+          "bbox": [
+            9,
+            25,
+            13,
+            29
+          ],
+          "point": [
+            11,
+            27
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 8
+        },
+        "alternative_enclosures": [],
+        "action": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 11,
+            "y": 27
+          }
+        },
+        "expected_effect": "unknown",
+        "scope": "Unique smallest measured compact two-value enclosure; other enclosures retain unknown roles. Action semantics and distant effects unconfirmed."
+      },
+      "pairedControls": []
+    },
+    {
+      "game": "AS66",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "GARE",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "COLM",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "GABA",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "FUIT",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "ETAG",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "TICT",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "GLOB",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            2,
+            40,
+            20,
+            48
+          ],
+          "point": [
+            11,
+            44
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-278",
+            "component-279"
+          ]
+        },
+        {
+          "bbox": [
+            12,
+            40,
+            30,
+            48
+          ],
+          "point": [
+            21,
+            44
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-279",
+            "component-280"
+          ]
+        },
+        {
+          "bbox": [
+            22,
+            40,
+            40,
+            48
+          ],
+          "point": [
+            31,
+            44
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-280",
+            "component-281"
+          ]
+        },
+        {
+          "bbox": [
+            32,
+            40,
+            50,
+            48
+          ],
+          "point": [
+            41,
+            44
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-281",
+            "component-282"
+          ]
+        },
+        {
+          "bbox": [
+            42,
+            40,
+            60,
+            48
+          ],
+          "point": [
+            51,
+            44
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-282",
+            "component-283"
+          ]
+        },
+        {
+          "bbox": [
+            2,
+            52,
+            20,
+            60
+          ],
+          "point": [
+            11,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-302",
+            "component-303"
+          ]
+        },
+        {
+          "bbox": [
+            12,
+            52,
+            30,
+            60
+          ],
+          "point": [
+            21,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-303",
+            "component-304"
+          ]
+        },
+        {
+          "bbox": [
+            22,
+            52,
+            40,
+            60
+          ],
+          "point": [
+            31,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-304",
+            "component-305"
+          ]
+        },
+        {
+          "bbox": [
+            32,
+            52,
+            50,
+            60
+          ],
+          "point": [
+            41,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-305",
+            "component-306"
+          ]
+        },
+        {
+          "bbox": [
+            42,
+            52,
+            60,
+            60
+          ],
+          "point": [
+            51,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-306",
+            "component-307"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "KATA",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            1,
+            53,
+            19,
+            59
+          ],
+          "point": [
+            10,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-13",
+            "component-14"
+          ]
+        },
+        {
+          "bbox": [
+            22,
+            53,
+            40,
+            59
+          ],
+          "point": [
+            31,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-15",
+            "component-16"
+          ]
+        },
+        {
+          "bbox": [
+            32,
+            53,
+            50,
+            59
+          ],
+          "point": [
+            41,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-16",
+            "component-17"
+          ]
+        },
+        {
+          "bbox": [
+            42,
+            53,
+            60,
+            59
+          ],
+          "point": [
+            51,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-17",
+            "component-18"
+          ]
+        },
+        {
+          "bbox": [
+            23,
+            54,
+            29,
+            58
+          ],
+          "point": [
+            26,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-26",
+            "component-28"
+          ]
+        },
+        {
+          "bbox": [
+            33,
+            54,
+            39,
+            58
+          ],
+          "point": [
+            36,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-29",
+            "component-31"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "HOLE",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "GRAV",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "VOIS",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            8,
+            50,
+            12,
+            51
+          ],
+          "point": [
+            10,
+            50
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-11",
+            "component-13"
+          ]
+        },
+        {
+          "bbox": [
+            8,
+            50,
+            12,
+            60
+          ],
+          "point": [
+            10,
+            55
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-12",
+            "component-36"
+          ]
+        },
+        {
+          "bbox": [
+            2,
+            55,
+            3,
+            59
+          ],
+          "point": [
+            2,
+            57
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-26",
+            "component-41"
+          ]
+        },
+        {
+          "bbox": [
+            17,
+            55,
+            18,
+            59
+          ],
+          "point": [
+            17,
+            57
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-31",
+            "component-44"
+          ]
+        },
+        {
+          "bbox": [
+            8,
+            59,
+            12,
+            60
+          ],
+          "point": [
+            10,
+            59
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-45",
+            "component-46"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "POLA",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "ELAS",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "TRIA",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "SERI",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            3,
+            1,
+            21,
+            9
+          ],
+          "point": [
+            12,
+            5
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-1",
+            "component-2"
+          ]
+        },
+        {
+          "bbox": [
+            13,
+            1,
+            31,
+            9
+          ],
+          "point": [
+            22,
+            5
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-2",
+            "component-3"
+          ]
+        },
+        {
+          "bbox": [
+            23,
+            1,
+            41,
+            9
+          ],
+          "point": [
+            32,
+            5
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-3",
+            "component-4"
+          ]
+        },
+        {
+          "bbox": [
+            33,
+            1,
+            51,
+            9
+          ],
+          "point": [
+            42,
+            5
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-4",
+            "component-5"
+          ]
+        },
+        {
+          "bbox": [
+            3,
+            12,
+            21,
+            20
+          ],
+          "point": [
+            12,
+            16
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-19",
+            "component-20"
+          ]
+        },
+        {
+          "bbox": [
+            13,
+            12,
+            31,
+            20
+          ],
+          "point": [
+            22,
+            16
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-20",
+            "component-21"
+          ]
+        },
+        {
+          "bbox": [
+            23,
+            12,
+            41,
+            20
+          ],
+          "point": [
+            32,
+            16
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-21",
+            "component-22"
+          ]
+        },
+        {
+          "bbox": [
+            33,
+            12,
+            51,
+            20
+          ],
+          "point": [
+            42,
+            16
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-22",
+            "component-23"
+          ]
+        },
+        {
+          "bbox": [
+            43,
+            12,
+            61,
+            20
+          ],
+          "point": [
+            52,
+            16
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-23",
+            "component-24"
+          ]
+        },
+        {
+          "bbox": [
+            3,
+            23,
+            21,
+            31
+          ],
+          "point": [
+            12,
+            27
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-37",
+            "component-38"
+          ]
+        },
+        {
+          "bbox": [
+            13,
+            23,
+            31,
+            31
+          ],
+          "point": [
+            22,
+            27
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-38",
+            "component-39"
+          ]
+        },
+        {
+          "bbox": [
+            23,
+            23,
+            41,
+            31
+          ],
+          "point": [
+            32,
+            27
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-39",
+            "component-40"
+          ]
+        },
+        {
+          "bbox": [
+            33,
+            23,
+            51,
+            31
+          ],
+          "point": [
+            42,
+            27
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-40",
+            "component-41"
+          ]
+        },
+        {
+          "bbox": [
+            43,
+            23,
+            61,
+            31
+          ],
+          "point": [
+            52,
+            27
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-41",
+            "component-42"
+          ]
+        },
+        {
+          "bbox": [
+            3,
+            34,
+            21,
+            42
+          ],
+          "point": [
+            12,
+            38
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-65",
+            "component-66"
+          ]
+        },
+        {
+          "bbox": [
+            13,
+            34,
+            31,
+            42
+          ],
+          "point": [
+            22,
+            38
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-66",
+            "component-67"
+          ]
+        },
+        {
+          "bbox": [
+            23,
+            34,
+            41,
+            42
+          ],
+          "point": [
+            32,
+            38
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-67",
+            "component-68"
+          ]
+        },
+        {
+          "bbox": [
+            33,
+            34,
+            51,
+            42
+          ],
+          "point": [
+            42,
+            38
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-68",
+            "component-69"
+          ]
+        },
+        {
+          "bbox": [
+            43,
+            34,
+            61,
+            42
+          ],
+          "point": [
+            52,
+            38
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-69",
+            "component-70"
+          ]
+        },
+        {
+          "bbox": [
+            27,
+            50,
+            45,
+            58
+          ],
+          "point": [
+            36,
+            54
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-85",
+            "component-86"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "COMB",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            22,
+            46,
+            40,
+            48
+          ],
+          "point": [
+            31,
+            47
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-20",
+            "component-21"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "ISOS",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            17,
+            7,
+            21,
+            21
+          ],
+          "point": [
+            19,
+            14
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-42",
+            "component-75"
+          ]
+        },
+        {
+          "bbox": [
+            29,
+            7,
+            33,
+            21
+          ],
+          "point": [
+            31,
+            14
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-45",
+            "component-77"
+          ]
+        },
+        {
+          "bbox": [
+            41,
+            7,
+            45,
+            21
+          ],
+          "point": [
+            43,
+            14
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-48",
+            "component-79"
+          ]
+        },
+        {
+          "bbox": [
+            11,
+            16,
+            15,
+            30
+          ],
+          "point": [
+            13,
+            23
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-82",
+            "component-118"
+          ]
+        },
+        {
+          "bbox": [
+            23,
+            16,
+            27,
+            30
+          ],
+          "point": [
+            25,
+            23
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-85",
+            "component-120"
+          ]
+        },
+        {
+          "bbox": [
+            35,
+            16,
+            39,
+            30
+          ],
+          "point": [
+            37,
+            23
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-88",
+            "component-122"
+          ]
+        },
+        {
+          "bbox": [
+            47,
+            16,
+            51,
+            30
+          ],
+          "point": [
+            49,
+            23
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-91",
+            "component-124"
+          ]
+        },
+        {
+          "bbox": [
+            17,
+            25,
+            21,
+            39
+          ],
+          "point": [
+            19,
+            32
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-128",
+            "component-161"
+          ]
+        },
+        {
+          "bbox": [
+            29,
+            25,
+            33,
+            39
+          ],
+          "point": [
+            31,
+            32
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-131",
+            "component-163"
+          ]
+        },
+        {
+          "bbox": [
+            41,
+            25,
+            45,
+            39
+          ],
+          "point": [
+            43,
+            32
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-134",
+            "component-165"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "SELE",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "REWI",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            28,
+            22,
+            32,
+            23
+          ],
+          "point": [
+            30,
+            22
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-40",
+            "component-42"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "LKEY",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "TEQU",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            40,
+            60,
+            54,
+            63
+          ],
+          "point": [
+            47,
+            61
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-226",
+            "component-227"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "GMAP",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            27,
+            20,
+            37,
+            24
+          ],
+          "point": [
+            32,
+            22
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-30",
+            "component-31"
+          ]
+        },
+        {
+          "bbox": [
+            27,
+            20,
+            31,
+            30
+          ],
+          "point": [
+            29,
+            25
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-30",
+            "component-46"
+          ]
+        },
+        {
+          "bbox": [
+            33,
+            20,
+            37,
+            30
+          ],
+          "point": [
+            35,
+            25
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-31",
+            "component-47"
+          ]
+        },
+        {
+          "bbox": [
+            27,
+            26,
+            37,
+            30
+          ],
+          "point": [
+            32,
+            28
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-46",
+            "component-47"
+          ]
+        },
+        {
+          "bbox": [
+            33,
+            26,
+            43,
+            30
+          ],
+          "point": [
+            38,
+            28
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-47",
+            "component-48"
+          ]
+        },
+        {
+          "bbox": [
+            18,
+            53,
+            32,
+            59
+          ],
+          "point": [
+            25,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-91",
+            "component-92"
+          ]
+        },
+        {
+          "bbox": [
+            26,
+            53,
+            40,
+            59
+          ],
+          "point": [
+            33,
+            56
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-92",
+            "component-93"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "CGWL",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "WEAV",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "GRIL",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "DICO",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "EVAS",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "KLOT",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "UPST",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "THER",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            15,
+            15,
+            41,
+            27
+          ],
+          "point": [
+            28,
+            21
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-6",
+            "component-7"
+          ]
+        },
+        {
+          "bbox": [
+            29,
+            15,
+            55,
+            27
+          ],
+          "point": [
+            42,
+            21
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-7",
+            "component-8"
+          ]
+        },
+        {
+          "bbox": [
+            15,
+            43,
+            41,
+            55
+          ],
+          "point": [
+            28,
+            49
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-24",
+            "component-25"
+          ]
+        },
+        {
+          "bbox": [
+            29,
+            43,
+            55,
+            55
+          ],
+          "point": [
+            42,
+            49
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-25",
+            "component-26"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "ZIPP",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "AMZE",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            26,
+            26,
+            48,
+            36
+          ],
+          "point": [
+            37,
+            31
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-26",
+            "component-27"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "PIPE",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "GIGO",
+      "typedMaterialScene": null,
+      "nestedControlPlan": {
+        "epoch": 1,
+        "score": 0,
+        "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:7e07e56969825161",
+        "frame_digest": "7e07e5696982516142d1fbbac0829a30743c0c3d9ee5364c4f90ec25d5f21519",
+        "selected": {
+          "frame_ref": "component-6",
+          "bbox": [
+            24,
+            18,
+            29,
+            23
+          ],
+          "point": [
+            26,
+            20
+          ],
+          "core_area": 16,
+          "core_scale": 4,
+          "core_palette": 5
+        },
+        "alternative_enclosures": [],
+        "action": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 26,
+            "y": 20
+          }
+        },
+        "expected_effect": "unknown",
+        "scope": "Unique smallest measured compact two-value enclosure; other enclosures retain unknown roles. Action semantics and distant effects unconfirmed."
+      },
+      "pairedControls": []
+    },
+    {
+      "game": "CATL",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "PRTL",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "MOTO",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "ONDE",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "SNAR",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "TRCP",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "SPOR",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            4,
+            4,
+            12,
+            7
+          ],
+          "point": [
+            8,
+            5
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-2",
+            "component-3"
+          ]
+        },
+        {
+          "bbox": [
+            4,
+            4,
+            7,
+            12
+          ],
+          "point": [
+            5,
+            8
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-2",
+            "component-13"
+          ]
+        },
+        {
+          "bbox": [
+            9,
+            4,
+            12,
+            12
+          ],
+          "point": [
+            10,
+            8
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-3",
+            "component-15"
+          ]
+        },
+        {
+          "bbox": [
+            3,
+            5,
+            4,
+            11
+          ],
+          "point": [
+            3,
+            8
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-4",
+            "component-12"
+          ]
+        },
+        {
+          "bbox": [
+            12,
+            5,
+            13,
+            11
+          ],
+          "point": [
+            12,
+            8
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-5",
+            "component-16"
+          ]
+        },
+        {
+          "bbox": [
+            4,
+            9,
+            12,
+            12
+          ],
+          "point": [
+            8,
+            10
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-13",
+            "component-15"
+          ]
+        },
+        {
+          "bbox": [
+            5,
+            12,
+            11,
+            13
+          ],
+          "point": [
+            8,
+            12
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-17",
+            "component-18"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "CWSE",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            2,
+            51,
+            10,
+            54
+          ],
+          "point": [
+            6,
+            52
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-54",
+            "component-55"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "CAVA",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "SMLP",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "DAME",
+      "typedMaterialScene": null,
+      "nestedControlPlan": {
+        "epoch": 1,
+        "score": 0,
+        "observation_ref": "linked-packet-initial-reference:epoch:1:revision:1:frame:1f154e9b119b149c",
+        "frame_digest": "1f154e9b119b149c01a2b34fadeb0f48516193742535984798e748a1ac85e91e",
+        "selected": {
+          "frame_ref": "component-48",
+          "bbox": [
+            35,
+            37,
+            41,
+            43
+          ],
+          "point": [
+            38,
+            40
+          ],
+          "core_area": 36,
+          "core_scale": 6,
+          "core_palette": 3
+        },
+        "alternative_enclosures": [],
+        "action": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 38,
+            "y": 40
+          }
+        },
+        "expected_effect": "unknown",
+        "scope": "Unique smallest measured compact two-value enclosure; other enclosures retain unknown roles. Action semantics and distant effects unconfirmed."
+      },
+      "pairedControls": []
+    },
+    {
+      "game": "HPDL",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "CATR",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": [
+        {
+          "bbox": [
+            32,
+            9,
+            42,
+            31
+          ],
+          "point": [
+            37,
+            20
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-3",
+            "component-28"
+          ]
+        },
+        {
+          "bbox": [
+            26,
+            15,
+            36,
+            19
+          ],
+          "point": [
+            31,
+            17
+          ],
+          "orientation": "horizontal",
+          "evidence_components": [
+            "component-16",
+            "component-17"
+          ]
+        },
+        {
+          "bbox": [
+            32,
+            15,
+            36,
+            25
+          ],
+          "point": [
+            34,
+            20
+          ],
+          "orientation": "vertical",
+          "evidence_components": [
+            "component-17",
+            "component-27"
+          ]
+        }
+      ]
+    },
+    {
+      "game": "RECR",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    },
+    {
+      "game": "RSWP",
+      "typedMaterialScene": null,
+      "nestedControlPlan": null,
+      "pairedControls": []
+    }
+  ],
+  "newGameExecutions": 0,
+  "newActions": 0,
+  "scope": "Read-only measurement of two unconnected capability candidates on the retained public initial corpus. No game host, private state, oracle, solution or executed proposal is used. An accepted structural hypothesis establishes no successful action or level."
+}

@@ -20,6 +20,7 @@ const aliases: Record<string, string> = {
   observed_program_composition: 'public_occurrence_recall',
   radial_port_composition: 'public_occurrence_recall',
   rooted_quota_composition: 'public_occurrence_recall',
+  occluded_catalogue_composition: 'public_occurrence_recall',
   queued_field_composition: 'public_occurrence_recall',
   product_panel_composition: 'public_occurrence_recall',
   labeled_sequence_composition: 'public_occurrence_recall',
