@@ -1,0 +1,211 @@
+{
+  "schema": "logos-engine.v46.regression-summary.v1",
+  "passed": true,
+  "verification": {
+    "path": "docs/migration/native-campaigns-v46/regression-verification.json",
+    "sha256": "4aff7de84b147904dcb48421b5602378694662adbfbe99ccbb61ff2d78d08d58",
+    "bytes": 771346
+  },
+  "plan": {
+    "path": "docs/migration/native-campaigns-v46/regression-plan.json",
+    "sha256": "467cc1d59a34ffab46ab9248c2d5ca6df10e054d82a8aa10f19cda481c8ea180",
+    "bytes": 14433
+  },
+  "sourceDigest": "793a6b2e57ffbab74e148b1170879cd720387cbe93a2af9977c6303e05c2e731",
+  "nativeSourceFiles": 152,
+  "qualification": "Seven cold native common-caller replays recalculate commands before consuming complete public returns from prior actual campaigns. They establish only the declared regression projections and are not new live game successes or speed comparisons. TICT is a separate cold continuous campaign against the opaque Python game host. No Python agent modules are authorized. All runs retain one native session and the exact frozen source manifest. The comparator declares its excluded internal projections and normalizes only listed session scopes.",
+  "groups": [
+    {
+      "mode": "recorded-public-replay",
+      "runs": 7,
+      "passed": true,
+      "commands": 370,
+      "completePublicPackets": 377,
+      "prefixes": 237,
+      "comparisonChecks": 98,
+      "games": [
+        "MEMO",
+        "STCK",
+        "PIPE",
+        "COMB",
+        "THER",
+        "CATL",
+        "LF52"
+      ]
+    },
+    {
+      "mode": "actual-game-campaign",
+      "runs": 1,
+      "passed": true,
+      "commands": 55,
+      "completePublicPackets": 56,
+      "prefixes": 55,
+      "comparisonChecks": 14,
+      "games": [
+        "TICT"
+      ]
+    }
+  ],
+  "results": [
+    {
+      "game": "MEMO",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 30,
+      "levelsCompleted": 3,
+      "state": "NOT_FINISHED",
+      "prefixes": 30,
+      "report": {
+        "path": "docs/migration/native-campaigns-v46/memo-recorded-public-replay.json",
+        "sha256": "760571bbd89ce1a71e7c4219580b6aeb4c68ebe5bee856fa6f51d42e674ede1e",
+        "bytes": 263063
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v46/memo-regression-comparison.json",
+        "sha256": "d13b82692cf7f2c337dd0edb5f5378ef6d1ad8baa4c05ea32577d45c93277ab4",
+        "bytes": 3061
+      }
+    },
+    {
+      "game": "STCK",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 35,
+      "levelsCompleted": 3,
+      "state": "NOT_FINISHED",
+      "prefixes": 15,
+      "report": {
+        "path": "docs/migration/native-campaigns-v46/stck-recorded-public-replay.json",
+        "sha256": "b72cb35ca141162a1309b9cde0b55c0ba3cb7fc858cd7086f4c2c66b1cc06028",
+        "bytes": 190788
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v46/stck-regression-comparison.json",
+        "sha256": "d702b85da538cb25393e81fbfeedef8b3ef99aade79e05726d1ac6b6c3199269",
+        "bytes": 3061
+      }
+    },
+    {
+      "game": "PIPE",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 23,
+      "levelsCompleted": 3,
+      "state": "NOT_FINISHED",
+      "prefixes": 20,
+      "report": {
+        "path": "docs/migration/native-campaigns-v46/pipe-recorded-public-replay.json",
+        "sha256": "9f8fb43ff10671d26884ae348f2e805a18e32c116648bcfc72b614a0b1ae2960",
+        "bytes": 203649
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v46/pipe-regression-comparison.json",
+        "sha256": "ff68d469fa0359a957f0e991dedd78fe08f7fb285b58737475e08b54e1dae6fc",
+        "bytes": 3061
+      }
+    },
+    {
+      "game": "COMB",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 104,
+      "levelsCompleted": 6,
+      "state": "WIN",
+      "prefixes": 45,
+      "report": {
+        "path": "docs/migration/native-campaigns-v46/comb-recorded-public-replay.json",
+        "sha256": "8c080f7a1dce22d00875a533e83cffb73e00436d34fdf26677cda6758919d855",
+        "bytes": 839038
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v46/comb-regression-comparison.json",
+        "sha256": "77554dbeab5a1272f6045dff089c30a2bb0b40e3b82b20ac50fb5f3f4ee46294",
+        "bytes": 3061
+      }
+    },
+    {
+      "game": "THER",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 26,
+      "levelsCompleted": 6,
+      "state": "WIN",
+      "prefixes": 8,
+      "report": {
+        "path": "docs/migration/native-campaigns-v46/ther-recorded-public-replay.json",
+        "sha256": "0499dfaf98606edb7aced96385f9ebe539ab44fcc91c849b109fe4c69a7e1524",
+        "bytes": 253823
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v46/ther-regression-comparison.json",
+        "sha256": "ce0003f85e67be87822293c1723d209dfd41adfef253823bd2a104fdae0a1ee4",
+        "bytes": 3058
+      }
+    },
+    {
+      "game": "CATL",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 48,
+      "levelsCompleted": 6,
+      "state": "WIN",
+      "prefixes": 48,
+      "report": {
+        "path": "docs/migration/native-campaigns-v46/catl-recorded-public-replay.json",
+        "sha256": "52ce5fc602099bb4a61c0bb452bf483bb751ef4f04f3f3843d0c4b658a80648f",
+        "bytes": 3873012
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v46/catl-regression-comparison-session-witness-normalization-v2.json",
+        "sha256": "8503aa87d5731baf0b47631815c37959d486eb521d45541ff34b6f258ea6df18",
+        "bytes": 3127
+      }
+    },
+    {
+      "game": "LF52",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 104,
+      "levelsCompleted": 3,
+      "state": "NOT_FINISHED",
+      "prefixes": 71,
+      "report": {
+        "path": "docs/migration/native-campaigns-v46/lf52-recorded-public-replay.json",
+        "sha256": "b046a8caf2d0c726785d137079efc3de57226321d311fdc0cbe1f17058ef3ad4",
+        "bytes": 3949582
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v46/lf52-regression-comparison.json",
+        "sha256": "72e62334772e37b04bf38a2a1500ba7801df199aecbbf8729e080a3d505f7556",
+        "bytes": 3063
+      }
+    },
+    {
+      "game": "TICT",
+      "mode": "actual-game-campaign",
+      "passed": true,
+      "status": "passed",
+      "actions": 55,
+      "levelsCompleted": 6,
+      "state": "WIN",
+      "prefixes": 55,
+      "report": {
+        "path": "docs/migration/native-campaigns-v46/tict-six-levels.json",
+        "sha256": "8511d4bb324676201276f65c2993f447164102992cdddd42371d7d2e08198f0a",
+        "bytes": 814516
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v46/tict-regression-comparison.json",
+        "sha256": "dfaa92ad6b1298f15fb0aa7530bd3953bd81787d7a9646158f2f6ee7980f9f5e",
+        "bytes": 3045
+      }
+    }
+  ]
+}

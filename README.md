@@ -28,8 +28,19 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **CATL now completes all
-  six levels with official `WIN` in 48 actions (eight per level)** through
+  level**; opening the tab does not move the game. **The v46 milestone completes
+  ZIPP's first four levels in 53 actions (8, 15, 15 and 15)** through one cold
+  native common session and 12 acquired prefixes. Its first three levels use
+  38 actions. The declared four-level target stops on entry to level 5 with
+  `NOT_FINISHED`; this is not a complete-game `WIN`. The generic
+  `trace_field_composition` transfer measures a cell graph and an ordered
+  trace from current public pixels, acquires actual extension effects, and
+  revalidates each proposed point through the common Kernel and WHY/ACT gates.
+  See the [v46 report](docs/migration/v46-trace-fields.md) for source parity,
+  complete public evidence, targeted regressions and the unresolved concentric
+  ring ambiguity in the next public scene.
+  **The previous v45 milestone completes all
+  six CATL levels with official `WIN` in 48 actions (eight per level)** through
   one cold native common session and 48 acquired prefixes. Its first three
   levels use 24 actions. A generic, bounded AND/OR composition extends the
   measured atomic predicates when the original finite grammar is completely
@@ -71,13 +82,14 @@ Fontan's **Symbolic Reasoning Agent** research.
   **Previous v38 milestone: TICT completes all six levels with official `WIN`
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
-  The current entry audit connects **36 of 76 explicit DRM subquestions
-  (47.4%)**, with the newly connected `supported_ternary_reduction` entry.
+  The current entry audit connects **37 of 76 explicit DRM subquestions
+  (48.7%)**, with the newly connected `trace_field_composition` entry.
   Bounded predicate composition, acquired-continuation coordination and complete
   aligned-mark support are explicit native extensions and add no source entry.
-  The next transfer candidate is
-  **ZIPP / `trace_field_composition`**, identified from its public initial
-  morphology; no solved level is yet claimed for that candidate.
+  The next step is to distinguish structural cell rings from current markers
+  using generic public geometry, retain unresolved alternatives, and then
+  test continuation beyond ZIPP's four completed levels. The original observer
+  finds two compatible ring pairs at the next scene and refuses to choose one.
   Complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These

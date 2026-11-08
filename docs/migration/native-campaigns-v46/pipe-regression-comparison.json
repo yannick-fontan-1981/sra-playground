@@ -1,0 +1,79 @@
+{
+  "schema": "logos-engine.v46.public-regression-comparison.v1",
+  "passed": true,
+  "checks": [
+    {
+      "name": "same declared game/target and both results passed",
+      "passed": true
+    },
+    {
+      "name": "same production budgets and original game asset provenance",
+      "passed": true
+    },
+    {
+      "name": "same complete initial public packet",
+      "passed": true
+    },
+    {
+      "name": "same commands, full returned animation packet hashes and primitive boundaries",
+      "passed": true
+    },
+    {
+      "name": "same selected source entries, acquired prefix lengths and observed solver projections",
+      "passed": true
+    },
+    {
+      "name": "same retained source-layer projections and labeled public submission receipts",
+      "passed": true
+    },
+    {
+      "name": "same bounded native predicate composition counts, survivors and reuse",
+      "passed": true
+    },
+    {
+      "name": "same source and preferred entry coordination with current guards",
+      "passed": true
+    },
+    {
+      "name": "same reduction geometry plan and step modes",
+      "passed": true
+    },
+    {
+      "name": "new Trace layer remains empty and never selects these legacy prefixes",
+      "passed": true
+    },
+    {
+      "name": "same request outcomes and common caller counters",
+      "passed": true
+    },
+    {
+      "name": "same final public result and retained-session counters",
+      "passed": true
+    },
+    {
+      "name": "source frozen during both runs and no Python agent modules",
+      "passed": true
+    },
+    {
+      "name": "same retained mechanical-domain assessments",
+      "passed": true
+    }
+  ],
+  "before": {
+    "path": "docs/migration/native-campaigns-v45/pipe-three-levels.json",
+    "sha256": "13fcf7f8cedb259eb32d5ae26fb818ccc432cdde45c111843112020a42fc6320",
+    "sourceDigest": "1278235f269085c057e4dfea619c5a65587bfd90998505858caeef067319640c"
+  },
+  "after": {
+    "path": "docs/migration/native-campaigns-v46/pipe-recorded-public-replay.json",
+    "sha256": "9f8fb43ff10671d26884ae348f2e805a18e32c116648bcfc72b614a0b1ae2960",
+    "sourceDigest": "793a6b2e57ffbab74e148b1170879cd720387cbe93a2af9977c6303e05c2e731",
+    "mode": "recorded-public-replay"
+  },
+  "compared": {
+    "commands": 23,
+    "completePublicPackets": 24,
+    "prefixes": 20
+  },
+  "qualification": "Exact public commands, complete packet hashes, source selection, prefix/acquisition counts and listed retained projections are compared. Observation session prefixes are normalized. Native graph chain/revision, inherited digest, session-derived model IDs, full labeled cache, four session-derived predicate proof references and complete reduction state are outside this projection. Reduction geometry/step modes, labeled public receipts, composition counts/survivors/reuse and selected coordination entries remain checked. New Trace state must be empty. Recorded-public replay recalculates commands before supplying prior actual returns; it is not a new live game, full internal-state parity or a speed comparison."
+}

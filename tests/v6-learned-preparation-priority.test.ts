@@ -97,12 +97,12 @@ test('cold public recall acquisition defers the seventh unlearned invitation thr
   assert.equal(proposal.field_subquestion, 'observed_occurrence_recall');
   assert.equal(proposal.strategy_receipt.selected, 'window_constraints');
   assert.deepEqual(proposal.strategy_receipt.visited, ['goal_access', 'window_constraints']);
-  assert.deepEqual(calls, ['product_panel_composition', 'labeled_sequence_composition', 'cell_patch_composition', 'observed_occurrence_recall'],
+  assert.deepEqual(calls, ['product_panel_composition', 'labeled_sequence_composition', 'trace_field_composition', 'cell_patch_composition', 'observed_occurrence_recall'],
     'The first ordinary window choice supplies its own proof; later entries are not borrowed or reordered');
   const groups = (result.snapshot.coverage as R).sourceGroups;
   assert.deepEqual(groups.map((group: R) => group.id), declarations.strategy.declarations[0]!.configuration.families);
   assert.deepEqual(groups.find((group: R) => group.id === 'window_constraints').entryPoints.filter((entry: string | null) => entry !== null),
-    ['product_panel_composition', 'labeled_sequence_composition', 'cell_patch_composition', 'observed_occurrence_recall', 'observed_program_composition', 'radial_port_composition', 'rooted_quota_composition']);
+    ['product_panel_composition', 'labeled_sequence_composition', 'trace_field_composition', 'cell_patch_composition', 'observed_occurrence_recall', 'observed_program_composition', 'radial_port_composition', 'rooted_quota_composition']);
   assert.ok(result.authorization, 'A priority witness still requires the current WHY/ACT authorization');
   assert.deepEqual(proposal.steps[0].point_binding.point, plan.selected.point);
   assert.equal(proposal.steps[0].point_binding.observation_ref, plan.observation_ref);
@@ -189,7 +189,7 @@ test('an earlier unlearned window proposal cannot borrow priority from the later
     return original(...args);
   });
   const result = await runtime.resume(execution);
-  assert.deepEqual(calls, ['product_panel_composition', 'labeled_sequence_composition', 'cell_patch_composition'], 'No later candidate may lend evidence to the earlier choice');
+  assert.deepEqual(calls, ['product_panel_composition', 'labeled_sequence_composition', 'trace_field_composition', 'cell_patch_composition'], 'No later candidate may lend evidence to the earlier choice');
   assert.equal(result.kind, 'action', result.reason);
   assert.equal(result.snapshot.lastDecision, 'animated_contact');
   assert.equal((result.snapshot.proposal as R).animated_contact_plan.mode, 'invitation');

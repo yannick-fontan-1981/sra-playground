@@ -19,6 +19,7 @@ import { RadialPortMemory, commonRadialPortProposal, bindRadialPort, radialPortB
 import { RootedQuotaMemory, commonRootedQuotaProposal, bindRootedQuota, rootedQuotaBefore, rootedQuotaAfter } from './v6-rooted-quota-access.ts';
 import { ProductPanelMemory, commonProductPanelProposal, bindProductPanel, productPanelBefore, productPanelAfter } from './v6-product-panel-access.ts';
 import { LabeledSequenceMemory, commonLabeledSequenceProposal, bindLabeledSequence, labeledSequenceBefore, labeledSequenceAfter } from './v6-labeled-sequence-access.ts';
+import { TraceFieldMemory, commonTraceFieldProposal, bindTraceField, traceFieldBefore, traceFieldAfter } from './v6-trace-field-access.ts';
 import { markedCollectionQuestion, observedProgramQuestion, observedProgramBefore, observedProgramAfter,
   recordObservedProgram, recordObservedProgramPacket } from './v6-program-composition-access.ts';
 import { programIdentity } from './v6-program-identity.ts';
@@ -36,7 +37,7 @@ import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts'
 import type { OccurrenceRecord as R } from './v6-occurrence-scene.ts';
 import type { NativeFamily, NativeRows, NativePublicObservation, NativeProposal } from './v6-native-types.ts';
 
-export const SHARED_SERIES_DIGEST_SCOPE = 'native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_labeled_sequence_cell_placement_alternating_graph_and_coupled_support_v6';
+export const SHARED_SERIES_DIGEST_SCOPE = 'native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_labeled_sequence_trace_field_cell_placement_alternating_graph_and_coupled_support_v6';
 
 export interface NativeSharedSeriesOptions {
   /** Native current-control revalidation; the default preserves source contracts. */
@@ -132,6 +133,7 @@ interface SharedWorkingStamp {
   rooted: RootedQuotaMemory; rootedRevision: number;
   product: ProductPanelMemory; productRevision: number;
   labeled: LabeledSequenceMemory; labeledRevision: number;
+  trace: TraceFieldMemory; traceRevision: number;
   cells: CellPlacementMemory; cellRevision: number;
   graph: AlternatingGraphMemory; graphRevision: number;
   pairs: CoupledPairEvidenceMemory; pairRevision: number;
@@ -146,6 +148,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   rooted = new RootedQuotaMemory();
   product = new ProductPanelMemory();
   labeled = new LabeledSequenceMemory();
+  trace = new TraceFieldMemory();
   cells = new CellPlacementMemory();
   graph = new AlternatingGraphMemory();
   pairs = new CoupledPairEvidenceMemory();
@@ -175,6 +178,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       rooted: this.rooted, rootedRevision: this.rooted.nativeRevision,
       product: this.product, productRevision: this.product.nativeRevision,
       labeled: this.labeled, labeledRevision: this.labeled.nativeRevision,
+      trace: this.trace, traceRevision: this.trace.nativeRevision,
       cells: this.cells, cellRevision: this.cells.nativeRevision,
       graph: this.graph, graphRevision: this.graph.nativeRevision,
       pairs: this.pairs, pairRevision: this.pairs.nativeRevision,
@@ -186,6 +190,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       && this.rooted === stamp.rooted && this.rooted.nativeRevision === stamp.rootedRevision
       && this.product === stamp.product && this.product.nativeRevision === stamp.productRevision
       && this.labeled === stamp.labeled && this.labeled.nativeRevision === stamp.labeledRevision
+      && this.trace === stamp.trace && this.trace.nativeRevision === stamp.traceRevision
       && this.cells === stamp.cells && this.cells.nativeRevision === stamp.cellRevision
       && this.graph === stamp.graph && this.graph.nativeRevision === stamp.graphRevision
       && this.pairs === stamp.pairs && this.pairs.nativeRevision === stamp.pairRevision
@@ -276,6 +281,12 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       { composedPredicates: this.composedLabeledPredicates });
   }
 
+  /** Current measured trace, with source evidence and the current physical deadline. */
+  tracePropose(observation: R, rows: NativeRows, inputs: readonly R[], remaining: number, config: R,
+    deadlineMs: number | null, now?: () => number): Promise<R | null> {
+    return commonTraceFieldProposal(this.trace, observation, rows, inputs, remaining, config, deadlineMs, now);
+  }
+
   /** ProgramCompositionConstraint's declared question on the same ancestor memory. */
   async programPropose(observation: R, rows: NativeRows, inputs: readonly R[], remaining: number,
     levelDeadline: number | null, now?: () => number): Promise<R | null> {
@@ -355,6 +366,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       }
       return;
     }
+    if (Object.hasOwn(proposal, 'trace_field_plan')) { bindTraceField(proposal, domain); return; }
     if (Object.hasOwn(proposal, 'labeled_sequence_plan')) { bindLabeledSequence(proposal, domain); return; }
     if (Object.hasOwn(proposal, 'product_panel_plan')) { bindProductPanel(proposal, domain); return; }
     if (Object.hasOwn(proposal, 'rooted_quota_plan')) { bindRootedQuota(proposal, domain); return; }
@@ -382,6 +394,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     if (truth(proposal.graph_access_plan)) return alternatingGraphBefore(proposal, index, packet.frame_rows,
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
     if (truth(proposal.cell_placement_plan)) return cellPlacementBefore(proposal, index, packet.frame_rows,
+      { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
+    if (truth(proposal.trace_field_plan)) return traceFieldBefore(proposal, index, packet.frame_rows,
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
     if (truth(proposal.labeled_sequence_plan)) return labeledSequenceBefore(proposal, index, packet.frame_rows,
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
@@ -413,6 +427,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     if (truth(proposal.graph_access_plan)) return alternatingGraphAfter(proposal, index, first, second,
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
     if (truth(proposal.cell_placement_plan)) return this.cells.after(proposal, index, first, second,
+      { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
+    if (truth(proposal.trace_field_plan)) return traceFieldAfter(proposal, index, first, second,
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
     if (truth(proposal.labeled_sequence_plan)) return labeledSequenceAfter(proposal, index, first, second,
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
@@ -475,6 +491,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     // LabeledSequenceAccess first lets Product and its ancestors acquire, then
     // retains this actual submission without promoting a unique universal law.
     events.push(...this.labeled.record(before, command, after, first, second, proposal, index));
+    // TraceFieldAccess records only an actual extension after its inherited layers.
+    events.push(...this.trace.record(before, command, after, first, second, proposal, index));
     events.push(...this.cells.record(before, command, after, first, second, proposal, index));
     events.push(...this.graph.record(before, command, after, first, second, proposal, index));
     // The source pair layer first acquires the before-epoch anchor, then its
@@ -498,7 +516,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   }
 
   private sharedDigest(): string {
-    return this.auxiliary.retainedDigest(this.pairs.retainedDigest(this.graph.retainedDigest(this.cells.retainedDigest(this.labeled.retainedDigest(this.product.retainedDigest(this.rooted.retainedDigest(this.radial.retainedDigest(this.memory.retainedDigest()))))))));
+    return this.auxiliary.retainedDigest(this.pairs.retainedDigest(this.graph.retainedDigest(this.cells.retainedDigest(this.trace.retainedDigest(this.labeled.retainedDigest(this.product.retainedDigest(this.rooted.retainedDigest(this.radial.retainedDigest(this.memory.retainedDigest())))))))));
   }
 
   /** Internal checkpoint only: public state() still returns an independent copy. */
@@ -537,23 +555,24 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
 
   private restoreOwned(state: Readonly<R>): void {
     if (!Array.isArray(state.events) || typeof state.digest !== 'string') throw new TypeError('Incomplete shared series memory');
-    const events = [...state.events] as R[], memory = new SharedOccurrenceMemory(), radial = new RadialPortMemory(), rooted = new RootedQuotaMemory(), product = new ProductPanelMemory(), labeled = new LabeledSequenceMemory(), cells = new CellPlacementMemory(), graph = new AlternatingGraphMemory(),
+    const events = [...state.events] as R[], memory = new SharedOccurrenceMemory(), radial = new RadialPortMemory(), rooted = new RootedQuotaMemory(), product = new ProductPanelMemory(), labeled = new LabeledSequenceMemory(), trace = new TraceFieldMemory(), cells = new CellPlacementMemory(), graph = new AlternatingGraphMemory(),
       pairs = new CoupledPairEvidenceMemory(), auxiliary = new AuxiliarySupportMemory();
     for (const event of events) {
       if (event.kind === 'radial_method_recall' || event.kind === 'radial_port_effect') radial.applyEvent(event);
       else if (event.kind === 'rooted_quota_state') rooted.applyEvent(event);
       else if (event.kind === 'observed_factor_product') product.applyEvent(event);
       else if (event.kind === 'labeled_sequence_submission') labeled.applyEvent(event);
+      else if (event.kind === 'observed_trace_extension') trace.applyEvent(event);
       else if (event.kind === 'cell_patch_placement_evidence') cells.applyEvent(event);
       else if (event.kind === 'alternating_graph_evidence') graph.applyEvent(event);
       else if (event.kind === 'coupled_pair_epoch_anchor' || event.kind === 'coupled_pair_evidence') pairs.applyEvent(event);
       else if (event.kind === 'coupled_support_control_model' || event.kind === 'coupled_support_preparation') auxiliary.applyEvent(event);
       else memory.applyEvent(event);
     }
-    if (auxiliary.retainedDigest(pairs.retainedDigest(graph.retainedDigest(cells.retainedDigest(labeled.retainedDigest(product.retainedDigest(rooted.retainedDigest(radial.retainedDigest(memory.retainedDigest())))))))) !== state.digest) throw new TypeError('Shared series memory changed during recall');
+    if (auxiliary.retainedDigest(pairs.retainedDigest(graph.retainedDigest(cells.retainedDigest(trace.retainedDigest(labeled.retainedDigest(product.retainedDigest(rooted.retainedDigest(radial.retainedDigest(memory.retainedDigest()))))))))) !== state.digest) throw new TypeError('Shared series memory changed during recall');
     // Only publish the reconstructed working copies after the complete journal
     // has passed integrity checks. A rejected edit cannot clear learned state.
-    this.memory = memory; this.radial = radial; this.rooted = rooted; this.product = product; this.labeled = labeled; this.cells = cells; this.graph = graph; this.pairs = pairs; this.auxiliary = auxiliary; this.events = events;
+    this.memory = memory; this.radial = radial; this.rooted = rooted; this.product = product; this.labeled = labeled; this.trace = trace; this.cells = cells; this.graph = graph; this.pairs = pairs; this.auxiliary = auxiliary; this.events = events;
     const stamp = this.workingStamp();
     this.certified = stamp; this.accepted = { value: state, stamp };
     this.checkpoint = { value: retainNativeJson({ events: this.events, digest: state.digest }), stamp, certified: true };
@@ -561,7 +580,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
 }
 
 export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, coupledConfig?: R, graphConfig?: R, cellConfig?: R,
-  options: NativeSharedSeriesOptions = {}, radialConfig?: R, rootedConfig?: R, productConfig?: R, labeledConfig?: R): NativeFamily {
+  options: NativeSharedSeriesOptions = {}, radialConfig?: R, rootedConfig?: R, productConfig?: R, labeledConfig?: R, traceConfig?: R): NativeFamily {
   const family = new SharedSeriesConstraint(config, options), adapter = asNativeOccurrenceRecallFamily(family);
   return { ...adapter, nativeState: () => family.nativeState(), restoreNative: state => family.restoreNative(state),
     unacquiredInquiryWitness: (proposal, observation) => cellUnacquiredInquiryWitness(family.cells.state(), proposal, observation),
@@ -594,6 +613,12 @@ export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, c
           const proposal = labeledConfig ? await family.labeledPropose(observation, rows, inputs, remaining, labeledConfig,
             execution?.deadlineMs ?? null, execution?.now) : null;
           if (proposal) proposal.field_subquestion = 'labeled_sequence_composition';
+          return proposal as NativeProposal | null;
+        }
+        if (subquestion === 'trace_field_composition') {
+          const proposal = traceConfig ? await family.tracePropose(observation, rows, inputs, remaining, traceConfig,
+            execution?.deadlineMs ?? null, execution?.now) : null;
+          if (proposal) proposal.field_subquestion = 'trace_field_composition';
           return proposal as NativeProposal | null;
         }
         if (subquestion === 'rooted_quota_composition') {
@@ -642,6 +667,10 @@ export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, c
         execution?.deadlineMs ?? null, execution?.now) : null;
       if (labeled) labeled.field_subquestion = 'labeled_sequence_composition';
       if (labeled) return labeled as NativeProposal;
+      const trace = traceConfig ? await family.tracePropose(observation, rows, inputs, remaining, traceConfig,
+        execution?.deadlineMs ?? null, execution?.now) : null;
+      if (trace) trace.field_subquestion = 'trace_field_composition';
+      if (trace) return trace as NativeProposal;
       const cell = cellConfig ? await family.cellPropose(observation, rows, inputs, remaining, cellConfig, execution?.deadlineMs ?? null) : null;
       if (cell) cell.field_subquestion = 'cell_patch_composition';
       if (cell) return cell as NativeProposal;

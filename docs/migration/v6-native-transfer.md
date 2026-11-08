@@ -11,7 +11,41 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v45):** the native common caller completes
+**Current integrated milestone (v46):** the native common Logos Engine caller
+completes **ZIPP's first four levels in 53 actions (8, 15, 15, 15)**, including
+the requested first three levels in 38 actions. The
+[fresh native campaign](native-campaigns-v46/zipp-four-levels.json) retains one
+cold continuous session, 12 sealed prefixes, 53 actual Kernel acquisitions and
+three natural-boundary replays. It stops at its declared four-level target on
+entry to level 5, with `NOT_FINISHED`; no full-game `WIN` is claimed.
+
+The new `trace_field_composition` entry occupies its original declared window
+position between the earlier labeled entry and the later cell-patch entry. It
+measures current cell geometry, distinguishable marks and visible connections,
+propagates finite residual-graph necessities, and constructs a bounded simple
+cover as an explicit experimental goal. Two distinct actual local extensions
+must be acquired before a longer conditional prefix is proposed. Every point
+still needs its current support, ordinary WHY/ACT authorization and response
+guard. New epochs cannot borrow an old geometry or point-effect qualification.
+Changes outside the measured support remain recorded as unknown effects.
+
+The evidence lives in the existing shared-series owner after Labeled and before
+Cell acquisition, with immutable checkpoints and atomic journal restoration.
+The 152 native source files remain unchanged throughout the campaign, with
+digest `793a6b2e57ffbab74e148b1170879cd720387cbe93a2af9977c6303e05c2e731`.
+The unchanged isolated Python trace component independently reaches four levels
+in the same action counts. Source-component parity and the native common-caller
+campaign remain distinct from complete original-caller selection parity.
+The independent [trace reference checks](../../tests/v6-trace-field-reference.test.ts)
+pass 422 tests over 415 cases, 67 public or controlled scenes and 12 source common
+envelopes, with all 53 original-component returns retained. Six separate
+[Kernel integration checks](../../tests/v6-trace-field-kernel.test.ts) verify the
+cold native selection, actual acquisition, current guards, epoch qualification,
+checkpoint reuse and atomic rejection of corrupt journals. The mechanical
+transport remains partial for general Pydantic coercion and arbitrary Python
+integers; the native request contract uses bounded exact integer fields.
+
+**Previous integrated milestone (v45):** the native common caller completes
 all six CATL levels with official **`WIN` in 48 actions, eight per level**,
 through one cold continuous session and 48 acquired prefixes. The first
 three levels use 24 actions. The [v45 report](v45-composed-predicates-and-reduction.md)
@@ -82,10 +116,12 @@ auxiliary support and native checkpoint report](v35-coupled-support.md), [the v3
 response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 36 of 76
-explicit DRM subquestions are connected (47.4%) in implementation
-`logos-engine.typescript.v6.native-migration/0.15.0`. This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 37 of 76
+explicit DRM subquestions are connected (48.7%) in implementation
+`logos-engine.typescript.v6.native-migration/0.16.0`. This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
+The v46 trace-field connection adds one source entry through the existing
+shared-series owner. It adds no game-specific selector or fixed solution.
 The v45 reduction-transport connection adds one source entry; its bounded
 predicate-composition and acquired-continuation coordination extensions add
 none. The v44 labeled-sequence connection
@@ -96,11 +132,19 @@ composition added one source entry, following the v38 cell-composition entry;
 the v37 performance step added none. All six conditions for a complete
 migration remain false.
 
-The next source transfer candidate is **ZIPP / `trace_field_composition`**.
-Its public initial morphology matches the original trace-field observer.
-Source-component checks and a fresh common-caller campaign are still required
-before claiming a level completion. LF52's completed native campaign and its
-explicit coordination extension remain separate from that next transfer.
+The next demonstrated question is the **new public morphology at ZIPP level 5**.
+The unchanged source component stops there because its trace observer does not
+produce a scene. The native observer returns the same absence on that saved
+public raster. Nested rings at the same centers produce competing mark pairs
+under the source rule that requires exactly one pair. This diagnoses a
+recognition limit before path search; it is not
+evidence of an exhausted DFS budget or a proved impossible level. The successful
+native campaign stops at its declared four-level target before attempting that
+next level. A future generic observer extension must justify its current support
+and preserve ambiguity, rather than selecting a shape because it yields a route.
+`linked_packet_composition` also remains a pending source entry, but the existing
+initial-morphology archive retains full rasters only for its two prior matches,
+so no additional game candidate is inferred from its other 88 summary rows.
 
 **Previous v42 result:** THER completes levels 1–4 in **4, 3, 4 and 4 actions**,
 15 total, six sealed prefixes and one retained session. The first two real

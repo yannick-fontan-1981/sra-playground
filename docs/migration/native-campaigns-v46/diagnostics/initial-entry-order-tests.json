@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.v46.exploratory-test-note.v1",
+  "status": "failed",
+  "finalReleaseValidation": false,
+  "sourceSnapshotCertified": false,
+  "counts": {
+    "tests": 106,
+    "pass": 104,
+    "fail": 2,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "output": {
+    "path": "docs/migration/native-campaigns-v46/diagnostics/initial-entry-order-test-output.log.gz",
+    "sha256": "42c9d44baeb96a1a39421f5587be8b457f887e2e6fd4b97fffb4dd3e627c5791",
+    "bytes": 4245
+  },
+  "cause": "Two expectations in the learned-preparation priority tests omitted the newly registered trace_field_composition entry. Commands and acquisition behavior did not fail. Three source-order array assertions in that test file now include Trace at its declared position. The final frozen delta run is retained separately."
+}

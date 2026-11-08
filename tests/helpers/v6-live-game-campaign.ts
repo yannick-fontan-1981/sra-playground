@@ -24,6 +24,13 @@ export interface NativeGameCampaignOptions {
   progress?: (event: R) => void;
   /** Evidence sink only; returned values never enter the production agent. */
   publicTrace?: (packet: NativePublicObservation, command: NativeCommand | null) => void;
+  /** Test host only: expected commands stay outside the production transport. */
+  recordedPublic?: {
+    trace: { path: string; sha256: string };
+    baseline: { path: string; sha256: string };
+    gameAssets: R;
+    packets: { command: NativeCommand | null; packet: NativePublicObservation }[];
+  };
 }
 
 async function nativeSourceManifest(): Promise<R> {
@@ -68,11 +75,15 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
   assert.ok(Number.isInteger(targetLevels) && targetLevels >= 1 && targetLevels <= 100);
   const started = performance.now(), sourceBefore = await nativeSourceManifest();
   const report: R = {
-    schema: 'logos-engine.v6.integrated-game-campaign.v1', game: gameCode, targetLevels,
+    schema: options.recordedPublic ? 'logos-engine.v6.recorded-public-regression.v1' : 'logos-engine.v6.integrated-game-campaign.v1', game: gameCode, targetLevels,
     status: 'running', referenceCommit: V6_REFERENCE_COMMIT,
     budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: 360, clock: 'real active compute and native execution' },
     source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [], domainAssessments: [],
     baseline: null, pythonAgentModules: null, failure: null,
+  };
+  if (options.recordedPublic) report.recordedPublicReplay = {
+    trace: options.recordedPublic.trace, baseline: options.recordedPublic.baseline,
+    qualification: 'A cold native common session recomputes every command before the recorded complete public return is supplied. No game host executes and no new live completion or speed comparison is claimed. Expected commands never enter the production transport.',
   };
   let runtime: Awaited<ReturnType<typeof createNativeV6Runtime>> | undefined;
   let native: Awaited<ReturnType<typeof loadPyodide>> | undefined;
@@ -150,6 +161,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const rootedStates = (series.events as R[]).filter(event => event.kind === 'rooted_quota_state');
           const productStates = (series.events as R[]).filter(event => event.kind === 'observed_factor_product');
           const labeledSubmissions = (series.events as R[]).filter(event => event.kind === 'labeled_sequence_submission');
+          const traceExtensions = (series.events as R[]).filter(event => event.kind === 'observed_trace_extension');
           const relationModels = (series.events as R[]).filter(event => event.kind === 'native_program_relation_model');
           const relationTrials = (series.events as R[]).filter(event => event.kind === 'native_program_relation_trial');
           const relationRefutations = (series.events as R[]).filter(event => event.kind === 'native_program_relation_refutation');
@@ -190,6 +202,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
                     stepModes: evidence.proposal.steps.map((step: R) => step.mode),
                     stateNode: 'family_state:reduction_transport',
                     acquiredState: read('family_state:reduction_transport') } } : {}),
+            ...(evidence.proposal.trace_field_plan
+              ? { traceField: { plan: evidence.proposal.trace_field_plan,
+                    observedSteps: evidence.proposal.steps.map((step: R) => step.relation_observed),
+                    stateNode: 'family_state:public_occurrence_recall' } } : {}),
             supportMode: evidence.proposal.support_preparation_plan?.mode ?? null,
             graphChain: graph.chain, graphRevision: snapshot.graphRevision, callerAcquiredTransitions: snapshot.caller.acquiredTransitions,
             sharedSeries: { digestScope: snapshot.coverage.sharedSeriesDigestScope, digest: series.digest,
@@ -219,6 +235,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               productPanelLatestState: productStates.at(-1) ?? null,
               labeledSequenceSubmissionCount: labeledSubmissions.length,
               labeledSequenceLatestSubmission: labeledSubmissions.at(-1) ?? null,
+              traceFieldExtensionCount: traceExtensions.length,
+              traceFieldLatestExtension: traceExtensions.at(-1) ?? null,
               nativeProgramRelations: { modelCount: relationModels.length, trialCount: relationTrials.length,
                 refutationCount: relationRefutations.length, latestModel: relationModels.at(-1) ?? null,
                 latestTrial: relationTrials.at(-1) ?? null, latestRefutation: relationRefutations.at(-1) ?? null },
@@ -236,7 +254,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
       reset() { assert.fail('The campaign must retain one native reasoning session across levels'); }, dispose() {},
     };
 
-    // Host-side games only. Reference Python and fixture files stay outside.
+    // Host-side games only. A recorded regression is a separate, explicit host.
+    if (!options.recordedPublic) {
     native = await loadPyodide({ indexURL: new URL('public/vendor/pyodide/', ROOT).pathname,
       stdout: () => {}, stderr: (text: string) => progress({ phase: 'game-stderr', message: text }) });
     await native.loadPackage(['numpy', 'pydantic', 'typing-extensions']);
@@ -249,9 +268,28 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
       native.FS.writeFile(`/games/${name}`, bytes.toString());
     }
     native.runPython("import sys\nsys.path.insert(0, '/games')\nfrom game_bridge import dispatch");
+    } else report.gameAssets = structuredClone(options.recordedPublic.gameAssets);
     const hostRequests: R[] = [];
     function game(request: R): GameObservation {
-      hostRequests.push(request); native!.globals.set('_native_game_request', JSON.stringify(request));
+      hostRequests.push(request);
+      if (options.recordedPublic) {
+        const index = hostRequests.length - 1, item = options.recordedPublic.packets[index];
+        assert.ok(item, 'The recorded trace must supply the next complete public return');
+        if (index === 0) {
+          assert.deepEqual(request, { type: 'load', code: gameCode, level: 1 });
+          assert.equal(item.command, null);
+        } else {
+          assert.equal(request.type, 'action');
+          assert.deepEqual({ action_ref: `ACTION${request.actionId}`, data: request.actionId === 6 ? request.data : {} },
+            item.command, `The recomputed command differs before recorded return ${index}`);
+        }
+        const packet = structuredClone(item.packet);
+        return { gameCode, frame: packet.frame_rows as number[][], frames: packet.frame_packet as number[][][],
+          state: packet.state, availableActionIds: packet.available_action_refs.map(ref => Number(ref.slice(6))),
+          canUndo: false, canSelectLevel: false, level: packet.level, levelCount: targetLevels,
+          levelsCompleted: packet.levels_completed, defaultFps: 0 };
+      }
+      native!.globals.set('_native_game_request', JSON.stringify(request));
       let result: R;
       try { result = JSON.parse(native!.runPython('dispatch(_native_game_request)')); }
       finally { native!.globals.delete('_native_game_request'); }
@@ -317,6 +355,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     assert.equal(hostRequests.filter(request => request.type === 'load').length, 1);
     assert.equal(hostRequests.filter(request => request.type === 'action').length, report.actions.length);
     assert.equal(hostRequests.length, report.actions.length + 1, 'No reset, undo, hidden probe or free game step');
+    if (options.recordedPublic) assert.equal(hostRequests.length, options.recordedPublic.packets.length,
+      'The complete declared recorded trajectory is consumed');
     if (baseline) {
       assert.equal(report.baseline.commandsCompared, Math.min(report.actions.length, baseline.stream.length));
       report.baseline.passed = true;
@@ -330,6 +370,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     report.pythonAgentModules = JSON.parse(native.runPython("__import__('json').dumps(sorted(name for name in sys.modules if name == 'agents' or name.startswith(('agents.', 'v6_python_bridge')) or name in {'common_frontier_runtime', 'src_bridge', 'common_ordered_support', 'prospective_contact_adapter'}))"));
     if (report.pythonAgentModules.length) { report.status = 'failed'; report.failure ??= 'Python agent module loaded in game interpreter'; }
   }
+  else if (options.recordedPublic) report.pythonAgentModules = [];
   const sourceAfter = await nativeSourceManifest();
   report.sourceUnchangedDuringRun = sourceBefore.digest === sourceAfter.digest;
   if (!report.sourceUnchangedDuringRun) { report.status = 'failed'; report.failure ??= 'Native source changed during campaign; rerun the fixed source'; }
