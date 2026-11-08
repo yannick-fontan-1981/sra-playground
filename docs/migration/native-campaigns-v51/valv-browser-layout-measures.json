@@ -1,0 +1,310 @@
+[
+  {
+    "phase": "ready",
+    "actions": 0,
+    "inspectionOpen": false,
+    "levels": 0,
+    "prefixes": 0,
+    "rects": {
+      "#agent-message": {
+        "height": 98,
+        "width": 265,
+        "x": 986,
+        "y": 948.671875
+      },
+      "#agent-run": {
+        "height": 44,
+        "width": 265,
+        "x": 986,
+        "y": 1062.671875
+      },
+      "#canvas-stage": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      "#game-canvas": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      ".board-column": {
+        "height": 442,
+        "width": 888,
+        "x": 75,
+        "y": 878.671875
+      }
+    },
+    "status": "Ready to run from level 1.",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  },
+  {
+    "phase": "running-1",
+    "actions": 0,
+    "inspectionOpen": false,
+    "levels": 0,
+    "prefixes": 0,
+    "rects": {
+      "#agent-message": {
+        "height": 98,
+        "width": 265,
+        "x": 986,
+        "y": 948.671875
+      },
+      "#agent-run": {
+        "height": 44,
+        "width": 265,
+        "x": 986,
+        "y": 1062.671875
+      },
+      "#canvas-stage": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      "#game-canvas": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      ".board-column": {
+        "height": 442,
+        "width": 888,
+        "x": 75,
+        "y": 878.671875
+      }
+    },
+    "status": "Preparing the agent…",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  },
+  {
+    "phase": "completed-1",
+    "actions": 10,
+    "inspectionOpen": false,
+    "levels": 1,
+    "prefixes": 10,
+    "rects": {
+      "#agent-message": {
+        "height": 98,
+        "width": 265,
+        "x": 986,
+        "y": 948.671875
+      },
+      "#agent-run": {
+        "height": 44,
+        "width": 265,
+        "x": 986,
+        "y": 1062.671875
+      },
+      "#canvas-stage": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      "#game-canvas": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      ".board-column": {
+        "height": 442,
+        "width": 888,
+        "x": 75,
+        "y": 878.671875
+      }
+    },
+    "status": "Level completed.",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  },
+  {
+    "phase": "running-2",
+    "actions": 10,
+    "inspectionOpen": false,
+    "levels": 1,
+    "prefixes": 10,
+    "rects": {
+      "#agent-message": {
+        "height": 98,
+        "width": 265,
+        "x": 986,
+        "y": 948.671875
+      },
+      "#agent-run": {
+        "height": 44,
+        "width": 265,
+        "x": 986,
+        "y": 1062.671875
+      },
+      "#canvas-stage": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      "#game-canvas": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      ".board-column": {
+        "height": 442,
+        "width": 888,
+        "x": 75,
+        "y": 878.671875
+      }
+    },
+    "status": "Reading the board and planning…",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  },
+  {
+    "phase": "completed-2",
+    "actions": 20,
+    "inspectionOpen": false,
+    "levels": 2,
+    "prefixes": 20,
+    "rects": {
+      "#agent-message": {
+        "height": 98,
+        "width": 265,
+        "x": 986,
+        "y": 948.671875
+      },
+      "#agent-run": {
+        "height": 44,
+        "width": 265,
+        "x": 986,
+        "y": 1062.671875
+      },
+      "#canvas-stage": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      "#game-canvas": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      ".board-column": {
+        "height": 442,
+        "width": 888,
+        "x": 75,
+        "y": 878.671875
+      }
+    },
+    "status": "Level completed.",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  },
+  {
+    "phase": "running-3",
+    "actions": 20,
+    "inspectionOpen": false,
+    "levels": 2,
+    "prefixes": 20,
+    "rects": {
+      "#agent-message": {
+        "height": 98,
+        "width": 265,
+        "x": 986,
+        "y": 948.671875
+      },
+      "#agent-run": {
+        "height": 44,
+        "width": 265,
+        "x": 986,
+        "y": 1062.671875
+      },
+      "#canvas-stage": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      "#game-canvas": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      ".board-column": {
+        "height": 442,
+        "width": 888,
+        "x": 75,
+        "y": 878.671875
+      }
+    },
+    "status": "Reading the board and planning…",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  },
+  {
+    "phase": "completed-3",
+    "actions": 28,
+    "inspectionOpen": false,
+    "levels": 3,
+    "prefixes": 28,
+    "rects": {
+      "#agent-message": {
+        "height": 98,
+        "width": 265,
+        "x": 986,
+        "y": 948.671875
+      },
+      "#agent-run": {
+        "height": 44,
+        "width": 265,
+        "x": 986,
+        "y": 1062.671875
+      },
+      "#canvas-stage": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      "#game-canvas": {
+        "height": 384,
+        "width": 384,
+        "x": 327,
+        "y": 907.671875
+      },
+      ".board-column": {
+        "height": 442,
+        "width": 888,
+        "x": 75,
+        "y": 878.671875
+      }
+    },
+    "status": "Level completed.",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  }
+]

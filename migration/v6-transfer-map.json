@@ -2373,6 +2373,66 @@
         "tests/v6-typed-material-kernel.test.ts"
       ],
       "notes": "The declared typed_material_flow source entry is connected after observed_program_composition and before radial_port_composition, using the existing shared occurrence owner. Current measured point support, first-frame and subsequent conditional-pose guards pass common WHY/ACT before physical execution. Acquisitions and immutable checkpoints retain five own event kinds; rejected journal restoration is atomic. This is an integrated native component, not a game-specific solver or complete original caller parity."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/envelope_fill_observation.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-field-service-observation.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/probe-v6-field-service-original.py",
+        "scripts/export-v6-field-service-reference.py",
+        "tests/fixtures/v6-field-service-original-public.json.gz",
+        "tests/fixtures/v6-field-service-reference.json.gz",
+        "tests/v6-field-service-reference.test.ts",
+        "tests/v6-field-service-kernel.test.ts"
+      ],
+      "notes": "Own measured rectangular changes, persistent field support, provisional appearance polarity, observed band profiles and profile differences are transferred on finite public rasters. Unknown replacement appearances preserve unknown intervals and profiles. Pixel extent is not physical quantity or capacity, and envelope completion remains unproved. Native finite numerical identities and source JSON numeric spelling remain separately qualified; full inherited numerical parity is not asserted. The independent v51 contracts verify exact Python/native canonical bytes for 430 observed own identity recipes, and the actual native campaign verifies 240 recipes without hash substitution. This safe-integer observed scope does not certify arbitrary Python numeric inputs."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/nested_control_access.py",
+        "agents/yf_arc3_v6/laya_proto/envelope_fill_access.py",
+        "agents/yf_arc3_v6/laya_proto/field_service_access.py",
+        "agents/yf_arc3_v6/laya_proto/service_transfer_access.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-field-service-access.ts",
+        "src/logos-engine/v6-field-service-observation.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/probe-v6-field-service-original.py",
+        "scripts/export-v6-field-service-reference.py",
+        "tests/fixtures/v6-field-service-original-public.json.gz",
+        "tests/fixtures/v6-field-service-reference.json.gz",
+        "tests/v6-field-service-reference.test.ts",
+        "tests/v6-field-service-kernel.test.ts"
+      ],
+      "notes": "Own current compact-control questions, observed repetition/restoration, conditional isolation/service, and cross-epoch rebinding after an acquired official boundary are transferred. The four event layers chain after Radial and before Rooted within the same common owner. Field-service recording skips the fill layer; transfer recording skips fill/service while retaining nested response, and Rooted still cuts the older chain. Geometry and roles are conditional; current full-raster, point, epoch, score and command guards remain necessary. Full inherited source behaviors and complete original-caller parity are not claimed."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_field_service.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-field-service-access.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/probe-v6-field-service-original.py",
+        "scripts/export-v6-field-service-reference.py",
+        "tests/fixtures/v6-field-service-original-public.json.gz",
+        "tests/fixtures/v6-field-service-reference.json.gz",
+        "tests/v6-field-service-reference.test.ts",
+        "tests/v6-field-service-kernel.test.ts"
+      ],
+      "notes": "The declared field_service_composition window entry is connected at its source ordering, after radial_port_composition and the still-unconnected observed_framed_analogy, before rooted_quota_composition. Current measured point support is bound through the existing common input domain and WHY/ACT. Acquisitions, immutable checkpoints and atomic reconstruction retain all four own event kinds in family_state:public_occurrence_recall. No game identifier, level branch, fixed semantic palette or preauthored solution selects this capability."
     }
   ],
   "scopeNotes": [
@@ -2413,7 +2473,8 @@
     "v48 connects queued_field_composition before product_panel_composition at its declared DRM position: 39 of 76 entries (51.3%) in native implementation 0.18.0. A separate native Kernel-correlated continuation extension requires a real acquired score increase bound to the exact provider entry and proposal kind. Source epoch-boundary labels alone cannot confer priority. Every current primitive still passes its guards and WHY/ACT. All six complete-migration gates remain false.",
     "v49 connects occluded_catalogue_composition at its declared first window position and restores the source catalogue-view fallback after common ViewFrontier. The four-list connection metric becomes 40 of 76 (52.6%) in native implementation 0.19.0. The direct view fallback is outside that denominator. No new game-specific or cold-start coordination rule is added; actual common acquisitions supply initial effects. All six complete-migration gates remain false.",
     "v50 connects typed_material_flow at its declared window position, with three own carrier/material/pose memory layers in the existing common owner. The four-list connection metric becomes 41 of 76 (53.9%) in native implementation 0.20.0. Finite native numeric identities and lexical-hash tie differences are explicit; no complete Python numeric or full common-caller parity is claimed. Actual native LIFE results and any coordination extensions are reported separately. All six complete-migration gates remain false.",
-    "v50 also declares transient_returned_unlearned_contact_refusal_scope as a native coordination evolution, not original Python caller parity. It retains every public frame, final protocol, command and actual Kernel transition, distinguishing transient return from a stationary observation. The first non-null current window question remains in declared order. A cold typed relation must be remeasured and have supports disjoint from both the invitation point and every transient effect pixel. Subsequent questions require event-backed acquired context and current guards. Returning to the same public image does not establish hidden-state equivalence or an understood effect. The first actual native LIFE failure remains preserved separately from the corrected frozen campaign; all six complete-migration gates remain false."
+    "v50 also declares transient_returned_unlearned_contact_refusal_scope as a native coordination evolution, not original Python caller parity. It retains every public frame, final protocol, command and actual Kernel transition, distinguishing transient return from a stationary observation. The first non-null current window question remains in declared order. A cold typed relation must be remeasured and have supports disjoint from both the invitation point and every transient effect pixel. Subsequent questions require event-backed acquired context and current guards. Returning to the same public image does not establish hidden-state equivalence or an understood effect. The first actual native LIFE failure remains preserved separately from the corrected frozen campaign; all six complete-migration gates remain false.",
+    "v51 connects field_service_composition in native implementation 0.21.0. The four-list connection metric becomes 42 of 76 entries (55.3%); it measures connected entry points, not whole-code completion or game success. Own nested-control, envelope, service and transfer evidence belongs to the same common memory. The independent original component and actual native common-caller campaign are reported separately. Numerical identity and inherited-caller limitations remain explicit, and all six complete-migration gates remain false. The frozen 172-file native source completes VALV levels 1\u20133 in 28 actions (10/10/8), 28 acquired prefixes, 63 own events and two natural-boundary replays. The isolated original component independently produces the same 28 commands and 29 complete public packets (238 frames); its complete strategic caller is outside this comparison. No new native priority rule is introduced in v51."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,

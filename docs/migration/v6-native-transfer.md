@@ -11,7 +11,40 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v50):** the native common Logos Engine caller
+**Current integrated milestone (v51):** the native common Logos Engine caller
+completes **VALV's first three levels in 28 actions (10, 10, 8)** in one cold
+continuous session, with 28 actual Kernel acquisitions and two natural boundary
+replays. The [actual campaign](native-campaigns-v51/valv-three-levels.json)
+stops at its declared target on entry to level 4 with `NOT_FINISHED`.
+Its 29 complete public packets contain 238 frames. All 28 prefixes are selected
+through the common caller's declared `field_service_composition` entry; no
+new coordination rule or game-specific priority is introduced.
+
+The source transfer includes current nested controls, repeated public field
+changes, actual restoration, conditional isolation/service and current geometric
+rebinding after an acquired official boundary. Four own digest layers retain
+63 actual events in `family_state:public_occurrence_recall`, after Radial and
+before Rooted. Their current guards, WHY/ACT, journal reconstruction and immutable
+checkpoint handling use the existing common architecture. Physical volumes,
+capacities, passage laws and universal terminal semantics remain unknown.
+
+The [independent component comparison](native-campaigns-v51/valv-original-component-comparison.json)
+verifies the same 28 commands and 29 complete public packets in the separately
+executed unchanged Python component campaign. It also verifies all 28 native
+own proposal envelopes, 63 own events, 28 reconstructed own states and four
+own digest layers with the source ancestor supplied separately. All 240 own
+identity recipes on this trace have identical canonical bytes and hashes,
+without numeric tolerance or identifier substitution. This checked safe-integer
+domain does not establish arbitrary Python float semantics, full inherited
+graph parity or the original complete strategic caller's ordering.
+
+The [browser verification](native-campaigns-v51/valv-browser-verification.json)
+confirms the same 28 actions and three levels, with seven stable desktop samples:
+442 px board column, 384 × 384 px canvas, 98 px status and zero measured position
+or dimension change. The compact UI source remains identical to v50.
+See [the v51 report](v51-field-service-composition.md) for evidence and limits.
+
+**Previous integrated milestone (v50):** the native common Logos Engine caller
 completes **LIFE's first three levels in 49 actions (15, 15, 19)** through one
 cold continuous session, 47 prefixes, 49 actual Kernel acquisitions and two
 natural boundary replays. The [actual campaign](native-campaigns-v50/life-three-levels-final.json)
@@ -258,11 +291,12 @@ auxiliary support and native checkpoint report](v35-coupled-support.md), [the v3
 response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 41 of 76
-explicit DRM subquestions are connected (53.9%) in implementation
-`logos-engine.typescript.v6.native-migration/0.20.0`. This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 42 of 76
+explicit DRM subquestions are connected (55.3%) in implementation
+`logos-engine.typescript.v6.native-migration/0.21.0`. This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
-The v50 typed-material connection adds one source entry. The explicit native
+The v51 field-service connection adds one source entry, with no new native
+priority rule. The v50 typed-material connection adds one source entry. The explicit native
 coordination of unresolved transient returns adds none; its evidence,
 disjointness and current inquiry guards are evaluated separately.
 The v49 occluded-catalogue connection adds one source entry. Its acquired-view
@@ -285,17 +319,17 @@ composition added one source entry, following the v38 cell-composition entry;
 the v37 performance step added none. All six conditions for a complete
 migration remain false.
 
-The next step is **`field_service_composition`**, including acquisition of
-persistent fields, actual restoration, conditional service and current
-geometric rebinding, followed by a cold VALV campaign targeting its first
-three levels. A bounded read-only selection on 100 retained public initial
-screens finds 11 admitted compact motifs, 22 views with reflected pairs,
-two combining both, and VALV alone also presenting a unique same-extent
-distinct enclosure. The [candidate-selection note](native-campaigns-v50/candidate-selection.md)
-and its reproducible script retain these measurements and source hashes.
-No game host, proposer, acquisition routine or solver runs during selection.
-The initial geometry establishes neither persistent fields nor a service
-relation, and demonstrates no executed action, solved level or VALV victory.
+The next step is **`observed_framed_transfer`**: acquire actual point-motion
+spans and framed replacements, retain their evidence, and rebind the current
+supports before proposing conditional reception. The related
+`observed_framed_analogy` may be connected only when its acquired premises and
+current guards are represented. **GARE** is the declared next evaluation
+preference, aiming for at least three levels from a cold continuous session.
+The [read-only candidate note](native-campaigns-v51/candidate-selection.md)
+retains all 100 initial public measurements: GARE, LKEY and HANO have eligible
+parallel-band questions. The alternative exact-window screen admits no initial
+view and is preserved separately. Neither screen executes a game, a proposer,
+an action or a learned-memory acquisition; neither establishes GARE success.
 
 **Previous v42 result:** THER completes levels 1–4 in **4, 3, 4 and 4 actions**,
 15 total, six sealed prefixes and one retained session. The first two real

@@ -51,7 +51,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.20.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.21.0';
 // The implementation identity and public snapshot describe the same extensions.
 const NATIVE_CALLER_EXTENSIONS = ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
   'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery',
@@ -989,7 +989,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id),
-        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_native_relations_typed_material_and_pose_radial_ports_rooted_quota_native_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
+        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_native_relations_typed_material_and_pose_radial_ports_field_service_rooted_quota_native_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
         sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,
         nativeCallerExtensions: NATIVE_CALLER_EXTENSIONS,
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
@@ -1184,7 +1184,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     (configuration.window_constraints as R).product_panel_composition, (configuration.window_constraints as R).labeled_sequence_composition,
     (configuration.window_constraints as R).trace_field_composition, (configuration.window_constraints as R).linked_packet_composition,
     (configuration.window_constraints as R).queued_field_composition, (configuration.window_constraints as R).occluded_catalogue_composition,
-    (configuration.window_constraints as R).typed_material_flow);
+    (configuration.window_constraints as R).typed_material_flow, (configuration.window_constraints as R).field_service_composition);
   const policy = loaded.common as R;
   const supportChildren: Record<string, NativeFamily<any>> = {
     ordered_support_transfer: ordered,
@@ -1211,7 +1211,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     multiscale_constraints: windows, occluded_catalogue_composition: recall, queued_field_composition: recall, product_panel_composition: recall, labeled_sequence_composition: recall,
     linked_packet_composition: recall, trace_field_composition: recall,
     cell_patch_composition: recall, observed_occurrence_recall: recall,
-    observed_program_composition: recall, typed_material_flow: recall, radial_port_composition: recall, rooted_quota_composition: recall, ...supportChildren,
+    observed_program_composition: recall, typed_material_flow: recall, radial_port_composition: recall, field_service_composition: recall, rooted_quota_composition: recall, ...supportChildren,
   };
   const windowEntries = (configuration.window_constraints.ordered_subquestions as string[])
     .filter(question => windowProviders[question]);

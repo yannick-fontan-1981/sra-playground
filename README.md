@@ -28,7 +28,21 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **The v50 milestone completes
+  level**; opening the tab does not move the game. **The v51 milestone completes
+  VALV's first three levels in 28 actions (10, 10 and 8)** through one cold
+  continuous native common session, 28 acquired prefixes and two natural
+  boundary replays. The newly connected `field_service_composition` measures
+  current controls, acquires actual repetition and restoration, tests isolation
+  and service, and rebinds learned roles after an official boundary. Its four
+  own layers retain 63 events in the existing common knowledge owner. The
+  independent original component produces the same 28 commands and 29 complete
+  public packets (238 frames). Own envelopes, events, states and 240 numerical
+  identity recipes match exactly on the checked safe-integer domain; complete
+  original-caller or inherited-graph parity is not claimed. The target stops on
+  entry to level 4 with `NOT_FINISHED`. The browser confirms 28 actions and
+  three levels, with seven unchanged 442 px board-height samples. No new native
+  priority rule is added. See the [v51 report](docs/migration/v51-field-service-composition.md).
+  **The previous v50 milestone completes
   LIFE's first three levels in 49 actions (15, 15 and 19)** through one cold
   native common session, 47 prefixes and 49 actual Kernel acquisitions. The
   connected `typed_material_flow` acquires marked supports, replacements,
@@ -140,16 +154,15 @@ Fontan's **Symbolic Reasoning Agent** research.
   **Previous v38 milestone: TICT completes all six levels with official `WIN`
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
-  The current entry audit connects **41 of 76 explicit DRM subquestions
-  (53.9%)** in implementation `logos-engine.typescript.v6.native-migration/0.20.0`,
-  with the newly connected `typed_material_flow` entry. Native coordination
-  extensions add no source entry to this connection metric. The next step is
-  to transfer `field_service_composition`, including acquired persistent
-  fields, restoration, conditional service and current geometric rebinding,
-  then test a cold three-level VALV campaign. The read-only selection examines
-  100 retained initial public views; VALV alone combines the admitted compact
-  motif, reflected pairs and a unique same-extent distinct enclosure.
-  This identifies a candidate, not an executed action or completed VALV level.
+  The current entry audit connects **42 of 76 explicit DRM subquestions
+  (55.3%)** in implementation `logos-engine.typescript.v6.native-migration/0.21.0`,
+  with the newly connected `field_service_composition` entry. This counts
+  connected entries, not full behavioral parity or a percentage of all code.
+  The next step is generic `observed_framed_transfer`: acquire point motion,
+  framed replacements and current rebindings, then evaluate GARE from a cold
+  session, targeting at least three levels. GARE is a declared evaluation
+  preference among candidates; the read-only initial-view screening also admits
+  LKEY and the already demonstrated HANO. No GARE success is claimed yet.
   Complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These

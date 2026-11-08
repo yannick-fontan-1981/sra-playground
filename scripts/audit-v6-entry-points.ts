@@ -19,6 +19,7 @@ const aliases: Record<string, string> = {
   cell_patch_composition: 'public_occurrence_recall',
   observed_program_composition: 'public_occurrence_recall',
   radial_port_composition: 'public_occurrence_recall',
+  field_service_composition: 'public_occurrence_recall',
   rooted_quota_composition: 'public_occurrence_recall',
   occluded_catalogue_composition: 'public_occurrence_recall',
   typed_material_flow: 'public_occurrence_recall',

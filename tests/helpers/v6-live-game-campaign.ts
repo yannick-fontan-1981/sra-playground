@@ -172,6 +172,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const materialEvents = (series.events as R[]).filter(event =>
             ['typed_carrier_response', 'typed_material_flow', 'typed_pose_scope', 'typed_pose_model', 'typed_pose_response'].includes(event.kind));
           const previousMaterialCount = report.prefixes.at(-1)?.sharedSeries.typedMaterialEventCount ?? 0;
+          const serviceEvents = (series.events as R[]).filter(event =>
+            ['nested_control_response', 'envelope_fill_context', 'field_service_context', 'field_service_transfer'].includes(event.kind));
+          const previousServiceCount = report.prefixes.at(-1)?.sharedSeries.fieldServiceEventCount ?? 0;
           const productStates = (series.events as R[]).filter(event => event.kind === 'observed_factor_product');
           const labeledSubmissions = (series.events as R[]).filter(event => event.kind === 'labeled_sequence_submission');
           const traceExtensions = (series.events as R[]).filter(event => event.kind === 'observed_trace_extension');
@@ -215,6 +218,11 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
                     negativeZeroPaths: negativeZeroPaths(evidence.proposal),
                     stateNode: 'family_state:public_occurrence_recall',
                     numericScope: 'Finite native numerical identities; source and native derived hashes are verified independently. Float JSON spelling equality with Python is not asserted.' } } : {}),
+            ...(evidence.proposal.nested_control_plan
+              ? { fieldService: { proposal: evidence.proposal,
+                    negativeZeroPaths: negativeZeroPaths(evidence.proposal),
+                    stateNode: 'family_state:public_occurrence_recall',
+                    numericScope: 'Native numerical identities and source identities are verified independently; complete Python caller or float JSON spelling parity is not asserted.' } } : {}),
             ...(evidence.proposal.labeled_sequence_plan
               ? { labeledSequenceLabel: evidence.proposal.labeled_sequence_plan.label,
                   labeledSequenceQuery: evidence.proposal.labeled_sequence_plan.scene.query.words[0].values,
@@ -273,6 +281,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               // journal range, rather than its oldest witness, defines this prefix.
               typedMaterialAcquiredEvents: materialEvents.slice(previousMaterialCount),
               typedMaterialAcquiredNegativeZeroPaths: negativeZeroPaths(materialEvents.slice(previousMaterialCount)),
+              fieldServiceEventCount: serviceEvents.length,
+              fieldServiceLatestEvent: serviceEvents.at(-1) ?? null,
+              fieldServiceAcquiredEvents: serviceEvents.slice(previousServiceCount),
+              fieldServiceAcquiredNegativeZeroPaths: negativeZeroPaths(serviceEvents.slice(previousServiceCount)),
               productPanelStateCount: productStates.length,
               productPanelLatestState: productStates.at(-1) ?? null,
               labeledSequenceSubmissionCount: labeledSubmissions.length,
