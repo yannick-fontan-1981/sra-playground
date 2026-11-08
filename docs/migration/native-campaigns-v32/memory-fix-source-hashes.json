@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.v32.memory-fix-sources.v1",
+  "qualification": "Reverse this exact patch in a separate checkout of the final product to reconstruct the profiled native source baseline. It changes only the two serializers and removes the newly introduced disposable cache; no game or learning code changes.",
+  "baselineSourceDigest": "aba20e40256a364dde30662a759e029b2f51af92695f9c13ea55a61c45b6d5d0",
+  "finalSourceDigest": "b72de816a5c707ef0b41515a22fcd52f1ffd797ab006d9f5daa39f15ae2e6710",
+  "patchSha256": "2f9fa8608035d54cdfcc28a81ec39dbbdf6fffc4e637dfb558cdbf941639f4c2",
+  "files": {
+    "src/logos-engine/canonical.ts": {
+      "before": "49641f2037177c0370e9381451105be427cdde9eadc643cd19a689afe1e4f9f7",
+      "after": "ad2dcb4b6da29e28b0d139aee32aaf2849a396e6d11514a236324f54c9fb6d65"
+    },
+    "src/logos-engine/v6-native-state-graph.ts": {
+      "before": "6f3acb4d91f7fa01cbedf6be9ff86fcff485f099d99849edca29877b8e4e5e42",
+      "after": "ffeb654334e1c809785ca8c1920fb1e39a4b848265abcaade97406120bc93d5d"
+    },
+    "src/logos-engine/bounded-weak-cache.ts": {
+      "before": null,
+      "after": "b04ce3e0a2c51044840ee45778d5e73f4cf445c90524ed5977865fe24b84d39a"
+    }
+  }
+}

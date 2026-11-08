@@ -10,6 +10,7 @@
  */
 import { canonical, compareUnicode, digest } from './canonical.ts';
 import { v6Digest } from './v6-native-observer.ts';
+import { retainNativeJson } from './v6-native-owned.ts';
 import type { NativeRows } from './v6-native-types.ts';
 
 // A rule has different fields in each original branch (literal transition,
@@ -56,6 +57,7 @@ function frozenRecord<T>(value: T): T {
 }
 const supports = new WeakMap<object, Support | null>();
 const neutralEntities = new WeakMap<object, TransitionRecord>();
+const observedStates = new WeakMap<object, TransitionRecord>();
 const shapes = new WeakMap<object, TransitionRecord>();
 const translations = new WeakMap<Support, Map<string, Support>>();
 const sweeps = new WeakMap<Support, Map<string, Support | null>>();
@@ -156,14 +158,26 @@ function neutralView(entity: TransitionRecord): TransitionRecord {
   return value;
 }
 function neutralEntity(entity: TransitionRecord): TransitionRecord { return copy(neutralView(entity)); }
-function observedState(observation: TransitionObservation): TransitionRecord {
-  return { coordinate_basis: has(observation, 'coordinate_basis') ? observation.coordinate_basis : 'unknown',
-    entities: observation.entities.map(neutralEntity).sort((a, b) => compareUnicode(canonical(a), canonical(b))),
+/** One immutable projection per actual public occurrence, reused across rule checks. */
+function observedStateView(observation: TransitionObservation): TransitionRecord {
+  const cacheable = deeplyFrozen(observation), cached = cacheable ? observedStates.get(observation) : undefined;
+  if (cached) return cached;
+  // Decorate once. Sorting used to clone and canonicalize the full pixel masks
+  // again for every comparator call, and repeat this for every retained rule.
+  const entities = observation.entities.map(entity => { const value = neutralView(entity); return { value, key: canonical(value) }; });
+  entities.sort((a, b) => compareUnicode(a.key, b.key));
+  const value = { coordinate_basis: has(observation, 'coordinate_basis') ? observation.coordinate_basis : 'unknown',
+    entities: entities.map(item => item.value),
     metadata: Object.fromEntries(['level_epoch', 'state', 'levels_completed', 'available_action_refs', 'context_scope']
       .filter(key => has(observation, key)).map(key => [key, copy(observation[key])])) };
+  if (cacheable) { frozenRecord(value); observedStates.set(observation, value); }
+  return value;
 }
-function literalConditions(observation: TransitionObservation, action: TransitionAction): TransitionRecord {
-  return { observed_features: observedState(observation), action: copy(action) };
+function literalConditions(observation: TransitionObservation, action: TransitionAction, owned = true): TransitionRecord {
+  const observed = observedStateView(observation);
+  // Publicly returned rules remain independently mutable. Internal comparisons
+  // borrow only the validated immutable projection, never the caller's values.
+  return { observed_features: owned ? copy(observed) : observed, action: copy(action) };
 }
 async function matching(before: TransitionObservation, after: TransitionObservation): Promise<[Pair[], TransitionRecord[]]> {
   const left = new Map<string, TransitionRecord[]>(), right = new Map<string, TransitionRecord[]>();
@@ -259,7 +273,7 @@ function shapeView(entity: TransitionRecord): TransitionRecord {
 }
 function shape(entity: TransitionRecord): TransitionRecord { return copy(shapeView(entity)); }
 function literalEffect(before: TransitionObservation, after: TransitionObservation): TransitionRecord {
-  const a = observedState(before), b = observedState(after), used = new Set<number>();
+  const a = observedStateView(before), b = observedStateView(after), used = new Set<number>();
   const updates: TransitionRecord[] = [], removed: number[] = [];
   for (const [index, old] of (a.entities as TransitionRecord[]).entries()) {
     const matches = (b.entities as TransitionRecord[]).flatMap((entity, i) => !used.has(i) && same(entity.signature, old.signature) &&
@@ -270,7 +284,7 @@ function literalEffect(before: TransitionObservation, after: TransitionObservati
     } else removed.push(index);
   }
   return { entity_translations: updates, remove_indices: removed,
-    add_entities: copy((b.entities as TransitionRecord[]).filter((_, i) => !used.has(i))), metadata_after: b.metadata, coordinate_basis_after: b.coordinate_basis };
+    add_entities: copy((b.entities as TransitionRecord[]).filter((_, i) => !used.has(i))), metadata_after: copy(b.metadata), coordinate_basis_after: b.coordinate_basis };
 }
 function applyLiteralEffect(state: TransitionRecord, effect: TransitionRecord): TransitionRecord {
   const out = copy(state), removed = new Set(effect.remove_indices), moves = new Map<number, Point>(effect.entity_translations.map((update: TransitionRecord) => [update.before_index, update.translation]));
@@ -281,8 +295,9 @@ function applyLiteralEffect(state: TransitionRecord, effect: TransitionRecord): 
     if (delta) entity.position = [entity.position[0] + delta[0], entity.position[1] + delta[1]];
     entities.push(entity);
   }
-  entities.push(...copy(effect.add_entities)); entities.sort((a, b) => compareUnicode(canonical(a), canonical(b)));
-  out.entities = entities; out.metadata = copy(effect.metadata_after); out.coordinate_basis = effect.coordinate_basis_after; return out;
+  entities.push(...copy(effect.add_entities));
+  const ordered = entities.map(value => ({ value, key: canonical(value) })).sort((a, b) => compareUnicode(a.key, b.key));
+  out.entities = ordered.map(item => item.value); out.metadata = copy(effect.metadata_after); out.coordinate_basis = effect.coordinate_basis_after; return out;
 }
 function bindVariables(conditions: TransitionRecord, observation: TransitionObservation, action: TransitionAction): TransitionRecord | null {
   if (!same(conditions.action, action) || !same(conditions.coordinate_basis, observation.coordinate_basis)) return null;
@@ -332,7 +347,7 @@ export async function constructEmpiricalRule(before: TransitionObservation, afte
       unmodeled_before_entities: before.entities.length - rigid.length, unresolved_correspondences: unresolved.length };
   } else {
     conditions = literalConditions(before, action); effect = literalEffect(before, after); kind = 'observed_transition'; status = 'empirical_transition_candidate';
-    if (!same(applyLiteralEffect(observedState(before), effect), observedState(after))) throw new TypeError('Observed transition delta does not reproduce supplied evidence');
+    if (!same(applyLiteralEffect(observedStateView(before), effect), observedStateView(after))) throw new TypeError('Observed transition delta does not reproduce supplied evidence');
     scope = { kind: 'literal_observed_features_only', generalized_mechanism_construction: 'not_implemented_for_this_effect', predictive_acquisition: 'forbidden_for_transition_replay' };
   }
   return { rule_id: `empirical:${await digest([kind, conditions, effect])}`, rule_family: kind, status, predictive_use_allowed: false,
@@ -365,8 +380,15 @@ export async function applyEmpiricalRule(rule: TransitionRecord, observation: Tr
   return prediction;
 }
 export async function validateEmpiricalRule(rule: TransitionRecord, before: TransitionObservation, after: TransitionObservation, action: TransitionAction): Promise<TransitionRecord> {
+  return validateRule(rule, before, after, action, false);
+}
+/** Internal persistent update; unchanged rule conditions/effects keep identity. */
+export async function validateRetainedEmpiricalRule(rule: TransitionRecord, before: TransitionObservation, after: TransitionObservation, action: TransitionAction): Promise<TransitionRecord> {
+  return retainNativeJson(await validateRule(retainNativeJson(rule), before, after, action, true));
+}
+async function validateRule(rule: TransitionRecord, before: TransitionObservation, after: TransitionObservation, action: TransitionAction, retained: boolean): Promise<TransitionRecord> {
   checkNeutralTransition(before, after, action);
-  const updated = copy(rule), observed = await evidence(before, after, action);
+  const updated = retained ? { ...rule } : copy(rule), observed = await evidence(before, after, action);
   const seen = new Set([...rule.validation_evidence, ...rule.counterexamples].map(item => item.transition_ref));
   if (seen.has(observed.transition_ref)) { updated.last_validation = { status: 'duplicate_evidence_not_independent' }; return updated; }
   let confirmed: boolean, changed: boolean;
@@ -377,17 +399,17 @@ export async function validateEmpiricalRule(rule: TransitionRecord, before: Tran
     observed.frozen_rule_digest = prediction.rule_digest; observed.prediction_digest = await digest(prediction.predicted_entities);
     changed = rule.validation_evidence.every((item: Evidence) => !same(item.position_context, prediction.position_context));
   } else {
-    if (!same(rule.conditions, literalConditions(before, action))) { updated.last_validation = { status: 'not_applicable' }; return updated; }
-    confirmed = same(applyLiteralEffect(observedState(before), rule.effect), observedState(after)); changed = false;
+    if (!same(rule.conditions, literalConditions(before, action, false))) { updated.last_validation = { status: 'not_applicable' }; return updated; }
+    confirmed = same(applyLiteralEffect(observedStateView(before), rule.effect), observedStateView(after)); changed = false;
   }
   if (!confirmed) {
-    updated.counterexamples.push({ ...observed, observed_feature_digest: await digest(observedState(after)) });
+    updated.counterexamples = [...updated.counterexamples, { ...observed, observed_feature_digest: await digest(observedStateView(after)) }];
     Object.assign(updated, { status: 'refuted', predictive_use_allowed: false, last_validation: { status: 'refuted', evidence: observed.transition_ref } });
   } else {
-    updated.validation_evidence.push(observed); updated.independent_confirmations = updated.validation_evidence.length;
+    updated.validation_evidence = [...updated.validation_evidence, observed]; updated.independent_confirmations = updated.validation_evidence.length;
     if (rule.rule_family === 'translation_relation' && changed && rule.scope.exact_support_measured && !updated.counterexamples.length) {
       Object.assign(updated, { status: 'mechanism_acquired', predictive_use_allowed: true });
-      updated.scope.position_generalization = 'confirmed_on_independent_changed_positions_only';
+      updated.scope = { ...updated.scope, position_generalization: 'confirmed_on_independent_changed_positions_only' };
       updated.uncertainty = [...updated.uncertainty.filter((item: string) => item !== 'one_transition_is_not_a_law'), 'transfer_outside_measured_conditions_unproved'];
     } else if (rule.rule_family !== 'translation_relation') Object.assign(updated, { status: 'reproduced_transition', predictive_use_allowed: false });
     updated.last_validation = { status: 'confirmed', changed_position_context: changed, evidence: observed.transition_ref };
@@ -396,10 +418,19 @@ export async function validateEmpiricalRule(rule: TransitionRecord, before: Tran
 }
 export async function assessTransition(before: TransitionObservation, after: TransitionObservation, action: TransitionAction,
   priorRules: readonly TransitionRecord[] = []): Promise<TransitionRecord> {
+  return assessTransitionState(before, after, action, priorRules, false);
+}
+/** Native acquisition retains immutable rule subtrees while acquiring every check. */
+export async function assessRetainedTransition(before: TransitionObservation, after: TransitionObservation, action: TransitionAction,
+  priorRules: readonly TransitionRecord[] = []): Promise<TransitionRecord> {
+  return retainNativeJson(await assessTransitionState(before, after, action, priorRules, true));
+}
+async function assessTransitionState(before: TransitionObservation, after: TransitionObservation, action: TransitionAction,
+  priorRules: readonly TransitionRecord[], retained: boolean): Promise<TransitionRecord> {
   checkNeutralTransition(before, after, action);
   const observed = await evidence(before, after, action), library = await assessMechanicalLibrary(before, after, action, priorRules, observed);
   const updated = new Map<string, TransitionRecord>();
-  for (const rule of priorRules) updated.set(rule.rule_id, await validateEmpiricalRule(rule, before, after, action));
+  for (const rule of priorRules) updated.set(rule.rule_id, await (retained ? validateRetainedEmpiricalRule : validateEmpiricalRule)(rule, before, after, action));
   const candidate = await constructEmpiricalRule(before, after, action);
   if (!updated.has(candidate.rule_id)) {
     const contradictory = priorRules.filter(rule => same(rule.conditions, candidate.conditions) && !same(rule.effect, candidate.effect));

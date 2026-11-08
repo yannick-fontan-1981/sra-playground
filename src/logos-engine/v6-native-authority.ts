@@ -4,7 +4,7 @@ import type { ReasoningDynamicState, ReasoningMemoryState } from './v6-reasoning
 import { NativeSrcBridge, NeutralEngine } from './v6-composition-engine.ts';
 import type { CompositionBridgeState, CompositionReport } from './v6-composition-engine.ts';
 import { CompositionTargetTree, mainObjective, postAnalysis, protocolProjection, stateCompositions } from './v6-target-binding.ts';
-import { assessPropertyTransition, assessTransition, predictCandidateRule, predictPropertyRule, validateEmpiricalRule } from './v6-transition-learning.ts';
+import { assessPropertyTransition, assessRetainedTransition, predictCandidateRule, predictPropertyRule, validateRetainedEmpiricalRule } from './v6-transition-learning.ts';
 import { pythonEqual as same } from './v6-operations.ts';
 import { objectValue } from './canonical.ts';
 import { symbolicDigest } from './v6-hash.ts';
@@ -207,8 +207,8 @@ export class NativeCompositionAuthority {
     const claims: R[] = proposal.steps.flatMap((step, index) => Object.hasOwn(step, 'point_binding') ? [{ index, ...step.point_binding as R }] : []);
     if (claims.length) { bundle.point_bindings = claims; bundle.evidence = [...bundle.evidence, ...claims.map(claim => `${claim.observation_ref}/${claim.entity_ref}`)]; }
     let registry: R[] = [], registryRevision: number | null = null;
-    try { const remembered = this.memory.get(EPISODE, 'empirical_registry'); registry = frozenSource(remembered.value); registryRevision = remembered.revision; } catch (error) { if (!(error instanceof RangeError)) throw error; }
-    const properties: R[] = frozenSource(this.memory.get(EPISODE, 'property_rules').value);
+    try { const remembered = this.memory.nativeGet(EPISODE, 'empirical_registry'); registry = remembered.value; registryRevision = remembered.revision; } catch (error) { if (!(error instanceof RangeError)) throw error; }
+    const properties: R[] = this.memory.nativeGet(EPISODE, 'property_rules').value;
     const first = proposal.actions[0]!;
     this.frozen = frozenSource({ before_observation_ref: observation.observation_ref, prior_rules: registry, prior_property_rules: properties,
       first_action: first, candidate_predictions: await Promise.all(registry.map(rule => predictCandidateRule(rule, observation, first))),
@@ -249,20 +249,22 @@ export class NativeCompositionAuthority {
         boundaryRefs.push({ node: id, before: before.observation_ref, after: after.observation_ref });
       } else {
         let prior: R[] = this.frozen?.prior_rules ?? [];
-        if (transition.index !== 0) { try { prior = frozenSource(this.memory.get(EPISODE, 'empirical_registry').value); } catch (error) { if (!(error instanceof RangeError)) throw error; } }
-        const checks = transition.index === 0 ? await Promise.all(prior.map(rule => validateEmpiricalRule(rule, before, after, command))) : [];
-        const assessment = await assessTransition(before, after, command, prior);
+        if (transition.index !== 0) { try { prior = this.memory.nativeGet(EPISODE, 'empirical_registry').value; } catch (error) { if (!(error instanceof RangeError)) throw error; } }
+        const checks = transition.index === 0 ? await Promise.all(prior.map(rule => validateRetainedEmpiricalRule(rule, before, after, command))) : [];
+        // The root is mutable for the addressed assessment below; its retained
+        // empirical rules remain immutable and share their unchanged branches.
+        const assessment = { ...await assessRetainedTransition(before, after, command, prior) };
         if (command.action_ref === 'ACTION6') {
-          const priorProperties = transition.index === 0 ? this.frozen?.prior_property_rules ?? [] : frozenSource(this.memory.get(EPISODE, 'property_rules').value);
+          const priorProperties = transition.index === 0 ? this.frozen?.prior_property_rules ?? [] : this.memory.nativeGet(EPISODE, 'property_rules').value;
           const properties = await assessPropertyTransition(before, after, command, priorProperties);
           assessment.property_rules = properties.property_rules; assessment.addressed_assessment = properties;
-          this.memory.put(EPISODE, 'property_rules', properties.property_rules, after.observation_ref, after.revision);
+          this.memory.nativePut(EPISODE, 'property_rules', properties.property_rules, after.observation_ref, after.revision);
         }
         record = { before: before.observation_ref, after: after.observation_ref, command, assessment,
           prospective_prediction_checks: checks, prospective_prediction_node: transition.index === 0 ? `reasoning:prediction:${decisionRevision}` : null,
           prospective_claim: transition.index === 0 ? 'first-action candidates frozen before dispatch' : 'mechanism fitting retrospective; only committed path-protocol expectation tested prospectively' };
         if (caller) record.frontier_acquisition = await caller.recordAssessment(transition, assessment);
-        this.memory.put(EPISODE, 'empirical_registry', assessment.empirical_rules, after.observation_ref, after.revision);
+        this.memory.nativePut(EPISODE, 'empirical_registry', assessment.empirical_rules, after.observation_ref, after.revision);
         transitionRefs.push({ node: id, before: before.observation_ref, after: after.observation_ref });
       }
       if (caller) record.caller_acquisition = acquired;

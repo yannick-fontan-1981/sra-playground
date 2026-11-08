@@ -119,8 +119,8 @@ app.innerHTML = `
                 <p id="runtime-message">Loading game…</p>
                 <button class="secondary-button" type="button" id="retry-button" hidden>Retry</button>
               </div>
-              <div class="game-overlay" id="win-overlay" hidden>
-                <div class="win-check">${icon('check')}</div><h3 id="win-title">Complete</h3>
+              <div class="game-overlay" id="win-overlay" role="status" aria-live="polite" hidden>
+                <div class="win-check">${icon('check')}</div><h3 id="win-title">VICTORY</h3>
                 <button class="primary-button" type="button" id="win-continue"><span id="win-continue-label">Restart from level 1</span>${icon('arrow')}</button>
               </div>
             </div>
@@ -178,14 +178,15 @@ app.innerHTML = `
           </aside>
         </div>
 
-        <section id="agent-inspection" class="agent-inspection" aria-label="Agent reasoning" hidden>
+        <details id="agent-inspection" class="agent-inspection" aria-label="Agent reasoning" hidden>
+          <summary class="agent-inspection-toggle">Inspect reasoning <span>Open to display the current plan, trace and memory</span></summary>
           <div class="agent-inspection-header"><div><p class="eyebrow">LIVE REASONING</p><h3>The current action sequence</h3></div><a class="text-link" href="/reasoning-lab.html">V7 Reasoning Lab ${icon('arrow')}</a></div>
           <p id="agent-cycle-summary">The engine will read the current visible frame when you start.</p>
           <div id="agent-plan" class="agent-plan"><p>No action sequence selected yet.</p></div>
           <details id="agent-trace-details"><summary>Inspect the V6 reasoning trace <span id="agent-trace-count"></span></summary><div id="agent-trace" class="agent-trace"><p>No reasoning cycle yet.</p></div></details>
           <div id="agent-knowledge"></div>
           <p class="agent-boundary-note">The agent runs entirely in TypeScript, using the common SRC interpreter from V7. Pause preserves the pending action sequence. The complete V6 migration is in progress; verified paths currently include ordered-support transfers and repairs of regular visual fields.</p>
-        </section>
+        </details>
 
         <p id="game-feedback" class="sr-only" aria-live="polite"></p>
       </article>
@@ -223,6 +224,9 @@ let renderedPalette = '';
 let colors: number[][] = [];
 let agentState: V6AgentSnapshot | null = null;
 let knowledgePanel: AgentKnowledgePanel | null = null;
+const UNRENDERED_PROPOSAL = Symbol('unrendered proposal');
+let renderedProposal: unknown = UNRENDERED_PROPOSAL;
+let renderedTrace: readonly unknown[] | undefined;
 const agent = new BrowserV6Agent({
   getObservation: () => observation,
   canDispatch: () => ready() && mode === 'agent',
@@ -249,7 +253,21 @@ const agent = new BrowserV6Agent({
   },
   onState: state => { agentState = state; knowledgePanel?.update(state); updateInterface(); },
 });
-knowledgePanel = new AgentKnowledgePanel(element('#agent-knowledge'), agent);
+element<HTMLDetailsElement>('#agent-inspection').addEventListener('toggle', () => {
+  if (element<HTMLDetailsElement>('#agent-inspection').open) {
+    knowledgePanel ??= new AgentKnowledgePanel(element('#agent-knowledge'), agent);
+    knowledgePanel.update(agentState);
+    updateAgentInterface();
+  } else {
+    knowledgePanel?.release();
+    renderedProposal = UNRENDERED_PROPOSAL; renderedTrace = undefined;
+    element('#agent-plan').replaceChildren(); element('#agent-trace').replaceChildren();
+  }
+});
+element<HTMLDetailsElement>('#agent-trace-details').addEventListener('toggle', () => {
+  if (element<HTMLDetailsElement>('#agent-trace-details').open) updateAgentInterface();
+  else { renderedTrace = undefined; element('#agent-trace').replaceChildren(); }
+});
 
 function updateAgentInterface(): void {
   const state = agentState;
@@ -276,9 +294,14 @@ function updateAgentInterface(): void {
   element('#agent-level-count').textContent = String(state?.sessionId ? state.levelsCompleted : 0);
   element('#agent-prefix-count').textContent = String(state?.cycles ?? 0);
   element('#agent-decision').textContent = state?.lastDecision ?? 'The transferred reasoning programs will select the next action sequence.';
+  // Inspection is opt-in. Closed panels neither stringify retained evidence nor
+  // rebuild the action/trace DOM as the solver advances.
+  if (mode !== 'agent' || !element<HTMLDetailsElement>('#agent-inspection').open) return;
   element('#agent-cycle-summary').textContent = state?.sessionId
     ? `${state.actionCount} actions · ${state.levelsCompleted} completed levels · ${state.cycles ?? 0} completed plans · ${state.activeSeconds.toFixed(1)} s active solving`
     : 'The engine will read the current visible frame when you start.';
+  if (renderedProposal !== state?.proposal) {
+  renderedProposal = state?.proposal;
   const record = (value: unknown): Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {};
   const proposal = record(state?.proposal);
   const question = record(proposal.question);
@@ -294,8 +317,11 @@ function updateAgentInterface(): void {
       return `<li><code>${escapeHtml(label)}</code><span>${expected === null || expected === undefined ? 'Effect to observe' : escapeHtml(JSON.stringify(expected))}</span></li>`;
     }).join('')}</ol><p class="agent-plan-note">Selected by V6 from the current public observations. Each action is checked against its retained conditions before execution.</p>`
     : '<p>No action sequence selected yet.</p>';
+  }
   const trace = state?.trace ?? [];
   element('#agent-trace-count').textContent = trace.length ? `(${trace.length} events)` : '';
+  if (!element<HTMLDetailsElement>('#agent-trace-details').open || renderedTrace === trace) return;
+  renderedTrace = trace;
   element('#agent-trace').innerHTML = trace.length
     ? `${trace.length > 64 ? '<p>Showing the last 64 retained execution events.</p>' : ''}<ol>${trace.slice(-64).map(event => `<li><pre>${escapeHtml(JSON.stringify(event, null, 2))}</pre></li>`).join('')}</ol>`
     : '<p>No reasoning cycle yet.</p>';
@@ -355,10 +381,11 @@ function updateInterface(): void {
   levelSelect.disabled = !enabled || levelCount < 2;
   if (levelCount && observation) levelSelect.value = String(observation.level);
   const hasNextLevel = Boolean(observation && observation.level < observation.levelCount);
-  element('#win-overlay').hidden = !enabled || !complete;
-  element('#win-title').textContent = hasNextLevel ? 'Level complete' : 'Complete';
+  const victory = complete && !hasNextLevel;
+  element('#win-overlay').hidden = !ready() || !complete || (mode === 'agent' && !victory);
+  element('#win-title').textContent = victory ? 'VICTORY' : 'Level complete';
   element('#win-continue-label').textContent = hasNextLevel ? 'Next level' : 'Restart from level 1';
-  element<HTMLButtonElement>('#win-continue').disabled = !enabled;
+  element<HTMLButtonElement>('#win-continue').disabled = !ready() || Boolean(agentState?.busy);
   element('#runtime-overlay').hidden = !loading && !failed;
   element('#runtime-spinner').hidden = !loading;
   element<HTMLButtonElement>('#retry-button').hidden = !failed;
@@ -395,7 +422,7 @@ async function present(next: GameObservation, selectedGeneration: number): Promi
   busy = false;
   agent.refresh();
   updateInterface();
-  if (next.state === 'WIN' || next.state === 'LEVEL_COMPLETE') element('#game-feedback').textContent = `Level ${next.level} complete.`;
+  if (next.state === 'WIN' || next.state === 'LEVEL_COMPLETE') element('#game-feedback').textContent = next.level >= next.levelCount ? 'VICTORY' : `Level ${next.level} complete.`;
   else if (next.state === 'GAME_OVER' || next.state === 'GAMEOVER') element('#game-feedback').textContent = 'Game over. Undo or reset to continue.';
 }
 
@@ -457,6 +484,7 @@ function setMode(next: 'manual' | 'agent', focusTab = false): void {
   element('#agent-panel').hidden = manual;
   element('.player').classList.toggle('is-agent-mode', !manual);
   element('#agent-inspection').hidden = manual;
+  if (manual) element<HTMLDetailsElement>('#agent-inspection').open = false;
   agent.refresh();
   updateInterface();
   if (focusTab) (manual ? manualTab : agentTab).focus();
@@ -569,7 +597,8 @@ element<HTMLSelectElement>('#level-select').addEventListener('change', event => 
   void run(() => runtime.selectLevel(level), `Level ${level} selected.`);
 });
 element('#win-continue').addEventListener('click', () => {
-  if (!observation) return;
+  if (!observation || !ready() || agentState?.busy) return;
+  if (mode === 'agent') setMode('manual');
   if (observation.level < observation.levelCount) {
     const level = observation.level + 1;
     void run(() => runtime.selectLevel(level), `Level ${level} selected.`);

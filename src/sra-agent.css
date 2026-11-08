@@ -35,6 +35,9 @@
 .agent-trace ol{padding-left:26px;margin:0}
 .agent-trace pre{white-space:pre-wrap;overflow-wrap:anywhere;font:12px/1.6 var(--mono);padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:4px}
 .agent-inspection{padding:24px 28px;border-top:1px solid var(--line);background:var(--surface-muted)}
+.agent-inspection>.agent-inspection-toggle{font-size:16px;font-weight:500;cursor:pointer;color:var(--accent-hover)}
+.agent-inspection-toggle span{display:block;font-size:13px;font-weight:400;color:var(--subtle);line-height:1.6;margin:6px 0 0 19px}
+.agent-inspection[open]>.agent-inspection-toggle{margin-bottom:24px}
 .agent-inspection-header{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .agent-inspection .eyebrow{color:var(--accent-hover);font-size:11px;margin:0 0 8px}
 .agent-inspection h3{font-size:22px;font-weight:500;letter-spacing:-.5px;margin:0}

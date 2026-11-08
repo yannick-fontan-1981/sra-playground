@@ -66,6 +66,9 @@ test('the live common caller acquires a real released prefix once and matches ev
     const transition = read(`reasoning:transition:${revision}`);
     assert.ok(transition.caller_acquisition);
     assert.equal(transition.caller_acquisition.selected_result.events.length, 1);
+    const sourceTransition = oracle.snapshots.find((row: any) => row.stage === 'before_assessment' && row.revision === revision);
+    assert.deepEqual(transition.caller_acquisition.selected_result, fromOracle(sourceTransition.result),
+      'The original SupportNavigation wrapper and its ordered-support event are acquired exactly once');
     assert.ok(transition.frontier_acquisition);
     assert.ok(transition.assessment);
     assert.equal(transition.before, `run:epoch:1:revision:${revision}:frame:${fromOracle(oracle.snapshots.find((row: any) => row.stage === 'before_assessment' && row.revision === revision).observation).frame_hash}`);

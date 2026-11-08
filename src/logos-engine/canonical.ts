@@ -1,4 +1,5 @@
 import type { JsonObject, JsonValue } from './ir.ts';
+import { BoundedWeakCache } from './bounded-weak-cache.ts';
 
 /**
  * Portable V7 scalar contract for this first browser port.
@@ -16,7 +17,11 @@ export const PORTABLE_SCALAR_DOMAIN = 'strings, booleans and safe integers (no n
 const immutableObjects = new WeakSet<object>();
 // Only deeply immutable, fully validated trees enter this cache. Size and
 // height are retained so reuse cannot evade the original structural limits.
-const canonicalObjects = new WeakMap<object, { text: string; nodes: number; height: number }>();
+// Historical V7 nodes deliberately remain alive. Weak keys alone therefore do
+// not bound the redundant text of every historical descendant/ancestor. This
+// cache holds at most 16 MiB of UTF-16 text plus an allowance for each entry;
+// eviction only removes a recomputable encoding, never a knowledge revision.
+const canonicalObjects = new BoundedWeakCache<{ text: string; nodes: number; height: number }>(16 * 1024 * 1024, 4096);
 const MAX_DEPTH = 128;
 const MAX_NODES = 1_000_000;
 
@@ -178,7 +183,7 @@ export function canonical(value: unknown): string {
     }
     ancestors.delete(item);
     lastHeight = height; lastImmutable = deeplyImmutable;
-    if (deeplyImmutable) canonicalObjects.set(item, { text: encoded, nodes: nodes - initialNodes + 1, height });
+    if (deeplyImmutable) canonicalObjects.set(item, { text: encoded, nodes: nodes - initialNodes + 1, height }, 2 * encoded.length + 128);
     return encoded;
   }
   return encode(value, 0);

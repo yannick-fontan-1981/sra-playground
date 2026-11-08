@@ -84,6 +84,9 @@ export interface NativeRecordResult extends NativeRecord {
 export interface NativeExecution {
   readonly signal?: AbortSignal;
   readonly yieldControl: () => Promise<void>;
+  /** Same active-level budget as the runtime, expressed on the supplied clock. */
+  readonly deadlineMs?: number;
+  readonly now?: () => number;
 }
 
 export interface NativeProgramHandle {

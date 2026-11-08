@@ -6,9 +6,43 @@ import { hydrateNativeState, splitNativeState } from '../src/logos-engine/v6-nat
 import { GoalAccessAdapter } from '../src/logos-engine/v6-goal-access.ts';
 import { ProspectiveContactAdapter } from '../src/logos-engine/v6-prospective-contact.ts';
 import { Snapshot } from '../src/logos-engine/v6-composition-memory.ts';
+import { retainNativeJson } from '../src/logos-engine/v6-native-owned.ts';
 
 const CAUSE = { workflow: 'test.native.persistence', step: 'write', statement: 'retain' };
 const raster = () => Array.from({ length: 32 }, (_, y) => Array.from({ length: 32 }, (_, x) => (x + y) % 16));
+
+test('unchanged encoded subtrees stay shared across real historical commits with the same canonical chains', async () => {
+  const branch = retainNativeJson(Array.from({ length: 60 }, (_, i) => ({ occurrence: i, evidence: ['frame:a', 'frame:b'], condition: { x: i, y: 3 } })));
+  const store = new NativeKnowledgeStore('delta-owned-ast-test', 'delta-owned-ast-test');
+  const write = { id: 'state:shared', kind: 'component_state' as const, component: 'shared', value: { branch, revision: 1 } };
+  await store.commit([write], CAUSE);
+  const before = store.memory, first = before.nodes[write.id]!.value as any;
+  await store.commit([{ ...write, value: { branch, revision: 2 } }], CAUSE);
+  const second = store.node(write.id).value as any;
+  assert.equal(first.root.members.branch, second.root.members.branch, 'the V7 boundary preserves the immutable AST identity');
+  assert.notEqual(first, second);
+  // Captured from the same two writes before owning AST nodes at construction.
+  assert.equal(before.chain, 'b41a96157b298fb37362c27044e29fa66440502865b498567ce8a0221a8915e2');
+  assert.equal(store.graphChain, '86ad3dce38d20dd7f0812d97701191bfc8ab1ee953402a642688338fc9f21671');
+  assert.equal(store.revision, 2); assert.equal(store.nodeCount, 1);
+  assert.equal(store.memory.deltas[0], before.deltas[0]);
+  assert.deepEqual(hydrateNativeState(first, () => undefined), { branch, revision: 1 });
+  assert.deepEqual(store.stateValue(write.id), { branch, revision: 2 });
+  assert.throws(() => { first.root.members.branch.items[0].members.occurrence = 99; }, TypeError);
+});
+
+test('owned encoded children do not bypass complete canonical nesting validation or publish partial writes', async () => {
+  const store = new NativeKnowledgeStore('bounded-ast-test', 'bounded-ast-test');
+  await store.commit([{ id: 'safe', kind: 'component_state', component: 'bounded', value: { retained: true } }], CAUSE);
+  const before = store.memory;
+  let deep: unknown = 1;
+  for (let i = 0; i < 70; i++) deep = Object.freeze([deep]);
+  // Raw depth is valid, but the explicit typed AST is too deeply nested for
+  // one V7 payload; even a warmed encoder must not bypass the final boundary.
+  splitNativeState(deep, 'too-deep');
+  await assert.rejects(store.commit([{ id: 'invalid', kind: 'component_state', component: 'bounded', value: deep }], CAUSE), /size\/nesting/);
+  assert.equal(store.memory, before); assert.deepEqual(store.stateValue('safe'), { retained: true });
+});
 
 test('immutable hydration observes root revisions and ignores a rolled-back write', async () => {
   const store = new NativeKnowledgeStore('revision-test', 'revision-test');

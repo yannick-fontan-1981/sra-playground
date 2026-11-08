@@ -1,0 +1,41 @@
+{
+  "qualification": "Unmodified initial V32 evidence, before the bounded memory-cache correction. Relocation preserves bytes; final-source revalidations use the original report locations.",
+  "files": [
+    {
+      "oldPath": "docs/migration/native-campaigns-v32/hano.json",
+      "newPath": "docs/migration/native-campaigns-v32/before-memory-fix/hano.json",
+      "sha256": "3b49b716dfe819ab3745fd30c851c03aa9e1c4aa8fddd1d756fc79e5814ea68e",
+      "bytes": 211594
+    },
+    {
+      "oldPath": "docs/migration/native-campaigns-v32/onde.json",
+      "newPath": "docs/migration/native-campaigns-v32/before-memory-fix/onde.json",
+      "sha256": "1fc1385991463c9109b0eef1d96bf54124e8397697e34f9d76c1229120328183",
+      "bytes": 143932
+    },
+    {
+      "oldPath": "docs/migration/native-campaigns-v32/skbn.json",
+      "newPath": "docs/migration/native-campaigns-v32/before-memory-fix/skbn.json",
+      "sha256": "b4396bac5643cafa0f8b734f193691696bceffcdee142bce592e4b86d35c9cd6",
+      "bytes": 144990
+    },
+    {
+      "oldPath": "docs/migration/native-campaigns-v32/memo.json",
+      "newPath": "docs/migration/native-campaigns-v32/before-memory-fix/memo.json",
+      "sha256": "c3aa95f95341f77870d6b16ed7b2873805b1be99516be4db91157433aa59ca74",
+      "bytes": 45596
+    },
+    {
+      "oldPath": "docs/migration/native-campaigns-v32/memo-original-comparison.json",
+      "newPath": "docs/migration/native-campaigns-v32/before-memory-fix/memo-original-comparison.json",
+      "sha256": "9e9828f90a3b3bf7c4c6f9a7659e19c11c8edba75837fb3abf31c147b4ae66c1",
+      "bytes": 22968
+    },
+    {
+      "oldPath": "docs/migration/native-campaigns-v32/hano-browser-victory.png",
+      "newPath": "docs/migration/native-campaigns-v32/before-memory-fix/hano-browser-victory.png",
+      "sha256": "04c03c6490e6dae954ae0451e3b32575941a11efb71754ae5ed9dcdb98d74f85",
+      "bytes": 62790
+    }
+  ]
+}

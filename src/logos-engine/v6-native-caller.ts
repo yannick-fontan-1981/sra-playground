@@ -77,7 +77,7 @@ export class NativeCallerCoordinator {
     this.memory.put(EPISODE, key, value, observation.observation_ref, observation.revision);
   }
   registry(): R[] {
-    try { return this.memory.get(EPISODE, 'empirical_registry').value; }
+    try { return this.memory.nativeGet(EPISODE, 'empirical_registry').value; }
     catch (error) { if (error instanceof RangeError) return []; throw error; }
   }
   graphInputs(observation: NativeObservation): NativeCommand[] {

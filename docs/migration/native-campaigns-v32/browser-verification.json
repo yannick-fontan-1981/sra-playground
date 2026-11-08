@@ -1,0 +1,27 @@
+{
+  "schema": "logos-engine.v32.browser-verification.v1",
+  "environment": "Managed local Site preview, cloud Chrome, actual UI and game worker",
+  "observedUrl": "http://127.0.0.1:4173/?game=ONDE&level=6",
+  "nativeSourceDigest": "b72de816a5c707ef0b41515a22fcd52f1ffd797ab006d9f5daa39f15ae2e6710",
+  "game": "ONDE",
+  "mode": "SRA Agent Native TS",
+  "actions": 48,
+  "levelsSolved": 6,
+  "completedPlans": 9,
+  "gameReports": "WIN",
+  "victoryHeading": "VICTORY",
+  "inspectionInitiallyCollapsed": true,
+  "inspectionOpenedDuringCampaign": false,
+  "pauseDisabledAfterCompletion": true,
+  "restartButtonEnabledAfterCompletion": true,
+  "controls": "Run to next level six times, one continuous session",
+  "screenshot": {
+    "path": "onde-browser-victory.png",
+    "sha256": "3fe49f86422276c6cc79acdbd767f19a251dae8c87de629eff983def1c5ff8be"
+  },
+  "uiFiles": {
+    "src/main.ts": "22e1c4c4cadf54feeb7f61296678c85621aee1d4dc5f117ce6b1e210b4415620",
+    "src/agent-knowledge-panel.ts": "a98c15442a6f19be49de46b10d9f1b4204bc5362742529100cea38d9a2a8fc13",
+    "src/sra-agent.css": "f9dd2af886c257cc2dde52173d87e723c94b956bb321867263ad7ee32b3cdf04"
+  }
+}

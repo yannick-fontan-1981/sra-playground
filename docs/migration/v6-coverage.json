@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 49,
-    "partiallyTransferredModules": 13,
+    "componentVerifiedModules": 76,
+    "partiallyTransferredModules": 46,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1307,
+    "pendingModules": 1247,
     "strategyFamilies": 16
   },
   "families": [
@@ -517,9 +517,15 @@
           "endLine": 17
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-support-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-navigation-reference.py",
+        "tests/fixtures/v6-support-navigation-reference.json.gz",
+        "tests/v6-support-navigation.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/adapter_mode_contracts_d.py",
@@ -1631,9 +1637,15 @@
           "endLine": 79
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-support-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-navigation-reference.py",
+        "tests/fixtures/v6-support-navigation-reference.json.gz",
+        "tests/v6-support-navigation.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/arc_center_frame_measurement_d.py",
@@ -6386,9 +6398,15 @@
           "endLine": 281
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-periodic-cell-grids.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-configured-arrivals-reference.py",
+        "tests/fixtures/v6-configured-arrivals-reference.json.gz",
+        "tests/v6-configured-arrivals.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/cell_supply.py",
@@ -19789,9 +19807,15 @@
           "endLine": 236
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-fixed-program-calculation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-procedures-reference.py",
+        "tests/fixtures/v6-support-procedures-reference.json.gz",
+        "tests/v6-support-procedures.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/flow_goal_audit_d.py",
@@ -20156,9 +20180,15 @@
           "endLine": 1209
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-periodic-cell-grids.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-configured-arrivals-reference.py",
+        "tests/fixtures/v6-configured-arrivals-reference.json.gz",
+        "tests/v6-configured-arrivals.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/framed_masks.py",
@@ -21864,9 +21894,15 @@
           "endLine": 84
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-subset-diagnosis.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-procedures-reference.py",
+        "tests/fixtures/v6-support-procedures-reference.json.gz",
+        "tests/v6-support-procedures.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/hollow_marker_occlusion.py",
@@ -29542,9 +29578,19 @@
           "endLine": 106
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-arrival-mechanics.ts",
+        "src/logos-engine/v6-ray-capture-domain.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-configured-arrivals-reference.py",
+        "tests/fixtures/v6-configured-arrivals-reference.json.gz",
+        "tests/v6-configured-arrivals.test.ts",
+        "scripts/export-v6-support-extensions-reference.py",
+        "tests/fixtures/v6-support-extensions-reference.json.gz",
+        "tests/v6-support-extensions.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/mechanical_family_registry_a.py",
@@ -30291,9 +30337,15 @@
           "endLine": 85
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-metric-stack-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-coupling-metric-reference.py",
+        "tests/fixtures/v6-coupling-metric-reference.json",
+        "tests/v6-coupling-metric.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/mechanical_request_shape_b.py",
@@ -31694,9 +31746,15 @@
           "endLine": 255
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-metric-stack-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-coupling-metric-reference.py",
+        "tests/fixtures/v6-coupling-metric-reference.json",
+        "tests/v6-coupling-metric.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/metric_stack_image.py",
@@ -31897,9 +31955,15 @@
           "endLine": 928
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-metric-stack-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-coupling-metric-reference.py",
+        "tests/fixtures/v6-coupling-metric-reference.json",
+        "tests/v6-coupling-metric.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/metric_step_c.py",
@@ -33284,9 +33348,15 @@
           "endLine": 219
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-support-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-navigation-reference.py",
+        "tests/fixtures/v6-support-navigation-reference.json.gz",
+        "tests/v6-support-navigation.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/neighborhood_completion_a.py",
@@ -34836,9 +34906,15 @@
           "endLine": 125
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-cavity-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-sliding-cavity-reference.py",
+        "tests/fixtures/v6-sliding-cavity-reference.json.gz",
+        "tests/v6-sliding-cavity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/open_cavity_transfer.py",
@@ -34871,9 +34947,15 @@
           "endLine": 110
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-cavity-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-sliding-cavity-reference.py",
+        "tests/fixtures/v6-sliding-cavity-reference.json.gz",
+        "tests/v6-sliding-cavity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/operational_goal_intent.py",
@@ -36870,9 +36952,15 @@
           "endLine": 967
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-oriented-handoff-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-coupling-metric-reference.py",
+        "tests/fixtures/v6-coupling-metric-reference.json",
+        "tests/v6-coupling-metric.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/oriented_contour_network.py",
@@ -38009,9 +38097,15 @@
           "endLine": 82
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-cavity-kinematics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-sliding-cavity-reference.py",
+        "tests/fixtures/v6-sliding-cavity-reference.json.gz",
+        "tests/v6-sliding-cavity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/peer_constraint_geometry.py",
@@ -38180,9 +38274,15 @@
           "endLine": 73
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-periodic-sums.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-procedures-reference.py",
+        "tests/fixtures/v6-support-procedures-reference.json.gz",
+        "tests/v6-support-procedures.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/perishable_compartment_d.py",
@@ -39612,9 +39712,15 @@
           "endLine": 56
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-arrival-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-configured-arrivals-reference.py",
+        "tests/fixtures/v6-configured-arrivals-reference.json.gz",
+        "tests/v6-configured-arrivals.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/port_rotation_observation_d.py",
@@ -40286,9 +40392,15 @@
           "endLine": 60
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-arrival-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-configured-arrivals-reference.py",
+        "tests/fixtures/v6-configured-arrivals-reference.json.gz",
+        "tests/v6-configured-arrivals.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/preview_piece_packing.py",
@@ -40922,9 +41034,16 @@
           "endLine": 21
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-contextual-compartments.ts",
+        "src/logos-engine/v6-ray-capture-domain.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-extensions-reference.py",
+        "tests/fixtures/v6-support-extensions-reference.json.gz",
+        "tests/v6-support-extensions.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/program_joint_fit_contracts_d.py",
@@ -42554,9 +42673,16 @@
           "endLine": 85
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-contextual-compartments.ts",
+        "src/logos-engine/v6-ray-capture-domain.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-extensions-reference.py",
+        "tests/fixtures/v6-support-extensions-reference.json.gz",
+        "tests/v6-support-extensions.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/reaction_arrival_reservation_d.py",
@@ -44618,9 +44744,15 @@
           "endLine": 348
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-support-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-navigation-reference.py",
+        "tests/fixtures/v6-support-navigation-reference.json.gz",
+        "tests/v6-support-navigation.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/rectangular_band_correspondence.py",
@@ -45299,9 +45431,16 @@
           "endLine": 3271
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-reflection-audit.ts",
+        "src/logos-engine/v6-reflected-cover.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-procedures-reference.py",
+        "tests/fixtures/v6-support-procedures-reference.json.gz",
+        "tests/v6-support-procedures.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/region_configuration_factors_d.py",
@@ -51283,9 +51422,15 @@
           "endLine": 26
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-support-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-navigation-reference.py",
+        "tests/fixtures/v6-support-navigation-reference.json.gz",
+        "tests/v6-support-navigation.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/sprites.py",
@@ -52383,9 +52528,15 @@
           "endLine": 89
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-subset-diagnosis.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-procedures-reference.py",
+        "tests/fixtures/v6-support-procedures-reference.json.gz",
+        "tests/v6-support-procedures.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/support_constrained_transport.py",
@@ -52543,9 +52694,15 @@
           "endLine": 218
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-support-navigation-domain.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-navigation-reference.py",
+        "tests/fixtures/v6-support-navigation-reference.json.gz",
+        "tests/v6-support-navigation.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/support_solving_contracts_d.py",
@@ -54765,9 +54922,15 @@
           "endLine": 25
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-periodic-cell-grids.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-configured-arrivals-reference.py",
+        "tests/fixtures/v6-configured-arrivals-reference.json.gz",
+        "tests/v6-configured-arrivals.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/tiled_support.py",
@@ -55660,9 +55823,15 @@
           "endLine": 3097
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-transient-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-animated-contact-reference.py",
+        "tests/fixtures/v6-animated-contact-reference.json",
+        "tests/v6-animated-contact.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/translated_support_cells.py",
@@ -56738,9 +56907,15 @@
           "endLine": 14
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-support-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-navigation-reference.py",
+        "tests/fixtures/v6-support-navigation-reference.json.gz",
+        "tests/v6-support-navigation.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/view_supposition_c.py",
@@ -58808,9 +58983,15 @@
           "endLine": 619
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-cavity-kinematics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-sliding-cavity-reference.py",
+        "tests/fixtures/v6-sliding-cavity-reference.json.gz",
+        "tests/v6-sliding-cavity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/drm/__init__.py",
@@ -71934,9 +72115,17 @@
           "endLine": 120
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-animated-contact.ts",
+        "src/logos-engine/v6-transient-contact-memory.ts",
+        "src/logos-engine/v6-transient-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-animated-contact-reference.py",
+        "tests/fixtures/v6-animated-contact-reference.json",
+        "tests/v6-animated-contact.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/ar25_reflections.py",
@@ -72859,9 +73048,17 @@
           "endLine": 44
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-animated-contact.ts",
+        "src/logos-engine/v6-transient-contact-memory.ts",
+        "src/logos-engine/v6-transient-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-animated-contact-reference.py",
+        "tests/fixtures/v6-animated-contact-reference.json",
+        "tests/v6-animated-contact.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_animated_contact_base.py",
@@ -72924,9 +73121,17 @@
           "endLine": 10
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-animated-contact.ts",
+        "src/logos-engine/v6-transient-contact-memory.ts",
+        "src/logos-engine/v6-transient-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-animated-contact-reference.py",
+        "tests/fixtures/v6-animated-contact-reference.json",
+        "tests/v6-animated-contact.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_band_transfer.py",
@@ -73169,9 +73374,18 @@
           "endLine": 116
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-sliding-cavity.ts",
+        "src/logos-engine/v6-cavity-clock.ts",
+        "src/logos-engine/v6-cavity-measurements.ts",
+        "src/logos-engine/v6-cavity-kinematics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-sliding-cavity-reference.py",
+        "tests/fixtures/v6-sliding-cavity-reference.json.gz",
+        "tests/v6-sliding-cavity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_cell_placement.py",
@@ -73438,9 +73652,17 @@
           "endLine": 246
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-configured-arrivals.ts",
+        "src/logos-engine/v6-periodic-cell-grids.ts",
+        "src/logos-engine/v6-arrival-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-configured-arrivals-reference.py",
+        "tests/fixtures/v6-configured-arrivals-reference.json.gz",
+        "tests/v6-configured-arrivals.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_constellation_cover.py",
@@ -73820,9 +74042,19 @@
           "endLine": 77
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-joint-transport.ts",
+        "src/logos-engine/v6-contextual-compartments.ts",
+        "src/logos-engine/v6-invited-reduction.ts",
+        "src/logos-engine/v6-ray-capture-domain.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-extensions-reference.py",
+        "tests/fixtures/v6-support-extensions-reference.json.gz",
+        "tests/v6-support-extensions.test.ts",
+        "tests/v6-support-caller-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_control_dependencies.py",
@@ -74069,9 +74301,18 @@
           "endLine": 257
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-occurrence-program-observer.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-occurrence-reference.py",
+        "tests/fixtures/v6-occurrence-reference.json",
+        "tests/v6-occurrence-recall.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_evidence_store.py",
@@ -74461,9 +74702,20 @@
           "endLine": 212
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-fixed-origin.ts",
+        "src/logos-engine/v6-fixed-program-calculation.ts",
+        "src/logos-engine/v6-periodic-sums.ts",
+        "src/logos-engine/v6-subset-diagnosis.ts",
+        "src/logos-engine/v6-reflected-cover.ts",
+        "src/logos-engine/v6-reflection-audit.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-procedures-reference.py",
+        "tests/fixtures/v6-support-procedures-reference.json.gz",
+        "tests/v6-support-procedures.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_framed_window.py",
@@ -74882,9 +75134,19 @@
           "endLine": 131
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-joint-transport.ts",
+        "src/logos-engine/v6-contextual-compartments.ts",
+        "src/logos-engine/v6-invited-reduction.ts",
+        "src/logos-engine/v6-ray-capture-domain.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-extensions-reference.py",
+        "tests/fixtures/v6-support-extensions-reference.json.gz",
+        "tests/v6-support-extensions.test.ts",
+        "tests/v6-support-caller-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_joint_transport.py",
@@ -74971,9 +75233,19 @@
           "endLine": 70
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-joint-transport.ts",
+        "src/logos-engine/v6-contextual-compartments.ts",
+        "src/logos-engine/v6-invited-reduction.ts",
+        "src/logos-engine/v6-ray-capture-domain.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-extensions-reference.py",
+        "tests/fixtures/v6-support-extensions-reference.json.gz",
+        "tests/v6-support-extensions.test.ts",
+        "tests/v6-support-caller-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_labeled_sequence.py",
@@ -75553,9 +75825,18 @@
           "endLine": 220
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-oriented-coupling.ts",
+        "src/logos-engine/v6-oriented-handoff-mechanics.ts",
+        "src/logos-engine/v6-metric-composition.ts",
+        "src/logos-engine/v6-metric-stack-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-coupling-metric-reference.py",
+        "tests/fixtures/v6-coupling-metric-reference.json",
+        "tests/v6-coupling-metric.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_motif_access.py",
@@ -75962,9 +76243,19 @@
           "endLine": 27
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-occurrence-scene.ts",
+        "src/logos-engine/v6-occurrence-program-observer.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-occurrence-reference.py",
+        "tests/fixtures/v6-occurrence-reference.json",
+        "tests/v6-occurrence-recall.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_orbit_constraints.py",
@@ -76261,9 +76552,18 @@
           "endLine": 182
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-oriented-coupling.ts",
+        "src/logos-engine/v6-oriented-handoff-mechanics.ts",
+        "src/logos-engine/v6-metric-composition.ts",
+        "src/logos-engine/v6-metric-stack-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-coupling-metric-reference.py",
+        "tests/fixtures/v6-coupling-metric-reference.json",
+        "tests/v6-coupling-metric.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_periodic_sums.py",
@@ -76386,9 +76686,20 @@
           "endLine": 229
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-fixed-origin.ts",
+        "src/logos-engine/v6-fixed-program-calculation.ts",
+        "src/logos-engine/v6-periodic-sums.ts",
+        "src/logos-engine/v6-subset-diagnosis.ts",
+        "src/logos-engine/v6-reflected-cover.ts",
+        "src/logos-engine/v6-reflection-audit.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-procedures-reference.py",
+        "tests/fixtures/v6-support-procedures-reference.json.gz",
+        "tests/v6-support-procedures.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_phase_relations.py",
@@ -77046,9 +77357,18 @@
           "endLine": 44
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-occurrence-program-observer.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-occurrence-reference.py",
+        "tests/fixtures/v6-occurrence-reference.json",
+        "tests/v6-occurrence-recall.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_property_rewrites.py",
@@ -77485,9 +77805,20 @@
           "endLine": 37
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-fixed-origin.ts",
+        "src/logos-engine/v6-fixed-program-calculation.ts",
+        "src/logos-engine/v6-periodic-sums.ts",
+        "src/logos-engine/v6-subset-diagnosis.ts",
+        "src/logos-engine/v6-reflected-cover.ts",
+        "src/logos-engine/v6-reflection-audit.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-procedures-reference.py",
+        "tests/fixtures/v6-support-procedures-reference.json.gz",
+        "tests/v6-support-procedures.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_repeated_lines.py",
@@ -77622,9 +77953,18 @@
           "endLine": 196
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-occurrence-program-observer.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-occurrence-reference.py",
+        "tests/fixtures/v6-occurrence-reference.json",
+        "tests/v6-occurrence-recall.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_rooted_quota.py",
@@ -77776,9 +78116,18 @@
           "endLine": 130
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-sliding-cavity.ts",
+        "src/logos-engine/v6-cavity-clock.ts",
+        "src/logos-engine/v6-cavity-measurements.ts",
+        "src/logos-engine/v6-cavity-kinematics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-sliding-cavity-reference.py",
+        "tests/fixtures/v6-sliding-cavity-reference.json.gz",
+        "tests/v6-sliding-cavity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_slot_substitution.py",
@@ -78002,9 +78351,20 @@
           "endLine": 177
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-fixed-origin.ts",
+        "src/logos-engine/v6-fixed-program-calculation.ts",
+        "src/logos-engine/v6-periodic-sums.ts",
+        "src/logos-engine/v6-subset-diagnosis.ts",
+        "src/logos-engine/v6-reflected-cover.ts",
+        "src/logos-engine/v6-reflection-audit.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-procedures-reference.py",
+        "tests/fixtures/v6-support-procedures-reference.json.gz",
+        "tests/v6-support-procedures.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_support_navigation.py",
@@ -78139,9 +78499,18 @@
           "endLine": 576
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-support-navigation.ts",
+        "src/logos-engine/v6-support-measurements.ts",
+        "src/logos-engine/v6-support-navigation-domain.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-navigation-reference.py",
+        "tests/fixtures/v6-support-navigation-reference.json.gz",
+        "tests/v6-support-navigation.test.ts",
+        "tests/v6-caller-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_supported_lines.py",
@@ -78294,9 +78663,18 @@
           "endLine": 111
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-occurrence-program-observer.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-occurrence-reference.py",
+        "tests/fixtures/v6-occurrence-reference.json",
+        "tests/v6-occurrence-recall.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_surface_program.py",
@@ -78782,9 +79160,18 @@
           "endLine": 22
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-support-navigation.ts",
+        "src/logos-engine/v6-support-measurements.ts",
+        "src/logos-engine/v6-support-navigation-domain.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-navigation-reference.py",
+        "tests/fixtures/v6-support-navigation-reference.json.gz",
+        "tests/v6-support-navigation.test.ts",
+        "tests/v6-caller-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_word_interface.py",
@@ -80483,9 +80870,19 @@
           "endLine": 71
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-joint-transport.ts",
+        "src/logos-engine/v6-contextual-compartments.ts",
+        "src/logos-engine/v6-invited-reduction.ts",
+        "src/logos-engine/v6-ray-capture-domain.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-extensions-reference.py",
+        "tests/fixtures/v6-support-extensions-reference.json.gz",
+        "tests/v6-support-extensions.test.ts",
+        "tests/v6-support-caller-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/labeled_sequence_access.py",
@@ -80872,9 +81269,18 @@
           "endLine": 143
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-occurrence-program-observer.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-occurrence-reference.py",
+        "tests/fixtures/v6-occurrence-reference.json",
+        "tests/v6-occurrence-recall.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/memory.py",
@@ -81252,9 +81658,18 @@
           "endLine": 115
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-occurrence-program-observer.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-occurrence-reference.py",
+        "tests/fixtures/v6-occurrence-reference.json",
+        "tests/v6-occurrence-recall.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/occluded_catalogue_access.py",
@@ -81434,9 +81849,19 @@
           "endLine": 68
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-occurrence-scene.ts",
+        "src/logos-engine/v6-occurrence-program-observer.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-occurrence-reference.py",
+        "tests/fixtures/v6-occurrence-reference.json",
+        "tests/v6-occurrence-recall.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/occurrence_scene.py",
@@ -81463,9 +81888,19 @@
           "endLine": 80
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-occurrence-scene.ts",
+        "src/logos-engine/v6-occurrence-program-observer.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-occurrence-reference.py",
+        "tests/fixtures/v6-occurrence-reference.json",
+        "tests/v6-occurrence-recall.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/operations.py",
@@ -82229,9 +82664,18 @@
           "endLine": 187
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-occurrence-program-observer.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-occurrence-reference.py",
+        "tests/fixtures/v6-occurrence-reference.json",
+        "tests/v6-occurrence-recall.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/program_compositions.py",
@@ -82399,9 +82843,18 @@
           "endLine": 125
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-occurrence-program-observer.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-occurrence-reference.py",
+        "tests/fixtures/v6-occurrence-reference.json",
+        "tests/v6-occurrence-recall.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/program_respondent_observations.py",
@@ -84033,9 +84486,18 @@
           "endLine": 44
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-support-navigation.ts",
+        "src/logos-engine/v6-support-measurements.ts",
+        "src/logos-engine/v6-support-navigation-domain.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-support-navigation-reference.py",
+        "tests/fixtures/v6-support-navigation-reference.json.gz",
+        "tests/v6-support-navigation.test.ts",
+        "tests/v6-caller-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/support_continuation.py",
@@ -84631,9 +85093,17 @@
           "endLine": 65
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-animated-contact.ts",
+        "src/logos-engine/v6-transient-contact-memory.ts",
+        "src/logos-engine/v6-transient-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-animated-contact-reference.py",
+        "tests/fixtures/v6-animated-contact-reference.json",
+        "tests/v6-animated-contact.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/typed_carrier_access.py",
@@ -95771,6 +96241,8 @@
     "The legacy neural benchmark launcher is separately identified by the V6 README. Its unpublished upstream harness and local model weights are not present in this reference. No equivalence with that absent artifact is claimed.",
     "A source copied into the reference directory is not a transferred capability. A TypeScript file is not verified until differential evidence is recorded.",
     "Standalone family parity does not establish parity of StrategyRouter, WHY/ACT, composition reconciliation or the complete campaign.",
-    "component_verified records differential evidence for a bounded component; it never passes the complete-port gate or implies integrated campaign parity."
+    "component_verified records differential evidence for a bounded component; it never passes the complete-port gate or implies integrated campaign parity.",
+    "The separately reported declared-entry progress is provider connection coverage over the four ordered DRM subquestion lists. It is not a game score, a code-volume percentage, or certification of complete V6 parity.",
+    "AnimatedContact exports the exact id/all_conditions of the two interaction.drm rules it consumes (ballistic contact solution and ballistic curve disclosure); this is not a transfer of every rule in that inherited DRM document."
   ]
 }

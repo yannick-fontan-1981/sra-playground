@@ -1,0 +1,542 @@
+{
+  "schema": "logos-engine.v6.declared-entry-coverage.v1",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.5.0",
+  "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
+  "connected": 27,
+  "declared": 76,
+  "percent": 35.5,
+  "groups": [
+    {
+      "id": "goal_access",
+      "declared": 12,
+      "connected": 6,
+      "entries": [
+        {
+          "question": "observed_composition_services",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "coupled_support_composition",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "alternating_graph_composition",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "scored_relation_access",
+          "family": "goal_access",
+          "status": "connected"
+        },
+        {
+          "question": "observed_support_access",
+          "family": "support_navigation",
+          "status": "connected"
+        },
+        {
+          "question": "subset_diagnosis",
+          "family": "subset_diagnosis",
+          "status": "connected"
+        },
+        {
+          "question": "preview_packing",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "selected_rigid",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "invited_reduction",
+          "family": "invited_reduction",
+          "status": "connected"
+        },
+        {
+          "question": "joint_transport",
+          "family": "joint_transport",
+          "status": "connected"
+        },
+        {
+          "question": "observed_feedback_sequence",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "animated_contact",
+          "family": "animated_contact",
+          "status": "connected"
+        }
+      ]
+    },
+    {
+      "id": "window_constraints",
+      "declared": 21,
+      "connected": 4,
+      "entries": [
+        {
+          "question": "occluded_catalogue_composition",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "queued_field_composition",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "product_panel_composition",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "labeled_sequence_composition",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "linked_packet_composition",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "trace_field_composition",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "cell_patch_composition",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "observed_occurrence_recall",
+          "family": "public_occurrence_recall",
+          "status": "connected"
+        },
+        {
+          "question": "observed_program_composition",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "typed_material_flow",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "radial_port_composition",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "observed_framed_analogy",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "field_service_composition",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "rooted_quota_composition",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "framed_window_composition",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "coupled_prefix_reference",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "relative_arrangement",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "multiscale_constraints",
+          "family": "window_constraints",
+          "status": "connected"
+        },
+        {
+          "question": "recurrent_series",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "periodic_sums",
+          "family": "periodic_sums",
+          "status": "connected"
+        },
+        {
+          "question": "reflected_cover",
+          "family": "reflected_cover",
+          "status": "connected"
+        }
+      ]
+    },
+    {
+      "id": "surface",
+      "declared": 10,
+      "connected": 8,
+      "entries": [
+        {
+          "question": "facet_example",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "surface_rewrite",
+          "family": "surface_program",
+          "status": "connected"
+        },
+        {
+          "question": "learned_code_program",
+          "family": "code_program",
+          "status": "connected"
+        },
+        {
+          "question": "slot_substitution",
+          "family": "slot_substitution",
+          "status": "connected"
+        },
+        {
+          "question": "typed_word_interface",
+          "family": "word_interface",
+          "status": "connected"
+        },
+        {
+          "question": "rigid_port_assembly",
+          "family": "port_assembly",
+          "status": "connected"
+        },
+        {
+          "question": "controlled_constellation_cover",
+          "family": "constellation_cover",
+          "status": "connected"
+        },
+        {
+          "question": "linked_temporal_preparation",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "configured_arrivals",
+          "family": "configured_arrivals",
+          "status": "connected"
+        },
+        {
+          "question": "fixed_origin",
+          "family": "fixed_origin",
+          "status": "connected"
+        }
+      ]
+    },
+    {
+      "id": "factored_material_return",
+      "declared": 33,
+      "connected": 9,
+      "entries": [
+        {
+          "question": "reactive_contact_continuation",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "observed_addressed_material",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "observed_rigid_cargo",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "observed_ranked_workshop",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "observed_symbol_transaction",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "observed_object_binding",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "observed_inventory_composition",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "factored_material_return",
+          "family": "factored_material_return",
+          "status": "connected"
+        },
+        {
+          "question": "motif_conditioned_access",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "parallel_branch_routing",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "conserved_band_transfer",
+          "family": "band_transfer",
+          "status": "connected"
+        },
+        {
+          "question": "supported_ternary_reduction",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "sliding_cavity",
+          "family": "sliding_cavity",
+          "status": "connected"
+        },
+        {
+          "question": "conditional_transit",
+          "family": "conditional_transit",
+          "status": "connected"
+        },
+        {
+          "question": "observed_outline_service",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "ordered_support_transfer",
+          "family": "ordered_support_transfer",
+          "status": "connected"
+        },
+        {
+          "question": "observed_framed_transfer",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "topological_recolor",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "axial_question",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "window_question",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "ordered_recruitment",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "reactive_contact",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "ordered_reaction",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "chart_navigation",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "region_intervention",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "temporal_selection",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "invited_endpoints",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "joint_channels",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "shared_settlement",
+          "family": null,
+          "status": "pending"
+        },
+        {
+          "question": "oriented_coupling",
+          "family": "oriented_coupling",
+          "status": "connected"
+        },
+        {
+          "question": "metric_composition",
+          "family": "metric_composition",
+          "status": "connected"
+        },
+        {
+          "question": "contextual_compartments",
+          "family": "contextual_compartments",
+          "status": "connected"
+        },
+        {
+          "question": "invited_reduction",
+          "family": "invited_reduction",
+          "status": "connected"
+        }
+      ]
+    }
+  ],
+  "qualification": "Each declared entry has equal weight. This counts actual provider registrations, not code volume, game score, expected success, or complete V6 behavioral parity. The common coordinator and direct groups are outside this denominator. Their own differential tests and live campaigns remain separate evidence.",
+  "commonGroups": [
+    {
+      "id": "goal_access",
+      "families": [
+        "goal_access",
+        "support_navigation",
+        "subset_diagnosis",
+        "invited_reduction",
+        "joint_transport",
+        "animated_contact"
+      ]
+    },
+    {
+      "id": "window_constraints",
+      "families": [
+        "public_occurrence_recall",
+        "window_constraints",
+        "periodic_sums",
+        "reflected_cover",
+        "regular_field_correspondence"
+      ]
+    },
+    {
+      "id": "orbit_constraints",
+      "families": [
+        "orbit_constraints"
+      ]
+    },
+    {
+      "id": "scored_local_rewrite",
+      "families": [
+        "scored_local_rewrite",
+        "visual_sequences"
+      ]
+    },
+    {
+      "id": "containment",
+      "families": [
+        "containment"
+      ]
+    },
+    {
+      "id": "surface",
+      "families": [
+        "surface_program",
+        "code_program",
+        "slot_substitution",
+        "word_interface",
+        "port_assembly",
+        "constellation_cover",
+        "configured_arrivals",
+        "fixed_origin"
+      ]
+    },
+    {
+      "id": "pre_score_contact",
+      "families": [
+        "pre_score_contact"
+      ]
+    },
+    {
+      "id": "factored_material_return",
+      "families": [
+        "factored_material_return",
+        "band_transfer",
+        "sliding_cavity",
+        "conditional_transit",
+        "ordered_support_transfer",
+        "oriented_coupling",
+        "metric_composition",
+        "contextual_compartments",
+        "invited_reduction"
+      ]
+    },
+    {
+      "id": "morphology",
+      "families": []
+    },
+    {
+      "id": "attention_parent_return",
+      "families": []
+    },
+    {
+      "id": "returned_branch_contrast",
+      "families": [
+        "returned_branch_contrast"
+      ]
+    },
+    {
+      "id": "information_goal",
+      "families": [
+        "visual_sequences",
+        "information_goal"
+      ]
+    },
+    {
+      "id": "acquire_control_for_target",
+      "families": []
+    },
+    {
+      "id": "view",
+      "families": [
+        "view"
+      ]
+    },
+    {
+      "id": "view_continuity",
+      "families": [
+        "view_continuity"
+      ]
+    },
+    {
+      "id": "observed_frontier",
+      "families": [
+        "observed_frontier"
+      ]
+    }
+  ],
+  "pendingSupportSubcompositions": [],
+  "sharedSeriesMemory": "occurrence_recall_and_its_ancestors_only; remaining ObservedCompositionConstraint providers pending",
+  "fullV6Parity": false
+}

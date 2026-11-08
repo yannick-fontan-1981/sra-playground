@@ -1,0 +1,293 @@
+{
+  "schema": "logos-engine.v6.aborted-game-campaign.v1",
+  "game": "SYME",
+  "targetLevels": 6,
+  "status": "process_aborted",
+  "exitCode": 134,
+  "qualification": "Postmortem extracted from the unmodified smoke runner progress log. The fatal Node heap abort prevented final campaign checks and normal report serialization. No final source or Python-module attestation is claimed.",
+  "failure": "Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory",
+  "budget": {
+    "levelActionCaps": [
+      600,
+      600,
+      600,
+      600,
+      600,
+      600
+    ],
+    "activeSecondsPerLevel": 360,
+    "heapOverride": false
+  },
+  "lastCompletedResponse": {
+    "game": "SYME",
+    "phase": "response",
+    "operation": "advance",
+    "sequence": 81,
+    "kind": "boundary",
+    "reason": null,
+    "level": 4,
+    "levelsCompleted": 3,
+    "actions": 81,
+    "cycles": 59,
+    "activeSeconds": 244.8719746,
+    "elapsedMs": 10001.58615800002,
+    "family": "observed_frontier",
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 81,
+      "boundaryReplays": 3,
+      "goalEvents": 3,
+      "frontierDeltas": 208,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 60
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 105
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 27
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 60
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 2
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 60
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 106
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    }
+  },
+  "pendingRequest": {
+    "game": "SYME",
+    "phase": "request",
+    "operation": "resume",
+    "sequence": 81
+  },
+  "progressBoundaries": [
+    {
+      "game": "SYME",
+      "phase": "sealed_prefix",
+      "completedLevel": 1,
+      "nativeLevel": 2,
+      "levelsCompleted": 1,
+      "levelActions": 9,
+      "totalActions": 9,
+      "levelActiveSeconds": 12.145433628000003,
+      "activeSeconds": 12.145433628000003,
+      "prefixCount": 6,
+      "graphChain": "fa094e262a9531c11360f6abd368cc9dc7aff5e83bc16afbfb5cea0c34017af2",
+      "graphRevision": 708,
+      "nodeCount": 265,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 9,
+        "boundaryReplays": 1,
+        "goalEvents": 1,
+        "frontierDeltas": 19,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 7
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 7
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 7
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 7
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 7
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 8
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "sessionRetained": true
+    },
+    {
+      "game": "SYME",
+      "phase": "sealed_prefix",
+      "completedLevel": 2,
+      "nativeLevel": 3,
+      "levelsCompleted": 2,
+      "levelActions": 12,
+      "totalActions": 21,
+      "levelActiveSeconds": 11.20130416800001,
+      "activeSeconds": 23.346737796000014,
+      "prefixCount": 9,
+      "graphChain": "e4b00f0a1b7fec86729a49a3eb14e32f3e3bea9d493b757960319495d58c3c8e",
+      "graphRevision": 1084,
+      "nodeCount": 415,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 21,
+        "boundaryReplays": 2,
+        "goalEvents": 2,
+        "frontierDeltas": 43,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 10
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 10
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 10
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 10
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 10
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 11
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "sessionRetained": true
+    },
+    {
+      "game": "SYME",
+      "phase": "sealed_prefix",
+      "completedLevel": 3,
+      "nativeLevel": 4,
+      "levelsCompleted": 3,
+      "levelActions": 15,
+      "totalActions": 36,
+      "levelActiveSeconds": 13.503592384000008,
+      "activeSeconds": 36.85033018000002,
+      "prefixCount": 14,
+      "graphChain": "fdf6be894be28a897f852e6dc852a98e22723aa735fef786306bd538ef317ca1",
+      "graphRevision": 1686,
+      "nodeCount": 643,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 36,
+        "boundaryReplays": 3,
+        "goalEvents": 3,
+        "frontierDeltas": 73,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 15
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 15
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 15
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 15
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 15
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 16
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology",
+          "attention_parent_return",
+          "acquire_control_for_target"
+        ],
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "sessionRetained": true
+    }
+  ],
+  "levelsCompletedObserved": 3,
+  "lastLevelObserved": 4,
+  "actionsObserved": 81,
+  "cyclesObserved": 59,
+  "activeSecondsObserved": 244.8719746,
+  "sourceUnchangedDuringRun": null,
+  "pythonAgentModules": null,
+  "log": {
+    "path": "/workspace/scratch/656587eca20f/v6-validation/syme-v32.log",
+    "sha256": "2165e61c85a88aa6726be67f330657eb508de7fa2d2f7825bb4f466c87cc6687",
+    "size": 148044
+  },
+  "nativeCodeModifiedByCampaignAgent": false
+}

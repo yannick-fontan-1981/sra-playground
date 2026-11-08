@@ -63,7 +63,7 @@ async function baselineFor(game: string): Promise<R | null> {
 export async function runNativeGameCampaign(options: NativeGameCampaignOptions): Promise<R> {
   const { gameCode, targetLevels } = options;
   assert.match(gameCode, /^[A-Z0-9]{4}$/);
-  assert.ok(Number.isInteger(targetLevels) && targetLevels >= 1 && targetLevels <= 3);
+  assert.ok(Number.isInteger(targetLevels) && targetLevels >= 1 && targetLevels <= 100);
   const started = performance.now(), sourceBefore = await nativeSourceManifest();
   const report: R = {
     schema: 'logos-engine.v6.integrated-game-campaign.v1', game: gameCode, targetLevels,
@@ -81,7 +81,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
   try {
     const baseline = await baselineFor(gameCode);
     if (baseline) report.baseline = { path: baseline.path, sha256: baseline.sha256,
-      qualification: 'Public commands and all animation packets previously matched the unchanged complete original caller',
+      qualification: 'Available reference prefix only: public commands and all animation packets previously matched the unchanged complete original caller. Further levels are live tests, not differential claims.',
+      referenceCommands: baseline.stream.length,
       packetsCompared: 0, commandsCompared: 0, passed: false };
     const reference = new URL(`reference/v6/${V6_REFERENCE_COMMIT}/source/agents/yf_arc3_v6/`, ROOT);
     const declarations = {
@@ -168,8 +169,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
         assert.equal((lastResponse!.snapshot as R).whyAct.decision.decision.status, 'action_set_released');
         const command = { action_ref: `ACTION${action.id}`, data: action.id === 6 ? { ...action.data } : {} };
         const expected = baseline?.stream[report.actions.length];
-        if (baseline) {
-          assert.ok(expected, 'No extra action beyond the original completed trajectory');
+        if (baseline && expected) {
           assert.deepEqual(command, expected.command, `Original command differs at physical action ${report.actions.length + 1}`);
           report.baseline.commandsCompared += 1;
         }
@@ -182,7 +182,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           publicPacketSha256: packetHash(packet), frameHash: packet.frame_hash, animationFrames: packet.frame_packet.length,
           decisionRevision: lastResponse!.ticket!.decisionRevision, actionIndex: lastResponse!.ticket!.actionIndex,
           family: lastResponse!.snapshot.lastDecision, executionMs });
-        if (baseline) {
+        if (baseline && expected) {
           assert.equal(packetHash(packet), packetHash(expected.after), `Original public packet differs at physical action ${report.actions.length}`);
           report.baseline.packetsCompared += 1;
         }
@@ -214,7 +214,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     assert.equal(hostRequests.filter(request => request.type === 'load').length, 1);
     assert.equal(hostRequests.filter(request => request.type === 'action').length, report.actions.length);
     assert.equal(hostRequests.length, report.actions.length + 1, 'No reset, undo, hidden probe or free game step');
-    if (baseline) report.baseline.passed = true;
+    if (baseline) {
+      assert.equal(report.baseline.commandsCompared, Math.min(report.actions.length, baseline.stream.length));
+      report.baseline.passed = true;
+    }
     report.status = 'passed';
   } catch (error) {
     report.status = 'failed'; report.failure = error instanceof Error ? error.message : String(error);

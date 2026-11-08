@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { canonical, compareUnicode, immutableJson } from '../src/logos-engine/canonical.ts';
+import { digest } from '../src/logos-engine/canonical.ts';
 
 test('canonical reuse sees changed mutable descendants of shallowly frozen parents', () => {
   const member = { count: 1 }, shallow = Object.freeze({ member });
@@ -47,4 +48,22 @@ test('frozen accessor objects, symbols and sparse arrays are never cached as val
     assert.throws(() => canonical(input)); assert.throws(() => canonical(input));
   }
   assert.equal(calls, 0);
+});
+
+test('evicted historical encodings preserve canonical bytes, hashes and warmed structural limits', async () => {
+  const first = immutableJson({ '\u{10000}': [1, true], '\ue000': { revision: 1, text: 'retained evidence' } });
+  const expected = canonical(first), hash = await digest(first), retained: unknown[] = [];
+  // Keep keys live, as the revision journal does. Weak references alone cannot
+  // release these cached strings; this crosses both configured cache bounds.
+  for (let i = 0; i < 4200; i++) {
+    const value = immutableJson({ index: i, text: String(i).padStart(6, '0') + 'é'.repeat(2200) });
+    retained.push(value); canonical(value);
+  }
+  assert.equal(retained.length, 4200);
+  assert.equal(canonical(first), expected); assert.equal(await digest(first), hash);
+  const block = immutableJson(Array<number>(1000).fill(7)); canonical(block);
+  assert.throws(() => canonical(Array(1000).fill(block)), /size\/nesting/);
+  let subtree: any = 1;
+  for (let depth = 0; depth < 128; depth++) subtree = Object.freeze([subtree]);
+  canonical(subtree); assert.throws(() => canonical(Object.freeze([subtree])), /size\/nesting/);
 });

@@ -77,7 +77,8 @@ test('real factory registers the four interfaces in DRM order and executes Word 
     assert.equal(snapshot.coverage.fullV6Parity, false);
     assert.deepEqual(snapshot.coverage.sourceGroups.map((group: R) => group.id), policy.families);
 
-    const available = { surface_rewrite: 'surface_program', learned_code_program: 'code_program', ...interfaceIds } as Record<string, string>;
+    const available = { surface_rewrite: 'surface_program', learned_code_program: 'code_program', ...interfaceIds,
+      configured_arrivals: 'configured_arrivals', fixed_origin: 'fixed_origin' } as Record<string, string>;
     const expected = policy.program_construction.ordered_subquestions.flatMap(question => available[question] ? [available[question]] : []);
     assert.deepEqual(snapshot.coverage.sourceGroups.find((group: R) => group.id === 'surface').families, expected);
     for (const id of Object.values(interfaceIds)) {
@@ -135,5 +136,5 @@ test('real factory registers the four interfaces in DRM order and executes Word 
 
 // This bounded positive route is not full router parity. In the unchanged
 // original router, the Slot fixture is preempted by public_occurrence_recall in
-// window_constraints, whose provider has not yet been transferred. Its isolated
-// adapter journal must not be counted as a successful full-router Slot campaign.
+// window_constraints. This priority is now tested by the connected recall
+// integration suite; the isolated Slot journal remains a component test.

@@ -1,6 +1,7 @@
 /** Native transfer of catalog.py / memory.py, ready for common V7 state persistence. */
 import transferred from './v6/catalog.json' with { type: 'json' };
 import { compareUnicode } from './canonical.ts';
+import { retainNativeJson } from './v6-native-owned.ts';
 
 export interface CatalogOperation {
   readonly key: string; readonly name: string; readonly description: string;
@@ -105,6 +106,18 @@ export class NativeReasoningMemory {
     this.available(); const fact = this.facts.get(JSON.stringify([episode, key]));
     if (!fact) throw new RangeError(`Unknown reasoning fact: ${episode}/${key}`);
     return { value: copy(fact.value), evidence: fact.evidence, revision: fact.revision };
+  }
+  /** Read-only native view; source get() continues to return an independent copy. */
+  nativeGet(episode: string, key: string): Readonly<ReasoningFact> {
+    this.available(); const fact = this.facts.get(JSON.stringify([episode, key]));
+    if (!fact) throw new RangeError(`Unknown reasoning fact: ${episode}/${key}`);
+    return retainNativeJson(fact);
+  }
+  /** Preserve unchanged immutable branches when a native fact receives a delta. */
+  nativePut(episode: string, key: string, value: any, evidence = 'fixture', revision = 1): void {
+    this.available(); const id = JSON.stringify([episode, key]);
+    this.facts.set(id, retainNativeJson({ episode, key, value, evidence, revision }));
+    this.factVersions.set(id, ++this.nativeRevision);
   }
   trace(episode: string, kind: string, value: any): void {
     this.available(); const id = (this.traces[this.traces.length - 1]?.id ?? 0) + 1;

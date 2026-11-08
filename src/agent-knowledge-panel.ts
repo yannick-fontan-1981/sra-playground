@@ -40,6 +40,16 @@ export class AgentKnowledgePanel {
   }
   private query<T extends HTMLElement>(selector: string): T { return this.root.querySelector<T>(selector)!; }
   private message(value: string): void { this.query('[data-status]').textContent = value; }
+  /** Closing inspection releases only its detached view, never agent memory. */
+  release(): void {
+    this.graph = null; this.decoded = null; this.selectionVersion++;
+    this.query('.agent-knowledge-browser').hidden = true;
+    this.query('[data-nodes]').replaceChildren();
+    this.query('[data-program-tree]').replaceChildren();
+    this.query('[data-node-json]').textContent = '';
+    this.query<HTMLTextAreaElement>('[data-program]').value = '';
+    this.message('Read the current graph when you want to inspect its nodes.');
+  }
   update(state: V6AgentSnapshot | null): void {
     if (this.session !== state?.sessionId) {
       this.session = state?.sessionId ?? null; this.graph = null; this.decoded = null; this.selected = ''; this.selectionVersion++;
@@ -66,9 +76,12 @@ export class AgentKnowledgePanel {
   }
   private async refresh(): Promise<void> {
     if (this.working) return;
+    const version = this.selectionVersion;
     this.working = true; this.controls(); this.message('Reading the retained graph…');
     try {
-      this.graph = await this.agent.inspectKnowledge();
+      const graph = await this.agent.inspectKnowledge();
+      if (version !== this.selectionVersion) return;
+      this.graph = graph;
       this.query('.agent-knowledge-browser').hidden = false;
       this.message(`${Object.keys(this.graph.nodes).length} nodes · ${this.graph.deltas.length} recorded revisions · graph ${this.graph.chain?.slice(0, 12)}`);
       this.renderList();

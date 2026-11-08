@@ -11,7 +11,13 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone:** the native common coordinator, shared WHY/ACT
+**Current integrated milestone:** see [the v32 SupportNavigation, occurrence
+recall and delta report](v32-support-recall-delta.md). The connected-entry audit
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 27 of 76
+explicit DRM subquestions are connected (35.5%). This is a connection metric,
+not complete behavioral parity, a percentage of code translated, or a game score.
+
+**Historical v31 checkpoint documented below:** the native common coordinator, shared WHY/ACT
 memory and four newly registered interface families execute in the product
 runtime. The first three levels of HANO, SYME and DNOI pass against the real
 games: **nine levels, 83 actions, 46 acquired prefixes**. The three campaigns
@@ -95,7 +101,7 @@ index. A checkpoint refuses a stale graph base; only a successfully committed
 and verified prepared batch can update the read cache. Failed transactions and
 unrelated commits do not mark unread revisions as acquired.
 
-### Connected common coordinator
+### Connected common coordinator at v31
 
 The runtime now constructs `NativeCallerCoordinator` with the same
 `ReasoningMemory` used by WHY/ACT. Its Goal, Frontier, View, Attention, Point,
@@ -149,9 +155,9 @@ The current browser defaults are diagnostic limits of 600 native actions and
 delay and user pauses do not consume that active budget. These limits are not
 claimed to be the V6 campaign's physically qualified oracle caps.
 
-## Integrated real-game evidence
+## Historical v31 integrated real-game evidence
 
-The current runtime, `logos-engine.typescript.v6.native-migration/0.4.0`, was
+The v31 runtime, `logos-engine.typescript.v6.native-migration/0.4.0`, was
 executed against each real game in a separate Pyodide environment. Only the
 games run in Python. The agent executes TypeScript and receives public game
 packets, without injected oracle state, proposals, plans or private game data.
@@ -215,7 +221,7 @@ scope, revision and budget. Detailed normalization limits remain in
 `v6-baseline-parity.json`.
 
 That historical baseline predates the full native acquisition integration.
-The current nine-level campaigns repeat its public trajectories with the
+The v31 nine-level campaigns repeat its public trajectories with the
 connected coordinator and verify that native WHY/ACT, acquisition and boundary
 replay actually execute. They **do not establish parity on all games**, nor do
 they establish identical complete internal caller state on every alternative.
@@ -244,9 +250,11 @@ The test also verifies original selection order, no premature acquisition,
 exactly two acquired transitions and OP29/OP30/OP31 execution. It does not
 restore oracle memory into the runtime.
 
-The ordered-support state is now retained as its source reasoning fact. The
+At the v31 checkpoint, the ordered-support state was retained as its source reasoning fact. The
 selected support subcomposition event is acquired, but the complete
-SupportNavigation wrapper and other source stores remain pending. A bounded
+SupportNavigation wrapper and other source stores were pending. The wrapper and
+all thirteen children are connected at v32; the remaining source stores and
+scope limits are identified in the current report. A bounded
 state comparison does not prove those absent capabilities.
 
 ### Component comparisons
@@ -294,8 +302,9 @@ the selected proposal, actual WHY/ACT release, acquired source fact and a
 subsequent family-activation revision without erasing learned evidence.
 This controlled scene does not count as a solved game. In the standalone Slot
 fixture, the original router's `public_occurrence_recall` provider preempts
-Slot; that provider is not yet transferred. Isolated Slot parity must not be
-presented as full-router parity on that scene.
+Slot; that provider was not transferred at v31. The v32 runtime connects it
+before Slot and adds a priority regression test. Isolated Slot parity by itself
+must not be presented as full-router parity on that scene.
 
 ## Completion tracking
 
@@ -329,12 +338,14 @@ without making the migration complete.
 1. Transfer and verify the remaining V6 families and every inherited V5
    primitive they call, retaining their original alternatives and ordering.
 2. Complete the remaining common providers, including Morphology,
-   `acquire_control_for_target`, `attention_parent_return` and inherited
-   `public_occurrence_recall`, while retaining original priorities.
-3. Complete the SupportNavigation aggregate and missing source acquisitions:
-   `addressed_material_event`, `framed_transfer_event`, `repeated_series_state`
-   and `temporal_selection_state`. Preserve their replay, counterexamples and
-   cross-level reuse in the same V7 graph.
+   `acquire_control_for_target` and `attention_parent_return`, while retaining
+   original priorities.
+3. Complete the remaining ObservedCompositionConstraint providers and source
+   acquisitions, including `addressed_material_event`, `framed_transfer_event`
+   and `temporal_selection_state`. The v32 `repeated_series_state` includes the
+   occurrence-recall ancestry only; it is not the complete original shared
+   series memory. Preserve replay, counterexamples and cross-level reuse in the
+   same V7 graph.
 4. Extend the existing program/knowledge editing model and its provenance,
    scope, type and authorization checks to each newly transferred capability.
 5. Extend complete-caller differential campaigns over the entire available

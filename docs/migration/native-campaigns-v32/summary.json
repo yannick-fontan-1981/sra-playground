@@ -1,0 +1,222 @@
+{
+  "schema": "logos-engine.v32.final-integrated-campaign-summary.v1",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.5.0",
+  "sourceDigest": "b72de816a5c707ef0b41515a22fcd52f1ffd797ab006d9f5daa39f15ae2e6710",
+  "sourceFileCount": 107,
+  "scope": "Real public game engines with the native TypeScript agent and integrated V7 caller/acquisition. No Python agent, injected plans, source memory, free resets, undo or hidden game state. Game engines remain separate Pyodide environments.",
+  "timingQualification": "These campaigns ran alongside other validation work. Their active times enforce real production budgets but are not controlled speed comparisons.",
+  "budget": {
+    "actionsPerLevel": 600,
+    "activeSecondsPerLevel": 360,
+    "clock": "real",
+    "heapLimitOverride": false
+  },
+  "campaigns": [
+    {
+      "game": "HANO",
+      "report": "hano.json",
+      "reportSha256": "b55bc29c1962e9a1aca6337971b254ae3707b3c91e750c10c6c0a3bcdf5fd55c",
+      "targetLevels": 4,
+      "targetStatus": "passed",
+      "fullGameWon": true,
+      "levelsCompleted": 4,
+      "actions": 60,
+      "actionsPerSolvedLevel": [
+        6,
+        10,
+        14,
+        30
+      ],
+      "sealedPrefixes": 30,
+      "acquiredTransitions": 60,
+      "boundaryReplays": 3,
+      "state": "WIN",
+      "stopReason": "target_levels_completed",
+      "activeSeconds": 173.35608308300016,
+      "failure": null,
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "availableReferenceComparison": {
+        "referenceCommands": 30,
+        "commandsCompared": 30,
+        "packetsCompared": 31,
+        "qualification": "Available reference prefix only: public commands and all animation packets previously matched the unchanged complete original caller. Further levels are live tests, not differential claims.",
+        "scopeNote": "Each counter increases only after its assertion passes. The original baseline.passed boolean is set after the entire requested target succeeds, so it remains false for a later budget stop even when the available reference prefix matched."
+      },
+      "unchangedFromInitialV32Trajectory": true
+    },
+    {
+      "game": "ONDE",
+      "report": "onde.json",
+      "reportSha256": "7a4248be187f7439ed5d3a43deb07688c8edf39ce47189793a83e7945ad0a6c4",
+      "targetLevels": 6,
+      "targetStatus": "passed",
+      "fullGameWon": true,
+      "levelsCompleted": 6,
+      "actions": 48,
+      "actionsPerSolvedLevel": [
+        2,
+        4,
+        12,
+        6,
+        7,
+        17
+      ],
+      "sealedPrefixes": 9,
+      "acquiredTransitions": 48,
+      "boundaryReplays": 5,
+      "state": "WIN",
+      "stopReason": "target_levels_completed",
+      "activeSeconds": 76.88891044400003,
+      "failure": null,
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "unchangedFromInitialV32Trajectory": true
+    },
+    {
+      "game": "SKBN",
+      "report": "skbn.json",
+      "reportSha256": "a0955c73cabc9a8e8da0f2e7548cfb26c02fd10024bb515920986578fd46783f",
+      "targetLevels": 3,
+      "targetStatus": "passed",
+      "fullGameWon": false,
+      "levelsCompleted": 3,
+      "actions": 51,
+      "actionsPerSolvedLevel": [
+        22,
+        10,
+        19
+      ],
+      "sealedPrefixes": 9,
+      "acquiredTransitions": 51,
+      "boundaryReplays": 2,
+      "state": "NOT_FINISHED",
+      "stopReason": "target_levels_completed",
+      "activeSeconds": 39.941657883,
+      "failure": null,
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "unchangedFromInitialV32Trajectory": true
+    },
+    {
+      "game": "SYME",
+      "report": "syme.json",
+      "reportSha256": "fac542c71567a28abb2719f5236aa71733eca868b249aba68de101eb4d8d48c9",
+      "targetLevels": 6,
+      "targetStatus": "failed",
+      "fullGameWon": false,
+      "levelsCompleted": 3,
+      "actions": 81,
+      "actionsPerSolvedLevel": [
+        9,
+        12,
+        15
+      ],
+      "sealedPrefixes": 59,
+      "acquiredTransitions": 81,
+      "boundaryReplays": 3,
+      "state": "NOT_FINISHED",
+      "stopReason": "level_active_time_budget",
+      "activeSeconds": 417.5170860419998,
+      "failure": "Did not complete SYME level 4: V6 stopped: level_active_time_budget. Its acquired evidence is retained for inspection.",
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "availableReferenceComparison": {
+        "referenceCommands": 36,
+        "commandsCompared": 36,
+        "packetsCompared": 37,
+        "qualification": "Available reference prefix only: public commands and all animation packets previously matched the unchanged complete original caller. Further levels are live tests, not differential claims.",
+        "scopeNote": "Each counter increases only after its assertion passes. The original baseline.passed boolean is set after the entire requested target succeeds, so it remains false for a later budget stop even when the available reference prefix matched."
+      }
+    },
+    {
+      "game": "DNOI",
+      "report": "dnoi.json",
+      "reportSha256": "ce754c51fd989b95b9de1760fa16926d21ead892c5ba00d8b6f90c164c457a9a",
+      "targetLevels": 6,
+      "targetStatus": "failed",
+      "fullGameWon": false,
+      "levelsCompleted": 3,
+      "actions": 72,
+      "actionsPerSolvedLevel": [
+        3,
+        6,
+        8
+      ],
+      "sealedPrefixes": 72,
+      "acquiredTransitions": 72,
+      "boundaryReplays": 3,
+      "state": "NOT_FINISHED",
+      "stopReason": "level_active_time_budget",
+      "activeSeconds": 397.4249101549999,
+      "failure": "Did not complete DNOI level 4: V6 stopped: level_active_time_budget. Its acquired evidence is retained for inspection.",
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "availableReferenceComparison": {
+        "referenceCommands": 17,
+        "commandsCompared": 17,
+        "packetsCompared": 18,
+        "qualification": "Available reference prefix only: public commands and all animation packets previously matched the unchanged complete original caller. Further levels are live tests, not differential claims.",
+        "scopeNote": "Each counter increases only after its assertion passes. The original baseline.passed boolean is set after the entire requested target succeeds, so it remains false for a later budget stop even when the available reference prefix matched."
+      }
+    },
+    {
+      "game": "MEMO",
+      "report": "memo.json",
+      "reportSha256": "8c1760372a7978706e8fe228e057900d65e84b43a9851e825a533cb519f8c2cc",
+      "targetLevels": 3,
+      "targetStatus": "failed",
+      "fullGameWon": false,
+      "levelsCompleted": 0,
+      "actions": 7,
+      "actionsPerSolvedLevel": [],
+      "sealedPrefixes": 7,
+      "acquiredTransitions": 7,
+      "boundaryReplays": 0,
+      "state": "NOT_FINISHED",
+      "stopReason": "frontier_unknown",
+      "activeSeconds": 11.26370816400001,
+      "failure": "Did not complete MEMO level 1: V6 stopped: frontier_unknown. Its acquired evidence is retained for inspection.",
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "unchangedFromInitialV32Trajectory": true
+    }
+  ],
+  "totals": {
+    "gamesEvaluated": 6,
+    "fullGamesWon": 2,
+    "requestedTargetsPassed": 3,
+    "requestedTargetsFailed": 3,
+    "completedLevels": 19,
+    "actions": 319,
+    "acquiredTransitions": 319,
+    "sealedPrefixes": 186
+  },
+  "learningChecks": {
+    "everyExecutedActionAcquired": true,
+    "everyAcquiredPrefixHasStoredCallerAndFrontierEvidence": true,
+    "allObservedSealedPrefixesExecutePostAnalysis": [
+      "OP29",
+      "OP30",
+      "OP31"
+    ],
+    "continuousSessionPerCampaign": true
+  },
+  "regressions": {
+    "initialSYMEandDNOIHeapExhaustion": "Historical postmortems archived in before-memory-fix/.",
+    "finalSYMEandDNOI": "Normal level_active_time_budget stops; game targets remain unresolved. No final JavaScript heap crash. DNOI ends at 72 actions, before the earlier 73-action crash boundary; no claim to have crossed that exact boundary. SYME ends at 81 actions, the same observed count as the earlier crash. The controlled 65-action memory comparison is the direct retention evidence.",
+    "MEMO": "Native frontier_unknown at seven actions matches the unchanged full Python caller; 31 semantic checks pass in memo-original-comparison.json."
+  },
+  "memoryEvidence": "memory-retention.json",
+  "componentEvidence": "validation.json",
+  "browserEvidence": "browser-verification.json",
+  "entryPointCoverage": {
+    "connected": 27,
+    "declared": 76,
+    "percent": 35.5,
+    "metric": "explicit entries in four source DRM ordered lists; not complete behavioral parity or a game score"
+  },
+  "fullV6Parity": false,
+  "finalTimingEvidence": "final-hano2-timing.json"
+}
