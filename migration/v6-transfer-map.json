@@ -133,9 +133,11 @@
       "proof": [
         "scripts/export-v6-transition-reference.py",
         "tests/fixtures/v6-transition-reference.json",
-        "tests/v6-transition-learning.test.ts"
+        "tests/v6-transition-learning.test.ts",
+        "scripts/export-v6-neutral-domain-reference.py",
+        "docs/migration/native-campaigns-v35/neutral-domain-original.json"
       ],
-      "notes": "Entire four empirical transition modules transferred; invalidation, acquired effects, precedence and preservation compared with source."
+      "notes": "Entire four empirical transition modules transferred; invalidation, acquired effects, precedence and preservation compared with source. The original 512-entity domain and its pure-function refusal remain unchanged; separate V7 caller continuation is not attributed to these source modules."
     },
     {
       "sources": [
@@ -302,7 +304,8 @@
         "src/logos-engine/v6-target-binding.ts",
         "src/logos-engine/v6-native-runtime.ts",
         "src/logos-engine/v6-native-authority.ts",
-        "src/logos-engine/v6-native-caller.ts"
+        "src/logos-engine/v6-native-caller.ts",
+        "src/logos-engine/v6-native-transition-domain.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -326,9 +329,13 @@
         "tests/fixtures/v6-native-caller/memo-first-prefix.json",
         "tests/fixtures/v6-native-caller/onde-first-prefix.json",
         "docs/migration/v33-shared-series-anchor.md",
-        "docs/migration/v34-coupled-pair-evidence.md"
+        "docs/migration/v34-coupled-pair-evidence.md",
+        "tests/v6-native-transition-domain.test.ts",
+        "tests/v6-native-transition-domain-integration.test.ts",
+        "docs/migration/v35-coupled-support.md",
+        "docs/migration/native-campaigns-v35/dico-domain-witness-diagnostic.json"
       ],
-      "notes": "The native common coordinator is connected to the product runtime and shares the WHY/ACT memory. Every witnessed primitive is acquired once at its sealed prefix; Goal/Frontier evidence is replayed across natural level boundaries. First-prefix HANO, MEMO and ONDE comparisons match all eight caller components without loading oracle state. SupportNavigation and all 13 acquired children are connected. Shared RepeatedSeries acquisition currently covers occurrence recall, its ancestor reducers and coupled-pair anchors/response evidence. AddressedMaterial, FramedTransfer, TemporalSelection and other series producers remain pending, along with Morphology/control-target/parent-attention providers. Bounded campaigns do not establish all-game V6 parity."
+      "notes": "The native common coordinator is connected to the product runtime and shares the WHY/ACT memory. Every witnessed primitive is acquired once at its sealed prefix; Goal/Frontier evidence is replayed across natural level boundaries. First-prefix HANO, MEMO and ONDE comparisons match all eight caller components without loading oracle state. SupportNavigation and all 13 acquired children are connected. Shared RepeatedSeries acquisition currently covers occurrence recall, its ancestor reducers and coupled-pair anchors/response evidence. AddressedMaterial, FramedTransfer, TemporalSelection and other series producers remain pending, along with Morphology/control-target/parent-attention providers. Bounded campaigns do not establish all-game V6 parity. v35 adds coupled support planning and auxiliary continuation in the single shared journal. Explicit V7 extension: the unchanged neutral entity-domain refusal becomes a retained unknown with complete public witnesses and no rule-registry update; this differs from the original caller fatal exception and is not exact out-of-domain parity."
     },
     {
       "sources": [
@@ -958,9 +965,10 @@
       "targets": [
         "src/logos-engine/v6-coupled-pair-epoch-anchor.ts",
         "src/logos-engine/v6-shared-series.ts",
-        "src/logos-engine/v6-coupled-pair-evidence.ts"
+        "src/logos-engine/v6-coupled-pair-evidence.ts",
+        "src/logos-engine/v6-coupled-pair-planning.ts"
       ],
-      "status": "partial_transfer",
+      "status": "component_verified",
       "proof": [
         "scripts/export-v6-coupled-pair-epoch-anchor-reference.py",
         "tests/fixtures/v6-coupled-pair-epoch-anchor-reference.json.gz",
@@ -972,9 +980,15 @@
         "scripts/export-v6-coupled-pair-evidence-reference.py",
         "tests/fixtures/v6-coupled-pair-evidence-reference.json.gz",
         "tests/v6-coupled-pair-evidence.test.ts",
-        "docs/migration/v34-coupled-pair-evidence.md"
+        "docs/migration/v34-coupled-pair-evidence.md",
+        "scripts/export-v6-coupled-pair-planning-reference.py",
+        "tests/fixtures/v6-coupled-pair-planning-reference.json.gz",
+        "tests/v6-coupled-pair-planning.test.ts",
+        "docs/migration/v35-coupled-support.md",
+        "tests/v6-shared-series-native.test.ts",
+        "tests/v6-native-checkpoint-integration.test.ts"
       ],
-      "notes": "The epoch anchor, complete CoupledPairAccess.record acquisition body, its pair-plan after check, both event reducers, layer digest and verified restoration are transferred. Source-order common acquisition is recall, then pair anchors/evidence, then public packet events. Member correspondence, no-effect samples, revealed floor values, early unresolved/refused versus late refused-only outcomes and exact whole-scene/interior return distinctions retain the source semantics. joint_route, propose_graph, pair-plan before guards and auxiliary inherited producers remain pending. No new DRM planning entry is counted."
+      "notes": "The complete CoupledPairAccess-owned acquisition, reducers, layer digest, pair planning and before/after branches are transferred. Learned controls, unique signs, current loci, bounded prefixes, refused trials and unresolved blockers are compared to the unchanged source. The inherited alternating-graph planner remains outside this component; its disabled-question fallback is retained explicitly in the common coupled-support entry. Source journals are reconstructed through the actual V7 family node. This is component evidence, not full inheritance or campaign parity."
     },
     {
       "sources": [
@@ -983,7 +997,8 @@
       "targets": [
         "src/logos-engine/v6-shared-series.ts",
         "src/logos-engine/v6-native-runtime.ts",
-        "src/logos-engine/v6-coupled-pair-evidence.ts"
+        "src/logos-engine/v6-coupled-pair-evidence.ts",
+        "src/logos-engine/v6-auxiliary-support.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -991,25 +1006,145 @@
         "tests/v6-caller-integration.test.ts",
         "tests/v6-support-caller-integration.test.ts",
         "docs/migration/v33-shared-series-anchor.md",
-        "docs/migration/v34-coupled-pair-evidence.md"
+        "docs/migration/v34-coupled-pair-evidence.md",
+        "scripts/export-v6-coupled-pair-planning-reference.py",
+        "tests/fixtures/v6-coupled-pair-planning-reference.json.gz",
+        "tests/v6-coupled-pair-planning.test.ts",
+        "docs/migration/v35-coupled-support.md",
+        "tests/v6-shared-series-native.test.ts",
+        "tests/v6-native-checkpoint-integration.test.ts"
       ],
-      "notes": "The supported common acquisition closure and selected/passive state restoration are integrated through the existing public_occurrence_recall provider. Native state keeps recall, pair anchors and coupled-pair response evidence in one shared journal with a qualified closure digest. The unchanged full-caller first-prefix MEMO result and HANO/ONDE journals match, but the complete ObservedCompositionConstraint digest, auxiliary pair-evidence producers, pair planning and remaining providers are pending."
+      "notes": "The supported common closure now integrates recall, pair acquisition/planning and auxiliary support in one authoritative public_occurrence_recall family. Separate group entry points preserve coupled goal-access priority and later occurrence recall. Sealed acquisition and atomic reconstruction include auxiliary control models and its pair-evidence producer. The native digest is qualified as native_recall_ancestors_and_coupled_support_v3; the full ObservedCompositionConstraint inheritance and remaining providers are pending."
     },
     {
       "sources": [
         "agents/yf_arc3_v6/laya_proto/coupled_pair_observation.py"
       ],
       "targets": [
-        "src/logos-engine/v6-coupled-pair-observation.ts"
+        "src/logos-engine/v6-coupled-pair-observation.ts",
+        "src/logos-engine/v6-coupled-pair-route.ts"
       ],
-      "status": "partial_transfer",
+      "status": "component_verified",
       "proof": [
         "scripts/export-v6-coupled-pair-observation-reference.py",
         "tests/fixtures/v6-coupled-pair-observation-reference.json.gz",
         "tests/v6-coupled-pair-observation.test.ts",
-        "docs/migration/v34-coupled-pair-evidence.md"
+        "docs/migration/v34-coupled-pair-evidence.md",
+        "scripts/export-v6-coupled-pair-route-reference.py",
+        "tests/fixtures/v6-coupled-pair-route-reference.json.gz",
+        "tests/v6-coupled-pair-route.test.ts",
+        "docs/migration/v35-coupled-support.md"
       ],
-      "notes": "Only pairs() and match_pair() are transferred and compared to the unchanged source, including component/group order, palette/borders, inclusive row-column coordinates, short cardinal displacements and unique-minimum assignment. The bounded joint_route search and its inherited collision capability remain unported."
+      "notes": "pairs and match_pair retain v34 evidence. joint_route now transfers its complete six-field output and refusals through the exact V6-built V5 search request, including canonical action order, tracked member alignment, collision/exclusion, 40-action depth and 4096-expansion bounds, grid identity and replay counters. Broader V5 interaction request types remain separately partial."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/interaction.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-coupled-pair-route.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-coupled-pair-route-reference.py",
+        "tests/fixtures/v6-coupled-pair-route-reference.json.gz",
+        "tests/v6-coupled-pair-route.test.ts",
+        "docs/migration/v35-coupled-support.md"
+      ],
+      "notes": "Only the V6 SimpleNamespace closure of _bounded_joint_peer_collision_route_candidates is transferred: supplied residual signs [1,-1], measured controls, first-member alignment, independent collisions, unmatched-floor-mixture exclusions, canonical BFS with one variant, bounded depth/expansion and wrapper-consumed replay counters. The disabled mixed-cell traversal branch retains supplied traversable refs. Other requests, tracking fallbacks, typed footprints, exact-terrain memory, variants and facts/causal overlays not returned by joint_route remain pending."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/cell_recount.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-coupled-pair-route.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-coupled-pair-route-reference.py",
+        "tests/fixtures/v6-coupled-pair-route-reference.json.gz",
+        "tests/v6-coupled-pair-route.test.ts",
+        "docs/migration/v35-coupled-support.md"
+      ],
+      "notes": "Only the type_patterns and cell_type_ids projection consumed by the V6 known square-cell lattice, pitch equal to cell size and empty prior, is transferred. General recount occurrences, deltas, separator measurement and retained-grid behavior remain pending."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/contracts.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-coupled-pair-route.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-coupled-pair-route-reference.py",
+        "tests/fixtures/v6-coupled-pair-route-reference.json.gz",
+        "tests/v6-coupled-pair-route.test.ts",
+        "docs/migration/v35-coupled-support.md"
+      ],
+      "notes": "Only the public geometric values and bounds consumed from FrameGrid, BoundingBox and KnownGridCellRecountInput in V6 joint_route are represented, including positive extents and the 4096-cell bound. This is not a general Pydantic or contract-system replacement."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/memorial_peer_step.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-coupled-pair-route.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-coupled-pair-route-reference.py",
+        "tests/fixtures/v6-coupled-pair-route-reference.json.gz",
+        "tests/v6-coupled-pair-route.test.ts",
+        "docs/migration/v35-coupled-support.md"
+      ],
+      "notes": "Only order_peers_by_measured_interface_alignment for the single aligned bbox and measure_unmatched_floor_mixture_pattern_refs for the singleton palette rows constructed by V6 are transferred. General peer memory and measure_peer_route_causal_step overlays remain pending."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/auxiliary_support_access.py",
+        "agents/yf_arc3_v6/laya_proto/coupled_support_preparation.py",
+        "agents/yf_arc3_v6/laya_proto/support_continuation.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-auxiliary-support.ts",
+        "src/logos-engine/v6-auxiliary-support-preparation.ts",
+        "src/logos-engine/v6-auxiliary-support-continuation.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-auxiliary-support-reference.py",
+        "tests/fixtures/v6-auxiliary-support-reference.json.gz",
+        "tests/v6-auxiliary-support.test.ts",
+        "docs/migration/v35-coupled-support.md",
+        "tests/v6-shared-series-native.test.ts",
+        "tests/v6-native-checkpoint-integration.test.ts"
+      ],
+      "notes": "The AuxiliarySupportAccess-owned proposal/guards/acquisition/reducer/digest layer, public support questions and guarded continuation/model helpers are transferred. Exact original proposals, point bindings, selection, parking, return tests, group-control evidence, counterexamples and cached suffixes are compared. The full selection-to-pair-resumption journal reconstructs through a V7 node and rejects corruption atomically. Raw source events remain in the oracle; global inheritance digest and other ancestral producers are not claimed."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_coupled_support.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-auxiliary-support-reference.py",
+        "tests/fixtures/v6-auxiliary-support-reference.json.gz",
+        "tests/v6-auxiliary-support.test.ts",
+        "docs/migration/v35-coupled-support.md",
+        "scripts/export-v6-coupled-pair-planning-reference.py",
+        "tests/fixtures/v6-coupled-pair-planning-reference.json.gz",
+        "tests/v6-coupled-pair-planning.test.ts",
+        "tests/v6-shared-series-native.test.ts",
+        "tests/v6-native-checkpoint-integration.test.ts"
+      ],
+      "notes": "coupled_propose, its original deadline precondition, remaining-action override, point/discrete binding and the coupled goal-access registration are transferred. One retained provider owns both coupled support and later occurrence recall. Native restoration validates the supported closure rather than claiming every CombinedCoupledMemory/ObservedCompositionConstraint ancestor or their complete digest."
     }
   ],
   "scopeNotes": [

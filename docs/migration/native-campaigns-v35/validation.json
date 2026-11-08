@@ -1,0 +1,310 @@
+{
+  "schema": "logos-engine.v6.integrated-validation.v35",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.6.2",
+  "nativeSource": {
+    "digest": "5dca7abf6903cbd3af3363a4db9e192c8e730f9b6693af721ed1a14fb5ee9196",
+    "fileCount": 117,
+    "completeManifest": "dico.json#/source",
+    "currentFilesMatch": true
+  },
+  "tests": {
+    "distinctPassing": 548,
+    "failed": 0,
+    "batches": [
+      {
+        "command": [
+          "node",
+          "--test",
+          "tests/v6-caller-integration.test.ts",
+          "tests/v6-support-caller-integration.test.ts",
+          "tests/v6-shared-series.test.ts",
+          "tests/v6-coupled-pair-evidence.test.ts",
+          "tests/v6-coupled-pair-planning.test.ts",
+          "tests/v6-coupled-pair-route.test.ts",
+          "tests/v6-auxiliary-support.test.ts",
+          "tests/v6-shared-series-native.test.ts",
+          "tests/v6-native-checkpoint-integration.test.ts",
+          "tests/v6-native-authority.test.ts",
+          "tests/v6-native-transition-domain.test.ts",
+          "tests/v6-transition-learning.test.ts"
+        ],
+        "passing": 547,
+        "failed": 0,
+        "capturedOutputSha256": "ace85e380ab3561f8b4de44fe1d65181abdc1512935add49cca250667b8acd6e"
+      },
+      {
+        "command": [
+          "node",
+          "--test",
+          "tests/v6-native-transition-domain-integration.test.ts"
+        ],
+        "passing": 1,
+        "failed": 0,
+        "qualification": "Actual authority, actual common caller and immutable V7 store; complete observed dense-scene witness, nonempty unchanged rule registries, unknown outcome and resumed WHY/ACT admission. This contract test executes no game action and supplies no solver."
+      }
+    ],
+    "testFileSha256": {
+      "tests/v6-caller-integration.test.ts": "72597754574bcfed663ae33d695e3ed75a69dca6a5cbd0e1228200230b92eade",
+      "tests/v6-support-caller-integration.test.ts": "f005fabf6df1b5422003dfe67a3a2d8a21122998f46d7dde9d2acd5381c4bf37",
+      "tests/v6-shared-series.test.ts": "50f5d5289a3b0aa930c8030cc3118d0df0fa6b1b36927b337649766fa5c01688",
+      "tests/v6-coupled-pair-evidence.test.ts": "e7292253d5052c0abdf6e03a5a0edecd4e41b91874cdbc26b21e6b3a16e136bb",
+      "tests/v6-coupled-pair-planning.test.ts": "b1e874ccf0beef3c78b56101f7abb7353afd1060f6849d036059a8cbdc26efe7",
+      "tests/v6-coupled-pair-route.test.ts": "ce797a50e3440ae529be6fc7ce40e728168d310ceac86b0b668da7df7da7ccff",
+      "tests/v6-auxiliary-support.test.ts": "b9a999601d6e7216eec714b4b4792314bf0f6dc09001d81c63ed501405c40c3e",
+      "tests/v6-shared-series-native.test.ts": "984863ea3a73acbc136470e007363e86c501fe8eb793f9de312251acc1ca4090",
+      "tests/v6-native-checkpoint-integration.test.ts": "1e17fafacf64e79dbb540ff4b9740b30f733c444d0d167d40e7ce56cc9f3abfe",
+      "tests/v6-native-authority.test.ts": "6b35c231916ee37a07ed2c8505a5cdd71b35f305bc93d1a411fdbcc98a58697d",
+      "tests/v6-native-transition-domain.test.ts": "cf885b68ce37924bae11b859769ece813c46ea0cb66ea7f0c2bb64c4d3d51462",
+      "tests/v6-transition-learning.test.ts": "73124db5ddebd06c38b0627f00ddf7383eec613b885e2cfb27bdea56ca8a2140",
+      "tests/v6-native-transition-domain-integration.test.ts": "d20a3565b85d908ff27a15ac5e808fc754cc6c33f048dd6fb636dd45fa8421cc"
+    },
+    "typecheck": {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "passed": true
+    },
+    "diffCheck": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "passed": true
+    }
+  },
+  "campaigns": [
+    {
+      "path": "dico.json",
+      "sha256": "15edee9019f519a70102730410e6fc8a8a82b50debe8e73b149b67743dcf570a",
+      "status": "passed",
+      "targetLevels": 6,
+      "final": {
+        "actions": 62,
+        "levelsCompleted": 6,
+        "level": 6,
+        "state": "WIN",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 186.35905627300008,
+        "prefixes": 62,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 62,
+          "boundaryReplays": 5,
+          "goalEvents": 6,
+          "frontierDeltas": 126,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 63
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 64
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 36
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 57
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 2
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 55
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 64
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 62,
+          "resume": 61
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.6.2"
+      },
+      "levelActions": [
+        7,
+        6,
+        8,
+        10,
+        15,
+        16
+      ],
+      "activeSeconds": [
+        8.396966599999995,
+        8.467607032,
+        17.906023084000005,
+        30.17880440799999,
+        47.10426403699998,
+        74.30539111200011
+      ],
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "explicitDomainUnknownAssessments": 22,
+      "qualification": "Complete six-level game WIN from a fresh level-1 common native session, without external priming. Includes the explicitly documented V7 dense-domain robustness extension."
+    },
+    {
+      "path": "m0r0-three-levels.json",
+      "sha256": "7e8efb9728a6644bbd6ce49eb3fd5466c546d4cd327afffb1313dd4be47226ba",
+      "status": "passed",
+      "targetLevels": 3,
+      "final": {
+        "actions": 108,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 186.68030742699983,
+        "prefixes": 34,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 108,
+          "boundaryReplays": 2,
+          "goalEvents": 3,
+          "frontierDeltas": 229,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 35
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 47
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 33
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 9
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 4
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 13
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 50
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 108,
+          "resume": 33
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.6.2"
+      },
+      "levelActions": [
+        19,
+        27,
+        62
+      ],
+      "activeSeconds": [
+        10.036529004,
+        39.311432751999966,
+        137.33234567099987
+      ],
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "explicitDomainUnknownAssessments": 0,
+      "qualification": "Successful three-level regression target only; the six-level game remains incomplete. No level-4 retry or relaxed floor precaution. Timing comparison is qualified separately."
+    }
+  ],
+  "preservedFailedAttempts": [
+    {
+      "path": "m0r0-before-native-checkpoint.json",
+      "sha256": "1b2149aa6a86c156162ff03dcb67ac50b0228b193ed025cb4047d4d95379aac5",
+      "result": "3/6 levels; original level-4 source hypothesis exhausted, then ordinary active budget reached"
+    },
+    {
+      "path": "dico-before-domain-handling.json",
+      "sha256": "6ed331606cd512252c71061a71dd9457231f522d649770aaab40192fe95614b8",
+      "result": "4/6 levels; 32 physical actions, 31 acquired, original mechanical domain refusal at 530 to 531 entities",
+      "publicCommandsAndResponsePacketsMatchingFinalPrefix": 32
+    }
+  ],
+  "sourceDomainAudit": {
+    "path": "neutral-domain-original.json",
+    "sha256": "f813b8b54cf74b02a434bacfc8fcae24cc4ccaf2ee25e0901392dfc45357cb3c",
+    "originalCalls": 12,
+    "acceptedAt512": 4,
+    "refusedWith513OnEitherSide": 8
+  },
+  "progress": {
+    "path": "../v6-entry-point-progress.json",
+    "connected": 28,
+    "declared": 76,
+    "percent": 36.8,
+    "qualification": "Each declared entry has equal weight. This counts actual provider registrations, not code volume, game score, expected success, or complete V6 behavioral parity. The common coordinator and direct groups are outside this denominator. Their own differential tests and live campaigns remain separate evidence.",
+    "fullV6Parity": false
+  },
+  "nativeExtensions": [
+    {
+      "capability": "neutral_entity_domain_refusal_retained_as_unknown_without_registry_update",
+      "sourceLimit": 512,
+      "originalCallerBehavior": "write failure and rethrow",
+      "v7Behavior": "retain complete public witness and local unknown; do not update empirical/property registries; continue independent families through unchanged authority",
+      "countedAsSourceEntry": false
+    }
+  ],
+  "performanceQualification": "Deterministic tests verify eliminated redundant shared-state replay/copy paths. Live request times are not CPU profiles or isolated causal attribution; the final target removes one boundary replay in the three-level comparison. No general speedup or constant-time-history claim.",
+  "nextStep": "Transfer alternating_graph_composition acquisition and instrumental questions into the same shared owner, preserving source priorities and differential evidence; measure remaining acquisition costs before promising further speed gains.",
+  "checkpointComparison": {
+    "path": "m0r0-native-checkpoint-comparison.json",
+    "sha256": "a84349da1106d2d3e166d94f2035441df9d7f437b434b7ac238f01f0e1584be8",
+    "controlsPassed": 8,
+    "matchingCommands": 108,
+    "matchingPublicPackets": 109,
+    "matchingPrefixes": 34,
+    "comparableFirstTwoLevelActiveSeconds": {
+      "before": 49.219404423000015,
+      "after": 49.34796175599997
+    },
+    "netSpeedupDemonstrated": false,
+    "qualification": "The first two levels have the same boundary replays. The smaller three-level total has one fewer boundary replay, so it does not isolate checkpoint performance."
+  }
+}

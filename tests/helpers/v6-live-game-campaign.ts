@@ -69,7 +69,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     schema: 'logos-engine.v6.integrated-game-campaign.v1', game: gameCode, targetLevels,
     status: 'running', referenceCommit: V6_REFERENCE_COMMIT,
     budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: 360, clock: 'real active compute and native execution' },
-    source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [],
+    source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [], domainAssessments: [],
     baseline: null, pythonAgentModules: null, failure: null,
   };
   let runtime: Awaited<ReturnType<typeof createNativeV6Runtime>> | undefined;
@@ -124,6 +124,15 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             assert.equal(record.before, transition.before); assert.equal(record.after, transition.after);
             assert.ok(record.caller_acquisition && typeof record.caller_acquisition === 'object', 'Caller acquisition must be retained, not only counted');
             assert.ok(record.frontier_acquisition && typeof record.frontier_acquisition === 'object', 'Frontier acquisition must be retained for every witnessed transition');
+            if (record.assessment?.domain?.status === 'outside_source_domain') {
+              assert.equal(record.assessment.status, 'unknown');
+              assert.equal(record.assessment.registry_update, 'none');
+              assert.equal(record.assessment.release_authority, false);
+              assert.ok(record.prospective_prediction_checks.every((check: R) => check.validation_performed === false));
+              report.domainAssessments.push({ transition: `reasoning:transition:${evidence.decision_revision + index}`,
+                before: record.before, after: record.after, domain: record.assessment.domain,
+                status: record.assessment.status, registryUpdate: record.assessment.registry_update });
+            }
           }
           const series = read('family_state:public_occurrence_recall');
           const anchors = (series.events as R[]).filter(event => event.kind === 'coupled_pair_epoch_anchor');
@@ -131,10 +140,14 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             'One anchor belongs to each publicly witnessed before-epoch, including natural boundary transitions');
           report.prefixes.push({ id: evidenceId, decisionRevision: evidence.decision_revision,
             acquiredActions: evidence.transitions.length, family: snapshot.lastDecision, operations: ['OP29', 'OP30', 'OP31'],
+            proposalKind: evidence.proposal.kind ?? null, fieldSubquestion: evidence.proposal.field_subquestion ?? null,
+            supportMode: evidence.proposal.support_preparation_plan?.mode ?? null,
             graphChain: graph.chain, graphRevision: snapshot.graphRevision, callerAcquiredTransitions: snapshot.caller.acquiredTransitions,
             sharedSeries: { digestScope: snapshot.coverage.sharedSeriesDigestScope, digest: series.digest,
               eventCount: series.events.length, epochAnchors: anchors,
-              pairEvidenceCount: (series.events as R[]).filter(event => event.kind === 'coupled_pair_evidence').length } });
+              pairEvidenceCount: (series.events as R[]).filter(event => event.kind === 'coupled_pair_evidence').length,
+              supportPreparationCount: (series.events as R[]).filter(event => event.kind === 'coupled_support_preparation').length,
+              supportControlModelCount: (series.events as R[]).filter(event => event.kind === 'coupled_support_control_model').length } });
           lastCycles = snapshot.cycles;
         }
         return result;

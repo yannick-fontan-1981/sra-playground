@@ -1,0 +1,207 @@
+{
+  "schema": "v6-original-neutral-domain-audit.v1",
+  "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceMethod": "Direct unchanged original-function calls; no source rewriting, injected catch, or native expectation.",
+  "sourceHashes": {
+    "agents/yf_arc3_v6/laya_proto/common_mechanisms.py": "e70dad68ac6ce1c6f95224a8cb26994bba3c2e7a93430dc8d0244017ee0f0631",
+    "agents/yf_arc3_v6/laya_proto/common_property_rewrites.py": "12f4006f8c38b063c650275b4aadbf91761aaf1802d48c8a0dcc175cd25402fe",
+    "agents/yf_arc3_v6/laya_proto/common_frontier_runtime.py": "bcc9bc79d04287c830efedce48b4cc2ab89b5600b8a77fe09782c35d1c05c064",
+    "agents/yf_arc3_v6/laya_proto/prospective_contact_adapter.py": "af3cbca00d6627fea68e7fea85b14e036fb297a16de05fb6b0f75c6b05cdf14f"
+  },
+  "generator": "scripts/export-v6-neutral-domain-reference.py",
+  "generatorSha256": "434f83e82924c405c096f7e5e5012c00a9a3648d201ec3e92d775d5f685479fa",
+  "inputRecipe": "observation(reference, count) in the generator: distinct public one-pixel positions, repeated measured signature, complete neutral fields; public ACTION6(1,1). No game or solution input.",
+  "qualification": "Pure-function domain evidence only. The V6 common caller does not isolate this exception; any V7 continuation outside the domain is an explicit robustness extension, not caller parity.",
+  "sourceCaller": {
+    "module": "agents/yf_arc3_v6/laya_proto/common_frontier_runtime.py",
+    "ordinaryAssessmentLines": [
+      1322,
+      1326,
+      1332
+    ],
+    "officialBoundarySkipLines": [
+      1256,
+      1316
+    ],
+    "fatalCatchAndRethrowLines": [
+      1518,
+      1540
+    ]
+  },
+  "existing513Oracle": {
+    "fixture": "tests/fixtures/v6-transition-reference.json",
+    "case": "too_many_neutral_entities",
+    "function": "construct_empirical_rule",
+    "test": "tests/v6-transition-learning.test.ts"
+  },
+  "cases": [
+    {
+      "function": "construct_empirical_rule",
+      "beforeEntities": 512,
+      "afterEntities": 512,
+      "inputSha256": "9c0db8d00df950740871f7126cbfb99f7cdfb514c4f15113c29025e39ce09332",
+      "accepted": true,
+      "resultSha256": "685ac56c250e3dd6f7f3d8bdb31c51b69cd37fa9560ccc2ec1430c95650fb7fc",
+      "resultKeys": [
+        "conditions",
+        "counterexamples",
+        "effect",
+        "evidence_refs",
+        "independent_confirmations",
+        "predictive_use_allowed",
+        "rule_family",
+        "rule_id",
+        "scope",
+        "status",
+        "uncertainty",
+        "validation_evidence"
+      ],
+      "resultStatus": "empirical_transition_candidate",
+      "libraryStatus": null,
+      "constructionStatus": null,
+      "ruleCount": 0
+    },
+    {
+      "function": "validate_empirical_rule",
+      "beforeEntities": 512,
+      "afterEntities": 512,
+      "inputSha256": "9c0db8d00df950740871f7126cbfb99f7cdfb514c4f15113c29025e39ce09332",
+      "accepted": true,
+      "resultSha256": "e48bd00c963f71e4a7ef74be95bbd4471a67aa033a40bb6af2af643ec7d5de83",
+      "resultKeys": [
+        "conditions",
+        "counterexamples",
+        "effect",
+        "evidence_refs",
+        "independent_confirmations",
+        "last_validation",
+        "predictive_use_allowed",
+        "rule_family",
+        "rule_id",
+        "scope",
+        "status",
+        "uncertainty",
+        "validation_evidence"
+      ],
+      "resultStatus": "empirical_transition_candidate",
+      "libraryStatus": null,
+      "constructionStatus": null,
+      "ruleCount": 0
+    },
+    {
+      "function": "assess_transition",
+      "beforeEntities": 512,
+      "afterEntities": 512,
+      "inputSha256": "9c0db8d00df950740871f7126cbfb99f7cdfb514c4f15113c29025e39ce09332",
+      "accepted": true,
+      "resultSha256": "b34bf3f1b68b204bce33487cb9f831ee66dde970c16f170f6165b2ad7f37c21b",
+      "resultKeys": [
+        "construction",
+        "empirical_rules",
+        "evidence_refs",
+        "library",
+        "limitations",
+        "predictive_applications",
+        "release_authority",
+        "schema"
+      ],
+      "resultStatus": null,
+      "libraryStatus": "unknown",
+      "constructionStatus": "empirical_transition_candidate",
+      "ruleCount": 1
+    },
+    {
+      "function": "assess_property_transition",
+      "beforeEntities": 512,
+      "afterEntities": 512,
+      "inputSha256": "9c0db8d00df950740871f7126cbfb99f7cdfb514c4f15113c29025e39ce09332",
+      "accepted": true,
+      "resultSha256": "855b3d8563883ca7be54b7fddcd48326c84b8d3e4914c3cf92d00ce25ccc0f86",
+      "resultKeys": [
+        "construction",
+        "evidence_refs",
+        "limitations",
+        "property_rules",
+        "release_authority",
+        "schema",
+        "unexplained_transition_retained"
+      ],
+      "resultStatus": null,
+      "libraryStatus": null,
+      "constructionStatus": "unknown",
+      "ruleCount": 0
+    },
+    {
+      "function": "construct_empirical_rule",
+      "beforeEntities": 513,
+      "afterEntities": 512,
+      "inputSha256": "2dd2bb61c8bf301d06043e1fb49c93cd3a463e2a371aea63b83e89bfa9f39e83",
+      "accepted": false,
+      "errorType": "ValueError",
+      "error": "Neutral entity measurement domain exceeded"
+    },
+    {
+      "function": "validate_empirical_rule",
+      "beforeEntities": 513,
+      "afterEntities": 512,
+      "inputSha256": "2dd2bb61c8bf301d06043e1fb49c93cd3a463e2a371aea63b83e89bfa9f39e83",
+      "accepted": false,
+      "errorType": "ValueError",
+      "error": "Neutral entity measurement domain exceeded"
+    },
+    {
+      "function": "assess_transition",
+      "beforeEntities": 513,
+      "afterEntities": 512,
+      "inputSha256": "2dd2bb61c8bf301d06043e1fb49c93cd3a463e2a371aea63b83e89bfa9f39e83",
+      "accepted": false,
+      "errorType": "ValueError",
+      "error": "Neutral entity measurement domain exceeded"
+    },
+    {
+      "function": "assess_property_transition",
+      "beforeEntities": 513,
+      "afterEntities": 512,
+      "inputSha256": "2dd2bb61c8bf301d06043e1fb49c93cd3a463e2a371aea63b83e89bfa9f39e83",
+      "accepted": false,
+      "errorType": "ValueError",
+      "error": "Neutral entity measurement domain exceeded"
+    },
+    {
+      "function": "construct_empirical_rule",
+      "beforeEntities": 512,
+      "afterEntities": 513,
+      "inputSha256": "1bef82803281bf1210dca8111ceb43113d147827c636c364311f15e632fb7d2b",
+      "accepted": false,
+      "errorType": "ValueError",
+      "error": "Neutral entity measurement domain exceeded"
+    },
+    {
+      "function": "validate_empirical_rule",
+      "beforeEntities": 512,
+      "afterEntities": 513,
+      "inputSha256": "1bef82803281bf1210dca8111ceb43113d147827c636c364311f15e632fb7d2b",
+      "accepted": false,
+      "errorType": "ValueError",
+      "error": "Neutral entity measurement domain exceeded"
+    },
+    {
+      "function": "assess_transition",
+      "beforeEntities": 512,
+      "afterEntities": 513,
+      "inputSha256": "1bef82803281bf1210dca8111ceb43113d147827c636c364311f15e632fb7d2b",
+      "accepted": false,
+      "errorType": "ValueError",
+      "error": "Neutral entity measurement domain exceeded"
+    },
+    {
+      "function": "assess_property_transition",
+      "beforeEntities": 512,
+      "afterEntities": 513,
+      "inputSha256": "1bef82803281bf1210dca8111ceb43113d147827c636c364311f15e632fb7d2b",
+      "accepted": false,
+      "errorType": "ValueError",
+      "error": "Neutral entity measurement domain exceeded"
+    }
+  ]
+}

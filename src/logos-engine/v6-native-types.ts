@@ -122,6 +122,10 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   state(): NativeRecord;
   /** All persistent state is reconstructed from the authoritative shared nodes. */
   restore(state: NativeRecord): void;
+  /** Opt-in internal checkpoint with validated immutable branches. Public state still copies. */
+  nativeState?(): NativeRecord;
+  /** Reads the actual hydrated V7 value; changed inputs still require complete validation. */
+  restoreNative?(state: Readonly<NativeRecord>): void;
 }
 
 export interface NativeBudgets {

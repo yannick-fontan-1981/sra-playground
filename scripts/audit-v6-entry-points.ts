@@ -14,6 +14,7 @@ const runtime = await createNativeV6Runtime(declarations), snapshot = runtime.sn
 const sourceGroups = coverage.sourceGroups as { id: string; families: string[] }[];
 const aliases: Record<string, string> = {
   scored_relation_access: 'goal_access', observed_support_access: 'support_navigation',
+  coupled_support_composition: 'public_occurrence_recall',
   observed_occurrence_recall: 'public_occurrence_recall', multiscale_constraints: 'window_constraints',
   surface_rewrite: 'surface_program', learned_code_program: 'code_program', typed_word_interface: 'word_interface',
   rigid_port_assembly: 'port_assembly', controlled_constellation_cover: 'constellation_cover', conserved_band_transfer: 'band_transfer',

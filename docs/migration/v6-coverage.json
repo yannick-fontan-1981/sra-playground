@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 76,
-    "partiallyTransferredModules": 49,
+    "componentVerifiedModules": 81,
+    "partiallyTransferredModules": 52,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1244,
+    "pendingModules": 1236,
     "strategyFamilies": 16
   },
   "families": [
@@ -6345,9 +6345,16 @@
           "endLine": 1184
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-coupled-pair-route.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-coupled-pair-route-reference.py",
+        "tests/fixtures/v6-coupled-pair-route-reference.json.gz",
+        "tests/v6-coupled-pair-route.test.ts",
+        "docs/migration/v35-coupled-support.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/cell_shape_support.py",
@@ -13529,9 +13536,16 @@
           "endLine": 5614
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-coupled-pair-route.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-coupled-pair-route-reference.py",
+        "tests/fixtures/v6-coupled-pair-route-reference.json.gz",
+        "tests/v6-coupled-pair-route.test.ts",
+        "docs/migration/v35-coupled-support.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/control_geometry_transport.py",
@@ -24919,9 +24933,16 @@
           "endLine": 18908
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-coupled-pair-route.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-coupled-pair-route-reference.py",
+        "tests/fixtures/v6-coupled-pair-route-reference.json.gz",
+        "tests/v6-coupled-pair-route.test.ts",
+        "docs/migration/v35-coupled-support.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/interaction_supposition_c.py",
@@ -31212,9 +31233,16 @@
           "endLine": 169
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-coupled-pair-route.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-coupled-pair-route-reference.py",
+        "tests/fixtures/v6-coupled-pair-route-reference.json.gz",
+        "tests/v6-coupled-pair-route.test.ts",
+        "docs/migration/v35-coupled-support.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/memorial_source_step.py",
@@ -72397,9 +72425,21 @@
           "endLine": 109
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-auxiliary-support.ts",
+        "src/logos-engine/v6-auxiliary-support-preparation.ts",
+        "src/logos-engine/v6-auxiliary-support-continuation.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-auxiliary-support-reference.py",
+        "tests/fixtures/v6-auxiliary-support-reference.json.gz",
+        "tests/v6-auxiliary-support.test.ts",
+        "docs/migration/v35-coupled-support.md",
+        "tests/v6-shared-series-native.test.ts",
+        "tests/v6-native-checkpoint-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/benchmark.py",
@@ -74124,7 +74164,9 @@
       "proof": [
         "scripts/export-v6-transition-reference.py",
         "tests/fixtures/v6-transition-reference.json",
-        "tests/v6-transition-learning.test.ts"
+        "tests/v6-transition-learning.test.ts",
+        "scripts/export-v6-neutral-domain-reference.py",
+        "docs/migration/native-campaigns-v35/neutral-domain-original.json"
       ]
     },
     {
@@ -74170,9 +74212,22 @@
           "endLine": 38
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-auxiliary-support-reference.py",
+        "tests/fixtures/v6-auxiliary-support-reference.json.gz",
+        "tests/v6-auxiliary-support.test.ts",
+        "docs/migration/v35-coupled-support.md",
+        "scripts/export-v6-coupled-pair-planning-reference.py",
+        "tests/fixtures/v6-coupled-pair-planning-reference.json.gz",
+        "tests/v6-coupled-pair-planning.test.ts",
+        "tests/v6-shared-series-native.test.ts",
+        "tests/v6-native-checkpoint-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_crossed_prefix.py",
@@ -74992,7 +75047,8 @@
         "src/logos-engine/v6-target-binding.ts",
         "src/logos-engine/v6-native-runtime.ts",
         "src/logos-engine/v6-native-authority.ts",
-        "src/logos-engine/v6-native-caller.ts"
+        "src/logos-engine/v6-native-caller.ts",
+        "src/logos-engine/v6-native-transition-domain.ts"
       ],
       "proof": [
         "scripts/export-v6-target-reference.py",
@@ -75015,7 +75071,11 @@
         "tests/fixtures/v6-native-caller/memo-first-prefix.json",
         "tests/fixtures/v6-native-caller/onde-first-prefix.json",
         "docs/migration/v33-shared-series-anchor.md",
-        "docs/migration/v34-coupled-pair-evidence.md"
+        "docs/migration/v34-coupled-pair-evidence.md",
+        "tests/v6-native-transition-domain.test.ts",
+        "tests/v6-native-transition-domain-integration.test.ts",
+        "docs/migration/v35-coupled-support.md",
+        "docs/migration/native-campaigns-v35/dico-domain-witness-diagnostic.json"
       ]
     },
     {
@@ -75718,7 +75778,9 @@
       "proof": [
         "scripts/export-v6-transition-reference.py",
         "tests/fixtures/v6-transition-reference.json",
-        "tests/v6-transition-learning.test.ts"
+        "tests/v6-transition-learning.test.ts",
+        "scripts/export-v6-neutral-domain-reference.py",
+        "docs/migration/native-campaigns-v35/neutral-domain-original.json"
       ]
     },
     {
@@ -76164,14 +76226,21 @@
       "targets": [
         "src/logos-engine/v6-shared-series.ts",
         "src/logos-engine/v6-native-runtime.ts",
-        "src/logos-engine/v6-coupled-pair-evidence.ts"
+        "src/logos-engine/v6-coupled-pair-evidence.ts",
+        "src/logos-engine/v6-auxiliary-support.ts"
       ],
       "proof": [
         "tests/v6-shared-series.test.ts",
         "tests/v6-caller-integration.test.ts",
         "tests/v6-support-caller-integration.test.ts",
         "docs/migration/v33-shared-series-anchor.md",
-        "docs/migration/v34-coupled-pair-evidence.md"
+        "docs/migration/v34-coupled-pair-evidence.md",
+        "scripts/export-v6-coupled-pair-planning-reference.py",
+        "tests/fixtures/v6-coupled-pair-planning-reference.json.gz",
+        "tests/v6-coupled-pair-planning.test.ts",
+        "docs/migration/v35-coupled-support.md",
+        "tests/v6-shared-series-native.test.ts",
+        "tests/v6-native-checkpoint-integration.test.ts"
       ]
     },
     {
@@ -77285,7 +77354,9 @@
       "proof": [
         "scripts/export-v6-transition-reference.py",
         "tests/fixtures/v6-transition-reference.json",
-        "tests/v6-transition-learning.test.ts"
+        "tests/v6-transition-learning.test.ts",
+        "scripts/export-v6-neutral-domain-reference.py",
+        "docs/migration/native-campaigns-v35/neutral-domain-original.json"
       ]
     },
     {
@@ -77477,7 +77548,9 @@
       "proof": [
         "scripts/export-v6-transition-reference.py",
         "tests/fixtures/v6-transition-reference.json",
-        "tests/v6-transition-learning.test.ts"
+        "tests/v6-transition-learning.test.ts",
+        "scripts/export-v6-neutral-domain-reference.py",
+        "docs/migration/native-campaigns-v35/neutral-domain-original.json"
       ]
     },
     {
@@ -79683,11 +79756,12 @@
           "endLine": 87
         }
       ],
-      "status": "partial_transfer",
+      "status": "component_verified",
       "targets": [
         "src/logos-engine/v6-coupled-pair-epoch-anchor.ts",
         "src/logos-engine/v6-shared-series.ts",
-        "src/logos-engine/v6-coupled-pair-evidence.ts"
+        "src/logos-engine/v6-coupled-pair-evidence.ts",
+        "src/logos-engine/v6-coupled-pair-planning.ts"
       ],
       "proof": [
         "scripts/export-v6-coupled-pair-epoch-anchor-reference.py",
@@ -79700,7 +79774,13 @@
         "scripts/export-v6-coupled-pair-evidence-reference.py",
         "tests/fixtures/v6-coupled-pair-evidence-reference.json.gz",
         "tests/v6-coupled-pair-evidence.test.ts",
-        "docs/migration/v34-coupled-pair-evidence.md"
+        "docs/migration/v34-coupled-pair-evidence.md",
+        "scripts/export-v6-coupled-pair-planning-reference.py",
+        "tests/fixtures/v6-coupled-pair-planning-reference.json.gz",
+        "tests/v6-coupled-pair-planning.test.ts",
+        "docs/migration/v35-coupled-support.md",
+        "tests/v6-shared-series-native.test.ts",
+        "tests/v6-native-checkpoint-integration.test.ts"
       ]
     },
     {
@@ -79728,15 +79808,20 @@
           "endLine": 69
         }
       ],
-      "status": "partial_transfer",
+      "status": "component_verified",
       "targets": [
-        "src/logos-engine/v6-coupled-pair-observation.ts"
+        "src/logos-engine/v6-coupled-pair-observation.ts",
+        "src/logos-engine/v6-coupled-pair-route.ts"
       ],
       "proof": [
         "scripts/export-v6-coupled-pair-observation-reference.py",
         "tests/fixtures/v6-coupled-pair-observation-reference.json.gz",
         "tests/v6-coupled-pair-observation.test.ts",
-        "docs/migration/v34-coupled-pair-evidence.md"
+        "docs/migration/v34-coupled-pair-evidence.md",
+        "scripts/export-v6-coupled-pair-route-reference.py",
+        "tests/fixtures/v6-coupled-pair-route-reference.json.gz",
+        "tests/v6-coupled-pair-route.test.ts",
+        "docs/migration/v35-coupled-support.md"
       ]
     },
     {
@@ -79824,9 +79909,21 @@
           "endLine": 114
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-auxiliary-support.ts",
+        "src/logos-engine/v6-auxiliary-support-preparation.ts",
+        "src/logos-engine/v6-auxiliary-support-continuation.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-auxiliary-support-reference.py",
+        "tests/fixtures/v6-auxiliary-support-reference.json.gz",
+        "tests/v6-auxiliary-support.test.ts",
+        "docs/migration/v35-coupled-support.md",
+        "tests/v6-shared-series-native.test.ts",
+        "tests/v6-native-checkpoint-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/custom_bridge.py",
@@ -84592,9 +84689,21 @@
           "endLine": 58
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-auxiliary-support.ts",
+        "src/logos-engine/v6-auxiliary-support-preparation.ts",
+        "src/logos-engine/v6-auxiliary-support-continuation.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-auxiliary-support-reference.py",
+        "tests/fixtures/v6-auxiliary-support-reference.json.gz",
+        "tests/v6-auxiliary-support.test.ts",
+        "docs/migration/v35-coupled-support.md",
+        "tests/v6-shared-series-native.test.ts",
+        "tests/v6-native-checkpoint-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/target_method.py",

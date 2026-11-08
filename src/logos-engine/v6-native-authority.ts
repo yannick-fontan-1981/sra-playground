@@ -4,7 +4,8 @@ import type { ReasoningDynamicState, ReasoningMemoryState } from './v6-reasoning
 import { NativeSrcBridge, NeutralEngine } from './v6-composition-engine.ts';
 import type { CompositionBridgeState, CompositionReport } from './v6-composition-engine.ts';
 import { CompositionTargetTree, mainObjective, postAnalysis, protocolProjection, stateCompositions } from './v6-target-binding.ts';
-import { assessPropertyTransition, assessRetainedTransition, predictCandidateRule, predictPropertyRule, validateRetainedEmpiricalRule } from './v6-transition-learning.ts';
+import { predictCandidateRule, predictPropertyRule } from './v6-transition-learning.ts';
+import { assessNativeTransitionDomain } from './v6-native-transition-domain.ts';
 import { pythonEqual as same } from './v6-operations.ts';
 import { objectValue } from './canonical.ts';
 import { symbolicDigest } from './v6-hash.ts';
@@ -250,21 +251,27 @@ export class NativeCompositionAuthority {
       } else {
         let prior: R[] = this.frozen?.prior_rules ?? [];
         if (transition.index !== 0) { try { prior = this.memory.nativeGet(EPISODE, 'empirical_registry').value; } catch (error) { if (!(error instanceof RangeError)) throw error; } }
-        const checks = transition.index === 0 ? await Promise.all(prior.map(rule => validateRetainedEmpiricalRule(rule, before, after, command))) : [];
-        // The root is mutable for the addressed assessment below; its retained
-        // empirical rules remain immutable and share their unchanged branches.
-        const assessment = { ...await assessRetainedTransition(before, after, command, prior) };
-        if (command.action_ref === 'ACTION6') {
-          const priorProperties = transition.index === 0 ? this.frozen?.prior_property_rules ?? [] : this.memory.nativeGet(EPISODE, 'property_rules').value;
-          const properties = await assessPropertyTransition(before, after, command, priorProperties);
-          assessment.property_rules = properties.property_rules; assessment.addressed_assessment = properties;
-          this.memory.nativePut(EPISODE, 'property_rules', properties.property_rules, after.observation_ref, after.revision);
+        const priorProperties = command.action_ref === 'ACTION6'
+          ? transition.index === 0 ? this.frozen?.prior_property_rules ?? [] : this.memory.nativeGet(EPISODE, 'property_rules').value : [];
+        const { assessment, predictionChecks: checks, updateRegistries } = await assessNativeTransitionDomain(
+          before, after, command, prior, priorProperties, transition.index === 0);
+        if (updateRegistries && command.action_ref === 'ACTION6') {
+          this.memory.nativePut(EPISODE, 'property_rules', assessment.property_rules, after.observation_ref, after.revision);
         }
         record = { before: before.observation_ref, after: after.observation_ref, command, assessment,
           prospective_prediction_checks: checks, prospective_prediction_node: transition.index === 0 ? `reasoning:prediction:${decisionRevision}` : null,
           prospective_claim: transition.index === 0 ? 'first-action candidates frozen before dispatch' : 'mechanism fitting retrospective; only committed path-protocol expectation tested prospectively' };
+        if (!updateRegistries) {
+          // Retain the complete unassessed witness for later reasoning. The
+          // V7 fragment store shares immutable rasters/measurements, including
+          // the observation reused by adjacent transitions. Nothing is clipped.
+          record.unassessed_public_transition = frozenSource({
+            before: { measurement: before, packet: transition.first },
+            after: { measurement: after, packet: transition.second },
+          });
+        }
         if (caller) record.frontier_acquisition = await caller.recordAssessment(transition, assessment);
-        this.memory.nativePut(EPISODE, 'empirical_registry', assessment.empirical_rules, after.observation_ref, after.revision);
+        if (updateRegistries) this.memory.nativePut(EPISODE, 'empirical_registry', assessment.empirical_rules, after.observation_ref, after.revision);
         transitionRefs.push({ node: id, before: before.observation_ref, after: after.observation_ref });
       }
       if (caller) record.caller_acquisition = acquired;

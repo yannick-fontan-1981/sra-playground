@@ -30,6 +30,11 @@ export const FORBIDDEN_TRANSITION_FIELDS: ReadonlySet<string> = new Set([
   'game_id', 'game_name', 'planner', 'planner_name', 'oracle', 'oracle_path', 'goal', 'goals', 'solution', 'winning_route',
 ]);
 const MAX_ENTITIES = 512, MAX_PAIRS = 128, MAX_SUPPORT_POINTS = 65536;
+/** Same source refusal; the V7 caller can distinguish it from corrupt input. */
+export class NeutralEntityDomainError extends RangeError {
+  readonly limit = MAX_ENTITIES;
+  constructor() { super('Neutral entity measurement domain exceeded'); }
+}
 const copy = <T>(value: T): T => structuredClone(value);
 const has = (value: TransitionRecord, key: string): boolean => Object.hasOwn(value, key);
 // Python tuple/set keys equate boolean coordinates with 0/1. Public game
@@ -86,7 +91,7 @@ export function checkNeutralTransition(before: TransitionObservation, after: Tra
   if (!truth(action.action_ref)) throw new TypeError('Action requires its observed public action_ref');
   for (const observation of [before, after]) {
     if (!Array.isArray(observation.entities)) throw new TypeError('Observation requires neutral entities');
-    if (observation.entities.length > MAX_ENTITIES) throw new RangeError('Neutral entity measurement domain exceeded');
+    if (observation.entities.length > MAX_ENTITIES) throw new NeutralEntityDomainError();
     for (const entity of observation.entities) {
       if (Object.keys(entity).some(key => FORBIDDEN_TRANSITION_FIELDS.has(key))) throw new TypeError('Semantic role/solution fields excluded from entities');
       const position = has(entity, 'position') ? entity.position : entity.pose;

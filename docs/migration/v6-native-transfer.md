@@ -11,13 +11,22 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone:** see [the v34 coupled-pair response-acquisition
-report](v34-coupled-pair-evidence.md), following [the v33 epoch-anchor
+**Current integrated milestone:** see [the v35 coupled planning, auxiliary support
+and native checkpoint report](v35-coupled-support.md), following [the v34 coupled-pair
+response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 27 of 76
-explicit DRM subquestions are connected (35.5%). This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 28 of 76
+explicit DRM subquestions are connected (36.8%). This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
+
+The v35 report also distinguishes an explicit V7 robustness extension from
+exact transfer: the original 512-entity mechanical domain still refuses dense
+scenes, but the native caller retains that refusal as unknown, leaves both rule
+registries unchanged, and allows independent families to continue. Complete
+public witnesses remain in the V7 transition nodes. This extension is not an
+extra migrated source entry and does not establish source caller parity outside
+the original domain.
 
 **Historical v31 checkpoint documented below:** the native common coordinator, shared WHY/ACT
 memory and four newly registered interface families execute in the product

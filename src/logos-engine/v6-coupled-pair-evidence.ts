@@ -5,6 +5,7 @@
  * Other ancestors and auxiliary producers retain their separate coverage.
  */
 import { symbolicDigest as identity } from './v6-hash.ts';
+import { retainNativeJson } from './v6-native-owned.ts';
 import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts';
 import { coupledPairEpochAnchor } from './v6-coupled-pair-epoch-anchor.ts';
 import { measureCoupledPairs, matchCoupledPair } from './v6-coupled-pair-observation.ts';
@@ -57,16 +58,23 @@ export class CoupledPairEvidenceMemory {
   private pairState: R | null = null;
   private pairEvents: R[] = [];
   private pairInitials = new Map<string, R>();
+  private version = 0;
+
+  /** Public reducers/restores invalidate the owner's native checkpoint too. */
+  get nativeRevision(): number { return this.version; }
 
   applyEvent(event: R): void {
-    if (event.kind === 'coupled_pair_epoch_anchor') {
-      if (!Object.hasOwn(event, 'epoch')) throw new TypeError('Epoch anchor lacks its epoch');
-      this.pairInitials.set(String(event.epoch), structuredClone(event));
-    } else if (event.kind === 'coupled_pair_evidence') {
-      if (!Object.hasOwn(event, 'state')) throw new TypeError('Coupled-pair evidence lacks its state');
-      this.pairState = structuredClone(event.state);
-    } else throw new TypeError(`Outside coupled-pair acquisition closure: ${String(event.kind)}`);
-    this.pairEvents.push(structuredClone(event));
+    const owned = retainNativeJson(event);
+    if (owned.kind === 'coupled_pair_epoch_anchor') {
+      if (!Object.hasOwn(owned, 'epoch')) throw new TypeError('Epoch anchor lacks its epoch');
+      this.version++; this.pairInitials.set(String(owned.epoch), owned);
+    } else if (owned.kind === 'coupled_pair_evidence') {
+      if (!Object.hasOwn(owned, 'state')) throw new TypeError('Coupled-pair evidence lacks its state');
+      this.version++; this.pairState = owned.state;
+    } else throw new TypeError(`Outside coupled-pair acquisition closure: ${String(owned.kind)}`);
+    // record() already copies its current state before changing it. The retained
+    // event and its state can therefore share one validated immutable tree.
+    this.pairEvents.push(owned);
   }
 
   record(before: R, command: R, after: R, rows: NativeRows, later: NativeRows, proposal: R, index: number): R[] {
@@ -140,8 +148,13 @@ export class CoupledPairEvidenceMemory {
   }
 
   state(): CoupledPairEvidenceState {
-    return structuredClone({ pair_state: this.pairState, pair_events: this.pairEvents, pair_initials: Object.fromEntries(this.pairInitials) });
+    // Public projection fields were independently owned in the source port.
+    // Do not expose the internal sharing as aliases inside a mutable snapshot.
+    return { pair_state: structuredClone(this.pairState), pair_events: structuredClone(this.pairEvents),
+      pair_initials: structuredClone(Object.fromEntries(this.pairInitials)) };
   }
+  /** Planning reads the current measured model without copying old journal entries. */
+  currentState(): R | null { return structuredClone(this.pairState); }
   retainedDigest(parentDigest: string): string {
     return identity([parentDigest, this.pairState, this.pairEvents, Object.fromEntries(this.pairInitials)]);
   }
@@ -154,5 +167,6 @@ export class CoupledPairEvidenceMemory {
     for (const event of state.pair_events) rebuilt.applyEvent(event);
     if (identity(rebuilt.state()) !== identity(state)) throw new TypeError('Coupled-pair state differs from its complete event journal');
     this.pairState = rebuilt.pairState; this.pairEvents = rebuilt.pairEvents; this.pairInitials = rebuilt.pairInitials;
+    this.version++;
   }
 }

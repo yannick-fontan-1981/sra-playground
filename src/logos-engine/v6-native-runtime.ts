@@ -45,13 +45,16 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.5.2';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.6.2';
 const SELECTION_PROGRAM = 'v6.composition_strategy.choose';
 type R = Record<string, any>;
 const EPISODE = 'common-observation-frontier';
 const CALLER_COMPONENTS = ['goal', 'frontier', 'view', 'attention', 'points', 'displays', 'controls', 'counters'] as const;
 const CALLER_PROVIDERS = ['goal_access', 'pre_score_contact', 'scored_local_rewrite', 'factored_material_return', 'conditional_transit',
   'returned_branch_contrast', 'information_goal', 'view', 'view_continuity', 'observed_frontier'] as const;
+function familyCheckpoint(family: NativeFamily): NativeRecord {
+  return family.nativeState && family.restoreNative ? family.nativeState() : family.state();
+}
 function freeze<T>(value: T): T {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
     for (const child of Object.values(value)) freeze(child);
@@ -185,7 +188,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     await this.timed(this.current.level, async () => {
       this.knowledge = new NativeKnowledgeStore(this.sourceDigest, this.sessionId);
       await this.knowledge.commit(this.families.flatMap(family => [
-        { id: `family_state:${family.id}`, kind: 'family_state' as const, family: family.id, value: family.state(),
+        { id: `family_state:${family.id}`, kind: 'family_state' as const, family: family.id, value: familyCheckpoint(family),
           relations: [{ relation: 'controlled_by', target: `family_activation:${family.id}` }] },
         { id: `family_activation:${family.id}`, kind: 'family_activation' as const, family: family.id, status: 'active' as const, value: { enabled: true } },
       ]), { workflow: SELECTION_PROGRAM, step: 'initialize', statement: 'family.install' });
@@ -458,6 +461,11 @@ export class NativeV6Runtime implements NativeV6Backend {
 
   private retainFamilyState(family: NativeFamily, key: string, transition: WitnessedTransition): void {
     const memory = this.authority!.memory, after = transition.after;
+    if (family.nativeState && family.restoreNative) {
+      memory.nativePut(EPISODE, key, family.nativeState(), after.observation_ref, after.revision);
+      family.restoreNative(memory.nativeGet(EPISODE, key).value);
+      return;
+    }
     memory.put(EPISODE, key, family.state(), after.observation_ref, after.revision);
     family.restore(memory.get(EPISODE, key).value);
   }
@@ -501,7 +509,13 @@ export class NativeV6Runtime implements NativeV6Backend {
 
   private restoreFamilies(): void {
     if (!this.knowledge) throw new Error('Native knowledge store is not initialized');
-    for (const family of this.families) family.restore(structuredClone(objectValue(this.knowledge.value(`family_state:${family.id}`))));
+    for (const family of this.families) {
+      // stateValue validates both the root and all referenced fragments before
+      // it reuses an immutable hydration. Never bypass that source of truth.
+      const state = objectValue(this.knowledge.value(`family_state:${family.id}`));
+      if (family.nativeState && family.restoreNative) family.restoreNative(state);
+      else family.restore(structuredClone(state));
+    }
   }
 
   private async persistFamilies(cause: DeltaCause, extra: NativeStoreWrite[] = [], evidenceId?: string): Promise<void> {
@@ -511,7 +525,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       value: { acquiredTransitions: this.callerAcquisitions, boundaryReplays: this.callerBoundaryReplays },
       relations: [{ relation: 'reconciles_with', target: 'reasoning:memory' }],
     }] : []), ...this.families.map(family => ({
-      id: `family_state:${family.id}`, kind: 'family_state' as const, family: family.id, value: family.state(),
+      id: `family_state:${family.id}`, kind: 'family_state' as const, family: family.id, value: familyCheckpoint(family),
       ...(evidenceId ? { evidence: [evidenceId] } : {}),
     }))], cause);
     this.authority?.didCheckpoint();
@@ -578,8 +592,9 @@ export class NativeV6Runtime implements NativeV6Backend {
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id),
-        sharedSeriesMemory: 'occurrence_recall_ancestors_and_coupled_pair_acquisition; remaining ObservedCompositionConstraint providers pending',
+        sharedSeriesMemory: 'occurrence_recall_ancestors_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
         sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,
+        nativeCallerExtensions: ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update'],
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
       srcDecision: this.selectionReceipt,
       whyAct: this.authority?.snapshot() ?? { enabled: false, scope: 'injected_family_test_runtime' },
@@ -687,6 +702,8 @@ function subquestionFamily(family: NativeFamily<any>, field: string, subquestion
     ...(family.bind ? { bind: (proposal: NativeProposal, domain: ObservedInputDomain) => family.bind!(proposal, domain) } : {}),
     before: (...args) => family.before(...args), after: (...args) => family.after(...args), record: (...args) => family.record(...args),
     state: () => family.state(), restore: state => family.restore(state),
+    ...(family.nativeState ? { nativeState: () => family.nativeState!() } : {}),
+    ...(family.restoreNative ? { restoreNative: (state: Readonly<NativeRecord>) => family.restoreNative!(state) } : {}),
   };
 }
 
@@ -752,7 +769,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const visualContinuation = configuration.scored_local_rewrite.minimum_completed_rows_for_visual_continuation as number | undefined;
   const visual = visualFirst || visualContinuation ? visualSequenceFamily(new VisualSequences(), visualContinuation) : null;
   const interfaces = createNativeInterfaceFamilies();
-  const recall = createNativeSharedSeriesFamily((configuration.window_constraints as R).occurrence_recall);
+  const recall = createNativeSharedSeriesFamily((configuration.window_constraints as R).occurrence_recall, configuration.coupled_support_composition);
   const policy = loaded.common as R;
   const supportChildren: Record<string, NativeFamily<any>> = {
     ordered_support_transfer: ordered,
@@ -775,6 +792,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     order.flatMap(question => registered[question] ? [registered[question].id] : []);
   const groupMembers: Record<string, readonly string[]> = {
     goal_access: (configuration.goal_access_subquestions as string[]).flatMap(question => {
+      if (question === 'coupled_support_composition') return [recall.id];
       if (question === 'scored_relation_access') return ['goal_access'];
       if (question === 'observed_support_access') return [supports.id];
       return supportChildren[question] ? [supportChildren[question]!.id] : [];
@@ -800,6 +818,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const manifest = { sourceEncoding: 'json-stringify-v1', implementation: NATIVE_V6_IMPLEMENTATION, referenceCommit: NATIVE_V6_REFERENCE_COMMIT,
     declarations: loaded, families: [...families.map(f => f.id), ...CALLER_PROVIDERS], groups, authority: 'native_original_why_act', caller: 'native_common_coordinator',
     selectionProgram: nativeProgramDescriptions().find(program => program.id === 'v6.composition_strategy.choose')?.transitiveSourceHash ?? null,
+    nativeCallerExtensions: ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update'],
     fullV6Parity: false };
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
