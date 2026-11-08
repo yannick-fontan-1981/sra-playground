@@ -7,6 +7,7 @@ import defaultRules from './v6/animated-contact-rules.json' with { type:'json' }
 import { ObservedInputDomain } from './v6-native-observer.ts';
 import { symbolicDigest } from './v6-hash.ts';
 import { supportSame,supportKey } from './v6-support-measurements.ts';
+import { animatedUnacquiredInquiryWitness } from './v6-acquired-continuation.ts';
 import { orderedTransientComponentPathFacts,measureScalarFillDisplay } from './v6-transient-measurements.ts';
 import { acquireTransientCurve,projectTransientCurve,transientCalibration,transientSourceRoleProbe } from './v6-transient-contact-memory.ts';
 import type { NativeFamily,NativeRows,NativeBeforeResult,NativeAfterResult,NativeRecordResult,NativeRecord,NativeObservation } from './v6-native-types.ts';
@@ -79,6 +80,7 @@ export class AnimatedContactAccess{
 export class AnimatedContact implements NativeFamily<any>{
   readonly id='animated_contact';readonly mechanism:AnimatedContactAccess;readonly policy:R;authorized:R={};
   constructor(policy:R=frontierPolicy.animated_contact_question,rules:R=defaultRules){this.policy=clone(policy);this.mechanism=new AnimatedContactAccess(rules);}
+  unacquiredInquiryWitness(proposal:R,observation:R):NativeRecord|null{return animatedUnacquiredInquiryWitness(this.state(),this.mechanism.arc_pending,proposal,observation);}
   async propose(obs:R,rows:NativeRows,inputs:readonly R[],remaining:number):Promise<any|null>{
     if(remaining<1)return null;const p=this.mechanism.proposeGraph(obs,rows,inputs,Math.min(remaining,16),{animated_contact_question:this.policy});if(!p||p.status!=='proposed')return p;
     p.support_plan={animated_contact:true};p.binding.levels_completed=obs.levels_completed;p.binding.frame_hash=obs.frame_hash;const command=p.actions[0];

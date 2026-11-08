@@ -15,7 +15,8 @@ import { SurfaceProgram } from './v6-surface-program.ts';
 import { CodeProgram } from './v6-code-program.ts';
 import { BandTransfer } from './v6-band-transfer.ts';
 import { ReductionTransport } from './v6-reduction-transport.ts';
-import { retainedReductionSuccess, reductionAcquiredContinuationWitness } from './v6-acquired-continuation.ts';
+import { retainedReductionSuccess, reductionAcquiredContinuationWitness, continuationProposalDigest,
+  CONTINUATION_PROPOSAL_DIGEST_PROFILE } from './v6-acquired-continuation.ts';
 import { createNativeSharedSeriesFamily, SHARED_SERIES_DIGEST_SCOPE } from './v6-shared-series.ts';
 import { SupportNavigation } from './v6-support-navigation.ts';
 import { JointTransport } from './v6-joint-transport.ts';
@@ -49,7 +50,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.17.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.18.0';
 // The implementation identity and public snapshot describe the same extensions.
 const NATIVE_CALLER_EXTENSIONS = ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
   'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery',
@@ -58,6 +59,7 @@ const NATIVE_CALLER_EXTENSIONS = ['neutral_entity_domain_refusal_retained_as_unk
   'structural_cell_support_disambiguation_for_trace_marks',
   'immutable_linked_packet_emission_receipts',
   'current_acquired_continuation_before_unacquired_exploration',
+  'kernel_correlated_official_success_for_current_continuation',
   'stationary_unlearned_contact_refusal_scope'] as const;
 const SELECTION_PROGRAM = 'v6.composition_strategy.choose';
 type R = Record<string, any>;
@@ -369,6 +371,67 @@ export class NativeV6Runtime implements NativeV6Backend {
   }
 
   /**
+   * Corroborate an owner's preflight reference against actual Kernel receipts.
+   * Source boundary labels alone do not prove a score increase. The same owner
+   * can host several entries, so the acquired prefix also binds the exact
+   * entry and proposal kind. Nothing here transfers a prior coordinate law.
+   */
+  private acquiredContribution(family: NativeFamily, retained: R, entry: string | null): R | null {
+    if (!this.knowledge || !this.current || !this.observation
+      || (entry !== null && retained.source_entry !== undefined && retained.source_entry !== entry)) return null;
+    const prefixes = Object.values(this.knowledge.memory.nodes).filter(node => node.kind === 'prefix_evidence' && node.family === family.id).reverse();
+    for (const node of prefixes) {
+      const prefix = this.knowledge.value(node.id) as R, proposal = prefix.proposal;
+      if (!proposal || proposal.status !== 'proposed' || !Array.isArray(prefix.transitions)
+        || !Array.isArray(prefix.composed_reconciliation?.boundary_refs)) continue;
+      const sourceGroup = this.groups.find(group => group.id === proposal.strategy_receipt?.selected);
+      const ownerIndices = sourceGroup?.families.flatMap((id, index) => id === family.id ? [index] : []) ?? [];
+      // A single declared owner entry is unambiguous even for a provider whose
+      // proposal has no subquestion field. A shared owner must name its entry.
+      const sourceEntry = proposal.material_access_subquestion ?? proposal.program_subquestion ?? proposal.field_subquestion
+        ?? (ownerIndices.length === 1 ? sourceGroup!.entryPoints?.[ownerIndices[0]!] ?? null : null);
+      if ((entry !== null && sourceEntry !== entry)
+        || (retained.source_entry !== undefined && retained.source_entry !== sourceEntry)
+        || (retained.source_kind !== undefined && retained.source_kind !== proposal.kind)) continue;
+      const references = prefix.composed_reconciliation.boundary_refs.filter((reference: R) => reference.after === retained.success_ref);
+      if (references.length !== 1) continue;
+      const reference = references[0], transitionNode = this.knowledge.memory.nodes[reference.node];
+      if (!transitionNode || transitionNode.kind !== 'transition_evidence' || transitionNode.component !== 'public_transition'
+        || transitionNode.status !== 'observed') continue;
+      const transition = this.knowledge.value(transitionNode.id) as R, boundary = transition.boundary_witness;
+      const ownedIndex = prefix.transitions.findIndex((item: R) => item.before === reference.before && item.after === reference.after);
+      const owned = prefix.transitions[ownedIndex], sourceComposition = proposal.bundle_template?.composition_ref;
+      if (ownedIndex < 0 || transition.status !== 'official_boundary_witness' || !boundary
+        || !Number.isSafeInteger(boundary.levels_completed_before) || boundary.levels_completed_before < 0
+        || !Number.isSafeInteger(boundary.levels_completed_after)
+        || boundary.levels_completed_after <= boundary.levels_completed_before
+        || boundary.levels_completed_after !== retained.score || retained.score !== this.current.levels_completed
+        || transition.levels_completed !== boundary.levels_completed_after
+        || transition.before !== reference.before || transition.after !== reference.after
+        || boundary.before_observation_ref !== reference.before || boundary.after_observation_ref !== reference.after
+        || !Number.isSafeInteger(prefix.decision_revision) || node.id !== `prefix_evidence:${prefix.decision_revision}`
+        || boundary.committed_decision_revision !== prefix.decision_revision
+        || typeof sourceComposition !== 'string' || !sourceComposition
+        || boundary.released_composition !== sourceComposition
+        || prefix.composed_reconciliation.released_composition_ref !== sourceComposition
+        || boundary.executed_prefix_actions !== ownedIndex + 1
+        || v6Canonical(transition.command) !== v6Canonical(owned.command)
+        || v6Canonical(boundary.last_action) !== v6Canonical(owned.command)
+        || v6Canonical(proposal.actions[ownedIndex]) !== v6Canonical(owned.command)) continue;
+      return { status: 'acquired_official_contribution', family: family.id, entry: sourceEntry,
+        proposal_kind: proposal.kind, source_proposal_ref: proposal.proposal_id ?? sourceComposition,
+        released_composition_ref: sourceComposition, committed_decision_revision: prefix.decision_revision,
+        prefix_evidence_ref: node.id, prefix_evidence_revision: node.revision,
+        transition_ref: transitionNode.id, transition_revision: transitionNode.revision,
+        before_observation_ref: reference.before, after_observation_ref: reference.after,
+        levels_completed_before: boundary.levels_completed_before, levels_completed_after: boundary.levels_completed_after,
+        acquired_command: transition.command, causal_terminal_role: 'unknown', primitive_release_authorized: false,
+        qualification: 'The actual selected prefix and acquired public transition corroborate this score increase for this exact provider entry. They do not establish a general terminal rule or any current physical effect.' };
+    }
+    return null;
+  }
+
+  /**
    * Native arbitration, separate from the unchanged source ordering. A dated
    * official success can support re-examining its own current continuation
    * before a wholly unacquired exploration. The exact attested candidate is
@@ -383,11 +446,13 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (!unacquired || unacquired.status !== 'unacquired_exploration'
       || unacquired.observation_ref !== this.observation.observation_ref
       || !Array.isArray(unacquired.evidence_refs) || unacquired.evidence_refs.length) return null;
+    const retainedByFamily = new Map<string, R | null>();
     for (const group of this.groups.slice(sourceIndex + 1)) for (const [entryIndex, id] of group.families.entries()) {
       const family = this.families.find(candidate => candidate.id === id);
       if (!family?.retainedSuccessWitness || !family.acquiredContinuationWitness
         || objectValue(this.knowledge.value(`family_activation:${id}`)).enabled !== true) continue;
-      const retained = await family.retainedSuccessWitness(this.observation) as R | null;
+      if (!retainedByFamily.has(id)) retainedByFamily.set(id, await family.retainedSuccessWitness(this.observation) as R | null);
+      const retained = retainedByFamily.get(id)!;
       const currentWitness = (witness: R | null): witness is R => Boolean(witness
         && witness.status === 'conditional_acquired_continuation'
         && witness.observation_ref === this.observation!.observation_ref
@@ -395,6 +460,8 @@ export class NativeV6Runtime implements NativeV6Backend {
         && Array.isArray(witness.evidence_refs) && witness.evidence_refs.includes(witness.success_ref));
       if (!currentWitness(retained)) continue;
       const entry = group.entryPoints?.[entryIndex], key = `${group.id}:${family.id}:${entry}`;
+      const contribution = this.acquiredContribution(family, retained, entry ?? null);
+      if (!contribution) continue;
       let candidate: NativeProposal | null;
       if (entry && this.planning.entryOffers.has(key)) candidate = this.planning.entryOffers.get(key)!;
       else {
@@ -406,7 +473,9 @@ export class NativeV6Runtime implements NativeV6Backend {
           : await family.propose(this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution);
         if (entry) this.planning.entryOffers.set(key, candidate);
       }
-      if (!candidate || candidate.status !== 'proposed' || !candidate.actions.length) continue;
+      if (!candidate || candidate.status !== 'proposed' || !candidate.actions.length
+        || candidate.kind !== contribution.proposal_kind
+        || (candidate.material_access_subquestion ?? candidate.program_subquestion ?? candidate.field_subquestion ?? entry ?? null) !== contribution.entry) continue;
       const witness = await family.acquiredContinuationWitness(candidate, this.observation) as R | null;
       if (!currentWitness(witness) || witness.success_ref !== retained.success_ref) continue;
       const guard = await family.before(candidate, 0, this.current, this.observation);
@@ -420,8 +489,10 @@ export class NativeV6Runtime implements NativeV6Backend {
         observation_ref: this.observation.observation_ref,
         deferred_family: deferredFamily.id, deferred_proposal_ref: deferredProposal.proposal_id ?? (deferredProposal as R).bundle_template?.composition_ref ?? null,
         preferred_family: family.id, preferred_proposal_ref: candidate.proposal_id ?? (candidate as R).bundle_template?.composition_ref ?? null,
-        preferred_proposal_digest: symbolicDigest(candidate),
+        preferred_proposal_digest: continuationProposalDigest(candidate),
+        preferred_proposal_digest_profile: CONTINUATION_PROPOSAL_DIGEST_PROFILE,
         unacquired_inquiry: unacquired, acquired_continuation: witness,
+        acquired_kernel_contribution: contribution,
         source_state_ref: stateRef, source_state_revision: this.knowledge.node(stateRef).revision,
         deferred_state_ref: deferredStateRef, deferred_state_revision: this.knowledge.node(deferredStateRef).revision,
         guard_reason: guard.reason, physical_action_authorized: false,
@@ -837,7 +908,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id),
-        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_native_relations_radial_ports_rooted_quota_native_mark_support_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
+        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_native_relations_radial_ports_rooted_quota_native_mark_support_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
         sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,
         nativeCallerExtensions: NATIVE_CALLER_EXTENSIONS,
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
@@ -1030,7 +1101,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       composedLabeledPredicates: true, distinguishTraceCellSupport: true },
     (configuration.window_constraints as R).radial_port_composition, (configuration.window_constraints as R).rooted_quota_composition,
     (configuration.window_constraints as R).product_panel_composition, (configuration.window_constraints as R).labeled_sequence_composition,
-    (configuration.window_constraints as R).trace_field_composition, (configuration.window_constraints as R).linked_packet_composition);
+    (configuration.window_constraints as R).trace_field_composition, (configuration.window_constraints as R).linked_packet_composition,
+    (configuration.window_constraints as R).queued_field_composition);
   const policy = loaded.common as R;
   const supportChildren: Record<string, NativeFamily<any>> = {
     ordered_support_transfer: ordered,
@@ -1054,7 +1126,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   // The cell, occurrence and program source entries share one acquired journal, but
   // each is consulted only at its own position in the original DRM order.
   const windowProviders: Record<string, NativeFamily> = {
-    multiscale_constraints: windows, product_panel_composition: recall, labeled_sequence_composition: recall,
+    multiscale_constraints: windows, queued_field_composition: recall, product_panel_composition: recall, labeled_sequence_composition: recall,
     linked_packet_composition: recall, trace_field_composition: recall,
     cell_patch_composition: recall, observed_occurrence_recall: recall,
     observed_program_composition: recall, radial_port_composition: recall, rooted_quota_composition: recall, ...supportChildren,

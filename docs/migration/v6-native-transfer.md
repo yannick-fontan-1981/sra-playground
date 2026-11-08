@@ -11,7 +11,38 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v47):** the native common Logos Engine caller
+**Current integrated milestone (v48):** the native common Logos Engine caller
+completes **COLM's first three levels in 45 actions (17, 17, 11)** through one
+cold continuous session, 21 sealed prefixes, 45 actual Kernel acquisitions and
+two natural boundary replays. The [actual campaign](native-campaigns-v48/colm-three-levels.json)
+stops at its declared target on entry to level 4 with `NOT_FINISHED`. Its
+46 complete public packets contain 125 frames. The newly connected
+`queued_field_composition` acquires scalar control effects and dated reception
+phases, retains compatible automatic-closure hypotheses, and prepares finite
+conditional contributions. An estimated removal count is never an official
+terminal quota. The unchanged isolated source component and native common
+caller agree on all action references and effect parameters, complete public
+packets, 21 plans and 39 own-layer acquired events. Source scalar commands omit
+the empty transport `data:{}` field, as explicitly recorded in the
+[independent comparison](native-campaigns-v48/colm-original-component-comparison.json).
+
+**ZIPP now completes all six levels with official `WIN` in 101 actions**, through
+a separate cold continuous session and 40 prefixes. The
+[new campaign](native-campaigns-v48/zipp-six-levels.json) retains 101 actual
+Kernel acquisitions, 102 public packets and 119 frames. Its first 77 commands,
+78 full packets, 36 complete plans and 77 retained trace transitions preserve
+the v47 trajectory within the declared comparison scopes. One generic
+arbitration at action 78 links a previously successful program to the actual
+Kernel score increase, command, released composition and exact provider entry.
+The new epoch still begins with two separate observed-effect questions before
+the source permits longer conditional prefixes. This explicit native
+coordination extension changes no source Trace event or geometric rule and
+adds no source entry. See the [v48 report](v48-queued-fields-and-acquired-continuation.md)
+for the evidence, numerical identity boundary, current guards and validation
+receipts. Both campaigns keep Python restricted to the opaque original game
+host; no Python agent, manual priming, reset or level jump participates.
+
+**Previous integrated milestone (v47):** the native common Logos Engine caller
 completes **SELE's first three levels in 44 actions (8, 10, 26)**, with one cold
 continuous session, 44 prefixes, 44 actual Kernel acquisitions and two natural
 boundary replays. The [actual campaign](native-campaigns-v47/sele-three-levels.json)
@@ -35,9 +66,9 @@ fifth level in 24 additional actions**, reaching five levels after 77 actions.
 The [target-six attempt](native-campaigns-v47/zipp-six-levels.json) remains
 `failed` for its declared target: one further animated-contact action in level 6
 is followed by `frontier_unknown` at 78 actions. No complete-game `WIN` is
-asserted. The current trace observer already measures a bounded composition
-at that boundary; the next coordination question is retained without changing
-the frozen implementation. See the [v47 report](v47-linked-packets-and-stable-board.md)
+asserted at that checkpoint. The trace observer already measures a bounded
+composition at that boundary; the then-unresolved coordination question is
+retained with its frozen implementation. See the [v47 report](v47-linked-packets-and-stable-board.md)
 for numerical scope, original-component comparisons, trace extension evidence,
 UI stability measurements and actual validation receipts.
 
@@ -146,10 +177,13 @@ auxiliary support and native checkpoint report](v35-coupled-support.md), [the v3
 response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 38 of 76
-explicit DRM subquestions are connected (50.0%) in implementation
-`logos-engine.typescript.v6.native-migration/0.17.0`. This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 39 of 76
+explicit DRM subquestions are connected (51.3%) in implementation
+`logos-engine.typescript.v6.native-migration/0.18.0`. This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
+The v48 queued-field connection adds one source entry. Corroborating a retained
+success against acquired Kernel boundary scores and exact provider identity is
+an explicit native coordination extension and adds none.
 The v47 linked-packet connection adds one source entry; its immutable numerical
 receipts and structural trace-support interpretation add none.
 The v46 trace-field connection adds one source entry through the existing
@@ -164,14 +198,14 @@ composition added one source entry, following the v38 cell-composition entry;
 the v37 performance step added none. All six conditions for a complete
 migration remain false.
 
-The next demonstrated question is **generic coordination at ZIPP level 6**.
-An offline diagnostic on its retained public entry packet constructs a 25-cell
-trace in 48 search visits. The actual common caller first chooses the competing
-animated-contact question; after its one action, that finite trace model no
-longer constructs a covering suffix and the caller stops. This identifies a
-current selection/continuation question, not a completed sixth level or proof
-that no alternative solution exists. The next change must require current
-support and acquired contribution evidence without a game or level branch.
+The next step is **`occluded_catalogue_composition` and acquisition of useful
+current views**, followed by a cold GRIL campaign targeting its first three
+levels. On the retained set of 100 untouched public initial screens, the
+original observer accepts only GRIL. That discovery identifies a candidate;
+it establishes no successful action or level. The missing initial view effect
+must be acquired from actual public returns before navigation or background
+absence can be treated as evidence. The [candidate-selection note](native-campaigns-v48/candidate-selection.md)
+records the source files, measured structures and unresolved acquisition task.
 
 **Previous v42 result:** THER completes levels 1–4 in **4, 3, 4 and 4 actions**,
 15 total, six sealed prefixes and one retained session. The first two real

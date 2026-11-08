@@ -8,6 +8,7 @@ import type { NativeCommand, NativeExecution, NativeFamily, NativeObservation, N
 import { hydrateNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 import { nativeProgramDescriptions } from '../src/logos-engine/v6-src-program.ts';
 import { symbolicDigest } from '../src/logos-engine/v6-hash.ts';
+import { continuationProposalDigest, CONTINUATION_PROPOSAL_DIGEST_PROFILE } from '../src/logos-engine/v6-acquired-continuation.ts';
 
 type R = Record<string, any>;
 const source = new URL('../reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/', import.meta.url);
@@ -193,7 +194,12 @@ test('the exact acquired candidate replaces an earlier unacquired offer, retaini
   assert.equal(receipt.deferred_family, explorer.family.id);
   assert.equal(receipt.preferred_family, continuation.family.id);
   assert.equal(receipt.preferred_proposal_ref, proposal.proposal_id);
-  assert.equal(receipt.preferred_proposal_digest, symbolicDigest(continuation.calls.offers[0]!.proposal));
+  assert.equal(receipt.preferred_proposal_digest, continuationProposalDigest(continuation.calls.offers[0]!.proposal));
+  assert.equal(receipt.preferred_proposal_digest_profile, CONTINUATION_PROPOSAL_DIGEST_PROFILE);
+  assert.equal(receipt.acquired_kernel_contribution.family, continuation.family.id);
+  assert.equal(receipt.acquired_kernel_contribution.levels_completed_before, 0);
+  assert.equal(receipt.acquired_kernel_contribution.levels_completed_after, 1);
+  assert.equal(receipt.acquired_kernel_contribution.primitive_release_authorized, false);
   assert.equal(receipt.source_state_revision, graph.nodes[`family_state:${continuation.family.id}`]!.revision);
   assert.equal(receipt.deferred_state_revision, graph.nodes[`family_state:${explorer.family.id}`]!.revision);
   assert.equal(receipt.acquired_continuation.success_ref, (previous as R).passed[0].ref);
@@ -220,22 +226,21 @@ test('a cold caller without an acquired success keeps the ordinary exploration',
 
 test('two owners with the same entry name cannot share or substitute their cached proposals', async () => {
   const setup = await acquired({ sameEntry: true });
-  // A controlled preflight stub makes the first provider eligible for a
-  // read-only offer, but it explicitly fails to attest that current offer.
-  // Only the second owner's actual acquired witness can select a proposal.
+  // A copied preflight reference cannot borrow another owner's acquired
+  // official contribution, even when their declared entry names agree.
   setup.unsupported.family.retainedSuccessWitness = observation => setup.continuation.family.retainedSuccessWitness!(observation);
   setup.unsupported.family.acquiredContinuationWitness = () => null;
   const result = await setup.runtime.resume(execution), proposal = result.snapshot.proposal as R;
   assert.equal(result.kind, 'action', result.reason);
   assert.equal(result.snapshot.lastDecision, setup.continuation.family.id);
   assert.equal(result.command!.action_ref, 'ACTION3');
-  assert.equal(setup.unsupported.calls.offers.length, 1);
+  assert.equal(setup.unsupported.calls.offers.length, 0);
   assert.equal(setup.continuation.calls.offers.length, 1);
   assert.equal(proposal.provider_id, setup.continuation.family.id);
   const [receipt] = proposal.strategy_receipt.native_coordination;
   assert.equal(receipt.selected_group, 'shared_entry_group');
   assert.equal(receipt.selected_entry, 'same_entry');
-  assert.equal(receipt.preferred_proposal_digest, symbolicDigest(setup.continuation.calls.offers[0]!.proposal));
+  assert.equal(receipt.preferred_proposal_digest, continuationProposalDigest(setup.continuation.calls.offers[0]!.proposal));
   assert.equal(setup.unsupported.calls.bindings, 0);
   assert.equal(setup.unsupported.calls.guards, 0);
   assert.equal(result.snapshot.actions, 1);
@@ -271,6 +276,7 @@ const retainedChanges: [string, NonNullable<Behavior['changeRetained']>][] = [
   ['missing success reference', witness => ({ ...witness!, success_ref: '' })],
   ['success without evidence', witness => ({ ...witness!, evidence_refs: [] })],
   ['unrelated evidence', witness => ({ ...witness!, evidence_refs: ['different-boundary'] })],
+  ['invented but internally consistent success reference', witness => ({ ...witness!, success_ref: 'unacquired-success', evidence_refs: ['unacquired-success'] })],
 ];
 for (const [name, change] of retainedChanges) test(`retained continuation preflight refuses ${name}`, async () => {
   const setup = await acquired(); setup.continuation.behavior.changeRetained = change;
@@ -307,6 +313,7 @@ const proposalChanges: [string, NonNullable<Behavior['changeProposal']>][] = [
   ['no candidate', () => null],
   ['source refusal', proposal => ({ ...proposal, status: 'unknown', actions: [] })],
   ['empty physical prefix', proposal => ({ ...proposal, actions: [], steps: [] })],
+  ['another kind on the same owner', proposal => ({ ...proposal, kind: 'unacquired_different_kind' })],
   ['old epoch binding', proposal => ({ ...proposal, binding: { ...proposal.binding, level_epoch: 1 } })],
   ['old observation binding', proposal => ({ ...proposal, binding: { ...proposal.binding, observation_ref: 'previous-observation' } })],
   ['old score binding', proposal => ({ ...proposal, binding: { ...proposal.binding, levels_completed: 0 } })],
@@ -316,6 +323,84 @@ for (const [name, change] of proposalChanges) test(`the current proposal and gua
   const setup = await acquired(); setup.continuation.behavior.changeProposal = change;
   assertSourceChoice(await setup.runtime.resume(execution), setup);
   assert.equal(setup.continuation.calls.bindings, 0);
+});
+
+test('an epoch change without a public score increase cannot corroborate a forged success preflight', async () => {
+  const setup = rig(), first = await setup.initialize();
+  assert.equal(first.snapshot.lastDecision, setup.continuation.family.id);
+  const boundary = await setup.runtime.advance({ command: first.command!, executionMs: 0,
+    observation: { ...packet(1), levels_completed: 0 } }, execution);
+  assert.equal(boundary.kind, 'boundary');
+  setup.explorer.behavior.cold = true;
+  setup.continuation.behavior.changeRetained = (_witness, observation) => ({ status: 'conditional_acquired_continuation',
+    observation_ref: observation.observation_ref, score: observation.levels_completed,
+    success_ref: observation.observation_ref, evidence_refs: [observation.observation_ref] });
+  setup.continuation.clearCalls();
+  const result = await setup.runtime.resume(execution);
+  assertSourceChoice(result, setup);
+  assert.deepEqual(setup.continuation.calls.offers, [], 'The actual acquired boundary has no score increase');
+});
+
+test('a real public score increase is sufficient even when the level epoch does not change', async () => {
+  const setup = rig(), first = await setup.initialize();
+  const boundary = await setup.runtime.advance({ command: first.command!, executionMs: 0,
+    observation: { ...packet(1), level: 1 } }, execution);
+  assert.equal(boundary.kind, 'boundary');
+  const result = await setup.runtime.resume(execution);
+  assert.equal(result.snapshot.lastDecision, setup.continuation.family.id);
+  const receipt = (result.snapshot.proposal as R).strategy_receipt.native_coordination[0].acquired_kernel_contribution;
+  assert.equal(receipt.levels_completed_before, 0);
+  assert.equal(receipt.levels_completed_after, 1);
+});
+
+test('a single provider without explicit group entries retains its proposal subquestion identity', async () => {
+  const setup = rig(), original = setup.continuation.family.propose;
+  setup.continuation.family.propose = async (...args) => {
+    const proposal = await original(...args);
+    return proposal ? { ...proposal, material_access_subquestion: 'anonymous_material_question' } : null;
+  };
+  const first = await setup.initialize();
+  await setup.runtime.advance({ command: first.command!, executionMs: 0, observation: packet(1) }, execution);
+  const result = await setup.runtime.resume(execution), proposal = result.snapshot.proposal as R;
+  assert.equal(result.kind, 'action', result.reason);
+  assert.equal(result.snapshot.lastDecision, setup.continuation.family.id);
+  assert.equal(proposal.material_access_subquestion, 'anonymous_material_question');
+  assert.equal(proposal.strategy_receipt.native_coordination[0].acquired_kernel_contribution.entry, 'anonymous_material_question');
+});
+
+test('a shared owner cannot lend a successful entry to another entry before proposing it', async () => {
+  const setup = rig({ sameEntry: true, groups: [
+    { id: 'exploration_group', families: ['anonymous_explorer'] },
+    { id: 'shared_group', families: ['anonymous_continuation', 'anonymous_continuation'],
+      entryPoints: ['acquired_entry', 'unacquired_entry'] },
+  ] });
+  const entries: string[] = [];
+  setup.continuation.family.proposeInSubquestion = async (_group, entry, ...args) => {
+    entries.push(entry);
+    if (args[0].levels_completed && entry === 'acquired_entry') return null;
+    const proposal = await setup.continuation.family.propose(...args);
+    return proposal ? { ...proposal, field_subquestion: entry } : null;
+  };
+  const first = await setup.initialize();
+  assert.equal((first.snapshot.proposal as R).field_subquestion, 'acquired_entry');
+  await setup.runtime.advance({ command: first.command!, executionMs: 0, observation: packet(1) }, execution);
+  entries.length = 0;
+  const result = await setup.runtime.resume(execution);
+  assertSourceChoice(result, setup);
+  assert.deepEqual(entries, ['acquired_entry'], 'The sibling entry has no acquired contribution of its own');
+});
+
+test('proposal provenance preserves Float64 values and distinguishes negative zero through the native codec', async () => {
+  const setup = await acquired();
+  setup.continuation.behavior.changeProposal = proposal => ({ ...proposal, measured_numeric_context: { angle: Math.PI / 6, offset: -0 } });
+  const result = await setup.runtime.resume(execution), proposal = result.snapshot.proposal as R;
+  assert.equal(result.kind, 'action', result.reason);
+  const receipt = proposal.strategy_receipt.native_coordination[0], actual = setup.continuation.calls.offers[0]!.proposal;
+  assert.equal(receipt.preferred_proposal_digest, continuationProposalDigest(actual));
+  assert.equal(receipt.preferred_proposal_digest_profile, CONTINUATION_PROPOSAL_DIGEST_PROFILE);
+  assert.notEqual(continuationProposalDigest(actual), continuationProposalDigest({ ...actual,
+    measured_numeric_context: { ...actual.measured_numeric_context, offset: 0 } }));
+  assert.throws(() => symbolicDigest(actual), /integer|number/i, 'The V7 canonical scalar domain remains unchanged');
 });
 
 test('a current guard veto leaves the exploration available and acquires nothing', async () => {

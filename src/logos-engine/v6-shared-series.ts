@@ -17,6 +17,7 @@ import { AlternatingGraphMemory, alternatingGraphBefore, alternatingGraphAfter }
 import { CellPlacementMemory, cellPlacementBefore } from './v6-cell-placement.ts';
 import { RadialPortMemory, commonRadialPortProposal, bindRadialPort, radialPortBefore, radialPortAfter } from './v6-radial-port-access.ts';
 import { RootedQuotaMemory, commonRootedQuotaProposal, bindRootedQuota, rootedQuotaBefore, rootedQuotaAfter } from './v6-rooted-quota-access.ts';
+import { QueuedFieldMemory, commonQueuedFieldProposal, bindQueuedField, queuedFieldBefore, queuedFieldAfter } from './v6-queued-field-access.ts';
 import { ProductPanelMemory, commonProductPanelProposal, bindProductPanel, productPanelBefore, productPanelAfter } from './v6-product-panel-access.ts';
 import { LabeledSequenceMemory, commonLabeledSequenceProposal, bindLabeledSequence, labeledSequenceBefore, labeledSequenceAfter } from './v6-labeled-sequence-access.ts';
 import { TraceFieldMemory, commonTraceFieldProposal, bindTraceField, traceFieldBefore, traceFieldAfter } from './v6-trace-field-access.ts';
@@ -25,7 +26,7 @@ import { markedCollectionQuestion, observedProgramQuestion, observedProgramBefor
   recordObservedProgram, recordObservedProgramPacket } from './v6-program-composition-access.ts';
 import { programIdentity } from './v6-program-identity.ts';
 import { sharedLearnedPreparationWitness, radialLearnedPreparationWitness } from './v6-learned-preparation.ts';
-import { cellUnacquiredInquiryWitness } from './v6-acquired-continuation.ts';
+import { cellUnacquiredInquiryWitness, retainedTraceBoundaryCandidate, traceAcquiredContinuationWitness } from './v6-acquired-continuation.ts';
 import { programControlDiscoveryQuestion, programControlDiscoveryBefore, programControlDiscoveryAfter, programControlDiscoveryBlocksOrdinaryPlan,
   recordProgramControlDiscovery } from './v6-program-control-discovery.ts';
 import { acquireProgramRelationModels, programRelationQuestion, programRelationBefore, programRelationAfter,
@@ -38,7 +39,7 @@ import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts'
 import type { OccurrenceRecord as R } from './v6-occurrence-scene.ts';
 import type { NativeFamily, NativeRows, NativePublicObservation, NativeProposal } from './v6-native-types.ts';
 
-export const SHARED_SERIES_DIGEST_SCOPE = 'native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_and_coupled_support_v6';
+export const SHARED_SERIES_DIGEST_SCOPE = 'native_program_relations_recall_radial_ports_rooted_quota_mark_support_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_and_coupled_support_v6';
 
 export interface NativeSharedSeriesOptions {
   /** Native current-control revalidation; the default preserves source contracts. */
@@ -134,6 +135,7 @@ interface SharedWorkingStamp {
   memory: SharedOccurrenceMemory; memoryRevision: number; memoryWitness: WorkingWitness;
   radial: RadialPortMemory; radialRevision: number;
   rooted: RootedQuotaMemory; rootedRevision: number;
+  queued: QueuedFieldMemory; queuedRevision: number;
   product: ProductPanelMemory; productRevision: number;
   labeled: LabeledSequenceMemory; labeledRevision: number;
   trace: TraceFieldMemory; traceRevision: number;
@@ -150,6 +152,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   override memory = new SharedOccurrenceMemory();
   radial = new RadialPortMemory();
   rooted = new RootedQuotaMemory();
+  queued = new QueuedFieldMemory();
   product = new ProductPanelMemory();
   labeled = new LabeledSequenceMemory();
   trace = new TraceFieldMemory();
@@ -183,6 +186,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     return { memory: this.memory, memoryRevision: this.memory.nativeRevision, memoryWitness: workingWitness(this.memory),
       radial: this.radial, radialRevision: this.radial.nativeRevision,
       rooted: this.rooted, rootedRevision: this.rooted.nativeRevision,
+      queued: this.queued, queuedRevision: this.queued.nativeRevision,
       product: this.product, productRevision: this.product.nativeRevision,
       labeled: this.labeled, labeledRevision: this.labeled.nativeRevision,
       trace: this.trace, traceRevision: this.trace.nativeRevision,
@@ -196,6 +200,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     return this.memory === stamp.memory && this.memory.nativeRevision === stamp.memoryRevision
       && this.radial === stamp.radial && this.radial.nativeRevision === stamp.radialRevision
       && this.rooted === stamp.rooted && this.rooted.nativeRevision === stamp.rootedRevision
+      && this.queued === stamp.queued && this.queued.nativeRevision === stamp.queuedRevision
       && this.product === stamp.product && this.product.nativeRevision === stamp.productRevision
       && this.labeled === stamp.labeled && this.labeled.nativeRevision === stamp.labeledRevision
       && this.trace === stamp.trace && this.trace.nativeRevision === stamp.traceRevision
@@ -281,6 +286,12 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   productPropose(observation: R, rows: NativeRows, inputs: readonly R[], remaining: number, config: R,
     deadlineMs: number | null, now?: () => number): Promise<R | null> {
     return commonProductPanelProposal(this.product, observation, rows, inputs, remaining, config, deadlineMs, now);
+  }
+
+  /** The queued-field source entry retains conditional models in the same owner. */
+  queuedPropose(observation: R, rows: NativeRows, inputs: readonly R[], remaining: number, config: R,
+    deadlineMs: number | null, now?: () => number): R | null {
+    return commonQueuedFieldProposal(this.queued, observation, rows, inputs, remaining, config, deadlineMs, now);
   }
 
   /** Current labeled-query entry with the same acquired journal and physical guard. */
@@ -386,6 +397,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     if (Object.hasOwn(proposal, 'trace_field_plan')) { bindTraceField(proposal, domain); return; }
     if (Object.hasOwn(proposal, 'labeled_sequence_plan')) { bindLabeledSequence(proposal, domain); return; }
     if (Object.hasOwn(proposal, 'product_panel_plan')) { bindProductPanel(proposal, domain); return; }
+    if (Object.hasOwn(proposal, 'queued_field_plan')) { bindQueuedField(proposal, domain); return; }
     if (Object.hasOwn(proposal, 'rooted_quota_plan')) { bindRootedQuota(proposal, domain); return; }
     if (Object.hasOwn(proposal, 'radial_port_plan')) { bindRadialPort(proposal, domain); return; }
     if (Object.hasOwn(proposal, 'occurrence_recall_plan')) { super.bind(proposal, domain); return; }
@@ -421,6 +433,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
     if (truth(proposal.product_panel_plan)) return productPanelBefore(proposal, index, packet.frame_rows,
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
+    if (truth(proposal.queued_field_plan)) return queuedFieldBefore(proposal, index, packet.frame_rows,
+      { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs }, this.queued);
     if (truth(proposal.program_relation_plan)) return programRelationBefore(proposal, index, packet.frame_rows,
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref,
         available: packet.available_action_refs, state: packet.state,
@@ -457,6 +471,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
     if (truth(proposal.product_panel_plan)) return productPanelAfter(proposal, index, first, second,
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
+    if (truth(proposal.queued_field_plan)) return queuedFieldAfter(proposal, index, first, second,
+      { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
     if (truth(proposal.program_relation_plan)) return programRelationAfter(proposal, index, first, second,
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state,
         model: this.memory.compositionModels.at(-1), events: this.memory.controlDiscoveryEvents });
@@ -478,6 +494,9 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     proposal: R, index: number, frames: readonly NativeRows[] = []): R {
     const certified = this.certified !== null && this.unchanged(this.certified);
     this.certified = null;
+    // Queue records its pending actual return before its inherited record chain;
+    // it acquires the conditional model only after the complete dated packet.
+    this.queued.record(before, command, after, first, second, proposal, index);
     // Program ancestors acquire before the higher occurrence/cell layers.
     // Their source record methods dispatch self.before/self.after through the
     // complete inherited guard chain, including mixed-key test envelopes.
@@ -527,6 +546,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     for (const event of supportEvents) if (event.kind === 'coupled_pair_evidence') this.pairs.applyEvent(event);
     events.push(...supportEvents);
     events.push(...recordObservedProgramPacket(this.memory, before, command, after, first, frames));
+    events.push(...this.queued.recordPacket(before, command, after, first, frames));
     events.push(...this.linked.recordPacket(before, command, after, first, frames));
     events.push(...this.cells.recordPacket(before, command, after, first, frames));
     // Keep returned source envelopes independently mutable. Only the retained
@@ -542,7 +562,10 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   }
 
   private sharedDigest(): string {
-    return this.auxiliary.retainedDigest(this.pairs.retainedDigest(this.graph.retainedDigest(this.cells.retainedDigest(this.linked.retainedDigest(this.trace.retainedDigest(this.labeled.retainedDigest(this.product.retainedDigest(this.rooted.retainedDigest(this.radial.retainedDigest(this.memory.retainedDigest()))))))))));
+    let digest = this.memory.retainedDigest();
+    for (const layer of [this.radial, this.rooted, this.queued, this.product, this.labeled, this.trace,
+      this.linked, this.cells, this.graph, this.pairs, this.auxiliary]) digest = layer.retainedDigest(digest);
+    return digest;
   }
 
   /** Internal checkpoint only: public state() still returns an independent copy. */
@@ -581,11 +604,12 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
 
   private restoreOwned(state: Readonly<R>): void {
     if (!Array.isArray(state.events) || typeof state.digest !== 'string') throw new TypeError('Incomplete shared series memory');
-    const events = [...state.events] as R[], memory = new SharedOccurrenceMemory(), radial = new RadialPortMemory(), rooted = new RootedQuotaMemory(), product = new ProductPanelMemory(), labeled = new LabeledSequenceMemory(), trace = new TraceFieldMemory(), linked = new LinkedPacketMemory(), cells = new CellPlacementMemory(), graph = new AlternatingGraphMemory(),
+    const events = [...state.events] as R[], memory = new SharedOccurrenceMemory(), radial = new RadialPortMemory(), rooted = new RootedQuotaMemory(), queued = new QueuedFieldMemory(), product = new ProductPanelMemory(), labeled = new LabeledSequenceMemory(), trace = new TraceFieldMemory(), linked = new LinkedPacketMemory(), cells = new CellPlacementMemory(), graph = new AlternatingGraphMemory(),
       pairs = new CoupledPairEvidenceMemory(), auxiliary = new AuxiliarySupportMemory();
     for (const event of events) {
       if (event.kind === 'radial_method_recall' || event.kind === 'radial_port_effect') radial.applyEvent(event);
       else if (event.kind === 'rooted_quota_state') rooted.applyEvent(event);
+      else if (event.kind === 'observed_queue_field_model') queued.applyEvent(event);
       else if (event.kind === 'observed_factor_product') product.applyEvent(event);
       else if (event.kind === 'labeled_sequence_submission') labeled.applyEvent(event);
       else if (event.kind === 'observed_trace_extension') trace.applyEvent(event);
@@ -596,10 +620,12 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       else if (event.kind === 'coupled_support_control_model' || event.kind === 'coupled_support_preparation') auxiliary.applyEvent(event);
       else memory.applyEvent(event);
     }
-    if (auxiliary.retainedDigest(pairs.retainedDigest(graph.retainedDigest(cells.retainedDigest(linked.retainedDigest(trace.retainedDigest(labeled.retainedDigest(product.retainedDigest(rooted.retainedDigest(radial.retainedDigest(memory.retainedDigest())))))))))) !== state.digest) throw new TypeError('Shared series memory changed during recall');
+    let digest = memory.retainedDigest();
+    for (const layer of [radial, rooted, queued, product, labeled, trace, linked, cells, graph, pairs, auxiliary]) digest = layer.retainedDigest(digest);
+    if (digest !== state.digest) throw new TypeError('Shared series memory changed during recall');
     // Only publish the reconstructed working copies after the complete journal
     // has passed integrity checks. A rejected edit cannot clear learned state.
-    this.memory = memory; this.radial = radial; this.rooted = rooted; this.product = product; this.labeled = labeled; this.trace = trace; this.linked = linked; this.cells = cells; this.graph = graph; this.pairs = pairs; this.auxiliary = auxiliary; this.events = events;
+    this.memory = memory; this.radial = radial; this.rooted = rooted; this.queued = queued; this.product = product; this.labeled = labeled; this.trace = trace; this.linked = linked; this.cells = cells; this.graph = graph; this.pairs = pairs; this.auxiliary = auxiliary; this.events = events;
     const stamp = this.workingStamp();
     this.certified = stamp; this.accepted = { value: state, stamp };
     this.checkpoint = { value: retainNativeJson({ events: this.events, digest: state.digest }), stamp, certified: true };
@@ -607,10 +633,13 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
 }
 
 export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, coupledConfig?: R, graphConfig?: R, cellConfig?: R,
-  options: NativeSharedSeriesOptions = {}, radialConfig?: R, rootedConfig?: R, productConfig?: R, labeledConfig?: R, traceConfig?: R, linkedConfig?: R): NativeFamily {
+  options: NativeSharedSeriesOptions = {}, radialConfig?: R, rootedConfig?: R, productConfig?: R, labeledConfig?: R, traceConfig?: R, linkedConfig?: R,
+  queuedConfig?: R): NativeFamily {
   const family = new SharedSeriesConstraint(config, options), adapter = asNativeOccurrenceRecallFamily(family);
   return { ...adapter, nativeState: () => family.nativeState(), restoreNative: state => family.restoreNative(state),
     unacquiredInquiryWitness: (proposal, observation) => cellUnacquiredInquiryWitness(family.cells.state(), proposal, observation),
+    retainedSuccessWitness: observation => retainedTraceBoundaryCandidate(family.trace.currentState(), observation),
+    acquiredContinuationWitness: (proposal, observation) => traceAcquiredContinuationWitness(family.trace.currentState(), proposal, observation),
     groundedInquiryWitness: (proposal, observation) => {
       if (proposal.kind === 'public_program_relation_probe') return programRelationWitness(family.memory.compositionModels.at(-1)!,
         family.memory.controlDiscoveryEvents, proposal, observation);
@@ -630,6 +659,12 @@ export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, c
       ? 'program_composition_projection_refuted' : family.rooted.requestedStopReason ?? family.memory.requestedStopReason,
     proposeInSubquestion: async (group, subquestion, observation, rows, inputs, remaining, execution) => {
       if (group === 'window_constraints') {
+        if (subquestion === 'queued_field_composition') {
+          const proposal = queuedConfig ? family.queuedPropose(observation, rows, inputs, remaining, queuedConfig,
+            execution?.deadlineMs ?? null, execution?.now) : null;
+          if (proposal) proposal.field_subquestion = 'queued_field_composition';
+          return proposal as NativeProposal | null;
+        }
         if (subquestion === 'product_panel_composition') {
           const proposal = productConfig ? await family.productPropose(observation, rows, inputs, remaining, productConfig,
             execution?.deadlineMs ?? null, execution?.now) : null;
@@ -692,6 +727,10 @@ export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, c
       return graphConfig ? family.graphPropose(observation, rows, inputs, remaining, graphConfig, execution?.deadlineMs ?? null) as NativeProposal | null : null;
     }
     if (group === 'window_constraints') {
+      const queued = queuedConfig ? family.queuedPropose(observation, rows, inputs, remaining, queuedConfig,
+        execution?.deadlineMs ?? null, execution?.now) : null;
+      if (queued) queued.field_subquestion = 'queued_field_composition';
+      if (queued) return queued as NativeProposal;
       const product = productConfig ? await family.productPropose(observation, rows, inputs, remaining, productConfig,
         execution?.deadlineMs ?? null, execution?.now) : null;
       if (product) product.field_subquestion = 'product_panel_composition';

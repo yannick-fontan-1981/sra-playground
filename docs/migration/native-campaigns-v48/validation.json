@@ -1,0 +1,588 @@
+{
+  "schema": "logos-engine.v48.release-validation.v1",
+  "status": "passed",
+  "sourceDigest": "30f078d458bf7771e203f3af194ff0bd89fb8fa233d3d0c14cee32282551ea24",
+  "nativeSourceFiles": 163,
+  "nativeSourceManifest": {
+    "path": "docs/migration/native-campaigns-v48/source-manifest.json",
+    "sha256": "8345a1c131a392da9febe7f561cf7d2cde6896694579a02825583989f637e3ba",
+    "bytes": 18973
+  },
+  "newActualCampaign": {
+    "report": {
+      "path": "docs/migration/native-campaigns-v48/colm-three-levels.json",
+      "sha256": "c323ea3cdf75927b544b190b9be8cf7e38c171e32ebb5d716f693dc1a3b303a0",
+      "bytes": 1523022
+    },
+    "execution": {
+      "path": "docs/migration/native-campaigns-v48/logs/execution-colm.json",
+      "sha256": "044b643a9475909c17033cfafad2bf87806150340a360372f65d160ce175225e",
+      "bytes": 40125
+    },
+    "trace": {
+      "path": "docs/migration/native-campaigns-v48/colm-public-trace.json.gz",
+      "sha256": "d3508414f956c35f58ef5364d14f91ea99a93c1b144ee476f4815b35a356bae7",
+      "bytes": 27249
+    },
+    "campaignStatus": "passed",
+    "targetLevels": 3,
+    "targetReached": true,
+    "levelsCompleted": 3,
+    "actions": 45,
+    "prefixes": 21,
+    "sessions": 1,
+    "stopReason": "target_levels_completed",
+    "officialState": "NOT_FINISHED",
+    "officialWin": false,
+    "boundaryActions": [
+      17,
+      34,
+      45
+    ],
+    "perLevelActions": [
+      17,
+      17,
+      11
+    ],
+    "completePublicPackets": 46,
+    "animationFramesIncludingInitial": 125
+  },
+  "completedContinuationCampaign": {
+    "report": {
+      "path": "docs/migration/native-campaigns-v48/zipp-six-levels.json",
+      "sha256": "98c4fb24013a13e93becf8fba6d3d4be51f2d94305b9bc0d21cc46fd366df5cb",
+      "bytes": 2568355
+    },
+    "execution": {
+      "path": "docs/migration/native-campaigns-v48/logs/execution-zipp.json",
+      "sha256": "8db0bc04cb7e050ff910a94edbe302f35ab183755081bb640c008dbda2b24058",
+      "bytes": 40122
+    },
+    "trace": {
+      "path": "docs/migration/native-campaigns-v48/zipp-public-trace.json.gz",
+      "sha256": "dca930510e267cdb3ae5098606da3441eecf14d362215f99197fc77023ab1917",
+      "bytes": 36532
+    },
+    "campaignStatus": "passed",
+    "targetLevels": 6,
+    "targetReached": true,
+    "levelsCompleted": 6,
+    "actions": 101,
+    "prefixes": 40,
+    "sessions": 1,
+    "stopReason": "target_levels_completed",
+    "officialState": "WIN",
+    "officialWin": true,
+    "boundaryActions": [
+      8,
+      23,
+      38,
+      53,
+      77,
+      101
+    ],
+    "perLevelActions": [
+      8,
+      15,
+      15,
+      15,
+      24,
+      24
+    ],
+    "completePublicPackets": 102,
+    "animationFramesIncludingInitial": 119
+  },
+  "componentComparisons": {
+    "queuedField": {
+      "path": "docs/migration/native-campaigns-v48/colm-original-component-comparison.json",
+      "sha256": "cb415408dcf08313556f574b7f6a463e526235951d0669593c345a8204683d59",
+      "bytes": 86085
+    },
+    "traceContinuation": {
+      "path": "docs/migration/native-campaigns-v48/zipp-trace-continuation-comparison.json",
+      "sha256": "2eeb54aa93bbc12646f090670450a8e17d5050cec1d9bc188f93caa727cbb108",
+      "bytes": 76447
+    },
+    "readOnlyRecomputationPassed": true,
+    "queuedNumericTolerance": 0,
+    "originalParentProjectionDiagnostic": {
+      "diagnostic": {
+        "path": "tests/fixtures/v6-queued-field-reference-parent-diagnostic.json.gz",
+        "sha256": "7105f0a20cac098cef76cda4b2c3f8597879fdc784ffefff10239a0c7b902529",
+        "bytes": 416298
+      },
+      "exporter": {
+        "path": "scripts/history/export-v6-queued-field-reference-parent-diagnostic.py",
+        "sha256": "86889a425dd02505ad772ce75a64a265a11f2573acfb51816b8acf0a2fa69af7",
+        "bytes": 14556
+      }
+    },
+    "qualification": "All 21 COLM plans and 39 own acquired events are compared. ZIPP preserves the first 77 public commands and independently validates the sixth-level continuation. Its complete preauthorization proposal is not projected, so that typed provenance hash is not independently recomputed here. No full original caller parity is claimed."
+  },
+  "deltaTests": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v48/validation/delta-tests-run.json",
+      "sha256": "2f5c0d8b36de7200c465ac8f126c3ee195abe1cb0b74cdf36f708ecc3be07610",
+      "bytes": 83133
+    },
+    "validationMode": "single-frozen-delta-execution",
+    "counts": {
+      "tests": 417,
+      "pass": 417,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "testFiles": 18,
+    "topLevelTests": 396,
+    "nestedTests": 21,
+    "sourceAndTestInputsUnchanged": true,
+    "qualification": "One retained execution covers the 18 affected test files on unchanged source, test and fixture inputs. This is not a rerun of the entire historical suite."
+  },
+  "regressions": {
+    "summary": {
+      "path": "docs/migration/native-campaigns-v48/regression-summary.json",
+      "sha256": "589feff5ab21a0bf4601df3cd23990aa6254f9653940420de138d91c96bcdd3f",
+      "bytes": 5092
+    },
+    "groups": [
+      {
+        "mode": "recorded-public-replay",
+        "runs": 5,
+        "passed": true,
+        "commands": 286,
+        "completePublicPackets": 291,
+        "prefixes": 233,
+        "comparisonChecks": 80,
+        "games": [
+          "STCK",
+          "CATL",
+          "LF52",
+          "TICT",
+          "SELE"
+        ]
+      },
+      {
+        "mode": "actual-game-campaign",
+        "runs": 0,
+        "passed": true,
+        "commands": 0,
+        "completePublicPackets": 0,
+        "prefixes": 0,
+        "comparisonChecks": 0,
+        "games": []
+      }
+    ],
+    "qualification": "Five cold native replays recompute decisions before consuming retained complete public returns. They are not five additional live wins. The plan, actual receipts and 80 retained comparisons are verified without rerunning the games or replaying the agent."
+  },
+  "checks": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v48/validation/checks-run.json",
+      "sha256": "0cb1d18e516288c80800f506028deae86548f36ced660a04a6a615c4000d0771",
+      "bytes": 67520
+    },
+    "nativeAgentWorker": {
+      "path": "dist/assets/v6-agent-worker-BQI4Vwlv.js",
+      "sha256": "2f39d8e84d650a6b292876e12fc2b045fd4d08626a9b3e769c3d67da115fbd9b",
+      "bytes": 5405847
+    }
+  },
+  "browser": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v48/colm-browser-verification.json",
+      "sha256": "8cb5a96b834fa78dddec1d543bc0fed5f85e3796c4e30981a426cacb79e205b4",
+      "bytes": 9057
+    },
+    "measurements": 7,
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    },
+    "boardColumnHeight": 442,
+    "canvasSize": 384,
+    "statusHeight": 98,
+    "maximumDocumentPositionDeltaPx": 0,
+    "maximumDimensionDeltaPx": 0,
+    "completedLevels": 3,
+    "actions": 45,
+    "prefixes": 21,
+    "inspectionClosedThroughout": true,
+    "captureProperties": {
+      "format": "JPEG",
+      "width": 1348,
+      "height": 926
+    },
+    "fullscreen": "not_retested",
+    "mobile": "not_measured",
+    "qualification": "Five normal desktop rectangles are identical across seven retained idle, active and completed samples. This is not a per-frame measurement. The raw samples contain no counters; the final accessibility tree binds 45 actions, 3 solved levels and 21 completed plans to their labels and retains the level-4 URL. The unchanged JPEG capture is retained separately. No additional fullscreen-mode or mobile-size verification is claimed."
+  },
+  "progress": {
+    "connected": 39,
+    "declared": 76,
+    "percent": 51.3,
+    "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
+    "entryAudit": {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "sha256": "9493edfa7a6c140cf68560eceaa25a4183af98675eb3a94f420e879714d66507",
+      "bytes": 15390
+    },
+    "migrationAudit": {
+      "path": "docs/migration/v6-coverage.json",
+      "sha256": "c7952a19d59ff9a5f0803b0f7ecd77f02655598296a696ef8b90efd1d61d7cde",
+      "bytes": 2405514
+    },
+    "qualification": "51.3% counts registered subquestions in the same four source DRM lists. It is not code-volume progress, game success rate, complete migration or original caller parity."
+  },
+  "historicalV47Evidence": {
+    "commit": "7ecdfc708ae80305640fc907dd8ddd4048202fe9",
+    "filesVerified": 67,
+    "unchanged": true,
+    "files": {
+      "docs/migration/native-campaigns-v47/catl-recorded-public-replay.json": {
+        "gitObject": "8e7276b86f68ceff35394656a157790fcd23e0eb",
+        "sha256": "b2046631fa3a4d6821b6bf428af3fb8716e1bd37a9d627497e77cae5ffdcd6a9",
+        "bytes": 3878340
+      },
+      "docs/migration/native-campaigns-v47/catl-regression-comparison.json": {
+        "gitObject": "4224ec382f9694821ac892b1e93df76ef67f7b1a",
+        "sha256": "c37f4595d95c14850d0e9285a4bcfeccc2820b697dc0cd1abfed7f5f5535b592",
+        "bytes": 3308
+      },
+      "docs/migration/native-campaigns-v47/lf52-recorded-public-replay.json": {
+        "gitObject": "51a54667550129903e545a844b601b049183381b",
+        "sha256": "09367c101591bd46c443ec3c63737ea85039942420ee082d44e96fd65e7ac770",
+        "bytes": 3957306
+      },
+      "docs/migration/native-campaigns-v47/lf52-regression-comparison.json": {
+        "gitObject": "faa8f7f3c0b2f58246b8bc02a7dcecc177b2355c",
+        "sha256": "0fb2bed64ba4d3b86925a8b8e0f3da657e84b929e44332035a4124bcde72e53a",
+        "bytes": 3312
+      },
+      "docs/migration/native-campaigns-v47/logs/comparison-catl-receipt.json": {
+        "gitObject": "d832efb421ab64d44e726a18f6c2ed73b7d07d50",
+        "sha256": "c5b9f865cc4f29bd42cd07ec1f230d68f956b4aa156e54f4a4245aaba7338d05",
+        "bytes": 40540
+      },
+      "docs/migration/native-campaigns-v47/logs/comparison-lf52-receipt.json": {
+        "gitObject": "1ca795a5508bd1146f9f9e0d882375819a231ddd",
+        "sha256": "730e3d1b0a58be979498192a0df3f5954120dc673c68a8556d9e66ec56fc12ac",
+        "bytes": 40547
+      },
+      "docs/migration/native-campaigns-v47/logs/comparison-stck-receipt.json": {
+        "gitObject": "ad458a9263128834e793ce0260e99837f51982de",
+        "sha256": "f737131cf47ffd63d8a0f0d91504f7d7b0623a857c3c43daef16bd7830533dd0",
+        "bytes": 40543
+      },
+      "docs/migration/native-campaigns-v47/logs/comparison-tict-receipt.json": {
+        "gitObject": "e16042d91373705892a6405beee6d043cf9a52b0",
+        "sha256": "8f28e6fa5dd2fb6120fcc6dff04ed68d70d73511dfc3e7881fbed79d83294d19",
+        "bytes": 40539
+      },
+      "docs/migration/native-campaigns-v47/logs/execution-sele.json": {
+        "gitObject": "525c7d930bd9827180dd26f265cd138df6caf242",
+        "sha256": "cc335fc9a907f10f90d48e0926aeff292ad2e2f7086667433e028e1b491baaf9",
+        "bytes": 38909
+      },
+      "docs/migration/native-campaigns-v47/logs/execution-zipp.json": {
+        "gitObject": "02d3c986cb434b6e93e0287181ee0e3b11363246",
+        "sha256": "a83673a6b45d6cfaa78a6e1ab32d549adc2a32929267627bc268805f58830d29",
+        "bytes": 38906
+      },
+      "docs/migration/native-campaigns-v47/logs/regression-catl-output.log.gz": {
+        "gitObject": "b9f365e9536e45359764ae82518a9b4fe082b1bf",
+        "sha256": "d6ceffe065a29882b724292e355ff361394e6f77087ff529de831980b43a9dfb",
+        "bytes": 6110
+      },
+      "docs/migration/native-campaigns-v47/logs/regression-catl-receipt.json": {
+        "gitObject": "065b50dddc4d9007df55759aef935e4fce8404f0",
+        "sha256": "ea17bf87aaafd52689a31e24f32ff4a0e01b3191ea19ec4b5395d3705a103804",
+        "bytes": 86000
+      },
+      "docs/migration/native-campaigns-v47/logs/regression-comparison-catl-output.log.gz": {
+        "gitObject": "e9ad07afe4697a836f6f6832042f76e6ecdb935b",
+        "sha256": "8a31d194659b9100ab8c682c0c65eebfa00bf62f9f629bf265843dfb6c0b2abb",
+        "bytes": 110
+      },
+      "docs/migration/native-campaigns-v47/logs/regression-comparison-lf52-output.log.gz": {
+        "gitObject": "6a6fa8698e6b4e07e3f3aeb42e431462667d140c",
+        "sha256": "2e4736e83efcc5f85df1e3d4e76bb210fb2f71f7b716457e925321f7c3739133",
+        "bytes": 111
+      },
+      "docs/migration/native-campaigns-v47/logs/regression-comparison-stck-output.log.gz": {
+        "gitObject": "2b672a9fa5706b537b56d9acb8ca779026dfdb47",
+        "sha256": "c18cba2acd6be1e0619628b31e4f7d4c1bbc476034d6242c78f8a5c3c47d26af",
+        "bytes": 109
+      },
+      "docs/migration/native-campaigns-v47/logs/regression-comparison-tict-output.log.gz": {
+        "gitObject": "a8ec56755405979816016b7ecedc6b6cb5b10272",
+        "sha256": "53b27a304eae46a0c8dabcada1b36c98d998acb61cf89b81e4f4e356917bfda1",
+        "bytes": 109
+      },
+      "docs/migration/native-campaigns-v47/logs/regression-lf52-output.log.gz": {
+        "gitObject": "46b137342e69e9d1df1532b1070215ad4ca2e25b",
+        "sha256": "faa0946dff84357ab37a74791c1dfbf4262136f5d7554d3f44d25f58f9e9d552",
+        "bytes": 9570
+      },
+      "docs/migration/native-campaigns-v47/logs/regression-lf52-receipt.json": {
+        "gitObject": "3f5fa1f7565414df52ad8671622527aa16b5ef86",
+        "sha256": "0ed54cd54feb9b287e12542a876e799f1cd3bf1d9c90bff06a7b30477f33836f",
+        "bytes": 86027
+      },
+      "docs/migration/native-campaigns-v47/logs/regression-stck-output.log.gz": {
+        "gitObject": "e8a30c2ab243a923fed35972f8fe30ae8fb2ba59",
+        "sha256": "53dc8b6aa52e4c544a5ea956d50eb045b6c571f91a7019b9bf3cf07b7833eadb",
+        "bytes": 3436
+      },
+      "docs/migration/native-campaigns-v47/logs/regression-stck-receipt.json": {
+        "gitObject": "47a0ece0a28aa7477b9a459fc56f7e1e7eb74732",
+        "sha256": "97419285c0751a38872916bf02f0e62be9242301b9716247228e58c6fcea97c7",
+        "bytes": 86013
+      },
+      "docs/migration/native-campaigns-v47/logs/regression-tict-output.log.gz": {
+        "gitObject": "bfe63af9a8ab5588dae58939a51c945f51fd0b62",
+        "sha256": "b53a236d8d2aaff3df7616a83bb859eac3bb6364c774570180b6723f3a0fe606",
+        "bytes": 6898
+      },
+      "docs/migration/native-campaigns-v47/logs/regression-tict-receipt.json": {
+        "gitObject": "215419c7e699369d392cd691f2a0831ad36b4adb",
+        "sha256": "7416e62219b5b19e67d29fd85bebc3f133b6be88c081af48d1d8fc4063a84692",
+        "bytes": 85999
+      },
+      "docs/migration/native-campaigns-v47/logs/sele-output.log.gz": {
+        "gitObject": "1fa5be09bb0a8cc9509f957d3ac5043707fa138d",
+        "sha256": "ca35868a9b6566ee03c7dd2100fc04e957ecb980163c45df3632bd907eb5664e",
+        "bytes": 5739
+      },
+      "docs/migration/native-campaigns-v47/logs/zipp-output.log.gz": {
+        "gitObject": "f1dcb46fda9ed08a37695b1b85d11d47ded0eb8c",
+        "sha256": "cd429a23ef8aa7aad3e263bb34d858fcedee5ec67531e9dd3f213408cb4dbb0e",
+        "bytes": 7443
+      },
+      "docs/migration/native-campaigns-v47/regression-plan.json": {
+        "gitObject": "bc7aa6714edc730621fecc53d652445b3fef416b",
+        "sha256": "0cd0088c8504379f1cb5dc92fe242893d7e35bc3226d6ed13a6ce37ddd8854e7",
+        "bytes": 8033
+      },
+      "docs/migration/native-campaigns-v47/regression-summary.json": {
+        "gitObject": "ef40c00aeba3d1a257480588920fcab1ea5d4cf7",
+        "sha256": "32ed7c666897701d5a13c4106095b5b88b20c9cbd378cf113ea3d11cc48902a7",
+        "bytes": 4379
+      },
+      "docs/migration/native-campaigns-v47/regression-verification.json": {
+        "gitObject": "7e436d637789b827eb063684e9523c5d4fb38805",
+        "sha256": "89f72f8ddcad4e4b098c759105608eed818006a7853857df092adbae706825bb",
+        "bytes": 396529
+      },
+      "docs/migration/native-campaigns-v47/sele-browser-layout-measures.json": {
+        "gitObject": "f42e4e2756a525776f6138848033d2c7556d6aa7",
+        "sha256": "c19c0298cf708f84ca3b876a1386ad88e382cbc6c52adae28ae2f65f06ddde40",
+        "bytes": 11252
+      },
+      "docs/migration/native-campaigns-v47/sele-browser-three-levels-ax.txt": {
+        "gitObject": "ce7040f10a0498ec12d2bd569620dc52425b1474",
+        "sha256": "1f2bccd63c9614a043e7ff3ecc531dc7128f3f89672e410c66d58f3523be520d",
+        "bytes": 9981
+      },
+      "docs/migration/native-campaigns-v47/sele-browser-three-levels.jpg": {
+        "gitObject": "bbb08bdb7eeeede2c655b529eb25373cc135d30e",
+        "sha256": "731decd9246f0e51e7821ced9140b9d1a52f30292e1bae5800707a7e81690ff8",
+        "bytes": 65422
+      },
+      "docs/migration/native-campaigns-v47/sele-browser-verification.json": {
+        "gitObject": "e7424fd38ff96233a1937f4445598362d08013a8",
+        "sha256": "196669f28523c41d1971f526e9827c41052dabe50d55931c41f996e054d7308d",
+        "bytes": 13639
+      },
+      "docs/migration/native-campaigns-v47/sele-original-component-comparison.json": {
+        "gitObject": "4c5f90d3f2d4a6eda12cd1924ecba7f662c5c1b5",
+        "sha256": "52bcecd5606e7955caa1828cae25d2eff4c75cd5ba020f18eaba592d2472556e",
+        "bytes": 69419
+      },
+      "docs/migration/native-campaigns-v47/sele-public-trace.json.gz": {
+        "gitObject": "6d1b3067563105262f2f7d8996c30d914db95f6e",
+        "sha256": "f62033bd4cc0d829ba9ffe36c9c3efd6b77a63bf1e5896f7a9b0a2694d49e3a2",
+        "bytes": 36187
+      },
+      "docs/migration/native-campaigns-v47/sele-three-levels.json": {
+        "gitObject": "9293e6d30b246bd586bdbe6f50ae76fa01fb69f9",
+        "sha256": "36f06711eea87e103312501b6b524ff30b3a773a0a0d598d1ce4027a78d6a430",
+        "bytes": 3958303
+      },
+      "docs/migration/native-campaigns-v47/source-manifest.json": {
+        "gitObject": "f853da1cbdab7c68cfaced98cf64bba5a2bac3d1",
+        "sha256": "cc8622ed59c6d1a93d98583271aa3ae744f68159a64887c98a8d080c5011c936",
+        "bytes": 18375
+      },
+      "docs/migration/native-campaigns-v47/stck-recorded-public-replay.json": {
+        "gitObject": "5ec3e6db282a0e739965f5382fea45e01d45ac0e",
+        "sha256": "48e0c42ba02d65d8180fb3e1893735a4f94ed8e31f368456d845c4153837976d",
+        "bytes": 192965
+      },
+      "docs/migration/native-campaigns-v47/stck-regression-comparison.json": {
+        "gitObject": "225d797be3ccdff9c5d90c6c8c0e92698a284aa2",
+        "sha256": "c55fa486e98c73de445a8b04c5ef86f1f57c2e4d7f29505754a46a5734ae1940",
+        "bytes": 3310
+      },
+      "docs/migration/native-campaigns-v47/tict-recorded-public-replay.json": {
+        "gitObject": "e8fb716e1dbe824db81bc5bae515072eaf08cd13",
+        "sha256": "6a1acb8bacd28f8ac839da249a588640af5946fe71f12554503f70548d5c60ac",
+        "bytes": 821192
+      },
+      "docs/migration/native-campaigns-v47/tict-regression-comparison.json": {
+        "gitObject": "0eb75db9f223ba39328919b72d660af5e22c2d64",
+        "sha256": "a04e969bba3cf4d3fdebdaef6b07c0670c5ad6d6964c396dbf9689e30dee8b71",
+        "bytes": 3308
+      },
+      "docs/migration/native-campaigns-v47/validation.json": {
+        "gitObject": "12800cda0537b8311e93e3d7169a962872380ef7",
+        "sha256": "e5936606ddb4d76f12fb55157b917c7a45b4e20aee6ce330ddfe1eada2e7a91a",
+        "bytes": 8612
+      },
+      "docs/migration/native-campaigns-v47/validation/build-output.log.gz": {
+        "gitObject": "b4bbad4172dda7d02484f8433d47b00a3375e965",
+        "sha256": "2c2896848c767d0ac5b21e15f9fd720d423fc94d343515a7a35cd0287ab4ee93",
+        "bytes": 1562
+      },
+      "docs/migration/native-campaigns-v47/validation/checks-run.json": {
+        "gitObject": "e6c26623f436924929db1cf37d53ceb8fe7f2597",
+        "sha256": "1ce97236b3fa216215f051d2c35ff5780990deb0e0918b7378d096b03db8a22f",
+        "bytes": 65706
+      },
+      "docs/migration/native-campaigns-v47/validation/delta-tests-final.json": {
+        "gitObject": "3a47a5a79fa685f0277df3265b545b7de7d59b6c",
+        "sha256": "6b8c13edc8925c4cc769459128d64642c57940881653393890c1af76caf5cf74",
+        "bytes": 171518
+      },
+      "docs/migration/native-campaigns-v47/validation/delta-tests-output.log.gz": {
+        "gitObject": "80553e18a6041823d6bf3c2589106133f021b21d",
+        "sha256": "9e5a7f825123334ba2b84250916290bf4f29a3ffab25d7c7d1c7470733c67399",
+        "bytes": 16128
+      },
+      "docs/migration/native-campaigns-v47/validation/delta-tests-run.json": {
+        "gitObject": "640d21fb5a244d558ed6a1461e1ade53841e228c",
+        "sha256": "6387c9b4a9fc375acbb65561c2e799e954005107bc097e93bcbdc6114d84df81",
+        "bytes": 80460
+      },
+      "docs/migration/native-campaigns-v47/validation/diff-check-output.log.gz": {
+        "gitObject": "0a69cdd7e6f4cf0fe73fb1df3109d36afb95b689",
+        "sha256": "5d2c0f1a4a1a994c5e1b399bfd52276d0221dca1f2be7176b3396f9e34099f8a",
+        "bytes": 20
+      },
+      "docs/migration/native-campaigns-v47/validation/entry-audit-output.log.gz": {
+        "gitObject": "554e4f5f2889b4d911de95f0c339b8e02f28654e",
+        "sha256": "66b407d301477b1d0e7072089d2e001b23abcf0a7139b5ef52d7031410aa1b27",
+        "bytes": 177
+      },
+      "docs/migration/native-campaigns-v47/validation/linked-reference-final-recheck.log.gz": {
+        "gitObject": "3fa32eb87e28aa3771af854746c1a16642d51135",
+        "sha256": "88c075363be0e77b2fbbe28932558e2a70fe6a7c96f554267627072832638f56",
+        "bytes": 1667
+      },
+      "docs/migration/native-campaigns-v47/validation/migration-audit-output.log.gz": {
+        "gitObject": "6c32aab2ecf711f3c44ac62db06aa2b3907e0843",
+        "sha256": "12767987eac870006a0935865436764ea6c770d329a979a1ca883cee384c3d44",
+        "bytes": 204
+      },
+      "docs/migration/native-campaigns-v47/validation/typecheck-output.log.gz": {
+        "gitObject": "b34d0c42ccaa840e44a1593744d887922b5cf359",
+        "sha256": "7855d2696319a6d6d337423f450576bdc814701872e9516286a9890a6c5c91e7",
+        "bytes": 141
+      },
+      "docs/migration/native-campaigns-v47/zipp-public-trace.json.gz": {
+        "gitObject": "b7389a6bc9ddfd2f5baf157d5a06de48d955b49b",
+        "sha256": "5a908ef86ec8b63c64cd19e9c662c5af32bdd5fe0f4025de691a840499c7ed6a",
+        "bytes": 27629
+      },
+      "docs/migration/native-campaigns-v47/zipp-six-levels.json": {
+        "gitObject": "da0f47562b2da5dd2f777622d24c914aa2cbd100",
+        "sha256": "f404ad30668c01804de9e466f3c0a944695e8988dbf33b531d8cfd20e02db62b",
+        "bytes": 2294194
+      },
+      "docs/migration/native-campaigns-v47/zipp-trace-extension-comparison.json": {
+        "gitObject": "a7c0a84ce3e658055e925c41b7f20016007118d2",
+        "sha256": "e0178b78a9ff823572e51f59cde7ffdedd0e1918dc5e0c7df5442e24daa1fe5c",
+        "bytes": 50536
+      },
+      "docs/migration/v47-linked-packets-and-stable-board.md": {
+        "gitObject": "32e45dc16d1d46319068d1f3be4fd2a1a92ad6ae",
+        "sha256": "2728e4ca20a4be8594eab70e0d42621b2007536f9725274b49333e9085ecab8f",
+        "bytes": 13435
+      },
+      "scripts/compare-v47-linked-public-evidence.py": {
+        "gitObject": "1267a32e659b6549e296747b6afc95e8eaf160e2",
+        "sha256": "c5b468bea53ba92cb87d9c467b19459a34a16697402df59f70f82c27a0c24eb8",
+        "bytes": 23428
+      },
+      "scripts/compare-v47-trace-extension.py": {
+        "gitObject": "da1b128a2a922994247042249f016912850403e8",
+        "sha256": "d37f85415bf99eb26fffce79b9d7dd2042ae8e4a6eb9040d33ec6c04e09736b3",
+        "bytes": 31423
+      },
+      "scripts/export-v6-linked-packet-reference.py": {
+        "gitObject": "0133f8e697ad8b1f4b9d18787116e699f1973350",
+        "sha256": "a264100ebaf5ef94091b34b81965a03fc007054c71b92c35a186441681e1ceed",
+        "bytes": 13284
+      },
+      "scripts/export-v6-visible-box-ray-reference.py": {
+        "gitObject": "76de26eefdc27673be1bfe7ac01b1c7bbfebf7c7",
+        "sha256": "e4c1b5766323d89e55eb54fd5333f372926699ff3776d9129ba3c0d2db5365da",
+        "bytes": 5729
+      },
+      "scripts/history/export-v6-linked-packet-reference-pre-emission.py": {
+        "gitObject": "cb99109d5b424821e0b08a643bc1662d66462bbb",
+        "sha256": "6523c8cbab77c318a64ebf52d6204dcf426d1140218f45d4126cdb2ea1af16ab",
+        "bytes": 9754
+      },
+      "scripts/probe-v6-linked-packet-initial-public.py": {
+        "gitObject": "5906df9a6f63568c2163fb8bd4129cbc4c8cecf8",
+        "sha256": "d950dbd2396a5e3063b4a3ab41d38170fd477916df6d8f05b19bc12ab38fd77d",
+        "bytes": 4200
+      },
+      "scripts/probe-v6-linked-packet-original.py": {
+        "gitObject": "0244a69fece929851eb35f4d0529edb3d2dce791",
+        "sha256": "cf147582e37049ef44b97672f9a67d52b7dee84cdb5a5bcb303559c855bcf657",
+        "bytes": 11252
+      },
+      "scripts/validate-v47-release.py": {
+        "gitObject": "f737b6698cbb940154eeab058d2e0cfe5d634c17",
+        "sha256": "3ed2ed28ece5040544adf17d3b4c87be4ad51e2d3235343a136da610effa3084",
+        "bytes": 47673
+      },
+      "tests/fixtures/v6-linked-packet-initial-public.json.gz": {
+        "gitObject": "1775c02a4ff73029569f4506a8a011edf4d73465",
+        "sha256": "3f82fb0b60a104095623216023054ef438ca4cc516941c671c385ebcbf1e54f2",
+        "bytes": 1026835
+      },
+      "tests/fixtures/v6-linked-packet-original-public.json.gz": {
+        "gitObject": "49481d59585717d2862f0b11a079bbd06c5c5c3b",
+        "sha256": "ea835b611db3301aa80129aec7f75ac4b4c33efe9ae8b470945cd9043c988aa5",
+        "bytes": 1899111
+      },
+      "tests/fixtures/v6-linked-packet-reference-alias-diagnostic.json.gz": {
+        "gitObject": "bcd82909476b8d57e2f680d6299d1db12009f607",
+        "sha256": "3ee4fe6907c44726ec06f5789effcf6bba6857e23cc06741a4034356ea93aa83",
+        "bytes": 1580717
+      },
+      "tests/fixtures/v6-linked-packet-reference.json.gz": {
+        "gitObject": "53d32772e6a3228344ee79e3cffa4f9ebda562ce",
+        "sha256": "43e4c7cb34f1d3745be074a65bcd154829932c6dd1c278791a8f23b08521b555",
+        "bytes": 2996826
+      },
+      "tests/fixtures/v6-visible-box-ray-reference.json.gz": {
+        "gitObject": "d363503da355e1273e03cffc45eae13e2eb9b0b8",
+        "sha256": "67cd5613867d72a5dbb788ecd1c6ee2f41499af7b55b0051473bc2c48d52a635",
+        "bytes": 35516
+      }
+    },
+    "scope": "Every tracked byte in the v47 campaign evidence directory and the listed source-reference fixtures, probes and exporters matches its published Git commit. No historical proof is regenerated or reclassified."
+  },
+  "completeMigration": false,
+  "originalFullCommonCallerParity": false,
+  "generator": {
+    "path": "scripts/validate-v48-release.py",
+    "sha256": "75d6cfd51d185f6acc7ff7e04bd813b1f009e99d348862aaf378556d2aa6bdf3",
+    "bytes": 50389
+  },
+  "scope": "Read-only validation of retained actual executions, frozen native inputs, two recomputed component comparisons, one affected test run, five recorded-public regressions, build inputs, historical proof bytes and observed desktop layout. No game, agent or test suite is executed. COLM reaches its declared three-level target without full-game WIN; ZIPP has a retained official WIN after six levels."
+}

@@ -159,6 +159,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const controlBindings = (series.events as R[]).filter(event => event.kind === 'native_program_control_binding');
           const controlEffects = (series.events as R[]).filter(event => event.kind === 'native_program_control_effect');
           const rootedStates = (series.events as R[]).filter(event => event.kind === 'rooted_quota_state');
+          const queuedModels = (series.events as R[]).filter(event => event.kind === 'observed_queue_field_model');
           const productStates = (series.events as R[]).filter(event => event.kind === 'observed_factor_product');
           const labeledSubmissions = (series.events as R[]).filter(event => event.kind === 'labeled_sequence_submission');
           const traceExtensions = (series.events as R[]).filter(event => event.kind === 'observed_trace_extension');
@@ -190,6 +191,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               ? { productPanelFactors: evidence.proposal.product_panel_plan.scene.controls.length,
                   productPanelEstimated: evidence.proposal.product_panel_plan.estimate !== null,
                   productPanelObservedSteps: evidence.proposal.steps.map((step: R) => step.relation_observed) } : {}),
+            ...(evidence.proposal.queued_field_plan
+              ? { queuedField: { plan: evidence.proposal.queued_field_plan,
+                    stateNode: 'family_state:public_occurrence_recall' } } : {}),
             ...(evidence.proposal.labeled_sequence_plan
               ? { labeledSequenceLabel: evidence.proposal.labeled_sequence_plan.label,
                   labeledSequenceQuery: evidence.proposal.labeled_sequence_plan.scene.query.words[0].values,
@@ -236,6 +240,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
                 latestTrial: controlTrials.at(-1) ?? null, latestBinding: controlBindings.at(-1) ?? null, latestEffect: controlEffects.at(-1) ?? null },
               rootedQuotaStateCount: rootedStates.length,
               rootedQuotaLatestState: rootedStates.at(-1) ?? null,
+              queuedFieldModelCount: queuedModels.length,
+              queuedFieldLatestModel: queuedModels.at(-1) ?? null,
+              queuedFieldAcquiredModels: queuedModels.filter(event => evidence.transitions.some((transition: R) => transition.before === event.evidence?.[0])),
               productPanelStateCount: productStates.length,
               productPanelLatestState: productStates.at(-1) ?? null,
               labeledSequenceSubmissionCount: labeledSubmissions.length,
