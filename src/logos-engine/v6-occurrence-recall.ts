@@ -249,7 +249,11 @@ export class OccurrenceRecallConstraint {
 
 /** The caller keeps this in original `window_constraints` subquestion order. */
 export function createNativeOccurrenceRecallFamily(config: OccurrenceRecallPolicy): NativeFamily {
-  const family = new OccurrenceRecallConstraint(config);
+  return asNativeOccurrenceRecallFamily(new OccurrenceRecallConstraint(config));
+}
+
+/** Shared-series acquisition can extend the same guarded recall entry point. */
+export function asNativeOccurrenceRecallFamily(family: OccurrenceRecallConstraint): NativeFamily {
   return {
     id: family.id,
     propose: async (observation, rows, inputs, remaining) => {

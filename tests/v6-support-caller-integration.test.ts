@@ -15,7 +15,7 @@ const declarations = {
   strategy: JSON.parse(await readFile(new URL('morphology_policy/strategy.drm', source), 'utf8')),
 } as NativeV6Declarations;
 
-test('the real common caller retains the original recall decision/event and eight caller components; other series providers stay explicitly pending', async context => {
+test('the real common caller retains the complete first recall envelope, epoch anchor and eight caller components; other series providers stay pending', async context => {
   const oracle = JSON.parse(await readFile(new URL('./fixtures/v6-native-caller/memo-first-prefix.json', import.meta.url), 'utf8'));
   const from = (reference: R): R => oracle.objects[reference.$object];
   assert.equal(oracle.method.sourceModified, false); assert.equal(oracle.sourceVerification.afterOriginalMain, true);
@@ -42,18 +42,18 @@ test('the real common caller retains the original recall decision/event and eigh
   }
   const transition = read('reasoning:transition:1');
   const sourceResult = from(final.result), nativeResult = transition.caller_acquisition.selected_result;
-  const recallEvents = (result: R) => result.events.filter((event: R) => event.kind === 'occurrence_recall_transition');
-  assert.deepEqual(recallEvents(nativeResult), recallEvents(sourceResult));
-  assert.equal(nativeResult.status, sourceResult.status); assert.equal(nativeResult.transfer_authority, sourceResult.transfer_authority);
+  assert.deepEqual(nativeResult, sourceResult, 'The whole source result now includes recall followed by the epoch anchor');
   const sourceFacts = from(final.memory).facts as R[], nativeFacts = (read('reasoning:memory').facts as string[]).map(read);
   const sourceFact = sourceFacts.find(fact => fact.key === 'window_constraint:1')!, nativeFact = nativeFacts.find(fact => fact.key === 'window_constraint:1')!;
-  assert.deepEqual({ ...nativeFact, value: recallEvents(nativeFact.value) }, { ...sourceFact, value: recallEvents(sourceFact.value) });
+  assert.deepEqual(nativeFact, sourceFact);
   assert.deepEqual(nativeFacts.find(fact => fact.key === 'repeated_series_state')!.value, read('family_state:public_occurrence_recall'));
-  // The full source object's other providers acquire an additional epoch
-  // anchor here. This test exposes that migration gap instead of claiming the
-  // shared series object's full digest has already been transferred.
-  assert.ok(sourceResult.events.some((event: R) => event.kind === 'coupled_pair_epoch_anchor'));
+  const series = read('family_state:public_occurrence_recall');
+  assert.deepEqual(series.events, sourceFacts.find(fact => fact.key === 'repeated_series_state')!.value.events);
+  assert.deepEqual(series.events.map((event: R) => event.kind), ['occurrence_recall_transition', 'coupled_pair_epoch_anchor']);
+  assert.notEqual(series.digest, sourceFacts.find(fact => fact.key === 'repeated_series_state')!.value.digest,
+    'The native closure does not impersonate the digest of the unported inheritance chain');
   assert.match((result.snapshot.coverage as R).sharedSeriesMemory, /remaining ObservedCompositionConstraint providers pending/);
+  assert.equal((result.snapshot.coverage as R).sharedSeriesDigestScope, 'native_recall_ancestors_and_coupled_pair_epoch_anchors_v1');
   assert.equal(read('family_state:public_occurrence_recall').events.filter((event: R) => event.kind === 'occurrence_recall_transition').length, 1,
     'The selected recall event is not acquired a second time by passive observation');
 });
@@ -121,4 +121,8 @@ test('ONDE begins with the exact complete-caller source decision and periodic/su
   for (const key of ['support_navigation_event:1', 'periodic_sums_state']) {
     assert.deepEqual(facts.find(fact => fact.key === key), sourceFacts.find(fact => fact.key === key), key);
   }
+  const series = read('family_state:public_occurrence_recall');
+  assert.deepEqual(series.events, sourceFacts.find(fact => fact.key === 'repeated_series_state')!.value.events);
+  assert.deepEqual(series.events.map((event: R) => event.kind), ['coupled_pair_epoch_anchor']);
+  assert.deepEqual(facts.find(fact => fact.key === 'repeated_series_state')!.value, series);
 });

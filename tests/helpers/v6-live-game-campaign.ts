@@ -125,9 +125,15 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             assert.ok(record.caller_acquisition && typeof record.caller_acquisition === 'object', 'Caller acquisition must be retained, not only counted');
             assert.ok(record.frontier_acquisition && typeof record.frontier_acquisition === 'object', 'Frontier acquisition must be retained for every witnessed transition');
           }
+          const series = read('family_state:public_occurrence_recall');
+          const anchors = (series.events as R[]).filter(event => event.kind === 'coupled_pair_epoch_anchor');
+          assert.deepEqual(anchors.map(event => event.epoch), [...new Set(report.actions.map((action: R) => action.levelBefore))],
+            'One anchor belongs to each publicly witnessed before-epoch, including natural boundary transitions');
           report.prefixes.push({ id: evidenceId, decisionRevision: evidence.decision_revision,
             acquiredActions: evidence.transitions.length, family: snapshot.lastDecision, operations: ['OP29', 'OP30', 'OP31'],
-            graphChain: graph.chain, graphRevision: snapshot.graphRevision, callerAcquiredTransitions: snapshot.caller.acquiredTransitions });
+            graphChain: graph.chain, graphRevision: snapshot.graphRevision, callerAcquiredTransitions: snapshot.caller.acquiredTransitions,
+            sharedSeries: { digestScope: snapshot.coverage.sharedSeriesDigestScope, digest: series.digest,
+              eventCount: series.events.length, epochAnchors: anchors } });
           lastCycles = snapshot.cycles;
         }
         return result;

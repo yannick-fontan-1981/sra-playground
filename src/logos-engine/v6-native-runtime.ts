@@ -14,7 +14,7 @@ import { Containment } from './v6-containment.ts';
 import { SurfaceProgram } from './v6-surface-program.ts';
 import { CodeProgram } from './v6-code-program.ts';
 import { BandTransfer } from './v6-band-transfer.ts';
-import { createNativeOccurrenceRecallFamily } from './v6-occurrence-recall.ts';
+import { createNativeSharedSeriesFamily, SHARED_SERIES_DIGEST_SCOPE } from './v6-shared-series.ts';
 import { SupportNavigation } from './v6-support-navigation.ts';
 import { JointTransport } from './v6-joint-transport.ts';
 import { InvitedReduction } from './v6-invited-reduction.ts';
@@ -45,7 +45,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.5.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.5.1';
 const SELECTION_PROGRAM = 'v6.composition_strategy.choose';
 type R = Record<string, any>;
 const EPISODE = 'common-observation-frontier';
@@ -578,7 +578,8 @@ export class NativeV6Runtime implements NativeV6Backend {
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id),
-        sharedSeriesMemory: 'occurrence_recall_and_its_ancestors_only; remaining ObservedCompositionConstraint providers pending',
+        sharedSeriesMemory: 'occurrence_recall_ancestors_and_coupled_pair_epoch_anchors; remaining ObservedCompositionConstraint providers pending',
+        sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
       srcDecision: this.selectionReceipt,
       whyAct: this.authority?.snapshot() ?? { enabled: false, scope: 'injected_family_test_runtime' },
@@ -751,7 +752,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const visualContinuation = configuration.scored_local_rewrite.minimum_completed_rows_for_visual_continuation as number | undefined;
   const visual = visualFirst || visualContinuation ? visualSequenceFamily(new VisualSequences(), visualContinuation) : null;
   const interfaces = createNativeInterfaceFamilies();
-  const recall = createNativeOccurrenceRecallFamily((configuration.window_constraints as R).occurrence_recall);
+  const recall = createNativeSharedSeriesFamily((configuration.window_constraints as R).occurrence_recall);
   const policy = loaded.common as R;
   const supportChildren: Record<string, NativeFamily<any>> = {
     ordered_support_transfer: ordered,

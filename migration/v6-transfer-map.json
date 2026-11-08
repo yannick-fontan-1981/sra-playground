@@ -321,9 +321,13 @@
         "tests/fixtures/v6-native-caller/hano-first-prefix.json",
         "tests/fixtures/v6-native-caller/viewport-three-prefixes.json",
         "tests/fixtures/v6-native-caller/report.json",
-        "docs/migration/v6-common-caller-oracle.md"
+        "docs/migration/v6-common-caller-oracle.md",
+        "tests/v6-support-caller-integration.test.ts",
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json",
+        "tests/fixtures/v6-native-caller/onde-first-prefix.json",
+        "docs/migration/v33-shared-series-anchor.md"
       ],
-      "notes": "The native common coordinator is connected to the product runtime and shares the WHY/ACT memory. Every witnessed primitive is acquired once at its sealed prefix; Goal/Frontier evidence is replayed across natural level boundaries. A real-runtime first-prefix HANO comparison matches all eight caller component states without restoring oracle state. ordered_support_state is now integrated; SupportNavigation remains partial, and AddressedMaterial, FramedTransfer, RepeatedSeries and TemporalSelection acquisitions remain pending, along with Morphology/control-target/parent-attention providers. Bounded campaigns do not establish all-game V6 parity."
+      "notes": "The native common coordinator is connected to the product runtime and shares the WHY/ACT memory. Every witnessed primitive is acquired once at its sealed prefix; Goal/Frontier evidence is replayed across natural level boundaries. First-prefix HANO, MEMO and ONDE comparisons match all eight caller components without loading oracle state. SupportNavigation and all 13 acquired children are connected. Shared RepeatedSeries acquisition currently covers occurrence recall, its ancestor reducers and coupled-pair epoch anchors. AddressedMaterial, FramedTransfer, TemporalSelection and other series producers remain pending, along with Morphology/control-target/parent-attention providers. Bounded campaigns do not establish all-game V6 parity."
     },
     {
       "sources": [
@@ -617,7 +621,7 @@
         "tests/v6-support-caller-integration.test.ts",
         "tests/fixtures/v6-native-caller/memo-first-prefix.json"
       ],
-      "notes": "Native public_occurrence_recall including exact event reducers/digests of its inherited recall closure. Original priority before SlotSubstitution is tested through the real common caller. This does not transfer the additional providers of ObservedCompositionConstraint; its full repeated_series_state still contains extra events such as coupled_pair_epoch_anchor."
+      "notes": "Native public_occurrence_recall including exact event reducers/digests of its inherited recall closure. Original priority before SlotSubstitution is tested through the real common caller. The production SharedSeriesConstraint also acquires coupled_pair_epoch_anchor between recall and packet observation. Other ObservedCompositionConstraint providers and the full inheritance digest remain pending; their absence is explicit in the native digest scope."
     },
     {
       "sources": [
@@ -945,6 +949,43 @@
         "tests/v6-animated-contact.test.ts"
       ],
       "notes": "Called _consistent_noncolinear_turn, _maximal_prefix_suffix_bars, _framed_rectangular_prefix_suffix_bars, measure_scalar_fill_display, _component_bbox_center, _linear_slope, _quadratic_linear_and_square, _ballistic_contact_click, _ordered_transient_component_path_facts and reached nested functions. Other generic transition measurements remain pending."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/coupled_pair_access.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-coupled-pair-epoch-anchor.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-coupled-pair-epoch-anchor-reference.py",
+        "tests/fixtures/v6-coupled-pair-epoch-anchor-reference.json.gz",
+        "tests/v6-coupled-pair-epoch-anchor.test.ts",
+        "tests/v6-shared-series.test.ts",
+        "tests/v6-caller-integration.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "docs/migration/v33-shared-series-anchor.md"
+      ],
+      "notes": "Only the unconditional epoch-anchor portion of record (source lines 55-59), its apply_event projection, retained digest layer and verified restoration are transferred. Source-order acquisition is recall, then anchor, then public packet evidence, and uses the before epoch even across a level boundary. pair_state remains null in this closure. coupled_pair_evidence, paired-control questions/planning, return/refutation logic and intervening inherited providers are not transferred. This producer adds no DRM planning entry."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_observed_compositions.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "tests/v6-shared-series.test.ts",
+        "tests/v6-caller-integration.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "docs/migration/v33-shared-series-anchor.md"
+      ],
+      "notes": "The supported common acquisition closure and selected/passive state restoration are integrated through the existing public_occurrence_recall provider. Native state keeps the shared event journal and a qualified closure digest. The unchanged full-caller first-prefix MEMO result and HANO/ONDE shared event journals match, but the original full ObservedCompositionConstraint digest and its remaining providers are still pending."
     }
   ],
   "scopeNotes": [

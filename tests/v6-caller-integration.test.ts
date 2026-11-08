@@ -37,6 +37,7 @@ test('the live common caller acquires a real released prefix once and matches ev
     return hydrateNativeState(graph.nodes[id]!.value!, key => graph.nodes[key]!.value) as Record<string, any>;
   };
   assert.equal(read('caller:goal').episode.length, 0);
+  assert.deepEqual(read('family_state:public_occurrence_recall').events, []);
   for (const [index, row] of oracle.publicProtocol.events.slice(1).entries()) {
     assert.deepEqual(result.command, row.command);
     result = await service.handle({ type: 'advance', sessionId, sequence: index + 1,
@@ -48,6 +49,8 @@ test('the live common caller acquires a real released prefix once and matches ev
       assert.equal(runtime.inspectKnowledge().chain, releasedGraph.chain,
         'A guarded intermediate primitive does not reconcile or revise learned memory');
       assert.equal(read('caller:goal').episode.length, 0);
+      assert.deepEqual(read('family_state:public_occurrence_recall').events, [],
+        'The epoch anchor is not acquired during an unfinished action prefix');
       assert.equal(runtime.inspectKnowledge().nodes['reasoning:transition:1'], undefined);
     }
   }
@@ -57,6 +60,12 @@ test('the live common caller acquires a real released prefix once and matches ev
   assert.equal((result.snapshot.caller as any).boundaryReplays, 0);
   assert.equal(result.snapshot.acquiredRecords, 2);
   assert.equal(read('family_state:ordered_support_transfer').events.length, 2);
+  const sourceFacts = fromOracle(oracle.snapshots.find((row: any) => row.stage === 'prefix_analyzed').memory).facts;
+  const nativeFacts = (read('reasoning:memory').facts as string[]).map(read), series = read('family_state:public_occurrence_recall');
+  assert.deepEqual(series.events, sourceFacts.find((fact: any) => fact.key === 'repeated_series_state').value.events);
+  assert.deepEqual(series.events.map((event: any) => event.kind), ['coupled_pair_epoch_anchor'],
+    'The passive shared series journal acquires one anchor across both reconciled primitives');
+  assert.deepEqual(nativeFacts.find(fact => fact.key === 'repeated_series_state')!.value, series);
   assert.deepEqual((result.snapshot.whyAct as any).analysis.map((row: any) => row.operation), ['OP29', 'OP30', 'OP31']);
   const originalState = fromOracle(oracle.snapshots.find((row: any) => row.stage === 'prefix_analyzed').state);
   for (const component of ['goal', 'frontier', 'view', 'attention', 'points', 'displays', 'controls', 'counters']) {

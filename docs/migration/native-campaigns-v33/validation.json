@@ -1,0 +1,188 @@
+{
+  "schema": "logos-engine.v6.v33-anchor-validation.v1",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.5.1",
+  "nativeSource": {
+    "digest": "0e7d1885a54389962b85b1eac51b386dda967ddee2aa68dcdbef44f8ae7746a0",
+    "fileCount": 109,
+    "manifest": "onde.json#source"
+  },
+  "scope": "Coupled-pair epoch-anchor acquisition/replay in the common native series closure. No pair solver or complete inheritance-digest parity is claimed.",
+  "tests": {
+    "uniqueTestsPassed": 135,
+    "qualification": "Distinct tests across the focused files, including nested cases. The final anchor/shared-series pass contains 41 tests; earlier recall/caller and graph-authority passes are listed separately, without double-counting the shared-series cases.",
+    "files": {
+      "tests/v6-occurrence-recall.test.ts": 41,
+      "tests/v6-caller-integration.test.ts": 9,
+      "tests/v6-support-caller-integration.test.ts": 21,
+      "tests/v6-shared-series.test.ts": 4,
+      "tests/v6-coupled-pair-epoch-anchor.test.ts": 37
+    },
+    "guardFiles": [
+      "tests/v6-native-runtime.test.ts",
+      "tests/v6-knowledge-store.test.ts",
+      "tests/v6-native-authority.test.ts"
+    ],
+    "guardTestsPassed": 23,
+    "commands": [
+      {
+        "command": "node --test --test-concurrency=1 tests/v6-occurrence-recall.test.ts tests/v6-shared-series.test.ts tests/v6-caller-integration.test.ts tests/v6-support-caller-integration.test.ts",
+        "tests": 74,
+        "passed": 74,
+        "failed": 0,
+        "note": "Before adding the final shared-series rollback test; all product behavior tested here is retained."
+      },
+      {
+        "command": "node --test --test-concurrency=1 --test-skip-pattern='native SRC/service/controller replays' tests/v6-native-runtime.test.ts tests/v6-knowledge-store.test.ts tests/v6-native-authority.test.ts",
+        "tests": 23,
+        "passed": 23,
+        "failed": 0,
+        "note": "Three heavy stored-trajectory replays were excluded; fresh live ONDE and HANO campaigns below cover the changed path."
+      },
+      {
+        "command": "node --test --test-concurrency=1 tests/v6-coupled-pair-epoch-anchor.test.ts tests/v6-shared-series.test.ts",
+        "tests": 41,
+        "passed": 41,
+        "failed": 0,
+        "note": "Final anchor and shared-state tests, including rollback and the complete original animation envelope."
+      }
+    ]
+  },
+  "oracle": {
+    "journals": 11,
+    "operations": 21,
+    "sourceHashes": 53,
+    "sourceModified": false,
+    "fixture": "../../../tests/fixtures/v6-coupled-pair-epoch-anchor-reference.json.gz"
+  },
+  "buildChecks": {
+    "typecheck": "passed",
+    "diffCheck": "passed"
+  },
+  "campaigns": [
+    {
+      "game": "ONDE",
+      "targetLevels": 6,
+      "passed": true,
+      "levelsCompleted": 6,
+      "state": "WIN",
+      "actions": 48,
+      "prefixes": 9,
+      "sessions": 1,
+      "epochAnchors": [
+        {
+          "epoch": 1,
+          "frame_digest": "f5c3dcb0500da2091d8daac7acd1cbb72aebb33c04c70c67581597b1fbbc90cd",
+          "interior_digest": "4947847ee816080b55a9a1e96baef28528969ed04c8c8ad57adf78d4696a54f8",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-e7b1d969-5334-4484-8f78-19434970dc2b:epoch:1:revision:1:frame:f5c3dcb0500da209",
+          "score": 0
+        },
+        {
+          "epoch": 2,
+          "frame_digest": "70b7b529acdd9700d12aa541c7f50d134a014ec0a852032d8d3740853bc4f15a",
+          "interior_digest": "f5505fa58f94d12e2a90109e639236cfed7ca03fb3c4268d9dd67de2f6600bb2",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-e7b1d969-5334-4484-8f78-19434970dc2b:epoch:2:revision:3:frame:70b7b529acdd9700",
+          "score": 1
+        },
+        {
+          "epoch": 3,
+          "frame_digest": "a77f36419054576ecc182e6ac971246618509de74fe89b4e01b49d37d189bed6",
+          "interior_digest": "68c28a79216d8b3e47e071f9737fbefbee23b685468e141ba1fc48813dc13b27",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-e7b1d969-5334-4484-8f78-19434970dc2b:epoch:3:revision:7:frame:a77f36419054576e",
+          "score": 2
+        },
+        {
+          "epoch": 4,
+          "frame_digest": "20af907d4c710e4558ce15b1832542ea736d70b5181b681ac7c41399b8139af3",
+          "interior_digest": "c80788c590767083acd8501fa8bccdf53a5de38d5bcc424b86d44e458caee452",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-e7b1d969-5334-4484-8f78-19434970dc2b:epoch:4:revision:19:frame:20af907d4c710e45",
+          "score": 3
+        },
+        {
+          "epoch": 5,
+          "frame_digest": "7afeb8e3c4fa8aed243290211d3666ebbe8303b1395f535d231d6a5663e74429",
+          "interior_digest": "9165fa9a100ab5a767271e0a7845fa6d0ae17c0501a02c1a242b8627d5346f03",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-e7b1d969-5334-4484-8f78-19434970dc2b:epoch:5:revision:25:frame:7afeb8e3c4fa8aed",
+          "score": 4
+        },
+        {
+          "epoch": 6,
+          "frame_digest": "22aa838de4cf8f443bc8c397682d2fa562d7c00a1683d391c403f58afdf80b06",
+          "interior_digest": "d984f267fe1a21a471ebff956d7e93f41af16cdcb20c34586719e0bfef860179",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-e7b1d969-5334-4484-8f78-19434970dc2b:epoch:6:revision:32:frame:22aa838de4cf8f44",
+          "score": 5
+        }
+      ],
+      "report": "onde.json"
+    },
+    {
+      "game": "HANO",
+      "targetLevels": 2,
+      "passed": true,
+      "levelsCompleted": 2,
+      "state": "NOT_FINISHED",
+      "actions": 16,
+      "prefixes": 8,
+      "sessions": 1,
+      "epochAnchors": [
+        {
+          "epoch": 1,
+          "frame_digest": "b98de996d71bd15851a87548cec2dfe58106d84aa35339aad5963407bdbaaf2e",
+          "interior_digest": "6cd0c207254b58599ca2136834f1eec912e5f25a8eaf29c3a21a9b63a97f6467",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-5b2cd3b5-9a3e-4f9b-9964-5e4d20ddbee8:epoch:1:revision:1:frame:b98de996d71bd158",
+          "score": 0
+        },
+        {
+          "epoch": 2,
+          "frame_digest": "cfd429328644402d9b6b74ea4e773b82950db224ec2ef54b1c3b27b1bac630bb",
+          "interior_digest": "55e7ce25431a328ad3691814a3891f23639f59440a21c7984156e503d5f4c007",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-5b2cd3b5-9a3e-4f9b-9964-5e4d20ddbee8:epoch:2:revision:7:frame:cfd429328644402d",
+          "score": 1
+        }
+      ],
+      "report": "hano-two-levels.json"
+    }
+  ],
+  "ondeRegression": {
+    "against": "../native-campaigns-v32/onde.json",
+    "commandsMatched": 48,
+    "completePublicPacketsMatched": 49,
+    "qualification": "Regression against the prior native integrated campaign, not a claim of full original V6 parity."
+  },
+  "hanoOriginalComparison": {
+    "path": "tests/fixtures/v6-ordered-support-reference.json",
+    "sha256": "592de5b4eac271df8d3bdf9addea962380885b59c0f4b7508ea1ca7c9f6eb863",
+    "qualification": "Available reference prefix only: public commands and all animation packets previously matched the unchanged complete original caller. Further levels are live tests, not differential claims.",
+    "referenceCommands": 30,
+    "packetsCompared": 17,
+    "commandsCompared": 16,
+    "passed": true
+  },
+  "declaredEntryCoverage": {
+    "connected": 27,
+    "total": 76,
+    "percent": 35.5,
+    "unchanged": true
+  },
+  "fullV6Parity": false,
+  "independentReview": {
+    "blockingFindings": 0,
+    "areas": [
+      "source order",
+      "single registered owner",
+      "sealed-prefix acquisition",
+      "atomic reconstruction",
+      "v32 state compatibility",
+      "bounded per-epoch anchor data"
+    ],
+    "requestedAdditionalTest": "restore old V7 epoch state and reacquire the later anchor",
+    "additionalTest": "passed"
+  }
+}

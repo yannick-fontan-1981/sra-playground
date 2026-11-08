@@ -11,8 +11,9 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone:** see [the v32 SupportNavigation, occurrence
-recall and delta report](v32-support-recall-delta.md). The connected-entry audit
+**Current integrated milestone:** see [the v33 shared-series epoch-anchor
+report](v33-shared-series-anchor.md), following [the v32 SupportNavigation,
+occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
 is [v6-entry-point-progress.json](v6-entry-point-progress.json): 27 of 76
 explicit DRM subquestions are connected (35.5%). This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.

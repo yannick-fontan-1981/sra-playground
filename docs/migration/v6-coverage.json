@@ -31,9 +31,9 @@
     "dataFiles": 417,
     "verifiedModules": 0,
     "componentVerifiedModules": 76,
-    "partiallyTransferredModules": 46,
+    "partiallyTransferredModules": 48,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1247,
+    "pendingModules": 1245,
     "strategyFamilies": 16
   },
   "families": [
@@ -75010,7 +75010,11 @@
         "tests/fixtures/v6-native-caller/hano-first-prefix.json",
         "tests/fixtures/v6-native-caller/viewport-three-prefixes.json",
         "tests/fixtures/v6-native-caller/report.json",
-        "docs/migration/v6-common-caller-oracle.md"
+        "docs/migration/v6-common-caller-oracle.md",
+        "tests/v6-support-caller-integration.test.ts",
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json",
+        "tests/fixtures/v6-native-caller/onde-first-prefix.json",
+        "docs/migration/v33-shared-series-anchor.md"
       ]
     },
     {
@@ -76155,9 +76159,17 @@
           "endLine": 38
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "tests/v6-shared-series.test.ts",
+        "tests/v6-caller-integration.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "docs/migration/v33-shared-series-anchor.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_occluded_catalogue.py",
@@ -79668,9 +79680,20 @@
           "endLine": 87
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-coupled-pair-epoch-anchor.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-coupled-pair-epoch-anchor-reference.py",
+        "tests/fixtures/v6-coupled-pair-epoch-anchor-reference.json.gz",
+        "tests/v6-coupled-pair-epoch-anchor.test.ts",
+        "tests/v6-shared-series.test.ts",
+        "tests/v6-caller-integration.test.ts",
+        "tests/v6-support-caller-integration.test.ts",
+        "docs/migration/v33-shared-series-anchor.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/coupled_pair_observation.py",
