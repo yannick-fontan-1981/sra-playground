@@ -1,0 +1,215 @@
+{
+  "format": "logos-engine.v34.coupled-pair-bounded-diagnostic.v1",
+  "qualification": {
+    "synthetic": true,
+    "responses": 100,
+    "gameCampaign": false,
+    "elapsedTimeBenchmark": false,
+    "performedOnce": true,
+    "copiedWithoutRerun": true,
+    "controlExecuted": false,
+    "scenario": "16x16 public raster with two disjoint solid 2x2 squares of palette value 5, both moved down one row on the first response; 99 later responses keep the settled raster and supply new observation references.",
+    "path": "Real SharedSeriesConstraint.record/state/restore and NativeKnowledgeStore.commit/stateValue, family_state plus the repeated_series_state reasoning fact mirror. No unrelated families, catalogue, prefix evidence, solver, or game engine.",
+    "checks": "Every stored family state equals the submitted state; every stored reasoning fact equals the submitted fact; family is restored from the V7 hydration after each response. All 100 responses completed with exit code 0.",
+    "storageMetrics": "Byte counts are UTF-8 JSON.stringify lengths of the named values. Current-node values and historical-node values include different views and must not be summed as independent retained memory; graphJsonBytes serializes current nodes and deltas, so repeats their overlapping representation.",
+    "heapMetricWarning": "Raw heapAfterGcMiB and heapIncreaseMiB are preserved verbatim for output fidelity only. The script invokes GC before computing the JSON byte metrics, then reads heap after those serializations. Thus the heap numbers include measurement-created temporary allocations and must not be cited as exact retained heap or as an exact before/after memory comparison.",
+    "conclusion": "Content-addressed V7 fragments share repeated state. No blocking accumulation failure was demonstrated within these 100 synthetic responses. Cumulative source journals may continue to grow on longer episodes; this bounded diagnostic is not a guarantee for arbitrary episode length.",
+    "productChanges": "None. The diagnostic was inline and created no files during its execution."
+  },
+  "reproduction": {
+    "cwd": "/workspace/scratch/656587eca20f/playground-site/.sites-checkout",
+    "command": "node --expose-gc --input-type=module - evidence < docs/migration/native-campaigns-v34/pair-storage-diagnostic.mjs",
+    "stdinRequired": "The copied script is the exact source originally executed via stdin. Its relative imports resolve against the checkout when run with the command above; do not invoke the external .mjs path directly.",
+    "sourceManifestReportedByParent": {
+      "files": 111,
+      "digest": "767819bb402a620dc900f8eb4063018e33c8f636df77a44fb7b936a1ffd6d164"
+    },
+    "sourceManifestQualification": "Parent-reported product freeze associated with the diagnostic; this read-only diagnostic did not recompute that manifest.",
+    "scriptSha256": "943fccd9d0560f800513435d95267990d3e2ae7e04dbdc0cae9172c8ad8a8838"
+  },
+  "stdout": [
+    {
+      "mode": "evidence",
+      "point": {
+        "responses": 1,
+        "recordsWithEvents": 1,
+        "events": 2,
+        "rawSharedStateBytes": 895,
+        "summedRawHistoricalFamilyStatesBytes": 895,
+        "graphNodes": 2,
+        "fragmentNodes": 0,
+        "deltas": 3,
+        "fragmentValueBytes": 0,
+        "currentNodeValuesBytes": 3262,
+        "allHistoricalNodeValuesBytes": 3508,
+        "graphJsonBytes": 9943,
+        "heapAfterGcMiB": 13.165351867675781,
+        "heapIncreaseMiB": 0.45392608642578125
+      }
+    },
+    {
+      "mode": "evidence",
+      "point": {
+        "responses": 10,
+        "recordsWithEvents": 10,
+        "events": 11,
+        "rawSharedStateBytes": 15909,
+        "summedRawHistoricalFamilyStatesBytes": 70179,
+        "graphNodes": 2,
+        "fragmentNodes": 0,
+        "deltas": 21,
+        "fragmentValueBytes": 0,
+        "currentNodeValuesBytes": 52732,
+        "allHistoricalNodeValuesBytes": 237168,
+        "graphJsonBytes": 306275,
+        "heapAfterGcMiB": 18.365402221679688,
+        "heapIncreaseMiB": 5.653404235839844
+      }
+    },
+    {
+      "mode": "evidence",
+      "point": {
+        "responses": 25,
+        "recordsWithEvents": 25,
+        "events": 26,
+        "rawSharedStateBytes": 82914,
+        "summedRawHistoricalFamilyStatesBytes": 779334,
+        "graphNodes": 4,
+        "fragmentNodes": 2,
+        "deltas": 53,
+        "fragmentValueBytes": 132410,
+        "currentNodeValuesBytes": 133534,
+        "allHistoricalNodeValuesBytes": 2393660,
+        "graphJsonBytes": 2568166,
+        "heapAfterGcMiB": 32.24500274658203,
+        "heapIncreaseMiB": 19.533004760742188
+      }
+    },
+    {
+      "mode": "evidence",
+      "point": {
+        "responses": 50,
+        "recordsWithEvents": 50,
+        "events": 51,
+        "rawSharedStateBytes": 311589,
+        "summedRawHistoricalFamilyStatesBytes": 5520759,
+        "graphNodes": 29,
+        "fragmentNodes": 27,
+        "deltas": 128,
+        "fragmentValueBytes": 1841209,
+        "currentNodeValuesBytes": 1842741,
+        "allHistoricalNodeValuesBytes": 4135047,
+        "graphJsonBytes": 6087539,
+        "heapAfterGcMiB": 57.5908203125,
+        "heapIncreaseMiB": 44.878822326660156
+      }
+    },
+    {
+      "mode": "evidence",
+      "point": {
+        "responses": 100,
+        "recordsWithEvents": 100,
+        "events": 101,
+        "rawSharedStateBytes": 1207700,
+        "summedRawHistoricalFamilyStatesBytes": 41514248,
+        "graphNodes": 79,
+        "fragmentNodes": 77,
+        "deltas": 278,
+        "fragmentValueBytes": 5262941,
+        "currentNodeValuesBytes": 5267127,
+        "allHistoricalNodeValuesBytes": 7695195,
+        "graphJsonBytes": 13209728,
+        "heapAfterGcMiB": 107.50334167480469,
+        "heapIncreaseMiB": 94.78919219970703
+      }
+    },
+    {
+      "mode": "evidence",
+      "initialHeapMiB": 12.715507507324219,
+      "scope": "100 synthetic public responses; actual SharedSeries acquisition/restoration and actual V7 store; family_state and repeated_series_state fact mirror, no unrelated agent families/catalogue/prefix evidence; heap after explicit GC includes live family, current fact, hydration and bounded caches; no elapsed-time benchmark",
+      "summary": [
+        {
+          "responses": 1,
+          "recordsWithEvents": 1,
+          "events": 2,
+          "rawSharedStateBytes": 895,
+          "summedRawHistoricalFamilyStatesBytes": 895,
+          "graphNodes": 2,
+          "fragmentNodes": 0,
+          "deltas": 3,
+          "fragmentValueBytes": 0,
+          "currentNodeValuesBytes": 3262,
+          "allHistoricalNodeValuesBytes": 3508,
+          "graphJsonBytes": 9943,
+          "heapAfterGcMiB": 13.165351867675781,
+          "heapIncreaseMiB": 0.45392608642578125
+        },
+        {
+          "responses": 10,
+          "recordsWithEvents": 10,
+          "events": 11,
+          "rawSharedStateBytes": 15909,
+          "summedRawHistoricalFamilyStatesBytes": 70179,
+          "graphNodes": 2,
+          "fragmentNodes": 0,
+          "deltas": 21,
+          "fragmentValueBytes": 0,
+          "currentNodeValuesBytes": 52732,
+          "allHistoricalNodeValuesBytes": 237168,
+          "graphJsonBytes": 306275,
+          "heapAfterGcMiB": 18.365402221679688,
+          "heapIncreaseMiB": 5.653404235839844
+        },
+        {
+          "responses": 25,
+          "recordsWithEvents": 25,
+          "events": 26,
+          "rawSharedStateBytes": 82914,
+          "summedRawHistoricalFamilyStatesBytes": 779334,
+          "graphNodes": 4,
+          "fragmentNodes": 2,
+          "deltas": 53,
+          "fragmentValueBytes": 132410,
+          "currentNodeValuesBytes": 133534,
+          "allHistoricalNodeValuesBytes": 2393660,
+          "graphJsonBytes": 2568166,
+          "heapAfterGcMiB": 32.24500274658203,
+          "heapIncreaseMiB": 19.533004760742188
+        },
+        {
+          "responses": 50,
+          "recordsWithEvents": 50,
+          "events": 51,
+          "rawSharedStateBytes": 311589,
+          "summedRawHistoricalFamilyStatesBytes": 5520759,
+          "graphNodes": 29,
+          "fragmentNodes": 27,
+          "deltas": 128,
+          "fragmentValueBytes": 1841209,
+          "currentNodeValuesBytes": 1842741,
+          "allHistoricalNodeValuesBytes": 4135047,
+          "graphJsonBytes": 6087539,
+          "heapAfterGcMiB": 57.5908203125,
+          "heapIncreaseMiB": 44.878822326660156
+        },
+        {
+          "responses": 100,
+          "recordsWithEvents": 100,
+          "events": 101,
+          "rawSharedStateBytes": 1207700,
+          "summedRawHistoricalFamilyStatesBytes": 41514248,
+          "graphNodes": 79,
+          "fragmentNodes": 77,
+          "deltas": 278,
+          "fragmentValueBytes": 5262941,
+          "currentNodeValuesBytes": 5267127,
+          "allHistoricalNodeValuesBytes": 7695195,
+          "graphJsonBytes": 13209728,
+          "heapAfterGcMiB": 107.50334167480469,
+          "heapIncreaseMiB": 94.78919219970703
+        }
+      ]
+    }
+  ],
+  "exitCode": 0
+}

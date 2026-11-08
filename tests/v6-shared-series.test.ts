@@ -9,6 +9,7 @@ import { NativeKnowledgeStore } from '../src/logos-engine/v6-knowledge-store.ts'
 type R = Record<string, any>;
 const oracle = JSON.parse(await readFile(new URL('./fixtures/v6-occurrence-reference.json', import.meta.url), 'utf8'));
 const anchorOracle = JSON.parse(gunzipSync(await readFile(new URL('./fixtures/v6-coupled-pair-epoch-anchor-reference.json.gz', import.meta.url))).toString());
+const pairOracle = JSON.parse(gunzipSync(await readFile(new URL('./fixtures/v6-coupled-pair-evidence-reference.json.gz', import.meta.url))).toString());
 
 test('shared series acquires the before-epoch anchor before the unchanged public animation event', () => {
   const family = new SharedSeriesConstraint(oracle.policy), before = oracle.scenes['program:before'], after = oracle.scenes['program:after'];
@@ -93,4 +94,54 @@ test('restoring an earlier authoritative epoch state permits exact reacquisition
   assert.deepEqual(family.state().events.map((event: R) => event.epoch), [1]);
   assert.deepEqual(acquire(steps[1]), second, 'No previously-seen-epoch cache survives restoration from the actual node');
   assert.deepEqual(family.state(), laterState, 'Reacquisition reproduces both the complete journal and its retained digest');
+});
+
+for (const id of ['learned_motion_and_exact_sample_deduplication', 'refuted_plan_whole_return',
+  'refuted_plan_interior_only_return', 'epoch_boundaries_preserve_old_state_until_new_motion']) {
+  test('shared V7 pair acquisition matches the complete original envelope: ' + id, async () => {
+    let family = new SharedSeriesConstraint(oracle.policy);
+    const journal = pairOracle.journals.find((row: R) => row.id === id);
+    const store = new NativeKnowledgeStore('shared-pair-acquisition-v2', id);
+    const expectedEvents: R[] = [];
+    for (const [index, step] of journal.steps.entries()) {
+      const operation = step.operation, before = pairOracle.scenes[operation.before], after = pairOracle.scenes[operation.after];
+      assert.equal(operation.kind, 'record');
+      const result = family.record(before.observation, after.observation, operation.command,
+        before.rows, after.rows, operation.proposal, operation.index, after.public.frame_packet);
+      assert.deepEqual(result, step.expected.result, 'No original common-adapter event is filtered out');
+      expectedEvents.push(...step.expected.result.events);
+      assert.deepEqual(family.state().events, expectedEvents);
+      assert.deepEqual(family.pairs.state(), step.expected.state);
+      await store.commit([{ id: 'family_state:public_occurrence_recall', kind: 'family_state', family: family.id, value: family.state() }],
+        { workflow: 'v6.composition_strategy.choose', step: 'observed_occurrence_recall', statement: 'pair.acquire.' + index });
+      const stored = store.stateValue('family_state:public_occurrence_recall') as R;
+      family = new SharedSeriesConstraint(oracle.policy); family.restore(stored);
+      assert.deepEqual(family.state(), stored);
+      assert.deepEqual(family.pairs.state(), step.expected.state, 'The pair model is rebuilt from the same authoritative shared node');
+    }
+  });
+}
+
+test('shared pair evidence rejects corruption atomically and reacquires identically after an earlier V7 state is restored', async () => {
+  const family = new SharedSeriesConstraint(oracle.policy);
+  const steps = pairOracle.journals.find((row: R) => row.id === 'learned_motion_and_exact_sample_deduplication').steps;
+  const acquire = (step: R) => {
+    const operation = step.operation, before = pairOracle.scenes[operation.before], after = pairOracle.scenes[operation.after];
+    const result = family.record(before.observation, after.observation, operation.command,
+      before.rows, after.rows, operation.proposal, operation.index, after.public.frame_packet);
+    assert.deepEqual(result, step.expected.result); return result;
+  };
+  acquire(steps[0]);
+  const store = new NativeKnowledgeStore('shared-pair-acquisition-v2', 'pair-state-rollback');
+  await store.commit([{ id: 'family_state:public_occurrence_recall', kind: 'family_state', family: family.id, value: family.state() }],
+    { workflow: 'v6.composition_strategy.choose', step: 'observed_occurrence_recall', statement: 'pair.acquire' });
+  const expectedResult = acquire(steps[1]), retained = family.state(), retainedPair = family.pairs.state();
+  const corrupted = structuredClone(retained);
+  corrupted.events.find((event: R) => event.kind === 'coupled_pair_evidence').state.refused.push('unwitnessed-trial');
+  assert.throws(() => family.restore(corrupted), /Shared series memory changed/);
+  assert.deepEqual(family.state(), retained); assert.deepEqual(family.pairs.state(), retainedPair);
+  family.restore(store.stateValue('family_state:public_occurrence_recall') as R);
+  assert.deepEqual(family.pairs.state(), steps[0].expected.state);
+  assert.deepEqual(acquire(steps[1]), expectedResult);
+  assert.deepEqual(family.state(), retained); assert.deepEqual(family.pairs.state(), retainedPair);
 });

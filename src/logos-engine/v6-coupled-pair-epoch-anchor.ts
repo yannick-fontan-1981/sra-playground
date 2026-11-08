@@ -24,6 +24,18 @@ export interface CoupledPairEpochAnchorState {
   readonly pair_initials: Readonly<Record<string, R>>;
 }
 
+/** Shared event constructor; the owning memory decides whether an epoch is new. */
+export function coupledPairEpochAnchor(before: CoupledPairEpochAnchorObservation, rows: NativeRows): R {
+  return {
+    kind: 'coupled_pair_epoch_anchor',
+    epoch: before.level_epoch,
+    score: before.levels_completed,
+    observation_ref: before.observation_ref,
+    frame_digest: symbolicDigest(rows),
+    interior_digest: symbolicDigest(rows.slice(1, -1).map(row => row.slice(1, -1))),
+  };
+}
+
 export class CoupledPairEpochAnchorMemory {
   private pairEvents: R[] = [];
   private pairInitials = new Map<string, R>();
@@ -31,14 +43,7 @@ export class CoupledPairEpochAnchorMemory {
   /** Source record order: inherited record, this anchor, then record_packet. */
   record(before: CoupledPairEpochAnchorObservation, rows: NativeRows): R[] {
     if (this.pairInitials.has(String(before.level_epoch))) return [];
-    const event = {
-      kind: 'coupled_pair_epoch_anchor',
-      epoch: before.level_epoch,
-      score: before.levels_completed,
-      observation_ref: before.observation_ref,
-      frame_digest: symbolicDigest(rows),
-      interior_digest: symbolicDigest(rows.slice(1, -1).map(row => row.slice(1, -1))),
-    };
+    const event = coupledPairEpochAnchor(before, rows);
     this.applyEvent(event);
     return [event];
   }

@@ -133,7 +133,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             acquiredActions: evidence.transitions.length, family: snapshot.lastDecision, operations: ['OP29', 'OP30', 'OP31'],
             graphChain: graph.chain, graphRevision: snapshot.graphRevision, callerAcquiredTransitions: snapshot.caller.acquiredTransitions,
             sharedSeries: { digestScope: snapshot.coverage.sharedSeriesDigestScope, digest: series.digest,
-              eventCount: series.events.length, epochAnchors: anchors } });
+              eventCount: series.events.length, epochAnchors: anchors,
+              pairEvidenceCount: (series.events as R[]).filter(event => event.kind === 'coupled_pair_evidence').length } });
           lastCycles = snapshot.cycles;
         }
         return result;

@@ -1,0 +1,198 @@
+{
+  "schema": "logos-engine.v6.v34-pair-acquisition-validation.v1",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.5.2",
+  "scope": "Public pair observation, correspondence and CoupledPairAccess record/after acquisition in the native common journal. No joint-route planner, new policy entry or full inheritance-digest equivalence is claimed.",
+  "nativeSource": {
+    "digest": "767819bb402a620dc900f8eb4063018e33c8f636df77a44fb7b936a1ffd6d164",
+    "fileCount": 111,
+    "manifest": "onde.json#source"
+  },
+  "tests": {
+    "uniqueTestsPassed": 199,
+    "qualification": "Distinct tests across the listed files, including nested oracle steps. Final evidence/shared-series batch has 85 tests. The 4 shared-series tests from the initial common batch are not counted twice.",
+    "files": {
+      "tests/v6-caller-integration.test.ts": 9,
+      "tests/v6-support-caller-integration.test.ts": 21,
+      "tests/v6-shared-series.test.ts": 9,
+      "tests/v6-coupled-pair-epoch-anchor.test.ts": 37,
+      "tests/v6-coupled-pair-observation.test.ts": 47,
+      "tests/v6-coupled-pair-evidence.test.ts": 76
+    },
+    "batches": [
+      {
+        "command": "node --test --test-concurrency=1 tests/v6-shared-series.test.ts tests/v6-caller-integration.test.ts tests/v6-support-caller-integration.test.ts",
+        "passed": 34,
+        "failed": 0,
+        "note": "Initial common regression batch before the 5 new pair/V7 integration tests."
+      },
+      {
+        "command": "node --test --test-concurrency=1 tests/v6-coupled-pair-epoch-anchor.test.ts",
+        "passed": 37,
+        "failed": 0
+      },
+      {
+        "command": "node --test --test-concurrency=1 tests/v6-coupled-pair-observation.test.ts",
+        "passed": 47,
+        "failed": 0
+      },
+      {
+        "command": "node --test --test-concurrency=1 tests/v6-coupled-pair-evidence.test.ts tests/v6-shared-series.test.ts",
+        "passed": 85,
+        "failed": 0,
+        "note": "Final pair evidence, shared envelope, V7 reconstruction, corruption rejection and rollback comparisons."
+      }
+    ]
+  },
+  "originalOracle": {
+    "observation": {
+      "measurements": 25,
+      "assignments": 19,
+      "fixture": "../../../tests/fixtures/v6-coupled-pair-observation-reference.json.gz"
+    },
+    "acquisition": {
+      "journals": 18,
+      "operations": 44,
+      "afterCases": 9,
+      "sourceHashes": 56,
+      "sourceModified": false,
+      "fixture": "../../../tests/fixtures/v6-coupled-pair-evidence-reference.json.gz"
+    },
+    "qualification": "Supplied pair plans in contract fixtures are not solver-produced game trajectories. Full common-adapter envelopes are retained without filtering unported events."
+  },
+  "campaigns": [
+    {
+      "game": "ONDE",
+      "targetLevels": 6,
+      "result": "passed",
+      "levelsCompleted": 6,
+      "state": "WIN",
+      "actions": 48,
+      "prefixes": 9,
+      "sessions": 1,
+      "pairEvidenceCount": 11,
+      "epochAnchors": [
+        {
+          "epoch": 1,
+          "frame_digest": "f5c3dcb0500da2091d8daac7acd1cbb72aebb33c04c70c67581597b1fbbc90cd",
+          "interior_digest": "4947847ee816080b55a9a1e96baef28528969ed04c8c8ad57adf78d4696a54f8",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-567fe45a-2c85-4837-b397-4378fa8a62fc:epoch:1:revision:1:frame:f5c3dcb0500da209",
+          "score": 0
+        },
+        {
+          "epoch": 2,
+          "frame_digest": "70b7b529acdd9700d12aa541c7f50d134a014ec0a852032d8d3740853bc4f15a",
+          "interior_digest": "f5505fa58f94d12e2a90109e639236cfed7ca03fb3c4268d9dd67de2f6600bb2",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-567fe45a-2c85-4837-b397-4378fa8a62fc:epoch:2:revision:3:frame:70b7b529acdd9700",
+          "score": 1
+        },
+        {
+          "epoch": 3,
+          "frame_digest": "a77f36419054576ecc182e6ac971246618509de74fe89b4e01b49d37d189bed6",
+          "interior_digest": "68c28a79216d8b3e47e071f9737fbefbee23b685468e141ba1fc48813dc13b27",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-567fe45a-2c85-4837-b397-4378fa8a62fc:epoch:3:revision:7:frame:a77f36419054576e",
+          "score": 2
+        },
+        {
+          "epoch": 4,
+          "frame_digest": "20af907d4c710e4558ce15b1832542ea736d70b5181b681ac7c41399b8139af3",
+          "interior_digest": "c80788c590767083acd8501fa8bccdf53a5de38d5bcc424b86d44e458caee452",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-567fe45a-2c85-4837-b397-4378fa8a62fc:epoch:4:revision:19:frame:20af907d4c710e45",
+          "score": 3
+        },
+        {
+          "epoch": 5,
+          "frame_digest": "7afeb8e3c4fa8aed243290211d3666ebbe8303b1395f535d231d6a5663e74429",
+          "interior_digest": "9165fa9a100ab5a767271e0a7845fa6d0ae17c0501a02c1a242b8627d5346f03",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-567fe45a-2c85-4837-b397-4378fa8a62fc:epoch:5:revision:25:frame:7afeb8e3c4fa8aed",
+          "score": 4
+        },
+        {
+          "epoch": 6,
+          "frame_digest": "22aa838de4cf8f443bc8c397682d2fa562d7c00a1683d391c403f58afdf80b06",
+          "interior_digest": "d984f267fe1a21a471ebff956d7e93f41af16cdcb20c34586719e0bfef860179",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-567fe45a-2c85-4837-b397-4378fa8a62fc:epoch:6:revision:32:frame:22aa838de4cf8f44",
+          "score": 5
+        }
+      ],
+      "report": "onde.json",
+      "sameCommandsAndCompletePublicPacketsAsV33": true
+    },
+    {
+      "game": "HANO",
+      "targetLevels": 2,
+      "result": "passed",
+      "levelsCompleted": 2,
+      "state": "NOT_FINISHED",
+      "actions": 16,
+      "prefixes": 8,
+      "sessions": 1,
+      "pairEvidenceCount": 0,
+      "epochAnchors": [
+        {
+          "epoch": 1,
+          "frame_digest": "b98de996d71bd15851a87548cec2dfe58106d84aa35339aad5963407bdbaaf2e",
+          "interior_digest": "6cd0c207254b58599ca2136834f1eec912e5f25a8eaf29c3a21a9b63a97f6467",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-38e95963-e269-4a8a-9e01-d1784c4d6f12:epoch:1:revision:1:frame:b98de996d71bd158",
+          "score": 0
+        },
+        {
+          "epoch": 2,
+          "frame_digest": "cfd429328644402d9b6b74ea4e773b82950db224ec2ef54b1c3b27b1bac630bb",
+          "interior_digest": "55e7ce25431a328ad3691814a3891f23639f59440a21c7984156e503d5f4c007",
+          "kind": "coupled_pair_epoch_anchor",
+          "observation_ref": "sra-v6-38e95963-e269-4a8a-9e01-d1784c4d6f12:epoch:2:revision:7:frame:cfd429328644402d",
+          "score": 1
+        }
+      ],
+      "report": "hano-two-levels.json",
+      "sameCommandsAndCompletePublicPacketsAsV33": true
+    }
+  ],
+  "regression": {
+    "onde": {
+      "commands": 48,
+      "completePublicPackets": 49,
+      "reference": "../native-campaigns-v33/onde.json"
+    },
+    "hano": {
+      "commands": 16,
+      "completePublicPackets": 17,
+      "reference": "../native-campaigns-v33/hano-two-levels.json"
+    },
+    "qualification": "Comparison with the previous native version; the HANO report also retains its separately qualified original reference comparison."
+  },
+  "buildChecks": {
+    "typecheck": "passed",
+    "diffCheck": "passed"
+  },
+  "declaredEntryCoverage": {
+    "connected": 27,
+    "total": 76,
+    "percent": 35.5,
+    "unchanged": true
+  },
+  "fullV6Parity": false,
+  "pending": [
+    "joint_route",
+    "pair propose_graph",
+    "pair-plan before guard",
+    "AuxiliarySupportAccess pair-evidence producer",
+    "remaining ObservedCompositionConstraint inheritance layers"
+  ],
+  "independentReview": {
+    "blockingFindings": 0,
+    "recordAndAfterParity": "no concrete mismatch found on the valid public domain",
+    "v33AnchorOnlyProjection": "same exact digest formula when pair_state is null; no invented pair history",
+    "boundedStorageDiagnostic": "pair-storage-diagnostic.json",
+    "diagnosticScript": "pair-storage-diagnostic.mjs",
+    "responses": 100,
+    "qualification": "Synthetic data volume test, not exact retained heap or a timing benchmark; cumulative source histories can continue to grow on long episodes."
+  }
+}

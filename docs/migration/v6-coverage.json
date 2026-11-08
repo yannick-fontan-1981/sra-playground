@@ -31,9 +31,9 @@
     "dataFiles": 417,
     "verifiedModules": 0,
     "componentVerifiedModules": 76,
-    "partiallyTransferredModules": 48,
+    "partiallyTransferredModules": 49,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1245,
+    "pendingModules": 1244,
     "strategyFamilies": 16
   },
   "families": [
@@ -75014,7 +75014,8 @@
         "tests/v6-support-caller-integration.test.ts",
         "tests/fixtures/v6-native-caller/memo-first-prefix.json",
         "tests/fixtures/v6-native-caller/onde-first-prefix.json",
-        "docs/migration/v33-shared-series-anchor.md"
+        "docs/migration/v33-shared-series-anchor.md",
+        "docs/migration/v34-coupled-pair-evidence.md"
       ]
     },
     {
@@ -76162,13 +76163,15 @@
       "status": "partial_transfer",
       "targets": [
         "src/logos-engine/v6-shared-series.ts",
-        "src/logos-engine/v6-native-runtime.ts"
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-coupled-pair-evidence.ts"
       ],
       "proof": [
         "tests/v6-shared-series.test.ts",
         "tests/v6-caller-integration.test.ts",
         "tests/v6-support-caller-integration.test.ts",
-        "docs/migration/v33-shared-series-anchor.md"
+        "docs/migration/v33-shared-series-anchor.md",
+        "docs/migration/v34-coupled-pair-evidence.md"
       ]
     },
     {
@@ -79683,7 +79686,8 @@
       "status": "partial_transfer",
       "targets": [
         "src/logos-engine/v6-coupled-pair-epoch-anchor.ts",
-        "src/logos-engine/v6-shared-series.ts"
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-coupled-pair-evidence.ts"
       ],
       "proof": [
         "scripts/export-v6-coupled-pair-epoch-anchor-reference.py",
@@ -79692,7 +79696,11 @@
         "tests/v6-shared-series.test.ts",
         "tests/v6-caller-integration.test.ts",
         "tests/v6-support-caller-integration.test.ts",
-        "docs/migration/v33-shared-series-anchor.md"
+        "docs/migration/v33-shared-series-anchor.md",
+        "scripts/export-v6-coupled-pair-evidence-reference.py",
+        "tests/fixtures/v6-coupled-pair-evidence-reference.json.gz",
+        "tests/v6-coupled-pair-evidence.test.ts",
+        "docs/migration/v34-coupled-pair-evidence.md"
       ]
     },
     {
@@ -79720,9 +79728,16 @@
           "endLine": 69
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-coupled-pair-observation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-coupled-pair-observation-reference.py",
+        "tests/fixtures/v6-coupled-pair-observation-reference.json.gz",
+        "tests/v6-coupled-pair-observation.test.ts",
+        "docs/migration/v34-coupled-pair-evidence.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/coupled_support_preparation.py",
