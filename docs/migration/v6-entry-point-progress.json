@@ -2,16 +2,16 @@
   "schema": "logos-engine.v6.declared-entry-coverage.v1",
   "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
   "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
-  "implementation": "logos-engine.typescript.v6.native-migration/0.6.2",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.7.0",
   "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
-  "connected": 28,
+  "connected": 29,
   "declared": 76,
-  "percent": 36.8,
+  "percent": 38.2,
   "groups": [
     {
       "id": "goal_access",
       "declared": 12,
-      "connected": 7,
+      "connected": 8,
       "entries": [
         {
           "question": "observed_composition_services",
@@ -25,8 +25,8 @@
         },
         {
           "question": "alternating_graph_composition",
-          "family": null,
-          "status": "pending"
+          "family": "public_occurrence_recall",
+          "status": "connected"
         },
         {
           "question": "scored_relation_access",
@@ -423,12 +423,23 @@
       "id": "goal_access",
       "families": [
         "public_occurrence_recall",
+        "public_occurrence_recall",
         "goal_access",
         "support_navigation",
         "subset_diagnosis",
         "invited_reduction",
         "joint_transport",
         "animated_contact"
+      ],
+      "entryPoints": [
+        "coupled_support_composition",
+        "alternating_graph_composition",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ]
     },
     {
@@ -538,7 +549,7 @@
     }
   ],
   "pendingSupportSubcompositions": [],
-  "sharedSeriesMemory": "occurrence_recall_ancestors_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending",
-  "sharedSeriesDigestScope": "native_recall_ancestors_and_coupled_support_v3",
+  "sharedSeriesMemory": "occurrence_recall_ancestors_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending",
+  "sharedSeriesDigestScope": "native_recall_ancestors_alternating_graph_and_coupled_support_v4",
   "fullV6Parity": false
 }

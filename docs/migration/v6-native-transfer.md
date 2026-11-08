@@ -11,14 +11,23 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone:** see [the v35 coupled planning, auxiliary support
-and native checkpoint report](v35-coupled-support.md), following [the v34 coupled-pair
+**Current integrated milestone:** see [the v36 alternating graph and common
+acquisition report](v36-alternating-graph.md), following [the v35 coupled planning,
+auxiliary support and native checkpoint report](v35-coupled-support.md), [the v34 coupled-pair
 response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 28 of 76
-explicit DRM subquestions are connected (36.8%). This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 29 of 76
+explicit DRM subquestions are connected (38.2%). This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
+
+**New v36 result:** the real native common agent completes TU93's first three
+levels in one fresh session: **32, 10 and 25 actions**, 67 total, 25 sealed
+prefixes. Eleven prefixes use the newly connected alternating-graph entry.
+The run stops at its declared three-level target on entry to level 4; this is
+not a claim of a complete-game `WIN`. Source files remain unchanged throughout
+the run and no Python agent module is loaded. The [campaign](native-campaigns-v36/tu93-three-levels.json)
+and [validation record](native-campaigns-v36/validation.json) preserve the evidence.
 
 The v35 report also distinguishes an explicit V7 robustness extension from
 exact transfer: the original 512-entity mechanical domain still refuses dense

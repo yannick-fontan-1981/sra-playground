@@ -1,0 +1,2537 @@
+{
+  "schema": "logos-engine.native-cpu-profile-summary.v1",
+  "input": "/workspace/scratch/656587eca20f/v36-profile/tu93.cpuprofile",
+  "sha256": "e95b7b05a0954cb146a3761f21e73f127b9f186a494f90d15f35138d2d398c1e",
+  "qualification": "One sampled process profile, not a comparative benchmark or an exact attribution of async decision costs. Does not assert game success or a performance improvement.",
+  "sampleCount": 62543,
+  "nodeCount": 48142,
+  "sampledSeconds": 68.169155,
+  "profileSpanSeconds": 68.169256,
+  "limitations": [
+    "timeDeltas are sampled elapsed intervals; scheduler delay, idle, startup, profiler overhead and garbage collection may be present.",
+    "V8 CPU stacks do not reliably preserve async ancestry. Common-acquisition attribution is a lower bound when awaited work resumes without its caller.",
+    "The disjoint context partition uses explicit inspection, game-runtime, acquisition, family, memory, native, helper, then loader precedence. A generic helper ancestor does not turn native work into validation work.",
+    "Explicit inspection identifies inspectKnowledge or the campaign read closure. Other proof assertions and hydration without those visible owners may remain in shared-memory, helper, or unattributed categories.",
+    "Inclusive contexts overlap and must not be added together. Self/module tables attribute only the sampled leaf and may put shared utility cost outside its logical caller.",
+    "The campaign report activeSeconds and request elapsedMs remain the source for production decision budgets; wall time includes game hosting and proof checks."
+  ],
+  "disjointContextPartition": [
+    {
+      "category": "shared_memory_without_visible_owner",
+      "samples": 23607,
+      "sampledMicroseconds": 25782228,
+      "sampledSeconds": 25.782228,
+      "percentOfAllSamples": 37.820958760600746
+    },
+    {
+      "category": "explicit_helper_inspection",
+      "samples": 12977,
+      "sampledMicroseconds": 14268468,
+      "sampledSeconds": 14.268468,
+      "percentOfAllSamples": 20.93097384000139
+    },
+    {
+      "category": "family_or_reasoning_work",
+      "samples": 11191,
+      "sampledMicroseconds": 11957675,
+      "sampledSeconds": 11.957675,
+      "percentOfAllSamples": 17.54118119844672
+    },
+    {
+      "category": "python_game_runtime",
+      "samples": 4173,
+      "sampledMicroseconds": 4551745,
+      "sampledSeconds": 4.551745,
+      "percentOfAllSamples": 6.677132788282325
+    },
+    {
+      "category": "common_acquisition_visible_stack",
+      "samples": 3906,
+      "sampledMicroseconds": 4248583,
+      "sampledSeconds": 4.248583,
+      "percentOfAllSamples": 6.232412591882649
+    },
+    {
+      "category": "garbage_collection",
+      "samples": 3468,
+      "sampledMicroseconds": 3818560,
+      "sampledSeconds": 3.81856,
+      "percentOfAllSamples": 5.601595032240021
+    },
+    {
+      "category": "other_native_coordination",
+      "samples": 2102,
+      "sampledMicroseconds": 2305933,
+      "sampledSeconds": 2.305933,
+      "percentOfAllSamples": 3.382663317449072
+    },
+    {
+      "category": "idle",
+      "samples": 742,
+      "sampledMicroseconds": 816930,
+      "sampledSeconds": 0.81693,
+      "percentOfAllSamples": 1.1983865723434595
+    },
+    {
+      "category": "other_or_unattributed",
+      "samples": 213,
+      "sampledMicroseconds": 240909,
+      "sampledSeconds": 0.240909,
+      "percentOfAllSamples": 0.3533988355877376
+    },
+    {
+      "category": "module_loading",
+      "samples": 121,
+      "sampledMicroseconds": 132516,
+      "sampledSeconds": 0.132516,
+      "percentOfAllSamples": 0.19439290394607356
+    },
+    {
+      "category": "campaign_driver_or_validation",
+      "samples": 43,
+      "sampledMicroseconds": 45608,
+      "sampledSeconds": 0.045608,
+      "percentOfAllSamples": 0.06690415921981137
+    }
+  ],
+  "leafCategoryPartition": [
+    {
+      "category": "shared_memory",
+      "samples": 31219,
+      "sampledMicroseconds": 34168036,
+      "sampledSeconds": 34.168036,
+      "percentOfAllSamples": 50.122428538244314
+    },
+    {
+      "category": "native_coordinator_or_transport",
+      "samples": 17681,
+      "sampledMicroseconds": 19381256,
+      "sampledSeconds": 19.381256,
+      "percentOfAllSamples": 28.431122550954314
+    },
+    {
+      "category": "python_game_runtime",
+      "samples": 4073,
+      "sampledMicroseconds": 4445883,
+      "sampledSeconds": 4.445883,
+      "percentOfAllSamples": 6.521839679544216
+    },
+    {
+      "category": "garbage_collection",
+      "samples": 3468,
+      "sampledMicroseconds": 3818560,
+      "sampledSeconds": 3.81856,
+      "percentOfAllSamples": 5.601595032240021
+    },
+    {
+      "category": "family_or_reasoning_helper",
+      "samples": 2907,
+      "sampledMicroseconds": 2848215,
+      "sampledSeconds": 2.848215,
+      "percentOfAllSamples": 4.178157995357284
+    },
+    {
+      "category": "other_or_unattributed",
+      "samples": 2269,
+      "sampledMicroseconds": 2487168,
+      "sampledSeconds": 2.487168,
+      "percentOfAllSamples": 3.648524028206012
+    },
+    {
+      "category": "idle",
+      "samples": 742,
+      "sampledMicroseconds": 816930,
+      "sampledSeconds": 0.81693,
+      "percentOfAllSamples": 1.1983865723434595
+    },
+    {
+      "category": "campaign_helper",
+      "samples": 98,
+      "sampledMicroseconds": 108911,
+      "sampledSeconds": 0.108911,
+      "percentOfAllSamples": 0.15976580610394833
+    },
+    {
+      "category": "module_loading",
+      "samples": 86,
+      "sampledMicroseconds": 94196,
+      "sampledSeconds": 0.094196,
+      "percentOfAllSamples": 0.13817979700643201
+    }
+  ],
+  "inclusiveVisibleContextsDoNotSum": [
+    {
+      "context": "native_agent",
+      "samples": 54655,
+      "sampledMicroseconds": 59524485,
+      "sampledSeconds": 59.524485,
+      "percentOfAllSamples": 87.31879542881234
+    },
+    {
+      "context": "shared_memory",
+      "samples": 47234,
+      "sampledMicroseconds": 51726704,
+      "sampledSeconds": 51.726704,
+      "percentOfAllSamples": 75.87992545895574
+    },
+    {
+      "context": "campaign_helper",
+      "samples": 16920,
+      "sampledMicroseconds": 18581865,
+      "sampledSeconds": 18.581865,
+      "percentOfAllSamples": 27.258464623773026
+    },
+    {
+      "context": "explicit_knowledge_inspection",
+      "samples": 12977,
+      "sampledMicroseconds": 14268468,
+      "sampledSeconds": 14.268468,
+      "percentOfAllSamples": 20.93097384000139
+    },
+    {
+      "context": "family_or_reasoning_helper",
+      "samples": 12655,
+      "sampledMicroseconds": 13560802,
+      "sampledSeconds": 13.560802,
+      "percentOfAllSamples": 19.892870903269962
+    },
+    {
+      "context": "python_game_runtime",
+      "samples": 4173,
+      "sampledMicroseconds": 4551745,
+      "sampledSeconds": 4.551745,
+      "percentOfAllSamples": 6.677132788282325
+    },
+    {
+      "context": "common_acquisition_visible_stack",
+      "samples": 3906,
+      "sampledMicroseconds": 4248583,
+      "sampledSeconds": 4.248583,
+      "percentOfAllSamples": 6.232412591882649
+    },
+    {
+      "context": "native_seal_visible_stack",
+      "samples": 1903,
+      "sampledMicroseconds": 2075809,
+      "sampledSeconds": 2.075809,
+      "percentOfAllSamples": 3.0450854202314814
+    },
+    {
+      "context": "module_loading",
+      "samples": 281,
+      "sampledMicroseconds": 304853,
+      "sampledSeconds": 0.304853,
+      "percentOfAllSamples": 0.44720079044547345
+    }
+  ],
+  "topSelfFunctions": [
+    {
+      "frame": {
+        "functionName": "set",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/bounded-weak-cache.ts",
+        "line": 29,
+        "column": 6
+      },
+      "samples": 15000,
+      "sampledMicroseconds": 16444110,
+      "sampledSeconds": 16.44411,
+      "percentOfAllSamples": 24.122508193038332,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 6465,
+          "sampledMicroseconds": 7082019,
+          "sampledSeconds": 7.082019,
+          "percentOfAllSamples": 10.388890694038968
+        },
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 6089,
+          "sampledMicroseconds": 6678357,
+          "sampledSeconds": 6.678357,
+          "percentOfAllSamples": 9.796743116443206
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 1501,
+          "sampledMicroseconds": 1648296,
+          "sampledSeconds": 1.648296,
+          "percentOfAllSamples": 2.4179498777709654
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 945,
+          "sampledMicroseconds": 1035438,
+          "sampledSeconds": 1.035438,
+          "percentOfAllSamples": 1.518924504785192
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "jsonDescriptors",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/canonical.ts",
+        "line": 28,
+        "column": 25
+      },
+      "samples": 12988,
+      "sampledMicroseconds": 14306717,
+      "sampledSeconds": 14.306717,
+      "percentOfAllSamples": 20.98708279426377,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 5797,
+          "sampledMicroseconds": 6359813,
+          "sampledSeconds": 6.359813,
+          "percentOfAllSamples": 9.329458462555388
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 3421,
+          "sampledMicroseconds": 3773591,
+          "sampledSeconds": 3.773591,
+          "percentOfAllSamples": 5.535628247115576
+        },
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 2997,
+          "sampledMicroseconds": 3319728,
+          "sampledSeconds": 3.319728,
+          "percentOfAllSamples": 4.869838858938475
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 773,
+          "sampledMicroseconds": 853585,
+          "sampledSeconds": 0.853585,
+          "percentOfAllSamples": 1.25215722565433
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "encode",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/canonical.ts",
+        "line": 152,
+        "column": 18
+      },
+      "samples": 5781,
+      "sampledMicroseconds": 6320113,
+      "sampledSeconds": 6.320113,
+      "percentOfAllSamples": 9.271220979635144,
+      "contextPartition": [
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 2094,
+          "sampledMicroseconds": 2294439,
+          "sampledSeconds": 2.294439,
+          "percentOfAllSamples": 3.3658023192454123
+        },
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 1955,
+          "sampledMicroseconds": 2117587,
+          "sampledSeconds": 2.117587,
+          "percentOfAllSamples": 3.1063712026355614
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 1524,
+          "sampledMicroseconds": 1679314,
+          "sampledSeconds": 1.679314,
+          "percentOfAllSamples": 2.463451395282808
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 208,
+          "sampledMicroseconds": 228773,
+          "sampledSeconds": 0.228773,
+          "percentOfAllSamples": 0.3355960624713626
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "(garbage collector)",
+        "url": "",
+        "line": 0,
+        "column": 0
+      },
+      "samples": 3468,
+      "sampledMicroseconds": 3818560,
+      "sampledSeconds": 3.81856,
+      "percentOfAllSamples": 5.601595032240021,
+      "contextPartition": [
+        {
+          "category": "garbage_collection",
+          "samples": 3468,
+          "sampledMicroseconds": 3818560,
+          "sampledSeconds": 3.81856,
+          "percentOfAllSamples": 5.601595032240021
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "visit",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/canonical.ts",
+        "line": 117,
+        "column": 17
+      },
+      "samples": 3230,
+      "sampledMicroseconds": 3530876,
+      "sampledSeconds": 3.530876,
+      "percentOfAllSamples": 5.179580119483658,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 2990,
+          "sampledMicroseconds": 3268858,
+          "sampledSeconds": 3.268858,
+          "percentOfAllSamples": 4.795215666088277
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 217,
+          "sampledMicroseconds": 236611,
+          "sampledSeconds": 0.236611,
+          "percentOfAllSamples": 0.34709393126554083
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 23,
+          "sampledMicroseconds": 25407,
+          "sampledSeconds": 0.025407,
+          "percentOfAllSamples": 0.037270522129840104
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "visitRaw",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-native-state-graph.ts",
+        "line": 106,
+        "column": 20
+      },
+      "samples": 1930,
+      "sampledMicroseconds": 2073776,
+      "sampledSeconds": 2.073776,
+      "percentOfAllSamples": 3.042103133007883,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 1723,
+          "sampledMicroseconds": 1855849,
+          "sampledSeconds": 1.855849,
+          "percentOfAllSamples": 2.7224174921927666
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 201,
+          "sampledMicroseconds": 211329,
+          "sampledSeconds": 0.211329,
+          "percentOfAllSamples": 0.3100067765252481
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 6,
+          "sampledMicroseconds": 6598,
+          "sampledSeconds": 0.006598,
+          "percentOfAllSamples": 0.009678864289868343
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "sha256Bytes",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-hash.ts",
+        "line": 15,
+        "column": 28
+      },
+      "samples": 1390,
+      "sampledMicroseconds": 1519765,
+      "sampledSeconds": 1.519765,
+      "percentOfAllSamples": 2.229402726203662,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 666,
+          "sampledMicroseconds": 726877,
+          "sampledSeconds": 0.726877,
+          "percentOfAllSamples": 1.0662843040961854
+        },
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 364,
+          "sampledMicroseconds": 401365,
+          "sampledSeconds": 0.401365,
+          "percentOfAllSamples": 0.5887780184454391
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 206,
+          "sampledMicroseconds": 224034,
+          "sampledSeconds": 0.224034,
+          "percentOfAllSamples": 0.32864423799884274
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 154,
+          "sampledMicroseconds": 167489,
+          "sampledSeconds": 0.167489,
+          "percentOfAllSamples": 0.24569616566319474
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "structuredClone",
+        "url": "node:internal/worker/js_transferable",
+        "line": 113,
+        "column": 25
+      },
+      "samples": 1113,
+      "sampledMicroseconds": 1214047,
+      "sampledSeconds": 1.214047,
+      "percentOfAllSamples": 1.7809330334225209,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 608,
+          "sampledMicroseconds": 664618,
+          "sampledSeconds": 0.664618,
+          "percentOfAllSamples": 0.9749541416495481
+        },
+        {
+          "category": "other_native_coordination",
+          "samples": 434,
+          "sampledMicroseconds": 472609,
+          "sampledSeconds": 0.472609,
+          "percentOfAllSamples": 0.6932886288527413
+        },
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 51,
+          "sampledMicroseconds": 54652,
+          "sampledSeconds": 0.054652,
+          "percentOfAllSamples": 0.08017115658834263
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 20,
+          "sampledMicroseconds": 22168,
+          "sampledSeconds": 0.022168,
+          "percentOfAllSamples": 0.03251910633188867
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "encodedCanonical",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-native-state-graph.ts",
+        "line": 45,
+        "column": 26
+      },
+      "samples": 1087,
+      "sampledMicroseconds": 1175492,
+      "sampledSeconds": 1.175492,
+      "percentOfAllSamples": 1.7243751957905302,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 746,
+          "sampledMicroseconds": 815577,
+          "sampledSeconds": 0.815577,
+          "percentOfAllSamples": 1.1964018037189987
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 341,
+          "sampledMicroseconds": 359915,
+          "sampledSeconds": 0.359915,
+          "percentOfAllSamples": 0.5279733920715315
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "decode",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-native-state-graph.ts",
+        "line": 207,
+        "column": 18
+      },
+      "samples": 902,
+      "sampledMicroseconds": 989319,
+      "sampledSeconds": 0.989319,
+      "percentOfAllSamples": 1.4512707396769111,
+      "contextPartition": [
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 553,
+          "sampledMicroseconds": 609351,
+          "sampledSeconds": 0.609351,
+          "percentOfAllSamples": 0.8938808175046324
+        },
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 349,
+          "sampledMicroseconds": 379968,
+          "sampledSeconds": 0.379968,
+          "percentOfAllSamples": 0.5573899221722787
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "(idle)",
+        "url": "",
+        "line": 0,
+        "column": 0
+      },
+      "samples": 742,
+      "sampledMicroseconds": 816930,
+      "sampledSeconds": 0.81693,
+      "percentOfAllSamples": 1.1983865723434595,
+      "contextPartition": [
+        {
+          "category": "idle",
+          "samples": 742,
+          "sampledMicroseconds": 816930,
+          "sampledSeconds": 0.81693,
+          "percentOfAllSamples": 1.1983865723434595
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "visit",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-native-owned.ts",
+        "line": 15,
+        "column": 17
+      },
+      "samples": 696,
+      "sampledMicroseconds": 757343,
+      "sampledSeconds": 0.757343,
+      "percentOfAllSamples": 1.1109760712157866,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 653,
+          "sampledMicroseconds": 707525,
+          "sampledSeconds": 0.707525,
+          "percentOfAllSamples": 1.03789609831602
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 43,
+          "sampledMicroseconds": 49818,
+          "sampledSeconds": 0.049818,
+          "percentOfAllSamples": 0.07307997289976677
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "(anonymous)",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/canonical.ts",
+        "line": 180,
+        "column": 83
+      },
+      "samples": 657,
+      "sampledMicroseconds": 723211,
+      "sampledSeconds": 0.723211,
+      "percentOfAllSamples": 1.0609065052955402,
+      "contextPartition": [
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 306,
+          "sampledMicroseconds": 338235,
+          "sampledSeconds": 0.338235,
+          "percentOfAllSamples": 0.49617015202843573
+        },
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 293,
+          "sampledMicroseconds": 320285,
+          "sampledSeconds": 0.320285,
+          "percentOfAllSamples": 0.4698385948894335
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 51,
+          "sampledMicroseconds": 57084,
+          "sampledSeconds": 0.057084,
+          "percentOfAllSamples": 0.08373875251937625
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 7,
+          "sampledMicroseconds": 7607,
+          "sampledSeconds": 0.007607,
+          "percentOfAllSamples": 0.011159005858294707
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "wasm-function[3792]",
+        "url": "wasm://wasm/0249d42a",
+        "line": 1,
+        "column": 1827769
+      },
+      "samples": 452,
+      "sampledMicroseconds": 497734,
+      "sampledSeconds": 0.497734,
+      "percentOfAllSamples": 0.7301454741517627,
+      "contextPartition": [
+        {
+          "category": "python_game_runtime",
+          "samples": 452,
+          "sampledMicroseconds": 497734,
+          "sampledSeconds": 0.497734,
+          "percentOfAllSamples": 0.7301454741517627
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "visit",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-native-state-graph.ts",
+        "line": 161,
+        "column": 17
+      },
+      "samples": 462,
+      "sampledMicroseconds": 494019,
+      "sampledSeconds": 0.494019,
+      "percentOfAllSamples": 0.7246957953344149,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 399,
+          "sampledMicroseconds": 424553,
+          "sampledSeconds": 0.424553,
+          "percentOfAllSamples": 0.6227934026760343
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 63,
+          "sampledMicroseconds": 69466,
+          "sampledSeconds": 0.069466,
+          "percentOfAllSamples": 0.10190239265838047
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "(anonymous)",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/runtime/v6-agent-protocol.ts",
+        "line": 156,
+        "column": 57
+      },
+      "samples": 372,
+      "sampledMicroseconds": 412749,
+      "sampledSeconds": 0.412749,
+      "percentOfAllSamples": 0.6054776533462972,
+      "contextPartition": [
+        {
+          "category": "other_native_coordination",
+          "samples": 372,
+          "sampledMicroseconds": 412749,
+          "sampledSeconds": 0.412749,
+          "percentOfAllSamples": 0.6054776533462972
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "deeplyFrozen",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-transition-learning.ts",
+        "line": 49,
+        "column": 22
+      },
+      "samples": 374,
+      "sampledMicroseconds": 411416,
+      "sampledSeconds": 0.411416,
+      "percentOfAllSamples": 0.6035222235041641,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 374,
+          "sampledMicroseconds": 411416,
+          "sampledSeconds": 0.411416,
+          "percentOfAllSamples": 0.6035222235041641
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "child",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/canonical.ts",
+        "line": 171,
+        "column": 19
+      },
+      "samples": 341,
+      "sampledMicroseconds": 370430,
+      "sampledSeconds": 0.37043,
+      "percentOfAllSamples": 0.5433982568802562,
+      "contextPartition": [
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 137,
+          "sampledMicroseconds": 149400,
+          "sampledSeconds": 0.1494,
+          "percentOfAllSamples": 0.21916070398701581
+        },
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 117,
+          "sampledMicroseconds": 127785,
+          "sampledSeconds": 0.127785,
+          "percentOfAllSamples": 0.18745281498648472
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 77,
+          "sampledMicroseconds": 82334,
+          "sampledSeconds": 0.082334,
+          "percentOfAllSamples": 0.12077896520794486
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 10,
+          "sampledMicroseconds": 10911,
+          "sampledSeconds": 0.010911,
+          "percentOfAllSamples": 0.016005772698810775
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "get",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/bounded-weak-cache.ts",
+        "line": 18,
+        "column": 6
+      },
+      "samples": 324,
+      "sampledMicroseconds": 354817,
+      "sampledSeconds": 0.354817,
+      "percentOfAllSamples": 0.5204949364562316,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 119,
+          "sampledMicroseconds": 129837,
+          "sampledSeconds": 0.129837,
+          "percentOfAllSamples": 0.19046297405329435
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 93,
+          "sampledMicroseconds": 103472,
+          "sampledSeconds": 0.103472,
+          "percentOfAllSamples": 0.15178712424996318
+        },
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 82,
+          "sampledMicroseconds": 88834,
+          "sampledSeconds": 0.088834,
+          "percentOfAllSamples": 0.13031406946440807
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 30,
+          "sampledMicroseconds": 32674,
+          "sampledSeconds": 0.032674,
+          "percentOfAllSamples": 0.04793076868856597
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "commit",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/kernel.ts",
+        "line": 264,
+        "column": 15
+      },
+      "samples": 301,
+      "sampledMicroseconds": 331922,
+      "sampledSeconds": 0.331922,
+      "percentOfAllSamples": 0.4869093653867354,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 301,
+          "sampledMicroseconds": 331922,
+          "sampledSeconds": 0.331922,
+          "percentOfAllSamples": 0.4869093653867354
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "sameStoredValue",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-native-authority.ts",
+        "line": 22,
+        "column": 25
+      },
+      "samples": 287,
+      "sampledMicroseconds": 323237,
+      "sampledSeconds": 0.323237,
+      "percentOfAllSamples": 0.47416899916098415,
+      "contextPartition": [
+        {
+          "category": "other_native_coordination",
+          "samples": 287,
+          "sampledMicroseconds": 323237,
+          "sampledSeconds": 0.323237,
+          "percentOfAllSamples": 0.47416899916098415
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "(anonymous)",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/canonical.ts",
+        "line": 178,
+        "column": 37
+      },
+      "samples": 289,
+      "sampledMicroseconds": 316881,
+      "sampledSeconds": 0.316881,
+      "percentOfAllSamples": 0.4648451341372795,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 129,
+          "sampledMicroseconds": 141456,
+          "sampledSeconds": 0.141456,
+          "percentOfAllSamples": 0.20750733964650142
+        },
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 82,
+          "sampledMicroseconds": 89347,
+          "sampledSeconds": 0.089347,
+          "percentOfAllSamples": 0.13106660923111046
+        },
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 63,
+          "sampledMicroseconds": 69726,
+          "sampledSeconds": 0.069726,
+          "percentOfAllSamples": 0.10228379682863899
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 15,
+          "sampledMicroseconds": 16352,
+          "sampledSeconds": 0.016352,
+          "percentOfAllSamples": 0.023987388431028666
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "geometricComponents",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-native-observer.ts",
+        "line": 97,
+        "column": 36
+      },
+      "samples": 535,
+      "sampledMicroseconds": 302441,
+      "sampledSeconds": 0.302441,
+      "percentOfAllSamples": 0.4436625332967674,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 421,
+          "sampledMicroseconds": 177126,
+          "sampledSeconds": 0.177126,
+          "percentOfAllSamples": 0.25983305792773875
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 114,
+          "sampledMicroseconds": 125315,
+          "sampledSeconds": 0.125315,
+          "percentOfAllSamples": 0.18382947536902872
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "detectV5Components",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-native-observer.ts",
+        "line": 234,
+        "column": 41
+      },
+      "samples": 257,
+      "sampledMicroseconds": 263888,
+      "sampledSeconds": 0.263888,
+      "percentOfAllSamples": 0.3871076295430096,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 257,
+          "sampledMicroseconds": 263888,
+          "sampledSeconds": 0.263888,
+          "percentOfAllSamples": 0.3871076295430096
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "jobPromise",
+        "url": "node:internal/crypto/util",
+        "line": 873,
+        "column": 20
+      },
+      "samples": 192,
+      "sampledMicroseconds": 211020,
+      "sampledSeconds": 0.21102,
+      "percentOfAllSamples": 0.309553492338287,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 145,
+          "sampledMicroseconds": 159366,
+          "sampledSeconds": 0.159366,
+          "percentOfAllSamples": 0.2337802192208485
+        },
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 36,
+          "sampledMicroseconds": 39572,
+          "sampledSeconds": 0.039572,
+          "percentOfAllSamples": 0.058049714713347994
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 10,
+          "sampledMicroseconds": 10966,
+          "sampledSeconds": 0.010966,
+          "percentOfAllSamples": 0.016086454350211617
+        },
+        {
+          "category": "other_native_coordination",
+          "samples": 1,
+          "sampledMicroseconds": 1116,
+          "sampledSeconds": 0.001116,
+          "percentOfAllSamples": 0.0016371040538789134
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "(anonymous)",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-native-observer.ts",
+        "line": 72,
+        "column": 17
+      },
+      "samples": 183,
+      "sampledMicroseconds": 199280,
+      "sampledSeconds": 0.19928,
+      "percentOfAllSamples": 0.29233162711199806,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 126,
+          "sampledMicroseconds": 135058,
+          "sampledSeconds": 0.135058,
+          "percentOfAllSamples": 0.19812186317990885
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 57,
+          "sampledMicroseconds": 64222,
+          "sampledSeconds": 0.064222,
+          "percentOfAllSamples": 0.09420976393208923
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "(anonymous)",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-native-authority.ts",
+        "line": 27,
+        "column": 66
+      },
+      "samples": 171,
+      "sampledMicroseconds": 188184,
+      "sampledSeconds": 0.188184,
+      "percentOfAllSamples": 0.2760544706766572,
+      "contextPartition": [
+        {
+          "category": "other_native_coordination",
+          "samples": 171,
+          "sampledMicroseconds": 188184,
+          "sampledSeconds": 0.188184,
+          "percentOfAllSamples": 0.2760544706766572
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "wasm-function[552]",
+        "url": "wasm://wasm/0249d42a",
+        "line": 1,
+        "column": 469255
+      },
+      "samples": 168,
+      "sampledMicroseconds": 182525,
+      "sampledSeconds": 0.182525,
+      "percentOfAllSamples": 0.2677530622170687,
+      "contextPartition": [
+        {
+          "category": "python_game_runtime",
+          "samples": 168,
+          "sampledMicroseconds": 182525,
+          "sampledSeconds": 0.182525,
+          "percentOfAllSamples": 0.2677530622170687
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "(anonymous)",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-native-state-graph.ts",
+        "line": 54,
+        "column": 12
+      },
+      "samples": 170,
+      "sampledMicroseconds": 181791,
+      "sampledSeconds": 0.181791,
+      "percentOfAllSamples": 0.2666763289056466,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 120,
+          "sampledMicroseconds": 131043,
+          "sampledSeconds": 0.131043,
+          "percentOfAllSamples": 0.19223210262764737
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 50,
+          "sampledMicroseconds": 50748,
+          "sampledSeconds": 0.050748,
+          "percentOfAllSamples": 0.0744442262779992
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "(program)",
+        "url": "",
+        "line": 0,
+        "column": 0
+      },
+      "samples": 154,
+      "sampledMicroseconds": 177919,
+      "sampledSeconds": 0.177919,
+      "percentOfAllSamples": 0.26099634064702726,
+      "contextPartition": [
+        {
+          "category": "other_or_unattributed",
+          "samples": 154,
+          "sampledMicroseconds": 177919,
+          "sampledSeconds": 0.177919,
+          "percentOfAllSamples": 0.26099634064702726
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "(anonymous)",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/runtime/v6-agent-protocol.ts",
+        "line": 123,
+        "column": 66
+      },
+      "samples": 150,
+      "sampledMicroseconds": 163778,
+      "sampledSeconds": 0.163778,
+      "percentOfAllSamples": 0.24025235460231245,
+      "contextPartition": [
+        {
+          "category": "other_native_coordination",
+          "samples": 150,
+          "sampledMicroseconds": 163778,
+          "sampledSeconds": 0.163778,
+          "percentOfAllSamples": 0.24025235460231245
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "compareUnicode",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/canonical.ts",
+        "line": 44,
+        "column": 31
+      },
+      "samples": 122,
+      "sampledMicroseconds": 137956,
+      "sampledSeconds": 0.137956,
+      "percentOfAllSamples": 0.20237305273917508,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 77,
+          "sampledMicroseconds": 90231,
+          "sampledSeconds": 0.090231,
+          "percentOfAllSamples": 0.13236338340998946
+        },
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 24,
+          "sampledMicroseconds": 26547,
+          "sampledSeconds": 0.026547,
+          "percentOfAllSamples": 0.03894283272251211
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 12,
+          "sampledMicroseconds": 11955,
+          "sampledSeconds": 0.011955,
+          "percentOfAllSamples": 0.017537257136310404
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 9,
+          "sampledMicroseconds": 9223,
+          "sampledSeconds": 0.009223,
+          "percentOfAllSamples": 0.013529579470363099
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "wasm-function[14534]",
+        "url": "wasm://wasm/0249d42a",
+        "line": 1,
+        "column": 5845803
+      },
+      "samples": 119,
+      "sampledMicroseconds": 131232,
+      "sampledSeconds": 0.131232,
+      "percentOfAllSamples": 0.192509354120643,
+      "contextPartition": [
+        {
+          "category": "python_game_runtime",
+          "samples": 119,
+          "sampledMicroseconds": 131232,
+          "sampledSeconds": 0.131232,
+          "percentOfAllSamples": 0.192509354120643
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "(anonymous)",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/canonical.ts",
+        "line": 134,
+        "column": 85
+      },
+      "samples": 117,
+      "sampledMicroseconds": 127761,
+      "sampledSeconds": 0.127761,
+      "percentOfAllSamples": 0.18741760844769162,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 114,
+          "sampledMicroseconds": 124495,
+          "sampledSeconds": 0.124495,
+          "percentOfAllSamples": 0.18262658529359796
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 3,
+          "sampledMicroseconds": 3266,
+          "sampledSeconds": 0.003266,
+          "percentOfAllSamples": 0.004791023154093666
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "RegExp: [\\ud800-\\udbff]",
+        "url": "",
+        "line": 0,
+        "column": 0
+      },
+      "samples": 113,
+      "sampledMicroseconds": 125117,
+      "sampledSeconds": 0.125117,
+      "percentOfAllSamples": 0.18353902142398568,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 77,
+          "sampledMicroseconds": 85574,
+          "sampledSeconds": 0.085574,
+          "percentOfAllSamples": 0.12553184794501268
+        },
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 24,
+          "sampledMicroseconds": 26237,
+          "sampledSeconds": 0.026237,
+          "percentOfAllSamples": 0.03848808159643463
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 6,
+          "sampledMicroseconds": 6718,
+          "sampledSeconds": 0.006718,
+          "percentOfAllSamples": 0.009854896983833818
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 6,
+          "sampledMicroseconds": 6588,
+          "sampledSeconds": 0.006588,
+          "percentOfAllSamples": 0.009664194898704553
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "assertUnicode",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/canonical.ts",
+        "line": 55,
+        "column": 30
+      },
+      "samples": 112,
+      "sampledMicroseconds": 121995,
+      "sampledSeconds": 0.121995,
+      "percentOfAllSamples": 0.17895923750265058,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 85,
+          "sampledMicroseconds": 92189,
+          "sampledSeconds": 0.092189,
+          "percentOfAllSamples": 0.13523565019985945
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 16,
+          "sampledMicroseconds": 17842,
+          "sampledSeconds": 0.017842,
+          "percentOfAllSamples": 0.02617312771443331
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 11,
+          "sampledMicroseconds": 11964,
+          "sampledSeconds": 0.011964,
+          "percentOfAllSamples": 0.017550459588357815
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "(anonymous)",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/canonical.ts",
+        "line": 132,
+        "column": 32
+      },
+      "samples": 110,
+      "sampledMicroseconds": 120544,
+      "sampledSeconds": 0.120544,
+      "percentOfAllSamples": 0.17683070884478472,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 107,
+          "sampledMicroseconds": 117212,
+          "sampledSeconds": 0.117212,
+          "percentOfAllSamples": 0.17194286770901004
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 3,
+          "sampledMicroseconds": 3332,
+          "sampledSeconds": 0.003332,
+          "percentOfAllSamples": 0.004887841135774677
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "encodeUtf8String",
+        "url": "",
+        "line": 0,
+        "column": 0
+      },
+      "samples": 107,
+      "sampledMicroseconds": 119152,
+      "sampledSeconds": 0.119152,
+      "percentOfAllSamples": 0.1747887295947852,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 58,
+          "sampledMicroseconds": 64216,
+          "sampledSeconds": 0.064216,
+          "percentOfAllSamples": 0.09420096229739096
+        },
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 23,
+          "sampledMicroseconds": 26611,
+          "sampledSeconds": 0.026611,
+          "percentOfAllSamples": 0.03903671682596036
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 14,
+          "sampledMicroseconds": 15240,
+          "sampledSeconds": 0.01524,
+          "percentOfAllSamples": 0.02235615213361527
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 12,
+          "sampledMicroseconds": 13085,
+          "sampledSeconds": 0.013085,
+          "percentOfAllSamples": 0.019194898337818622
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "wasm-function[14535]",
+        "url": "wasm://wasm/0249d42a",
+        "line": 1,
+        "column": 5851153
+      },
+      "samples": 107,
+      "sampledMicroseconds": 118044,
+      "sampledSeconds": 0.118044,
+      "percentOfAllSamples": 0.17316336105383734,
+      "contextPartition": [
+        {
+          "category": "python_game_runtime",
+          "samples": 107,
+          "sampledMicroseconds": 118044,
+          "sampledSeconds": 0.118044,
+          "percentOfAllSamples": 0.17316336105383734
+        }
+      ]
+    },
+    {
+      "frame": {
+        "functionName": "same",
+        "url": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/src/logos-engine/v6-transition-learning.ts",
+        "line": 77,
+        "column": 14
+      },
+      "samples": 113,
+      "sampledMicroseconds": 111039,
+      "sampledSeconds": 0.111039,
+      "percentOfAllSamples": 0.16288745254360276,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 113,
+          "sampledMicroseconds": 111039,
+          "sampledSeconds": 0.111039,
+          "percentOfAllSamples": 0.16288745254360276
+        }
+      ]
+    }
+  ],
+  "topSelfModules": [
+    {
+      "module": "src/logos-engine/canonical.ts",
+      "samples": 24204,
+      "sampledMicroseconds": 26579249,
+      "sampledSeconds": 26.579249,
+      "percentOfAllSamples": 38.99014004207621,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 11861,
+          "sampledMicroseconds": 12978394,
+          "sampledSeconds": 12.978394,
+          "percentOfAllSamples": 19.038513826377926
+        },
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 5730,
+          "sampledMicroseconds": 6317083,
+          "sampledSeconds": 6.317083,
+          "percentOfAllSamples": 9.266776154112517
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 5339,
+          "sampledMicroseconds": 5882449,
+          "sampledSeconds": 5.882449,
+          "percentOfAllSamples": 8.629194538204265
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 1274,
+          "sampledMicroseconds": 1401323,
+          "sampledSeconds": 1.401323,
+          "percentOfAllSamples": 2.055655523381506
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/bounded-weak-cache.ts",
+      "samples": 15324,
+      "sampledMicroseconds": 16798927,
+      "sampledSeconds": 16.798927,
+      "percentOfAllSamples": 24.643003129494563,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 6584,
+          "sampledMicroseconds": 7211856,
+          "sampledSeconds": 7.211856,
+          "percentOfAllSamples": 10.579353668092262
+        },
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 6171,
+          "sampledMicroseconds": 6767191,
+          "sampledSeconds": 6.767191,
+          "percentOfAllSamples": 9.927057185907614
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 1594,
+          "sampledMicroseconds": 1751768,
+          "sampledSeconds": 1.751768,
+          "percentOfAllSamples": 2.5697370020209287
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 975,
+          "sampledMicroseconds": 1068112,
+          "sampledSeconds": 1.068112,
+          "percentOfAllSamples": 1.566855273473758
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-native-state-graph.ts",
+      "samples": 5033,
+      "sampledMicroseconds": 5432652,
+      "sampledSeconds": 5.432652,
+      "percentOfAllSamples": 7.969369724474361,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 3706,
+          "sampledMicroseconds": 4004901,
+          "sampledSeconds": 4.004901,
+          "percentOfAllSamples": 5.874945934125192
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 691,
+          "sampledMicroseconds": 729219,
+          "sampledSeconds": 0.729219,
+          "percentOfAllSamples": 1.069719875506745
+        },
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 629,
+          "sampledMicroseconds": 690846,
+          "sampledSeconds": 0.690846,
+          "percentOfAllSamples": 1.0134290207939354
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 7,
+          "sampledMicroseconds": 7686,
+          "sampledSeconds": 0.007686,
+          "percentOfAllSamples": 0.011274894048488646
+        }
+      ]
+    },
+    {
+      "module": "(native or unnamed)",
+      "samples": 4815,
+      "sampledMicroseconds": 5310461,
+      "sampledSeconds": 5.310461,
+      "percentOfAllSamples": 7.7901229669049,
+      "contextPartition": [
+        {
+          "category": "garbage_collection",
+          "samples": 3468,
+          "sampledMicroseconds": 3818560,
+          "sampledSeconds": 3.81856,
+          "percentOfAllSamples": 5.601595032240021
+        },
+        {
+          "category": "idle",
+          "samples": 742,
+          "sampledMicroseconds": 816930,
+          "sampledSeconds": 0.81693,
+          "percentOfAllSamples": 1.1983865723434595
+        },
+        {
+          "category": "other_or_unattributed",
+          "samples": 167,
+          "sampledMicroseconds": 192637,
+          "sampledSeconds": 0.192637,
+          "percentOfAllSamples": 0.2825867505618927
+        },
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 147,
+          "sampledMicroseconds": 162756,
+          "sampledSeconds": 0.162756,
+          "percentOfAllSamples": 0.23875314282537316
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 105,
+          "sampledMicroseconds": 116558,
+          "sampledSeconds": 0.116558,
+          "percentOfAllSamples": 0.1709834895268982
+        },
+        {
+          "category": "python_game_runtime",
+          "samples": 61,
+          "sampledMicroseconds": 65480,
+          "sampledSeconds": 0.06548,
+          "percentOfAllSamples": 0.09605517334049395
+        },
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 54,
+          "sampledMicroseconds": 60618,
+          "sampledSeconds": 0.060618,
+          "percentOfAllSamples": 0.08892291535665947
+        },
+        {
+          "category": "module_loading",
+          "samples": 26,
+          "sampledMicroseconds": 27916,
+          "sampledSeconds": 0.027916,
+          "percentOfAllSamples": 0.0409510723728349
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 24,
+          "sampledMicroseconds": 26248,
+          "sampledSeconds": 0.026248,
+          "percentOfAllSamples": 0.0385042179267148
+        },
+        {
+          "category": "other_native_coordination",
+          "samples": 12,
+          "sampledMicroseconds": 12964,
+          "sampledSeconds": 0.012964,
+          "percentOfAllSamples": 0.019017398704736767
+        },
+        {
+          "category": "campaign_driver_or_validation",
+          "samples": 9,
+          "sampledMicroseconds": 9794,
+          "sampledSeconds": 0.009794,
+          "percentOfAllSamples": 0.014367201705815482
+        }
+      ]
+    },
+    {
+      "module": "wasm://wasm/0249d42a",
+      "samples": 3551,
+      "sampledMicroseconds": 3900709,
+      "sampledSeconds": 3.900709,
+      "percentOfAllSamples": 5.722102613711436,
+      "contextPartition": [
+        {
+          "category": "python_game_runtime",
+          "samples": 3551,
+          "sampledMicroseconds": 3900709,
+          "sampledSeconds": 3.900709,
+          "percentOfAllSamples": 5.722102613711436
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-hash.ts",
+      "samples": 1449,
+      "sampledMicroseconds": 1583629,
+      "sampledSeconds": 1.583629,
+      "percentOfAllSamples": 2.3230873259320877,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 704,
+          "sampledMicroseconds": 767750,
+          "sampledSeconds": 0.76775,
+          "percentOfAllSamples": 1.1262425065999424
+        },
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 366,
+          "sampledMicroseconds": 403553,
+          "sampledSeconds": 0.403553,
+          "percentOfAllSamples": 0.5919876812320763
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 213,
+          "sampledMicroseconds": 231692,
+          "sampledSeconds": 0.231692,
+          "percentOfAllSamples": 0.33987805775207275
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 166,
+          "sampledMicroseconds": 180634,
+          "sampledSeconds": 0.180634,
+          "percentOfAllSamples": 0.2649790803479961
+        }
+      ]
+    },
+    {
+      "module": "node:internal/worker/js_transferable",
+      "samples": 1114,
+      "sampledMicroseconds": 1214099,
+      "sampledSeconds": 1.214099,
+      "percentOfAllSamples": 1.7810093142565724,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 608,
+          "sampledMicroseconds": 664618,
+          "sampledSeconds": 0.664618,
+          "percentOfAllSamples": 0.9749541416495481
+        },
+        {
+          "category": "other_native_coordination",
+          "samples": 434,
+          "sampledMicroseconds": 472609,
+          "sampledSeconds": 0.472609,
+          "percentOfAllSamples": 0.6932886288527413
+        },
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 51,
+          "sampledMicroseconds": 54652,
+          "sampledSeconds": 0.054652,
+          "percentOfAllSamples": 0.08017115658834263
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 20,
+          "sampledMicroseconds": 22168,
+          "sampledSeconds": 0.022168,
+          "percentOfAllSamples": 0.03251910633188867
+        },
+        {
+          "category": "other_or_unattributed",
+          "samples": 1,
+          "sampledMicroseconds": 52,
+          "sampledSeconds": 0.000052,
+          "percentOfAllSamples": 0.00007628083405170564
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-native-observer.ts",
+      "samples": 1177,
+      "sampledMicroseconds": 988295,
+      "sampledSeconds": 0.988295,
+      "percentOfAllSamples": 1.449768594021739,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 988,
+          "sampledMicroseconds": 779102,
+          "sampledSeconds": 0.779102,
+          "percentOfAllSamples": 1.1428951994490764
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 189,
+          "sampledMicroseconds": 209193,
+          "sampledSeconds": 0.209193,
+          "percentOfAllSamples": 0.30687339457266266
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-transition-learning.ts",
+      "samples": 842,
+      "sampledMicroseconds": 906436,
+      "sampledSeconds": 0.906436,
+      "percentOfAllSamples": 1.329686424894074,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 825,
+          "sampledMicroseconds": 887956,
+          "sampledSeconds": 0.887956,
+          "percentOfAllSamples": 1.302577390023391
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 17,
+          "sampledMicroseconds": 18480,
+          "sampledSeconds": 0.01848,
+          "percentOfAllSamples": 0.027109034870683082
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-native-owned.ts",
+      "samples": 773,
+      "sampledMicroseconds": 841033,
+      "sampledSeconds": 0.841033,
+      "percentOfAllSamples": 1.2337442058655415,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 727,
+          "sampledMicroseconds": 787952,
+          "sampledSeconds": 0.787952,
+          "percentOfAllSamples": 1.15587761062903
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 46,
+          "sampledMicroseconds": 53081,
+          "sampledSeconds": 0.053081,
+          "percentOfAllSamples": 0.0778665952365113
+        }
+      ]
+    },
+    {
+      "module": "src/runtime/v6-agent-protocol.ts",
+      "samples": 747,
+      "sampledMicroseconds": 822391,
+      "sampledSeconds": 0.822391,
+      "percentOfAllSamples": 1.206397526858005,
+      "contextPartition": [
+        {
+          "category": "other_native_coordination",
+          "samples": 747,
+          "sampledMicroseconds": 822391,
+          "sampledSeconds": 0.822391,
+          "percentOfAllSamples": 1.206397526858005
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-native-authority.ts",
+      "samples": 589,
+      "sampledMicroseconds": 654817,
+      "sampledSeconds": 0.654817,
+      "percentOfAllSamples": 0.960576671369918,
+      "contextPartition": [
+        {
+          "category": "other_native_coordination",
+          "samples": 565,
+          "sampledMicroseconds": 628658,
+          "sampledSeconds": 0.628658,
+          "percentOfAllSamples": 0.9222030110245609
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 14,
+          "sampledMicroseconds": 15208,
+          "sampledSeconds": 0.015208,
+          "percentOfAllSamples": 0.022309210081891143
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 10,
+          "sampledMicroseconds": 10951,
+          "sampledSeconds": 0.010951,
+          "percentOfAllSamples": 0.016064450263465934
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/kernel.ts",
+      "samples": 313,
+      "sampledMicroseconds": 344678,
+      "sampledSeconds": 0.344678,
+      "percentOfAllSamples": 0.5056216407552654,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 313,
+          "sampledMicroseconds": 344678,
+          "sampledSeconds": 0.344678,
+          "percentOfAllSamples": 0.5056216407552654
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-support-measurements.ts",
+      "samples": 298,
+      "sampledMicroseconds": 322004,
+      "sampledSeconds": 0.322004,
+      "percentOfAllSamples": 0.4723602632304889,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 166,
+          "sampledMicroseconds": 176867,
+          "sampledSeconds": 0.176867,
+          "percentOfAllSamples": 0.2594531206965966
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 132,
+          "sampledMicroseconds": 145137,
+          "sampledSeconds": 0.145137,
+          "percentOfAllSamples": 0.21290714253389234
+        }
+      ]
+    },
+    {
+      "module": "file:///workspace/scratch/656587eca20f/playground-site/.sites-checkout/public/vendor/pyodide/pyodide.asm.mjs",
+      "samples": 242,
+      "sampledMicroseconds": 241460,
+      "sampledSeconds": 0.24146,
+      "percentOfAllSamples": 0.3542071190408624,
+      "contextPartition": [
+        {
+          "category": "python_game_runtime",
+          "samples": 242,
+          "sampledMicroseconds": 241460,
+          "sampledSeconds": 0.24146,
+          "percentOfAllSamples": 0.3542071190408624
+        }
+      ]
+    },
+    {
+      "module": "node:internal/crypto/util",
+      "samples": 209,
+      "sampledMicroseconds": 229653,
+      "sampledSeconds": 0.229653,
+      "percentOfAllSamples": 0.33688696889377606,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 152,
+          "sampledMicroseconds": 167051,
+          "sampledSeconds": 0.167051,
+          "percentOfAllSamples": 0.24505364633022075
+        },
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 41,
+          "sampledMicroseconds": 45087,
+          "sampledSeconds": 0.045087,
+          "percentOfAllSamples": 0.06613988394017793
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 12,
+          "sampledMicroseconds": 13153,
+          "sampledSeconds": 0.013153,
+          "percentOfAllSamples": 0.01929465019773239
+        },
+        {
+          "category": "other_or_unattributed",
+          "samples": 3,
+          "sampledMicroseconds": 3246,
+          "sampledSeconds": 0.003246,
+          "percentOfAllSamples": 0.004761684371766087
+        },
+        {
+          "category": "other_native_coordination",
+          "samples": 1,
+          "sampledMicroseconds": 1116,
+          "sampledSeconds": 0.001116,
+          "percentOfAllSamples": 0.0016371040538789134
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-view-frontier.ts",
+      "samples": 175,
+      "sampledMicroseconds": 187940,
+      "sampledSeconds": 0.18794,
+      "percentOfAllSamples": 0.27569653753226075,
+      "contextPartition": [
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 148,
+          "sampledMicroseconds": 159637,
+          "sampledSeconds": 0.159637,
+          "percentOfAllSamples": 0.23417775972138719
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 27,
+          "sampledMicroseconds": 28303,
+          "sampledSeconds": 0.028303,
+          "percentOfAllSamples": 0.041518777810873556
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-native-runtime.ts",
+      "samples": 139,
+      "sampledMicroseconds": 146515,
+      "sampledSeconds": 0.146515,
+      "percentOfAllSamples": 0.21492858463626255,
+      "contextPartition": [
+        {
+          "category": "other_native_coordination",
+          "samples": 136,
+          "sampledMicroseconds": 143888,
+          "sampledSeconds": 0.143888,
+          "percentOfAllSamples": 0.21107493557753504
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 3,
+          "sampledMicroseconds": 2627,
+          "sampledSeconds": 0.002627,
+          "percentOfAllSamples": 0.003853649058727514
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-reasoning-memory.ts",
+      "samples": 126,
+      "sampledMicroseconds": 130345,
+      "sampledSeconds": 0.130345,
+      "percentOfAllSamples": 0.19120817912441485,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 70,
+          "sampledMicroseconds": 69031,
+          "sampledSeconds": 0.069031,
+          "percentOfAllSamples": 0.10126427414275561
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 48,
+          "sampledMicroseconds": 52519,
+          "sampledSeconds": 0.052519,
+          "percentOfAllSamples": 0.07704217545310632
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 8,
+          "sampledMicroseconds": 8795,
+          "sampledSeconds": 0.008795,
+          "percentOfAllSamples": 0.012901729528552907
+        }
+      ]
+    },
+    {
+      "module": "wasm://wasm/00ad0bc6",
+      "samples": 118,
+      "sampledMicroseconds": 127278,
+      "sampledSeconds": 0.127278,
+      "percentOfAllSamples": 0.1867090768544806,
+      "contextPartition": [
+        {
+          "category": "python_game_runtime",
+          "samples": 118,
+          "sampledMicroseconds": 127278,
+          "sampledSeconds": 0.127278,
+          "percentOfAllSamples": 0.1867090768544806
+        }
+      ]
+    },
+    {
+      "module": "tests/helpers/v6-live-game-campaign.ts",
+      "samples": 98,
+      "sampledMicroseconds": 108911,
+      "sampledSeconds": 0.108911,
+      "percentOfAllSamples": 0.15976580610394833,
+      "contextPartition": [
+        {
+          "category": "other_native_coordination",
+          "samples": 82,
+          "sampledMicroseconds": 91509,
+          "sampledSeconds": 0.091509,
+          "percentOfAllSamples": 0.13423813160072176
+        },
+        {
+          "category": "campaign_driver_or_validation",
+          "samples": 13,
+          "sampledMicroseconds": 14119,
+          "sampledSeconds": 0.014119,
+          "percentOfAllSamples": 0.02071171338415446
+        },
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 3,
+          "sampledMicroseconds": 3283,
+          "sampledSeconds": 0.003283,
+          "percentOfAllSamples": 0.004815961119072109
+        }
+      ]
+    },
+    {
+      "module": "node:internal/encoding",
+      "samples": 91,
+      "sampledMicroseconds": 98398,
+      "sampledSeconds": 0.098398,
+      "percentOfAllSamples": 0.14434387517345637,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 40,
+          "sampledMicroseconds": 43764,
+          "sampledSeconds": 0.043764,
+          "percentOfAllSamples": 0.06419912348920857
+        },
+        {
+          "category": "explicit_helper_inspection",
+          "samples": 24,
+          "sampledMicroseconds": 25894,
+          "sampledSeconds": 0.025894,
+          "percentOfAllSamples": 0.03798492147951665
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 18,
+          "sampledMicroseconds": 19578,
+          "sampledSeconds": 0.019578,
+          "percentOfAllSamples": 0.028719734020467173
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 6,
+          "sampledMicroseconds": 6502,
+          "sampledSeconds": 0.006502,
+          "percentOfAllSamples": 0.009538038134695963
+        },
+        {
+          "category": "python_game_runtime",
+          "samples": 3,
+          "sampledMicroseconds": 2660,
+          "sampledSeconds": 0.00266,
+          "percentOfAllSamples": 0.0039020580495680193
+        }
+      ]
+    },
+    {
+      "module": "wasm://wasm/00838632",
+      "samples": 83,
+      "sampledMicroseconds": 90783,
+      "sampledSeconds": 0.090783,
+      "percentOfAllSamples": 0.13317313380223064,
+      "contextPartition": [
+        {
+          "category": "python_game_runtime",
+          "samples": 83,
+          "sampledMicroseconds": 90783,
+          "sampledSeconds": 0.090783,
+          "percentOfAllSamples": 0.13317313380223064
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-alternating-graph-access.ts",
+      "samples": 69,
+      "sampledMicroseconds": 74482,
+      "sampledSeconds": 0.074482,
+      "percentOfAllSamples": 0.1092605592661373,
+      "contextPartition": [
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 38,
+          "sampledMicroseconds": 41663,
+          "sampledSeconds": 0.041663,
+          "percentOfAllSamples": 0.06111708440569639
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 31,
+          "sampledMicroseconds": 32819,
+          "sampledSeconds": 0.032819,
+          "percentOfAllSamples": 0.04814347486044091
+        }
+      ]
+    },
+    {
+      "module": "node:internal/crypto/hash",
+      "samples": 67,
+      "sampledMicroseconds": 72858,
+      "sampledSeconds": 0.072858,
+      "percentOfAllSamples": 0.10687825014113787,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 25,
+          "sampledMicroseconds": 27113,
+          "sampledSeconds": 0.027113,
+          "percentOfAllSamples": 0.0397731202623826
+        },
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 21,
+          "sampledMicroseconds": 22938,
+          "sampledSeconds": 0.022938,
+          "percentOfAllSamples": 0.033648649451500465
+        },
+        {
+          "category": "campaign_driver_or_validation",
+          "samples": 9,
+          "sampledMicroseconds": 9686,
+          "sampledSeconds": 0.009686,
+          "percentOfAllSamples": 0.014208772281246555
+        },
+        {
+          "category": "other_native_coordination",
+          "samples": 8,
+          "sampledMicroseconds": 8774,
+          "sampledSeconds": 0.008774,
+          "percentOfAllSamples": 0.012870923807108949
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 4,
+          "sampledMicroseconds": 4347,
+          "sampledSeconds": 0.004347,
+          "percentOfAllSamples": 0.006376784338899316
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-periodic-sums.ts",
+      "samples": 55,
+      "sampledMicroseconds": 59712,
+      "sampledSeconds": 0.059712,
+      "percentOfAllSamples": 0.08759386851722015,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 55,
+          "sampledMicroseconds": 59712,
+          "sampledSeconds": 0.059712,
+          "percentOfAllSamples": 0.08759386851722015
+        }
+      ]
+    },
+    {
+      "module": "node:internal/modules/esm/utils",
+      "samples": 53,
+      "sampledMicroseconds": 59424,
+      "sampledSeconds": 0.059424,
+      "percentOfAllSamples": 0.087171390051703,
+      "contextPartition": [
+        {
+          "category": "module_loading",
+          "samples": 35,
+          "sampledMicroseconds": 39109,
+          "sampledSeconds": 0.039109,
+          "percentOfAllSamples": 0.05737052190246454
+        },
+        {
+          "category": "python_game_runtime",
+          "samples": 18,
+          "sampledMicroseconds": 20315,
+          "sampledSeconds": 0.020315,
+          "percentOfAllSamples": 0.029800868149238463
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/interpreter.ts",
+      "samples": 54,
+      "sampledMicroseconds": 59257,
+      "sampledSeconds": 0.059257,
+      "percentOfAllSamples": 0.08692641121926772,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 29,
+          "sampledMicroseconds": 31761,
+          "sampledSeconds": 0.031761,
+          "percentOfAllSamples": 0.04659145327531198
+        },
+        {
+          "category": "other_native_coordination",
+          "samples": 20,
+          "sampledMicroseconds": 21743,
+          "sampledSeconds": 0.021743,
+          "percentOfAllSamples": 0.03189565720742761
+        },
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 5,
+          "sampledMicroseconds": 5753,
+          "sampledSeconds": 0.005753,
+          "percentOfAllSamples": 0.008439300736528127
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-alternating-graph-observation.ts",
+      "samples": 54,
+      "sampledMicroseconds": 58243,
+      "sampledSeconds": 0.058243,
+      "percentOfAllSamples": 0.08543893495525946,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 27,
+          "sampledMicroseconds": 29456,
+          "sampledSeconds": 0.029456,
+          "percentOfAllSamples": 0.043210158612058486
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 27,
+          "sampledMicroseconds": 28787,
+          "sampledSeconds": 0.028787,
+          "percentOfAllSamples": 0.04222877634320097
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-knowledge-store.ts",
+      "samples": 49,
+      "sampledMicroseconds": 52572,
+      "sampledSeconds": 0.052572,
+      "percentOfAllSamples": 0.07711992322627441,
+      "contextPartition": [
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 46,
+          "sampledMicroseconds": 49288,
+          "sampledSeconds": 0.049288,
+          "percentOfAllSamples": 0.07230249516808591
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 2,
+          "sampledMicroseconds": 2177,
+          "sampledSeconds": 0.002177,
+          "percentOfAllSamples": 0.0031935264563569842
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 1,
+          "sampledMicroseconds": 1107,
+          "sampledSeconds": 0.001107,
+          "percentOfAllSamples": 0.001623901601831503
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-contextual-compartments.ts",
+      "samples": 45,
+      "sampledMicroseconds": 48957,
+      "sampledSeconds": 0.048957,
+      "percentOfAllSamples": 0.07181693832056449,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 45,
+          "sampledMicroseconds": 48957,
+          "sampledSeconds": 0.048957,
+          "percentOfAllSamples": 0.07181693832056449
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-composition-memory.ts",
+      "samples": 45,
+      "sampledMicroseconds": 44911,
+      "sampledSeconds": 0.044911,
+      "percentOfAllSamples": 0.06588170265569523,
+      "contextPartition": [
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 25,
+          "sampledMicroseconds": 23881,
+          "sampledSeconds": 0.023881,
+          "percentOfAllSamples": 0.03503197303824582
+        },
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 15,
+          "sampledMicroseconds": 16641,
+          "sampledSeconds": 0.016641,
+          "percentOfAllSamples": 0.024411333835662186
+        },
+        {
+          "category": "shared_memory_without_visible_owner",
+          "samples": 5,
+          "sampledMicroseconds": 4389,
+          "sampledSeconds": 0.004389,
+          "percentOfAllSamples": 0.006438395781787232
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-shared-series.ts",
+      "samples": 39,
+      "sampledMicroseconds": 42586,
+      "sampledSeconds": 0.042586,
+      "percentOfAllSamples": 0.062471069210114166,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 31,
+          "sampledMicroseconds": 33827,
+          "sampledSeconds": 0.033827,
+          "percentOfAllSamples": 0.0496221494897509
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 8,
+          "sampledMicroseconds": 8759,
+          "sampledSeconds": 0.008759,
+          "percentOfAllSamples": 0.012848919720363264
+        }
+      ]
+    },
+    {
+      "module": "wasm://wasm/6a0cf496",
+      "samples": 36,
+      "sampledMicroseconds": 39259,
+      "sampledSeconds": 0.039259,
+      "percentOfAllSamples": 0.05759056276992138,
+      "contextPartition": [
+        {
+          "category": "python_game_runtime",
+          "samples": 36,
+          "sampledMicroseconds": 39259,
+          "sampledSeconds": 0.039259,
+          "percentOfAllSamples": 0.05759056276992138
+        }
+      ]
+    },
+    {
+      "module": "src/logos-engine/v6-observed-frontier.ts",
+      "samples": 34,
+      "sampledMicroseconds": 37372,
+      "sampledSeconds": 0.037372,
+      "percentOfAllSamples": 0.054822448657314296,
+      "contextPartition": [
+        {
+          "category": "family_or_reasoning_work",
+          "samples": 31,
+          "sampledMicroseconds": 34101,
+          "sampledSeconds": 0.034101,
+          "percentOfAllSamples": 0.050024090807638734
+        },
+        {
+          "category": "common_acquisition_visible_stack",
+          "samples": 3,
+          "sampledMicroseconds": 3271,
+          "sampledSeconds": 0.003271,
+          "percentOfAllSamples": 0.0047983578496755604
+        }
+      ]
+    },
+    {
+      "module": "src/runtime/contracts.ts",
+      "samples": 31,
+      "sampledMicroseconds": 31309,
+      "sampledSeconds": 0.031309,
+      "percentOfAllSamples": 0.04592839679470869,
+      "contextPartition": [
+        {
+          "category": "other_native_coordination",
+          "samples": 31,
+          "sampledMicroseconds": 31309,
+          "sampledSeconds": 0.031309,
+          "percentOfAllSamples": 0.04592839679470869
+        }
+      ]
+    },
+    {
+      "module": "src/runtime/v6-agent.ts",
+      "samples": 23,
+      "sampledMicroseconds": 24307,
+      "sampledSeconds": 0.024307,
+      "percentOfAllSamples": 0.03565688910182325,
+      "contextPartition": [
+        {
+          "category": "other_native_coordination",
+          "samples": 23,
+          "sampledMicroseconds": 24307,
+          "sampledSeconds": 0.024307,
+          "percentOfAllSamples": 0.03565688910182325
+        }
+      ]
+    },
+    {
+      "module": "wasm://wasm/0104f166",
+      "samples": 21,
+      "sampledMicroseconds": 22905,
+      "sampledSeconds": 0.022905,
+      "percentOfAllSamples": 0.03360024046065996,
+      "contextPartition": [
+        {
+          "category": "python_game_runtime",
+          "samples": 21,
+          "sampledMicroseconds": 22905,
+          "sampledSeconds": 0.022905,
+          "percentOfAllSamples": 0.03360024046065996
+        }
+      ]
+    },
+    {
+      "module": "node:internal/deps/amaro/dist/index",
+      "samples": 21,
+      "sampledMicroseconds": 22542,
+      "sampledSeconds": 0.022542,
+      "percentOfAllSamples": 0.0330677415614144,
+      "contextPartition": [
+        {
+          "category": "module_loading",
+          "samples": 11,
+          "sampledMicroseconds": 11988,
+          "sampledSeconds": 0.011988,
+          "percentOfAllSamples": 0.017585666127150908
+        },
+        {
+          "category": "python_game_runtime",
+          "samples": 10,
+          "sampledMicroseconds": 10554,
+          "sampledSeconds": 0.010554,
+          "percentOfAllSamples": 0.015482075434263488
+        }
+      ]
+    },
+    {
+      "module": "node:internal/bootstrap/realm",
+      "samples": 19,
+      "sampledMicroseconds": 21183,
+      "sampledSeconds": 0.021183,
+      "percentOfAllSamples": 0.031074171302255395,
+      "contextPartition": [
+        {
+          "category": "other_or_unattributed",
+          "samples": 12,
+          "sampledMicroseconds": 13170,
+          "sampledSeconds": 0.01317,
+          "percentOfAllSamples": 0.019319588162710833
+        },
+        {
+          "category": "module_loading",
+          "samples": 5,
+          "sampledMicroseconds": 5762,
+          "sampledSeconds": 0.005762,
+          "percentOfAllSamples": 0.008452503188575537
+        },
+        {
+          "category": "python_game_runtime",
+          "samples": 2,
+          "sampledMicroseconds": 2251,
+          "sampledSeconds": 0.002251,
+          "percentOfAllSamples": 0.003302079950969027
+        }
+      ]
+    }
+  ]
+}

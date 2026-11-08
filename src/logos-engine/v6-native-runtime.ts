@@ -45,7 +45,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.6.2';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.7.0';
 const SELECTION_PROGRAM = 'v6.composition_strategy.choose';
 type R = Record<string, any>;
 const EPISODE = 'common-observation-frontier';
@@ -70,10 +70,16 @@ interface Prefix {
   family: NativeFamily; proposal: NativeProposal; revision: number; index: number; witnessed: WitnessedTransition[];
   released: boolean; interruption: string | null;
 }
+export interface NativeSelectionGroup {
+  readonly id: string;
+  readonly families: readonly string[];
+  /** Aligned with families, without adding duplicate memory/activation owners. */
+  readonly entryPoints?: readonly (string | null)[];
+}
 export interface NativeV6RuntimeConfiguration {
   sourceDigest: string; families: readonly NativeFamily[]; maxPointOccurrences: number; now?: () => number;
   /** Source DRM groups retain their order even while some implementations are pending. */
-  groups?: readonly { readonly id: string; readonly families: readonly string[] }[];
+  groups?: readonly NativeSelectionGroup[];
   /** Production supplies the original objective policy and enables the real WHY/ACT gate. */
   authorityPolicy?: { provided_objective: { definition: string } };
   /** Same source policy drives the native common caller's retained components. */
@@ -86,7 +92,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   readonly sourceCommit = NATIVE_V6_REFERENCE_COMMIT;
   readonly sourceDigest: string;
   private readonly families: readonly NativeFamily[];
-  private readonly groups: readonly { readonly id: string; readonly families: readonly string[] }[];
+  private readonly groups: readonly NativeSelectionGroup[];
   private readonly domain: ObservedInputDomain;
   private readonly now: () => number;
   private readonly authorityPolicy?: { provided_objective: { definition: string } };
@@ -142,6 +148,11 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.groups = structuredClone(configuration.groups ?? this.families.map(family => ({ id: family.id, families: [family.id] })));
     if (!this.groups.length || this.groups.length > 16 || new Set(this.groups.map(group => group.id)).size !== this.groups.length
       || this.groups.some(group => group.families.some(id => !this.families.some(family => family.id === id)))) throw new TypeError('Native selection requires 1–16 declared groups of registered families');
+    if (this.groups.some(group => group.entryPoints && (group.entryPoints.length !== group.families.length
+      || group.entryPoints.some((entry, index) => entry !== null && (typeof entry !== 'string' || !entry
+        || !this.families.find(family => family.id === group.families[index])?.proposeInSubquestion))))) {
+      throw new TypeError('Native source entries require an aligned subquestion adapter on their single family owner');
+    }
     this.domain = new ObservedInputDomain(configuration.maxPointOccurrences); this.now = configuration.now ?? (() => performance.now());
     this.authorityPolicy = configuration.authorityPolicy ? structuredClone(configuration.authorityPolicy) : undefined;
   }
@@ -278,10 +289,14 @@ export class NativeV6Runtime implements NativeV6Backend {
           const group = this.groups[index]!;
           this.check(this.planning.execution); await this.planning.execution.yieldControl(); this.check(this.planning.execution);
           let offered: { family: NativeFamily; proposal: NativeProposal } | null = null;
-          for (const id of group.families) {
+          for (const [entryIndex, id] of group.families.entries()) {
             const family = this.families.find(candidate => candidate.id === id)!;
             const enabled = objectValue(this.knowledge!.value(`family_activation:${family.id}`)).enabled === true;
-            const proposal = !enabled ? null : family.proposeInGroup
+            const entry = group.entryPoints?.[entryIndex];
+            const proposal = !enabled ? null : entry
+              ? await family.proposeInSubquestion!(group.id, entry, this.observation, this.current.frame_rows,
+                this.planning.inputs, this.remaining(), this.planning.execution)
+              : family.proposeInGroup
               ? await family.proposeInGroup(group.id, this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution)
               : await family.propose(this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution);
             if (proposal) { offered = { family, proposal }; break; }
@@ -592,7 +607,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id),
-        sharedSeriesMemory: 'occurrence_recall_ancestors_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
+        sharedSeriesMemory: 'occurrence_recall_ancestors_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
         sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,
         nativeCallerExtensions: ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update'],
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
@@ -698,6 +713,7 @@ function subquestionFamily(family: NativeFamily<any>, field: string, subquestion
     ...(family.proposeInGroup ? { proposeInGroup: async (...args: Parameters<NonNullable<NativeFamily['proposeInGroup']>>) => {
       const proposal = await family.proposeInGroup!(...args); if (proposal) proposal[field] = subquestion; return proposal;
     } } : {}),
+    ...(family.proposeInSubquestion ? { proposeInSubquestion: (...args: Parameters<NonNullable<NativeFamily['proposeInSubquestion']>>) => family.proposeInSubquestion!(...args) } : {}),
     ...(family.preservationObligations ? { preservationObligations: (...args: Parameters<NonNullable<NativeFamily['preservationObligations']>>) => family.preservationObligations!(...args) } : {}),
     ...(family.bind ? { bind: (proposal: NativeProposal, domain: ObservedInputDomain) => family.bind!(proposal, domain) } : {}),
     before: (...args) => family.before(...args), after: (...args) => family.after(...args), record: (...args) => family.record(...args),
@@ -769,7 +785,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const visualContinuation = configuration.scored_local_rewrite.minimum_completed_rows_for_visual_continuation as number | undefined;
   const visual = visualFirst || visualContinuation ? visualSequenceFamily(new VisualSequences(), visualContinuation) : null;
   const interfaces = createNativeInterfaceFamilies();
-  const recall = createNativeSharedSeriesFamily((configuration.window_constraints as R).occurrence_recall, configuration.coupled_support_composition);
+  const recall = createNativeSharedSeriesFamily((configuration.window_constraints as R).occurrence_recall,
+    configuration.coupled_support_composition, configuration.alternating_graph_composition);
   const policy = loaded.common as R;
   const supportChildren: Record<string, NativeFamily<any>> = {
     ordered_support_transfer: ordered,
@@ -792,7 +809,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     order.flatMap(question => registered[question] ? [registered[question].id] : []);
   const groupMembers: Record<string, readonly string[]> = {
     goal_access: (configuration.goal_access_subquestions as string[]).flatMap(question => {
-      if (question === 'coupled_support_composition') return [recall.id];
+      if (question === 'coupled_support_composition' || question === 'alternating_graph_composition') return [recall.id];
       if (question === 'scored_relation_access') return ['goal_access'];
       if (question === 'observed_support_access') return [supports.id];
       return supportChildren[question] ? [supportChildren[question]!.id] : [];
@@ -811,7 +828,13 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     information_goal: [...(visual && visualFirst ? [visual.id] : []), 'information_goal'],
     view: ['view'], view_continuity: ['view_continuity'], observed_frontier: ['observed_frontier'],
   };
-  const groups = loaded.strategy.declarations[0]!.configuration.families.map(id => ({ id, families: groupMembers[id] ?? [] }));
+  const goalEntryPoints = (configuration.goal_access_subquestions as string[]).flatMap<string | null>(question => {
+    if (question === 'coupled_support_composition' || question === 'alternating_graph_composition') return [question];
+    return ['scored_relation_access', 'observed_support_access'].includes(question) || supportChildren[question] ? [null] : [];
+  });
+  const groups: NativeSelectionGroup[] = loaded.strategy.declarations[0]!.configuration.families.map(id => ({
+    id, families: groupMembers[id] ?? [], ...(id === 'goal_access' ? { entryPoints: goalEntryPoints } : {}),
+  }));
   // Some original policy declarations contain non-integer thresholds. This
   // implementation manifest uses explicit JSON.stringify encoding, as does the
   // existing V7 implementation manifest; it is not a V7 portable-JSON datum.

@@ -136,6 +136,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           }
           const series = read('family_state:public_occurrence_recall');
           const anchors = (series.events as R[]).filter(event => event.kind === 'coupled_pair_epoch_anchor');
+          const alternating = (series.events as R[]).filter(event => event.kind === 'alternating_graph_evidence');
+          const graphEvidence = alternating.at(-1);
           assert.deepEqual(anchors.map(event => event.epoch), [...new Set(report.actions.map((action: R) => action.levelBefore))],
             'One anchor belongs to each publicly witnessed before-epoch, including natural boundary transitions');
           report.prefixes.push({ id: evidenceId, decisionRevision: evidence.decision_revision,
@@ -145,6 +147,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             graphChain: graph.chain, graphRevision: snapshot.graphRevision, callerAcquiredTransitions: snapshot.caller.acquiredTransitions,
             sharedSeries: { digestScope: snapshot.coverage.sharedSeriesDigestScope, digest: series.digest,
               eventCount: series.events.length, epochAnchors: anchors,
+              alternatingGraphEvidenceCount: alternating.length,
+              alternatingGraphSampleCount: graphEvidence?.samples?.length ?? 0,
+              alternatingGraphContactCount: graphEvidence?.contacts?.length ?? 0,
+              alternatingGraphRemovalCount: graphEvidence?.removals?.length ?? 0,
               pairEvidenceCount: (series.events as R[]).filter(event => event.kind === 'coupled_pair_evidence').length,
               supportPreparationCount: (series.events as R[]).filter(event => event.kind === 'coupled_support_preparation').length,
               supportControlModelCount: (series.events as R[]).filter(event => event.kind === 'coupled_support_control_model').length } });

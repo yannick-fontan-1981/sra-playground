@@ -111,6 +111,9 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   /** One retained family can have distinct source entry points in two groups. */
   proposeInGroup?(group: string, observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number,
     execution?: NativeExecution): NativeMaybePromise<P | null>;
+  /** Distinct ordered source entries can share one retained family owner. */
+  proposeInSubquestion?(group: string, subquestion: string, observation: NativeObservation, rows: NativeRows,
+    inputs: readonly NativeCommand[], remaining: number, execution?: NativeExecution): NativeMaybePromise<P | null>;
   preservationObligations?(observation: NativeObservation, rows: NativeRows): NativeMaybePromise<readonly NativeRecord[]>;
   bind?(proposal: P, domain: ObservedInputDomain): NativeMaybePromise<void>;
   before(proposal: P, index: number, publicPacket: NativePublicObservation, observation: NativeObservation): NativeMaybePromise<NativeBeforeResult>;

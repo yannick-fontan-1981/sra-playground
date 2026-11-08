@@ -11,10 +11,11 @@ const strategyBytes = await readFile(new URL(prefix + 'morphology_policy/strateg
 const declarations = { common: JSON.parse(commonBytes.toString()), strategy: JSON.parse(strategyBytes.toString()) } as NativeV6Declarations;
 const configuration = declarations.strategy.declarations[0]!.configuration;
 const runtime = await createNativeV6Runtime(declarations), snapshot = runtime.snapshot(), coverage = snapshot.coverage as R;
-const sourceGroups = coverage.sourceGroups as { id: string; families: string[] }[];
+const sourceGroups = coverage.sourceGroups as { id: string; families: string[]; entryPoints?: (string | null)[] }[];
 const aliases: Record<string, string> = {
   scored_relation_access: 'goal_access', observed_support_access: 'support_navigation',
   coupled_support_composition: 'public_occurrence_recall',
+  alternating_graph_composition: 'public_occurrence_recall',
   observed_occurrence_recall: 'public_occurrence_recall', multiscale_constraints: 'window_constraints',
   surface_rewrite: 'surface_program', learned_code_program: 'code_program', typed_word_interface: 'word_interface',
   rigid_port_assembly: 'port_assembly', controlled_constellation_cover: 'constellation_cover', conserved_band_transfer: 'band_transfer',
@@ -26,10 +27,14 @@ const lists: [string, readonly string[]][] = [
   ['factored_material_return', configuration.factored_material_return.ordered_subquestions],
 ];
 const groups = lists.map(([id, declared]) => {
-  const registered = new Set(sourceGroups.find(group => group.id === id)!.families);
+  const actual = sourceGroups.find(group => group.id === id)!;
+  const registered = new Set(actual.families);
   const entries = declared.map(question => {
     const family = aliases[question] ?? question;
-    return { question, family: registered.has(family) ? family : null, status: registered.has(family) ? 'connected' : 'pending' };
+    const explicitSharedEntry = id === 'goal_access' && family === 'public_occurrence_recall';
+    const connected = registered.has(family) && (!explicitSharedEntry || actual.entryPoints?.some((entry, index) =>
+      entry === question && actual.families[index] === family) === true);
+    return { question, family: connected ? family : null, status: connected ? 'connected' : 'pending' };
   });
   return { id, declared: entries.length, connected: entries.filter(entry => entry.status === 'connected').length, entries };
 });

@@ -1,0 +1,264 @@
+{
+  "schema": "logos-engine.v6.integrated-validation.v36",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.7.0",
+  "nativeSource": {
+    "digest": "96b52417818c38398f9f810ffda7da00add109bf870bb0ba4acfdb8e76b61771",
+    "fileCount": 120,
+    "completeManifest": "tu93-three-levels.json#/source",
+    "currentFilesMatch": true
+  },
+  "tests": {
+    "distinctPassing": 844,
+    "failed": 0,
+    "batches": [
+      {
+        "command": [
+          "node",
+          "--test",
+          "tests/v6-caller-integration.test.ts",
+          "tests/v6-support-caller-integration.test.ts",
+          "tests/v6-shared-series.test.ts",
+          "tests/v6-coupled-pair-evidence.test.ts",
+          "tests/v6-coupled-pair-planning.test.ts",
+          "tests/v6-coupled-pair-route.test.ts",
+          "tests/v6-auxiliary-support.test.ts",
+          "tests/v6-shared-series-native.test.ts",
+          "tests/v6-native-checkpoint-integration.test.ts",
+          "tests/v6-native-authority.test.ts",
+          "tests/v6-native-transition-domain.test.ts",
+          "tests/v6-transition-learning.test.ts",
+          "tests/v6-native-transition-domain-integration.test.ts",
+          "tests/v6-alternating-graph-measurement.test.ts",
+          "tests/v6-alternating-graph-access.test.ts",
+          "tests/v6-alternating-graph-integration.test.ts",
+          "tests/v6-source-entry-routing.test.ts",
+          "tests/v6-native-runtime.test.ts"
+        ],
+        "passing": 844,
+        "failed": 0,
+        "capturedOutput": "regression-output.log.gz",
+        "capturedOutputSha256": "79b6db8c3ae722a80906f0eba50184c56d69b0900eedd68e8d93fcf391e28f5f"
+      }
+    ],
+    "testFileSha256": {
+      "tests/v6-caller-integration.test.ts": "72597754574bcfed663ae33d695e3ed75a69dca6a5cbd0e1228200230b92eade",
+      "tests/v6-support-caller-integration.test.ts": "b66dc21b9a0e18b3372e32a238bc68fb62120132a942cf946e1d04dff1eced00",
+      "tests/v6-shared-series.test.ts": "50f5d5289a3b0aa930c8030cc3118d0df0fa6b1b36927b337649766fa5c01688",
+      "tests/v6-coupled-pair-evidence.test.ts": "e7292253d5052c0abdf6e03a5a0edecd4e41b91874cdbc26b21e6b3a16e136bb",
+      "tests/v6-coupled-pair-planning.test.ts": "75d265b08b8992188112a9009e3651940d3bd7316ef61f05253ff00ca12b8ffa",
+      "tests/v6-coupled-pair-route.test.ts": "ce797a50e3440ae529be6fc7ce40e728168d310ceac86b0b668da7df7da7ccff",
+      "tests/v6-auxiliary-support.test.ts": "b9a999601d6e7216eec714b4b4792314bf0f6dc09001d81c63ed501405c40c3e",
+      "tests/v6-shared-series-native.test.ts": "984863ea3a73acbc136470e007363e86c501fe8eb793f9de312251acc1ca4090",
+      "tests/v6-native-checkpoint-integration.test.ts": "1e17fafacf64e79dbb540ff4b9740b30f733c444d0d167d40e7ce56cc9f3abfe",
+      "tests/v6-native-authority.test.ts": "6b35c231916ee37a07ed2c8505a5cdd71b35f305bc93d1a411fdbcc98a58697d",
+      "tests/v6-native-transition-domain.test.ts": "cf885b68ce37924bae11b859769ece813c46ea0cb66ea7f0c2bb64c4d3d51462",
+      "tests/v6-transition-learning.test.ts": "73124db5ddebd06c38b0627f00ddf7383eec613b885e2cfb27bdea56ca8a2140",
+      "tests/v6-native-transition-domain-integration.test.ts": "d20a3565b85d908ff27a15ac5e808fc754cc6c33f048dd6fb636dd45fa8421cc",
+      "tests/v6-alternating-graph-measurement.test.ts": "a2db0e691344509bdbdd7f708ac74af8a6bf3fd31d184f2b89add117ab61ca45",
+      "tests/v6-alternating-graph-access.test.ts": "d7b53577ee8037b8c8736064db212d0d3f9959f1f04ddeec1399b28de4abbd48",
+      "tests/v6-alternating-graph-integration.test.ts": "b5444ee2923b77f44f57f7ea8ea0b7249f728bbb5c826893136252107909c901",
+      "tests/v6-source-entry-routing.test.ts": "ef5e39698c27da5c0596f351483bbf7ab3553c81b9180df3b10f1c2ac23dd47d",
+      "tests/v6-native-runtime.test.ts": "1155e102d4a767b1bb38c1798dc96187dc6c3ae966617e3c760af906f98bb2f4"
+    },
+    "typecheck": {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "passed": true
+    },
+    "build": {
+      "workflow": "Sites build-site.mjs; npm run build",
+      "passed": true,
+      "campaignGameAssetsMatchBuiltAssets": true,
+      "builtGameAssets": {
+        "custom-games.zip": "44d108fe4feed3ce0c9587e90f071876b13730af8136cd54cbfa5c1562d87822",
+        "official-games.zip": "90b5aeaee21ec11285799287445b33d3c19f4ea4894a8a60964117f7757f59ed",
+        "game_bridge.py": "cc9df3ea6eae0057898fa01fd949322c6af0b481030f4c271b9a719f0a07983e",
+        "official_adapter.py": "efead273b89ffe8cf595e41b9f4b25a6106e6cb6e5a7d1013ebc887cfc646837",
+        "custom_level_navigation.py": "8cc1716619aff08915135ebfa093fc305b211e28fabdff2c027d994d84f82c9b"
+      }
+    },
+    "diffCheck": {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "passed": true
+    }
+  },
+  "campaigns": [
+    {
+      "path": "tu93-three-levels.json",
+      "sha256": "435394c4bc286424572587fdf91f534c3e42564dc63db4aa9fee790569809f2f",
+      "status": "passed",
+      "targetLevels": 3,
+      "final": {
+        "actions": 67,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "activeSeconds": 47.53651044400001,
+        "prefixes": 25,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 67,
+          "boundaryReplays": 2,
+          "goalEvents": 15,
+          "frontierDeltas": 149,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 26
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 40
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 27
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 12
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 41
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology",
+            "attention_parent_return",
+            "acquire_control_for_target"
+          ],
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "fullV6Parity": false,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 67,
+          "resume": 24
+        },
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.7.0"
+      },
+      "levelActions": [
+        32,
+        10,
+        25
+      ],
+      "activeSeconds": [
+        20.666572156999997,
+        5.521018168000005,
+        21.348920119000006
+      ],
+      "elapsedSeconds": 67.82783528,
+      "sourceUnchangedDuringRun": true,
+      "pythonAgentModules": [],
+      "explicitDomainUnknownAssessments": 0,
+      "proposalPrefixCounts": {
+        "observed_frontier": 14,
+        "alternating_graph_composition": 11
+      },
+      "lastSharedSeries": {
+        "digestScope": "native_recall_ancestors_alternating_graph_and_coupled_support_v4",
+        "digest": "8efa930e19b6590a88d53990bb669ff5cd39c0cca76dd6def4fc4cb7c3e20fdc",
+        "eventCount": 62,
+        "epochAnchors": [
+          {
+            "epoch": 1,
+            "frame_digest": "23357766b7528ba534149f7208fb60ca49ff5ef82d5df20d3d48a4f30f3c0ad0",
+            "interior_digest": "3f879bd6cc35ae30b16def40ceb248167fbca9c5bf98ca344a4fd34711af22c1",
+            "kind": "coupled_pair_epoch_anchor",
+            "observation_ref": "sra-v6-88e66412-df93-43ca-b47f-aac7357020d4:epoch:1:revision:1:frame:23357766b7528ba5",
+            "score": 0
+          },
+          {
+            "epoch": 2,
+            "frame_digest": "a2d4678a8ab3ad465bd870700bb3779cd2e93b3ba3dcc1fd5b4a6558136914a0",
+            "interior_digest": "59185c7a21d373c217705f2e07999a9662057cec223862572e14a2f749601625",
+            "kind": "coupled_pair_epoch_anchor",
+            "observation_ref": "sra-v6-88e66412-df93-43ca-b47f-aac7357020d4:epoch:2:revision:33:frame:a2d4678a8ab3ad46",
+            "score": 1
+          },
+          {
+            "epoch": 3,
+            "frame_digest": "9a4c72b4fae47d8583490c513d3843eea07054b5ff57e719babbcef8b9efaa94",
+            "interior_digest": "ac860b6f5a67878e70e9167d723180e42b757d86db0732419c77d3bbf2e21aea",
+            "kind": "coupled_pair_epoch_anchor",
+            "observation_ref": "sra-v6-88e66412-df93-43ca-b47f-aac7357020d4:epoch:3:revision:43:frame:9a4c72b4fae47d85",
+            "score": 2
+          }
+        ],
+        "alternatingGraphEvidenceCount": 59,
+        "alternatingGraphSampleCount": 56,
+        "alternatingGraphContactCount": 4,
+        "alternatingGraphRemovalCount": 4,
+        "pairEvidenceCount": 0,
+        "supportPreparationCount": 0,
+        "supportControlModelCount": 0
+      },
+      "qualification": "Successful first three levels in one fresh native common session. Stops at the declared target on entry to level 4 with NOT_FINISHED, not a complete-game WIN. No external priming or solution replay."
+    }
+  ],
+  "progress": {
+    "path": "../v6-entry-point-progress.json",
+    "connected": 29,
+    "declared": 76,
+    "percent": 38.2,
+    "qualification": "Each declared entry has equal weight. This counts actual provider registrations, not code volume, game score, expected success, or complete V6 behavioral parity. The common coordinator and direct groups are outside this denominator. Their own differential tests and live campaigns remain separate evidence.",
+    "fullV6Parity": false
+  },
+  "moduleAudit": {
+    "path": "../v6-coverage.json",
+    "complete": false,
+    "failures": [],
+    "summary": {
+      "pythonModules": 1369,
+      "pythonLines": 320375,
+      "declaredClassesAndFunctions": 12857,
+      "dataFiles": 417,
+      "verifiedModules": 0,
+      "componentVerifiedModules": 82,
+      "partiallyTransferredModules": 56,
+      "transferredUnverifiedModules": 0,
+      "pendingModules": 1231,
+      "strategyFamilies": 16
+    }
+  },
+  "performance": {
+    "summary": "tu93-cpu-summary.json",
+    "profileSha256": "e95b7b05a0954cb146a3761f21e73f127b9f186a494f90d15f35138d2d398c1e",
+    "activeSeconds": 47.53651044400001,
+    "elapsedSeconds": 67.82783528,
+    "qualification": "Single sampled process run. Request timing separates decision service from explicit helper inspections; async profile ancestry is incomplete. No before/after speedup claim."
+  },
+  "nativeExtensions": [
+    {
+      "capability": "neutral_entity_domain_refusal_retained_as_unknown_without_registry_update",
+      "sourceLimit": 512,
+      "usedInThisCampaign": false,
+      "countedAsSourceEntry": false
+    }
+  ],
+  "nextStep": "Reduce repeated canonicalization and fingerprinting of unchanged immutable fragments at sealed-prefix acquisition, then extend TU93 beyond the first three levels under unchanged source policies."
+}

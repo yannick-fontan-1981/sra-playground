@@ -1,6 +1,6 @@
 /** CoupledPairAccess proposal and before-guard branches from the pinned V6.
  * An absent pair proposal leaves the inherited provider to its caller; it is
- * not a claim that the remaining alternating-graph ancestors are transferred.
+ * not a claim that the entire inherited series-provider chain is transferred.
  */
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts';

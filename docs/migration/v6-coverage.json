@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 81,
-    "partiallyTransferredModules": 52,
+    "componentVerifiedModules": 82,
+    "partiallyTransferredModules": 56,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1236,
+    "pendingModules": 1231,
     "strategyFamilies": 16
   },
   "families": [
@@ -24935,13 +24935,18 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-coupled-pair-route.ts"
+        "src/logos-engine/v6-coupled-pair-route.ts",
+        "src/logos-engine/v6-alternating-graph-observation.ts"
       ],
       "proof": [
         "scripts/export-v6-coupled-pair-route-reference.py",
         "tests/fixtures/v6-coupled-pair-route-reference.json.gz",
         "tests/v6-coupled-pair-route.test.ts",
-        "docs/migration/v35-coupled-support.md"
+        "docs/migration/v35-coupled-support.md",
+        "scripts/export-v6-alternating-graph-measurement-reference.py",
+        "tests/fixtures/v6-alternating-graph-measurement-reference.json.gz",
+        "tests/v6-alternating-graph-measurement.test.ts",
+        "docs/migration/v36-alternating-graph.md"
       ]
     },
     {
@@ -51539,9 +51544,16 @@
           "endLine": 427
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-alternating-graph-observation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-alternating-graph-measurement-reference.py",
+        "tests/fixtures/v6-alternating-graph-measurement-reference.json.gz",
+        "tests/v6-alternating-graph-measurement.test.ts",
+        "docs/migration/v36-alternating-graph.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/staged_replenishment_continuation_d.py",
@@ -72008,9 +72020,16 @@
           "endLine": 103
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-alternating-graph-access.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-alternating-graph-access-reference.py",
+        "tests/fixtures/v6-alternating-graph-access-reference.json.gz",
+        "tests/v6-alternating-graph-access.test.ts",
+        "docs/migration/v36-alternating-graph.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/alternating_graph_observation.py",
@@ -72043,9 +72062,16 @@
           "endLine": 37
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-alternating-graph-observation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-alternating-graph-measurement-reference.py",
+        "tests/fixtures/v6-alternating-graph-measurement-reference.json.gz",
+        "tests/v6-alternating-graph-measurement.test.ts",
+        "docs/migration/v36-alternating-graph.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/alternating_graph_questions.py",
@@ -72066,9 +72092,16 @@
           "endLine": 70
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-alternating-graph-questions.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-alternating-graph-measurement-reference.py",
+        "tests/fixtures/v6-alternating-graph-measurement-reference.json.gz",
+        "tests/v6-alternating-graph-measurement.test.ts",
+        "docs/migration/v36-alternating-graph.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/animated_contact_access.py",
@@ -73023,9 +73056,22 @@
           "endLine": 26
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-alternating-graph-access-reference.py",
+        "tests/fixtures/v6-alternating-graph-access-reference.json.gz",
+        "tests/v6-alternating-graph-access.test.ts",
+        "docs/migration/v36-alternating-graph.md",
+        "tests/v6-support-caller-integration.test.ts",
+        "tests/v6-source-entry-routing.test.ts",
+        "scripts/export-v6-alternating-common-reference.py",
+        "tests/fixtures/v6-alternating-common-reference.json.gz",
+        "tests/v6-alternating-graph-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_animated_contact.py",
@@ -96390,6 +96436,7 @@
     "Standalone family parity does not establish parity of StrategyRouter, WHY/ACT, composition reconciliation or the complete campaign.",
     "component_verified records differential evidence for a bounded component; it never passes the complete-port gate or implies integrated campaign parity.",
     "The separately reported declared-entry progress is provider connection coverage over the four ordered DRM subquestion lists. It is not a game score, a code-volume percentage, or certification of complete V6 parity.",
-    "AnimatedContact exports the exact id/all_conditions of the two interaction.drm rules it consumes (ballistic contact solution and ballistic curve disclosure); this is not a transfer of every rule in that inherited DRM document."
+    "AnimatedContact exports the exact id/all_conditions of the two interaction.drm rules it consumes (ballistic contact solution and ballistic curve disclosure); this is not a transfer of every rule in that inherited DRM document.",
+    "Alternating graph compares complete measurement and topology/contact outputs plus the graph-owned access layer. Its scene description is explicitly the consumed sprite projection, and its shared journal digest names the supported native closure. Public gallery rasters and controlled helper inputs are not complete-game or full-inheritance evidence."
   ]
 }
