@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.v45.baseline-execution.v1",
+  "command": [
+    "node",
+    "scripts/run-v44-campaign.mjs",
+    "LF52",
+    "3",
+    "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/docs/migration/native-campaigns-v45/lf52-v44-baseline.json"
+  ],
+  "cwd": "/workspace/scratch/1cef09f3652c/v44-next-baseline",
+  "exitCode": 1,
+  "startedAt": "2026-11-08T19:21:39.421439+00:00",
+  "finishedAt": "2026-11-08T19:25:42.158105+00:00",
+  "sourceCommit": "5f09bef380512549906ef30d687bed22ad70cb6c",
+  "reportSha256": "1a4e47a96485a119c1d978e9bf11d8dae90aeb009b84eaf7801399e3c86d54ac",
+  "logSha256": "fc7d6a5a34e7f18af17c42fde8e82a37ce2a8dc325df1d0720e481d9b2edeb89",
+  "sourceUnchanged": true
+}

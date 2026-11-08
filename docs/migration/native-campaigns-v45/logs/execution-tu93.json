@@ -1,0 +1,125 @@
+{
+  "game": "TU93",
+  "targetLevels": 3,
+  "command": [
+    "node",
+    "scripts/run-v44-campaign.mjs",
+    "TU93",
+    "3",
+    "docs/migration/native-campaigns-v45/tu93-three-levels.json"
+  ],
+  "startedAt": "2026-11-08T19:57:45.257411+00:00",
+  "finishedAt": "2026-11-08T19:58:41.172478+00:00",
+  "exitCode": 0,
+  "output": {
+    "path": "docs/migration/native-campaigns-v45/logs/regression-tu93.log.gz",
+    "sha256": "c691cf6535643538997ba1511d1e59953af0fe1bb66e9cfa128703faaf868a1a",
+    "bytes": 5537
+  },
+  "report": {
+    "path": "docs/migration/native-campaigns-v45/tu93-three-levels.json",
+    "sha256": "e52a9266b3e252d92eb1333e5e844c79b1b42f0064967e7d27bbd212314a8cf4",
+    "bytes": 285427
+  },
+  "status": "passed",
+  "final": {
+    "actions": 67,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 42.601616463999996,
+    "prefixes": 25,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 67,
+      "boundaryReplays": 2,
+      "goalEvents": 15,
+      "frontierDeltas": 149,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 26
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 40
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 27
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 12
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 1
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 41
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 67,
+      "resume": 24
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.15.0"
+  },
+  "sourceDigest": "1278235f269085c057e4dfea619c5a65587bfd90998505858caeef067319640c",
+  "nativeSourceFiles": 149,
+  "nativeSourceMatchesInitialFiles": true,
+  "sourceUnchangedDuringRun": true,
+  "pythonAgentModules": [],
+  "comparison": {
+    "command": [
+      "node",
+      "scripts/compare-v44-regressions.mjs",
+      "docs/migration/native-campaigns-v44/tu93-three-levels.json",
+      "docs/migration/native-campaigns-v45/tu93-three-levels.json",
+      "docs/migration/native-campaigns-v45/tu93-comparison.json"
+    ],
+    "startedAt": "2026-11-08T19:58:41.175657+00:00",
+    "finishedAt": "2026-11-08T19:58:41.247393+00:00",
+    "exitCode": 0,
+    "output": {
+      "path": "docs/migration/native-campaigns-v45/logs/comparison-tu93.log.gz",
+      "sha256": "809cbeaeeb95e9a8c2afce158b59b5b60f288a2e37f22d9748a6235315605df2",
+      "bytes": 112
+    },
+    "path": "docs/migration/native-campaigns-v45/tu93-comparison.json",
+    "sha256": "3031ef789782d27bfea8a4d86767388b3abbdb1c95b4443a6c307602f475477c",
+    "bytes": 3497,
+    "passed": true,
+    "checks": 13,
+    "compared": {
+      "commands": 67,
+      "completePublicPackets": 68,
+      "prefixes": 25
+    },
+    "failedChecks": []
+  },
+  "nativeSourceUnchangedAfterComparison": true,
+  "passed": true
+}

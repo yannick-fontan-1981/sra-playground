@@ -23,6 +23,7 @@ import { markedCollectionQuestion, observedProgramQuestion, observedProgramBefor
   recordObservedProgram, recordObservedProgramPacket } from './v6-program-composition-access.ts';
 import { programIdentity } from './v6-program-identity.ts';
 import { sharedLearnedPreparationWitness, radialLearnedPreparationWitness } from './v6-learned-preparation.ts';
+import { cellUnacquiredInquiryWitness } from './v6-acquired-continuation.ts';
 import { programControlDiscoveryQuestion, programControlDiscoveryBefore, programControlDiscoveryAfter, programControlDiscoveryBlocksOrdinaryPlan,
   recordProgramControlDiscovery } from './v6-program-control-discovery.ts';
 import { acquireProgramRelationModels, programRelationQuestion, programRelationBefore, programRelationAfter,
@@ -46,6 +47,8 @@ export interface NativeSharedSeriesOptions {
   programRelationLearning?: boolean;
   /** Explicit native measurement of complete homologous aligned mark support. */
   extendedRootedMarkSupport?: boolean;
+  /** Exhaustive bounded native AND/OR fallback after atomic contradiction. */
+  composedLabeledPredicates?: boolean;
 }
 
 /** The inherited public reducer participates in the native mutation guard. */
@@ -154,6 +157,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   private readonly programControlDiscovery: boolean;
   private readonly programRelationLearning: boolean;
   private readonly extendedRootedMarkSupport: boolean;
+  private readonly composedLabeledPredicates: boolean;
 
   constructor(config: OccurrenceRecallPolicy, options: NativeSharedSeriesOptions = {}) {
     super(config);
@@ -161,6 +165,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     this.programControlDiscovery = options.programControlDiscovery === true;
     this.programRelationLearning = options.programRelationLearning === true;
     this.extendedRootedMarkSupport = options.extendedRootedMarkSupport === true;
+    this.composedLabeledPredicates = options.composedLabeledPredicates === true;
     this.certified = this.workingStamp();
   }
 
@@ -267,7 +272,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   /** Current labeled-query entry with the same acquired journal and physical guard. */
   labeledPropose(observation: R, rows: NativeRows, inputs: readonly R[], remaining: number, config: R,
     deadlineMs: number | null, now?: () => number): Promise<R | null> {
-    return commonLabeledSequenceProposal(this.labeled, observation, rows, inputs, remaining, config, deadlineMs, now);
+    return commonLabeledSequenceProposal(this.labeled, observation, rows, inputs, remaining, config, deadlineMs, now, undefined,
+      { composedPredicates: this.composedLabeledPredicates });
   }
 
   /** ProgramCompositionConstraint's declared question on the same ancestor memory. */
@@ -558,6 +564,7 @@ export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, c
   options: NativeSharedSeriesOptions = {}, radialConfig?: R, rootedConfig?: R, productConfig?: R, labeledConfig?: R): NativeFamily {
   const family = new SharedSeriesConstraint(config, options), adapter = asNativeOccurrenceRecallFamily(family);
   return { ...adapter, nativeState: () => family.nativeState(), restoreNative: state => family.restoreNative(state),
+    unacquiredInquiryWitness: (proposal, observation) => cellUnacquiredInquiryWitness(family.cells.state(), proposal, observation),
     groundedInquiryWitness: (proposal, observation) => {
       if (proposal.kind === 'public_program_relation_probe') return programRelationWitness(family.memory.compositionModels.at(-1)!,
         family.memory.controlDiscoveryEvents, proposal, observation);

@@ -1,0 +1,78 @@
+{
+  "schema": "logos-engine.v44.public-regression-comparison.v1",
+  "passed": true,
+  "checks": [
+    {
+      "name": "same game and target, both campaigns passed",
+      "passed": true
+    },
+    {
+      "name": "same production budgets and exact game assets",
+      "passed": true
+    },
+    {
+      "name": "same complete initial public packet hash",
+      "passed": true
+    },
+    {
+      "name": "same physical commands, full animation packet hashes and primitive boundaries",
+      "passed": true
+    },
+    {
+      "name": "same selected source prefix kinds and acquired action counts",
+      "passed": true
+    },
+    {
+      "name": "same previously reported series projection with observation-scope normalization",
+      "passed": true
+    },
+    {
+      "name": "same acquired-preparation deferrals and guards",
+      "passed": true
+    },
+    {
+      "name": "partial current-control access is not required in these previous successful prefixes",
+      "passed": true
+    },
+    {
+      "name": "new labeled acquisition remains empty in prior successful prefixes",
+      "passed": true
+    },
+    {
+      "name": "same request outcomes and common caller revisions",
+      "passed": true
+    },
+    {
+      "name": "same final public result and retained-session counters",
+      "passed": true
+    },
+    {
+      "name": "source frozen during both campaigns and no Python agent modules",
+      "passed": true
+    },
+    {
+      "name": "same retained mechanical-domain assessments",
+      "passed": true
+    }
+  ],
+  "before": {
+    "path": "docs/migration/native-campaigns-v44/ther-six-levels.json",
+    "sha256": "e0e0b6fa3e57d23db864f2918ded874246d51f1f9bf43e39eb081c056f42f332",
+    "implementation": "logos-engine.typescript.v6.native-migration/0.14.0",
+    "sourceDigest": "1b30d1f0a80275a1204b44198b5fd62f43439d16b5eccdd768a4357b78986093",
+    "sharedDigestScope": "native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_labeled_sequence_cell_placement_alternating_graph_and_coupled_support_v6"
+  },
+  "after": {
+    "path": "docs/migration/native-campaigns-v45/ther-six-levels.json",
+    "sha256": "108f0392d9b2738857f4250389a923225c249deda5d9a5c5ae9e3b66822dfc37",
+    "implementation": "logos-engine.typescript.v6.native-migration/0.15.0",
+    "sourceDigest": "1278235f269085c057e4dfea619c5a65587bfd90998505858caeef067319640c",
+    "sharedDigestScope": "native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_labeled_sequence_cell_placement_alternating_graph_and_coupled_support_v6"
+  },
+  "compared": {
+    "commands": 26,
+    "completePublicPackets": 27,
+    "prefixes": 8
+  },
+  "qualification": "Compares commands, complete public packet hashes, source prefix kinds, acquisition counters and reported series projections. Observation session scope is normalized. Session-derived hashed program model IDs are excluded while their acquisition epochs, normalized evidence and observed/inferred operator counts remain compared. Native graph chains/revisions and shared inherited digests are excluded. Prior acquired-preparation deferrals and guards are compared. New labeled projections must remain empty on these prior successful prefixes; all prior product, radial/control-discovery, quota/native-mark-support, relation and other series evidence remain compared. No partial-access extension is required in these prefixes. Timings are excluded; this is not a speed comparison or full internal-state parity."
+}

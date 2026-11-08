@@ -1,0 +1,33 @@
+{
+  "initialLevel": 1,
+  "initialActions": 0,
+  "initialSolvedLevels": 0,
+  "initialPlans": 0,
+  "inspectionClosedAtStart": true,
+  "manualGameActions": 0,
+  "agentSessionResets": 0,
+  "levelJumps": 0,
+  "cumulativeActionsAtBoundaries": [
+    8,
+    48,
+    104
+  ],
+  "completedPlansAtBoundaries": [
+    8,
+    26,
+    71
+  ],
+  "solvedLevels": 3,
+  "completedPlans": 71,
+  "finalVisibleLevel": 4,
+  "victoryVisible": false,
+  "inspectionOpenedDuringRun": false,
+  "nativeSourceManifestDigest": "1278235f269085c057e4dfea619c5a65587bfd90998505858caeef067319640c",
+  "previewUrl": "http://127.0.0.1:4173/?game=LF52&level=4",
+  "qualification": "Fresh browser run after the final source freeze. Three clicks on Run to next level, one retained native session; no manual game command, level jump, reset or inspection opening.",
+  "schema": "logos-engine.v45.browser-verification.v1",
+  "game": "LF52",
+  "recordedAt": "2026-11-08T19:59:26.854079+00:00",
+  "screenshot": "lf52-browser-three-levels.png",
+  "screenshotSha256": "074db3f3b3ce70c1a81dbdd620368719f1690b9b1fde38b6e33ea3dc8867e2bf"
+}

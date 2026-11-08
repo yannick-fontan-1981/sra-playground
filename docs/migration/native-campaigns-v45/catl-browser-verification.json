@@ -1,0 +1,43 @@
+{
+  "initialLevel": 1,
+  "initialActions": 0,
+  "initialSolvedLevels": 0,
+  "initialPlans": 0,
+  "inspectionClosedAtStart": true,
+  "manualGameActions": 0,
+  "agentSessionResets": 0,
+  "levelJumps": 0,
+  "cumulativeActionsAtBoundaries": [
+    8,
+    16,
+    24,
+    32,
+    40,
+    48
+  ],
+  "completedPlansAtBoundaries": [
+    8,
+    16,
+    24,
+    32,
+    40,
+    48
+  ],
+  "purpose": "Fresh run to recover the screenshot after the first already successful browser run had a capture timeout.",
+  "solvedLevels": 6,
+  "completedPlans": 48,
+  "finalVisibleLevel": 6,
+  "victoryVisible": true,
+  "officialWinTextVisible": true,
+  "inspectionOpenedDuringRun": false,
+  "nativeSourceManifestDigest": "1278235f269085c057e4dfea619c5a65587bfd90998505858caeef067319640c",
+  "previewUrl": "http://127.0.0.1:4173/?game=CATL&level=6",
+  "qualification": "Separate fresh capture run from level 1. One retained native session, six Run to next level requests, no manual game command, reset, level jump or inspection opening. The prior completed browser run and screenshot timeout are documented separately.",
+  "schema": "logos-engine.v45.browser-verification.v1",
+  "game": "CATL",
+  "recordedAt": "2026-11-08T20:13:08.437599+00:00",
+  "screenshot": "catl-browser-victory.png",
+  "screenshotSha256": "80802984528998a375707492e39847b3d2bfa5f3907579d1931664a6cf86c957",
+  "accessibilityEvidence": "catl-browser-victory-ax.txt",
+  "accessibilityEvidenceSha256": "85704bf4545fcd80f7a73359c04b1e3c3a9b02ded028fdab09b6bb9f0c2f7030"
+}

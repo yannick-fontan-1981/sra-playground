@@ -1,6 +1,7 @@
 /** LabeledSequenceAccess own layer and source common current-point wrapper. */
 import { measureLabeledSequence } from './v6-labeled-sequence-observation.ts';
 import { inferLabeledSequence } from './v6-labeled-sequence-mechanics.ts';
+import { inferComposedLabeledSequence } from './v6-labeled-sequence-composition.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
@@ -12,6 +13,10 @@ type Clock = () => number;
 type BeforeMeta = { epoch: number; score: number; observation_ref: string; available: readonly string[] };
 type AfterMeta = { epoch: number; score: number; state?: string };
 export interface LabeledSequenceState { labeled_cache: R | null; labeled_events: R[] }
+export interface NativeLabeledSequenceOptions {
+  /** Explicit native finite composition, only after complete atomic contradiction. */
+  composedPredicates?: boolean;
+}
 
 export function labeledSequenceBefore(proposal: R, index: number, rows: NativeRows, meta: BeforeMeta): R {
   const plan = proposal.labeled_sequence_plan;
@@ -45,13 +50,18 @@ export class LabeledSequenceMemory {
   /** Planning acquires nothing; the common owner supplies inherited fallbacks. */
   proposeLabeled(observation: R, rows: NativeRows, _inputs: readonly R[], maxPrefix: number, config: R,
     levelDeadlineMs: number, now: Clock = () => performance.now(),
-    base: R | null = { status: 'abstained', reason: 'no_recurrent_line_question' }): R | null {
+    base: R | null = { status: 'abstained', reason: 'no_recurrent_line_question' }, native: NativeLabeledSequenceOptions = {}): R | null {
     const cfg = config.labeled_sequence_question;
     const prior = this.cache && this.cache.epoch === observation.level_epoch ? this.cache.controls ?? null : null;
     const scene = truth(cfg) ? measureLabeledSequence(rows, prior) : null;
     if (!scene || !maxPrefix || !observation.available_action_refs.includes('ACTION6')) return base;
-    const result = inferLabeledSequence(scene, observation, levelDeadlineMs, cfg, this.cache, now);
-    if (!result || !truth(result.induction.values.robust_answer_and_submission_agreement)) {
+    const result = native.composedPredicates
+      ? inferComposedLabeledSequence(scene, observation, levelDeadlineMs, cfg, this.cache, now)
+      : inferLabeledSequence(scene, observation, levelDeadlineMs, cfg, this.cache, now);
+    if (!result || !truth(result.induction.values.robust_answer_and_submission_agreement)
+      || result.native_composition && (result.native_composition.complete !== true
+        || result.induction.status !== 'COMPLETE' || result.induction.domain_complete !== true
+        || result.induction.values.observation_compatible_version_space.length === 0)) {
       return { status: 'abstained', reason: 'labeled_predicate_domain_has_no_unique_current_answer' };
     }
     const labels = new Set<string>((result.induction.values.label_predictions as R[]).map(prediction => prediction.predicted_label_ref));
@@ -64,8 +74,12 @@ export class LabeledSequenceMemory {
     }
     const plan = { epoch: observation.level_epoch, score: observation.levels_completed, observation_ref: observation.observation_ref,
       frame_digest: identity(rows), scene, inference: result, label, button, commands: [structuredClone(action)],
-      scope: 'Agreement within declared atomic/complement grammar on observed examples; labels/control correspondence remains geometric hypothesis. Next question and physical receipt unknown.' };
-    const ref = 'C_labeled_' + identity(plan).slice(0, 20), why = cfg.question;
+      scope: result.native_composition
+        ? 'Agreement within the exhaustively examined bounded native AND/OR grammar on observed examples; labels/control correspondence remains geometric hypothesis. Next question and physical receipt unknown.'
+        : 'Agreement within declared atomic/complement grammar on observed examples; labels/control correspondence remains geometric hypothesis. Next question and physical receipt unknown.' };
+    const ref = 'C_labeled_' + identity(plan).slice(0, 20), why = result.native_composition
+      ? 'Compare the current measured sequence with both example collections using the declared bounded native AND/OR grammar. Submit only when a nonempty set of compatible predicates unanimously predicts the current label and its visible control. Seal this one action on its unknown physical response.'
+      : cfg.question;
     const facts = { measured_labeled_panel_and_scaled_query: true, finite_declared_predicate_agreement: true, current_button_bound_to_predicted_label: true };
     return structuredClone({ status: 'proposed', kind: 'labeled_sequence_experiment', labeled_sequence_plan: plan, proposal_id: ref,
       actions: [action], steps: [{ action, expected_after: null }], facts,
@@ -92,11 +106,12 @@ export class LabeledSequenceMemory {
 }
 
 export async function commonLabeledSequenceProposal(memory: LabeledSequenceMemory, observation: R, rows: NativeRows, inputs: readonly R[],
-  remaining: number, config: R, levelDeadlineMs: number | null, now: Clock = () => performance.now(), base?: R | null): Promise<R | null> {
+  remaining: number, config: R, levelDeadlineMs: number | null, now: Clock = () => performance.now(), base?: R | null,
+  native: NativeLabeledSequenceOptions = {}): Promise<R | null> {
   if (remaining < 1) return null;
   if (levelDeadlineMs === null || levelDeadlineMs === undefined) throw new TypeError('Labeled query requires current level deadline');
   const proposal = memory.proposeLabeled(observation, rows, inputs, Math.min(16, remaining), { ...config, remaining_level_actions: remaining },
-    levelDeadlineMs, now, base);
+    levelDeadlineMs, now, base, native);
   if (!proposal || !Object.hasOwn(proposal, 'labeled_sequence_plan')) return null;
   const plan = proposal.labeled_sequence_plan, button = plan.button, [x, y] = button.point, step = proposal.steps[0];
   step.expected_before = Object.fromEntries(['level_epoch', 'frame_hash', 'levels_completed', 'state'].map(key => [key, observation[key]]));

@@ -14,6 +14,8 @@ import { Containment } from './v6-containment.ts';
 import { SurfaceProgram } from './v6-surface-program.ts';
 import { CodeProgram } from './v6-code-program.ts';
 import { BandTransfer } from './v6-band-transfer.ts';
+import { ReductionTransport } from './v6-reduction-transport.ts';
+import { retainedReductionSuccess, reductionAcquiredContinuationWitness } from './v6-acquired-continuation.ts';
 import { createNativeSharedSeriesFamily, SHARED_SERIES_DIGEST_SCOPE } from './v6-shared-series.ts';
 import { SupportNavigation } from './v6-support-navigation.ts';
 import { JointTransport } from './v6-joint-transport.ts';
@@ -38,6 +40,7 @@ import { arrayValue, immutableJson, objectValue, stringValue } from './canonical
 import { NativeKnowledgeStore, NATIVE_STORE_PROFILE } from './v6-knowledge-store.ts';
 import type { NativeStoreWrite, StoredNativeProgram } from './v6-knowledge-store.ts';
 import type { DeltaCause, KnowledgeMemory } from './kernel.ts';
+import type { JsonValue } from './ir.ts';
 import { NativeEditRejected } from './v6-native-types.ts';
 import { NativeCompositionAuthority } from './v6-native-authority.ts';
 import type {
@@ -46,11 +49,13 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.14.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.15.0';
 // The implementation identity and public snapshot describe the same extensions.
 const NATIVE_CALLER_EXTENSIONS = ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
   'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery',
   'conditional_program_relation_acquisition_and_validation', 'complete_homologous_aligned_mark_support',
+  'bounded_labeled_predicate_composition_after_atomic_contradiction',
+  'current_acquired_continuation_before_unacquired_exploration',
   'stationary_unlearned_contact_refusal_scope'] as const;
 const SELECTION_PROGRAM = 'v6.composition_strategy.choose';
 type R = Record<string, any>;
@@ -297,7 +302,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       if (!this.knowledge) throw new Error('Native knowledge store is not initialized');
       this.selectionProgram ??= await this.knowledge.registerProgram(SELECTION_PROGRAM, {
         'families.begin': () => ({ pending: true, done: false, index: 0, progress: 0, visited: [] }),
-        'families.offer': async args => {
+        'families.offer': async (args): Promise<JsonValue> => {
           const session = objectValue(args.session), index = session.index;
           if (typeof index !== 'number' || !Number.isSafeInteger(index) || index < 0 || index >= this.groups.length || !this.planning || !this.current || !this.observation) throw new Error('Invalid native family selection cursor');
           const group = this.groups[index]!;
@@ -307,7 +312,7 @@ export class NativeV6Runtime implements NativeV6Backend {
             const family = this.families.find(candidate => candidate.id === id)!;
             const enabled = objectValue(this.knowledge!.value(`family_activation:${family.id}`)).enabled === true;
             const entry = group.entryPoints?.[entryIndex];
-            const entryKey = `${group.id}:${entry}`;
+            const entryKey = `${group.id}:${family.id}:${entry}`;
             const proposal = !enabled ? null : entry && this.planning.entryOffers.has(entryKey)
               ? this.planning.entryOffers.get(entryKey)! : entry
               ? await family.proposeInSubquestion!(group.id, entry, this.observation, this.current.frame_rows,
@@ -317,7 +322,14 @@ export class NativeV6Runtime implements NativeV6Backend {
               : await family.propose(this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution);
             if (proposal && group.id === 'goal_access'
               && (await this.deferUnlearnedInvitation(proposal) || await this.scopeStationaryContactRefusal(family, proposal))) continue;
-            if (proposal) { offered = { family, proposal }; break; }
+            if (proposal) {
+              const preferred = await this.preferAcquiredContinuation(index, entryIndex, family, proposal);
+              if (preferred) {
+                this.planning.offers.set(preferred.group, preferred.offer);
+                return { family: preferred.group, selected: true, source_trigger_group: group.id };
+              }
+              offered = { family, proposal }; break;
+            }
           }
           this.planning.offers.set(group.id, offered);
           return { family: group.id, selected: offered !== null };
@@ -325,7 +337,7 @@ export class NativeV6Runtime implements NativeV6Backend {
         'families.finish': args => {
           const session = objectValue(args.session), trial = objectValue(args.trial);
           return { ...session, pending: false, done: true, progress: Number(session.progress) + 1,
-            selected: stringValue(trial.family), visited: [...arrayValue(session.visited), trial.family!] };
+            selected: stringValue(trial.family), visited: [...arrayValue(session.visited), trial.source_trigger_group ?? trial.family!] };
         },
         'families.advance': args => {
           const session = objectValue(args.session), index = Number(session.index) + 1;
@@ -355,6 +367,70 @@ export class NativeV6Runtime implements NativeV6Backend {
   }
 
   /**
+   * Native arbitration, separate from the unchanged source ordering. A dated
+   * official success can support re-examining its own current continuation
+   * before a wholly unacquired exploration. The exact attested candidate is
+   * selected, not an earlier offer borrowing its evidence. The source cursor
+   * and the actual selected group remain distinct in the retained receipt.
+   */
+  private async preferAcquiredContinuation(sourceIndex: number, sourceEntryIndex: number, deferredFamily: NativeFamily,
+    deferredProposal: NativeProposal): Promise<{ group: string; offer: { family: NativeFamily; proposal: NativeProposal } } | null> {
+    if (!this.caller || !this.planning || !this.knowledge || !this.current || !this.observation
+      || deferredProposal.status !== 'proposed' || !deferredFamily.unacquiredInquiryWitness) return null;
+    const unacquired = await deferredFamily.unacquiredInquiryWitness(deferredProposal, this.observation) as R | null;
+    if (!unacquired || unacquired.status !== 'unacquired_exploration'
+      || unacquired.observation_ref !== this.observation.observation_ref
+      || !Array.isArray(unacquired.evidence_refs) || unacquired.evidence_refs.length) return null;
+    for (const group of this.groups.slice(sourceIndex + 1)) for (const [entryIndex, id] of group.families.entries()) {
+      const family = this.families.find(candidate => candidate.id === id);
+      if (!family?.retainedSuccessWitness || !family.acquiredContinuationWitness
+        || objectValue(this.knowledge.value(`family_activation:${id}`)).enabled !== true) continue;
+      const retained = await family.retainedSuccessWitness(this.observation) as R | null;
+      const currentWitness = (witness: R | null): witness is R => Boolean(witness
+        && witness.status === 'conditional_acquired_continuation'
+        && witness.observation_ref === this.observation!.observation_ref
+        && witness.score === this.current!.levels_completed && typeof witness.success_ref === 'string' && witness.success_ref.length
+        && Array.isArray(witness.evidence_refs) && witness.evidence_refs.includes(witness.success_ref));
+      if (!currentWitness(retained)) continue;
+      const entry = group.entryPoints?.[entryIndex], key = `${group.id}:${family.id}:${entry}`;
+      let candidate: NativeProposal | null;
+      if (entry && this.planning.entryOffers.has(key)) candidate = this.planning.entryOffers.get(key)!;
+      else {
+        this.check(this.planning.execution); await this.planning.execution.yieldControl(); this.check(this.planning.execution);
+        candidate = entry ? await family.proposeInSubquestion!(group.id, entry, this.observation,
+          this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution)
+          : family.proposeInGroup ? await family.proposeInGroup(group.id, this.observation,
+            this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution)
+          : await family.propose(this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution);
+        if (entry) this.planning.entryOffers.set(key, candidate);
+      }
+      if (!candidate || candidate.status !== 'proposed' || !candidate.actions.length) continue;
+      const witness = await family.acquiredContinuationWitness(candidate, this.observation) as R | null;
+      if (!currentWitness(witness) || witness.success_ref !== retained.success_ref) continue;
+      const guard = await family.before(candidate, 0, this.current, this.observation);
+      if (!guard.admitted) continue;
+      const stateRef = `family_state:${family.id}`, deferredStateRef = `family_state:${deferredFamily.id}`;
+      const receipt = { rule: 'current_acquired_continuation_before_unacquired_exploration',
+        source_trigger_group: this.groups[sourceIndex]!.id, source_trigger_index: sourceIndex,
+        source_trigger_entry: this.groups[sourceIndex]!.entryPoints?.[sourceEntryIndex] ?? null,
+        selected_group: group.id, selected_group_index: this.groups.indexOf(group), selected_entry: entry ?? null,
+        selected_subquestion: candidate.material_access_subquestion ?? candidate.program_subquestion ?? candidate.field_subquestion ?? entry ?? null,
+        observation_ref: this.observation.observation_ref,
+        deferred_family: deferredFamily.id, deferred_proposal_ref: deferredProposal.proposal_id ?? (deferredProposal as R).bundle_template?.composition_ref ?? null,
+        preferred_family: family.id, preferred_proposal_ref: candidate.proposal_id ?? (candidate as R).bundle_template?.composition_ref ?? null,
+        preferred_proposal_digest: symbolicDigest(candidate),
+        unacquired_inquiry: unacquired, acquired_continuation: witness,
+        source_state_ref: stateRef, source_state_revision: this.knowledge.node(stateRef).revision,
+        deferred_state_ref: deferredStateRef, deferred_state_revision: this.knowledge.node(deferredStateRef).revision,
+        guard_reason: guard.reason, physical_action_authorized: false,
+        scope: 'Explicit native selection extension. Previous official success supports this remeasured inquiry, not a universal law or a known effect for an uncalibrated control. Ordinary binding, preservation and WHY/ACT authorization still apply.' };
+      this.planning.coordination.push(receipt); this.note({ kind: 'native_coordination', ...receipt });
+      return { group: group.id, offer: { family, proposal: candidate } };
+    }
+    return null;
+  }
+
+  /**
    * Explicit native coordination extension. The unchanged Python caller can
    * select a visual invitation despite an independently acquired preparation.
    * Inspect the next window choice in declared order. Its family must attest
@@ -373,7 +449,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       // A provider without this read-only contract remains in normal source
       // order; do not speculate past it or execute its question for arbitration.
       if (!family.learnedPreparationWitness) return false;
-      const entry = group.entryPoints?.[index], key = `${group.id}:${entry}`;
+      const entry = group.entryPoints?.[index], key = `${group.id}:${family.id}:${entry}`;
       let candidate: NativeProposal | null;
       if (entry && this.planning.entryOffers.has(key)) candidate = this.planning.entryOffers.get(key)!;
       else {
@@ -431,7 +507,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       const family = this.families.find(candidate => candidate.id === id);
       if (!family || objectValue(this.knowledge.value(`family_activation:${id}`)).enabled !== true) continue;
       if (!family.groundedInquiryWitness) return false;
-      const entry = group.entryPoints?.[index], key = `${group.id}:${entry}`;
+      const entry = group.entryPoints?.[index], key = `${group.id}:${family.id}:${entry}`;
       let candidate: NativeProposal | null;
       if (entry && this.planning.entryOffers.has(key)) candidate = this.planning.entryOffers.get(key)!;
       else {
@@ -602,7 +678,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private retainSelectedAcquisition(family: NativeFamily, record: NativeRecordResult, transition: WitnessedTransition): void {
     const memory = this.authority!.memory, after = transition.after;
     const singleEventKeys: Record<string, string> = { window_constraints: 'window_constraint', regular_field_correspondence: 'symmetric_field',
-      orbit_constraints: 'orbit_constraint', containment: 'containment', surface_program: 'surface', code_program: 'codes', band_transfer: 'bands',
+      orbit_constraints: 'orbit_constraint', containment: 'containment', surface_program: 'surface', code_program: 'codes', band_transfer: 'bands', reduction_transport: 'reduction',
       visual_sequences: 'visual_sequence_event', slot_substitution: 'slots', word_interface: 'words', port_assembly: 'ports', constellation_cover: 'constellations' };
     const key = singleEventKeys[family.id];
     if (key) memory.put(EPISODE, `${key}:${transition.before.revision}`, record.events[0] ?? null, after.observation_ref, after.revision);
@@ -844,7 +920,7 @@ function fieldFamily(field: WindowConstraints): NativeFamily {
 }
 
 /** These original families return one event and preserve absent action data. */
-function originalEventFamily(family: OrbitConstraints | Containment | SurfaceProgram | CodeProgram | BandTransfer): NativeFamily {
+function originalEventFamily(family: OrbitConstraints | Containment | SurfaceProgram | CodeProgram | BandTransfer | ReductionTransport): NativeFamily {
   return {
     id: family.familyId,
     propose: async (observation, rows, inputs, remaining) => await family.propose(observation, rows, inputs, remaining) as NativeProposal | null,
@@ -867,6 +943,9 @@ function subquestionFamily(family: NativeFamily<any>, field: string, subquestion
     } } : {}),
     ...(family.proposeInSubquestion ? { proposeInSubquestion: (...args: Parameters<NonNullable<NativeFamily['proposeInSubquestion']>>) => family.proposeInSubquestion!(...args) } : {}),
     ...(family.preservationObligations ? { preservationObligations: (...args: Parameters<NonNullable<NativeFamily['preservationObligations']>>) => family.preservationObligations!(...args) } : {}),
+    ...(family.retainedSuccessWitness ? { retainedSuccessWitness: (...args: Parameters<NonNullable<NativeFamily['retainedSuccessWitness']>>) => family.retainedSuccessWitness!(...args) } : {}),
+    ...(family.acquiredContinuationWitness ? { acquiredContinuationWitness: (...args: Parameters<NonNullable<NativeFamily['acquiredContinuationWitness']>>) => family.acquiredContinuationWitness!(...args) } : {}),
+    ...(family.unacquiredInquiryWitness ? { unacquiredInquiryWitness: (...args: Parameters<NonNullable<NativeFamily['unacquiredInquiryWitness']>>) => family.unacquiredInquiryWitness!(...args) } : {}),
     ...(family.bind ? { bind: (proposal: NativeProposal, domain: ObservedInputDomain) => family.bind!(proposal, domain) } : {}),
     before: (...args) => family.before(...args), after: (...args) => family.after(...args), record: (...args) => family.record(...args),
     state: () => family.state(), restore: state => family.restore(state),
@@ -934,13 +1013,19 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const surface = subquestionFamily(originalEventFamily(new SurfaceProgram()), 'program_subquestion', 'surface_rewrite');
   const code = subquestionFamily(originalEventFamily(new CodeProgram()), 'program_subquestion', 'learned_code_program');
   const band = subquestionFamily(originalEventFamily(new BandTransfer()), 'material_access_subquestion', 'conserved_band_transfer');
+  const reductionOwner = new ReductionTransport();
+  const reduction = subquestionFamily({ ...originalEventFamily(reductionOwner),
+    retainedSuccessWitness: observation => retainedReductionSuccess(reductionOwner.state(), observation),
+    acquiredContinuationWitness: (proposal, observation) => reductionAcquiredContinuationWitness(reductionOwner.state(), proposal, observation),
+  }, 'material_access_subquestion', 'supported_ternary_reduction');
   const visualContinuation = configuration.scored_local_rewrite.minimum_completed_rows_for_visual_continuation as number | undefined;
   const visual = visualFirst || visualContinuation ? visualSequenceFamily(new VisualSequences(), visualContinuation) : null;
   const interfaces = createNativeInterfaceFamilies();
   const recall = createNativeSharedSeriesFamily((configuration.window_constraints as R).occurrence_recall,
     configuration.coupled_support_composition, configuration.alternating_graph_composition,
     (configuration.window_constraints as R).cell_patch_composition,
-    { currentProgramAccess: true, programControlDiscovery: true, programRelationLearning: true, extendedRootedMarkSupport: true },
+    { currentProgramAccess: true, programControlDiscovery: true, programRelationLearning: true, extendedRootedMarkSupport: true,
+      composedLabeledPredicates: true },
     (configuration.window_constraints as R).radial_port_composition, (configuration.window_constraints as R).rooted_quota_composition,
     (configuration.window_constraints as R).product_panel_composition, (configuration.window_constraints as R).labeled_sequence_composition);
   const policy = loaded.common as R;
@@ -960,7 +1045,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     animated_contact: new AnimatedContact(policy.animated_contact_question),
   };
   const supports = new SupportNavigation(supportChildren, policy);
-  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, recall, supports, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
+  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, reduction, recall, supports, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
   const registeredSubquestions = (order: readonly string[], registered: Record<string, NativeFamily>): string[] =>
     order.flatMap(question => registered[question] ? [registered[question].id] : []);
   // The cell, occurrence and program source entries share one acquired journal, but
@@ -985,7 +1070,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     scored_local_rewrite: ['scored_local_rewrite', ...(visual && visualContinuation ? [visual.id] : [])],
     factored_material_return: configuration.factored_material_return.ordered_subquestions.flatMap(question => {
       const registered: Record<string, string> = { factored_material_return: 'factored_material_return', conditional_transit: 'conditional_transit',
-        conserved_band_transfer: band.id, ordered_support_transfer: ordered.id };
+        conserved_band_transfer: band.id, supported_ternary_reduction: reduction.id, ordered_support_transfer: ordered.id };
       return registered[question] ? [registered[question]!] : supportChildren[question] ? [supportChildren[question]!.id] : [];
     }),
     returned_branch_contrast: ['returned_branch_contrast'],

@@ -1,0 +1,282 @@
+{
+  "schema": "logos-engine.v45.regression-plan.v1",
+  "status": "completed",
+  "preparedAt": "2026-11-08T19:51:51.115532+00:00",
+  "maxConcurrentCampaigns": 2,
+  "nativeSourceManifestPath": "docs/migration/native-campaigns-v45/source-manifest.json",
+  "nativeSourceManifestDigest": "1278235f269085c057e4dfea619c5a65587bfd90998505858caeef067319640c",
+  "nativeSourceFiles": 149,
+  "harnessFileSha256": {
+    "scripts/run-v44-campaign.mjs": "70743bb539013c1d387149b613944ba09d053e86fd2c0808d9f6d0632ba90de3",
+    "scripts/compare-v44-regressions.mjs": "b1014b99913e06979420a106ed1957131753a0c68a9bb60835c54cbd699aa1b5",
+    "tests/helpers/v6-live-game-campaign.ts": "e2fa1d4fa51b5f57b3490b7b30ddfa400da154134d6fc5fd5c7075b40f5f4855"
+  },
+  "runs": [
+    {
+      "game": "MEMO",
+      "targetLevels": 3,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v44/memo-three-levels.json",
+        "sha256": "341485d78db051e76d71bbd2cf5792059797742f435c7989d372ca17db3ed28d"
+      },
+      "expectedCommands": 30,
+      "expectedCompletePublicPackets": 31,
+      "expectedPrefixes": 30,
+      "report": "docs/migration/native-campaigns-v45/memo-three-levels.json",
+      "comparison": "docs/migration/native-campaigns-v45/memo-comparison.json",
+      "command": [
+        "node",
+        "scripts/run-v44-campaign.mjs",
+        "MEMO",
+        "3",
+        "docs/migration/native-campaigns-v45/memo-three-levels.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v44-regressions.mjs",
+        "docs/migration/native-campaigns-v44/memo-three-levels.json",
+        "docs/migration/native-campaigns-v45/memo-three-levels.json",
+        "docs/migration/native-campaigns-v45/memo-comparison.json"
+      ]
+    },
+    {
+      "game": "TICT",
+      "targetLevels": 6,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v44/tict-six-levels.json",
+        "sha256": "f09653cdd1bcb82314d7684f7b5509135bb00351074aba39f5bef4404d4998b6"
+      },
+      "expectedCommands": 55,
+      "expectedCompletePublicPackets": 56,
+      "expectedPrefixes": 55,
+      "report": "docs/migration/native-campaigns-v45/tict-six-levels.json",
+      "comparison": "docs/migration/native-campaigns-v45/tict-comparison.json",
+      "command": [
+        "node",
+        "scripts/run-v44-campaign.mjs",
+        "TICT",
+        "6",
+        "docs/migration/native-campaigns-v45/tict-six-levels.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v44-regressions.mjs",
+        "docs/migration/native-campaigns-v44/tict-six-levels.json",
+        "docs/migration/native-campaigns-v45/tict-six-levels.json",
+        "docs/migration/native-campaigns-v45/tict-comparison.json"
+      ]
+    },
+    {
+      "game": "HANO",
+      "targetLevels": 4,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v44/hano-four-levels.json",
+        "sha256": "f7239fe3b866589dbb287e3a4ecd1b896b567428b9cbbbaa296ba6463b3cac86"
+      },
+      "expectedCommands": 60,
+      "expectedCompletePublicPackets": 61,
+      "expectedPrefixes": 30,
+      "report": "docs/migration/native-campaigns-v45/hano-four-levels.json",
+      "comparison": "docs/migration/native-campaigns-v45/hano-comparison.json",
+      "command": [
+        "node",
+        "scripts/run-v44-campaign.mjs",
+        "HANO",
+        "4",
+        "docs/migration/native-campaigns-v45/hano-four-levels.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v44-regressions.mjs",
+        "docs/migration/native-campaigns-v44/hano-four-levels.json",
+        "docs/migration/native-campaigns-v45/hano-four-levels.json",
+        "docs/migration/native-campaigns-v45/hano-comparison.json"
+      ]
+    },
+    {
+      "game": "ELAS",
+      "targetLevels": 3,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v44/elas-three-levels.json",
+        "sha256": "e8655e29d9407a139aa64a2a019133b67e7ecab6aaf3b58fa403ba7ffee094ef"
+      },
+      "expectedCommands": 33,
+      "expectedCompletePublicPackets": 34,
+      "expectedPrefixes": 9,
+      "report": "docs/migration/native-campaigns-v45/elas-three-levels.json",
+      "comparison": "docs/migration/native-campaigns-v45/elas-comparison.json",
+      "command": [
+        "node",
+        "scripts/run-v44-campaign.mjs",
+        "ELAS",
+        "3",
+        "docs/migration/native-campaigns-v45/elas-three-levels.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v44-regressions.mjs",
+        "docs/migration/native-campaigns-v44/elas-three-levels.json",
+        "docs/migration/native-campaigns-v45/elas-three-levels.json",
+        "docs/migration/native-campaigns-v45/elas-comparison.json"
+      ]
+    },
+    {
+      "game": "TU93",
+      "targetLevels": 3,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v44/tu93-three-levels.json",
+        "sha256": "edc7e63b10364934ee3837c7f26338fc15c14aa7d0d1815e189b459c4a9168de"
+      },
+      "expectedCommands": 67,
+      "expectedCompletePublicPackets": 68,
+      "expectedPrefixes": 25,
+      "report": "docs/migration/native-campaigns-v45/tu93-three-levels.json",
+      "comparison": "docs/migration/native-campaigns-v45/tu93-comparison.json",
+      "command": [
+        "node",
+        "scripts/run-v44-campaign.mjs",
+        "TU93",
+        "3",
+        "docs/migration/native-campaigns-v45/tu93-three-levels.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v44-regressions.mjs",
+        "docs/migration/native-campaigns-v44/tu93-three-levels.json",
+        "docs/migration/native-campaigns-v45/tu93-three-levels.json",
+        "docs/migration/native-campaigns-v45/tu93-comparison.json"
+      ]
+    },
+    {
+      "game": "STCK",
+      "targetLevels": 3,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v44/stck-three-levels.json",
+        "sha256": "e0bb1671149768c74e9dcdfb7dd7d5af9074f2d6fcfe25625e352e3a7a033a9a"
+      },
+      "expectedCommands": 35,
+      "expectedCompletePublicPackets": 36,
+      "expectedPrefixes": 15,
+      "report": "docs/migration/native-campaigns-v45/stck-three-levels.json",
+      "comparison": "docs/migration/native-campaigns-v45/stck-comparison.json",
+      "command": [
+        "node",
+        "scripts/run-v44-campaign.mjs",
+        "STCK",
+        "3",
+        "docs/migration/native-campaigns-v45/stck-three-levels.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v44-regressions.mjs",
+        "docs/migration/native-campaigns-v44/stck-three-levels.json",
+        "docs/migration/native-campaigns-v45/stck-three-levels.json",
+        "docs/migration/native-campaigns-v45/stck-comparison.json"
+      ]
+    },
+    {
+      "game": "PIPE",
+      "targetLevels": 3,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v44/pipe-three-levels.json",
+        "sha256": "47d8c6be646319b85fa03b5240af2ddec4a68f5e3fa7586ddb822dd59904862f"
+      },
+      "expectedCommands": 23,
+      "expectedCompletePublicPackets": 24,
+      "expectedPrefixes": 20,
+      "report": "docs/migration/native-campaigns-v45/pipe-three-levels.json",
+      "comparison": "docs/migration/native-campaigns-v45/pipe-comparison.json",
+      "command": [
+        "node",
+        "scripts/run-v44-campaign.mjs",
+        "PIPE",
+        "3",
+        "docs/migration/native-campaigns-v45/pipe-three-levels.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v44-regressions.mjs",
+        "docs/migration/native-campaigns-v44/pipe-three-levels.json",
+        "docs/migration/native-campaigns-v45/pipe-three-levels.json",
+        "docs/migration/native-campaigns-v45/pipe-comparison.json"
+      ]
+    },
+    {
+      "game": "COMB",
+      "targetLevels": 6,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v44/comb-six-levels.json",
+        "sha256": "215d597e8dcf18fbffdb021473f11cb57da5e6dc4894d748cd8f8a04dcf9838d"
+      },
+      "expectedCommands": 104,
+      "expectedCompletePublicPackets": 105,
+      "expectedPrefixes": 45,
+      "report": "docs/migration/native-campaigns-v45/comb-six-levels.json",
+      "comparison": "docs/migration/native-campaigns-v45/comb-comparison.json",
+      "command": [
+        "node",
+        "scripts/run-v44-campaign.mjs",
+        "COMB",
+        "6",
+        "docs/migration/native-campaigns-v45/comb-six-levels.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v44-regressions.mjs",
+        "docs/migration/native-campaigns-v44/comb-six-levels.json",
+        "docs/migration/native-campaigns-v45/comb-six-levels.json",
+        "docs/migration/native-campaigns-v45/comb-comparison.json"
+      ]
+    },
+    {
+      "game": "THER",
+      "targetLevels": 6,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v44/ther-six-levels.json",
+        "sha256": "e0e0b6fa3e57d23db864f2918ded874246d51f1f9bf43e39eb081c056f42f332"
+      },
+      "expectedCommands": 26,
+      "expectedCompletePublicPackets": 27,
+      "expectedPrefixes": 8,
+      "report": "docs/migration/native-campaigns-v45/ther-six-levels.json",
+      "comparison": "docs/migration/native-campaigns-v45/ther-comparison.json",
+      "command": [
+        "node",
+        "scripts/run-v44-campaign.mjs",
+        "THER",
+        "6",
+        "docs/migration/native-campaigns-v45/ther-six-levels.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v44-regressions.mjs",
+        "docs/migration/native-campaigns-v44/ther-six-levels.json",
+        "docs/migration/native-campaigns-v45/ther-six-levels.json",
+        "docs/migration/native-campaigns-v45/ther-comparison.json"
+      ]
+    }
+  ],
+  "qualification": "Nine real cold-memory native campaigns, no new full raster trace requested. Existing comparator retains 13 checks per game. Timing, graph-chain digest and session-derived IDs are excluded according to that comparator.",
+  "preparationRevisions": [
+    {
+      "preparedAt": "2026-11-08T19:35:05.281487+00:00",
+      "nativeSourceManifestDigest": "2819ec88e8c6b9c00c2ff04b9086dd7958d7cfdffef93c5a7edad1f2e16c789f",
+      "nativeSourceFiles": 148,
+      "campaignsStarted": 0,
+      "reason": "Replaced by final native acquired-continuation freeze before any regression launch."
+    }
+  ],
+  "launchedAt": "2026-11-08T19:55:09.961831+00:00",
+  "campaignsStartedBeforeAuthorization": 0,
+  "executionReceiptPath": "docs/migration/native-campaigns-v45/regression-verification.json",
+  "launchPrerequisite": {
+    "path": "docs/migration/native-campaigns-v45/lf52-three-levels.json",
+    "sha256": "555181d73960aefa6dddce778adddd6f0ce34c2d723f149158fb81e50182b7ca",
+    "status": "passed",
+    "sourceDigest": "1278235f269085c057e4dfea619c5a65587bfd90998505858caeef067319640c",
+    "fileCount": 149
+  },
+  "completedAt": "2026-11-08T20:01:12.749214+00:00",
+  "completedCampaigns": 9,
+  "executionPassed": true
+}

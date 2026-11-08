@@ -319,7 +319,7 @@ test('the revalidation question still requires the exact current frame and avail
   assert.deepEqual(family.state(), retained, 'Neither admission nor refusal acquires a current method');
 });
 
-test('the product, labeled, radial and rooted entries preserve declared order with exactly 35 of 76 source entries connected', async () => {
+test('the source entries including labeled and supported reduction preserve declared order with exactly 36 of 76 connected', async () => {
   const runtime = await createNativeV6Runtime(declarations, { now: () => 0 });
   const coverage = runtime.snapshot().coverage as R, groups = coverage.sourceGroups as R[];
   const configuration = declarations.strategy.declarations[0]!.configuration as R;
@@ -341,6 +341,7 @@ test('the product, labeled, radial and rooted entries preserve declared order wi
     multiscale_constraints: 'window_constraints', surface_rewrite: 'surface_program', learned_code_program: 'code_program',
     typed_word_interface: 'word_interface', rigid_port_assembly: 'port_assembly',
     controlled_constellation_cover: 'constellation_cover', conserved_band_transfer: 'band_transfer',
+    supported_ternary_reduction: 'reduction_transport',
   };
   const lists: [string, string[]][] = [
     ['goal_access', configuration.goal_access_subquestions],
@@ -357,8 +358,8 @@ test('the product, labeled, radial and rooted entries preserve declared order wi
     });
     return [connected.length, declared.length];
   });
-  assert.deepEqual(counts, [[8, 12], [10, 21], [8, 10], [9, 33]]);
-  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 35);
+  assert.deepEqual(counts, [[8, 12], [10, 21], [8, 10], [10, 33]]);
+  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 36);
   assert.equal(counts.reduce((sum, count) => sum + count[1]!, 0), 76);
   assert.equal(coverage.fullV6Parity, false);
 });

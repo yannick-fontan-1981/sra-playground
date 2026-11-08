@@ -11,16 +11,46 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v44):** the native common caller completes
-CATL's first five levels in **40 actions, eight per level**, through one cold
-continuous session and 40 acquired prefixes. The first three levels use
-24 actions. The [v44 report](v44-labeled-sequences.md) records the transfer of
-finite labeled-query agreement, 35 training-feature cache reuses, exact
-original-component trajectory parity and actual Kernel/WHY-ACT integration.
-The official state remains `NOT_FINISHED`. At the sixth-level public packet,
-the unchanged source/native components both refute all 80 atomic/complement
-roots against the 20 measured examples. A richer bounded grammar remains a
-future native extension; no complete CATL victory is claimed.
+**Current integrated milestone (v45):** the native common caller completes
+all six CATL levels with official **`WIN` in 48 actions, eight per level**,
+through one cold continuous session and 48 acquired prefixes. The first
+three levels use 24 actions. The [v45 report](v45-composed-predicates-and-reduction.md)
+records a generic native AND/OR extension activated only after a complete
+atomic contradiction. At level 6, all 6,400 roots of the declared one-layer
+language are examined, two expressions survive, and their answers are
+re-evaluated for each current query. The campaign reuses training features
+42 times and its complete composed fit seven times. Actual Kernel acquisition,
+current-point guards and WHY/ACT remain required for each submitted action.
+
+The unchanged Python evaluator independently checks the authored composite
+grammar in complete batches; this establishes bounded evaluation agreement,
+not that the original Python caller generates those composites. The source
+helper's atomic grammar and the source-compatible v44 path remain separate.
+The same v45 work connects `supported_ternary_reduction`, with 106 passing
+ReductionTransport component checks. **The final native common-caller campaign
+completes LF52's first three levels in 104 actions (8, 40, 56), through one cold
+session and 71 acquired prefixes.** It stops at its declared target on entry
+to level 4 with `NOT_FINISHED`. An explicit native coordination extension
+prefers a currently guarded continuation backed by acquired official success
+over a wholly unacquired exploration. The first attempt's Cell selection
+collision remains recorded separately. The unchanged isolated Reduction
+component uses 102 actions; the final native common caller also performs two
+observed-effect access actions. These results do not establish complete
+trajectory or full original-caller selection parity.
+
+The final 149-source snapshot also passes [nine real regression campaigns](native-campaigns-v45/regression-summary.json),
+with 117 successful comparison checks over 433 commands, 442 complete public
+packets and 237 prefixes from v44. Source entry coverage remains 47.4%; these
+repeated successes do not add source entries or close the complete-migration
+gates.
+
+**Previous integrated milestone (v44):** CATL's first five levels completed
+in 40 actions, with 35 training-feature cache reuses and exact original-component
+trajectory parity. The [v44 report](v44-labeled-sequences.md) preserves that
+source-compatible result and the sixth-level diagnostic: all 80 atomic/complement
+roots were refuted by the 20 measured examples. The v45 extension addresses
+that finite-language limitation without replacing the measured examples with
+a game-specific answer.
 
 **Previous integrated milestone (v43):** the native common caller completes all
 six THER levels with official **`WIN` in 26 actions (4, 3, 4, 4, 5, 6)**,
@@ -52,16 +82,25 @@ auxiliary support and native checkpoint report](v35-coupled-support.md), [the v3
 response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 35 of 76
-explicit DRM subquestions are connected (46.1%) in implementation
-`logos-engine.typescript.v6.native-migration/0.14.0`. This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 36 of 76
+explicit DRM subquestions are connected (47.4%) in implementation
+`logos-engine.typescript.v6.native-migration/0.15.0`. This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
-The v44 labeled-sequence connection adds one source entry. The v43 product-panel connection adds one source entry; its native mark-support extension adds none. The v42 rooted-quota connection adds one source entry; its conditional relation and return-preparation extensions add none. The v41 radial-port connection added one source entry; the native control-discovery
+The v45 reduction-transport connection adds one source entry; its bounded
+predicate-composition and acquired-continuation coordination extensions add
+none. The v44 labeled-sequence connection
+adds one source entry. The v43 product-panel connection adds one source entry; its native mark-support extension adds none. The v42 rooted-quota connection adds one source entry; its conditional relation and return-preparation extensions add none. The v41 radial-port connection added one source entry; the native control-discovery
 and refusal-scope extensions add none. The v40 changes are explicit native evolutions: they add no Python module to
 the transferred inventory and no source entry. The v39 observed-program
 composition added one source entry, following the v38 cell-composition entry;
 the v37 performance step added none. All six conditions for a complete
 migration remain false.
+
+The next source transfer candidate is **ZIPP / `trace_field_composition`**.
+Its public initial morphology matches the original trace-field observer.
+Source-component checks and a fresh common-caller campaign are still required
+before claiming a level completion. LF52's completed native campaign and its
+explicit coordination extension remain separate from that next transfer.
 
 **Previous v42 result:** THER completes levels 1–4 in **4, 3, 4 and 4 actions**,
 15 total, six sealed prefixes and one retained session. The first two real

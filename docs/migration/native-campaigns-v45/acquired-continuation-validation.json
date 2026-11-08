@@ -1,0 +1,22 @@
+{
+  "schema": "logos-engine.v45.acquired-continuation-witness-validation.v1",
+  "createdAt": "2026-11-08T19:51:26.630753+00:00",
+  "command": [
+    "node",
+    "--test",
+    "tests/v6-acquired-continuation.test.ts"
+  ],
+  "exitCode": 0,
+  "tests": 49,
+  "passed": 49,
+  "failed": 0,
+  "durationMs": 362.976057,
+  "sourceReductionUnchanged": true,
+  "artifacts": {
+    "src/logos-engine/v6-acquired-continuation.ts": "70fd64db28d802446e74a3af5439c6ff1ea5afcc66f084d96fdb3ed93bf085a8",
+    "src/logos-engine/v6-reduction-transport.ts": "192c0f4510b0c436d29237ff359220285e76128902121841b7cfb62735e4ae7f",
+    "tests/v6-acquired-continuation.test.ts": "75a1bc0f8dd3dbbd38b2ce5c863b9e6339dc7bcd46c3302073f37dbb42e53cf4",
+    "docs/migration/native-campaigns-v45/logs/acquired-continuation-tests.log.gz": "cc04552d3fc1990e9b2a6408d6031540eb70fa4adfa106d795f472503fcfd5e9"
+  },
+  "scope": "Native opt-in selection witnesses only. Source Reduction unchanged. Tests distinguish fresh exploration, retained official progress, current guarded continuation and unknown calibration; physical authorization stays with the caller."
+}

@@ -1,0 +1,20 @@
+Browser tab: 1, Title: "SRA Playground · CATL — Symbolic Reasoning Agent", URL: "http://127.0.0.1:4173/?game=CATL&level=6".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 197-198, 226-230
++					226 container canvas-stage
++						227 container Description: CATL game board. Use the arrow keys, Space, or click to interact., ID: game-canvas
++							228 text Your browser must support canvas to play.
++						229 container win-overlay
++							230 heading VICTORY, Value: 3, ID: win-title
++								231 text VICTORY
++							232 button Restart from level 1, ID: win-continue
++								233 text Restart from level 1
++						234 text The game reports WIN.
+~						208 button (disabled) Pause, ID: agent-pause
++							235 text 48
++							236 text 6
++							237 text 48
++						238 text public_occurrence_recall
+~						218 button New reasoning session, ID: agent-new-session
++					239 text VICTORY
+The focused UI element is 1 AXWebArea SRA Playground · CATL — Symbolic Reasoning Agent, URL: 127.0.0.1:4173/?game=CATL&level=6
