@@ -259,7 +259,7 @@ test('contact scope acquisition checks every returned image and the public proto
   const initial = { ...recordedPacket(36), level: 1, levels_completed: 0, step_index: 0 };
   for (const variant of [
     { id: 'unchanged public return', expected: 'stationary_unlearned_invitation', change: (_packet: R) => {} },
-    { id: 'different intermediate image despite an unchanged final image', expected: 'outside_stationary_invitation_scope', change: (packet: R) => {
+    { id: 'different intermediate image despite an unchanged final image', expected: 'transient_returned_unlearned_invitation', change: (packet: R) => {
       const intermediate = copy(packet.frame_rows); intermediate[0][0] = (intermediate[0][0] + 1) % 256;
       packet.frame_packet = [intermediate, copy(packet.frame_rows)];
     } },
@@ -394,7 +394,8 @@ test('cold common acquisition scopes a contact refusal and measures a conditiona
       return original(...args);
     });
     assert.equal(await refusalScoped(), false);
-    assert.deepEqual(calls, ['product_panel_composition', 'labeled_sequence_composition', 'cell_patch_composition']);
+    const order: string[] = internal.groups.find((group: R) => group.id === 'window_constraints').entryPoints;
+    assert.deepEqual(calls, order.slice(0, order.indexOf('cell_patch_composition') + 1));
   });
   assert.equal(runtime.inspectKnowledge(), graphBefore, 'Counterfactual refusal checks do not alter the Kernel graph');
   assert.deepEqual(family.state(), acquired, 'Counterfactual arbitration acquires no model or binding');

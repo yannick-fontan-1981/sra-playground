@@ -18,6 +18,13 @@ const ROOT = new URL('../../', import.meta.url);
 const COMPONENTS = ['goal', 'frontier', 'view', 'attention', 'points', 'displays', 'controls', 'counters'];
 const PUBLIC_KEYS = ['availableActionIds', 'frame', 'frames', 'level', 'levelsCompleted', 'state', 'stepIndex'];
 const hash = (data: string | Uint8Array): string => createHash('sha256').update(data).digest('hex');
+/** JSON otherwise turns -0 into 0; preserve the exact observed numeric payload. */
+function negativeZeroPaths(value: unknown, path: (string | number)[] = []): (string | number)[][] {
+  if (typeof value === 'number') return Object.is(value, -0) ? [path] : [];
+  if (Array.isArray(value)) return value.flatMap((item, index) => negativeZeroPaths(item, [...path, index]));
+  if (value && typeof value === 'object') return Object.entries(value).flatMap(([key, item]) => negativeZeroPaths(item, [...path, key]));
+  return [];
+}
 export interface NativeGameCampaignOptions {
   gameCode: string;
   targetLevels: number;
@@ -162,6 +169,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const queuedModels = (series.events as R[]).filter(event => event.kind === 'observed_queue_field_model');
           const catalogueEvents = (series.events as R[]).filter(event =>
             ['catalogue_observation', 'catalogue_response', 'catalogue_field_input_observed'].includes(event.kind));
+          const materialEvents = (series.events as R[]).filter(event =>
+            ['typed_carrier_response', 'typed_material_flow', 'typed_pose_scope', 'typed_pose_model', 'typed_pose_response'].includes(event.kind));
+          const previousMaterialCount = report.prefixes.at(-1)?.sharedSeries.typedMaterialEventCount ?? 0;
           const productStates = (series.events as R[]).filter(event => event.kind === 'observed_factor_product');
           const labeledSubmissions = (series.events as R[]).filter(event => event.kind === 'labeled_sequence_submission');
           const traceExtensions = (series.events as R[]).filter(event => event.kind === 'observed_trace_extension');
@@ -200,6 +210,11 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             ...(evidence.proposal.occluded_catalogue_plan
               ? { occludedCatalogue: { plan: evidence.proposal.occluded_catalogue_plan, proposal: evidence.proposal,
                     stateNode: 'family_state:public_occurrence_recall' } } : {}),
+            ...(['typed_carrier_plan', 'material_flow_plan', 'material_pose_plan'].some(key => evidence.proposal[key])
+              ? { typedMaterial: { proposal: evidence.proposal,
+                    negativeZeroPaths: negativeZeroPaths(evidence.proposal),
+                    stateNode: 'family_state:public_occurrence_recall',
+                    numericScope: 'Finite native numerical identities; source and native derived hashes are verified independently. Float JSON spelling equality with Python is not asserted.' } } : {}),
             ...(evidence.proposal.labeled_sequence_plan
               ? { labeledSequenceLabel: evidence.proposal.labeled_sequence_plan.label,
                   labeledSequenceQuery: evidence.proposal.labeled_sequence_plan.scene.query.words[0].values,
@@ -252,6 +267,12 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               catalogueEventCount: catalogueEvents.length,
               catalogueLatestEvent: catalogueEvents.at(-1) ?? null,
               catalogueAcquiredEvents: catalogueEvents.filter(event => evidence.transitions.some((transition: R) => transition.before === event.evidence?.[0])),
+              typedMaterialEventCount: materialEvents.length,
+              typedMaterialLatestEvent: materialEvents.at(-1) ?? null,
+              // Model events can carry cumulative evidence. The newly appended
+              // journal range, rather than its oldest witness, defines this prefix.
+              typedMaterialAcquiredEvents: materialEvents.slice(previousMaterialCount),
+              typedMaterialAcquiredNegativeZeroPaths: negativeZeroPaths(materialEvents.slice(previousMaterialCount)),
               productPanelStateCount: productStates.length,
               productPanelLatestState: productStates.at(-1) ?? null,
               labeledSequenceSubmissionCount: labeledSubmissions.length,

@@ -28,7 +28,25 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **The v49 milestone completes
+  level**; opening the tab does not move the game. **The v50 milestone completes
+  LIFE's first three levels in 49 actions (15, 15 and 19)** through one cold
+  native common session, 47 prefixes and 49 actual Kernel acquisitions. The
+  connected `typed_material_flow` acquires marked supports, replacements,
+  typed descendants, request associations and conditional pose changes from
+  real public returns. Its 68 own events join the existing common memory.
+  Three actual contact invitations remain in the trajectory. A generic native
+  coordination extension bounds their unresolved transient-return refusal
+  using complete public packets and a current independent relation or acquired
+  context; ordinary guards and WHY/ACT still authorize every action. The
+  independent source component uses 46 actions, while replay on actual native
+  returns verifies all 44 material proposals, 68 own events and 49 own states
+  under explicit numeric-identity qualifications. The target stops on entry
+  to level 4 with `NOT_FINISHED`, without a complete LIFE victory claim.
+  The compact panel and stable board layout are preserved. A browser run
+  confirms the same 49 actions and three levels; seven desktop layout samples
+  show no position or dimension change, with the board column held at 442 px.
+  See the [v50 report](docs/migration/v50-typed-material-and-returned-inquiries.md).
+  **The previous v49 milestone completes
   GRIL's first three levels in 19 actions (5, 5 and 9)** through one cold
   native common session, 19 prefixes and 19 actual Kernel acquisitions. The
   connected `occluded_catalogue_composition` preserves unknown pixels,
@@ -122,14 +140,16 @@ Fontan's **Symbolic Reasoning Agent** research.
   **Previous v38 milestone: TICT completes all six levels with official `WIN`
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
-  The current entry audit connects **40 of 76 explicit DRM subquestions
-  (52.6%)** in implementation `logos-engine.typescript.v6.native-migration/0.19.0`,
-  with the newly connected `occluded_catalogue_composition` entry. Its acquired
-  view fallback joins a direct common group outside that denominator. The
-  next step is to transfer `typed_material_flow`, including acquisition of
-  typed selections and replacements, then test a cold three-level LIFE
-  campaign. LIFE's initial public view is a candidate-selection result,
-  not a demonstrated level completion.
+  The current entry audit connects **41 of 76 explicit DRM subquestions
+  (53.9%)** in implementation `logos-engine.typescript.v6.native-migration/0.20.0`,
+  with the newly connected `typed_material_flow` entry. Native coordination
+  extensions add no source entry to this connection metric. The next step is
+  to transfer `field_service_composition`, including acquired persistent
+  fields, restoration, conditional service and current geometric rebinding,
+  then test a cold three-level VALV campaign. The read-only selection examines
+  100 retained initial public views; VALV alone combines the admitted compact
+  motif, reflected pairs and a unique same-extent distinct enclosure.
+  This identifies a candidate, not an executed action or completed VALV level.
   Complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These

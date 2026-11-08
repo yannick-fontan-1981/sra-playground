@@ -11,7 +11,50 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v49):** the native common Logos Engine caller
+**Current integrated milestone (v50):** the native common Logos Engine caller
+completes **LIFE's first three levels in 49 actions (15, 15, 19)** through one
+cold continuous session, 47 prefixes, 49 actual Kernel acquisitions and two
+natural boundary replays. The [actual campaign](native-campaigns-v50/life-three-levels-final.json)
+stops at its declared target on entry to level 4 with `NOT_FINISHED`. Its
+50 complete public packets contain 238 frames. The connected
+`typed_material_flow` measures marked supports, acquires their replacements
+and descendants, retains observed request associations and tests pose effects
+before executing guarded conditional prefixes. Its 68 own events share the
+existing `public_occurrence_recall` owner through three retained digest layers.
+
+The [first native attempt](native-campaigns-v50/life-three-levels.json) is
+preserved: one contact invitation, four returned frames, zero completed levels
+and a global refusal despite a still-current material inquiry. Twelve pixels
+change transiently before the final image is restored. A declared native
+coordination extension now corroborates the complete public return and the
+actual Kernel transition. A cold material inquiry needs a repeated current
+relation whose supports avoid the invitation point and all transient pixels;
+later inquiries need real acquired event/model references. No hidden-state
+equivalence or understood contact effect is inferred, and ordinary current
+guards, preservation and WHY/ACT remain necessary.
+
+The final trajectory retains three contact invitations, one at each level,
+and 44 material prefixes. The unchanged isolated source provider takes
+46 actions (14, 14, 18) and 44 prefixes. Its trajectory diverges from the full
+native caller at the first action. The
+[independent comparison](native-campaigns-v50/life-original-component-comparison.json)
+replays all 49 actual native returns and verifies 44 complete material
+envelopes, 68 own events and 49 reconstructed own states, with zero numeric
+tolerance under an explicit identity projection. It independently recomputes
+328 identity recipes and restores 14 signed-zero paths. Python integer/float
+JSON spelling and native Float64 identity are not asserted equal. Controlled
+carrier and pose cases also show that lexical hash tie-breaking may select
+different alternatives; no such tie occurs in this actual LIFE trace.
+Complete original-caller parity and complete inherited digest equality remain
+outside this claim. The [v50 report](v50-typed-material-and-returned-inquiries.md)
+details the source transfer, native extension, acquired graph and limits.
+The [desktop browser verification](native-campaigns-v50/life-browser-verification.json)
+also completes three levels in 49 actions and 47 plans. Seven sampled states
+retain the closed inspection, 442 px board column, 384 × 384 px canvas and
+98 px status height, with zero position or dimension change. This is a
+sampled normal-viewport check, not a per-frame, mobile or fullscreen claim.
+
+**Previous integrated milestone (v49):** the native common Logos Engine caller
 completes **GRIL's first three levels in 19 actions (5, 5, 9)**, through one
 cold continuous session, 19 acquired prefixes and two natural boundary
 replays. The [actual campaign](native-campaigns-v49/gril-three-levels.json)
@@ -215,10 +258,13 @@ auxiliary support and native checkpoint report](v35-coupled-support.md), [the v3
 response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 40 of 76
-explicit DRM subquestions are connected (52.6%) in implementation
-`logos-engine.typescript.v6.native-migration/0.19.0`. This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 41 of 76
+explicit DRM subquestions are connected (53.9%) in implementation
+`logos-engine.typescript.v6.native-migration/0.20.0`. This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
+The v50 typed-material connection adds one source entry. The explicit native
+coordination of unresolved transient returns adds none; its evidence,
+disjointness and current inquiry guards are evaluated separately.
 The v49 occluded-catalogue connection adds one source entry. Its acquired-view
 fallback also connects the existing direct `view` group; direct groups remain
 outside this four-list denominator.
@@ -239,16 +285,17 @@ composition added one source entry, following the v38 cell-composition entry;
 the v37 performance step added none. All six conditions for a complete
 migration remain false.
 
-The next step is **`typed_material_flow`**, including acquisition of selection,
-material replacement, typed descendants and current request associations,
-followed by a cold LIFE campaign targeting its first three levels. A bounded
-read-only selection on the retained 100 public initial screens finds LIFE as
-the sole view accepted by the original typed-carrier observer, with four
-measured supports. This establishes no executed action, solved level or game
-victory. The [candidate-selection note](native-campaigns-v49/candidate-selection.md)
-records the exact source functions, retained measurements and acquisition
-questions. No first selection, production, delivery or rotation law starts
-acquired.
+The next step is **`field_service_composition`**, including acquisition of
+persistent fields, actual restoration, conditional service and current
+geometric rebinding, followed by a cold VALV campaign targeting its first
+three levels. A bounded read-only selection on 100 retained public initial
+screens finds 11 admitted compact motifs, 22 views with reflected pairs,
+two combining both, and VALV alone also presenting a unique same-extent
+distinct enclosure. The [candidate-selection note](native-campaigns-v50/candidate-selection.md)
+and its reproducible script retain these measurements and source hashes.
+No game host, proposer, acquisition routine or solver runs during selection.
+The initial geometry establishes neither persistent fields nor a service
+relation, and demonstrates no executed action, solved level or VALV victory.
 
 **Previous v42 result:** THER completes levels 1–4 in **4, 3, 4 and 4 actions**,
 15 total, six sealed prefixes and one retained session. The first two real

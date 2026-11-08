@@ -1,0 +1,66 @@
+{
+  "schema": "logos-engine.v50.initial-evidence-retention.v1",
+  "qualification": "The first actual native campaign failed after one action and zero completed levels. Its native source, report, full public trace, execution receipt, output and diagnostics remain unchanged. Corrected campaign evidence uses distinct final paths. An initial integration-test failure is retained separately and is not a passed gate.",
+  "preservedFiles": [
+    {
+      "path": "scripts/run-v50-campaign-proof.py",
+      "sha256": "dc003dffb71a5f39e2ef03e5f0de4f6d7f97692229e048f29c55f8366b05b5f5",
+      "bytes": 3540
+    },
+    {
+      "path": "scripts/probe-v50-cold-start-v49.mjs",
+      "sha256": "9566d4ba5851d42f15c52b4f43ac6694de684ce726d89b3d9485ebd1d845ddb1",
+      "bytes": 3851
+    },
+    {
+      "path": "scripts/diagnose-v50-material-cold-path.mjs",
+      "sha256": "1b1484e2cd60d2625716c092ff4eee2c596cb0cb7e234c9c9d82bd6a8b22a479",
+      "bytes": 8597
+    },
+    {
+      "path": "docs/migration/native-campaigns-v50/source-manifest.json",
+      "sha256": "46c2ae1eafd582c396f6c2a977fdd1401f8919f8381b5324b57cc35df816013c",
+      "bytes": 19598
+    },
+    {
+      "path": "docs/migration/native-campaigns-v50/cold-start-v49.json",
+      "sha256": "67cd65aa3e03db44d53d47b8a5e36df16abad9dd88a27a0ff8c429bc1dc7a41a",
+      "bytes": 149503
+    },
+    {
+      "path": "docs/migration/native-campaigns-v50/life-three-levels.json",
+      "sha256": "5bcbdf155270101a772ba6f3eec2ee990a2ffec7c15dfa32ff019a8e6443620d",
+      "bytes": 31749
+    },
+    {
+      "path": "docs/migration/native-campaigns-v50/life-public-trace.json.gz",
+      "sha256": "a015b0fe1bc9c7b7bcc4e8d7ec38bbc005fb8ba72f91f5f2156fc6576cd4a5ab",
+      "bytes": 1351
+    },
+    {
+      "path": "docs/migration/native-campaigns-v50/logs/execution-life.json",
+      "sha256": "6cbbee810605055eafa0d2e83e98e4612fea057949b315010a98f18adcdc19d6",
+      "bytes": 41392
+    },
+    {
+      "path": "docs/migration/native-campaigns-v50/logs/life-output.log.gz",
+      "sha256": "855066bca69149835a9fa22bf183ada755260878c9abad33c909d4cec2d81833",
+      "bytes": 1023
+    },
+    {
+      "path": "docs/migration/native-campaigns-v50/diagnostics/material-cold-path.json",
+      "sha256": "e39624a32931b87af6652d15f72c006955856a58317548a25a39e54c9c534a4d",
+      "bytes": 13651
+    },
+    {
+      "path": "docs/migration/native-campaigns-v50/diagnostics/native-source-at-first-campaign.tar.gz",
+      "sha256": "345ec6cd46f6b09809c3ea3a7a8155f96c9844217c95ac22e264dc365bceff47",
+      "bytes": 1273902
+    },
+    {
+      "path": "docs/migration/native-campaigns-v50/diagnostics/typed-material-kernel-first-run.log.gz",
+      "sha256": "8111d1211ab81d1a2cdb54db8c88269a5561276a02c461e057979fa128e12d04",
+      "bytes": 1245
+    }
+  ]
+}

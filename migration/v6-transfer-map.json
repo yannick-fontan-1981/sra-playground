@@ -2312,6 +2312,67 @@
         "tests/v6-occluded-catalogue-kernel.test.ts"
       ],
       "notes": "Bounded D layered catalogue projection, measured present/absent/unknown cells, persistent model comparison, unknown/refusal outcomes and node/time/geometry limits are transferred for exact safe-integer inputs used by the current catalogue builder. Full generic Pydantic/FrozenMap coercion and validation, arbitrary Python integer sizes and every inherited D transport contract are not asserted. Results remain descriptive and cannot authorize a primitive or establish a game-terminal law."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/typed_carrier_scene.py",
+        "agents/yf_arc3_v6/laya_proto/typed_material_observations.py",
+        "agents/yf_arc3_v6/laya_proto/typed_pose_observations.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-typed-material-observation.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/probe-v6-typed-material-original.py",
+        "scripts/export-v6-typed-material-reference.py",
+        "tests/fixtures/v6-typed-material-original-public.json.gz",
+        "tests/fixtures/v6-typed-material-reference.json.gz",
+        "tests/v6-typed-material-reference.test.ts",
+        "tests/v6-typed-material-kernel.test.ts"
+      ],
+      "notes": "Own public dense-carrier and typed-mark measurement, replacement comparison, descendant continuity, framed requests, novel controls and selected-scope pose observations are transferred. Only public raster structures and actual changes enter the calculation. Palette roles, selection, production, kinship and destination laws do not start acquired. Native finite-number identities intentionally differ from Python float JSON spelling; integer versus float spelling and signed-zero-derived identities are not asserted identical. Hash-based tie order can therefore differ for concentric carriers or equally oriented model choices; controlled cases document the actual choices rather than treating hash renaming as behavioral parity."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/typed_carrier_access.py",
+        "agents/yf_arc3_v6/laya_proto/typed_material_flow.py",
+        "agents/yf_arc3_v6/laya_proto/typed_pose_access.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-typed-material-access.ts",
+        "src/logos-engine/v6-typed-material-observation.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/probe-v6-typed-material-original.py",
+        "scripts/export-v6-typed-material-reference.py",
+        "tests/fixtures/v6-typed-material-original-public.json.gz",
+        "tests/fixtures/v6-typed-material-reference.json.gz",
+        "tests/v6-typed-material-reference.test.ts",
+        "tests/v6-typed-material-kernel.test.ts"
+      ],
+      "notes": "Own carrier, material-flow and pose layers acquire local marking, actual replacement and activation, typed occurrences and conditional request association. Consumption with a changed request or official boundary is required before retaining association; pose effect is unknown until a current selected-role experiment. Subsequent bounded prefixes preserve typed marks and exterior, and cancel on mismatch. Events rebuild three own digest layers after OccurrenceRecall and before Radial; Rooted short-circuit and catalogue-view ancestor projection are preserved. Numeric identity and lexical-hash tie qualifications are explicit. Full inherited Python memory and global caller parity are not asserted."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_typed_material_flow.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-typed-material-access.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/probe-v6-typed-material-original.py",
+        "scripts/export-v6-typed-material-reference.py",
+        "tests/fixtures/v6-typed-material-original-public.json.gz",
+        "tests/fixtures/v6-typed-material-reference.json.gz",
+        "tests/v6-typed-material-reference.test.ts",
+        "tests/v6-typed-material-kernel.test.ts"
+      ],
+      "notes": "The declared typed_material_flow source entry is connected after observed_program_composition and before radial_port_composition, using the existing shared occurrence owner. Current measured point support, first-frame and subsequent conditional-pose guards pass common WHY/ACT before physical execution. Acquisitions and immutable checkpoints retain five own event kinds; rejected journal restoration is atomic. This is an integrated native component, not a game-specific solver or complete original caller parity."
     }
   ],
   "scopeNotes": [
@@ -2350,7 +2411,9 @@
     "v47 connects linked_packet_composition as entry 38 of 76 (50.0%) in implementation 0.17.0. The bounded metric counts registered source entries equally; it is not full behavioral parity, code completion or game score. A separate generic trace support interpretation and immutable Linked emission receipts are declared native extensions and add no source entry. All six complete-migration gates remain false.",
     "The final v47 frozen 158-file native digest 2f8f5d8660716e44e81fa987d08264324f61838c81ba9e96b2e64f69c136d100 completes SELE first three levels in one cold continuous actual common-caller session, with 44 actions (8/10/26), 44 prefixes,44 acquired transitions and two natural-boundary replays. It stops at the declared target on entry to4 with NOT_FINISHED. A separate ZIPP target-six attempt completes five levels by action77 (8/15/15/15/24), then stops after one action in6 at78 with frontier_unknown. Its report remains failed for the declared six-level target; no full-game WIN is asserted. The first53 commands/54 complete public packets remain separately compared to v46; extension interpretation and actual return reconciliation are qualified in their own report.",
     "v48 connects queued_field_composition before product_panel_composition at its declared DRM position: 39 of 76 entries (51.3%) in native implementation 0.18.0. A separate native Kernel-correlated continuation extension requires a real acquired score increase bound to the exact provider entry and proposal kind. Source epoch-boundary labels alone cannot confer priority. Every current primitive still passes its guards and WHY/ACT. All six complete-migration gates remain false.",
-    "v49 connects occluded_catalogue_composition at its declared first window position and restores the source catalogue-view fallback after common ViewFrontier. The four-list connection metric becomes 40 of 76 (52.6%) in native implementation 0.19.0. The direct view fallback is outside that denominator. No new game-specific or cold-start coordination rule is added; actual common acquisitions supply initial effects. All six complete-migration gates remain false."
+    "v49 connects occluded_catalogue_composition at its declared first window position and restores the source catalogue-view fallback after common ViewFrontier. The four-list connection metric becomes 40 of 76 (52.6%) in native implementation 0.19.0. The direct view fallback is outside that denominator. No new game-specific or cold-start coordination rule is added; actual common acquisitions supply initial effects. All six complete-migration gates remain false.",
+    "v50 connects typed_material_flow at its declared window position, with three own carrier/material/pose memory layers in the existing common owner. The four-list connection metric becomes 41 of 76 (53.9%) in native implementation 0.20.0. Finite native numeric identities and lexical-hash tie differences are explicit; no complete Python numeric or full common-caller parity is claimed. Actual native LIFE results and any coordination extensions are reported separately. All six complete-migration gates remain false.",
+    "v50 also declares transient_returned_unlearned_contact_refusal_scope as a native coordination evolution, not original Python caller parity. It retains every public frame, final protocol, command and actual Kernel transition, distinguishing transient return from a stationary observation. The first non-null current window question remains in declared order. A cold typed relation must be remeasured and have supports disjoint from both the invitation point and every transient effect pixel. Subsequent questions require event-backed acquired context and current guards. Returning to the same public image does not establish hidden-state equivalence or an understood effect. The first actual native LIFE failure remains preserved separately from the corrected frozen campaign; all six complete-migration gates remain false."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,

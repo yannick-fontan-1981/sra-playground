@@ -1,0 +1,774 @@
+{
+  "schema": "logos-engine.v50.release-validation.v1",
+  "status": "passed",
+  "sourceDigest": "66529083d89d420f9d198e99c8639ee174f1d829380d0d71eb86432ad184a94f",
+  "nativeSourceFiles": 170,
+  "nativeSourceManifest": {
+    "path": "docs/migration/native-campaigns-v50/source-manifest-final.json",
+    "sha256": "8c91e8bcb81736e043145ea9905fe67671bb7a560be24261b9aa5fe86811116d",
+    "bytes": 19839
+  },
+  "initialFailedAttempt": {
+    "retentionContract": {
+      "path": "docs/migration/native-campaigns-v50/evidence-retention.json",
+      "sha256": "d7f4d3954fa0b5f3c25109c2af8aec77ba3110be41d94fd444a6bb1e54eeba6c",
+      "bytes": 2776
+    },
+    "preservedFiles": [
+      {
+        "path": "scripts/run-v50-campaign-proof.py",
+        "sha256": "dc003dffb71a5f39e2ef03e5f0de4f6d7f97692229e048f29c55f8366b05b5f5",
+        "bytes": 3540
+      },
+      {
+        "path": "scripts/probe-v50-cold-start-v49.mjs",
+        "sha256": "9566d4ba5851d42f15c52b4f43ac6694de684ce726d89b3d9485ebd1d845ddb1",
+        "bytes": 3851
+      },
+      {
+        "path": "scripts/diagnose-v50-material-cold-path.mjs",
+        "sha256": "1b1484e2cd60d2625716c092ff4eee2c596cb0cb7e234c9c9d82bd6a8b22a479",
+        "bytes": 8597
+      },
+      {
+        "path": "docs/migration/native-campaigns-v50/source-manifest.json",
+        "sha256": "46c2ae1eafd582c396f6c2a977fdd1401f8919f8381b5324b57cc35df816013c",
+        "bytes": 19598
+      },
+      {
+        "path": "docs/migration/native-campaigns-v50/cold-start-v49.json",
+        "sha256": "67cd65aa3e03db44d53d47b8a5e36df16abad9dd88a27a0ff8c429bc1dc7a41a",
+        "bytes": 149503
+      },
+      {
+        "path": "docs/migration/native-campaigns-v50/life-three-levels.json",
+        "sha256": "5bcbdf155270101a772ba6f3eec2ee990a2ffec7c15dfa32ff019a8e6443620d",
+        "bytes": 31749
+      },
+      {
+        "path": "docs/migration/native-campaigns-v50/life-public-trace.json.gz",
+        "sha256": "a015b0fe1bc9c7b7bcc4e8d7ec38bbc005fb8ba72f91f5f2156fc6576cd4a5ab",
+        "bytes": 1351
+      },
+      {
+        "path": "docs/migration/native-campaigns-v50/logs/execution-life.json",
+        "sha256": "6cbbee810605055eafa0d2e83e98e4612fea057949b315010a98f18adcdc19d6",
+        "bytes": 41392
+      },
+      {
+        "path": "docs/migration/native-campaigns-v50/logs/life-output.log.gz",
+        "sha256": "855066bca69149835a9fa22bf183ada755260878c9abad33c909d4cec2d81833",
+        "bytes": 1023
+      },
+      {
+        "path": "docs/migration/native-campaigns-v50/diagnostics/material-cold-path.json",
+        "sha256": "e39624a32931b87af6652d15f72c006955856a58317548a25a39e54c9c534a4d",
+        "bytes": 13651
+      },
+      {
+        "path": "docs/migration/native-campaigns-v50/diagnostics/native-source-at-first-campaign.tar.gz",
+        "sha256": "345ec6cd46f6b09809c3ea3a7a8155f96c9844217c95ac22e264dc365bceff47",
+        "bytes": 1273902
+      },
+      {
+        "path": "docs/migration/native-campaigns-v50/diagnostics/typed-material-kernel-first-run.log.gz",
+        "sha256": "8111d1211ab81d1a2cdb54db8c88269a5561276a02c461e057979fa128e12d04",
+        "bytes": 1245
+      }
+    ],
+    "sourceDigest": "e156fdd0bcf7b1aa81233be74a6c78b1dd0ac819f6a46bcd103e1622bf2d40f0",
+    "archivedNativeFiles": 168,
+    "actualActions": 1,
+    "levelsCompleted": 0,
+    "reason": "frontier_unknown",
+    "transientChangedPixelsByFrame": [
+      0,
+      12,
+      0,
+      0
+    ],
+    "qualification": "The initial live failure, complete public return, immutable native source snapshot and diagnostic are preserved at their original paths. They are not successful gates. Corrected evidence is stored separately; raster restoration never establishes hidden-state equality."
+  },
+  "newActualCampaign": {
+    "report": {
+      "path": "docs/migration/native-campaigns-v50/life-three-levels-final.json",
+      "sha256": "b704dde9b4e3347cabc252c6655dbf9dcd85e9027535d7b7d0c2d98ff68c28b8",
+      "bytes": 3271456
+    },
+    "trace": {
+      "path": "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz",
+      "sha256": "8c2e1b67af1c827d2a132c211d71b6e25158a5db1e9b236e4d0d92e912fe7c84",
+      "bytes": 39361
+    },
+    "actualExecution": {
+      "path": "docs/migration/native-campaigns-v50/logs/execution-life-final.json",
+      "sha256": "4705e7ce226dfba4c8cd81ba131ffe152144bdc614a0fac3c6d47ef99f36e013",
+      "bytes": 41921
+    },
+    "actions": 49,
+    "prefixes": 47,
+    "levelsCompleted": 3,
+    "enteredLevel": 4,
+    "officialState": "NOT_FINISHED",
+    "perLevelActions": [
+      15,
+      15,
+      19
+    ],
+    "sessions": 1,
+    "commonCallerAcquiredTransitions": 49,
+    "boundaryReplays": 2,
+    "providerKinds": {
+      "measured_animated_contact": 3,
+      "typed_carrier_experiment": 18,
+      "typed_material_flow": 22,
+      "typed_pose_dependency": 4
+    },
+    "materialOwnEvents": 68,
+    "materialEventKinds": {
+      "typed_carrier_response": 18,
+      "typed_pose_scope": 4,
+      "typed_material_flow": 28,
+      "typed_pose_model": 12,
+      "typed_pose_response": 6
+    },
+    "inquiryWitnessKinds": {
+      "current_measured_relation_for_unknown_effect": 1,
+      "acquired_context_for_unknown_effect": 43
+    },
+    "foreignInvitationPrefixIndices": [
+      0,
+      15,
+      30
+    ],
+    "signedZeroPathsRestored": 14,
+    "completePublicPackets": 50,
+    "animationFramesIncludingInitial": 238,
+    "qualification": "One actual cold native common-caller session reaches three official levels in 49 commands, including three original animated invitations. Forty-four material prefixes acquire their own 68 events through normal WHY/ACT. Cold measured relation and acquired context are distinguished. The final state is entry to level four, not a full-game WIN."
+  },
+  "coldStartDiagnostic": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v50/cold-start-v49.json",
+      "sha256": "67cd65aa3e03db44d53d47b8a5e36df16abad9dd88a27a0ff8c429bc1dc7a41a",
+      "bytes": 149503
+    },
+    "sourceCommit": "ac5015493dee4094c9f358f63aee6fb68c30d770",
+    "proposedCommand": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 24,
+        "y": 7
+      }
+    },
+    "dispatchedActions": 0,
+    "qualification": "Read-only planning on published v49 selected the original animated invitation. The actual source v50 failure and corrected campaign retain that first choice. This diagnostic executes no game and proves no level."
+  },
+  "componentComparison": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v50/life-original-component-comparison.json",
+      "sha256": "f7c6e456e592269ad59c59fe399604c7ad47825cfba491e046797aabf9c26894",
+      "bytes": 180696
+    },
+    "identityEvidence": {
+      "path": "docs/migration/native-campaigns-v50/life-material-identity-recipes.json.gz",
+      "sha256": "9f584098c09f837f5b594263dc9ec6b3bf592c3cbba3d905c3d9993d52c9c128",
+      "bytes": 311969
+    },
+    "verificationCommand": [
+      "python",
+      "-B",
+      "scripts/compare-v50-material-public-evidence.py",
+      "--verify"
+    ],
+    "summary": {
+      "nativeActions": 49,
+      "sourceSubsetActions": 46,
+      "levelsCompleted": 3,
+      "officialState": "NOT_FINISHED",
+      "enteredLevel": 4,
+      "nativePrefixes": 47,
+      "sourceSubsetPrefixes": 44,
+      "nativeCompletePublicPackets": 50,
+      "nativePublicFramesIncludingInitial": 238,
+      "exactCommonInitialCommands": 0,
+      "exactCommonInitialPackets": 1,
+      "sourceProviderProposalsCompared": 44,
+      "ownAcquiredEventsCompared": 68,
+      "ownEventKinds": {
+        "typed_carrier_response": 18,
+        "typed_pose_scope": 4,
+        "typed_material_flow": 28,
+        "typed_pose_model": 12,
+        "typed_pose_response": 6
+      },
+      "foreignPrefixes": 3,
+      "foreignActions": 3,
+      "stateReconstructions": 49,
+      "identityRecipes": 328,
+      "explicitNegativeZeroPathsRestored": 14,
+      "observedSourceHashDecisionTies": {
+        "carrier": 0,
+        "pose": 0
+      },
+      "nativePerLevelActions": [
+        15,
+        15,
+        19
+      ],
+      "sourcePerLevelActions": [
+        14,
+        14,
+        18
+      ]
+    },
+    "firstTrajectoryDivergence": {
+      "actionIndex": 1,
+      "sourceCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 6,
+          "y": 48
+        }
+      },
+      "nativeCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 24,
+          "y": 7
+        }
+      },
+      "sourcePublicPacketSha256": "453d7620950ea5c38bec9031857e0d883f41bae23c8605bf5123b2b95c29bb7c",
+      "nativePublicPacketSha256": "a9b3d4260720a74c26206866a1c5f8701c753361b6e8b81403868ec9baddbe1e"
+    },
+    "wholePublicTrajectoriesEquivalent": false,
+    "rawPythonNativeIdentityParity": false,
+    "universalLexicalHashDecisionParity": false,
+    "originalFullCommonCallerParity": false,
+    "qualification": "All 44 actual selected provider envelopes, 68 own events and 49 reconstructed own states agree under independently recomputed finite numerical identities, declared reference-set ordering and retained signed-zero templates. Two controlled contracts retain different lexical-hash choices. Whole-caller parity, raw identity equality and universal tie-breaking equivalence are not asserted."
+  },
+  "deltaTests": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v50/validation/delta-tests-run.json",
+      "sha256": "1bd203d5848a1bdb921ea6936828d56a6ae9fbcdf8390d210c154126e5080984",
+      "bytes": 87410
+    },
+    "validationMode": "single-frozen-delta-execution",
+    "counts": {
+      "tests": 371,
+      "pass": 371,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "testFiles": 21,
+    "topLevelTests": 265,
+    "nestedTests": 106,
+    "sourceAndTestInputsUnchanged": true,
+    "qualification": "One retained execution covers the 21 affected test files on unchanged source, test and fixture inputs. Counts and scoped identities are recomputed from its complete TAP output. This is not a rerun of the historical suite."
+  },
+  "regressions": {
+    "summary": {
+      "path": "docs/migration/native-campaigns-v50/regression-summary.json",
+      "sha256": "4e1473c68348368528717f9eaf20c5ec2bfc18c02365c62cfc55f29ce7504d78",
+      "bytes": 5761
+    },
+    "groups": [
+      {
+        "mode": "recorded-public-replay",
+        "runs": 6,
+        "passed": true,
+        "commands": 292,
+        "completePublicPackets": 298,
+        "prefixes": 187,
+        "comparisonChecks": 108,
+        "games": [
+          "STCK",
+          "CATL",
+          "SELE",
+          "COLM",
+          "ZIPP",
+          "GRIL"
+        ]
+      },
+      {
+        "mode": "actual-game-campaign",
+        "runs": 0,
+        "passed": true,
+        "commands": 0,
+        "completePublicPackets": 0,
+        "prefixes": 0,
+        "comparisonChecks": 0,
+        "games": []
+      }
+    ],
+    "qualification": "Six cold native replays recompute decisions before consuming retained complete public returns. They are not six additional live wins. The plan, actual receipts and 108 retained comparisons are verified without rerunning the games or replaying the agent."
+  },
+  "checks": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v50/validation/checks-run.json",
+      "sha256": "9005c056bfeb4b0d28431e47f487ae3638c601170338d45ef373a20274ceda4b",
+      "bytes": 70147
+    },
+    "nativeAgentWorker": {
+      "path": "dist/assets/v6-agent-worker-Cmdo1TCx.js",
+      "sha256": "8cb038982025e40133ae84c011fd180af763132f97eeda6304a677c34c93c56a",
+      "bytes": 5483966
+    }
+  },
+  "browser": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v50/life-browser-verification.json",
+      "sha256": "28c2a33878d7b10f4e73155813e5cc5584d7cb5ad099d5b514a73ec4a69bce61",
+      "bytes": 9762
+    },
+    "measurements": 7,
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    },
+    "boardColumnHeight": 442,
+    "canvasSize": 384,
+    "statusHeight": 98,
+    "maximumDocumentPositionDeltaPx": 0,
+    "maximumDimensionDeltaPx": 0,
+    "completedLevels": 3,
+    "actions": 49,
+    "prefixes": 47,
+    "sampledCounters": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        15,
+        1,
+        15
+      ],
+      [
+        15,
+        1,
+        15
+      ],
+      [
+        30,
+        2,
+        30
+      ],
+      [
+        30,
+        2,
+        30
+      ],
+      [
+        49,
+        3,
+        47
+      ]
+    ],
+    "inspectionClosedThroughout": true,
+    "captureProperties": {
+      "format": "JPEG",
+      "width": 1348,
+      "height": 926
+    },
+    "fullscreen": "not_retested",
+    "mobile": "not_measured",
+    "qualification": "Five normal desktop rectangles are identical across seven retained idle, active and completed samples. This is not a per-frame measurement. Every raw sample retains its displayed action, level and plan counters; the final accessibility tree independently binds 49 actions, 3 solved levels and 47 completed plans to their labels and retains the level-4 URL. The unchanged JPEG capture is retained separately. No additional fullscreen-mode or mobile-size verification is claimed."
+  },
+  "progress": {
+    "connected": 41,
+    "declared": 76,
+    "percent": 53.9,
+    "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
+    "entryAudit": {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "sha256": "52d1a003998f7d18e8c5119472bc3aaba27b9fc46c70abbb64a3ac243ccd3f32",
+      "bytes": 15723
+    },
+    "migrationAudit": {
+      "path": "docs/migration/v6-coverage.json",
+      "sha256": "66bfc3c799b20ad8313dc18505cd7995881084dc96bb266c5483f07bc3a26d1e",
+      "bytes": 2414830
+    },
+    "qualification": "53.9% counts registered subquestions in the same four source DRM lists. It is not code-volume progress, game success rate, complete migration or original caller parity."
+  },
+  "historicalV49Evidence": {
+    "commit": "ac5015493dee4094c9f358f63aee6fb68c30d770",
+    "filesVerified": 71,
+    "unchanged": true,
+    "files": {
+      "docs/migration/native-campaigns-v49/candidate-selection.json": {
+        "gitObject": "7691f72ac4e94600fd66d853f28fcbb958f9cfe5",
+        "sha256": "405546ae8c6863ff3bf75e8d9f0625a60e951a09b97f6dc427f3a32bfe08a39e",
+        "bytes": 70419
+      },
+      "docs/migration/native-campaigns-v49/candidate-selection.md": {
+        "gitObject": "99be46408eb48b7b0b367a14afdde55514f772fc",
+        "sha256": "7224ff140d499a87148e4b08e5023b5645cdd6b490e4224c2431594cf65f40c6",
+        "bytes": 4068
+      },
+      "docs/migration/native-campaigns-v49/catl-recorded-public-replay.json": {
+        "gitObject": "2c714ad391c328e3518370ef84e2ed1e38e3ba41",
+        "sha256": "7e3c39ea5a55c8aae6a3e2f8bcce9bbff9faa73677133880271679c410774b2f",
+        "bytes": 3894489
+      },
+      "docs/migration/native-campaigns-v49/catl-regression-comparison.json": {
+        "gitObject": "ade9889bba07c0a9f504fd98dc40b539fa1f8ff7",
+        "sha256": "204c205bd2abd296e15a645f1080b656173f685d51b6df7ce31c134733abfe65",
+        "bytes": 3808
+      },
+      "docs/migration/native-campaigns-v49/cold-start-v48.json": {
+        "gitObject": "503bcdb01666a84d11f0d9e572f544d51e493763",
+        "sha256": "18f9741ec6b8acea8e2c11a3e1eebbe5e6a12e7f5eac03b8fbc0debbca7812c2",
+        "bytes": 243616
+      },
+      "docs/migration/native-campaigns-v49/colm-recorded-public-replay.json": {
+        "gitObject": "6254d37cc38a75725e7daac292fc955c81627eeb",
+        "sha256": "a1b85b98d325aa240d8a29dcae2c771800c7d5a2232797ca62ce20bcc9746778",
+        "bytes": 1528005
+      },
+      "docs/migration/native-campaigns-v49/colm-regression-comparison.json": {
+        "gitObject": "f242fe93d13a2c413eab0c1a5584d2a5db2d6a6b",
+        "sha256": "6b4bd7d98ad3ba8326ef5e2179227bc555f03740de8556a47f1dad4db1135c8d",
+        "bytes": 14805
+      },
+      "docs/migration/native-campaigns-v49/gril-browser-layout-measures.json": {
+        "gitObject": "394b8cc8baedaa9e078404702e280014bb1ddb98",
+        "sha256": "dcd3bf98d2a3b495783c4908601421efb0c30853bb15986627577e9cbccdd1b4",
+        "bytes": 6898
+      },
+      "docs/migration/native-campaigns-v49/gril-browser-three-levels-ax.txt": {
+        "gitObject": "53c24b80a20622dbad405c8bf76eb907227a1147",
+        "sha256": "41db36eab8e87419ad9de94861c950bc6e9df590c665c525cc87f6f16764e78c",
+        "bytes": 9949
+      },
+      "docs/migration/native-campaigns-v49/gril-browser-three-levels.jpg": {
+        "gitObject": "efd0dc8feb99c295b38d289602325c11e65fb440",
+        "sha256": "e5c75eca7c7cd0cfad21b3b86d4d92bf6b7521b1524ba1214d8a81886ae20344",
+        "bytes": 80988
+      },
+      "docs/migration/native-campaigns-v49/gril-browser-verification.json": {
+        "gitObject": "a4657966cacabea74b6cd16341e5d4c1f98ea6c9",
+        "sha256": "2eeddfd0f6f47dbe8e7af88946162d80d69edcaf6be457f33acd603743e7212d",
+        "bytes": 9569
+      },
+      "docs/migration/native-campaigns-v49/gril-original-component-comparison.json": {
+        "gitObject": "45e9c04d33b9fa7385a8f3e8889729c4ee68cb9a",
+        "sha256": "4c29aa0cf1e440937c204766b535f2abcdd5cf581f5e8da6c5361a81af73aa07",
+        "bytes": 149524
+      },
+      "docs/migration/native-campaigns-v49/gril-public-trace.json.gz": {
+        "gitObject": "dbd851f06074518688a16ea385e5a28e0848a75e",
+        "sha256": "dd72621fb8f650ee95ba907f61e9cb4675a7de75e3dd537a9dec7c3d5c47b6ae",
+        "bytes": 12713
+      },
+      "docs/migration/native-campaigns-v49/gril-three-levels.json": {
+        "gitObject": "ef7325c9c39f089bcecacfc16678012157e2fdc4",
+        "sha256": "95e3a88d2cda99590d63ca27af5da4b1c19eb05c77523a843febed06c7eb91af",
+        "bytes": 5859401
+      },
+      "docs/migration/native-campaigns-v49/logs/comparison-catl-receipt.json": {
+        "gitObject": "b72cf97b49279ce24ffd25b9115b4a2398573b85",
+        "sha256": "0b5802d06029b91545552d2792e6ad384c7a57d7cf1b784081f02e0b81169886",
+        "bytes": 42529
+      },
+      "docs/migration/native-campaigns-v49/logs/comparison-colm-receipt.json": {
+        "gitObject": "578037cf03ccc55d23742d8f7934672d142738e8",
+        "sha256": "1c262ed8420817029726d50fc6d0924360a815852dd0637ea065cebab5428589",
+        "bytes": 42534
+      },
+      "docs/migration/native-campaigns-v49/logs/comparison-sele-receipt.json": {
+        "gitObject": "6c1bfd0488d3ce013606cd00a0b2821c60405c5f",
+        "sha256": "41bc18bb28e2e89e12e9ea742dc66a0b8d0328eef30c4430cc9d4969e73497e4",
+        "bytes": 42533
+      },
+      "docs/migration/native-campaigns-v49/logs/comparison-stck-receipt.json": {
+        "gitObject": "a5c0170cba73d8450beae466e81e0f7c50e55e5c",
+        "sha256": "30124259e6193596ac845b44698dc2716cf6d37c1235ed2ee00c05567a3a0062",
+        "bytes": 42531
+      },
+      "docs/migration/native-campaigns-v49/logs/comparison-zipp-receipt.json": {
+        "gitObject": "2b538456b3ffbfcdba4210c78280f79cecd37864",
+        "sha256": "67d645410c00ec79fa4d2fc5723a5f07403465579700246437694253bf5a1e60",
+        "bytes": 42531
+      },
+      "docs/migration/native-campaigns-v49/logs/execution-gril.json": {
+        "gitObject": "4b3bd43b59697047911ede41a7e4c9d5a60a9805",
+        "sha256": "599f5851fdee75e2ec6f0573905370de55372c4bb4869d2f3c31c0eacad54895",
+        "bytes": 40897
+      },
+      "docs/migration/native-campaigns-v49/logs/gril-output.log.gz": {
+        "gitObject": "16144d6627c95a21fad285abe794ed6149b566cd",
+        "sha256": "5075a4d339206fc2f6c77d7404a4cacd3e2641cb2b71d665c04102dc46be2f17",
+        "bytes": 3261
+      },
+      "docs/migration/native-campaigns-v49/logs/regression-catl-output.log.gz": {
+        "gitObject": "bdaf1f1671c77266670305ca516c2a30742c3884",
+        "sha256": "ea1e56df620054c3f20c31c8f5bdb334a558a43beb48b9ff26ab348300bcddaf",
+        "bytes": 6131
+      },
+      "docs/migration/native-campaigns-v49/logs/regression-catl-receipt.json": {
+        "gitObject": "4dbca25934f47a1e9bf00b5688b213eed3254cb4",
+        "sha256": "4f72ad5ad1d2da3524632a41aeef47bd94e6eb4bb7a6cb5d4b5091b1b4e65ad6",
+        "bytes": 90053
+      },
+      "docs/migration/native-campaigns-v49/logs/regression-colm-output.log.gz": {
+        "gitObject": "48e51cc6fd2d5f96e5cbaaf0060ba167de692a1e",
+        "sha256": "f4efa257eeeb0b0956e6ac528132e37531085e1ea99fd7d47806395d1cd3a79a",
+        "bytes": 4099
+      },
+      "docs/migration/native-campaigns-v49/logs/regression-colm-receipt.json": {
+        "gitObject": "2150609375b35d0d5b85cc5f2a5a286a4087c16c",
+        "sha256": "03df117c64e24a8ec5aae57f83019b2f7c46bdf5d45660cb3fae814785311288",
+        "bytes": 90070
+      },
+      "docs/migration/native-campaigns-v49/logs/regression-comparison-catl-output.log.gz": {
+        "gitObject": "230a452ce4b62c753109e384dfbdac0b1980e475",
+        "sha256": "bea5ac3a3be606cb706548f69f7debfacd57d944156cbfbe916a2dd8fdf63b54",
+        "bytes": 110
+      },
+      "docs/migration/native-campaigns-v49/logs/regression-comparison-colm-output.log.gz": {
+        "gitObject": "77ec0576fd7581b6486b7d481abe56572eaf32a8",
+        "sha256": "a902bea8972bc22d5d3c661516ff8d846156dd7a39c3974404d766dd73ce653c",
+        "bytes": 112
+      },
+      "docs/migration/native-campaigns-v49/logs/regression-comparison-sele-output.log.gz": {
+        "gitObject": "8a032bd8e6ab08e0158dc2fc49f77ca5e70fd7c4",
+        "sha256": "39e1d1c4f977ca90e7a1b657ba26a84c7f9f72644d900bae4c963e3c62545f62",
+        "bytes": 110
+      },
+      "docs/migration/native-campaigns-v49/logs/regression-comparison-stck-output.log.gz": {
+        "gitObject": "0b5c09c60349ba6b088a1e423ce9d6524d34ac78",
+        "sha256": "89a8a88cafefe0ce5c580b9319dca6cbb34197a625945e79b643d1b1d38f7b19",
+        "bytes": 111
+      },
+      "docs/migration/native-campaigns-v49/logs/regression-comparison-zipp-output.log.gz": {
+        "gitObject": "da6c2212cf2b2a4794357de494bc4f54e8969605",
+        "sha256": "b00591351b4bd69ba7818f48bf783231976cc7356ac65edd7d9af9dd5dc9306e",
+        "bytes": 112
+      },
+      "docs/migration/native-campaigns-v49/logs/regression-sele-output.log.gz": {
+        "gitObject": "5242a41599a89b5583dbc0e8b108e8f7a477e6de",
+        "sha256": "83093b2f253bbe63d444be38d18d3589248e456cf9e342dfc9db915c1dbe21c8",
+        "bytes": 5409
+      },
+      "docs/migration/native-campaigns-v49/logs/regression-sele-receipt.json": {
+        "gitObject": "135307f9453dbaeec003b77a9ea139492487cc8d",
+        "sha256": "9fe7c9b4794a94d1d44ffde384c69a21d4d5487fca914b8456acf735c2fef996",
+        "bytes": 90067
+      },
+      "docs/migration/native-campaigns-v49/logs/regression-stck-output.log.gz": {
+        "gitObject": "a6db26b959ac9587641e98640902fdbe723c176d",
+        "sha256": "62bdef975ae7ddf2cc2e7addb2d9853fce39344503a3c9a2fc44b5389b2b81b5",
+        "bytes": 3426
+      },
+      "docs/migration/native-campaigns-v49/logs/regression-stck-receipt.json": {
+        "gitObject": "cdd26513bf5c21e99258ffb66590f4fea1962a0e",
+        "sha256": "60d238b40ea0ac571dd67ad182e29c30145c9de8c21173e9420201708c0d35e0",
+        "bytes": 90064
+      },
+      "docs/migration/native-campaigns-v49/logs/regression-zipp-output.log.gz": {
+        "gitObject": "c4f5348d303dccc5791cd9f713052c208a72cc4a",
+        "sha256": "0b267919a99990fef188b70132c204574958b0e5a4ce040ff0938b2f81878e4c",
+        "bytes": 7771
+      },
+      "docs/migration/native-campaigns-v49/logs/regression-zipp-receipt.json": {
+        "gitObject": "8ef66f96ad638af8f8c32804471091f3dfa8238b",
+        "sha256": "7061bd0a01b25252460a41831f0a8873f336804fdbb75c0891a5f6d3b1ca8b89",
+        "bytes": 90060
+      },
+      "docs/migration/native-campaigns-v49/regression-plan.json": {
+        "gitObject": "ab9a1892424894eb54033d824746c6b43e4e98c1",
+        "sha256": "2f03b8fdceee99cca289eb7f2d1b1ad57ff4594a7afc7b1d80a2ca3ab31675a0",
+        "bytes": 9582
+      },
+      "docs/migration/native-campaigns-v49/regression-summary.json": {
+        "gitObject": "d0ecb679d41157fedece0e241e14f4403b5ff525",
+        "sha256": "72d2ec4855a86bd67bc894e4aa247e1bb07ecbc570e1292645d6a76ee695ac75",
+        "bytes": 5054
+      },
+      "docs/migration/native-campaigns-v49/regression-verification.json": {
+        "gitObject": "65ff1fdbfbaa8b94f28340e499823d202be4c019",
+        "sha256": "6e20452916e804cd56575f81d08584fbf8596418bc8a5837187f50357cc3d4da",
+        "bytes": 508873
+      },
+      "docs/migration/native-campaigns-v49/sele-recorded-public-replay.json": {
+        "gitObject": "5b527e4d6ce2e008f9756bf15eca2b4bf8d69fc9",
+        "sha256": "0c61fbfe4c1b6c643b3eafe7265bb967fc962ad12b5dabace6023a5bb806dc98",
+        "bytes": 3973880
+      },
+      "docs/migration/native-campaigns-v49/sele-regression-comparison.json": {
+        "gitObject": "a9c629422c8d241708178645cf2368d5d0ef8a65",
+        "sha256": "2e26d0a84d30174ae5555bd1eaf043b2382896e69a116a6f48e143a23ce2ce0d",
+        "bytes": 3810
+      },
+      "docs/migration/native-campaigns-v49/source-manifest.json": {
+        "gitObject": "9a16a928b97502199d1f4ebbbfb726c82c4ccc6a",
+        "sha256": "b63640ec9c219e0f8a03edcf0f50a5f75a1aade9884ccd9f82ded9d10e23176c",
+        "bytes": 19353
+      },
+      "docs/migration/native-campaigns-v49/stck-recorded-public-replay.json": {
+        "gitObject": "b13921460dc3eb08b2a3468bb54c55c4b5f1648b",
+        "sha256": "8e28c7f7eb648b264172b76593e3c7838b8bf882a9a8eaded108e4374baa151b",
+        "bytes": 198690
+      },
+      "docs/migration/native-campaigns-v49/stck-regression-comparison.json": {
+        "gitObject": "37485e2791a5b18392bb0d0d01b860dbca61ec95",
+        "sha256": "82003dc41460ff72e1f464bf12e27b3ab81093585334a64826089a6ac5f9cef3",
+        "bytes": 3810
+      },
+      "docs/migration/native-campaigns-v49/validation.json": {
+        "gitObject": "8f1b289d664ea479054ab8d7d09293c30d6de218",
+        "sha256": "0144801f5a95a042e74fcd7ab41b4bde0595adcca8db96fb79288748ca3735a7",
+        "bytes": 29847
+      },
+      "docs/migration/native-campaigns-v49/validation/build-output.log.gz": {
+        "gitObject": "113033234ac1f872bd313f8353eadbd3fcf207ef",
+        "sha256": "305f63c6e3be11c94f4be08f4f543eccf16a78a3ce15866a6c21333c0c21f4a5",
+        "bytes": 1561
+      },
+      "docs/migration/native-campaigns-v49/validation/checks-run.json": {
+        "gitObject": "c76c6f841c2881d427c4b4874ac148595b2ca2be",
+        "sha256": "31d37cc2f09622af493b34e5cbdc0560f1312d13b3ac678f1b45018a46cb86ad",
+        "bytes": 68673
+      },
+      "docs/migration/native-campaigns-v49/validation/delta-tests-output.log.gz": {
+        "gitObject": "edc704a7fab6011f5ec807bc6cd2097d44573429",
+        "sha256": "e34f19634928d73e0d581d9ca1818d32c725ccda0f924f5fee6ea634f9dd5102",
+        "bytes": 8977
+      },
+      "docs/migration/native-campaigns-v49/validation/delta-tests-run.json": {
+        "gitObject": "2c0ff15bd93a833cac8f5c69b342c23763781066",
+        "sha256": "a1e9aef02f5a54025c6945bea96fc99f2740a9f60fc4e393004d28e125e38e16",
+        "bytes": 84997
+      },
+      "docs/migration/native-campaigns-v49/validation/diff-check-output.log.gz": {
+        "gitObject": "ac8e0e811e3ed53779cee083f6a0e92ca73ceffd",
+        "sha256": "1ffd272feeae1498aa8c2651db0fd458768086dfe03909bc4fa77c046daba8ca",
+        "bytes": 20
+      },
+      "docs/migration/native-campaigns-v49/validation/entry-audit-output.log.gz": {
+        "gitObject": "32a1b44a16db5f77ca3eb54105783906ac80b1bf",
+        "sha256": "040447eef4e09e97d422010a48aa34efcea41d8b3f2058f8647ca063a06b316b",
+        "bytes": 179
+      },
+      "docs/migration/native-campaigns-v49/validation/migration-audit-output.log.gz": {
+        "gitObject": "bc4f29dfa007160c793dce07daf5bacc3b44ca91",
+        "sha256": "503d4777ee8b2e8efd8e96202ce8b42be17abe9f37b6cbcfbe6df2cb65e7dc58",
+        "bytes": 205
+      },
+      "docs/migration/native-campaigns-v49/validation/typecheck-output.log.gz": {
+        "gitObject": "00f83e38f0107358dd2412acb3732109725aeea3",
+        "sha256": "c4e52b1a806cc8600a6fa4ecbeffb7829ef250511549f4e5a79e799926e59741",
+        "bytes": 141
+      },
+      "docs/migration/native-campaigns-v49/zipp-recorded-public-replay.json": {
+        "gitObject": "cf23579f1c0f0f0a0969139f6f98cb10f106b816",
+        "sha256": "9c36d2b69b13bb09e536d191694bfdd2e0ff987a4b98f8c115f9aa0ec0b2ef66",
+        "bytes": 2576934
+      },
+      "docs/migration/native-campaigns-v49/zipp-regression-comparison.json": {
+        "gitObject": "75ecda85b195b322182b9208a585af8a52eca5d3",
+        "sha256": "24a34ee203e89e2e844cbab5c2f6336efece609364cee1dc9e8b76b4b0900d85",
+        "bytes": 15402
+      },
+      "docs/migration/v49-occluded-catalogues-and-acquired-views.md": {
+        "gitObject": "cba3791db82d602111d11024a22f2167baf00e35",
+        "sha256": "afb908ff67340693d48e9e4cf958153ffe4e0ff5b56ffd51638bab8117eaaae6",
+        "bytes": 16911
+      },
+      "scripts/compare-v49-catalogue-public-evidence.py": {
+        "gitObject": "01b0c58b7d1e9f0ae4a109bc9362a9116fbde9f1",
+        "sha256": "f1e78bc3151583ad1f1e211d9e22bbd830fc8f345ed2bb7aae144c8dd3734de6",
+        "bytes": 20786
+      },
+      "scripts/compare-v49-regressions.mjs": {
+        "gitObject": "5ea0ba3a2119b580c8664d5b7bbdaac6c4a5d7b2",
+        "sha256": "8c6042e0b758bf9c98a9bd56bce9ef890ddb2d0afa18ec7190b15327fa671082",
+        "bytes": 12382
+      },
+      "scripts/export-v6-occluded-catalogue-reference.py": {
+        "gitObject": "605c80f88c6e81d9516c5cce2cf49a80d9299a9a",
+        "sha256": "5dffd58dec89b3d3b1a206440960d2b6b2ffb0bbf3569c8707c8d564e69f0362",
+        "bytes": 17365
+      },
+      "scripts/probe-v49-cold-start-v48.mjs": {
+        "gitObject": "3278c7e3db08369a8a0c8cf8200738aa4a565e2c",
+        "sha256": "b2e6833ae149d86fcd6903cd35f01518a9a46f36e5cbbad00aca0c251cdbc8cc",
+        "bytes": 3834
+      },
+      "scripts/probe-v6-occluded-catalogue-frontier-original.py": {
+        "gitObject": "d62b584da4cc5e022967a81e4f43640a441c1353",
+        "sha256": "1188f12cce599a26c85e680914d5fa4d23fe530fe28ce9f324f1764ebd3ca5f3",
+        "bytes": 13098
+      },
+      "scripts/probe-v6-occluded-catalogue-original.py": {
+        "gitObject": "32b5856362c28cdcd5395562a7503896d28d2245",
+        "sha256": "703454ae28bf46eaa9d2e9f9a5192567903d7b01d3387cc5dcd910637e7ea301",
+        "bytes": 12010
+      },
+      "scripts/replay-v49-public-regression.mjs": {
+        "gitObject": "8e5db285047b98f40251ef77e686c733ee94e71c",
+        "sha256": "4554f4579cd197c0681cd970673e83f9031889a24c07ce6374315cefb5e915af",
+        "bytes": 2453
+      },
+      "scripts/run-v49-campaign-proof.py": {
+        "gitObject": "9e9c182e8d1c4b301a1bae81b517e0d419acec6b",
+        "sha256": "f18c0af4dbeef7f7ff759acaa1e48f66423da32f9ff375cc87edb68fead9f94c",
+        "bytes": 3540
+      },
+      "scripts/run-v49-delta-tests.py": {
+        "gitObject": "2653169ed2304b707a8f3ffc462f4d1128aee7eb",
+        "sha256": "a3c5c889c111b59eab415ffd7d99410a5d1de6e69ff3864be84fb68704518560",
+        "bytes": 4426
+      },
+      "scripts/run-v49-regression-checks.py": {
+        "gitObject": "3219f7f3a49dd27b33c542c8dae1d4c1c8c73bc6",
+        "sha256": "04acb1263e84a0a6d153e47e719c6fc75d059ca086d3a24123447424307473cf",
+        "bytes": 16690
+      },
+      "scripts/run-v49-release-checks.py": {
+        "gitObject": "13e95cd0541c85ab096b18a9872004e3ced302d2",
+        "sha256": "2360a9aec8173157cf7fc40c3b6a2770f13c4766a49accf5fe7999587453e90f",
+        "bytes": 4062
+      },
+      "scripts/validate-v49-release.py": {
+        "gitObject": "1491e612160f14692c2476f518c67a8de343f154",
+        "sha256": "b1e2873e6281cb38b854fc63dfb89b10a50a27bf92926e5e34982f608f83b07c",
+        "bytes": 60609
+      },
+      "tests/fixtures/v6-occluded-catalogue-frontier-original-public.json.gz": {
+        "gitObject": "8f550ed58ae9e4ebe00453241c3a35432c1fd5c7",
+        "sha256": "d55035a11cd1f757b421e5df02d70de4daf9d6010949346e81f4d706ffeef509",
+        "bytes": 340124
+      },
+      "tests/fixtures/v6-occluded-catalogue-original-public.json.gz": {
+        "gitObject": "76d40dd7f6f4cc1a56402991dda8a419021320ea",
+        "sha256": "3dfca8ca888404f021512c5c1dff2c74a34c2e70467ed2ad1cf8ecbc3d59b7b3",
+        "bytes": 51349
+      },
+      "tests/fixtures/v6-occluded-catalogue-reference.json.gz": {
+        "gitObject": "2dafc15f15d8485965309adf94985a600be787b0",
+        "sha256": "c3702192076a607b4308fa2c99652a26b04e3aa4479b1e7a51c5d48d77666450",
+        "bytes": 196872
+      }
+    },
+    "scope": "Every committed byte of the complete v49 campaign evidence directory and the listed reference fixtures, probes, exporters, comparison tools and release scripts matches its published Git object. No historical proof is regenerated or reclassified."
+  },
+  "completeMigration": false,
+  "originalFullCommonCallerParity": false,
+  "retainedInputsUnchangedDuringValidation": true,
+  "generator": {
+    "path": "scripts/validate-v50-release.py",
+    "sha256": "c0ba51596c2b6463834c92e33321253fad64cdb53dfe4613533dcd857f7a881c",
+    "bytes": 76122
+  },
+  "scope": "Read-only validation of retained actual executions, immutable failed-attempt evidence, frozen native inputs, one recomputed original-provider comparison with explicit numeric identity boundaries, one affected test run, six recorded-public regressions, build inputs, historical proof bytes and observed browser layout. No game, native agent or test suite is executed. LIFE reaches three official levels and enters level four without full-game WIN. Original component and native full-caller trajectories differ from their first action."
+}

@@ -31,9 +31,9 @@
     "dataFiles": 417,
     "verifiedModules": 0,
     "componentVerifiedModules": 105,
-    "partiallyTransferredModules": 87,
+    "partiallyTransferredModules": 94,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1177,
+    "pendingModules": 1170,
     "strategyFamilies": 16
   },
   "families": [
@@ -79437,9 +79437,20 @@
           "endLine": 29
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-typed-material-access.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/probe-v6-typed-material-original.py",
+        "scripts/export-v6-typed-material-reference.py",
+        "tests/fixtures/v6-typed-material-original-public.json.gz",
+        "tests/fixtures/v6-typed-material-reference.json.gz",
+        "tests/v6-typed-material-reference.test.ts",
+        "tests/v6-typed-material-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_view_frontier.py",
@@ -85994,9 +86005,19 @@
           "endLine": 64
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-typed-material-access.ts",
+        "src/logos-engine/v6-typed-material-observation.ts"
+      ],
+      "proof": [
+        "scripts/probe-v6-typed-material-original.py",
+        "scripts/export-v6-typed-material-reference.py",
+        "tests/fixtures/v6-typed-material-original-public.json.gz",
+        "tests/fixtures/v6-typed-material-reference.json.gz",
+        "tests/v6-typed-material-reference.test.ts",
+        "tests/v6-typed-material-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/typed_carrier_scene.py",
@@ -86017,9 +86038,18 @@
           "endLine": 59
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-typed-material-observation.ts"
+      ],
+      "proof": [
+        "scripts/probe-v6-typed-material-original.py",
+        "scripts/export-v6-typed-material-reference.py",
+        "tests/fixtures/v6-typed-material-original-public.json.gz",
+        "tests/fixtures/v6-typed-material-reference.json.gz",
+        "tests/v6-typed-material-reference.test.ts",
+        "tests/v6-typed-material-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/typed_material_flow.py",
@@ -86088,9 +86118,19 @@
           "endLine": 29
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-typed-material-access.ts",
+        "src/logos-engine/v6-typed-material-observation.ts"
+      ],
+      "proof": [
+        "scripts/probe-v6-typed-material-original.py",
+        "scripts/export-v6-typed-material-reference.py",
+        "tests/fixtures/v6-typed-material-original-public.json.gz",
+        "tests/fixtures/v6-typed-material-reference.json.gz",
+        "tests/v6-typed-material-reference.test.ts",
+        "tests/v6-typed-material-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/typed_material_observations.py",
@@ -86123,9 +86163,18 @@
           "endLine": 56
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-typed-material-observation.ts"
+      ],
+      "proof": [
+        "scripts/probe-v6-typed-material-original.py",
+        "scripts/export-v6-typed-material-reference.py",
+        "tests/fixtures/v6-typed-material-original-public.json.gz",
+        "tests/fixtures/v6-typed-material-reference.json.gz",
+        "tests/v6-typed-material-reference.test.ts",
+        "tests/v6-typed-material-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/typed_pose_access.py",
@@ -86206,9 +86255,19 @@
           "endLine": 93
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-typed-material-access.ts",
+        "src/logos-engine/v6-typed-material-observation.ts"
+      ],
+      "proof": [
+        "scripts/probe-v6-typed-material-original.py",
+        "scripts/export-v6-typed-material-reference.py",
+        "tests/fixtures/v6-typed-material-original-public.json.gz",
+        "tests/fixtures/v6-typed-material-reference.json.gz",
+        "tests/v6-typed-material-reference.test.ts",
+        "tests/v6-typed-material-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/typed_pose_observations.py",
@@ -86253,9 +86312,18 @@
           "endLine": 49
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-typed-material-observation.ts"
+      ],
+      "proof": [
+        "scripts/probe-v6-typed-material-original.py",
+        "scripts/export-v6-typed-material-reference.py",
+        "tests/fixtures/v6-typed-material-original-public.json.gz",
+        "tests/fixtures/v6-typed-material-reference.json.gz",
+        "tests/v6-typed-material-reference.test.ts",
+        "tests/v6-typed-material-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/__init__.py",
@@ -97112,6 +97180,8 @@
     "v47 connects linked_packet_composition as entry 38 of 76 (50.0%) in implementation 0.17.0. The bounded metric counts registered source entries equally; it is not full behavioral parity, code completion or game score. A separate generic trace support interpretation and immutable Linked emission receipts are declared native extensions and add no source entry. All six complete-migration gates remain false.",
     "The final v47 frozen 158-file native digest 2f8f5d8660716e44e81fa987d08264324f61838c81ba9e96b2e64f69c136d100 completes SELE first three levels in one cold continuous actual common-caller session, with 44 actions (8/10/26), 44 prefixes,44 acquired transitions and two natural-boundary replays. It stops at the declared target on entry to4 with NOT_FINISHED. A separate ZIPP target-six attempt completes five levels by action77 (8/15/15/15/24), then stops after one action in6 at78 with frontier_unknown. Its report remains failed for the declared six-level target; no full-game WIN is asserted. The first53 commands/54 complete public packets remain separately compared to v46; extension interpretation and actual return reconciliation are qualified in their own report.",
     "v48 connects queued_field_composition before product_panel_composition at its declared DRM position: 39 of 76 entries (51.3%) in native implementation 0.18.0. A separate native Kernel-correlated continuation extension requires a real acquired score increase bound to the exact provider entry and proposal kind. Source epoch-boundary labels alone cannot confer priority. Every current primitive still passes its guards and WHY/ACT. All six complete-migration gates remain false.",
-    "v49 connects occluded_catalogue_composition at its declared first window position and restores the source catalogue-view fallback after common ViewFrontier. The four-list connection metric becomes 40 of 76 (52.6%) in native implementation 0.19.0. The direct view fallback is outside that denominator. No new game-specific or cold-start coordination rule is added; actual common acquisitions supply initial effects. All six complete-migration gates remain false."
+    "v49 connects occluded_catalogue_composition at its declared first window position and restores the source catalogue-view fallback after common ViewFrontier. The four-list connection metric becomes 40 of 76 (52.6%) in native implementation 0.19.0. The direct view fallback is outside that denominator. No new game-specific or cold-start coordination rule is added; actual common acquisitions supply initial effects. All six complete-migration gates remain false.",
+    "v50 connects typed_material_flow at its declared window position, with three own carrier/material/pose memory layers in the existing common owner. The four-list connection metric becomes 41 of 76 (53.9%) in native implementation 0.20.0. Finite native numeric identities and lexical-hash tie differences are explicit; no complete Python numeric or full common-caller parity is claimed. Actual native LIFE results and any coordination extensions are reported separately. All six complete-migration gates remain false.",
+    "v50 also declares transient_returned_unlearned_contact_refusal_scope as a native coordination evolution, not original Python caller parity. It retains every public frame, final protocol, command and actual Kernel transition, distinguishing transient return from a stationary observation. The first non-null current window question remains in declared order. A cold typed relation must be remeasured and have supports disjoint from both the invitation point and every transient effect pixel. Subsequent questions require event-backed acquired context and current guards. Returning to the same public image does not establish hidden-state equivalence or an understood effect. The first actual native LIFE failure remains preserved separately from the corrected frozen campaign; all six complete-migration gates remain false."
   ]
 }

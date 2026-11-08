@@ -31,6 +31,7 @@ import { OrientedCoupling } from './v6-oriented-coupling.ts';
 import { MetricComposition } from './v6-metric-composition.ts';
 import { SlidingCavity } from './v6-sliding-cavity.ts';
 import { AnimatedContact } from './v6-animated-contact.ts';
+import { summaryReturnedPublicProbe, independentReturnedProbeSupport } from './v6-returned-probe-scope.ts';
 import { symbolicDigest } from './v6-hash.ts';
 import { createNativeInterfaceFamilies } from './v6-native-interface-families.ts';
 import { NativeCallerCoordinator } from './v6-native-caller.ts';
@@ -50,7 +51,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.19.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.20.0';
 // The implementation identity and public snapshot describe the same extensions.
 const NATIVE_CALLER_EXTENSIONS = ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
   'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery',
@@ -60,7 +61,8 @@ const NATIVE_CALLER_EXTENSIONS = ['neutral_entity_domain_refusal_retained_as_unk
   'immutable_linked_packet_emission_receipts',
   'current_acquired_continuation_before_unacquired_exploration',
   'kernel_correlated_official_success_for_current_continuation',
-  'stationary_unlearned_contact_refusal_scope'] as const;
+  'stationary_unlearned_contact_refusal_scope',
+  'transient_returned_unlearned_contact_refusal_scope'] as const;
 const SELECTION_PROGRAM = 'v6.composition_strategy.choose';
 type R = Record<string, any>;
 const EPISODE = 'common-observation-frontier';
@@ -325,7 +327,8 @@ export class NativeV6Runtime implements NativeV6Backend {
               ? await family.proposeInGroup(group.id, this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution)
               : await family.propose(this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution);
             if (proposal && group.id === 'goal_access'
-              && (await this.deferUnlearnedInvitation(proposal) || await this.scopeStationaryContactRefusal(family, proposal))) continue;
+              && (await this.deferUnlearnedInvitation(proposal) || await this.scopeStationaryContactRefusal(family, proposal)
+                || await this.scopeReturnedContactRefusal(family, proposal))) continue;
             if (proposal) {
               const preferred = await this.preferAcquiredContinuation(index, entryIndex, family, proposal);
               if (preferred) {
@@ -611,6 +614,86 @@ export class NativeV6Runtime implements NativeV6Backend {
     return false;
   }
 
+  /**
+   * A transient public effect returning to its starting image remains unknown.
+   * Its local refusal can leave a distinct current relation open to inquiry.
+   * Cold inquiries must avoid every observed effect pixel and the probe point;
+   * later inquiries need actual acquired context, not the old image alone.
+   */
+  private async scopeReturnedContactRefusal(contact: NativeFamily, refusal: NativeProposal): Promise<boolean> {
+    if (contact.id !== 'animated_contact' || refusal.status !== 'unknown'
+      || !refusal.block_unrelated_probe || refusal.reason !== 'measured_contact_continuation_requires_current_evidence'
+      || !this.planning || !this.knowledge || !this.current || !this.observation) return false;
+    if (!this.knowledge.memory.nodes[CONTACT_SCOPE_NODE]) return false;
+    const state = this.knowledge.value(`family_state:${contact.id}`) as R, events: R[] = state.events;
+    const scope = this.knowledge.value(CONTACT_SCOPE_NODE) as R;
+    if (!scope || !Array.isArray(events) || !events.length || events.some(event => event.model || event.mode !== 'invitation')
+      || scope.status !== 'transient_returned_unlearned_invitation' || scope.epoch !== this.observation.level_epoch
+      || scope.score !== this.current.levels_completed || scope.public_state !== this.current.state
+      || v6Canonical(scope.available_action_refs) !== v6Canonical(this.current.available_action_refs)
+      || !scope.public_return?.first || !scope.public_return?.second) return false;
+    const last = events.at(-1)!;
+    if (last.epoch !== scope.epoch || last.boundary || last.after_rows_digest !== scope.frame_digest
+      || v6Canonical(last.evidence) !== v6Canonical(scope.evidence) || v6Canonical(last.command) !== v6Canonical(scope.command)) return false;
+    let summary: R;
+    try { summary = summaryReturnedPublicProbe(scope.public_return.first, scope.public_return.second); }
+    catch { return false; }
+    if (Object.keys(summary).some(key => v6Canonical(summary[key]) !== v6Canonical(scope[key]))) return false;
+    const returned = scope.public_return.second;
+    if (returned.level !== scope.epoch || returned.levels_completed !== scope.score || returned.state !== scope.public_state
+      || v6Canonical(returned.available_action_refs) !== v6Canonical(scope.available_action_refs)) return false;
+    const transitionNode = this.knowledge.memory.nodes[scope.transition_ref];
+    if (!transitionNode || transitionNode.kind !== 'transition_evidence' || transitionNode.component !== 'public_transition'
+      || transitionNode.status !== 'observed') return false;
+    const transition = this.knowledge.value(scope.transition_ref) as R;
+    if (transition.status === 'official_boundary_witness' || transition.before !== scope.evidence?.[0]
+      || transition.after !== scope.evidence?.[1] || v6Canonical(transition.command) !== v6Canonical(scope.command)) return false;
+    const group = this.groups.find(candidate => candidate.id === 'window_constraints');
+    if (!group) return false;
+    for (const [index, id] of group.families.entries()) {
+      const family = this.families.find(candidate => candidate.id === id);
+      if (!family || objectValue(this.knowledge.value(`family_activation:${id}`)).enabled !== true) continue;
+      // Respect the first non-null question in source order. A later witness
+      // cannot justify skipping an earlier unsupported question.
+      if (!family.currentInquiryWitness) return false;
+      const entry = group.entryPoints?.[index], key = `${group.id}:${family.id}:${entry}`;
+      let candidate: NativeProposal | null;
+      if (entry && this.planning.entryOffers.has(key)) candidate = this.planning.entryOffers.get(key)!;
+      else {
+        candidate = entry ? await family.proposeInSubquestion!(group.id, entry, this.observation,
+          this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution)
+          : family.proposeInGroup ? await family.proposeInGroup(group.id, this.observation,
+            this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution)
+          : await family.propose(this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution);
+        if (entry) this.planning.entryOffers.set(key, candidate);
+      }
+      if (!candidate) continue;
+      if (candidate.status !== 'proposed' || !candidate.actions.length) return false;
+      const witness = await family.currentInquiryWitness(candidate, this.observation, this.current.frame_rows) as R | null;
+      if (!witness || witness.observation_ref !== this.observation.observation_ref
+        || witness.proposal_ref !== candidate.proposal_id || witness.effect_requires_actual_return !== true
+        || !Array.isArray(witness.evidence_refs) || !witness.evidence_refs.length
+        || !Array.isArray(witness.acquisition_event_refs)) return false;
+      const cold = witness.status === 'current_measured_relation_for_unknown_effect';
+      const acquired = witness.status === 'acquired_context_for_unknown_effect';
+      if (cold ? witness.acquisition_event_refs.length !== 0 || !independentReturnedProbeSupport(scope, witness, this.current.frame_rows)
+        : !acquired || !witness.acquisition_event_refs.length || !Array.isArray(witness.context_model_ids) || !witness.context_model_ids.length) return false;
+      const guard = await family.before(candidate, 0, this.current, this.observation);
+      if (!guard.admitted) return false;
+      const stateRef = `family_state:${family.id}`;
+      const receipt = { rule: 'returned_unlearned_contact_refusal_is_local', observation_ref: this.observation.observation_ref,
+        contact_scope_ref: CONTACT_SCOPE_NODE, contact_scope_revision: this.knowledge.node(CONTACT_SCOPE_NODE).revision,
+        contact_evidence_refs: scope.evidence, public_return_status: scope.status,
+        preferred_proposal_id: candidate.proposal_id, current_inquiry: witness,
+        source_state_ref: stateRef, source_state_revision: this.knowledge.node(stateRef).revision,
+        guard_reason: guard.reason, physical_action_authorized: false,
+        scope: 'Explicit native coordination extension. The transient effect remains unknown. A disjoint current relation or actual acquired context supports another question; ordinary binding, preservation and WHY/ACT authorization still apply.' };
+      this.planning.coordination.push(receipt); this.note({ kind: 'native_coordination', ...receipt });
+      return true;
+    }
+    return false;
+  }
+
   private async authorize(execution: NativeExecution): Promise<boolean> {
     this.check(execution);
     if (!this.prefix || !this.current || !this.observation) throw new Error('No native prefix to authorize');
@@ -721,18 +804,16 @@ export class NativeV6Runtime implements NativeV6Backend {
     const contactScope: NativeStoreWrite[] = [];
     if (prefix.family.id === 'animated_contact' && prefix.proposal.kind === 'measured_animated_contact' && prefix.witnessed.length === 1) {
       const transition = prefix.witnessed[0]!, first = transition.first, second = transition.second;
-      const stationary = (prefix.proposal as R).animated_contact_plan?.mode === 'invitation'
-        && v6Canonical(first.frame_rows) === v6Canonical(second.frame_rows)
-        && second.frame_packet.every(rows => v6Canonical(rows) === v6Canonical(first.frame_rows))
-        && ['level', 'levels_completed', 'state', 'available_action_refs'].every(key => v6Canonical((first as R)[key]) === v6Canonical((second as R)[key]));
+      const summary = summaryReturnedPublicProbe(first, second);
+      if ((prefix.proposal as R).animated_contact_plan?.mode !== 'invitation') summary.status = 'outside_stationary_invitation_scope';
       contactScope.push({ id: CONTACT_SCOPE_NODE, kind: 'transition_evidence', component: 'native_contact_probe_scope', status: 'observed',
-        value: { status: stationary ? 'stationary_unlearned_invitation' : 'outside_stationary_invitation_scope',
+        value: { ...summary,
           epoch: transition.before.level_epoch, score: second.levels_completed, public_state: second.state,
           available_action_refs: second.available_action_refs, command: transition.command,
-          frame_digest: symbolicDigest(second.frame_rows), returned_frame_count: second.frame_packet.length,
           evidence: [transition.before.observation_ref, transition.after.observation_ref],
           transition_ref: `reasoning:transition:${transition.before.revision}`,
-          qualification: 'Only the returned public images and protocol fields were unchanged; no hidden-state equivalence is inferred.' },
+          ...(summary.status === 'transient_returned_unlearned_invitation' ? { public_return: { first, second } } : {}),
+          qualification: 'The complete public packet distinguishes stationary, transient-returned and changed outcomes. No hidden-state equivalence or understood effect is inferred.' },
         relations: [{ relation: 'witnesses', target: `reasoning:transition:${transition.before.revision}` }] });
     }
     await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'sealed_prefix', statement: 'outcome.acquire' }, [{
@@ -908,7 +989,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id),
-        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_native_relations_radial_ports_rooted_quota_native_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
+        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_native_relations_typed_material_and_pose_radial_ports_rooted_quota_native_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
         sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,
         nativeCallerExtensions: NATIVE_CALLER_EXTENSIONS,
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
@@ -1102,7 +1183,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     (configuration.window_constraints as R).radial_port_composition, (configuration.window_constraints as R).rooted_quota_composition,
     (configuration.window_constraints as R).product_panel_composition, (configuration.window_constraints as R).labeled_sequence_composition,
     (configuration.window_constraints as R).trace_field_composition, (configuration.window_constraints as R).linked_packet_composition,
-    (configuration.window_constraints as R).queued_field_composition, (configuration.window_constraints as R).occluded_catalogue_composition);
+    (configuration.window_constraints as R).queued_field_composition, (configuration.window_constraints as R).occluded_catalogue_composition,
+    (configuration.window_constraints as R).typed_material_flow);
   const policy = loaded.common as R;
   const supportChildren: Record<string, NativeFamily<any>> = {
     ordered_support_transfer: ordered,
@@ -1129,7 +1211,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     multiscale_constraints: windows, occluded_catalogue_composition: recall, queued_field_composition: recall, product_panel_composition: recall, labeled_sequence_composition: recall,
     linked_packet_composition: recall, trace_field_composition: recall,
     cell_patch_composition: recall, observed_occurrence_recall: recall,
-    observed_program_composition: recall, radial_port_composition: recall, rooted_quota_composition: recall, ...supportChildren,
+    observed_program_composition: recall, typed_material_flow: recall, radial_port_composition: recall, rooted_quota_composition: recall, ...supportChildren,
   };
   const windowEntries = (configuration.window_constraints.ordered_subquestions as string[])
     .filter(question => windowProviders[question]);

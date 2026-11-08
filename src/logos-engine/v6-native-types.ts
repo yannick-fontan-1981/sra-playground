@@ -146,6 +146,8 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   /** Read-only: proves acquisition separately from the current before-action guard. */
   learnedPreparationWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeLearnedPreparationWitness | null>;
   groundedInquiryWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeGroundedInquiryWitness | null>;
+  /** Read-only current relation or acquired context, explicitly distinguished. */
+  currentInquiryWitness?(proposal: P, observation: NativeObservation, rows: NativeRows): NativeMaybePromise<NativeRecord | null>;
   /** Native coordination only: distinguish an unacquired question from a
    * current continuation supported by an actual official acquisition. These
    * read-only attestations never authorize a physical action. */
