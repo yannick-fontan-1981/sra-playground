@@ -11,7 +11,37 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v46):** the native common Logos Engine caller
+**Current integrated milestone (v47):** the native common Logos Engine caller
+completes **SELE's first three levels in 44 actions (8, 10, 26)**, with one cold
+continuous session, 44 prefixes, 44 actual Kernel acquisitions and two natural
+boundary replays. The [actual campaign](native-campaigns-v47/sele-three-levels.json)
+stops at its declared target on entry to level 4 with `NOT_FINISHED`. Its
+45 complete public packets contain 229 frames. No Python agent module, manual
+priming, reset or level jump participates.
+
+The newly connected `linked_packet_composition` measures current remote support
+selection, reads dated public animation fronts, learns conditional input and
+output relations, and evaluates hypothetical visible-support routes through an
+exact rational box-intersection kernel. The shared V7 graph preserves every
+finite Float64 bit through its existing typed-state codec; portable canonical
+values remain integer-only. Python/JavaScript libm equality and float digest
+identity are explicitly limited. Native receipts remain immutable, while the
+original Python layer aliases and enriches nine earlier event payloads during
+the same packet acquisition. The source return tracer and comparison verify
+both emission-time payloads and each later enrichment separately.
+
+A source-first structural support interpretation also lets **ZIPP complete its
+fifth level in 24 additional actions**, reaching five levels after 77 actions.
+The [target-six attempt](native-campaigns-v47/zipp-six-levels.json) remains
+`failed` for its declared target: one further animated-contact action in level 6
+is followed by `frontier_unknown` at 78 actions. No complete-game `WIN` is
+asserted. The current trace observer already measures a bounded composition
+at that boundary; the next coordination question is retained without changing
+the frozen implementation. See the [v47 report](v47-linked-packets-and-stable-board.md)
+for numerical scope, original-component comparisons, trace extension evidence,
+UI stability measurements and actual validation receipts.
+
+**Previous integrated milestone (v46):** the native common Logos Engine caller
 completes **ZIPP's first four levels in 53 actions (8, 15, 15, 15)**, including
 the requested first three levels in 38 actions. The
 [fresh native campaign](native-campaigns-v46/zipp-four-levels.json) retains one
@@ -116,10 +146,12 @@ auxiliary support and native checkpoint report](v35-coupled-support.md), [the v3
 response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 37 of 76
-explicit DRM subquestions are connected (48.7%) in implementation
-`logos-engine.typescript.v6.native-migration/0.16.0`. This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 38 of 76
+explicit DRM subquestions are connected (50.0%) in implementation
+`logos-engine.typescript.v6.native-migration/0.17.0`. This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
+The v47 linked-packet connection adds one source entry; its immutable numerical
+receipts and structural trace-support interpretation add none.
 The v46 trace-field connection adds one source entry through the existing
 shared-series owner. It adds no game-specific selector or fixed solution.
 The v45 reduction-transport connection adds one source entry; its bounded
@@ -132,19 +164,14 @@ composition added one source entry, following the v38 cell-composition entry;
 the v37 performance step added none. All six conditions for a complete
 migration remain false.
 
-The next demonstrated question is the **new public morphology at ZIPP level 5**.
-The unchanged source component stops there because its trace observer does not
-produce a scene. The native observer returns the same absence on that saved
-public raster. Nested rings at the same centers produce competing mark pairs
-under the source rule that requires exactly one pair. This diagnoses a
-recognition limit before path search; it is not
-evidence of an exhausted DFS budget or a proved impossible level. The successful
-native campaign stops at its declared four-level target before attempting that
-next level. A future generic observer extension must justify its current support
-and preserve ambiguity, rather than selecting a shape because it yields a route.
-`linked_packet_composition` also remains a pending source entry, but the existing
-initial-morphology archive retains full rasters only for its two prior matches,
-so no additional game candidate is inferred from its other 88 summary rows.
+The next demonstrated question is **generic coordination at ZIPP level 6**.
+An offline diagnostic on its retained public entry packet constructs a 25-cell
+trace in 48 search visits. The actual common caller first chooses the competing
+animated-contact question; after its one action, that finite trace model no
+longer constructs a covering suffix and the caller stops. This identifies a
+current selection/continuation question, not a completed sixth level or proof
+that no alternative solution exists. The next change must require current
+support and acquired contribution evidence without a game or level branch.
 
 **Previous v42 result:** THER completes levels 1–4 in **4, 3, 4 and 4 actions**,
 15 total, six sealed prefixes and one retained session. The first two real

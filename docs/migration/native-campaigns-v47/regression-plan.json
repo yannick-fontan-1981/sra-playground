@@ -1,0 +1,164 @@
+{
+  "schema": "logos-engine.v47.regression-plan.v1",
+  "status": "prepared",
+  "preparedAt": "2026-11-08T21:18:32.241203+00:00",
+  "maxConcurrentRuns": 2,
+  "qualification": "Four cold native common-caller replays recalculate commands before consuming complete public returns from prior actual campaigns. These bounded affected-layer regressions cover learned programs, labeled predicates, reduction coordination and cell placement. They are not new live game successes or speed comparisons. The source manifest, commands, complete packets, source selections, retained projections and guards remain explicit. The separate current SELE and ZIPP campaigns use the opaque game host. No Python agent modules are authorized.",
+  "nativeSourceManifest": {
+    "path": "docs/migration/native-campaigns-v47/source-manifest.json",
+    "sha256": "cc8622ed59c6d1a93d98583271aa3ae744f68159a64887c98a8d080c5011c936",
+    "bytes": 18375
+  },
+  "nativeSourceManifestDigest": "2f8f5d8660716e44e81fa987d08264324f61838c81ba9e96b2e64f69c136d100",
+  "nativeSourceFiles": 158,
+  "harnessFileSha256": {
+    "scripts/run-v47-regression-checks.py": "f5acc714519b550df2f738fcace9fcb4814102f0af45a278ca4808dc8fb7326c",
+    "scripts/replay-v47-public-regression.mjs": "c34377453333c153bc53447b9b8a35fd55dea478922d507782f653190f676f7a",
+    "scripts/compare-v47-regressions.mjs": "551da1d433199e5401304a6d60ab39970e21dd785371946d9028f486d0f4216d",
+    "scripts/run-v47-campaign-proof.py": "c9ddaa89abb361ba8deb9a9cbb53040fe41f476b9e16b9b6cd61ff9daf1d2a9b",
+    "scripts/run-v44-campaign.mjs": "70743bb539013c1d387149b613944ba09d053e86fd2c0808d9f6d0632ba90de3",
+    "tests/helpers/v6-live-game-campaign.ts": "db87a4adc4a2c4734917d6312a42eb199857b09579a5955c57619f5edf92c01a"
+  },
+  "runs": [
+    {
+      "game": "STCK",
+      "mode": "recorded-public-replay",
+      "targetLevels": 3,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v45/stck-three-levels.json",
+        "sha256": "4dc473487b8d8d19bd08d6cc07313eb3b285b0ec7fb9a809b0785be3941ef558",
+        "bytes": 188279
+      },
+      "expectedCommands": 35,
+      "expectedCompletePublicPackets": 36,
+      "expectedPrefixes": 15,
+      "report": "docs/migration/native-campaigns-v47/stck-recorded-public-replay.json",
+      "comparison": "docs/migration/native-campaigns-v47/stck-regression-comparison.json",
+      "executionReceipt": "docs/migration/native-campaigns-v47/logs/regression-stck-receipt.json",
+      "recordedTrace": {
+        "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+        "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+        "bytes": 53583
+      },
+      "command": [
+        "node",
+        "scripts/replay-v47-public-regression.mjs",
+        "docs/migration/native-campaigns-v45/stck-three-levels.json",
+        "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+        "docs/migration/native-campaigns-v47/stck-recorded-public-replay.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v47-regressions.mjs",
+        "docs/migration/native-campaigns-v45/stck-three-levels.json",
+        "docs/migration/native-campaigns-v47/stck-recorded-public-replay.json",
+        "docs/migration/native-campaigns-v47/stck-regression-comparison.json"
+      ]
+    },
+    {
+      "game": "CATL",
+      "mode": "recorded-public-replay",
+      "targetLevels": 6,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v45/catl-six-levels.json",
+        "sha256": "4fae9c0c249a8f9a22ddfefad6b00ee6b8c74a4ab3e9e94e02c35f41e198839b",
+        "bytes": 3867378
+      },
+      "expectedCommands": 48,
+      "expectedCompletePublicPackets": 49,
+      "expectedPrefixes": 48,
+      "report": "docs/migration/native-campaigns-v47/catl-recorded-public-replay.json",
+      "comparison": "docs/migration/native-campaigns-v47/catl-regression-comparison.json",
+      "executionReceipt": "docs/migration/native-campaigns-v47/logs/regression-catl-receipt.json",
+      "recordedTrace": {
+        "path": "docs/migration/native-campaigns-v45/catl-public-trace.json.gz",
+        "sha256": "da5c6c585b0369f25c8aabd9a0ce05bacbccbf315059682e29d5d8fb7693e63e",
+        "bytes": 38151
+      },
+      "command": [
+        "node",
+        "scripts/replay-v47-public-regression.mjs",
+        "docs/migration/native-campaigns-v45/catl-six-levels.json",
+        "docs/migration/native-campaigns-v45/catl-public-trace.json.gz",
+        "docs/migration/native-campaigns-v47/catl-recorded-public-replay.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v47-regressions.mjs",
+        "docs/migration/native-campaigns-v45/catl-six-levels.json",
+        "docs/migration/native-campaigns-v47/catl-recorded-public-replay.json",
+        "docs/migration/native-campaigns-v47/catl-regression-comparison.json"
+      ]
+    },
+    {
+      "game": "LF52",
+      "mode": "recorded-public-replay",
+      "targetLevels": 3,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v45/lf52-three-levels.json",
+        "sha256": "555181d73960aefa6dddce778adddd6f0ce34c2d723f149158fb81e50182b7ca",
+        "bytes": 3941769
+      },
+      "expectedCommands": 104,
+      "expectedCompletePublicPackets": 105,
+      "expectedPrefixes": 71,
+      "report": "docs/migration/native-campaigns-v47/lf52-recorded-public-replay.json",
+      "comparison": "docs/migration/native-campaigns-v47/lf52-regression-comparison.json",
+      "executionReceipt": "docs/migration/native-campaigns-v47/logs/regression-lf52-receipt.json",
+      "recordedTrace": {
+        "path": "docs/migration/native-campaigns-v45/lf52-public-trace.json.gz",
+        "sha256": "61eada811448b278e2049a668b6594b4f8acaeec36b6769aeebd2599c67b6155",
+        "bytes": 124573
+      },
+      "command": [
+        "node",
+        "scripts/replay-v47-public-regression.mjs",
+        "docs/migration/native-campaigns-v45/lf52-three-levels.json",
+        "docs/migration/native-campaigns-v45/lf52-public-trace.json.gz",
+        "docs/migration/native-campaigns-v47/lf52-recorded-public-replay.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v47-regressions.mjs",
+        "docs/migration/native-campaigns-v45/lf52-three-levels.json",
+        "docs/migration/native-campaigns-v47/lf52-recorded-public-replay.json",
+        "docs/migration/native-campaigns-v47/lf52-regression-comparison.json"
+      ]
+    },
+    {
+      "game": "TICT",
+      "mode": "recorded-public-replay",
+      "targetLevels": 6,
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v46/tict-six-levels.json",
+        "sha256": "8511d4bb324676201276f65c2993f447164102992cdddd42371d7d2e08198f0a",
+        "bytes": 814516
+      },
+      "expectedCommands": 55,
+      "expectedCompletePublicPackets": 56,
+      "expectedPrefixes": 55,
+      "report": "docs/migration/native-campaigns-v47/tict-recorded-public-replay.json",
+      "comparison": "docs/migration/native-campaigns-v47/tict-regression-comparison.json",
+      "executionReceipt": "docs/migration/native-campaigns-v47/logs/regression-tict-receipt.json",
+      "recordedTrace": {
+        "path": "docs/migration/native-campaigns-v46/tict-public-trace.json.gz",
+        "sha256": "05967c41e0cf0d1a749438e60d564faa5522647ed2767dc30cfaaed5fd861179",
+        "bytes": 84422
+      },
+      "command": [
+        "node",
+        "scripts/replay-v47-public-regression.mjs",
+        "docs/migration/native-campaigns-v46/tict-six-levels.json",
+        "docs/migration/native-campaigns-v46/tict-public-trace.json.gz",
+        "docs/migration/native-campaigns-v47/tict-recorded-public-replay.json"
+      ],
+      "comparisonCommand": [
+        "node",
+        "scripts/compare-v47-regressions.mjs",
+        "docs/migration/native-campaigns-v46/tict-six-levels.json",
+        "docs/migration/native-campaigns-v47/tict-recorded-public-replay.json",
+        "docs/migration/native-campaigns-v47/tict-regression-comparison.json"
+      ]
+    }
+  ]
+}

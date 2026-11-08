@@ -1,0 +1,83 @@
+{
+  "schema": "logos-engine.v47.public-regression-comparison.v1",
+  "passed": true,
+  "checks": [
+    {
+      "name": "same declared game/target and both results passed",
+      "passed": true
+    },
+    {
+      "name": "same production budgets and original game asset provenance",
+      "passed": true
+    },
+    {
+      "name": "same complete initial public packet",
+      "passed": true
+    },
+    {
+      "name": "same commands, full returned animation packet hashes and primitive boundaries",
+      "passed": true
+    },
+    {
+      "name": "same selected source entries, acquired prefix lengths and observed solver projections",
+      "passed": true
+    },
+    {
+      "name": "same retained source-layer projections and labeled public submission receipts",
+      "passed": true
+    },
+    {
+      "name": "same bounded native predicate composition counts, survivors and reuse",
+      "passed": true
+    },
+    {
+      "name": "same source and preferred entry coordination with current guards",
+      "passed": true
+    },
+    {
+      "name": "same reduction geometry plan and step modes",
+      "passed": true
+    },
+    {
+      "name": "new Trace layer remains empty and never selects these legacy prefixes",
+      "passed": true
+    },
+    {
+      "name": "new Linked Packet layer remains empty and never selects these legacy prefixes",
+      "passed": true
+    },
+    {
+      "name": "same request outcomes and common caller counters",
+      "passed": true
+    },
+    {
+      "name": "same final public result and retained-session counters",
+      "passed": true
+    },
+    {
+      "name": "source frozen during both runs and no Python agent modules",
+      "passed": true
+    },
+    {
+      "name": "same retained mechanical-domain assessments",
+      "passed": true
+    }
+  ],
+  "before": {
+    "path": "docs/migration/native-campaigns-v45/catl-six-levels.json",
+    "sha256": "4fae9c0c249a8f9a22ddfefad6b00ee6b8c74a4ab3e9e94e02c35f41e198839b",
+    "sourceDigest": "1278235f269085c057e4dfea619c5a65587bfd90998505858caeef067319640c"
+  },
+  "after": {
+    "path": "docs/migration/native-campaigns-v47/catl-recorded-public-replay.json",
+    "sha256": "b2046631fa3a4d6821b6bf428af3fb8716e1bd37a9d627497e77cae5ffdcd6a9",
+    "sourceDigest": "2f8f5d8660716e44e81fa987d08264324f61838c81ba9e96b2e64f69c136d100",
+    "mode": "recorded-public-replay"
+  },
+  "compared": {
+    "commands": 48,
+    "completePublicPackets": 49,
+    "prefixes": 48
+  },
+  "qualification": "Exact public commands, complete packet hashes, source selection, prefix/acquisition counts and listed retained projections are compared. Observation session prefixes are normalized. Native graph chain/revision, inherited digest, session-derived model IDs, full labeled cache, five session-derived predicate proof references (including the elimination witness digest of training receipt refs) and complete reduction state are outside this projection. Reduction geometry/step modes, labeled public receipts, composition counts/survivors/reuse and selected coordination entries remain checked. Trace and Linked Packet state must remain empty on these four legacy trajectories. Recorded-public replay recalculates commands before supplying prior actual returns; it is not a new live game, full internal-state parity or a speed comparison."
+}

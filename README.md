@@ -28,7 +28,19 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **The v46 milestone completes
+  level**; opening the tab does not move the game. **The v47 milestone completes
+  SELE's first three levels in 44 actions (8, 10 and 26)** in one cold native
+  common session, with 44 actual acquired prefixes. It connects the generic
+  `linked_packet_composition` entry: current control selection is observed,
+  dated public animation frames provide output directions, and conditional
+  angular relations prepare explicitly guarded experiments. **ZIPP also reaches
+  five completed levels in 77 actions**; the six-level attempt stops after one
+  further action at `frontier_unknown`, so no full-game victory is claimed.
+  The "Solve with SRA." panel now keeps only its useful controls, counters and
+  concise status; technical detail stays in the closed inspection. The board
+  column has independent height and no longer recenters when status text changes.
+  See the [v47 report](docs/migration/v47-linked-packets-and-stable-board.md).
+  **The previous v46 milestone completes
   ZIPP's first four levels in 53 actions (8, 15, 15 and 15)** through one cold
   native common session and 12 acquired prefixes. Its first three levels use
   38 actions. The declared four-level target stops on entry to level 5 with
@@ -82,14 +94,13 @@ Fontan's **Symbolic Reasoning Agent** research.
   **Previous v38 milestone: TICT completes all six levels with official `WIN`
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
-  The current entry audit connects **37 of 76 explicit DRM subquestions
-  (48.7%)**, with the newly connected `trace_field_composition` entry.
-  Bounded predicate composition, acquired-continuation coordination and complete
-  aligned-mark support are explicit native extensions and add no source entry.
-  The next step is to distinguish structural cell rings from current markers
-  using generic public geometry, retain unresolved alternatives, and then
-  test continuation beyond ZIPP's four completed levels. The original observer
-  finds two compatible ring pairs at the next scene and refuses to choose one.
+  The current entry audit connects **38 of 76 explicit DRM subquestions
+  (50.0%)**, with the newly connected `linked_packet_composition` entry.
+  Native structural trace support and immutable Linked emission receipts are
+  explicitly declared extensions and add no source entry. The next step is
+  generic common-caller coordination at ZIPP's sixth-level boundary: a current
+  measured trace composition exists, while an animated-contact probe is selected
+  first. The saved public-return diagnostic is distinct from a successful run.
   Complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These

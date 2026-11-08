@@ -6,12 +6,35 @@ import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts'
 import { retainNativeJson } from './v6-native-owned.ts';
 import { rowsDigest, type ObservedInputDomain } from './v6-native-observer.ts';
 import type { NativeRows } from './v6-native-types.ts';
+import type { NativeTraceFieldOptions } from './v6-trace-field-support.ts';
 
 type R = Record<string, any>;
 type Clock = () => number;
 type BeforeMeta = { epoch: number; score: number; observation_ref: string; available: readonly string[] };
 type AfterMeta = { epoch: number; score: number; state?: string };
 export interface TraceFieldState { trace_state: R | null; trace_events: R[] }
+
+function nativeSupportRequired(plan: R): boolean {
+  return Object.hasOwn(plan, 'native_support_ref') || Object.hasOwn(plan.scene, 'native_support_discrimination');
+}
+
+function nativeSupportBound(plan: R, options: NativeTraceFieldOptions): boolean {
+  return options.distinguishCellSupport === true && truth(plan.scene.native_support_discrimination)
+    && plan.native_support_ref === identity(plan.scene.native_support_discrimination);
+}
+
+/** A current unique source interpretation also discharges the native ambiguity. */
+function nativeSupportProjection(plan: R, step: R, rows: NativeRows, options: NativeTraceFieldOptions, after: boolean): R | null {
+  if (!nativeSupportBound(plan, options)) return null;
+  const current = measureTraceField(rows, plan.scene.geometry, options);
+  if (!current || current.geometry_ref !== plan.scene.geometry_ref
+    || !equal(current.receiver_hypothesis, plan.scene.receiver_hypothesis)
+    || current.head.palette !== plan.scene.head.palette || current.head.width !== plan.scene.head.width
+    || current.head.center_value !== plan.scene.head.center_value
+    || !equal(current.head.cell, after ? step.target : step.source)
+    || !equal(current.prefix, after ? [...step.prefix_before, step.target] : step.prefix_before)) return null;
+  return current;
+}
 
 export function traceFieldCommand(geometry: R, cell: readonly number[]): R {
   const [x, y] = traceFieldCenter(geometry, cell);
@@ -32,7 +55,7 @@ export function localTraceEffect(scene: R, source: readonly number[], target: re
   return true;
 }
 
-export function traceFieldBefore(proposal: R, index: number, rows: NativeRows, meta: BeforeMeta): R {
+export function traceFieldBefore(proposal: R, index: number, rows: NativeRows, meta: BeforeMeta, options: NativeTraceFieldOptions = {}): R {
   const plan = proposal.trace_field_plan;
   if (!truth(plan)) throw new TypeError('Trace guard requires trace_field_plan');
   let admitted = meta.epoch === plan.epoch && meta.score === plan.score && equal(proposal.actions, plan.commands)
@@ -43,10 +66,15 @@ export function traceFieldBefore(proposal: R, index: number, rows: NativeRows, m
       && traceFieldRingMatches(rows, plan.scene.geometry, plan.scene.head, step.source);
   }
   if (index === 0) admitted = admitted && meta.observation_ref === plan.observation_ref && identity(rows) === plan.frame_digest;
+  if (admitted && nativeSupportRequired(plan)) {
+    const current = nativeSupportProjection(plan, proposal.steps[index], rows, options, false);
+    admitted = Boolean(current) && (index !== 0 || equal(current, plan.scene));
+    if (!admitted) return { admitted: false, reason: 'native_trace_cell_support_not_currently_bound' };
+  }
   return { admitted: Boolean(admitted), reason: admitted ? 'trace_current_head_and_point_bound' : 'trace_binding_or_payload_changed' };
 }
 
-export function traceFieldAfter(proposal: R, index: number, rows: NativeRows, later: NativeRows, meta: AfterMeta): R {
+export function traceFieldAfter(proposal: R, index: number, rows: NativeRows, later: NativeRows, meta: AfterMeta, options: NativeTraceFieldOptions = {}): R {
   const plan = proposal.trace_field_plan;
   if (!truth(plan)) throw new TypeError('Trace outcome requires trace_field_plan');
   const step = proposal.steps[index], progress = meta.score > plan.score, boundary = meta.epoch !== plan.epoch;
@@ -54,6 +82,10 @@ export function traceFieldAfter(proposal: R, index: number, rows: NativeRows, la
   if (matched && plan.scene.trace_value !== null) {
     const a = traceFieldCenter(plan.scene.geometry, step.source), b = traceFieldCenter(plan.scene.geometry, step.target);
     matched = later[Math.floor((a[1] + b[1]) / 2)]![Math.floor((a[0] + b[0]) / 2)] === plan.scene.trace_value;
+  }
+  if (nativeSupportRequired(plan) && !nativeSupportBound(plan, options)) matched = false;
+  if (matched && !progress && !boundary && nativeSupportRequired(plan)) {
+    matched = nativeSupportProjection(plan, step, later, options, true) !== null;
   }
   return { matched, seal_prefix: progress || boundary || matched !== true || !step.relation_observed, official_progress: progress,
     reason: matched ? 'trace_local_extension_projection_matched' : 'trace_effect_requires_reconciliation',
@@ -76,10 +108,10 @@ export class TraceFieldMemory {
   /** Planning acquires nothing; the shared owner supplies the inherited fallback. */
   proposeTrace(observation: R, rows: NativeRows, _inputs: readonly R[], maxPrefix: number, config: R,
     levelDeadlineMs: number, now: Clock = () => performance.now(),
-    base: R | null = { status: 'abstained', reason: 'no_recurrent_line_question' }): R | null {
+    base: R | null = { status: 'abstained', reason: 'no_recurrent_line_question' }, options: NativeTraceFieldOptions = {}): R | null {
     const cfg = config.trace_field_question;
     const old = this.traceState && this.traceState.epoch === observation.level_epoch ? this.traceState : null;
-    const scene = truth(cfg) ? measureTraceField(rows, old ? old.geometry : null) : null;
+    const scene = truth(cfg) ? measureTraceField(rows, old ? old.geometry : null, options) : null;
     if (!scene || !maxPrefix || !observation.available_action_refs.includes('ACTION6')) return base;
     const state = old && old.geometry_ref === scene.geometry_ref ? old : { epoch: observation.level_epoch, geometry: scene.geometry,
       geometry_ref: scene.geometry_ref, successes: [], failures: [], evidence: [] };
@@ -99,6 +131,7 @@ export class TraceFieldMemory {
     if (!actions.length) return { status: 'abstained', reason: 'trace_command_refuted_in_exact_context' };
     const plan = { epoch: observation.level_epoch, score: observation.levels_completed, observation_ref: observation.observation_ref,
       frame_digest: identity(rows), scene, state: structuredClone(state), commands: structuredClone(actions), estimate,
+      ...(scene.native_support_discrimination ? { native_support_ref: identity(scene.native_support_discrimination) } : {}),
       scope: 'A simple covering trace ending at the other mark is an experimental target. Geometry, point effect and terminal role remain independently falsifiable.' };
     const ref = 'C_trace_' + identity(plan).slice(0, 20), why = cfg.question;
     const facts = { measured_cell_domain: true, simple_cover_is_declared_experimental_target: true, official_terminal_law_unknown: true };
@@ -111,16 +144,18 @@ export class TraceFieldMemory {
   }
 
   /** Labeled and older acquisitions run first in the common source owner. */
-  record(before: R, command: R, after: R, rows: NativeRows, later: NativeRows, proposal: R, index: number): R[] {
+  record(before: R, command: R, after: R, rows: NativeRows, later: NativeRows, proposal: R, index: number, options: NativeTraceFieldOptions = {}): R[] {
     const plan = proposal.trace_field_plan;
     if (!truth(plan)) return [];
     if (!equal(command, plan.commands[index])) throw new TypeError('Trace receipt differs from committed command');
+    if (nativeSupportRequired(plan) && !nativeSupportBound(plan, options)) throw new TypeError('Native trace support receipt is not bound to the enabled interpretation');
     const state = structuredClone(this.traceState && this.traceState.epoch === plan.epoch ? this.traceState : plan.state), step = proposal.steps[index];
     const boundary = after.level_epoch !== before.level_epoch || after.levels_completed > before.levels_completed;
     let outcome = boundary ? 'official_boundary' : localTraceEffect(plan.scene, step.source, step.target, rows, later) ? 'local_extension_observed' : 'projection_refuted';
     if (outcome === 'local_extension_observed') {
-      const projected = measureTraceField(later, state.geometry);
+      const projected = measureTraceField(later, state.geometry, options);
       if (!projected || !equal(projected.prefix, [...step.prefix_before, step.target])) outcome = 'ordered_trace_projection_refuted';
+      if (nativeSupportRequired(plan) && !nativeSupportProjection(plan, step, later, options, true)) outcome = 'ordered_trace_projection_refuted';
     }
     const [l, t, r, b] = plan.scene.geometry.bbox;
     let outside = 0;
@@ -133,16 +168,24 @@ export class TraceFieldMemory {
     else if (!boundary) state.failures.push(evidence);
     state.evidence.push(after.observation_ref);
     const event = { kind: 'observed_trace_extension', state, transition: evidence,
+      ...(nativeSupportRequired(plan) ? { native_support_discrimination: {
+        witness_ref: plan.native_support_ref, witness: structuredClone(plan.scene.native_support_discrimination),
+        before_ref: before.observation_ref, after_ref: after.observation_ref,
+        actual_response: outcome, local_control_effect_observed: outcome === 'local_extension_observed',
+        terminal_role_acquired: false, primitive_release_authorized: false,
+        scope: 'The visual support interpretation was proposed from the bound public frame and is retained with its actual response. This does not acquire a universal marker or terminal law.',
+      } } : {}),
       scope: 'Current epoch only; prior geometry or point law grants no authority in a new epoch.' };
     this.applyEvent(event); return [structuredClone(event)];
   }
 }
 
 export async function commonTraceFieldProposal(memory: TraceFieldMemory, observation: R, rows: NativeRows, inputs: readonly R[],
-  remaining: number, config: R, levelDeadlineMs: number | null, now: Clock = () => performance.now(), base?: R | null): Promise<R | null> {
+  remaining: number, config: R, levelDeadlineMs: number | null, now: Clock = () => performance.now(), base?: R | null,
+  options: NativeTraceFieldOptions = {}): Promise<R | null> {
   if (remaining < 1) return null;
   if (levelDeadlineMs === null || levelDeadlineMs === undefined) throw new TypeError('Trace experiment requires current level deadline');
-  const proposal = memory.proposeTrace(observation, rows, inputs, Math.min(16, remaining), { ...config, remaining_level_actions: remaining }, levelDeadlineMs, now, base);
+  const proposal = memory.proposeTrace(observation, rows, inputs, Math.min(16, remaining), { ...config, remaining_level_actions: remaining }, levelDeadlineMs, now, base, options);
   if (!proposal || !Object.hasOwn(proposal, 'trace_field_plan')) return null;
   const scene = proposal.trace_field_plan.scene;
   for (const step of proposal.steps as R[]) {

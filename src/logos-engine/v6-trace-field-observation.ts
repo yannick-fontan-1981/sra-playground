@@ -3,6 +3,7 @@ import { geometricComponents } from './v6-native-observer.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { comparePoints, pointKey, type Point } from './v6-point-set.ts';
 import type { NativeRows } from './v6-native-types.ts';
+import { distinguishTraceCellSupport, type NativeTraceFieldOptions } from './v6-trace-field-support.ts';
 
 type R = Record<string, any>;
 const numeric = (a: number, b: number): number => a - b;
@@ -22,7 +23,7 @@ export function traceFieldCenter(geometry: R, cell: readonly number[]): [number,
     geometry.bbox[1] + geometry.pitch * cell[1]! + Math.floor(geometry.pitch / 2)];
 }
 
-export function measureTraceField(rows: NativeRows, retainedGeometry: R | null = null): R | null {
+export function measureTraceField(rows: NativeRows, retainedGeometry: R | null = null, options: NativeTraceFieldOptions = {}): R | null {
   const parts = geometricComponents(rows), squares = new Map<number, R[]>(), frames: R[] = [];
   for (const part of parts) {
     const [l, t, r, b] = part.bbox, w = r - l + 1, h = b - t + 1;
@@ -80,8 +81,12 @@ export function measureTraceField(rows: NativeRows, retainedGeometry: R | null =
   }
   const heads = marks.filter(mark => mark.center_value !== g.floor_value), receivers = marks.filter(mark => mark.center_value === g.floor_value);
   const pairs = heads.flatMap(head => receivers.filter(receiver => head.width === receiver.width).map(receiver => [head, receiver] as const));
-  if (pairs.length !== 1) return null;
-  const [head, receiver] = pairs[0]!, traceValue = head.center_value, edges: R[] = [], traced: [Point, Point][] = [];
+  // The original unique-pair measurement always has priority. The explicit
+  // native extension may only distinguish its concentric support alternatives.
+  const support = pairs.length !== 1 && options.distinguishCellSupport
+    ? distinguishTraceCellSupport(rows, g, marks, parts) : null;
+  if (pairs.length !== 1 && !support) return null;
+  const [head, receiver] = support?.pair ?? pairs[0]!, traceValue = head.center_value, edges: R[] = [], traced: [Point, Point][] = [];
   for (let y = 0; y < ny; y++) for (let x = 0; x < nx; x++) for (const [dx, dy] of [[1, 0], [0, 1]] as Point[]) {
     if (x + dx >= nx || y + dy >= ny) continue;
     const a: Point = [x, y], other: Point = [x + dx, y + dy], [px, py] = traceFieldCenter(g, a), [qx, qy] = traceFieldCenter(g, other);
@@ -119,6 +124,7 @@ export function measureTraceField(rows: NativeRows, retainedGeometry: R | null =
   path.reverse();
   return { geometry: g, geometry_ref: identity(g), head, receiver_hypothesis: receiver, prefix: path.map(point => [...point]),
     allowed_edges_hypothesis: allowed, edge_measurements: edges, trace_value: path.length > 1 ? traceValue : null,
+    ...(support ? { native_support_discrimination: support.witness } : {}),
     scope: 'Thinner separators as passages and distinct empty mark as final receiver remain hypotheses. No palette role or game law is fixed.' };
 }
 

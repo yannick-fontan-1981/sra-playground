@@ -154,10 +154,8 @@ app.innerHTML = `
               <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level.</p>
             </div>
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}" hidden>
-              <p class="agent-engine-name">LOGOS ENGINE / NATIVE SRA</p>
               <h3>Solve with SRA.</h3>
-              <p class="agent-introduction">V6 reasoning is being transferred into the common V7 engine. The native agent observes the game, prepares action sequences and checks their effects.</p>
-              <p id="agent-message" class="agent-message" role="status" aria-live="polite">Start from level 1, then run toward the next completed level.</p>
+              <p id="agent-message" class="agent-message" role="status" aria-live="polite" aria-atomic="true" tabindex="0">Ready to run from level 1.</p>
               <div class="agent-run-controls">
                 <button id="agent-run" type="button" class="primary-button">Run to next level</button>
                 <button id="agent-batch" type="button" class="secondary-button">Run 16 actions</button>
@@ -169,9 +167,7 @@ app.innerHTML = `
                 <div><strong id="agent-level-count">0</strong><span>levels solved</span></div>
                 <div><strong id="agent-prefix-count">0</strong><span>completed plans</span></div>
               </div>
-              <p id="agent-decision" class="agent-decision">The transferred reasoning programs will select the next action sequence.</p>
-              <div id="agent-unsupported" hidden><p>The V6 campaign begins at level 1 and carries its acquired knowledge into later levels.</p><button id="agent-restart" type="button" class="secondary-button">Restart game at level 1</button></div>
-              <p class="agent-scope">Runs locally, without a model server. Up to 600 actions and 6 minutes of active solving per level. Pause keeps the current reasoning session.</p>
+              <div id="agent-unsupported" hidden><button id="agent-restart" type="button" class="secondary-button">Restart game at level 1</button></div>
               <button id="agent-new-session" type="button" class="agent-text-button">New reasoning session</button>
               <button id="return-manual" type="button" class="agent-text-button">Return to Manual ${icon('arrow')}</button>
             </div>
@@ -182,6 +178,8 @@ app.innerHTML = `
           <summary class="agent-inspection-toggle">Inspect reasoning <span>Open to display the current plan, trace and memory</span></summary>
           <div class="agent-inspection-header"><div><p class="eyebrow">LIVE REASONING</p><h3>The current action sequence</h3></div><a class="text-link" href="/reasoning-lab.html">V7 Reasoning Lab ${icon('arrow')}</a></div>
           <p id="agent-cycle-summary">The engine will read the current visible frame when you start.</p>
+          <p id="agent-status-detail" class="agent-inspection-message"></p>
+          <p id="agent-decision" class="agent-decision" hidden></p>
           <div id="agent-plan" class="agent-plan"><p>No action sequence selected yet.</p></div>
           <details id="agent-trace-details"><summary>Inspect the V6 reasoning trace <span id="agent-trace-count"></span></summary><div id="agent-trace" class="agent-trace"><p>No reasoning cycle yet.</p></div></details>
           <div id="agent-knowledge"></div>
@@ -282,21 +280,32 @@ function updateAgentInterface(): void {
   element<HTMLButtonElement>('#agent-new-session').disabled = !ready() || Boolean(state?.busy);
   element<HTMLButtonElement>('#agent-restart').disabled = !ready() || Boolean(state?.busy);
   element('#agent-unsupported').hidden = !needsRestart;
+  const pausedMessage = state?.message.startsWith('Level completed.') ? 'Level completed.'
+    : state?.message.startsWith('One action completed.') ? 'One action completed.'
+    : state?.message.startsWith('Batch limit reached:') ? `${state.message.split('. ')[0]}.`
+    : state?.message.startsWith('Paused.') ? 'Paused.' : state?.message;
   const message = loading ? 'Waiting for the game to load…' : failed ? 'Reload the game to continue.'
-    : state?.sessionId ? state.message
-    : needsRestart ? 'Restart this game at level 1 to begin a V6 campaign.'
+    : state?.sessionId ? state.status === 'preparing' ? 'Preparing the agent…'
+      : state.status === 'thinking' ? 'Reading the board and planning…'
+      : state.status === 'acting' ? 'Applying the next action…'
+      : state.status === 'paused' ? pausedMessage
+      : state.message
+    : needsRestart ? 'Restart at level 1 to begin.'
     : terminal ? 'This game has ended. Use Manual to reset or restart it.'
     : observation && !grounded ? 'The game offers no action in its current public state.'
-    : state?.message ?? 'Start from level 1, then run toward the next completed level.';
-  element('#agent-message').textContent = message;
+    : state?.status === 'idle' ? 'Ready to run from level 1.'
+    : state?.message ?? 'Ready to run from level 1.';
+  element('#agent-message').textContent = message ?? '';
   element('#agent-message').setAttribute('data-status', state?.status ?? 'idle');
   element('#agent-action-count').textContent = String(state?.actionCount ?? 0);
   element('#agent-level-count').textContent = String(state?.sessionId ? state.levelsCompleted : 0);
   element('#agent-prefix-count').textContent = String(state?.cycles ?? 0);
-  element('#agent-decision').textContent = state?.lastDecision ?? 'The transferred reasoning programs will select the next action sequence.';
   // Inspection is opt-in. Closed panels neither stringify retained evidence nor
   // rebuild the action/trace DOM as the solver advances.
   if (mode !== 'agent' || !element<HTMLDetailsElement>('#agent-inspection').open) return;
+  element('#agent-status-detail').textContent = state?.message ?? message ?? '';
+  element('#agent-decision').textContent = state?.lastDecision ?? '';
+  element('#agent-decision').hidden = !state?.lastDecision;
   element('#agent-cycle-summary').textContent = state?.sessionId
     ? `${state.actionCount} actions · ${state.levelsCompleted} completed levels · ${state.cycles ?? 0} completed plans · ${state.activeSeconds.toFixed(1)} s active solving`
     : 'The engine will read the current visible frame when you start.';

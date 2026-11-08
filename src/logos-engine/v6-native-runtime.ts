@@ -49,12 +49,14 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.16.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.17.0';
 // The implementation identity and public snapshot describe the same extensions.
 const NATIVE_CALLER_EXTENSIONS = ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
   'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery',
   'conditional_program_relation_acquisition_and_validation', 'complete_homologous_aligned_mark_support',
   'bounded_labeled_predicate_composition_after_atomic_contradiction',
+  'structural_cell_support_disambiguation_for_trace_marks',
+  'immutable_linked_packet_emission_receipts',
   'current_acquired_continuation_before_unacquired_exploration',
   'stationary_unlearned_contact_refusal_scope'] as const;
 const SELECTION_PROGRAM = 'v6.composition_strategy.choose';
@@ -835,7 +837,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id),
-        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_native_relations_radial_ports_rooted_quota_native_mark_support_product_panel_labeled_sequence_trace_field_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
+        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_native_relations_radial_ports_rooted_quota_native_mark_support_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
         sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,
         nativeCallerExtensions: NATIVE_CALLER_EXTENSIONS,
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
@@ -1025,10 +1027,10 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     configuration.coupled_support_composition, configuration.alternating_graph_composition,
     (configuration.window_constraints as R).cell_patch_composition,
     { currentProgramAccess: true, programControlDiscovery: true, programRelationLearning: true, extendedRootedMarkSupport: true,
-      composedLabeledPredicates: true },
+      composedLabeledPredicates: true, distinguishTraceCellSupport: true },
     (configuration.window_constraints as R).radial_port_composition, (configuration.window_constraints as R).rooted_quota_composition,
     (configuration.window_constraints as R).product_panel_composition, (configuration.window_constraints as R).labeled_sequence_composition,
-    (configuration.window_constraints as R).trace_field_composition);
+    (configuration.window_constraints as R).trace_field_composition, (configuration.window_constraints as R).linked_packet_composition);
   const policy = loaded.common as R;
   const supportChildren: Record<string, NativeFamily<any>> = {
     ordered_support_transfer: ordered,
@@ -1052,7 +1054,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   // The cell, occurrence and program source entries share one acquired journal, but
   // each is consulted only at its own position in the original DRM order.
   const windowProviders: Record<string, NativeFamily> = {
-    multiscale_constraints: windows, product_panel_composition: recall, labeled_sequence_composition: recall, trace_field_composition: recall,
+    multiscale_constraints: windows, product_panel_composition: recall, labeled_sequence_composition: recall,
+    linked_packet_composition: recall, trace_field_composition: recall,
     cell_patch_composition: recall, observed_occurrence_recall: recall,
     observed_program_composition: recall, radial_port_composition: recall, rooted_quota_composition: recall, ...supportChildren,
   };

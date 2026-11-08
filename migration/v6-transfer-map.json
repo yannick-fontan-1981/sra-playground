@@ -1951,7 +1951,8 @@
         "agents/yf_arc3_v6/laya_proto/trace_field_observation.py"
       ],
       "targets": [
-        "src/logos-engine/v6-trace-field-observation.ts"
+        "src/logos-engine/v6-trace-field-observation.ts",
+        "src/logos-engine/v6-trace-field-support.ts"
       ],
       "status": "component_verified",
       "proof": [
@@ -1959,9 +1960,10 @@
         "tests/fixtures/v6-trace-field-original-public.json.gz",
         "scripts/export-v6-trace-field-reference.py",
         "tests/fixtures/v6-trace-field-reference.json.gz",
-        "tests/v6-trace-field-reference.test.ts"
+        "tests/v6-trace-field-reference.test.ts",
+        "tests/v6-trace-field-support.test.ts"
       ],
-      "notes": "Complete own public-raster observer: repeated square cells, enclosing geometry, current distinguishable rings, conditional thin-separator edges, ordered observed trace, point centers and ring matching. All roles are measured from the current raster; no game identity, fixed palette, coordinate or authored path is supplied. Source fixtures include palette bijections, translation, reflections, transposition, scale, ambiguous or damaged supports and retained geometry. The exact source refusal on the fifth-level public boundary is preserved, rather than selecting a visually plausible ring from downstream route satisfiability."
+      "notes": "Complete own public-raster observer: repeated square cells, enclosing geometry, current distinguishable rings, conditional thin-separator edges, ordered observed trace, point centers and ring matching. All roles are measured from the current raster; no game identity, fixed palette, coordinate or authored path is supplied. Source fixtures include palette bijections, translation, reflections, transposition, scale, ambiguous or damaged supports and retained geometry. The exact source refusal on the fifth-level public boundary is preserved, rather than selecting a visually plausible ring from downstream route satisfiability. The source-compatible default still refuses competing rings. v47 separately enables structural_cell_support_disambiguation_for_trace_marks only after source refusal, with current full-cell material/geometry, unique concentric inner markers and at least three homologous full cells across both axes. It chooses no interpretation from route satisfiability and preserves unresolved ambiguity."
     },
     {
       "sources": [
@@ -2017,7 +2019,7 @@
         "tests/v6-trace-field-kernel.test.ts",
         "docs/migration/native-campaigns-v46/zipp-four-levels.json"
       ],
-      "notes": "trace_field_composition is connected at its declared window position after the earlier labeled entry and before cell_patch_composition; the intervening unported linked-packet entry remains pending. The common wrapper preserves deadline, remaining actions, current measured-point support and source binding. Twelve complete CombinedObserved source proposal/guard/return envelopes are compared separately from the native cold common-caller/WHY-ACT/Kernel checks. One existing shared-series state owner retains actual Trace evidence after Labeled and before Cell, participates in mutation-aware immutable checkpoints and rejects corrupt journal restoration atomically. Its explicit native digest closure is not the complete original inherited memory, and these proofs do not establish full original-caller selection parity."
+      "notes": "trace_field_composition is connected at its declared window position after the earlier labeled entry and before cell_patch_composition; v47 separately connects the intervening linked-packet entry before Trace selection. The common wrapper preserves deadline, remaining actions, current measured-point support and source binding. Twelve complete CombinedObserved source proposal/guard/return envelopes are compared separately from the native cold common-caller/WHY-ACT/Kernel checks. One existing shared-series state owner retains actual Trace evidence after Labeled and before Cell, participates in mutation-aware immutable checkpoints and rejects corrupt journal restoration atomically. Its explicit native digest closure is not the complete original inherited memory, and these proofs do not establish full original-caller selection parity."
     },
     {
       "sources": [
@@ -2035,6 +2037,126 @@
         "tests/v6-trace-field-reference.test.ts"
       ],
       "notes": "Both EVALUATE and PROPAGATE algorithms are transferred for bounded canonical typed JSON requests: exact graph/prefix checks, residual connectivity, iterative cut counts, licensed bipartite parity, degree propagation, forced closed-subtour and saturated-chain contradictions, stable request-scoped resumable frontiers and actual work/time interruption. Descriptive receipts retain primitive_release_authorized false, and incomplete work cannot supply a complete graph result. Safe JavaScript integers and explicit booleans are required; arbitrary Python integers, general Pydantic coercion and the full typed immutable transport are not implemented. Malformed resumed-round text, null, nonfinite numbers and unsafe resulting integers are refused within this narrower native numeric domain."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/linked_support_observation.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-linked-packet-observation.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/probe-v6-linked-packet-initial-public.py",
+        "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+        "scripts/probe-v6-linked-packet-original.py",
+        "tests/fixtures/v6-linked-packet-original-public.json.gz",
+        "scripts/export-v6-linked-packet-reference.py",
+        "tests/fixtures/v6-linked-packet-reference.json.gz",
+        "tests/v6-linked-packet-reference.test.ts",
+        "tests/v6-linked-packet-kernel.test.ts"
+      ],
+      "notes": "All six public support functions are transferred on exact integer raster contracts: merge, foreground supports, scene controls, current drawing phase, changed supports and selection recipient provenance. All 100 public initial screens and controlled selection/phase cases are compared exactly. No game identity, palette role, fixed coordinate or source engine state is consumed."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/packet_line_observation.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-linked-packet-observation.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/probe-v6-linked-packet-initial-public.py",
+        "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+        "scripts/probe-v6-linked-packet-original.py",
+        "tests/fixtures/v6-linked-packet-original-public.json.gz",
+        "scripts/export-v6-linked-packet-reference.py",
+        "tests/fixtures/v6-linked-packet-reference.json.gz",
+        "tests/v6-linked-packet-reference.test.ts",
+        "tests/v6-linked-packet-kernel.test.ts"
+      ],
+      "notes": "Frame-support extraction is exact. Dated line fits use finite IEEE-754 calculations and Python/JavaScript libm numerical comparisons with tolerance 1e-12. All dated frames, measured front intervals and output comparisons remain public evidence; no physical reemission or capture law is supplied."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/packet_ray_methods.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-linked-packet-ray.ts",
+        "src/logos-engine/v6-linked-packet-numeric.ts",
+        "src/logos-engine/v6-visible-box-ray.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/probe-v6-linked-packet-initial-public.py",
+        "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+        "scripts/probe-v6-linked-packet-original.py",
+        "tests/fixtures/v6-linked-packet-original-public.json.gz",
+        "scripts/export-v6-linked-packet-reference.py",
+        "tests/fixtures/v6-linked-packet-reference.json.gz",
+        "tests/v6-linked-packet-reference.test.ts",
+        "tests/v6-linked-packet-kernel.test.ts"
+      ],
+      "notes": "Candidate angular lattices, observed-edge phase inference, conditional inverse relations, exact-context route cache and visible-support BFS are transferred. Uniform spacing and marker terminal roles remain hypotheses. Finite JavaScript libm and a declared native numerical digest replace Python floating spellings; floating SHA parity is not claimed. Only the exact box FIRST_HIT internal geometry kernel is used, not the full optical state machine or physical collision law."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/linked_packet_access.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-linked-packet-access.ts",
+        "src/logos-engine/v6-linked-packet-numeric.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/probe-v6-linked-packet-initial-public.py",
+        "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+        "scripts/probe-v6-linked-packet-original.py",
+        "tests/fixtures/v6-linked-packet-original-public.json.gz",
+        "scripts/export-v6-linked-packet-reference.py",
+        "tests/fixtures/v6-linked-packet-reference.json.gz",
+        "tests/v6-linked-packet-reference.test.ts",
+        "tests/v6-linked-packet-kernel.test.ts"
+      ],
+      "notes": "Own current selection/input/output experiments, packet acquisition, refutations and guards are transferred. Source emission payloads and current states are compared explicitly. The native immutable_linked_packet_emission_receipts extension freezes each record at emission; the Python source aliases outputs/input_steps and retroactively enriches nine earlier record payloads in the same packet acquisition. A read-only source return tracer captures both sides, without altering source execution. All float values remain finite IEEE-754 and are stored bit-exactly in the existing native graph codec; V7 canonical remains integer-only. Full historical Python alias/digest parity and unported inheritance are not asserted."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_linked_packet.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-linked-packet-access.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/probe-v6-linked-packet-initial-public.py",
+        "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+        "scripts/probe-v6-linked-packet-original.py",
+        "tests/fixtures/v6-linked-packet-original-public.json.gz",
+        "scripts/export-v6-linked-packet-reference.py",
+        "tests/fixtures/v6-linked-packet-reference.json.gz",
+        "tests/v6-linked-packet-reference.test.ts",
+        "tests/v6-linked-packet-kernel.test.ts"
+      ],
+      "notes": "linked_packet_composition is connected at its original DRM position before trace_field_composition. One common acquired journal owns the Linked layer after Trace and before Cell; complete dated packet acquisition follows ordinary records. Current point support, real deadline, action remainder, normal WHY/ACT, actual Kernel acquisition, immutable checkpoints and atomic restore are retained. Forty-four source common envelopes and a cold native common-caller three-level campaign establish bounded evidence, not complete original caller parity."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/discrete_relay_optics.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-visible-box-ray.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-visible-box-ray-reference.py",
+        "tests/fixtures/v6-visible-box-ray-reference.json.gz",
+        "tests/v6-visible-box-ray-reference.test.ts"
+      ],
+      "notes": "Exact axis_aligned_closed_box branches of _receiver_interval and _first_hit only, with shared actual time/node bounds. BigInt rational arithmetic preserves exact first impact and tie laws. Sixty-two unchanged-source cases plus provenance, budget and precision-refusal checks pass. Disks, uncertain roots, full optical calibration/state machine and arbitrary-size JSON integer receipts remain unported. A safe-integer receipt overflow refuses instead of rounding."
     }
   ],
   "scopeNotes": [
@@ -2069,7 +2191,9 @@
     "The final v45 frozen 149-file implementation separately passes all nine fresh regression campaigns and all 117 comparison checks against v44, preserving 433 commands, 442 complete public packets and 237 prefixes. MEMO reaches 3/30, TICT 6/55 WIN, HANO 4/60 WIN, ELAS 3/33, TU93 3/67, STCK 3/35, PIPE 3/23, COMB 6/104 WIN and THER 6/26 WIN. Production budgets and game assets match; source and harness hashes remain unchanged. Reported series comparison normalizes observation-session scope and excludes session-derived model IDs, native graph chains/revisions and shared inherited digests as qualified by the individual receipts. These checks do not assert full internal-state parity or a performance benchmark and add no entry to the 36/76 metric.",
     "v46 connects trace_field_composition at its original declared window position, giving 37 of 76 entries (48.7%) in native implementation 0.16.0. Its observer and finite construct helper are component_verified; own access/common inheritance and the V5 residual mechanic remain partial_transfer with explicit canonical typed-input and safe-integer bounds. The current native shared digest scope is native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_labeled_sequence_trace_field_cell_placement_alternating_graph_and_coupled_support_v6; earlier scope names above are historical. No additional complete-migration gate is passed.",
     "The v46 trace reference preserves 415 cases, 67 public or controlled scenes, twelve complete source common envelopes and all 53 isolated-component returns. Its 422 checks pass, with 825 actually imported source files recorded and all 1786 pinned manifest files verified before import and again afterwards. Six separate native common-caller/Kernel tests check current WHY-ACT authorization, actual acquisition, the two-distinct-effect threshold, new-epoch qualification, physical and computational budgets, immutable checkpoint reuse and atomic rejection of changed journals. These are component and recorded-observation integration checks, not extra live campaigns or complete original-caller parity.",
-    "The final v46 frozen 152-file native source digest 793a6b2e57ffbab74e148b1170879cd720387cbe93a2af9977c6303e05c2e731 completes four ZIPP levels in one cold continuous common-caller session with 53 actions (8/15/15/15), twelve sealed prefixes, 53 actual Kernel acquisitions and three natural-boundary replays. It stops at its declared four-level target on entry to level 5 with NOT_FINISHED; no full-game WIN or native fifth-level abstention is asserted. The separately run unchanged isolated source component reaches the same four boundaries, then abstains because its current public-raster observer returns no scene. Saved-raster measurement reproduces this absence before search, without proving impossibility or attributing it to a DFS budget. No game-specific production branch, fixed palette, authored route or Python agent module is added."
+    "The final v46 frozen 152-file native source digest 793a6b2e57ffbab74e148b1170879cd720387cbe93a2af9977c6303e05c2e731 completes four ZIPP levels in one cold continuous common-caller session with 53 actions (8/15/15/15), twelve sealed prefixes, 53 actual Kernel acquisitions and three natural-boundary replays. It stops at its declared four-level target on entry to level 5 with NOT_FINISHED; no full-game WIN or native fifth-level abstention is asserted. The separately run unchanged isolated source component reaches the same four boundaries, then abstains because its current public-raster observer returns no scene. Saved-raster measurement reproduces this absence before search, without proving impossibility or attributing it to a DFS budget. No game-specific production branch, fixed palette, authored route or Python agent module is added.",
+    "v47 connects linked_packet_composition as entry 38 of 76 (50.0%) in implementation 0.17.0. The bounded metric counts registered source entries equally; it is not full behavioral parity, code completion or game score. A separate generic trace support interpretation and immutable Linked emission receipts are declared native extensions and add no source entry. All six complete-migration gates remain false.",
+    "The final v47 frozen 158-file native digest 2f8f5d8660716e44e81fa987d08264324f61838c81ba9e96b2e64f69c136d100 completes SELE first three levels in one cold continuous actual common-caller session, with 44 actions (8/10/26), 44 prefixes,44 acquired transitions and two natural-boundary replays. It stops at the declared target on entry to4 with NOT_FINISHED. A separate ZIPP target-six attempt completes five levels by action77 (8/15/15/15/24), then stops after one action in6 at78 with frontier_unknown. Its report remains failed for the declared six-level target; no full-game WIN is asserted. The first53 commands/54 complete public packets remain separately compared to v46; extension interpretation and actual return reconciliation are qualified in their own report."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,

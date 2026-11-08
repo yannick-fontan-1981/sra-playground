@@ -162,6 +162,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const productStates = (series.events as R[]).filter(event => event.kind === 'observed_factor_product');
           const labeledSubmissions = (series.events as R[]).filter(event => event.kind === 'labeled_sequence_submission');
           const traceExtensions = (series.events as R[]).filter(event => event.kind === 'observed_trace_extension');
+          const linkedEvidence = (series.events as R[]).filter(event => event.kind === 'linked_packet_evidence');
           const relationModels = (series.events as R[]).filter(event => event.kind === 'native_program_relation_model');
           const relationTrials = (series.events as R[]).filter(event => event.kind === 'native_program_relation_trial');
           const relationRefutations = (series.events as R[]).filter(event => event.kind === 'native_program_relation_refutation');
@@ -206,6 +207,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               ? { traceField: { plan: evidence.proposal.trace_field_plan,
                     observedSteps: evidence.proposal.steps.map((step: R) => step.relation_observed),
                     stateNode: 'family_state:public_occurrence_recall' } } : {}),
+            ...(evidence.proposal.linked_packet_plan
+              ? { linkedPacket: { plan: evidence.proposal.linked_packet_plan,
+                    stateNode: 'family_state:public_occurrence_recall',
+                    numericScope: 'Finite IEEE-754 values preserved bit-exactly by the native state graph; Python libm and float digest identity are not asserted.' } } : {}),
             supportMode: evidence.proposal.support_preparation_plan?.mode ?? null,
             graphChain: graph.chain, graphRevision: snapshot.graphRevision, callerAcquiredTransitions: snapshot.caller.acquiredTransitions,
             sharedSeries: { digestScope: snapshot.coverage.sharedSeriesDigestScope, digest: series.digest,
@@ -237,6 +242,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               labeledSequenceLatestSubmission: labeledSubmissions.at(-1) ?? null,
               traceFieldExtensionCount: traceExtensions.length,
               traceFieldLatestExtension: traceExtensions.at(-1) ?? null,
+              linkedPacketEvidenceCount: linkedEvidence.length,
+              linkedPacketLatestEvidence: linkedEvidence.at(-1) ?? null,
               nativeProgramRelations: { modelCount: relationModels.length, trialCount: relationTrials.length,
                 refutationCount: relationRefutations.length, latestModel: relationModels.at(-1) ?? null,
                 latestTrial: relationTrials.at(-1) ?? null, latestRefutation: relationRefutations.at(-1) ?? null },

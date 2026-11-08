@@ -512,7 +512,8 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 .local-label{font-size:13px;letter-spacing:.1px;gap:7px}
 .local-label .status-dot{background:var(--yellow)}
 .minimal-play-area{grid-template-columns:minmax(0,1fr) 232px;min-height:444px;background:#090d13}
-.minimal-play-area .board-column{padding:29px 38px;background:#0d1117;justify-content:center}
+/* Keep the square board's height independent of the adjacent control panel. */
+.minimal-play-area .board-column{align-self:start;padding:29px 38px;background:#0d1117;justify-content:center}
 .minimal-play-area .canvas-stage{width:min(100%,384px);margin:0;background:#040608;box-shadow:0 0 0 5px #265b9b,0 0 0 8px #14283f}
 .canvas-stage canvas:focus-visible{outline:2px solid var(--yellow);outline-offset:7px}
 .minimal-play-area #fullscreen-button{top:12px;right:12px;background:#285e9e;border-color:#8ab9f3;color:#f5f9ff;border-radius:3px}

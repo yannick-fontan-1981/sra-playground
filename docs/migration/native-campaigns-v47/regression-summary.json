@@ -1,0 +1,126 @@
+{
+  "schema": "logos-engine.v47.regression-summary.v1",
+  "passed": true,
+  "verification": {
+    "path": "docs/migration/native-campaigns-v47/regression-verification.json",
+    "sha256": "89f72f8ddcad4e4b098c759105608eed818006a7853857df092adbae706825bb",
+    "bytes": 396529
+  },
+  "plan": {
+    "path": "docs/migration/native-campaigns-v47/regression-plan.json",
+    "sha256": "0cd0088c8504379f1cb5dc92fe242893d7e35bc3226d6ed13a6ce37ddd8854e7",
+    "bytes": 8033
+  },
+  "sourceDigest": "2f8f5d8660716e44e81fa987d08264324f61838c81ba9e96b2e64f69c136d100",
+  "nativeSourceFiles": 158,
+  "qualification": "Four cold native common-caller replays recalculate commands before consuming complete public returns from prior actual campaigns. These bounded affected-layer regressions cover learned programs, labeled predicates, reduction coordination and cell placement. They are not new live game successes or speed comparisons. The source manifest, commands, complete packets, source selections, retained projections and guards remain explicit. The separate current SELE and ZIPP campaigns use the opaque game host. No Python agent modules are authorized.",
+  "groups": [
+    {
+      "mode": "recorded-public-replay",
+      "runs": 4,
+      "passed": true,
+      "commands": 242,
+      "completePublicPackets": 246,
+      "prefixes": 189,
+      "comparisonChecks": 60,
+      "games": [
+        "STCK",
+        "CATL",
+        "LF52",
+        "TICT"
+      ]
+    },
+    {
+      "mode": "actual-game-campaign",
+      "runs": 0,
+      "passed": true,
+      "commands": 0,
+      "completePublicPackets": 0,
+      "prefixes": 0,
+      "comparisonChecks": 0,
+      "games": []
+    }
+  ],
+  "results": [
+    {
+      "game": "STCK",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 35,
+      "levelsCompleted": 3,
+      "state": "NOT_FINISHED",
+      "prefixes": 15,
+      "report": {
+        "path": "docs/migration/native-campaigns-v47/stck-recorded-public-replay.json",
+        "sha256": "48e0c42ba02d65d8180fb3e1893735a4f94ed8e31f368456d845c4153837976d",
+        "bytes": 192965
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v47/stck-regression-comparison.json",
+        "sha256": "c55fa486e98c73de445a8b04c5ef86f1f57c2e4d7f29505754a46a5734ae1940",
+        "bytes": 3310
+      }
+    },
+    {
+      "game": "CATL",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 48,
+      "levelsCompleted": 6,
+      "state": "WIN",
+      "prefixes": 48,
+      "report": {
+        "path": "docs/migration/native-campaigns-v47/catl-recorded-public-replay.json",
+        "sha256": "b2046631fa3a4d6821b6bf428af3fb8716e1bd37a9d627497e77cae5ffdcd6a9",
+        "bytes": 3878340
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v47/catl-regression-comparison.json",
+        "sha256": "c37f4595d95c14850d0e9285a4bcfeccc2820b697dc0cd1abfed7f5f5535b592",
+        "bytes": 3308
+      }
+    },
+    {
+      "game": "LF52",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 104,
+      "levelsCompleted": 3,
+      "state": "NOT_FINISHED",
+      "prefixes": 71,
+      "report": {
+        "path": "docs/migration/native-campaigns-v47/lf52-recorded-public-replay.json",
+        "sha256": "09367c101591bd46c443ec3c63737ea85039942420ee082d44e96fd65e7ac770",
+        "bytes": 3957306
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v47/lf52-regression-comparison.json",
+        "sha256": "0fb2bed64ba4d3b86925a8b8e0f3da657e84b929e44332035a4124bcde72e53a",
+        "bytes": 3312
+      }
+    },
+    {
+      "game": "TICT",
+      "mode": "recorded-public-replay",
+      "passed": true,
+      "status": "passed",
+      "actions": 55,
+      "levelsCompleted": 6,
+      "state": "WIN",
+      "prefixes": 55,
+      "report": {
+        "path": "docs/migration/native-campaigns-v47/tict-recorded-public-replay.json",
+        "sha256": "6a1acb8bacd28f8ac839da249a588640af5946fe71f12554503f70548d5c60ac",
+        "bytes": 821192
+      },
+      "comparison": {
+        "path": "docs/migration/native-campaigns-v47/tict-regression-comparison.json",
+        "sha256": "a04e969bba3cf4d3fdebdaef6b07c0670c5ad6d6964c396dbf9689e30dee8b71",
+        "bytes": 3308
+      }
+    }
+  ]
+}
