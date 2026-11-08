@@ -394,7 +394,7 @@ test('cold common acquisition scopes a contact refusal and measures a conditiona
       return original(...args);
     });
     assert.equal(await refusalScoped(), false);
-    assert.deepEqual(calls, ['cell_patch_composition']);
+    assert.deepEqual(calls, ['product_panel_composition', 'cell_patch_composition']);
   });
   assert.equal(runtime.inspectKnowledge(), graphBefore, 'Counterfactual refusal checks do not alter the Kernel graph');
   assert.deepEqual(family.state(), acquired, 'Counterfactual arbitration acquires no model or binding');

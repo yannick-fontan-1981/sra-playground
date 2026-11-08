@@ -46,7 +46,12 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.12.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.13.0';
+// The implementation identity and public snapshot describe the same extensions.
+const NATIVE_CALLER_EXTENSIONS = ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
+  'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery',
+  'conditional_program_relation_acquisition_and_validation', 'complete_homologous_aligned_mark_support',
+  'stationary_unlearned_contact_refusal_scope'] as const;
 const SELECTION_PROGRAM = 'v6.composition_strategy.choose';
 type R = Record<string, any>;
 const EPISODE = 'common-observation-frontier';
@@ -754,11 +759,9 @@ export class NativeV6Runtime implements NativeV6Backend {
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id),
-        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_native_relations_radial_ports_rooted_quota_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
+        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_native_relations_radial_ports_rooted_quota_native_mark_support_product_panel_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
         sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,
-        nativeCallerExtensions: ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
-          'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery', 'conditional_program_relation_acquisition_and_validation',
-          'stationary_unlearned_contact_refusal_scope'],
+        nativeCallerExtensions: NATIVE_CALLER_EXTENSIONS,
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
       srcDecision: this.selectionReceipt,
       whyAct: this.authority?.snapshot() ?? { enabled: false, scope: 'injected_family_test_runtime' },
@@ -936,8 +939,10 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const interfaces = createNativeInterfaceFamilies();
   const recall = createNativeSharedSeriesFamily((configuration.window_constraints as R).occurrence_recall,
     configuration.coupled_support_composition, configuration.alternating_graph_composition,
-    (configuration.window_constraints as R).cell_patch_composition, { currentProgramAccess: true, programControlDiscovery: true, programRelationLearning: true },
-    (configuration.window_constraints as R).radial_port_composition, (configuration.window_constraints as R).rooted_quota_composition);
+    (configuration.window_constraints as R).cell_patch_composition,
+    { currentProgramAccess: true, programControlDiscovery: true, programRelationLearning: true, extendedRootedMarkSupport: true },
+    (configuration.window_constraints as R).radial_port_composition, (configuration.window_constraints as R).rooted_quota_composition,
+    (configuration.window_constraints as R).product_panel_composition);
   const policy = loaded.common as R;
   const supportChildren: Record<string, NativeFamily<any>> = {
     ordered_support_transfer: ordered,
@@ -961,7 +966,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   // The cell, occurrence and program source entries share one acquired journal, but
   // each is consulted only at its own position in the original DRM order.
   const windowProviders: Record<string, NativeFamily> = {
-    multiscale_constraints: windows, cell_patch_composition: recall, observed_occurrence_recall: recall,
+    multiscale_constraints: windows, product_panel_composition: recall, cell_patch_composition: recall, observed_occurrence_recall: recall,
     observed_program_composition: recall, radial_port_composition: recall, rooted_quota_composition: recall, ...supportChildren,
   };
   const windowEntries = (configuration.window_constraints.ordered_subquestions as string[])
@@ -1001,9 +1006,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const manifest = { sourceEncoding: 'json-stringify-v1', implementation: NATIVE_V6_IMPLEMENTATION, referenceCommit: NATIVE_V6_REFERENCE_COMMIT,
     declarations: loaded, families: [...families.map(f => f.id), ...CALLER_PROVIDERS], groups, authority: 'native_original_why_act', caller: 'native_common_coordinator',
     selectionProgram: nativeProgramDescriptions().find(program => program.id === 'v6.composition_strategy.choose')?.transitiveSourceHash ?? null,
-    nativeCallerExtensions: ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
-      'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery', 'conditional_program_relation_acquisition_and_validation',
-      'stationary_unlearned_contact_refusal_scope'],
+    nativeCallerExtensions: NATIVE_CALLER_EXTENSIONS,
     fullV6Parity: false };
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');

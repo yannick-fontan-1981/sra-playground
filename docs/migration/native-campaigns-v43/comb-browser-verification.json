@@ -1,0 +1,42 @@
+{
+  "schema": "logos-engine.v43.browser-verification.v1",
+  "game": "COMB",
+  "surface": "managed development preview from the same frozen checkout",
+  "nativeSourceManifestDigest": "702fd71e5c234d1942dab9685306aa252b68eaa1280def89d9665a3fcbe2a3fb",
+  "observedUrl": "http://127.0.0.1:4173/?game=COMB&level=6",
+  "mode": "SRA Agent Native TS",
+  "initialLevel": 1,
+  "initialActions": 0,
+  "initialSolvedLevels": 0,
+  "controlsUsed": [
+    "Choose COMB",
+    "SRA Agent Native TS",
+    "Run to next level",
+    "Run to next level",
+    "Run to next level",
+    "Run to next level",
+    "Run to next level",
+    "Run to next level"
+  ],
+  "cumulativeActionsAtBoundaries": [
+    3,
+    10,
+    24,
+    43,
+    73,
+    104
+  ],
+  "solvedLevels": 6,
+  "completedPlans": 45,
+  "finalVisibleLevel": 6,
+  "visibleStatus": "The game reports WIN.",
+  "visibleVictoryHeading": "VICTORY",
+  "inspectionClosedAtStart": true,
+  "inspectionOpenedDuringRun": false,
+  "manualGameActions": 0,
+  "agentSessionResets": 0,
+  "levelJumps": 0,
+  "screenshot": "comb-browser-six-levels.png",
+  "screenshotSha256": "4415452cb410d3a9fcd9afa003410b4287ef6e00812606cd47fc4d8045ee3378",
+  "qualification": "Actual browser observations from a cold continuous run, with only six natural level-boundary resumptions. Frozen production source matches canonical campaigns. Site publication is verified separately."
+}

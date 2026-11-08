@@ -28,21 +28,21 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **THER now completes its
-  first four levels in 15 actions (4, 3, 4 and 4)** through one fresh common
-  Logos Engine session, acquiring all 15 transitions across six prefixes.
-  **STCK now also completes level 4**, reaching four completed levels in
-  **45 actions (3, 7, 25 and 10)** through a separate cold common session.
-  Both bounded campaigns stop at their declared target on entry to level 5
-  with `NOT_FINISHED`, without claiming a full-game win.
-  The [v42 rooted-quota and conditional-relation report](docs/migration/v42-rooted-quota-program-relations.md)
-  documents the original quota component transfer, conditional return
-  preparation, acquisition of a phase-associated relation and a real guarded
-  transport experiment. The official fourth-level completion does not
-  strengthen that relation: its terminal packet excludes phase attribution,
-  so fixed/relative displacement and delayed-response alternatives remain open.
-  Acquired state and proposal evidence use the actual Kernel graph;
-  observation, search and guard algorithms still run as native TypeScript callbacks.
+  level**; opening the tab does not move the game. **COMB now completes all
+  six levels with official `WIN` in 104 actions (3, 7, 14, 19, 30 and 31)**,
+  through one cold common Logos Engine session and 45 acquired prefixes.
+  **THER also completes all six levels with official `WIN` in 26 actions
+  (4, 3, 4, 4, 5 and 6)**, through a separate cold session and eight prefixes.
+  The [v43 product-panel and mark-support report](docs/migration/v43-product-panels-mark-support.md)
+  documents the faithful transfer of conditional factor composition, the native
+  extension of complete visible mark support, exact original-component
+  comparisons, actual Kernel acquisition and limits. Neither the game name nor
+  a level number chooses a reasoning rule. Official success remains distinct
+  from a universal control or terminal law. Observation, search and guard
+  algorithms still run as native TypeScript callbacks.
+  **Previous v42 milestone: STCK completes its first four levels in 45 actions
+  (3, 7, 25 and 10)** through conditional return preparation and a measured
+  relation. See the [v42 report](docs/migration/v42-rooted-quota-program-relations.md).
   **Previous v41 milestone: PIPE completes its first three levels in 23 actions
   (4, 8 and 11)**; see the [v41 report](docs/migration/v41-radial-ports-control-discovery.md).
   **Previous v40 milestone: MEMO completes its first three levels in 30 actions
@@ -52,9 +52,9 @@ Fontan's **Symbolic Reasoning Agent** research.
   **Previous v38 milestone: TICT completes all six levels with official `WIN`
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
-  The current entry audit connects **33 of 76 explicit DRM subquestions
-  (43.4%)**, with one newly connected rooted-quota entry. Conditional program
-  relations are explicit native extensions and add no source entry.
+  The current entry audit connects **34 of 76 explicit DRM subquestions
+  (44.7%)**, with one newly connected product-panel entry. Complete aligned-mark
+  support is an explicit native extension and adds no source entry.
   Complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These

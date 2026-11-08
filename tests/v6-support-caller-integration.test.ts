@@ -53,7 +53,7 @@ test('the real common caller retains the complete first recall envelope, epoch a
   assert.notEqual(series.digest, sourceFacts.find(fact => fact.key === 'repeated_series_state')!.value.digest,
     'The native closure does not impersonate the digest of the unported inheritance chain');
   assert.match((result.snapshot.coverage as R).sharedSeriesMemory, /remaining ObservedCompositionConstraint providers pending/);
-  assert.equal((result.snapshot.coverage as R).sharedSeriesDigestScope, 'native_program_relations_recall_radial_ports_rooted_quota_cell_placement_alternating_graph_and_coupled_support_v6');
+  assert.equal((result.snapshot.coverage as R).sharedSeriesDigestScope, 'native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_cell_placement_alternating_graph_and_coupled_support_v6');
   assert.equal(read('family_state:public_occurrence_recall').events.filter((event: R) => event.kind === 'occurrence_recall_transition').length, 1,
     'The selected recall event is not acquired a second time by passive observation');
 });

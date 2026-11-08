@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 91,
-    "partiallyTransferredModules": 65,
+    "componentVerifiedModules": 93,
+    "partiallyTransferredModules": 68,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1213,
+    "pendingModules": 1208,
     "strategyFamilies": 16
   },
   "families": [
@@ -14944,9 +14944,15 @@
           "endLine": 497
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-product-panel-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-product-panel-reference.py",
+        "tests/fixtures/v6-product-panel-reference.json.gz",
+        "tests/v6-product-panel-parity.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/d_native_goal_domain_audit_d.py",
@@ -29614,7 +29620,8 @@
       "targets": [
         "src/logos-engine/v6-arrival-mechanics.ts",
         "src/logos-engine/v6-ray-capture-domain.ts",
-        "src/logos-engine/v6-rooted-quota-mechanics.ts"
+        "src/logos-engine/v6-rooted-quota-mechanics.ts",
+        "src/logos-engine/v6-product-panel-mechanics.ts"
       ],
       "proof": [
         "scripts/export-v6-configured-arrivals-reference.py",
@@ -29625,7 +29632,10 @@
         "tests/v6-support-extensions.test.ts",
         "scripts/export-v6-rooted-quota-reference.py",
         "tests/fixtures/v6-rooted-quota-reference.json.gz",
-        "tests/v6-rooted-quota-parity.test.ts"
+        "tests/v6-rooted-quota-parity.test.ts",
+        "scripts/export-v6-product-panel-reference.py",
+        "tests/fixtures/v6-product-panel-reference.json.gz",
+        "tests/v6-product-panel-parity.test.ts"
       ]
     },
     {
@@ -77531,9 +77541,20 @@
           "endLine": 32
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-product-panel-access.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-product-panel-reference.py",
+        "tests/fixtures/v6-product-panel-reference.json.gz",
+        "tests/v6-product-panel-parity.test.ts",
+        "scripts/probe-v6-product-panel-original.py",
+        "tests/fixtures/v6-product-panel-original-public.json.gz",
+        "tests/v6-product-panel-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_program_composition.py",
@@ -82853,9 +82874,18 @@
           "endLine": 71
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-product-panel-access.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-product-panel-reference.py",
+        "tests/fixtures/v6-product-panel-reference.json.gz",
+        "tests/v6-product-panel-parity.test.ts",
+        "scripts/probe-v6-product-panel-original.py",
+        "tests/fixtures/v6-product-panel-original-public.json.gz",
+        "tests/v6-product-panel-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/product_panel_methods.py",
@@ -82870,9 +82900,17 @@
           "endLine": 31
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-product-panel-mechanics.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-product-panel-reference.py",
+        "tests/fixtures/v6-product-panel-reference.json.gz",
+        "tests/v6-product-panel-parity.test.ts",
+        "scripts/probe-v6-product-panel-original.py",
+        "tests/fixtures/v6-product-panel-original-public.json.gz"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/product_panel_observation.py",
@@ -82887,9 +82925,17 @@
           "endLine": 53
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-product-panel-observation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-product-panel-reference.py",
+        "tests/fixtures/v6-product-panel-reference.json.gz",
+        "tests/v6-product-panel-parity.test.ts",
+        "scripts/probe-v6-product-panel-original.py",
+        "tests/fixtures/v6-product-panel-original-public.json.gz"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/program_composition_access.py",
@@ -96710,6 +96756,8 @@
     "v41 also exposes measured_program_control_discovery and stationary_unlearned_contact_refusal_scope as native evolutions, not additional Python transfers. New control insertions, input roles and unknown operator phases are distinguished; every question requires an actual public return and current guards. A failed stationary unlearned invitation remains acquired evidence and can be scoped locally only for an independently grounded guarded inquiry. Acquired radial preparation expands the existing native priority witness, separately from source algorithm parity. These algorithms and guards are still TypeScript callbacks; their revisioned graph evidence is not a claim that all reasoning rules are declaratively editable.",
     "The frozen native 0.11.0 PIPE campaign is separately successful for three levels: 23 actions (4/8/11), one session, 20 sealed prefixes, 23 acquired transitions and two boundary replays, stopping at level 4 with NOT_FINISHED. A saved-evidence-only structural comparison to the unchanged isolated radial component matches every command, every complete public packet and animation, available-action order, official boundary and executed prefix length. No game/agent is rerun by that comparison and no field is projected or normalized. This exact bounded trajectory does not compare the full original caller selection, complete retained memory, budgets or performance.",
     "v42 adds the source-declared rooted_quota_composition window provider with six explicit source mappings. Rooted-chain observation and the bounded caller helpers are component_verified; own access/common inheritance and both mechanical V5 modules remain partial_transfer. The source-only fixture contains 176 cases, 18 scenes and five true CombinedObservedCompositionMemory envelopes, and its 181 focused tests verify 825 loaded source-file hashes. The original rooted record cutoff suppresses older Program/Occurrence/Radial acquisition, preserves outer Cell/Graph/Pair/Auxiliary acquisition and still runs record_packet. Every actual public return and boundary in the isolated 11-action component trajectory is covered by source-family envelope and native checkpoint checks. Safe JavaScript integer limits, missing Pydantic/general inherited transport and the narrower native digest are explicit. The unchanged isolated component reaches three THER levels in 11 actions (4/3/4); this is separate from a fresh native common-caller campaign, which is not claimed by these fixture proofs. No additional complete-migration gate is passed.",
-    "At v42, the current native shared closure is native_program_relations_recall_radial_ports_rooted_quota_cell_placement_alternating_graph_and_coupled_support_v6. Earlier closure names in historical campaign notes remain historical. Conditional program relation acquisition, inverse-return preparation and transport validation are explicit native extensions, not claims of unchanged Python behavior. Four native THER levels and four STCK levels are completed; STCK terminal progress does not add a second relation sample or a terminal law. Mixed retained native derivations are outside the source-only quota envelope parity."
+    "At v42, the current native shared closure is native_program_relations_recall_radial_ports_rooted_quota_cell_placement_alternating_graph_and_coupled_support_v6. Earlier closure names in historical campaign notes remain historical. Conditional program relation acquisition, inverse-return preparation and transport validation are explicit native extensions, not claims of unchanged Python behavior. Four native THER levels and four STCK levels are completed; STCK terminal progress does not add a second relation sample or a terminal law. Mixed retained native derivations are outside the source-only quota envelope parity.",
+    "v43 connects product_panel_composition at its original window position, giving 34 of 76 declared entries (44.7%). Its four V6 modules and one V5 mechanical module have distinct component/partial qualifications; no complete migration gate is passed. Product acquisition belongs after Rooted and before Cell/Graph/Pair/Auxiliary, remains passive for measurable public returns and participates in one actual Kernel journal with atomic restoration.",
+    "v43 separately adds complete_homologous_aligned_mark_support as an explicit native extension. The faithful source observer remains unchanged. Pixel-only homology, alignment, palette, spacing, anchors and visible termination determine an extended mark reading; downstream quota satisfiability never selects counts. Ambiguous support abstains. Every dispatched continuation revalidates geometry and mark support; a real acquired return retains the descriptive evidence. Native mark support adds no source entry. The current shared digest closure is native_program_relations_recall_radial_ports_rooted_quota_mark_support_product_panel_cell_placement_alternating_graph_and_coupled_support_v6; historical closure names above remain historical."
   ]
 }

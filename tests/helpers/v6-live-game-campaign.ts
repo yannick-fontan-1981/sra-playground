@@ -148,6 +148,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const controlBindings = (series.events as R[]).filter(event => event.kind === 'native_program_control_binding');
           const controlEffects = (series.events as R[]).filter(event => event.kind === 'native_program_control_effect');
           const rootedStates = (series.events as R[]).filter(event => event.kind === 'rooted_quota_state');
+          const productStates = (series.events as R[]).filter(event => event.kind === 'observed_factor_product');
           const relationModels = (series.events as R[]).filter(event => event.kind === 'native_program_relation_model');
           const relationTrials = (series.events as R[]).filter(event => event.kind === 'native_program_relation_trial');
           const relationRefutations = (series.events as R[]).filter(event => event.kind === 'native_program_relation_refutation');
@@ -171,6 +172,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               ? { programRelationMode: evidence.proposal.program_relation_plan.mode } : {}),
             ...(evidence.proposal.rooted_quota_plan
               ? { rootedQuotaPhase: evidence.proposal.rooted_quota_plan.phase } : {}),
+            ...(evidence.proposal.product_panel_plan
+              ? { productPanelFactors: evidence.proposal.product_panel_plan.scene.controls.length,
+                  productPanelEstimated: evidence.proposal.product_panel_plan.estimate !== null,
+                  productPanelObservedSteps: evidence.proposal.steps.map((step: R) => step.relation_observed) } : {}),
             supportMode: evidence.proposal.support_preparation_plan?.mode ?? null,
             graphChain: graph.chain, graphRevision: snapshot.graphRevision, callerAcquiredTransitions: snapshot.caller.acquiredTransitions,
             sharedSeries: { digestScope: snapshot.coverage.sharedSeriesDigestScope, digest: series.digest,
@@ -196,6 +201,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
                 latestTrial: controlTrials.at(-1) ?? null, latestBinding: controlBindings.at(-1) ?? null, latestEffect: controlEffects.at(-1) ?? null },
               rootedQuotaStateCount: rootedStates.length,
               rootedQuotaLatestState: rootedStates.at(-1) ?? null,
+              productPanelStateCount: productStates.length,
+              productPanelLatestState: productStates.at(-1) ?? null,
               nativeProgramRelations: { modelCount: relationModels.length, trialCount: relationTrials.length,
                 refutationCount: relationRefutations.length, latestModel: relationModels.at(-1) ?? null,
                 latestTrial: relationTrials.at(-1) ?? null, latestRefutation: relationRefutations.at(-1) ?? null },

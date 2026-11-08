@@ -1,5 +1,6 @@
 /** RootedQuotaAccess own source layer and its common observed-point wrapper. */
 import { measureRootedQuota, measureRootedLengths } from './v6-rooted-quota-observation.ts';
+import { measureRootedQuotaWithMarkSupport, currentRootedMarkSupportMatches, revalidateRootedMarkSupport, type NativeRootedQuotaOptions } from './v6-rooted-quota-mark-support.ts';
 import { propagateRootedQuota, stepRootedQuota } from './v6-rooted-quota-mechanics.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts';
@@ -13,7 +14,7 @@ type BeforeMeta = { epoch: number; score: number; observation_ref: string; avail
 type AfterMeta = { epoch: number; score: number; state?: string };
 export interface RootedQuotaState { quota_events: R[]; quota_model: R; quota_context: R | null; requested_stop_reason: string | null }
 
-export function rootedQuotaBefore(proposal: R, index: number, rows: NativeRows, meta: BeforeMeta): R {
+export function rootedQuotaBefore(proposal: R, index: number, rows: NativeRows, meta: BeforeMeta, native: NativeRootedQuotaOptions = {}): R {
   const plan = proposal.rooted_quota_plan;
   if (!truth(plan)) throw new TypeError('Rooted guard requires rooted_quota_plan');
   const step = proposal.steps[index], point = plan.scene.chains[step.chain].points[step.rank];
@@ -21,13 +22,19 @@ export function rootedQuotaBefore(proposal: R, index: number, rows: NativeRows, 
     && equal(proposal.actions[index], { action_ref: 'ACTION6', data: { x: point[0], y: point[1] } });
   if (index === 0) admitted = admitted && meta.observation_ref === plan.observation_ref && identity(rows) === plan.frame_digest;
   else admitted = admitted && step.prediction !== null && equal(measureRootedLengths(rows, plan.scene, plan.model), step.prediction.before);
+  if (native.extendedMarkSupport && !currentRootedMarkSupportMatches(rows, plan.scene, index > 0)) {
+    return { admitted: false, reason: 'native_rooted_mark_support_not_current' };
+  }
   return { admitted, reason: admitted ? 'current_rooted_composition_bound' : 'rooted_context_or_predicted_prefix_changed' };
 }
 
-export function rootedQuotaAfter(proposal: R, index: number, _rows: NativeRows, later: NativeRows, meta: AfterMeta): R {
+export function rootedQuotaAfter(proposal: R, index: number, _rows: NativeRows, later: NativeRows, meta: AfterMeta, native: NativeRootedQuotaOptions = {}): R {
   const plan = proposal.rooted_quota_plan;
   if (!truth(plan)) throw new TypeError('Rooted outcome requires rooted_quota_plan');
   if (meta.epoch !== plan.epoch || meta.score > plan.score) return { matched: null, seal_prefix: true, reason: 'official_boundary', official_progress: true };
+  if (native.extendedMarkSupport && !currentRootedMarkSupportMatches(later, plan.scene, true)) {
+    return { matched: false, seal_prefix: true, reason: 'native_rooted_mark_support_changed', official_progress: false };
+  }
   const prediction = proposal.steps[index].prediction;
   const matched = truth(prediction) ? equal(measureRootedLengths(later, plan.scene, plan.model), prediction.after) : null;
   return { matched, seal_prefix: matched !== true, reason: matched ? 'conditional_prefix_matched' : 'unknown_or_divergent_indexed_edit', official_progress: false };
@@ -54,10 +61,13 @@ export class RootedQuotaMemory {
   /** Inherited fallback is supplied by the common owner; this method acquires nothing. */
   proposeRooted(observation: R, rows: NativeRows, _inputs: readonly R[], maxPrefix: number, config: R,
     levelDeadlineMs: number, now: Clock = () => performance.now(),
-    base: R | null = { status: 'abstained', reason: 'no_recurrent_line_question' }): R | null {
+    base: R | null = { status: 'abstained', reason: 'no_recurrent_line_question' }, native: NativeRootedQuotaOptions = {}): R | null {
     const cfg = config.rooted_quota_question;
     if (!truth(cfg) || !observation.available_action_refs.includes('ACTION6')) return base;
-    const scene = measureRootedQuota(rows, this.model.empty_palette ?? null);
+    const extended = native.extendedMarkSupport ? measureRootedQuotaWithMarkSupport(rows, this.model.empty_palette ?? null) : null;
+    if (extended?.status === 'refused') return { status: 'abstained', reason: 'native_rooted_mark_support_' + extended.reason,
+      native_mark_refusal: extended.receipt };
+    const scene = native.extendedMarkSupport ? extended!.scene : measureRootedQuota(rows, this.model.empty_palette ?? null);
     if (scene === null) return base;
     const model = this.model, current = measureRootedLengths(rows, scene, model);
     if (current === null) return { status: 'abstained', reason: 'rooted_content_not_a_measured_prefix' };
@@ -127,17 +137,32 @@ export class RootedQuotaMemory {
       context = { epoch: after.level_epoch, lengths: next, effect_evidence: refs, owner_preserved: preserved };
     } else model.official_quota_witness = refs;
     model.evidence = [...(model.evidence ?? []), ...refs];
-    const event = { kind: 'rooted_quota_state', model, context, stop_reason: stop, evidence: refs,
+    const event: R = { kind: 'rooted_quota_state', model, context, stop_reason: stop, evidence: refs,
       scope: 'Observed current addition/cut examples. Root, numeric clue semantics and transfer remain conditional; no universal edit or terminal law.' };
+    if (Object.hasOwn(scene, 'native_mark_support')) {
+      const boundary = before.level_epoch !== after.level_epoch || after.levels_completed > before.levels_completed;
+      const initial = revalidateRootedMarkSupport(rows, scene, index > 0), current = boundary ? null : revalidateRootedMarkSupport(later, scene, true);
+      const actualAfter = current?.measurement.receipt;
+      event.native_mark_support = { measurement: initial.measurement.receipt, plan_support_ref: scene.native_mark_support.support_ref, evidence: refs,
+        before_status: initial.admitted ? 'current_structural_mark_support_measured' : 'current_mark_support_changed_or_unresolved',
+        after_status: boundary ? 'official_boundary_excluded_from_mark_attribution' : current?.admitted ? 'current_structural_mark_support_preserved' : 'current_mark_support_changed_or_unresolved',
+        revalidation: { before_support_ref: initial.measurement.receipt?.support_ref ?? null,
+          after_support_ref: actualAfter?.support_ref ?? null, after_structure_ref: actualAfter?.structure_ref ?? null,
+          after_group_palettes: actualAfter?.axes?.map((axis: R) => ({ axis: axis.axis,
+            groups: axis.groups.map((group: R) => ({ index: group.index, kind: group.kind, palette_value: group.palette_value })) })) ?? null },
+        scope: 'This actual indexed-edit return retains the descriptive mark support. Official progress does not establish a universal numeric or terminal law.' };
+      if ((!initial.admitted || (!boundary && !current?.admitted)) && stop === null) event.stop_reason = 'native_rooted_mark_support_changed';
+    }
     this.applyEvent(event); return [structuredClone(event)];
   }
 }
 
 export async function commonRootedQuotaProposal(memory: RootedQuotaMemory, observation: R, rows: NativeRows, inputs: readonly R[],
-  remaining: number, config: R, levelDeadlineMs: number | null, now: Clock = () => performance.now(), base?: R | null): Promise<R | null> {
+  remaining: number, config: R, levelDeadlineMs: number | null, now: Clock = () => performance.now(), base?: R | null,
+  native: NativeRootedQuotaOptions = {}): Promise<R | null> {
   if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
   if (levelDeadlineMs === null || levelDeadlineMs === undefined) throw new TypeError('Rooted calculation requires current level deadline');
-  const proposal = memory.proposeRooted(observation, rows, inputs, Math.min(16, remaining), config, levelDeadlineMs, now, base);
+  const proposal = memory.proposeRooted(observation, rows, inputs, Math.min(16, remaining), config, levelDeadlineMs, now, base, native);
   if (!proposal || !Object.hasOwn(proposal, 'rooted_quota_plan')) return null;
   const plan = proposal.rooted_quota_plan, scene = plan.scene;
   proposal.steps = structuredClone(proposal.steps);
