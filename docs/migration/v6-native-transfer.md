@@ -11,6 +11,13 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
+**Current integrated milestone:** the native common coordinator, shared WHY/ACT
+memory and four newly registered interface families execute in the product
+runtime. The first three levels of HANO, SYME and DNOI pass against the real
+games: **nine levels, 83 actions, 46 acquired prefixes**. The three campaigns
+used the same unchanged native source and real time budgets. Their scope and
+reproducible evidence are recorded below.
+
 The reference is `yannick-fontan-1981/ARC-AGI-3-Yannick-Fontan` at
 `786dcf51ca57773d8e3a8948ce9ea3655e7baf8e`. The complete conservative source
 snapshot is retained under `reference/v6/<commit>/source`. Its original bytes
@@ -88,6 +95,33 @@ index. A checkpoint refuses a stale graph base; only a successfully committed
 and verified prepared batch can update the read cache. Failed transactions and
 unrelated commits do not mark unread revisions as acquired.
 
+### Connected common coordinator
+
+The runtime now constructs `NativeCallerCoordinator` with the same
+`ReasoningMemory` used by WHY/ACT. Its Goal, Frontier, View, Attention, Point,
+Display, Control and Counter states are authoritative V7 nodes, with a separate
+lifecycle node. The original 16 DRM groups retain their order. Thirteen
+specific family adapters and ten common providers participate in the actual
+selection path; unported providers remain explicitly listed as pending.
+
+The slot, word, port and constellation adapters are registered in the
+`surface` group according to the original `program_construction` subquestion
+order. Their retained state, before/after observations and acquired events use
+the same native family contract as the previously integrated families.
+
+At a sealed committed prefix, each witnessed primitive is reconciled exactly
+once: Attention/View, selected-family recording, Goal/Point/Control,
+assessment, then Frontier. The runtime executes OP29, OP30 and OP31 and
+reconstructs Goal and Frontier memory at natural, nonfinal level boundaries.
+No intermediate action in an unfinished prefix is prematurely acquired.
+Pause retains that prefix; the next level retains the same session.
+
+Native checkpoints share only immutable public observations. Public state
+reads still return independent copies. Hydration caches validate the actual
+root and fragment identities, and immutable pixel-matrix fragments are emitted
+into each destination store. These changes reduce repeated copying without
+dropping observations, masking revised nodes or relaxing integrity checks.
+
 ## Behavioral invariants
 
 The complete transfer must retain all of the following:
@@ -115,52 +149,82 @@ The current browser defaults are diagnostic limits of 600 native actions and
 delay and user pauses do not consume that active budget. These limits are not
 claimed to be the V6 campaign's physically qualified oracle caps.
 
-## Evidence already collected
+## Integrated real-game evidence
 
-The unchanged **complete Python common caller** was executed in a separate
-process against a host that exposed only public game packets. The native
-family implementations and the native controller were compared to those runs.
+The current runtime, `logos-engine.typescript.v6.native-migration/0.4.0`, was
+executed against each real game in a separate Pyodide environment. Only the
+games run in Python. The agent executes TypeScript and receives public game
+packets, without injected oracle state, proposals, plans or private game data.
 
-| Game | Levels completed | Actions by level | Total actions |
-| --- | ---: | --- | ---: |
-| HANO | 3 | 6, 10, 14 | 30 |
-| SYME | 3 | 9, 12, 15 | 36 |
-| DNOI | 3 | 3, 6, 8 | 17 |
+| Game | Levels completed | Actions L1 / L2 / L3 | Total actions | Acquired prefixes | Active seconds L1 / L2 / L3 |
+| --- | ---: | --- | ---: | ---: | --- |
+| [HANO](native-campaigns/hano.json) | 3 | 6 / 10 / 14 | 30 | 15 | 13.65 / 56.34 / 189.43 |
+| [SYME](native-campaigns/syme.json) | 3 | 9 / 12 / 15 | 36 | 14 | 63.17 / 80.99 / 168.17 |
+| [DNOI](native-campaigns/dnoi.json) | 3 | 3 / 6 / 8 | 17 | 17 | 7.55 / 25.26 / 78.02 |
+| **Total** | **9** | | **83** | **46** | **682.58 seconds across all games** |
 
-Commands, coordinates, returned public images and animation packets, states,
-level transitions and completed-level counts match the original runs.
-HANO's 15 complete family proposals also match the common caller's proposals
-at equal source scope, revision and budget. The detailed evidence and explicit
-normalization limits are in `v6-baseline-parity.json`.
+Each campaign passes the following assertions in
+`tests/helpers/v6-live-game-campaign.ts`:
 
-The native TypeScript agent also completed HANO's three levels against the
-real game in a separate Pyodide game runtime, with 30 actions and 15 prefixes.
-No Python agent module was loaded. This is an executable smoke test rather than
-only a replay of stored frames.
+- The requested three levels are completed in one continuous agent session.
+- All 83 commands and 86 complete public packets, including animation frames,
+  match trajectories previously checked against the unchanged complete
+  original caller. Expected packets are used only by the external comparator.
+- Every executed primitive has both `caller_acquisition` and
+  `frontier_acquisition` in its actual `reasoning:transition` graph node.
+- All 46 sealed prefixes execute OP29, OP30 and OP31: 138 post-analyses.
+- Goal and Frontier memory are reconstructed at both nonfinal level boundaries
+  in each run: six verified replays. Completing the requested third level stops
+  the campaign without an unnecessary extra boundary replay.
+- No reset, undo, hidden-state probe or free simulation is performed.
+- No Python agent module is loaded.
+- The 74-file native source manifest is unchanged before and after each run
+  and is identical across all three campaigns.
 
-This nine-level baseline was obtained before the full native WHY/ACT and
-empirical-acquisition integration. The integrated caller must repeat those
-campaigns before the baseline is treated as validation of the completed agent.
-The full-game replays are deliberately separate from the component suite.
+The common source manifest digest is
+`22300eccafb584692324b29a2b6d7a763d8748d591eb5facba95bdb68d20d7c7`.
+Each report includes its complete file hashes, game-asset hashes, public packet
+hashes, commands, request log, level metrics and graph acquisition evidence.
+The aggregate and component-run qualification are in
+[native-campaigns/summary.json](native-campaigns/summary.json).
 
-After the incremental memory and independent-leaf revision corrections, the
-integrated runtime was tested again against the real HANO game with
-`node tests/v6-agent-native.smoke.ts HANO 1`. It completed the first level in six
-actions and three prefixes, reached the second level, and loaded zero Python
-agent modules. This current one-level smoke result includes WHY/ACT and
-transition acquisition; it does not extend to the entire earlier nine-level
-baseline or to the still-disconnected autonomous caller coordinator.
+These are real-clock runs using the product's 360-second active budget and
+600-action cap per level. The longest observed level took 189.43 active
+seconds. Acquisition can therefore take noticeable time after the board
+changes. These measurements describe this execution environment, not a
+performance guarantee for another computer. The recorded-frame unit replays
+use an injected clock; the real-game campaigns above do not.
 
-These nine solved levels **do not establish parity on all games**. They do
-not establish identical global WHY/ACT, parent-tree or complete StrategyRouter
-state on every alternative. Family-level differential fixtures are labelled
-separately from complete-caller evidence.
+DNOI was also run through the actual browser interface with **Run to next
+level** three times in the same session: three solved levels, 17 actions and
+17 completed plans. The real graph inspector showed 427 nodes and 1,442
+revisions, including the acquired `caller:counters` node. The browser session
+used the interface's continuing target and therefore also replayed the third
+boundary. Its measured 123.0 active seconds are a separate observation from
+the headless campaign.
 
-Visual sequence fixtures include real-scene refusals and explicit synthetic
-positive, ambiguous and counterexample cases. Synthetic tests are not counted
-as solved game levels. The original visual-sequence family does not propose an
-action on the initial SEQN scene used in this fixture; the native port preserves
-that refusal rather than substituting a new solver.
+![DNOI: three solved levels, 17 actions and 17 completed plans](native-campaigns/dnoi-browser-three-levels.png)
+
+### Relationship to the original baselines
+
+The unchanged **complete Python common caller** was previously executed in a
+separate development process against a host exposing only public packets.
+Commands, coordinates, public images, animations, states and level counts were
+compared. HANO's 15 complete family proposals also matched at equal source
+scope, revision and budget. Detailed normalization limits remain in
+`v6-baseline-parity.json`.
+
+That historical baseline predates the full native acquisition integration.
+The current nine-level campaigns repeat its public trajectories with the
+connected coordinator and verify that native WHY/ACT, acquisition and boundary
+replay actually execute. They **do not establish parity on all games**, nor do
+they establish identical complete internal caller state on every alternative.
+
+Visual-sequence fixtures retain real-scene refusals and synthetic positive,
+ambiguous and counterexample cases. The original isolated family does not
+propose an action on the initial SEQN fixture. That refusal remains tested;
+it does not require the full common coordinator to stop, since Frontier can
+select an exploratory action. Synthetic cases are not counted as solved levels.
 
 ### Common-caller acquisition checkpoint
 
@@ -172,10 +236,18 @@ selects its view experiment. Together they provide 44 passing comparisons,
 including physical transition guards. The fixture exports, scope and explicit
 limitations are documented in `v6-common-caller-oracle.md`.
 
-These comparisons exercise the autonomous `NativeCallerCoordinator`. It is not
-yet connected to the browser runtime. Its six missing acquisition stores and
-the remaining provider integration are still required work. A matching bounded
-acquisition scenario is not a complete-caller campaign result.
+The coordinator is now connected to the browser runtime. The additional
+`v6-caller-integration.test.ts` starts the actual runtime using only HANO's
+original public initial observation. After its first two-action prefix, all
+eight retained caller component states match the unchanged-original captures.
+The test also verifies original selection order, no premature acquisition,
+exactly two acquired transitions and OP29/OP30/OP31 execution. It does not
+restore oracle memory into the runtime.
+
+The ordered-support state is now retained as its source reasoning fact. The
+selected support subcomposition event is acquired, but the complete
+SupportNavigation wrapper and other source stores remain pending. A bounded
+state comparison does not prove those absent capabilities.
 
 ### Component comparisons
 
@@ -194,11 +266,11 @@ test names, fixtures, generators and exact source mapping are recorded in
 | Point contrasts and displays | Frozen witnesses, competing causal explanations, frame displays and score-qualified reuse |
 | Orbit and containment | Full search/selection, point bounds, retained state, guards and NumPy integer wrapping |
 | Surface/code programs and band transfer | All 48 routines, packet observations, wrong-outcome refutation and wide integer masks |
-| Slot, word, port and constellation families | Complete family modules and their called parser/pose primitives, 235 operations with restoration after every step; registration remains pending |
+| Slot, word, port and constellation families | Registered in original subquestion order; 235 operations through the native adapter and V7 commit/restore path, plus positive Word selection, acquisition and activation editing through the actual runtime |
 | Prospective contact closure | Effect access, factored returns, scored rewrites and passage options, including score-qualified terminal learning and next-epoch reuse |
 | Remaining geometry and target methods | Framed alignment, occlusion, lattice paths, ambiguous component matches and scored-boundary method recall |
-| Autonomous caller coordinator | Two unchanged-main acquisition scenarios, retained component state, frontier deltas and physical guards; product-runtime connection remains pending |
-| Native persistence | Atomic revisions, real program replacement, immutable fragments, integrity and lossless episodes larger than a single V7 value |
+| Common caller coordinator | Two unchanged-main acquisition scenarios, actual runtime integration and eight-component state comparison, then nine real levels with transition acquisition and cross-level replay |
+| Native persistence | Atomic revisions, real program replacement, immutable fragments, integrity, independent leaf revisions, cache invalidation and lossless episodes larger than a single V7 value |
 
 Unit fixtures deliberately include positive proposals and state-changing
 sequences, alongside refusals. A component marked `component_verified` has
@@ -208,13 +280,22 @@ as a completely integrated V6 capability solely because its isolated tests pass.
 The checkpoint component run used:
 
 ```sh
-node --test --test-concurrency=2 --test-skip-pattern='native SRC/service/controller replays' tests/*.test.ts
+node --test --test-concurrency=1 --test-skip-pattern='native SRC/service/controller replays' tests/*.test.ts
 ```
 
-It passed 1,418 tests, including the caller oracles and independent fact/trace
-revision regressions. The four full-caller game replay cases were excluded from
-that run and remain a separate integration gate. This result is not reported as
-an unqualified full-suite or complete-campaign success.
+It passed **1,444 tests** with zero failures. The recorded full-caller replay
+cases were filtered out of this component command. The three real-game
+campaigns above were then independently checked as their own integration gate;
+the result is not described as an unqualified `npm test` run.
+
+The new interface-family checks include ten adapter tests covering 235 original
+operations and one positive Word runtime integration test. The latter verifies
+the selected proposal, actual WHY/ACT release, acquired source fact and a
+subsequent family-activation revision without erasing learned evidence.
+This controlled scene does not count as a solved game. In the standalone Slot
+fixture, the original router's `public_occurrence_recall` provider preempts
+Slot; that provider is not yet transferred. Isolated Slot parity must not be
+presented as full-router parity on that scene.
 
 ## Completion tracking
 
@@ -235,6 +316,8 @@ python3 scripts/audit-v6-migration.py --require-complete
 npm run typecheck
 npm test
 node tests/v6-agent-native.smoke.ts HANO 3
+node tests/v6-agent-native.smoke.ts SYME 3
+node tests/v6-agent-native.smoke.ts DNOI 3
 ```
 
 The `--require-complete` gate must continue to fail while required capabilities
@@ -245,12 +328,15 @@ without making the migration complete.
 
 1. Transfer and verify the remaining V6 families and every inherited V5
    primitive they call, retaining their original alternatives and ordering.
-2. Complete the common-caller orchestration: goal access, curiosity, attention,
-   parent returns, view continuity, source-bound WHY/ACT and operation contracts.
-3. Migrate the full composition/knowledge/evidence memory into the common V7
-   representation, with faithful replay, counterexamples and cross-level reuse.
-4. Reconcile the native program/knowledge editing model with execution identity,
-   scope, type checks and current authorizations.
+2. Complete the remaining common providers, including Morphology,
+   `acquire_control_for_target`, `attention_parent_return` and inherited
+   `public_occurrence_recall`, while retaining original priorities.
+3. Complete the SupportNavigation aggregate and missing source acquisitions:
+   `addressed_material_event`, `framed_transfer_event`, `repeated_series_state`
+   and `temporal_selection_state`. Preserve their replay, counterexamples and
+   cross-level reuse in the same V7 graph.
+4. Extend the existing program/knowledge editing model and its provenance,
+   scope, type and authorization checks to each newly transferred capability.
 5. Extend complete-caller differential campaigns over the entire available
    game set and reported edge cases with identical diagnostic budgets.
 6. Resolve or explicitly reproduce Python semantic domains used by those

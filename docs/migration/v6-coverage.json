@@ -73592,12 +73592,15 @@
         "src/logos-engine/v6-slot-substitution.ts",
         "src/logos-engine/v6-word-interface.ts",
         "src/logos-engine/v6-port-assembly.ts",
-        "src/logos-engine/v6-constellation-cover.ts"
+        "src/logos-engine/v6-constellation-cover.ts",
+        "src/logos-engine/v6-native-interface-families.ts"
       ],
       "proof": [
         "scripts/export-v6-interface-families-reference.py",
         "tests/fixtures/v6-interface-families-reference.json",
-        "tests/v6-interface-families.test.ts"
+        "tests/v6-interface-families.test.ts",
+        "tests/v6-native-interface-families.test.ts",
+        "tests/v6-native-family-registration.test.ts"
       ]
     },
     {
@@ -74749,6 +74752,9 @@
         "scripts/compare-v6-caller-reference.ts",
         "tests/helpers/v6-caller-differential.ts",
         "tests/v6-native-caller.test.ts",
+        "tests/v6-caller-integration.test.ts",
+        "tests/helpers/v6-live-game-campaign.ts",
+        "tests/v6-agent-native.smoke.ts",
         "tests/fixtures/v6-native-caller/hano-first-prefix.json",
         "tests/fixtures/v6-native-caller/viewport-three-prefixes.json",
         "tests/fixtures/v6-native-caller/report.json",
@@ -76904,12 +76910,15 @@
         "src/logos-engine/v6-slot-substitution.ts",
         "src/logos-engine/v6-word-interface.ts",
         "src/logos-engine/v6-port-assembly.ts",
-        "src/logos-engine/v6-constellation-cover.ts"
+        "src/logos-engine/v6-constellation-cover.ts",
+        "src/logos-engine/v6-native-interface-families.ts"
       ],
       "proof": [
         "scripts/export-v6-interface-families-reference.py",
         "tests/fixtures/v6-interface-families-reference.json",
-        "tests/v6-interface-families.test.ts"
+        "tests/v6-interface-families.test.ts",
+        "tests/v6-native-interface-families.test.ts",
+        "tests/v6-native-family-registration.test.ts"
       ]
     },
     {
@@ -77855,12 +77864,15 @@
         "src/logos-engine/v6-slot-substitution.ts",
         "src/logos-engine/v6-word-interface.ts",
         "src/logos-engine/v6-port-assembly.ts",
-        "src/logos-engine/v6-constellation-cover.ts"
+        "src/logos-engine/v6-constellation-cover.ts",
+        "src/logos-engine/v6-native-interface-families.ts"
       ],
       "proof": [
         "scripts/export-v6-interface-families-reference.py",
         "tests/fixtures/v6-interface-families-reference.json",
-        "tests/v6-interface-families.test.ts"
+        "tests/v6-interface-families.test.ts",
+        "tests/v6-native-interface-families.test.ts",
+        "tests/v6-native-family-registration.test.ts"
       ]
     },
     {
@@ -78870,12 +78882,15 @@
         "src/logos-engine/v6-slot-substitution.ts",
         "src/logos-engine/v6-word-interface.ts",
         "src/logos-engine/v6-port-assembly.ts",
-        "src/logos-engine/v6-constellation-cover.ts"
+        "src/logos-engine/v6-constellation-cover.ts",
+        "src/logos-engine/v6-native-interface-families.ts"
       ],
       "proof": [
         "scripts/export-v6-interface-families-reference.py",
         "tests/fixtures/v6-interface-families-reference.json",
-        "tests/v6-interface-families.test.ts"
+        "tests/v6-interface-families.test.ts",
+        "tests/v6-native-interface-families.test.ts",
+        "tests/v6-native-family-registration.test.ts"
       ]
     },
     {

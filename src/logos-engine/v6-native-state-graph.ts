@@ -18,6 +18,9 @@ export interface NativeStateGraphRoot extends JsonObject {
 export interface NativeStateFragment { readonly id: string; readonly value: JsonObject }
 export interface SplitNativeState { readonly root: NativeStateGraphRoot; readonly fragments: readonly NativeStateFragment[] }
 interface Sized { node: Encoded; cost: number }
+// Public Snapshot rasters are deeply immutable. Cache only this closed scalar
+// shape, and re-emit its fragment for every store receiving a new root.
+const frozenMatrices = new WeakMap<object, { limit: number; value: Sized; fragment: NativeStateFragment }>();
 
 /**
  * Typed envelopes distinguish graph references from user data. Even a user
@@ -82,7 +85,14 @@ export function splitNativeState(value: unknown, component: string, options: { m
         if (cost <= bound) {
           const node = Object.freeze({ kind: 'array' as const, items: Object.freeze(children.map(child => child.node)) });
           const pixelMatrix = input.length > 0 && input.every(row => Array.isArray(row) && row.length > 0 && row.every(v => typeof v === 'number' && Number.isSafeInteger(v) && v >= 0 && v <= 255));
-          return pixelMatrix && cost >= 512 ? fragment(node) : { node, cost };
+          if (pixelMatrix && cost >= 512) {
+            const value = fragment(node);
+            if (Object.isFrozen(input) && input.every(row => Object.isFrozen(row))) {
+              frozenMatrices.set(input, { limit, value, fragment: fragments.get((value.node as { kind: 'ref'; id: string }).id)! });
+            }
+            return value;
+          }
+          return { node, cost };
         }
         const groups: Sized[] = []; let group: Sized[] = [], groupCost = 3;
         for (let child of children) {
@@ -108,6 +118,12 @@ export function splitNativeState(value: unknown, component: string, options: { m
   };
   const visit = (input: unknown, depth: number): Sized => {
     if (input !== null && typeof input === 'object') {
+      const matrix = frozenMatrices.get(input);
+      if (matrix?.limit === limit) {
+        if (depth + 2 > 128) throw new TypeError('Native state nesting exceeds the V7 structural contract');
+        fragments.set(matrix.fragment.id, matrix.fragment);
+        return matrix.value;
+      }
       const known = measured.get(input);
       // A previously validated subtree can safely be reused at equal or shallower
       // depth. A deeper occurrence is traversed again to retain the nesting bound.

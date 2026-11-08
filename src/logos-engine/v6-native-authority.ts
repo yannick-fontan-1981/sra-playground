@@ -36,6 +36,12 @@ export interface NativeAuthorityTransition {
   command: NativeCommand; before: NativeObservation; after: NativeObservation;
   first: NativePublicObservation; second: NativePublicObservation; index: number; outcome: NativeAfterResult;
 }
+/** Acquisition is ordered around assessment, never performed twice by callers. */
+export interface NativeAuthorityAcquisition {
+  beforeAssessment(transition: NativeAuthorityTransition): Promise<R>;
+  recordAssessment(transition: NativeAuthorityTransition, assessment: R | null): Promise<R>;
+  boundaryWitness(transition: NativeAuthorityTransition): R;
+}
 function summary(observation: NativeObservation): R {
   return { ...Object.fromEntries(['revision', 'level_epoch', 'frame_hash', 'state', 'levels_completed', 'unknowns'].map(key => [key, observation[key]])),
     component_count: observation.entities.length, unambiguous_signature_components: observation.entities.filter(entity => !entity.identity_ambiguous).length };
@@ -223,18 +229,23 @@ export class NativeCompositionAuthority {
   }
 
   async acquire(proposal: NativeProposal, decisionRevision: number, transitions: readonly NativeAuthorityTransition[], interruption: string | null,
-    execution: NativeExecution): Promise<R> {
+    execution: NativeExecution, caller?: NativeAuthorityAcquisition): Promise<R> {
     if (!transitions.length || !this.store) throw new Error('Only an observed native prefix can be acquired');
     const transitionRefs: R[] = [], boundaryRefs: R[] = [], writes: NativeStoreWrite[] = [];
     let boundary = false;
     for (const transition of transitions) {
       const { before, after, command } = transition;
+      const acquired = caller ? await caller.beforeAssessment(transition) : null;
       const id = `reasoning:transition:${before.revision}`;
       boundary = after.level_epoch !== before.level_epoch || after.levels_completed > before.levels_completed || ['WIN', 'GAME_OVER'].includes(after.state);
       let record: R;
       if (boundary) {
         record = { status: 'official_boundary_witness', before: before.observation_ref, after: after.observation_ref,
           command, source_level: before.level_epoch, levels_completed: after.levels_completed, visual_terminal_cause: 'unknown' };
+        if (caller) {
+          record.boundary_witness = caller.boundaryWitness(transition);
+          record.frontier_acquisition = await caller.recordAssessment(transition, null);
+        }
         boundaryRefs.push({ node: id, before: before.observation_ref, after: after.observation_ref });
       } else {
         let prior: R[] = this.frozen?.prior_rules ?? [];
@@ -247,12 +258,14 @@ export class NativeCompositionAuthority {
           assessment.property_rules = properties.property_rules; assessment.addressed_assessment = properties;
           this.memory.put(EPISODE, 'property_rules', properties.property_rules, after.observation_ref, after.revision);
         }
-        this.memory.put(EPISODE, 'empirical_registry', assessment.empirical_rules, after.observation_ref, after.revision);
         record = { before: before.observation_ref, after: after.observation_ref, command, assessment,
           prospective_prediction_checks: checks, prospective_prediction_node: transition.index === 0 ? `reasoning:prediction:${decisionRevision}` : null,
           prospective_claim: transition.index === 0 ? 'first-action candidates frozen before dispatch' : 'mechanism fitting retrospective; only committed path-protocol expectation tested prospectively' };
+        if (caller) record.frontier_acquisition = await caller.recordAssessment(transition, assessment);
+        this.memory.put(EPISODE, 'empirical_registry', assessment.empirical_rules, after.observation_ref, after.revision);
         transitionRefs.push({ node: id, before: before.observation_ref, after: after.observation_ref });
       }
+      if (caller) record.caller_acquisition = acquired;
       writes.push({ id, kind: 'transition_evidence', component: 'public_transition', status: 'observed', value: record,
         evidence: [before.observation_ref, after.observation_ref], relations: [{ relation: 'updates', target: 'reasoning:memory' }] });
     }

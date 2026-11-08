@@ -51,7 +51,7 @@ export class ProspectiveContactAdapter extends GoalAccessAdapter {
     const events = await super.record(before, beforeRows, command, after, afterRows, options);
     return [...events, ...await this.memory.pre_score.record(before, command, after, beforeRows, afterRows, options.proposal, options.index)];
   }
-  override state(): R { return structuredClone({ ...super.state(), pre_score: this.memory.pre_score.state() }); }
+  override nativeState(): R { return { ...super.nativeState(), pre_score: this.memory.pre_score.state() }; }
   override restore(state: R): void {
     const staged = new PassageOptions(); staged.restore(state.pre_score);
     if (staged.retainedDigest() !== state.pre_score_digest) throw new TypeError('Prospective contact memory digest does not match its nested evidence');

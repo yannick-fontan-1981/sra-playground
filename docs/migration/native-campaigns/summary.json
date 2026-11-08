@@ -1,0 +1,125 @@
+{
+  "schema": "logos-engine.v6.integrated-game-summary.v1",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.4.0",
+  "nativeSourceDigest": "22300eccafb584692324b29a2b6d7a763d8748d591eb5facba95bdb68d20d7c7",
+  "nativeSourceFileCount": 74,
+  "fullV6Parity": false,
+  "campaigns": [
+    {
+      "game": "HANO",
+      "report": "hano.json",
+      "reportSha256": "3e1ea0f4ad3ab5f0610615ce18bc74d1cc231d6ee909bd45feb10eaf7aa7fe8e",
+      "status": "passed",
+      "levelsCompleted": 3,
+      "actionsByLevel": [
+        6,
+        10,
+        14
+      ],
+      "activeSecondsByLevel": [
+        13.647298837000001,
+        56.34186935300003,
+        189.431255803
+      ],
+      "totalActions": 30,
+      "acquiredPrefixes": 15,
+      "boundaryReplays": 2,
+      "activeSeconds": 259.42042399300004,
+      "publicPacketsCompared": 31,
+      "pythonAgentModules": [],
+      "sourceUnchangedDuringRun": true
+    },
+    {
+      "game": "SYME",
+      "report": "syme.json",
+      "reportSha256": "9c4cc28edc2e1eb92bcb70e4341cebf199aa010f5b7f470421c0b470777670da",
+      "status": "passed",
+      "levelsCompleted": 3,
+      "actionsByLevel": [
+        9,
+        12,
+        15
+      ],
+      "activeSecondsByLevel": [
+        63.17021055800002,
+        80.99433014600002,
+        168.17444269199996
+      ],
+      "totalActions": 36,
+      "acquiredPrefixes": 14,
+      "boundaryReplays": 2,
+      "activeSeconds": 312.338983396,
+      "publicPacketsCompared": 37,
+      "pythonAgentModules": [],
+      "sourceUnchangedDuringRun": true
+    },
+    {
+      "game": "DNOI",
+      "report": "dnoi.json",
+      "reportSha256": "6bb2831c7363f404b1e0f5d74511e737670753726fac981169e2423f6d2a87e9",
+      "status": "passed",
+      "levelsCompleted": 3,
+      "actionsByLevel": [
+        3,
+        6,
+        8
+      ],
+      "activeSecondsByLevel": [
+        7.5468840370000025,
+        25.257856801000013,
+        78.01766884499999
+      ],
+      "totalActions": 17,
+      "acquiredPrefixes": 17,
+      "boundaryReplays": 2,
+      "activeSeconds": 110.822409683,
+      "publicPacketsCompared": 18,
+      "pythonAgentModules": [],
+      "sourceUnchangedDuringRun": true
+    }
+  ],
+  "totals": {
+    "levelsCompleted": 9,
+    "actions": 83,
+    "acquiredPrefixes": 46,
+    "postAnalyses": 138,
+    "boundaryReplays": 6,
+    "publicPacketsCompared": 86,
+    "activeSeconds": 682.581817072,
+    "maxLevelActiveSeconds": 189.431255803
+  },
+  "componentSuite": {
+    "command": "node --test --test-concurrency=1 --test-skip-pattern='native SRC/service/controller replays' tests/*.test.ts",
+    "exitCode": 0,
+    "tests": 1444,
+    "pass": 1444,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0,
+    "durationMs": 63776.515001,
+    "logSha256": "fa014de3a50af484a038fb4ad7093344e88cc0a1955b9c70d4fb6b3090eca5c2",
+    "qualification": "Recorded full-caller replays were filtered from this component command. The three separate real-game campaigns provide the current integration gate. This is not an unqualified npm test result."
+  },
+  "browserCheck": {
+    "game": "DNOI",
+    "levelsCompleted": 3,
+    "totalActions": 17,
+    "completedPlans": 17,
+    "activeSeconds": 123.0,
+    "sessions": 1,
+    "graphNodes": 427,
+    "graphRevisions": 1442,
+    "screenshot": "dnoi-browser-three-levels.png",
+    "screenshotSha256": "7b822e3c7c9bedf498f98bba115185fbdb451dac7c2acc62b1ebe794d7d6bdb6",
+    "qualification": "Observed through the actual browser UI. Its continuing target also replayed the third level boundary; timing is separate from the Node campaign."
+  },
+  "limits": [
+    "Only the first three levels of each named game were evaluated.",
+    "Public commands and packets match historical unchanged-original-caller baselines; complete internal state parity is not claimed across all campaigns.",
+    "The real-game campaigns use an actual active clock, 360 seconds and 600 actions per level.",
+    "No Python agent runtime is used. Python/Pyodide runs the existing game engines only.",
+    "SupportNavigation aggregate, additional acquisitions, common providers and inherited families remain incomplete."
+  ]
+}

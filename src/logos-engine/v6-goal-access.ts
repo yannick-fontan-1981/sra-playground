@@ -50,7 +50,13 @@ export class GoalAccessAdapter {
   }
   /** Preserve both reusable knowledge and the current episode across native V7 checkpoints. */
   state(): R {
-    return structuredClone({ ...this.memory.retainedState(), episode: this.memory.episode.map(([b, command, a]) => [{ ...b }, command, { ...a }]), last: this.memory.last === null ? null : { ...this.memory.last } });
+    return structuredClone(this.nativeState());
+  }
+  /** Native persistence shares only immutable Snapshot rasters and role boxes. */
+  nativeState(): R {
+    return { ...structuredClone(this.memory.retainedState()),
+      episode: this.memory.episode.map(([before, command, after]) => [{ ...before }, command, { ...after }]),
+      last: this.memory.last === null ? null : { ...this.memory.last } };
   }
   restore(state: R): void {
     const input = structuredClone(state);

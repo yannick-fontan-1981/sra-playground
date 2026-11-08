@@ -2,8 +2,11 @@
 
 This is development evidence for the native TypeScript transfer. The Python
 reference is not imported by the website or packaged in its agent worker.
-`NativeCallerCoordinator` is tested independently; its complete integration
-with the product runtime remains pending.
+The fixtures below test `NativeCallerCoordinator` independently. The coordinator
+is now also connected to the product runtime. A separate integration test starts
+from the public HANO packet, without restoring oracle state, and matches all eight
+caller component states after the first released prefix. Complete V6 provider
+coverage remains pending.
 
 ## Recorded cases and result
 
@@ -96,8 +99,16 @@ Source facts outside the current coordinator are reported explicitly:
 Support navigation and ordered-support state are selected-family work.
 The other acquisitions still need their corresponding coordinator integration.
 No score boundary occurs in these cases, so Goal event replay and Frontier
-boundary reconstruction require a later full-caller boundary fixture. No
-completion gate is relaxed by these tests.
+boundary reconstruction are checked separately by the real-game campaign
+runner, `tests/helpers/v6-live-game-campaign.ts`. No completion gate is relaxed
+by these tests.
+
+In the connected runtime, `ordered_support_state` is now acquired as a source
+fact as well as a real family state node. The selected OrderedSupport event is
+also retained; the complete SupportNavigation aggregate is still missing.
+AddressedMaterial, FramedTransfer, RepeatedSeries and TemporalSelection remain
+outside the connected acquisition coverage. The bounded fixture comparator
+retains its original exclusion list so its historical scope remains explicit.
 
 ## Reproduction
 

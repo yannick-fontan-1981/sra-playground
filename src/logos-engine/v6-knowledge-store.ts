@@ -93,6 +93,7 @@ export class NativeKnowledgeStore {
   private state: KnowledgeMemory = emptyMemory();
   private busy = false;
   private callbacks = new Map<string, Readonly<Record<string, Primitive>>>();
+  private hydrated = new Map<string, { node: KnowledgeNode; fragments: readonly KnowledgeNode[]; value: JsonValue }>();
 
   constructor(sourceDigest: string, scope: string, maxNodes = 16_384) {
     this.scope = scope;
@@ -110,14 +111,21 @@ export class NativeKnowledgeStore {
   node(id: string): KnowledgeNode {
     const node = this.state.nodes[id]; if (!node) throw new TypeError(`Unknown native store node: ${id}`); return node;
   }
-  /** Read retained state from its actual lossless fragment nodes, never a cache. */
+  /** Reuse immutable hydration only while the root and every read fragment are current. */
   stateValue(id: string): JsonValue {
-    const value = this.node(id).value!;
-    return isNativeStateGraph(value) ? hydrateNativeState(value, fragmentId => {
+    const node = this.node(id), cached = this.hydrated.get(id);
+    if (cached?.node === node && cached.fragments.every(fragment => this.state.nodes[fragment.id] === fragment)) return cached.value;
+    const fragments: KnowledgeNode[] = [], value = node.value!;
+    const decoded = isNativeStateGraph(value) ? hydrateNativeState(value, fragmentId => {
       const fragment = this.node(fragmentId);
       if (fragment.kind !== 'state_fragment') throw new TypeError('Native state reference must bind a state fragment');
+      fragments.push(fragment);
       return fragment.value;
     }) : decodeNativeState(value);
+    // Keep only the current hydration for each logical node. Retaining all
+    // historical decoded episodes would duplicate the versioned graph history.
+    this.hydrated.set(id, { node, fragments, value: decoded });
+    return decoded;
   }
   value(id: string): JsonValue { return this.stateValue(id); }
 

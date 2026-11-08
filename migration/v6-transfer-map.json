@@ -315,12 +315,15 @@
         "scripts/compare-v6-caller-reference.ts",
         "tests/helpers/v6-caller-differential.ts",
         "tests/v6-native-caller.test.ts",
+        "tests/v6-caller-integration.test.ts",
+        "tests/helpers/v6-live-game-campaign.ts",
+        "tests/v6-agent-native.smoke.ts",
         "tests/fixtures/v6-native-caller/hano-first-prefix.json",
         "tests/fixtures/v6-native-caller/viewport-three-prefixes.json",
         "tests/fixtures/v6-native-caller/report.json",
         "docs/migration/v6-common-caller-oracle.md"
       ],
-      "notes": "Caller projection helpers and an autonomous native coordinator are transferred. Independent unchanged-main oracles compare HANO's first prefix and a controlled public View scenario, including retained component state and physical guards. The coordinator is not yet connected to the product runtime; six acquisition stores and complete caller orchestration remain pending. This is bounded differential evidence, not full-campaign parity."
+      "notes": "The native common coordinator is connected to the product runtime and shares the WHY/ACT memory. Every witnessed primitive is acquired once at its sealed prefix; Goal/Frontier evidence is replayed across natural level boundaries. A real-runtime first-prefix HANO comparison matches all eight caller component states without restoring oracle state. ordered_support_state is now integrated; SupportNavigation remains partial, and AddressedMaterial, FramedTransfer, RepeatedSeries and TemporalSelection acquisitions remain pending, along with Morphology/control-target/parent-attention providers. Bounded campaigns do not establish all-game V6 parity."
     },
     {
       "sources": [
@@ -468,15 +471,18 @@
         "src/logos-engine/v6-slot-substitution.ts",
         "src/logos-engine/v6-word-interface.ts",
         "src/logos-engine/v6-port-assembly.ts",
-        "src/logos-engine/v6-constellation-cover.ts"
+        "src/logos-engine/v6-constellation-cover.ts",
+        "src/logos-engine/v6-native-interface-families.ts"
       ],
       "status": "component_verified",
       "proof": [
         "scripts/export-v6-interface-families-reference.py",
         "tests/fixtures/v6-interface-families-reference.json",
-        "tests/v6-interface-families.test.ts"
+        "tests/v6-interface-families.test.ts",
+        "tests/v6-native-interface-families.test.ts",
+        "tests/v6-native-family-registration.test.ts"
       ],
-      "notes": "Four complete family modules transferred and compared through235operations with restoration after every operation. Includes learned controls and ownership, exact proposals and counterexamples. Not yet registered in the native caller at this checkpoint."
+      "notes": "Four complete family modules and native adapters registered in the original surface subquestion order. Their 235 original operations pass through actual V7 persistence, including learned controls, ownership, proposals and counterexamples. A positive Word scene verifies real SRC selection, WHY/ACT release, native acquisition and graph activation edits. The Slot fixture is preempted by original OccurrenceRecall, which is not yet transferred; isolated Slot parity must not be called full-router parity."
     },
     {
       "sources": [

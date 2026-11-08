@@ -105,6 +105,10 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   attachPrograms?(registry: NativeProgramRegistry): NativeMaybePromise<void>;
   propose(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number,
     execution?: NativeExecution): NativeMaybePromise<P | null>;
+  /** One retained family can have distinct source entry points in two groups. */
+  proposeInGroup?(group: string, observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number,
+    execution?: NativeExecution): NativeMaybePromise<P | null>;
+  preservationObligations?(observation: NativeObservation, rows: NativeRows): NativeMaybePromise<readonly NativeRecord[]>;
   bind?(proposal: P, domain: ObservedInputDomain): NativeMaybePromise<void>;
   before(proposal: P, index: number, publicPacket: NativePublicObservation, observation: NativeObservation): NativeMaybePromise<NativeBeforeResult>;
   after(proposal: P, index: number, before: NativeObservation, after: NativeObservation,

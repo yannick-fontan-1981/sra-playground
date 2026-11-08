@@ -14,6 +14,8 @@ import { Containment } from './v6-containment.ts';
 import { SurfaceProgram } from './v6-surface-program.ts';
 import { CodeProgram } from './v6-code-program.ts';
 import { BandTransfer } from './v6-band-transfer.ts';
+import { createNativeInterfaceFamilies } from './v6-native-interface-families.ts';
+import { NativeCallerCoordinator } from './v6-native-caller.ts';
 import type { VisualSequenceProposal } from './v6-visual-sequences.ts';
 import { nativeProgramDescriptions } from './v6-src-program.ts';
 import type { NativeSrcReceipt } from './v6-src-program.ts';
@@ -24,13 +26,18 @@ import type { DeltaCause, KnowledgeMemory } from './kernel.ts';
 import { NativeEditRejected } from './v6-native-types.ts';
 import { NativeCompositionAuthority } from './v6-native-authority.ts';
 import type {
-  NativeAfterResult, NativeBudgets, NativeCommand, NativeExecution, NativeFamily, NativeInitialize, NativeOutcome,
+  NativeAfterResult, NativeBudgets, NativeCommand, NativeExecution, NativeFamily, NativeInitialize, NativeOutcome, NativeRecordResult,
   NativeGraphEdit, NativeProposal, NativePublicObservation, NativeRecord, NativeRuntimeSnapshot, NativeRuntimeYield, NativeV6Backend,
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.3.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.4.0';
 const SELECTION_PROGRAM = 'v6.composition_strategy.choose';
+type R = Record<string, any>;
+const EPISODE = 'common-observation-frontier';
+const CALLER_COMPONENTS = ['goal', 'frontier', 'view', 'attention', 'points', 'displays', 'controls', 'counters'] as const;
+const CALLER_PROVIDERS = ['goal_access', 'pre_score_contact', 'scored_local_rewrite', 'factored_material_return', 'conditional_transit',
+  'returned_branch_contrast', 'information_goal', 'view', 'view_continuity', 'observed_frontier'] as const;
 function freeze<T>(value: T): T {
   if (value && typeof value === 'object' && !Object.isFrozen(value)) {
     for (const child of Object.values(value)) freeze(child);
@@ -52,6 +59,8 @@ export interface NativeV6RuntimeConfiguration {
   groups?: readonly { readonly id: string; readonly families: readonly string[] }[];
   /** Production supplies the original objective policy and enables the real WHY/ACT gate. */
   authorityPolicy?: { provided_objective: { definition: string } };
+  /** Same source policy drives the native common caller's retained components. */
+  callerStrategy?: R;
 }
 
 export class NativeV6Runtime implements NativeV6Backend {
@@ -63,6 +72,10 @@ export class NativeV6Runtime implements NativeV6Backend {
   private readonly now: () => number;
   private readonly authorityPolicy?: { provided_objective: { definition: string } };
   private authority: NativeCompositionAuthority | null = null;
+  private caller: NativeCallerCoordinator | null = null;
+  private readonly callerStrategy?: R;
+  private callerAcquisitions = 0;
+  private callerBoundaryReplays = 0;
   private sessionId = '';
   private budgets: NativeBudgets | null = null;
   private current: NativePublicObservation | null = null;
@@ -95,7 +108,12 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (!configuration.sourceDigest || !configuration.families.length
       || new Set(configuration.families.map(f => f.id)).size !== configuration.families.length
       || configuration.families.some(f => typeof f.restore !== 'function')) throw new TypeError('A native implementation identity and distinct state-restorable families are required');
-    this.sourceDigest = configuration.sourceDigest; this.families = [...configuration.families];
+    this.sourceDigest = configuration.sourceDigest;
+    this.callerStrategy = configuration.callerStrategy ? structuredClone(configuration.callerStrategy) : undefined;
+    if (this.callerStrategy && !configuration.authorityPolicy) throw new TypeError('The common caller requires native WHY/ACT authority');
+    this.families = [...configuration.families, ...(this.callerStrategy ? nativeCallerFamilies(() => {
+      if (!this.caller) throw new Error('The common caller is not initialized'); return this.caller;
+    }) : [])];
     this.groups = structuredClone(configuration.groups ?? this.families.map(family => ({ id: family.id, families: [family.id] })));
     if (!this.groups.length || this.groups.length > 16 || new Set(this.groups.map(group => group.id)).size !== this.groups.length
       || this.groups.some(group => group.families.some(id => !this.families.some(family => family.id === id)))) throw new TypeError('Native selection requires 1–16 declared groups of registered families');
@@ -155,6 +173,12 @@ export class NativeV6Runtime implements NativeV6Backend {
         this.authority = new NativeCompositionAuthority(this.authorityPolicy, input.budgets.targetLevels);
         await this.authority.initialize(this.knowledge, this.observation);
       }
+      if (this.callerStrategy) {
+        this.caller = new NativeCallerCoordinator(this.authority!.memory, { targetLevels: input.budgets.targetLevels,
+          domain: this.domain, strategy: this.callerStrategy, informationGoal: 'accessible_view_frontier' });
+        await this.caller.initialize(this.observation);
+        await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'initialize', statement: 'caller.install' }, this.authority!.checkpointWrites());
+      }
       await this.plan(execution);
     });
     return this.output();
@@ -169,14 +193,35 @@ export class NativeV6Runtime implements NativeV6Backend {
     // determine every new plan, including across natural level transitions.
     this.restoreFamilies();
     this.authority?.restore();
-    const selected = await this.selectFamily(execution);
+    if (this.caller && this.knowledge) this.caller.restoreFrom(this.knowledge);
+    const inputs = this.domain.candidates(this.observation);
+    const obligations = (await Promise.all(this.families.map(family => family.preservationObligations?.(this.observation!, this.current!.frame_rows) ?? []))).flat();
+    let selected = await this.selectFamily(execution, inputs);
+    if (selected && this.caller) {
+      let [protectedProposal, rejected] = this.caller.protect(selected.proposal, obligations, this.observation, this.current.frame_rows);
+      if (rejected.length) {
+        const revisionInputs = new Set(obligations.flatMap(obligation => (obligation.revision_inputs ?? []) as string[]));
+        selected = await this.selectFamily(execution, inputs.filter(command => !revisionInputs.has(command.action_ref)));
+        if (selected) {
+          const [alternative, conflicts] = this.caller.protect(selected.proposal, obligations, this.observation, this.current.frame_rows);
+          protectedProposal = { ...alternative, preservation_rejected_candidates: rejected,
+            ...(conflicts.length ? { status: 'preservation_conflict', actions: [] } : {}) };
+        }
+      }
+      if (selected) selected = { ...selected, proposal: protectedProposal as NativeProposal };
+    }
     if (selected) {
       const { family, proposal } = selected;
-      if (proposal.status !== 'proposed' || !Array.isArray(proposal.actions) || proposal.actions.length < 1 || proposal.actions.length > Math.min(16, this.remaining())
+      if (proposal.status !== 'proposed') {
+        await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'selection', statement: 'source.refusal' }, this.authority?.checkpointWrites() ?? []);
+        this.stop(`frontier_${proposal.status ?? 'unknown'}`); return;
+      }
+      if (!Array.isArray(proposal.actions) || proposal.actions.length < 1 || proposal.actions.length > Math.min(16, this.remaining())
         || !Array.isArray(proposal.steps) || proposal.steps.length !== proposal.actions.length) throw new Error(`Invalid committed prefix from ${family.id}`);
       await family.bind?.(proposal, this.domain);
       for (const step of proposal.steps) if (step.locus_witness && !step.point_binding) step.point_binding = structuredClone(step.locus_witness);
       if (this.authority) {
+        await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'selection', statement: 'caller.prepare' }, this.authority.checkpointWrites());
         const target = await this.authority.bind(proposal, this.observation);
         if (!target.admitted) { this.stop(`composition_target_${target.reason}`); return; }
       }
@@ -188,14 +233,15 @@ export class NativeV6Runtime implements NativeV6Backend {
       if (!await this.authorize(execution)) this.stop(this.budgetReason() ?? 'no_admissible_prefix');
       return;
     }
-    await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'selection', statement: 'no_candidate' });
+    await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'selection', statement: 'no_candidate' }, this.authority?.checkpointWrites() ?? []);
     this.stop('no_applicable_transferred_family');
   }
 
   /** Original V6 family-selection SRC tree, interpreted by the V7 TS engine. */
-  private async selectFamily(execution: NativeExecution): Promise<{ family: NativeFamily; proposal: NativeProposal } | null> {
+  private async selectFamily(execution: NativeExecution, inputs: readonly NativeCommand[]): Promise<{ family: NativeFamily; proposal: NativeProposal } | null> {
     if (!this.current || !this.observation) throw new Error('Missing current selection context');
-    this.planning = { execution, inputs: this.domain.candidates(this.observation), offers: new Map() };
+    this.caller?.prepare(this.observation, this.remaining());
+    this.planning = { execution, inputs, offers: new Map() };
     try {
       if (!this.knowledge) throw new Error('Native knowledge store is not initialized');
       this.selectionProgram ??= await this.knowledge.registerProgram(SELECTION_PROGRAM, {
@@ -209,7 +255,9 @@ export class NativeV6Runtime implements NativeV6Backend {
           for (const id of group.families) {
             const family = this.families.find(candidate => candidate.id === id)!;
             const enabled = objectValue(this.knowledge!.value(`family_activation:${family.id}`)).enabled === true;
-            const proposal = enabled ? await family.propose(this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution) : null;
+            const proposal = !enabled ? null : family.proposeInGroup
+              ? await family.proposeInGroup(group.id, this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution)
+              : await family.propose(this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution);
             if (proposal) { offered = { family, proposal }; break; }
           }
           this.planning.offers.set(group.id, offered);
@@ -237,6 +285,11 @@ export class NativeV6Runtime implements NativeV6Backend {
       if (typeof result.selected !== 'string') return null;
       const offered = this.planning.offers.get(result.selected);
       if (!offered) throw new Error('The SRC selection does not bind an offered native family');
+      if (this.caller) {
+        offered.proposal.strategy_receipt = { ...selected.receipt, visited: result.visited, selected: result.selected, deferred_curiosity: [],
+          ...(this.caller.returnedAttention ? { attention_return: Object.fromEntries(['id', 'status', 'parent', 'pair_ref', 'returned_at'].map(key => [key, this.caller!.returnedAttention![key]])) } : {}) };
+        offered.proposal.morphology = { status: 'not_evaluated', reason: 'prior_family_selected' };
+      }
       return offered;
     } finally { this.planning = null; }
   }
@@ -247,7 +300,9 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (this.budgetReason()) return false;
     const { family, proposal, index } = this.prefix, command = proposal.actions[index];
     if (!command || !this.current.available_action_refs.includes(command.action_ref)) return false;
-    const before = await family.before(proposal, index, this.current, this.observation);
+    let before = await family.before(proposal, index, this.current, this.observation);
+    const preserved = this.caller?.preservation(proposal, this.current, this.observation);
+    if (preserved && !preserved.admitted) before = { admitted: false, reason: preserved.reason };
     const point = await ObservedInputDomain.pointGuard(this.current, command, proposal.steps![index] as { point_binding?: LocusWitness });
     this.note({ kind: 'before_guard', family: family.id, index, admitted: before.admitted, reason: before.reason, point_bound: point });
     this.check(execution);
@@ -278,7 +333,10 @@ export class NativeV6Runtime implements NativeV6Backend {
     await this.timed(first.level, async () => {
       this.observation = freeze(await measureNativeObservation(this.current!, this.actions + 1, this.sessionId));
       const after = this.observation;
-      const result = await prefix.family.after(prefix.proposal, prefix.index, before, after, first.frame_rows, this.current!.frame_rows);
+      let result = await prefix.family.after(prefix.proposal, prefix.index, before, after, first.frame_rows, this.current!.frame_rows);
+      const publicBoundary = first.level !== this.current!.level || first.levels_completed !== this.current!.levels_completed || ['WIN', 'GAME_OVER'].includes(this.current!.state);
+      const preserved = this.caller?.preservation(prefix.proposal, this.current!, after, true, publicBoundary);
+      if (preserved && !preserved.admitted) result = { matched: false, seal_prefix: true, reason: preserved.reason };
       prefix.witnessed.push({ command: freeze(structuredClone(outcome.command)), before, after, first, second: this.current!, index: prefix.index, outcome: freeze(structuredClone(result)) });
       this.note({ kind: 'actual_outcome', family: prefix.family.id, index: prefix.index, ...result, observation_ref: after.observation_ref });
       this.check(execution);
@@ -298,20 +356,44 @@ export class NativeV6Runtime implements NativeV6Backend {
   private async seal(execution: NativeExecution): Promise<void> {
     const prefix = this.prefix;
     if (!prefix) throw new Error('No native prefix to seal');
-    for (const transition of prefix.witnessed) {
+    const recordSelected = async (transition: WitnessedTransition): Promise<R | null> => {
       this.check(execution);
-      const record = await prefix.family.record(transition.before, transition.after, transition.command,
+      const common = this.caller && CALLER_PROVIDERS.includes(prefix.family.id as typeof CALLER_PROVIDERS[number]);
+      const record = common ? null : await prefix.family.record(transition.before, transition.after, transition.command,
         transition.first.frame_rows, transition.second.frame_rows, prefix.proposal, transition.index, transition.second.frame_packet);
       this.records.push(freeze(structuredClone({ family: prefix.family.id, revision: prefix.revision, index: transition.index, record })));
-    }
+      if (record && this.caller && this.authority) this.retainSelectedAcquisition(prefix.family, record, transition);
+      return record;
+    };
+    // Source ordering is per acquired transition, after physical prefix sealing:
+    // Attention/View -> selected family -> Goal/Point/Control -> assessment -> Frontier.
+    // A selected-family record must never be applied in an earlier separate pass.
+    if (!this.caller) for (const transition of prefix.witnessed) await recordSelected(transition);
+    const composed = this.authority ? await this.authority.acquire(prefix.proposal, prefix.revision, prefix.witnessed, prefix.interruption, execution,
+      this.caller ? {
+        beforeAssessment: transition => this.caller!.beforeAssessment(transition, prefix.proposal, () => recordSelected(transition as WitnessedTransition)),
+        recordAssessment: (transition, assessment) => this.caller!.recordAssessment(transition, assessment),
+        boundaryWitness: transition => this.caller!.boundaryWitness(transition, prefix.proposal, prefix.revision),
+      } : undefined) : null;
     this.cycles += 1;
-    const composed = this.authority ? await this.authority.acquire(prefix.proposal, prefix.revision, prefix.witnessed, prefix.interruption, execution) : null;
+    let transfer: R | null = null;
+    if (this.caller) {
+      this.callerAcquisitions += prefix.witnessed.length;
+      const last = prefix.witnessed.at(-1)!;
+      const boundary = last.after.level_epoch !== last.before.level_epoch || last.after.levels_completed > last.before.levels_completed || ['WIN', 'GAME_OVER'].includes(last.after.state);
+      // The source stops immediately after the requested score / GAME_OVER.
+      // Replay is for continuation into the next natural level only.
+      if (boundary && last.after.state !== 'GAME_OVER' && last.after.levels_completed < this.budgets!.targetLevels) {
+        transfer = await this.caller.replayBoundary(last.after); this.callerBoundaryReplays += 1;
+      }
+      const reason = this.budgetReason(); if (reason) this.caller.close(last.after, reason);
+    }
     this.note({ kind: 'sealed_prefix', family: prefix.family.id, revision: prefix.revision, acquired_actions: prefix.witnessed.length });
     const evidenceId = `prefix_evidence:${prefix.revision}`;
     await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'sealed_prefix', statement: 'outcome.acquire' }, [{
       id: evidenceId, kind: 'prefix_evidence', family: prefix.family.id, status: 'observed',
       value: { decision_revision: prefix.revision, proposal: prefix.proposal, selection: this.selectionReceipt,
-        composed_reconciliation: composed,
+        composed_reconciliation: composed, caller_transfer: transfer,
         transitions: prefix.witnessed.map(transition => ({ command: transition.command,
           before: transition.before.observation_ref, after: transition.after.observation_ref, outcome: transition.outcome })) },
       relations: [{ relation: 'records', target: `family_state:${prefix.family.id}` }, { relation: 'selected_by', target: `program:${SELECTION_PROGRAM}` }],
@@ -319,6 +401,27 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.restoreFamilies();
     this.kind = 'boundary'; this.reason = null;
     const reason = this.budgetReason(); if (reason) this.stop(reason);
+  }
+
+  private retainSelectedAcquisition(family: NativeFamily, record: NativeRecordResult, transition: WitnessedTransition): void {
+    const memory = this.authority!.memory, after = transition.after;
+    const singleEventKeys: Record<string, string> = { window_constraints: 'window_constraint', regular_field_correspondence: 'symmetric_field',
+      orbit_constraints: 'orbit_constraint', containment: 'containment', surface_program: 'surface', code_program: 'codes', band_transfer: 'bands',
+      visual_sequences: 'visual_sequence_event', slot_substitution: 'slots', word_interface: 'words', port_assembly: 'ports', constellation_cover: 'constellations' };
+    const key = singleEventKeys[family.id];
+    if (key) memory.put(EPISODE, `${key}:${transition.before.revision}`, record.events[0] ?? null, after.observation_ref, after.revision);
+    // Ordered support is a transferred subcomposition of SupportNavigation; its
+    // exact state is retained without inventing the unported wrapper's event.
+    if (family.id === 'ordered_support_transfer' || family.id === 'visual_sequences') {
+      const state = family.state();
+      memory.put(EPISODE, family.id === 'ordered_support_transfer' ? 'ordered_support_state' : 'visual_sequence_state', state, after.observation_ref, after.revision);
+      family.restore(memory.get(EPISODE, family.id === 'ordered_support_transfer' ? 'ordered_support_state' : 'visual_sequence_state').value);
+    }
+    if ((family.id === 'window_constraints' || family.id === 'regular_field_correspondence')
+      && (record.events[0] as R | null)?.status === 'official_boundary_witness') {
+      const state = family.state();
+      memory.put(EPISODE, family.id === 'window_constraints' ? 'window_prior' : 'symmetry_prior', state.prior, after.observation_ref, after.revision);
+    }
   }
 
   async resume(execution: NativeExecution): Promise<NativeRuntimeYield> {
@@ -336,7 +439,11 @@ export class NativeV6Runtime implements NativeV6Backend {
 
   private async persistFamilies(cause: DeltaCause, extra: NativeStoreWrite[] = [], evidenceId?: string): Promise<void> {
     if (!this.knowledge) throw new Error('Native knowledge store is not initialized');
-    await this.knowledge.commit([...extra, ...this.families.map(family => ({
+    await this.knowledge.commit([...extra, ...(this.caller?.checkpointWrites() ?? []), ...(this.caller ? [{
+      id: 'caller:lifecycle', kind: 'component_state' as const, component: 'common_caller.lifecycle',
+      value: { acquiredTransitions: this.callerAcquisitions, boundaryReplays: this.callerBoundaryReplays },
+      relations: [{ relation: 'reconciles_with', target: 'reasoning:memory' }],
+    }] : []), ...this.families.map(family => ({
       id: `family_state:${family.id}`, kind: 'family_state' as const, family: family.id, value: family.state(),
       ...(evidenceId ? { evidence: [evidenceId] } : {}),
     }))], cause);
@@ -406,12 +513,21 @@ export class NativeV6Runtime implements NativeV6Backend {
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id), fullV6Parity: false },
       srcDecision: this.selectionReceipt,
       whyAct: this.authority?.snapshot() ?? { enabled: false, scope: 'injected_family_test_runtime' },
+      caller: this.caller ? { enabled: true, acquiredTransitions: this.callerAcquisitions, boundaryReplays: this.callerBoundaryReplays,
+        goalEvents: this.caller.goalEventCount, frontierDeltas: this.caller.deltaSequence,
+        components: Object.fromEntries(CALLER_COMPONENTS.map(component => {
+          const id = `caller:${component}`; return [component, { id, revision: this.knowledge!.node(id).revision }];
+        })), pendingSourceProviders: ['morphology', 'attention_parent_return', 'acquire_control_for_target'],
+        scope: 'native common acquisition and connected providers; remaining source families are still in migration' }
+        : { enabled: false, scope: 'injected_family_test_runtime' },
       ...(this.knowledge?.graphChain ? { graphChain: this.knowledge.graphChain, graphRevision: this.knowledge.revision } : {}),
       ...(this.executionDigest ? { nativeExecutionDigest: this.executionDigest } : {}),
       knowledgeProfile: NATIVE_STORE_PROFILE,
       prefix: this.prefix ? { revision: this.prefix.revision, planned: this.prefix.proposal.actions.length, executed: this.prefix.witnessed.length, nextIndex: this.prefix.index } : null,
       acquiredRecords: this.records.length, levelActions: Object.fromEntries(this.levelActions),
-      familyStates: Object.fromEntries(this.families.map(f => [f.id, this.knowledge ? this.knowledge.value(`family_state:${f.id}`) : structuredClone(f.state())])),
+      familyStateRefs: Object.fromEntries(this.families.map(f => {
+        const id = `family_state:${f.id}`; return [f.id, { id, revision: this.knowledge?.memory.nodes[id]?.revision ?? null }];
+      })),
     });
   }
   private output(): NativeRuntimeYield {
@@ -423,6 +539,43 @@ export class NativeV6Runtime implements NativeV6Backend {
       } : null, snapshot: this.snapshot() });
   }
   close(reason: string): void { this.closed = true; this.kind = 'stopped'; this.reason = reason; }
+}
+
+/** Shared caller providers use the same retained Goal/Frontier/View objects. */
+function nativeCallerFamilies(getCaller: () => NativeCallerCoordinator): NativeFamily[] {
+  type Offer = (caller: NativeCallerCoordinator, observation: Parameters<NativeFamily['propose']>[0],
+    rows: Parameters<NativeFamily['propose']>[1], inputs: Parameters<NativeFamily['propose']>[2], remaining: number) => Promise<NativeProposal | R | null> | NativeProposal | R | null;
+  const offers: Record<typeof CALLER_PROVIDERS[number], Offer> = {
+    goal_access: (caller, observation, rows, inputs, remaining) => caller.goalOffer(observation, rows, inputs, remaining),
+    pre_score_contact: (caller, observation, rows, inputs, remaining) => caller.preScoreOffer(observation, rows, inputs, remaining),
+    scored_local_rewrite: (caller, observation, rows, inputs, remaining) => caller.scoredOffer(observation, rows, inputs, remaining),
+    factored_material_return: (caller, observation, _rows, inputs, remaining) => caller.factoredOffer(observation, inputs, remaining),
+    conditional_transit: (caller, observation, rows, inputs, remaining) => caller.passageOffer(observation, rows, inputs, remaining),
+    returned_branch_contrast: (caller, observation, _rows, inputs) => caller.returnedBranchOffer(observation, inputs),
+    information_goal: (caller, observation, rows, inputs, remaining) => caller.informationOffer(observation, rows, inputs, remaining),
+    view: (caller, observation, rows, inputs, remaining) => caller.viewOffer(observation, rows, inputs, remaining),
+    view_continuity: (caller, observation, _rows, inputs) => caller.continuityOffer(observation, inputs),
+    observed_frontier: (caller, observation, _rows, inputs) => caller.frontierOffer(observation, inputs),
+  };
+  return CALLER_PROVIDERS.map(id => {
+    const descriptor = { schema: 'logos-engine.v6.caller-provider.v1', provider: id, state_owner: 'caller' };
+    return {
+      id,
+      propose: async (observation, rows, inputs, remaining) => {
+        const result = await offers[id](getCaller(), observation, rows, inputs, remaining);
+        if (result && (id === 'factored_material_return' || id === 'conditional_transit')) result.material_access_subquestion = id;
+        return result as NativeProposal | null;
+      },
+      bind: proposal => getCaller().bind(proposal),
+      before: async (...args) => await getCaller().before(...args) as { admitted: boolean; reason: string },
+      after: (...args) => getCaller().after(...args) as NativeAfterResult,
+      // Goal/View/Frontier acquisition is universal and ordered by the common
+      // caller; a selected provider must not replay it a second time.
+      record: () => ({ events: [] }),
+      state: () => ({ ...descriptor }),
+      restore: state => { if (v6Canonical(state) !== v6Canonical(descriptor)) throw new TypeError('Caller provider state must reference the common owner'); },
+    } satisfies NativeFamily;
+  });
 }
 
 function fieldFamily(field: WindowConstraints): NativeFamily {
@@ -457,6 +610,10 @@ function subquestionFamily(family: NativeFamily, field: string, subquestion: str
     id: family.id,
     ...(family.attachPrograms ? { attachPrograms: (registry: Parameters<NonNullable<NativeFamily['attachPrograms']>>[0]) => family.attachPrograms!(registry) } : {}),
     propose: async (...args) => { const proposal = await family.propose(...args); if (proposal) proposal[field] = subquestion; return proposal; },
+    ...(family.proposeInGroup ? { proposeInGroup: async (...args: Parameters<NonNullable<NativeFamily['proposeInGroup']>>) => {
+      const proposal = await family.proposeInGroup!(...args); if (proposal) proposal[field] = subquestion; return proposal;
+    } } : {}),
+    ...(family.preservationObligations ? { preservationObligations: (...args: Parameters<NonNullable<NativeFamily['preservationObligations']>>) => family.preservationObligations!(...args) } : {}),
     ...(family.bind ? { bind: (proposal: NativeProposal, domain: ObservedInputDomain) => family.bind!(proposal, domain) } : {}),
     before: (...args) => family.before(...args), after: (...args) => family.after(...args), record: (...args) => family.record(...args),
     state: () => family.state(), restore: state => family.restore(state),
@@ -464,12 +621,15 @@ function subquestionFamily(family: NativeFamily, field: string, subquestion: str
 }
 
 /** Explicit adapter: the original visual family records one event, not a list. */
-export function visualSequenceFamily(visual = new VisualSequences()): NativeFamily {
+export function visualSequenceFamily(visual = new VisualSequences(), minimumRows?: number): NativeFamily {
   const proposal = (value: NativeProposal) => value as VisualSequenceProposal;
   return {
     id: 'visual_sequences',
     attachPrograms: registry => visual.attachPrograms(registry),
     propose: (observation, rows, inputs, remaining) => visual.propose(observation, rows, inputs, remaining),
+    proposeInGroup: (group, observation, rows, inputs, remaining) => group === 'scored_local_rewrite'
+      ? minimumRows ? visual.proposeContinuation(observation, rows, inputs, remaining, minimumRows) : null
+      : visual.propose(observation, rows, inputs, remaining),
     bind: (value, domain) => visual.bind(proposal(value), domain),
     before: (value, index, publicPacket, observation) => visual.before(proposal(value), index, publicPacket, observation),
     after: (value, index, before, after, firstRows, secondRows) => visual.after(proposal(value), index, before, after, firstRows, secondRows),
@@ -479,7 +639,7 @@ export function visualSequenceFamily(visual = new VisualSequences()): NativeFami
 }
 export interface NativeV6Declarations {
   common: { provided_objective: { definition: string }; input_domain: { max_point_occurrences: number }; ordered_support_transfer: OrderedSupportPolicy };
-  strategy: { declarations: { configuration: {
+  strategy: { declarations: { configuration: R & {
     families: readonly string[]; regular_field_correspondence: SymmetryPolicy; information_goal?: { visual_sequences_first?: boolean };
     program_construction: { ordered_subquestions: readonly string[] };
     factored_material_return: { ordered_subquestions: readonly string[] };
@@ -493,7 +653,7 @@ export async function loadNativeV6Declarations(): Promise<NativeV6Declarations> 
   const [common, strategy] = await Promise.all([load(commonUrl), load(strategyUrl)]); return { common, strategy };
 }
 /** Identifies native declarations/version, not a Python runtime or source binary. */
-export async function createNativeV6Runtime(declarations?: NativeV6Declarations): Promise<NativeV6Runtime> {
+export async function createNativeV6Runtime(declarations?: NativeV6Declarations, options: { now?: () => number } = {}): Promise<NativeV6Runtime> {
   const loaded = declarations ?? await loadNativeV6Declarations();
   const symmetry = loaded.strategy.declarations[0]?.configuration.regular_field_correspondence;
   if (!symmetry || !loaded.common.ordered_support_transfer || !loaded.common.input_domain) throw new Error('Incomplete native V6 declarations');
@@ -507,26 +667,38 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations)
   const surface = subquestionFamily(originalEventFamily(new SurfaceProgram()), 'program_subquestion', 'surface_rewrite');
   const code = subquestionFamily(originalEventFamily(new CodeProgram()), 'program_subquestion', 'learned_code_program');
   const band = subquestionFamily(originalEventFamily(new BandTransfer()), 'material_access_subquestion', 'conserved_band_transfer');
-  const visual = visualFirst ? visualSequenceFamily() : null;
-  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, ordered, ...(visual ? [visual] : [])];
+  const visualContinuation = configuration.scored_local_rewrite.minimum_completed_rows_for_visual_continuation as number | undefined;
+  const visual = visualFirst || visualContinuation ? visualSequenceFamily(new VisualSequences(), visualContinuation) : null;
+  const interfaces = createNativeInterfaceFamilies();
+  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, ordered, ...(visual ? [visual] : []), ...Object.values(interfaces)];
   const registeredSubquestions = (order: readonly string[], registered: Record<string, NativeFamily>): string[] =>
     order.flatMap(question => registered[question] ? [registered[question].id] : []);
   const groupMembers: Record<string, readonly string[]> = {
+    goal_access: (configuration.goal_access_subquestions as string[]).flatMap(question => question === 'scored_relation_access' ? ['goal_access'] : []),
     window_constraints: [...registeredSubquestions(configuration.window_constraints.ordered_subquestions, { multiscale_constraints: windows }), symmetric.id],
     orbit_constraints: [orbit.id], containment: [containment.id],
-    surface: registeredSubquestions(configuration.program_construction.ordered_subquestions, { surface_rewrite: surface, learned_code_program: code }),
-    factored_material_return: registeredSubquestions(configuration.factored_material_return.ordered_subquestions, { conserved_band_transfer: band, ordered_support_transfer: ordered }),
-    information_goal: visual ? [visual.id] : [],
+    surface: registeredSubquestions(configuration.program_construction.ordered_subquestions, { surface_rewrite: surface, learned_code_program: code, ...interfaces }),
+    pre_score_contact: ['pre_score_contact'],
+    scored_local_rewrite: ['scored_local_rewrite', ...(visual && visualContinuation ? [visual.id] : [])],
+    factored_material_return: configuration.factored_material_return.ordered_subquestions.flatMap(question => {
+      const registered: Record<string, string> = { factored_material_return: 'factored_material_return', conditional_transit: 'conditional_transit',
+        conserved_band_transfer: band.id, ordered_support_transfer: ordered.id };
+      return registered[question] ? [registered[question]!] : [];
+    }),
+    returned_branch_contrast: ['returned_branch_contrast'],
+    information_goal: [...(visual && visualFirst ? [visual.id] : []), 'information_goal'],
+    view: ['view'], view_continuity: ['view_continuity'], observed_frontier: ['observed_frontier'],
   };
   const groups = loaded.strategy.declarations[0]!.configuration.families.map(id => ({ id, families: groupMembers[id] ?? [] }));
   // Some original policy declarations contain non-integer thresholds. This
   // implementation manifest uses explicit JSON.stringify encoding, as does the
   // existing V7 implementation manifest; it is not a V7 portable-JSON datum.
   const manifest = { sourceEncoding: 'json-stringify-v1', implementation: NATIVE_V6_IMPLEMENTATION, referenceCommit: NATIVE_V6_REFERENCE_COMMIT,
-    declarations: loaded, families: families.map(f => f.id), groups, authority: 'native_original_why_act',
+    declarations: loaded, families: [...families.map(f => f.id), ...CALLER_PROVIDERS], groups, authority: 'native_original_why_act', caller: 'native_common_coordinator',
     selectionProgram: nativeProgramDescriptions().find(program => program.id === 'v6.composition_strategy.choose')?.transitiveSourceHash ?? null,
     fullV6Parity: false };
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
-  return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, maxPointOccurrences: loaded.common.input_domain.max_point_occurrences });
+  return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration,
+    maxPointOccurrences: loaded.common.input_domain.max_point_occurrences, ...(options.now ? { now: options.now } : {}) });
 }

@@ -65,6 +65,7 @@ export class NativeCallerCoordinator {
   goalReason: string | null = null;
   returnedAttention: R | null = null;
   targetMethod: R | null = null;
+  private restoredValues: readonly unknown[] | null = null;
 
   constructor(memory: NativeReasoningMemory, configuration: NativeCallerConfiguration) {
     this.memory = memory; this.configuration = configuration;
@@ -84,6 +85,7 @@ export class NativeCallerCoordinator {
     return this.view?.hasObservedViewQuestion() ? inputs.filter(action => !truth(action.data)) : inputs;
   }
   async initialize(observation: NativeObservation): Promise<void> {
+    this.restoredValues = null;
     await this.frontier.observe(observation, this.graphInputs(observation));
     this.persistDeltas(observation);
   }
@@ -96,8 +98,13 @@ export class NativeCallerCoordinator {
 
   /** Read the actual retained source objects before a new prefix is planned. */
   restoreFrom(store: NativeKnowledgeStore): void {
-    const state = Object.fromEntries(COMPONENTS.map(component => [component, store.stateValue(`caller:${component}`)])) as unknown as NativeCallerState;
+    // stateValue checks the root AND every referenced fragment revision. A root
+    // identity alone is not enough to authorize reuse of a fragmented state.
+    const values = COMPONENTS.map(component => store.stateValue(`caller:${component}`));
+    if (this.restoredValues && values.every((value, index) => value === this.restoredValues![index])) return;
+    const state = Object.fromEntries(COMPONENTS.map((component, index) => [component, values[index]])) as unknown as NativeCallerState;
     this.restore(state);
+    this.restoredValues = values;
   }
   state(): NativeCallerState {
     return {
@@ -124,15 +131,25 @@ export class NativeCallerCoordinator {
       || !Number.isSafeInteger(counters.deltaSequence) || counters.deltaSequence < 0) throw new TypeError('Invalid native caller checkpoint');
     const controls = new ControlDependencies(); controls.pending = controlState.pending; controls.attempted = new Set(controlState.attempted);
     this.goal = goal; this.frontier = frontier; this.view = view; this.attention = attention; this.points = points; this.displays = displays; this.controls = controls;
-    Object.assign(this, counters);
+    Object.assign(this, counters); this.restoredValues = null;
   }
   checkpointWrites(): NativeStoreWrite[] {
-    const state = this.state();
+    // Preserve immutable raster identities on the internal checkpoint path.
+    // Public state() still returns an independent source-compatible snapshot.
+    const state = { ...this.stateWithoutGoal(), goal: this.goal.nativeState() };
     return COMPONENTS.map(component => ({ id: `caller:${component}`, kind: 'component_state', component: `common_caller.${component}`, value: state[component],
       relations: [{ relation: 'reconciles_with', target: 'reasoning:memory' }] }));
   }
+  private stateWithoutGoal(): Omit<NativeCallerState, 'goal'> {
+    return { frontier: this.frontier.snapshot(), view: this.view?.state() ?? null,
+      attention: this.attention.state(), points: this.points.state(), displays: this.displays.state(),
+      controls: structuredClone({ pending: this.controls.pending, attempted: [...this.controls.attempted].sort(compareUnicode) }),
+      counters: structuredClone({ goalEventCount: this.goalEventCount, deltaSequence: this.deltaSequence,
+        goalReason: this.goalReason, returnedAttention: this.returnedAttention, targetMethod: this.targetMethod }) };
+  }
   prepare(observation: NativeObservation, remaining: number): void {
     if (!Number.isSafeInteger(remaining) || remaining < 1) throw new TypeError('Planning requires a positive public action allowance');
+    this.restoredValues = null;
     this.frontier.max_prefix = Math.min(16, remaining);
     this.frontier.bindCurrentCandidateContext(observation, this.registry());
     this.attention.revalidate(observation); this.returnedAttention = this.attention.takeParentReturn(observation); this.goalReason = null;
@@ -217,6 +234,7 @@ export class NativeCallerCoordinator {
   /** This is called only while acquiring a sealed prefix of actual host outcomes. */
   async beforeAssessment(transition: NativeAuthorityTransition, proposal: NativeProposal,
     recordSelected: () => Promise<R | null> = async () => null): Promise<NativeCallerAcquisition> {
+    this.restoredValues = null;
     const { before, after, command, first, second, index } = transition, question = proposal.question as R ?? {};
     const acquisition = question.control_acquisition ?? {}, shared = question.curiosity?.also_tests_current_control ?? {};
     const attention_result = this.attention.observe(before, after, command, acquisition.attention_ref || shared.attention_ref || null);
@@ -254,11 +272,13 @@ export class NativeCallerCoordinator {
     return { attention_result, view_result, selected_result, goal_events, point_experiment_result, control_experiment_result, information_goal_result };
   }
   async recordAssessment(transition: NativeAuthorityTransition, assessment: R | null): Promise<R> {
+    this.restoredValues = null;
     const receipt = await this.frontier.recordTransition(transition.before, transition.command, transition.after,
       { assessment, after_action_candidates: this.graphInputs(transition.after) });
     this.persistDeltas(transition.after); return receipt;
   }
   boundaryWitness(transition: NativeAuthorityTransition, proposal: NativeProposal, decisionRevision: number): R {
+    this.restoredValues = null;
     const { before, after, command, index } = transition, template = proposal.bundle_template as R;
     const witness: R = { source_level: before.level_epoch, before_observation_ref: before.observation_ref, after_observation_ref: after.observation_ref,
       last_action: command, released_composition: template.composition_ref, committed_decision_revision: decisionRevision,
@@ -271,6 +291,7 @@ export class NativeCallerCoordinator {
   }
   /** Rebuild the original retained goal/frontier objects from verified events. */
   async replayBoundary(observation: NativeObservation): Promise<R> {
+    this.restoredValues = null;
     const before = await compositionIdentity(this.goal.memory.retainedState()), goal = new ProspectiveContactAdapter();
     for (let sequence = 1; sequence <= this.goalEventCount; sequence += 1) {
       const record = this.memory.get(EPISODE, `goal_access_event:${sequence}`).value;
@@ -289,5 +310,5 @@ export class NativeCallerCoordinator {
       retained_goal_state_digest: before, retained_rule_count: this.registry().length,
       rule_scope: 'prior evidence retained; next-level applicability must be revalidated', visual_terminal_role: 'unknown' };
   }
-  close(observation: NativeObservation, reason: string): void { this.attention.closePending(observation, reason); }
+  close(observation: NativeObservation, reason: string): void { this.restoredValues = null; this.attention.closePending(observation, reason); }
 }
