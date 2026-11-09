@@ -11,7 +11,47 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current delivery (lot 2B, native 0.34.0):** the complete current morphology
+**Current functional delivery with cost reservation (lot 2C, native 0.35.0):** station-method enrichment,
+entry rebind and entry-return continuation, managed capacity and target-extension
+consumers are connected at their original source positions. The existing caller
+owns the method; the morphology journal owns acquired entry returns; GoalAccess
+and inventory keep motion, meter and collection evidence. Checkpoint v2 accepts
+legacy v1 with a null entry return and verifies its acquired projection before
+restoring it.
+
+The frozen **242-file** inventory is
+`3cd17565b114a40ed71870bf8d7875a1b91102440b92d14a9258bfa98d4f7779`.
+The explicit release delta passes **859/859 tests** in 17 files. Original-source
+contracts cover 48 entry approaches, 37 resumes, 8 contours, 15 method boundaries,
+7 recalls, the complete adapter approach/return/probe sequence, 45 managed
+searches, 35 projections and 18 geometry integrations. Synthetic component
+premises and source set-order qualifications remain explicit in the lineage.
+
+A cold **LS20** campaign completes **three levels in 142 actions (17, 67, 58)**
+and 58 sealed prefixes, with one session and two intermediate boundary resumes.
+The managed browser independently reproduces 142 actions, three solved levels
+and 58 completed plans on entry to level 4, with the inspector closed.
+The session acquires a method from one unique station entry, consumes it in 47
+morphology calls, selects two `entry_rebind` prefixes, one acquired return/probe
+chain and fourteen `managed_access` prefixes. Source comparison passes 312
+actual morphology calls, 600 shared-context calls and 58 checkpoints. It replays
+the original component and the actual method-consumer view; full historical
+caller acquisition is a distinct claim. The V62 prefix comparison matches 25
+commands and stops before a differing return at cumulative action 26, during level 2.
+
+The [lot 2C report](lot2c-method-continuation.md),
+[lineage](lot2c-method-continuation-lineage.md) and
+[roadmap](v6-delivery-roadmap.md) retain browser verification, cost results,
+qualification and delivery integrity. The registry remains **50/76**, with
+**37 compiled workflows**. Four additional source modules are conservatively
+mapped as partial transfers. **Lot 2C remains open on cost:** 14/16 initial
+budgeted medians pass; the fresh paired STCK follow-up retains five of eight
+medians above +10%, including service continuation (+25.74%), persistence
+(+20.67%) and restoration (+16.45%). Its cause remains unresolved. Closing this
+unchanged cost gate is the next priority before extending lot 3. Complete
+morphology-domain closure, remaining families and full V6 parity remain open.
+
+**Previous delivery (lot 2B, native 0.34.0):** the complete current morphology
 decision survives a missing route and reaches the original control-acquisition,
 information-admission and attention parent-return consumers. It is cleared at
 every selection cycle and restoration, not retained as historical authority.
@@ -64,8 +104,8 @@ and [updated roadmap](v6-delivery-roadmap.md) contain the campaigns, validation,
 measured costs and remaining branches. The registry stays **50/76**, with
 **37 compiled workflows**. The regenerated audit records **151 component-verified,
 126 partial and 1,092 pending modules**, zero fully transferred modules and all
-six complete-migration gates false. **Lot 2C is the next step**; the wider lot 2
-remains open.
+six complete-migration gates false at that delivery. Lot 2C extends its bounded
+method consumers; complete global parity remains open.
 
 **Previous delivery (lot 2A, native 0.33.0):** current public measurements now
 feed the existing morphology policy and its actual ordered provider in the
@@ -112,7 +152,7 @@ The [lot report](lot1-retained-material-parent.md) distinguishes the baseline ga
 controlled contrary returns, real common execution, live campaign and measured
 costs. The [roadmap](v6-delivery-roadmap.md) preserves all eleven lots and exactly
 26 remaining registry entries. The [lineage](lot1-composition-return-lineage.md)
-records source relationships and actually consumed operations. The bounded lot 2A and 2B deliveries follow this milestone; the complete morphology provider still requires lot 2C.
+records source relationships and actually consumed operations. The bounded lot 2A, 2B and functional 2C deliveries follow this historical milestone; the current 2C cost reservation and complete morphology-domain closure remain open.
 
 **Previous integrated milestone (v57):** the native common caller completes
 **SMLP's first three levels in 15 actions (3, 4, 8)** in one cold continuous

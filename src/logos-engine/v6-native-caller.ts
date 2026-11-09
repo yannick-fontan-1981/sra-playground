@@ -509,7 +509,8 @@ export class NativeCallerCoordinator {
       { assessment, after_action_candidates: this.graphInputs(transition.after) });
     this.persistDeltas(transition.after); return receipt;
   }
-  boundaryWitness(transition: NativeAuthorityTransition, proposal: NativeProposal, decisionRevision: number): R {
+  boundaryWitness(transition: NativeAuthorityTransition, proposal: NativeProposal, decisionRevision: number,
+    stationHypothesisFor?: (method: R, witness: R) => R | null): R {
     this.restoredValues = null;
     const { before, after, command, index } = transition, template = proposal.bundle_template as R;
     const witness: R = { source_level: before.level_epoch, before_observation_ref: before.observation_ref, after_observation_ref: after.observation_ref,
@@ -518,7 +519,12 @@ export class NativeCallerCoordinator {
       levels_completed_before: before.levels_completed, levels_completed_after: after.levels_completed, official_state: after.state,
       causal_terminal_role: 'unknown', qualification: 'observed official boundary/terminal witness, not a generalized winning recipe' };
     const method = targetMethodAtBoundary(proposal.composition_target_tree as R, witness);
-    if (method) { this.put('target_method', method, after); this.targetMethod = this.memory.get(EPISODE, 'target_method').value; witness.target_method = method; }
+    if (method) {
+      const station = stationHypothesisFor?.(method, witness) ?? null;
+      if (station) method.station_hypothesis = station;
+      this.put('target_method', method, after); this.targetMethod = this.memory.get(EPISODE, 'target_method').value;
+      witness.target_method = method;
+    }
     this.put(`boundary_witness:${after.revision}`, witness, after); return witness;
   }
   /** Rebuild the original retained goal/frontier objects from verified events. */

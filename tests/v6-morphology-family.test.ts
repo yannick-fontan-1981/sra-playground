@@ -59,7 +59,8 @@ test('native family consumes real producers and reproduces the complete original
   assert.deepEqual(sourceProposal(await propose(family)), scenario.proposal);
   assert.deepEqual(shared.state(), meter, 'Repeated planning does not acquire the current meter twice');
   assert.deepEqual(family.state(), state, 'Pure current measurements do not become extra domain memory');
-  assert.deepEqual(Object.keys(state).sort(), ['contacts', 'feature_trials', 'format', 'journal', 'tried']);
+  assert.deepEqual(Object.keys(state).sort(), ['contacts', 'entry_access_return', 'feature_trials', 'format', 'journal', 'tried']);
+  assert.equal(state.entry_access_return, null);
 });
 
 test('current morphology decision survives a null route only within its measured selection scope', async () => {

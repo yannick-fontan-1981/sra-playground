@@ -4,11 +4,11 @@
  * It consumes the caller's real public history and shared meter forecast.
  *
  * Supported route domain: a complete or witnessed border-occluded current
- * pair, observed rigid control,
+ * pair, observed or caller-revalidated rigid control,
  * ordinary traversable surfaces and first modifier/peer/feature/capacity
  * questions, with current revalidation of observed station/feature sites,
- * witnessed station cycles and border-only partial correspondence. Transferred
- * station methods and the managed capacity search they enable remain deferred.
+ * witnessed station cycles and border-only partial correspondence. Retained
+ * station methods are revalidated before finite managed-capacity projection.
  */
 import { compareUnicode } from './canonical.ts';
 import { compositionIdentity, registered, Snapshot } from './v6-composition-memory.ts';
@@ -18,6 +18,8 @@ import type { FramedPattern } from './v6-geometric-scene.ts';
 import { gauge_related_marks } from './v6-inventory-continuation.ts';
 import { componentSignatures, motionFootprint, rigidRole } from './v6-motion-contrast.ts';
 import type { RigidMotionTrack } from './v6-motion-contrast.ts';
+import { projectManagedLayout, searchManagedAccess } from './v6-morphology-managed.ts';
+import type { MorphologyCollectionEvidence } from './v6-morphology-managed.ts';
 import { geometricComponents, rotateMask } from './v6-native-observer.ts';
 import type { GeometricComponent } from './v6-native-observer.ts';
 import { pythonEqual as same, pythonTruthy as truth } from './v6-operations.ts';
@@ -39,9 +41,11 @@ export interface MorphologyMeasurementInput {
   actionBudget?: number | null;
   meterForecast?: R | null;
   stationMethod?: R | null;
-  collectionEvidence?: { pending: R; history: R } | null;
+  collectionEvidence?: MorphologyCollectionEvidence | null;
   observation?: R | null;
   featureTrials?: R | null;
+  /** Current control reconstructed by the source entry-rebind consumer. */
+  provisionalControl?: RigidMotionTrack | null;
 }
 export interface MorphologyMeasurements { facts: R; plans: R; receipt: R }
 type Step = { from: number[]; to: number[]; action_ref: string | null; surface_sha: string; nonlocal_witness?: R;
@@ -328,8 +332,8 @@ export async function morphologyMissingAxisWitness(current: Snapshot, history: r
     probe_index: index, expected_if_positive: [...probe.to], source_position: [...probe.from], peer_bbox: [...peer] }];
 }
 
-/** Base geometry.measure_routes. Optional historical branches retain an
- * explicit refusal receipt; they cannot silently turn into ordinary transit. */
+/** geometry.measure_routes with current revalidation of retained methods.
+ * Projection and search remain measurements with no physical authority. */
 export async function measureMorphologyRoutes(input: MorphologyMeasurementInput): Promise<MorphologyMeasurements> {
   const { history, current, limit, contacts, tried, available } = input;
   const actionBudget = input.actionBudget ?? null, meter = input.meterForecast ?? null;
@@ -338,7 +342,7 @@ export async function measureMorphologyRoutes(input: MorphologyMeasurementInput)
     orientation_relation: 'ambiguous', control_attested: false, single_pattern_contact_change: false, alignment_refuted: false,
     peer_discrimination_bound: false, routes: {} };
   const receipt: R = { source: 'geometry.measure_routes', source_commit: '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e',
-    status: 'measured', domain: 'current_pair_routes_without_transferred_station_method', observation_ref: current.ref, level_epoch: current.epoch,
+    status: 'measured', domain: 'current_pair_routes_and_revalidated_managed_capacity', observation_ref: current.ref, level_epoch: current.epoch,
     history_transition_count: history.length, release_authority: false, deferred_source_branches: [] };
   const defer = (reason: string, evidence: R = {}): MorphologyMeasurements => ({ facts: { ...facts, routes: {} }, plans: {},
     receipt: { ...receipt, status: 'deferred_source_branch', reason, deferred_source_branches: [reason], ...evidence } });
@@ -360,7 +364,7 @@ export async function measureMorphologyRoutes(input: MorphologyMeasurementInput)
   const contact = contacts.get(key([current.epoch, pairKey])), peer = contact ? contact.peer ?? null : null;
   if (contact) facts.single_pattern_change_observation_ref = contact.observed;
   facts.single_pattern_contact_change = peer !== null;
-  const control: RigidMotionTrack | null = partial ? partial.control : rigidRole(history, current, parts, await componentSignatures(parts));
+  const control: RigidMotionTrack | null = partial ? partial.control : input.provisionalControl ?? rigidRole(history, current, parts, await componentSignatures(parts));
   if (!control) return { facts, plans: {}, receipt: { ...receipt, reason: 'current_control_unattested' } };
   const { roles, moves: motions, position, size } = control, origin = position(current);
   if (!origin) return { facts, plans: {}, receipt: { ...receipt, reason: 'current_control_position_missing' } };
@@ -370,7 +374,6 @@ export async function measureMorphologyRoutes(input: MorphologyMeasurementInput)
     const plans = await partialInteriorProbe(input, pair, control, partial.support, facts);
     return { facts, plans, receipt: { ...receipt, route_keys: Object.keys(plans), partial_correspondence: true, retained_support: partial.support } };
   }
-  if (truth(input.stationMethod)) return defer('retained_station_method');
   const featureSites = await knownMorphologyFeatureSites(current, pair, history, input.featureTrials ?? null, origin, size);
   const positives = new Map<string, Set<string>>(), negatives = new Set<string>(), anchors: Snapshot[] = [], unresolved = new Map<string, R>();
   for (const [before, action, after] of history) {
@@ -388,9 +391,6 @@ export async function measureMorphologyRoutes(input: MorphologyMeasurementInput)
   const marks = gauge_related_marks(parts, meter, size, pair.sites);
   const stations = new Map<string, R>(Object.values(contact?.stations ?? {}).map((s: any) => [key(s.site), s]));
   facts.observed_color_sites = [...featureSites].map(([at, site]) => ({ site: JSON.parse(at), signature: site.site_surface, evidence: site.evidence }));
-  // Source managed_projection.project_layout immediately returns (None, None)
-  // without station_method. The exact null-method domain therefore keeps its
-  // ordinary capacity routes even when marks and a current meter are present.
   const queue: [NativePoint, Step[]][] = [[origin, []]], visited = new Set([key(origin)]);
   const targets = new Map<string, Map<string, Target>>(['peer', 'modifier', 'capacity_probe', 'feature_probe'].map(name => [name, new Map()]));
   const add = (name: string, dest: NativePoint, path: Step[]): void => { const pool = targets.get(name)!; if (!pool.has(key(dest))) pool.set(key(dest), { dest, path }); };
@@ -498,6 +498,72 @@ export async function measureMorphologyRoutes(input: MorphologyMeasurementInput)
       }
     }
     facts.capacity_needed = minimum === null || minimum > meter.steps_before_empty; facts.direct_goal_cost_lower_bound = minimum;
+  }
+  const collection = input.collectionEvidence;
+  if ((facets.color === 'equal' || featureSites.size) && pair.quarter_turns !== null && truth(meter) && input.observation && actionBudget
+    && (marks.length || truth(collection?.pending) || Object.values(collection?.history ?? {}).some(e => e.epoch === current.epoch && e.kind === 'disappearance_confirmed'))) {
+    const [layout, orientation] = projectManagedLayout({ current, pair, origin, size, motions, surfaces, unresolvedEdges: unresolved,
+      marks, stations, stationMethod: input.stationMethod ?? null, roleRefs: roles, available,
+      collectionEvidence: collection ?? null, observation: input.observation, featureSites });
+    if (layout !== null && orientation !== null) {
+      const search = searchManagedAccess(layout, meter, orientation, { actionBudget, maxPrefix: limit }), options: R[] = search.options;
+      facts.managed_search = { status: search.status, options: options.length, charge_orders: options.slice(0, 12).map(option => ({
+        order: option.charge_order, cost: option.primitive_count, remaining: option.remaining_at_goal, objective: option.objective })) };
+      for (const option of options) {
+        const prefix: R[] = option.prefix, commands: string[] = prefix.map(step => step.test_command || step.command);
+        if (!commands.length || commands.some(command => !available.includes(command))) continue;
+        const last = prefix.at(-1)!;
+        if (truth(last.unidentified_control)) {
+          const move = last.unidentified_control, eligible: [number, string][] = [];
+          for (const command of move.test_commands as string[]) {
+            let success = 0, contrary = false;
+            for (const [before, action, after] of history) {
+              if (action !== command) continue;
+              const a = position(before), b = position(after); if (a === null || b === null) continue;
+              if (same([b[0] - a[0], b[1] - a[1]], move.predicted_delta)) success++;
+              else if (same(a, last.from) && same(motionFootprint(before.rows, point(last.to), size), motionFootprint(current.rows, point(last.to), size))) contrary = true;
+            }
+            if (!contrary) eligible.push([-success, command]);
+          }
+          if (!eligible.length) continue;
+          eligible.sort(lex); commands[commands.length - 1] = eligible[0]![1];
+        }
+        const trial = await compositionIdentity([current.epoch, pairKey, option.first_obligation, last.from, last.to,
+          commands.at(-1), orientation.residual, meter!.steps_before_empty, layout.color_state?.initial ?? null]);
+        if (tried.has(trial)) continue;
+        const steps = await Promise.all(prefix.map(async (step, index) => ({ from: step.from, to: step.to, action_ref: commands[index],
+          surface_sha: await compositionIdentity(motionFootprint(current.rows, point(step.to), size)) })));
+        const name = 'managed_access', terminalEffect = ({ test_or_rearm_orientation: 'modifier', test_aligned_peer: 'peer',
+          test_or_collect_capacity: 'capacity_probe', test_observed_palette_entry: 'feature_probe' } as R)[option.first_obligation] ?? null;
+        Object.assign(facts, { managed_capacity_bound: true, managed_access_xy: last.to });
+        if (facets.color === 'different') {
+          facts.feature_reaccess_bound = !!(truth(layout.color_state) && option.conditional_path.some((s: R) => truth(s.feature))
+            && ['aligned_peer', 'feature_then_recovery'].includes(option.objective));
+          if (facts.feature_reaccess_bound) {
+            const path: R[] = option.conditional_path, ix = path.findIndex(s => truth(s.feature)), repair = path[ix]!;
+            const station = (layout.color_state.features as R[]).find(v => v.id === repair.feature)!;
+            const witnessed = (station.effects as R[]).filter(r => r.from_color === repair.color_before && r.to_color === repair.color_after
+              && same(r.mobile_site, layout.color_state.mobile_site));
+            const j = path.findIndex((s, index) => index > ix && (truth(s.charge) || truth(s.peer))), recovery = path[j]!;
+            facts.feature_reaccess = { route_key: name, effect_site: repair.to, effect_before: witnessed.at(-1)!.before,
+              effect_after: witnessed.at(-1)!.after, steps_to_effect: ix + 1, recovery_site: recovery.to, steps_to_recovery: j + 1,
+              total_cost: path.length, observation_ref: current.ref, level_epoch: current.epoch, pair_ref: facts.pair_ref,
+              objective: option.objective, release_authority: false };
+          }
+        }
+        facts.routes[name] = { start_xy: [...origin], end_xy: last.to, actions: commands.map(action_ref => ({ action_ref })),
+          observation_ref: current.ref, level_epoch: current.epoch };
+        plans[name] = { route_key: name, steps, size: [...size], footprint_sha: footprint, role_refs: [...roles], pair, trial,
+          score: current.score, level_epoch: current.epoch, observation_ref: current.ref, contact_in_prefix: truth(terminalEffect), goal_xy: last.to,
+          access_phase: terminalEffect ? 'contact' : 'intermediate', physical_effect: terminalEffect,
+          obligation: option.first_obligation, charge_order: option.charge_order, total_cost: option.primitive_count,
+          assumptions: option.hypotheses, falsifiers: option.falsifiers, entry_model: orientation,
+          composition_objective: option.objective, first_obligation: option.next_composition,
+          feature_witnesses: option.conditional_path.filter((s: R) => truth(s.feature)),
+          recovery_witnesses: option.conditional_path.filter((s: R) => truth(s.charge) || truth(s.peer)), predicted_last: last };
+        break;
+      }
+    }
   }
   Object.assign(receipt, { route_keys: Object.keys(plans), measured_passage_pattern_count: surfaces.size, persistent_anchor_count: anchors.length,
     nonlocal_edge_count: unresolved.size, gauge_related_mark_count: marks.length });

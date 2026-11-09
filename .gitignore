@@ -106,3 +106,12 @@ __pycache__/
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot2b-evidence/final/syme-control-attention/syme-campaign.json.gz
 /docs/migration/lot2b-evidence/final/weav-control-attention/weav-campaign.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-campaign.json.gz
+/docs/migration/lot2c-evidence/final/source-archive.tar.gz
+
+# Lot 2C exact performance receipts retained in checked gzip archives.
+/docs/migration/lot2c-evidence/performance/after.json
+/docs/migration/lot2c-evidence/performance/managed-component-costs.json
+/docs/migration/lot2c-evidence/performance/stck-followup/after.json

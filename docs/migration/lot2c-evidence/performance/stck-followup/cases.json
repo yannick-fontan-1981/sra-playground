@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.native-loop-cost-cases.v1",
+  "rounds": 5,
+  "cases": [
+    {
+      "id": "STCK",
+      "trace": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "traceSha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "actions": 10,
+      "targetLevels": 3,
+      "warmupActions": 3,
+      "purpose": "Unaffected common decisions and known-prefix continuation through two natural levels."
+    }
+  ],
+  "budget": {
+    "unaffectedMedianRelativeIncrease": 0.1,
+    "qualification": "Fixed five-session paired follow-up of initial STCK continuation service/request median excesses. Same eight metrics and 10% limit; retain all initial evidence and every outcome."
+  }
+}

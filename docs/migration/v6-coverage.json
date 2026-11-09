@@ -31,9 +31,9 @@
     "dataFiles": 417,
     "verifiedModules": 0,
     "componentVerifiedModules": 151,
-    "partiallyTransferredModules": 126,
+    "partiallyTransferredModules": 130,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1092,
+    "pendingModules": 1088,
     "strategyFamilies": 16
   },
   "families": [
@@ -75669,7 +75669,11 @@
         "scripts/export-v6-motion-contrast-reference.py",
         "tests/fixtures/v6-motion-contrast-reference.json.gz",
         "tests/v6-motion-contrast.test.ts",
-        "tests/v6-motion-caller-integration.test.ts"
+        "tests/v6-motion-caller-integration.test.ts",
+        "scripts/export-v6-morphology-methods-reference.py",
+        "tests/fixtures/v6-morphology-methods-reference.json.gz",
+        "tests/v6-morphology-methods-reference.test.ts",
+        "docs/migration/lot2c-method-continuation-lineage.md"
       ]
     },
     {
@@ -85873,7 +85877,14 @@
       "proof": [
         "scripts/export-v6-geometry-reference.py",
         "tests/fixtures/v6-geometry-reference.json",
-        "tests/v6-geometric-scene.test.ts"
+        "tests/v6-geometric-scene.test.ts",
+        "scripts/export-v6-morphology-entry-reference.py",
+        "tests/fixtures/v6-morphology-entry-reference.json.gz",
+        "tests/v6-morphology-entry.test.ts",
+        "scripts/export-v6-morphology-methods-reference.py",
+        "tests/fixtures/v6-morphology-methods-reference.json.gz",
+        "tests/v6-morphology-methods-reference.test.ts",
+        "docs/migration/lot2c-method-continuation-lineage.md"
       ]
     },
     {
@@ -86877,7 +86888,17 @@
         "tests/v6-morphology-measurements.test.ts",
         "tests/v6-morphology-family.test.ts",
         "tests/v6-control-attention-kernel.test.ts",
-        "docs/migration/lot2b-control-attention-lineage.md"
+        "docs/migration/lot2b-control-attention-lineage.md",
+        "scripts/export-v6-morphology-entry-reference.py",
+        "tests/fixtures/v6-morphology-entry-reference.json.gz",
+        "tests/v6-morphology-entry.test.ts",
+        "scripts/export-v6-morphology-managed-reference.py",
+        "tests/fixtures/v6-morphology-managed-reference.json.gz",
+        "tests/v6-morphology-managed.test.ts",
+        "scripts/export-v6-morphology-methods-reference.py",
+        "tests/fixtures/v6-morphology-methods-reference.json.gz",
+        "tests/v6-morphology-methods-reference.test.ts",
+        "docs/migration/lot2c-method-continuation-lineage.md"
       ]
     },
     {
@@ -87376,9 +87397,19 @@
           "endLine": 38
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-morphology-entry.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-morphology-entry-reference.py",
+        "tests/fixtures/v6-morphology-entry-reference.json.gz",
+        "tests/v6-morphology-entry.test.ts",
+        "scripts/export-v6-morphology-methods-reference.py",
+        "tests/fixtures/v6-morphology-methods-reference.json.gz",
+        "tests/v6-morphology-methods-reference.test.ts",
+        "docs/migration/lot2c-method-continuation-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/derive.py",
@@ -87804,9 +87835,19 @@
           "endLine": 33
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-morphology-entry.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-morphology-entry-reference.py",
+        "tests/fixtures/v6-morphology-entry-reference.json.gz",
+        "tests/v6-morphology-entry.test.ts",
+        "scripts/export-v6-morphology-methods-reference.py",
+        "tests/fixtures/v6-morphology-methods-reference.json.gz",
+        "tests/v6-morphology-methods-reference.test.ts",
+        "docs/migration/lot2c-method-continuation-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/facet_examples/compound.py",
@@ -88617,7 +88658,17 @@
         "scripts/export-v6-morphology-measurements-reference.py",
         "tests/fixtures/v6-morphology-measurements-reference.json.gz",
         "tests/v6-morphology-measurements.test.ts",
-        "tests/v6-morphology-family.test.ts"
+        "tests/v6-morphology-family.test.ts",
+        "scripts/export-v6-morphology-managed-reference.py",
+        "tests/fixtures/v6-morphology-managed-reference.json.gz",
+        "tests/v6-morphology-managed.test.ts",
+        "scripts/export-v6-morphology-entry-reference.py",
+        "tests/fixtures/v6-morphology-entry-reference.json.gz",
+        "tests/v6-morphology-entry.test.ts",
+        "scripts/export-v6-morphology-methods-reference.py",
+        "tests/fixtures/v6-morphology-methods-reference.json.gz",
+        "tests/v6-morphology-methods-reference.test.ts",
+        "docs/migration/lot2c-method-continuation-lineage.md"
       ]
     },
     {
@@ -89534,9 +89585,15 @@
           "endLine": 54
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-morphology-managed.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-morphology-managed-reference.py",
+        "tests/fixtures/v6-morphology-managed-reference.json.gz",
+        "tests/v6-morphology-managed.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/managed_projection.py",
@@ -89557,9 +89614,15 @@
           "endLine": 140
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-morphology-managed.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-morphology-managed-reference.py",
+        "tests/fixtures/v6-morphology-managed-reference.json.gz",
+        "tests/v6-morphology-managed.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/motion_contrast.py",
@@ -98393,6 +98456,7 @@
     "V57 connects the single topological_recolor material declaration at source position 18 through one six-field owner; the declared entry metric becomes 50/76 (65.8%) and material 17/33, with the regenerated audit as its separate attestation. Three nonempty local V6 Recolor modules and its explicitly empty initializer have component evidence; its original DRM/SRC uses an existing workflow, leaving 37 compiled programs. Inherited topological_region_recolor, digital_topology and mechanical_family_contracts_d remain partial on consumed helpers and caller-supplied bounds. Stateless motion_contrast is separately component-verified, while shared geometry remains partial on footprint, rigid_role and the component-only projection of pairs. Neither this producer nor readonly forecast use transfers the pending MorphologyAdapter or its planning-time meter observation. All six complete-migration gates remain false.",
     "V57 component and caller proof comprises 99 Recolor reference/native contracts plus three common Kernel tests, and 34 motion-producer contracts plus six common caller tests (142 checks). The positive Recolor sequence uses four synthetic public returns from cold component memory, preserving all original receipts and six source fields, with no goal-confirmation claim. Motion positives are likewise controlled component evidence. SMLP already succeeds under the unchanged V56 baseline; these closures alone establish no causal improvement or selected-Recolor/motion efficacy on SMLP. Frozen public execution, unchanged-original replay and browser evidence are separate forthcoming attestations; no unexecuted public-comparison result or file is linked here.",
     "Lot 1 (native implementation 0.32.0), reconciled from published V59, adds retained_typed_material_request_parent outside the 76-entry registry. The common typed-material loop retains a parent, consumes actual child returns, resumes delivery or pose under ordinary WHY/ACT, and records suspension, refutation or an observed boundary. Attention owns the binding and selection witness; SharedSeries remains the one business owner. The roadmap keeps 50/76 entries connected, 37 compiled workflows and all six complete-migration gates false. Baseline ablations, original-source contracts, cold common-runtime tests, a separate live campaign and cost measurements are documented under docs/migration/lot1-evidence; no new game success or full source-provider transfer is inferred solely from the new parent trace.",
-    "Lot 2A connects the morphology current producer at its declared source priority with a single morphology contact journal and existing goal/meter/collection owners. Current measurements can now release guarded proposals through common WHY/ACT. The 76-entry registry denominator is unchanged; morphology remains a partial source provider, and no global migration gate is advanced."
+    "Lot 2A connects the morphology current producer at its declared source priority with a single morphology contact journal and existing goal/meter/collection owners. Current measurements can now release guarded proposals through common WHY/ACT. The 76-entry registry denominator is unchanged; morphology remains a partial source provider, and no global migration gate is advanced.",
+    "Lot 2C (native 0.35.0) connects retained morphology station methods, guarded entry rebind/continuation and managed capacity planning through existing caller, morphology and inventory owners. The three focused suites contain 96 entry checks, 101 managed checks and 39 boundary/adapter checks; their synthetic/public consumer contracts are distinct from any live campaign. All exporters verify the 1786 pinned originals before/after; source boundary doubles and unordered projection-edge comparison are explicitly scoped. Four new helper mappings remain partial_transfer, existing geometry/adapter/common-caller mappings remain partial, and no complete-migration gate is advanced."
   ]
 }

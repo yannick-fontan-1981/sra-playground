@@ -1,0 +1,9 @@
+# Fixed paired STCK follow-up
+
+Declared before execution on 2026-11-09T20:40:21.487019+00:00. The initial complete comparison remains immutable at ../comparison.json. It observes STCK known_prefix_service +12.4349% and known_prefix_request +12.1687%, beyond the unchanged 10% limit with between-round variation. Fourteen other initial medians are within budget. No noise allowance is added.
+
+Exactly one fresh baseline run followed by one fresh changed run is planned. Both use the unchanged measure-native-loop-costs.mjs runner, this identical cases.json at the same repository-relative path, the original STCK trace and declarations, three warmup actions, then five fresh-knowledge sessions of 10 actions each in a warm worker. The baseline is the detached published V62 checkout e56118da8b5f596b9727ca78a037e930bc333860 (native digest 17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b). The changed source remains the frozen 0.35 digest 3cd17565b114a40ed71870bf8d7875a1b91102440b92d14a9258bfa98d4f7779. Both runner and input identities must match.
+
+All eight original metrics are compared and retained, not only the two initial exceedances. The same 10% limit applies. Every follow-up result and variation remain visible; no faster-run selection, deletion of the initial result, new native change or repeated optional retry is permitted. If an excess remains, it remains a performance reserve rather than being waived by noise. This targeted follow-up does not rerun or replace the SMLP or LIFE results.
+
+The project measurement window is reserved: no campaign, browser game, fixture generation, tests or build in parallel. External host load is not independently measured. Interpretation remains observed matched-work cost, not a universal speed claim. Input construction, tracing, pause, inspection, correlated samples and withheld p95 follow the unchanged common protocol.

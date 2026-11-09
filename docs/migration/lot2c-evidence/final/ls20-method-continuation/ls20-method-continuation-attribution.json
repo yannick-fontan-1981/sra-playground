@@ -1,0 +1,2988 @@
+{
+  "schema": "logos-engine.native-method-continuation-attribution.v1",
+  "generatedAt": "2026-11-09T20:22:12.632413+00:00",
+  "game": "LS20",
+  "evidence": {
+    "report": {
+      "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-campaign.json.gz",
+      "bytes": 23163581,
+      "sha256": "924ff4b8ca6ed084c0dfdbe4408871ac425d4e576920478a5068e0f403fff50d"
+    },
+    "trace": {
+      "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-public-trace.json.gz",
+      "bytes": 44543,
+      "sha256": "123127c1e7b79383c8e0619931d4cb8dc965e7c376bf1b06445eac4b593649c0"
+    },
+    "execution": {
+      "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/execution-ls20.json",
+      "bytes": 61495,
+      "sha256": "bdaba98a2cf4a6aba1f8244507716dfdfba4fa81e149bb545504dc844e089d96"
+    },
+    "manifest": {
+      "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/source-manifest.json",
+      "bytes": 28569,
+      "sha256": "63ee61cba9093c5b0f96cfdf7491e62decf3b932ff2a20cfbe5be983acbdafc0"
+    },
+    "journal": {
+      "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-actual-public-journal.jsonl.gz",
+      "bytes": 26168,
+      "sha256": "da62e7f0c02939e7b638219aaa9f1adf7564a4561ed6e63fe986b2505f0ca245"
+    }
+  },
+  "extractor": {
+    "path": "scripts/extract-native-method-continuation-evidence.py",
+    "bytes": 26660,
+    "sha256": "2dc459199d857538dd38ca7b69643d6ca1015544f9677a58276cea3247bb68d6"
+  },
+  "sharedEvidenceUtilities": {
+    "path": "scripts/extract-native-control-attention-evidence.py",
+    "bytes": 25634,
+    "sha256": "8184ee974e9eef6dcc2c6108296dfb29d96fd13b38c3c3e653e5d6309f5332b2"
+  },
+  "source": {
+    "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "nativeManifestDigest": "3cd17565b114a40ed71870bf8d7875a1b91102440b92d14a9258bfa98d4f7779",
+    "nativeFileCount": 242,
+    "unchangedDuringRun": true,
+    "executionInputsUnchanged": true,
+    "pythonAgentModules": []
+  },
+  "observedOutcome": {
+    "campaignStatus": "passed",
+    "failure": null,
+    "requestedTargetLevels": 3,
+    "publicLevelsCompleted": 3,
+    "publicFinalLevel": 4,
+    "publicFinalState": "NOT_FINISHED",
+    "publicWinStateObserved": false,
+    "actions": 142,
+    "elapsedSeconds": 228.4687660069976,
+    "startedAt": "2026-11-09T20:17:53.086009+00:00",
+    "finishedAt": "2026-11-09T20:21:41.554762+00:00"
+  },
+  "instrumentation": {
+    "callerMethodViewsCaptured": true,
+    "legacyMethodAbsenceIsNotZeroAcquisitionEvidence": false
+  },
+  "counts": {
+    "sealedPrefixes": 58,
+    "acquiredActions": 142,
+    "dispatchedActions": 142,
+    "unattributedDispatchedActions": 0,
+    "newlyObservedCallerMethods": 1,
+    "methodsWithStation": 1,
+    "sourceCalls": {
+      "propose": 58,
+      "observeDepartures": 142,
+      "record": 112
+    },
+    "sourceCallErrors": {
+      "propose": 0,
+      "observeDepartures": 0,
+      "record": 0
+    },
+    "proposeCallsWithMethod": 47,
+    "offeredRoutes": {
+      "modifier": 1,
+      "peer_access_probe": 2,
+      "peer": 4,
+      "entry_rebind": 2,
+      "managed_access": 14,
+      "entry_probe": 1,
+      "capacity_access_probe": 4,
+      "capacity_probe": 1,
+      "feature_probe": 1
+    },
+    "selectedRoutes": {
+      "capacity_access_probe": 4,
+      "capacity_probe": 1,
+      "entry_probe": 1,
+      "entry_rebind": 2,
+      "feature_probe": 1,
+      "managed_access": 14,
+      "modifier": 1,
+      "peer": 4,
+      "peer_access_probe": 2
+    },
+    "selectedActionsBySourceLevelAndRoute": {
+      "1": {
+        "modifier": 4,
+        "peer_access_probe": 3,
+        "peer": 4
+      },
+      "2": {
+        "entry_rebind": 5,
+        "managed_access": 44,
+        "peer": 1
+      },
+      "3": {
+        "entry_rebind": 5,
+        "entry_probe": 1,
+        "capacity_access_probe": 7,
+        "capacity_probe": 5,
+        "feature_probe": 5,
+        "managed_access": 27,
+        "peer": 1
+      }
+    },
+    "acquiredEntryReturns": 1,
+    "selectedEntryProbeChains": 1,
+    "linkedEntryProbeChains": 1
+  },
+  "publicProgression": {
+    "actionsBySourceLevel": {
+      "1": 17,
+      "2": 67,
+      "3": 58
+    },
+    "scoreIncreases": [
+      {
+        "sequence": 17,
+        "levelBefore": 1,
+        "levelAfter": 2,
+        "completedBefore": 0,
+        "completedAfter": 1,
+        "state": "NOT_FINISHED",
+        "evidence": {
+          "report": "/actions/16",
+          "trace": "/packets/17"
+        }
+      },
+      {
+        "sequence": 84,
+        "levelBefore": 2,
+        "levelAfter": 3,
+        "completedBefore": 1,
+        "completedAfter": 2,
+        "state": "NOT_FINISHED",
+        "evidence": {
+          "report": "/actions/83",
+          "trace": "/packets/84"
+        }
+      },
+      {
+        "sequence": 142,
+        "levelBefore": 3,
+        "levelAfter": 4,
+        "completedBefore": 2,
+        "completedAfter": 3,
+        "state": "NOT_FINISHED",
+        "evidence": {
+          "report": "/actions/141",
+          "trace": "/packets/142"
+        }
+      }
+    ]
+  },
+  "methodAcquisitions": [
+    {
+      "prefixIndex": 10,
+      "throughAction": 17,
+      "method": {
+        "composition": "alignment_of_homologous_patterns",
+        "source_scope": 1,
+        "role_refs": [
+          "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d",
+          "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344"
+        ],
+        "motion_examples": {
+          "ACTION1": [
+            0,
+            -5
+          ],
+          "ACTION2": [
+            0,
+            5
+          ],
+          "ACTION3": [
+            -5,
+            0
+          ],
+          "ACTION4": [
+            5,
+            0
+          ]
+        },
+        "peer_approach_return": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:17:frame:fae374e4635d3b54",
+        "scoring_observation": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+        "qualification": "observed_sequence_possible_goal; necessity_and_sufficiency_open",
+        "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+        "verifiedSelectiveChange": {
+          "after": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:11:frame:3b2b2d00a79c9299",
+          "before": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:7:frame:2fe09b67a0203019",
+          "child": "composition:morphology:4a4e299cca73921f825ddd607d8785baece9972a19a271ea363758dd50f646d3",
+          "effect": "one_pattern_changed_and_orientation_aligned"
+        },
+        "stationHypothesis": {
+          "after": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:11:frame:3b2b2d00a79c9299",
+          "delta": 1,
+          "observed_scales": [
+            1,
+            2
+          ],
+          "peer_scale": 1,
+          "role_refs": [
+            "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d",
+            "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344"
+          ],
+          "site_surface": "8120edcf4dbdd2c9877f4c2b6a9b706f8d22154c6dff54f2259621683c9da943",
+          "size": [
+            5,
+            5
+          ],
+          "source_epoch": 1
+        }
+      },
+      "stationMatchingEntries": [
+        {
+          "entry": {
+            "site_surface": "8120edcf4dbdd2c9877f4c2b6a9b706f8d22154c6dff54f2259621683c9da943",
+            "size": [
+              5,
+              5
+            ],
+            "role_refs": [
+              "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d",
+              "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344"
+            ],
+            "delta": 1,
+            "peer_scale": 1,
+            "observed_scales": [
+              1,
+              2
+            ],
+            "after": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:11:frame:3b2b2d00a79c9299"
+          },
+          "contactKey": [
+            1,
+            "179d07e8cc1cd6937009e050aa6d0ebc7429bb10c7758d826334cdbd78c72436"
+          ],
+          "stationKey": "aaded8d5389b202b56442e08bbe6e0d9410486a24dd4fe83e1fa52f31285b096",
+          "evidence": "/prefixes/10/morphologyOwnership/nativeCheckpoint/contacts/0/1/stations/aaded8d5389b202b56442e08bbe6e0d9410486a24dd4fe83e1fa52f31285b096/entries/0"
+        }
+      ],
+      "targetReceiptCaptured": true,
+      "checks": {
+        "exactlyOnePublicScoreIncrement": true,
+        "sourceEpochMatchesPublicBoundary": true,
+        "scoringReferenceMatchesPublicReturn": true,
+        "peerApproachReferenceMatchesBoundaryBefore": true,
+        "stationProjectionMatchesUniqueAcquiredEntry": true,
+        "targetEffectMatches": true,
+        "targetCompositionMatches": true,
+        "precedingPeerComplete": true,
+        "targetAndPeerPairMatch": true,
+        "targetObservationMatchesBoundaryBefore": true
+      },
+      "allCapturedChecksMatch": true,
+      "evidence": {
+        "owner": "/prefixes/10/morphologyOwnership/targetMethod",
+        "publicBoundary": "/actions/16",
+        "publicReturn": "/packets/17",
+        "selectedTarget": "/prefixes/10/compositionAttention/selectedTarget"
+      }
+    }
+  ],
+  "methodConsumers": [
+    {
+      "call": 0,
+      "publicPacketIndex": 0,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:1:frame:f530cf6adb4a6d0f",
+      "methodCaptured": true,
+      "methodSha256": null,
+      "methodSourceScope": null,
+      "stationPresent": false,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/0",
+        "owner": null,
+        "publicObservation": "/packets/0"
+      }
+    },
+    {
+      "call": 2,
+      "publicPacketIndex": 1,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:2:frame:c11a377268d286ce",
+      "methodCaptured": true,
+      "methodSha256": null,
+      "methodSourceScope": null,
+      "stationPresent": false,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/2",
+        "owner": "/prefixes/0/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/1"
+      }
+    },
+    {
+      "call": 4,
+      "publicPacketIndex": 2,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:3:frame:b2ee2db27a608502",
+      "methodCaptured": true,
+      "methodSha256": null,
+      "methodSourceScope": null,
+      "stationPresent": false,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/4",
+        "owner": "/prefixes/1/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/2"
+      }
+    },
+    {
+      "call": 6,
+      "publicPacketIndex": 3,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:4:frame:bec1518dcc022021",
+      "methodCaptured": true,
+      "methodSha256": null,
+      "methodSourceScope": null,
+      "stationPresent": false,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/6",
+        "owner": "/prefixes/2/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/3"
+      }
+    },
+    {
+      "call": 8,
+      "publicPacketIndex": 4,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:5:frame:dce6a339745c1528",
+      "methodCaptured": true,
+      "methodSha256": null,
+      "methodSourceScope": null,
+      "stationPresent": false,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/8",
+        "owner": "/prefixes/3/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/4"
+      }
+    },
+    {
+      "call": 10,
+      "publicPacketIndex": 5,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:6:frame:89d0f8c9479f1d99",
+      "methodCaptured": true,
+      "methodSha256": null,
+      "methodSourceScope": null,
+      "stationPresent": false,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/10",
+        "owner": "/prefixes/4/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/5"
+      }
+    },
+    {
+      "call": 12,
+      "publicPacketIndex": 6,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:7:frame:2fe09b67a0203019",
+      "methodCaptured": true,
+      "methodSha256": null,
+      "methodSourceScope": null,
+      "stationPresent": false,
+      "matchesSealedOwner": true,
+      "offeredRoute": "modifier",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/12",
+        "owner": "/prefixes/5/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/6"
+      }
+    },
+    {
+      "call": 21,
+      "publicPacketIndex": 10,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:11:frame:3b2b2d00a79c9299",
+      "methodCaptured": true,
+      "methodSha256": null,
+      "methodSourceScope": null,
+      "stationPresent": false,
+      "matchesSealedOwner": true,
+      "offeredRoute": "peer_access_probe",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/21",
+        "owner": "/prefixes/6/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/10"
+      }
+    },
+    {
+      "call": 26,
+      "publicPacketIndex": 12,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:13:frame:fa68def21041b23d",
+      "methodCaptured": true,
+      "methodSha256": null,
+      "methodSourceScope": null,
+      "stationPresent": false,
+      "matchesSealedOwner": true,
+      "offeredRoute": "peer_access_probe",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/26",
+        "owner": "/prefixes/7/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/12"
+      }
+    },
+    {
+      "call": 29,
+      "publicPacketIndex": 13,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:14:frame:f797a87c66de3b5f",
+      "methodCaptured": true,
+      "methodSha256": null,
+      "methodSourceScope": null,
+      "stationPresent": false,
+      "matchesSealedOwner": true,
+      "offeredRoute": "peer",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/29",
+        "owner": "/prefixes/8/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/13"
+      }
+    },
+    {
+      "call": 36,
+      "publicPacketIndex": 16,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:17:frame:fae374e4635d3b54",
+      "methodCaptured": true,
+      "methodSha256": null,
+      "methodSourceScope": null,
+      "stationPresent": false,
+      "matchesSealedOwner": true,
+      "offeredRoute": "peer",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/36",
+        "owner": "/prefixes/9/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/16"
+      }
+    },
+    {
+      "call": 39,
+      "publicPacketIndex": 17,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/39",
+        "owner": "/prefixes/10/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/17"
+      }
+    },
+    {
+      "call": 41,
+      "publicPacketIndex": 18,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:19:frame:6cdc959715fc6df8",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/41",
+        "owner": "/prefixes/11/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/18"
+      }
+    },
+    {
+      "call": 43,
+      "publicPacketIndex": 19,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:20:frame:e8dd9a3e18ff8dcb",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/43",
+        "owner": "/prefixes/12/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/19"
+      }
+    },
+    {
+      "call": 45,
+      "publicPacketIndex": 20,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:21:frame:ba9337eab03e4ad1",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/45",
+        "owner": "/prefixes/13/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/20"
+      }
+    },
+    {
+      "call": 47,
+      "publicPacketIndex": 21,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:22:frame:904c8d72466c661f",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/47",
+        "owner": "/prefixes/14/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/21"
+      }
+    },
+    {
+      "call": 49,
+      "publicPacketIndex": 22,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:23:frame:40a6f892323c5277",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/49",
+        "owner": "/prefixes/15/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/22"
+      }
+    },
+    {
+      "call": 51,
+      "publicPacketIndex": 23,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:24:frame:633864125d13d738",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/51",
+        "owner": "/prefixes/16/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/23"
+      }
+    },
+    {
+      "call": 53,
+      "publicPacketIndex": 24,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:25:frame:c00df657a5969bb9",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/53",
+        "owner": "/prefixes/17/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/24"
+      }
+    },
+    {
+      "call": 55,
+      "publicPacketIndex": 25,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:26:frame:2c0bc6125a902236",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "entry_rebind",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/55",
+        "owner": "/prefixes/18/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/25"
+      }
+    },
+    {
+      "call": 66,
+      "publicPacketIndex": 30,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:31:frame:48f97ebe3a004b62",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/66",
+        "owner": "/prefixes/19/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/30"
+      }
+    },
+    {
+      "call": 68,
+      "publicPacketIndex": 31,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:32:frame:6dc96891e1be7340",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/68",
+        "owner": "/prefixes/20/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/31"
+      }
+    },
+    {
+      "call": 70,
+      "publicPacketIndex": 32,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:33:frame:9bf1176ad23c0622",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/70",
+        "owner": "/prefixes/21/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/32"
+      }
+    },
+    {
+      "call": 72,
+      "publicPacketIndex": 33,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:34:frame:9f067206d2e53b8b",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/72",
+        "owner": "/prefixes/22/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/33"
+      }
+    },
+    {
+      "call": 74,
+      "publicPacketIndex": 34,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:35:frame:29c2fb2ad28c948d",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/74",
+        "owner": "/prefixes/23/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/34"
+      }
+    },
+    {
+      "call": 76,
+      "publicPacketIndex": 35,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:36:frame:3cea25583a08f24f",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/76",
+        "owner": "/prefixes/24/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/35"
+      }
+    },
+    {
+      "call": 78,
+      "publicPacketIndex": 36,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:37:frame:d1b760e145a6428f",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/78",
+        "owner": "/prefixes/25/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/36"
+      }
+    },
+    {
+      "call": 80,
+      "publicPacketIndex": 37,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:38:frame:bcc776c901880b77",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/80",
+        "owner": "/prefixes/26/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/37"
+      }
+    },
+    {
+      "call": 82,
+      "publicPacketIndex": 38,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:39:frame:c0b21abe6f568018",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/82",
+        "owner": "/prefixes/27/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/38"
+      }
+    },
+    {
+      "call": 84,
+      "publicPacketIndex": 39,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:40:frame:5e86da3647ad7143",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "managed_access",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/84",
+        "owner": "/prefixes/28/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/39"
+      }
+    },
+    {
+      "call": 117,
+      "publicPacketIndex": 55,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:56:frame:876cd3de858d3608",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "managed_access",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/117",
+        "owner": "/prefixes/29/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/55"
+      }
+    },
+    {
+      "call": 120,
+      "publicPacketIndex": 56,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:57:frame:2fa1a0543ca495d4",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "managed_access",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/120",
+        "owner": "/prefixes/30/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/56"
+      }
+    },
+    {
+      "call": 125,
+      "publicPacketIndex": 58,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:59:frame:3cdfc93c8ff7f24e",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "managed_access",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/125",
+        "owner": "/prefixes/31/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/58"
+      }
+    },
+    {
+      "call": 128,
+      "publicPacketIndex": 59,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:60:frame:85cd30c3b89a8e18",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "managed_access",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/128",
+        "owner": "/prefixes/32/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/59"
+      }
+    },
+    {
+      "call": 135,
+      "publicPacketIndex": 62,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:63:frame:bc906cc905d9f98d",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "managed_access",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/135",
+        "owner": "/prefixes/33/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/62"
+      }
+    },
+    {
+      "call": 138,
+      "publicPacketIndex": 63,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:64:frame:dc01116d802d5877",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "managed_access",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/138",
+        "owner": "/prefixes/34/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/63"
+      }
+    },
+    {
+      "call": 141,
+      "publicPacketIndex": 64,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:65:frame:edceb7735572de71",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "managed_access",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/141",
+        "owner": "/prefixes/35/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/64"
+      }
+    },
+    {
+      "call": 172,
+      "publicPacketIndex": 79,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:80:frame:dc3c7564f874d6b8",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "managed_access",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/172",
+        "owner": "/prefixes/36/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/79"
+      }
+    },
+    {
+      "call": 181,
+      "publicPacketIndex": 83,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:84:frame:7c4c5312599d3df1",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "peer",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/181",
+        "owner": "/prefixes/37/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/83"
+      }
+    },
+    {
+      "call": 184,
+      "publicPacketIndex": 84,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:85:frame:8dcadc1d835e9d2c",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/184",
+        "owner": "/prefixes/38/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/84"
+      }
+    },
+    {
+      "call": 186,
+      "publicPacketIndex": 85,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:86:frame:9a8bda2336b447ab",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/186",
+        "owner": "/prefixes/39/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/85"
+      }
+    },
+    {
+      "call": 188,
+      "publicPacketIndex": 86,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:87:frame:a6e82bcf235ce21a",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "entry_rebind",
+      "pendingReturnRef": null,
+      "evidence": {
+        "call": "/morphologySourceCalls/188",
+        "owner": "/prefixes/40/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/86"
+      }
+    },
+    {
+      "call": 199,
+      "publicPacketIndex": 91,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "entry_probe",
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/199",
+        "owner": "/prefixes/41/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/91"
+      }
+    },
+    {
+      "call": 202,
+      "publicPacketIndex": 92,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:93:frame:d041d36cd007650b",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/202",
+        "owner": "/prefixes/42/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/92"
+      }
+    },
+    {
+      "call": 204,
+      "publicPacketIndex": 93,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:94:frame:54caed4c4600d5b3",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/204",
+        "owner": "/prefixes/43/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/93"
+      }
+    },
+    {
+      "call": 206,
+      "publicPacketIndex": 94,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:95:frame:109224a2dc4fa536",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": null,
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/206",
+        "owner": "/prefixes/44/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/94"
+      }
+    },
+    {
+      "call": 210,
+      "publicPacketIndex": 97,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:98:frame:edd2646f7c31521b",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "capacity_access_probe",
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/210",
+        "owner": "/prefixes/45/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/97"
+      }
+    },
+    {
+      "call": 215,
+      "publicPacketIndex": 99,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:100:frame:4893da4cb2e0b599",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "capacity_access_probe",
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/215",
+        "owner": "/prefixes/46/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/99"
+      }
+    },
+    {
+      "call": 218,
+      "publicPacketIndex": 100,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:101:frame:ca743abfdca13914",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "capacity_probe",
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/218",
+        "owner": "/prefixes/47/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/100"
+      }
+    },
+    {
+      "call": 229,
+      "publicPacketIndex": 105,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:106:frame:bf7f77927b61139a",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "capacity_access_probe",
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/229",
+        "owner": "/prefixes/48/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/105"
+      }
+    },
+    {
+      "call": 236,
+      "publicPacketIndex": 108,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:109:frame:ebda0c07d6ca0a51",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "capacity_access_probe",
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/236",
+        "owner": "/prefixes/49/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/108"
+      }
+    },
+    {
+      "call": 239,
+      "publicPacketIndex": 109,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:110:frame:7115165842ec7c0f",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "feature_probe",
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/239",
+        "owner": "/prefixes/50/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/109"
+      }
+    },
+    {
+      "call": 250,
+      "publicPacketIndex": 114,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:115:frame:004db8f3f2a533b4",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "managed_access",
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/250",
+        "owner": "/prefixes/51/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/114"
+      }
+    },
+    {
+      "call": 265,
+      "publicPacketIndex": 121,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:122:frame:8f50192dbd5ee241",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "managed_access",
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/265",
+        "owner": "/prefixes/52/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/121"
+      }
+    },
+    {
+      "call": 286,
+      "publicPacketIndex": 131,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:132:frame:55942d0ed08ddf1e",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "managed_access",
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/286",
+        "owner": "/prefixes/53/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/131"
+      }
+    },
+    {
+      "call": 289,
+      "publicPacketIndex": 132,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:133:frame:fc24f63d6155c832",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "managed_access",
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/289",
+        "owner": "/prefixes/54/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/132"
+      }
+    },
+    {
+      "call": 292,
+      "publicPacketIndex": 133,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:134:frame:1cde7659476c05fa",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "managed_access",
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/292",
+        "owner": "/prefixes/55/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/133"
+      }
+    },
+    {
+      "call": 309,
+      "publicPacketIndex": 141,
+      "observationRef": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:142:frame:169f27e35eb0afe2",
+      "methodCaptured": true,
+      "methodSha256": "27a9ac58548883ed38c37b37700ab5d264ac52e90029e4b3e0191eda9008cd2f",
+      "methodSourceScope": 1,
+      "stationPresent": true,
+      "matchesSealedOwner": true,
+      "offeredRoute": "peer",
+      "pendingReturnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "evidence": {
+        "call": "/morphologySourceCalls/309",
+        "owner": "/prefixes/56/morphologyOwnership/targetMethod",
+        "publicObservation": "/packets/141"
+      }
+    }
+  ],
+  "selectedMorphologyRoutes": [
+    {
+      "prefixIndex": 6,
+      "routeKey": "modifier",
+      "proposalId": "2b7ed61ecff8ee18e485a703d4a3e0b9550d11de9501e07d8d47c539b031e3f8",
+      "selectedActions": 4,
+      "firstAction": 7,
+      "lastAction": 10,
+      "plan": {
+        "trial": "2b7ed61ecff8ee18e485a703d4a3e0b9550d11de9501e07d8d47c539b031e3f8",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:7:frame:2fe09b67a0203019",
+        "level_epoch": 1,
+        "score": 0,
+        "access_phase": "contact",
+        "contact_in_prefix": true,
+        "full_access_length": 4
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": null,
+      "evidence": {
+        "proposal": "/prefixes/6/morphologyOwnership/proposal",
+        "targetExtension": null,
+        "actions": [
+          "/actions/6",
+          "/actions/7",
+          "/actions/8",
+          "/actions/9"
+        ],
+        "publicReturns": [
+          "/packets/7",
+          "/packets/8",
+          "/packets/9",
+          "/packets/10"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 7,
+      "routeKey": "peer_access_probe",
+      "proposalId": "2f668ba846a262d372100aaa0c21290751ebd6d87ce292bd7d413efdb8b3d5c4",
+      "selectedActions": 2,
+      "firstAction": 11,
+      "lastAction": 12,
+      "plan": {
+        "trial": "2f668ba846a262d372100aaa0c21290751ebd6d87ce292bd7d413efdb8b3d5c4",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:11:frame:3b2b2d00a79c9299",
+        "level_epoch": 1,
+        "score": 0
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": null,
+      "evidence": {
+        "proposal": "/prefixes/7/morphologyOwnership/proposal",
+        "targetExtension": null,
+        "actions": [
+          "/actions/10",
+          "/actions/11"
+        ],
+        "publicReturns": [
+          "/packets/11",
+          "/packets/12"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 8,
+      "routeKey": "peer_access_probe",
+      "proposalId": "bc247a430f2f8d88fd68b59565fa411ddc9ae10c7a425b515dc11a77c4baae15",
+      "selectedActions": 1,
+      "firstAction": 13,
+      "lastAction": 13,
+      "plan": {
+        "trial": "bc247a430f2f8d88fd68b59565fa411ddc9ae10c7a425b515dc11a77c4baae15",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:13:frame:fa68def21041b23d",
+        "level_epoch": 1,
+        "score": 0
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": null,
+      "evidence": {
+        "proposal": "/prefixes/8/morphologyOwnership/proposal",
+        "targetExtension": null,
+        "actions": [
+          "/actions/12"
+        ],
+        "publicReturns": [
+          "/packets/13"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 9,
+      "routeKey": "peer",
+      "proposalId": "2e3a4a3c48ca61506f35d602cb1caab8e13e218c8b128519eaae941b61fcb690",
+      "selectedActions": 3,
+      "firstAction": 14,
+      "lastAction": 16,
+      "plan": {
+        "trial": "2e3a4a3c48ca61506f35d602cb1caab8e13e218c8b128519eaae941b61fcb690",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:14:frame:f797a87c66de3b5f",
+        "level_epoch": 1,
+        "score": 0,
+        "access_phase": "contact",
+        "contact_in_prefix": true,
+        "full_access_length": 3
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": null,
+      "evidence": {
+        "proposal": "/prefixes/9/morphologyOwnership/proposal",
+        "targetExtension": null,
+        "actions": [
+          "/actions/13",
+          "/actions/14",
+          "/actions/15"
+        ],
+        "publicReturns": [
+          "/packets/14",
+          "/packets/15",
+          "/packets/16"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 10,
+      "routeKey": "peer",
+      "proposalId": "45ad5ecf9817aa40c44a5bd2212488d61b0bfe06bfaa03ed047197f2af3f1dec",
+      "selectedActions": 1,
+      "firstAction": 17,
+      "lastAction": 17,
+      "plan": {
+        "trial": "45ad5ecf9817aa40c44a5bd2212488d61b0bfe06bfaa03ed047197f2af3f1dec",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:1:revision:17:frame:fae374e4635d3b54",
+        "level_epoch": 1,
+        "score": 0,
+        "access_phase": "contact",
+        "contact_in_prefix": true,
+        "full_access_length": 1
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": null,
+      "evidence": {
+        "proposal": "/prefixes/10/morphologyOwnership/proposal",
+        "targetExtension": null,
+        "actions": [
+          "/actions/16"
+        ],
+        "publicReturns": [
+          "/packets/17"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 19,
+      "routeKey": "entry_rebind",
+      "proposalId": "40a6daca4de5c0fb6fd4aaddb7f0b34decae92256af826a32129da593a04beea",
+      "selectedActions": 5,
+      "firstAction": 26,
+      "lastAction": 30,
+      "plan": {
+        "trial": "40a6daca4de5c0fb6fd4aaddb7f0b34decae92256af826a32129da593a04beea",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:26:frame:2c0bc6125a902236",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "approach",
+        "contact_in_prefix": false,
+        "full_access_length": 5
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "4635a024ef5fefc874197e83d22aa2589e75234ff437a14ae41b29e0d64e2e1d"
+      },
+      "evidence": {
+        "proposal": "/prefixes/19/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/19/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/25",
+          "/actions/26",
+          "/actions/27",
+          "/actions/28",
+          "/actions/29"
+        ],
+        "publicReturns": [
+          "/packets/26",
+          "/packets/27",
+          "/packets/28",
+          "/packets/29",
+          "/packets/30"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 29,
+      "routeKey": "managed_access",
+      "proposalId": "e948dcb0907eee906888c0e18b28a35776f61bab392624ce73bb12abec6954dd",
+      "selectedActions": 16,
+      "firstAction": 40,
+      "lastAction": 55,
+      "plan": {
+        "trial": "e948dcb0907eee906888c0e18b28a35776f61bab392624ce73bb12abec6954dd",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:40:frame:5e86da3647ad7143",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "intermediate",
+        "contact_in_prefix": false
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": true,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "b63dfd7dcb63a85c361d9287ad89f12206fed0ce9ae5332d19022233ba834452"
+      },
+      "evidence": {
+        "proposal": "/prefixes/29/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/29/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/39",
+          "/actions/40",
+          "/actions/41",
+          "/actions/42",
+          "/actions/43",
+          "/actions/44",
+          "/actions/45",
+          "/actions/46",
+          "/actions/47",
+          "/actions/48",
+          "/actions/49",
+          "/actions/50",
+          "/actions/51",
+          "/actions/52",
+          "/actions/53",
+          "/actions/54"
+        ],
+        "publicReturns": [
+          "/packets/40",
+          "/packets/41",
+          "/packets/42",
+          "/packets/43",
+          "/packets/44",
+          "/packets/45",
+          "/packets/46",
+          "/packets/47",
+          "/packets/48",
+          "/packets/49",
+          "/packets/50",
+          "/packets/51",
+          "/packets/52",
+          "/packets/53",
+          "/packets/54",
+          "/packets/55"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 30,
+      "routeKey": "managed_access",
+      "proposalId": "0bd63d9b443b6758324c17e89b06ff62a2331f394c94c1a07ab855c27c84d73a",
+      "selectedActions": 1,
+      "firstAction": 56,
+      "lastAction": 56,
+      "plan": {
+        "trial": "0bd63d9b443b6758324c17e89b06ff62a2331f394c94c1a07ab855c27c84d73a",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:56:frame:876cd3de858d3608",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": true,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "86cc0de32f7c6c11185c460402d7212413d9af45b05b2d2ba734482806951d8a"
+      },
+      "evidence": {
+        "proposal": "/prefixes/30/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/30/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/55"
+        ],
+        "publicReturns": [
+          "/packets/56"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 31,
+      "routeKey": "managed_access",
+      "proposalId": "b9a4766b8beddc9bf2dab34a0e389cc34080c3579f13e913387447faef53d6f1",
+      "selectedActions": 2,
+      "firstAction": 57,
+      "lastAction": 58,
+      "plan": {
+        "trial": "b9a4766b8beddc9bf2dab34a0e389cc34080c3579f13e913387447faef53d6f1",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:57:frame:2fa1a0543ca495d4",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "intermediate",
+        "contact_in_prefix": false
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "65384f600826f03259f00cd87402cf763b4c59469908cb17853203b04a9f0496"
+      },
+      "evidence": {
+        "proposal": "/prefixes/31/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/31/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/56",
+          "/actions/57"
+        ],
+        "publicReturns": [
+          "/packets/57",
+          "/packets/58"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 32,
+      "routeKey": "managed_access",
+      "proposalId": "143962a3d040ed1c05f017fb9322c07d897d8d4491bb5a3867d931b143d2dfb4",
+      "selectedActions": 1,
+      "firstAction": 59,
+      "lastAction": 59,
+      "plan": {
+        "trial": "143962a3d040ed1c05f017fb9322c07d897d8d4491bb5a3867d931b143d2dfb4",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:59:frame:3cdfc93c8ff7f24e",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": true,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "bef8c1526c9428bb72ef585bf1ab3baeb4a817024fb38bfad6ca5873d9f5a195"
+      },
+      "evidence": {
+        "proposal": "/prefixes/32/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/32/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/58"
+        ],
+        "publicReturns": [
+          "/packets/59"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 33,
+      "routeKey": "managed_access",
+      "proposalId": "0202f8fbbd1ff8bce1c86d7b581006419ff13e9936600f10805bdca95d9d1bf0",
+      "selectedActions": 3,
+      "firstAction": 60,
+      "lastAction": 62,
+      "plan": {
+        "trial": "0202f8fbbd1ff8bce1c86d7b581006419ff13e9936600f10805bdca95d9d1bf0",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:60:frame:85cd30c3b89a8e18",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": true,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "49583cd1baad49671cc8f2b2f3fbdbf4bcf080385ecdf2d48da2d20fcb57b345"
+      },
+      "evidence": {
+        "proposal": "/prefixes/33/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/33/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/59",
+          "/actions/60",
+          "/actions/61"
+        ],
+        "publicReturns": [
+          "/packets/60",
+          "/packets/61",
+          "/packets/62"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 34,
+      "routeKey": "managed_access",
+      "proposalId": "daff2c4f749c774660f6a319e59cda97e128f042c5f66f6d34049fb0fbbb97dc",
+      "selectedActions": 1,
+      "firstAction": 63,
+      "lastAction": 63,
+      "plan": {
+        "trial": "daff2c4f749c774660f6a319e59cda97e128f042c5f66f6d34049fb0fbbb97dc",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:63:frame:bc906cc905d9f98d",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": null,
+        "release_authority": false,
+        "kind": "observed_derivation",
+        "sha256": "74da25ddf9a800b80107442cab7f889392a8deb50d5ebd1858f98964e1760461"
+      },
+      "evidence": {
+        "proposal": "/prefixes/34/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/34/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/62"
+        ],
+        "publicReturns": [
+          "/packets/63"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 35,
+      "routeKey": "managed_access",
+      "proposalId": "5c478ad2d650c7665433d60335df8193ab9da5a0ce1ed329a3f22d177d5b5f8f",
+      "selectedActions": 1,
+      "firstAction": 64,
+      "lastAction": 64,
+      "plan": {
+        "trial": "5c478ad2d650c7665433d60335df8193ab9da5a0ce1ed329a3f22d177d5b5f8f",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:64:frame:dc01116d802d5877",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": true,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "observed_derivation",
+        "sha256": "910eeb429be2ed8b055c5941286c9096463a180e47f5fe28d2f9c57e656613f6"
+      },
+      "evidence": {
+        "proposal": "/prefixes/35/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/35/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/63"
+        ],
+        "publicReturns": [
+          "/packets/64"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 36,
+      "routeKey": "managed_access",
+      "proposalId": "7cea42c5a5237521e6cc6be920e2f2d535985b56f30e807f69cc7d75bc985833",
+      "selectedActions": 15,
+      "firstAction": 65,
+      "lastAction": 79,
+      "plan": {
+        "trial": "7cea42c5a5237521e6cc6be920e2f2d535985b56f30e807f69cc7d75bc985833",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:65:frame:edceb7735572de71",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": null,
+      "evidence": {
+        "proposal": "/prefixes/36/morphologyOwnership/proposal",
+        "targetExtension": null,
+        "actions": [
+          "/actions/64",
+          "/actions/65",
+          "/actions/66",
+          "/actions/67",
+          "/actions/68",
+          "/actions/69",
+          "/actions/70",
+          "/actions/71",
+          "/actions/72",
+          "/actions/73",
+          "/actions/74",
+          "/actions/75",
+          "/actions/76",
+          "/actions/77",
+          "/actions/78"
+        ],
+        "publicReturns": [
+          "/packets/65",
+          "/packets/66",
+          "/packets/67",
+          "/packets/68",
+          "/packets/69",
+          "/packets/70",
+          "/packets/71",
+          "/packets/72",
+          "/packets/73",
+          "/packets/74",
+          "/packets/75",
+          "/packets/76",
+          "/packets/77",
+          "/packets/78",
+          "/packets/79"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 37,
+      "routeKey": "managed_access",
+      "proposalId": "1e65a5d05db85f731fac49fd020ee629575ec79f63f2883ad2f4ab8c0d96ebe6",
+      "selectedActions": 4,
+      "firstAction": 80,
+      "lastAction": 83,
+      "plan": {
+        "trial": "1e65a5d05db85f731fac49fd020ee629575ec79f63f2883ad2f4ab8c0d96ebe6",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:80:frame:dc3c7564f874d6b8",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "intermediate",
+        "contact_in_prefix": false
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": null,
+      "evidence": {
+        "proposal": "/prefixes/37/morphologyOwnership/proposal",
+        "targetExtension": null,
+        "actions": [
+          "/actions/79",
+          "/actions/80",
+          "/actions/81",
+          "/actions/82"
+        ],
+        "publicReturns": [
+          "/packets/80",
+          "/packets/81",
+          "/packets/82",
+          "/packets/83"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 38,
+      "routeKey": "peer",
+      "proposalId": "42963ba5593045d493ff989b098cae9dc638ca41d2e2eacfa7aaeeba4bcade0c",
+      "selectedActions": 1,
+      "firstAction": 84,
+      "lastAction": 84,
+      "plan": {
+        "trial": "42963ba5593045d493ff989b098cae9dc638ca41d2e2eacfa7aaeeba4bcade0c",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:84:frame:7c4c5312599d3df1",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "contact",
+        "contact_in_prefix": true,
+        "full_access_length": 1
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": null,
+      "evidence": {
+        "proposal": "/prefixes/38/morphologyOwnership/proposal",
+        "targetExtension": null,
+        "actions": [
+          "/actions/83"
+        ],
+        "publicReturns": [
+          "/packets/84"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 41,
+      "routeKey": "entry_rebind",
+      "proposalId": "e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621",
+      "selectedActions": 5,
+      "firstAction": 87,
+      "lastAction": 91,
+      "plan": {
+        "trial": "e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:87:frame:a6e82bcf235ce21a",
+        "level_epoch": 3,
+        "score": 2,
+        "access_phase": "approach",
+        "contact_in_prefix": false,
+        "full_access_length": 5
+      },
+      "deferredProbePresent": true,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": "feature_probe",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "ca15d558345a37202898a9c9a718f18e5254a8de74ac52d16cc335f39455e5b1"
+      },
+      "evidence": {
+        "proposal": "/prefixes/41/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/41/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/86",
+          "/actions/87",
+          "/actions/88",
+          "/actions/89",
+          "/actions/90"
+        ],
+        "publicReturns": [
+          "/packets/87",
+          "/packets/88",
+          "/packets/89",
+          "/packets/90",
+          "/packets/91"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 42,
+      "routeKey": "entry_probe",
+      "proposalId": "d73a367e5e9897f33f6e664556aa59413cfe01d772a5d181552f643bcd7fbf25",
+      "selectedActions": 1,
+      "firstAction": 92,
+      "lastAction": 92,
+      "plan": {
+        "trial": "d73a367e5e9897f33f6e664556aa59413cfe01d772a5d181552f643bcd7fbf25",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+        "level_epoch": 3,
+        "score": 2,
+        "access_phase": "discriminant",
+        "contact_in_prefix": true,
+        "full_access_length": 1,
+        "information_cost": 1,
+        "reserve_after_probe": 13,
+        "parent_return_ref": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028"
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": "feature_probe",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "2a04fb97680d2884fa7ed4039845475790e9a110f1401411f08dcd330634cf4e"
+      },
+      "evidence": {
+        "proposal": "/prefixes/42/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/42/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/91"
+        ],
+        "publicReturns": [
+          "/packets/92"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 46,
+      "routeKey": "capacity_access_probe",
+      "proposalId": "0aaf5533f7af53f8c27a45bebf009daeccf319c51b9f96f52a293f54be92300e",
+      "selectedActions": 2,
+      "firstAction": 98,
+      "lastAction": 99,
+      "plan": {
+        "trial": "0aaf5533f7af53f8c27a45bebf009daeccf319c51b9f96f52a293f54be92300e",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:98:frame:edd2646f7c31521b",
+        "level_epoch": 3,
+        "score": 2
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": "feature_probe",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "1bf76a31a13924f1249a8d854c113a2a3acb1dc003d9115ba0fcbadcc5b5fd6e"
+      },
+      "evidence": {
+        "proposal": "/prefixes/46/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/46/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/97",
+          "/actions/98"
+        ],
+        "publicReturns": [
+          "/packets/98",
+          "/packets/99"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 47,
+      "routeKey": "capacity_access_probe",
+      "proposalId": "4bb0206d20b6d2eaee363d28c0487f294207cb650cc6fe95967ad99ff00c799e",
+      "selectedActions": 1,
+      "firstAction": 100,
+      "lastAction": 100,
+      "plan": {
+        "trial": "4bb0206d20b6d2eaee363d28c0487f294207cb650cc6fe95967ad99ff00c799e",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:100:frame:4893da4cb2e0b599",
+        "level_epoch": 3,
+        "score": 2
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": "feature_probe",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "ed5d628a781eeea3f76505441f1a564a99565428677b975f565445ec98c1327e"
+      },
+      "evidence": {
+        "proposal": "/prefixes/47/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/47/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/99"
+        ],
+        "publicReturns": [
+          "/packets/100"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 48,
+      "routeKey": "capacity_probe",
+      "proposalId": "5a679da0aae180f2459a6adfa7fe2a50457df8ec9eab99c937d16dff868ec553",
+      "selectedActions": 5,
+      "firstAction": 101,
+      "lastAction": 105,
+      "plan": {
+        "trial": "5a679da0aae180f2459a6adfa7fe2a50457df8ec9eab99c937d16dff868ec553",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:101:frame:ca743abfdca13914",
+        "level_epoch": 3,
+        "score": 2,
+        "access_phase": "contact",
+        "contact_in_prefix": true,
+        "full_access_length": 5
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": true,
+        "first_route_key": "feature_probe",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "98b6adadd5fc3e592c8c52ab1c5271f2ec54b251950f4deadd6753b39234e964"
+      },
+      "evidence": {
+        "proposal": "/prefixes/48/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/48/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/100",
+          "/actions/101",
+          "/actions/102",
+          "/actions/103",
+          "/actions/104"
+        ],
+        "publicReturns": [
+          "/packets/101",
+          "/packets/102",
+          "/packets/103",
+          "/packets/104",
+          "/packets/105"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 49,
+      "routeKey": "capacity_access_probe",
+      "proposalId": "041282f041ae833592ceb3ca384d423f474e39c8c1a6f1b782d5d9257fb02236",
+      "selectedActions": 3,
+      "firstAction": 106,
+      "lastAction": 108,
+      "plan": {
+        "trial": "041282f041ae833592ceb3ca384d423f474e39c8c1a6f1b782d5d9257fb02236",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:106:frame:bf7f77927b61139a",
+        "level_epoch": 3,
+        "score": 2
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": "feature_probe",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "c6ed642a37f130fdf946c6c17366c629e83d6bef094ae1cc78bfac1ee2e27b09"
+      },
+      "evidence": {
+        "proposal": "/prefixes/49/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/49/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/105",
+          "/actions/106",
+          "/actions/107"
+        ],
+        "publicReturns": [
+          "/packets/106",
+          "/packets/107",
+          "/packets/108"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 50,
+      "routeKey": "capacity_access_probe",
+      "proposalId": "a33730ca3585c78bc784c3290fddbbb012d4cbba1870b7192eba0df517b6351c",
+      "selectedActions": 1,
+      "firstAction": 109,
+      "lastAction": 109,
+      "plan": {
+        "trial": "a33730ca3585c78bc784c3290fddbbb012d4cbba1870b7192eba0df517b6351c",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:109:frame:ebda0c07d6ca0a51",
+        "level_epoch": 3,
+        "score": 2
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": "feature_probe",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "de1cad2ddf85bb26746280736a95a745b0987501d1387c2aef2ce26a4c8e6779"
+      },
+      "evidence": {
+        "proposal": "/prefixes/50/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/50/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/108"
+        ],
+        "publicReturns": [
+          "/packets/109"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 51,
+      "routeKey": "feature_probe",
+      "proposalId": "a228f0daed4c7ba57b329913fb378194859e05820c011d856f7a0b5ad6f203a3",
+      "selectedActions": 5,
+      "firstAction": 110,
+      "lastAction": 114,
+      "plan": {
+        "trial": "a228f0daed4c7ba57b329913fb378194859e05820c011d856f7a0b5ad6f203a3",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:110:frame:7115165842ec7c0f",
+        "level_epoch": 3,
+        "score": 2,
+        "access_phase": "contact",
+        "contact_in_prefix": true,
+        "full_access_length": 5
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": true,
+        "first_route_key": "feature_probe",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "f0a42081d72f461a0016f6ceca46e837378db82127a4322437c68e40b6905446"
+      },
+      "evidence": {
+        "proposal": "/prefixes/51/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/51/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/109",
+          "/actions/110",
+          "/actions/111",
+          "/actions/112",
+          "/actions/113"
+        ],
+        "publicReturns": [
+          "/packets/110",
+          "/packets/111",
+          "/packets/112",
+          "/packets/113",
+          "/packets/114"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 52,
+      "routeKey": "managed_access",
+      "proposalId": "7689a8db03dfbceda754c0b3eaa6f4d8c30961f5dd8aeb0aad9a79a6c78b9e5c",
+      "selectedActions": 7,
+      "firstAction": 115,
+      "lastAction": 121,
+      "plan": {
+        "trial": "7689a8db03dfbceda754c0b3eaa6f4d8c30961f5dd8aeb0aad9a79a6c78b9e5c",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:115:frame:004db8f3f2a533b4",
+        "level_epoch": 3,
+        "score": 2,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": true,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "65b589c2f1d3686f091d97bd6fd4934a9099ec87df730b3c69b8c341a0277ef2"
+      },
+      "evidence": {
+        "proposal": "/prefixes/52/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/52/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/114",
+          "/actions/115",
+          "/actions/116",
+          "/actions/117",
+          "/actions/118",
+          "/actions/119",
+          "/actions/120"
+        ],
+        "publicReturns": [
+          "/packets/115",
+          "/packets/116",
+          "/packets/117",
+          "/packets/118",
+          "/packets/119",
+          "/packets/120",
+          "/packets/121"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 53,
+      "routeKey": "managed_access",
+      "proposalId": "52372b8533ec343628999f39e7ebfca7564db7730b854f55fbb3565f59162b32",
+      "selectedActions": 10,
+      "firstAction": 122,
+      "lastAction": 131,
+      "plan": {
+        "trial": "52372b8533ec343628999f39e7ebfca7564db7730b854f55fbb3565f59162b32",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:122:frame:8f50192dbd5ee241",
+        "level_epoch": 3,
+        "score": 2,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": true,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "2deb3bb02302c57a8eb198f8564d95cc18a406fae7a83f41327131c21052c379"
+      },
+      "evidence": {
+        "proposal": "/prefixes/53/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/53/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/121",
+          "/actions/122",
+          "/actions/123",
+          "/actions/124",
+          "/actions/125",
+          "/actions/126",
+          "/actions/127",
+          "/actions/128",
+          "/actions/129",
+          "/actions/130"
+        ],
+        "publicReturns": [
+          "/packets/122",
+          "/packets/123",
+          "/packets/124",
+          "/packets/125",
+          "/packets/126",
+          "/packets/127",
+          "/packets/128",
+          "/packets/129",
+          "/packets/130",
+          "/packets/131"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 54,
+      "routeKey": "managed_access",
+      "proposalId": "53d29ed12b1a498c309c5bef9de30b1567cde6003e30867849fb1446a3c71bf4",
+      "selectedActions": 1,
+      "firstAction": 132,
+      "lastAction": 132,
+      "plan": {
+        "trial": "53d29ed12b1a498c309c5bef9de30b1567cde6003e30867849fb1446a3c71bf4",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:132:frame:55942d0ed08ddf1e",
+        "level_epoch": 3,
+        "score": 2,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "5495c5829e7d392908c4ce5724891ee4767d9c1f98c872ec6032f6245d584100"
+      },
+      "evidence": {
+        "proposal": "/prefixes/54/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/54/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/131"
+        ],
+        "publicReturns": [
+          "/packets/132"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 55,
+      "routeKey": "managed_access",
+      "proposalId": "7f034228e3ee0b90422993c227df4be4e9e96af27f649e64622320e801fc0fdf",
+      "selectedActions": 1,
+      "firstAction": 133,
+      "lastAction": 133,
+      "plan": {
+        "trial": "7f034228e3ee0b90422993c227df4be4e9e96af27f649e64622320e801fc0fdf",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:133:frame:fc24f63d6155c832",
+        "level_epoch": 3,
+        "score": 2,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": true,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "9c11ba39007d9dd2f3e8ff1befaa59f124e18116b0153d8b966725f0c9cdf689"
+      },
+      "evidence": {
+        "proposal": "/prefixes/55/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/55/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/132"
+        ],
+        "publicReturns": [
+          "/packets/133"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 56,
+      "routeKey": "managed_access",
+      "proposalId": "ffbb9fd6518c38a968c4bd3bab21b3cb1e9a2e78046f90c521a145b14bdb278d",
+      "selectedActions": 8,
+      "firstAction": 134,
+      "lastAction": 141,
+      "plan": {
+        "trial": "ffbb9fd6518c38a968c4bd3bab21b3cb1e9a2e78046f90c521a145b14bdb278d",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:134:frame:1cde7659476c05fa",
+        "level_epoch": 3,
+        "score": 2,
+        "access_phase": "intermediate",
+        "contact_in_prefix": false
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": null,
+      "evidence": {
+        "proposal": "/prefixes/56/morphologyOwnership/proposal",
+        "targetExtension": null,
+        "actions": [
+          "/actions/133",
+          "/actions/134",
+          "/actions/135",
+          "/actions/136",
+          "/actions/137",
+          "/actions/138",
+          "/actions/139",
+          "/actions/140"
+        ],
+        "publicReturns": [
+          "/packets/134",
+          "/packets/135",
+          "/packets/136",
+          "/packets/137",
+          "/packets/138",
+          "/packets/139",
+          "/packets/140",
+          "/packets/141"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 57,
+      "routeKey": "peer",
+      "proposalId": "608fb7fcb445189366732bc1e0081b5fe897c89964496dfb7897a21e3239ceee",
+      "selectedActions": 1,
+      "firstAction": 142,
+      "lastAction": 142,
+      "plan": {
+        "trial": "608fb7fcb445189366732bc1e0081b5fe897c89964496dfb7897a21e3239ceee",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:142:frame:169f27e35eb0afe2",
+        "level_epoch": 3,
+        "score": 2,
+        "access_phase": "contact",
+        "contact_in_prefix": true,
+        "full_access_length": 1
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": null,
+      "evidence": {
+        "proposal": "/prefixes/57/morphologyOwnership/proposal",
+        "targetExtension": null,
+        "actions": [
+          "/actions/141"
+        ],
+        "publicReturns": [
+          "/packets/142"
+        ]
+      }
+    }
+  ],
+  "acquiredEntryReturns": [
+    {
+      "evidence": "/prefixes/41/morphologyOwnership/nativeCheckpoint/journal/18",
+      "prefixIndex": 41,
+      "throughAction": 91,
+      "recordCalls": [
+        "/morphologySourceCalls/197"
+      ],
+      "event": {
+        "kind": "entry_access_return",
+        "before": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:87:frame:a6e82bcf235ce21a",
+        "after": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+        "return_ref": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+        "epoch": 3,
+        "trial": "e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621"
+      },
+      "deferredPlanSha256": "4d41912c9d3ec3555afa13ae9c8b5ecf17b0ff8aa1b1f4bffd582a59e4be7e19"
+    }
+  ],
+  "entryProbeChains": [
+    {
+      "returnRef": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "acquisition": "/prefixes/41/morphologyOwnership/nativeCheckpoint/journal/18",
+      "acquisitionPrefix": 41,
+      "probePrefix": 42,
+      "probeEvidence": "/prefixes/42/morphologyOwnership/proposal",
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": "feature_probe",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "2a04fb97680d2884fa7ed4039845475790e9a110f1401411f08dcd330634cf4e"
+      },
+      "checks": {
+        "parentReturnAcquired": true,
+        "factsReferenceMatchesParent": true,
+        "currentObservationMatchesParentAfter": true,
+        "epochMatchesParent": true
+      },
+      "allCapturedChecksMatch": true
+    }
+  ],
+  "firstContinuationExamples": [
+    {
+      "prefixIndex": 19,
+      "routeKey": "entry_rebind",
+      "proposalId": "40a6daca4de5c0fb6fd4aaddb7f0b34decae92256af826a32129da593a04beea",
+      "selectedActions": 5,
+      "firstAction": 26,
+      "lastAction": 30,
+      "plan": {
+        "trial": "40a6daca4de5c0fb6fd4aaddb7f0b34decae92256af826a32129da593a04beea",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:26:frame:2c0bc6125a902236",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "approach",
+        "contact_in_prefix": false,
+        "full_access_length": 5
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "4635a024ef5fefc874197e83d22aa2589e75234ff437a14ae41b29e0d64e2e1d"
+      },
+      "evidence": {
+        "proposal": "/prefixes/19/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/19/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/25",
+          "/actions/26",
+          "/actions/27",
+          "/actions/28",
+          "/actions/29"
+        ],
+        "publicReturns": [
+          "/packets/26",
+          "/packets/27",
+          "/packets/28",
+          "/packets/29",
+          "/packets/30"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 29,
+      "routeKey": "managed_access",
+      "proposalId": "e948dcb0907eee906888c0e18b28a35776f61bab392624ce73bb12abec6954dd",
+      "selectedActions": 16,
+      "firstAction": 40,
+      "lastAction": 55,
+      "plan": {
+        "trial": "e948dcb0907eee906888c0e18b28a35776f61bab392624ce73bb12abec6954dd",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:40:frame:5e86da3647ad7143",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "intermediate",
+        "contact_in_prefix": false
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": true,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "b63dfd7dcb63a85c361d9287ad89f12206fed0ce9ae5332d19022233ba834452"
+      },
+      "evidence": {
+        "proposal": "/prefixes/29/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/29/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/39",
+          "/actions/40",
+          "/actions/41",
+          "/actions/42",
+          "/actions/43",
+          "/actions/44",
+          "/actions/45",
+          "/actions/46",
+          "/actions/47",
+          "/actions/48",
+          "/actions/49",
+          "/actions/50",
+          "/actions/51",
+          "/actions/52",
+          "/actions/53",
+          "/actions/54"
+        ],
+        "publicReturns": [
+          "/packets/40",
+          "/packets/41",
+          "/packets/42",
+          "/packets/43",
+          "/packets/44",
+          "/packets/45",
+          "/packets/46",
+          "/packets/47",
+          "/packets/48",
+          "/packets/49",
+          "/packets/50",
+          "/packets/51",
+          "/packets/52",
+          "/packets/53",
+          "/packets/54",
+          "/packets/55"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 30,
+      "routeKey": "managed_access",
+      "proposalId": "0bd63d9b443b6758324c17e89b06ff62a2331f394c94c1a07ab855c27c84d73a",
+      "selectedActions": 1,
+      "firstAction": 56,
+      "lastAction": 56,
+      "plan": {
+        "trial": "0bd63d9b443b6758324c17e89b06ff62a2331f394c94c1a07ab855c27c84d73a",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:56:frame:876cd3de858d3608",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": true,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "86cc0de32f7c6c11185c460402d7212413d9af45b05b2d2ba734482806951d8a"
+      },
+      "evidence": {
+        "proposal": "/prefixes/30/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/30/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/55"
+        ],
+        "publicReturns": [
+          "/packets/56"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 31,
+      "routeKey": "managed_access",
+      "proposalId": "b9a4766b8beddc9bf2dab34a0e389cc34080c3579f13e913387447faef53d6f1",
+      "selectedActions": 2,
+      "firstAction": 57,
+      "lastAction": 58,
+      "plan": {
+        "trial": "b9a4766b8beddc9bf2dab34a0e389cc34080c3579f13e913387447faef53d6f1",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:57:frame:2fa1a0543ca495d4",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "intermediate",
+        "contact_in_prefix": false
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "65384f600826f03259f00cd87402cf763b4c59469908cb17853203b04a9f0496"
+      },
+      "evidence": {
+        "proposal": "/prefixes/31/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/31/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/56",
+          "/actions/57"
+        ],
+        "publicReturns": [
+          "/packets/57",
+          "/packets/58"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 32,
+      "routeKey": "managed_access",
+      "proposalId": "143962a3d040ed1c05f017fb9322c07d897d8d4491bb5a3867d931b143d2dfb4",
+      "selectedActions": 1,
+      "firstAction": 59,
+      "lastAction": 59,
+      "plan": {
+        "trial": "143962a3d040ed1c05f017fb9322c07d897d8d4491bb5a3867d931b143d2dfb4",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:59:frame:3cdfc93c8ff7f24e",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": true,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "bef8c1526c9428bb72ef585bf1ab3baeb4a817024fb38bfad6ca5873d9f5a195"
+      },
+      "evidence": {
+        "proposal": "/prefixes/32/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/32/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/58"
+        ],
+        "publicReturns": [
+          "/packets/59"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 33,
+      "routeKey": "managed_access",
+      "proposalId": "0202f8fbbd1ff8bce1c86d7b581006419ff13e9936600f10805bdca95d9d1bf0",
+      "selectedActions": 3,
+      "firstAction": 60,
+      "lastAction": 62,
+      "plan": {
+        "trial": "0202f8fbbd1ff8bce1c86d7b581006419ff13e9936600f10805bdca95d9d1bf0",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:60:frame:85cd30c3b89a8e18",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": true,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "49583cd1baad49671cc8f2b2f3fbdbf4bcf080385ecdf2d48da2d20fcb57b345"
+      },
+      "evidence": {
+        "proposal": "/prefixes/33/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/33/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/59",
+          "/actions/60",
+          "/actions/61"
+        ],
+        "publicReturns": [
+          "/packets/60",
+          "/packets/61",
+          "/packets/62"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 34,
+      "routeKey": "managed_access",
+      "proposalId": "daff2c4f749c774660f6a319e59cda97e128f042c5f66f6d34049fb0fbbb97dc",
+      "selectedActions": 1,
+      "firstAction": 63,
+      "lastAction": 63,
+      "plan": {
+        "trial": "daff2c4f749c774660f6a319e59cda97e128f042c5f66f6d34049fb0fbbb97dc",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:63:frame:bc906cc905d9f98d",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": null,
+        "release_authority": false,
+        "kind": "observed_derivation",
+        "sha256": "74da25ddf9a800b80107442cab7f889392a8deb50d5ebd1858f98964e1760461"
+      },
+      "evidence": {
+        "proposal": "/prefixes/34/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/34/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/62"
+        ],
+        "publicReturns": [
+          "/packets/63"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 35,
+      "routeKey": "managed_access",
+      "proposalId": "5c478ad2d650c7665433d60335df8193ab9da5a0ce1ed329a3f22d177d5b5f8f",
+      "selectedActions": 1,
+      "firstAction": 64,
+      "lastAction": 64,
+      "plan": {
+        "trial": "5c478ad2d650c7665433d60335df8193ab9da5a0ce1ed329a3f22d177d5b5f8f",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:64:frame:dc01116d802d5877",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": true,
+        "first_route_key": "modifier",
+        "release_authority": false,
+        "kind": "observed_derivation",
+        "sha256": "910eeb429be2ed8b055c5941286c9096463a180e47f5fe28d2f9c57e656613f6"
+      },
+      "evidence": {
+        "proposal": "/prefixes/35/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/35/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/63"
+        ],
+        "publicReturns": [
+          "/packets/64"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 36,
+      "routeKey": "managed_access",
+      "proposalId": "7cea42c5a5237521e6cc6be920e2f2d535985b56f30e807f69cc7d75bc985833",
+      "selectedActions": 15,
+      "firstAction": 65,
+      "lastAction": 79,
+      "plan": {
+        "trial": "7cea42c5a5237521e6cc6be920e2f2d535985b56f30e807f69cc7d75bc985833",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:65:frame:edceb7735572de71",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "contact",
+        "contact_in_prefix": true
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": null,
+      "evidence": {
+        "proposal": "/prefixes/36/morphologyOwnership/proposal",
+        "targetExtension": null,
+        "actions": [
+          "/actions/64",
+          "/actions/65",
+          "/actions/66",
+          "/actions/67",
+          "/actions/68",
+          "/actions/69",
+          "/actions/70",
+          "/actions/71",
+          "/actions/72",
+          "/actions/73",
+          "/actions/74",
+          "/actions/75",
+          "/actions/76",
+          "/actions/77",
+          "/actions/78"
+        ],
+        "publicReturns": [
+          "/packets/65",
+          "/packets/66",
+          "/packets/67",
+          "/packets/68",
+          "/packets/69",
+          "/packets/70",
+          "/packets/71",
+          "/packets/72",
+          "/packets/73",
+          "/packets/74",
+          "/packets/75",
+          "/packets/76",
+          "/packets/77",
+          "/packets/78",
+          "/packets/79"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 37,
+      "routeKey": "managed_access",
+      "proposalId": "1e65a5d05db85f731fac49fd020ee629575ec79f63f2883ad2f4ab8c0d96ebe6",
+      "selectedActions": 4,
+      "firstAction": 80,
+      "lastAction": 83,
+      "plan": {
+        "trial": "1e65a5d05db85f731fac49fd020ee629575ec79f63f2883ad2f4ab8c0d96ebe6",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:2:revision:80:frame:dc3c7564f874d6b8",
+        "level_epoch": 2,
+        "score": 1,
+        "access_phase": "intermediate",
+        "contact_in_prefix": false
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": null,
+      "targetExtension": null,
+      "evidence": {
+        "proposal": "/prefixes/37/morphologyOwnership/proposal",
+        "targetExtension": null,
+        "actions": [
+          "/actions/79",
+          "/actions/80",
+          "/actions/81",
+          "/actions/82"
+        ],
+        "publicReturns": [
+          "/packets/80",
+          "/packets/81",
+          "/packets/82",
+          "/packets/83"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 41,
+      "routeKey": "entry_rebind",
+      "proposalId": "e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621",
+      "selectedActions": 5,
+      "firstAction": 87,
+      "lastAction": 91,
+      "plan": {
+        "trial": "e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:87:frame:a6e82bcf235ce21a",
+        "level_epoch": 3,
+        "score": 2,
+        "access_phase": "approach",
+        "contact_in_prefix": false,
+        "full_access_length": 5
+      },
+      "deferredProbePresent": true,
+      "factsEntryAccessReturn": null,
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": "feature_probe",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "ca15d558345a37202898a9c9a718f18e5254a8de74ac52d16cc335f39455e5b1"
+      },
+      "evidence": {
+        "proposal": "/prefixes/41/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/41/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/86",
+          "/actions/87",
+          "/actions/88",
+          "/actions/89",
+          "/actions/90"
+        ],
+        "publicReturns": [
+          "/packets/87",
+          "/packets/88",
+          "/packets/89",
+          "/packets/90",
+          "/packets/91"
+        ]
+      }
+    },
+    {
+      "prefixIndex": 42,
+      "routeKey": "entry_probe",
+      "proposalId": "d73a367e5e9897f33f6e664556aa59413cfe01d772a5d181552f643bcd7fbf25",
+      "selectedActions": 1,
+      "firstAction": 92,
+      "lastAction": 92,
+      "plan": {
+        "trial": "d73a367e5e9897f33f6e664556aa59413cfe01d772a5d181552f643bcd7fbf25",
+        "observation_ref": "sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+        "level_epoch": 3,
+        "score": 2,
+        "access_phase": "discriminant",
+        "contact_in_prefix": true,
+        "full_access_length": 1,
+        "information_cost": 1,
+        "reserve_after_probe": 13,
+        "parent_return_ref": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028"
+      },
+      "deferredProbePresent": false,
+      "factsEntryAccessReturn": "return:e815b78ef6faa8ee7881d1ee81b546540cd056f2604b4035b2a00fa3c1184621:sra-v6-64094f88-cec6-4b94-846b-90271cfeec91:epoch:3:revision:92:frame:7e4ad79207667028",
+      "targetExtension": {
+        "currently_bound": false,
+        "first_route_key": "feature_probe",
+        "release_authority": false,
+        "kind": "remaining_alignment",
+        "sha256": "2a04fb97680d2884fa7ed4039845475790e9a110f1401411f08dcd330634cf4e"
+      },
+      "evidence": {
+        "proposal": "/prefixes/42/morphologyOwnership/proposal",
+        "targetExtension": "/prefixes/42/morphologyOwnership/proposal/morphology/target_extension",
+        "actions": [
+          "/actions/91"
+        ],
+        "publicReturns": [
+          "/packets/92"
+        ]
+      }
+    }
+  ],
+  "capturedLinkAnomalies": [],
+  "capturedLinksConsistent": true,
+  "qualifications": [
+    "The report, trace, execution receipts, frozen native manifest and actual public journal are byte-linked before indexing.",
+    "Method acquisition means a newly observed value in the existing sealed caller owner. Its source epoch, scoring reference, boundary score and unique station projection are checked against captured evidence; this is not a reexecution of the historical caller.",
+    "Station candidates follow the historical source filter: source epoch, selective-effect after reference and preserved peer, with no additional pair-key filter.",
+    "Captured target-method views at propose are compared with the preceding sealed caller owner. Null views in legacy reports are not evidence that historical method acquisition never occurred.",
+    "An offered route, a selected sealed prefix, acquired actions, an entry-access-return event and a selected continuation are counted separately.",
+    "An entry probe chain must name an actually acquired return_ref and agree with its current reference and epoch. Retained target extensions are indexed as captured, without granting release authority or inferring their truth.",
+    "Official progress is read only from public score and terminal-state returns. Provider participation or link consistency does not establish that the provider caused progress, nor that an unobserved run would succeed.",
+    "No solver, game implementation, private state, native-source mutation, action execution or ablation is used by this extractor."
+  ]
+}

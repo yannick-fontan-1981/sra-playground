@@ -1,0 +1,40 @@
+{
+  "schema": "logos-engine.lot2c.managed-component-execution.v1",
+  "status": "passed",
+  "exitCode": 0,
+  "command": [
+    "node",
+    "scripts/measure-native-morphology-managed-costs.mjs",
+    "docs/migration/lot2c-evidence/performance/managed-component-costs.json"
+  ],
+  "startedAt": "2026-11-09T20:38:57.672Z",
+  "finishedAt": "2026-11-09T20:39:00.519Z",
+  "executorWallTimeSeconds": 2.940117645,
+  "nativeDigest": "3cd17565b114a40ed71870bf8d7875a1b91102440b92d14a9258bfa98d4f7779",
+  "nativeSourceUnchanged": true,
+  "caseCount": 12,
+  "warmupCalls": 36,
+  "measuredCalls": 240,
+  "attempt": 1,
+  "archives": [
+    {
+      "source": "docs/migration/lot2c-evidence/performance/managed-component-costs.json",
+      "sourceBytes": 71057,
+      "sourceSha256": "26bec402ced420e02240a308904d2d21b166780e3d188533be1573a6356a0d0f",
+      "archive": "docs/migration/lot2c-evidence/performance/managed-component-costs.json.gz",
+      "archiveBytes": 19489,
+      "archiveSha256": "03fcfa5da174d368baf681bdb1ef68905227e5cfc658299574f6b952d27683fc",
+      "decompressedBytesExact": true
+    },
+    {
+      "source": "docs/migration/lot2c-evidence/performance/managed-component-attempt-01.log",
+      "sourceBytes": 2432,
+      "sourceSha256": "45d89bb725f5996fb95a3af7659a32eb7e66f7674068abef97f09833ae41d41e",
+      "archive": "docs/migration/lot2c-evidence/performance/managed-component-attempt-01.log.gz",
+      "archiveBytes": 974,
+      "archiveSha256": "bbdfec8ea420b6e4e0fd2049c47d134e71e47d5a5a1a83d977b686d5d3c083a4",
+      "decompressedBytesExact": true
+    }
+  ],
+  "scope": "Absolute source-verified consumer component cost. No cold Kernel acquisition or game timing; no V62 baseline ratio."
+}

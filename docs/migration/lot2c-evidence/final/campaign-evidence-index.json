@@ -1,0 +1,165 @@
+{
+  "schema": "logos-engine.native-campaign-evidence-index.v1",
+  "recordedAt": "2026-11-09T20:48:39.994248+00:00",
+  "nativeSourceDigest": "3cd17565b114a40ed71870bf8d7875a1b91102440b92d14a9258bfa98d4f7779",
+  "campaigns": [
+    {
+      "game": "LS20",
+      "targetStatus": "target_reached",
+      "levelsCompleted": 3,
+      "actions": 142,
+      "prefixes": 58,
+      "officialState": "NOT_FINISHED",
+      "completeGameWinClaimed": false,
+      "executionExitCode": 0,
+      "completeReportAvailable": true,
+      "execution": {
+        "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/execution-ls20.json",
+        "bytes": 61495,
+        "sha256": "bdaba98a2cf4a6aba1f8244507716dfdfba4fa81e149bb545504dc844e089d96"
+      },
+      "selection": {
+        "path": "docs/migration/lot2c-evidence/final/ls20-selection.json",
+        "bytes": 1006,
+        "sha256": "1cd012a39bd6f8e17fc14277116b9176278eb1908163c62fde6b93cc8a3ee8bd"
+      },
+      "resolution": {
+        "path": "docs/migration/lot2c-evidence/final/ls20-resolution.json",
+        "bytes": 918,
+        "sha256": "3320c14d1fe969fb8935d4d56a142b5447bc1cccac901b565d9754cff2b85e9a"
+      },
+      "artifacts": {
+        "execution-ls20.json": {
+          "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/execution-ls20.json",
+          "bytes": 61495,
+          "sha256": "bdaba98a2cf4a6aba1f8244507716dfdfba4fa81e149bb545504dc844e089d96"
+        },
+        "ls20-actual-public-journal.jsonl.gz": {
+          "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-actual-public-journal.jsonl.gz",
+          "bytes": 26168,
+          "sha256": "da62e7f0c02939e7b638219aaa9f1adf7564a4561ed6e63fe986b2505f0ca245"
+        },
+        "ls20-campaign.json.gz": {
+          "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-campaign.json.gz",
+          "bytes": 23163581,
+          "sha256": "924ff4b8ca6ed084c0dfdbe4408871ac425d4e576920478a5068e0f403fff50d"
+        },
+        "ls20-campaign.json.gz.parts.json": {
+          "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-campaign.json.gz.parts.json",
+          "bytes": 4658,
+          "sha256": "8fad5ba4729990d33475226d7ab12e4b8ea52717402ba40279b013a98da638f0"
+        },
+        "ls20-method-continuation-attribution-lineage.json": {
+          "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-method-continuation-attribution-lineage.json",
+          "bytes": 1625,
+          "sha256": "ea8b613b7fe5d09440272d757d8b3eff2bcee558189f86bacaac69789ee6e4d2"
+        },
+        "ls20-method-continuation-attribution-v2.json": {
+          "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-method-continuation-attribution-v2.json",
+          "bytes": 127848,
+          "sha256": "72c1183d81cac9b5568b51b19bc8eaa936191a2b4cfccb58a5dc653b356ac315"
+        },
+        "ls20-method-continuation-attribution.json": {
+          "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-method-continuation-attribution.json",
+          "bytes": 107232,
+          "sha256": "4b814b641ad067ad38580344862b253d31812f27beab1210cd1e0e214645d24f"
+        },
+        "ls20-morphology-original-comparison.json.gz": {
+          "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-morphology-original-comparison.json.gz",
+          "bytes": 86460,
+          "sha256": "675533dd1a5719beba94b3b655e82a1174ec69844ec283ca13897b25234b39be"
+        },
+        "ls20-output.log.gz": {
+          "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-output.log.gz",
+          "bytes": 11565,
+          "sha256": "090b21c490c1e0ad429cba40620cd4714983f1fd6d9eee9a00f34473161fe4a8"
+        },
+        "ls20-public-trace.json.gz": {
+          "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/ls20-public-trace.json.gz",
+          "bytes": 44543,
+          "sha256": "123127c1e7b79383c8e0619931d4cb8dc965e7c376bf1b06445eac4b593649c0"
+        },
+        "method-continuation-extractor-v1.py": {
+          "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/method-continuation-extractor-v1.py",
+          "bytes": 26660,
+          "sha256": "2dc459199d857538dd38ca7b69643d6ca1015544f9677a58276cea3247bb68d6"
+        },
+        "method-continuation-extractor-v2.py": {
+          "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/method-continuation-extractor-v2.py",
+          "bytes": 28746,
+          "sha256": "4b09d2e19e3e31eb48354d7308bbea71c8cba999b50febac0805c03dfdcafa26"
+        },
+        "source-manifest.json": {
+          "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/source-manifest.json",
+          "bytes": 28569,
+          "sha256": "63ee61cba9093c5b0f96cfdf7491e62decf3b932ff2a20cfbe5be983acbdafc0"
+        },
+        "v62-first-command-divergence.json": {
+          "path": "docs/migration/lot2c-evidence/final/ls20-method-continuation/v62-first-command-divergence.json",
+          "bytes": 74447,
+          "sha256": "c00d9677fb8f9a83ff9195ca524fb79dae2aeca336b56805f16616be7603b855"
+        }
+      }
+    }
+  ],
+  "browser": [
+    {
+      "path": "docs/migration/lot2c-evidence/final/browser/lot2c-ls20-three-levels-ax.txt",
+      "bytes": 1073,
+      "sha256": "d505d3a1a25be1632caf6e2def4148d81228229aa80c18f6d64eab4f29fb6b65"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/final/browser/lot2c-ls20-three-levels.jpg",
+      "bytes": 72138,
+      "sha256": "441efb15dc56d9c42c010786cfbe5d79096a0540892dc54a450a525ed360dd45"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/final/browser/ls20-verification.json",
+      "bytes": 2418,
+      "sha256": "8ac4b71612ba6eab4e6c32fa7e84dba9e67f004933efdab5c5ff21510cb2b0a6"
+    }
+  ],
+  "sourceContracts": [
+    {
+      "path": "tests/fixtures/v6-morphology-entry-reference.json.gz",
+      "bytes": 295568,
+      "sha256": "2ea1ee23ab986f84e589c75d1a9ac806bb7285fe32e2d0a3e34b31d6b6633583"
+    },
+    {
+      "path": "tests/fixtures/v6-morphology-managed-reference.json.gz",
+      "bytes": 46160,
+      "sha256": "ed90ac39b579741c4f0e5799e6638d52f3c76cb2f9ac80acab81649fab995508"
+    },
+    {
+      "path": "tests/fixtures/v6-morphology-methods-reference.json.gz",
+      "bytes": 109384,
+      "sha256": "c4a324715e0d2f18a6b67432c9a428f11e1b880e6c24e3831d312c5a5d6a49f9"
+    },
+    {
+      "path": "scripts/export-v6-morphology-entry-reference.py",
+      "bytes": 26532,
+      "sha256": "5748b2ef218d76145bc4fd1905d927cb857e3ab2b010f830590c3e9b1a12ad82"
+    },
+    {
+      "path": "scripts/export-v6-morphology-managed-reference.py",
+      "bytes": 32187,
+      "sha256": "c3f6a8f47b621d6a09959290c544f3a383d84b871e95237d95f5dfd4c8af052f"
+    },
+    {
+      "path": "scripts/export-v6-morphology-methods-reference.py",
+      "bytes": 28926,
+      "sha256": "61d5354fbfaeb15ff8d17270c5c8e1ab1e1d2e7d19f21c583923bbe0ed430559"
+    },
+    {
+      "path": "scripts/compare-native-morphology-public-evidence.py",
+      "bytes": 34767,
+      "sha256": "2e13958fc37728ddb07f2730f6ac56fd123d0add154c1e750c8d58a88ad952ff"
+    },
+    {
+      "path": "scripts/extract-native-method-continuation-evidence.py",
+      "bytes": 28746,
+      "sha256": "4b09d2e19e3e31eb48354d7308bbea71c8cba999b50febac0805c03dfdcafa26"
+    }
+  ],
+  "qualification": "Integrity index of the completed cold LS20 campaign, independent managed-browser boundary verification, source contracts and bounded V62 divergence. Three levels are reached in one session; no full game WIN or full original-caller parity is claimed. Source comparison consumes actual caller method views checked against the prior sealed owner. Raw campaign bytes remain reconstructible from ordered parts. Attribution v1, v2 and their exact generator lineage are retained. Cost acceptance is a separate unresolved gate."
+}

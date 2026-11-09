@@ -197,6 +197,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               const memory = backend.caller.goal.memory;
               event.history = memory.episode.map(([before, command, after]: [R, string, R]) => [snapshotRef(before), command, snapshotRef(after)]);
               event.current = snapshotRef(memory.snapshot(args[0], args[1]));
+              // Read the one caller-owned method at this actual decision. The
+              // observer never supplies a method, contact or return to the agent.
+              event.targetMethod = structuredClone(backend.caller.targetMethod);
             }
             try {
               const result = await original.apply(this, args);
@@ -398,7 +401,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             ...(morphologyCheckpoint ? { morphologyOwnership: {
               stateNode: 'family_state:morphology', nativeCheckpoint: morphologyCheckpoint,
               proposal: evidence.proposal.kind === 'morphology_probe' ? evidence.proposal : null,
-              qualification: 'Passive evidence from the actual common family. Contacts, tried trials and feature returns have one owner; public motion history and meter/collection stay with their existing owners. This observer supplies no command, learned state or expected return.',
+              targetMethod: read('caller:counters').targetMethod,
+              qualification: 'Passive evidence from the actual common family. Contacts, tried trials, feature returns and entry access returns have one owner; the retained method, public motion history and meter/collection stay with their existing owners. This observer supplies no command, learned state or expected return.',
             } } : {}),
             ...(evidence.native_bindings?.length
               ? { nativeBindings: evidence.native_bindings.map((binding: R) => ({ ...binding, retainedGuard: read(binding.evidence_node) })) } : {}),

@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.native-loop-cost-comparison-policy.v1",
+  "relativeBudget": 0.1,
+  "unaffectedCaseIds": [
+    "STCK"
+  ],
+  "stages": [
+    "session_elapsed",
+    "new_decision",
+    "known_prefix_service",
+    "known_prefix_request",
+    "known_prefix_guard",
+    "acquisition_and_persistence",
+    "persistence",
+    "restoration"
+  ],
+  "qualification": "STCK and SMLP are predeclared common-path controls for lot2B; LIFE retains multi-level knowledge and lot1 parent logic. Compare identical public returns, counts and harness inputs. An over-budget result is not waived by a broad noise allowance; retain it and use a targeted follow-up if necessary. Control-acquisition/attention-positive trajectories may require separate diagnostics if baseline commands diverge."
+}

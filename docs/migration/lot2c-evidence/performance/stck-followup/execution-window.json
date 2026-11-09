@@ -1,0 +1,67 @@
+{
+  "schema": "logos-engine.native-paired-cost-followup-execution.v1",
+  "startedAt": "2026-11-09T20:40:21.863604+00:00",
+  "status": "completed",
+  "qualification": "One predeclared paired follow-up, baseline then after; no project heavy tasks in parallel. Initial full comparison is retained; source is not changed for this follow-up.",
+  "runs": [
+    {
+      "version": "baseline",
+      "startedAt": "2026-11-09T20:40:21.863741+00:00",
+      "finishedAt": "2026-11-09T20:41:32.115607+00:00",
+      "elapsedSeconds": 70.25187765999726,
+      "exitCode": 0,
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot2c-evidence/performance/stck-followup/cases.json",
+        "/workspace/scratch/c4dd29871d33/lot2c-baseline/docs/migration/lot2c-evidence/performance/stck-followup/baseline.json"
+      ],
+      "workingDirectory": "/workspace/scratch/c4dd29871d33/lot2c-baseline",
+      "log": {
+        "path": "docs/migration/lot2c-evidence/performance/stck-followup/baseline.log.gz",
+        "bytes": 348,
+        "sha256": "d8e4df86502e041c6f8467f37ba14577b1e5efee097302304a99422abae1d37c"
+      },
+      "receipt": {
+        "path": "docs/migration/lot2c-evidence/performance/stck-followup/baseline.json.gz",
+        "bytes": 30411,
+        "sha256": "fc6171e6de0faed6067d2f24995568e23e1460252cb5aba3a8120a5588f48625"
+      },
+      "originalJson": {
+        "path": "/workspace/scratch/c4dd29871d33/lot2c-baseline/docs/migration/lot2c-evidence/performance/stck-followup/baseline.json",
+        "bytes": 234911,
+        "sha256": "16e2403ae2222455eeedb3730941cbe39ef2f585d2cebd0d9cc8f85135d3f568"
+      }
+    },
+    {
+      "version": "after",
+      "startedAt": "2026-11-09T20:41:32.126773+00:00",
+      "finishedAt": "2026-11-09T20:42:46.677769+00:00",
+      "elapsedSeconds": 74.55099994199554,
+      "exitCode": 0,
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot2c-evidence/performance/stck-followup/cases.json",
+        "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot2c-evidence/performance/stck-followup/after.json"
+      ],
+      "workingDirectory": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout",
+      "log": {
+        "path": "docs/migration/lot2c-evidence/performance/stck-followup/after.log.gz",
+        "bytes": 350,
+        "sha256": "b1b96ab77bab5ae78ba1ce48311804ed9c8fe459269103c1c80bfe15735b4212"
+      },
+      "receipt": {
+        "path": "docs/migration/lot2c-evidence/performance/stck-followup/after.json.gz",
+        "bytes": 30480,
+        "sha256": "74eb31b899186e07ad9e7c79d9bd4adee2981c4f311cf0ca978983f2e1970f7a"
+      },
+      "originalJson": {
+        "path": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/docs/migration/lot2c-evidence/performance/stck-followup/after.json",
+        "bytes": 235010,
+        "sha256": "f813ae7ec7ca9a84d038034c3571d34b570bf6ba8cd728e35b8c5b2c8bee03e2"
+      }
+    }
+  ],
+  "finishedAt": "2026-11-09T20:42:46.690797+00:00"
+}

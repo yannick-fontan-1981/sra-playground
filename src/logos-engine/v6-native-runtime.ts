@@ -60,7 +60,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.34.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.35.0';
 // The implementation identity and public snapshot describe the same extensions.
 const NATIVE_CALLER_EXTENSIONS = ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
   'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery',
@@ -212,6 +212,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       forecast: () => this.acquisitionFamilies?.inventory?.callerMeterForecast() ?? null,
       observe: (obs, rows) => this.acquisitionFamilies?.inventory?.observeCallerContext(obs, rows),
       collection: () => this.acquisitionFamilies?.inventory?.callerCollectionEvidence() ?? null,
+      targetMethod: () => this.caller?.targetMethod ?? null,
     });
     this.groups = structuredClone(configuration.groups ?? this.families.map(family => ({ id: family.id, families: [family.id] })));
     if (!this.groups.length || this.groups.length > 16 || new Set(this.groups.map(group => group.id)).size !== this.groups.length
@@ -1044,7 +1045,8 @@ export class NativeV6Runtime implements NativeV6Backend {
           this.acquisitionFamilies?.inventory?.observeCallerContext(transition.after, transition.second.frame_rows);
         }),
         recordAssessment: (transition, assessment) => this.caller!.recordAssessment(transition, assessment),
-        boundaryWitness: transition => this.caller!.boundaryWitness(transition, prefix.proposal, prefix.revision),
+        boundaryWitness: transition => this.caller!.boundaryWitness(transition, prefix.proposal, prefix.revision,
+          (method, witness) => this.acquisitionFamilies?.morphology?.stationHypothesisFor(method, witness) ?? null),
       } : undefined) : null;
     this.cycles += 1;
     // common_frontier_runtime.py checks observed program refutations after
@@ -1365,12 +1367,14 @@ export class NativeV6Runtime implements NativeV6Backend {
         components: Object.fromEntries(CALLER_COMPONENTS.map(component => {
           const id = `caller:${component}`; return [component, { id, revision: this.knowledge!.node(id).revision }];
         })), pendingSourceProviders: ['morphology'],
-        morphologyProvider: { status: 'partial_current_measurements_control_and_attention',
+        morphologyProvider: { status: 'partial_current_measurements_control_attention_and_methods',
           state_owner: 'family_state:morphology', motion_owner: 'caller:goal',
           forecast_owner: 'family_state:public_observed_inventory',
           current_decision_scope: 'one_source_selection_cycle', attention_owner: 'caller:attention',
-          pending: ['retained_station_method_and_managed_capacity', 'entry_access_return_and_rebind',
-            'target_extension_continuation'] },
+          method_owner: 'caller:counters.targetMethod', entry_return_owner: 'family_state:morphology.entry_access_return',
+          connected_methods: ['retained_station_method', 'entry_access_return', 'entry_rebind',
+            'entry_probe', 'managed_capacity', 'target_extension_continuation'],
+          pending: ['complete_original_caller_parity_and_domain_closure'] },
         scope: 'native common acquisition and connected providers; remaining source families are still in migration' }
         : { enabled: false, scope: 'injected_family_test_runtime' },
       ...(this.knowledge?.graphChain ? { graphChain: this.knowledge.graphChain, graphRevision: this.knowledge.revision } : {}),

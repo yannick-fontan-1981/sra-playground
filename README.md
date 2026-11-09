@@ -28,38 +28,46 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **Lot 2B connects the current
-  morphology decision to control acquisition and attention parent-return**.
-  A retained composition without a route now requests the original V6 control
-  experiments. Information questions preserve the current witness, and actual
-  returns resume the same measured pair. The decision lasts one selection cycle;
-  GoalAccess, Frontier, attention and morphology keep their existing owners.
-  Native `0.34.0` passes **623/623 release tests**. Unchanged source references
-  cover 38 strategy cases and 45 contextual-translation cases. A real Kernel
-  test starts with pixels and empty knowledge, releases an unused control,
-  acquires its response and then releases a witnessed replication.
-  The cold LS20 campaign completes level 1 in **17 actions**, compared with
-  28 in V61, and independently repeats this result in the managed browser.
-  It then reaches `GAME_OVER` on level 2 after **133 actions in total**.
-  Fourteen control prefixes, two actual attention parent-returns and all three
-  source experiment types contribute to that session. Both observed attention
-  returns are contradictory and are consumed exactly once. The failed target
-  remains part of the evidence. A separate fresh SYME session completes its
-  **first three levels in 36 actions (9, 12 and 15)** and 14 acquired prefixes.
-  The managed browser independently confirms 36 actions, three solved levels
-  and 14 plans at level 4. Its existing `regular_field_correspondence` provider
-  supplies this historical capability; the new control and attention providers
-  do not receive credit for that regression demonstration.
-  The matched cost comparison passes all **16 predeclared STCK/SMLP median
-  budgets of +10%**, with a maximum observed increase of 8.72%. Raw timings,
-  higher STCK p95 restoration and inspection costs, and the six absolute
-  control/attention component cases remain qualified in the report.
-  No game name, fixed colour role or stored solution selects production behavior.
-  The [current report](docs/migration/lot2b-control-attention.md),
-  [source lineage](docs/migration/lot2b-control-attention-lineage.md) and
-  [roadmap](docs/migration/v6-delivery-roadmap.md) distinguish contribution,
-  campaigns, costs and limits. **Lot 2C remains next**: station/entry methods,
-  rebinding, rearming and wider target continuation are still incomplete.
+  level**; opening the tab does not move the game. **Lot 2C connects acquired
+  station methods, entry continuation and managed capacity to the common agent.**
+  A method is acquired only at a verified natural level boundary and enriched
+  from one uniquely acquired, peer-preserving station contact. Recalled methods
+  are revalidated against current public geometry, witnessed motion and resource
+  forecasts. The existing caller, GoalAccess, inventory, attention and morphology
+  owners retain their respective evidence. Checkpoint v2 restores older v1
+  morphology states with no invented entry return.
+  Native `0.35.0` passes **859/859 release-delta tests** across 17 files.
+  The cold LS20 campaign now completes **its first three levels in 142 actions
+  (17, 67 and 58)** and 58 acquired prefixes, in one continuous session. It stops
+  naturally on entry to level 4. The managed browser independently reproduces
+  142 actions, three solved levels and 58 completed plans, with the inspector
+  closed and no session reset. V62 had completed only level 1 before its
+  recorded level-2 game-over. The new session actually selects two entry-rebind
+  prefixes, one acquired entry-return/probe chain and fourteen managed-access
+  prefixes. A captured method with a uniquely acquired station is consumed in
+  47 subsequent morphology calls.
+  The unchanged original morphology adapter matches **312 actual calls and
+  58 sealed checkpoints**, with 600 shared-context calls reconstructed from the
+  public journal. Separate source contracts cover acquisition, refusals,
+  transformations, restoration and managed projection/search. The bounded V62
+  comparison matches 25 commands and stops before supplying the first differing
+  return at action 26; it does not claim full original-caller parity.
+  Decisions use public observations and acquired witnesses rather than game
+  names, fixed colour roles or stored solutions. The [current report](docs/migration/lot2c-method-continuation.md),
+  [source lineage](docs/migration/lot2c-method-continuation-lineage.md) and
+  [roadmap](docs/migration/v6-delivery-roadmap.md) retain the campaigns, browser
+  verification, measured costs and limits. **Lot 2C is functionally available,
+  with its cost gate still open:** the initial comparison has 14/16 medians
+  within +10%; a fresh paired STCK follow-up has five of eight medians above
+  that unchanged limit. The next priority is to isolate and resolve these
+  continuation/persistence/restoration costs before extending lot 3's shared
+  memory and composition services. Complete morphology-domain closure and full
+  V6 parity remain separate open migration goals.
+  Previous [lot 2B](docs/migration/lot2b-control-attention.md) connected the current
+  morphology decision to control acquisition and attention parent-return,
+  including retained compositions without a route, source experiments and
+  witness-preserving information questions. Its independent SYME demonstration
+  completed three levels in 36 actions through the historical field provider.
   **Previous lot 1 retains a measured
   material request while its pose question is resolved**, then consumes the
   acquired return before the next delivery or control decision. The existing
@@ -76,7 +84,7 @@ Fontan's **Symbolic Reasoning Agent** research.
   [eleven-lot roadmap](docs/migration/v6-delivery-roadmap.md) distinguish its
   contracts, integrated campaign and performance evidence. Lot 2A supplies the current morphology measurements and guarded probes;
   lot 2B now connects their current decision to the control and attention consumers.
-  Station/entry continuation remains open for lot 2C. **The previous v57 milestone completes
+  Lot 2C adds the revalidated station/entry consumers. **The previous v57 milestone completes
   SMLP's first three levels in 15 actions (3, 4 and 8)** through one cold
   continuous native common session, nine acquired prefixes and two natural
   boundary replays. The managed browser independently confirms 15 actions,
@@ -308,16 +316,17 @@ Fontan's **Symbolic Reasoning Agent** research.
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
   The current entry audit connects **50 of 76 explicit DRM subquestions
-  (65.8%)** in implementation `logos-engine.typescript.v6.native-migration/0.33.0`.
+  (65.8%)** in implementation `logos-engine.typescript.v6.native-migration/0.35.0`.
   Lot 1's retained material parent is native coordination outside this entry count.
   The compiled original workflow inventory remains 37. This counts
   connected entries, not full behavioral parity or a percentage of all code.
   The `topological_recolor` entry records only selected returns and retains its
   six-field state before FramedTransfer acquisition. Current motion information
   questions reuse acquired Goal history and read the existing meter forecast.
-  The partially connected morphology provider and pending parent/control admissions require
-  further source transfer and independent validation; no future game outcome
-  is assumed.
+  Lot 2B connects the current parent/control admissions, and lot 2C extends
+  acquired methods and continuation. Complete morphology-domain coverage still
+  requires further source transfer and independent validation; lot 2C's cost
+  gate remains open. No future game outcome is assumed.
   Complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These

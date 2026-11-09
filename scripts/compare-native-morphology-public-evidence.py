@@ -6,9 +6,12 @@ It does not execute a game, provide a native command, or seed native knowledge.
 The original adapter starts with cold contacts/trials and retains its own state
 through the complete captured call order. Its external meter/collection inputs
 come from a separate cold replay of the actual shared-owner calls, never from
-an assumed forecast or a native retained-state seed. The transferred domain is
-station_method = entry_method = entry_access_return = None. The untransferred
-morph.last handoff to the strategic caller is outside this comparison.
+an assumed forecast or a native retained-state seed. Captured caller-owned
+target methods are explicit external consumer inputs, cross-checked against
+sealed caller checkpoints; the original adapter independently reacquires every
+entry_access_return through its own record calls. The strategic morph.last
+handoff and acquisition of target methods by the whole caller remain outside
+this component comparison.
 """
 from __future__ import annotations
 
@@ -40,8 +43,10 @@ def import_helper(name, path):
 shared = import_helper('morphology_public_contracts', HELPER)
 inventory = import_helper('morphology_shared_owner_contracts', INVENTORY_HELPER)
 load, proof, check, plain, digest = shared.load, shared.proof, shared.check, shared.plain, shared.digest
-FORMAT = 'native.current_morphology.v1'
-STATE_FIELDS = {'format', 'journal', 'contacts', 'tried', 'feature_trials'}
+LEGACY_FORMAT = 'native.current_morphology.v1'
+FORMAT = 'native.current_morphology.v2'
+LEGACY_STATE_FIELDS = {'format', 'journal', 'contacts', 'tried', 'feature_trials'}
+STATE_FIELDS = LEGACY_STATE_FIELDS | {'entry_access_return'}
 SNAPSHOT_FIELDS = {'rows', 'roles', 'epoch', 'score', 'ref', 'frame_hash'}
 POLICY_RECEIPT_FIELDS = {'trace', 'instructions', 'execution_engine', 'reference_commit',
                          'reference_semantic_hash', 'all_executed_statements', 'instruction_quantum',
@@ -58,19 +63,25 @@ def source_state(adapter):
     # Preserve insertion order of acquired contacts, just as the source dict and
     # the native Map do. Only the explicit JSON transport of tuple keys changes.
     return {'contacts': [[list(key), plain(value)] for key, value in adapter.contacts.items()],
-            'tried': sorted(adapter.tried), 'feature_trials': plain(adapter.feature_trials)}
+            'tried': sorted(adapter.tried), 'feature_trials': plain(adapter.feature_trials),
+            'entry_access_return': plain(adapter.entry_access_return)}
 
 
 def native_source_state(value):
-    assert set(value) == STATE_FIELDS and value['format'] == FORMAT
+    legacy = value['format'] == LEGACY_FORMAT
+    assert ((legacy and set(value) == LEGACY_STATE_FIELDS)
+            or (value['format'] == FORMAT and set(value) == STATE_FIELDS))
     assert isinstance(value['journal'], list)
+    pending = None if legacy else value['entry_access_return']
+    assert pending is None or isinstance(pending, dict)
     contacts = []
     for encoded, row in value['contacts']:
         key = json.loads(encoded)
         assert isinstance(key, list) and len(key) == 2
         assert encoded == json.dumps(key, separators=(',', ':'), ensure_ascii=False)
         contacts.append([key, row])
-    return {'contacts': contacts, 'tried': value['tried'], 'feature_trials': value['feature_trials']}
+    return {'contacts': contacts, 'tried': value['tried'], 'feature_trials': value['feature_trials'],
+            'entry_access_return': pending}
 
 
 def source_proposal(value):
@@ -194,11 +205,19 @@ def main():
     meter, collection, adapter = ObservedMeter(), CollectionEvidence(), MorphologyAdapter()
     context = lambda: {'meter': inventory.meter_state(meter), 'collection': plain(collection.retained_state())}
     initial_context, initial_state = context(), source_state(adapter)
-    assert initial_state == {'contacts': [], 'tried': [], 'feature_trials': {}}
+    assert initial_state == {'contacts': [], 'tried': [], 'feature_trials': {}, 'entry_access_return': None}
     contexts, context_checks, call_checks, prefix_checks, decisions = {}, [], [], [], []
     counts, reasons, routes = Counter(), Counter(), Counter()
     records, departures, offers, expected_journal, acquired_ids = {}, {}, {}, [], set()
     failure, phase = None, 'shared_context_replay'
+    owner_methods = {0: None}
+    owner_cursor = 0
+    for prefix in campaign['prefixes']:
+        owner_cursor += prefix['acquiredActions']
+        ownership = prefix['morphologyOwnership']
+        if ownership['nativeCheckpoint']['format'] == FORMAT:
+            assert 'targetMethod' in ownership, 'A v2 capture must include the existing caller method owner'
+        owner_methods[owner_cursor] = copy.deepcopy(ownership.get('targetMethod'))
 
     def retain_event(event, event_id):
         assert event_id not in acquired_ids, 'Repeated acquisition is outside this actual-call replay claim'
@@ -209,7 +228,6 @@ def main():
         state = source_state(adapter)
         check(native_source_state(value), state, label + '.source_projection')
         check(value['journal'], expected_journal, label + '.native_journal_from_original_events')
-        assert adapter.station_method is adapter.entry_method is adapter.entry_access_return is None
         return state
 
     try:
@@ -277,6 +295,17 @@ def main():
                 verified_context = contexts[obs['observation_ref']]
                 adapter.meter = copy.deepcopy(verified_context['meter'])
                 adapter.collection = copy.deepcopy(verified_context['collection'])
+                if call['sourceBefore']['format'] == FORMAT:
+                    assert 'targetMethod' in call, 'A v2 propose capture must include its caller-owned method view'
+                method_view = copy.deepcopy(call.get('targetMethod'))
+                assert method_view is None or isinstance(method_view, dict)
+                assert position in owner_methods, 'Planning must consume a sealed prefix caller owner'
+                check(method_view, owner_methods[position], label + '.caller_method_checkpoint_view')
+                # These mirrors are the original adapter's external dependency.
+                # The method is never installed into the native family or used
+                # as an expected decision; all source routes are recomputed.
+                adapter.entry_method = method_view
+                adapter.station_method = (method_view or {}).get('station_hypothesis')
                 goal = GoalAccessMemory()
                 goal.episode = history
                 original = adapter.propose(goal, obs, rows, inputs, remaining)
@@ -302,6 +331,9 @@ def main():
                                   'controlAttested': facts['control_attested'], 'routeKeys': list(facts['routes']),
                                   'reason': decision['reason'], 'selectedRouteKey': decision['route_key'],
                                   'featureResiduals': plain(facts.get('feature_residuals')),
+                                  'callerMethodSha256': digest(method_view),
+                                  'stationMethodPresent': adapter.station_method is not None,
+                                  'acquiredEntryReturnPresent': adapter.entry_access_return is not None,
                                   'meterForecast': plain(adapter.meter.forecast()), 'offeredActions': result['actions'] if result else [],
                                   'sourceFactsSha256': identity(facts)})
                 detail.update(publicPacketIndex=position, historyTransitions=len(history), historyRefsSha256=digest(history_refs),
@@ -309,6 +341,8 @@ def main():
                 counts['nonNullOffers' if original is not None else 'abstentions'] += 1
                 counts['episodeTransitionsCompared'] += len(history)
                 counts['sourceFactsAndDecisionComparisons'] += 1
+                counts['nonNullCallerMethodViews'] += method_view is not None
+                counts['nonNullStationMethodViews'] += adapter.station_method is not None
             elif method == 'record':
                 assert len(arguments) in (7, 8)
                 position = transition(arguments, label)
@@ -319,7 +353,6 @@ def main():
                     # animation packet; MorphologyAdapter does not consume it.
                     check(arguments[7], trace['packets'][position + 1]['packet']['frame_packet'], label + '.unused_public_animation_packet')
                 assert proposal and proposal['kind'] == 'morphology_probe'
-                assert proposal['morphology_plan']['route_key'] not in {'entry_probe', 'entry_rebind', 'managed_access'}
                 selected_action = proposal['actions'][step_index]
                 check({'action_ref': command['action_ref'], 'data': command.get('data', {})},
                       {'action_ref': selected_action['action_ref'], 'data': selected_action.get('data', {})}, label + '.selected_action')
@@ -335,6 +368,7 @@ def main():
                     retain_event(original_event, json.dumps(['selected', proposal['morphology_plan']['trial'], step_index,
                                  before['observation_ref'], after['observation_ref']], separators=(',', ':'), ensure_ascii=False))
                     counts['selectedEventsAcquired'] += 1
+                    counts['entryAccessReturnsAcquired'] += original_event.get('kind') == 'entry_access_return'
                 records[position] = {'call': index, 'proposal': proposal, 'stepIndex': step_index,
                                      'guard': plain(guard), 'outcome': plain(outcome), 'result': result}
                 detail.update(publicPacketIndex=position, guard=plain(guard), outcome=plain(outcome))
@@ -421,7 +455,7 @@ def main():
             imported[name] = verified[name]
     assert shared.verify_source() == verified
     result = {
-        'schema': 'logos-engine.lot2a.current-morphology-public-source-comparison.v1',
+        'schema': 'logos-engine.current-morphology-public-source-comparison.v2',
         'status': 'failed' if failure else 'passed', 'referenceCommit': shared.COMMIT,
         'game': args.game, 'nativeSourceDigest': native['digest'],
         'campaignStatus': campaign['status'], 'campaignFinal': campaign['final'],
@@ -440,8 +474,12 @@ def main():
         'finalMorphologySourceState': source_state(adapter), 'finalOriginalSharedContext': context(),
         'failure': failure,
         'scope': {
-            'station_method': None, 'entry_method': None, 'entry_access_return': None,
-            'sourceStateFieldsCompared': ['contacts', 'tried', 'feature_trials'],
+            'acceptedNativeCheckpointFormats': [LEGACY_FORMAT, FORMAT],
+            'station_method': 'view of captured caller-owned targetMethod.station_hypothesis',
+            'entry_method': 'captured caller-owned targetMethod, checked against the preceding sealed caller checkpoint',
+            'entry_access_return': 'independently acquired by original adapter.record and compared after every call',
+            'callerMethodAcquisitionCompared': False,
+            'sourceStateFieldsCompared': ['contacts', 'tried', 'feature_trials', 'entry_access_return'],
             'nativeWrapperFieldsExcludedFromOriginalProposal': ['morphology_measurement_receipt'],
             'nativePolicyReceiptFieldsExcluded': sorted(POLICY_RECEIPT_FIELDS),
             'measurementReceiptSourceFieldsCompared': ['facts_digest', 'decision', 'routes', 'meter_observation_ref'],
@@ -455,12 +493,15 @@ def main():
             'The unchanged original meter and collection are replayed cold through all captured shared-owner context calls; '
             'each morphology observation must resolve to one unique verified original context. A copy of those original owner '
             'objects supplies the actual external context to the original adapter, without native state seeds or fabricated forecasts. '
-            'Original contacts/tried/feature_trials start cold and evolve only through actual selected record and passive departure calls. '
+            'Original contacts/tried/feature_trials/entry_access_return start cold and evolve only through actual selected record and passive departure calls. '
+            'For v2 captures the original station_method and entry_method mirrors consume the captured existing caller-owned targetMethod, '
+            'checked against its preceding sealed checkpoint. Legacy v1 captures imply null methods and null pending returns. This checks '
+            'the method consumer boundary, not independent acquisition of that method by the full historical caller. '
             'All captured proposals, abstentions, measured facts hashes, policy decisions, acquisitions and before/after source projections '
             'are compared; native journals are separately reconstructed from original returned events. Selected guards are recomputed '
             'against actual public packets and outcomes are compared with sealed transitions. Native receipt metadata has no original '
             'counterpart and is excluded except for explicitly listed source-derived fields. The original adapter computes last internally, '
-            'but the untransferred morph.last handoff, retained station/entry methods, whole strategic caller and other families are outside '
+            'but the strategic morph.last handoff, acquisition of retained station/entry methods, whole strategic caller and other families are outside '
             'this claim. No source patch, identifier remapping, tolerance, native action injection or new game run is used. '
             'Passing component parity does not explain a campaign failure or claim overall game completion.'),
     }

@@ -1,0 +1,252 @@
+{
+  "schema": "logos-engine.native-performance-evidence-index.v1",
+  "recordedAt": "2026-11-09T20:48:40.005818+00:00",
+  "status": "budget_review_required",
+  "lotClosure": "open_on_cost",
+  "nativeSourceDigest": "3cd17565b114a40ed71870bf8d7875a1b91102440b92d14a9258bfa98d4f7779",
+  "baselineNativeSourceDigest": "17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b",
+  "budget": {
+    "relativeBudget": 0.1,
+    "initial": {
+      "applicableMedianMetrics": 16,
+      "withinObservedBudget": 14,
+      "unresolved": [
+        {
+          "case": "STCK",
+          "stage": "known_prefix_service",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.12434867584573062
+        },
+        {
+          "case": "STCK",
+          "stage": "known_prefix_request",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.12168749403710666
+        }
+      ]
+    },
+    "freshPairedStckFollowup": {
+      "applicableMedianMetrics": 8,
+      "withinObservedBudget": 3,
+      "measuredSessionsPerVersion": 5,
+      "unresolved": [
+        {
+          "case": "STCK",
+          "stage": "known_prefix_service",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.2573807106909576
+        },
+        {
+          "case": "STCK",
+          "stage": "known_prefix_request",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.25270097410239645
+        },
+        {
+          "case": "STCK",
+          "stage": "known_prefix_guard",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.13611135375966832
+        },
+        {
+          "case": "STCK",
+          "stage": "persistence",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.20666811460048717
+        },
+        {
+          "case": "STCK",
+          "stage": "restoration",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.16450084518520147
+        }
+      ]
+    }
+  },
+  "component": {
+    "status": "passed",
+    "caseCount": 12,
+    "measuredCallsPerCase": 20,
+    "warmupCallsPerCase": 3
+  },
+  "receipts": [
+    {
+      "path": "docs/migration/lot2c-evidence/performance/after-attempt-01.json",
+      "bytes": 940,
+      "sha256": "42bdb09faa91ca305008fa7d22924c7b7383c3d3ff2ca7a137e9cabf7cf4ffc5"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/after-attempt-01.log.gz",
+      "bytes": 464,
+      "sha256": "90913bd8739a37381a1906af1b9659c01625ba322ad65485eb6b4aeea45bc8e6"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/after-relocation.json",
+      "bytes": 590,
+      "sha256": "0011aab3b166b7659af5344c027121f289302c22833383ba449435709e78dc82"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/after.json.gz",
+      "bytes": 81480,
+      "sha256": "922bdc2c25857e688d57e77fe834409a02394f702636cdeb67c5d4bc4d0073b1"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/baseline-reuse.json",
+      "bytes": 29829,
+      "sha256": "d2a6623959002d614c80388d4c251ef4dc7cacd9dadd0c29773ff478e1427c9d"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/baseline.json.gz",
+      "bytes": 81253,
+      "sha256": "0614f4b0a831ed604a99fcc1fa0e1db85af4ef1c064d713fdb614eac2821381d"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/comparison-policy.json",
+      "bytes": 798,
+      "sha256": "55e9530209b1b785c27474aa6085b2364995a99e894414078647007d0c0bfefb"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/comparison.json",
+      "bytes": 38405,
+      "sha256": "26e6135785f98076f01baa09c368f393dee5cef901d7a9184edf27cc31328ac9"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/managed-component-attempt-01-execution.json",
+      "bytes": 1702,
+      "sha256": "830faba6e0db324334b1e8ce36130bee479706ebae4b1658c565c6c86cf7a608"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/managed-component-attempt-01.log.gz",
+      "bytes": 974,
+      "sha256": "bbdfec8ea420b6e4e0fd2049c47d134e71e47d5a5a1a83d977b686d5d3c083a4"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/managed-component-costs.json.gz",
+      "bytes": 19489,
+      "sha256": "03fcfa5da174d368baf681bdb1ef68905227e5cfc658299574f6b952d27683fc"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/managed-component-protocol.md",
+      "bytes": 13766,
+      "sha256": "55db76445cfc2875a9e4ec4a7b5047457573b12a5fcf7213f198c57208ff93fc"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/stck-followup/after.json.gz",
+      "bytes": 30480,
+      "sha256": "74eb31b899186e07ad9e7c79d9bd4adee2981c4f311cf0ca978983f2e1970f7a"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/stck-followup/after.log.gz",
+      "bytes": 350,
+      "sha256": "b1b96ab77bab5ae78ba1ce48311804ed9c8fe459269103c1c80bfe15735b4212"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/stck-followup/baseline.json.gz",
+      "bytes": 30411,
+      "sha256": "fc6171e6de0faed6067d2f24995568e23e1460252cb5aba3a8120a5588f48625"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/stck-followup/baseline.log.gz",
+      "bytes": 348,
+      "sha256": "d8e4df86502e041c6f8467f37ba14577b1e5efee097302304a99422abae1d37c"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/stck-followup/cases.json",
+      "bytes": 734,
+      "sha256": "c95d5171e560cb7970ecf8e7a14a2b37b224fd8b212ec9bbba39edef2717cfdb"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/stck-followup/comparison-policy.json",
+      "bytes": 786,
+      "sha256": "00efef606ceb684e057464993695bd815aec887faf4dd1d31151c1d5a4dfd699"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/stck-followup/comparison.json",
+      "bytes": 15001,
+      "sha256": "d11fb1a30ae8652437466c49125d93a30bc863bcf965b949a8956ee54213c325"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/stck-followup/execution-window.json",
+      "bytes": 3099,
+      "sha256": "69977e6a6c172dec367044a0fd27c64d8dc3aa7ce8acae32981b03a0f915d650"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/cases.json",
+      "bytes": 1631,
+      "sha256": "7ca2508da22332eafaea53c1508d7363cec63cb0832cc6ea21713dbe331bace6"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/README.md",
+      "bytes": 4132,
+      "sha256": "e3205471eb29cb69b9c894f149874b2b66717beb4d3633b67cf19a53da75aad6"
+    },
+    {
+      "path": "docs/migration/lot2c-evidence/performance/stck-followup/README.md",
+      "bytes": 1894,
+      "sha256": "356745f3944cc4731037acff78c33e3e7874ead2cf66b8047bc2ee92e6a26aea"
+    }
+  ],
+  "losslessTransportChecks": [
+    {
+      "original": {
+        "path": "docs/migration/lot2c-evidence/performance/after.json",
+        "bytes": 976870,
+        "sha256": "40e71f85286797873044775c67288875e932aec94dbb5a1100ae823d42499c29"
+      },
+      "archive": {
+        "path": "docs/migration/lot2c-evidence/performance/after.json.gz",
+        "bytes": 81480,
+        "sha256": "922bdc2c25857e688d57e77fe834409a02394f702636cdeb67c5d4bc4d0073b1"
+      },
+      "byteIdentical": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot2c-evidence/performance/managed-component-costs.json",
+        "bytes": 71057,
+        "sha256": "26bec402ced420e02240a308904d2d21b166780e3d188533be1573a6356a0d0f"
+      },
+      "archive": {
+        "path": "docs/migration/lot2c-evidence/performance/managed-component-costs.json.gz",
+        "bytes": 19489,
+        "sha256": "03fcfa5da174d368baf681bdb1ef68905227e5cfc658299574f6b952d27683fc"
+      },
+      "byteIdentical": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot2c-evidence/performance/stck-followup/after.json",
+        "bytes": 235010,
+        "sha256": "f813ae7ec7ca9a84d038034c3571d34b570bf6ba8cd728e35b8c5b2c8bee03e2"
+      },
+      "archive": {
+        "path": "docs/migration/lot2c-evidence/performance/stck-followup/after.json.gz",
+        "bytes": 30480,
+        "sha256": "74eb31b899186e07ad9e7c79d9bd4adee2981c4f311cf0ca978983f2e1970f7a"
+      },
+      "byteIdentical": true
+    },
+    {
+      "baselineFollowup": "Exact original bytes checked against execution-window.json and baseline.json.gz",
+      "byteIdentical": true
+    }
+  ],
+  "generators": [
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "bytes": 9861,
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    },
+    {
+      "path": "scripts/measure-native-morphology-managed-costs.mjs",
+      "bytes": 15911,
+      "sha256": "76490ed142b94dde2cdc4dacf8440c13d8c1a945817f4b41d512099029683651"
+    }
+  ],
+  "qualification": "Indexes immutable completed measurements, not a new benchmark. Initial baseline is the exact historical lot2B after measurement; the sole predeclared follow-up measures fresh V62 then 0.35. The initial two over-budget medians and follow-up five over-budget medians remain unresolved; noise does not relax the +10% threshold. Functional LS20 success and passing component contracts do not close this gate. Component input premises, p95 increases, variation, inspection and Pause limits remain explicit in receipts/protocols. No rerun was selected to manufacture a pass."
+}

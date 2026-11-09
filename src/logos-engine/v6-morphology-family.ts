@@ -2,7 +2,8 @@
  *
  * Contacts belong here; motion history belongs to the common GoalAccess owner,
  * meter/collection to the existing InventoryCallerContext. The current decision
- * lives for one caller selection only; remembered station/entry methods remain open.
+ * lives for one caller selection only. Scored methods are views of the existing
+ * caller owner; this family retains only acquired contacts and entry returns.
  */
 import { NativeMorphologyPolicy } from './v6-morphology-policy.ts';
 import { CompositionTargetTree } from './v6-target-binding.ts';
@@ -11,6 +12,8 @@ import { measureMorphologyRoutes, morphologyPairs, morphologyPairKey,
   observedMorphologySelectiveChange, morphologyCompareFeatures, MorphologyMeasurementDomainError,
   morphologyOrientation as orientation } from './v6-morphology-measurements.ts';
 import { motionFootprint } from './v6-motion-contrast.ts';
+import { approachMorphologyEntry, resumeMorphologyEntry, morphologyEntryContour } from './v6-morphology-entry.ts';
+import type { CollectionEvidence } from './v6-inventory-caller-context.ts';
 import { compositionIdentity } from './v6-composition-memory.ts';
 import type { GoalAccessMemory } from './v6-composition-memory.ts';
 import { pythonEqual as same, pythonTruthy as truth } from './v6-operations.ts';
@@ -21,7 +24,8 @@ import type { NativeCommand, NativeExecution, NativeFamily, NativeObservation, N
   NativeProgramRegistry, NativeProposal, NativePublicObservation, NativeRecord, NativeRows } from './v6-native-types.ts';
 
 type R = Record<string, any>;
-const FORMAT = 'native.current_morphology.v1';
+const FORMAT = 'native.current_morphology.v2';
+const LEGACY_FORMAT = 'native.current_morphology.v1';
 const copy = <T>(v: T): T => structuredClone(v);
 const key = (epoch: number, pair: string): string => JSON.stringify([epoch, pair]);
 const footprint = (rows: NativeRows, at: number[], size: number[]) => motionFootprint(rows, at as unknown as NativePoint, size as unknown as NativePoint);
@@ -31,7 +35,8 @@ interface Context {
   goal: () => GoalAccessMemory;
   forecast: () => R | null;
   observe: (obs: NativeObservation, rows: NativeRows) => void;
-  collection: () => { pending: R; history: R } | null;
+  collection: () => CollectionEvidence | null;
+  targetMethod?: () => R | null;
 }
 
 export class NativeMorphologyFamily implements NativeFamily<any> {
@@ -42,6 +47,7 @@ export class NativeMorphologyFamily implements NativeFamily<any> {
   private contacts = new Map<string, R>();
   private tried = new Set<string>();
   private featureTrials: R = {};
+  private entryAccessReturn: R | null = null;
   private journal: R[] = [];
   private eventIds = new Map<string, string>();
   private checkpoint: R | null = null;
@@ -66,6 +72,27 @@ export class NativeMorphologyFamily implements NativeFamily<any> {
   currentProposalRefusal(obs: NativeObservation): R | null {
     return this.refusal?.observation_ref === obs.observation_ref ? copy(this.refusal) : null;
   }
+  /** The source boundary caller enriches its one scored-method owner from one
+   * uniquely acquired, peer-preserving station entry. This read acquires nothing. */
+  stationHypothesisFor(method: R, witness: R): R | null {
+    const entries: R[] = [];
+    for (const [encoded, contact] of this.contacts) {
+      const [epoch] = JSON.parse(encoded);
+      if (!same(epoch, witness.source_level)) continue;
+      for (const station of Object.values(contact.stations ?? {}) as R[]) {
+        for (const entry of station.entries) {
+          if (same(entry.after, method.verified_selective_change.after) && truth(entry.peer_preserved)) entries.push(entry);
+        }
+      }
+    }
+    if (entries.length !== 1) return null;
+    const entry = entries[0]!, result: R = {};
+    for (const field of ['site_surface', 'size', 'role_refs', 'delta', 'peer_scale', 'observed_scales', 'after']) {
+      if (!Object.hasOwn(entry, field)) throw new TypeError('Acquired morphology station entry lacks ' + field);
+      result[field] = copy(entry[field]);
+    }
+    return { ...result, source_epoch: witness.source_level };
+  }
   async propose(obs: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number,
     execution?: NativeExecution): Promise<NativeProposal | null> {
     this.beginDecision();
@@ -75,12 +102,14 @@ export class NativeMorphologyFamily implements NativeFamily<any> {
     // Same observation is idempotent in the existing meter. No second meter exists.
     this.context.observe(obs, rows);
     const forecast = this.context.forecast(), available = inputs.filter(a => !truth(a.data)).map(a => a.action_ref);
+    const method = this.context.targetMethod?.() ?? null, stationMethod = method?.station_hypothesis ?? null;
+    const collection = this.context.collection();
     let measured;
     try {
       measured = await measureMorphologyRoutes({ history: goal.episode, current,
         limit: Math.min(16, remaining), contacts: this.contacts, tried: this.tried, available,
-        actionBudget: remaining, meterForecast: forecast, collectionEvidence: this.context.collection(), observation: obs,
-        featureTrials: this.featureTrials });
+        actionBudget: remaining, meterForecast: forecast, collectionEvidence: collection, observation: obs,
+        featureTrials: this.featureTrials, stationMethod });
     } catch (error) {
       if (!(error instanceof MorphologyMeasurementDomainError)) throw error;
       this.refusal = { rule: 'current_morphology_measurement_domain', observation_ref: obs.observation_ref,
@@ -89,15 +118,21 @@ export class NativeMorphologyFamily implements NativeFamily<any> {
       return null;
     }
     const { facts, plans, receipt } = measured;
+    const resumed = await resumeMorphologyEntry(this.entryAccessReturn, current, obs, facts, remaining, available, forecast);
+    if (resumed) plans.entry_probe = resumed;
+    if (!truth(facts.control_attested) && truth(method)) {
+      const approach = await approachMorphologyEntry(method!, goal.episode, current, obs, facts, remaining,
+        available, forecast, collection);
+      if (approach) plans.entry_rebind = approach;
+    }
     for (const name of Object.keys(facts.routes)) {
       if (!plans[name] || plans[name].steps.some((s: R) => !available.includes(s.action_ref))) delete facts.routes[name];
     }
     facts.meter_forecast = forecast;
-    // Reuse the already transferred target derivation so current residuals
-    // retain their source priority. Remembered entry/rearm producers remain open.
+    // Reuse the existing derivation owner and its original method conditions.
     const extension = await this.targetTree.extendTarget(facts, plans,
       [...this.contacts].map(([encoded, row]) => [JSON.parse(encoded), row]) as ContactEntries,
-      this.featureTrials, null, remaining);
+      this.featureTrials, stationMethod, remaining);
     facts.extension_route = extension?.currently_bound ? extension.first_route_key : null;
     facts.extension_kind = extension?.proposed.kind ?? null;
     const decision = await this.policy.evaluate(facts);
@@ -163,6 +198,12 @@ export class NativeMorphologyFamily implements NativeFamily<any> {
       ok = ok && support.after === plan.observation_ref && support.epoch === packet.level
         && support.visible_pixels.every(([x, y, value]: number[]) => packet.frame_rows[y!]?.[x!] === value);
     }
+    if (plan.route_key === 'entry_probe') {
+      const retreat = plan.exit_candidate;
+      ok = ok && same(morphologyEntryContour(packet.frame_rows, step.to, plan.size, step.from), plan.untested_contour)
+        && sourceIdentity(footprint(packet.frame_rows, retreat.to, plan.size)) === retreat.surface_sha
+        && packet.available_action_refs.includes(retreat.action_ref);
+    }
     return { admitted: ok, reason: ok ? 'current_geometry_bound' : 'geometric_premise_changed' };
   }
   async after(proposal: R, index: number, _before: NativeObservation, after: NativeObservation, _first: NativeRows, second: NativeRows) {
@@ -183,6 +224,7 @@ export class NativeMorphologyFamily implements NativeFamily<any> {
     return { matched, seal_prefix: !matched, reason: 'compare_predicted_position' };
   }
   private applyEvent(event: R): void {
+    if (event.kind === 'entry_access_return') { this.entryAccessReturn = copy(event); return; }
     if (event.feature_effect) this.featureTrials[event.observation_ref] = copy(event.feature_effect);
     const at = key(event.epoch, event.pair_key);
     if (event.kind === 'departure') {
@@ -211,6 +253,16 @@ export class NativeMorphologyFamily implements NativeFamily<any> {
   async record(before: NativeObservation, after: NativeObservation, _command: NativeCommand,
     first: NativeRows, second: NativeRows, proposal: R, index: number) {
     const plan = proposal.morphology_plan;
+    if (index + 1 === plan.steps.length && plan.route_key === 'entry_rebind' && truth(plan.deferred_probe)
+      && before.level_epoch === after.level_epoch && after.level_epoch === plan.level_epoch
+      && before.levels_completed === after.levels_completed
+      && sourceIdentity(footprint(second, plan.steps.at(-1).to, plan.size)) === plan.footprint_sha) {
+      const event: R = { kind: 'entry_access_return', before: plan.observation_ref, after: after.observation_ref,
+        return_ref: 'return:' + plan.trial + ':' + after.observation_ref, plan: plan.deferred_probe,
+        observation_ref: after.observation_ref, epoch: after.level_epoch, trial: plan.trial };
+      const id = JSON.stringify(['selected', plan.trial, index, before.observation_ref, after.observation_ref]);
+      return { events: this.retainEvent(id, event) ? [event] : [] };
+    }
     if (index + 1 !== plan.steps.length || plan.access_phase === 'approach') return { events: [] };
     const effect = plan.physical_effect ?? plan.route_key, pairKey = await morphologyPairKey(plan.pair);
     let unchanged: number[] | null = null;
@@ -276,22 +328,29 @@ export class NativeMorphologyFamily implements NativeFamily<any> {
   state(): R { return copy(this.nativeState()); }
   nativeState(): R {
     return this.checkpoint ??= retainNativeJson({ format: FORMAT, journal: this.journal,
-      contacts: [...this.contacts], tried: [...this.tried].sort(), feature_trials: this.featureTrials });
+      contacts: [...this.contacts], tried: [...this.tried].sort(), feature_trials: this.featureTrials,
+      entry_access_return: this.entryAccessReturn });
   }
   restore(value: NativeRecord): void { this.restoreNative(value); }
   restoreNative(value: Readonly<NativeRecord>): void {
     this.beginDecision();
     if (value === this.checkpoint) return;
     const v = retainNativeJson(value) as R;
-    if (!isJsonObject(v) || Object.keys(v).length !== 5 || v.format !== FORMAT || !Array.isArray(v.journal)
+    if (!isJsonObject(v)) throw new TypeError('Invalid morphology checkpoint');
+    const legacy = v.format === LEGACY_FORMAT && Object.keys(v).length === 5;
+    const current = v.format === FORMAT && Object.keys(v).length === 6
+      && (v.entry_access_return === null || isJsonObject(v.entry_access_return));
+    if (!(legacy || current) || !Array.isArray(v.journal)
       || !Array.isArray(v.contacts) || !Array.isArray(v.tried) || !isJsonObject(v.feature_trials)) throw new TypeError('Invalid morphology checkpoint');
     const staged = new NativeMorphologyFamily(this.policy);
     for (const row of v.journal) {
       if (!isJsonObject(row) || typeof row.id !== 'string' || row.digest !== sourceIdentity(row.event)
         || !isJsonObject(row.event) || !staged.retainEvent(row.id, row.event)) throw new TypeError('Invalid or repeated morphology event');
     }
-    if (!same(staged.nativeState(), v)) throw new TypeError('Morphology evidence differs from its acquired projection');
+    const expected = legacy ? { ...v, format: FORMAT, entry_access_return: null } : v;
+    if (!same(staged.nativeState(), expected)) throw new TypeError('Morphology evidence differs from its acquired projection');
     this.contacts = staged.contacts; this.tried = staged.tried; this.featureTrials = staged.featureTrials;
-    this.journal = staged.journal; this.eventIds = staged.eventIds; this.checkpoint = v;
+    this.entryAccessReturn = staged.entryAccessReturn;
+    this.journal = staged.journal; this.eventIds = staged.eventIds; this.checkpoint = legacy ? staged.nativeState() : v;
   }
 }
