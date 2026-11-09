@@ -98,7 +98,7 @@ function renderMotivation() {
       </aside>
       <article class="reading-article motivation-article" id="content">
         <header class="reading-header">
-          <p class="reading-breadcrumb">The beginning <span>/</span> Faith, design, and purpose</p>
+          <p class="reading-breadcrumb">The beginning <span>/</span> ${escape(motivation.breadcrumb)}</p>
           <h1>${escape(motivation.title)}</h1>
           <p class="reading-deck">${escape(motivation.deck)}</p>
           <p class="motivation-byline">A personal statement by ${escape(motivation.author)}</p>
@@ -115,7 +115,7 @@ function renderMotivation() {
                 <div class="motivation-step-heading"><span class="motivation-step-number" aria-label="Step ${step.number}">${number(step.number)}</span><h3 id="${escape(step.id)}-heading">${escape(step.title)}</h3></div>
                 <div class="motivation-step-body">
                   ${paragraphs(step.paragraphs)}
-                  <div class="motivation-consequence"><p class="motivation-consequence-label">What this leads me to do</p><p>${escape(step.consequence)}</p></div>
+                  <div class="motivation-consequence"><p class="motivation-consequence-label">${escape(step.consequenceLabel ?? 'The next question')}</p><p>${escape(step.consequence)}</p></div>
                   ${sources(step.sources)}
                   ${step.links?.length ? `<div class="reading-sources">${step.links.map(link => `<a href="${escape(link.href)}">${escape(link.label)}${arrow}</a>`).join('')}</div>` : ''}
                 </div>

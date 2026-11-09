@@ -1,169 +1,228 @@
 {
   "title": "Motivation",
-  "description": "How faith in creation and in Jesus Christ leads me to explore symbolic intelligence, take responsibility for its design, and build capabilities that serve others.",
-  "deck": "From faith in creation to responsible intelligence, and from faith in Christ to a purpose of love and service.",
+  "description": "The questions behind SRA, from understanding a program's decisions to the purposes and personal convictions that guide its design.",
+  "deck": "What should we be able to understand about the intelligence we build, and what makes it worth building?",
+  "breadcrumb": "Questions, design, and purpose",
   "author": "Yannick Fontan",
   "intro": [
-    "SRA begins with a conviction about where intelligence comes from and what we should do with it. I believe the world is created by God, that our capacity to understand is received, and that what we make with this capacity carries responsibility. My Christian faith gives that responsibility its center and direction in Jesus Christ.",
-    "The steps below explain how these convictions lead to questions, design choices, and a purpose for this project. Faith motivates the inquiry; experiments establish what the resulting software can do."
+    "When a program solves a puzzle, we can see the result. I also want to understand what made that result possible: what was noticed, which relationships mattered, and why a particular action was chosen. That is a useful place to begin explaining why I am building SRA.",
+    "Following this practical question leads to others about meaning, responsibility, and the purposes we give technology. This page follows that path, step by step, toward the personal convictions that give my work its direction."
   ],
   "parts": [
     {
-      "id": "creation-and-responsibility",
+      "id": "starting-with-the-work",
       "label": "Part I",
-      "title": "Creation and responsibility",
-      "description": "Why I approach intelligence as something received, meaningful, and entrusted to us.",
+      "title": "Starting with the work",
+      "description": "From an interactive puzzle to a reasoning process that people can examine.",
       "steps": [
         {
-          "id": "an-intelligible-creation",
-          "navTitle": "An intelligible creation",
-          "title": "I believe creation is intended and intelligible",
+          "id": "sra-as-an-experiment",
+          "navTitle": "A small world to explore",
+          "title": "Start with a small world",
           "paragraphs": [
-            "My creationist faith begins with the conviction that the world, human life, and our capacity to reason have their origin in the will of a Creator. I receive existence as a gift with meaning. When I encounter patterns, relationships, or the possibility of understanding, I believe there is something real to discover.",
-            "This conviction gives me a reason to investigate intelligence. I want to understand how we recognize structure, connect ideas, and act purposefully within the world we have been given. Genesis also places human beings within creation as bearers of God's image, entrusted with responsibility."
+            "An interactive puzzle offers a manageable place to study a difficult problem. There are visible objects, possible actions, and consequences to observe. Even a simple scene requires choices about what to represent and which changes matter.",
+            "In SRA, I explore how software can connect those observations to useful actions. A movement might reveal a barrier. A repeated transformation might suggest a rule. Each experiment gives me something concrete to examine, and each unexpected result gives me a reason to look more closely."
           ],
-          "consequence": "Because I believe creation has meaning, I look for intelligible structures and ask how our understanding of them can guide what we build.",
-          "sources": [
-            { "label": "Genesis 1:26–28", "url": "https://www.esv.org/verses/Genesis%201%3A26-28/" }
+          "consequence": "What does the system need to represent before a useful decision becomes possible?",
+          "links": [
+            {
+              "label": "Explore the experimental setting",
+              "href": "/arc-agi-3.html"
+            }
           ]
         },
         {
-          "id": "intelligence-is-received",
-          "navTitle": "Intelligence is received",
-          "title": "Understanding begins with what is given",
+          "id": "what-an-observation-means",
+          "navTitle": "What an observation means",
+          "title": "Decide what an observation means",
           "paragraphs": [
-            "My thinking depends on a world to encounter, a capacity to reason, language learned from others, and knowledge passed down across generations. The questions I ask already depend on concepts and principles I have received. I can examine that foundation, develop it, and transmit what I learn.",
-            "This shapes the questions I bring to artificial intelligence: what do human designers provide that makes further discovery possible? Which concepts, distinctions, operations, and purposes do we place at the beginning? How will those representations connect to observations and remain meaningful to us?"
+            "A frame contains colors and positions. To work with it, I may need representations of objects, boundaries, roles, or relationships. Those choices shape the kinds of questions the software can address.",
+            "Calling something a target already introduces an interpretation. I need to explain what supports that interpretation, how it affects the next action, and what evidence would require changing it. Representation becomes part of the research: I need to understand what a concept means and how it connects to the situation."
           ],
-          "consequence": "Because understanding develops from a received foundation, I make the origin, meaning, and transmission of a system's concepts part of the design problem."
+          "consequence": "How can a representation stay connected to what can actually be observed and tested?"
+        },
+        {
+          "id": "connecting-symbols-to-experience",
+          "navTitle": "Symbols and experience",
+          "title": "Connect symbols to experience",
+          "paragraphs": [
+            "A symbol becomes useful through its relationships: what it refers to, how it can be used, and what follows from using it. In an interactive environment, those relationships can be examined through action.",
+            "For example, if a procedure depends on an object being movable, a controlled attempt can provide relevant evidence. The resulting observation can support that representation or expose a mistake in it. I want those connections to remain accessible to the people designing and evaluating the software."
+          ],
+          "consequence": "If a decision goes wrong, can we follow the path from observation to interpretation to action?"
+        },
+        {
+          "id": "making-reasoning-explicit",
+          "navTitle": "Decisions we can examine",
+          "title": "Make the decisions inspectable",
+          "paragraphs": [
+            "When an action produces an unexpected result, I want to locate the choices that led to it. Which observations were represented? Which conditions were considered satisfied? Which procedure was selected, and on what basis?",
+            "Symbolic reasoning gives me a way to make these elements explicit. Concepts, rules, and intermediate results can become structures people can inspect and discuss. This is why I investigate the approach: I want the design to retain a meaningful connection to human understanding."
+          ],
+          "consequence": "What would show that these explicit structures are useful in practice?",
+          "links": [
+            {
+              "label": "What symbolic reasoning means",
+              "href": "/symbolic-reasoning.html"
+            }
+          ]
+        },
+        {
+          "id": "learning-from-the-results",
+          "navTitle": "Learning from the results",
+          "title": "Let the experiments constrain the explanation",
+          "paragraphs": [
+            "An explanation needs to remain connected to what happened. If an expected result fails to appear, the implementation, representation, or underlying assumption needs examination. Readability should help us identify the cause.",
+            "I therefore want useful records of experiments: starting conditions, actions, observations, and the limits of what can be concluded. SRA and Logos Engine give this investigation a concrete form. The Playground makes parts of it available through games, examples, and explanations of the architecture."
+          ],
+          "consequence": "A game tells us what counts as success. Who makes that choice when we build tools for the wider world?",
+          "links": [
+            {
+              "label": "Follow the architecture",
+              "href": "/architecture.html"
+            },
+            {
+              "label": "Logos Engine Reasoning Lab",
+              "href": "/reasoning-lab.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "following-the-consequences",
+      "label": "Part II",
+      "title": "Following the consequences",
+      "description": "From the choices inside a program to the people and purposes those choices affect.",
+      "steps": [
+        {
+          "id": "choosing-the-objective",
+          "navTitle": "Choosing the objective",
+          "title": "Ask who chooses the objective",
+          "paragraphs": [
+            "A puzzle supplies a relatively clear definition of success. Beyond that setting, the objective itself becomes a design decision. Someone chooses what to measure, which outcomes to pursue, and which costs to accept.",
+            "Those choices deserve attention alongside the method used to achieve them. Greater capability makes the purposes assigned to it more consequential. This brings the human designer into view: my responsibility includes the assumptions and priorities I place in the software, and the situations in which I make it available."
+          ],
+          "consequence": "What do people need in order to exercise that responsibility meaningfully?"
         },
         {
           "id": "the-responsibility-of-the-designer",
-          "navTitle": "The designer's responsibility",
-          "title": "Designing intelligence carries responsibility",
+          "navTitle": "Responsibility in practice",
+          "title": "Keep responsibility practical",
           "paragraphs": [
-            "When I build software, I choose what it can represent, the operations it can perform, the evidence it can use, and the outcomes it pursues. These are human judgments about what matters and what counts as success. They shape the possibilities available to the system.",
-            "Because I understand my own capacities as entrusted to me, I also understand their use as a responsibility. The people who design and operate a system must be able to examine their assumptions, understand its limits, and correct their work. That requires a continuing connection between the intelligence we build and the human understanding from which its design comes."
+            "Responsibility needs workable means. People need enough information to understand a problem, access to investigate it, and the authority to change the relevant decisions. A claim of oversight becomes meaningful through those practical conditions.",
+            "This affects how I think about documentation, interfaces, traces, and the distribution of knowledge within a project. I want the people responsible for the software to be able to explain the choices that matter, make limitations visible, and correct their work. This is another reason to care about understandable intelligence."
           ],
-          "consequence": "Because design choices have consequences, I seek structures that people can understand, examine, explain, and take responsibility for."
-        }
-      ]
-    },
-    {
-      "id": "from-conviction-to-research",
-      "label": "Part II",
-      "title": "From conviction to research",
-      "description": "How this responsibility becomes a choice of method and a concrete experimental project.",
-      "steps": [
-        {
-          "id": "making-reasoning-explicit",
-          "navTitle": "Making reasoning explicit",
-          "title": "I choose to investigate symbolic intelligence",
-          "paragraphs": [
-            "Symbolic reasoning gives me a way to express concepts, relationships, conditions, and procedures explicitly. A conclusion can be connected to observations, rules, and intermediate steps. Those connections give people something concrete to inspect and discuss.",
-            "This is why I investigate reasoning that human designers can follow, test, and modify. The meaning of a symbol and the conditions of a rule need to be made clear. I want to learn where explicit representations help, where they encounter limits, and how they can work with other techniques while preserving meaningful human understanding."
-          ],
-          "consequence": "Because responsibility requires understanding, I choose explicit representations and traceable reasoning as a research direction.",
-          "links": [
-            { "label": "What symbolic reasoning means", "href": "/symbolic-reasoning.html" }
-          ]
+          "consequence": "Once we can examine a decision, what should guide our judgment of its purpose and consequences?"
         },
         {
-          "id": "sra-as-an-experiment",
-          "navTitle": "SRA as an experiment",
-          "title": "SRA turns these commitments into research",
+          "id": "the-people-affected",
+          "navTitle": "The people affected",
+          "title": "Consider the people affected",
           "paragraphs": [
-            "SRA, the Symbolic Reasoning Agent, gives these ideas an experimental setting in interactive games. I investigate how visual observations can become structured representations, how hypotheses about a mechanism can be tested through action, and how elementary operations can be composed into useful procedures.",
-            "Logos Engine carries the ambition of making a common reasoning architecture available for this work. The Playground provides a place to explore the games, follow the architecture, and inspect examples of the reasoning. Progress requires working implementations, reproducible experiments, and records that let people locate mistakes."
+            "Technical measures help me evaluate a tool's accuracy, speed, cost, or reliability. Evaluating its purpose also requires attention to the people whose lives and work it may affect.",
+            "I care about their dignity, freedom, vulnerability, and ability to participate in decisions that concern them. A person's worth cannot be read from a performance score. These commitments influence which uses I want to support and what consequences I need to examine. They also shape the way I want to work with others."
           ],
-          "consequence": "Because an explicit design must work in practice, I test its usefulness against observable behavior and make the research understandable through examples and documentation.",
-          "links": [
-            { "label": "Explore the architecture", "href": "/architecture.html" },
-            { "label": "Logos Engine Reasoning Lab", "href": "/reasoning-lab.html" }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "christ-and-the-purpose-of-the-work",
-      "label": "Part III",
-      "title": "Christ and the purpose of the work",
-      "description": "How my specifically Christian faith shapes the meaning, ambition, and intended fruit of this research.",
-      "steps": [
-        {
-          "id": "christ-the-incarnate-logos",
-          "navTitle": "Christ, the incarnate Logos",
-          "title": "My Christian faith gives this search its center",
-          "paragraphs": [
-            "My understanding of creation takes its specifically Christian meaning from Jesus Christ, whom I confess as the incarnate Logos. In John's Gospel, the Word is the source of creation and enters human life. I understand the source of reason, coherence, and meaning as personal, and I seek to orient my work toward him.",
-            "The incarnation directs my attention to actual people, relationships, vulnerability, and action. Understanding should be communicable, responsibility should be exercised, and knowledge should bear fruit in how we live. The name Logos Engine expresses the conviction that motivates this search. The engine is a human work whose design and results remain our responsibility."
-          ],
-          "consequence": "Because I believe the source of creation is revealed personally in Christ, I ask how this work can serve the people who will encounter it.",
-          "sources": [
-            { "label": "John 1:1–5, 14", "url": "https://bible.usccb.org/bible/john/1" }
-          ]
-        },
-        {
-          "id": "grace-and-human-worth",
-          "navTitle": "Grace and human worth",
-          "title": "The Cross and grace shape how I understand human worth",
-          "paragraphs": [
-            "In the Cross of Christ, I see the seriousness of love, the cost of reconciliation, and God's commitment to humanity. In grace, I receive salvation as a gift, and good work becomes a response to that gift. This matters deeply in a field so concerned with capability, optimization, and achievement.",
-            "Every person bears a dignity that precedes performance. I can measure a tool's accuracy, speed, or usefulness; my responsibility toward people includes their freedom, vulnerability, and relationships. This conviction should shape the purposes I select, the effects I examine, and the way I treat collaborators and users."
-          ],
-          "consequence": "Because human worth precedes achievement, technical performance must serve purposes that respect people and their dignity.",
-          "sources": [
-            { "label": "Colossians 1:15–20", "url": "https://www.esv.org/verses/Colossians%201%3A15-20/" },
-            { "label": "Ephesians 2:8–10", "url": "https://bible.usccb.org/bible/ephesians/2" }
-          ]
-        },
-        {
-          "id": "love-directs-capability",
-          "navTitle": "Love directs capability",
-          "title": "Love gives capability a direction",
-          "paragraphs": [
-            "The ability to infer, organize, or solve problems gives us power to act. My Christian faith asks what that power serves. Jesus places service at the heart of greatness, and Paul places love at the heart of the use of knowledge and ability. These convictions shape what I want greater intelligence to make possible.",
-            "In practice, I want truthfulness, patience, and care to govern both the purposes of the tools and the conduct of the work. This includes explaining limitations honestly, listening to serious criticism, and giving the responsible people the knowledge and authority to correct errors."
-          ],
-          "consequence": "Because love gives power its purpose, I want capability to become useful service, with honest explanations and accountable human decisions.",
-          "sources": [
-            { "label": "Mark 10:42–45", "url": "https://bible.usccb.org/bible/mark/10" },
-            { "label": "1 Corinthians 13:1–3", "url": "https://www.biblegateway.com/passage/?search=1Corinthians+13%3A1-3&version=ESV" }
-          ]
-        },
-        {
-          "id": "building-lasting-capability",
-          "navTitle": "Building lasting capability",
-          "title": "Stewardship requires real capability",
-          "paragraphs": [
-            "Serving others through technology requires competence. A useful intention needs reliable tools, sustained effort, and the resources to maintain what has been built. The time, energy, money, and work entrusted to a project deserve careful use.",
-            "I therefore want this research to develop into capabilities that people can use and sustain. That means confronting difficult technical problems, understanding real needs, and building the knowledge, teams, and resources that allow useful work to continue. I see quality and effectiveness as part of the responsibility to serve."
-          ],
-          "consequence": "Because service needs effective means, I pursue technical excellence and the durable capacity to build, maintain, and teach."
+          "consequence": "What would make this capability worth building, maintaining, and placing in other people's hands?"
         },
         {
           "id": "a-capacity-to-share",
           "navTitle": "A capacity to share",
-          "title": "I want this capacity to be shared",
+          "title": "Build something others can carry forward",
           "paragraphs": [
-            "My hope extends beyond my own project. I want to contribute to an awakening among Christians in the field of intelligence: people studying deeply, making symbolic intelligence their own, building useful tools, and establishing institutions capable of lasting work. I want Christian convictions to inspire a substantial contribution to the technologies shaping our shared future.",
-            "This makes transmission part of the purpose from the beginning. Documentation, teaching, collaboration, and opportunities for others to build should allow knowledge to continue beyond one person. I hope Christians will grow in competence, cooperate widely for the common good, and bring light through work that serves people and honors Christ."
+            "Useful knowledge gains reach when other people can understand and develop it. Documentation, teaching, reproducible examples, and collaboration allow work to continue beyond its original author.",
+            "I want SRA and Logos Engine to contribute to that kind of capacity. This requires dependable engineering, sustained resources, and people who can become competent contributors in their own right. A result matters, and so does another person's ability to reproduce it, explain it, question it, and use it to create something worthwhile."
           ],
-          "consequence": "Because this calling is shared, I want the work to leave people more capable: able to understand, create, take responsibility, and carry it forward.",
+          "consequence": "Why do I attach so much importance to understanding, responsibility, and the value of the people this work could serve?"
+        }
+      ]
+    },
+    {
+      "id": "where-the-questions-lead",
+      "label": "Part III",
+      "title": "Where these questions lead",
+      "description": "The broader questions behind these choices, and the personal answer through which I understand them.",
+      "steps": [
+        {
+          "id": "intelligence-is-received",
+          "navTitle": "What makes understanding possible",
+          "title": "Notice what the work depends on",
+          "paragraphs": [
+            "Following these questions brings me back to what makes my own work possible. I depend on a world I can investigate, a capacity to reason, language learned from others, and knowledge passed across generations. Even an original idea develops from conditions I did not bring into existence myself.",
+            "There is a further question here: how should I understand this meeting between a world that can be explored and a mind capable of finding meaning in it? Alongside that question stands another: where do my convictions about human dignity and responsibility find their grounding?",
+            "At this point, the inquiry reaches the way I understand my own place in the world."
+          ],
+          "consequence": "What account of existence brings these commitments together for me?"
+        },
+        {
+          "id": "an-intelligible-creation",
+          "navTitle": "Existence as a gift",
+          "title": "Receive existence as a gift",
+          "paragraphs": [
+            "When I bring these questions together, I find a coherent answer in the idea that existence and intelligence have their source in a creative intention. I understand the world as something given, its intelligibility as meaningful, and our capacity to understand as something to receive and develop responsibly.",
+            "This is what I mean here by faith in creation: the conviction that the world and human life originate in a Creator. This understanding of creation gives a foundation, for me, to gratitude, inquiry, and responsibility. It also gives depth to the idea that every person has a worth that precedes usefulness.",
+            "Seen from this perspective, the project is a way of putting that conviction to work: seeking intelligible structures, examining what I provide in a design, and taking responsibility for its effects. The experiments establish what the software can do; this conviction helps explain why I undertake the work."
+          ],
+          "consequence": "What kind of source do I have in mind, and how does it give a direction to this responsibility?",
           "sources": [
-            { "label": "Matthew 5:14–16", "url": "https://bible.usccb.org/bible/matthew/5" }
+            {
+              "label": "Genesis 1:26–28",
+              "url": "https://www.esv.org/verses/Genesis%201%3A26-28/"
+            }
+          ]
+        },
+        {
+          "id": "christ-the-incarnate-logos",
+          "navTitle": "A personal answer",
+          "title": "Give that responsibility a direction",
+          "paragraphs": [
+            "For me, the answer takes its fullest form in Jesus Christ. John's Gospel presents him as the Logos, the Word through whom creation comes into being and who enters human life. I understand the source of reason and meaning as personal. In his life and Cross, I find a connection between truth and love, between power and service, and between knowing and caring.",
+            "Grace gives another part of the answer: a worth received before achievement, from which good work can grow. This is the Christian faith in which the threads of this reflection meet for me. It gives personal meaning to the dignity, responsibility, and service discussed along the way. The name Logos Engine acknowledges that connection; its design and consequences remain a human responsibility.",
+            "One hope that follows is to see more Christians develop real competence in the field of intelligence, make symbolic methods their own, and contribute through useful tools, teaching, and lasting institutions. I want this capacity to be shared widely, in collaboration with people working for the common good. That is how I hope to honor Christ through what I build."
+          ],
+          "consequenceLabel": "Returning to the work",
+          "consequence": "Build intelligence that people can understand and take responsibility for, develop the capability to make it useful, and pass that knowledge on in a spirit of service.",
+          "sources": [
+            {
+              "label": "John 1:1–5, 14",
+              "url": "https://bible.usccb.org/bible/john/1"
+            },
+            {
+              "label": "Colossians 1:15–20",
+              "url": "https://www.esv.org/verses/Colossians%201%3A15-20/"
+            },
+            {
+              "label": "Ephesians 2:8–10",
+              "url": "https://bible.usccb.org/bible/ephesians/2"
+            },
+            {
+              "label": "Mark 10:42–45",
+              "url": "https://bible.usccb.org/bible/mark/10"
+            }
           ]
         }
       ]
     }
   ],
   "closing": {
-    "title": "The work this faith calls me to do",
-    "text": "Receive intelligence with gratitude. Make its design understandable. Take responsibility for its effects. Develop real capability. Put that capability at the service of people, and pass it on. This is the direction I want SRA and Logos Engine to take.",
+    "title": "Continue with the project",
+    "text": "The pages that follow explore how these intentions take shape in a method, an architecture, and experiments you can examine for yourself.",
     "links": [
-      { "label": "Understand the method", "title": "Symbolic Reasoning", "href": "/symbolic-reasoning.html" },
-      { "label": "Follow the implementation", "title": "SRA Architecture", "href": "/architecture.html" },
-      { "label": "Explore the experiments", "title": "Playground", "href": "/" }
+      {
+        "label": "Understand the method",
+        "title": "Symbolic Reasoning",
+        "href": "/symbolic-reasoning.html"
+      },
+      {
+        "label": "Follow the implementation",
+        "title": "SRA Architecture",
+        "href": "/architecture.html"
+      },
+      {
+        "label": "Explore the experiments",
+        "title": "Playground",
+        "href": "/"
+      }
     ]
   }
 }
