@@ -11,7 +11,40 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v51):** the native common Logos Engine caller
+**Current integrated milestone (v52):** the native common Logos Engine caller
+completes **GARE's first three levels in 53 actions (7, 9, 37)** in one cold
+continuous session, with 53 actual Kernel acquisitions and two natural
+boundary replays. The [actual campaign](native-campaigns-v52/attempt9/gare-three-levels.json)
+stops at its declared target on entry to level 4 with `NOT_FINISHED`.
+No reset, level jump, learned-state import or Python agent module supplies
+the native trajectory.
+
+The newly connected `observed_framed_transfer` material entry and
+`observed_framed_analogy` window entry share one immutable
+`public_framed_transfer` owner. The default preserves the pinned original
+component. Explicit native extensions retain current point witnesses,
+bound ReductionTransport search as unknown, and acquire receptions visible
+inside actual public animation packets. A reception after a support settles
+retains contextual appearance identity and its signed displacement; those
+receipts stay excluded from the original directionless candidate generator.
+
+A current co-carried shape pair can then ask about an independently supported
+uniform receiver. Each preparation or reception question is measured again
+from current geometry and observed controls. Concurrent offset hypotheses
+remain explicit, ambiguous physical tasks are refused across the source and
+native domains, and every step still goes through ordinary WHY/ACT. No
+following route or successful outcome is assumed.
+
+The [browser verification](native-campaigns-v52/attempt9/gare-browser-verification.json)
+independently confirms 53 actions and three completed levels. Seven normal
+desktop samples retain the 442 px board column, 384 × 384 px canvas and
+98 px status, with zero position or dimension change. The compact UI files
+remain byte-identical to v51. Eight prior failed attempts remain under their
+own source manifests and do not inherit this result.
+See the [v52 report](v52-framed-transfer-and-public-packet-acquisition.md)
+for source-comparison scopes, native extensions and their qualifications.
+
+**Previous integrated milestone (v51):** the native common Logos Engine caller
 completes **VALV's first three levels in 28 actions (10, 10, 8)** in one cold
 continuous session, with 28 actual Kernel acquisitions and two natural boundary
 replays. The [actual campaign](native-campaigns-v51/valv-three-levels.json)
@@ -291,11 +324,13 @@ auxiliary support and native checkpoint report](v35-coupled-support.md), [the v3
 response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 42 of 76
-explicit DRM subquestions are connected (55.3%) in implementation
-`logos-engine.typescript.v6.native-migration/0.21.0`. This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 44 of 76
+explicit DRM subquestions are connected (57.9%) in implementation
+`logos-engine.typescript.v6.native-migration/0.22.0`. This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
-The v51 field-service connection adds one source entry, with no new native
+The v52 framed-transfer owner adds two source entries. Its explicit native
+binding, bounded-search, public-packet and current-prerequisite extensions add
+none to that denominator. The v51 field-service connection adds one source entry, with no new native
 priority rule. The v50 typed-material connection adds one source entry. The explicit native
 coordination of unresolved transient returns adds none; its evidence,
 disjointness and current inquiry guards are evaluated separately.
@@ -319,17 +354,15 @@ composition added one source entry, following the v38 cell-composition entry;
 the v37 performance step added none. All six conditions for a complete
 migration remain false.
 
-The next step is **`observed_framed_transfer`**: acquire actual point-motion
-spans and framed replacements, retain their evidence, and rebind the current
-supports before proposing conditional reception. The related
-`observed_framed_analogy` may be connected only when its acquired premises and
-current guards are represented. **GARE** is the declared next evaluation
-preference, aiming for at least three levels from a cold continuous session.
-The [read-only candidate note](native-campaigns-v51/candidate-selection.md)
-retains all 100 initial public measurements: GARE, LKEY and HANO have eligible
-parallel-band questions. The alternative exact-window screen admits no initial
-view and is preserved separately. Neither screen executes a game, a proposer,
-an action or a learned-memory acquisition; neither establishes GARE success.
+The next step is **`observed_outline_service`**: transfer actual outline-motion
+acquisition, interior-contrast evidence, current control rebinding and the
+source's conditional service questions. The
+[read-only candidate screening](native-campaigns-v52/candidate-selection.json)
+finds outlines in 57 of 100 retained initial views and a unique outline with
+an available declared direction in 30. None yet supplies the acquired control
+required by this cold source entry. The next evaluation game will therefore
+be selected after actual control acquisition. The screening executes no game,
+proposal, command or acquisition, and claims no next-game success.
 
 **Previous v42 result:** THER completes levels 1–4 in **4, 3, 4 and 4 actions**,
 15 total, six sealed prefixes and one retained session. The first two real

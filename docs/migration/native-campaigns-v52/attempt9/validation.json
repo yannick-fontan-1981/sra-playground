@@ -1,0 +1,2598 @@
+{
+  "schema": "logos-engine.v52.release-validation.v1",
+  "status": "passed",
+  "sourceDigest": "e32656de6ab64b0f6bdf8188e7bdeac06b4b3063c0bfb6d5531484cefb900f60",
+  "nativeSourceFiles": 181,
+  "nativeSourceManifest": {
+    "path": "docs/migration/native-campaigns-v52/attempt9/source-manifest.json",
+    "sha256": "41fc0e92d5dff6eb786807e676661819810fdc87839e8dafb03a459d9ad40de4",
+    "bytes": 21203
+  },
+  "newActualCampaign": {
+    "report": {
+      "path": "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json",
+      "sha256": "5f7e53a53a439851be3cb60fcb5d79d28c781ad49c968ded63efa479be6088f3",
+      "bytes": 52318713
+    },
+    "trace": {
+      "path": "docs/migration/native-campaigns-v52/attempt9/gare-public-trace.json.gz",
+      "sha256": "f903e2211a211e203b18356ddc12b29a1e63e0b8ab25cedfe3f7b42e6cd2a7f5",
+      "bytes": 39254
+    },
+    "actualExecution": {
+      "path": "docs/migration/native-campaigns-v52/attempt9/execution-gare.json",
+      "sha256": "9da201b5791e7ecd4fc32c983e2dde15976b0fc7167820c8c76215e888c81f2e",
+      "bytes": 46102
+    },
+    "actualPublicJournal": {
+      "path": "docs/migration/native-campaigns-v52/attempt9/gare-actual-public-journal.jsonl.gz",
+      "sha256": "15ba8fffb1d571f3f53fee9d1158c045a7987dd2a655654546ef7dfe505d8ed3",
+      "bytes": 28213
+    },
+    "journalMatchesCompleteTrace": true,
+    "actions": 53,
+    "prefixes": 53,
+    "levelsCompleted": 3,
+    "enteredLevel": 4,
+    "officialState": "NOT_FINISHED",
+    "perLevelActions": [
+      7,
+      9,
+      37
+    ],
+    "sessions": 1,
+    "commonCallerAcquiredTransitions": 53,
+    "boundaryReplays": 2,
+    "selectedFamilies": {
+      "public_framed_transfer": 38,
+      "public_occurrence_recall": 15
+    },
+    "framedOwnAcquiredEvents": 53,
+    "nativePointBindings": 8,
+    "boundedSearchRefusals": [
+      {
+        "prefixIndex": 16,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 7120,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1073,
+              "frontierEntries": 7119,
+              "generatedTransitions": 17732,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 7119,
+              "poppedEntries": 1073,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "a88fda3980a83ded",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:17:frame:a88fda3980a83ded",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 600,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:1811b36122c95bbcd87d268ef6f34679e96f7faa6c5fa75f7bd3587d3a6b8740",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:9781036680bba18290b28d052b41ab0da3fd33d8c522a9314607682378a82187",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 17,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 7090,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1103,
+              "frontierEntries": 7089,
+              "generatedTransitions": 17267,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 7089,
+              "poppedEntries": 1103,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "6ba4642831bc86eb",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:18:frame:6ba4642831bc86eb",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 599,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:a2c99d05733ed025db7f4f69c2176c3825386d6d5903d58c3915bdd5b9d4f23c",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:d103247b20e1d5d831bae404e3bd2a08e1775d25beff3be16f9176990ded5f77",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 20,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 7115,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1078,
+              "frontierEntries": 7114,
+              "generatedTransitions": 17733,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 7115,
+              "poppedEntries": 1078,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "1f9b2c4440aa14e5",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:21:frame:1f9b2c4440aa14e5",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 596,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:51d0d527f99a90c45bd67e095bc667fffc883d6da4e89ade2880a93b9cc63c81",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:14519712520ffb701b515e3a59094faa10dfee405c65c560f7a685b8bd7a6b8f",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 22,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 7113,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1080,
+              "frontierEntries": 7112,
+              "generatedTransitions": 17117,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 7112,
+              "poppedEntries": 1080,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "c4f08369ae84761e",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:23:frame:c4f08369ae84761e",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 594,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:1fe36689948cdae885d73a4d72d38850a35ff60250aa4b0d6a10412385aa34f9",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:e4f1a6a0eeab805c4bd66f304d693db658a5c3044bc308e4bdebb4b597efda30",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 24,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 7090,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1103,
+              "frontierEntries": 7089,
+              "generatedTransitions": 17267,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 7089,
+              "poppedEntries": 1103,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "bd4e0016aa60be17",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:25:frame:bd4e0016aa60be17",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 592,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:a2c99d05733ed025db7f4f69c2176c3825386d6d5903d58c3915bdd5b9d4f23c",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:d103247b20e1d5d831bae404e3bd2a08e1775d25beff3be16f9176990ded5f77",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 26,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 7118,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1075,
+              "frontierEntries": 7117,
+              "generatedTransitions": 17622,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 7117,
+              "poppedEntries": 1075,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "d7e01d3b6ba810ab",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:27:frame:d7e01d3b6ba810ab",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 590,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:684b59b4233996b59c6cbd92dbb60c42154a69f7b04241b147fb44c399944b03",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:bdbb8b7d3a208138bf526913e7c30f5ff3f5e8d614a7e4e3329eb4770d6c401a",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 27,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 7090,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1103,
+              "frontierEntries": 7089,
+              "generatedTransitions": 17267,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 7089,
+              "poppedEntries": 1103,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "bd4e0016aa60be17",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:28:frame:bd4e0016aa60be17",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 589,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:a2c99d05733ed025db7f4f69c2176c3825386d6d5903d58c3915bdd5b9d4f23c",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:d103247b20e1d5d831bae404e3bd2a08e1775d25beff3be16f9176990ded5f77",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 29,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 7035,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1158,
+              "frontierEntries": 7034,
+              "generatedTransitions": 17813,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 7035,
+              "poppedEntries": 1158,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "ba438c0a36b546ed",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:30:frame:ba438c0a36b546ed",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 587,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:58aecb2fa3e4d8a3e045db8fe5b9cf82d736df30036c26e882e40af26ec1500b",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:44e56af7bb59105d23f26a62a9f350af8a96a35422545d1e4528b00725d1cba9",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 31,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 6983,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1210,
+              "frontierEntries": 6982,
+              "generatedTransitions": 18319,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 6982,
+              "poppedEntries": 1210,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "f86758139c209f8a",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:32:frame:f86758139c209f8a",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 585,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:42b1ee56c8697affd843b6af6620e48fdd786fe855796eccfa9eb7b88d79ad54",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:e2b7098e70038f3dd36057f8228f85ff890eba785170bebdaffa684d2d6218ce",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 33,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 7085,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1108,
+              "frontierEntries": 7084,
+              "generatedTransitions": 17687,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 7084,
+              "poppedEntries": 1108,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "cd42870cb5da307e",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:34:frame:cd42870cb5da307e",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 583,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:e297e606d3607004dfe2c8bfa9e78562b7e0954be1abb1ca08719d256d711cb1",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:ee142a014f949e9522496a7f4ef357abf8dff147b4b25f656c7c7922afe7de00",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 35,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 7082,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1111,
+              "frontierEntries": 7081,
+              "generatedTransitions": 17758,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 7081,
+              "poppedEntries": 1111,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "3ddf93d5a22bc0c6",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:36:frame:3ddf93d5a22bc0c6",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 581,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:26437cba3674de7dfc033b6e795ba837b494eeb89c6ad21df9161423b1c1321c",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:54ec8955cc7db4ef09ed9d2d00846a98e2e066411ec265165536db40e598b98d",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 37,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 7075,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1118,
+              "frontierEntries": 7074,
+              "generatedTransitions": 17751,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 7074,
+              "poppedEntries": 1118,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "926298294a7f0d81",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:38:frame:926298294a7f0d81",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 579,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:68b5b381e2732849e5d9b723ac05e960832a0ec276b542e65882ffadcba6e617",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:3d3054981be309f28622e6af5b314b7812064b50bb53b7d3172e319c82b68230",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 39,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 7036,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1157,
+              "frontierEntries": 7035,
+              "generatedTransitions": 17878,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 7035,
+              "poppedEntries": 1157,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "807f4893f502650a",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:40:frame:807f4893f502650a",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 577,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:f63300d682cb20cdad9ee985efe1a287b52c44b610373cbb392c788e6c76dbe4",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:e2b25878984c91b15f79836c802f2364a3160d301b728db1cd9bf6a700350703",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 41,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 7000,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1193,
+              "frontierEntries": 6999,
+              "generatedTransitions": 18143,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 6999,
+              "poppedEntries": 1193,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "48203ed71685250f",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:42:frame:48203ed71685250f",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 575,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:c88936ff7027dddf6eb8db68355fe197da8fe4ea740a841254b1be99d2233ea5",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:51276730eb5ce5101364ab41d109e7fd58808e7a5f49bb50b1cc5a20327e8ea8",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 43,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 6934,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1259,
+              "frontierEntries": 6933,
+              "generatedTransitions": 19085,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 6933,
+              "poppedEntries": 1259,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "acea5b4018a6e30f",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:44:frame:acea5b4018a6e30f",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 573,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:1152e020f915b16ccc64f1ab12a4be1d575becd1f98248c7250c66d9235c0eae",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:0eb52e14621b223879bae3b8c90ca804d5bf310b87e0ef3d5b7aa3981366b7a6",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 45,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 6908,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1285,
+              "frontierEntries": 6907,
+              "generatedTransitions": 18801,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 6909,
+              "poppedEntries": 1285,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "7a2e0158de54d6eb",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:46:frame:7a2e0158de54d6eb",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 571,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:6ee5bb924ef50549976fc4a0939c8f5fffa6d80cb511062fbaf8a39f9530bf70",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:90cce1bb1e3db7cbf6dde4f65e758dbb77cbfff8bbbcfb8f49c97d7f3bbb4beb",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      },
+      {
+        "prefixIndex": 47,
+        "evidence": {
+          "entry": null,
+          "family": "reduction_transport",
+          "group": "factored_material_return",
+          "refusal": {
+            "blocked_insertion": {
+              "cost": 10,
+              "newState": true,
+              "requiredFrontierEntries": 6891,
+              "requiredStates": 8193
+            },
+            "bounds": {
+              "maximumFrontier": 16384,
+              "maximumStates": 8192
+            },
+            "completed_searches": [],
+            "counters": {
+              "expandedStates": 1302,
+              "frontierEntries": 6890,
+              "generatedTransitions": 18612,
+              "insertedEntries": 8192,
+              "peakFrontierEntries": 6890,
+              "poppedEntries": 1302,
+              "retainedStates": 8192,
+              "staleEntries": 0
+            },
+            "frame_hash": "f25d3307634a9347",
+            "level_epoch": 3,
+            "model": {
+              "floor": 5,
+              "height": 64,
+              "phase": [
+                3,
+                2
+              ],
+              "pitch": 5,
+              "rail": null,
+              "ring": null,
+              "token": 5,
+              "unit": 3,
+              "width": 64
+            },
+            "model_ref": "reduction_model:7c8ee0e2bc51e31a3fa17b38e0a73733e5f24eb23facc344afa18e6fd21b05fc",
+            "observation_ref": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc:epoch:3:revision:48:frame:f25d3307634a9347",
+            "owner_state_ref": "reduction_owner:8bf2b90cc797361e4b2acaba5dc7cf87e5da1a9b6d0a6907ca6a6a17090ffc6b",
+            "primitive_cost_limit": 569,
+            "provider": "reduction_transport",
+            "reached_bound": "maximum_states",
+            "release_authority": false,
+            "rule": "native.bounded_reduction_search",
+            "scene_ref": "reduction_scene:0f5a5ae6bcedebfb2b5c3cbdd1dde89b525a69eee720bd38c77ea2aa4ca90788",
+            "schema": "logos-engine.native.bounded-search-refusal.v1",
+            "scope": "The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.",
+            "search_phase": "goal",
+            "search_status": "resource_bound",
+            "searches_started": 1,
+            "state_ref": "reduction_state:a84e0d1ed25dbb38c7eb9e6c007286e55235e3c6dfad1b1defec1053b5d66a39",
+            "status": "unknown"
+          },
+          "source_state_ref": "family_state:reduction_transport"
+        }
+      }
+    ],
+    "completePublicPackets": 54,
+    "animationFramesIncludingInitial": 235,
+    "qualification": "One actual cold continuous native session. Native current-witness binding and resource-bounded abstention are explicit extensions; this is not complete original-caller parity or a full-game WIN."
+  },
+  "preservedFailuresAndDiagnostic": {
+    "failedAttempts": [
+      {
+        "attempt": 1,
+        "execution": {
+          "path": "docs/migration/native-campaigns-v52/logs/execution-gare-attempt1.json",
+          "sha256": "ecfbb2edfd4ccd70574b21a099012b5361facee7bcc23d8c66c0d5522f144a7c",
+          "bytes": 43655
+        },
+        "sourceManifest": {
+          "path": "docs/migration/native-campaigns-v52/source-manifest-attempt1.json",
+          "sha256": "1be9777d0d63c86781acc714fad2d1a9bc2103dd58d80d4979a6762a43d9a0aa",
+          "bytes": 20690
+        },
+        "exitCode": 1,
+        "report": {
+          "path": "docs/migration/native-campaigns-v52/gare-three-levels-attempt1.json",
+          "sha256": "50f66dd6e77d3aeaa03a195c4f60aba8bf6971b2a7fb82e9b59fc69fd06964e8",
+          "bytes": 22774
+        },
+        "trace": {
+          "path": "docs/migration/native-campaigns-v52/gare-public-trace-attempt1.json.gz",
+          "sha256": "cd287c56e2035321eaff75f564cbdc43e33708f9cf8862dff25fc6f99c64c68e",
+          "bytes": 681
+        },
+        "actions": 0,
+        "levelsCompleted": 0,
+        "completePublicPackets": 1,
+        "animationFramesIncludingInitial": 1
+      },
+      {
+        "attempt": 2,
+        "execution": {
+          "path": "docs/migration/native-campaigns-v52/logs/execution-gare-attempt2.json",
+          "sha256": "0b4c91009b99ea94ece170816ed05979ed392a785c8242596154262dc0d84f2f",
+          "bytes": 43661
+        },
+        "sourceManifest": {
+          "path": "docs/migration/native-campaigns-v52/source-manifest-attempt2.json",
+          "sha256": "07746bc75f4d8c37e90cd5923de9d7979bdc5da54f5ece50f156a8c63db6ad06",
+          "bytes": 20690
+        },
+        "exitCode": 1,
+        "report": {
+          "path": "docs/migration/native-campaigns-v52/gare-three-levels-attempt2.json",
+          "sha256": "197324672c850eae558f667cbd0ad1eb2c3435d2185831b299e715f3928d31c1",
+          "bytes": 3230715
+        },
+        "trace": {
+          "path": "docs/migration/native-campaigns-v52/gare-public-trace-attempt2.json.gz",
+          "sha256": "24440da44daf386377fe826af3e0ee9a0d32e1078daa3dc9187b532c0fbbc26f",
+          "bytes": 13783
+        },
+        "actions": 12,
+        "levelsCompleted": 1,
+        "completePublicPackets": 13,
+        "animationFramesIncludingInitial": 90
+      },
+      {
+        "attempt": 3,
+        "execution": {
+          "path": "docs/migration/native-campaigns-v52/logs/execution-gare-attempt3.json",
+          "sha256": "6c4d899a092420f1f4bece8d49bff5986f6e34f753cd9fe07617a5a342934584",
+          "bytes": 43251
+        },
+        "sourceManifest": {
+          "path": "docs/migration/native-campaigns-v52/source-manifest-attempt3.json",
+          "sha256": "96968fafdcc2289a68eb198a8a2edf24679b3062bf9534981b7d7086aaac924d",
+          "bytes": 20690
+        },
+        "exitCode": -6,
+        "actionsObservedInLog": 16,
+        "levelsObservedInLog": 2,
+        "finalCampaignReportAvailable": false
+      },
+      {
+        "attempt": 4,
+        "execution": {
+          "path": "docs/migration/native-campaigns-v52/logs/execution-gare.json",
+          "sha256": "3d676d7c8b153d10353a3576a63bbe32e5253ecc698a1eddbc02c654984c5eb1",
+          "bytes": 43616
+        },
+        "sourceManifest": {
+          "path": "docs/migration/native-campaigns-v52/source-manifest.json",
+          "sha256": "9d086b81fa6f783407626b443ab3c0ac3cbe4cfcc0cb550df3f2510b77712f42",
+          "bytes": 20690
+        },
+        "exitCode": 1,
+        "report": {
+          "path": "docs/migration/native-campaigns-v52/gare-three-levels.json",
+          "sha256": "9442003a153e87447b746927ea0b91379bdfa82f5b7ad3883c44cd24f56f55a7",
+          "bytes": 49097421
+        },
+        "trace": {
+          "path": "docs/migration/native-campaigns-v52/gare-public-trace.json.gz",
+          "sha256": "634e01d9b47b4a381e4f519f8a6685ad46ffbcc3ad55406b281f0aa349843d29",
+          "bytes": 50664
+        },
+        "actions": 77,
+        "levelsCompleted": 2,
+        "completePublicPackets": 78,
+        "animationFramesIncludingInitial": 293,
+        "originalComponentComparison": {
+          "path": "docs/migration/native-campaigns-v52/gare-attempt4-original-component-comparison.json",
+          "sha256": "f1b44af1fc67b1d9f925e3e226e854917d3dbb37c55e5ed248d00f5b72157388",
+          "bytes": 2382073
+        },
+        "sourceProposalsCompared": 62,
+        "sourceTransitionsCompared": 77,
+        "identityRecipes": 1675
+      }
+    ],
+    "strictSourceFailureComparison": {
+      "path": "docs/migration/native-campaigns-v52/gare-strict-attempt-comparison.json",
+      "sha256": "16769d10ef8c0c067ce5bc3a9bddff0b37caad7b3b4725a9d70fee4586e6deed",
+      "bytes": 1321
+    },
+    "instrumentedDiagnostic": {
+      "path": "docs/migration/native-campaigns-v52/diagnostic-memory/execution.json",
+      "sha256": "335f2e3d0519dccc6ee7e3eca4960fc13567379a30545a06eab083701996719c",
+      "bytes": 44367
+    },
+    "diagnosticCompletePublicPackets": 17,
+    "diagnosticAcquiredTransitions": 16,
+    "diagnosticLevelsCompleted": 2,
+    "diagnosticPrefixMatchesFourthAttemptPublicPackets": 17,
+    "diagnosticOriginalComponentReplay": {
+      "sourceComponent": "FramedTransfer",
+      "publicTransitionsCompared": 16,
+      "selectedProposalsCompared": 16,
+      "ownEventsCompared": 16,
+      "completeStatesCompared": 16,
+      "stateSha256": [
+        "ae56bdd9174854deb38fe7e1b4448bb014c1b1459e58cd9cb21ee8f24b87cc98",
+        "4210131f26badc7cac0dbc502fb5b39b5ff56ebbeadf64cf9cd44bed93e2c278",
+        "af114623bbd637d062ede54a860815b095bbbbcf7397674f2b75fcb59b8a9b24",
+        "4a7f629604eeddd3bb973a51688f516d93be37bc368db121f9f35ba477570682",
+        "f292f64f400b6b80b0c48c5cd22a970daf3570ed3d5795cb536ce823fb703b35",
+        "de71d6f8ebfdd7c9061b708d4b86e6d8d7798c796e5c61bb5ccb7b8c03cec282",
+        "78e4f90d77e88212aa744760758697ff37e73130d2fe9ace00365e993d7d14ca",
+        "9ae5138bb84797bcaee5068a7079ec9dc20a8a8a9f49ff6c2a378067f384b68e",
+        "c4be7b62f46d792638a3d1329e996051e31f08ce4ca11fc2278259a57c3d6dd6",
+        "99b2d00c67820081d427012900dd3e90e5cbdf543a345cae9ca9a017959c1403",
+        "1a923b836a0e6bfc317c9e675bf563cf96df46ea1901b939cbe9ffa58755ee75",
+        "bc1df43b8462ca6e876cd4c2b9ed1a642f5c920890e794f5ca9f34db4dc9bbfc",
+        "a37b97c0adbdba64085e0020dd342968019fafe4eecef5967e9d714d5aeace25",
+        "8f58465af798c05d20981cd082089210c3ad15afdc3831121d693d164dd9715e",
+        "c5249d5244ff974177c49045d14a2eb3414c4efbff36540a5b7de419c694c8e4",
+        "ef69f67665bb5ba78ac7385dd1f7f9f5ba1f4e722efb80a0e5c5ab9e782183cb"
+      ],
+      "nativeBindingExtensions": 1,
+      "explicitGuardDifferences": [
+        {
+          "actionIndex": 13,
+          "sourceGuard": {
+            "admitted": false,
+            "reason": "current_parallel_support_and_payload"
+          },
+          "nativeBindingReceipt": {
+            "schema": "logos-engine.native.current-point-binding.v1",
+            "rule": "native.current_framed_point_witness",
+            "source_guard": {
+              "admitted": false,
+              "reason": "current_parallel_support_and_payload"
+            },
+            "observation_ref": "sra-v6-7407f888-6abe-497c-941d-d10d3761b80d:epoch:2:revision:13:frame:5745f55fe853d767",
+            "level_epoch": 2,
+            "frame_hash": "5745f55fe853d767",
+            "current_description_count": 2,
+            "current_component_refs": [
+              "block.shape_1x15.area_15.pattern_b26e3393.instance_001",
+              "point_region:29670bd275792fa0cda76a80b8d391cdbb6fa9103ecebaca75a0d757d72274c1"
+            ],
+            "selected_component_ref": "point_region:29670bd275792fa0cda76a80b8d391cdbb6fa9103ecebaca75a0d757d72274c1",
+            "selected_current_bindings": 1,
+            "same_physical_point": true,
+            "point_binding_current": true,
+            "physical_command": {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 54,
+                "y": 13
+              }
+            },
+            "release_authority": false,
+            "expected_effect_status": "unknown",
+            "qualification": "current_public_binding_only_no_effect_claim"
+          }
+        }
+      ],
+      "pinnedSourceFilesVerifiedBeforeAndAfter": 1786,
+      "sourceModified": false,
+      "originalCallerSearchRun": false,
+      "gameHostRun": false,
+      "nativeAgentRun": false
+    },
+    "sourceReductionMeasurement": {
+      "path": "docs/migration/native-campaigns-v52/diagnostic-memory/reduction-scene-original.json",
+      "sha256": "afa63fbf7bd9bb18a0c0e59bcc6e051f8b9f9a1058b5b097f9fa587a73ebb496",
+      "bytes": 164348
+    },
+    "qualification": "Initialization failure, strict uniqueness refusal, OOM and the fourth active-time-budget failure are preserved separately. The instrumented journal ends after sixteen acquired public returns and two levels, with no final success report. Its reduction invariants do not prove a one-peg goal impossible. The fourth target-three campaign remains failed after seventy-seven acquired actions and two levels."
+  },
+  "coldStartDiagnostic": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v52/cold-start-v51.json",
+      "sha256": "e3d9ce2cb48cdef81f0020c1125938ba0095b5374f2cdeeb814f7dc6bdab6b03",
+      "bytes": 237581
+    },
+    "sourceCommit": "9fb19f769f4920808ddaabf8ba73c07e5a125d0f",
+    "proposedCommand": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 19,
+        "y": 13
+      }
+    },
+    "selectedProvider": "information_goal",
+    "dispatchedActions": 0,
+    "qualification": "Read-only initial planning on the published v51 bytes. It proves neither an effect nor a completed level."
+  },
+  "componentComparisons": {
+    "framed": {
+      "path": "docs/migration/native-campaigns-v52/attempt9/framed-transfer-original-comparison.json",
+      "sha256": "089f8f9b0e289b3c4f067324f4b0a2721bf2f65bd8378aa2a16aeb7606759090",
+      "bytes": 5001592
+    },
+    "serviceReplay": {
+      "path": "docs/migration/native-campaigns-v52/attempt9/valv-service-original-component-comparison.json",
+      "sha256": "cb7b26911d930f13962cf239c9b9c86efcbb7ca563cdc0ca57f67f576adc47b0",
+      "bytes": 167253
+    },
+    "readOnlySourceRecomputations": 2,
+    "framedOwnIdentityRecipes": 2103,
+    "framedFixtureIdentityRecipes": 8769,
+    "serviceReplayIdentityRecipes": 240,
+    "framedContracts": {
+      "geometry": 141,
+      "policy": 52,
+      "memoryAndGuards": 78,
+      "initialPublicViews": 100
+    },
+    "qualification": "Both Python comparators are recomputed unchanged without a game or native execution. Strict source proposals remain explicit counterfactuals; actual proposals and guards may use separately declared native questions. Original acquisitions, independent native annex acquisitions and qualified identities are checked in their stated domains without promoting a native extension to source parity."
+  },
+  "independentExtensionContracts": {
+    "comparisons": {
+      "phased": {
+        "comparison": {
+          "path": "docs/migration/native-campaigns-v52/attempt9/phased-reception-contract-comparison.json",
+          "sha256": "d5d5df4025ef633f09db35e8ee015bdcc2202f68e5163f1267d755ac92e38b80",
+          "bytes": 100798
+        },
+        "reference": {
+          "path": "docs/migration/native-campaigns-v52/attempt9/phased-reception-contract-reference.json.gz",
+          "sha256": "30a3b51f768b774299d0670f0c2ddde571ef7c885011cb27216b0ec4243c3d75",
+          "bytes": 31116
+        },
+        "retainedNativeOutput": {
+          "path": "docs/migration/native-campaigns-v52/attempt9/phased-reception-contract-native.json.gz",
+          "sha256": "58b1db158f579303551fdb955d16f559c8d7a6b6ad17be230045f1ff56b088f5",
+          "bytes": 5194
+        },
+        "summary": {
+          "stationaryReceipts": 3,
+          "phasedDirectedOnlyReceipts": 1,
+          "stationaryWork": 432,
+          "phasedWork": 981,
+          "originalSrcRecordProjections": 4
+        }
+      },
+      "directed": {
+        "comparison": {
+          "path": "docs/migration/native-campaigns-v52/attempt9/directed-composition-contract-comparison.json",
+          "sha256": "1554ece897c34e371897906aaa5e71aa56312c85792a01c7431885c643ad494d",
+          "bytes": 106678
+        },
+        "reference": {
+          "path": "docs/migration/native-campaigns-v52/attempt9/directed-composition-contract-reference.json.gz",
+          "sha256": "ae74daf2222d2078a09feaca57155154adf2fbc2bf9cc01ae50ec0e9cab8376c",
+          "bytes": 335544
+        },
+        "retainedNativeOutput": {
+          "path": "docs/migration/native-campaigns-v52/attempt9/directed-composition-contract-native.json.gz",
+          "sha256": "01515b058ad3ecfdf891f827f1c5652074aa28c2c6a22620aef25380be7c6cc5",
+          "bytes": 190490
+        },
+        "summary": {
+          "controlledQueries": 4,
+          "queries": [
+            {
+              "afterActualAction": 9,
+              "directedOffers": 0,
+              "command": {
+                "action_ref": "ACTION6",
+                "data": {
+                  "x": 6,
+                  "y": 23
+                }
+              },
+              "strictSourceGuard": {
+                "admitted": true,
+                "reason": "current_parallel_support_and_payload"
+              },
+              "nativeGuardReason": "current_parallel_support_and_payload"
+            },
+            {
+              "afterActualAction": 17,
+              "directedOffers": 0,
+              "command": {
+                "action_ref": "ACTION6",
+                "data": {
+                  "x": 51,
+                  "y": 43
+                }
+              },
+              "strictSourceGuard": {
+                "admitted": true,
+                "reason": "current_parallel_support_and_payload"
+              },
+              "nativeGuardReason": "native_current_uniform_reception_question_bound"
+            },
+            {
+              "afterActualAction": 49,
+              "directedOffers": 3,
+              "command": {
+                "action_ref": "ACTION6",
+                "data": {
+                  "x": 14,
+                  "y": 33
+                }
+              },
+              "strictSourceGuard": {
+                "admitted": false,
+                "reason": "current_parallel_support_and_payload"
+              },
+              "nativeGuardReason": "native_current_directed_receiver_composition_bound"
+            },
+            {
+              "afterActualAction": 51,
+              "directedOffers": 3,
+              "command": {
+                "action_ref": "ACTION6",
+                "data": {
+                  "x": 41,
+                  "y": 33
+                }
+              },
+              "strictSourceGuard": {
+                "admitted": false,
+                "reason": "current_parallel_support_and_payload"
+              },
+              "nativeGuardReason": "native_current_directed_receiver_composition_bound"
+            }
+          ]
+        }
+      }
+    },
+    "sourceRecomputations": 2,
+    "newGameHostRuns": 0,
+    "newPhysicalActions": 0,
+    "newCompletedLevels": 0,
+    "qualification": "Separate frozen helper comparisons of actual retained public inputs. Their restored checkpoint queries validate component construction and guards, never a new cold campaign or a solved level."
+  },
+  "deltaTests": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v52/attempt9/validation/delta-tests-run.json",
+      "sha256": "4e94da9460225d135c15e63dbf43608de4b9733695f69138a2bdf533eca0d88a",
+      "bytes": 94283
+    },
+    "counts": {
+      "tests": 728,
+      "pass": 728,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "testFiles": 23,
+    "topLevelTests": 540,
+    "nestedTests": 188,
+    "sourceAndTestInputsUnchanged": true,
+    "qualification": "One frozen targeted execution; counts and unique scoped identities are recomputed from the retained complete TAP log. This is not the historical full suite."
+  },
+  "regressions": {
+    "summary": {
+      "path": "docs/migration/native-campaigns-v52/attempt9/regression-summary.json",
+      "sha256": "18cd23d3c4c5d636bf99ec51c04906230f8ea36393d9d9b9a79da1e7b03c1ded",
+      "bytes": 7388
+    },
+    "groups": [
+      {
+        "mode": "recorded-public-replay",
+        "runs": 8,
+        "passed": true,
+        "commands": 369,
+        "completePublicPackets": 377,
+        "prefixes": 262,
+        "comparisonChecks": 151,
+        "games": [
+          "STCK",
+          "CATL",
+          "SELE",
+          "COLM",
+          "ZIPP",
+          "GRIL",
+          "LIFE",
+          "VALV"
+        ]
+      },
+      {
+        "mode": "actual-game-campaign",
+        "runs": 0,
+        "passed": true,
+        "commands": 0,
+        "completePublicPackets": 0,
+        "prefixes": 0,
+        "comparisonChecks": 0,
+        "games": []
+      }
+    ],
+    "results": [
+      {
+        "game": "STCK",
+        "commands": 35,
+        "completePublicPackets": 36,
+        "prefixes": 15,
+        "comparisonChecks": 19,
+        "levelsCompleted": 3,
+        "officialState": "NOT_FINISHED"
+      },
+      {
+        "game": "CATL",
+        "commands": 48,
+        "completePublicPackets": 49,
+        "prefixes": 48,
+        "comparisonChecks": 19,
+        "levelsCompleted": 6,
+        "officialState": "WIN"
+      },
+      {
+        "game": "SELE",
+        "commands": 44,
+        "completePublicPackets": 45,
+        "prefixes": 44,
+        "comparisonChecks": 19,
+        "levelsCompleted": 3,
+        "officialState": "NOT_FINISHED"
+      },
+      {
+        "game": "COLM",
+        "commands": 45,
+        "completePublicPackets": 46,
+        "prefixes": 21,
+        "comparisonChecks": 19,
+        "levelsCompleted": 3,
+        "officialState": "NOT_FINISHED"
+      },
+      {
+        "game": "ZIPP",
+        "commands": 101,
+        "completePublicPackets": 102,
+        "prefixes": 40,
+        "comparisonChecks": 19,
+        "levelsCompleted": 6,
+        "officialState": "WIN"
+      },
+      {
+        "game": "GRIL",
+        "commands": 19,
+        "completePublicPackets": 20,
+        "prefixes": 19,
+        "comparisonChecks": 19,
+        "levelsCompleted": 3,
+        "officialState": "NOT_FINISHED"
+      },
+      {
+        "game": "LIFE",
+        "commands": 49,
+        "completePublicPackets": 50,
+        "prefixes": 47,
+        "comparisonChecks": 19,
+        "levelsCompleted": 3,
+        "officialState": "NOT_FINISHED"
+      },
+      {
+        "game": "VALV",
+        "commands": 28,
+        "completePublicPackets": 29,
+        "prefixes": 28,
+        "comparisonChecks": 18,
+        "levelsCompleted": 3,
+        "officialState": "NOT_FINISHED"
+      }
+    ],
+    "qualification": "Eight cold native recalculations consume previously retained complete public returns. They are regressions, not eight new live victories or speed comparisons."
+  },
+  "checks": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v52/attempt9/validation/checks-run.json",
+      "sha256": "bdfcf84a162ad326fdfc08dbd41059d49ac695fbed69499af7b80452ce618ace",
+      "bytes": 74326
+    },
+    "nativeAgentWorker": {
+      "path": "dist/assets/v6-agent-worker-CcB8trzr.js",
+      "sha256": "7e6a0caf881c5657389bb0d5b62fee58ec29b23bcad21592c12abdc24809655e",
+      "bytes": 5671382
+    }
+  },
+  "browser": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v52/attempt9/gare-browser-verification.json",
+      "sha256": "c6cdaba9f65713eeced536e2fe9a2a0f1b6965bf8e440ac0ef3a22af851914a0",
+      "bytes": 9959
+    },
+    "measurements": 7,
+    "layout": {
+      "viewport": {
+        "height": 936,
+        "width": 1363
+      },
+      "boardColumnHeight": 442,
+      "canvasHeight": 384,
+      "canvasWidth": 384,
+      "statusHeight": 98,
+      "maxDocumentPositionDeltaPx": 0,
+      "maxDimensionDeltaPx": 0,
+      "selectors": [
+        ".board-column",
+        "#canvas-stage",
+        "#game-canvas",
+        "#agent-message",
+        "#agent-run"
+      ],
+      "inspectionClosedThroughout": true
+    },
+    "sampledCounters": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        7,
+        1,
+        7
+      ],
+      [
+        7,
+        1,
+        7
+      ],
+      [
+        16,
+        2,
+        16
+      ],
+      [
+        16,
+        2,
+        16
+      ],
+      [
+        53,
+        3,
+        53
+      ]
+    ],
+    "completedLevels": 3,
+    "actions": 53,
+    "prefixes": 53,
+    "captureProperties": {
+      "format": "JPEG",
+      "width": 1348,
+      "height": 926
+    },
+    "qualification": "Seven observed desktop samples have identical document rectangles with inspection closed. This is not per-frame, fullscreen or mobile validation."
+  },
+  "progress": {
+    "connected": 44,
+    "declared": 76,
+    "percent": 57.9,
+    "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
+    "entryAudit": {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "sha256": "8c6b454707eae08ed285d9d03daa246eae62f4cfdbdfc746359a89d3f774cb5f",
+      "bytes": 16202
+    },
+    "migrationAudit": {
+      "path": "docs/migration/v6-coverage.json",
+      "sha256": "dca8a0934775a227b4f8c1cc36980ffebf16babed9a00f5106ec81fee66ce05e",
+      "bytes": 2425235
+    },
+    "qualification": "Registered questions in four fixed source DRM lists. This percentage is not code-volume progress, a game success rate, full original caller parity or complete migration."
+  },
+  "historicalV51Evidence": {
+    "commit": "9fb19f769f4920808ddaabf8ba73c07e5a125d0f",
+    "filesVerified": 88,
+    "unchanged": true,
+    "files": {
+      "docs/migration/native-campaigns-v51/candidate-selection.json": {
+        "gitObject": "eba97a8a4cce4cb989b4ba71c474d93f4710f62f",
+        "sha256": "f437a571c635f969e167936fcfb4a9c6c803b93e9a6cec45ecbe4b03f31cb526",
+        "bytes": 120554
+      },
+      "docs/migration/native-campaigns-v51/candidate-selection.md": {
+        "gitObject": "549e00dfa6a09900bc0bf7bcce621d62b8a3c7ce",
+        "sha256": "ca8e6c0d0de673c1d6a6698ecba1a604e929e8d5d371c2f9bbcb1af6f4fb0351",
+        "bytes": 5217
+      },
+      "docs/migration/native-campaigns-v51/catl-recorded-public-replay.json": {
+        "gitObject": "d9736e90e26d0eec5702d7fd6fe10cb595369080",
+        "sha256": "55914bb978d1bef4072054535d84b60366cf04913763f97268d4122407067953",
+        "bytes": 3913833
+      },
+      "docs/migration/native-campaigns-v51/catl-regression-comparison.json": {
+        "gitObject": "6f7295e7a0100bb3c80ae76f88671eff500c5a71",
+        "sha256": "c9942201ff74f07675ee952d5a3c9d07820c9d606940358357154eac2fb56ad8",
+        "bytes": 4965
+      },
+      "docs/migration/native-campaigns-v51/cold-start-v50.json": {
+        "gitObject": "79a9ac27c0334d58dc7f0d45d25688d0ae270e9e",
+        "sha256": "1396db35567a85dd62f886b3e8f25ebe79de0e0f3a901cd5f2791da1d9e22a71",
+        "bytes": 246646
+      },
+      "docs/migration/native-campaigns-v51/colm-recorded-public-replay.json": {
+        "gitObject": "d6a1968a86d2b7d777bafd235339ae074da45b8f",
+        "sha256": "b98915e0f666224480edd512396946e462af7e93af84d0584d698711fdaa7c51",
+        "bytes": 1536850
+      },
+      "docs/migration/native-campaigns-v51/colm-regression-comparison.json": {
+        "gitObject": "47f37939391530cd99fe707d9842c7463942388b",
+        "sha256": "20757613651f442606effbd5a2d14cfad640c93b1a2339db741ef30040dfd178",
+        "bytes": 15962
+      },
+      "docs/migration/native-campaigns-v51/framed-transfer-candidate-selection.json": {
+        "gitObject": "fab218e73827a97028a1e1106f93e3719b30e4d8",
+        "sha256": "1d42b7c228b12d0f4ec0d9b7298e8441531dcc9380f41f2d1e82a4813d79b174",
+        "bytes": 136228
+      },
+      "docs/migration/native-campaigns-v51/gril-recorded-public-replay.json": {
+        "gitObject": "6b3902222218b28ac372ecc0e4c19c85bae48ed0",
+        "sha256": "67352bc1a3d7ce96dbf4f7f0b0250ab1b88be4e6a5c586b03bdd4d4a83fc31c9",
+        "bytes": 5868153
+      },
+      "docs/migration/native-campaigns-v51/gril-regression-comparison.json": {
+        "gitObject": "7390c26fccde41091265784e04e8560891dd3b67",
+        "sha256": "fd6ee799dad7213aafeba21d320c8937aae6f719cd64195cdb5c0570afcddb74",
+        "bytes": 28991
+      },
+      "docs/migration/native-campaigns-v51/life-recorded-public-replay.json": {
+        "gitObject": "131315cd5d14c59d3889ab0c66302e77068769ee",
+        "sha256": "910ebe12ef24d28b6905fc2b2085973ec0bc150e4266276da33e2857533296c2",
+        "bytes": 3281145
+      },
+      "docs/migration/native-campaigns-v51/life-regression-comparison.json": {
+        "gitObject": "31c145b64e6d4cd39057847cfce9198c9dc3c3fd",
+        "sha256": "e9e65f7bd69ab7cbc69c5a5bf729ecf25760e5ba75d6c81f83b711216487bc1d",
+        "bytes": 129247
+      },
+      "docs/migration/native-campaigns-v51/logs/comparison-catl-receipt.json": {
+        "gitObject": "a0689b170a44cba7e0af66984513e4dedf4a852c",
+        "sha256": "b0043ddef6ad06c7651bcf54f5e8cce4f6f4e566831c634e5ae7d27129e94a28",
+        "bytes": 44249
+      },
+      "docs/migration/native-campaigns-v51/logs/comparison-colm-receipt.json": {
+        "gitObject": "32a9f8e17b97943bb07bcbc25a8a3bc0cbb384d5",
+        "sha256": "34cd06e2e6cbe81b2c44cedf71f20b0dc570571c98aa112cba78faa704bbb731",
+        "bytes": 44254
+      },
+      "docs/migration/native-campaigns-v51/logs/comparison-gril-receipt.json": {
+        "gitObject": "265b7b560dd681e8a5181cad3efa81034f6a2ce8",
+        "sha256": "95abebfd896c65ea4fb7e7d5fcc13be09db57287794ba9a487f7eff04b69bafa",
+        "bytes": 44254
+      },
+      "docs/migration/native-campaigns-v51/logs/comparison-life-receipt.json": {
+        "gitObject": "3ca1001887d976cd95bfca40cf8b3158a5e2c667",
+        "sha256": "176e51e844fed7ebb4418a8c3d7e6cc705b54c673a4ff5df6691e170755ee4dc",
+        "bytes": 44264
+      },
+      "docs/migration/native-campaigns-v51/logs/comparison-sele-receipt.json": {
+        "gitObject": "a5c6bb3453f2581556a306235c02f9a01af82404",
+        "sha256": "7a5b599385cd7fa27cf81b6d1fd57ec0c93992f2019d665f28af862c2d437028",
+        "bytes": 44253
+      },
+      "docs/migration/native-campaigns-v51/logs/comparison-stck-receipt.json": {
+        "gitObject": "71a542f842f42ecbada1eb9c52cbf8e08f02c876",
+        "sha256": "57c7d4bf0cc68722082a0afae5bb8163c1225f5d00efc943a3eeeff1de661c43",
+        "bytes": 44251
+      },
+      "docs/migration/native-campaigns-v51/logs/comparison-zipp-receipt.json": {
+        "gitObject": "bcd409fa84314bd3ba387c4ef2d59e28c7c75120",
+        "sha256": "c3322dda1b7f746ec76c1f956ca55017b2b4d7a35f29940ecf7ae90f4217b062",
+        "bytes": 44252
+      },
+      "docs/migration/native-campaigns-v51/logs/execution-valv.json": {
+        "gitObject": "174fd4ba9cee9e6c410417752e8d2e4fba4a7ef8",
+        "sha256": "e553b3129e44201ec7a51f04ed3a7753eb3ccfbbf6e638da57c13c935c477f20",
+        "bytes": 42380
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-catl-output.log.gz": {
+        "gitObject": "88e525345fe07faa9575ce98e076fbe4601c2463",
+        "sha256": "2fea3dcc37d89de6f5a9fda72cf82e538e781fb5a9851b3adb030922ddb77499",
+        "bytes": 6112
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-catl-receipt.json": {
+        "gitObject": "8cb33efcc9f50ebbf7548e2f39443a99b0f1f59b",
+        "sha256": "ea4b21d399daf661c31adcb8a318210c62d0d46c1953a0263f1599284e0a55ea",
+        "bytes": 93597
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-colm-output.log.gz": {
+        "gitObject": "1865110cce5ac9a6ef6c9a870e1d8f8b7cb564dd",
+        "sha256": "48e4a37c6fead708954d980492ba5a6ab7711d18ad2fbc8b0d0409cb8dcb3e8e",
+        "bytes": 4123
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-colm-receipt.json": {
+        "gitObject": "4c842f07ffa04968579867601ff6d3f0b3e0c85f",
+        "sha256": "99dc82368c251425f45b5b0ae7d6deb0da5b46c77f71a02998a76072a22151eb",
+        "bytes": 93613
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-comparison-catl-output.log.gz": {
+        "gitObject": "152ae91cc6f549b608944e00f0054a6f1638b6dc",
+        "sha256": "fc27f0f262503e6fc72d9bd8e8c5b607b7377f4c789ca854559c687d74063bdd",
+        "bytes": 109
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-comparison-colm-output.log.gz": {
+        "gitObject": "c3e739655bf61b85d76e86ccba5b1d4912f90dc6",
+        "sha256": "a2d84dd57cab6bf79e4281beac54c01d6b72e587c0548de932a1e6c6b64945c3",
+        "bytes": 112
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-comparison-gril-output.log.gz": {
+        "gitObject": "b43007114a7edd7eb4e848f272efbcc128b150bb",
+        "sha256": "6753b3532e09f4f36830774b45d809e752239cb12ae727fef2665b34116ffa2c",
+        "bytes": 107
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-comparison-life-output.log.gz": {
+        "gitObject": "1d81f69f9bb070279d695c251986e188c1c3ffe0",
+        "sha256": "c319ae40c46d568383e5af1f2d2257d742381b49a7896a25c34fa9e54c2f580f",
+        "bytes": 111
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-comparison-sele-output.log.gz": {
+        "gitObject": "526f2cdad36de2012841e85d6aa5d458a7c267ba",
+        "sha256": "e70b8fcb7ea84594a44f0a11b0b37d271a0cf5ce42976af506bbddc0fcea1e7a",
+        "bytes": 110
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-comparison-stck-output.log.gz": {
+        "gitObject": "8696215691109ef05165d6e63efba0ab3c8e7784",
+        "sha256": "69bf498c036047c7daac76879e71bf1526cd3917bfadd05d961976b07c6e598e",
+        "bytes": 111
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-comparison-zipp-output.log.gz": {
+        "gitObject": "037647b56b9773324b4e0eb0787785ecd49e1c3d",
+        "sha256": "af459b8a73cbd9ae8251c3ecc7a9604906f276e28f43bbb8d0751855ed9adecb",
+        "bytes": 112
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-gril-output.log.gz": {
+        "gitObject": "7876a64565c83c7d1fa7c80c4d60b1cfdbb81357",
+        "sha256": "a088bf19af2b6c1916bf40f017a90ec43fb7378dc7da1d86ae7d67cefa1845ac",
+        "bytes": 3052
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-gril-receipt.json": {
+        "gitObject": "794c47e89d53b2df1b907d73c6d503714400c857",
+        "sha256": "8718886b9ad8e478d6aee7869a57c4fb0ae56ae1352bd8554a7d8054aa1ee31a",
+        "bytes": 93615
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-life-output.log.gz": {
+        "gitObject": "739333a847efd3a5f41cc5223e2f20f2215bca3f",
+        "sha256": "6e25a236514821838ae6f7351b07106f89d8b5fdfc15c9e0e18be40a2f1f883b",
+        "bytes": 5993
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-life-receipt.json": {
+        "gitObject": "44fcf4ecad3fe7035a3f9ef6a6f6e032ec4ac1db",
+        "sha256": "01dedf3617bcfffaf24762703a6c69e970a6b382c837d661df3ab0376450e8a8",
+        "bytes": 93648
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-sele-output.log.gz": {
+        "gitObject": "d623f2825fe553b1307b92b24771aa791d83c314",
+        "sha256": "56628b5e47dc36cbcd84374f10c4dc211a8be9b363800a36773d9976d0f51533",
+        "bytes": 5392
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-sele-receipt.json": {
+        "gitObject": "a21ecd739026d4844005717aa3b38e1c61f7426e",
+        "sha256": "7483bd35948cabbfd21b755d645250c3526ca9083501320795fc95fc27a46950",
+        "bytes": 93612
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-stck-output.log.gz": {
+        "gitObject": "d12f38991ddf47349b5964cb19e37fd26a1d9018",
+        "sha256": "32d2cc6c7f703c17a4d8a30adc84919828a1d04f695a82b699a83ff4768ada7d",
+        "bytes": 3421
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-stck-receipt.json": {
+        "gitObject": "f7709cba97b147431f71d8ed758452f6615d407e",
+        "sha256": "a710a94a41af8792e8c745c0c4101c942137037bf2f07b63b166f2d3c3e769d1",
+        "bytes": 93608
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-zipp-output.log.gz": {
+        "gitObject": "ee4281417cc81d74062831d18b3ea55106d1346a",
+        "sha256": "3b5039aaaa6617d92d865d3a79801d4b7719a7302b31ac7da4480d43cc2363f6",
+        "bytes": 7851
+      },
+      "docs/migration/native-campaigns-v51/logs/regression-zipp-receipt.json": {
+        "gitObject": "59ea8d1354ec9a6868c864793a22f0a07c717837",
+        "sha256": "3a878573d2fcc166eb88daee2b29d92f9f1766cdb2918732fb680777bf39e58a",
+        "bytes": 93605
+      },
+      "docs/migration/native-campaigns-v51/logs/valv-output.log.gz": {
+        "gitObject": "44a2058cbc58055626dd0a1d7781d339d6dc7bbc",
+        "sha256": "199c2af8a348d18c82cfb90a16b9d911850cdc0c47ef95ec45613e24e1484218",
+        "bytes": 4108
+      },
+      "docs/migration/native-campaigns-v51/regression-plan.json": {
+        "gitObject": "b2a13a2da567269a5b11eff599e2f043a3750177",
+        "sha256": "08bbd8d73a5b459507f9645ec88673f71e9485552246872c4f0b1e7156d01597",
+        "bytes": 12889
+      },
+      "docs/migration/native-campaigns-v51/regression-summary.json": {
+        "gitObject": "3f3e969c374d9d9d5569ac16368f537ce98723e9",
+        "sha256": "283cddbbafbc9d16583a27c5c706dd16a2dcf55efa10aca5a83a3f70b564fa80",
+        "bytes": 6463
+      },
+      "docs/migration/native-campaigns-v51/regression-verification.json": {
+        "gitObject": "7b70195a80e330315861a485568fadd8259624a7",
+        "sha256": "c303c52776d9bb20d7c4bb299f93defbdd37825216efa727406636775408b4c2",
+        "bytes": 723322
+      },
+      "docs/migration/native-campaigns-v51/sele-recorded-public-replay.json": {
+        "gitObject": "66ded5e18e285c89aeacbcbbdd4c20becc996882",
+        "sha256": "d1ac60d5ccb0116c938d721f5c892ab573449c358592906cc542cd4b7e360e15",
+        "bytes": 3991677
+      },
+      "docs/migration/native-campaigns-v51/sele-regression-comparison.json": {
+        "gitObject": "9ec42799bd0472c4ea1b9efe1fdd1a4325cc7165",
+        "sha256": "bc05699d1f194583ab319fd15ea7fd757ff007742440d577190d3ca8927a1303",
+        "bytes": 4967
+      },
+      "docs/migration/native-campaigns-v51/source-manifest.json": {
+        "gitObject": "91d1e98e27a95262193a53e7a435c241a70aab22",
+        "sha256": "6fa8116a39f05923f3926e32b6ccd74a9ca9dd11cef754466e079892a4a4e874",
+        "bytes": 20082
+      },
+      "docs/migration/native-campaigns-v51/stck-recorded-public-replay.json": {
+        "gitObject": "3c03a3d7aa4ccbb542ec92382870be72277f9c91",
+        "sha256": "60710928520930f429be34efb61ceed9d71c9bf08bfe81af37a159854d614517",
+        "bytes": 205276
+      },
+      "docs/migration/native-campaigns-v51/stck-regression-comparison.json": {
+        "gitObject": "684bc1ad1ec73b78bb274e388ec6037fbd5073f4",
+        "sha256": "1511c3077546c09a4d99c4447d5ca4f3d86a3a5fed5ed9dd19945db24333630b",
+        "bytes": 4967
+      },
+      "docs/migration/native-campaigns-v51/validation.json": {
+        "gitObject": "19b058405faa22ab42a97e586b8f17cbbce5aae6",
+        "sha256": "768de4ed2685cdf1219059019c92b086f12989a0cb56afb8e683b64ad288b908",
+        "bytes": 35788
+      },
+      "docs/migration/native-campaigns-v51/validation/build-output.log.gz": {
+        "gitObject": "7dc7ecee178712d3bb90a468f52f31090adbfdaf",
+        "sha256": "2bc118dc38dc6ff1f1bf48e34db807f1c5da2a72ba94eef986fe0df5749c2a0c",
+        "bytes": 1562
+      },
+      "docs/migration/native-campaigns-v51/validation/checks-run.json": {
+        "gitObject": "2d11a03ed5d20e218f0306eb039f931a84ea8342",
+        "sha256": "dc6a8578f041f8f5f62c628aa6defbf987c072c56299e58e2bd19eb6c7158754",
+        "bytes": 70884
+      },
+      "docs/migration/native-campaigns-v51/validation/delta-tests-output.log.gz": {
+        "gitObject": "4bdd82359247d29f4a7d671d03762ee63bc19d46",
+        "sha256": "09c9826355f7f1f751f60e448459826cbc887e37fc5e1499f6ee0c0cdcb50c63",
+        "bytes": 17661
+      },
+      "docs/migration/native-campaigns-v51/validation/delta-tests-run.json": {
+        "gitObject": "ef74055016b3fc5d3f0a43f44a396bc505bfdc5d",
+        "sha256": "e23e699f1deaab472c640027470150c3d59b544bc707a151f311913078553e0d",
+        "bytes": 88807
+      },
+      "docs/migration/native-campaigns-v51/validation/diff-check-output.log.gz": {
+        "gitObject": "4d6d63d2781accdeca0d74e9833783191ff5a4a5",
+        "sha256": "a74d3a1fe90acba1f8ad126ba9938672bb30acc0b207b24a2e0c3fb0d5f38095",
+        "bytes": 20
+      },
+      "docs/migration/native-campaigns-v51/validation/entry-audit-output.log.gz": {
+        "gitObject": "270d6388a453ceef5f333dab79bd832ddaa03e61",
+        "sha256": "cc3dbe0921e165ef5aa587346b14d15082a5bbee46432f967aa31c202126d735",
+        "bytes": 179
+      },
+      "docs/migration/native-campaigns-v51/validation/migration-audit-output.log.gz": {
+        "gitObject": "408b06c217db8ef69586e796af89447e0f06163b",
+        "sha256": "1be0f9cae2f0df944318a27e54b119c0023c67c1cd74c41375fbf6373f765a16",
+        "bytes": 205
+      },
+      "docs/migration/native-campaigns-v51/validation/typecheck-output.log.gz": {
+        "gitObject": "65e50aa8882473c7661e6fc639d04083cff6f573",
+        "sha256": "da2b1a798d61c2944b9da4b4035d486f893cb6cc182bf3b4d8cb61869956a548",
+        "bytes": 141
+      },
+      "docs/migration/native-campaigns-v51/valv-browser-layout-measures.json": {
+        "gitObject": "af7c617b7694e13e738b072b6bb10c0597eefc67",
+        "sha256": "588c95a64a92cef85f53698e8daaec21542828a4723f6a268b7814ec6841fe87",
+        "bytes": 5931
+      },
+      "docs/migration/native-campaigns-v51/valv-browser-three-levels-ax.txt": {
+        "gitObject": "7968911a720825f71138574023bc62b63681e720",
+        "sha256": "3bcac50921cc7eb389dd240ec054d502766af18e8764a6987684a94587f0b7ce",
+        "bytes": 9961
+      },
+      "docs/migration/native-campaigns-v51/valv-browser-three-levels.jpg": {
+        "gitObject": "c754cb4b32878a5643f0f088bd74ff5f96663b28",
+        "sha256": "99ef284e78baf66b59d607bb1259e76e8d5f36facff7b4021a044c8cf6a59174",
+        "bytes": 75484
+      },
+      "docs/migration/native-campaigns-v51/valv-browser-verification.json": {
+        "gitObject": "faa1ece757212552def0587bab6de0c9c34ebdfb",
+        "sha256": "2f735d18ed9cd63663cc8b4594406369395cf3baf9f8e880f46210984f98f143",
+        "bytes": 9733
+      },
+      "docs/migration/native-campaigns-v51/valv-original-component-comparison.json": {
+        "gitObject": "5071e05c442cac5602139e75d1942f3c0d68258e",
+        "sha256": "fc0b14163dc85785b8338c7e8c79a74072dc95de9e9f448176dcb48d8f7d8bea",
+        "bytes": 165847
+      },
+      "docs/migration/native-campaigns-v51/valv-public-trace.json.gz": {
+        "gitObject": "e988d9ea125c4b62a8af1b57ff3b7c7962e4dbf0",
+        "sha256": "63adf3bf04c0678699af265ba1808fd2eca96b4f255473ee9bb43ba8a078a87d",
+        "bytes": 41686
+      },
+      "docs/migration/native-campaigns-v51/valv-service-identity-recipes.json.gz": {
+        "gitObject": "bb23f7ef7408ff485ebc75e27c6f432599f9a627",
+        "sha256": "833945f4e199d953670b5caef7689530d4fd9f4d1dd44c653e027297493d80c7",
+        "bytes": 461027
+      },
+      "docs/migration/native-campaigns-v51/valv-three-levels.json": {
+        "gitObject": "9ad6bad3cfebff724b3edaddf93455bb26224734",
+        "sha256": "263a6a9690f8564eea26598171e16e615e577eb06cbf2074e8218077356ba38c",
+        "bytes": 2639152
+      },
+      "docs/migration/native-campaigns-v51/zipp-recorded-public-replay.json": {
+        "gitObject": "2887e99856e8c8fed120e9152ee8107bdf968ebe",
+        "sha256": "5ad12e2c6b8b92cfff19e3219c98e6f0483e3872e5f22274b4ebf131c69899c4",
+        "bytes": 2593311
+      },
+      "docs/migration/native-campaigns-v51/zipp-regression-comparison.json": {
+        "gitObject": "e1f0005fba67e1906d50b3384ebf0e741db3a07f",
+        "sha256": "a9e9e460c75d14e6887866c34411d7feb6f8af6cf32b1e9183fd2679313e1e1b",
+        "bytes": 16559
+      },
+      "docs/migration/v51-field-service-composition.md": {
+        "gitObject": "98f36a0d22c95130c36d7b8cec9309bd5dd04d69",
+        "sha256": "618a93d8358a5f8237f639dc5898a5f8633a430a6323e38671a8d3db71ada522",
+        "bytes": 12445
+      },
+      "scripts/compare-v51-material-projection.mjs": {
+        "gitObject": "85a497f88d904d46e180673e5c1bd1e79e6d04cc",
+        "sha256": "a54b7b368687ec553e88dfe675bd88b2fc85014f30907d2b21f49af090a53895",
+        "bytes": 13413
+      },
+      "scripts/compare-v51-regressions.mjs": {
+        "gitObject": "896cd76cbc010cfd1a03cc36f82e0bdfb2d70c6e",
+        "sha256": "2a5d6ae2e995121a01e633c7464bc84a884c83af4613f165131683618b51c592",
+        "bytes": 18289
+      },
+      "scripts/compare-v51-service-public-evidence.py": {
+        "gitObject": "83b98dfdc7def5b4f553287948331df72277dfc4",
+        "sha256": "548ade5165ac610e8b828bb87d65d12065c0c7f868bcebe029e6306299f1ef99",
+        "bytes": 21473
+      },
+      "scripts/export-v6-field-service-reference.py": {
+        "gitObject": "ba49f64f64fe2fa877f008e8339cacbc79337ff0",
+        "sha256": "7f64c2c89dc430d42b044239dd5476a2dfbdd72284a0943b4789663d2ff40d8f",
+        "bytes": 32592
+      },
+      "scripts/probe-v51-cold-start-v50.mjs": {
+        "gitObject": "e67d8914d632ba548fef3935bec563b97c8d9d46",
+        "sha256": "fb9879c335d8d58aa1a560c1090452d4451daa17fa7f6f52a1248b2f7c13dedc",
+        "bytes": 4386
+      },
+      "scripts/probe-v6-field-service-original.py": {
+        "gitObject": "876b93b7551da439bda6d20312585f94f33bed2f",
+        "sha256": "5b417d3a7b256a73e0ee71be6bec5584ec8eb001020a0132f0c29ebcbb084b25",
+        "bytes": 13242
+      },
+      "scripts/record-v51-browser-verification.py": {
+        "gitObject": "08bbe9323d9e6ec8a1d524914f25f801ffebced6",
+        "sha256": "5366975a0797bb2fb411a0623d28b0b9a4d32d011d7aaee65b7f4de7e190017d",
+        "bytes": 5221
+      },
+      "scripts/replay-v51-public-regression.mjs": {
+        "gitObject": "f28c42196403fdae014c25fbcad5d7870e769b08",
+        "sha256": "6df194798af42c89d2210c61954fa1076fbd9b08dc516399e82638cf4d3ed0d6",
+        "bytes": 2453
+      },
+      "scripts/run-v51-campaign-proof.py": {
+        "gitObject": "608ab09e918b527678888d632ba17dde2761237c",
+        "sha256": "67e56f8ccfc6f37493440ef9b4162fafea0e621d7ea6cd870d89f2b0964926c6",
+        "bytes": 3546
+      },
+      "scripts/run-v51-delta-tests.py": {
+        "gitObject": "81c3715839cde01054230f20753ad35c41b8da2f",
+        "sha256": "d97240c45867e1cbd86852e94a84888eb6351f4e75b0221dddda7844d1d8ce10",
+        "bytes": 4680
+      },
+      "scripts/run-v51-regression-checks.py": {
+        "gitObject": "4d5085204ca45c54d8ca385318e129c21767472a",
+        "sha256": "54b7536562259ff98c2ec57560a5af42f24a371d187b6cef4888729de2f1ff8a",
+        "bytes": 16929
+      },
+      "scripts/run-v51-release-checks.py": {
+        "gitObject": "05b964cc7b1b3931698d873ade36669f9064b2d8",
+        "sha256": "0c5c3e21efb42e774867cedce0329959071740af5fc083ef65625dc7e35220fd",
+        "bytes": 4062
+      },
+      "scripts/select-v51-framed-transfer-candidate.py": {
+        "gitObject": "51273fe755292d87a7700754d88629c902f5b754",
+        "sha256": "de7943fdaec1a4c3ceaff86fb18a239d55b6f65d42727095e718ea9ebf9d3973",
+        "bytes": 5604
+      },
+      "scripts/select-v51-next-candidate.py": {
+        "gitObject": "a2e53e2bc5c240f3ef7bb0a38ba8b2d285cae7d2",
+        "sha256": "ae05f80103f874aba6375d9238cd34c4a7ce0c2e6fc372501cede0f605cf9840",
+        "bytes": 4676
+      },
+      "scripts/validate-v51-release.py": {
+        "gitObject": "a4bd78d75a21f4819b5a7d7c7a0023c4c0a57086",
+        "sha256": "b60981e5c187e1eb7aac85c56f4b57afc5d47abc566c54232b9360cf2ca1bb64",
+        "bytes": 74443
+      },
+      "tests/fixtures/v6-field-service-original-public.json.gz": {
+        "gitObject": "090476227891f01da793ea3cca62d8b994d4c64d",
+        "sha256": "806dd23649c4f52fadc882e694a1997799e3be9450571054a61ab480e0ba15ba",
+        "bytes": 898270
+      },
+      "tests/fixtures/v6-field-service-reference.json.gz": {
+        "gitObject": "e7aa4eced7ab22b44c5779bbd2999463f5143bf4",
+        "sha256": "b583f58ecf7feabae1353cc3fd7dce241cb1c0197d78cb62c983adb7dc62dfb7",
+        "bytes": 2852033
+      },
+      "tests/v6-field-service-reference.test.ts": {
+        "gitObject": "80e1f7eaa26ba2f0be86e11a324ad421680ef150",
+        "sha256": "505a49c86a853b3fc4d4f3a0d86c7638b6f3bdb2875d1e6bb6d7ae06048cc1cc",
+        "bytes": 15590
+      }
+    },
+    "scope": "Complete committed v51 evidence directory, its release note, independent service fixtures/reference test, probes/exporters and all v51-named scripts retain their original Git blob bytes."
+  },
+  "preservedC227Snapshot": {
+    "checkpoint": {
+      "path": "docs/migration/native-campaigns-v52/history/c227-source-test-code.json",
+      "sha256": "e23444e454140e651fa7ba50d330a50254218824b1faf3a58b724ca36ac84346",
+      "bytes": 81351
+    },
+    "archive": {
+      "path": "docs/migration/native-campaigns-v52/history/c227-source-test-code.tar.gz",
+      "sha256": "346c4db7453c19508d5e28634d6a0409aa0f2059c93be7e6f699bca1cba2365f",
+      "bytes": 2277053
+    },
+    "archivedCodeFiles": 504,
+    "nativeSourceDigest": "c227cb63aa743ed5790acc7e0cb825e107a4a6ac87471754a3216084ff224bf2",
+    "deltaTests": {
+      "receipt": {
+        "path": "docs/migration/native-campaigns-v52/validation/delta-tests-run.json",
+        "sha256": "b168b60d2b1286ff713b2beb243ad7cd7e2d59cefd267d28e0ce81bc610a3133",
+        "bytes": 91054
+      },
+      "counts": {
+        "tests": 686,
+        "pass": 686,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "testFiles": 19,
+      "topLevelTests": 498,
+      "nestedTests": 188,
+      "sourceAndTestInputsUnchanged": true,
+      "qualification": "One frozen targeted execution; counts and unique scoped identities are recomputed from the retained complete TAP log. This is not the historical full suite."
+    },
+    "regressions": {
+      "summary": {
+        "path": "docs/migration/native-campaigns-v52/regression-summary.json",
+        "sha256": "0a21e0a56968ed72ddecc80b572d48bb78d6f424d1d6d65563eefd59915fe97c",
+        "bytes": 7226
+      },
+      "groups": [
+        {
+          "mode": "recorded-public-replay",
+          "runs": 8,
+          "passed": true,
+          "commands": 369,
+          "completePublicPackets": 377,
+          "prefixes": 262,
+          "comparisonChecks": 151,
+          "games": [
+            "STCK",
+            "CATL",
+            "SELE",
+            "COLM",
+            "ZIPP",
+            "GRIL",
+            "LIFE",
+            "VALV"
+          ]
+        },
+        {
+          "mode": "actual-game-campaign",
+          "runs": 0,
+          "passed": true,
+          "commands": 0,
+          "completePublicPackets": 0,
+          "prefixes": 0,
+          "comparisonChecks": 0,
+          "games": []
+        }
+      ],
+      "results": [
+        {
+          "game": "STCK",
+          "commands": 35,
+          "completePublicPackets": 36,
+          "prefixes": 15,
+          "comparisonChecks": 19,
+          "levelsCompleted": 3,
+          "officialState": "NOT_FINISHED"
+        },
+        {
+          "game": "CATL",
+          "commands": 48,
+          "completePublicPackets": 49,
+          "prefixes": 48,
+          "comparisonChecks": 19,
+          "levelsCompleted": 6,
+          "officialState": "WIN"
+        },
+        {
+          "game": "SELE",
+          "commands": 44,
+          "completePublicPackets": 45,
+          "prefixes": 44,
+          "comparisonChecks": 19,
+          "levelsCompleted": 3,
+          "officialState": "NOT_FINISHED"
+        },
+        {
+          "game": "COLM",
+          "commands": 45,
+          "completePublicPackets": 46,
+          "prefixes": 21,
+          "comparisonChecks": 19,
+          "levelsCompleted": 3,
+          "officialState": "NOT_FINISHED"
+        },
+        {
+          "game": "ZIPP",
+          "commands": 101,
+          "completePublicPackets": 102,
+          "prefixes": 40,
+          "comparisonChecks": 19,
+          "levelsCompleted": 6,
+          "officialState": "WIN"
+        },
+        {
+          "game": "GRIL",
+          "commands": 19,
+          "completePublicPackets": 20,
+          "prefixes": 19,
+          "comparisonChecks": 19,
+          "levelsCompleted": 3,
+          "officialState": "NOT_FINISHED"
+        },
+        {
+          "game": "LIFE",
+          "commands": 49,
+          "completePublicPackets": 50,
+          "prefixes": 47,
+          "comparisonChecks": 19,
+          "levelsCompleted": 3,
+          "officialState": "NOT_FINISHED"
+        },
+        {
+          "game": "VALV",
+          "commands": 28,
+          "completePublicPackets": 29,
+          "prefixes": 28,
+          "comparisonChecks": 18,
+          "levelsCompleted": 3,
+          "officialState": "NOT_FINISHED"
+        }
+      ],
+      "qualification": "Eight cold native recalculations consume previously retained complete public returns. They are regressions, not eight new live victories or speed comparisons."
+    },
+    "currentMutableNativeCodeUsedForHistoricalChecks": false,
+    "qualification": "Historical c227 native source, test code and harness bytes are read from the exact retained archive. Their unchanged styles, previously generated fixtures and execution logs are byte-verified at their original paths. These 686 tests and eight recorded-public replays validate the failed-attempt snapshot only; they are not reused as validation of the later final source."
+  },
+  "preservedPacketOnlySnapshot": {
+    "checkpoint": {
+      "path": "docs/migration/native-campaigns-v52/history/686159-source-test-code.json",
+      "sha256": "4c312a174ec068501092827a354224c2d9731850435fc6ad0aea4578213bb3b5",
+      "bytes": 81990
+    },
+    "archive": {
+      "path": "docs/migration/native-campaigns-v52/history/686159-source-test-code.tar.gz",
+      "sha256": "a28f6a38117d871d3205654526e7526a8f04b36a16edfe206dffc266c9bfa215",
+      "bytes": 2298374
+    },
+    "archivedCodeFiles": 508,
+    "nativeSourceDigest": "686159b35c366a6305f46ee1c06e4d0c2d54ae805c8c3c47cdb165b0b732dacc",
+    "failedCampaign": {
+      "report": {
+        "path": "docs/migration/native-campaigns-v52/final/gare-three-levels.json",
+        "sha256": "e4e6ca1c54798c923ede7b822c821064fda2b71f9fe642d601ff33c606ce3881",
+        "bytes": 97906617
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v52/final/gare-public-trace.json.gz",
+        "sha256": "dcee9fc15e36e962f33c09853c794b19c4c8bec1fca472a23e233b3c82b8388a",
+        "bytes": 51259
+      },
+      "execution": {
+        "path": "docs/migration/native-campaigns-v52/final/logs/execution-gare.json",
+        "sha256": "f7b73c798885434c3b7d8bdbf4d123d015880d9e50086d4204d815aac288430e",
+        "bytes": 43915
+      },
+      "actions": 80,
+      "levelsCompleted": 2,
+      "completePublicPackets": 81,
+      "animationFramesIncludingInitial": 296
+    },
+    "failedAlternativeCampaign": {
+      "game": "LKEY",
+      "report": {
+        "path": "docs/migration/native-campaigns-v52/final/lkey-three-levels.json",
+        "sha256": "9e1f9a4ca5adeb08eef5acb15cea78573d14968d608c1c2fdefc773cde7cebb0",
+        "bytes": 19410174
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v52/final/lkey-public-trace.json.gz",
+        "sha256": "37a6929fc500d2230b01c32ada069cae2926a8beca4507839ed8d39bc73c6e90",
+        "bytes": 32637
+      },
+      "execution": {
+        "path": "docs/migration/native-campaigns-v52/final/logs/execution-lkey.json",
+        "sha256": "17e940ec7f6b30e45ec63f497801d5a4c7f36469c03118c576794fc3ead9f183",
+        "bytes": 43916
+      },
+      "actions": 98,
+      "levelsCompleted": 0,
+      "completePublicPackets": 99,
+      "animationFramesIncludingInitial": 157,
+      "commonOriginalFailurePublicPackets": 3
+    },
+    "maximumCurrentPacketReceipts": 3,
+    "selectedProposalsUsingPacketPremises": 0,
+    "qualification": "The separately preserved packet-acquisition implementation fails the GARE target at eighty actions and two levels, and its alternative cold LKEY attempt fails at ninety-eight actions with no completed level. Recorded observations do not imply useful plan selection or a completed level. No later targeted suite or successful campaign is attributed to this source snapshot."
+  },
+  "preservedFirstUniformQuestionSnapshot": {
+    "checkpoint": {
+      "path": "docs/migration/native-campaigns-v52/history/a076-source-test-code.json",
+      "sha256": "35404020bc7374563bf94ce3966952d26a4021161c4a5f6f37ed859f7fe1cf94",
+      "bytes": 59853
+    },
+    "archive": {
+      "path": "docs/migration/native-campaigns-v52/history/a076-source-test-code.tar.gz",
+      "sha256": "0b30d279cbef4169a5336e7e3bd95dad560a71d38c0a41cea5c6d222fd6f7957",
+      "bytes": 2336324
+    },
+    "archivedCodeFiles": 517,
+    "nativeSourceDigest": "a076b3a403036cb40922795d4103ce6fc94be5971672ac4cb20377cc27092748",
+    "failedCampaign": {
+      "report": {
+        "path": "docs/migration/native-campaigns-v52/verified/gare-three-levels.json",
+        "sha256": "8cc72eeaea6625e0a16e0a2aee89467cc3fee3e3f1de0d219b95699314df25cc",
+        "bytes": 100266106
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v52/verified/gare-public-trace.json.gz",
+        "sha256": "4172c891d3f40728dff9164c086034e13dc27ac5b837c07dca485b81ac7ea46c",
+        "bytes": 49131
+      },
+      "execution": {
+        "path": "docs/migration/native-campaigns-v52/verified/execution-gare.json",
+        "sha256": "9c5ebc7ed87d590f6f817ec4b1ab4d91c6dd70bd1edc59161fe1664724bf8358",
+        "bytes": 44176
+      },
+      "actions": 87,
+      "levelsCompleted": 2,
+      "completePublicPackets": 88,
+      "animationFramesIncludingInitial": 285
+    },
+    "selectedNativeQuestionKinds": {
+      "calibration_dependency": 1,
+      "reception_question": 1
+    },
+    "maximumCurrentPacketReceipts": 3,
+    "formalDeltaSuiteAttributed": false,
+    "recordedPublicRegressionSuiteAttributed": false,
+    "qualification": "The separately preserved first uniform-question implementation fails the GARE target at eighty-seven actions and two levels. Its subsequent physical-point ambiguity correction and later typed dependency work are not part of this archived source. No later test suite, recorded-public regression suite, complete component comparison or successful campaign is attributed to this snapshot."
+  },
+  "preservedTypedPrioritySnapshot": {
+    "checkpoint": {
+      "path": "docs/migration/native-campaigns-v52/history/2d1295-source-test-code.json",
+      "sha256": "f4f71e0df01866caa598075818f52472c97a28e2b051d8e1ebe3a349d32e5996",
+      "bytes": 60095
+    },
+    "archive": {
+      "path": "docs/migration/native-campaigns-v52/history/2d1295-source-test-code.tar.gz",
+      "sha256": "f6aa8137edbedd86f363ec8358ab9c19af4177ab3ce595e5737c9db45db3bf45",
+      "bytes": 2346813
+    },
+    "archivedCodeFiles": 519,
+    "nativeSourceDigest": "2d1295c937cb3b058e7fa210ab4f84bbfbcb533d15c24ca4c3ab25b13c28615b",
+    "failedCampaign": {
+      "report": {
+        "path": "docs/migration/native-campaigns-v52/attempt7/gare-three-levels.json",
+        "sha256": "8b86ac7632d2660668981437e25f182c98735e34bc0710919f02d12a968421b0",
+        "bytes": 129637379
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v52/attempt7/gare-public-trace.json.gz",
+        "sha256": "8544a825690a4dd14d526edc7675b760de4d0e1eedb8bbedf45e3551fee470d3",
+        "bytes": 69370
+      },
+      "execution": {
+        "path": "docs/migration/native-campaigns-v52/attempt7/execution-gare.json",
+        "sha256": "291d5d7fb99d7da241a470d6723bbd76e426684c17cfececa964cda226b764ff",
+        "bytes": 44177
+      },
+      "actions": 103,
+      "levelsCompleted": 1,
+      "completePublicPackets": 104,
+      "animationFramesIncludingInitial": 414
+    },
+    "firstDifferenceFromPreviousAttempt": {
+      "commonCompletePublicPackets": 10,
+      "commonCommands": 9,
+      "actionIndex": 10,
+      "previousCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 6,
+          "y": 23
+        }
+      },
+      "actualCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 44,
+          "y": 13
+        }
+      }
+    },
+    "selectedNativeRules": {
+      "native.current_typed_reception_dependency": 1
+    },
+    "typedQuestionsOverridingRevalidatedSourceControl": 1,
+    "formalDeltaSuiteAttributed": false,
+    "recordedPublicRegressionSuiteAttributed": false,
+    "completeComponentComparisonAttributed": false,
+    "qualification": "The retained first typed-prerequisite priority implementation regresses to one completed level and fails at103 actions. Its known-offset source question was replaced by an unknown-control typed calibration. This actual failed trajectory remains separate from the later generic precedence correction and any later validation."
+  },
+  "preservedPrePhasedSnapshot": {
+    "checkpoint": {
+      "path": "docs/migration/native-campaigns-v52/history/0fb602-source-test-code.json",
+      "sha256": "60a7f73112feb85411927e52ad90143a81dceb5f066360719ad3898376779974",
+      "bytes": 60078
+    },
+    "archive": {
+      "path": "docs/migration/native-campaigns-v52/history/0fb602-source-test-code.tar.gz",
+      "sha256": "ff4f3835aee1d8f073c1ff5f8965c5e20d37853c25a06dbb1b01a287d8a959c1",
+      "bytes": 2350537
+    },
+    "archivedCodeFiles": 519,
+    "nativeSourceDigest": "0fb60234d0ffb2b191d9d8d107b9150b6853eb6432cca0b414ca1d5fa56bc25f",
+    "failedCampaign": {
+      "report": {
+        "path": "docs/migration/native-campaigns-v52/attempt8/gare-three-levels.json",
+        "sha256": "cf8679afe1da9542ed84a2eea9ba2dee2aefb2d1d05992d3a1508e485e5c9576",
+        "bytes": 100746524
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v52/attempt8/gare-public-trace.json.gz",
+        "sha256": "edc1cd8b522bbec40da200e837a449df2104553d10e5ab53d770dbaf19222a42",
+        "bytes": 54714
+      },
+      "execution": {
+        "path": "docs/migration/native-campaigns-v52/attempt8/execution-gare.json",
+        "sha256": "3a8d02602d4a9cb293156c60583d4efa2548037db238a0ec41c7ec6465fca643",
+        "bytes": 45580
+      },
+      "actions": 86,
+      "levelsCompleted": 2,
+      "completePublicPackets": 87,
+      "animationFramesIncludingInitial": 313
+    },
+    "passivePublicJournal": {
+      "evidence": {
+        "path": "docs/migration/native-campaigns-v52/attempt8/gare-actual-public-journal.jsonl.gz",
+        "sha256": "f018c85caffda9b55404d7101eba8f9876f98ec7eed15239b68e3d1511caf208",
+        "bytes": 38087
+      },
+      "completePublicPackets": 87,
+      "equalsCompleteTrace": true,
+      "runner": {
+        "path": "scripts/run-v52-journaled-campaign.mjs",
+        "sha256": "e4bc1150cfedcaac0dd739209d3f2e501efc64ba262a887b5d896da07de25f90",
+        "bytes": 1951
+      },
+      "harness": {
+        "path": "tests/helpers/v6-live-game-campaign.ts",
+        "sha256": "fe264c52e9d0e0c894cd567bc2a27dd89ca20c5077e2835348c34c9051f62982",
+        "bytes": 39026
+      },
+      "executionCodeUnchanged": true
+    },
+    "selectedNativeRules": {
+      "native.current_typed_reception_dependency": 1,
+      "native.current_uniform_reception_dependency": 1,
+      "native.current_uniform_reception_question": 1
+    },
+    "maximumCurrentStationaryAnnexRecords": 3,
+    "pureTypedQuestionsOverridingRevalidatedSourceControl": 0,
+    "formalDeltaSuiteAttributed": false,
+    "recordedPublicRegressionSuiteAttributed": false,
+    "completeComponentComparisonAttributed": false,
+    "qualification": "The precedence correction restores two completed levels but the actual cold campaign still fails after eighty-six acquired actions. Its complete passive streamed public journal is preserved. Later phased reception observations, directed composition and their validation are not attributed to this archived source."
+  },
+  "nextCandidateScreening": {
+    "receipt": {
+      "path": "docs/migration/native-campaigns-v52/candidate-selection.json",
+      "sha256": "cab4e692688a63ee402f30fbbd74a5e63cd81e718bd1d3e556e214a7ff63f57a",
+      "bytes": 406645
+    },
+    "nextEntry": "observed_outline_service",
+    "publicViews": 100,
+    "viewsWithOutlines": 57,
+    "controlAcquisitionStudyViews": 30,
+    "coldEntryAdmissibleViews": 0,
+    "completedLevels": 0,
+    "dispatchedActions": 0,
+    "qualification": "Initial visual candidates alone do not identify controlled objects or a future successful game. The next transfer must acquire control from actual public returns."
+  },
+  "completeMigration": false,
+  "originalFullCommonCallerParity": false,
+  "retainedInputsUnchangedDuringValidation": true,
+  "generator": {
+    "path": "scripts/validate-v52-release.py",
+    "sha256": "7b91be29c11203eac15ccae0fe39222a8209472c3a93718268ae00d218ce04b4",
+    "bytes": 95694
+  },
+  "scope": "Read-only validation of a real final campaign, explicit native guard/search extensions, unchanged original component recomputations, preserved failed attempts, targeted tests, eight recorded-public replays, exact historical bytes, build, browser observations and candidate-only screening. No game, native agent or test suite is executed by this validator."
+}

@@ -20,6 +20,8 @@ const aliases: Record<string, string> = {
   observed_program_composition: 'public_occurrence_recall',
   radial_port_composition: 'public_occurrence_recall',
   field_service_composition: 'public_occurrence_recall',
+  observed_framed_transfer: 'public_framed_transfer',
+  observed_framed_analogy: 'public_framed_transfer',
   rooted_quota_composition: 'public_occurrence_recall',
   occluded_catalogue_composition: 'public_occurrence_recall',
   typed_material_flow: 'public_occurrence_recall',
@@ -44,7 +46,8 @@ const groups = lists.map(([id, declared]) => {
   const registered = new Set(actual.families);
   const entries = declared.map(question => {
     const family = aliases[question] ?? question;
-    const explicitSharedEntry = ['goal_access', 'window_constraints'].includes(id) && family === 'public_occurrence_recall';
+    const explicitSharedEntry = (['goal_access', 'window_constraints'].includes(id) && family === 'public_occurrence_recall')
+      || family === 'public_framed_transfer';
     const connected = registered.has(family) && (!explicitSharedEntry || actual.entryPoints?.some((entry, index) =>
       entry === question && actual.families[index] === family) === true);
     return { question, family: connected ? family : null, status: connected ? 'connected' : 'pending' };

@@ -7,7 +7,8 @@
 import { symbolicDigest as digest, sha256Bytes } from './v6-hash.ts';
 import { projection } from './v6-native-observer.ts';
 import type { ObservedInputDomain } from './v6-native-observer.ts';
-import type { NativePublicObservation, NativeRows } from './v6-native-types.ts';
+import type { NativeExecution, NativePublicObservation, NativeRows } from './v6-native-types.ts';
+import { retainNativeJson } from './v6-native-owned.ts';
 
 type R = Record<string, any>;
 export type ReductionPoint = [number, number];
@@ -21,6 +22,34 @@ export type ReductionScene = {
 };
 export type ReductionState = [Set<string>, ReductionPoint[]];
 export type ReductionOperation = ['jump', ReductionPoint, ReductionPoint] | ['move', ReductionPoint];
+export interface ReductionSearchBounds {
+  readonly maximumStates: number;
+  readonly maximumFrontier: number;
+}
+export interface ReductionSearchCounters {
+  readonly retainedStates: number;
+  readonly frontierEntries: number;
+  readonly peakFrontierEntries: number;
+  readonly insertedEntries: number;
+  readonly poppedEntries: number;
+  readonly staleEntries: number;
+  readonly expandedStates: number;
+  readonly generatedTransitions: number;
+}
+export interface ReductionSearchResult {
+  readonly status: 'found' | 'exhausted' | 'resource_bound';
+  readonly path: ReductionOperation[] | null;
+  readonly bound: 'maximum_states' | 'maximum_frontier' | 'deadline' | null;
+  readonly bounds: ReductionSearchBounds;
+  readonly counters: ReductionSearchCounters;
+  readonly blockedInsertion: {
+    readonly newState: boolean; readonly requiredStates: number; readonly requiredFrontierEntries: number; readonly cost: number;
+  } | null;
+}
+export interface NativeReductionTransportOptions {
+  /** Opt-in resource profile; the unconfigured constructor retains source search. */
+  readonly boundedSearch?: ReductionSearchBounds;
+}
 export const REDUCTION_VECTORS: readonly ReductionPoint[] = Object.freeze([[1, 0], [-1, 0], [0, 1], [0, -1]] as ReductionPoint[]);
 const key = (p: readonly number[]) => `${p[0]},${p[1]}`;
 const point = (s: string): ReductionPoint => s.split(',').map(Number) as ReductionPoint;
@@ -186,6 +215,98 @@ export function reductionRoute(current: ReductionState, scene: ReductionScene, l
   return null;
 }
 
+function checkedReductionBounds(bounds: ReductionSearchBounds): ReductionSearchBounds {
+  if (!bounds || !Number.isSafeInteger(bounds.maximumStates) || bounds.maximumStates < 1
+    || !Number.isSafeInteger(bounds.maximumFrontier) || bounds.maximumFrontier < 1) throw new TypeError('Reduction search bounds must be positive exact integers');
+  return Object.freeze({ maximumStates: bounds.maximumStates, maximumFrontier: bounds.maximumFrontier });
+}
+
+/**
+ * Native bounded Dijkstra. Its queue, successors and cost/serial ordering are
+ * the source order. A resource stop occurs before the map/parent/heap insertion
+ * that would exceed a bound. One temporary successor can be inspected to decide
+ * whether that insertion is new; it is never retained after a resource stop.
+ */
+function* boundedReductionSearch(current: ReductionState, scene: ReductionScene, limit: number,
+  inputBounds: ReductionSearchBounds, reveal: boolean, control?: () => 'deadline' | null): Generator<void, ReductionSearchResult> {
+  type Entry = { cost: number; serial: number; state: ReductionState; key: string };
+  const bounds = checkedReductionBounds(inputBounds), heap: Entry[] = [], costs = new Map<string, number>();
+  const parents = new Map<string, { previous: string; action: ReductionOperation }>();
+  let serial = 1, insertedEntries = 0, poppedEntries = 0, staleEntries = 0, expandedStates = 0;
+  let generatedTransitions = 0, peakFrontierEntries = 0, work = 0;
+  const finish = (status: ReductionSearchResult['status'], path: ReductionOperation[] | null,
+    bound: ReductionSearchResult['bound'] = null, blockedInsertion: ReductionSearchResult['blockedInsertion'] = null): ReductionSearchResult => ({
+    status, path, bound, bounds, blockedInsertion,
+    counters: { retainedStates: costs.size, frontierEntries: heap.length, peakFrontierEntries,
+      insertedEntries, poppedEntries, staleEntries, expandedStates, generatedTransitions },
+  });
+  if (control?.() === 'deadline') return finish('resource_bound', null, 'deadline');
+  const start = stateKey(current);
+  heap.push({ cost: 0, serial: 0, state: current, key: start }); costs.set(start, 0);
+  insertedEntries = peakFrontierEntries = 1;
+  const order = (a: Entry, b: Entry) => a.cost - b.cost || a.serial - b.serial;
+  const push = (value: Entry) => {
+    let i = heap.length; heap.push(value);
+    while (i > 0) { const parent = Math.floor((i - 1) / 2); if (order(heap[parent]!, value) <= 0) break; heap[i] = heap[parent]!; i = parent; }
+    heap[i] = value; peakFrontierEntries = Math.max(peakFrontierEntries, heap.length); insertedEntries++;
+  };
+  const pop = (): Entry => {
+    const first = heap[0]!, last = heap.pop()!; if (!heap.length) return first;
+    let i = 0; while (i * 2 + 1 < heap.length) { let child = i * 2 + 1;
+      if (child + 1 < heap.length && order(heap[child + 1]!, heap[child]!) < 0) child++;
+      if (order(last, heap[child]!) <= 0) break; heap[i] = heap[child]!; i = child;
+    } heap[i] = last; return first;
+  };
+  while (heap.length) {
+    if (control?.() === 'deadline') return finish('resource_bound', null, 'deadline');
+    const { cost, state: node, key: nodeKey } = pop(); poppedEntries++;
+    if (++work % 128 === 0) { yield; if (control?.() === 'deadline') return finish('resource_bound', null, 'deadline'); }
+    if (costs.get(nodeKey) !== cost) { staleEntries++; continue; }
+    const frontier = node[1].some(p => node[0].has(key(p)) && REDUCTION_VECTORS.some(v => !scene.known_cells?.has(key(add(add(p, v), v)))));
+    if (reveal ? frontier && nodeKey !== start : node[0].size === 1) {
+      const path: ReductionOperation[] = []; let cursor = nodeKey;
+      while (cursor !== start) { const parent = parents.get(cursor)!; path.push(parent.action); cursor = parent.previous; }
+      return finish('found', path.reverse());
+    }
+    if (cost >= limit) continue;
+    expandedStates++;
+    for (const [following, action, weight] of reductionSuccessors(node, scene)) {
+      generatedTransitions++;
+      if (++work % 128 === 0) { yield; if (control?.() === 'deadline') return finish('resource_bound', null, 'deadline'); }
+      const value = cost + weight, nextKey = stateKey(following);
+      if (value <= limit && value < (costs.get(nextKey) ?? Infinity)) {
+        const newState = !costs.has(nextKey), requiredStates = costs.size + Number(newState), requiredFrontierEntries = heap.length + 1;
+        const blocked = requiredStates > bounds.maximumStates ? 'maximum_states'
+          : requiredFrontierEntries > bounds.maximumFrontier ? 'maximum_frontier' : null;
+        if (blocked) return finish('resource_bound', null, blocked, { newState, requiredStates, requiredFrontierEntries, cost: value });
+        costs.set(nextKey, value); parents.set(nextKey, { previous: nodeKey, action });
+        push({ cost: value, serial: serial++, state: following, key: nextKey });
+      }
+    }
+  }
+  return finish('exhausted', null);
+}
+
+/** Complete within the supplied primitive-cost limit, or explicitly unknown. */
+export function boundedReductionRoute(current: ReductionState, scene: ReductionScene, limit: number,
+  bounds: ReductionSearchBounds, reveal = false): ReductionSearchResult {
+  const search = boundedReductionSearch(current, scene, limit, bounds, reveal);
+  let result = search.next(); while (!result.done) result = search.next(); return result.value;
+}
+
+/** Cooperative scheduling changes neither insertion order nor physical action count. */
+export async function boundedReductionRouteCooperative(current: ReductionState, scene: ReductionScene, limit: number,
+  bounds: ReductionSearchBounds, reveal = false, execution?: NativeExecution): Promise<ReductionSearchResult> {
+  const control = (): 'deadline' | null => {
+    if (execution?.signal?.aborted) throw new DOMException('Reduction search aborted', 'AbortError');
+    return execution?.deadlineMs !== undefined && (execution.now ?? performance.now.bind(performance))() >= execution.deadlineMs ? 'deadline' : null;
+  };
+  const search = boundedReductionSearch(current, scene, limit, bounds, reveal, control);
+  let result = search.next();
+  while (!result.done) { if (execution) await execution.yieldControl(); result = search.next(); }
+  return result.value;
+}
+
 export function translatedReductionScene(scene: ReductionScene, offset: ReductionPoint): ReductionScene {
   const shift = (values: Set<string>) => new Set([...values].map(value => key(add(point(value), offset))));
   return { floor: shift(scene.floor), pegs: shift(scene.pegs), rails: shift(scene.rails), carriers: scene.carriers.map(p => add(p, offset)).sort(compare),
@@ -246,9 +367,14 @@ function unpackScene(value: R | null): ReductionScene | null {
 /** Original single-event API; the common runtime owns its explicit list adapter. */
 export class ReductionTransport {
   readonly id = 'reduction_transport'; readonly familyId = 'reduction_transport';
+  private readonly boundedSearch: ReductionSearchBounds | null;
+  private proposalRefusal: R | null = null;
   epoch: number | null = null; passed: R[] = []; events: R[] = [];
   model: ReductionModel | null | undefined; motion: Record<string, ReductionPoint> = {}; tested = new Map<string, [string, [ReductionPoint[], ReductionPoint[]]]>();
   verified = new Set<string>(); refs: Record<string, string> = {}; selected: ReductionPoint | null = null; retired = false; offset: ReductionPoint = [0, 0]; scene: ReductionScene | null = null;
+  constructor(options: NativeReductionTransportOptions = {}) {
+    this.boundedSearch = options.boundedSearch ? checkedReductionBounds(options.boundedSearch) : null;
+  }
   state(): R {
     const result: R = { format: 'native.reduction_transport.v1', epoch: this.epoch, passed: this.passed, events: this.events };
     if (this.model !== undefined) Object.assign(result, { model: this.model, motion: this.motion, tested: [...this.tested.values()].sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b))),
@@ -277,17 +403,62 @@ export class ReductionTransport {
     this.motion = value.motion ?? {}; this.tested = new Map((value.tested ?? []).map((item: any) => [JSON.stringify(item), item]));
     this.verified = new Set(value.verified ?? []); this.refs = value.refs ?? {}; this.selected = value.selected ?? null;
     this.retired = value.retired ?? false; this.offset = value.offset ?? [0, 0]; this.scene = scene;
+    this.proposalRefusal = null;
   }
-  propose(o: R, rows: NativeRows, inputs: readonly R[], remaining: number): R | null {
+  /** A bounded search refusal is diagnostic, never acquired state or an action. */
+  currentProposalRefusal(observation: R): R | null {
+    const refusal = this.proposalRefusal;
+    if (!refusal || ['observation_ref', 'level_epoch', 'frame_hash'].some(field => refusal[field] !== observation[field])
+      || refusal.owner_state_ref !== `reduction_owner:${digest(this.state())}`) return null;
+    return structuredClone(refusal);
+  }
+  propose(o: R, rows: NativeRows, inputs: readonly R[], remaining: number, execution?: NativeExecution): R | null | Promise<R | null> {
+    this.proposalRefusal = null;
+    if (this.boundedSearch && execution?.signal?.aborted) return Promise.reject(new DOMException('Reduction search aborted', 'AbortError'));
     if (!o.available_action_refs.includes('ACTION6')) return null;
     if (this.epoch !== o.level_epoch) {
       this.epoch = o.level_epoch; this.model = reductionLayout(o, rows); this.motion = {}; this.tested.clear(); this.verified.clear(); this.refs = {};
       this.selected = null; this.retired = false; this.offset = [0, 0]; this.scene = null;
     }
     if (!this.model || this.retired) return null;
-    const scene = mergeReductionScene(this.scene, reductionScan(rows, this.model), this.model, this.offset); this.scene = scene;
-    const current = reductionState(scene); let path = reductionRoute(current, scene, remaining);
+    const scene = mergeReductionScene(this.scene, reductionScan(rows, this.model), this.model, this.offset), current = reductionState(scene);
+    if (this.boundedSearch) return this.proposeBounded(o, rows, inputs, remaining, scene, current, execution);
+    this.scene = scene;
+    let path = reductionRoute(current, scene, remaining);
     const reveal = path === null; if (reveal) path = reductionRoute(current, scene, remaining, true);
+    return this.packageProposal(o, rows, inputs, remaining, scene, current, path, reveal);
+  }
+  private async proposeBounded(o: R, rows: NativeRows, inputs: readonly R[], remaining: number,
+    scene: ReductionScene, current: ReductionState, execution?: NativeExecution): Promise<R | null> {
+    const ownerStateRef = `reduction_owner:${digest(this.state())}`;
+    const goal = await boundedReductionRouteCooperative(current, scene, remaining, this.boundedSearch!, false, execution);
+    let result = goal, reveal = false, searchesStarted = 1;
+    // A cut off goal search is unknown. It must not spend a second budget on
+    // reveal, claim exhaustion or retain a partial route as a continuation.
+    if (goal.status === 'exhausted') {
+      reveal = true; searchesStarted++;
+      result = await boundedReductionRouteCooperative(current, scene, remaining, this.boundedSearch!, true, execution);
+    }
+    if (ownerStateRef !== `reduction_owner:${digest(this.state())}`) throw new Error('Reduction memory changed during cooperative search');
+    if (result.status === 'resource_bound') {
+      this.proposalRefusal = retainNativeJson({
+        schema: 'logos-engine.native.bounded-search-refusal.v1', rule: 'native.bounded_reduction_search',
+        provider: this.familyId, observation_ref: o.observation_ref, level_epoch: o.level_epoch, frame_hash: o.frame_hash,
+        model: structuredClone(this.model), model_ref: `reduction_model:${digest(this.model)}`,
+        state_ref: `reduction_state:${digest(packReductionState(current))}`, scene_ref: `reduction_scene:${digest(packScene(scene))}`,
+        owner_state_ref: ownerStateRef, counters: result.counters, bounds: result.bounds, reached_bound: result.bound,
+        blocked_insertion: result.blockedInsertion, search_phase: reveal ? 'reveal' : 'goal', searches_started: searchesStarted,
+        completed_searches: reveal ? [{ phase: 'goal', status: goal.status, counters: goal.counters }] : [],
+        primitive_cost_limit: remaining, status: 'unknown', search_status: 'resource_bound', release_authority: false,
+        scope: 'The declared native resource bound stopped this current conditional search; neither impossibility nor an effect law was established.',
+      });
+      return null;
+    }
+    this.scene = scene;
+    return this.packageProposal(o, rows, inputs, remaining, scene, current, result.path, reveal);
+  }
+  private packageProposal(o: R, rows: NativeRows, inputs: readonly R[], remaining: number,
+    scene: ReductionScene, current: ReductionState, path: ReductionOperation[] | null, reveal: boolean): R | null {
     if (!path?.length) return null;
     let steps: R[] = [], hypothetical = current;
     const plain = inputs.filter(a => !hasData(a) && a.action_ref !== 'ACTION7').map(a => a.action_ref as string);
@@ -305,7 +476,7 @@ export class ReductionTransport {
         const [, start, end] = operation;
         for (const [mode, cell] of [['select', start], ['jump', end]] as const) {
           if (mode === 'select' && same(this.selected, start) && !steps.length) continue;
-          const s = this.model.unit, pitch = this.model.pitch, [px, py] = this.model.phase;
+          const s = this.model!.unit, pitch = this.model!.pitch, [px, py] = this.model!.phase;
           const x = px + (cell[0] - this.offset[0]) * pitch, y = py + (cell[1] - this.offset[1]) * pitch;
           const command = inputs.find(a => hasData(a) && x <= a.data.x && a.data.x < x + s && y <= a.data.y && a.data.y < y + s);
           if (!command) break;
@@ -362,6 +533,7 @@ export class ReductionTransport {
       reason: cameraChanged ? 'camera_reconciled' : 'compare_frozen_population_and_supports' };
   }
   record(before: R, after: R, command: R, first: NativeRows, second: NativeRows, p: R, i: number, _frames?: readonly NativeRows[]): R {
+    this.proposalRefusal = null;
     const step = p.steps[i], ref = after.observation_ref, mode = step.mode;
     if (after.levels_completed > before.levels_completed) { this.passed.push({ score: after.levels_completed, ref }); return { status: 'official_boundary', ref }; }
     const old = reductionState(this.scene!), aligned = alignReductionScene(second, after, this.model!, this.scene!, this.offset);

@@ -28,7 +28,22 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **The v51 milestone completes
+  level**; opening the tab does not move the game. **The v52 milestone completes
+  GARE's first three levels in 53 actions (7, 9 and 37)** through one cold
+  continuous native common session, 53 acquired prefixes and two natural
+  boundary replays. The source-declared `observed_framed_transfer` and
+  `observed_framed_analogy` entries share one knowledge owner. Explicit native
+  extensions retain real receptions from public animation frames, revalidate
+  current controls, and ask one directed question at a time about an
+  intermediate receiver. Conflicting control offsets remain hypotheses.
+  There is no game identifier, level branch or stored action route in these
+  helpers. The target stops on entry to level 4 with `NOT_FINISHED`;
+  no complete GARE victory is claimed. The browser independently confirms
+  53 actions and three levels, with seven unchanged 442 px board-height
+  samples and the same compact UI as v51. The connection audit is now
+  44/76 source entries (57.9%); complete V6 parity remains unverified.
+  See the [v52 report](docs/migration/v52-framed-transfer-and-public-packet-acquisition.md).
+  **The previous v51 milestone completes
   VALV's first three levels in 28 actions (10, 10 and 8)** through one cold
   continuous native common session, 28 acquired prefixes and two natural
   boundary replays. The newly connected `field_service_composition` measures
@@ -154,15 +169,16 @@ Fontan's **Symbolic Reasoning Agent** research.
   **Previous v38 milestone: TICT completes all six levels with official `WIN`
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
-  The current entry audit connects **42 of 76 explicit DRM subquestions
-  (55.3%)** in implementation `logos-engine.typescript.v6.native-migration/0.21.0`,
-  with the newly connected `field_service_composition` entry. This counts
+  The current entry audit connects **44 of 76 explicit DRM subquestions
+  (57.9%)** in implementation `logos-engine.typescript.v6.native-migration/0.22.0`,
+  with the newly connected `observed_framed_transfer` and
+  `observed_framed_analogy` entries sharing one acquired owner. This counts
   connected entries, not full behavioral parity or a percentage of all code.
-  The next step is generic `observed_framed_transfer`: acquire point motion,
-  framed replacements and current rebindings, then evaluate GARE from a cold
-  session, targeting at least three levels. GARE is a declared evaluation
-  preference among candidates; the read-only initial-view screening also admits
-  LKEY and the already demonstrated HANO. No GARE success is claimed yet.
+  The next step is generic `observed_outline_service`: transfer actual outline
+  motion, interior-contrast evidence and current control rebinding. The
+  read-only screening finds outlines in 57 of 100 initial views and 30 unique
+  directional candidates, but no acquired cold control for this entry. Its
+  next evaluation game will be selected after actual control acquisition.
   Complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These
@@ -295,11 +311,21 @@ npm run dev
 ```
 
 ```sh
+python scripts/restore-v52-evidence.py
 npm run typecheck
 npm test
 npm run build
 npm run preview
 ```
+
+Large v52 evidence reports are stored as lossless gzip files to keep source
+repository transfers within their memory limit. Before tests or proof
+verification in a fresh checkout, the restore command reconstructs the exact
+original report paths and checks their recorded sizes and SHA-256 hashes.
+`python scripts/restore-v52-evidence.py --verify` checks the stored compressed
+streams without creating reports. The mapping is retained in
+`docs/migration/native-campaigns-v52/evidence-storage.json`; original execution
+receipts and their byte-level claims remain unchanged.
 
 `dev` and `build` first run `scripts/prepare-python.mjs`. It downloads any missing
 runtime assets specified in `scripts/python-runtime-assets.json`, checks their

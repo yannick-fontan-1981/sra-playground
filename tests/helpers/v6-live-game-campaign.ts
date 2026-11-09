@@ -31,6 +31,9 @@ export interface NativeGameCampaignOptions {
   progress?: (event: R) => void;
   /** Evidence sink only; returned values never enter the production agent. */
   publicTrace?: (packet: NativePublicObservation, command: NativeCommand | null) => void;
+  /** Development diagnostics only, outside the production transport. */
+  providerDiagnostics?: boolean;
+  checkpoint?: (partialReport: R) => void;
   /** Test host only: expected commands stay outside the production transport. */
   recordedPublic?: {
     trace: { path: string; sha256: string };
@@ -109,7 +112,28 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
       common: JSON.parse(await readFile(new URL('laya_proto/common_frontier_policy.drm.json', reference), 'utf8')),
       strategy: JSON.parse(await readFile(new URL('morphology_policy/strategy.drm', reference), 'utf8')),
     } as NativeV6Declarations;
-    const service = new V6AgentService(async () => { runtime = await createNativeV6Runtime(declarations); return runtime; });
+    const service = new V6AgentService(async () => {
+      runtime = await createNativeV6Runtime(declarations);
+      if (options.providerDiagnostics) {
+        // Observe the actual instance call without altering its inputs, result,
+        // budget, priority or retained state. No game object enters the runtime.
+        const families = (runtime as unknown as { families: R[] }).families;
+        for (const family of families) for (const method of ['propose', 'proposeInGroup', 'proposeInSubquestion']) {
+          if (typeof family[method] !== 'function') continue;
+          const original = family[method];
+          family[method] = async function (...args: any[]) {
+            const offset = method === 'propose' ? 0 : method === 'proposeInGroup' ? 1 : 2;
+            const context = { family: family.id, method, group: offset ? args[0] : null, entry: offset === 2 ? args[1] : null,
+              observation_ref: args[offset].observation_ref, level_epoch: args[offset].level_epoch };
+            progress({ phase: 'provider-start', ...context, memory: process.memoryUsage() });
+            const result = await original.apply(this, args);
+            progress({ phase: 'provider-end', ...context, proposed: result !== null, memory: process.memoryUsage() });
+            return result;
+          };
+        }
+      }
+      return runtime;
+    });
     const transport: V6AgentTransport = {
       async request(operation) {
         operationCounts[operation.type] = (operationCounts[operation.type] ?? 0) + 1;
@@ -155,6 +179,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             }
           }
           const series = read('family_state:public_occurrence_recall');
+          const framedCheckpoint = read('family_state:public_framed_transfer');
+          const framedFacts = (read('reasoning:memory').facts as string[]).map(read)
+            .filter(fact => evidence.transitions.some((_: R, index: number) =>
+              fact.key === `framed_transfer_event:${evidence.decision_revision + index}`));
           const anchors = (series.events as R[]).filter(event => event.kind === 'coupled_pair_epoch_anchor');
           const alternating = (series.events as R[]).filter(event => event.kind === 'alternating_graph_evidence');
           const graphEvidence = alternating.at(-1);
@@ -192,9 +220,14 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           report.prefixes.push({ id: evidenceId, decisionRevision: evidence.decision_revision,
             acquiredActions: evidence.transitions.length, family: snapshot.lastDecision, operations: ['OP29', 'OP30', 'OP31'],
             proposalKind: evidence.proposal.kind ?? null, fieldSubquestion: evidence.proposal.field_subquestion ?? null,
+            materialSubquestion: evidence.proposal.material_access_subquestion ?? null,
             selectionGroup: evidence.proposal.strategy_receipt?.selected ?? null,
+            ...(evidence.native_bindings?.length
+              ? { nativeBindings: evidence.native_bindings.map((binding: R) => ({ ...binding, retainedGuard: read(binding.evidence_node) })) } : {}),
             ...(evidence.proposal.strategy_receipt?.native_coordination?.length
               ? { nativeCoordination: evidence.proposal.strategy_receipt.native_coordination } : {}),
+            ...(evidence.proposal.strategy_receipt?.native_proposal_refusals?.length
+              ? { nativeProposalRefusals: evidence.proposal.strategy_receipt.native_proposal_refusals } : {}),
             ...((evidence.proposal.program_composition_plan ?? evidence.proposal.respondent_probe_plan)?.current_program_access
               ? { currentProgramAccess: (evidence.proposal.program_composition_plan ?? evidence.proposal.respondent_probe_plan).current_program_access } : {}),
             ...(evidence.proposal.program_control_probe_plan
@@ -223,6 +256,17 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
                     negativeZeroPaths: negativeZeroPaths(evidence.proposal),
                     stateNode: 'family_state:public_occurrence_recall',
                     numericScope: 'Native numerical identities and source identities are verified independently; complete Python caller or float JSON spelling parity is not asserted.' } } : {}),
+            ...(evidence.proposal.framed_transfer_plan
+              ? { framedTransfer: { proposal: evidence.proposal,
+                    stateNode: 'family_state:public_framed_transfer' } } : {}),
+            framedAcquisition: {
+              stateNode: 'family_state:public_framed_transfer',
+              checkpointFormat: framedCheckpoint.format,
+              sourceState: framedCheckpoint.source_state,
+              nativeCheckpoint: framedCheckpoint,
+              acquired: framedFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
+              qualification: 'One shared FramedTransfer owner acquires actual selected or foreign public transitions. The six-field source projection and the complete native checkpoint are retained separately. Additional public-packet measurements, when enabled, have their own native provenance. Current level facts and historical portable records remain separate. This is not a complete-original-caller parity claim.',
+            },
             ...(evidence.proposal.labeled_sequence_plan
               ? { labeledSequenceLabel: evidence.proposal.labeled_sequence_plan.label,
                   labeledSequenceQuery: evidence.proposal.labeled_sequence_plan.scene.query.words[0].values,
@@ -304,6 +348,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               supportPreparationCount: (series.events as R[]).filter(event => event.kind === 'coupled_support_preparation').length,
               supportControlModelCount: (series.events as R[]).filter(event => event.kind === 'coupled_support_control_model').length } });
           lastCycles = snapshot.cycles;
+          options.checkpoint?.(report);
         }
         return result;
       },

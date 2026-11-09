@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 105,
+    "componentVerifiedModules": 108,
     "partiallyTransferredModules": 100,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1164,
+    "pendingModules": 1161,
     "strategyFamilies": 16
   },
   "families": [
@@ -87886,9 +87886,31 @@
           "endLine": 59
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-framed-transfer.ts",
+        "src/logos-engine/v6-framed-transfer-observation.ts",
+        "src/logos-engine/v6-framed-transfer-mechanics.ts",
+        "src/logos-engine/v6-framed-transfer-policy.ts",
+        "src/logos-engine/v6/framed-transfer-policy.json"
+      ],
+      "proof": [
+        "scripts/probe-v6-framed-transfer-original.py",
+        "tests/fixtures/v6-framed-transfer-original-public.json.gz",
+        "tests/fixtures/v6-framed-transfer-original-lkey-public.json.gz",
+        "scripts/export-v6-framed-transfer-reference.py",
+        "tests/fixtures/v6-framed-transfer-reference.json.gz",
+        "tests/v6-framed-transfer-reference.test.ts",
+        "scripts/measure-v52-native-phased-receptions.py",
+        "scripts/measure-v52-native-directed-composition.py",
+        "scripts/compare-v52-native-extension-contracts.py",
+        "scripts/compare-v52-final-framed-public-evidence.py",
+        "docs/migration/native-campaigns-v52/attempt9/phased-reception-contract-comparison.json",
+        "docs/migration/native-campaigns-v52/attempt9/directed-composition-contract-comparison.json",
+        "docs/migration/native-campaigns-v52/attempt9/framed-transfer-original-comparison.json",
+        "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json",
+        "docs/migration/native-campaigns-v52/attempt9/gare-public-trace.json.gz"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/framed_transfer/geometry.py",
@@ -87945,9 +87967,31 @@
           "endLine": 48
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-framed-transfer.ts",
+        "src/logos-engine/v6-framed-transfer-observation.ts",
+        "src/logos-engine/v6-framed-transfer-mechanics.ts",
+        "src/logos-engine/v6-framed-transfer-policy.ts",
+        "src/logos-engine/v6/framed-transfer-policy.json"
+      ],
+      "proof": [
+        "scripts/probe-v6-framed-transfer-original.py",
+        "tests/fixtures/v6-framed-transfer-original-public.json.gz",
+        "tests/fixtures/v6-framed-transfer-original-lkey-public.json.gz",
+        "scripts/export-v6-framed-transfer-reference.py",
+        "tests/fixtures/v6-framed-transfer-reference.json.gz",
+        "tests/v6-framed-transfer-reference.test.ts",
+        "scripts/measure-v52-native-phased-receptions.py",
+        "scripts/measure-v52-native-directed-composition.py",
+        "scripts/compare-v52-native-extension-contracts.py",
+        "scripts/compare-v52-final-framed-public-evidence.py",
+        "docs/migration/native-campaigns-v52/attempt9/phased-reception-contract-comparison.json",
+        "docs/migration/native-campaigns-v52/attempt9/directed-composition-contract-comparison.json",
+        "docs/migration/native-campaigns-v52/attempt9/framed-transfer-original-comparison.json",
+        "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json",
+        "docs/migration/native-campaigns-v52/attempt9/gare-public-trace.json.gz"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/framed_transfer/policy.py",
@@ -88004,9 +88048,31 @@
           "endLine": 70
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-framed-transfer.ts",
+        "src/logos-engine/v6-framed-transfer-observation.ts",
+        "src/logos-engine/v6-framed-transfer-mechanics.ts",
+        "src/logos-engine/v6-framed-transfer-policy.ts",
+        "src/logos-engine/v6/framed-transfer-policy.json"
+      ],
+      "proof": [
+        "scripts/probe-v6-framed-transfer-original.py",
+        "tests/fixtures/v6-framed-transfer-original-public.json.gz",
+        "tests/fixtures/v6-framed-transfer-original-lkey-public.json.gz",
+        "scripts/export-v6-framed-transfer-reference.py",
+        "tests/fixtures/v6-framed-transfer-reference.json.gz",
+        "tests/v6-framed-transfer-reference.test.ts",
+        "scripts/measure-v52-native-phased-receptions.py",
+        "scripts/measure-v52-native-directed-composition.py",
+        "scripts/compare-v52-native-extension-contracts.py",
+        "scripts/compare-v52-final-framed-public-evidence.py",
+        "docs/migration/native-campaigns-v52/attempt9/phased-reception-contract-comparison.json",
+        "docs/migration/native-campaigns-v52/attempt9/directed-composition-contract-comparison.json",
+        "docs/migration/native-campaigns-v52/attempt9/framed-transfer-original-comparison.json",
+        "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json",
+        "docs/migration/native-campaigns-v52/attempt9/gare-public-trace.json.gz"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/geometry.py",
@@ -97243,6 +97309,8 @@
     "v49 connects occluded_catalogue_composition at its declared first window position and restores the source catalogue-view fallback after common ViewFrontier. The four-list connection metric becomes 40 of 76 (52.6%) in native implementation 0.19.0. The direct view fallback is outside that denominator. No new game-specific or cold-start coordination rule is added; actual common acquisitions supply initial effects. All six complete-migration gates remain false.",
     "v50 connects typed_material_flow at its declared window position, with three own carrier/material/pose memory layers in the existing common owner. The four-list connection metric becomes 41 of 76 (53.9%) in native implementation 0.20.0. Finite native numeric identities and lexical-hash tie differences are explicit; no complete Python numeric or full common-caller parity is claimed. Actual native LIFE results and any coordination extensions are reported separately. All six complete-migration gates remain false.",
     "v50 also declares transient_returned_unlearned_contact_refusal_scope as a native coordination evolution, not original Python caller parity. It retains every public frame, final protocol, command and actual Kernel transition, distinguishing transient return from a stationary observation. The first non-null current window question remains in declared order. A cold typed relation must be remeasured and have supports disjoint from both the invitation point and every transient effect pixel. Subsequent questions require event-backed acquired context and current guards. Returning to the same public image does not establish hidden-state equivalence or an understood effect. The first actual native LIFE failure remains preserved separately from the corrected frozen campaign; all six complete-migration gates remain false.",
-    "v51 connects field_service_composition in native implementation 0.21.0. The four-list connection metric becomes 42 of 76 entries (55.3%); it measures connected entry points, not whole-code completion or game success. Own nested-control, envelope, service and transfer evidence belongs to the same common memory. The independent original component and actual native common-caller campaign are reported separately. Numerical identity and inherited-caller limitations remain explicit, and all six complete-migration gates remain false. The frozen 172-file native source completes VALV levels 1–3 in 28 actions (10/10/8), 28 acquired prefixes, 63 own events and two natural-boundary replays. The isolated original component independently produces the same 28 commands and 29 complete public packets (238 frames); its complete strategic caller is outside this comparison. No new native priority rule is introduced in v51."
+    "v51 connects field_service_composition in native implementation 0.21.0. The four-list connection metric becomes 42 of 76 entries (55.3%); it measures connected entry points, not whole-code completion or game success. Own nested-control, envelope, service and transfer evidence belongs to the same common memory. The independent original component and actual native common-caller campaign are reported separately. Numerical identity and inherited-caller limitations remain explicit, and all six complete-migration gates remain false. The frozen 172-file native source completes VALV levels 1–3 in 28 actions (10/10/8), 28 acquired prefixes, 63 own events and two natural-boundary replays. The isolated original component independently produces the same 28 commands and 29 complete public packets (238 frames); its complete strategic caller is outside this comparison. No new native priority rule is introduced in v51.",
+    "v52 connects observed_framed_transfer and observed_framed_analogy to one FramedTransfer owner at their declared positions, giving 44 of 76 connected entries (57.9%) in native implementation 0.22.0. The three own source modules are component_verified on independently generated bounded contracts; V5 dependency modules and the whole common caller keep their separate qualifications. The strict source GARE component stops at twelve actions and one level, and the separately preserved native target-three attempt on the frozen c227cb63aa743ed5790acc7e0cb825e107a4a6ac87471754a3216084ff224bf2 source stops after 77 actions and two completed levels at the level-three active-time budget. This attempt is failed, not a three-level completion or full-game WIN. Initialization, strict-guard and heap-exhaustion failures remain separate evidence. Native current-point witness binding and bounded reduction-search abstention are explicitly declared extensions, not new Python transfers or full original-caller parity. All subsequent attempts retain separate source snapshots and public evidence. The final successful attempt is qualified in the following note; all six complete-migration gates remain false.",
+    "The separately frozen final v52 attempt9 completes GARE levels 1–3 in 53 actions (7/9/37), 53 prefixes and one cold continuous session on native digest e32656de6ab64b0f6bdf8188e7bdeac06b4b3063c0bfb6d5531484cefb900f60, with 181 native files. It enters level 4 with NOT_FINISHED at its declared three-level target, not full-game WIN. The complete 54-packet/235-frame trajectory retains the original isolated component's first 12 commands and 13 packets exactly. Original six-field acquisitions and all 53 native checkpoints are independently recomputed; 47 original records, three stationary annex observations and two phased directed-only observations are distinct domains. Seven of 38 executed Framed proposals differ from strict source, with eight explicit native guard receipts. The directed composition uses one real receiver preparation and then one current question retaining both competing offsets; it stores no future action sequence and claims no reception before the real return. The entry metric remains 44/76 (57.9%), and all six complete-migration gates remain false. Earlier initialization, guard, heap, budget and priority-regression failures remain preserved with their exact historical source archives; their evidence is not replaced by this success."
   ]
 }

@@ -194,7 +194,7 @@ export class NativeCompositionAuthority {
     return receipt;
   }
 
-  async release(proposal: NativeProposal, observation: NativeObservation, guard: { admitted: boolean; reason: string }, execution: NativeExecution): Promise<boolean> {
+  async release(proposal: NativeProposal, observation: NativeObservation, guard: { admitted: boolean; reason: string; native_binding_receipt?: R }, execution: NativeExecution): Promise<boolean> {
     const template = proposal.bundle_template as R, target = proposal.composition_target_tree as R;
     if (!target?.admitted || !guard.admitted) return false;
     if (!template || !['OP18', 'OP28'].includes(template.operation_key)) throw new Error('Unsupported physical frontier operation');
@@ -221,7 +221,12 @@ export class NativeCompositionAuthority {
       memory_hint: { current_observation: summary(observation), main_objective_memory_revision: this.memory.get(EPISODE, 'main_objective').revision,
         path_refs: proposal.route_refs ?? [], library_registry_revision: registryRevision } }, observation.observation_ref, revision);
     await this.checkpoint('prediction.freeze', [{ id: `reasoning:prediction:${revision}`, kind: 'component_state', component: 'prospective_predictions', value: this.frozen,
-      evidence: [observation.observation_ref], relations: [{ relation: 'tests', target: 'reasoning:memory' }] }]);
+      evidence: [observation.observation_ref], relations: [{ relation: 'tests', target: 'reasoning:memory' }] },
+      ...(guard.native_binding_receipt ? [{ id: `reasoning:binding:${revision}`, kind: 'transition_evidence' as const,
+        component: 'native_current_input_binding', status: 'observed' as const,
+        value: { observation_ref: observation.observation_ref, level_epoch: observation.level_epoch, frame_hash: observation.frame_hash,
+          command: first, guard: structuredClone(guard), qualification: 'Current public input binding retained before ordinary WHY/ACT release; no physical effect or terminal role is inferred.' },
+        evidence: [observation.observation_ref], relations: [{ relation: 'supports', target: 'reasoning:memory' }] }] : [])]);
     const report = await this.run({ episode: EPISODE, id: `frontier-${revision}`, level_epoch: observation.level_epoch, policy: 'code_only', context: bundle.purpose,
       bundles: { B0: bundle }, candidates: ['B0'], relevant_compositions: stateCompositions(proposal, this.objective).map(composition => composition.id) }, execution);
     this.lastRelease = report;

@@ -1,0 +1,661 @@
+{
+  "schema": "logos-engine.v52.public-regression-comparison.v1",
+  "passed": true,
+  "checks": [
+    {
+      "name": "same declared game/target and both results passed",
+      "passed": true
+    },
+    {
+      "name": "same production budgets and original game asset provenance",
+      "passed": true
+    },
+    {
+      "name": "same complete initial public packet",
+      "passed": true
+    },
+    {
+      "name": "same commands, full returned animation packet hashes and primitive boundaries",
+      "passed": true
+    },
+    {
+      "name": "same selected source entries, acquired prefix lengths and observed solver projections",
+      "passed": true
+    },
+    {
+      "name": "same retained source-layer projections and labeled public submission receipts",
+      "passed": true
+    },
+    {
+      "name": "same bounded native predicate composition counts, survivors and reuse",
+      "passed": true
+    },
+    {
+      "name": "same source and preferred entry coordination with current guards",
+      "passed": true
+    },
+    {
+      "name": "same reduction geometry plan and step modes",
+      "passed": true
+    },
+    {
+      "name": "same complete trace plans and latest acquired trace payloads",
+      "passed": true
+    },
+    {
+      "name": "same acquired linked packet counts, complete latest payloads and complete plans",
+      "passed": true
+    },
+    {
+      "name": "same complete queued-field plans and every acquired model event",
+      "passed": true
+    },
+    {
+      "name": "same complete catalogue plans, latest payloads and every acquired catalogue or view event",
+      "passed": true
+    },
+    {
+      "name": "field-service layers remain empty on the seven earlier trajectories",
+      "passed": true
+    },
+    {
+      "name": "typed-material layers remain empty outside LIFE on the retained trajectories",
+      "passed": true
+    },
+    {
+      "name": "same request outcomes and common caller counters",
+      "passed": true
+    },
+    {
+      "name": "same final public result and retained-session counters",
+      "passed": true
+    },
+    {
+      "name": "source frozen during both runs and no Python agent modules",
+      "passed": true
+    },
+    {
+      "name": "same retained mechanical-domain assessments",
+      "passed": true
+    }
+  ],
+  "independentlyRecomputedReferences": [
+    {
+      "kind": "catalogue_supporting_event_0",
+      "prefixIndex": 1,
+      "baseline": "e4f239edfc6b8f1488ebe83da846ea56f873e0ac7f6d8b14948f8f43c9f42243",
+      "current": "d9bde6b0475c36e5b488a8aefb43ccd072995c02d4a60d7a1e2a3326431729c4",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_request_scope",
+      "prefixIndex": 1,
+      "baseline": "projection:72499909230eae64335a247b05b00fe9ace474a2d26345be7e10d8b4d5c6cdef",
+      "current": "projection:7d532c536fd0795d6080d54af95f0f172168cd8fc39016dd0074a58f433092b1",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_model_scope",
+      "prefixIndex": 1,
+      "baseline": "49c4b7b89bb4abe45a219ce0734a12ff9ec957efa22652efc35cda4133bfd239",
+      "current": "af105d56c6b4b5bbc746695b6702299c19dbab6b274040933ea8069e8eb83825",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_request_descriptive_facts",
+      "prefixIndex": 1,
+      "baseline": "projection:72499909230eae64335a247b05b00fe9ace474a2d26345be7e10d8b4d5c6cdef",
+      "current": "projection:7d532c536fd0795d6080d54af95f0f172168cd8fc39016dd0074a58f433092b1",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_model_descriptive_facts",
+      "prefixIndex": 1,
+      "baseline": "49c4b7b89bb4abe45a219ce0734a12ff9ec957efa22652efc35cda4133bfd239",
+      "current": "af105d56c6b4b5bbc746695b6702299c19dbab6b274040933ea8069e8eb83825",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_0",
+      "prefixIndex": 2,
+      "baseline": "e4f239edfc6b8f1488ebe83da846ea56f873e0ac7f6d8b14948f8f43c9f42243",
+      "current": "d9bde6b0475c36e5b488a8aefb43ccd072995c02d4a60d7a1e2a3326431729c4",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_1",
+      "prefixIndex": 2,
+      "baseline": "ebc0fbf9c909bf7ab2be9ede74640947d9e9d3e1a60b142ea1e7c7a172aae4c6",
+      "current": "63947a7b3f5e743527d17687e079311ff2d0838da023a9ff2f54b4d10a293a84",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_2",
+      "prefixIndex": 2,
+      "baseline": "b1ff3f46f0facff8fc9be693e70dc4adffe56019e0dad72271142692e63fd912",
+      "current": "41d8d57012ef23f8b2485dffffc4d252fe367831926de0348470d8dcc06d711c",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_0",
+      "prefixIndex": 4,
+      "baseline": "e4f239edfc6b8f1488ebe83da846ea56f873e0ac7f6d8b14948f8f43c9f42243",
+      "current": "d9bde6b0475c36e5b488a8aefb43ccd072995c02d4a60d7a1e2a3326431729c4",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_1",
+      "prefixIndex": 4,
+      "baseline": "ebc0fbf9c909bf7ab2be9ede74640947d9e9d3e1a60b142ea1e7c7a172aae4c6",
+      "current": "63947a7b3f5e743527d17687e079311ff2d0838da023a9ff2f54b4d10a293a84",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_2",
+      "prefixIndex": 4,
+      "baseline": "b1ff3f46f0facff8fc9be693e70dc4adffe56019e0dad72271142692e63fd912",
+      "current": "41d8d57012ef23f8b2485dffffc4d252fe367831926de0348470d8dcc06d711c",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_3",
+      "prefixIndex": 4,
+      "baseline": "1541d2983e595e26497efba492481d4e7f660f474dd450bdb5f85b004f32a420",
+      "current": "18762651299feecea257ae829aeae146958711ba8bf7045b485fd4e0a35a337c",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_4",
+      "prefixIndex": 4,
+      "baseline": "c9293b9974de651f38c12d843e88f46f2ac8a1c5791e91ec793840a5109843ff",
+      "current": "f3f88d95de8a8c7f1f529afcb78250a6a6c6381d2119c976e508250bc47686bc",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_5",
+      "prefixIndex": 4,
+      "baseline": "eb3d6ddcc2dedea1c30fbd3037f24b346111d870f69739ed97daaeef620e7119",
+      "current": "c03ac0fdae3c98f46b7ab2373becdb00d8c975dc60e9c00580d03a0a6bc46537",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_request_scope",
+      "prefixIndex": 4,
+      "baseline": "projection:ef5e730e11961c2296b06dc03e6aa94b2d098e088b731b98fccbc9a8dcb425e8",
+      "current": "projection:5dd2f540a595ff997dfe7cfc992b4cc3df069428cfadf1d518bde833f1d29e2d",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_model_scope",
+      "prefixIndex": 4,
+      "baseline": "95a4d8fa0026ac0401416e0cfb2636d96d15485d528165f609fabcff7d65e19e",
+      "current": "72f710ec5d6590bdfb55830ba87e361266b8a568991cd5316fe8d5bdf9397a3a",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_request_descriptive_facts",
+      "prefixIndex": 4,
+      "baseline": "projection:ef5e730e11961c2296b06dc03e6aa94b2d098e088b731b98fccbc9a8dcb425e8",
+      "current": "projection:5dd2f540a595ff997dfe7cfc992b4cc3df069428cfadf1d518bde833f1d29e2d",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_model_descriptive_facts",
+      "prefixIndex": 4,
+      "baseline": "95a4d8fa0026ac0401416e0cfb2636d96d15485d528165f609fabcff7d65e19e",
+      "current": "72f710ec5d6590bdfb55830ba87e361266b8a568991cd5316fe8d5bdf9397a3a",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_0",
+      "prefixIndex": 6,
+      "baseline": "97028b5ae83a8f8d2b0885347afffe3c0f3bd99aa09d0fe04b4eddc43411b540",
+      "current": "60bdcd924ee4d40f63221116a76f7340aa008cded9c900e204a837ad1995cfdb",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_request_scope",
+      "prefixIndex": 6,
+      "baseline": "projection:68dc39cb7dae1aacb1d688dd4fab27666390de7c2ca902b4026918ec81e79fea",
+      "current": "projection:b6dc4bd552409377bb6cfc996eb185915e7f9f5aa489e63223fcfcff70c40558",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_model_scope",
+      "prefixIndex": 6,
+      "baseline": "1ae7470d349cd7cb1008334d15ee63f2cea5d6c8ad1e99ed65f50b4e894f22ae",
+      "current": "4c40a26407f8ff9636a40367c704cdee7993f51eaa5006b7c2c4788925ff4482",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_request_descriptive_facts",
+      "prefixIndex": 6,
+      "baseline": "projection:68dc39cb7dae1aacb1d688dd4fab27666390de7c2ca902b4026918ec81e79fea",
+      "current": "projection:b6dc4bd552409377bb6cfc996eb185915e7f9f5aa489e63223fcfcff70c40558",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_model_descriptive_facts",
+      "prefixIndex": 6,
+      "baseline": "1ae7470d349cd7cb1008334d15ee63f2cea5d6c8ad1e99ed65f50b4e894f22ae",
+      "current": "4c40a26407f8ff9636a40367c704cdee7993f51eaa5006b7c2c4788925ff4482",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_0",
+      "prefixIndex": 7,
+      "baseline": "97028b5ae83a8f8d2b0885347afffe3c0f3bd99aa09d0fe04b4eddc43411b540",
+      "current": "60bdcd924ee4d40f63221116a76f7340aa008cded9c900e204a837ad1995cfdb",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_1",
+      "prefixIndex": 7,
+      "baseline": "47d9e4c34f010b26695a9d345bedfd32c40c3f4b6f9fa904582bc891f857d27e",
+      "current": "00e06c099b149bb5fbed35bd0b42d056b391d0c04cbc9d5c417ab6929ac1bc16",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_2",
+      "prefixIndex": 7,
+      "baseline": "cf1fa73fc77c0dddaee971c151a2e42d83fdb43eb487a6b9749b51fbf79ef3d8",
+      "current": "629b71e976bff31bacc42b55068992b21721b7f8d8b8858ea68319b985e05b44",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_0",
+      "prefixIndex": 9,
+      "baseline": "97028b5ae83a8f8d2b0885347afffe3c0f3bd99aa09d0fe04b4eddc43411b540",
+      "current": "60bdcd924ee4d40f63221116a76f7340aa008cded9c900e204a837ad1995cfdb",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_1",
+      "prefixIndex": 9,
+      "baseline": "47d9e4c34f010b26695a9d345bedfd32c40c3f4b6f9fa904582bc891f857d27e",
+      "current": "00e06c099b149bb5fbed35bd0b42d056b391d0c04cbc9d5c417ab6929ac1bc16",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_2",
+      "prefixIndex": 9,
+      "baseline": "cf1fa73fc77c0dddaee971c151a2e42d83fdb43eb487a6b9749b51fbf79ef3d8",
+      "current": "629b71e976bff31bacc42b55068992b21721b7f8d8b8858ea68319b985e05b44",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_3",
+      "prefixIndex": 9,
+      "baseline": "755c28cd212c30a274f1d3f4369155f10647f241792317ac2b0203c5f9efe636",
+      "current": "b6c5821c69bed6b5d09ab6e3d26b76634514f87f2c629125292cd84855c719a6",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_4",
+      "prefixIndex": 9,
+      "baseline": "be86f24a4e4f48675133063e9972bf0aac1cdd87c980bdcf3d7e1037178432ff",
+      "current": "c7aec977ebdaf63f16c557b37a0836b638445192841747d41f66e3d9858c8a34",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_5",
+      "prefixIndex": 9,
+      "baseline": "bd9dd8005f82f935fbacdc586fa7d64551df60832875ecd62540688db762674c",
+      "current": "dfe66c7efc7ffa9c421b3611d8aa12b042d6487c60ec0831cc23a510a528cb2d",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_request_scope",
+      "prefixIndex": 9,
+      "baseline": "projection:d4faffd0c4a29a9c26875661617a44aa60fa421bdbc3d86b96d64f8d0e18a487",
+      "current": "projection:63be8a30722ed7f9bec4dbbac8f165fb8a4bd8d30686f643f22a5d74d76163e2",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_model_scope",
+      "prefixIndex": 9,
+      "baseline": "79b05daf0c6b115f1e4bbd6a932e1d2c345dd30fb8512076000db94db402f6ef",
+      "current": "771f8738bd493ca469b609338c27cf71cee8625217a964ba950e6be1ce1b9b61",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_request_descriptive_facts",
+      "prefixIndex": 9,
+      "baseline": "projection:d4faffd0c4a29a9c26875661617a44aa60fa421bdbc3d86b96d64f8d0e18a487",
+      "current": "projection:63be8a30722ed7f9bec4dbbac8f165fb8a4bd8d30686f643f22a5d74d76163e2",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_model_descriptive_facts",
+      "prefixIndex": 9,
+      "baseline": "79b05daf0c6b115f1e4bbd6a932e1d2c345dd30fb8512076000db94db402f6ef",
+      "current": "771f8738bd493ca469b609338c27cf71cee8625217a964ba950e6be1ce1b9b61",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_0",
+      "prefixIndex": 11,
+      "baseline": "9d756536ab07698cab189fbd06a1299fa3064e50e9891ba556c2320bf38272cd",
+      "current": "bb887139cb28d24da346dcc350ec4df2602fc4a36005f8015041e0c22b144e9a",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_request_scope",
+      "prefixIndex": 11,
+      "baseline": "projection:8fcb256b6ee2f111fa0f8410af54e7a3c7810ea64eb104eab259a5fea70d725d",
+      "current": "projection:7ec6de698b60223fdc4238e535f749a8931497f2103e65af3a758658c05f0e42",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_model_scope",
+      "prefixIndex": 11,
+      "baseline": "7354a65491d61bd3c5038329682bbab342b23ce693d92c89f6a5413e926da27b",
+      "current": "03c1e80ba0ba0f25f530c16ebbc3a920357c8eb6ac1a870930fff13ed416a6a5",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_request_descriptive_facts",
+      "prefixIndex": 11,
+      "baseline": "projection:8fcb256b6ee2f111fa0f8410af54e7a3c7810ea64eb104eab259a5fea70d725d",
+      "current": "projection:7ec6de698b60223fdc4238e535f749a8931497f2103e65af3a758658c05f0e42",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_model_descriptive_facts",
+      "prefixIndex": 11,
+      "baseline": "7354a65491d61bd3c5038329682bbab342b23ce693d92c89f6a5413e926da27b",
+      "current": "03c1e80ba0ba0f25f530c16ebbc3a920357c8eb6ac1a870930fff13ed416a6a5",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_0",
+      "prefixIndex": 12,
+      "baseline": "9d756536ab07698cab189fbd06a1299fa3064e50e9891ba556c2320bf38272cd",
+      "current": "bb887139cb28d24da346dcc350ec4df2602fc4a36005f8015041e0c22b144e9a",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_1",
+      "prefixIndex": 12,
+      "baseline": "4f61579b0b486c87bf495a23b4f2725b0cb8ebb134debbe5ed363eeb0587666f",
+      "current": "686cacfb826d418ca30a4f226a3c2de68fe7fddbda3795a58a129f7fb1a00c9d",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_2",
+      "prefixIndex": 12,
+      "baseline": "2cb4bc0b7a8e94e8d747806dcf8fbd9cb3bc035df09018ed6c6727c5e3a1516f",
+      "current": "5f9c25c3825da3ac8f7fd2e85b41357bd6d917115bdf752b411811289827956d",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_0",
+      "prefixIndex": 15,
+      "baseline": "9d756536ab07698cab189fbd06a1299fa3064e50e9891ba556c2320bf38272cd",
+      "current": "bb887139cb28d24da346dcc350ec4df2602fc4a36005f8015041e0c22b144e9a",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_1",
+      "prefixIndex": 15,
+      "baseline": "4f61579b0b486c87bf495a23b4f2725b0cb8ebb134debbe5ed363eeb0587666f",
+      "current": "686cacfb826d418ca30a4f226a3c2de68fe7fddbda3795a58a129f7fb1a00c9d",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_2",
+      "prefixIndex": 15,
+      "baseline": "2cb4bc0b7a8e94e8d747806dcf8fbd9cb3bc035df09018ed6c6727c5e3a1516f",
+      "current": "5f9c25c3825da3ac8f7fd2e85b41357bd6d917115bdf752b411811289827956d",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_3",
+      "prefixIndex": 15,
+      "baseline": "c6cc9ef0a0287f738ffa51e2093771a25df3139b3c6429b637c4b5deb8801562",
+      "current": "fcc908787d38a574c230bf041a482f502adc5fea0e91f92aceebe77601cf5f84",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_4",
+      "prefixIndex": 15,
+      "baseline": "114650640e89a4926161233cff933c002af8f5f3f85d3407f4a3e2d788da05dc",
+      "current": "a1cf9af06c21bfe2a32a2e32ea040b361916a745bee91ccf4ffbb2e362a32ba4",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_5",
+      "prefixIndex": 15,
+      "baseline": "8e119e6a06a20292ff3bbef138b2f4e5cb86d7a97bcd85aba3b65dc062483d6a",
+      "current": "cc6d78ea07694b283d640ced8319789723ccdeb0faa4afb7c36e8e17900c6096",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_6",
+      "prefixIndex": 15,
+      "baseline": "36ff5a10589fe9de2a454394b94b053e1018112dc0c9dc9e502113f09846e1df",
+      "current": "1d467a429fb0954d56836bc3c27c1b8c7e26a9264f40831962fa2e09d8af1b23",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_request_scope",
+      "prefixIndex": 15,
+      "baseline": "projection:dd40157e8d2a71bbbb4564c2d21c3ffb8440308893162904e7293a8acff84ce4",
+      "current": "projection:0b942dea8fb9aa3c551443e647a3a58a5d8f65248b7ded182727b6bf4d0c71d4",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_model_scope",
+      "prefixIndex": 15,
+      "baseline": "aae5d447355791ac51a96d438307288e2f8b871e5728c4957a2e632cb2e74dee",
+      "current": "afa08323b24501e00a5982e09ac34d91d9a6a9f14196a36896fd0565bd601ef0",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_request_descriptive_facts",
+      "prefixIndex": 15,
+      "baseline": "projection:dd40157e8d2a71bbbb4564c2d21c3ffb8440308893162904e7293a8acff84ce4",
+      "current": "projection:0b942dea8fb9aa3c551443e647a3a58a5d8f65248b7ded182727b6bf4d0c71d4",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_model_descriptive_facts",
+      "prefixIndex": 15,
+      "baseline": "aae5d447355791ac51a96d438307288e2f8b871e5728c4957a2e632cb2e74dee",
+      "current": "afa08323b24501e00a5982e09ac34d91d9a6a9f14196a36896fd0565bd601ef0",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_0",
+      "prefixIndex": 16,
+      "baseline": "9d756536ab07698cab189fbd06a1299fa3064e50e9891ba556c2320bf38272cd",
+      "current": "bb887139cb28d24da346dcc350ec4df2602fc4a36005f8015041e0c22b144e9a",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_1",
+      "prefixIndex": 16,
+      "baseline": "4f61579b0b486c87bf495a23b4f2725b0cb8ebb134debbe5ed363eeb0587666f",
+      "current": "686cacfb826d418ca30a4f226a3c2de68fe7fddbda3795a58a129f7fb1a00c9d",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_2",
+      "prefixIndex": 16,
+      "baseline": "2cb4bc0b7a8e94e8d747806dcf8fbd9cb3bc035df09018ed6c6727c5e3a1516f",
+      "current": "5f9c25c3825da3ac8f7fd2e85b41357bd6d917115bdf752b411811289827956d",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_3",
+      "prefixIndex": 16,
+      "baseline": "c6cc9ef0a0287f738ffa51e2093771a25df3139b3c6429b637c4b5deb8801562",
+      "current": "fcc908787d38a574c230bf041a482f502adc5fea0e91f92aceebe77601cf5f84",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_4",
+      "prefixIndex": 16,
+      "baseline": "114650640e89a4926161233cff933c002af8f5f3f85d3407f4a3e2d788da05dc",
+      "current": "a1cf9af06c21bfe2a32a2e32ea040b361916a745bee91ccf4ffbb2e362a32ba4",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_5",
+      "prefixIndex": 16,
+      "baseline": "8e119e6a06a20292ff3bbef138b2f4e5cb86d7a97bcd85aba3b65dc062483d6a",
+      "current": "cc6d78ea07694b283d640ced8319789723ccdeb0faa4afb7c36e8e17900c6096",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_6",
+      "prefixIndex": 16,
+      "baseline": "36ff5a10589fe9de2a454394b94b053e1018112dc0c9dc9e502113f09846e1df",
+      "current": "1d467a429fb0954d56836bc3c27c1b8c7e26a9264f40831962fa2e09d8af1b23",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_7",
+      "prefixIndex": 16,
+      "baseline": "e6e4082e57df90ca678d63c6b3b4a4887df4475bc075aa73950445114f7e06e4",
+      "current": "e92e0ed4a9fd9a02bbacba9a6e1b0a6a75efe1603cde62c00a27eff6a1c0e9e7",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_8",
+      "prefixIndex": 16,
+      "baseline": "e4b63ead1300acb8c9c65fd28aeff25de5605ce5eb41e0e2dd59ee1a4a436dbd",
+      "current": "d0d7a1fde33ba9a64d553283e844ac2bff94d752c8d60f06722265158d54d749",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_0",
+      "prefixIndex": 18,
+      "baseline": "9d756536ab07698cab189fbd06a1299fa3064e50e9891ba556c2320bf38272cd",
+      "current": "bb887139cb28d24da346dcc350ec4df2602fc4a36005f8015041e0c22b144e9a",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_1",
+      "prefixIndex": 18,
+      "baseline": "4f61579b0b486c87bf495a23b4f2725b0cb8ebb134debbe5ed363eeb0587666f",
+      "current": "686cacfb826d418ca30a4f226a3c2de68fe7fddbda3795a58a129f7fb1a00c9d",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_2",
+      "prefixIndex": 18,
+      "baseline": "2cb4bc0b7a8e94e8d747806dcf8fbd9cb3bc035df09018ed6c6727c5e3a1516f",
+      "current": "5f9c25c3825da3ac8f7fd2e85b41357bd6d917115bdf752b411811289827956d",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_3",
+      "prefixIndex": 18,
+      "baseline": "c6cc9ef0a0287f738ffa51e2093771a25df3139b3c6429b637c4b5deb8801562",
+      "current": "fcc908787d38a574c230bf041a482f502adc5fea0e91f92aceebe77601cf5f84",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_4",
+      "prefixIndex": 18,
+      "baseline": "114650640e89a4926161233cff933c002af8f5f3f85d3407f4a3e2d788da05dc",
+      "current": "a1cf9af06c21bfe2a32a2e32ea040b361916a745bee91ccf4ffbb2e362a32ba4",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_5",
+      "prefixIndex": 18,
+      "baseline": "8e119e6a06a20292ff3bbef138b2f4e5cb86d7a97bcd85aba3b65dc062483d6a",
+      "current": "cc6d78ea07694b283d640ced8319789723ccdeb0faa4afb7c36e8e17900c6096",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_6",
+      "prefixIndex": 18,
+      "baseline": "36ff5a10589fe9de2a454394b94b053e1018112dc0c9dc9e502113f09846e1df",
+      "current": "1d467a429fb0954d56836bc3c27c1b8c7e26a9264f40831962fa2e09d8af1b23",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_7",
+      "prefixIndex": 18,
+      "baseline": "e6e4082e57df90ca678d63c6b3b4a4887df4475bc075aa73950445114f7e06e4",
+      "current": "e92e0ed4a9fd9a02bbacba9a6e1b0a6a75efe1603cde62c00a27eff6a1c0e9e7",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_8",
+      "prefixIndex": 18,
+      "baseline": "e4b63ead1300acb8c9c65fd28aeff25de5605ce5eb41e0e2dd59ee1a4a436dbd",
+      "current": "d0d7a1fde33ba9a64d553283e844ac2bff94d752c8d60f06722265158d54d749",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_9",
+      "prefixIndex": 18,
+      "baseline": "2bcc5fe5bcf0e4c9338acaf37b9e1665abe0091a3b91e048cdabf3809dc71a3b",
+      "current": "4895ca280aebe2eefcbe71217c71146c3f86bb3aff8709c4876d3ad9500d6bf5",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_10",
+      "prefixIndex": 18,
+      "baseline": "e82fef808bb4466e66b3401ce863b2c422319e2cd10712aedad655bcc72938be",
+      "current": "991f47b7d1b76fafb5be640c0a02c894c2ff262a33dfb1d2c1fc40c7cb365a14",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_supporting_event_11",
+      "prefixIndex": 18,
+      "baseline": "45f40eac1857be6e80301b2bcc14daa9bc0ab4fbfd6122809edc8a4d80497ee7",
+      "current": "6d3c1de84030bd831f275e319673bc6fbc550cde2809ef46c1a7a076d0c01c3a",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_request_scope",
+      "prefixIndex": 18,
+      "baseline": "projection:dcd4cca1562cee4ae7771a43209185e4570c8350e5f1157b55239c31be1cd97d",
+      "current": "projection:8cc98e2ab34c213016417ffa7456f08bd7349dc2f2b021d8e033836f02ebf230",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_model_scope",
+      "prefixIndex": 18,
+      "baseline": "9acac268f35c20cee26bd1802574ea7afb194abbebcd91c3d54e382aaba3dc44",
+      "current": "9e5e425b407348a28bf9ed2f6db2c320cb5ea208be538d978df25f630a738ff6",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_request_descriptive_facts",
+      "prefixIndex": 18,
+      "baseline": "projection:dcd4cca1562cee4ae7771a43209185e4570c8350e5f1157b55239c31be1cd97d",
+      "current": "projection:8cc98e2ab34c213016417ffa7456f08bd7349dc2f2b021d8e033836f02ebf230",
+      "independentlyRecomputed": true
+    },
+    {
+      "kind": "catalogue_projection_model_descriptive_facts",
+      "prefixIndex": 18,
+      "baseline": "9acac268f35c20cee26bd1802574ea7afb194abbebcd91c3d54e382aaba3dc44",
+      "current": "9e5e425b407348a28bf9ed2f6db2c320cb5ea208be538d978df25f630a738ff6",
+      "independentlyRecomputed": true
+    }
+  ],
+  "before": {
+    "path": "docs/migration/native-campaigns-v49/gril-three-levels.json",
+    "sha256": "95e3a88d2cda99590d63ca27af5da4b1c19eb05c77523a843febed06c7eb91af",
+    "sourceDigest": "e5a7fc15461fd1ddbc9019b3749dad98a2235fc38df40898778d6c089cc13a5a"
+  },
+  "after": {
+    "path": "docs/migration/native-campaigns-v52/gril-recorded-public-replay.json",
+    "sha256": "ea543a71185cbb177632743623e856b4a469be76f94173d6e0433abdb05a914f",
+    "sourceDigest": "c227cb63aa743ed5790acc7e0cb825e107a4a6ac87471754a3216084ff224bf2",
+    "mode": "recorded-public-replay"
+  },
+  "compared": {
+    "commands": 19,
+    "completePublicPackets": 20,
+    "prefixes": 19
+  },
+  "qualification": "Exact public commands, complete packet hashes, source selection, prefix/acquisition counts and listed retained projections are compared. Observation session prefixes are normalized. Trace request, Queue model/portable-relation/request, and Catalogue supporting-event/projection-request/projection-model identifiers are independently recomputed from complete retained payloads before normalization. Catalogue support recipes use only prior catalogue observation/response events in the matching field; current acquired events are accumulated afterward. Complete Trace, Linked Packet and Queue plans and their declared acquired payloads remain compared, including numeric fields. Complete Catalogue plans, every acquired catalogue or view event, the latest payload, counts and state-node label remain compared; absent baseline layers are explicitly normalized to zero/null/empty. Its full caller proposal envelope is outside the retained projection. Native graph chain/revision, inherited digest, session-derived observed-program model IDs, full labeled cache and five predicate proof references are also outside that projection. Coordination source/preferred entries and current guards remain compared; full proposal digest and graph-node references are not asserted equal. Field Service own counts, latest payload, acquisitions, negative-zero paths and selected plans must remain empty on the seven trajectories before VALV. VALV service own envelopes and acquisitions are checked separately against the unchanged source component on the retained public trace; this baseline projection alone does not compare those identifiers. Typed Material remains empty outside LIFE on these eight trajectories. FramedTransfer state and passive acquisitions are retained separately and are not assumed to be empty or equal to an absent baseline layer. LIFE compares all three reconstructed own material layers, complete provider envelopes and every acquired receipt with explicit signed-zero restoration and independently recomputed identity recipes; its exact limits are in typedMaterialComparison. Execution durations and final implementation labels are excluded. Recorded-public replay recomputes commands before supplying prior actual returns and is neither a new live success nor a speed measurement."
+}
