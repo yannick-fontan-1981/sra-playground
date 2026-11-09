@@ -39,7 +39,12 @@ separate evidence. The frozen release delta passes 252 checks. The final live
 result is reached 11 minutes 38 seconds after the immutable candidate selection,
 within the user's 40-minute bound. The entry audit reaches **50/76 (65.8%)**,
 including **17/33 material entries**, and the compiled inventory remains 37.
-All complete-migration gates remain false. See the
+All 13 recorded-public regressions pass 221 historical comparison checks.
+The concurrent Motivation/navigation publication is preserved by a normal
+merge. Its separate publication validation again passes 252 checks, with an
+identical native worker and unchanged frozen campaign inputs. The v57 label
+continues to identify the native milestone and its evidence, independently of
+the Site publication number. All complete-migration gates remain false. See the
 [v57 report](v57-topological-recolor-and-motion-questions.md) for exact scopes,
 validation and retained evidence.
 

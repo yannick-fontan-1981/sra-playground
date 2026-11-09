@@ -1,0 +1,33 @@
+{
+  "schema": "sra.browser-publication-smoke.v1",
+  "recordedAt": "2026-11-09T15:38:15.967Z",
+  "motivation": {
+    "active": "Motivation",
+    "horizontalOverflow": false,
+    "stepCount": 10,
+    "title": "Motivation · SRA Playground",
+    "viewport": [
+      1363,
+      936
+    ]
+  },
+  "coldPanel": "Solve with SRA.\n\nReady to run from level 1.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n0\nactions\n0\nlevels solved\n0\ncompleted plans\nNew reasoning session\nReturn to Manual",
+  "completed": {
+    "canvas": {
+      "height": 384,
+      "width": 384,
+      "x": 327,
+      "y": 534.671875
+    },
+    "horizontalOverflow": false,
+    "inspectorOpen": false,
+    "panel": "Solve with SRA. Level completed. Run to next level Run 16 actions One action Pause 3actions 1levels solved 3completed plans Restart game at level 1 New reasoning session Return to Manual",
+    "title": "SRA Playground · SMLP — Symbolic Reasoning Agent",
+    "url": "http://127.0.0.1:4173/?game=SMLP&level=2",
+    "viewport": [
+      1363,
+      936
+    ]
+  },
+  "qualification": "Managed-preview browser smoke after preserving the concurrent editorial/navigation update. One ordinary Run to next level click from a cold SMLP level 1; not a new three-level campaign. The earlier full three-level browser proof remains separate."
+}

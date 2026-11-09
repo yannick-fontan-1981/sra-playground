@@ -1,5 +1,7 @@
 # V57: topological recolor, current motion questions and SMLP
 
+V57 identifies this native migration milestone and its immutable evidence paths. During verification, a concurrent editorial update was published as Site version 57. That update is preserved in the merged delivery; the Site publication number therefore advances separately from this milestone label.
+
 ## Delivered result
 
 The frozen native common agent completes **SMLP's first three official levels in 15 actions**, using one cold continuous session. The levels require **3, 4 and 8 actions**. The common Kernel acquires all 15 actual returns in nine sealed prefixes, with two natural boundary replays. It stops on entry to level 4 with `NOT_FINISHED` and `target_levels_completed`. This is a three-level result, not a complete-game victory.
@@ -127,6 +129,16 @@ The existing comparator retains its 17 checks per case: selected commands, full 
 The three required state owners are present at every checked prefix: **1,254 of 1,254 owner/prefix checks**, retaining 2,004 transition references. Those references repeat the same 668 actions across owners and are not additional actions. The legacy `passiveOwnerRequirements` receipt key denotes state-presence checks; Recolor still records only its own selected actions.
 
 These are recorded-return regression checks. SMLP is the new live three-level result; the thirteen replays are not counted as thirteen new game victories.
+
+## Concurrent update and merged delivery
+
+The published editorial commit `38032a980d4889fb55eb309428aebea131d7fde1` adds Motivation, shared navigation and its build entry. It was preserved with a normal Git merge, recorded in [concurrent-merge.json](native-campaigns-v57/final/publication/concurrent-merge.json). All **236 native files and 247 execution/archive inputs** retain their frozen hashes. Four source/UI files in the earlier test inventory change; the earlier receipts remain untouched and are explicitly historical.
+
+The merged tree passes a new [252-check validation](native-campaigns-v57/final/publication/validation/delta-tests-run.json), with all 507 current source/test inputs unchanged during execution, and a new [production validation](native-campaigns-v57/final/publication/validation/checks-run.json). The latter includes **301 build inputs**. Its native worker is byte-identical to the pre-merge worker, including the SHA-256 and size above.
+
+The targeted [browser smoke check](native-campaigns-v57/final/publication/sra-merged-publication-smoke.json) opens Motivation through the shared menu, checks the active navigation state and ten steps, returns to the Playground, selects SMLP and runs one ordinary level from zero counters. It observes **three actions, one solved level and three completed plans**, a 384-by-384 board, a closed inspector and no horizontal overflow at the observed 1,363-by-936 viewport. The [merged-preview screenshot](native-campaigns-v57/final/publication/sra-merged-publication-smoke.png) is retained separately. This is a UI/bundle integration check; the earlier three-level campaign and browser proof keep their own identity.
+
+The generic [delivery integrity check](native-campaigns-v57/final/delivery-integrity.json) passes against the merged publication inputs. It verifies the frozen source archive, 236 native files, 247 archive inputs, 507 current source/test files, 301 build inputs, seven regression execution inputs and all 1,786 pinned original sources. Fourteen large JSON reports, totaling **67,489,777 bytes**, are transported in 81 bounded parts. Every report was restored from only its manifest and parts into an initially empty temporary directory, then compared byte for byte with its unchanged original. This check establishes file integrity and exact transport, not new game performance. `scripts/verify-native-delivery.py` accepts a delivery directory and a separate validation directory so later UI merges can retain historical receipts.
 
 ## Reproduction
 

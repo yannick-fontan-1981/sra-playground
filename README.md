@@ -46,7 +46,11 @@ Fontan's **Symbolic Reasoning Agent** research.
   15 commands and nine prefix selections identical. The positive Recolor and
   Motion source contracts are separate evidence from this live success.
   The audit connects 50/76 source entries (65.8%), with 37 compiled programs;
-  complete V6 parity remains unverified. See the
+  complete V6 parity remains unverified. All 13 recorded-public regressions
+  pass their 221 comparison checks. The concurrent Motivation update is
+  preserved; merged validation passes 252 checks with the same native worker.
+  The milestone label and its evidence paths are retained independently of
+  the later Site publication number. See the
   [v57 report](docs/migration/v57-topological-recolor-and-motion-questions.md).
   **The previous v56 milestone completes
   GLOB's first three levels in 20 actions (5, 11 and 4)** through one cold
