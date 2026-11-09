@@ -1,0 +1,88 @@
+{
+  "schema": "logos-engine.native-campaign-resolution.v1",
+  "game": "CATR",
+  "selection": "docs/migration/lot2b-evidence/final/catr-selection.json",
+  "execution": "docs/migration/lot2b-evidence/final/catr-control-attention/execution-catr.json",
+  "resolvedAt": "2026-11-09T19:21:38.833511+00:00",
+  "secondsSinceSelection": 107.399326,
+  "maximumBlockedSeconds": 2400,
+  "status": "target_not_reached",
+  "final": {
+    "actions": 1,
+    "levelsCompleted": 0,
+    "level": 1,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "frontier_unknown",
+    "activeSeconds": 2.214464474,
+    "prefixes": 1,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 1,
+      "boundaryReplays": 0,
+      "goalEvents": 0,
+      "frontierDeltas": 3,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 2
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 2
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 2
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 2
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 1
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 3
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_and_attention",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "pending": [
+          "retained_station_method_and_managed_capacity",
+          "entry_access_return_and_rebind",
+          "target_extension_continuation"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 1,
+      "resume": 1
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.34.0"
+  },
+  "nextCandidate": "MOTO",
+  "switchBasis": "The generic common runtime stopped after one action with frontier_unknown. Preserve that unknown result and switch; do not invent a relation law or add a game-specific branch."
+}

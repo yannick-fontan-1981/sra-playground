@@ -1,0 +1,124 @@
+{
+  "schema": "logos-engine.native-performance-evidence-index.v1",
+  "recordedAt": "2026-11-09T19:57:50.998644+00:00",
+  "status": "passed",
+  "nativeSourceDigest": "17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b",
+  "baselineNativeSourceDigest": "cc4bcea77e0099dc035afa5d6ae03e0d5a7a00082633b8e2332691f34b769ad3",
+  "budget": {
+    "relativeBudget": 0.1,
+    "applicableMedianMetrics": 16,
+    "maximumObservedMedianIncrease": 0.08724216565412712,
+    "unresolved": []
+  },
+  "component": {
+    "status": "passed",
+    "caseCount": 6,
+    "measuredCallsPerCase": 20,
+    "warmupCallsPerCase": 3
+  },
+  "receipts": [
+    {
+      "path": "docs/migration/lot2b-evidence/performance/baseline.json.gz",
+      "bytes": 81310,
+      "sha256": "c50100a4ff8fd43435c7bdbd05fddec143062796a5e2f0af0112100686a2fb49"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/after.json.gz",
+      "bytes": 81253,
+      "sha256": "0614f4b0a831ed604a99fcc1fa0e1db85af4ef1c064d713fdb614eac2821381d"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/component-costs.json.gz",
+      "bytes": 42801,
+      "sha256": "c5eb0ea3e50dc137f1cee8bddf3795f064d2baf990a9303f9a7676376f793fe1"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/comparison.json",
+      "bytes": 37961,
+      "sha256": "30d5b74bf54e2af082ea9a32302d3ca809ebbcf725e5941801ebe3e72296a696"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/cases.json",
+      "bytes": 1631,
+      "sha256": "7ca2508da22332eafaea53c1508d7363cec63cb0832cc6ea21713dbe331bace6"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/comparison-policy.json",
+      "bytes": 798,
+      "sha256": "55e9530209b1b785c27474aa6085b2364995a99e894414078647007d0c0bfefb"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/component-protocol.md",
+      "bytes": 6407,
+      "sha256": "afbda4ae548e5aa6053d42ab35d9f9d030a76d327cd71ccb9abd44e36632c611"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/measurement-windows.json",
+      "bytes": 2463,
+      "sha256": "63726a0cfb3d37fc91b6f65e6a05eaba03a0e197fc899bde142d0a388a8ea605"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/baseline-relocation.json",
+      "bytes": 895,
+      "sha256": "9568d5bebafc6a9e1e06e9a6703f33dbb048b1d1351e0ac7e2b0e6c9b90d94a3"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/after-relocation.json",
+      "bytes": 862,
+      "sha256": "e53ee1f6debef8ca77e7ffd7731eb97e40b056ee2d40c5b03a88cb6068d967b4"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/component-costs-relocation.json",
+      "bytes": 892,
+      "sha256": "cfa7628a322131ecb3e15729ec79afda543448e7311d7510fa27c2090b9edc67"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/after-attempt-01.json",
+      "bytes": 29877,
+      "sha256": "26b81fc3b3e98f16a36c30411d3276b524310278d5e15a4f992eb2b3bab8523d"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/component-attempt-01.json",
+      "bytes": 823,
+      "sha256": "a68d647f80422a7da2a86e79a90722aac2fa913dd4f48163b5400c20ca699af9"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/after-attempt-01.log.gz",
+      "bytes": 457,
+      "sha256": "2b8416f6431fdc6ec78583422a8a9440872101331ed010f82ccc33e8c1383fb2"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/component-attempt-01.log.gz",
+      "bytes": 603,
+      "sha256": "0508421ac5aa70093d5dfaacb03bbfeb5b9d5d279cdb2902d1b7007eea7ed891"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/after-attempt-01-log-transport.json",
+      "bytes": 671,
+      "sha256": "93279a7289c3c21a7ec6b7e5ff9290a356bfea923638c1b634c5569dd51d932c"
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/performance/component-attempt-01-log-transport.json",
+      "bytes": 683,
+      "sha256": "cbe2bf0c3f5aebe11241f15089ebcbaa1a036823957cd249838564b7b087f36d"
+    }
+  ],
+  "generators": [
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "bytes": 9861,
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    },
+    {
+      "path": "scripts/measure-native-control-attention-costs.mjs",
+      "bytes": 20451,
+      "sha256": "515df2902725e37b210a3be367f082c39df57ff18f71fea13915fa571361802a"
+    }
+  ],
+  "qualification": "Indexes the immutable measured receipts and their declared inputs, not a new benchmark. Scope, p95 increases, variation, inspection, pause limitations and component boundary inputs remain in the linked receipts/protocols. Narrative README/results are not measurement inputs and are not substituted for raw evidence."
+}

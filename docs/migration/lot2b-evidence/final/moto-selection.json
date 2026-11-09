@@ -1,0 +1,13 @@
+{
+  "schema": "logos-engine.native-campaign-selection.v1",
+  "game": "MOTO",
+  "targetLevels": 3,
+  "selectedAt": "2026-11-09T19:21:38.833511+00:00",
+  "switchDeadline": "2026-11-09T20:01:38.833511+00:00",
+  "maximumBlockedSeconds": 2400,
+  "previousResolution": "docs/migration/lot2b-evidence/final/catr-resolution.json",
+  "sourceManifestDigest": "17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b",
+  "selectionBasis": "Public catalogue describes turning posts and a launched run. Evaluate the unchanged generic runtime on a distinct public interface; no private game implementation or solution is read.",
+  "clockPolicy": "Preserve this selection identity across diagnosis and retries; switch after 40 minutes blocked.",
+  "nextCandidate": "WEAV"
+}

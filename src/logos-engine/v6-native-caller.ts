@@ -9,7 +9,8 @@
  */
 import { AttentionMemory } from './v6-attention-memory.ts';
 import { ProspectiveContactAdapter } from './v6-prospective-contact.ts';
-import { compositionIdentity } from './v6-composition-memory.ts';
+import { compositionIdentity, registered, relativeMotion } from './v6-composition-memory.ts';
+import type { Snapshot } from './v6-composition-memory.ts';
 import { ObservedFrontier, frontierActionKey, frontierIndex } from './v6-observed-frontier.ts';
 import { ViewFrontier } from './v6-view-frontier.ts';
 import { PointExperimentMemory } from './v6-point-contrasts.ts';
@@ -17,8 +18,9 @@ import { CoupledDisplays } from './v6-coupled-displays.ts';
 import { ControlDependencies, bindPreservation, checkPreservation } from './v6-transition-learning.ts';
 import { electInformationGoals, pointGoal, reconcileInformationGoal } from './v6-information-goals.ts';
 import { motionOffers } from './v6-motion-contrast.ts';
+import { contextualTranslationExposures } from './v6-contextual-translation.ts';
 import { ObservedInputDomain } from './v6-native-observer.ts';
-import { targetMethodAtBoundary } from './v6-target-method.ts';
+import { recalledDirections, targetMethodAtBoundary } from './v6-target-method.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
 import { compareUnicode } from './canonical.ts';
 import { pythonEqual as same, pythonTruthy as truth } from './v6-operations.ts';
@@ -67,6 +69,8 @@ export class NativeCallerCoordinator {
   goalReason: string | null = null;
   returnedAttention: R | null = null;
   targetMethod: R | null = null;
+  private deferred: R[] = [];
+  get deferredCuriosity(): R[] { return structuredClone(this.deferred); }
   private restoredValues: readonly unknown[] | null = null;
   private effectfulInventory: { frontier: ObservedFrontier; sequence: number; chain: string | null;
     knowledgeRevision: number; observationKey: string; value: R } | null = null;
@@ -136,7 +140,7 @@ export class NativeCallerCoordinator {
       || !Number.isSafeInteger(counters.deltaSequence) || counters.deltaSequence < 0) throw new TypeError('Invalid native caller checkpoint');
     const controls = new ControlDependencies(); controls.pending = controlState.pending; controls.attempted = new Set(controlState.attempted);
     this.goal = goal; this.frontier = frontier; this.view = view; this.attention = attention; this.points = points; this.displays = displays; this.controls = controls;
-    Object.assign(this, counters); this.restoredValues = null; this.effectfulInventory = null;
+    Object.assign(this, counters); this.restoredValues = null; this.effectfulInventory = null; this.deferred = [];
   }
   checkpointWrites(): NativeStoreWrite[] {
     // Preserve immutable raster identities on the internal checkpoint path.
@@ -159,6 +163,7 @@ export class NativeCallerCoordinator {
     this.frontier.max_prefix = Math.min(16, remaining);
     this.frontier.bindCurrentCandidateContext(observation, this.registry());
     this.attention.revalidate(observation); this.returnedAttention = this.attention.takeParentReturn(observation); this.goalReason = null;
+    this.deferred = [];
   }
 
   /** Actual registered providers; source subgroup ordering remains in the SRC caller. */
@@ -304,9 +309,84 @@ export class NativeCallerCoordinator {
     const proposal = await this.frontier.propose(observation, inputs, { prefix_evidence: [], experimental_probes: offer ? [offer] : [], control_probe: control });
     this.persistDeltas(observation); return proposal;
   }
+  /** Exact current-control questions from StrategyRouter.choose. Inspection
+   * reads the frontier; only an admitted source proposal reaches common WHY/ACT.
+   */
+  async acquireControlForTarget(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[],
+    decision: R | null, options: { inspectOnly?: boolean } = {}): Promise<R | null> {
+    const active = decision ?? {}, policy = this.configuration.strategy.acquire_control_for_target;
+    if (!policy || active.status !== policy.requires_status || active.reason !== policy.requires_reason) return null;
+    const facts = active.measured_facts, current = this.goal.memory.snapshot(observation, rows);
+    const commands = inputs.filter(action => !truth(action.data)).map(action => action.action_ref).sort(compareUnicode);
+    const trials = new Map<string, [Snapshot, Snapshot][]>(commands.map(command => [command, []]));
+    for (const [before, command, after] of this.goal.memory.episode) {
+      if (trials.has(command) && before.epoch === after.epoch && after.epoch === current.epoch) trials.get(command)!.push([before, after]);
+    }
+    const recalled = recalledDirections(this.targetMethod, active, current), bases: number[][] = [];
+    if (truth(recalled) && policy.recall === 'prefer_an_unmeasured_axis_of_a_relocated_role') {
+      for (const [command, pairs] of trials) {
+        if (!Object.hasOwn(recalled, command)) continue;
+        const vector = recalled[command];
+        if (pairs.some(([before, after]) => registered(before, after)
+          && this.targetMethod!.role_refs.every((signature: string) => same(relativeMotion(before, after, signature), vector)))
+          && !bases.some(base => same(base, vector))) bases.push([...vector]);
+      }
+      const axisOrder = (command: string): number => {
+        if (!Object.hasOwn(recalled, command)) return 2;
+        const [dx, dy] = recalled[command];
+        return Number(bases.some(([x, y]) => x! * dy === y! * dx));
+      };
+      commands.sort((first, second) => axisOrder(first) - axisOrder(second));
+    }
+    let exposures: R | null = null;
+    const experiments = [...policy.experiments] as string[], focus = this.attention.item;
+    if (focus?.status === 'pending' && focus.opened_at === observation.observation_ref && same(focus.pair_ref, facts.pair_ref)) {
+      commands.sort((first, second) => Number(first !== focus.action_ref) - Number(second !== focus.action_ref));
+      experiments.sort((first, second) => Number(first !== focus.experiment) - Number(second !== focus.experiment));
+    }
+    for (const experiment of experiments) for (const command of commands) {
+      const pairs = trials.get(command)!;
+      let evidence: string[] = [current.ref], contrast: R | null = null, expectedMotion: R | null = null;
+      if (experiment === 'replicate_after_contextual_block') {
+        exposures ??= await contextualTranslationExposures(this.goal.memory.episode, current, commands);
+        contrast = Object.hasOwn(exposures, command) ? exposures[command] : null;
+        if (contrast === null) continue;
+        evidence = contrast.evidence;
+        expectedMotion = Object.fromEntries(contrast.role_signatures.map((signature: string) => [signature, contrast!.observed_delta]));
+      } else if (experiment === 'sample_unused_control') {
+        if (pairs.length) continue;
+      } else if (experiment === 'replicate_translation') {
+        if (pairs.length !== 1) continue;
+        const [before, after] = pairs[0]!;
+        if (!registered(before, after) || !registered(after, current)) continue;
+        const changed = Object.keys(current.roles).filter(signature => Object.hasOwn(after.roles, signature) && Object.hasOwn(before.roles, signature)
+          && !same(relativeMotion(before, after, signature), [0, 0]) && !same(current.roles[signature]!.slice(0, 2), before.roles[signature]!.slice(0, 2)));
+        if (!changed.length) continue;
+        evidence.push(before.ref, after.ref);
+        expectedMotion = Object.fromEntries(changed.map(signature => [signature, [...relativeMotion(before, after, signature)!]]));
+      } else throw new TypeError('Unknown control experiment');
+      const acquisition: R = { action_ref: command, experiment, evidence, pair_ref: facts.pair_ref,
+        observation_ref: current.ref, objective: policy.objective };
+      if (contrast !== null) acquisition.exposure_contrast = contrast;
+      if (expectedMotion !== null) acquisition.expected_motion = expectedMotion;
+      if (Object.hasOwn(recalled, command)) acquisition.recalled_method = { evidence: this.targetMethod!.scoring_observation,
+        tested_prediction: recalled[command], current_measured_vectors: [...bases].sort((a, b) => a[0]! - b[0]! || a[1]! - b[1]!) };
+      if (options.inspectOnly) {
+        if (await this.frontier.canProbeHere(observation, { action_ref: command })) return acquisition;
+        continue;
+      }
+      if (this.attention.matches(acquisition, observation)) acquisition.attention_ref = this.attention.item!.id;
+      const proposal = await this.frontier.propose(observation, inputs, { control_acquisition: acquisition });
+      this.persistDeltas(observation); if (proposal) return proposal;
+    }
+    return null;
+  }
+  async attentionParentReturnOffer(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], decision: R | null): Promise<R | null> {
+    if (!this.returnedAttention || !same(decision?.measured_facts?.pair_ref ?? null, this.returnedAttention.pair_ref)) return null;
+    return this.acquireControlForTarget(observation, rows, inputs, decision);
+  }
   /** Source movement contrasts consume the same acquired episode and current
    * snapshot as the other information questions. The meter is read, not advanced.
-   * MorphologyAdapter's parent/control admission remains a separate pending port.
    */
   async currentMotionOffers(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number,
     meter: R | null): Promise<R[]> {
@@ -316,17 +396,41 @@ export class NativeCallerCoordinator {
     return (await motionOffers(this.goal.memory.episode, current, scope, observation)).map(candidate => ({ ...candidate, source: 'motion_contrast' }));
   }
   async currentInformationOffer(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number,
-    meter: R | null): Promise<R | null> {
-    return this.informationOffer(observation, rows, inputs, remaining, { meter, currentMotion: true });
+    meter: R | null, decision: R | null = null): Promise<R | null> {
+    return this.informationOffer(observation, rows, inputs, remaining, { meter, currentMotion: true, morphologyDecision: decision });
   }
   /** Elect only observed offers. Additional source producers enter as explicit inputs. */
   async informationOffer(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number,
-    options: { meter: R | null; additionalOffers?: readonly R[]; currentMotion?: boolean; admit?: (candidate: R, receipt: R) => Promise<boolean> } = { meter: null }): Promise<R | null> {
+    options: { meter: R | null; additionalOffers?: readonly R[]; currentMotion?: boolean; morphologyDecision?: R | null;
+      admit?: (candidate: R, receipt: R) => Promise<boolean> } = { meter: null }): Promise<R | null> {
     const policy = this.configuration.strategy.information_goal;
     const offers = (await this.points.offers(observation, inputs)).map(pointGoal);
     offers.push(...this.displays.offers(observation, rows, inputs, policy.coupled_displays), ...(options.additionalOffers ?? []));
     if (options.currentMotion) offers.push(...await this.currentMotionOffers(observation, rows, inputs, remaining, options.meter));
+    const active = options.morphologyDecision ?? {};
+    const pending = offers.length ? await this.acquireControlForTarget(observation, rows, inputs, active, { inspectOnly: true }) : null;
     for (const [candidate, receipt] of electInformationGoals(offers, observation, remaining, options.meter, policy)) {
+      const sameControl = pending !== null && same(receipt.action, { action_ref: pending.action_ref });
+      const preserveExposure = pending !== null && policy.preserve_current_exposures.includes(pending.experiment);
+      if (policy.preserve_unbound_parent && receipt.return_steps === null && active.status === 'retained'
+        && active.reason === this.configuration.strategy.acquire_control_for_target?.requires_reason && !sameControl && !preserveExposure) {
+        this.deferred.push({ reason: 'unbound_return_from_the_current_role_acquisition_goal', proposed_action: receipt.action, parent: active.composition ?? null });
+        continue;
+      }
+      if (pending !== null) {
+        if (!sameControl && receipt.return_steps === null && preserveExposure) {
+          const focus = await this.attention.open(pending, observation);
+          if (focus && this.attention.matches(pending, observation)) {
+            this.deferred.push({ reason: 'would_abandon_current_control_witness_without_bound_return', proposed_action: receipt.action,
+              attention_ref: focus.id, preserved: pending });
+            continue;
+          }
+        }
+        if (sameControl) {
+          receipt.also_tests_current_control = { ...pending };
+          if (this.attention.matches(pending, observation)) receipt.also_tests_current_control.attention_ref = this.attention.item!.id;
+        }
+      }
       if (options.admit && !await options.admit(candidate, receipt)) continue;
       const proposal = await this.frontier.propose(observation, inputs, { curiosity: receipt, experimental_probes: candidate.native_probe ? [candidate.native_probe] : [] });
       this.persistDeltas(observation); if (proposal) return proposal;

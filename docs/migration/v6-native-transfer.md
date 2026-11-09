@@ -11,7 +11,63 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current delivery (lot 2A, native 0.33.0):** current public measurements now
+**Current delivery (lot 2B, native 0.34.0):** the complete current morphology
+decision survives a missing route and reaches the original control-acquisition,
+information-admission and attention parent-return consumers. It is cleared at
+every selection cycle and restoration, not retained as historical authority.
+The source provider order and the existing GoalAccess, Frontier, attention,
+WHY/ACT and target-tree owners are reused. Contextual translation is transferred
+as a stateless public-observation component.
+
+The frozen 240-file inventory is
+`17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b`.
+The release delta passes **623/623 tests** in 14 files. Original-source references
+cover 38 strategy cases / 44 choices and 45 contextual cases / 101 public rasters.
+A separate actual Kernel test acquires unused control and then its replication
+from pixels and initially empty knowledge. The source's hash-dependent order
+for mixed missing/contrary multi-role attention diagnostics remains explicitly
+qualified; both source outcomes are tested, including restored single-use returns.
+
+LS20's first level now completes in **17 actions**, independently confirmed in
+the managed browser, compared with the 28-action V61 delivery. The cold session
+then reaches **GAME_OVER on level 2**, with 133 actions and 79 acquired prefixes
+in total. Fourteen control-provider prefixes and two actual attention returns
+are selected; all three source control experiments are exercised. The two
+contradictory attention returns are consumed by their correct parent. All 277
+actual morphology calls and 79 sealed checkpoints match the unchanged original
+component on the captured public observations. The V61 cold prefix comparison
+matches two commands and stops at the first divergence, before supplying a
+mismatched return. This is bounded contribution evidence, not complete strategy
+parity or a claim of three LS20 levels.
+
+The independent fresh SYME campaign completes **three levels in 36 actions
+(9, 12 and 15)**, with 14 acquired prefixes, three natural level completions,
+two intermediate boundary resumes and one continuous session.
+The managed browser repeats 36 actions, three solved levels
+and 14 plans on entry to level 4. The commands and public returns match the
+existing source reference. This is a regression demonstration of the historical
+`regular_field_correspondence` capability, with no newly selected control or
+attention provider. CATR, MOTO and WEAV reach zero levels; their failed targets
+remain in the delivery report. MOTO's instrumented process exhausted memory
+after its terminal response and could not write a complete diagnostic report.
+
+The matched before/after benchmark passes all **16 predeclared STCK/SMLP
+median budgets of +10%**, with a maximum observed increase of 8.72%.
+STCK restoration p95 and inspection service costs increase and remain explicit.
+Six absolute control/attention cases pass with real acquired checkpoints and
+twenty measured calls per case; synthetic boundary offers and cost exclusions
+are declared separately. Neither these measurements nor finite LIFE sessions
+establish general speed improvements or hours-long memory stability.
+
+The [lot 2B report](lot2b-control-attention.md), [lineage](lot2b-control-attention-lineage.md)
+and [updated roadmap](v6-delivery-roadmap.md) contain the campaigns, validation,
+measured costs and remaining branches. The registry stays **50/76**, with
+**37 compiled workflows**. The regenerated audit records **151 component-verified,
+126 partial and 1,092 pending modules**, zero fully transferred modules and all
+six complete-migration gates false. **Lot 2C is the next step**; the wider lot 2
+remains open.
+
+**Previous delivery (lot 2A, native 0.33.0):** current public measurements now
 feed the existing morphology policy and its actual ordered provider in the
 common caller. The consumed V5/V6 closure produces centered enclosures, paired
 patterns, independent residuals, observed motion routes, access probes and
@@ -43,7 +99,7 @@ The [delivery report](lot2a-current-morphology.md) and
 [source lineage](lot2a-morphology-lineage.md) distinguish these claims,
 their retained evidence, browser verification, costs and remaining branches.
 The registry stays at **50/76**, with 37 compiled workflows and all six
-complete-migration gates false. Lot 2 remains open; 2B is the next step.
+complete-migration gates false. At that milestone lot 2 remained open and 2B was the next step; its current result is recorded above.
 
 **Previous delivery (lot 1, native 0.32.0):** a measured material request remains
 retained while `typed_pose_dependency` selects and tests its child. The ordinary
@@ -56,7 +112,7 @@ The [lot report](lot1-retained-material-parent.md) distinguishes the baseline ga
 controlled contrary returns, real common execution, live campaign and measured
 costs. The [roadmap](v6-delivery-roadmap.md) preserves all eleven lots and exactly
 26 remaining registry entries. The [lineage](lot1-composition-return-lineage.md)
-records source relationships and actually consumed operations. Lot 2A follows this milestone; none of the three incomplete common providers is declared complete.
+records source relationships and actually consumed operations. The bounded lot 2A and 2B deliveries follow this milestone; the complete morphology provider still requires lot 2C.
 
 **Previous integrated milestone (v57):** the native common caller completes
 **SMLP's first three levels in 15 actions (3, 4, 8)** in one cold continuous

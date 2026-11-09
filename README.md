@@ -28,22 +28,38 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **Lot 2A connects current
-  morphology measurements to the common caller**, reusing V5/V6 enclosure,
-  paired-pattern, residual, observed-route and prediction logic. The existing
-  policy consumes actual public measurements; selected returns revise the
-  next decision. Shared movement history and meter/collection context keep
-  their existing owners. Native `0.33.0` completes the first three TR87 levels
-  in **105 actions (22, 37 and 46)** and 30 prefixes in one cold session.
-  Those actions use existing `word_interface`; the separate LS20 campaign
-  establishes actual new morphology contribution in the final 11 actions of
-  its 28-action first level. LS20 subsequently fails on level 2, and its
-  evidence is retained. Unchanged original Python matches 291 morphology
-  calls, 678 shared-context calls and 82 checkpoints. The frozen release delta
-  passes **532/532 tests**. The [current report](docs/migration/lot2a-current-morphology.md)
-  and [lineage](docs/migration/lot2a-morphology-lineage.md) record source scope,
-  campaigns, browser verification, cost measurements and the pending 2B/2C
-  paths. No game name, fixed colour role or stored solution selects behavior.
+  level**; opening the tab does not move the game. **Lot 2B connects the current
+  morphology decision to control acquisition and attention parent-return**.
+  A retained composition without a route now requests the original V6 control
+  experiments. Information questions preserve the current witness, and actual
+  returns resume the same measured pair. The decision lasts one selection cycle;
+  GoalAccess, Frontier, attention and morphology keep their existing owners.
+  Native `0.34.0` passes **623/623 release tests**. Unchanged source references
+  cover 38 strategy cases and 45 contextual-translation cases. A real Kernel
+  test starts with pixels and empty knowledge, releases an unused control,
+  acquires its response and then releases a witnessed replication.
+  The cold LS20 campaign completes level 1 in **17 actions**, compared with
+  28 in V61, and independently repeats this result in the managed browser.
+  It then reaches `GAME_OVER` on level 2 after **133 actions in total**.
+  Fourteen control prefixes, two actual attention parent-returns and all three
+  source experiment types contribute to that session. Both observed attention
+  returns are contradictory and are consumed exactly once. The failed target
+  remains part of the evidence. A separate fresh SYME session completes its
+  **first three levels in 36 actions (9, 12 and 15)** and 14 acquired prefixes.
+  The managed browser independently confirms 36 actions, three solved levels
+  and 14 plans at level 4. Its existing `regular_field_correspondence` provider
+  supplies this historical capability; the new control and attention providers
+  do not receive credit for that regression demonstration.
+  The matched cost comparison passes all **16 predeclared STCK/SMLP median
+  budgets of +10%**, with a maximum observed increase of 8.72%. Raw timings,
+  higher STCK p95 restoration and inspection costs, and the six absolute
+  control/attention component cases remain qualified in the report.
+  No game name, fixed colour role or stored solution selects production behavior.
+  The [current report](docs/migration/lot2b-control-attention.md),
+  [source lineage](docs/migration/lot2b-control-attention-lineage.md) and
+  [roadmap](docs/migration/v6-delivery-roadmap.md) distinguish contribution,
+  campaigns, costs and limits. **Lot 2C remains next**: station/entry methods,
+  rebinding, rearming and wider target continuation are still incomplete.
   **Previous lot 1 retains a measured
   material request while its pose question is resolved**, then consumes the
   acquired return before the next delivery or control decision. The existing
@@ -58,9 +74,9 @@ Fontan's **Symbolic Reasoning Agent** research.
   ablation supplies the separate contribution proof. The [delivery report](docs/migration/lot1-retained-material-parent.md),
   [source lineage](docs/migration/lot1-composition-return-lineage.md) and
   [eleven-lot roadmap](docs/migration/v6-delivery-roadmap.md) distinguish its
-  contracts, integrated campaign and performance evidence. Lot 2A connects current morphology measurements and guarded probes;
-  retained decision forwarding, attention parent-return and control acquisition
-  remain incomplete for lot 2B. **The previous v57 milestone completes
+  contracts, integrated campaign and performance evidence. Lot 2A supplies the current morphology measurements and guarded probes;
+  lot 2B now connects their current decision to the control and attention consumers.
+  Station/entry continuation remains open for lot 2C. **The previous v57 milestone completes
   SMLP's first three levels in 15 actions (3, 4 and 8)** through one cold
   continuous native common session, nine acquired prefixes and two natural
   boundary replays. The managed browser independently confirms 15 actions,

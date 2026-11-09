@@ -62,6 +62,40 @@ test('native family consumes real producers and reproduces the complete original
   assert.deepEqual(Object.keys(state).sort(), ['contacts', 'feature_trials', 'format', 'journal', 'tried']);
 });
 
+test('current morphology decision survives a null route only within its measured selection scope', async () => {
+  const { family, goal } = await setup();
+  goal.episode = [];
+  const current = observation(scenario.current), retained = family.state();
+  assert.equal(await family.propose(current, rows(scenario.current), scenario.inputs, scenario.remaining), null);
+  const decision = family.currentDecision(current);
+  assert.ok(decision);
+  assert.equal(decision.status, 'retained');
+  assert.equal(decision.reason, 'control_not_currently_attested');
+  assert.equal(decision.route_key, null);
+  assert.equal(decision.measured_facts.control_attested, false);
+  assert.equal(decision.release_authority, false);
+  assert.deepEqual(family.state(), retained, 'A current answer is not acquired historical evidence');
+  decision.measured_facts.pair_ref = 'changed-by-reader';
+  assert.notEqual(family.currentDecision(current)?.measured_facts.pair_ref, 'changed-by-reader');
+  for (const changed of [
+    { ...current, observation_ref: 'another-observation' }, { ...current, level_epoch: current.level_epoch + 1 },
+    { ...current, levels_completed: current.levels_completed + 1 }, { ...current, frame_hash: 'another-frame' },
+  ]) assert.equal(family.currentDecision(changed), null);
+  family.beginDecision(); assert.equal(family.currentDecision(current), null);
+  assert.equal(family.currentMeasurementReceipt(current), null);
+  await family.propose(current, rows(scenario.current), scenario.inputs, scenario.remaining);
+  family.restoreNative(family.nativeState());
+  assert.equal(family.currentDecision(current), null, 'Even an identical checkpoint cannot restore an ephemeral decision');
+});
+
+test('a selected morphology proposal and the current source decision have identical measured meaning', async () => {
+  const { family } = await setup(), proposal = await propose(family), current = observation(scenario.current);
+  assert.deepEqual(family.currentDecision(current), proposal.morphology);
+  family.beginDecision();
+  assert.equal(family.currentDecision(current), null);
+  assert.deepEqual(sourceProposal(proposal), scenario.proposal, 'Resetting the next cycle does not alter the committed proposal');
+});
+
 test('all original per-step geometry guards, effects and selected acquisitions match unchanged Python', async () => {
   const { family } = await setup(), proposal = await propose(family);
   family.bind(proposal);

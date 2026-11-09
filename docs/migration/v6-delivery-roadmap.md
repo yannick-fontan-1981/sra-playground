@@ -18,7 +18,7 @@ L'[audit du registre](v6-entry-point-progress.json), le [bilan de migration](v6-
 | `OP01` à `OP31` | Implémentations présentes ; leur utilité est à établir par leurs producteurs et consommateurs réels |
 | Migration globale | En cours ; aucune annonce de parité complète |
 
-Le mandat initial autorisait **la livraison du lot 1 uniquement**. Cette livraison a été publiée en version **60**, commit `9be3d0434f6f8ff91236d61a51eafa4017c3a082`. La demande suivante « OK, continuez avec la prochaine étape » autorise maintenant le **lot 2A**, sur cette base publiée vérifiée. Les autres sous-lots conservent leur statut propre.
+Le mandat initial autorisait **la livraison du lot 1 uniquement**. Cette livraison a été publiée en version **60**, commit `9be3d0434f6f8ff91236d61a51eafa4017c3a082`. La continuation suivante a livré le **lot 2A** en publication **61**, commit `b288fef0f6ec7898e6e6ea6de56c3e2af2d5cf19`. La nouvelle demande de poursuivre la prochaine étape avec une feuille de route actualisée livre maintenant le **lot 2B, moteur `0.34.0`**, à partir de cette base publiée vérifiée. Ses contrats, campagnes, contrôles navigateur, budgets de coûts et preuves d'intégrité sont clôturés dans le périmètre annoncé. Les autres sous-lots conservent leur statut propre.
 
 ## Priorités, dépendances et statuts
 
@@ -27,7 +27,7 @@ Une dépendance désigne un contrat réellement consommé. Les numéros indiquen
 | Lot | Résultat attendu | Entrées restantes | Dépendance nécessaire | Statut courant |
 | --- | --- | ---: | --- | --- |
 | 1 | Cible conservée, sous-question, retour et reprise | Hors compteur | Runtime commun et familles existantes | **Livré, moteur `0.32.0`** |
-| 2 | Stratégie morphologique et fournisseurs communs | Hors compteur | Cycle validé du lot 1, mesures et mémoire courantes | **2A livré dans son domaine courant, moteur `0.33.0`** ; lot global ouvert, 2B/2C planifiés |
+| 2 | Stratégie morphologique et fournisseurs communs | Hors compteur | Cycle validé du lot 1, mesures et mémoire courantes | **2A livré, moteur `0.33.0` ; 2B livré, moteur `0.34.0`** ; 2C prochaine étape, lot global ouvert |
 | 3 | Mémoire commune et compositions | 4 | Propriétaire commun, acquisition et contrats de continuation | Planifié |
 | 4 | Exemples, correspondances et retours discriminants | 3 | Observations, callbacks SRC et gardes | Planifié |
 | 5 | Temps, adressage et liaisons | 3 | Historique public ; contrat de conservation pour les consommateurs concernés | Planifié |
@@ -108,11 +108,54 @@ Ces hausses font partie du bilan du chemin modifié. Les médianes globales plus
 
 **Dépendances :** cycle du lot 1, observations, historique des transitions et contrats de mesure. Organiser le travail en **2A**, producteurs de mesures/paires/routes/prévisions ; **2B**, état de décision `morph.last` et raccord de `acquire_control_for_target`/`attention_parent_return` ; **2C**, continuation, réarmement et extension de cible requis par le périmètre source annoncé.
 
-**Sous-lot 2A livré, moteur `0.33.0`, sur la base V60.** Les producteurs morphologiques alimentent la politique existante au rang source du chemin commun. Le domaine comprend les mesures courantes, les paires, les routes, les expériences d'accès et les prédictions d'une station réellement acquise, avec `station_method` absent. Une méthode non nulle, courante ou historique, reste explicitement hors domaine. **2B et 2C restent planifiés** ; ce raccord ne clôt pas les critères du lot global 2.
+### Sous-lot 2A livré
+
+**Sous-lot 2A livré, moteur `0.33.0`, sur la base V60, puis publié en V61.** Les producteurs morphologiques alimentent la politique existante au rang source du chemin commun. Le domaine comprend les mesures courantes, les paires, les routes, les expériences d'accès et les prédictions d'une station réellement acquise, avec `station_method` absent. Une méthode non nulle, courante ou historique, reste explicitement hors domaine. Ce raccord reste le socle du lot 2B et ne clôt pas les critères du lot global 2.
 
 Le [rapport du lot 2A](lot2a-current-morphology.md) et sa [filiation](lot2a-morphology-lineage.md) établissent les producteurs, propriétaires, gardes, acquisitions et limites. Le delta gelé passe **532 tests**. Les originaux inchangés concordent sur **291 appels morphologiques réels**, 678 appels de contexte et 82 checkpoints de LS20. Ce jeu réussit son premier niveau en 28 actions, dont les 11 dernières viennent de la nouvelle morphologie, puis échoue au niveau 2 après 144 actions. Le passage à TR87 intervient après moins de huit minutes ; TR87 réussit ses **trois premiers niveaux en 105 actions et 30 préfixes** par `word_interface`, sans attribution de ce succès à la morphologie. Les contrôles navigateur, mesures de coûts et reçus complets sont détaillés dans le rapport.
 
-**Prochaine étape : 2B.** Transmettre la décision conservée `morph.last`, raccorder `acquire_control_for_target`, puis consommer `attention_parent_return` pour la paire, le parent et la portée effectivement établis. Le propriétaire courant reste unique et les branches incomplètes conservent leurs refus. Les méthodes de station et d'entrée, le réarmement et les continuations conditionnelles restant au périmètre 2C ne sont pas annoncés acquis.
+### Sous-lot 2B livré
+
+L'implémentation est gelée sous **`logos-engine.typescript.v6.native-migration/0.34.0`**, avec **240 fichiers natifs** et l'inventaire SHA-256 **`17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b`**. Le [reçu de validation](lot2b-evidence/final/validation/delta-tests-run.json) confirme **623 tests réussis sur 623**, sans modification des sources ni des entrées de test pendant l'exécution. Il s'agit du delta de contrats et d'intégration explicitement sélectionné, pas de toute la suite historique.
+
+La décision `morph.last` est transmise aux consommateurs du choix courant, y compris lorsqu'elle conserve une composition sans proposer de route. Elle est recalculée à chaque sélection. Les groupes `acquire_control_for_target` et `attention_parent_return` sont raccordés dans l'ordre source. Les trois expériences de contrôle sont consommées : réplication d'une translation depuis une autre origine, essai d'une commande encore inutilisée et réplication après blocage contextuel. L'admission des questions d'information conserve le parent, les témoins à préserver et les deux motifs de report de la source.
+
+L'histoire reste chez GoalAccess, l'attention chez `AttentionMemory`, et les prévisions/collectes chez leur propriétaire courant. Les propositions passent par le frontier, les gardes et WHY/ACT communs. Les mesures V5/V6 déjà transférées sont réutilisées ; aucun identifiant de jeu, niveau, rôle de couleur ou trajet préparé ne décide à la place des observations. La [filiation du lot 2B](lot2b-control-attention-lineage.md) décrit ces contrats, leur portée et la qualification de l'ordre Python des rôles lors d'un retour mixte à plusieurs participants.
+
+| Preuve disponible du lot 2B | Résultat vérifié | Portée |
+| --- | --- | --- |
+| Appelant et attention, originaux inchangés | **38 cas, 44 choix, 17 scènes** ; [références source](../../tests/fixtures/v6-control-attention-reference.json.gz) | Priorités, refus, rappel, partage d'expérience et retour unique ; dépendances non ciblées remplacées par des doubles explicites de frontière |
+| Translation après blocage, original inchangé | **45 cas, dont 21 positifs, 101 rasters** ; [références source](../../tests/fixtures/v6-contextual-translation-reference.json.gz) | Géométrie publique, empreinte remplie, surfaces, témoins, époques et cas contraires ; aucune solution de jeu injectée |
+| Delta formel gelé | **623/623**, zéro échec ; [exécution](lot2b-evidence/final/validation/delta-tests-run.json) | Contrats et intégration du chemin commun, dont acquisition d'une vraie transition synthétique puis réplication liée au retour |
+| Campagne LS20 et contribution réelle | Premier niveau en **17 actions**, contre 28 au lot 2A ; puis **`GAME_OVER` au niveau 2**, bilan **133 actions, 79 préfixes, un niveau réussi** ; [résolution](lot2b-evidence/final/ls20-resolution.json) | **14 préfixes `acquire_control_for_target` et 2 `attention_parent_return`** réellement sélectionnés ; [attribution](lot2b-evidence/final/ls20-control-attention/ls20-control-attention-attribution.json). La contribution observée ne transforme pas cet échec en réussite de trois niveaux |
+| Comparaison source sur LS20 | **277 appels morphologiques et 636 appels de contexte** concordants avec les originaux inchangés ; [comparaison](lot2b-evidence/final/ls20-control-attention/ls20-morphology-original-comparison.json.gz) | Vérification des appels effectivement observés dans cette campagne ; aucune parité globale déduite de ces effectifs |
+| Campagne SYME froide et navigateur | **Trois niveaux, 36 actions et 14 préfixes**, en une session ; L1 **9 actions / 6 préfixes**, L2 **12 / 3**, L3 **15 / 5** ; [résolution](lot2b-evidence/final/syme-resolution.json) et [contrôle navigateur](lot2b-evidence/final/browser/syme-verification.json) | Navigateur arrivé naturellement au niveau 4 avec **36 actions / 3 niveaux / 14 plans**. Réussite historiquement connue, confirmant la non-régression de `regular_field_correspondence` ; aucune attribution aux nouveaux fournisseurs de contrôle |
+| Audits et contrôles du projet | Contrôles réussis ; **151 composants vérifiés, 126 partiels, 1 092 en attente, aucun transfert complet** ; [reçu](lot2b-evidence/final/validation/checks-run.json) | Compteurs de migration distincts des **50/76 entrées** et **37 workflows**, inchangés |
+| Coûts avant/après | **16 médianes STCK/SMLP dans le budget +10 %**, maximum observé **+8,72 %** ; [comparaison](lot2b-evidence/performance/comparison.json) | 222 actions mesurées par version ; hausses de p95 et d'inspection STCK conservées, six cas absolus des nouveaux consommateurs et limites détaillés dans les [résultats](lot2b-evidence/performance/results.md) |
+| Intégrité de livraison | **Vérifiée** ; [reçu final](lot2b-evidence/final/delivery-integrity.json) | 240 fichiers natifs, 522 entrées source/tests, 305 entrées de build, 1 786 fichiers originaux inchangés ; trois rapports restaurés octet pour octet depuis 60 parties |
+
+Les exporteurs vérifient les **1 786 fichiers originaux** avant et après génération. Les contrats synthétiques complètent les campagnes réelles ; leurs effectifs ne sont pas des niveaux de jeu réussis. Le [rapport du lot 2B](lot2b-control-attention.md) consigne les résultats, les échecs, les coûts et les limites de la livraison. Les compteurs de raccordement restent **50/76 entrées** et **37 workflows** : ce sous-lot porte sur les fournisseurs communs hors du dénominateur 76.
+
+Les autres essais de cette livraison restent au bilan avec leurs résultats propres. Les changements de cas conservent leurs reçus de sélection, leurs horloges et la limite de 40 minutes de blocage ; une absence de solution ou un diagnostic incomplet n'est pas assimilé à une impossibilité de jeu.
+
+| Cas conservé | Résultat observé | Limite et preuve disponible |
+| --- | --- | --- |
+| CATR | **1 action, aucun niveau**, arrêt `frontier_unknown` | Connaissance insuffisante conservée comme inconnue ; [résolution](lot2b-evidence/final/catr-resolution.json) |
+| MOTO | **109 actions, aucun niveau**, arrêt au budget de temps actif à **363,584 s** | Le processus Node a ensuite épuisé sa mémoire pendant la clôture du diagnostic. Le rapport complet n'a pas été produit ; le reçu d'exécution, la sortie et le journal public restent conservés dans la [résolution](lot2b-evidence/final/moto-resolution.json) |
+| WEAV | **97 actions, aucun niveau**, arrêt au budget de temps actif à **363,434 s** | Rapport de campagne produit et conservé ; [exécution](lot2b-evidence/final/weav-control-attention/execution-weav.json), [rapport fractionné](lot2b-evidence/final/weav-control-attention/weav-campaign.json.gz.parts.json) |
+
+### Prochaine étape : sous-lot 2C
+
+Le lot 2C doit raccorder les méthodes et continuations encore absentes : propriétaires `station_method`, `entry_method` et `entry_access_return`, accès et réassociation conditionnels, réarmement, capacités gérées et extension de cible dans leur domaine source requis. Une méthode de station non nulle reste hors du domaine 2A/2B annoncé, même si elle provient de l'époque courante.
+
+Chaque méthode devra être acquise par le retour réellement prévu, conservée par son propriétaire, puis revalidée avant une nouvelle proposition. Les témoins d'identité, de géométrie, de ressource, d'effet sélectif et de retour devront être consommés par les gardes concernés ; disparition, contradiction, ambiguïté ou frontière devront provoquer la révision ou le refus prévu par la source. Les prédictions de stations courantes déjà acquises en 2A restent disponibles. Le lot 2C complétera leurs usages conditionnels sans annoncer de parité du lot 2 avant les preuves de chaque branche requise.
+
+**Ordre de réalisation prévu pour 2C :**
+
+1. Fixer les contrats source de méthode de station, méthode d'entrée et retour d'accès, puis leur acquisition et restauration chez les propriétaires existants.
+2. Raccorder les reprises `entry_probe` et `entry_rebind` à leurs retours mesurés, avec l'ordre de sélection et les conditions de géométrie de l'adaptateur original.
+3. Compléter les dérivations conditionnelles, le réarmement, les capacités gérées et l'extension de cible dans le domaine réellement couvert par leurs preuves.
+4. Vérifier les refus et la révision après disparition, contradiction, changement de portée ou interruption, puis la contribution du chemin complet en campagne. Conserver la limite de 40 minutes par blocage et les mêmes contrôles de coûts sur les chemins non concernés.
 
 **Critères de fin :** faits produits réellement et courants ; décision morphologique utilisée par une proposition ou une sous-question ; retour d'attention consommé pour la bonne paire, le bon parent et la bonne portée ; ordre et refus source vérifiés ; preuves positives, refus et restauration pour chaque fournisseur ; branches absentes encore identifiées, sans déclaration de complétude avant leur couverture. Les questions d'information respectent la conservation du parent et les possibilités de retour. Les familles indépendantes n'attendent pas la fin de ce lot.
 
@@ -184,6 +227,8 @@ Le [rapport du lot 2A](lot2a-current-morphology.md) et sa [filiation](lot2a-morp
 
 **Dépendances :** résultats intégrés des lots 1 à 10. Réconcilier positions, propriétaires, branches et preuves ; bilan séparé des fournisseurs communs et chemins hors registre ; situation des 31 opérations ; correspondance entre chemins, workflows et arbre ; régressions, restauration, sessions longues et coûts.
 
+**Point concret issu du lot 2B :** borner le coût de clôture des diagnostics et vérifier leur export progressif. La campagne instrumentée MOTO a acquis son arrêt normal après 109 actions, puis a épuisé la mémoire avant de produire son rapport complet. Le journal public et le reçu externe sont disponibles. Ce constat porte sur ce processus instrumenté ; il ne suffit ni à conclure à une fuite du moteur en production ni à déclarer les longues sessions stables.
+
 **Critères de fin :** chaque entrée annoncée possède producteur, consommateur et preuve de contribution ; couverture adaptée à chaque capacité revendiquée ; bilan propre des chemins hors registre ; écarts bloquants corrigés et vérifiés ; contrôles de migration complète cohérents avec les preuves ; trace humaine expliquant cible, manque, hypothèse, expérience, retour et suite, avec détails accessibles à la demande ; budgets de performance respectés.
 
 **76/76 clôt le raccordement du registre.** La parité globale V5/V6 exige les contrôles portant sur tout le comportement requis.
@@ -206,7 +251,9 @@ Avant modification, mesurer continuation connue, nouvelle décision, acquisition
 | Implémentation du lot 1 | Gelée, version native `0.32.0` | Extension `retained_typed_material_request_parent` ; digest natif indiqué ci-dessus ; même retour refusé par le contrat séparé du parent |
 | Livraison du lot 1 | **Livré, moteur `0.32.0`** | 241 tests, contrôles du projet, campagne LIFE et navigateur, coût des 16 métriques non concernées validés ; limites du chemin modifié documentées |
 | Lot 2A | **Livré dans le domaine courant, moteur `0.33.0`** | Producteurs réels raccordés ; 532 tests, comparaison source des appels réels, contribution LS20 et trois niveaux TR87 confirmés au navigateur ; 16 médianes STCK/SMLP dans le budget +10 %, limites et hausses de p95 conservées dans le [rapport](lot2a-current-morphology.md) |
-| Lots 2B et 2C | Planifiés, non réalisés | Fournisseurs communs, état de décision, continuation et extension de cible restent à raccorder selon leurs contrats |
+| Implémentation du lot 2B | **Gelée, moteur `0.34.0`** | 240 fichiers natifs ; digest indiqué ci-dessus ; décision courante, contrôle, attention et admission des questions raccordés |
+| Livraison du lot 2B | **Livré, moteur `0.34.0`** | 623/623 tests ; contrats source et audits réconciliés ; contribution LS20 puis échec conservé au niveau 2 ; trois niveaux SYME en 36 actions/14 préfixes confirmés au navigateur ; CATR, MOTO et WEAV conservés avec leurs limites ; 16 médianes dans le budget +10 %, six cas de coûts absolus et intégrité finale validés |
+| Lot 2C | **Prochaine étape, planifiée** | Méthodes de station et d'entrée, continuation, réarmement, capacités gérées et extension de cible restent à raccorder selon leurs contrats |
 | Lots 3 à 10 | Planifiés et conditionnellement éligibles | Préparation autonome possible selon les contrats réellement disponibles |
 
-Le sous-lot 2A clôt cette livraison bornée. La migration globale demeure ouverte : **37 workflows**, **50/76 entrées**, fournisseurs communs incomplets et **six conditions de migration complète encore fausses**. Les audits répertorient 150 transferts de composant, **126 transferts partiels**, **1 093 éléments en attente** et aucun élément déclaré `fully_transferred`. Ces catégories ne doivent pas être assimilées au compteur des 76 entrées. La prochaine étape proposée est 2B ; cette livraison conserve les résultats et preuves historiques des lots précédents.
+Les sous-lots **2A et 2B sont livrés dans leurs périmètres annoncés**. La migration globale demeure ouverte : **37 workflows**, **50/76 entrées**, `morphology` encore partiel et méthodes du lot 2C en attente. Les audits du lot 2B répertorient désormais **151 composants vérifiés** (`componentVerified`), **126 transferts partiels**, **1 092 éléments en attente** et **aucun élément déclaré `fully_transferred`** ; les **six conditions de migration complète restent fausses**. L'état historique du lot 2A était de 150 composants vérifiés, 126 partiels et 1 093 en attente. Ces catégories restent distinctes du compteur des 76 entrées. La prochaine étape technique est **2C** ; les résultats, échecs et limites historiques des lots précédents sont conservés.

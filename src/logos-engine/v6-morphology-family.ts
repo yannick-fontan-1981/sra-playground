@@ -1,8 +1,8 @@
 /** Current V6 morphology producer and base probe adapter.
  *
  * Contacts belong here; motion history belongs to the common GoalAccess owner,
- * meter/collection to the existing InventoryCallerContext. This does not expose
- * morph.last, acquire_control_for_target or remembered station/entry methods.
+ * meter/collection to the existing InventoryCallerContext. The current decision
+ * lives for one caller selection only; remembered station/entry methods remain open.
  */
 import { NativeMorphologyPolicy } from './v6-morphology-policy.ts';
 import { CompositionTargetTree } from './v6-target-binding.ts';
@@ -47,11 +47,19 @@ export class NativeMorphologyFamily implements NativeFamily<any> {
   private checkpoint: R | null = null;
   private measurement: R | null = null;
   private refusal: R | null = null;
+  private last: { observation: string; epoch: number; score: number; frame: string; decision: R } | null = null;
 
   private constructor(policy: NativeMorphologyPolicy) { this.policy = policy; }
   static async create(): Promise<NativeMorphologyFamily> { return new NativeMorphologyFamily(await NativeMorphologyPolicy.create()); }
   enableCallerContext(context: Context): void { this.context = context; }
   async attachPrograms(registry: NativeProgramRegistry): Promise<void> { await this.policy.attachPrograms(registry); }
+  /** Source StrategyRouter resets morph.last before visiting any provider. */
+  beginDecision(): void { this.last = null; this.measurement = null; this.refusal = null; }
+  currentDecision(obs: NativeObservation): R | null {
+    const last = this.last;
+    return last && last.observation === obs.observation_ref && last.epoch === obs.level_epoch
+      && last.score === obs.levels_completed && last.frame === obs.frame_hash ? copy(last.decision) : null;
+  }
   currentMeasurementReceipt(obs: NativeObservation): R | null {
     return this.measurement?.observation_ref === obs.observation_ref ? copy(this.measurement) : null;
   }
@@ -60,7 +68,7 @@ export class NativeMorphologyFamily implements NativeFamily<any> {
   }
   async propose(obs: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number,
     execution?: NativeExecution): Promise<NativeProposal | null> {
-    this.measurement = null; this.refusal = null;
+    this.beginDecision();
     if (!this.context) throw new Error('Morphology requires the existing common observation owners');
     if (execution?.signal?.aborted) throw new DOMException('Native reasoning cancelled', 'AbortError');
     const goal = this.context.goal(), current = goal.snapshot(obs, rows);
@@ -105,11 +113,17 @@ export class NativeMorphologyFamily implements NativeFamily<any> {
         reason: 'morphology_source_branch_not_transferred', producer: receipt };
       return null;
     }
+    // A covered measurement can retain a composition without offering a route.
+    // Later source providers consume that decision in this same selection.
+    // A deferred producer above cannot supply an untransferred control premise.
+    const bound: R = { ...decision, target_extension: extension, measured_facts: facts };
+    this.last = { observation: obs.observation_ref, epoch: obs.level_epoch, score: obs.levels_completed,
+      frame: obs.frame_hash, decision: bound };
     if (!decision.route_key) return null;
     const plan = plans[String(decision.route_key)];
     if (!plan || !facts.routes[plan.route_key]) throw new TypeError('Morphology decision lacks its current measured route');
-    const bound: R = { ...decision, target_extension: extension, measured_facts: facts,
-      access_phase: plan.access_phase ?? 'probe_access', contact_in_prefix: plan.contact_in_prefix ?? false };
+    bound.access_phase = plan.access_phase ?? 'probe_access';
+    bound.contact_in_prefix = plan.contact_in_prefix ?? false;
     plan.facts = facts;
     const actions = facts.routes[plan.route_key].actions, steps = actions.map((action: R, i: number) => ({ action,
       expected_after: i + 1 === actions.length && (plan.last_effect_unknown ?? true) ? null : { position: plan.steps[i].to } }));
@@ -266,6 +280,7 @@ export class NativeMorphologyFamily implements NativeFamily<any> {
   }
   restore(value: NativeRecord): void { this.restoreNative(value); }
   restoreNative(value: Readonly<NativeRecord>): void {
+    this.beginDecision();
     if (value === this.checkpoint) return;
     const v = retainNativeJson(value) as R;
     if (!isJsonObject(v) || Object.keys(v).length !== 5 || v.format !== FORMAT || !Array.isArray(v.journal)
@@ -278,6 +293,5 @@ export class NativeMorphologyFamily implements NativeFamily<any> {
     if (!same(staged.nativeState(), v)) throw new TypeError('Morphology evidence differs from its acquired projection');
     this.contacts = staged.contacts; this.tried = staged.tried; this.featureTrials = staged.featureTrials;
     this.journal = staged.journal; this.eventIds = staged.eventIds; this.checkpoint = v;
-    this.measurement = null; this.refusal = null;
   }
 }

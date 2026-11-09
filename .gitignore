@@ -96,3 +96,13 @@ __pycache__/
 
 # Exact performance receipt retained as checked gzip.
 /docs/migration/lot2a-evidence/performance/after.json
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot2b-evidence/final/ls20-control-attention/ls20-campaign.json.gz
+
+# Exact lot 2B source archives are retained in checked ordered parts.
+/docs/migration/lot2b-evidence/**/source-archive.tar.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot2b-evidence/final/syme-control-attention/syme-campaign.json.gz
+/docs/migration/lot2b-evidence/final/weav-control-attention/weav-campaign.json.gz

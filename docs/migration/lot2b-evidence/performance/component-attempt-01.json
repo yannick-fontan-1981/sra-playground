@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.native-cost-attempt.v1",
+  "attempt": 1,
+  "status": "completed",
+  "startedAt": "2026-11-09T19:51:39.724Z",
+  "command": [
+    "node",
+    "scripts/measure-native-control-attention-costs.mjs",
+    "docs/migration/lot2b-evidence/performance/component-costs.json"
+  ],
+  "log": "docs/migration/lot2b-evidence/performance/component-attempt-01.log.gz",
+  "exitCode": 0,
+  "finishedAt": "2026-11-09T19:51:49.934Z",
+  "retainedOutput": "docs/migration/lot2b-evidence/performance/component-costs.json.gz",
+  "relocationReceipt": "docs/migration/lot2b-evidence/performance/component-costs-relocation.json",
+  "originalLogPath": "docs/migration/lot2b-evidence/performance/component-attempt-01.log",
+  "logTransport": "docs/migration/lot2b-evidence/performance/component-attempt-01-log-transport.json"
+}

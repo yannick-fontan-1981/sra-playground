@@ -1,0 +1,1760 @@
+{
+  "schema": "logos-engine.native-control-attention-attribution.v1",
+  "generatedAt": "2026-11-09T19:23:29.551626+00:00",
+  "game": "LS20",
+  "evidence": {
+    "report": {
+      "path": "docs/migration/lot2b-evidence/final/ls20-control-attention/ls20-campaign.json.gz",
+      "bytes": 24407498,
+      "sha256": "5a02d81e4110708c0adf48b4b3470de06678da344a6d29aa1b6da78e1374336f"
+    },
+    "trace": {
+      "path": "docs/migration/lot2b-evidence/final/ls20-control-attention/ls20-public-trace.json.gz",
+      "bytes": 41118,
+      "sha256": "e59a6005a56d332937c92772666fca9504528a62ac874d12a9dfa1fd54862342"
+    },
+    "execution": {
+      "path": "docs/migration/lot2b-evidence/final/ls20-control-attention/execution-ls20.json",
+      "bytes": 61010,
+      "sha256": "89843cd91f6c5e90ec7f5a9f8cd51f01944c32c41eb44e9aca524d066718abf6"
+    },
+    "manifest": {
+      "path": "docs/migration/lot2b-evidence/final/ls20-control-attention/source-manifest.json",
+      "bytes": 28337,
+      "sha256": "9c33919dbddcf392f162081600d6516bfab4b3c7a4a3de659a3d5fbe287125a6"
+    },
+    "journal": {
+      "path": "docs/migration/lot2b-evidence/final/ls20-control-attention/ls20-actual-public-journal.jsonl.gz",
+      "bytes": 22706,
+      "sha256": "84c6e9a1b3a1224b105a4fc25e417997f456f8f2cebdc2a399efdbcf2483900d"
+    },
+    "archiveManifest": {
+      "path": "docs/migration/lot2b-evidence/final/ls20-control-attention/source-archive.json",
+      "bytes": 29991,
+      "sha256": "dbee7ebf8a9f91c1b0edff73a49a9533f51f53122a47c900274f98c2c993f03f"
+    }
+  },
+  "extractor": {
+    "path": "scripts/extract-native-control-attention-evidence.py",
+    "bytes": 25634,
+    "sha256": "8184ee974e9eef6dcc2c6108296dfb29d96fd13b38c3c3e653e5d6309f5332b2"
+  },
+  "source": {
+    "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "nativeManifestDigest": "17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b",
+    "nativeFileCount": 240,
+    "unchangedDuringRun": true,
+    "executionInputsUnchanged": true,
+    "executionInputs": {
+      "runner": {
+        "path": "scripts/run-v53-journaled-campaign.mjs",
+        "sha256": "fea5ea30777475f21ee6ffc3cfa221f652e0e5deccc606c16f9b51d6bd47f646",
+        "bytes": 1961
+      },
+      "harness": {
+        "path": "tests/helpers/v6-live-game-campaign.ts",
+        "sha256": "b5355151556c05f5442485c51d5b81e1ad8d0519be82bf73b94dac37f6c4cfca",
+        "bytes": 57517
+      },
+      "generator": {
+        "path": "scripts/run-v53-campaign-proof.py",
+        "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+        "bytes": 5421
+      }
+    },
+    "pythonAgentModules": []
+  },
+  "outcome": {
+    "campaignStatus": "failed",
+    "failure": "Did not complete LS20 level 2: The game reports GAME_OVER.",
+    "targetLevels": 3,
+    "levelsCompleted": 1,
+    "targetCompleted": false,
+    "fullGameWinObserved": false,
+    "finalState": "GAME_OVER",
+    "actions": 133,
+    "sealedPrefixes": 79,
+    "acquiredActionsInCapturedPrefixes": 133,
+    "unattributedDispatchedActions": 0,
+    "prefixCaptureMatchesRuntimeCount": true,
+    "elapsedSeconds": 350.55547655400005,
+    "activeSeconds": 291.69203380300013,
+    "startedAt": "2026-11-09T19:12:10.575493+00:00",
+    "finishedAt": "2026-11-09T19:18:01.130952+00:00"
+  },
+  "publicProgression": {
+    "perSourceLevel": {
+      "1": {
+        "actions": 17,
+        "firstAction": 1,
+        "lastAction": 17
+      },
+      "2": {
+        "actions": 116,
+        "firstAction": 18,
+        "lastAction": 133
+      }
+    },
+    "scoreIncreases": [
+      {
+        "action": 17,
+        "levelBefore": 1,
+        "levelAfter": 2,
+        "completedBefore": 0,
+        "completedAfter": 1,
+        "state": "NOT_FINISHED",
+        "evidence": {
+          "report": "/actions/16",
+          "trace": "/packets/17"
+        }
+      }
+    ]
+  },
+  "selectedProviders": {
+    "groups": {
+      "acquire_control_for_target": {
+        "sealedPrefixes": 14,
+        "actionsInSealedPrefixes": 14
+      },
+      "morphology": {
+        "sealedPrefixes": 14,
+        "actionsInSealedPrefixes": 65
+      },
+      "attention_parent_return": {
+        "sealedPrefixes": 2,
+        "actionsInSealedPrefixes": 2
+      },
+      "observed_frontier": {
+        "sealedPrefixes": 24,
+        "actionsInSealedPrefixes": 24
+      },
+      "view": {
+        "sealedPrefixes": 11,
+        "actionsInSealedPrefixes": 14
+      },
+      "view_continuity": {
+        "sealedPrefixes": 14,
+        "actionsInSealedPrefixes": 14
+      },
+      "information_goal": {
+        "sealedPrefixes": 0,
+        "actionsInSealedPrefixes": 0
+      }
+    },
+    "families": {
+      "acquire_control_for_target": {
+        "sealedPrefixes": 14,
+        "actionsInSealedPrefixes": 14
+      },
+      "morphology": {
+        "sealedPrefixes": 14,
+        "actionsInSealedPrefixes": 65
+      },
+      "attention_parent_return": {
+        "sealedPrefixes": 2,
+        "actionsInSealedPrefixes": 2
+      },
+      "observed_frontier": {
+        "sealedPrefixes": 24,
+        "actionsInSealedPrefixes": 24
+      },
+      "view": {
+        "sealedPrefixes": 11,
+        "actionsInSealedPrefixes": 14
+      },
+      "view_continuity": {
+        "sealedPrefixes": 14,
+        "actionsInSealedPrefixes": 14
+      }
+    },
+    "groupsBySourceLevel": {
+      "1": {
+        "acquire_control_for_target": {
+          "sealedPrefixes": 6,
+          "actionsInSealedPrefixes": 6
+        },
+        "morphology": {
+          "sealedPrefixes": 5,
+          "actionsInSealedPrefixes": 11
+        }
+      },
+      "2": {
+        "acquire_control_for_target": {
+          "sealedPrefixes": 8,
+          "actionsInSealedPrefixes": 8
+        },
+        "attention_parent_return": {
+          "sealedPrefixes": 2,
+          "actionsInSealedPrefixes": 2
+        },
+        "observed_frontier": {
+          "sealedPrefixes": 24,
+          "actionsInSealedPrefixes": 24
+        },
+        "view": {
+          "sealedPrefixes": 11,
+          "actionsInSealedPrefixes": 14
+        },
+        "view_continuity": {
+          "sealedPrefixes": 14,
+          "actionsInSealedPrefixes": 14
+        },
+        "morphology": {
+          "sealedPrefixes": 9,
+          "actionsInSealedPrefixes": 54
+        }
+      }
+    },
+    "zeroSelectionAmongRelevantGroups": [
+      "information_goal"
+    ]
+  },
+  "morphology": {
+    "sourceMethodCalls": {
+      "propose": 79,
+      "observeDepartures": 133,
+      "record": 65
+    },
+    "currentDecisionStatusesDuringEvaluation": {
+      "retained": 65,
+      "proposed": 14
+    },
+    "currentDecisionReasonsDuringEvaluation": {
+      "control_not_currently_attested": 17,
+      "change_one_pattern_to_test_alignment": 4,
+      "discriminate_missing_control_for_peer_access": 2,
+      "test_peer_contact_after_measured_selective_alignment": 2,
+      "access_exceeds_observed_meter_seek_affordable_effect": 27,
+      "test_missing_access_to_possible_capacity_source": 2,
+      "probe_shared_appearance_to_restore_diminishing_capacity": 4,
+      "modifier_access_unbound": 21
+    },
+    "decisionStatusesAttachedToSelectedPrefixes": {
+      "retained": 65,
+      "proposed": 14
+    }
+  },
+  "control": {
+    "methodCalls": {
+      "acquireControlForTarget": {
+        "calls": 67,
+        "nonNullResults": 18,
+        "errors": 0,
+        "inspectionCalls": 2,
+        "inspectionNonNullResults": 2
+      },
+      "attentionParentReturnOffer": {
+        "calls": 65,
+        "nonNullResults": 2,
+        "errors": 0,
+        "inspectionCalls": 0,
+        "inspectionNonNullResults": 0
+      },
+      "currentInformationOffer": {
+        "calls": 63,
+        "nonNullResults": 0,
+        "errors": 0,
+        "inspectionCalls": 0,
+        "inspectionNonNullResults": 0
+      }
+    },
+    "inspectionResultExperiments": {
+      "replicate_translation": 2
+    },
+    "proposedResultExperiments": {
+      "sample_unused_control": 7,
+      "replicate_translation": 6,
+      "replicate_after_contextual_block": 3
+    },
+    "selectedQuestionExperiments": {
+      "sample_unused_control": {
+        "sealedPrefixes": 7,
+        "actionsInSealedPrefixes": 7,
+        "directPrefixes": 7,
+        "sharedInformationPrefixes": 0
+      },
+      "replicate_translation": {
+        "sealedPrefixes": 6,
+        "actionsInSealedPrefixes": 6,
+        "directPrefixes": 6,
+        "sharedInformationPrefixes": 0
+      },
+      "replicate_after_contextual_block": {
+        "sealedPrefixes": 3,
+        "actionsInSealedPrefixes": 3,
+        "directPrefixes": 3,
+        "sharedInformationPrefixes": 0
+      }
+    },
+    "deferralReasonsOnSelectedPrefixes": {
+      "would_abandon_current_control_witness_without_bound_return": 2
+    }
+  },
+  "attention": {
+    "observedOpenings": [
+      {
+        "attention": {
+          "id": "4a00a636813638445959",
+          "status": "pending",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "level_epoch": 2,
+          "opened_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f",
+          "action_ref": "ACTION4",
+          "experiment": "replicate_translation",
+          "release_authority": false
+        },
+        "evidence": "/controlAttentionSourceCalls/32/attentionAfter/item",
+        "method": "currentInformationOffer"
+      },
+      {
+        "attention": {
+          "id": "b027c0204e009e5ff87a",
+          "status": "pending",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "level_epoch": 2,
+          "opened_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:24:frame:633864125d13d738",
+          "action_ref": "ACTION2",
+          "experiment": "replicate_translation",
+          "release_authority": false
+        },
+        "evidence": "/controlAttentionSourceCalls/38/attentionAfter/item",
+        "method": "currentInformationOffer"
+      }
+    ],
+    "uniqueItemStates": 6,
+    "uniqueItemStateStatusCounts": {
+      "pending": 2,
+      "returned": 2,
+      "contradicted": 2
+    },
+    "acquiredReturnStatusCounts": {
+      "contradicted": 2
+    },
+    "acquiredReturnWitnesses": [
+      {
+        "attention": {
+          "id": "4a00a636813638445959",
+          "status": "contradicted",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "level_epoch": 2,
+          "opened_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f",
+          "returned_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277",
+          "action_ref": "ACTION4",
+          "experiment": "replicate_translation",
+          "release_authority": false
+        },
+        "transitionBefore": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f",
+        "transitionAfter": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277",
+        "action": 22,
+        "evidence": "/prefixes/15/controlAttention/acquiredAttention/item"
+      },
+      {
+        "attention": {
+          "id": "b027c0204e009e5ff87a",
+          "status": "contradicted",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "level_epoch": 2,
+          "opened_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:24:frame:633864125d13d738",
+          "returned_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:25:frame:c00df657a5969bb9",
+          "action_ref": "ACTION2",
+          "experiment": "replicate_translation",
+          "release_authority": false
+        },
+        "transitionBefore": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:24:frame:633864125d13d738",
+        "transitionAfter": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:25:frame:c00df657a5969bb9",
+        "action": 24,
+        "evidence": "/prefixes/17/controlAttention/acquiredAttention/item"
+      }
+    ],
+    "consumedReturnStatusCounts": {
+      "contradicted": 2
+    },
+    "consumedReturns": [
+      {
+        "attention": {
+          "id": "4a00a636813638445959",
+          "status": "contradicted",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "returned_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277"
+        },
+        "selectedGroup": "attention_parent_return",
+        "prefix": "prefix_evidence:23",
+        "evidence": "/prefixes/16/controlAttention/returnedAttention"
+      },
+      {
+        "attention": {
+          "id": "b027c0204e009e5ff87a",
+          "status": "contradicted",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "returned_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:25:frame:c00df657a5969bb9"
+        },
+        "selectedGroup": "attention_parent_return",
+        "prefix": "prefix_evidence:25",
+        "evidence": "/prefixes/18/controlAttention/returnedAttention"
+      }
+    ],
+    "consumedReturnsSelectedByParentProvider": 2,
+    "firstObservedStates": [
+      {
+        "item": {
+          "id": "4a00a636813638445959",
+          "status": "pending",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "level_epoch": 2,
+          "opened_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f",
+          "action_ref": "ACTION4",
+          "experiment": "replicate_translation",
+          "release_authority": false
+        },
+        "evidence": [
+          "/controlAttentionSourceCalls/32/attentionAfter/item",
+          "/controlAttentionSourceCalls/33/attentionBefore/item",
+          "/controlAttentionSourceCalls/33/attentionAfter/item"
+        ]
+      },
+      {
+        "item": {
+          "id": "4a00a636813638445959",
+          "status": "returned",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "level_epoch": 2,
+          "opened_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f",
+          "returned_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277",
+          "action_ref": "ACTION4",
+          "experiment": "replicate_translation",
+          "result": "contradicted",
+          "release_authority": false
+        },
+        "evidence": [
+          "/controlAttentionSourceCalls/34/attentionBefore/item",
+          "/controlAttentionSourceCalls/34/attentionAfter/item",
+          "/controlAttentionSourceCalls/35/attentionBefore/item"
+        ]
+      },
+      {
+        "item": {
+          "id": "b027c0204e009e5ff87a",
+          "status": "pending",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "level_epoch": 2,
+          "opened_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:24:frame:633864125d13d738",
+          "action_ref": "ACTION2",
+          "experiment": "replicate_translation",
+          "release_authority": false
+        },
+        "evidence": [
+          "/controlAttentionSourceCalls/38/attentionAfter/item",
+          "/controlAttentionSourceCalls/39/attentionBefore/item",
+          "/controlAttentionSourceCalls/39/attentionAfter/item"
+        ]
+      },
+      {
+        "item": {
+          "id": "b027c0204e009e5ff87a",
+          "status": "returned",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "level_epoch": 2,
+          "opened_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:24:frame:633864125d13d738",
+          "returned_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:25:frame:c00df657a5969bb9",
+          "action_ref": "ACTION2",
+          "experiment": "replicate_translation",
+          "result": "contradicted",
+          "release_authority": false
+        },
+        "evidence": [
+          "/controlAttentionSourceCalls/40/attentionBefore/item",
+          "/controlAttentionSourceCalls/40/attentionAfter/item",
+          "/controlAttentionSourceCalls/41/attentionBefore/item"
+        ]
+      },
+      {
+        "item": {
+          "id": "4a00a636813638445959",
+          "status": "contradicted",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "level_epoch": 2,
+          "opened_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f",
+          "returned_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277",
+          "action_ref": "ACTION4",
+          "experiment": "replicate_translation",
+          "release_authority": false
+        },
+        "evidence": [
+          "/prefixes/15/controlAttention/acquiredAttention/item"
+        ]
+      },
+      {
+        "item": {
+          "id": "b027c0204e009e5ff87a",
+          "status": "contradicted",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "level_epoch": 2,
+          "opened_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:24:frame:633864125d13d738",
+          "returned_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:25:frame:c00df657a5969bb9",
+          "action_ref": "ACTION2",
+          "experiment": "replicate_translation",
+          "release_authority": false
+        },
+        "evidence": [
+          "/prefixes/17/controlAttention/acquiredAttention/item"
+        ]
+      }
+    ]
+  },
+  "firstAttributionChains": [
+    {
+      "categories": [
+        "control:sample_unused_control"
+      ],
+      "prefix": "prefix_evidence:1",
+      "decisionRevision": 1,
+      "selectionGroup": "acquire_control_for_target",
+      "family": "acquire_control_for_target",
+      "firstAction": 1,
+      "lastAction": 1,
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "composition": "alignment_of_homologous_patterns",
+        "measured": {
+          "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:1:frame:f530cf6adb4a6d0f",
+          "level_epoch": 1,
+          "pair_ref": "91427da0d458452625b8e6ccec255d72c01a3bcdb23b0c8bafb5dc1291c53599",
+          "control_attested": false,
+          "framed_pair": true,
+          "homologous": true,
+          "asymmetric": true,
+          "alignment_refuted": false
+        },
+        "measuredRoutes": []
+      },
+      "question": {
+        "action_ref": "ACTION1",
+        "evidence": [
+          "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:1:frame:f530cf6adb4a6d0f"
+        ],
+        "experiment": "sample_unused_control",
+        "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input.",
+        "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:1:frame:f530cf6adb4a6d0f",
+        "pair_ref": "91427da0d458452625b8e6ccec255d72c01a3bcdb23b0c8bafb5dc1291c53599"
+      },
+      "questionKind": "direct_control",
+      "deferredCuriosity": [],
+      "parentReturn": null,
+      "acquisition": {
+        "count": 1,
+        "before": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:1:frame:f530cf6adb4a6d0f",
+        "after": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:2:frame:c11a377268d286ce",
+        "publicScoreBefore": 0,
+        "publicScoreAfter": 0,
+        "attentionAtSealedCheckpoint": null
+      },
+      "continuation": {
+        "nextSealedPrefix": "prefix_evidence:2",
+        "selectedGroup": "acquire_control_for_target",
+        "controlQuestion": {
+          "action_ref": "ACTION1",
+          "evidence": [
+            "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:2:frame:c11a377268d286ce",
+            "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:1:frame:f530cf6adb4a6d0f",
+            "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:2:frame:c11a377268d286ce"
+          ],
+          "expected_motion": {
+            "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d": [
+              0,
+              -5
+            ],
+            "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344": [
+              0,
+              -5
+            ]
+          },
+          "experiment": "replicate_translation",
+          "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input.",
+          "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:2:frame:c11a377268d286ce",
+          "pair_ref": "91427da0d458452625b8e6ccec255d72c01a3bcdb23b0c8bafb5dc1291c53599"
+        },
+        "returnedAttention": null,
+        "nextCurrentMorphology": {
+          "status": "retained",
+          "reason": "control_not_currently_attested",
+          "route_key": null,
+          "composition": "alignment_of_homologous_patterns",
+          "measured": {
+            "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:2:frame:c11a377268d286ce",
+            "level_epoch": 1,
+            "pair_ref": "91427da0d458452625b8e6ccec255d72c01a3bcdb23b0c8bafb5dc1291c53599",
+            "control_attested": false,
+            "framed_pair": true,
+            "homologous": true,
+            "asymmetric": true,
+            "alignment_refuted": false
+          },
+          "measuredRoutes": []
+        }
+      },
+      "evidence": {
+        "reportPrefix": "/prefixes/0",
+        "morphologyEvaluations": [
+          "/morphologySourceCalls/0"
+        ],
+        "consumerCalls": [
+          {
+            "path": "/controlAttentionSourceCalls/0",
+            "method": "attentionParentReturnOffer",
+            "entryIndex": 0,
+            "nonNullResult": false
+          },
+          {
+            "path": "/controlAttentionSourceCalls/1",
+            "method": "currentInformationOffer",
+            "entryIndex": 1,
+            "nonNullResult": false
+          },
+          {
+            "path": "/controlAttentionSourceCalls/2",
+            "method": "acquireControlForTarget",
+            "entryIndex": 2,
+            "nonNullResult": true
+          }
+        ],
+        "actions": [
+          "/actions/0"
+        ],
+        "publicReturns": [
+          "/packets/1"
+        ]
+      }
+    },
+    {
+      "categories": [
+        "control:replicate_translation"
+      ],
+      "prefix": "prefix_evidence:2",
+      "decisionRevision": 2,
+      "selectionGroup": "acquire_control_for_target",
+      "family": "acquire_control_for_target",
+      "firstAction": 2,
+      "lastAction": 2,
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "composition": "alignment_of_homologous_patterns",
+        "measured": {
+          "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:2:frame:c11a377268d286ce",
+          "level_epoch": 1,
+          "pair_ref": "91427da0d458452625b8e6ccec255d72c01a3bcdb23b0c8bafb5dc1291c53599",
+          "control_attested": false,
+          "framed_pair": true,
+          "homologous": true,
+          "asymmetric": true,
+          "alignment_refuted": false
+        },
+        "measuredRoutes": []
+      },
+      "question": {
+        "action_ref": "ACTION1",
+        "evidence": [
+          "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:2:frame:c11a377268d286ce",
+          "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:1:frame:f530cf6adb4a6d0f",
+          "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:2:frame:c11a377268d286ce"
+        ],
+        "expected_motion": {
+          "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d": [
+            0,
+            -5
+          ],
+          "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344": [
+            0,
+            -5
+          ]
+        },
+        "experiment": "replicate_translation",
+        "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input.",
+        "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:2:frame:c11a377268d286ce",
+        "pair_ref": "91427da0d458452625b8e6ccec255d72c01a3bcdb23b0c8bafb5dc1291c53599"
+      },
+      "questionKind": "direct_control",
+      "deferredCuriosity": [],
+      "parentReturn": null,
+      "acquisition": {
+        "count": 1,
+        "before": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:2:frame:c11a377268d286ce",
+        "after": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:3:frame:b2ee2db27a608502",
+        "publicScoreBefore": 0,
+        "publicScoreAfter": 0,
+        "attentionAtSealedCheckpoint": null
+      },
+      "continuation": {
+        "nextSealedPrefix": "prefix_evidence:3",
+        "selectedGroup": "acquire_control_for_target",
+        "controlQuestion": {
+          "action_ref": "ACTION2",
+          "evidence": [
+            "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:3:frame:b2ee2db27a608502"
+          ],
+          "experiment": "sample_unused_control",
+          "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input.",
+          "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:3:frame:b2ee2db27a608502",
+          "pair_ref": "91427da0d458452625b8e6ccec255d72c01a3bcdb23b0c8bafb5dc1291c53599"
+        },
+        "returnedAttention": null,
+        "nextCurrentMorphology": {
+          "status": "retained",
+          "reason": "control_not_currently_attested",
+          "route_key": null,
+          "composition": "alignment_of_homologous_patterns",
+          "measured": {
+            "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:3:frame:b2ee2db27a608502",
+            "level_epoch": 1,
+            "pair_ref": "91427da0d458452625b8e6ccec255d72c01a3bcdb23b0c8bafb5dc1291c53599",
+            "control_attested": false,
+            "framed_pair": true,
+            "homologous": true,
+            "asymmetric": true,
+            "alignment_refuted": false
+          },
+          "measuredRoutes": []
+        }
+      },
+      "evidence": {
+        "reportPrefix": "/prefixes/1",
+        "morphologyEvaluations": [
+          "/morphologySourceCalls/2"
+        ],
+        "consumerCalls": [
+          {
+            "path": "/controlAttentionSourceCalls/3",
+            "method": "attentionParentReturnOffer",
+            "entryIndex": 3,
+            "nonNullResult": false
+          },
+          {
+            "path": "/controlAttentionSourceCalls/4",
+            "method": "currentInformationOffer",
+            "entryIndex": 4,
+            "nonNullResult": false
+          },
+          {
+            "path": "/controlAttentionSourceCalls/5",
+            "method": "acquireControlForTarget",
+            "entryIndex": 5,
+            "nonNullResult": true
+          }
+        ],
+        "actions": [
+          "/actions/1"
+        ],
+        "publicReturns": [
+          "/packets/2"
+        ]
+      }
+    },
+    {
+      "categories": [
+        "selected_morphology"
+      ],
+      "prefix": "prefix_evidence:7",
+      "decisionRevision": 7,
+      "selectionGroup": "morphology",
+      "family": "morphology",
+      "firstAction": 7,
+      "lastAction": 10,
+      "decision": {
+        "status": "proposed",
+        "reason": "change_one_pattern_to_test_alignment",
+        "route_key": "modifier",
+        "composition": "alignment_of_homologous_patterns",
+        "access_phase": "contact",
+        "contact_in_prefix": true,
+        "measured": {
+          "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:7:frame:2fe09b67a0203019",
+          "level_epoch": 1,
+          "pair_ref": "91427da0d458452625b8e6ccec255d72c01a3bcdb23b0c8bafb5dc1291c53599",
+          "control_attested": true,
+          "framed_pair": true,
+          "homologous": true,
+          "asymmetric": true,
+          "alignment_refuted": false
+        },
+        "measuredRoutes": [
+          "modifier"
+        ]
+      },
+      "question": null,
+      "questionKind": null,
+      "deferredCuriosity": [],
+      "parentReturn": null,
+      "acquisition": {
+        "count": 4,
+        "before": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:7:frame:2fe09b67a0203019",
+        "after": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:11:frame:3b2b2d00a79c9299",
+        "publicScoreBefore": 0,
+        "publicScoreAfter": 0,
+        "attentionAtSealedCheckpoint": null
+      },
+      "continuation": {
+        "nextSealedPrefix": "prefix_evidence:11",
+        "selectedGroup": "morphology",
+        "controlQuestion": null,
+        "returnedAttention": null,
+        "nextCurrentMorphology": {
+          "status": "proposed",
+          "reason": "discriminate_missing_control_for_peer_access",
+          "route_key": "peer_access_probe",
+          "composition": "alignment_of_homologous_patterns",
+          "access_phase": "probe_access",
+          "contact_in_prefix": false,
+          "measured": {
+            "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:1:revision:11:frame:3b2b2d00a79c9299",
+            "level_epoch": 1,
+            "pair_ref": "91427da0d458452625b8e6ccec255d72c01a3bcdb23b0c8bafb5dc1291c53599",
+            "control_attested": true,
+            "framed_pair": true,
+            "homologous": true,
+            "asymmetric": true,
+            "alignment_refuted": false
+          },
+          "measuredRoutes": [
+            "peer_access_probe"
+          ]
+        }
+      },
+      "evidence": {
+        "reportPrefix": "/prefixes/6",
+        "morphologyEvaluations": [
+          "/morphologySourceCalls/12"
+        ],
+        "consumerCalls": [],
+        "actions": [
+          "/actions/6",
+          "/actions/7",
+          "/actions/8",
+          "/actions/9"
+        ],
+        "publicReturns": [
+          "/packets/7",
+          "/packets/8",
+          "/packets/9",
+          "/packets/10"
+        ]
+      }
+    },
+    {
+      "categories": [
+        "control:sample_unused_control",
+        "recalled_control:sample_unused_control"
+      ],
+      "prefix": "prefix_evidence:18",
+      "decisionRevision": 18,
+      "selectionGroup": "acquire_control_for_target",
+      "family": "acquire_control_for_target",
+      "firstAction": 18,
+      "lastAction": 18,
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "composition": "alignment_of_homologous_patterns",
+        "measured": {
+          "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+          "level_epoch": 2,
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "control_attested": false,
+          "framed_pair": true,
+          "homologous": true,
+          "asymmetric": true,
+          "alignment_refuted": false
+        },
+        "measuredRoutes": []
+      },
+      "question": {
+        "action_ref": "ACTION1",
+        "evidence": [
+          "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2"
+        ],
+        "experiment": "sample_unused_control",
+        "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input.",
+        "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+        "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+        "recalled_method": {
+          "current_measured_vectors": [],
+          "evidence": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+          "tested_prediction": [
+            0,
+            -5
+          ]
+        }
+      },
+      "questionKind": "direct_control",
+      "deferredCuriosity": [],
+      "parentReturn": null,
+      "acquisition": {
+        "count": 1,
+        "before": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+        "after": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:19:frame:6cdc959715fc6df8",
+        "publicScoreBefore": 1,
+        "publicScoreAfter": 1,
+        "attentionAtSealedCheckpoint": null
+      },
+      "continuation": {
+        "nextSealedPrefix": "prefix_evidence:19",
+        "selectedGroup": "acquire_control_for_target",
+        "controlQuestion": {
+          "action_ref": "ACTION1",
+          "evidence": [
+            "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:19:frame:6cdc959715fc6df8",
+            "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+            "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:19:frame:6cdc959715fc6df8"
+          ],
+          "expected_motion": {
+            "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d": [
+              0,
+              -5
+            ],
+            "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344": [
+              0,
+              -5
+            ]
+          },
+          "experiment": "replicate_translation",
+          "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input.",
+          "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:19:frame:6cdc959715fc6df8",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "recalled_method": {
+            "current_measured_vectors": [
+              [
+                0,
+                -5
+              ]
+            ],
+            "evidence": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+            "tested_prediction": [
+              0,
+              -5
+            ]
+          }
+        },
+        "returnedAttention": null,
+        "nextCurrentMorphology": {
+          "status": "retained",
+          "reason": "control_not_currently_attested",
+          "route_key": null,
+          "composition": "alignment_of_homologous_patterns",
+          "measured": {
+            "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:19:frame:6cdc959715fc6df8",
+            "level_epoch": 2,
+            "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+            "control_attested": false,
+            "framed_pair": true,
+            "homologous": true,
+            "asymmetric": true,
+            "alignment_refuted": false
+          },
+          "measuredRoutes": []
+        }
+      },
+      "evidence": {
+        "reportPrefix": "/prefixes/11",
+        "morphologyEvaluations": [
+          "/morphologySourceCalls/39"
+        ],
+        "consumerCalls": [
+          {
+            "path": "/controlAttentionSourceCalls/18",
+            "method": "attentionParentReturnOffer",
+            "entryIndex": 18,
+            "nonNullResult": false
+          },
+          {
+            "path": "/controlAttentionSourceCalls/19",
+            "method": "currentInformationOffer",
+            "entryIndex": 19,
+            "nonNullResult": false
+          },
+          {
+            "path": "/controlAttentionSourceCalls/20",
+            "method": "acquireControlForTarget",
+            "entryIndex": 20,
+            "nonNullResult": true
+          }
+        ],
+        "actions": [
+          "/actions/17"
+        ],
+        "publicReturns": [
+          "/packets/18"
+        ]
+      }
+    },
+    {
+      "categories": [
+        "control:replicate_translation",
+        "recalled_control:replicate_translation"
+      ],
+      "prefix": "prefix_evidence:19",
+      "decisionRevision": 19,
+      "selectionGroup": "acquire_control_for_target",
+      "family": "acquire_control_for_target",
+      "firstAction": 19,
+      "lastAction": 19,
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "composition": "alignment_of_homologous_patterns",
+        "measured": {
+          "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:19:frame:6cdc959715fc6df8",
+          "level_epoch": 2,
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "control_attested": false,
+          "framed_pair": true,
+          "homologous": true,
+          "asymmetric": true,
+          "alignment_refuted": false
+        },
+        "measuredRoutes": []
+      },
+      "question": {
+        "action_ref": "ACTION1",
+        "evidence": [
+          "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:19:frame:6cdc959715fc6df8",
+          "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+          "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:19:frame:6cdc959715fc6df8"
+        ],
+        "expected_motion": {
+          "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d": [
+            0,
+            -5
+          ],
+          "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344": [
+            0,
+            -5
+          ]
+        },
+        "experiment": "replicate_translation",
+        "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input.",
+        "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:19:frame:6cdc959715fc6df8",
+        "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+        "recalled_method": {
+          "current_measured_vectors": [
+            [
+              0,
+              -5
+            ]
+          ],
+          "evidence": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+          "tested_prediction": [
+            0,
+            -5
+          ]
+        }
+      },
+      "questionKind": "direct_control",
+      "deferredCuriosity": [],
+      "parentReturn": null,
+      "acquisition": {
+        "count": 1,
+        "before": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:19:frame:6cdc959715fc6df8",
+        "after": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:20:frame:e8dd9a3e18ff8dcb",
+        "publicScoreBefore": 1,
+        "publicScoreAfter": 1,
+        "attentionAtSealedCheckpoint": null
+      },
+      "continuation": {
+        "nextSealedPrefix": "prefix_evidence:20",
+        "selectedGroup": "acquire_control_for_target",
+        "controlQuestion": {
+          "action_ref": "ACTION3",
+          "evidence": [
+            "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:20:frame:e8dd9a3e18ff8dcb"
+          ],
+          "experiment": "sample_unused_control",
+          "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input.",
+          "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:20:frame:e8dd9a3e18ff8dcb",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "recalled_method": {
+            "current_measured_vectors": [
+              [
+                0,
+                -5
+              ]
+            ],
+            "evidence": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+            "tested_prediction": [
+              -5,
+              0
+            ]
+          }
+        },
+        "returnedAttention": null,
+        "nextCurrentMorphology": {
+          "status": "retained",
+          "reason": "control_not_currently_attested",
+          "route_key": null,
+          "composition": "alignment_of_homologous_patterns",
+          "measured": {
+            "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:20:frame:e8dd9a3e18ff8dcb",
+            "level_epoch": 2,
+            "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+            "control_attested": false,
+            "framed_pair": true,
+            "homologous": true,
+            "asymmetric": true,
+            "alignment_refuted": false
+          },
+          "measuredRoutes": []
+        }
+      },
+      "evidence": {
+        "reportPrefix": "/prefixes/12",
+        "morphologyEvaluations": [
+          "/morphologySourceCalls/41"
+        ],
+        "consumerCalls": [
+          {
+            "path": "/controlAttentionSourceCalls/21",
+            "method": "attentionParentReturnOffer",
+            "entryIndex": 21,
+            "nonNullResult": false
+          },
+          {
+            "path": "/controlAttentionSourceCalls/22",
+            "method": "currentInformationOffer",
+            "entryIndex": 22,
+            "nonNullResult": false
+          },
+          {
+            "path": "/controlAttentionSourceCalls/23",
+            "method": "acquireControlForTarget",
+            "entryIndex": 23,
+            "nonNullResult": true
+          }
+        ],
+        "actions": [
+          "/actions/18"
+        ],
+        "publicReturns": [
+          "/packets/19"
+        ]
+      }
+    },
+    {
+      "categories": [
+        "control:replicate_translation",
+        "focused_control:replicate_translation",
+        "recalled_control:replicate_translation",
+        "information_deferred:would_abandon_current_control_witness_without_bound_return"
+      ],
+      "prefix": "prefix_evidence:22",
+      "decisionRevision": 22,
+      "selectionGroup": "acquire_control_for_target",
+      "family": "acquire_control_for_target",
+      "firstAction": 22,
+      "lastAction": 22,
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "composition": "alignment_of_homologous_patterns",
+        "measured": {
+          "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f",
+          "level_epoch": 2,
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "control_attested": false,
+          "framed_pair": true,
+          "homologous": true,
+          "asymmetric": true,
+          "alignment_refuted": false
+        },
+        "measuredRoutes": []
+      },
+      "question": {
+        "action_ref": "ACTION4",
+        "attention_ref": "4a00a636813638445959",
+        "evidence": [
+          "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f",
+          "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:21:frame:ba9337eab03e4ad1",
+          "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f"
+        ],
+        "expected_motion": {
+          "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d": [
+            5,
+            0
+          ],
+          "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344": [
+            5,
+            0
+          ]
+        },
+        "experiment": "replicate_translation",
+        "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input.",
+        "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f",
+        "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+        "recalled_method": {
+          "current_measured_vectors": [
+            [
+              0,
+              -5
+            ],
+            [
+              5,
+              0
+            ]
+          ],
+          "evidence": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+          "tested_prediction": [
+            5,
+            0
+          ]
+        }
+      },
+      "questionKind": "direct_control",
+      "deferredCuriosity": [
+        {
+          "attention_ref": "4a00a636813638445959",
+          "preserved": {
+            "action_ref": "ACTION4",
+            "evidence": [
+              "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f",
+              "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:21:frame:ba9337eab03e4ad1",
+              "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f"
+            ],
+            "expected_motion": {
+              "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d": [
+                5,
+                0
+              ],
+              "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344": [
+                5,
+                0
+              ]
+            },
+            "experiment": "replicate_translation",
+            "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input.",
+            "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f",
+            "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+            "recalled_method": {
+              "current_measured_vectors": [
+                [
+                  0,
+                  -5
+                ],
+                [
+                  5,
+                  0
+                ]
+              ],
+              "evidence": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+              "tested_prediction": [
+                5,
+                0
+              ]
+            }
+          },
+          "proposed_action": {
+            "action_ref": "ACTION1"
+          },
+          "reason": "would_abandon_current_control_witness_without_bound_return"
+        }
+      ],
+      "parentReturn": null,
+      "acquisition": {
+        "count": 1,
+        "before": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f",
+        "after": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277",
+        "publicScoreBefore": 1,
+        "publicScoreAfter": 1,
+        "attentionAtSealedCheckpoint": {
+          "id": "4a00a636813638445959",
+          "status": "contradicted",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "level_epoch": 2,
+          "opened_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f",
+          "returned_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277",
+          "action_ref": "ACTION4",
+          "experiment": "replicate_translation",
+          "release_authority": false
+        }
+      },
+      "continuation": {
+        "nextSealedPrefix": "prefix_evidence:23",
+        "selectedGroup": "attention_parent_return",
+        "controlQuestion": {
+          "action_ref": "ACTION2",
+          "evidence": [
+            "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277"
+          ],
+          "experiment": "sample_unused_control",
+          "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input.",
+          "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "recalled_method": {
+            "current_measured_vectors": [
+              [
+                0,
+                -5
+              ],
+              [
+                5,
+                0
+              ]
+            ],
+            "evidence": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+            "tested_prediction": [
+              0,
+              5
+            ]
+          }
+        },
+        "returnedAttention": {
+          "id": "4a00a636813638445959",
+          "status": "contradicted",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "returned_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277"
+        },
+        "nextCurrentMorphology": {
+          "status": "retained",
+          "reason": "control_not_currently_attested",
+          "route_key": null,
+          "composition": "alignment_of_homologous_patterns",
+          "measured": {
+            "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277",
+            "level_epoch": 2,
+            "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+            "control_attested": false,
+            "framed_pair": true,
+            "homologous": true,
+            "asymmetric": true,
+            "alignment_refuted": false
+          },
+          "measuredRoutes": []
+        }
+      },
+      "evidence": {
+        "reportPrefix": "/prefixes/15",
+        "morphologyEvaluations": [
+          "/morphologySourceCalls/47"
+        ],
+        "consumerCalls": [
+          {
+            "path": "/controlAttentionSourceCalls/30",
+            "method": "attentionParentReturnOffer",
+            "entryIndex": 30,
+            "nonNullResult": false
+          },
+          {
+            "path": "/controlAttentionSourceCalls/32",
+            "method": "currentInformationOffer",
+            "entryIndex": 31,
+            "nonNullResult": false
+          },
+          {
+            "path": "/controlAttentionSourceCalls/31",
+            "method": "acquireControlForTarget",
+            "entryIndex": 32,
+            "nonNullResult": true
+          },
+          {
+            "path": "/controlAttentionSourceCalls/33",
+            "method": "acquireControlForTarget",
+            "entryIndex": 33,
+            "nonNullResult": true
+          }
+        ],
+        "actions": [
+          "/actions/21"
+        ],
+        "publicReturns": [
+          "/packets/22"
+        ]
+      }
+    },
+    {
+      "categories": [
+        "control:sample_unused_control",
+        "recalled_control:sample_unused_control",
+        "parent_return:contradicted"
+      ],
+      "prefix": "prefix_evidence:23",
+      "decisionRevision": 23,
+      "selectionGroup": "attention_parent_return",
+      "family": "attention_parent_return",
+      "firstAction": 23,
+      "lastAction": 23,
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "composition": "alignment_of_homologous_patterns",
+        "measured": {
+          "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277",
+          "level_epoch": 2,
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "control_attested": false,
+          "framed_pair": true,
+          "homologous": true,
+          "asymmetric": true,
+          "alignment_refuted": false
+        },
+        "measuredRoutes": []
+      },
+      "question": {
+        "action_ref": "ACTION2",
+        "evidence": [
+          "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277"
+        ],
+        "experiment": "sample_unused_control",
+        "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input.",
+        "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277",
+        "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+        "recalled_method": {
+          "current_measured_vectors": [
+            [
+              0,
+              -5
+            ],
+            [
+              5,
+              0
+            ]
+          ],
+          "evidence": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+          "tested_prediction": [
+            0,
+            5
+          ]
+        }
+      },
+      "questionKind": "direct_control",
+      "deferredCuriosity": [],
+      "parentReturn": {
+        "id": "4a00a636813638445959",
+        "status": "contradicted",
+        "parent": "alignment_of_homologous_patterns",
+        "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+        "returned_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277"
+      },
+      "acquisition": {
+        "count": 1,
+        "before": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277",
+        "after": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:24:frame:633864125d13d738",
+        "publicScoreBefore": 1,
+        "publicScoreAfter": 1,
+        "attentionAtSealedCheckpoint": {
+          "id": "4a00a636813638445959",
+          "status": "returned",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "level_epoch": 2,
+          "opened_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:22:frame:904c8d72466c661f",
+          "returned_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277",
+          "action_ref": "ACTION4",
+          "experiment": "replicate_translation",
+          "result": "contradicted",
+          "release_authority": false
+        }
+      },
+      "continuation": {
+        "nextSealedPrefix": "prefix_evidence:24",
+        "selectedGroup": "acquire_control_for_target",
+        "controlQuestion": {
+          "action_ref": "ACTION2",
+          "attention_ref": "b027c0204e009e5ff87a",
+          "evidence": [
+            "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:24:frame:633864125d13d738",
+            "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:23:frame:40a6f892323c5277",
+            "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:24:frame:633864125d13d738"
+          ],
+          "expected_motion": {
+            "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d": [
+              0,
+              5
+            ],
+            "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344": [
+              0,
+              5
+            ]
+          },
+          "experiment": "replicate_translation",
+          "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input.",
+          "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:24:frame:633864125d13d738",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "recalled_method": {
+            "current_measured_vectors": [
+              [
+                0,
+                -5
+              ],
+              [
+                0,
+                5
+              ],
+              [
+                5,
+                0
+              ]
+            ],
+            "evidence": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+            "tested_prediction": [
+              0,
+              5
+            ]
+          }
+        },
+        "returnedAttention": null,
+        "nextCurrentMorphology": {
+          "status": "retained",
+          "reason": "control_not_currently_attested",
+          "route_key": null,
+          "composition": "alignment_of_homologous_patterns",
+          "measured": {
+            "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:24:frame:633864125d13d738",
+            "level_epoch": 2,
+            "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+            "control_attested": false,
+            "framed_pair": true,
+            "homologous": true,
+            "asymmetric": true,
+            "alignment_refuted": false
+          },
+          "measuredRoutes": []
+        }
+      },
+      "evidence": {
+        "reportPrefix": "/prefixes/16",
+        "morphologyEvaluations": [
+          "/morphologySourceCalls/49"
+        ],
+        "consumerCalls": [
+          {
+            "path": "/controlAttentionSourceCalls/35",
+            "method": "attentionParentReturnOffer",
+            "entryIndex": 34,
+            "nonNullResult": true
+          },
+          {
+            "path": "/controlAttentionSourceCalls/34",
+            "method": "acquireControlForTarget",
+            "entryIndex": 35,
+            "nonNullResult": true
+          }
+        ],
+        "actions": [
+          "/actions/22"
+        ],
+        "publicReturns": [
+          "/packets/23"
+        ]
+      }
+    },
+    {
+      "categories": [
+        "control:replicate_after_contextual_block",
+        "recalled_control:replicate_after_contextual_block",
+        "parent_return:contradicted"
+      ],
+      "prefix": "prefix_evidence:25",
+      "decisionRevision": 25,
+      "selectionGroup": "attention_parent_return",
+      "family": "attention_parent_return",
+      "firstAction": 25,
+      "lastAction": 25,
+      "decision": {
+        "status": "retained",
+        "reason": "control_not_currently_attested",
+        "route_key": null,
+        "composition": "alignment_of_homologous_patterns",
+        "measured": {
+          "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:25:frame:c00df657a5969bb9",
+          "level_epoch": 2,
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "control_attested": false,
+          "framed_pair": true,
+          "homologous": true,
+          "asymmetric": true,
+          "alignment_refuted": false
+        },
+        "measuredRoutes": []
+      },
+      "question": {
+        "action_ref": "ACTION1",
+        "evidence": [
+          "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+          "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:19:frame:6cdc959715fc6df8",
+          "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:25:frame:c00df657a5969bb9"
+        ],
+        "expected_motion": {
+          "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d": [
+            0,
+            -5
+          ],
+          "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344": [
+            0,
+            -5
+          ]
+        },
+        "experiment": "replicate_after_contextual_block",
+        "exposure_contrast": {
+          "alternate_outcomes": [
+            "blocked_again",
+            "different_translation",
+            "nonlocal_effect"
+          ],
+          "distinct_prior_success_origins": 1,
+          "evidence": [
+            "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+            "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:19:frame:6cdc959715fc6df8",
+            "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:25:frame:c00df657a5969bb9"
+          ],
+          "observed_delta": [
+            0,
+            -5
+          ],
+          "predicted_origin": [
+            34,
+            40
+          ],
+          "projected_destination": [
+            34,
+            35
+          ],
+          "role_signatures": [
+            "510f25975e2ade31316bca5e63e4f00c57c5b39625e5e76911c878c58667079d",
+            "b1ceb17a0c0ecbb1304fbd518665a312d4762956042c5adce142930250b80344"
+          ],
+          "surface_ref": "96b621b55be6efa7a62568a7f73830a709ed358acc16141b3789364e727115f0"
+        },
+        "objective": "Identify a controllable participant for this composition through a changed-origin replication or an unused public input.",
+        "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:25:frame:c00df657a5969bb9",
+        "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+        "recalled_method": {
+          "current_measured_vectors": [
+            [
+              0,
+              -5
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              5,
+              0
+            ]
+          ],
+          "evidence": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:18:frame:fa0ea3dd51f09af2",
+          "tested_prediction": [
+            0,
+            -5
+          ]
+        }
+      },
+      "questionKind": "direct_control",
+      "deferredCuriosity": [],
+      "parentReturn": {
+        "id": "b027c0204e009e5ff87a",
+        "status": "contradicted",
+        "parent": "alignment_of_homologous_patterns",
+        "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+        "returned_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:25:frame:c00df657a5969bb9"
+      },
+      "acquisition": {
+        "count": 1,
+        "before": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:25:frame:c00df657a5969bb9",
+        "after": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:26:frame:2c0bc6125a902236",
+        "publicScoreBefore": 1,
+        "publicScoreAfter": 1,
+        "attentionAtSealedCheckpoint": {
+          "id": "b027c0204e009e5ff87a",
+          "status": "returned",
+          "parent": "alignment_of_homologous_patterns",
+          "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+          "level_epoch": 2,
+          "opened_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:24:frame:633864125d13d738",
+          "returned_at": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:25:frame:c00df657a5969bb9",
+          "action_ref": "ACTION2",
+          "experiment": "replicate_translation",
+          "result": "contradicted",
+          "release_authority": false
+        }
+      },
+      "continuation": {
+        "nextSealedPrefix": "prefix_evidence:26",
+        "selectedGroup": "observed_frontier",
+        "controlQuestion": null,
+        "returnedAttention": null,
+        "nextCurrentMorphology": {
+          "status": "retained",
+          "reason": "control_not_currently_attested",
+          "route_key": null,
+          "composition": "alignment_of_homologous_patterns",
+          "measured": {
+            "observation_ref": "sra-v6-b553fe77-eedd-449f-8865-beb4ed4bffb5:epoch:2:revision:26:frame:2c0bc6125a902236",
+            "level_epoch": 2,
+            "pair_ref": "5539c37e22aa692b16556a4ad01e263ef57dd2a65ef94877a484a159175d1c0e",
+            "control_attested": false,
+            "framed_pair": true,
+            "homologous": true,
+            "asymmetric": true,
+            "alignment_refuted": false
+          },
+          "measuredRoutes": []
+        }
+      },
+      "evidence": {
+        "reportPrefix": "/prefixes/18",
+        "morphologyEvaluations": [
+          "/morphologySourceCalls/53"
+        ],
+        "consumerCalls": [
+          {
+            "path": "/controlAttentionSourceCalls/41",
+            "method": "attentionParentReturnOffer",
+            "entryIndex": 40,
+            "nonNullResult": true
+          },
+          {
+            "path": "/controlAttentionSourceCalls/40",
+            "method": "acquireControlForTarget",
+            "entryIndex": 41,
+            "nonNullResult": true
+          }
+        ],
+        "actions": [
+          "/actions/24"
+        ],
+        "publicReturns": [
+          "/packets/25"
+        ]
+      }
+    }
+  ],
+  "qualifications": [
+    "Counts describe the complete captured run; first chains and first states are bounded examples with JSON pointers into the hashed report.",
+    "A method call, a non-null offer, a selected sealed prefix and its acquired actions are separate counts. Inspection can return a control question without selecting or dispatching it.",
+    "Nested calls are recorded independently. Their append order can differ from call-entry order; entryIndex is retained for ordering within the instrumented caller.",
+    "ActionsInSealedPrefixes attributes the prefix, not one separately confirmed control experiment per action.",
+    "Attention item states are deduplicated across observations of the same persisted state. Acquired-return witnesses additionally require returned_at to match an acquired transition after-reference.",
+    "The motion attention item is separate from the composition attention owner; composition attention is not counted as a control return.",
+    "A zero selected-provider count means no selected sealed prefix in this capture. Method-call counts separately show evaluation; no failure of the provider is inferred.",
+    "Official progress comes only from public score/state returns. Participation of a provider does not establish that it alone caused completion; no ablation or hypothetical success is inferred.",
+    "No solver, game implementation, private state, native source mutation or action execution is used by this extractor."
+  ]
+}

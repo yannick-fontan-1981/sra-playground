@@ -1,0 +1,89 @@
+{
+  "schema": "logos-engine.native-campaign-resolution.v1",
+  "game": "WEAV",
+  "selection": "docs/migration/lot2b-evidence/final/weav-selection.json",
+  "execution": "docs/migration/lot2b-evidence/final/weav-control-attention/execution-weav.json",
+  "resolvedAt": "2026-11-09T19:37:53.327811+00:00",
+  "recordedAt": "2026-11-09T19:41:33.204127+00:00",
+  "secondsSinceSelection": 474.037204,
+  "maximumBlockedSeconds": 2400,
+  "status": "target_not_reached",
+  "lastObservedResponse": {
+    "game": "WEAV",
+    "phase": "response",
+    "operation": "advance",
+    "sequence": 97,
+    "kind": "stopped",
+    "reason": "level_active_time_budget",
+    "level": 1,
+    "levelsCompleted": 0,
+    "actions": 97,
+    "cycles": 97,
+    "activeSeconds": 363.43389519,
+    "elapsedMs": 4027.281665000017,
+    "family": "observed_frontier",
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 97,
+      "boundaryReplays": 0,
+      "goalEvents": 0,
+      "frontierDeltas": 292,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 98
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 195
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 14
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 90
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 8
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 19
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 195
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_and_attention",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "pending": [
+          "retained_station_method_and_managed_capacity",
+          "entry_access_return_and_rebind",
+          "target_extension_continuation"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    }
+  },
+  "completeReportAvailable": true,
+  "sourceUnchanged": true,
+  "explorationClosed": true,
+  "threeLevelDemonstration": "SYME, completed in a separate cold session on the same frozen native source",
+  "switchBasis": "Stopped at the per-level active-time budget with 97 acquired actions and zero completed levels. No retry, game-specific change or extended budget. The current delivery uses the separately completed three-level SYME demonstration; no LS19 execution is claimed."
+}

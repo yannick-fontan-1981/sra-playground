@@ -1,0 +1,151 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "weav-campaign.json.gz",
+    "sha256": "14139d426f81222e45cf50fa9c4e7ac0c43ded802d0946e748dfe8cd4091cc3d",
+    "bytes": 24361311
+  },
+  "parts": [
+    {
+      "file": "weav-campaign.json.gz.part000",
+      "sha256": "93eaa22a1f2cc3f5aa768bd4bfe62996a152172181ab2958fc6120742f023f1c",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part001",
+      "sha256": "65a210d6f95052eb8b27193b6b72d050b299248eb8a470fbbc2fe22d3214d480",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part002",
+      "sha256": "28c6f1ffdb007787f6c66d8fc22350aa4b00dfb1ff2414ace352b2ec8d854707",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part003",
+      "sha256": "41d09a7a7cc75bffaff9cee462d28e4b7e27aac7c479808712b352025e6b58bd",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part004",
+      "sha256": "7601513ad9dece24ab6313929e63748103cc1fef011ac76b8da1dbd1bc174e8c",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part005",
+      "sha256": "3a6ead9082a7131146c03596558ef50e9408ed4859945c945b47e7229b945d1a",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part006",
+      "sha256": "30fe6157d5ce5cfadbc1472b93a6fdb130f02ca082e180b266fbc423d814551e",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part007",
+      "sha256": "edca7c3e2c1bbb94f8daa1b09459cbc0a47c352d47f0a5aa360c66a161784050",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part008",
+      "sha256": "49fd774d822c7e8b790efcc1c5275adeb01a1beb75973779a4f35e6280ada66d",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part009",
+      "sha256": "871c99853a29da7f88905815b6f0d798f278f675449ed46311b141e99f29ce2d",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part010",
+      "sha256": "b21c0c9a239a736fb28df5584abc1de64cfc7af9d1d8cf458482054066a7f37e",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part011",
+      "sha256": "302f51b3927f5fce298d81566bd0a04a8c113a18ff91fa86b762fdb52e44180d",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part012",
+      "sha256": "a0913709b023aeaba1c362444c6d543d71fd4124c6691e0584f585a1dffd5947",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part013",
+      "sha256": "76058a98662338829111bae1963be18e766e67a160619883bb63b56265b31e64",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part014",
+      "sha256": "e488c0b9e27fdfdf7fac3ca9d2425a07c2c337230bf5aa358cb2f26fc5c4140f",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part015",
+      "sha256": "8a5c9531ebeefae34cbccaac9ad6b0bfd19b1fe3fc06adab47bf546e9cbe5d3a",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part016",
+      "sha256": "aa85e6a8fe7108677027c42cedf053b6c46b81c879afbef43641065e4aba1166",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part017",
+      "sha256": "400969a9c5d7d248f1d45971a8052204db7cc121ffa68e02ddf26a2504e17b69",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part018",
+      "sha256": "c6b16bf66eb23743e133046973602286b06fec848cc135c6e1fa1e0c413e319a",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part019",
+      "sha256": "d0edcca22d9c7cead7f716d14f8b5a21b19eb15774b307ad3a1687c85f639762",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part020",
+      "sha256": "b196ea5ff637b059a5fd8f0c33daaa7f6411e461ee658479dbd25abf79c173de",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part021",
+      "sha256": "d2b135217bc77402d0e71c42ce7b513abdb6a1beb8a7ded0c1d5fb5898f582c9",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part022",
+      "sha256": "da09b6362a9fb0580e6489b87b58611c6d8120b1efba39a3f432a946e210bda4",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part023",
+      "sha256": "28348848bd6afdeb7180cc0ec427cc95dcd1df86532aec6f9e890b292d029510",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part024",
+      "sha256": "7745e468d95c338e3912ee453f5291b7def1f0e2a9395265194d031627ff470f",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part025",
+      "sha256": "bca9a0fd9467609bfdc8b744537a5595b61896e4d32ffb5b8507b35871344c3d",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part026",
+      "sha256": "f1c0adc423e2689d57c225d185b34c5e1191a5ac6344b8433fcac4f30a8ee5df",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part027",
+      "sha256": "034f8764ffc785326a804147385cef762899cf576f38ba197e1e9d89236aed00",
+      "bytes": 61311
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

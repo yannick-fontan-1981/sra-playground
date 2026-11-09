@@ -60,7 +60,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.33.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.34.0';
 // The implementation identity and public snapshot describe the same extensions.
 const NATIVE_CALLER_EXTENSIONS = ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
   'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery',
@@ -98,7 +98,7 @@ const EPISODE = 'common-observation-frontier';
 const CONTACT_SCOPE_NODE = 'native_contact_probe_scope:animated_contact';
 const CALLER_COMPONENTS = ['goal', 'frontier', 'view', 'attention', 'points', 'displays', 'controls', 'counters'] as const;
 const CALLER_PROVIDERS = ['goal_access', 'pre_score_contact', 'scored_local_rewrite', 'factored_material_return', 'conditional_transit',
-  'returned_branch_contrast', 'information_goal', 'view', 'view_continuity', 'observed_frontier'] as const;
+  'attention_parent_return', 'returned_branch_contrast', 'information_goal', 'acquire_control_for_target', 'view', 'view_continuity', 'observed_frontier'] as const;
 function familyCheckpoint(family: NativeFamily): NativeRecord {
   return family.nativeState && family.restoreNative ? family.nativeState() : family.state();
 }
@@ -190,7 +190,8 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (this.callerStrategy && !configuration.authorityPolicy) throw new TypeError('The common caller requires native WHY/ACT authority');
     this.families = [...configuration.families, ...(this.callerStrategy ? nativeCallerFamilies(() => {
       if (!this.caller) throw new Error('The common caller is not initialized'); return this.caller;
-    }, () => this.acquisitionFamilies?.inventory?.callerMeterForecast() ?? null) : [])];
+    }, () => this.acquisitionFamilies?.inventory?.callerMeterForecast() ?? null,
+    observation => this.acquisitionFamilies?.morphology?.currentDecision(observation) ?? null) : [])];
     if (this.acquisitionFamilies && (!this.callerStrategy || ![this.acquisitionFamilies.supports, this.acquisitionFamilies.recall,
       ...(this.acquisitionFamilies.framed ? [this.acquisitionFamilies.framed] : []),
       ...(this.acquisitionFamilies.outline ? [this.acquisitionFamilies.outline] : []),
@@ -421,6 +422,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private async selectFamily(execution: NativeExecution, inputs: readonly NativeCommand[]): Promise<{ family: NativeFamily; proposal: NativeProposal } | null> {
     if (!this.current || !this.observation) throw new Error('Missing current selection context');
     this.caller?.prepare(this.observation, this.remaining());
+    this.acquisitionFamilies?.morphology?.beginDecision();
     const remainingActiveMs = Math.max(0, 360_000 - (this.levelMs.get(this.current.level) ?? 0) - this.runningMs(this.current.level));
     this.planning = { execution: { ...execution, now: this.now, deadlineMs: this.now() + remainingActiveMs },
       inputs, offers: new Map(), entryOffers: new Map(), coordination: [], refusals: [] };
@@ -504,11 +506,12 @@ export class NativeV6Runtime implements NativeV6Backend {
       const offered = this.planning.offers.get(result.selected);
       if (!offered) throw new Error('The SRC selection does not bind an offered native family');
       if (this.caller) {
-        offered.proposal.strategy_receipt = { ...selected.receipt, visited: result.visited, selected: result.selected, deferred_curiosity: [],
+        offered.proposal.strategy_receipt = { ...selected.receipt, visited: result.visited, selected: result.selected, deferred_curiosity: this.caller.deferredCuriosity,
           ...(this.planning.coordination.length ? { native_coordination: this.planning.coordination } : {}),
           ...(this.planning.refusals.length ? { native_proposal_refusals: this.planning.refusals } : {}),
           ...(this.caller.returnedAttention ? { attention_return: Object.fromEntries(['id', 'status', 'parent', 'pair_ref', 'returned_at'].map(key => [key, this.caller!.returnedAttention![key]])) } : {}) };
-        if (offered.family.id !== 'morphology') offered.proposal.morphology = { status: 'not_evaluated', reason: 'prior_family_selected' };
+        offered.proposal.morphology = this.acquisitionFamilies?.morphology?.currentDecision(this.observation)
+          ?? { status: 'not_evaluated', reason: 'prior_family_selected' };
       }
       return offered;
     } finally { this.planning = null; }
@@ -1361,12 +1364,12 @@ export class NativeV6Runtime implements NativeV6Backend {
         goalEvents: this.caller.goalEventCount, frontierDeltas: this.caller.deltaSequence,
         components: Object.fromEntries(CALLER_COMPONENTS.map(component => {
           const id = `caller:${component}`; return [component, { id, revision: this.knowledge!.node(id).revision }];
-        })), pendingSourceProviders: ['morphology', 'attention_parent_return', 'acquire_control_for_target'],
-        morphologyProvider: { status: 'partial_current_measurements_and_base_probes',
+        })), pendingSourceProviders: ['morphology'],
+        morphologyProvider: { status: 'partial_current_measurements_control_and_attention',
           state_owner: 'family_state:morphology', motion_owner: 'caller:goal',
           forecast_owner: 'family_state:public_observed_inventory',
-          pending: ['morph.last', 'acquire_control_for_target', 'attention_parent_return',
-            'retained_station_method_and_managed_capacity', 'entry_access_return_and_rebind',
+          current_decision_scope: 'one_source_selection_cycle', attention_owner: 'caller:attention',
+          pending: ['retained_station_method_and_managed_capacity', 'entry_access_return_and_rebind',
             'target_extension_continuation'] },
         scope: 'native common acquisition and connected providers; remaining source families are still in migration' }
         : { enabled: false, scope: 'injected_family_test_runtime' },
@@ -1392,7 +1395,8 @@ export class NativeV6Runtime implements NativeV6Backend {
 }
 
 /** Shared caller providers use the same retained Goal/Frontier/View objects. */
-function nativeCallerFamilies(getCaller: () => NativeCallerCoordinator, meterForecast: () => R | null = () => null): NativeFamily[] {
+function nativeCallerFamilies(getCaller: () => NativeCallerCoordinator, meterForecast: () => R | null = () => null,
+  morphologyDecision: (observation: Parameters<NativeFamily['propose']>[0]) => R | null = () => null): NativeFamily[] {
   type Offer = (caller: NativeCallerCoordinator, observation: Parameters<NativeFamily['propose']>[0],
     rows: Parameters<NativeFamily['propose']>[1], inputs: Parameters<NativeFamily['propose']>[2], remaining: number) => Promise<NativeProposal | R | null> | NativeProposal | R | null;
   const offers: Record<typeof CALLER_PROVIDERS[number], Offer> = {
@@ -1401,8 +1405,10 @@ function nativeCallerFamilies(getCaller: () => NativeCallerCoordinator, meterFor
     scored_local_rewrite: (caller, observation, rows, inputs, remaining) => caller.scoredOffer(observation, rows, inputs, remaining),
     factored_material_return: (caller, observation, _rows, inputs, remaining) => caller.factoredOffer(observation, inputs, remaining),
     conditional_transit: (caller, observation, rows, inputs, remaining) => caller.passageOffer(observation, rows, inputs, remaining),
+    attention_parent_return: (caller, observation, rows, inputs) => caller.attentionParentReturnOffer(observation, rows, inputs, morphologyDecision(observation)),
     returned_branch_contrast: (caller, observation, _rows, inputs) => caller.returnedBranchOffer(observation, inputs),
-    information_goal: (caller, observation, rows, inputs, remaining) => caller.currentInformationOffer(observation, rows, inputs, remaining, meterForecast()),
+    information_goal: (caller, observation, rows, inputs, remaining) => caller.currentInformationOffer(observation, rows, inputs, remaining, meterForecast(), morphologyDecision(observation)),
+    acquire_control_for_target: (caller, observation, rows, inputs) => caller.acquireControlForTarget(observation, rows, inputs, morphologyDecision(observation)),
     view: (caller, observation, rows, inputs, remaining) => caller.viewOffer(observation, rows, inputs, remaining),
     view_continuity: (caller, observation, _rows, inputs) => caller.continuityOffer(observation, inputs),
     observed_frontier: (caller, observation, _rows, inputs) => caller.frontierOffer(observation, inputs),
@@ -1620,7 +1626,9 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     }),
     returned_branch_contrast: ['returned_branch_contrast'],
     morphology: [morphology.id],
+    attention_parent_return: ['attention_parent_return'],
     information_goal: [...(visual && visualFirst ? [visual.id] : []), 'information_goal'],
+    acquire_control_for_target: ['acquire_control_for_target'],
     view: ['view', recall.id], view_continuity: ['view_continuity'], observed_frontier: ['observed_frontier'],
   };
   const goalEntryPoints = (configuration.goal_access_subquestions as string[]).flatMap<string | null>(question => {

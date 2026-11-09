@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 150,
+    "componentVerifiedModules": 151,
     "partiallyTransferredModules": 126,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1093,
+    "pendingModules": 1092,
     "strategyFamilies": 16
   },
   "families": [
@@ -86875,7 +86875,9 @@
         "scripts/export-v6-morphology-measurements-reference.py",
         "tests/fixtures/v6-morphology-measurements-reference.json.gz",
         "tests/v6-morphology-measurements.test.ts",
-        "tests/v6-morphology-family.test.ts"
+        "tests/v6-morphology-family.test.ts",
+        "tests/v6-control-attention-kernel.test.ts",
+        "docs/migration/lot2b-control-attention-lineage.md"
       ]
     },
     {
@@ -87344,9 +87346,16 @@
           "endLine": 53
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-contextual-translation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-contextual-translation-reference.py",
+        "tests/fixtures/v6-contextual-translation-reference.json.gz",
+        "tests/v6-contextual-translation.test.ts",
+        "docs/migration/lot2b-control-attention-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/continuation.py",
@@ -94261,7 +94270,9 @@
         "src/logos-engine/v6-ordered-reaction.ts",
         "src/logos-engine/v6-topological-recolor.ts",
         "src/logos-engine/v6-motion-contrast.ts",
-        "src/logos-engine/v6-native-caller.ts"
+        "src/logos-engine/v6-native-caller.ts",
+        "src/logos-engine/v6-morphology-family.ts",
+        "src/logos-engine/v6-contextual-translation.ts"
       ],
       "proof": [
         "tests/v6-native-runtime.test.ts",
@@ -94295,7 +94306,12 @@
         "scripts/export-v6-motion-contrast-reference.py",
         "tests/fixtures/v6-motion-contrast-reference.json.gz",
         "tests/v6-motion-contrast.test.ts",
-        "tests/v6-motion-caller-integration.test.ts"
+        "tests/v6-motion-caller-integration.test.ts",
+        "scripts/export-v6-control-attention-reference.py",
+        "tests/fixtures/v6-control-attention-reference.json.gz",
+        "tests/v6-control-attention-reference.test.ts",
+        "tests/v6-control-attention-kernel.test.ts",
+        "docs/migration/lot2b-control-attention-lineage.md"
       ]
     },
     {

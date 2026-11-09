@@ -89,7 +89,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     status: 'running', referenceCommit: V6_REFERENCE_COMMIT,
     budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: 360, clock: 'real active compute and native execution' },
     source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [], domainAssessments: [],
-    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [],
+    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
   };
   if (options.recordedPublic) report.recordedPublicReplay = {
     trace: options.recordedPublic.trace, baseline: options.recordedPublic.baseline,
@@ -204,6 +204,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               if (method === 'propose') {
                 event.measurement = this.currentMeasurementReceipt(args[0]);
                 event.refusal = this.currentProposalRefusal(args[0]);
+                event.currentDecision = this.currentDecision(args[0]);
               }
               report.morphologySourceCalls.push(event); return result;
             } catch (error) {
@@ -227,6 +228,27 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             try { const result = await original.apply(this, inputs); event.result = structuredClone(result); report.motionSourceCalls.push(event); return result; }
             catch (error) { event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error); report.motionSourceCalls.push(event); throw error; }
           };
+          let controlCallSequence = 0;
+          for (const method of ['acquireControlForTarget', 'attentionParentReturnOffer', 'currentInformationOffer']) {
+            const sourceMethod = caller[method];
+            caller[method] = async function (...inputs: any[]) {
+              const event: R = { index: controlCallSequence++, method, arguments: structuredClone(inputs),
+                history: this.goal.memory.episode.map(([before, command, after]: [R, string, R]) => [snapshotRef(before), command, snapshotRef(after)]),
+                current: snapshotRef(this.goal.memory.snapshot(inputs[0], inputs[1])),
+                targetMethod: structuredClone(this.targetMethod), returnedAttention: structuredClone(this.returnedAttention),
+                attentionBefore: this.attention.state(), deferredBefore: this.deferredCuriosity };
+              try {
+                const result = await sourceMethod.apply(this, inputs);
+                event.result = structuredClone(result ?? null);
+                event.attentionAfter = this.attention.state(); event.deferredAfter = this.deferredCuriosity;
+                report.controlAttentionSourceCalls.push(event); return result;
+              } catch (error) {
+                event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+                event.attentionAfter = this.attention.state(); event.deferredAfter = this.deferredCuriosity;
+                report.controlAttentionSourceCalls.push(event); throw error;
+              }
+            };
+          }
         }
         return originalPlan.apply(this, args);
       };
@@ -366,6 +388,13 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             proposalKind: evidence.proposal.kind ?? null, fieldSubquestion: evidence.proposal.field_subquestion ?? null,
             materialSubquestion: evidence.proposal.material_access_subquestion ?? null,
             selectionGroup: evidence.proposal.strategy_receipt?.selected ?? null,
+            controlAttention: { morphology: evidence.proposal.morphology ?? null,
+              controlAcquisition: evidence.proposal.question?.control_acquisition ?? null,
+              sharedControl: evidence.proposal.question?.curiosity?.also_tests_current_control ?? null,
+              deferredCuriosity: evidence.proposal.strategy_receipt?.deferred_curiosity ?? [],
+              returnedAttention: evidence.proposal.strategy_receipt?.attention_return ?? null,
+              acquiredAttention: read('caller:attention'),
+              qualification: 'Observed source decisions and acquired attention in the actual common prefix; this recorder supplies no state or action.' },
             ...(morphologyCheckpoint ? { morphologyOwnership: {
               stateNode: 'family_state:morphology', nativeCheckpoint: morphologyCheckpoint,
               proposal: evidence.proposal.kind === 'morphology_probe' ? evidence.proposal : null,

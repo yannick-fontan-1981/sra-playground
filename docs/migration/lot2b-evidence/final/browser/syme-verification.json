@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.native-browser-verification.v1",
+  "recordedAt": "2026-11-09T19:41:33.204127+00:00",
+  "environment": "managed Sites preview, real browser workers and public game engine",
+  "url": "http://127.0.0.1:4173/?game=SYME&level=4",
+  "nativeSourceManifestDigest": "17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b",
+  "game": "SYME",
+  "startedAtLevel": 1,
+  "observedLevel": 4,
+  "levelsSolved": 3,
+  "actions": 36,
+  "completedPlans": 14,
+  "statusText": "Level completed.",
+  "inspectorExpanded": false,
+  "manualGameActions": 0,
+  "levelJumps": 0,
+  "sessionResetsDuringRun": 0,
+  "steps": [
+    "Selected SYME in the visible game chooser with a fresh native reasoning session",
+    "Clicked Run to next level and observed 9 actions, 1 level, 6 plans",
+    "Clicked Run to next level and observed 21 actions, 2 levels, 9 plans",
+    "Clicked Run to next level and observed 36 actions, 3 levels, 14 plans at level 4"
+  ],
+  "screenshot": {
+    "path": "docs/migration/lot2b-evidence/final/browser/syme-three-levels.png",
+    "bytes": 109978,
+    "sha256": "8552cd2712d878d35b40683a58f0b53e58e3cc509615120d980416d7a83b04f1"
+  },
+  "qualification": "Independent browser confirmation of the three-level cold campaign. SYME was already successful historically; this is a current regression demonstration, not a newly attributed control/attention success. This is not an authenticated production-site game session."
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.native-campaign-resolution.v1",
+  "game": "LS20",
+  "selection": "docs/migration/lot2b-evidence/final/ls20-selection.json",
+  "execution": "docs/migration/lot2b-evidence/final/ls20-control-attention/execution-ls20.json",
+  "resolvedAt": "2026-11-09T19:19:51.434185+00:00",
+  "secondsThisSelection": 492.060937,
+  "carriedBlockedSeconds": 475.600811,
+  "cumulativeBlockedSeconds": 967.661748,
+  "maximumBlockedSeconds": 2400,
+  "status": "target_not_reached",
+  "levelsCompleted": 1,
+  "targetLevels": 3,
+  "actions": 133,
+  "officialState": "GAME_OVER",
+  "sourceUnchanged": true,
+  "nextCandidate": "CATR",
+  "switchBasis": "Actual common session reached official game-over on level2. Preserve the failure and its inherited clock; proceed to a distinct candidate without modifying native code."
+}

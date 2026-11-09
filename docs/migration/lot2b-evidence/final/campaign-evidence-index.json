@@ -1,0 +1,302 @@
+{
+  "schema": "logos-engine.native-campaign-evidence-index.v1",
+  "recordedAt": "2026-11-09T19:54:29.095102+00:00",
+  "nativeSourceDigest": "17252e294212a1563b75037a0b0dd782c2ecbc8cc4e1997a4f2bb2103bdf4e8b",
+  "campaigns": [
+    {
+      "game": "LS20",
+      "targetStatus": "target_not_reached",
+      "execution": {
+        "path": "docs/migration/lot2b-evidence/final/ls20-control-attention/execution-ls20.json",
+        "sha256": "89843cd91f6c5e90ec7f5a9f8cd51f01944c32c41eb44e9aca524d066718abf6",
+        "bytes": 61010
+      },
+      "selection": {
+        "path": "docs/migration/lot2b-evidence/final/ls20-selection.json",
+        "sha256": "7c543880d38c9b262c001b0f37a44435a0118995993c99b19206b2d0d24767af",
+        "bytes": 1044
+      },
+      "resolution": {
+        "path": "docs/migration/lot2b-evidence/final/ls20-resolution.json",
+        "sha256": "8f54154f28cc313b707ca748828bf1ad439a6ddc6bcd709d988c543f2331d066",
+        "bytes": 826
+      },
+      "completeReportAvailable": true,
+      "executionExitCode": 1,
+      "artifacts": {
+        "report": {
+          "path": "docs/migration/lot2b-evidence/final/ls20-control-attention/ls20-campaign.json.gz",
+          "sha256": "5a02d81e4110708c0adf48b4b3470de06678da344a6d29aa1b6da78e1374336f",
+          "bytes": 24407498
+        },
+        "reportByteParts": {
+          "path": "docs/migration/lot2b-evidence/final/ls20-control-attention/ls20-campaign.json.gz.parts.json",
+          "sha256": "749e6bb6c5a5e1e4b57e2caed8cb23c42e0dfe264023f0e9b270f1b9b4b1979b",
+          "bytes": 4990
+        },
+        "trace": {
+          "path": "docs/migration/lot2b-evidence/final/ls20-control-attention/ls20-public-trace.json.gz",
+          "sha256": "e59a6005a56d332937c92772666fca9504528a62ac874d12a9dfa1fd54862342",
+          "bytes": 41118
+        },
+        "output": {
+          "path": "docs/migration/lot2b-evidence/final/ls20-control-attention/ls20-output.log.gz",
+          "sha256": "0dd4b49163b34cb9077df87077098753d80a818014e87a5411c9cd24accc124f",
+          "bytes": 11986
+        },
+        "publicJournal": {
+          "path": "docs/migration/lot2b-evidence/final/ls20-control-attention/ls20-actual-public-journal.jsonl.gz",
+          "sha256": "84c6e9a1b3a1224b105a4fc25e417997f456f8f2cebdc2a399efdbcf2483900d",
+          "bytes": 22706
+        },
+        "ls20-control-attention-attribution.json": {
+          "path": "docs/migration/lot2b-evidence/final/ls20-control-attention/ls20-control-attention-attribution.json",
+          "sha256": "91e534044d9304b200502e86482cac6efda1e616fe9df6ea03471fd3dadb7573",
+          "bytes": 66373
+        },
+        "ls20-morphology-original-comparison.json.gz": {
+          "path": "docs/migration/lot2b-evidence/final/ls20-control-attention/ls20-morphology-original-comparison.json.gz",
+          "sha256": "b078372b2e5a5022107ea6b4f9ba2d32d6f70f5432030bc6b1b7965030c07151",
+          "bytes": 82727
+        },
+        "v61-first-command-divergence.json": {
+          "path": "docs/migration/lot2b-evidence/final/ls20-control-attention/v61-first-command-divergence.json",
+          "sha256": "366c4e45eaad2553d15c9806feb4d7adedbfb8d7c33b5cd27e6a565ee0b7505a",
+          "bytes": 61038
+        }
+      }
+    },
+    {
+      "game": "CATR",
+      "targetStatus": "target_not_reached",
+      "execution": {
+        "path": "docs/migration/lot2b-evidence/final/catr-control-attention/execution-catr.json",
+        "sha256": "8e0161d517d6c640e0001bfd9036033296b47734ba6edfe3b3eab3965d520865",
+        "bytes": 61001
+      },
+      "selection": {
+        "path": "docs/migration/lot2b-evidence/final/catr-selection.json",
+        "sha256": "1556c0307a9cd00ba4aa1e167881ecc5728e1eb2f17ecbe8f14e5599355b01b9",
+        "bytes": 813
+      },
+      "resolution": {
+        "path": "docs/migration/lot2b-evidence/final/catr-resolution.json",
+        "sha256": "1281bd182e2976c7dde75b151a664bead41bbbe6139444d8238d5149f8b08d0c",
+        "bytes": 2703
+      },
+      "completeReportAvailable": true,
+      "executionExitCode": 1,
+      "artifacts": {
+        "report": {
+          "path": "docs/migration/lot2b-evidence/final/catr-control-attention/catr-campaign.json.gz",
+          "sha256": "f9ecbfc161ec19961cb3e2108077c6c485f36d7643329879e83bfb8ce81dceed",
+          "bytes": 131852
+        },
+        "trace": {
+          "path": "docs/migration/lot2b-evidence/final/catr-control-attention/catr-public-trace.json.gz",
+          "sha256": "e2614433a841dcb6c44de30b5ecef92035c44d7e81a5253a7b70af217ffa659a",
+          "bytes": 986
+        },
+        "output": {
+          "path": "docs/migration/lot2b-evidence/final/catr-control-attention/catr-output.log.gz",
+          "sha256": "915e9808facdc1e35c6ad6e887d9a800a7d4f36a178b6db2924760de2b93648e",
+          "bytes": 1204
+        },
+        "publicJournal": {
+          "path": "docs/migration/lot2b-evidence/final/catr-control-attention/catr-actual-public-journal.jsonl.gz",
+          "sha256": "bed64e97890d1495a45d432a23157b6bcf25a8355cedafe2bd777add2d700191",
+          "bytes": 686
+        }
+      }
+    },
+    {
+      "game": "MOTO",
+      "targetStatus": "target_not_reached",
+      "execution": {
+        "path": "docs/migration/lot2b-evidence/final/moto-control-attention/execution-moto.json",
+        "sha256": "03f8682e90f01e3dbbeb3898a8e520a346767c6bb92b802d70632c7760b9f662",
+        "bytes": 60573
+      },
+      "selection": {
+        "path": "docs/migration/lot2b-evidence/final/moto-selection.json",
+        "sha256": "b593d89d031426a27094522ef77f812ae7f247a4118291d5cec07f9ce67c23e9",
+        "bytes": 768
+      },
+      "resolution": {
+        "path": "docs/migration/lot2b-evidence/final/moto-resolution.json",
+        "sha256": "900c7b9699c8c2e64ea4a197d2a42c615d038c88fcfbcb802514ec70193de4d4",
+        "bytes": 3007
+      },
+      "completeReportAvailable": false,
+      "executionExitCode": -6,
+      "artifacts": {
+        "output": {
+          "path": "docs/migration/lot2b-evidence/final/moto-control-attention/moto-output.log.gz",
+          "sha256": "c25a2803ceeba96a55a8bab671a198b5c94767d2ceb08b7f34be75e2fd0edf28",
+          "bytes": 12939
+        },
+        "publicJournal": {
+          "path": "docs/migration/lot2b-evidence/final/moto-control-attention/moto-actual-public-journal.jsonl.gz",
+          "sha256": "67681218adf9e2e3ef0f8d6b37f889b0a5ad07da9dc1e4e724fad882ace08b04",
+          "bytes": 15219
+        }
+      }
+    },
+    {
+      "game": "WEAV",
+      "targetStatus": "target_not_reached",
+      "execution": {
+        "path": "docs/migration/lot2b-evidence/final/weav-control-attention/execution-weav.json",
+        "sha256": "30686b9ea7fb378ab671a61541deb5f7da9f85294cdb52dee66b9a1cdb67de36",
+        "bytes": 61010
+      },
+      "selection": {
+        "path": "docs/migration/lot2b-evidence/final/weav-selection.json",
+        "sha256": "85aed2aa57d7c41bb7b02d8650e3a124e15916586e3c60e8a3b03f3e0330ab76",
+        "bytes": 810
+      },
+      "resolution": {
+        "path": "docs/migration/lot2b-evidence/final/weav-resolution.json",
+        "sha256": "c7a0d39ff02dbbc5cc30c33ea7fd3b4ccf8fa0e36930283e8a235bf3aa0cf0b9",
+        "bytes": 2964
+      },
+      "completeReportAvailable": true,
+      "executionExitCode": 1,
+      "artifacts": {
+        "report": {
+          "path": "docs/migration/lot2b-evidence/final/weav-control-attention/weav-campaign.json.gz",
+          "sha256": "14139d426f81222e45cf50fa9c4e7ac0c43ded802d0946e748dfe8cd4091cc3d",
+          "bytes": 24361311
+        },
+        "reportByteParts": {
+          "path": "docs/migration/lot2b-evidence/final/weav-control-attention/weav-campaign.json.gz.parts.json",
+          "sha256": "e353d7ac7824fdebef541fdb73b77fec2ea9404b8a199e0c178792479d9744cb",
+          "bytes": 4989
+        },
+        "trace": {
+          "path": "docs/migration/lot2b-evidence/final/weav-control-attention/weav-public-trace.json.gz",
+          "sha256": "c3e05ce273961f21bedcf5d9a4f1b8cbd347c1238e117f400e8b6a5904ea976e",
+          "bytes": 22472
+        },
+        "output": {
+          "path": "docs/migration/lot2b-evidence/final/weav-control-attention/weav-output.log.gz",
+          "sha256": "0a2d17582f92f1c206e2b11a93ec59c75382e987c8bf7efeca94b8d99780cad4",
+          "bytes": 11567
+        },
+        "publicJournal": {
+          "path": "docs/migration/lot2b-evidence/final/weav-control-attention/weav-actual-public-journal.jsonl.gz",
+          "sha256": "c6ae8f1aec5599ca790729b6789167168315786b7248ae9e7130076a530fecf4",
+          "bytes": 12493
+        }
+      }
+    },
+    {
+      "game": "SYME",
+      "targetStatus": "target_reached",
+      "execution": {
+        "path": "docs/migration/lot2b-evidence/final/syme-control-attention/execution-syme.json",
+        "sha256": "642f557d55676a32925eae897aae1d42c607630a9d3711628859b37737fd8f32",
+        "bytes": 61007
+      },
+      "selection": {
+        "path": "docs/migration/lot2b-evidence/final/syme-selection.json",
+        "sha256": "e4cdc75dd8862b7efc94d3faa988359a9fcb3fd00f73984785c548ba506ca215",
+        "bytes": 961
+      },
+      "resolution": {
+        "path": "docs/migration/lot2b-evidence/final/syme-resolution.json",
+        "sha256": "a97186647ead63be0c6f5bf8854813d1b6bece77f368ad237a57685cc5533a2f",
+        "bytes": 688
+      },
+      "completeReportAvailable": true,
+      "executionExitCode": 0,
+      "artifacts": {
+        "report": {
+          "path": "docs/migration/lot2b-evidence/final/syme-control-attention/syme-campaign.json.gz",
+          "sha256": "f05b862eef194a7faa5043cd0fc6b699687c4188f57b4bb3810b5c964168d1cb",
+          "bytes": 3051058
+        },
+        "reportByteParts": {
+          "path": "docs/migration/lot2b-evidence/final/syme-control-attention/syme-campaign.json.gz.parts.json",
+          "sha256": "47c67a0bc6e36fe01970dadbda54c4f1880f4e016a36e8854dc7307911781188",
+          "bytes": 1005
+        },
+        "trace": {
+          "path": "docs/migration/lot2b-evidence/final/syme-control-attention/syme-public-trace.json.gz",
+          "sha256": "b723805216b6ff8fa39cc2bd49b8d4fa6eda49d5da424f7c445835ac6e93e035",
+          "bytes": 23317
+        },
+        "output": {
+          "path": "docs/migration/lot2b-evidence/final/syme-control-attention/syme-output.log.gz",
+          "sha256": "29100872b35b63dd6b8c1bef95d278a7fb7159ad3b5ed60b4411a62d01670f5b",
+          "bytes": 4066
+        },
+        "publicJournal": {
+          "path": "docs/migration/lot2b-evidence/final/syme-control-attention/syme-actual-public-journal.jsonl.gz",
+          "sha256": "a50c096dd8928693296eea9ed8fa417345601f4f8bd41d05fb12fb02bf7bfb89",
+          "bytes": 11913
+        },
+        "syme-control-attention-attribution.json": {
+          "path": "docs/migration/lot2b-evidence/final/syme-control-attention/syme-control-attention-attribution.json",
+          "sha256": "2f4e4c8da6bbe03a18285e110c501e6a42e65656511efc47c29e5433ccade611",
+          "bytes": 9205
+        },
+        "syme-original-prefix-comparison.json": {
+          "path": "docs/migration/lot2b-evidence/final/syme-control-attention/syme-original-prefix-comparison.json",
+          "sha256": "1e008847fe87480ed86e9a1d5254058fec261c3b8dc698d7a579efec4f0f0e03",
+          "bytes": 1532
+        }
+      }
+    }
+  ],
+  "browser": [
+    {
+      "path": "docs/migration/lot2b-evidence/final/browser/verification.json",
+      "sha256": "8c401c04d9390d6bdefd039128396eb0b9b0f168679aaae403ae06adf9092b76",
+      "bytes": 1211
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/final/browser/ls20-first-level.png",
+      "sha256": "b76dc0f3333e04bc69b717dc89b1ef11bcf8fb396ef3528f975653616fc386d1",
+      "bytes": 96456
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/final/browser/syme-verification.json",
+      "sha256": "aab348cd82ad783fd5e42c0a268648f24794ceaabbf9d2f1c53577f59b3a6b54",
+      "bytes": 1453
+    },
+    {
+      "path": "docs/migration/lot2b-evidence/final/browser/syme-three-levels.png",
+      "sha256": "8552cd2712d878d35b40683a58f0b53e58e3cc509615120d980416d7a83b04f1",
+      "bytes": 109978
+    }
+  ],
+  "sourceContracts": [
+    {
+      "path": "tests/fixtures/v6-control-attention-reference.json.gz",
+      "sha256": "2d1338f08632a4cd41add69c3a95945b4d5df2059ecde34ccb118464416f8fb2",
+      "bytes": 31722
+    },
+    {
+      "path": "tests/fixtures/v6-contextual-translation-reference.json.gz",
+      "sha256": "65544cfd2e0e0fdcc5c261996a0388ca0b191036a28caee529a78d63c965f891",
+      "bytes": 23618
+    },
+    {
+      "path": "scripts/export-v6-control-attention-reference.py",
+      "sha256": "e5c8149fe9cd5237be8fb0f5a85e7c5718b3d8d287dcc81bc22568fa8f4c1d0e",
+      "bytes": 22264
+    },
+    {
+      "path": "scripts/export-v6-contextual-translation-reference.py",
+      "sha256": "dcfa11bbd8b60ac07bd9fb380102c80765d25fd0529ae673ba89e74dbfa2bbe5",
+      "bytes": 17707
+    },
+    {
+      "path": "scripts/extract-native-control-attention-evidence.py",
+      "sha256": "8184ee974e9eef6dcc2c6108296dfb29d96fd13b38c3c3e653e5d6309f5332b2",
+      "bytes": 25634
+    }
+  ],
+  "qualification": "Integrity index of completed actual campaigns and their qualified outcomes. LS20, CATR, MOTO and WEAV did not reach their target. MOTO has no complete report after the instrumented process exhausted its heap; its outer execution receipt, exact output and actual public journal are retained. SYME reached three levels but was already a historical success and does not select the new control/attention providers. Exact byte-part manifests retain the large reports; no evidence is rewritten."
+}
