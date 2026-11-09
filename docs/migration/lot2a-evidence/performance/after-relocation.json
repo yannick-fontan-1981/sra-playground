@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.native-loop-cost-relocation.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-09T18:14:40.158438+00:00",
+  "source": {
+    "path": "docs/migration/lot2a-evidence/performance/after.json",
+    "bytes": 976551,
+    "sha256": "58ce250f146000234e0936d8c32951354f929195e9ecd1d94787029c9d432ba2"
+  },
+  "destination": {
+    "path": "docs/migration/lot2a-evidence/performance/after.json.gz",
+    "bytes": 81410,
+    "sha256": "3b903f5dcfc88d5a83e9dc8eb723a587149ce81e1958db516c602fa6568f2de1"
+  },
+  "compression": "gzip with mtime=0; decompressed bytes match original exactly",
+  "gitHead": "9be3d0434f6f8ff91236d61a51eafa4017c3a082",
+  "nativeDigest": "cc4bcea77e0099dc035afa5d6ae03e0d5a7a00082633b8e2332691f34b769ad3",
+  "nativeFiles": 239
+}

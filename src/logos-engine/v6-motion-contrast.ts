@@ -18,7 +18,8 @@ export interface MotionLimits {
   readonly remaining_meter_steps?: number | null;
   readonly preserve_cells?: readonly NativePoint[];
 }
-type Track = { roles: string[]; moves: Record<string, NativePoint>; position: (scene: Snapshot) => NativePoint | null; size: NativePoint };
+export type RigidMotionTrack = { roles: string[]; moves: Record<string, NativePoint>; position: (scene: Snapshot) => NativePoint | null; size: NativePoint };
+type Track = RigidMotionTrack;
 type Measured = { before: Snapshot; command: string; after: Snapshot; from: NativePoint; to: NativePoint };
 type SurfaceWitness = { from: NativePoint; to: NativePoint; before: string; after: string };
 const key = (value: unknown): string => JSON.stringify(value);
@@ -33,7 +34,7 @@ export function motionFootprint(rows: NativeRows, at: NativePoint, size: NativeP
   return rows.slice(y, y + height).flatMap(row => [...row.slice(x, x + width)]);
 }
 
-async function componentSignatures(parts: readonly GeometricComponent[]): Promise<Map<GeometricComponent, string>> {
+export async function componentSignatures(parts: readonly GeometricComponent[]): Promise<Map<GeometricComponent, string>> {
   return new Map(await Promise.all(parts.map(async part => [part, await compositionIdentity({
     palette_value: part.color, area: part.area, scale: part.scale,
     normalized_mask: [...part.normalized].sort((a, b) => a[0] - b[0] || a[1] - b[1]),
@@ -58,7 +59,7 @@ function trackPosition(current: Snapshot, roles: readonly string[], left: number
   };
 }
 /** Exact geometry.rigid_role, consuming the existing source motion model. */
-function rigidRole(history: readonly CompositionTransition[], current: Snapshot, parts: readonly GeometricComponent[], signatures: ReadonlyMap<GeometricComponent, string>): Track | null {
+export function rigidRole(history: readonly CompositionTransition[], current: Snapshot, parts: readonly GeometricComponent[], signatures: ReadonlyMap<GeometricComponent, string>): Track | null {
   const candidates = motionModels(history, current); if (!candidates.length) return null;
   const roles = candidates.map(([role]) => role), moves = candidates[0]![1];
   if (!(Object.values(moves).some(([x]) => x !== 0) && Object.values(moves).some(([, y]) => y !== 0))) return null;

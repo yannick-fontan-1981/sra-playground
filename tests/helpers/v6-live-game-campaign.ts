@@ -89,7 +89,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     status: 'running', referenceCommit: V6_REFERENCE_COMMIT,
     budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: 360, clock: 'real active compute and native execution' },
     source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [], domainAssessments: [],
-    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], motionSourceCalls: [], motionSnapshots: {},
+    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [],
   };
   if (options.recordedPublic) report.recordedPublicReplay = {
     trace: options.recordedPublic.trace, baseline: options.recordedPublic.baseline,
@@ -184,6 +184,35 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
         else report.motionSnapshots[ref] = value;
         observedSnapshots.set(snapshot, ref); return ref;
       };
+      const morphology = (runtime as unknown as { families: R[] }).families.find(f => f.id === 'morphology');
+      if (morphology) {
+        for (const method of ['propose', 'record', 'observeDepartures']) {
+          const original = morphology[method];
+          assert.equal(typeof original, 'function', `Missing morphology source surface: ${method}`);
+          morphology[method] = async function (...args: any[]) {
+            const capturedArgs = method === 'propose' ? args.slice(0, 4) : args;
+            const event: R = { index: report.morphologySourceCalls.length, method,
+              arguments: structuredClone(capturedArgs), sourceBefore: this.state() };
+            if (method === 'propose') {
+              const memory = backend.caller.goal.memory;
+              event.history = memory.episode.map(([before, command, after]: [R, string, R]) => [snapshotRef(before), command, snapshotRef(after)]);
+              event.current = snapshotRef(memory.snapshot(args[0], args[1]));
+            }
+            try {
+              const result = await original.apply(this, args);
+              event.result = structuredClone(result ?? null); event.sourceAfter = this.state();
+              if (method === 'propose') {
+                event.measurement = this.currentMeasurementReceipt(args[0]);
+                event.refusal = this.currentProposalRefusal(args[0]);
+              }
+              report.morphologySourceCalls.push(event); return result;
+            } catch (error) {
+              event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+              event.sourceAfter = this.state(); report.morphologySourceCalls.push(event); throw error;
+            }
+          };
+        }
+      }
       backend.plan = function (...args: any[]) {
         const caller = this.caller;
         if (caller && !observedCallers.has(caller)) {
@@ -276,6 +305,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             ? read('family_state:public_observed_inventory') : null;
           const recolorCheckpoint = graph.nodes['family_state:public_topological_recolor']
             ? read('family_state:public_topological_recolor') : null;
+          const morphologyCheckpoint = graph.nodes['family_state:morphology']
+            ? read('family_state:morphology') : null;
           const reasoningFacts = (read('reasoning:memory').facts as string[]).map(read);
           const compositionAttention = read('caller:attention').composition;
           const framedFacts = reasoningFacts
@@ -335,6 +366,11 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             proposalKind: evidence.proposal.kind ?? null, fieldSubquestion: evidence.proposal.field_subquestion ?? null,
             materialSubquestion: evidence.proposal.material_access_subquestion ?? null,
             selectionGroup: evidence.proposal.strategy_receipt?.selected ?? null,
+            ...(morphologyCheckpoint ? { morphologyOwnership: {
+              stateNode: 'family_state:morphology', nativeCheckpoint: morphologyCheckpoint,
+              proposal: evidence.proposal.kind === 'morphology_probe' ? evidence.proposal : null,
+              qualification: 'Passive evidence from the actual common family. Contacts, tried trials and feature returns have one owner; public motion history and meter/collection stay with their existing owners. This observer supplies no command, learned state or expected return.',
+            } } : {}),
             ...(evidence.native_bindings?.length
               ? { nativeBindings: evidence.native_bindings.map((binding: R) => ({ ...binding, retainedGuard: read(binding.evidence_node) })) } : {}),
             ...(evidence.proposal.strategy_receipt?.native_coordination?.length

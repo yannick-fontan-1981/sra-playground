@@ -2,7 +2,8 @@
 import { immutableJson, isJsonObject } from './canonical.ts';
 import { NativeDrmRegistry, projectDeclaredAlternatives } from './v6-drm-projector.ts';
 import { NativeSrcProgram, V6_DECLARATIVE_SOURCES } from './v6-src-program.ts';
-import type { JsonObject, JsonValue } from './ir.ts';
+import type { JsonObject, JsonValue, Primitive } from './ir.ts';
+import type { NativeProgramHandle, NativeProgramRegistry } from './v6-native-types.ts';
 
 const POLICY = 'agents/yf_arc3_v6/morphology_policy/morphology_policy.drm';
 const PRINCIPLES = 'agents/yf_arc3_v5/drm/morphology.drm';
@@ -41,9 +42,14 @@ export class NativeMorphologyPolicy {
   readonly registry: NativeDrmRegistry;
   readonly drmHash: string;
   readonly principlesHash: string;
-  private program!: NativeSrcProgram;
+  private program!: NativeProgramHandle;
+  private readonly callbacks: Readonly<Record<string, Primitive>>;
   private constructor(registry: NativeDrmRegistry, drmHash: string, principlesHash: string) {
     this.registry = registry; this.drmHash = drmHash; this.principlesHash = principlesHash;
+    this.callbacks = Object.freeze({ 'morph.project': (args: JsonObject) => {
+      if (typeof args.policy !== 'string' || !isJsonObject(args.facts)) throw new TypeError('Morphology projection requires policy and facts');
+      return this.project(args.policy, args.facts);
+    } });
   }
   static async create(): Promise<NativeMorphologyPolicy> {
     const registry = new NativeDrmRegistry(), policy = declaredSource(POLICY), principles = declaredSource(PRINCIPLES);
@@ -51,13 +57,11 @@ export class NativeMorphologyPolicy {
     await registry.registerSource(principles.text, principles.sha256);
     registry.seal();
     const result = new NativeMorphologyPolicy(registry, policy.sha256, principles.sha256);
-    result.program = await NativeSrcProgram.create('v6.morphology.evaluate', {
-      'morph.project': args => {
-        if (typeof args.policy !== 'string' || !isJsonObject(args.facts)) throw new TypeError('Morphology projection requires policy and facts');
-        return result.project(args.policy, args.facts);
-      },
-    });
+    result.program = await NativeSrcProgram.create('v6.morphology.evaluate', result.callbacks);
     return result;
+  }
+  async attachPrograms(registry: NativeProgramRegistry): Promise<void> {
+    this.program = await registry.registerProgram('v6.morphology.evaluate', this.callbacks);
   }
   project(policy: string, facts: JsonObject): JsonObject {
     const projection = projectDeclaredAlternatives({ drm: this.registry, selection_policy_ref: policy,

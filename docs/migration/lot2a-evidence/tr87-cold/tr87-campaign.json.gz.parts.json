@@ -1,0 +1,71 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "tr87-campaign.json.gz",
+    "sha256": "32782b39d6b2034ec58f4bd62be683f43198884a8d93aa30749f9060e521c2fc",
+    "bytes": 10347580
+  },
+  "parts": [
+    {
+      "file": "tr87-campaign.json.gz.part000",
+      "sha256": "b7b158cb2daa9c7880ad70ee38e9e0cd066a4cf5acac1608834fba2c1d8b6f9e",
+      "bytes": 900000
+    },
+    {
+      "file": "tr87-campaign.json.gz.part001",
+      "sha256": "ea2c32397041cb159ff1ce94a7f0b4333b75b0562f00328a151756fa1e102613",
+      "bytes": 900000
+    },
+    {
+      "file": "tr87-campaign.json.gz.part002",
+      "sha256": "ff28dd18eecbc531f829fd6fb83220f4902c794226d301eaa9f108f8cc840e85",
+      "bytes": 900000
+    },
+    {
+      "file": "tr87-campaign.json.gz.part003",
+      "sha256": "e15bc5d1656d6a824301683bfdd282e7aa33d4eb4c598437077fdbfd185b20e5",
+      "bytes": 900000
+    },
+    {
+      "file": "tr87-campaign.json.gz.part004",
+      "sha256": "ff606aed9eaef8d1d36f6ebfe6e7c9f776278589865afde3acc021c1ccfd26db",
+      "bytes": 900000
+    },
+    {
+      "file": "tr87-campaign.json.gz.part005",
+      "sha256": "30d4fdcdbfed49281358f9774658dfe763df6b837a440df6ce69f4dc0729eba7",
+      "bytes": 900000
+    },
+    {
+      "file": "tr87-campaign.json.gz.part006",
+      "sha256": "75d0fafec42556a3f0b7078580951e0bb6b7bcbd2357efaf4ab85bf902b4af0c",
+      "bytes": 900000
+    },
+    {
+      "file": "tr87-campaign.json.gz.part007",
+      "sha256": "c2f77ae121b42f236b7b25821498f0d26c7b161c9c0445802db44f43f9da285e",
+      "bytes": 900000
+    },
+    {
+      "file": "tr87-campaign.json.gz.part008",
+      "sha256": "c9dddb6e8001c9e944bad4d9401d13936e4dd262cf8a5829ba30b361565ba7c9",
+      "bytes": 900000
+    },
+    {
+      "file": "tr87-campaign.json.gz.part009",
+      "sha256": "b023a2dd21a4b513fb6b24c21b8150d340a27b476365ca2ec110b38170f20fab",
+      "bytes": 900000
+    },
+    {
+      "file": "tr87-campaign.json.gz.part010",
+      "sha256": "515a1240d11b25688266ad7745d56db2d64cb41b01f5579f8d5984eef1fcf08a",
+      "bytes": 900000
+    },
+    {
+      "file": "tr87-campaign.json.gz.part011",
+      "sha256": "a0234d8bd8d347fa80360cada22236daec506eb85a21d6275fba0fd681b06ba9",
+      "bytes": 447580
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

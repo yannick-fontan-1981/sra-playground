@@ -16,6 +16,7 @@ import { measured_paths } from './v6-inventory-routing.ts';
 import { digest, find_body, locate, moved_core } from './v6-inventory-measurements.ts';
 import { InventoryPolicy, INVENTORY_WORKFLOW, inventoryReceipt } from './v6-inventory-policy.ts';
 import { InventoryCallerContext } from './v6-inventory-caller-context.ts';
+import type { CollectionEvidence } from './v6-inventory-caller-context.ts';
 import { NativeSrcProgram } from './v6-src-program.ts';
 import { checkPreservation } from './v6-transition-learning.ts';
 import { pythonEqual as same, pythonTruthy as truth } from './v6-operations.ts';
@@ -83,6 +84,8 @@ export class ObservedInventory implements NativeFamily<any> {
   callerContextState(): R | null { return this.callerContext?.state() ?? null; }
   /** Read the already acquired common meter. Planning does not observe a frame. */
   callerMeterForecast(): R | null { return this.callerContext?.meter.forecast() ?? null; }
+  /** Borrow the existing common collection owner; morphology never acquires or copies it. */
+  callerCollectionEvidence(): CollectionEvidence | null { return this.callerContext?.collection ?? null; }
   observeCallerContext(obs: R, rows: NativeRows): void { this.callerContext?.observePlanning(obs, rows); }
   recordCallerContext(before: NativeObservation, after: NativeObservation, command: R, first: NativeRows, second: NativeRows, proposal: R, index: number): R[] {
     return this.callerContext?.record(before, after, command, first, second, proposal, index) ?? [];

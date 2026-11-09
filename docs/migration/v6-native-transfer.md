@@ -11,7 +11,41 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current delivery (lot 1, native 0.32.0):** a measured material request remains
+**Current delivery (lot 2A, native 0.33.0):** current public measurements now
+feed the existing morphology policy and its actual ordered provider in the
+common caller. The consumed V5/V6 closure produces centered enclosures, paired
+patterns, independent residuals, observed motion routes, access probes and
+current station predictions. Shared GoalAccess history and the existing
+meter/collection owner are reused. One morphology journal owns selected
+contacts, trials and passive departures. The scoped domain requires absent
+`station_method`; nonnull station/entry methods and strategic `morph.last`
+forwarding remain pending for 2B/2C.
+
+The new cold TR87 campaign completes **three levels in 105 actions
+(22, 37 and 46)** and 30 acquired prefixes, stopping naturally on entry to
+level 4. Its commands come from existing `word_interface`, so this result is
+not attributed to morphology. The separate LS20 campaign establishes actual
+morphology contribution: it supplies the final 11 actions of the first level,
+including a selected orientation change consumed before the peer route.
+LS20 then ends in `GAME_OVER` on level 2 after 144 actions; that failed target
+is retained. The candidate switches after 475.601 seconds, with no reset of
+the 40-minute clock.
+
+Unchanged original Python matches all **291 actual morphology calls**,
+678 shared-context calls and 82 sealed owner checkpoints on LS20. The V60
+ablation matches the first 18 commands, then stops at the first command
+divergence at action 19; it does not claim a complete baseline game failure.
+The formal delta passes **532/532 tests**, including 41 new contracts from
+26 original-source cases and 143 public rasters. Typecheck, both audits and
+the production build pass on the frozen 239-file native inventory
+`cc4bcea77e0099dc035afa5d6ae03e0d5a7a00082633b8e2332691f34b769ad3`.
+The [delivery report](lot2a-current-morphology.md) and
+[source lineage](lot2a-morphology-lineage.md) distinguish these claims,
+their retained evidence, browser verification, costs and remaining branches.
+The registry stays at **50/76**, with 37 compiled workflows and all six
+complete-migration gates false. Lot 2 remains open; 2B is the next step.
+
+**Previous delivery (lot 1, native 0.32.0):** a measured material request remains
 retained while `typed_pose_dependency` selects and tests its child. The ordinary
 common caller acquires the actual return at the existing material owner, then
 consumes that evidence to resume the same request or suspend it. This is an
@@ -22,14 +56,13 @@ The [lot report](lot1-retained-material-parent.md) distinguishes the baseline ga
 controlled contrary returns, real common execution, live campaign and measured
 costs. The [roadmap](v6-delivery-roadmap.md) preserves all eleven lots and exactly
 26 remaining registry entries. The [lineage](lot1-composition-return-lineage.md)
-records source relationships and actually consumed operations. Lot 2A is the
-next priority; none of the three incomplete common providers is declared complete.
+records source relationships and actually consumed operations. Lot 2A follows this milestone; none of the three incomplete common providers is declared complete.
 
 **Previous integrated milestone (v57):** the native common caller completes
 **SMLP's first three levels in 15 actions (3, 4, 8)** in one cold continuous
 session, with nine acquired prefixes, 15 actual Kernel acquisitions and two
 natural boundary replays. The
-[actual campaign](native-campaigns-v57/final/smlp-campaign.json.gz) and
+[actual campaign, exact archived parts](native-campaigns-v57/final/smlp-campaign.json.gz.parts.json) and
 [execution receipt](native-campaigns-v57/final/execution-smlp.json) bind this
 result to unchanged implementation `0.31.0` and native digest
 `f2ec2ff8658290c510a58642612b4f9d4b07a04d8fa6434c91aadda997e6c23e`.
@@ -66,7 +99,7 @@ validation and retained evidence.
 **GLOB's first three levels in 20 actions (5, 11, 4)** in one cold continuous
 session, with 17 acquired prefixes, 20 actual Kernel acquisitions and two
 natural boundary replays. The
-[actual campaign](native-campaigns-v56/final/glob-campaign.json.gz) and
+[actual campaign, exact archived parts](native-campaigns-v56/final/glob-campaign.json.gz.parts.json) and
 [execution receipt](native-campaigns-v56/final/execution-glob.json) bind the
 result to unchanged implementation `0.30.0` and native digest
 `bade8fd58991e6a127abc84f373d539edeaa70d45ab0da94a84a6751fdc92de5`.

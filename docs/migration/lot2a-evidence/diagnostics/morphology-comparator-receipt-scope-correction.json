@@ -1,0 +1,92 @@
+{
+  "schema": "logos-engine.lot2a.comparator-development-diagnostic.v1",
+  "recordedAt": "2026-11-09T18:02:46.979868+00:00",
+  "classification": "native_registry_receipt_fields_missing_from_offline_comparator_exclusion_list",
+  "productionChangeRequired": false,
+  "firstAttempt": {
+    "status": "failed",
+    "startedAt": "2026-11-09T17:56:24.346332+00:00",
+    "finishedAt": "2026-11-09T17:57:02.597439+00:00",
+    "elapsedSeconds": 38.250972066998656,
+    "generator": {
+      "path": "scripts/compare-native-morphology-public-evidence.py",
+      "sha256": "2cae046bfde0ff9690d1116212285c9fa0c0a0fa2b8547b1df98529e5f83f12f",
+      "bytes": 31133
+    },
+    "originalResultSha256": "1819f9cf00e8cb3bb977d5cc549199a414b8b5e20a7590d2d03299a7444f4b9f",
+    "originalResultBytes": 65100,
+    "failureType": "AssertionError",
+    "failurePath": "morphology.call.27.original_proposal.morphology",
+    "completedMorphologyCalls": 27,
+    "completedSharedContextCalls": 678,
+    "extraNativeRegistryFields": [
+      "edited",
+      "native_execution_hash",
+      "source_definition_hash"
+    ],
+    "missingOriginalFields": [],
+    "allOriginalFieldsExactlyEqualAfterRemovingOnlyTheseThreeNativeFields": true
+  },
+  "correction": {
+    "file": "scripts/compare-native-morphology-public-evidence.py",
+    "oldSha256": "2cae046bfde0ff9690d1116212285c9fa0c0a0fa2b8547b1df98529e5f83f12f",
+    "newSha256": "73dd7cec5d67fac527105654e44709e68c788a80a8afd9124b598292599b4d5b",
+    "additionalExcludedOriginalComparisonFields": [
+      "edited",
+      "native_execution_hash",
+      "source_definition_hash"
+    ],
+    "nativeMetadataChecks": [
+      "source_definition_hash equals the retained source src_hash",
+      "edited is exactly false",
+      "native_execution_hash is a 64-character string"
+    ],
+    "sourceSemanticFieldsExcluded": [],
+    "scope": "Only native provenance metadata without a field in the original MorphologyPolicy result."
+  },
+  "finalComparison": {
+    "path": "docs/migration/lot2a-evidence/ls20-cold/ls20-morphology-original-comparison.json.gz",
+    "sha256": "cec19a1a121426a49e5f1d5b1c3e498136ed1be3e0f12a3d3de88cd79ee875c9",
+    "bytes": 84361,
+    "status": "passed",
+    "startedAt": "2026-11-09T17:57:48.191611+00:00",
+    "finishedAt": "2026-11-09T17:58:41.176667+00:00",
+    "generator": {
+      "path": "scripts/compare-native-morphology-public-evidence.py",
+      "sha256": "73dd7cec5d67fac527105654e44709e68c788a80a8afd9124b598292599b4d5b",
+      "bytes": 31593
+    },
+    "counts": {
+      "sharedContext.preservation_obligations": 82,
+      "sharedContext.proposeSource": 82,
+      "sharedContext.observeCallerContext": 226,
+      "sharedContext.recordCallerContext": 144,
+      "sharedContext.recordSource": 144,
+      "publicSnapshotsCompared": 144,
+      "abstentions": 69,
+      "episodeTransitionsCompared": 3992,
+      "sourceFactsAndDecisionComparisons": 82,
+      "propose": 82,
+      "departureEventsAcquired": 4,
+      "observeDepartures": 144,
+      "nonNullOffers": 13,
+      "record": 65,
+      "selectedEventsAcquired": 12,
+      "foreignPrefixes": 69,
+      "sealedCheckpointsCompared": 82,
+      "selectedPrefixes": 13,
+      "selectedOutcomesCompared": 65
+    },
+    "failure": null
+  },
+  "sourceIntegrity": {
+    "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "originalSourceFilesVerifiedBeforeAndAfterEachAttempt": 1786,
+    "nativeSourceFilesRehashedAtDiagnosticCreation": 239,
+    "nativeSourceDigestAtBothAttemptsAndDiagnosticCreation": "cc4bcea77e0099dc035afa5d6ae03e0d5a7a00082633b8e2332691f34b769ad3",
+    "matchesFrozenNativeInventory": true,
+    "nativeFilesModifiedForComparatorCorrection": []
+  },
+  "canonicalEvidenceMovedOrRewritten": false,
+  "qualification": "The first offline attempt really failed its proposal-shape comparison. Its sole difference at that boundary was three native registry provenance fields, and every original field was already equal. The final run with the explicit metadata exclusions passes the complete actual-call comparison. Neither original source nor frozen native production code was changed. This diagnostic preserves the development event without treating the first attempt as a source-producer failure or as a completed parity proof."
+}

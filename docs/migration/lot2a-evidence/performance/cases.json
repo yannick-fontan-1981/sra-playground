@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.native-loop-cost-cases.v1",
+  "rounds": 3,
+  "cases": [
+    {
+      "id": "STCK",
+      "trace": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "traceSha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "actions": 10,
+      "targetLevels": 3,
+      "warmupActions": 3,
+      "purpose": "Unaffected common decisions and known-prefix continuation through two natural levels."
+    },
+    {
+      "id": "SMLP",
+      "trace": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "traceSha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "actions": 15,
+      "targetLevels": 3,
+      "warmupActions": 3,
+      "purpose": "Unaffected ordinary three-level common-agent trajectory."
+    },
+    {
+      "id": "LIFE",
+      "trace": "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz",
+      "traceSha256": "8c2e1b67af1c827d2a132c211d71b6e25158a5db1e9b236e4d0d92e912fe7c84",
+      "actions": 49,
+      "targetLevels": 3,
+      "warmupActions": 3,
+      "purpose": "Retained three-level material session, including previously integrated parent/pose logic, natural boundaries and guarded multi-action continuation. Finite longer-session non-regression, not an isolated morphology producer measurement."
+    }
+  ],
+  "budget": {
+    "unaffectedMedianRelativeIncrease": 0.1,
+    "qualification": "Predeclared 10% observed median bound for STCK and SMLP; retain unresolved exceedances without adding noise to the allowance. LIFE is reported separately as a longer-session diagnostic."
+  }
+}

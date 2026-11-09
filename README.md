@@ -28,7 +28,23 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **Lot 1 retains a measured
+  level**; opening the tab does not move the game. **Lot 2A connects current
+  morphology measurements to the common caller**, reusing V5/V6 enclosure,
+  paired-pattern, residual, observed-route and prediction logic. The existing
+  policy consumes actual public measurements; selected returns revise the
+  next decision. Shared movement history and meter/collection context keep
+  their existing owners. Native `0.33.0` completes the first three TR87 levels
+  in **105 actions (22, 37 and 46)** and 30 prefixes in one cold session.
+  Those actions use existing `word_interface`; the separate LS20 campaign
+  establishes actual new morphology contribution in the final 11 actions of
+  its 28-action first level. LS20 subsequently fails on level 2, and its
+  evidence is retained. Unchanged original Python matches 291 morphology
+  calls, 678 shared-context calls and 82 checkpoints. The frozen release delta
+  passes **532/532 tests**. The [current report](docs/migration/lot2a-current-morphology.md)
+  and [lineage](docs/migration/lot2a-morphology-lineage.md) record source scope,
+  campaigns, browser verification, cost measurements and the pending 2B/2C
+  paths. No game name, fixed colour role or stored solution selects behavior.
+  **Previous lot 1 retains a measured
   material request while its pose question is resolved**, then consumes the
   acquired return before the next delivery or control decision. The existing
   attention owner keeps the parent binding; the existing shared material owner
@@ -42,9 +58,9 @@ Fontan's **Symbolic Reasoning Agent** research.
   ablation supplies the separate contribution proof. The [delivery report](docs/migration/lot1-retained-material-parent.md),
   [source lineage](docs/migration/lot1-composition-return-lineage.md) and
   [eleven-lot roadmap](docs/migration/v6-delivery-roadmap.md) distinguish its
-  contracts, integrated campaign and performance evidence. The next priority is
-  lot 2A; morphology, attention parent-return and control acquisition remain
-  incomplete. **The previous v57 milestone completes
+  contracts, integrated campaign and performance evidence. Lot 2A connects current morphology measurements and guarded probes;
+  retained decision forwarding, attention parent-return and control acquisition
+  remain incomplete for lot 2B. **The previous v57 milestone completes
   SMLP's first three levels in 15 actions (3, 4 and 8)** through one cold
   continuous native common session, nine acquired prefixes and two natural
   boundary replays. The managed browser independently confirms 15 actions,
@@ -276,14 +292,14 @@ Fontan's **Symbolic Reasoning Agent** research.
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
   The current entry audit connects **50 of 76 explicit DRM subquestions
-  (65.8%)** in implementation `logos-engine.typescript.v6.native-migration/0.32.0`.
+  (65.8%)** in implementation `logos-engine.typescript.v6.native-migration/0.33.0`.
   Lot 1's retained material parent is native coordination outside this entry count.
   The compiled original workflow inventory remains 37. This counts
   connected entries, not full behavioral parity or a percentage of all code.
   The `topological_recolor` entry records only selected returns and retains its
   six-field state before FramedTransfer acquisition. Current motion information
   questions reuse acquired Goal history and read the existing meter forecast.
-  The still-pending morphology provider and parent/control admissions require
+  The partially connected morphology provider and pending parent/control admissions require
   further source transfer and independent validation; no future game outcome
   is assumed.
   Complete V6 migration remains in progress.

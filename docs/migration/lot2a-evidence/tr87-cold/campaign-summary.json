@@ -1,0 +1,83 @@
+{
+  "schema": "logos-engine.lot2a.cold-campaign-summary.v1",
+  "game": "TR87",
+  "targetLevels": 3,
+  "status": "passed",
+  "sourceDigest": "cc4bcea77e0099dc035afa5d6ae03e0d5a7a00082633b8e2332691f34b769ad3",
+  "report": {
+    "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz",
+    "sha256": "32782b39d6b2034ec58f4bd62be683f43198884a8d93aa30749f9060e521c2fc",
+    "bytes": 10347580
+  },
+  "trace": {
+    "path": "docs/migration/lot2a-evidence/tr87-cold/tr87-public-trace.json.gz",
+    "sha256": "667ec5c470dd699b2ae866f904f356c11c3055cbc2649139a5094eba0a23860a",
+    "bytes": 73765
+  },
+  "selectionResolution": "docs/migration/lot2a-evidence/tr87-cold/selection-resolution.json",
+  "boundaries": [
+    {
+      "completedLevel": 1,
+      "nativeLevel": 2,
+      "levelsCompleted": 1,
+      "levelActions": 22,
+      "totalActions": 22,
+      "levelActiveSeconds": 21.605875747999995,
+      "activeSeconds": 21.605875747999995,
+      "prefixCount": 10,
+      "sessionRetained": true
+    },
+    {
+      "completedLevel": 2,
+      "nativeLevel": 3,
+      "levelsCompleted": 2,
+      "levelActions": 37,
+      "totalActions": 59,
+      "levelActiveSeconds": 40.22297883300006,
+      "activeSeconds": 61.82885458100006,
+      "prefixCount": 20,
+      "sessionRetained": true
+    },
+    {
+      "completedLevel": 3,
+      "nativeLevel": 4,
+      "levelsCompleted": 3,
+      "levelActions": 46,
+      "totalActions": 105,
+      "levelActiveSeconds": 66.75950915499982,
+      "activeSeconds": 128.58836373599988,
+      "prefixCount": 30,
+      "sessionRetained": true
+    }
+  ],
+  "final": {
+    "actions": 105,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 128.58836373599988,
+    "prefixes": 30,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 105,
+      "resume": 29
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.33.0"
+  },
+  "actionFamilyCounts": {
+    "word_interface": 105
+  },
+  "morphologyCallCounts": {
+    "observeDepartures": 105
+  },
+  "morphologyNonNullProposals": 0,
+  "morphologySelectedActions": 0,
+  "pythonAgentModules": [],
+  "sourceUnchangedDuringRun": true,
+  "executionCodeUnchanged": true,
+  "secondsSinceSelection": 233.28808,
+  "qualification": "Observed cold native common campaign and retained session across natural public boundaries. A successful game campaign is distinct from a causal morphology improvement; family counts state the actual selections. No reset, undo, seeded knowledge, expected command or level jump was supplied."
+}

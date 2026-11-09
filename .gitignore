@@ -83,3 +83,16 @@ __pycache__/
 
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot1-evidence/final/life-campaign.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot2a-evidence/ls20-cold/ls20-campaign.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot2a-evidence/tr87-cold/tr87-campaign.json.gz
+
+/docs/migration/lot2a-evidence/final/source-archive.tar.gz
+/docs/migration/lot2a-evidence/ls20-cold/source-archive.tar.gz
+/docs/migration/lot2a-evidence/tr87-cold/source-archive.tar.gz
+
+# Exact performance receipt retained as checked gzip.
+/docs/migration/lot2a-evidence/performance/after.json

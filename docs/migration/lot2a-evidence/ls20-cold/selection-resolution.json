@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.lot2a.campaign-resolution.v1",
+  "game": "LS20",
+  "selection": "docs/migration/lot2a-evidence/campaign-selection.json",
+  "selectedAt": "2026-11-09T17:43:50.333677+00:00",
+  "switchDeadline": "2026-11-09T18:23:50.333677+00:00",
+  "execution": "docs/migration/lot2a-evidence/ls20-cold/execution-ls20.json",
+  "finishedAt": "2026-11-09T17:51:01.886416+00:00",
+  "resolvedAt": "2026-11-09T17:51:45.934488+00:00",
+  "secondsSinceSelection": 475.600811,
+  "status": "target_not_reached",
+  "levelsCompleted": 1,
+  "targetLevels": 3,
+  "actions": 144,
+  "officialState": "GAME_OVER",
+  "reason": "native_game_over",
+  "sameSource": true,
+  "nextCandidate": "TR87",
+  "switchBasis": "One cold native session ended at an official game-over on level2 after completing level1; retain actual failure and try the second public initial-pair candidate without game-specific source changes."
+}
