@@ -106,7 +106,9 @@
       "targets": [
         "src/logos-engine/v6-native-observer.ts",
         "src/logos-engine/v6-geometric-scene.ts",
-        "src/logos-engine/v6-component-matches.ts"
+        "src/logos-engine/v6-component-matches.ts",
+        "src/logos-engine/v6-support-measurements.ts",
+        "src/logos-engine/v6-ordered-reaction-measurements.ts"
       ],
       "status": "component_verified",
       "proof": [
@@ -115,9 +117,13 @@
         "tests/v6-native-observer.test.ts",
         "scripts/export-v6-geometry-reference.py",
         "tests/fixtures/v6-geometry-reference.json",
-        "tests/v6-geometric-scene.test.ts"
+        "tests/v6-geometric-scene.test.ts",
+        "scripts/export-v6-ordered-reaction-reference.py",
+        "tests/fixtures/v6-ordered-reaction-reference.json.gz",
+        "tests/v6-ordered-reaction-reference.test.ts",
+        "docs/migration/v55-ordered-reactions-and-public-animations.md"
       ],
-      "notes": "Full geometric_observer and V5 components modules now transferred, including compact/framed-pattern/alignment/motion/lattice projections and ambiguity-preserving component matching. Positive framed alignments and both correspondence ambiguity directions are source-compared."
+      "notes": "Full geometric_observer and V5 components modules now transferred, including compact/framed-pattern/alignment/motion/lattice projections and ambiguity-preserving component matching. Positive framed alignments and both correspondence ambiguity directions are source-compared. V55 OrderedReaction reuses supportParts for the same four-neighbour component records, inclusive row/column boxes, area, boundary flags and relative masks. Independent transformed-raster and temporal-packet cases verify this consumed reuse; it introduces no duplicate source mapping or game-specific segmentation."
     },
     {
       "sources": [
@@ -308,7 +314,8 @@
         "src/logos-engine/v6-native-transition-domain.ts",
         "src/logos-engine/v6-learned-preparation.ts",
         "src/logos-engine/v6-program-control-discovery.ts",
-        "src/logos-engine/v6-reactive-contact.ts"
+        "src/logos-engine/v6-reactive-contact.ts",
+        "src/logos-engine/v6-ordered-reaction.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -368,9 +375,26 @@
         "scripts/compare-v54-reactive-public-evidence.py",
         "docs/migration/native-campaigns-v54/final/re86-campaign.json.gz",
         "docs/migration/native-campaigns-v54/final/execution-re86.json",
-        "docs/migration/native-campaigns-v54/final/reactive-original-comparison.json.gz"
+        "docs/migration/native-campaigns-v54/final/reactive-original-comparison.json.gz",
+        "scripts/export-v6-ordered-reaction-family-reference.py",
+        "tests/fixtures/v6-ordered-reaction-family-reference.json.gz",
+        "tests/v6-ordered-reaction-family-reference.test.ts",
+        "tests/v6-ordered-reaction-kernel.test.ts",
+        "docs/migration/v55-ordered-reactions-and-public-animations.md",
+        "scripts/compare-v55-reaction-public-evidence.py",
+        "docs/migration/native-campaigns-v55/final/source-manifest.json",
+        "docs/migration/native-campaigns-v55/final/as66-campaign.json.gz",
+        "docs/migration/native-campaigns-v55/final/execution-as66.json",
+        "docs/migration/native-campaigns-v55/final/as66-reaction-original-comparison.json.gz",
+        "docs/migration/native-campaigns-v55/final/casc-campaign.json.gz",
+        "docs/migration/native-campaigns-v55/final/execution-casc.json",
+        "docs/migration/native-campaigns-v55/final/casc-reaction-original-comparison.json.gz",
+        "docs/migration/native-campaigns-v55/candidate-resolution.json",
+        "docs/migration/native-campaigns-v55/final/as66-browser-verification.json",
+        "docs/migration/native-campaigns-v55/final/as66-browser-observation.json",
+        "docs/migration/native-campaigns-v55/support-caller-expectation-verification/support-caller-run.json"
       ],
-      "notes": "The native common coordinator is connected to the product runtime and shares the WHY/ACT memory. Every witnessed primitive is acquired once at its sealed prefix; Goal/Frontier evidence is replayed across natural level boundaries. First-prefix HANO, MEMO and ONDE comparisons match all eight caller components without loading oracle state. SupportNavigation and all 13 acquired children are connected. Shared RepeatedSeries acquisition currently covers occurrence recall, its ancestor reducers and coupled-pair anchors/response evidence. At the initial coordinator milestone, AddressedMaterial, FramedTransfer, TemporalSelection and other series producers remained pending, along with Morphology/control-target/parent-attention providers. v52 now connects the two declared FramedTransfer entries through one own state owner; the remaining providers and complete original common-caller selection remain outside that component verification. Bounded campaigns do not establish all-game V6 parity. v35 adds coupled support planning and auxiliary continuation in the single shared journal. Explicit V7 extension: the unchanged neutral entity-domain refusal becomes a retained unknown with complete public witnesses and no rule-registry update; this differs from the original caller fatal exception and is not exact out-of-domain parity. v39 adds observed-program acquisition in the same shared series owner and original post-acquisition stop/refutation checks. The v39 program-priority extension is generalized at v40 as retained_learned_preparation_before_unlearned_invitation. Only the first non-null window candidate in declared order may supply priority, and its provider must expose an acquired preparation witness: a retained fitted program or source-threshold, convergent occurrence correspondence without counterexamples. The current primitive guard must admit that same candidate. Read-only offers are cached for ordinary selection; the receipt references the real family_state node and revision. Physical binding, point guards, preservation, budgets and WHY/ACT still run normally. The fresh frozen 0.10.0 MEMO campaign completes three levels in 30 actions, one session, with 30 acquired prefixes and two boundary replays; the v39 baseline completes no level in seven actions. These are explicit native coordination evolutions and bounded integrated evidence, not original Python selection parity or additional transferred Python modules. v41 connects the radial source entry and expands the acquired-preparation witness to measured radial input effects; the unchanged original caller reproduces the seven-command PIPE invitation collision. The implementation manifest separately names measured_program_control_discovery and stationary_unlearned_contact_refusal_scope as native evolutions. The first issues one real unknown-control insertion or execution question only from a retained acquired editor context; insertion evidence does not define an operator law. The second retains the actual stationary unlearned contact return in revisioned Kernel evidence and may scope that specific refusal locally only when the first non-null declared window candidate supplies its own acquired-context witness and current primitive guard. Neither extension imports a new Python capability, changes a missing control into an operator by resemblance, or establishes full original caller parity. The separate fresh frozen native 0.11.0 common campaign completes three PIPE levels in 23 actions (4, 8, 11), with 20 sealed prefixes, 23 acquisitions and two natural boundary replays. The saved-evidence comparison matches all 23 commands, 24 complete public packets, 33 animation frames, public action domains, official boundaries and 20 executed prefix lengths to the unchanged isolated radial component, without normalization or action-domain projection. This is bounded native success and exact public-trajectory agreement with a component, not full original caller or all-game parity. V54 adds one ReactiveContact acquisition owner after OutlineService in the same sealed transition journal. Every selected or foreign real return is recorded exactly once; foreign inputs retain a null selected reactive proposal. All thirteen source fields and the full native checkpoint are retained separately from source reasoning facts. Controlled common Kernel tests cover selected WHY/ACT, acquisition order and authoritative restore. The public comparison script starts from empty original source state and recomputes actual retained returns; this remains component acquisition evidence, not full original common-caller parity."
+      "notes": "The native common coordinator is connected to the product runtime and shares the WHY/ACT memory. Every witnessed primitive is acquired once at its sealed prefix; Goal/Frontier evidence is replayed across natural level boundaries. First-prefix HANO, MEMO and ONDE comparisons match all eight caller components without loading oracle state. SupportNavigation and all 13 acquired children are connected. Shared RepeatedSeries acquisition currently covers occurrence recall, its ancestor reducers and coupled-pair anchors/response evidence. At the initial coordinator milestone, AddressedMaterial, FramedTransfer, TemporalSelection and other series producers remained pending, along with Morphology/control-target/parent-attention providers. v52 now connects the two declared FramedTransfer entries through one own state owner; the remaining providers and complete original common-caller selection remain outside that component verification. Bounded campaigns do not establish all-game V6 parity. v35 adds coupled support planning and auxiliary continuation in the single shared journal. Explicit V7 extension: the unchanged neutral entity-domain refusal becomes a retained unknown with complete public witnesses and no rule-registry update; this differs from the original caller fatal exception and is not exact out-of-domain parity. v39 adds observed-program acquisition in the same shared series owner and original post-acquisition stop/refutation checks. The v39 program-priority extension is generalized at v40 as retained_learned_preparation_before_unlearned_invitation. Only the first non-null window candidate in declared order may supply priority, and its provider must expose an acquired preparation witness: a retained fitted program or source-threshold, convergent occurrence correspondence without counterexamples. The current primitive guard must admit that same candidate. Read-only offers are cached for ordinary selection; the receipt references the real family_state node and revision. Physical binding, point guards, preservation, budgets and WHY/ACT still run normally. The fresh frozen 0.10.0 MEMO campaign completes three levels in 30 actions, one session, with 30 acquired prefixes and two boundary replays; the v39 baseline completes no level in seven actions. These are explicit native coordination evolutions and bounded integrated evidence, not original Python selection parity or additional transferred Python modules. v41 connects the radial source entry and expands the acquired-preparation witness to measured radial input effects; the unchanged original caller reproduces the seven-command PIPE invitation collision. The implementation manifest separately names measured_program_control_discovery and stationary_unlearned_contact_refusal_scope as native evolutions. The first issues one real unknown-control insertion or execution question only from a retained acquired editor context; insertion evidence does not define an operator law. The second retains the actual stationary unlearned contact return in revisioned Kernel evidence and may scope that specific refusal locally only when the first non-null declared window candidate supplies its own acquired-context witness and current primitive guard. Neither extension imports a new Python capability, changes a missing control into an operator by resemblance, or establishes full original caller parity. The separate fresh frozen native 0.11.0 common campaign completes three PIPE levels in 23 actions (4, 8, 11), with 20 sealed prefixes, 23 acquisitions and two natural boundary replays. The saved-evidence comparison matches all 23 commands, 24 complete public packets, 33 animation frames, public action domains, official boundaries and 20 executed prefix lengths to the unchanged isolated radial component, without normalization or action-domain projection. This is bounded native success and exact public-trajectory agreement with a component, not full original caller or all-game parity. V54 adds one ReactiveContact acquisition owner after OutlineService in the same sealed transition journal. Every selected or foreign real return is recorded exactly once; foreign inputs retain a null selected reactive proposal. All thirteen source fields and the full native checkpoint are retained separately from source reasoning facts. Controlled common Kernel tests cover selected WHY/ACT, acquisition order and authoritative restore. The public comparison script starts from empty original source state and recomputes actual retained returns; this remains component acquisition evidence, not full original common-caller parity. V55 adds source OrderedReaction acquisition after OutlineService and before ReactiveContact, with the intervening original ObservedInventory owner still explicitly pending. Selected and foreign real returns are acquired once at a sealed prefix, retaining the complete ordered public animation packet. Source reaction_event:<revision> and conditionally retained reaction_state preserve all six original fields. Source history remains history_only_no_current_permit across official boundaries. Three common Kernel tests cover the exact entry, passive order, selected WHY/ACT and authoritative restoration; this does not make the original common-caller closure complete. Final frozen v55 public replay starts the unchanged original OrderedReaction from empty state and compares every actual return: AS66 has 19 records, 11 complete six-field source/native checkpoint comparisons and three exact official-boundary events; CASC has one record and one complete checkpoint comparison. The complete public journals contain 20 packets/121 frames for AS66 and two packets/two frames for CASC. All 12 prefixes are foreign selections, so this proves passive acquisition on those trajectories, not selected-reaction game efficacy. Source guards on the comparator's optional selected path are compatibility recomputations because raw native before guards are not retained; pure losing offers and whole strategic selection remain outside the comparison."
     },
     {
       "sources": [
@@ -431,7 +455,9 @@
       "targets": [
         "src/logos-engine/v6-drm-projector.ts",
         "src/logos-engine/v6-drm-selection.ts",
-        "src/logos-engine/v6-selection-contracts.ts"
+        "src/logos-engine/v6-selection-contracts.ts",
+        "src/logos-engine/v6-ordered-reaction-policy.ts",
+        "src/logos-engine/v6/ordered-reaction-policy.json"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -443,9 +469,13 @@
         "scripts/export-v6-select-builder-reference.py",
         "tests/fixtures/v6-select-builder-reference.json.gz",
         "tests/v6-select-reference.test.ts",
-        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-ordered-reaction-reference.py",
+        "tests/fixtures/v6-ordered-reaction-reference.json.gz",
+        "tests/v6-ordered-reaction-reference.test.ts",
+        "docs/migration/v55-ordered-reactions-and-public-animations.md"
       ],
-      "notes": "Only the generic projection/condition paths used in the current V6 morphology port are transferred; unported source claims/term-delta semantics remain explicit. V54 additionally transfers the declared SELECT evaluator consumed by Source81: single admissible, eligibility-single, declared lexicographic order and symbolic partial-order outcomes, including reasons, comparison traces, hash-identity unresolved ties and preserved alternatives. Sixty-eight unchanged original evaluator/projection cases plus twenty-five original builder fixtures are retained. Exact comparisons are qualified to same-type JSON scalars and safe integers; Python numeric representation and arbitrary container repr remain outside the claim. The rest of the inherited DRM runtime/registry remains partial."
+      "notes": "Only the generic projection/condition paths used in the current V6 morphology port are transferred; unported source claims/term-delta semantics remain explicit. V54 additionally transfers the declared SELECT evaluator consumed by Source81: single admissible, eligibility-single, declared lexicographic order and symbolic partial-order outcomes, including reasons, comparison traces, hash-identity unresolved ties and preserved alternatives. Sixty-eight unchanged original evaluator/projection cases plus twenty-five original builder fixtures are retained. Exact comparisons are qualified to same-type JSON scalars and safe integers; Python numeric representation and arbitrary container repr remain outside the claim. The rest of the inherited DRM runtime/registry remains partial. V55 ReactionPolicy reuses the existing generic condition evaluator for its exact local rules and three consumed V5 interaction.drm projections. The independent 213-case measurement/policy fixture includes all four kinds, missing/null/false/numeric facts, reference-field comparisons, declared priority, input-order ties and missing templates. This adds a tested consumer, not full production DRM registry parity."
     },
     {
       "sources": [
@@ -456,7 +486,8 @@
         "src/logos-engine/interpreter.ts",
         "src/logos-engine/v6/programs.json",
         "src/logos-engine/v6-drm-selection.ts",
-        "src/logos-engine/v6-selection-contracts.ts"
+        "src/logos-engine/v6-selection-contracts.ts",
+        "src/logos-engine/v6-ordered-reaction-policy.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -472,9 +503,13 @@
         "scripts/export-v6-reactive-contact-source81-reference.py",
         "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
         "tests/v6-reactive-contact-source81-reference.test.ts",
-        "scripts/export-v6-reactive-contact-source81-programs.py"
+        "scripts/export-v6-reactive-contact-source81-programs.py",
+        "scripts/export-v6-ordered-reaction-reference.py",
+        "tests/fixtures/v6-ordered-reaction-reference.json.gz",
+        "tests/v6-ordered-reaction-reference.test.ts",
+        "docs/migration/v55-ordered-reactions-and-public-animations.md"
       ],
-      "notes": "Original declarative entry programs and V6 WHILE semantics execute natively. The development compiler remains Python; a full V5 source compiler port is not claimed. V54 adds generic SELECT statement admission and pure authority invocation in the common interpreter, with original builder preflight before the callback. Four Source81 workflows are exported from the unchanged compiler and appended without changing the thirty-three existing compiled entries; six ContactPolicy workflows were already present. Source-facing policy receipts preserve the exact original workflow/src_hash/src_status/executed_statements fields before their use in source identities. The compiler and arbitrary Python runtime are still development references, not production dependencies."
+      "notes": "Original declarative entry programs and V6 WHILE semantics execute natively. The development compiler remains Python; a full V5 source compiler port is not claimed. V54 adds generic SELECT statement admission and pure authority invocation in the common interpreter, with original builder preflight before the callback. Four Source81 workflows are exported from the unchanged compiler and appended without changing the thirty-three existing compiled entries; six ContactPolicy workflows were already present. Source-facing policy receipts preserve the exact original workflow/src_hash/src_status/executed_statements fields before their use in source identities. The compiler and arbitrary Python runtime are still development references, not production dependencies. V55 executes the already compiled original v6.ordered_reaction.choose program through the shared registry. It preserves exactly the four original source-facing receipt fields inside offers and state, while native execution metadata stays in the native program handle. The compiled program inventory remains 37; this transfer adds no program bundle entry."
     },
     {
       "sources": [
@@ -483,7 +518,8 @@
       "targets": [
         "src/logos-engine/v6-native-runtime.ts",
         "src/logos-engine/v6-learned-preparation.ts",
-        "src/logos-engine/v6-reactive-contact.ts"
+        "src/logos-engine/v6-reactive-contact.ts",
+        "src/logos-engine/v6-ordered-reaction.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -505,9 +541,14 @@
         "tests/v6-reactive-contact-family-reference.test.ts",
         "tests/v6-reactive-contact-kernel.test.ts",
         "docs/migration/v54-reactive-contact-and-declared-selection.md",
-        "docs/migration/v6-entry-point-progress.json"
+        "docs/migration/v6-entry-point-progress.json",
+        "scripts/export-v6-ordered-reaction-family-reference.py",
+        "tests/fixtures/v6-ordered-reaction-family-reference.json.gz",
+        "tests/v6-ordered-reaction-family-reference.test.ts",
+        "tests/v6-ordered-reaction-kernel.test.ts",
+        "docs/migration/v55-ordered-reactions-and-public-animations.md"
       ],
-      "notes": "Sixteen outer strategy groups and implemented subgroup ordering are retained. All remaining providers, parent returns and cross-family interactions remain pending. The v39 retained_program_preparation_before_unlearned_invitation extension is broadened in v40 to retained_learned_preparation_before_unlearned_invitation. A read-only acquired witness and current guard must belong to the first non-null window candidate in declared order; an earlier unsupported candidate cannot borrow a later model. Unsupported providers are not speculatively crossed. The candidate remains subject to ordinary selection and WHY/ACT, and the receipt identifies its actual source family_state revision. Declared list order is preserved, but these native coordination extensions deliberately change selection relative to the original Python caller; no complete original selection parity is claimed. v41 registers radial_port_composition in its real window position and retains the same shared provider. Acquired radial preparation, measured_program_control_discovery and stationary_unlearned_contact_refusal_scope remain explicitly native coordination/inquiry behavior with ordinary authorization; they do not make this partial strategy mapping complete. The original full caller seven-command replay diagnoses its own invitation collision rather than proving native selection parity. V54 registers reactive_contact_continuation and reactive_contact at their two exact material positions through one owner. The early entry preserves the original pre-call retained-dependency gate, allowed kinds and all four declared conditions; the later entry retains ordinary source proposal semantics. This adds two connected declarations (47/76, 61.8%) and no native priority rule. Other providers and whole strategic caller parity remain pending."
+      "notes": "Sixteen outer strategy groups and implemented subgroup ordering are retained. All remaining providers, parent returns and cross-family interactions remain pending. The v39 retained_program_preparation_before_unlearned_invitation extension is broadened in v40 to retained_learned_preparation_before_unlearned_invitation. A read-only acquired witness and current guard must belong to the first non-null window candidate in declared order; an earlier unsupported candidate cannot borrow a later model. Unsupported providers are not speculatively crossed. The candidate remains subject to ordinary selection and WHY/ACT, and the receipt identifies its actual source family_state revision. Declared list order is preserved, but these native coordination extensions deliberately change selection relative to the original Python caller; no complete original selection parity is claimed. v41 registers radial_port_composition in its real window position and retains the same shared provider. Acquired radial preparation, measured_program_control_discovery and stationary_unlearned_contact_refusal_scope remain explicitly native coordination/inquiry behavior with ordinary authorization; they do not make this partial strategy mapping complete. The original full caller seven-command replay diagnoses its own invitation collision rather than proving native selection parity. V54 registers reactive_contact_continuation and reactive_contact at their two exact material positions through one owner. The early entry preserves the original pre-call retained-dependency gate, allowed kinds and all four declared conditions; the later entry retains ordinary source proposal semantics. This adds two connected declarations (47/76, 61.8%) and no native priority rule. Other providers and whole strategic caller parity remain pending. V55 registers ordered_reaction exactly after reactive_contact in the material list, through one public_ordered_reaction owner. The original cover/protected/continue/probe priority stays local to that family. The regenerated four-list audit records 48/76 (63.2%); no native priority rule or cold control acquisition is added. Full strategy selection and pending providers remain outside this partial mapping."
     },
     {
       "sources": [
@@ -1391,7 +1432,8 @@
       "targets": [
         "src/logos-engine/v6-coupled-pair-route.ts",
         "src/logos-engine/v6-reactive-contact-geometry.ts",
-        "src/logos-engine/v6-reactive-contact-source81-projection.ts"
+        "src/logos-engine/v6-reactive-contact-source81-projection.ts",
+        "src/logos-engine/v6-ordered-reaction-measurements.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -1405,9 +1447,13 @@
         "docs/migration/v54-reactive-contact-and-declared-selection.md",
         "scripts/export-v6-reactive-contact-source81-reference.py",
         "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
-        "tests/v6-reactive-contact-source81-reference.test.ts"
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "scripts/export-v6-ordered-reaction-reference.py",
+        "tests/fixtures/v6-ordered-reaction-reference.json.gz",
+        "tests/v6-ordered-reaction-reference.test.ts",
+        "docs/migration/v55-ordered-reactions-and-public-animations.md"
       ],
-      "notes": "Only the public geometric values and bounds consumed from FrameGrid, BoundingBox and KnownGridCellRecountInput in V6 joint_route are represented, including positive extents and the 4096-cell bound. This is not a general Pydantic or contract-system replacement. V54 additionally represents the finite FrameGrid/component/periodic-grid/InteractionProbeInput values constructed by the ReactiveContact and Source81 wrappers. Their absent optional source inputs keep their original empty defaults. General Pydantic coercion, arbitrary reference types and unused contract classes remain outside the transfer."
+      "notes": "Only the public geometric values and bounds consumed from FrameGrid, BoundingBox and KnownGridCellRecountInput in V6 joint_route are represented, including positive extents and the 4096-cell bound. This is not a general Pydantic or contract-system replacement. V54 additionally represents the finite FrameGrid/component/periodic-grid/InteractionProbeInput values constructed by the ReactiveContact and Source81 wrappers. Their absent optional source inputs keep their original empty defaults. General Pydantic coercion, arbitrary reference types and unused contract classes remain outside the transfer. V55 additionally represents the FrameGrid and component input values actually constructed by OrderedReaction geometry: rectangular public integer rasters and four-neighbour connectivity. Its source measurement receives ordered public frames and inferred non-negative lattice phases. This extends the consumed JSON domain only; general Pydantic coercion, nominal Python values and unused contract classes remain outside this partial mapping."
     },
     {
       "sources": [
@@ -2964,6 +3010,135 @@
         "docs/migration/v54-reactive-contact-and-declared-selection.md"
       ],
       "notes": "Only SelectionInput/SelectRequest/selection witness payload contracts and the SELECT builder preflight are transferred. The native interpreter checks evaluated clauses before any authority callback: absent defaults, explicit null rejection, scalar/finite-list references, whitespace normalization, duplicates, indexed facts and witness scope preserve original source distinctions. Sixty-eight original evaluator cases and twenty-five independent original builder cases support 114 SELECT checks. The domain is safe JSON integers/scalars; arbitrary Python container repr, all other operator builders/contracts and durable Logos request lineage remain untransferred."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/ordered_reaction/family.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-ordered-reaction.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-ordered-reaction-family-reference.py",
+        "tests/fixtures/v6-ordered-reaction-family-reference.json.gz",
+        "tests/v6-ordered-reaction-family-reference.test.ts",
+        "tests/v6-ordered-reaction-kernel.test.ts",
+        "docs/migration/v55-ordered-reactions-and-public-animations.md",
+        "scripts/compare-v55-reaction-public-evidence.py",
+        "docs/migration/native-campaigns-v55/final/source-manifest.json",
+        "docs/migration/native-campaigns-v55/final/as66-campaign.json.gz",
+        "docs/migration/native-campaigns-v55/final/execution-as66.json",
+        "docs/migration/native-campaigns-v55/final/as66-reaction-original-comparison.json.gz",
+        "docs/migration/native-campaigns-v55/final/casc-campaign.json.gz",
+        "docs/migration/native-campaigns-v55/final/execution-casc.json",
+        "docs/migration/native-campaigns-v55/final/casc-reaction-original-comparison.json.gz",
+        "docs/migration/native-campaigns-v55/candidate-resolution.json"
+      ],
+      "notes": "Complete local OrderedReaction family on the native public JSON domain: scope, measurement, offers, proposal, exact binding, current guards, after-return uncertainty and record. The six original fields epoch/control/packets/attempts/progress/history, sixteen control receipts, four distinct ordered packets and history_only_no_current_permit resets retain source behavior. Fifty-four unchanged-original synthetic cases compare literal proposals/events/state and guards; common Kernel tests separately cover selected and passive acquisition. No game result, cold control, phase/quota/terminal law or full original caller parity is inferred from component verification. Final frozen v55 public replay starts the unchanged original OrderedReaction from empty state and compares every actual return: AS66 has 19 records, 11 complete six-field source/native checkpoint comparisons and three exact official-boundary events; CASC has one record and one complete checkpoint comparison. The complete public journals contain 20 packets/121 frames for AS66 and two packets/two frames for CASC. All 12 prefixes are foreign selections, so this proves passive acquisition on those trajectories, not selected-reaction game efficacy. Source guards on the comparator's optional selected path are compatibility recomputations because raw native before guards are not retained; pure losing offers and whole strategic selection remain outside the comparison."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/ordered_reaction/policy.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-ordered-reaction-policy.ts",
+        "src/logos-engine/v6/ordered-reaction-policy.json",
+        "src/logos-engine/v6/programs.json"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-ordered-reaction-reference.py",
+        "tests/fixtures/v6-ordered-reaction-reference.json.gz",
+        "tests/v6-ordered-reaction-reference.test.ts",
+        "docs/migration/v55-ordered-reactions-and-public-animations.md"
+      ],
+      "notes": "Complete local ReactionPolicy using the original reaction.drm configuration and existing reaction.src workflow v6.ordered_reaction.choose. Preserves cover/protected/continue/probe ordering, stable request-index ties, rule/projection conditions, static/template facts and original four-field receipts. The three exact V5 projection rows are declaration 217, zero-based projections 519/520/521. The 213 independent measurement/policy cases and source/ownership checks do not claim the full inherited production DRM registry. Program inventory remains 37."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/ordered_reaction/geometry.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-ordered-reaction-measurements.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-ordered-reaction-reference.py",
+        "tests/fixtures/v6-ordered-reaction-reference.json.gz",
+        "tests/v6-ordered-reaction-reference.test.ts",
+        "docs/migration/v55-ordered-reactions-and-public-animations.md",
+        "scripts/export-v6-ordered-reaction-family-reference.py",
+        "tests/fixtures/v6-ordered-reaction-family-reference.json.gz",
+        "tests/v6-ordered-reaction-family-reference.test.ts"
+      ],
+      "notes": "Complete local geometry wrapper on actual native runtime inputs: Python-compatible sorted compact JSON digest, packet restoration, square-field measurements and ordered public-frame observation. Row/column coordinates, direction insertion order and ordered packet/frame processing remain literal. Nominal Python dataclass repr and coercion-only TypeAdapter inputs are outside the native JSON safe-integer/string/boolean domain; consumed record structure is mapped separately as partial. No hidden game state or palette role is supplied."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/ordered_tip_changes.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-ordered-reaction-measurements.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-ordered-reaction-reference.py",
+        "tests/fixtures/v6-ordered-reaction-reference.json.gz",
+        "tests/v6-ordered-reaction-reference.test.ts",
+        "docs/migration/v55-ordered-reactions-and-public-animations.md"
+      ],
+      "notes": "Finite public-raster measurement and retention functions transferred on their consumed exact-integer domain: marked-square and lattice inference, sparse marker-loss/recolor packets, external equal-cardinality component groups, temporal orthogonal incidences, intact distinct terminals, earlier predecessor chains and one bounded shortest witness. Source loops, row-major ordering, 256-square/frame bounds, mode ambiguity and compatible retained geometry are preserved. Independent fixtures include transformed palettes, translations, rotations, renamed inputs, restoration, missing/ambiguous geometry, temporal refutation and bound guards. Retention is compared for positive integer limits; arbitrary Python malformed/coercion inputs are not claimed. These are measurements and conditional witnesses, not acquired universal reaction or traversability laws."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/cell_deltas.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-ordered-reaction-measurements.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-ordered-reaction-reference.py",
+        "tests/fixtures/v6-ordered-reaction-reference.json.gz",
+        "tests/v6-ordered-reaction-reference.test.ts",
+        "docs/migration/v55-ordered-reactions-and-public-animations.md"
+      ],
+      "notes": "Sparse CellFrameDelta/CellDeltaPacket measurement transferred for the non-negative inferred finite lattices used by ordered_tip_changes. Initial cell types are assigned in row-major first-occurrence order; successive rows are compared before only changed cells are classified, retaining every frame ordinal, including unchanged frames. Dimension/size/cell/frame guards and source output shape are compared independently. Standalone negative phase, non-integral or arbitrary Python coercion inputs are outside this caller-domain claim; no full-frame history is retained in the sparse result."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/physical_transition_contracts.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-ordered-reaction-measurements.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-ordered-reaction-reference.py",
+        "tests/fixtures/v6-ordered-reaction-reference.json.gz",
+        "tests/v6-ordered-reaction-reference.test.ts",
+        "docs/migration/v55-ordered-reactions-and-public-animations.md"
+      ],
+      "notes": "Only MarkedSquare, SquareField, OrderedSquareChange and OrderedSquarePacket fields and the consumed JSON restoration contract are transferred. Original row/column positions, nullable temporal ordinals, exact boolean restoration and nested sparse cell packets are retained and detached. General nominal-dataclass repr restoration, Pydantic coercion, arbitrary Python numeric identities and all other physical transition contracts remain untransferred."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/drm/interaction.drm"
+      ],
+      "targets": [
+        "src/logos-engine/v6/ordered-reaction-policy.json",
+        "src/logos-engine/v6-ordered-reaction-policy.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-ordered-reaction-reference.py",
+        "tests/fixtures/v6-ordered-reaction-reference.json.gz",
+        "tests/v6-ordered-reaction-reference.test.ts",
+        "docs/migration/v55-ordered-reactions-and-public-animations.md"
+      ],
+      "notes": "This asset mapping documents the exact OrderedReaction subset only: declaration 217 (policy.declared_initial_interaction_exploration), zero-based projection rows 519 ordered_tip_process_probe, 520 ordered_tip_intervention and 521 ordered_tip_achieved_cover_activates_process_test. Rows are exported verbatim and verified against pinned source bytes, including conditions, static facts and templates. Other existing consumers keep their separately documented subset evidence; this mapping does not claim the whole interaction.drm document or increment Python-module coverage. OrderedReaction does not consume interaction.py, whose existing partial mapping remains unchanged."
     }
   ],
   "scopeNotes": [
@@ -3013,7 +3188,11 @@
     "V53 final-source validation: attempt7 freezes 195 native files at digest d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70, implementation logos-engine.typescript.v6.native-migration/0.27.0. The independent cold CN04 execution receipt confirms unchanged native source and execution code, 73 actions from port_assembly, three completed levels with 18/31/24 actions, 29 prefixes and one session. Its public result is level 4 NOT_FINISHED with target_levels_completed, not full-game VICTORY. No action sequence, learned checkpoint, Python agent or level jump is supplied. This supports the existing integrated port-assembly capability and does not establish Outline efficacy or full V6 parity. The actual entry audit records 45/76 connected declarations (59.2%); recovery, access, arrival and this campaign add no further declared entry. The actual-browser receipt on the same frozen source independently records three Run to next level clicks from level 1, counters 18/1 then 49/2 then 73/3, 29 completed plans and entry to level 4, with inspection closed. Its single 384x384 canvas sample at a 1363x936 viewport is not a responsive or performance benchmark. The targeted delta suite passes 3611 tests; typecheck, audits and production build pass. All nine recorded trajectories retain their commands and official results, with the original comparison-domain failures and their explicit LIFE/GARE resolutions preserved in regression-final-summary.json. ESCT completes only L1 in 16 actions, then stops at the L2 active-time budget after 113 total actions; it is not a three-level success. Publication is tracked by the saved Site version separately from these immutable execution receipts. All six completion gates remain false.",
     "V54 connects reactive_contact_continuation and reactive_contact through one public_reactive_contact owner at their exact source material positions in native implementation 0.28.0, advancing the declared-entry connection metric to 47/76 (61.8%). All thirteen source state fields, source-facing four-field workflow receipts, current guards and selected/passive sealed acquisitions are retained. Independently generated source evidence comprises 272 Contact/geometry cases, 53 family/return cases and 193 Source81 cases, with 527 reactive checks including three common Kernel tests. Generic SELECT adds 68 original evaluator/projection cases and 25 original builder cases, with 114 checks on its documented native scalar domain. The four original Source81 workflows extend the compiled bundle from 33 to 37 entries; no existing entry is replaced. Inherited interaction, prospective-grasp, cell-support, routing, rigid geometry, consumption and escape contract modules retain partial consumed-domain mappings. No whole original strategic caller, arbitrary Python numeric/validation semantics, full-game result or complete-migration gate is inferred.",
     "V54 candidate study: unchanged published v53 completes WA30 level1 in 31 actions, then reaches natural GAME_OVER on level2 after 101 total actions. The candidate is closed after approximately eight minutes twenty seconds, before the user forty-minute limit. The next unchanged v53 baseline completes RE86 levels1–3 in 26/47/61 actions (134 total), 46 prefixes and about 122 seconds through the existing generic constellation_cover provider. These are separately retained baselines; final frozen v54 execution and original ReactiveContact public-return comparisons remain separate evidence. The 210-file final native source digest is 059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a. No native source/game-result claim is inferred merely from the freeze.",
-    "The final frozen v54 RE86 campaign passes its declared first-three-level target in one cold continuous session: 26/47/61 actions (134 total), 46 sealed prefixes, 134 actual acquisitions and two caller boundary replays. It enters level4 with NOT_FINISHED and target_levels_completed, not full-game victory. Native source and execution code are unchanged on digest 059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a (210 files). All 46 selected prefixes use the existing constellation_cover provider. The independent unchanged original ReactiveContact replay starts empty and matches 134 source records, all thirteen fields and the full native checkpoint at 46 prefixes, three official-boundary events/source epoch resets, and the complete 135-packet/138-frame public journal. It verifies all 1786 pinned files before and after, with 736 imported original source files. There are no reactive selections or planning calls on this trajectory; this is exact passive acquisition evidence, while positive reactive behavior is verified separately by component and Kernel tests. It does not establish reactive game efficacy, complete original-caller parity or any of the six still-false complete-migration gates."
+    "The final frozen v54 RE86 campaign passes its declared first-three-level target in one cold continuous session: 26/47/61 actions (134 total), 46 sealed prefixes, 134 actual acquisitions and two caller boundary replays. It enters level4 with NOT_FINISHED and target_levels_completed, not full-game victory. Native source and execution code are unchanged on digest 059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a (210 files). All 46 selected prefixes use the existing constellation_cover provider. The independent unchanged original ReactiveContact replay starts empty and matches 134 source records, all thirteen fields and the full native checkpoint at 46 prefixes, three official-boundary events/source epoch resets, and the complete 135-packet/138-frame public journal. It verifies all 1786 pinned files before and after, with 736 imported original source files. There are no reactive selections or planning calls on this trajectory; this is exact passive acquisition evidence, while positive reactive behavior is verified separately by component and Kernel tests. It does not establish reactive game efficacy, complete original-caller parity or any of the six still-false complete-migration gates.",
+    "V55 connects the single ordered_reaction material entry through one public_ordered_reaction owner in native implementation 0.29.0, bringing the audited four-list connection metric to 48/76 (63.2%) while preserving 37 compiled programs. Three local V6 modules and the consumed V5 ordered-tip/sparse-cell measurement modules have independent unchanged-source contracts; physical_transition_contracts, general FrameGrid/validation and production DRM remain separately qualified. Exact source priority, six-field state, four-field workflow receipts, current primitive guards and complete ordered public animations are retained. The native passive acquisition position follows OutlineService and precedes ReactiveContact; the intervening original ObservedInventory owner is still pending. History has no current action authority. All six complete-migration gates remain false.",
+    "V55 candidate evidence remains distinct from final release proof. The unchanged published v54 cold AS66 baseline completes levels 1–3 in 5/6/8 actions (19 total), 11 sealed prefixes and one session, using four observed_frontier inputs followed by fifteen sliding_cavity inputs. It enters level4 NOT_FINISHED, not full-game WIN. The separate CASC baseline completes zero levels: one animated_contact point input, then frontier_unknown with no observed directional control. A read-only unchanged-source scan of 100 retained initial public views finds only CASC eligible for the geometric field/ring/input filter, but all cold proposal/control checks remain false. Neither that geometry nor another family's AS66 success establishes OrderedReaction actionability or game efficacy. The final frozen campaigns and exact passive public-source comparisons are recorded in the next scope note. Broader release-wide checks remain separately tracked, and the per-candidate forty-minute limit stays anchored to first selection.",
+    "Final frozen v55 source contains 214 native files at digest 3794fa1b97951b20f3ce06d2d1d11b20d8c2b47132591fb5b8cf6f3e75b661d3, implementation 0.29.0. The cold AS66 campaign completes levels 1–3 in 5/6/8 actions (19 total), 11 sealed prefixes, 19 acquired returns and one continuous session, entering level4 NOT_FINISHED with target_levels_completed. Four observed_frontier actions and fifteen sliding_cavity actions supply the result; the unchanged v54 baseline already has the same three-level action counts, so no new OrderedReaction causal contribution is inferred. The separate final CASC attempt completes zero levels and stops after one animated_contact point action at frontier_unknown. It is closed 610.948436 seconds after original selection, before its forty-minute deadline; AS66 closes after 870.695328 seconds. The immutable candidate-resolution receipt binds both closures to the original ledger. Independent unchanged-original source replays pass on both: AS66 19 records, 11 complete six-field states/checkpoints, 20 packets/121 animation frames and three official-boundary events/source epoch changes; CASC one record, one complete state/checkpoint and two packets/two frames. Each comparison verifies all 1786 pinned files before/after and imports 719 original source files. Every prefix is selected by another provider (11 AS66, one CASC), so these are exact passive acquisition receipts, not selected reaction guards or reaction game efficacy. The 279-check focused execution includes 276 new checks and three existing ReactiveContact Kernel regressions; broader release checks have their own receipts. All six complete-migration gates remain false.",
+    "V55 browser evidence independently passes on the same frozen native source: three ordinary Run to next level clicks in one AS66 session produce cumulative action/level/plan counters 5/1/5, 11/2/8 and 19/3/11, entering level4 with the inspector closed. No manual game input, new-session restart or level jump is used. The retained 384x384 canvas at a 1363x936 viewport is one browser sample, not a responsive/performance campaign or reaction efficacy claim. The initial broader delta records 606 passes and one failed stale sharedSeriesDigestScope metadata assertion among 607 checks. Exact published-v54 git bytes, the unchanged source constant and runtime binding establish the stale expectation without claiming an isolated baseline execution. One expected string is corrected; the full support-caller file passes 21/21. The original failed receipt/log, all frozen native files and execution archive remain byte-identical. The same 607-check set has a separate rerun receipt; final broader checks and regressions remain separately qualified. All six complete-migration gates remain false."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,

@@ -1,0 +1,3034 @@
+{
+  "schema": "logos-engine.v55.readonly-ordered-reaction-candidate-selection.v1",
+  "generatedAt": "2026-11-09T13:13:34.222474+00:00",
+  "generator": {
+    "path": "scripts/select-v55-ordered-reaction-candidate.py",
+    "sha256": "5a0ca0128a16c884660cd595c6d1bdd050e834c0a5e3d5560f8735bc4839d878",
+    "bytes": 6039
+  },
+  "corpus": {
+    "path": "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+    "sha256": "3f82fb0b60a104095623216023054ef438ca4cc516941c671c385ebcbf1e54f2",
+    "bytes": 1026835
+  },
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceFilesVerifiedBefore": 1786,
+  "sourceFilesVerifiedAfter": 1786,
+  "declaration": {
+    "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/ordered_reaction/reaction.drm",
+    "sha256": "8ecd6264bc01cffaf6e1ca0ec940115dfc8bdcd5cf26b6f17a18136ade8d0d3d",
+    "bytes": 5180
+  },
+  "declaredRevisableDirectionPrior": {
+    "ACTION1": [
+      -1,
+      0
+    ],
+    "ACTION2": [
+      1,
+      0
+    ],
+    "ACTION3": [
+      0,
+      -1
+    ],
+    "ACTION4": [
+      0,
+      1
+    ]
+  },
+  "declaredRevisableProcessPrior": "ACTION5",
+  "executionScope": {
+    "gameHostsLoaded": 0,
+    "gameExecutions": 0,
+    "familyInstances": 0,
+    "agentProposals": 0,
+    "srcWorkflowCalls": 0,
+    "acquisitionCalls": 0,
+    "physicalActions": 0,
+    "levelJumps": 0,
+    "privateStatesRead": 0,
+    "commandsInjectedIntoAgent": 0,
+    "statesInjectedIntoAgent": 0
+  },
+  "results": [
+    {
+      "game": "AR25",
+      "frameHash": "dcb73927160522c2",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:dcb73927160522c2",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "BP35",
+      "frameHash": "73ed3968e48e2ac7",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:73ed3968e48e2ac7",
+      "availableActionRefs": [
+        "ACTION3",
+        "ACTION4",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "CD82",
+      "frameHash": "824ef203a4308533",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:824ef203a4308533",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "CN04",
+      "frameHash": "76e9c99bc22f6b77",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:76e9c99bc22f6b77",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "DC22",
+      "frameHash": "3882264d7cb6462e",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:3882264d7cb6462e",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION6"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "FT09",
+      "frameHash": "b537cde839031c14",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:b537cde839031c14",
+      "availableActionRefs": [
+        "ACTION6"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "G50T",
+      "frameHash": "f79ab0e9d856fdf8",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:f79ab0e9d856fdf8",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "KA59",
+      "frameHash": "a5391f47a4b5f63f",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:a5391f47a4b5f63f",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION6"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "LF52",
+      "frameHash": "8c3509a81bc0b33c",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:8c3509a81bc0b33c",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "LP85",
+      "frameHash": "10d339c4ff95d67f",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:10d339c4ff95d67f",
+      "availableActionRefs": [
+        "ACTION6"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "LS20",
+      "frameHash": "f530cf6adb4a6d0f",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:f530cf6adb4a6d0f",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "M0R0",
+      "frameHash": "bb1341069e852a7c",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:bb1341069e852a7c",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "R11L",
+      "frameHash": "130ccc591dbbae50",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:130ccc591dbbae50",
+      "availableActionRefs": [
+        "ACTION6"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "RE86",
+      "frameHash": "86e77cb5586f7c72",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:86e77cb5586f7c72",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "S5I5",
+      "frameHash": "0de899ef426dee32",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:0de899ef426dee32",
+      "availableActionRefs": [
+        "ACTION6"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "SB26",
+      "frameHash": "8cc17052ea2038b2",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:8cc17052ea2038b2",
+      "availableActionRefs": [
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "SC25",
+      "frameHash": "518653148c1631c7",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:518653148c1631c7",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION6"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "SK48",
+      "frameHash": "e4bbd31c5eaa4d7b",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:e4bbd31c5eaa4d7b",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "SP80",
+      "frameHash": "0ba719661c41cd3d",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:0ba719661c41cd3d",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "SU15",
+      "frameHash": "e04c9e9cd2bdb080",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:e04c9e9cd2bdb080",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "TN36",
+      "frameHash": "3e8702e648bb9755",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:3e8702e648bb9755",
+      "availableActionRefs": [
+        "ACTION6"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "TR87",
+      "frameHash": "bf60e2953965adca",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:bf60e2953965adca",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "TU93",
+      "frameHash": "23357766b7528ba5",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:23357766b7528ba5",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "VC33",
+      "frameHash": "fdde551e3fd269f6",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:fdde551e3fd269f6",
+      "availableActionRefs": [
+        "ACTION6"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "WA30",
+      "frameHash": "22f3ccd4739a85ce",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:22f3ccd4739a85ce",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "SKBN",
+      "frameHash": "397457b492afea44",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:397457b492afea44",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "CLRS",
+      "frameHash": "e2b4355c3cbb57a2",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:e2b4355c3cbb57a2",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "SWCH",
+      "frameHash": "2a01379c598b3d70",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:2a01379c598b3d70",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "STCK",
+      "frameHash": "0aff2f0878f2054d",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:0aff2f0878f2054d",
+      "availableActionRefs": [
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "HANO",
+      "frameHash": "b98de996d71bd158",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:b98de996d71bd158",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "SEQN",
+      "frameHash": "90b98f0d2993a933",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:90b98f0d2993a933",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "MIND",
+      "frameHash": "38a98b347eb0eff5",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:38a98b347eb0eff5",
+      "availableActionRefs": [
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "MEMO",
+      "frameHash": "27ba4cd855a64b3d",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:27ba4cd855a64b3d",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "REGN",
+      "frameHash": "47aa13d6af55af3e",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:47aa13d6af55af3e",
+      "availableActionRefs": [
+        "ACTION3",
+        "ACTION4",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "CONN",
+      "frameHash": "8582db3762417036",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:8582db3762417036",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "DNOI",
+      "frameHash": "fe8185baa681f8b6",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:fe8185baa681f8b6",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "SYME",
+      "frameHash": "a8e7722fbd6f8241",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:a8e7722fbd6f8241",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "GORI",
+      "frameHash": "b7789fb9ae19a319",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:b7789fb9ae19a319",
+      "availableActionRefs": [
+        "ACTION3",
+        "ACTION4",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "KEYD",
+      "frameHash": "1968dffaf6bef933",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:1968dffaf6bef933",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "LOGI",
+      "frameHash": "93695febfcefd196",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:93695febfcefd196",
+      "availableActionRefs": [
+        "ACTION6"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "PORT",
+      "frameHash": "3e7e40321ad15433",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:3e7e40321ad15433",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "FOGW",
+      "frameHash": "68605777340ade0d",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:68605777340ade0d",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "LIFE",
+      "frameHash": "9cf0321c97cd4ec7",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:9cf0321c97cd4ec7",
+      "availableActionRefs": [
+        "ACTION6"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "VALV",
+      "frameHash": "cde1b5db276f7597",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:cde1b5db276f7597",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "SIGN",
+      "frameHash": "bbef948cb4925d82",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:bbef948cb4925d82",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "CASC",
+      "frameHash": "8c751a15869573d1",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:8c751a15869573d1",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": true,
+      "field": {
+        "stride": 4,
+        "size": 3,
+        "rowPhase": 1,
+        "colPhase": 0
+      },
+      "facts": {
+        "ordered_tip_square_count": 14,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": true,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0,
+        "ordered_tip_ring_position": [
+          17,
+          12
+        ]
+      },
+      "perActionFacts": {
+        "ACTION1": {
+          "ordered_tip_next_cell_measured": true,
+          "ordered_tip_next_cell_has_mark": false
+        },
+        "ACTION2": {
+          "ordered_tip_next_cell_measured": true,
+          "ordered_tip_next_cell_has_mark": false
+        },
+        "ACTION3": {
+          "ordered_tip_next_cell_measured": true,
+          "ordered_tip_next_cell_has_mark": true
+        },
+        "ACTION4": {
+          "ordered_tip_next_cell_measured": true,
+          "ordered_tip_next_cell_has_mark": true
+        }
+      },
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "CRAF",
+      "frameHash": "2731a599e06fc2a4",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:2731a599e06fc2a4",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "ESCT",
+      "frameHash": "cb790f27dc27d7dc",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:cb790f27dc27d7dc",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "LS19",
+      "frameHash": "19e99dde912cee08",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:19e99dde912cee08",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "FITE",
+      "frameHash": "d87fbc49803097ac",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:d87fbc49803097ac",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "AS66",
+      "frameHash": "39bddf2920c3e13f",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:39bddf2920c3e13f",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "GARE",
+      "frameHash": "372d5629c8032c12",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:372d5629c8032c12",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "COLM",
+      "frameHash": "9d4a426749776752",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:9d4a426749776752",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "GABA",
+      "frameHash": "dad2631650c92187",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:dad2631650c92187",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "FUIT",
+      "frameHash": "17c5c4147e162332",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:17c5c4147e162332",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "ETAG",
+      "frameHash": "bf64cd6cbf5bc15a",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:bf64cd6cbf5bc15a",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "TICT",
+      "frameHash": "a672cd7ff15e02d1",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:a672cd7ff15e02d1",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "GLOB",
+      "frameHash": "ba5d996decc75763",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:ba5d996decc75763",
+      "availableActionRefs": [
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "KATA",
+      "frameHash": "6b968a6e6ad21fd1",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:6b968a6e6ad21fd1",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "HOLE",
+      "frameHash": "e4e1a575a19b1589",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:e4e1a575a19b1589",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "GRAV",
+      "frameHash": "864f1740139121cf",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:864f1740139121cf",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "VOIS",
+      "frameHash": "d1bacc3cc20afcc8",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:d1bacc3cc20afcc8",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "POLA",
+      "frameHash": "c3a7becb1324bb0c",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:c3a7becb1324bb0c",
+      "availableActionRefs": [
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "ELAS",
+      "frameHash": "56f3647e10bd9638",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:56f3647e10bd9638",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "TRIA",
+      "frameHash": "a3db269ad73475b8",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:a3db269ad73475b8",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "SERI",
+      "frameHash": "a3d9e5b6d56eb9f7",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:a3d9e5b6d56eb9f7",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "COMB",
+      "frameHash": "a188f019a6b99b2b",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:a188f019a6b99b2b",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "ISOS",
+      "frameHash": "2213b32effda75e6",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:2213b32effda75e6",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "SELE",
+      "frameHash": "e0cab414a9ad4004",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:e0cab414a9ad4004",
+      "availableActionRefs": [
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "REWI",
+      "frameHash": "470ca6d4cd27a31e",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:470ca6d4cd27a31e",
+      "availableActionRefs": [
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "LKEY",
+      "frameHash": "8d0eaeb50c797a2a",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:8d0eaeb50c797a2a",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "TEQU",
+      "frameHash": "414f03727847c86e",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:414f03727847c86e",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "GMAP",
+      "frameHash": "2bcae799f4729d87",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:2bcae799f4729d87",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "CGWL",
+      "frameHash": "5b9f513c36c7067d",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:5b9f513c36c7067d",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "WEAV",
+      "frameHash": "af1b67ae6a394974",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:af1b67ae6a394974",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "GRIL",
+      "frameHash": "586f549f81987020",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:586f549f81987020",
+      "availableActionRefs": [
+        "ACTION3",
+        "ACTION4",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "DICO",
+      "frameHash": "4c66a07b55379fb4",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:4c66a07b55379fb4",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "EVAS",
+      "frameHash": "ceac639fe38e32de",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:ceac639fe38e32de",
+      "availableActionRefs": [
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "KLOT",
+      "frameHash": "b70f41cc40f08e72",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:b70f41cc40f08e72",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "UPST",
+      "frameHash": "97ddaef0e9538cf5",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:97ddaef0e9538cf5",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "THER",
+      "frameHash": "e4949964e4d02658",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:e4949964e4d02658",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "ZIPP",
+      "frameHash": "32f5e9dc5ce9d135",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:32f5e9dc5ce9d135",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "AMZE",
+      "frameHash": "0859ffa1372ea6ac",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:0859ffa1372ea6ac",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "PIPE",
+      "frameHash": "cc2da57812c48d52",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:cc2da57812c48d52",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "GIGO",
+      "frameHash": "7e07e56969825161",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:7e07e56969825161",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "CATL",
+      "frameHash": "645b3c0a4e06f244",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:645b3c0a4e06f244",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "PRTL",
+      "frameHash": "6ef4fd56acd3239f",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:6ef4fd56acd3239f",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "MOTO",
+      "frameHash": "507788fb1b628579",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:507788fb1b628579",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "ONDE",
+      "frameHash": "f5c3dcb0500da209",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:f5c3dcb0500da209",
+      "availableActionRefs": [
+        "ACTION3",
+        "ACTION4",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "SNAR",
+      "frameHash": "23a18f323d2571f2",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:23a18f323d2571f2",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "TRCP",
+      "frameHash": "03590df58a79831a",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:03590df58a79831a",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "SPOR",
+      "frameHash": "ef7046fff5e68e4f",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:ef7046fff5e68e4f",
+      "availableActionRefs": [
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "CWSE",
+      "frameHash": "14b234e86cb071c9",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:14b234e86cb071c9",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "CAVA",
+      "frameHash": "3a81cada09d4393d",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:3a81cada09d4393d",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "SMLP",
+      "frameHash": "63772d1746311d0c",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:63772d1746311d0c",
+      "availableActionRefs": [
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "DAME",
+      "frameHash": "1f154e9b119b149c",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:1f154e9b119b149c",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "HPDL",
+      "frameHash": "a736549b36c7d3a0",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:a736549b36c7d3a0",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4"
+      ],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "CATR",
+      "frameHash": "8c49c0659af32834",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:8c49c0659af32834",
+      "availableActionRefs": [
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": false,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "RECR",
+      "frameHash": "9c659d0462f191ba",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:9c659d0462f191ba",
+      "availableActionRefs": [
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    },
+    {
+      "game": "RSWP",
+      "frameHash": "3e364c99f049645b",
+      "observationRef": "linked-packet-initial-reference:epoch:1:revision:1:frame:3e364c99f049645b",
+      "availableActionRefs": [
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "geometryAndInputsCandidate": false,
+      "field": null,
+      "facts": {
+        "ordered_tip_square_count": 0,
+        "ordered_tip_temporal_incidence_count": 0,
+        "ordered_tip_unique_ring_present": false,
+        "ordered_tip_ring_on_earlier_chain": false,
+        "ordered_tip_route_present": false,
+        "ordered_tip_same_initial_value_count": 0
+      },
+      "perActionFacts": {},
+      "declaredDirectionalInputsAvailable": [],
+      "declaredProcessInputAvailable": true,
+      "currentControlObserved": false,
+      "coldProposalAdmissible": false
+    }
+  ],
+  "summary": {
+    "views": 100,
+    "squareFields": 1,
+    "uniqueRings": 1,
+    "geometryAndInputsCandidates": [
+      "CASC"
+    ]
+  },
+  "qualification": "Only unchanged original pure geometry is measured on recorded initial public rasters. The declared directions and process input are revisable priors, not acquired controls. Current control and ordered packet history are empty, so no cold OrderedReaction proposal is admitted. Game codes label evaluation candidates; they do not select production behavior. No geometry, input sequence, plan or learned state from this study is supplied to any live agent. Initial morphology predicts neither a successful acquisition nor an official level completion."
+}

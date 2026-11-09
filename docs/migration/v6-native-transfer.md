@@ -11,7 +11,37 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v54):** the native common Logos Engine caller
+**Current integrated milestone (v55):** the native common Logos Engine caller
+completes **AS66's first three levels in 19 actions (5, 6, 8)** in one cold
+continuous session, with 11 acquired prefixes, 19 actual Kernel acquisitions
+and two natural boundary replays. The
+[actual campaign](native-campaigns-v55/final/as66-campaign.json.gz) and
+[execution receipt](native-campaigns-v55/final/execution-as66.json) bind the
+result to unchanged implementation `0.29.0`, native digest
+`3794fa1b97951b20f3ce06d2d1d11b20d8c2b47132591fb5b8cf6f3e75b661d3`.
+The target stops on entry to level 4 with `NOT_FINISHED`. The existing generic
+`observed_frontier` and `sliding_cavity` providers supply the trajectory. The
+[independent browser observation](native-campaigns-v55/final/as66-browser-verification.json)
+confirms all three levels in the same session through ordinary controls.
+
+The newly connected `ordered_reaction` entry retains one original six-field
+owner, its material priority and its passive acquisition position among the
+already connected providers. Its V5/V6 source closure preserves ordered cell
+changes, repeated-square geometry, original conditional policies, current
+guards and immutable acquisition checkpoints. No fixed palette, coordinate,
+game identifier or stored solution enters the implementation. Original Python
+comparison of the retained public AS66 observations passes 19 source record
+calls, 11 complete prefix states and checkpoints, and three boundary events.
+This is passive family equivalence on that trajectory, not full caller parity.
+The unchanged v54 baseline also solves AS66 in 19 actions, so the success is
+not attributed to OrderedReaction. CASC remains unresolved after one action;
+that candidate was closed after 10 minutes 11 seconds, below the user's
+40-minute limit. The connection audit reaches 48/76 (63.2%), with 37 compiled
+original workflows; every complete-migration gate remains false. See the
+[v55 report](v55-ordered-reactions-and-public-animations.md) for evidence,
+bounded source claims and remaining work.
+
+**Previous integrated milestone (v54):** the native common Logos Engine caller
 completes **RE86's first three levels in 134 actions (26, 47, 61)** in one cold
 continuous session, with 46 acquired prefixes, 134 actual Kernel acquisitions
 and two natural boundary replays. The
@@ -62,7 +92,7 @@ retains the successful campaign, unsuccessful experiments and verification scope
 **Previous integrated milestone (v52):** the native common Logos Engine caller
 completes **GARE's first three levels in 53 actions (7, 9, 37)** in one cold
 continuous session, with 53 actual Kernel acquisitions and two natural
-boundary replays. The [actual campaign](native-campaigns-v52/attempt9/gare-three-levels.json)
+boundary replays. The [actual campaign](native-campaigns-v52/attempt9/gare-three-levels.json.gz)
 stops at its declared target on entry to level 4 with `NOT_FINISHED`.
 No reset, level jump, learned-state import or Python agent module supplies
 the native trajectory.

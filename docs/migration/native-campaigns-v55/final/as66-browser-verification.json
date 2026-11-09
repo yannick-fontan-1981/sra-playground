@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.v55.browser-verification.v1",
+  "status": "passed",
+  "game": "AS66",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.29.0",
+  "nativeSourceManifestDigest": "3794fa1b97951b20f3ce06d2d1d11b20d8c2b47132591fb5b8cf6f3e75b661d3",
+  "nativeSourceUnchanged": true,
+  "publicObservation": {
+    "path": "docs/migration/native-campaigns-v55/final/as66-browser-observation.json",
+    "sha256": "235a2feb9403f9ba839fe542f43ecc43f40535a30fa3c2096747da545f076fe5",
+    "bytes": 2025
+  },
+  "screenshot": {
+    "path": "docs/migration/native-campaigns-v55/final/as66-browser-final.png",
+    "sha256": "9d278e65958c8ebdfdb335f90f89d6d889761a704c73b4bb87d1754b742901a1",
+    "bytes": 74041
+  },
+  "counts": {
+    "actions": 19,
+    "levelsCompleted": 3,
+    "completedPlans": 11
+  },
+  "actionsPerLevel": [
+    5,
+    6,
+    8
+  ],
+  "qualification": "Observed through ordinary UI in the managed preview, one session from level 1, three Run to next level clicks, no manual game inputs or level jumps; target stops on entry to level 4. Browser observation is independent from journaled campaign evidence."
+}

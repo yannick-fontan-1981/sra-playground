@@ -1,0 +1,204 @@
+{
+  "schema": "logos-engine.scoped-public-regression-comparison.v1",
+  "game": "VALV",
+  "passed": true,
+  "checks": [
+    {
+      "name": "both runs passed with the same declared game and target",
+      "passed": true,
+      "baselineProjectionSha256": "b4ea2ddffb3bf515a63e34af1d0739be32c3443e51fc700f94ec8974f40a560e",
+      "currentProjectionSha256": "b4ea2ddffb3bf515a63e34af1d0739be32c3443e51fc700f94ec8974f40a560e"
+    },
+    {
+      "name": "same production budgets, source reference and opaque game asset provenance",
+      "passed": true,
+      "baselineProjectionSha256": "85b682a3c656d4d450449445925550118f309af1594deefe247dd87efda788c6",
+      "currentProjectionSha256": "85b682a3c656d4d450449445925550118f309af1594deefe247dd87efda788c6"
+    },
+    {
+      "name": "same complete initial public packet hash and public state",
+      "passed": true,
+      "baselineProjectionSha256": "4c21636ee5fb476324a22203123edf2e17d34be772362fc65a46977fe9644dc4",
+      "currentProjectionSha256": "4c21636ee5fb476324a22203123edf2e17d34be772362fc65a46977fe9644dc4"
+    },
+    {
+      "name": "every archived public packet independently hashes to the v53 baseline",
+      "passed": true,
+      "baselineProjectionSha256": "a735713d8c3f008852901940d813815ddd2a4022eadd5c911efeb093683b0901",
+      "currentProjectionSha256": "a735713d8c3f008852901940d813815ddd2a4022eadd5c911efeb093683b0901"
+    },
+    {
+      "name": "every archived host-only command equals its prior baseline command",
+      "passed": true,
+      "baselineProjectionSha256": "4e96ebd6ed16e267b24ea9b8c905a9296ef063580407203632fdbabb78e37513",
+      "currentProjectionSha256": "4e96ebd6ed16e267b24ea9b8c905a9296ef063580407203632fdbabb78e37513"
+    },
+    {
+      "name": "same commands, complete returned packet hashes, animation lengths and primitive boundaries",
+      "passed": true,
+      "baselineProjectionSha256": "a9c9a8f7e8781721911980b956e1a7b8303c7a4ea98def646ff09265797e70da",
+      "currentProjectionSha256": "a9c9a8f7e8781721911980b956e1a7b8303c7a4ea98def646ff09265797e70da"
+    },
+    {
+      "name": "same selected family/group/kind/subquestion, acquired prefix lengths and retained solver scalars",
+      "passed": true,
+      "baselineProjectionSha256": "b3c2ea06073169153e37379ae34d6f8d0326359c5c9ee939e9b8acd6cb96fb38",
+      "currentProjectionSha256": "b3c2ea06073169153e37379ae34d6f8d0326359c5c9ee939e9b8acd6cb96fb38"
+    },
+    {
+      "name": "same retained coordination source/preferred entries and current guard scope",
+      "passed": true,
+      "baselineProjectionSha256": "9aa92b0f2f1ba756d6634452b816f3133a257db87e3150792ec784e09bc2514d",
+      "currentProjectionSha256": "9aa92b0f2f1ba756d6634452b816f3133a257db87e3150792ec784e09bc2514d"
+    },
+    {
+      "name": "same historical epoch anchors with session namespace normalized",
+      "passed": true,
+      "baselineProjectionSha256": "64c7e73b3bd9000128ce92e85cf5df4113afa1e2d44cfeaffa86ee783f46c588",
+      "currentProjectionSha256": "64c7e73b3bd9000128ce92e85cf5df4113afa1e2d44cfeaffa86ee783f46c588"
+    },
+    {
+      "name": "same inherited source-series event counts on every sealed prefix",
+      "passed": true,
+      "baselineProjectionSha256": "4fd4f8968c690a00e068144dd007896272d026cad019f06c5748afb3dcbd30d3",
+      "currentProjectionSha256": "4fd4f8968c690a00e068144dd007896272d026cad019f06c5748afb3dcbd30d3"
+    },
+    {
+      "name": "same common request outcomes and retained caller acquisition counters",
+      "passed": true,
+      "baselineProjectionSha256": "b9a51f6ca99070c582991803df800d19b070064c57eb174765873d6cec3a506e",
+      "currentProjectionSha256": "b9a51f6ca99070c582991803df800d19b070064c57eb174765873d6cec3a506e"
+    },
+    {
+      "name": "same natural level boundaries and retained-session caller counters",
+      "passed": true,
+      "baselineProjectionSha256": "f0725061b5f8a765e98ff5cd8b8a047494818d098cc366574511241cdffd2bc7",
+      "currentProjectionSha256": "f0725061b5f8a765e98ff5cd8b8a047494818d098cc366574511241cdffd2bc7"
+    },
+    {
+      "name": "same final public result and retained-session operation counts",
+      "passed": true,
+      "baselineProjectionSha256": "49b2bc373684cd63588227305f4c86ae307cc23604be120f1238aa9dbe3953ef",
+      "currentProjectionSha256": "49b2bc373684cd63588227305f4c86ae307cc23604be120f1238aa9dbe3953ef"
+    },
+    {
+      "name": "same retained mechanical-domain assessments",
+      "passed": true,
+      "baselineProjectionSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "currentProjectionSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    {
+      "name": "both source runs remained unchanged and imported no Python agent module",
+      "passed": true,
+      "baselineProjectionSha256": "6dfa9e070d04981f350bd1b62a67aa294200924a4e300757121c928967837dd4",
+      "currentProjectionSha256": "6dfa9e070d04981f350bd1b62a67aa294200924a4e300757121c928967837dd4"
+    },
+    {
+      "name": "current replay used the declared complete frozen native source",
+      "passed": true,
+      "baselineProjectionSha256": "f78743a2532b245e3ab0b378e010186ff6243decb07a1d1bb2d1d149f788e187",
+      "currentProjectionSha256": "f78743a2532b245e3ab0b378e010186ff6243decb07a1d1bb2d1d149f788e187"
+    },
+    {
+      "name": "current replay identifies the exact host-only baseline and public trace",
+      "passed": true,
+      "baselineProjectionSha256": "7e9e92d8e75b019e376a5fbcdde659118fe400377ee0597775660d1b534a74b0",
+      "currentProjectionSha256": "7e9e92d8e75b019e376a5fbcdde659118fe400377ee0597775660d1b534a74b0"
+    }
+  ],
+  "before": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/valv-replay.json.gz",
+    "sha256": "9b2964251ba85a106e2ed9aa9f6414088d185b2fcd655c2ca025b2d815763916",
+    "bytes": 209022,
+    "sourceDigest": "059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a"
+  },
+  "after": {
+    "path": "docs/migration/native-campaigns-v55/final/regressions/valv-replay.json.gz",
+    "sha256": "b54e0277334a0517e560583f1ca4e626b1de813e124b4b9f43ef02dc72348bda",
+    "bytes": 215054,
+    "sourceDigest": "3794fa1b97951b20f3ce06d2d1d11b20d8c2b47132591fb5b8cf6f3e75b661d3"
+  },
+  "trace": {
+    "path": "docs/migration/native-campaigns-v51/valv-public-trace.json.gz",
+    "sha256": "63adf3bf04c0678699af265ba1808fd2eca96b4f255473ee9bb43ba8a078a87d",
+    "bytes": 41686
+  },
+  "compared": {
+    "commands": 28,
+    "completePublicPackets": 29,
+    "prefixes": 28,
+    "requests": 56,
+    "naturalLevelBoundaries": 3,
+    "animationFrames": 238
+  },
+  "scope": {
+    "prefixKeys": [
+      "id",
+      "decisionRevision",
+      "acquiredActions",
+      "family",
+      "operations",
+      "proposalKind",
+      "fieldSubquestion",
+      "materialSubquestion",
+      "selectionGroup",
+      "programControlProbeMode",
+      "programRelationMode",
+      "rootedQuotaPhase",
+      "productPanelFactors",
+      "productPanelEstimated",
+      "productPanelObservedSteps",
+      "labeledSequenceLabel",
+      "labeledSequenceQuery",
+      "labeledSequenceTrainingReused",
+      "labeledSequenceCompatiblePredicates",
+      "labeledSequenceAgreement",
+      "labeledSequenceGrammarSize",
+      "supportMode",
+      "callerAcquiredTransitions"
+    ],
+    "coordinationKeys": [
+      "rule",
+      "observation_ref",
+      "guard_reason",
+      "scope",
+      "deferred_family",
+      "preferred_family",
+      "physical_action_authorized",
+      "source_trigger_group",
+      "source_trigger_entry",
+      "selected_group",
+      "selected_entry",
+      "selected_subquestion"
+    ],
+    "callerKeys": [
+      "enabled",
+      "acquiredTransitions",
+      "boundaryReplays",
+      "goalEvents",
+      "frontierDeltas",
+      "components"
+    ],
+    "boundaryKeys": [
+      "completedLevel",
+      "nativeLevel",
+      "levelsCompleted",
+      "levelActions",
+      "totalActions",
+      "prefixCount",
+      "phase",
+      "sessionRetained"
+    ]
+  },
+  "qualification": "Cold native common-caller replays use unchanged archived public returns. Every current command is computed before the host supplies its expected return. The unchanged historical comparator supplies the same 17 checks and check labels: commands, complete public-packet hashes, animation lengths, primitive boundaries, selected family/group/proposal kind/subquestion, named coordination entry/guard fields, prefix lengths, epoch anchors, source-series event counts, common-caller counters, natural level boundaries and final public result. Only fresh observation-session prefixes are normalized in the selected fields. Timings, implementation labels and migration-status labels are excluded. Complete provider payloads, derived identities, graph chains/revisions, full original-caller parity and equality of newly added family state are not asserted. Original payloads remain in the complete reports. These are recorded-return regressions, not new live game successes or a speed comparison. Legacy v53/v54 labels in the reused comparator identify its provenance; the case manifest and frozen source identify the actual baselines and current execution.",
+  "legacyComparatorMetadata": {
+    "implementation": {
+      "path": "scripts/compare-v54-regressions.py",
+      "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+      "bytes": 18166
+    },
+    "schema": "logos-engine.v54.scoped-public-regression-comparison.v1",
+    "qualification": "Ten cold native common-caller replays use unchanged archived public returns; every current command is computed before the host supplies its expected return. The comparison covers every command, complete public-packet SHA-256, animation length, primitive boundary, selected family/group/proposal kind/subquestion, retained coordination entry/guard fields, acquired prefix lengths, epoch anchors, source-series event counts, common-caller counters, natural level boundaries and final public result. Only the fresh observation-session prefix is normalized in the selected fields. Timings, implementation labels and migration-status labels are excluded. Complete provider payloads, derived identities, graph chains/revisions, full original-caller parity and equality of the newly added ReactiveContact state are not asserted. Existing LIFE material recipe identities and GARE nonempty FieldService payloads remain retained in the raw reports, outside this declared comparison. The prior v53 comparison records are unchanged. These are regressions, not ten new live games and not a speed comparison.",
+    "checkLabelsPreserved": true
+  }
+}

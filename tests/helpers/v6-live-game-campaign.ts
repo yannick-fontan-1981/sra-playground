@@ -183,6 +183,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const outlineCheckpoint = read('family_state:public_outline_service');
           const reactiveCheckpoint = graph.nodes['family_state:public_reactive_contact']
             ? read('family_state:public_reactive_contact') : null;
+          const reactionCheckpoint = graph.nodes['family_state:public_ordered_reaction']
+            ? read('family_state:public_ordered_reaction') : null;
           const reasoningFacts = (read('reasoning:memory').facts as string[]).map(read);
           const framedFacts = reasoningFacts
             .filter(fact => evidence.transitions.some((_: R, index: number) =>
@@ -193,6 +195,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const reactiveFacts = reasoningFacts
             .filter(fact => evidence.transitions.some((_: R, index: number) =>
               fact.key === `reactive_event:${evidence.decision_revision + index}`));
+          const reactionFacts = reasoningFacts
+            .filter(fact => evidence.transitions.some((_: R, index: number) =>
+              fact.key === `reaction_event:${evidence.decision_revision + index}`));
           const anchors = (series.events as R[]).filter(event => event.kind === 'coupled_pair_epoch_anchor');
           const alternating = (series.events as R[]).filter(event => event.kind === 'alternating_graph_evidence');
           const graphEvidence = alternating.at(-1);
@@ -294,6 +299,14 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               acquired: reactiveFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
               ...(evidence.proposal.reactive_plan ? { selectedProposal: evidence.proposal } : {}),
               qualification: 'Passive evidence only: the one actual ReactiveContact owner, its thirteen source fields, source transition references and complete native checkpoint. No state, action or expected return is supplied by this observer.',
+            } } : {}),
+            ...(reactionCheckpoint ? { reactionAcquisition: {
+              stateNode: 'family_state:public_ordered_reaction', checkpointFormat: reactionCheckpoint.format,
+              sourceState: reactionCheckpoint.source_state, nativeCheckpoint: reactionCheckpoint,
+              transitions: evidence.transitions, selectionReceipt: evidence.proposal.strategy_receipt,
+              acquired: reactionFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
+              ...(evidence.proposal.reaction_plan ? { selectedProposal: evidence.proposal } : {}),
+              qualification: 'Passive evidence only: the one actual OrderedReaction owner, its six source fields, source transition references and complete native checkpoint. No state, action or expected return is supplied by this observer.',
             } } : {}),
             ...(evidence.proposal.labeled_sequence_plan
               ? { labeledSequenceLabel: evidence.proposal.labeled_sequence_plan.label,

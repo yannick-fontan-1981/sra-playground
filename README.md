@@ -28,7 +28,23 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **The v54 milestone completes
+  level**; opening the tab does not move the game. **The v55 milestone completes
+  AS66's first three levels in 19 actions (5, 6 and 8)** through one cold
+  continuous native common session, 11 acquired prefixes and two natural
+  boundary replays. The managed browser independently confirms 19 actions,
+  three solved levels and 11 completed plans with the inspector closed.
+  The target stops on entry to level 4 with `NOT_FINISHED`.
+  This release connects the original `ordered_reaction` entry to one owner,
+  recovering V5 ordered cell changes and V6 conditional reaction policies.
+  Ordered public animation frames retain their actual sequence, with current
+  control, cover and continuation guards. All measurements remain generic;
+  no game identifier, fixed colour role, coordinate or stored action route
+  enters the agent. AS66 uses the existing `observed_frontier` and
+  `sliding_cavity` providers and also succeeds on the unchanged v54 baseline;
+  its new cold common result is separate from OrderedReaction's source proof.
+  The audit connects 48/76 source entries (63.2%), with complete V6 parity
+  still unverified. See the [v55 report](docs/migration/v55-ordered-reactions-and-public-animations.md).
+  **The previous v54 milestone completes
   RE86's first three levels in 134 actions (26, 47 and 61)** through one cold
   continuous native common session, 46 acquired prefixes and two natural
   boundary replays. The existing generic `constellation_cover` provider supplies
@@ -201,15 +217,15 @@ Fontan's **Symbolic Reasoning Agent** research.
   **Previous v38 milestone: TICT completes all six levels with official `WIN`
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
-  The current entry audit connects **47 of 76 explicit DRM subquestions
-  (61.8%)** in implementation `logos-engine.typescript.v6.native-migration/0.28.0`,
-  with both newly connected reactive-contact entries using one acquired owner.
-  Its native coordination extensions add no source entry. This counts
+  The current entry audit connects **48 of 76 explicit DRM subquestions
+  (63.2%)** in implementation `logos-engine.typescript.v6.native-migration/0.29.0`,
+  with the newly connected ordered-reaction entry using one acquired owner.
+  The compiled original workflow inventory remains 37. This counts
   connected entries, not full behavioral parity or a percentage of all code.
-  The next source entry to study is `reactive_contact_continuation`, preserving
-  the distinction between an observed response, a historical method and a
-  current conditional continuation. Selection and validation will use public
-  observations; no new game outcome is assumed for that pending entry.
+  The remaining `observed_inventory_composition` entry and its original
+  passive acquisition position are a next source closure to study. Selection
+  and validation will use public observations; no new game outcome is assumed
+  for that pending entry.
   Complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These

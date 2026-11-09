@@ -1,0 +1,135 @@
+{
+  "schema": "logos-engine.v55.baseline-evidence-relocation.v1",
+  "sourceWorktree": "/workspace/scratch/c4dd29871d33/v55-candidate-baseline",
+  "destinationCheckout": "/workspace/scratch/c4dd29871d33/sra-playground-v55/.sites-checkout",
+  "baselineCommit": "9355290a1f839bc3151b75817eedda5f148b0eba",
+  "byteIdentical": true,
+  "files": [
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-as66/as66-actual-public-journal.jsonl.gz",
+      "sha256": "8ede6cd4389df636dfb4c557eda1e2b8a513453789eb4d9189ab2aaa0c65743e",
+      "bytes": 13761
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-as66/as66-campaign.json.gz",
+      "sha256": "59305ab7ae8f539e9e0e25dc2b1d423f2be5c14534981013b79d1185c68ca5c3",
+      "bytes": 51173
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-as66/as66-output.log.gz",
+      "sha256": "376c4afc43214f826ec8ff92166d73aed712c0c3e9cff3198366a85b4f7182a8",
+      "bytes": 2688
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-as66/as66-public-trace.json.gz",
+      "sha256": "d11ca96d9bdc1edcffd3ba50f2a2202a7957dab3d3b2eb6fa9771438dc46208c",
+      "bytes": 20409
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-as66/execution-as66.json",
+      "sha256": "0a85e1794ffaf140b144e815d64860abc923ccba66c65da60254cb963854fb15",
+      "bytes": 53525
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-as66/source-archive-parts.json",
+      "sha256": "a1e4a1885baedb3a30ae149c70a184c589ad93f89ea52d3365e77f1d25faefce",
+      "bytes": 833
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-as66/source-archive.json",
+      "sha256": "62f6f4bc090fbe20b01dfc5e244512ecc646375fbdf547026e84775b7531acce",
+      "bytes": 26365
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-as66/source-archive.tar.gz",
+      "sha256": "7b838821578c32eb838d431440cfd94a5d7a2e1c2ce7a01bcc3b193f238437c7",
+      "bytes": 1489125
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-as66/source-archive.tar.gz.part000",
+      "sha256": "39f1441668e60b5e8b41a12b1ed26bc793edfa86bdd2f90fff2a8860de8047e0",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-as66/source-archive.tar.gz.part001",
+      "sha256": "a0f37e5f5a94278a0b345631b4d2478f859d862638f532e2086097bae255d170",
+      "bytes": 589125
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-as66/source-manifest.json",
+      "sha256": "e99fa46d9a0a996a3ec5cd7e3d428f50e9d0501a72008770bab3b6627288ebc9",
+      "bytes": 24720
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-casc/casc-actual-public-journal.jsonl.gz",
+      "sha256": "bd5e9e56c298180d838faeabd9f482a13929fa3216bdaedd154e48856dd81515",
+      "bytes": 659
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-casc/casc-campaign.json.gz",
+      "sha256": "377097459b8afe96becaa9973da14f2339b17ab3ff82d30d7a1cf8dbdadde580",
+      "bytes": 15028
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-casc/casc-output.log.gz",
+      "sha256": "5407b02becd9a91277b8f3448793741686607633230128b7f6320ea10e7d3f0f",
+      "bytes": 1022
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-casc/casc-public-trace.json.gz",
+      "sha256": "515d949f096738e880131281c976614fff7fc49ab3ffbeaa264fa33e9b62a5f5",
+      "bytes": 944
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-casc/execution-casc.json",
+      "sha256": "77c66e6ae4a6e6e96d1e8d9cbdff9cd22460e88e09efbd9ad5dda31dff2b2551",
+      "bytes": 53521
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-casc/source-archive-parts.json",
+      "sha256": "aa94da3f80a754ace14293b362d0e97a81a9e7fb5ed5c15bf71190e12293b88a",
+      "bytes": 833
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-casc/source-archive.json",
+      "sha256": "898e691fd2e34dd021092a9107aef42e2face23ae6bd5089c844573cd42726c1",
+      "bytes": 26365
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-casc/source-archive.tar.gz",
+      "sha256": "7b838821578c32eb838d431440cfd94a5d7a2e1c2ce7a01bcc3b193f238437c7",
+      "bytes": 1489125
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-casc/source-archive.tar.gz.part000",
+      "sha256": "39f1441668e60b5e8b41a12b1ed26bc793edfa86bdd2f90fff2a8860de8047e0",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-casc/source-archive.tar.gz.part001",
+      "sha256": "a0f37e5f5a94278a0b345631b4d2478f859d862638f532e2086097bae255d170",
+      "bytes": 589125
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/baseline-casc/source-manifest.json",
+      "sha256": "e99fa46d9a0a996a3ec5cd7e3d428f50e9d0501a72008770bab3b6627288ebc9",
+      "bytes": 24720
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/candidate-selection.json",
+      "sha256": "62ca6d4676cac0c006795050ddf17f22e80b9d05d3bea7a561a47825fe57c56f",
+      "bytes": 3652
+    },
+    {
+      "path": "docs/migration/native-campaigns-v55/ordered-reaction-candidate-selection.json",
+      "sha256": "1d87b6bcdda9b338f79f4a3d5f2291ad8f61495b7ee1e24325f1786f0d77a131",
+      "bytes": 95066
+    },
+    {
+      "path": "scripts/select-v55-ordered-reaction-candidate.py",
+      "sha256": "5a0ca0128a16c884660cd595c6d1bdd050e834c0a5e3d5560f8735bc4839d878",
+      "bytes": 6039
+    }
+  ],
+  "qualification": "Unmodified published-v54 cold baseline campaigns and separate original public-only measurement evidence. Original execution receipts retain their original absolute command paths. Relative artifact paths remain the same. No original campaign, receipt, trace, archive part or measurement result was rewritten. Raw source archives are reconstructible from the retained split parts."
+}

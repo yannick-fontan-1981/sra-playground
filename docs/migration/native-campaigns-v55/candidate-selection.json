@@ -1,0 +1,71 @@
+{
+  "schema": "logos-engine.v55.bounded-game-candidate-study.v1",
+  "maximumBlockedWallMinutesPerCandidate": 40,
+  "sourceBaselineCommit": "9355290a1f839bc3151b75817eedda5f148b0eba",
+  "readOnlySelectionEvidence": {
+    "path": "tests/fixtures/v6-sliding-cavity-reference.json.gz",
+    "qualification": "Original family-only AS66 development fixture reaches 3 levels but uses 16 explicitly imposed exploratory inputs. This is a candidate rationale, not a prior cold common-agent success and not input to the live agent."
+  },
+  "runs": [
+    {
+      "game": "AS66",
+      "selectedAt": "2026-11-09T13:09:49.237518+00:00",
+      "blockedDeadline": "2026-11-09T13:49:49.237518+00:00",
+      "state": "passed",
+      "directory": "docs/migration/native-campaigns-v55/baseline-as66",
+      "reason": "Strongest remaining previously unqualified three-level family evidence; the cold common caller must acquire every required control and stop relation itself.",
+      "candidateClosedAt": "2026-11-09T13:10:13.374487+00:00",
+      "executionStartedAt": "2026-11-09T13:09:49.650956+00:00",
+      "executionFinishedAt": "2026-11-09T13:10:13.374487+00:00",
+      "executionElapsedSeconds": 23.72353584800112,
+      "actions": 19,
+      "levelsCompleted": 3,
+      "levelActions": [
+        5,
+        6,
+        8
+      ],
+      "prefixes": 11,
+      "nativeSourceManifestDigest": "059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a",
+      "receipt": {
+        "path": "docs/migration/native-campaigns-v55/baseline-as66/execution-as66.json",
+        "sha256": "0a85e1794ffaf140b144e815d64860abc923ccba66c65da60254cb963854fb15",
+        "bytes": 53525
+      }
+    },
+    {
+      "game": "CASC",
+      "selectedAt": "2026-11-09T13:12:45.455277+00:00",
+      "blockedDeadline": "2026-11-09T13:52:45.455277+00:00",
+      "state": "baseline_failed",
+      "directory": "docs/migration/native-campaigns-v55/baseline-casc",
+      "reason": "The original OrderedReaction pure geometry accepts exactly one of 100 retained public initial views: CASC. Cold current control remains unacquired. This baseline measures existing v54 common behavior before that family is connected.",
+      "candidateState": "awaiting_new_source_with_original_deadline",
+      "baselineClosedAt": "2026-11-09T13:12:53.924546+00:00",
+      "executionStartedAt": "2026-11-09T13:12:46.706166+00:00",
+      "executionFinishedAt": "2026-11-09T13:12:53.924546+00:00",
+      "executionElapsedSeconds": 7.218380587999491,
+      "actions": 1,
+      "levelsCompleted": 0,
+      "reasonForStop": "frontier_unknown",
+      "prefixes": 1,
+      "nativeSourceManifestDigest": "059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a",
+      "receipt": {
+        "path": "docs/migration/native-campaigns-v55/baseline-casc/execution-casc.json",
+        "sha256": "77c66e6ae4a6e6e96d1e8d9cbdff9cd22460e88e09efbd9ad5dda31dff2b2551",
+        "bytes": 53521
+      }
+    }
+  ],
+  "candidateOrder": [
+    "AS66",
+    "CASC",
+    "GLOB"
+  ],
+  "boundary": "No hidden game source, authored levels or solution read for this selection. No probe sequence, learned state, expected action or visual measurement is supplied to a live native decision.",
+  "qualification": "AS66 already reached the three-level target on unchanged v54. CASC is a separate bounded candidate for the new OrderedReaction transfer; its first selection clock also bounds any subsequent v55 repair attempt.",
+  "orderedReactionPublicStudy": {
+    "path": "docs/migration/native-campaigns-v55/ordered-reaction-candidate-selection.json",
+    "sha256": "1d87b6bcdda9b338f79f4a3d5f2291ad8f61495b7ee1e24325f1786f0d77a131"
+  }
+}

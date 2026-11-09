@@ -17,6 +17,7 @@ import { BandTransfer } from './v6-band-transfer.ts';
 import { FramedTransfer } from './v6-framed-transfer.ts';
 import { OutlineService } from './v6-outline-service.ts';
 import { ReactiveContact } from './v6-reactive-contact.ts';
+import { OrderedReaction } from './v6-ordered-reaction.ts';
 import { ReductionTransport } from './v6-reduction-transport.ts';
 import { retainedReductionSuccess, reductionAcquiredContinuationWitness, continuationProposalDigest,
   CONTINUATION_PROPOSAL_DIGEST_PROFILE } from './v6-acquired-continuation.ts';
@@ -54,7 +55,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.28.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.29.0';
 // The implementation identity and public snapshot describe the same extensions.
 const NATIVE_CALLER_EXTENSIONS = ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
   'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery',
@@ -125,7 +126,7 @@ export interface NativeV6RuntimeConfiguration {
   /** Same source policy drives the native common caller's retained components. */
   callerStrategy?: R;
   /** The same registered instances acquire passive evidence in source order. */
-  acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; reactive?: ReactiveContact };
+  acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; reaction?: OrderedReaction; reactive?: ReactiveContact };
 }
 
 export class NativeV6Runtime implements NativeV6Backend {
@@ -139,7 +140,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private authority: NativeCompositionAuthority | null = null;
   private caller: NativeCallerCoordinator | null = null;
   private readonly callerStrategy?: R;
-  private readonly acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; reactive?: ReactiveContact };
+  private readonly acquisitionFamilies?: { supports: SupportNavigation; recall: NativeFamily; framed?: FramedTransfer; outline?: OutlineService; reaction?: OrderedReaction; reactive?: ReactiveContact };
   private callerAcquisitions = 0;
   private callerBoundaryReplays = 0;
   private sessionId = '';
@@ -186,6 +187,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (this.acquisitionFamilies && (!this.callerStrategy || ![this.acquisitionFamilies.supports, this.acquisitionFamilies.recall,
       ...(this.acquisitionFamilies.framed ? [this.acquisitionFamilies.framed] : []),
       ...(this.acquisitionFamilies.outline ? [this.acquisitionFamilies.outline] : []),
+      ...(this.acquisitionFamilies.reaction ? [this.acquisitionFamilies.reaction] : []),
       ...(this.acquisitionFamilies.reactive ? [this.acquisitionFamilies.reactive] : []),
       ...Object.values(this.acquisitionFamilies.supports.acquiredCompositions)].every(family => this.families.some(registered => registered.id === family.id)))) {
       throw new TypeError('Passive acquisition requires the registered common caller families');
@@ -999,7 +1001,8 @@ export class NativeV6Runtime implements NativeV6Backend {
     const singleEventKeys: Record<string, string> = { window_constraints: 'window_constraint', regular_field_correspondence: 'symmetric_field',
       orbit_constraints: 'orbit_constraint', containment: 'containment', surface_program: 'surface', code_program: 'codes', band_transfer: 'bands', reduction_transport: 'reduction',
       visual_sequences: 'visual_sequence_event', slot_substitution: 'slots', word_interface: 'words', port_assembly: 'ports', constellation_cover: 'constellations',
-      public_framed_transfer: 'framed_transfer_event', public_outline_service: 'outline_service_event', public_reactive_contact: 'reactive_event' };
+      public_framed_transfer: 'framed_transfer_event', public_outline_service: 'outline_service_event',
+      public_ordered_reaction: 'reaction_event', public_reactive_contact: 'reactive_event' };
     const key = singleEventKeys[family.id];
     if (key) memory.put(EPISODE, `${key}:${transition.before.revision}`, record.events[0] ?? null, after.observation_ref, after.revision);
     // These source record methods already return their complete envelope.
@@ -1035,7 +1038,7 @@ export class NativeV6Runtime implements NativeV6Backend {
 
   /** Source common_frontier_runtime.py acquisitions, once per sealed transition. */
   private async acquirePassiveFamilies(transition: WitnessedTransition, proposal: NativeProposal, selectedSupport: boolean, selectedId: string): Promise<void> {
-    const { supports, recall, framed, outline, reactive } = this.acquisitionFamilies!, { before, after, command, first, second, index } = transition;
+    const { supports, recall, framed, outline, reaction, reactive } = this.acquisitionFamilies!, { before, after, command, first, second, index } = transition;
     const memory = this.authority!.memory;
     if (!selectedSupport) {
       const result = await supports.record(before, after, command, first.frame_rows, second.frame_rows, undefined, undefined, second.frame_packet);
@@ -1095,8 +1098,20 @@ export class NativeV6Runtime implements NativeV6Backend {
         // context; restoring this projection alone would discard that context.
       }
     }
-    // ReactiveContact follows OutlineService in the source passive acquisition
-    // sequence (the intervening inventory/reaction owners are still pending).
+    // Source acquisition orders OrderedReaction after OutlineService and the
+    // still-pending inventory owner, immediately before ReactiveContact.
+    if (reaction) {
+      if (selectedId !== reaction.id) {
+        const result = reaction.recordSource(before, after, command, first.frame_rows, second.frame_rows, null, index, second.frame_packet);
+        if (result) memory.put(EPISODE, `reaction_event:${before.revision}`, result, after.observation_ref, after.revision);
+      }
+      const state = reaction.state();
+      if (state.control.length || state.packets.length || state.history.length) {
+        memory.put(EPISODE, 'reaction_state', state, after.observation_ref, after.revision);
+        reaction.restore(memory.get(EPISODE, 'reaction_state').value);
+      }
+    }
+    // ReactiveContact follows OrderedReaction in the source sequence.
     // A selected reactive return is already acquired above; a foreign return
     // carries no reactive proposal or selected-contact experiment attribution.
     if (reactive) {
@@ -1392,6 +1407,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const outlineOwner = await OutlineService.create({ retainDomainRefusal: true, currentPublicAnnouncementContext: true, currentRecoveryQuestions: true });
   const outline = subquestionFamily(outlineOwner, 'material_access_subquestion', 'observed_outline_service');
   const reactive = await ReactiveContact.create(configuration.reactive_contact_continuation);
+  const reaction = await OrderedReaction.create();
   const reductionOwner = new ReductionTransport({ boundedSearch: { maximumStates: 8192, maximumFrontier: 16384 } });
   const reduction = subquestionFamily({ ...originalEventFamily(reductionOwner),
     propose: async (observation, rows, inputs, remaining, execution) => await reductionOwner.propose(observation, rows, inputs, remaining, execution) as NativeProposal | null,
@@ -1429,7 +1445,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     animated_contact: new AnimatedContact(policy.animated_contact_question),
   };
   const supports = new SupportNavigation(supportChildren, policy);
-  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, reactive, reduction, recall, supports, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
+  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, reactive, reaction, reduction, recall, supports, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
   const registeredSubquestions = (order: readonly string[], registered: Record<string, NativeFamily>): string[] =>
     order.flatMap(question => registered[question] ? [registered[question].id] : []);
   // The cell, occurrence and program source entries share one acquired journal, but
@@ -1459,7 +1475,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       const registered: Record<string, string> = { factored_material_return: 'factored_material_return', conditional_transit: 'conditional_transit',
         conserved_band_transfer: band.id, supported_ternary_reduction: reduction.id, ordered_support_transfer: ordered.id,
         observed_framed_transfer: framed.id, observed_outline_service: outline.id,
-        reactive_contact_continuation: reactive.id, reactive_contact: reactive.id };
+        reactive_contact_continuation: reactive.id, reactive_contact: reactive.id, ordered_reaction: reaction.id };
       return registered[question] ? [registered[question]!] : supportChildren[question] ? [supportChildren[question]!.id] : [];
     }),
     returned_branch_contrast: ['returned_branch_contrast'],
@@ -1471,7 +1487,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     return ['scored_relation_access', 'observed_support_access'].includes(question) || supportChildren[question] ? [null] : [];
   });
   const materialEntryPoints = configuration.factored_material_return.ordered_subquestions.flatMap<string | null>(question => {
-    if (['observed_framed_transfer', 'reactive_contact_continuation', 'reactive_contact'].includes(question)) return [question];
+    if (['observed_framed_transfer', 'reactive_contact_continuation', 'reactive_contact', 'ordered_reaction'].includes(question)) return [question];
     return ['factored_material_return', 'conditional_transit', 'conserved_band_transfer', 'supported_ternary_reduction', 'ordered_support_transfer', 'observed_outline_service'].includes(question)
       || supportChildren[question] ? [null] : [];
   });
@@ -1490,6 +1506,6 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     fullV6Parity: false };
   const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
   const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
-  return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration, acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, reactive },
+  return new NativeV6Runtime({ sourceDigest, families, groups, authorityPolicy: loaded.common, callerStrategy: configuration, acquisitionFamilies: { supports, recall, framed, outline: outlineOwner, reaction, reactive },
     maxPointOccurrences: loaded.common.input_domain.max_point_occurrences, ...(options.now ? { now: options.now } : {}) });
 }

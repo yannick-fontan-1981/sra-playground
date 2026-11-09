@@ -13,7 +13,7 @@ __pycache__/
 /tests/fixtures/v6-outline-service-reference.json.gz
 
 # Frozen campaign archives are represented by their checked byte parts.
-/docs/migration/native-campaigns-v54/**/source-archive.tar.gz
+/docs/migration/native-campaigns-v*/**/source-archive.tar.gz
 
 # v52 evidence: lossless gzip is tracked; restore JSON with scripts/restore-v52-evidence.py
 /docs/migration/native-campaigns-v52/attempt7/gare-three-levels.json
