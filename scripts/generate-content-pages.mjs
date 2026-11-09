@@ -10,6 +10,7 @@ const architecture = JSON.parse(await readFile(resolve(root, 'content/architectu
 const catalog = JSON.parse(await readFile(resolve(root, 'content/videos.json'), 'utf8'));
 const benchmark = JSON.parse(await readFile(resolve(root, 'content/arc-agi-3.json'), 'utf8'));
 const symbolic = JSON.parse(await readFile(resolve(root, 'content/symbolic-reasoning.json'), 'utf8'));
+const motivation = JSON.parse(await readFile(resolve(root, 'content/motivation.json'), 'utf8'));
 const contact = JSON.parse(await readFile(resolve(root, 'content/contact.json'), 'utf8'));
 const pages = architecture.pages;
 const videos = [...catalog.videos].sort((a, b) => a.episode - b.episode);
@@ -81,6 +82,55 @@ function documentPage({ title, description, path, active, body, script = '/src/r
   </body>
 </html>
 `;
+}
+function renderMotivation() {
+  let stepNumber = 0;
+  const parts = motivation.parts.map(part => ({ ...part, steps: part.steps.map(step => ({ ...step, number: ++stepNumber })) }));
+  return documentPage({title:motivation.title,description:motivation.description,path:'/motivation.html',active:'motivation',body:`
+    <main class="reading-layout motivation-layout wrap">
+      <aside class="reading-sidebar motivation-sidebar">
+        <a class="sidebar-heading" href="#content">Start with Motivation</a>
+        <nav aria-label="Motivation steps">${parts.map(part => `
+          <a class="motivation-nav-part" href="#${escape(part.id)}">${escape(part.label)} · ${escape(part.title)}</a>
+          ${part.steps.map(step => `<a href="#${escape(step.id)}"><span>${number(step.number)}</span>${escape(step.navTitle)}</a>`).join('')}
+        `).join('')}</nav>
+        <a class="sidebar-series" href="/symbolic-reasoning.html">Continue: the method ${arrow}</a>
+      </aside>
+      <article class="reading-article motivation-article" id="content">
+        <header class="reading-header">
+          <p class="reading-breadcrumb">The beginning <span>/</span> Faith, design, and purpose</p>
+          <h1>${escape(motivation.title)}</h1>
+          <p class="reading-deck">${escape(motivation.deck)}</p>
+          <p class="motivation-byline">A personal statement by ${escape(motivation.author)}</p>
+        </header>
+        <div class="reading-intro">${paragraphs(motivation.intro)}</div>
+        <nav class="motivation-route" aria-label="The three parts of this motivation">${parts.map(part => `
+          <a href="#${escape(part.id)}"><span>Steps ${number(part.steps[0].number)}–${number(part.steps.at(-1).number)}</span><strong>${escape(part.title)}</strong>${arrow}</a>
+        `).join('')}</nav>
+        ${parts.map(part => `
+          <section class="motivation-part" id="${escape(part.id)}" aria-labelledby="${escape(part.id)}-heading">
+            <header class="motivation-part-heading"><p>${escape(part.label)}</p><h2 id="${escape(part.id)}-heading">${escape(part.title)}</h2><p>${escape(part.description)}</p></header>
+            ${part.steps.map(step => `
+              <section class="motivation-step" id="${escape(step.id)}" aria-labelledby="${escape(step.id)}-heading">
+                <div class="motivation-step-heading"><span class="motivation-step-number" aria-label="Step ${step.number}">${number(step.number)}</span><h3 id="${escape(step.id)}-heading">${escape(step.title)}</h3></div>
+                <div class="motivation-step-body">
+                  ${paragraphs(step.paragraphs)}
+                  <div class="motivation-consequence"><p class="motivation-consequence-label">What this leads me to do</p><p>${escape(step.consequence)}</p></div>
+                  ${sources(step.sources)}
+                  ${step.links?.length ? `<div class="reading-sources">${step.links.map(link => `<a href="${escape(link.href)}">${escape(link.label)}${arrow}</a>`).join('')}</div>` : ''}
+                </div>
+              </section>
+            `).join('')}
+          </section>
+        `).join('')}
+        <section class="motivation-closing" aria-labelledby="motivation-closing-title">
+          <h2 id="motivation-closing-title">${escape(motivation.closing.title)}</h2>
+          <p>${escape(motivation.closing.text)}</p>
+          <nav class="motivation-next" aria-label="Continue exploring SRA">${motivation.closing.links.map(link => `<a href="${escape(link.href)}"><small>${escape(link.label)}</small><span>${escape(link.title)}${arrow}</span></a>`).join('')}</nav>
+          <a class="motivation-back" href="#content">Back to the beginning ↑</a>
+        </section>
+      </article>
+    </main>`});
 }
 function renderContact() {
   const envelope = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 6 9 7 9-7"/></svg>';
@@ -244,9 +294,10 @@ async function save(path, html) {
   await writeFile(target, html.replace(/[\t ]+$/gm, ''));
 }
 for (const [index,page] of pages.entries()) await save(archPath(page),renderChapter(page,index));
+await save('/motivation.html',renderMotivation());
 await save('/arc-agi-3.html',renderBenchmark());
 await save('/symbolic-reasoning.html',renderSymbolicReasoning());
 await save('/videos.html',renderVideoIndex());
 await save('/contact.html',renderContact());
 for (const [index,video] of videos.entries()) await save(videoPath(video),renderVideo(video,index));
-console.log(`Generated the ARC-AGI-3 and Symbolic Reasoning introductions, ${pages.length} architecture pages, ${videos.length} episode pages, the video index, and the Contact page.`);
+console.log(`Generated Motivation, the ARC-AGI-3 and Symbolic Reasoning introductions, ${pages.length} architecture pages, ${videos.length} episode pages, the video index, and the Contact page.`);

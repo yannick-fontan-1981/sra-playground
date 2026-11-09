@@ -622,8 +622,11 @@ button:disabled{opacity:.32}
     grid-column: span 2;
     padding: 8px 6px;
   }
-  .site-header nav a:nth-child(4),
-  .site-header nav a:nth-child(5) {
+  .site-header nav a[href="/motivation.html"],
+  .site-header nav a[href="/"],
+  .site-header nav a[href="#playground"],
+  .site-header nav a[href="/symbolic-reasoning.html"],
+  .site-header nav a[href="/architecture.html"] {
     grid-column: span 3;
   }
   .site-header nav>.source-link{display:inline-flex}

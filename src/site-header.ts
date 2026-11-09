@@ -1,7 +1,7 @@
 const sourceUrl = 'https://github.com/yannick-fontan-1981/sra-playground';
 
 /** SRA is the project identity; ARC-AGI-3 is its interactive research setting. */
-export function renderSiteHeader(active: 'playground' | 'gallery' | 'arc-agi-3' | 'symbolic-reasoning' | 'architecture' | 'videos' | 'contact' | 'lab'): string {
+export function renderSiteHeader(active: 'motivation' | 'playground' | 'gallery' | 'arc-agi-3' | 'symbolic-reasoning' | 'architecture' | 'videos' | 'contact' | 'lab'): string {
   return `
     <header class="site-header wrap">
       <div class="site-masthead">
@@ -26,6 +26,7 @@ export function renderSiteHeader(active: 'playground' | 'gallery' | 'arc-agi-3' 
         </div>
       </div>
       <nav aria-label="Main navigation">
+        <a${active === 'motivation' ? ' class="nav-active" aria-current="page"' : ''} href="/motivation.html">Motivation</a>
         <a${active === 'playground' ? ' class="nav-active" aria-current="page"' : ''} href="${active === 'playground' ? '#playground' : '/'}">Playground</a>
         <a${active === 'gallery' ? ' class="nav-active" aria-current="page"' : ''} href="/gallery.html">75 New Games</a>
         <a${active === 'lab' ? ' class="nav-active" aria-current="page"' : ''} href="/reasoning-lab.html">Reasoning Lab</a>

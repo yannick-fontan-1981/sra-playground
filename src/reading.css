@@ -19,6 +19,61 @@
 .reading-breadcrumb a:hover{color:var(--accent-hover)}
 .reading-header h1,.video-index-header h1{font-size:43px;font-weight:550;letter-spacing:-1.3px;line-height:1.15;margin:0;max-width:800px;overflow-wrap:break-word}
 .reading-deck{font-size:20px;line-height:1.8;color:var(--muted);margin:17px 0 0;max-width:730px}
+.motivation-sidebar nav{gap:1px}
+.motivation-sidebar nav>a{font-size:14px;padding-block:6px}
+.motivation-sidebar nav>.motivation-nav-part{font-size:12px;line-height:1.6;color:var(--accent-hover);margin-top:13px;padding-top:9px;border-top:1px solid var(--line)}
+.motivation-sidebar nav>.motivation-nav-part:first-child{margin-top:0}
+.reading-article .motivation-byline{font-family:var(--mono);font-size:13px;color:var(--subtle);margin:18px 0 0}
+.motivation-route{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:29px 0 44px;border-block:1px solid var(--line)}
+.motivation-route>a{display:grid;grid-template-columns:1fr 17px;gap:8px 10px;padding:19px 18px;align-content:start;border-right:1px solid var(--line)}
+.motivation-route>a:first-child{padding-left:0}
+.motivation-route>a:last-child{border-right:0;padding-right:0}
+.motivation-route>a>span{grid-column:1/-1;font-family:var(--mono);font-size:12px;color:var(--accent-hover)}
+.motivation-route strong{font-size:16px;line-height:1.5;font-weight:500}
+.motivation-route .icon{width:17px;height:17px;margin-top:4px;color:var(--accent-hover)}
+.motivation-route a:hover strong{color:var(--accent-hover)}
+.motivation-part{margin-top:48px;scroll-margin-top:28px}
+.motivation-part-heading{padding-bottom:22px;border-bottom:1px solid var(--line);margin-bottom:27px}
+.reading-article .motivation-part-heading>p:first-child{font-family:var(--mono);font-size:13px;letter-spacing:.7px;text-transform:uppercase;color:var(--accent-hover);margin-bottom:9px}
+.motivation-part-heading h2{font-size:30px;line-height:1.3;font-weight:500;letter-spacing:-.6px;margin:0 0 11px}
+.reading-article .motivation-part-heading>p:last-child{font-size:17px;line-height:1.7;margin-bottom:0}
+.motivation-step{padding-bottom:31px;margin-bottom:31px;border-bottom:1px solid var(--line);scroll-margin-top:28px}
+.motivation-step:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0}
+.motivation-step-heading{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;align-items:baseline;margin-bottom:16px}
+.motivation-step-number{font-family:var(--mono);font-size:19px;color:var(--accent-hover);line-height:1.6}
+.motivation-step-heading h3{font-size:24px;line-height:1.4;font-weight:500;letter-spacing:-.25px;margin:0}
+.motivation-step-body{padding-left:56px}
+.motivation-consequence{margin-top:22px;padding:13px 19px 15px;border-left:2px solid var(--accent);background:#101a27}
+.reading-article .motivation-consequence-label{font-family:var(--mono);font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--accent-hover);margin-bottom:6px;line-height:1.6}
+.reading-article .motivation-consequence>p:last-child{font-size:17px;color:var(--ink);line-height:1.7;margin:0}
+.motivation-closing{margin-top:49px;padding-top:29px;border-top:1px solid var(--accent)}
+.motivation-closing h2{font-size:28px;line-height:1.35;font-weight:500;letter-spacing:-.4px;margin:0 0 18px}
+.motivation-next{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:27px;padding-block:22px;border-block:1px solid var(--line)}
+.motivation-next a{display:flex;flex-direction:column;gap:8px}
+.motivation-next small{font-size:13px;line-height:1.6;color:var(--subtle)}
+.motivation-next a>span{display:flex;align-items:center;gap:10px;font-size:17px;line-height:1.5;color:var(--accent-hover)}
+.motivation-next .icon{width:16px;height:16px;flex-shrink:0}
+.motivation-next a:hover>span{text-decoration:underline;text-underline-offset:4px}
+.motivation-back{display:inline-block;margin-top:22px;font-size:14px;color:var(--subtle)}
+.motivation-back:hover{color:var(--accent-hover)}
+@media(max-width:760px){
+  .motivation-sidebar{display:none}
+  .motivation-route{grid-template-columns:1fr;margin-bottom:32px}
+  .motivation-route>a,.motivation-route>a:first-child,.motivation-route>a:last-child{padding:13px 0;gap:5px 15px;border-right:0;border-bottom:1px solid var(--line)}
+  .motivation-route>a:last-child{border-bottom:0}
+  .motivation-route>a>span{grid-column:1}
+  .motivation-route .icon{grid-column:2;grid-row:1/3;align-self:center;margin-top:0}
+  .motivation-route strong{font-size:17px}
+  .motivation-part{margin-top:35px}
+  .motivation-part-heading h2{font-size:26px}
+  .motivation-step-heading{grid-template-columns:30px minmax(0,1fr);gap:12px}
+  .motivation-step-heading h3{font-size:23px}
+  .motivation-step-number{font-size:17px}
+  .motivation-step-body{padding-left:0}
+  .motivation-consequence{padding-inline:15px}
+  .motivation-closing h2{font-size:26px}
+  .motivation-next{grid-template-columns:1fr;gap:21px}
+}
 .reading-intro:empty{display:none}
 .reading-article p{font-size:18px;line-height:1.8;color:var(--muted);margin:0 0 16px}
 .reading-article .reading-breadcrumb{font-size:14px;line-height:1.8;margin-bottom:18px;color:var(--subtle)}

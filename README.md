@@ -316,6 +316,7 @@ or Restart from level 1 when the final level is complete.
 
 | Route | Content |
 | --- | --- |
+| `/motivation.html` | Ten steps connecting faith in creation to symbolic intelligence, human responsibility, Christian service, and transmission |
 | `/gallery.html` | 75 custom and 25 official game cards, native level previews, and exact game/level launch links |
 | `/reasoning-lab.html` | Native TypeScript V7 experiment, actual program tree, knowledge inspector and execution trace |
 | `/symbolic-reasoning.html` | Definition, interactive key-and-door example, history, comparison with neural networks, and the SRA design premise |
@@ -328,7 +329,7 @@ or Restart from level 1 when the final level is complete.
 | `/videos.html` | The six-episode video index |
 | `/videos/<slug>.html` | One episode, its player, full original text, and related links |
 
-Edit `content/architecture.json`, `content/arc-agi-3.json`,
+Edit `content/motivation.json`, `content/architecture.json`, `content/arc-agi-3.json`,
 `content/symbolic-reasoning.json`, or `content/videos.json`, then run
 `npm run content:generate`. `scripts/generate-content-pages.mjs` writes complete
 HTML documents and shares the same header as the Playground. The generated
