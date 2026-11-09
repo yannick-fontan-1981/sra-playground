@@ -1,7 +1,7 @@
 /** Versioned native state/program storage backed by the actual V7 Kernel. */
 import { emptyMemory, Kernel } from './kernel.ts';
 import type { DeltaCause, KnowledgeMemory, KnowledgeNode } from './kernel.ts';
-import { arrayValue, compareUnicode, digest, immutableJson, objectValue, stringValue } from './canonical.ts';
+import { arrayValue, compareUnicode, digest, equal, immutableJson, objectValue, stringValue } from './canonical.ts';
 import { executeWorkflow, validateCompiledModule } from './interpreter.ts';
 import type { CompiledModule, ExecutionOptions, JsonObject, JsonValue, Primitive } from './ir.ts';
 import { NativeSrcProgram, V6_NATIVE_PROGRAM_REFERENCE } from './v6-src-program.ts';
@@ -111,10 +111,16 @@ export class NativeKnowledgeStore {
   node(id: string): KnowledgeNode {
     const node = this.state.nodes[id]; if (!node) throw new TypeError(`Unknown native store node: ${id}`); return node;
   }
-  /** Reuse immutable hydration only while the root and every read fragment are current. */
+  /** Reuse immutable hydration only while its value and every read fragment are current. */
   stateValue(id: string): JsonValue {
     const node = this.node(id), cached = this.hydrated.get(id);
-    if (cached?.node === node && cached.fragments.every(fragment => this.state.nodes[fragment.id] === fragment)) return cached.value;
+    // Evidence/status revisions are still real Kernel revisions, but do not
+    // change a closed encoded value. The payload identity below is retained
+    // only after exact canonical equality at commit. Its kind/scope and every
+    // fragment read by hydration must still bind the current graph; a changed
+    // or missing fragment goes through the ordinary kind/profile/hash checks.
+    if (cached && cached.node.value === node.value && cached.node.kind === node.kind && cached.node.scope === node.scope
+        && cached.fragments.every(fragment => this.state.nodes[fragment.id] === fragment)) return cached.value;
     const fragments: KnowledgeNode[] = [], value = node.value!;
     const decoded = isNativeStateGraph(value) ? hydrateNativeState(value, fragmentId => {
       const fragment = this.node(fragmentId);
@@ -159,6 +165,11 @@ export class NativeKnowledgeStore {
         } else storedValue = encodeNativeState(write.value);
         const previous = staged.nodes[write.id];
         if (previous && (previous.kind !== write.kind || previous.scope !== this.scope)) throw new TypeError('Native node identity cannot change kind or scope');
+        // Metadata-only writes must retain their delta, provenance and revision.
+        // Share only the already closed payload when its full typed encoding is
+        // unchanged. This keeps source values, Float64 bits and canonical graph
+        // bytes exact while avoiding a fresh hydration of passive family state.
+        if (previous?.value !== undefined && equal(previous.value, storedValue)) storedValue = previous.value;
         const definition = previous?.definition ?? write.definition;
         const node = {
           id: write.id, kind: write.kind, revision: previous?.revision ?? 0, status: write.status ?? previous?.status ?? 'retained', scope: this.scope,

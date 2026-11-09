@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "semantic-baseline.json.gz",
+    "sha256": "9edb49481488a10f79cf5ba8d60edd10995be1bdcd4b89167b9482bccbcf2d8c",
+    "bytes": 3158146
+  },
+  "parts": [
+    {
+      "file": "semantic-baseline.json.gz.part000",
+      "sha256": "711bedad033489714b68ba941c316168bf37b68aa8f8e498e7ee554de8c4a461",
+      "bytes": 900000
+    },
+    {
+      "file": "semantic-baseline.json.gz.part001",
+      "sha256": "3cc9ef7d66ad0e5715eb9f14a88f97a7f3b436aa8669fe72529235ca8057b0aa",
+      "bytes": 900000
+    },
+    {
+      "file": "semantic-baseline.json.gz.part002",
+      "sha256": "0961689736eeab675e4ad891e330df1140994573c354b663fa8e65f07dc85459",
+      "bytes": 900000
+    },
+    {
+      "file": "semantic-baseline.json.gz.part003",
+      "sha256": "c1e50fad626c5080ba54a2bdcb782153fe5884d8ca37d14938fb04d8f44b12d5",
+      "bytes": 458146
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

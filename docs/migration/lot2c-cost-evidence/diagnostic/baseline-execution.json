@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.native-profile-execution.v1",
+  "startedAt": "2026-11-09T21:07:47.663511+00:00",
+  "finishedAt": "2026-11-09T21:08:01.179289+00:00",
+  "elapsedSeconds": 13.515801563000423,
+  "command": [
+    "node",
+    "scripts/profile-native-loop-costs.mjs",
+    "docs/migration/lot2c-evidence/performance/stck-followup/cases.json",
+    "STCK",
+    "docs/migration/lot2c-cost-evidence/diagnostic/baseline.json.gz",
+    "3cd17565b114a40ed71870bf8d7875a1b91102440b92d14a9258bfa98d4f7779"
+  ],
+  "checkout": "/workspace/scratch/c4dd29871d33/lot2c-cost-baseline",
+  "exitCode": 0,
+  "log": {
+    "path": "docs/migration/lot2c-cost-evidence/diagnostic/baseline-attempt-01.log.gz",
+    "bytes": 353,
+    "sha256": "04e55c78482e91009dd5796fbc1991aa99a1ba4186cd1d0d3f71a51df73d2054"
+  }
+}

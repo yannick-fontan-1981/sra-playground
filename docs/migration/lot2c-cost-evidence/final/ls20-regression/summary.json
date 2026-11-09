@@ -1,0 +1,163 @@
+{
+  "schema": "logos-engine.native-campaign-summary.v1",
+  "game": "LS20",
+  "source": {
+    "path": "docs/migration/lot2c-cost-evidence/final/ls20-regression/ls20-output.log.gz",
+    "bytes": 11523,
+    "sha256": "36c3abba463ca71b2bfda2d44014ff7e93fd4c2f289a4445c235067420032ff2"
+  },
+  "sourceRecord": "last JSON record containing final and boundaries",
+  "execution": {
+    "path": "docs/migration/lot2c-cost-evidence/final/ls20-regression/execution-ls20.json",
+    "bytes": 61463,
+    "sha256": "d1ea8abe6bee0ab1093f62c874a7a3b077ebbc111a482425cfca62d4c14ce9b9"
+  },
+  "status": "passed",
+  "levels": [
+    {
+      "completedLevel": 1,
+      "nativeLevel": 2,
+      "levelsCompleted": 1,
+      "levelActions": 17,
+      "totalActions": 17,
+      "levelActiveSeconds": 15.687467557000002,
+      "activeSeconds": 15.687467557000002,
+      "prefixCount": 11,
+      "graphChain": "310d494f768d43555a61ca6f8c1a15db41b7792076157e366ba0d5bfc1c9645d",
+      "graphRevision": 1321,
+      "nodeCount": 394,
+      "levelPrefixes": 11
+    },
+    {
+      "completedLevel": 2,
+      "nativeLevel": 3,
+      "levelsCompleted": 2,
+      "levelActions": 67,
+      "totalActions": 84,
+      "levelActiveSeconds": 75.07149864999992,
+      "activeSeconds": 90.75896620699993,
+      "prefixCount": 39,
+      "graphChain": "9c9192f4973454547ffef4172384ea283674567592313dd306602b39b92df148",
+      "graphRevision": 4458,
+      "nodeCount": 1169,
+      "levelPrefixes": 28
+    },
+    {
+      "completedLevel": 3,
+      "nativeLevel": 4,
+      "levelsCompleted": 3,
+      "levelActions": 58,
+      "totalActions": 142,
+      "levelActiveSeconds": 79.19025703999995,
+      "activeSeconds": 169.94922324699988,
+      "prefixCount": 58,
+      "graphChain": "3e74784deac1f0b5c3c4af394197bd9ac3711da68e2809f1705610d0f0e6aa49",
+      "graphRevision": 6745,
+      "nodeCount": 1876,
+      "levelPrefixes": 19
+    }
+  ],
+  "final": {
+    "actions": 142,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 169.94922324699988,
+    "prefixes": 58,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 142,
+      "boundaryReplays": 2,
+      "goalEvents": 51,
+      "frontierDeltas": 312,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 59
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 86
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 60
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 7
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 19
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 1
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 87
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 142,
+      "resume": 57
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.36.0"
+  },
+  "publicVerification": {
+    "packetCount": 143,
+    "actionCommands": 142,
+    "actionsBySourcePacketLevel": {
+      "1": 17,
+      "2": 67,
+      "3": 58
+    },
+    "finalPacket": {
+      "level": 4,
+      "levels_completed": 3,
+      "state": "NOT_FINISHED",
+      "step_index": 142,
+      "frame_hash": "eac92ab6c46171e4"
+    },
+    "allPublicPacketsEqualToPublished": true,
+    "allCommandsEqualToPublished": true
+  },
+  "qualification": "Cold regression in one session; final stop at the three-level target, official state NOT_FINISHED, fullV6Parity false. ActiveSeconds is the runtime field, not an official before/after performance-budget comparison."
+}

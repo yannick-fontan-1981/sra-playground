@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.native-semantic-control-preparation.v1",
+  "preparedAt": "2026-11-09T21:18:11.277793+00:00",
+  "copiedByteIdentical": [
+    {
+      "path": "scripts/capture-native-loop-semantics.mjs",
+      "bytes": 9292,
+      "sha256": "f5d42c69fbebdb41d7b1e9d65dc523f7e7e969535f60ca214d23ddc2c7af03aa"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-control-protocol.md",
+      "bytes": 3741,
+      "sha256": "d04fb7d3f351ac5423fb9bc679981df12897bb65d09d606858269fea809a80ea"
+    }
+  ],
+  "executionStarted": false,
+  "rootSignalRequired": true
+}

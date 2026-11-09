@@ -11,7 +11,71 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current functional delivery with cost reservation (lot 2C, native 0.35.0):** station-method enrichment,
+**Current lot 2C closure, native 0.36.0:** the common runtime
+preserves the acquired V5/V6 behavior while reducing redundant representation
+work. Four generic changes are applied: exact sharing of unchanged encoded
+payloads and their validated hydration; a live authorization-identity read with
+the existing snapshot fallback; sharing owned frozen trace entries inside
+runtime snapshots; and private geometric-component signatures with the same
+canonical bytes and SHA-256. Evidence, revisions, guards, acquisition order and
+existing state owners remain in place. The public service snapshot retains its
+independent copy and validation. No new reasoning family or registry entry is
+claimed by this optimization.
+
+The current frozen **242-file** native inventory is
+`ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b`.
+The [formal release delta](lot2c-cost-evidence/final/validation/delta-tests-run.json)
+passes **947/947 tests in 26 files**, with zero failures, cancellations or skipped
+tests and unchanged native/source/test inputs during execution. The
+[optimization report](lot2c-cost-closure.md) and
+[lineage](lot2c-cost-closure-lineage.md) retain the source relationships,
+negative cases, scope and diagnostic qualifications.
+
+A fresh cold [LS20 campaign](lot2c-cost-evidence/final/ls20-regression/results.md)
+retains **three levels in 142 actions (17, 67, 58)** and **58 prefixes**, with one
+session and natural boundaries. Its 142 commands and 143 public packets match
+the published 0.35.0 campaign exactly; the complete trace retains its changed
+source digest. The run stops on entry to level 4 with `NOT_FINISHED` and does not
+claim a whole-game win. The managed
+[STCK browser check](lot2c-cost-evidence/final/browser/stck-verification.json)
+independently reaches three levels in **35 actions and 15 plans**, with cumulative
+action boundaries 3, 10 and 35. This preserves a historical STCK capability and
+is not an official latency benchmark.
+
+A separate [STCK10 semantic control](lot2c-cost-evidence/diagnostic/semantic-qualification.json)
+qualifies **3,834 differing leaves with zero unqualified business differences**.
+The ten commands, four owner states and all 344 node identities/types/revisions
+agree. The 24 decoded trace differences occur only at `created`; each version's
+842 delta hashes, previous links, final nodes and execution identity are checked.
+The strict comparison remains `strict_identity_failed`: provenance, version and
+observed clocks stay recorded. This bounded control establishes no binary graph
+identity, all-game equivalence or complete V6 parity.
+
+**Official 0.36.0 cost comparison: PASSED, 16/16 medians within +10%.** The
+[comparison](lot2c-cost-evidence/performance/comparison.json) uses a fresh V62
+reference followed by the frozen 0.36.0 source in the recorded
+[measurement window](lot2c-cost-evidence/performance/window.json), with unchanged
+runner, traces, declarations and threshold. No budget metric remains unresolved.
+STCK session median decreases by **11.66%** and service continuation by **40.18%**;
+SMLP session median decreases by **0.99%** and service continuation by **56.81%**.
+SMLP restoration increases by **1.65%**, still within the same limit. LIFE remains
+a separate diagnostic: its session median increases by **3.39%**, and the other
+local increases, dispersions and measurement limits remain in the
+[results](lot2c-cost-evidence/performance/results.md).
+
+**Lot 2C is closed within its declared delivery scope. Lot 3 is the next step**,
+starting with `observed_composition_services`, followed by the remaining shared
+memory/composition contracts. The historical 0.35.0 failures below remain
+unchanged. This measured closure does not establish complete morphology-domain
+coverage or full V6 parity.
+
+The registry remains **50/76 entries**, with **37 compiled workflows** and
+**26 declared entries remaining**. The current audit retains **151
+component-verified, 130 partial and 1,088 pending modules**, zero fully transferred
+modules and all six complete-migration gates false. Complete morphology-domain
+closure, remaining families and original-caller parity remain separate goals.
+
+**Previous functional delivery with cost reservation (lot 2C, native 0.35.0):** station-method enrichment,
 entry rebind and entry-return continuation, managed capacity and target-extension
 consumers are connected at their original source positions. The existing caller
 owns the method; the morphology journal owns acquired entry returns; GoalAccess
@@ -44,11 +108,13 @@ The [lot 2C report](lot2c-method-continuation.md),
 [roadmap](v6-delivery-roadmap.md) retain browser verification, cost results,
 qualification and delivery integrity. The registry remains **50/76**, with
 **37 compiled workflows**. Four additional source modules are conservatively
-mapped as partial transfers. **Lot 2C remains open on cost:** 14/16 initial
-budgeted medians pass; the fresh paired STCK follow-up retains five of eight
+mapped as partial transfers. **Historical 0.35.0 cost result:** 14/16 initial
+budgeted medians pass; its fresh paired STCK follow-up retains five of eight
 medians above +10%, including service continuation (+25.74%), persistence
-(+20.67%) and restoration (+16.45%). Its cause remains unresolved. Closing this
-unchanged cost gate is the next priority before extending lot 3. Complete
+(+20.67%) and restoration (+16.45%). These measurements remain unchanged; the
+0.36.0 work above removes observed redundant work without claiming an exclusive
+cause for all V62/V63 variations. The completed official 0.36.0 comparison closes
+the cost gate without reclassifying these historical failures. Complete
 morphology-domain closure, remaining families and full V6 parity remain open.
 
 **Previous delivery (lot 2B, native 0.34.0):** the complete current morphology
@@ -152,7 +218,7 @@ The [lot report](lot1-retained-material-parent.md) distinguishes the baseline ga
 controlled contrary returns, real common execution, live campaign and measured
 costs. The [roadmap](v6-delivery-roadmap.md) preserves all eleven lots and exactly
 26 remaining registry entries. The [lineage](lot1-composition-return-lineage.md)
-records source relationships and actually consumed operations. The bounded lot 2A, 2B and functional 2C deliveries follow this historical milestone; the current 2C cost reservation and complete morphology-domain closure remain open.
+records source relationships and actually consumed operations. The bounded lot 2A, 2B and functional 2C deliveries follow this historical milestone. The completed 0.36.0 cost check is reported above; complete morphology-domain closure remains open.
 
 **Previous integrated milestone (v57):** the native common caller completes
 **SMLP's first three levels in 15 actions (3, 4, 8)** in one cold continuous

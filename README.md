@@ -28,16 +28,55 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **Lot 2C connects acquired
-  station methods, entry continuation and managed capacity to the common agent.**
+  level**; opening the tab does not move the game.
+  **Current native revision `0.36.0` preserves the lot 2C behavior while reducing
+  redundant common-runtime work.** Four generic changes share unchanged encoded
+  values and their validated hydration, read current authorization identities
+  without rebuilding diagnostics, share owned frozen trace entries inside
+  snapshots, and serialize private measured-component signatures with exactly
+  the original canonical bytes. Every proof, revision and acquisition remains
+  with its existing owner; outgoing service snapshots keep their independent
+  copy and validation. No new reasoning family or game-specific rule is added.
+  The frozen 242-file native inventory is
+  `ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b`.
+  The [formal delta](docs/migration/lot2c-cost-evidence/final/validation/delta-tests-run.json)
+  passes **947/947 tests in 26 files**.
+  A fresh cold [LS20 regression](docs/migration/lot2c-cost-evidence/final/ls20-regression/results.md)
+  preserves **three levels, 142 actions (17, 67, 58) and 58 prefixes**. All
+  142 commands and 143 public packets match the published 0.35.0 campaign;
+  the trace retains its changed source digest. The managed
+  [STCK browser check](docs/migration/lot2c-cost-evidence/final/browser/stck-verification.json)
+  completes **three levels in 35 actions and 15 plans**, using one continuous
+  session. These are regression checks, not new game-capability claims.
+  The separate [STCK10 semantic control](docs/migration/lot2c-cost-evidence/diagnostic/semantic-qualification.json)
+  qualifies all 3,834 differing leaves with no unqualified business difference;
+  24 trace timestamps and each version's provenance remain explicit. Its strict
+  identity failure is retained, and it does not establish binary graph identity
+  or behavior on every game. The [optimization report](docs/migration/lot2c-cost-closure.md)
+  and [lineage](docs/migration/lot2c-cost-closure-lineage.md) separate these proofs.
+  **Official 0.36.0 cost comparison: PASSED, 16/16 medians within +10%.**
+  The [comparison](docs/migration/lot2c-cost-evidence/performance/comparison.json)
+  uses a fresh V62 reference and the frozen 0.36.0 source in the recorded
+  [measurement window](docs/migration/lot2c-cost-evidence/performance/window.json),
+  with the unchanged runner and no unresolved budget metric. STCK session time
+  decreases by **11.66%** and service continuation by **40.18%**; SMLP session time
+  decreases by **0.99%** and service continuation by **56.81%**. SMLP restoration
+  increases by **1.65%**, within the same limit. LIFE remains a separate diagnostic:
+  its session median increases by **3.39%**, with its other increases and the
+  measurement limits retained in the [results](docs/migration/lot2c-cost-evidence/performance/results.md).
+  **Lot 2C is closed within its declared delivery scope. Lot 3 is next**, starting
+  with `observed_composition_services` for shared memory and composition services.
+  Complete morphology-domain closure and full V6 parity remain open.
+  **Previous functional lot 2C delivery, native `0.35.0`:** acquired station
+  methods, entry continuation and managed capacity join the common agent.
   A method is acquired only at a verified natural level boundary and enriched
   from one uniquely acquired, peer-preserving station contact. Recalled methods
   are revalidated against current public geometry, witnessed motion and resource
   forecasts. The existing caller, GoalAccess, inventory, attention and morphology
   owners retain their respective evidence. Checkpoint v2 restores older v1
   morphology states with no invented entry return.
-  Native `0.35.0` passes **859/859 release-delta tests** across 17 files.
-  The cold LS20 campaign now completes **its first three levels in 142 actions
+  That frozen `0.35.0` release passes **859/859 release-delta tests** across 17 files.
+  Its cold LS20 campaign completes **the first three levels in 142 actions
   (17, 67 and 58)** and 58 acquired prefixes, in one continuous session. It stops
   naturally on entry to level 4. The managed browser independently reproduces
   142 actions, three solved levels and 58 completed plans, with the inspector
@@ -53,16 +92,16 @@ Fontan's **Symbolic Reasoning Agent** research.
   comparison matches 25 commands and stops before supplying the first differing
   return at action 26; it does not claim full original-caller parity.
   Decisions use public observations and acquired witnesses rather than game
-  names, fixed colour roles or stored solutions. The [current report](docs/migration/lot2c-method-continuation.md),
+  names, fixed colour roles or stored solutions. The [0.35.0 report](docs/migration/lot2c-method-continuation.md),
   [source lineage](docs/migration/lot2c-method-continuation-lineage.md) and
   [roadmap](docs/migration/v6-delivery-roadmap.md) retain the campaigns, browser
-  verification, measured costs and limits. **Lot 2C is functionally available,
-  with its cost gate still open:** the initial comparison has 14/16 medians
-  within +10%; a fresh paired STCK follow-up has five of eight medians above
-  that unchanged limit. The next priority is to isolate and resolve these
-  continuation/persistence/restoration costs before extending lot 3's shared
-  memory and composition services. Complete morphology-domain closure and full
-  V6 parity remain separate open migration goals.
+  verification, measured costs and limits. **Historical 0.35.0 cost result:**
+  the initial comparison has 14/16 medians within +10%; its fresh paired STCK
+  follow-up has five of eight medians above that unchanged limit. These failures
+  remain retained in their original receipts. The passing 0.36.0 comparison
+  closes this cost gate without reclassifying those historical failures. Lot 3's
+  shared memory and composition services are next. Complete morphology-domain
+  closure and full V6 parity remain separate open migration goals.
   Previous [lot 2B](docs/migration/lot2b-control-attention.md) connected the current
   morphology decision to control acquisition and attention parent-return,
   including retained compositions without a route, source experiments and
@@ -316,7 +355,7 @@ Fontan's **Symbolic Reasoning Agent** research.
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
   The current entry audit connects **50 of 76 explicit DRM subquestions
-  (65.8%)** in implementation `logos-engine.typescript.v6.native-migration/0.35.0`.
+  (65.8%)** in implementation `logos-engine.typescript.v6.native-migration/0.36.0`.
   Lot 1's retained material parent is native coordination outside this entry count.
   The compiled original workflow inventory remains 37. This counts
   connected entries, not full behavioral parity or a percentage of all code.
@@ -325,8 +364,9 @@ Fontan's **Symbolic Reasoning Agent** research.
   questions reuse acquired Goal history and read the existing meter forecast.
   Lot 2B connects the current parent/control admissions, and lot 2C extends
   acquired methods and continuation. Complete morphology-domain coverage still
-  requires further source transfer and independent validation; lot 2C's cost
-  gate remains open. No future game outcome is assumed.
+  requires further source transfer and independent validation. The completed
+  0.36.0 cost check closes the declared 2C delivery scope, as detailed above.
+  No future game outcome is assumed.
   Complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These

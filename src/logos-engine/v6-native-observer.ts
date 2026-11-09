@@ -4,7 +4,7 @@
  * game identifier, state accessor or action meaning enters these measurements.
  * Reference: 786dcf51ca57773d8e3a8948ce9ea3655e7baf8e.
  */
-import { canonical } from './canonical.ts';
+import { assertPortableNumber, canonical } from './canonical.ts';
 import type { NativeRows as SharedRows, NativePoint, NativeBox, NativeEntity, NativeObservation } from './v6-native-types.ts';
 
 export type NativeRows = SharedRows;
@@ -193,11 +193,25 @@ export function geometricTransitions(before: readonly GeometricComponent[], afte
   return changes;
 }
 
+/**
+ * Private closed record built only from geometricComponents below. Its area,
+ * scale and normalized coordinates are bounded integers produced after raster
+ * validation. Constant ASCII keys follow the exact canonical order, so direct
+ * JSON has the same bytes without revalidating every freshly constructed pair.
+ * Keep the palette scalar check: validateRows admits -0, whereas the original
+ * canonical signature rejects it. Public v6Canonical/v6Digest stay unchanged.
+ */
+function measuredComponentSignature(part: GeometricComponent): Promise<string> {
+  assertPortableNumber(part.color);
+  const text = JSON.stringify({ area: part.area, normalized_mask: part.normalized,
+    palette_value: part.color, scale: part.scale });
+  return sha256(new TextEncoder().encode(text));
+}
+
 export async function measureNativeObservation(publicPacket: ObserverPublicPacket, revision: number, scope = 'neutral'): Promise<MeasuredObservation> {
   if (!Number.isSafeInteger(revision) || revision < 0) throw new TypeError('Observation revision must be an integer');
   const parts = geometricComponents(publicPacket.frame_rows);
-  const signatures = await Promise.all(parts.map(part => v6Digest({ palette_value: part.color, area: part.area,
-    scale: part.scale, normalized_mask: part.normalized })));
+  const signatures = await Promise.all(parts.map(measuredComponentSignature));
   const counts = new Map<string, number>(), ordinal = new Map<string, number>();
   for (const signature of signatures) counts.set(signature, (counts.get(signature) ?? 0) + 1);
   const entities = parts.map((part, index): MeasuredEntity => {

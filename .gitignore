@@ -115,3 +115,13 @@ __pycache__/
 /docs/migration/lot2c-evidence/performance/after.json
 /docs/migration/lot2c-evidence/performance/managed-component-costs.json
 /docs/migration/lot2c-evidence/performance/stck-followup/after.json
+
+/docs/migration/lot2c-cost-evidence/final/source-archive.tar.gz
+/docs/migration/lot2c-cost-evidence/performance/baseline.json
+/docs/migration/lot2c-cost-evidence/performance/after.json
+
+/docs/migration/lot2c-cost-evidence/final/ls20-regression/ls20-campaign.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot2c-cost-evidence/diagnostic/semantic-after.json.gz
+/docs/migration/lot2c-cost-evidence/diagnostic/semantic-baseline.json.gz

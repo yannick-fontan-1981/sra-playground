@@ -1,0 +1,32 @@
+{
+  "schema": "logos-engine.native-delta-test-scope.v1",
+  "scope": "Lot2C cost closure: exact immutable payload reuse and hydration invalidation, current authorization identity and immutable trace sharing, plus retained lot2C method/entry/managed contracts, caller/authority/service and actual public replay integration. Explicit affected delta, not full historical suite. Closed geometric signature encoding preserves exact Python-reference bytes and observer rejection domain.",
+  "testFiles": [
+    "tests/v6-morphology-entry.test.ts",
+    "tests/v6-morphology-managed.test.ts",
+    "tests/v6-morphology-methods-reference.test.ts",
+    "tests/v6-morphology-measurements.test.ts",
+    "tests/v6-morphology-family.test.ts",
+    "tests/v6-contextual-translation.test.ts",
+    "tests/v6-control-attention-reference.test.ts",
+    "tests/v6-control-attention-kernel.test.ts",
+    "tests/v6-drm-projector.test.ts",
+    "tests/v6-motion-contrast.test.ts",
+    "tests/v6-target-binding.test.ts",
+    "tests/v6-inventory-kernel.test.ts",
+    "tests/v6-inventory-helpers-reference.test.ts",
+    "tests/v6-native-caller.test.ts",
+    "tests/v6-native-authority.test.ts",
+    "tests/v6-caller-integration.test.ts",
+    "tests/v6-agent.test.ts",
+    "tests/v6-native-snapshot-identity.test.ts",
+    "tests/v6-native-persistence.test.ts",
+    "tests/v6-knowledge-store.test.ts",
+    "tests/v6-native-state-graph.test.ts",
+    "tests/canonical-cache.test.ts",
+    "tests/v7-kernel.test.ts",
+    "tests/v6-native-runtime.test.ts",
+    "tests/v6-native-checkpoint-integration.test.ts",
+    "tests/v6-native-observer.test.ts"
+  ]
+}

@@ -7,6 +7,8 @@ import { GoalAccessAdapter } from '../src/logos-engine/v6-goal-access.ts';
 import { ProspectiveContactAdapter } from '../src/logos-engine/v6-prospective-contact.ts';
 import { Snapshot } from '../src/logos-engine/v6-composition-memory.ts';
 import { retainNativeJson } from '../src/logos-engine/v6-native-owned.ts';
+import { immutableJson } from '../src/logos-engine/canonical.ts';
+import type { KnowledgeMemory } from '../src/logos-engine/kernel.ts';
 
 const CAUSE = { workflow: 'test.native.persistence', step: 'write', statement: 'retain' };
 const raster = () => Array.from({ length: 32 }, (_, y) => Array.from({ length: 32 }, (_, x) => (x + y) % 16));
@@ -60,6 +62,93 @@ test('immutable hydration observes root revisions and ignores a rolled-back writ
   assert.equal((second as { score: number }).score, 1);
   assert.equal((first as { score: number }).score, 0);
 });
+
+test('metadata-only revisions retain exact chains and one immutable hydration without losing evidence', async () => {
+  const store = new NativeKnowledgeStore('metadata-payload-identity', 'metadata-payload-identity');
+  const write = { id: 'state:metadata', kind: 'component_state' as const, component: 'metadata',
+    value: { rows: raster(), count: 2, fraction: 0.125, negative: -0, literal: { $v6_float64: 'literal' } } };
+  await store.commit([write], CAUSE);
+  const first = store.memory, root = store.node(write.id), value = store.stateValue(write.id);
+  await store.commit([{ ...write, value: structuredClone(write.value), evidence: ['prefix:1'],
+    relations: [{ relation: 'observes', target: 'observed:1' }], status: 'observed' }], CAUSE);
+  const updated = store.node(write.id);
+  assert.notEqual(updated, root); assert.equal(updated.revision, 2);
+  assert.deepEqual(updated.evidence, ['prefix:1']);
+  assert.deepEqual(updated.relations, [{ relation: 'observes', target: 'observed:1' }]);
+  assert.equal(updated.status, 'observed');
+  assert.equal(updated.value, root.value, 'Only the canonical payload is shared, not the revised node');
+  assert.equal(store.stateValue(write.id), value, 'Metadata alone does not force decoding the same immutable payload');
+  assert.deepEqual(value, write.value); assert.ok(Object.is((value as any).negative, -0));
+  assert.equal(store.revision, 3); assert.equal(store.nodeCount, 2);
+  assert.equal(store.memory.deltas[0], first.deltas[0]);
+  // Captured from these same writes on published V63 before this optimization.
+  assert.equal(first.chain, '8f132ff7d6a1c13c0659153c3f95fcb9c4feade76164da9e7485f77802ab13ec');
+  assert.equal(store.graphChain, '4bb15e06ec0058cd6564941d22029b507784ff7b9c7ce33fd4e6bff90d0ec78a');
+  const working = structuredClone(value) as typeof write.value;
+  working.rows[0]![0] = 255; working.count = 99; working.negative = 0;
+  assert.equal(store.stateValue(write.id), value); assert.equal((value as any).rows[0][0], 0);
+  assert.ok(Object.is((value as any).negative, -0));
+});
+
+test('changed payloads, including Float64 bits and mutable inputs, invalidate metadata-only sharing', async () => {
+  const store = new NativeKnowledgeStore('changed-payload', 'changed-payload');
+  const input = { rows: raster(), fraction: 0.125, signed: -0 };
+  const write = { id: 'observed', kind: 'component_state' as const, component: 'observed', value: input };
+  await store.commit([write], CAUSE);
+  const original = store.stateValue(write.id), root = store.node(write.id);
+  input.rows[0]![0] = 255; input.fraction = 0.25; input.signed = 0;
+  await store.commit([{ ...write, evidence: ['prefix:2'] }], CAUSE);
+  const changed = store.stateValue(write.id) as typeof input;
+  assert.notEqual(store.node(write.id).value, root.value); assert.notEqual(changed, original);
+  assert.equal(changed.rows[0]![0], 255); assert.equal(changed.fraction, 0.25);
+  assert.ok(Object.is(changed.signed, 0)); assert.ok(!Object.is(changed.signed, -0));
+  assert.equal((original as any).rows[0][0], 0); assert.ok(Object.is((original as any).signed, -0));
+});
+
+test('a failed metadata transaction leaves its node, cache and subsequent exact write intact', async () => {
+  const store = new NativeKnowledgeStore('metadata-rollback', 'metadata-rollback');
+  const write = { id: 'observed', kind: 'component_state' as const, component: 'observed', value: { rows: raster(), score: 0 } };
+  await store.commit([write], CAUSE);
+  const before = store.memory, root = store.node(write.id), value = store.stateValue(write.id);
+  await assert.rejects(store.commit([{ ...write, evidence: ['uncommitted'] },
+    { id: 'invalid', kind: 'family_state', value: {} }], CAUSE), /Logos contract/);
+  assert.equal(store.memory, before); assert.equal(store.node(write.id), root); assert.equal(store.stateValue(write.id), value);
+  await store.commit([{ ...write, evidence: ['committed'] }], CAUSE);
+  assert.deepEqual(store.node(write.id).evidence, ['committed']);
+  assert.equal(store.node(write.id).revision, root.revision + 1);
+  assert.equal(store.stateValue(write.id), value);
+});
+
+for (const fault of ['changed', 'profile', 'kind', 'missing'] as const) {
+  test(`metadata-only hydration still rejects a ${fault} fragment under an unchanged root`, async () => {
+    const store = new NativeKnowledgeStore(`metadata-fragment-${fault}`, `metadata-fragment-${fault}`);
+    // Distinct rasters force two read dependencies, so checking only the first
+    // fragment would incorrectly allow a stale hydration of the second one.
+    const second = raster(); second[0]![0] = 255;
+    const write = { id: 'observed', kind: 'component_state' as const, component: 'observed', value: { first: raster(), second } };
+    await store.commit([write], CAUSE);
+    const value = store.stateValue(write.id);
+    await store.commit([{ ...write, evidence: ['prefix:1'] }], CAUSE);
+    const root = store.node(write.id); assert.equal(store.stateValue(write.id), value);
+    const fragments = Object.values(store.memory.nodes).filter(node => node.kind === 'state_fragment');
+    assert.equal(fragments.length, 2);
+    const fragment = fragments[1]!;
+    if (fault === 'changed' || fault === 'profile') {
+      await store.commit([{ id: fragment.id, kind: 'state_fragment', component: 'native_state_fragments',
+        value: { profile: fault === 'profile' ? 'invalid-profile' : 'logos-engine.v6.state-graph.v1', node: null } } as unknown as NativeStoreWrite], CAUSE);
+    } else {
+      // Fault injection at the persisted graph boundary. Ordinary store writes
+      // already forbid kind replacement and provide no node deletion API.
+      const nodes = { ...store.memory.nodes };
+      if (fault === 'missing') delete nodes[fragment.id];
+      else nodes[fragment.id] = immutableJson({ ...fragment, kind: 'component_state' }) as typeof fragment;
+      (store as unknown as { state: KnowledgeMemory }).state = immutableJson({ ...store.memory, nodes }) as KnowledgeMemory;
+    }
+    assert.equal(store.node(write.id), root);
+    assert.throws(() => store.stateValue(write.id), fault === 'kind' ? /must bind a state fragment/
+      : fault === 'missing' ? /Unknown native store node/ : /digest mismatch/);
+  });
+}
 
 test('a cached root never hides a changed content-addressed fragment', async () => {
   const store = new NativeKnowledgeStore('fragment-integrity', 'fragment-integrity');

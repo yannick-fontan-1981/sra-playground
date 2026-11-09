@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { detectV5Components, geometricComponents, geometricCorrespondences, geometricTransitions,
-  measureNativeObservation, ObservedInputDomain, publicFrameHash, rowsDigest, v6Canonical } from '../src/logos-engine/v6-native-observer.ts';
+  measureNativeObservation, ObservedInputDomain, publicFrameHash, rowsDigest, v6Canonical, v6Digest } from '../src/logos-engine/v6-native-observer.ts';
 
 const reference = JSON.parse(await readFile(new URL('./fixtures/v6-observer-reference.json', import.meta.url), 'utf8'));
 
@@ -43,4 +43,46 @@ test('V6 canonical strings use Python ASCII escapes and unsupported rasters fail
   assert.throws(() => geometricComponents([[0, 1], [2]]), /rectangular/);
   assert.throws(() => geometricComponents([[NaN]]), /palette/);
   assert.throws(() => new ObservedInputDomain(0), /cap/);
+});
+
+const signatureCases = [
+  { id: 'palette-extremes-and-many-components', rows: Array.from({ length: 17 }, (_, y) => Array.from({ length: 19 }, (_, x) => (x + y) % 2 ? 255 : 0)) },
+  { id: 'scaled-blocks-with-duplicate-signatures', rows: Array.from({ length: 24 }, (_, y) => Array.from({ length: 32 }, (_, x) => (Math.floor(x / 8) + Math.floor(y / 8)) % 2 ? 7 : 3)) },
+  { id: 'irregular-masks-and-holes', rows: Array.from({ length: 19 }, (_, y) => Array.from({ length: 23 }, (_, x) => x === y || x === 22 - y || (x % 5 === 1 && y % 3 === 0) ? 11 : 4)) },
+  { id: 'maximum-public-one-dimensional-raster', rows: [Array<number>(65_536).fill(255)] },
+];
+for (const { id, rows } of signatureCases) {
+  test(`private component signatures retain the original generic digest: ${id}`, async () => {
+    const packet = { frame_rows: rows, frame_hash: 'measured-public-signature-contract', level: 2,
+      levels_completed: 1, state: 'NOT_FINISHED', available_action_refs: ['ACTION1'] };
+    const parts = geometricComponents(rows), observation = await measureNativeObservation(packet, 9, 'signature-contract');
+    const expected = await Promise.all(parts.map(part => v6Digest({ palette_value: part.color, area: part.area,
+      scale: part.scale, normalized_mask: part.normalized })));
+    assert.deepEqual(observation.entities.map(entity => entity.signature), expected);
+    assert.equal(observation.revision, 9); assert.equal(observation.level_epoch, 2);
+    assert.equal(observation.levels_completed, 1);
+    for (const [index, entity] of observation.entities.entries()) {
+      assert.deepEqual(entity.mask, parts[index]!.mask);
+      assert.equal(entity.identity_ambiguous, expected.filter(value => value === expected[index]).length > 1);
+    }
+  });
+}
+
+test('closed observation signatures preserve portable palette and raster refusals', async () => {
+  for (const value of [-0, NaN, Infinity, 0.5, -1, 256]) {
+    const packet = { frame_rows: [[value]], frame_hash: 'invalid-palette', level: 1,
+      levels_completed: 0, state: 'NOT_FINISHED', available_action_refs: ['ACTION1'] };
+    await assert.rejects(measureNativeObservation(packet, 1), Object.is(value, -0) ? /Portable V7 numbers/ : /palette/);
+  }
+  const valid = { frame_rows: [[0]], frame_hash: 'valid-palette', level: 1,
+    levels_completed: 0, state: 'NOT_FINISHED', available_action_refs: ['ACTION1'] };
+  await assert.rejects(measureNativeObservation(valid, -1), /revision/);
+});
+
+test('a palette getter cannot substitute a nonportable scalar after raster validation', async () => {
+  let reads = 0;
+  const row = [0];
+  Object.defineProperty(row, '0', { enumerable: true, get: () => ++reads === 1 ? 0 : 0.5 });
+  await assert.rejects(measureNativeObservation({ frame_rows: [row], frame_hash: 'changed-palette', level: 1,
+    levels_completed: 0, state: 'NOT_FINISHED', available_action_refs: ['ACTION1'] }, 1), /Portable V7 numbers/);
 });

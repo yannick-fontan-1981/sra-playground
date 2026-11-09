@@ -212,6 +212,12 @@ export interface NativeAuthorization {
   readonly action_index: number;
 }
 
+/** Current authoritative graph/program identity, without diagnostic materialization. */
+export interface NativeAuthorizationIdentity {
+  readonly graphChain: string;
+  readonly nativeExecutionDigest: string;
+}
+
 export interface NativeRuntimeYield {
   readonly kind: 'action' | 'boundary' | 'stopped';
   readonly reason: string | null;
@@ -259,6 +265,8 @@ export interface NativeV6Backend {
   advance(outcome: NativeOutcome, execution: NativeExecution): Promise<NativeRuntimeYield>;
   resume(execution: NativeExecution): Promise<NativeRuntimeYield>;
   snapshot(): NativeRuntimeSnapshot;
+  /** Opt-in read of current authority; backends without it retain snapshot validation. */
+  authorizationIdentity?(): NativeAuthorizationIdentity;
   inspectKnowledge?(): KnowledgeMemory;
   edit?(input: NativeGraphEdit, execution: NativeExecution): Promise<NativeRuntimeYield>;
   close(reason: string): NativeMaybePromise<void>;

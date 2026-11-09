@@ -1,0 +1,50 @@
+{
+  "schema": "logos-engine.native-browser-verification.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-09T21:29:21.421829+00:00",
+  "environment": "Sites managed preview, CUA Chrome tab6; production build from frozen source",
+  "previewUrl": "http://127.0.0.1:4173/",
+  "observedFinalUrl": "http://127.0.0.1:4173/?game=STCK&level=4",
+  "nativeSourceManifestDigest": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b",
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-DIatnB2-.js",
+    "sha256": "ebf6b7ebccc817749a90a6c591e549a290dc2088af420872d8cf4b3c35d83c2c",
+    "bytes": 6316097
+  },
+  "game": "STCK",
+  "startedAtLevel": 1,
+  "actions": 35,
+  "levelsCompleted": 3,
+  "completedPlans": 15,
+  "displayedActiveSeconds": 49.7,
+  "finalStatus": "Level completed.",
+  "finalLevel": 4,
+  "workflow": [
+    "Fresh preview navigation",
+    "Select STCK at level 1",
+    "Select SRA Agent Native TS",
+    "Run to next level three times with the same reasoning session",
+    "Inspect reasoning and retain screenshot and accessibility evidence"
+  ],
+  "levelBoundaryCumulativeActions": [
+    3,
+    10,
+    35
+  ],
+  "noManualGameAction": true,
+  "noLevelJump": true,
+  "knowledgeResetDuringRun": false,
+  "files": [
+    {
+      "path": "docs/migration/lot2c-cost-evidence/final/browser/lot2c-cost-stck-three-levels.jpg",
+      "bytes": 84448,
+      "sha256": "867741e565c15d9746c62c3ee6b97140bffa354ff90974c96eab753bb0739566"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/final/browser/lot2c-cost-stck-three-levels-ax.txt",
+      "bytes": 11559,
+      "sha256": "b80dfe6f92656437a3e49f98c80ebe9afb69adeef52ed70c9a9a4d29211193f0"
+    }
+  ],
+  "qualification": "Browser functional regression proof on STCK, not a new game capability or official latency benchmark. LS20 three-level cold campaign is retained separately. Preview stopped before the official cost window."
+}

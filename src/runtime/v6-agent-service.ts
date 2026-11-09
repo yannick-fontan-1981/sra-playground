@@ -164,7 +164,15 @@ export class V6AgentService {
         const pending = this.pending;
         if (!pending || operation.ticketId !== pending.ticket.id || this.usedTickets.has(operation.ticketId)
           || operation.sequence !== this.sequence + 1) throw new V6AgentError('stale', 'The native outcome does not bind the one pending authorization.');
-        const currentKnowledge = this.backend.snapshot();
+        // The ticket binds only these live graph/program identities. Production
+        // can read them without rebuilding diagnostics; injected backends retain
+        // the complete snapshot fallback. The outgoing snapshot is unchanged.
+        const currentKnowledge = this.backend.authorizationIdentity ? this.backend.authorizationIdentity() : this.backend.snapshot();
+        if (this.backend.authorizationIdentity && (!currentKnowledge
+          || typeof currentKnowledge.graphChain !== 'string' || !/^[a-f0-9]{64}$/.test(currentKnowledge.graphChain)
+          || typeof currentKnowledge.nativeExecutionDigest !== 'string' || !/^[a-f0-9]{64}$/.test(currentKnowledge.nativeExecutionDigest))) {
+          throw new TypeError('Invalid native authorization identity.');
+        }
         if (pending.ticket.graphChain !== currentKnowledge.graphChain || pending.ticket.nativeExecutionDigest !== currentKnowledge.nativeExecutionDigest) {
           throw new V6AgentError('stale', 'The native authorization belongs to an earlier knowledge graph.');
         }
