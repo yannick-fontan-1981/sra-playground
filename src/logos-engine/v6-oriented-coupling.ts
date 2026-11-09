@@ -103,7 +103,10 @@ export class OrientedCoupling implements NativeFamily<any>{
     while(head<queue.length){const[s,path]=queue[head++]!,a=s.actors[0],key=v6Canonical([a.x,a.y,a.face,s.cargo.map((c:R)=>[c.x,c.y])]);if(seen.has(key))continue;seen.add(key);
       if(predicate(s))return[path,s];
       if(execution&&seen.size%128===0){execution.signal?.throwIfAborted();await execution.yieldControl();}
-      for(const[action,d]of Object.entries(this.policy.direction_candidates) as [string,number[]][]){const[t,,missing]=handoffMove(s,model,'controller',d[0]!,d[1]!,100000,true);if(!missing.length&&!supportSame(t,s))queue.push([t,[...path,[action,t]]]);}
+      // The transferred V5 move changes only actors and cargo; all other
+      // state fields are retained verbatim. Compare those complete records
+      // instead of serializing the unchanged terrain on every search edge.
+      for(const[action,d]of Object.entries(this.policy.direction_candidates) as [string,number[]][]){const[t,,missing]=handoffMove(s,model,'controller',d[0]!,d[1]!,100000,true);if(!missing.length&&(!supportSame(t.actors,s.actors)||!supportSame(t.cargo,s.cargo)))queue.push([t,[...path,[action,t]]]);}
     }return null;
   }
   async route(state:R,model:R,execution?:NativeExecution):Promise<Array<[string,R]>|null>{

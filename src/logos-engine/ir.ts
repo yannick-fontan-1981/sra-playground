@@ -35,19 +35,21 @@ export interface IrLoopContract {
   readonly maximum_symbolic_depth: number;
   readonly limit_result: IrExpression;
 }
-export type StatementKind = 'CALL' | 'IF' | 'FOR_EACH' | 'WHILE' | 'NEXT' | 'STOP';
+export type StatementKind = 'CALL' | 'SELECT' | 'IF' | 'FOR_EACH' | 'WHILE' | 'NEXT' | 'STOP';
+export interface IrClause { readonly name: string; readonly value: IrExpression }
 export interface IrStatement {
   readonly id: string;
   readonly kind: StatementKind;
-  readonly expression: IrExpression;
+  readonly expression: IrExpression | null;
   readonly target?: string | null;
   readonly type_annotation?: TypeSpec | null;
   readonly result_binding?: string | null;
   readonly body?: readonly IrStatement[];
   readonly else_body?: readonly IrStatement[];
   readonly iterator?: string | null;
-  // Clauses/match arms remain outside the presently transferred SRC subset.
-  readonly clauses?: readonly JsonValue[];
+  // SELECT uses the original compiler's named clauses. Other authority
+  // operators and MATCH arms remain outside the transferred subset.
+  readonly clauses?: readonly IrClause[];
   readonly match_arms?: readonly JsonValue[];
   readonly loop_contract?: IrLoopContract | null;
 }

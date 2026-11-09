@@ -1,0 +1,116 @@
+{
+  "game": "ZIPP",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/native-campaigns-v53/attempt7/regressions/zipp-replay.json.gz",
+    "docs/migration/native-campaigns-v48/zipp-public-trace.json.gz",
+    "docs/migration/native-campaigns-v54/final/regressions/zipp-replay.json.gz"
+  ],
+  "startedAt": "2026-11-09T12:28:07.381188+00:00",
+  "finishedAt": "2026-11-09T12:31:53.003299+00:00",
+  "elapsedSeconds": 225.62211166199995,
+  "exitCode": 0,
+  "timeoutSeconds": 2400,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/zipp-replay.json.gz",
+    "sha256": "673ab90226ee847a8a29acb0c2e370cc7c78937baf56d3892d0ae1fe37fd6f04",
+    "bytes": 165210
+  },
+  "trace": {
+    "path": "docs/migration/native-campaigns-v48/zipp-public-trace.json.gz",
+    "sha256": "dca930510e267cdb3ae5098606da3441eecf14d362215f99197fc77023ab1917",
+    "bytes": 36532
+  },
+  "output": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/zipp-output.log.gz",
+    "sha256": "e7bf79fe44009e4ea4dd4cfadec78c2fd75952eabafd1a84b75d7fce1b943848",
+    "bytes": 7856
+  },
+  "passed": true,
+  "memory": {},
+  "report": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/zipp-replay.json.gz",
+    "sha256": "989c7f54528dfd9ed61ab3c026f3315bbc0496896768a1cf091ce133c515263e",
+    "bytes": 294666
+  },
+  "status": "passed",
+  "actions": 101,
+  "prefixes": 40,
+  "final": {
+    "actions": 101,
+    "levelsCompleted": 6,
+    "level": 6,
+    "state": "WIN",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 171.54799087499998,
+    "prefixes": 40,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 101,
+      "boundaryReplays": 5,
+      "goalEvents": 6,
+      "frontierDeltas": 203,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 41
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 41
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 41
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 40
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 41
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 42
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 101,
+      "resume": 39
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.28.0"
+  },
+  "comparison": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/zipp-comparison.json",
+    "sha256": "41cb3c11e6da3ecbf34722253a907cdcfad6afda5fcf05892f7259f9510d258a",
+    "bytes": 9097
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "immutableInputsUnchanged": true
+}

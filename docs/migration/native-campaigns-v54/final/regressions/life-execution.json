@@ -1,0 +1,116 @@
+{
+  "game": "LIFE",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/native-campaigns-v53/attempt7/regressions/life-replay.json.gz",
+    "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz",
+    "docs/migration/native-campaigns-v54/final/regressions/life-replay.json.gz"
+  ],
+  "startedAt": "2026-11-09T12:29:22.606401+00:00",
+  "finishedAt": "2026-11-09T12:32:25.557968+00:00",
+  "elapsedSeconds": 182.95156620099988,
+  "exitCode": 0,
+  "timeoutSeconds": 2400,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-replay.json.gz",
+    "sha256": "ebf4d1f109cc4c48bdba1fd1fd51073742cc3f34aba70f6b84c5b00232cd5599",
+    "bytes": 275577
+  },
+  "trace": {
+    "path": "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz",
+    "sha256": "8c2e1b67af1c827d2a132c211d71b6e25158a5db1e9b236e4d0d92e912fe7c84",
+    "bytes": 39361
+  },
+  "output": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/life-output.log.gz",
+    "sha256": "a7c16f62360c1a88d6a5ef870bf10226f328ef42b1273faf3c5eff565fb1fe90",
+    "bytes": 6040
+  },
+  "passed": true,
+  "memory": {},
+  "report": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/life-replay.json.gz",
+    "sha256": "2474e67c28363f0ad39544a9c1fca09855347d7901ef27a7f5542f65a18cbae8",
+    "bytes": 332445
+  },
+  "status": "passed",
+  "actions": 49,
+  "prefixes": 47,
+  "final": {
+    "actions": 49,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 128.44530515399995,
+    "prefixes": 47,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 49,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 99,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 48
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 48
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 46
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 45
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 31
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 49
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 49,
+      "resume": 46
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.28.0"
+  },
+  "comparison": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/life-comparison.json",
+    "sha256": "b78b28df583e310ed749a3443e3b566215094896903d190a12614c5188207bc9",
+    "bytes": 9100
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "immutableInputsUnchanged": true
+}

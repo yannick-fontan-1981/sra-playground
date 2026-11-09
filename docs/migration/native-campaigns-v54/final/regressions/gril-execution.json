@@ -1,0 +1,116 @@
+{
+  "game": "GRIL",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/native-campaigns-v53/attempt7/regressions/gril-replay.json.gz",
+    "docs/migration/native-campaigns-v49/gril-public-trace.json.gz",
+    "docs/migration/native-campaigns-v54/final/regressions/gril-replay.json.gz"
+  ],
+  "startedAt": "2026-11-09T12:28:44.071797+00:00",
+  "finishedAt": "2026-11-09T12:29:22.445790+00:00",
+  "elapsedSeconds": 38.373993643001086,
+  "exitCode": 0,
+  "timeoutSeconds": 2400,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gril-replay.json.gz",
+    "sha256": "c3967f7141bdac3cd39dcfdff3513dc5435daa60c200a682f896694bf5bce79f",
+    "bytes": 146090
+  },
+  "trace": {
+    "path": "docs/migration/native-campaigns-v49/gril-public-trace.json.gz",
+    "sha256": "dd72621fb8f650ee95ba907f61e9cb4675a7de75e3dd537a9dec7c3d5c47b6ae",
+    "bytes": 12713
+  },
+  "output": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/gril-output.log.gz",
+    "sha256": "0a73570f9d54f70fdd25f9a141c8ebdad6589b8095f8e3fb4aa58455c1a44fcf",
+    "bytes": 3065
+  },
+  "passed": true,
+  "memory": {},
+  "report": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/gril-replay.json.gz",
+    "sha256": "c9a651607bb3d2d6f9b42c6d4869fc1c9e7d4474b9e1180b68c75c64f260da5a",
+    "bytes": 165697
+  },
+  "status": "passed",
+  "actions": 19,
+  "prefixes": 19,
+  "final": {
+    "actions": 19,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 30.917712685999998,
+    "prefixes": 19,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 19,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 41,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 20
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 22
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 20
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 12
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 3
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 1
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 22
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 19,
+      "resume": 18
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.28.0"
+  },
+  "comparison": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/gril-comparison.json",
+    "sha256": "11cb4f0467064677604556aff8943e21589a15a42b3330ecd3d93ead12fa1b39",
+    "bytes": 9093
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "immutableInputsUnchanged": true
+}

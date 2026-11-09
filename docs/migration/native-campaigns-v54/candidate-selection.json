@@ -1,0 +1,42 @@
+{
+  "schema": "logos-engine.bounded-game-candidate-study.v1",
+  "maximumBlockedWallMinutesPerCandidate": 40,
+  "selectionInput": {
+    "path": "docs/migration/native-campaigns-v53/supplementary/candidate-selection-supplement.json",
+    "sha256": "18708d2896f400aae3800ef9a86e6b16c04734b79cc05adc19a730572e81420b"
+  },
+  "criteria": "An already-connected generic provider matches retained public initial geometry, without a known qualifying common-caller success: WA30 oriented coupling, then RE86 constellation cover. Selection supplies no action, plan, learned state or game engine to the native agent.",
+  "runs": [
+    {
+      "game": "WA30",
+      "selectedAt": "2026-11-09T12:02:56Z",
+      "candidateClosedAt": "2026-11-09T12:11:16Z",
+      "reason": "One level completed; natural GAME_OVER on level 2. Changed candidate before 40 minutes.",
+      "executionStartedAt": "2026-11-09T12:03:21.723256+00:00",
+      "executionFinishedAt": "2026-11-09T12:09:28.110835+00:00",
+      "executionElapsedSeconds": 366.38758553299976,
+      "sourceDigest": "d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70",
+      "receipt": {
+        "path": "docs/migration/native-campaigns-v54/baseline-wa30/execution-wa30.json",
+        "sha256": "8d726a1cee7a0119b74ede25f5dc368b018fce7db3272f25c026ba6205d49892",
+        "bytes": 49688
+      }
+    },
+    {
+      "game": "RE86",
+      "selectedAt": "2026-11-09T12:11:16Z",
+      "candidateClosedAt": "2026-11-09T12:13:25.662478+00:00",
+      "reason": "First-three-level target achieved on unmodified published v53; the final integrated run is recorded separately.",
+      "executionStartedAt": "2026-11-09T12:11:23.387449+00:00",
+      "executionFinishedAt": "2026-11-09T12:13:25.662478+00:00",
+      "executionElapsedSeconds": 122.27503484399949,
+      "sourceDigest": "d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70",
+      "receipt": {
+        "path": "docs/migration/native-campaigns-v54/baseline-re86/execution-re86.json",
+        "sha256": "289090120f2fda7c80d6996c11ee3bd127569526d0acc23bf9d8d69f177fdf5d",
+        "bytes": 49687
+      }
+    }
+  ],
+  "relocation": "Baseline evidence copied byte-identically from isolated worktree /workspace/scratch/c4dd29871d33/v54-wa30-baseline. Commands inside original receipts still name that worktree. Relative artifacts are retained at the same path; no original receipt was rewritten."
+}

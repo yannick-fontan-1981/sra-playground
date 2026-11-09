@@ -5,7 +5,8 @@ import type { Primitive } from '../src/logos-engine/ir.ts';
 
 test('all transferred SRC programs validate their exact source, semantic and transitive identities', async () => {
   const descriptions = nativeProgramDescriptions();
-  assert.equal(descriptions.length, 33);
+  // The prior 33 programs plus the four original Source81 workflows.
+  assert.equal(descriptions.length, 37);
   let executed = 0;
   for (const description of descriptions) {
     const callbacks: Record<string, Primitive> = Object.fromEntries(description.callbackRefs.map(id => [id, () => { executed++; throw new Error('No test capability is executable'); }]));

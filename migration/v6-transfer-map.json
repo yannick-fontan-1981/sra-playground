@@ -307,7 +307,8 @@
         "src/logos-engine/v6-native-caller.ts",
         "src/logos-engine/v6-native-transition-domain.ts",
         "src/logos-engine/v6-learned-preparation.ts",
-        "src/logos-engine/v6-program-control-discovery.ts"
+        "src/logos-engine/v6-program-control-discovery.ts",
+        "src/logos-engine/v6-reactive-contact.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -358,9 +359,18 @@
         "docs/migration/native-campaigns-v41/pipe-three-levels.json",
         "docs/migration/native-campaigns-v41/pipe-public-trace.json.gz",
         "scripts/compare-v41-radial-component.py",
-        "docs/migration/native-campaigns-v41/pipe-original-component-comparison.json"
+        "docs/migration/native-campaigns-v41/pipe-original-component-comparison.json",
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/compare-v54-reactive-public-evidence.py",
+        "docs/migration/native-campaigns-v54/final/re86-campaign.json.gz",
+        "docs/migration/native-campaigns-v54/final/execution-re86.json",
+        "docs/migration/native-campaigns-v54/final/reactive-original-comparison.json.gz"
       ],
-      "notes": "The native common coordinator is connected to the product runtime and shares the WHY/ACT memory. Every witnessed primitive is acquired once at its sealed prefix; Goal/Frontier evidence is replayed across natural level boundaries. First-prefix HANO, MEMO and ONDE comparisons match all eight caller components without loading oracle state. SupportNavigation and all 13 acquired children are connected. Shared RepeatedSeries acquisition currently covers occurrence recall, its ancestor reducers and coupled-pair anchors/response evidence. At the initial coordinator milestone, AddressedMaterial, FramedTransfer, TemporalSelection and other series producers remained pending, along with Morphology/control-target/parent-attention providers. v52 now connects the two declared FramedTransfer entries through one own state owner; the remaining providers and complete original common-caller selection remain outside that component verification. Bounded campaigns do not establish all-game V6 parity. v35 adds coupled support planning and auxiliary continuation in the single shared journal. Explicit V7 extension: the unchanged neutral entity-domain refusal becomes a retained unknown with complete public witnesses and no rule-registry update; this differs from the original caller fatal exception and is not exact out-of-domain parity. v39 adds observed-program acquisition in the same shared series owner and original post-acquisition stop/refutation checks. The v39 program-priority extension is generalized at v40 as retained_learned_preparation_before_unlearned_invitation. Only the first non-null window candidate in declared order may supply priority, and its provider must expose an acquired preparation witness: a retained fitted program or source-threshold, convergent occurrence correspondence without counterexamples. The current primitive guard must admit that same candidate. Read-only offers are cached for ordinary selection; the receipt references the real family_state node and revision. Physical binding, point guards, preservation, budgets and WHY/ACT still run normally. The fresh frozen 0.10.0 MEMO campaign completes three levels in 30 actions, one session, with 30 acquired prefixes and two boundary replays; the v39 baseline completes no level in seven actions. These are explicit native coordination evolutions and bounded integrated evidence, not original Python selection parity or additional transferred Python modules. v41 connects the radial source entry and expands the acquired-preparation witness to measured radial input effects; the unchanged original caller reproduces the seven-command PIPE invitation collision. The implementation manifest separately names measured_program_control_discovery and stationary_unlearned_contact_refusal_scope as native evolutions. The first issues one real unknown-control insertion or execution question only from a retained acquired editor context; insertion evidence does not define an operator law. The second retains the actual stationary unlearned contact return in revisioned Kernel evidence and may scope that specific refusal locally only when the first non-null declared window candidate supplies its own acquired-context witness and current primitive guard. Neither extension imports a new Python capability, changes a missing control into an operator by resemblance, or establishes full original caller parity. The separate fresh frozen native 0.11.0 common campaign completes three PIPE levels in 23 actions (4, 8, 11), with 20 sealed prefixes, 23 acquisitions and two natural boundary replays. The saved-evidence comparison matches all 23 commands, 24 complete public packets, 33 animation frames, public action domains, official boundaries and 20 executed prefix lengths to the unchanged isolated radial component, without normalization or action-domain projection. This is bounded native success and exact public-trajectory agreement with a component, not full original caller or all-game parity."
+      "notes": "The native common coordinator is connected to the product runtime and shares the WHY/ACT memory. Every witnessed primitive is acquired once at its sealed prefix; Goal/Frontier evidence is replayed across natural level boundaries. First-prefix HANO, MEMO and ONDE comparisons match all eight caller components without loading oracle state. SupportNavigation and all 13 acquired children are connected. Shared RepeatedSeries acquisition currently covers occurrence recall, its ancestor reducers and coupled-pair anchors/response evidence. At the initial coordinator milestone, AddressedMaterial, FramedTransfer, TemporalSelection and other series producers remained pending, along with Morphology/control-target/parent-attention providers. v52 now connects the two declared FramedTransfer entries through one own state owner; the remaining providers and complete original common-caller selection remain outside that component verification. Bounded campaigns do not establish all-game V6 parity. v35 adds coupled support planning and auxiliary continuation in the single shared journal. Explicit V7 extension: the unchanged neutral entity-domain refusal becomes a retained unknown with complete public witnesses and no rule-registry update; this differs from the original caller fatal exception and is not exact out-of-domain parity. v39 adds observed-program acquisition in the same shared series owner and original post-acquisition stop/refutation checks. The v39 program-priority extension is generalized at v40 as retained_learned_preparation_before_unlearned_invitation. Only the first non-null window candidate in declared order may supply priority, and its provider must expose an acquired preparation witness: a retained fitted program or source-threshold, convergent occurrence correspondence without counterexamples. The current primitive guard must admit that same candidate. Read-only offers are cached for ordinary selection; the receipt references the real family_state node and revision. Physical binding, point guards, preservation, budgets and WHY/ACT still run normally. The fresh frozen 0.10.0 MEMO campaign completes three levels in 30 actions, one session, with 30 acquired prefixes and two boundary replays; the v39 baseline completes no level in seven actions. These are explicit native coordination evolutions and bounded integrated evidence, not original Python selection parity or additional transferred Python modules. v41 connects the radial source entry and expands the acquired-preparation witness to measured radial input effects; the unchanged original caller reproduces the seven-command PIPE invitation collision. The implementation manifest separately names measured_program_control_discovery and stationary_unlearned_contact_refusal_scope as native evolutions. The first issues one real unknown-control insertion or execution question only from a retained acquired editor context; insertion evidence does not define an operator law. The second retains the actual stationary unlearned contact return in revisioned Kernel evidence and may scope that specific refusal locally only when the first non-null declared window candidate supplies its own acquired-context witness and current primitive guard. Neither extension imports a new Python capability, changes a missing control into an operator by resemblance, or establishes full original caller parity. The separate fresh frozen native 0.11.0 common campaign completes three PIPE levels in 23 actions (4, 8, 11), with 20 sealed prefixes, 23 acquisitions and two natural boundary replays. The saved-evidence comparison matches all 23 commands, 24 complete public packets, 33 animation frames, public action domains, official boundaries and 20 executed prefix lengths to the unchanged isolated radial component, without normalization or action-domain projection. This is bounded native success and exact public-trajectory agreement with a component, not full original caller or all-game parity. V54 adds one ReactiveContact acquisition owner after OutlineService in the same sealed transition journal. Every selected or foreign real return is recorded exactly once; foreign inputs retain a null selected reactive proposal. All thirteen source fields and the full native checkpoint are retained separately from source reasoning facts. Controlled common Kernel tests cover selected WHY/ACT, acquisition order and authoritative restore. The public comparison script starts from empty original source state and recomputes actual retained returns; this remains component acquisition evidence, not full original common-caller parity."
     },
     {
       "sources": [
@@ -419,15 +429,23 @@
         "agents/yf_arc3_v5/drm/runtime.py"
       ],
       "targets": [
-        "src/logos-engine/v6-drm-projector.ts"
+        "src/logos-engine/v6-drm-projector.ts",
+        "src/logos-engine/v6-drm-selection.ts",
+        "src/logos-engine/v6-selection-contracts.ts"
       ],
       "status": "partial_transfer",
       "proof": [
         "scripts/export-v6-drm-reference.py",
         "tests/fixtures/v6-drm-reference.json",
-        "tests/v6-drm-projector.test.ts"
+        "tests/v6-drm-projector.test.ts",
+        "scripts/export-v6-select-reference.py",
+        "tests/fixtures/v6-select-reference.json.gz",
+        "scripts/export-v6-select-builder-reference.py",
+        "tests/fixtures/v6-select-builder-reference.json.gz",
+        "tests/v6-select-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
       ],
-      "notes": "Only the generic projection/condition paths used in the current V6 morphology port are transferred; unported source claims/term-delta semantics remain explicit."
+      "notes": "Only the generic projection/condition paths used in the current V6 morphology port are transferred; unported source claims/term-delta semantics remain explicit. V54 additionally transfers the declared SELECT evaluator consumed by Source81: single admissible, eligibility-single, declared lexicographic order and symbolic partial-order outcomes, including reasons, comparison traces, hash-identity unresolved ties and preserved alternatives. Sixty-eight unchanged original evaluator/projection cases plus twenty-five original builder fixtures are retained. Exact comparisons are qualified to same-type JSON scalars and safe integers; Python numeric representation and arbitrary container repr remain outside the claim. The rest of the inherited DRM runtime/registry remains partial."
     },
     {
       "sources": [
@@ -436,15 +454,27 @@
       "targets": [
         "src/logos-engine/v6-src-program.ts",
         "src/logos-engine/interpreter.ts",
-        "src/logos-engine/v6/programs.json"
+        "src/logos-engine/v6/programs.json",
+        "src/logos-engine/v6-drm-selection.ts",
+        "src/logos-engine/v6-selection-contracts.ts"
       ],
       "status": "partial_transfer",
       "proof": [
         "scripts/export-v6-programs.py",
         "tests/v6-src-program.test.ts",
-        "tests/src-while.test.ts"
+        "tests/src-while.test.ts",
+        "scripts/export-v6-select-reference.py",
+        "tests/fixtures/v6-select-reference.json.gz",
+        "scripts/export-v6-select-builder-reference.py",
+        "tests/fixtures/v6-select-builder-reference.json.gz",
+        "tests/v6-select-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "scripts/export-v6-reactive-contact-source81-programs.py"
       ],
-      "notes": "Original declarative entry programs and V6 WHILE semantics execute natively. The development compiler remains Python; a full V5 source compiler port is not claimed."
+      "notes": "Original declarative entry programs and V6 WHILE semantics execute natively. The development compiler remains Python; a full V5 source compiler port is not claimed. V54 adds generic SELECT statement admission and pure authority invocation in the common interpreter, with original builder preflight before the callback. Four Source81 workflows are exported from the unchanged compiler and appended without changing the thirty-three existing compiled entries; six ContactPolicy workflows were already present. Source-facing policy receipts preserve the exact original workflow/src_hash/src_status/executed_statements fields before their use in source identities. The compiler and arbitrary Python runtime are still development references, not production dependencies."
     },
     {
       "sources": [
@@ -452,7 +482,8 @@
       ],
       "targets": [
         "src/logos-engine/v6-native-runtime.ts",
-        "src/logos-engine/v6-learned-preparation.ts"
+        "src/logos-engine/v6-learned-preparation.ts",
+        "src/logos-engine/v6-reactive-contact.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -468,9 +499,15 @@
         "scripts/replay-v6-original-public-caller.py",
         "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-collision.json",
         "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-oracle.json.gz",
-        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-report.json.gz"
+        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-report.json.gz",
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "docs/migration/v6-entry-point-progress.json"
       ],
-      "notes": "Sixteen outer strategy groups and implemented subgroup ordering are retained. All remaining providers, parent returns and cross-family interactions remain pending. The v39 retained_program_preparation_before_unlearned_invitation extension is broadened in v40 to retained_learned_preparation_before_unlearned_invitation. A read-only acquired witness and current guard must belong to the first non-null window candidate in declared order; an earlier unsupported candidate cannot borrow a later model. Unsupported providers are not speculatively crossed. The candidate remains subject to ordinary selection and WHY/ACT, and the receipt identifies its actual source family_state revision. Declared list order is preserved, but these native coordination extensions deliberately change selection relative to the original Python caller; no complete original selection parity is claimed. v41 registers radial_port_composition in its real window position and retains the same shared provider. Acquired radial preparation, measured_program_control_discovery and stationary_unlearned_contact_refusal_scope remain explicitly native coordination/inquiry behavior with ordinary authorization; they do not make this partial strategy mapping complete. The original full caller seven-command replay diagnoses its own invitation collision rather than proving native selection parity."
+      "notes": "Sixteen outer strategy groups and implemented subgroup ordering are retained. All remaining providers, parent returns and cross-family interactions remain pending. The v39 retained_program_preparation_before_unlearned_invitation extension is broadened in v40 to retained_learned_preparation_before_unlearned_invitation. A read-only acquired witness and current guard must belong to the first non-null window candidate in declared order; an earlier unsupported candidate cannot borrow a later model. Unsupported providers are not speculatively crossed. The candidate remains subject to ordinary selection and WHY/ACT, and the receipt identifies its actual source family_state revision. Declared list order is preserved, but these native coordination extensions deliberately change selection relative to the original Python caller; no complete original selection parity is claimed. v41 registers radial_port_composition in its real window position and retains the same shared provider. Acquired radial preparation, measured_program_control_discovery and stationary_unlearned_contact_refusal_scope remain explicitly native coordination/inquiry behavior with ordinary authorization; they do not make this partial strategy mapping complete. The original full caller seven-command replay diagnoses its own invitation collision rather than proving native selection parity. V54 registers reactive_contact_continuation and reactive_contact at their two exact material positions through one owner. The early entry preserves the original pre-call retained-dependency gate, allowed kinds and all four declared conditions; the later entry retains ordinary source proposal semantics. This adds two connected declarations (47/76, 61.8%) and no native priority rule. Other providers and whole strategic caller parity remain pending."
     },
     {
       "sources": [
@@ -921,15 +958,20 @@
         "agents/yf_arc3_v5/capabilities/navigation_transition_measurements.py"
       ],
       "targets": [
-        "src/logos-engine/v6-support-measurements.ts"
+        "src/logos-engine/v6-support-measurements.ts",
+        "src/logos-engine/v6-reactive-contact-geometry.ts"
       ],
       "status": "partial_transfer",
       "proof": [
         "scripts/export-v6-support-navigation-reference.py",
         "tests/fixtures/v6-support-navigation-reference.json.gz",
-        "tests/v6-support-navigation.test.ts"
+        "tests/v6-support-navigation.test.ts",
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
       ],
-      "notes": "Called routines only: measure_orthogonal_bands, enclosed_rendering_pixels, _support_transform, measure_current_translation_underlays and measure_remote_navigation_transition. No claim for other inherited functions."
+      "notes": "Called routines only: measure_orthogonal_bands, enclosed_rendering_pixels, _support_transform, measure_current_translation_underlays and measure_remote_navigation_transition. No claim for other inherited functions. V54 reuses the existing measure_current_translation_underlays transfer for ReactiveContact.relative, retaining only a unique current observed body translation in the same epoch and the exact matching support evidence. This adds a source-compared caller without expanding the inherited module claim."
     },
     {
       "sources": [
@@ -1293,7 +1335,8 @@
         "src/logos-engine/v6-alternating-graph-observation.ts",
         "src/logos-engine/v6-outline-geometry.ts",
         "src/logos-engine/v6-outline-identity.ts",
-        "src/logos-engine/v6-outline-rejoin.ts"
+        "src/logos-engine/v6-outline-rejoin.ts",
+        "src/logos-engine/v6-reactive-contact-geometry.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -1317,9 +1360,13 @@
         "scripts/export-v6-outline-rejoin-reference.py",
         "tests/fixtures/v6-outline-rejoin-reference.json.gz",
         "tests/v6-outline-rejoin-reference.test.ts",
-        "docs/migration/v53-outline-service-and-current-relations.md"
+        "docs/migration/v53-outline-service-and-current-relations.md",
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
       ],
-      "notes": "Only the V6 SimpleNamespace closure of _bounded_joint_peer_collision_route_candidates is transferred: supplied residual signs [1,-1], measured controls, first-member alignment, independent collisions, unmatched-floor-mixture exclusions, canonical BFS with one variant, bounded depth/expansion and wrapper-consumed replay counters. The disabled mixed-cell traversal branch retains supplied traversable refs. Other requests, tracking fallbacks, typed footprints, exact-terrain memory, variants and facts/causal overlays not returned by joint_route remain pending. V36 additionally transfers the full result of _alternating_material_graph_measurement for the exact V6 wrapper request: measured action translations, at most three additional cardinal-marker overlays, optional counterfactual exclusion, 512 expansions, depth 40, three route witnesses and description-bound ambiguity. The wider inherited interaction module remains partial. V53 additionally transfers the OutlineService-consumed closures of _compatible_control_zone_cell_routes and _compact_body_perimeter_marker_accompaniment: bounded residual BFS, measured translation quantum, swept-route facts, canonical memorial/identity measurements and current compact perimeter accompaniment. The strict V6 wrapper supplies its actual minimal canonical term and no previous_action_observed_frame; direct helper fixtures exercising broader declared fields do not prove that the original family supplies them. Source input bounds, including at most 64 observed controlled translations, are preserved without truncation. The separately enabled native public-context annex supplies only the immediately preceding actual public final raster to the already transferred V5 helper; its source-reference evidence qualifies that augmented helper input, not parity of the unchanged V6 wrapper or its caller. V53 also transfers the full _adjacent_unmarked_compact_body_capture measurement in v6-outline-rejoin.ts, including adjacent-capture and announced-cell-rejoin summaries, source ambiguity bounds and unchanged return semantics. Its independent original-Python fixture covers 49 cases: 37 controlled raster variants and 12 retained public scenes. The native v6-outline-access.ts extension uses the same visual motif and observed-announcement premise, but its distant approach, conditional recalled-control access and temporal observed-body access are not unchanged transfers of this source helper. Other interaction capabilities remain pending, and this mapping stays partial_transfer."
+      "notes": "Only the V6 SimpleNamespace closure of _bounded_joint_peer_collision_route_candidates is transferred: supplied residual signs [1,-1], measured controls, first-member alignment, independent collisions, unmatched-floor-mixture exclusions, canonical BFS with one variant, bounded depth/expansion and wrapper-consumed replay counters. The disabled mixed-cell traversal branch retains supplied traversable refs. Other requests, tracking fallbacks, typed footprints, exact-terrain memory, variants and facts/causal overlays not returned by joint_route remain pending. V36 additionally transfers the full result of _alternating_material_graph_measurement for the exact V6 wrapper request: measured action translations, at most three additional cardinal-marker overlays, optional counterfactual exclusion, 512 expansions, depth 40, three route witnesses and description-bound ambiguity. The wider inherited interaction module remains partial. V53 additionally transfers the OutlineService-consumed closures of _compatible_control_zone_cell_routes and _compact_body_perimeter_marker_accompaniment: bounded residual BFS, measured translation quantum, swept-route facts, canonical memorial/identity measurements and current compact perimeter accompaniment. The strict V6 wrapper supplies its actual minimal canonical term and no previous_action_observed_frame; direct helper fixtures exercising broader declared fields do not prove that the original family supplies them. Source input bounds, including at most 64 observed controlled translations, are preserved without truncation. The separately enabled native public-context annex supplies only the immediately preceding actual public final raster to the already transferred V5 helper; its source-reference evidence qualifies that augmented helper input, not parity of the unchanged V6 wrapper or its caller. V53 also transfers the full _adjacent_unmarked_compact_body_capture measurement in v6-outline-rejoin.ts, including adjacent-capture and announced-cell-rejoin summaries, source ambiguity bounds and unchanged return semantics. Its independent original-Python fixture covers 49 cases: 37 controlled raster variants and 12 retained public scenes. The native v6-outline-access.ts extension uses the same visual motif and observed-announcement premise, but its distant approach, conditional recalled-control access and temporal observed-body access are not unchanged transfers of this source helper. Other interaction capabilities remain pending, and this mapping stays partial_transfer. V54 additionally transfers exactly the route-grid closure consumed by ReactiveContact geometry.scene: one current canonical aligned box, measured/known translations, current last motion and retained geometry. Periodic grids, retained recount/grid references, interface deltas, fill-growth and cell-role inputs are empty at this call, so those inherited branches abstain. The resulting action-centered zero-gap grid is compared on translated and palette-mutated rasters with varied quanta. This does not transfer the general _action_quantized_route_grid_candidates or recount interfaces outside that constructed wrapper domain."
     },
     {
       "sources": [
@@ -1342,16 +1389,25 @@
         "agents/yf_arc3_v5/capabilities/contracts.py"
       ],
       "targets": [
-        "src/logos-engine/v6-coupled-pair-route.ts"
+        "src/logos-engine/v6-coupled-pair-route.ts",
+        "src/logos-engine/v6-reactive-contact-geometry.ts",
+        "src/logos-engine/v6-reactive-contact-source81-projection.ts"
       ],
       "status": "partial_transfer",
       "proof": [
         "scripts/export-v6-coupled-pair-route-reference.py",
         "tests/fixtures/v6-coupled-pair-route-reference.json.gz",
         "tests/v6-coupled-pair-route.test.ts",
-        "docs/migration/v35-coupled-support.md"
+        "docs/migration/v35-coupled-support.md",
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts"
       ],
-      "notes": "Only the public geometric values and bounds consumed from FrameGrid, BoundingBox and KnownGridCellRecountInput in V6 joint_route are represented, including positive extents and the 4096-cell bound. This is not a general Pydantic or contract-system replacement."
+      "notes": "Only the public geometric values and bounds consumed from FrameGrid, BoundingBox and KnownGridCellRecountInput in V6 joint_route are represented, including positive extents and the 4096-cell bound. This is not a general Pydantic or contract-system replacement. V54 additionally represents the finite FrameGrid/component/periodic-grid/InteractionProbeInput values constructed by the ReactiveContact and Source81 wrappers. Their absent optional source inputs keep their original empty defaults. General Pydantic coercion, arbitrary reference types and unused contract classes remain outside the transfer."
     },
     {
       "sources": [
@@ -2484,8 +2540,8 @@
         "scripts/compare-v52-final-framed-public-evidence.py",
         "docs/migration/native-campaigns-v52/attempt9/phased-reception-contract-comparison.json",
         "docs/migration/native-campaigns-v52/attempt9/directed-composition-contract-comparison.json",
-        "docs/migration/native-campaigns-v52/attempt9/framed-transfer-original-comparison.json",
-        "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json",
+        "docs/migration/native-campaigns-v52/attempt9/framed-transfer-original-comparison.json.gz",
+        "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json.gz",
         "docs/migration/native-campaigns-v52/attempt9/gare-public-trace.json.gz"
       ],
       "notes": "The three own FramedTransfer modules are compared with unchanged pinned Python on finite public rasters and exact safe-integer identity operands. The independent fixture has 141 geometry/mechanics cases, 52 policy/SRC cases, 78 memory/guard cases, 100 initial public views and 8769 exact JSON identity recipes; the reference suite passes 283 checks. Coverage includes complete source proposals, temporal component correspondence and ambiguities, point spans, framed masks and replacements, regional and parallel-band reception, measured work bounds, policy selection/projection/claims, both actual SRC workflows, current primitive guards, passive acquisition and all six retained source-state fields. Only the consumed four route contracts, local framed.drm/framed.src declarations, selected V5 projections, record policies and meaning rules are transferred into the native registry; this does not transfer the full V5 production registry or certify every inherited dependency module. The V5 mechanical routines called by this component are compared at the declared bounded input contracts; their containing modules retain their separate mapping status. Restoring an original short SRC receipt and repeating an identical acquired return preserves source deduplication while the full native receipt remains retained; only ten enumerated native annotations at derivation.workflow are excluded from source record equality, and unknown or out-of-path fields remain significant. The original isolated GARE component stops after twelve actions and one completed level at an ambiguous current-description guard; the isolated LKEY component abstains after two actions with no completed level. These isolated source failures are retained and do not establish a three-level original campaign. Separate final native evidence is qualified below. The strict source guard remains the default and is available as beforeSource. An explicitly enabled native current-point witness binding may resolve multiple current descriptions only when every description denotes the same physical command/support and exactly one matches the complete selected current point binding; its separate receipt is not source parity. The two connected declared entries share one native FramedTransfer state owner. Generic control/role hypotheses remain conditional, historical portable receipts do not authorize a current action, and ordinary Kernel WHY/ACT and actual public-return acquisition still apply. No fixed game identifier, level route, semantic palette or authored action sequence selects this family. General Python numeric identity, complete original common-caller selection parity and all-game success are outside this component mapping. The separate final 181-file native snapshot e32656de6ab64b0f6bdf8188e7bdeac06b4b3063c0bfb6d5531484cefb900f60 completes the first three GARE levels in 53 actual actions and 53 acquired prefixes (7/9/37), in one cold continuous session, stopping with NOT_FINISHED on entry to level 4. Its independent final comparison checks all 54 complete public packets, 235 animation frames and 53 source acquisitions/checkpoints, including 15 passive foreign prefixes. Of 38 Framed proposals, 31 equal the strict original proposal and seven use explicitly verified native extensions; eight retained native guards are compared separately. Five independently measured annex receipts comprise three stationary observations and two phased directed-only observations. The latter retain contextual appearance and signed passage without asserting global component identity or a control law, and never enter original directionless candidates. A separate native composition prepares one current uniform receiver, then recomputes from its real return before an independent current discrimination question; all compatible offsets remain explicit, the complete original point-span measurement is unchanged, and preparing a receiver never claims a reception. Both controlled extension comparisons and all 2103 qualified trajectory identity recipes pass. These native acquisition/coordination helpers are not additional transferred Python modules, unchanged original-caller parity or all-game success."
@@ -2619,6 +2675,295 @@
         "docs/migration/native-campaigns-v53/attempt2/outline-service-original-comparison.json.gz"
       ],
       "notes": "Only the current-box invocation of measure_contact_overlay_supports consumed by the Outline route helper is transferred as currentContactOverlaySupports, preserving measured role-premise bindings, component/shape checks and source bounds (more than 128 components or eight bindings yields no support). Point-driven and prior-sprite branches are not implemented or claimed. The strict Outline wrapper supplies minimal canonical terms without the role-premise fields needed by this overlay branch; broader controlled helper fixtures qualify the bounded current-box helper domain, not an acquisition path used by the original family. The remaining enclosure-family capabilities are untransferred."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/reactive_contact/family.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-reactive-contact.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/native-campaigns-v54/final/re86-campaign.json.gz",
+        "docs/migration/native-campaigns-v54/final/execution-re86.json",
+        "docs/migration/native-campaigns-v54/final/reactive-original-comparison.json.gz"
+      ],
+      "notes": "Complete local ReactiveContact family port with thirteen original source fields, source current/propose/before/after/record behavior and one native owner for both declared material entries. Independent original cases compare full source offers, guards, return events, receipts, identity-bearing state and natural epoch resets. Three separate common Kernel tests verify exact-once passive acquisition and selected source execution through WHY/ACT. Source fixtures are synthetic component states, never campaign seeds. Inherited helper domains remain separately partial, and no full original common-caller or all-game parity follows."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/reactive_contact/policy.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-policy.ts",
+        "src/logos-engine/v6/reactive-contact-policy.json",
+        "src/logos-engine/v6/programs.json"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ],
+      "notes": "Complete local ContactPolicy with six unchanged original SRC workflows and exact contact.drm configuration. Only two V5 interaction.drm fact projections are consumed: declaration 217 projections 1015 and 1016, current_contact_opens_local_mechanism_question and reactive_escape_opens_contact_manipulation_question. Source-facing receipts have the original four fields so nested control/recipe identities remain literal; native handle receipts are separate. The 272 independent original contact/geometry cases plus pinned-subset and immutability checks do not establish the full production DRM registry."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/reactive_contact/geometry.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-geometry.ts",
+        "src/logos-engine/v6-reactive-contact-measurements.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts"
+      ],
+      "notes": "Complete local geometry wrapper: digest, unique entities, patch/rectangular mask, movement and relative pursuit, current scene/routes, current body/member scene and unique relative-peer binding. Its inherited action-grid and consumption-path helpers are implemented only on the fields and fixed defaults actually constructed by this wrapper; those larger V5 modules retain partial mappings. Existing exact component records and current support-underlay measurement are reused. Independent original tests retain ambiguity, source route ordering and evaluation counts, available-input conditions, transformed rasters and original source hashes."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/reactive_contact/parent_return.py",
+        "agents/yf_arc3_v6/morphology_policy/reactive_contact/escape_domain.py",
+        "agents/yf_arc3_v6/morphology_policy/reactive_contact/stationary_return.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-parent.ts",
+        "src/logos-engine/v6-reactive-contact-escape.ts",
+        "src/logos-engine/v6-reactive-contact-stationary.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts"
+      ],
+      "notes": "Complete three local V6 return modules: parent current binding/offers/reconciliation, real occupied-mask finite escape projection, selected stationary preparation, loaded return, inverse return and independent member tests. Current scope, exact observed entity correspondence, support evidence, incomplete topology and changed/recolored subjects preserve source refusal semantics. The family fixture has 53 original component cases; Source81 tests additionally exercise loaded records and retained continuations. Conditional geometry is never asserted as acquired capture, detachment or a guaranteed future outcome. The inherited EscapeTopologyDomain general model-validation system remains separately partial."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/reactive_contact/source81_policy.py",
+        "agents/yf_arc3_v6/morphology_policy/reactive_contact/source81_context.py",
+        "agents/yf_arc3_v6/morphology_policy/reactive_contact/source81_projection.py",
+        "agents/yf_arc3_v6/morphology_policy/reactive_contact/source81_independent.py",
+        "agents/yf_arc3_v6/morphology_policy/reactive_contact/source81_execution.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-source81-policy.ts",
+        "src/logos-engine/v6-reactive-contact-source81-context.ts",
+        "src/logos-engine/v6-reactive-contact-source81-projection.ts",
+        "src/logos-engine/v6-reactive-contact-source81-execution.ts",
+        "src/logos-engine/v6/programs.json"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-programs.py",
+        "tests/v6-reactive-contact-kernel.test.ts"
+      ],
+      "notes": "Complete local Source81 workflow, context, projection, independent binding and execution modules on their consumed finite public inputs. Four original DRM documents and SRC workflows drive generic native projection/SELECT; full source receipts and offer identities are compared literally. The independent original fixture contains 193 cases (prepare24, continuation18, revision14, project1, projection56, independent4, joined8, materialize8, offer12, before32, after12, record4) plus a pinned-source byte check. It covers transformed public rasters, positive grasp/loaded offers, current and unavailable/stale guards, retained continuation and whole-family records. Broader private Source81 measurement modules are explicitly partial, and no complete original caller or live-game efficacy is inferred."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/reactive_contact/_source81/prospective_grasp.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-source81-measurements.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ],
+      "notes": "Only the query closure actually reached by source81_project is transferred: bound-pair peer inventory, peer-access inventory and selected route materialization. The fixed source query leaves pending-motion recall, current-clearance, preserved-effect and generic support-delivery branches disabled. Candidate inventory and geometry are independently compared with original output; no arbitrary measure_prospective_grasp input domain or whole private source module parity is claimed."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/reactive_contact/_source81/operator_cell_support.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-source81-measurements.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ],
+      "notes": "Consumed measure_cell_support_model and normalized_cell_pattern calculation only, including current observed support, unique background, occluded-cell ambiguity and finite connected regions. General measure_cell_support_contacts and measure_body_cell_pattern_types capabilities are not ported or claimed."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/reactive_contact/_source81/peer_constraint_geometry.py",
+        "agents/yf_arc3_v6/morphology_policy/reactive_contact/_source81/unbound.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-source81-measurements.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ],
+      "notes": "Consumed finite source81_project domains only: cell-domain construction, distances/reachability, stationary contrasts, independent inventory and unbound peer-access projection with its fixed operator query. The original fixture includes direct independent inventories and complete projection/materialization outputs. Wider caller-supplied model/contract semantics and unused generic query options remain outside this consumed-closure claim."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/reactive_pursuit_observation.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-measurements.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ],
+      "notes": "The complete measure_reactive_pursuit_observation routine consumed by V6 is transferred, including relative displacement, counteracted approach, pixel-contact witnesses and missing-prior/grid qualification. attach_reactive_pursuit_observation agenda mutation is not transferred. Synthetic before/after public rasters compare the exact measurement; it supplies no control role, acquired manipulation claim or action authority."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/rigid_grasp_geometry.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-measurements.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts",
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts"
+      ],
+      "notes": "Only occupied_union, translated_mask, support_collisions and candidate_grasp_roots are transferred for the reactive closure. Occupied support remains distinct from blocked/unknown evidence; bounded grasp root enumeration preserves original ordering and work count. Quarter turns, footprint/contact measurement, general RigidGraspGeometry models and measure_rigid_grasp_geometry are not part of this transfer."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/autonomous_consumption_d.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-geometry.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ],
+      "notes": "Only _consumption_paths and _consumption_path on the graph constructed by ReactiveContact.routes are transferred: admitted minus excluded cells plus the current body, no blocked nodes, one constant room, sorted neighbor order and depth bound max(1,node count). Three original geometry.routes cases compare paths, BFS order, edge/node evaluations and truncation. The general ConsumptionGraphD validator, mode/journey relations and autonomous consumption engine are not transferred."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/escape_topology.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-escape.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ],
+      "notes": "measure_escape_topology and the source domain checks used by V6 escape_domain.project are transferred on finite plain-JSON geometry. Six original topology cases and five current/stale/missing-evidence escape projections compare complete, incomplete, blocked and unknown successor results and evaluation count. General Python/Pydantic coercion and arbitrary Ref validation are outside the claim; this does not establish capture or all-domain model equivalence."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/routing.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-source81-measurements.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ],
+      "notes": "The finite_grid_reachability FIFO closure consumed by Source81 is represented with canonical action order, exact distances, all shortest first steps and the first canonical route witness. It runs on the already qualified finite cell domain supplied by source81_project. Viewport support-terrain measurement, the general ReachabilityInput validator and other routing capabilities are not transferred."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/operators/selection_projection.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-drm-selection.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-select-reference.py",
+        "tests/fixtures/v6-select-reference.json.gz",
+        "scripts/export-v6-select-builder-reference.py",
+        "tests/fixtures/v6-select-builder-reference.json.gz",
+        "tests/v6-select-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ],
+      "notes": "Complete mechanical SELECT output projection on admitted native JSON alternatives and a declared selection result: canonical alternative order, explicit unresolved-choice refusal, selected-reference membership, live alternatives, preserved alternatives, reasons and comparison trace. Independent unchanged original evaluator/projection cases and original builder cases are retained. This is pure symbolic projection; the durable original Logos operator lineage is not transferred by this module claim."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/operators/contracts.py",
+        "agents/yf_arc3_v5/scheduler/operator_builders.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-selection-contracts.ts",
+        "src/logos-engine/interpreter.ts",
+        "src/logos-engine/v6-drm-selection.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-select-reference.py",
+        "tests/fixtures/v6-select-reference.json.gz",
+        "scripts/export-v6-select-builder-reference.py",
+        "tests/fixtures/v6-select-builder-reference.json.gz",
+        "tests/v6-select-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ],
+      "notes": "Only SelectionInput/SelectRequest/selection witness payload contracts and the SELECT builder preflight are transferred. The native interpreter checks evaluated clauses before any authority callback: absent defaults, explicit null rejection, scalar/finite-list references, whitespace normalization, duplicates, indexed facts and witness scope preserve original source distinctions. Sixty-eight original evaluator cases and twenty-five independent original builder cases support 114 SELECT checks. The domain is safe JSON integers/scalars; arbitrary Python container repr, all other operator builders/contracts and durable Logos request lineage remain untransferred."
     }
   ],
   "scopeNotes": [
@@ -2660,12 +3005,15 @@
     "v49 connects occluded_catalogue_composition at its declared first window position and restores the source catalogue-view fallback after common ViewFrontier. The four-list connection metric becomes 40 of 76 (52.6%) in native implementation 0.19.0. The direct view fallback is outside that denominator. No new game-specific or cold-start coordination rule is added; actual common acquisitions supply initial effects. All six complete-migration gates remain false.",
     "v50 connects typed_material_flow at its declared window position, with three own carrier/material/pose memory layers in the existing common owner. The four-list connection metric becomes 41 of 76 (53.9%) in native implementation 0.20.0. Finite native numeric identities and lexical-hash tie differences are explicit; no complete Python numeric or full common-caller parity is claimed. Actual native LIFE results and any coordination extensions are reported separately. All six complete-migration gates remain false.",
     "v50 also declares transient_returned_unlearned_contact_refusal_scope as a native coordination evolution, not original Python caller parity. It retains every public frame, final protocol, command and actual Kernel transition, distinguishing transient return from a stationary observation. The first non-null current window question remains in declared order. A cold typed relation must be remeasured and have supports disjoint from both the invitation point and every transient effect pixel. Subsequent questions require event-backed acquired context and current guards. Returning to the same public image does not establish hidden-state equivalence or an understood effect. The first actual native LIFE failure remains preserved separately from the corrected frozen campaign; all six complete-migration gates remain false.",
-    "v51 connects field_service_composition in native implementation 0.21.0. The four-list connection metric becomes 42 of 76 entries (55.3%); it measures connected entry points, not whole-code completion or game success. Own nested-control, envelope, service and transfer evidence belongs to the same common memory. The independent original component and actual native common-caller campaign are reported separately. Numerical identity and inherited-caller limitations remain explicit, and all six complete-migration gates remain false. The frozen 172-file native source completes VALV levels 1\u20133 in 28 actions (10/10/8), 28 acquired prefixes, 63 own events and two natural-boundary replays. The isolated original component independently produces the same 28 commands and 29 complete public packets (238 frames); its complete strategic caller is outside this comparison. No new native priority rule is introduced in v51.",
+    "v51 connects field_service_composition in native implementation 0.21.0. The four-list connection metric becomes 42 of 76 entries (55.3%); it measures connected entry points, not whole-code completion or game success. Own nested-control, envelope, service and transfer evidence belongs to the same common memory. The independent original component and actual native common-caller campaign are reported separately. Numerical identity and inherited-caller limitations remain explicit, and all six complete-migration gates remain false. The frozen 172-file native source completes VALV levels 1–3 in 28 actions (10/10/8), 28 acquired prefixes, 63 own events and two natural-boundary replays. The isolated original component independently produces the same 28 commands and 29 complete public packets (238 frames); its complete strategic caller is outside this comparison. No new native priority rule is introduced in v51.",
     "v52 connects observed_framed_transfer and observed_framed_analogy to one FramedTransfer owner at their declared positions, giving 44 of 76 connected entries (57.9%) in native implementation 0.22.0. The three own source modules are component_verified on independently generated bounded contracts; V5 dependency modules and the whole common caller keep their separate qualifications. The strict source GARE component stops at twelve actions and one level, and the separately preserved native target-three attempt on the frozen c227cb63aa743ed5790acc7e0cb825e107a4a6ac87471754a3216084ff224bf2 source stops after 77 actions and two completed levels at the level-three active-time budget. This attempt is failed, not a three-level completion or full-game WIN. Initialization, strict-guard and heap-exhaustion failures remain separate evidence. Native current-point witness binding and bounded reduction-search abstention are explicitly declared extensions, not new Python transfers or full original-caller parity. All subsequent attempts retain separate source snapshots and public evidence. The final successful attempt is qualified in the following note; all six complete-migration gates remain false.",
-    "The separately frozen final v52 attempt9 completes GARE levels 1\u20133 in 53 actions (7/9/37), 53 prefixes and one cold continuous session on native digest e32656de6ab64b0f6bdf8188e7bdeac06b4b3063c0bfb6d5531484cefb900f60, with 181 native files. It enters level 4 with NOT_FINISHED at its declared three-level target, not full-game WIN. The complete 54-packet/235-frame trajectory retains the original isolated component's first 12 commands and 13 packets exactly. Original six-field acquisitions and all 53 native checkpoints are independently recomputed; 47 original records, three stationary annex observations and two phased directed-only observations are distinct domains. Seven of 38 executed Framed proposals differ from strict source, with eight explicit native guard receipts. The directed composition uses one real receiver preparation and then one current question retaining both competing offsets; it stores no future action sequence and claims no reception before the real return. The entry metric remains 44/76 (57.9%), and all six complete-migration gates remain false. Earlier initialization, guard, heap, budget and priority-regression failures remain preserved with their exact historical source archives; their evidence is not replaced by this success.",
+    "The separately frozen final v52 attempt9 completes GARE levels 1–3 in 53 actions (7/9/37), 53 prefixes and one cold continuous session on native digest e32656de6ab64b0f6bdf8188e7bdeac06b4b3063c0bfb6d5531484cefb900f60, with 181 native files. It enters level 4 with NOT_FINISHED at its declared three-level target, not full-game WIN. The complete 54-packet/235-frame trajectory retains the original isolated component's first 12 commands and 13 packets exactly. Original six-field acquisitions and all 53 native checkpoints are independently recomputed; 47 original records, three stationary annex observations and two phased directed-only observations are distinct domains. Seven of 38 executed Framed proposals differ from strict source, with eight explicit native guard receipts. The directed composition uses one real receiver preparation and then one current question retaining both competing offsets; it stores no future action sequence and claims no reception before the real return. The entry metric remains 44/76 (57.9%), and all six complete-migration gates remain false. Earlier initialization, guard, heap, budget and priority-regression failures remain preserved with their exact historical source archives; their evidence is not replaced by this success.",
     "V53 adds the strict observed_outline_service entry with its two own Python modules component_verified and only bounded consumed closures of V5 interaction.py, entity_identity.py and enclosure_family.py marked partial_transfer. Initial source contracts, the separate literal remote-count correction and the exact attempt2 original-component comparison are distinct evidence. The initial large gzip fixture is stored losslessly via its .parts.json manifest and byte parts, without changing expected values. Exact selected source proposals and seven-field acquisitions/checkpoints do not imply complete caller parity: raw ordinary native guard/outcome values were not retained, so the original guards/outcomes are recomputed only for compatibility with actual dispatch/sealing. The two ESCT attempts used for those original-component comparisons, attempt1 and attempt2, complete zero levels. Later campaign history is separately retained in docs/migration/v53-outline-service-and-current-relations.md: attempt3 and interrupted attempt5 each record one completed ESCT level; attempt4 and the attempt5 KEYD run remain interrupted with zero completed levels. Attempt6 completes one ESCT level and fails its three-level target at the level2 active-time budget after 117 actions and 381.55 cumulative active seconds. Attempt7 final-source CN04 passes its three-level target through the existing port_assembly provider; its result and the 45/76 connection audit have separate receipts and are not inferred from Outline component tests. Attempt7 ESCT and final release checks remain pending. No complete-migration gate is inferred from these component or campaign results.",
     "V53 native coordination is a separate scope from strict Outline transfer. A source-derived V5 continuation subset supports a current-service preference; a second explicit subset reuses projection1296/tier19 and order19/20 for the current obstructing-inset operator question. Their unchanged-Python condition/projection/tier receipts are bounded declarative evidence, not full V5 selection or original V6 caller parity. The optional public-transition annex retains the immediately preceding actual public final raster and its current scope, outside the seven-field source state; the original V6 wrapper does not supply that raster. After an actual selected access question, the annex may also retain its bounded access_relation, validated against the prior observation, row hash, scope, selected command and guard. Each selected primitive refreshes this relation; no recursive prior-access chain or future route is retained. The annex binds only the 16-character JSON public-frame identifier. Its producer declines alternate caller hash domains, including the full NumPy rowsDigest, without rewriting observations or interrupting ordinary source acquisition; stale annex evidence is cleared. Supported-domain byte mismatches and malformed restored annexes still fail the same strict validation. Native proposals requiring a current-service witness must pass the common admission gate, current remeasurement, per-primitive guards and WHY/ACT. The V6 current-trial witness requires an actual current frontier occurrence and an untried command in that exact public protocol; any retained prior attempt removes that preference. Its explicitly distinct effect inventory covers actual caller edges in the current epoch and score, retaining a positive observation only when the final frame hash changes; unchanged or transient-returning frames remain unknown. The trial and effect domains do not claim V5 producer/context parity, universal causation or action authority. Current questions retain one primitive, replan on the real return and assert no future effect or stored winning route. The exact V5 recovery subsets separately retain interaction.drm declaration217 projections624/666 with tier15, projections1300/1301 with tier16, and projections1298/1299 with tier17. Their 59 original-evaluator cases and the 49 original-Python rejoin geometry cases do not prove whole-policy selection or unchanged V6 caller ordering. Native access applies only when no transferred service or recovery proposal applies and an actual historical local method is available. It distinguishes current reacquired control from a unique current revalidation of recalled control; the latter has historical evidence but no acquired current deltas and uses explicitly revisable interface priors. Measured conflicting directions cannot be overwritten by those priors. Its announced-cell question targets a current visible singleton in an exact unique body/marker/perimeter motif. Its separately named current_observed_body_access_question targets the actual current solid body only after an adjacent public transition in the same epoch and score revalidates an exact previous selected relation or observed motif. The body must be unchanged or have moved exactly to the preceding observed singleton; missing current marker fields remain null. A boundary-only recalled context has before/command null and cannot supply that temporal fallback. Only current final public rasters qualify; intermediate animation frames do not. Both access modes select one in-bounds lattice-aligned distance-reducing primitive and claim no safe route or guaranteed effect. Attempt7 adds native v6-outline-arrival.ts, absent from frozen attempt6. It requires the actual selected observed-body access return to reach its prior body cell, reacquired control, an unchanged unique compatible perimeter, current same-value inset remnants and visibly changed inset pixels. It asserts no complete current body, survival, identity or capture. V5 principle.effectful_local_operator_transfers_to_new_changed_bfs_endpoint motivates the question, but exact_source_projection_matched remains false: no standard completed-BFS endpoint is supplied. The service separately revalidates one currently available input with positive historical local-method evidence, a complete current effect inventory without a competing observed local operator, and the actual untried caller context. Unknown other-input effects remain unknown; historical effects never become fabricated current-epoch inventory. The one conditional local question retains recovery.contact, not a new access relation, and still requires ordinary preservation and WHY/ACT. These native helpers are not additional transferred Python modules. All six completion gates remain false.",
-    "V53 final-source validation: attempt7 freezes 195 native files at digest d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70, implementation logos-engine.typescript.v6.native-migration/0.27.0. The independent cold CN04 execution receipt confirms unchanged native source and execution code, 73 actions from port_assembly, three completed levels with 18/31/24 actions, 29 prefixes and one session. Its public result is level 4 NOT_FINISHED with target_levels_completed, not full-game VICTORY. No action sequence, learned checkpoint, Python agent or level jump is supplied. This supports the existing integrated port-assembly capability and does not establish Outline efficacy or full V6 parity. The actual entry audit records 45/76 connected declarations (59.2%); recovery, access, arrival and this campaign add no further declared entry. The actual-browser receipt on the same frozen source independently records three Run to next level clicks from level 1, counters 18/1 then 49/2 then 73/3, 29 completed plans and entry to level 4, with inspection closed. Its single 384x384 canvas sample at a 1363x936 viewport is not a responsive or performance benchmark. The targeted delta suite passes 3611 tests; typecheck, audits and production build pass. All nine recorded trajectories retain their commands and official results, with the original comparison-domain failures and their explicit LIFE/GARE resolutions preserved in regression-final-summary.json. ESCT completes only L1 in 16 actions, then stops at the L2 active-time budget after 113 total actions; it is not a three-level success. Publication is tracked by the saved Site version separately from these immutable execution receipts. All six completion gates remain false."
+    "V53 final-source validation: attempt7 freezes 195 native files at digest d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70, implementation logos-engine.typescript.v6.native-migration/0.27.0. The independent cold CN04 execution receipt confirms unchanged native source and execution code, 73 actions from port_assembly, three completed levels with 18/31/24 actions, 29 prefixes and one session. Its public result is level 4 NOT_FINISHED with target_levels_completed, not full-game VICTORY. No action sequence, learned checkpoint, Python agent or level jump is supplied. This supports the existing integrated port-assembly capability and does not establish Outline efficacy or full V6 parity. The actual entry audit records 45/76 connected declarations (59.2%); recovery, access, arrival and this campaign add no further declared entry. The actual-browser receipt on the same frozen source independently records three Run to next level clicks from level 1, counters 18/1 then 49/2 then 73/3, 29 completed plans and entry to level 4, with inspection closed. Its single 384x384 canvas sample at a 1363x936 viewport is not a responsive or performance benchmark. The targeted delta suite passes 3611 tests; typecheck, audits and production build pass. All nine recorded trajectories retain their commands and official results, with the original comparison-domain failures and their explicit LIFE/GARE resolutions preserved in regression-final-summary.json. ESCT completes only L1 in 16 actions, then stops at the L2 active-time budget after 113 total actions; it is not a three-level success. Publication is tracked by the saved Site version separately from these immutable execution receipts. All six completion gates remain false.",
+    "V54 connects reactive_contact_continuation and reactive_contact through one public_reactive_contact owner at their exact source material positions in native implementation 0.28.0, advancing the declared-entry connection metric to 47/76 (61.8%). All thirteen source state fields, source-facing four-field workflow receipts, current guards and selected/passive sealed acquisitions are retained. Independently generated source evidence comprises 272 Contact/geometry cases, 53 family/return cases and 193 Source81 cases, with 527 reactive checks including three common Kernel tests. Generic SELECT adds 68 original evaluator/projection cases and 25 original builder cases, with 114 checks on its documented native scalar domain. The four original Source81 workflows extend the compiled bundle from 33 to 37 entries; no existing entry is replaced. Inherited interaction, prospective-grasp, cell-support, routing, rigid geometry, consumption and escape contract modules retain partial consumed-domain mappings. No whole original strategic caller, arbitrary Python numeric/validation semantics, full-game result or complete-migration gate is inferred.",
+    "V54 candidate study: unchanged published v53 completes WA30 level1 in 31 actions, then reaches natural GAME_OVER on level2 after 101 total actions. The candidate is closed after approximately eight minutes twenty seconds, before the user forty-minute limit. The next unchanged v53 baseline completes RE86 levels1–3 in 26/47/61 actions (134 total), 46 prefixes and about 122 seconds through the existing generic constellation_cover provider. These are separately retained baselines; final frozen v54 execution and original ReactiveContact public-return comparisons remain separate evidence. The 210-file final native source digest is 059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a. No native source/game-result claim is inferred merely from the freeze.",
+    "The final frozen v54 RE86 campaign passes its declared first-three-level target in one cold continuous session: 26/47/61 actions (134 total), 46 sealed prefixes, 134 actual acquisitions and two caller boundary replays. It enters level4 with NOT_FINISHED and target_levels_completed, not full-game victory. Native source and execution code are unchanged on digest 059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a (210 files). All 46 selected prefixes use the existing constellation_cover provider. The independent unchanged original ReactiveContact replay starts empty and matches 134 source records, all thirteen fields and the full native checkpoint at 46 prefixes, three official-boundary events/source epoch resets, and the complete 135-packet/138-frame public journal. It verifies all 1786 pinned files before and after, with 736 imported original source files. There are no reactive selections or planning calls on this trajectory; this is exact passive acquisition evidence, while positive reactive behavior is verified separately by component and Kernel tests. It does not establish reactive game efficacy, complete original-caller parity or any of the six still-false complete-migration gates."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,

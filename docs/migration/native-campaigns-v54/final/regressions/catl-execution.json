@@ -1,0 +1,116 @@
+{
+  "game": "CATL",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/native-campaigns-v53/attempt7/regressions/catl-replay.json.gz",
+    "docs/migration/native-campaigns-v45/catl-public-trace.json.gz",
+    "docs/migration/native-campaigns-v54/final/regressions/catl-replay.json.gz"
+  ],
+  "startedAt": "2026-11-09T12:24:47.790238+00:00",
+  "finishedAt": "2026-11-09T12:28:07.170246+00:00",
+  "elapsedSeconds": 199.3800142380005,
+  "exitCode": 0,
+  "timeoutSeconds": 2400,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/catl-replay.json.gz",
+    "sha256": "c4d9aa435ed3b4d8170493325dcf94b4f07c81ad55d613a51dfa8479b16a7740",
+    "bytes": 241912
+  },
+  "trace": {
+    "path": "docs/migration/native-campaigns-v45/catl-public-trace.json.gz",
+    "sha256": "da5c6c585b0369f25c8aabd9a0ce05bacbccbf315059682e29d5d8fb7693e63e",
+    "bytes": 38151
+  },
+  "output": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/catl-output.log.gz",
+    "sha256": "afae818dfc8b4a5a0b89ccf31db5ec6de4570473ac9f7a70996df8d77bb3e8db",
+    "bytes": 6182
+  },
+  "passed": true,
+  "memory": {},
+  "report": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/catl-replay.json.gz",
+    "sha256": "e3ef339b5f830f3833278c26c1bf2decd2a9387ff8373be0aa545969c544d4e8",
+    "bytes": 313484
+  },
+  "status": "passed",
+  "actions": 48,
+  "prefixes": 48,
+  "final": {
+    "actions": 48,
+    "levelsCompleted": 6,
+    "level": 6,
+    "state": "WIN",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 149.23468878000008,
+    "prefixes": 48,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 48,
+      "boundaryReplays": 5,
+      "goalEvents": 6,
+      "frontierDeltas": 97,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 49
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 49
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 29
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 43
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 1
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 50
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 48,
+      "resume": 47
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.28.0"
+  },
+  "comparison": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/catl-comparison.json",
+    "sha256": "b9e71cbbfcd535fcb5c1524d3e253485ac043f1104960408a0b69b9b85ab2022",
+    "bytes": 9094
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "immutableInputsUnchanged": true
+}

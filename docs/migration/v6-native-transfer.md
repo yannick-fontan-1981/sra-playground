@@ -11,7 +11,32 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v53):** the native common Logos Engine caller
+**Current integrated milestone (v54):** the native common Logos Engine caller
+completes **RE86's first three levels in 134 actions (26, 47, 61)** in one cold
+continuous session, with 46 acquired prefixes, 134 actual Kernel acquisitions
+and two natural boundary replays. The
+[actual campaign](native-campaigns-v54/final/re86-campaign.json.gz) and
+[execution receipt](native-campaigns-v54/final/execution-re86.json) bind the
+result to unchanged implementation `0.28.0`, native digest
+`059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a`.
+The target stops on entry to level 4 with `NOT_FINISHED`. All inputs come from
+the existing generic `constellation_cover` provider in the common caller.
+
+The newly connected `reactive_contact_continuation` and `reactive_contact`
+entries share one original 13-field owner and retain their declared positions.
+Their consumed V5/V6 closure includes current contact geometry, parent return,
+escape and stationary return, and Source81 preparation and reconciliation.
+Generic SRC `SELECT` and declared policy evaluation use the common interpreter
+and registry, including original request admission and explicit unresolved ties.
+Four original Source81 workflows join the prior 33 unchanged bundle entries.
+RE86 success is separate from ReactiveContact's original component comparisons;
+the result is not attributed to the newly connected family. The entry audit
+reaches 47/76 (61.8%), while every complete-migration gate remains false.
+See the [v54 report](v54-reactive-contact-and-declared-selection.md) for source
+contracts, actual public evidence, regression scope and the bounded candidate
+change before the user's 40-minute limit.
+
+**Previous integrated milestone (v53):** the native common Logos Engine caller
 completes **CN04's first three levels in 73 actions (18, 31, 24)** in one cold
 continuous session, with 29 acquired prefixes, 73 actual Kernel acquisitions
 and two natural boundary replays. The

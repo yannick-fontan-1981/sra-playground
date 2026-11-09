@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 110,
-    "partiallyTransferredModules": 102,
+    "componentVerifiedModules": 122,
+    "partiallyTransferredModules": 113,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1157,
+    "pendingModules": 1134,
     "strategyFamilies": 16
   },
   "families": [
@@ -1639,12 +1639,17 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-support-measurements.ts"
+        "src/logos-engine/v6-support-measurements.ts",
+        "src/logos-engine/v6-reactive-contact-geometry.ts"
       ],
       "proof": [
         "scripts/export-v6-support-navigation-reference.py",
         "tests/fixtures/v6-support-navigation-reference.json.gz",
-        "tests/v6-support-navigation.test.ts"
+        "tests/v6-support-navigation.test.ts",
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
       ]
     },
     {
@@ -3445,9 +3450,16 @@
           "endLine": 540
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-geometry.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/autonomous_route_intervention.py",
@@ -13538,13 +13550,22 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-coupled-pair-route.ts"
+        "src/logos-engine/v6-coupled-pair-route.ts",
+        "src/logos-engine/v6-reactive-contact-geometry.ts",
+        "src/logos-engine/v6-reactive-contact-source81-projection.ts"
       ],
       "proof": [
         "scripts/export-v6-coupled-pair-route-reference.py",
         "tests/fixtures/v6-coupled-pair-route-reference.json.gz",
         "tests/v6-coupled-pair-route.test.ts",
-        "docs/migration/v35-coupled-support.md"
+        "docs/migration/v35-coupled-support.md",
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts"
       ]
     },
     {
@@ -17822,9 +17843,17 @@
           "endLine": 53
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-escape.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/experiment_frontier_c.py",
@@ -24976,7 +25005,8 @@
         "src/logos-engine/v6-alternating-graph-observation.ts",
         "src/logos-engine/v6-outline-geometry.ts",
         "src/logos-engine/v6-outline-identity.ts",
-        "src/logos-engine/v6-outline-rejoin.ts"
+        "src/logos-engine/v6-outline-rejoin.ts",
+        "src/logos-engine/v6-reactive-contact-geometry.ts"
       ],
       "proof": [
         "scripts/export-v6-coupled-pair-route-reference.py",
@@ -24999,7 +25029,11 @@
         "scripts/export-v6-outline-rejoin-reference.py",
         "tests/fixtures/v6-outline-rejoin-reference.json.gz",
         "tests/v6-outline-rejoin-reference.test.ts",
-        "docs/migration/v53-outline-service-and-current-relations.md"
+        "docs/migration/v53-outline-service-and-current-relations.md",
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
       ]
     },
     {
@@ -33465,12 +33499,17 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-support-measurements.ts"
+        "src/logos-engine/v6-support-measurements.ts",
+        "src/logos-engine/v6-reactive-contact-geometry.ts"
       ],
       "proof": [
         "scripts/export-v6-support-navigation-reference.py",
         "tests/fixtures/v6-support-navigation-reference.json.gz",
-        "tests/v6-support-navigation.test.ts"
+        "tests/v6-support-navigation.test.ts",
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
       ]
     },
     {
@@ -43511,9 +43550,16 @@
           "endLine": 148
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/reactive_solving_c.py",
@@ -44889,12 +44935,17 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-support-measurements.ts"
+        "src/logos-engine/v6-support-measurements.ts",
+        "src/logos-engine/v6-reactive-contact-geometry.ts"
       ],
       "proof": [
         "scripts/export-v6-support-navigation-reference.py",
         "tests/fixtures/v6-support-navigation-reference.json.gz",
-        "tests/v6-support-navigation.test.ts"
+        "tests/v6-support-navigation.test.ts",
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
       ]
     },
     {
@@ -48884,9 +48935,23 @@
           "endLine": 132
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts",
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/rigid_indexed_search_c.py",
@@ -49829,9 +49894,16 @@
           "endLine": 342
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-source81-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/scene_layer_measurement_d.py",
@@ -51581,12 +51653,17 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-support-measurements.ts"
+        "src/logos-engine/v6-support-measurements.ts",
+        "src/logos-engine/v6-reactive-contact-geometry.ts"
       ],
       "proof": [
         "scripts/export-v6-support-navigation-reference.py",
         "tests/fixtures/v6-support-navigation-reference.json.gz",
-        "tests/v6-support-navigation.test.ts"
+        "tests/v6-support-navigation.test.ts",
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
       ]
     },
     {
@@ -59414,12 +59491,20 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-drm-projector.ts"
+        "src/logos-engine/v6-drm-projector.ts",
+        "src/logos-engine/v6-drm-selection.ts",
+        "src/logos-engine/v6-selection-contracts.ts"
       ],
       "proof": [
         "scripts/export-v6-drm-reference.py",
         "tests/fixtures/v6-drm-reference.json",
-        "tests/v6-drm-projector.test.ts"
+        "tests/v6-drm-projector.test.ts",
+        "scripts/export-v6-select-reference.py",
+        "tests/fixtures/v6-select-reference.json.gz",
+        "scripts/export-v6-select-builder-reference.py",
+        "tests/fixtures/v6-select-builder-reference.json.gz",
+        "tests/v6-select-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
       ]
     },
     {
@@ -59467,12 +59552,20 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-drm-projector.ts"
+        "src/logos-engine/v6-drm-projector.ts",
+        "src/logos-engine/v6-drm-selection.ts",
+        "src/logos-engine/v6-selection-contracts.ts"
       ],
       "proof": [
         "scripts/export-v6-drm-reference.py",
         "tests/fixtures/v6-drm-reference.json",
-        "tests/v6-drm-projector.test.ts"
+        "tests/v6-drm-projector.test.ts",
+        "scripts/export-v6-select-reference.py",
+        "tests/fixtures/v6-select-reference.json.gz",
+        "scripts/export-v6-select-builder-reference.py",
+        "tests/fixtures/v6-select-builder-reference.json.gz",
+        "tests/v6-select-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
       ]
     },
     {
@@ -59782,12 +59875,20 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-drm-projector.ts"
+        "src/logos-engine/v6-drm-projector.ts",
+        "src/logos-engine/v6-drm-selection.ts",
+        "src/logos-engine/v6-selection-contracts.ts"
       ],
       "proof": [
         "scripts/export-v6-drm-reference.py",
         "tests/fixtures/v6-drm-reference.json",
-        "tests/v6-drm-projector.test.ts"
+        "tests/v6-drm-projector.test.ts",
+        "scripts/export-v6-select-reference.py",
+        "tests/fixtures/v6-select-reference.json.gz",
+        "scripts/export-v6-select-builder-reference.py",
+        "tests/fixtures/v6-select-builder-reference.json.gz",
+        "tests/v6-select-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
       ]
     },
     {
@@ -59943,12 +60044,20 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-drm-projector.ts"
+        "src/logos-engine/v6-drm-projector.ts",
+        "src/logos-engine/v6-drm-selection.ts",
+        "src/logos-engine/v6-selection-contracts.ts"
       ],
       "proof": [
         "scripts/export-v6-drm-reference.py",
         "tests/fixtures/v6-drm-reference.json",
-        "tests/v6-drm-projector.test.ts"
+        "tests/v6-drm-projector.test.ts",
+        "scripts/export-v6-select-reference.py",
+        "tests/fixtures/v6-select-reference.json.gz",
+        "scripts/export-v6-select-builder-reference.py",
+        "tests/fixtures/v6-select-builder-reference.json.gz",
+        "tests/v6-select-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
       ]
     },
     {
@@ -60128,12 +60237,20 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-drm-projector.ts"
+        "src/logos-engine/v6-drm-projector.ts",
+        "src/logos-engine/v6-drm-selection.ts",
+        "src/logos-engine/v6-selection-contracts.ts"
       ],
       "proof": [
         "scripts/export-v6-drm-reference.py",
         "tests/fixtures/v6-drm-reference.json",
-        "tests/v6-drm-projector.test.ts"
+        "tests/v6-drm-projector.test.ts",
+        "scripts/export-v6-select-reference.py",
+        "tests/fixtures/v6-select-reference.json.gz",
+        "scripts/export-v6-select-builder-reference.py",
+        "tests/fixtures/v6-select-builder-reference.json.gz",
+        "tests/v6-select-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
       ]
     },
     {
@@ -65287,9 +65404,20 @@
           "endLine": 541
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-selection-contracts.ts",
+        "src/logos-engine/interpreter.ts",
+        "src/logos-engine/v6-drm-selection.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-select-reference.py",
+        "tests/fixtures/v6-select-reference.json.gz",
+        "scripts/export-v6-select-builder-reference.py",
+        "tests/fixtures/v6-select-builder-reference.json.gz",
+        "tests/v6-select-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/operators/runtime.py",
@@ -65495,9 +65623,18 @@
           "endLine": 38
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-drm-selection.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-select-reference.py",
+        "tests/fixtures/v6-select-reference.json.gz",
+        "scripts/export-v6-select-builder-reference.py",
+        "tests/fixtures/v6-select-builder-reference.json.gz",
+        "tests/v6-select-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/performance.py",
@@ -66882,9 +67019,20 @@
           "endLine": 260
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-selection-contracts.ts",
+        "src/logos-engine/interpreter.ts",
+        "src/logos-engine/v6-drm-selection.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-select-reference.py",
+        "tests/fixtures/v6-select-reference.json.gz",
+        "scripts/export-v6-select-builder-reference.py",
+        "tests/fixtures/v6-select-builder-reference.json.gz",
+        "tests/v6-select-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/scheduler/propagation.py",
@@ -75279,7 +75427,8 @@
         "src/logos-engine/v6-native-caller.ts",
         "src/logos-engine/v6-native-transition-domain.ts",
         "src/logos-engine/v6-learned-preparation.ts",
-        "src/logos-engine/v6-program-control-discovery.ts"
+        "src/logos-engine/v6-program-control-discovery.ts",
+        "src/logos-engine/v6-reactive-contact.ts"
       ],
       "proof": [
         "scripts/export-v6-target-reference.py",
@@ -75329,7 +75478,16 @@
         "docs/migration/native-campaigns-v41/pipe-three-levels.json",
         "docs/migration/native-campaigns-v41/pipe-public-trace.json.gz",
         "scripts/compare-v41-radial-component.py",
-        "docs/migration/native-campaigns-v41/pipe-original-component-comparison.json"
+        "docs/migration/native-campaigns-v41/pipe-original-component-comparison.json",
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/compare-v54-reactive-public-evidence.py",
+        "docs/migration/native-campaigns-v54/final/re86-campaign.json.gz",
+        "docs/migration/native-campaigns-v54/final/execution-re86.json",
+        "docs/migration/native-campaigns-v54/final/reactive-original-comparison.json.gz"
       ]
     },
     {
@@ -87970,8 +88128,8 @@
         "scripts/compare-v52-final-framed-public-evidence.py",
         "docs/migration/native-campaigns-v52/attempt9/phased-reception-contract-comparison.json",
         "docs/migration/native-campaigns-v52/attempt9/directed-composition-contract-comparison.json",
-        "docs/migration/native-campaigns-v52/attempt9/framed-transfer-original-comparison.json",
-        "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json",
+        "docs/migration/native-campaigns-v52/attempt9/framed-transfer-original-comparison.json.gz",
+        "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json.gz",
         "docs/migration/native-campaigns-v52/attempt9/gare-public-trace.json.gz"
       ]
     },
@@ -88051,8 +88209,8 @@
         "scripts/compare-v52-final-framed-public-evidence.py",
         "docs/migration/native-campaigns-v52/attempt9/phased-reception-contract-comparison.json",
         "docs/migration/native-campaigns-v52/attempt9/directed-composition-contract-comparison.json",
-        "docs/migration/native-campaigns-v52/attempt9/framed-transfer-original-comparison.json",
-        "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json",
+        "docs/migration/native-campaigns-v52/attempt9/framed-transfer-original-comparison.json.gz",
+        "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json.gz",
         "docs/migration/native-campaigns-v52/attempt9/gare-public-trace.json.gz"
       ]
     },
@@ -88132,8 +88290,8 @@
         "scripts/compare-v52-final-framed-public-evidence.py",
         "docs/migration/native-campaigns-v52/attempt9/phased-reception-contract-comparison.json",
         "docs/migration/native-campaigns-v52/attempt9/directed-composition-contract-comparison.json",
-        "docs/migration/native-campaigns-v52/attempt9/framed-transfer-original-comparison.json",
-        "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json",
+        "docs/migration/native-campaigns-v52/attempt9/framed-transfer-original-comparison.json.gz",
+        "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json.gz",
         "docs/migration/native-campaigns-v52/attempt9/gare-public-trace.json.gz"
       ]
     },
@@ -91221,9 +91379,16 @@
           "endLine": 116
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-source81-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/reactive_contact/_source81/peer_constraint_geometry.py",
@@ -91256,9 +91421,16 @@
           "endLine": 125
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-source81-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/reactive_contact/_source81/prospective_grasp.py",
@@ -91327,9 +91499,16 @@
           "endLine": 644
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-source81-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/reactive_contact/_source81/unbound.py",
@@ -91356,9 +91535,16 @@
           "endLine": 107
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-source81-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/reactive_contact/escape_domain.py",
@@ -91409,9 +91595,22 @@
           "endLine": 124
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-parent.ts",
+        "src/logos-engine/v6-reactive-contact-escape.ts",
+        "src/logos-engine/v6-reactive-contact-stationary.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/reactive_contact/family.py",
@@ -91492,9 +91691,24 @@
           "endLine": 146
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/native-campaigns-v54/final/re86-campaign.json.gz",
+        "docs/migration/native-campaigns-v54/final/execution-re86.json",
+        "docs/migration/native-campaigns-v54/final/reactive-original-comparison.json.gz"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/reactive_contact/geometry.py",
@@ -91593,9 +91807,21 @@
           "endLine": 67
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-geometry.ts",
+        "src/logos-engine/v6-reactive-contact-measurements.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/reactive_contact/parent_return.py",
@@ -91646,9 +91872,22 @@
           "endLine": 208
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-parent.ts",
+        "src/logos-engine/v6-reactive-contact-escape.ts",
+        "src/logos-engine/v6-reactive-contact-stationary.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/reactive_contact/policy.py",
@@ -91753,9 +91992,18 @@
           "endLine": 61
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-policy.ts",
+        "src/logos-engine/v6/reactive-contact-policy.json",
+        "src/logos-engine/v6/programs.json"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-reference.py",
+        "tests/fixtures/v6-reactive-contact-reference.json.gz",
+        "tests/v6-reactive-contact-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/reactive_contact/source81_context.py",
@@ -91770,9 +92018,22 @@
           "endLine": 43
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-source81-policy.ts",
+        "src/logos-engine/v6-reactive-contact-source81-context.ts",
+        "src/logos-engine/v6-reactive-contact-source81-projection.ts",
+        "src/logos-engine/v6-reactive-contact-source81-execution.ts",
+        "src/logos-engine/v6/programs.json"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-programs.py",
+        "tests/v6-reactive-contact-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/reactive_contact/source81_execution.py",
@@ -91829,9 +92090,22 @@
           "endLine": 299
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-source81-policy.ts",
+        "src/logos-engine/v6-reactive-contact-source81-context.ts",
+        "src/logos-engine/v6-reactive-contact-source81-projection.ts",
+        "src/logos-engine/v6-reactive-contact-source81-execution.ts",
+        "src/logos-engine/v6/programs.json"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-programs.py",
+        "tests/v6-reactive-contact-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/reactive_contact/source81_independent.py",
@@ -91852,9 +92126,22 @@
           "endLine": 16
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-source81-policy.ts",
+        "src/logos-engine/v6-reactive-contact-source81-context.ts",
+        "src/logos-engine/v6-reactive-contact-source81-projection.ts",
+        "src/logos-engine/v6-reactive-contact-source81-execution.ts",
+        "src/logos-engine/v6/programs.json"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-programs.py",
+        "tests/v6-reactive-contact-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/reactive_contact/source81_policy.py",
@@ -91959,9 +92246,22 @@
           "endLine": 177
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-source81-policy.ts",
+        "src/logos-engine/v6-reactive-contact-source81-context.ts",
+        "src/logos-engine/v6-reactive-contact-source81-projection.ts",
+        "src/logos-engine/v6-reactive-contact-source81-execution.ts",
+        "src/logos-engine/v6/programs.json"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-programs.py",
+        "tests/v6-reactive-contact-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/reactive_contact/source81_projection.py",
@@ -92012,9 +92312,22 @@
           "endLine": 18
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-source81-policy.ts",
+        "src/logos-engine/v6-reactive-contact-source81-context.ts",
+        "src/logos-engine/v6-reactive-contact-source81-projection.ts",
+        "src/logos-engine/v6-reactive-contact-source81-execution.ts",
+        "src/logos-engine/v6/programs.json"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-programs.py",
+        "tests/v6-reactive-contact-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/reactive_contact/stationary_return.py",
@@ -92083,9 +92396,22 @@
           "endLine": 209
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-reactive-contact-parent.ts",
+        "src/logos-engine/v6-reactive-contact-escape.ts",
+        "src/logos-engine/v6-reactive-contact-stationary.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/rearm_evidence.py",
@@ -92991,12 +93317,24 @@
       "targets": [
         "src/logos-engine/v6-src-program.ts",
         "src/logos-engine/interpreter.ts",
-        "src/logos-engine/v6/programs.json"
+        "src/logos-engine/v6/programs.json",
+        "src/logos-engine/v6-drm-selection.ts",
+        "src/logos-engine/v6-selection-contracts.ts"
       ],
       "proof": [
         "scripts/export-v6-programs.py",
         "tests/v6-src-program.test.ts",
-        "tests/src-while.test.ts"
+        "tests/src-while.test.ts",
+        "scripts/export-v6-select-reference.py",
+        "tests/fixtures/v6-select-reference.json.gz",
+        "scripts/export-v6-select-builder-reference.py",
+        "tests/fixtures/v6-select-builder-reference.json.gz",
+        "tests/v6-select-reference.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-reactive-contact-source81-reference.py",
+        "tests/fixtures/v6-reactive-contact-source81-reference.json.gz",
+        "tests/v6-reactive-contact-source81-reference.test.ts",
+        "scripts/export-v6-reactive-contact-source81-programs.py"
       ]
     },
     {
@@ -93394,7 +93732,8 @@
       "status": "partial_transfer",
       "targets": [
         "src/logos-engine/v6-native-runtime.ts",
-        "src/logos-engine/v6-learned-preparation.ts"
+        "src/logos-engine/v6-learned-preparation.ts",
+        "src/logos-engine/v6-reactive-contact.ts"
       ],
       "proof": [
         "tests/v6-native-runtime.test.ts",
@@ -93409,7 +93748,13 @@
         "scripts/replay-v6-original-public-caller.py",
         "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-collision.json",
         "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-oracle.json.gz",
-        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-report.json.gz"
+        "docs/migration/native-campaigns-v41/diagnostics/pipe-original-caller-report.json.gz",
+        "scripts/export-v6-reactive-contact-family-reference.py",
+        "tests/fixtures/v6-reactive-contact-family-reference.json.gz",
+        "tests/v6-reactive-contact-family-reference.test.ts",
+        "tests/v6-reactive-contact-kernel.test.ts",
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "docs/migration/v6-entry-point-progress.json"
       ]
     },
     {
@@ -97452,6 +97797,9 @@
     "The separately frozen final v52 attempt9 completes GARE levels 1–3 in 53 actions (7/9/37), 53 prefixes and one cold continuous session on native digest e32656de6ab64b0f6bdf8188e7bdeac06b4b3063c0bfb6d5531484cefb900f60, with 181 native files. It enters level 4 with NOT_FINISHED at its declared three-level target, not full-game WIN. The complete 54-packet/235-frame trajectory retains the original isolated component's first 12 commands and 13 packets exactly. Original six-field acquisitions and all 53 native checkpoints are independently recomputed; 47 original records, three stationary annex observations and two phased directed-only observations are distinct domains. Seven of 38 executed Framed proposals differ from strict source, with eight explicit native guard receipts. The directed composition uses one real receiver preparation and then one current question retaining both competing offsets; it stores no future action sequence and claims no reception before the real return. The entry metric remains 44/76 (57.9%), and all six complete-migration gates remain false. Earlier initialization, guard, heap, budget and priority-regression failures remain preserved with their exact historical source archives; their evidence is not replaced by this success.",
     "V53 adds the strict observed_outline_service entry with its two own Python modules component_verified and only bounded consumed closures of V5 interaction.py, entity_identity.py and enclosure_family.py marked partial_transfer. Initial source contracts, the separate literal remote-count correction and the exact attempt2 original-component comparison are distinct evidence. The initial large gzip fixture is stored losslessly via its .parts.json manifest and byte parts, without changing expected values. Exact selected source proposals and seven-field acquisitions/checkpoints do not imply complete caller parity: raw ordinary native guard/outcome values were not retained, so the original guards/outcomes are recomputed only for compatibility with actual dispatch/sealing. The two ESCT attempts used for those original-component comparisons, attempt1 and attempt2, complete zero levels. Later campaign history is separately retained in docs/migration/v53-outline-service-and-current-relations.md: attempt3 and interrupted attempt5 each record one completed ESCT level; attempt4 and the attempt5 KEYD run remain interrupted with zero completed levels. Attempt6 completes one ESCT level and fails its three-level target at the level2 active-time budget after 117 actions and 381.55 cumulative active seconds. Attempt7 final-source CN04 passes its three-level target through the existing port_assembly provider; its result and the 45/76 connection audit have separate receipts and are not inferred from Outline component tests. Attempt7 ESCT and final release checks remain pending. No complete-migration gate is inferred from these component or campaign results.",
     "V53 native coordination is a separate scope from strict Outline transfer. A source-derived V5 continuation subset supports a current-service preference; a second explicit subset reuses projection1296/tier19 and order19/20 for the current obstructing-inset operator question. Their unchanged-Python condition/projection/tier receipts are bounded declarative evidence, not full V5 selection or original V6 caller parity. The optional public-transition annex retains the immediately preceding actual public final raster and its current scope, outside the seven-field source state; the original V6 wrapper does not supply that raster. After an actual selected access question, the annex may also retain its bounded access_relation, validated against the prior observation, row hash, scope, selected command and guard. Each selected primitive refreshes this relation; no recursive prior-access chain or future route is retained. The annex binds only the 16-character JSON public-frame identifier. Its producer declines alternate caller hash domains, including the full NumPy rowsDigest, without rewriting observations or interrupting ordinary source acquisition; stale annex evidence is cleared. Supported-domain byte mismatches and malformed restored annexes still fail the same strict validation. Native proposals requiring a current-service witness must pass the common admission gate, current remeasurement, per-primitive guards and WHY/ACT. The V6 current-trial witness requires an actual current frontier occurrence and an untried command in that exact public protocol; any retained prior attempt removes that preference. Its explicitly distinct effect inventory covers actual caller edges in the current epoch and score, retaining a positive observation only when the final frame hash changes; unchanged or transient-returning frames remain unknown. The trial and effect domains do not claim V5 producer/context parity, universal causation or action authority. Current questions retain one primitive, replan on the real return and assert no future effect or stored winning route. The exact V5 recovery subsets separately retain interaction.drm declaration217 projections624/666 with tier15, projections1300/1301 with tier16, and projections1298/1299 with tier17. Their 59 original-evaluator cases and the 49 original-Python rejoin geometry cases do not prove whole-policy selection or unchanged V6 caller ordering. Native access applies only when no transferred service or recovery proposal applies and an actual historical local method is available. It distinguishes current reacquired control from a unique current revalidation of recalled control; the latter has historical evidence but no acquired current deltas and uses explicitly revisable interface priors. Measured conflicting directions cannot be overwritten by those priors. Its announced-cell question targets a current visible singleton in an exact unique body/marker/perimeter motif. Its separately named current_observed_body_access_question targets the actual current solid body only after an adjacent public transition in the same epoch and score revalidates an exact previous selected relation or observed motif. The body must be unchanged or have moved exactly to the preceding observed singleton; missing current marker fields remain null. A boundary-only recalled context has before/command null and cannot supply that temporal fallback. Only current final public rasters qualify; intermediate animation frames do not. Both access modes select one in-bounds lattice-aligned distance-reducing primitive and claim no safe route or guaranteed effect. Attempt7 adds native v6-outline-arrival.ts, absent from frozen attempt6. It requires the actual selected observed-body access return to reach its prior body cell, reacquired control, an unchanged unique compatible perimeter, current same-value inset remnants and visibly changed inset pixels. It asserts no complete current body, survival, identity or capture. V5 principle.effectful_local_operator_transfers_to_new_changed_bfs_endpoint motivates the question, but exact_source_projection_matched remains false: no standard completed-BFS endpoint is supplied. The service separately revalidates one currently available input with positive historical local-method evidence, a complete current effect inventory without a competing observed local operator, and the actual untried caller context. Unknown other-input effects remain unknown; historical effects never become fabricated current-epoch inventory. The one conditional local question retains recovery.contact, not a new access relation, and still requires ordinary preservation and WHY/ACT. These native helpers are not additional transferred Python modules. All six completion gates remain false.",
-    "V53 final-source validation: attempt7 freezes 195 native files at digest d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70, implementation logos-engine.typescript.v6.native-migration/0.27.0. The independent cold CN04 execution receipt confirms unchanged native source and execution code, 73 actions from port_assembly, three completed levels with 18/31/24 actions, 29 prefixes and one session. Its public result is level 4 NOT_FINISHED with target_levels_completed, not full-game VICTORY. No action sequence, learned checkpoint, Python agent or level jump is supplied. This supports the existing integrated port-assembly capability and does not establish Outline efficacy or full V6 parity. The actual entry audit records 45/76 connected declarations (59.2%); recovery, access, arrival and this campaign add no further declared entry. The actual-browser receipt on the same frozen source independently records three Run to next level clicks from level 1, counters 18/1 then 49/2 then 73/3, 29 completed plans and entry to level 4, with inspection closed. Its single 384x384 canvas sample at a 1363x936 viewport is not a responsive or performance benchmark. The targeted delta suite passes 3611 tests; typecheck, audits and production build pass. All nine recorded trajectories retain their commands and official results, with the original comparison-domain failures and their explicit LIFE/GARE resolutions preserved in regression-final-summary.json. ESCT completes only L1 in 16 actions, then stops at the L2 active-time budget after 113 total actions; it is not a three-level success. Publication is tracked by the saved Site version separately from these immutable execution receipts. All six completion gates remain false."
+    "V53 final-source validation: attempt7 freezes 195 native files at digest d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70, implementation logos-engine.typescript.v6.native-migration/0.27.0. The independent cold CN04 execution receipt confirms unchanged native source and execution code, 73 actions from port_assembly, three completed levels with 18/31/24 actions, 29 prefixes and one session. Its public result is level 4 NOT_FINISHED with target_levels_completed, not full-game VICTORY. No action sequence, learned checkpoint, Python agent or level jump is supplied. This supports the existing integrated port-assembly capability and does not establish Outline efficacy or full V6 parity. The actual entry audit records 45/76 connected declarations (59.2%); recovery, access, arrival and this campaign add no further declared entry. The actual-browser receipt on the same frozen source independently records three Run to next level clicks from level 1, counters 18/1 then 49/2 then 73/3, 29 completed plans and entry to level 4, with inspection closed. Its single 384x384 canvas sample at a 1363x936 viewport is not a responsive or performance benchmark. The targeted delta suite passes 3611 tests; typecheck, audits and production build pass. All nine recorded trajectories retain their commands and official results, with the original comparison-domain failures and their explicit LIFE/GARE resolutions preserved in regression-final-summary.json. ESCT completes only L1 in 16 actions, then stops at the L2 active-time budget after 113 total actions; it is not a three-level success. Publication is tracked by the saved Site version separately from these immutable execution receipts. All six completion gates remain false.",
+    "V54 connects reactive_contact_continuation and reactive_contact through one public_reactive_contact owner at their exact source material positions in native implementation 0.28.0, advancing the declared-entry connection metric to 47/76 (61.8%). All thirteen source state fields, source-facing four-field workflow receipts, current guards and selected/passive sealed acquisitions are retained. Independently generated source evidence comprises 272 Contact/geometry cases, 53 family/return cases and 193 Source81 cases, with 527 reactive checks including three common Kernel tests. Generic SELECT adds 68 original evaluator/projection cases and 25 original builder cases, with 114 checks on its documented native scalar domain. The four original Source81 workflows extend the compiled bundle from 33 to 37 entries; no existing entry is replaced. Inherited interaction, prospective-grasp, cell-support, routing, rigid geometry, consumption and escape contract modules retain partial consumed-domain mappings. No whole original strategic caller, arbitrary Python numeric/validation semantics, full-game result or complete-migration gate is inferred.",
+    "V54 candidate study: unchanged published v53 completes WA30 level1 in 31 actions, then reaches natural GAME_OVER on level2 after 101 total actions. The candidate is closed after approximately eight minutes twenty seconds, before the user forty-minute limit. The next unchanged v53 baseline completes RE86 levels1–3 in 26/47/61 actions (134 total), 46 prefixes and about 122 seconds through the existing generic constellation_cover provider. These are separately retained baselines; final frozen v54 execution and original ReactiveContact public-return comparisons remain separate evidence. The 210-file final native source digest is 059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a. No native source/game-result claim is inferred merely from the freeze.",
+    "The final frozen v54 RE86 campaign passes its declared first-three-level target in one cold continuous session: 26/47/61 actions (134 total), 46 sealed prefixes, 134 actual acquisitions and two caller boundary replays. It enters level4 with NOT_FINISHED and target_levels_completed, not full-game victory. Native source and execution code are unchanged on digest 059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a (210 files). All 46 selected prefixes use the existing constellation_cover provider. The independent unchanged original ReactiveContact replay starts empty and matches 134 source records, all thirteen fields and the full native checkpoint at 46 prefixes, three official-boundary events/source epoch resets, and the complete 135-packet/138-frame public journal. It verifies all 1786 pinned files before and after, with 736 imported original source files. There are no reactive selections or planning calls on this trajectory; this is exact passive acquisition evidence, while positive reactive behavior is verified separately by component and Kernel tests. It does not establish reactive game efficacy, complete original-caller parity or any of the six still-false complete-migration gates."
   ]
 }

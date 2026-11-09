@@ -1,0 +1,116 @@
+{
+  "game": "COLM",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/native-campaigns-v53/attempt7/regressions/colm-replay.json.gz",
+    "docs/migration/native-campaigns-v48/colm-public-trace.json.gz",
+    "docs/migration/native-campaigns-v54/final/regressions/colm-replay.json.gz"
+  ],
+  "startedAt": "2026-11-09T12:27:49.983160+00:00",
+  "finishedAt": "2026-11-09T12:28:43.968842+00:00",
+  "elapsedSeconds": 53.98568393300047,
+  "exitCode": 0,
+  "timeoutSeconds": 2400,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/colm-replay.json.gz",
+    "sha256": "ca0e93701ae0df7e05e1553cc2f977722806233e1e30d1f73e031438bff9f829",
+    "bytes": 89731
+  },
+  "trace": {
+    "path": "docs/migration/native-campaigns-v48/colm-public-trace.json.gz",
+    "sha256": "d3508414f956c35f58ef5364d14f91ea99a93c1b144ee476f4815b35a356bae7",
+    "bytes": 27249
+  },
+  "output": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/colm-output.log.gz",
+    "sha256": "80d2471333fc670b7128d7aca90cd4723cd39c2a0e9ed17f63f5bc0ac5299b8d",
+    "bytes": 4104
+  },
+  "passed": true,
+  "memory": {},
+  "report": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/colm-replay.json.gz",
+    "sha256": "6de81e94b93cafa1a905ef94a1ba1bc70dbff2459e2cda55bf6cb4a2ac2d92b7",
+    "bytes": 133098
+  },
+  "status": "passed",
+  "actions": 45,
+  "prefixes": 21,
+  "final": {
+    "actions": 45,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 39.21067197599999,
+    "prefixes": 21,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 45,
+      "boundaryReplays": 2,
+      "goalEvents": 25,
+      "frontierDeltas": 91,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 22
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 22
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 21
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 8
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 1
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 23
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 45,
+      "resume": 20
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.28.0"
+  },
+  "comparison": {
+    "path": "docs/migration/native-campaigns-v54/final/regressions/colm-comparison.json",
+    "sha256": "04710d5637707a9822fef5349907178df5fe762907ee790d3201498a5a457072",
+    "bytes": 9093
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "immutableInputsUnchanged": true
+}

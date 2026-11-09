@@ -28,7 +28,23 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **The v53 milestone completes
+  level**; opening the tab does not move the game. **The v54 milestone completes
+  RE86's first three levels in 134 actions (26, 47 and 61)** through one cold
+  continuous native common session, 46 acquired prefixes and two natural
+  boundary replays. The existing generic `constellation_cover` provider supplies
+  every input. The target stops on entry to level 4 with `NOT_FINISHED`.
+  This release connects the original `reactive_contact_continuation` and
+  `reactive_contact` entries to one acquired owner, with the consumed V5
+  geometry, parent return, escape, stationary return and Source81 logic.
+  Generic SRC `SELECT` now evaluates declared policies, admits complete
+  requests and preserves unresolved ambiguity through the common interpreter.
+  Four unchanged-source Source81 workflows join its existing program registry.
+  The implementation adds no game identifier, palette convention, fixed
+  coordinate or stored action route. RE86 validates the existing constellation
+  service; the new reactive component has separate original-source evidence.
+  The audit connects 47/76 source entries (61.8%), with complete V6 parity
+  still unverified. See the [v54 report](docs/migration/v54-reactive-contact-and-declared-selection.md).
+  **The previous v53 milestone completes
   CN04's first three levels in 73 actions (18, 31 and 24)** through one cold
   continuous native common session, 29 acquired prefixes and two natural
   boundary replays. All 73 inputs come from the already connected generic
@@ -185,9 +201,9 @@ Fontan's **Symbolic Reasoning Agent** research.
   **Previous v38 milestone: TICT completes all six levels with official `WIN`
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
-  The current entry audit connects **45 of 76 explicit DRM subquestions
-  (59.2%)** in implementation `logos-engine.typescript.v6.native-migration/0.27.0`,
-  with the newly connected `observed_outline_service` using one acquired owner.
+  The current entry audit connects **47 of 76 explicit DRM subquestions
+  (61.8%)** in implementation `logos-engine.typescript.v6.native-migration/0.28.0`,
+  with both newly connected reactive-contact entries using one acquired owner.
   Its native coordination extensions add no source entry. This counts
   connected entries, not full behavioral parity or a percentage of all code.
   The next source entry to study is `reactive_contact_continuation`, preserving

@@ -1,5 +1,6 @@
 import { SRC_SCHEMA_VERSION } from './ir.ts';
-import { immutableJson } from './canonical.ts';
+import { immutableJson, isJsonObject } from './canonical.ts';
+import { validateSelectRequest } from './v6-selection-contracts.ts';
 import type {
   CallContext, CompiledModule, ExecutionOptions, ExecutionResult, IrExpression,
   IrStatement, IrStep, JsonObject, JsonValue, Primitive, TraceEvent, TypeSpec,
@@ -34,7 +35,9 @@ const own = (value: object, key: string) => Object.prototype.hasOwnProperty.call
 function fail(code: string, message: string): never { throw new SrcExecutionError(code, message); }
 const pathPattern = /^[\p{L}_][\p{L}\p{N}_-]*(?:\.[\p{L}\p{N}_-]+)*$/u;
 const namePattern = /^[\p{L}_][\p{L}\p{N}_-]*$/u;
-const supported = new Set(['CALL', 'IF', 'FOR_EACH', 'WHILE', 'NEXT', 'STOP']);
+const supported = new Set(['CALL', 'SELECT', 'IF', 'FOR_EACH', 'WHILE', 'NEXT', 'STOP']);
+const selectRequired = ['FOR', 'FROM', 'UNDER', 'REQUIRE', 'PRESERVE'];
+const selectOptional = ['FACTS', 'CONTEXT', 'DOMINANCE'];
 
 /** The kernel and interpreter share one immutable-value registry. */
 function snapshotJson(value: unknown, location: string): JsonValue {
@@ -185,13 +188,26 @@ export function validateCompiledModule(value: unknown, primitives?: Readonly<Rec
         unique(statementId, allStatementIds, where);
         const kind = String(statement.kind);
         if (!supported.has(kind)) fail('unsupported_ir', `${statementId}: unsupported statement ${kind}`);
-        for (const field of ['target', 'type_annotation']) {
-          if (statement[field] != null) fail('unsupported_ir', `${statementId}: ${kind} cannot use ${field}`);
+        if (statement.type_annotation != null) fail('unsupported_ir', `${statementId}: ${kind} cannot use type_annotation`);
+        if (kind === 'SELECT') {
+          ref(statement.target, `${where}.target`, true);
+          if (statement.expression != null) fail('invalid_ir', `${statementId}: SELECT has no expression`);
+          const names = new Set<string>();
+          for (const [index, raw] of sequence(statement.clauses, `${where}.clauses`).entries()) {
+            const clause = record(raw, `${where}.clauses[${index}]`);
+            keys(clause, ['name', 'value'], `${where}.clauses[${index}]`);
+            const name = nonempty(clause.name, `${where}.clauses[${index}].name`);
+            if (![...selectRequired, ...selectOptional].includes(name)) fail('invalid_ir', `${statementId}: unknown SELECT clause ${name}`);
+            unique(name, names, `${where}.clauses`);
+            expression(clause.value, `${where}.clauses[${index}].value`, primitives, false);
+          }
+          if (selectRequired.some(name => !names.has(name))) fail('invalid_ir', `${statementId}: incomplete SELECT clauses`);
+        } else {
+          if (statement.target != null) fail('unsupported_ir', `${statementId}: ${kind} cannot use target`);
+          if (sequence(statement.clauses, `${where}.clauses`, true).length) fail('unsupported_ir', `${statementId}: unexpected clauses`);
+          expression(statement.expression, `${where}.expression`, primitives);
         }
-        for (const field of ['clauses', 'match_arms']) {
-          if (sequence(statement[field], `${where}.${field}`, true).length) fail('unsupported_ir', `${statementId}: ${field} is outside the supported subset`);
-        }
-        expression(statement.expression, `${where}.expression`, primitives);
+        if (sequence(statement.match_arms, `${where}.match_arms`, true).length) fail('unsupported_ir', `${statementId}: MATCH arms are outside the supported subset`);
         if (kind === 'WHILE') {
           const loop = record(statement.loop_contract, `${where}.loop_contract`);
           keys(loop, ['progress_witness', 'stop_condition', 'maximum_symbolic_depth', 'limit_result'], `${where}.loop_contract`);
@@ -199,7 +215,7 @@ export function validateCompiledModule(value: unknown, primitives?: Readonly<Rec
           if (typeof maximum !== 'number' || !Number.isSafeInteger(maximum) || maximum < 1) fail('invalid_ir', `${statementId}: WHILE requires a positive symbolic depth`);
           for (const field of ['progress_witness', 'stop_condition', 'limit_result']) expression(loop[field], `${where}.loop_contract.${field}`, primitives);
         } else if (statement.loop_contract != null) fail('unsupported_ir', `${statementId}: only WHILE can use a loop contract`);
-        const expr = record(statement.expression, `${where}.expression`);
+        const expr = kind === 'SELECT' ? {} : record(statement.expression, `${where}.expression`);
         const body = sequence(statement.body, `${where}.body`, true);
         const otherwise = sequence(statement.else_body, `${where}.else_body`, true);
         if (kind !== 'IF' && kind !== 'FOR_EACH' && kind !== 'WHILE' && body.length) fail('invalid_ir', `${statementId}: unexpected body`);
@@ -296,15 +312,43 @@ function summary(value: JsonValue): string {
   return text.length > 100 ? `${text.slice(0, 97)}…` : text;
 }
 
-function pythonString(value: JsonValue): string {
-  // All transferred V6 ON LIMIT clauses return symbolic/string references.
-  // Python scalar spellings remain explicit; unsupported container repr must
-  // fail instead of inventing a completed or differently worded checkpoint.
+function pythonString(value: JsonValue, code = 'unsupported_defer_value', location = 'The transferred SRC ON LIMIT result'): string {
+  // Preserve Python scalar spellings. Container repr is outside the native
+  // domain and must never invent a symbolic reference or a checkpoint.
   if (typeof value === 'string') return value;
   if (value === null) return 'None';
   if (typeof value === 'boolean') return value ? 'True' : 'False';
   if (typeof value === 'number' && Number.isSafeInteger(value) && !Object.is(value, -0)) return String(value);
-  return fail('unsupported_defer_value', 'The transferred SRC ON LIMIT result must be a string or exact scalar');
+  return fail(code, `${location} must be a string or exact scalar`);
+}
+
+/** Mechanical V5 scheduler/operator_builders._select conversion. Optional
+ * clauses default only when absent; supplied nulls cannot erase a clause.
+ */
+function buildSelectionRequest(clauses: Record<string, JsonValue>): JsonObject {
+  const witnesses = own(clauses, 'DOMINANCE') ? clauses.DOMINANCE! : [];
+  if (!Array.isArray(witnesses)) fail('invalid_selection_request', 'SELECT DOMINANCE requires explicit comparison witnesses');
+  const facts = own(clauses, 'FACTS') ? clauses.FACTS! : {};
+  if (!isJsonObject(facts)) fail('invalid_selection_request', 'SELECT FACTS requires a mapping indexed by alternative');
+  const context = own(clauses, 'CONTEXT') ? clauses.CONTEXT! : {};
+  if (!isJsonObject(context)) fail('invalid_selection_request', 'SELECT CONTEXT requires a shared fact mapping');
+  const scalar = (value: JsonValue): string => pythonString(value, 'invalid_selection_request', 'SELECT reference');
+  const refs = (value: JsonValue, name: string): string[] => {
+    const values = typeof value === 'string' ? [value] : Array.isArray(value) ? value.map(scalar) : null;
+    if (values === null) fail('invalid_selection_request', `${name} requires one reference or a finite sequence`);
+    if (!values.length || values.some(item => !item.trim())) fail('invalid_selection_request', `${name} requires non-empty references`);
+    return values;
+  };
+  try {
+    return validateSelectRequest({ goal_ref: scalar(clauses.FOR!),
+      alternative_refs: refs(clauses.FROM!, 'SELECT FROM'), selection_policy_ref: scalar(clauses.UNDER!),
+      requirement_refs: refs(clauses.REQUIRE!, 'SELECT REQUIRE'), preserve_refs: refs(clauses.PRESERVE!, 'SELECT PRESERVE'),
+      dominance_witnesses: witnesses, alternative_facts: facts, context_facts: context,
+      schema_version: 'yf_arc3_v5.authority_input.selection.v1' }) as JsonObject;
+  } catch (error) {
+    if (error instanceof SrcExecutionError) throw error;
+    fail('invalid_selection_request', error instanceof Error ? error.message : String(error));
+  }
 }
 
 interface Frame {
@@ -483,7 +527,7 @@ export async function executeWorkflow(
               const result = await evaluate(contract.limit_result, context);
               defer(pythonString(result));
             }
-            const condition = await evaluate(owner.expression, context);
+              const condition = await evaluate(owner.expression!, context);
             if (condition !== true) stack.pop();
             else { frame.index = 0; frame.whileLoop.iteration = next; frame.whileLoop.progressIdentity = identity; }
           }
@@ -518,18 +562,37 @@ export async function executeWorkflow(
       };
       switch (statement.kind) {
         case 'CALL': {
-          const value = await evaluate(statement.expression, context);
+          const value = await evaluate(statement.expression!, context);
           if (statement.result_binding != null) {
             const type = types.get(statement.result_binding);
             if (type) validateType(value, type, `Result binding ${statement.result_binding}`);
             bindings[statement.result_binding] = value;
           }
-          complete({ target: String(statement.expression.value),
+          complete({ target: String(statement.expression!.value),
             ...(statement.result_binding == null ? {} : { resultBinding: statement.result_binding }), summary: summary(value) });
           break;
         }
+        case 'SELECT': {
+          const clauses: Record<string, JsonValue> = Object.create(null);
+          for (const clause of statement.clauses!) clauses[clause.name] = await evaluate(clause.value, context);
+          const request = snapshotJson(buildSelectionRequest(clauses), 'SELECT request') as JsonObject;
+          const authority = request.selection_policy_ref as string;
+          if (!own(registry, authority)) fail('unknown_selection_authority', `${statement.id}: SELECT authority is unavailable`);
+          let value: JsonValue;
+          try { value = snapshotJson(await wait(registry[authority]!({ request }, context)), 'SELECT output'); }
+          catch (error) {
+            if (error instanceof SrcExecutionError) throw error;
+            fail('selection_failed', `${authority}: ${error instanceof Error ? error.message : String(error)}`);
+          }
+          check();
+          const type = types.get(statement.target!);
+          if (type) validateType(value, type, `SELECT binding ${statement.target}`);
+          bindings[statement.target!] = value;
+          complete({ target: authority, resultBinding: statement.target!, summary: summary(value) });
+          break;
+        }
         case 'IF': {
-          const condition = await evaluate(statement.expression, context);
+          const condition = await evaluate(statement.expression!, context);
           if (typeof condition !== 'boolean') fail('invalid_condition', `${statement.id}: IF requires a Boolean`);
           const body = condition ? statement.body! : statement.else_body ?? EMPTY;
           complete({ summary: condition ? 'true → body' : 'false → else' });
@@ -537,7 +600,7 @@ export async function executeWorkflow(
           break;
         }
         case 'FOR_EACH': {
-          const items = await evaluate(statement.expression, context);
+          const items = await evaluate(statement.expression!, context);
           if (!Array.isArray(items)) fail('invalid_collection', `${statement.id}: FOR EACH requires a finite list`);
           if (items.length > collectionLimit) fail('collection_limit', `${statement.id}: collection exceeds ${collectionLimit} items`);
           complete({ summary: `${items.length} items` });
@@ -552,7 +615,7 @@ export async function executeWorkflow(
         case 'WHILE': {
           const contract = statement.loop_contract!;
           const stop = await evaluate(contract.stop_condition, context);
-          const condition = await evaluate(statement.expression, context);
+          const condition = await evaluate(statement.expression!, context);
           if (typeof stop !== 'boolean' || typeof condition !== 'boolean') fail('invalid_condition', `${statement.id}: WHILE condition/stop must be Boolean`);
           complete({ summary: condition && !stop ? 'while → body' : 'while → complete' });
           if (condition && !stop) {
@@ -563,14 +626,14 @@ export async function executeWorkflow(
           break;
         }
         case 'NEXT': {
-          const target = `${workflow.id}.${String(statement.expression.value)}`, step = steps.get(target)!;
-          complete({ target, summary: `next → ${String(statement.expression.value)}` });
+          const target = `${workflow.id}.${String(statement.expression!.value)}`, step = steps.get(target)!;
+          complete({ target, summary: `next → ${String(statement.expression!.value)}` });
           // Python NEXT discards frames without unwinding loop bindings.
           stack = [{ step, body: step.statements, index: 0 }];
           break;
         }
         case 'STOP': {
-          const value = await evaluate(statement.expression, context);
+          const value = await evaluate(statement.expression!, context);
           complete({ summary: summary(value) });
           check();
           return { value, bindings: Object.freeze({ ...bindings }), trace, instructions };

@@ -2,11 +2,11 @@
   "schema": "logos-engine.v6.declared-entry-coverage.v1",
   "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
   "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
-  "implementation": "logos-engine.typescript.v6.native-migration/0.27.0",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.28.0",
   "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
-  "connected": 45,
+  "connected": 47,
   "declared": 76,
-  "percent": 59.2,
+  "percent": 61.8,
   "groups": [
     {
       "id": "goal_access",
@@ -247,12 +247,12 @@
     {
       "id": "factored_material_return",
       "declared": 33,
-      "connected": 12,
+      "connected": 14,
       "entries": [
         {
           "question": "reactive_contact_continuation",
-          "family": null,
-          "status": "pending"
+          "family": "public_reactive_contact",
+          "status": "connected"
         },
         {
           "question": "observed_addressed_material",
@@ -356,8 +356,8 @@
         },
         {
           "question": "reactive_contact",
-          "family": null,
-          "status": "pending"
+          "family": "public_reactive_contact",
+          "status": "connected"
         },
         {
           "question": "ordered_reaction",
@@ -526,6 +526,7 @@
     {
       "id": "factored_material_return",
       "families": [
+        "public_reactive_contact",
         "factored_material_return",
         "band_transfer",
         "reduction_transport",
@@ -534,12 +535,14 @@
         "public_outline_service",
         "ordered_support_transfer",
         "public_framed_transfer",
+        "public_reactive_contact",
         "oriented_coupling",
         "metric_composition",
         "contextual_compartments",
         "invited_reduction"
       ],
       "entryPoints": [
+        "reactive_contact_continuation",
         null,
         null,
         null,
@@ -548,6 +551,7 @@
         null,
         null,
         "observed_framed_transfer",
+        "reactive_contact",
         null,
         null,
         null,

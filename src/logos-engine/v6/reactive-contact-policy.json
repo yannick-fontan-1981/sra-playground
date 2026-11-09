@@ -1,0 +1,223 @@
+{
+  "schema": "logos-engine.v6.reactive-contact-policy.v1",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "scope": "Exact two consumed V5 fact projections, full local V6 ContactPolicy; not the full production DRM registry.",
+  "sourceHashes": {
+    "agents/yf_arc3_v6/morphology_policy/reactive_contact/contact.drm": "9fb199bcae0f0094d8370844cbde934da9f95c50d6e6b19b492f06aa0ae45350",
+    "agents/yf_arc3_v5/drm/interaction.drm": "12ce3fd97fb267c893f2241fb71a596c5b3b688324ce04211c52932e9e7b8e94"
+  },
+  "projections": {
+    "projection.exploration.current_contact_opens_local_mechanism_question": {
+      "id": "projection.exploration.current_contact_opens_local_mechanism_question",
+      "all_conditions": [
+        {
+          "field": "oriented_square_transport_route_present",
+          "operator": "not_equals",
+          "expected": true
+        },
+        {
+          "expected": true,
+          "field": "entered_cell_visible_support_changed_to_vacated_cell_pattern",
+          "operator": "not_equals"
+        },
+        {
+          "expected": true,
+          "field": "current_targeted_experiment_contract_requested",
+          "operator": "not_equals"
+        },
+        {
+          "expected": true,
+          "field": "relative_escape_candidate_contact_input_available",
+          "operator": "equals"
+        },
+        {
+          "expected": "measured",
+          "field": "relative_escape_contact_measurement_status",
+          "operator": "equals"
+        },
+        {
+          "expected": 0,
+          "field": "relative_escape_contact_component_count",
+          "operator": "greater_than"
+        },
+        {
+          "expected": "discrete",
+          "field": "interaction_measurement_kind",
+          "operator": "equals"
+        },
+        {
+          "expected": false,
+          "field": "is_directional_interface_action",
+          "operator": "equals"
+        },
+        {
+          "expected": false,
+          "field": "candidate_previously_executed_in_current_configuration",
+          "operator": "equals"
+        },
+        {
+          "expected": false,
+          "field": "current_context_no_effect_memory_match",
+          "operator": "equals"
+        },
+        {
+          "expected": 0,
+          "field": "current_context_prior_world_effect_action_count",
+          "operator": "equals"
+        },
+        {
+          "field": "auxiliary_probe_preparation_scope_ready",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "any_conditions": [
+        {
+          "field": "incoming_declared_route_engagement_present",
+          "operator": "equals",
+          "expected": false
+        },
+        {
+          "field": "incoming_declared_route_lease_consumed",
+          "operator": "equals",
+          "expected": true
+        }
+      ],
+      "static_facts": {
+        "current_contact_mechanism_probe": true,
+        "candidate_is_general_unscoped_probe": false,
+        "candidate_attempt_memory_eligible": true,
+        "current_level_deferred_action_family_eligible": true,
+        "goal_ref": "goal.discriminate_current_contact_operator_effect",
+        "active_goal_ref": "goal.discriminate_current_contact_operator_effect",
+        "declared_terminal_goal_ref": "goal.discriminate_current_contact_operator_effect",
+        "active_terminal_goal_ref": "goal.discriminate_current_contact_operator_effect",
+        "subgoal_ref": null,
+        "goal_dependency_chain_refs": [
+          "goal.discriminate_current_contact_operator_effect"
+        ],
+        "goal_graph_edge_refs": [],
+        "advances_active_goal_chain": true,
+        "inherited_priority_from_terminal_goal": false,
+        "declared_complete_plan_present": false,
+        "declared_plan_ref": null,
+        "declared_plan_stage_refs": [],
+        "declared_plan_current_stage_ref": null,
+        "remaining_action_bound": 1,
+        "committed_plan_ref": null,
+        "expected_effect_class": "experimental_unknown",
+        "operational_selection_frontier_required": true,
+        "mechanism_question_ref": "question.does_local_input_change_contacted_body_or_its_binding",
+        "hypothesis_refs": [
+          "hypothesis.contact_changes_binding",
+          "hypothesis.contact_changes_body_state",
+          "hypothesis.contact_input_has_no_effect"
+        ],
+        "information_outcome_refs": [
+          "outcome.contact_binding_changed",
+          "outcome.object_moves_with_control",
+          "outcome.no_contact_effect",
+          "outcome.contact_response_unresolved"
+        ],
+        "mechanism_effect_observation_required": true,
+        "mechanism_outcomes_are_predictions": true,
+        "preserve_parent_plan_until_acquisition_reconciled": true,
+        "selection_principle_ref": "reason.untried_current_contact_discriminates_local_operator_effect",
+        "expected_configuration_or_goal_delta_ref": "expectation.contact_interaction_distinguishes_manipulability",
+        "falsifier_refs": [
+          "falsifier.contact_and_followup_motion_do_not_support_binding"
+        ],
+        "selection_precondition_support_required": true,
+        "current_measured_precondition_fields": [
+          "relative_escape_contact_measurement_status",
+          "relative_escape_contact_component_count",
+          "relative_escape_contact_component_refs",
+          "relative_escape_contact_witnesses",
+          "relative_escape_candidate_contact_input_available",
+          "is_directional_interface_action",
+          "candidate_previously_executed_in_current_configuration"
+        ],
+        "premise_claim_refs": [],
+        "release_premise_claim_refs": [],
+        "canonical_premise_claim_refs": []
+      },
+      "bound_facts": {
+        "contact_experiment_subject_refs": "relative_escape_contact_component_refs",
+        "contact_experiment_witnesses": "relative_escape_contact_witnesses"
+      },
+      "templated_facts": {
+        "discriminating_experiment_ref": "experiment.current_contact_operator.{candidate_ref}",
+        "release_discriminating_experiment_ref": "experiment.current_contact_operator.{candidate_ref}",
+        "reconciliation_checkpoint_ref": "checkpoint.current_contact_operator.{candidate_ref}"
+      }
+    },
+    "projection.exploration.reactive_escape_opens_contact_manipulation_question": {
+      "id": "projection.exploration.reactive_escape_opens_contact_manipulation_question",
+      "all_conditions": [
+        {
+          "field": "current_contact_mechanism_probe",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "relative_escape_candidate_contact_input_available",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "relative_motion_controlled_approach_counteracted",
+          "operator": "equals",
+          "expected": true
+        },
+        {
+          "field": "relative_escape_contact_component_count",
+          "operator": "equals",
+          "expected": 1
+        },
+        {
+          "field": "interaction_measurement_kind",
+          "operator": "equals",
+          "expected": "discrete"
+        },
+        {
+          "field": "is_directional_interface_action",
+          "operator": "equals",
+          "expected": false
+        },
+        {
+          "field": "candidate_previously_executed_in_current_configuration",
+          "operator": "equals",
+          "expected": false
+        }
+      ],
+      "static_facts": {
+        "reactive_escape_contact_probe": true,
+        "mechanism_benefit_question_ref": "question.can_obstacle_manipulation_reduce_observed_escape_options",
+        "hypothesis_refs": [
+          "hypothesis.guide_reactive_peer_into_existing_dead_end",
+          "hypothesis.reshape_escape_domain_with_manipulable_obstacle",
+          "hypothesis.contact_interaction_has_no_effect"
+        ],
+        "information_outcome_refs": [
+          "outcome.contact_binding_changed",
+          "outcome.object_moves_with_control",
+          "outcome.no_contact_effect",
+          "outcome.contact_response_unresolved"
+        ],
+        "mechanism_effect_observation_required": true,
+        "mechanism_outcomes_are_predictions": true,
+        "preserve_parent_plan_until_acquisition_reconciled": true,
+        "selection_principle_ref": "reason.counteracted_approach_opens_contact_manipulation_question",
+        "expected_configuration_or_goal_delta_ref": "expectation.contact_interaction_distinguishes_manipulability",
+        "falsifier_refs": [
+          "falsifier.contact_and_followup_motion_do_not_support_binding"
+        ],
+        "declared_complete_plan_present": false
+      },
+      "bound_facts": {
+        "reactive_escape_contact_subject_refs": "relative_escape_contact_component_refs",
+        "reactive_escape_observation_rows": "relative_escape_transition_rows"
+      }
+    }
+  }
+}
