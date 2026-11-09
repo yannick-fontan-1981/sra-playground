@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "life-replay.json.gz",
+    "sha256": "2f2077a819324b521caccfdd84aec26ee154436e400b3f4f81c98d01fba1c7bb",
+    "bytes": 4447670
+  },
+  "parts": [
+    {
+      "file": "life-replay.json.gz.part000",
+      "sha256": "dae4ee9782faba155df32268d1623d388df6cc41d8afc4b5042d278bcc0e9947",
+      "bytes": 900000
+    },
+    {
+      "file": "life-replay.json.gz.part001",
+      "sha256": "242db919133fca49f2212814b298b6d717ab8e17a035a1f2f8b2a38f06d7632e",
+      "bytes": 900000
+    },
+    {
+      "file": "life-replay.json.gz.part002",
+      "sha256": "d8f9cd7e063f861e1b365a1c1fb8872f80e8592763b4eeac738d1d4bbd3fb7ad",
+      "bytes": 900000
+    },
+    {
+      "file": "life-replay.json.gz.part003",
+      "sha256": "23ebbaee9495d8a60682a7e149df533d79b402548966ab169693b1c78292013c",
+      "bytes": 900000
+    },
+    {
+      "file": "life-replay.json.gz.part004",
+      "sha256": "968260f77602eecf1d81ba0138dec40d975e5f5f75ee71ae8bf9b461fcc062e4",
+      "bytes": 847670
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "smlp-campaign.json.gz",
+    "sha256": "62c06ceee46337429c0cce2a660c1b6dbefe66b602c6fa44791ac1af0f144a39",
+    "bytes": 1276655
+  },
+  "parts": [
+    {
+      "file": "smlp-campaign.json.gz.part000",
+      "sha256": "1ed5ce36fec88c894796225a008fe07160583114768e011ac7fc422cd1367280",
+      "bytes": 900000
+    },
+    {
+      "file": "smlp-campaign.json.gz.part001",
+      "sha256": "d3fb59d96ee823f59ce4dd2589c49e7bf5085aebf80115be8262ece2895d5301",
+      "bytes": 376655
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

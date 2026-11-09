@@ -81,6 +81,8 @@ export class ObservedInventory implements NativeFamily<any> {
     this.goalModels = goalModels; this.callerContext ??= new InventoryCallerContext();
   }
   callerContextState(): R | null { return this.callerContext?.state() ?? null; }
+  /** Read the already acquired common meter. Planning does not observe a frame. */
+  callerMeterForecast(): R | null { return this.callerContext?.meter.forecast() ?? null; }
   observeCallerContext(obs: R, rows: NativeRows): void { this.callerContext?.observePlanning(obs, rows); }
   recordCallerContext(before: NativeObservation, after: NativeObservation, command: R, first: NativeRows, second: NativeRows, proposal: R, index: number): R[] {
     return this.callerContext?.record(before, after, command, first, second, proposal, index) ?? [];

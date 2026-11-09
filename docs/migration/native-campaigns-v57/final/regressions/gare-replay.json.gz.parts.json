@@ -1,0 +1,61 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "gare-replay.json.gz",
+    "sha256": "1f5b5b31eb7766ea3d3d3c76685814ace551c21f6b4af07778cab10062418c81",
+    "bytes": 8949686
+  },
+  "parts": [
+    {
+      "file": "gare-replay.json.gz.part000",
+      "sha256": "ebeb6a9d18873eb7f95c7123bdbeeea1d4f9aada94ebee48128da5bd5d69317e",
+      "bytes": 900000
+    },
+    {
+      "file": "gare-replay.json.gz.part001",
+      "sha256": "c435cd9150c4b9cd7c8d873f1aa36b52f6c1dbc6cd1750600bed021ec7e772e7",
+      "bytes": 900000
+    },
+    {
+      "file": "gare-replay.json.gz.part002",
+      "sha256": "6c1d8a533ccaf07cd6195bb2328b19d84238cce5d240c522965cd201f01e929b",
+      "bytes": 900000
+    },
+    {
+      "file": "gare-replay.json.gz.part003",
+      "sha256": "f7b864653429275c16dbc9d1ee647bbaa78e81df52f4aa9820ebca060c016b83",
+      "bytes": 900000
+    },
+    {
+      "file": "gare-replay.json.gz.part004",
+      "sha256": "e6c354a6e12b44e4ab71c82fcffe424ac8b15c635816c8d28a11ba78a4231735",
+      "bytes": 900000
+    },
+    {
+      "file": "gare-replay.json.gz.part005",
+      "sha256": "c924ee45b58f059fc75c88c0e119af255b821f524fd723c4bd67de5e72fd0842",
+      "bytes": 900000
+    },
+    {
+      "file": "gare-replay.json.gz.part006",
+      "sha256": "523311b08b1949c1ba2d5e46743452d4ec0ffc2c7806d613cfc7abb94914b2fb",
+      "bytes": 900000
+    },
+    {
+      "file": "gare-replay.json.gz.part007",
+      "sha256": "6c9c4dc244be65ccb91142fa9af58130de933ef98c0e5159d774697056b6d3d2",
+      "bytes": 900000
+    },
+    {
+      "file": "gare-replay.json.gz.part008",
+      "sha256": "1f99bbebe06669607499cc6a858e7d843a6939749b0241b9b1d22824207c7a67",
+      "bytes": 900000
+    },
+    {
+      "file": "gare-replay.json.gz.part009",
+      "sha256": "1decfd43410c7e76efe1b82a684234ff67cdad2a1cec210ede03eb00b8bbf332",
+      "bytes": 849686
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

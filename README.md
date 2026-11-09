@@ -28,7 +28,27 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **The v56 milestone completes
+  level**; opening the tab does not move the game. **The v57 milestone completes
+  SMLP's first three levels in 15 actions (3, 4 and 8)** through one cold
+  continuous native common session, nine acquired prefixes and two natural
+  boundary replays. The managed browser independently confirms 15 actions,
+  three solved levels and nine completed plans, with the inspector closed.
+  The target stops on entry to level 4 with `NOT_FINISHED`.
+  This release connects the original `topological_recolor` entry, its six-field
+  owner and the consumed V5 bounded pocket/flood logic. Only selected recolor
+  returns become recolor evidence. It also recovers current motion contrasts
+  in the common information caller, with source resource and preservation
+  checks and an already acquired meter forecast. All measurements remain
+  generic; no game identifier, fixed colour role, coordinate or stored route
+  enters the agent. SMLP uses the existing `configured_arrivals`,
+  `observed_frontier` and `public_occurrence_recall` providers. The unchanged
+  V56 baseline also succeeds, with all 16 public packets, 579 animation frames,
+  15 commands and nine prefix selections identical. The positive Recolor and
+  Motion source contracts are separate evidence from this live success.
+  The audit connects 50/76 source entries (65.8%), with 37 compiled programs;
+  complete V6 parity remains unverified. See the
+  [v57 report](docs/migration/v57-topological-recolor-and-motion-questions.md).
+  **The previous v56 milestone completes
   GLOB's first three levels in 20 actions (5, 11 and 4)** through one cold
   continuous native common session, 17 acquired prefixes and two natural
   boundary replays. The managed browser independently confirms 20 actions,
@@ -235,15 +255,17 @@ Fontan's **Symbolic Reasoning Agent** research.
   **Previous v38 milestone: TICT completes all six levels with official `WIN`
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
-  The current entry audit connects **49 of 76 explicit DRM subquestions
-  (64.5%)** in implementation `logos-engine.typescript.v6.native-migration/0.30.0`,
-  with the newly connected inventory entry using one acquired owner.
+  The current entry audit connects **50 of 76 explicit DRM subquestions
+  (65.8%)** in implementation `logos-engine.typescript.v6.native-migration/0.31.0`,
+  with the newly connected recolor entry using one retained owner.
   The compiled original workflow inventory remains 37. This counts
   connected entries, not full behavioral parity or a percentage of all code.
-  The `observed_inventory_composition` entry now retains its original passive
-  acquisition position and scoped caller context. The still-pending morphology
-  provider and other pending source entries require further source transfer
-  and independent validation; no future game outcome is assumed.
+  The `topological_recolor` entry records only selected returns and retains its
+  six-field state before FramedTransfer acquisition. Current motion information
+  questions reuse acquired Goal history and read the existing meter forecast.
+  The still-pending morphology provider and parent/control admissions require
+  further source transfer and independent validation; no future game outcome
+  is assumed.
   Complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These

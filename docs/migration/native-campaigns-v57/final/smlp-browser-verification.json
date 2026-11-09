@@ -1,0 +1,56 @@
+{
+  "schema": "logos-engine.v57.browser-verification.v1",
+  "status": "passed",
+  "createdAt": "2026-11-09T15:22:13.251520+00:00",
+  "nativeSourceDigest": "f2ec2ff8658290c510a58642612b4f9d4b07a04d8fa6434c91aadda997e6c23e",
+  "sourceUnchanged": true,
+  "url": "http://127.0.0.1:4173/?game=SMLP&level=4",
+  "game": "SMLP",
+  "actions": 15,
+  "levelsSolved": 3,
+  "completedPlans": 9,
+  "enteredLevel": 4,
+  "inspectorOpen": false,
+  "coldSession": true,
+  "userActions": [
+    "Select SMLP from game menu",
+    "Open SRA Agent tab",
+    "Run to next level",
+    "Run to next level",
+    "Run to next level"
+  ],
+  "observedBoundaries": [
+    {
+      "completedLevel": 1,
+      "totalActions": 3,
+      "completedPlans": 3
+    },
+    {
+      "completedLevel": 2,
+      "totalActions": 7,
+      "completedPlans": 5
+    },
+    {
+      "completedLevel": 3,
+      "totalActions": 15,
+      "completedPlans": 9
+    }
+  ],
+  "files": {
+    "smlp-browser-three-levels.png": {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-browser-three-levels.png",
+      "bytes": 76457,
+      "sha256": "3388887993c011399427b111395bd822637284d69a2cf2f1a34d0e495155520e",
+      "sharedSource": "/workspace/shared/smlp-v57-browser-three-levels.png",
+      "sameBytes": true
+    },
+    "smlp-browser-observation.json": {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-browser-observation.json",
+      "bytes": 12192,
+      "sha256": "b1fa8e457ccea3ffb23b30290fec63ecbecfef0737b3e424bb49f94043e9ecbe",
+      "sharedSource": "/workspace/shared/smlp-v57-browser-observation.json",
+      "sameBytes": true
+    }
+  },
+  "qualification": "Independent ordinary browser UI execution of the same frozen native source on managed preview, starting at level1 with zero counters and using three Run to next level clicks. No manual game move, injected state, level jump or new reasoning session. Screenshot and DOM accessibility observation were captured through the browser and copied byte-identically. This verifies preview behavior, not authenticated production access."
+}

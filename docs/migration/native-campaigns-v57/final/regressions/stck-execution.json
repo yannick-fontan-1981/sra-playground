@@ -1,0 +1,128 @@
+{
+  "case": "stck",
+  "game": "STCK",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/native-campaigns-v56/final/regressions/stck-replay.json.gz",
+    "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+    "docs/migration/native-campaigns-v57/final/regressions/stck-replay.json.gz"
+  ],
+  "startedAt": "2026-11-09T15:18:32.442449+00:00",
+  "finishedAt": "2026-11-09T15:19:59.965804+00:00",
+  "elapsedSeconds": 87.52336090099925,
+  "exitCode": 0,
+  "timeoutSeconds": 2400,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/native-campaigns-v56/final/regressions/stck-replay.json.gz",
+    "sha256": "7d20335d04f37a351038ad8acdaa6328281a4ee73536d20c804d6b284c1328fb",
+    "bytes": 3664278
+  },
+  "trace": {
+    "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+    "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+    "bytes": 53583
+  },
+  "output": {
+    "path": "docs/migration/native-campaigns-v57/final/regressions/stck-output.log.gz",
+    "sha256": "ed936c7ea6323ddcd8e2e9bd13a71417abaa60e471995f8abc409c5f9f4df434",
+    "bytes": 3468
+  },
+  "passed": true,
+  "report": {
+    "path": "docs/migration/native-campaigns-v57/final/regressions/stck-replay.json.gz",
+    "sha256": "747edced71dd931c81c9a2c589b8d020d28f1fd7796cae779d748a1cf373628c",
+    "bytes": 3668290
+  },
+  "status": "passed",
+  "actions": 35,
+  "prefixes": 15,
+  "final": {
+    "actions": 35,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 61.62476397600001,
+    "prefixes": 15,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 35,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 71,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 16
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 16
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 16
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 12
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 3
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 17
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 35,
+      "resume": 14
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.31.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/native-campaigns-v57/final/regressions/stck-passive-owner-presence.json",
+    "sha256": "66db2c4423e35dccd1c9d41ac58e7150572897a931a47e2c9a85798c181ce5c5",
+    "bytes": 26519
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 45,
+  "passiveOwnerPrefixesPassed": 45,
+  "passiveOwnerTransitionsRetained": 105,
+  "comparison": {
+    "path": "docs/migration/native-campaigns-v57/final/regressions/stck-comparison.json",
+    "sha256": "87b381ca26f613bee05124bcf5bfa22c517d4822948b97c729dc2e3c7fb77547",
+    "bytes": 10594
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceBeforeDigest": "f2ec2ff8658290c510a58642612b4f9d4b07a04d8fa6434c91aadda997e6c23e",
+  "nativeSourceAfterDigest": "f2ec2ff8658290c510a58642612b4f9d4b07a04d8fa6434c91aadda997e6c23e",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true
+}

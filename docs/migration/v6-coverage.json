@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 145,
-    "partiallyTransferredModules": 118,
+    "componentVerifiedModules": 150,
+    "partiallyTransferredModules": 120,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1106,
+    "pendingModules": 1099,
     "strategyFamilies": 16
   },
   "families": [
@@ -16027,9 +16027,15 @@
           "endLine": 42
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-topological-recolor-geometry.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-topological-recolor-reference.py",
+        "tests/fixtures/v6-topological-recolor-reference.json.gz",
+        "tests/v6-topological-recolor-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/directed_accretive_flow.py",
@@ -29777,7 +29783,8 @@
         "src/logos-engine/v6-ray-capture-domain.ts",
         "src/logos-engine/v6-rooted-quota-mechanics.ts",
         "src/logos-engine/v6-product-panel-mechanics.ts",
-        "src/logos-engine/v6-labeled-sequence-mechanics.ts"
+        "src/logos-engine/v6-labeled-sequence-mechanics.ts",
+        "src/logos-engine/v6-topological-recolor-geometry.ts"
       ],
       "proof": [
         "scripts/export-v6-configured-arrivals-reference.py",
@@ -29794,7 +29801,10 @@
         "tests/v6-product-panel-parity.test.ts",
         "scripts/export-v6-labeled-sequence-reference.py",
         "tests/fixtures/v6-labeled-sequence-reference.json.gz",
-        "tests/v6-labeled-sequence-parity.test.ts"
+        "tests/v6-labeled-sequence-parity.test.ts",
+        "scripts/export-v6-topological-recolor-reference.py",
+        "tests/fixtures/v6-topological-recolor-reference.json.gz",
+        "tests/v6-topological-recolor-reference.test.ts"
       ]
     },
     {
@@ -55492,9 +55502,15 @@
           "endLine": 771
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-topological-recolor-geometry.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-topological-recolor-reference.py",
+        "tests/fixtures/v6-topological-recolor-reference.json.gz",
+        "tests/v6-topological-recolor-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/tracking.py",
@@ -75560,7 +75576,9 @@
         "src/logos-engine/v6-learned-preparation.ts",
         "src/logos-engine/v6-program-control-discovery.ts",
         "src/logos-engine/v6-reactive-contact.ts",
-        "src/logos-engine/v6-ordered-reaction.ts"
+        "src/logos-engine/v6-ordered-reaction.ts",
+        "src/logos-engine/v6-topological-recolor.ts",
+        "src/logos-engine/v6-motion-contrast.ts"
       ],
       "proof": [
         "scripts/export-v6-target-reference.py",
@@ -75636,7 +75654,15 @@
         "docs/migration/native-campaigns-v55/candidate-resolution.json",
         "docs/migration/native-campaigns-v55/final/as66-browser-verification.json",
         "docs/migration/native-campaigns-v55/final/as66-browser-observation.json",
-        "docs/migration/native-campaigns-v55/support-caller-expectation-verification/support-caller-run.json"
+        "docs/migration/native-campaigns-v55/support-caller-expectation-verification/support-caller-run.json",
+        "scripts/export-v6-topological-recolor-reference.py",
+        "tests/fixtures/v6-topological-recolor-reference.json.gz",
+        "tests/v6-topological-recolor-reference.test.ts",
+        "tests/v6-topological-recolor-kernel.test.ts",
+        "scripts/export-v6-motion-contrast-reference.py",
+        "tests/fixtures/v6-motion-contrast-reference.json.gz",
+        "tests/v6-motion-contrast.test.ts",
+        "tests/v6-motion-caller-integration.test.ts"
       ]
     },
     {
@@ -88543,12 +88569,16 @@
       ],
       "status": "partial_transfer",
       "targets": [
-        "src/logos-engine/v6-inventory-continuation.ts"
+        "src/logos-engine/v6-inventory-continuation.ts",
+        "src/logos-engine/v6-motion-contrast.ts"
       ],
       "proof": [
         "scripts/export-v6-inventory-helpers-reference.py",
         "tests/fixtures/v6-inventory-helpers-reference.json.gz",
-        "tests/v6-inventory-helpers-reference.test.ts"
+        "tests/v6-inventory-helpers-reference.test.ts",
+        "scripts/export-v6-motion-contrast-reference.py",
+        "tests/fixtures/v6-motion-contrast-reference.json.gz",
+        "tests/v6-motion-contrast.test.ts"
       ]
     },
     {
@@ -89529,9 +89559,17 @@
           "endLine": 135
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-motion-contrast.ts",
+        "src/logos-engine/v6-native-caller.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-motion-contrast-reference.py",
+        "tests/fixtures/v6-motion-contrast-reference.json.gz",
+        "tests/v6-motion-contrast.test.ts",
+        "tests/v6-motion-caller-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/observed_derivations.py",
@@ -93735,7 +93773,8 @@
         "src/logos-engine/v6-selection-contracts.ts",
         "src/logos-engine/v6-ordered-reaction-policy.ts",
         "src/logos-engine/v6-inventory-policy.ts",
-        "src/logos-engine/v6-observed-inventory.ts"
+        "src/logos-engine/v6-observed-inventory.ts",
+        "src/logos-engine/v6-topological-recolor-policy.ts"
       ],
       "proof": [
         "scripts/export-v6-programs.py",
@@ -93757,7 +93796,11 @@
         "docs/migration/v55-ordered-reactions-and-public-animations.md",
         "scripts/export-v6-inventory-family-reference.py",
         "tests/fixtures/v6-inventory-family-reference.json.gz",
-        "tests/v6-inventory-family-reference.test.ts"
+        "tests/v6-inventory-family-reference.test.ts",
+        "scripts/export-v6-topological-recolor-reference.py",
+        "tests/fixtures/v6-topological-recolor-reference.json.gz",
+        "tests/v6-topological-recolor-reference.test.ts",
+        "tests/v6-topological-recolor-kernel.test.ts"
       ]
     },
     {
@@ -94157,7 +94200,10 @@
         "src/logos-engine/v6-native-runtime.ts",
         "src/logos-engine/v6-learned-preparation.ts",
         "src/logos-engine/v6-reactive-contact.ts",
-        "src/logos-engine/v6-ordered-reaction.ts"
+        "src/logos-engine/v6-ordered-reaction.ts",
+        "src/logos-engine/v6-topological-recolor.ts",
+        "src/logos-engine/v6-motion-contrast.ts",
+        "src/logos-engine/v6-native-caller.ts"
       ],
       "proof": [
         "tests/v6-native-runtime.test.ts",
@@ -94183,7 +94229,15 @@
         "tests/fixtures/v6-ordered-reaction-family-reference.json.gz",
         "tests/v6-ordered-reaction-family-reference.test.ts",
         "tests/v6-ordered-reaction-kernel.test.ts",
-        "docs/migration/v55-ordered-reactions-and-public-animations.md"
+        "docs/migration/v55-ordered-reactions-and-public-animations.md",
+        "scripts/export-v6-topological-recolor-reference.py",
+        "tests/fixtures/v6-topological-recolor-reference.json.gz",
+        "tests/v6-topological-recolor-reference.test.ts",
+        "tests/v6-topological-recolor-kernel.test.ts",
+        "scripts/export-v6-motion-contrast-reference.py",
+        "tests/fixtures/v6-motion-contrast-reference.json.gz",
+        "tests/v6-motion-contrast.test.ts",
+        "tests/v6-motion-caller-integration.test.ts"
       ]
     },
     {
@@ -94673,9 +94727,15 @@
       "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "lines": 0,
       "definitions": [],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-topological-recolor.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-topological-recolor-reference.py",
+        "tests/fixtures/v6-topological-recolor-reference.json.gz",
+        "tests/v6-topological-recolor-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/topological_recolor/family.py",
@@ -94756,9 +94816,17 @@
           "endLine": 61
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-topological-recolor.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-topological-recolor-reference.py",
+        "tests/fixtures/v6-topological-recolor-reference.json.gz",
+        "tests/v6-topological-recolor-reference.test.ts",
+        "tests/v6-topological-recolor-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/topological_recolor/geometry.py",
@@ -94797,9 +94865,15 @@
           "endLine": 92
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-topological-recolor-geometry.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-topological-recolor-reference.py",
+        "tests/fixtures/v6-topological-recolor-reference.json.gz",
+        "tests/v6-topological-recolor-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/topological_recolor/policy.py",
@@ -94832,9 +94906,15 @@
           "endLine": 14
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-topological-recolor-policy.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-topological-recolor-reference.py",
+        "tests/fixtures/v6-topological-recolor-reference.json.gz",
+        "tests/v6-topological-recolor-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/visual_sequences/family.py",
@@ -98235,6 +98315,8 @@
     "Final frozen v55 source contains 214 native files at digest 3794fa1b97951b20f3ce06d2d1d11b20d8c2b47132591fb5b8cf6f3e75b661d3, implementation 0.29.0. The cold AS66 campaign completes levels 1–3 in 5/6/8 actions (19 total), 11 sealed prefixes, 19 acquired returns and one continuous session, entering level4 NOT_FINISHED with target_levels_completed. Four observed_frontier actions and fifteen sliding_cavity actions supply the result; the unchanged v54 baseline already has the same three-level action counts, so no new OrderedReaction causal contribution is inferred. The separate final CASC attempt completes zero levels and stops after one animated_contact point action at frontier_unknown. It is closed 610.948436 seconds after original selection, before its forty-minute deadline; AS66 closes after 870.695328 seconds. The immutable candidate-resolution receipt binds both closures to the original ledger. Independent unchanged-original source replays pass on both: AS66 19 records, 11 complete six-field states/checkpoints, 20 packets/121 animation frames and three official-boundary events/source epoch changes; CASC one record, one complete state/checkpoint and two packets/two frames. Each comparison verifies all 1786 pinned files before/after and imports 719 original source files. Every prefix is selected by another provider (11 AS66, one CASC), so these are exact passive acquisition receipts, not selected reaction guards or reaction game efficacy. The 279-check focused execution includes 276 new checks and three existing ReactiveContact Kernel regressions; broader release checks have their own receipts. All six complete-migration gates remain false.",
     "V55 browser evidence independently passes on the same frozen native source: three ordinary Run to next level clicks in one AS66 session produce cumulative action/level/plan counters 5/1/5, 11/2/8 and 19/3/11, entering level4 with the inspector closed. No manual game input, new-session restart or level jump is used. The retained 384x384 canvas at a 1363x936 viewport is one browser sample, not a responsive/performance campaign or reaction efficacy claim. The initial broader delta records 606 passes and one failed stale sharedSeriesDigestScope metadata assertion among 607 checks. Exact published-v54 git bytes, the unchanged source constant and runtime binding establish the stale expectation without claiming an isolated baseline execution. One expected string is corrected; the full support-caller file passes 21/21. The original failed receipt/log, all frozen native files and execution archive remain byte-identical. The same 607-check set has a separate rerun receipt; final broader checks and regressions remain separately qualified. All six complete-migration gates remain false.",
     "V56 connects the single observed_inventory_composition material entry to ObservedInventory at its declared position; the separately regenerated four-list entry audit records 49 of 76 entries (64.5%), including 16 of 33 material entries. Its nineteen original inventory rules use an existing SRC entry, leaving 37 compiled programs. Fifteen nonempty local package modules and the explicitly empty initializer have bounded component evidence; full ObservedMeter and CollectionEvidence behavior has separate caller-context contracts. Shared V5 interaction, frame, transition and contracts remain partial on exact wrapper-supplied fields/defaults. Imported-source inventory is not a whole-dependency claim. Inventory planning only reads an already existing forecast; MorphologyAdapter planning-time meter observation remains with that pending provider. Native collection-before-meter acquisition does not imply full adapter or common strategic caller parity. All six complete-migration gates remain false.",
-    "V56 component proof and campaign attribution remain separate. The unchanged published V55 GLOB baseline in docs/migration/native-campaigns-v56/baseline-glob/ completes levels 1–3 in 5/11/4 actions (20 total), 17 sealed prefixes and one cold continuous session, entering level 4 NOT_FINISHED with target_levels_completed. Its existing observed_frontier/fixed_origin/information_goal providers already supply that success; no new inventory causal contribution is inferred. The immutable candidate ledger records selection at 2026-11-09T13:59:36.727704+00:00 and deadline 2026-11-09T14:39:36.727704+00:00; baseline success closes after 52.039416 seconds without resetting the clock. Byte-identical relocation is separately hashed. The separate final frozen V56 execution also passes those three levels in 20 actions, 17 prefixes and one cold session; its full 21 public packets equal the unchanged baseline. Native digest bade8fd58991e6a127abc84f373d539edeaa70d45ab0da94a84a6751fdc92de5 retains 232 files. The final run finishes 22 minutes 57.258916 seconds after original selection, before the same immutable deadline. Independent browser controls show 20 actions, 3 solved levels and 17 completed plans with the inspector closed. The original-source comparator passes 90 actual source-facing calls and 17 complete checkpoints, including 13 inventory proposal abstentions, 20 source records, 20 meter observations, 20 collection records and 17 preservation queries. All 17 prefixes belong to other providers; positive inventory behavior is supported separately by source fixtures. Final receipts are under docs/migration/native-campaigns-v56/final/ and candidate-final-resolution.json resolves the historical initial ledger. No full-game victory, selected-inventory efficacy or complete caller parity is inferred from this baseline or component fixtures."
+    "V56 component proof and campaign attribution remain separate. The unchanged published V55 GLOB baseline in docs/migration/native-campaigns-v56/baseline-glob/ completes levels 1–3 in 5/11/4 actions (20 total), 17 sealed prefixes and one cold continuous session, entering level 4 NOT_FINISHED with target_levels_completed. Its existing observed_frontier/fixed_origin/information_goal providers already supply that success; no new inventory causal contribution is inferred. The immutable candidate ledger records selection at 2026-11-09T13:59:36.727704+00:00 and deadline 2026-11-09T14:39:36.727704+00:00; baseline success closes after 52.039416 seconds without resetting the clock. Byte-identical relocation is separately hashed. The separate final frozen V56 execution also passes those three levels in 20 actions, 17 prefixes and one cold session; its full 21 public packets equal the unchanged baseline. Native digest bade8fd58991e6a127abc84f373d539edeaa70d45ab0da94a84a6751fdc92de5 retains 232 files. The final run finishes 22 minutes 57.258916 seconds after original selection, before the same immutable deadline. Independent browser controls show 20 actions, 3 solved levels and 17 completed plans with the inspector closed. The original-source comparator passes 90 actual source-facing calls and 17 complete checkpoints, including 13 inventory proposal abstentions, 20 source records, 20 meter observations, 20 collection records and 17 preservation queries. All 17 prefixes belong to other providers; positive inventory behavior is supported separately by source fixtures. Final receipts are under docs/migration/native-campaigns-v56/final/ and candidate-final-resolution.json resolves the historical initial ledger. No full-game victory, selected-inventory efficacy or complete caller parity is inferred from this baseline or component fixtures.",
+    "V57 connects the single topological_recolor material declaration at source position 18 through one six-field owner; the declared entry metric becomes 50/76 (65.8%) and material 17/33, with the regenerated audit as its separate attestation. Three nonempty local V6 Recolor modules and its explicitly empty initializer have component evidence; its original DRM/SRC uses an existing workflow, leaving 37 compiled programs. Inherited topological_region_recolor, digital_topology and mechanical_family_contracts_d remain partial on consumed helpers and caller-supplied bounds. Stateless motion_contrast is separately component-verified, while shared geometry remains partial on footprint, rigid_role and the component-only projection of pairs. Neither this producer nor readonly forecast use transfers the pending MorphologyAdapter or its planning-time meter observation. All six complete-migration gates remain false.",
+    "V57 component and caller proof comprises 99 Recolor reference/native contracts plus three common Kernel tests, and 34 motion-producer contracts plus six common caller tests (142 checks). The positive Recolor sequence uses four synthetic public returns from cold component memory, preserving all original receipts and six source fields, with no goal-confirmation claim. Motion positives are likewise controlled component evidence. SMLP already succeeds under the unchanged V56 baseline; these closures alone establish no causal improvement or selected-Recolor/motion efficacy on SMLP. Frozen public execution, unchanged-original replay and browser evidence are separate forthcoming attestations; no unexecuted public-comparison result or file is linked here."
   ]
 }

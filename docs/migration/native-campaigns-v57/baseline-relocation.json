@@ -1,0 +1,109 @@
+{
+  "schema": "logos-engine.v57.baseline-evidence-relocation.v1",
+  "copiedAt": "2026-11-09T15:09:26.181050+00:00",
+  "originCheckout": "/workspace/scratch/c4dd29871d33/v57-candidate-baseline",
+  "destinationCheckout": "/workspace/scratch/c4dd29871d33/sra-playground-v57/.sites-checkout",
+  "records": [
+    {
+      "path": "docs/migration/native-campaigns-v57/baseline-smlp/execution-smlp.json",
+      "sha256": "9f7d9e034dc6441ceed0bff14f8562200b328ec7b7425ce94adca92d14c0e1b4",
+      "bytes": 58914
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/baseline-smlp/smlp-actual-public-journal.jsonl.gz",
+      "sha256": "12026a9c7b102f3e362ebd985a3ea4c6880146d922c7ccbd4b6872f51c067c85",
+      "bytes": 53321
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/baseline-smlp/smlp-campaign.json.gz",
+      "sha256": "8f2cb01c7159354a7e433c3d2a892906abb169fc628534097105455d37398783",
+      "bytes": 1252238
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/baseline-smlp/smlp-campaign.json.gz.part000",
+      "sha256": "871fa628e8cc2d3f8a84e09b317bff5252fe9d156c41600c6ada3f49e0813284",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/baseline-smlp/smlp-campaign.json.gz.part001",
+      "sha256": "0aa1170dc9dc9a8dd4ebcc4b66d5eaa0f63f46023c5fd087d0b43acc29f8c831",
+      "bytes": 352238
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/baseline-smlp/smlp-campaign.json.gz.parts.json",
+      "sha256": "556bff8067715ac1e7eeb79e80efc6598b495ee3e0a18bb15653e9769b5759fc",
+      "bytes": 673
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/baseline-smlp/smlp-output.log.gz",
+      "sha256": "11d2e7f2ef7fe0471682ceb8be3a1e53a4e14c9083b46c448d7edb6aa1e5197d",
+      "bytes": 2425
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/baseline-smlp/smlp-public-trace.json.gz",
+      "sha256": "7eb70ab823d95837235a49350aa0fb26e306c2b477af9be4880fd93371b3440b",
+      "bytes": 111624
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/baseline-smlp/source-archive-parts.json",
+      "sha256": "6e963ee8b9fd9d6a06a9cdea19a710b9568be3609c1960b2a29eb09b41a71dc7",
+      "bytes": 833
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/baseline-smlp/source-archive.json",
+      "sha256": "b6f7f359dbf05c5bb9e0cc79fb88f5659c467fafd68d8f003c29c0049112bb6f",
+      "bytes": 29014
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/baseline-smlp/source-archive.tar.gz",
+      "sha256": "cc884d460c2016b7241ec7564a7ae8244af93841a0307e59d6e0d4eea84b1352",
+      "bytes": 1546810
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/baseline-smlp/source-archive.tar.gz.part000",
+      "sha256": "4d69603e78c1598a82319505ca9f34ec4b55b673e937bdbe8fbd2fcd7cf8d754",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/baseline-smlp/source-archive.tar.gz.part001",
+      "sha256": "971cbece40ede8dd42e86e682b65bf1905f899ae42f32d3945003dc3ddd791c1",
+      "bytes": 646810
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/baseline-smlp/source-manifest.json",
+      "sha256": "cc0abc39e125c98c9462c1896b71cd8628ab4c371adb2e7938197f40cf4b23b3",
+      "bytes": 27369
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/baseline-summary.json",
+      "sha256": "2ef497ce3201f2305c822b632c5523848e659445555be1dff791dc81e27b4e29",
+      "bytes": 4811
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/candidate-selection.json",
+      "sha256": "1cebb78000c8518f73754784fad8ae57bb6526088065561eda7edc564c0b8a50",
+      "bytes": 1489
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/candidates/001-smlp-selection.json",
+      "sha256": "2080e664e32badaf6ad0ee2c38e825fe26320348e8eeaf6100cd745b23ca39c5",
+      "bytes": 1030
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/initial-morphology-rerun.json",
+      "sha256": "d92a26f803e2d175f0780955a79b642edfcecf7b1927a54f4f434d5018f6dba2",
+      "bytes": 46670
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/initial-morphology.json",
+      "sha256": "8e130872225c749aae1872de6541797f3a5064328cb086205c8e36cad1c67b53",
+      "bytes": 46670
+    },
+    {
+      "path": "scripts/select-v57-public-candidate.mjs",
+      "sha256": "cd890afdc0016fcdff48386cd75963765cb6d932cac1d13274814b5c6129fb6e",
+      "bytes": 3933
+    }
+  ],
+  "qualification": "Every listed file copied byte-identically. Original selection clocks, receipts, recorded commands and paths retained without rewriting. This relocation performs no game execution and changes no native implementation."
+}

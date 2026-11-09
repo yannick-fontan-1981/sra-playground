@@ -16,6 +16,7 @@ import { PointExperimentMemory } from './v6-point-contrasts.ts';
 import { CoupledDisplays } from './v6-coupled-displays.ts';
 import { ControlDependencies, bindPreservation, checkPreservation } from './v6-transition-learning.ts';
 import { electInformationGoals, pointGoal, reconcileInformationGoal } from './v6-information-goals.ts';
+import { motionOffers } from './v6-motion-contrast.ts';
 import { ObservedInputDomain } from './v6-native-observer.ts';
 import { targetMethodAtBoundary } from './v6-target-method.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
@@ -303,12 +304,28 @@ export class NativeCallerCoordinator {
     const proposal = await this.frontier.propose(observation, inputs, { prefix_evidence: [], experimental_probes: offer ? [offer] : [], control_probe: control });
     this.persistDeltas(observation); return proposal;
   }
+  /** Source movement contrasts consume the same acquired episode and current
+   * snapshot as the other information questions. The meter is read, not advanced.
+   * MorphologyAdapter's parent/control admission remains a separate pending port.
+   */
+  async currentMotionOffers(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number,
+    meter: R | null): Promise<R[]> {
+    const scope = { actions: inputs, remaining_actions: remaining, remaining_meter_steps: meter?.steps_before_empty ?? null,
+      preserve_cells: (observation as R).preserve_cells ?? [] };
+    const current = this.goal.memory.snapshot(observation, rows);
+    return (await motionOffers(this.goal.memory.episode, current, scope, observation)).map(candidate => ({ ...candidate, source: 'motion_contrast' }));
+  }
+  async currentInformationOffer(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number,
+    meter: R | null): Promise<R | null> {
+    return this.informationOffer(observation, rows, inputs, remaining, { meter, currentMotion: true });
+  }
   /** Elect only observed offers. Additional source producers enter as explicit inputs. */
   async informationOffer(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number,
-    options: { meter: R | null; additionalOffers?: readonly R[]; admit?: (candidate: R, receipt: R) => Promise<boolean> } = { meter: null }): Promise<R | null> {
+    options: { meter: R | null; additionalOffers?: readonly R[]; currentMotion?: boolean; admit?: (candidate: R, receipt: R) => Promise<boolean> } = { meter: null }): Promise<R | null> {
     const policy = this.configuration.strategy.information_goal;
     const offers = (await this.points.offers(observation, inputs)).map(pointGoal);
     offers.push(...this.displays.offers(observation, rows, inputs, policy.coupled_displays), ...(options.additionalOffers ?? []));
+    if (options.currentMotion) offers.push(...await this.currentMotionOffers(observation, rows, inputs, remaining, options.meter));
     for (const [candidate, receipt] of electInformationGoals(offers, observation, remaining, options.meter, policy)) {
       if (options.admit && !await options.admit(candidate, receipt)) continue;
       const proposal = await this.frontier.propose(observation, inputs, { curiosity: receipt, experimental_probes: candidate.native_probe ? [candidate.native_probe] : [] });

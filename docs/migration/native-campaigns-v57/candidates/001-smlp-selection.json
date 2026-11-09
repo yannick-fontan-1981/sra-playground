@@ -1,0 +1,14 @@
+{
+  "schema": "logos-engine.v57.immutable-candidate-selection.v1",
+  "game": "SMLP",
+  "selectedAt": "2026-11-09T15:05:58.388528+00:00",
+  "blockedDeadline": "2026-11-09T15:45:58.388528+00:00",
+  "baseCommit": "54b6057c5c53490a2dea5929003992551f442099",
+  "criterion": "Only unqualified game among the 100 retained initial public rasters admitted by the existing configuredScene measurement. This fits already connected configured_arrivals; common exploration still must acquire the atomic launch and actual route/timing evidence. Public catalog describes shared-exit timing. No success assumed.",
+  "measurement": {
+    "path": "docs/migration/native-campaigns-v57/initial-morphology.json",
+    "sha256": "8e130872225c749aae1872de6541797f3a5064328cb086205c8e36cad1c67b53"
+  },
+  "targetOfficialLevels": 3,
+  "scope": "Fresh unchanged V56 native common caller. No supplied route, probe, learned state, policy override or game-source inspection. Maximum one active candidate process; stop and switch before deadline if blocked."
+}

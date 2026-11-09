@@ -2,11 +2,11 @@
   "schema": "logos-engine.v6.declared-entry-coverage.v1",
   "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
   "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
-  "implementation": "logos-engine.typescript.v6.native-migration/0.30.0",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.31.0",
   "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
-  "connected": 49,
+  "connected": 50,
   "declared": 76,
-  "percent": 64.5,
+  "percent": 65.8,
   "groups": [
     {
       "id": "goal_access",
@@ -247,7 +247,7 @@
     {
       "id": "factored_material_return",
       "declared": 33,
-      "connected": 16,
+      "connected": 17,
       "entries": [
         {
           "question": "reactive_contact_continuation",
@@ -336,8 +336,8 @@
         },
         {
           "question": "topological_recolor",
-          "family": null,
-          "status": "pending"
+          "family": "public_topological_recolor",
+          "status": "connected"
         },
         {
           "question": "axial_question",
@@ -536,6 +536,7 @@
         "public_outline_service",
         "ordered_support_transfer",
         "public_framed_transfer",
+        "public_topological_recolor",
         "public_reactive_contact",
         "public_ordered_reaction",
         "oriented_coupling",
@@ -554,6 +555,7 @@
         null,
         null,
         "observed_framed_transfer",
+        "topological_recolor",
         "reactive_contact",
         "ordered_reaction",
         null,

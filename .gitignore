@@ -57,3 +57,22 @@ __pycache__/
 /docs/migration/native-campaigns-v56/final/regressions/as66-replay.json.gz
 /docs/migration/native-campaigns-v56/final/regressions/gare-replay.json.gz
 /docs/migration/native-campaigns-v56/final/regressions/re86-replay.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/native-campaigns-v57/baseline-smlp/smlp-campaign.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/native-campaigns-v57/final/regressions/as66-replay.json.gz
+/docs/migration/native-campaigns-v57/final/regressions/catl-replay.json.gz
+/docs/migration/native-campaigns-v57/final/regressions/cn04-replay.json.gz
+/docs/migration/native-campaigns-v57/final/regressions/colm-replay.json.gz
+/docs/migration/native-campaigns-v57/final/regressions/gare-replay.json.gz
+/docs/migration/native-campaigns-v57/final/regressions/glob-replay.json.gz
+/docs/migration/native-campaigns-v57/final/regressions/gril-replay.json.gz
+/docs/migration/native-campaigns-v57/final/regressions/life-replay.json.gz
+/docs/migration/native-campaigns-v57/final/regressions/re86-replay.json.gz
+/docs/migration/native-campaigns-v57/final/regressions/sele-replay.json.gz
+/docs/migration/native-campaigns-v57/final/regressions/stck-replay.json.gz
+/docs/migration/native-campaigns-v57/final/regressions/valv-replay.json.gz
+/docs/migration/native-campaigns-v57/final/regressions/zipp-replay.json.gz
+/docs/migration/native-campaigns-v57/final/smlp-campaign.json.gz

@@ -89,7 +89,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     status: 'running', referenceCommit: V6_REFERENCE_COMMIT,
     budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: 360, clock: 'real active compute and native execution' },
     source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [], domainAssessments: [],
-    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [],
+    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], motionSourceCalls: [], motionSnapshots: {},
   };
   if (options.recordedPublic) report.recordedPublicReplay = {
     trace: options.recordedPublic.trace, baseline: options.recordedPublic.baseline,
@@ -147,6 +147,60 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           };
         }
       }
+      const recolor = (runtime as unknown as { families: R[] }).families.find(f => f.id === 'public_topological_recolor');
+      if (recolor) {
+        let sourceDepth = 0;
+        for (const method of ['proposeSource', 'recordSource']) {
+          const original = recolor[method];
+          assert.equal(typeof original, 'function', `Missing topological recolor source surface: ${method}`);
+          recolor[method] = function (...args: any[]) {
+            if (sourceDepth) return original.apply(this, args);
+            const event: R = { index: report.recolorSourceCalls.length, method,
+              arguments: structuredClone(args), sourceBefore: this.state() };
+            sourceDepth++;
+            const complete = (result: any): any => {
+              event.result = structuredClone(result ?? null); event.sourceAfter = this.state();
+              report.recolorSourceCalls.push(event); sourceDepth--; return result;
+            };
+            const failed = (error: unknown): never => {
+              event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+              event.sourceAfter = this.state(); report.recolorSourceCalls.push(event); sourceDepth--; throw error;
+            };
+            try {
+              const result = original.apply(this, args);
+              return result && typeof result.then === 'function' ? result.then(complete, failed) : complete(result);
+            } catch (error) { return failed(error); }
+          };
+        }
+      }
+      // The caller is constructed during initialize. Observe its actual instance
+      // before the first plan, without replacing any producer or supplying state.
+      const backend = runtime as unknown as R, originalPlan = backend.plan, observedCallers = new WeakSet<object>();
+      const observedSnapshots = new WeakMap<object, string>();
+      const snapshotRef = (snapshot: R): string => {
+        const previous = observedSnapshots.get(snapshot); if (previous) return previous;
+        const ref = snapshot.ref as string, value = structuredClone(snapshot);
+        if (Object.hasOwn(report.motionSnapshots, ref)) assert.deepEqual(value, report.motionSnapshots[ref], `Conflicting public motion snapshot: ${ref}`);
+        else report.motionSnapshots[ref] = value;
+        observedSnapshots.set(snapshot, ref); return ref;
+      };
+      backend.plan = function (...args: any[]) {
+        const caller = this.caller;
+        if (caller && !observedCallers.has(caller)) {
+          observedCallers.add(caller);
+          const original = caller.currentMotionOffers;
+          caller.currentMotionOffers = async function (...inputs: any[]) {
+            // Store each public snapshot once. Repeating complete historical
+            // rasters per planning call would make this evidence grow quadratically.
+            const event: R = { index: report.motionSourceCalls.length, arguments: structuredClone(inputs),
+              history: this.goal.memory.episode.map(([before, command, after]: [R, string, R]) => [snapshotRef(before), command, snapshotRef(after)]),
+              current: snapshotRef(this.goal.memory.snapshot(inputs[0], inputs[1])) };
+            try { const result = await original.apply(this, inputs); event.result = structuredClone(result); report.motionSourceCalls.push(event); return result; }
+            catch (error) { event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error); report.motionSourceCalls.push(event); throw error; }
+          };
+        }
+        return originalPlan.apply(this, args);
+      };
       if (options.providerDiagnostics) {
         // Observe the actual instance call without altering its inputs, result,
         // budget, priority or retained state. No game object enters the runtime.
@@ -220,6 +274,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             ? read('family_state:public_ordered_reaction') : null;
           const inventoryCheckpoint = graph.nodes['family_state:public_observed_inventory']
             ? read('family_state:public_observed_inventory') : null;
+          const recolorCheckpoint = graph.nodes['family_state:public_topological_recolor']
+            ? read('family_state:public_topological_recolor') : null;
           const reasoningFacts = (read('reasoning:memory').facts as string[]).map(read);
           const framedFacts = reasoningFacts
             .filter(fact => evidence.transitions.some((_: R, index: number) =>
@@ -236,6 +292,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const inventoryFacts = reasoningFacts
             .filter(fact => evidence.transitions.some((_: R, index: number) =>
               fact.key === `observed_inventory_event:${evidence.decision_revision + index}`));
+          const recolorFacts = reasoningFacts
+            .filter(fact => evidence.transitions.some((_: R, index: number) =>
+              fact.key === `topological_recolor_event:${evidence.decision_revision + index}`));
           const anchors = (series.events as R[]).filter(event => event.kind === 'coupled_pair_epoch_anchor');
           const alternating = (series.events as R[]).filter(event => event.kind === 'alternating_graph_evidence');
           const graphEvidence = alternating.at(-1);
@@ -355,6 +414,16 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               ...(evidence.proposal.inventory_plan ? { selectedProposal: evidence.proposal } : {}),
               qualification: 'Evidence only: actual eight-field inventory owner, caller meter/collection context, sealed transition references and complete native checkpoint. Source method calls retain losing proposal evaluation and acquisition order without providing inputs, state or actions to the production agent.',
             } } : {}),
+            ...(recolorCheckpoint ? { recolorAcquisition: {
+              stateNode: 'family_state:public_topological_recolor', checkpointFormat: recolorCheckpoint.format,
+              sourceState: recolorCheckpoint.source_state, nativeCheckpoint: recolorCheckpoint,
+              transitions: evidence.transitions, sourceCallsThrough: report.recolorSourceCalls.length,
+              acquired: recolorFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
+              ...(evidence.proposal.recolor_plan ? { selectedProposal: evidence.proposal } : {}),
+              qualification: 'Actual single six-field source owner. Only selected recolor actions call record; foreign returns do not become recolor experiments. Complete losing proposal evaluations and sealed checkpoints are observed without providing state or decisions.',
+            } } : {}),
+            informationGoal: evidence.proposal.question?.curiosity ?? null,
+            motionSourceCallsThrough: report.motionSourceCalls.length,
             ...(evidence.proposal.labeled_sequence_plan
               ? { labeledSequenceLabel: evidence.proposal.labeled_sequence_plan.label,
                   labeledSequenceQuery: evidence.proposal.labeled_sequence_plan.scene.query.words[0].values,

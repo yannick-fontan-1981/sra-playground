@@ -1,0 +1,56 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "zipp-replay.json.gz",
+    "sha256": "ff6973871e967ce1b754dcca587476afea032bf6e0c52ef210158909e54d2ce7",
+    "bytes": 7633951
+  },
+  "parts": [
+    {
+      "file": "zipp-replay.json.gz.part000",
+      "sha256": "ab2b4f52043caf8e2ba8bac3f93939119796abf7909ebe3536858d6f9bdaf14d",
+      "bytes": 900000
+    },
+    {
+      "file": "zipp-replay.json.gz.part001",
+      "sha256": "d36f1af28e71fa67c5c180f5016321ab9d7372394d49740907a0f990d13e834e",
+      "bytes": 900000
+    },
+    {
+      "file": "zipp-replay.json.gz.part002",
+      "sha256": "d6fe1b316c2a2e3a0632d5c3c83616783217b8066df0f80f3a3bbe244398fa73",
+      "bytes": 900000
+    },
+    {
+      "file": "zipp-replay.json.gz.part003",
+      "sha256": "f61c724b409a6e5265845974572e80a251f4a2f45a59500f0ef4a69a777e5e56",
+      "bytes": 900000
+    },
+    {
+      "file": "zipp-replay.json.gz.part004",
+      "sha256": "028b81eff131f98390d33867f946894e658645454ab371fe6845b058abd48ed7",
+      "bytes": 900000
+    },
+    {
+      "file": "zipp-replay.json.gz.part005",
+      "sha256": "d59ee6dd09ffe025ce1b90d96c8e5c5d901a44098c6b6d43a78a2317dbc11082",
+      "bytes": 900000
+    },
+    {
+      "file": "zipp-replay.json.gz.part006",
+      "sha256": "523c1bf0b9a90e55532897ce5a78742738b9d9ab3b4b5be591930a5697fd4ae0",
+      "bytes": 900000
+    },
+    {
+      "file": "zipp-replay.json.gz.part007",
+      "sha256": "db0b8427ba18126a0f04d40ba006a7f0e57ba4b332251b95979234c633bbaedb",
+      "bytes": 900000
+    },
+    {
+      "file": "zipp-replay.json.gz.part008",
+      "sha256": "eab25d7ee8cc353afe2bcadee375677830e22fb3cc48f9013de7f82e4a4147fc",
+      "bytes": 433951
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

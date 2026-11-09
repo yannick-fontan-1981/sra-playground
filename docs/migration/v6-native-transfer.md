@@ -11,7 +11,39 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v56):** the native common caller completes
+**Current integrated milestone (v57):** the native common caller completes
+**SMLP's first three levels in 15 actions (3, 4, 8)** in one cold continuous
+session, with nine acquired prefixes, 15 actual Kernel acquisitions and two
+natural boundary replays. The
+[actual campaign](native-campaigns-v57/final/smlp-campaign.json.gz) and
+[execution receipt](native-campaigns-v57/final/execution-smlp.json) bind this
+result to unchanged implementation `0.31.0` and native digest
+`f2ec2ff8658290c510a58642612b4f9d4b07a04d8fa6434c91aadda997e6c23e`.
+It stops on entry to level 4 with `NOT_FINISHED`. The independent
+[browser verification](native-campaigns-v57/final/smlp-browser-verification.json)
+confirms the same counters through ordinary controls, with the inspector closed.
+
+The new `topological_recolor` entry connects one six-field owner, the original
+local DRM/SRC policy and bounded consumed V5 flood/pocket logic. Recolor records
+only selected returns; foreign actions never become its experiments. The
+common information caller also regains current motion contrast offers from
+public history, with source preservation/resource checks and the already
+acquired meter forecast. No new planning-time meter observation or complete
+MorphologyAdapter/parent-return transfer is claimed.
+
+The [unchanged V56 comparison](native-campaigns-v57/final/smlp-baseline-public-comparison.json)
+matches all 16 public packets, 579 animation frames, 15 commands and nine prefix
+selections. SMLP uses existing generic providers; its success is not attributed
+to the new Recolor/Motion logic. Their 142 positive and refusal contracts are
+separate evidence. The frozen release delta passes 252 checks. The final live
+result is reached 11 minutes 38 seconds after the immutable candidate selection,
+within the user's 40-minute bound. The entry audit reaches **50/76 (65.8%)**,
+including **17/33 material entries**, and the compiled inventory remains 37.
+All complete-migration gates remain false. See the
+[v57 report](v57-topological-recolor-and-motion-questions.md) for exact scopes,
+validation and retained evidence.
+
+**Previous integrated milestone (v56):** the native common caller completes
 **GLOB's first three levels in 20 actions (5, 11, 4)** in one cold continuous
 session, with 17 acquired prefixes, 20 actual Kernel acquisitions and two
 natural boundary replays. The
