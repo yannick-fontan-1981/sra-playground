@@ -1,0 +1,22 @@
+{
+  "schema": "logos-engine.diagnostic-generator-relocation.v1",
+  "recordedAt": "2026-11-09T22:56:35Z",
+  "operation": "byte_identical_copy_without_reexecution",
+  "originalGenerator": {
+    "path": "/workspace/scratch/c4dd29871d33/lot3a-panel-measurement-cost.mjs",
+    "sha256": "960079e28e34361c7839bd07f7c3c6a3aac9c6387887a16d5dcb96b2fb52814f"
+  },
+  "retainedGenerator": {
+    "path": "scripts/diagnose-panel-measurement-cost.mjs",
+    "sha256": "960079e28e34361c7839bd07f7c3c6a3aac9c6387887a16d5dcb96b2fb52814f"
+  },
+  "originalReceipt": {
+    "path": "docs/migration/lot3a-evidence/diagnostics/panel-measurement-cost.json",
+    "sha256": "241be0bf21a06cbc6d0dfe3ebb9ae321ac577100c15a7ccf6aa72e0f6c40ef55",
+    "rewritten": false
+  },
+  "nativeCodeChanged": false,
+  "benchmarkRerun": false,
+  "gameHostInvoked": false,
+  "physicalActions": 0
+}

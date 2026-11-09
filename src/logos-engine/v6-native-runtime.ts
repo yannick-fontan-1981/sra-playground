@@ -60,7 +60,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.36.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.37.0';
 // The implementation identity and public snapshot describe the same extensions.
 const NATIVE_CALLER_EXTENSIONS = ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
   'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery',
@@ -1366,7 +1366,11 @@ export class NativeV6Runtime implements NativeV6Backend {
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       implementation: NATIVE_V6_IMPLEMENTATION, coverage: { status: 'in_progress', registeredFamilies: this.families.map(f => f.id),
         sourceGroups: this.groups, emptySourceGroups: this.groups.filter(group => !group.families.length).map(group => group.id),
-        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_native_relations_typed_material_and_pose_radial_ports_field_service_rooted_quota_native_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_and_coupled_support_composition; remaining ObservedCompositionConstraint providers pending',
+        partialEntryPoints: this.groups.some(group => group.entryPoints?.includes('observed_composition_services')) ? {
+          observed_composition_services: { owner: 'public_occurrence_recall', connectedBranches: ['panel_service_plan'],
+            pendingBranches: ['exposed_reception_plan', 'chamber_relation_plan', 'rooted_line_plan', 'reception_service_plan', 'reference_population_plan'] },
+        } : {},
+        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_native_relations_typed_material_and_pose_radial_ports_field_service_rooted_quota_native_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_composition_and_panel_service; observed_composition_services 1/6 branches connected; remaining ObservedCompositionConstraint providers pending',
         sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,
         nativeCallerExtensions: NATIVE_CALLER_EXTENSIONS,
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
@@ -1587,7 +1591,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     (configuration.window_constraints as R).product_panel_composition, (configuration.window_constraints as R).labeled_sequence_composition,
     (configuration.window_constraints as R).trace_field_composition, (configuration.window_constraints as R).linked_packet_composition,
     (configuration.window_constraints as R).queued_field_composition, (configuration.window_constraints as R).occluded_catalogue_composition,
-    (configuration.window_constraints as R).typed_material_flow, (configuration.window_constraints as R).field_service_composition);
+    (configuration.window_constraints as R).typed_material_flow, (configuration.window_constraints as R).field_service_composition,
+    configuration.observed_composition_services);
   const policy = loaded.common as R;
   const supportChildren: Record<string, NativeFamily<any>> = {
     ordered_support_transfer: ordered,
@@ -1621,7 +1626,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     .filter(question => windowProviders[question]);
   const groupMembers: Record<string, readonly string[]> = {
     goal_access: (configuration.goal_access_subquestions as string[]).flatMap(question => {
-      if (question === 'coupled_support_composition' || question === 'alternating_graph_composition') return [recall.id];
+      if (['observed_composition_services', 'coupled_support_composition', 'alternating_graph_composition'].includes(question)) return [recall.id];
       if (question === 'scored_relation_access') return ['goal_access'];
       if (question === 'observed_support_access') return [supports.id];
       return supportChildren[question] ? [supportChildren[question]!.id] : [];
@@ -1646,7 +1651,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     view: ['view', recall.id], view_continuity: ['view_continuity'], observed_frontier: ['observed_frontier'],
   };
   const goalEntryPoints = (configuration.goal_access_subquestions as string[]).flatMap<string | null>(question => {
-    if (question === 'coupled_support_composition' || question === 'alternating_graph_composition') return [question];
+    if (['observed_composition_services', 'coupled_support_composition', 'alternating_graph_composition'].includes(question)) return [question];
     return ['scored_relation_access', 'observed_support_access'].includes(question) || supportChildren[question] ? [null] : [];
   });
   const materialEntryPoints = configuration.factored_material_return.ordered_subquestions.flatMap<string | null>(question => {

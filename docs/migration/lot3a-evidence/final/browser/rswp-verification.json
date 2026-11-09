@@ -1,0 +1,65 @@
+{
+  "schema": "logos-engine.native-browser-verification.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-09T22:43:43.128030+00:00",
+  "game": "RSWP",
+  "environment": "Sites managed preview, cloud Chrome; actual public game host and native TypeScript worker",
+  "previewUrl": "http://127.0.0.1:4173/?game=RSWP&level=4",
+  "sourceManifestDigest": "f3f795a3c813b72803e3f26bd207eed032853ae03d60582a33392f52a1bf8e7d",
+  "sourceBinding": "Checkout frozen before campaign and preview; no production source edits during browser verification. Native version is established by the frozen source and live campaign receipt, not an inspected browser internal object.",
+  "observations": [
+    {
+      "event": "initial_pause",
+      "actions": 0,
+      "levelsCompleted": 0,
+      "plans": 0,
+      "text": "Paused."
+    },
+    {
+      "event": "natural_level_boundary",
+      "actions": 3,
+      "levelsCompleted": 1,
+      "plans": 3,
+      "level": 2
+    },
+    {
+      "event": "pause_in_prefix",
+      "actions": 5,
+      "levelsCompleted": 1,
+      "plans": 3,
+      "level": 2,
+      "text": "Paused."
+    },
+    {
+      "event": "resume_retained_prefix",
+      "actions": 6,
+      "levelsCompleted": 1,
+      "plans": 3,
+      "level": 2
+    },
+    {
+      "event": "natural_level_boundary",
+      "actions": 11,
+      "levelsCompleted": 2,
+      "plans": 7,
+      "level": 3
+    },
+    {
+      "event": "natural_level_boundary",
+      "actions": 19,
+      "levelsCompleted": 3,
+      "plans": 11,
+      "level": 4,
+      "text": "Level completed."
+    }
+  ],
+  "newReasoningSessionsRequested": 0,
+  "manualGameActions": 0,
+  "levelJumps": 0,
+  "screenshot": {
+    "path": "docs/migration/lot3a-evidence/final/browser/rswp-browser.png",
+    "sha256": "9da9abeef0c36f8cee783de003df241899ffa8adb8673e70cc0b5b72cfb449ca",
+    "bytes": 83614
+  },
+  "qualification": "Independent cold browser session selected RSWP at level1, then only common-agent Run/Pause controls. Natural progression retained the session; no restart, new reasoning session, injected command or solution. Final UI counts match the journaled campaign. This is a functional browser check, not a latency benchmark or full-game victory."
+}

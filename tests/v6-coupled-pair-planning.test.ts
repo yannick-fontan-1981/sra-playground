@@ -150,18 +150,26 @@ test('one shared family selects coupled planning in goal_access and occurrence r
   assert.deepEqual(recalled, await fresh.propose(memo.observation, memo.rows, inputs, 600, execution));
 });
 
-test('production source groups reference one retained public_occurrence_recall identity at both source priorities', async () => {
+test('observed, coupled and graph source entries share one retained public_occurrence_recall owner', async () => {
   const runtime = await createNativeV6Runtime(declarations, { now: () => 0 });
   const coverage = runtime.snapshot().coverage as R;
   assert.equal(coverage.registeredFamilies.filter((id: string) => id === 'public_occurrence_recall').length, 1);
   const goal = coverage.sourceGroups.find((group: R) => group.id === 'goal_access');
   const window = coverage.sourceGroups.find((group: R) => group.id === 'window_constraints');
-  assert.equal(goal.families.filter((id: string) => id === 'public_occurrence_recall').length, 2);
+  assert.equal(goal.families.filter((id: string) => id === 'public_occurrence_recall').length, 3);
   assert.deepEqual(goal.entryPoints.filter((entry: string | null) => entry !== null),
-    ['coupled_support_composition', 'alternating_graph_composition']);
-  assert.equal(window.families.filter((id: string) => id === 'public_occurrence_recall').length, 7);
+    ['observed_composition_services', 'coupled_support_composition', 'alternating_graph_composition']);
+  assert.equal(goal.entryPoints[0], 'observed_composition_services');
+  assert.deepEqual(coverage.partialEntryPoints, {
+    observed_composition_services: { owner: 'public_occurrence_recall', connectedBranches: ['panel_service_plan'],
+      pendingBranches: ['exposed_reception_plan', 'chamber_relation_plan', 'rooted_line_plan', 'reception_service_plan', 'reference_population_plan'] },
+  });
+  assert.equal(window.families.filter((id: string) => id === 'public_occurrence_recall').length, 13);
   assert.deepEqual(window.entryPoints.filter((entry: string | null) => entry !== null),
-    ['product_panel_composition', 'labeled_sequence_composition', 'cell_patch_composition', 'observed_occurrence_recall', 'observed_program_composition', 'radial_port_composition', 'rooted_quota_composition']);
+    ['occluded_catalogue_composition', 'queued_field_composition', 'product_panel_composition', 'labeled_sequence_composition',
+      'linked_packet_composition', 'trace_field_composition', 'cell_patch_composition', 'observed_occurrence_recall',
+      'observed_program_composition', 'typed_material_flow', 'radial_port_composition', 'observed_framed_analogy',
+      'field_service_composition', 'rooted_quota_composition']);
   assert.ok(coverage.sourceGroups.indexOf(goal) < coverage.sourceGroups.indexOf(window));
   assert.equal(coverage.fullV6Parity, false);
 });

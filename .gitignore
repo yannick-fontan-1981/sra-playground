@@ -125,3 +125,10 @@ __pycache__/
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot2c-cost-evidence/diagnostic/semantic-after.json.gz
 /docs/migration/lot2c-cost-evidence/diagnostic/semantic-baseline.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot3a-evidence/final/rswp-campaign.json.gz
+
+/docs/migration/lot3a-evidence/final/source-archive.tar.gz
+
+/docs/migration/lot3a-evidence/baseline/source-archive.tar.gz

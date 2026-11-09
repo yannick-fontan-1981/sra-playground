@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.native-loop-cost-cases.v1",
+  "rounds": 3,
+  "cases": [
+    {
+      "id": "RSWP",
+      "trace": "docs/migration/lot3a-evidence/final/rswp-public-trace.json.gz",
+      "traceSha256": "2dffef10c885e57f79332d586ef414fa4750475e1cc9d93efe362401cc4e8505",
+      "actions": 19,
+      "targetLevels": 3,
+      "warmupActions": 3,
+      "purpose": "New Panel path, three natural levels from cold knowledge using the recorded actual public returns. Absolute costs only; baseline performs different work and supplies no speed ratio."
+    }
+  ],
+  "budget": {
+    "qualification": "Added-path diagnostic, separate from the predeclared STCK/SMLP sixteen-median comparison. P95 withheld below twenty samples."
+  }
+}

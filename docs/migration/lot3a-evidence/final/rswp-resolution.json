@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.native-campaign-resolution.v1",
+  "game": "RSWP",
+  "selection": "docs/migration/lot3a-evidence/rswp-selection.json",
+  "execution": "docs/migration/lot3a-evidence/final/execution-rswp.json",
+  "resolvedAt": "2026-11-09T22:37:40.421114+00:00",
+  "secondsThisSelection": 448.421114,
+  "carriedBlockedSeconds": 0,
+  "cumulativeBlockedSeconds": 448.421114,
+  "maximumBlockedSeconds": 2400,
+  "status": "target_reached",
+  "levelsCompleted": 3,
+  "targetLevels": 3,
+  "actions": 19,
+  "prefixes": 11,
+  "officialState": "NOT_FINISHED",
+  "sourceUnchanged": true,
+  "nextCandidate": null,
+  "resolutionBasis": "Three target levels completed naturally in one cold common native session. Stop on entry to level4; no full game WIN claim. The conservative clock includes generic implementation preparation after game selection. Browser, causal comparison and performance are separate checks after this achieved target."
+}

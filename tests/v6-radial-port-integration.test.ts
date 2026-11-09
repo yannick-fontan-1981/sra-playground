@@ -108,7 +108,9 @@ test('six cold public radial returns retain a measured method and defer the seve
   assert.equal(plan.goal_status, 'closed_connected_acyclic_composition_hypothesis_official_terminal_unknown');
   assert.notDeepEqual(normalized(result.command!), normalized(trace.packets[7].command),
     'The original diagnostic seventh command was the deferred invitation, not this acquired rotation');
-  assert.deepEqual(calls, ['product_panel_composition', 'labeled_sequence_composition', 'cell_patch_composition', 'observed_occurrence_recall', 'observed_program_composition', 'radial_port_composition']);
+  assert.deepEqual(calls, ['occluded_catalogue_composition', 'queued_field_composition', 'product_panel_composition', 'labeled_sequence_composition',
+    'linked_packet_composition', 'trace_field_composition', 'cell_patch_composition', 'observed_occurrence_recall',
+    'observed_program_composition', 'typed_material_flow', 'radial_port_composition']);
   assert.equal(proposal.strategy_receipt.selected, 'window_constraints');
   assert.deepEqual(proposal.strategy_receipt.visited, ['goal_access', 'window_constraints']);
   assert.ok(result.authorization, 'The learned-method witness does not replace WHY/ACT');
@@ -319,14 +321,17 @@ test('the revalidation question still requires the exact current frame and avail
   assert.deepEqual(family.state(), retained, 'Neither admission nor refusal acquires a current method');
 });
 
-test('the source entries including labeled and supported reduction preserve declared order with exactly 36 of 76 connected', async () => {
+test('declared source order retains 50 of 76 connected entries and reports the panel branch separately', async () => {
   const runtime = await createNativeV6Runtime(declarations, { now: () => 0 });
   const coverage = runtime.snapshot().coverage as R, groups = coverage.sourceGroups as R[];
   const configuration = declarations.strategy.declarations[0]!.configuration as R;
   assert.deepEqual(groups.map(group => group.id), configuration.families);
   const windows = groups.find(group => group.id === 'window_constraints')!;
   assert.deepEqual(windows.entryPoints.filter((entry: string | null) => entry !== null),
-    ['product_panel_composition', 'labeled_sequence_composition', 'cell_patch_composition', 'observed_occurrence_recall', 'observed_program_composition', 'radial_port_composition', 'rooted_quota_composition']);
+    ['occluded_catalogue_composition', 'queued_field_composition', 'product_panel_composition', 'labeled_sequence_composition',
+      'linked_packet_composition', 'trace_field_composition', 'cell_patch_composition', 'observed_occurrence_recall',
+      'observed_program_composition', 'typed_material_flow', 'radial_port_composition', 'observed_framed_analogy',
+      'field_service_composition', 'rooted_quota_composition']);
   const radialIndex = windows.entryPoints.indexOf('radial_port_composition');
   assert.equal(windows.families[radialIndex], 'public_occurrence_recall');
   assert.equal(coverage.registeredFamilies.filter((family: string) => family === 'public_occurrence_recall').length, 1);
@@ -335,7 +340,15 @@ test('the source entries including labeled and supported reduction preserve decl
   // private game scores, code volume or a claim of complete behavioral parity.
   const aliases: Record<string, string> = {
     scored_relation_access: 'goal_access', observed_support_access: 'support_navigation',
+    observed_composition_services: 'public_occurrence_recall',
     coupled_support_composition: 'public_occurrence_recall', alternating_graph_composition: 'public_occurrence_recall',
+    occluded_catalogue_composition: 'public_occurrence_recall', queued_field_composition: 'public_occurrence_recall',
+    linked_packet_composition: 'public_occurrence_recall', trace_field_composition: 'public_occurrence_recall',
+    typed_material_flow: 'public_occurrence_recall', field_service_composition: 'public_occurrence_recall',
+    observed_framed_analogy: 'public_framed_transfer', observed_framed_transfer: 'public_framed_transfer',
+    observed_outline_service: 'public_outline_service', observed_inventory_composition: 'public_observed_inventory',
+    reactive_contact: 'public_reactive_contact', reactive_contact_continuation: 'public_reactive_contact',
+    ordered_reaction: 'public_ordered_reaction', topological_recolor: 'public_topological_recolor',
     product_panel_composition: 'public_occurrence_recall', labeled_sequence_composition: 'public_occurrence_recall', cell_patch_composition: 'public_occurrence_recall', observed_program_composition: 'public_occurrence_recall',
     radial_port_composition: 'public_occurrence_recall', rooted_quota_composition: 'public_occurrence_recall', observed_occurrence_recall: 'public_occurrence_recall',
     multiscale_constraints: 'window_constraints', surface_rewrite: 'surface_program', learned_code_program: 'code_program',
@@ -352,14 +365,17 @@ test('the source entries including labeled and supported reduction preserve decl
   const counts = lists.map(([id, declared]) => {
     const group = groups.find(item => item.id === id)!;
     const connected = declared.filter(question => {
+      // A registered branch is still partial until its declared entry closes.
+      if (coverage.partialEntryPoints[question]) return false;
       const family = aliases[question] ?? question;
       return group.families.includes(family) && (family !== 'public_occurrence_recall'
         || group.entryPoints?.some((entry: string | null, index: number) => entry === question && group.families[index] === family));
     });
     return [connected.length, declared.length];
   });
-  assert.deepEqual(counts, [[8, 12], [10, 21], [8, 10], [10, 33]]);
-  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 36);
+  assert.deepEqual(counts, [[8, 12], [17, 21], [8, 10], [17, 33]]);
+  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 50);
+  assert.deepEqual(Object.keys(coverage.partialEntryPoints), ['observed_composition_services']);
   assert.equal(counts.reduce((sum, count) => sum + count[1]!, 0), 76);
   assert.equal(coverage.fullV6Parity, false);
 });

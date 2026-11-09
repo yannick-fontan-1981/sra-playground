@@ -14,6 +14,7 @@ const runtime = await createNativeV6Runtime(declarations), snapshot = runtime.sn
 const sourceGroups = coverage.sourceGroups as { id: string; families: string[]; entryPoints?: (string | null)[] }[];
 const aliases: Record<string, string> = {
   scored_relation_access: 'goal_access', observed_support_access: 'support_navigation',
+  observed_composition_services: 'public_occurrence_recall',
   coupled_support_composition: 'public_occurrence_recall',
   alternating_graph_composition: 'public_occurrence_recall',
   cell_patch_composition: 'public_occurrence_recall',
@@ -57,17 +58,22 @@ const groups = lists.map(([id, declared]) => {
       || family === 'public_topological_recolor';
     const connected = registered.has(family) && (!explicitSharedEntry || actual.entryPoints?.some((entry, index) =>
       entry === question && actual.families[index] === family) === true);
-    return { question, family: connected ? family : null, status: connected ? 'connected' : 'pending' };
+    const partial = connected ? coverage.partialEntryPoints?.[question] : null;
+    return { question, family: connected ? family : null,
+      status: connected ? partial ? 'partially_connected' : 'connected' : 'pending',
+      ...(partial ? { connectedBranches: partial.connectedBranches, pendingBranches: partial.pendingBranches } : {}) };
   });
-  return { id, declared: entries.length, connected: entries.filter(entry => entry.status === 'connected').length, entries };
+  return { id, declared: entries.length, connected: entries.filter(entry => entry.status === 'connected').length,
+    partiallyConnected: entries.filter(entry => entry.status === 'partially_connected').length, entries };
 });
 const connected = groups.reduce((sum, group) => sum + group.connected, 0), total = groups.reduce((sum, group) => sum + group.declared, 0);
 const report = {
   schema: 'logos-engine.v6.declared-entry-coverage.v1', referenceCommit: commit,
   strategySha256: createHash('sha256').update(strategyBytes).digest('hex'), implementation: snapshot.implementation,
   metric: 'Connection of the explicit subquestions in the four ordered source DRM lists',
-  connected, declared: total, percent: Math.round(connected * 1000 / total) / 10, groups,
-  qualification: 'Each declared entry has equal weight. This counts actual provider registrations, not code volume, game score, expected success, or complete V6 behavioral parity. The common coordinator and direct groups are outside this denominator. Their own differential tests and live campaigns remain separate evidence.',
+  connected, partiallyConnected: groups.reduce((sum, group) => sum + group.partiallyConnected, 0),
+  declared: total, percent: Math.round(connected * 1000 / total) / 10, groups,
+  qualification: 'Each declared entry has equal weight. This counts actual provider registrations, not code volume, game score, expected success, or complete V6 behavioral parity. An explicitly declared partial entry is reported with its connected and pending internal branches and does not increment the connected total. The common coordinator and direct groups are outside this denominator. Their own differential tests and live campaigns remain separate evidence.',
   commonGroups: sourceGroups, pendingSupportSubcompositions: coverage.supportSubcompositionsPending,
   sharedSeriesMemory: coverage.sharedSeriesMemory, sharedSeriesDigestScope: coverage.sharedSeriesDigestScope, fullV6Parity: false,
 };

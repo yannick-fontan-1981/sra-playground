@@ -11,7 +11,64 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current lot 2C closure, native 0.36.0:** the common runtime
+## Current functional delivery: lot 3A, native 0.37.0, cost open
+
+The first observed-composition service branch, **`panel_service_plan`**, is now
+connected at the original first goal-access position through the existing
+`public_occurrence_recall` owner. Its complete own-layer projection, proposal,
+guards, observed selection, contrary/no-information trials and restoration are
+transferred from pinned V6. It shares the same inherited planner with the coupled
+and graph entries, and adds no duplicate passive acquisition. Existing native
+checkpoint digests remain compatible until the first Panel event. This sublot
+reuses the previously transferred V5/V6 foundation; it does not introduce a new
+V5 numerical kernel.
+
+The **245-file** native freeze is
+`f3f795a3c813b72803e3f26bd207eed032853ae03d60582a33392f52a1bf8e7d`.
+The [formal affected delta](lot3a-evidence/final/validation/delta-tests-run.json)
+passes **548/548 tests in 18 files**, including 58 original-source Panel checks,
+shared ownership, certified restore, refusal ordering and common runtime paths.
+[Typecheck, audits and production build](lot3a-evidence/final/validation/checks-run.json)
+also pass. The [report](lot3a-observed-panel.md) and
+[lineage](lot3a-observed-panel-lineage.md) qualify inherited coverage and native
+compatibility choices.
+
+A cold common [RSWP campaign](lot3a-evidence/final/execution-rswp.json) completes
+**three levels in 19 actions (3, 8, 8) and 11 prefixes**, with one session, 19 actual
+acquisitions and natural entry into level 4 in `NOT_FINISHED`. Direct service,
+displayed rewrite and room-parameter composition are all selected. The
+[contribution evidence](lot3a-evidence/final/panel-contribution.json) reproduces all
+11 proposals from only preceding actual events. Four isolated component
+ablations changing only acquired `selection_observed` reduce a three-action
+prefix to one; no counterfactual state enters the live game. The
+[browser check](lot3a-evidence/final/browser/rswp-verification.json) independently
+reaches the same 19 actions / three levels / 11 plans with initial Pause and mid-prefix
+Pause/Resume. The conservative game clock resolves in **448.421 seconds**, below
+forty minutes including implementation preparation after selection.
+
+The preserved [0.36 baseline](lot3a-evidence/baseline/summary.json) records 93 actions
+and 94 contiguous public packets, no completed level, and an active-budget stop at
+363.044 seconds. Its diagnostic export subsequently exhausts the Node heap. The
+complete report, asset-hash record and module audit are absent and are not
+reconstructed. Matching full initial public packets and the separate acquisition
+ablation retain their own limited claims. This export problem remains in lot 11.
+
+The [isolated cost comparison](lot3a-evidence/performance/results.md) uses a fresh
+0.36 baseline, the same STCK/SMLP public work and unchanged +10% budget. The added
+Panel path is measured separately. The aggregate of all eight sessions per case
+and version passes **12/16** median criteria; four remain over +10%. STCK
+continuation/guard and SMLP decision/continuation remain unresolved. The full
+sublot is not closed. The registry remains **50/76**, with **one
+explicitly partial entry covering one of six branches** among the 26 remaining.
+There are 37 compiled workflows, 152 component-verified modules, 131 partial modules,
+1,086 pending modules, no globally transferred module, and all six completion
+gates remain false. Next is **lot 3A cost closure**, then **lot 3B, `chamber_relation_plan`**, including the
+actually consumed V5 finite-relation helpers and public candidate CATR with its
+107.399326 seconds carried forward. See the [complete roadmap](v6-delivery-roadmap.md).
+
+## Preserved lot 2C closure, native 0.36.0
+
+**Lot 2C closure, native 0.36.0:** the common runtime
 preserves the acquired V5/V6 behavior while reducing redundant representation
 work. Four generic changes are applied: exact sharing of unchanged encoded
 payloads and their validated hydration; a live authorization-identity read with
@@ -22,7 +79,7 @@ existing state owners remain in place. The public service snapshot retains its
 independent copy and validation. No new reasoning family or registry entry is
 claimed by this optimization.
 
-The current frozen **242-file** native inventory is
+The preserved 0.36 frozen **242-file** native inventory is
 `ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b`.
 The [formal release delta](lot2c-cost-evidence/final/validation/delta-tests-run.json)
 passes **947/947 tests in 26 files**, with zero failures, cancellations or skipped
@@ -63,14 +120,13 @@ a separate diagnostic: its session median increases by **3.39%**, and the other
 local increases, dispersions and measurement limits remain in the
 [results](lot2c-cost-evidence/performance/results.md).
 
-**Lot 2C is closed within its declared delivery scope. Lot 3 is the next step**,
-starting with `observed_composition_services`, followed by the remaining shared
-memory/composition contracts. The historical 0.35.0 failures below remain
+**Lot 2C is closed within its declared delivery scope.** The lot 3A continuation
+is reported above; the remaining shared memory/composition contracts stay open. The historical 0.35.0 failures below remain
 unchanged. This measured closure does not establish complete morphology-domain
 coverage or full V6 parity.
 
 The registry remains **50/76 entries**, with **37 compiled workflows** and
-**26 declared entries remaining**. The current audit retains **151
+**26 declared entries remaining**. At the 0.36 delivery, the audit retained **151
 component-verified, 130 partial and 1,088 pending modules**, zero fully transferred
 modules and all six complete-migration gates false. Complete morphology-domain
 closure, remaining families and original-caller parity remain separate goals.

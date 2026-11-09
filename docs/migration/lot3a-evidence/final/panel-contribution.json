@@ -1,0 +1,1028 @@
+{
+  "schema": "logos-engine.observed-panel-contribution.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-09T22:44:43.519Z",
+  "generator": {
+    "path": "scripts/prove-observed-panel-contribution.mjs",
+    "sha256": "4f091956e9648ff6dcd56823a714ba587cefaf7b7678f20f9a230f0f777487ac"
+  },
+  "inputs": {
+    "report": {
+      "path": "docs/migration/lot3a-evidence/final/rswp-campaign.json.gz",
+      "sha256": "9bd2d30f23afb4a4b53e14f37922b019acbeffca11128a7bcf78ac4c505ef59e",
+      "bytes": 2175445
+    },
+    "trace": {
+      "path": "docs/migration/lot3a-evidence/final/rswp-public-trace.json.gz",
+      "sha256": "2dffef10c885e57f79332d586ef414fa4750475e1cc9d93efe362401cc4e8505",
+      "bytes": 41442
+    },
+    "baseline": {
+      "path": "docs/migration/lot3a-evidence/baseline/summary.json",
+      "sha256": "8182c1e91e0195636e4faf312273f77cd440e026943812a44d097717e7eca95f",
+      "bytes": 7253
+    },
+    "baselineTraceOrJournal": {
+      "path": "docs/migration/lot3a-evidence/baseline/rswp-actual-public-journal.jsonl.gz",
+      "sha256": "59e4c8f02ab6a73dd0792e686d4543540791ad4c4956d4861b37cf425f8923c1",
+      "bytes": 16557
+    },
+    "sourcePolicy": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+      "bytes": 46966
+    }
+  },
+  "nativeSourceDigest": "f3f795a3c813b72803e3f26bd207eed032853ae03d60582a33392f52a1bf8e7d",
+  "game": "RSWP",
+  "baseline": {
+    "sourceDigest": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b",
+    "evidenceMode": "execution_receipt_public_journal_and_process_log",
+    "status": "target_not_reached_export_incomplete",
+    "final": {
+      "actions": 93,
+      "levelsCompleted": 0,
+      "level": 1,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "level_active_time_budget",
+      "activeSeconds": 363.0439832090004,
+      "cycles": 93
+    },
+    "failure": {
+      "campaignStop": "level_active_time_budget",
+      "diagnostic": "FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory",
+      "exitCode": -6,
+      "order": "The gameplay stop and failure message were recorded before the fatal heap diagnostic; full report/trace export did not complete."
+    },
+    "initialPublicPacketMatched": true,
+    "hostAssetComparison": {
+      "status": "baseline_hashes_unavailable",
+      "qualification": "The incomplete baseline retains no opaque host-asset hash list; matching initial public packets does not establish identical assets or their pre-run timestamping."
+    }
+  },
+  "actual": {
+    "final": {
+      "actions": 19,
+      "levelsCompleted": 3,
+      "level": 4,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "target_levels_completed",
+      "activeSeconds": 27.05285185000001,
+      "prefixes": 11,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 19,
+        "boundaryReplays": 2,
+        "goalEvents": 3,
+        "frontierDeltas": 39,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 12
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 12
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 12
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 11
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 1
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 1
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 12
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology"
+        ],
+        "morphologyProvider": {
+          "status": "partial_current_measurements_control_attention_and_methods",
+          "state_owner": "family_state:morphology",
+          "motion_owner": "caller:goal",
+          "forecast_owner": "family_state:public_observed_inventory",
+          "current_decision_scope": "one_source_selection_cycle",
+          "attention_owner": "caller:attention",
+          "method_owner": "caller:counters.targetMethod",
+          "entry_return_owner": "family_state:morphology.entry_access_return",
+          "connected_methods": [
+            "retained_station_method",
+            "entry_access_return",
+            "entry_rebind",
+            "entry_probe",
+            "managed_capacity",
+            "target_extension_continuation"
+          ],
+          "pending": [
+            "complete_original_caller_parity_and_domain_closure"
+          ]
+        },
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "fullV6Parity": false,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 19,
+        "resume": 10
+      },
+      "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.37.0"
+    },
+    "boundaries": [
+      {
+        "completedLevel": 1,
+        "nativeLevel": 2,
+        "levelsCompleted": 1,
+        "levelActions": 3,
+        "totalActions": 3,
+        "levelActiveSeconds": 4.602040623999998,
+        "activeSeconds": 4.602040623999998,
+        "prefixCount": 3,
+        "graphChain": "2e2521f8cc77268979e3aae8ce336614467bc0ec4c78cc231ef0d01801478564",
+        "graphRevision": 464,
+        "nodeCount": 223,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 3,
+          "boundaryReplays": 1,
+          "goalEvents": 1,
+          "frontierDeltas": 7,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 4
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 4
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 4
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 3
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 4
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology"
+          ],
+          "morphologyProvider": {
+            "status": "partial_current_measurements_control_attention_and_methods",
+            "state_owner": "family_state:morphology",
+            "motion_owner": "caller:goal",
+            "forecast_owner": "family_state:public_observed_inventory",
+            "current_decision_scope": "one_source_selection_cycle",
+            "attention_owner": "caller:attention",
+            "method_owner": "caller:counters.targetMethod",
+            "entry_return_owner": "family_state:morphology.entry_access_return",
+            "connected_methods": [
+              "retained_station_method",
+              "entry_access_return",
+              "entry_rebind",
+              "entry_probe",
+              "managed_capacity",
+              "target_extension_continuation"
+            ],
+            "pending": [
+              "complete_original_caller_parity_and_domain_closure"
+            ]
+          },
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "phase": "sealed_prefix",
+        "sessionRetained": true
+      },
+      {
+        "completedLevel": 2,
+        "nativeLevel": 3,
+        "levelsCompleted": 2,
+        "levelActions": 8,
+        "totalActions": 11,
+        "levelActiveSeconds": 10.223720439000004,
+        "activeSeconds": 14.825761063000003,
+        "prefixCount": 7,
+        "graphChain": "7047c0ef5eb287a76a1958f3c6af95590345d4dafefdb60f81ceeb00edeec1c3",
+        "graphRevision": 939,
+        "nodeCount": 368,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 11,
+          "boundaryReplays": 2,
+          "goalEvents": 2,
+          "frontierDeltas": 23,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 8
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 8
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 8
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 7
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 8
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology"
+          ],
+          "morphologyProvider": {
+            "status": "partial_current_measurements_control_attention_and_methods",
+            "state_owner": "family_state:morphology",
+            "motion_owner": "caller:goal",
+            "forecast_owner": "family_state:public_observed_inventory",
+            "current_decision_scope": "one_source_selection_cycle",
+            "attention_owner": "caller:attention",
+            "method_owner": "caller:counters.targetMethod",
+            "entry_return_owner": "family_state:morphology.entry_access_return",
+            "connected_methods": [
+              "retained_station_method",
+              "entry_access_return",
+              "entry_rebind",
+              "entry_probe",
+              "managed_capacity",
+              "target_extension_continuation"
+            ],
+            "pending": [
+              "complete_original_caller_parity_and_domain_closure"
+            ]
+          },
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "phase": "sealed_prefix",
+        "sessionRetained": true
+      },
+      {
+        "completedLevel": 3,
+        "nativeLevel": 4,
+        "levelsCompleted": 3,
+        "levelActions": 8,
+        "totalActions": 19,
+        "levelActiveSeconds": 12.227090787000007,
+        "activeSeconds": 27.05285185000001,
+        "prefixCount": 11,
+        "graphChain": "75bccfc8b643395bfc5403763491bf559cf998fb189ea335e77c1939f2d39819",
+        "graphRevision": 1417,
+        "nodeCount": 516,
+        "caller": {
+          "enabled": true,
+          "acquiredTransitions": 19,
+          "boundaryReplays": 2,
+          "goalEvents": 3,
+          "frontierDeltas": 39,
+          "components": {
+            "goal": {
+              "id": "caller:goal",
+              "revision": 12
+            },
+            "frontier": {
+              "id": "caller:frontier",
+              "revision": 12
+            },
+            "view": {
+              "id": "caller:view",
+              "revision": 12
+            },
+            "attention": {
+              "id": "caller:attention",
+              "revision": 1
+            },
+            "points": {
+              "id": "caller:points",
+              "revision": 11
+            },
+            "displays": {
+              "id": "caller:displays",
+              "revision": 1
+            },
+            "controls": {
+              "id": "caller:controls",
+              "revision": 1
+            },
+            "counters": {
+              "id": "caller:counters",
+              "revision": 12
+            }
+          },
+          "pendingSourceProviders": [
+            "morphology"
+          ],
+          "morphologyProvider": {
+            "status": "partial_current_measurements_control_attention_and_methods",
+            "state_owner": "family_state:morphology",
+            "motion_owner": "caller:goal",
+            "forecast_owner": "family_state:public_observed_inventory",
+            "current_decision_scope": "one_source_selection_cycle",
+            "attention_owner": "caller:attention",
+            "method_owner": "caller:counters.targetMethod",
+            "entry_return_owner": "family_state:morphology.entry_access_return",
+            "connected_methods": [
+              "retained_station_method",
+              "entry_access_return",
+              "entry_rebind",
+              "entry_probe",
+              "managed_capacity",
+              "target_extension_continuation"
+            ],
+            "pending": [
+              "complete_original_caller_parity_and_domain_closure"
+            ]
+          },
+          "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+        },
+        "phase": "stopped",
+        "sessionRetained": true
+      }
+    ],
+    "selectedPrefixes": 11,
+    "configurationActions": 14,
+    "applicationActions": 5,
+    "panelEvents": 19
+  },
+  "selections": [
+    {
+      "prefix": "prefix_evidence:1",
+      "level": 1,
+      "kind": "configuration",
+      "planned": 1,
+      "acquired": 1,
+      "selectionObservedBefore": false,
+      "evidenceBefore": 0,
+      "effectCountBefore": 0,
+      "contributions": [
+        "current_material_matches_local_receiver",
+        "current_material_matches_local_receiver",
+        "current_material_matches_local_receiver"
+      ]
+    },
+    {
+      "prefix": "prefix_evidence:2",
+      "level": 1,
+      "kind": "configuration",
+      "planned": 1,
+      "acquired": 1,
+      "selectionObservedBefore": true,
+      "evidenceBefore": 2,
+      "effectCountBefore": 1,
+      "contributions": [
+        "current_material_matches_local_receiver",
+        "current_material_matches_local_receiver",
+        "current_material_matches_local_receiver"
+      ]
+    },
+    {
+      "prefix": "prefix_evidence:3",
+      "level": 1,
+      "kind": "application",
+      "planned": 1,
+      "acquired": 1,
+      "selectionObservedBefore": true,
+      "evidenceBefore": 3,
+      "effectCountBefore": 2,
+      "contributions": [
+        "current_material_matches_local_receiver",
+        "current_material_matches_local_receiver",
+        "current_material_matches_local_receiver"
+      ]
+    },
+    {
+      "prefix": "prefix_evidence:4",
+      "level": 2,
+      "kind": "configuration",
+      "planned": 3,
+      "acquired": 3,
+      "selectionObservedBefore": true,
+      "evidenceBefore": 4,
+      "effectCountBefore": 3,
+      "contributions": [
+        "displayed_rewrite_prepares_local_receiver",
+        "displayed_rewrite_prepares_local_receiver",
+        "displayed_rewrite_prepares_local_receiver"
+      ]
+    },
+    {
+      "prefix": "prefix_evidence:7",
+      "level": 2,
+      "kind": "application",
+      "planned": 1,
+      "acquired": 1,
+      "selectionObservedBefore": true,
+      "evidenceBefore": 7,
+      "effectCountBefore": 6,
+      "contributions": [
+        "displayed_rewrite_prepares_local_receiver",
+        "displayed_rewrite_prepares_local_receiver",
+        "displayed_rewrite_prepares_local_receiver"
+      ]
+    },
+    {
+      "prefix": "prefix_evidence:8",
+      "level": 2,
+      "kind": "configuration",
+      "planned": 3,
+      "acquired": 3,
+      "selectionObservedBefore": true,
+      "evidenceBefore": 8,
+      "effectCountBefore": 7,
+      "contributions": [
+        "current_material_matches_local_receiver",
+        "current_material_matches_local_receiver",
+        "current_material_matches_local_receiver"
+      ]
+    },
+    {
+      "prefix": "prefix_evidence:11",
+      "level": 2,
+      "kind": "application",
+      "planned": 1,
+      "acquired": 1,
+      "selectionObservedBefore": true,
+      "evidenceBefore": 11,
+      "effectCountBefore": 10,
+      "contributions": [
+        "current_material_matches_local_receiver",
+        "current_material_matches_local_receiver",
+        "current_material_matches_local_receiver"
+      ]
+    },
+    {
+      "prefix": "prefix_evidence:12",
+      "level": 3,
+      "kind": "configuration",
+      "planned": 3,
+      "acquired": 3,
+      "selectionObservedBefore": true,
+      "evidenceBefore": 12,
+      "effectCountBefore": 11,
+      "contributions": [
+        "test_room_parameter_to_prepare_matching_receiver",
+        "test_room_parameter_to_prepare_matching_receiver",
+        "test_room_parameter_to_prepare_matching_receiver"
+      ]
+    },
+    {
+      "prefix": "prefix_evidence:15",
+      "level": 3,
+      "kind": "application",
+      "planned": 1,
+      "acquired": 1,
+      "selectionObservedBefore": true,
+      "evidenceBefore": 15,
+      "effectCountBefore": 14,
+      "contributions": [
+        "test_room_parameter_to_prepare_matching_receiver",
+        "test_room_parameter_to_prepare_matching_receiver",
+        "test_room_parameter_to_prepare_matching_receiver"
+      ]
+    },
+    {
+      "prefix": "prefix_evidence:16",
+      "level": 3,
+      "kind": "configuration",
+      "planned": 3,
+      "acquired": 3,
+      "selectionObservedBefore": true,
+      "evidenceBefore": 16,
+      "effectCountBefore": 15,
+      "contributions": [
+        "current_material_matches_local_receiver",
+        "current_material_matches_local_receiver",
+        "current_material_matches_local_receiver"
+      ]
+    },
+    {
+      "prefix": "prefix_evidence:19",
+      "level": 3,
+      "kind": "application",
+      "planned": 1,
+      "acquired": 1,
+      "selectionObservedBefore": true,
+      "evidenceBefore": 19,
+      "effectCountBefore": 18,
+      "contributions": [
+        "current_material_matches_local_receiver",
+        "current_material_matches_local_receiver",
+        "current_material_matches_local_receiver"
+      ]
+    }
+  ],
+  "transitions": [
+    {
+      "prefix": "prefix_evidence:1",
+      "sequence": 1,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:1:revision:2:frame:65bdc7f82186da01",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:1:revision:1:frame:3e364c99f049645b",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 45,
+            "y": 12
+          }
+        },
+        "kind": "configuration",
+        "pixel_changed": true,
+        "prediction_matched": true,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 1,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:2",
+      "sequence": 2,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:1:revision:3:frame:1cd82bbe90372978",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:1:revision:2:frame:65bdc7f82186da01",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 45,
+            "y": 48
+          }
+        },
+        "kind": "configuration",
+        "pixel_changed": true,
+        "prediction_matched": true,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 2,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:3",
+      "sequence": 3,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:4:frame:13abced482ed3f20",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:1:revision:3:frame:1cd82bbe90372978",
+        "boundary": true,
+        "command": {
+          "action_ref": "ACTION5"
+        },
+        "kind": "application",
+        "pixel_changed": true,
+        "prediction_matched": null,
+        "score_delta": 1
+      },
+      "selectionObserved": true,
+      "effectCount": 3,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:4",
+      "sequence": 4,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:5:frame:4b6bbd1cc638b9f0",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:4:frame:13abced482ed3f20",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 45,
+            "y": 17
+          }
+        },
+        "kind": "configuration",
+        "pixel_changed": true,
+        "prediction_matched": true,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 4,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:4",
+      "sequence": 5,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:6:frame:b23a72086350ebf7",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:5:frame:4b6bbd1cc638b9f0",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 45,
+            "y": 35
+          }
+        },
+        "kind": "configuration",
+        "pixel_changed": true,
+        "prediction_matched": true,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 5,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:4",
+      "sequence": 6,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:7:frame:4a659bd18cce7ef2",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:6:frame:b23a72086350ebf7",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 45,
+            "y": 53
+          }
+        },
+        "kind": "configuration",
+        "pixel_changed": true,
+        "prediction_matched": true,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 6,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:7",
+      "sequence": 7,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:8:frame:6948b3b939691e51",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:7:frame:4a659bd18cce7ef2",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION5"
+        },
+        "kind": "application",
+        "pixel_changed": true,
+        "prediction_matched": null,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 7,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:8",
+      "sequence": 8,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:9:frame:7b448f543bd33166",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:8:frame:6948b3b939691e51",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 45,
+            "y": 12
+          }
+        },
+        "kind": "configuration",
+        "pixel_changed": true,
+        "prediction_matched": true,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 8,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:8",
+      "sequence": 9,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:10:frame:8e10013cefebfff1",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:9:frame:7b448f543bd33166",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 45,
+            "y": 30
+          }
+        },
+        "kind": "configuration",
+        "pixel_changed": true,
+        "prediction_matched": true,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 9,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:8",
+      "sequence": 10,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:11:frame:9aeec4f076651c8d",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:10:frame:8e10013cefebfff1",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 45,
+            "y": 48
+          }
+        },
+        "kind": "configuration",
+        "pixel_changed": true,
+        "prediction_matched": true,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 10,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:11",
+      "sequence": 11,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:12:frame:6b50c0dc383ab4d8",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:2:revision:11:frame:9aeec4f076651c8d",
+        "boundary": true,
+        "command": {
+          "action_ref": "ACTION5"
+        },
+        "kind": "application",
+        "pixel_changed": true,
+        "prediction_matched": null,
+        "score_delta": 1
+      },
+      "selectionObserved": true,
+      "effectCount": 11,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:12",
+      "sequence": 12,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:13:frame:96e32fc05dd51a05",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:12:frame:6b50c0dc383ab4d8",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 60,
+            "y": 22
+          }
+        },
+        "kind": "configuration",
+        "pixel_changed": true,
+        "prediction_matched": true,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 12,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:12",
+      "sequence": 13,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:14:frame:6619dc2f46597486",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:13:frame:96e32fc05dd51a05",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 50,
+            "y": 40
+          }
+        },
+        "kind": "configuration",
+        "pixel_changed": true,
+        "prediction_matched": true,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 13,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:12",
+      "sequence": 14,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:15:frame:25bd7d970687f266",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:14:frame:6619dc2f46597486",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 55,
+            "y": 58
+          }
+        },
+        "kind": "configuration",
+        "pixel_changed": true,
+        "prediction_matched": true,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 14,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:15",
+      "sequence": 15,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:16:frame:b9c8d0c59685582c",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:15:frame:25bd7d970687f266",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION5"
+        },
+        "kind": "application",
+        "pixel_changed": true,
+        "prediction_matched": null,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 15,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:16",
+      "sequence": 16,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:17:frame:8491d3e5ef888292",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:16:frame:b9c8d0c59685582c",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 45,
+            "y": 12
+          }
+        },
+        "kind": "configuration",
+        "pixel_changed": true,
+        "prediction_matched": true,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 16,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:16",
+      "sequence": 17,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:18:frame:7af1ed024dc2c820",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:17:frame:8491d3e5ef888292",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 45,
+            "y": 30
+          }
+        },
+        "kind": "configuration",
+        "pixel_changed": true,
+        "prediction_matched": true,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 17,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:16",
+      "sequence": 18,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:19:frame:095579f4ff4adc71",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:18:frame:7af1ed024dc2c820",
+        "boundary": false,
+        "command": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 45,
+            "y": 48
+          }
+        },
+        "kind": "configuration",
+        "pixel_changed": true,
+        "prediction_matched": true,
+        "score_delta": 0
+      },
+      "selectionObserved": true,
+      "effectCount": 18,
+      "failedCount": 0
+    },
+    {
+      "prefix": "prefix_evidence:19",
+      "sequence": 19,
+      "detail": {
+        "after": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:4:revision:20:frame:4bc10bedfd04f3d7",
+        "before": "sra-v6-3c0f95dc-ce0c-4b15-81cb-2dc4a2e3217e:epoch:3:revision:19:frame:095579f4ff4adc71",
+        "boundary": true,
+        "command": {
+          "action_ref": "ACTION5"
+        },
+        "kind": "application",
+        "pixel_changed": true,
+        "prediction_matched": null,
+        "score_delta": 1
+      },
+      "selectionObserved": true,
+      "effectCount": 19,
+      "failedCount": 0
+    }
+  ],
+  "ablations": [
+    {
+      "prefix": "prefix_evidence:4",
+      "level": 2,
+      "actualActions": 3,
+      "withoutAcquiredSelection": 1,
+      "actualProposal": "panel-service:ca944644b690b49995b3f529298d5f31944ed7ffaa53a0aed25c739977d2a374",
+      "counterfactualProposal": "panel-service:b508f88e1893c8333d5fd74f363b9d5bcc1ece220229d7947d45264c10d6a168",
+      "onlyMemoryFieldChanged": "selection_observed",
+      "memoryBasis": "Only previously accepted real transition events; no current proposal symbols are preloaded."
+    },
+    {
+      "prefix": "prefix_evidence:8",
+      "level": 2,
+      "actualActions": 3,
+      "withoutAcquiredSelection": 1,
+      "actualProposal": "panel-service:3d31e313cad605602fafdeae89f2a0f84370de58295144d82ea9fdab9b68df83",
+      "counterfactualProposal": "panel-service:89a517e28eefc724df6223f8904132aac2228b0b1575ea6407de3dd883b6eb06",
+      "onlyMemoryFieldChanged": "selection_observed",
+      "memoryBasis": "Only previously accepted real transition events; no current proposal symbols are preloaded."
+    },
+    {
+      "prefix": "prefix_evidence:12",
+      "level": 3,
+      "actualActions": 3,
+      "withoutAcquiredSelection": 1,
+      "actualProposal": "panel-service:eb2c3dd62550d44ca6a61074066f2ab9a90bdf52162e4f2aad311f7373ef2a01",
+      "counterfactualProposal": "panel-service:fa820fcefff69174453d184be86aa5b6b5ce655744f0391ecdf1d3a545c5784c",
+      "onlyMemoryFieldChanged": "selection_observed",
+      "memoryBasis": "Only previously accepted real transition events; no current proposal symbols are preloaded."
+    },
+    {
+      "prefix": "prefix_evidence:16",
+      "level": 3,
+      "actualActions": 3,
+      "withoutAcquiredSelection": 1,
+      "actualProposal": "panel-service:8f7fde3203ca3545a49568d4665a7e3b5ab8357e508e6fa7e2cbff0f2c1c3de8",
+      "counterfactualProposal": "panel-service:131c8cb38a30aa315aeef2dca82f60e8b5484aab3cc2cbddac278f5b1aaa8d11",
+      "onlyMemoryFieldChanged": "selection_observed",
+      "memoryBasis": "Only previously accepted real transition events; no current proposal symbols are preloaded."
+    }
+  ],
+  "qualification": "The common cold live campaign is observed without supplying actions or state. The separate component ablation reuses an actual public decision context and changes only the acquired selection bit; it is not a second live game run and does not claim that every game action is causally necessary. Source-parity and contrary-return cases are separate fixtures. Initial complete public packets match the retained baseline. Baseline report/export limitations and opaque host-asset hash availability are recorded explicitly; no missing evidence is reconstructed."
+}

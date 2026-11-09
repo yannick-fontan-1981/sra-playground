@@ -372,6 +372,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const serviceEvents = (series.events as R[]).filter(event =>
             ['nested_control_response', 'envelope_fill_context', 'field_service_context', 'field_service_transfer'].includes(event.kind));
           const previousServiceCount = report.prefixes.at(-1)?.sharedSeries.fieldServiceEventCount ?? 0;
+          const panelServiceEvents = (series.events as R[]).filter(event => event.kind === 'observed_panel_service');
+          const previousPanelServiceCount = report.prefixes.at(-1)?.sharedSeries.panelServiceEventCount ?? 0;
           const productStates = (series.events as R[]).filter(event => event.kind === 'observed_factor_product');
           const labeledSubmissions = (series.events as R[]).filter(event => event.kind === 'labeled_sequence_submission');
           const traceExtensions = (series.events as R[]).filter(event => event.kind === 'observed_trace_extension');
@@ -422,6 +424,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               ? { productPanelFactors: evidence.proposal.product_panel_plan.scene.controls.length,
                   productPanelEstimated: evidence.proposal.product_panel_plan.estimate !== null,
                   productPanelObservedSteps: evidence.proposal.steps.map((step: R) => step.relation_observed) } : {}),
+            ...(evidence.proposal.panel_service_plan
+              ? { observedPanelService: { proposal: evidence.proposal,
+                    stateNode: 'family_state:public_occurrence_recall',
+                    qualification: 'Passive capture of the selected common proposal. All panel measurements and acquired events are computed by production; this recorder supplies no decision or expected return.' } } : {}),
             ...(evidence.proposal.queued_field_plan
               ? { queuedField: { plan: evidence.proposal.queued_field_plan,
                     stateNode: 'family_state:public_occurrence_recall' } } : {}),
@@ -567,6 +573,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               fieldServiceLatestEvent: serviceEvents.at(-1) ?? null,
               fieldServiceAcquiredEvents: serviceEvents.slice(previousServiceCount),
               fieldServiceAcquiredNegativeZeroPaths: negativeZeroPaths(serviceEvents.slice(previousServiceCount)),
+              panelServiceEventCount: panelServiceEvents.length,
+              panelServiceAcquiredEvents: panelServiceEvents.slice(previousPanelServiceCount),
               productPanelStateCount: productStates.length,
               productPanelLatestState: productStates.at(-1) ?? null,
               labeledSequenceSubmissionCount: labeledSubmissions.length,

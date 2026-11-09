@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 151,
-    "partiallyTransferredModules": 130,
+    "componentVerifiedModules": 152,
+    "partiallyTransferredModules": 131,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1088,
+    "pendingModules": 1086,
     "strategyFamilies": 16
   },
   "families": [
@@ -76851,7 +76851,9 @@
         "src/logos-engine/v6-coupled-pair-evidence.ts",
         "src/logos-engine/v6-auxiliary-support.ts",
         "src/logos-engine/v6-alternating-graph-access.ts",
-        "src/logos-engine/v6-cell-placement.ts"
+        "src/logos-engine/v6-cell-placement.ts",
+        "src/logos-engine/v6-panel-service-access.ts",
+        "src/logos-engine/v6-panel-service-observation.ts"
       ],
       "proof": [
         "tests/v6-shared-series.test.ts",
@@ -76872,7 +76874,13 @@
         "tests/v6-source-entry-routing.test.ts",
         "tests/v6-program-current-access-integration.test.ts",
         "tests/v6-learned-preparation-priority.test.ts",
-        "docs/migration/native-campaigns-v40/memo-three-levels.json"
+        "docs/migration/native-campaigns-v40/memo-three-levels.json",
+        "scripts/export-v6-panel-service-parity.py",
+        "tests/fixtures/v6-panel-service-parity.json.gz",
+        "tests/v6-panel-service.test.ts",
+        "docs/migration/lot3a-observed-panel-lineage.md",
+        "docs/migration/lot3a-evidence/final/execution-rswp.json",
+        "docs/migration/lot3a-evidence/final/rswp-resolution.json"
       ]
     },
     {
@@ -83281,9 +83289,20 @@
           "endLine": 95
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-panel-service-access.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-panel-service-parity.py",
+        "tests/fixtures/v6-panel-service-parity.json.gz",
+        "tests/v6-panel-service.test.ts",
+        "tests/v6-shared-series-native.test.ts",
+        "docs/migration/lot3a-observed-panel-lineage.md",
+        "docs/migration/lot3a-evidence/final/execution-rswp.json",
+        "docs/migration/lot3a-evidence/final/rswp-resolution.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/panel_service_projection.py",
@@ -83316,9 +83335,17 @@
           "endLine": 79
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-panel-service-observation.ts",
+        "src/logos-engine/v6-panel-service-pattern-set.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-panel-service-parity.py",
+        "tests/fixtures/v6-panel-service-parity.json.gz",
+        "tests/v6-panel-service.test.ts",
+        "docs/migration/lot3a-observed-panel-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/passage_options.py",
@@ -98457,6 +98484,7 @@
     "V57 component and caller proof comprises 99 Recolor reference/native contracts plus three common Kernel tests, and 34 motion-producer contracts plus six common caller tests (142 checks). The positive Recolor sequence uses four synthetic public returns from cold component memory, preserving all original receipts and six source fields, with no goal-confirmation claim. Motion positives are likewise controlled component evidence. SMLP already succeeds under the unchanged V56 baseline; these closures alone establish no causal improvement or selected-Recolor/motion efficacy on SMLP. Frozen public execution, unchanged-original replay and browser evidence are separate forthcoming attestations; no unexecuted public-comparison result or file is linked here.",
     "Lot 1 (native implementation 0.32.0), reconciled from published V59, adds retained_typed_material_request_parent outside the 76-entry registry. The common typed-material loop retains a parent, consumes actual child returns, resumes delivery or pose under ordinary WHY/ACT, and records suspension, refutation or an observed boundary. Attention owns the binding and selection witness; SharedSeries remains the one business owner. The roadmap keeps 50/76 entries connected, 37 compiled workflows and all six complete-migration gates false. Baseline ablations, original-source contracts, cold common-runtime tests, a separate live campaign and cost measurements are documented under docs/migration/lot1-evidence; no new game success or full source-provider transfer is inferred solely from the new parent trace.",
     "Lot 2A connects the morphology current producer at its declared source priority with a single morphology contact journal and existing goal/meter/collection owners. Current measurements can now release guarded proposals through common WHY/ACT. The 76-entry registry denominator is unchanged; morphology remains a partial source provider, and no global migration gate is advanced.",
-    "Lot 2C (native 0.35.0) connects retained morphology station methods, guarded entry rebind/continuation and managed capacity planning through existing caller, morphology and inventory owners. The three focused suites contain 96 entry checks, 101 managed checks and 39 boundary/adapter checks; their synthetic/public consumer contracts are distinct from any live campaign. All exporters verify the 1786 pinned originals before/after; source boundary doubles and unordered projection-edge comparison are explicitly scoped. Four new helper mappings remain partial_transfer, existing geometry/adapter/common-caller mappings remain partial, and no complete-migration gate is advanced."
+    "Lot 2C (native 0.35.0) connects retained morphology station methods, guarded entry rebind/continuation and managed capacity planning through existing caller, morphology and inventory owners. The three focused suites contain 96 entry checks, 101 managed checks and 39 boundary/adapter checks; their synthetic/public consumer contracts are distinct from any live campaign. All exporters verify the 1786 pinned originals before/after; source boundary doubles and unordered projection-edge comparison are explicitly scoped. Four new helper mappings remain partial_transfer, existing geometry/adapter/common-caller mappings remain partial, and no complete-migration gate is advanced.",
+    "Lot3A/native0.37 transfers the complete own Panel service branch from V6 into the existing SharedSeries owner. The registry facade is explicitly 1/6 partial and does not increment the connected50/76 total. Projection is component_verified; access and common facade retain partial_transfer because inherited branches remain pending. Original source fixtures, shared-owner tests, the cold three-level RSWP campaign and separate browser/cost evidence retain their distinct scopes. No new V5 numerical kernel or full source-caller parity is claimed; all six complete-migration gates remain false."
   ]
 }

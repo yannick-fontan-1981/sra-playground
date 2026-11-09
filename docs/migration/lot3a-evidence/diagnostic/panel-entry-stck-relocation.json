@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.panel-entry-diagnostic-relocation.v1",
+  "recordedAt": "2026-11-09T22:59:53.571693+00:00",
+  "operation": "byte_identical_conservation_copy_without_reexecution",
+  "executedInstrumentation": {
+    "path": "/workspace/scratch/c4dd29871d33/lot3a-panel-entry-profile.mjs",
+    "bytes": 7097,
+    "sha256": "f58e78f04cf6a6fc03206472d665284221e5bc53160854c610b44987e00d384e"
+  },
+  "conservedInstrumentation": {
+    "path": "scripts/diagnose-panel-entry-cost.mjs",
+    "bytes": 7097,
+    "sha256": "f58e78f04cf6a6fc03206472d665284221e5bc53160854c610b44987e00d384e"
+  },
+  "receiptInstrumentationSha256Matches": true,
+  "nativeDigestFromOriginalReceipt": "f3f795a3c813b72803e3f26bd207eed032853ae03d60582a33392f52a1bf8e7d",
+  "originalReceipts": [
+    {
+      "path": "docs/migration/lot3a-evidence/diagnostic/panel-entry-stck-receipt.json.gz",
+      "bytes": 122185,
+      "sha256": "45a590b9515ce9add01de87fc658af945b14a7ec5ced1b0def9550dea90a7ffe",
+      "unchangedAfterConservation": true
+    },
+    {
+      "path": "docs/migration/lot3a-evidence/diagnostic/panel-entry-stck-calls.json.gz",
+      "bytes": 5750,
+      "sha256": "f08b2fcf1dc1ef487767fd0b250eb95c8dbd78a4c20b56c5899354eecbbb57d6",
+      "unchangedAfterConservation": true
+    }
+  ],
+  "qualifications": [
+    "The conserved script is byte-identical to the instrumentation actually executed in scratch; no rerun was performed.",
+    "Both original compressed receipts retain their exact bytes and hashes, including their original scratch instrumentation path.",
+    "This receipt records only conservation and provenance. It is not a new profile, native-source validation run or performance-budget acceptance.",
+    "No production source file was modified by this conservation operation."
+  ]
+}

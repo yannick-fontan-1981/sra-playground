@@ -4,7 +4,8 @@
  * The source calls the inherited record chain before record_packet. At this
  * migration stage that chain contains observed-program composition, occurrence recall, cell-patch placement,
  * coupled-pair epoch anchors, alternating graph evidence, pair-response evidence
- * and coupled support planning/acquisition.
+ * and coupled support planning/acquisition, followed by the panel-service layer.
+ * Panel service is one of the six observed-composition service branches.
  * Other providers remain pending. The retained digest describes this native closure, not the
  * original full ObservedCompositionConstraint inheritance chain.
  */
@@ -13,6 +14,8 @@ import type { OccurrenceRecallPolicy } from './v6-occurrence-recall.ts';
 import { CoupledPairEvidenceMemory, coupledPairAfter } from './v6-coupled-pair-evidence.ts';
 import { proposeCoupledPairGraph, coupledPairBefore } from './v6-coupled-pair-planning.ts';
 import { AuxiliarySupportMemory, auxiliarySupportBefore, auxiliarySupportAfter } from './v6-auxiliary-support.ts';
+import { PanelServiceMemory, proposePanelService, panelServiceBefore, panelServiceAfter } from './v6-panel-service-access.ts';
+import { panelServiceInputCandidates } from './v6-panel-service-observation.ts';
 import { AlternatingGraphMemory, alternatingGraphBefore, alternatingGraphAfter } from './v6-alternating-graph-access.ts';
 import { CellPlacementMemory, cellPlacementBefore } from './v6-cell-placement.ts';
 import { TypedMaterialMemory, commonTypedMaterialProposal, bindTypedMaterial, typedMaterialBefore, typedMaterialAfter } from './v6-typed-material-access.ts';
@@ -44,7 +47,7 @@ import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts'
 import type { OccurrenceRecord as R } from './v6-occurrence-scene.ts';
 import type { NativeFamily, NativeRows, NativePublicObservation, NativeProposal } from './v6-native-types.ts';
 
-export const SHARED_SERIES_DIGEST_SCOPE = 'native_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_and_coupled_support_v6';
+export const SHARED_SERIES_DIGEST_SCOPE = 'native_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_and_panel_service_one_of_six_observed_compositions_v6';
 
 export interface NativeSharedSeriesOptions {
   /** Native current-control revalidation; the default preserves source contracts. */
@@ -152,6 +155,7 @@ interface SharedWorkingStamp {
   graph: AlternatingGraphMemory; graphRevision: number;
   pairs: CoupledPairEvidenceMemory; pairRevision: number;
   auxiliary: AuxiliarySupportMemory; auxiliaryRevision: number;
+  panel: PanelServiceMemory; panelRevision: number; panelWitness: WorkingWitness;
   events: WorkingWitness;
 }
 
@@ -172,6 +176,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   graph = new AlternatingGraphMemory();
   pairs = new CoupledPairEvidenceMemory();
   auxiliary = new AuxiliarySupportMemory();
+  panel = new PanelServiceMemory();
   private certified: SharedWorkingStamp | null = null;
   private checkpoint: { value: R; stamp: SharedWorkingStamp; certified: boolean } | null = null;
   private accepted: { value: Readonly<R>; stamp: SharedWorkingStamp } | null = null;
@@ -208,7 +213,9 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       cells: this.cells, cellRevision: this.cells.nativeRevision,
       graph: this.graph, graphRevision: this.graph.nativeRevision,
       pairs: this.pairs, pairRevision: this.pairs.nativeRevision,
-      auxiliary: this.auxiliary, auxiliaryRevision: this.auxiliary.nativeRevision, events: workingWitness(this.events) };
+      auxiliary: this.auxiliary, auxiliaryRevision: this.auxiliary.nativeRevision,
+      panel: this.panel, panelRevision: this.panel.nativeRevision, panelWitness: workingWitness(this.panel),
+      events: workingWitness(this.events) };
   }
   private unchanged(stamp: SharedWorkingStamp): boolean {
     return this.memory === stamp.memory && this.memory.nativeRevision === stamp.memoryRevision
@@ -226,7 +233,37 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       && this.graph === stamp.graph && this.graph.nativeRevision === stamp.graphRevision
       && this.pairs === stamp.pairs && this.pairs.nativeRevision === stamp.pairRevision
       && this.auxiliary === stamp.auxiliary && this.auxiliary.nativeRevision === stamp.auxiliaryRevision
+      && this.panel === stamp.panel && this.panel.nativeRevision === stamp.panelRevision && witnessMatches(stamp.panelWitness, this.panel)
       && witnessMatches(stamp.events, this.events) && witnessMatches(stamp.memoryWitness, this.memory);
+  }
+
+  /** One transferred branch of the original six-plan observed-composition entry. */
+  async observedPropose(observation: R, rows: NativeRows, inputs: readonly R[], remaining: number,
+    config: R, levelDeadline: number | null): Promise<R | null> {
+    if (remaining < 1) return null;
+    if (levelDeadline === null || levelDeadline === undefined) throw new TypeError('Observed composition requires current level deadline');
+    // This 1/6 closure adds measured panel points to the caller's observed
+    // inputs. Additional inherited candidate generators remain outside it.
+    const candidates = [...inputs, ...panelServiceInputCandidates(rows, observation.available_action_refs)];
+    const proposal = this.sourceGraphProposal(observation, rows, candidates, Math.min(16, remaining),
+      { ...config, remaining_level_actions: remaining, level_deadline: levelDeadline });
+    if (proposal.block_unrelated_probe) return proposal;
+    if (proposal.status !== 'proposed' || !Object.hasOwn(proposal, 'panel_service_plan')) return null;
+    proposal.field_subquestion = 'observed_composition_services';
+    for (const [index, action] of (proposal.actions as R[]).entries()) {
+      const step = proposal.steps[index];
+      step.expected_before = Object.fromEntries(['level_epoch', 'frame_hash', 'levels_completed', 'state'].map(key => [key, observation[key]]));
+      if (action.action_ref === 'ACTION6') {
+        const { x, y } = action.data, value = rows.at(y)?.at(x);
+        if (value === undefined) throw new RangeError('Observed composition point is outside its public frame');
+        step.point_support = { level_epoch: observation.level_epoch, observation_ref: observation.observation_ref,
+          frame_hash: observation.frame_hash, point: [x, y], palette_value: value, projection_bbox: [x, y, x, y],
+          projected_rows_digest: await rowsDigest([[value]]), entity_ref: `observed-composition-control:${identity([observation.observation_ref, x, y])}`,
+          signature: identity([observation.frame_hash, x, y, value]),
+          scope: 'Measured control point, independently rechecked before dispatch; family geometry and predicted-state guards additionally apply.' };
+      }
+    }
+    return proposal;
   }
 
   /** The original goal-access entry, separate from the later occurrence recall. */
@@ -401,6 +438,10 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   }
 
   private sourceGraphProposal(observation: R, rows: NativeRows, inputs: readonly R[], maxPrefix: number, config: R): R {
+    // All three source adapters call this same inherited planner. Their own
+    // configurations and result filters decide which entry can expose a plan.
+    const panel = proposePanelService(this.panel, observation, rows, inputs, maxPrefix, config);
+    if (panel) return panel;
     const pair = this.pairs.currentState();
     const ordinary = (): R => proposeCoupledPairGraph(pair, observation, rows, inputs, maxPrefix, config)
       ?? this.graph.proposeGraph(observation, rows, inputs, maxPrefix, config);
@@ -410,6 +451,16 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   override bind(proposal: R, domain: ObservedInputDomain): void {
     // The common source wrappers dispatch by key presence in this inherited
     // order; a mixed envelope must not let a lower layer bypass its parent.
+    if (Object.hasOwn(proposal, 'panel_service_plan')) {
+      for (const [index, action] of (proposal.actions as R[]).entries()) {
+        const step = proposal.steps[index];
+        if (action.action_ref === 'ACTION6') {
+          if (!equal(step.point_support.point, [action.data.x, action.data.y])) throw new TypeError('Current point changed');
+          step.point_binding = { ...step.point_support };
+        } else if (truth(action.data)) throw new TypeError('Unexpected nonpoint payload');
+      }
+      return;
+    }
     if (['pair_access_plan', 'support_preparation_plan'].some(key => Object.hasOwn(proposal, key))) {
       for (const [index, action] of (proposal.actions as R[]).entries()) {
         const step = proposal.steps[index];
@@ -460,6 +511,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   }
 
   override before(proposal: R, index: number, packet: NativePublicObservation, observation: R): R {
+    if (truth(proposal.panel_service_plan)) return panelServiceBefore(proposal, index, packet.frame_rows,
+      { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
     if (truth(proposal.support_preparation_plan)) return auxiliarySupportBefore(proposal, index, packet.frame_rows,
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
     if (truth(proposal.pair_access_plan)) return coupledPairBefore(proposal, index, packet.frame_rows,
@@ -504,6 +557,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     return super.before(proposal, index, packet, observation);
   }
   override after(proposal: R, index: number, before: R, after: R, first: NativeRows, second: NativeRows): R {
+    if (truth(proposal.panel_service_plan)) return panelServiceAfter(proposal, index, first, second,
+      { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
     if (truth(proposal.support_preparation_plan)) return auxiliarySupportAfter(proposal, index, first, second,
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
     if (truth(proposal.pair_access_plan)) return coupledPairAfter(proposal, index, first, second,
@@ -609,6 +664,9 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     const supportEvents = this.auxiliary.record(this.pairs.currentState(), before, command, after, first, second, proposal, index);
     for (const event of supportEvents) if (event.kind === 'coupled_pair_evidence') this.pairs.applyEvent(event);
     events.push(...supportEvents);
+    // PanelServiceAccess acquires after its inherited Coupled/Auxiliary chain.
+    // This common owner runs that chain once, then the public packet acquisition.
+    events.push(...this.panel.record(before, command, after, first, second, proposal, index));
     events.push(...recordObservedProgramPacket(this.memory, before, command, after, first, frames));
     events.push(...this.queued.recordPacket(before, command, after, first, frames));
     events.push(...this.linked.recordPacket(before, command, after, first, frames));
@@ -629,6 +687,10 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     let digest = this.memory.retainedDigest();
     for (const layer of [this.material, this.radial, this.service, this.rooted, this.catalogue, this.queued, this.product, this.labeled, this.trace,
       this.linked, this.cells, this.graph, this.pairs, this.auxiliary]) digest = layer.retainedDigest(digest);
+    // Existing native checkpoints keep their exact digest until the first panel
+    // event. This conditional layer is a native migration envelope, not a claim
+    // that the complete source inheritance digest has already been transferred.
+    if (this.panel.eventCount) digest = this.panel.retainedDigest(digest);
     return digest;
   }
 
@@ -669,7 +731,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   private restoreOwned(state: Readonly<R>): void {
     if (!Array.isArray(state.events) || typeof state.digest !== 'string') throw new TypeError('Incomplete shared series memory');
     const events = [...state.events] as R[], memory = new SharedOccurrenceMemory(), material = new TypedMaterialMemory(), radial = new RadialPortMemory(), service = new FieldServiceMemory(), rooted = new RootedQuotaMemory(), catalogue = new OccludedCatalogueMemory(), queued = new QueuedFieldMemory(), product = new ProductPanelMemory(), labeled = new LabeledSequenceMemory(), trace = new TraceFieldMemory(), linked = new LinkedPacketMemory(), cells = new CellPlacementMemory(), graph = new AlternatingGraphMemory(),
-      pairs = new CoupledPairEvidenceMemory(), auxiliary = new AuxiliarySupportMemory();
+      pairs = new CoupledPairEvidenceMemory(), auxiliary = new AuxiliarySupportMemory(), panel = new PanelServiceMemory();
     for (const event of events) {
       if (['typed_carrier_response', 'typed_material_flow', 'typed_pose_scope', 'typed_pose_model', 'typed_pose_response'].includes(event.kind)) material.applyEvent(event);
       else if (event.kind === 'radial_method_recall' || event.kind === 'radial_port_effect') radial.applyEvent(event);
@@ -685,14 +747,16 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       else if (event.kind === 'alternating_graph_evidence') graph.applyEvent(event);
       else if (event.kind === 'coupled_pair_epoch_anchor' || event.kind === 'coupled_pair_evidence') pairs.applyEvent(event);
       else if (event.kind === 'coupled_support_control_model' || event.kind === 'coupled_support_preparation') auxiliary.applyEvent(event);
+      else if (event.kind === 'observed_panel_service') panel.applyEvent(event);
       else memory.applyEvent(event);
     }
     let digest = memory.retainedDigest();
     for (const layer of [material, radial, service, rooted, catalogue, queued, product, labeled, trace, linked, cells, graph, pairs, auxiliary]) digest = layer.retainedDigest(digest);
+    if (panel.eventCount) digest = panel.retainedDigest(digest);
     if (digest !== state.digest) throw new TypeError('Shared series memory changed during recall');
     // Only publish the reconstructed working copies after the complete journal
     // has passed integrity checks. A rejected edit cannot clear learned state.
-    this.memory = memory; this.material = material; this.radial = radial; this.service = service; this.rooted = rooted; this.catalogue = catalogue; this.queued = queued; this.product = product; this.labeled = labeled; this.trace = trace; this.linked = linked; this.cells = cells; this.graph = graph; this.pairs = pairs; this.auxiliary = auxiliary; this.events = events;
+    this.memory = memory; this.material = material; this.radial = radial; this.service = service; this.rooted = rooted; this.catalogue = catalogue; this.queued = queued; this.product = product; this.labeled = labeled; this.trace = trace; this.linked = linked; this.cells = cells; this.graph = graph; this.pairs = pairs; this.auxiliary = auxiliary; this.panel = panel; this.events = events;
     const stamp = this.workingStamp();
     this.certified = stamp; this.accepted = { value: state, stamp };
     this.checkpoint = { value: retainNativeJson({ events: this.events, digest: state.digest }), stamp, certified: true };
@@ -701,7 +765,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
 
 export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, coupledConfig?: R, graphConfig?: R, cellConfig?: R,
   options: NativeSharedSeriesOptions = {}, radialConfig?: R, rootedConfig?: R, productConfig?: R, labeledConfig?: R, traceConfig?: R, linkedConfig?: R,
-  queuedConfig?: R, catalogueConfig?: R, materialConfig?: R, serviceConfig?: R): NativeFamily {
+  queuedConfig?: R, catalogueConfig?: R, materialConfig?: R, serviceConfig?: R, observedConfig?: R): NativeFamily {
   const family = new SharedSeriesConstraint(config, options), adapter = asNativeOccurrenceRecallFamily(family);
   return { ...adapter, nativeState: () => family.nativeState(), restoreNative: state => family.restoreNative(state),
     compositionDependencyState: () => family.material.currentState() as unknown as R,
@@ -804,6 +868,8 @@ export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, c
         throw new TypeError('Unsupported shared-series source subquestion');
       }
       if (group !== 'goal_access') return null;
+      if (subquestion === 'observed_composition_services') return observedConfig
+        ? await family.observedPropose(observation, rows, inputs, remaining, observedConfig, execution?.deadlineMs ?? null) as NativeProposal | null : null;
       if (subquestion === 'coupled_support_composition') return coupledConfig
         ? await family.coupledPropose(observation, rows, inputs, remaining, coupledConfig, execution?.deadlineMs ?? null) as NativeProposal | null : null;
       if (subquestion === 'alternating_graph_composition') return graphConfig
@@ -817,6 +883,8 @@ export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, c
       return proposal as NativeProposal | null;
     }
     if (group === 'goal_access') {
+      const observed = observedConfig ? await family.observedPropose(observation, rows, inputs, remaining, observedConfig, execution?.deadlineMs ?? null) : null;
+      if (observed) return observed as NativeProposal;
       const coupled = coupledConfig ? await family.coupledPropose(observation, rows, inputs, remaining, coupledConfig, execution?.deadlineMs ?? null) : null;
       if (coupled) return coupled as NativeProposal;
       return graphConfig ? family.graphPropose(observation, rows, inputs, remaining, graphConfig, execution?.deadlineMs ?? null) as NativeProposal | null : null;

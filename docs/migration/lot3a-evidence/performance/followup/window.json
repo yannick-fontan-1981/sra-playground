@@ -1,0 +1,41 @@
+{
+  "schema": "logos-engine.native-loop-cost-window.v1",
+  "startedAt": "2026-11-09T22:58:30.227453+00:00",
+  "protocol": "docs/migration/lot3a-evidence/performance/followup/protocol.json",
+  "runs": [
+    {
+      "name": "baseline",
+      "checkout": "/workspace/scratch/c4dd29871d33/lot3a-baseline",
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot3a-evidence/performance/followup/cases.json",
+        "docs/migration/lot3a-evidence/performance/followup/baseline.json"
+      ],
+      "startedAt": "2026-11-09T22:58:30.227470+00:00",
+      "finishedAt": "2026-11-09T23:01:57.359676+00:00",
+      "elapsedSeconds": 207.13222000400128,
+      "exitCode": 0,
+      "report": "docs/migration/lot3a-evidence/performance/followup/baseline.json",
+      "log": "docs/migration/lot3a-evidence/performance/followup/baseline.log.gz"
+    },
+    {
+      "name": "after",
+      "checkout": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout",
+      "command": [
+        "node",
+        "scripts/measure-native-loop-costs.mjs",
+        "docs/migration/lot3a-evidence/performance/followup/cases.json",
+        "docs/migration/lot3a-evidence/performance/followup/after.json"
+      ],
+      "startedAt": "2026-11-09T23:01:57.359772+00:00",
+      "finishedAt": "2026-11-09T23:05:25.765143+00:00",
+      "elapsedSeconds": 208.40538578800624,
+      "exitCode": 0,
+      "report": "docs/migration/lot3a-evidence/performance/followup/after.json",
+      "log": "docs/migration/lot3a-evidence/performance/followup/after.log.gz"
+    }
+  ],
+  "finishedAt": "2026-11-09T23:05:25.765238+00:00",
+  "status": "passed"
+}

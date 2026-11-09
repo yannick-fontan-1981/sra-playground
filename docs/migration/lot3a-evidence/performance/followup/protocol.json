@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.native-cost-followup-protocol.v1",
+  "declaredAt": "2026-11-09T22:58:30.227230+00:00",
+  "reason": "First comparison has six unresolved budget exceedances with noise. Position audit and one actual STCK profile find nonuniform phase changes; new observed entry median6.283ms does not attribute the50/65ms decision increases. Preserve all failures.",
+  "originalComparison": "docs/migration/lot3a-evidence/performance/comparison.json",
+  "originalComparisonSha256": "21c0f037ca661c68d63859fd8eca5dac8bcd144f64f21375c9cc9957420c26c4",
+  "additionalColdSessionsPerVersionAndCase": 5,
+  "totalColdSessionsPerVersionAndCase": 8,
+  "cases": [
+    "STCK10",
+    "SMLP15"
+  ],
+  "relativeBudget": 0.1,
+  "stages": [
+    "session_elapsed",
+    "new_decision",
+    "known_prefix_service",
+    "known_prefix_request",
+    "known_prefix_guard",
+    "acquisition_and_persistence",
+    "persistence",
+    "restoration"
+  ],
+  "unchangedSource": {
+    "baseline": "ac7225dd2e5f51551881f0c1d5eba284c64c2f019b08f00e572900319e89255b",
+    "after": "f3f795a3c813b72803e3f26bd207eed032853ae03d60582a33392f52a1bf8e7d"
+  },
+  "decisionRule": "Exactly one follow-up cohort. Retain and compare both original3 and fresh5 with the unchanged runner/comparator. Final cost assessment pools ALL8 sessions per case/version, same sixteen median metrics and+10% threshold, no exclusion, no noise allowance, no reweighting of decision positions. Aggregate tool must reproduce each original cohort comparison before pooling. Any remaining pooled overrun stays unresolved.",
+  "isolation": "No tests, builds, source exports, profiles, browser or live campaign during sequential measurement. Only documentation, read-only review and nonexecuted evidence-tool editing."
+}

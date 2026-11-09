@@ -5,13 +5,17 @@ import { gunzipSync } from 'node:zlib';
 import { SharedSeriesConstraint, createNativeSharedSeriesFamily } from '../src/logos-engine/v6-shared-series.ts';
 import { CoupledPairEvidenceMemory } from '../src/logos-engine/v6-coupled-pair-evidence.ts';
 import { AuxiliarySupportMemory } from '../src/logos-engine/v6-auxiliary-support.ts';
+import { PanelServiceMemory } from '../src/logos-engine/v6-panel-service-access.ts';
 import { OccurrenceRecallAccess } from '../src/logos-engine/v6-occurrence-recall.ts';
 import { NativeKnowledgeStore } from '../src/logos-engine/v6-knowledge-store.ts';
 import { NativeReasoningMemory } from '../src/logos-engine/v6-reasoning-memory.ts';
+import { ObservedInputDomain } from '../src/logos-engine/v6-native-observer.ts';
+import type { NativePublicObservation } from '../src/logos-engine/v6-native-types.ts';
 
 type R = Record<string, any>;
 const oracle = JSON.parse(gunzipSync(await readFile(new URL('./fixtures/v6-coupled-pair-planning-reference.json.gz', import.meta.url))).toString());
 const auxiliary = JSON.parse(gunzipSync(await readFile(new URL('./fixtures/v6-auxiliary-support-reference.json.gz', import.meta.url))).toString());
+const panelSource = JSON.parse(gunzipSync(await readFile(new URL('./fixtures/v6-panel-service-parity.json.gz', import.meta.url))).toString());
 const ID = 'family_state:public_occurrence_recall';
 const CAUSE = { workflow: 'test.shared.native', step: 'checkpoint', statement: 'retain' };
 const copy = <T>(value: T): T => structuredClone(value);
@@ -27,7 +31,7 @@ function initial(name = 'small'): SharedSeriesConstraint {
 
 function counter(context: any): { total: () => number; reset: () => void } {
   let count = 0;
-  for (const prototype of [CoupledPairEvidenceMemory.prototype, AuxiliarySupportMemory.prototype, OccurrenceRecallAccess.prototype]) {
+  for (const prototype of [CoupledPairEvidenceMemory.prototype, AuxiliarySupportMemory.prototype, PanelServiceMemory.prototype, OccurrenceRecallAccess.prototype]) {
     const original = prototype.applyEvent;
     context.mock.method(prototype, 'applyEvent', function (this: any, event: R): void { count++; original.call(this, event); });
   }
@@ -38,6 +42,168 @@ function acquireHeld(family: SharedSeriesConstraint): R {
   const before = oracle.scenes['small:5'], after = oracle.scenes['held:0'];
   return family.record(before.observation, after.observation, { action_ref: 'ACTION4' }, before.rows, after.rows, {}, 0, after.public.frame_packet);
 }
+
+/** Controlled reducer evidence for checkpoint integrity, not a game receipt. */
+const panelEvent = (): R => ({ kind: 'observed_panel_service',
+  memory: { symbols: [], evidence: ['panel-before', 'panel-after'], selection_observed: true, effects: [], failed: [] },
+  detail: { before: 'panel-before', after: 'panel-after', kind: 'configuration', command: { action_ref: 'ACTION6', data: { x: 3, y: 4 } },
+    boundary: false, pixel_changed: true, prediction_matched: true, score_delta: 0 } });
+
+function withPanel(): SharedSeriesConstraint {
+  const family = initial(), event = panelEvent();
+  family.panel.applyEvent(event); family.events.push(copy(event));
+  family.restore(family.state()); return family;
+}
+
+test('pre-panel native checkpoints retain their exact digest and can replace later panel evidence', () => {
+  // Captured from commit 3b5cb28a594e8570253371aeeb24444361df3cb0 using the same
+  // controlled pair fixture. Empty new layers do not rewrite historical hashes.
+  assert.equal(new SharedSeriesConstraint(oracle.policy.recall).state().digest,
+    'b4d864f344c39137a51b10624f03e4e37b14c053c8799b5e6ee957648d679503');
+  const legacy = initial().state();
+  assert.equal(legacy.digest, '46077bcd09dec8c38c35a9e34e054ed6882b50b1bbd0244dd17ad5a26e935ff3');
+  const family = withPanel();
+  assert.equal(family.panel.eventCount, 1); assert.notEqual(family.state().digest, legacy.digest);
+  family.restoreNative(legacy);
+  assert.deepEqual(family.state(), legacy); assert.equal(family.panel.eventCount, 0);
+});
+
+test('the shared immutable panel checkpoint replays once from Kernel and then retains its certificate', async context => {
+  const family = withPanel(), store = new NativeKnowledgeStore('shared-native-v37', 'panel-checkpoint'), calls = counter(context);
+  await store.commit([{ id: ID, kind: 'family_state', family: family.id, value: family.nativeState() }], CAUSE);
+  const checkpoint = store.stateValue(ID) as R;
+  calls.reset(); family.restoreNative(checkpoint);
+  assert.equal(calls.total(), checkpoint.events.length);
+  assert.equal(family.panel.eventCount, 1);
+  calls.reset(); family.restoreNative(store.stateValue(ID) as R);
+  assert.equal(calls.total(), 0, 'The panel layer participates in the same certified owner, without its own replay');
+  const current = family.nativeState(), publicPanel = family.panel.currentState();
+  publicPanel.panel_memory.evidence.push('edited-public-copy'); publicPanel.panel_events.pop();
+  assert.equal(family.nativeState(), current, 'An independent panel projection cannot mutate the accepted owner');
+  assert.deepEqual(family.state(), checkpoint);
+});
+
+test('direct panel reduction, layer replacement and container edits invalidate the shared certificate', context => {
+  const changes: [string, (family: SharedSeriesConstraint) => void][] = [
+    ['panel reducer', family => family.panel.applyEvent(panelEvent())],
+    ['panel layer replacement', family => { family.panel = new PanelServiceMemory(); }],
+    ['panel memory replacement', family => { (family.panel as R).panelMemory = { ...copy(family.panel.currentState().panel_memory), evidence: ['unacquired'] }; }],
+    ['panel journal append', family => { (family.panel as R).panelEvents.push(panelEvent()); }],
+    ['panel journal replacement', family => { (family.panel as R).panelEvents[0] = panelEvent(); }],
+  ];
+  const calls = counter(context);
+  for (const [label, change] of changes) {
+    const family = withPanel(), trusted = family.nativeState(); family.restoreNative(trusted);
+    change(family); calls.reset(); family.restoreNative(trusted);
+    assert.equal(calls.total(), trusted.events.length, label);
+    assert.deepEqual(family.state(), trusted, label);
+    assert.deepEqual(family.panel.currentState().panel_events, [panelEvent()], label);
+  }
+});
+
+test('invalid panel restoration is atomic for all shared layers and keeps the previous certificate', context => {
+  const family = withPanel(), trusted = family.nativeState(); family.restoreNative(trusted);
+  const retained = family.state(), panel = family.panel, pairs = family.pairs, calls = counter(context);
+  for (const mutate of [
+    (value: R) => { value.events.at(-1).memory.evidence.push('unwitnessed'); },
+    (value: R) => { value.events.pop(); },
+    (value: R) => { delete value.events.at(-1).memory; },
+    (value: R) => { value.digest = 'forged-panel-digest'; },
+  ]) {
+    const invalid = copy(retained); mutate(invalid);
+    assert.throws(() => family.restoreNative(invalid));
+    assert.deepEqual(family.state(), retained);
+    assert.equal(family.panel, panel); assert.equal(family.pairs, pairs);
+    calls.reset(); family.restoreNative(trusted); assert.equal(calls.total(), 0);
+  }
+});
+
+test('panel reduction outside the common journal cannot certify a fresh native checkpoint', () => {
+  const family = withPanel(), trusted = family.nativeState();
+  family.panel.applyEvent(panelEvent());
+  const inconsistent = family.nativeState();
+  assert.throws(() => family.restoreNative(inconsistent), /Shared series memory changed/);
+  family.restoreNative(trusted); assert.deepEqual(family.state(), trusted);
+});
+
+for (const item of panelSource.commons as R[]) test(`shared observed wrapper and point binding match original ${item.id}`, async () => {
+  const family = new SharedSeriesConstraint(oracle.policy.recall);
+  for (const event of item.seedEvents) { family.panel.applyEvent(copy(event)); family.events.push(copy(event)); }
+  family.restore(family.state());
+  const args = item.arguments, checkpoint = family.nativeState();
+  const propose = () => family.observedPropose(args.obs, args.rows, args.inputs, args.remaining, args.config, args.levelDeadline);
+  if (item.error) await assert.rejects(propose, { message: item.error.message });
+  else {
+    const proposal = await propose();
+    assert.deepEqual(proposal, item.unboundProposal, 'Complete source envelope before physical point binding');
+    if (proposal?.status === 'proposed') family.bind(proposal, new ObservedInputDomain(256));
+    assert.deepEqual(proposal, item.proposal, 'Complete source envelope including current measured point binding');
+  }
+  assert.equal(family.nativeState(), checkpoint, 'A proposal or a refusal never acquires panel evidence');
+});
+
+test('panel guards retain priority over every older plan in mixed envelopes', () => {
+  const family = new SharedSeriesConstraint(oracle.policy.recall);
+  for (const item of panelSource.guards as R[]) {
+    const args = item.arguments, proposal = { ...copy(args.proposal),
+      support_preparation_plan: { unexpected_ancestor: true }, pair_access_plan: { unexpected_ancestor: true },
+      graph_access_plan: { unexpected_ancestor: true }, occurrence_recall_plan: { unexpected_ancestor: true } };
+    const actual = item.operation === 'before'
+      ? family.before(proposal, args.index, { frame_rows: args.rows, level: args.meta.epoch,
+        levels_completed: args.meta.score, available_action_refs: args.meta.available } as NativePublicObservation,
+      { observation_ref: args.meta.observation_ref })
+      : family.after(proposal, args.index, {}, { level_epoch: args.meta.epoch, levels_completed: args.meta.score, state: args.meta.state }, args.rows, args.later);
+    assert.deepEqual(actual, item.expected, item.id);
+  }
+  const original = panelSource.commons.find((item: R) => item.id === 'public_initial').unboundProposal;
+  const proposal = { ...copy(original), panel_service_plan: {}, graph_access_plan: { unexpected_ancestor: true } };
+  family.bind(proposal, new ObservedInputDomain(256));
+  assert.deepEqual(proposal.steps[0].point_binding, proposal.steps[0].point_support,
+    'The wrapper uses key presence, including an empty panel key, before considering a lower binding');
+  proposal.actions[0].data.x++;
+  assert.throws(() => family.bind(proposal, new ObservedInputDomain(256)), /Current point changed/);
+});
+
+test('an empty panel plan delegates inherited before and after guards by Python truthiness', () => {
+  const family = initial(), scene = oracle.scenes['small:5'], proposal = copy(oracle.plans.common);
+  const expectedBefore = family.before(proposal, 0, scene.public, scene.observation);
+  const expectedAfter = family.after(proposal, 0, scene.observation, scene.observation, scene.rows, scene.rows);
+  assert.equal(expectedBefore.admitted, true);
+  proposal.panel_service_plan = {};
+  assert.deepEqual(family.before(proposal, 0, scene.public, scene.observation), expectedBefore);
+  assert.deepEqual(family.after(proposal, 0, scene.observation, scene.observation, scene.rows, scene.rows), expectedAfter);
+});
+
+test('all three source adapters preserve a blocking panel refusal from their one shared planner', async () => {
+  const item = panelSource.cases.find((item: R) => item.id === 'propose:pointing_unavailable'), args = item.arguments;
+  const family = new SharedSeriesConstraint(oracle.policy.recall), retained = family.nativeState();
+  assert.deepEqual(await family.observedPropose(args.obs, args.rows, args.inputs, args.limit, args.config, 1_000_000), item.expected);
+  assert.deepEqual(await family.coupledPropose(args.obs, args.rows, args.inputs, args.limit, args.config, 1_000_000), item.expected);
+  assert.deepEqual(family.graphPropose(args.obs, args.rows, args.inputs, args.limit, args.config, 1_000_000), item.expected);
+  assert.equal(family.nativeState(), retained);
+});
+
+test('shared acquisition calls inherited and panel records once and certifies their one journal', context => {
+  const family = new SharedSeriesConstraint(oracle.policy.recall), item = panelSource.cases.find((item: R) => item.id === 'record:observed_selection');
+  const args = item.arguments, recordCalls = { pair: 0, auxiliary: 0, panel: 0 };
+  for (const [key, prototype] of [['pair', CoupledPairEvidenceMemory.prototype], ['auxiliary', AuxiliarySupportMemory.prototype],
+    ['panel', PanelServiceMemory.prototype]] as const) {
+    const original = prototype.record;
+    context.mock.method(prototype, 'record', function (this: any, ...values: any[]): R[] {
+      recordCalls[key]++; return (original as Function).apply(this, values);
+    });
+  }
+  const result = family.record(args.before, args.after, args.command, args.rows, args.later, args.proposal, args.index, [args.later]);
+  assert.deepEqual(recordCalls, { pair: 1, auxiliary: 1, panel: 1 });
+  assert.deepEqual(result.events.filter((event: R) => event.kind === 'observed_panel_service'), item.expected);
+  assert.equal(family.events.filter(event => event.kind === 'observed_panel_service').length, 1);
+  assert.deepEqual(family.panel.currentState(), item.afterState.projection);
+  const checkpoint = family.nativeState(), calls = counter(context);
+  family.restoreNative(checkpoint); assert.equal(calls.total(), 0);
+  result.events.find((event: R) => event.kind === 'observed_panel_service').memory.evidence.push('edited-public-envelope');
+  assert.deepEqual(family.state(), checkpoint);
+  assert.equal(family.nativeState(), checkpoint);
+});
 
 test('unchanged actual V7 hydration skips replay but public restore still validates every event', async context => {
   const family = initial(), store = new NativeKnowledgeStore('shared-native-v35', 'unchanged'), calls = counter(context);
