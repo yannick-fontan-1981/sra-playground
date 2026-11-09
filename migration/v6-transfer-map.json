@@ -108,7 +108,8 @@
         "src/logos-engine/v6-geometric-scene.ts",
         "src/logos-engine/v6-component-matches.ts",
         "src/logos-engine/v6-support-measurements.ts",
-        "src/logos-engine/v6-ordered-reaction-measurements.ts"
+        "src/logos-engine/v6-ordered-reaction-measurements.ts",
+        "src/logos-engine/v6-inventory-measurements.ts"
       ],
       "status": "component_verified",
       "proof": [
@@ -121,9 +122,12 @@
         "scripts/export-v6-ordered-reaction-reference.py",
         "tests/fixtures/v6-ordered-reaction-reference.json.gz",
         "tests/v6-ordered-reaction-reference.test.ts",
-        "docs/migration/v55-ordered-reactions-and-public-animations.md"
+        "docs/migration/v55-ordered-reactions-and-public-animations.md",
+        "scripts/export-v6-inventory-observation-reference.py",
+        "tests/fixtures/v6-inventory-observation-reference.json.gz",
+        "tests/v6-inventory-observation-reference.test.ts"
       ],
-      "notes": "Full geometric_observer and V5 components modules now transferred, including compact/framed-pattern/alignment/motion/lattice projections and ambiguity-preserving component matching. Positive framed alignments and both correspondence ambiguity directions are source-compared. V55 OrderedReaction reuses supportParts for the same four-neighbour component records, inclusive row/column boxes, area, boundary flags and relative masks. Independent transformed-raster and temporal-packet cases verify this consumed reuse; it introduces no duplicate source mapping or game-specific segmentation."
+      "notes": "Full geometric_observer and V5 components modules now transferred, including compact/framed-pattern/alignment/motion/lattice projections and ambiguity-preserving component matching. Positive framed alignments and both correspondence ambiguity directions are source-compared. V55 OrderedReaction reuses supportParts for the same four-neighbour component records, inclusive row/column boxes, area, boundary flags and relative masks. Independent transformed-raster and temporal-packet cases verify this consumed reuse; it introduces no duplicate source mapping or game-specific segmentation. V56 adds synchronous inventory reuse with explicit four- and eight-neighbour connectivity in shared supportParts. Original component records and cache separation are compared on synthetic diagonals and transformed rasters. Existing default four-neighbour consumers retain their original path; this is not a game-specific segmentation rule or a duplicate module count."
     },
     {
       "sources": [
@@ -487,7 +491,9 @@
         "src/logos-engine/v6/programs.json",
         "src/logos-engine/v6-drm-selection.ts",
         "src/logos-engine/v6-selection-contracts.ts",
-        "src/logos-engine/v6-ordered-reaction-policy.ts"
+        "src/logos-engine/v6-ordered-reaction-policy.ts",
+        "src/logos-engine/v6-inventory-policy.ts",
+        "src/logos-engine/v6-observed-inventory.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -507,9 +513,12 @@
         "scripts/export-v6-ordered-reaction-reference.py",
         "tests/fixtures/v6-ordered-reaction-reference.json.gz",
         "tests/v6-ordered-reaction-reference.test.ts",
-        "docs/migration/v55-ordered-reactions-and-public-animations.md"
+        "docs/migration/v55-ordered-reactions-and-public-animations.md",
+        "scripts/export-v6-inventory-family-reference.py",
+        "tests/fixtures/v6-inventory-family-reference.json.gz",
+        "tests/v6-inventory-family-reference.test.ts"
       ],
-      "notes": "Original declarative entry programs and V6 WHILE semantics execute natively. The development compiler remains Python; a full V5 source compiler port is not claimed. V54 adds generic SELECT statement admission and pure authority invocation in the common interpreter, with original builder preflight before the callback. Four Source81 workflows are exported from the unchanged compiler and appended without changing the thirty-three existing compiled entries; six ContactPolicy workflows were already present. Source-facing policy receipts preserve the exact original workflow/src_hash/src_status/executed_statements fields before their use in source identities. The compiler and arbitrary Python runtime are still development references, not production dependencies. V55 executes the already compiled original v6.ordered_reaction.choose program through the shared registry. It preserves exactly the four original source-facing receipt fields inside offers and state, while native execution metadata stays in the native program handle. The compiled program inventory remains 37; this transfer adds no program bundle entry."
+      "notes": "Original declarative entry programs and V6 WHILE semantics execute natively. The development compiler remains Python; a full V5 source compiler port is not claimed. V54 adds generic SELECT statement admission and pure authority invocation in the common interpreter, with original builder preflight before the callback. Four Source81 workflows are exported from the unchanged compiler and appended without changing the thirty-three existing compiled entries; six ContactPolicy workflows were already present. Source-facing policy receipts preserve the exact original workflow/src_hash/src_status/executed_statements fields before their use in source identities. The compiler and arbitrary Python runtime are still development references, not production dependencies. V55 executes the already compiled original v6.ordered_reaction.choose program through the shared registry. It preserves exactly the four original source-facing receipt fields inside offers and state, while native execution metadata stays in the native program handle. The compiled program inventory remains 37; this transfer adds no program bundle entry. V56 executes the existing v6.observed_inventory.choose entry with its original policy or family callbacks and literal four-field source-facing receipts. No compiled entry is added: the registry remains at 37 programs. The whole Python runtime/compiler and complete original strategic caller remain outside this mapping."
     },
     {
       "sources": [
@@ -1000,7 +1009,9 @@
       ],
       "targets": [
         "src/logos-engine/v6-support-measurements.ts",
-        "src/logos-engine/v6-reactive-contact-geometry.ts"
+        "src/logos-engine/v6-reactive-contact-geometry.ts",
+        "src/logos-engine/v6-inventory-project.ts",
+        "src/logos-engine/v6-inventory-control-revalidation.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -1010,9 +1021,12 @@
         "scripts/export-v6-reactive-contact-reference.py",
         "tests/fixtures/v6-reactive-contact-reference.json.gz",
         "tests/v6-reactive-contact-reference.test.ts",
-        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-inventory-observation-reference.py",
+        "tests/fixtures/v6-inventory-observation-reference.json.gz",
+        "tests/v6-inventory-observation-reference.test.ts"
       ],
-      "notes": "Called routines only: measure_orthogonal_bands, enclosed_rendering_pixels, _support_transform, measure_current_translation_underlays and measure_remote_navigation_transition. No claim for other inherited functions. V54 reuses the existing measure_current_translation_underlays transfer for ReactiveContact.relative, retaining only a unique current observed body translation in the same epoch and the exact matching support evidence. This adds a source-compared caller without expanding the inherited module claim."
+      "notes": "Called routines only: measure_orthogonal_bands, enclosed_rendering_pixels, _support_transform, measure_current_translation_underlays and measure_remote_navigation_transition. No claim for other inherited functions. V54 reuses the existing measure_current_translation_underlays transfer for ReactiveContact.relative, retaining only a unique current observed body translation in the same epoch and the exact matching support evidence. This adds a source-compared caller without expanding the inherited module claim. V56 additionally consumes the already transferred measure_current_translation_underlays for exact inventory movement acquisition and cross-scope metric revalidation. Complete retained underlay receipts, unique body correspondence and source absence/refutation behavior are source-compared; no new general navigation capability is claimed."
     },
     {
       "sources": [
@@ -1036,15 +1050,20 @@
         "agents/yf_arc3_v5/capabilities/cell_shape_support.py"
       ],
       "targets": [
-        "src/logos-engine/v6-periodic-cell-grids.ts"
+        "src/logos-engine/v6-periodic-cell-grids.ts",
+        "src/logos-engine/v6-inventory-initial.ts",
+        "src/logos-engine/v6-inventory-measurements.ts"
       ],
       "status": "partial_transfer",
       "proof": [
         "scripts/export-v6-configured-arrivals-reference.py",
         "tests/fixtures/v6-configured-arrivals-reference.json.gz",
-        "tests/v6-configured-arrivals.test.ts"
+        "tests/v6-configured-arrivals.test.ts",
+        "scripts/export-v6-inventory-observation-reference.py",
+        "tests/fixtures/v6-inventory-observation-reference.json.gz",
+        "tests/v6-inventory-observation-reference.test.ts"
       ],
-      "notes": "Exact enumerate_periodic_cell_grids candidate calculation and retention, axes, exact_bordered_tile_lattices, exact_joint_tile_lattices and measure_shape_lattice_geometries. Only consumed geometric fields are serialized; unused cells/crops and unrelated grid services are not claimed."
+      "notes": "Exact enumerate_periodic_cell_grids candidate calculation and retention, axes, exact_bordered_tile_lattices, exact_joint_tile_lattices and measure_shape_lattice_geometries. Only consumed geometric fields are serialized; unused cells/crops and unrelated grid services are not claimed. V56 additionally materializes the complete original initial periodic-grid cells and visible clipped-edge serialization, including _with_visible_grid_edges, on the default enumerate_periodic_cell_grids domain used by inventory initial hypotheses. It reuses the previously transferred grid enumerator. This expands that specific serialization closure only; unrelated frame/grid services and the grouped tile/support modules retain their existing partial scope."
     },
     {
       "sources": [
@@ -1268,15 +1287,19 @@
         "agents/yf_arc3_v5/capabilities/transition.py"
       ],
       "targets": [
-        "src/logos-engine/v6-transient-measurements.ts"
+        "src/logos-engine/v6-transient-measurements.ts",
+        "src/logos-engine/v6-inventory-caller-context.ts"
       ],
       "status": "partial_transfer",
       "proof": [
         "scripts/export-v6-animated-contact-reference.py",
         "tests/fixtures/v6-animated-contact-reference.json",
-        "tests/v6-animated-contact.test.ts"
+        "tests/v6-animated-contact.test.ts",
+        "scripts/export-v6-inventory-family-reference.py",
+        "tests/fixtures/v6-inventory-family-reference.json.gz",
+        "tests/v6-inventory-family-reference.test.ts"
       ],
-      "notes": "Called _consistent_noncolinear_turn, _maximal_prefix_suffix_bars, _framed_rectangular_prefix_suffix_bars, measure_scalar_fill_display, _component_bbox_center, _linear_slope, _quadratic_linear_and_square, _ballistic_contact_click, _ordered_transient_component_path_facts and reached nested functions. Other generic transition measurements remain pending."
+      "notes": "Called _consistent_noncolinear_turn, _maximal_prefix_suffix_bars, _framed_rectangular_prefix_suffix_bars, measure_scalar_fill_display, _component_bbox_center, _linear_slope, _quadratic_linear_and_square, _ballistic_contact_click, _ordered_transient_component_path_facts and reached nested functions. Other generic transition measurements remain pending. V56 adds only the exact two-frame _measure_pixel_packet plus _boundary_adjacent_monotonic_strip_decrease predicate consumed by ObservedMeter single-line support discovery on its local boundary band. The native combined predicate and retained source meter sequences are independently compared. General pixel-packet APIs, longer animation/packet cases and unrelated transition semantics are not transferred here."
     },
     {
       "sources": [
@@ -1377,7 +1400,9 @@
         "src/logos-engine/v6-outline-geometry.ts",
         "src/logos-engine/v6-outline-identity.ts",
         "src/logos-engine/v6-outline-rejoin.ts",
-        "src/logos-engine/v6-reactive-contact-geometry.ts"
+        "src/logos-engine/v6-reactive-contact-geometry.ts",
+        "src/logos-engine/v6-inventory-measurements.ts",
+        "src/logos-engine/v6-inventory-endpoints.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -1405,9 +1430,15 @@
         "scripts/export-v6-reactive-contact-reference.py",
         "tests/fixtures/v6-reactive-contact-reference.json.gz",
         "tests/v6-reactive-contact-reference.test.ts",
-        "docs/migration/v54-reactive-contact-and-declared-selection.md"
+        "docs/migration/v54-reactive-contact-and-declared-selection.md",
+        "scripts/export-v6-inventory-observation-reference.py",
+        "tests/fixtures/v6-inventory-observation-reference.json.gz",
+        "tests/v6-inventory-observation-reference.test.ts",
+        "scripts/export-v6-inventory-helpers-reference.py",
+        "tests/fixtures/v6-inventory-helpers-reference.json.gz",
+        "tests/v6-inventory-helpers-reference.test.ts"
       ],
-      "notes": "Only the V6 SimpleNamespace closure of _bounded_joint_peer_collision_route_candidates is transferred: supplied residual signs [1,-1], measured controls, first-member alignment, independent collisions, unmatched-floor-mixture exclusions, canonical BFS with one variant, bounded depth/expansion and wrapper-consumed replay counters. The disabled mixed-cell traversal branch retains supplied traversable refs. Other requests, tracking fallbacks, typed footprints, exact-terrain memory, variants and facts/causal overlays not returned by joint_route remain pending. V36 additionally transfers the full result of _alternating_material_graph_measurement for the exact V6 wrapper request: measured action translations, at most three additional cardinal-marker overlays, optional counterfactual exclusion, 512 expansions, depth 40, three route witnesses and description-bound ambiguity. The wider inherited interaction module remains partial. V53 additionally transfers the OutlineService-consumed closures of _compatible_control_zone_cell_routes and _compact_body_perimeter_marker_accompaniment: bounded residual BFS, measured translation quantum, swept-route facts, canonical memorial/identity measurements and current compact perimeter accompaniment. The strict V6 wrapper supplies its actual minimal canonical term and no previous_action_observed_frame; direct helper fixtures exercising broader declared fields do not prove that the original family supplies them. Source input bounds, including at most 64 observed controlled translations, are preserved without truncation. The separately enabled native public-context annex supplies only the immediately preceding actual public final raster to the already transferred V5 helper; its source-reference evidence qualifies that augmented helper input, not parity of the unchanged V6 wrapper or its caller. V53 also transfers the full _adjacent_unmarked_compact_body_capture measurement in v6-outline-rejoin.ts, including adjacent-capture and announced-cell-rejoin summaries, source ambiguity bounds and unchanged return semantics. Its independent original-Python fixture covers 49 cases: 37 controlled raster variants and 12 retained public scenes. The native v6-outline-access.ts extension uses the same visual motif and observed-announcement premise, but its distant approach, conditional recalled-control access and temporal observed-body access are not unchanged transfers of this source helper. Other interaction capabilities remain pending, and this mapping stays partial_transfer. V54 additionally transfers exactly the route-grid closure consumed by ReactiveContact geometry.scene: one current canonical aligned box, measured/known translations, current last motion and retained geometry. Periodic grids, retained recount/grid references, interface deltas, fill-growth and cell-role inputs are empty at this call, so those inherited branches abstain. The resulting action-centered zero-gap grid is compared on translated and palette-mutated rasters with varied quanta. This does not transfer the general _action_quantized_route_grid_candidates or recount interfaces outside that constructed wrapper domain."
+      "notes": "Only the V6 SimpleNamespace closure of _bounded_joint_peer_collision_route_candidates is transferred: supplied residual signs [1,-1], measured controls, first-member alignment, independent collisions, unmatched-floor-mixture exclusions, canonical BFS with one variant, bounded depth/expansion and wrapper-consumed replay counters. The disabled mixed-cell traversal branch retains supplied traversable refs. Other requests, tracking fallbacks, typed footprints, exact-terrain memory, variants and facts/causal overlays not returned by joint_route remain pending. V36 additionally transfers the full result of _alternating_material_graph_measurement for the exact V6 wrapper request: measured action translations, at most three additional cardinal-marker overlays, optional counterfactual exclusion, 512 expansions, depth 40, three route witnesses and description-bound ambiguity. The wider inherited interaction module remains partial. V53 additionally transfers the OutlineService-consumed closures of _compatible_control_zone_cell_routes and _compact_body_perimeter_marker_accompaniment: bounded residual BFS, measured translation quantum, swept-route facts, canonical memorial/identity measurements and current compact perimeter accompaniment. The strict V6 wrapper supplies its actual minimal canonical term and no previous_action_observed_frame; direct helper fixtures exercising broader declared fields do not prove that the original family supplies them. Source input bounds, including at most 64 observed controlled translations, are preserved without truncation. The separately enabled native public-context annex supplies only the immediately preceding actual public final raster to the already transferred V5 helper; its source-reference evidence qualifies that augmented helper input, not parity of the unchanged V6 wrapper or its caller. V53 also transfers the full _adjacent_unmarked_compact_body_capture measurement in v6-outline-rejoin.ts, including adjacent-capture and announced-cell-rejoin summaries, source ambiguity bounds and unchanged return semantics. Its independent original-Python fixture covers 49 cases: 37 controlled raster variants and 12 retained public scenes. The native v6-outline-access.ts extension uses the same visual motif and observed-announcement premise, but its distant approach, conditional recalled-control access and temporal observed-body access are not unchanged transfers of this source helper. Other interaction capabilities remain pending, and this mapping stays partial_transfer. V54 additionally transfers exactly the route-grid closure consumed by ReactiveContact geometry.scene: one current canonical aligned box, measured/known translations, current last motion and retained geometry. Periodic grids, retained recount/grid references, interface deltas, fill-growth and cell-role inputs are empty at this call, so those inherited branches abstain. The resulting action-centered zero-gap grid is compared on translated and palette-mutated rasters with varied quanta. This does not transfer the general _action_quantized_route_grid_candidates or recount interfaces outside that constructed wrapper domain. V56 adds only the exact ObservedInventory CellProjection/initial/endpoints closure: primitive translation quantum/current evidence, action-centered grid construction and selection, retained-underlay count, edge-display exact complements and the three-output provisional object-terminating-route wrapper. Its positive routes are independently exercised on a painted hollow control and complementary peripheral pattern, including translation, palette, visited and current forecast variants. These calls supply only current body geometry, measured/known translations, periodic cells, current underlay values, optional visited boxes, interface directions and meter forecasts; broader production roles, assemblies, retained-grid/recount, failed-contact, policy override and correspondence registries remain outside the transferred domain. The module remains partial_transfer; direct helper results grant no action authority."
     },
     {
       "sources": [
@@ -1433,7 +1464,10 @@
         "src/logos-engine/v6-coupled-pair-route.ts",
         "src/logos-engine/v6-reactive-contact-geometry.ts",
         "src/logos-engine/v6-reactive-contact-source81-projection.ts",
-        "src/logos-engine/v6-ordered-reaction-measurements.ts"
+        "src/logos-engine/v6-ordered-reaction-measurements.ts",
+        "src/logos-engine/v6-inventory-measurements.ts",
+        "src/logos-engine/v6-inventory-project.ts",
+        "src/logos-engine/v6-inventory-caller-context.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -1451,9 +1485,18 @@
         "scripts/export-v6-ordered-reaction-reference.py",
         "tests/fixtures/v6-ordered-reaction-reference.json.gz",
         "tests/v6-ordered-reaction-reference.test.ts",
-        "docs/migration/v55-ordered-reactions-and-public-animations.md"
+        "docs/migration/v55-ordered-reactions-and-public-animations.md",
+        "scripts/export-v6-inventory-observation-reference.py",
+        "tests/fixtures/v6-inventory-observation-reference.json.gz",
+        "tests/v6-inventory-observation-reference.test.ts",
+        "scripts/export-v6-inventory-helpers-reference.py",
+        "tests/fixtures/v6-inventory-helpers-reference.json.gz",
+        "tests/v6-inventory-helpers-reference.test.ts",
+        "scripts/export-v6-inventory-family-reference.py",
+        "tests/fixtures/v6-inventory-family-reference.json.gz",
+        "tests/v6-inventory-family-reference.test.ts"
       ],
-      "notes": "Only the public geometric values and bounds consumed from FrameGrid, BoundingBox and KnownGridCellRecountInput in V6 joint_route are represented, including positive extents and the 4096-cell bound. This is not a general Pydantic or contract-system replacement. V54 additionally represents the finite FrameGrid/component/periodic-grid/InteractionProbeInput values constructed by the ReactiveContact and Source81 wrappers. Their absent optional source inputs keep their original empty defaults. General Pydantic coercion, arbitrary reference types and unused contract classes remain outside the transfer. V55 additionally represents the FrameGrid and component input values actually constructed by OrderedReaction geometry: rectangular public integer rasters and four-neighbour connectivity. Its source measurement receives ordered public frames and inferred non-negative lattice phases. This extends the consumed JSON domain only; general Pydantic coercion, nominal Python values and unused contract classes remain outside this partial mapping."
+      "notes": "Only the public geometric values and bounds consumed from FrameGrid, BoundingBox and KnownGridCellRecountInput in V6 joint_route are represented, including positive extents and the 4096-cell bound. This is not a general Pydantic or contract-system replacement. V54 additionally represents the finite FrameGrid/component/periodic-grid/InteractionProbeInput values constructed by the ReactiveContact and Source81 wrappers. Their absent optional source inputs keep their original empty defaults. General Pydantic coercion, arbitrary reference types and unused contract classes remain outside the transfer. V55 additionally represents the FrameGrid and component input values actually constructed by OrderedReaction geometry: rectangular public integer rasters and four-neighbour connectivity. Its source measurement receives ordered public frames and inferred non-negative lattice phases. This extends the consumed JSON domain only; general Pydantic coercion, nominal Python values and unused contract classes remain outside this partial mapping. V56 adds the native JSON projection of FrameGrid, BoundingBox, component/periodic-grid records and InteractionProbeInput fields actually constructed by inventory initial/projection/endpoints, plus the two-frame meter predicate request. Bounding-box computed dimensions and FrameGrid rows are explicit representation adapters in the independent tests. Unused optional source fields retain empty defaults; arbitrary Pydantic coercion, Python nominal identity, malformed imported models and wider production probe inputs remain outside this partial mapping."
     },
     {
       "sources": [
@@ -3139,6 +3182,209 @@
         "docs/migration/v55-ordered-reactions-and-public-animations.md"
       ],
       "notes": "This asset mapping documents the exact OrderedReaction subset only: declaration 217 (policy.declared_initial_interaction_exploration), zero-based projection rows 519 ordered_tip_process_probe, 520 ordered_tip_intervention and 521 ordered_tip_achieved_cover_activates_process_test. Rows are exported verbatim and verified against pinned source bytes, including conditions, static facts and templates. Other existing consumers keep their separately documented subset evidence; this mapping does not claim the whole interaction.drm document or increment Python-module coverage. OrderedReaction does not consume interaction.py, whose existing partial mapping remains unchanged."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/family.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-observed-inventory.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-inventory-family-reference.py",
+        "tests/fixtures/v6-inventory-family-reference.json.gz",
+        "tests/v6-inventory-family-reference.test.ts",
+        "tests/v6-inventory-kernel.test.ts"
+      ],
+      "notes": "Complete local ObservedInventory family on the finite native public JSON domain: preservation obligations, remembered endpoints, current projection and selection, source proposals, binding, per-primitive guards, after-return uncertainty and acquisition. All eight source state fields tracker/seen_pairs/failed/access_returns/endpoint_memory/boundary_memory/pending_access/retained_effect_scope remain explicit. The single observed_inventory_composition material entry delegates to this owner at its source declaration position. Source-facing receipts contain only workflow/src_hash/src_status/executed_statements. Synthetic unchanged-source contracts and common Kernel acquisition checks are separate evidence; no game efficacy or full original strategic caller parity follows. The family only reads an existing meter forecast, goal models and collection evidence. It does not observe the planning raster: that earlier observation belongs to the still-pending MorphologyAdapter provider. The native caller retains the separate context annex and preserves source collection-before-meter acquisition order without claiming that adapter or its whole planning cadence has been transferred. The independent family/context fixture contains 59 family cases, 58 policy cases, 11 meter sequences, 12 collection cases and five consumed V5 predicate cases; 150 reference checks and three common Kernel checks pass. These counts measure bounded contracts, not live selected-family actions."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/__init__.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-observed-inventory.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-inventory-helpers-reference.py",
+        "tests/fixtures/v6-inventory-helpers-reference.json.gz",
+        "tests/v6-inventory-helpers-reference.test.ts"
+      ],
+      "notes": "The original package initializer is exactly zero bytes. Its hash is checked with all 1786 original source files; the native owner supplies the package surface. This is an explicitly empty initializer mapping, not another algorithm or declared strategy entry."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/policy.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-inventory-policy.ts",
+        "src/logos-engine/v6/inventory-policy.json",
+        "src/logos-engine/v6/programs.json"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-inventory-family-reference.py",
+        "tests/fixtures/v6-inventory-family-reference.json.gz",
+        "tests/v6-inventory-family-reference.test.ts"
+      ],
+      "notes": "Complete InventoryPolicy interpretation and evaluation of the unchanged inventory.drm configuration, including all nineteen rules, unbound/abstain/unique/ambiguous results and release_authority false. The existing v6.observed_inventory.choose program runs through the shared native SRC registry with literal four-field source receipts. The compiled program inventory remains 37; this adds no bundle entry and does not claim general Python validation or the whole strategic caller."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/inventory.drm",
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/inventory.src"
+      ],
+      "targets": [
+        "src/logos-engine/v6/inventory-policy.json",
+        "src/logos-engine/v6-inventory-policy.ts",
+        "src/logos-engine/v6/programs.json"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-inventory-family-reference.py",
+        "tests/fixtures/v6-inventory-family-reference.json.gz",
+        "tests/v6-inventory-family-reference.test.ts"
+      ],
+      "notes": "Exact original local DRM configuration and nineteen rules, plus the already compiled inventory SRC workflow. Source hashes and original policy evaluations are compared independently. These are declarative assets, not additional Python modules or new compiled programs. Other production DRM and caller selection remain separately scoped."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/project.py",
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/initial.py",
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/contrast.py",
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/material_layers.py",
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/effect_scope.py",
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/control_revalidation.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-inventory-project.ts",
+        "src/logos-engine/v6-inventory-initial.ts",
+        "src/logos-engine/v6-inventory-contrast.ts",
+        "src/logos-engine/v6-inventory-material-layers.ts",
+        "src/logos-engine/v6-inventory-effect-scope.ts",
+        "src/logos-engine/v6-inventory-control-revalidation.ts",
+        "src/logos-engine/v6-inventory-measurements.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-inventory-observation-reference.py",
+        "tests/fixtures/v6-inventory-observation-reference.json.gz",
+        "tests/v6-inventory-observation-reference.test.ts"
+      ],
+      "notes": "Complete six local ObservedInventory measurement modules on their consumed finite JSON raster/record inputs: CellProjection acquisition/state/restore, provisional body/lattice hypotheses, shape transfer and reverse correspondence, retained material surfaces, effect-domain measurement/contrast/retention and foreign-scope control revalidation. Eighty-two independently computed unchanged-original cases pass 85 checks, including translated and palette-permuted sequences, current/stale/ambiguous evidence, retained local supports and exact observed-scene restoration. Current effect support and remembered shape correspondence remain qualified observations, never object roles or release authority. Shared inherited measurements are mapped separately and remain partial outside the actual wrapper-supplied fields and defaults."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/routing.py",
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/dependencies.py",
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/endpoints.py",
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/boundary.py",
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/continuation.py",
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/local_contact.py",
+        "agents/yf_arc3_v6/morphology_policy/observed_inventory/context_intervention.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-inventory-routing.ts",
+        "src/logos-engine/v6-inventory-dependencies.ts",
+        "src/logos-engine/v6-inventory-endpoints.ts",
+        "src/logos-engine/v6-inventory-boundary.ts",
+        "src/logos-engine/v6-inventory-continuation.ts",
+        "src/logos-engine/v6-inventory-local-contact.ts",
+        "src/logos-engine/v6-inventory-context-intervention.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-inventory-helpers-reference.py",
+        "tests/fixtures/v6-inventory-helpers-reference.json.gz",
+        "tests/v6-inventory-helpers-reference.test.ts"
+      ],
+      "notes": "Complete seven local ObservedInventory helpers on finite JSON public rasters and records, totaling 44094 original source bytes. Independent unchanged-Python expectations compare 201 cases across 21 operations, with 202 passing checks including source/ownership verification. All 1786 pinned files are hash-verified before and after; imported modules, opened files and executed call sites are separately inventoried and do not imply whole-dependency transfer. Tests cover observed/recalled/conditional routing, ambiguity and scope guards, true original V5 endpoint routes under palette and translation changes, boundary persistence hypotheses, goal contours, current peripheral and local support revalidation, and complete local-contact/context-intervention mutation snapshots. Bounded sixteen-record histories and equivalent descriptive witnesses retain source semantics. The collection evidence_for dependency uses an explicitly synthetic source-compatible stub only in that helper test; full caller collection behavior has separate family fixtures. FrameGrid and computed bbox hydration adapts the declared native API without normalizing expected results. Full-game performance, the whole common caller and arbitrary Python nominal/coercion semantics are not asserted."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/observed_meter.py",
+        "agents/yf_arc3_v6/morphology_policy/collection_evidence.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-inventory-caller-context.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-inventory-family-reference.py",
+        "tests/fixtures/v6-inventory-family-reference.json.gz",
+        "tests/v6-inventory-family-reference.test.ts",
+        "tests/v6-inventory-kernel.test.ts"
+      ],
+      "notes": "Complete original ObservedMeter methods and strips/single_line_supports measurements, plus complete CollectionEvidence methods and local participant/anchor geometry, on supported finite JSON inputs. The meter has a separately normalized nine-field native checkpoint annex; CollectionEvidence retains the original event history and pending evidence. Independent source sequences compare gain/refutation, missing support, scope changes and restore. The native caller supplies this context during actual acquisition in collection-before-meter order. ObservedInventory merely reads an existing forecast when planning; the original MorphologyAdapter planning observation remains in that pending provider, and no whole-adapter or complete common-caller cadence parity is claimed. The V5 two-frame strip predicate is separately partial."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/guarded_binding/geometry.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-inventory-measurements.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-inventory-observation-reference.py",
+        "tests/fixtures/v6-inventory-observation-reference.json.gz",
+        "tests/v6-inventory-observation-reference.test.ts"
+      ],
+      "notes": "Only the complete consumed unique, find_body, moved_core and revalidate_frame routines are transferred for inventory current binding and effect-scope checks. Missing/ambiguous signatures, competing cores, preferred minimum area, contour occlusion and literal public coordinates retain source behavior. Other object/frame discovery, correspondence and generic geometry services in this module remain pending; the ObservedBinding family is not thereby transferred."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/guarded_binding/family.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-inventory-measurements.ts",
+        "src/logos-engine/v6-inventory-continuation.ts",
+        "src/logos-engine/v6-inventory-context-intervention.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-inventory-observation-reference.py",
+        "tests/fixtures/v6-inventory-observation-reference.json.gz",
+        "tests/v6-inventory-observation-reference.test.ts",
+        "scripts/export-v6-inventory-helpers-reference.py",
+        "tests/fixtures/v6-inventory-helpers-reference.json.gz",
+        "tests/v6-inventory-helpers-reference.test.ts"
+      ],
+      "notes": "Only locate, the complete finite raster search for the exact uniquely matching core palette/area/offset mask, is transferred and exercised by inventory observations, access reconciliation and context questions. The ObservedBinding class and its own policy, inheritance, planning and acquisition are not transferred by this mapping."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/contour_domains.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-inventory-measurements.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-inventory-observation-reference.py",
+        "tests/fixtures/v6-inventory-observation-reference.json.gz",
+        "tests/v6-inventory-observation-reference.test.ts"
+      ],
+      "notes": "Only complete measure_contour_domain on observed finite components is transferred: bounded outside flood, concavity-preserving interior, exact rectangular/digital-disk descriptions, boundary uncertainty and literal domain digest. Support membership, cotranslated enclosure associations and translated-support changes remain outside this mapping. A measured closed contour assigns no protection, influence law or action authority."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/geometry.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-inventory-continuation.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-inventory-helpers-reference.py",
+        "tests/fixtures/v6-inventory-helpers-reference.json.gz",
+        "tests/v6-inventory-helpers-reference.test.ts"
+      ],
+      "notes": "Only gauge_related_marks is transferred for the current inventory capacity-target query: matching currently measured pigment, excluded control support, strip separation and size bounds. The four original capacity-target cases exercise its positive result and stale/on-strip guards. This is an appearance relation, not an acquired refill role. Other shared morphology geometry routines are not claimed."
     }
   ],
   "scopeNotes": [
@@ -3180,19 +3426,21 @@
     "v49 connects occluded_catalogue_composition at its declared first window position and restores the source catalogue-view fallback after common ViewFrontier. The four-list connection metric becomes 40 of 76 (52.6%) in native implementation 0.19.0. The direct view fallback is outside that denominator. No new game-specific or cold-start coordination rule is added; actual common acquisitions supply initial effects. All six complete-migration gates remain false.",
     "v50 connects typed_material_flow at its declared window position, with three own carrier/material/pose memory layers in the existing common owner. The four-list connection metric becomes 41 of 76 (53.9%) in native implementation 0.20.0. Finite native numeric identities and lexical-hash tie differences are explicit; no complete Python numeric or full common-caller parity is claimed. Actual native LIFE results and any coordination extensions are reported separately. All six complete-migration gates remain false.",
     "v50 also declares transient_returned_unlearned_contact_refusal_scope as a native coordination evolution, not original Python caller parity. It retains every public frame, final protocol, command and actual Kernel transition, distinguishing transient return from a stationary observation. The first non-null current window question remains in declared order. A cold typed relation must be remeasured and have supports disjoint from both the invitation point and every transient effect pixel. Subsequent questions require event-backed acquired context and current guards. Returning to the same public image does not establish hidden-state equivalence or an understood effect. The first actual native LIFE failure remains preserved separately from the corrected frozen campaign; all six complete-migration gates remain false.",
-    "v51 connects field_service_composition in native implementation 0.21.0. The four-list connection metric becomes 42 of 76 entries (55.3%); it measures connected entry points, not whole-code completion or game success. Own nested-control, envelope, service and transfer evidence belongs to the same common memory. The independent original component and actual native common-caller campaign are reported separately. Numerical identity and inherited-caller limitations remain explicit, and all six complete-migration gates remain false. The frozen 172-file native source completes VALV levels 1–3 in 28 actions (10/10/8), 28 acquired prefixes, 63 own events and two natural-boundary replays. The isolated original component independently produces the same 28 commands and 29 complete public packets (238 frames); its complete strategic caller is outside this comparison. No new native priority rule is introduced in v51.",
+    "v51 connects field_service_composition in native implementation 0.21.0. The four-list connection metric becomes 42 of 76 entries (55.3%); it measures connected entry points, not whole-code completion or game success. Own nested-control, envelope, service and transfer evidence belongs to the same common memory. The independent original component and actual native common-caller campaign are reported separately. Numerical identity and inherited-caller limitations remain explicit, and all six complete-migration gates remain false. The frozen 172-file native source completes VALV levels 1\u20133 in 28 actions (10/10/8), 28 acquired prefixes, 63 own events and two natural-boundary replays. The isolated original component independently produces the same 28 commands and 29 complete public packets (238 frames); its complete strategic caller is outside this comparison. No new native priority rule is introduced in v51.",
     "v52 connects observed_framed_transfer and observed_framed_analogy to one FramedTransfer owner at their declared positions, giving 44 of 76 connected entries (57.9%) in native implementation 0.22.0. The three own source modules are component_verified on independently generated bounded contracts; V5 dependency modules and the whole common caller keep their separate qualifications. The strict source GARE component stops at twelve actions and one level, and the separately preserved native target-three attempt on the frozen c227cb63aa743ed5790acc7e0cb825e107a4a6ac87471754a3216084ff224bf2 source stops after 77 actions and two completed levels at the level-three active-time budget. This attempt is failed, not a three-level completion or full-game WIN. Initialization, strict-guard and heap-exhaustion failures remain separate evidence. Native current-point witness binding and bounded reduction-search abstention are explicitly declared extensions, not new Python transfers or full original-caller parity. All subsequent attempts retain separate source snapshots and public evidence. The final successful attempt is qualified in the following note; all six complete-migration gates remain false.",
-    "The separately frozen final v52 attempt9 completes GARE levels 1–3 in 53 actions (7/9/37), 53 prefixes and one cold continuous session on native digest e32656de6ab64b0f6bdf8188e7bdeac06b4b3063c0bfb6d5531484cefb900f60, with 181 native files. It enters level 4 with NOT_FINISHED at its declared three-level target, not full-game WIN. The complete 54-packet/235-frame trajectory retains the original isolated component's first 12 commands and 13 packets exactly. Original six-field acquisitions and all 53 native checkpoints are independently recomputed; 47 original records, three stationary annex observations and two phased directed-only observations are distinct domains. Seven of 38 executed Framed proposals differ from strict source, with eight explicit native guard receipts. The directed composition uses one real receiver preparation and then one current question retaining both competing offsets; it stores no future action sequence and claims no reception before the real return. The entry metric remains 44/76 (57.9%), and all six complete-migration gates remain false. Earlier initialization, guard, heap, budget and priority-regression failures remain preserved with their exact historical source archives; their evidence is not replaced by this success.",
+    "The separately frozen final v52 attempt9 completes GARE levels 1\u20133 in 53 actions (7/9/37), 53 prefixes and one cold continuous session on native digest e32656de6ab64b0f6bdf8188e7bdeac06b4b3063c0bfb6d5531484cefb900f60, with 181 native files. It enters level 4 with NOT_FINISHED at its declared three-level target, not full-game WIN. The complete 54-packet/235-frame trajectory retains the original isolated component's first 12 commands and 13 packets exactly. Original six-field acquisitions and all 53 native checkpoints are independently recomputed; 47 original records, three stationary annex observations and two phased directed-only observations are distinct domains. Seven of 38 executed Framed proposals differ from strict source, with eight explicit native guard receipts. The directed composition uses one real receiver preparation and then one current question retaining both competing offsets; it stores no future action sequence and claims no reception before the real return. The entry metric remains 44/76 (57.9%), and all six complete-migration gates remain false. Earlier initialization, guard, heap, budget and priority-regression failures remain preserved with their exact historical source archives; their evidence is not replaced by this success.",
     "V53 adds the strict observed_outline_service entry with its two own Python modules component_verified and only bounded consumed closures of V5 interaction.py, entity_identity.py and enclosure_family.py marked partial_transfer. Initial source contracts, the separate literal remote-count correction and the exact attempt2 original-component comparison are distinct evidence. The initial large gzip fixture is stored losslessly via its .parts.json manifest and byte parts, without changing expected values. Exact selected source proposals and seven-field acquisitions/checkpoints do not imply complete caller parity: raw ordinary native guard/outcome values were not retained, so the original guards/outcomes are recomputed only for compatibility with actual dispatch/sealing. The two ESCT attempts used for those original-component comparisons, attempt1 and attempt2, complete zero levels. Later campaign history is separately retained in docs/migration/v53-outline-service-and-current-relations.md: attempt3 and interrupted attempt5 each record one completed ESCT level; attempt4 and the attempt5 KEYD run remain interrupted with zero completed levels. Attempt6 completes one ESCT level and fails its three-level target at the level2 active-time budget after 117 actions and 381.55 cumulative active seconds. Attempt7 final-source CN04 passes its three-level target through the existing port_assembly provider; its result and the 45/76 connection audit have separate receipts and are not inferred from Outline component tests. Attempt7 ESCT and final release checks remain pending. No complete-migration gate is inferred from these component or campaign results.",
     "V53 native coordination is a separate scope from strict Outline transfer. A source-derived V5 continuation subset supports a current-service preference; a second explicit subset reuses projection1296/tier19 and order19/20 for the current obstructing-inset operator question. Their unchanged-Python condition/projection/tier receipts are bounded declarative evidence, not full V5 selection or original V6 caller parity. The optional public-transition annex retains the immediately preceding actual public final raster and its current scope, outside the seven-field source state; the original V6 wrapper does not supply that raster. After an actual selected access question, the annex may also retain its bounded access_relation, validated against the prior observation, row hash, scope, selected command and guard. Each selected primitive refreshes this relation; no recursive prior-access chain or future route is retained. The annex binds only the 16-character JSON public-frame identifier. Its producer declines alternate caller hash domains, including the full NumPy rowsDigest, without rewriting observations or interrupting ordinary source acquisition; stale annex evidence is cleared. Supported-domain byte mismatches and malformed restored annexes still fail the same strict validation. Native proposals requiring a current-service witness must pass the common admission gate, current remeasurement, per-primitive guards and WHY/ACT. The V6 current-trial witness requires an actual current frontier occurrence and an untried command in that exact public protocol; any retained prior attempt removes that preference. Its explicitly distinct effect inventory covers actual caller edges in the current epoch and score, retaining a positive observation only when the final frame hash changes; unchanged or transient-returning frames remain unknown. The trial and effect domains do not claim V5 producer/context parity, universal causation or action authority. Current questions retain one primitive, replan on the real return and assert no future effect or stored winning route. The exact V5 recovery subsets separately retain interaction.drm declaration217 projections624/666 with tier15, projections1300/1301 with tier16, and projections1298/1299 with tier17. Their 59 original-evaluator cases and the 49 original-Python rejoin geometry cases do not prove whole-policy selection or unchanged V6 caller ordering. Native access applies only when no transferred service or recovery proposal applies and an actual historical local method is available. It distinguishes current reacquired control from a unique current revalidation of recalled control; the latter has historical evidence but no acquired current deltas and uses explicitly revisable interface priors. Measured conflicting directions cannot be overwritten by those priors. Its announced-cell question targets a current visible singleton in an exact unique body/marker/perimeter motif. Its separately named current_observed_body_access_question targets the actual current solid body only after an adjacent public transition in the same epoch and score revalidates an exact previous selected relation or observed motif. The body must be unchanged or have moved exactly to the preceding observed singleton; missing current marker fields remain null. A boundary-only recalled context has before/command null and cannot supply that temporal fallback. Only current final public rasters qualify; intermediate animation frames do not. Both access modes select one in-bounds lattice-aligned distance-reducing primitive and claim no safe route or guaranteed effect. Attempt7 adds native v6-outline-arrival.ts, absent from frozen attempt6. It requires the actual selected observed-body access return to reach its prior body cell, reacquired control, an unchanged unique compatible perimeter, current same-value inset remnants and visibly changed inset pixels. It asserts no complete current body, survival, identity or capture. V5 principle.effectful_local_operator_transfers_to_new_changed_bfs_endpoint motivates the question, but exact_source_projection_matched remains false: no standard completed-BFS endpoint is supplied. The service separately revalidates one currently available input with positive historical local-method evidence, a complete current effect inventory without a competing observed local operator, and the actual untried caller context. Unknown other-input effects remain unknown; historical effects never become fabricated current-epoch inventory. The one conditional local question retains recovery.contact, not a new access relation, and still requires ordinary preservation and WHY/ACT. These native helpers are not additional transferred Python modules. All six completion gates remain false.",
     "V53 final-source validation: attempt7 freezes 195 native files at digest d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70, implementation logos-engine.typescript.v6.native-migration/0.27.0. The independent cold CN04 execution receipt confirms unchanged native source and execution code, 73 actions from port_assembly, three completed levels with 18/31/24 actions, 29 prefixes and one session. Its public result is level 4 NOT_FINISHED with target_levels_completed, not full-game VICTORY. No action sequence, learned checkpoint, Python agent or level jump is supplied. This supports the existing integrated port-assembly capability and does not establish Outline efficacy or full V6 parity. The actual entry audit records 45/76 connected declarations (59.2%); recovery, access, arrival and this campaign add no further declared entry. The actual-browser receipt on the same frozen source independently records three Run to next level clicks from level 1, counters 18/1 then 49/2 then 73/3, 29 completed plans and entry to level 4, with inspection closed. Its single 384x384 canvas sample at a 1363x936 viewport is not a responsive or performance benchmark. The targeted delta suite passes 3611 tests; typecheck, audits and production build pass. All nine recorded trajectories retain their commands and official results, with the original comparison-domain failures and their explicit LIFE/GARE resolutions preserved in regression-final-summary.json. ESCT completes only L1 in 16 actions, then stops at the L2 active-time budget after 113 total actions; it is not a three-level success. Publication is tracked by the saved Site version separately from these immutable execution receipts. All six completion gates remain false.",
     "V54 connects reactive_contact_continuation and reactive_contact through one public_reactive_contact owner at their exact source material positions in native implementation 0.28.0, advancing the declared-entry connection metric to 47/76 (61.8%). All thirteen source state fields, source-facing four-field workflow receipts, current guards and selected/passive sealed acquisitions are retained. Independently generated source evidence comprises 272 Contact/geometry cases, 53 family/return cases and 193 Source81 cases, with 527 reactive checks including three common Kernel tests. Generic SELECT adds 68 original evaluator/projection cases and 25 original builder cases, with 114 checks on its documented native scalar domain. The four original Source81 workflows extend the compiled bundle from 33 to 37 entries; no existing entry is replaced. Inherited interaction, prospective-grasp, cell-support, routing, rigid geometry, consumption and escape contract modules retain partial consumed-domain mappings. No whole original strategic caller, arbitrary Python numeric/validation semantics, full-game result or complete-migration gate is inferred.",
-    "V54 candidate study: unchanged published v53 completes WA30 level1 in 31 actions, then reaches natural GAME_OVER on level2 after 101 total actions. The candidate is closed after approximately eight minutes twenty seconds, before the user forty-minute limit. The next unchanged v53 baseline completes RE86 levels1–3 in 26/47/61 actions (134 total), 46 prefixes and about 122 seconds through the existing generic constellation_cover provider. These are separately retained baselines; final frozen v54 execution and original ReactiveContact public-return comparisons remain separate evidence. The 210-file final native source digest is 059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a. No native source/game-result claim is inferred merely from the freeze.",
+    "V54 candidate study: unchanged published v53 completes WA30 level1 in 31 actions, then reaches natural GAME_OVER on level2 after 101 total actions. The candidate is closed after approximately eight minutes twenty seconds, before the user forty-minute limit. The next unchanged v53 baseline completes RE86 levels1\u20133 in 26/47/61 actions (134 total), 46 prefixes and about 122 seconds through the existing generic constellation_cover provider. These are separately retained baselines; final frozen v54 execution and original ReactiveContact public-return comparisons remain separate evidence. The 210-file final native source digest is 059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a. No native source/game-result claim is inferred merely from the freeze.",
     "The final frozen v54 RE86 campaign passes its declared first-three-level target in one cold continuous session: 26/47/61 actions (134 total), 46 sealed prefixes, 134 actual acquisitions and two caller boundary replays. It enters level4 with NOT_FINISHED and target_levels_completed, not full-game victory. Native source and execution code are unchanged on digest 059d6204097fae6749138b9afc650ccc54867886bda3887ef6f978f6afdf393a (210 files). All 46 selected prefixes use the existing constellation_cover provider. The independent unchanged original ReactiveContact replay starts empty and matches 134 source records, all thirteen fields and the full native checkpoint at 46 prefixes, three official-boundary events/source epoch resets, and the complete 135-packet/138-frame public journal. It verifies all 1786 pinned files before and after, with 736 imported original source files. There are no reactive selections or planning calls on this trajectory; this is exact passive acquisition evidence, while positive reactive behavior is verified separately by component and Kernel tests. It does not establish reactive game efficacy, complete original-caller parity or any of the six still-false complete-migration gates.",
     "V55 connects the single ordered_reaction material entry through one public_ordered_reaction owner in native implementation 0.29.0, bringing the audited four-list connection metric to 48/76 (63.2%) while preserving 37 compiled programs. Three local V6 modules and the consumed V5 ordered-tip/sparse-cell measurement modules have independent unchanged-source contracts; physical_transition_contracts, general FrameGrid/validation and production DRM remain separately qualified. Exact source priority, six-field state, four-field workflow receipts, current primitive guards and complete ordered public animations are retained. The native passive acquisition position follows OutlineService and precedes ReactiveContact; the intervening original ObservedInventory owner is still pending. History has no current action authority. All six complete-migration gates remain false.",
-    "V55 candidate evidence remains distinct from final release proof. The unchanged published v54 cold AS66 baseline completes levels 1–3 in 5/6/8 actions (19 total), 11 sealed prefixes and one session, using four observed_frontier inputs followed by fifteen sliding_cavity inputs. It enters level4 NOT_FINISHED, not full-game WIN. The separate CASC baseline completes zero levels: one animated_contact point input, then frontier_unknown with no observed directional control. A read-only unchanged-source scan of 100 retained initial public views finds only CASC eligible for the geometric field/ring/input filter, but all cold proposal/control checks remain false. Neither that geometry nor another family's AS66 success establishes OrderedReaction actionability or game efficacy. The final frozen campaigns and exact passive public-source comparisons are recorded in the next scope note. Broader release-wide checks remain separately tracked, and the per-candidate forty-minute limit stays anchored to first selection.",
-    "Final frozen v55 source contains 214 native files at digest 3794fa1b97951b20f3ce06d2d1d11b20d8c2b47132591fb5b8cf6f3e75b661d3, implementation 0.29.0. The cold AS66 campaign completes levels 1–3 in 5/6/8 actions (19 total), 11 sealed prefixes, 19 acquired returns and one continuous session, entering level4 NOT_FINISHED with target_levels_completed. Four observed_frontier actions and fifteen sliding_cavity actions supply the result; the unchanged v54 baseline already has the same three-level action counts, so no new OrderedReaction causal contribution is inferred. The separate final CASC attempt completes zero levels and stops after one animated_contact point action at frontier_unknown. It is closed 610.948436 seconds after original selection, before its forty-minute deadline; AS66 closes after 870.695328 seconds. The immutable candidate-resolution receipt binds both closures to the original ledger. Independent unchanged-original source replays pass on both: AS66 19 records, 11 complete six-field states/checkpoints, 20 packets/121 animation frames and three official-boundary events/source epoch changes; CASC one record, one complete state/checkpoint and two packets/two frames. Each comparison verifies all 1786 pinned files before/after and imports 719 original source files. Every prefix is selected by another provider (11 AS66, one CASC), so these are exact passive acquisition receipts, not selected reaction guards or reaction game efficacy. The 279-check focused execution includes 276 new checks and three existing ReactiveContact Kernel regressions; broader release checks have their own receipts. All six complete-migration gates remain false.",
-    "V55 browser evidence independently passes on the same frozen native source: three ordinary Run to next level clicks in one AS66 session produce cumulative action/level/plan counters 5/1/5, 11/2/8 and 19/3/11, entering level4 with the inspector closed. No manual game input, new-session restart or level jump is used. The retained 384x384 canvas at a 1363x936 viewport is one browser sample, not a responsive/performance campaign or reaction efficacy claim. The initial broader delta records 606 passes and one failed stale sharedSeriesDigestScope metadata assertion among 607 checks. Exact published-v54 git bytes, the unchanged source constant and runtime binding establish the stale expectation without claiming an isolated baseline execution. One expected string is corrected; the full support-caller file passes 21/21. The original failed receipt/log, all frozen native files and execution archive remain byte-identical. The same 607-check set has a separate rerun receipt; final broader checks and regressions remain separately qualified. All six complete-migration gates remain false."
+    "V55 candidate evidence remains distinct from final release proof. The unchanged published v54 cold AS66 baseline completes levels 1\u20133 in 5/6/8 actions (19 total), 11 sealed prefixes and one session, using four observed_frontier inputs followed by fifteen sliding_cavity inputs. It enters level4 NOT_FINISHED, not full-game WIN. The separate CASC baseline completes zero levels: one animated_contact point input, then frontier_unknown with no observed directional control. A read-only unchanged-source scan of 100 retained initial public views finds only CASC eligible for the geometric field/ring/input filter, but all cold proposal/control checks remain false. Neither that geometry nor another family's AS66 success establishes OrderedReaction actionability or game efficacy. The final frozen campaigns and exact passive public-source comparisons are recorded in the next scope note. Broader release-wide checks remain separately tracked, and the per-candidate forty-minute limit stays anchored to first selection.",
+    "Final frozen v55 source contains 214 native files at digest 3794fa1b97951b20f3ce06d2d1d11b20d8c2b47132591fb5b8cf6f3e75b661d3, implementation 0.29.0. The cold AS66 campaign completes levels 1\u20133 in 5/6/8 actions (19 total), 11 sealed prefixes, 19 acquired returns and one continuous session, entering level4 NOT_FINISHED with target_levels_completed. Four observed_frontier actions and fifteen sliding_cavity actions supply the result; the unchanged v54 baseline already has the same three-level action counts, so no new OrderedReaction causal contribution is inferred. The separate final CASC attempt completes zero levels and stops after one animated_contact point action at frontier_unknown. It is closed 610.948436 seconds after original selection, before its forty-minute deadline; AS66 closes after 870.695328 seconds. The immutable candidate-resolution receipt binds both closures to the original ledger. Independent unchanged-original source replays pass on both: AS66 19 records, 11 complete six-field states/checkpoints, 20 packets/121 animation frames and three official-boundary events/source epoch changes; CASC one record, one complete state/checkpoint and two packets/two frames. Each comparison verifies all 1786 pinned files before/after and imports 719 original source files. Every prefix is selected by another provider (11 AS66, one CASC), so these are exact passive acquisition receipts, not selected reaction guards or reaction game efficacy. The 279-check focused execution includes 276 new checks and three existing ReactiveContact Kernel regressions; broader release checks have their own receipts. All six complete-migration gates remain false.",
+    "V55 browser evidence independently passes on the same frozen native source: three ordinary Run to next level clicks in one AS66 session produce cumulative action/level/plan counters 5/1/5, 11/2/8 and 19/3/11, entering level4 with the inspector closed. No manual game input, new-session restart or level jump is used. The retained 384x384 canvas at a 1363x936 viewport is one browser sample, not a responsive/performance campaign or reaction efficacy claim. The initial broader delta records 606 passes and one failed stale sharedSeriesDigestScope metadata assertion among 607 checks. Exact published-v54 git bytes, the unchanged source constant and runtime binding establish the stale expectation without claiming an isolated baseline execution. One expected string is corrected; the full support-caller file passes 21/21. The original failed receipt/log, all frozen native files and execution archive remain byte-identical. The same 607-check set has a separate rerun receipt; final broader checks and regressions remain separately qualified. All six complete-migration gates remain false.",
+    "V56 connects the single observed_inventory_composition material entry to ObservedInventory at its declared position; the separately regenerated four-list entry audit records 49 of 76 entries (64.5%), including 16 of 33 material entries. Its nineteen original inventory rules use an existing SRC entry, leaving 37 compiled programs. Fifteen nonempty local package modules and the explicitly empty initializer have bounded component evidence; full ObservedMeter and CollectionEvidence behavior has separate caller-context contracts. Shared V5 interaction, frame, transition and contracts remain partial on exact wrapper-supplied fields/defaults. Imported-source inventory is not a whole-dependency claim. Inventory planning only reads an already existing forecast; MorphologyAdapter planning-time meter observation remains with that pending provider. Native collection-before-meter acquisition does not imply full adapter or common strategic caller parity. All six complete-migration gates remain false.",
+    "V56 component proof and campaign attribution remain separate. The unchanged published V55 GLOB baseline in docs/migration/native-campaigns-v56/baseline-glob/ completes levels 1\u20133 in 5/11/4 actions (20 total), 17 sealed prefixes and one cold continuous session, entering level 4 NOT_FINISHED with target_levels_completed. Its existing observed_frontier/fixed_origin/information_goal providers already supply that success; no new inventory causal contribution is inferred. The immutable candidate ledger records selection at 2026-11-09T13:59:36.727704+00:00 and deadline 2026-11-09T14:39:36.727704+00:00; baseline success closes after 52.039416 seconds without resetting the clock. Byte-identical relocation is separately hashed. The separate final frozen V56 execution also passes those three levels in 20 actions, 17 prefixes and one cold session; its full 21 public packets equal the unchanged baseline. Native digest bade8fd58991e6a127abc84f373d539edeaa70d45ab0da94a84a6751fdc92de5 retains 232 files. The final run finishes 22 minutes 57.258916 seconds after original selection, before the same immutable deadline. Independent browser controls show 20 actions, 3 solved levels and 17 completed plans with the inspector closed. The original-source comparator passes 90 actual source-facing calls and 17 complete checkpoints, including 13 inventory proposal abstentions, 20 source records, 20 meter observations, 20 collection records and 17 preservation queries. All 17 prefixes belong to other providers; positive inventory behavior is supported separately by source fixtures. Final receipts are under docs/migration/native-campaigns-v56/final/ and candidate-final-resolution.json resolves the historical initial ledger. No full-game victory, selected-inventory efficacy or complete caller parity is inferred from this baseline or component fixtures."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,

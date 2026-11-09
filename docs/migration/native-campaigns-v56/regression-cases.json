@@ -1,0 +1,183 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "description": "Eleven prior successful v55 recorded-public replays plus the actual v55 AS66 campaign. Expected commands and old family state are never supplied to native decisions. Context annex checks assert evidence presence, not original caller parity.",
+  "passiveOwnerRequirements": [
+    {
+      "prefixProperty": "reactionAcquisition",
+      "stateNode": "family_state:public_ordered_reaction",
+      "sourceStateKeys": [
+        "epoch",
+        "control",
+        "packets",
+        "attempts",
+        "progress",
+        "history"
+      ],
+      "checkpointFormat": "native.public_ordered_reaction.v1"
+    },
+    {
+      "prefixProperty": "inventoryAcquisition",
+      "stateNode": "family_state:public_observed_inventory",
+      "sourceStateKeys": [
+        "tracker",
+        "seen_pairs",
+        "failed",
+        "access_returns",
+        "endpoint_memory",
+        "boundary_memory",
+        "pending_access",
+        "retained_effect_scope"
+      ],
+      "checkpointFormat": "native.public_observed_inventory.v1",
+      "checkpointAnnexFields": {
+        "caller_context": "callerContext"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "stck",
+      "game": "STCK",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v55/final/regressions/stck-replay.json.gz",
+        "sha256": "e9b23829d70c1fbe78908a1b71dc1cdb482a93f6080aaa7be1b7c8508ef0e445"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+        "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+      }
+    },
+    {
+      "id": "catl",
+      "game": "CATL",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v55/final/regressions/catl-replay.json.gz",
+        "sha256": "1e3de04c65ddaa5885aa041b872584a4a85c5fa57da99c15595ef3e7859c0caf"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v45/catl-public-trace.json.gz",
+        "sha256": "da5c6c585b0369f25c8aabd9a0ce05bacbccbf315059682e29d5d8fb7693e63e"
+      }
+    },
+    {
+      "id": "sele",
+      "game": "SELE",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v55/final/regressions/sele-replay.json.gz",
+        "sha256": "f5ad81ea73da4e1fd01c977db69ececf00f42b0b4a5474f7e176c5313ced0716"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v47/sele-public-trace.json.gz",
+        "sha256": "f62033bd4cc0d829ba9ffe36c9c3efd6b77a63bf1e5896f7a9b0a2694d49e3a2"
+      }
+    },
+    {
+      "id": "colm",
+      "game": "COLM",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v55/final/regressions/colm-replay.json.gz",
+        "sha256": "a5ee496cd8f24f320ac51cecab8fe7de5f40d64e4e7fb21e0fa461b7c0ff402b"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v48/colm-public-trace.json.gz",
+        "sha256": "d3508414f956c35f58ef5364d14f91ea99a93c1b144ee476f4815b35a356bae7"
+      }
+    },
+    {
+      "id": "zipp",
+      "game": "ZIPP",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v55/final/regressions/zipp-replay.json.gz",
+        "sha256": "4477b8785ff11c4789dca8bd47891eaf8446f331952ee81b7165f610343cba9e"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v48/zipp-public-trace.json.gz",
+        "sha256": "dca930510e267cdb3ae5098606da3441eecf14d362215f99197fc77023ab1917"
+      }
+    },
+    {
+      "id": "gril",
+      "game": "GRIL",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v55/final/regressions/gril-replay.json.gz",
+        "sha256": "c4697cfa037a16edbedf683096b27ee317ffd83816cdcb1d05ab018f09afed73"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v49/gril-public-trace.json.gz",
+        "sha256": "dd72621fb8f650ee95ba907f61e9cb4675a7de75e3dd537a9dec7c3d5c47b6ae"
+      }
+    },
+    {
+      "id": "life",
+      "game": "LIFE",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v55/final/regressions/life-replay.json.gz",
+        "sha256": "15848674fb60ade02e74d40b2386d9b52e92fc0d2fede0e1cb940798c30f829f"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v50/life-public-trace-final.json.gz",
+        "sha256": "8c2e1b67af1c827d2a132c211d71b6e25158a5db1e9b236e4d0d92e912fe7c84"
+      }
+    },
+    {
+      "id": "valv",
+      "game": "VALV",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v55/final/regressions/valv-replay.json.gz",
+        "sha256": "b54e0277334a0517e560583f1ca4e626b1de813e124b4b9f43ef02dc72348bda"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v51/valv-public-trace.json.gz",
+        "sha256": "63adf3bf04c0678699af265ba1808fd2eca96b4f255473ee9bb43ba8a078a87d"
+      }
+    },
+    {
+      "id": "gare",
+      "game": "GARE",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v55/final/regressions/gare-replay.json.gz",
+        "sha256": "4bbf61644ecf8ff00e29aa9efcb07158981be7fe440c0257eb26b794c8d40b7a"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v52/attempt9/gare-public-trace.json.gz",
+        "sha256": "f903e2211a211e203b18356ddc12b29a1e63e0b8ab25cedfe3f7b42e6cd2a7f5"
+      }
+    },
+    {
+      "id": "cn04",
+      "game": "CN04",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v55/final/regressions/cn04-replay.json.gz",
+        "sha256": "14bf0b12e6ac11aa216e98542f135cb6039e2e420842c7aa05cc93914027b1b4"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/cn04-public-trace.json.gz",
+        "sha256": "f156b22facec2c20cbfe0886b9b51253a1bea9fff2c57f2281708fc9897cc03d"
+      }
+    },
+    {
+      "id": "re86",
+      "game": "RE86",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v55/final/regressions/re86-replay.json.gz",
+        "sha256": "25ea0777fd8ebd7e703ab0fa603ea0438188832d3a1f5883940b99ab2ed60baa"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v54/final/re86-public-trace.json.gz",
+        "sha256": "374bac54e821aa70304747f4cbd12626cab72d804ff690fe94914460dada6453"
+      }
+    },
+    {
+      "id": "as66",
+      "game": "AS66",
+      "baseline": {
+        "path": "docs/migration/native-campaigns-v55/final/as66-campaign.json.gz",
+        "sha256": "390506b221b93237daec1a15e4c047fb3a51be88d29a54b0b4c9c6c2c351cc6c"
+      },
+      "trace": {
+        "path": "docs/migration/native-campaigns-v55/final/as66-public-trace.json.gz",
+        "sha256": "397e6c96727675c522e4983fce511712ef62fa711b5c713b18a9bdf73e86fc25"
+      }
+    }
+  ]
+}

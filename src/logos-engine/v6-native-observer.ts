@@ -94,8 +94,9 @@ export function projection(rows: NativeRows, box: readonly number[]): number[][]
 }
 
 /** V6 masks are relative [x,y] pairs, unlike V5 pixels ([row,column]). */
-export function geometricComponents(rows: NativeRows): GeometricComponent[] {
+export function geometricComponents(rows: NativeRows, connectivity: 4 | 8 = 4): GeometricComponent[] {
   validateRows(rows);
+  if (connectivity !== 4 && connectivity !== 8) throw new TypeError('Connectivity must be 4 or 8');
   const height = rows.length, width = rows[0]!.length;
   const seen = new Uint8Array(height * width), result: GeometricComponent[] = [];
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
@@ -108,7 +109,9 @@ export function geometricComponents(rows: NativeRows): GeometricComponent[] {
       const current = pending.pop()!, px = current % width, py = Math.floor(current / width);
       pixels.push([px, py]); left = Math.min(left, px); right = Math.max(right, px);
       top = Math.min(top, py); bottom = Math.max(bottom, py);
-      for (const [nx, ny] of [[px - 1, py], [px + 1, py], [px, py - 1], [px, py + 1]] as Pixel[]) {
+      const neighbors: Pixel[] = connectivity === 4 ? [[px - 1, py], [px + 1, py], [px, py - 1], [px, py + 1]]
+        : [[px - 1, py - 1], [px, py - 1], [px + 1, py - 1], [px - 1, py], [px + 1, py], [px - 1, py + 1], [px, py + 1], [px + 1, py + 1]];
+      for (const [nx, ny] of neighbors) {
         const index = ny * width + nx;
         if (nx >= 0 && nx < width && ny >= 0 && ny < height && !seen[index] && rows[ny]![nx] === color) {
           seen[index] = 1; pending.push(index);

@@ -40,3 +40,20 @@ __pycache__/
 /docs/migration/native-campaigns-v52/valv-recorded-public-replay.json
 /docs/migration/native-campaigns-v52/verified/gare-three-levels.json
 /docs/migration/native-campaigns-v52/zipp-recorded-public-replay.json
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/native-campaigns-v56/final/glob-campaign.json.gz
+/docs/migration/native-campaigns-v56/final/regressions/catl-replay.json.gz
+/docs/migration/native-campaigns-v56/final/regressions/cn04-replay.json.gz
+/docs/migration/native-campaigns-v56/final/regressions/colm-replay.json.gz
+/docs/migration/native-campaigns-v56/final/regressions/gril-replay.json.gz
+/docs/migration/native-campaigns-v56/final/regressions/life-replay.json.gz
+/docs/migration/native-campaigns-v56/final/regressions/sele-replay.json.gz
+/docs/migration/native-campaigns-v56/final/regressions/stck-replay.json.gz
+/docs/migration/native-campaigns-v56/final/regressions/valv-replay.json.gz
+/docs/migration/native-campaigns-v56/final/regressions/zipp-replay.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/native-campaigns-v56/final/regressions/as66-replay.json.gz
+/docs/migration/native-campaigns-v56/final/regressions/gare-replay.json.gz
+/docs/migration/native-campaigns-v56/final/regressions/re86-replay.json.gz

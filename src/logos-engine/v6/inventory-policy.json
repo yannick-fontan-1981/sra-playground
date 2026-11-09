@@ -1,0 +1,10 @@
+{
+  "schema": "logos-engine.v6.inventory-policy.v1",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceHashes": {
+    "agents/yf_arc3_v6/morphology_policy/observed_inventory/family.py": "04018fdaa264afbc54855bb094a365841230f2d20e109bf6f49ab42c773fe7dd",
+    "agents/yf_arc3_v6/morphology_policy/observed_inventory/policy.py": "145fc3730441934c007ed127755135e6ce6e164848733cee832c50219a73e5f5",
+    "agents/yf_arc3_v6/morphology_policy/observed_inventory/inventory.drm": "1c128c353bf7006e1867c139daa95de6f2395cd264b10cea3124df31a026b9b0",
+    "agents/yf_arc3_v6/morphology_policy/observed_inventory/inventory.src": "cbddaeaf543967e4d87bdbf0775c15ffce53a92315205985ce54f61f3452a55d"
+  }
+}

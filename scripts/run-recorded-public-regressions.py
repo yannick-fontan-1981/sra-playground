@@ -75,7 +75,8 @@ def prepare(manifest_path):
         raise ValueError('Passive owner requirements must be a list')
     owner_properties = set()
     for requirement in requirements:
-        if not isinstance(requirement, dict) or set(requirement) != {'prefixProperty', 'stateNode', 'sourceStateKeys', 'checkpointFormat'}:
+        required = {'prefixProperty', 'stateNode', 'sourceStateKeys', 'checkpointFormat'}
+        if not isinstance(requirement, dict) or not required <= set(requirement) or set(requirement) - required - {'checkpointAnnexFields'}:
             raise ValueError('Each passive owner requirement needs property, node, fields and format')
         if any(not isinstance(requirement[key], str) or not requirement[key]
                for key in ['prefixProperty', 'stateNode', 'checkpointFormat']):
@@ -83,6 +84,10 @@ def prepare(manifest_path):
         fields = requirement['sourceStateKeys']
         if not isinstance(fields, list) or not fields or any(not isinstance(key, str) or not key for key in fields) or len(set(fields)) != len(fields):
             raise ValueError('Passive source fields must be unique nonempty strings')
+        annexes = requirement.get('checkpointAnnexFields', {})
+        if not isinstance(annexes, dict) or any(not isinstance(key, str) or not key or key in {'format', 'source_state'}
+                or not isinstance(value, str) or not value for key, value in annexes.items()):
+            raise ValueError('Checkpoint annex fields must map extra envelope keys to retained prefix properties')
         if requirement['prefixProperty'] in owner_properties:
             raise ValueError('Passive owner requirements must have unique properties')
         owner_properties.add(requirement['prefixProperty'])
@@ -132,7 +137,7 @@ def passive_owner_presence(actual, requirements, report_path, manifest_path):
                 'ownerPresent': present,
                 'stateNode': present and owner.get('stateNode') == requirement['stateNode'],
                 'exactSourceFields': isinstance(state, dict) and set(state) == set(requirement['sourceStateKeys']),
-                'checkpointShape': isinstance(checkpoint, dict) and set(checkpoint) == {'format', 'source_state'},
+                'checkpointShape': isinstance(checkpoint, dict) and set(checkpoint) == {'format', 'source_state'} | set(requirement.get('checkpointAnnexFields', {})),
                 'checkpointFormat': present and owner.get('checkpointFormat') == requirement['checkpointFormat']
                     and isinstance(checkpoint, dict) and checkpoint.get('format') == requirement['checkpointFormat'],
                 'checkpointMatchesRetainedState': isinstance(state, dict) and isinstance(checkpoint, dict)
@@ -141,6 +146,10 @@ def passive_owner_presence(actual, requirements, report_path, manifest_path):
                     and isinstance(acquired, int) and not isinstance(acquired, bool) and acquired >= 0
                     and len(transitions) == acquired,
             }
+            if requirement.get('checkpointAnnexFields'):
+                checks['checkpointAnnexesMatchRetainedValues'] = present and isinstance(checkpoint, dict) and all(
+                    isinstance(checkpoint.get(key), dict) and property_name in owner and checkpoint[key] == owner[property_name]
+                    for key, property_name in requirement['checkpointAnnexFields'].items())
             prefixes.append({'index': index, 'prefixId': prefix.get('id'),
                              'acquiredActions': acquired,
                              'retainedTransitionCount': len(transitions) if isinstance(transitions, list) else None,
@@ -154,7 +163,7 @@ def passive_owner_presence(actual, requirements, report_path, manifest_path):
             'report': PROOF.evidence(report_path), 'caseManifest': PROOF.evidence(manifest_path),
             'owners': owners, 'passed': all(owner['passed'] for owner in owners),
             'qualification': 'Post-run evidence-presence checks on every completed current replay prefix. '
-                'The manifest declares retained owner identity, exact source-field names and checkpoint format. '
+                'The manifest declares retained owner identity, exact source-field names, checkpoint format and optional context annex bindings. '
                 'Each retained checkpoint is checked against its own current source projection, and its '
                 'transition count against that prefix acquiredActions. These checks neither initialize '
                 'native state nor assert equality with an older baseline, complete caller parity or a live game success. '

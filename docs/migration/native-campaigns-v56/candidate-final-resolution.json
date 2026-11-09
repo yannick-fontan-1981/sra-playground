@@ -1,0 +1,127 @@
+{
+  "schema": "logos-engine.v56.candidate-final-resolution.v1",
+  "recordedAt": "2026-11-09T14:24:44.054466+00:00",
+  "game": "GLOB",
+  "status": "passed_three_levels_on_frozen_v56",
+  "selectionLedger": {
+    "path": "docs/migration/native-campaigns-v56/candidate-selection.json",
+    "sha256": "dfe7e59d280f0d39f2e8b0351dd9cb184ef72b34bffb20b76f6fb3f8526c6b51",
+    "bytes": 1380
+  },
+  "baselineResolution": {
+    "path": "docs/migration/native-campaigns-v56/baseline-resolution.json",
+    "sha256": "18198ed339e03b503843186ca2214c8c51a3ffcf5c2dcdb17a0e448b7cb5b3a8",
+    "bytes": 3185
+  },
+  "selectedAt": "2026-11-09T13:59:36.727704+00:00",
+  "originalDeadline": "2026-11-09T14:39:36.727704+00:00",
+  "finalRunFinishedAt": "2026-11-09T14:22:33.986620+00:00",
+  "selectionToFinalCompletionSeconds": 1377.258916,
+  "withinOriginalFortyMinuteDeadline": true,
+  "selectionClockReset": false,
+  "campaign": {
+    "path": "docs/migration/native-campaigns-v56/final/glob-campaign.json.gz",
+    "sha256": "9a1f3c9664931c5022ad758a2878a14eb34d1969ee2b4828b7a44c68410df61e",
+    "bytes": 2548385
+  },
+  "execution": {
+    "path": "docs/migration/native-campaigns-v56/final/execution-glob.json",
+    "sha256": "02851d80ba8c29ec7dbba5864aa972f0439adc1816d794b224fead135c6be9b9",
+    "bytes": 58912
+  },
+  "originalSourceComparison": {
+    "path": "docs/migration/native-campaigns-v56/final/glob-inventory-original-comparison.json.gz",
+    "sha256": "3246cbbdb8261794a2b9f408aac57bb14933b09e0117785f2a67e8b74974b150",
+    "bytes": 44237
+  },
+  "nativeSource": {
+    "path": "docs/migration/native-campaigns-v56/final/source-manifest.json",
+    "sha256": "cc0abc39e125c98c9462c1896b71cd8628ab4c371adb2e7938197f40cf4b23b3",
+    "bytes": 27369
+  },
+  "final": {
+    "actions": 20,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 45.88357175700001,
+    "prefixes": 17,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 20,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 54,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 18
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 31
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 8
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 15
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 3
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 4
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 31
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology",
+        "attention_parent_return",
+        "acquire_control_for_target"
+      ],
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 20,
+      "resume": 16
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.30.0"
+  },
+  "levelActions": [
+    5,
+    11,
+    4
+  ],
+  "baselineAndFinalCompletePublicPacketsEqual": true,
+  "comparisonInputs": {
+    "baselineTrace": {
+      "path": "docs/migration/native-campaigns-v56/baseline-glob/glob-public-trace.json.gz",
+      "sha256": "c2a1bf8d55dc66f333c14919a8f22b714f4f67a1edb7838c538dfa94efac53d7",
+      "bytes": 60688
+    },
+    "finalTrace": {
+      "path": "docs/migration/native-campaigns-v56/final/glob-public-trace.json.gz",
+      "sha256": "186f76497902980a3c542fe00f40e77e4aebc365bee41d9d2e250525556f3cc0",
+      "bytes": 60687
+    }
+  },
+  "inventorySelectedPrefixes": 0,
+  "qualification": "The immutable initial ledger remains a historical snapshot. This separate receipt resolves its pending V56 rerun. Both baseline and final cold sessions reach official level4 with three levels completed and NOT_FINISHED. The original selection clock was never restarted. No stored route, expected action or learned state is supplied to either native run. Equal actual complete public packets and providers support existing generic capabilities; no causal inventory contribution is asserted."
+}

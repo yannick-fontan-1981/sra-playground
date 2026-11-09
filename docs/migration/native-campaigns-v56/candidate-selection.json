@@ -1,0 +1,51 @@
+{
+  "schema": "logos-engine.v56.candidate-selection-ledger.v1",
+  "baseCommit": "4e581c40bfed1d238515f6327758a8e9877ba837",
+  "candidates": [
+    {
+      "selection": {
+        "path": "docs/migration/native-campaigns-v56/candidates/001-glob-selection.json",
+        "sha256": "f284a604c921da9217a39ada44808b9f69384b719012acf4de3390c67280da5d",
+        "bytes": 923
+      },
+      "game": "GLOB",
+      "selectedAt": "2026-11-09T13:59:36.727704+00:00",
+      "blockedDeadline": "2026-11-09T14:39:36.727704+00:00",
+      "baselineStatus": "passed_three_levels",
+      "baselineClosedAt": "2026-11-09T14:00:28.767120+00:00",
+      "baselineDirectory": "docs/migration/native-campaigns-v56/baseline-glob",
+      "finalV56Status": "pending_frozen_source_rerun"
+    }
+  ],
+  "excludedPreviouslyQualifiedGames": [
+    "HANO",
+    "SYME",
+    "DNOI",
+    "TU93",
+    "MEMO",
+    "PIPE",
+    "STCK",
+    "TICT",
+    "THER",
+    "COMB",
+    "CATL",
+    "LF52",
+    "ZIPP",
+    "SELE",
+    "COLM",
+    "GRIL",
+    "LIFE",
+    "VALV",
+    "GARE",
+    "CN04",
+    "RE86",
+    "ELAS",
+    "ONDE",
+    "DICO",
+    "M0R0",
+    "SKBN",
+    "DAME",
+    "AS66"
+  ],
+  "qualification": "One selected game only. The target completed before one minute from selection, so no candidate switch or further baseline attempt was needed. A separate final-source execution is required for V56 publication."
+}

@@ -89,7 +89,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     status: 'running', referenceCommit: V6_REFERENCE_COMMIT,
     budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: 360, clock: 'real active compute and native execution' },
     source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [], domainAssessments: [],
-    baseline: null, pythonAgentModules: null, failure: null,
+    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [],
   };
   if (options.recordedPublic) report.recordedPublicReplay = {
     trace: options.recordedPublic.trace, baseline: options.recordedPublic.baseline,
@@ -114,6 +114,39 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     } as NativeV6Declarations;
     const service = new V6AgentService(async () => {
       runtime = await createNativeV6Runtime(declarations);
+      // Evidence-only source-call observer. It preserves the method's sync or
+      // async return, inputs, ordering and state, and never supplies a decision.
+      // Inventory propose() can acquire memories even when another provider
+      // wins, so record-only replay would miss source mutations.
+      const inventory = (runtime as unknown as { families: R[] }).families.find(f => f.id === 'public_observed_inventory');
+      if (inventory) {
+        let sourceDepth = 0;
+        for (const method of ['observeCallerContext', 'recordCallerContext', 'proposeSource', 'preservation_obligations', 'recordSource']) {
+          const original = inventory[method];
+          assert.equal(typeof original, 'function', `Missing observed inventory source surface: ${method}`);
+          inventory[method] = function (...args: any[]) {
+            if (sourceDepth) return original.apply(this, args);
+            const capturedArgs = method === 'proposeSource'
+              ? [args[0], args[1], args[2], args[3], args[4] ?? null, args[5] ?? [], args[6]?.retained_state() ?? null] : args;
+            const event: R = { index: report.inventorySourceCalls.length, method, arguments: structuredClone(capturedArgs),
+              sourceBefore: this.state(), callerContextBefore: this.callerContextState() };
+            sourceDepth++;
+            const complete = (result: any): any => {
+              event.result = structuredClone(result ?? null); event.sourceAfter = this.state(); event.callerContextAfter = this.callerContextState();
+              report.inventorySourceCalls.push(event); sourceDepth--; return result;
+            };
+            const failed = (error: unknown): never => {
+              event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+              event.sourceAfter = this.state(); event.callerContextAfter = this.callerContextState();
+              report.inventorySourceCalls.push(event); sourceDepth--; throw error;
+            };
+            try {
+              const result = original.apply(this, args);
+              return result && typeof result.then === 'function' ? result.then(complete, failed) : complete(result);
+            } catch (error) { return failed(error); }
+          };
+        }
+      }
       if (options.providerDiagnostics) {
         // Observe the actual instance call without altering its inputs, result,
         // budget, priority or retained state. No game object enters the runtime.
@@ -185,6 +218,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             ? read('family_state:public_reactive_contact') : null;
           const reactionCheckpoint = graph.nodes['family_state:public_ordered_reaction']
             ? read('family_state:public_ordered_reaction') : null;
+          const inventoryCheckpoint = graph.nodes['family_state:public_observed_inventory']
+            ? read('family_state:public_observed_inventory') : null;
           const reasoningFacts = (read('reasoning:memory').facts as string[]).map(read);
           const framedFacts = reasoningFacts
             .filter(fact => evidence.transitions.some((_: R, index: number) =>
@@ -198,6 +233,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const reactionFacts = reasoningFacts
             .filter(fact => evidence.transitions.some((_: R, index: number) =>
               fact.key === `reaction_event:${evidence.decision_revision + index}`));
+          const inventoryFacts = reasoningFacts
+            .filter(fact => evidence.transitions.some((_: R, index: number) =>
+              fact.key === `observed_inventory_event:${evidence.decision_revision + index}`));
           const anchors = (series.events as R[]).filter(event => event.kind === 'coupled_pair_epoch_anchor');
           const alternating = (series.events as R[]).filter(event => event.kind === 'alternating_graph_evidence');
           const graphEvidence = alternating.at(-1);
@@ -307,6 +345,15 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               acquired: reactionFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
               ...(evidence.proposal.reaction_plan ? { selectedProposal: evidence.proposal } : {}),
               qualification: 'Passive evidence only: the one actual OrderedReaction owner, its six source fields, source transition references and complete native checkpoint. No state, action or expected return is supplied by this observer.',
+            } } : {}),
+            ...(inventoryCheckpoint ? { inventoryAcquisition: {
+              stateNode: 'family_state:public_observed_inventory', checkpointFormat: inventoryCheckpoint.format,
+              sourceState: inventoryCheckpoint.source_state, callerContext: inventoryCheckpoint.caller_context, nativeCheckpoint: inventoryCheckpoint,
+              transitions: evidence.transitions, selectionReceipt: evidence.proposal.strategy_receipt,
+              sourceCallsThrough: report.inventorySourceCalls.length,
+              acquired: inventoryFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
+              ...(evidence.proposal.inventory_plan ? { selectedProposal: evidence.proposal } : {}),
+              qualification: 'Evidence only: actual eight-field inventory owner, caller meter/collection context, sealed transition references and complete native checkpoint. Source method calls retain losing proposal evaluation and acquisition order without providing inputs, state or actions to the production agent.',
             } } : {}),
             ...(evidence.proposal.labeled_sequence_plan
               ? { labeledSequenceLabel: evidence.proposal.labeled_sequence_plan.label,

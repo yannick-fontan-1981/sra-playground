@@ -11,7 +11,39 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v55):** the native common Logos Engine caller
+**Current integrated milestone (v56):** the native common caller completes
+**GLOB's first three levels in 20 actions (5, 11, 4)** in one cold continuous
+session, with 17 acquired prefixes, 20 actual Kernel acquisitions and two
+natural boundary replays. The
+[actual campaign](native-campaigns-v56/final/glob-campaign.json.gz) and
+[execution receipt](native-campaigns-v56/final/execution-glob.json) bind the
+result to unchanged implementation `0.30.0` and native digest
+`bade8fd58991e6a127abc84f373d539edeaa70d45ab0da94a84a6751fdc92de5`.
+The target stops on entry to level 4 with `NOT_FINISHED`. The
+[independent browser verification](native-campaigns-v56/final/glob-browser-verification.json)
+confirms the same counters through three ordinary Run to next level clicks,
+with the inspector closed.
+
+The new `observed_inventory_composition` entry connects one eight-field
+ObservedInventory owner, its original 19-rule policy and existing SRC workflow,
+V5 current cell / underlay / endpoint measurements, conditional supplier
+relations, contact returns and context associations. Meter and collection
+acquisition remain separate checkpoint context. Inventory reads that context;
+it does not insert the planning observation owned by the still-pending
+MorphologyAdapter provider. The exact partial V5 probe domain remains explicit.
+Original Python matches all 90 actual source-facing calls, including 13 losing
+proposal abstentions, and all 17 full source/context prefix checkpoints on
+GLOB. Positive inventory behavior has separate original-source and Kernel
+proof; no inventory proposal is selected on this game. The unchanged V55
+baseline also succeeds, with the same 21 complete public packets, so the live
+success is not attributed to the new inventory logic. The final V56 objective
+completes 22 minutes 57 seconds after the original candidate selection, before
+its immutable 40-minute deadline. The connection audit reaches 49/76 (64.5%),
+with 37 compiled programs. All complete-migration gates remain false. See the
+[v56 report](v56-observed-inventory-and-current-context.md) for precise scopes
+and retained evidence.
+
+**Previous integrated milestone (v55):** the native common Logos Engine caller
 completes **AS66's first three levels in 19 actions (5, 6, 8)** in one cold
 continuous session, with 11 acquired prefixes, 19 actual Kernel acquisitions
 and two natural boundary replays. The

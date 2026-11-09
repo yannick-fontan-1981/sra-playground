@@ -341,12 +341,13 @@ export class NativeCallerCoordinator {
 
   /** This is called only while acquiring a sealed prefix of actual host outcomes. */
   async beforeAssessment(transition: NativeAuthorityTransition, proposal: NativeProposal,
-    recordSelected: () => Promise<R | null> = async () => null): Promise<NativeCallerAcquisition> {
+    recordSelected: () => Promise<R | null> = async () => null, acquireBeforeView: () => void = () => {}): Promise<NativeCallerAcquisition> {
     this.restoredValues = null;
     this.effectfulInventory = null;
     const { before, after, command, first, second, index } = transition, question = proposal.question as R ?? {};
     const acquisition = question.control_acquisition ?? {}, shared = question.curiosity?.also_tests_current_control ?? {};
     const attention_result = this.attention.observe(before, after, command, acquisition.attention_ref || shared.attention_ref || null);
+    acquireBeforeView();
     const view_result = this.view ? await this.view.record(before, after, command, first.frame_rows, second.frame_rows, proposal, index) : null;
     if (view_result) this.put(`view_evidence:${before.revision}`, view_result, after);
     const selected_result = await recordSelected();

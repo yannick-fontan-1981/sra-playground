@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "valv-replay.json.gz",
+    "sha256": "73a23689a3df55d8697447c278ac138e41c815bbce1de353a3a85480f0869810",
+    "bytes": 2701932
+  },
+  "parts": [
+    {
+      "file": "valv-replay.json.gz.part000",
+      "sha256": "235ae867c9e5ff83f17e590a7574c62b22102e63bf6c0848c9c29496cc2665a1",
+      "bytes": 900000
+    },
+    {
+      "file": "valv-replay.json.gz.part001",
+      "sha256": "d27903e571717eabb7f3c994ae2a08a6e540ee8cae261a35c722656366420b9d",
+      "bytes": 900000
+    },
+    {
+      "file": "valv-replay.json.gz.part002",
+      "sha256": "89ecdaaac31aed8e2e4def5f051fb01dfaead15c71f9fabca58391ce80094c5e",
+      "bytes": 900000
+    },
+    {
+      "file": "valv-replay.json.gz.part003",
+      "sha256": "0dc452048ab70a18644f43f3e3512638a3e1f38fc123832c39e407d159eee952",
+      "bytes": 1932
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

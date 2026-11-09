@@ -2,11 +2,11 @@
   "schema": "logos-engine.v6.declared-entry-coverage.v1",
   "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
   "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
-  "implementation": "logos-engine.typescript.v6.native-migration/0.29.0",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.30.0",
   "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
-  "connected": 48,
+  "connected": 49,
   "declared": 76,
-  "percent": 63.2,
+  "percent": 64.5,
   "groups": [
     {
       "id": "goal_access",
@@ -247,7 +247,7 @@
     {
       "id": "factored_material_return",
       "declared": 33,
-      "connected": 15,
+      "connected": 16,
       "entries": [
         {
           "question": "reactive_contact_continuation",
@@ -281,8 +281,8 @@
         },
         {
           "question": "observed_inventory_composition",
-          "family": null,
-          "status": "pending"
+          "family": "public_observed_inventory",
+          "status": "connected"
         },
         {
           "question": "factored_material_return",
@@ -527,6 +527,7 @@
       "id": "factored_material_return",
       "families": [
         "public_reactive_contact",
+        "public_observed_inventory",
         "factored_material_return",
         "band_transfer",
         "reduction_transport",
@@ -544,6 +545,7 @@
       ],
       "entryPoints": [
         "reactive_contact_continuation",
+        "observed_inventory_composition",
         null,
         null,
         null,

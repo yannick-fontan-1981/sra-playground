@@ -28,7 +28,25 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **The v55 milestone completes
+  level**; opening the tab does not move the game. **The v56 milestone completes
+  GLOB's first three levels in 20 actions (5, 11 and 4)** through one cold
+  continuous native common session, 17 acquired prefixes and two natural
+  boundary replays. The managed browser independently confirms 20 actions,
+  three solved levels and 17 completed plans with the inspector closed.
+  The target stops on entry to level 4 with `NOT_FINISHED`.
+  This release connects the original `observed_inventory_composition` entry
+  and its eight-field owner, current cell/material measurements, conditional
+  dependency routes, contact and context reconciliation, and source meter /
+  collection acquisition. Generic helpers retain current guards and bounded
+  source uncertainty. No game identifier, fixed colour role, coordinate or
+  stored route enters the agent. GLOB uses the existing `observed_frontier`,
+  `fixed_origin` and `information_goal` providers and also succeeds on the
+  unchanged V55 baseline. Its new cold common result is separate from the
+  positive inventory component tests. Original Python matches all 90 actual
+  inventory/context calls and all 17 complete prefix checkpoints on GLOB.
+  The audit connects 49/76 source entries (64.5%); complete V6 parity remains
+  unverified. See the [v56 report](docs/migration/v56-observed-inventory-and-current-context.md).
+  **The previous v55 milestone completes
   AS66's first three levels in 19 actions (5, 6 and 8)** through one cold
   continuous native common session, 11 acquired prefixes and two natural
   boundary replays. The managed browser independently confirms 19 actions,
@@ -217,15 +235,15 @@ Fontan's **Symbolic Reasoning Agent** research.
   **Previous v38 milestone: TICT completes all six levels with official `WIN`
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
-  The current entry audit connects **48 of 76 explicit DRM subquestions
-  (63.2%)** in implementation `logos-engine.typescript.v6.native-migration/0.29.0`,
-  with the newly connected ordered-reaction entry using one acquired owner.
+  The current entry audit connects **49 of 76 explicit DRM subquestions
+  (64.5%)** in implementation `logos-engine.typescript.v6.native-migration/0.30.0`,
+  with the newly connected inventory entry using one acquired owner.
   The compiled original workflow inventory remains 37. This counts
   connected entries, not full behavioral parity or a percentage of all code.
-  The remaining `observed_inventory_composition` entry and its original
-  passive acquisition position are a next source closure to study. Selection
-  and validation will use public observations; no new game outcome is assumed
-  for that pending entry.
+  The `observed_inventory_composition` entry now retains its original passive
+  acquisition position and scoped caller context. The still-pending morphology
+  provider and other pending source entries require further source transfer
+  and independent validation; no future game outcome is assumed.
   Complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These
