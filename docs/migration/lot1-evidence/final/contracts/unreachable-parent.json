@@ -1,0 +1,338 @@
+{
+  "schema": "logos-engine.lot1.contract-evidence.v1",
+  "status": "passed",
+  "qualification": "Controlled public-return component contract",
+  "receipt": {
+    "native_extension": "retained_typed_material_request_parent",
+    "parent_ref": "composition_attention:c9ea476c15d95600f6b9",
+    "target_ref": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+    "observation_ref": "lot1-controlled-public-return:epoch:3:revision:36:frame:83dc0751c9098c50",
+    "level_epoch": 3,
+    "decision": "suspend",
+    "reason": "retained_request_unreachable_under_observed_rule",
+    "condition": "selected_pose_matches_retained_request",
+    "child_ref": "06b50017466b565e63a63a4dc8e17fa7bec4ee5260d5653506be29a29691ffc0",
+    "returned_transition_ref": "reasoning:transition:35",
+    "release_authority": false,
+    "parent_status": "pending",
+    "returned_event_ref": "typed-material-event:b583a592a42548377c4b9c510e59afb764380806bd5d0345c077cf3a2f7182a7",
+    "evidence_refs": [
+      "lot1-controlled-public-return:epoch:3:revision:35:frame:f216bc8af2019d79",
+      "lot1-controlled-public-return:epoch:3:revision:36:frame:83dc0751c9098c50"
+    ],
+    "effect_acquired_once": true
+  },
+  "poseRule": {
+    "status": "conditional_observed_pose_change",
+    "turns": 2,
+    "epoch": 3,
+    "control_bbox": [
+      29,
+      38,
+      35,
+      43
+    ],
+    "evidence": [
+      [
+        "lot1-controlled-public-return:epoch:3:revision:35:frame:f216bc8af2019d79",
+        "lot1-controlled-public-return:epoch:3:revision:36:frame:83dc0751c9098c50"
+      ]
+    ]
+  },
+  "parent": {
+    "id": "composition_attention:c9ea476c15d95600f6b9",
+    "owner": "native:typed_material_flow",
+    "target_ref": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+    "question": "Deliver the selected typed material to this measured request; first resolve its current pose.",
+    "status": "pending",
+    "level_epoch": 3,
+    "opened_at": "typed-material-reference:epoch:3:revision:34:frame:fdde58a4801f71e7",
+    "evidence": [
+      "typed-material-reference:epoch:3:revision:34:frame:fdde58a4801f71e7",
+      "typed-material-reference:epoch:3:revision:32:frame:af5454cac73bd5bd",
+      "typed-material-reference:epoch:3:revision:29:frame:7978b68385a22d49",
+      "typed-material-reference:epoch:1:revision:5:frame:13a34cbb674ceb63"
+    ],
+    "release_authority": false,
+    "current_revalidation_required": true,
+    "binding": {
+      "native_extension": "retained_typed_material_request_parent",
+      "family_id": "public_occurrence_recall",
+      "source_entry": "typed_material_flow",
+      "request": {
+        "id": "da85f4d09241424d7105deb60071b954eeaf0baac9532f3bff4557e90f0db3d6",
+        "bbox": [
+          53,
+          3,
+          61,
+          11
+        ],
+        "point": [
+          57,
+          7
+        ],
+        "descriptor": {
+          "palette": 10,
+          "width": 3,
+          "height": 3,
+          "mask": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              2,
+              1
+            ]
+          ]
+        }
+      },
+      "child_ref": "06b50017466b565e63a63a4dc8e17fa7bec4ee5260d5653506be29a29691ffc0",
+      "child": {
+        "id": "06b50017466b565e63a63a4dc8e17fa7bec4ee5260d5653506be29a29691ffc0",
+        "bbox": [
+          11,
+          20,
+          13,
+          22
+        ],
+        "center": [
+          12,
+          21
+        ],
+        "point": [
+          11,
+          21
+        ],
+        "body_palette": 2,
+        "source_ref": "typed-material-reference:epoch:3:revision:32:frame:af5454cac73bd5bd"
+      },
+      "child_marks_digest": "f2ad31bc876d5db03e9cd1d5f13b9f7f70bb86bb3230344d542f9a5e7b227f3d",
+      "control": {
+        "bbox": [
+          29,
+          38,
+          35,
+          43
+        ],
+        "point": [
+          32,
+          40
+        ],
+        "epoch": 3,
+        "source_ref": "typed-material-reference:epoch:3:revision:29:frame:7978b68385a22d49"
+      },
+      "control_projection_digest": "1027ae1ebc6fb3124abb82eddf1305127e911bd853c9d06515a5390e536c3eaf",
+      "model_ref": "f01fb444b02b5d01694dee73167fc851010b6fd96446b4cd08e13390ff7a58c9",
+      "model_digest": "0dda82d19a9e72e6f3cb8fdd5c7362b49c18da1f3e86c67bd49dff224cf0e335",
+      "condition": "selected_pose_matches_retained_request",
+      "phase": "suspended",
+      "selection_witness": {
+        "event_ref": "typed-material-event:d4dea80e259ca071e1b3acd730bfd2fa5977f4c240bf0a89569799320c57b1c6",
+        "evidence": [
+          "typed-material-reference:epoch:3:revision:34:frame:fdde58a4801f71e7",
+          "lot1-controlled-public-return:epoch:3:revision:35:frame:f216bc8af2019d79"
+        ],
+        "pixels": [
+          [
+            8,
+            17,
+            0
+          ],
+          [
+            9,
+            17,
+            0
+          ],
+          [
+            10,
+            17,
+            0
+          ],
+          [
+            11,
+            17,
+            0
+          ],
+          [
+            12,
+            17,
+            0
+          ],
+          [
+            13,
+            17,
+            0
+          ],
+          [
+            14,
+            17,
+            0
+          ],
+          [
+            15,
+            17,
+            0
+          ],
+          [
+            16,
+            17,
+            0
+          ],
+          [
+            8,
+            18,
+            0
+          ],
+          [
+            16,
+            18,
+            0
+          ],
+          [
+            8,
+            19,
+            0
+          ],
+          [
+            16,
+            19,
+            0
+          ],
+          [
+            8,
+            20,
+            0
+          ],
+          [
+            16,
+            20,
+            0
+          ],
+          [
+            8,
+            21,
+            0
+          ],
+          [
+            16,
+            21,
+            0
+          ],
+          [
+            8,
+            22,
+            0
+          ],
+          [
+            16,
+            22,
+            0
+          ],
+          [
+            8,
+            23,
+            0
+          ],
+          [
+            16,
+            23,
+            0
+          ],
+          [
+            8,
+            24,
+            0
+          ],
+          [
+            16,
+            24,
+            0
+          ],
+          [
+            8,
+            25,
+            0
+          ],
+          [
+            9,
+            25,
+            0
+          ],
+          [
+            10,
+            25,
+            0
+          ],
+          [
+            11,
+            25,
+            0
+          ],
+          [
+            12,
+            25,
+            0
+          ],
+          [
+            13,
+            25,
+            0
+          ],
+          [
+            14,
+            25,
+            0
+          ],
+          [
+            15,
+            25,
+            0
+          ],
+          [
+            16,
+            25,
+            0
+          ]
+        ]
+      },
+      "last_return": {
+        "transition_ref": "reasoning:transition:35",
+        "proposal_ref": "C_typed_pose_918ba40dc5732365014b",
+        "index": 0,
+        "evidence": [
+          "lot1-controlled-public-return:epoch:3:revision:35:frame:f216bc8af2019d79",
+          "lot1-controlled-public-return:epoch:3:revision:36:frame:83dc0751c9098c50"
+        ],
+        "event_ref": "typed-material-event:b583a592a42548377c4b9c510e59afb764380806bd5d0345c077cf3a2f7182a7",
+        "status": "retained_request_unreachable_under_observed_rule"
+      },
+      "consumed_return_ref": "reasoning:transition:34",
+      "active_question": {
+        "proposal_ref": "C_typed_pose_918ba40dc5732365014b",
+        "kind": "typed_pose_dependency",
+        "mode": "control",
+        "opened_at": "lot1-controlled-public-return:epoch:3:revision:35:frame:f216bc8af2019d79"
+      },
+      "suspension_reason": "retained_request_unreachable_under_observed_rule",
+      "consumed_at": "lot1-controlled-public-return:epoch:3:revision:35:frame:f216bc8af2019d79"
+    },
+    "revised_at": "lot1-controlled-public-return:epoch:3:revision:36:frame:83dc0751c9098c50",
+    "revision_evidence": [
+      "lot1-controlled-public-return:epoch:3:revision:36:frame:83dc0751c9098c50",
+      "lot1-controlled-public-return:epoch:3:revision:35:frame:f216bc8af2019d79"
+    ]
+  }
+}

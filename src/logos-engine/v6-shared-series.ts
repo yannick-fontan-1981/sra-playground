@@ -704,6 +704,12 @@ export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, c
   queuedConfig?: R, catalogueConfig?: R, materialConfig?: R, serviceConfig?: R): NativeFamily {
   const family = new SharedSeriesConstraint(config, options), adapter = asNativeOccurrenceRecallFamily(family);
   return { ...adapter, nativeState: () => family.nativeState(), restoreNative: state => family.restoreNative(state),
+    compositionDependencyState: () => family.material.currentState() as unknown as R,
+    proposeForRetainedComposition: async (binding, observation, rows, inputs, remaining) => {
+      const proposal = materialConfig ? await commonTypedMaterialProposal(family.material, observation, rows, inputs, remaining, materialConfig, binding) : null;
+      if (proposal) proposal.field_subquestion = 'typed_material_flow';
+      return proposal as NativeProposal | null;
+    },
     currentInquiryWitness: (proposal, observation, rows) => proposedTypedMaterialInquiryWitness(family.material.currentState(), proposal, observation, rows),
     unacquiredInquiryWitness: (proposal, observation) => cellUnacquiredInquiryWitness(family.cells.state(), proposal, observation),
     retainedSuccessWitness: observation => retainedTraceBoundaryCandidate(family.trace.currentState(), observation),

@@ -90,6 +90,17 @@ export class AttentionMemory {
     if (status !== 'boundary' && item.level_epoch !== obs.level_epoch) return null;
     return this.saveComposition({ ...item, status, returned_at: obs.observation_ref, return_evidence: [...new Set(evidence)] }, obs);
   }
+  /** Native coordination extension. Revise a pending question's binding, never
+   * its target, owner, epoch or action authority. The source motion channel and
+   * retain/return contracts above are unchanged. */
+  reviseComposition(owner: string, targetRef: string, binding: R, evidence: readonly string[], obs: R): R | null {
+    const item = this.composition;
+    if (!item || item.status !== 'pending' || item.owner !== owner || item.target_ref !== targetRef
+      || item.level_epoch !== obs.level_epoch || !evidence.includes(obs.observation_ref)
+      || typeof binding.native_extension !== 'string' || !binding.native_extension) return null;
+    return this.saveComposition({ ...item, binding: structuredClone(binding), revised_at: obs.observation_ref,
+      revision_evidence: [...new Set(evidence)] }, obs);
+  }
   state(): R { return structuredClone({ item: this.item, composition: this.composition }); }
   restore(state: R): void { this.item = structuredClone(state.item ?? null); this.composition = structuredClone(state.composition ?? null); }
 }

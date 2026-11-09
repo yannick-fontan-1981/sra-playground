@@ -152,6 +152,13 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   groundedInquiryWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeGroundedInquiryWitness | null>;
   /** Read-only current relation or acquired context, explicitly distinguished. */
   currentInquiryWitness?(proposal: P, observation: NativeObservation, rows: NativeRows): NativeMaybePromise<NativeRecord | null>;
+  /** Native composition attention reads the existing acquired owner. It must
+   * not retain a second domain model or invoke record to consume its returns. */
+  compositionDependencyState?(): NativeRecord;
+  /** A native facade may constrain a fresh source question to the retained
+   * parent. Ordinary family binding, guards and WHY/ACT remain mandatory. */
+  proposeForRetainedComposition?(binding: NativeRecord, observation: NativeObservation, rows: NativeRows,
+    inputs: readonly NativeCommand[], remaining: number, execution?: NativeExecution): NativeMaybePromise<P | null>;
   /** Native coordination only: a source-declared current service may take
    * precedence over an independent unknown-effect question. The caller must
    * supply its real current trial scope; this witness releases no action. */

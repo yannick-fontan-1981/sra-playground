@@ -11,7 +11,21 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v57):** the native common caller completes
+**Current delivery (lot 1, native 0.32.0):** a measured material request remains
+retained while `typed_pose_dependency` selects and tests its child. The ordinary
+common caller acquires the actual return at the existing material owner, then
+consumes that evidence to resume the same request or suspend it. This is an
+explicit native coordination extension of the existing composition attention
+contract, with no second material model, fabricated morphology route or new
+entry in the 76-entry count. Original default source contracts remain covered.
+The [lot report](lot1-retained-material-parent.md) distinguishes the baseline gap,
+controlled contrary returns, real common execution, live campaign and measured
+costs. The [roadmap](v6-delivery-roadmap.md) preserves all eleven lots and exactly
+26 remaining registry entries. The [lineage](lot1-composition-return-lineage.md)
+records source relationships and actually consumed operations. Lot 2A is the
+next priority; none of the three incomplete common providers is declared complete.
+
+**Previous integrated milestone (v57):** the native common caller completes
 **SMLP's first three levels in 15 actions (3, 4, 8)** in one cold continuous
 session, with nine acquired prefixes, 15 actual Kernel acquisitions and two
 natural boundary replays. The

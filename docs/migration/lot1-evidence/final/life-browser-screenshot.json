@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.lot1.browser-screenshot.v1",
+  "observation": "LIFE after three completed levels through ordinary controls, inspector closed:49actions/3levels/47plans",
+  "source": "Cloud browser tab6, managed preview, http://127.0.0.1:4173/?game=LIFE&level=4",
+  "screenshot": {
+    "path": "docs/migration/lot1-evidence/final/life-browser.png",
+    "bytes": 78012,
+    "sha256": "d7cf8987071e13ca322e31089590d2930670ca1663cddb38383f3f27a8dbc9fb"
+  },
+  "unmodifiedCapture": true,
+  "behaviorReceipt": "docs/migration/lot1-evidence/final/life-browser-verification.json"
+}

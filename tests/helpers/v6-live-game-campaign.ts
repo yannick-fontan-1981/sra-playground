@@ -277,6 +277,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const recolorCheckpoint = graph.nodes['family_state:public_topological_recolor']
             ? read('family_state:public_topological_recolor') : null;
           const reasoningFacts = (read('reasoning:memory').facts as string[]).map(read);
+          const compositionAttention = read('caller:attention').composition;
           const framedFacts = reasoningFacts
             .filter(fact => evidence.transitions.some((_: R, index: number) =>
               fact.key === `framed_transfer_event:${evidence.decision_revision + index}`));
@@ -424,6 +425,17 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             } } : {}),
             informationGoal: evidence.proposal.question?.curiosity ?? null,
             motionSourceCallsThrough: report.motionSourceCalls.length,
+            ...(compositionAttention ? { compositionAttention: {
+              stateNode: 'caller:attention', state: compositionAttention,
+              selectedTarget: evidence.proposal.composition_target_tree ?? null,
+              transitions: evidence.transitions.map((_: R, index: number) => {
+                const node = `reasoning:transition:${evidence.decision_revision + index}`;
+                const acquired = read(node);
+                return { node, before: acquired.before, after: acquired.after,
+                  callerAcquisition: acquired.caller_acquisition, frontierAcquisition: acquired.frontier_acquisition };
+              }),
+              qualification: 'Read-only projection of the actual retained composition-attention owner and ordinary acquired transition nodes. No parent, result, proposal or permission is supplied by this observer; motion attention remains a separate source contract.',
+            } } : {}),
             ...(evidence.proposal.labeled_sequence_plan
               ? { labeledSequenceLabel: evidence.proposal.labeled_sequence_plan.label,
                   labeledSequenceQuery: evidence.proposal.labeled_sequence_plan.scene.query.words[0].values,

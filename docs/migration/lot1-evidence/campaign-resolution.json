@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.lot1.campaign-resolution.v1",
+  "selection": "docs/migration/lot1-evidence/campaign-selection.json",
+  "execution": "docs/migration/lot1-evidence/final/execution-life.json",
+  "status": "passed",
+  "selectedAt": "2026-11-09T16:41:18.402941+00:00",
+  "finishedAt": "2026-11-09T16:45:09.842697+00:00",
+  "deadline": "2026-11-09T17:21:18.402941+00:00",
+  "elapsedSinceSelectionSeconds": 231.439756,
+  "completedBeforeOriginalDeadline": true,
+  "game": "LIFE",
+  "levelsCompleted": 3,
+  "actions": 49,
+  "qualification": "Same immutable selected-game clock; one cold live attempt, no retries or reset."
+}

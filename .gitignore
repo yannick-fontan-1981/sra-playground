@@ -76,3 +76,10 @@ __pycache__/
 /docs/migration/native-campaigns-v57/final/regressions/valv-replay.json.gz
 /docs/migration/native-campaigns-v57/final/regressions/zipp-replay.json.gz
 /docs/migration/native-campaigns-v57/final/smlp-campaign.json.gz
+
+# Lot 1 exact originals are retained in checked gzip or ordered source parts.
+/docs/migration/lot1-evidence/ablation/parent-scope-gap.json
+/docs/migration/lot1-evidence/final/source-archive.tar.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot1-evidence/final/life-campaign.json.gz

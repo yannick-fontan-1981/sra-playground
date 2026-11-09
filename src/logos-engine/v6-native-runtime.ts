@@ -41,6 +41,8 @@ import { summaryReturnedPublicProbe, independentReturnedProbeSupport } from './v
 import { symbolicDigest } from './v6-hash.ts';
 import { createNativeInterfaceFamilies } from './v6-native-interface-families.ts';
 import { NativeCallerCoordinator } from './v6-native-caller.ts';
+import { TYPED_MATERIAL_COMPOSITION_OWNER, retainTypedMaterialParent, revalidateTypedMaterialParent,
+  consumeTypedMaterialParent, recordTypedMaterialParent, typedMaterialParentGuard, suspendTypedMaterialParent } from './v6-typed-material-composition.ts';
 import type { VisualSequenceProposal } from './v6-visual-sequences.ts';
 import { nativeProgramDescriptions } from './v6-src-program.ts';
 import type { NativeSrcReceipt } from './v6-src-program.ts';
@@ -57,7 +59,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.31.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.32.0';
 // The implementation identity and public snapshot describe the same extensions.
 const NATIVE_CALLER_EXTENSIONS = ['neutral_entity_domain_refusal_retained_as_unknown_without_registry_update',
   'retained_learned_preparation_before_unlearned_invitation', 'current_program_access_revalidation', 'measured_program_control_discovery',
@@ -86,7 +88,8 @@ const NATIVE_CALLER_EXTENSIONS = ['neutral_entity_domain_refusal_retained_as_unk
   'current_unique_announced_access_one_primitive_composition',
   'current_unique_recalled_outline_control_conditional_revalidation',
   'bounded_previous_relation_current_observed_body_access',
-  'observed_access_arrival_conditional_historical_local_test'] as const;
+  'observed_access_arrival_conditional_historical_local_test',
+  'retained_typed_material_request_parent'] as const;
 const SELECTION_PROGRAM = 'v6.composition_strategy.choose';
 type R = Record<string, any>;
 const EPISODE = 'common-observation-frontier';
@@ -289,6 +292,16 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.restoreFamilies();
     this.authority?.restore();
     if (this.caller && this.knowledge) this.caller.restoreFrom(this.knowledge);
+    const parentOwner = this.typedMaterialParentFamily();
+    if (parentOwner && this.caller) {
+      const validation = revalidateTypedMaterialParent(this.caller.attention, parentOwner.compositionDependencyState!(),
+        this.observation, this.current.frame_rows);
+      if (validation && !validation.admitted) {
+        this.note({ kind: 'native_composition_dependency', ...validation });
+        await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'selection', statement: 'native.parent.suspend' }, this.authority?.checkpointWrites() ?? []);
+        this.stop(`composition_dependency_${validation.reason}`); return;
+      }
+    }
     const inputs = this.domain.candidates(this.observation);
     const obligations = (await Promise.all(this.families.map(family => family.preservationObligations?.(this.observation!, this.current!.frame_rows) ?? []))).flat();
     let selected = await this.selectAdmittedFamily(execution, inputs);
@@ -306,15 +319,54 @@ export class NativeV6Runtime implements NativeV6Backend {
       if (selected) selected = { ...selected, proposal: protectedProposal as NativeProposal };
     }
     if (selected) {
-      const { family, proposal } = selected;
+      const { family } = selected; let { proposal } = selected;
       if (proposal.status !== 'proposed') {
         await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'selection', statement: 'source.refusal' }, this.authority?.checkpointWrites() ?? []);
         this.stop(`frontier_${proposal.status ?? 'unknown'}`); return;
+      }
+      // Source selection still chooses the family/entry. This explicit native
+      // facade constrains its material question to the pending parent instead
+      // of letting a newly matching request silently replace that obligation.
+      if (this.caller && this.typedMaterialParentFamily() === family && (proposal.material_pose_plan || proposal.material_flow_plan)) {
+        const replacement = await family.proposeForRetainedComposition?.(this.caller.attention.composition!.binding,
+          this.observation, this.current.frame_rows, inputs, this.remaining(), execution);
+        if (replacement) {
+          const sourceReceipt = proposal.strategy_receipt as R | undefined;
+          replacement.strategy_receipt = { ...structuredClone(sourceReceipt ?? {}), native_coordination: [
+            ...(sourceReceipt?.native_coordination ?? []), {
+              rule: 'retained_typed_material_request_parent', parent_ref: this.caller.attention.composition!.id,
+              source_proposal_ref: proposal.proposal_id, constrained_proposal_ref: replacement.proposal_id,
+              observation_ref: this.observation.observation_ref, source_family_selection_preserved: true, release_authority: false,
+            }] };
+          replacement.morphology = structuredClone(proposal.morphology);
+        }
+        const [protectedReplacement, conflicts] = replacement ? this.caller.protect(replacement, obligations, this.observation, this.current.frame_rows) : [null, []];
+        if (!protectedReplacement || conflicts.length) {
+          const result = suspendTypedMaterialParent(this.caller.attention, this.observation,
+            conflicts.length ? 'retained_parent_preservation_conflict' : 'no_current_path_to_retained_request');
+          if (result) this.note({ kind: 'native_composition_dependency', ...result });
+          await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'selection', statement: 'native.parent.suspend' }, this.authority?.checkpointWrites() ?? []);
+          this.stop(`composition_dependency_${result?.reason ?? 'retained_owner_unavailable'}`); return;
+        }
+        proposal = protectedReplacement as NativeProposal;
       }
       if (!Array.isArray(proposal.actions) || proposal.actions.length < 1 || proposal.actions.length > Math.min(16, this.remaining())
         || !Array.isArray(proposal.steps) || proposal.steps.length !== proposal.actions.length) throw new Error(`Invalid committed prefix from ${family.id}`);
       await family.bind?.(proposal, this.domain);
       for (const step of proposal.steps) if (step.locus_witness && !step.point_binding) step.point_binding = structuredClone(step.locus_witness);
+      if (this.caller && family.compositionDependencyState && (proposal.material_pose_plan
+        || proposal.material_flow_plan && this.typedMaterialParentFamily() === family)) {
+        const state = family.compositionDependencyState();
+        const retained = await retainTypedMaterialParent(this.caller.attention, state, proposal, this.observation, this.current.frame_rows);
+        const consumed = retained?.admitted === false ? retained
+          : consumeTypedMaterialParent(this.caller.attention, state, proposal, this.observation, this.current.frame_rows);
+        if (retained) this.note({ kind: 'native_composition_dependency', ...retained });
+        if (consumed) this.note({ kind: 'native_composition_dependency', ...consumed });
+        if (consumed?.admitted === false) {
+          await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'selection', statement: 'native.parent.suspend' }, this.authority?.checkpointWrites() ?? []);
+          this.stop(`composition_dependency_${consumed.reason}`); return;
+        }
+      }
       if (this.authority) {
         await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'selection', statement: 'caller.prepare' }, this.authority.checkpointWrites());
         const target = await this.authority.bind(proposal, this.observation);
@@ -330,6 +382,16 @@ export class NativeV6Runtime implements NativeV6Backend {
     }
     await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'selection', statement: 'no_candidate' }, this.authority?.checkpointWrites() ?? []);
     this.stop('no_applicable_transferred_family');
+  }
+
+  /** The one existing attention owner retains only the parent obligation. No
+   * material state is read on paths without an active material parent. */
+  private typedMaterialParentFamily(): NativeFamily | null {
+    const item = this.caller?.attention.composition;
+    if (item?.owner !== TYPED_MATERIAL_COMPOSITION_OWNER || item.status !== 'pending') return null;
+    const family = this.families.find(value => value.id === item.binding?.family_id && value.compositionDependencyState);
+    if (!family) throw new Error('Retained material parent has no registered acquired owner');
+    return family;
   }
 
   /** Every selection helper converges here before preservation/binding. A
@@ -870,6 +932,11 @@ export class NativeV6Runtime implements NativeV6Backend {
     const { family, proposal, index } = this.prefix, command = proposal.actions[index];
     if (!command || !this.current.available_action_refs.includes(command.action_ref)) return false;
     let before = await family.before(proposal, index, this.current, this.observation);
+    if (this.caller && proposal.native_composition_dependency) {
+      const parentGuard = typedMaterialParentGuard(this.caller.attention, family.compositionDependencyState?.() ?? {},
+        proposal, index, this.observation, this.current.frame_rows);
+      if (parentGuard?.admitted === false) before = { admitted: false, reason: parentGuard.reason };
+    }
     const preserved = this.caller?.preservation(proposal, this.current, this.observation);
     if (preserved && !preserved.admitted) before = { admitted: false, reason: preserved.reason };
     const point = await ObservedInputDomain.pointGuard(this.current, command, proposal.steps![index] as { point_binding?: LocusWitness });
@@ -930,6 +997,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private async seal(execution: NativeExecution): Promise<void> {
     const prefix = this.prefix;
     if (!prefix) throw new Error('No native prefix to seal');
+    const compositionReturns: R[] = [];
     const recordSelected = async (transition: WitnessedTransition): Promise<R | null> => {
       this.check(execution);
       const common = this.caller && CALLER_PROVIDERS.includes(prefix.family.id as typeof CALLER_PROVIDERS[number]);
@@ -940,6 +1008,11 @@ export class NativeV6Runtime implements NativeV6Backend {
       this.records.push(freeze(structuredClone({ family: prefix.family.id, revision: prefix.revision, index: transition.index, record })));
       if (record && this.caller && this.authority) this.retainSelectedAcquisition(selectedFamily, record, transition);
       if (this.acquisitionFamilies) await this.acquirePassiveFamilies(transition, prefix.proposal, Boolean(selectedSupport), prefix.family.id);
+      const parentFamily = this.typedMaterialParentFamily();
+      if (this.caller && parentFamily) {
+        const result = recordTypedMaterialParent(this.caller.attention, parentFamily.compositionDependencyState!(), prefix.proposal, transition, record);
+        if (result) { compositionReturns.push(result); this.note({ kind: 'native_composition_dependency', ...result }); }
+      }
       return record;
     };
     // Source ordering is per acquired transition, after physical prefix sealing:
@@ -965,7 +1038,10 @@ export class NativeV6Runtime implements NativeV6Backend {
       || ['WIN', 'GAME_OVER'].includes(this.current!.state);
     const sourceStop = this.families.map(family => family.requestedStopReason?.(this.observation!) ?? null)
       .find(reason => reason !== null) ?? null;
-    const stopReason = officialStop ? this.budgetReason() : sourceStop ?? this.budgetReason();
+    const parent = this.caller?.attention.composition;
+    const parentStop = parent?.owner === TYPED_MATERIAL_COMPOSITION_OWNER && parent.status === 'pending' && parent.binding?.phase === 'suspended'
+      ? `composition_dependency_${parent.binding.suspension_reason}` : null;
+    const stopReason = officialStop ? this.budgetReason() : sourceStop ?? parentStop ?? this.budgetReason();
     let transfer: R | null = null;
     if (this.caller) {
       this.callerAcquisitions += prefix.witnessed.length;
@@ -999,6 +1075,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       id: evidenceId, kind: 'prefix_evidence', family: prefix.family.id, status: 'observed',
       value: { decision_revision: prefix.revision, proposal: prefix.proposal, selection: this.selectionReceipt,
         ...(prefix.nativeBindings.length ? { native_bindings: prefix.nativeBindings } : {}),
+        ...(compositionReturns.length ? { composition_dependency_returns: compositionReturns } : {}),
         composed_reconciliation: composed, caller_transfer: transfer,
         transitions: prefix.witnessed.map(transition => ({ command: transition.command,
           before: transition.before.observation_ref, after: transition.after.observation_ref, outcome: transition.outcome })) },

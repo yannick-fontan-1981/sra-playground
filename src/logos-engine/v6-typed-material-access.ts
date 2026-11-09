@@ -210,10 +210,33 @@ export class TypedMaterialMemory {
     return this.poseQuestion(obs, rows, cfg, child, 'select');
   }
 
-  poseQuestion(obs: R, rows: NativeRows, cfg: R, child: R, mode: string): R | null {
+  /** Explicit native facade: the source's default question selection below is
+   * unchanged. A returned selection can serve only the retained request and
+   * model; a different currently matching request never replaces that parent. */
+  nativeRetainedRequestQuestion(obs: R, rows: NativeRows, cfg: R, binding: R): R | null {
+    if (!equal(this.poseCfg, cfg)) { this.poseCfg = retainNativeJson(cfg); this.version++; }
+    const child = this.flowChildren.find(value => value.id === binding.child_ref);
+    const context = this.poseContext ?? this.flowContext;
+    if (this.stopReason || this.flowEpoch !== obs.level_epoch || !child
+      || !typedChildPresent(child, rows)) return null;
+    if (binding.phase === 'needs_selection' && !context) return this.poseQuestion(obs, rows, cfg, child, 'select', binding);
+    if (context?.child.id !== child.id) return null;
+    const options = this.matchingPoseTargets(child, rows, obs)
+      .filter(option => option.target.id === binding.request.id && option.model_ref === binding.model_ref);
+    if (!options.length) return null;
+    if (options.some(option => option.turns === 0)) {
+      const flow = this.baseFlowQuestion(obs, rows, cfg);
+      return flow?.material_flow_plan.mode === 'deliver' && flow.material_flow_plan.child.id === child.id
+        && flow.material_flow_plan.target.id === binding.request.id ? flow : null;
+    }
+    return this.poseQuestion(obs, rows, cfg, child, 'control', binding);
+  }
+
+  poseQuestion(obs: R, rows: NativeRows, cfg: R, child: R, mode: string, nativeParent: R | null = null): R | null {
     const controls = this.poseControls.filter(c => typedControlMatches(c, rows, obs.level_epoch));
     if (controls.length !== 1) return null;
-    const options = this.matchingPoseTargets(child, rows, obs);
+    const options = this.matchingPoseTargets(child, rows, obs)
+      .filter(option => nativeParent === null || option.target.id === nativeParent.request.id && option.model_ref === nativeParent.model_ref);
     if (!options.length) return null;
     const option = options.sort((a, b) => a.turns - b.turns || compareText(a.model_ref, b.model_ref))[0]!, control = controls[0]!;
     let count = 1, expected: number[][][] = [], before: number[][][] = []; const rule = this.poseRule;
@@ -334,10 +357,12 @@ export class TypedMaterialMemory {
   }
 }
 
-export async function commonTypedMaterialProposal(memory: TypedMaterialMemory, obs: R, rows: NativeRows, _inputs: readonly R[], remaining: number, config: R): Promise<R | null> {
+export async function commonTypedMaterialProposal(memory: TypedMaterialMemory, obs: R, rows: NativeRows, _inputs: readonly R[], remaining: number, config: R,
+  nativeParent: R | null = null): Promise<R | null> {
   if (remaining < 1 || !obs.available_action_refs.includes('ACTION6')) return null;
   memory.setPrefixLimit(Math.min(16, remaining));
-  const proposal = memory.carrierQuestion(obs, rows, config);
+  const proposal = nativeParent === null ? memory.carrierQuestion(obs, rows, config)
+    : memory.nativeRetainedRequestQuestion(obs, rows, config, nativeParent);
   if (!proposal) return null;
   const plan = proposal[FLAGS.find(flag => Object.hasOwn(proposal, flag))!];
   proposal.steps[0].expected_before = expectedBefore(obs);

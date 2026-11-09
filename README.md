@@ -28,7 +28,23 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **The v57 milestone completes
+  level**; opening the tab does not move the game. **Lot 1 retains a measured
+  material request while its pose question is resolved**, then consumes the
+  acquired return before the next delivery or control decision. The existing
+  attention owner keeps the parent binding; the existing shared material owner
+  keeps the models and counterexamples. Changed identity, stale proof, lost
+  selection evidence or an unreachable request suspends the parent. This is an
+  explicit native coordination extension, with ordinary source guards and
+  WHY/ACT still required. The integrated LIFE campaign completes the first three
+  levels in **49 actions (15, 15 and 19)**, with 47 acquired prefixes and one cold
+  continuous session. The 241-check release delta passes against the frozen
+  implementation. LIFE already succeeded before this change; the scoped-parent
+  ablation supplies the separate contribution proof. The [delivery report](docs/migration/lot1-retained-material-parent.md),
+  [source lineage](docs/migration/lot1-composition-return-lineage.md) and
+  [eleven-lot roadmap](docs/migration/v6-delivery-roadmap.md) distinguish its
+  contracts, integrated campaign and performance evidence. The next priority is
+  lot 2A; morphology, attention parent-return and control acquisition remain
+  incomplete. **The previous v57 milestone completes
   SMLP's first three levels in 15 actions (3, 4 and 8)** through one cold
   continuous native common session, nine acquired prefixes and two natural
   boundary replays. The managed browser independently confirms 15 actions,
@@ -260,8 +276,8 @@ Fontan's **Symbolic Reasoning Agent** research.
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
   The current entry audit connects **50 of 76 explicit DRM subquestions
-  (65.8%)** in implementation `logos-engine.typescript.v6.native-migration/0.31.0`,
-  with the newly connected recolor entry using one retained owner.
+  (65.8%)** in implementation `logos-engine.typescript.v6.native-migration/0.32.0`.
+  Lot 1's retained material parent is native coordination outside this entry count.
   The compiled original workflow inventory remains 37. This counts
   connected entries, not full behavioral parity or a percentage of all code.
   The `topological_recolor` entry records only selected returns and retains its

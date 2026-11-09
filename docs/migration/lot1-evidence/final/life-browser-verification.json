@@ -1,0 +1,67 @@
+{
+  "schema": "logos-engine.lot1.browser-verification.v1",
+  "verifiedAt": "2026-11-09T16:53:07.835897+00:00",
+  "status": "passed",
+  "surface": "Managed Sites preview, cloud browser, ordinary visible controls",
+  "checkoutNativeDigest": "8a67b57947364dab988c7081e35eb6a923beee2305eb4b8a8a89c2fc86ebea57",
+  "previewUrl": "http://127.0.0.1:4173/",
+  "finalObservedUrl": "http://127.0.0.1:4173/?game=LIFE&level=4",
+  "game": "LIFE",
+  "oneContinuousSession": true,
+  "inspectorClosedThroughoutExecution": true,
+  "observations": [
+    {
+      "interaction": "Select LIFE; open SRA Agent tab",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0
+    },
+    {
+      "interaction": "Run to next level, then Pause while initial computation is outstanding",
+      "acknowledgement": "Pausing at the next V6 action boundary. The current computation will finish safely…",
+      "settled": "Paused.",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0
+    },
+    {
+      "interaction": "Run to next level",
+      "actions": 15,
+      "levelsSolved": 1,
+      "completedPlans": 15,
+      "nativeLevel": 2
+    },
+    {
+      "interaction": "Run to next level",
+      "actions": 30,
+      "levelsSolved": 2,
+      "completedPlans": 30,
+      "nativeLevel": 3
+    },
+    {
+      "interaction": "Run 16 actions",
+      "actions": 46,
+      "levelsSolved": 2,
+      "completedPlans": 45,
+      "nativeLevel": 3,
+      "message": "Batch limit reached: 16 actions."
+    },
+    {
+      "interaction": "One action",
+      "actions": 47,
+      "levelsSolved": 2,
+      "completedPlans": 45,
+      "nativeLevel": 3,
+      "message": "One action completed."
+    },
+    {
+      "interaction": "Run to next level",
+      "actions": 49,
+      "levelsSolved": 3,
+      "completedPlans": 47,
+      "nativeLevel": 4,
+      "message": "Level completed."
+    }
+  ],
+  "qualification": "Visible UI observations recorded through the browser-control tool; no prepared route, game internals, debugger action or level jump was used. The mid-prefix interruptions preserve the same acquired session. This verifies behavior, not precise timing, arbitrary search preemption or production authentication. Native implementation provenance is the frozen checkout served by the managed preview; the production build has its separate receipt."
+}
