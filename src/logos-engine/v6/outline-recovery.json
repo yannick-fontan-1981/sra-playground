@@ -1,0 +1,254 @@
+{
+  "schema": "logos-engine.v5.outline-recovery-subsets.v1",
+  "subsets": {
+    "announced_rejoin": {
+      "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+      "sourcePath": "agents/yf_arc3_v5/drm/interaction.drm",
+      "sourceSha256": "12ce3fd97fb267c893f2241fb71a596c5b3b688324ce04211c52932e9e7b8e94",
+      "sourceSelectionPolicyRef": "policy.declared_initial_interaction_exploration",
+      "subsetPolicyRef": "native.outline.recovery.announced_rejoin",
+      "document": {
+        "text": "{\"declarations\":[{\"evaluation\":\"declared_eligibility_single\",\"fact_projections\":[{\"all_conditions\":[{\"expected\":true,\"field\":\"last_action_was_nondirectional_discrete\",\"operator\":\"equals\"},{\"expected\":1,\"field\":\"body_perimeter_marker_rejoin_count\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"controlled_lead_cardinally_adjacent_to_announced_cell\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"candidate_is_body_perimeter_marker_rejoin_route_first_action\",\"operator\":\"equals\"},{\"expected\":false,\"field\":\"body_perimeter_marker_rejoin_route_bound_reached\",\"operator\":\"equals\"}],\"id\":\"projection.exploration.post_capture_announced_cell_rejoin\",\"static_facts\":{\"active_goal_ref\":\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"active_terminal_goal_ref\":\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"advances_active_goal_chain\":true,\"dynamic_goal_binding_satisfied\":true,\"emphasis_action_eligible\":true,\"expected_effect_class\":\"effectful_novel\",\"full_metaplan_reprojection_required_after_primitive\":true,\"goal_dependency_chain_refs\":[\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"subgoal.rejoin_announced_mobile_destination_after_local_intervention\"],\"goal_graph_edge_refs\":[\"edge.post_capture_accompaniment_requires_one_announced_cell_rejoin_step\"],\"inherited_priority_from_terminal_goal\":true,\"layer_action_eligible\":true,\"open_terminal_objective_action_family_progress_eligible\":true,\"ordinary_contextual_no_effect_repeat_eligible\":true,\"parallel_action_eligible\":true,\"periodic_action_eligible\":true,\"reasoning_tree_observed_announcement_tool_intervention_action_ready_activations\":[{\"reasoning_tree_node_address\":\"2.15.5\",\"reasoning_tree_node_id\":\"composition.family.autonomous_response.observed_announcement_tool_intervention\",\"reasoning_tree_parent_address\":\"2.15\",\"reasoning_tree_parent_key\":\"composition.family.autonomous_response\",\"reasoning_tree_provisional_gate\":\"action_ready\",\"reasoning_tree_version\":\"composition-target-tree_v-1.0\"}],\"remaining_action_bound\":1,\"selection_principle_ref\":\"principle.unique_announced_cell_adjacency_supports_post_capture_rejoin\",\"subgoal_ref\":\"subgoal.rejoin_announced_mobile_destination_after_local_intervention\",\"terminal_residual_action_eligible_in_current_control_context\":true},\"templated_facts\":{\"expected_configuration_or_goal_delta_ref\":\"expectation.controlled_lead_rejoins_announced_mobile_cell.{candidate_ref}\",\"falsifier_refs\":[\"falsifier.controlled_lead_does_not_rejoin_announced_mobile_cell.{candidate_ref}\"],\"premise_claim_refs\":[\"supposition.unique_post_capture_announced_cell_rejoin.{candidate_ref}\"],\"reconciliation_checkpoint_ref\":\"checkpoint.post_capture_announced_cell_rejoin.{candidate_ref}\"}},{\"all_conditions\":[{\"expected\":true,\"field\":\"last_action_was_nondirectional_discrete\",\"operator\":\"equals\"},{\"expected\":1,\"field\":\"body_perimeter_marker_rejoin_count\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"controlled_lead_cardinally_adjacent_to_announced_cell\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"candidate_is_body_perimeter_marker_rejoin_route_first_action\",\"operator\":\"equals\"},{\"expected\":false,\"field\":\"body_perimeter_marker_rejoin_route_bound_reached\",\"operator\":\"equals\"},{\"expected\":\"discrete\",\"field\":\"interaction_measurement_kind\",\"operator\":\"equals\"},{\"expected\":false,\"field\":\"attempted_without_effect_in_current_context\",\"operator\":\"equals\"},{\"expected\":1,\"field\":\"remaining_action_bound\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"full_metaplan_reprojection_required_after_primitive\",\"operator\":\"equals\"}],\"id\":\"projection.exploration.current_announced_cell_rejoin_is_not_unrequired_cell_exploration\",\"static_facts\":{\"current_action_quantized_grid_edge_eligible\":true,\"current_action_quantized_nonrevisit_eligible\":true,\"selection_principle_ref\":\"principle.unique_announced_cell_adjacency_supports_post_capture_rejoin\"}}],\"id\":\"native.outline.recovery.announced_rejoin\",\"input_contract\":\"yf_arc3_v5.authority_input.selection.v1\",\"kind\":\"selection_policy\",\"output_contract\":\"yf_arc3_v5.authority_output.selection.v1\",\"reason_refs\":[\"reason.one_cardinal_rejoin_step_restores_preserved_accompaniment\"],\"supported_operators\":[\"SELECT\"]}],\"module_id\":\"native.outline.recovery.announced_rejoin\"}",
+        "sha256": "980768b7c94a1274ddcc569a23456d54ad2c75e1faa2321021e5553bbe5a9e93"
+      },
+      "selectionTier": {
+        "id": "tier.post_capture_announced_cell_rejoin",
+        "all_conditions": [
+          {
+            "field": "interaction_kind",
+            "operator": "equals",
+            "expected": "discrete"
+          },
+          {
+            "field": "last_action_was_nondirectional_discrete",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "body_perimeter_marker_rejoin_count",
+            "operator": "equals",
+            "expected": 1
+          },
+          {
+            "field": "controlled_lead_cardinally_adjacent_to_announced_cell",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "candidate_is_body_perimeter_marker_rejoin_route_first_action",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "body_perimeter_marker_rejoin_route_bound_reached",
+            "operator": "equals",
+            "expected": false
+          },
+          {
+            "field": "attempted_without_effect_in_current_context",
+            "operator": "equals",
+            "expected": false
+          }
+        ],
+        "reason_ref": "reason.one_cardinal_rejoin_step_restores_preserved_accompaniment"
+      },
+      "sourcePointers": [
+        {
+          "id": "projection.exploration.post_capture_announced_cell_rejoin",
+          "pointer": [
+            "declarations",
+            217,
+            "fact_projections",
+            624
+          ]
+        },
+        {
+          "id": "projection.exploration.current_announced_cell_rejoin_is_not_unrequired_cell_exploration",
+          "pointer": [
+            "declarations",
+            217,
+            "fact_projections",
+            666
+          ]
+        },
+        {
+          "id": "tier.post_capture_announced_cell_rejoin",
+          "pointer": [
+            "declarations",
+            217,
+            "selection_tiers",
+            15
+          ]
+        }
+      ],
+      "qualification": "Exact original V5 projections and tier, evaluated as a bounded question. No complete V5 caller parity is claimed.",
+      "wrapperQualification": "The reduced wrapper retains source operator and contract names. Its eligibility label is metadata; it adds no predicate or physical action authority."
+    },
+    "overlaid_capture": {
+      "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+      "sourcePath": "agents/yf_arc3_v5/drm/interaction.drm",
+      "sourceSha256": "12ce3fd97fb267c893f2241fb71a596c5b3b688324ce04211c52932e9e7b8e94",
+      "sourceSelectionPolicyRef": "policy.declared_initial_interaction_exploration",
+      "subsetPolicyRef": "native.outline.recovery.overlaid_capture",
+      "document": {
+        "text": "{\"declarations\":[{\"evaluation\":\"declared_eligibility_single\",\"fact_projections\":[{\"all_conditions\":[{\"expected\":false,\"field\":\"last_action_was_nondirectional_discrete\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"controlled_lead_distinct_uniform_interior_present\",\"operator\":\"equals\"},{\"expected\":0,\"field\":\"adjacent_compact_body_without_visible_cardinal_marker_count\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"filled_logical_cell_opposite_last_direction_present\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"candidate_is_unique_effectful_nondirectional_local_action\",\"operator\":\"equals\"},{\"expected\":1,\"field\":\"compact_body_perimeter_cardinal_announcement_count\",\"operator\":\"equals\"},{\"expected\":false,\"field\":\"body_perimeter_marker_rejoin_route_bound_reached\",\"operator\":\"equals\"},{\"field\":\"premise_claim_refs\",\"operator\":\"is_absent\"}],\"id\":\"projection.exploration.post_obstruction_overlaid_body_capture_test.preserve_observed_correspondence_beneficiary.initialize_only_absent_premises\",\"static_facts\":{\"premise_claim_refs\":[]}},{\"all_conditions\":[{\"expected\":false,\"field\":\"last_action_was_nondirectional_discrete\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"controlled_lead_distinct_uniform_interior_present\",\"operator\":\"equals\"},{\"expected\":0,\"field\":\"adjacent_compact_body_without_visible_cardinal_marker_count\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"filled_logical_cell_opposite_last_direction_present\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"candidate_is_unique_effectful_nondirectional_local_action\",\"operator\":\"equals\"},{\"expected\":1,\"field\":\"compact_body_perimeter_cardinal_announcement_count\",\"operator\":\"equals\"},{\"expected\":false,\"field\":\"body_perimeter_marker_rejoin_route_bound_reached\",\"operator\":\"equals\"}],\"id\":\"projection.exploration.post_obstruction_overlaid_body_capture_test.preserve_observed_correspondence_beneficiary\",\"sequence_compositions\":[{\"max_items\":128,\"output_field\":\"premise_claim_refs\",\"source_fields\":[\"premise_claim_refs\",\"post_obstruction_capture_support_claim_refs\"],\"unique_items\":true}],\"static_facts\":{\"active_goal_ref\":\"goal.immobilize_contact_causing_mobile_entity\",\"active_terminal_goal_ref\":\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"advances_active_goal_chain\":true,\"candidate_is_general_unscoped_probe\":false,\"current_contact_mechanism_probe\":false,\"current_measured_precondition_fields\":[\"compact_body_perimeter_cardinal_announcement_count\",\"body_perimeter_marker_rejoin_route_bound_reached\"],\"declared_terminal_goal_ref\":\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"dynamic_goal_binding_satisfied\":true,\"emphasis_action_eligible\":true,\"expected_effect_class\":\"effectful_novel\",\"full_metaplan_reprojection_required_after_primitive\":true,\"goal_dependency_chain_refs\":[\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"goal.immobilize_contact_causing_mobile_entity\",\"subgoal.test_local_immobilization_on_contact_causing_mobile_cell\"],\"goal_graph_edge_refs\":[\"edge.protected_correspondence_requires_contact_prevention\",\"edge.mobile_immobilization_requires_local_obstruction_on_mobile_cell\"],\"goal_ref\":\"goal.immobilize_contact_causing_mobile_entity\",\"inherited_priority_from_terminal_goal\":true,\"layer_action_eligible\":true,\"mechanism_question_ref\":null,\"open_terminal_objective_action_family_progress_eligible\":true,\"ordinary_contextual_no_effect_repeat_eligible\":true,\"parallel_action_eligible\":true,\"periodic_action_eligible\":true,\"reasoning_tree_observed_announcement_tool_intervention_action_ready_activations\":[{\"reasoning_tree_node_address\":\"2.15.5\",\"reasoning_tree_node_id\":\"composition.family.autonomous_response.observed_announcement_tool_intervention\",\"reasoning_tree_parent_address\":\"2.15\",\"reasoning_tree_parent_key\":\"composition.family.autonomous_response\",\"reasoning_tree_provisional_gate\":\"action_ready\",\"reasoning_tree_version\":\"composition-target-tree_v-1.0\"}],\"remaining_action_bound\":1,\"selection_precondition_support_required\":true,\"selection_principle_ref\":\"principle.post_obstruction_unmarked_adjacent_body_supports_bounded_capture\",\"subgoal_ref\":\"subgoal.test_local_immobilization_on_contact_causing_mobile_cell\",\"terminal_residual_action_eligible_in_current_control_context\":true},\"templated_facts\":{\"discriminating_experiment_ref\":\"experiment.local_overlaid_body_immobilization.{candidate_ref}\",\"expected_configuration_or_goal_delta_ref\":\"expectation.local_obstruction_immobilizes_overlaid_compact_body.{candidate_ref}\",\"falsifier_refs\":[\"falsifier.overlaid_compact_body_is_not_immobilized.{candidate_ref}\"],\"post_obstruction_capture_support_claim_refs\":[\"supposition.controlled_lead_overlays_post_obstruction_compact_body.{candidate_ref}\",\"supposition.unique_current_body_announcement_perimeter_correspondence.{candidate_ref}\"],\"reconciliation_checkpoint_ref\":\"checkpoint.local_overlaid_body_immobilization.{candidate_ref}\"}}],\"id\":\"native.outline.recovery.overlaid_capture\",\"input_contract\":\"yf_arc3_v5.authority_input.selection.v1\",\"kind\":\"selection_policy\",\"output_contract\":\"yf_arc3_v5.authority_output.selection.v1\",\"reason_refs\":[\"reason.direct_capture_closes_the_observed_contact_risk\"],\"supported_operators\":[\"SELECT\"]}],\"module_id\":\"native.outline.recovery.overlaid_capture\"}",
+        "sha256": "65aad0f01daca4c9ec6dc3c59817a23b47d2c86f9ebec9e2c54b82615f7584ce"
+      },
+      "selectionTier": {
+        "id": "tier.post_obstruction_overlaid_body_capture_test",
+        "all_conditions": [
+          {
+            "field": "interaction_kind",
+            "operator": "equals",
+            "expected": "discrete"
+          },
+          {
+            "field": "last_action_was_nondirectional_discrete",
+            "operator": "equals",
+            "expected": false
+          },
+          {
+            "field": "controlled_lead_distinct_uniform_interior_present",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "adjacent_compact_body_without_visible_cardinal_marker_count",
+            "operator": "equals",
+            "expected": 0
+          },
+          {
+            "field": "filled_logical_cell_opposite_last_direction_present",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "candidate_is_unique_effectful_nondirectional_local_action",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "attempted_without_effect_in_current_context",
+            "operator": "equals",
+            "expected": false
+          }
+        ],
+        "reason_ref": "reason.direct_capture_closes_the_observed_contact_risk"
+      },
+      "sourcePointers": [
+        {
+          "id": "projection.exploration.post_obstruction_overlaid_body_capture_test.preserve_observed_correspondence_beneficiary.initialize_only_absent_premises",
+          "pointer": [
+            "declarations",
+            217,
+            "fact_projections",
+            1300
+          ]
+        },
+        {
+          "id": "projection.exploration.post_obstruction_overlaid_body_capture_test.preserve_observed_correspondence_beneficiary",
+          "pointer": [
+            "declarations",
+            217,
+            "fact_projections",
+            1301
+          ]
+        },
+        {
+          "id": "tier.post_obstruction_overlaid_body_capture_test",
+          "pointer": [
+            "declarations",
+            217,
+            "selection_tiers",
+            16
+          ]
+        }
+      ],
+      "qualification": "Exact original V5 projections and tier, evaluated as a bounded question. No complete V5 caller parity is claimed.",
+      "wrapperQualification": "The reduced wrapper retains source operator and contract names. Its eligibility label is metadata; it adds no predicate or physical action authority."
+    },
+    "adjacent_capture": {
+      "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+      "sourcePath": "agents/yf_arc3_v5/drm/interaction.drm",
+      "sourceSha256": "12ce3fd97fb267c893f2241fb71a596c5b3b688324ce04211c52932e9e7b8e94",
+      "sourceSelectionPolicyRef": "policy.declared_initial_interaction_exploration",
+      "subsetPolicyRef": "native.outline.recovery.adjacent_capture",
+      "document": {
+        "text": "{\"declarations\":[{\"evaluation\":\"declared_eligibility_single\",\"fact_projections\":[{\"all_conditions\":[{\"expected\":true,\"field\":\"last_action_was_nondirectional_discrete\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"controlled_lead_distinct_uniform_interior_present\",\"operator\":\"equals\"},{\"expected\":1,\"field\":\"adjacent_compact_body_without_visible_cardinal_marker_count\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"candidate_is_adjacent_unmarked_compact_body_route_first_action\",\"operator\":\"equals\"},{\"expected\":false,\"field\":\"adjacent_unmarked_compact_body_route_bound_reached\",\"operator\":\"equals\"},{\"expected\":1,\"field\":\"compact_body_perimeter_cardinal_announcement_count\",\"operator\":\"equals\"},{\"expected\":false,\"field\":\"body_perimeter_marker_rejoin_route_bound_reached\",\"operator\":\"equals\"},{\"field\":\"premise_claim_refs\",\"operator\":\"is_absent\"}],\"id\":\"projection.exploration.post_obstruction_adjacent_body_capture_route.preserve_observed_correspondence_beneficiary.initialize_only_absent_premises\",\"static_facts\":{\"premise_claim_refs\":[]}},{\"all_conditions\":[{\"expected\":true,\"field\":\"last_action_was_nondirectional_discrete\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"controlled_lead_distinct_uniform_interior_present\",\"operator\":\"equals\"},{\"expected\":1,\"field\":\"adjacent_compact_body_without_visible_cardinal_marker_count\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"candidate_is_adjacent_unmarked_compact_body_route_first_action\",\"operator\":\"equals\"},{\"expected\":false,\"field\":\"adjacent_unmarked_compact_body_route_bound_reached\",\"operator\":\"equals\"},{\"expected\":1,\"field\":\"compact_body_perimeter_cardinal_announcement_count\",\"operator\":\"equals\"},{\"expected\":false,\"field\":\"body_perimeter_marker_rejoin_route_bound_reached\",\"operator\":\"equals\"}],\"id\":\"projection.exploration.post_obstruction_adjacent_body_capture_route.preserve_observed_correspondence_beneficiary\",\"sequence_compositions\":[{\"max_items\":128,\"output_field\":\"premise_claim_refs\",\"source_fields\":[\"premise_claim_refs\",\"post_obstruction_capture_support_claim_refs\"],\"unique_items\":true}],\"static_facts\":{\"active_goal_ref\":\"goal.immobilize_contact_causing_mobile_entity\",\"active_terminal_goal_ref\":\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"advances_active_goal_chain\":true,\"candidate_is_general_unscoped_probe\":false,\"current_contact_mechanism_probe\":false,\"current_measured_precondition_fields\":[\"compact_body_perimeter_cardinal_announcement_count\",\"body_perimeter_marker_rejoin_route_bound_reached\"],\"declared_terminal_goal_ref\":\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"dynamic_goal_binding_satisfied\":true,\"emphasis_action_eligible\":true,\"expected_effect_class\":\"effectful_novel\",\"full_metaplan_reprojection_required_after_primitive\":true,\"goal_dependency_chain_refs\":[\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"goal.immobilize_contact_causing_mobile_entity\",\"subgoal.reach_contact_causing_mobile_current_cell\"],\"goal_graph_edge_refs\":[\"edge.protected_correspondence_requires_contact_prevention\",\"edge.mobile_immobilization_requires_controlled_lead_on_mobile_cell\"],\"goal_ref\":\"goal.immobilize_contact_causing_mobile_entity\",\"inherited_priority_from_terminal_goal\":true,\"layer_action_eligible\":true,\"mechanism_question_ref\":null,\"open_terminal_objective_action_family_progress_eligible\":true,\"ordinary_contextual_no_effect_repeat_eligible\":true,\"parallel_action_eligible\":true,\"periodic_action_eligible\":true,\"reasoning_tree_observed_announcement_tool_intervention_action_ready_activations\":[{\"reasoning_tree_node_address\":\"2.15.5\",\"reasoning_tree_node_id\":\"composition.family.autonomous_response.observed_announcement_tool_intervention\",\"reasoning_tree_parent_address\":\"2.15\",\"reasoning_tree_parent_key\":\"composition.family.autonomous_response\",\"reasoning_tree_provisional_gate\":\"action_ready\",\"reasoning_tree_version\":\"composition-target-tree_v-1.0\"}],\"remaining_action_bound\":1,\"selection_precondition_support_required\":true,\"selection_principle_ref\":\"principle.post_obstruction_unmarked_adjacent_body_supports_bounded_capture\",\"subgoal_ref\":\"subgoal.reach_contact_causing_mobile_current_cell\",\"terminal_residual_action_eligible_in_current_control_context\":true},\"templated_facts\":{\"expected_configuration_or_goal_delta_ref\":\"expectation.controlled_lead_overlays_adjacent_compact_body.{candidate_ref}\",\"falsifier_refs\":[\"falsifier.controlled_lead_does_not_overlay_adjacent_compact_body.{candidate_ref}\"],\"post_obstruction_capture_support_claim_refs\":[\"supposition.post_obstruction_adjacent_unmarked_compact_body.{candidate_ref}\",\"supposition.unique_current_body_announcement_perimeter_correspondence.{candidate_ref}\"],\"reconciliation_checkpoint_ref\":\"checkpoint.post_obstruction_capture_route.{candidate_ref}\"}}],\"id\":\"native.outline.recovery.adjacent_capture\",\"input_contract\":\"yf_arc3_v5.authority_input.selection.v1\",\"kind\":\"selection_policy\",\"output_contract\":\"yf_arc3_v5.authority_output.selection.v1\",\"reason_refs\":[\"reason.direct_capture_closes_the_observed_contact_risk\"],\"supported_operators\":[\"SELECT\"]}],\"module_id\":\"native.outline.recovery.adjacent_capture\"}",
+        "sha256": "ef314bd67b7f65e78f55d20134fd52f322dc57205d1080d1cf388cd1a80a23b2"
+      },
+      "selectionTier": {
+        "id": "tier.post_obstruction_adjacent_body_capture_route",
+        "all_conditions": [
+          {
+            "field": "interaction_kind",
+            "operator": "equals",
+            "expected": "discrete"
+          },
+          {
+            "field": "last_action_was_nondirectional_discrete",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "controlled_lead_distinct_uniform_interior_present",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "adjacent_compact_body_without_visible_cardinal_marker_count",
+            "operator": "equals",
+            "expected": 1
+          },
+          {
+            "field": "candidate_is_adjacent_unmarked_compact_body_route_first_action",
+            "operator": "equals",
+            "expected": true
+          },
+          {
+            "field": "adjacent_unmarked_compact_body_route_bound_reached",
+            "operator": "equals",
+            "expected": false
+          },
+          {
+            "field": "attempted_without_effect_in_current_context",
+            "operator": "equals",
+            "expected": false
+          }
+        ],
+        "reason_ref": "reason.direct_capture_closes_the_observed_contact_risk"
+      },
+      "sourcePointers": [
+        {
+          "id": "projection.exploration.post_obstruction_adjacent_body_capture_route.preserve_observed_correspondence_beneficiary.initialize_only_absent_premises",
+          "pointer": [
+            "declarations",
+            217,
+            "fact_projections",
+            1298
+          ]
+        },
+        {
+          "id": "projection.exploration.post_obstruction_adjacent_body_capture_route.preserve_observed_correspondence_beneficiary",
+          "pointer": [
+            "declarations",
+            217,
+            "fact_projections",
+            1299
+          ]
+        },
+        {
+          "id": "tier.post_obstruction_adjacent_body_capture_route",
+          "pointer": [
+            "declarations",
+            217,
+            "selection_tiers",
+            17
+          ]
+        }
+      ],
+      "qualification": "Exact original V5 projections and tier, evaluated as a bounded question. No complete V5 caller parity is claimed.",
+      "wrapperQualification": "The reduced wrapper retains source operator and contract names. Its eligibility label is metadata; it adds no predicate or physical action authority."
+    }
+  }
+}

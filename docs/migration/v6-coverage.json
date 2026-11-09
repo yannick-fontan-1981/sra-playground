@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 108,
-    "partiallyTransferredModules": 100,
+    "componentVerifiedModules": 110,
+    "partiallyTransferredModules": 102,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1161,
+    "pendingModules": 1157,
     "strategyFamilies": 16
   },
   "families": [
@@ -17286,9 +17286,18 @@
           "endLine": 302
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-outline-geometry.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-outline-service-reference.py",
+        "tests/fixtures/v6-outline-service-reference.json.gz.parts.json",
+        "tests/v6-outline-service-reference.test.ts",
+        "docs/migration/native-campaigns-v53/source-reference-contracts.json",
+        "scripts/compare-v53-outline-public-evidence.py",
+        "docs/migration/native-campaigns-v53/attempt2/outline-service-original-comparison.json.gz"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/enclosure_transfer_graph.py",
@@ -17615,9 +17624,19 @@
           "endLine": 166
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-outline-identity.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-outline-service-reference.py",
+        "tests/fixtures/v6-outline-service-reference.json.gz.parts.json",
+        "tests/v6-outline-service-reference.test.ts",
+        "docs/migration/native-campaigns-v53/source-reference-contracts.json",
+        "scripts/compare-v53-outline-public-evidence.py",
+        "docs/migration/native-campaigns-v53/attempt2/outline-service-original-comparison.json.gz",
+        "docs/migration/native-campaigns-v53/attempt2/outline-service-identity-recipes.json.gz"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/entry_memory_c.py",
@@ -24954,7 +24973,10 @@
       "status": "partial_transfer",
       "targets": [
         "src/logos-engine/v6-coupled-pair-route.ts",
-        "src/logos-engine/v6-alternating-graph-observation.ts"
+        "src/logos-engine/v6-alternating-graph-observation.ts",
+        "src/logos-engine/v6-outline-geometry.ts",
+        "src/logos-engine/v6-outline-identity.ts",
+        "src/logos-engine/v6-outline-rejoin.ts"
       ],
       "proof": [
         "scripts/export-v6-coupled-pair-route-reference.py",
@@ -24964,7 +24986,20 @@
         "scripts/export-v6-alternating-graph-measurement-reference.py",
         "tests/fixtures/v6-alternating-graph-measurement-reference.json.gz",
         "tests/v6-alternating-graph-measurement.test.ts",
-        "docs/migration/v36-alternating-graph.md"
+        "docs/migration/v36-alternating-graph.md",
+        "scripts/export-v6-outline-service-reference.py",
+        "tests/fixtures/v6-outline-service-reference.json.gz.parts.json",
+        "tests/v6-outline-service-reference.test.ts",
+        "docs/migration/native-campaigns-v53/source-reference-contracts.json",
+        "scripts/export-v6-outline-prior-raster-reference.py",
+        "tests/fixtures/v6-outline-prior-raster-reference.json.gz",
+        "docs/migration/native-campaigns-v53/source-reference-prior-raster.json",
+        "scripts/compare-v53-outline-public-evidence.py",
+        "docs/migration/native-campaigns-v53/attempt2/outline-service-original-comparison.json.gz",
+        "scripts/export-v6-outline-rejoin-reference.py",
+        "tests/fixtures/v6-outline-rejoin-reference.json.gz",
+        "tests/v6-outline-rejoin-reference.test.ts",
+        "docs/migration/v53-outline-service-and-current-relations.md"
       ]
     },
     {
@@ -74039,7 +74074,14 @@
         "tests/v6-native-family-registration.test.ts",
         "scripts/export-v6-radial-port-reference.py",
         "tests/fixtures/v6-radial-port-reference.json.gz",
-        "tests/v6-radial-port-parity.test.ts"
+        "tests/v6-radial-port-parity.test.ts",
+        "docs/migration/native-campaigns-v53/attempt7/source-manifest.json",
+        "docs/migration/native-campaigns-v53/attempt7/execution-cn04.json",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-campaign.json.gz",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-public-trace.json.gz",
+        "docs/migration/v53-outline-service-and-current-relations.md",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-browser-verification.json",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-browser-final.png"
       ]
     },
     {
@@ -77580,7 +77622,14 @@
         "tests/v6-native-family-registration.test.ts",
         "scripts/export-v6-radial-port-reference.py",
         "tests/fixtures/v6-radial-port-reference.json.gz",
-        "tests/v6-radial-port-parity.test.ts"
+        "tests/v6-radial-port-parity.test.ts",
+        "docs/migration/native-campaigns-v53/attempt7/source-manifest.json",
+        "docs/migration/native-campaigns-v53/attempt7/execution-cn04.json",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-campaign.json.gz",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-public-trace.json.gz",
+        "docs/migration/v53-outline-service-and-current-relations.md",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-browser-verification.json",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-browser-final.png"
       ]
     },
     {
@@ -78654,7 +78703,14 @@
         "tests/v6-native-family-registration.test.ts",
         "scripts/export-v6-radial-port-reference.py",
         "tests/fixtures/v6-radial-port-reference.json.gz",
-        "tests/v6-radial-port-parity.test.ts"
+        "tests/v6-radial-port-parity.test.ts",
+        "docs/migration/native-campaigns-v53/attempt7/source-manifest.json",
+        "docs/migration/native-campaigns-v53/attempt7/execution-cn04.json",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-campaign.json.gz",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-public-trace.json.gz",
+        "docs/migration/v53-outline-service-and-current-relations.md",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-browser-verification.json",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-browser-final.png"
       ]
     },
     {
@@ -79739,7 +79795,14 @@
         "tests/v6-native-family-registration.test.ts",
         "scripts/export-v6-radial-port-reference.py",
         "tests/fixtures/v6-radial-port-reference.json.gz",
-        "tests/v6-radial-port-parity.test.ts"
+        "tests/v6-radial-port-parity.test.ts",
+        "docs/migration/native-campaigns-v53/attempt7/source-manifest.json",
+        "docs/migration/native-campaigns-v53/attempt7/execution-cn04.json",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-campaign.json.gz",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-public-trace.json.gz",
+        "docs/migration/v53-outline-service-and-current-relations.md",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-browser-verification.json",
+        "docs/migration/native-campaigns-v53/attempt7/cn04-browser-final.png"
       ]
     },
     {
@@ -90340,9 +90403,69 @@
           "endLine": 116
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-outline-service.ts",
+        "src/logos-engine/v6-outline-geometry.ts",
+        "src/logos-engine/v6-outline-continuation.ts",
+        "src/logos-engine/v6/outline-continuation.json",
+        "src/logos-engine/v6-outline-public-context.ts",
+        "src/logos-engine/v6/outline-public-context.json",
+        "src/logos-engine/v6-outline-rejoin.ts",
+        "src/logos-engine/v6-outline-recovery-policy.ts",
+        "src/logos-engine/v6/outline-recovery.json",
+        "src/logos-engine/v6-outline-access.ts",
+        "src/logos-engine/v6-outline-arrival.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-outline-service-reference.py",
+        "tests/fixtures/v6-outline-service-reference.json.gz.parts.json",
+        "tests/v6-outline-service-reference.test.ts",
+        "docs/migration/native-campaigns-v53/source-reference-contracts.json",
+        "scripts/export-v6-outline-local-count-reference.py",
+        "tests/fixtures/v6-outline-local-count-reference.json.gz",
+        "tests/v6-outline-local-count.test.ts",
+        "docs/migration/native-campaigns-v53/source-reference-local-count.json",
+        "scripts/compare-v53-outline-public-evidence.py",
+        "docs/migration/native-campaigns-v53/attempt2/outline-service-original-comparison.json.gz",
+        "docs/migration/native-campaigns-v53/attempt1/outline-service-original-comparison.json.gz",
+        "tests/v6-outline-kernel.test.ts",
+        "tests/v6-outline-arbitration.test.ts",
+        "tests/v6-outline-continuation.test.ts",
+        "tests/v6-outline-continuation-reference.test.ts",
+        "docs/migration/native-campaigns-v53/source-reference-continuation.json",
+        "docs/migration/native-campaigns-v53/attempt2/outline-continuation-source-witness-comparison.json.gz",
+        "tests/v6-outline-public-context.test.ts",
+        "scripts/export-v6-outline-prior-raster-reference.py",
+        "tests/fixtures/v6-outline-prior-raster-reference.json.gz",
+        "docs/migration/native-campaigns-v53/source-reference-prior-raster.json",
+        "scripts/export-v6-outline-rejoin-reference.py",
+        "tests/fixtures/v6-outline-rejoin-reference.json.gz",
+        "tests/v6-outline-rejoin-reference.test.ts",
+        "scripts/export-v6-outline-recovery-policy.py",
+        "tests/fixtures/v6-outline-recovery-policy-reference.json.gz",
+        "tests/v6-outline-recovery-policy.test.ts",
+        "tests/v6-outline-access.test.ts",
+        "tests/v6-outline-recovery-integration.test.ts",
+        "docs/migration/v53-outline-service-and-current-relations.md",
+        "docs/migration/native-campaigns-v53/attempt4/source-manifest.json",
+        "docs/migration/native-campaigns-v53/attempt4/interruption.json",
+        "docs/migration/native-campaigns-v53/attempt5/source-manifest.json",
+        "docs/migration/native-campaigns-v53/attempt5/interruption-esct.json",
+        "docs/migration/native-campaigns-v53/attempt5/interruption-keyd.json",
+        "docs/migration/native-campaigns-v53/attempt6/source-manifest.json",
+        "tests/v6-outline-arrival.test.ts",
+        "tests/v6-material-recovery-priority.test.ts",
+        "tests/v6-program-control-discovery-integration.test.ts",
+        "docs/migration/native-campaigns-v53/attempt6/execution-esct.json",
+        "docs/migration/native-campaigns-v53/attempt6/esct-campaign.json.gz",
+        "docs/migration/native-campaigns-v53/attempt7/source-manifest.json",
+        "docs/migration/v6-entry-point-progress.json",
+        "docs/migration/native-campaigns-v53/attempt7/execution-esct.json",
+        "docs/migration/native-campaigns-v53/attempt7/validation/delta-tests-run.json",
+        "docs/migration/native-campaigns-v53/attempt7/validation/checks-run.json",
+        "docs/migration/native-campaigns-v53/attempt7/regression-final-summary.json"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/outline_service/policy.py",
@@ -90387,9 +90510,24 @@
           "endLine": 27
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-outline-policy.ts",
+        "src/logos-engine/v6/outline-policy.json"
+      ],
+      "proof": [
+        "scripts/export-v6-outline-service-reference.py",
+        "tests/fixtures/v6-outline-service-reference.json.gz.parts.json",
+        "tests/v6-outline-service-reference.test.ts",
+        "docs/migration/native-campaigns-v53/source-reference-contracts.json",
+        "scripts/export-v6-outline-local-count-reference.py",
+        "tests/fixtures/v6-outline-local-count-reference.json.gz",
+        "tests/v6-outline-local-count.test.ts",
+        "docs/migration/native-campaigns-v53/source-reference-local-count.json",
+        "scripts/compare-v53-outline-public-evidence.py",
+        "docs/migration/native-campaigns-v53/attempt2/outline-service-original-comparison.json.gz",
+        "tests/v6-outline-kernel.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/partial_correspondence.py",
@@ -97311,6 +97449,9 @@
     "v50 also declares transient_returned_unlearned_contact_refusal_scope as a native coordination evolution, not original Python caller parity. It retains every public frame, final protocol, command and actual Kernel transition, distinguishing transient return from a stationary observation. The first non-null current window question remains in declared order. A cold typed relation must be remeasured and have supports disjoint from both the invitation point and every transient effect pixel. Subsequent questions require event-backed acquired context and current guards. Returning to the same public image does not establish hidden-state equivalence or an understood effect. The first actual native LIFE failure remains preserved separately from the corrected frozen campaign; all six complete-migration gates remain false.",
     "v51 connects field_service_composition in native implementation 0.21.0. The four-list connection metric becomes 42 of 76 entries (55.3%); it measures connected entry points, not whole-code completion or game success. Own nested-control, envelope, service and transfer evidence belongs to the same common memory. The independent original component and actual native common-caller campaign are reported separately. Numerical identity and inherited-caller limitations remain explicit, and all six complete-migration gates remain false. The frozen 172-file native source completes VALV levels 1–3 in 28 actions (10/10/8), 28 acquired prefixes, 63 own events and two natural-boundary replays. The isolated original component independently produces the same 28 commands and 29 complete public packets (238 frames); its complete strategic caller is outside this comparison. No new native priority rule is introduced in v51.",
     "v52 connects observed_framed_transfer and observed_framed_analogy to one FramedTransfer owner at their declared positions, giving 44 of 76 connected entries (57.9%) in native implementation 0.22.0. The three own source modules are component_verified on independently generated bounded contracts; V5 dependency modules and the whole common caller keep their separate qualifications. The strict source GARE component stops at twelve actions and one level, and the separately preserved native target-three attempt on the frozen c227cb63aa743ed5790acc7e0cb825e107a4a6ac87471754a3216084ff224bf2 source stops after 77 actions and two completed levels at the level-three active-time budget. This attempt is failed, not a three-level completion or full-game WIN. Initialization, strict-guard and heap-exhaustion failures remain separate evidence. Native current-point witness binding and bounded reduction-search abstention are explicitly declared extensions, not new Python transfers or full original-caller parity. All subsequent attempts retain separate source snapshots and public evidence. The final successful attempt is qualified in the following note; all six complete-migration gates remain false.",
-    "The separately frozen final v52 attempt9 completes GARE levels 1–3 in 53 actions (7/9/37), 53 prefixes and one cold continuous session on native digest e32656de6ab64b0f6bdf8188e7bdeac06b4b3063c0bfb6d5531484cefb900f60, with 181 native files. It enters level 4 with NOT_FINISHED at its declared three-level target, not full-game WIN. The complete 54-packet/235-frame trajectory retains the original isolated component's first 12 commands and 13 packets exactly. Original six-field acquisitions and all 53 native checkpoints are independently recomputed; 47 original records, three stationary annex observations and two phased directed-only observations are distinct domains. Seven of 38 executed Framed proposals differ from strict source, with eight explicit native guard receipts. The directed composition uses one real receiver preparation and then one current question retaining both competing offsets; it stores no future action sequence and claims no reception before the real return. The entry metric remains 44/76 (57.9%), and all six complete-migration gates remain false. Earlier initialization, guard, heap, budget and priority-regression failures remain preserved with their exact historical source archives; their evidence is not replaced by this success."
+    "The separately frozen final v52 attempt9 completes GARE levels 1–3 in 53 actions (7/9/37), 53 prefixes and one cold continuous session on native digest e32656de6ab64b0f6bdf8188e7bdeac06b4b3063c0bfb6d5531484cefb900f60, with 181 native files. It enters level 4 with NOT_FINISHED at its declared three-level target, not full-game WIN. The complete 54-packet/235-frame trajectory retains the original isolated component's first 12 commands and 13 packets exactly. Original six-field acquisitions and all 53 native checkpoints are independently recomputed; 47 original records, three stationary annex observations and two phased directed-only observations are distinct domains. Seven of 38 executed Framed proposals differ from strict source, with eight explicit native guard receipts. The directed composition uses one real receiver preparation and then one current question retaining both competing offsets; it stores no future action sequence and claims no reception before the real return. The entry metric remains 44/76 (57.9%), and all six complete-migration gates remain false. Earlier initialization, guard, heap, budget and priority-regression failures remain preserved with their exact historical source archives; their evidence is not replaced by this success.",
+    "V53 adds the strict observed_outline_service entry with its two own Python modules component_verified and only bounded consumed closures of V5 interaction.py, entity_identity.py and enclosure_family.py marked partial_transfer. Initial source contracts, the separate literal remote-count correction and the exact attempt2 original-component comparison are distinct evidence. The initial large gzip fixture is stored losslessly via its .parts.json manifest and byte parts, without changing expected values. Exact selected source proposals and seven-field acquisitions/checkpoints do not imply complete caller parity: raw ordinary native guard/outcome values were not retained, so the original guards/outcomes are recomputed only for compatibility with actual dispatch/sealing. The two ESCT attempts used for those original-component comparisons, attempt1 and attempt2, complete zero levels. Later campaign history is separately retained in docs/migration/v53-outline-service-and-current-relations.md: attempt3 and interrupted attempt5 each record one completed ESCT level; attempt4 and the attempt5 KEYD run remain interrupted with zero completed levels. Attempt6 completes one ESCT level and fails its three-level target at the level2 active-time budget after 117 actions and 381.55 cumulative active seconds. Attempt7 final-source CN04 passes its three-level target through the existing port_assembly provider; its result and the 45/76 connection audit have separate receipts and are not inferred from Outline component tests. Attempt7 ESCT and final release checks remain pending. No complete-migration gate is inferred from these component or campaign results.",
+    "V53 native coordination is a separate scope from strict Outline transfer. A source-derived V5 continuation subset supports a current-service preference; a second explicit subset reuses projection1296/tier19 and order19/20 for the current obstructing-inset operator question. Their unchanged-Python condition/projection/tier receipts are bounded declarative evidence, not full V5 selection or original V6 caller parity. The optional public-transition annex retains the immediately preceding actual public final raster and its current scope, outside the seven-field source state; the original V6 wrapper does not supply that raster. After an actual selected access question, the annex may also retain its bounded access_relation, validated against the prior observation, row hash, scope, selected command and guard. Each selected primitive refreshes this relation; no recursive prior-access chain or future route is retained. The annex binds only the 16-character JSON public-frame identifier. Its producer declines alternate caller hash domains, including the full NumPy rowsDigest, without rewriting observations or interrupting ordinary source acquisition; stale annex evidence is cleared. Supported-domain byte mismatches and malformed restored annexes still fail the same strict validation. Native proposals requiring a current-service witness must pass the common admission gate, current remeasurement, per-primitive guards and WHY/ACT. The V6 current-trial witness requires an actual current frontier occurrence and an untried command in that exact public protocol; any retained prior attempt removes that preference. Its explicitly distinct effect inventory covers actual caller edges in the current epoch and score, retaining a positive observation only when the final frame hash changes; unchanged or transient-returning frames remain unknown. The trial and effect domains do not claim V5 producer/context parity, universal causation or action authority. Current questions retain one primitive, replan on the real return and assert no future effect or stored winning route. The exact V5 recovery subsets separately retain interaction.drm declaration217 projections624/666 with tier15, projections1300/1301 with tier16, and projections1298/1299 with tier17. Their 59 original-evaluator cases and the 49 original-Python rejoin geometry cases do not prove whole-policy selection or unchanged V6 caller ordering. Native access applies only when no transferred service or recovery proposal applies and an actual historical local method is available. It distinguishes current reacquired control from a unique current revalidation of recalled control; the latter has historical evidence but no acquired current deltas and uses explicitly revisable interface priors. Measured conflicting directions cannot be overwritten by those priors. Its announced-cell question targets a current visible singleton in an exact unique body/marker/perimeter motif. Its separately named current_observed_body_access_question targets the actual current solid body only after an adjacent public transition in the same epoch and score revalidates an exact previous selected relation or observed motif. The body must be unchanged or have moved exactly to the preceding observed singleton; missing current marker fields remain null. A boundary-only recalled context has before/command null and cannot supply that temporal fallback. Only current final public rasters qualify; intermediate animation frames do not. Both access modes select one in-bounds lattice-aligned distance-reducing primitive and claim no safe route or guaranteed effect. Attempt7 adds native v6-outline-arrival.ts, absent from frozen attempt6. It requires the actual selected observed-body access return to reach its prior body cell, reacquired control, an unchanged unique compatible perimeter, current same-value inset remnants and visibly changed inset pixels. It asserts no complete current body, survival, identity or capture. V5 principle.effectful_local_operator_transfers_to_new_changed_bfs_endpoint motivates the question, but exact_source_projection_matched remains false: no standard completed-BFS endpoint is supplied. The service separately revalidates one currently available input with positive historical local-method evidence, a complete current effect inventory without a competing observed local operator, and the actual untried caller context. Unknown other-input effects remain unknown; historical effects never become fabricated current-epoch inventory. The one conditional local question retains recovery.contact, not a new access relation, and still requires ordinary preservation and WHY/ACT. These native helpers are not additional transferred Python modules. All six completion gates remain false.",
+    "V53 final-source validation: attempt7 freezes 195 native files at digest d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70, implementation logos-engine.typescript.v6.native-migration/0.27.0. The independent cold CN04 execution receipt confirms unchanged native source and execution code, 73 actions from port_assembly, three completed levels with 18/31/24 actions, 29 prefixes and one session. Its public result is level 4 NOT_FINISHED with target_levels_completed, not full-game VICTORY. No action sequence, learned checkpoint, Python agent or level jump is supplied. This supports the existing integrated port-assembly capability and does not establish Outline efficacy or full V6 parity. The actual entry audit records 45/76 connected declarations (59.2%); recovery, access, arrival and this campaign add no further declared entry. The actual-browser receipt on the same frozen source independently records three Run to next level clicks from level 1, counters 18/1 then 49/2 then 73/3, 29 completed plans and entry to level 4, with inspection closed. Its single 384x384 canvas sample at a 1363x936 viewport is not a responsive or performance benchmark. The targeted delta suite passes 3611 tests; typecheck, audits and production build pass. All nine recorded trajectories retain their commands and official results, with the original comparison-domain failures and their explicit LIFE/GARE resolutions preserved in regression-final-summary.json. ESCT completes only L1 in 16 actions, then stops at the L2 active-time budget after 113 total actions; it is not a three-level success. Publication is tracked by the saved Site version separately from these immutable execution receipts. All six completion gates remain false."
   ]
 }

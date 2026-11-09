@@ -8,6 +8,10 @@ public/vendor/pyodide/
 __pycache__/
 *.pyc
 
+# v53 exact source archives are tracked in checked, ordered byte parts.
+/docs/migration/native-campaigns-v53/attempt*/source-archive.tar.gz
+/tests/fixtures/v6-outline-service-reference.json.gz
+
 # v52 evidence: lossless gzip is tracked; restore JSON with scripts/restore-v52-evidence.py
 /docs/migration/native-campaigns-v52/attempt7/gare-three-levels.json
 /docs/migration/native-campaigns-v52/attempt8/gare-three-levels.json

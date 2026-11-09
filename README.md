@@ -28,7 +28,23 @@ Fontan's **Symbolic Reasoning Agent** research.
   the V7 common reasoning architecture is in progress. The connected native
   path supports guarded coordinate actions, committed sequences, Pause and
   cross-level memory. Use **One action**, **Run 16 actions**, or **Run to next
-  level**; opening the tab does not move the game. **The v52 milestone completes
+  level**; opening the tab does not move the game. **The v53 milestone completes
+  CN04's first three levels in 73 actions (18, 31 and 24)** through one cold
+  continuous native common session, 29 acquired prefixes and two natural
+  boundary replays. All 73 inputs come from the already connected generic
+  `rigid_port_assembly` service; no game-specific selector, imported solution
+  or level jump supplies the trajectory. The target stops at entry to level 4
+  with `NOT_FINISHED`, without claiming a full victory.
+  This release connects `observed_outline_service` using the pinned V6 owner,
+  DRM/SRC workflows and V5 geometry/recovery helpers. Explicit native
+  compositions separately revalidate recalled control, retain one actual
+  visual relation when a marker disappears, and ask a conditional local
+  question at an observed access arrival. They add no game identifier,
+  palette convention, fixed coordinate or stored action route. CN04 validates
+  existing port assembly; it is not evidence that Outline solves three levels
+  of ESCT. The audit connects 45/76 source entries (59.2%), with complete V6
+  parity still unverified. See the [v53 report](docs/migration/v53-outline-service-and-current-relations.md).
+  **The previous v52 milestone completes
   GARE's first three levels in 53 actions (7, 9 and 37)** through one cold
   continuous native common session, 53 acquired prefixes and two natural
   boundary replays. The source-declared `observed_framed_transfer` and
@@ -40,7 +56,7 @@ Fontan's **Symbolic Reasoning Agent** research.
   helpers. The target stops on entry to level 4 with `NOT_FINISHED`;
   no complete GARE victory is claimed. The browser independently confirms
   53 actions and three levels, with seven unchanged 442 px board-height
-  samples and the same compact UI as v51. The connection audit is now
+  samples and the same compact UI as v51. Its connection audit was
   44/76 source entries (57.9%); complete V6 parity remains unverified.
   See the [v52 report](docs/migration/v52-framed-transfer-and-public-packet-acquisition.md).
   **The previous v51 milestone completes
@@ -169,16 +185,15 @@ Fontan's **Symbolic Reasoning Agent** research.
   **Previous v38 milestone: TICT completes all six levels with official `WIN`
   in 55 actions**, using the transferred cell-patch composition. See the
   [v38 report](docs/migration/v38-cell-placement.md).
-  The current entry audit connects **44 of 76 explicit DRM subquestions
-  (57.9%)** in implementation `logos-engine.typescript.v6.native-migration/0.22.0`,
-  with the newly connected `observed_framed_transfer` and
-  `observed_framed_analogy` entries sharing one acquired owner. This counts
+  The current entry audit connects **45 of 76 explicit DRM subquestions
+  (59.2%)** in implementation `logos-engine.typescript.v6.native-migration/0.27.0`,
+  with the newly connected `observed_outline_service` using one acquired owner.
+  Its native coordination extensions add no source entry. This counts
   connected entries, not full behavioral parity or a percentage of all code.
-  The next step is generic `observed_outline_service`: transfer actual outline
-  motion, interior-contrast evidence and current control rebinding. The
-  read-only screening finds outlines in 57 of 100 initial views and 30 unique
-  directional candidates, but no acquired cold control for this entry. Its
-  next evaluation game will be selected after actual control acquisition.
+  The next source entry to study is `reactive_contact_continuation`, preserving
+  the distinction between an observed response, a historical method and a
+  current conditional continuation. Selection and validation will use public
+  observations; no new game outcome is assumed for that pending entry.
   Complete V6 migration remains in progress.
   HANO, SYME and DNOI reproduce
   three original V6 level completions each, with 30, 36 and 17 actions. These

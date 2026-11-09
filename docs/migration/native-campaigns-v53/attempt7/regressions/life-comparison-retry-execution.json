@@ -1,0 +1,48 @@
+{
+  "schema": "logos-engine.v53.retained-comparison-retry.v1",
+  "command": [
+    "node",
+    "scripts/compare-v52-regressions.mjs",
+    "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-life-comparison-v8kppn9i/baseline.json",
+    "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/artifacts/v53-life-comparison-v8kppn9i/current.json",
+    "/workspace/scratch/1cef09f3652c/playground-site/.sites-checkout/docs/migration/native-campaigns-v53/attempt7/regressions/life-comparison-retry.json"
+  ],
+  "exitCode": -9,
+  "elapsedSeconds": 4.351779222488403,
+  "inputs": [
+    {
+      "path": "docs/migration/native-campaigns-v52/attempt9/life-recorded-public-replay.json.gz",
+      "sha256": "6c605911111588f1b6a437e23ec9fd4f6092b06e1bd8a8ea6483380380fdadc1",
+      "bytes": 347694
+    },
+    {
+      "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-replay.json.gz",
+      "sha256": "ebf4d1f109cc4c48bdba1fd1fd51073742cc3f34aba70f6b84c5b00232cd5599",
+      "bytes": 275577
+    },
+    {
+      "path": "scripts/compare-v52-regressions.mjs",
+      "sha256": "546187729a8b14653ba7e5916cfa35b74d15440b7bab5b5eda69a732614d8c51",
+      "bytes": 18658
+    },
+    {
+      "path": "scripts/compare-v52-material-projection.mjs",
+      "sha256": "a54b7b368687ec553e88dfe675bd88b2fc85014f30907d2b21f49af090a53895",
+      "bytes": 13413
+    },
+    {
+      "path": "docs/migration/native-campaigns-v50/life-material-identity-recipes.json.gz",
+      "sha256": "9f584098c09f837f5b594263dc9ec6b3bf592c3cbba3d905c3d9993d52c9c128",
+      "bytes": 311969
+    }
+  ],
+  "inputsUnchanged": true,
+  "output": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-comparison-retry-output.log.gz",
+    "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+    "bytes": 20
+  },
+  "comparison": null,
+  "passed": false,
+  "qualification": "Only the unchanged original comparator is retried on the same immutable baseline and already completed native replay. No agent rerun, source edit, weaker assertion or result replacement occurs. The original batch result is retained separately."
+}

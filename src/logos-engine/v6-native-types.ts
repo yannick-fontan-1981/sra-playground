@@ -152,6 +152,11 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   groundedInquiryWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeGroundedInquiryWitness | null>;
   /** Read-only current relation or acquired context, explicitly distinguished. */
   currentInquiryWitness?(proposal: P, observation: NativeObservation, rows: NativeRows): NativeMaybePromise<NativeRecord | null>;
+  /** Native coordination only: a source-declared current service may take
+   * precedence over an independent unknown-effect question. The caller must
+   * supply its real current trial scope; this witness releases no action. */
+  currentRequiredServiceWitness?(proposal: P, observation: NativeObservation, rows: NativeRows,
+    currentTrial: NativeRecord): NativeMaybePromise<NativeRecord | null>;
   /** Native coordination only: distinguish an unacquired question from a
    * current continuation supported by an actual official acquisition. These
    * read-only attestations never authorize a physical action. */

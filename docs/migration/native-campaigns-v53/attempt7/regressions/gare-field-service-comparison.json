@@ -1,0 +1,2566 @@
+{
+  "schema": "logos-engine.v53.gare-field-service-regression.v1",
+  "passed": true,
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "baseline": {
+    "path": "docs/migration/native-campaigns-v52/attempt9/gare-three-levels.json.gz",
+    "sha256": "ba5d0652e3f0d34fb18f5f9c804964feb38fc171899281c7c4a36bba73b28135",
+    "bytes": 3775917,
+    "uncompressedSha256": "5f7e53a53a439851be3cb60fcb5d79d28c781ad49c968ded63efa479be6088f3",
+    "sourceDigest": "e32656de6ab64b0f6bdf8188e7bdeac06b4b3063c0bfb6d5531484cefb900f60"
+  },
+  "current": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gare-replay.json.gz",
+    "sha256": "c5ce892c5dbbc9b2b706fbb4ab7a6cb0f94f99c300536acd22882310c0a57c65",
+    "bytes": 2845118,
+    "uncompressedSha256": "d0c0d14ba7cc0626145a9033e886488c630e29a4d49f03733e5eb585ed028f6a",
+    "sourceDigest": "d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70",
+    "mode": "recorded-public-replay"
+  },
+  "priorComparison": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gare-comparison.json",
+    "sha256": "2f8cd7cef1b4b8e7553a39fafb7269585ad2ebb31d496dc1cbc42ac6008a81dc",
+    "bytes": 380553,
+    "retainedPassedValue": false,
+    "unchanged": true,
+    "otherChecksPassed": 18,
+    "inapplicableEmptyLayerAssertion": "field-service layers remain empty on the seven earlier trajectories"
+  },
+  "generator": {
+    "path": "scripts/compare-v53-gare-field-service.py",
+    "sha256": "543e7c6c1de1e73da4f3f3d5842ce09b736c71e7c83bbda0b3cc4c7f08b51930",
+    "bytes": 14814
+  },
+  "identitySource": {
+    "files": [
+      {
+        "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/terminal_composition.py",
+        "sha256": "10ab6ba513d3cc0b4dbf96868d8c716eee449068dba3f2fcdf06d5b35566609e",
+        "bytes": 31558
+      },
+      {
+        "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/nested_control_access.py",
+        "sha256": "0dd84832e0b864bbd1614c86fbf32861288c922969051321b9741b202ff0e7e5",
+        "bytes": 6801
+      },
+      {
+        "path": "scripts/export-v6-field-service-reference.py",
+        "sha256": "7f64c2c89dc430d42b044239dd5476a2dfbdd72284a0943b4789663d2ff40d8f",
+        "bytes": 32592
+      },
+      {
+        "path": "tests/fixtures/v6-field-service-reference.json.gz",
+        "sha256": "b583f58ecf7feabae1353cc3fd7dce241cb1c0197d78cb62c983adb7dc62dfb7",
+        "bytes": 2852033
+      }
+    ],
+    "verifiedExistingConstructorRecipes": 42,
+    "constructorPlanFields": [
+      "epoch",
+      "score",
+      "observation_ref",
+      "frame_digest",
+      "selected",
+      "alternative_enclosures",
+      "action",
+      "expected_effect",
+      "scope"
+    ],
+    "postConstructionFields": [
+      "no_visible_effect_contract"
+    ],
+    "recipe": "Unchanged nested_question ref expression over every constructor plan field. propose appends no_visible_effect_contract after identity construction; that field remains in the complete payload comparison."
+  },
+  "compared": {
+    "prefixes": 53,
+    "fieldsPerPrefix": 5,
+    "fieldComparisons": 265,
+    "acquiredEventsPerRun": 14,
+    "completeProviderPayloadsPerRun": 14,
+    "proposalIdentityPairs": 14,
+    "independentRawIdentityChecks": 28,
+    "negativeZeroPathListsCompared": 134
+  },
+  "observationNamespaces": [
+    {
+      "side": "baseline",
+      "namespace": "sra-v6-c0e26959-9588-4922-8008-bcf60cb103dc",
+      "occurrences": 290,
+      "uniqueReferences": 28,
+      "fieldServiceEvents": 14,
+      "verifiedProposalIdentities": 14
+    },
+    {
+      "side": "current",
+      "namespace": "sra-v6-e56f09c9-f068-4eb1-9f54-d804209ecf59",
+      "occurrences": 290,
+      "uniqueReferences": 28,
+      "fieldServiceEvents": 14,
+      "verifiedProposalIdentities": 14
+    }
+  ],
+  "identityChecks": [
+    {
+      "side": "baseline",
+      "prefixIndex": 19,
+      "prefixRef": "prefix_evidence:20",
+      "actual": "C_nested_43e534ea5c422dad8207",
+      "recomputed": "C_nested_43e534ea5c422dad8207",
+      "rebased": "C_nested_f985e2e4598208e2bb19",
+      "completeRetainedPlanSha256": "a2a463d577504a79b49c5354afb30813a65d5a46da33190530692fb92d8a4128",
+      "sourceIdentityOperandSha256": "43e534ea5c422dad8207baa26e3e94cd6c165e8639dd45232d631df22939feb0",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "baseline",
+      "prefixIndex": 21,
+      "prefixRef": "prefix_evidence:22",
+      "actual": "C_nested_91174e90d39b65cf7139",
+      "recomputed": "C_nested_91174e90d39b65cf7139",
+      "rebased": "C_nested_f574949ed5a6e250382e",
+      "completeRetainedPlanSha256": "55f319aef1d8182e1c7163d02db12386317b4d9deeebac333a421e647b93a8d1",
+      "sourceIdentityOperandSha256": "91174e90d39b65cf7139d1bb7d07b358b56bf088b22e05ba0278b0581502a52c",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "baseline",
+      "prefixIndex": 23,
+      "prefixRef": "prefix_evidence:24",
+      "actual": "C_nested_2f4de2904bc7a5fd189c",
+      "recomputed": "C_nested_2f4de2904bc7a5fd189c",
+      "rebased": "C_nested_b872cea3b7333d24ea88",
+      "completeRetainedPlanSha256": "34cd9313db295902e4a8a9ac9c66f95bef46056c9439755a4b170583050aeaf0",
+      "sourceIdentityOperandSha256": "2f4de2904bc7a5fd189c1e57820f71e1a1ce54949b89ef72ab47a4d611d374e5",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "baseline",
+      "prefixIndex": 25,
+      "prefixRef": "prefix_evidence:26",
+      "actual": "C_nested_d562364ddff926077d69",
+      "recomputed": "C_nested_d562364ddff926077d69",
+      "rebased": "C_nested_b024f0c6f9abd4a87e58",
+      "completeRetainedPlanSha256": "a9e6db283bf91862c9960970b42c75457942dc3bdd6be82f1cf358bee84c4523",
+      "sourceIdentityOperandSha256": "d562364ddff926077d6905aabedfb43ba40011bd6936c8873c7cecd328e192ee",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "baseline",
+      "prefixIndex": 28,
+      "prefixRef": "prefix_evidence:29",
+      "actual": "C_nested_6378bfb45bab030c66a0",
+      "recomputed": "C_nested_6378bfb45bab030c66a0",
+      "rebased": "C_nested_0723a4b6de88bea15964",
+      "completeRetainedPlanSha256": "cf10532ba7e04e2c1eb4ea9bf677d41855a9116f2dd372ff6ee2c223c8886b9c",
+      "sourceIdentityOperandSha256": "6378bfb45bab030c66a01fa6a5b975e149ea93f610bb137b1fbf068544c46e00",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "baseline",
+      "prefixIndex": 30,
+      "prefixRef": "prefix_evidence:31",
+      "actual": "C_nested_d8d7ae97c79345b7cc55",
+      "recomputed": "C_nested_d8d7ae97c79345b7cc55",
+      "rebased": "C_nested_a483d5bb0d6da8833632",
+      "completeRetainedPlanSha256": "0082f4d3e14ddfde34297bc5c4a7978dcaa4dca7356a18fb00a3536725bf4dd0",
+      "sourceIdentityOperandSha256": "d8d7ae97c79345b7cc5579889e565ec913bf13af507533d48b27038daf3902ca",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "baseline",
+      "prefixIndex": 32,
+      "prefixRef": "prefix_evidence:33",
+      "actual": "C_nested_086c13a3d5bb11a68265",
+      "recomputed": "C_nested_086c13a3d5bb11a68265",
+      "rebased": "C_nested_096d3ed38a404c573d28",
+      "completeRetainedPlanSha256": "2a2e8f5c9a012ef0aec7f9c7074e037a59e37e8cdf146ef70859a9007d27cf4f",
+      "sourceIdentityOperandSha256": "086c13a3d5bb11a68265fd9de34f6b0f3ea33241d016c51888c0a0c3889839ed",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "baseline",
+      "prefixIndex": 34,
+      "prefixRef": "prefix_evidence:35",
+      "actual": "C_nested_c20ca5f8013004f7120d",
+      "recomputed": "C_nested_c20ca5f8013004f7120d",
+      "rebased": "C_nested_cc44024f208898775b34",
+      "completeRetainedPlanSha256": "e4553bde496f49e669b2410557aa284c8d7dca99096de488c2e7b5fe12527a01",
+      "sourceIdentityOperandSha256": "c20ca5f8013004f7120d62c89147011dac9fc9e692ffab78d91f490ea3403ecb",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "baseline",
+      "prefixIndex": 36,
+      "prefixRef": "prefix_evidence:37",
+      "actual": "C_nested_9fb6c37396bc5bbcf910",
+      "recomputed": "C_nested_9fb6c37396bc5bbcf910",
+      "rebased": "C_nested_3d3bef84bb7cf441b07b",
+      "completeRetainedPlanSha256": "556fe89d101ec98143d73389648fe66c501351bbab6560914f16489f14c4f05f",
+      "sourceIdentityOperandSha256": "9fb6c37396bc5bbcf91088660aa8a337fe757bac0b961220e97112804f510bcb",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "baseline",
+      "prefixIndex": 38,
+      "prefixRef": "prefix_evidence:39",
+      "actual": "C_nested_00545507173293bdfb18",
+      "recomputed": "C_nested_00545507173293bdfb18",
+      "rebased": "C_nested_e41ef6454d03a859bed5",
+      "completeRetainedPlanSha256": "a217b4ea3478cf9b821245211365f2b6321dd4e98b1e3b449e509babcf63cf09",
+      "sourceIdentityOperandSha256": "00545507173293bdfb18b700ec1d55827b062e1a44a8c879d80401075972b7da",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "baseline",
+      "prefixIndex": 40,
+      "prefixRef": "prefix_evidence:41",
+      "actual": "C_nested_a5917fa593479b599bb0",
+      "recomputed": "C_nested_a5917fa593479b599bb0",
+      "rebased": "C_nested_3e32b0bb3655f1c65c1e",
+      "completeRetainedPlanSha256": "00164ad8b7e076972f319d6d6eaec7b53d0a1c9551615b5bcb7d3e6d4b526402",
+      "sourceIdentityOperandSha256": "a5917fa593479b599bb073b7fae0a61a071cedb88be173f7f094575e81e7bdf1",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "baseline",
+      "prefixIndex": 42,
+      "prefixRef": "prefix_evidence:43",
+      "actual": "C_nested_38438ad1f5a3e31a1d67",
+      "recomputed": "C_nested_38438ad1f5a3e31a1d67",
+      "rebased": "C_nested_a7615daec24faf265b85",
+      "completeRetainedPlanSha256": "ecd0b063f1c55f92aac409d20f2e1e6136d873622f3677fb52760f5afee02090",
+      "sourceIdentityOperandSha256": "38438ad1f5a3e31a1d6722ec1ab09a0e43d238c54ecc5716c6e9eaa5280a1678",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "baseline",
+      "prefixIndex": 44,
+      "prefixRef": "prefix_evidence:45",
+      "actual": "C_nested_850ee3bb4479339646c7",
+      "recomputed": "C_nested_850ee3bb4479339646c7",
+      "rebased": "C_nested_61ee3e0de5cd97e4d40a",
+      "completeRetainedPlanSha256": "7b4f2cdffb6110beaccf8febfd75fc8ca02cad8dc0d9066f6557e0e546fafec4",
+      "sourceIdentityOperandSha256": "850ee3bb4479339646c711969d5fef4276ea86e4147925dc18450fefc681e4a1",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "baseline",
+      "prefixIndex": 46,
+      "prefixRef": "prefix_evidence:47",
+      "actual": "C_nested_cef7d631008bd8c02cce",
+      "recomputed": "C_nested_cef7d631008bd8c02cce",
+      "rebased": "C_nested_c84a5b4d39d9a5b93cb3",
+      "completeRetainedPlanSha256": "79be7ae736ac6fdd2384a8e38281a3b5c9857eac5ea068a6f3b963bbf58321d9",
+      "sourceIdentityOperandSha256": "cef7d631008bd8c02ccea789aa4af17166fb4cb8f2811f3f130829c61d9ad468",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "current",
+      "prefixIndex": 19,
+      "prefixRef": "prefix_evidence:20",
+      "actual": "C_nested_9a9029cf29d9e2f3b3e8",
+      "recomputed": "C_nested_9a9029cf29d9e2f3b3e8",
+      "rebased": "C_nested_f985e2e4598208e2bb19",
+      "completeRetainedPlanSha256": "a07821a1cf99236f17523fb4cc3847a459ce1f93b8b6c7b655e1bb7f7481e74c",
+      "sourceIdentityOperandSha256": "9a9029cf29d9e2f3b3e8bcbf0eaf2f19235fb2eb6e1d4e51b0297c69562c56e9",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "current",
+      "prefixIndex": 21,
+      "prefixRef": "prefix_evidence:22",
+      "actual": "C_nested_3b14b9b5582a36a6f1cf",
+      "recomputed": "C_nested_3b14b9b5582a36a6f1cf",
+      "rebased": "C_nested_f574949ed5a6e250382e",
+      "completeRetainedPlanSha256": "9c0a9d6c47cb59c1085c72b3e702a367fc0670c724909ff1dfe02d7643948028",
+      "sourceIdentityOperandSha256": "3b14b9b5582a36a6f1cff0e7f984a85d12cbc0d28444adcc5d99973df24d9194",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "current",
+      "prefixIndex": 23,
+      "prefixRef": "prefix_evidence:24",
+      "actual": "C_nested_c661973189277964321a",
+      "recomputed": "C_nested_c661973189277964321a",
+      "rebased": "C_nested_b872cea3b7333d24ea88",
+      "completeRetainedPlanSha256": "ae05a31eb85b27e58ebdaa80334bb18c4f1b010f518cb3c0ff3b1f3fc1783bf1",
+      "sourceIdentityOperandSha256": "c661973189277964321afddc214780be382e69b80bd0b1fb7fbe25311c7bd76e",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "current",
+      "prefixIndex": 25,
+      "prefixRef": "prefix_evidence:26",
+      "actual": "C_nested_998a9ee1e85097677b5b",
+      "recomputed": "C_nested_998a9ee1e85097677b5b",
+      "rebased": "C_nested_b024f0c6f9abd4a87e58",
+      "completeRetainedPlanSha256": "41cc7316f0a72ad7e436a418fc5d61babce831026eb74afef6693210a836d6d4",
+      "sourceIdentityOperandSha256": "998a9ee1e85097677b5b1b7abc7fb7d9ccc877a145abc516ad55ff563e7535f0",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "current",
+      "prefixIndex": 28,
+      "prefixRef": "prefix_evidence:29",
+      "actual": "C_nested_6f454ee5815d4da0b44f",
+      "recomputed": "C_nested_6f454ee5815d4da0b44f",
+      "rebased": "C_nested_0723a4b6de88bea15964",
+      "completeRetainedPlanSha256": "4711e6327f253b87a09fd8a96b22f43e29c043cc6c631b015df4446b9dda460e",
+      "sourceIdentityOperandSha256": "6f454ee5815d4da0b44fe6a0605554f660bffc61cf4bd23b4f100a2f0173914e",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "current",
+      "prefixIndex": 30,
+      "prefixRef": "prefix_evidence:31",
+      "actual": "C_nested_4f54b77d0511aa632a86",
+      "recomputed": "C_nested_4f54b77d0511aa632a86",
+      "rebased": "C_nested_a483d5bb0d6da8833632",
+      "completeRetainedPlanSha256": "27f2af134bcd967f9a2b4363742a18ab4bb1a8f2babdc460d0a65389b078d946",
+      "sourceIdentityOperandSha256": "4f54b77d0511aa632a86c1a6f02de522567cb948087f8d3c6f4820f45cf31dc2",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "current",
+      "prefixIndex": 32,
+      "prefixRef": "prefix_evidence:33",
+      "actual": "C_nested_bb8754cd931c8916ca5e",
+      "recomputed": "C_nested_bb8754cd931c8916ca5e",
+      "rebased": "C_nested_096d3ed38a404c573d28",
+      "completeRetainedPlanSha256": "6dff5fb8f771491efd3aebcd8743f75706b64c3677707cfdafdc7811e8e98dbc",
+      "sourceIdentityOperandSha256": "bb8754cd931c8916ca5ed0c14f64acff4f84f831ccbcfe388683588d87faeaf9",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "current",
+      "prefixIndex": 34,
+      "prefixRef": "prefix_evidence:35",
+      "actual": "C_nested_3d1b43e6d57b3df5c1d8",
+      "recomputed": "C_nested_3d1b43e6d57b3df5c1d8",
+      "rebased": "C_nested_cc44024f208898775b34",
+      "completeRetainedPlanSha256": "8fa02019edfeb70451592b5d0ac5226838355d156c8033ea9f0536afd81a7162",
+      "sourceIdentityOperandSha256": "3d1b43e6d57b3df5c1d844e4ddfe9027d6b1d48c644e3246e9eafc5c84c4aa5f",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "current",
+      "prefixIndex": 36,
+      "prefixRef": "prefix_evidence:37",
+      "actual": "C_nested_e818a5e4f3e4d54b0613",
+      "recomputed": "C_nested_e818a5e4f3e4d54b0613",
+      "rebased": "C_nested_3d3bef84bb7cf441b07b",
+      "completeRetainedPlanSha256": "1b75ff5fdc234461237bac6f15b27bb2a962b2165f53b549ceb911a18d560974",
+      "sourceIdentityOperandSha256": "e818a5e4f3e4d54b06132fe602d668115570da7e94ae243e093c8225c8e0a3a4",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "current",
+      "prefixIndex": 38,
+      "prefixRef": "prefix_evidence:39",
+      "actual": "C_nested_1c98f825cafd5f179594",
+      "recomputed": "C_nested_1c98f825cafd5f179594",
+      "rebased": "C_nested_e41ef6454d03a859bed5",
+      "completeRetainedPlanSha256": "05670264696e5aaa72faf43eb9918689907092ce6fd1f5493142f1f86efe7cc3",
+      "sourceIdentityOperandSha256": "1c98f825cafd5f1795949373eace243771d7a81f67675dc49b5c0586e6e3d1ae",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "current",
+      "prefixIndex": 40,
+      "prefixRef": "prefix_evidence:41",
+      "actual": "C_nested_6376b84b10ea586e1cd6",
+      "recomputed": "C_nested_6376b84b10ea586e1cd6",
+      "rebased": "C_nested_3e32b0bb3655f1c65c1e",
+      "completeRetainedPlanSha256": "532f783958ccdd3a28ddd80b995dccf7d6e3fabc9751f1ce844880adfa9f002f",
+      "sourceIdentityOperandSha256": "6376b84b10ea586e1cd66e13fcb77b9a92b812ad6fd9dd12f48b14c427cb5625",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "current",
+      "prefixIndex": 42,
+      "prefixRef": "prefix_evidence:43",
+      "actual": "C_nested_a2064fc1ea1d8fd7d58d",
+      "recomputed": "C_nested_a2064fc1ea1d8fd7d58d",
+      "rebased": "C_nested_a7615daec24faf265b85",
+      "completeRetainedPlanSha256": "9b4e199db1a5014e04ad299f0fe5218e512726f4e0036dc46af1bf017e24a4d0",
+      "sourceIdentityOperandSha256": "a2064fc1ea1d8fd7d58d7cbe2bd9999271eb59d50b7e21f8eadb591b1b2b65d6",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "current",
+      "prefixIndex": 44,
+      "prefixRef": "prefix_evidence:45",
+      "actual": "C_nested_00f0eec17475671af529",
+      "recomputed": "C_nested_00f0eec17475671af529",
+      "rebased": "C_nested_61ee3e0de5cd97e4d40a",
+      "completeRetainedPlanSha256": "87a24895f16ba0da5a25836eabba6678ea9366db98b2f8dd399e5054c467b1eb",
+      "sourceIdentityOperandSha256": "00f0eec17475671af52920cc4633ace29f56e9b183e432f02aea77db2fcee3db",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    },
+    {
+      "side": "current",
+      "prefixIndex": 46,
+      "prefixRef": "prefix_evidence:47",
+      "actual": "C_nested_458a01a75e6ba58347d5",
+      "recomputed": "C_nested_458a01a75e6ba58347d5",
+      "rebased": "C_nested_c84a5b4d39d9a5b93cb3",
+      "completeRetainedPlanSha256": "4ab861cf0d07bd420247491aab0fa35a26efcf0087158c1ad28460676f068757",
+      "sourceIdentityOperandSha256": "458a01a75e6ba58347d585ec74dbdb0933eaaa0a101ad27ba7c93b8d9b68cb33",
+      "postConstructionFieldsStillCompared": [
+        "no_visible_effect_contract"
+      ],
+      "passed": true
+    }
+  ],
+  "prefixChecks": [
+    {
+      "prefixIndex": 0,
+      "prefixRef": "prefix_evidence:1",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 1,
+      "prefixRef": "prefix_evidence:2",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 2,
+      "prefixRef": "prefix_evidence:3",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 3,
+      "prefixRef": "prefix_evidence:4",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 4,
+      "prefixRef": "prefix_evidence:5",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 5,
+      "prefixRef": "prefix_evidence:6",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 6,
+      "prefixRef": "prefix_evidence:7",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 7,
+      "prefixRef": "prefix_evidence:8",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 8,
+      "prefixRef": "prefix_evidence:9",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 9,
+      "prefixRef": "prefix_evidence:10",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 10,
+      "prefixRef": "prefix_evidence:11",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 11,
+      "prefixRef": "prefix_evidence:12",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 12,
+      "prefixRef": "prefix_evidence:13",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 13,
+      "prefixRef": "prefix_evidence:14",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 14,
+      "prefixRef": "prefix_evidence:15",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 15,
+      "prefixRef": "prefix_evidence:16",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 16,
+      "prefixRef": "prefix_evidence:17",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 17,
+      "prefixRef": "prefix_evidence:18",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 18,
+      "prefixRef": "prefix_evidence:19",
+      "fieldServicePresent": false,
+      "eventCount": 0,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+          "currentCanonicalSha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 19,
+      "prefixRef": "prefix_evidence:20",
+      "fieldServicePresent": true,
+      "eventCount": 1,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+          "currentCanonicalSha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "82f0bcf71c554803755d70bba82b254df31f89d08fc5ad1d9bfc29906dbb9537",
+          "currentCanonicalSha256": "82f0bcf71c554803755d70bba82b254df31f89d08fc5ad1d9bfc29906dbb9537"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "715fdd414395bff1bc132f9c3b00a659db3e71c0e915fc7acb40fdca47c2dc37",
+          "currentCanonicalSha256": "715fdd414395bff1bc132f9c3b00a659db3e71c0e915fc7acb40fdca47c2dc37"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "4591ecb6a1cfd9cc3718b0acb3c6186f2afe121a9f35a461273987bbae500a84",
+          "currentCanonicalSha256": "4591ecb6a1cfd9cc3718b0acb3c6186f2afe121a9f35a461273987bbae500a84"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 20,
+      "prefixRef": "prefix_evidence:21",
+      "fieldServicePresent": false,
+      "eventCount": 1,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+          "currentCanonicalSha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "82f0bcf71c554803755d70bba82b254df31f89d08fc5ad1d9bfc29906dbb9537",
+          "currentCanonicalSha256": "82f0bcf71c554803755d70bba82b254df31f89d08fc5ad1d9bfc29906dbb9537"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 21,
+      "prefixRef": "prefix_evidence:22",
+      "fieldServicePresent": true,
+      "eventCount": 2,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+          "currentCanonicalSha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "c8fe01397fabab03bfdb286b69bf15c8b28740ce23b09e443be047d8f23a0fbc",
+          "currentCanonicalSha256": "c8fe01397fabab03bfdb286b69bf15c8b28740ce23b09e443be047d8f23a0fbc"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "bd85557bd87a43f8db2aaaf7af81b49c9ffeea0cf570e9fb1fbe892c6b880f3b",
+          "currentCanonicalSha256": "bd85557bd87a43f8db2aaaf7af81b49c9ffeea0cf570e9fb1fbe892c6b880f3b"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "6234d51e6d715559c525e0bb60f5063657c4c28720ab1532bb8d30db8bcae54e",
+          "currentCanonicalSha256": "6234d51e6d715559c525e0bb60f5063657c4c28720ab1532bb8d30db8bcae54e"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 22,
+      "prefixRef": "prefix_evidence:23",
+      "fieldServicePresent": false,
+      "eventCount": 2,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+          "currentCanonicalSha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "c8fe01397fabab03bfdb286b69bf15c8b28740ce23b09e443be047d8f23a0fbc",
+          "currentCanonicalSha256": "c8fe01397fabab03bfdb286b69bf15c8b28740ce23b09e443be047d8f23a0fbc"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 23,
+      "prefixRef": "prefix_evidence:24",
+      "fieldServicePresent": true,
+      "eventCount": 3,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+          "currentCanonicalSha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "6ee33395b647a367b086ea1d03b618eb12746d38f0ccda8310581cc88b14aaa3",
+          "currentCanonicalSha256": "6ee33395b647a367b086ea1d03b618eb12746d38f0ccda8310581cc88b14aaa3"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "c208d00632f2ef0a798c97efc0cd41238500c3be02a3a92d96b210f422ad3180",
+          "currentCanonicalSha256": "c208d00632f2ef0a798c97efc0cd41238500c3be02a3a92d96b210f422ad3180"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "cfbdc54ec074c0c77f913b63191b20c80525cb0ecd71b98cf4063f4f3e3626fd",
+          "currentCanonicalSha256": "cfbdc54ec074c0c77f913b63191b20c80525cb0ecd71b98cf4063f4f3e3626fd"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 24,
+      "prefixRef": "prefix_evidence:25",
+      "fieldServicePresent": false,
+      "eventCount": 3,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
+          "currentCanonicalSha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "6ee33395b647a367b086ea1d03b618eb12746d38f0ccda8310581cc88b14aaa3",
+          "currentCanonicalSha256": "6ee33395b647a367b086ea1d03b618eb12746d38f0ccda8310581cc88b14aaa3"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 25,
+      "prefixRef": "prefix_evidence:26",
+      "fieldServicePresent": true,
+      "eventCount": 4,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+          "currentCanonicalSha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "43e46aa87fed1a48483cfce78cd3a4b1b59f08e61e9c0914f76300adf878e7e3",
+          "currentCanonicalSha256": "43e46aa87fed1a48483cfce78cd3a4b1b59f08e61e9c0914f76300adf878e7e3"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "fa95efd88ff1c05a57978a882e453fa570433aba517c3fced78bb598c17c6e4f",
+          "currentCanonicalSha256": "fa95efd88ff1c05a57978a882e453fa570433aba517c3fced78bb598c17c6e4f"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "ebc8f73457b43e8ebdff3e83cb71ee1bf2946a7c61659f310da00f5b84c40d21",
+          "currentCanonicalSha256": "ebc8f73457b43e8ebdff3e83cb71ee1bf2946a7c61659f310da00f5b84c40d21"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 26,
+      "prefixRef": "prefix_evidence:27",
+      "fieldServicePresent": false,
+      "eventCount": 4,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+          "currentCanonicalSha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "43e46aa87fed1a48483cfce78cd3a4b1b59f08e61e9c0914f76300adf878e7e3",
+          "currentCanonicalSha256": "43e46aa87fed1a48483cfce78cd3a4b1b59f08e61e9c0914f76300adf878e7e3"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 27,
+      "prefixRef": "prefix_evidence:28",
+      "fieldServicePresent": false,
+      "eventCount": 4,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+          "currentCanonicalSha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "43e46aa87fed1a48483cfce78cd3a4b1b59f08e61e9c0914f76300adf878e7e3",
+          "currentCanonicalSha256": "43e46aa87fed1a48483cfce78cd3a4b1b59f08e61e9c0914f76300adf878e7e3"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 28,
+      "prefixRef": "prefix_evidence:29",
+      "fieldServicePresent": true,
+      "eventCount": 5,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+          "currentCanonicalSha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "f96315ef1cd78c22899011f3a62ffeab940186ad563b81b9e87999d8f364201e",
+          "currentCanonicalSha256": "f96315ef1cd78c22899011f3a62ffeab940186ad563b81b9e87999d8f364201e"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "9d77a53310d26937c002daa489af0f70167d32038c0ec291c0dc5013421cab78",
+          "currentCanonicalSha256": "9d77a53310d26937c002daa489af0f70167d32038c0ec291c0dc5013421cab78"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "a51e5bd6c800b8d60bdc624725160c513f64f4f5920d858cc63c0f86aeb9cd1b",
+          "currentCanonicalSha256": "a51e5bd6c800b8d60bdc624725160c513f64f4f5920d858cc63c0f86aeb9cd1b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 29,
+      "prefixRef": "prefix_evidence:30",
+      "fieldServicePresent": false,
+      "eventCount": 5,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+          "currentCanonicalSha256": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "f96315ef1cd78c22899011f3a62ffeab940186ad563b81b9e87999d8f364201e",
+          "currentCanonicalSha256": "f96315ef1cd78c22899011f3a62ffeab940186ad563b81b9e87999d8f364201e"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 30,
+      "prefixRef": "prefix_evidence:31",
+      "fieldServicePresent": true,
+      "eventCount": 6,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+          "currentCanonicalSha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "6295bde6bcac45ab6b3f6009fd8a391310b539d41bc9fbd660a691aee1f7fd64",
+          "currentCanonicalSha256": "6295bde6bcac45ab6b3f6009fd8a391310b539d41bc9fbd660a691aee1f7fd64"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "f08bb6c2cb39cf65dd86d6e56018368320e68ea53625e3f15d2706b92b60a213",
+          "currentCanonicalSha256": "f08bb6c2cb39cf65dd86d6e56018368320e68ea53625e3f15d2706b92b60a213"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "c8b38f2eda00e1ea83f11cf707e2001add32cf34759a3e679cf8d121cef5a015",
+          "currentCanonicalSha256": "c8b38f2eda00e1ea83f11cf707e2001add32cf34759a3e679cf8d121cef5a015"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 31,
+      "prefixRef": "prefix_evidence:32",
+      "fieldServicePresent": false,
+      "eventCount": 6,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+          "currentCanonicalSha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "6295bde6bcac45ab6b3f6009fd8a391310b539d41bc9fbd660a691aee1f7fd64",
+          "currentCanonicalSha256": "6295bde6bcac45ab6b3f6009fd8a391310b539d41bc9fbd660a691aee1f7fd64"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 32,
+      "prefixRef": "prefix_evidence:33",
+      "fieldServicePresent": true,
+      "eventCount": 7,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "currentCanonicalSha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "68b6a0604f44a6f1f58db66ab51f9fb5196c15dcd1fb59260a34ccea009bb189",
+          "currentCanonicalSha256": "68b6a0604f44a6f1f58db66ab51f9fb5196c15dcd1fb59260a34ccea009bb189"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4ec08c8ce2b14c9e1b9cf6a43335e43b5a6df51a9fa4514f346fbe7726caf140",
+          "currentCanonicalSha256": "4ec08c8ce2b14c9e1b9cf6a43335e43b5a6df51a9fa4514f346fbe7726caf140"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "24975c4499b286b53683a6bb62bfd9f9165b0a425414549565af44c7146736bf",
+          "currentCanonicalSha256": "24975c4499b286b53683a6bb62bfd9f9165b0a425414549565af44c7146736bf"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 33,
+      "prefixRef": "prefix_evidence:34",
+      "fieldServicePresent": false,
+      "eventCount": 7,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+          "currentCanonicalSha256": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "68b6a0604f44a6f1f58db66ab51f9fb5196c15dcd1fb59260a34ccea009bb189",
+          "currentCanonicalSha256": "68b6a0604f44a6f1f58db66ab51f9fb5196c15dcd1fb59260a34ccea009bb189"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 34,
+      "prefixRef": "prefix_evidence:35",
+      "fieldServicePresent": true,
+      "eventCount": 8,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3",
+          "currentCanonicalSha256": "2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "c1196256e6fa6a905f770c00335238170669859a2d7bc1399482ece223a73148",
+          "currentCanonicalSha256": "c1196256e6fa6a905f770c00335238170669859a2d7bc1399482ece223a73148"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "3ad682b27f60e60d3c1e0500e6e97de18d740eacec44058a7467a14f87138af0",
+          "currentCanonicalSha256": "3ad682b27f60e60d3c1e0500e6e97de18d740eacec44058a7467a14f87138af0"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "b38ab9497a7cceaddf8bd52dc0e7f516bd3f2fb6b28c03be024cd83df3b5044f",
+          "currentCanonicalSha256": "b38ab9497a7cceaddf8bd52dc0e7f516bd3f2fb6b28c03be024cd83df3b5044f"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 35,
+      "prefixRef": "prefix_evidence:36",
+      "fieldServicePresent": false,
+      "eventCount": 8,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3",
+          "currentCanonicalSha256": "2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "c1196256e6fa6a905f770c00335238170669859a2d7bc1399482ece223a73148",
+          "currentCanonicalSha256": "c1196256e6fa6a905f770c00335238170669859a2d7bc1399482ece223a73148"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 36,
+      "prefixRef": "prefix_evidence:37",
+      "fieldServicePresent": true,
+      "eventCount": 9,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7",
+          "currentCanonicalSha256": "19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "1a03743a7393487b899297dd1566edeb1d4d270caf617dc7e6edf629bb51b98c",
+          "currentCanonicalSha256": "1a03743a7393487b899297dd1566edeb1d4d270caf617dc7e6edf629bb51b98c"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "6f0d80d27ded3b5cf4f1c89762f1780cb5d76fd04ed1eaecf716c97cc251f67a",
+          "currentCanonicalSha256": "6f0d80d27ded3b5cf4f1c89762f1780cb5d76fd04ed1eaecf716c97cc251f67a"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "90656e27e7b85e552e62f3af605c8777808b5c86fbcacec4693d8c131e4ec3ce",
+          "currentCanonicalSha256": "90656e27e7b85e552e62f3af605c8777808b5c86fbcacec4693d8c131e4ec3ce"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 37,
+      "prefixRef": "prefix_evidence:38",
+      "fieldServicePresent": false,
+      "eventCount": 9,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7",
+          "currentCanonicalSha256": "19581e27de7ced00ff1ce50b2047e7a567c76b1cbaebabe5ef03f7c3017bb5b7"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "1a03743a7393487b899297dd1566edeb1d4d270caf617dc7e6edf629bb51b98c",
+          "currentCanonicalSha256": "1a03743a7393487b899297dd1566edeb1d4d270caf617dc7e6edf629bb51b98c"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 38,
+      "prefixRef": "prefix_evidence:39",
+      "fieldServicePresent": true,
+      "eventCount": 10,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5",
+          "currentCanonicalSha256": "4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "d7575e1377ca3f7aaeedf517e7010488e54192ecde4280684dc56234487ca606",
+          "currentCanonicalSha256": "d7575e1377ca3f7aaeedf517e7010488e54192ecde4280684dc56234487ca606"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "bf3df1ae3d5e15a832ae4cdae67e4224ded93222492c528be0585bf4e089142c",
+          "currentCanonicalSha256": "bf3df1ae3d5e15a832ae4cdae67e4224ded93222492c528be0585bf4e089142c"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "0784889099b10fbed4d1c83a16fc1126a3a918e00eee2b6268e8a6310ebb9495",
+          "currentCanonicalSha256": "0784889099b10fbed4d1c83a16fc1126a3a918e00eee2b6268e8a6310ebb9495"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 39,
+      "prefixRef": "prefix_evidence:40",
+      "fieldServicePresent": false,
+      "eventCount": 10,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5",
+          "currentCanonicalSha256": "4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "d7575e1377ca3f7aaeedf517e7010488e54192ecde4280684dc56234487ca606",
+          "currentCanonicalSha256": "d7575e1377ca3f7aaeedf517e7010488e54192ecde4280684dc56234487ca606"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 40,
+      "prefixRef": "prefix_evidence:41",
+      "fieldServicePresent": true,
+      "eventCount": 11,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "4fc82b26aecb47d2868c4efbe3581732a3e7cbcc6c2efb32062c08170a05eeb8",
+          "currentCanonicalSha256": "4fc82b26aecb47d2868c4efbe3581732a3e7cbcc6c2efb32062c08170a05eeb8"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "0414ed7011f5efbd3bf3970d45bfe3e1ebaf0a81674952b98c565d1ae590949f",
+          "currentCanonicalSha256": "0414ed7011f5efbd3bf3970d45bfe3e1ebaf0a81674952b98c565d1ae590949f"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "c5a22476c6e95b297155d16d6461ff59821ad862fd4f24efd6f4f51fc5bf2f0b",
+          "currentCanonicalSha256": "c5a22476c6e95b297155d16d6461ff59821ad862fd4f24efd6f4f51fc5bf2f0b"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "a9c4061fc3d0073d0d9623d7b1e4ec3444d7626ffe32c13d1be99ce84009f9ad",
+          "currentCanonicalSha256": "a9c4061fc3d0073d0d9623d7b1e4ec3444d7626ffe32c13d1be99ce84009f9ad"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 41,
+      "prefixRef": "prefix_evidence:42",
+      "fieldServicePresent": false,
+      "eventCount": 11,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "4fc82b26aecb47d2868c4efbe3581732a3e7cbcc6c2efb32062c08170a05eeb8",
+          "currentCanonicalSha256": "4fc82b26aecb47d2868c4efbe3581732a3e7cbcc6c2efb32062c08170a05eeb8"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "0414ed7011f5efbd3bf3970d45bfe3e1ebaf0a81674952b98c565d1ae590949f",
+          "currentCanonicalSha256": "0414ed7011f5efbd3bf3970d45bfe3e1ebaf0a81674952b98c565d1ae590949f"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 42,
+      "prefixRef": "prefix_evidence:43",
+      "fieldServicePresent": true,
+      "eventCount": 12,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918",
+          "currentCanonicalSha256": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "47b9a95dc5d0980bde7940d8096bd9ead788eaf3d96f77da1e755d9f14eda795",
+          "currentCanonicalSha256": "47b9a95dc5d0980bde7940d8096bd9ead788eaf3d96f77da1e755d9f14eda795"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "b70127b38cbbe33e1eef84f945f2d0ea1deb784fdd66cbcfe5468e949d9aa490",
+          "currentCanonicalSha256": "b70127b38cbbe33e1eef84f945f2d0ea1deb784fdd66cbcfe5468e949d9aa490"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "fd8fe9ef6bbad4177270b23fcaed498a90008b29af26355cc22c1f2ea5f21e22",
+          "currentCanonicalSha256": "fd8fe9ef6bbad4177270b23fcaed498a90008b29af26355cc22c1f2ea5f21e22"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 43,
+      "prefixRef": "prefix_evidence:44",
+      "fieldServicePresent": false,
+      "eventCount": 12,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918",
+          "currentCanonicalSha256": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "47b9a95dc5d0980bde7940d8096bd9ead788eaf3d96f77da1e755d9f14eda795",
+          "currentCanonicalSha256": "47b9a95dc5d0980bde7940d8096bd9ead788eaf3d96f77da1e755d9f14eda795"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 44,
+      "prefixRef": "prefix_evidence:45",
+      "fieldServicePresent": true,
+      "eventCount": 13,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "3fdba35f04dc8c462986c992bcf875546257113072a909c162f7e470e581e278",
+          "currentCanonicalSha256": "3fdba35f04dc8c462986c992bcf875546257113072a909c162f7e470e581e278"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "a0bee2e9b227433a4034a03dd7013b853ad296695770456279a2eb273c4d4fb6",
+          "currentCanonicalSha256": "a0bee2e9b227433a4034a03dd7013b853ad296695770456279a2eb273c4d4fb6"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "29d17195de89d2b060522e70e3e778490b974c7de7488a0b1bfdc67d2a8d9744",
+          "currentCanonicalSha256": "29d17195de89d2b060522e70e3e778490b974c7de7488a0b1bfdc67d2a8d9744"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "571607dcb3221ae91b604085aaecf37359ba020413309335edfa9b9befcc870e",
+          "currentCanonicalSha256": "571607dcb3221ae91b604085aaecf37359ba020413309335edfa9b9befcc870e"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 45,
+      "prefixRef": "prefix_evidence:46",
+      "fieldServicePresent": false,
+      "eventCount": 13,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "3fdba35f04dc8c462986c992bcf875546257113072a909c162f7e470e581e278",
+          "currentCanonicalSha256": "3fdba35f04dc8c462986c992bcf875546257113072a909c162f7e470e581e278"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "a0bee2e9b227433a4034a03dd7013b853ad296695770456279a2eb273c4d4fb6",
+          "currentCanonicalSha256": "a0bee2e9b227433a4034a03dd7013b853ad296695770456279a2eb273c4d4fb6"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 46,
+      "prefixRef": "prefix_evidence:47",
+      "fieldServicePresent": true,
+      "eventCount": 14,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61",
+          "currentCanonicalSha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "50ec873242e4984b1419e6758e98b3036f2459888769474ae670b8d01eaa51ec",
+          "currentCanonicalSha256": "50ec873242e4984b1419e6758e98b3036f2459888769474ae670b8d01eaa51ec"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "ee4791c0aa7d174ce35c3df150878c6e1ba43650799c012d4706dde0a44227d5",
+          "currentCanonicalSha256": "ee4791c0aa7d174ce35c3df150878c6e1ba43650799c012d4706dde0a44227d5"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "f278defa9a3b4e6c8a5b7fe8782a3ac4606cde61dc186eaebc2e37a01f574947",
+          "currentCanonicalSha256": "f278defa9a3b4e6c8a5b7fe8782a3ac4606cde61dc186eaebc2e37a01f574947"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 47,
+      "prefixRef": "prefix_evidence:48",
+      "fieldServicePresent": false,
+      "eventCount": 14,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61",
+          "currentCanonicalSha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "50ec873242e4984b1419e6758e98b3036f2459888769474ae670b8d01eaa51ec",
+          "currentCanonicalSha256": "50ec873242e4984b1419e6758e98b3036f2459888769474ae670b8d01eaa51ec"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 48,
+      "prefixRef": "prefix_evidence:49",
+      "fieldServicePresent": false,
+      "eventCount": 14,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61",
+          "currentCanonicalSha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "50ec873242e4984b1419e6758e98b3036f2459888769474ae670b8d01eaa51ec",
+          "currentCanonicalSha256": "50ec873242e4984b1419e6758e98b3036f2459888769474ae670b8d01eaa51ec"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 49,
+      "prefixRef": "prefix_evidence:50",
+      "fieldServicePresent": false,
+      "eventCount": 14,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61",
+          "currentCanonicalSha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "50ec873242e4984b1419e6758e98b3036f2459888769474ae670b8d01eaa51ec",
+          "currentCanonicalSha256": "50ec873242e4984b1419e6758e98b3036f2459888769474ae670b8d01eaa51ec"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 50,
+      "prefixRef": "prefix_evidence:51",
+      "fieldServicePresent": false,
+      "eventCount": 14,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61",
+          "currentCanonicalSha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "50ec873242e4984b1419e6758e98b3036f2459888769474ae670b8d01eaa51ec",
+          "currentCanonicalSha256": "50ec873242e4984b1419e6758e98b3036f2459888769474ae670b8d01eaa51ec"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 51,
+      "prefixRef": "prefix_evidence:52",
+      "fieldServicePresent": false,
+      "eventCount": 14,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61",
+          "currentCanonicalSha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "50ec873242e4984b1419e6758e98b3036f2459888769474ae670b8d01eaa51ec",
+          "currentCanonicalSha256": "50ec873242e4984b1419e6758e98b3036f2459888769474ae670b8d01eaa51ec"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "prefixIndex": 52,
+      "prefixRef": "prefix_evidence:53",
+      "fieldServicePresent": false,
+      "eventCount": 14,
+      "fields": [
+        {
+          "field": "fieldServiceEventCount",
+          "passed": true,
+          "baselineCanonicalSha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61",
+          "currentCanonicalSha256": "8527a891e224136950ff32ca212b45bc93f69fbb801c3b1ebedac52775f99e61"
+        },
+        {
+          "field": "fieldServiceLatestEvent",
+          "passed": true,
+          "baselineCanonicalSha256": "50ec873242e4984b1419e6758e98b3036f2459888769474ae670b8d01eaa51ec",
+          "currentCanonicalSha256": "50ec873242e4984b1419e6758e98b3036f2459888769474ae670b8d01eaa51ec"
+        },
+        {
+          "field": "fieldServiceAcquiredEvents",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldServiceAcquiredNegativeZeroPaths",
+          "passed": true,
+          "baselineCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "currentCanonicalSha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        },
+        {
+          "field": "fieldService",
+          "passed": true,
+          "baselineCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+          "currentCanonicalSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "qualification": "Exact comparison of the five previously tested field-service values at every retained prefix: count, complete latest event, every acquired event, acquisition negative-zero paths and the complete fieldService payload including provider/caller envelope, plan, contracts, state-node label and numeric scope. No payload field is omitted. Only full observation-reference session namespaces and independently source-recomputed C_nested identities are rebased. Epochs, revisions, frame identifiers and every other value remain compared. Both operands independently satisfy the existing safe-integer JSON identity domain; all declared negative-zero lists are checked and empty. This supplements the preserved failed aggregate receipt: its empty-layer premise does not apply to GARE because the v52 baseline already acquired 14 field-service events. Its other 18 checks remain passed and unchanged. This is retained-public regression evidence, not a fresh live game or full unretained internal-state parity."
+}

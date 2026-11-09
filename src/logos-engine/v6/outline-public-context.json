@@ -1,0 +1,76 @@
+{
+  "schema": "logos-engine.v5.outline-public-operator-subset.v1",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourcePath": "agents/yf_arc3_v5/drm/interaction.drm",
+  "sourceSha256": "12ce3fd97fb267c893f2241fb71a596c5b3b688324ce04211c52932e9e7b8e94",
+  "sourceBytes": 7108887,
+  "sourceSelectionPolicyRef": "policy.declared_initial_interaction_exploration",
+  "subsetPolicyRef": "native.outline.current_public_operator_subset",
+  "selectionTier": {
+    "id": "tier.current_tool_on_obstructing_other_inset_operator_question",
+    "all_conditions": [
+      {
+        "field": "interaction_measurement_kind",
+        "operator": "equals",
+        "expected": "discrete"
+      },
+      {
+        "field": "dispatched_composition_active_goal_ref",
+        "operator": "equals",
+        "expected": "goal.accompany_mobile_entity_to_compatible_hollow_perimeter"
+      },
+      {
+        "field": "same_value_compact_body_hollow_perimeter_marker_triplet_count",
+        "operator": "equals",
+        "expected": 1
+      },
+      {
+        "field": "controlled_lead_covers_other_inset_on_body_target_segment",
+        "operator": "equals",
+        "expected": true
+      },
+      {
+        "field": "other_compact_body_marker_immediate_contact_count",
+        "operator": "equals",
+        "expected": 0
+      },
+      {
+        "field": "candidate_is_unique_effectful_nondirectional_local_action",
+        "operator": "equals",
+        "expected": true
+      },
+      {
+        "field": "attempted_without_effect_in_current_context",
+        "operator": "equals",
+        "expected": false
+      }
+    ],
+    "reason_ref": "reason.untried_current_contact_discriminates_local_operator_effect"
+  },
+  "sourcePointers": [
+    {
+      "id": "projection.exploration.tool_on_obstructing_other_inset_opens_scoped_operator_question",
+      "pointer": [
+        "declarations",
+        217,
+        "fact_projections",
+        1296
+      ]
+    },
+    {
+      "id": "tier.current_tool_on_obstructing_other_inset_operator_question",
+      "pointer": [
+        "declarations",
+        217,
+        "selection_tiers",
+        19
+      ]
+    }
+  ],
+  "document": {
+    "sha256": "441166403099285220422ac66392f5ea40c3b8138b96887e06cdc4e2274b81ab",
+    "text": "{\"declarations\":[{\"evaluation\":\"declared_eligibility_single\",\"fact_projections\":[{\"all_conditions\":[{\"expected\":\"discrete\",\"field\":\"interaction_measurement_kind\",\"operator\":\"equals\"},{\"expected\":\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"field\":\"dispatched_composition_active_goal_ref\",\"operator\":\"equals\"},{\"expected\":1,\"field\":\"same_value_compact_body_hollow_perimeter_marker_triplet_count\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"controlled_lead_covers_other_inset_on_body_target_segment\",\"operator\":\"equals\"},{\"expected\":0,\"field\":\"other_compact_body_marker_immediate_contact_count\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"candidate_is_unique_effectful_nondirectional_local_action\",\"operator\":\"equals\"},{\"expected\":false,\"field\":\"attempted_without_effect_in_current_context\",\"operator\":\"equals\"}],\"id\":\"projection.exploration.tool_on_obstructing_other_inset_opens_scoped_operator_question\",\"static_facts\":{\"active_goal_ref\":\"goal.reveal_action_conditioned_structure\",\"active_terminal_goal_ref\":\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"advances_active_goal_chain\":true,\"candidate_is_general_unscoped_probe\":false,\"committed_plan_ref\":null,\"current_contact_mechanism_probe\":false,\"current_measured_precondition_fields\":[\"controlled_lead_covers_other_inset_on_body_target_segment\",\"same_value_compact_body_hollow_perimeter_marker_triplet_count\",\"other_compact_body_marker_immediate_contact_count\"],\"declared_conditional_series_authorized\":false,\"declared_deterministic_series_authorized\":false,\"declared_terminal_goal_ref\":\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"dynamic_goal_binding_satisfied\":true,\"emphasis_action_eligible\":true,\"expected_effect_class\":\"experimental_unknown\",\"full_metaplan_reprojection_required_after_primitive\":true,\"goal_dependency_chain_refs\":[\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"goal.reveal_action_conditioned_structure\",\"subgoal.observe_one_local_activation_effect\"],\"goal_graph_edge_refs\":[\"edge.local_contact_effect_requires_bounded_operator_trial\"],\"goal_ref\":\"goal.reveal_action_conditioned_structure\",\"inherited_priority_from_terminal_goal\":true,\"layer_action_eligible\":true,\"mechanism_question_ref\":null,\"open_terminal_objective_action_family_progress_eligible\":true,\"ordinary_contextual_no_effect_repeat_eligible\":true,\"parallel_action_eligible\":true,\"periodic_action_eligible\":true,\"reasoning_tree_observed_announcement_tool_intervention_action_ready_activations\":[{\"reasoning_tree_node_address\":\"2.15.5\",\"reasoning_tree_node_id\":\"composition.family.autonomous_response.observed_announcement_tool_intervention\",\"reasoning_tree_parent_address\":\"2.15\",\"reasoning_tree_parent_key\":\"composition.family.autonomous_response\",\"reasoning_tree_provisional_gate\":\"action_ready\",\"reasoning_tree_version\":\"composition-target-tree_v-1.0\"}],\"release_remaining_action_bound\":1,\"remaining_action_bound\":1,\"remaining_step_count\":1,\"resource_constrained_action_grounding_eligible\":true,\"selection_precondition_support_required\":true,\"selection_principle_ref\":\"reason.untried_current_contact_discriminates_local_operator_effect\",\"subgoal_ref\":\"subgoal.observe_one_local_activation_effect\",\"terminal_residual_action_eligible_in_current_control_context\":true},\"templated_facts\":{\"discriminating_experiment_ref\":\"experiment.current_cell_operator_on_observed_route_obstruction.{candidate_ref}\",\"expected_configuration_or_goal_delta_ref\":\"expectation.current_cell_operator_discriminates_overlaid_route_obstruction.{candidate_ref}\",\"falsifier_refs\":[\"falsifier.current_cell_operator_has_no_useful_local_effect.{candidate_ref}\"],\"reconciliation_checkpoint_ref\":\"checkpoint.reconcile_overlaid_body_and_announced_beneficiary_after_one_input.{candidate_ref}\"}}],\"id\":\"native.outline.current_public_operator_subset\",\"input_contract\":\"yf_arc3_v5.authority_input.selection.v1\",\"kind\":\"selection_policy\",\"output_contract\":\"yf_arc3_v5.authority_output.selection.v1\",\"reason_refs\":[\"reason.untried_current_contact_discriminates_local_operator_effect\"],\"supported_operators\":[\"SELECT\"]}],\"module_id\":\"native.outline.current_public_operator_subset\"}"
+  },
+  "qualification": "One exact original V5 projection and its tier are applied only to current measured public-frame context and actual caller trial/operator evidence. This conditional native extension is not complete V5 selection and does not change the default source Outline policy.",
+  "wrapperQualification": "The projection-only wrapper has empty eligibility conditions; its eligibility counters do not establish full source admissibility. The exact tier is evaluated separately and no SELECT is executed."
+}

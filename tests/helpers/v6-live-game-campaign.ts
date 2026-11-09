@@ -180,9 +180,14 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           }
           const series = read('family_state:public_occurrence_recall');
           const framedCheckpoint = read('family_state:public_framed_transfer');
-          const framedFacts = (read('reasoning:memory').facts as string[]).map(read)
+          const outlineCheckpoint = read('family_state:public_outline_service');
+          const reasoningFacts = (read('reasoning:memory').facts as string[]).map(read);
+          const framedFacts = reasoningFacts
             .filter(fact => evidence.transitions.some((_: R, index: number) =>
               fact.key === `framed_transfer_event:${evidence.decision_revision + index}`));
+          const outlineFacts = reasoningFacts
+            .filter(fact => evidence.transitions.some((_: R, index: number) =>
+              fact.key === `outline_service_event:${evidence.decision_revision + index}`));
           const anchors = (series.events as R[]).filter(event => event.kind === 'coupled_pair_epoch_anchor');
           const alternating = (series.events as R[]).filter(event => event.kind === 'alternating_graph_evidence');
           const graphEvidence = alternating.at(-1);
@@ -266,6 +271,16 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               nativeCheckpoint: framedCheckpoint,
               acquired: framedFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
               qualification: 'One shared FramedTransfer owner acquires actual selected or foreign public transitions. The six-field source projection and the complete native checkpoint are retained separately. Additional public-packet measurements, when enabled, have their own native provenance. Current level facts and historical portable records remain separate. This is not a complete-original-caller parity claim.',
+            },
+            ...(evidence.proposal.outline_plan
+              ? { outlineService: { proposal: evidence.proposal, stateNode: 'family_state:public_outline_service' } } : {}),
+            outlineAcquisition: {
+              stateNode: 'family_state:public_outline_service',
+              checkpointFormat: outlineCheckpoint.format,
+              sourceState: outlineCheckpoint.source_state,
+              nativeCheckpoint: outlineCheckpoint,
+              acquired: outlineFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
+              qualification: 'The actual common Kernel owner acquires selected or foreign public transitions once after prefix sealing. The seven-field V6 source state and immutable native checkpoint are retained separately. Recalled evidence is not current transition evidence. No checkpoint or expected action is supplied to the agent by this passive evidence observer.',
             },
             ...(evidence.proposal.labeled_sequence_plan
               ? { labeledSequenceLabel: evidence.proposal.labeled_sequence_plan.label,

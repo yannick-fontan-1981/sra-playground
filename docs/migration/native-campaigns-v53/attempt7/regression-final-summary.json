@@ -1,0 +1,207 @@
+{
+  "schema": "logos-engine.v53.resolved-recorded-regressions.v1",
+  "status": "passed",
+  "nativeSourceManifestDigest": "d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70",
+  "originalBatch": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regression-summary.json",
+    "sha256": "1ac843e49b3fab1edc97af0103363743d46eddbc1b2212b474ff480dd0efa267",
+    "bytes": 64757
+  },
+  "originalBatchStatus": "failed",
+  "results": [
+    {
+      "game": "STCK",
+      "actions": 35,
+      "levelsCompleted": 3,
+      "replay": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/stck-replay.json.gz",
+        "sha256": "51c0a9f1b4c2109afe209a747d20642dafcbbf7b315db544359c372f5345aa42",
+        "bytes": 27566
+      },
+      "replayPassed": true,
+      "comparisonPassed": true,
+      "comparisonMode": "unchanged_original_comparator",
+      "evidence": [
+        {
+          "path": "docs/migration/native-campaigns-v53/attempt7/regressions/stck-comparison.json",
+          "sha256": "9fb1d44174a8c2a0af01fbf4d3d3c78307adfe7dfafe9378f1b62a85ed18732d",
+          "bytes": 5413
+        }
+      ]
+    },
+    {
+      "game": "CATL",
+      "actions": 48,
+      "levelsCompleted": 6,
+      "replay": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/catl-replay.json.gz",
+        "sha256": "c4d9aa435ed3b4d8170493325dcf94b4f07c81ad55d613a51dfa8479b16a7740",
+        "bytes": 241912
+      },
+      "replayPassed": true,
+      "comparisonPassed": true,
+      "comparisonMode": "unchanged_original_comparator",
+      "evidence": [
+        {
+          "path": "docs/migration/native-campaigns-v53/attempt7/regressions/catl-comparison.json",
+          "sha256": "0b9896ad6bd7d29fe866de16d5350fc7a89ac373dc50174fc20c336f7183ac66",
+          "bytes": 5413
+        }
+      ]
+    },
+    {
+      "game": "SELE",
+      "actions": 44,
+      "levelsCompleted": 3,
+      "replay": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/sele-replay.json.gz",
+        "sha256": "b9e8bdd43fb96bf36f3a5304a8081282dd360b0c08aeb018e1eace0eb45f30a3",
+        "bytes": 202500
+      },
+      "replayPassed": true,
+      "comparisonPassed": true,
+      "comparisonMode": "unchanged_original_comparator",
+      "evidence": [
+        {
+          "path": "docs/migration/native-campaigns-v53/attempt7/regressions/sele-comparison.json",
+          "sha256": "b625d09562b5dfd29f75c2ad76b276ed27c3eb166af5bace344848791e051d3d",
+          "bytes": 5413
+        }
+      ]
+    },
+    {
+      "game": "COLM",
+      "actions": 45,
+      "levelsCompleted": 3,
+      "replay": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/colm-replay.json.gz",
+        "sha256": "ca0e93701ae0df7e05e1553cc2f977722806233e1e30d1f73e031438bff9f829",
+        "bytes": 89731
+      },
+      "replayPassed": true,
+      "comparisonPassed": true,
+      "comparisonMode": "unchanged_original_comparator",
+      "evidence": [
+        {
+          "path": "docs/migration/native-campaigns-v53/attempt7/regressions/colm-comparison.json",
+          "sha256": "66ccca57e4ada4e0cc1c55bb4382ca007d9a02fd6cde0fe3a0e63fa4da297c73",
+          "bytes": 16408
+        }
+      ]
+    },
+    {
+      "game": "ZIPP",
+      "actions": 101,
+      "levelsCompleted": 6,
+      "replay": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/zipp-replay.json.gz",
+        "sha256": "673ab90226ee847a8a29acb0c2e370cc7c78937baf56d3892d0ae1fe37fd6f04",
+        "bytes": 165210
+      },
+      "replayPassed": true,
+      "comparisonPassed": true,
+      "comparisonMode": "unchanged_original_comparator",
+      "evidence": [
+        {
+          "path": "docs/migration/native-campaigns-v53/attempt7/regressions/zipp-comparison.json",
+          "sha256": "c8d957f0d0c020692c9f655e7a59e94aac54fc06d108e1f1285cba768e04e7c0",
+          "bytes": 17007
+        }
+      ]
+    },
+    {
+      "game": "GRIL",
+      "actions": 19,
+      "levelsCompleted": 3,
+      "replay": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gril-replay.json.gz",
+        "sha256": "c3967f7141bdac3cd39dcfdff3513dc5435daa60c200a682f896694bf5bce79f",
+        "bytes": 146090
+      },
+      "replayPassed": true,
+      "comparisonPassed": true,
+      "comparisonMode": "unchanged_original_comparator",
+      "evidence": [
+        {
+          "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gril-comparison.json",
+          "sha256": "f55a1c7bfb4c19ab8fcf609eae48fcf57a68a5c797315ab61d105c4e3fd4cbe3",
+          "bytes": 29437
+        }
+      ]
+    },
+    {
+      "game": "LIFE",
+      "actions": 49,
+      "levelsCompleted": 3,
+      "replay": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-replay.json.gz",
+        "sha256": "ebf4d1f109cc4c48bdba1fd1fd51073742cc3f34aba70f6b84c5b00232cd5599",
+        "bytes": 275577
+      },
+      "replayPassed": true,
+      "comparisonPassed": true,
+      "comparisonMode": "unchanged_original_recipe_baseline_with_verified_v52_transitivity",
+      "evidence": [
+        {
+          "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-original-baseline-comparison.json",
+          "sha256": "3a42149d21fb75835d43a661a94e0b36b84b17d4ea57e86f13a0d2c5f962dc3f",
+          "bytes": 129635
+        },
+        {
+          "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-v52-v53-transitive-comparison.json",
+          "sha256": "18e6a0b7229577ec8ed8b10be422c646835c2d2438a6d8c9a164351b62cc7fe6",
+          "bytes": 6539
+        }
+      ]
+    },
+    {
+      "game": "VALV",
+      "actions": 28,
+      "levelsCompleted": 3,
+      "replay": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/valv-replay.json.gz",
+        "sha256": "0a20a0d9f331ba54c6a05f2b30ebb298e95121ca3910035bddd431a784b051e4",
+        "bytes": 181392
+      },
+      "replayPassed": true,
+      "comparisonPassed": true,
+      "comparisonMode": "unchanged_original_comparator",
+      "evidence": [
+        {
+          "path": "docs/migration/native-campaigns-v53/attempt7/regressions/valv-comparison.json",
+          "sha256": "819ac7eb2c9e48550ced2ddd91ac23165f9801da1294cc225ad3c4ea6c179b9e",
+          "bytes": 5294
+        }
+      ]
+    },
+    {
+      "game": "GARE",
+      "actions": 53,
+      "levelsCompleted": 3,
+      "replay": {
+        "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gare-replay.json.gz",
+        "sha256": "c5ce892c5dbbc9b2b706fbb4ab7a6cb0f94f99c300536acd22882310c0a57c65",
+        "bytes": 2845118
+      },
+      "replayPassed": true,
+      "comparisonPassed": true,
+      "comparisonMode": "eighteen_unchanged_checks_and_exact_existing_field_service_baseline",
+      "evidence": [
+        {
+          "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gare-comparison.json",
+          "sha256": "2f8cd7cef1b4b8e7553a39fafb7269585ad2ebb31d496dc1cbc42ac6008a81dc",
+          "bytes": 380553
+        },
+        {
+          "path": "docs/migration/native-campaigns-v53/attempt7/regressions/gare-field-service-comparison.json",
+          "sha256": "829c495c8877e4a88184225ebacbc516f743f78d468560b0055129f316943715",
+          "bytes": 110983
+        }
+      ],
+      "inapplicableHistoricalPremise": "field-service layers remain empty on the seven earlier trajectories"
+    }
+  ],
+  "passed": 9,
+  "total": 9,
+  "qualification": "All nine cold native replays chose their commands before receiving immutable archived public returns. Seven original comparisons pass directly. LIFE uses the unchanged comparator with its exact v50 recipe baseline plus the verified existing v50-to-v52 comparison; GARE retains the eighteen valid original checks and replaces the inapplicable pre-v51 empty-layer premise with exact complete v52 field-service baseline comparison. Original failed comparison records remain unchanged. No agent, harness, assertion or successful trajectory is rewritten. This is retained-public regression evidence, not nine new live games or full original-caller parity."
+}

@@ -1,0 +1,135 @@
+{
+  "schema": "logos-engine.v53.life-transitive-exact-regression-comparison.v1",
+  "passed": true,
+  "checks": [
+    {
+      "name": "original v52 execution and all original comparison assertions passed",
+      "passed": true
+    },
+    {
+      "name": "original execution receipt binds exact retained v52 comparison bytes",
+      "passed": true
+    },
+    {
+      "name": "original v52 receipt binds exact original v50 baseline raw bytes",
+      "passed": true
+    },
+    {
+      "name": "original v52 receipt binds exact supplied v52 replay raw bytes",
+      "passed": true
+    },
+    {
+      "name": "both complete comparator files are byte-identical to original v52 comparison",
+      "passed": true
+    },
+    {
+      "name": "new original-baseline comparison passes every unchanged assertion",
+      "passed": true
+    },
+    {
+      "name": "new comparison binds the same original baseline and exact current replay raw bytes",
+      "passed": true
+    },
+    {
+      "name": "both comparisons use the same complete ordered check domain",
+      "passed": true
+    },
+    {
+      "name": "both material comparisons use the same independently verified recipe bundle and qualification",
+      "passed": true
+    },
+    {
+      "name": "both material after projections retain exact proposal event and signed-zero counts",
+      "passed": true
+    },
+    {
+      "name": "current recorded replay passed on the unchanged frozen native source",
+      "passed": true
+    },
+    {
+      "name": "all failed original batch and two SIGKILL records were preserved",
+      "passed": true
+    }
+  ],
+  "baselineV52": {
+    "path": "docs/migration/native-campaigns-v52/attempt9/life-recorded-public-replay.json.gz",
+    "sha256": "6c605911111588f1b6a437e23ec9fd4f6092b06e1bd8a8ea6483380380fdadc1",
+    "bytes": 347694,
+    "rawSha256": "3e95beecbf915d7cb127d36c9dadba216892bc9ad0c403d216dcab52442679f1",
+    "rawBytes": 3454718
+  },
+  "currentV53": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-replay.json.gz",
+    "sha256": "ebf4d1f109cc4c48bdba1fd1fd51073742cc3f34aba70f6b84c5b00232cd5599",
+    "bytes": 275577,
+    "rawSha256": "4f08f683f72ef96dc280927bb3f5f8c02b69e45f5af966c963a68c9511752ef7",
+    "rawBytes": 2109342
+  },
+  "commonOriginalBaseline": {
+    "path": "docs/migration/native-campaigns-v50/life-three-levels-final.json",
+    "sha256": "b704dde9b4e3347cabc252c6655dbf9dcd85e9027535d7b7d0c2d98ff68c28b8",
+    "bytes": 3271456,
+    "rawSha256": "b704dde9b4e3347cabc252c6655dbf9dcd85e9027535d7b7d0c2d98ff68c28b8",
+    "rawBytes": 3271456
+  },
+  "originalV50ToV52Comparison": {
+    "path": "docs/migration/native-campaigns-v52/attempt9/life-regression-comparison.json",
+    "sha256": "13723a2577e742fb25241f787640f8e8bbd30e61caa263b14fadcbb5e993393b",
+    "bytes": 129585,
+    "rawSha256": "13723a2577e742fb25241f787640f8e8bbd30e61caa263b14fadcbb5e993393b",
+    "rawBytes": 129585
+  },
+  "originalV52ExecutionReceipt": {
+    "path": "docs/migration/native-campaigns-v52/attempt9/logs/comparison-life-receipt.json",
+    "sha256": "0f8b905f30e45748237f67abdf1d8df3515396f9338fe80cec0857fa09ba8277",
+    "bytes": 46607,
+    "rawSha256": "0f8b905f30e45748237f67abdf1d8df3515396f9338fe80cec0857fa09ba8277",
+    "rawBytes": 46607
+  },
+  "newV50ToV53Comparison": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-original-baseline-comparison.json",
+    "sha256": "3a42149d21fb75835d43a661a94e0b36b84b17d4ea57e86f13a0d2c5f962dc3f",
+    "bytes": 129635,
+    "rawSha256": "3a42149d21fb75835d43a661a94e0b36b84b17d4ea57e86f13a0d2c5f962dc3f",
+    "rawBytes": 129635
+  },
+  "newExecutionReceipt": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/regressions/life-original-baseline-comparison-execution.json",
+    "sha256": "5b005881a32fe77fcb958f0893fe9259ef3a723e82d4fe2c1196d217a259870e",
+    "bytes": 5204,
+    "rawSha256": "5b005881a32fe77fcb958f0893fe9259ef3a723e82d4fe2c1196d217a259870e",
+    "rawBytes": 5204
+  },
+  "relation": "The declared v52 comparator projection of the exact v52 replay equals the common original v50 projection; the declared projection of the exact frozen v53 replay equals that same original projection. Equality is therefore transitive for every retained field in that unchanged declared projection.",
+  "compared": {
+    "commands": 49,
+    "completePublicPackets": 50,
+    "prefixes": 47
+  },
+  "materialProjection": {
+    "recipes": {
+      "path": "docs/migration/native-campaigns-v50/life-material-identity-recipes.json.gz",
+      "sha256": "9f584098c09f837f5b594263dc9ec6b3bf592c3cbba3d905c3d9993d52c9c128",
+      "verified": 328,
+      "uniqueNativeInputs": 328
+    },
+    "before": {
+      "proposals": 44,
+      "events": 68,
+      "explicitNegativeZeroPaths": 14
+    },
+    "after": {
+      "proposals": 44,
+      "events": 68,
+      "explicitNegativeZeroPaths": 14
+    },
+    "qualification": "All three own material layers are reconstructed independently from the complete recorded event journal at every acquired prefix. Complete provider envelopes, point bindings, unknown-effect declarations, every acquired event, latest receipt, counts and all retained own state fields are compared, including restored negative zero. Session-dependent IDs are related only through the retained independently checked source/native recipes; both native recipe hashes and proposal IDs are recomputed. The four common-caller wrapper fields composition_target_tree, field_subquestion, morphology and strategy_receipt are outside this own-layer projection. Existing caller selection/coordination checks remain separate; no full inherited state or graph-chain equality is asserted."
+  },
+  "limits": "No assertion is removed, replaced, skipped or weakened. Full graph-chain/implementation identity and fields already excluded by the unchanged comparator remain outside the claim. No new live success or speed result is implied. The earlier wrong-baseline executions remain failed receipts.",
+  "wrongBaselineDiagnosis": {
+    "recipeObservationScope": "sra-v6-df9b76e3-067f-4306-afeb-b06b7b3ff471",
+    "suppliedV52ObservationScope": "sra-v6-82be47d4-a200-401d-8bce-bb8c71d149ae",
+    "currentObservationScope": "sra-v6-8fcef2cf-6afd-49db-b02d-10476981df25",
+    "cause": "The existing material recipe adapter rebases only its beforeScope. It requires the original v50 baseline. Supplying the already-rebased v52 replay fails to rebase recipe scopes and identities. SIGKILL is observed; resource-exhaustion cause is not independently established."
+  }
+}

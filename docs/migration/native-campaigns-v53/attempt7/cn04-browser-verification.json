@@ -1,0 +1,42 @@
+{
+  "schema": "logos-engine.v53.browser-verification.v1",
+  "mode": "managed-preview-actual-ui",
+  "sourceManifestDigest": "d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70",
+  "game": "CN04",
+  "sequence": [
+    {
+      "button": "Run to next level",
+      "actionsAfter": 18,
+      "levelsSolvedAfter": 1
+    },
+    {
+      "button": "Run to next level",
+      "actionsAfter": 49,
+      "levelsSolvedAfter": 2
+    },
+    {
+      "button": "Run to next level",
+      "actionsAfter": 73,
+      "levelsSolvedAfter": 3
+    }
+  ],
+  "observedFinal": {
+    "canvas": {
+      "height": 384,
+      "width": 384
+    },
+    "inspectionOpen": false,
+    "panel": "Solve with SRA.\n\nLevel completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n73\nactions\n3\nlevels solved\n29\ncompleted plans\nNew reasoning session\nReturn to Manual",
+    "url": "http://127.0.0.1:4173/?game=CN04&level=4",
+    "viewport": {
+      "height": 936,
+      "width": 1363
+    }
+  },
+  "screenshot": {
+    "path": "docs/migration/native-campaigns-v53/attempt7/cn04-browser-final.png",
+    "bytes": 69028,
+    "sha256": "35db07f2e0b2c56c15fc2fb15f52d507b44187841538b27c46d69c1950e10438"
+  },
+  "qualification": "Actual browser controls from level 1 in one retained session, with no level jump or state injection. Visible result: 73 actions, 3 levels, 29 completed plans, entry to level 4. Inspection remained closed. Canvas measured 384 \u00d7 384 in a 1363 \u00d7 936 viewport. No full-game victory is claimed; this is one desktop visual sample, not a responsive-layout or performance benchmark."
+}

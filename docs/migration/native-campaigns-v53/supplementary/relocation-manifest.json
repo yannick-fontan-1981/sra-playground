@@ -1,0 +1,238 @@
+{
+  "schema": "logos-engine.v53.supplementary-campaign-relocation.v1",
+  "createdAt": "2026-11-09T08:09:10.126549+00:00",
+  "scope": "Retained supplemental evidence from isolated, cold common campaigns on earlier immutable v53 freezes. These records do not establish the final release source result.",
+  "relocationRule": "Each retained artifact is an exact byte copy. Receipt contents and historical command paths are unchanged. Relative original paths resolve against originalWorkspace. Source and execution-input paths resolve through the referenced existing source archive, which is not duplicated here.",
+  "campaigns": [
+    {
+      "game": "CN04",
+      "targetLevels": 3,
+      "scope": "Preliminary success: first three levels only, on frozen attempt6. Re-run on the final release source before attributing this result to that release.",
+      "originalWorkspace": "/workspace/scratch/c4dd29871d33/cn04-frozen-attempt6",
+      "sourceFreeze": {
+        "directory": "docs/migration/native-campaigns-v53/attempt6",
+        "nativeSourceManifestDigest": "f5b0202b4fe5f122e0e4dbad0112f6b444df7d78a3dfecddcce2e7d83b3bafff",
+        "nativeFileCount": 194,
+        "manifest": {
+          "path": "docs/migration/native-campaigns-v53/attempt6/source-manifest.json",
+          "bytes": 22724,
+          "sha256": "0512e5987b414fb41f908b233bffb8fa36ce498cfa4401660cdd0c29baff7c3e"
+        },
+        "archiveReceipt": {
+          "path": "docs/migration/native-campaigns-v53/attempt6/source-archive.json",
+          "bytes": 24364,
+          "sha256": "7aa5fe758ab912c9249c86110a19be8039dd8bba8e231df7bce5ec7c486cd557"
+        },
+        "archiveParts": {
+          "path": "docs/migration/native-campaigns-v53/attempt6/source-archive-parts.json",
+          "bytes": 818,
+          "sha256": "0318c4ecd5eaf201b46b87acf2dc0e0b25d4f3f2e114eea3d9806986715cba6a"
+        },
+        "originalArchive": {
+          "path": "docs/migration/native-campaigns-v53/attempt6/source-archive.tar.gz",
+          "sha256": "6e3a1072a2936b8701527b4e0672a154ece968c0a734dd36fedb667e0e5d14ae",
+          "bytes": 1419799
+        },
+        "qualification": "The identical source archive already retained at this freeze is referenced, not copied into supplementary."
+      },
+      "result": {
+        "status": "passed",
+        "exitCode": 0,
+        "actions": 73,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "stopReason": "target_levels_completed",
+        "activeSeconds": 85.30161619000008,
+        "prefixes": 29,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 73,
+          "resume": 28
+        },
+        "callerAcquiredTransitions": 73,
+        "boundaryReplays": 2,
+        "levelActions": [
+          18,
+          31,
+          24
+        ],
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.26.0"
+      },
+      "verification": {
+        "nativeSourceUnchanged": true,
+        "executionCodeUnchanged": true,
+        "publicPackets": 74,
+        "publicFrames": 80,
+        "journalMatchesTrace": true,
+        "journalCommandsMatchReport": true,
+        "pythonAgentModules": [],
+        "externalDomainAssessments": 0,
+        "actionsByFamily": {
+          "port_assembly": 73
+        },
+        "prefixesByFamily": {
+          "port_assembly": 29
+        }
+      },
+      "startedAt": "2026-11-09T08:04:13.150629+00:00",
+      "finishedAt": "2026-11-09T08:05:59.567151+00:00",
+      "elapsedSeconds": 106.41652802600584,
+      "artifacts": [
+        {
+          "role": "receipt",
+          "originalPath": "artifacts/cn04-attempt6/execution-cn04.json",
+          "retainedPath": "docs/migration/native-campaigns-v53/supplementary/cn04-attempt6/execution-cn04.json",
+          "bytes": 49308,
+          "sha256": "fc9b77ae1aee5f8e35d07074e380fe98f5ad29da1eb89e82b1b5a5e3b25ddf36"
+        },
+        {
+          "role": "report",
+          "originalPath": "artifacts/cn04-attempt6/cn04-campaign.json.gz",
+          "retainedPath": "docs/migration/native-campaigns-v53/supplementary/cn04-attempt6/cn04-campaign.json.gz",
+          "bytes": 35021,
+          "sha256": "246e5b8ea7f5663e7bbded77b6162e4c40e3c7be2a3cd5b4e35188a2f239d04c"
+        },
+        {
+          "role": "trace",
+          "originalPath": "artifacts/cn04-attempt6/cn04-public-trace.json.gz",
+          "retainedPath": "docs/migration/native-campaigns-v53/supplementary/cn04-attempt6/cn04-public-trace.json.gz",
+          "bytes": 21107,
+          "sha256": "5f56a84b3d263d277dae6a00ba4c2141d58e3571c870205c7791a93924e6f62e"
+        },
+        {
+          "role": "publicJournal",
+          "originalPath": "artifacts/cn04-attempt6/cn04-actual-public-journal.jsonl.gz",
+          "retainedPath": "docs/migration/native-campaigns-v53/supplementary/cn04-attempt6/cn04-actual-public-journal.jsonl.gz",
+          "bytes": 15195,
+          "sha256": "194fa2f9b7e3164d0b998b8fe2dcd5a50b07a897dfb89ef1ecbb77cb29501da4"
+        },
+        {
+          "role": "output",
+          "originalPath": "artifacts/cn04-attempt6/cn04-output.log.gz",
+          "retainedPath": "docs/migration/native-campaigns-v53/supplementary/cn04-attempt6/cn04-output.log.gz",
+          "bytes": 5952,
+          "sha256": "f12078eb8a2639ca23478b2606d48786c735592445b58b5807698c23dcda3e2b"
+        }
+      ]
+    },
+    {
+      "game": "SYME",
+      "targetLevels": 6,
+      "scope": "Exploratory full-six-level target failed at level4. It repeats the previously known first-three-level success and establishes no new completed level or full-game victory.",
+      "originalWorkspace": "/workspace/scratch/c4dd29871d33/syme-frozen-attempt5",
+      "sourceFreeze": {
+        "directory": "docs/migration/native-campaigns-v53/attempt5",
+        "nativeSourceManifestDigest": "4de2508ac3e7c6eadbd265ed1b5841db49a0bdc869a78f7c91e6b7cb35ab28b9",
+        "nativeFileCount": 194,
+        "manifest": {
+          "path": "docs/migration/native-campaigns-v53/attempt5/source-manifest.json",
+          "bytes": 22724,
+          "sha256": "fdee1374ce663798e341d393d9cfec1b0ad3860359825085b867a9beded78b51"
+        },
+        "archiveReceipt": {
+          "path": "docs/migration/native-campaigns-v53/attempt5/source-archive.json",
+          "bytes": 24364,
+          "sha256": "294472a21578b3ee38bbffa3351942caaedee7cefa859172ebe183bc6441f6a6"
+        },
+        "archiveParts": {
+          "path": "docs/migration/native-campaigns-v53/attempt5/source-archive-parts.json",
+          "bytes": 818,
+          "sha256": "7bb0cd6ac6b90ceade6f2d36733715ab13fd3f1b8d85ef09e53b69bd1121de2b"
+        },
+        "originalArchive": {
+          "path": "docs/migration/native-campaigns-v53/attempt5/source-archive.tar.gz",
+          "sha256": "4edab6e5eac20ec6a4e228eb68cffec9fd70c2b4b57519a12a6c6cc88daef761",
+          "bytes": 1415646
+        },
+        "qualification": "The identical source archive already retained at this freeze is referenced, not copied into supplementary."
+      },
+      "result": {
+        "status": "failed",
+        "exitCode": 1,
+        "actions": 101,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "stopReason": "level_active_time_budget",
+        "activeSeconds": 405.28639742900015,
+        "prefixes": 79,
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 101,
+          "resume": 78
+        },
+        "callerAcquiredTransitions": 101,
+        "boundaryReplays": 3,
+        "levelActions": [
+          9,
+          12,
+          15
+        ],
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.26.0"
+      },
+      "verification": {
+        "nativeSourceUnchanged": true,
+        "executionCodeUnchanged": true,
+        "publicPackets": 102,
+        "publicFrames": 232,
+        "journalMatchesTrace": true,
+        "journalCommandsMatchReport": true,
+        "pythonAgentModules": [],
+        "externalDomainAssessments": 0,
+        "actionsByFamily": {
+          "regular_field_correspondence": 36,
+          "observed_frontier": 64,
+          "information_goal": 1
+        },
+        "prefixesByFamily": {
+          "regular_field_correspondence": 14,
+          "observed_frontier": 64,
+          "information_goal": 1
+        }
+      },
+      "startedAt": "2026-11-09T07:48:34.417779+00:00",
+      "finishedAt": "2026-11-09T07:59:05.844453+00:00",
+      "elapsedSeconds": 631.4266840939963,
+      "artifacts": [
+        {
+          "role": "receipt",
+          "originalPath": "artifacts/syme-attempt5/execution-syme.json",
+          "retainedPath": "docs/migration/native-campaigns-v53/supplementary/syme-attempt5/execution-syme.json",
+          "bytes": 49308,
+          "sha256": "27be9ceaa5a45f2e844ae1d5a3a4af869b26c345b2b12ef08d4aa44b4898790e"
+        },
+        {
+          "role": "report",
+          "originalPath": "artifacts/syme-attempt5/syme-campaign.json.gz",
+          "retainedPath": "docs/migration/native-campaigns-v53/supplementary/syme-attempt5/syme-campaign.json.gz",
+          "bytes": 67401,
+          "sha256": "3108316aebe087ec13c8c62ef8763726adfbc1dd6abd7f9791b8eebb4eb61b78"
+        },
+        {
+          "role": "trace",
+          "originalPath": "artifacts/syme-attempt5/syme-public-trace.json.gz",
+          "retainedPath": "docs/migration/native-campaigns-v53/supplementary/syme-attempt5/syme-public-trace.json.gz",
+          "bytes": 60111,
+          "sha256": "67c3bafdaf20de6787bfebcb11308976b93ddb859cde8d205d79a48256bdc533"
+        },
+        {
+          "role": "publicJournal",
+          "originalPath": "artifacts/syme-attempt5/syme-actual-public-journal.jsonl.gz",
+          "retainedPath": "docs/migration/native-campaigns-v53/supplementary/syme-attempt5/syme-actual-public-journal.jsonl.gz",
+          "bytes": 25979,
+          "sha256": "3f39a68e8ab81e740810924a62c0177847c595539291e3bddf635e501fde1aa9"
+        },
+        {
+          "role": "output",
+          "originalPath": "artifacts/syme-attempt5/syme-output.log.gz",
+          "retainedPath": "docs/migration/native-campaigns-v53/supplementary/syme-attempt5/syme-output.log.gz",
+          "bytes": 11066,
+          "sha256": "08a0ab644790173e6c311ee4fe430fa7f984c69e87847af0e80d3d20cd69c1d1"
+        }
+      ]
+    }
+  ]
+}

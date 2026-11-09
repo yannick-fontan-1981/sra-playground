@@ -10,7 +10,7 @@
 import { AttentionMemory } from './v6-attention-memory.ts';
 import { ProspectiveContactAdapter } from './v6-prospective-contact.ts';
 import { compositionIdentity } from './v6-composition-memory.ts';
-import { ObservedFrontier } from './v6-observed-frontier.ts';
+import { ObservedFrontier, frontierActionKey, frontierIndex } from './v6-observed-frontier.ts';
 import { ViewFrontier } from './v6-view-frontier.ts';
 import { PointExperimentMemory } from './v6-point-contrasts.ts';
 import { CoupledDisplays } from './v6-coupled-displays.ts';
@@ -18,6 +18,7 @@ import { ControlDependencies, bindPreservation, checkPreservation } from './v6-t
 import { electInformationGoals, pointGoal, reconcileInformationGoal } from './v6-information-goals.ts';
 import { ObservedInputDomain } from './v6-native-observer.ts';
 import { targetMethodAtBoundary } from './v6-target-method.ts';
+import { retainNativeJson } from './v6-native-owned.ts';
 import { compareUnicode } from './canonical.ts';
 import { pythonEqual as same, pythonTruthy as truth } from './v6-operations.ts';
 import type { NativeReasoningMemory } from './v6-reasoning-memory.ts';
@@ -66,6 +67,8 @@ export class NativeCallerCoordinator {
   returnedAttention: R | null = null;
   targetMethod: R | null = null;
   private restoredValues: readonly unknown[] | null = null;
+  private effectfulInventory: { frontier: ObservedFrontier; sequence: number; chain: string | null;
+    knowledgeRevision: number; observationKey: string; value: R } | null = null;
 
   constructor(memory: NativeReasoningMemory, configuration: NativeCallerConfiguration) {
     this.memory = memory; this.configuration = configuration;
@@ -86,6 +89,7 @@ export class NativeCallerCoordinator {
   }
   async initialize(observation: NativeObservation): Promise<void> {
     this.restoredValues = null;
+    this.effectfulInventory = null;
     await this.frontier.observe(observation, this.graphInputs(observation));
     this.persistDeltas(observation);
   }
@@ -131,7 +135,7 @@ export class NativeCallerCoordinator {
       || !Number.isSafeInteger(counters.deltaSequence) || counters.deltaSequence < 0) throw new TypeError('Invalid native caller checkpoint');
     const controls = new ControlDependencies(); controls.pending = controlState.pending; controls.attempted = new Set(controlState.attempted);
     this.goal = goal; this.frontier = frontier; this.view = view; this.attention = attention; this.points = points; this.displays = displays; this.controls = controls;
-    Object.assign(this, counters); this.restoredValues = null;
+    Object.assign(this, counters); this.restoredValues = null; this.effectfulInventory = null;
   }
   checkpointWrites(): NativeStoreWrite[] {
     // Preserve immutable raster identities on the internal checkpoint path.
@@ -150,6 +154,7 @@ export class NativeCallerCoordinator {
   prepare(observation: NativeObservation, remaining: number): void {
     if (!Number.isSafeInteger(remaining) || remaining < 1) throw new TypeError('Planning requires a positive public action allowance');
     this.restoredValues = null;
+    this.effectfulInventory = null;
     this.frontier.max_prefix = Math.min(16, remaining);
     this.frontier.bindCurrentCandidateContext(observation, this.registry());
     this.attention.revalidate(observation); this.returnedAttention = this.attention.takeParentReturn(observation); this.goalReason = null;
@@ -163,6 +168,109 @@ export class NativeCallerCoordinator {
   async preScoreOffer(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number): Promise<NativeProposal | null> {
     const result = await this.goal.proposeEffect(observation, rows, inputs, remaining, this.configuration.strategy.pre_score_contact);
     return result.status === 'proposed' ? result as NativeProposal : null;
+  }
+
+  /** An observed access model is not an acquired contact effect. This narrowly
+   * identifies the source's first contact experiment, without treating other
+   * learned effect questions as interchangeable exploration. */
+  unacquiredInquiryWitness(proposal: NativeProposal, observation: NativeObservation): R | null {
+    const plan = proposal.effect_plan as R | undefined;
+    if (proposal.status !== 'proposed' || proposal.kind !== 'observed_effect_access' || !plan
+      || plan.observation_ref !== observation.observation_ref || plan.epoch !== observation.level_epoch
+      || plan.score !== observation.levels_completed || plan.initial_contact_acquisition !== true
+      || plan.kind !== 'acquire_visible_contact_response' || plan.observed_nonlocal_contact_count !== 0
+      || !Array.isArray(plan.contact_evidence) || plan.contact_evidence.length
+      || !Array.isArray(plan.remote_effect_families) || plan.remote_effect_families.length
+      || plan.remote_change_evidence !== null || !Array.isArray(plan.control_surface_evidence)
+      || !plan.control_surface_evidence.length || !Array.isArray(plan.prefix) || !plan.prefix.length
+      || plan.prefix.at(-1).effect !== 'unknown_then_observe') return null;
+    return { status: 'unknown_effect_inquiry_with_measured_access', observation_ref: observation.observation_ref,
+      level_epoch: observation.level_epoch, proposal_ref: proposal.proposal_id,
+      contact_evidence: [], control_evidence: [...plan.control_surface_evidence],
+      effect_status: 'unobserved', terminal_role: 'unknown', physical_action_authorized: false,
+      qualification: 'Current measured access supports an initial contact question. No nonlocal contact effect has been acquired by this plan.' };
+  }
+
+  /** Conservative bridge for a V5 current-context premise. Only a genuinely
+   * untried command in the acquired V6 public-protocol node is in this native
+   * extension's domain. Any previous trial, including a changed or transient
+   * return, removes priority. A final-frame self-loop is never called no-effect.
+   * This is not the unported V5 caller's context-equivalence algorithm. */
+  async currentUntriedServiceTrial(observation: NativeObservation, command: NativeCommand): Promise<R | null> {
+    const index = await frontierIndex(observation), key = await frontierActionKey(command);
+    const occurrence = this.frontier.observations[observation.observation_ref], node = this.frontier.nodes[index];
+    if (!occurrence || occurrence.index !== index || !node || !node.occurrences.includes(observation.observation_ref)
+      || !Object.hasOwn(node.actions, key) || Object.hasOwn(node.attempts, key)
+      || !observation.available_action_refs.includes(command.action_ref)) return null;
+    const effectful = this.currentObservedEffectfulActions(observation);
+    if (!effectful) return null;
+    return { status: 'untried_exact_public_context', observation_ref: observation.observation_ref,
+      level_epoch: observation.level_epoch, frame_hash: observation.frame_hash, action_ref: command.action_ref,
+      trial_key: `${index}:${key}`, action_key: key, context_index: index,
+      protocol: structuredClone(node.protocol), command: structuredClone(node.actions[key]),
+      domain_complete: true, attempted_without_effect_in_current_context: false,
+      evidence_refs: [observation.observation_ref], prior_trial_count: 0, prior_transition_refs: [],
+      source_state_ref: 'caller:frontier', source_frontier_chain: this.frontier.chain,
+      source_frontier_sequence: this.frontier.sequence, context_projection: 'v6.frontierProtocol',
+      v5_caller_context_parity: false,
+      effectful_action_context: effectful,
+      qualification: 'No acquired trial exists for this exact admitted command and public protocol. All previously tried commands are outside this narrower native priority domain; no hidden-state equivalence or transient no-effect is inferred.' };
+  }
+
+  /** Complete inventory of positive FINAL-raster changes in the actual current
+   * public epoch. This is a named native producer for a consumed V5 input, not
+   * the unported V5 producer. Final-equal/transient returns remain unknown here;
+   * none is classified as no-effect, and unseen inputs are not assigned a role. */
+  private currentObservedEffectfulActions(observation: NativeObservation): R | null {
+    // Several independent guards ask this same question before a primitive is
+    // dispatched. Reuse one validated inventory only while the actual frontier
+    // chain and complete public scope are unchanged. No historical cache grows.
+    const frontier = this.frontier;
+    const observationKey = JSON.stringify([observation.observation_ref, observation.level_epoch,
+      observation.levels_completed, observation.frame_hash, observation.state, observation.revision,
+      observation.available_action_refs]);
+    const cached = this.effectfulInventory;
+    if (cached?.frontier === frontier && cached.sequence === frontier.sequence
+      && cached.chain === frontier.chain && cached.knowledgeRevision === frontier.knowledge_revision
+      && cached.observationKey === observationKey) return structuredClone(cached.value);
+    this.effectfulInventory = null;
+    const value = this.measureObservedEffectfulActions(observation);
+    if (value) this.effectfulInventory = { frontier, sequence: frontier.sequence, chain: frontier.chain,
+      knowledgeRevision: frontier.knowledge_revision, observationKey, value: retainNativeJson(value) };
+    return value;
+  }
+
+  private measureObservedEffectfulActions(observation: NativeObservation): R | null {
+    const witnesses: R[] = [], known = new Set<string>(), evidence = new Set<string>();
+    let considered = 0;
+    for (const edge of Object.values(this.frontier.edges) as R[]) {
+      const before = this.frontier.nodes[edge.source], after = this.frontier.nodes[edge.target];
+      if (!before || !after || !Array.isArray(edge.evidence_refs) || !edge.evidence_refs.length) return null;
+      const first = before.protocol, second = after.protocol;
+      if (first.level_epoch !== observation.level_epoch || second.level_epoch !== observation.level_epoch
+        || first.levels_completed !== observation.levels_completed || second.levels_completed !== observation.levels_completed) continue;
+      const attempt = before.attempts[edge.action_key];
+      if (!attempt || !(attempt.outcomes[edge.target] > 0) || typeof first.frame_hash !== 'string'
+        || typeof second.frame_hash !== 'string' || !first.available_action_refs.includes(edge.action.action_ref)
+        || !edge.evidence_refs.every((ref: string) => attempt.evidence_refs.includes(ref))) return null;
+      considered += edge.evidence_refs.length;
+      if (first.frame_hash === second.frame_hash) continue;
+      known.add(edge.action.action_ref);
+      for (const ref of edge.evidence_refs) evidence.add(ref);
+      witnesses.push({ edge_ref: edge.edge_id, command: structuredClone(edge.action), source_index: edge.source,
+        target_index: edge.target, before_frame_hash: first.frame_hash, after_frame_hash: second.frame_hash,
+        transition_refs: [...edge.evidence_refs], effect_status: 'observed_final_raster_change' });
+    }
+    return { status: 'observed_effectful_action_inventory', observation_ref: observation.observation_ref,
+      level_epoch: observation.level_epoch, levels_completed: observation.levels_completed,
+      available_action_refs: [...observation.available_action_refs], known_effectful_action_refs: [...known].sort(compareUnicode),
+      witnesses, evidence_refs: [...evidence].sort(compareUnicode), considered_transition_count: considered,
+      source_state_ref: 'caller:frontier', source_frontier_chain: this.frontier.chain,
+      source_frontier_sequence: this.frontier.sequence, domain_complete: true,
+      measurement_domain: 'final_public_raster_change_within_current_epoch_and_score', v5_producer_parity: false,
+      level_start_checkpoint_action_ref: null,
+      checkpoint_qualification: 'The admitted V6 public protocol has no checkpoint-role attribute; null retains the V5 InteractionProbeInput default and gives no action a checkpoint role.',
+      qualification: 'All acquired frontier edges in this declared scope are examined. A positive final-raster change is an observed response, not a general causal law. Unseen inputs and final-equal returns, including possible transient effects, remain unknown; no effect or no-effect is inferred for them.' };
   }
   factoredOffer(observation: NativeObservation, inputs: readonly NativeCommand[], remaining: number): NativeProposal | null {
     return this.goal.proposeFactored(observation, inputs, remaining) as NativeProposal | null;
@@ -235,6 +343,7 @@ export class NativeCallerCoordinator {
   async beforeAssessment(transition: NativeAuthorityTransition, proposal: NativeProposal,
     recordSelected: () => Promise<R | null> = async () => null): Promise<NativeCallerAcquisition> {
     this.restoredValues = null;
+    this.effectfulInventory = null;
     const { before, after, command, first, second, index } = transition, question = proposal.question as R ?? {};
     const acquisition = question.control_acquisition ?? {}, shared = question.curiosity?.also_tests_current_control ?? {};
     const attention_result = this.attention.observe(before, after, command, acquisition.attention_ref || shared.attention_ref || null);
@@ -273,6 +382,7 @@ export class NativeCallerCoordinator {
   }
   async recordAssessment(transition: NativeAuthorityTransition, assessment: R | null): Promise<R> {
     this.restoredValues = null;
+    this.effectfulInventory = null;
     const receipt = await this.frontier.recordTransition(transition.before, transition.command, transition.after,
       { assessment, after_action_candidates: this.graphInputs(transition.after) });
     this.persistDeltas(transition.after); return receipt;
@@ -292,6 +402,7 @@ export class NativeCallerCoordinator {
   /** Rebuild the original retained goal/frontier objects from verified events. */
   async replayBoundary(observation: NativeObservation): Promise<R> {
     this.restoredValues = null;
+    this.effectfulInventory = null;
     const before = await compositionIdentity(this.goal.memory.retainedState()), goal = new ProspectiveContactAdapter();
     for (let sequence = 1; sequence <= this.goalEventCount; sequence += 1) {
       const record = this.memory.get(EPISODE, `goal_access_event:${sequence}`).value;
@@ -310,5 +421,7 @@ export class NativeCallerCoordinator {
       retained_goal_state_digest: before, retained_rule_count: this.registry().length,
       rule_scope: 'prior evidence retained; next-level applicability must be revalidated', visual_terminal_role: 'unknown' };
   }
-  close(observation: NativeObservation, reason: string): void { this.restoredValues = null; this.attention.closePending(observation, reason); }
+  close(observation: NativeObservation, reason: string): void {
+    this.restoredValues = null; this.effectfulInventory = null; this.attention.closePending(observation, reason);
+  }
 }

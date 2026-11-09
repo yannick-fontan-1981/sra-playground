@@ -22,6 +22,7 @@ const aliases: Record<string, string> = {
   field_service_composition: 'public_occurrence_recall',
   observed_framed_transfer: 'public_framed_transfer',
   observed_framed_analogy: 'public_framed_transfer',
+  observed_outline_service: 'public_outline_service',
   rooted_quota_composition: 'public_occurrence_recall',
   occluded_catalogue_composition: 'public_occurrence_recall',
   typed_material_flow: 'public_occurrence_recall',

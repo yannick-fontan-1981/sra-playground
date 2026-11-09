@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.v53.frozen-source-parts.v1",
+  "original": {
+    "path": "docs/migration/native-campaigns-v53/attempt2/source-archive.tar.gz",
+    "sha256": "7199980f390a89150b740036e014d48171cd3fe21b9b6b9bbd3d1d1639251267",
+    "bytes": 1396360
+  },
+  "parts": [
+    {
+      "path": "docs/migration/native-campaigns-v53/attempt2/source-archive.tar.gz.part000",
+      "sha256": "ff5ef81c162a53659966df5ec48ecfc2fcdbd49fe099a2895666073b9cc6841a",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/native-campaigns-v53/attempt2/source-archive.tar.gz.part001",
+      "sha256": "25dc8ea7c495a70d1bf29c7c0fb613566d7c6c5aae6f4333faef177a40c46fec",
+      "bytes": 496360
+    }
+  ],
+  "qualification": "Ordered byte slices of the exact frozen gzip archive. No source or evidence content changes."
+}

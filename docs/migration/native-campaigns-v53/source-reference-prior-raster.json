@@ -1,0 +1,54 @@
+{
+  "actualScenes": [
+    {
+      "afterActualAction": 11,
+      "announcedActions": [
+        "ACTION1"
+      ],
+      "coveredOtherInset": true,
+      "strictTriplets": 0,
+      "withPreviousTriplets": 1
+    },
+    {
+      "afterActualAction": 13,
+      "announcedActions": [
+        "ACTION2"
+      ],
+      "coveredOtherInset": false,
+      "strictTriplets": 0,
+      "withPreviousTriplets": 1
+    }
+  ],
+  "counts": {
+    "actualPublicScenes": 2,
+    "conditionCases": 298,
+    "geometryCases": 16,
+    "projectionCases": 150,
+    "sourceDeclarations": 2,
+    "tierOrderCases": 6
+  },
+  "fixture": {
+    "bytes": 438846,
+    "path": "tests/fixtures/v6-outline-prior-raster-reference.json.gz",
+    "sha256": "76d575db196f285eb0edf71ec8f57e7cf3abe43f8fc232d737a205a956d6bf71"
+  },
+  "generator": {
+    "bytes": 20609,
+    "path": "scripts/export-v6-outline-prior-raster-reference.py",
+    "sha256": "8a0c6d8ac1087d56691840be4fec51355600ff97ea7450a089bdefcb1449fbfc"
+  },
+  "qualification": {
+    "fullV5SelectionParity": false,
+    "fullV6CallerParity": false,
+    "hostExecuted": false,
+    "nativeExecuted": false,
+    "nativeOutputsUsedAsExpected": false,
+    "originalV6WrapperSuppliesPreviousRaster": false,
+    "scope": "Original V5 helper geometry on inputs captured from unchanged original V6 Outline.measure, augmented solely with the actual immediately preceding public final raster. Other variants are explicit controlled cases. Exact projection1296/tier19 and relative order19/20 are evaluated by unchanged original DRM code. The common-caller premises and native annex/arbitration are separate obligations; no game success or new action is produced."
+  },
+  "schema": "logos-engine.v53.outline-prior-raster-original-reference-receipt.v1",
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceUnchanged": true,
+  "status": "passed",
+  "subsetDocumentSha256": "441166403099285220422ac66392f5ea40c3b8138b96887e06cdc4e2274b81ab"
+}

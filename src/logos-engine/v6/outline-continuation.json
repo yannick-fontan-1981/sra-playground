@@ -1,0 +1,101 @@
+{
+  "schema": "logos-engine.v5.outline-continuation-subset.v1",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourcePath": "agents/yf_arc3_v5/drm/interaction.drm",
+  "sourceSha256": "12ce3fd97fb267c893f2241fb71a596c5b3b688324ce04211c52932e9e7b8e94",
+  "sourceBytes": 7108887,
+  "sourceSelectionPolicyRef": "policy.declared_initial_interaction_exploration",
+  "subsetPolicyRef": "native.outline.current_announced_service_subset",
+  "sourcePointers": [
+    {
+      "id": "principle.same_value_body_perimeter_marker_triplet_supports_revisable_accompaniment",
+      "pointer": [
+        "declarations",
+        213
+      ]
+    },
+    {
+      "id": "projection.exploration.compact_body_perimeter_marker_accompaniment",
+      "pointer": [
+        "declarations",
+        217,
+        "fact_projections",
+        634
+      ]
+    },
+    {
+      "id": "projection.exploration.current_announced_accompaniment_is_not_unrequired_cell_exploration",
+      "pointer": [
+        "declarations",
+        217,
+        "fact_projections",
+        665
+      ]
+    },
+    {
+      "id": "projection.policy.declared_initial_interaction_exploration.announced_mobile_step_keeps_its_local_release_scope",
+      "pointer": [
+        "declarations",
+        217,
+        "fact_projections",
+        984
+      ]
+    },
+    {
+      "id": "tier.unique_compact_body_perimeter_marker_accompaniment",
+      "pointer": [
+        "declarations",
+        217,
+        "selection_tiers",
+        20
+      ]
+    }
+  ],
+  "document": {
+    "sha256": "0eb4788851d59715119c025d6cdef43db0029781eb69309e3ee61d4c25372866",
+    "text": "{\"declarations\":[{\"abstraction_level\":\"causal_variant\",\"applicability\":[\"one_step_revisable_accompaniment_toward_a_compatible_locus\"],\"falsifiers\":[\"the_compact_body_does_not_occupy_its_marked_cell_after_the_step\",\"the_hollow_perimeter_correspondence_becomes_ambiguous\",\"the_announced_step_no_longer_reduces_the_measured_residual\"],\"family_ref\":\"family.interaction_evidence\",\"id\":\"principle.same_value_body_perimeter_marker_triplet_supports_revisable_accompaniment\",\"invariants\":[\"palette_identity_is_only_a_correspondence_measurement_not_a_fixed_role\",\"both_body_and_controlled_lead_reduce_distance_to_the_hollow_perimeter\",\"only_the_current_announced_cardinal_step_is_released\",\"hostile_contact_preservation_remains_a_hard_release_constraint\"],\"kind\":\"principle\",\"premises\":[\"one_filled_inset_body_one_same_value_hollow_perimeter_and_one_cardinal_marker_are_unique\",\"the_canonical_controlled_lead_occupies_the_marked_destination_cell\",\"the_preceding_nondirectional_action_produced_a_scene_effect\"],\"reason_refs\":[\"reason.unique_same_value_body_perimeter_marker_triplet_advances_accompaniment\"]},{\"evaluation\":\"declared_eligibility_single\",\"fact_projections\":[{\"all_conditions\":[{\"expected\":1,\"field\":\"same_value_compact_body_hollow_perimeter_marker_triplet_count\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"controlled_lead_bbox_is_compatible_with_announced_motion\",\"operator\":\"equals\"},{\"expected\":0,\"field\":\"other_compact_body_marker_immediate_contact_count\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"candidate_matches_compact_body_hollow_perimeter_marker_direction\",\"operator\":\"equals\"},{\"expected\":false,\"field\":\"compact_body_hollow_perimeter_marker_route_bound_reached\",\"operator\":\"equals\"}],\"id\":\"projection.exploration.compact_body_perimeter_marker_accompaniment\",\"static_facts\":{\"active_goal_ref\":\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"active_terminal_goal_ref\":\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"advances_active_goal_chain\":true,\"dynamic_goal_binding_satisfied\":true,\"emphasis_action_eligible\":true,\"expected_effect_class\":\"effectful_novel\",\"full_metaplan_reprojection_required_after_primitive\":true,\"goal_dependency_chain_refs\":[\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"subgoal.advance_controlled_lead_with_announced_compact_body\"],\"goal_graph_edge_refs\":[\"edge.accompaniment_requires_one_announced_residual_reducing_step\"],\"inherited_priority_from_terminal_goal\":true,\"layer_action_eligible\":true,\"open_terminal_objective_action_family_progress_eligible\":true,\"ordinary_contextual_no_effect_repeat_eligible\":true,\"parallel_action_eligible\":true,\"periodic_action_eligible\":true,\"reasoning_tree_observed_announcement_tool_intervention_action_ready_activations\":[{\"reasoning_tree_node_address\":\"2.15.5\",\"reasoning_tree_node_id\":\"composition.family.autonomous_response.observed_announcement_tool_intervention\",\"reasoning_tree_parent_address\":\"2.15\",\"reasoning_tree_parent_key\":\"composition.family.autonomous_response\",\"reasoning_tree_provisional_gate\":\"action_ready\",\"reasoning_tree_version\":\"composition-target-tree_v-1.0\"}],\"remaining_action_bound\":1,\"selection_principle_ref\":\"principle.same_value_body_perimeter_marker_triplet_supports_revisable_accompaniment\",\"subgoal_ref\":\"subgoal.advance_controlled_lead_with_announced_compact_body\",\"terminal_residual_action_eligible_in_current_control_context\":true},\"templated_facts\":{\"discriminating_experiment_ref\":\"experiment.revisable_compact_body_accompaniment.{candidate_ref}\",\"expected_configuration_or_goal_delta_ref\":\"expectation.compact_body_and_controlled_lead_reduce_hollow_perimeter_residual.{candidate_ref}\",\"falsifier_refs\":[\"falsifier.compact_body_does_not_follow_announced_residual_reducing_step.{candidate_ref}\"],\"premise_claim_refs\":[\"supposition.same_value_body_perimeter_marker_accompaniment.{candidate_ref}\"],\"reconciliation_checkpoint_ref\":\"checkpoint.compact_body_perimeter_marker_accompaniment.{candidate_ref}\"}},{\"all_conditions\":[{\"expected\":1,\"field\":\"same_value_compact_body_hollow_perimeter_marker_triplet_count\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"controlled_lead_bbox_is_compatible_with_announced_motion\",\"operator\":\"equals\"},{\"expected\":0,\"field\":\"other_compact_body_marker_immediate_contact_count\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"candidate_matches_compact_body_hollow_perimeter_marker_direction\",\"operator\":\"equals\"},{\"expected\":false,\"field\":\"compact_body_hollow_perimeter_marker_route_bound_reached\",\"operator\":\"equals\"},{\"expected\":\"discrete\",\"field\":\"interaction_measurement_kind\",\"operator\":\"equals\"},{\"expected\":false,\"field\":\"attempted_without_effect_in_current_context\",\"operator\":\"equals\"},{\"expected\":1,\"field\":\"remaining_action_bound\",\"operator\":\"equals\"},{\"expected\":true,\"field\":\"full_metaplan_reprojection_required_after_primitive\",\"operator\":\"equals\"}],\"id\":\"projection.exploration.current_announced_accompaniment_is_not_unrequired_cell_exploration\",\"static_facts\":{\"current_action_quantized_grid_edge_eligible\":true,\"current_action_quantized_nonrevisit_eligible\":true,\"selection_principle_ref\":\"principle.same_value_body_perimeter_marker_triplet_supports_revisable_accompaniment\"}},{\"all_conditions\":[{\"expected\":\"goal.accompany_mobile_entity_to_compatible_hollow_perimeter\",\"field\":\"active_goal_ref\",\"operator\":\"equals\"}],\"id\":\"projection.policy.declared_initial_interaction_exploration.announced_mobile_step_keeps_its_local_release_scope\",\"static_facts\":{\"committed_verified_repetition\":false,\"declared_complete_plan_present\":false,\"declared_complete_series_authorized\":false,\"declared_conditional_series_authorized\":false,\"declared_deterministic_series_authorized\":false,\"declared_plan_current_stage_ref\":null,\"declared_plan_ref\":null,\"declared_plan_stage_refs\":[],\"release_remaining_action_bound\":1,\"remaining_action_bound\":1,\"remaining_step_count\":1,\"replan_after_each_primitive_declared\":true,\"standard_bfs_target_reached_on_cursor_end\":false,\"verified_repetition_action_payloads\":[{}]},\"templated_facts\":{\"verified_repetition_action_refs\":[\"{action_ref}\"]}}],\"id\":\"native.outline.current_announced_service_subset\",\"input_contract\":\"yf_arc3_v5.authority_input.selection.v1\",\"kind\":\"selection_policy\",\"output_contract\":\"yf_arc3_v5.authority_output.selection.v1\",\"reason_refs\":[\"reason.unique_same_value_body_perimeter_marker_triplet_advances_accompaniment\"],\"supported_operators\":[\"SELECT\"]}],\"module_id\":\"native.outline.current_announced_service_subset\"}"
+  },
+  "qualification": "Exactly one V5 principle, three ordered fact projections and one tier are transferred. Their matcher/projection results support a native current-service coordination witness; this is neither full V5 policy selection nor unchanged V6 caller priority. The caller supplies its actual exact-context trial evidence separately.",
+  "selectionTier": {
+    "all_conditions": [
+      {
+        "expected": "discrete",
+        "field": "interaction_kind",
+        "operator": "equals"
+      },
+      {
+        "expected": 1,
+        "field": "same_value_compact_body_hollow_perimeter_marker_triplet_count",
+        "operator": "equals"
+      },
+      {
+        "expected": true,
+        "field": "controlled_lead_bbox_is_compatible_with_announced_motion",
+        "operator": "equals"
+      },
+      {
+        "expected": 0,
+        "field": "other_compact_body_marker_immediate_contact_count",
+        "operator": "equals"
+      },
+      {
+        "expected": true,
+        "field": "candidate_matches_compact_body_hollow_perimeter_marker_direction",
+        "operator": "equals"
+      },
+      {
+        "expected": false,
+        "field": "compact_body_hollow_perimeter_marker_route_bound_reached",
+        "operator": "equals"
+      },
+      {
+        "expected": false,
+        "field": "attempted_without_effect_in_current_context",
+        "operator": "equals"
+      }
+    ],
+    "id": "tier.unique_compact_body_perimeter_marker_accompaniment",
+    "reason_ref": "reason.unique_same_value_body_perimeter_marker_triplet_advances_accompaniment"
+  },
+  "wrapperQualification": "The native projection-only wrapper uses declared_eligibility_single with no eligibility conditions and the original input/output contract identifiers. Its mechanical eligibility counters do not mean full original-policy admissibility; SELECT is not executed. The exact original tier is matched separately."
+}

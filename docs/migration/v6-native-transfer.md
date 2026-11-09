@@ -11,7 +11,30 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-**Current integrated milestone (v52):** the native common Logos Engine caller
+**Current integrated milestone (v53):** the native common Logos Engine caller
+completes **CN04's first three levels in 73 actions (18, 31, 24)** in one cold
+continuous session, with 29 acquired prefixes, 73 actual Kernel acquisitions
+and two natural boundary replays. The
+[actual campaign](native-campaigns-v53/attempt7/cn04-campaign.json.gz) and
+[execution receipt](native-campaigns-v53/attempt7/execution-cn04.json) bind the
+result to unchanged implementation `0.27.0`, native digest
+`d87f952e0db958cf2168c1af68ecdc85f4164e1dda7e75e2874733fa03359b70`.
+The target stops on entry to level 4 with `NOT_FINISHED`. The 74 complete public
+packets contain 80 frames. All commands come from the existing generic
+`rigid_port_assembly` service; no Python agent, baseline, imported learned
+state, reset or level jump supplies the run.
+
+The newly connected `observed_outline_service` owns the seven pinned V6 source
+fields and consumes the original DRM/SRC policies plus V5 geometry and three
+exact recovery subsets. Explicit native extensions separately provide current
+public-return context, conditional historical-control rebinding, bounded
+observed-body access and a single local question after an actual access
+arrival. Source equivalence is asserted only for the tested strict component
+contracts. CN04 confirms existing port assembly and is not a three-level
+Outline result on ESCT. The [v53 report](v53-outline-service-and-current-relations.md)
+retains the successful campaign, unsuccessful experiments and verification scopes.
+
+**Previous integrated milestone (v52):** the native common Logos Engine caller
 completes **GARE's first three levels in 53 actions (7, 9, 37)** in one cold
 continuous session, with 53 actual Kernel acquisitions and two natural
 boundary replays. The [actual campaign](native-campaigns-v52/attempt9/gare-three-levels.json)
@@ -324,10 +347,12 @@ auxiliary support and native checkpoint report](v35-coupled-support.md), [the v3
 response acquisition](v34-coupled-pair-evidence.md) and [the v33 epoch-anchor
 checkpoint](v33-shared-series-anchor.md) and [the v32 SupportNavigation,
 occurrence recall and delta checkpoint](v32-support-recall-delta.md). The connected-entry audit
-is [v6-entry-point-progress.json](v6-entry-point-progress.json): 44 of 76
-explicit DRM subquestions are connected (57.9%) in implementation
-`logos-engine.typescript.v6.native-migration/0.22.0`. This is a connection metric,
+is [v6-entry-point-progress.json](v6-entry-point-progress.json): 45 of 76
+explicit DRM subquestions are connected (59.2%) in implementation
+`logos-engine.typescript.v6.native-migration/0.27.0`. This is a connection metric,
 not complete behavioral parity, a percentage of code translated, or a game score.
+The v53 Outline owner adds one source entry. Exact recovery subsets and explicit
+native context, access and arrival compositions add no further entry.
 The v52 framed-transfer owner adds two source entries. Its explicit native
 binding, bounded-search, public-packet and current-prerequisite extensions add
 none to that denominator. The v51 field-service connection adds one source entry, with no new native
@@ -354,15 +379,14 @@ composition added one source entry, following the v38 cell-composition entry;
 the v37 performance step added none. All six conditions for a complete
 migration remain false.
 
-The next step is **`observed_outline_service`**: transfer actual outline-motion
-acquisition, interior-contrast evidence, current control rebinding and the
-source's conditional service questions. The
-[read-only candidate screening](native-campaigns-v52/candidate-selection.json)
-finds outlines in 57 of 100 retained initial views and a unique outline with
-an available declared direction in 30. None yet supplies the acquired control
-required by this cold source entry. The next evaluation game will therefore
-be selected after actual control acquisition. The screening executes no game,
-proposal, command or acquisition, and claims no next-game success.
+The next source entry to study is **`reactive_contact_continuation`**, which is
+still pending in the declared material-return list. It should preserve actual
+contact-response evidence and revalidate a current continuation before release.
+The v53 public access/arrival experiments motivate this choice, but do not
+establish a source transfer or a successful game for that pending entry.
+The [public candidate supplement](native-campaigns-v53/supplementary/candidate-selection-supplement.json)
+records how initial observations identified CN04 for evaluating the already
+connected port-assembly service, separately from the Outline experiments.
 
 **Previous v42 result:** THER completes levels 1–4 in **4, 3, 4 and 4 actions**,
 15 total, six sealed prefixes and one retained session. The first two real

@@ -1,0 +1,203 @@
+{
+  "schema": "logos-engine.v53.public-candidate-selection-supplement.v1",
+  "scope": "Read-only supplementary candidate selection for a previously unvalidated game, followed by one separately evidenced cold CN04 campaign. The measurements and identifiers in this document are offline selection evidence and are not supplied to runtime decisions.",
+  "selectedGame": "CN04",
+  "sourceFreeze": "docs/migration/native-campaigns-v53/attempt6/source-manifest.json",
+  "nativeSourceManifestDigest": "f5b0202b4fe5f122e0e4dbad0112f6b444df7d78a3dfecddcce2e7d83b3bafff",
+  "dataBoundary": {
+    "publicInitialCorpus": {
+      "path": "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+      "sha256": "3f82fb0b60a104095623216023054ef438ca4cc516941c671c385ebcbf1e54f2",
+      "games": 100,
+      "actions": 0,
+      "levelJumps": 0
+    },
+    "priorSelection": {
+      "path": "docs/migration/native-campaigns-v37/candidate-selection.json",
+      "sha256": "998856baf5cb7f818ad3da6a15b0126d2941540852863229d104dc700648929e",
+      "scope": "Non-product candidate selection only. No actions were proposed or executed and no game engine was run for this audit."
+    },
+    "readmeAtSelection": {
+      "path": "README.md",
+      "baseCommit": "54327e068839f67fa93b9b8fcdb4089a7a2e3ad3",
+      "sha256": "319a33e3388309258338e1ea2e167d9bf05ea4a412ec1d302d924b15ccf5bfc1",
+      "candidateMentions": {
+        "CN04": 0,
+        "WA30": 0,
+        "RE86": 0
+      },
+      "qualification": "Historical README at selection; later release documentation may add CN04."
+    },
+    "measurementsOnly": true,
+    "familyProposalsInvoked": false,
+    "physicalActionsForSelection": 0,
+    "hiddenEngineOrAuthoredLevelOrSolutionRead": false,
+    "selectionDataSuppliedToAgent": false,
+    "qualification": "The three exported pure measurement functions were applied to their recorded initial public observations and rasters. All printed palette values, dimensions and counts are observed results, not game-specific native rules."
+  },
+  "candidates": [
+    {
+      "rank": 1,
+      "family": "port_assembly",
+      "sourceEntry": "rigid_port_assembly",
+      "measurement": "measurePortLayout",
+      "summary": {
+        "background": 10,
+        "marker": 8,
+        "unit": 3,
+        "phase": [
+          2,
+          2
+        ],
+        "bodies": [
+          {
+            "materialCells": 17,
+            "portCells": 2,
+            "known": true
+          },
+          {
+            "materialCells": 18,
+            "portCells": 2,
+            "known": true
+          }
+        ],
+        "width": 64,
+        "height": 64
+      },
+      "reason": "Unique repeated marker lattice with two disjoint material owners. The existing source proposal can initiate its own physical control calibration, then identify active material and attempt joint port matching.",
+      "bootstrapLimit": "A positive layout is not evidence of observed motion, successful ownership after selection, rotation, editing overlap, common priority selection or level completion.",
+      "priorEvidence": {
+        "location": "ranked_candidates[game=CN04]",
+        "publicPreviewsMatched": [
+          1,
+          2,
+          3
+        ],
+        "kind": "Detailed recorded pure-measurement results with raster and atlas hashes."
+      },
+      "campaignScope": "Only CN04 was subsequently run among these three candidates. The retained preliminary attempt6 campaign reaches three completed levels; final release reproduction is separate.",
+      "game": "CN04",
+      "connectionStatus": "connected",
+      "connectionEvidence": "docs/migration/v6-entry-point-progress.json",
+      "source": {
+        "path": "src/logos-engine/v6-port-assembly.ts",
+        "sha256": "fd41bf045465287af77c5bb68497e79c97357250501bd75cfe62e166f5b5694d"
+      },
+      "initialFrameHash": "76e9c99bc22f6b77",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6"
+      ]
+    },
+    {
+      "rank": 2,
+      "family": "oriented_coupling",
+      "sourceEntry": "oriented_coupling",
+      "measurement": "orientedCouplingInitial",
+      "summary": {
+        "pitch": 4,
+        "phase": [
+          0,
+          0
+        ],
+        "core": 9,
+        "rest_shell": 4,
+        "background": 1,
+        "targetSlots": 3,
+        "initialBoxes": 3
+      },
+      "reason": "Repeated hollow square objects share one pitch and phase, with a homologous enclosure containing enough measured slots.",
+      "bootstrapLimit": "Common exploration must first observe controller translation and a new frontal contour invitation. Initial geometry alone does not activate this family; subsequent coupling and release must be learned from returned observations.",
+      "priorEvidence": {
+        "location": "ranked_candidates[game=WA30]",
+        "publicPreviewsMatched": [
+          1,
+          2,
+          3
+        ],
+        "kind": "Detailed recorded pure-measurement results with raster and atlas hashes."
+      },
+      "campaignScope": "No additional campaign was run for this supplementary selection.",
+      "game": "WA30",
+      "connectionStatus": "connected",
+      "connectionEvidence": "docs/migration/v6-entry-point-progress.json",
+      "source": {
+        "path": "src/logos-engine/v6-oriented-coupling.ts",
+        "sha256": "87b682dab1406d4bcef59095bd3422509f3d13338f81ffc9c1972db6c0e682b8"
+      },
+      "initialFrameHash": "22f3ccd4739a85ce",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5"
+      ]
+    },
+    {
+      "rank": 3,
+      "family": "constellation_cover",
+      "sourceEntry": "controlled_constellation_cover",
+      "measurement": "measureConstellationLayout",
+      "summary": {
+        "background": 5,
+        "focusColor": 0,
+        "ringWidths": [
+          3
+        ],
+        "targetGroups": [
+          {
+            "color": 11,
+            "count": 4
+          },
+          {
+            "color": 9,
+            "count": 4
+          }
+        ],
+        "boundaryOverlay": 64,
+        "width": 64,
+        "height": 64
+      },
+      "reason": "Two groups of four measured marker centres, square rings and a unique focus satisfy the native layout guard. The existing generic component can acquire support ownership through independent observed displacements.",
+      "bootstrapLimit": "Ownership, selector, movement controls, occlusion agreement and joint coverage still require live acquisition. The prior candidate report records longer acquisition than the preferred candidates.",
+      "priorEvidence": {
+        "location": "other_evidence_limits.RE86",
+        "publicPreviewsMatched": [
+          1,
+          2,
+          3
+        ],
+        "kind": "Historical report statement; this supplement does not independently re-decode those gallery previews."
+      },
+      "campaignScope": "No additional campaign was run for this supplementary selection.",
+      "game": "RE86",
+      "connectionStatus": "connected",
+      "connectionEvidence": "docs/migration/v6-entry-point-progress.json",
+      "source": {
+        "path": "src/logos-engine/v6-constellation-cover.ts",
+        "sha256": "a7c1ac659e38ced3628a614e90c452c82b62b02cc9b6208aa651a7ffa6ab7e95"
+      },
+      "initialFrameHash": "86e77cb5586f7c72",
+      "availableActionRefs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5"
+      ]
+    }
+  ],
+  "deprioritized": {
+    "LKEY": {
+      "reason": "A previously recorded cold common-caller probe completed zero levels in 98 actions before its active budget expired.",
+      "evidence": "docs/migration/v52-framed-transfer-and-public-packet-acquisition.md",
+      "qualification": "This historical unsuccessful probe is not newly run by this supplement."
+    }
+  },
+  "subsequentPreliminaryEvidence": "docs/migration/native-campaigns-v53/supplementary/relocation-manifest.json"
+}
