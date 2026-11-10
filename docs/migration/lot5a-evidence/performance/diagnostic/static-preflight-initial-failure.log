@@ -1,0 +1,1 @@
+{"status": "static_input_review_failed", "checkedCount": 65, "unsatisfied": ["baseline_dependency_equivalence_public/vendor/pyodide"], "measurementExecuted": false, "readinessCreated": false, "receipt": {"path": "docs/migration/lot5a-evidence/performance/static-preflight.json", "sha256": "21f12cdcb5c36a8be513c1a3c74eadc2093d4037f5b9c21a1db1068ffe8196d5", "bytes": 16305}}

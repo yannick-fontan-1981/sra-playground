@@ -1,0 +1,82 @@
+{
+  "schema": "logos-engine.linked-temporal-development.v1",
+  "status": "targeted-development-validation-passed-integrated-gates-pending",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "consumedEntry": "LinkedPreparation.propose -> PhaseRelations.linked_contact.propose",
+  "closure": [
+    "LinkedPreparation public wrapper and historical event-list adapter",
+    "LinkedContact measured geometry, source-ordered proposals, guards, refutations and preservation obligations",
+    "PhaseRelations passive acquisition, remote reversal and changed-endpoint validation",
+    "PhaseTransfer conditional boundary acquisition, epoch reset and passive measurements",
+    "Legacy phase/portable guard delegation without activating their separate proposal policies"
+  ],
+  "implementationFiles": [
+    "src/logos-engine/v6-linked-temporal-common.ts",
+    "src/logos-engine/v6-linked-temporal-contact.ts",
+    "src/logos-engine/v6-linked-temporal-phase.ts",
+    "src/logos-engine/v6-linked-temporal-preparation.ts"
+  ],
+  "testFiles": [
+    "tests/v6-linked-temporal-preparation.test.ts",
+    "tests/v6-linked-temporal-reference.test.ts"
+  ],
+  "independentOracle": {
+    "receipt": "docs/migration/lot5a-evidence/diagnostic/source-oracle-export.json",
+    "fixture": "tests/fixtures/v6-linked-preparation-reference.json.gz",
+    "sha256": "280397c931e2ba7bff5aa99931b64b938d18e5224e66e9da397407c0e3018299",
+    "helpers": 14,
+    "coldChains": 9,
+    "coldOperations": 165,
+    "directComponents": 13,
+    "retainedSourceExceptions": 2,
+    "repeatedNativeRestoration": "Every cold-chain operation is also executed on a separate owner restored after each preceding operation."
+  },
+  "priorExecutedValidation": {
+    "tests": { "passed": 49, "failed": 0, "includesLatestTextEdits": false },
+    "targetedTransitiveTypecheck": { "exitCode": 0, "includesLatestTextEdits": false },
+    "qualifications": [
+      "These results precede the final geometry receipt cache, immutable adapter-event sharing and additional malformed-checkpoint tests.",
+      "No new test, typecheck or oracle execution is started during the separately coordinated lot 7A ABBA window."
+    ]
+  },
+  "lastExecutedValidation": {
+    "receipt": "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-validation.json",
+    "recordedAt": "2026-11-10T20:38:52Z",
+    "tests": { "passed": 51, "failed": 0, "cancelled": 0, "skipped": 0, "includesLatestTextEdits": true },
+    "targetedTransitiveTypecheck": { "exitCode": 0, "diagnostics": 0, "includesLatestTextEdits": true },
+    "directInputsUnchangedDuringValidation": true,
+    "qualifications": [
+      "Executed after explicit parent release of the coordinated lot 7A quiet window.",
+      "This is a development validation before integration of the effectively published lot 7A source, not a final integrated gate.",
+      "The independent fixture was not regenerated; no production code was changed and no additional test or game was run."
+    ]
+  },
+  "validatedPostreviewChanges": [
+    "Cache validated immutable geometry together with its digest, width and height; reject rebinding.",
+    "Retain immutable adapter events and scored witnesses when restoring a native checkpoint.",
+    "Check contact body mask against the canonical acquired mask, in addition to size and digest bindings.",
+    "Exercise geometry corruption and portable template corruption with atomic restoration rejection.",
+    "Check that the portable state retains conditional templates without previous-epoch raster histories."
+  ],
+  "invalidInputQualification": {
+    "fixtureCase": "malformed AFTER observation without entities",
+    "original": "Python appends a command before raising KeyError('entities'), leaving a partial inconsistent history. The fixture retains both the exception and the exact partial state.",
+    "native": "Native ingress rejects the malformed AFTER observation with TypeError before mutating acquired history. A dedicated conformance branch checks atomic rejection and the retained original partial mutation.",
+    "scope": "This is an explicit invalid-input difference. Results and state remain exact for admitted fixture operations; the native checkpoint contract is not weakened to reproduce corrupted state."
+  },
+  "nativeExtensions": {
+    "checkpoint": "logos-engine.linked-temporal-preparation.v1",
+    "ownership": "Immutable acquired rasters and validated masks may be shared by native checkpoints. Mutable foreign input is retained before sharing; public state() and sourceState() remain detached copies.",
+    "epochRelease": "Official epoch/state boundaries drop phase snapshots, commands and local contact state. Conditional portable knowledge follows the original scored-boundary rule; adapter event and score witnesses are retained.",
+    "sourceCompatibleDefault": true,
+    "boundedProductionOption": { "maximumNodes": 65536, "maximumWork": 2000000 },
+    "cutoff": "Return current-observation unknown with release_authority=false and block_unrelated_probe=true after rolling back partial contact-proposal mutation; acquire no action, refutation or impossibility.",
+    "deadlineQualification": "Synchronous work checks are bounded and sample deadline/abort at work checkpoints. No new asynchronous-yield or hard Pause-latency guarantee is claimed."
+  },
+  "scopeQualifications": [
+    "All test rasters, actual transition rows and exposed controls are synthetic public observations.",
+    "No game-specific solution, engine rule or hidden state was read or added by this implementation task.",
+    "The consumed source entry retains guarded key paths of up to min(16, remaining). No unconsumed phase/portable proposal policy is activated.",
+    "Full production-priority contribution, integrated runtime gates, game replays and final cost measurement are separate parent-owned evidence."
+  ]
+}

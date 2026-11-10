@@ -1,0 +1,14 @@
+{
+  "startedAt": "2026-11-10T20:07:57.326576+00:00",
+  "pid": 7,
+  "command": [
+    "python",
+    "-B",
+    "scripts/run-bounded-native-campaign-proof.py",
+    "WEAV",
+    "6",
+    "400",
+    "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic"
+  ],
+  "cutoff": "2026-11-10T20:15:17.217385+00:00"
+}

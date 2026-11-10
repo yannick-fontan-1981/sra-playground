@@ -1,0 +1,10 @@
+{
+  "schema": "logos-engine.lot5a-retained-delivery-verifier-argument-failure.v1",
+  "recordedAt": "2026-11-10T21:44:22.554249+00:00",
+  "status": "input_resolution_failed",
+  "exitCode": 1,
+  "tool": "scripts/verify-native-delivery.py",
+  "exception": "Missing regular input file: /workspace/sites/sra-lot5-20261110/.sites-checkout/docs/migration/lot5a-evidence/final/docs/migration/lot5a-evidence/performance/readiness.json",
+  "scope": "The unchanged delivery verifier confines extra receipts to its final directory. Repository-relative cost receipt outside that directory was incorrectly supplied as an extra argument. No native validation, test, build, game or cost was rerun; no delivery receipt was written.",
+  "correction": "Use only final-local extra receipts for the functional delivery verification. Cost inputs receive their separate publication integrity receipt."
+}

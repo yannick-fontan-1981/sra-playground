@@ -1,0 +1,267 @@
+{
+  "schema": "logos-engine.lot5a-shared-fragment-independent-review.v1",
+  "status": "independent_agent_review_passed_before_measurement",
+  "reviewAuthority": {
+    "kind": "independent_agent_assessment",
+    "agent": "/root/forced_paths",
+    "implementationOwner": "/root/delta_runtime",
+    "humanApprovalClaimed": false,
+    "reviewerChangedQualificationCode": false
+  },
+  "startedAt": "2026-11-10T21:16:08Z",
+  "finishedAt": "2026-11-10T21:23:43.264621+00:00",
+  "timestampScope": "Start/end cover the final source and receipt review. The preliminary direct capture comparison was already completed before the recorded start; no earlier exact start time is claimed.",
+  "scope": "Static source review plus discrete inspection, canonical hashing and structural-count checks of retained untimed capture evidence. No native runtime, test, build, live game, replay, benchmark or cost window was executed by this reviewer.",
+  "nativeDigests": {
+    "baseline": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+    "candidate": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f"
+  },
+  "runtimeSourceDigests": {
+    "baseline": "043124f54bca0d7b6f7add03d395dc57cd306112966aa311922596747aae67de",
+    "candidate": "49ae385ee5a16a2922bbed7228858083a81bd9a462e7cd5d0bb16cd977d80624"
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot5a-evidence/qualify-cost-owner-graphs-v2.mjs",
+      "bytes": 57320,
+      "sha256": "dd3ff479cedf907a3811264d70eddc040ddc50d3ae8d6e82dcadc7e39d7ddf2f"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/declare-shared-fragment-supplement.py",
+      "bytes": 9809,
+      "sha256": "4c24e168469bd38286442d5a8aed83db80975e492255e71acbf1471ef2372d28"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/finalize-owner-cost-contract.py",
+      "bytes": 12534,
+      "sha256": "79a0c4c1651ee1774434aafff381ad11910c7d4e08045174566683f64db189f5"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 41436,
+      "sha256": "99c9ca930f6ca86bb54f7ef1d0e67dbb5af84365b827b9c881b956f6a519f0d7"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/diagnose-cost-fragment-reuse.py",
+      "bytes": 13396,
+      "sha256": "d74ad9b2b4f180e4d9662d61362e675e0e46c01fb04a484a0f3306f44d632ae8"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/shared-fragment-premeasurement-supplement.json",
+      "bytes": 3802271,
+      "sha256": "71820d69e926954a9859e066b05d098b7faf23c3358321352b0e0c32d1411e33"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/diagnostic/fragment-first-creator-inventory.json",
+      "bytes": 4108930,
+      "sha256": "91dce3ae786ec5bfa3a1d0bad7435b366de82f55feb635232f24e4e0c68a4353"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-first-creator.json",
+      "bytes": 39817093,
+      "sha256": "bdfa9286d7a03715282b7e8c7ef49a3c90ccd4eb1e4d7ac1149aa59085127163"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-structural-attribution-v2.json",
+      "bytes": 3988757,
+      "sha256": "bf3e4c7d8ae032e0964760263eda1bf91dce288e436155f197a79ed4534372dd"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-structural-attribution-v2.log",
+      "bytes": 309,
+      "sha256": "4b9d027ff4c877578543b7ce7868bd16f740e3e26505f09f0489eca633eb8020"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-structural-fixture.json",
+      "bytes": 59963,
+      "sha256": "b6d77cd1bf4f2a5611d1092c6d754eec7dcab4fbce9d1210804bd87c374203bb"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-structural-attribution.json",
+      "bytes": 34095,
+      "sha256": "09ec7837d374f41fbf3a4db449e1b39611a8d456463c69ba06fce1d557f32450"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/declaration.json",
+      "bytes": 5524,
+      "sha256": "9dba35881a2ef113bdfb2b7a1477bf0f6514d774f933926a649f844798365651"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/initial-preparation-tools/manifest.json",
+      "bytes": 3288,
+      "sha256": "00758247cb9bbfa8f248037d4b106a34b727d89ef51cb0ce97a0099ae9598301"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz",
+      "bytes": 4755121,
+      "sha256": "2938b69b5b02028e197ab2eadb1352918459def94ad38a0c17de2e0e6268e8f3"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/baseline-structure.receipt.json",
+      "bytes": 103744,
+      "sha256": "b6aa1ebad686f3cfea072268fcdff0fc57b528fcd82563c50e279c951a4c0aed"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz",
+      "bytes": 6820472,
+      "sha256": "dfcd0141da2ae230efbee9efedb8177c91d3cb1d3ddb17c0bcd22eac66eefa37"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/candidate-structure.receipt.json",
+      "bytes": 104466,
+      "sha256": "ec940f9a384c8021422a683f0412aa0b975444b3a9687cb112462f71bd323b4c"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/source-manifest.json",
+      "bytes": 33584,
+      "sha256": "631951d71c675e5c29f712e92724f17e446915807570581c049357bb97bf46b3"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/consolidate-owner-costs.mjs",
+      "bytes": 50598,
+      "sha256": "9e6112ec83b75bbdc7bdb2a614dd7ce0e860e1ea9b71ba2f74fb37e4f2e74f1e"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/review-owner-costs.py",
+      "bytes": 67816,
+      "sha256": "40b6a2068b61652725a55567407a58e54b88cd81056ecbe56755018d7a3d496d"
+    }
+  ],
+  "independentChecks": [
+    {
+      "name": "source_first_creator_semantics",
+      "method": "static source inspection",
+      "passed": true,
+      "details": "NativeKnowledgeStore.commit reuses an existing content-addressed fragment without rewriting its origin; both Kernel transaction and ordinary commit retain actual sequence, cause and source digest."
+    },
+    {
+      "name": "fourteen_direct_capture_creation_checks",
+      "method": "independent read-only parsing of both frozen gzip captures and canonical SHA-256 comparison",
+      "passed": true,
+      "fragmentCount": 14,
+      "details": "Exactly one revision-one creation per side, candidate point strictly earlier, terminal encoded value with no reference, full canonical value/address equality, all non-origin fields equal, and each origin.source_digest equal to that capture runtime."
+    },
+    {
+      "name": "direct_common_consumer_root_checks",
+      "method": "independent read-only comparison of raw captured deltas at the baseline catch-up point",
+      "passed": true,
+      "fragmentRootReuseChecks": 28,
+      "details": "For each fragment, both common reasoning roots have exact complete encoded values, causes and metadata except their separately verified runtime source digest. The 28 checks include repeated checks of roots that consume several fragments; they are not 28 distinct root identities."
+    },
+    {
+      "name": "closed_ledger_and_early_owner_only",
+      "method": "static v2 control-flow review and binding to the successful v2 receipt",
+      "passed": true,
+      "details": "Only the exact 14 (case, form, fragmentId) entries are allowed. Actual creation events and first consumers equal the ledger; all B creation-point consumers equal the closed owner-only list. Every B consumer before A catch-up must remain family_state:linked_temporal_preparation through phase.masks. Each earlier owner root has an actual checkpoint attribution."
+    },
+    {
+      "name": "raw_graph_integrity_retained",
+      "method": "static inspection of graph validation plus existing qualified execution receipt; no independent rerun of that qualifier",
+      "passed": true,
+      "details": "Both complete captured Kernel chains retain sequence/previous/hash/node revision/cause/scope/profile/source_digest validation. Immutable fragments cannot be revised. Special origins are retained separately; no global fragment-origin normalization occurs."
+    },
+    {
+      "name": "pointwise_extra_minus_catchup_balance",
+      "method": "independent arithmetic on structural counts only in the v2 receipt",
+      "passed": true,
+      "points": 58,
+      "details": "At every point, revisionB-revisionA = cumulative actual attributed B deltas E minus observed paired A creations C. E is never decremented. Current candidate-only node count equals the actual extra-ID set; IDs leave that set when A creates them. No timing arithmetic is included."
+    },
+    {
+      "name": "remaining_common_order_and_values_scope",
+      "method": "static source inspection and closed receipt review",
+      "passed": true,
+      "details": "Only the exact paired baseline creation sequences leave the common comparison stream; every remaining common node identity/revision/cause/order remains checked. All common fragment values are compared in full. Full equality of every other private root is not claimed."
+    },
+    {
+      "name": "preserved_failure_and_chronology",
+      "method": "fingerprints, schemas and timestamps",
+      "passed": true,
+      "details": "Original failed v1 attribution and nine archived preparation tools remain preserved. Supplement was declared before v2 execution and binds captures, inventory, qualifier, finalizer and unchanged analyzers. Official window/readiness/cohort reports were absent at this review."
+    },
+    {
+      "name": "unchanged_cost_contract_scope",
+      "method": "static finalizer/analyzer interface inspection and fingerprint comparison to initial declaration",
+      "passed": true,
+      "details": "The same four allowed work-count paths remain. Existing cost consolidator and independent numeric reviewer hashes equal the initial declaration. No numeric policy, budget, sample count or measurement was changed by this qualification."
+    }
+  ],
+  "retainedExecution": {
+    "startedAt": "2026-11-10T21:21:40.001Z",
+    "finishedAt": "2026-11-10T21:22:02.544Z",
+    "passedChecks": 64,
+    "failedChecks": 0,
+    "forms": 4,
+    "capturedPoints": 58,
+    "attributedCandidateDeltas": 70,
+    "pairedBaselineCatchups": 14,
+    "formsSha256": "87a2a84523cbb4fe95c289947588588f5681afb5bbdb804ff41b214c30b27e71",
+    "executionWasPerformedBy": "/root/delta_runtime",
+    "qualifierRerunByThisReviewer": false
+  },
+  "structuralFinalLedgers": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "capturedPoints": 6,
+      "attributedCandidateDeltas": 10,
+      "pairedBaselineCatchups": 0,
+      "netRevisionDifference": 10,
+      "candidateOnlyNodes": 7
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "capturedPoints": 19,
+      "attributedCandidateDeltas": 19,
+      "pairedBaselineCatchups": 3,
+      "netRevisionDifference": 16,
+      "candidateOnlyNodes": 10
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "capturedPoints": 6,
+      "attributedCandidateDeltas": 11,
+      "pairedBaselineCatchups": 0,
+      "netRevisionDifference": 11,
+      "candidateOnlyNodes": 8
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "capturedPoints": 27,
+      "attributedCandidateDeltas": 30,
+      "pairedBaselineCatchups": 11,
+      "netRevisionDifference": 19,
+      "candidateOnlyNodes": 10
+    }
+  ],
+  "premeasurementObservation": {
+    "supplementDeclaredAt": "2026-11-10T21:21:19.327035+00:00",
+    "officialWindowAbsent": true,
+    "readinessAbsent": true,
+    "cohortReportsAbsent": true,
+    "timingReportsRead": 0,
+    "timingCalculationsPerformed": 0,
+    "measuredSessionsExcludedByReview": 0
+  },
+  "decision": "Approve this narrowly closed first-creator attribution and fixture for prospective cost comparison. No blocker remains in the reviewed v2 code or retained result.",
+  "limitations": [
+    "This is an independent agent review, not a claim of external human approval.",
+    "The earlier raw-capture inspection independently covered all 14 exceptional fragments and their catch-up roots; complete-chain qualification is supplied by the retained v2 run whose checks were statically reviewed.",
+    "The 268 common-fragment inventory and exact remaining-delta findings come from the bound diagnostic plus strengthened v2 validation; no general equivalence of all private graph values is claimed.",
+    "No measured cost evidence exists in the reviewed window. Approval does not predict the ABBA result, WEAV level-six completion, long-session performance or any live-game behavior.",
+    "Neither source digests nor origin causes nor captured graph data are rewritten. Historical facts and the failed initial qualification remain retained."
+  ]
+}

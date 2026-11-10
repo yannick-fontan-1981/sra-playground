@@ -1,0 +1,316 @@
+TAP version 13
+# Subtest: cold linked preparation abstains and the public adapter preserves full observation identity
+ok 1 - cold linked preparation abstains and the public adapter preserves full observation identity
+  ---
+  duration_ms: 22.770453
+  type: 'test'
+  ...
+# Subtest: public displacement acquires the current linked geometry and preserves the source candidate order
+ok 2 - public displacement acquires the current linked geometry and preserves the source candidate order
+  ---
+  duration_ms: 41.613805
+  type: 'test'
+  ...
+# Subtest: contact, departure and a persistent effect change the next question through actual public records
+ok 3 - contact, departure and a persistent effect change the next question through actual public records
+  ---
+  duration_ms: 92.687603
+  type: 'test'
+  ...
+# Subtest: reversible contact is distinguished from persistence and freezes a source path before a phase input
+ok 4 - reversible contact is distinguished from persistence and freezes a source path before a phase input
+  ---
+  duration_ms: 68.06173
+  type: 'test'
+  ...
+# Subtest: guards reject stale origin, unavailable input and displaced receiver; official boundaries stay unknown
+ok 5 - guards reject stale origin, unavailable input and displaced receiver; official boundaries stay unknown
+  ---
+  duration_ms: 34.168908
+  type: 'test'
+  ...
+# Subtest: native work exhaustion produces a current refusal and rolls back partial proposal changes
+ok 6 - native work exhaustion produces a current refusal and rolls back partial proposal changes
+  ---
+  duration_ms: 23.089454
+  type: 'test'
+  ...
+# Subtest: deadline exhaustion and abort preserve evidence instead of acquiring refutation
+ok 7 - deadline exhaustion and abort preserve evidence instead of acquiring refutation
+  ---
+  duration_ms: 23.853583
+  type: 'test'
+  ...
+# Subtest: snapshots own foreign rasters and immutable native checkpoints reuse prior acquired snapshots
+ok 8 - snapshots own foreign rasters and immutable native checkpoints reuse prior acquired snapshots
+  ---
+  duration_ms: 21.222286
+  type: 'test'
+  ...
+# Subtest: epoch boundaries release old raster history but retain the independently scored adapter witnesses
+ok 9 - epoch boundaries release old raster history but retain the independently scored adapter witnesses
+  ---
+  duration_ms: 24.742905
+  type: 'test'
+  ...
+# Subtest: malformed checkpoints are rejected before changing the current owner
+ok 10 - malformed checkpoints are rejected before changing the current owner
+  ---
+  duration_ms: 209.539775
+  type: 'test'
+  ...
+# Subtest: noncontiguous actual observations are refused instead of filling a fictional history
+ok 11 - noncontiguous actual observations are refused instead of filling a fictional history
+  ---
+  duration_ms: 19.656323
+  type: 'test'
+  ...
+# Subtest: cached immutable geometry cannot be rebound to a different digest or size
+ok 12 - cached immutable geometry cannot be rebound to a different digest or size
+  ---
+  duration_ms: 16.034364
+  type: 'test'
+  ...
+# Subtest: contact digest retains Python default spaces and compact phase digest stays distinct
+ok 13 - contact digest retains Python default spaces and compact phase digest stays distinct
+  ---
+  duration_ms: 0.500009
+  type: 'test'
+  ...
+# Subtest: linked temporal oracle pins the original source and retains its explicit exceptions
+ok 14 - linked temporal oracle pins the original source and retains its explicit exceptions
+  ---
+  duration_ms: 4.761805
+  type: 'test'
+  ...
+# Subtest: linked temporal original helper: open_enclosures-positive
+ok 15 - linked temporal original helper: open_enclosures-positive
+  ---
+  duration_ms: 0.667296
+  type: 'test'
+  ...
+# Subtest: linked temporal original helper: open_enclosures-empty
+ok 16 - linked temporal original helper: open_enclosures-empty
+  ---
+  duration_ms: 0.120908
+  type: 'test'
+  ...
+# Subtest: linked temporal original helper: linked_nodes-positive
+ok 17 - linked temporal original helper: linked_nodes-positive
+  ---
+  duration_ms: 0.885537
+  type: 'test'
+  ...
+# Subtest: linked temporal original helper: linked_nodes-empty
+ok 18 - linked temporal original helper: linked_nodes-empty
+  ---
+  duration_ms: 0.095061
+  type: 'test'
+  ...
+# Subtest: linked temporal original helper: phase-slots-false
+ok 19 - linked temporal original helper: phase-slots-false
+  ---
+  duration_ms: 0.363187
+  type: 'test'
+  ...
+# Subtest: linked temporal original helper: phase-slots-true
+ok 20 - linked temporal original helper: phase-slots-true
+  ---
+  duration_ms: 0.166466
+  type: 'test'
+  ...
+# Subtest: linked temporal original helper: full-observation-measures-public-raster
+ok 21 - linked temporal original helper: full-observation-measures-public-raster
+  ---
+  duration_ms: 19.022437
+  type: 'test'
+  ...
+# Subtest: linked temporal original helper: full-observation-preserves-existing-measurements
+ok 22 - linked temporal original helper: full-observation-preserves-existing-measurements
+  ---
+  duration_ms: 1.440067
+  type: 'test'
+  ...
+# Subtest: linked temporal original helper: phase-slots-absent
+ok 23 - linked temporal original helper: phase-slots-absent
+  ---
+  duration_ms: 0.286483
+  type: 'test'
+  ...
+# Subtest: linked temporal original helper: phase-slots-two-competing-rows
+ok 24 - linked temporal original helper: phase-slots-two-competing-rows
+  ---
+  duration_ms: 0.262998
+  type: 'test'
+  ...
+# Subtest: linked temporal original helper: compressed-visible-path
+ok 25 - linked temporal original helper: compressed-visible-path
+  ---
+  duration_ms: 0.197081
+  type: 'test'
+  ...
+# Subtest: linked temporal original helper: portable-patch-inside
+ok 26 - linked temporal original helper: portable-patch-inside
+  ---
+  duration_ms: 0.245873
+  type: 'test'
+  ...
+# Subtest: linked temporal original helper: portable-patch-negative
+ok 27 - linked temporal original helper: portable-patch-negative
+  ---
+  duration_ms: 0.063413
+  type: 'test'
+  ...
+# Subtest: linked temporal original helper: portable-patch-past-edge
+ok 28 - linked temporal original helper: portable-patch-past-edge
+  ---
+  duration_ms: 0.050315
+  type: 'test'
+  ...
+# Subtest: linked temporal original cold chain and repeated restoration: reversible-contact-and-phase
+ok 29 - linked temporal original cold chain and repeated restoration: reversible-contact-and-phase
+  ---
+  duration_ms: 1615.770422
+  type: 'test'
+  ...
+# Subtest: linked temporal original cold chain and repeated restoration: persistent-departure
+ok 30 - linked temporal original cold chain and repeated restoration: persistent-departure
+  ---
+  duration_ms: 363.608451
+  type: 'test'
+  ...
+# Subtest: linked temporal original cold chain and repeated restoration: translated-palette-permuted-contact
+ok 31 - linked temporal original cold chain and repeated restoration: translated-palette-permuted-contact
+  ---
+  duration_ms: 576.047684
+  type: 'test'
+  ...
+# Subtest: linked temporal original cold chain and repeated restoration: learned-multi-action-access
+ok 32 - linked temporal original cold chain and repeated restoration: learned-multi-action-access
+  ---
+  duration_ms: 442.044553
+  type: 'test'
+  ...
+# Subtest: linked temporal original cold chain and repeated restoration: learned-path-no-remote-effect
+ok 33 - linked temporal original cold chain and repeated restoration: learned-path-no-remote-effect
+  ---
+  duration_ms: 462.674418
+  type: 'test'
+  ...
+# Subtest: linked temporal original cold chain and repeated restoration: phase-relation-and-two-scored-boundaries
+ok 34 - linked temporal original cold chain and repeated restoration: phase-relation-and-two-scored-boundaries
+  ---
+  duration_ms: 1526.897568
+  type: 'test'
+  ...
+# Subtest: linked temporal original cold chain and repeated restoration: refusals-and-source-exceptions
+ok 35 - linked temporal original cold chain and repeated restoration: refusals-and-source-exceptions
+  ---
+  duration_ms: 157.943111
+  type: 'test'
+  ...
+# Subtest: linked temporal original cold chain and repeated restoration: source-malformed-public-observation-exception
+ok 36 - linked temporal original cold chain and repeated restoration: source-malformed-public-observation-exception
+  ---
+  duration_ms: 0.798609
+  type: 'test'
+  ...
+# Subtest: linked temporal original cold chain and repeated restoration: nonprogress-epoch-reset-and-scored-passed-list
+ok 37 - linked temporal original cold chain and repeated restoration: nonprogress-epoch-reset-and-scored-passed-list
+  ---
+  duration_ms: 53.166253
+  type: 'test'
+  ...
+# Subtest: linked temporal explicitly seeded source component: condition-visible-original
+ok 38 - linked temporal explicitly seeded source component: condition-visible-original
+  ---
+  duration_ms: 36.091872
+  type: 'test'
+  ...
+# Subtest: linked temporal explicitly seeded source component: condition-visible-changed
+ok 39 - linked temporal explicitly seeded source component: condition-visible-changed
+  ---
+  duration_ms: 47.337338
+  type: 'test'
+  ...
+# Subtest: linked temporal explicitly seeded source component: condition-fully-occluded
+ok 40 - linked temporal explicitly seeded source component: condition-fully-occluded
+  ---
+  duration_ms: 55.198184
+  type: 'test'
+  ...
+# Subtest: linked temporal explicitly seeded source component: condition-partly-occluded
+ok 41 - linked temporal explicitly seeded source component: condition-partly-occluded
+  ---
+  duration_ms: 49.321293
+  type: 'test'
+  ...
+# Subtest: linked temporal explicitly seeded source component: portable-from-scored-boundary
+ok 42 - linked temporal explicitly seeded source component: portable-from-scored-boundary
+  ---
+  duration_ms: 110.19347
+  type: 'test'
+  ...
+# Subtest: linked temporal explicitly seeded source component: portable-before-valid
+ok 43 - linked temporal explicitly seeded source component: portable-before-valid
+  ---
+  duration_ms: 8.148066
+  type: 'test'
+  ...
+# Subtest: linked temporal explicitly seeded source component: portable-before-stale
+ok 44 - linked temporal explicitly seeded source component: portable-before-stale
+  ---
+  duration_ms: 5.944491
+  type: 'test'
+  ...
+# Subtest: linked temporal explicitly seeded source component: portable-before-unavailable
+ok 45 - linked temporal explicitly seeded source component: portable-before-unavailable
+  ---
+  duration_ms: 5.873435
+  type: 'test'
+  ...
+# Subtest: linked temporal explicitly seeded source component: portable-before-wrong-score
+ok 46 - linked temporal explicitly seeded source component: portable-before-wrong-score
+  ---
+  duration_ms: 9.252387
+  type: 'test'
+  ...
+# Subtest: linked temporal explicitly seeded source component: portable-after-matched
+ok 47 - linked temporal explicitly seeded source component: portable-after-matched
+  ---
+  duration_ms: 5.352296
+  type: 'test'
+  ...
+# Subtest: linked temporal explicitly seeded source component: portable-after-diverged
+ok 48 - linked temporal explicitly seeded source component: portable-after-diverged
+  ---
+  duration_ms: 5.304265
+  type: 'test'
+  ...
+# Subtest: linked temporal explicitly seeded source component: portable-after-score-boundary
+ok 49 - linked temporal explicitly seeded source component: portable-after-score-boundary
+  ---
+  duration_ms: 5.564219
+  type: 'test'
+  ...
+# Subtest: linked temporal explicitly seeded source component: portable-after-epoch-boundary
+ok 50 - linked temporal explicitly seeded source component: portable-after-epoch-boundary
+  ---
+  duration_ms: 5.183066
+  type: 'test'
+  ...
+# Subtest: portable checkpoint retains conditional templates without old-epoch raster histories and rejects inconsistent shapes
+ok 51 - portable checkpoint retains conditional templates without old-epoch raster histories and rejects inconsistent shapes
+  ---
+  duration_ms: 20.872982
+  type: 'test'
+  ...
+1..51
+# tests 51
+# suites 0
+# pass 51
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 6067.37623

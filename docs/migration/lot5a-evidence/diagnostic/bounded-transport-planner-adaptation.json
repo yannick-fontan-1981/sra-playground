@@ -1,0 +1,39 @@
+{
+  "schema": "logos-engine.lot5a.bounded-transport-planner-adaptation.v1",
+  "recordedAt": "2026-11-10T21:11:45.399344+00:00",
+  "status": "prepared_not_executed",
+  "source": {
+    "path": "docs/migration/lot7a-evidence/plan-bounded-source-transport.py",
+    "sha256": "163a8fc62222b0dc824a1534310adad51baa7ebde681f030bc72252f8e552dfe"
+  },
+  "candidate": {
+    "path": "docs/migration/lot5a-evidence/plan-bounded-source-transport.py",
+    "sha256": "0b31a36da1bf41f191f2abb9559a122edc28a9f9d88aad16dbc6f30ca5a7ede9"
+  },
+  "substitutions": [
+    {
+      "from": "lot7a",
+      "to": "lot5a"
+    },
+    {
+      "from": "lot 7A",
+      "to": "lot 5A"
+    },
+    {
+      "from": "SITE_81",
+      "to": "SITE_83"
+    },
+    {
+      "from": "Site 81",
+      "to": "Site 83"
+    },
+    {
+      "from": "performance-integrated/window.json",
+      "to": "performance/window.json"
+    }
+  ],
+  "algorithmChanged": false,
+  "rawMissingObjectLimit": 41943040,
+  "windowBarrier": "docs/migration/lot5a-evidence/performance/window.json",
+  "qualification": "Exact attribution and path substitutions only; no planner, Git transport or Sites publication executed. Final actual published predecessor must be independently verified again before use."
+}

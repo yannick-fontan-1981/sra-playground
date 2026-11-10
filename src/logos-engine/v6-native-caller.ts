@@ -77,7 +77,7 @@ export class NativeCallerCoordinator {
 
   constructor(memory: NativeReasoningMemory, configuration: NativeCallerConfiguration) {
     this.memory = memory; this.configuration = configuration;
-    this.frontier = new ObservedFrontier(configuration.targetLevels, 16);
+    this.frontier = new ObservedFrontier(configuration.targetLevels, 16, null, { nativeOwned: true });
     this.view = configuration.informationGoal === 'open_questions' ? null : new ViewFrontier();
     this.attention = new AttentionMemory(memory, EPISODE);
   }
@@ -128,7 +128,7 @@ export class NativeCallerCoordinator {
     // Stage each component first: a bad nested digest must not leave half of
     // the coordinator restored while its peers still refer to old evidence.
     const goal = new ProspectiveContactAdapter(); goal.restore(state.goal);
-    const frontier = new ObservedFrontier(this.configuration.targetLevels, 16, state.frontier);
+    const frontier = new ObservedFrontier(this.configuration.targetLevels, 16, state.frontier, { nativeOwned: true });
     const view = state.view === null ? null : new ViewFrontier(); view?.restore(state.view!);
     const attention = new AttentionMemory(this.memory, EPISODE); attention.restore(state.attention);
     const points = new PointExperimentMemory(); points.restore(state.points as ReturnType<PointExperimentMemory['state']>);
@@ -150,7 +150,7 @@ export class NativeCallerCoordinator {
       relations: [{ relation: 'reconciles_with', target: 'reasoning:memory' }] }));
   }
   private stateWithoutGoal(): Omit<NativeCallerState, 'goal'> {
-    return { frontier: this.frontier.snapshot(), view: this.view?.state() ?? null,
+    return { frontier: this.frontier.nativeSnapshot(), view: this.view?.state() ?? null,
       attention: this.attention.state(), points: this.points.state(), displays: this.displays.state(),
       controls: structuredClone({ pending: this.controls.pending, attempted: [...this.controls.attempted].sort(compareUnicode) }),
       counters: structuredClone({ goalEventCount: this.goalEventCount, deltaSequence: this.deltaSequence,
@@ -538,7 +538,7 @@ export class NativeCallerCoordinator {
       await goal.memory.applyEvent(record.event);
     }
     if (await compositionIdentity(goal.memory.retainedState()) !== before) throw new Error('Goal state did not restore from retained evidence');
-    const frontier = new ObservedFrontier(this.configuration.targetLevels, 16);
+    const frontier = new ObservedFrontier(this.configuration.targetLevels, 16, null, { nativeOwned: true });
     const last = this.memory.get(EPISODE, 'frontier_last_sequence').value;
     if (!Number.isSafeInteger(last) || last !== this.deltaSequence) throw new TypeError('Frontier replay sequence differs from the current source record');
     for (let sequence = 1; sequence <= last; sequence += 1) await frontier.applyDelta(this.memory.get(EPISODE, `frontier_delta:${String(sequence).padStart(8, '0')}`).value);

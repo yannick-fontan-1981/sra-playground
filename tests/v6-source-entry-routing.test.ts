@@ -68,6 +68,55 @@ test('a refusal at the earlier source entry stops the later entry', async () => 
   assert.deepEqual(records, []); assert.equal(result.snapshot.actions, 0);
 });
 
+for (const blocking of [true, false, undefined]) test(`a current bounded-search witness respects its declared blocking flag (${blocking})`, async () => {
+  const { family, visited, records } = shared();
+  const original = family.proposeInSubquestion!;
+  let refusal: Record<string, any> | null = null;
+  family.proposeInSubquestion = (...args) => {
+    const result = original(...args);
+    if (args[1] === 'first_source_question') {
+      const observation = args[2];
+      refusal = { status: 'unknown', reason: 'declared_work_bound', release_authority: false,
+        observation_ref: observation.observation_ref, level_epoch: observation.level_epoch,
+        frame_hash: observation.frame_hash, frontier: { complete: false, visited: 3 },
+        ...(blocking === undefined ? {} : { block_unrelated_probe: blocking }) };
+    } else refusal = null;
+    return result;
+  };
+  family.currentProposalRefusal = () => refusal;
+  const runtime = make(family, entries(family.id));
+  const result = await initialize(runtime, `bounded-entry-${blocking}`);
+  assert.equal(result.kind, blocking ? 'stopped' : 'action');
+  assert.equal(result.reason, blocking ? 'frontier_unknown' : null);
+  assert.deepEqual(visited, blocking ? ['first_source_question'] : ['first_source_question', 'second_source_question']);
+  assert.deepEqual(records, [], 'A computation cutoff is not an acquired physical transition');
+  assert.equal(result.snapshot.actions, 0);
+  const witness = (result.snapshot.trace as Record<string, any>[]).find(row => row.kind === 'native_proposal_refusal');
+  assert.equal(witness?.entry, 'first_source_question');
+  assert.equal(witness?.refusal.release_authority, false);
+  assert.equal(witness?.refusal.frontier.complete, false);
+  runtime.close('bounded adapter contract complete');
+});
+
+for (const invalid of ['stale_observation', 'action_authority']) test(`a blocking witness cannot bypass current binding (${invalid})`, async () => {
+  const { family, visited, records } = shared();
+  const original = family.proposeInSubquestion!;
+  let refusal: Record<string, any> | null = null;
+  family.proposeInSubquestion = (...args) => {
+    const result = original(...args), observation = args[2];
+    refusal = { status: 'unknown', reason: 'declared_work_bound', block_unrelated_probe: true,
+      release_authority: invalid === 'action_authority',
+      observation_ref: invalid === 'stale_observation' ? 'stale' : observation.observation_ref,
+      level_epoch: observation.level_epoch, frame_hash: observation.frame_hash };
+    return result;
+  };
+  family.currentProposalRefusal = () => refusal;
+  const runtime = make(family, entries(family.id));
+  await assert.rejects(initialize(runtime, `invalid-bound-${invalid}`), /current observation without action authority/);
+  assert.deepEqual(visited, ['first_source_question']); assert.deepEqual(records, []);
+  runtime.close('invalid witness contract complete');
+});
+
 test('source-entry wiring rejects missing adapters, misalignment and malformed entries', () => {
   const { family } = shared();
   assert.throws(() => make({ ...family, proposeInSubquestion: undefined }, entries(family.id)), /aligned subquestion adapter/);

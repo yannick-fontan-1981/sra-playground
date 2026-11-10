@@ -1,0 +1,13 @@
+{"branch":"learned-multi-action-access","stage":1,"returned":1,"ownReturns":0,"ownPathReturns":0,"passiveReturns":1,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-multi-action-access","stage":2,"returned":2,"ownReturns":1,"ownPathReturns":0,"passiveReturns":1,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-multi-action-access","stage":3,"returned":3,"ownReturns":2,"ownPathReturns":0,"passiveReturns":1,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-multi-action-access","stage":4,"returned":4,"ownReturns":3,"ownPathReturns":0,"passiveReturns":1,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-multi-action-access","stage":5,"returned":5,"ownReturns":4,"ownPathReturns":1,"passiveReturns":1,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-multi-action-access","stage":6,"returned":6,"ownReturns":5,"ownPathReturns":2,"passiveReturns":1,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-path-no-remote-effect","stage":1,"returned":1,"ownReturns":0,"ownPathReturns":0,"passiveReturns":1,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-path-no-remote-effect","stage":2,"returned":2,"ownReturns":1,"ownPathReturns":0,"passiveReturns":1,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-path-no-remote-effect","stage":3,"returned":3,"ownReturns":2,"ownPathReturns":0,"passiveReturns":1,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-path-no-remote-effect","stage":4,"returned":4,"ownReturns":3,"ownPathReturns":0,"passiveReturns":1,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-path-no-remote-effect","stage":5,"returned":5,"ownReturns":4,"ownPathReturns":1,"passiveReturns":1,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-path-no-remote-effect","stage":6,"returned":6,"ownReturns":5,"ownPathReturns":2,"passiveReturns":1,"next":"action","family":"observed_frontier"}
+{"status":"passed","checks":16,"branches":2,"returned":12,"ownReturns":10,"ownPathReturns":4,"passiveReturns":2}

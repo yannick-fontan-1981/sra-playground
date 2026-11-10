@@ -34,6 +34,13 @@ export interface KnowledgeMemory extends JsonObject {
   readonly chain: string | null;
 }
 
+/** Ordered writes with one final materialization of the immutable graph. */
+export interface KernelTransaction {
+  node(identity: string): KnowledgeNode | undefined;
+  commit(node: JsonObject, cause: DeltaCause): Promise<void>;
+  finish(): KnowledgeMemory;
+}
+
 export interface DependencyBlocker extends JsonObject {
   readonly node: string;
   readonly reason: 'missing_dependency' | 'disabled_node' | 'disabled_kind';
@@ -261,6 +268,16 @@ export class Kernel {
     if (typeof node.revision !== 'number' || !Number.isSafeInteger(node.revision) || node.revision < 0) throw new TypeError('Invalid node revision');
   }
 
+  /**
+   * Native checkpoints often write many independent nodes. Their deltas retain
+   * the ordinary commit order and hashes, but the growing graph containers need
+   * only be copied once, after every write has succeeded. No intermediate graph
+   * or mutable staging container is exposed to readers or V7 primitives.
+   */
+  beginTransaction(memory: KnowledgeMemory): KernelTransaction {
+    return new StagedKernelTransaction(this, memory);
+  }
+
   async commit(memory: KnowledgeMemory, node: JsonObject, cause: DeltaCause): Promise<KnowledgeMemory> {
     memory = memoryValue(immutableJson(memory));
     this.validateNode(node);
@@ -342,5 +359,80 @@ export class Kernel {
     });
     add('unify', ['left', 'right'], a => unify(a.left!, a.right!));
     return Object.freeze(registry);
+  }
+}
+
+class StagedKernelTransaction implements KernelTransaction {
+  private readonly kernel: Kernel;
+  private readonly initial: KnowledgeMemory;
+  private readonly updates = new Map<string, KnowledgeNode>();
+  private readonly appended: KnowledgeDelta[] = [];
+  private readonly nodeLimit: number;
+  private nodeCount: number;
+  private chain: string | null;
+  private busy = false;
+  private failed = false;
+  private closed = false;
+
+  constructor(kernel: Kernel, memory: KnowledgeMemory) {
+    this.kernel = kernel;
+    this.initial = memoryValue(immutableJson(memory));
+    this.nodeCount = Object.keys(this.initial.nodes).length;
+    this.nodeLimit = objectValue(kernel.drm.limits).nodes as number;
+    this.chain = this.initial.chain;
+  }
+
+  private available(): void {
+    if (this.closed) throw new Error('Kernel transaction is already closed');
+    if (this.failed) throw new Error('Kernel transaction failed');
+  }
+
+  node(identity: string): KnowledgeNode | undefined {
+    this.available();
+    return this.updates.get(identity) ?? (Object.hasOwn(this.initial.nodes, identity) ? this.initial.nodes[identity] : undefined);
+  }
+
+  async commit(node: JsonObject, cause: DeltaCause): Promise<void> {
+    this.available();
+    if (this.busy) { this.failed = true; throw new Error('Kernel transaction writes must be awaited in order'); }
+    this.busy = true;
+    try {
+      // Close caller inputs before the asynchronous hash boundary. Prior nodes
+      // and deltas remain the same deeply immutable values as single commits.
+      const input = objectValue(immutableJson(node));
+      this.kernel.validateNode(input);
+      const identity = stringValue(input.id), old = this.node(identity);
+      if (old !== undefined && equal(old, input)) return;
+      if (old === undefined && this.nodeCount >= this.nodeLimit) throw new RangeError('Declared node budget exhausted');
+      const updated = immutableJson({ ...input, revision: old === undefined ? 1 : old.revision + 1 }) as KnowledgeNode;
+      const delta = immutableJson({ sequence: this.initial.deltas.length + this.appended.length + 1,
+        previous: this.chain, node: updated, cause, source_digest: this.kernel.sourceDigest });
+      const chain = await digest(delta);
+      // A concurrent write is rejected and cannot leave a usable partial batch.
+      this.available();
+      this.updates.set(identity, updated);
+      this.appended.push(immutableJson({ ...objectValue(delta), digest: chain }) as KnowledgeDelta);
+      if (old === undefined) this.nodeCount += 1;
+      this.chain = chain;
+    } catch (error) {
+      this.failed = true;
+      throw error;
+    } finally { this.busy = false; }
+  }
+
+  finish(): KnowledgeMemory {
+    this.available();
+    if (this.busy) throw new Error('Kernel transaction still has a pending write');
+    try {
+      if (!this.appended.length) { this.closed = true; return this.initial; }
+      const nodes = { ...this.initial.nodes };
+      for (const [identity, node] of this.updates) {
+        // Define data properties even for names such as __proto__.
+        Object.defineProperty(nodes, identity, { value: node, enumerable: true, writable: true, configurable: true });
+      }
+      const result = immutableJson({ nodes, deltas: [...this.initial.deltas, ...this.appended], chain: this.chain }) as KnowledgeMemory;
+      this.closed = true;
+      return result;
+    } catch (error) { this.failed = true; throw error; }
   }
 }

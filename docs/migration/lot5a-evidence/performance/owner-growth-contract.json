@@ -1,0 +1,99 @@
+{
+  "schema": "logos-engine.lot5a-owner-cost-contract.v2",
+  "lot": "5A",
+  "declaredAt": "2026-11-10T21:22:39.047606+00:00",
+  "performanceDirectory": "docs/migration/lot5a-evidence/performance",
+  "declaration": {
+    "path": "docs/migration/lot5a-evidence/performance/declaration.json",
+    "bytes": 5524,
+    "sha256": "9dba35881a2ef113bdfb2b7a1477bf0f6514d774f933926a649f844798365651"
+  },
+  "tools": {
+    "consolidator": {
+      "path": "docs/migration/lot5a-evidence/consolidate-owner-costs.mjs",
+      "bytes": 50598,
+      "sha256": "9e6112ec83b75bbdc7bdb2a614dd7ce0e860e1ea9b71ba2f74fb37e4f2e74f1e"
+    },
+    "reviewer": {
+      "path": "docs/migration/lot5a-evidence/review-owner-costs.py",
+      "bytes": 67816,
+      "sha256": "40b6a2068b61652725a55567407a58e54b88cd81056ecbe56755018d7a3d496d"
+    }
+  },
+  "structuralExpectation": {
+    "ownerId": "linked_temporal_preparation",
+    "programId": null,
+    "installedNodeIds": [
+      "family_state:linked_temporal_preparation",
+      "family_activation:linked_temporal_preparation"
+    ],
+    "allowedPaths": [
+      "observations[*].nodeCount",
+      "inspection[*].graphNodes",
+      "final.nodeCount",
+      "final.graphRevision"
+    ],
+    "mode": "predeclared_functional_fixture",
+    "qualification": "functional_structure_frozen_before_measurement"
+  },
+  "sourceEvidence": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 141662,
+      "sha256": "3dd8ff07f3b0e82c6059f825295e15d9e49af47d4aebb850aa9cb8fac90ed2e4"
+    },
+    {
+      "path": "src/logos-engine/v6-linked-temporal-preparation.ts",
+      "bytes": 24845,
+      "sha256": "c85464b1162352f7c6cb329f2d2f9b6cbcc74baae616be3d643d1ac1b646aeed"
+    },
+    {
+      "path": "src/logos-engine/v6-linked-temporal-contact.ts",
+      "bytes": 34974,
+      "sha256": "29b68e614203302e36ef731866544e35146b2b553b7d424c0e533eb38519b1b5"
+    },
+    {
+      "path": "src/logos-engine/v6-linked-temporal-phase.ts",
+      "bytes": 30482,
+      "sha256": "d431c10a89c967b056417ba526d68907ef1ddac62b5411b51f9d70edb8c994e1"
+    },
+    {
+      "path": "src/logos-engine/v6-linked-temporal-common.ts",
+      "bytes": 8267,
+      "sha256": "3e7111bccfefa22a67afad24cefdbc95834053eb233007f4f4ddda19f1bfe54f"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    }
+  ],
+  "ownerInventory": {
+    "path": "docs/migration/lot5a-evidence/performance/owner-source-inventory.json",
+    "bytes": 107904,
+    "sha256": "6f8a9990a077a6ad5c597188fdfd43513f43e0e4cf1eb8680057085699145acc"
+  },
+  "structuralFixture": {
+    "path": "docs/migration/lot5a-evidence/performance/owner-structural-fixture.json",
+    "bytes": 59963,
+    "sha256": "b6d77cd1bf4f2a5611d1092c6d754eec7dcab4fbce9d1210804bd87c374203bb"
+  },
+  "premeasurementAttributionSupplement": {
+    "path": "docs/migration/lot5a-evidence/performance/shared-fragment-premeasurement-supplement.json",
+    "bytes": 3802271,
+    "sha256": "71820d69e926954a9859e066b05d098b7faf23c3358321352b0e0c32d1411e33"
+  },
+  "initialQualificationFailure": {
+    "path": "docs/migration/lot5a-evidence/performance/owner-structural-attribution.json",
+    "bytes": 34095,
+    "sha256": "09ec7837d374f41fbf3a4db449e1b39611a8d456463c69ba06fce1d557f32450"
+  },
+  "strictFailureReceipt": "docs/migration/lot5a-evidence/performance/aggregation-failure.json",
+  "strictFailureLog": "docs/migration/lot5a-evidence/performance/aggregation-failure.log",
+  "historicalAggregateOutput": "docs/migration/lot5a-evidence/performance/combined-comparison.json"
+}

@@ -1,0 +1,268 @@
+TAP version 13
+# Subtest: native immutable frontier preserves source sequence, deltas and restoration: observations_access_and_guards
+ok 1 - native immutable frontier preserves source sequence, deltas and restoration: observations_access_and_guards
+  ---
+  duration_ms: 101.220994
+  type: 'test'
+  ...
+# Subtest: native immutable frontier preserves source sequence, deltas and restoration: domain_and_assessment_refusals
+ok 2 - native immutable frontier preserves source sequence, deltas and restoration: domain_and_assessment_refusals
+  ---
+  duration_ms: 9.800655
+  type: 'test'
+  ...
+# Subtest: native immutable frontier preserves source sequence, deltas and restoration: rule_candidate
+ok 3 - native immutable frontier preserves source sequence, deltas and restoration: rule_candidate
+  ---
+  duration_ms: 14.328348
+  type: 'test'
+  ...
+# Subtest: native immutable frontier preserves source sequence, deltas and restoration: rule_refuted
+ok 4 - native immutable frontier preserves source sequence, deltas and restoration: rule_refuted
+  ---
+  duration_ms: 8.748311
+  type: 'test'
+  ...
+# Subtest: native immutable frontier preserves source sequence, deltas and restoration: rule_old_scope
+ok 5 - native immutable frontier preserves source sequence, deltas and restoration: rule_old_scope
+  ---
+  duration_ms: 7.818398
+  type: 'test'
+  ...
+# Subtest: native immutable frontier preserves source sequence, deltas and restoration: rule_acquired
+ok 6 - native immutable frontier preserves source sequence, deltas and restoration: rule_acquired
+  ---
+  duration_ms: 8.196627
+  type: 'test'
+  ...
+# Subtest: native immutable frontier preserves source sequence, deltas and restoration: information_and_experimental_questions
+ok 7 - native immutable frontier preserves source sequence, deltas and restoration: information_and_experimental_questions
+  ---
+  duration_ms: 29.488405
+  type: 'test'
+  ...
+# Subtest: native immutable frontier preserves source sequence, deltas and restoration: closed_return_contrast
+ok 8 - native immutable frontier preserves source sequence, deltas and restoration: closed_return_contrast
+  ---
+  duration_ms: 18.107576
+  type: 'test'
+  ...
+# Subtest: empty native snapshots are stable and immutable, while public snapshots remain detached and mutable
+ok 9 - empty native snapshots are stable and immutable, while public snapshots remain detached and mutable
+  ---
+  duration_ms: 0.775706
+  type: 'test'
+  ...
+# Subtest: native frontier changes only affected records and preserves older snapshots and cross-epoch facts
+ok 10 - native frontier changes only affected records and preserves older snapshots and cross-epoch facts
+  ---
+  duration_ms: 7.050433
+  type: 'test'
+  ...
+# Subtest: native restore shares owned branches but the next valid delta preserves the checkpoint and exact source values
+ok 11 - native restore shares owned branches but the next valid delta preserves the checkpoint and exact source values
+  ---
+  duration_ms: 2.229623
+  type: 'test'
+  ...
+# Subtest: invalid native deltas cannot publish partial records, counters, chain or cached snapshots
+ok 12 - invalid native deltas cannot publish partial records, counters, chain or cached snapshots
+  ---
+  duration_ms: 3.147539
+  type: 'test'
+  ...
+# Subtest: native event ingress is detached before hashing and external shallow freezes never authorize cached reuse
+ok 13 - native event ingress is detached before hashing and external shallow freezes never authorize cached reuse
+  ---
+  duration_ms: 1.579777
+  type: 'test'
+  ...
+# Subtest: caller checkpoints use native frontier ownership while restoration and boundary replay retain authoritative values
+ok 14 - caller checkpoints use native frontier ownership while restoration and boundary replay retain authoritative values
+  ---
+  duration_ms: 14.503261
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: plain
+ok 15 - V6 observed frontier helper original parity: plain
+  ---
+  duration_ms: 2.372184
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: empty_data
+ok 16 - V6 observed frontier helper original parity: empty_data
+  ---
+  duration_ms: 0.215659
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: point
+ok 17 - V6 observed frontier helper original parity: point
+  ---
+  duration_ms: 0.230019
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: forbidden
+ok 18 - V6 observed frontier helper original parity: forbidden
+  ---
+  duration_ms: 0.561879
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: missing
+ok 19 - V6 observed frontier helper original parity: missing
+  ---
+  duration_ms: 0.18966
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: public
+ok 20 - V6 observed frontier helper original parity: public
+  ---
+  duration_ms: 0.419921
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: order
+ok 21 - V6 observed frontier helper original parity: order
+  ---
+  duration_ms: 0.211582
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: forbidden
+ok 22 - V6 observed frontier helper original parity: forbidden
+  ---
+  duration_ms: 0.143352
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: incomplete
+ok 23 - V6 observed frontier helper original parity: incomplete
+  ---
+  duration_ms: 0.212314
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: index
+ok 24 - V6 observed frontier helper original parity: index
+  ---
+  duration_ms: 7.757158
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: ref
+ok 25 - V6 observed frontier helper original parity: ref
+  ---
+  duration_ms: 0.33165
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: missing_ref
+ok 26 - V6 observed frontier helper original parity: missing_ref
+  ---
+  duration_ms: 0.144333
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: action_key
+ok 27 - V6 observed frontier helper original parity: action_key
+  ---
+  duration_ms: 1.0968
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: rules_empty
+ok 28 - V6 observed frontier helper original parity: rules_empty
+  ---
+  duration_ms: 0.31175
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: closed_path
+ok 29 - V6 observed frontier helper original parity: closed_path
+  ---
+  duration_ms: 0.259413
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: broken_path
+ok 30 - V6 observed frontier helper original parity: broken_path
+  ---
+  duration_ms: 0.07482
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: nested_path
+ok 31 - V6 observed frontier helper original parity: nested_path
+  ---
+  duration_ms: 0.080418
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: short_path
+ok 32 - V6 observed frontier helper original parity: short_path
+  ---
+  duration_ms: 0.053119
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier helper original parity: rules_evidence
+ok 33 - V6 observed frontier helper original parity: rules_evidence
+  ---
+  duration_ms: 0.328645
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier original sequence and delta replay: observations_access_and_guards
+ok 34 - V6 observed frontier original sequence and delta replay: observations_access_and_guards
+  ---
+  duration_ms: 68.480482
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier original sequence and delta replay: domain_and_assessment_refusals
+ok 35 - V6 observed frontier original sequence and delta replay: domain_and_assessment_refusals
+  ---
+  duration_ms: 11.200424
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier original sequence and delta replay: rule_candidate
+ok 36 - V6 observed frontier original sequence and delta replay: rule_candidate
+  ---
+  duration_ms: 14.671384
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier original sequence and delta replay: rule_refuted
+ok 37 - V6 observed frontier original sequence and delta replay: rule_refuted
+  ---
+  duration_ms: 8.317105
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier original sequence and delta replay: rule_old_scope
+ok 38 - V6 observed frontier original sequence and delta replay: rule_old_scope
+  ---
+  duration_ms: 7.620811
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier original sequence and delta replay: rule_acquired
+ok 39 - V6 observed frontier original sequence and delta replay: rule_acquired
+  ---
+  duration_ms: 6.282454
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier original sequence and delta replay: information_and_experimental_questions
+ok 40 - V6 observed frontier original sequence and delta replay: information_and_experimental_questions
+  ---
+  duration_ms: 20.431547
+  type: 'test'
+  ...
+# Subtest: V6 observed frontier original sequence and delta replay: closed_return_contrast
+ok 41 - V6 observed frontier original sequence and delta replay: closed_return_contrast
+  ---
+  duration_ms: 16.056977
+  type: 'test'
+  ...
+# Subtest: V6 frontier rejects tampered, duplicate or reordered retained events without replacing its chain
+ok 42 - V6 frontier rejects tampered, duplicate or reordered retained events without replacing its chain
+  ---
+  duration_ms: 2.12644
+  type: 'test'
+  ...
+# Subtest: V6 frontier oracle and native policy retain the pinned original sources
+ok 43 - V6 frontier oracle and native policy retain the pinned original sources
+  ---
+  duration_ms: 3.088181
+  type: 'test'
+  ...
+1..43
+# tests 43
+# suites 0
+# pass 43
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 508.506511
