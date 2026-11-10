@@ -11,9 +11,148 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-## Current correction: lot 3B native 0.40.0, functional validation complete, cost reserve
+## Current correction: lot 3B native 0.41.0, functional validation complete, cost reserve
 
-The current native freeze is **`391a2797414c0090fa632a2fc13736c7806c1f5fceceafa34e1583dd4ef9e3a9`**, **249 native files**, retained in
+Native 0.41.0 is frozen at
+**`3edffde9b21f4fc8af9dda9a1dbd40707c015d9f7cba8a41460021e39acb7605`**,
+with **249 native files** and a **260-file source archive**; see the
+[manifest](lot3b-smlp-cost-evidence/final/source-manifest.json) and
+[archive inventory](lot3b-smlp-cost-evidence/final/source-archive.json).
+The declared [affected formal scope](lot3b-smlp-cost-evidence/final/release-scope.json)
+contains **41 test files**, with **1,379/1,379 tests passed** and no failures,
+cancellations, skipped tests or TODOs. Native source and test inputs remained
+unchanged during the formal run. The **five project checks pass**. A fresh cold CATR
+campaign preserves **12 actions, three levels and eight prefixes**; CATR and RSWP
+recorded-return regressions pass **2/2 cases and 34/34 checks**. Browser QA also
+confirms **12 actions, three levels and eight completed plans**, with pauses at
+zero and five actions. The official cost comparison is complete:
+**`budget_review_required`, 14/16 medians within budget**. STCK persistence
+**+14.269890%** and SMLP restoration **+11.220692%** remain unresolved.
+
+The correction reduces repeated work in the common state path while preserving
+the transferred V5/V6 behavior. A bounded cache reuses decoded fragments only
+when they contain no references and their deeply immutable source identity has
+already been validated against the same content address. Every new hydration
+still resolves the actual fragment through the store. Composite fragments are
+decoded again, preserving the reads of their transitive dependencies. The cache
+holds at most **256 results and 8 MiB of structural weight**; eviction discards
+only a recomputable value, never a knowledge revision. Foreign frozen objects,
+changed identities and changed addresses retain full validation.
+
+Inventory also avoids `structuredClone` calls for clonable primitives and a
+redundant tracker input copy when the actual selected restorer is the original
+source method. Composite values remain detached; numeric edge values,
+`bigint`, `undefined`, callable/symbol rejection and customized restorers retain
+their source semantics. Capturing the actual restorer also preserves an accessor
+that changes the prototype during lookup. No checkpoint-equality policy or game
+selection rule changes.
+
+Local and persistent fragment entries retain their complete transitive height.
+This also closes a **pre-existing depth-check bypass**, documented separately in
+the [synthetic comparison](lot3b-smlp-cost-evidence/diagnostic/repeated-reference-depth-comparison.json):
+published 0.40 rejects a first reference occurrence at decoded depth **513**, but
+accepts the same subtree at that depth after a shallower occurrence. The candidate
+rejects both over-limit forms and continues to accept depth **512**. This is a
+structural-contract correction, not an encoded-format or gameplay-policy change.
+
+| Current 0.41 evidence | Qualification |
+| --- | --- |
+| Targeted Inventory contracts | **194/194 passed**, including six new copy/restorer contracts; [receipt](lot3b-smlp-cost-evidence/diagnostic/inventory-copy-getter-tests.json) |
+| Targeted hydration, persistence and canonical contracts | **57/57 passed**, including twelve new hydration-cache contracts; [receipt](lot3b-smlp-cost-evidence/diagnostic/hydration-cache-tests.json) |
+| Frozen affected formal suite | **1,379/1,379 tests passed in 41 files**, no failures, cancellations, skipped tests or TODOs; source and test inputs unchanged; affected delta and integrations, not the entire historical suite; [receipt](lot3b-smlp-cost-evidence/final/validation/delta-tests-run.json) |
+| Project checks | **5/5 pass**: typecheck, entry audit, migration audit, diff check and build; native source unchanged; [receipt](lot3b-smlp-cost-evidence/final/validation/checks-run.json) |
+| Fresh CATR campaign | **12 actions, three levels, eight prefixes**, one cold session in native 0.41; natural arrival at level 4 in `NOT_FINISHED`, source and execution inputs unchanged; [execution](lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/execution-catr.json) |
+| CATR and RSWP recorded regressions | **2/2 cases, 34/34 historical comparison checks** against 0.40; **12/3/8** and **19/3/11** in actions/levels/prefixes; [summary](lot3b-smlp-cost-evidence/final/regressions/regression-summary.json) |
+| Browser confirmation | **12 actions, three levels, eight plans**, arrival at level 4 in the same session; pauses at zero and five actions, partial-prefix continuation preserved; frozen-source development preview, distinct from compiled production execution; [receipt](lot3b-smlp-cost-evidence/final/browser/browser-qa.json) |
+| Official STCK/SMLP cost comparison | **`budget_review_required`, 14/16**; STCK persistence **+14.269890%** and SMLP restoration **+11.220692%** unresolved against fresh 0.38; unchanged **+10% limit on each of sixteen medians**; [aggregate](lot3b-smlp-cost-evidence/performance/combined-comparison.json) |
+
+The first attempt at both recorded regressions failed **before any command**:
+the concurrent build had not yet generated the required Pyodide module. The
+original failed summaries and logs remain unchanged under
+[`prebuild-failed/regressions/`](lot3b-smlp-cost-evidence/prebuild-failed/regressions/regression-summary.json).
+The [relocation receipt](lot3b-smlp-cost-evidence/prebuild-failed/relocation.json)
+records the reason and retained hashes. The successful retry used the same
+frozen source and public inputs after that prerequisite became available.
+The 34 checks cover the historical comparator's named commands, public packets,
+boundaries, selection fields and counters. They do not establish global state
+or complete provider-payload identity. This run declares
+`passiveOwnerRequirements: []` and checks **zero passive-owner prefixes**;
+no passive-owner validation is inferred from its status. The live CATR result
+confirms three-level non-regression, not a complete-game victory or an additional
+transferred game capability.
+
+Browser QA used the visible controls in one continuous session: initial Pause,
+single actions 1 and 2, then level-boundary counts **3/1/2**, single action 4,
+Pause at **5/1/3**, and resumed boundaries **7/2/5** and **12/3/8** in
+actions/levels/completed plans. The first full-page screenshot attempt timed out;
+subsequent viewport captures and the complete accessibility-tree record succeeded
+without replaying the game. This source-preview check establishes visible
+controls and counters, not compiled production execution or performance.
+
+The completed [official window](lot3b-smlp-cost-evidence/performance/combined-comparison.json)
+retains both predeclared cohorts in **A1/B1/B2/A2 order**, **eight sessions per
+case/version**, **32 measured sessions and 400 actions**. Every measured session
+is included, with no outlier removal or additional noise allowance. The phase
+definitions and **+10% threshold for each of sixteen medians** are unchanged
+under the [protocol](lot3b-smlp-cost-evidence/performance/protocol.md).
+
+| Phase | Fresh 0.38 median | 0.41 `3edffde` median | Change | Aggregate verdict |
+| --- | ---: | ---: | ---: | --- |
+| STCK persistence, 104 samples per version | 169.327983 ms | 193.490900 ms | **+14.269890%** | **Unresolved** |
+| SMLP restoration, 144 samples per version | 4.907037 ms | 5.4576405 ms | **+11.220692%** | **Unresolved** |
+| SMLP acquisition/persistence, 72 samples per version | 1,046.0816115 ms | 934.704901 ms | **−10.647038%** | Within +10% |
+| STCK restoration, 96 samples per version | 9.9928605 ms | 8.4364265 ms | **−15.575460%** | Within +10% |
+
+The two unresolved metrics retain `over_budget_with_noise_unresolved`. Session
+medians change by **+0.169604% on STCK** and **+0.330178% on SMLP**; these totals
+and the improved phases do not compensate the two failed individual criteria.
+All changes in this table compare 0.41 with its fresh 0.38 reference in this
+window, not with the timings of the separate historical 0.40 window.
+
+Both original cohorts remain **14/16**. Cohort 1 retains **STCK persistence
++20.788833%** and **SMLP restoration +21.227162%**; cohort 2 retains **continuation
+guard +11.226586% on STCK** and **+25.651441% on SMLP**. Their failures are
+preserved even where the pooled median is within budget. The STCK continuation
+guard p95 also rises from **0.302587 to 6.544347 ms**, while its aggregate median
+remains within budget. This tail observation is retained separately from the
+median gate. Nested phases are not additive, within-session samples are
+correlated, and these finite recorded-return measurements establish neither
+live-game speed nor hours-long stability. They do not establish the cause of
+either remaining increase.
+
+The [independent consolidation review](lot3b-smlp-cost-evidence/performance/consolidation-review.json)
+passes **231 checks**, confirms the session accounting and arithmetic, and keeps
+the same **`budget_review_required`, 14/16** verdict. A successful arithmetic
+review does not validate the cost budget.
+
+**Native 0.41.0 is functionally validated with a cost reserve; lot 3B remains open.**
+The next step is to diagnose and reduce the common **STCK persistence** and
+**SMLP restoration** work, retaining source semantics, identities, revisions,
+guards, unique acquisition and old checkpoints. A concrete generic code change,
+new source freeze and predeclared protocol must precede the next official cost
+validation against fresh 0.38. No repeat of the unchanged `3edffde` source replaces
+this retained result. The earlier outcomes remain **15/16 for 0.39**,
+**14/16 for the first 0.40 `f0ba` attempt** and **14/16 for published 0.40
+`391a279`**, including its SMLP acquisition/persistence **+11.642%** and restoration
+**+14.989%** overruns. No historical failure is replaced by this candidate.
+**3C, `exposed_reception_plan`, remains after 3B cost closure.** Coverage is still
+**50/76 complete entries**, **2/6 observed-composition branches** and **37 compiled
+workflows**; the [roadmap](v6-delivery-roadmap.md) retains all eleven lots, the
+separate 2A/2B/2C scopes and the six false complete-migration gates.
+
+The next implementation hypotheses remain **unproven**: traverse dense arrays
+certified by `immutableJson` directly by index in `canonical.encode`, avoiding
+`Object.entries` pair allocations while preserving full foreign-input validation,
+canonical bytes, Unicode, structural limits and Kernel commits. The
+[SMLP CPU profile](lot3b-smlp-cost-evidence/diagnostic/after-cpu-summary.json) records
+`jsonEntries` and garbage-collector work but does not isolate the cause of the STCK
+increase. For SMLP restoration, examine context normalization, validation and
+Inventory copies without removing any required copy or validation. These are
+investigation directions, not delivered changes or a proven cost closure.
+
+## Preserved correction: lot 3B native 0.40.0, functional validation complete, cost reserve
+
+The published 0.40 native freeze is **`391a2797414c0090fa632a2fc13736c7806c1f5fceceafa34e1583dd4ef9e3a9`**, **249 native files**, retained in
 [`final-v3/`](lot3b-cost-evidence/final-v3/source-manifest.json), with an archive
 of 260 files. The [correction report](lot3b-cost-correction.md) binds the successive
 attempts to their actual source digests. Native 0.40.0 also identifies the earlier
@@ -29,14 +168,14 @@ identity, property order, direct mutations, customized or inherited iterators,
 old checkpoints, unique acquisition and atomic rejection remain covered.
 The transferred V5/V6 behavior and the two-branch functional scope are preserved.
 
-| Current evidence, freeze `391a279` | Verified result and scope |
+| Preserved 0.40 evidence, freeze `391a279` | Verified result and scope |
 | --- | --- |
 | Affected contracts and integration tests | **1,322/1,322 tests in 35 files**; [formal receipt](lot3b-cost-evidence/final-v3/validation/delta-tests-run.json) |
 | Project checks | Typecheck, entry and migration audits, diff check and production build pass; [receipt](lot3b-cost-evidence/final-v3/validation/checks-run.json) |
 | Fresh CATR campaign | **12 actions, three levels, eight prefixes**, one cold session, natural arrival at level 4 in `NOT_FINISHED`; [execution](lot3b-cost-evidence/final-v3/catr-cost-v3-session/execution-catr.json) |
 | Browser confirmation | **12 actions, three levels, eight plans**, initial and five-action pauses, retained partial prefix; frozen TypeScript source preview, distinct from the built worker; [receipt](lot3b-cost-evidence/final-v3/browser/browser-verification.json) |
 | CATR and RSWP recorded regressions | **34/34 checks** against the two 0.39 references; CATR **12/3/8**, RSWP **19/3/11** in actions/levels/prefixes; [summary](lot3b-cost-evidence/final-v3/regressions/regression-summary.json) |
-| New official cost result | **`budget_review_required`, 14/16**; SMLP acquisition/persistence **+11.642%** and restoration **+14.989%** unresolved; fresh 0.38 reference and the unchanged **+10% limit for each of sixteen medians**; [aggregate](lot3b-cost-evidence/performance-v2/combined-comparison.json) |
+| Official 0.40 cost result | **`budget_review_required`, 14/16**; SMLP acquisition/persistence **+11.642%** and restoration **+14.989%** unresolved; fresh 0.38 reference and the unchanged **+10% limit for each of sixteen medians**; [aggregate](lot3b-cost-evidence/performance-v2/combined-comparison.json) |
 
 The first official 0.40 attempt, freeze
 **`f0ba85e80fbe7543f2e2360c6b6e846ae76839cb6ede0e9c022d31b56f46cece`**,
@@ -47,7 +186,7 @@ and **21.511% on SMLP**. Its source archive, functional receipts and all measure
 sessions remain retained. The earlier 0.39 **15/16** cost failure also remains
 recorded below; neither result is replaced by the new source or its tests.
 
-The completed new window retains two cohorts in A1/B1/B2/A2 order, **eight
+The completed 0.40 window retains two cohorts in A1/B1/B2/A2 order, **eight
 sessions per case/version, 32 measured sessions and 400 actions**, with the same
 warmups, inputs and threshold. Its actual aggregate is **14/16**:
 
@@ -69,18 +208,19 @@ failed budget**. It validates the arithmetic, not a cost closure. The
 p95, cohort failures and qualifications under the
 [predeclared protocol](lot3b-cost-evidence/performance-v2/protocol.md).
 Nested phases are not additive, and noise introduces no additional allowance.
-The precise causes of the two SMLP increases remain to be isolated.
+These measurements alone did not isolate the causes of the two SMLP increases.
 
 **Native 0.40.0 is functionally validated with a cost reserve; 3B remains open.**
-The next priority is to diagnose and then reduce the common acquisition,
+The resulting next priority was to diagnose and then reduce the common acquisition,
 persistence and restoration work still over budget on SMLP through a generic
 correction, while retaining
 CATR **12/3/8**, RSWP **19/3/11**, guards, unique acquisition and old checkpoints.
-A changed source freeze and predeclared protocol must precede any future cost
-validation against fresh 0.38. No additional measurement of the same `391a279`
-is requested to replace this outcome. **3C, `exposed_reception_plan`, follows
+A changed source freeze and predeclared protocol were required before any future cost
+validation against fresh 0.38. Candidate 0.41 above addresses that continuation;
+no additional official measurement of the same `391a279` replaces this outcome.
+**3C, `exposed_reception_plan`, follows
 only after the cost requirement closes.**
-The current three-level CATR confirmations establish non-regression of the generic
+The preserved three-level CATR confirmations establish non-regression of the 0.40 generic
 correction, not an additional game capability or a complete-game victory.
 The new 34 checks against 0.39 preserve the historical strict RSWP 0.38 → 0.39
 **16/17 failure** and its separate empty-extension qualification.

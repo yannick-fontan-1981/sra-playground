@@ -25,6 +25,11 @@ const canonicalObjects = new BoundedWeakCache<{ text: string; nodes: number; hei
 const MAX_DEPTH = 128;
 const MAX_NODES = 1_000_000;
 
+/** Read-only ownership test; a foreign or merely frozen object is not certified. */
+export function isOwnedImmutableJson(value: unknown): boolean {
+  return value !== null && typeof value === 'object' && immutableObjects.has(value);
+}
+
 function jsonEntries(item: object): readonly (readonly [string, unknown])[] {
   // Only immutableJson's own closed, deeply frozen results enter this set.
   // Their keys and enumerable data properties have already been validated at

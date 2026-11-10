@@ -1,0 +1,96 @@
+{
+  "schema": "logos-engine.native-cost-protocol-declaration.v1",
+  "recordedAt": "2026-11-10T03:27:40.663165+00:00",
+  "status": "declared_before_official_window",
+  "protocol": {
+    "path": "docs/migration/lot3b-smlp-cost-evidence/performance/protocol.md",
+    "sha256": "45a242dd01181244b73982ee74e198f58ebe0682bab116d4f66fa4dd607041f4",
+    "bytes": 18356
+  },
+  "cases": {
+    "path": "docs/migration/lot3b-smlp-cost-evidence/performance/cases.json",
+    "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+    "bytes": 1451
+  },
+  "comparisonPolicy": {
+    "path": "docs/migration/lot3b-smlp-cost-evidence/performance/comparison-policy.json",
+    "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+    "bytes": 991
+  },
+  "baselineManifest": {
+    "path": "docs/migration/lot3b-smlp-cost-evidence/base/source-manifest.json",
+    "sha256": "0024028577107a7dbcc65ea0cc3ffa929a0ce5a6e7f11bf4515a169fc5cb1146",
+    "bytes": 28936
+  },
+  "publishedFunctionalManifest": {
+    "path": "docs/migration/lot3b-smlp-cost-evidence/published/source-manifest.json",
+    "sha256": "01342c154132a0b5f86c59c4be6e41d48800793ba04916c05b9ff94672c61531",
+    "bytes": 29431
+  },
+  "correctionManifest": {
+    "path": "docs/migration/lot3b-smlp-cost-evidence/final/source-manifest.json",
+    "sha256": "12b765bcd7348af0f7e3e4325862cae570c2b81470475839fdfe9df79fa2078b",
+    "bytes": 29431
+  },
+  "correctionArchiveManifest": {
+    "path": "docs/migration/lot3b-smlp-cost-evidence/final/source-archive.json",
+    "sha256": "9ab74d5916b3940dcaea1ddd8522828e455ec6a0dc2c5ae0652c0d2358d0d575",
+    "bytes": 31072
+  },
+  "releaseScope": {
+    "path": "docs/migration/lot3b-smlp-cost-evidence/final/release-scope.json",
+    "sha256": "3343041f750449afc2a45c1ece3a367343335e6402851195c579ea79e7283e36",
+    "bytes": 2249
+  },
+  "changedNativeFiles": [
+    "src/logos-engine/canonical.ts",
+    "src/logos-engine/v6-inventory-caller-context.ts",
+    "src/logos-engine/v6-native-runtime.ts",
+    "src/logos-engine/v6-native-state-graph.ts",
+    "src/logos-engine/v6-observed-inventory.ts"
+  ],
+  "officialTools": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    }
+  ],
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "cohorts": 2,
+  "sessionsPerCaseVersionCohort": 4,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "budgetMetrics": 16,
+  "relativeBudget": 0.1,
+  "inputsByteIdenticalToHistorical": true,
+  "noOfficialWindowAtDeclaration": true,
+  "qualification": "Frozen before any official timing of native 0.41 digest 3edffde9b21f4fc8af9dda9a1dbd40707c015d9f7cba8a41460021e39acb7605. Functional reference is publication 68/native 0.40; official timing baseline is native 0.38 freshly remeasured. Historical prose in byte-identical cases and policy still names 0.40, explicitly qualified by the new protocol. No timing, replay, profile, test or build was executed to create this declaration."
+}

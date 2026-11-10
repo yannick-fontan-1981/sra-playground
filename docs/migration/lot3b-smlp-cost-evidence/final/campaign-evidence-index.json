@@ -1,0 +1,906 @@
+{
+  "schema": "logos-engine.lot3b.smlp-cost-evidence-index.v1",
+  "status": "functional_validated_cost_reserve",
+  "recordedAt": "2026-11-10T03:44:50.530180+00:00",
+  "implementation": "0.41.0",
+  "candidate": "final",
+  "publication": {
+    "status": "pending_after_evidence_freeze",
+    "audience": "owner-private",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258"
+  },
+  "nativeSourceManifestDigest": "3edffde9b21f4fc8af9dda9a1dbd40707c015d9f7cba8a41460021e39acb7605",
+  "nativeFileCount": 249,
+  "sourceArchiveFileCount": 260,
+  "functionalBaseline": {
+    "publication": 68,
+    "implementation": "0.40.0",
+    "commitSha": "512ac2cd7270b669aca0a12dbc9c4702174f1c0f"
+  },
+  "costBaseline": {
+    "publication": 66,
+    "implementation": "0.38.0",
+    "commitSha": "b5d95c59bda43e5a5ee83dd067a0f28767205ab0",
+    "remeasuredInThisWindow": true
+  },
+  "functional": {
+    "tests": {
+      "tests": 1379,
+      "pass": 1379,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "testFiles": 41,
+    "checks": [
+      {
+        "name": "typecheck",
+        "exitCode": 0
+      },
+      {
+        "name": "entry-audit",
+        "exitCode": 0
+      },
+      {
+        "name": "migration-audit",
+        "exitCode": 0
+      },
+      {
+        "name": "diff-check",
+        "exitCode": 0
+      },
+      {
+        "name": "build",
+        "exitCode": 0
+      }
+    ],
+    "regressionCases": 2,
+    "regressionChecks": 34,
+    "regressionTotals": {
+      "commands": 31,
+      "completePublicPackets": 33,
+      "animationFrames": 336,
+      "prefixes": 19,
+      "requests": 50,
+      "naturalLevelBoundaries": 6
+    },
+    "passiveOwnerRequirements": [],
+    "passiveOwnerPrefixesChecked": 0,
+    "passiveOwnerCoverageClaimed": false,
+    "coldCATR": {
+      "actions": 12,
+      "levelsCompleted": 3,
+      "level": 4,
+      "state": "NOT_FINISHED",
+      "prefixes": 8,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 12,
+        "resume": 7
+      }
+    },
+    "coldRunTimingIsNotAnOfficialPerformanceMetric": true,
+    "browser": {
+      "schema": "logos-engine.browser-qa-observation.v1",
+      "status": "passed",
+      "recordedAt": "2026-11-10T03:29:14.017116+00:00",
+      "game": "CATR",
+      "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.41.0",
+      "nativeSourceDigest": "3edffde9b21f4fc8af9dda9a1dbd40707c015d9f7cba8a41460021e39acb7605",
+      "managedPreview": "http://127.0.0.1:4173/",
+      "finalObservedUrl": "http://127.0.0.1:4173/?game=CATR&level=4",
+      "method": "CUA user-visible controls and accessibility observations; native state and game code were not read from the browser",
+      "steps": [
+        {
+          "action": "Initial cold Agent tab",
+          "actions": 0,
+          "levelsSolved": 0,
+          "completedPlans": 0,
+          "level": 1
+        },
+        {
+          "action": "Run then Pause during initialization; observed Paused",
+          "actions": 0,
+          "levelsSolved": 0,
+          "completedPlans": 0,
+          "level": 1
+        },
+        {
+          "action": "One action",
+          "actions": 1,
+          "levelsSolved": 0,
+          "completedPlans": 1,
+          "level": 1
+        },
+        {
+          "action": "One action",
+          "actions": 2,
+          "levelsSolved": 0,
+          "completedPlans": 1,
+          "level": 1
+        },
+        {
+          "action": "Run to next level",
+          "actions": 3,
+          "levelsSolved": 1,
+          "completedPlans": 2,
+          "level": 2
+        },
+        {
+          "action": "One action",
+          "actions": 4,
+          "levelsSolved": 1,
+          "completedPlans": 2,
+          "level": 2
+        },
+        {
+          "action": "Run then Pause; observed Paused at engaged action boundary",
+          "actions": 5,
+          "levelsSolved": 1,
+          "completedPlans": 3,
+          "level": 2
+        },
+        {
+          "action": "Run to next level",
+          "actions": 7,
+          "levelsSolved": 2,
+          "completedPlans": 5,
+          "level": 3
+        },
+        {
+          "action": "Run to next level",
+          "actions": 12,
+          "levelsSolved": 3,
+          "completedPlans": 8,
+          "level": 4
+        }
+      ],
+      "artifacts": [
+        {
+          "path": "docs/migration/lot3b-smlp-cost-evidence/final/browser/catr-three-levels.png",
+          "sha256": "cc4fd2aecf2c1c6e0cf6a7a828f5a03945c76ba3c99859e4a05b909a6795b211",
+          "bytes": 92285
+        },
+        {
+          "path": "docs/migration/lot3b-smlp-cost-evidence/final/browser/catr-three-levels-overview.png",
+          "sha256": "092b651cc7c29c5920ef9481580c58840647d9960e6c1a1a1b6ba0be0a6726fc",
+          "bytes": 85240
+        },
+        {
+          "path": "docs/migration/lot3b-smlp-cost-evidence/final/browser/catr-final-ax.txt",
+          "sha256": "c819162873ae4eead328fce76afc7078d8b6aa71593ec3a430d17185c6e3a5ca",
+          "bytes": 10097
+        }
+      ],
+      "captureIssue": "Initial full-page screenshot timed out after final result was observed. Viewport screenshots then succeeded; no game was rerun for capture.",
+      "qualification": "Manual browser QA of the frozen source in managed development preview. This confirms visible controls and counters, not compiled production execution, complete game victory or performance. Formal cold live campaign and archived-return regressions remain separate."
+    },
+    "nativeAgentWorker": {
+      "path": "dist/assets/v6-agent-worker-t1L4VUtU.js",
+      "sha256": "c7042992c9b60bd6da9ec615a4f4e21a8bca0370f6cac1e3ab75baaeca8d1e99",
+      "bytes": 6354968
+    }
+  },
+  "cost": {
+    "status": "budget_review_required",
+    "relativeBudget": 0.1,
+    "withinObservedBudget": 14,
+    "budgetMetricCount": 16,
+    "unresolved": [
+      {
+        "case": "STCK",
+        "stage": "persistence",
+        "result": "over_budget_with_noise_unresolved",
+        "medianRelativeIncrease": 0.14269890051192302
+      },
+      {
+        "case": "SMLP",
+        "stage": "restoration",
+        "result": "over_budget_with_noise_unresolved",
+        "medianRelativeIncrease": 0.1122069183485006
+      }
+    ],
+    "cohorts": [
+      {
+        "cohort": 1,
+        "status": "budget_review_required",
+        "withinObservedBudget": 14,
+        "unresolved": [
+          {
+            "case": "STCK",
+            "stage": "persistence",
+            "result": "over_budget_with_noise_unresolved",
+            "medianRelativeIncrease": 0.20788832582756567
+          },
+          {
+            "case": "SMLP",
+            "stage": "restoration",
+            "result": "over_budget_with_noise_unresolved",
+            "medianRelativeIncrease": 0.2122716186860334
+          }
+        ]
+      },
+      {
+        "cohort": 2,
+        "status": "budget_review_required",
+        "withinObservedBudget": 14,
+        "unresolved": [
+          {
+            "case": "STCK",
+            "stage": "known_prefix_guard",
+            "result": "over_budget_with_noise_unresolved",
+            "medianRelativeIncrease": 0.11226585616829476
+          },
+          {
+            "case": "SMLP",
+            "stage": "known_prefix_guard",
+            "result": "over_budget_with_noise_unresolved",
+            "medianRelativeIncrease": 0.25651440529189884
+          }
+        ]
+      }
+    ],
+    "totalMeasuredSessions": 32,
+    "measuredActions": 400,
+    "measuredSessionsPerCaseAndVersion": 8,
+    "excludedWarmups": 8,
+    "excludedWarmupActions": 24,
+    "excludedMeasuredSessions": 0,
+    "excludedOutliers": 0,
+    "startedAt": "2026-11-10T03:29:17.604801+00:00",
+    "finishedAt": "2026-11-10T03:38:41.399588+00:00",
+    "arithmeticReview": {
+      "status": "passed",
+      "budgetStatus": "budget_review_required",
+      "checks": 231,
+      "receipt": {
+        "path": "docs/migration/lot3b-smlp-cost-evidence/performance/consolidation-review.json",
+        "bytes": 45507,
+        "sha256": "238b7b4f667c293c30102e6655f440aa21cebbdfa9e20a96967d37ce06fc327b"
+      }
+    },
+    "noFollowupCohortOnSameSource": true,
+    "unfavorableTailRetained": "STCK known-prefix guard p95 0.302587 ms to 6.544347 ms, maximum 7.056963 ms. No additional acceptance criterion was introduced."
+  },
+  "diagnostics": {
+    "case": "SMLP",
+    "receipt": {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/comparison.json",
+      "bytes": 709727,
+      "sha256": "e3204164b3e92189effaf669c49f93c59deeb13fc4bc25e5ad170f9c6b2677a2"
+    },
+    "status": "scoped_behavior_identical",
+    "checksPassed": 6,
+    "checksExpected": 6,
+    "strictFinalEquality": false,
+    "aggregateInvocationCountsExact": true,
+    "methodInvocationCountsExact": true,
+    "witnessResultsExact": true,
+    "replayElapsed": {
+      "beforeMs": 17519.444418,
+      "afterMs": 18572.071020000003,
+      "deltaMs": 1052.626602000004,
+      "relativeChange": 0.06008333237545501
+    },
+    "allWorkDiagnosticsAndCpuProfilesRetained": true,
+    "diagnosticDurationsDoNotOverrideBudget": true
+  },
+  "structuralContractCorrection": {
+    "description": "The pre-existing 512-depth structural limit is now also enforced for repeated references; formerly accepted over-limit cases now reject. Valid at-limit cases remain accepted.",
+    "proof": {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/repeated-reference-depth-comparison.json",
+      "bytes": 128671,
+      "sha256": "6ad9a7919318afe9e7f52ce03926cc7618d8d290d9aa683973db27f1c1f2440d"
+    }
+  },
+  "preservedAttempts": [
+    {
+      "candidate": "published-0.40-final-v3",
+      "nativeDigest": "391a2797414c0090fa632a2fc13736c7806c1f5fceceafa34e1583dd4ef9e3a9",
+      "costWithinObservedBudget": 14,
+      "costMetricCount": 16,
+      "index": {
+        "path": "docs/migration/lot3b-cost-evidence/final-v3/campaign-evidence-index.json",
+        "bytes": 54462,
+        "sha256": "e243ea240eed2ec1927614bc6ca3914d353e7e5c7350a01c0f20b169edda0c04"
+      }
+    },
+    {
+      "candidate": "0.41-before-build-replays",
+      "status": "failed_before_any_action_due_to_missing_prepared_pyodide_module",
+      "sameSourceRetryAfterBuildCompleted": true,
+      "relocation": {
+        "path": "docs/migration/lot3b-smlp-cost-evidence/prebuild-failed/relocation.json",
+        "bytes": 2247,
+        "sha256": "dd011f0b25677f8bb16e7251f5d218f03e8f1c46cff00175384a60c2f22fb5e5"
+      }
+    }
+  ],
+  "migration": {
+    "connectedEntries": 50,
+    "declaredEntries": 76,
+    "observedCompositionBranchesConnected": 2,
+    "observedCompositionBranchesDeclared": 6,
+    "compiledWorkflows": 37,
+    "fullV6Parity": false,
+    "completionGates": {
+      "allRequiredCapabilitiesTransferred": false,
+      "fullCommonCallerDifferentialParity": false,
+      "allDeclaredFamiliesIntegrated": false,
+      "commonGraphEditingCoversExecutedPrograms": false,
+      "pythonNumericSemanticsCovered": false,
+      "fullCampaignRegression": false
+    },
+    "coverageSummary": {
+      "pythonModules": 1369,
+      "pythonLines": 320375,
+      "declaredClassesAndFunctions": 12857,
+      "dataFiles": 417,
+      "verifiedModules": 0,
+      "componentVerifiedModules": 153,
+      "partiallyTransferredModules": 133,
+      "transferredUnverifiedModules": 0,
+      "pendingModules": 1083,
+      "strategyFamilies": 16
+    },
+    "lot3BStatus": "open_with_functional_validation_and_cost_reserve",
+    "lot3CStatus": "waiting_for_3B_cost_closure"
+  },
+  "nextStep": "Diagnose and reduce remaining STCK persistence and SMLP restoration work on materially changed generic source. Investigate allocations in canonical encoding of certified dense arrays and redundant Inventory normalization/context-copy work without weakening validation. Preserve the 0.41 evidence, freeze a new candidate, validate functionality, then execute a newly declared full comparison. Close 3B only after the unchanged budget passes; exposed_reception_plan remains next after that closure.",
+  "limitations": [
+    "CATR confirms the already acquired first three levels; this correction adds no new game capability and does not claim a complete victory.",
+    "The 41-file validation scope is not the complete historical test suite.",
+    "The 34 replay checks do not establish whole-graph equality, complete original-caller parity, or passive owner coverage; the requirements list is empty.",
+    "The six diagnostic checks are scoped; strictFinalEquality remains false.",
+    "Browser evidence uses frozen source in the managed development preview, separately from the built production worker.",
+    "The 256-entry and 8 MiB structural-weight cache limits are not a measured whole-process heap cap or a long-session stability proof.",
+    "All historical failed cohorts and the original RSWP 0.38 to 0.39 strict 16/17 result remain unchanged.",
+    "File integrity and arithmetic review success do not imply budget acceptance or complete migration."
+  ],
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/base/source-manifest.json",
+      "bytes": 28936,
+      "sha256": "0024028577107a7dbcc65ea0cc3ffa929a0ce5a6e7f11bf4515a169fc5cb1146"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/after-cpu-summary.json",
+      "bytes": 6361,
+      "sha256": "b8a64b7feb8f420b8922b742c49a8da1cfaf9a40e5fa3b0df13cc000c70567aa"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/after-output-receipt.json",
+      "bytes": 1221,
+      "sha256": "0e7be21832142954966b42f9ff6934780713c438e11f64cc4776cb488328ddc6"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/after-smlp.cpuprofile.gz",
+      "bytes": 209974,
+      "sha256": "ffbe77182a6435462875c5aa0c3cbe54f5fba3ca0627c4edb97e71a87541fdb4"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/after-smlp.json.gz",
+      "bytes": 142739,
+      "sha256": "4c1c7b953406f0d7b4d9741695feefd8256d7f4ecd822fcf9039d35a8b5d7d64"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/after-smlp.log",
+      "bytes": 566,
+      "sha256": "e80c7129126317c24d1f817ae37bcbd9d41fcec3e70c71fc8c992ad3187fb74e"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/before-cpu-summary.json",
+      "bytes": 5982,
+      "sha256": "feecebf82a606468a84aa5769f17b6e4c219f57a526dcd7e11fadab845efaafc"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/before-output-copy.json",
+      "bytes": 1264,
+      "sha256": "1c4c4f9eaba71a1fa76e9ed067ebc9c0bc3066aab01946ffd9d8af9796d4f7e5"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/before-smlp.cpuprofile.gz",
+      "bytes": 205311,
+      "sha256": "513221595596fae20b74e2578f7e40084dce4f855fe5fbba65d8bc3ad79f6e57"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/before-smlp.json.gz",
+      "bytes": 142553,
+      "sha256": "fce8294db2a53d8832ea69199289d5998c85f4c6186545a33d0539fbf72bba4b"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/before-smlp.log",
+      "bytes": 562,
+      "sha256": "45e1f6c386ad2adac44e40e3c65a10ad925287f5f14d8b4ce427cf4adeca6508"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/before-source-copy.json",
+      "bytes": 1348,
+      "sha256": "ae3117506e9b210b7697f616a794169465c4cee5e9676d4a3aff55774f2878e0"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/cases.json",
+      "bytes": 956,
+      "sha256": "85cf4f2981b9c0e1e5e9dbbb53dcefd2314dae49172cae69124fe70ca9201dee"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/comparison.json",
+      "bytes": 709727,
+      "sha256": "e3204164b3e92189effaf669c49f93c59deeb13fc4bc25e5ad170f9c6b2677a2"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/declaration.json",
+      "bytes": 1689,
+      "sha256": "795222c1ae1efb8db8a61349fdceff153d190ced8e485f214be6c0c5ceb3f935"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/hydration-cache-tests.json",
+      "bytes": 61785,
+      "sha256": "7cbc680792e63275a2827c25f52825acdb4baed4ce634eb2c57024bebce0183d"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/hydration-cache-tests.tap.gz",
+      "bytes": 3048,
+      "sha256": "9bb43f314a16ba94341e7cd088e7495ff44c1f948190bc4a1ab762df927c8d80"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/inventory-copy-getter-tests.json",
+      "bytes": 61476,
+      "sha256": "c04643ddc0366a37170bab1447e759dfac9048b69c7f7d081c601c4c37ec9ebf"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/inventory-copy-getter-tests.tap.gz",
+      "bytes": 5606,
+      "sha256": "371a9897736fe4f938638a172e827863d49b417489ffe357fc94da22fcfb40ce"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/inventory-copy-tests.json",
+      "bytes": 61378,
+      "sha256": "5e27d5b59a132a0cfb68eafa001e8ae88ba3495fcb99128bf6efa193e7d3e088"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/inventory-copy-tests.tap.gz",
+      "bytes": 5520,
+      "sha256": "b57f9427cccbcc5656cbaca487e0f59d27f8a8b6c6a2b6c53b8af2b677ed71e7"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/protocol.md",
+      "bytes": 8338,
+      "sha256": "356656c9bf904d4fd00028960b998948996816b4a7819fc6963507f62d381d47"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/repeated-reference-depth-candidate.log.gz",
+      "bytes": 347,
+      "sha256": "5d25497dd393cea75d3f13a0ad330b822a9a3267fe10fe0483219f2bcb5bda16"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/repeated-reference-depth-comparison.json",
+      "bytes": 128671,
+      "sha256": "6ad9a7919318afe9e7f52ce03926cc7618d8d290d9aa683973db27f1c1f2440d"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/repeated-reference-depth-probe.mjs",
+      "bytes": 1949,
+      "sha256": "36b2bba8f2dd4df5f2d59d349cb2699b079ab52ef9e3c477fb39b0fb1e0f3c50"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/repeated-reference-depth-published-0.40.log.gz",
+      "bytes": 336,
+      "sha256": "68d4e01c10cb5fbb08e11da54cf3b6934947b394b49a0c054d0df4842cf76de7"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/browser/browser-qa.json",
+      "bytes": 3000,
+      "sha256": "8af2b4cfd21c8a054bdf81e553609bd8d44f43c607d0247a11d160faa9baa1ba"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/browser/catr-final-ax.txt",
+      "bytes": 10097,
+      "sha256": "c819162873ae4eead328fce76afc7078d8b6aa71593ec3a430d17185c6e3a5ca"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/browser/catr-three-levels-overview.png",
+      "bytes": 85240,
+      "sha256": "092b651cc7c29c5920ef9481580c58840647d9960e6c1a1a1b6ba0be0a6726fc"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/browser/catr-three-levels.png",
+      "bytes": 92285,
+      "sha256": "cc4fd2aecf2c1c6e0cf6a7a828f5a03945c76ba3c99859e4a05b909a6795b211"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/catr-actual-public-journal.jsonl.gz",
+      "bytes": 17003,
+      "sha256": "197e3664d52bf948cf26a9e3073a9d4a2ea011776920a9a75641013c5c99de88"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/catr-campaign.json.gz",
+      "bytes": 1371756,
+      "sha256": "2ba882f125d1727dd51325555b5bf80dc1bc77c0bf13249b47e27cac29486412"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/catr-campaign.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "6c4cdd5528dd24696d11bf23ab4671fb429e4cbc47741ab7e16c291ac6df4f45"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/catr-campaign.json.gz.part001",
+      "bytes": 471756,
+      "sha256": "54b36c0152dcbf27dd64b02692bbbd926d5fbd165e152e4bb497b9f013d114ae"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/catr-campaign.json.gz.parts.json",
+      "bytes": 673,
+      "sha256": "327179de8c7a0c655036c664866bddceb704668378bfa6c2bc1784bad5a91546"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/catr-output.log.gz",
+      "bytes": 2584,
+      "sha256": "7e34d639923ab7a93c7eadfaa044ec9ed5dccaec5d8bb2e7cd4b6a363bcc7630"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/catr-public-trace.json.gz",
+      "bytes": 24340,
+      "sha256": "f0602a7a40bde7c40f850eeef8ad496c3ad9a4e0aeb38fc1ff0ae21b4a6de846"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/execution-catr.json",
+      "bytes": 63291,
+      "sha256": "4644c6801812253fac52e90a0514016e7163fb640f10a567f5e6f2a14b14fac5"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/source-manifest.json",
+      "bytes": 29431,
+      "sha256": "12b765bcd7348af0f7e3e4325862cae570c2b81470475839fdfe9df79fa2078b"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/catr-040-comparison.json",
+      "bytes": 10643,
+      "sha256": "d35c1142d72e51179077196c5aca1eb73eaa3d3ab847ec9b0d90db40811e980d"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/catr-040-execution.json",
+      "bytes": 4943,
+      "sha256": "060fd41d626593c04f6239ede912ab62ad9dc186856a2ef9734d4a7a1cb3926a"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/catr-040-output.log.gz",
+      "bytes": 2492,
+      "sha256": "c018a3d41817d373338183907f523da4cef2e9af014b7cc3d34d21e2a0298b31"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/catr-040-passive-owner-presence.json",
+      "bytes": 1098,
+      "sha256": "126ce2d7a901d6a6116cb0a3fcd6d136f6a826f854f715236bad9b6795a427d2"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/catr-040-replay.json.gz",
+      "bytes": 1372089,
+      "sha256": "05baf45df70958140448ff6cec38225dacf4c0198342ca59e6d9fba8a6212953"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/catr-040-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "190935be532795cf641808a4fa48e67c0efcac7224ccab5d4618c65faa05cc79"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/catr-040-replay.json.gz.part001",
+      "bytes": 472089,
+      "sha256": "58076c121bfd4ac748783d52290f7a42da952939caaaa5dbfa82c497dffa810f"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/catr-040-replay.json.gz.parts.json",
+      "bytes": 679,
+      "sha256": "36c9484153e2e5435f8aaa52e742f331677aee3aa48d68e407158d453b4e59ed"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/regression-summary.json",
+      "bytes": 75225,
+      "sha256": "dc14052a619bb36720a0faa50a27b5d36bb5c5b8bb79fc824316e5500be03fd9"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/rswp-040-comparison.json",
+      "bytes": 10629,
+      "sha256": "37a717422b4ec75319897d926ee5e431cc0fc4f6acfe3912a02f31949973363c"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/rswp-040-execution.json",
+      "bytes": 4914,
+      "sha256": "b3c1ee6ff140680e535cbcd3ebaae3c9c352808a65cb5a102ea148a0d09c7a8b"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/rswp-040-output.log.gz",
+      "bytes": 2935,
+      "sha256": "0fbbbb326ae73577b711a0e79cf6f3244d79b9efd5eeaa51041a44c9b9af4455"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/rswp-040-passive-owner-presence.json",
+      "bytes": 1098,
+      "sha256": "d9f47354b29752aac1a159bc5b9e827660f3de9b30da85bed51c189a32ccf3db"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/rswp-040-replay.json.gz",
+      "bytes": 2176318,
+      "sha256": "ba6bf1e144daf09d554086d1b035a2ec6afa05515340ceb99d4ce1771e490c06"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/rswp-040-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "bc1d4a4653f27ff6f8f0414e701b961b6505182a32684e35c65ed6a9091055e0"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/rswp-040-replay.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "bfbc3717308703a919c24d5f98b6a6ec2f37a9b877836bcd8a8d9e686194c15b"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/rswp-040-replay.json.gz.part002",
+      "bytes": 376318,
+      "sha256": "ff773f1b66cf29af45a6a248333b250ff1037136a3caa24106dd6a1225ec72ef"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/rswp-040-replay.json.gz.parts.json",
+      "bytes": 847,
+      "sha256": "7e83f7b4faec120b6a791c0b52859f48746568ea818f1aef34118e2e346b515c"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/release-scope.json",
+      "bytes": 2249,
+      "sha256": "3343041f750449afc2a45c1ece3a367343335e6402851195c579ea79e7283e36"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/source-archive-parts.json",
+      "bytes": 821,
+      "sha256": "fb2967ebd2650b6ee785a1a403faff72bf5ec44c4c4ebaf172ef764d436bc3ab"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/source-archive.json",
+      "bytes": 31072,
+      "sha256": "9ab74d5916b3940dcaea1ddd8522828e455ec6a0dc2c5ae0652c0d2358d0d575"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/source-archive.tar.gz",
+      "bytes": 1628944,
+      "sha256": "608b5fba673d4854a3d51bdc8e99b8ab2aea3479e3b79af3756514567955a769"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/source-archive.tar.gz.part000",
+      "bytes": 900000,
+      "sha256": "6da265e058e03c6d3130b9ab523f124c17f048bddb1a8a24b5e4916f5a50980b"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/source-archive.tar.gz.part001",
+      "bytes": 728944,
+      "sha256": "7522623670c71bbe029ba936437f957ac5db3eb7af677d6099236f29eeefada8"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/source-manifest.json",
+      "bytes": 29431,
+      "sha256": "12b765bcd7348af0f7e3e4325862cae570c2b81470475839fdfe9df79fa2078b"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/validation/build-output.log.gz",
+      "bytes": 1749,
+      "sha256": "67259e2741958f0d34310712dd79e20eb3e854ba7e096f18dd6bc8b5c9b7861d"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/validation/checks-run.json",
+      "bytes": 69415,
+      "sha256": "419e942717aefaffcd1767b7a60e52071c01237a547bfc15319b0eca9004bdd0"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/validation/delta-tests-output.log.gz",
+      "bytes": 38805,
+      "sha256": "fc138d7e950c411060a409434937ba691269920e19a0c9889edbbb0150cf1e24"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/validation/delta-tests-run.json",
+      "bytes": 100258,
+      "sha256": "1406ee7fae86c5bc06abb94f94fad816d96fc7a68980dd4bf00f35077ff84986"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/validation/diff-check-output.log.gz",
+      "bytes": 20,
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/validation/entry-audit-output.log.gz",
+      "bytes": 177,
+      "sha256": "204b6870bdf12b63de658e3a61d4dc5be9e64c13e1c1e7ccc8d2126beed57d2d"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/validation/migration-audit-output.log.gz",
+      "bytes": 205,
+      "sha256": "c47347672bc689b95cb00e77bd46756ad63c1803c2eacc440f1afded0deea694"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/final/validation/typecheck-output.log.gz",
+      "bytes": 141,
+      "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/input-copies.json",
+      "bytes": 2249,
+      "sha256": "adac7d0efeb267de46045a613c1796b6114952d29164f212c484ef75c0e4e421"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/cohort1/after.json",
+      "bytes": 425921,
+      "sha256": "98f0e8b1be5645af5b269ba0376c09cb0825a23345ebe327b93e67c36353f82c"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/cohort1/after.log",
+      "bytes": 1573,
+      "sha256": "a63a3ec58bf09f7c552b6d900aab08ce5875b91ad31e77d275a647a990237e34"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/cohort1/baseline.json",
+      "bytes": 425433,
+      "sha256": "48c12c36e1d1e4de5d4d8c2de7aaff4a81a46e0b159c848a55a3353173145a2e"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/cohort1/baseline.log",
+      "bytes": 1598,
+      "sha256": "ac7ae20d7d8b508415aec0712c5229a007d2915f8d365fc3b5d113dde2a8ea64"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/cohort1/comparison.json",
+      "bytes": 25559,
+      "sha256": "2853427e08c7177e76b6899b97d22085c3a7779dfedc1e022c8cfe432a41fd22"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/cohort2/after.json",
+      "bytes": 425968,
+      "sha256": "6be2c9f8a867bfdfd228877167e2fc9e83d41b167eae1fa5c5376973d86c5042"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/cohort2/after.log",
+      "bytes": 1589,
+      "sha256": "4dbe52e3641938f299d99b86f858648dae8607760e35f79c34d972417ae88f53"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/cohort2/baseline.json",
+      "bytes": 425405,
+      "sha256": "7eb66583e85179c982dc9ab0f63f16163e43e6734b2480115d42d61170a6c099"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/cohort2/baseline.log",
+      "bytes": 1564,
+      "sha256": "0a007a392303d1bf5dedafe96b6ffe17d124e5549cd6ef816631dfdb43eeb880"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/cohort2/comparison.json",
+      "bytes": 25586,
+      "sha256": "74953c4e5fd138a0410089bcd2ffbbda0a61ae479b89f1624c826b47fdc43cd0"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/combined-comparison.json",
+      "bytes": 29769,
+      "sha256": "34657555c0607b32897af4fb224ec637f6db2821764427be8d90d7aff0e68cf1"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/consolidation-review.json",
+      "bytes": 45507,
+      "sha256": "238b7b4f667c293c30102e6655f440aa21cebbdfa9e20a96967d37ce06fc327b"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/declaration.json",
+      "bytes": 3829,
+      "sha256": "94db7d959ba947d60d05d56c80e2b7608dd13ded4e3fce66fb355e153713b08c"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/inputs-preparation.json",
+      "bytes": 1602,
+      "sha256": "25c681088a6375c6df0e9a34b7ef6393ec4aec74e8b245b92046c7615b9d426d"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/protocol.md",
+      "bytes": 18356,
+      "sha256": "45a242dd01181244b73982ee74e198f58ebe0682bab116d4f66fa4dd607041f4"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/results.md",
+      "bytes": 19156,
+      "sha256": "5bf0ad1d30af743e930b07657ad0cef7e2bceeef5d148ae89ed40e7c4c498bdf"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/performance/window.json",
+      "bytes": 10909,
+      "sha256": "01b0b078f6d091f1a68de317ae599fcb0dc7cbd53ecf17ad28063be0e73c2525"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/prebuild-failed/regressions/catr-040-execution.json",
+      "bytes": 1594,
+      "sha256": "d045f8535c934b5f68d021abe33b330c63dee758904ccd7a97b41436a0295fe1"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/prebuild-failed/regressions/catr-040-output.log.gz",
+      "bytes": 477,
+      "sha256": "d8756412e8c616f5ef6b3b0eae5f4b248a79d788dccc146cb585c5a7eeb1d09f"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/prebuild-failed/regressions/regression-summary.json",
+      "bytes": 67652,
+      "sha256": "629c76b6cb536214fd30045f230b14ecd05f2509d3896ab7b6c4d44af2870c3d"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/prebuild-failed/regressions/rswp-040-execution.json",
+      "bytes": 1563,
+      "sha256": "a89f76c6875a51ff53ec65e01cfe82e71c215100d6a28389f7403facdcad1e7b"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/prebuild-failed/regressions/rswp-040-output.log.gz",
+      "bytes": 477,
+      "sha256": "d8756412e8c616f5ef6b3b0eae5f4b248a79d788dccc146cb585c5a7eeb1d09f"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/prebuild-failed/relocation.json",
+      "bytes": 2247,
+      "sha256": "dd011f0b25677f8bb16e7251f5d218f03e8f1c46cff00175384a60c2f22fb5e5"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/published/source-manifest.json",
+      "bytes": 29431,
+      "sha256": "01342c154132a0b5f86c59c4be6e41d48800793ba04916c05b9ff94672c61531"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/recorded-regression-cases.json",
+      "bytes": 2248,
+      "sha256": "69fba10635a08805b936face6a7351ff21e9f58ecc709e0b5ae3bd6fc325c4fe"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/recorded-regression-preflight.json",
+      "bytes": 1149,
+      "sha256": "0ecb31be34f7aad1aa0f4fe33ab7a6a85514c600a48a04973f0c10c8dc5a0034"
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-correction.md",
+      "bytes": 22659,
+      "sha256": "6866448ef4283d8ab56cae7d7c09afedc0dc1fd4d1116bd708716fa206aa02ba"
+    },
+    {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "bytes": 83392,
+      "sha256": "1a4cecfc00cd5e1252a091b923b1719aa4cead3fa1f0714c93412ab7fd59afcb"
+    },
+    {
+      "path": "docs/migration/v6-native-transfer.md",
+      "bytes": 114281,
+      "sha256": "91cdaa39d060fe291eb1d3b8a1902ae8ea78395b3eaad76d70e3973b9841ff90"
+    },
+    {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "bytes": 17720,
+      "sha256": "cbd0410c8990f2dc73451b4ed20321766f86091fec392441041b06be3f1634d9"
+    },
+    {
+      "path": "scripts/profile-native-state-costs.mjs",
+      "bytes": 18208,
+      "sha256": "d4ebd302163ea4d96c6d7699d29a036547f0e82fec35c93c7c3a0c4ee077de55"
+    },
+    {
+      "path": "tests/v6-inventory-copy-cost.test.ts",
+      "bytes": 5100,
+      "sha256": "5fda1a77f3c37bf51ae65219765d693e075878fce205d2e9f7a051a6c4e53cd8"
+    },
+    {
+      "path": "tests/v6-native-hydration-cache.test.ts",
+      "bytes": 10289,
+      "sha256": "213918b61178728029ba43588a288731125b4176f41f88833851318c114e9100"
+    }
+  ],
+  "artifactTransport": "Large original reports remain available locally and are preserved in exact ordered byte parts. Raw CPU profiles are retained through their lossless gzip copies and recorded fingerprints.",
+  "qualification": "Prepublication evidence freeze for a functionally validated generic native correction with an unresolved declared cost budget. Publication provenance follows separately through the Site version."
+}

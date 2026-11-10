@@ -1,5 +1,5 @@
 /** Lossless native state graphs; immutable fragments are ordinary versioned V7 nodes. */
-import { assertUnicode, compareUnicode, immutableJson, isJsonObject } from './canonical.ts';
+import { assertUnicode, compareUnicode, immutableJson, isJsonObject, isOwnedImmutableJson } from './canonical.ts';
 import { sha256Bytes, symbolicDigest } from './v6-hash.ts';
 import type { JsonObject, JsonValue } from './ir.ts';
 import { BoundedWeakCache } from './bounded-weak-cache.ts';
@@ -25,6 +25,13 @@ interface Sized { node: Encoded; cost: number }
 // reuse preserves both the nesting bound and a complete export to a new store.
 const frozenStateNodes = new WeakMap<object, { limit: number; value: Sized; height: number; fragments: readonly NativeStateFragment[] }>();
 const NO_FRAGMENTS: readonly NativeStateFragment[] = Object.freeze([]);
+
+interface HydratedFragment { readonly value: JsonValue; readonly height: number }
+// Reuse only terminal fragments: composite references still traverse the actual
+// store on every hydration. Keys are deeply validated immutable V7 JSON values,
+// not caller-frozen envelopes. The disposable cache retains at most 256 results
+// and 8 MiB of conservative structural weight; no graph revision is discarded.
+const hydratedLeaves = new BoundedWeakCache<HydratedFragment & { readonly id: string }>(8 * 1024 * 1024, 256);
 
 // Own the closed AST when each node is built. Its children are then recognized
 // at the ordinary V7 ingress boundary, so persisting the next root preserves
@@ -200,12 +207,22 @@ export function isNativeStateGraph(value: unknown): value is NativeStateGraphRoo
 /** Read the actual V7 fragments, verify content identity, and restore immutable values. */
 export function hydrateNativeState(root: unknown, readFragment: (id: string) => unknown): JsonValue {
   if (!isNativeStateGraph(root) || Object.keys(root).length !== 3) throw new TypeError('Invalid native state graph root');
-  const visiting = new Set<string>(), cache = new Map<string, JsonValue>();
+  const visiting = new Set<string>(), cache = new Map<string, HydratedFragment>();
+  let measure: { base: number; height: number; weight: number; terminal: boolean } | null = null;
   const exact = (object: JsonObject, fields: readonly string[]): void => {
     if (Object.keys(object).length !== fields.length || fields.some(field => !Object.hasOwn(object, field))) throw new TypeError('Malformed native state graph node');
   };
+  const referenced = (entry: HydratedFragment, depth: number): JsonValue => {
+    if (depth + 1 + entry.height > 512) throw new TypeError('Native state reference nesting exceeds the structural contract');
+    if (measure) measure.height = Math.max(measure.height, depth + 1 + entry.height - measure.base);
+    return entry.value;
+  };
   const decode = (value: unknown, depth: number): JsonValue => {
     if (depth > 512) throw new TypeError('Native state reference nesting exceeds the structural contract');
+    if (measure) {
+      measure.height = Math.max(measure.height, depth - measure.base);
+      measure.weight += 64 + (typeof value === 'string' ? 2 * value.length : 0);
+    }
     if (value === null || typeof value === 'boolean') return value;
     if (typeof value === 'string') { assertUnicode(value); return value; }
     if (typeof value === 'number') {
@@ -221,12 +238,28 @@ export function hydrateNativeState(root: unknown, readFragment: (id: string) => 
       exact(value, ['kind', 'id']); const id = value.id;
       if (typeof id !== 'string' || !/^state_fragment:[a-f0-9]{64}$/.test(id)) throw new TypeError('Invalid native fragment reference');
       if (visiting.has(id)) throw new TypeError('Cyclic native fragment reference');
-      const found = cache.get(id); if (found !== undefined) return found;
+      if (measure) measure.terminal = false;
+      // A resolver is called once per id in this hydration, as before. A cached
+      // cross-root leaf still requires this authoritative read. Its deeply
+      // immutable identity and the same id certify the previously checked
+      // profile/content hash; every other object/id takes the full boundary.
+      const found = cache.get(id); if (found !== undefined) return referenced(found, depth);
       const fragment = readFragment(id);
+      const retained = isJsonObject(fragment) ? hydratedLeaves.get(fragment) : undefined;
+      if (retained?.id === id) { cache.set(id, retained); return referenced(retained, depth); }
       if (!isJsonObject(fragment) || fragment.profile !== NATIVE_STATE_GRAPH_PROFILE || !Object.hasOwn(fragment, 'node') || Object.keys(fragment).length !== 2 ||
           `${NATIVE_STATE_FRAGMENT_PREFIX}${symbolicDigest(fragment, false)}` !== id) throw new TypeError('Native state fragment digest mismatch or missing fragment');
+      const parent = measure;
+      const current = { base: depth + 1, height: 0, weight: 256, terminal: true };
+      measure = current;
       visiting.add(id);
-      try { const result = decode(fragment.node, depth + 1); cache.set(id, result); return result; } finally { visiting.delete(id); }
+      let result: HydratedFragment;
+      try {
+        result = { value: decode(fragment.node, depth + 1), height: current.height };
+        cache.set(id, result);
+        if (current.terminal && isOwnedImmutableJson(fragment)) hydratedLeaves.set(fragment, { id, ...result }, current.weight);
+      } finally { visiting.delete(id); measure = parent; }
+      return referenced(result, depth);
     }
     if (value.kind === 'array') {
       exact(value, ['kind', 'items']); if (!Array.isArray(value.items)) throw new TypeError('Invalid native array items');
@@ -234,7 +267,10 @@ export function hydrateNativeState(root: unknown, readFragment: (id: string) => 
     }
     if (value.kind === 'object') {
       exact(value, ['kind', 'members']); if (!isJsonObject(value.members)) throw new TypeError('Invalid native object members');
-      return Object.freeze(Object.fromEntries(Object.entries(value.members).map(([name, item]) => { assertUnicode(name); return [name, decode(item, depth + 1)]; })));
+      return Object.freeze(Object.fromEntries(Object.entries(value.members).map(([name, item]) => {
+        assertUnicode(name); if (measure) measure.weight += 2 * name.length;
+        return [name, decode(item, depth + 1)];
+      })));
     }
     if (value.kind === 'concat' || value.kind === 'merge') {
       exact(value, ['kind', 'parts']); if (!Array.isArray(value.parts) || !value.parts.length) throw new TypeError('Invalid native state groups');

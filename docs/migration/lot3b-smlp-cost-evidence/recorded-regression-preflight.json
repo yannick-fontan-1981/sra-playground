@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.recorded-public-regression-preflight-receipt.v1",
+  "recordedAt": "2026-11-10T03:13:04.290641+00:00",
+  "command": [
+    "python",
+    "-B",
+    "scripts/run-recorded-public-regressions.py",
+    "docs/migration/lot3b-smlp-cost-evidence/recorded-regression-cases.json",
+    "--preflight"
+  ],
+  "exitCode": 0,
+  "result": {
+    "mode": "read-only-preflight",
+    "status": "passed",
+    "manifest": {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/recorded-regression-cases.json",
+      "sha256": "69fba10635a08805b936face6a7351ff21e9f58ecc709e0b5ae3bd6fc325c4fe",
+      "bytes": 2248
+    },
+    "cases": 2,
+    "totals": {
+      "commands": 31,
+      "completePublicPackets": 33,
+      "animationFrames": 336,
+      "prefixes": 19,
+      "requests": 50,
+      "naturalLevelBoundaries": 6
+    },
+    "passiveOwnerRequirements": [],
+    "replaysExecuted": 0
+  },
+  "qualification": "Saved output of the completed existing read-only preflight. Immutable archived report/trace hashes, commands and complete public packets were checked. Zero current native replays were executed; this does not validate native0.41."
+}

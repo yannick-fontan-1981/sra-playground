@@ -1,0 +1,192 @@
+{
+  "schema": "logos-engine.cpu-self-time-summary.v1",
+  "profile": {
+    "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/after-smlp.cpuprofile.gz",
+    "sha256": "ffbe77182a6435462875c5aa0c3cbe54f5fba3ca0627c4edb97e71a87541fdb4",
+    "bytes": 209974
+  },
+  "sampleIntervalMicros": 1000,
+  "topSelfTime": [
+    {
+      "name": "(garbage collector)",
+      "url": "",
+      "lineNumber": -1,
+      "selfMs": 1193.919
+    },
+    {
+      "name": "(idle)",
+      "url": "",
+      "lineNumber": -1,
+      "selfMs": 659.752
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 32,
+      "selfMs": 598.54
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 32,
+      "selfMs": 367.0
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 32,
+      "selfMs": 340.997
+    },
+    {
+      "name": "visit",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 130,
+      "selfMs": 273.717
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 32,
+      "selfMs": 271.011
+    },
+    {
+      "name": "structuredClone",
+      "url": "node:internal/worker/js_transferable",
+      "lineNumber": 112,
+      "selfMs": 237.364
+    },
+    {
+      "name": "",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/scripts/profile-native-state-costs.mjs",
+      "lineNumber": 0,
+      "selfMs": 181.418
+    },
+    {
+      "name": "encode",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 165,
+      "selfMs": 176.626
+    },
+    {
+      "name": "detectV5Components",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/v6-native-observer.ts",
+      "lineNumber": 254,
+      "selfMs": 160.134
+    },
+    {
+      "name": "encode",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 165,
+      "selfMs": 149.767
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 32,
+      "selfMs": 130.805
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 32,
+      "selfMs": 126.979
+    },
+    {
+      "name": "visitRaw",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/v6-native-state-graph.ts",
+      "lineNumber": 112,
+      "selfMs": 126.521
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 32,
+      "selfMs": 124.766
+    },
+    {
+      "name": "(program)",
+      "url": "",
+      "lineNumber": -1,
+      "selfMs": 123.254
+    },
+    {
+      "name": "visit",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/v6-native-owned.ts",
+      "lineNumber": 18,
+      "selfMs": 117.896
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 32,
+      "selfMs": 108.614
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 32,
+      "selfMs": 98.811
+    },
+    {
+      "name": "jsonEntries",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 32,
+      "selfMs": 88.424
+    },
+    {
+      "name": "jobPromise",
+      "url": "node:internal/crypto/util",
+      "lineNumber": 872,
+      "selfMs": 86.664
+    },
+    {
+      "name": "visit",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/v6-native-owned.ts",
+      "lineNumber": 18,
+      "selfMs": 86.63
+    },
+    {
+      "name": "commit",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/kernel.ts",
+      "lineNumber": 263,
+      "selfMs": 84.765
+    },
+    {
+      "name": "",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/v6-transition-learning.ts",
+      "lineNumber": 283,
+      "selfMs": 84.021
+    },
+    {
+      "name": "visit",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 130,
+      "selfMs": 81.618
+    },
+    {
+      "name": "",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/scripts/profile-native-state-costs.mjs",
+      "lineNumber": 213,
+      "selfMs": 80.903
+    },
+    {
+      "name": "supportKey",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/v6-support-measurements.ts",
+      "lineNumber": 9,
+      "selfMs": 76.98
+    },
+    {
+      "name": "encode",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 165,
+      "selfMs": 75.601
+    },
+    {
+      "name": "visit",
+      "url": "file:///workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout/src/logos-engine/canonical.ts",
+      "lineNumber": 130,
+      "selfMs": 74.981
+    }
+  ],
+  "qualification": "Sampled self CPU time, not wall time; timing includes the declared diagnostic instrumentation and cannot decide the budget."
+}

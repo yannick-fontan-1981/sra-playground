@@ -1,0 +1,55 @@
+{
+  "schema": "logos-engine.native-cost-input-copies.v1",
+  "recordedAt": "2026-11-10T03:11:09.860218+00:00",
+  "copies": [
+    {
+      "source": {
+        "path": "docs/migration/lot3b-cost-evidence/base/source-manifest.json",
+        "sha256": "0024028577107a7dbcc65ea0cc3ffa929a0ce5a6e7f11bf4515a169fc5cb1146",
+        "bytes": 28936
+      },
+      "copy": {
+        "path": "docs/migration/lot3b-smlp-cost-evidence/base/source-manifest.json",
+        "sha256": "0024028577107a7dbcc65ea0cc3ffa929a0ce5a6e7f11bf4515a169fc5cb1146",
+        "bytes": 28936
+      },
+      "byteIdentical": true
+    },
+    {
+      "source": {
+        "path": "docs/migration/lot3b-cost-evidence/final-v3/source-manifest.json",
+        "sha256": "01342c154132a0b5f86c59c4be6e41d48800793ba04916c05b9ff94672c61531",
+        "bytes": 29431
+      },
+      "copy": {
+        "path": "docs/migration/lot3b-smlp-cost-evidence/published/source-manifest.json",
+        "sha256": "01342c154132a0b5f86c59c4be6e41d48800793ba04916c05b9ff94672c61531",
+        "bytes": 29431
+      },
+      "byteIdentical": true
+    }
+  ],
+  "regressionInputs": [
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/catr-campaign.json.gz",
+      "sha256": "1c2c0ce3a21867e3646efc161570a81241544411d8f33e17662cfa047d7e87d0",
+      "bytes": 1371840
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/catr-public-trace.json.gz",
+      "sha256": "a865209c6acd3a17e028d2469bbb736669f0281350ae7ea2bca3f8ea3b732e20",
+      "bytes": 24340
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/rswp-039-replay.json.gz",
+      "sha256": "5c489de83ef946d26253c3beb29953efddcea513b9a29a09b6ec232f1dbabbee",
+      "bytes": 2176376
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+      "bytes": 41445
+    }
+  ],
+  "qualification": "Read-only fingerprint verification and exclusive byte copies of source manifests and references after restoring unchanged large reports from their checked parts. No game, agent replay, test, profiling or build was executed."
+}

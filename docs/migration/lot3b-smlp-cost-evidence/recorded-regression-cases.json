@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "cases": [
+    {
+      "id": "catr-040",
+      "game": "CATR",
+      "baseline": {
+        "path": "docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/catr-campaign.json.gz",
+        "sha256": "1c2c0ce3a21867e3646efc161570a81241544411d8f33e17662cfa047d7e87d0"
+      },
+      "trace": {
+        "path": "docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/catr-public-trace.json.gz",
+        "sha256": "a865209c6acd3a17e028d2469bbb736669f0281350ae7ea2bca3f8ea3b732e20"
+      }
+    },
+    {
+      "id": "rswp-040",
+      "game": "RSWP",
+      "baseline": {
+        "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/rswp-039-replay.json.gz",
+        "sha256": "5c489de83ef946d26253c3beb29953efddcea513b9a29a09b6ec232f1dbabbee"
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "qualification": "Two predeclared cold common-agent command recomputations against immutable successful native 0.40 reports from publication 68, commit 512ac2cd7270b669aca0a12dbc9c4702174f1c0f, native digest 391a2797414c0090fa632a2fc13736c7806c1f5fceceafa34e1583dd4ef9e3a9. CATR uses its actual 0.40 cold campaign and corresponding actual public trace: 12 actions, 3 levels, 8 prefixes, 1 session. RSWP uses the 0.40 report produced by replay of the retained 0.38 public trace: 19 actions, 3 levels, 11 prefixes, 1 session. RSWP public-return provenance remains 0.38, while its current baseline decisions were recomputed by 0.40; neither report nor trace is relabeled or regenerated. Every current command is computed before its recorded return is supplied. No expected command, game solution, learned state or level jump initializes native reasoning. The unchanged historical comparator applies its 17 bounded checks per case. The historical strict 0.38-to-0.39 RSWP 16/17 result and its separate qualification remain unchanged. These are recorded-return regressions, not new live-game successes, whole-graph equality or timing measurements."
+}

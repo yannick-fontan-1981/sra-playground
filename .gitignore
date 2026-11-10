@@ -184,3 +184,19 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 !/docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-smlp.log
 !/docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-after-stck.log
 !/docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-after-smlp.log
+
+# Lot 3B SMLP cost diagnostics: raw CPU profiles retained as exact gzip.
+/docs/migration/lot3b-smlp-cost-evidence/diagnostic/*.cpuprofile
+!/docs/migration/lot3b-smlp-cost-evidence/diagnostic/*.log
+
+# Frozen native source is retained in exact ordered archive parts.
+/docs/migration/lot3b-smlp-cost-evidence/final/source-archive.tar.gz
+!/docs/migration/lot3b-smlp-cost-evidence/performance/cohort1/baseline.log
+!/docs/migration/lot3b-smlp-cost-evidence/performance/cohort1/after.log
+!/docs/migration/lot3b-smlp-cost-evidence/performance/cohort2/baseline.log
+!/docs/migration/lot3b-smlp-cost-evidence/performance/cohort2/after.log
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/catr-campaign.json.gz
+/docs/migration/lot3b-smlp-cost-evidence/final/regressions/catr-040-replay.json.gz
+/docs/migration/lot3b-smlp-cost-evidence/final/regressions/rswp-040-replay.json.gz

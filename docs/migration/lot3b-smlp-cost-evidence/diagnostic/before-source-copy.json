@@ -1,0 +1,32 @@
+{
+  "schema": "logos-engine.diagnostic-source-copy.v1",
+  "recordedAt": "2026-11-10T03:13:30.595416+00:00",
+  "sourceCheckout": "/workspace/scratch/c4dd29871d33/sra-playground-lot2a/.sites-checkout",
+  "isolatedCheckout": "/workspace/scratch/c4dd29871d33/lot3b-published-040",
+  "nativeSourceDigest": "391a2797414c0090fa632a2fc13736c7806c1f5fceceafa34e1583dd4ef9e3a9",
+  "nativeFileCount": 249,
+  "files": [
+    {
+      "path": "scripts/profile-native-state-costs.mjs",
+      "sha256": "d4ebd302163ea4d96c6d7699d29a036547f0e82fec35c93c7c3a0c4ee077de55",
+      "bytes": 18208
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/protocol.md",
+      "sha256": "356656c9bf904d4fd00028960b998948996816b4a7819fc6963507f62d381d47",
+      "bytes": 8338
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/cases.json",
+      "sha256": "85cf4f2981b9c0e1e5e9dbbb53dcefd2314dae49172cae69124fe70ca9201dee",
+      "bytes": 956
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/declaration.json",
+      "sha256": "795222c1ae1efb8db8a61349fdceff153d190ced8e485f214be6c0c5ceb3f935",
+      "bytes": 1689
+    }
+  ],
+  "status": "passed",
+  "qualification": "Exact diagnostic code/declarations copied to immutable published source worktree; no game or source implementation edited."
+}

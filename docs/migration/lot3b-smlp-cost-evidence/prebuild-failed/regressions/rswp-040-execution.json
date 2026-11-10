@@ -1,0 +1,38 @@
+{
+  "case": "rswp-040",
+  "game": "RSWP",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/lot3b-cost-evidence/final-v3/regressions/rswp-039-replay.json.gz",
+    "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+    "docs/migration/lot3b-smlp-cost-evidence/final/regressions/rswp-040-replay.json.gz"
+  ],
+  "startedAt": "2026-11-10T03:23:36.327526+00:00",
+  "finishedAt": "2026-11-10T03:23:36.494070+00:00",
+  "elapsedSeconds": 0.1665404559998933,
+  "exitCode": 1,
+  "timeoutSeconds": 180,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/rswp-039-replay.json.gz",
+    "sha256": "5c489de83ef946d26253c3beb29953efddcea513b9a29a09b6ec232f1dbabbee",
+    "bytes": 2176376
+  },
+  "trace": {
+    "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+    "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+    "bytes": 41445
+  },
+  "output": {
+    "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/rswp-040-output.log.gz",
+    "sha256": "d8756412e8c616f5ef6b3b0eae5f4b248a79d788dccc146cb585c5a7eeb1d09f",
+    "bytes": 477
+  },
+  "passed": false,
+  "nativeSourceBeforeDigest": "3edffde9b21f4fc8af9dda9a1dbd40707c015d9f7cba8a41460021e39acb7605",
+  "nativeSourceAfterDigest": "3edffde9b21f4fc8af9dda9a1dbd40707c015d9f7cba8a41460021e39acb7605",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true
+}

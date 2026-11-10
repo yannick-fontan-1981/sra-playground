@@ -61,7 +61,11 @@ function retainedSourceState(value: R): R {
 
 function validatedState(value: R): R {
   const state = retainedSourceState(value);
-  const tracker = new CellProjection(); tracker.restore(clone(state.tracker));
+  const tracker = new CellProjection();
+  // The source restorer already detaches the input. A customized restorer
+  // still receives the historical mutable copy before its validation call.
+  const restore = tracker.restore;
+  Reflect.apply(restore, tracker, [restore === cellRestoreProjection ? state.tracker : clone(state.tracker)]);
   return state;
 }
 

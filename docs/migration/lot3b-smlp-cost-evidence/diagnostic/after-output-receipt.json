@@ -1,0 +1,30 @@
+{
+  "schema": "logos-engine.diagnostic-output-local.v1",
+  "recordedAt": "2026-11-10T03:23:47.292538+00:00",
+  "status": "passed",
+  "nativeDigest": "3edffde9b21f4fc8af9dda9a1dbd40707c015d9f7cba8a41460021e39acb7605",
+  "outputs": [
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/after-smlp.json.gz",
+      "sha256": "4c1c7b953406f0d7b4d9741695feefd8256d7f4ecd822fcf9039d35a8b5d7d64",
+      "bytes": 142739
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/after-smlp.log",
+      "sha256": "e80c7129126317c24d1f817ae37bcbd9d41fcec3e70c71fc8c992ad3187fb74e",
+      "bytes": 566
+    },
+    {
+      "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/after-smlp.cpuprofile",
+      "sha256": "b55aa38b4d7d98a6bcc0cdcf04ec7d0422ed1a993f6f2611834d2de427fd796b",
+      "bytes": 3058031
+    }
+  ],
+  "losslessCpuProfile": {
+    "path": "docs/migration/lot3b-smlp-cost-evidence/diagnostic/after-smlp.cpuprofile.gz",
+    "sha256": "ffbe77182a6435462875c5aa0c3cbe54f5fba3ca0627c4edb97e71a87541fdb4",
+    "bytes": 209974
+  },
+  "losslessRoundTripExact": true,
+  "qualification": "One declared cold SMLP15 diagnostic with CPU sampling; not an official cost measurement."
+}
