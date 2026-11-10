@@ -102,7 +102,7 @@ test('cold public recall acquisition defers the seventh unlearned invitation thr
   const groups = (result.snapshot.coverage as R).sourceGroups;
   assert.deepEqual(groups.map((group: R) => group.id), declarations.strategy.declarations[0]!.configuration.families);
   assert.deepEqual(groups.find((group: R) => group.id === 'window_constraints').entryPoints.filter((entry: string | null) => entry !== null),
-    ['occluded_catalogue_composition', 'queued_field_composition', 'product_panel_composition', 'labeled_sequence_composition', 'linked_packet_composition', 'trace_field_composition', 'cell_patch_composition', 'observed_occurrence_recall', 'observed_program_composition', 'typed_material_flow', 'radial_port_composition', 'observed_framed_analogy', 'field_service_composition', 'rooted_quota_composition']);
+    ['occluded_catalogue_composition', 'queued_field_composition', 'product_panel_composition', 'labeled_sequence_composition', 'linked_packet_composition', 'trace_field_composition', 'cell_patch_composition', 'observed_occurrence_recall', 'observed_program_composition', 'typed_material_flow', 'radial_port_composition', 'observed_framed_analogy', 'field_service_composition', 'rooted_quota_composition', 'framed_window_composition', 'coupled_prefix_reference', 'relative_arrangement', 'recurrent_series']);
   assert.ok(result.authorization, 'A priority witness still requires the current WHY/ACT authorization');
   assert.deepEqual(proposal.steps[0].point_binding.point, plan.selected.point);
   assert.equal(proposal.steps[0].point_binding.observation_ref, plan.observation_ref);
