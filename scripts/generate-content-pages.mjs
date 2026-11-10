@@ -83,6 +83,26 @@ function documentPage({ title, description, path, active, body, script = '/src/r
 </html>
 `;
 }
+function motivationTable(table) {
+  if (!table) return '';
+  return `<div class="motivation-commitments"><table role="table">
+    <caption>${escape(table.caption)}</caption>
+    <thead role="rowgroup"><tr role="row">${table.headers.map(header => `<th scope="col" role="columnheader">${escape(header)}</th>`).join('')}</tr></thead>
+    <tbody role="rowgroup">${table.rows.map(row => `<tr role="row">${row.map((cell, index) => index === 0
+      ? `<th scope="row" role="rowheader">${escape(cell)}</th>`
+      : `<td role="cell"><span class="motivation-cell-label" aria-hidden="true">${escape(table.headers[index])}</span>${escape(cell)}</td>`).join('')}</tr>`).join('')}</tbody>
+  </table></div>`;
+}
+function motivationPath(stages) {
+  if (!stages?.length) return '';
+  return `<ol class="motivation-path">${stages.map((stage, index) => `<li>
+    <span class="motivation-path-number" aria-hidden="true">${number(index + 1)}</span>
+    <div><p class="motivation-path-status">${escape(stage.status)}</p><h4>${escape(stage.title)}</h4>
+      <p>${escape(stage.text)}</p><p class="motivation-path-evidence"><strong>Milestone</strong>${escape(stage.evidence)}</p>
+      ${stage.link ? `<div class="reading-sources"><a href="${escape(stage.link.href)}">${escape(stage.link.label)}${arrow}</a></div>` : ''}
+    </div>
+  </li>`).join('')}</ol>`;
+}
 function renderMotivation() {
   let stepNumber = 0;
   const parts = motivation.parts.map(part => ({ ...part, steps: part.steps.map(step => ({ ...step, number: ++stepNumber })) }));
@@ -103,6 +123,7 @@ function renderMotivation() {
           <p class="reading-deck">${escape(motivation.deck)}</p>
           <p class="motivation-byline">A personal statement by ${escape(motivation.author)}</p>
         </header>
+        <p class="motivation-pitch">${escape(motivation.pitch)}</p>
         <div class="reading-intro">${paragraphs(motivation.intro)}</div>
         <nav class="motivation-route" aria-label="The three parts of this motivation">${parts.map(part => `
           <a href="#${escape(part.id)}"><span>Steps ${number(part.steps[0].number)}–${number(part.steps.at(-1).number)}</span><strong>${escape(part.title)}</strong>${arrow}</a>
@@ -115,7 +136,11 @@ function renderMotivation() {
                 <div class="motivation-step-heading"><span class="motivation-step-number" aria-label="Step ${step.number}">${number(step.number)}</span><h3 id="${escape(step.id)}-heading">${escape(step.title)}</h3></div>
                 <div class="motivation-step-body">
                   ${paragraphs(step.paragraphs)}
-                  <div class="motivation-consequence"><p class="motivation-consequence-label">${escape(step.consequenceLabel ?? 'The next question')}</p><p>${escape(step.consequence)}</p></div>
+                  ${motivationTable(step.table)}
+                  ${step.items?.length ? `<ul>${step.items.map(item => `<li>${escape(item)}</li>`).join('')}</ul>` : ''}
+                  ${motivationPath(step.stages)}
+                  ${paragraphs(step.after)}
+                  ${step.consequence ? `<div class="motivation-consequence"><p class="motivation-consequence-label">${escape(step.consequenceLabel ?? 'The consequence')}</p><p>${escape(step.consequence)}</p></div>` : ''}
                   ${sources(step.sources)}
                   ${step.links?.length ? `<div class="reading-sources">${step.links.map(link => `<a href="${escape(link.href)}">${escape(link.label)}${arrow}</a>`).join('')}</div>` : ''}
                 </div>

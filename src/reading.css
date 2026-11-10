@@ -24,6 +24,7 @@
 .motivation-sidebar nav>.motivation-nav-part{font-size:12px;line-height:1.6;color:var(--accent-hover);margin-top:13px;padding-top:9px;border-top:1px solid var(--line)}
 .motivation-sidebar nav>.motivation-nav-part:first-child{margin-top:0}
 .reading-article .motivation-byline{font-family:var(--mono);font-size:13px;color:var(--subtle);margin:18px 0 0}
+.reading-article .motivation-pitch{font-size:28px;line-height:1.5;letter-spacing:-.4px;color:var(--ink);margin:29px 0 25px;max-width:31ch}
 .motivation-route{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:29px 0 44px;border-block:1px solid var(--line)}
 .motivation-route>a{display:grid;grid-template-columns:1fr 17px;gap:8px 10px;padding:19px 18px;align-content:start;border-right:1px solid var(--line)}
 .motivation-route>a:first-child{padding-left:0}
@@ -56,8 +57,28 @@
 .motivation-next a:hover>span{text-decoration:underline;text-underline-offset:4px}
 .motivation-back{display:inline-block;margin-top:22px;font-size:14px;color:var(--subtle)}
 .motivation-back:hover{color:var(--accent-hover)}
+.motivation-commitments{margin:26px 0;max-width:100%}
+.motivation-commitments table{width:100%;border-collapse:collapse;text-align:left;table-layout:fixed;font-size:16px;line-height:1.75}
+.motivation-commitments caption{text-align:left;font-family:var(--mono);font-size:13px;line-height:1.7;color:var(--accent-hover);padding-bottom:13px}
+.motivation-commitments th,.motivation-commitments td{padding:16px 13px;vertical-align:top;border-bottom:1px solid var(--line);overflow-wrap:break-word}
+.motivation-commitments thead th{font-size:13px;font-weight:400;line-height:1.7;color:var(--subtle);background:var(--surface-muted);border-top:1px solid var(--line)}
+.motivation-commitments thead th:first-child{width:25%}
+.motivation-commitments thead th:nth-child(2){width:32%}
+.motivation-commitments tbody th{font-weight:500;color:var(--ink)}
+.motivation-commitments td{color:var(--muted)}
+.motivation-cell-label{display:none}
+.reading-article .motivation-path{list-style:none;margin:29px 0 31px;padding:0}
+.reading-article .motivation-path>li{display:grid;grid-template-columns:38px minmax(0,1fr);gap:19px;margin:0;padding:0 0 29px;position:relative}
+.motivation-path>li:not(:last-child):before{content:"";position:absolute;top:39px;bottom:10px;left:18px;border-left:1px solid #675b3c}
+.motivation-path-number{display:grid;place-items:center;align-self:start;height:38px;border:1px solid #8f7b4c;color:#e5cc8e;font-family:var(--mono);font-size:14px}
+.reading-article .motivation-path-status{font-family:var(--mono);font-size:12px;line-height:1.6;color:#e5cc8e;margin:0 0 7px;padding-top:1px}
+.motivation-path h4{font-size:22px;font-weight:500;letter-spacing:-.2px;line-height:1.45;margin:0 0 12px;color:var(--ink)}
+.reading-article .motivation-path-evidence{font-size:16px;line-height:1.75;margin-bottom:0;padding-left:14px;border-left:2px solid #675b3c}
+.motivation-path-evidence strong{display:block;font-family:var(--mono);font-size:12px;font-weight:400;line-height:1.7;color:#e5cc8e;margin-bottom:4px}
+.motivation-path .reading-sources{margin-top:11px}
 @media(max-width:760px){
   .motivation-sidebar{display:none}
+  .reading-article .motivation-pitch{font-size:25px;line-height:1.5;margin-top:25px;max-width:100%}
   .motivation-route{grid-template-columns:1fr;margin-bottom:32px}
   .motivation-route>a,.motivation-route>a:first-child,.motivation-route>a:last-child{padding:13px 0;gap:5px 15px;border-right:0;border-bottom:1px solid var(--line)}
   .motivation-route>a:last-child{border-bottom:0}
@@ -73,6 +94,18 @@
   .motivation-consequence{padding-inline:15px}
   .motivation-closing h2{font-size:26px}
   .motivation-next{grid-template-columns:1fr;gap:21px}
+  .motivation-commitments table,.motivation-commitments caption,.motivation-commitments tbody,.motivation-commitments tr,.motivation-commitments th,.motivation-commitments td{display:block;width:100%}
+  .motivation-commitments thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  .motivation-commitments tbody>tr{padding:18px 0;border-top:1px solid var(--line)}
+  .motivation-commitments tbody>tr:last-child{border-bottom:1px solid var(--line)}
+  .motivation-commitments th,.motivation-commitments td{padding:0;border:0}
+  .motivation-commitments tbody th{font-size:18px;line-height:1.6;margin-bottom:13px}
+  .motivation-commitments td+td{margin-top:13px}
+  .motivation-cell-label{display:block;font-family:var(--mono);font-size:12px;line-height:1.7;color:var(--accent-hover);margin-bottom:4px}
+  .reading-article .motivation-path>li{grid-template-columns:32px minmax(0,1fr);gap:13px}
+  .motivation-path-number{height:32px;font-size:13px}
+  .motivation-path>li:not(:last-child):before{top:34px;left:15px}
+  .motivation-path h4{font-size:21px}
 }
 .reading-intro:empty{display:none}
 .reading-article p{font-size:18px;line-height:1.8;color:var(--muted);margin:0 0 16px}
