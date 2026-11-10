@@ -1,0 +1,67 @@
+{
+  "schema": "logos-engine.browser-qa.v1",
+  "recordedAt": "2026-11-10T20:11:11.672918+00:00",
+  "nativeVersion": "0.52.0",
+  "nativeDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+  "previewUrl": "http://127.0.0.1:4173/",
+  "finalUrl": "http://127.0.0.1:4173/?game=LKEY&level=3",
+  "game": "LKEY",
+  "startLevel": 1,
+  "learnedStateInjected": false,
+  "pause": {
+    "observed": "Paused.",
+    "actions": 1,
+    "levels": 0,
+    "plans": 1,
+    "latencyMeasured": false
+  },
+  "oneAction": {
+    "observed": "One action completed.",
+    "actions": 2,
+    "levels": 0,
+    "plans": 2
+  },
+  "boundaries": [
+    {
+      "actions": 16,
+      "levels": 1,
+      "plans": 16,
+      "visibleOwner": "public_ranked_workshop"
+    },
+    {
+      "actions": 24,
+      "levels": 2,
+      "plans": 24,
+      "visibleOwner": "public_ranked_workshop"
+    }
+  ],
+  "final": {
+    "actions": 25,
+    "levels": 2,
+    "plans": 25,
+    "activeSolvingSecondsDisplayed": 33.2,
+    "status": "frontier_unknown",
+    "visibleOwner": "animated_contact"
+  },
+  "targetLevels": 3,
+  "targetMet": false,
+  "qualification": "Actual managed browser UI on the integrated0.52 source freeze. Cold LKEY selection from level1; Pause, one-action, resumed natural boundaries and final frontier_unknown observed. Two actual levels; third-level reserve retained. No arbitrary level jump, injected state, full-caller parity, immediate interrupt or measured Pause latency claimed. Screenshot and actual accessibility states retained.",
+  "cumulativeGameCaseSeconds": 1341.6227419909999,
+  "artifacts": [
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/browser/observed-states.json",
+      "sha256": "b918f582827f30c3c025c82df1edf1d80400100c2f69635896233666f9b76c92",
+      "bytes": 63702
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/browser/final-ax.txt",
+      "sha256": "827dd4dc5f9e26cba07c9fc8057b7075c8d23ad1f812c574725b5507c6615655",
+      "bytes": 11269
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/browser/final.png",
+      "sha256": "0fb10009181c02b1af001d9981ae1aa5b2e348d1c8eaf63d5ce7153c9c345414",
+      "bytes": 81830
+    }
+  ]
+}

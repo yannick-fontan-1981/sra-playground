@@ -1,0 +1,60 @@
+{
+  "schema": "logos-engine.browser-qa.v1",
+  "recordedAt": "2026-11-10T18:18:30.524030+00:00",
+  "nativeVersion": "0.50.0",
+  "nativeDigest": "8492388162915bd01be1279d645870d366f0fd306e4f31ea47e8b65aafebac7e",
+  "previewUrl": "http://127.0.0.1:4173/",
+  "finalUrl": "http://127.0.0.1:4173/?game=LKEY&level=3",
+  "game": "LKEY",
+  "startLevel": 1,
+  "learnedStateInjected": false,
+  "pause": {
+    "observed": "Paused.",
+    "actions": 1,
+    "levels": 0,
+    "plans": 1,
+    "latencyMeasured": false
+  },
+  "oneAction": {
+    "observed": "One action completed.",
+    "actions": 2,
+    "levels": 0,
+    "plans": 2
+  },
+  "boundaries": [
+    {
+      "actions": 16,
+      "levels": 1,
+      "plans": 16,
+      "visibleOwner": "public_ranked_workshop"
+    },
+    {
+      "actions": 24,
+      "levels": 2,
+      "plans": 24,
+      "visibleOwner": "public_ranked_workshop"
+    }
+  ],
+  "final": {
+    "actions": 25,
+    "levels": 2,
+    "plans": 25,
+    "activeSolvingSecondsDisplayed": 28.1,
+    "status": "frontier_unknown",
+    "visibleOwner": "animated_contact"
+  },
+  "targetLevels": 3,
+  "targetMet": false,
+  "qualification": "Browser UI actions only: Pause, single step, resume and natural boundaries. Official game state supplies levels. Third-level reserve confirmed; no full caller parity or bounded Pause latency claimed. Full-page screenshot timed out once; viewport capture succeeded.",
+  "cumulativeGameCaseSeconds": 1120.6761759909998,
+  "artifacts": [
+    {
+      "path": "docs/migration/lot7a-evidence/final/browser/lot7a-browser-lkey-ax.txt",
+      "sha256": "cbf653d246428e8c35c3e67ae05443fee16194ce6ff15a73f1085da6d7d5ece8"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/final/browser/lot7a-browser-lkey.png",
+      "sha256": "c816b28ad6ba643afcb23c1a808cd694657abde6735b1331ee2622ad9649089b"
+    }
+  ]
+}

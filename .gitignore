@@ -285,6 +285,15 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot3h-evidence/diagnostic/weav-public-source-parity.json.gz
 /docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-campaign.json.gz
 
+# Lot 7A immutable source archives are tracked as verified ordered byte parts.
+/docs/migration/lot7a-evidence/**/source-archive.tar.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot7a-evidence/attempt1/lkey-campaign.json.gz
+/docs/migration/lot7a-evidence/final/regressions/catr-049-replay.json.gz
+/docs/migration/lot7a-evidence/final/regressions/fogw-049-replay.json.gz
+/docs/migration/lot7a-evidence/final/regressions/rswp-049-replay.json.gz
+/docs/migration/lot7a-evidence/final/regressions/vois-049-replay.json.gz
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /tests/fixtures/v6-feedback-sequences-reference.json.gz
 
@@ -308,6 +317,15 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz
 /docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz
 
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz
+/docs/migration/lot7a-evidence/integrated-final/regressions/catr-051-replay.json.gz
+/docs/migration/lot7a-evidence/integrated-final/regressions/conn-050-replay.json.gz
+/docs/migration/lot7a-evidence/integrated-final/regressions/fogw-051-replay.json.gz
+/docs/migration/lot7a-evidence/integrated-final/regressions/mind-051-replay.json.gz
+/docs/migration/lot7a-evidence/integrated-final/regressions/rswp-051-replay.json.gz
+/docs/migration/lot7a-evidence/integrated-final/regressions/vois-051-replay.json.gz
+/docs/migration/lot7a-evidence/integrated-final/regressions/weav-051-replay.json.gz
 # Frozen source archive retained as exact ordered byte parts
 /docs/migration/lot4a-evidence/integrated-051/source-archive.tar.gz
 
@@ -350,3 +368,7 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 
 # Exact frozen archives are retained in verified byte parts
 /docs/migration/lot4b-evidence/**/source-archive.tar.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot7a-evidence/performance-integrated/owner-graphs-baseline.json.gz
+/docs/migration/lot7a-evidence/performance-integrated/owner-graphs-candidate.json.gz

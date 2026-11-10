@@ -1,0 +1,224 @@
+{
+  "schema": "logos-engine.lot7a-owner-cost-io-correction.v1",
+  "status": "declared_post_measurement_io_correction",
+  "recordedAt": "2026-11-10T20:45:59.268280+00:00",
+  "postMeasurement": true,
+  "scope": "baseline_attribution_fingerprint_paths_only",
+  "contract": {
+    "path": "docs/migration/lot7a-evidence/performance-integrated/owner-growth-contract.json",
+    "bytes": 2724,
+    "sha256": "562c60c639690c86a11cd386c71d2b5d40a7217859a8b08ab7f69653d30df391"
+  },
+  "window": {
+    "path": "docs/migration/lot7a-evidence/performance-integrated/window.json",
+    "bytes": 10531,
+    "sha256": "d950d2d319d85d705e13f0e3941ef07e9ca513d1b09e8fbeb4f0a914f8f33434"
+  },
+  "originalFailure": {
+    "path": "docs/migration/lot7a-evidence/performance-integrated/diagnostic/consolidator-initial-path-failure.json",
+    "bytes": 1070,
+    "sha256": "c23326c59d705bb08d6ea5c1954350ff5bef6576e4090968d8e9c99c53aecb6b"
+  },
+  "declaredTools": {
+    "consolidator": {
+      "path": "docs/migration/lot7a-evidence/consolidate-owner-costs.mjs",
+      "bytes": 50099,
+      "sha256": "2f105646bf41022f83b330b9d95d5a7720cb7f02a4385a0dfb97122b68a4c132"
+    },
+    "reviewer": {
+      "path": "docs/migration/lot7a-evidence/review-owner-costs.py",
+      "bytes": 67447,
+      "sha256": "5b1758f03d2031e956a68b4e43a3f1b5a079c32ec168c813de88b3e7f64b802c"
+    }
+  },
+  "executedTools": {
+    "consolidator": {
+      "path": "docs/migration/lot7a-evidence/consolidate-owner-costs-io-v1.mjs",
+      "bytes": 54936,
+      "sha256": "78ed9ea54051f9f5de6ce7a6659094d33d2729f3cd53075a03c44be3a98f6aac"
+    },
+    "reviewer": {
+      "path": "docs/migration/lot7a-evidence/review-owner-costs-io-v1.py",
+      "bytes": 73478,
+      "sha256": "c95fd37389b7af18c049b6264fab968a52d4055f7c590004ecd4877d8b65044e"
+    }
+  },
+  "baselineCheckout": "/workspace/sites/sra-lot7a-baseline-integrated",
+  "attribution": {
+    "path": "docs/migration/lot7a-evidence/performance-integrated/owner-structural-attribution-02.json",
+    "bytes": 106622,
+    "sha256": "5a25fb7094d72ad6655e893e5f9ec98257f3d905ea86027c39cd4efa7db69531"
+  },
+  "externalAttributionInputs": [
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    }
+  ],
+  "rulesChanged": false,
+  "calculationsChanged": false,
+  "rawInputsRewritten": false,
+  "sourceChecks": [
+    {
+      "language": "JavaScript",
+      "section": "decimal_and_structural_rules",
+      "comparison": "byte_identical",
+      "passed": true
+    },
+    {
+      "language": "JavaScript",
+      "section": "phase_arithmetic_and_raw_validation",
+      "comparison": "byte_identical",
+      "passed": true
+    },
+    {
+      "language": "JavaScript",
+      "section": "all_comparison_and_pooling_loops",
+      "comparison": "byte_identical",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "same",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "distribution",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "samples",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "calculate",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "metric",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "unresolved_for",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "within_decimal",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "work",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "functional_shape",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "Review.bytes",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "Review.fingerprint",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "Review.verify",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "Review.manifest",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "Review.verify_capture_input",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "Review.validate_capture_receipt",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "Review.load_window",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "Review.structural_pair",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "Review.verify_structure_and_ledgers",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "Review.verify_historical_failure",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    },
+    {
+      "language": "Python",
+      "section": "Review.recalculate",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true
+    }
+  ],
+  "executionPerformedByThisCorrection": false,
+  "qualification": "The frozen consolidator failed before writing output because its attribution-input loop admitted checkout-relative fingerprints only. The unchanged pre-measurement attribution already contains exactly five absolute fingerprints in the frozen baseline checkout. Separate JavaScript and Python variants route only that exact ordered list through size/SHA-256 verification after resolving each path inside the same frozen baseline checkout. Other file readers, work signatures, functional fixture values, cohort membership, arithmetic and budget rules remain unchanged. The original tools, contract, readiness, window, retained failure and raw reports are not rewritten. Executed generators are reported separately from declared generators; this I/O correction is explicitly post-measurement. These variants have passed syntax/static source comparison only and have not been executed by this correction."
+}

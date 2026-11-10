@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.retained-style-check.v1",
+  "recordedAt": "2026-11-10T20:49:16.820807+00:00",
+  "command": [
+    "git",
+    "diff",
+    "--cached",
+    "--check"
+  ],
+  "exitCode": 2,
+  "diagnostic": "docs/migration/lot7a-evidence/review-owner-costs-io-v1.py:970: new blank line at EOF.",
+  "file": {
+    "path": "docs/migration/lot7a-evidence/review-owner-costs-io-v1.py",
+    "bytes": 73478,
+    "sha256": "c95fd37389b7af18c049b6264fab968a52d4055f7c590004ecd4877d8b65044e"
+  },
+  "qualification": "A single extra terminal blank line is retained to preserve the exact executed independent-review tool and its pre-execution correction receipt. This supplementary publication style check is not relabelled as passed. No native, test, build, data or arithmetic change is made."
+}

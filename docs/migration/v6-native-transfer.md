@@ -11,11 +11,41 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-## Current delivery: lot 4A native 0.51.0, acquired feedback and qualified cost accepted
+## Current integrated transfer: lot 7A native 0.52.0, RankedWorkshop
+
+Native **0.52.0** is frozen at **`f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb`**, with **279 native files and a 290-file execution archive**. It integrates the **actually published Site 81 / lot 4A / native 0.51.0**, commit **`4dafc40c53ed4406ee7cd148e3e6995a2eb4185e`**, digest **`c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7`**, while retaining the published 3I contribution. The [verified Site 81 publication](lot7a-evidence/coordination/published-4a-site81.json) and [published-base binding](lot7a-evidence/coordination/published-base-binding.json) establish that ancestry. The latter verifies that native, archive, test and build inputs remained byte-identical after the documentation merge; it does not claim a new native execution after that merge. The earlier isolated 7A evidence retains its own provisional version and scope.
+
+The [integrated functional findings](lot7a-evidence/integrated-final/functional-findings.md), [source manifest](lot7a-evidence/integrated-final/source-manifest.json) and [lineage](lot7a-ranked-workshop-lineage.md) identify the transferred chain. One authoritative `public_ranked_workshop` owner serves `observed_ranked_workshop` through the existing `v6.ranked_workshop.choose` workflow. Current profile measurements, method and preparation extensions, `workshop.measure` and `workshop.select` feed the ordinary strategic order and common WHY/ACT release. Guards bind the current observation and epoch; an official boundary retains conditional learned methods while clearing local mode evidence and rejections. A historical method must be revalidated before it authorizes a new action. The common runtime preserves the distinct Recall, Feedback and Workshop owners and their source acquisition order.
+
+The [declared affected validation](lot7a-evidence/integrated-final/validation/delta-tests-run.json) passes **3,745/3,745 tests in 97 files**, with no failures, cancellations, skipped tests or TODOs. All [5/5 project checks, including production build](lot7a-evidence/integrated-final/project-checks-retry/validation/checks-run.json), pass. The earlier build invocation's obsolete helper path remains in the [retained resolution](lot7a-evidence/integrated-final/build-helper-path-resolution.json); the successful retry preserves the original test receipt byte for byte. These counts describe the declared affected scope, not the entire historical repository suite.
+
+The [seven recorded regressions](lot7a-evidence/integrated-final/regressions/regression-summary.json) pass **119/119 comparisons**, retaining **292 commands, 210 prefixes and 21 natural boundaries** across CATR, RSWP, FOGW, VOIS, CONN, MIND and WEAV. Six references use the actual 4A/native 0.51 source bytes; CONN retains its published 3I/native 0.50 reference because 4A did not publish a CONN report. The [regression provenance](lot7a-evidence/coordination/integrated-regression-provenance.json) and subsequent published-base binding retain this distinction. Recorded returns establish command and declared-projection compatibility; they are separate from new live success and cost measurement.
+
+**LKEY completes two of the three targeted natural levels in a cold integrated session: 25 actions and 25 prefixes.** The [source comparison](lot7a-evidence/integrated-final/diagnostic/integrated-public-parity.json) reproduces **49 captured calls and 147 exact state/result comparisons** with one initially empty original `RankedWorkshop`, preserving **1,786 original files**. The [contribution proof](lot7a-evidence/integrated-final/diagnostic/contribution.json.gz) records **25 distinct returns: 14 active and 11 passive, with no duplicate acquisition**. A passive `ACTION5` return acquires a mode contrast before Workshop is selected. Removing all learned layers suppresses its fourteen selected proposals; separate mode-method and command-effect ablations each suppress a later selected proposal. Operator observations are retained, but their ablation changes none of those fourteen choices, so later causal use of that model is not established on this trajectory. Full inherited-caller parity and a complete-game counterfactual remain outside this proof.
+
+The [integrated browser receipt](lot7a-evidence/integrated-final/browser/browser-qa.json) observes Pause, one isolated action, resumed play and both natural level boundaries. The final state is **`frontier_unknown` at the third level**, after an earlier AnimatedContact selection. The original Workshop would propose a conditional `revalidate_mode` on that final packet, but the common caller stops before consulting it; this action was not executed and is not a proven solution. The three-level target remains **2/3**, and the [cumulative case checkpoint](lot7a-evidence/integrated-final/lkey-case-checkpoint.json) retains **1,341.622742 seconds used** and **1,058.377258 seconds remaining** in the 2,400-second envelope. Any renewed LKEY work must resume this clock and preserve the generic source order. Browser controls do not establish a maximum Pause latency or multi-hour stability.
+
+The [delivery integrity receipt](lot7a-evidence/integrated-final/delivery-integrity.json) verifies **279 native files, 290 archive inputs, 638 source/test inputs, 344 build inputs and ten regression execution inputs**, with the original source files unchanged and eight transported reports reconstructed exactly. Functional, source, browser, cost and publication receipts retain their separate scopes.
+
+<!-- LOT7A_COST_FINAL_START -->
+
+**The global 7A cost rule is accepted for 2/2 games under the structural contract declared before measurement.** The [independent review](lot7a-evidence/performance-integrated/owner-growth-review.json) passes **3,866/3,866 checks**. The [complete A1/B1/B2/A2 window](lot7a-evidence/performance-integrated/window.json) retains **32 measured sessions and 400 actions**, comparing fresh Site 81/native 0.51 with frozen 0.52. Complete-session medians are **STCK 9,821.3656235 → 9,865.8814085 ms (+0.453255%)** and **SMLP 16,545.1855975 → 16,310.572066 ms (−1.418017%)**. All eight sessions per game/version remain; each pooled median is strictly below +10%, with no compensation, nested-phase sum, average of ratios or removed measured observation. Only the eight predeclared warmups, 24 actions, are excluded.
+
+Pooled phase diagnostics pass **16/16**; original cohorts retain **15/16 then 16/16**, including **SMLP restoration +12.133996% in cohort 1**. Pooled p95 increases remain **STCK new decision +10.534805%** and **SMLP restoration +50.326822%**. All distributions, adverse results, Pause and memory observations are preserved in the [full report](lot7a-evidence/performance-integrated/results.md).
+
+**The historical strict aggregator remains failed**, with its [actual refusal](lot7a-evidence/performance-integrated/aggregation-failure.json). All **432 work-signature differences** match the four structural paths and functional shapes frozen before measurement; every other work field remains strict. Functional captures do not expose uncaptured private leaves of measured sessions. The frozen supplemental tool then encountered an external-reference path error. A [separate post-measurement I/O correction](lot7a-evidence/performance-integrated/diagnostic/owner-cost-io-correction-v1.json) admits only the five already-pinned baseline attribution paths and retains size/SHA-256 and real-path checks. Both outputs identify executed and originally declared tools separately. The failure, original tools, rules, calculations, fixtures, raw data, thresholds and population are unchanged.
+
+The [publication-input integrity receipt](lot7a-evidence/integrated-final/publication-inputs.json) confirms unchanged **279 native files, 290 archive members, 638 source/test inputs and 344 build inputs**, including the already compiled worker. This qualified acceptance does not close the LKEY 2/3 or full inherited-caller reservations.
+
+<!-- LOT7A_COST_FINAL_END -->
+
+Current integrated coverage is **56/76 complete declared entries, zero partial entries and 20 remaining**, with **6/6 observed-composition branches** and **37 compiled workflows**. The audit records **172 component-verified modules, 143 partial transfers, 1,054 pending and zero fully verified modules**, within **1,369 Python modules and 417 data files**. All six full-migration gates and `fullV6Parity` remain false. The LKEY 2/3 reservation, complete inherited closure and full-caller parity remain open; lot 7B is outside this transfer.
+
+## Historical transfer: lot 4A native 0.51.0, acquired feedback and post-measurement cost qualification
 
 Native **0.51.0** is frozen at **`c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7`**, with **273 native files and a 284-file archive**. It integrates Feedback with **actually published Site 79 / lot 3I / native 0.50.0**, commit **`6d03c2adda9f60b1c97304f5491a428cfbec7a6c`**, digest **`e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87`**. The [report](lot4a-feedback-sequences.md), [lineage](lot4a-feedback-sequences-lineage.md) and [published baseline provenance](lot4a-evidence/baseline-integrated/provenance.json) identify the scope. The earlier isolated Feedback candidate also used the provisional 0.50 label; its different digest and evidence remain explicitly historical.
 
-**The initial 4A deployment is verified in Site 80**, source commit `a52ef3d8396eb051d6d42d3388072fe0bf2a2d9e`, with terminal **`succeeded` at 2026-11-10 20:13:29 UTC** and owner-private access preserved. The [publication receipt](lot4a-evidence/integrated-051/publication-site80.json) binds the deployed source and archive. A subsequent documentation-only publication preserves the identical native engine. The [bounded source transport](lot4a-evidence/integrated-051/publication-source-transport.json) retains the initial size rejection, original commits and all evidence bytes; no intermediate source push was deployed.
+**The initial 4A deployment is verified in Site 80**, source commit `a52ef3d8396eb051d6d42d3388072fe0bf2a2d9e`, with terminal **`succeeded` at 2026-11-10 20:13:29 UTC** and owner-private access preserved. The [publication receipt](lot4a-evidence/integrated-051/publication-site80.json) binds the deployed source and archive. Its subsequent documentation-only publication is verified in **Site 81**, commit **`4dafc40c53ed4406ee7cd148e3e6995a2eb4185e`**, with terminal **`succeeded`** and the identical native engine; the [successor's publication receipt](lot7a-evidence/coordination/published-4a-site81.json) preserves that confirmation. The [bounded source transport](lot4a-evidence/integrated-051/publication-source-transport.json) retains the initial size rejection, original commits and all evidence bytes; no intermediate source push was deployed.
 
 One `FeedbackSequences` instance consumes the existing `v6.feedback_sequences.choose` workflow through both `goal_access` and configured `information_goal`. Source order, priorities, selected acquisition and the distinct five-argument passive acquisition are preserved. Each actual return reaches Feedback at most once. Current measured points, values, compacted palettes, ordered prefixes and unknown submission controls govern execution. The owner persists `entry_method` after an official boundary clears `layout`; the next epoch must revalidate that conditional method. Acquired history constrains both possible secrets and compatible feedback interpretations. Interrupted enumeration retains an incomplete result without a recommendation or acquired refutation. The consumed V5 filtering and partitioning closure is qualified separately from full V5 inheritance.
 
@@ -35,7 +65,7 @@ The aggregate phase diagnostic remains **15/16**, preserving **SMLP acquisition/
 The [qualified publication-input receipt](lot4a-evidence/integrated-051/publication-inputs-owner-qualified.json) verifies unchanged functional/build inputs, the retained proofs and qualified cost chain, including exact graph-capture transport. Initial publication is verified in Site 80; browser infrastructure and full inherited parity remain explicit limitations.
 <!-- LOT4A_COST_FINAL_END -->
 
-Integrated coverage is **55/76 complete entries, zero partial entries and 21 remaining**, with **6/6 observed-composition branches** and **37 compiled workflows**. The actual audit records **166 component-verified modules, 142 partial transfers, 1,061 pending and zero fully verified modules**. All full-migration gates remain false. **4B `relative_arrangement`, then 4C `facet_example`, remain planned and unimplemented in this delivery.** The next continuation of this thread starts with RelativeArrangement's selected, initially bound acquisition and the precise recognized-interface stop in the window-constraint chain. The separate 7A thread must integrate the actual published 4A commit before its next validation and publication.
+Coverage at this 0.51 milestone is **55/76 complete entries, zero partial entries and 21 remaining**, with **6/6 observed-composition branches** and **37 compiled workflows**. Its audit records **166 component-verified modules, 142 partial transfers, 1,061 pending and zero fully verified modules**. All full-migration gates remain false. **4B `relative_arrangement`, then 4C `facet_example`, remain planned and unimplemented in this milestone.** The lot 4 continuation starts with RelativeArrangement's selected, initially bound acquisition and the precise recognized-interface stop in the window-constraint chain. The current 7A section above records integration of the actual published 4A commit; it does not rewrite this milestone's counts or its post-measurement cost qualification.
 
 ## Historical transfer: lot 3I native 0.50.0, RecurrentSeries and observed insertions
 
@@ -82,7 +112,7 @@ The [aggregate](lot3i-evidence/performance/combined-comparison.json) passes **16
 **Lot 3I is closed within its announced functional, contribution, integrity and cost scope.** This matched common-loop replay result does not guarantee live-game latency, every long session or complete inherited-caller parity.
 <!-- LOT3I_COST_FINAL_END -->
 
-**Lot 3I's announced scope is closed and published in Site 79.** At this historical milestone the next entry was **`observed_feedback_sequence`**; the integrated 4A/0.51 candidate above now contains it while preserving 3I. The separate 7A preparation adds no functionality or coverage to this freeze. Lots 5–10 retain the other nineteen entries, and lot 11 retains consolidation beyond the registry. Prior FramedWindow game contribution, Population/Reception revalidation, RootedLine model limitations, prefilter latency and full inherited migration remain explicit follow-ups.
+**Lot 3I's announced scope is closed and published in Site 79.** At this historical milestone the next entry was **`observed_feedback_sequence`**, subsequently transferred by 4A/0.51 and retained in the integrated 7A/0.52 candidate above. Those later transfers do not change this 0.50 freeze's functionality or coverage counts. At this milestone, lots 5–10 retained the other nineteen entries, and lot 11 retained consolidation beyond the registry. Prior FramedWindow game contribution, Population/Reception revalidation, RootedLine model limitations, prefilter latency and full inherited migration remain explicit follow-ups.
 
 ## Historical transfer: lot 3H native 0.49.0, CrossedPrefix and acquired coupled choices
 
@@ -1827,36 +1857,40 @@ modules and therefore exceeds the minimum semantic dependency closure. This
 upper bound must be refined through documented dependency analysis, not by
 silently dropping unimplemented capabilities.
 
-### Current frozen inventory: native 0.50.0
+### Current frozen inventory: integrated lot 7A native 0.52.0
 
-The [resolved 0.50 audit](lot3i-evidence/final/validation/migration-audit-resolution.json),
-[entry register](v6-entry-point-progress.json) and
-[delivery integrity receipt](lot3i-evidence/final/delivery-integrity.json) retain
-different coverage scopes:
+The [integrated functional findings](lot7a-evidence/integrated-final/functional-findings.md),
+[entry register](v6-entry-point-progress.json), [coverage inventory](v6-coverage.json)
+and [delivery integrity receipt](lot7a-evidence/integrated-final/delivery-integrity.json)
+retain different coverage scopes. The [published-base binding](lot7a-evidence/coordination/published-base-binding.json)
+ties this candidate to the actual Site 81/native 0.51 predecessor without
+changing the native and functional inputs used for these proofs:
 
 | Scope | Current frozen result |
 | --- | --- |
-| Complete declared DRM entries | **54/76**, with **zero partial entries** |
-| Remaining declared entries | **22**, in lots 4–10: 3 + 3 + 4 + 2 + 2 + 3 + 5 |
+| Complete declared DRM entries | **56/76**, with **zero partial entries** |
+| Remaining declared entries | **20**, within the remaining lots 4–10 |
 | Lot 3 registry entries still open | **0**; functional and inherited-caller reservations remain |
 | Observed-composition branches | **6/6** |
 | Compiled workflows | **37**, distinct from verified consumption |
-| Component-verified modules | **163** |
-| Partially transferred modules | **141** |
-| Pending modules | **1,065** |
+| Python module inventory | **1,369**, with **417 data files** counted separately |
+| Component-verified modules | **172** |
+| Partially transferred modules | **143** |
+| Pending modules | **1,054** |
 | Fully verified modules | **0** |
 | Full-migration gates | **All six false**, with `fullV6Parity` false |
 
-The current delivery has passed **3,225 tests in 76 files**, all five project
-checks with the separate audit resolution, all **85 recorded regression
-checks**, CONN's declared three-level target, own contribution, browser controls
-and source/evidence integrity. Official global cost is accepted on both games:
-**STCK −1.421099%, SMLP +2.192594%**, aggregate **16/16** and independent review
-**231/231**, with cohort results **16/16 and 9/16** and all unfavorable tails
-retained. **Lot 3I is closed within its announced scope.** Actual publication
-follows the documentation freeze. Separate 4A/7A preparations are outside these
-counts and will be integrated after 3I's actual publication. No registry count
-proves complete inherited V5/V6 parity.
+The integrated candidate has passed **3,745 tests in 97 files**, all **five
+project checks**, and **119/119 recorded comparisons across seven cases and
+292 commands**. LKEY's captured component calls match **49/49**, with **147
+exact state/result comparisons**; **14 active and 11 passive returns** are
+acquired once each. The browser verifies Pause, single action and resumed
+natural progress, while the live three-level target remains **2/3 after
+25 actions**. Its cumulative clock remains **1,341.622742 seconds used**.
+The current cost section above carries the independent 7A window status;
+historical 3I and 4A cost decisions apply only to their respective milestones.
+The actual published 4A integration and source/evidence integrity do not close
+the LKEY reservation or establish complete inherited V5/V6 parity.
 
 ### Historical v41 inventory and qualification
 
@@ -1919,9 +1953,11 @@ without making the migration complete.
 
 ## Remaining work before the target is met
 
-1. Transfer and verify the **22 remaining declared V6 entries**, starting with
-   `observed_feedback_sequence`, then `relative_arrangement` and `facet_example`
-   in lot 4, together with every inherited V5 primitive they actually call.
+1. Transfer and verify the **20 remaining declared V6 entries**, including
+   `relative_arrangement` and `facet_example` in the remaining lot 4 scope,
+   together with every inherited V5 primitive they actually call.
+   `observed_feedback_sequence` and `observed_ranked_workshop` are connected in
+   the current integrated candidate, with their qualified evidence above.
    Retain their original alternatives and ordering, and separately account
    for common providers and paths outside the 76-entry registry.
 2. Complete the remaining common providers, including Morphology,
@@ -1944,12 +1980,13 @@ without making the migration complete.
    capabilities, including tuple/set structural equality and numeric identity.
    Current portable fixtures do not prove arbitrary Python integer/float parity.
 
-The next integration follows the actual publication of 3I. Preparations 4A and
-7A remain separate and are not counted as delivered functionality. Lot 3's
-zero open registry entries do not close CWSE/SK48, FramedWindow contribution,
-Population/Reception revalidation, prefilter timing or full inherited-caller
-reservations. The [roadmap](v6-delivery-roadmap.md) retains the exact lots 4–11
-and their dependencies.
+The current 7A/native 0.52 candidate incorporates the actual published 3I and
+4A lineage. Remaining lot 4 work and lot 7B keep their separate roadmap scopes.
+The LKEY third-level reservation remains open with its retained cumulative
+clock. Lot 3's zero open registry entries do not close CWSE/SK48, FramedWindow
+contribution, Population/Reception revalidation, prefilter timing or full
+inherited-caller reservations. The [roadmap](v6-delivery-roadmap.md) retains the
+exact remaining lots and their dependencies.
 
 The completion criterion is functional coverage and comparison with the
 original agent, not a renamed prototype or a score claim. Reproducing all V6

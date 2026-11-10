@@ -1,0 +1,70 @@
+{
+  "schema": "logos-engine.lot7a-owner-cost-contract.v2",
+  "lot": "7A",
+  "declaredAt": "2026-11-10T20:22:01.715604+00:00",
+  "performanceDirectory": "docs/migration/lot7a-evidence/performance-integrated",
+  "declaration": {
+    "path": "docs/migration/lot7a-evidence/performance-integrated/declaration.json",
+    "sha256": "ceeab7f6148871594857fc7638c5af5f5a1fddcee6cf29e69489d36d8926b7f0",
+    "bytes": 5556
+  },
+  "tools": {
+    "consolidator": {
+      "path": "docs/migration/lot7a-evidence/consolidate-owner-costs.mjs",
+      "sha256": "2f105646bf41022f83b330b9d95d5a7720cb7f02a4385a0dfb97122b68a4c132",
+      "bytes": 50099
+    },
+    "reviewer": {
+      "path": "docs/migration/lot7a-evidence/review-owner-costs.py",
+      "sha256": "5b1758f03d2031e956a68b4e43a3f1b5a079c32ec168c813de88b3e7f64b802c",
+      "bytes": 67447
+    }
+  },
+  "structuralExpectation": {
+    "ownerId": "public_ranked_workshop",
+    "programId": "v6.ranked_workshop.choose",
+    "installedNodeIds": [
+      "family_state:public_ranked_workshop",
+      "family_activation:public_ranked_workshop",
+      "program:v6.ranked_workshop.choose"
+    ],
+    "allowedPaths": [
+      "observations[*].nodeCount",
+      "inspection[*].graphNodes",
+      "final.nodeCount",
+      "final.graphRevision"
+    ],
+    "mode": "predeclared_functional_fixture",
+    "qualification": "functional_structure_frozen_before_measurement"
+  },
+  "sourceEvidence": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "5c2c4a0d9fce3f6fae72973073a0348664d63b0608aae066467afb33b943c820",
+      "bytes": 138902
+    },
+    {
+      "path": "src/logos-engine/v6-ranked-workshop.ts",
+      "sha256": "002ea017828e0dc1304c3f0a8eeb6ff4acb66c70ff1d8ff269a917d132a18cf2",
+      "bytes": 22626
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "sha256": "5efe83d07b6d5354b9a26b39320449ecaa631ca55563c683779f067a8d670bf0",
+      "bytes": 14854
+    }
+  ],
+  "ownerInventory": {
+    "path": "docs/migration/lot7a-evidence/performance-integrated/owner-source-inventory.json",
+    "sha256": "772e37516ea22987663f6c8fe780c94da37e1faeaccdd63bae82e3e2927e0927",
+    "bytes": 105942
+  },
+  "structuralFixture": {
+    "path": "docs/migration/lot7a-evidence/performance-integrated/owner-structural-fixture.json",
+    "sha256": "146b702ae04126eb5bc45208c96c8ba190d1d693d050e0e48f41f10303ab49cb",
+    "bytes": 60040
+  },
+  "strictFailureReceipt": "docs/migration/lot7a-evidence/performance-integrated/aggregation-failure.json",
+  "strictFailureLog": "docs/migration/lot7a-evidence/performance-integrated/aggregation-failure.log",
+  "historicalAggregateOutput": "docs/migration/lot7a-evidence/performance-integrated/combined-comparison.json"
+}

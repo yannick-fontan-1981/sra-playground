@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 169,
-    "partiallyTransferredModules": 142,
+    "componentVerifiedModules": 175,
+    "partiallyTransferredModules": 143,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1058,
+    "pendingModules": 1051,
     "strategyFamilies": 16
   },
   "families": [
@@ -52371,9 +52371,18 @@
           "endLine": 211
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v5-station-profile-scene.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-ranked-workshop-reference.py",
+        "tests/fixtures/v6-ranked-workshop-reference.json.gz",
+        "tests/v6-ranked-workshop-reference.test.ts",
+        "tests/v6-ranked-workshop-kernel.test.ts",
+        "docs/migration/lot7a-ranked-workshop-lineage.md",
+        "scripts/compare-ranked-workshop-public-parity.py"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/station_profile_workbench.py",
@@ -52568,9 +52577,18 @@
           "endLine": 350
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-ranked-workshop-methods.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-ranked-workshop-reference.py",
+        "tests/fixtures/v6-ranked-workshop-reference.json.gz",
+        "tests/v6-ranked-workshop-reference.test.ts",
+        "tests/v6-ranked-workshop-kernel.test.ts",
+        "docs/migration/lot7a-ranked-workshop-lineage.md",
+        "scripts/compare-ranked-workshop-public-parity.py"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/stationary_target.py",
@@ -52644,9 +52662,18 @@
           "endLine": 170
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v5-stem-reliefs.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-ranked-workshop-reference.py",
+        "tests/fixtures/v6-ranked-workshop-reference.json.gz",
+        "tests/v6-ranked-workshop-reference.test.ts",
+        "tests/v6-ranked-workshop-kernel.test.ts",
+        "docs/migration/lot7a-ranked-workshop-lineage.md",
+        "scripts/compare-ranked-workshop-public-parity.py"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/structural_supposition_c.py",
@@ -75687,7 +75714,8 @@
         "src/logos-engine/v6-reactive-contact.ts",
         "src/logos-engine/v6-ordered-reaction.ts",
         "src/logos-engine/v6-topological-recolor.ts",
-        "src/logos-engine/v6-motion-contrast.ts"
+        "src/logos-engine/v6-motion-contrast.ts",
+        "src/logos-engine/v6-ranked-workshop.ts"
       ],
       "proof": [
         "scripts/export-v6-target-reference.py",
@@ -75775,7 +75803,9 @@
         "scripts/export-v6-morphology-methods-reference.py",
         "tests/fixtures/v6-morphology-methods-reference.json.gz",
         "tests/v6-morphology-methods-reference.test.ts",
-        "docs/migration/lot2c-method-continuation-lineage.md"
+        "docs/migration/lot2c-method-continuation-lineage.md",
+        "tests/v6-ranked-workshop-kernel.test.ts",
+        "docs/migration/lot7a-ranked-workshop-lineage.md"
       ]
     },
     {
@@ -92090,9 +92120,22 @@
           "endLine": 117
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-ranked-workshop-geometry.ts",
+        "src/logos-engine/v6-ranked-workshop-methods.ts",
+        "src/logos-engine/v6-ranked-workshop-preparation.ts",
+        "src/logos-engine/v6-ranked-workshop.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-ranked-workshop-reference.py",
+        "tests/fixtures/v6-ranked-workshop-reference.json.gz",
+        "tests/v6-ranked-workshop-reference.test.ts",
+        "tests/v6-ranked-workshop-kernel.test.ts",
+        "docs/migration/lot7a-ranked-workshop-lineage.md",
+        "scripts/compare-ranked-workshop-public-parity.py"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/ranked_workshop/geometry.py",
@@ -92125,9 +92168,22 @@
           "endLine": 49
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-ranked-workshop-geometry.ts",
+        "src/logos-engine/v6-ranked-workshop-methods.ts",
+        "src/logos-engine/v6-ranked-workshop-preparation.ts",
+        "src/logos-engine/v6-ranked-workshop.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-ranked-workshop-reference.py",
+        "tests/fixtures/v6-ranked-workshop-reference.json.gz",
+        "tests/v6-ranked-workshop-reference.test.ts",
+        "tests/v6-ranked-workshop-kernel.test.ts",
+        "docs/migration/lot7a-ranked-workshop-lineage.md",
+        "scripts/compare-ranked-workshop-public-parity.py"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/ranked_workshop/methods.py",
@@ -92214,9 +92270,22 @@
           "endLine": 22
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-ranked-workshop-geometry.ts",
+        "src/logos-engine/v6-ranked-workshop-methods.ts",
+        "src/logos-engine/v6-ranked-workshop-preparation.ts",
+        "src/logos-engine/v6-ranked-workshop.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-ranked-workshop-reference.py",
+        "tests/fixtures/v6-ranked-workshop-reference.json.gz",
+        "tests/v6-ranked-workshop-reference.test.ts",
+        "tests/v6-ranked-workshop-kernel.test.ts",
+        "docs/migration/lot7a-ranked-workshop-lineage.md",
+        "scripts/compare-ranked-workshop-public-parity.py"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/ranked_workshop/preparation.py",
@@ -92267,9 +92336,22 @@
           "endLine": 102
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-ranked-workshop-geometry.ts",
+        "src/logos-engine/v6-ranked-workshop-methods.ts",
+        "src/logos-engine/v6-ranked-workshop-preparation.ts",
+        "src/logos-engine/v6-ranked-workshop.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-ranked-workshop-reference.py",
+        "tests/fixtures/v6-ranked-workshop-reference.json.gz",
+        "tests/v6-ranked-workshop-reference.test.ts",
+        "tests/v6-ranked-workshop-kernel.test.ts",
+        "docs/migration/lot7a-ranked-workshop-lineage.md",
+        "scripts/compare-ranked-workshop-public-parity.py"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/reactive_contact/__init__.py",
@@ -94735,7 +94817,8 @@
         "src/logos-engine/v6-motion-contrast.ts",
         "src/logos-engine/v6-native-caller.ts",
         "src/logos-engine/v6-morphology-family.ts",
-        "src/logos-engine/v6-contextual-translation.ts"
+        "src/logos-engine/v6-contextual-translation.ts",
+        "src/logos-engine/v6-ranked-workshop.ts"
       ],
       "proof": [
         "tests/v6-native-runtime.test.ts",
@@ -94774,7 +94857,9 @@
         "tests/fixtures/v6-control-attention-reference.json.gz",
         "tests/v6-control-attention-reference.test.ts",
         "tests/v6-control-attention-kernel.test.ts",
-        "docs/migration/lot2b-control-attention-lineage.md"
+        "docs/migration/lot2b-control-attention-lineage.md",
+        "tests/v6-ranked-workshop-kernel.test.ts",
+        "docs/migration/lot7a-ranked-workshop-lineage.md"
       ]
     },
     {
