@@ -6,6 +6,8 @@ Le fil du lot 10 porte `axial_question` depuis la publication réelle **Site 83 
 
 Le registre recalculé de cette branche est **57/76**, soit **19 entrées ouvertes**, avec **37 workflows compilés**. Il ne constitue pas encore une publication supplémentaire : régressions, build, coût, intégration et publication sont suivis séparément. Les travaux concurrents des lots 4, 5 et 7 restent dans leurs fils. La réserve de jeu Axial demeure ouverte : le seul cas initial admis, POLA, possède une tentative historique interrompue dont le temps n'est pas reconstructible ; aucun budget de cas n'est remis à zéro.
 
+La [validation isolée](lot10a-evidence/README.md) ajoute **5/5 contrôles du projet**, build compris, et **7/7 rejeux, 119/119 comparaisons sur 292 commandes**. La première suite de 31 fichiers conserve son résultat **866/867** ; l'attente d'adjacence Recolor devenue obsolète est corrigée selon le DRM, puis ses trois tests passent. Le gel natif `cabd056f` demeure distinct du futur candidat intégré. Le coût et la publication de 10A ne sont pas encore établis.
+
 ## Jalon publié : Workshop 0.52 ; transactions symboliques 7B en cours
 
 Le candidat **7A / native 0.52.0** intègre la publication réelle **4A / Site 81**, commit `4dafc40c53ed4406ee7cd148e3e6995a2eb4185e`, après **3I / Site 79**. Son gel `f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb` contient **279 fichiers natifs** et une archive de **290 fichiers**. La réconciliation conserve l'ordre des familles, leurs propriétaires et l'acquisition unique des retours. Le registre courant est **56/76**, avec **20 entrées ouvertes**, 37 workflows compilés et une façade 6/6.

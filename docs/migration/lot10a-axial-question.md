@@ -8,6 +8,8 @@ Le registre recalculé de cette branche compte **57/76 entrées raccordées**, s
 
 Les contrats de composant passent **130/130**, et les scénarios du caller commun passent **6/6**. Les contrôles de régression, la compilation de livraison, le coût, l'intégration finale et la publication restent des étapes distinctes à établir. Aucun résultat de coût ou de partie nouvelle n'est déduit des tests de composant.
 
+La [première validation isolée](lot10a-evidence/README.md) utilise le gel `cabd056f2fddded1c5f7bcc214bd1fd1ac387764b61cddf42606debe72f37915`, avec **282 fichiers natifs et 293 membres d'archive**. Les cinq contrôles du projet, build compris, passent. La suite de 31 fichiers conserve **866/867** : son seul échec est l'ancienne attente plaçant Reactive immédiatement après Recolor. Le DRM place Axial à cet endroit ; la correction porte uniquement sur ce test et sa reprise passe **3/3**. Le reçu initial reste en échec et le périmètre final sera exécuté après intégration. Les [sept rejeux publics](lot10a-evidence/isolated-functional/regressions/regression-summary.json) passent **7/7 et 119/119 comparaisons**, en conservant **292 commandes, 210 préfixes et 21 frontières naturelles**. Ils ne constituent pas une nouvelle partie ni une contribution propre Axial.
+
 ## Comportement porté
 
 La mesure retrouve les corps à barres opposées, leurs axes, leurs marqueurs, les ancres et l'unique cible. La sélection doit avoir été acquise par un contraste public compatible. Une sélection seulement dessinée, ambiguë ou incompatible avec la scène courante n'autorise pas Axial.
@@ -34,6 +36,7 @@ L'adaptation native **`current_epoch_axial_packet_attribution`** est séparée d
 
 ## Preuves et réserves
 
+- [Index des preuves et statuts de validation](lot10a-evidence/README.md).
 - [Filiation source, contrats et limites](lot10a-axial-question-lineage.md).
 - [Reçu des comparaisons Python](lot10a-evidence/diagnostic/axial-reference-validation.json) : 68 cas de famille, 38 de géométrie, 16 de politique/SRC et huit contrats natifs supplémentaires. Le manifeste source est vérifié avant et après l'oracle.
 - [Boucle commune](../../tests/v6-axial-question-kernel.test.ts) : propriétaire unique, acquisition passive froide, action Axial, retour unique, influence, tentatives, restauration et frontières. Les journaux de diagnostic conservent aussi les essais échoués.

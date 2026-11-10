@@ -359,3 +359,17 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot7a-evidence/performance-integrated/owner-graphs-baseline.json.gz
 /docs/migration/lot7a-evidence/performance-integrated/owner-graphs-candidate.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot10a-evidence/isolated-functional/regressions/catr-site83-replay.json.gz
+/docs/migration/lot10a-evidence/isolated-functional/regressions/conn-site83-replay.json.gz
+/docs/migration/lot10a-evidence/isolated-functional/regressions/fogw-site83-replay.json.gz
+/docs/migration/lot10a-evidence/isolated-functional/regressions/mind-site83-replay.json.gz
+/docs/migration/lot10a-evidence/isolated-functional/regressions/rswp-site83-replay.json.gz
+/docs/migration/lot10a-evidence/isolated-functional/regressions/vois-site83-replay.json.gz
+/docs/migration/lot10a-evidence/isolated-functional/regressions/weav-site83-replay.json.gz
+
+# Exact raw validation logs retained in gzip; see isolated-functional/validation/log-transport.json
+/docs/migration/lot10a-evidence/isolated-functional/validation/build-output.raw.txt
+/docs/migration/lot10a-evidence/isolated-functional/validation/delta-tests-output.raw.txt
+/docs/migration/lot10a-evidence/isolated-functional/validation/typecheck-output.raw.txt

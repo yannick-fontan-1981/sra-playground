@@ -1,0 +1,74 @@
+# Lot 10A : index des preuves AxialQuestion
+
+Le [bilan](../lot10a-axial-question.md), la
+[filiation source](../lot10a-axial-question-lineage.md) et la
+[feuille de route](../v6-delivery-roadmap.md) délimitent le transfert.
+La référence reste le commit V6
+`786dcf51ca57773d8e3a8948ce9ea3655e7baf8e`.
+
+## Composant et boucle commune
+
+| Preuve | Résultat et portée |
+| --- | --- |
+| [Comparaisons de référence](diagnostic/axial-reference-validation.json) | 130/130 tests : 68 cas de famille, 38 de géométrie/V5, 16 de politique/SRC et huit contrats natifs. Les 1 786 fichiers originaux sont vérifiés avant/après l'oracle. |
+| [Dernier journal de référence](diagnostic/axial-reference-04.tap) | Les essais antérieurs restent conservés, notamment l'écart réel de zéro négatif corrigé. |
+| [Boucle commune](diagnostic/kernel-03.log) | 6/6 scénarios synthétiques : sélection passive froide, action Axial autorisée, acquisition unique, décision influencée, tentatives, frontières et restauration. |
+| [Revue source](independent-source-review.md) | Relecture de la famille, de la politique et du raccordement par un agent distinct ; la géométrie est relue par son auteur. Aucun nouveau défaut bloquant identifié dans le domaine annoncé. |
+| [Admission publique initiale](diagnostic/initial-public-admission.json) | 95 images initiales archivées ; POLA est seul admis par la mesure. Aucune action de jeu. |
+| [Budget POLA](diagnostic/pola-case-budget-review.json) | Essai historique de 94 actions, zéro niveau, temps inconnu. Aucune nouvelle horloge créée ; contribution en nouvelle partie ouverte. |
+
+Les références proviennent du Python original inchangé, exécuté sur des rasters
+contrôlés. Le chemin source `recordSource` et l'adaptation native de frontière
+`recordObserved` restent distincts. Une rotation projetée n'est ni une loi
+physique acquise ni une réussite officielle.
+
+## Première validation isolée
+
+Le [gel natif](isolated-functional/source-manifest.json)
+`cabd056f2fddded1c5f7bcc214bd1fd1ac387764b61cddf42606debe72f37915`
+contient 282 fichiers natifs ; son archive contient 293 fichiers. Il ajoute Axial
+à la base publiée Site 83 / `bed48116585da864dd5c412ed11dd6990a950e8e`.
+La chaîne native porte encore l'étiquette provisoire 0.52.0 ; le digest distingue
+ce candidat du moteur 0.52 publié. Cette branche n'est pas encore intégrée aux
+publications suivantes.
+
+| Contrôle | État conservé |
+| --- | --- |
+| [Suite de 31 fichiers](isolated-functional/validation/delta-tests-run.json) | 866/867 tests réussis. Le reçu reste en échec ; aucun résultat n'est remplacé. |
+| [Résolution du test Recolor](diagnostic/isolated-test-order-resolution.json) | Une attente d'adjacence était obsolète : Axial vient après Recolor selon le DRM. Correction du test uniquement, puis reprise de ses trois tests : 3/3. Source native inchangée. |
+| [Cinq contrôles du projet](isolated-functional/validation/checks-run.json) | 5/5 : typage, audit réel des entrées, audit de migration sans défaillance sémantique, diff et build. |
+| [Sept rejeux archivés](isolated-functional/regressions/regression-summary.json) | 7/7 cas et 119/119 comparaisons : 292 commandes, 210 préfixes, 299 paquets publics complets, 1 405 images d'animation, 502 requêtes et 21 frontières naturelles conservés. |
+| [Transport exact des rapports](isolated-functional/evidence-byte-transport.json) | Les sept rapports sont fractionnés sans perte, avec les originaux conservés localement. Aucun résultat n'est régénéré par ce transport. |
+
+Les [journaux de validation](isolated-functional/validation/log-transport.json)
+conservent leurs octets exacts en gzip, y compris les espaces produits par les
+outils et la sortie du test en échec. Trois originaux sont exclus de Git pour
+éviter de modifier ces sorties au contrôle de whitespace. Leur décompression
+aux chemins `raw` du reçu restitue exactement les empreintes déclarées.
+
+Les contrôles isolés ne remplacent pas la future validation du candidat après
+intégration des prédécesseurs effectivement publiés. Le test corrigé sera inclus
+dans ce périmètre final. Aucun coût, succès de jeu ou déploiement supplémentaire
+n'est déduit de ce gel.
+
+## Préparation des contrôles finaux
+
+- [Périmètre fonctionnel et rejeux](validation-and-regression-plan.md),
+  [revue des runners](validation-runner-source-review.md).
+- [Commandes de coût](README-commands.md),
+  [préparation des déclarations](README-preparation.md).
+- [Revue des analyseurs de coût](cost-tool-source-review.md),
+  [revue des finaliseurs](cost-preparation-source-review.md),
+  [contrôle syntaxique borné](diagnostic/cost-preparation-syntax.json).
+
+Les captures fonctionnelles doivent qualifier l'ajout du seul propriétaire
+Axial sur la référence intégrée réelle avant la mesure. La fenêtre officielle
+conserve A1/B1/B2/A2, 32 sessions mesurées et 400 actions. Chaque jeu doit rester
+strictement sous +10 % de médiane complète ; aucun temps de propriétaire n'est
+soustrait. Le refus du comparateur historique et l'analyse complémentaire restent
+des résultats distincts. La présence des outils ne vaut pas qualification,
+readiness, mesure ni acceptation.
+
+La croissance de l'historique propre à Axial n'a pas de borne de coût démontrée.
+Les tests synthétiques et les petits rejeux de coût ne remplacent pas cette
+caractérisation. La parité de l'appelant Python complet reste également ouverte.
