@@ -186,6 +186,8 @@ def main():
                         help='Frozen candidate directory containing source-manifest.json and source-archive.json.')
     parser.add_argument('--baseline-manifest', type=Path, default=EVIDENCE / 'baseline/source-manifest.json',
                         help='Retained baseline manifest inside this checkout.')
+    parser.add_argument('--owner-cost-qualification', action='store_true',
+                        help='Predeclare the separate, falsifiable added-owner graph analysis before measurement.')
     parser.add_argument('--finalize', action='store_true', help='Finalize only after the retained source manifests and archive exist.')
     args = parser.parse_args()
     require(args.finalize, 'This is a one-shot finalizer; pass --finalize after freezing both source identities')
@@ -243,6 +245,16 @@ def main():
          'nativeWorktreeChanges': candidate_status.splitlines(), 'siteVersion': None,
          'qualification': 'The frozen digest and archive identify candidate bytes. A null source commit means the checkout HEAD is ancestry only. No candidate publication is asserted.'}
     stamp = now()
+    owner_qualification = None
+    if args.owner_cost_qualification:
+        owner_qualification = {
+            'schema': 'logos-engine.lot7a-owner-cost-qualification.v1',
+            'contractPath': relative(OUT / 'owner-growth-contract.json'),
+            'tools': {
+                'consolidator': fingerprint(EVIDENCE / 'consolidate-owner-costs.mjs'),
+                'reviewer': fingerprint(EVIDENCE / 'review-owner-costs.py'),
+            },
+        }
     OUT.mkdir(parents=True, exist_ok=True)
     for name in ('cases.json', 'comparison-policy.json'):
         if not (OUT / name).exists():
@@ -264,8 +276,57 @@ def main():
         'measuredSessions': 32, 'measuredActions': 400, 'excludedWarmupSessions': 8, 'excludedWarmupActions': 24,
         'excludedMeasuredSessions': 0, 'excludedOutliers': 0, 'baseline': a, 'candidate': b,
         'qualification': 'Declared before a new lot7A official window on exact retained source freezes. Each game must independently remain strictly below +10% complete-session median increase. All measured samples, phase results and available p95 remain. Readiness, isolation and functional evidence are separate.'})
+    protocol_text = protocol(stamp, baseline_checkout, a, b, archive, retained, baseline_path, candidate_path, archive_path)
+    if owner_qualification is not None:
+        protocol_text += f'''
+## Consolidation complémentaire déclarée avant mesure : propriétaire ajouté
+
+Cette fenêtre ajoute le propriétaire `public_ranked_workshop` et son programme
+`v6.ranked_workshop.choose`. L'identité intégrale des compteurs de graphe entre
+les deux versions n'est donc pas une prémisse de cette analyse complémentaire.
+Le contrôle historique reste exécuté et son refus, son journal complet et ses
+entrées sont conservés séparément. Il n'est jamais reclassé comme réussi.
+
+Le contrat fermé `{owner_qualification['contractPath']}` sera finalisé après la
+présente déclaration et avant le préflight, la readiness et toute mesure. Il lie
+les sources et l'inventaire réel des propriétaires et programmes. Ses seules
+différences structurelles admissibles sont `observations[*].nodeCount`,
+`inspection[*].graphNodes`, `final.nodeCount` et `final.graphRevision`.
+Les valeurs attendues proviennent de captures fonctionnelles sans mesure de
+coût, réalisées sur les deux gels avant cette fenêtre : STCK et SMLP, chacun
+en forme chauffe puis session complète. La fixture fermée lie leurs graphes,
+leurs trois inspections terminales pour les sessions complètes, l'attribution
+des nouveaux nœuds Workshop et les sources correspondantes. Elle distingue
+les nœuds installés des faits acquis aux frontières officielles. Aucune formule
+constante de croissance du graphe n'est supposée.
+
+Chaque session future est vérifiée contre les valeurs publiques exactes de sa
+forme pré-déclarée ; les compteurs de coût ne prétendent pas exposer ses feuilles
+privées. Chaque valeur A/B et chaque différence sont conservées, chauffes
+comprises. Tout écart à cette fixture ou à un autre champ de travail bloque la
+consolidation. Les signatures complètes restent identiques à l'intérieur de
+chaque version. La fixture, son attribution et les deux outils sont figés avant
+le préflight et toute mesure ; aucun rapport de coût futur ne sert à les définir.
+
+| Outil complémentaire | SHA-256 pré-déclaré |
+| --- | --- |
+| `{owner_qualification['tools']['consolidator']['path']}` | `{owner_qualification['tools']['consolidator']['sha256']}` |
+| `{owner_qualification['tools']['reviewer']['path']}` | `{owner_qualification['tools']['reviewer']['sha256']}` |
+
+Le consolidateur JavaScript et le reviewer Python recalculent indépendamment
+les mêmes métriques à partir de toutes les durées brutes. Les 32 sessions,
+400 actions, huit chauffes et 24 actions exclues restent inchangées. Aucun temps
+n'est corrigé pour le travail supplémentaire du graphe. Le seuil global reste
+strictement inférieur à +10 % pour chaque jeu, sans compensation.
+
+Les nouveaux schémas et fichiers séparent l'agrégat complémentaire, sa revue et
+sa décision globale du refus historique. Le rendu doit montrer les deux
+résultats. Il ne peut déduire une acceptation des seuls rapports de paires.
+La readiness lie les empreintes du contrat, du préflight et des deux outils ;
+leur identité et leur antériorité sont revérifiées après la fenêtre.
+'''
     with (OUT / 'protocol.md').open('x') as stream:
-        stream.write(protocol(stamp, baseline_checkout, a, b, archive, retained, baseline_path, candidate_path, archive_path))
+        stream.write(protocol_text)
     declaration = {'schema': 'logos-engine.native-cost-protocol-declaration.v2', 'recordedAt': stamp,
         'status': 'declared_before_official_window', 'protocol': fingerprint(OUT / 'protocol.md'),
         'cases': fingerprint(OUT / 'cases.json'), 'diagnosticComparisonPolicy': fingerprint(OUT / 'comparison-policy.json'),
@@ -281,6 +342,8 @@ def main():
         'officialToolsByteIdenticalToHistorical': True, 'noOfficialWindowAtDeclaration': True,
         'functionalReadinessNotAnticipated': True, 'finalizedAt': stamp, 'baseline': a, 'candidate': b,
         'qualification': 'This declaration binds actual baseline and candidate source identities before any official measurement. It asserts no test outcome, game success, machine isolation, publication or functional readiness.'}
+    if owner_qualification is not None:
+        declaration['ownerCostQualification'] = owner_qualification
     write(OUT / 'declaration.json', declaration)
     result = subprocess.run([sys.executable, '-B', 'scripts/review-native-global-cost-window.py', '--check-protocol',
                              relative(OUT / 'declaration.json')], cwd=ROOT, text=True, capture_output=True)

@@ -72,6 +72,8 @@ def main():
                         default=BASE / 'performance-integrated')
     parser.add_argument('--candidate-source-directory', type=Path,
                         default=BASE / 'integrated-final')
+    parser.add_argument('--validation-directory', type=Path, default=Path('validation'),
+                        help='Completed official test/build receipts inside the candidate evidence directory.')
     parser.add_argument('--parity-receipt', type=Path, required=True,
                         help='Completed original-Python workshop parity receipt for this freeze.')
     parser.add_argument('--browser-receipt', type=Path, required=True,
@@ -84,12 +86,14 @@ def main():
     perf, candidate_dir = local(args.performance_directory), local(args.candidate_source_directory)
     require(perf.is_relative_to(BASE) and candidate_dir.is_relative_to(BASE),
             '7A readiness and candidate evidence must stay inside lot7a-evidence')
+    validation_dir = (candidate_dir / args.validation_directory).resolve()
+    require(validation_dir.is_relative_to(candidate_dir), 'Validation receipts escape the candidate directory')
     output = perf / 'readiness.json'
     require(not output.exists() and not (perf / 'window.json').exists(),
             'Readiness or an official window already exists; refusing overwrite')
     require(not (perf / 'superseded-before-measurement.json').exists(),
             'A superseded protocol cannot authorize measurement')
-    inputs = {}
+    inputs, external_inputs = {}, {}
 
     def keep(path):
         record = fp(path)
@@ -157,8 +161,8 @@ def main():
             and protocol['nativeDigests'] == declaration['nativeDigests'],
             'Protocol check does not bind these source identities')
 
-    tests = load(candidate_dir / 'validation/delta-tests-run.json')
-    checks = load(candidate_dir / 'validation/checks-run.json')
+    tests = load(validation_dir / 'delta-tests-run.json')
+    checks = load(validation_dir / 'checks-run.json')
     for value in (tests, checks):
         require(value['schema'] == 'logos-engine.native-delta-verification.v1'
                 and value['status'] == 'passed' and value['generator'] == fp(TEST_RUNNER)
@@ -228,11 +232,11 @@ def main():
             and integrity['sourceArchiveVerification']['byteIdentical'] is True,
             'Delivery integrity is not passed for the final source and tests')
     integrity_paths = {record['path'] for record in integrity['receipts']}
-    for required in ('source-manifest.json', 'source-archive.json', 'source-archive-parts.json',
-                     'validation/delta-tests-run.json', 'validation/checks-run.json',
-                     'regressions/regression-summary.json'):
-        require((candidate_dir / required).relative_to(ROOT).as_posix() in integrity_paths,
-                'Integrity receipt omits required evidence: ' + required)
+    for required in [candidate_dir / name for name in ('source-manifest.json', 'source-archive.json',
+                     'source-archive-parts.json', 'regressions/regression-summary.json')] + [
+                     validation_dir / 'delta-tests-run.json', validation_dir / 'checks-run.json']:
+        require(required.relative_to(ROOT).as_posix() in integrity_paths,
+                'Integrity receipt omits required evidence: ' + str(required))
     for record in [integrity['generator'], *integrity['verificationHelpers'], *integrity['receipts']]:
         checked(record)
     require(integrity['nativeAgentWorker'] == checks['nativeAgentWorker'], 'Integrity and build name different workers')
@@ -318,11 +322,50 @@ def main():
             'Static preflight is incomplete or differs from the finalized inputs')
     for key in ('generator', 'adaptedFrom', 'preparationTool'):
         checked(static[key])
+    owner_qualification = declaration.get('ownerCostQualification')
+    if owner_qualification is not None:
+        owner_contract_path = local(owner_qualification['contractPath'])
+        owner_contract = load(owner_contract_path)
+        require(owner_qualification['schema'] == 'logos-engine.lot7a-owner-cost-qualification.v1'
+                and owner_contract['schema'] == 'logos-engine.lot7a-owner-cost-contract.v2'
+                and owner_contract['declaration'] == fp(perf / 'declaration.json')
+                and owner_contract['tools'] == owner_qualification['tools'] == static['ownerCostTools']
+                and static['ownerCostContract'] == fp(owner_contract_path)
+                and instant(declaration['finalizedAt']) <= instant(owner_contract['declaredAt'])
+                <= instant(static['recordedAt']),
+                'Added-owner qualification is not source-bound and predeclared before the static check')
+        for record in [*owner_contract['tools'].values(), owner_contract['ownerInventory'],
+                       *owner_contract['sourceEvidence'], owner_contract['structuralFixture']]:
+            checked(record)
+        fixture = load(owner_contract['structuralFixture']['path'])
+        attribution = load(checked(fixture['attribution']))
+        require(static['ownerStructuralFixture'] == owner_contract['structuralFixture']
+                and fixture['schema'] == 'logos-engine.lot7a-owner-cost-structural-fixture.v1'
+                and fixture['status'] == attribution['status'] == 'qualified_functional_structure'
+                and fixture['nativeDigests'] == attribution['nativeDigests'] == declaration['nativeDigests']
+                and fixture['cases'] == declaration['cases']
+                and instant(attribution['recordedAt']) <= instant(fixture['recordedAt'])
+                <= instant(owner_contract['declaredAt']),
+                'Functional structure fixture is not fixed before the cost contract')
+        for record in [fixture['cases'], fixture['captureTool'], attribution['generator'],
+                       *attribution['inputs'], *[item for side in ('baseline', 'candidate')
+                       for item in fixture['captures'][side].values()]]:
+            if Path(record['path']).is_absolute():
+                path = Path(record['path']).resolve()
+                require(path.is_relative_to(Path(preparation['baselineCheckout']).resolve()),
+                        'External structure input escapes the declared baseline checkout')
+                actual = {'path': record['path'], 'sha256': sha(path), 'bytes': path.stat().st_size}
+                require(actual == record, 'External structure input fingerprint differs')
+                external_inputs[record['path']] = record
+            else:
+                checked(record)
     isolation = load(perf / 'coordinated-isolation.json')
     require(isolation['status'] == 'acknowledged_quiet_before_window'
             and isolation['otherLaneAcknowledged'] is True and isolation['ownTrackedComputeEnded'] is True
             and isolation['previewStopped'] is True and isolation['costNodeOptionsOverride'] is None,
             'Explicit cooperative isolation is not acknowledged')
+    for record in isolation.get('evidence', []):
+        checked(record)
     finalized = datetime.now(timezone.utc)
     require(instant(declaration['finalizedAt']) <= instant(static['recordedAt']) <= finalized
             and all(instant(row['finishedAt']) <= finalized for value in (tests, checks) for row in value['checks']),
@@ -347,6 +390,10 @@ def main():
             'clock precede this cost window. An explicitly qualified unmet three-level game target is retained '
             'and does not become a success claim. Cooperative lane acknowledgement and ended tracked work '
             'establish the declared quiet interval; process visibility alone does not establish isolation.'}
+    if owner_qualification is not None:
+        value['ownerCostContract'] = fp(owner_contract_path)
+        value['historicalStrictIdentityNotAnticipated'] = True
+        value['watchedExternalInputs'] = list(external_inputs.values())
     with output.open('x') as stream:
         stream.write(json.dumps(value, indent=2, ensure_ascii=False) + '\n')
     print(json.dumps({'status': 'ready', 'receipt': fp(output), 'gameTargetMet': game_target_met}))

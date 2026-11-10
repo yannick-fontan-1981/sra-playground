@@ -219,6 +219,74 @@ def main():
     checker = json.loads(result.stdout) if result.returncode == 0 else None
     check('retained_protocol_contract_checker', result.returncode == 0 and checker == read(perf / 'protocol-check.json'),
           command=command, exitCode=result.returncode, stdout=result.stdout, stderr=result.stderr)
+    owner_contract_record, owner_tools = None, None
+    qualification = declared.get('ownerCostQualification')
+    if qualification is not None:
+        contract_path = (ROOT / qualification['contractPath']).resolve()
+        contract = read(contract_path)
+        owner_contract_record, owner_tools = fp(contract_path), qualification['tools']
+        check('owner_contract_declared_inside_window', contract_path.parent == perf
+              and qualification['schema'] == 'logos-engine.lot7a-owner-cost-qualification.v1'
+              and contract['schema'] == 'logos-engine.lot7a-owner-cost-contract.v2'
+              and contract['lot'] == '7A' and contract['performanceDirectory'] == relative_perf.as_posix()
+              and contract['declaration'] == fp(perf / 'declaration.json')
+              and contract['tools'] == owner_tools)
+        check('owner_tools_unchanged', set(owner_tools) == {'consolidator', 'reviewer'}
+              and all(fp(ROOT / item['path']) == item for item in owner_tools.values()))
+        expectation = contract['structuralExpectation']
+        check('owner_structural_rule_fixed', expectation == {
+            'ownerId': 'public_ranked_workshop', 'programId': 'v6.ranked_workshop.choose',
+            'installedNodeIds': ['family_state:public_ranked_workshop', 'family_activation:public_ranked_workshop',
+                             'program:v6.ranked_workshop.choose'],
+            'allowedPaths': ['observations[*].nodeCount', 'inspection[*].graphNodes',
+                             'final.nodeCount', 'final.graphRevision'],
+            'mode': 'predeclared_functional_fixture',
+            'qualification': 'functional_structure_frozen_before_measurement'})
+        fixture = read(ROOT / contract['structuralFixture']['path'])
+        attribution = read(ROOT / fixture['attribution']['path'])
+        structural_records = [contract['structuralFixture'], fixture['cases'], fixture['captureTool'],
+                              fixture['attribution'], attribution['generator'], *attribution['inputs']]
+        structural_records += [item for side in ('baseline', 'candidate')
+                               for item in fixture['captures'][side].values()]
+        def structural_fingerprint(record):
+            path = (ROOT / record['path']).resolve()
+            if not path.is_relative_to(ROOT) and not path.is_relative_to(base):
+                raise ValueError('Functional structure input escapes the two declared checkouts')
+            return {'path': record['path'], 'sha256': sha(path), 'bytes': path.stat().st_size}
+        check('functional_structure_fingerprints',
+              all(structural_fingerprint(item) == item for item in structural_records))
+        check('functional_structure_identity',
+              fixture['schema'] == 'logos-engine.lot7a-owner-cost-structural-fixture.v1'
+              and attribution['schema'] == 'logos-engine.lot7a-owner-cost-structural-attribution.v1'
+              and fixture['status'] == attribution['status'] == 'qualified_functional_structure'
+              and fixture['nativeDigests'] == attribution['nativeDigests'] == declared['nativeDigests']
+              and fixture['cases'] == declared['cases']
+              and [(row['case'], row['form']) for row in fixture['forms']] ==
+                  [('STCK', 'warmup'), ('STCK', 'measured'), ('SMLP', 'warmup'), ('SMLP', 'measured')]
+              and attribution['formsSha256'] == hashlib.sha256(json.dumps(fixture['forms'], sort_keys=True,
+                  separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode()).hexdigest()
+              and attribution['checkedCount'] == len(attribution['checks']) > 0
+              and all(row['passed'] is True for row in attribution['checks']))
+        check('functional_structure_predeclared', datetime.fromisoformat(attribution['recordedAt'])
+              <= datetime.fromisoformat(fixture['recordedAt'])
+              <= datetime.fromisoformat(contract['declaredAt']))
+        source_inventory = read(ROOT / contract['ownerInventory']['path'])
+        check('owner_source_inventory_bound', fp(ROOT / contract['ownerInventory']['path']) == contract['ownerInventory']
+              and source_inventory['schema'] == 'logos-engine.lot7a-owner-cost-source-inventory.v1'
+              and source_inventory['nativeDigests'] == declared['nativeDigests']
+              and source_inventory['programScope'] == 'family-installed programs'
+              and all(fp(ROOT / item['path']) == item for item in contract['sourceEvidence']))
+        for key, addition in [('owners', 'public_ranked_workshop'), ('programs', 'v6.ranked_workshop.choose')]:
+            a, b = source_inventory[key]['baseline'], source_inventory[key]['candidate']
+            check('owner_inventory_exact_addition_' + key,
+                  len(a) == len(set(a)) and len(b) == len(set(b))
+                  and set(b) - set(a) == {addition} and not set(a) - set(b))
+        check('owner_contract_chronology', datetime.fromisoformat(declared['finalizedAt'])
+              <= datetime.fromisoformat(contract['declaredAt']) <= datetime.fromisoformat(started)
+              and datetime.fromisoformat(source_inventory['recordedAt']) <= datetime.fromisoformat(contract['declaredAt']))
+        check('owner_outputs_absent', not any((perf / name).exists() for name in (
+            'owner-growth-comparison.json', 'owner-growth-review.json',
+            'aggregation-failure.json', 'aggregation-failure.log')))
     node = subprocess.check_output(['node', '--version'], text=True).strip()
     failed = [item for item in checks if not item['satisfied']]
     superseded = perf / 'superseded-before-measurement.json'
@@ -239,6 +307,11 @@ def main():
             'Dependency gaps and cache differences are retained, not repaired or treated as equivalent. '
             'This receipt neither authorizes a superseded window nor asserts functional readiness, isolation or a game outcome. '
             'The owner must separately bind actual completed evidence and cross-thread coordination before any official window.'}
+    if owner_contract_record is not None:
+        receipt.update(ownerCostContract=owner_contract_record, ownerCostTools=owner_tools)
+        receipt['ownerStructuralFixture'] = contract['structuralFixture']
+        receipt['ownerStructuralExternalInputs'] = [item for item in structural_records
+                                                  if Path(item['path']).is_absolute()]
     with output_path.open('x') as stream:
         stream.write(json.dumps(receipt, indent=2, ensure_ascii=False) + '\n')
     print(json.dumps({'status': receipt['status'], 'checkedCount': len(checks), 'unsatisfied': [c['name'] for c in failed],

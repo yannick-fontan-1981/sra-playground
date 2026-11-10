@@ -1,0 +1,66 @@
+{
+  "schema": "logos-engine.coordinated-cost-isolation.v1",
+  "recordedAt": "2026-11-10T20:22:56.581345+00:00",
+  "status": "acknowledged_quiet_before_window",
+  "otherLaneAcknowledged": true,
+  "ownTrackedComputeEnded": true,
+  "previewStopped": true,
+  "costNodeOptionsOverride": null,
+  "locks": {
+    "performance": "/workspace/shared/sra-coordination/performance.lock",
+    "publication": "/workspace/shared/sra-coordination/publication.lock"
+  },
+  "knownLanes": [
+    {
+      "lot": "3I recurrent_series",
+      "updatedAt": "2026-11-10T19:03:07.717559+00:00",
+      "activeCommand": null,
+      "stage": "Native 0.50 published successfully as Site 79. Source, tests, build, regression evidence and official costs are verified. The agreed next slot is released to 4A."
+    },
+    {
+      "lot": "4A observed_feedback_sequence",
+      "updatedAt": "2026-11-10T20:16:35.791120+00:00",
+      "activeCommand": null,
+      "stage": "Delivered. Native0.51 deployed in Site80, then documentation closure in Site81; both terminal succeeded and deployment archive byte-identical. Source worktree clean. Slot released to7A."
+    },
+    {
+      "lot": "5A linked_temporal_preparation and generic long-session performance",
+      "updatedAt": "2026-11-10T20:19:57.175207+00:00",
+      "activeCommand": null,
+      "stage": "Explicit quiet acknowledged for the upcoming7A ABBA window. No tests, build, replay, browser preview or profiling will start until7A explicit release. Preparing source, independent lineage and common-loop proof code only."
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/migration/lot7a-evidence/coordination/before-cost/lot3-status.json",
+      "sha256": "f397d6076b5fde6775fe5056c48e3b69dd10110fcd68d0d627f0849d2a4a8076",
+      "bytes": 4769
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/coordination/before-cost/lot4a-status.json",
+      "sha256": "6ee5eb6316d5f583b351ff856300be78844c15174f49edd7318a2497395173fa",
+      "bytes": 6401
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/coordination/before-cost/lot5a-status.json",
+      "sha256": "052544b5173985271a972d7f28e3fe6d90ba9d17807bb363d7cb49d188a55617",
+      "bytes": 1916
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/coordination/published-base-binding.json",
+      "sha256": "b9e4ebd1b5d42ab4ed4fac76ffcaa1af98971925b92674a963dabd42cc64be96",
+      "bytes": 1817
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/coordination/published-4a-site81.json",
+      "sha256": "6df93261f4128a236fc24edf71f408451eb036f8ecc2e88e601b76a0483d6e17",
+      "bytes": 1321
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/browser/preview-stopped.json",
+      "sha256": "4c784685d55c0018e8a9de58f5c7e63fe25848c069f337f19631d1698cdaa47b",
+      "bytes": 236
+    }
+  ],
+  "qualification": "Explicit4A terminal publication release and explicit5A quiet acknowledgement through7AABBA retained.3I work ended and its successor5A is included. All7A tests/build/replays/live/captures and qualification are terminal; only documentation/read-only preparation may continue. Advisoryflock supplements this cooperative evidence and does not alone prove isolation."
+}

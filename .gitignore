@@ -355,3 +355,7 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4a-evidence/performance-integrated/owner-graphs-A-01.json.gz
 /docs/migration/lot4a-evidence/performance-integrated/owner-graphs-B-01.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot7a-evidence/performance-integrated/owner-graphs-baseline.json.gz
+/docs/migration/lot7a-evidence/performance-integrated/owner-graphs-candidate.json.gz

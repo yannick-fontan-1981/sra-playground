@@ -143,14 +143,18 @@ def main():
     destination = PERF / 'results.md'
     render_path = PERF / 'results-render.json'
     require(not destination.exists() and not render_path.exists(), 'A rendered report already exists; refusing overwrite')
+    require((PERF / 'declaration.json').is_file(), 'The selected window needs its retained declaration')
+    declaration = read(PERF / 'declaration.json')
+    qualified = declaration.get('ownerCostQualification') is not None
+    aggregate_name = 'owner-growth-comparison.json' if qualified else 'combined-comparison.json'
+    review_name = 'owner-growth-review.json' if qualified else 'consolidation-review.json'
+    decision_name = review_name if qualified else 'global-budget-decision.json'
     names = ['window.json', 'declaration.json', 'global-budget-policy.json', 'cases.json',
              'comparison-policy.json', 'readiness.json', 'static-preflight.json',
-             'combined-comparison.json', 'consolidation-review.json', 'global-budget-decision.json',
+             aggregate_name, review_name, *([] if qualified else [decision_name]),
              'log-transport.json', 'preparation.json', 'protocol-check.json']
     names += [f'cohort{index}/{name}.json' for index in (1, 2) for name in ('baseline', 'after', 'comparison')]
     required = [PERF / name for name in names]
-    require((PERF / 'declaration.json').is_file(), 'The selected window needs its retained declaration')
-    declaration = read(PERF / 'declaration.json')
     baseline_path, candidate_path, archive_path = (
         (ROOT / declaration[key]['path']).resolve()
         for key in ('baselineManifest', 'candidateManifest', 'candidateArchiveManifest'))
@@ -168,7 +172,9 @@ def main():
     records = [fp(path) for path in required]
     source = {name: read(PERF / name) for name in names}
     window, declaration, policy = (source[name] for name in ('window.json', 'declaration.json', 'global-budget-policy.json'))
-    aggregate, review, decision = (source[name] for name in ('combined-comparison.json', 'consolidation-review.json', 'global-budget-decision.json'))
+    aggregate, review, decision = (source[name] for name in (aggregate_name, review_name, decision_name))
+    phase_status = aggregate['phaseStatus'] if qualified else aggregate['status']
+    decision_status = decision['globalStatus'] if qualified else decision['status']
     cohorts = [source[f'cohort{index}/comparison.json'] for index in (1, 2)]
     transport, static = source['log-transport.json'], source['static-preflight.json']
     readiness = source['readiness.json']
@@ -200,7 +206,8 @@ def main():
     require(source['protocol-check.json']['status'] == 'protocol_contract_passed'
             and source['protocol-check.json']['nativeDigests'] == declaration['nativeDigests'],
             'The retained protocol checker does not bind this declaration')
-    require(window['status'] == window['finalIntegrity'] == review['status'] == 'passed',
+    require(window['status'] == window['finalIntegrity'] == 'passed'
+            and review['status'] == ('qualified_owner_cost_review_passed' if qualified else 'passed'),
             'Window and arithmetic review must be complete before rendering')
     require(review['checkedCount'] == len(review['checks']) > 0 and all(item['passed'] is True for item in review['checks']),
             'Arithmetic review is incomplete')
@@ -208,6 +215,23 @@ def main():
             'Actual completed readiness is required before rendering')
     require(static['status'] == 'static_inputs_checked' and all(item['satisfied'] for item in static['checks']),
             'Static input review is missing or failed')
+    if qualified:
+        contract_path = ROOT / declaration['ownerCostQualification']['contractPath']
+        contract = read(contract_path)
+        require(contract['schema'] == 'logos-engine.lot7a-owner-cost-contract.v2'
+                and contract['declaration'] == fp(PERF / 'declaration.json')
+                and contract['tools'] == declaration['ownerCostQualification']['tools']
+                and readiness['ownerCostContract'] == static['ownerCostContract'] == fp(contract_path)
+                and aggregate['status'] == 'qualified_consolidation_complete'
+                and aggregate['historicalStrict']['passed'] is False
+                and aggregate['historicalStrict']['status'] == 'failed_work_metadata'
+                and review['historicalStrictPassed'] is False,
+                'Qualified owner analysis must retain the failed historical identity gate')
+        for record in [*contract['tools'].values(), contract['structuralFixture'],
+                       contract['ownerInventory'], *contract['sourceEvidence']]:
+            require(fp(ROOT / record['path']) == record, 'A qualified structural input changed')
+            records.append(record)
+        records.append(fp(contract_path))
     require(policy['globalStage'] == 'session_elapsed' and policy['relativeIncreaseLimit'] == 0.1
             and policy['comparison'] == 'strictly_less_than' and policy['allCasesMustPass'] is True
             and policy['crossCaseCompensation'] is False
@@ -225,9 +249,10 @@ def main():
             and decision['totalCases'] == len(decision['globalCases']) == len(policy['caseIds'])
             and decision['accepted'] is all(row['accepted'] is True for row in decision['globalCases']),
             'Global decision summary differs from its cases')
-    expected_status = 'accepted_under_user_global_rule' if decision['accepted'] else 'global_budget_review_required'
-    require(decision['status'] == expected_status, 'Global decision status is inconsistent')
-    require(decision['sources'] == aggregate['sources'] and decision['diagnosticPhaseRule']['status'] == aggregate['status']
+    accepted_status = 'accepted_under_predeclared_owner_cost_rule' if qualified else 'accepted_under_user_global_rule'
+    expected_status = accepted_status if decision['accepted'] else 'global_budget_review_required'
+    require(decision_status == expected_status, 'Global decision status is inconsistent')
+    require(decision['sources'] == aggregate['sources'] and decision['diagnosticPhaseRule']['status'] == phase_status
             and decision['diagnosticPhaseRule']['budgetMetricCount'] == aggregate['budgetMetricCount']
             and decision['diagnosticPhaseRule']['withinObservedBudget'] == aggregate['withinObservedBudget']
             and decision['diagnosticPhaseRule']['unresolved'] == aggregate['unresolved'], 'Copied diagnostics differ')
@@ -249,6 +274,14 @@ def main():
             'The declared policy and readiness must precede this window')
     for item in [*readiness['inputs'], *review['inputs'], *decision['inputs']]:
         require(fp(ROOT / item['path']) == item, 'A reviewed receipt changed: ' + item['path'])
+    external_inputs = {item['path']: item for value in (readiness, review, decision)
+                       for item in value.get('watchedExternalInputs', [])}
+    baseline_checkout = Path(source['preparation.json']['baselineCheckout']).resolve()
+    for item in external_inputs.values():
+        path = Path(item['path']).resolve()
+        require(Path(item['path']).is_absolute() and path.is_relative_to(baseline_checkout)
+                and sha(path) == item['sha256'] and path.stat().st_size == item['bytes'],
+                'An external baseline input changed: ' + item['path'])
     require(transport['status'] == 'passed' and transport['window'] == fp(PERF / 'window.json'),
             'Log transport does not bind this completed window')
     require([item['series'] for item in transport['logs']] == policy['plannedOrder'], 'Log series order differs')
@@ -267,10 +300,10 @@ def main():
     lines = [
         f"# Lot 7A : résultats de coût de native {b['nativeVersion']}",
         f"**{verdict} selon le critère global déclaré : {global_summary}.** "
-        f"La [décision globale](global-budget-decision.json) conserve {decision['acceptedCases']}/{decision['totalCases']} jeux conformes, "
-        f"avec le statut `{decision['status']}`. Les diagnostics de phases restent **{phase_summary}**, "
-        f"statut `{aggregate['status']}`, avec **{len(aggregate['unresolved'])} dépassement(s) conservé(s)**. "
-        f"La [revue arithmétique indépendante](consolidation-review.json) passe {review['checkedCount']}/{len(review['checks'])} contrôles.",
+        f"La [décision globale]({decision_name}) conserve {decision['acceptedCases']}/{decision['totalCases']} jeux conformes, "
+        f"avec le statut `{decision_status}`. Les diagnostics de phases restent **{phase_summary}**, "
+        f"statut `{phase_status}`, avec **{len(aggregate['unresolved'])} dépassement(s) conservé(s)**. "
+        f"La [revue arithmétique indépendante]({review_name}) passe {review['checkedCount']}/{len(review['checks'])} contrôles.",
         '## Sources et périmètre',
         table(['Rôle', 'Identité', 'Digest natif'], [
             ['A : référence remesurée', f"Site {a['siteVersion']} / native {a['nativeVersion']} ; commit `{a['commit']}` ; {a['nativeFiles']} fichiers natifs", '`' + a['nativeDigest'] + '`'],
@@ -320,7 +353,7 @@ def main():
         'Un dépassement de phase peut être accepté lorsque ce critère global est satisfait. Le comparateur de phases '
         'garde son seuil historique, ses classifications et ses valeurs défavorables ; son diagnostic ne remplace pas la décision globale distincte.',
         '## Les seize diagnostics agrégés',
-        'Source : [comparaison agrégée](combined-comparison.json). Les résultats reproduisent les classifications du '
+        f'Source : [comparaison agrégée]({aggregate_name}). Les résultats reproduisent les classifications du '
         'comparateur conservé. Une qualification de bruit ne relève aucun seuil.',
         medians(aggregate['comparisons']), adverse_text(aggregate['comparisons']),
         '### Dispersion et p95 agrégés',
@@ -401,14 +434,14 @@ def main():
         'il n’ajoute aucun critère d’acceptation et ne démontre pas une stabilité pendant plusieurs heures.',
         table(['Cohorte', 'Jeu', 'Version', 'Mesure', 'Effectif', 'Médiane, Mio', 'Min à max, Mio'], memory_rows),
         '## Calculs, empreintes et transport',
-        'La [revue de consolidation](consolidation-review.json) recalcule les distributions, ratios et classements depuis '
-        'les quatre rapports bruts. La [revue globale](global-budget-decision.json) recalcule les durées complètes, '
+        f'La [revue de consolidation]({review_name}) recalcule les distributions, ratios et classements depuis '
+        f'les quatre rapports bruts. La [revue globale]({decision_name}) recalcule les durées complètes, '
         'avec multiplicité de chaque session préservée. La déclaration et la readiness établissent séparément '
         'l’antériorité de la politique pour cette fenêtre. La qualification historique du générateur global reste '
         'conservée dans son reçu ; elle ne remplace pas cette chronologie. Aucun ratio de phase ou de cohorte n’est substitué au global.',
         table(['Pièce', 'SHA-256'], [[name, '`' + sha(PERF / name) + '`'] for name in [
-            'declaration.json', 'global-budget-policy.json', 'combined-comparison.json',
-            'consolidation-review.json', 'global-budget-decision.json']]),
+            'declaration.json', 'global-budget-policy.json', aggregate_name, review_name,
+            *([] if qualified else [decision_name])]]),
         'Le [reçu de transport](log-transport.json) lie les originaux et leurs copies gzip sans perte. Le générateur '
         'du présent rapport vérifie à nouveau les empreintes et l’égalité exacte après décompression, sans modifier les journaux.',
         table(['Série', 'Rapport', 'Journal compressé', 'Octets originaux', 'Octets gzip'],
@@ -432,7 +465,7 @@ def main():
                   'fenêtre un incident historique d’un autre lot et ne modifie aucun reçu de mesure.']
     lines += [
         '## Décision et portée fonctionnelle',
-        f"**{verdict} pour native {b['nativeVersion']} dans cette fenêtre**, selon le reçu `{decision['status']}`. "
+        f"**{verdict} pour native {b['nativeVersion']} dans cette fenêtre**, selon le reçu `{decision_status}`. "
         f"Les **{len(aggregate['unresolved'])} dépassement(s) agrégé(s)** et tous les diagnostics de cohorte, p95, "
         'dispersions, inspections, pauses et échantillons mémoire restent visibles. Aucun seuil, observation ou cohorte n’est modifié par ce rapport.',
         'La [readiness](readiness.json) rassemble les preuves disponibles, leurs limites et les réserves conservées. '
@@ -442,6 +475,21 @@ def main():
         'Le statut réel de contribution relève de ces preuves, séparément de la décision de coût. '
         'La règle globale ne transforme pas ce raccordement en migration globale complète.',
     ]
+    if qualified:
+        relative_contract = Path(os.path.relpath(contract_path, PERF)).as_posix()
+        relative_fixture = Path(os.path.relpath(ROOT / contract['structuralFixture']['path'], PERF)).as_posix()
+        relative_failure = Path(os.path.relpath(ROOT / contract['strictFailureReceipt'], PERF)).as_posix()
+        lines[2:2] = [
+            '## Qualification structurelle et refus historique',
+            '**Le contrôle historique d’identité intégrale du travail a échoué.** '
+            f'Son [refus conservé]({relative_failure}) reste distinct de cette analyse complémentaire. '
+            f'Le [contrat]({relative_contract}) et la [fixture fonctionnelle]({relative_fixture}) ont été figés avant toute mesure. '
+            'Les captures fonctionnelles attribuent les nouveaux nœuds Workshop ; chaque session de coût est comparée '
+            'aux valeurs publiques exactes de sa forme pré-déclarée. Les feuilles privées des sessions mesurées ne '
+            'sont pas exposées par leurs seuls compteurs. Tous les autres champs de travail restent strictement comparés, '
+            'et les signatures complètes restent identiques au sein de chaque version. '
+            'Aucune durée ni observation défavorable n’est corrigée ou retirée pour compenser les nœuds supplémentaires.'
+        ]
     document = '\n\n'.join(lines) + '\n'
     links = re.findall(r'\[[^\]]+\]\(([^)]+)\)', document)
     require(all((PERF / link).resolve().is_file() for link in links), 'A report link is missing')
@@ -454,6 +502,7 @@ def main():
                'aggregateDiagnostics': 16, 'cohortDiagnostics': 32, 'displayedMeasuredSessions': len(session_rows), 'timezone': 'UTC−03',
                'inputReceiptsUnchanged': True, 'localLinksChecked': len(links),
                'runtimeOrGameExecuted': False, 'measurementExecuted': False,
+               'watchedExternalInputs': list(external_inputs.values()),
                'qualification': 'Formatting of completed retained evidence only. No assumed outcome, selected session or new acceptance rule.'}
     with render_path.open('x') as stream:
         json.dump(receipt, stream, ensure_ascii=False, indent=2)
