@@ -1,0 +1,91 @@
+{
+  "schema": "logos-engine.lot4b-untimed-functional-execution.v1",
+  "phase": "baseline_owner_graph_capture",
+  "status": "completed",
+  "command": [
+    "node",
+    "docs/migration/lot4b-evidence/capture-cost-owner-graphs.mjs",
+    "baseline",
+    "/workspace/sites/sra-lot4b-baseline-5a-20261110",
+    "docs/migration/lot4b-evidence/performance-integrated/cases.json",
+    "docs/migration/lot4b-evidence/integrated-baseline/source-manifest.json",
+    "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz"
+  ],
+  "cwd": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "startedAt": "2026-11-10T22:32:14.187524+00:00",
+  "finishedAt": "2026-11-10T22:32:55.974872+00:00",
+  "exitCode": 0,
+  "inputsBefore": [
+    {
+      "path": "docs/migration/lot4b-evidence/capture-cost-owner-graphs.mjs",
+      "sha256": "13cc2498b7e27e7b90fe7216e91c4a329e8e9a37c7d7671b655039daead6f65f",
+      "bytes": 23834
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/qualify-cost-owner-graphs.mjs",
+      "sha256": "3b9f006424fa27080993271d57d086537665dc25a6926b2b2a9ec48e48220ad5",
+      "bytes": 47487
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "bytes": 1451
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-baseline/source-manifest.json",
+      "sha256": "631951d71c675e5c29f712e92724f17e446915807570581c049357bb97bf46b3",
+      "bytes": 33584
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/declaration.json",
+      "sha256": "2940ab2c1b5b303ea103fbf6f3a9f1edaa0b83ff2b40cfbf535bda54f477bd20",
+      "bytes": 5556
+    }
+  ],
+  "measuredCostSessions": 0,
+  "timingMetricsProduced": 0,
+  "automaticRetry": false,
+  "childPid": 6,
+  "inputsAfter": [
+    {
+      "path": "docs/migration/lot4b-evidence/capture-cost-owner-graphs.mjs",
+      "sha256": "13cc2498b7e27e7b90fe7216e91c4a329e8e9a37c7d7671b655039daead6f65f",
+      "bytes": 23834
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/qualify-cost-owner-graphs.mjs",
+      "sha256": "3b9f006424fa27080993271d57d086537665dc25a6926b2b2a9ec48e48220ad5",
+      "bytes": 47487
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "bytes": 1451
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-baseline/source-manifest.json",
+      "sha256": "631951d71c675e5c29f712e92724f17e446915807570581c049357bb97bf46b3",
+      "bytes": 33584
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/declaration.json",
+      "sha256": "2940ab2c1b5b303ea103fbf6f3a9f1edaa0b83ff2b40cfbf535bda54f477bd20",
+      "bytes": 5556
+    }
+  ],
+  "inputsUnchanged": true,
+  "log": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.log",
+    "sha256": "78a4720c9cbf93aa3d5e469b9590148beea874c5dc7406262c79233c125270f3",
+    "bytes": 363
+  },
+  "captureReceipt": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+    "sha256": "022dcd292a0c41c8a2bdae0b0cd2d1196a3f3280890cdb62130caa87bcfb94cb",
+    "bytes": 105012
+  },
+  "captureStatus": "captured_functional_structure",
+  "sessions": 4,
+  "actions": 31,
+  "failures": []
+}

@@ -1,0 +1,165 @@
+{
+  "schema": "logos-engine.lot4b-bounded-source-transport-object-limit-adaptation.v1",
+  "status": "text_adaptation_and_ast_verified_no_planner_execution",
+  "recordedAt": "2026-11-10T22:03:07.920982+00:00",
+  "reason": {
+    "source": "Parent instruction reporting lot5a-status at 2026-11-10T21:59:50Z",
+    "reportedServerRestriction": "A newly sent individual Git object larger than 32 MiB is refused even when the total push is below 64 MiB.",
+    "independentServerProbePerformed": false
+  },
+  "initialAdaptation": {
+    "path": "docs/migration/lot4b-evidence/planning/bounded-source-transport-adaptation.json",
+    "bytes": 10912,
+    "sha256": "5e30edad443e1097f50b2e5c6a48fc75d051d3da7615f7051e72f151761c44df"
+  },
+  "original5aTool": {
+    "path": "docs/migration/lot5a-evidence/plan-bounded-source-transport.py",
+    "bytes": 30314,
+    "sha256": "0b31a36da1bf41f191f2abb9559a122edc28a9f9d88aad16dbc6f30ca5a7ede9"
+  },
+  "previous4bTool": {
+    "path": "docs/migration/lot4b-evidence/planning/plan-bounded-source-transport-before-object-limit.py",
+    "bytes": 30493,
+    "sha256": "7e7c92fe4c11609beed41dd62d9ef5da371d4ef7a57e4e14c7317deefeade7b5"
+  },
+  "current4bTool": {
+    "path": "docs/migration/lot4b-evidence/plan-bounded-source-transport.py",
+    "bytes": 32122,
+    "sha256": "235eb59eae2c1d2ef29c8dd4b1721adf524923a91eb47197246740d31f639d7d"
+  },
+  "diff": {
+    "path": "docs/migration/lot4b-evidence/planning/bounded-source-transport-object-limit.diff",
+    "bytes": 5723,
+    "sha256": "3a8af97c2e5fb31277369adb110dff3ba2aef2752e276eb160f9fc9fb9aef5c0"
+  },
+  "unifiedDiff": "--- docs/migration/lot4b-evidence/planning/plan-bounded-source-transport-before-object-limit.py\n+++ docs/migration/lot4b-evidence/plan-bounded-source-transport.py\n@@ -17,6 +17,9 @@\n the previous planned remote commit, using rev-list and cat-file object sizes.\n 40 MiB of raw object contents is a bound with headroom below the observed\n 64 MiB server limit; it is not a measurement or guarantee of wire pack size.\n+Every newly reachable individual object must also be at most 32 MiB, including\n+retained history and synthetic transport trees/commits. An oversized object is\n+a hard refusal: neither history nor final tree is rewritten to hide it.\n Large proof blobs are deferred, while all other target paths are complete in\n the first step. The final tree is exactly the original HEAD tree, and the\n original HEAD is a direct parent of the final transport commit.\n@@ -41,6 +44,7 @@\n DEFAULT_WINDOW = ROOT / 'docs/migration/lot4b-evidence/performance-integrated/window.json'\n RAW_LIMIT = 40 * 1024 * 1024\n SERVER_LIMIT = 64 * 1024 * 1024\n+INDIVIDUAL_OBJECT_LIMIT = 32 * 1024 * 1024\n SCHEMA = 'logos-engine.bounded-source-push-plan.v2'\n REDIRECT_ENV = ('GIT_DIR', 'GIT_WORK_TREE', 'GIT_INDEX_FILE', 'GIT_COMMON_DIR',\n                 'GIT_OBJECT_DIRECTORY', 'GIT_ALTERNATE_OBJECT_DIRECTORIES',\n@@ -218,6 +222,11 @@\n     def accept(self, kind, commit, tree, parents, stats, paths=()):\n         require(parents[0] == self.current and self.ancestor(self.current, commit),\n                 'A planned step is not a fast-forward from its predecessor')\n+        oversized = [row for row in stats['objects'] if row['bytes'] > INDIVIDUAL_OBJECT_LIMIT]\n+        if oversized:\n+            self.plan.setdefault('rejectedStepsForIndividualObjectLimit', []).append(\n+                {'kind': kind, 'commit': commit, 'previousCommit': self.current, 'objects': oversized})\n+        require(not oversized, f'{kind} contains a newly reachable Git object above the 32 MiB server object limit')\n         require(stats['rawBytes'] <= self.args.max_missing_raw_bytes,\n                 f'{kind} exceeds the per-step raw missing-object limit')\n         delta = self.differing_paths(tree, self.target_tree)\n@@ -366,6 +375,10 @@\n         required = self.missing(self.target, self.base)\n         self.required_ids = {row['oid'] for row in required['objects']}\n         self.plan['originalTargetMissingObjects'] = required\n+        server_oversized = [row for row in required['objects'] if row['bytes'] > INDIVIDUAL_OBJECT_LIMIT]\n+        self.plan['serverOversizedIndividualObjects'] = server_oversized\n+        require(not server_oversized, 'An individual missing Git object exceeds the 32 MiB server object limit; '\n+                'target/history cannot be silently split')\n         oversized = [row for row in required['objects'] if row['bytes'] > self.args.max_missing_raw_bytes]\n         self.plan['oversizedIndividualObjects'] = oversized\n         require(not oversized, 'An individual missing Git object exceeds the raw limit; target/history cannot be silently split')\n@@ -410,6 +423,8 @@\n                 'Final commit does not retain the original HEAD directly with its exact tree')\n         require(self.ancestor(self.base, self.current), 'Final source is not a fast-forward from the published base')\n         final_missing = self.missing(self.current, self.base)\n+        require(all(row['bytes'] <= INDIVIDUAL_OBJECT_LIMIT for row in final_missing['objects']),\n+                'Final transport ancestry contains an object above the 32 MiB server object limit')\n         require({row['oid'] for row in final_missing['objects']} == self.uploaded\n                 and self.required_ids <= self.uploaded\n                 and final_missing['rawBytes'] == sum(step['rawMissingObjectBytes'] for step in self.steps),\n@@ -418,6 +433,8 @@\n                          finalTreeExactlyEqualToRetainedTarget=True, originalHeadIsFinalDirectParent=True,\n                          allOriginalTargetObjectsRetained=True, allPublishedBaseObjectsRetained=True,\n                          allMissingAncestryAccountedFor=True, allStepsWithinRawObjectLimit=True,\n+                         allStepsWithinIndividualObjectLimit=True,\n+                         maximumNewReachableObjectBytes=max((row['bytes'] for row in final_missing['objects']), default=0),\n                          nativeTestBuildInputsEqualToTargetFromFirstStep=True,\n                          totalNewReachableRawObjectBytes=final_missing['rawBytes'],\n                          totalNewReachableObjects=final_missing['count'],\n@@ -449,10 +466,12 @@\n             'generator': fingerprint(__file__), 'window': window_fp, 'checkout': str(ROOT),\n             'output': str(output), 'requestedBase': args.base, 'requestedTarget': args.target,\n             'perPushServerLimitBytes': SERVER_LIMIT, 'perStepRawObjectLimitBytes': args.max_missing_raw_bytes,\n+            'perObjectServerLimitBytes': INDIVIDUAL_OBJECT_LIMIT,\n             'bulkProofMinimumBytes': args.bulk_min_bytes, 'steps': [], 'createdCommitObjects': [],\n             'pushesPerformed': 0, 'siteDeploymentsPerformed': 0, 'forcePush': False,\n             'intermediateSiteDeployment': False, 'branchUpdatesPerformed': 0,\n             'qualification': 'Raw bounds include all newly reachable commits, trees and blobs from every parent. '\n+                             'Each newly reachable individual object is also bounded by the observed 32 MiB server limit. '\n                              'They are not observed network pack sizes. The published base is supplied by the operator; '\n                              'no remote lookup, credential access, push, package or deployment is performed.',\n             'executionNotes': [\n",
+  "guards": [
+    {
+      "point": "Planner.prepare",
+      "population": "Every newly reachable object in the exact target and every retained ancestor relative to the supplied published baseline",
+      "operator": "bytes > INDIVIDUAL_OBJECT_LIMIT",
+      "limitBytes": 33554432,
+      "beforeTransportCommitCreation": true,
+      "failureObjectsField": "serverOversizedIndividualObjects"
+    },
+    {
+      "point": "Planner.accept",
+      "population": "Every newly reachable object of each accepted step, including synthesized transport trees and commits",
+      "operator": "bytes > INDIVIDUAL_OBJECT_LIMIT",
+      "limitBytes": 33554432,
+      "failureObjectsField": "rejectedStepsForIndividualObjectLimit"
+    },
+    {
+      "point": "Planner.build final accounting",
+      "population": "Complete final transport ancestry relative to the published baseline",
+      "operator": "all bytes <= INDIVIDUAL_OBJECT_LIMIT",
+      "limitBytes": 33554432
+    }
+  ],
+  "retainedContract": {
+    "schema": "logos-engine.bounded-source-push-plan.v2",
+    "rawObjectLimitBytes": 41943040,
+    "perPushServerLimitBytes": 67108864,
+    "individualServerObjectLimitBytes": 33554432,
+    "individualLimitNotOverridableByCLI": true,
+    "existingPublishedObjectsExcludedFromNewObjectLimit": true,
+    "allParentsAndOriginalHistoryCounted": true,
+    "finalTreeExactlyEqualToOriginalTarget": true,
+    "originalTargetDirectParent": true,
+    "passedABBAWindowGuardUnchanged": true,
+    "cleanCommittedCheckoutGuardUnchanged": true,
+    "temporaryIndexOnly": true,
+    "noHEADRefsRealIndexWorktreeOrRemoteMutation": true
+  },
+  "syntax": {
+    "method": "ast.parse only; neither original nor adapted planner imported or executed",
+    "oldParsed": true,
+    "newParsed": true,
+    "changedFunctions": [
+      "Planner.accept",
+      "Planner.prepare",
+      "Planner.build",
+      "main"
+    ],
+    "unchangedFunctionASTs": [
+      "require",
+      "utc_now",
+      "canonical",
+      "fingerprint",
+      "path_label",
+      "passed_window",
+      "Planner.__init__",
+      "Planner.git",
+      "Planner.text",
+      "Planner.resolve_commit",
+      "Planner.ancestor",
+      "Planner.snapshot",
+      "Planner.tree_entries",
+      "Planner.object_info",
+      "Planner.missing",
+      "Planner.commit",
+      "Planner.differing_paths",
+      "Planner.write_step_tree",
+      "Planner.proof_batch",
+      "Planner.final_candidate",
+      "Planner.preserve_history",
+      "Planner.ignored_proofs"
+    ],
+    "testsRun": false
+  },
+  "inputsBefore": [
+    {
+      "path": "docs/migration/lot4b-evidence/planning/plan-bounded-source-transport-before-object-limit.py",
+      "bytes": 30493,
+      "sha256": "7e7c92fe4c11609beed41dd62d9ef5da371d4ef7a57e4e14c7317deefeade7b5"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/bounded-source-transport-adaptation.json",
+      "bytes": 10912,
+      "sha256": "5e30edad443e1097f50b2e5c6a48fc75d051d3da7615f7051e72f151761c44df"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/plan-bounded-source-transport.py",
+      "bytes": 30314,
+      "sha256": "0b31a36da1bf41f191f2abb9559a122edc28a9f9d88aad16dbc6f30ca5a7ede9"
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "docs/migration/lot4b-evidence/planning/plan-bounded-source-transport-before-object-limit.py",
+      "bytes": 30493,
+      "sha256": "7e7c92fe4c11609beed41dd62d9ef5da371d4ef7a57e4e14c7317deefeade7b5"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/bounded-source-transport-adaptation.json",
+      "bytes": 10912,
+      "sha256": "5e30edad443e1097f50b2e5c6a48fc75d051d3da7615f7051e72f151761c44df"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/plan-bounded-source-transport.py",
+      "bytes": 30314,
+      "sha256": "0b31a36da1bf41f191f2abb9559a122edc28a9f9d88aad16dbc6f30ca5a7ede9"
+    }
+  ],
+  "priorInputsUnchanged": true,
+  "execution": {
+    "plannerMainExecuted": false,
+    "transportPlanCreated": false,
+    "gitCommandInvoked": false,
+    "gitObjectCreated": false,
+    "pushPerformed": false,
+    "siteDeploymentPerformed": false,
+    "nativeExecution": false,
+    "testOrBuildExecuted": false,
+    "measurementExecuted": false
+  },
+  "limits": [
+    "This is a prospective source/AST review, not a behavioral planner run or a server probe.",
+    "The archived prior 4B script is preserved for provenance only and must not be executed from planning/.",
+    "No parent, tree or history contract is relaxed. If the finalized target still retains an oversized unpublished 5A object, planning must fail. Root must first construct the intended clean final integration from the actual published predecessor.",
+    "No planner invocation is authorized before the final 4B cost window and independent publication prerequisites pass, and the completed checkout is committed and clean.",
+    "The passed-window guard does not itself recalculate the global cost budget or prove the supplied baseline was published.",
+    "Forty MiB raw aggregate bytes and the new 32 MiB individual ceiling are distinct limits; raw byte size does not guarantee actual network pack size.",
+    "Future planner execution writes local Git objects and an exclusive JSON outside the checkout but preserves HEAD, refs, real index, worktree and remote. Only later authorized ordinary Sites helper pushes may transport the result."
+  ]
+}

@@ -9,6 +9,8 @@ The independent source suite passes 130/130; six cold common-caller scenarios co
 
 The actual Site 84 / 5A predecessor and its Site 85 documentation closure are now merged into the development branch. Its optimized common core is preserved. The [intermediate inventory](lot10a-evidence/diagnostic/post5a-inventory-run.json) records **58/76 entries**, 178 component-verified modules, 146 partial transfers and 1,045 pending modules, with no semantic audit failures. This is still an intermediate integration; the final 10A source identity and cost require the actual published 4B and 7B predecessors.
 
+The actual **4B / Site 86**, commit `082ce553ce4dfbac37071a64497bcca129b7ced0`, is also merged. Its group-local source stops and priority guards remain intact. The [intermediate audit](lot10a-evidence/diagnostic/post4b-inventory-run.json) records **59/76 entries**, 181 component-verified modules, 146 partial and 1,042 pending, with no semantic audit failures. The inherited 0.54 label remains provisional for 10A. Final source identity, validation and cost still require the published 7B predecessor.
+
 ## Required outcome
 
 The accepted target is **100% of the published V6 common symbolic agent's
@@ -19,6 +21,38 @@ not satisfy this target.
 
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
+
+<!-- LOT4B_CURRENT_START -->
+
+## Current integrated candidate: lot 4B native 0.54.0, relative arrangements
+
+Native **0.54.0** is frozen at **`f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9`**, with **286 native files and a 297-file archive**. It integrates the actual published **5A / Site 85 / native 0.53.0** commit **`a009e1f138bb18251d697f49647bacc615ee514f`**, following Site 84 with unchanged execution inputs. The [published predecessor closure](lot4b-evidence/integrated-baseline/published-closure85.json), [report](lot4b-relative-arrangements.md) and [source lineage](lot4b-relative-arrangements-lineage.md) bind that scope. **Functional verification and the global cost gate are complete; 4B publication remains pending.**
+
+One `relative_arrangements` owner consumes the existing `v6.relative_arrangements.choose` workflow. Current geometry, participants, targets and actuator markers produce conditional experiments. Only the selected proposal's exact command and initially bound observation authorize acquisition. There is no passive Relative acquisition. Retained `models`, `events`, `failed`, `selection_ref` and `epoch` preserve the source distinctions; a new epoch clears the three local hypothesis/selection fields while retaining the event journal. Contradictory gains, ambiguous effects and inadmissible assignments remain refusals. Production rules contain no game identifier, fixed palette, prepared coordinate or recorded solution.
+
+An unrecognized domain permits later fallbacks. A currently recognized arrangement with no admissible offer stops the remainder of `window_constraints`, including symmetry; outer strategy groups continue. Both native preference paths honor the stop before asking and admitting a later provider. An acquired continuation may first read its retained witness and Kernel corroboration; that read does not authorize a blocked offer. These carefully scoped common-runtime changes do not claim equality with every behavior of the full Python caller.
+
+The final [declared 108-file scope](lot4b-evidence/integrated-final/test-expectation-correction/validation/delta-tests-run.json) passes **4,048/4,048 tests**, with zero failure, cancellation, skip or TODO, and all **five project checks** pass. The initial **4,047/4,048** receipt remains failed: a single 24-byte expected-list insertion accounts for the newly registered entry, with no native change. The [eight recorded regressions](lot4b-evidence/integrated-final/regressions/regression-summary.json) pass **136/136 comparisons**, preserving **309 actions, 317 complete public packets, 227 prefixes, 536 requests and 24 natural boundaries**. The separate [LKEY partial qualification](lot4b-evidence/integrated-final/lkey-partial/qualification.json) passes **157/157 checks**, retaining two levels and 25 actions, the raw `failed` campaign and `frontier_unknown` on level three.
+
+TRIA reaches **three natural levels in 17 actions and 17 prefixes** in the cold development session. On the final freeze, recorded replay preserves the trajectory and [cold original-family comparison](lot4b-evidence/integrated-final/tria-relative-arrangement-source-parity.json.gz) matches **68/68 calls, 34 guards, 17 selected acquisitions, 17 restorations, 18 public observations and 16 subsequent choices**, with zero difference and all **1,786 originals unchanged**. All 51 ablations remain: two action changes at the same single call44, four metadata-only changes and 45 identical proposals. The live path has no `failed` entries; failed-trial causality is covered synthetically. These are family and local-decision proofs, not full-caller or whole-campaign causal parity.
+
+The [final browser QA](lot4b-evidence/integrated-final/browser/browser-qa-test-correction-binding.json) independently observes a cold continuous TRIA session reaching **three levels / 17 actions**, with Pause and single-step exercised. Its evidence is a faithful structured transcription of observed accessibility states, without a screenshot claim. The complete **389.595754-second** QA interval adds to the initial **374.140910 seconds**, yielding **763.736664 cumulative seconds**, without resetting the 2,400-second case budget. The managed preview is stopped; the verified production build is bound separately.
+
+The [delivery integrity receipt](lot4b-evidence/integrated-final/delivery-integrity.json) verifies **286 native files, 297 archive members, 657 source/test inputs and 351 build inputs**, plus exact transport of nine reports in 72 parts. Cost policy and functional structural attribution were declared before measurement. Missing baseline dependency links caused a retained initial static failure; after only those links were prepared, the unchanged tool passed **65/65** checks. No cost acceptance is inferred from that preparation.
+
+<!-- LOT4B_COST_FINAL_START -->
+
+**The 4B global cost is accepted on 2/2 games under the rule declared before measurement.** The [exclusive ABBA window](lot4b-evidence/performance-integrated/window.json) retains all **32 measured sessions / 400 actions**, with only the predeclared eight warmups / 24 actions excluded. Complete-session pooled medians are **STCK 10,986.992674 → 10,787.8010065 ms (−1.812977%)** and **SMLP 16,041.944504 → 16,480.765660 ms (+2.735461%)**. Each game is strictly below +10%; no cross-game compensation, pooled ratio of cohorts or sum of nested phases supplies this decision. The independent [Python review](lot4b-evidence/performance-integrated/owner-growth-review.json) passes **3,960/3,960 checks**.
+
+The aggregate phase diagnostic stays **14/16**, with both cohorts **15/16**. SMLP known-prefix guard **+12.069030%** and restoration **+29.830670%** remain adverse. P95 increases are also retained: STCK known-prefix service/request **+32.773109% / +26.838601%**, SMLP guard **+23.351327%** and acquisition/persistence **+12.278213%**. The [full report](lot4b-evidence/performance-integrated/results.md) preserves all durations, phase diagnostics, pauses and memory observations. These standard recorded tasks establish common-loop cost. Relative-specific performance improvement and production browser/network latency remain outside this measurement.
+
+Strict historical aggregation remains **failed** on cross-version work metadata. Before measurement, the separate structural contract and 64-check qualification attributed 37 new deltas at 58 paired points / 116 graphs; every measured trial then matches its exact declared public form, retaining all 432 structural differences. Other work metadata is compared exactly, as are complete within-version signatures. Unexposed private leaves of measured graphs are not inferred from their counters. No duration, calculation tool, rule, threshold or population was altered after measurement. The [publication-input receipt](lot4b-evidence/integrated-final/publication-inputs.json) verifies unchanged executed inputs and binds this qualified accepted cost chain without rerunning or replacing the functional receipts.
+
+<!-- LOT4B_COST_FINAL_END -->
+
+Coverage is now **58/76 connected declared entries, zero partial entries and 18 remaining**: `goal_access` 10/12, `window_constraints` 21/21, `surface` 9/10 and `factored_material_return` 18/33. The audit records **177 component-verified modules, 145 partial transfers, 1,047 pending and zero fully verified modules**, within **1,369 Python modules and 417 data files**. All six full-migration gates and `fullV6Parity` remain false. **Lot 4C `facet_example` remains unimplemented and is the next lot4 transfer.** Its existing compiled workflow still requires actual measurement/binding callbacks, owner, selected acquisition, conditional simple/composed methods, observed refutations and restoration/revalidation proofs.
+
+<!-- LOT4B_CURRENT_END -->
 
 <!-- LOT5A_CURRENT_START -->
 

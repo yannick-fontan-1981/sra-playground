@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.lot10a-published-native-reconciliation.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T23:02:22.244576+00:00",
+  "publishedCommit": "082ce553ce4dfbac37071a64497bcca129b7ced0",
+  "siteVersion": 86,
+  "publishedNativeVersion": "0.54.0",
+  "publishedNativeManifest": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/source-manifest.json",
+    "digest": "f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9",
+    "fileCount": 286
+  },
+  "nativeDifferencePaths": [
+    "src/logos-engine/v6-axial-question-geometry.ts",
+    "src/logos-engine/v6-axial-question-policy.ts",
+    "src/logos-engine/v6-axial-question.ts",
+    "src/logos-engine/v6-native-runtime.ts"
+  ],
+  "commonPublishedNativeInputsRetained": 285,
+  "runtimeDifferenceQualification": "Manual source diff review confirms only Axial import, extension, owner binding, passive/current-state cycle, factory registration and source entry. All4B sourceGroupStop, selected Relative acquisition and5A shared optimizations remain unchanged. The0.54 version label is inherited and provisional for10A.",
+  "restoredRelativeFixtureSha256": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933",
+  "qualification": "Intermediate published4B integration only. Final7B predecessor, final version/freeze, tests, replays, cost and10A publication remain outstanding."
+}

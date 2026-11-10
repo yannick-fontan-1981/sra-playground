@@ -1,0 +1,47 @@
+{
+  "schema": "logos-engine.lot4b.validation-plan.v1",
+  "status": "development_checks_started_final_freeze_pending_predecessors",
+  "declaredAt": "2026-11-10T20:39:08.420718+00:00",
+  "scope": "relative_arrangement only; facet_example remains next",
+  "base": {
+    "siteVersion": 81,
+    "commit": "4dafc40c53ed4406ee7cd148e3e6995a2eb4185e",
+    "nativeVersion": "0.51.0",
+    "branch": "lot4b-relative-arrangement"
+  },
+  "sourceReference": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "contracts": [
+    "Unrecognized domain allows the remaining window fallbacks.",
+    "Recognized current interface with null offer stops the remainder of window_constraints, symmetry included, but not outer strategy groups.",
+    "Selected-only acquisition with command and initial-observation binding; no passive relative-arrangement record.",
+    "Actual measured object/actuator displacements preserve other participants and create conditional models only.",
+    "Models, failed trials, and selection evidence influence subsequent choices.",
+    "Epoch measurement resets models/failed/selection, retains event history; five source state fields restore."
+  ],
+  "proofs": [
+    "Unchanged original-Python synthetic oracle, complete proposals/SRC/geometry/options/guards/events/states/restore/next decisions.",
+    "Native common selection/binding/WHYACT/return/acquisition plus group barrier and priority look-ahead contracts.",
+    "Bounded cold public TRIA campaign, goal3levels; retain everyattempt and cumulative40min case clock.",
+    "Cold original family replay of actual public campaign calls, including guards, plus all model/failed/selection ablations.",
+    "Actual merged predecessor source freeze: complete relevant test suite, typecheck, entry and migration audits, diff check, Sitesbuild.",
+    "Recorded public regressions covering selected controls, common persistence, information, Feedback and new preceding owners.",
+    "Fresh STCK/SMLP A1/B1/B2/A2 cost on actual integrated candidate against actual last published predecessor.",
+    "Existing private Site publication with unchangedaccess and terminaldeployment verification."
+  ],
+  "cost": {
+    "sessions": 32,
+    "measuredActions": 400,
+    "globalCriterion": "For eachgame, pooled complete-session median increase strictly below10percent.",
+    "phaseExceedances": "Retained diagnostics, accepted if global criterion passes eachgame.",
+    "exclusiveMachineWindow": true,
+    "ownerStructureQualification": "Must be declared and verified from exact frozen functional graphs before measurement; no blanket owner-node normalization.",
+    "retainUnfavorableResults": true
+  },
+  "coordination": {
+    "7A": "Nextpublisher; officialABBAfinished20:31:52UTC, explicitfunctionalrelease20:36:50UTC.",
+    "5A": "Previouslyqueuedafter7A;4Bfinalreadiness/order tocoordinate.",
+    "finalVersion": "Unassigneduntilactualpredecessor integrated.",
+    "newTimingWindow": "No4Btiminguntilformalcoordinationandreadiness."
+  },
+  "qualification": "This plan claims no passing final gate, live contribution, cost acceptance or publication. Development source maychange; final claims bind a later immutable integrated freeze."
+}

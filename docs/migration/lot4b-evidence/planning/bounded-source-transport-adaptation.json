@@ -1,0 +1,103 @@
+{
+  "schema": "logos-engine.lot4b-bounded-source-transport-adaptation.v1",
+  "status": "text_adaptation_and_ast_verified_no_planner_execution",
+  "recordedAt": "2026-11-10T22:00:02.586406+00:00",
+  "sourceBefore": {
+    "path": "docs/migration/lot5a-evidence/plan-bounded-source-transport.py",
+    "bytes": 30314,
+    "sha256": "0b31a36da1bf41f191f2abb9559a122edc28a9f9d88aad16dbc6f30ca5a7ede9"
+  },
+  "sourceAfter": {
+    "path": "docs/migration/lot5a-evidence/plan-bounded-source-transport.py",
+    "bytes": 30314,
+    "sha256": "0b31a36da1bf41f191f2abb9559a122edc28a9f9d88aad16dbc6f30ca5a7ede9"
+  },
+  "sourceUnchanged": true,
+  "adapted": {
+    "path": "docs/migration/lot4b-evidence/plan-bounded-source-transport.py",
+    "bytes": 30493,
+    "sha256": "7e7c92fe4c11609beed41dd62d9ef5da371d4ef7a57e4e14c7317deefeade7b5"
+  },
+  "changes": [
+    {
+      "before": "lot5a",
+      "after": "lot4b",
+      "occurrences": 6,
+      "reason": "Evidence paths, output example and temporary-index label"
+    },
+    {
+      "before": "lot 5A",
+      "after": "lot 4B",
+      "occurrences": 4,
+      "reason": "Transport commit-message labels only"
+    },
+    {
+      "before": "FULL_PUBLISHED_SITE_83_COMMIT",
+      "after": "FULL_ACTUAL_PUBLISHED_5A_COMMIT",
+      "occurrences": 1,
+      "reason": "Require the actual future published 5A baseline in the usage example"
+    },
+    {
+      "before": "actually published Site 83 source",
+      "after": "actually published 5A source",
+      "occurrences": 1,
+      "reason": "Baseline argument help, without a fabricated Site number or commit"
+    },
+    {
+      "before": "docs/migration/lot4b-evidence/performance/window.json",
+      "after": "docs/migration/lot4b-evidence/performance-integrated/window.json",
+      "occurrences": 1,
+      "reason": "Default final 4B ABBA receipt"
+    }
+  ],
+  "provenanceHeaderAdded": "# Adapted for lot 4B from docs/migration/lot5a-evidence/plan-bounded-source-transport.py; source SHA-256 0b31a36da1bf41f191f2abb9559a122edc28a9f9d88aad16dbc6f30ca5a7ede9.",
+  "unifiedDiff": "--- docs/migration/lot5a-evidence/plan-bounded-source-transport.py\n+++ docs/migration/lot4b-evidence/plan-bounded-source-transport.py\n@@ -1,11 +1,12 @@\n #!/usr/bin/env python3\n+# Adapted for lot 4B from docs/migration/lot5a-evidence/plan-bounded-source-transport.py; source SHA-256 0b31a36da1bf41f191f2abb9559a122edc28a9f9d88aad16dbc6f30ca5a7ede9.\n \"\"\"Plan bounded, ordinary fast-forward source pushes after the official window.\n \n Run only once the final delivery is committed and the checkout is clean:\n \n-  python -B docs/migration/lot5a-evidence/plan-bounded-source-transport.py \\\n-    --base FULL_PUBLISHED_SITE_83_COMMIT --target HEAD \\\n-    --output /ABSOLUTE/PATH/OUTSIDE/CHECKOUT/lot5a-source-push-plan.json\n+  python -B docs/migration/lot4b-evidence/plan-bounded-source-transport.py \\\n+    --base FULL_ACTUAL_PUBLISHED_5A_COMMIT --target HEAD \\\n+    --output /ABSOLUTE/PATH/OUTSIDE/CHECKOUT/lot4b-source-push-plan.json\n \n This creates Git tree/commit objects with a temporary index. It never changes\n HEAD, a branch, the real index, a worktree file, credentials, or a remote. It\n@@ -36,8 +37,8 @@\n \n \n ROOT = Path(__file__).resolve().parents[3]\n-EVIDENCE = b'docs/migration/lot5a-evidence/'\n-DEFAULT_WINDOW = ROOT / 'docs/migration/lot5a-evidence/performance/window.json'\n+EVIDENCE = b'docs/migration/lot4b-evidence/'\n+DEFAULT_WINDOW = ROOT / 'docs/migration/lot4b-evidence/performance-integrated/window.json'\n RAW_LIMIT = 40 * 1024 * 1024\n SERVER_LIMIT = 64 * 1024 * 1024\n SCHEMA = 'logos-engine.bounded-source-push-plan.v2'\n@@ -249,7 +250,7 @@\n     def proof_batch(self, index, paths):\n         tree = self.write_step_tree(index, paths)\n         parents = [self.current]\n-        commit = self.commit(tree, parents, f'Transport lot 5A evidence batch {len(self.steps) + 1}')\n+        commit = self.commit(tree, parents, f'Transport lot 4B evidence batch {len(self.steps) + 1}')\n         stats = self.missing(commit, self.current)\n         if stats['rawBytes'] > self.args.max_missing_raw_bytes:\n             require(len(paths) > 1,\n@@ -263,7 +264,7 @@\n     def final_candidate(self):\n         parents = [self.current, self.target]\n         commit = self.commit(self.target_tree, parents,\n-                             'Preserve original lot 5A delivery history after bounded source transport')\n+                             'Preserve original lot 4B delivery history after bounded source transport')\n         return commit, parents, self.missing(commit, self.current)\n \n     def preserve_history(self):\n@@ -286,7 +287,7 @@\n                     break\n                 bridge_parents = [self.current, *proposed]\n                 bridge = self.commit(self.target_tree, bridge_parents,\n-                                     f'Transport retained lot 5A ancestry batch {len(self.steps) + 1}')\n+                                     f'Transport retained lot 4B ancestry batch {len(self.steps) + 1}')\n                 bridge_stats = self.missing(bridge, self.current)\n                 if bridge_stats['rawBytes'] <= self.args.max_missing_raw_bytes:\n                     frontier = proposed\n@@ -378,7 +379,7 @@\n         else:\n             tree = self.write_step_tree(index, self.critical)\n             parents = [self.current]\n-            commit = self.commit(tree, parents, 'Transport complete lot 5A source, tests and build inputs')\n+            commit = self.commit(tree, parents, 'Transport complete lot 4B source, tests and build inputs')\n             stats = self.missing(commit, self.current)\n             require(stats['rawBytes'] <= self.args.max_missing_raw_bytes,\n                     f'All non-deferred source paths require {stats[\"rawBytes\"]} raw object bytes in the first step')\n@@ -425,14 +426,14 @@\n \n def main():\n     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)\n-    parser.add_argument('--base', required=True, help='Full commit ID of the actually published Site 83 source')\n+    parser.add_argument('--base', required=True, help='Full commit ID of the actually published 5A source')\n     parser.add_argument('--target', default='HEAD', help='Final clean original HEAD, or its full commit ID')\n     parser.add_argument('--output', type=Path, required=True, help='Exclusive plan JSON outside this checkout')\n     parser.add_argument('--window-receipt', type=Path, default=DEFAULT_WINDOW)\n     parser.add_argument('--max-missing-raw-bytes', type=int, default=RAW_LIMIT,\n                         help='Per-push sum of all missing raw object contents; at most 41943040')\n     parser.add_argument('--bulk-min-bytes', type=int, default=256 * 1024,\n-                        help='Minimum size for deferring a regular proof data file under lot5a-evidence')\n+                        help='Minimum size for deferring a regular proof data file under lot4b-evidence')\n     args = parser.parse_args()\n     require(not any(os.environ.get(name) for name in REDIRECT_ENV), 'Git location/index overrides are not accepted')\n     require(re.fullmatch(r'[0-9a-fA-F]{40}', args.base), '--base must be a full published commit ID')\n@@ -475,7 +476,7 @@\n     with output.open('x', encoding='utf-8') as stream:\n         try:\n             planner.prepare()\n-            with tempfile.TemporaryDirectory(prefix='lot5a-transport-index-', dir=output.parent) as temporary:\n+            with tempfile.TemporaryDirectory(prefix='lot4b-transport-index-', dir=output.parent) as temporary:\n                 planner.build(Path(temporary) / 'index')\n             plan['status'] = 'planned_not_pushed'\n         except (ValueError, OSError, KeyError, json.JSONDecodeError) as error:\n",
+  "syntax": {
+    "method": "ast.parse of original and adapted text; neither module imported",
+    "originalParsed": true,
+    "adaptedParsed": true,
+    "astIdenticalAfterReversingOnlyDeclaredStringAndByteLiteralChanges": true
+  },
+  "retainedContract": {
+    "rawObjectLimitMiB": 40,
+    "rawObjectLimitBytes": 41943040,
+    "observedServerLimitMiB": 64,
+    "observedServerLimitBytes": 67108864,
+    "schemaUnchanged": "logos-engine.bounded-source-push-plan.v2",
+    "passedABBAWindowGateUnchanged": true,
+    "cleanCommittedActualHEADGateUnchanged": true,
+    "allMissingObjectsAcrossAllParentsCounted": true,
+    "fullOriginalHistoryRetained": true,
+    "temporaryIndexOnly": true,
+    "finalTreeEqualsOriginalTarget": true,
+    "originalHEADIsFinalDirectParent": true,
+    "noHEADBranchRealIndexOrWorktreeMutationByPlanner": true,
+    "noRemoteLookupCredentialsFetchPushPackageBuildOrDeployByPlanner": true,
+    "defaultWindow": "docs/migration/lot4b-evidence/performance-integrated/window.json",
+    "baselineIdentity": "Full commit of actually published 5A supplied by operator; no Site83 default and no future commit assumed"
+  },
+  "execution": {
+    "originalMainExecuted": false,
+    "adaptedMainExecuted": false,
+    "transportPlanCreated": false,
+    "gitObjectCreated": false,
+    "gitMutationCommandInvoked": false,
+    "sourcePushPerformed": false,
+    "siteDeploymentPerformed": false,
+    "nativeEngineExecuted": false,
+    "testExecuted": false,
+    "buildExecuted": false,
+    "measurementExecuted": false
+  },
+  "limits": [
+    "Only source adaptation and AST structure were checked; the planner behavior was not executed.",
+    "Future invocation is forbidden until final 4B cost execution/integrity is passed and the completed delivery is committed with a clean tracked/untracked checkout.",
+    "The preserved passed_window guard checks completed ABBA executions and integrity; it does not recompute the independent global budget decision or prove publication provenance.",
+    "The exact published 5A base and remote predecessor must be established by root; the planner intentionally performs no remote lookup.",
+    "A future planner invocation writes local Git tree/commit objects and one exclusive JSON plan outside the checkout, while preserving HEAD, refs, the real index and worktree.",
+    "Forty MiB of raw newly reachable object contents provides headroom below the observed sixty-four MiB server limit; it is not a measured or guaranteed wire-pack size.",
+    "Untransportable individual objects or ancestry remain a retained failure; no history, target path or proof is removed.",
+    "Only the standard authorized Sites helper may execute planned ordinary pushes afterward; no intermediate Site deployment or force-push is authorized by this adaptation."
+  ],
+  "qualification": "Prospective 4B transport tooling only. Existing 5A source is unchanged. The only executable-source differences are declared path/default-window and label literals; AST is identical after reversing those literals. No transport plan, graph/cost execution, build rerun, source push or publication occurred."
+}

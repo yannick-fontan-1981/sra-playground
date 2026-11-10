@@ -356,6 +356,19 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot4a-evidence/performance-integrated/owner-graphs-A-01.json.gz
 /docs/migration/lot4a-evidence/performance-integrated/owner-graphs-B-01.json.gz
 
+# Retained lot4B development and case execution logs
+!/docs/migration/lot4b-evidence/**/*.log
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot4b-evidence/development/tria-baseline-site81/tria-campaign.json.gz
+/docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/tests/fixtures/v6-relative-arrangements-reference.json.gz
+
+# Exact frozen archives are retained in verified byte parts
+/docs/migration/lot4b-evidence/**/source-archive.tar.gz
+
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot7a-evidence/performance-integrated/owner-graphs-baseline.json.gz
 /docs/migration/lot7a-evidence/performance-integrated/owner-graphs-candidate.json.gz
@@ -393,3 +406,21 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 # Lot 5A server object-size repair: exact bytes are retained as parts and manifests.
 /docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-first-creator.json
 /docs/migration/lot5a-evidence/final/transport/retained-original-history.bundle
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/replay-campaign.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz
+/docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-replay.json.gz
+/docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz
+/docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz
+/docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz
+/docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-replay.json.gz
+/docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz
+/docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz
+/docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz
+/docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz

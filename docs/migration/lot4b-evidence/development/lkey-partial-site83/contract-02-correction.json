@@ -1,0 +1,91 @@
+{
+  "schema": "logos-engine.partial-regression-source-command-correction.v1",
+  "recordedAt": "2026-11-10T21:18:49.282994+00:00",
+  "status": "prepared_for_independent_static_review_not_executed",
+  "attemptRetained": {
+    "directory": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-01",
+    "qualification": {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-01/qualification.json",
+      "sha256": "706aad124c99d9c360727d070bb28121432754d4eb0e4f54c95093a104522fef",
+      "bytes": 3012
+    },
+    "rawCampaignStatus": null,
+    "error": {
+      "name": "AssertionError",
+      "message": "native public command field presence\n+ actual - expected\n\n  [\n    'action_ref',\n-   'data'\n  ]\n"
+    }
+  },
+  "previousRunner": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-01/runner-before-fix.mjs",
+    "sha256": "2ad1bc5cb7763efbf8d1905d184dbb33c873c70416dd5ce125ea2f85f45ace69",
+    "bytes": 40628
+  },
+  "correctedRunner": {
+    "path": "scripts/replay-native-partial-public-regression.mjs",
+    "sha256": "b1618a2cf7867c0a783de131ed3cb8d24baffb77c858f04927fe85843c7688bf",
+    "bytes": 41724
+  },
+  "previousContract": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/contract.json",
+    "sha256": "d3d6cc003ca9414d5937449e671f7905e63c19d48399607e912fce6ead8e72a5",
+    "bytes": 4339
+  },
+  "contract": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/contract-02.json",
+    "sha256": "3da0449b6a864c0c5cfe587e3b1b0cf6200bfe7920587a0839a9a2151dddeca9",
+    "bytes": 4339
+  },
+  "onlyChangedFunction": "workshopProjection",
+  "outsideFunctionBytesUnchanged": true,
+  "publicCommandValidatorUnchanged": true,
+  "publicCommandAndPacketComparisonsUnchanged": true,
+  "correction": "Workshop source scalar commands have exactly action_ref; source point commands have exactly action_ref and data{x,y}. The source action ref and point data are bound explicitly to the retained public action. Scalar public data must still be the explicit empty object required by command(). The raw source envelope remains in each compared row, with its publicActionSequence. No public command or packet is normalized.",
+  "candidateSourceManifest": {
+    "path": "docs/migration/lot4b-evidence/development/merged-site82/source-manifest.json",
+    "sha256": "655a60d587dced4c4b1b3b234b6ec28271e8676894581776802e9bd747c27bb7",
+    "bytes": 33472
+  },
+  "otherContractInputsUnchanged": true,
+  "expectedHistoricalOutcomeUnchanged": {
+    "game": "LKEY",
+    "targetLevels": 3,
+    "baselineSourceDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+    "status": "failed",
+    "traceStatus": "failed",
+    "baselineExitCode": 1,
+    "failure": "Did not complete LKEY level 3: V6 stopped: frontier_unknown. Its acquired evidence is retained for inspection.",
+    "actions": 25,
+    "prefixes": 25,
+    "completePublicPackets": 26,
+    "boundaryActionCounts": [
+      16,
+      24
+    ],
+    "final": {
+      "actions": 25,
+      "levelsCompleted": 2,
+      "level": 3,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "frontier_unknown",
+      "prefixes": 25,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 25,
+        "resume": 25
+      }
+    },
+    "workshop": {
+      "calls": 49,
+      "records": 25,
+      "selectedRecords": 14,
+      "passiveRecords": 11
+    }
+  },
+  "comparisonScopeUnchanged": true,
+  "independentStaticReview": "pending /root/feedback_source_audit",
+  "runnerExecuted": false,
+  "nativeExecutions": 0,
+  "suggestedOutputDirectory": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-02"
+}

@@ -1,0 +1,575 @@
+{
+  "schema": "logos-engine.lot4b.safe-history-reconstruction-review.v1",
+  "createdAt": "2026-11-10T22:10:44.386539+00:00",
+  "status": "same_reviewed_inputs_pending_actual_publication",
+  "branch": "lot4b-final-relative-arrangement",
+  "base4b": "d49474cc013a62a71a22369baa1eee907bf12007",
+  "safe5aTarget": "7b0637cfef2a7e5ef42fbdf0cb214cc35aa31886",
+  "safeTargetPublished": false,
+  "priorReview": {
+    "path": "docs/migration/lot4b-evidence/planning/merged5a-source-review.json",
+    "sha256": "862be50cd1d6412f9f0b26c415e3a3f795d3a4326bc247f04cce87b8973c7ccd",
+    "bytes": 33393
+  },
+  "reviewedFiles": [
+    {
+      "expected": {
+        "path": "src/logos-engine/v6-native-runtime.ts",
+        "sha256": "96071ede181246c251b5611d769505f033470a7666f92890c5e8aba5681e6941",
+        "bytes": 147934,
+        "ours": {
+          "present": true,
+          "sha256": "fd7cd01e4b35db37886f910d710dbabda99e0a40a729dadf2ae9e1f43bbd0aa8",
+          "bytes": 145046,
+          "sameBytes": false
+        },
+        "fiveA": {
+          "present": true,
+          "sha256": "3dd8ff07f3b0e82c6059f825295e15d9e49af47d4aebb850aa9cb8fac90ed2e4",
+          "bytes": 141662,
+          "sameBytes": false
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "96071ede181246c251b5611d769505f033470a7666f92890c5e8aba5681e6941",
+          "bytes": 147934,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "src/logos-engine/v6-native-runtime.ts",
+        "sha256": "96071ede181246c251b5611d769505f033470a7666f92890c5e8aba5681e6941",
+        "bytes": 147934
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "src/logos-engine/v6-native-types.ts",
+        "sha256": "6fbb3e98ba8350e4a9ec82fb4d155e635887a8a83c53a9603f8f3e7d075d0b07",
+        "bytes": 13052,
+        "ours": {
+          "present": true,
+          "sha256": "6fbb3e98ba8350e4a9ec82fb4d155e635887a8a83c53a9603f8f3e7d075d0b07",
+          "bytes": 13052,
+          "sameBytes": true
+        },
+        "fiveA": {
+          "present": true,
+          "sha256": "a400b8664370be04950ee721ea4503774a245300251624bf632376ad489b668b",
+          "bytes": 12773,
+          "sameBytes": false
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "6fbb3e98ba8350e4a9ec82fb4d155e635887a8a83c53a9603f8f3e7d075d0b07",
+          "bytes": 13052,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "src/logos-engine/v6-native-types.ts",
+        "sha256": "6fbb3e98ba8350e4a9ec82fb4d155e635887a8a83c53a9603f8f3e7d075d0b07",
+        "bytes": 13052
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "tests/helpers/v6-live-game-campaign.ts",
+        "sha256": "93b824b078ccf259827be897e8143dc59fc0479d6f765f3a437cc95b2f4472c1",
+        "bytes": 73454,
+        "ours": {
+          "present": true,
+          "sha256": "93b824b078ccf259827be897e8143dc59fc0479d6f765f3a437cc95b2f4472c1",
+          "bytes": 73454,
+          "sameBytes": true
+        },
+        "fiveA": {
+          "present": true,
+          "sha256": "a33b59fc84bb2007a6c80842e9cc395836270bc3ddd90eece606f1dcce04261a",
+          "bytes": 70789,
+          "sameBytes": false
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "93b824b078ccf259827be897e8143dc59fc0479d6f765f3a437cc95b2f4472c1",
+          "bytes": 73454,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "tests/helpers/v6-live-game-campaign.ts",
+        "sha256": "93b824b078ccf259827be897e8143dc59fc0479d6f765f3a437cc95b2f4472c1",
+        "bytes": 73454
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "tests/v6-radial-port-integration.test.ts",
+        "sha256": "86a051c90fd919488b69509c24b6fca29420041a4870f728aa2bb083c02b50fa",
+        "bytes": 28209,
+        "ours": {
+          "present": true,
+          "sha256": "d471de7ac2cc4844be26ff69e8557d78d47e141e9d9516c8053d796b2a648c8f",
+          "bytes": 28209,
+          "sameBytes": false
+        },
+        "fiveA": {
+          "present": true,
+          "sha256": "41aeb040cc64bd9e1bece99b45a72e69747c99813618cd3116d922bf4c1799aa",
+          "bytes": 28096,
+          "sameBytes": false
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "86a051c90fd919488b69509c24b6fca29420041a4870f728aa2bb083c02b50fa",
+          "bytes": 28209,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "tests/v6-radial-port-integration.test.ts",
+        "sha256": "86a051c90fd919488b69509c24b6fca29420041a4870f728aa2bb083c02b50fa",
+        "bytes": 28209
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "scripts/audit-v6-entry-points.ts",
+        "sha256": "3dbf9f4c327cdd5f6554af0b2a89da602a3d4f7141b08fb456b2f5aa9fe96d20",
+        "bytes": 6893,
+        "ours": {
+          "present": true,
+          "sha256": "3dbf9f4c327cdd5f6554af0b2a89da602a3d4f7141b08fb456b2f5aa9fe96d20",
+          "bytes": 6893,
+          "sameBytes": true
+        },
+        "fiveA": {
+          "present": true,
+          "sha256": "7db616a4abe6d176c7f638cc3e8d350a22d2a08f0386d23dae6b63b83ae479f8",
+          "bytes": 6808,
+          "sameBytes": false
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "3dbf9f4c327cdd5f6554af0b2a89da602a3d4f7141b08fb456b2f5aa9fe96d20",
+          "bytes": 6893,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "scripts/audit-v6-entry-points.ts",
+        "sha256": "3dbf9f4c327cdd5f6554af0b2a89da602a3d4f7141b08fb456b2f5aa9fe96d20",
+        "bytes": 6893
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "migration/v6-transfer-map.json",
+        "sha256": "8b7be10059a287b597f9425dee558e3a2a4a2408ec26527c11c1cbf220ed9417",
+        "bytes": 397512,
+        "ours": {
+          "present": true,
+          "sha256": "b05238e07257c28b6a7100d2a63382c817ebeb14fa9275b5dc348a4aee33cccb",
+          "bytes": 384971,
+          "sameBytes": false
+        },
+        "fiveA": {
+          "present": true,
+          "sha256": "f03947fe5d553c794ed794b86196c577bef007fd83115bc9fff551ababc48eab",
+          "bytes": 395982,
+          "sameBytes": false
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "8b7be10059a287b597f9425dee558e3a2a4a2408ec26527c11c1cbf220ed9417",
+          "bytes": 397512,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "migration/v6-transfer-map.json",
+        "sha256": "8b7be10059a287b597f9425dee558e3a2a4a2408ec26527c11c1cbf220ed9417",
+        "bytes": 397512
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "src/logos-engine/v6-relative-arrangements.ts",
+        "sha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c",
+        "bytes": 13576,
+        "ours": {
+          "present": true,
+          "sha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c",
+          "bytes": 13576,
+          "sameBytes": true
+        },
+        "fiveA": {
+          "present": false,
+          "sha256": null,
+          "bytes": null,
+          "sameBytes": false
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c",
+          "bytes": 13576,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "src/logos-engine/v6-relative-arrangements.ts",
+        "sha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c",
+        "bytes": 13576
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "src/logos-engine/v6-relative-arrangements-geometry.ts",
+        "sha256": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db",
+        "bytes": 14815,
+        "ours": {
+          "present": true,
+          "sha256": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db",
+          "bytes": 14815,
+          "sameBytes": true
+        },
+        "fiveA": {
+          "present": false,
+          "sha256": null,
+          "bytes": null,
+          "sameBytes": false
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db",
+          "bytes": 14815,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "src/logos-engine/v6-relative-arrangements-geometry.ts",
+        "sha256": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db",
+        "bytes": 14815
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "src/logos-engine/v6-relative-arrangements-planner.ts",
+        "sha256": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30",
+        "bytes": 10252,
+        "ours": {
+          "present": true,
+          "sha256": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30",
+          "bytes": 10252,
+          "sameBytes": true
+        },
+        "fiveA": {
+          "present": false,
+          "sha256": null,
+          "bytes": null,
+          "sameBytes": false
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30",
+          "bytes": 10252,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "src/logos-engine/v6-relative-arrangements-planner.ts",
+        "sha256": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30",
+        "bytes": 10252
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "src/logos-engine/v6-linked-temporal-common.ts",
+        "sha256": "3e7111bccfefa22a67afad24cefdbc95834053eb233007f4f4ddda19f1bfe54f",
+        "bytes": 8267,
+        "ours": {
+          "present": false,
+          "sha256": null,
+          "bytes": null,
+          "sameBytes": false
+        },
+        "fiveA": {
+          "present": true,
+          "sha256": "3e7111bccfefa22a67afad24cefdbc95834053eb233007f4f4ddda19f1bfe54f",
+          "bytes": 8267,
+          "sameBytes": true
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "3e7111bccfefa22a67afad24cefdbc95834053eb233007f4f4ddda19f1bfe54f",
+          "bytes": 8267,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "src/logos-engine/v6-linked-temporal-common.ts",
+        "sha256": "3e7111bccfefa22a67afad24cefdbc95834053eb233007f4f4ddda19f1bfe54f",
+        "bytes": 8267
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "src/logos-engine/v6-linked-temporal-contact.ts",
+        "sha256": "29b68e614203302e36ef731866544e35146b2b553b7d424c0e533eb38519b1b5",
+        "bytes": 34974,
+        "ours": {
+          "present": false,
+          "sha256": null,
+          "bytes": null,
+          "sameBytes": false
+        },
+        "fiveA": {
+          "present": true,
+          "sha256": "29b68e614203302e36ef731866544e35146b2b553b7d424c0e533eb38519b1b5",
+          "bytes": 34974,
+          "sameBytes": true
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "29b68e614203302e36ef731866544e35146b2b553b7d424c0e533eb38519b1b5",
+          "bytes": 34974,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "src/logos-engine/v6-linked-temporal-contact.ts",
+        "sha256": "29b68e614203302e36ef731866544e35146b2b553b7d424c0e533eb38519b1b5",
+        "bytes": 34974
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "src/logos-engine/v6-linked-temporal-phase.ts",
+        "sha256": "d431c10a89c967b056417ba526d68907ef1ddac62b5411b51f9d70edb8c994e1",
+        "bytes": 30482,
+        "ours": {
+          "present": false,
+          "sha256": null,
+          "bytes": null,
+          "sameBytes": false
+        },
+        "fiveA": {
+          "present": true,
+          "sha256": "d431c10a89c967b056417ba526d68907ef1ddac62b5411b51f9d70edb8c994e1",
+          "bytes": 30482,
+          "sameBytes": true
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "d431c10a89c967b056417ba526d68907ef1ddac62b5411b51f9d70edb8c994e1",
+          "bytes": 30482,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "src/logos-engine/v6-linked-temporal-phase.ts",
+        "sha256": "d431c10a89c967b056417ba526d68907ef1ddac62b5411b51f9d70edb8c994e1",
+        "bytes": 30482
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "src/logos-engine/v6-linked-temporal-preparation.ts",
+        "sha256": "c85464b1162352f7c6cb329f2d2f9b6cbcc74baae616be3d643d1ac1b646aeed",
+        "bytes": 24845,
+        "ours": {
+          "present": false,
+          "sha256": null,
+          "bytes": null,
+          "sameBytes": false
+        },
+        "fiveA": {
+          "present": true,
+          "sha256": "c85464b1162352f7c6cb329f2d2f9b6cbcc74baae616be3d643d1ac1b646aeed",
+          "bytes": 24845,
+          "sameBytes": true
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "c85464b1162352f7c6cb329f2d2f9b6cbcc74baae616be3d643d1ac1b646aeed",
+          "bytes": 24845,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "src/logos-engine/v6-linked-temporal-preparation.ts",
+        "sha256": "c85464b1162352f7c6cb329f2d2f9b6cbcc74baae616be3d643d1ac1b646aeed",
+        "bytes": 24845
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "src/logos-engine/kernel.ts",
+        "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207",
+        "bytes": 23637,
+        "ours": {
+          "present": true,
+          "sha256": "9c7fb668e85bf101f88de439ff43b42bba9566917a2c2b8fb8f13e2ee00e247b",
+          "bytes": 19490,
+          "sameBytes": false
+        },
+        "fiveA": {
+          "present": true,
+          "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207",
+          "bytes": 23637,
+          "sameBytes": true
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207",
+          "bytes": 23637,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "src/logos-engine/kernel.ts",
+        "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207",
+        "bytes": 23637
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "src/logos-engine/v6-knowledge-store.ts",
+        "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08",
+        "bytes": 14849,
+        "ours": {
+          "present": true,
+          "sha256": "5efe83d07b6d5354b9a26b39320449ecaa631ca55563c683779f067a8d670bf0",
+          "bytes": 14854,
+          "sameBytes": false
+        },
+        "fiveA": {
+          "present": true,
+          "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08",
+          "bytes": 14849,
+          "sameBytes": true
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08",
+          "bytes": 14849,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "src/logos-engine/v6-knowledge-store.ts",
+        "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08",
+        "bytes": 14849
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "src/logos-engine/v6-native-caller.ts",
+        "sha256": "621aa8b5569420e12905af4c22db1be50a387e22cec0e01bc24db1695b1b917a",
+        "bytes": 41090,
+        "ours": {
+          "present": true,
+          "sha256": "07b6811595812ea2d4f266cea7b7c44633567ebca044b8dc7254c4d082a19968",
+          "bytes": 41003,
+          "sameBytes": false
+        },
+        "fiveA": {
+          "present": true,
+          "sha256": "621aa8b5569420e12905af4c22db1be50a387e22cec0e01bc24db1695b1b917a",
+          "bytes": 41090,
+          "sameBytes": true
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "621aa8b5569420e12905af4c22db1be50a387e22cec0e01bc24db1695b1b917a",
+          "bytes": 41090,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "src/logos-engine/v6-native-caller.ts",
+        "sha256": "621aa8b5569420e12905af4c22db1be50a387e22cec0e01bc24db1695b1b917a",
+        "bytes": 41090
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "src/logos-engine/v6-observed-frontier.ts",
+        "sha256": "c2adeb462bf5a4089af59c8141b880c9ef2ba6378d1fc5c52c33333fe564ba62",
+        "bytes": 40967,
+        "ours": {
+          "present": true,
+          "sha256": "1812e3b6209271420a776d3ff823090488cef4ab19b08f173d2b3a80a2e2c5e0",
+          "bytes": 35262,
+          "sameBytes": false
+        },
+        "fiveA": {
+          "present": true,
+          "sha256": "c2adeb462bf5a4089af59c8141b880c9ef2ba6378d1fc5c52c33333fe564ba62",
+          "bytes": 40967,
+          "sameBytes": true
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "c2adeb462bf5a4089af59c8141b880c9ef2ba6378d1fc5c52c33333fe564ba62",
+          "bytes": 40967,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "src/logos-engine/v6-observed-frontier.ts",
+        "sha256": "c2adeb462bf5a4089af59c8141b880c9ef2ba6378d1fc5c52c33333fe564ba62",
+        "bytes": 40967
+      },
+      "sameBytes": true
+    },
+    {
+      "expected": {
+        "path": "src/logos-engine/v6-crossed-prefix-access.ts",
+        "sha256": "1fa16f6712e281d50628a2fc6ff619d224d7f44d492f1152ce8a09a93767d162",
+        "bytes": 27111,
+        "ours": {
+          "present": true,
+          "sha256": "db35f9ad5988b899bcdc98d52a4e1bd837a3b15e0346c93a6da09433ef056465",
+          "bytes": 26105,
+          "sameBytes": false
+        },
+        "fiveA": {
+          "present": true,
+          "sha256": "1fa16f6712e281d50628a2fc6ff619d224d7f44d492f1152ce8a09a93767d162",
+          "bytes": 27111,
+          "sameBytes": true
+        },
+        "mergedHead": {
+          "present": true,
+          "sha256": "1fa16f6712e281d50628a2fc6ff619d224d7f44d492f1152ce8a09a93767d162",
+          "bytes": 27111,
+          "sameBytes": true
+        }
+      },
+      "actual": {
+        "path": "src/logos-engine/v6-crossed-prefix-access.ts",
+        "sha256": "1fa16f6712e281d50628a2fc6ff619d224d7f44d492f1152ce8a09a93767d162",
+        "bytes": 27111
+      },
+      "sameBytes": true
+    }
+  ],
+  "qualification": "The resolved integration restores the exact18files read by the independent review. Audits rerun58/76 and177component/145partial/1047pending with no failures. No final native version, freeze or functional proof claimed."
+}

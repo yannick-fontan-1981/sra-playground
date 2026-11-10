@@ -67,6 +67,17 @@ La [reprise des deux fichiers Axial](diagnostic/history-lookup-validation.json)
 passe **136/136**, avec les mêmes attentes Python et des entrées inchangées.
 Cette réduction d’allocations ne constitue pas une mesure de durée.
 
+## Intégration intermédiaire du lot 4B publié
+
+Le [Site 86 effectivement publié](coordination/published-4b-site86.json), commit
+`082ce553ce4dfbac37071a64497bcca129b7ced0`, est fusionné avec Axial. La
+[réconciliation native](coordination/published-4b-site86-reconciliation.json)
+conserve ses autres entrées et limite le diff natif à Axial et son raccordement.
+Les [audits réels](diagnostic/post4b-inventory-run.json) passent : **59/76 entrées**,
+181 composants vérifiés, 146 transferts partiels, 1 042 en attente, aucun échec
+de mapping. Ce point intermédiaire ne constitue pas la validation finale 10A ;
+la publication de 7B doit encore être intégrée.
+
 ## Préparation des contrôles finaux
 
 - [Périmètre fonctionnel et rejeux](validation-and-regression-plan.md),

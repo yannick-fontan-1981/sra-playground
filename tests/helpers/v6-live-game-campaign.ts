@@ -89,7 +89,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     status: 'running', referenceCommit: V6_REFERENCE_COMMIT,
     budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: 360, clock: 'real active compute and native execution' },
     source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [], domainAssessments: [],
-    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], workshopSourceCalls: [], feedbackSourceCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
+    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], workshopSourceCalls: [], feedbackSourceCalls: [], relativeArrangementSourceCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
   };
   if (options.recordedPublic) report.recordedPublicReplay = {
     trace: options.recordedPublic.trace, baseline: options.recordedPublic.baseline,
@@ -221,6 +221,36 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             const failed = (error: unknown): never => {
               event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
               event.sourceAfter = this.state(); report.feedbackSourceCalls.push(event); throw error;
+            };
+            try {
+              const result = original.apply(this, args);
+              return result && typeof result.then === 'function' ? result.then(complete, failed) : complete(result);
+            } catch (error) { return failed(error); }
+          };
+        }
+      }
+      // Observe the source arrangement owner without supplying observations,
+      // models or commands. This owner has selected acquisition only.
+      const arrangements = (runtime as unknown as { families: R[] }).families.find(f => f.id === 'relative_arrangements');
+      if (arrangements) {
+        for (const method of ['propose', 'proposeInSubquestion', 'before', 'after', 'record']) {
+          const original = arrangements[method];
+          assert.equal(typeof original, 'function', `Missing arrangement source surface: ${method}`);
+          arrangements[method] = function (...args: any[]) {
+            const capturedArgs = method === 'proposeInSubquestion' ? args.slice(2, 6)
+              : method === 'propose' || method === 'before' ? args.slice(0, 4)
+              : method === 'after' ? args.slice(0, 6) : args.slice(0, 7);
+            const event: R = { index: report.relativeArrangementSourceCalls.length,
+              method: method === 'proposeInSubquestion' ? 'propose' : method, nativeMethod: method,
+              selectionEntry: method === 'proposeInSubquestion' ? args.slice(0, 2) : null,
+              arguments: structuredClone(capturedArgs), sourceBefore: this.state() };
+            const complete = (result: any): any => {
+              event.result = structuredClone(method === 'record' ? result.events[0] : result ?? null);
+              event.sourceAfter = this.state(); report.relativeArrangementSourceCalls.push(event); return result;
+            };
+            const failed = (error: unknown): never => {
+              event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+              event.sourceAfter = this.state(); report.relativeArrangementSourceCalls.push(event); throw error;
             };
             try {
               const result = original.apply(this, args);
@@ -472,6 +502,12 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               stateNode: 'family_state:feedback_sequences', state: read('family_state:feedback_sequences'),
               proposal: evidence.proposal.feedback_plan ? evidence.proposal : null,
               qualification: 'Passive capture of the actual one-owner state after acquisition. Selected and foreign returns stay distinct; no observation, state, trial or action is supplied by this recorder.',
+            } } : {}),
+            ...(graph.nodes['family_state:relative_arrangements'] ? { relativeArrangement: {
+              stateNode: 'family_state:relative_arrangements', state: read('family_state:relative_arrangements'),
+              sourceCallsThrough: report.relativeArrangementSourceCalls.length,
+              proposal: evidence.proposal.arrangement_plan ? evidence.proposal : null,
+              qualification: 'Passive recorder of actual selected acquisition. The family receives no passive acquisition; this recorder supplies no state, action or return.',
             } } : {}),
             controlAttention: { morphology: evidence.proposal.morphology ?? null,
               controlAcquisition: evidence.proposal.question?.control_acquisition ?? null,

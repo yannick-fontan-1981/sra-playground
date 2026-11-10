@@ -1,0 +1,247 @@
+{
+  "schema": "logos-engine.lot4b.cost-tool-review-browser-qa-addendum.v1",
+  "status": "prospective_static_review_no_blocking_finding",
+  "reviewer": "/root/feedback_source_audit",
+  "reviewedAt": "2026-11-10T21:25:40Z",
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "scope": "Independent source-only review of the prospective readiness correction for a separate final-browser QA interval after the resolved TRIA case. Original review and earlier addendum are unchanged. No syntax check, imported module, executable validation, browser action or cost run is claimed.",
+  "retainedReviews": [
+    {
+      "path": "docs/migration/lot4b-evidence/planning/cost-tool-review.json",
+      "bytes": 24247,
+      "sha256": "4a4f305b5828a6516074ade42163fb555b6da5f9a61e1f02c1cc6d3a45e94cee",
+      "unchanged": true
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/cost-tool-review-text-addendum.json",
+      "sha256": "f6353a90d1b8a99a406525a44d15847a3527bd22d798d7785b057223ca931e34",
+      "unchanged": true
+    }
+  ],
+  "correction": {
+    "before": {
+      "path": "docs/migration/lot4b-evidence/finalize-cost-readiness.py",
+      "bytes": 34992,
+      "sha256": "ab3e404841ce349001d281873dd8d72fd32ee3b0d4bad33ed65df874d4d4b519"
+    },
+    "retainedBeforeCopy": {
+      "path": "docs/migration/lot4b-evidence/planning/finalize-cost-readiness-before-browser-continuation.py",
+      "bytes": 34992,
+      "sha256": "ab3e404841ce349001d281873dd8d72fd32ee3b0d4bad33ed65df874d4d4b519"
+    },
+    "after": {
+      "path": "docs/migration/lot4b-evidence/finalize-cost-readiness.py",
+      "bytes": 38778,
+      "sha256": "579f69f39b1da4dcf13629710faf41f07c90e99fe444a8bef81921599e16ca7b"
+    },
+    "problem": "The prior passing-browser branch required its cumulativeGameCaseSeconds to fit inside the already closed initial 374.140910-second case total. A genuine subsequent QA interval could not be charged without that check rejecting it.",
+    "changedSurfaces": [
+      "Decimal standard-library import",
+      "optional --browser-qa-continuation CLI argument",
+      "separate QA receipt, exact fingerprint/timestamp/additive-budget checks",
+      "completed QA interval required before readiness finalization",
+      "separate initial cumulative, QA elapsed and total cumulative output fields",
+      "qualification of the closed-case waiting gap"
+    ],
+    "otherReadinessGatesUnchanged": true,
+    "officialCostToolsChanged": false,
+    "phaseOrGlobalCostRuleChanged": false
+  },
+  "primaryInventory": {
+    "basis": "filesAfter from cost-tool-review-text-addendum.json",
+    "reviewedFiles": 12,
+    "changedSincePreviousAddendum": 1,
+    "unchangedSincePreviousAddendum": 11,
+    "allTwelveFingerprintsRechecked": true,
+    "filesAfter": [
+      {
+        "path": "docs/migration/lot4b-evidence/capture-cost-owner-graphs.mjs",
+        "bytes": 23834,
+        "sha256": "13cc2498b7e27e7b90fe7216e91c4a329e8e9a37c7d7671b655039daead6f65f"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/check-cost-static-inputs.py",
+        "bytes": 23603,
+        "sha256": "9cbe543d0166d366d4d8e576dcc8553c7a8116d4d657202c5be29a4d2607a121"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/consolidate-owner-costs.mjs",
+        "bytes": 52881,
+        "sha256": "7691a06e88d60139941ace27605aa319aa9a01e31a7e315630abb1d8cef7e123"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/finalize-cost-readiness.py",
+        "bytes": 38778,
+        "sha256": "579f69f39b1da4dcf13629710faf41f07c90e99fe444a8bef81921599e16ca7b"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/prepare-cost-protocol.py",
+        "bytes": 28164,
+        "sha256": "f9dab9d3e94b51ebc75ce9e8ce192a0c8e23c26329714c00cfea8e8310f536e2"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/prepare-owner-cost-contract.py",
+        "bytes": 13795,
+        "sha256": "b3916d2b48e8e7a0b61771a14ad7e911bfa9fd7691eb6ac9bcaf99c79897c9f4"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/qualify-cost-owner-graphs.mjs",
+        "bytes": 47487,
+        "sha256": "3b9f006424fa27080993271d57d086537665dc25a6926b2b2a9ec48e48220ad5"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/record-cost-log-transport.py",
+        "bytes": 3763,
+        "sha256": "ced9c309bc72f791b3f451d4793e11a2830f414019c08aeb1df22522b671dc7a"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/record-cost-owner-source-inventory.mjs",
+        "bytes": 12532,
+        "sha256": "38077e5103a8657eec7dce1fdbc65506327e1a6f29a4bfcd622efb84119d73eb"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/review-owner-costs.py",
+        "bytes": 70762,
+        "sha256": "4e842901740ba1ac384df6198dabf766f7f7dfd6778917a183234ed9f02a994e"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/write-cost-results.py",
+        "bytes": 40623,
+        "sha256": "0b4a31393535713d676a09a8b78ad67dbcbfeb2a0e835cabc4f6e709210afcc3"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/owner-cost-contract.md",
+        "bytes": 12061,
+        "sha256": "9bf0fdaf60f6c8d3b45bed8657b902c2fc66dcc4fc7c1e6d5671d668c2166049"
+      }
+    ],
+    "qualification": "This refers to the twelve reviewed primary tools/contract only. The separate partial-regression runner has its own retained failures and correction03 review; it is not silently treated as unchanged from the original review's supporting inputs."
+  },
+  "initialCase": {
+    "resolution": {
+      "path": "docs/migration/lot4b-evidence/tria-case-resolution.json",
+      "bytes": 2135,
+      "sha256": "db90a62494a55bb8c96e59676a6bd9baf9521421cc3ea4f084acd23c70cf46fc"
+    },
+    "status": "target_three_levels_achieved",
+    "cumulativeChargedSeconds": 374.14091,
+    "maximumCumulativeSeconds": 2400,
+    "clockReset": false,
+    "altered": false
+  },
+  "continuationContract": {
+    "schema": "logos-engine.relative-arrangement-browser-qa-continuation.v1",
+    "status": "completed",
+    "scope": "continuous_final_browser_qa_interval",
+    "requiredForPassingBrowser": true,
+    "exactInputBindings": [
+      "initialResolution",
+      "sourceManifest",
+      "browserReceipt"
+    ],
+    "equalityBindings": [
+      "game equals selected game",
+      "initialCaseStatus equals unchanged initial case status",
+      "browserStatus equals actual browser status",
+      "cumulativeBeforeSeconds equals initial cumulativeChargedSeconds",
+      "startedAt and finishedAt equal corresponding browser instants",
+      "browser.cumulativeGameCaseSeconds equals cumulativeAfterSeconds"
+    ],
+    "timeOrdering": "initial resolvedAt <= QA startedAt < QA finishedAt <= readiness finalizedAt",
+    "arithmetic": "Decimal(elapsedSeconds) equals the exact day/second/microsecond timestamp interval. Decimal(cumulativeAfterSeconds) equals Decimal(initial cumulativeChargedSeconds) plus that interval and is <=2400.",
+    "resetAllowed": false,
+    "gapQualification": "The interval between the closed initial case and the first final-browser QA attempt is outside this additional continuous QA phase. The phase itself must retain its original start across every attempt and retry.",
+    "blockedInfrastructureWithoutContinuation": {
+      "allowed": true,
+      "requiredBrowserGameActions": 0,
+      "requiredVerifiedFunctionalChecks": [],
+      "cumulativeMeaning": "Only the original resolved case total is reported; no additional measured/charged QA duration is claimed."
+    }
+  },
+  "checks": [
+    {
+      "name": "initial_resolution_immutable_and_bound",
+      "passed": true,
+      "finding": "The original case resolution is still loaded and verified under its unchanged contract, then fingerprinted exactly by the continuation. The original status, successful cold case, no reset and prior cumulative interval checks remain."
+    },
+    {
+      "name": "new_phase_binds_actual_frozen_source_and_browser_receipt",
+      "passed": true,
+      "finding": "The continuation must name the selected game, exact final source manifest, exact browser receipt and its actual status. All linked records enter the existing input inventory and are rechecked before exclusive output."
+    },
+    {
+      "name": "exact_positive_interval_and_cumulative_arithmetic",
+      "passed": true,
+      "finding": "Timezone-aware instants must match the browser interval and be ordered after initial resolution. Decimal arithmetic uses days, seconds and microseconds directly, avoiding a float total_seconds tolerance in the new interval. Positive duration, exact addition and <=2400 enforce the retained budget."
+    },
+    {
+      "name": "no_future_or_incomplete_qa_qualification",
+      "passed": true,
+      "finding": "The receipt must be completed and finish before readiness. Passing browser evidence cannot omit it. Numeric inputs exclude booleans and non-finite values through finite()."
+    },
+    {
+      "name": "initial_total_and_added_duration_remain_distinct",
+      "passed": true,
+      "finding": "readiness.game exposes initialResolvedCumulativeSeconds, browserQaContinuation, browserQaElapsedSeconds, cumulativeSeconds and remainingSeconds separately. Existing browser status/qualification and final recorded-replay scope remain."
+    },
+    {
+      "name": "cost_criteria_population_and_structural_contract_unchanged",
+      "passed": true,
+      "finding": "The eleven other primary fingerprints match the preceding addendum. No cost comparator, population of 32 sessions and 400 actions, phase diagnostic or global rule of strictly below 10% per game changes."
+    },
+    {
+      "name": "historical_reviews_and_prior_script_retained",
+      "passed": true,
+      "finding": "The old script copy exactly matches its previously reviewed SHA-256. The original cost review and its phrase-correction addendum remain unchanged."
+    },
+    {
+      "name": "consumer_field_conflict_not_found",
+      "passed": true,
+      "finding": "A targeted source search found no reads of the replaced game cumulative fields in consolidation, independent review, result renderer or publication wrapper. Those tools retain readiness through its fingerprint and input chain."
+    }
+  ],
+  "limits": [
+    "This validator checks consistency of declared browser times and retained fingerprints. It cannot independently establish that the recorder included every earlier attempt. The runbook expressly requires starting before the first attempt and retaining that same start across retries; the actual browser receipt and journal must substantiate this when created.",
+    "A blocked_infrastructure receipt with zero actions may remain without a continuation under the stated contract. Its retained initial total must not be described as a measurement of every browser preparation or infrastructure activity.",
+    "This is one continuous additional final-QA phase bound to the original closed case. It is not a general multi-phase ledger allowing later phases to reset their cumulativeBeforeSeconds to the original total.",
+    "No QA receipt, browser result, readiness receipt, cost declaration or measured acceptance is created by this review. All executable checks remain deferred until root explicitly releases 5A."
+  ],
+  "supportingDocuments": [
+    {
+      "path": "docs/migration/lot4b-evidence/planning/browser-qa-continuation-correction.md",
+      "bytes": 6022,
+      "sha256": "959f43c3e1884d6f2eb1368fbb9db221a1d79eb1f1047901380ae4a256c540d1"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/final-execution-runbook.md",
+      "bytes": 22770,
+      "sha256": "8aaa63bb2e7aaf1e52b93cd1fdfb23d6e314dfe72e092ae3dd8a5e72a40f9b76"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/workshop-projection-review-03.json",
+      "sha256": "73dc21440f6ba87d2bf10bf67caf88a250c26e170688c23dfe1a2662e9ce5ea8"
+    }
+  ],
+  "futureEvidence": {
+    "browserQaContinuationReceipt": null,
+    "browserOutcome": null,
+    "readinessReceipt": null,
+    "costVerdict": null
+  },
+  "execution": {
+    "sourceTextRead": true,
+    "lightweightFingerprints": true,
+    "pythonOrNodeProcesses": 0,
+    "syntaxChecks": 0,
+    "imports": 0,
+    "tests": 0,
+    "builds": 0,
+    "archiveOrCampaignDecompressions": 0,
+    "replays": 0,
+    "browserActions": 0,
+    "games": 0,
+    "captures": 0,
+    "benchmarks": 0
+  },
+  "predeclarationRequirement": "The future protocol must pin the corrected readiness fingerprint 579f69f3..., alongside the separately reviewed corrected partial-regression runner. These are prospective changes, not postmeasurement substitutions."
+}

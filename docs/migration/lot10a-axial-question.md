@@ -12,6 +12,8 @@ La [première validation isolée](lot10a-evidence/README.md) utilise le gel `cab
 
 La fusion du prédécesseur publié **5A / Site 84**, commit `51e2813dedb2d71001290f94f100605e0327ead3`, conserve ses optimisations communes et les raccordements Axial. L’[audit de cette intégration intermédiaire](lot10a-evidence/diagnostic/post5a-inventory-run.json) trouve **58/76 entrées**, 178 composants vérifiés, 146 transferts partiels et 1 045 modules en attente, sans défaillance sémantique. Les [six scénarios du caller Axial](lot10a-evidence/diagnostic/post5a-kernel-run.json) passent de nouveau sur cette fusion, avec sources et test inchangés pendant l’exécution. La version finale 10A, son gel et son coût attendent toujours les prédécesseurs publiés 4B et 7B.
 
+La fusion de **4B / Site 86**, commit `082ce553ce4dfbac37071a64497bcca129b7ced0`, conserve ensuite ses arrêts locaux de groupe et ses gardes de priorité. Le [diagnostic intermédiaire](lot10a-evidence/diagnostic/post4b-inventory-run.json) établit **59/76 entrées**, 181 composants vérifiés, 146 transferts partiels et 1 042 modules en attente, avec zéro défaillance de mapping. La [réconciliation native](lot10a-evidence/coordination/published-4b-site86-reconciliation.json) conserve les 285 autres entrées natives du prédécesseur ; les différences portent seulement sur les trois modules Axial et leur raccordement au runtime. L’étiquette 0.54 est héritée et provisoire ; le gel final attend 7B.
+
 ## Comportement porté
 
 La mesure retrouve les corps à barres opposées, leurs axes, leurs marqueurs, les ancres et l'unique cible. La sélection doit avoir été acquise par un contraste public compatible. Une sélection seulement dessinée, ambiguë ou incompatible avec la scène courante n'autorise pas Axial.

@@ -1,0 +1,75 @@
+{
+  "schema": "logos-engine.retained-merge-whitespace-review.v1",
+  "status": "reviewed_with_inherited_diagnostics",
+  "recordedAt": "2026-11-10T23:05:09.161089+00:00",
+  "checks": [
+    {
+      "label": "all-merged-history",
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check"
+      ],
+      "startedAt": "2026-11-10T23:05:09.050635+00:00",
+      "finishedAt": "2026-11-10T23:05:09.112949+00:00",
+      "exitCode": 2,
+      "stdout": "docs/migration/lot4b-evidence/development/typecheck-01.log:5: new blank line at EOF.\ndocs/migration/lot4b-evidence/development/typecheck-merged-site82.log:5: new blank line at EOF.\ndocs/migration/lot4b-evidence/planning/roadmap-final-patch-plan.md:236: new blank line at EOF.\ndocs/migration/lot4b-evidence/review-owner-costs.py:939: new blank line at EOF.\n",
+      "stderr": ""
+    },
+    {
+      "label": "resolved-source-and-documentation",
+      "command": [
+        "git",
+        "diff",
+        "--cached",
+        "--check",
+        "--",
+        ".gitattributes",
+        ".gitignore",
+        "src",
+        "scripts/audit-v6-entry-points.ts",
+        "tests",
+        "migration",
+        "docs/migration/v6-coverage.json",
+        "docs/migration/v6-entry-point-progress.json",
+        "docs/migration/v6-delivery-roadmap.md",
+        "docs/migration/v6-native-transfer.md",
+        "docs/migration/lot10a-axial-question.md",
+        "docs/migration/lot10a-evidence"
+      ],
+      "startedAt": "2026-11-10T23:05:09.112967+00:00",
+      "finishedAt": "2026-11-10T23:05:09.152968+00:00",
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "inheritedFiles": [
+    {
+      "path": "docs/migration/lot4b-evidence/development/typecheck-01.log",
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "bytes": 149,
+      "byteIdenticalToPublishedSite86": true
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/typecheck-merged-site82.log",
+      "sha256": "617dc12a2c337d93b91e07bef62eae59b1abe157b737d909052c3e9d2db0d09d",
+      "bytes": 149,
+      "byteIdenticalToPublishedSite86": true
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/roadmap-final-patch-plan.md",
+      "sha256": "f2c343bcbee8bb761781b6adc65f2dc04251561baad82a4a503fe7b0136c80e7",
+      "bytes": 29360,
+      "byteIdenticalToPublishedSite86": true
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/review-owner-costs.py",
+      "sha256": "4e842901740ba1ac384df6198dabf766f7f7dfd6778917a183234ed9f02a994e",
+      "bytes": 70762,
+      "byteIdenticalToPublishedSite86": true
+    }
+  ],
+  "qualification": "The full staged-history whitespace check remains exit2 on four exact published4B files. Their bytes and historical evidence/tool fingerprints are preserved. The separately scoped source and resolved-documentation check passes; it does not relabel the full check as passed."
+}

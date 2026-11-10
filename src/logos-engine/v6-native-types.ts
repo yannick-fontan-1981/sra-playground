@@ -137,6 +137,9 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
     inputs: readonly NativeCommand[], remaining: number, execution?: NativeExecution): NativeMaybePromise<P | null>;
   /** A measured current abstention, such as an incomplete bounded search. */
   currentProposalRefusal?(observation: NativeObservation): NativeRecord | null;
+  /** Source-local routing barrier, read only after this entry returned null.
+   * A recognized interface may stop its remaining group without stopping later groups. */
+  sourceGroupStop?(group: string, entry: string | null, observation: NativeObservation): NativeRecord | null;
   preservationObligations?(observation: NativeObservation, rows: NativeRows): NativeMaybePromise<readonly NativeRecord[]>;
   bind?(proposal: P, domain: ObservedInputDomain): NativeMaybePromise<void>;
   before(proposal: P, index: number, publicPacket: NativePublicObservation, observation: NativeObservation): NativeMaybePromise<NativeBeforeResult>;

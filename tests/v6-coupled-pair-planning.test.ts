@@ -171,7 +171,7 @@ test('observed, coupled and graph source entries share one retained public_occur
     ['occluded_catalogue_composition', 'queued_field_composition', 'product_panel_composition', 'labeled_sequence_composition',
       'linked_packet_composition', 'trace_field_composition', 'cell_patch_composition', 'observed_occurrence_recall',
       'observed_program_composition', 'typed_material_flow', 'radial_port_composition', 'observed_framed_analogy',
-      'field_service_composition', 'rooted_quota_composition', 'framed_window_composition', 'coupled_prefix_reference', 'recurrent_series']);
+      'field_service_composition', 'rooted_quota_composition', 'framed_window_composition', 'coupled_prefix_reference', 'relative_arrangement', 'recurrent_series']);
   assert.ok(coverage.sourceGroups.indexOf(goal) < coverage.sourceGroups.indexOf(window));
   assert.equal(coverage.fullV6Parity, false);
 });

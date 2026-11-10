@@ -1,0 +1,455 @@
+{
+  "schema": "logos-engine.lot4b-final-cost-delivery-review.v1",
+  "status": "documentary_review_no_publication_blocking_finding",
+  "startedAt": "2026-11-10T22:55:07.681948+00:00",
+  "completedAt": "2026-11-10T22:55:07.693291+00:00",
+  "reviewer": "/root/validation_plan",
+  "blockingFindings": [],
+  "globalCasesExactAsRecorded": [
+    {
+      "case": "STCK",
+      "sessionsPerVersion": 8,
+      "beforeMedianMs": 10986.992674000001,
+      "afterMedianMs": 10787.801006499998,
+      "medianRelativeIncrease": -0.018129771577201192,
+      "accepted": true,
+      "result": "within_user_global_budget"
+    },
+    {
+      "case": "SMLP",
+      "sessionsPerVersion": 8,
+      "beforeMedianMs": 16041.944504,
+      "afterMedianMs": 16480.765659999997,
+      "medianRelativeIncrease": 0.027354611274872553,
+      "accepted": true,
+      "result": "within_user_global_budget"
+    }
+  ],
+  "aggregateDiagnostics": {
+    "status": "budget_review_required",
+    "budgetMetricCount": 16,
+    "withinObservedBudget": 14,
+    "unresolved": [
+      {
+        "case": "SMLP",
+        "stage": "known_prefix_guard",
+        "result": "over_budget_with_noise_unresolved",
+        "medianRelativeIncrease": 0.12069030093961497
+      },
+      {
+        "case": "SMLP",
+        "stage": "restoration",
+        "result": "over_budget_with_noise_unresolved",
+        "medianRelativeIncrease": 0.2983067024536985
+      }
+    ]
+  },
+  "cohortDiagnostics": [
+    {
+      "cohort": "cohort_1",
+      "status": "budget_review_required",
+      "withinObservedBudget": 15,
+      "budgetMetricCount": 16,
+      "unresolved": [
+        {
+          "case": "SMLP",
+          "stage": "restoration",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.4223132525733231
+        }
+      ]
+    },
+    {
+      "cohort": "cohort_2",
+      "status": "budget_review_required",
+      "withinObservedBudget": 15,
+      "budgetMetricCount": 16,
+      "unresolved": [
+        {
+          "case": "SMLP",
+          "stage": "known_prefix_guard",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.1462486630723061
+        }
+      ]
+    }
+  ],
+  "aggregateP95OverrunsAbove10Percent": [
+    {
+      "case": "STCK",
+      "stage": "known_prefix_service",
+      "displayedIncreasePercent": 32.773109,
+      "beforeP95Ms": 11.644137999996019,
+      "afterP95Ms": 15.460283999993408,
+      "samplesPerVersion": 32
+    },
+    {
+      "case": "STCK",
+      "stage": "known_prefix_request",
+      "displayedIncreasePercent": 26.838601,
+      "beforeP95Ms": 13.74986699999863,
+      "afterP95Ms": 17.440138999998453,
+      "samplesPerVersion": 32
+    },
+    {
+      "case": "SMLP",
+      "stage": "known_prefix_guard",
+      "displayedIncreasePercent": 23.351327,
+      "beforeP95Ms": 0.4860880000051111,
+      "afterP95Ms": 0.5995960000000196,
+      "samplesPerVersion": 48
+    },
+    {
+      "case": "SMLP",
+      "stage": "acquisition_and_persistence",
+      "displayedIncreasePercent": 12.278213,
+      "beforeP95Ms": 2419.8288979999925,
+      "afterP95Ms": 2716.94065199999,
+      "samplesPerVersion": 72
+    }
+  ],
+  "population": {
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "excludedWarmupSessions": 8,
+    "excludedWarmupActions": 24,
+    "excludedMeasuredSessions": 0,
+    "excludedOutliers": 0
+  },
+  "historicalStrict": {
+    "passed": false,
+    "status": "failed_work_metadata",
+    "failureReceipt": {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/aggregation-failure.json",
+      "bytes": 4732,
+      "sha256": "5de6b0b461c66606424f08a2369328de57b9ec1b1927740c3b353f0d3ae4b415"
+    },
+    "failureLog": {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/aggregation-failure.log",
+      "bytes": 204711,
+      "sha256": "ca4de3552bb5fadab6870aa98e9a82db176eea4c1a98881996c08dbf66e79d8b"
+    },
+    "tool": {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    }
+  },
+  "toolContinuity": {
+    "declaredConsolidatorAndReviewer": {
+      "consolidator": {
+        "path": "docs/migration/lot4b-evidence/consolidate-owner-costs.mjs",
+        "bytes": 52881,
+        "sha256": "7691a06e88d60139941ace27605aa319aa9a01e31a7e315630abb1d8cef7e123"
+      },
+      "reviewer": {
+        "path": "docs/migration/lot4b-evidence/review-owner-costs.py",
+        "bytes": 70762,
+        "sha256": "4e842901740ba1ac384df6198dabf766f7f7dfd6778917a183234ed9f02a994e"
+      }
+    },
+    "postMeasurementToolCorrectionFoundInReviewedChain": false
+  },
+  "retainedQualifications": [
+    "The acceptance rule is the predeclared pooled session median strictly below+10percent for each game; phase diagnostics remain14/16 and both cohorts15/16.",
+    "All four aggregate p95 increases above+10percent and adverse cohort diagnostics remain displayed; p95 is withheld below20samples.",
+    "The strict historical work-identity aggregation remains failed. Exactly four structural count paths are qualified against the prior fixture, with432positions retained. Uncaptured private measured graph leaves are not retrospectively proved.",
+    "The two missing baseline dependency links were prepared before the window and checked with the same tool; the initial static failure remains retained.",
+    "After the window, an overly strict byte-equality bookkeeping assertion encountered two explanatory7Bstatus changes. The retained quiet commitment remained; no measurement, cost tool, rule or population changed.",
+    "Pause and memory remain bounded observations; no multi-hour stability, immediate universal interruption or functional game success is inferred from cost."
+  ],
+  "cohortProjectionNote": "The retained cohort objects intentionally project case+metrics. Their32metric rows exactly match the original comparison receipts. Original inspection/Pause/session metadata remain in those receipts and the Markdown; whole-object equality is not the intended schema contract.",
+  "publicationVerifier": {
+    "receipt": {
+      "path": "docs/migration/lot4b-evidence/integrated-final/publication-inputs.json",
+      "bytes": 147344,
+      "sha256": "ac3ffae3b17c8f4642689fb1c2c28404b91d7d29609b417beb67a21da0cb50bc"
+    },
+    "status": "integrity_verified_with_predeclared_owner_cost"
+  },
+  "checks": [
+    {
+      "name": "global_receipts_agree_at_full_recorded_precision",
+      "passed": true
+    },
+    {
+      "name": "global_rule_is_separate_strict_per_game_under10percent",
+      "passed": true
+    },
+    {
+      "name": "global_acceptance_two_games",
+      "passed": true
+    },
+    {
+      "name": "independent_arithmetic_receipt_actual3960checks",
+      "passed": true
+    },
+    {
+      "name": "aggregate_preserves14of16_and_both_overruns",
+      "passed": true
+    },
+    {
+      "name": "two_cohorts_preserve15of16_each",
+      "passed": true
+    },
+    {
+      "name": "all32_cohort_metric_rows_equal_original_comparators",
+      "passed": true
+    },
+    {
+      "name": "all32sessions400actions_and8warmups24actions_retained",
+      "passed": true
+    },
+    {
+      "name": "no_discarded_duration_or_selected_cohort_declared",
+      "passed": true
+    },
+    {
+      "name": "all_diagnostics_rendered_with_p95_sample_limit",
+      "passed": true
+    },
+    {
+      "name": "four_adverse_aggregate_p95_values_are_visible",
+      "passed": true
+    },
+    {
+      "name": "historical_strict_failure_not_reclassified",
+      "passed": true
+    },
+    {
+      "name": "qualified_counts_do_not_claim_full_graph_equality",
+      "passed": true
+    },
+    {
+      "name": "structural_fixture_and_contract_precede_measurement",
+      "passed": true
+    },
+    {
+      "name": "declared_tool_fingerprints_equal_postmeasurement_generators",
+      "passed": true
+    },
+    {
+      "name": "premeasurement_dependency_fix_did_not_change_tool",
+      "passed": true
+    },
+    {
+      "name": "official_abba_complete_and_integrity_passed",
+      "passed": true
+    },
+    {
+      "name": "cooperative_isolation_and_completion_are_explicit",
+      "passed": true
+    },
+    {
+      "name": "isolation_bookkeeping_incident_preserves_measurements",
+      "passed": true
+    },
+    {
+      "name": "pause_memory_and_private_graph_claims_are_bounded",
+      "passed": true
+    },
+    {
+      "name": "official_publication_wrapper_terminal_and_qualified",
+      "passed": true
+    },
+    {
+      "name": "reviewed_json_and_markdown_unchanged",
+      "passed": true
+    }
+  ],
+  "checkedCount": 22,
+  "inputsBefore": [
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/publication-inputs.json",
+      "bytes": 147344,
+      "sha256": "ac3ffae3b17c8f4642689fb1c2c28404b91d7d29609b417beb67a21da0cb50bc"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/aggregation-failure.json",
+      "bytes": 4732,
+      "sha256": "5de6b0b461c66606424f08a2369328de57b9ec1b1927740c3b353f0d3ae4b415"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/comparison.json",
+      "bytes": 25417,
+      "sha256": "f77b0de27b5286819db0f9ad65e3d07cd5b283a1c20e9e660a60c25e9bb0c3e4"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/comparison.json",
+      "bytes": 25420,
+      "sha256": "bf8714d55eba72dc73c236cfe48226c75b0639197ede8bb86f835c09ebb196a5"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/coordinated-isolation-completion.json",
+      "bytes": 3288,
+      "sha256": "51c2875019a47be0db4a87659b4dbf62d6472917539ca87fef7f44e8ee537633"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/coordinated-isolation.json",
+      "bytes": 2080,
+      "sha256": "0cb02fa8b949190573ab6f887b5f7b0c9ac5891f0541735a13bba7fc3be81312"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/declaration.json",
+      "bytes": 5556,
+      "sha256": "2940ab2c1b5b303ea103fbf6f3a9f1edaa0b83ff2b40cfbf535bda54f477bd20"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-completion-attempt1.json",
+      "bytes": 2643,
+      "sha256": "5c8fe0fcb9de53e4ef0f767c7d76e76de8c70e6b4624c9d6285230733f55dd76"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-growth-comparison.json",
+      "bytes": 244993,
+      "sha256": "5c6510f56105431e127b565d1d5b8d8a0cd2cdd52d684392040ff7bfc1dcd576"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-growth-contract.json",
+      "bytes": 22768,
+      "sha256": "ae75c71f8baafcfd9d6f2c607981351481ec531e26e7656d3c7d0fe2a1da1909"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-growth-review.json",
+      "bytes": 764063,
+      "sha256": "445b0283d1ae3860a2639da1af8f28cd369fa359424d846357bf8e37772098f1"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-structural-attribution.json",
+      "bytes": 73280,
+      "sha256": "390d7a6801c9191146f372d842404eaa6cc3922f92b452e613589652d205816c"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-structural-fixture.json",
+      "bytes": 60036,
+      "sha256": "67d65dcaf4358af2237d3e3d6620141679890c89eafb5add264d1ea953c6b688"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/premeasurement-dependency-preparation.json",
+      "bytes": 2163,
+      "sha256": "882082cb1d68a53159fe07ce25e3d2a9d56b184969d17edb445e2ee2ad8e1654"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/results-render.json",
+      "bytes": 10607,
+      "sha256": "8809add78fd5a78ebc7e77b4e003214c4455c81cb3866d6fe79acec012f02280"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/results.md",
+      "bytes": 33750,
+      "sha256": "1370240fe6b6373d1221c1813bc50a96a6c6d123097bdd104219c831431ffc8c"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/static-preflight-recheck.json",
+      "bytes": 2455,
+      "sha256": "c53a07cfde0679681c26749ed2941db4121971322dfb55e302bf89043251189a"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/window.json",
+      "bytes": 10543,
+      "sha256": "cb56920dab8a5f2404f72e428c80b7fc4db7f7ff6fbb401b30a2cd064223184d"
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/publication-inputs.json",
+      "bytes": 147344,
+      "sha256": "ac3ffae3b17c8f4642689fb1c2c28404b91d7d29609b417beb67a21da0cb50bc"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/aggregation-failure.json",
+      "bytes": 4732,
+      "sha256": "5de6b0b461c66606424f08a2369328de57b9ec1b1927740c3b353f0d3ae4b415"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/comparison.json",
+      "bytes": 25417,
+      "sha256": "f77b0de27b5286819db0f9ad65e3d07cd5b283a1c20e9e660a60c25e9bb0c3e4"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/comparison.json",
+      "bytes": 25420,
+      "sha256": "bf8714d55eba72dc73c236cfe48226c75b0639197ede8bb86f835c09ebb196a5"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/coordinated-isolation-completion.json",
+      "bytes": 3288,
+      "sha256": "51c2875019a47be0db4a87659b4dbf62d6472917539ca87fef7f44e8ee537633"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/coordinated-isolation.json",
+      "bytes": 2080,
+      "sha256": "0cb02fa8b949190573ab6f887b5f7b0c9ac5891f0541735a13bba7fc3be81312"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/declaration.json",
+      "bytes": 5556,
+      "sha256": "2940ab2c1b5b303ea103fbf6f3a9f1edaa0b83ff2b40cfbf535bda54f477bd20"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-completion-attempt1.json",
+      "bytes": 2643,
+      "sha256": "5c8fe0fcb9de53e4ef0f767c7d76e76de8c70e6b4624c9d6285230733f55dd76"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-growth-comparison.json",
+      "bytes": 244993,
+      "sha256": "5c6510f56105431e127b565d1d5b8d8a0cd2cdd52d684392040ff7bfc1dcd576"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-growth-contract.json",
+      "bytes": 22768,
+      "sha256": "ae75c71f8baafcfd9d6f2c607981351481ec531e26e7656d3c7d0fe2a1da1909"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-growth-review.json",
+      "bytes": 764063,
+      "sha256": "445b0283d1ae3860a2639da1af8f28cd369fa359424d846357bf8e37772098f1"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-structural-attribution.json",
+      "bytes": 73280,
+      "sha256": "390d7a6801c9191146f372d842404eaa6cc3922f92b452e613589652d205816c"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-structural-fixture.json",
+      "bytes": 60036,
+      "sha256": "67d65dcaf4358af2237d3e3d6620141679890c89eafb5add264d1ea953c6b688"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/premeasurement-dependency-preparation.json",
+      "bytes": 2163,
+      "sha256": "882082cb1d68a53159fe07ce25e3d2a9d56b184969d17edb445e2ee2ad8e1654"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/results-render.json",
+      "bytes": 10607,
+      "sha256": "8809add78fd5a78ebc7e77b4e003214c4455c81cb3866d6fe79acec012f02280"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/results.md",
+      "bytes": 33750,
+      "sha256": "1370240fe6b6373d1221c1813bc50a96a6c6d123097bdd104219c831431ffc8c"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/static-preflight-recheck.json",
+      "bytes": 2455,
+      "sha256": "c53a07cfde0679681c26749ed2941db4121971322dfb55e302bf89043251189a"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/window.json",
+      "bytes": 10543,
+      "sha256": "cb56920dab8a5f2404f72e428c80b7fc4db7f7ff6fbb401b30a2cd064223184d"
+    }
+  ],
+  "inputsUnchanged": true,
+  "execution": {
+    "jsonAndMarkdownOnlyRead": true,
+    "sourceToolOrTestModified": false,
+    "benchmarkMeasurementExecuted": false,
+    "benchmarkCalculatorOrComparatorExecuted": false,
+    "officialArithmeticReviewReexecuted": false,
+    "nativeTestBuildOrCaptureExecuted": false
+  },
+  "qualification": "Short independent documentary conclusion review, not a new benchmark calculation or replacement of the3960-check arithmetic review. Exact recorded median values and metric rows were confronted across the qualified receipts and the rendered report. No publication blocker was identified within this scope; no actual deployment is claimed."
+}

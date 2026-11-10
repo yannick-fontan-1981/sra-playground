@@ -1,0 +1,3423 @@
+{
+  "schema": "logos-engine.lot4b-publication-inputs.v1",
+  "status": "integrity_verified_with_predeclared_owner_cost",
+  "recordedAt": "2026-11-10T22:48:49.366500+00:00",
+  "generators": [
+    {
+      "path": "docs/migration/lot4b-evidence/verify-publication-inputs.py",
+      "sha256": "75c8ba20cab0f0d231ce7193fe42664aa8ad75fef0b418778e018475615ad20c",
+      "bytes": 15729
+    },
+    {
+      "path": "scripts/verify-native-delivery.py",
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+      "bytes": 26494
+    },
+    {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "bytes": 5421
+    },
+    {
+      "path": "scripts/compare-v54-reactive-public-evidence.py",
+      "sha256": "3274acc5ed28a40f91ad0ee2e34c247ab160919ea43855cf514b4fbc22ef6a69",
+      "bytes": 18850
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+      "bytes": 3361
+    }
+  ],
+  "directory": "docs/migration/lot4b-evidence/integrated-final",
+  "performanceDirectory": "docs/migration/lot4b-evidence/performance-integrated",
+  "nativeVersion": "0.54.0",
+  "nativeSourceDigest": "f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9",
+  "deliveryIntegrity": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/delivery-integrity.json",
+    "sha256": "c27b10eea5302a5b15563e8c64476ffe48ad20780e0e8339d85e3cae00be9e63",
+    "bytes": 10357
+  },
+  "matchedFileInventories": {
+    "native": 286,
+    "archive": 297,
+    "sourceAndTests": 657,
+    "buildInputs": 351,
+    "regressionExecutionInputs": 10
+  },
+  "tests": {
+    "tests": 4048,
+    "pass": 4048,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "regressions": {
+    "passed": 8,
+    "total": 8,
+    "comparisonChecksPassed": 136,
+    "comparisonChecksExpected": 136,
+    "passiveOwnerPrefixesChecked": 0,
+    "passiveOwnerPrefixesPassed": 0,
+    "passiveOwnerTransitionsRetained": 0,
+    "prevalidatedTotals": {
+      "commands": 309,
+      "completePublicPackets": 317,
+      "animationFrames": 1487,
+      "prefixes": 227,
+      "requests": 536,
+      "naturalLevelBoundaries": 24
+    }
+  },
+  "partialRegression": {
+    "receipt": {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/qualification.json",
+      "sha256": "4e8fc8dfae9959484a85b0962725be0be453e79d612ace9f6608c79e0711e18e",
+      "bytes": 93179
+    },
+    "status": "partial_trajectory_preserved",
+    "game": "LKEY",
+    "rawCampaignStatus": "failed",
+    "targetCompleted": false,
+    "actions": 25,
+    "publicPackets": 26,
+    "boundaries": 2,
+    "reason": "frontier_unknown",
+    "includedInStrictRegressionTotals": false,
+    "qualification": "Exact preservation is limited to the declared trajectory scope. The raw historical and current campaigns remain failed at their original unresolved target. No live game, third-level success, full original-caller parity, complete owner-state equality or speed result is claimed. A failed or absent terminal qualification must not be excluded from later reporting."
+  },
+  "inputsBefore": [
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/docs/migration/lot4b-evidence/performance-integrated/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "bytes": 1451
+    },
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/docs/migration/lot4b-evidence/performance-integrated/comparison-policy.json",
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+      "bytes": 991
+    },
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/docs/migration/lot4b-evidence/performance-integrated/protocol.md",
+      "sha256": "f3c85310fd2ec64836875dee04822723eca5136795715ac2d6295f644997385f",
+      "bytes": 12573
+    },
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "bytes": 53583
+    },
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "bytes": 111624
+    },
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "bytes": 48531
+    },
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+      "bytes": 46966
+    },
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "dist/assets/v6-agent-worker-D7_Txg6T.js",
+      "sha256": "f16238fb553fa0357510f6bfba67a7803144ed667e795e0abfb65b88ade12faf",
+      "bytes": 6660281
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+      "bytes": 41445
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+      "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+      "bytes": 24340
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+      "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+      "bytes": 39060
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+      "bytes": 19976
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/check-cost-static-inputs.py",
+      "sha256": "6aaa8170be30bd4c69f3af5ad2d501475d3967a00fa96e6f5843ecee4357039e",
+      "bytes": 16713
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+      "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+      "bytes": 26568
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/declaration.json",
+      "sha256": "ca371fbf437d2434932c74238a75ab0eb6cd6ef27e8db5aa329c2d179c8c667d",
+      "bytes": 4105
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+      "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+      "bytes": 2630905
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+      "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102",
+      "bytes": 56466
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+      "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+      "bytes": 4349054
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+      "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+      "bytes": 1649205
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+      "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+      "bytes": 8174480
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+      "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba",
+      "bytes": 2585868
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+      "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+      "bytes": 10678168
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+      "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3",
+      "bytes": 13577757
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/capture-cost-owner-graphs.mjs",
+      "sha256": "13cc2498b7e27e7b90fe7216e91c4a329e8e9a37c7d7671b655039daead6f65f",
+      "bytes": 23834
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/check-cost-static-inputs.py",
+      "sha256": "9cbe543d0166d366d4d8e576dcc8553c7a8116d4d657202c5be29a4d2607a121",
+      "bytes": 23603
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/consolidate-owner-costs.mjs",
+      "sha256": "7691a06e88d60139941ace27605aa319aa9a01e31a7e315630abb1d8cef7e123",
+      "bytes": 52881
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+      "bytes": 3161161
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+      "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3",
+      "bytes": 13286
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-relative-arrangement-source-parity-02.json.gz",
+      "sha256": "97b79e0b6d309dff79a2a49f8760d18348b617ac04704576e541f6143562c8bb",
+      "bytes": 65114
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/finalize-cost-readiness.py",
+      "sha256": "579f69f39b1da4dcf13629710faf41f07c90e99fe444a8bef81921599e16ca7b",
+      "bytes": 38778
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-baseline/source-manifest.json",
+      "sha256": "631951d71c675e5c29f712e92724f17e446915807570581c049357bb97bf46b3",
+      "bytes": 33584
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/browser-qa-continuation-test-correction-binding.json",
+      "sha256": "76ea7a40d1e5caac0c3b023da6aa69b131123e8e20c2ec65fc5dce6b2de95cc6",
+      "bytes": 1789
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/browser-qa-test-correction-binding.json",
+      "sha256": "f94d60ed2e3a4c562f0724f20124b5ab69b3275f856a2771460ee39bd47396b4",
+      "bytes": 3840
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/observed-states.json",
+      "sha256": "4262133043c084ec18e0cff925d19bf2ac7d36ee6479cb112fd9f6903b9f5856",
+      "bytes": 3515
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/preview-start.json",
+      "sha256": "8c43ecf96f3772d1c12add47825b5564b9e4bc64e1e7d0cae115992fc1f2ac10",
+      "bytes": 493
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/preview-start.log",
+      "sha256": "f9393e80b0c26ca24f28a0b25f4c1d032efe90dfc75ec07d9690b4627ec1d1a7",
+      "bytes": 48
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/preview-stopped.json",
+      "sha256": "b667eb921ddb1e52a1820aba7dc553cbfbf92b7af4f4db39da8c037bcb43be9a",
+      "bytes": 482
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/delivery-integrity.json",
+      "sha256": "c27b10eea5302a5b15563e8c64476ffe48ad20780e0e8339d85e3cae00be9e63",
+      "bytes": 10357
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial-contract.json",
+      "sha256": "8fa8aecbb026ca3bb16deed0033390f7d8f8968147f4b02ffdd7478c36635c15",
+      "bytes": 4330
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/progress.jsonl",
+      "sha256": "0450939de7b36579950315ef855a6488aa5472c61b1cea6891865e866abbdcf4",
+      "bytes": 154857
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/public-journal.jsonl",
+      "sha256": "e13bc45b6969db3d303ed4e7f3c13c98a6c1d0963875bc9d1a254e67c2224762",
+      "bytes": 640845
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/public-journal.jsonl.gz",
+      "sha256": "276d8f2fd01ba3bde13b664c9591d5dc34b753ff8c2c9bcaa9e9f24d656379cd",
+      "bytes": 10823
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/qualification.json",
+      "sha256": "4e8fc8dfae9959484a85b0962725be0be453e79d612ace9f6608c79e0711e18e",
+      "bytes": 93179
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz",
+      "sha256": "824a6fbe3f92ad946b6da2362f30bab2d23c3db8aa50933e59e666da7a81d43b",
+      "bytes": 5733885
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.part000",
+      "sha256": "6f0d4e1b07c0005a9658216443a73f1c06bbd6adbfa33bab4149915f4c844606",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.part001",
+      "sha256": "76a3cfa83082d14125015875cf71d58f14e29109f4e5bfff25d3e106ddac78ca",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.part002",
+      "sha256": "e902ffa9219d52e0f4bc1420593174e1bb4e47317fbf6b300773f708e0eb9403",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.part003",
+      "sha256": "028b5e11e9ce711b5f63dfb39d48526172ff1f21d47b486cadfce93d4a203495",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.part004",
+      "sha256": "927230c0efabf87f6725b6274ceb4f2c001f13ab398c96facad31e020691d6c7",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.part005",
+      "sha256": "598bcbe2955a1674c8e063ce1d9a4527a5367ce515503681dcf5d490e75f7380",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.part006",
+      "sha256": "11add9f598307d996ea7df70b86798d6d2783fb6bbe06c86f0b8af8959e390e3",
+      "bytes": 333885
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.parts.json",
+      "sha256": "ae4abde63b5dec93f6e5cd6dbf766a512b3149dae8491fd907c9241a202538c5",
+      "bytes": 1519
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-public-trace.json.gz",
+      "sha256": "a7a5ebeebc389e7816af06109f06fea82985940ad006dc88cd73838b809556b6",
+      "bytes": 10983
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/preflight.json",
+      "sha256": "32b4277d1a908879646ffad16f5e362430dbe7bbe3a861f5079eb4a30d8b2ca7",
+      "bytes": 4857
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-comparison.json",
+      "sha256": "32f7123f7ae9542a1244ceb00e324ee52c11e260a983052623341ce57323caff",
+      "bytes": 11014
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-execution-started.json",
+      "sha256": "6f8b9689d46ee11334b4968408e0a1382c838020cd7c0e6f1e1f1210e36f9a21",
+      "bytes": 3090
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-execution.json",
+      "sha256": "e471f5a25bfc58388756795342b85df80219c3e8bd85f7de46707a98143ce7d9",
+      "bytes": 8684
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-host-preparation.json",
+      "sha256": "d3086b66e5c51965ad5462ac73a371ef036962f428db8c39a06fd771b415c75e",
+      "bytes": 4210
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-output.log.gz",
+      "sha256": "2f99ec841f72fe51fdb6eab0bd94ced55fbe7392f5b64dd297c7e3274408d6a1",
+      "bytes": 2679
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-output.raw.log",
+      "sha256": "b2cb62dc45c48c078d4c551c9adb86f04eaab32df1d9f5eb7dbabb2e59c74663",
+      "bytes": 39202
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-passive-owner-presence.json",
+      "sha256": "fbb533e2ed1d2205d7c4b59f308291ad2478724833ab3141861228ec6eecef7c",
+      "bytes": 1095
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-replay.json.gz",
+      "sha256": "1fc568ec4bee3f2964c45ac388ce416a03fb3d98f796d97cab17fb61a8e49dd2",
+      "bytes": 1925599
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-replay.json.gz.part000",
+      "sha256": "f50a67a9186e2690cf64eedc0f7ba3823e5f89e5e8d80cd5628302503693adca",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-replay.json.gz.part001",
+      "sha256": "f5edceb0244a98ac1a177ce5b5efb6a069a756ef54f26cbb969dac5f262ada63",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-replay.json.gz.part002",
+      "sha256": "6b3703785be294161bcdb00fc75705141693eb58d7ae333d19326ba4d95ef694",
+      "bytes": 125599
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-replay.json.gz.parts.json",
+      "sha256": "d7ee01b211f657439ab1b93cc1e8a984e8c87802e5e24bf5abe36bf1b0713887",
+      "bytes": 847
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-comparison.json",
+      "sha256": "0f102d660d0d6867ce8b1875f02702114c56f5c0091e45a3fd69db5fe666750d",
+      "bytes": 11017
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-execution-started.json",
+      "sha256": "d9d6e3ccb6a332235e5818d018365a7f589c4d6c27f23f046c929d98f7ef1f4f",
+      "bytes": 3094
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-execution.json",
+      "sha256": "30c678788522fed1203f044b76b327da3fa06ed12fcf454a2643901a7a1dd79f",
+      "bytes": 10163
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-host-preparation.json",
+      "sha256": "9f48596c6f2a0e9bfd7f67969eed165a9bf8df7862198294346d369ccf0379b7",
+      "bytes": 6178
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-output.log.gz",
+      "sha256": "29ecfd677bbfa197577457a63526b5462cc02a6fb37864648da09d84a6822fb5",
+      "bytes": 4035
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-output.raw.log",
+      "sha256": "3966d67843b87a30bbe3b1f142627e4586f3a604a1c97a5fe8c46645b99cdc74",
+      "bytes": 74633
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-passive-owner-presence.json",
+      "sha256": "897019dcb2aca8d671f4fcbb1d9209c25600db8e524e937e4583208cd8f4ecd4",
+      "bytes": 1095
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz",
+      "sha256": "33d47d9638b264a12c2b47349c60bdf873ff6e938cfd537579985598f86d3939",
+      "bytes": 3939724
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz.part000",
+      "sha256": "01f901782f5031532e4504e6b5e2b71d772f5b5d0171fc5890387321f52caaec",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz.part001",
+      "sha256": "02eb034c542aa750b208f15b50491941f282a03c49730d91390279725b3f7493",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz.part002",
+      "sha256": "264cd14dc13aaccb17008d5aeb4316185124e7c2a4d03d650ec1855af78f73af",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz.part003",
+      "sha256": "c735afd0b73c1187c4d84c2199790b49dffe15c120e9e63960b6c7f3f054976a",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz.part004",
+      "sha256": "fa78c6fe11158d2244493be037e5f7030404f3b4a1834f67aae35e05394e65d7",
+      "bytes": 339724
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz.parts.json",
+      "sha256": "8ffca8905bbf1235896d44094d1a2fbe33f0d5824615a3026cb22cd1017f7af5",
+      "bytes": 1183
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-comparison.json",
+      "sha256": "a66efbfaab513d1030eccdaf379e16d1fd8ffce4930213fe680753cd3a8dad0f",
+      "bytes": 11003
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-execution-started.json",
+      "sha256": "aa3375be33e641b45f31329db93628f4889c5b0b353358b012fce80cf8cdac71",
+      "bytes": 3066
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-execution.json",
+      "sha256": "83b4fd0d48c6fdc66f6db87031291de9ebf09784796116f84c34f6ce2609fbf4",
+      "bytes": 11434
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-host-preparation.json",
+      "sha256": "5929b4d85157ae6c999f3b804e5b93705481d5fba2c6e5a2c77d843306eca41f",
+      "bytes": 12489
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-output.log.gz",
+      "sha256": "954fa4d802334f6827379d6fd767af40b9fa70f222f31b563fa26d6c55b31a04",
+      "bytes": 5544
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-output.raw.log",
+      "sha256": "12b7b1c81d82dcc7be6ea9ae6a66d77b17357b3ccf9c08bc2ef521a24fd58fce",
+      "bytes": 131260
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-passive-owner-presence.json",
+      "sha256": "5f4a32ef19755f4cb48972023518ddf93ca6b0d14fafdce6860f03eb2d850f7a",
+      "bytes": 1095
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz",
+      "sha256": "eb0794f621fcf3b2c283a8862f14ed2c497efe6ce84c6c4f0489221ad0cb5631",
+      "bytes": 9454322
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part000",
+      "sha256": "4614c44d2818c3530ebfb49e5675603cb2124a4cdd09505bb6b1db8e4ea5d478",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part001",
+      "sha256": "ca54d6af2b379507c7aa6276811e342745758701ffd505442b00cc5b425de185",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part002",
+      "sha256": "b38af0131b3f2b51118a09bcfb73d4763d23c57987a1cd7af07b05b29052bd49",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part003",
+      "sha256": "6efe9d77ef1798e0024b3f355fae7fc5e6472fb9972d77e6a09dfcb7c3bb87e6",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part004",
+      "sha256": "4ce575584776e29796d993d6d143fef3ba6a0a01a5ab9a8d53819d92203202c6",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part005",
+      "sha256": "efa418ddd7c7fc224ac45bb9b99cfb5ce73de9b5d531cc04e6c4458ff2fdc135",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part006",
+      "sha256": "8acf4f3d76d433de2b159c6fa7cbddd1bd2981fd5754ced48081d6596e3bab2a",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part007",
+      "sha256": "8d9e4f49e36c9734f5d9c1b0e61d38d35c49bdb2c19792dd0d4ee01bebc797a6",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part008",
+      "sha256": "1ec9c4898bdb17a70618bc25f9b4f1c24f0f38ac43550186ba897451d85c37ed",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part009",
+      "sha256": "a4894040369727b50eb2c0337297ac36a976dd71ad0d70760fd190749e7f6116",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part010",
+      "sha256": "6c552e2105131f2d06a092fbeb73da52c3f7a75befd4cedb2aee75ab8587984c",
+      "bytes": 454322
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.parts.json",
+      "sha256": "95918d7c9b71c06bdd913aa109aa01a8d74e0ecf6f7717968a8c8b0f0cc66cb5",
+      "bytes": 2191
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-comparison.json",
+      "sha256": "e84cc49c0882a93c9975528472237aefc46a6a77d76b2399840d58148644edca",
+      "bytes": 11002
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-execution-started.json",
+      "sha256": "1eab99ba8f9b61a82038cc5277b0497ea6c3fa60c7090bb8c913bc8187b667ed",
+      "bytes": 3064
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-execution.json",
+      "sha256": "9bb8408ed202d95bebc476cbc6caf267c0c00486c1f5534efc77d9cb5f4c0a95",
+      "bytes": 9960
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-host-preparation.json",
+      "sha256": "1db687bef59900467211933014e6a3c8f4220d3baa2a093f9c1eecd72a0989ab",
+      "bytes": 8345
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-output.log.gz",
+      "sha256": "84fe3df75e9d08f780a40898a71f91134538189251cce36db0a1ac1b0a0b16cd",
+      "bytes": 4300
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-output.raw.log",
+      "sha256": "175297d906550ca837b8980c35923739bdcfb732cb4483792efb463ac412b936",
+      "bytes": 88967
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-passive-owner-presence.json",
+      "sha256": "da42fe0cdfb88825ae1cb604c5c663abb7ced3558094042184542185c1c0b58f",
+      "bytes": 1095
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz",
+      "sha256": "d86f6baee43c9db0d122c97677552cd117c66939450edb4564a065d54d999721",
+      "bytes": 4981857
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz.part000",
+      "sha256": "26b1d6d60030d272f652355891eb65dfc8bf93c6a329adec5cc977042702fc2f",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz.part001",
+      "sha256": "6d2be9b80df39e345f7719752dcbc27d8737340aa063c1d3bb99459c869c71c4",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz.part002",
+      "sha256": "6d913f94b20c4776fe1a76ee9739690dfa4b43cc421dea60e75617c8c6d342fd",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz.part003",
+      "sha256": "3d9c5f51e7b16995c76a0a024e2fd36a1d25bfef9cf3e4a271e1e947aa3934b3",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz.part004",
+      "sha256": "c245cd7d5b476ae27a5a10570fe3cdd8dc3e171e08c46cb83c07dae7c1fb1770",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz.part005",
+      "sha256": "e88f00dbe7fb66358bf31cc02fd12ebad028a400e6f304910f8aea1c2f7fa131",
+      "bytes": 481857
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz.parts.json",
+      "sha256": "0bba087dd059bae2051cf0556ee136ac88620c503001efad05767a2610b6ca28",
+      "bytes": 1351
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/regression-summary.json",
+      "sha256": "d47f428c40300f71aa3961a7dc0a8ca14c4da06bdcf20bee579518f8821a1e05",
+      "bytes": 177178
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-comparison.json",
+      "sha256": "419a663983a5104ee22e4aa150f6e78a870fb68c60d1aec5e20cd34a07e443e2",
+      "bytes": 11001
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-execution-started.json",
+      "sha256": "3c4785e6e8acf082552e61fb9341e319d604dfd48f2f6913659c35627bb9c17b",
+      "bytes": 3062
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-execution.json",
+      "sha256": "13532afa0e170e3cd60e907f472e130988110c4b1fa1fe9f60e55b15f4384539",
+      "bytes": 9038
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-host-preparation.json",
+      "sha256": "3f2f735600085846645d4485328354de94a3996684658304bc3627216fe58a3e",
+      "bytes": 5725
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-output.log.gz",
+      "sha256": "0a8bfdbdad772e12020a7c168296ad133e896ecc073f5a8cd117bbff5a0a3d3a",
+      "bytes": 3142
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-output.raw.log",
+      "sha256": "5977b3eeef184fd1880dc8a855af4f8a4ecc998d793477513f7c9593a82dff61",
+      "bytes": 55285
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-passive-owner-presence.json",
+      "sha256": "780e5e9c4fda2f349e06ce084701f89a2b5506a7efa94b081e63ecc7eb016e46",
+      "bytes": 1095
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-replay.json.gz",
+      "sha256": "0eb51898001f83702ddd59d0b2903148c1bc5718bef2c797ae27e09aaa70f3b3",
+      "bytes": 2992246
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-replay.json.gz.part000",
+      "sha256": "cd8d1c85833ee1e30845667ede233dbf7104d1df857d135acf04420a74b5f82c",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-replay.json.gz.part001",
+      "sha256": "4d619b65eaed6a0cb2d1aca34a209457b34264439cfdacaf5493a92201789454",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-replay.json.gz.part002",
+      "sha256": "4ad89700e29e3907cca1c6e08d953cd1a6b49f942928a74590bd9d8c974cc405",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-replay.json.gz.part003",
+      "sha256": "6f42b7d77535aae3e3a79369c423dfbf2f6c4a8feed4c5b4d26e1f2a7c1e111b",
+      "bytes": 292246
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-replay.json.gz.parts.json",
+      "sha256": "94c6a20589b3b8c5db08d74783c9cb276dd18f2db4830363b2a22ba1e05460e6",
+      "bytes": 1015
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-comparison.json",
+      "sha256": "e88a2081f6a46a249ad7acb4600aff6f399750bd4602072271515ccef1d2b00a",
+      "bytes": 11005
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-execution-started.json",
+      "sha256": "1c9ee86886387322afb0f6c1cdf299a68f57db5bd10af811c7175b4f5d4e8d71",
+      "bytes": 3094
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-execution.json",
+      "sha256": "275db166a95bc0ab6d01cc8db8add921fb3c5b6b91252c3ef086b6e9b88492e2",
+      "bytes": 9694
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-host-preparation.json",
+      "sha256": "1912dfd29a79f1c056f4f75048681bb436d68775728b95ab6b872f5e891b89cd",
+      "bytes": 5283
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-output.log.gz",
+      "sha256": "0bad6f5ac7a873186dc0dba98c7b53d5b07be8e816047b3d5369e024adbe965e",
+      "bytes": 3560
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-output.raw.log",
+      "sha256": "65b778dbf84d3694f7c29f98e53e2934831d846ed73cad2f731af34e78566926",
+      "bytes": 61755
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-passive-owner-presence.json",
+      "sha256": "7e07d0aee11236ba61da4d754cd2c5c122e79702734c341b9241bf9cc2d85d4b",
+      "bytes": 1106
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz",
+      "sha256": "ab6871538451108539ecefad128730b0c80826464653f552ca39cf9a623b512a",
+      "bytes": 3460246
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz.part000",
+      "sha256": "f6e38f8553dd4cd7e45539139b2ce9157c5535732abce52260d88e14933d411f",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz.part001",
+      "sha256": "086957b45ce3987d91f835d53ee43d562b99ec6130ea10f40c1bcb2cab0ec421",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz.part002",
+      "sha256": "c1975ca3c5710c14d6d0f28308f23f86cdbc06019aaa72e253b5cd39a4e5aa3d",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz.part003",
+      "sha256": "d65352e8a7c4d39a78e0d9daa813fa5deb02ad0a9296bcf2f977e2178bb2bd8c",
+      "bytes": 760246
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz.parts.json",
+      "sha256": "7495442335414f0e1447bc449f2e2f94a38eafef0be38ef1f47af80a72bbd5c7",
+      "bytes": 1070
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-comparison.json",
+      "sha256": "03a405e95e246929ca0b0633bab6cbcd6eba395d07687c15ee18922ba43feb67",
+      "bytes": 11006
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-execution-started.json",
+      "sha256": "0a59a2269557c0a771dda8d7a4a35967c6bfa9c0582a9b755533afc5a8c5b11f",
+      "bytes": 3069
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-execution.json",
+      "sha256": "a525181acef25cee49d653b2ef0039b1ca75d73f679209127f1df285cde2aaeb",
+      "bytes": 13105
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-host-preparation.json",
+      "sha256": "5b93ec10172b12222bf2893f6ecab3cf99c97ee3e20e401d2dcb85ea11868dc0",
+      "bytes": 18591
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-output.log.gz",
+      "sha256": "eb807ba15459c6e0215b8c54f5552880ab39a65eebf7d12e3106240d8bfe7c77",
+      "bytes": 7595
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-output.raw.log",
+      "sha256": "0bc7c929ced5160ff9c15aa369955b39722e36b4ff28018b47c591af6c92061b",
+      "bytes": 200854
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-passive-owner-presence.json",
+      "sha256": "d0b029d6fe362fa2e54087992bb348a19bf8c566ac66db30875af576464c38a9",
+      "bytes": 1096
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz",
+      "sha256": "9896ee769b2d150f03737d910bc42d396f63cfcdf35e7d6df7e1c57c5e8eff29",
+      "bytes": 12328000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part000",
+      "sha256": "f7f7e16c15f952c53648406d2f114e56448f23c6109f1659a1d72d42b9955164",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part001",
+      "sha256": "c70df3abd52cb7859d81d6a4049c6061543af4aea04ac34b8821922454417b40",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part002",
+      "sha256": "2b8376557bdbdcde98803845567471d331f7a77037cdf42d1d4b6ae677f0212e",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part003",
+      "sha256": "e293027a380284a1f1ec93127a80f291add1dcf7b0d7fcbeaaa5dd2efe80689f",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part004",
+      "sha256": "ac9d36af69bbaa20ca3322215414de26caef7b816c47e82f806edcb5dc9b7fbc",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part005",
+      "sha256": "3d05541df9cd9757101e9099e90b0552fd55a6ee18e343e80b45629bdfcb6dbd",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part006",
+      "sha256": "f32717b6e0018c3c0946a579238bef474ffc4c1ad9ece59d60014b3e0180edd6",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part007",
+      "sha256": "72e880c8a314c42e08694e6597fcca49fa3ba0129a00817668a72b70ed4f602e",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part008",
+      "sha256": "6d5725b545e7aa5fb79e872ef653bf7e0e8147cb83780d239d555da36d61a2dd",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part009",
+      "sha256": "2086ce509a4c68d5c30b8d485337b7defbe1b44058e81243a87510bf030dd22e",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part010",
+      "sha256": "436901a97d337d526b3cec609407a42db14ab32c25b5073cdd1a0fe13926cc26",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part011",
+      "sha256": "aeee1af8f6f6b4473ac84c613acba31b6e9f5a1ee06d2cc34b32d417f8b85ff9",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part012",
+      "sha256": "5a3a51c5936921a0b9f15d6e3d2823573f9a173a3e251b444169cf09d4614cc5",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part013",
+      "sha256": "b76195e0b38010237a3eb35b609e185e62bf4aaab920c447cb787847ca0d38e9",
+      "bytes": 628000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.parts.json",
+      "sha256": "6671f66601180841e6510e0634891d1fb9273b458056c655f971934a79dff28f",
+      "bytes": 2696
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-comparison.json",
+      "sha256": "5e38e55e968624b9d13ae16511de6ce767e3865ca969927bd1b2c09e0555c976",
+      "bytes": 11021
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-execution-started.json",
+      "sha256": "7d44f20fcea3a4f6d5b4c932625e1891dbd9ccff1cfeb0ad07682bc4bc00bbb3",
+      "bytes": 3097
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-execution.json",
+      "sha256": "136e1a0b6473e9334dd87f643898d8e6290fca1afa338d7cb12d6877e4997e7c",
+      "bytes": 17574
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-host-preparation.json",
+      "sha256": "a423825677d1e81d89f84fc0ad271e9638eff182f6f28c372a9ab58dcb0a01e1",
+      "bytes": 19265
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-output.log.gz",
+      "sha256": "2d56fe18d12cd1a1beb6f3c72960a1335d2bd7e23d930e95a33bf51f4700bd65",
+      "bytes": 10227
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-output.raw.log",
+      "sha256": "2067c03546700e8c8288399e2c83eb99e8d781a5d02204b203800f18c66221b2",
+      "bytes": 268777
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-passive-owner-presence.json",
+      "sha256": "3fb9fe33d714e0a2bb6d923eb673aa8212c73bd54865c26a8f94981a2adfd1ce",
+      "bytes": 1096
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz",
+      "sha256": "37ed530b06c7b545bb4901773d2d3973dcc67b4eda352e6d88a23c30e28b9848",
+      "bytes": 15394957
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part000",
+      "sha256": "74f817dbd9af31ad1d60c900a202dfcb54872ae3078b3def5ad1a034b82ad9f9",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part001",
+      "sha256": "c7aad876f02d76b220f767ee31fddd63d77628ae6fe2c3c3c4b2ed2b6076910c",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part002",
+      "sha256": "91934e5755ad54c73781324c4eca15c7b25e4e8e4799f0f305e29b290b73b5f6",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part003",
+      "sha256": "61417e471600420185ca1ee816b3b731410ec03f1432c826217647078bd4ee4b",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part004",
+      "sha256": "cc2ba4de21b3e02a1d86c6631c97191c02ebe78ffb0cb8a79edba5481e92f935",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part005",
+      "sha256": "268227b2b0b0a64c67f966bae2f8e9e81699d4078164d857ec1f20b29b66cb9c",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part006",
+      "sha256": "5141d9df866ec566c8f97fbfb3822018dc6709090f615b62dff17dd0f699e4a4",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part007",
+      "sha256": "7260957dff080563629f74f6dc787d77b153c95eb11357f402806ef2d300c4f1",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part008",
+      "sha256": "57f9dda5f83a2f8e33ed0f77cc5255cb47f645c2a1093d5dd8cad46ddd26ce54",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part009",
+      "sha256": "fa0383be31caee9c1c9f3eea67997b206638ee026a051154164ac68dc25e76d5",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part010",
+      "sha256": "32c8e1890658c1e25f7244a1923f049ac700ed8889f7a4bf893c965a3917d9a3",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part011",
+      "sha256": "f17451fb305f7730a89c308a7a30c22b21d6222e194d05e250023ed3d2bbe615",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part012",
+      "sha256": "de0553fbc753059dfeafc0eb8a507af9df7574722e68310fa895b47486bc2636",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part013",
+      "sha256": "a0f2e177e25daf0d8b73882daf6bd9092c14b7ec687fe7d2b19b7da64bbaeb09",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part014",
+      "sha256": "3de2524b530c2998d2ecfa9125b667d0affec5faa04ffbdf6d263ecd85e904d0",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part015",
+      "sha256": "afaff60ab87c73a4c996b6c998058eb5bb2b9d68d2c27bc0b35a6c3bec2567f5",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part016",
+      "sha256": "12d6f7cfb0a7571e82e8491ca5d7a2b83c0714855c7fb7fbbeaa4ac789e8c7b9",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part017",
+      "sha256": "5e678367a12dc772ff51c4ca680698749a7048317185d42e2305b89691afe42c",
+      "bytes": 94957
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.parts.json",
+      "sha256": "78b73c9f0b9574ceff781ec4a182e93373804dd9a232e8d225e0c027686658d1",
+      "bytes": 3367
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/source-archive-parts.json",
+      "sha256": "f54b89b1209c119aaf20541759bad4b03fb51c58b467881c4f2fc6bbce184c9d",
+      "bytes": 824
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/source-archive.json",
+      "sha256": "2d70b3175e3e9091f19040969a83db4b44a1a063f9c21b5d81c4ac46de8cd517",
+      "bytes": 35603
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/source-archive.tar.gz",
+      "sha256": "7026559d5b122a3a2b14afed994de5dede72bc3fd587a889c5d7f919e37e1173",
+      "bytes": 1784114
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/source-archive.tar.gz.part000",
+      "sha256": "e5c063caa4d9d075d452a8ff56b6c6050eb34df19bdca47a54f1f15beaab5652",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/source-archive.tar.gz.part001",
+      "sha256": "4cac732cae37286ec476f7b97b30f723c72bbeefd3f93d45cdd5b7e7ecfeb5f5",
+      "bytes": 884114
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/source-manifest.json",
+      "sha256": "699559bcf331e34dfa8e62137b099f05ba2e160811bc8e8e18ed1a3117bec164",
+      "bytes": 33961
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/test-expectation-correction/correction-source-review.json",
+      "sha256": "749a973ad1e6ed6909ede2f314ae02c5927f16528d8fd057f512d387c675bb73",
+      "bytes": 191744
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/test-expectation-correction/validation/checks-run.json",
+      "sha256": "74e6034d12e7cc7fe408a5b23b82bc02763da673f4ac949570f6219dd20bd135",
+      "bytes": 78558
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/test-expectation-correction/validation/delta-tests-output.log.gz",
+      "sha256": "5710808b64b934b64b6c38d75dc9a0fe57e14c0eb318992a3272e36168d015e9",
+      "bytes": 115173
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/test-expectation-correction/validation/delta-tests-run.json",
+      "sha256": "7ad0949868259cdae325a4f2c42c92b96b9b90b2f10ce13decd656b7c1c9b3e3",
+      "bytes": 124599
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/tria-relative-arrangement-source-parity.json.gz",
+      "sha256": "2d1097a564bee45da5ded53f8cc6b26479a1c32f429404743ff3b426c8e4480a",
+      "bytes": 65634
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/validation/build-output.log.gz",
+      "sha256": "47a4e378d927c781a2c1df9e2cef9b54ef50e06667050d9eaea28634dcb4f45e",
+      "bytes": 1591
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/validation/diff-check-output.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "bytes": 20
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/validation/entry-audit-output.log.gz",
+      "sha256": "dacd1410b01b86ede4cb6d4160d5f01d8d16058919cf43016f645034b58a5f47",
+      "bytes": 180
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/validation/migration-audit-output.log.gz",
+      "sha256": "83398710af4d8f63a1e782a7e03904dfb1729b665c49d5ea92f52bd2e1c9efdd",
+      "bytes": 205
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/validation/typecheck-output.log.gz",
+      "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d",
+      "bytes": 141
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/aggregation-failure.json",
+      "sha256": "5de6b0b461c66606424f08a2369328de57b9ec1b1927740c3b353f0d3ae4b415",
+      "bytes": 4732
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/aggregation-failure.log",
+      "sha256": "ca4de3552bb5fadab6870aa98e9a82db176eea4c1a98881996c08dbf66e79d8b",
+      "bytes": 204711
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "bytes": 1451
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/after.json",
+      "sha256": "dbd6b834567f431882a4e33223b2e599a68dcaeab50600c04930c5d16c1ce7a8",
+      "bytes": 430594
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/after.log",
+      "sha256": "c3fe42a01cb1983245ac0f076a3b9429d8286840e062e9c6e9635d435f305d35",
+      "bytes": 1578
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/after.log.gz",
+      "sha256": "effd4997e62b4fa3afff157d323c3756b8ad97d076f55e17a0be6b6e4e8d557c",
+      "bytes": 443
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/baseline.json",
+      "sha256": "1e51742596cfd213e6875fcdb41dd8ed6a3f9650428c218acf08823e5b2ae797",
+      "bytes": 430297
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/baseline.log",
+      "sha256": "ca505ed08e57156cee14d91ac9032ca986707469c755c3c9397980ea8763cafe",
+      "bytes": 1588
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/baseline.log.gz",
+      "sha256": "9526f3656819ad7b30d30d139724e4623305a4927ccee046262cddb3c953d497",
+      "bytes": 448
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/comparison.json",
+      "sha256": "f77b0de27b5286819db0f9ad65e3d07cd5b283a1c20e9e660a60c25e9bb0c3e4",
+      "bytes": 25417
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/after.json",
+      "sha256": "3cf02b142de6fadbb5b840df894f8c87abe776854ad042b6e2a87c2ed3c21b9e",
+      "bytes": 430661
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/after.log",
+      "sha256": "b8e1d218ea6b039ddb82fb74b310e3774a14c5f827866cb1328a3233564b1ee2",
+      "bytes": 1572
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/after.log.gz",
+      "sha256": "53cae3919b5064266fa8ce932b1757f3f66bed17922eb63b392bd95caaad0f60",
+      "bytes": 438
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/baseline.json",
+      "sha256": "c9fce4ac5acf4450edf96d66d19ea18fd476b0573d513be183c237d70b9f748e",
+      "bytes": 430207
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/baseline.log",
+      "sha256": "106dd867198a11c808e62dd510ee8dc46b5783427b30977f6b19c40909c3512b",
+      "bytes": 1600
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/baseline.log.gz",
+      "sha256": "fb2f0c213c746292d5f09ba824bbfbe51bfbba75763c7261d1ccdefd5e7f4c6e",
+      "bytes": 450
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/comparison.json",
+      "sha256": "bf8714d55eba72dc73c236cfe48226c75b0639197ede8bb86f835c09ebb196a5",
+      "bytes": 25420
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/comparison-policy.json",
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+      "bytes": 991
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/coordinated-isolation.json",
+      "sha256": "0cb02fa8b949190573ab6f887b5f7b0c9ac5891f0541735a13bba7fc3be81312",
+      "bytes": 2080
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/declaration.json",
+      "sha256": "2940ab2c1b5b303ea103fbf6f3a9f1edaa0b83ff2b40cfbf535bda54f477bd20",
+      "bytes": 5556
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/global-budget-policy.json",
+      "sha256": "5f62d99315ea71efc91451596c171f2cc0782b14be8151ba503a427df8eaacf0",
+      "bytes": 2293
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-evidence/lot5a-status.json",
+      "sha256": "6c59d5cce15d1cd1342581cf26e886013def11f19c84777733f689511a573519",
+      "bytes": 5135
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-evidence/lot7b-status.json",
+      "sha256": "4daec9b73adc9785f453282df0aa71f93e38fd8d305657d3441faa446f0e0f42",
+      "bytes": 2439
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-evidence/own-agents-quiet.json",
+      "sha256": "32b8ef5521fccfff88c343be47248223f7ddf27bb64ffedadb9d23a4f2e48c46",
+      "bytes": 1315
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/log-transport.json",
+      "sha256": "1530cb3fb08337296c57915e06c9f5a852afd775b83c0463dd6436ba5673d999",
+      "bytes": 2880
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz",
+      "sha256": "1c2040e37350c3832134234cac6c0e8085ff02f8bff744c5b821214868c94e51",
+      "bytes": 5016756
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz.part000",
+      "sha256": "ef7a57a99451e7f4d8434326da6b5775465c4e576ac19e243dc73b0188a99a68",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz.part001",
+      "sha256": "8dadb32fe0e243e257d9561b3207a67753741b379fbd8ea3ebf7cc1fc57df8e0",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz.part002",
+      "sha256": "b2f542bc1a404f56c2fc630655cf17b75108fb5a545e097e04f3eb062da993eb",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz.part003",
+      "sha256": "102f6612818edf27a2a1667d3c29b20d440625213064e3ce1c4ef0bbb6e52e9c",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz.part004",
+      "sha256": "24ec0b791cf0e9d751057dc4934e25f18b138fb740cfe2da5215c218aa79194f",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz.part005",
+      "sha256": "9464055ec90fc16067483250724153721364fc1e2ceb56bda75ff50cdb6d592a",
+      "bytes": 516756
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz.parts.json",
+      "sha256": "553265fde62852e56ae4b691a0324fe815b1a5ca788c925e79329effb4da01bf",
+      "bytes": 1393
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+      "sha256": "022dcd292a0c41c8a2bdae0b0cd2d1196a3f3280890cdb62130caa87bcfb94cb",
+      "bytes": 105012
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz",
+      "sha256": "65528de50b2a1d7505880002bc28f0dbcb058c708ba6cd95636dae9e6dbedcc9",
+      "bytes": 5033871
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz.part000",
+      "sha256": "3518f5f41e94a1a0997b5db4648a7c869ef3c1a5060cb7fdb75f8655d7b5c5fe",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz.part001",
+      "sha256": "96c871bf6a5a927b428fef5be3ca236f77b0789d28c33fd50c78d8c03b9d61a0",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz.part002",
+      "sha256": "4a6092364917f1d1e80c5e123e0ab8296f3a1acdff0cdd29f3c1be6a2c2afdec",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz.part003",
+      "sha256": "4f49e7c78782dd77ac63e4d5b0203412e49ee3c67c14ab99e3ed93242fe0b3b5",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz.part004",
+      "sha256": "6d5b26b519e5405d24892841f7938185a464bdb5fee662f2853f50004d1abd3f",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz.part005",
+      "sha256": "df287be6844832bef33132ee13b167471846249012dee0e1b69c2be45ff23471",
+      "bytes": 533871
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz.parts.json",
+      "sha256": "a99dd1ca3247c9ca9ca7c00abdf6f31a7e78c61e6ab682f5d89cea20f77f255d",
+      "bytes": 1400
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.receipt.json",
+      "sha256": "94387fd2d0121106ea6623a7a03bee379efd1810fb128c4628fad5f5c48cffb0",
+      "bytes": 105296
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-growth-comparison.json",
+      "sha256": "5c6510f56105431e127b565d1d5b8d8a0cd2cdd52d684392040ff7bfc1dcd576",
+      "bytes": 244993
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-growth-contract.json",
+      "sha256": "ae75c71f8baafcfd9d6f2c607981351481ec531e26e7656d3c7d0fe2a1da1909",
+      "bytes": 22768
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-growth-review.json",
+      "sha256": "445b0283d1ae3860a2639da1af8f28cd369fa359424d846357bf8e37772098f1",
+      "bytes": 764063
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-source-inventory.json",
+      "sha256": "e722b1f40e5139a35f151ccf177d240a1bcedad66cebd9f5ef75a05d29fec65d",
+      "bytes": 109643
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-structural-attribution.json",
+      "sha256": "390d7a6801c9191146f372d842404eaa6cc3922f92b452e613589652d205816c",
+      "bytes": 73280
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-structural-fixture.json",
+      "sha256": "67d65dcaf4358af2237d3e3d6620141679890c89eafb5add264d1ea953c6b688",
+      "bytes": 60036
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/preparation.json",
+      "sha256": "23df7f57aa137b486320c72b1228aa58504c7e31634f6750214f401e781a064f",
+      "bytes": 3415
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/protocol-check.json",
+      "sha256": "bb190f7a1f98158146e3bdaf5d6dd109da6b7864d115cb8ec321e39a295932d3",
+      "bytes": 417
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/protocol.md",
+      "sha256": "f3c85310fd2ec64836875dee04822723eca5136795715ac2d6295f644997385f",
+      "bytes": 12573
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/readiness.json",
+      "sha256": "4f086495373c9794238810f00e32c280c195d321926073ebc81bc5d493ab184d",
+      "bytes": 42997
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/results-render.json",
+      "sha256": "8809add78fd5a78ebc7e77b4e003214c4455c81cb3866d6fe79acec012f02280",
+      "bytes": 10607
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/results.md",
+      "sha256": "1370240fe6b6373d1221c1813bc50a96a6c6d123097bdd104219c831431ffc8c",
+      "bytes": 33750
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/static-preflight-recheck.json",
+      "sha256": "c53a07cfde0679681c26749ed2941db4121971322dfb55e302bf89043251189a",
+      "bytes": 2455
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/static-preflight.json",
+      "sha256": "e31c198993e3536045fba1859841298662aeea451c0931e1d3bc2750b15f5894",
+      "bytes": 15950
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/window.json",
+      "sha256": "cb56920dab8a5f2404f72e428c80b7fc4db7f7ff6fbb401b30a2cd064223184d",
+      "bytes": 10543
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/prepare-cost-protocol.py",
+      "sha256": "f9dab9d3e94b51ebc75ce9e8ce192a0c8e23c26329714c00cfea8e8310f536e2",
+      "bytes": 28164
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/prepare-owner-cost-contract.py",
+      "sha256": "b3916d2b48e8e7a0b61771a14ad7e911bfa9fd7691eb6ac9bcaf99c79897c9f4",
+      "bytes": 13795
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/qualify-cost-owner-graphs.mjs",
+      "sha256": "3b9f006424fa27080993271d57d086537665dc25a6926b2b2a9ec48e48220ad5",
+      "bytes": 47487
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/record-cost-log-transport.py",
+      "sha256": "ced9c309bc72f791b3f451d4793e11a2830f414019c08aeb1df22522b671dc7a",
+      "bytes": 3763
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/record-cost-owner-source-inventory.mjs",
+      "sha256": "38077e5103a8657eec7dce1fdbc65506327e1a6f29a4bfcd622efb84119d73eb",
+      "bytes": 12532
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/recorded-regression-cases-final.json",
+      "sha256": "92039b4892be0ee05faa1e66001ec6d9f92403d7143ed0bf61462b78ba50eecc",
+      "bytes": 4490
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/review-owner-costs.py",
+      "sha256": "4e842901740ba1ac384df6198dabf766f7f7dfd6778917a183234ed9f02a994e",
+      "bytes": 70762
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/tria-case-resolution.json",
+      "sha256": "db90a62494a55bb8c96e59676a6bd9baf9521421cc3ea4f084acd23c70cf46fc",
+      "bytes": 2135
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/verify-publication-inputs.py",
+      "sha256": "75c8ba20cab0f0d231ce7193fe42664aa8ad75fef0b418778e018475615ad20c",
+      "bytes": 15729
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/write-cost-results.py",
+      "sha256": "0b4a31393535713d676a09a8b78ad67dbcbfeb2a0e835cabc4f6e709210afcc3",
+      "bytes": 40623
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+      "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+      "bytes": 17256
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/execution-lkey.json",
+      "sha256": "ac35fbe45492ee87b02e472455d828408b33d261ed1873f6044f1419c611dfec",
+      "bytes": 70533
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-actual-public-journal.jsonl.gz",
+      "sha256": "d00fd30f4c5579137e603e53faf9ab29d51c82c4b0dfb1c28ef31a0fcab67450",
+      "bytes": 8081
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+      "sha256": "11aa4589a7d294cc5c7aed2e0e3946541cf48a208b891b0c7229a190e290aff4",
+      "bytes": 5445629
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-public-trace.json.gz",
+      "sha256": "de96446d655f3c5165f4eeebfbd0aa1ed074c2b65ee35288d84c6d4112a2a763",
+      "bytes": 10983
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "bytes": 53583
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "bytes": 111624
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6",
+      "bytes": 424024
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "bytes": 48531
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+      "bytes": 46966
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-relative-arrangement-public-parity.py",
+      "sha256": "a6731204feb80b373ec79dd7fd4742a3ff24d58353597b5a8da261794e3c9f67",
+      "bytes": 39949
+    },
+    {
+      "path": "scripts/compare-v54-reactive-public-evidence.py",
+      "sha256": "3274acc5ed28a40f91ad0ee2e34c247ab160919ea43855cf514b4fbc22ef6a69",
+      "bytes": 18850
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/replay-native-partial-public-regression.mjs",
+      "sha256": "7fed8d182e48c9707d07856a78b3604f2279a678020906ed5e5716c4cb1d9665",
+      "bytes": 42152
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+      "bytes": 3361
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+      "bytes": 8476
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+      "bytes": 22204
+    },
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "bytes": 5421
+    },
+    {
+      "path": "scripts/verify-native-delivery.py",
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+      "bytes": 26494
+    },
+    {
+      "path": "scripts/verify-native-delta.py",
+      "sha256": "0ee99d46e7702b4b2c44c69ebef8cfaa646839be1134a8501f0d7220c0730780",
+      "bytes": 5917
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1",
+      "bytes": 11291
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207",
+      "bytes": 23637
+    },
+    {
+      "path": "src/logos-engine/v6-hash.ts",
+      "sha256": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5",
+      "bytes": 2842
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08",
+      "bytes": 14849
+    },
+    {
+      "path": "src/logos-engine/v6-native-authority.ts",
+      "sha256": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff",
+      "bytes": 23736
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "172db46681832ce3b944fad5a98d6cd54b2bd983e1c4245a0040e590841d4b8d",
+      "bytes": 147934
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d",
+      "bytes": 21947
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements.ts",
+      "sha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c",
+      "bytes": 13576
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77",
+      "bytes": 5903
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834",
+      "bytes": 1502394
+    },
+    {
+      "path": "src/runtime/v6-agent-protocol.ts",
+      "sha256": "597b4d4ab19882a37048e1fa9caeaebea2112b66e25f6294f428bb7916818aa4",
+      "bytes": 9389
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96",
+      "bytes": 18195
+    },
+    {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "sha256": "93b824b078ccf259827be897e8143dc59fc0479d6f765f3a437cc95b2f4472c1",
+      "bytes": 73454
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/docs/migration/lot4b-evidence/performance-integrated/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "bytes": 1451
+    },
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/docs/migration/lot4b-evidence/performance-integrated/comparison-policy.json",
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+      "bytes": 991
+    },
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/docs/migration/lot4b-evidence/performance-integrated/protocol.md",
+      "sha256": "f3c85310fd2ec64836875dee04822723eca5136795715ac2d6295f644997385f",
+      "bytes": 12573
+    },
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "bytes": 53583
+    },
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "bytes": 111624
+    },
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "bytes": 48531
+    },
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+      "bytes": 46966
+    },
+    {
+      "path": "/workspace/sites/sra-lot4b-baseline-5a-20261110/scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "dist/assets/v6-agent-worker-D7_Txg6T.js",
+      "sha256": "f16238fb553fa0357510f6bfba67a7803144ed667e795e0abfb65b88ade12faf",
+      "bytes": 6660281
+    },
+    {
+      "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+      "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+      "bytes": 41445
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+      "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+      "bytes": 24340
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+      "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+      "bytes": 39060
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+      "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+      "bytes": 19976
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/check-cost-static-inputs.py",
+      "sha256": "6aaa8170be30bd4c69f3af5ad2d501475d3967a00fa96e6f5843ecee4357039e",
+      "bytes": 16713
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+      "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+      "bytes": 26568
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/declaration.json",
+      "sha256": "ca371fbf437d2434932c74238a75ab0eb6cd6ef27e8db5aa329c2d179c8c667d",
+      "bytes": 4105
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+      "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+      "bytes": 2630905
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+      "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102",
+      "bytes": 56466
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+      "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+      "bytes": 4349054
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+      "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+      "bytes": 1649205
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+      "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+      "bytes": 8174480
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+      "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba",
+      "bytes": 2585868
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+      "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+      "bytes": 10678168
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+      "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3",
+      "bytes": 13577757
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/capture-cost-owner-graphs.mjs",
+      "sha256": "13cc2498b7e27e7b90fe7216e91c4a329e8e9a37c7d7671b655039daead6f65f",
+      "bytes": 23834
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/check-cost-static-inputs.py",
+      "sha256": "9cbe543d0166d366d4d8e576dcc8553c7a8116d4d657202c5be29a4d2607a121",
+      "bytes": 23603
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/consolidate-owner-costs.mjs",
+      "sha256": "7691a06e88d60139941ace27605aa319aa9a01e31a7e315630abb1d8cef7e123",
+      "bytes": 52881
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+      "bytes": 3161161
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+      "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3",
+      "bytes": 13286
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-relative-arrangement-source-parity-02.json.gz",
+      "sha256": "97b79e0b6d309dff79a2a49f8760d18348b617ac04704576e541f6143562c8bb",
+      "bytes": 65114
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/finalize-cost-readiness.py",
+      "sha256": "579f69f39b1da4dcf13629710faf41f07c90e99fe444a8bef81921599e16ca7b",
+      "bytes": 38778
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-baseline/source-manifest.json",
+      "sha256": "631951d71c675e5c29f712e92724f17e446915807570581c049357bb97bf46b3",
+      "bytes": 33584
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/browser-qa-continuation-test-correction-binding.json",
+      "sha256": "76ea7a40d1e5caac0c3b023da6aa69b131123e8e20c2ec65fc5dce6b2de95cc6",
+      "bytes": 1789
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/browser-qa-test-correction-binding.json",
+      "sha256": "f94d60ed2e3a4c562f0724f20124b5ab69b3275f856a2771460ee39bd47396b4",
+      "bytes": 3840
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/observed-states.json",
+      "sha256": "4262133043c084ec18e0cff925d19bf2ac7d36ee6479cb112fd9f6903b9f5856",
+      "bytes": 3515
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/preview-start.json",
+      "sha256": "8c43ecf96f3772d1c12add47825b5564b9e4bc64e1e7d0cae115992fc1f2ac10",
+      "bytes": 493
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/preview-start.log",
+      "sha256": "f9393e80b0c26ca24f28a0b25f4c1d032efe90dfc75ec07d9690b4627ec1d1a7",
+      "bytes": 48
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/preview-stopped.json",
+      "sha256": "b667eb921ddb1e52a1820aba7dc553cbfbf92b7af4f4db39da8c037bcb43be9a",
+      "bytes": 482
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/delivery-integrity.json",
+      "sha256": "c27b10eea5302a5b15563e8c64476ffe48ad20780e0e8339d85e3cae00be9e63",
+      "bytes": 10357
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial-contract.json",
+      "sha256": "8fa8aecbb026ca3bb16deed0033390f7d8f8968147f4b02ffdd7478c36635c15",
+      "bytes": 4330
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/progress.jsonl",
+      "sha256": "0450939de7b36579950315ef855a6488aa5472c61b1cea6891865e866abbdcf4",
+      "bytes": 154857
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/public-journal.jsonl",
+      "sha256": "e13bc45b6969db3d303ed4e7f3c13c98a6c1d0963875bc9d1a254e67c2224762",
+      "bytes": 640845
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/public-journal.jsonl.gz",
+      "sha256": "276d8f2fd01ba3bde13b664c9591d5dc34b753ff8c2c9bcaa9e9f24d656379cd",
+      "bytes": 10823
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/qualification.json",
+      "sha256": "4e8fc8dfae9959484a85b0962725be0be453e79d612ace9f6608c79e0711e18e",
+      "bytes": 93179
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz",
+      "sha256": "824a6fbe3f92ad946b6da2362f30bab2d23c3db8aa50933e59e666da7a81d43b",
+      "bytes": 5733885
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.part000",
+      "sha256": "6f0d4e1b07c0005a9658216443a73f1c06bbd6adbfa33bab4149915f4c844606",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.part001",
+      "sha256": "76a3cfa83082d14125015875cf71d58f14e29109f4e5bfff25d3e106ddac78ca",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.part002",
+      "sha256": "e902ffa9219d52e0f4bc1420593174e1bb4e47317fbf6b300773f708e0eb9403",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.part003",
+      "sha256": "028b5e11e9ce711b5f63dfb39d48526172ff1f21d47b486cadfce93d4a203495",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.part004",
+      "sha256": "927230c0efabf87f6725b6274ceb4f2c001f13ab398c96facad31e020691d6c7",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.part005",
+      "sha256": "598bcbe2955a1674c8e063ce1d9a4527a5367ce515503681dcf5d490e75f7380",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.part006",
+      "sha256": "11add9f598307d996ea7df70b86798d6d2783fb6bbe06c86f0b8af8959e390e3",
+      "bytes": 333885
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.parts.json",
+      "sha256": "ae4abde63b5dec93f6e5cd6dbf766a512b3149dae8491fd907c9241a202538c5",
+      "bytes": 1519
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-public-trace.json.gz",
+      "sha256": "a7a5ebeebc389e7816af06109f06fea82985940ad006dc88cd73838b809556b6",
+      "bytes": 10983
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/preflight.json",
+      "sha256": "32b4277d1a908879646ffad16f5e362430dbe7bbe3a861f5079eb4a30d8b2ca7",
+      "bytes": 4857
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-comparison.json",
+      "sha256": "32f7123f7ae9542a1244ceb00e324ee52c11e260a983052623341ce57323caff",
+      "bytes": 11014
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-execution-started.json",
+      "sha256": "6f8b9689d46ee11334b4968408e0a1382c838020cd7c0e6f1e1f1210e36f9a21",
+      "bytes": 3090
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-execution.json",
+      "sha256": "e471f5a25bfc58388756795342b85df80219c3e8bd85f7de46707a98143ce7d9",
+      "bytes": 8684
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-host-preparation.json",
+      "sha256": "d3086b66e5c51965ad5462ac73a371ef036962f428db8c39a06fd771b415c75e",
+      "bytes": 4210
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-output.log.gz",
+      "sha256": "2f99ec841f72fe51fdb6eab0bd94ced55fbe7392f5b64dd297c7e3274408d6a1",
+      "bytes": 2679
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-output.raw.log",
+      "sha256": "b2cb62dc45c48c078d4c551c9adb86f04eaab32df1d9f5eb7dbabb2e59c74663",
+      "bytes": 39202
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-passive-owner-presence.json",
+      "sha256": "fbb533e2ed1d2205d7c4b59f308291ad2478724833ab3141861228ec6eecef7c",
+      "bytes": 1095
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-replay.json.gz",
+      "sha256": "1fc568ec4bee3f2964c45ac388ce416a03fb3d98f796d97cab17fb61a8e49dd2",
+      "bytes": 1925599
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-replay.json.gz.part000",
+      "sha256": "f50a67a9186e2690cf64eedc0f7ba3823e5f89e5e8d80cd5628302503693adca",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-replay.json.gz.part001",
+      "sha256": "f5edceb0244a98ac1a177ce5b5efb6a069a756ef54f26cbb969dac5f262ada63",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-replay.json.gz.part002",
+      "sha256": "6b3703785be294161bcdb00fc75705141693eb58d7ae333d19326ba4d95ef694",
+      "bytes": 125599
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-replay.json.gz.parts.json",
+      "sha256": "d7ee01b211f657439ab1b93cc1e8a984e8c87802e5e24bf5abe36bf1b0713887",
+      "bytes": 847
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-comparison.json",
+      "sha256": "0f102d660d0d6867ce8b1875f02702114c56f5c0091e45a3fd69db5fe666750d",
+      "bytes": 11017
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-execution-started.json",
+      "sha256": "d9d6e3ccb6a332235e5818d018365a7f589c4d6c27f23f046c929d98f7ef1f4f",
+      "bytes": 3094
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-execution.json",
+      "sha256": "30c678788522fed1203f044b76b327da3fa06ed12fcf454a2643901a7a1dd79f",
+      "bytes": 10163
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-host-preparation.json",
+      "sha256": "9f48596c6f2a0e9bfd7f67969eed165a9bf8df7862198294346d369ccf0379b7",
+      "bytes": 6178
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-output.log.gz",
+      "sha256": "29ecfd677bbfa197577457a63526b5462cc02a6fb37864648da09d84a6822fb5",
+      "bytes": 4035
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-output.raw.log",
+      "sha256": "3966d67843b87a30bbe3b1f142627e4586f3a604a1c97a5fe8c46645b99cdc74",
+      "bytes": 74633
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-passive-owner-presence.json",
+      "sha256": "897019dcb2aca8d671f4fcbb1d9209c25600db8e524e937e4583208cd8f4ecd4",
+      "bytes": 1095
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz",
+      "sha256": "33d47d9638b264a12c2b47349c60bdf873ff6e938cfd537579985598f86d3939",
+      "bytes": 3939724
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz.part000",
+      "sha256": "01f901782f5031532e4504e6b5e2b71d772f5b5d0171fc5890387321f52caaec",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz.part001",
+      "sha256": "02eb034c542aa750b208f15b50491941f282a03c49730d91390279725b3f7493",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz.part002",
+      "sha256": "264cd14dc13aaccb17008d5aeb4316185124e7c2a4d03d650ec1855af78f73af",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz.part003",
+      "sha256": "c735afd0b73c1187c4d84c2199790b49dffe15c120e9e63960b6c7f3f054976a",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz.part004",
+      "sha256": "fa78c6fe11158d2244493be037e5f7030404f3b4a1834f67aae35e05394e65d7",
+      "bytes": 339724
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz.parts.json",
+      "sha256": "8ffca8905bbf1235896d44094d1a2fbe33f0d5824615a3026cb22cd1017f7af5",
+      "bytes": 1183
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-comparison.json",
+      "sha256": "a66efbfaab513d1030eccdaf379e16d1fd8ffce4930213fe680753cd3a8dad0f",
+      "bytes": 11003
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-execution-started.json",
+      "sha256": "aa3375be33e641b45f31329db93628f4889c5b0b353358b012fce80cf8cdac71",
+      "bytes": 3066
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-execution.json",
+      "sha256": "83b4fd0d48c6fdc66f6db87031291de9ebf09784796116f84c34f6ce2609fbf4",
+      "bytes": 11434
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-host-preparation.json",
+      "sha256": "5929b4d85157ae6c999f3b804e5b93705481d5fba2c6e5a2c77d843306eca41f",
+      "bytes": 12489
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-output.log.gz",
+      "sha256": "954fa4d802334f6827379d6fd767af40b9fa70f222f31b563fa26d6c55b31a04",
+      "bytes": 5544
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-output.raw.log",
+      "sha256": "12b7b1c81d82dcc7be6ea9ae6a66d77b17357b3ccf9c08bc2ef521a24fd58fce",
+      "bytes": 131260
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-passive-owner-presence.json",
+      "sha256": "5f4a32ef19755f4cb48972023518ddf93ca6b0d14fafdce6860f03eb2d850f7a",
+      "bytes": 1095
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz",
+      "sha256": "eb0794f621fcf3b2c283a8862f14ed2c497efe6ce84c6c4f0489221ad0cb5631",
+      "bytes": 9454322
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part000",
+      "sha256": "4614c44d2818c3530ebfb49e5675603cb2124a4cdd09505bb6b1db8e4ea5d478",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part001",
+      "sha256": "ca54d6af2b379507c7aa6276811e342745758701ffd505442b00cc5b425de185",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part002",
+      "sha256": "b38af0131b3f2b51118a09bcfb73d4763d23c57987a1cd7af07b05b29052bd49",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part003",
+      "sha256": "6efe9d77ef1798e0024b3f355fae7fc5e6472fb9972d77e6a09dfcb7c3bb87e6",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part004",
+      "sha256": "4ce575584776e29796d993d6d143fef3ba6a0a01a5ab9a8d53819d92203202c6",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part005",
+      "sha256": "efa418ddd7c7fc224ac45bb9b99cfb5ce73de9b5d531cc04e6c4458ff2fdc135",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part006",
+      "sha256": "8acf4f3d76d433de2b159c6fa7cbddd1bd2981fd5754ced48081d6596e3bab2a",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part007",
+      "sha256": "8d9e4f49e36c9734f5d9c1b0e61d38d35c49bdb2c19792dd0d4ee01bebc797a6",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part008",
+      "sha256": "1ec9c4898bdb17a70618bc25f9b4f1c24f0f38ac43550186ba897451d85c37ed",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part009",
+      "sha256": "a4894040369727b50eb2c0337297ac36a976dd71ad0d70760fd190749e7f6116",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.part010",
+      "sha256": "6c552e2105131f2d06a092fbeb73da52c3f7a75befd4cedb2aee75ab8587984c",
+      "bytes": 454322
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.parts.json",
+      "sha256": "95918d7c9b71c06bdd913aa109aa01a8d74e0ecf6f7717968a8c8b0f0cc66cb5",
+      "bytes": 2191
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-comparison.json",
+      "sha256": "e84cc49c0882a93c9975528472237aefc46a6a77d76b2399840d58148644edca",
+      "bytes": 11002
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-execution-started.json",
+      "sha256": "1eab99ba8f9b61a82038cc5277b0497ea6c3fa60c7090bb8c913bc8187b667ed",
+      "bytes": 3064
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-execution.json",
+      "sha256": "9bb8408ed202d95bebc476cbc6caf267c0c00486c1f5534efc77d9cb5f4c0a95",
+      "bytes": 9960
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-host-preparation.json",
+      "sha256": "1db687bef59900467211933014e6a3c8f4220d3baa2a093f9c1eecd72a0989ab",
+      "bytes": 8345
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-output.log.gz",
+      "sha256": "84fe3df75e9d08f780a40898a71f91134538189251cce36db0a1ac1b0a0b16cd",
+      "bytes": 4300
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-output.raw.log",
+      "sha256": "175297d906550ca837b8980c35923739bdcfb732cb4483792efb463ac412b936",
+      "bytes": 88967
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-passive-owner-presence.json",
+      "sha256": "da42fe0cdfb88825ae1cb604c5c663abb7ced3558094042184542185c1c0b58f",
+      "bytes": 1095
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz",
+      "sha256": "d86f6baee43c9db0d122c97677552cd117c66939450edb4564a065d54d999721",
+      "bytes": 4981857
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz.part000",
+      "sha256": "26b1d6d60030d272f652355891eb65dfc8bf93c6a329adec5cc977042702fc2f",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz.part001",
+      "sha256": "6d2be9b80df39e345f7719752dcbc27d8737340aa063c1d3bb99459c869c71c4",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz.part002",
+      "sha256": "6d913f94b20c4776fe1a76ee9739690dfa4b43cc421dea60e75617c8c6d342fd",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz.part003",
+      "sha256": "3d9c5f51e7b16995c76a0a024e2fd36a1d25bfef9cf3e4a271e1e947aa3934b3",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz.part004",
+      "sha256": "c245cd7d5b476ae27a5a10570fe3cdd8dc3e171e08c46cb83c07dae7c1fb1770",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz.part005",
+      "sha256": "e88f00dbe7fb66358bf31cc02fd12ebad028a400e6f304910f8aea1c2f7fa131",
+      "bytes": 481857
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz.parts.json",
+      "sha256": "0bba087dd059bae2051cf0556ee136ac88620c503001efad05767a2610b6ca28",
+      "bytes": 1351
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/regression-summary.json",
+      "sha256": "d47f428c40300f71aa3961a7dc0a8ca14c4da06bdcf20bee579518f8821a1e05",
+      "bytes": 177178
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-comparison.json",
+      "sha256": "419a663983a5104ee22e4aa150f6e78a870fb68c60d1aec5e20cd34a07e443e2",
+      "bytes": 11001
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-execution-started.json",
+      "sha256": "3c4785e6e8acf082552e61fb9341e319d604dfd48f2f6913659c35627bb9c17b",
+      "bytes": 3062
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-execution.json",
+      "sha256": "13532afa0e170e3cd60e907f472e130988110c4b1fa1fe9f60e55b15f4384539",
+      "bytes": 9038
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-host-preparation.json",
+      "sha256": "3f2f735600085846645d4485328354de94a3996684658304bc3627216fe58a3e",
+      "bytes": 5725
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-output.log.gz",
+      "sha256": "0a8bfdbdad772e12020a7c168296ad133e896ecc073f5a8cd117bbff5a0a3d3a",
+      "bytes": 3142
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-output.raw.log",
+      "sha256": "5977b3eeef184fd1880dc8a855af4f8a4ecc998d793477513f7c9593a82dff61",
+      "bytes": 55285
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-passive-owner-presence.json",
+      "sha256": "780e5e9c4fda2f349e06ce084701f89a2b5506a7efa94b081e63ecc7eb016e46",
+      "bytes": 1095
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-replay.json.gz",
+      "sha256": "0eb51898001f83702ddd59d0b2903148c1bc5718bef2c797ae27e09aaa70f3b3",
+      "bytes": 2992246
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-replay.json.gz.part000",
+      "sha256": "cd8d1c85833ee1e30845667ede233dbf7104d1df857d135acf04420a74b5f82c",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-replay.json.gz.part001",
+      "sha256": "4d619b65eaed6a0cb2d1aca34a209457b34264439cfdacaf5493a92201789454",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-replay.json.gz.part002",
+      "sha256": "4ad89700e29e3907cca1c6e08d953cd1a6b49f942928a74590bd9d8c974cc405",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-replay.json.gz.part003",
+      "sha256": "6f42b7d77535aae3e3a79369c423dfbf2f6c4a8feed4c5b4d26e1f2a7c1e111b",
+      "bytes": 292246
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-replay.json.gz.parts.json",
+      "sha256": "94c6a20589b3b8c5db08d74783c9cb276dd18f2db4830363b2a22ba1e05460e6",
+      "bytes": 1015
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-comparison.json",
+      "sha256": "e88a2081f6a46a249ad7acb4600aff6f399750bd4602072271515ccef1d2b00a",
+      "bytes": 11005
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-execution-started.json",
+      "sha256": "1c9ee86886387322afb0f6c1cdf299a68f57db5bd10af811c7175b4f5d4e8d71",
+      "bytes": 3094
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-execution.json",
+      "sha256": "275db166a95bc0ab6d01cc8db8add921fb3c5b6b91252c3ef086b6e9b88492e2",
+      "bytes": 9694
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-host-preparation.json",
+      "sha256": "1912dfd29a79f1c056f4f75048681bb436d68775728b95ab6b872f5e891b89cd",
+      "bytes": 5283
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-output.log.gz",
+      "sha256": "0bad6f5ac7a873186dc0dba98c7b53d5b07be8e816047b3d5369e024adbe965e",
+      "bytes": 3560
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-output.raw.log",
+      "sha256": "65b778dbf84d3694f7c29f98e53e2934831d846ed73cad2f731af34e78566926",
+      "bytes": 61755
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-passive-owner-presence.json",
+      "sha256": "7e07d0aee11236ba61da4d754cd2c5c122e79702734c341b9241bf9cc2d85d4b",
+      "bytes": 1106
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz",
+      "sha256": "ab6871538451108539ecefad128730b0c80826464653f552ca39cf9a623b512a",
+      "bytes": 3460246
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz.part000",
+      "sha256": "f6e38f8553dd4cd7e45539139b2ce9157c5535732abce52260d88e14933d411f",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz.part001",
+      "sha256": "086957b45ce3987d91f835d53ee43d562b99ec6130ea10f40c1bcb2cab0ec421",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz.part002",
+      "sha256": "c1975ca3c5710c14d6d0f28308f23f86cdbc06019aaa72e253b5cd39a4e5aa3d",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz.part003",
+      "sha256": "d65352e8a7c4d39a78e0d9daa813fa5deb02ad0a9296bcf2f977e2178bb2bd8c",
+      "bytes": 760246
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz.parts.json",
+      "sha256": "7495442335414f0e1447bc449f2e2f94a38eafef0be38ef1f47af80a72bbd5c7",
+      "bytes": 1070
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-comparison.json",
+      "sha256": "03a405e95e246929ca0b0633bab6cbcd6eba395d07687c15ee18922ba43feb67",
+      "bytes": 11006
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-execution-started.json",
+      "sha256": "0a59a2269557c0a771dda8d7a4a35967c6bfa9c0582a9b755533afc5a8c5b11f",
+      "bytes": 3069
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-execution.json",
+      "sha256": "a525181acef25cee49d653b2ef0039b1ca75d73f679209127f1df285cde2aaeb",
+      "bytes": 13105
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-host-preparation.json",
+      "sha256": "5b93ec10172b12222bf2893f6ecab3cf99c97ee3e20e401d2dcb85ea11868dc0",
+      "bytes": 18591
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-output.log.gz",
+      "sha256": "eb807ba15459c6e0215b8c54f5552880ab39a65eebf7d12e3106240d8bfe7c77",
+      "bytes": 7595
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-output.raw.log",
+      "sha256": "0bc7c929ced5160ff9c15aa369955b39722e36b4ff28018b47c591af6c92061b",
+      "bytes": 200854
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-passive-owner-presence.json",
+      "sha256": "d0b029d6fe362fa2e54087992bb348a19bf8c566ac66db30875af576464c38a9",
+      "bytes": 1096
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz",
+      "sha256": "9896ee769b2d150f03737d910bc42d396f63cfcdf35e7d6df7e1c57c5e8eff29",
+      "bytes": 12328000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part000",
+      "sha256": "f7f7e16c15f952c53648406d2f114e56448f23c6109f1659a1d72d42b9955164",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part001",
+      "sha256": "c70df3abd52cb7859d81d6a4049c6061543af4aea04ac34b8821922454417b40",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part002",
+      "sha256": "2b8376557bdbdcde98803845567471d331f7a77037cdf42d1d4b6ae677f0212e",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part003",
+      "sha256": "e293027a380284a1f1ec93127a80f291add1dcf7b0d7fcbeaaa5dd2efe80689f",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part004",
+      "sha256": "ac9d36af69bbaa20ca3322215414de26caef7b816c47e82f806edcb5dc9b7fbc",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part005",
+      "sha256": "3d05541df9cd9757101e9099e90b0552fd55a6ee18e343e80b45629bdfcb6dbd",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part006",
+      "sha256": "f32717b6e0018c3c0946a579238bef474ffc4c1ad9ece59d60014b3e0180edd6",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part007",
+      "sha256": "72e880c8a314c42e08694e6597fcca49fa3ba0129a00817668a72b70ed4f602e",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part008",
+      "sha256": "6d5725b545e7aa5fb79e872ef653bf7e0e8147cb83780d239d555da36d61a2dd",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part009",
+      "sha256": "2086ce509a4c68d5c30b8d485337b7defbe1b44058e81243a87510bf030dd22e",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part010",
+      "sha256": "436901a97d337d526b3cec609407a42db14ab32c25b5073cdd1a0fe13926cc26",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part011",
+      "sha256": "aeee1af8f6f6b4473ac84c613acba31b6e9f5a1ee06d2cc34b32d417f8b85ff9",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part012",
+      "sha256": "5a3a51c5936921a0b9f15d6e3d2823573f9a173a3e251b444169cf09d4614cc5",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.part013",
+      "sha256": "b76195e0b38010237a3eb35b609e185e62bf4aaab920c447cb787847ca0d38e9",
+      "bytes": 628000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.parts.json",
+      "sha256": "6671f66601180841e6510e0634891d1fb9273b458056c655f971934a79dff28f",
+      "bytes": 2696
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-comparison.json",
+      "sha256": "5e38e55e968624b9d13ae16511de6ce767e3865ca969927bd1b2c09e0555c976",
+      "bytes": 11021
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-execution-started.json",
+      "sha256": "7d44f20fcea3a4f6d5b4c932625e1891dbd9ccff1cfeb0ad07682bc4bc00bbb3",
+      "bytes": 3097
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-execution.json",
+      "sha256": "136e1a0b6473e9334dd87f643898d8e6290fca1afa338d7cb12d6877e4997e7c",
+      "bytes": 17574
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-host-preparation.json",
+      "sha256": "a423825677d1e81d89f84fc0ad271e9638eff182f6f28c372a9ab58dcb0a01e1",
+      "bytes": 19265
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-output.log.gz",
+      "sha256": "2d56fe18d12cd1a1beb6f3c72960a1335d2bd7e23d930e95a33bf51f4700bd65",
+      "bytes": 10227
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-output.raw.log",
+      "sha256": "2067c03546700e8c8288399e2c83eb99e8d781a5d02204b203800f18c66221b2",
+      "bytes": 268777
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-passive-owner-presence.json",
+      "sha256": "3fb9fe33d714e0a2bb6d923eb673aa8212c73bd54865c26a8f94981a2adfd1ce",
+      "bytes": 1096
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz",
+      "sha256": "37ed530b06c7b545bb4901773d2d3973dcc67b4eda352e6d88a23c30e28b9848",
+      "bytes": 15394957
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part000",
+      "sha256": "74f817dbd9af31ad1d60c900a202dfcb54872ae3078b3def5ad1a034b82ad9f9",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part001",
+      "sha256": "c7aad876f02d76b220f767ee31fddd63d77628ae6fe2c3c3c4b2ed2b6076910c",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part002",
+      "sha256": "91934e5755ad54c73781324c4eca15c7b25e4e8e4799f0f305e29b290b73b5f6",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part003",
+      "sha256": "61417e471600420185ca1ee816b3b731410ec03f1432c826217647078bd4ee4b",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part004",
+      "sha256": "cc2ba4de21b3e02a1d86c6631c97191c02ebe78ffb0cb8a79edba5481e92f935",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part005",
+      "sha256": "268227b2b0b0a64c67f966bae2f8e9e81699d4078164d857ec1f20b29b66cb9c",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part006",
+      "sha256": "5141d9df866ec566c8f97fbfb3822018dc6709090f615b62dff17dd0f699e4a4",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part007",
+      "sha256": "7260957dff080563629f74f6dc787d77b153c95eb11357f402806ef2d300c4f1",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part008",
+      "sha256": "57f9dda5f83a2f8e33ed0f77cc5255cb47f645c2a1093d5dd8cad46ddd26ce54",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part009",
+      "sha256": "fa0383be31caee9c1c9f3eea67997b206638ee026a051154164ac68dc25e76d5",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part010",
+      "sha256": "32c8e1890658c1e25f7244a1923f049ac700ed8889f7a4bf893c965a3917d9a3",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part011",
+      "sha256": "f17451fb305f7730a89c308a7a30c22b21d6222e194d05e250023ed3d2bbe615",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part012",
+      "sha256": "de0553fbc753059dfeafc0eb8a507af9df7574722e68310fa895b47486bc2636",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part013",
+      "sha256": "a0f2e177e25daf0d8b73882daf6bd9092c14b7ec687fe7d2b19b7da64bbaeb09",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part014",
+      "sha256": "3de2524b530c2998d2ecfa9125b667d0affec5faa04ffbdf6d263ecd85e904d0",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part015",
+      "sha256": "afaff60ab87c73a4c996b6c998058eb5bb2b9d68d2c27bc0b35a6c3bec2567f5",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part016",
+      "sha256": "12d6f7cfb0a7571e82e8491ca5d7a2b83c0714855c7fb7fbbeaa4ac789e8c7b9",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.part017",
+      "sha256": "5e678367a12dc772ff51c4ca680698749a7048317185d42e2305b89691afe42c",
+      "bytes": 94957
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.parts.json",
+      "sha256": "78b73c9f0b9574ceff781ec4a182e93373804dd9a232e8d225e0c027686658d1",
+      "bytes": 3367
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/source-archive-parts.json",
+      "sha256": "f54b89b1209c119aaf20541759bad4b03fb51c58b467881c4f2fc6bbce184c9d",
+      "bytes": 824
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/source-archive.json",
+      "sha256": "2d70b3175e3e9091f19040969a83db4b44a1a063f9c21b5d81c4ac46de8cd517",
+      "bytes": 35603
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/source-archive.tar.gz",
+      "sha256": "7026559d5b122a3a2b14afed994de5dede72bc3fd587a889c5d7f919e37e1173",
+      "bytes": 1784114
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/source-archive.tar.gz.part000",
+      "sha256": "e5c063caa4d9d075d452a8ff56b6c6050eb34df19bdca47a54f1f15beaab5652",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/source-archive.tar.gz.part001",
+      "sha256": "4cac732cae37286ec476f7b97b30f723c72bbeefd3f93d45cdd5b7e7ecfeb5f5",
+      "bytes": 884114
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/source-manifest.json",
+      "sha256": "699559bcf331e34dfa8e62137b099f05ba2e160811bc8e8e18ed1a3117bec164",
+      "bytes": 33961
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/test-expectation-correction/correction-source-review.json",
+      "sha256": "749a973ad1e6ed6909ede2f314ae02c5927f16528d8fd057f512d387c675bb73",
+      "bytes": 191744
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/test-expectation-correction/validation/checks-run.json",
+      "sha256": "74e6034d12e7cc7fe408a5b23b82bc02763da673f4ac949570f6219dd20bd135",
+      "bytes": 78558
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/test-expectation-correction/validation/delta-tests-output.log.gz",
+      "sha256": "5710808b64b934b64b6c38d75dc9a0fe57e14c0eb318992a3272e36168d015e9",
+      "bytes": 115173
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/test-expectation-correction/validation/delta-tests-run.json",
+      "sha256": "7ad0949868259cdae325a4f2c42c92b96b9b90b2f10ce13decd656b7c1c9b3e3",
+      "bytes": 124599
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/tria-relative-arrangement-source-parity.json.gz",
+      "sha256": "2d1097a564bee45da5ded53f8cc6b26479a1c32f429404743ff3b426c8e4480a",
+      "bytes": 65634
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/validation/build-output.log.gz",
+      "sha256": "47a4e378d927c781a2c1df9e2cef9b54ef50e06667050d9eaea28634dcb4f45e",
+      "bytes": 1591
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/validation/diff-check-output.log.gz",
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec",
+      "bytes": 20
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/validation/entry-audit-output.log.gz",
+      "sha256": "dacd1410b01b86ede4cb6d4160d5f01d8d16058919cf43016f645034b58a5f47",
+      "bytes": 180
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/validation/migration-audit-output.log.gz",
+      "sha256": "83398710af4d8f63a1e782a7e03904dfb1729b665c49d5ea92f52bd2e1c9efdd",
+      "bytes": 205
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/validation/typecheck-output.log.gz",
+      "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d",
+      "bytes": 141
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/aggregation-failure.json",
+      "sha256": "5de6b0b461c66606424f08a2369328de57b9ec1b1927740c3b353f0d3ae4b415",
+      "bytes": 4732
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/aggregation-failure.log",
+      "sha256": "ca4de3552bb5fadab6870aa98e9a82db176eea4c1a98881996c08dbf66e79d8b",
+      "bytes": 204711
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "bytes": 1451
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/after.json",
+      "sha256": "dbd6b834567f431882a4e33223b2e599a68dcaeab50600c04930c5d16c1ce7a8",
+      "bytes": 430594
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/after.log",
+      "sha256": "c3fe42a01cb1983245ac0f076a3b9429d8286840e062e9c6e9635d435f305d35",
+      "bytes": 1578
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/after.log.gz",
+      "sha256": "effd4997e62b4fa3afff157d323c3756b8ad97d076f55e17a0be6b6e4e8d557c",
+      "bytes": 443
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/baseline.json",
+      "sha256": "1e51742596cfd213e6875fcdb41dd8ed6a3f9650428c218acf08823e5b2ae797",
+      "bytes": 430297
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/baseline.log",
+      "sha256": "ca505ed08e57156cee14d91ac9032ca986707469c755c3c9397980ea8763cafe",
+      "bytes": 1588
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/baseline.log.gz",
+      "sha256": "9526f3656819ad7b30d30d139724e4623305a4927ccee046262cddb3c953d497",
+      "bytes": 448
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort1/comparison.json",
+      "sha256": "f77b0de27b5286819db0f9ad65e3d07cd5b283a1c20e9e660a60c25e9bb0c3e4",
+      "bytes": 25417
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/after.json",
+      "sha256": "3cf02b142de6fadbb5b840df894f8c87abe776854ad042b6e2a87c2ed3c21b9e",
+      "bytes": 430661
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/after.log",
+      "sha256": "b8e1d218ea6b039ddb82fb74b310e3774a14c5f827866cb1328a3233564b1ee2",
+      "bytes": 1572
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/after.log.gz",
+      "sha256": "53cae3919b5064266fa8ce932b1757f3f66bed17922eb63b392bd95caaad0f60",
+      "bytes": 438
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/baseline.json",
+      "sha256": "c9fce4ac5acf4450edf96d66d19ea18fd476b0573d513be183c237d70b9f748e",
+      "bytes": 430207
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/baseline.log",
+      "sha256": "106dd867198a11c808e62dd510ee8dc46b5783427b30977f6b19c40909c3512b",
+      "bytes": 1600
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/baseline.log.gz",
+      "sha256": "fb2f0c213c746292d5f09ba824bbfbe51bfbba75763c7261d1ccdefd5e7f4c6e",
+      "bytes": 450
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/comparison.json",
+      "sha256": "bf8714d55eba72dc73c236cfe48226c75b0639197ede8bb86f835c09ebb196a5",
+      "bytes": 25420
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/comparison-policy.json",
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+      "bytes": 991
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/coordinated-isolation.json",
+      "sha256": "0cb02fa8b949190573ab6f887b5f7b0c9ac5891f0541735a13bba7fc3be81312",
+      "bytes": 2080
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/declaration.json",
+      "sha256": "2940ab2c1b5b303ea103fbf6f3a9f1edaa0b83ff2b40cfbf535bda54f477bd20",
+      "bytes": 5556
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/global-budget-policy.json",
+      "sha256": "5f62d99315ea71efc91451596c171f2cc0782b14be8151ba503a427df8eaacf0",
+      "bytes": 2293
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-evidence/lot5a-status.json",
+      "sha256": "6c59d5cce15d1cd1342581cf26e886013def11f19c84777733f689511a573519",
+      "bytes": 5135
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-evidence/lot7b-status.json",
+      "sha256": "4daec9b73adc9785f453282df0aa71f93e38fd8d305657d3441faa446f0e0f42",
+      "bytes": 2439
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-evidence/own-agents-quiet.json",
+      "sha256": "32b8ef5521fccfff88c343be47248223f7ddf27bb64ffedadb9d23a4f2e48c46",
+      "bytes": 1315
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/log-transport.json",
+      "sha256": "1530cb3fb08337296c57915e06c9f5a852afd775b83c0463dd6436ba5673d999",
+      "bytes": 2880
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz",
+      "sha256": "1c2040e37350c3832134234cac6c0e8085ff02f8bff744c5b821214868c94e51",
+      "bytes": 5016756
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz.part000",
+      "sha256": "ef7a57a99451e7f4d8434326da6b5775465c4e576ac19e243dc73b0188a99a68",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz.part001",
+      "sha256": "8dadb32fe0e243e257d9561b3207a67753741b379fbd8ea3ebf7cc1fc57df8e0",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz.part002",
+      "sha256": "b2f542bc1a404f56c2fc630655cf17b75108fb5a545e097e04f3eb062da993eb",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz.part003",
+      "sha256": "102f6612818edf27a2a1667d3c29b20d440625213064e3ce1c4ef0bbb6e52e9c",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz.part004",
+      "sha256": "24ec0b791cf0e9d751057dc4934e25f18b138fb740cfe2da5215c218aa79194f",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz.part005",
+      "sha256": "9464055ec90fc16067483250724153721364fc1e2ceb56bda75ff50cdb6d592a",
+      "bytes": 516756
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz.parts.json",
+      "sha256": "553265fde62852e56ae4b691a0324fe815b1a5ca788c925e79329effb4da01bf",
+      "bytes": 1393
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+      "sha256": "022dcd292a0c41c8a2bdae0b0cd2d1196a3f3280890cdb62130caa87bcfb94cb",
+      "bytes": 105012
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz",
+      "sha256": "65528de50b2a1d7505880002bc28f0dbcb058c708ba6cd95636dae9e6dbedcc9",
+      "bytes": 5033871
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz.part000",
+      "sha256": "3518f5f41e94a1a0997b5db4648a7c869ef3c1a5060cb7fdb75f8655d7b5c5fe",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz.part001",
+      "sha256": "96c871bf6a5a927b428fef5be3ca236f77b0789d28c33fd50c78d8c03b9d61a0",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz.part002",
+      "sha256": "4a6092364917f1d1e80c5e123e0ab8296f3a1acdff0cdd29f3c1be6a2c2afdec",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz.part003",
+      "sha256": "4f49e7c78782dd77ac63e4d5b0203412e49ee3c67c14ab99e3ed93242fe0b3b5",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz.part004",
+      "sha256": "6d5b26b519e5405d24892841f7938185a464bdb5fee662f2853f50004d1abd3f",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz.part005",
+      "sha256": "df287be6844832bef33132ee13b167471846249012dee0e1b69c2be45ff23471",
+      "bytes": 533871
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz.parts.json",
+      "sha256": "a99dd1ca3247c9ca9ca7c00abdf6f31a7e78c61e6ab682f5d89cea20f77f255d",
+      "bytes": 1400
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.receipt.json",
+      "sha256": "94387fd2d0121106ea6623a7a03bee379efd1810fb128c4628fad5f5c48cffb0",
+      "bytes": 105296
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-growth-comparison.json",
+      "sha256": "5c6510f56105431e127b565d1d5b8d8a0cd2cdd52d684392040ff7bfc1dcd576",
+      "bytes": 244993
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-growth-contract.json",
+      "sha256": "ae75c71f8baafcfd9d6f2c607981351481ec531e26e7656d3c7d0fe2a1da1909",
+      "bytes": 22768
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-growth-review.json",
+      "sha256": "445b0283d1ae3860a2639da1af8f28cd369fa359424d846357bf8e37772098f1",
+      "bytes": 764063
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-source-inventory.json",
+      "sha256": "e722b1f40e5139a35f151ccf177d240a1bcedad66cebd9f5ef75a05d29fec65d",
+      "bytes": 109643
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-structural-attribution.json",
+      "sha256": "390d7a6801c9191146f372d842404eaa6cc3922f92b452e613589652d205816c",
+      "bytes": 73280
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-structural-fixture.json",
+      "sha256": "67d65dcaf4358af2237d3e3d6620141679890c89eafb5add264d1ea953c6b688",
+      "bytes": 60036
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/preparation.json",
+      "sha256": "23df7f57aa137b486320c72b1228aa58504c7e31634f6750214f401e781a064f",
+      "bytes": 3415
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/protocol-check.json",
+      "sha256": "bb190f7a1f98158146e3bdaf5d6dd109da6b7864d115cb8ec321e39a295932d3",
+      "bytes": 417
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/protocol.md",
+      "sha256": "f3c85310fd2ec64836875dee04822723eca5136795715ac2d6295f644997385f",
+      "bytes": 12573
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/readiness.json",
+      "sha256": "4f086495373c9794238810f00e32c280c195d321926073ebc81bc5d493ab184d",
+      "bytes": 42997
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/results-render.json",
+      "sha256": "8809add78fd5a78ebc7e77b4e003214c4455c81cb3866d6fe79acec012f02280",
+      "bytes": 10607
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/results.md",
+      "sha256": "1370240fe6b6373d1221c1813bc50a96a6c6d123097bdd104219c831431ffc8c",
+      "bytes": 33750
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/static-preflight-recheck.json",
+      "sha256": "c53a07cfde0679681c26749ed2941db4121971322dfb55e302bf89043251189a",
+      "bytes": 2455
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/static-preflight.json",
+      "sha256": "e31c198993e3536045fba1859841298662aeea451c0931e1d3bc2750b15f5894",
+      "bytes": 15950
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/window.json",
+      "sha256": "cb56920dab8a5f2404f72e428c80b7fc4db7f7ff6fbb401b30a2cd064223184d",
+      "bytes": 10543
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/prepare-cost-protocol.py",
+      "sha256": "f9dab9d3e94b51ebc75ce9e8ce192a0c8e23c26329714c00cfea8e8310f536e2",
+      "bytes": 28164
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/prepare-owner-cost-contract.py",
+      "sha256": "b3916d2b48e8e7a0b61771a14ad7e911bfa9fd7691eb6ac9bcaf99c79897c9f4",
+      "bytes": 13795
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/qualify-cost-owner-graphs.mjs",
+      "sha256": "3b9f006424fa27080993271d57d086537665dc25a6926b2b2a9ec48e48220ad5",
+      "bytes": 47487
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/record-cost-log-transport.py",
+      "sha256": "ced9c309bc72f791b3f451d4793e11a2830f414019c08aeb1df22522b671dc7a",
+      "bytes": 3763
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/record-cost-owner-source-inventory.mjs",
+      "sha256": "38077e5103a8657eec7dce1fdbc65506327e1a6f29a4bfcd622efb84119d73eb",
+      "bytes": 12532
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/recorded-regression-cases-final.json",
+      "sha256": "92039b4892be0ee05faa1e66001ec6d9f92403d7143ed0bf61462b78ba50eecc",
+      "bytes": 4490
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/review-owner-costs.py",
+      "sha256": "4e842901740ba1ac384df6198dabf766f7f7dfd6778917a183234ed9f02a994e",
+      "bytes": 70762
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/tria-case-resolution.json",
+      "sha256": "db90a62494a55bb8c96e59676a6bd9baf9521421cc3ea4f084acd23c70cf46fc",
+      "bytes": 2135
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/verify-publication-inputs.py",
+      "sha256": "75c8ba20cab0f0d231ce7193fe42664aa8ad75fef0b418778e018475615ad20c",
+      "bytes": 15729
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/write-cost-results.py",
+      "sha256": "0b4a31393535713d676a09a8b78ad67dbcbfeb2a0e835cabc4f6e709210afcc3",
+      "bytes": 40623
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+      "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+      "bytes": 17256
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/execution-lkey.json",
+      "sha256": "ac35fbe45492ee87b02e472455d828408b33d261ed1873f6044f1419c611dfec",
+      "bytes": 70533
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-actual-public-journal.jsonl.gz",
+      "sha256": "d00fd30f4c5579137e603e53faf9ab29d51c82c4b0dfb1c28ef31a0fcab67450",
+      "bytes": 8081
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+      "sha256": "11aa4589a7d294cc5c7aed2e0e3946541cf48a208b891b0c7229a190e290aff4",
+      "bytes": 5445629
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-public-trace.json.gz",
+      "sha256": "de96446d655f3c5165f4eeebfbd0aa1ed074c2b65ee35288d84c6d4112a2a763",
+      "bytes": 10983
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "bytes": 53583
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "bytes": 111624
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6",
+      "bytes": 424024
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "bytes": 48531
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+      "bytes": 46966
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-relative-arrangement-public-parity.py",
+      "sha256": "a6731204feb80b373ec79dd7fd4742a3ff24d58353597b5a8da261794e3c9f67",
+      "bytes": 39949
+    },
+    {
+      "path": "scripts/compare-v54-reactive-public-evidence.py",
+      "sha256": "3274acc5ed28a40f91ad0ee2e34c247ab160919ea43855cf514b4fbc22ef6a69",
+      "bytes": 18850
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/replay-native-partial-public-regression.mjs",
+      "sha256": "7fed8d182e48c9707d07856a78b3604f2279a678020906ed5e5716c4cb1d9665",
+      "bytes": 42152
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+      "bytes": 3361
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+      "bytes": 8476
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+      "bytes": 22204
+    },
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "bytes": 5421
+    },
+    {
+      "path": "scripts/verify-native-delivery.py",
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+      "bytes": 26494
+    },
+    {
+      "path": "scripts/verify-native-delta.py",
+      "sha256": "0ee99d46e7702b4b2c44c69ebef8cfaa646839be1134a8501f0d7220c0730780",
+      "bytes": 5917
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1",
+      "bytes": 11291
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207",
+      "bytes": 23637
+    },
+    {
+      "path": "src/logos-engine/v6-hash.ts",
+      "sha256": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5",
+      "bytes": 2842
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08",
+      "bytes": 14849
+    },
+    {
+      "path": "src/logos-engine/v6-native-authority.ts",
+      "sha256": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff",
+      "bytes": 23736
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "172db46681832ce3b944fad5a98d6cd54b2bd983e1c4245a0040e590841d4b8d",
+      "bytes": 147934
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d",
+      "bytes": 21947
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements.ts",
+      "sha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c",
+      "bytes": 13576
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77",
+      "bytes": 5903
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834",
+      "bytes": 1502394
+    },
+    {
+      "path": "src/runtime/v6-agent-protocol.ts",
+      "sha256": "597b4d4ab19882a37048e1fa9caeaebea2112b66e25f6294f428bb7916818aa4",
+      "bytes": 9389
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96",
+      "bytes": 18195
+    },
+    {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "sha256": "93b824b078ccf259827be897e8143dc59fc0479d6f765f3a437cc95b2f4472c1",
+      "bytes": 73454
+    }
+  ],
+  "inputsUnchanged": true,
+  "sourceArchiveVerification": {
+    "files": 297,
+    "archive": {
+      "path": "docs/migration/lot4b-evidence/integrated-final/source-archive.tar.gz",
+      "sha256": "7026559d5b122a3a2b14afed994de5dede72bc3fd587a889c5d7f919e37e1173",
+      "bytes": 1784114
+    },
+    "members": 297,
+    "parts": 2,
+    "byteIdentical": true
+  },
+  "byteStorage": {
+    "reports": 9,
+    "parts": 72,
+    "bytes": 60210836,
+    "originalsAbsentBeforeRestore": true,
+    "temporaryRootRemoved": true,
+    "originalsUnchanged": true,
+    "restoredByteIdentical": [
+      {
+        "path": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz",
+        "sha256": "824a6fbe3f92ad946b6da2362f30bab2d23c3db8aa50933e59e666da7a81d43b",
+        "bytes": 5733885,
+        "manifest": "docs/migration/lot4b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz.parts.json",
+        "parts": 7,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-replay.json.gz",
+        "sha256": "1fc568ec4bee3f2964c45ac388ce416a03fb3d98f796d97cab17fb61a8e49dd2",
+        "bytes": 1925599,
+        "manifest": "docs/migration/lot4b-evidence/integrated-final/regressions/catr-051-replay.json.gz.parts.json",
+        "parts": 3,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz",
+        "sha256": "33d47d9638b264a12c2b47349c60bdf873ff6e938cfd537579985598f86d3939",
+        "bytes": 3939724,
+        "manifest": "docs/migration/lot4b-evidence/integrated-final/regressions/conn-050-replay.json.gz.parts.json",
+        "parts": 5,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz",
+        "sha256": "eb0794f621fcf3b2c283a8862f14ed2c497efe6ce84c6c4f0489221ad0cb5631",
+        "bytes": 9454322,
+        "manifest": "docs/migration/lot4b-evidence/integrated-final/regressions/fogw-051-replay.json.gz.parts.json",
+        "parts": 11,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz",
+        "sha256": "d86f6baee43c9db0d122c97677552cd117c66939450edb4564a065d54d999721",
+        "bytes": 4981857,
+        "manifest": "docs/migration/lot4b-evidence/integrated-final/regressions/mind-051-replay.json.gz.parts.json",
+        "parts": 6,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-replay.json.gz",
+        "sha256": "0eb51898001f83702ddd59d0b2903148c1bc5718bef2c797ae27e09aaa70f3b3",
+        "bytes": 2992246,
+        "manifest": "docs/migration/lot4b-evidence/integrated-final/regressions/rswp-051-replay.json.gz.parts.json",
+        "parts": 4,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz",
+        "sha256": "ab6871538451108539ecefad128730b0c80826464653f552ca39cf9a623b512a",
+        "bytes": 3460246,
+        "manifest": "docs/migration/lot4b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz.parts.json",
+        "parts": 4,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz",
+        "sha256": "9896ee769b2d150f03737d910bc42d396f63cfcdf35e7d6df7e1c57c5e8eff29",
+        "bytes": 12328000,
+        "manifest": "docs/migration/lot4b-evidence/integrated-final/regressions/vois-051-replay.json.gz.parts.json",
+        "parts": 14,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz",
+        "sha256": "37ed530b06c7b545bb4901773d2d3973dcc67b4eda352e6d88a23c30e28b9848",
+        "bytes": 15394957,
+        "manifest": "docs/migration/lot4b-evidence/integrated-final/regressions/weav-051-replay.json.gz.parts.json",
+        "parts": 18,
+        "restored": true,
+        "byteIdentical": true
+      }
+    ]
+  },
+  "performanceByteStorage": {
+    "reports": 2,
+    "parts": 12,
+    "bytes": 10050627,
+    "originalsAbsentBeforeRestore": true,
+    "temporaryRootRemoved": true,
+    "originalsUnchanged": true,
+    "restoredByteIdentical": [
+      {
+        "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz",
+        "sha256": "1c2040e37350c3832134234cac6c0e8085ff02f8bff744c5b821214868c94e51",
+        "bytes": 5016756,
+        "manifest": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz.parts.json",
+        "parts": 6,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz",
+        "sha256": "65528de50b2a1d7505880002bc28f0dbcb058c708ba6cd95636dae9e6dbedcc9",
+        "bytes": 5033871,
+        "manifest": "docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz.parts.json",
+        "parts": 6,
+        "restored": true,
+        "byteIdentical": true
+      }
+    ]
+  },
+  "historicalStrictPassed": false,
+  "workMetadataExactAcrossVersions": false,
+  "cost": {
+    "review": {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-growth-review.json",
+      "sha256": "445b0283d1ae3860a2639da1af8f28cd369fa359424d846357bf8e37772098f1",
+      "bytes": 764063
+    },
+    "aggregate": {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/owner-growth-comparison.json",
+      "sha256": "5c6510f56105431e127b565d1d5b8d8a0cd2cdd52d684392040ff7bfc1dcd576",
+      "bytes": 244993
+    },
+    "globalStatus": "accepted_under_predeclared_owner_cost_rule",
+    "arithmeticReviewChecks": 3960,
+    "diagnosticPhaseRule": {
+      "status": "budget_review_required",
+      "budgetMetricCount": 16,
+      "withinObservedBudget": 14,
+      "unresolved": [
+        {
+          "case": "SMLP",
+          "stage": "known_prefix_guard",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.12069030093961497
+        },
+        {
+          "case": "SMLP",
+          "stage": "restoration",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.2983067024536985
+        }
+      ]
+    },
+    "render": {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/results-render.json",
+      "sha256": "8809add78fd5a78ebc7e77b4e003214c4455c81cb3866d6fe79acec012f02280",
+      "bytes": 10607
+    }
+  },
+  "runtimeOrGameExecuted": false,
+  "measurementExecuted": false,
+  "qualification": "same executed inputs, no new functional execution. File integrity and byte transport only. The premeasurement owner qualification and independent cost decision retain their limits; historical strict aggregation remains failed. This is not publication, a new live success, a new performance calculation or proof of uncaptured private measured graph leaves."
+}

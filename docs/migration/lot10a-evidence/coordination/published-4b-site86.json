@@ -1,0 +1,40 @@
+{
+  "schema": "logos-engine.published-predecessor-observation.v1",
+  "recordedAt": "2026-11-10T23:00:08.734Z",
+  "status": "verified_published",
+  "lot": "4B",
+  "nativeVersion": "0.54.0",
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_4ef4534a7080819194a01604513ae2dc",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 86,
+    "source": {
+      "commit_sha": "082ce553ce4dfbac37071a64497bcca129b7ced0"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000a9bc820e8f857d8eb6004942",
+      "content_hash": "sha256:f53c8790f0b099113c899c06ac55f455eb7c86153da7d5036499b6076433870c",
+      "size_bytes": 29829120,
+      "file_count": 75
+    },
+    "deployment_id": "appgdep_6af3a1a4ffb081918113831cbc83ee4d"
+  },
+  "deployment": {
+    "id": "appgdep_6af3a1a4ffb081918113831cbc83ee4d",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_4ef4534a7080819194a01604513ae2dc",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-10T22:59:03.528254+00:00"
+  },
+  "evidenceMethod": "Direct Sites list_site_versions and get_deployment_status responses. Native source version and digest must also be reconciled from the exact published Git commit before final freeze.",
+  "qualification": "Actual published predecessor only; no claim of 10A publication, final source validation or cost acceptance."
+}
