@@ -1,0 +1,1343 @@
+{
+  "schema": "logos-engine.lot4a.integrated-validation-planning.v1",
+  "status": "prepared_not_executed",
+  "recordedAt": "2026-11-10T18:31:34.389769+00:00",
+  "scope": "Lightweight preparation only during the concurrent3I performance slot. No fetch, source copy, merge, runner invocation, replay, test, audit, build, source import, benchmark or game execution is performed by this plan.",
+  "onlyArtifactWritten": "docs/migration/lot4a-evidence/planning/integrated-validation-plan.json",
+  "currentCandidatePreserved": {
+    "nativeDigest": "66be0948fdff5abe10b12d253bb4583db067aab2f5b7248632c9f9d443bc53fe",
+    "sourceManifest": {
+      "path": "docs/migration/lot4a-evidence/final/source-manifest.json",
+      "bytes": 32130,
+      "sha256": "09118332044f22a23eb84a7a2b76c1c28bd1c425ec665a9e883510152fc21daa"
+    },
+    "mutation": false,
+    "existingEvidenceRemainsImmutable": true
+  },
+  "futureCandidate": {
+    "intendedImplementation": "logos-engine.typescript.v6.native-migration/0.51.0",
+    "implementationAssignment": "Provisional until the actual publication/fetch establishes the preceding version.",
+    "nativeDigest": null,
+    "freezeDirectory": "docs/migration/lot4a-evidence/integrated-051",
+    "mustContainBothEntries": [
+      "observed_feedback_sequence",
+      "recurrent_series"
+    ],
+    "doNotReuseExistingFinalFreeze": "docs/migration/lot4a-evidence/final",
+    "qualification": "The integrated candidate is not yet created or validated. Neither e039a62b (3I worktree) nor66be0948 (Feedback worktree) identifies its future bytes."
+  },
+  "publicationGate": {
+    "current3ICheckout": "/workspace/sites/sra-playground-step3d/.sites-checkout",
+    "currentFeedbackCheckout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+    "lastObservedSharedHead": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+    "sourceOf3IInspection": "Uncommitted working-copy files and local evidence, not an attested published release.",
+    "executionAllowedByThisPlan": false,
+    "afterPublicationAndFetch": [
+      "Record actual Site version, source commit and implementation identity from the published release; fetch into a distinct integration checkout without overwriting the current66be0948 checkout.",
+      "Re-read the delivered released-runner/host, the successful3I test scope, final regression summary and any recovery receipts. Pin delivered hashes; these working-copy fingerprints are provisional.",
+      "Require completed passed WEAV recovery execution plus all17 comparison checks and the exact81-action public stream. A host-preparation receipt or recovery script describing future success is not a completed replay.",
+      "Use the delivered0.50 reports as the five regression baselines if their publication and pass identities are verified; preserve their original public trace bytes. If the delivered paths differ, update the plan/manifest with actual provenance before execution.",
+      "Merge additive Feedback and recurrent wiring, preserve both owners and source order, reconcile the hard-coded routing tests, then freeze the actual integrated candidate in a new directory.",
+      "Run any substantive validation only after the active3I slot has ended and coordination permits it. Official performance uses its own separately declared isolated slot; none is started by this plan."
+    ],
+    "observed3IRegressionStatusAtRead": {
+      "status": "failed",
+      "passed": 4,
+      "total": 5,
+      "retrySummaryExisted": false,
+      "qualification": "A time-specific working-copy observation; do not promote it to a publication claim."
+    },
+    "latestWorkingRecoveryUpdate": {
+      "recordedAt": "2026-11-10T18:43:03.175542+00:00",
+      "reportedStatus": "in_progress",
+      "published": false,
+      "successAssumed": false,
+      "driver": "scripts/run-released-public-regressions-streamlog.py",
+      "driverWorkingCopyIdentity": {
+        "path": "scripts/run-released-public-regressions-streamlog.py",
+        "bytes": 15626,
+        "sha256": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+      },
+      "planWorkingCopyIdentity": {
+        "path": "docs/migration/lot3i-evidence/weav-streamlog-recovery-plan.json",
+        "bytes": 5885,
+        "sha256": "5b0058893fa6bbbc02a1219f4f8a0fcf28c09321da30b4c9f2c38ab4e58df566"
+      },
+      "caseManifest": "docs/migration/lot3i-evidence/weav-streamlog-recovery-cases.json",
+      "directory": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2",
+      "expectedReport": {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz",
+        "sha256": null,
+        "bytes": null
+      },
+      "expectedSummary": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/regression-summary.json",
+      "currentlyObservedArtifactKinds": [
+        "execution-started.json",
+        "execution.json",
+        "host-preparation.json",
+        "output.raw.log"
+      ],
+      "priorReleasedDriverAttempt": "The previous weav-memory-retry attempt retains preparation but lacks observed final exit/report; cause remains unknown, without an inferred OOM classification.",
+      "requiredAfterFetch": "Select the actual delivered completed proof, which may differ from this in-progress candidate. Verify all path/hash/source/status identities then; do not fill null from a preparation receipt or progress counter."
+    }
+  },
+  "reviewedTools": [
+    {
+      "path": "scripts/run-released-public-regressions.py",
+      "bytes": 14089,
+      "sha256": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+      "observedInCheckout": "/workspace/sites/sra-playground-step3d/.sites-checkout",
+      "publishedAtPreparation": false,
+      "revalidateAfterFetch": true
+    },
+    {
+      "path": "scripts/replay-public-regression-released-baseline.mjs",
+      "bytes": 6355,
+      "sha256": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+      "observedInCheckout": "/workspace/sites/sra-playground-step3d/.sites-checkout",
+      "publishedAtPreparation": false,
+      "revalidateAfterFetch": true
+    },
+    {
+      "path": "scripts/run-recorded-public-regressions.py",
+      "bytes": 20897,
+      "sha256": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+      "observedInCheckout": "/workspace/sites/sra-playground-step3d/.sites-checkout",
+      "publishedAtPreparation": false,
+      "revalidateAfterFetch": true
+    },
+    {
+      "path": "scripts/compare-v54-regressions.py",
+      "bytes": 18166,
+      "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+      "observedInCheckout": "/workspace/sites/sra-playground-step3d/.sites-checkout",
+      "publishedAtPreparation": false,
+      "revalidateAfterFetch": true
+    },
+    {
+      "path": "scripts/replay-v53-public-regression.mjs",
+      "bytes": 2447,
+      "sha256": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+      "observedInCheckout": "/workspace/sites/sra-playground-step3d/.sites-checkout",
+      "publishedAtPreparation": false,
+      "revalidateAfterFetch": true
+    },
+    {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "bytes": 5421,
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "observedInCheckout": "/workspace/sites/sra-playground-step3d/.sites-checkout",
+      "publishedAtPreparation": false,
+      "revalidateAfterFetch": true
+    },
+    {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "bytes": 66724,
+      "sha256": "b0acd3a5a3a7e1293745c3a5843231eda7929589a7ce0c5fe402fc30d390d257",
+      "observedInCheckout": "/workspace/sites/sra-playground-step3d/.sites-checkout",
+      "publishedAtPreparation": false,
+      "revalidateAfterFetch": true
+    },
+    {
+      "path": "scripts/run-released-public-regressions-streamlog.py",
+      "bytes": 15626,
+      "sha256": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9",
+      "observedInCheckout": "/workspace/sites/sra-playground-step3d/.sites-checkout",
+      "publishedAtPreparation": false,
+      "revalidateAfterFetch": true
+    }
+  ],
+  "releasedReplayHostContract": {
+    "runner": "scripts/run-released-public-regressions-streamlog.py",
+    "host": "scripts/replay-public-regression-released-baseline.mjs",
+    "reusedPrevalidator": "scripts/run-recorded-public-regressions.py:prepare",
+    "reusedComparator": "scripts/compare-v54-regressions.py:compare",
+    "normalHarness": "tests/helpers/v6-live-game-campaign.ts:runNativeGameCampaign",
+    "processOrder": [
+      "Python prevalidation child exits",
+      "one Node recorded replay exits",
+      "Python unchanged comparator child exits",
+      "next case"
+    ],
+    "maximumConcurrentReplays": 1,
+    "runnerArguments": {
+      "required": [
+        "manifest",
+        "directory",
+        "--source-manifest"
+      ],
+      "nodeOldSpaceMiBChoices": [
+        768,
+        1024,
+        1536
+      ],
+      "plannedNodeOldSpaceMiB": 1536,
+      "timeoutSecondsMaximum": 2400,
+      "workersArgument": "Not supported; this runner is sequential by construction."
+    },
+    "nodeCommandShape": [
+      "node",
+      "--expose-gc",
+      "--max-old-space-size=1536",
+      "scripts/replay-public-regression-released-baseline.mjs",
+      "BASELINE",
+      "TRACE.json.gz",
+      "REPORT.json.gz",
+      "PREPARATION.json"
+    ],
+    "memoryRationale": {
+      "observedOriginalWEAVBaselineDecodedBytes": 90453644,
+      "retainedFailureFacts": [
+        {
+          "exitCode": -9,
+          "lastAcquiredActions": 67,
+          "cause": "External SIGKILL; cause not established by this log alone."
+        },
+        {
+          "exitCode": -6,
+          "nodeOldSpaceMiB": 768,
+          "lastRequestedOperation": "resume",
+          "sequence": 16,
+          "fatal": "Ineffective mark-compacts near heap limit; JavaScript heap out of memory"
+        }
+      ],
+      "releaseMechanism": "The Node preparation function returns only game/target/assets, provenance and original trace packets. After a fresh event-loop turn, explicit GC must make a WeakRef to the historical report root empty before importing the complete harness.",
+      "pythonReleaseMechanism": "Full historical prevalidation reports live only in a child that exits before Node; baseline/current/trace comparison starts in another child only after Node exits.",
+      "currentReplayEvidenceRetainedInFull": true,
+      "doesNotDisableObserversOrFeedbackCapture": true,
+      "doesNotChangeProductionBudgetsOrComparator": true,
+      "qualification": "This removes documented unnecessary historical-report retention. It does not guarantee a peak-memory limit for newly recorded observations or promise that the future integrated replay cannot exhaust memory. The1536MiB old-space cap and exposed GC are regression-host settings only and must not leak into official cost measurements."
+    },
+    "exclusiveOutputs": [
+      "DIRECTORY/preflight.json",
+      "DIRECTORY/regressions/regression-summary.json",
+      "DIRECTORY/regressions/CASE-replay.json.gz",
+      "DIRECTORY/regressions/CASE-comparison.json",
+      "DIRECTORY/regressions/CASE-passive-owner-presence.json",
+      "DIRECTORY/regressions/CASE-output.log.gz",
+      "DIRECTORY/regressions/CASE-execution.json",
+      "DIRECTORY/regressions/CASE-host-preparation.json",
+      "DIRECTORY/regressions/CASE-output.raw.log",
+      "DIRECTORY/regressions/CASE-execution-started.json"
+    ],
+    "acceptance": [
+      "prevalidationProcessExitedBeforeAnyReplay=true",
+      "baselineRootCollectedBeforeHarnessImport=true",
+      "Node exits0 without timeout",
+      "all17 unchanged comparison checks pass",
+      "native source equals the declared final freeze before/after",
+      "baseline and trace immutable",
+      "executionInputs and executionInputsAfter identical",
+      "all current reports and adverse results retained",
+      "nodeExitObserved=true",
+      "no driverInterruption or postprocessingError promoted to success"
+    ],
+    "helperDriver": "scripts/run-released-public-regressions.py",
+    "runnerSelectionQualification": "Prefer the durable streamlog driver only after its actual publication, fetch and fingerprint validation. It reuses the reviewed released-baseline host and comparator; its working-copy presence is not delivery.",
+    "durability": {
+      "rawOutput": "Node writes directly to persistent CASE-output.raw.log, not an anonymous temporary file or a display pipe.",
+      "startedReceipt": "CASE-execution-started.json is exclusive and written before Popen.",
+      "currentReceipt": "CASE-execution.json is atomically refreshed with child identity, last progress and process-memory samples until finalized.",
+      "catchableInterruption": "The child is stopped and observed exit metadata plus raw/compressed logs are retained.",
+      "uncatchableInterruption": "SIGKILL cannot execute finally; started/current/raw evidence remains incomplete. A lost tool handle alone is not classified as out-of-memory.",
+      "doesNotChangeNormalHarnessOrEvidencePayload": true
+    },
+    "outputLifecycleQualification": "Paths must be absent before an attempt. The raw journal grows and the current execution receipt changes while the child is active; only final completed evidence may be packed or fingerprinted as immutable delivery evidence."
+  },
+  "fiveRegressions": {
+    "gamesInOrder": [
+      "CATR",
+      "RSWP",
+      "FOGW",
+      "VOIS",
+      "WEAV"
+    ],
+    "manifestToMaterializeAfterFetch": "docs/migration/lot4a-evidence/integrated-051-regression-cases.json",
+    "manifestSchema": "logos-engine.recorded-public-regression-cases.v1",
+    "templateIsExecutableNow": false,
+    "caseCandidates": [
+      {
+        "id": "catr-published-050",
+        "game": "CATR",
+        "proposedBaselineFrom3I": {
+          "path": "docs/migration/lot3i-evidence/final/regressions/catr-049-replay.json.gz",
+          "sha256": "779d50a3088a8c2c16abc2ff46213356402db4001309babac005a238cdd83350",
+          "bytes": 1373207
+        },
+        "trace": {
+          "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+          "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+        },
+        "earlierPublished049Baseline": {
+          "path": "docs/migration/lot3h-evidence/final/regressions/catr-048-replay.json.gz",
+          "sha256": "cd02c23d1e4d2fdbe2023c5a4959ee65dfbc4a18054585254d2bcdb99dcbff88"
+        },
+        "expectedActionsFromRetainedTrajectory": 12,
+        "expectedPrefixesFromRetainedTrajectory": 8,
+        "publicationStatus": "unverified_working_copy_candidate",
+        "admission": "After fetch, require the report and its successful comparison/execution receipt in the verified published 3I checkout; verify native source identity, every command/packet and current bytes. Replace these tentative fingerprints if the delivered evidence differs. Never silently fall back to the older baseline."
+      },
+      {
+        "id": "rswp-published-050",
+        "game": "RSWP",
+        "proposedBaselineFrom3I": {
+          "path": "docs/migration/lot3i-evidence/final/regressions/rswp-049-replay.json.gz",
+          "sha256": "b443cdf19caa7b4c3bbc353d3dc9273b8d3d9b0115323d879fdbeadf2694a183",
+          "bytes": 2179314
+        },
+        "trace": {
+          "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+          "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+        },
+        "earlierPublished049Baseline": {
+          "path": "docs/migration/lot3h-evidence/final/regressions/rswp-048-replay.json.gz",
+          "sha256": "e2e0c550edf3323fe66014274e1464c6ecca9061b761b90b11cc4c4093460120"
+        },
+        "expectedActionsFromRetainedTrajectory": 19,
+        "expectedPrefixesFromRetainedTrajectory": 11,
+        "publicationStatus": "unverified_working_copy_candidate",
+        "admission": "After fetch, require the report and its successful comparison/execution receipt in the verified published 3I checkout; verify native source identity, every command/packet and current bytes. Replace these tentative fingerprints if the delivered evidence differs. Never silently fall back to the older baseline."
+      },
+      {
+        "id": "fogw-published-050",
+        "game": "FOGW",
+        "proposedBaselineFrom3I": {
+          "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz",
+          "sha256": "566dd7bd6056ca514c06b3f37ba1740b00961f119aa8e9b792ca60b66bd54322",
+          "bytes": 6891744
+        },
+        "trace": {
+          "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+          "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46"
+        },
+        "earlierPublished049Baseline": {
+          "path": "docs/migration/lot3h-evidence/final/regressions/fogw-048-replay.json.gz",
+          "sha256": "737241772f443bc4af6cf2bc5bb24178e0abaf0658f398651af9f6dbec54c9ea"
+        },
+        "expectedActionsFromRetainedTrajectory": 50,
+        "expectedPrefixesFromRetainedTrajectory": 27,
+        "publicationStatus": "unverified_working_copy_candidate",
+        "admission": "After fetch, require the report and its successful comparison/execution receipt in the verified published 3I checkout; verify native source identity, every command/packet and current bytes. Replace these tentative fingerprints if the delivered evidence differs. Never silently fall back to the older baseline."
+      },
+      {
+        "id": "vois-published-050",
+        "game": "VOIS",
+        "proposedBaselineFrom3I": {
+          "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz",
+          "sha256": "c0e10237ef6e955675ccbd73bc6828d963ac6b67a752f682b768a537b7624378",
+          "bytes": 9022543
+        },
+        "trace": {
+          "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+          "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d"
+        },
+        "earlierPublished049Baseline": {
+          "path": "docs/migration/lot3h-evidence/final/regressions/vois-048-replay.json.gz",
+          "sha256": "2d130642dab5cd2b0f5660a692fa4d9e7620ccbc6743d246293c913ce0ebec96"
+        },
+        "expectedActionsFromRetainedTrajectory": 78,
+        "expectedPrefixesFromRetainedTrajectory": 42,
+        "publicationStatus": "unverified_working_copy_candidate",
+        "admission": "After fetch, require the report and its successful comparison/execution receipt in the verified published 3I checkout; verify native source identity, every command/packet and current bytes. Replace these tentative fingerprints if the delivered evidence differs. Never silently fall back to the older baseline."
+      },
+      {
+        "id": "weav-published-050",
+        "game": "WEAV",
+        "proposedBaselineFrom3I": {
+          "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz",
+          "sha256": null,
+          "bytes": null
+        },
+        "trace": {
+          "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+          "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+        },
+        "earlierPublished049Baseline": {
+          "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-campaign.json.gz",
+          "sha256": "74b5890967f4675e9005549692d744cb803acbc6c8dc627f4f23585582e4caa5"
+        },
+        "expectedActionsFromRetainedTrajectory": 81,
+        "expectedPrefixesFromRetainedTrajectory": 81,
+        "publicationStatus": "in_progress_working_recovery_not_published",
+        "admission": "Await a final passed streamlog execution and all17 unchanged comparison checks on the81-action trace, then attest the delivered path, hash and native source after publication/fetch. The current candidate hash remains null; no success is anticipated.",
+        "supersededWorkingRecoveryCandidate": {
+          "path": "docs/migration/lot3i-evidence/final/weav-memory-retry/regressions/weav-049-memory-efficient-replay.json.gz",
+          "sha256": null,
+          "bytes": null
+        }
+      }
+    ],
+    "materializationRule": "For each admitted delivered report use exactly {id,game,baseline:{path,sha256},trace:{path,sha256}}. Use fresh safe lowercase ids ending published-050 only after verifying that published identity; include passiveOwnerRequirements:[]. The tentative WEAV null fingerprint must be resolved, never passed to a runner.",
+    "passiveOwnerRequirements": [],
+    "reasonForNoGenericFeedbackOwnerRequirement": "The generic presence checker requires sourceState/nativeCheckpoint/transition envelopes on every prefix. Feedback records use a different own-state contract and are absent on unrecognized interfaces. Its actual selected/passive behavior has separate targeted evidence.",
+    "baselinePolicy": "Prefer verified delivered3I0.50 execution reports as nearest-release baselines. The supplied original0.49 alternatives are provenance only and are not an automatic fallback.",
+    "expectedRetainedTotalsToRecheck": {
+      "commands": 240,
+      "completePublicPackets": 245,
+      "prefixes": 169,
+      "animationFrames": 705,
+      "requests": 409,
+      "naturalLevelBoundaries": 15,
+      "historicalComparisonChecks": 85
+    },
+    "commandAfterPrerequisites": [
+      "python3",
+      "-B",
+      "scripts/run-released-public-regressions-streamlog.py",
+      "docs/migration/lot4a-evidence/integrated-051-regression-cases.json",
+      "docs/migration/lot4a-evidence/integrated-051",
+      "--source-manifest",
+      "docs/migration/lot4a-evidence/integrated-051/source-manifest.json",
+      "--node-old-space-mib",
+      "1536",
+      "--timeout-seconds",
+      "2400"
+    ],
+    "qualification": "Cold recomputation on immutable recorded returns, not five new live campaigns or a cost benchmark. Every current command is computed before the host releases its corresponding return. The17 checks cover declared public/caller projections; full provider-state equality and original-common-caller parity are not asserted."
+  },
+  "mindReplay": {
+    "manifestToMaterialize": "docs/migration/lot4a-evidence/integrated-051-mind-replay-case.json",
+    "manifestContent": {
+      "schema": "logos-engine.recorded-public-regression-cases.v1",
+      "cases": [
+        {
+          "id": "mind-feedback-66be0948",
+          "game": "MIND",
+          "baseline": {
+            "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02/mind-campaign.json.gz",
+            "sha256": "995714bd0d458100dfce8c3f1eeeed67f76f4d83de18debfa2569598426bc2f5"
+          },
+          "trace": {
+            "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02/mind-public-trace.json.gz",
+            "sha256": "3fe7708a8372041bc081dae17ef0c11ab0f4e6d514e41fb51f8d025760bdf752"
+          }
+        }
+      ],
+      "passiveOwnerRequirements": [],
+      "qualification": "Cold future integrated-candidate replay of the exact 31-action MIND public trajectory from Feedback candidate digest66be0948fdff5abe10b12d253bb4583db067aab2f5b7248632c9f9d443bc53fe. This historical candidate is not the separate published3I0.50 baseline. Expected commands remain in the replay host and every current command precedes its supplied return. The normal complete harness must retain feedbackSourceCalls and observedFeedbackSequence. The seventeen historical checks are supplemented by cold unchanged-original family replay, without claiming full original caller parity, a new live success or a performance result."
+    },
+    "historicalBaseline": {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02/mind-campaign.json.gz",
+      "bytes": 4348035,
+      "sha256": "995714bd0d458100dfce8c3f1eeeed67f76f4d83de18debfa2569598426bc2f5"
+    },
+    "publicTrace": {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02/mind-public-trace.json.gz",
+      "bytes": 17257,
+      "sha256": "3fe7708a8372041bc081dae17ef0c11ab0f4e6d514e41fb51f8d025760bdf752"
+    },
+    "historicalContribution": {
+      "path": "docs/migration/lot4a-evidence/final/feedback-public-contribution.json",
+      "bytes": 51324,
+      "sha256": "a60bf7aa6f3482ef694b7cfe108d48fb175f79067103367f61f290e57a68821f"
+    },
+    "historicalFamilyParity": {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02/mind-feedback-source-parity.json.gz",
+      "bytes": 36237,
+      "sha256": "2bb4f0681b3351908c0e93adc48c20de3a00b74b985399483eefd89d805ab3bb"
+    },
+    "historicalCandidateNativeDigest": "66be0948fdff5abe10b12d253bb4583db067aab2f5b7248632c9f9d443bc53fe",
+    "baselineQualification": "This is our retained Feedback diagnostic candidate, not an assumed published0.50. Its public trajectory remains an admissible explicit regression input with that narrower provenance.",
+    "commandAfterPrerequisites": [
+      "python3",
+      "-B",
+      "scripts/run-released-public-regressions-streamlog.py",
+      "docs/migration/lot4a-evidence/integrated-051-mind-replay-case.json",
+      "docs/migration/lot4a-evidence/integrated-051/mind-public-replay",
+      "--source-manifest",
+      "docs/migration/lot4a-evidence/integrated-051/source-manifest.json",
+      "--node-old-space-mib",
+      "1536",
+      "--timeout-seconds",
+      "2400"
+    ],
+    "normalHarnessRequirement": {
+      "importsNormalHarnessThroughReleasedHost": true,
+      "mustRetain": [
+        "feedbackSourceCalls",
+        "prefixes[].observedFeedbackSequence",
+        "actions",
+        "requests",
+        "boundaries",
+        "complete public input arguments"
+      ],
+      "capturedCallFields": [
+        "index",
+        "method",
+        "nativeMethod",
+        "selectionEntry",
+        "arguments",
+        "sourceBefore",
+        "result",
+        "sourceAfter"
+      ],
+      "proposePublicArgumentCount": 4,
+      "recordPublicArgumentCountRange": [
+        5,
+        7
+      ],
+      "recordResult": "events[0] already unwrapped",
+      "noStateSeed": "Neither historical sourceBefore nor checkpoints prime the new native runtime or the original Feedback replay.",
+      "doNotUse": "A reduced report, disabled observers, a stubbed provider or supplied expected actions."
+    },
+    "expectedHistoricalCoverageToVerify": {
+      "actions": 31,
+      "completePublicPackets": 32,
+      "prefixes": 20,
+      "feedbackSourceCalls": 51,
+      "feedbackProposeCalls": 20,
+      "feedbackRecordCalls": 31,
+      "selectedObservedAppend": 24,
+      "observedSubmissionFeedback": 4,
+      "officialBoundary": 3,
+      "publicObservationsRemeasured": 32,
+      "persistedPrefixStates": 20,
+      "eligibleHistoryAblations": 8
+    },
+    "replayReport": "docs/migration/lot4a-evidence/integrated-051/mind-public-replay/regressions/mind-feedback-66be0948-replay.json.gz",
+    "familyParityCommandAfterReplay": [
+      "python3",
+      "-B",
+      "scripts/compare-feedback-public-parity.py",
+      "docs/migration/lot4a-evidence/integrated-051/mind-public-replay/regressions/mind-feedback-66be0948-replay.json.gz",
+      "--output",
+      "docs/migration/lot4a-evidence/integrated-051/mind-public-replay/mind-feedback-source-parity.json.gz"
+    ],
+    "familyComparatorCurrentIdentity": {
+      "path": "scripts/compare-feedback-public-parity.py",
+      "bytes": 18997,
+      "sha256": "0f22f59cab245e210be437c81e032bf64657fe7241ece0f49970fb25220f3ffd"
+    },
+    "familyAcceptance": [
+      "The replay report is complete and passed on the declared integrated freeze.",
+      "All51 captured calls are complete and ordered, with no duplicate actual acquisition.",
+      "Original Feedback starts empty; native states remain comparison data only.",
+      "Full proposal/return and before/after state match, with no unapproved normalization.",
+      "All1786 original source files are verified unchanged before and after.",
+      "The32 measured observations and20 persisted prefix states are cross-checked;31 captured record commands match the independently recorded actions.",
+      "Retain all8 eligible history ablations, including unchanged decisions and errors. Do not count mere evidence metadata changes as different choices."
+    ],
+    "historicalAblationReference": {
+      "changedActionAndTrialCalls": [
+        8,
+        37,
+        44
+      ],
+      "sameChoiceChangedAccountingCall": 22,
+      "unchangedBoundSubmissionCalls": [
+        12,
+        26,
+        42,
+        49
+      ],
+      "qualification": "Reference findings to compare honestly, not outputs to force on the new candidate."
+    },
+    "scope": "A new cold native common-caller replay of the existing31-action public path, followed by source-family parity on its actual arguments. This is not an original Python common-caller replay, a new live MIND completion, or a full-caller history ablation.",
+    "action7Qualification": "The observed interface announces ACTION5/6/7. Native and original ObservedInputDomain whitelist ACTION1..5 for non-addressed controls, adding ACTION6 loci; ACTION7 remains outside captured candidates. Original-family replay consumes that captured domain."
+  },
+  "mergedTestScope": {
+    "sourceReceipts": {
+      "lot3IWorkingCopy": {
+        "path": "docs/migration/lot3i-evidence/final/validation/delta-tests-run.json",
+        "bytes": 114673,
+        "sha256": "f250f63d2ff9d4c209d711c19dda2c2691b4b0b1bb4d217b859d8e25cef0cd01",
+        "published": false,
+        "revalidateAfterFetch": true
+      },
+      "lot4ACurrentFrozenCandidate": {
+        "path": "docs/migration/lot4a-evidence/final/validation/delta-tests-run.json",
+        "bytes": 110166,
+        "sha256": "37a303137e85923886f5fce8f523ab97aaa00756563ff2f0d97093bb1e5ca12e"
+      }
+    },
+    "lot3IFiles": 76,
+    "lot4AFiles": 28,
+    "sharedFiles": 15,
+    "unionFiles": 89,
+    "additionalFiles": [
+      "tests/v6-source-entry-routing.test.ts"
+    ],
+    "selectedFileCount": 90,
+    "allFilesExistInAtLeastOneInspectedCheckout": true,
+    "testFiles": [
+      "tests/bounded-weak-cache.test.ts",
+      "tests/canonical-cache.test.ts",
+      "tests/v5-finite-relation-domain.test.ts",
+      "tests/v5-piercing-native.test.ts",
+      "tests/v5-reception-wait-contracts.test.ts",
+      "tests/v5-reference-population-calculus.test.ts",
+      "tests/v5-temporal-fragment-match.test.ts",
+      "tests/v6-agent.test.ts",
+      "tests/v6-alternating-graph-access.test.ts",
+      "tests/v6-alternating-graph-integration.test.ts",
+      "tests/v6-auxiliary-support.test.ts",
+      "tests/v6-caller-integration.test.ts",
+      "tests/v6-cell-placement-integration.test.ts",
+      "tests/v6-cell-placement.test.ts",
+      "tests/v6-configured-arrivals.test.ts",
+      "tests/v6-control-attention-reference.test.ts",
+      "tests/v6-coupled-pair-planning.test.ts",
+      "tests/v6-crossed-prefix-access.test.ts",
+      "tests/v6-crossed-prefix-integration.test.ts",
+      "tests/v6-crossed-prefix-observation.test.ts",
+      "tests/v6-exposed-current-evidence.test.ts",
+      "tests/v6-exposed-reception-integration.test.ts",
+      "tests/v6-exposed-reception-observation.test.ts",
+      "tests/v6-exposed-reception.test.ts",
+      "tests/v6-feedback-sequences-integration.test.ts",
+      "tests/v6-feedback-sequences-reference.test.ts",
+      "tests/v6-framed-window-access.test.ts",
+      "tests/v6-framed-window-integration.test.ts",
+      "tests/v6-framed-window-observation.test.ts",
+      "tests/v6-goal-attention.test.ts",
+      "tests/v6-incremental-memory.test.ts",
+      "tests/v6-interface-families.test.ts",
+      "tests/v6-inventory-copy-cost.test.ts",
+      "tests/v6-inventory-family-reference.test.ts",
+      "tests/v6-inventory-kernel.test.ts",
+      "tests/v6-inventory-restoration-cache.test.ts",
+      "tests/v6-knowledge-store.test.ts",
+      "tests/v6-motion-caller-integration.test.ts",
+      "tests/v6-motion-contrast.test.ts",
+      "tests/v6-native-authority.test.ts",
+      "tests/v6-native-caller.test.ts",
+      "tests/v6-native-checkpoint-integration.test.ts",
+      "tests/v6-native-copy.test.ts",
+      "tests/v6-native-family-registration.test.ts",
+      "tests/v6-native-hydration-cache.test.ts",
+      "tests/v6-native-interface-families.test.ts",
+      "tests/v6-native-observer.test.ts",
+      "tests/v6-native-persistence.test.ts",
+      "tests/v6-native-runtime.test.ts",
+      "tests/v6-native-snapshot-identity.test.ts",
+      "tests/v6-native-state-graph.test.ts",
+      "tests/v6-native-transition-domain-integration.test.ts",
+      "tests/v6-native-transition-domain.test.ts",
+      "tests/v6-native-working-witness.test.ts",
+      "tests/v6-occluded-catalogue-kernel.test.ts",
+      "tests/v6-occluded-catalogue-reference.test.ts",
+      "tests/v6-panel-service.test.ts",
+      "tests/v6-periodic-pattern-counts.test.ts",
+      "tests/v6-point-display.test.ts",
+      "tests/v6-point-set.test.ts",
+      "tests/v6-radial-port-integration.test.ts",
+      "tests/v6-reception-residual-evidence.test.ts",
+      "tests/v6-reception-service-access.test.ts",
+      "tests/v6-reception-service-integration.test.ts",
+      "tests/v6-reception-service-native-contracts.test.ts",
+      "tests/v6-reception-service-observation.test.ts",
+      "tests/v6-recurrent-series-access.test.ts",
+      "tests/v6-recurrent-series-integration.test.ts",
+      "tests/v6-recurrent-series-native.test.ts",
+      "tests/v6-recurrent-series-observation.test.ts",
+      "tests/v6-reference-population-access.test.ts",
+      "tests/v6-reference-population-integration.test.ts",
+      "tests/v6-reference-population-observation.test.ts",
+      "tests/v6-relational-chamber-integration.test.ts",
+      "tests/v6-relational-chamber.test.ts",
+      "tests/v6-rooted-line-access.test.ts",
+      "tests/v6-rooted-line-integration.test.ts",
+      "tests/v6-rooted-line-observation.test.ts",
+      "tests/v6-rooted-quota-mark-support.test.ts",
+      "tests/v6-rooted-quota-parity.test.ts",
+      "tests/v6-service-snapshot-reuse.test.ts",
+      "tests/v6-shared-series-native.test.ts",
+      "tests/v6-shared-series.test.ts",
+      "tests/v6-source-entry-routing.test.ts",
+      "tests/v6-support-caller-integration.test.ts",
+      "tests/v6-support-extensions.test.ts",
+      "tests/v6-support-navigation.test.ts",
+      "tests/v6-support-procedures.test.ts",
+      "tests/v6-visual-sequences.test.ts",
+      "tests/v7-kernel.test.ts"
+    ],
+    "additionalTestReason": "The merged factory contains multiple explicit source entries, including the shared Recurrent provider and two Feedback paths. Source-entry routing independently verifies priority, blocking refusals, aligned adapters and exactly one acquisition for one physical transition. It is absent from both prior gates.",
+    "requiredReconciliationBeforeFreeze": [
+      {
+        "file": "tests/v6-radial-port-integration.test.ts",
+        "change": "Keep recurrent_series and add observed_feedback_sequence alias plus exact aligned-entry checking; infer combined expectations [[10,12],[20,21],[8,10],[17,33]] and55/76, then confirm through the actual audit. The existing3I54/76 test can ignore Feedback without this correction.",
+        "expectedCombinedGroupCounts": [
+          [
+            10,
+            12
+          ],
+          [
+            20,
+            21
+          ],
+          [
+            8,
+            10
+          ],
+          [
+            17,
+            33
+          ]
+        ],
+        "expectedCombinedConnectedEntries": 55,
+        "denominator": 76
+      },
+      {
+        "file": "tests/v6-coupled-pair-planning.test.ts",
+        "change": "Append observed_feedback_sequence to the filtered non-null goal.entryPoints expectation, producing four entries. Keep exactly3 goal public_occurrence_recall provider occurrences, exactly16 window recall occurrences and recurrent_series after coupled_prefix_reference. Do not change the goal recall count to4.",
+        "expectedNonNullGoalEntries": [
+          "observed_composition_services",
+          "coupled_support_composition",
+          "alternating_graph_composition",
+          "observed_feedback_sequence"
+        ],
+        "expectedGoalRecallProviderOccurrences": 3,
+        "expectedWindowRecallProviderOccurrences": 16
+      },
+      {
+        "file": "tests/v6-support-caller-integration.test.ts",
+        "change": "Keep the3I native_recurrent_series_ shared digest-scope identity."
+      }
+    ],
+    "testCountClaim": null,
+    "qualification": "Union of the two previously declared affected gates, plus one justified routing file. This is90 test files, not90 assertions; prior3225 and536 test counts are not added and do not certify the new candidate.",
+    "commandAfterFreeze": [
+      "python3",
+      "-B",
+      "scripts/verify-native-delta.py",
+      "docs/migration/lot4a-evidence/integrated-051",
+      "--tests",
+      "tests/bounded-weak-cache.test.ts",
+      "tests/canonical-cache.test.ts",
+      "tests/v5-finite-relation-domain.test.ts",
+      "tests/v5-piercing-native.test.ts",
+      "tests/v5-reception-wait-contracts.test.ts",
+      "tests/v5-reference-population-calculus.test.ts",
+      "tests/v5-temporal-fragment-match.test.ts",
+      "tests/v6-agent.test.ts",
+      "tests/v6-alternating-graph-access.test.ts",
+      "tests/v6-alternating-graph-integration.test.ts",
+      "tests/v6-auxiliary-support.test.ts",
+      "tests/v6-caller-integration.test.ts",
+      "tests/v6-cell-placement-integration.test.ts",
+      "tests/v6-cell-placement.test.ts",
+      "tests/v6-configured-arrivals.test.ts",
+      "tests/v6-control-attention-reference.test.ts",
+      "tests/v6-coupled-pair-planning.test.ts",
+      "tests/v6-crossed-prefix-access.test.ts",
+      "tests/v6-crossed-prefix-integration.test.ts",
+      "tests/v6-crossed-prefix-observation.test.ts",
+      "tests/v6-exposed-current-evidence.test.ts",
+      "tests/v6-exposed-reception-integration.test.ts",
+      "tests/v6-exposed-reception-observation.test.ts",
+      "tests/v6-exposed-reception.test.ts",
+      "tests/v6-feedback-sequences-integration.test.ts",
+      "tests/v6-feedback-sequences-reference.test.ts",
+      "tests/v6-framed-window-access.test.ts",
+      "tests/v6-framed-window-integration.test.ts",
+      "tests/v6-framed-window-observation.test.ts",
+      "tests/v6-goal-attention.test.ts",
+      "tests/v6-incremental-memory.test.ts",
+      "tests/v6-interface-families.test.ts",
+      "tests/v6-inventory-copy-cost.test.ts",
+      "tests/v6-inventory-family-reference.test.ts",
+      "tests/v6-inventory-kernel.test.ts",
+      "tests/v6-inventory-restoration-cache.test.ts",
+      "tests/v6-knowledge-store.test.ts",
+      "tests/v6-motion-caller-integration.test.ts",
+      "tests/v6-motion-contrast.test.ts",
+      "tests/v6-native-authority.test.ts",
+      "tests/v6-native-caller.test.ts",
+      "tests/v6-native-checkpoint-integration.test.ts",
+      "tests/v6-native-copy.test.ts",
+      "tests/v6-native-family-registration.test.ts",
+      "tests/v6-native-hydration-cache.test.ts",
+      "tests/v6-native-interface-families.test.ts",
+      "tests/v6-native-observer.test.ts",
+      "tests/v6-native-persistence.test.ts",
+      "tests/v6-native-runtime.test.ts",
+      "tests/v6-native-snapshot-identity.test.ts",
+      "tests/v6-native-state-graph.test.ts",
+      "tests/v6-native-transition-domain-integration.test.ts",
+      "tests/v6-native-transition-domain.test.ts",
+      "tests/v6-native-working-witness.test.ts",
+      "tests/v6-occluded-catalogue-kernel.test.ts",
+      "tests/v6-occluded-catalogue-reference.test.ts",
+      "tests/v6-panel-service.test.ts",
+      "tests/v6-periodic-pattern-counts.test.ts",
+      "tests/v6-point-display.test.ts",
+      "tests/v6-point-set.test.ts",
+      "tests/v6-radial-port-integration.test.ts",
+      "tests/v6-reception-residual-evidence.test.ts",
+      "tests/v6-reception-service-access.test.ts",
+      "tests/v6-reception-service-integration.test.ts",
+      "tests/v6-reception-service-native-contracts.test.ts",
+      "tests/v6-reception-service-observation.test.ts",
+      "tests/v6-recurrent-series-access.test.ts",
+      "tests/v6-recurrent-series-integration.test.ts",
+      "tests/v6-recurrent-series-native.test.ts",
+      "tests/v6-recurrent-series-observation.test.ts",
+      "tests/v6-reference-population-access.test.ts",
+      "tests/v6-reference-population-integration.test.ts",
+      "tests/v6-reference-population-observation.test.ts",
+      "tests/v6-relational-chamber-integration.test.ts",
+      "tests/v6-relational-chamber.test.ts",
+      "tests/v6-rooted-line-access.test.ts",
+      "tests/v6-rooted-line-integration.test.ts",
+      "tests/v6-rooted-line-observation.test.ts",
+      "tests/v6-rooted-quota-mark-support.test.ts",
+      "tests/v6-rooted-quota-parity.test.ts",
+      "tests/v6-service-snapshot-reuse.test.ts",
+      "tests/v6-shared-series-native.test.ts",
+      "tests/v6-shared-series.test.ts",
+      "tests/v6-source-entry-routing.test.ts",
+      "tests/v6-support-caller-integration.test.ts",
+      "tests/v6-support-extensions.test.ts",
+      "tests/v6-support-navigation.test.ts",
+      "tests/v6-support-procedures.test.ts",
+      "tests/v6-visual-sequences.test.ts",
+      "tests/v7-kernel.test.ts"
+    ],
+    "staticRoutingReview": {
+      "recordedAt": "2026-11-10T18:43:03.175542+00:00",
+      "mode": "read_only_static",
+      "filesSearched": 90,
+      "testsExecuted": 0,
+      "inspectedFileIdentities": {
+        "tests/bounded-weak-cache.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "76efd3c1489f00a7b76dd0f9ba7fa210a5baf079aed954e8dc1a3db54296f24f"
+        },
+        "tests/canonical-cache.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "6062eb52ce1258640dd42b0a8316551e2544e76591d3e4b3985114ecb8972846"
+        },
+        "tests/v5-finite-relation-domain.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "e358221c2e90477ae12ebbab358866093787d095e9dd2da52913a2d34795c5b6"
+        },
+        "tests/v5-piercing-native.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "489eeef69135d9053e76d0aa728aea4e8b7991628b0200818d0102be768896c5"
+        },
+        "tests/v5-reception-wait-contracts.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "8fdde7013a20e2215db51515bdd43158285b312697237aee3e9b0ed172b2fe10"
+        },
+        "tests/v5-reference-population-calculus.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "e5d6f2d4ca542bfbbe46e681f3e1bbd062b975f6aca3ce8f9cc80a8df90d8075"
+        },
+        "tests/v5-temporal-fragment-match.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "a246b9e2ddc9f3104341a19765d3e962da2352d877a2062cb367ea48071b86be"
+        },
+        "tests/v6-agent.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "be0b63b7cb74bbfc1e7345fa7dc2d09ca78ad3b4d046f28fa671e771dcb68cc2"
+        },
+        "tests/v6-alternating-graph-access.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "d7b53577ee8037b8c8736064db212d0d3f9959f1f04ddeec1399b28de4abbd48"
+        },
+        "tests/v6-alternating-graph-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "b5444ee2923b77f44f57f7ea8ea0b7249f728bbb5c826893136252107909c901"
+        },
+        "tests/v6-auxiliary-support.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "b9a999601d6e7216eec714b4b4792314bf0f6dc09001d81c63ed501405c40c3e"
+        },
+        "tests/v6-caller-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "72597754574bcfed663ae33d695e3ed75a69dca6a5cbd0e1228200230b92eade"
+        },
+        "tests/v6-cell-placement-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "39310f52a96559e45066a5d8ef94c8a0e48bc61fe7cb1d1328631b1555be9b4f"
+        },
+        "tests/v6-cell-placement.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "81a4bf7632f4bc8be63e94d176747bffa32afc63f1814ae2175b08d420d351a4"
+        },
+        "tests/v6-configured-arrivals.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "805e00966544b88198b6025d77c9f29c2f9f11adead1117a5cb8f15f346ec8ea"
+        },
+        "tests/v6-control-attention-reference.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "3cd2112202e321bddce3d2c430fc73c3357fe12f188a0ce6b028637c9be19455"
+        },
+        "tests/v6-coupled-pair-planning.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "dc0349a2e64e9efc1c387f3d87bc838975bcc2518e664b57f5c906a2ffccfd80"
+        },
+        "tests/v6-crossed-prefix-access.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "d8543e71e9f65ab8c3b8e2c4f9294948564c124c514400995789e480319b7ba0"
+        },
+        "tests/v6-crossed-prefix-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "b40a6a1458c564ddf860134ba675a99f835cc9a5b8c2c583ceedcedff13ad9ac"
+        },
+        "tests/v6-crossed-prefix-observation.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "6564abd19642f2bcfb66357509d796d37e17d82bfc64297d79c1532d9eeb7484"
+        },
+        "tests/v6-exposed-current-evidence.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "4951895e851e40174c11591ef9cdc21234b3b0c66af858eeb228c987807b0766"
+        },
+        "tests/v6-exposed-reception-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "d5523d9d6c3bdc566128bfc17828b6ac7895afe51bc6c1838a0c069fff4845e1"
+        },
+        "tests/v6-exposed-reception-observation.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "88627b8a24b9f21854371d1dbc655aaadb5118447a588e397a48152851ca7747"
+        },
+        "tests/v6-exposed-reception.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "79e5e482120221448c270128766af0cd2b872e8de8378d32bd8a88d8b51bd958"
+        },
+        "tests/v6-feedback-sequences-integration.test.ts": {
+          "checkout": "4A_frozen_worktree",
+          "sha256": "f1b5da93895b648864e6f0da1f11d9776836a619d712a231796dc6237165e59c"
+        },
+        "tests/v6-feedback-sequences-reference.test.ts": {
+          "checkout": "4A_frozen_worktree",
+          "sha256": "924e2954664fe0a3ae96b3b7a340ea555a88e13cbfd37d313f62b525c5361d5f"
+        },
+        "tests/v6-framed-window-access.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "f6e49a7d5b7bb185460677fe512cdf65dfb1e75e26e6e998fd518b4002a108ab"
+        },
+        "tests/v6-framed-window-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "cbd4d0130e00be57085a30ae78a334c25174842d7959a1a14438faee0dad7926"
+        },
+        "tests/v6-framed-window-observation.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "292f5ed178f43be18e3f5355c785911094f91f3e1b94e84b3eafa5a0df8c1bf8"
+        },
+        "tests/v6-goal-attention.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "22acd80e35d54cfddbbc597acc0d979efc7f4003fa964fb2d2caeae9bb1f6e59"
+        },
+        "tests/v6-incremental-memory.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "fc89b6425b901c7dd1212f4d515977562d2b6ec549e6d2676fdb126770dd6870"
+        },
+        "tests/v6-interface-families.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "7d6aaa18ce6dfb07cc2290b82fef27ab90f4792e8abd295aa8b1f0fa051e2f90"
+        },
+        "tests/v6-inventory-copy-cost.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "5fda1a77f3c37bf51ae65219765d693e075878fce205d2e9f7a051a6c4e53cd8"
+        },
+        "tests/v6-inventory-family-reference.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "2091f6807c8bbb0549f38f0ae3cd07ece7771cab222a6cf2a84dd56174d1a755"
+        },
+        "tests/v6-inventory-kernel.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "a9b9e47fcd0bc2ad31158c5447efef68b05aa108b5d3e39a91e1fa158f1cad1e"
+        },
+        "tests/v6-inventory-restoration-cache.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "f17376ff75f4d1e70825d305e527df59c8ce0c614d8cd636618dfc79afd5eb11"
+        },
+        "tests/v6-knowledge-store.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "ac4e5f62adf2533d7e7499627802bb3003a51f87a8f6b1d65320b31f54800230"
+        },
+        "tests/v6-motion-caller-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "9f65e0e69e8545d005ceaa577cee7f9f66fdaf6db17c530284752afffc354d20"
+        },
+        "tests/v6-motion-contrast.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "527ec4c75dca9ef565db9100189f0599a14677d88f5ca98c5a341b7f969cf134"
+        },
+        "tests/v6-native-authority.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "6b35c231916ee37a07ed2c8505a5cdd71b35f305bc93d1a411fdbcc98a58697d"
+        },
+        "tests/v6-native-caller.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "1285ae419fa7282e9c5bde8c7873a5a5db8dfa2c817a2f3850a0e34e0ccf5334"
+        },
+        "tests/v6-native-checkpoint-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "1e17fafacf64e79dbb540ff4b9740b30f733c444d0d167d40e7ce56cc9f3abfe"
+        },
+        "tests/v6-native-copy.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "d109221ee552a7c80e1098b0d2acf3e7130169f1e7f447f552e8dea9b4990b8e"
+        },
+        "tests/v6-native-family-registration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "12082a8c4ceaa0c221d87fd4d24b5971e4db59c0b42bff3dc4a4eeb0a0b405d8"
+        },
+        "tests/v6-native-hydration-cache.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "213918b61178728029ba43588a288731125b4176f41f88833851318c114e9100"
+        },
+        "tests/v6-native-interface-families.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "ffaa56bc8ca98a2f100b109fc6bf023add516e1368d24933959270230fd07904"
+        },
+        "tests/v6-native-observer.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "c50e379c6db4cd55af1e7911033a6123e8e964d33d40b764ac7e3ca340f6c9aa"
+        },
+        "tests/v6-native-persistence.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "a50306119a9e8429015ec2e338c4e054efe276a56c53b0d3f5b735fedabc33d9"
+        },
+        "tests/v6-native-runtime.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "1155e102d4a767b1bb38c1798dc96187dc6c3ae966617e3c760af906f98bb2f4"
+        },
+        "tests/v6-native-snapshot-identity.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "2fa5c08b3e8d078f423f1afd0e25bfea5380df20c167b5fdd964f228996207d0"
+        },
+        "tests/v6-native-state-graph.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "5d43343376c73016fed9c01d92c781cdcbc67d81a6bfcc2b0934e0d2308b0c2c"
+        },
+        "tests/v6-native-transition-domain-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "d20a3565b85d908ff27a15ac5e808fc754cc6c33f048dd6fb636dd45fa8421cc"
+        },
+        "tests/v6-native-transition-domain.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "cf885b68ce37924bae11b859769ece813c46ea0cb66ea7f0c2bb64c4d3d51462"
+        },
+        "tests/v6-native-working-witness.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "53e20eca15ed57dc3d9c8247712987d1f8217c2fab853d846d7cef9a0860a1c7"
+        },
+        "tests/v6-occluded-catalogue-kernel.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "e02b2114c9eb8580b6fed2a4551aec1377314fb590b0e3b753a78dc78017d9ea"
+        },
+        "tests/v6-occluded-catalogue-reference.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "9d8a8e4daacc6f2f63b391df783622e70c953a385163f4b39c10cbbeefc0c6a6"
+        },
+        "tests/v6-panel-service.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "80431b060a6776f2f63ef3cb06584f07634c383dd84888620a1efaca7eeb8c19"
+        },
+        "tests/v6-periodic-pattern-counts.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "768c4accecced8b77c556f7a0c0679441e1cf70e27ddb3fd6f1564a5a7d2abc8"
+        },
+        "tests/v6-point-display.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "25da80929ee69628b6d90dc95e9a12c79ef6c89594c466a15763eb73a7d1a578"
+        },
+        "tests/v6-point-set.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "494e7fc1b37f08674efd049cee83957346dcf20dc6a31c7486a774da5a730821"
+        },
+        "tests/v6-radial-port-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "1884f13f72dc578e818f38fadbf0f5fbde4c3708a0045984047dc3a12c079dcf"
+        },
+        "tests/v6-reception-residual-evidence.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "2d7f266a75b5db684998adb06a5a742fa07a86b675003e607f37e4a422bffa92"
+        },
+        "tests/v6-reception-service-access.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "40514cd985eae59fed33e8b765ca4448025f1b5775f4dedf6b33d965f763914a"
+        },
+        "tests/v6-reception-service-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "d618f4d24511b1b3ae1124fd4792dfd693a66198b9e22590deb263d520750da3"
+        },
+        "tests/v6-reception-service-native-contracts.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "b80c8330b73f9497ea2cbc2e5b7a52f8284497d208fc51ddf0d48dbf1274ea63"
+        },
+        "tests/v6-reception-service-observation.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "36704d0d7f8dcc2b514d4d2536a59ed704ce256da9539eb53d6e20197af49cf1"
+        },
+        "tests/v6-recurrent-series-access.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "b1d03ee907c6068c615e311e617f18a7e94f8e2ed73837b43cd57188f5d44114"
+        },
+        "tests/v6-recurrent-series-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "bf3b28b9dda73590f63f03a9d0ba5c549af3b313f43b506da4072e5e259c135f"
+        },
+        "tests/v6-recurrent-series-native.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "f2a8c90c692870538560efef03bf3daa3ff1531333b4c80774e1ae67ae1b8ca0"
+        },
+        "tests/v6-recurrent-series-observation.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "e09fe0d83f2a6da66fa65be774eb316a7cebc28c3761b54d71f97d8fd0e511d7"
+        },
+        "tests/v6-reference-population-access.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "0eca09dd7618ef5f50231c665d8b7636e23289f33c9adc62a3b8f4d38d99cda5"
+        },
+        "tests/v6-reference-population-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "0aa8f82c4bf9939c1b99d683f0dc20c7ba057a5d339f63f74eee70d8dff205c3"
+        },
+        "tests/v6-reference-population-observation.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "14c16d06c787d7bfac25849251977fc7cbfb6494d0751853d64d090ddd60059c"
+        },
+        "tests/v6-relational-chamber-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "fa9195286072ccbbadc774f8737954e1b06799f71a8b95e5574a698d55cb3741"
+        },
+        "tests/v6-relational-chamber.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "fce640edbd03db804b9ae5784587f7bea9523879cc3aa04abe13a33e176b43bd"
+        },
+        "tests/v6-rooted-line-access.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "736c273c50fd53edfb309df4ced0827fe4ea86b9ee37ff1b0b6c95715e0cf30d"
+        },
+        "tests/v6-rooted-line-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "b4cdbe782ef89aa529ce12d42031b0be1e290e4677ab17675fefd87abe39f255"
+        },
+        "tests/v6-rooted-line-observation.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "7e7abba231a20203e8f600ed8ba5c456e14700444d6d70708ac8ba852bc91cf2"
+        },
+        "tests/v6-rooted-quota-mark-support.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "cd423355a49653dc070a427a66a7765e5aa48f663ef59cd7d37e471256542de5"
+        },
+        "tests/v6-rooted-quota-parity.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "ad8aaa81d0ab4e9df92f76e72a9ab0fb4e8aaff223177a7e432fe960728513c7"
+        },
+        "tests/v6-service-snapshot-reuse.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "ca3aafda8b40a0f51931abb3682de0cb2e7a5e0c049b58ab65d270a047303688"
+        },
+        "tests/v6-shared-series-native.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "3746f7d817f6dc17537089ac9fc430d1620e447ab23ac014e2efdc67a6f8144a"
+        },
+        "tests/v6-shared-series.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "50f5d5289a3b0aa930c8030cc3118d0df0fa6b1b36927b337649766fa5c01688"
+        },
+        "tests/v6-source-entry-routing.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "ef5e39698c27da5c0596f351483bbf7ab3553c81b9180df3b10f1c2ac23dd47d"
+        },
+        "tests/v6-support-caller-integration.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "4ca081661a4781def8fe1e443dc946511e534aa8c355863fdaf2b67fa3741997"
+        },
+        "tests/v6-support-extensions.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "0aafcedde8fa90cbd7b6592461827fa967782ee3ca389ce1f04e77c7e2272952"
+        },
+        "tests/v6-support-navigation.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "74cc87f14be3df74294939ca1b603b9743322b99c931ca70c82d9ab5bbb9a299"
+        },
+        "tests/v6-support-procedures.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "25a72872cf3ca44fe2267da7ac4d2927ef2f9f1488966c5dde0a46450f24a554"
+        },
+        "tests/v6-visual-sequences.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "44daf171fb2740d46eafb6e14abb705ac6c2aec8b97b202fdc67ae007d13b5a3"
+        },
+        "tests/v7-kernel.test.ts": {
+          "checkout": "3I_unpublished_worktree",
+          "sha256": "d718d6bff6e5f6f911e468e0b36bbe18054dc007ec5400ff00a802c1e37f24de"
+        }
+      },
+      "sharedTestsWithDifferentCurrentBytes": [
+        "tests/v6-coupled-pair-planning.test.ts",
+        "tests/v6-radial-port-integration.test.ts",
+        "tests/v6-support-caller-integration.test.ts"
+      ],
+      "additionalConcreteIncompatibilitiesFound": [],
+      "knownCorrections": [
+        "Radial registration aliases/counts must represent both additions,55/76 after the actual merged audit.",
+        "Coupled goal non-null entry array grows from3 to4; its recall-provider count remains3. Preserve3I16 recall window occurrences.",
+        "Preserve3I native_recurrent_series_ sharedSeriesDigestScope in support-caller-integration."
+      ],
+      "structurallyUnaffectedExpectations": [
+        {
+          "tests": [
+            "tests/v6-native-family-registration.test.ts"
+          ],
+          "reason": "The exact surface-group list is derived from unchanged program_construction entries. Other registry checks assert presence of named interfaces and source group order, not an obsolete total owner count."
+        },
+        {
+          "tests": [
+            "tests/v6-framed-window-integration.test.ts",
+            "tests/v6-crossed-prefix-integration.test.ts",
+            "tests/v6-recurrent-series-integration.test.ts"
+          ],
+          "reason": "Relative RootedQuota→FramedWindow→CrossedPrefix→Recurrent positions and one registered shared owner remain consistent with the additive patches."
+        },
+        {
+          "tests": [
+            "tests/v6-cell-placement-integration.test.ts",
+            "tests/v6-occluded-catalogue-kernel.test.ts",
+            "tests/v6-inventory-kernel.test.ts"
+          ],
+          "reason": "Cell/recall order, catalogue/queue order, the view group and inventory position do not change structurally."
+        },
+        {
+          "tests": [
+            "tests/v6-source-entry-routing.test.ts"
+          ],
+          "reason": "Its exact one-owner registry uses explicitly constructed local NativeV6Runtime instances, not the production factory. Do not add production families to these expected local registries."
+        },
+        {
+          "tests": [
+            "tests/v6-feedback-sequences-integration.test.ts"
+          ],
+          "reason": "The Feedback neighbors joint_transport/animated_contact, information_goal ordering, one Feedback owner and disabled-entry case are unaffected structurally by the separate window Recurrent entry."
+        }
+      ],
+      "qualification": "No further literal registry/version/routing expectation was found to contradict the union. Actual factory selections, especially the passive-unmarked Feedback scene and historical fixture routes, still require the planned executions; static inspection does not certify that a new earlier provider cannot recognize those public scenes."
+    }
+  },
+  "executionSequenceAfterPrerequisites": [
+    {
+      "order": 1,
+      "operation": "Verify actual publication and fetch; reconcile the merged sources, tests, audit aliases and full harness. Materialize only pinned final input manifests. No worktree3I code is copied by this plan."
+    },
+    {
+      "order": 2,
+      "operation": "Restore source-reference fixtures and needed large reports from their exact byte parts. Finish fixture parts before tests inventory; preserve original hashes. Pack future outputs only after their writers exit."
+    },
+    {
+      "order": 3,
+      "command": [
+        "python3",
+        "-B",
+        "scripts/freeze-v53-native-source.py",
+        "freeze",
+        "docs/migration/lot4a-evidence/integrated-051"
+      ],
+      "operation": "Create a new immutable source freeze; never overwrite the old final66be0948 archive."
+    },
+    {
+      "order": 4,
+      "operation": "Run the90-file test argv above once against the new freeze, after the active slot ends. Preserve any failure and use a new candidate/attempt path when input changes require revalidation."
+    },
+    {
+      "order": 5,
+      "command": [
+        "python3",
+        "-B",
+        "scripts/verify-native-delta.py",
+        "docs/migration/lot4a-evidence/integrated-051",
+        "--build-script",
+        "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.5/scripts/build-site.mjs"
+      ],
+      "operation": "Typecheck, entry audit, migration audit, diff check and build; re-resolve the actual Sites build helper if its installed location changes."
+    },
+    {
+      "order": 6,
+      "command": [
+        "python3",
+        "-B",
+        "scripts/run-released-public-regressions-streamlog.py",
+        "docs/migration/lot4a-evidence/integrated-051-regression-cases.json",
+        "docs/migration/lot4a-evidence/integrated-051",
+        "--source-manifest",
+        "docs/migration/lot4a-evidence/integrated-051/source-manifest.json",
+        "--node-old-space-mib",
+        "1536",
+        "--timeout-seconds",
+        "2400"
+      ],
+      "operation": "Five sequential public regressions; no --workers flag. No test/build/campaign/performance process runs alongside."
+    },
+    {
+      "order": 7,
+      "command": [
+        "python3",
+        "-B",
+        "scripts/run-released-public-regressions-streamlog.py",
+        "docs/migration/lot4a-evidence/integrated-051-mind-replay-case.json",
+        "docs/migration/lot4a-evidence/integrated-051/mind-public-replay",
+        "--source-manifest",
+        "docs/migration/lot4a-evidence/integrated-051/source-manifest.json",
+        "--node-old-space-mib",
+        "1536",
+        "--timeout-seconds",
+        "2400"
+      ],
+      "operation": "Separate cold recorded MIND replay through the complete normal harness."
+    },
+    {
+      "order": 8,
+      "command": [
+        "python3",
+        "-B",
+        "scripts/compare-feedback-public-parity.py",
+        "docs/migration/lot4a-evidence/integrated-051/mind-public-replay/regressions/mind-feedback-66be0948-replay.json.gz",
+        "--output",
+        "docs/migration/lot4a-evidence/integrated-051/mind-public-replay/mind-feedback-source-parity.json.gz"
+      ],
+      "operation": "Only after MIND replay exits, run cold unchanged-original family parity and retain every ablation outcome."
+    },
+    {
+      "order": 9,
+      "command": [
+        "python3",
+        "-B",
+        "scripts/evidence-byte-parts.py",
+        "pack",
+        "docs/migration/lot4a-evidence/integrated-051"
+      ],
+      "operation": "After all relevant writers finish, pack reports above900000bytes without changing their original data. Prepare a new integrated contribution/index with actual hashes."
+    },
+    {
+      "order": 10,
+      "command": [
+        "python3",
+        "-B",
+        "scripts/verify-native-delivery.py",
+        "docs/migration/lot4a-evidence/integrated-051",
+        "--require-regressions",
+        "--receipt",
+        "mind-public-replay/regressions/regression-summary.json",
+        "--receipt",
+        "mind-public-replay/mind-feedback-source-parity.json.gz"
+      ],
+      "operation": "After all required delivery evidence is complete, verify the integrated archive/tests/build and five-case regression summary. Additional receipts are fingerprinted only; independently inspect MIND/source acceptance first."
+    }
+  ],
+  "failureAndQualificationPolicy": [
+    "No command in this plan has run. No future pass count, published version, WEAV recovery or integrated source digest is assumed.",
+    "An input manifest with unresolved fingerprints is not executable. Recompute provenance after fetch and check published membership, exact report source and successful receipts.",
+    "Keep signal9 and V8 heap exhaustion attempts and their original logs. The historical SIGKILL cause remains unproven; a preparation success does not prove game replay completion.",
+    "Do not reuse consolidate-regression-recovery.py as a generic integrated runner: it hard-codes3I paths, prior failure statuses and its exact five-case consolidation.",
+    "Do not use verify-native-delivery-qualified-regressions.py for this gate; it is an unrelated hard-coded32/34 empty-observer exception. The integrated gate retains all17 checks per case.",
+    "If a current command differs, the recorded host refuses before supplying that return. Preserve the failure and investigate actual source-order behavior; do not inject the expected action or silently weaken the comparator.",
+    "A strict comparison failure from additional observed state remains a strict failure until separately explained. No automatic normalization of new recurrent or Feedback fields is authorized here.",
+    "The released host retains complete current observation/call evidence. If memory still fails, preserve the partial attempt and diagnose a new host-only recovery; do not silently omit Feedback evidence or change official performance settings.",
+    "Recorded replay consumes existing public returns and does not execute the game host. It does not restart MIND, WEAV or historical case clocks, and it does not add a new live game success.",
+    "Official cost baseline and performance protocol must bind the actually published preceding release and final integrated source. This file does not authorize or launch any benchmark and carries no cost acceptance claim.",
+    "The active3I recovery now uses run-released-public-regressions-streamlog.py and final/weav-memory-retry-v2. Its current raw/status files are mutable and incomplete evidence; no final replay hash or pass is assumed. Re-attest delivered paths and hashes after fetch."
+  ],
+  "updatedAt": "2026-11-10T18:43:03.175542+00:00",
+  "preparationUpdates": [
+    {
+      "recordedAt": "2026-11-10T18:43:03.175542+00:00",
+      "previousPlanSha256": "b4942154103c4015cf3a286201a7c0c31064ae2d1995bc6adf812097e973b6fd",
+      "scope": "Static review of registry/routing expectations in all90 planned files, plus latest uncommitted3I durable replay driver. No test or replay executed; only this plan changes."
+    }
+  ]
+}

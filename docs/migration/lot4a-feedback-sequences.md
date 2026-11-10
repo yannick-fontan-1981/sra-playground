@@ -8,6 +8,8 @@ L’entrée **`observed_feedback_sequence`** est raccordée à **Logos Engine**.
 
 Le delta formel passe **548/548 tests dans 29 fichiers**, ainsi que **5/5 contrôles du projet, compilation comprise**. Les quatre régressions sur retours enregistrés passent **68/68 contrôles**. Le contrôle fonctionnel dans le navigateur est **bloqué par l’infrastructure** : aucune réussite navigateur, Pause ou pas à pas dans l’interface n’est revendiquée. Les portées de ces preuves sont séparées ci-dessous.
 
+Les identités et preuves chiffrées ci-dessous décrivent le candidat isolé déjà gelé. L’ordre de publication et le scénario d’intégration restent soumis à la coordination exposée dans la section des coûts. Ces reçus ne certifient pas encore un futur candidat issu de l’intégration d’une autre livraison.
+
 ## Référence, gel et compteurs
 
 | Identité | Référence publiée | Candidat exécuté |
@@ -113,7 +115,7 @@ La campagne live ne sélectionne pas Feedback par `information_goal` et n’exer
 
 ## Validation formelle et persistance
 
-Le [reçu du delta](lot4a-evidence/final-release/validation/delta-tests-run.json) donne **536 tests réussis sur 536**, dans **29 fichiers**, sans échec, annulation, test ignoré ou TODO. Les sources natives et les entrées des tests sont inchangées pendant l’exécution. Le [reçu des contrôles](lot4a-evidence/final/validation/checks-run.json) donne **5/5** : typage, audit des entrées, audit de migration, contrôle du diff et compilation de production. Il s’agit du périmètre formel déclaré, pas d’une réexécution de toute la suite historique.
+Le [reçu du delta](lot4a-evidence/final-release/validation/delta-tests-run.json) donne **548 tests réussis sur 548**, dans **29 fichiers**, sans échec, annulation, test ignoré ou TODO. Les sources natives et les entrées des tests sont inchangées pendant l’exécution. Le [reçu des contrôles](lot4a-evidence/final/validation/checks-run.json) donne **5/5** : typage, audit des entrées, audit de migration, contrôle du diff et compilation de production. Il s’agit du périmètre formel déclaré, pas d’une réexécution de toute la suite historique.
 
 L’[exporteur de référence](../../scripts/export-v6-feedback-sequences-reference.py) appelle les originaux inchangés. Les [tests différentiels](../../tests/v6-feedback-sequences-reference.test.ts) couvrent notamment les 13 cas de calcul fini, la reconnaissance, les sessions de saisie, les retours, les refus, les liaisons, les gardes et la restauration. Ils comparent les propositions et reçus complets, sans prendre une sortie native comme attente. La [fixture](../../tests/fixtures/v6-feedback-sequences-reference.json.gz.parts.json) est conservée en deux parties ; `readEvidenceSync` permet aux deux fichiers de test Feedback de la lire sans restauration préalable du fichier compressé.
 
@@ -143,11 +145,17 @@ Le [reçu navigateur](lot4a-evidence/final/browser/browser-qa.json) porte le sta
 
 Le reçu conserve **zéro action de jeu navigateur et aucun contrôle fonctionnel validé**. La compilation de production, les campagnes de l’appelant commun et les tests de Pause/annulation restent des preuves séparées. Ils ne certifient pas le jeu, Pause/reprise ou le pas à pas dans le navigateur. Aucun changement du moteur ni serveur de contournement n’a été introduit pour transformer ce blocage en validation.
 
-## Coûts : protocole déclaré, verdict à compléter
+## Coûts : protocole initial remplacé avant mesure, nouvelle fenêtre à préparer
 
-**Les résultats et le verdict de coût ne sont pas encore intégrés à ce rapport.** Le [protocole](lot4a-evidence/performance/protocol.md), sa [déclaration préalable](lot4a-evidence/performance/declaration.json) et la [politique globale](lot4a-evidence/performance/global-budget-policy.json) fixent la comparaison avant mesure. A est la référence publiée 0.49.0 ; B est le candidat 0.50.0 gelé ci-dessus. Les anciennes durées ne fournissent aucun échantillon.
+**Aucun résultat ni verdict de coût 4A n’est établi.** Le dossier `performance/` conserve le [protocole initial](lot4a-evidence/performance/protocol.md), sa [déclaration préalable](lot4a-evidence/performance/declaration.json) et sa [politique globale](lot4a-evidence/performance/global-budget-policy.json) pour la comparaison **0.49.0 → candidat isolé 0.50.0**. Il est désormais historique, **`superseded-before-measurement`** : le [reçu de remplacement avant mesure](lot4a-evidence/performance/superseded-before-measurement.json) porte le statut `superseded_before_any_measurement`, avec **zéro session, zéro action mesurée et aucun échantillon de coût**. Ce dossier reste conservé sans exécution ni remplacement de ses preuves.
 
-L’ordre déclaré est **A1/B1/B2/A2**, STCK puis SMLP dans chaque série : quatre sessions froides par jeu et série, soit huit sessions par jeu et version, **32 sessions et 400 actions mesurées**. Huit chauffes séparées, totalisant 24 actions, sont exclues selon la règle préalable. Aucune session mesurée ni valeur extrême ne doit être écartée. Les deux cohortes, incidents et résultats défavorables doivent rester conservés.
+Le dernier ordre de publication acquitté est **3I → 4A → 7A**, consigné dans les états de coordination des [lots 4A](lot4a-evidence/coordination/three-lane-lot4a-status.json) et [7A](lot4a-evidence/coordination/three-lane-lot7a-status.json). Une demande de passage de 4A au premier créneau est encore en attente d’accord. Cet ordre peut donc être révisé par un nouvel acquittement explicite ; ni un créneau libre ni cette demande ne valent autorisation de le changer.
+
+Si 3I publie en premier conformément à l’ordre acquitté, la prochaine comparaison 4A attendue est **0.50.0 → 0.51.0**, fraîchement déclarée dans `performance-integrated/`. Elle exige d’abord la publication effective de 3I, l’identification de son commit et de ses octets publiés, puis l’intégration, la validation et le gel du candidat 4A. Ces numéros désignent le scénario prévu : aucune publication 3I, provenance future, identité intégrée ni équivalence des anciennes preuves au futur candidat n’est certifiée par le présent rapport.
+
+Si le premier créneau est explicitement accordé à 4A, une **nouvelle déclaration** dans `performance-firstslot/` devra précéder une comparaison fraîche **0.49.0 → 0.50.0**. Le protocole initial restera historique et non exécuté. Aucun résultat ni échantillon ancien ne sera fourni à cette nouvelle fenêtre. Ce second scénario reste conditionnel à l’accord de coordination.
+
+Le cadre de mesure à déclarer pour la nouvelle fenêtre conserve l’ordre **A1/B1/B2/A2**, STCK puis SMLP dans chaque série : quatre sessions froides par jeu et série, soit huit sessions par jeu et version, **32 sessions et 400 actions à mesurer**. Huit chauffes séparées, totalisant 24 actions, sont exclues selon la règle préalable. Ces effectifs sont un protocole, pas des mesures déjà réalisées. Aucune session mesurée ni valeur extrême ne doit être écartée. Les deux cohortes, incidents et résultats défavorables doivent rester conservés.
 
 L’acceptation exige, **pour chacun des deux jeux**, une augmentation strictement inférieure à **10 %** de la médiane regroupée des sessions complètes : `médiane(B) / médiane(A) - 1`. Les jeux ne se compensent pas. Les phases imbriquées ne s’additionnent pas. Une hausse de phase peut rester admissible lorsque le budget global passe, mais elle et les queues de distribution doivent rester visibles. Le p95 empirique n’est rapporté qu’avec au moins vingt échantillons ; huit sessions ne justifient pas un p95 de session.
 
@@ -155,6 +163,9 @@ La fenêtre doit conserver les contrôles d’intégrité avant et après mesure
 
 | Élément à finaliser | État du présent rapport |
 | --- | --- |
+| Ordre effectif et premier créneau 4A | Dernier accord 3I → 4A → 7A ; demande de premier créneau 4A sans nouvel accord |
+| Référence publiée et candidat de la nouvelle fenêtre | Identités à vérifier selon l’ordre finalement acquitté ; aucune provenance future anticipée |
+| Nouvelle déclaration de coût | À établir dans le dossier correspondant au scénario retenu ; `performance/` reste historique, sans échantillon |
 | Reçu d’ouverture et isolation effective | À référencer après vérification |
 | Médianes globales A/B, STCK et SMLP | À compléter depuis les nouveaux reçus |
 | Détails des phases, p95 admissibles, mémoire, Pause et incidents | À compléter, y compris résultats défavorables |
@@ -182,6 +193,6 @@ La fenêtre doit conserver les contrôles d’intégrité avant et après mesure
 | **4B — `relative_arrangement`** | Planifié. Raccorder `v6.relative_arrangements.choose`, ses mesures, expériences sélectionnées, acquisition liée à l’observation initiale et restauration. Distinguer domaine non reconnu et arrangement reconnu sans expérience admissible : ce dernier clôt la chaîne de contraintes de fenêtre prévue par la source. Son contrat d’acquisition ne doit pas être remplacé par celui de Feedback. |
 | **4C — `facet_example`** | Planifié. Raccorder `v6.facet_examples.choose`, les correspondances simples puis les branches composées selon la configuration originale. Préserver déplacement de face, extension de côtés, méthode portable et méthode composée locale, réfutations, changements hors région, absence d’effet et refus officiel malgré un rendu conforme. Distinguer connaissance acquise et caches recalculables. |
 
-La [roadmap](v6-delivery-roadmap.md) conserve **4B comme prochain travail de ce fil après clôture de 4A**. La suite du lot 3 reste indépendante. 4C peut être scindé en livraisons simple et composée avec des statuts propres ; aucun de ces sous-lots n’est déclaré transféré par 4A.
+La [roadmap](v6-delivery-roadmap.md) conserve **4B comme prochain travail de ce fil après clôture de 4A**. L’intégration et la publication sont coordonnées avec les lots 3I et 7A selon l’ordre acquitté et les éventuels changements explicitement acceptés, décrits dans la section des coûts. 4C peut être scindé en livraisons simple et composée avec des statuts propres ; aucun de ces sous-lots n’est déclaré transféré par 4A.
 
 **Publication à compléter.** Le présent rapport ne certifie aucune nouvelle version Site publiée. Le commit final, la version Site, la version native effectivement intégrée, leur lien au gel et le reçu de publication devront être ajoutés après vérification. Les résultats de cette livraison restent ceux du digest explicitement identifié ; une modification ultérieure des sources ne les étend pas automatiquement au nouveau code.

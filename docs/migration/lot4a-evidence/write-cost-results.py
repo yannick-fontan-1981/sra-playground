@@ -249,18 +249,38 @@ def main():
     require(review['schema'] == 'logos-engine.native-cost-consolidation-review.v2' and review['status'] == 'passed'
             and review['checkedCount'] == len(review['checks']) > 0
             and all(item['passed'] is True for item in review['checks']), 'Revue arithmétique incomplète')
+    reviewers = [item for item in declaration['officialTools']
+                 if item['path'] == 'scripts/review-native-cost-consolidation.py']
+    require(len(reviewers) == 1 and review['generator'] == reviewers[0],
+            'La revue arithmétique ne provient pas de l’outil déclaré')
     require(decision['schema'] == 'logos-engine.predeclared-global-cost-window-decision.v1'
-            and decision['nativeVersion'] == b['nativeVersion'] and decision['policy'] == policy,
+            and decision['nativeVersion'] == b['nativeVersion'] and decision['policy'] == policy
+            and decision['generator'] == declaration['globalDecisionTool']
+            and decision['calculationHelper'] == declaration['globalCalculationTool'],
             'La décision doit provenir du reviewer pré-déclaré de cette fenêtre')
     require(decision['predeclaration']['finalizedAt'] == declaration['finalizedAt']
             and decision['predeclaration']['windowStartedAt'] == window['startedAt']
             and decision['predeclaration']['watchedProtocolMatched'] is True, 'Antériorité de la décision globale non liée')
     require(decision['diagnosticArithmeticReview']['receipt'] == retain(perf / 'consolidation-review.json')
             and decision['diagnosticArithmeticReview']['checkedCount'] == review['checkedCount']
-            and decision['diagnosticArithmeticReview']['status'] == review['status'], 'La décision cite une autre revue arithmétique')
+            and decision['diagnosticArithmeticReview']['status'] == review['status']
+            and decision['diagnosticArithmeticReview']['generator'] == review['generator']
+            and decision['diagnosticArithmeticReview']['budgetStatus'] == review['budgetStatus'],
+            'La décision cite une autre revue arithmétique')
     for item in [*readiness['inputs'], *review['inputs'], *decision['inputs'], *declaration['officialTools'],
                  declaration['globalDecisionTool'], declaration['globalCalculationTool']]:
         verified(item)
+    reviewed_names = ['cases.json', 'comparison-policy.json', 'protocol.md', 'window.json', 'combined-comparison.json']
+    reviewed_names += [f'cohort{index}/{name}.json' for index in (1, 2)
+                       for name in ('baseline', 'after', 'comparison')]
+    reviewed_inputs = [retain(perf / name) for name in reviewed_names]
+    require(len({item['path'] for item in review['inputs']}) == len(review['inputs'])
+            and all(item in review['inputs'] for item in reviewed_inputs),
+            'La revue arithmétique ne lie pas toutes les pièces effectivement rendues')
+    decision_inputs = reviewed_inputs + [retain(perf / name) for name in
+                                        ('declaration.json', 'global-budget-policy.json', 'consolidation-review.json')]
+    require(all(item in decision['inputs'] for item in decision_inputs),
+            'La décision globale ne lie pas la déclaration et les pièces effectivement rendues')
 
     expected_sources = {side: {'digest': identity['nativeDigest'], 'fileCount': identity['nativeFiles']}
                         for side, identity in [('baseline', a), ('after', b)]}

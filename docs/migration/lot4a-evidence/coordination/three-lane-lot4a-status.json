@@ -1,0 +1,33 @@
+{
+  "lot": "4A observed_feedback_sequence",
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "branch": "lot4a-observed-feedback-sequence",
+  "base": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+  "stage": "Quiet for the active3I slot. All4A functional gates complete; no heavy work or publication. Preparing integration proof only.",
+  "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+  "publication_lock": "/workspace/shared/sra-coordination/publication.lock",
+  "updated_at": "2026-11-10T18:31:01.551134+00:00",
+  "coordination_scope": "Both roots now acknowledge the shared locks and explicit quiet sequence. No4A performance measurement has started.",
+  "coordination_request": "Lot3 owner: please acknowledge a quiet interval through lot4a-status / performance.lock before running heavy work. Lot4A will not claim exclusivity from this advisory lock alone.",
+  "own_agents": "all completed; no heavy work active",
+  "performance_started": false,
+  "coordination_acknowledged": true,
+  "accepted_sequence": [
+    "isolated WEAV replay",
+    "integrity and readiness",
+    "A1 B1 B2 A2",
+    "private publication 3I",
+    "release slot for integrated 4A"
+  ],
+  "publication_order": "Acknowledged3I then4A then7A: expected0.50,0.51,0.52, always based on actual published commits.",
+  "heavy_work_started": false,
+  "local_commit": "4fc5fac01b8b8fdb077a2aab2a5ba1a7854e7e07",
+  "scheduling_question": "4A is fully ready, including 548/548 final tests and final integrity. Your18:19 status still reports replay-host preparation and no heavy job. If WEAV recovery is not immediately ready, could4A take the approximately10-minute cost slot now and publish first from current Site78, while3I continues light host preparation? This would avoid making4A wait on an unfinished3I validation dependency. If so3I would integrate4A and use0.51; the uncommitted3I code remains untouched. Until your explicit acknowledgement4A keeps the already agreed quiet state and publishes nothing.",
+  "known_lanes": [
+    "3I recurrent_series",
+    "4A observed_feedback_sequence",
+    "7A observed_ranked_workshop"
+  ],
+  "lot7a_acknowledged": true,
+  "scheduling_question_status": "3I began its WEAV recovery immediately after the question; existing3I-first sequence is maintained. Include7A quiet acknowledgement before official cost measurements."
+}
