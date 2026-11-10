@@ -47,9 +47,12 @@ AXIAL_BASELINE_MANIFEST=docs/migration/lot10a-evidence/integrated-baseline/sourc
 AXIAL_CANDIDATE_MANIFEST=docs/migration/lot10a-evidence/integrated-final/source-manifest.json
 ```
 
-Préparer `cases.json`, les deux politiques et `protocol.md` dans `AXIAL_COST`.
-Les traces publiques doivent être présentes, vérifiées et identiques dans les
-deux checkouts. Les sorties des commandes suivantes doivent être absentes.
+Suivre d'abord [README-preparation.md](README-preparation.md) pour finaliser la
+déclaration sur les identités réelles, **avant l'inventaire et les captures**.
+Le helper prépare `cases.json`, les deux politiques et `protocol.md` dans
+`AXIAL_COST`, et fige les empreintes des outils. Les traces publiques doivent
+être présentes, vérifiées et identiques dans les deux checkouts. Les sorties
+des commandes suivantes doivent être absentes.
 
 ## 2. Inventaire réel et captures fonctionnelles avant mesure
 
@@ -81,13 +84,14 @@ comme durées officielles. Elles contrôlent chaque commande avant de fournir so
 retour archivé. Trois inspections terminales réelles complètent chaque forme
 mesurée. Un échec d'attribution est conservé et ne crée pas de fixture qualifiée.
 
-## 3. Déclaration, contrat et readiness
+## 3. Contrat, préflight et readiness
 
-Après qualification réussie, finaliser et committer, dans cet ordre : déclaration
-historique v2, contrat Axial v2, précontrôle statique, readiness. Toutes les
-empreintes doivent porter sur les octets définitifs. Les captures, attribution,
-fixture et inventaire doivent précéder le contrat ; la readiness doit précéder
-strictement le début de la fenêtre.
+La déclaration historique v2 a été finalisée avant l'inventaire et les captures,
+selon [README-preparation.md](README-preparation.md). Après qualification
+réussie, finaliser et committer, dans cet ordre : contrat Axial v2, précontrôle
+statique, readiness. Toutes les empreintes doivent porter sur les octets
+définitifs. Les captures, attribution, fixture et inventaire doivent précéder
+le contrat ; la readiness doit précéder strictement le début de la fenêtre.
 
 Le contrat utilise le schéma `logos-engine.lot10a-owner-cost-contract.v2`,
 `lot: "10A"`, et les mêmes champs de liaison que le contrat 7A v2 :
