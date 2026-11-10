@@ -347,3 +347,6 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /tests/fixtures/v6-relative-arrangements-reference.json.gz
+
+# Exact frozen archives are retained in verified byte parts
+/docs/migration/lot4b-evidence/**/source-archive.tar.gz
