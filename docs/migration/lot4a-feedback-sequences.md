@@ -1,10 +1,10 @@
-# Lot 4A : séquences et retours discriminants, candidat intégré natif 0.51
+# Lot 4A : séquences et retours discriminants, livraison native 0.51
 
 ## État de la livraison
 
 L’entrée **`observed_feedback_sequence`** est raccordée à **Logos Engine**. Le composant reconnaît une interface ordonnée, acquiert les effets de saisie effectivement observés, soumet un essai complet et utilise les retours publics pour choisir l’essai suivant. Les hypothèses portent à la fois sur les valeurs possibles et sur les lois d’interprétation du retour. La décision reste conditionnée par la palette, le préfixe courant et les preuves acquises.
 
-**Le candidat intégré 0.51.0 réunit Feedback et la livraison 3I effectivement publiée dans Site 79. Son delta passe 3 566/3 566 tests dans 90 fichiers et 5/5 contrôles, compilation comprise.** Sa nouvelle campagne MIND atteint trois niveaux en **31 actions et 20 préfixes**, avec une parité de famille originale de **51/51 appels** et **trois choix changés sur huit ablations**. Les **cinq régressions** contre la référence publiée 0.50 passent **85/85 contrôles**, sur **240 actions et 169 préfixes**. Ces résultats sont rattachés au nouveau gel par les [tests intégrés](lot4a-evidence/integrated-051/validation/delta-tests-run.json), les [contrôles intégrés](lot4a-evidence/integrated-051/validation/checks-run.json), le [reçu de contribution live](lot4a-evidence/integrated-051/feedback-live-contribution.json) et le [reçu des régressions](lot4a-evidence/integrated-051/regressions/regression-summary.json). **La décision de coût respecte la règle globale pour 2/2 jeux, sous qualification de l’ajout du propriétaire : STCK −9,093642 %, SMLP +4,601522 %. La consolidation stricte demeure en échec ; la qualification structurelle est distincte et déclarée après mesure. La publication 4A reste en attente.**
+**La livraison intégrée 0.51.0 réunit Feedback et la livraison 3I effectivement publiée dans Site 79. Son delta passe 3 566/3 566 tests dans 90 fichiers et 5/5 contrôles, compilation comprise.** Sa nouvelle campagne MIND atteint trois niveaux en **31 actions et 20 préfixes**, avec une parité de famille originale de **51/51 appels** et **trois choix changés sur huit ablations**. Les **cinq régressions** contre la référence publiée 0.50 passent **85/85 contrôles**, sur **240 actions et 169 préfixes**. Ces résultats sont rattachés au nouveau gel par les [tests intégrés](lot4a-evidence/integrated-051/validation/delta-tests-run.json), les [contrôles intégrés](lot4a-evidence/integrated-051/validation/checks-run.json), le [reçu de contribution live](lot4a-evidence/integrated-051/feedback-live-contribution.json) et le [reçu des régressions](lot4a-evidence/integrated-051/regressions/regression-summary.json). **La décision de coût respecte la règle globale pour 2/2 jeux, sous qualification de l’ajout du propriétaire : STCK −9,093642 %, SMLP +4,601522 %. La consolidation stricte demeure en échec ; la qualification structurelle est distincte et déclarée après mesure. La première publication 4A est confirmée dans Site 80, avec déploiement `succeeded` et accès privé conservé.**
 
 Le **premier candidat 4A isolé, étiqueté 0.50.0**, conserve ses preuves historiques : **548/548 tests dans 29 fichiers**, **5/5 contrôles**, quatre régressions et **68/68 comparaisons**. Sa campagne MIND atteint trois niveaux naturels en **31 actions et 20 préfixes** ; le rejeu de la famille Python originale concorde sur **51/51 appels**. Retirer uniquement l’historique change le choix dans **trois des huit contextes** examinés ; cinq restent identiques. Le [reçu de contribution historique](lot4a-evidence/final/feedback-public-contribution.json) identifie précisément ce candidat. **Ces résultats ne sont pas annoncés comme de nouvelles exécutions du candidat intégré 0.51.**
 
@@ -12,15 +12,17 @@ Le nouveau [contrôle navigateur intégré](lot4a-evidence/integrated-051/browse
 
 ## Référence, gel et compteurs
 
-### Référence publiée et candidat intégré actuels
+### Référence publiée et livraison intégrée actuelles
 
-| Identité | Référence effectivement publiée | Candidat intégré vérifié |
+| Identité | Référence effectivement publiée | Livraison intégrée vérifiée |
 | --- | --- | --- |
-| Publication Site | **79**, livraison 3I ; déploiement `succeeded` | Publication 4A en attente |
+| Publication Site | **79**, livraison 3I ; déploiement `succeeded` | **80**, première publication 4A ; déploiement `succeeded` |
 | Version native | **0.50.0** | **0.51.0** |
-| Commit | `6d03c2adda9f60b1c97304f5491a428cfbec7a6c` | Fusion `025b8000265f75441aaf57e62514c0b580b62218` |
+| Commit de la première publication | `6d03c2adda9f60b1c97304f5491a428cfbec7a6c` | `a52ef3d8396eb051d6d42d3388072fe0bf2a2d9e` |
 | Fichiers natifs | **270** | **273** |
 | Digest natif | `e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87` | `c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7` |
+
+Le gel fonctionnel a été vérifié sur la fusion `025b8000265f75441aaf57e62514c0b580b62218`. Les commits de preuves et de transport qui suivent conservent exactement ses entrées natives, de tests et de build.
 
 La [provenance de la référence intégrée](lot4a-evidence/baseline-integrated/provenance.json) lie le commit Site 79, le déploiement réussi et le checkout distinct `/workspace/sites/sra-lot4a-base79` à l’inventaire publié. Le [manifeste intégré](lot4a-evidence/integrated-051/source-manifest.json) et l’[archive intégrée de 284 fichiers](lot4a-evidence/integrated-051/source-archive.json) identifient le candidat réellement vérifié. L’identité de version 0.50 de Site 79 désigne les octets de 3I ; elle est distincte de l’étiquette provisoire 0.50 du premier candidat isolé 4A.
 
@@ -275,7 +277,7 @@ Les queues défavorables restent également conservées dans le [rendu complet](
 
 Les contrôles de Pause conservent les acquittements et les frontières sûres à **zéro action pendant la planification initiale** et **une action lorsque celle-ci est déjà engagée**. Cette portée ne valide pas la préemption de toute recherche longue, ni l’interface navigateur bloquée. Les observations `heapUsed` et RSS de chaque cohorte sont conservées dans le rendu ; leur variabilité dépend aussi des processus, chauffes, allocations et GC. Elle n’établit pas, à elle seule, une fuite ou une cause propre à Feedback. Le banc mesure la boucle commune sur des retours enregistrés ; il exclut le rendu navigateur, le moteur du jeu et le réseau, et ne démontre pas une stabilité sur plusieurs heures.
 
-Le [contrôle des entrées de publication qualifiées](lot4a-evidence/integrated-051/publication-inputs-owner-qualified.json) est **`integrity_verified_with_owner_qualified_cost`**, enregistré à **20:02:41,843604 UTC**. Il lie le gel natif, les inventaires de sources/tests/build, les cinq régressions, les preuves de coût et la conservation exacte des archives, notamment les **92 parties** des captures. Il vérifie les octets sans nouvelle campagne, mesure ou recalcul arithmétique, et maintient l’échec strict. **Ce reçu ne vérifie aucun déploiement d’hébergement : la publication reste en attente.**
+Le [contrôle des entrées de publication qualifiées](lot4a-evidence/integrated-051/publication-inputs-owner-qualified.json) est **`integrity_verified_with_owner_qualified_cost`**, enregistré à **20:02:41,843604 UTC**. Il lie le gel natif, les inventaires de sources/tests/build, les cinq régressions, les preuves de coût et la conservation exacte des archives, notamment les **92 parties** des captures. Il vérifie les octets sans nouvelle campagne, mesure ou recalcul arithmétique, et maintient l’échec strict. **Ce reçu vérifie les entrées ; le déploiement d’hébergement est attesté séparément par le [reçu Site 80](lot4a-evidence/integrated-051/publication-site80.json).**
 
 | Élément de décision | État du présent rapport |
 | --- | --- |
@@ -293,7 +295,7 @@ Le [contrôle des entrées de publication qualifiées](lot4a-evidence/integrated
 | Médianes globales A/B, STCK et SMLP | STCK −9,093642 % ; SMLP +4,601522 % ; huit sessions par jeu et version |
 | Phases, p95 admissibles, mémoire et Pause | Rendu complet conservé, dont SMLP acquisition/persistance +11,646641 % et deux hausses de p95 au-delà de 10 % |
 | Décision de budget | 2/2 jeux acceptés selon la règle globale avec qualification du propriétaire ajouté ; consolidation stricte toujours en échec |
-| Entrées de publication | Intégrité vérifiée avec coût qualifié ; déploiement 4A encore en attente |
+| Entrées de publication | Intégrité vérifiée avec coût qualifié ; première publication 4A confirmée dans Site 80, déploiement `succeeded` |
 
 ## Fichiers et preuves principales
 
@@ -322,10 +324,14 @@ Le [contrôle des entrées de publication qualifiées](lot4a-evidence/integrated
 
 | Sous-lot | État et prochain travail |
 | --- | --- |
-| **4A — `observed_feedback_sequence`** | Candidat intégré 0.51 gelé : 3 566/3 566 tests, 5/5 contrôles et 5/5 régressions, avec 85/85 comparaisons. Nouvelle campagne MIND : trois niveaux, 31 actions, 20 préfixes et parité source 51/51 ; contribution locale vérifiée par les huit ablations. Coût global conforme pour 2/2 jeux sous qualification de l’ajout du propriétaire, échec strict et phase défavorable conservés. Intégrité des entrées vérifiée ; publication en attente et blocage navigateur explicitement conservé. Les preuves du candidat isolé restent historiques. |
+| **4A — `observed_feedback_sequence`** | Candidat intégré 0.51 gelé : 3 566/3 566 tests, 5/5 contrôles et 5/5 régressions, avec 85/85 comparaisons. Nouvelle campagne MIND : trois niveaux, 31 actions, 20 préfixes et parité source 51/51 ; contribution locale vérifiée par les huit ablations. Coût global conforme pour 2/2 jeux sous qualification de l’ajout du propriétaire, échec strict et phase défavorable conservés. Intégrité des entrées vérifiée ; première publication Site 80 confirmée, blocage navigateur explicitement conservé. Les preuves du candidat isolé restent historiques. |
 | **4B — `relative_arrangement`** | Planifié. Raccorder `v6.relative_arrangements.choose`, ses mesures, expériences sélectionnées, acquisition liée à l’observation initiale et restauration. Distinguer domaine non reconnu et arrangement reconnu sans expérience admissible : ce dernier clôt la chaîne de contraintes de fenêtre prévue par la source. Son contrat d’acquisition ne doit pas être remplacé par celui de Feedback. |
 | **4C — `facet_example`** | Planifié. Raccorder `v6.facet_examples.choose`, les correspondances simples puis les branches composées selon la configuration originale. Préserver déplacement de face, extension de côtés, méthode portable et méthode composée locale, réfutations, changements hors région, absence d’effet et refus officiel malgré un rendu conforme. Distinguer connaissance acquise et caches recalculables. |
 
 La [roadmap](v6-delivery-roadmap.md) conserve **4B comme prochain travail de ce fil après clôture de 4A**. L’ordre effectif est 3I → 4A → 7A ; 3I est publiée et intégrée. 4C peut être scindé en livraisons simple et composée avec des statuts propres ; aucun de ces sous-lots n’est déclaré transféré par 4A.
 
-**Publication 4A à compléter.** Site 79 certifie la livraison 3I et fournit la référence effective de coût ; elle ne publie pas Feedback. Le candidat 4A est désormais identifié par la fusion `025b8000265f75441aaf57e62514c0b580b62218`, la version native 0.51.0 et le gel `c1e3dbdb…`. La version Site 4A et son reçu de publication devront être ajoutés après validation et déploiement. Les preuves historiques et intégrées restent attachées à leurs digests respectifs.
+**Première publication 4A vérifiée dans Site 80.** Le [reçu d’hébergement](lot4a-evidence/integrated-051/publication-site80.json) confirme le déploiement `appgdep_6af37ad6579c8191a1a3b9559531deed`, de statut **`succeeded`**, à **20:13:29,074363 UTC le 10 novembre 2026**, sur [SRA Playground](https://sra-playground.yannick-fontan.chatgpt.site). Le commit source est **`a52ef3d8396eb051d6d42d3388072fe0bf2a2d9e`** ; l’archive enregistrée compte **29 706 240 octets**, SHA-256 **`6a81c5c07d33d053916d6e68532ce7226999969d0c68365808c3b1642355865f`**. L’accès privé du propriétaire reste inchangé.
+
+Le premier envoi source, **130 Mio**, a été refusé par la limite serveur de **64 Mio par envoi**. Le [reçu de transport](lot4a-evidence/integrated-051/publication-source-transport.json) conserve cet échec et les cinq appels standard réussis qui ont transféré l’historique puis les preuves par étapes. Les commits originaux sont retenus ; l’arbre final est exactement celui du candidat complet avec son reçu d’incident. Aucun push forcé, retrait d’octets de preuve, changement natif ou déploiement intermédiaire n’a été effectué.
+
+Cette publication initiale établit la livraison native **0.51.0**, gel **`c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7`**. La mise à jour documentaire qui ajoute ces reçus peut recevoir une version Site ultérieure, avec le même moteur validé. Les preuves historiques et intégrées restent attachées à leurs digests respectifs. Site 79 demeure la référence 3I/0.50 fraîche utilisée pour le coût ; le candidat 4A isolé provisoirement nommé 0.50 n’a pas été publié.
