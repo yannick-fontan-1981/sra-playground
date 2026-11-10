@@ -1,0 +1,8 @@
+{
+  "schema": "logos-engine.advisory-publication-lock.v1",
+  "acquiredAt": "2026-11-10T23:45:22.329270+00:00",
+  "pid": 2,
+  "lock": "/workspace/shared/sra-coordination/publication.lock",
+  "status": "held_for_sequential_private_publication",
+  "qualification": "Held until actual native publication and documentation closure complete. No source push, deployment or audience change is performed by this lock holder."
+}
