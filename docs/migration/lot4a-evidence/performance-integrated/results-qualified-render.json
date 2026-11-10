@@ -1,0 +1,772 @@
+{
+  "schema": "logos-engine.lot4a-owner-qualified-cost-report-render.v1",
+  "status": "rendered_qualified_receipts",
+  "recordedAt": "2026-11-10T20:02:29.872534+00:00",
+  "generator": {
+    "path": "docs/migration/lot4a-evidence/write-owner-qualified-cost-results.py",
+    "bytes": 16706,
+    "sha256": "8ff24e4044d1d4927905eaa42501aa16cb4b532e41b81ae302d38abefcca3f68"
+  },
+  "formattingHelper": {
+    "path": "docs/migration/lot4a-evidence/write-cost-results.py",
+    "bytes": 43222,
+    "sha256": "9886e156d0853f6ef1bb6160ec2c2611ed49af4108a1a842c3dc4cb1319336f8"
+  },
+  "report": {
+    "path": "docs/migration/lot4a-evidence/performance-integrated/results-qualified.md",
+    "bytes": 26345,
+    "sha256": "ac9c95e31a699169cdf72510aad7ce904fe09f3702f80247671b01e22baf5f59"
+  },
+  "inputsBefore": [
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/declaration.json",
+      "bytes": 4036,
+      "sha256": "7d55983836c6d24bd365335c447b09001f3f296f78a9ab30e0a315fdf5704faa"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/global-budget-policy.json",
+      "bytes": 1763,
+      "sha256": "540d08e3c68cf2fa51705cab3cecfd2d6d3c14455602e43b8cb33a0afcfd5a83"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/readiness.json",
+      "bytes": 4942,
+      "sha256": "1897d6565363c01a838dfa7e91d41b330b04956f9c9d319ffaa5f7786be0697d"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/window.json",
+      "bytes": 10361,
+      "sha256": "3fea8d11469293bee2954f244aca164f95cb26c51edcf1e1cedc157b82faef22"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/coordinated-window-execution.json",
+      "bytes": 1538,
+      "sha256": "a4618baa313b8a72d62a2b13326dc180edfd763bfbd6a0796bbddd8130d3fbf5"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/lock-acquisition.json",
+      "bytes": 8205,
+      "sha256": "639cad1fd7c60e51a7f5ee7d73773af43790e3eeac656c713c28131e6ca32d63"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/protocol-check.json",
+      "bytes": 417,
+      "sha256": "cd706e314b5394a81a0ea006e34496c4c268ff7a3c68bb2348e9460634e7266c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-addition-declaration.json",
+      "bytes": 3052,
+      "sha256": "c37b6cc8b9bcd43705e497dcd49aca57196e1e1129620ccdbb2aac57aa923dd7"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-addition-qualification.json",
+      "bytes": 67441,
+      "sha256": "b3c6dd99ff278f84e6b607a29b4c4502764c9d346ac2604c340730349011c311"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/aggregation-failure-reproduced.json",
+      "bytes": 3052,
+      "sha256": "2305d404095fdcbba714b9697435a5b70afcafccfd332bf0b4504fc098c7d769"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-qualified-comparison.json",
+      "bytes": 119032,
+      "sha256": "75eff33223fa7820400e0f65aff16f0c2ee7338e33c6feb93e9314aeb1c733c5"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-qualified-cost-review.json",
+      "bytes": 167294,
+      "sha256": "fe57f941f30d152abd9c5408f47351171d4b24e5ecd9c95bed0ff0345af300e0"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-qualified-global-budget-decision.json",
+      "bytes": 57039,
+      "sha256": "46a6fe936ce14abb5fd423fb7fb742914e3bbcb702a3365d85a89d4e8f74ebe4"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/baseline.json",
+      "bytes": 428605,
+      "sha256": "eb6164f04fd26a2e23d9d7f9860facae317aac4c93f6781bef9a8c839d73cd1c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/after.json",
+      "bytes": 428993,
+      "sha256": "01e8ce13b3be5fb207e8ed22d52bf27e2f9be31d0566c2f0ffb50fb46ddb6176"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/comparison.json",
+      "bytes": 25220,
+      "sha256": "5c59ddab5eba78f5b8c53ca85318295f0b5196b3d9d289654acd083d47d5a9f7"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/baseline.json",
+      "bytes": 428592,
+      "sha256": "9edcd6f308342828bd598c7bb75cdc69c99c1fa9ad41a2f30b636ecd9c020285"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/after.json",
+      "bytes": 429008,
+      "sha256": "8cb6aac8a3955fd011ece23dc908f37d306bcad16adcfa0bbcc7606ec80066f9"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/comparison.json",
+      "bytes": 25795,
+      "sha256": "abe3b5fd1f9b67a0721a3cc70987cf2935ff1dc648c21ea56b172e45db4f27b8"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/protocol.md",
+      "bytes": 3464,
+      "sha256": "31b2965b8c5cbb026e7ed566318994ec0068857ca6a519915207b94728732181"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-addition-protocol.md",
+      "bytes": 5065,
+      "sha256": "95f4232a6139dde7f1a69ac131011241ec9b05848e0236f41356f2b855b78025"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/write-cost-results.py",
+      "bytes": 43222,
+      "sha256": "9886e156d0853f6ef1bb6160ec2c2611ed49af4108a1a842c3dc4cb1319336f8"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/write-owner-qualified-cost-results.py",
+      "bytes": 16706,
+      "sha256": "8ff24e4044d1d4927905eaa42501aa16cb4b532e41b81ae302d38abefcca3f68"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/baseline.log",
+      "bytes": 1577,
+      "sha256": "e3669ad55fb95b4c574ccba2a6a0173c83a07fb80fa6a80cbd15a63e50c43898"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/after.log",
+      "bytes": 1587,
+      "sha256": "865b3d071dbb1c7537ea3dba3c5cf617e848ad4e93901317b921757cd3752d4a"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/baseline.log",
+      "bytes": 1579,
+      "sha256": "6f28dbbe74c14f66012c410bcfbe8a63298095b7b03fccf03e8665979691395b"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/after.log",
+      "bytes": 1581,
+      "sha256": "76ea00c1a54474da094149226ba8aca16c92b01cb7ec06e5a08e84a20129c6d0"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/aggregation-failure-reproduced.log",
+      "bytes": 204711,
+      "sha256": "b18b7f5ec1d90b3913d8e217a91276c20711ae46e646eea14d9ce0f89352bc78"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/aggregate-owner-qualified-cost.mjs",
+      "bytes": 15538,
+      "sha256": "c7b735126e37e5f67e354f71cfa479d93a7b3c49fd5fab457bdaf4efc5cbda8e"
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "bytes": 19460,
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/review-owner-qualified-cost.py",
+      "bytes": 32648,
+      "sha256": "0abbc42a6128b0090b56ddbab13c46eac5c558e46ea04ad17069c8f24797872b"
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "bytes": 17810,
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4"
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "bytes": 22204,
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940"
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "bytes": 8476,
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341"
+    },
+    {
+      "path": "scripts/verify-native-delivery.py",
+      "bytes": 26494,
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a"
+    },
+    {
+      "path": "scripts/compare-v54-reactive-public-evidence.py",
+      "bytes": 18850,
+      "sha256": "3274acc5ed28a40f91ad0ee2e34c247ab160919ea43855cf514b4fbc22ef6a69"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/docs/migration/lot4a-evidence/performance-integrated/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/docs/migration/lot4a-evidence/performance-integrated/cohort1/baseline.json",
+      "bytes": 428605,
+      "sha256": "eb6164f04fd26a2e23d9d7f9860facae317aac4c93f6781bef9a8c839d73cd1c"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/docs/migration/lot4a-evidence/performance-integrated/cohort2/baseline.json",
+      "bytes": 428592,
+      "sha256": "9edcd6f308342828bd598c7bb75cdc69c99c1fa9ad41a2f30b636ecd9c020285"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/docs/migration/lot4a-evidence/performance-integrated/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/docs/migration/lot4a-evidence/performance-integrated/protocol.md",
+      "bytes": 3464,
+      "sha256": "31b2965b8c5cbb026e7ed566318994ec0068857ca6a519915207b94728732181"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/baseline-integrated/source-manifest.json",
+      "bytes": 32014,
+      "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 26495,
+      "sha256": "048eb1fcb0887e56ae26c047aefd336c04f3b96a0828dc720efe2ce49b87a3f0"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/source-archive.json",
+      "bytes": 34019,
+      "sha256": "1372ad8554dabd2dc5440ca78703faf3ad548bdac3605c1abd3982978fe20448"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/source-manifest.json",
+      "bytes": 32379,
+      "sha256": "391b3e33c4bbd66ed9a1885d4803fb754b596a6e31ba42b79114fc2c43d6e6cd"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-graphs-A-01.json.gz",
+      "bytes": 41054071,
+      "sha256": "97dd95d8edd01679760499cce00d5c8fd7a553ccd3973969d92cbf85c3e8b1cb"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-graphs-A-01.receipt.json",
+      "bytes": 131861,
+      "sha256": "6cab3647c3fd540f5b4501deaaefc9df8b93efe6f9d73cd96cf5c24a92144a3d"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-graphs-B-01.json.gz",
+      "bytes": 41125058,
+      "sha256": "5ec8fef3d3c57b6172aae1aeb55ed968eafa33235394e13153919cf8a8e0c0ab"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-graphs-B-01.receipt.json",
+      "bytes": 168006,
+      "sha256": "4a8daafd4bdc61e5c0544c40e62f155ab65603260828ecd793bb07091d40c6c0"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/planning/feedback-cost-work-delta.json",
+      "bytes": 78018,
+      "sha256": "27f8bb84df1cee13787b73eddd99e5387eb4517ebe93175c1172e0f2e7dc22c9"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 43513,
+      "sha256": "93c099c2bfce8a49abe0619f081ce9f1056ef76391f182cc0690888e040f50f6"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "bytes": 9861,
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    },
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "bytes": 8933,
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "bytes": 11291,
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1"
+    },
+    {
+      "path": "src/logos-engine/interpreter.ts",
+      "bytes": 37750,
+      "sha256": "fcc2aa513bc8e8d7cd5b69156eb2e246fd15327fdbc0e27db9c95f9205147d94"
+    },
+    {
+      "path": "src/logos-engine/ir.ts",
+      "bytes": 4843,
+      "sha256": "912987119cfc47a3e6f2175643101cbd24795a289338099d0c94c0e976a3ecfc"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 19490,
+      "sha256": "9c7fb668e85bf101f88de439ff43b42bba9566917a2c2b8fb8f13e2ee00e247b"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14854,
+      "sha256": "5efe83d07b6d5354b9a26b39320449ecaa631ca55563c683779f067a8d670bf0"
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "bytes": 21947,
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d"
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "bytes": 5903,
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "bytes": 1502394,
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834"
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/declaration.json",
+      "bytes": 4036,
+      "sha256": "7d55983836c6d24bd365335c447b09001f3f296f78a9ab30e0a315fdf5704faa"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/global-budget-policy.json",
+      "bytes": 1763,
+      "sha256": "540d08e3c68cf2fa51705cab3cecfd2d6d3c14455602e43b8cb33a0afcfd5a83"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/readiness.json",
+      "bytes": 4942,
+      "sha256": "1897d6565363c01a838dfa7e91d41b330b04956f9c9d319ffaa5f7786be0697d"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/window.json",
+      "bytes": 10361,
+      "sha256": "3fea8d11469293bee2954f244aca164f95cb26c51edcf1e1cedc157b82faef22"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/coordinated-window-execution.json",
+      "bytes": 1538,
+      "sha256": "a4618baa313b8a72d62a2b13326dc180edfd763bfbd6a0796bbddd8130d3fbf5"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/lock-acquisition.json",
+      "bytes": 8205,
+      "sha256": "639cad1fd7c60e51a7f5ee7d73773af43790e3eeac656c713c28131e6ca32d63"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/protocol-check.json",
+      "bytes": 417,
+      "sha256": "cd706e314b5394a81a0ea006e34496c4c268ff7a3c68bb2348e9460634e7266c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-addition-declaration.json",
+      "bytes": 3052,
+      "sha256": "c37b6cc8b9bcd43705e497dcd49aca57196e1e1129620ccdbb2aac57aa923dd7"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-addition-qualification.json",
+      "bytes": 67441,
+      "sha256": "b3c6dd99ff278f84e6b607a29b4c4502764c9d346ac2604c340730349011c311"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/aggregation-failure-reproduced.json",
+      "bytes": 3052,
+      "sha256": "2305d404095fdcbba714b9697435a5b70afcafccfd332bf0b4504fc098c7d769"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-qualified-comparison.json",
+      "bytes": 119032,
+      "sha256": "75eff33223fa7820400e0f65aff16f0c2ee7338e33c6feb93e9314aeb1c733c5"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-qualified-cost-review.json",
+      "bytes": 167294,
+      "sha256": "fe57f941f30d152abd9c5408f47351171d4b24e5ecd9c95bed0ff0345af300e0"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-qualified-global-budget-decision.json",
+      "bytes": 57039,
+      "sha256": "46a6fe936ce14abb5fd423fb7fb742914e3bbcb702a3365d85a89d4e8f74ebe4"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/baseline.json",
+      "bytes": 428605,
+      "sha256": "eb6164f04fd26a2e23d9d7f9860facae317aac4c93f6781bef9a8c839d73cd1c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/after.json",
+      "bytes": 428993,
+      "sha256": "01e8ce13b3be5fb207e8ed22d52bf27e2f9be31d0566c2f0ffb50fb46ddb6176"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/comparison.json",
+      "bytes": 25220,
+      "sha256": "5c59ddab5eba78f5b8c53ca85318295f0b5196b3d9d289654acd083d47d5a9f7"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/baseline.json",
+      "bytes": 428592,
+      "sha256": "9edcd6f308342828bd598c7bb75cdc69c99c1fa9ad41a2f30b636ecd9c020285"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/after.json",
+      "bytes": 429008,
+      "sha256": "8cb6aac8a3955fd011ece23dc908f37d306bcad16adcfa0bbcc7606ec80066f9"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/comparison.json",
+      "bytes": 25795,
+      "sha256": "abe3b5fd1f9b67a0721a3cc70987cf2935ff1dc648c21ea56b172e45db4f27b8"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/protocol.md",
+      "bytes": 3464,
+      "sha256": "31b2965b8c5cbb026e7ed566318994ec0068857ca6a519915207b94728732181"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-addition-protocol.md",
+      "bytes": 5065,
+      "sha256": "95f4232a6139dde7f1a69ac131011241ec9b05848e0236f41356f2b855b78025"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/write-cost-results.py",
+      "bytes": 43222,
+      "sha256": "9886e156d0853f6ef1bb6160ec2c2611ed49af4108a1a842c3dc4cb1319336f8"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/write-owner-qualified-cost-results.py",
+      "bytes": 16706,
+      "sha256": "8ff24e4044d1d4927905eaa42501aa16cb4b532e41b81ae302d38abefcca3f68"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/baseline.log",
+      "bytes": 1577,
+      "sha256": "e3669ad55fb95b4c574ccba2a6a0173c83a07fb80fa6a80cbd15a63e50c43898"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/after.log",
+      "bytes": 1587,
+      "sha256": "865b3d071dbb1c7537ea3dba3c5cf617e848ad4e93901317b921757cd3752d4a"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/baseline.log",
+      "bytes": 1579,
+      "sha256": "6f28dbbe74c14f66012c410bcfbe8a63298095b7b03fccf03e8665979691395b"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/after.log",
+      "bytes": 1581,
+      "sha256": "76ea00c1a54474da094149226ba8aca16c92b01cb7ec06e5a08e84a20129c6d0"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/aggregation-failure-reproduced.log",
+      "bytes": 204711,
+      "sha256": "b18b7f5ec1d90b3913d8e217a91276c20711ae46e646eea14d9ce0f89352bc78"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/aggregate-owner-qualified-cost.mjs",
+      "bytes": 15538,
+      "sha256": "c7b735126e37e5f67e354f71cfa479d93a7b3c49fd5fab457bdaf4efc5cbda8e"
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "bytes": 19460,
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/review-owner-qualified-cost.py",
+      "bytes": 32648,
+      "sha256": "0abbc42a6128b0090b56ddbab13c46eac5c558e46ea04ad17069c8f24797872b"
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "bytes": 17810,
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4"
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "bytes": 22204,
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940"
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "bytes": 8476,
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341"
+    },
+    {
+      "path": "scripts/verify-native-delivery.py",
+      "bytes": 26494,
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a"
+    },
+    {
+      "path": "scripts/compare-v54-reactive-public-evidence.py",
+      "bytes": 18850,
+      "sha256": "3274acc5ed28a40f91ad0ee2e34c247ab160919ea43855cf514b4fbc22ef6a69"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/docs/migration/lot4a-evidence/performance-integrated/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/docs/migration/lot4a-evidence/performance-integrated/cohort1/baseline.json",
+      "bytes": 428605,
+      "sha256": "eb6164f04fd26a2e23d9d7f9860facae317aac4c93f6781bef9a8c839d73cd1c"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/docs/migration/lot4a-evidence/performance-integrated/cohort2/baseline.json",
+      "bytes": 428592,
+      "sha256": "9edcd6f308342828bd598c7bb75cdc69c99c1fa9ad41a2f30b636ecd9c020285"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/docs/migration/lot4a-evidence/performance-integrated/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/docs/migration/lot4a-evidence/performance-integrated/protocol.md",
+      "bytes": 3464,
+      "sha256": "31b2965b8c5cbb026e7ed566318994ec0068857ca6a519915207b94728732181"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/baseline-integrated/source-manifest.json",
+      "bytes": 32014,
+      "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 26495,
+      "sha256": "048eb1fcb0887e56ae26c047aefd336c04f3b96a0828dc720efe2ce49b87a3f0"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/source-archive.json",
+      "bytes": 34019,
+      "sha256": "1372ad8554dabd2dc5440ca78703faf3ad548bdac3605c1abd3982978fe20448"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/source-manifest.json",
+      "bytes": 32379,
+      "sha256": "391b3e33c4bbd66ed9a1885d4803fb754b596a6e31ba42b79114fc2c43d6e6cd"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-graphs-A-01.json.gz",
+      "bytes": 41054071,
+      "sha256": "97dd95d8edd01679760499cce00d5c8fd7a553ccd3973969d92cbf85c3e8b1cb"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-graphs-A-01.receipt.json",
+      "bytes": 131861,
+      "sha256": "6cab3647c3fd540f5b4501deaaefc9df8b93efe6f9d73cd96cf5c24a92144a3d"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-graphs-B-01.json.gz",
+      "bytes": 41125058,
+      "sha256": "5ec8fef3d3c57b6172aae1aeb55ed968eafa33235394e13153919cf8a8e0c0ab"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-graphs-B-01.receipt.json",
+      "bytes": 168006,
+      "sha256": "4a8daafd4bdc61e5c0544c40e62f155ab65603260828ecd793bb07091d40c6c0"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/planning/feedback-cost-work-delta.json",
+      "bytes": 78018,
+      "sha256": "27f8bb84df1cee13787b73eddd99e5387eb4517ebe93175c1172e0f2e7dc22c9"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 43513,
+      "sha256": "93c099c2bfce8a49abe0619f081ce9f1056ef76391f182cc0690888e040f50f6"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+      "bytes": 424024,
+      "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "bytes": 9861,
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    },
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "bytes": 8933,
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "bytes": 11291,
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1"
+    },
+    {
+      "path": "src/logos-engine/interpreter.ts",
+      "bytes": 37750,
+      "sha256": "fcc2aa513bc8e8d7cd5b69156eb2e246fd15327fdbc0e27db9c95f9205147d94"
+    },
+    {
+      "path": "src/logos-engine/ir.ts",
+      "bytes": 4843,
+      "sha256": "912987119cfc47a3e6f2175643101cbd24795a289338099d0c94c0e976a3ecfc"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 19490,
+      "sha256": "9c7fb668e85bf101f88de439ff43b42bba9566917a2c2b8fb8f13e2ee00e247b"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14854,
+      "sha256": "5efe83d07b6d5354b9a26b39320449ecaa631ca55563c683779f067a8d670bf0"
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "bytes": 21947,
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d"
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "bytes": 5903,
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "bytes": 1502394,
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834"
+    }
+  ],
+  "inputReceiptsUnchanged": true,
+  "runtimeOrGameExecuted": false,
+  "measurementExecuted": false,
+  "arithmeticReviewChecks": 274,
+  "strictAggregationStatus": "failed",
+  "workMetadataExactAcrossAllSessions": false,
+  "globalBudgetAccepted": true,
+  "qualificationDeclaredAfterWindow": true
+}

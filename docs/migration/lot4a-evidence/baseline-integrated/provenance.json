@@ -1,0 +1,25 @@
+{
+  "schema": "logos-engine.lot4a.published-baseline-provenance.v1",
+  "recordedAt": "2026-11-10T19:05:33.361389+00:00",
+  "checkout": "/workspace/sites/sra-lot4a-base79",
+  "commit": "6d03c2adda9f60b1c97304f5491a428cfbec7a6c",
+  "siteVersion": 79,
+  "nativeVersion": "0.50.0",
+  "nativeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+  "nativeFiles": 270,
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_b50eae90dfd481918691b50c439bf10b",
+  "deploymentId": "appgdep_6af36a37f4f48191b4f5bf3e6fc88435",
+  "deploymentStatus": "succeeded",
+  "deploymentUpdatedAt": "2026-11-10T19:02:37.167593+00:00",
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "sourceManifest": {
+    "path": "docs/migration/lot3i-evidence/final/source-manifest.json",
+    "bytes": 32014,
+    "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd"
+  },
+  "remoteFetchedBeforeIntegration": true,
+  "nativeInventoryVerifiedAgainstPublishedFreeze": true,
+  "historicalTimingReused": false,
+  "qualification": "Detached worktree at the actual verified Site79 commit. Future cost comparisons use fresh executions in this worktree; no prior timing is an input."
+}

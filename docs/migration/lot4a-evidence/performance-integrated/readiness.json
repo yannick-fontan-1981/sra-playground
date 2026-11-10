@@ -1,0 +1,117 @@
+{
+  "schema": "logos-engine.native-cost-window-readiness.v1",
+  "status": "ready_for_predeclared_official_window",
+  "measurementAuthorized": true,
+  "finalizedAt": "2026-11-10T19:29:44.668582+00:00",
+  "pendingRequirements": [],
+  "inputs": [
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/source-manifest.json",
+      "bytes": 32379,
+      "sha256": "391b3e33c4bbd66ed9a1885d4803fb754b596a6e31ba42b79114fc2c43d6e6cd"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/source-archive.json",
+      "bytes": 34019,
+      "sha256": "1372ad8554dabd2dc5440ca78703faf3ad548bdac3605c1abd3982978fe20448"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/validation/delta-tests-run.json",
+      "bytes": 117693,
+      "sha256": "5062b51a9110c06164bfb8147f8d7ed16fc3014eb40f873a825adb20fbcceff0"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/validation/checks-run.json",
+      "bytes": 75358,
+      "sha256": "58daa8f4e8f19ef9a21182ed3106e465dcad66733997893fced36156d01495a9"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/regressions/regression-summary.json",
+      "bytes": 138767,
+      "sha256": "e1e598636a3ed27da11f3528bbdf8104f20628c9fadc7da9daca070f0306a62b"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/feedback-live-contribution.json",
+      "bytes": 69698,
+      "sha256": "7bcf18ef05a401e01b60bde54f3978fdf85ef0d7ac4458e173f39c07e98e636c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/delivery-integrity.json",
+      "bytes": 8858,
+      "sha256": "05478830f244889f1585f20c707d25e070d72b3d18c853e997cf75e540533797"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/browser/browser-qa.json",
+      "bytes": 2129,
+      "sha256": "dd1e133dfc0cbc7f797f14538f29c65f4735fc952b589f7eaa568722cef8055f"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/integrated-051/browser/preview-stopped.json",
+      "bytes": 514,
+      "sha256": "a8f188cbe648c1ed0935e9ba153cc4376c74658ff7667ec59c69bfe4e6a90576"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/baseline-integrated/source-manifest.json",
+      "bytes": 32014,
+      "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/baseline-integrated/provenance.json",
+      "bytes": 1271,
+      "sha256": "73d738bb8f132d2f86c5875ad10045b3648f2cacda4f6a2e85d22b38465fa340"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/planning/integrated-051-regression-provenance.json",
+      "bytes": 50015,
+      "sha256": "3da77a4f79f071a2277c72ee567258da3042982e9a3ff29eab69104666959004"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/protocol-check.json",
+      "bytes": 417,
+      "sha256": "cd706e314b5394a81a0ea006e34496c4c268ff7a3c68bb2348e9460634e7266c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/declaration.json",
+      "bytes": 4036,
+      "sha256": "7d55983836c6d24bd365335c447b09001f3f296f78a9ab30e0a315fdf5704faa"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/run-coordinated-cost-window.py",
+      "bytes": 6616,
+      "sha256": "5bff6cfa8d7d21d2021fa2a6e9a166a686bbd82c5f59c04baf42c365a87b36ba"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/lock-acquisition.json",
+      "bytes": 8205,
+      "sha256": "639cad1fd7c60e51a7f5ee7d73773af43790e3eeac656c713c28131e6ca32d63"
+    }
+  ],
+  "nativeSourceDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+  "baselineCommit": "6d03c2adda9f60b1c97304f5491a428cfbec7a6c",
+  "baselineSiteVersion": 79,
+  "nativeVersion": "0.51.0",
+  "functionalSummary": {
+    "tests": 3566,
+    "testFiles": 90,
+    "projectGates": 5,
+    "regressions": 5,
+    "regressionChecks": 85,
+    "mindLevels": 3,
+    "mindActions": 31,
+    "mindPrefixes": 20,
+    "feedbackSourceCalls": 51
+  },
+  "browserQualification": "Blocked infrastructure; zero browser game actions and no browser functional pass. The managed preview is stopped.",
+  "ownAgentWork": "Only light report editing by feedback_component; all tests/builds/campaigns/replays/source verification completed. No preview or other4A heavy process.",
+  "isolation": "Shared exclusive flock held before this receipt and throughout the unchanged official child;3I completed and7A explicitly quiet through4A publication.",
+  "officialCommand": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-native-cost-window.py",
+    "/workspace/sites/sra-lot4a-base79",
+    "docs/migration/lot4a-evidence/performance-integrated",
+    "docs/migration/lot4a-evidence/baseline-integrated/source-manifest.json",
+    "docs/migration/lot4a-evidence/integrated-051/source-manifest.json"
+  ],
+  "noNodeOptionsOrHeapOverrideAdded": true
+}
