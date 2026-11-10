@@ -4,7 +4,7 @@
  * crossing law; retained crossing pairs remain experimental across epochs.
  */
 import { crossedPrefixGeometry, crossedPrefixMeasureControls, crossedPrefixReferencePresent,
-  crossedPrefixCell, crossedPrefixSlot, crossedPrefixInputCandidates } from './v6-crossed-prefix-observation.ts';
+  crossedPrefixCell, crossedPrefixSlot } from './v6-crossed-prefix-observation.ts';
 import type { CrossedPrefixController, CrossedPrefixLayout } from './v6-crossed-prefix-observation.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { compareUnicode } from './canonical.ts';
@@ -193,10 +193,26 @@ export class CrossedPrefixMemory {
         deadline_ms: Number.isFinite(deadline) ? deadline : null,
         scope: 'Unfinished controller-appearance assignment, not an acquired impossibility or crossing law.' } });
     if (bounded && controls.length > limits.maxControllers) return interrupted('controllers');
-    let more = true;
+    let more = true, checkCurrentAssignment = true;
     while (more) {
       if (bounded && now() >= deadline) return interrupted('deadline');
       if (bounded && examined >= limits.maxAssignments) return interrupted('assignments');
+      // Reusing the currently measured appearances costs zero recolorings.
+      // If they satisfy every crossing clause, this is the unique zero-cost
+      // assignment and therefore exactly the exhaustive source optimum. It
+      // needs no claim about an input's physical effect. Check request bounds
+      // first: a zero-work budget or expired deadline still cannot decide.
+      // A failed zero-cost check leaves the original enumeration, ordering,
+      // request-wide counter and cutoff frontier unchanged.
+      if (checkCurrentAssignment) {
+        checkCurrentAssignment = false;
+        if (target.every((row, j) => row.every((value, i) => equal(value, horizontal[j]!.color)
+          || equal(value, vertical[i]!.color)))) {
+          examined++;
+          best = { cost: 0, assignment: Object.fromEntries(controls.map(control => [control.key, control.color])) };
+          break;
+        }
+      }
       examined++;
       const assignment = Object.fromEntries(controls.map((control, index) => [control.key, choices[index]![cursor[index]!]!]));
       const cost = controls.reduce((sum, control) => sum + Number(!equal(assignment[control.key], control.color)), 0);
@@ -338,14 +354,16 @@ export class CrossedPrefixMemory {
   }
 }
 
-/** The source transport obtains measured candidates independently of the
- * bounded exploratory sampler. The native assignment budget is one request-wide
- * counter; it never restarts for each appearance assignment. */
+/** This own question derives its address from the acquired layout and current
+ * measured controls; it does not consume its exploratory-input argument. Avoid
+ * re-running full geometry merely to append unused candidates. The actual point
+ * still receives current observation support and mandatory common binding.
+ * The native assignment budget remains one request-wide counter. */
 export async function proposeCrossedPrefixCommon(memory: CrossedPrefixMemory, observation: R, rows: NativeRows,
   inputs: readonly R[], remaining: number, deadlineMs: number | null = null, now: Clock = () => performance.now(),
   bounds: CrossedPrefixAssignmentBounds = {}): Promise<R | null> {
   if (remaining < 1) return null;
-  const proposal = memory.crossQuestion(observation, rows, [...inputs, ...crossedPrefixInputCandidates(rows, observation.available_action_refs)],
+  const proposal = memory.crossQuestion(observation, rows, inputs,
     { ...bounds, nativeBounds: true, deadlineMs, now });
   if (!truth(proposal) || proposal!.status === 'unknown') return proposal;
   proposal!.steps[0].expected_before = { level_epoch: observation.level_epoch, frame_hash: observation.frame_hash,
