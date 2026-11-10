@@ -116,6 +116,17 @@ ne constituent pas des résultats de performance.
 | [Résultats complets](performance-integrated/results.md) | 32 sessions affichées, 16 diagnostics groupés et 32 diagnostics de cohorte ; dépassements et p95 conservés |
 | [Entrées de publication](integrated-final/publication-inputs.json) | Source, tests et build inchangés ; aucun nouveau test, jeu ou build déduit de ce reçu |
 
+## Publication vérifiée
+
+La première livraison est **Site 82/native 0.52**, commit
+`0ca36b0a6a358e1e89420753bbcec4a33f028e0a`, déploiement `succeeded` et accès privé.
+Le [reçu de publication](integrated-final/publication-site82.json), le
+[transport normal des sources](integrated-final/publication-source-transport.json)
+et son [plan conservé](coordination/publication-bounded-source-plan.json) gardent
+les identités exactes, tous les commits et les cinq étapes sans déploiement
+intermédiaire. Les 75 contenus de fichiers des archives sont identiques ; leurs
+conteneurs et l'identité d'archive du serveur restent identifiés séparément.
+
 ## Conservation des octets
 
 Les gros rapports compressés restent disponibles sous forme de parties exactes

@@ -1,0 +1,28 @@
+{
+  "schema": "logos-engine.lot7a-published-site.v1",
+  "status": "published",
+  "recordedAt": "2026-11-10T20:54:42.874Z",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 82,
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_313e1b8e10c48191b1021845fb64fc55",
+  "commit": "0ca36b0a6a358e1e89420753bbcec4a33f028e0a",
+  "deploymentId": "appgdep_6af3842943848191a1b559c431014ee7",
+  "deploymentStatus": "succeeded",
+  "deploymentUpdatedAt": "2026-11-10T20:53:16.560226+00:00",
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "archiveStorage": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_000000008f7c820e8a07302a6ff30907",
+    "content_hash": "sha256:95d1d9780bdb75c1eda9fe36ad66f3cab2e9277306722bea087592c19dab83c9",
+    "size_bytes": 29747200,
+    "file_count": 75
+  },
+  "localArchive": "/workspace/sites/sra-lot7a-20261110/lot7a-transport-step-5.tar",
+  "nativeVersion": "0.52.0",
+  "nativeSourceDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+  "access": {
+    "ownerPrivate": true,
+    "sharingChanged": false
+  },
+  "qualification": "Terminal deployment success returned by the private Site operation. The version listing independently binds the published commit and archive. This publication preserves the LKEY third-level and full-caller-parity reservations."
+}

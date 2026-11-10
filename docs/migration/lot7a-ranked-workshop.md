@@ -147,7 +147,7 @@ L'inventaire intégré donne **56 entrées raccordées sur 76**, soit **20 resta
 
 <!-- LOT7A_PUBLICATION_FINAL_START -->
 
-**Publication 7A : en attente.** Le commit effectivement poussé, la version Sites et le résultat du déploiement seront renseignés après vérification. Le commit local et le preview ne constituent pas une publication de 7A.
+**La première publication 7A est confirmée dans Site 82**, moteur **0.52.0**, commit **`0ca36b0a6a358e1e89420753bbcec4a33f028e0a`**, déploiement **`succeeded`** et accès privé conservé. Le [reçu Sites](lot7a-evidence/integrated-final/publication-site82.json) lie le commit, la version et l'archive déclarée par le serveur. Le [transport des sources](lot7a-evidence/integrated-final/publication-source-transport.json) conserve tous les commits et l'arbre final exact ; les cinq pushes normaux n'ont produit aucun déploiement intermédiaire. Les 75 fichiers du build ont un contenu identique dans les cinq archives locales, dont les identités de conteneur restent distinctes. Une clôture documentaire ultérieure garde ce même moteur.
 
 <!-- LOT7A_PUBLICATION_FINAL_END -->
 
