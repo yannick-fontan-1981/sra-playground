@@ -1,0 +1,143 @@
+{
+  "schema": "logos-engine.lot4b.partial-workshop-projection-static-review.v1",
+  "status": "static_review_no_blocking_finding",
+  "reviewer": "/root/feedback_source_audit",
+  "reviewedAt": "2026-11-10T21:19:01Z",
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "scope": "Independent source-only review of the prospective Workshop command-envelope correction after the retained preflight failure. This receipt does not execute the runner, native runtime or any validation, and does not qualify a replay as successful.",
+  "previousRunner": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-01/runner-before-fix.mjs",
+    "bytes": 40628,
+    "sha256": "2ad1bc5cb7763efbf8d1905d184dbb33c873c70416dd5ce125ea2f85f45ace69"
+  },
+  "correctedRunner": {
+    "path": "scripts/replay-native-partial-public-regression.mjs",
+    "bytes": 41724,
+    "sha256": "b1618a2cf7867c0a783de131ed3cb8d24baffb77c858f04927fe85843c7688bf"
+  },
+  "contracts": {
+    "previous": {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/contract.json",
+      "bytes": 4339,
+      "sha256": "d3d6cc003ca9414d5937449e671f7905e63c19d48399607e912fce6ead8e72a5"
+    },
+    "corrected": {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/contract-02.json",
+      "bytes": 4339,
+      "sha256": "3da0449b6a864c0c5cfe587e3b1b0cf6200bfe7920587a0839a9a2151dddeca9"
+    },
+    "differences": [
+      "declaredAt",
+      "executionInputs.runner"
+    ],
+    "allOtherValuesAndOrderingIdentical": true
+  },
+  "retainedFailure": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-01/qualification.json",
+    "bytes": 3012,
+    "sha256": "706aad124c99d9c360727d070bb28121432754d4eb0e4f54c95093a104522fef",
+    "status": "failed",
+    "reason": "The public command validator required data on a raw scalar source command.",
+    "commandsCheckedBeforeReturn": 0,
+    "publicPacketsObserved": 0,
+    "requestsObserved": 0,
+    "rawCampaignStatus": null,
+    "reclassified": false
+  },
+  "sourceEvidence": [
+    {
+      "path": "src/logos-engine/v6-ranked-workshop.ts",
+      "sha256": "002ea017828e0dc1304c3f0a8eeb6ff4acb66c70ff1d8ff269a917d132a18cf2",
+      "locations": [
+        "select: scalar offer action_ref only",
+        "recordSource: exact selected command comparison and retained command copies"
+      ],
+      "finding": "The native family preserves the original scalar offer and records the supplied command without completing a data field."
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/ranked_workshop/family.py",
+      "sha256": "d5e597658994d23659fc086ae9fd66d031501d1fd8a319ce95f38579bd8bb95d",
+      "locations": [
+        "select: lines31-36",
+        "record: lines71-73"
+      ],
+      "finding": "Original scalar offers contain action_ref; record compares the selected proposal command exactly and retains copies of the command it receives."
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "fd7cd01e4b35db37886f910d710dbabda99e0a40a729dadf2ae9e1f43bbd0aa8",
+      "locations": [
+        "advance/seal: lines1060-1102",
+        "acquirePassiveFamilies: lines1225-1255"
+      ],
+      "finding": "Selected and passive Workshop acquisitions receive the witnessed transition command. A selected Workshop record is not repeated through its passive path; foreign point commands can reach passive acquisition."
+    }
+  ],
+  "checks": [
+    {
+      "name": "only_workshop_projection_changes",
+      "passed": true,
+      "method": "Exact textual comparison before function workshopProjection and from function parseArguments onward; both regions are byte-equivalent text."
+    },
+    {
+      "name": "public_command_validator_unchanged",
+      "passed": true,
+      "finding": "command() remains outside the changed function. It still requires exactly action_ref/data, ACTION1..7, integer x/y for ACTION6, and an explicit empty object for scalar public data."
+    },
+    {
+      "name": "source_representation_bound_to_public_command",
+      "passed": true,
+      "finding": "Source scalar commands require exactly action_ref; source point commands require exactly action_ref/data with x/y. The source action_ref equals the public action_ref and source point data deeply equals the strictly validated public data."
+    },
+    {
+      "name": "raw_source_command_retained",
+      "passed": true,
+      "finding": "row.command is clone(sourceCommand), where sourceCommand is args[2]; neither this object nor the public command is completed, stripped or rewritten. Baseline and candidate compare the retained source envelopes, including field presence."
+    },
+    {
+      "name": "order_frames_uniqueness_and_selection_preserved",
+      "passed": true,
+      "finding": "Existing record order, before/after frame binding, unique transition, selected/passive counts and source-call indices remain. publicActionSequence is additionally retained in each record row."
+    },
+    {
+      "name": "public_comparison_scope_unchanged",
+      "passed": true,
+      "finding": "The strict public action/packet comparisons and COMPARISON_SCOPE remain outside the edited function. Both actionNormalization and publicPacketNormalization remain none; no comparison or declared historical negative outcome is removed."
+    },
+    {
+      "name": "new_contract_changes_only_time_and_runner_pin",
+      "passed": true,
+      "finding": "Both JSON contracts are identical after removing declaredAt and executionInputs.runner, including expected historical outcome, counts, native source pin and comparison scope."
+    },
+    {
+      "name": "first_failure_retained",
+      "passed": true,
+      "finding": "The old runner and failed qualification are preserved under attempt-01. A new attempt must use the separately declared contract and a fresh output directory."
+    }
+  ],
+  "interpretation": {
+    "sourceShapeScope": "The shape guard states the canonical source-command envelopes expected by this retained LKEY trajectory and its caller. It does not assert that RankedWorkshop universally rewrites arbitrary foreign commands: the source family copies what it receives.",
+    "preservedOutcome": "The retained trajectory remains 25 actions, two completed levels and an unresolved third-level frontier. A successful partial regression would preserve that outcome; it would not establish a third-level success.",
+    "excludedClaims": [
+      "Successful execution of contract-02",
+      "Whole original-caller parity",
+      "Complete provider-state equality",
+      "Live-game execution",
+      "Performance result"
+    ],
+    "syntaxOrRuntimeVerifiedByThisReview": false
+  },
+  "execution": {
+    "sourceTextRead": true,
+    "lightweightFingerprints": true,
+    "textAndJsonComparisonsOnly": true,
+    "pythonOrNodeProcesses": 0,
+    "originalOrNativeImports": 0,
+    "tests": 0,
+    "builds": 0,
+    "replays": 0,
+    "games": 0,
+    "benchmarks": 0
+  },
+  "nextAction": "Execution remains with root, using the new pinned contract and a new attempt directory after the scheduling release."
+}

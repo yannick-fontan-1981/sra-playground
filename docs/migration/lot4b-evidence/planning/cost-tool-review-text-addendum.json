@@ -1,0 +1,142 @@
+{
+  "schema": "logos-engine.lot4b.cost-tool-review-text-addendum.v1",
+  "status": "single_documentary_replacement_verified",
+  "reviewer": "/root/feedback_source_audit",
+  "reviewedAt": "2026-11-10T21:11:31Z",
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "originalReview": {
+    "path": "docs/migration/lot4b-evidence/planning/cost-tool-review.json",
+    "bytes": 24247,
+    "sha256": "4a4f305b5828a6516074ade42163fb555b6da5f9a61e1f02c1cc6d3a45e94cee",
+    "unchanged": true
+  },
+  "scope": "Static addendum requested by root after the initial review and before the 4B protocol is declared or measured. The original review remains unchanged. This receipt neither runs a validator nor supplies readiness, structural-capture, performance or publication results.",
+  "replacement": {
+    "path": "docs/migration/lot4b-evidence/prepare-cost-protocol.py",
+    "lineAtReview": 107,
+    "exactBefore": "ils n'établissent pas la contribution propre de l'atelier",
+    "exactAfter": "ils n'établissent pas la contribution propre de la famille RelativeArrangements",
+    "before": {
+      "path": "docs/migration/lot4b-evidence/prepare-cost-protocol.py",
+      "bytes": 28142,
+      "sha256": "aad72237b820a6964b49afc9dd5c7d00053f8a83da4101f04b38b37e4080cb06"
+    },
+    "after": {
+      "path": "docs/migration/lot4b-evidence/prepare-cost-protocol.py",
+      "bytes": 28164,
+      "sha256": "f9dab9d3e94b51ebc75ce9e8ce192a0c8e23c26329714c00cfea8e8310f536e2"
+    },
+    "occurrencesAfter": 1,
+    "occurrencesBeforeRemaining": 0,
+    "reverseTextSubstitutionSha256": "aad72237b820a6964b49afc9dd5c7d00053f8a83da4101f04b38b37e4080cb06",
+    "reverseTextSubstitutionMatchesOriginalReviewedFile": true,
+    "implication": "Reversing this literal phrase in the current byte stream recovers the original reviewed SHA-256. No other byte change in this file is present; calculations, thresholds, populations, tool commands and validation rules retain their reviewed bytes."
+  },
+  "inventory": {
+    "reviewedFiles": 12,
+    "description": "Eleven tools and one written owner-cost contract.",
+    "changedFiles": 1,
+    "unchangedFiles": 11,
+    "filesAfter": [
+      {
+        "path": "docs/migration/lot4b-evidence/capture-cost-owner-graphs.mjs",
+        "bytes": 23834,
+        "sha256": "13cc2498b7e27e7b90fe7216e91c4a329e8e9a37c7d7671b655039daead6f65f"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/check-cost-static-inputs.py",
+        "bytes": 23603,
+        "sha256": "9cbe543d0166d366d4d8e576dcc8553c7a8116d4d657202c5be29a4d2607a121"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/consolidate-owner-costs.mjs",
+        "bytes": 52881,
+        "sha256": "7691a06e88d60139941ace27605aa319aa9a01e31a7e315630abb1d8cef7e123"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/finalize-cost-readiness.py",
+        "bytes": 34992,
+        "sha256": "ab3e404841ce349001d281873dd8d72fd32ee3b0d4bad33ed65df874d4d4b519"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/prepare-cost-protocol.py",
+        "bytes": 28164,
+        "sha256": "f9dab9d3e94b51ebc75ce9e8ce192a0c8e23c26329714c00cfea8e8310f536e2"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/prepare-owner-cost-contract.py",
+        "bytes": 13795,
+        "sha256": "b3916d2b48e8e7a0b61771a14ad7e911bfa9fd7691eb6ac9bcaf99c79897c9f4"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/qualify-cost-owner-graphs.mjs",
+        "bytes": 47487,
+        "sha256": "3b9f006424fa27080993271d57d086537665dc25a6926b2b2a9ec48e48220ad5"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/record-cost-log-transport.py",
+        "bytes": 3763,
+        "sha256": "ced9c309bc72f791b3f451d4793e11a2830f414019c08aeb1df22522b671dc7a"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/record-cost-owner-source-inventory.mjs",
+        "bytes": 12532,
+        "sha256": "38077e5103a8657eec7dce1fdbc65506327e1a6f29a4bfcd622efb84119d73eb"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/review-owner-costs.py",
+        "bytes": 70762,
+        "sha256": "4e842901740ba1ac384df6198dabf766f7f7dfd6778917a183234ed9f02a994e"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/write-cost-results.py",
+        "bytes": 40623,
+        "sha256": "0b4a31393535713d676a09a8b78ad67dbcbfeb2a0e835cabc4f6e709210afcc3"
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/owner-cost-contract.md",
+        "bytes": 12061,
+        "sha256": "9bf0fdaf60f6c8d3b45bed8657b902c2fc66dcc4fc7c1e6d5671d668c2166049"
+      }
+    ],
+    "unchangedFilesIndependentlyRehashed": true
+  },
+  "checks": [
+    {
+      "name": "original_review_retained",
+      "passed": true
+    },
+    {
+      "name": "single_literal_phrase_replacement",
+      "passed": true
+    },
+    {
+      "name": "reverse_substitution_recovers_original_hash",
+      "passed": true
+    },
+    {
+      "name": "all_eleven_other_reviewed_files_unchanged",
+      "passed": true
+    },
+    {
+      "name": "no_execution_or_measurement_claim",
+      "passed": true
+    }
+  ],
+  "execution": {
+    "sourceTextRead": true,
+    "lightweightFingerprints": true,
+    "textualReverseStreamHashed": true,
+    "toolMainFunctionsExecuted": 0,
+    "pythonOrNodeProcesses": 0,
+    "nativeOrOriginalImports": 0,
+    "tests": 0,
+    "builds": 0,
+    "games": 0,
+    "replays": 0,
+    "captures": 0,
+    "benchmarks": 0
+  },
+  "declaredTiming": "Root and the tool author requested and applied this documentary correction before any 4B declaration or measurement. This addendum records that prospective correction and does not amend a measured protocol.",
+  "remainingScope": "The initial static review conclusions and limitations remain applicable. The new protocol declaration must bind the new prepare-cost-protocol.py fingerprint; any later tool change still requires explicit review and a consistent declaration."
+}

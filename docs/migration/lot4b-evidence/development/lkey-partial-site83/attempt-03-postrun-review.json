@@ -1,0 +1,398 @@
+{
+  "schema": "logos-engine.lot4b.partial-replay-boundary-postrun-review.v1",
+  "status": "retained_data_diagnostic_complete_original_qualification_failed",
+  "reviewer": "/root/feedback_source_audit",
+  "reviewedAt": "2026-11-10T21:44:44Z",
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "scope": "Independent read-only inspection of the retained attempt03 reports, public journal and progress journal against the published baseline, plus source review of the prospective boundary observer correction. It neither executes nor requalifies a replay. All historical attempts remain unchanged.",
+  "retainedAttempt": {
+    "directory": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03",
+    "qualification": {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/qualification.json",
+      "sha256": "fb7c919600b1a6b8394fec81ac7c04c36a3de598fb2102005e102d27f3c3aeb9",
+      "bytes": 94195
+    },
+    "status": "failed",
+    "checks": 150,
+    "passingChecks": 149,
+    "failedChecks": [
+      {
+        "name": "boundary observer covers every natural boundary",
+        "passed": false
+      }
+    ],
+    "rawCampaignStatus": "failed",
+    "rawCampaignFailure": "Did not complete LKEY level 3: V6 stopped: frontier_unknown. Its acquired evidence is retained for inspection.",
+    "commandsCheckedBeforeReturn": 25,
+    "publicPacketsObserved": 26,
+    "requestsObserved": 51,
+    "acquiredPrefixesObserved": 25,
+    "naturalBoundariesObservedByOriginalRunner": 0,
+    "final": {
+      "actions": 25,
+      "levelsCompleted": 2,
+      "level": 3,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "frontier_unknown",
+      "prefixes": 25,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 25,
+        "resume": 25
+      }
+    },
+    "nativeDigest": "31850e3a309e51da61980025d333d4936e8ddbba44ed262ebe0330d944e589fe",
+    "reclassified": false
+  },
+  "rootCause": {
+    "producer": {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "bytes": 73454,
+      "sha256": "93b824b078ccf259827be897e8143dc59fc0479d6f765f3a437cc95b2f4472c1",
+      "linesAtReview": [
+        859,
+        864
+      ]
+    },
+    "source": "boundary includes phase: snapshot.phase; progress({ phase: 'completed-level', ...boundary }) spreads boundary afterward.",
+    "consequence": "The retained boundary.phase replaces the initial progress phase. Both actual boundary events therefore have phase sealed_prefix, and the old observer looking for completed-level never records them.",
+    "observed": {
+      "completedLevelEvents": [
+        {
+          "progressIndex": 130,
+          "completedLevel": 1,
+          "nativeLevel": 2,
+          "levelsCompleted": 1,
+          "levelActions": 16,
+          "totalActions": 16,
+          "prefixCount": 16,
+          "phase": "sealed_prefix",
+          "sessionRetained": true
+        },
+        {
+          "progressIndex": 195,
+          "completedLevel": 2,
+          "nativeLevel": 3,
+          "levelsCompleted": 2,
+          "levelActions": 8,
+          "totalActions": 24,
+          "prefixCount": 24,
+          "phase": "sealed_prefix",
+          "sessionRetained": true
+        }
+      ],
+      "eventsNamedCompletedLevel": 0,
+      "qualificationObserverCount": 0
+    },
+    "qualification": "This is an observer/schema defect. The raw report already retained both natural boundaries, and the original report-boundary comparison passed."
+  },
+  "correction": {
+    "previousRunner": {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/runner-before-fix.mjs",
+      "bytes": 41906,
+      "sha256": "abd6a49fb509323fd24aa40451d6681a4ac8f5aebc9ede666511f5c2e63d1ae0"
+    },
+    "correctedRunner": {
+      "path": "scripts/replay-native-partial-public-regression.mjs",
+      "bytes": 42152,
+      "sha256": "7fed8d182e48c9707d07856a78b3604f2279a678020906ed5e5716c4cb1d9665"
+    },
+    "oldCondition": "event.phase === 'completed-level'",
+    "newCondition": "Object.hasOwn(event, 'completedLevel')",
+    "completeTextEqualsSingleReplacement": true,
+    "changedScope": "Only that condition and its explanatory comment change. boundaryProjection, its phase field, public command/packet comparisons, Workshop projections, all post-run comparisons and the unchanged native/harness code retain their bytes.",
+    "sourceSchemaBinding": "completedLevel is produced on the natural-boundary object, not inferred from a game name, action count, level constant or rendered state. The retained journal contains exactly the two matching events, which equal both baseline and actual report boundary projections.",
+    "nonNormalization": "The actual phase sealed_prefix is retained and compared. No event, public packet or command is rewritten."
+  },
+  "baseline": {
+    "report": {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+      "sha256": "11aa4589a7d294cc5c7aed2e0e3946541cf48a208b891b0c7229a190e290aff4",
+      "bytes": 5445629
+    },
+    "nativeDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+    "status": "failed",
+    "targetLevels": 3,
+    "final": {
+      "actions": 25,
+      "levelsCompleted": 2,
+      "level": 3,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "frontier_unknown",
+      "prefixes": 25,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 25,
+        "resume": 25
+      }
+    }
+  },
+  "diagnostic": {
+    "checks": [
+      {
+        "name": "corrected boundary observer against baseline",
+        "matched": true,
+        "scope": "read-only extraction of retained progress events",
+        "differences": []
+      },
+      {
+        "name": "corrected boundary observer against actual report",
+        "matched": true,
+        "scope": "read-only extraction of retained progress events",
+        "differences": []
+      },
+      {
+        "name": "same declared final public outcome",
+        "matched": true,
+        "scope": "post-run comparison not reached by attempt03",
+        "differences": []
+      },
+      {
+        "name": "same final caller acquisition",
+        "matched": true,
+        "scope": "post-run comparison not reached by attempt03",
+        "differences": []
+      },
+      {
+        "name": "Workshop call order and real selected/passive acquisition",
+        "matched": true,
+        "scope": "post-run comparison not reached by attempt03; declared projection only, not full owner-state equality",
+        "differences": []
+      },
+      {
+        "name": "one command checked before each archived return",
+        "matched": true,
+        "scope": "post-run comparison not reached by attempt03",
+        "differences": []
+      },
+      {
+        "name": "host provenance exact",
+        "matched": true,
+        "scope": "post-run comparison not reached by attempt03",
+        "differences": []
+      },
+      {
+        "name": "partial preservation cannot be relabelled target completion",
+        "matched": true,
+        "scope": "remaining terminal assertion",
+        "differences": []
+      },
+      {
+        "name": "full retained journal equals published public trace",
+        "matched": true,
+        "scope": "independent read-only consistency check",
+        "differences": []
+      },
+      {
+        "name": "candidate trace equals retained journal",
+        "matched": true,
+        "scope": "independent read-only consistency check",
+        "differences": []
+      },
+      {
+        "name": "all command authorization flags retained",
+        "matched": true,
+        "scope": "independent read-only consistency check",
+        "differences": []
+      },
+      {
+        "name": "baseline Workshop public joins",
+        "matched": true,
+        "scope": "read-only binding of original raw source commands to public frames",
+        "differences": []
+      },
+      {
+        "name": "candidate Workshop public joins",
+        "matched": true,
+        "scope": "read-only binding of original raw source commands to public frames",
+        "differences": []
+      },
+      {
+        "name": "logged command precedes each actual return",
+        "matched": true,
+        "scope": "read-only retained progress ordering",
+        "differences": []
+      }
+    ],
+    "checkedCount": 14,
+    "matchedCount": 14,
+    "differences": [],
+    "workshopSummaries": {
+      "baseline": {
+        "calls": 49,
+        "records": 25,
+        "selectedRecords": 14,
+        "passiveRecords": 11
+      },
+      "candidate": {
+        "calls": 49,
+        "records": 25,
+        "selectedRecords": 14,
+        "passiveRecords": 11
+      }
+    },
+    "sourceCallEnvelopeInspection": [
+      {
+        "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+        "calls": 49,
+        "records": 25,
+        "shapeGuardFailures": []
+      },
+      {
+        "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/replay-campaign.json.gz",
+        "calls": 49,
+        "records": 25,
+        "shapeGuardFailures": []
+      }
+    ],
+    "sourceCallEnvelopeQualification": "Each report's 49 actual call envelopes were also checked for indices, permitted source methods, absence of errors, arguments, before/after states, result presence and all 25 record/public command shapes. No source-call or command-envelope guard failure was found.",
+    "method": "Standard-library JSON/gzip reads only. Each large campaign was reduced to the declared comparison projection and released before the next campaign was loaded. Complete public packets were compared in the small traces/journal; the existing report scope determines the remaining projections. No source or runner function was imported/evaluated.",
+    "comparisonQualification": "The retained-data comparisons use exact JSON field presence, list order, booleans separate from numeric values and numeric equality corresponding to JSON numbers. The public packets and commands are kept complete; only the already declared partial-regression projections omit their existing excluded fields."
+  },
+  "remainingPostRunChecks": {
+    "dataComparisonsNotReachedByAttempt03": [
+      "same declared final public outcome",
+      "same final caller acquisition",
+      "Workshop call order and real selected/passive acquisition",
+      "one command checked before each archived return",
+      "host provenance exact"
+    ],
+    "diagnosticDisposition": "All five data comparisons agree on the immutable attempt03 evidence. The terminal condition levelsCompleted<targetLevels also holds. This is a separate diagnosis, not an execution of the corrected runner.",
+    "allEarlierChecksPassedAssertion": "It remains false for the historical attempt03 because that attempt retains its failed boundary-observer check. Nothing in this diagnosis permits replacing its qualification with partial_trajectory_preserved.",
+    "finalInputChecks": "The original attempt already recorded native freeze and execution/evidence inputs unchanged. This diagnosis separately rehashed every evidence input before and after its report reads."
+  },
+  "inputsBefore": [
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+      "sha256": "11aa4589a7d294cc5c7aed2e0e3946541cf48a208b891b0c7229a190e290aff4",
+      "bytes": 5445629
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-public-trace.json.gz",
+      "sha256": "de96446d655f3c5165f4eeebfbd0aa1ed074c2b65ee35288d84c6d4112a2a763",
+      "bytes": 10983
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/replay-campaign.json.gz",
+      "sha256": "1c7701c27af707ba6c925aee36e2bcd00687e91612cadadfd4dbfc7099bb673f",
+      "bytes": 5733514
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/replay-public-trace.json.gz",
+      "sha256": "21df745259ded0d59373488118436998be6a0620dc70d2577212ab4c639b15c8",
+      "bytes": 10983
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/qualification.json",
+      "sha256": "fb7c919600b1a6b8394fec81ac7c04c36a3de598fb2102005e102d27f3c3aeb9",
+      "bytes": 94195
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/preparation.json",
+      "sha256": "57e106406a22edae52d2f77fb69dd906c3939b9bdbcb31d0f81d8169d0c1a384",
+      "bytes": 39265
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/command-checks.json",
+      "sha256": "9dfdfc3b93823be20942d103d3e38b2fbefbc326b2ef794326fcb2b2b7d7b3e0",
+      "bytes": 8257
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/progress.jsonl",
+      "sha256": "2dfebe8671f278afbc1c921957be02463a03ba8ab955c01ca07753522752ecff",
+      "bytes": 157393
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/public-journal.jsonl",
+      "sha256": "e13bc45b6969db3d303ed4e7f3c13c98a6c1d0963875bc9d1a254e67c2224762",
+      "bytes": 640845
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/contract-03.json",
+      "sha256": "36e8f4f9910f0553c18f3a891a432365e08258f97345f8584c8154a01f50e13e",
+      "bytes": 4339
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+      "sha256": "11aa4589a7d294cc5c7aed2e0e3946541cf48a208b891b0c7229a190e290aff4",
+      "bytes": 5445629
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-public-trace.json.gz",
+      "sha256": "de96446d655f3c5165f4eeebfbd0aa1ed074c2b65ee35288d84c6d4112a2a763",
+      "bytes": 10983
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/replay-campaign.json.gz",
+      "sha256": "1c7701c27af707ba6c925aee36e2bcd00687e91612cadadfd4dbfc7099bb673f",
+      "bytes": 5733514
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/replay-public-trace.json.gz",
+      "sha256": "21df745259ded0d59373488118436998be6a0620dc70d2577212ab4c639b15c8",
+      "bytes": 10983
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/qualification.json",
+      "sha256": "fb7c919600b1a6b8394fec81ac7c04c36a3de598fb2102005e102d27f3c3aeb9",
+      "bytes": 94195
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/preparation.json",
+      "sha256": "57e106406a22edae52d2f77fb69dd906c3939b9bdbcb31d0f81d8169d0c1a384",
+      "bytes": 39265
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/command-checks.json",
+      "sha256": "9dfdfc3b93823be20942d103d3e38b2fbefbc326b2ef794326fcb2b2b7d7b3e0",
+      "bytes": 8257
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/progress.jsonl",
+      "sha256": "2dfebe8671f278afbc1c921957be02463a03ba8ab955c01ca07753522752ecff",
+      "bytes": 157393
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03/public-journal.jsonl",
+      "sha256": "e13bc45b6969db3d303ed4e7f3c13c98a6c1d0963875bc9d1a254e67c2224762",
+      "bytes": 640845
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/contract-03.json",
+      "sha256": "36e8f4f9910f0553c18f3a891a432365e08258f97345f8584c8154a01f50e13e",
+      "bytes": 4339
+    }
+  ],
+  "inputsUnchanged": true,
+  "execution": {
+    "sourceTextRead": true,
+    "standardLibraryJsonAndGzipDataReads": true,
+    "largeReportsReadSequentially": true,
+    "runnerExecuted": false,
+    "nativeModulesImported": 0,
+    "originalModulesImported": 0,
+    "tests": 0,
+    "builds": 0,
+    "replays": 0,
+    "games": 0,
+    "benchmarks": 0
+  },
+  "nextExecution": {
+    "developmentReplayPlanned": false,
+    "finalCandidateDigest": null,
+    "finalExecutableContract": null,
+    "requirement": "The next replay is the final one after the actual 5A publication is integrated and the candidate is frozen. Its new contract must pin the real final native manifest, actual merged harness and corrected runner. No executable final contract or success is inferred from the present diagnostic."
+  },
+  "preservedLimits": [
+    "The candidate and baseline both retain 25 actions, two completed levels and frontier_unknown on level 3. No third-level success is established.",
+    "The diagnostic covers the declared partial public trajectory, not full original-caller parity or complete provider-state equality.",
+    "The corrected runner has not been executed by this reviewer; the future merged candidate may still expose a genuine difference.",
+    "The original attempt 03 qualification remains failed, along with attempts 01 and 02; no receipt is overwritten."
+  ]
+}

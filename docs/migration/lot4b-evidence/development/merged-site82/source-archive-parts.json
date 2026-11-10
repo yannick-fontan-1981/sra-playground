@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.v53.frozen-source-parts.v1",
+  "original": {
+    "path": "docs/migration/lot4b-evidence/development/merged-site82/source-archive.tar.gz",
+    "sha256": "4f1d5d3a4fdadf06621516d18ee3cd17f7e24649e9cfea0de9c95539c690d765",
+    "bytes": 1756189
+  },
+  "parts": [
+    {
+      "path": "docs/migration/lot4b-evidence/development/merged-site82/source-archive.tar.gz.part000",
+      "sha256": "e6992e72ae105203ae14921ee16647313e4c57169449f1400505f17cef2f5cc4",
+      "bytes": 900000
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/merged-site82/source-archive.tar.gz.part001",
+      "sha256": "de1335e6a15cc8d5dc04b7009cccee4a5c133199fd9c0f29bce275b9b157ae2a",
+      "bytes": 856189
+    }
+  ],
+  "qualification": "Ordered byte slices of the exact frozen gzip archive. No source or evidence content changes."
+}

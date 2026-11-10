@@ -1,0 +1,380 @@
+{
+  "schema": "logos-engine.workshop-command-envelope-inventory.v1",
+  "recordedAt": "2026-11-10T21:21:32.238047+00:00",
+  "method": "Read retained published report; visit workshopSourceCalls in order, filter recordSource, retain raw arguments[2], classify optional arguments[5], join sequentially to report.actions. No runtime, oracle or game execution.",
+  "input": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+    "sha256": "11aa4589a7d294cc5c7aed2e0e3946541cf48a208b891b0c7229a190e290aff4",
+    "bytes": 5445629
+  },
+  "rows": [
+    {
+      "callIndex": 1,
+      "argumentCount": 5,
+      "selected": false,
+      "sourceCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 47,
+          "y": 18
+        }
+      },
+      "publicActionSequence": 1,
+      "publicCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 47,
+          "y": 18
+        }
+      }
+    },
+    {
+      "callIndex": 3,
+      "argumentCount": 5,
+      "selected": false,
+      "sourceCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 47,
+          "y": 46
+        }
+      },
+      "publicActionSequence": 2,
+      "publicCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 47,
+          "y": 46
+        }
+      }
+    },
+    {
+      "callIndex": 5,
+      "argumentCount": 5,
+      "selected": false,
+      "sourceCommand": {
+        "action_ref": "ACTION1"
+      },
+      "publicActionSequence": 3,
+      "publicCommand": {
+        "action_ref": "ACTION1",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 7,
+      "argumentCount": 5,
+      "selected": false,
+      "sourceCommand": {
+        "action_ref": "ACTION2"
+      },
+      "publicActionSequence": 4,
+      "publicCommand": {
+        "action_ref": "ACTION2",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 9,
+      "argumentCount": 5,
+      "selected": false,
+      "sourceCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 47,
+          "y": 18
+        }
+      },
+      "publicActionSequence": 5,
+      "publicCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 47,
+          "y": 18
+        }
+      }
+    },
+    {
+      "callIndex": 11,
+      "argumentCount": 5,
+      "selected": false,
+      "sourceCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 47,
+          "y": 46
+        }
+      },
+      "publicActionSequence": 6,
+      "publicCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 47,
+          "y": 46
+        }
+      }
+    },
+    {
+      "callIndex": 13,
+      "argumentCount": 5,
+      "selected": false,
+      "sourceCommand": {
+        "action_ref": "ACTION2"
+      },
+      "publicActionSequence": 7,
+      "publicCommand": {
+        "action_ref": "ACTION2",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 15,
+      "argumentCount": 5,
+      "selected": false,
+      "sourceCommand": {
+        "action_ref": "ACTION3"
+      },
+      "publicActionSequence": 8,
+      "publicCommand": {
+        "action_ref": "ACTION3",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 17,
+      "argumentCount": 5,
+      "selected": false,
+      "sourceCommand": {
+        "action_ref": "ACTION4"
+      },
+      "publicActionSequence": 9,
+      "publicCommand": {
+        "action_ref": "ACTION4",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 19,
+      "argumentCount": 5,
+      "selected": false,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicActionSequence": 10,
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 21,
+      "argumentCount": 7,
+      "selected": true,
+      "sourceCommand": {
+        "action_ref": "ACTION1"
+      },
+      "publicActionSequence": 11,
+      "publicCommand": {
+        "action_ref": "ACTION1",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 23,
+      "argumentCount": 7,
+      "selected": true,
+      "sourceCommand": {
+        "action_ref": "ACTION4"
+      },
+      "publicActionSequence": 12,
+      "publicCommand": {
+        "action_ref": "ACTION4",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 25,
+      "argumentCount": 7,
+      "selected": true,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicActionSequence": 13,
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 27,
+      "argumentCount": 7,
+      "selected": true,
+      "sourceCommand": {
+        "action_ref": "ACTION2"
+      },
+      "publicActionSequence": 14,
+      "publicCommand": {
+        "action_ref": "ACTION2",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 29,
+      "argumentCount": 7,
+      "selected": true,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicActionSequence": 15,
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 31,
+      "argumentCount": 7,
+      "selected": true,
+      "sourceCommand": {
+        "action_ref": "ACTION4"
+      },
+      "publicActionSequence": 16,
+      "publicCommand": {
+        "action_ref": "ACTION4",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 33,
+      "argumentCount": 7,
+      "selected": true,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicActionSequence": 17,
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 35,
+      "argumentCount": 7,
+      "selected": true,
+      "sourceCommand": {
+        "action_ref": "ACTION3",
+        "data": {}
+      },
+      "publicActionSequence": 18,
+      "publicCommand": {
+        "action_ref": "ACTION3",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 37,
+      "argumentCount": 7,
+      "selected": true,
+      "sourceCommand": {
+        "action_ref": "ACTION2"
+      },
+      "publicActionSequence": 19,
+      "publicCommand": {
+        "action_ref": "ACTION2",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 39,
+      "argumentCount": 7,
+      "selected": true,
+      "sourceCommand": {
+        "action_ref": "ACTION4"
+      },
+      "publicActionSequence": 20,
+      "publicCommand": {
+        "action_ref": "ACTION4",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 41,
+      "argumentCount": 7,
+      "selected": true,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicActionSequence": 21,
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 43,
+      "argumentCount": 7,
+      "selected": true,
+      "sourceCommand": {
+        "action_ref": "ACTION1"
+      },
+      "publicActionSequence": 22,
+      "publicCommand": {
+        "action_ref": "ACTION1",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 45,
+      "argumentCount": 7,
+      "selected": true,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicActionSequence": 23,
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 47,
+      "argumentCount": 7,
+      "selected": true,
+      "sourceCommand": {
+        "action_ref": "ACTION4"
+      },
+      "publicActionSequence": 24,
+      "publicCommand": {
+        "action_ref": "ACTION4",
+        "data": {}
+      }
+    },
+    {
+      "callIndex": 48,
+      "argumentCount": 5,
+      "selected": false,
+      "sourceCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 7,
+          "y": 9
+        }
+      },
+      "publicActionSequence": 25,
+      "publicCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 7,
+          "y": 9
+        }
+      }
+    }
+  ],
+  "counts": {
+    "records": 25,
+    "points": 5,
+    "scalars": 20,
+    "scalarsWithData": 1
+  },
+  "inputUnchanged": true
+}

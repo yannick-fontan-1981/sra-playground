@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "command": "node --test tests/v6-relative-arrangements-integration.test.ts",
+  "startedAt": "2026-11-10T20:40:01.584Z",
+  "finishedAt": "2026-11-10T20:40:25.721Z",
+  "exitCode": 0,
+  "tests": 8,
+  "passed": 8,
+  "failed": 0,
+  "cancelled": 0,
+  "skipped": 0,
+  "testRunnerDurationMs": 23708.258071,
+  "log": "integration-attempt1.log",
+  "scope": "Targeted development integration tests after explicit 7A release. Includes real common caller lifecycle under an explicit arrangement-only policy variant and controlled null routing probes. No game campaign, benchmark, build or global test run."
+}

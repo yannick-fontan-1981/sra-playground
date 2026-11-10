@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.targeted-development-test-plan.v1",
+  "declaredAt": "2026-11-10T21:42:19.580039+00:00",
+  "status": "declared_before_execution",
+  "sourceManifest": {
+    "path": "docs/migration/lot4b-evidence/development/merged-site82/source-manifest.json",
+    "sha256": "655a60d587dced4c4b1b3b234b6ec28271e8676894581776802e9bd747c27bb7"
+  },
+  "testFiles": [
+    "tests/v6-acquired-continuation-priority.test.ts",
+    "tests/v6-learned-preparation-priority.test.ts",
+    "tests/v6-material-recovery-priority.test.ts",
+    "tests/v6-outline-arbitration.test.ts"
+  ],
+  "reason": "Four newly selected inherited priority contracts directly surround the two4B lookahead barriers and the upcoming5A null-refusal integration. They were absent from the previously executed28coexistence tests. This verifies present4B+publishedSite83 before final5A integration; no final-release or whole-suite claim."
+}

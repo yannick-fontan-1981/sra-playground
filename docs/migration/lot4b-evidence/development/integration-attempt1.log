@@ -1,0 +1,16 @@
+✔ production factory registers the source arrangement entry once, before window repair, with one persistent owner (120.318157ms)
+✔ common WHY/ACT acquires, persists and restores original arrangement responses: selected_displacement (8155.55022ms)
+✔ common WHY/ACT acquires, persists and restores original arrangement responses: failed_trial (3922.600308ms)
+✔ common WHY/ACT acquires, persists and restores original arrangement responses: official_boundary (2533.478378ms)
+✔ different public actuator returns acquire different models and justify different next commands after graph restoration (6104.904278ms)
+✔ source recognition barrier closes only the remaining window entries: already_arranged (611.253549ms)
+✔ source recognition barrier closes only the remaining window entries: action6-unavailable (588.016973ms)
+✔ source recognition barrier closes only the remaining window entries: unrecognized_no_model (862.551943ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 23708.258071

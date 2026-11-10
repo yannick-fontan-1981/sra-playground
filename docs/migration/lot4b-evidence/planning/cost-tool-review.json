@@ -1,0 +1,451 @@
+{
+  "schema": "logos-engine.lot4b.cost-tool-review.v1",
+  "status": "static_review_no_blocking_finding",
+  "reviewer": "/root/feedback_source_audit",
+  "reviewedAt": "2026-11-10T21:03:39Z",
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "checkoutHeadAtFingerprint": "dbb3349a012c38b71581851439922f1f292fe946",
+  "scope": "Independent static review of eleven prospective 4B cost tools and their written contract, after the author confirmed final files. This receipt is not a benchmark result, structural-capture qualification or authorization to start a cost window.",
+  "execution": {
+    "sourceTextRead": true,
+    "gitObjectsRead": true,
+    "lightweightFingerprints": true,
+    "toolMainFunctionsExecuted": 0,
+    "nativeOrOriginalImports": 0,
+    "tests": 0,
+    "builds": 0,
+    "games": 0,
+    "replays": 0,
+    "captures": 0,
+    "benchmarks": 0,
+    "authorSyntaxChecks": "The author reported seven Python AST parses and four node --check successes before the 5A quiet interval. This review does not claim an independent execution of those checks.",
+    "quietIntervalFinalization": "After root acknowledged the 5A exclusive cost window, this reviewer used only source text, Git metadata, lightweight hashing and this JSON write; no Python/Node process or validation main was launched."
+  },
+  "files": [
+    {
+      "path": "docs/migration/lot4b-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 23834,
+      "sha256": "13cc2498b7e27e7b90fe7216e91c4a329e8e9a37c7d7671b655039daead6f65f"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/check-cost-static-inputs.py",
+      "bytes": 23603,
+      "sha256": "9cbe543d0166d366d4d8e576dcc8553c7a8116d4d657202c5be29a4d2607a121"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/consolidate-owner-costs.mjs",
+      "bytes": 52881,
+      "sha256": "7691a06e88d60139941ace27605aa319aa9a01e31a7e315630abb1d8cef7e123"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/finalize-cost-readiness.py",
+      "bytes": 34992,
+      "sha256": "ab3e404841ce349001d281873dd8d72fd32ee3b0d4bad33ed65df874d4d4b519"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/prepare-cost-protocol.py",
+      "bytes": 28142,
+      "sha256": "aad72237b820a6964b49afc9dd5c7d00053f8a83da4101f04b38b37e4080cb06"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/prepare-owner-cost-contract.py",
+      "bytes": 13795,
+      "sha256": "b3916d2b48e8e7a0b61771a14ad7e911bfa9fd7691eb6ac9bcaf99c79897c9f4"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 47487,
+      "sha256": "3b9f006424fa27080993271d57d086537665dc25a6926b2b2a9ec48e48220ad5"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/record-cost-log-transport.py",
+      "bytes": 3763,
+      "sha256": "ced9c309bc72f791b3f451d4793e11a2830f414019c08aeb1df22522b671dc7a"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/record-cost-owner-source-inventory.mjs",
+      "bytes": 12532,
+      "sha256": "38077e5103a8657eec7dce1fdbc65506327e1a6f29a4bfcd622efb84119d73eb"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/review-owner-costs.py",
+      "bytes": 70762,
+      "sha256": "4e842901740ba1ac384df6198dabf766f7f7dfd6778917a183234ed9f02a994e"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/write-cost-results.py",
+      "bytes": 40623,
+      "sha256": "0b4a31393535713d676a09a8b78ad67dbcbfeb2a0e835cabc4f6e709210afcc3"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/owner-cost-contract.md",
+      "bytes": 12061,
+      "sha256": "9bf0fdaf60f6c8d3b45bed8657b902c2fc66dcc4fc7c1e6d5671d668c2166049"
+    }
+  ],
+  "supportingInputs": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "bytes": 8933,
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "bytes": 9861,
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "bytes": 19460,
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "bytes": 17810,
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4"
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "bytes": 22204,
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940"
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "bytes": 8476,
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341"
+    },
+    {
+      "path": "scripts/compare-relative-arrangement-public-parity.py",
+      "bytes": 39949,
+      "sha256": "a6731204feb80b373ec79dd7fd4742a3ff24d58353597b5a8da261794e3c9f67"
+    },
+    {
+      "path": "scripts/replay-native-partial-public-regression.mjs",
+      "bytes": 40628,
+      "sha256": "2ad1bc5cb7763efbf8d1905d184dbb33c873c70416dd5ce125ea2f85f45ace69"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/declaration.json",
+      "bytes": 4105,
+      "sha256": "ca371fbf437d2434932c74238a75ab0eb6cd6ef27e8db5aa329c2d179c8c667d"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    }
+  ],
+  "sourceLineage": {
+    "namedGitCommit": "0ca36b0a6a358e1e89420753bbcec4a33f028e0a",
+    "verification": "Exact file blobs read with git show from the named integrated 7A history; no source imported or executed. Hosting publication was reported by the delivery owner and is not independently established by this receipt.",
+    "inheritedHeadersVerified": [
+      {
+        "adaptation": "docs/migration/lot4b-evidence/capture-cost-owner-graphs.mjs",
+        "source": "docs/migration/lot7a-evidence/capture-cost-owner-graphs.mjs",
+        "sha256": "3afca2b4756a01c1ba1736ab775781e48a17977f8bdcf6654873fd904f452c33",
+        "matchesNamedGitCommit": true
+      },
+      {
+        "adaptation": "docs/migration/lot4b-evidence/check-cost-static-inputs.py",
+        "source": "docs/migration/lot7a-evidence/check-cost-static-inputs.py",
+        "sha256": "8911f321cd5de299087e3937fa4df68c8167950329884e0bad78feca38c12f15",
+        "matchesNamedGitCommit": true
+      },
+      {
+        "adaptation": "docs/migration/lot4b-evidence/consolidate-owner-costs.mjs",
+        "source": "docs/migration/lot7a-evidence/consolidate-owner-costs.mjs",
+        "sha256": "2f105646bf41022f83b330b9d95d5a7720cb7f02a4385a0dfb97122b68a4c132",
+        "matchesNamedGitCommit": true
+      },
+      {
+        "adaptation": "docs/migration/lot4b-evidence/finalize-cost-readiness.py",
+        "source": "docs/migration/lot7a-evidence/finalize-cost-readiness.py",
+        "sha256": "5ffa9f9a720f3977ac3a07696fe61140517ee3e41c6962c800c9e38ae39dd7ec",
+        "matchesNamedGitCommit": true
+      },
+      {
+        "adaptation": "docs/migration/lot4b-evidence/prepare-cost-protocol.py",
+        "source": "docs/migration/lot7a-evidence/prepare-cost-protocol.py",
+        "sha256": "0cac3e5ed22a2f68a4aece55950fa32fc42552d8fabe740b2fa645093a4bef76",
+        "matchesNamedGitCommit": true
+      },
+      {
+        "adaptation": "docs/migration/lot4b-evidence/qualify-cost-owner-graphs.mjs",
+        "source": "docs/migration/lot7a-evidence/qualify-cost-owner-graphs.mjs",
+        "sha256": "3bb06dfe8ad7d0ab7874dd0bfda219c7639cbc6dd27cf7b517732b40df2902f1",
+        "matchesNamedGitCommit": true
+      },
+      {
+        "adaptation": "docs/migration/lot4b-evidence/record-cost-log-transport.py",
+        "source": "docs/migration/lot7a-evidence/record-cost-log-transport.py",
+        "sha256": "4953605251faf8f3a7e2f13fc370becde5aef556e055985ff5891bbe232dd9e7",
+        "matchesNamedGitCommit": true
+      },
+      {
+        "adaptation": "docs/migration/lot4b-evidence/record-cost-owner-source-inventory.mjs",
+        "source": "docs/migration/lot7a-evidence/record-owner-source-inventory.mjs",
+        "sha256": "259c91c3e1e88e6873e662081582b241ad97d955a1101fc6e6b96b5a4b068ba1",
+        "matchesNamedGitCommit": true
+      },
+      {
+        "adaptation": "docs/migration/lot4b-evidence/review-owner-costs.py",
+        "source": "docs/migration/lot7a-evidence/review-owner-costs.py",
+        "sha256": "5b1758f03d2031e956a68b4e43a3f1b5a079c32ec168c813de88b3e7f64b802c",
+        "matchesNamedGitCommit": true
+      }
+    ],
+    "renderer": {
+      "adaptation": "docs/migration/lot4b-evidence/write-cost-results.py",
+      "declaredWorkingSnapshotSha256": "9396863d0860d10b5db1a8482445eeca557010a1b0f41d2ac912dc6c1b6d8c3e",
+      "publishedFile": "docs/migration/lot7a-evidence/write-cost-results.py",
+      "publishedFileSha256": "60245844520a48eef37f662f8826648b84ee348a1983b13da3786b6be0cb845a",
+      "qualification": "The declared working snapshot differs from the later named Git blob. The final 4B header explicitly retains both identities. The published renderer's postmeasurement I/O substitution branch was reviewed and is deliberately not inherited; 4B requires the exact predeclared executed tools. No missing metric/schema correction was identified."
+    },
+    "prospectiveIoSources": [
+      {
+        "path": "docs/migration/lot7a-evidence/consolidate-owner-costs-io-v1.mjs",
+        "bytes": 54936,
+        "sha256": "78ed9ea54051f9f5de6ce7a6659094d33d2729f3cd53075a03c44be3a98f6aac",
+        "matchesNamedGitCommit": true
+      },
+      {
+        "path": "docs/migration/lot7a-evidence/review-owner-costs-io-v1.py",
+        "bytes": 73478,
+        "sha256": "c95fd37389b7af18c049b6264fab968a52d4055f7c590004ecd4877d8b65044e",
+        "matchesNamedGitCommit": true
+      }
+    ],
+    "additional4BFiles": [
+      "prepare-owner-cost-contract.py",
+      "owner-cost-contract.md"
+    ]
+  },
+  "historicalTools": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "matches": true
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "matches": true
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "matches": true
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "matches": true
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "matches": true
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "matches": true
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "matches": true
+    }
+  ],
+  "historicalFunctionTextChecks": [
+    {
+      "name": "distribution",
+      "exactFunctionTextEqual": true
+    },
+    {
+      "name": "valuesFor",
+      "exactFunctionTextEqual": true
+    },
+    {
+      "name": "metricFor",
+      "exactFunctionTextEqual": true
+    },
+    {
+      "name": "comparisonMetrics",
+      "exactFunctionTextEqual": true
+    },
+    {
+      "name": "workSignature",
+      "exactFunctionTextEqual": true
+    }
+  ],
+  "checks": [
+    {
+      "id": "relative_source_state_and_acquisition",
+      "status": "consistent_by_static_review",
+      "files": [
+        "capture-cost-owner-graphs.mjs",
+        "qualify-cost-owner-graphs.mjs"
+      ],
+      "finding": "The owner payload is exactly models/events/failed/selection_ref/epoch. Only failed is compared as the declared unordered Python set. Capture observes the real adapter's propose/proposeInSubquestion, restore and selected record calls and the real persistFamilies intervals. No passive record path or record-per-action requirement is inherited. The qualifier binds command and initial observation to the actual proposal, rejects duplicate before observations and reconstructs the operation/state chain. Model copies exclude expected/risks, which belong to the subsequently enriched event. Epoch changes clear models/failed/selection_ref and retain events."
+    },
+    {
+      "id": "actual_owner_graph_attribution",
+      "status": "consistent_by_static_review",
+      "files": [
+        "record-cost-owner-source-inventory.mjs",
+        "capture-cost-owner-graphs.mjs",
+        "qualify-cost-owner-graphs.mjs"
+      ],
+      "finding": "The actual factories must differ by only the Relative owner and v6.relative_arrangements.choose program. The three installed IDs are explicit; subsequent node and revision totals are derived from captures, not from +3 or a cycle formula. Every capture is reconstructed from its own full Kernel delta chain. Common node metadata and common delta identities/causes/order are checked; runtime source digests are bound separately to each version. Every additional node/delta needs installation, actual source state/event, reasoning-fact or reachable-fragment provenance. Private common values remain retained but are not asserted equal between versions."
+    },
+    {
+      "id": "same_public_work_before_cost",
+      "status": "consistent_by_static_review",
+      "files": [
+        "capture-cost-owner-graphs.mjs",
+        "qualify-cost-owner-graphs.mjs"
+      ],
+      "finding": "Each source runs four cold functional forms: STCK warmup3/full10 and SMLP warmup3/full15, 31 actions per side. Commands are computed and compared before each archived public return is supplied. Init, advance, necessary resume and exactly three real terminal inspections for full forms are retained. Functional captures contain no timing outcome and do not execute the game engine. No learned state or action trajectory is injected."
+    },
+    {
+      "id": "prospective_structure_then_readiness_then_window",
+      "status": "consistent_by_static_review",
+      "files": [
+        "prepare-cost-protocol.py",
+        "prepare-owner-cost-contract.py",
+        "check-cost-static-inputs.py",
+        "finalize-cost-readiness.py",
+        "consolidate-owner-costs.mjs",
+        "review-owner-costs.py"
+      ],
+      "finding": "The source declaration pins the executed consolidator and reviewer before captures/cost. The closed contract binds actual inventories, completed causal attribution and exact functional forms before static preflight and readiness; readiness must precede the official window. Captures/qualification refuse existing readiness or measured reports. Both analyses require capture/attribution/fixture/contract/static/readiness/window chronology and unchanged fingerprints. No future fixture value, source identity or successful cost outcome is assumed."
+    },
+    {
+      "id": "complete_work_identity_checks",
+      "status": "consistent_by_static_review",
+      "files": [
+        "consolidate-owner-costs.mjs",
+        "review-owner-costs.py"
+      ],
+      "finding": "All 40 warmup/measured trials must equal the functional shape predeclared for their own source. Between versions, only observations[*].nodeCount, inspection[*].graphNodes, final.nodeCount and final.graphRevision may differ, at the exact captured values. Each before/after/delta is retained. All other historical work-signature fields remain equal. Full signatures, including structural counts, must be equal across repetitions/cohorts within each version. No generic subtree deletion or numeric/time normalization is introduced."
+    },
+    {
+      "id": "population_and_strict_global_rule",
+      "status": "consistent_by_static_review",
+      "files": [
+        "prepare-cost-protocol.py",
+        "consolidate-owner-costs.mjs",
+        "review-owner-costs.py",
+        "write-cost-results.py"
+      ],
+      "finding": "A1/B1/B2/A2, two games, four measured rounds per game/series, STCK10 and SMLP15 preserve 32 measured sessions/400 actions. Only eight separate three-action warmups (24 actions) are excluded from timing distributions. Eight full-session durations per game/version are pooled before taking the median. JavaScript integer arithmetic on decimal representations and independent Python Decimal both require medianB < 1.1*medianA. Equality fails; no cross-game compensation, cohort selection, outlier removal or noise allowance is allowed."
+    },
+    {
+      "id": "unchanged_phase_metrics_and_independent_review",
+      "status": "consistent_by_static_review",
+      "files": [
+        "consolidate-owner-costs.mjs",
+        "review-owner-costs.py"
+      ],
+      "finding": "Five JavaScript function definitions are textually identical to the retained historical cohort comparator. The independent standard-library Python review recalculates every original cohort metric and pooled metric from raw trials. The eight stages per game, 16 pooled diagnostics and 32 cohort diagnostics retain their exact historical classifications. Phase diagnostics use the existing <=10% rule; global acceptance is a separate strict <10% rule. P95 uses empirical nearest rank only at n>=20. No nested phases are summed, and a diagnostic noise label never relaxes a threshold."
+    },
+    {
+      "id": "strict_failure_not_reclassified",
+      "status": "consistent_by_static_review",
+      "files": [
+        "consolidate-owner-costs.mjs",
+        "review-owner-costs.py",
+        "write-cost-results.py",
+        "owner-cost-contract.md"
+      ],
+      "finding": "The supplemental path requires the actual unchanged strict tool's nonzero result, exact command/inputs/log and absent historical aggregate, with the specific Within-cohort work metadata changed reason. Any other outcome blocks this path for review. The strict result remains failed. A successful arithmetic review can retain globalAccepted=false; neither its status nor a favorable cohort substitutes for the global verdict."
+    },
+    {
+      "id": "baseline_absolute_input_boundary",
+      "status": "consistent_by_static_review",
+      "files": [
+        "consolidate-owner-costs.mjs",
+        "review-owner-costs.py",
+        "finalize-cost-readiness.py",
+        "write-cost-results.py"
+      ],
+      "finding": "The repaired capture-input helpers require an explicit baseline root before reading an absolute path, reject symlink/alias traversal and reject paths outside that root. Preparation and window must name the same actual baseline. The attribution retains exactly the ordered external input fingerprints from the baseline capture; candidate inputs stay local. Sizes/hashes are checked and rechecked, conflicting external fingerprints are rejected, and the renderer refuses postmeasurement tool substitution. These changes are present before any 4B declaration in the default performance directory."
+    },
+    {
+      "id": "readiness_schema_and_limits",
+      "status": "consistent_by_static_review",
+      "files": [
+        "finalize-cost-readiness.py"
+      ],
+      "finding": "Readiness consumes the actual Relative comparator schema: cold source without native-state priming, complete before/result/after equality, guarded unique selected records, passiveRecords=0, exact retained prefix states and every declared ablation, including unchanged cases. Counts are derived, with no forced TRIA 17/68 or changed-ablation total. The original 1786-file integrity, cumulative case resolution and final frozen public replay are distinct from live success. Browser infrastructure blockage stays nonpassing. Optional LKEY preservation retains raw failed status and excludes that partial trajectory from strict regression totals and cost populations."
+    },
+    {
+      "id": "rendering_and_lossless_transport",
+      "status": "consistent_by_static_review",
+      "files": [
+        "record-cost-log-transport.py",
+        "write-cost-results.py",
+        "owner-cost-contract.md"
+      ],
+      "finding": "All four original logs remain and their gzip transport is compared byte for byte. Rendering requires completed receipts and preserves every global/phase/cohort verdict, complete measured ledger, available tails, Pause and memory limits. UTC conversion/labels/receipt now agree and the family is correctly named RelativeArrangements. Detailed structural differences remain in linked aggregate/review JSON; the document does not claim to render every such row."
+    }
+  ],
+  "checkedCount": 11,
+  "findingsResolvedBeforeFinalFingerprint": [
+    {
+      "id": "capture_input_reader_scope",
+      "classification": "early-read confinement and future-call robustness",
+      "finding": "The first inspected helper could read an arbitrary absolute path before its surrounding caller performed baseline restrictions. The current caller did ultimately restrict accepted inputs; no path to a valid final verdict with arbitrary external input was found.",
+      "resolution": "Both helpers now require the explicit baseline before reading and reject aliases/symlinks. Caller checks retain the exact ordered baseline input list."
+    },
+    {
+      "id": "utc_display_mismatch",
+      "classification": "concrete rendering defect",
+      "finding": "UTC instants were initially labeled UTC-03 in text, tables and render metadata.",
+      "resolution": "Final conversion, docstring, table labels and receipt all use UTC."
+    },
+    {
+      "id": "legacy_family_description",
+      "classification": "scope wording defect",
+      "finding": "The initial renderer still named the ordered-profile workshop.",
+      "resolution": "Final output names relative arrangements/RelativeArrangements."
+    },
+    {
+      "id": "renderer_source_provenance",
+      "classification": "lineage qualification",
+      "finding": "One source header identified a working snapshot rather than the later 7A blob.",
+      "resolution": "The final header explicitly names both hashes and explains the deliberately excluded postmeasurement branch."
+    },
+    {
+      "id": "contract_wording",
+      "classification": "three documentation inaccuracies",
+      "finding": "The initial contract described epoch as reset to zero, referred to imported historical Python functions and implied the renderer displayed every structural delta.",
+      "resolution": "The final text fixes epoch semantics, describes independent calculation plus source fingerprint verification without imports, and locates the complete structural register in the linked JSON outputs."
+    }
+  ],
+  "blockingFindings": [],
+  "inputsUnchanged": true,
+  "defaultPerformanceDirectory": "docs/migration/lot4b-evidence/performance-integrated",
+  "defaultDeclarationAndWindowAbsentAtReview": true,
+  "outcomesNotClaimed": {
+    "finalBaselineOrCandidateChosen": false,
+    "functionalCapturesQualified": false,
+    "readinessEstablished": false,
+    "isolationEstablishedByThisReview": false,
+    "costMeasured": false,
+    "costAccepted": null,
+    "publicationApproved": false
+  },
+  "limits": [
+    "Static code and contract review only. Real capture/qualification, final frozen source identities, readiness and all official cost outputs still require their own prospective receipts.",
+    "Functional graph captures are separate executions. Matching future measured public counts/signatures cannot establish all uncaptured private node values from the 400 measured actions.",
+    "The owner qualifier compares common identities/metadata and delta causes/order, with per-version digest identities; it does not assert complete private graph-value equality across source versions.",
+    "STCK and SMLP measure the retained common native path. They do not by themselves prove Relative contribution, live-game success, full Python caller parity, browser rendering performance or long-duration memory stability.",
+    "An arithmetic review can succeed while the global cost rule fails. The historical strict identity refusal must remain retained and must never be reclassified.",
+    "The fingerprints bind the final files reviewed here. Any subsequent tool or contract edit invalidates this review's file identity and must precede a new declaration; no postmeasurement replacement is authorized by this receipt."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "logos-engine.retained-development-execution.v1",
+  "purpose": "Verify newly prepared partial public regression runner and coexistence on actual Site83 plus4B development; not final validation or live case.",
+  "command": [
+    "node",
+    "--expose-gc",
+    "--max-old-space-size=1536",
+    "scripts/replay-native-partial-public-regression.mjs",
+    "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+    "docs/migration/lot7a-evidence/integrated-final/lkey-public-trace.json.gz",
+    "docs/migration/lot4b-evidence/development/merged-site82/source-manifest.json",
+    "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-02",
+    "--contract",
+    "docs/migration/lot4b-evidence/development/lkey-partial-site83/contract-02.json"
+  ],
+  "startedAt": "2026-11-10T21:19:45.410917+00:00",
+  "finishedAt": "2026-11-10T21:19:46.173494+00:00",
+  "elapsedSeconds": 0.762593786988873,
+  "exitCode": 1,
+  "log": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-02-execution.log",
+    "sha256": "e5ed9755f9573a2bfe336be1e44939bc8eaaf72ec0954ea086bc71ff93bd2027",
+    "bytes": 203
+  }
+}

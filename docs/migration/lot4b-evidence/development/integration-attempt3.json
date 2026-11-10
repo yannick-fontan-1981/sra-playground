@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "command": "node --test --test-name-pattern='native acquired-continuation look-ahead' tests/v6-relative-arrangements-integration.test.ts",
+  "startedAt": "2026-11-10T20:44:11.806Z",
+  "finishedAt": "2026-11-10T20:44:15.337Z",
+  "exitCode": 0,
+  "tests": 2,
+  "passed": 2,
+  "failed": 0,
+  "cancelled": 0,
+  "skipped": 0,
+  "testRunnerDurationMs": 3120.330889,
+  "log": "integration-attempt3.log",
+  "scope": "Only the two new acquired-continuation bypass contracts. Synthetic provider acquires one controlled public score boundary through real common WHY/ACT, persistence and Kernel prefix/transition evidence. Actual acquiredContribution result is observed unchanged. Real RelativeArrangements recognition blocks the later proposal when recognized and permits its corroborated continuation when unrecognized. No graph-injected success, game parity claim, campaign or benchmark."
+}

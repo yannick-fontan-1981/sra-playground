@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.relative-arrangement-case-selection.v1",
+  "game": "TRIA",
+  "targetLevels": 3,
+  "selectedAt": "2026-11-10T20:41:18.627048+00:00",
+  "deadline": "2026-11-10T21:21:18.627048+00:00",
+  "previousChargedSeconds": 0,
+  "maximumCumulativeSeconds": 2400,
+  "clockReset": false,
+  "reason": "Catalogue public describes participants and separate actuators plus a visible relative model. No game implementation or hidden state was inspected. Recognition and attribution remain to be established by the common native session.",
+  "phases": {
+    "baseline-site81": {
+      "checkout": "/workspace/sites/sra-lot4b-base81",
+      "directory": "docs/migration/lot4b-evidence/development/tria-baseline-site81",
+      "manifest": "docs/migration/lot4b-evidence/baseline-site81/source-manifest.json",
+      "actionCap": 8
+    }
+  },
+  "qualification": "Same original cumulative TRIA clock; bounded actual publishedSite81 baseline,8actions maximum, no injected solution. Not a general impossibility verdict."
+}

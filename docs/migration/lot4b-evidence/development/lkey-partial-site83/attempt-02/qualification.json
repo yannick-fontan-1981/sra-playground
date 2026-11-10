@@ -1,0 +1,65 @@
+{
+  "schema": "logos-engine.partial-public-regression-qualification.v1",
+  "status": "failed",
+  "startedAt": "2026-11-10T21:19:45.501Z",
+  "finishedAt": "2026-11-10T21:19:46.141Z",
+  "gameTargetCompleted": null,
+  "liveGameExecuted": false,
+  "timingQualification": "Elapsed values in raw reports are diagnostic only; this is not a speed measurement.",
+  "comparisonScope": {
+    "exact": [
+      "complete public commands and packets",
+      "action metadata except executionMs",
+      "selected prefix scalar fields and declared coordination fields",
+      "epoch order and inherited source-series counts",
+      "request protocol and caller counters/components",
+      "natural boundaries and retained-session caller counters/components",
+      "final public outcome, unresolved failure and operation counts",
+      "mechanical domain assessments",
+      "Workshop source-call order, public revisions, commands, selections and record cardinality"
+    ],
+    "excluded": [
+      "durations",
+      "native implementation label",
+      "migration coverage/status labels",
+      "fresh observation-session identifiers in coordination and epoch anchors",
+      "graph chains, graph revisions, graph node counts and complete provider state equality"
+    ],
+    "actionNormalization": "none",
+    "publicPacketNormalization": "none",
+    "targetCompletionClaim": false,
+    "speedComparisonClaim": false,
+    "originalCallerParityClaim": false
+  },
+  "checks": [],
+  "error": {
+    "name": "AssertionError",
+    "message": "Workshop source scalar command field presence\n+ actual - expected\n\n  [\n    'action_ref',\n+   'data'\n  ]\n"
+  },
+  "nativeSourceAfter": null,
+  "executionInputsAfter": null,
+  "rawCampaignStatus": null,
+  "rawCampaignFailure": null,
+  "actualFinal": null,
+  "commandsCheckedBeforeReturn": 0,
+  "publicPacketsObserved": 0,
+  "requestsObserved": 0,
+  "acquiredPrefixesObserved": 0,
+  "naturalBoundariesObserved": 0,
+  "qualification": "Exact preservation is limited to the declared trajectory scope. The raw historical and current campaigns remain failed at their original unresolved target. No live game, third-level success, full original-caller parity, complete owner-state equality or speed result is claimed. A failed or absent terminal qualification must not be excluded from later reporting.",
+  "rawPublicJournal": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-02/public-journal.jsonl",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "publicJournal": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-02/public-journal.jsonl.gz",
+    "sha256": "59869db34853933b239f1e2219cf7d431da006aa919635478511fabbfc8849d2",
+    "bytes": 20
+  },
+  "progress": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-02/progress.jsonl",
+    "sha256": "13644e0ce6e7524ba11b3a41635103c8d3b3aa5c6aafcf461148ed4bcffb00db",
+    "bytes": 343
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "tria-campaign.json.gz",
+    "sha256": "00e036ea551291452bdaea66a96ddfcb88be32f609e704e06b0bfb4d669049a7",
+    "bytes": 1619638
+  },
+  "parts": [
+    {
+      "file": "tria-campaign.json.gz.part000",
+      "sha256": "e22648ce05a7387c5163ee0258e3e71764c0e3a59249d900e8d1140bad54df03",
+      "bytes": 900000
+    },
+    {
+      "file": "tria-campaign.json.gz.part001",
+      "sha256": "af8f0ef713e929c639221b72ad177277b17de6c0e7fb220ea8b29cb058127db9",
+      "bytes": 719638
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}
