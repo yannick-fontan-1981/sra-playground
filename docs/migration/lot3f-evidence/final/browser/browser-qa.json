@@ -1,0 +1,74 @@
+{
+  "schema": "logos-engine.browser-qa-observation.v1",
+  "status": "controls_and_three_levels_verified",
+  "recordedAt": "2026-11-10T14:05:44.789159+00:00",
+  "game": "VOIS",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.47.0",
+  "nativeSourceDigest": "54d8742300a04dcdf0cb1b038bc62b947d4a1c60f70da4ee80e6971b0f021165",
+  "managedPreview": "http://127.0.0.1:4173/",
+  "finalObservedUrl": "http://127.0.0.1:4173/?game=VOIS&level=4#playground",
+  "method": "CUA visible controls, accessibility observations and screenshot only. No hidden browser agent/game state inspected. Frozen checkout and build receipts establish source identity.",
+  "successfulAttempt": 2,
+  "priorAttempt": {
+    "path": "docs/migration/lot3f-evidence/final/browser/attempt1-navigation-interruption.json",
+    "bytes": 1641,
+    "sha256": "5f1584bdea06a8434c6240f52fdbbb7204c4e7349bf92a3285074d1a59e974ff"
+  },
+  "steps": [
+    {
+      "action": "Cold session after visible Restart from level1",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0,
+      "level": 1
+    },
+    {
+      "action": "Run then Pause; Paused observed",
+      "actions": 8,
+      "levelsSolved": 0,
+      "completedPlans": 6,
+      "level": 1
+    },
+    {
+      "action": "One action completed",
+      "actions": 9,
+      "levelsSolved": 0,
+      "completedPlans": 7,
+      "level": 1
+    },
+    {
+      "action": "Resume Run to next level; Level completed",
+      "actions": 14,
+      "levelsSolved": 1,
+      "completedPlans": 9,
+      "level": 2
+    },
+    {
+      "action": "Run to next level; Level completed",
+      "actions": 36,
+      "levelsSolved": 2,
+      "completedPlans": 21,
+      "level": 3
+    },
+    {
+      "action": "Run to next level; Level completed",
+      "actions": 78,
+      "levelsSolved": 3,
+      "completedPlans": 42,
+      "level": 4
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3f-evidence/final/browser/vois-final.png",
+      "bytes": 68229,
+      "sha256": "159474e516ee13c0ce4a4dff9b1076faec16c452e0337782a52879555c858f5d"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/browser/vois-final-ax.txt",
+      "bytes": 1105,
+      "sha256": "b3f8f53885f0b30808d7b3bac6dc074b7b60d5bba82fc7a4c7d8c83260266f8e"
+    }
+  ],
+  "qualification": "Second separate cold browser session continuously completes three levels, matching the instrumented78/3/42 counters after Pause, single action and resume. No manual game action, memory injection or level-jump control. Initial browser attempt ended through operator page navigation after two verified levels; retained separately, not counted as a three-level success. Both attempts stay within the cumulative VOIS clock. Inspector stayed closed; saved AX is final diff and screenshot shows all three counters."
+}

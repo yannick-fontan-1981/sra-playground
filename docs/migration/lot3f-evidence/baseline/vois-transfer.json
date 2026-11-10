@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.byte-identical-baseline-relocation.v1",
+  "status": "passed",
+  "files": [
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/vois-bounded-reference/vois-public-trace.json.gz",
+      "bytes": 833,
+      "sha256": "255335ab130f09a647cbaa744f38e087881ca6d58ddb4349b51fb32e6c1aaa0b"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/vois-bounded-reference/vois-campaign.json.gz",
+      "bytes": 121615,
+      "sha256": "1a3671bb03dd8e3afeb0aaac2cf1987b87e5d2f4c573e9260fc2ae3797ab28ca"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/vois-bounded-reference/vois-output.log.gz",
+      "bytes": 1111,
+      "sha256": "a35e4d311372d26a9a5cdde14c44985e8276ee9f4cd3e58ada96ff7800b560c4"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/vois-bounded-reference/execution-vois.json",
+      "bytes": 65945,
+      "sha256": "5ec81386735b26b1ce23c41bcb0d51f71e829e9b6ef433f3f14e8f1a70c84361"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/vois-bounded-reference/vois-actual-public-journal.jsonl.gz",
+      "bytes": 628,
+      "sha256": "a764cee4529a7d5dd62cb144d13608a030b3d8d7867784c14ea9b7392a87c1d8"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/vois-bounded-reference/source-manifest.json",
+      "bytes": 30770,
+      "sha256": "02ce173c4784af4e4f6bba3c2f7d3f72a2c2dc17cfe5c5ef46c0a2cf35c47238"
+    }
+  ],
+  "qualification": "Exact completed published0.46 reference evidence copied from its isolated worktree; original receipts and their relative paths remain unchanged."
+}

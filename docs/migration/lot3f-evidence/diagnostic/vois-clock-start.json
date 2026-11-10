@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.lot3f.cumulative-case-clock.v1",
+  "game": "VOIS",
+  "selectedAt": "2026-11-10T13:52:35.837560+00:00",
+  "selectionTimestampQualification": "Timestamp of durable selection receipt after one launch-preparation error; cumulative accounting starts earlier to include it conservatively.",
+  "accountingStartedAt": "2026-11-10T13:48:47.319628+00:00",
+  "previousCumulativeSeconds": 0,
+  "maximumCumulativeSeconds": 2400,
+  "deadline": "2026-11-10T14:28:47.319628+00:00",
+  "targetLevels": 3,
+  "selectionBasis": "Only structurally admitted initial public raster among97 archived views. No game engine, specification, routes, solution or later scene inspected.",
+  "admissionReceipt": {
+    "path": "docs/migration/lot3f-evidence/diagnostic/reference-population-public-admission.json",
+    "bytes": 24743,
+    "sha256": "4e4cc5a99328c20c649acba614855d60bdf4dab30571e1ff6509cdb2eab5ac49"
+  },
+  "candidateNativeDigest": "54d8742300a04dcdf0cb1b038bc62b947d4a1c60f70da4ee80e6971b0f021165",
+  "baselineNativeDigest": "5adf58cb9bd0802dd083812e7591c53cb786410ad23c14a29814d870ef67276c",
+  "plannedReferenceMaximumActions": 16,
+  "priorCaseClocksUnchanged": {
+    "CWSE": 2399.683865,
+    "SK48": 667.35444,
+    "FOGW": 951.320275
+  },
+  "qualification": "Conservative cumulative wall interval starts at the verified build completion before case-specific launch preparation and includes its failed setup. It covers baseline, candidate, diagnosis, public/source comparisons, contribution and browser work until explicit closure. No clock reset. A positive initial projection is not a solved-game claim."
+}

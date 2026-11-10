@@ -1,0 +1,237 @@
+{
+  "schema": "logos-engine.reference-population-shared-integration-review.v1",
+  "reviewedAt": "2026-11-10T13:52:36.195048+00:00",
+  "status": "no_blocking_issue_found",
+  "method": "Independent read-only review of the common integration/runtime diff, pinned common wrapper, access/integration contracts, coverage and retained development logs. The reviewer implemented the projection/calculus separately; this receipt does not claim an independent review of those own implementations.",
+  "candidateNativeDigest": "54d8742300a04dcdf0cb1b038bc62b947d4a1c60f70da4ee80e6971b0f021165",
+  "candidateManifest": {
+    "path": "docs/migration/lot3f-evidence/final/source-manifest.json",
+    "bytes": 31155,
+    "sha256": "62e0566b67f867107aa06d64852e6c2051b9636df3844e8bf79ac3885bff7966"
+  },
+  "checkedCount": 10,
+  "checks": [
+    {
+      "name": "dispatch_and_guard_precedence",
+      "status": "reviewed",
+      "finding": "Population precedes Reception, RootedLine, Panel, Chamber and Exposed. Presence of its plan key selects its own guard; null, false or empty plans do not bypass it."
+    },
+    {
+      "name": "candidate_binding",
+      "status": "reviewed",
+      "finding": "Own population points follow inherited candidates; the common envelope measures and binds their current public support and rejects a changed point."
+    },
+    {
+      "name": "single_acquisition_and_event_routing",
+      "status": "reviewed",
+      "finding": "Own acquisition occurs once after Reception and before public packet acquisition. Only observed_reference_population events replay into the Population owner."
+    },
+    {
+      "name": "conditional_digest_compatibility",
+      "status": "reviewed",
+      "finding": "The new digest suffix follows Reception and enters only after an own event. Eight published 0.46 checkpoint cases cover empty and nonempty earlier layers."
+    },
+    {
+      "name": "atomic_restoration",
+      "status": "reviewed",
+      "finding": "Replay builds temporary owners and checks the complete digest before publication. Rejected restores preserve the existing owner identities and state."
+    },
+    {
+      "name": "working_certificate",
+      "status": "reviewed",
+      "finding": "Population identity, native revision and structural witness participate in certified reuse; reducer changes, replacement and direct working-state or journal edits invalidate reuse."
+    },
+    {
+      "name": "detached_ownership",
+      "status": "reviewed",
+      "finding": "Public state, proposed state and returned events remain detached from the retained owner; retained event ownership supports safe repeated native restoration."
+    },
+    {
+      "name": "native_limits",
+      "status": "reviewed",
+      "finding": "The common entry enforces positive remaining actions, a current deadline and a capped prefix. Population paths and matching share native work bounds whose exhaustion returns blocking unknown without acquisition."
+    },
+    {
+      "name": "cold_source_chain",
+      "status": "reviewed",
+      "finding": "The integration test now follows two coherent cold source acquisitions and compares their complete own events, then restores the acquired selection and displacement before the next decision."
+    },
+    {
+      "name": "qualified_coverage",
+      "status": "reviewed",
+      "finding": "The six declared observed branches are registered and the entry count is 51/76. The common source module remains partial_transfer, fullV6Parity is false and all six completion gates remain false."
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src/logos-engine/v6-shared-series.ts",
+      "bytes": 78281,
+      "sha256": "9ec1e16b09290e2f256bea57bc837a2ff5c645d39af9337a90687650541fd240"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 133532,
+      "sha256": "0d56913bf8ade432cfc734140a61d823f0ffacadfc2691a6daf97f9599ac0458"
+    },
+    {
+      "path": "src/logos-engine/v6-reference-population-access.ts",
+      "bytes": 18240,
+      "sha256": "5806047c7db43fd0d179c5319932e63271b793148ac4477e352abef9c0d458bc"
+    },
+    {
+      "path": "src/logos-engine/v6-native-working-witness.ts",
+      "bytes": 5896,
+      "sha256": "08bca697678eb3a89960ff2ed1c49b9fc0c91082b86952be51edf0f34a1f38fb"
+    },
+    {
+      "path": "tests/v6-reference-population-integration.test.ts",
+      "bytes": 14812,
+      "sha256": "0aa8f82c4bf9939c1b99d683f0dc20c7ba057a5d339f63f74eee70d8dff205c3"
+    },
+    {
+      "path": "tests/v6-reference-population-access.test.ts",
+      "bytes": 10351,
+      "sha256": "0eca09dd7618ef5f50231c665d8b7636e23289f33c9adc62a3b8f4d38d99cda5"
+    },
+    {
+      "path": "tests/v6-support-caller-integration.test.ts",
+      "bytes": 11315,
+      "sha256": "56e02b0ef9729bb42e309616130fb975a1603770a1f687b04f80560654e71f30"
+    },
+    {
+      "path": "tests/v6-radial-port-integration.test.ts",
+      "bytes": 27631,
+      "sha256": "fbe623b8ad704ee5ab008b725b224644b8a09589e5710264529efd1943db36d3"
+    },
+    {
+      "path": "tests/v6-coupled-pair-planning.test.ts",
+      "bytes": 15719,
+      "sha256": "a3abdcd79e3c3407f0f185129e9884fa8ceb82b9148fce47db54967b1d29192e"
+    },
+    {
+      "path": "scripts/audit-v6-entry-points.ts",
+      "bytes": 6467,
+      "sha256": "a92940baccbb96b4fdb0a960591c6129ca42467985542fec90d31a0b28411471"
+    },
+    {
+      "path": "migration/v6-transfer-map.json",
+      "bytes": 365440,
+      "sha256": "f6b05729ada5df603eb8e16f9c048aecb68c3deed68f10cefdf3d28f6d1c54d2"
+    },
+    {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "bytes": 18063,
+      "sha256": "ead958f4e858a4b45ee2b68398673787b6c904d84dce11764a1a12b31cf78afa"
+    },
+    {
+      "path": "docs/migration/lot3f-reference-population-lineage.md",
+      "bytes": 18354,
+      "sha256": "7dbcacd21cafa7120209d7be7c04fbaac394d92755c3115f4b9d3f9dfac02d7f"
+    },
+    {
+      "path": "tests/fixtures/v6-reference-population-legacy-checkpoints.json.gz",
+      "bytes": 2490,
+      "sha256": "4ae9c591820e5b1ce49eeae2b1110f8caec3f1f3da4489d70d9e05d1acf266d5"
+    },
+    {
+      "path": "tests/fixtures/v6-reference-population-reference.json.gz",
+      "bytes": 676234,
+      "sha256": "4a8f656ab4aa5708647916bd3fe52a1a09b2c78a64376c2c0cc0552214d86b97"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_observed_compositions.py",
+      "bytes": 3143,
+      "sha256": "4f836b0c66c84805755533a194a58a05222c1bf8f7a656aa030cc1fe01811d5e"
+    }
+  ],
+  "correctionsReviewed": [
+    {
+      "finding": "The common-caller assertion still expected the old runtime qualification text.",
+      "correction": "The assertion now matches the explicit partial inherited source-closure wording; the count-test title now names 51/76 and all six declared branches.",
+      "retestEvidence": {
+        "path": "docs/migration/lot3f-evidence/diagnostic/population-development-targeted.tap.gz",
+        "bytes": 6054,
+        "sha256": "f67ec56c361b81881d7b9b0899023613e3f7561ecae501dbd13bb4bbf001454b"
+      },
+      "status": "corrected_source_and_passing_retained_diagnostic_log_observed"
+    },
+    {
+      "finding": "Deep structural equality did not establish owner identity after rejected restoration.",
+      "correction": "The test now asserts strict equality for each prior owner, while retaining the complete-state equality check.",
+      "retestEvidence": {
+        "path": "docs/migration/lot3f-evidence/diagnostic/population-integration-final.tap.gz",
+        "bytes": 624,
+        "sha256": "ae4ce8e9038769ea2ab8657726779bbb32a3a00180b3b66aca2783e1024fb877"
+      },
+      "status": "corrected_source_and_passing_retained_diagnostic_log_observed"
+    }
+  ],
+  "observedDiagnosticTests": [
+    {
+      "receipt": {
+        "path": "docs/migration/lot3f-evidence/diagnostic/population-integration-final.tap.gz",
+        "bytes": 624,
+        "sha256": "ae4ce8e9038769ea2ab8657726779bbb32a3a00180b3b66aca2783e1024fb877"
+      },
+      "observedSummary": {
+        "tests": 15,
+        "suites": 0,
+        "pass": 15,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "executedByThisReview": false,
+      "qualification": "Read from the retained development diagnostic log. This is not a new execution or a complete formal exact-source test receipt."
+    },
+    {
+      "receipt": {
+        "path": "docs/migration/lot3f-evidence/diagnostic/population-development-targeted.tap.gz",
+        "bytes": 6054,
+        "sha256": "f67ec56c361b81881d7b9b0899023613e3f7561ecae501dbd13bb4bbf001454b"
+      },
+      "observedSummary": {
+        "tests": 278,
+        "suites": 0,
+        "pass": 278,
+        "fail": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0
+      },
+      "executedByThisReview": false,
+      "qualification": "Read from the retained development diagnostic log. This is not a new execution or a complete formal exact-source test receipt."
+    }
+  ],
+  "coverageQualification": {
+    "connectedEntries": 51,
+    "declaredEntries": 76,
+    "partiallyConnectedEntries": 0,
+    "declaredObservedBranches": 6,
+    "commonSourceMappingStatus": "partial_transfer",
+    "fullV6Parity": false,
+    "completionGates": {
+      "allRequiredCapabilitiesTransferred": false,
+      "fullCommonCallerDifferentialParity": false,
+      "allDeclaredFamiliesIntegrated": false,
+      "commonGraphEditingCoversExecutedPrograms": false,
+      "pythonNumericSemanticsCovered": false,
+      "fullCampaignRegression": false
+    },
+    "meaning": "Registry connection of the six declared branches; neither global source parity nor game success."
+  },
+  "remainingQualifications": [
+    "Retained revalidation does not reconstruct every receiving-frame feature; the source continuation limitation remains explicit.",
+    "A predicted move without observed displacement does not automatically revoke an acquired source control.",
+    "Prepared occupancy and observed appearances provide no complete color or official terminal law.",
+    "Truncated retained images and pending selection without nonpoint input retain explicit refusals; native exception classes differ from Python.",
+    "Native path/matching limits are named extensions; V5 physical support is limited to the consumed selected-cardinal-step domain.",
+    "Full inherited source digest, complete original-caller parity, functional campaigns and official costs require their own evidence."
+  ],
+  "nativeChangesMadeByReview": false,
+  "testsExecutedByReview": 0,
+  "gamesExecuted": 0,
+  "costMeasurementsExecuted": 0,
+  "formalValidationClaimed": false
+}

@@ -75,7 +75,8 @@ const report = {
   declared: total, percent: Math.round(connected * 1000 / total) / 10, groups,
   qualification: 'Each declared entry has equal weight. This counts actual provider registrations, not code volume, game score, expected success, or complete V6 behavioral parity. An explicitly declared partial entry is reported with its connected and pending internal branches and does not increment the connected total. The common coordinator and direct groups are outside this denominator. Their own differential tests and live campaigns remain separate evidence.',
   commonGroups: sourceGroups, pendingSupportSubcompositions: coverage.supportSubcompositionsPending,
-  sharedSeriesMemory: coverage.sharedSeriesMemory, sharedSeriesDigestScope: coverage.sharedSeriesDigestScope, fullV6Parity: false,
+  sharedSeriesMemory: coverage.sharedSeriesMemory, sharedSeriesDigestScope: coverage.sharedSeriesDigestScope,
+  observedCompositionBranches: coverage.observedCompositionBranches ?? null, fullV6Parity: false,
 };
 await writeFile(new URL('docs/migration/v6-entry-point-progress.json', root), JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify({ connected, declared: total, percent: report.percent, groups: groups.map(({ id, connected, declared }) => ({ id, connected, declared })), fullV6Parity: false }));

@@ -382,6 +382,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const previousRootedLineCount = report.prefixes.at(-1)?.sharedSeries.rootedLineEventCount ?? 0;
           const receptionServiceEvents = (series.events as R[]).filter(event => event.kind === 'observed_reception_service');
           const previousReceptionServiceCount = report.prefixes.at(-1)?.sharedSeries.receptionServiceEventCount ?? 0;
+          const referencePopulationEvents = (series.events as R[]).filter(event => event.kind === 'observed_reference_population');
+          const previousReferencePopulationCount = report.prefixes.at(-1)?.sharedSeries.referencePopulationEventCount ?? 0;
           const productStates = (series.events as R[]).filter(event => event.kind === 'observed_factor_product');
           const labeledSubmissions = (series.events as R[]).filter(event => event.kind === 'labeled_sequence_submission');
           const traceExtensions = (series.events as R[]).filter(event => event.kind === 'observed_trace_extension');
@@ -444,6 +446,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               ? { observedExposedReception: { proposal: evidence.proposal,
                     stateNode: 'family_state:public_occurrence_recall',
                     qualification: 'Passive capture of the selected common proposal. Production measures the scene, searches with conditional acquired effects and V5 nominal push expansion, and acquires each actual return once. No action, state or expected return is supplied by this recorder.' } } : {}),
+            ...(evidence.proposal.reference_population_plan
+              ? { observedReferencePopulation: { proposal: evidence.proposal,
+                    stateNode: 'family_state:public_occurrence_recall',
+                    qualification: 'Passive capture only. Production measures the population and reference, computes injective assignments from observed controls, and acquires actual returns. This recorder supplies no decision, acquired state or expected return.' } } : {}),
             ...(evidence.proposal.reception_service_plan
               ? { observedReceptionService: { proposal: evidence.proposal,
                     stateNode: 'family_state:public_occurrence_recall',
@@ -603,6 +609,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               chamberRelationAcquiredEvents: chamberRelationEvents.slice(previousChamberRelationCount),
               exposedReceptionEventCount: exposedReceptionEvents.length,
               exposedReceptionAcquiredEvents: exposedReceptionEvents.slice(previousExposedReceptionCount),
+              ...(referencePopulationEvents.length || evidence.proposal.reference_population_plan
+                ? { referencePopulationEventCount: referencePopulationEvents.length,
+                    referencePopulationAcquiredEvents: referencePopulationEvents.slice(previousReferencePopulationCount) } : {}),
               ...(receptionServiceEvents.length || evidence.proposal.reception_service_plan
                 ? { receptionServiceEventCount: receptionServiceEvents.length,
                     receptionServiceAcquiredEvents: receptionServiceEvents.slice(previousReceptionServiceCount) } : {}),

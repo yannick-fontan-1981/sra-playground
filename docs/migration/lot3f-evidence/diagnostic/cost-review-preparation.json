@@ -1,0 +1,272 @@
+{
+  "schema": "logos-engine.lot3f-cost-review-preparation.v1",
+  "preparedAt": "2026-11-10T13:59:34.762040+00:00",
+  "status": "prepared_awaiting_completed_official_window_and_owner_signal",
+  "method": "Prepare the retained 3E review method for current 3F identities. No historical timing data, acceptance count or phase verdict is used as a future expected result.",
+  "candidateNativeDigest": "54d8742300a04dcdf0cb1b038bc62b947d4a1c60f70da4ee80e6971b0f021165",
+  "baselineNativeDigest": "5adf58cb9bd0802dd083812e7591c53cb786410ad23c14a29814d870ef67276c",
+  "inputs": [
+    {
+      "path": "docs/migration/lot3f-evidence/performance/declaration.json",
+      "bytes": 4102,
+      "sha256": "84200cc1bdae6bb378924df5994b8cfd4baf63c0dd302a123653027837b0becf"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/global-budget-policy.json",
+      "bytes": 2009,
+      "sha256": "89fced9e1b7c83f0071ddfd6335c54797e62a99585230aa9c65133f8856febb9"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/protocol.md",
+      "bytes": 9801,
+      "sha256": "3f7b8bedf32771942e842230e6f34e89bef7929300bc59279a0b6e0e2dd97450"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/protocol-check.json",
+      "bytes": 406,
+      "sha256": "9592c20c459b1f5fab2ff32a5ff55046db01efee0ea15679ed578c010da4f203"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/static-preflight.json",
+      "bytes": 11613,
+      "sha256": "97e96642c50ae6cb1f554a6cd8fc52664be48fd1aff33c7ea6ab8cbee0da9066"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/readiness-template.json",
+      "bytes": 1129,
+      "sha256": "0b58f5bcd802aba8f5925760e864fde4f376e85d727e0f4bd321c6a584e8a26a"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/source-manifest.json",
+      "bytes": 30770,
+      "sha256": "02ce173c4784af4e4f6bba3c2f7d3f72a2c2dc17cfe5c5ef46c0a2cf35c47238"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/source-manifest.json",
+      "bytes": 31155,
+      "sha256": "62e0566b67f867107aa06d64852e6c2051b9636df3844e8bf79ac3885bff7966"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/source-archive.json",
+      "bytes": 32786,
+      "sha256": "1007ef87a4f3c87de4e2fbfe55f3b0a1ec31c9727629ddad89c72d48c9e08592"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/check-cost-static-inputs.py",
+      "bytes": 13108,
+      "sha256": "22dcf3ca46a2a405ba1c5656c779312090ea3f851dc90aa36ceed31851908dbc"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/write-cost-results.py",
+      "bytes": 27635,
+      "sha256": "c817928e2d43d4443c8d8cbe29f6eda8896ed284662b90d38ebf337cbf62aa8b"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/shared-integration-review.json",
+      "bytes": 10628,
+      "sha256": "323f3db1095fd51abd9ba91ccaa8073ac95764f8bcb7ebc367f548c3aa952311"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/static-preflight-generation-incident.json",
+      "bytes": 1252,
+      "sha256": "603d79388e81746f38593366c61269c590c999661ac122985ee072a1a8231a01"
+    }
+  ],
+  "staticReview": {
+    "receipt": {
+      "path": "docs/migration/lot3f-evidence/performance/static-preflight.json",
+      "bytes": 11613,
+      "sha256": "97e96642c50ae6cb1f554a6cd8fc52664be48fd1aff33c7ea6ab8cbee0da9066"
+    },
+    "status": "static_inputs_checked",
+    "checkedCount": 48,
+    "unsatisfiedCount": 0,
+    "measurementExecuted": false,
+    "readinessCreated": false,
+    "isolationChecked": false
+  },
+  "completedProtocolCheck": {
+    "command": [
+      "python",
+      "-B",
+      "scripts/review-native-global-cost-window.py",
+      "--check-protocol",
+      "docs/migration/lot3f-evidence/performance/declaration.json"
+    ],
+    "exitCode": 0,
+    "result": {
+      "status": "protocol_contract_passed",
+      "declaration": "docs/migration/lot3f-evidence/performance/declaration.json",
+      "finalizedAt": "2026-11-10T13:48:11.124091+00:00",
+      "nativeDigests": {
+        "baseline": "5adf58cb9bd0802dd083812e7591c53cb786410ad23c14a29814d870ef67276c",
+        "candidate": "54d8742300a04dcdf0cb1b038bc62b947d4a1c60f70da4ee80e6971b0f021165"
+      },
+      "caseIds": [
+        "STCK",
+        "SMLP"
+      ],
+      "measurementExecuted": false
+    },
+    "measurementExecuted": false
+  },
+  "sourceAndPolicyContracts": {
+    "baselineSiteVersion": 74,
+    "baselineNativeVersion": "0.46.0",
+    "candidateNativeVersion": "0.47.0",
+    "baselineNativeFiles": 260,
+    "candidateNativeFiles": 263,
+    "candidateArchiveFiles": 274,
+    "plannedOrder": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
+    "caseIds": [
+      "STCK",
+      "SMLP"
+    ],
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "excludedWarmupSessions": 8,
+    "excludedWarmupActions": 24,
+    "excludedMeasuredSessions": 0,
+    "excludedOutliers": 0,
+    "globalStage": "session_elapsed",
+    "statistic": "pooled median of eight complete measured sessions per case and version",
+    "relativeIncreaseLimit": 0.1,
+    "comparison": "strictly_less_than",
+    "allCasesMustPass": true,
+    "crossCaseCompensation": false,
+    "phaseDiagnosticsRemainIndependent": true
+  },
+  "futureReviewRequirements": [
+    "Wait for the delivery owner signal and a completed official window. This preparation authorizes no timing runner or campaign.",
+    "Check exact source, archive, cases, traces, tools and policy fingerprints; final declaration must precede the first measured execution.",
+    "Retain A1/B1/B2/A2 in declared order and both cases in each series; include every declared measured session with multiplicity preserved.",
+    "Verify work equivalence and action counts from all four raw reports; exclude only the eight declared warmups, never a measured outlier or unfavorable cohort.",
+    "Produce both cohort comparisons, then pool all sessions and retain their original statuses and every phase result.",
+    "Recalculate distributions, median ratios, classifications and ledgers independently with the unchanged consolidation reviewer.",
+    "Apply the separate strict global threshold per case to complete-session medians; do not sum nested phase costs or average cohort ratios.",
+    "Keep sixteen aggregate diagnostics and thirty-two cohort diagnostics, all sample counts, minimum/maximum dispersion and available empirical p95 values.",
+    "Keep inspection, Pause acknowledgements/safe boundaries and memory samples, including unfavorable values; no unsupported causal attribution.",
+    "Preserve original logs and exact gzip transports; verify decoded bytes and original report/log identities before rendering.",
+    "Render only actual completed receipts in UTC. A failed global decision must remain failed in the report; no placeholder acceptance or historical timing number.",
+    "Keep functional success, acquired contribution, browser checks, inherited-source limitations and full migration parity separate from any cost decision."
+  ],
+  "futureCommands": [
+    {
+      "step": "compare_cohort_1",
+      "argv": [
+        "node",
+        "scripts/compare-native-loop-costs.mjs",
+        "docs/migration/lot3f-evidence/performance/comparison-policy.json",
+        "docs/migration/lot3f-evidence/performance/cohort1/baseline.json",
+        "docs/migration/lot3f-evidence/performance/cohort1/after.json",
+        "docs/migration/lot3f-evidence/performance/cohort1/comparison.json"
+      ],
+      "executed": false
+    },
+    {
+      "step": "compare_cohort_2",
+      "argv": [
+        "node",
+        "scripts/compare-native-loop-costs.mjs",
+        "docs/migration/lot3f-evidence/performance/comparison-policy.json",
+        "docs/migration/lot3f-evidence/performance/cohort2/baseline.json",
+        "docs/migration/lot3f-evidence/performance/cohort2/after.json",
+        "docs/migration/lot3f-evidence/performance/cohort2/comparison.json"
+      ],
+      "executed": false
+    },
+    {
+      "step": "pool_all_declared_sessions",
+      "argv": [
+        "node",
+        "scripts/compare-native-cost-cohorts.mjs",
+        "docs/migration/lot3f-evidence/performance/comparison-policy.json",
+        "docs/migration/lot3f-evidence/performance/cohort1/baseline.json",
+        "docs/migration/lot3f-evidence/performance/cohort1/after.json",
+        "docs/migration/lot3f-evidence/performance/cohort1/comparison.json",
+        "docs/migration/lot3f-evidence/performance/cohort2/baseline.json",
+        "docs/migration/lot3f-evidence/performance/cohort2/after.json",
+        "docs/migration/lot3f-evidence/performance/cohort2/comparison.json",
+        "docs/migration/lot3f-evidence/performance/combined-comparison.json"
+      ],
+      "executed": false
+    },
+    {
+      "step": "independent_arithmetic_review",
+      "argv": [
+        "python",
+        "-B",
+        "scripts/review-native-cost-consolidation.py",
+        "docs/migration/lot3f-evidence/performance"
+      ],
+      "executed": false
+    },
+    {
+      "step": "independent_global_rule_review",
+      "argv": [
+        "python",
+        "-B",
+        "scripts/review-native-global-cost-window.py",
+        "docs/migration/lot3f-evidence/performance/combined-comparison.json",
+        "docs/migration/lot3f-evidence/performance/declaration.json",
+        "docs/migration/lot3f-evidence/performance/global-budget-decision.json",
+        "--lot",
+        "3F",
+        "--native-version",
+        "0.47.0"
+      ],
+      "executed": false
+    },
+    {
+      "step": "render_completed_retained_receipts_after_lossless_log_transport",
+      "argv": [
+        "python",
+        "-B",
+        "docs/migration/lot3f-evidence/write-cost-results.py"
+      ],
+      "executed": false
+    }
+  ],
+  "additionalPrerequisiteForRendering": "Create and verify performance/log-transport.json from the four original window logs, with byte-identical gzip transports and unchanged originals.",
+  "renderer": {
+    "generator": {
+      "path": "docs/migration/lot3f-evidence/write-cost-results.py",
+      "bytes": 27635,
+      "sha256": "c817928e2d43d4443c8d8cbe29f6eda8896ed284662b90d38ebf337cbf62aa8b"
+    },
+    "syntaxParsed": true,
+    "executed": false,
+    "timezone": "UTC",
+    "aggregateDiagnosticsRequired": 16,
+    "cohortDiagnosticsRequired": 32,
+    "historicalResultAssertions": false,
+    "requiresCompletedEvidence": true,
+    "refusesExistingOutputs": true,
+    "outputPaths": [
+      "docs/migration/lot3f-evidence/performance/results.md",
+      "docs/migration/lot3f-evidence/performance/results-render.json"
+    ],
+    "executesNoTimingRunner": true,
+    "doesNotDetermineGlobalAcceptance": true
+  },
+  "formalFunctionalValidationClaimed": false,
+  "officialMeasurementsExecuted": 0,
+  "comparisonsExecuted": 0,
+  "costResultsRendered": false,
+  "qualification": "Static integrity review and future evidence-processing preparation only. No cost verdict is supplied. Readiness and execution isolation remain the delivery owner responsibility."
+}

@@ -1,0 +1,111 @@
+{
+  "schema": "logos-engine.native-cost-window-readiness.v1",
+  "recordedAt": "2026-11-10T14:07:48.146305+00:00",
+  "finalizedAt": "2026-11-10T14:07:48.146305+00:00",
+  "status": "ready_for_predeclared_official_window",
+  "preview": "sites-preview stop completed; subsequent sites-preview status confirmed stopped. The preview command session has exited.",
+  "isolation": "All owned tests, build, regression replays, campaigns, source comparisons, contribution checks, browser actions, transport and delivery integrity are finished. Delegated agents have completed their tasks and confirmed no compute work remains. During sequential A1/B1/B2/A2 only light reading/documentation is allowed; no test/build/replay/game/preview, large archive or other heavy calculation will run concurrently.",
+  "functionalQualification": "Frozen native0.47:2086/2086 tests in60files;5/5checks/build; strict CATR/RSWP/FOGW51/51 on81archived actions. Cold VOIS meets target3 in78actions/42prefixes; browser same afterPause/step/resume, interrupted first browser attempt retained. Original own trajectory matches3434checks with no source exception; full inherited caller parity remains partial. Contribution252ablations100action/refusalchanges, negative results retained. VOISclock1017.469531seconds closed; prior CWSE2399.683865,SK48667.35444,FOGW951.320275 unchanged. Source receiving-frame, control-revocation and unknown-color limitations remain.",
+  "costPolicy": "Strict complete-session pooled median increase below10% separately for STCK and SMLP. Phase overruns may be accepted when both globals pass. All32measuredsessions400actions and all phase/p95/cohort diagnostics retained; no measured exclusions or cross-game compensation.",
+  "authorization": "User requested continuation and explicitly permits phase overruns if global increase remains below10%.",
+  "measurementAuthorized": true,
+  "pendingRequirements": [],
+  "inputs": [
+    {
+      "path": "docs/migration/lot3f-evidence/final/validation/delta-tests-run.json",
+      "bytes": 109242,
+      "sha256": "04e955b740d3f506ccd30c61f95ee18a50cb2c81beba1c80a72de1ccd5f7f682"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/validation/checks-run.json",
+      "bytes": 72845,
+      "sha256": "e9dfbcbfff0184bf831bca0327e18bcc5ce2db4b8f3b39fd7bd0e212c7522964"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/regression-summary.json",
+      "bytes": 84229,
+      "sha256": "36e6e53fc78a7f240c9d9a161efd42562ab172549877e1e44175f03d7eea353f"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/declaration.json",
+      "bytes": 4102,
+      "sha256": "84200cc1bdae6bb378924df5994b8cfd4baf63c0dd302a123653027837b0becf"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/protocol.md",
+      "bytes": 9801,
+      "sha256": "3f7b8bedf32771942e842230e6f34e89bef7929300bc59279a0b6e0e2dd97450"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/global-budget-policy.json",
+      "bytes": 2009,
+      "sha256": "89fced9e1b7c83f0071ddfd6335c54797e62a99585230aa9c65133f8856febb9"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/protocol-check.json",
+      "bytes": 406,
+      "sha256": "9592c20c459b1f5fab2ff32a5ff55046db01efee0ea15679ed578c010da4f203"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/static-preflight.json",
+      "bytes": 11613,
+      "sha256": "97e96642c50ae6cb1f554a6cd8fc52664be48fd1aff33c7ea6ab8cbee0da9066"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/source-oracle-export.json",
+      "bytes": 1289,
+      "sha256": "9332dcc2dee0ee8e96ac562e1ab47001854c5c24c68b739d86b5b3bd499d53d0"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/shared-integration-review.json",
+      "bytes": 10628,
+      "sha256": "323f3db1095fd51abd9ba91ccaa8073ac95764f8bcb7ebc367f548c3aa952311"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/vois-public-parity.json",
+      "bytes": 214774,
+      "sha256": "efe91899f50702823537eefb06041455d1f29761056c80523baf886f639597f1"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/vois-public-replay-execution.json",
+      "bytes": 3445,
+      "sha256": "4bcaf2972c71ac473dc33cb73ceba6f824c919eabfc38a3423f3833c6b551b30"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/browser/browser-qa.json",
+      "bytes": 2815,
+      "sha256": "36e24c00efc45271daf7662795580d074879e1e5330ae4249ec11d801936de09"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/browser/attempt1-navigation-interruption.json",
+      "bytes": 1641,
+      "sha256": "5f1584bdea06a8434c6240f52fdbbb7204c4e7349bf92a3285074d1a59e974ff"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-resolution.json",
+      "bytes": 5162,
+      "sha256": "d3104de3d08221ac9e1663945a46c951df4e4c4d9f43ab914e41552138ee69fa"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/execution-vois.json",
+      "bytes": 66686,
+      "sha256": "6ef4d35cd12cbdff0f40e04b6ea512652d9cf7b42eb47c3f862dee79d00e02e8"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/reference-population-contribution.json",
+      "bytes": 1100208,
+      "sha256": "6d61dbea3376060da97436362ae3d888087122c740c6961a01747a761565b225"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/contribution-transport.json",
+      "bytes": 685,
+      "sha256": "1723b48d71b64186cb2a2cca5bf1db4db053b8fd47c23394dd8c070cf0e586e7"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/delivery-integrity.json",
+      "bytes": 7629,
+      "sha256": "b0d1fea6100538f10d6b57d76751340129834a76a5e997f4134f1d1aa7fa9c5c"
+    }
+  ],
+  "qualification": "Readiness binds completed functional and integrity evidence. It authorizes only the predeclared timing window; it anticipates neither acceptance nor full migration parity."
+}

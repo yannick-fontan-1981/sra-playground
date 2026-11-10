@@ -1,0 +1,147 @@
+{
+  "case": "catr-046",
+  "game": "CATR",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/lot3e-evidence/final/regressions/catr-045-replay.json.gz",
+    "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+    "docs/migration/lot3f-evidence/final/regressions/catr-046-replay.json.gz"
+  ],
+  "startedAt": "2026-11-10T13:49:20.976414+00:00",
+  "finishedAt": "2026-11-10T13:49:36.001519+00:00",
+  "elapsedSeconds": 15.02510194900242,
+  "exitCode": 0,
+  "timeoutSeconds": 2400,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/lot3e-evidence/final/regressions/catr-045-replay.json.gz",
+    "sha256": "c308f55fafe12b5eccc7cdadfd70887f64811d88b87f2a4738045f0c8bbac282",
+    "bytes": 1372839
+  },
+  "trace": {
+    "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+    "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+    "bytes": 24340
+  },
+  "output": {
+    "path": "docs/migration/lot3f-evidence/final/regressions/catr-046-output.log.gz",
+    "sha256": "4b86d33687468b6ec5188959aa87eef1587feb5c21685e6615417809e53e38f5",
+    "bytes": 2476
+  },
+  "passed": true,
+  "report": {
+    "path": "docs/migration/lot3f-evidence/final/regressions/catr-046-replay.json.gz",
+    "sha256": "e0386709c716544276453499aceb9b023dda12ed7cf825d730af06066437702d",
+    "bytes": 1372857
+  },
+  "status": "passed",
+  "actions": 12,
+  "prefixes": 8,
+  "final": {
+    "actions": 12,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 12.795098006000002,
+    "prefixes": 8,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 12,
+      "boundaryReplays": 2,
+      "goalEvents": 6,
+      "frontierDeltas": 25,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 9
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 9
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 8
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 7
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 9
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 9
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 12,
+      "resume": 7
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.47.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot3f-evidence/final/regressions/catr-046-passive-owner-presence.json",
+    "sha256": "6f4b4b7447e88e846da24be88dbbf008ec74dc3c8d8ab2a368e39f6c56600d91",
+    "bytes": 1078
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot3f-evidence/final/regressions/catr-046-comparison.json",
+    "sha256": "68f1ef90245ce65313ffa633314148704336f763e69f441ba2f7848426dd7e98",
+    "bytes": 10624
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceBeforeDigest": "54d8742300a04dcdf0cb1b038bc62b947d4a1c60f70da4ee80e6971b0f021165",
+  "nativeSourceAfterDigest": "54d8742300a04dcdf0cb1b038bc62b947d4a1c60f70da4ee80e6971b0f021165",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "cases": [
+    {
+      "id": "catr-046",
+      "game": "CATR",
+      "baseline": {
+        "path": "docs/migration/lot3e-evidence/final/regressions/catr-045-replay.json.gz",
+        "sha256": "c308f55fafe12b5eccc7cdadfd70887f64811d88b87f2a4738045f0c8bbac282"
+      },
+      "trace": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+      }
+    },
+    {
+      "id": "rswp-046",
+      "game": "RSWP",
+      "baseline": {
+        "path": "docs/migration/lot3e-evidence/final/regressions/rswp-045-replay.json.gz",
+        "sha256": "15efd1086c7a07f1781eac359f7888daa6b75329630e9b54b08ac1798edd306b"
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+      }
+    },
+    {
+      "id": "fogw-046",
+      "game": "FOGW",
+      "baseline": {
+        "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-campaign.json.gz",
+        "sha256": "91403b91f4e3821056b46771be13efd7fdb33ea3b0280f62cd9bdcfcf1b30f46"
+      },
+      "trace": {
+        "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+        "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "qualification": "Cold recorded-return regressions against actual native0.46 reports from Site74 commit a6edbb838670785733155262ae95f69892a236fc, digest5adf58cb9bd0802dd083812e7591c53cb786410ad23c14a29814d870ef67276c. CATR/RSWP use prior recomputed0.46 reports on historical immutable public traces; FOGW uses its actual0.46 public campaign. Every0.47 command is computed before its recorded return. Same17unchanged checks per case. New Population evidence absent until own selection/acquisition. No new live FOGW attempt, case diagnosis, game success, full-state equality, speed claim or new Population contribution inferred."
+}

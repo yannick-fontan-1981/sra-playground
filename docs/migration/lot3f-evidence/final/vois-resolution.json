@@ -1,0 +1,142 @@
+{
+  "schema": "logos-engine.lot3f.reference-population-resolution.v1",
+  "status": "own_transfer_verified_three_level_target_met",
+  "game": "VOIS",
+  "targetLevels": 3,
+  "actual": {
+    "actions": 78,
+    "levelsCompleted": 3,
+    "prefixes": 42,
+    "actionsPerLevel": [
+      14,
+      22,
+      42
+    ],
+    "prefixesPerLevel": [
+      9,
+      12,
+      21
+    ],
+    "stop": "target_levels_completed",
+    "reachedLevel": 4,
+    "terminalGameState": "NOT_FINISHED"
+  },
+  "baseline": {
+    "native": "0.46.0",
+    "actions": 1,
+    "levelsCompleted": 0,
+    "prefixes": 1,
+    "stop": "frontier_unknown",
+    "outerMaximumActions": 16,
+    "outerActionCapReached": false,
+    "qualification": "A bounded cold reference stopped naturally before the outer action cap; not a universal impossibility or full-game verdict."
+  },
+  "sourceComparison": {
+    "checksPassed": 3434,
+    "checksTotal": 3434,
+    "exactOriginal": {
+      "prefixes": 42,
+      "returns": 78,
+      "ownEvents": 75,
+      "emptyReturns": 3,
+      "restorations": 43,
+      "sourceStop": null,
+      "differences": 0,
+      "coldStart": true,
+      "primedFromCapturedProposalMemory": false,
+      "completeSelectedOwnTrajectoryParity": true,
+      "fullInheritedCallerParity": false
+    },
+    "originalFilesVerifiedUnchanged": 1786
+  },
+  "contribution": {
+    "prefixes": 42,
+    "actions": 78,
+    "ownEvents": 75,
+    "emptyOwnReturns": 3,
+    "restorations": 43,
+    "publicObservationsRecomputed": 79,
+    "ablations": 252,
+    "interventionsChangingRetainedKnowledge": 200,
+    "actionOrRefusalChanges": 100,
+    "decisionProjectionChanges": 148,
+    "strictProposalChanges": 194,
+    "strictOnlyChanges": 46,
+    "negativeOrUnchangedDecisions": 104,
+    "actionContributionObserved": true,
+    "planningContributionObserved": true,
+    "controlsContribute": true,
+    "activeIdentityContributes": true,
+    "pendingSelectionContributes": true,
+    "triedInputsContribute": false,
+    "markerOverlaysContribute": true,
+    "noEffectIsRetainedAsNoEffect": true
+  },
+  "browser": {
+    "actions": 78,
+    "levelsCompleted": 3,
+    "plans": 42,
+    "successfulAttempt": 2,
+    "pauseAtActions": 8,
+    "singleActionVerified": true,
+    "resumeVerified": true,
+    "matchesCampaign": true,
+    "interruptedFirstAttemptRetained": true
+  },
+  "caseClock": {
+    "selectedAt": "2026-11-10T13:52:35.837560+00:00",
+    "accountingStartedAt": "2026-11-10T13:48:47.319628+00:00",
+    "workFinishedAt": "2026-11-10T14:05:44.789159+00:00",
+    "currentIntervalSeconds": 1017.469531,
+    "previousCumulativeSeconds": 0,
+    "cumulativeSeconds": 1017.469531,
+    "maximumCumulativeSeconds": 2400,
+    "remainingSeconds": 1382.530469,
+    "exhausted": false,
+    "furtherWorkThisDelivery": false,
+    "qualification": "Conservative wall interval starts at verified build completion before the first launch-preparation error. Includes setup, reference, candidate, source comparison, contribution and both browser attempts without reset. Subsequent file transport, documentation, delivery integrity and STCK/SMLP timing are release work. Any future VOIS diagnosis must resume this cumulative value."
+  },
+  "priorCaseClocksUnchanged": {
+    "CWSE": 2399.683865,
+    "SK48": 667.35444,
+    "FOGW": 951.320275
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/vois-clock-start.json",
+      "bytes": 1620,
+      "sha256": "c73df0debc13d3adcad579dfc6713dfd4543c08b60bfb32f7ae79b32087e9557"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/baseline-launch-preparation-error.json",
+      "bytes": 655,
+      "sha256": "7a9d8db8b4bed4f359052934b8246846238480dc73c71b6dcd9056e83d50887a"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/execution-vois.json",
+      "bytes": 66686,
+      "sha256": "6ef4d35cd12cbdff0f40e04b6ea512652d9cf7b42eb47c3f862dee79d00e02e8"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-population-session/reference-population-contribution.json",
+      "bytes": 1100208,
+      "sha256": "6d61dbea3376060da97436362ae3d888087122c740c6961a01747a761565b225"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/diagnostic/vois-public-parity.json",
+      "bytes": 214774,
+      "sha256": "efe91899f50702823537eefb06041455d1f29761056c80523baf886f639597f1"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/browser/browser-qa.json",
+      "bytes": 2815,
+      "sha256": "36e24c00efc45271daf7662795580d074879e1e5330ae4249ec11d801936de09"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/baseline/vois-bounded-reference/execution-vois.json",
+      "bytes": 65945,
+      "sha256": "5ec81386735b26b1ce23c41bcb0d51f71e829e9b6ef433f3f14e8f1a70c84361"
+    }
+  ],
+  "qualification": "Own ReferencePopulation transfer and consumed matching/cardinal-motion contracts meet the first-three-level target. Full original inherited-caller parity, whole-game victory, complete receiving-frame revalidation, automatic revocation of contradicted controls and universal appearance/terminal laws are not claimed. Cost acceptance has a separate official decision."
+}

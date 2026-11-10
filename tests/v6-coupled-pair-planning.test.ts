@@ -160,10 +160,12 @@ test('observed, coupled and graph source entries share one retained public_occur
   assert.deepEqual(goal.entryPoints.filter((entry: string | null) => entry !== null),
     ['observed_composition_services', 'coupled_support_composition', 'alternating_graph_composition']);
   assert.equal(goal.entryPoints[0], 'observed_composition_services');
-  assert.deepEqual(coverage.partialEntryPoints, {
-    observed_composition_services: { owner: 'public_occurrence_recall', connectedBranches: ['panel_service_plan', 'chamber_relation_plan', 'exposed_reception_plan', 'rooted_line_plan', 'reception_service_plan'],
-      pendingBranches: ['reference_population_plan'] },
-  });
+  assert.deepEqual(coverage.partialEntryPoints, {});
+  assert.deepEqual(coverage.observedCompositionBranches.connectedBranches,
+    ['panel_service_plan', 'chamber_relation_plan', 'exposed_reception_plan', 'rooted_line_plan', 'reception_service_plan', 'reference_population_plan']);
+  assert.equal(coverage.observedCompositionBranches.owner, 'public_occurrence_recall');
+  assert.equal(coverage.observedCompositionBranches.status, 'all_declared_branches_connected');
+  assert.deepEqual(coverage.observedCompositionBranches.pendingBranches, []);
   assert.equal(window.families.filter((id: string) => id === 'public_occurrence_recall').length, 13);
   assert.deepEqual(window.entryPoints.filter((entry: string | null) => entry !== null),
     ['occluded_catalogue_composition', 'queued_field_composition', 'product_panel_composition', 'labeled_sequence_composition',

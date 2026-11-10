@@ -1,0 +1,79 @@
+{
+  "schema": "logos-engine.cost-log-byte-transport.v1",
+  "recordedAt": "2026-11-10T14:16:35.022522+00:00",
+  "status": "passed",
+  "method": "gzip level9 with mtime0; exact decoded byte equality and original SHA-256 verified against the official execution window. Original logs were not edited or removed.",
+  "window": {
+    "path": "docs/migration/lot3f-evidence/performance/window.json",
+    "bytes": 10162,
+    "sha256": "873d420443bfe9a5d69fc3ea70bd29541243226b68227fd5d25400c0dd168ff9"
+  },
+  "logs": [
+    {
+      "series": "A1",
+      "original": {
+        "path": "docs/migration/lot3f-evidence/performance/cohort1/baseline.log",
+        "bytes": 1569,
+        "sha256": "bc0669f16e8008bae8bffc25c0c9f747a466642301e0e6d75f622f0c36b8b6b7"
+      },
+      "transport": {
+        "path": "docs/migration/lot3f-evidence/performance/cohort1/baseline.log.gz",
+        "bytes": 439,
+        "sha256": "d1fdc0a1b264a2dc3c958419e2d0bbd83da02b83a52ab213c6ab569178b19f24"
+      },
+      "decodedBytesIdentical": true,
+      "originalUnchanged": true,
+      "gzipMtime": 0
+    },
+    {
+      "series": "B1",
+      "original": {
+        "path": "docs/migration/lot3f-evidence/performance/cohort1/after.log",
+        "bytes": 1559,
+        "sha256": "9e7cce9f90551662e2d63b0d78245dbb96f85d441953a769c89eb201a81ba5a9"
+      },
+      "transport": {
+        "path": "docs/migration/lot3f-evidence/performance/cohort1/after.log.gz",
+        "bytes": 436,
+        "sha256": "8fff99794e0b86320a03026dba767cc2052227b69c864ba588d126249d64dc15"
+      },
+      "decodedBytesIdentical": true,
+      "originalUnchanged": true,
+      "gzipMtime": 0
+    },
+    {
+      "series": "B2",
+      "original": {
+        "path": "docs/migration/lot3f-evidence/performance/cohort2/after.log",
+        "bytes": 1560,
+        "sha256": "f578107754663dc1d73c13c889e2202f3fcdd4248f84d85dd34ebdadd593b6bd"
+      },
+      "transport": {
+        "path": "docs/migration/lot3f-evidence/performance/cohort2/after.log.gz",
+        "bytes": 432,
+        "sha256": "df6a0152090096d9b289e4a4ede1271877db143f287f4c839811b850847a67ce"
+      },
+      "decodedBytesIdentical": true,
+      "originalUnchanged": true,
+      "gzipMtime": 0
+    },
+    {
+      "series": "A2",
+      "original": {
+        "path": "docs/migration/lot3f-evidence/performance/cohort2/baseline.log",
+        "bytes": 1550,
+        "sha256": "aa0366ec88a5931f06d515f69d729f0f7516cbaf07d296e44ff8d43dc1d629a6"
+      },
+      "transport": {
+        "path": "docs/migration/lot3f-evidence/performance/cohort2/baseline.log.gz",
+        "bytes": 429,
+        "sha256": "2c07cd91cdef3341ce6b3f89287083b9be0afe1bf7b05b0ebe55ed8bc70984e6"
+      },
+      "decodedBytesIdentical": true,
+      "originalUnchanged": true,
+      "gzipMtime": 0
+    }
+  ],
+  "count": 4,
+  "qualification": "Lossless transport only, no new timing, filtering, summarization or alteration of the original logs. No benchmark, runtime or game is run by this step."
+}

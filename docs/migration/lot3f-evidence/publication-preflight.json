@@ -1,0 +1,80 @@
+{
+  "schema": "logos-engine.lot3f.publication-inputs.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T14:20:04.190900+00:00",
+  "generator": {
+    "path": "docs/migration/lot3f-evidence/verify-publication-inputs.py",
+    "bytes": 4029,
+    "sha256": "4bddad0c99cebddbb234bc40ae7019f38c2fab6058aa9deba082808e5441a126"
+  },
+  "nativeDigest": "54d8742300a04dcdf0cb1b038bc62b947d4a1c60f70da4ee80e6971b0f021165",
+  "checkedInventories": {
+    "native": 263,
+    "sourceAndTests": 595,
+    "buildInputs": 328
+  },
+  "globalCostAccepted": true,
+  "inputs": [
+    {
+      "path": "docs/migration/lot3f-evidence/final/source-manifest.json",
+      "bytes": 31155,
+      "sha256": "62e0566b67f867107aa06d64852e6c2051b9636df3844e8bf79ac3885bff7966"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/validation/delta-tests-run.json",
+      "bytes": 109242,
+      "sha256": "04e955b740d3f506ccd30c61f95ee18a50cb2c81beba1c80a72de1ccd5f7f682"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/validation/checks-run.json",
+      "bytes": 72845,
+      "sha256": "e9dfbcbfff0184bf831bca0327e18bcc5ce2db4b8f3b39fd7bd0e212c7522964"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/regressions/regression-summary.json",
+      "bytes": 84229,
+      "sha256": "36e6e53fc78a7f240c9d9a161efd42562ab172549877e1e44175f03d7eea353f"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/browser/browser-qa.json",
+      "bytes": 2815,
+      "sha256": "36e24c00efc45271daf7662795580d074879e1e5330ae4249ec11d801936de09"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/vois-resolution.json",
+      "bytes": 5162,
+      "sha256": "d3104de3d08221ac9e1663945a46c951df4e4c4d9f43ab914e41552138ee69fa"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/final/delivery-integrity.json",
+      "bytes": 7629,
+      "sha256": "b0d1fea6100538f10d6b57d76751340129834a76a5e997f4134f1d1aa7fa9c5c"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/readiness.json",
+      "bytes": 5964,
+      "sha256": "0fd41cc3e3b76914207809bd5912d518081fbdaab2f1b8ee9919c60664b49793"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/window.json",
+      "bytes": 10162,
+      "sha256": "873d420443bfe9a5d69fc3ea70bd29541243226b68227fd5d25400c0dd168ff9"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/global-budget-decision.json",
+      "bytes": 29199,
+      "sha256": "a4b5da6d18acb8fc8ce61e388d5b518cc50d79cc7bc6d2ebf5f03b737129570e"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/consolidation-review.json",
+      "bytes": 43682,
+      "sha256": "185c32ae0eeeb906489534aa38ed6f9cb37b2a5e0bf6ffb527501696fd7da3e4"
+    },
+    {
+      "path": "docs/migration/lot3f-evidence/performance/results.md",
+      "bytes": 29925,
+      "sha256": "3747ab7a933c3a1e73ef57a6d58b0c97dc9bba5773708cf66750a599c04344af"
+    }
+  ],
+  "qualification": "Final retained-input check after completed timing. No source, test, build, game or cost result is regenerated. ReferencePopulation meets the announced three-level VOIS target. Partial inherited-caller scope, incomplete retained-frame revalidation, missing control revocation and unknown color law remain explicit. Prior CWSE/SK48/FOGW clocks are unchanged. Cost acceptance is reported independently; this check cannot override it."
+}

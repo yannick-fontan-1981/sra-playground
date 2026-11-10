@@ -250,3 +250,15 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 
 # Exact pre-freeze audit output is preserved in deterministic gzip.
 /docs/migration/lot3e-evidence/diagnostic/pre-freeze-migration-audit.json
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot3f-evidence/final/regressions/catr-046-replay.json.gz
+/docs/migration/lot3f-evidence/final/regressions/fogw-046-replay.json.gz
+/docs/migration/lot3f-evidence/final/regressions/rswp-046-replay.json.gz
+/docs/migration/lot3f-evidence/final/vois-population-session/vois-campaign.json.gz
+
+# Lot3F frozen native archive retained as exact checked byte parts
+/docs/migration/lot3f-evidence/final/source-archive.tar.gz
+
+# Exact large contribution JSON retained as deterministic gzip
+/docs/migration/lot3f-evidence/final/vois-population-session/reference-population-contribution.json

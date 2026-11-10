@@ -1,0 +1,9 @@
+{
+  "schema": "logos-engine.launch-preparation-error.v1",
+  "recordedAt": "2026-11-10T13:52:35.837560+00:00",
+  "game": "VOIS",
+  "error": "Preparation used baseline checkout as cwd instead of candidate root, then bounded runner found no source-manifest. Both FileNotFoundError occurred before game-host creation.",
+  "gameActionsExecuted": 0,
+  "accounting": "The cumulative case clock conservatively starts at the last completed build receipt, before the failed preparation. No reset or exclusion of preparation time.",
+  "correctiveAction": "Use explicit candidate and baseline roots; prepare manifests before separately launching the bounded host."
+}
