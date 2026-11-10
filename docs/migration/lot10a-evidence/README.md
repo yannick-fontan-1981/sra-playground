@@ -70,12 +70,15 @@ Cette réduction d’allocations ne constitue pas une mesure de durée.
 ## Préparation des contrôles finaux
 
 - [Périmètre fonctionnel et rejeux](validation-and-regression-plan.md),
-  [revue des runners](validation-runner-source-review.md).
+  [revue des runners](validation-runner-source-review.md),
+  [checklist des prédécesseurs préparés](upcoming-predecessor-merge-review.md).
 - [Commandes de coût](README-commands.md),
   [préparation des déclarations](README-preparation.md).
 - [Finalisation de la readiness](README-readiness.md),
   [revue indépendante du lecteur](readiness-source-review.md). Sa préparation
-  et sa revue textuelle ne constituent pas une readiness exécutée.
+  et sa revue textuelle ne constituent pas une readiness exécutée. Le
+  [contrôle AST et aide CLI](diagnostic/readiness-helper-validation.json) passe
+  sur les octets inchangés ; il n’exécute pas la finalisation sur les preuves.
 - [Revue des analyseurs de coût](cost-tool-source-review.md),
   [revue des finaliseurs](cost-preparation-source-review.md),
   [contrôle syntaxique borné](diagnostic/cost-preparation-syntax.json).

@@ -11,18 +11,21 @@
     "tests/v6-learned-preparation-priority.test.ts",
     "tests/v6-relative-arrangements-reference.test.ts",
     "tests/v6-relative-arrangements-integration.test.ts",
+    "tests/v6-coupled-pair-planning.test.ts",
     "tests/v6-symbol-transactions-reference.test.ts",
-    "tests/v6-symbol-transactions-kernel.test.ts"
+    "tests/v6-symbol-transactions-kernel.test.ts",
+    "tests/v6-symbol-geometry-reference.test.ts",
+    "tests/v6-symbol-interface-reference.test.ts"
   ],
   "predecessorTestFileCounts": {
     "5A": 6,
-    "4B": 3,
-    "7B": 2
+    "4B": 4,
+    "7B": 4
   },
   "baseScope": "docs/migration/lot10a-evidence/validation-test-scope.json",
   "baseTestFileCountAtPreparation": 31,
-  "extraTestFileCount": 11,
+  "extraTestFileCount": 14,
   "duplicateExtraTestFiles": [],
   "overlapWithBaseScope": [],
-  "qualification": "Provisional explicit additions for the eventual integration of the actually published 5A, 4B and 7B predecessors. All eleven filenames were verified by read-only listing in their respective workspaces, with no duplicate or overlap against the current 31-file base scope. This declares neither the final integrated source nor executed validation evidence. Root must reconcile these paths with the actual published commits before supplying this manifest to the final frozen run."
+  "qualification": "Provisional explicit additions for eventual integration of actually published 5A, 4B and 7B. The initial 11-file declaration was expanded by source review of prepared 4B 7d44dbff8ad70c4c34845c246c77cfecf4e451db and 7B b2593ddd34e547bcf28962e135433a1ccdf39d5f: CoupledPair exhaustive registry assertion plus Symbols geometry and interface source contracts. Fourteen filenames are declared with no duplicate or overlap against the 31-file base, giving 45 files. This does not establish final integrated source identity or executed validation. Reconcile all paths and relevant changes with actual published commits before final frozen use."
 }
