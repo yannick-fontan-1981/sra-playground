@@ -1,0 +1,166 @@
+{
+  "schema": "logos-engine.lot5a-publication-source-transport.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T22:12:55.467117+00:00",
+  "publishedPredecessor": {
+    "siteVersion": 83,
+    "commit": "bed48116585da864dd5c412ed11dd6990a950e8e"
+  },
+  "originalRetainedTarget": "33d91ef1b8a6343c554b5c18beacd051816e11b9",
+  "initialPlan": "transport/lot5a-bounded-source-plan.json",
+  "successfulInitialSteps": [
+    {
+      "step": 1,
+      "recordedAt": "2026-11-10T21:54:55.161Z",
+      "planned": {
+        "step": 1,
+        "kind": "complete_source",
+        "previousCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+        "commit": "0ab6fdda85811eeff28bfbae38a6f1bab7fd5dbb",
+        "tree": "9173b32b5b3f994feab641437c80fa78ab0d9b39",
+        "rawMissingObjectBytes": 9900078
+      },
+      "source": {
+        "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+        "checkout_path": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+        "commit_sha": "0ab6fdda85811eeff28bfbae38a6f1bab7fd5dbb",
+        "archive": "/workspace/sites/sra-lot5-20261110/lot5a-transport-step-1.tar.gz"
+      }
+    },
+    {
+      "step": 2,
+      "startedAt": "2026-11-10T21:55:21.819Z",
+      "finishedAt": "2026-11-10T21:55:37.026Z",
+      "planned": {
+        "step": 2,
+        "kind": "evidence",
+        "previousCommit": "0ab6fdda85811eeff28bfbae38a6f1bab7fd5dbb",
+        "commit": "70bebab972a59d4bb5d60b6c6278576a767fd61d",
+        "tree": "b505cf87669ab6e6322ed33cd64bfb3d34ea1827",
+        "rawMissingObjectBytes": 40583412
+      },
+      "source": {
+        "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+        "checkout_path": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+        "commit_sha": "70bebab972a59d4bb5d60b6c6278576a767fd61d",
+        "archive": "/workspace/sites/sra-lot5-20261110/lot5a-transport-step-2.tar.gz"
+      }
+    },
+    {
+      "step": 3,
+      "startedAt": "2026-11-10T21:55:38.168Z",
+      "finishedAt": "2026-11-10T21:55:50.839Z",
+      "planned": {
+        "step": 3,
+        "kind": "evidence",
+        "previousCommit": "70bebab972a59d4bb5d60b6c6278576a767fd61d",
+        "commit": "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+        "tree": "9f8719e758cbac92810ac72a743dfb6bb5c4c787",
+        "rawMissingObjectBytes": 29744913
+      },
+      "source": {
+        "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+        "checkout_path": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+        "commit_sha": "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+        "archive": "/workspace/sites/sra-lot5-20261110/lot5a-transport-step-3.tar.gz"
+      }
+    }
+  ],
+  "retainedFailure": "transport/lot5a-transport-step-4-failure.json",
+  "reconstruction": "transport/reconstruction.json",
+  "repairedSourceTree": "transport/source-tree-reconciliation.json",
+  "repairedPlan": "transport/lot5a-bounded-source-plan-v3.json",
+  "successfulRecoverySteps": [
+    {
+      "step": 1,
+      "startedAt": "2026-11-10T22:09:50.062Z",
+      "finishedAt": "2026-11-10T22:10:06.717Z",
+      "planned": {
+        "step": 1,
+        "kind": "complete_source",
+        "previousCommit": "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+        "commit": "842e8f5da4a3230900a5d4f1cec4dff5fcb6ace8",
+        "tree": "7151f8bddebc7e40c68e11a024ef3d44ed64d41f",
+        "rawMissingObjectBytes": 535597
+      },
+      "source": {
+        "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+        "checkout_path": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+        "commit_sha": "842e8f5da4a3230900a5d4f1cec4dff5fcb6ace8",
+        "archive": "/workspace/sites/sra-lot5-20261110/lot5a-recovery-step-1.tar.gz"
+      }
+    },
+    {
+      "step": 2,
+      "startedAt": "2026-11-10T22:10:10.983Z",
+      "finishedAt": "2026-11-10T22:10:23.450Z",
+      "planned": {
+        "step": 2,
+        "kind": "evidence",
+        "previousCommit": "842e8f5da4a3230900a5d4f1cec4dff5fcb6ace8",
+        "commit": "83de3943d5942350a6a54b9dc4c508e5b6745b78",
+        "tree": "c892d20f24716d4554729b70e1fca759087972ce",
+        "rawMissingObjectBytes": 40227048
+      },
+      "source": {
+        "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+        "checkout_path": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+        "commit_sha": "83de3943d5942350a6a54b9dc4c508e5b6745b78",
+        "archive": "/workspace/sites/sra-lot5-20261110/lot5a-recovery-step-2.tar.gz"
+      }
+    },
+    {
+      "step": 3,
+      "startedAt": "2026-11-10T22:10:27.617Z",
+      "finishedAt": "2026-11-10T22:10:47.719Z",
+      "planned": {
+        "step": 3,
+        "kind": "evidence",
+        "previousCommit": "83de3943d5942350a6a54b9dc4c508e5b6745b78",
+        "commit": "dd7cb29e7bd88d7dfe57042f666b3008e3b6c96e",
+        "tree": "f4ccc15b007cb693f6497930fb4e68ef669786bb",
+        "rawMissingObjectBytes": 8672711
+      },
+      "source": {
+        "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+        "checkout_path": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+        "commit_sha": "dd7cb29e7bd88d7dfe57042f666b3008e3b6c96e",
+        "archive": "/workspace/sites/sra-lot5-20261110/lot5a-recovery-step-3.tar.gz"
+      }
+    },
+    {
+      "step": 4,
+      "startedAt": "2026-11-10T22:10:51.925Z",
+      "finishedAt": "2026-11-10T22:11:08.963Z",
+      "planned": {
+        "step": 4,
+        "kind": "final_history_merge",
+        "previousCommit": "dd7cb29e7bd88d7dfe57042f666b3008e3b6c96e",
+        "commit": "51e2813dedb2d71001290f94f100605e0327ead3",
+        "tree": "f4ccc15b007cb693f6497930fb4e68ef669786bb",
+        "rawMissingObjectBytes": 211417
+      },
+      "source": {
+        "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+        "checkout_path": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+        "commit_sha": "51e2813dedb2d71001290f94f100605e0327ead3",
+        "archive": "/workspace/sites/sra-lot5-20261110/lot5a-recovery-step-4.tar.gz"
+      }
+    }
+  ],
+  "finalPushedCommit": "51e2813dedb2d71001290f94f100605e0327ead3",
+  "finalTree": "f4ccc15b007cb693f6497930fb4e68ef669786bb",
+  "finalTreeExactlyEqualsRepairedTarget": true,
+  "originalTargetRecoverableFromBundle": true,
+  "allOriginalPlanCommitsRecoverable": true,
+  "allPublishedSourceHistoryRetained": true,
+  "forcePush": false,
+  "intermediateSitePublications": 0,
+  "perObjectLimitBytes": 33554432,
+  "perStepRawObjectLimitBytes": 41943040,
+  "maximumNewObjectBytes": 3988757,
+  "maximumRecoveryStepRawBytes": 40227048,
+  "compiledArchiveFileIntegrity": "transport/lot5a-pushed-archive-integrity.json",
+  "firstPublication": "publication-site84.json",
+  "qualification": "Original33d91 and initial failed/not-executed plan commits are archived losslessly in an incremental Git bundle, not attached as ancestry to the published commit. Native history throughbc199 and all already-pushed source ancestors remain actual parents. Only evidence transport representation changed; no cost or executable inputs changed."
+}
