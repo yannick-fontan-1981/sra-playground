@@ -16,6 +16,9 @@ Every step counts ALL objects newly reachable from ALL of its parents, against
 the previous planned remote commit, using rev-list and cat-file object sizes.
 40 MiB of raw object contents is a bound with headroom below the observed
 64 MiB server limit; it is not a measurement or guarantee of wire pack size.
+The backend also rejects individual objects of 32 MiB or more. The complete
+new target/history object inventory is checked before creating any commit;
+splitting pushes cannot make such an object admissible.
 Large proof blobs are deferred, while all other target paths are complete in
 the first step. The final tree is exactly the original HEAD tree, and the
 original HEAD is a direct parent of the final transport commit.
@@ -40,6 +43,7 @@ EVIDENCE = b'docs/migration/lot10a-evidence/'
 DEFAULT_WINDOW = ROOT / 'docs/migration/lot10a-evidence/performance-integrated/window.json'
 RAW_LIMIT = 40 * 1024 * 1024
 SERVER_LIMIT = 64 * 1024 * 1024
+INDIVIDUAL_OBJECT_LIMIT = 32 * 1024 * 1024
 SCHEMA = 'logos-engine.bounded-source-push-plan.v2'
 REDIRECT_ENV = ('GIT_DIR', 'GIT_WORK_TREE', 'GIT_INDEX_FILE', 'GIT_COMMON_DIR',
                 'GIT_OBJECT_DIRECTORY', 'GIT_ALTERNATE_OBJECT_DIRECTORIES',
@@ -365,8 +369,16 @@ class Planner:
         required = self.missing(self.target, self.base)
         self.required_ids = {row['oid'] for row in required['objects']}
         self.plan['originalTargetMissingObjects'] = required
+        # prepare() completes before build() can call commit-tree. Check every
+        # newly reachable object, including retained ancestry and all types;
+        # an object exactly at the backend limit is already inadmissible.
+        backend_rejected = [row for row in required['objects'] if row['bytes'] >= INDIVIDUAL_OBJECT_LIMIT]
         oversized = [row for row in required['objects'] if row['bytes'] > self.args.max_missing_raw_bytes]
+        self.plan['backendRejectedIndividualObjects'] = backend_rejected
         self.plan['oversizedIndividualObjects'] = oversized
+        require(not backend_rejected,
+                'A new Git object is >= 32 MiB (33554432 bytes), the backend individual-object limit; '
+                'refusing before commit creation. No target bytes or history were removed.')
         require(not oversized, 'An individual missing Git object exceeds the raw limit; target/history cannot be silently split')
 
     def build(self, index):
@@ -448,6 +460,7 @@ def main():
             'generator': fingerprint(__file__), 'window': window_fp, 'checkout': str(ROOT),
             'output': str(output), 'requestedBase': args.base, 'requestedTarget': args.target,
             'perPushServerLimitBytes': SERVER_LIMIT, 'perStepRawObjectLimitBytes': args.max_missing_raw_bytes,
+            'individualObjectLimitBytes': INDIVIDUAL_OBJECT_LIMIT, 'individualObjectComparison': 'strictly_less_than',
             'bulkProofMinimumBytes': args.bulk_min_bytes, 'steps': [], 'createdCommitObjects': [],
             'pushesPerformed': 0, 'siteDeploymentsPerformed': 0, 'forcePush': False,
             'intermediateSiteDeployment': False, 'branchUpdatesPerformed': 0,
