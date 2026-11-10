@@ -294,3 +294,14 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot7a-evidence/final/regressions/fogw-049-replay.json.gz
 /docs/migration/lot7a-evidence/final/regressions/rswp-049-replay.json.gz
 /docs/migration/lot7a-evidence/final/regressions/vois-049-replay.json.gz
+/docs/migration/lot3i-evidence/final/source-archive.tar.gz
+!/docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-output.raw.log
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot3i-evidence/baseline/conn-native049/conn-campaign.json.gz
+/docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz
+/docs/migration/lot3i-evidence/final/regressions/catr-049-replay.json.gz
+/docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz
+/docs/migration/lot3i-evidence/final/regressions/rswp-049-replay.json.gz
+/docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz
+/docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz

@@ -1,0 +1,54 @@
+{
+  "schema": "logos-engine.lot3i.source-oracle-export.v1",
+  "recordedAt": "2026-11-10T14:48:34.077222-03:00",
+  "status": "passed",
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceFiles": {
+    "agents/yf_arc3_v6/laya_proto/common_repeated_lines.py": "fb91aa26449a1633a4fa23e7089d8e775645c2775b5c3be295e7c4bcf1ceaaca",
+    "agents/yf_arc3_v6/laya_proto/common_supported_lines.py": "bc1e5599ea5be873f16dd37570fa2e998ec29bcc670dc55433c50c45f8a60fcd",
+    "agents/yf_arc3_v6/laya_proto/common_crossed_prefix.py": "f5fc76010a642de99452efe409a85f968839b54bfc37adeefff66fed4e243a4f",
+    "agents/yf_arc3_v6/laya_proto/common_observed_compositions.py": "4f836b0c66c84805755533a194a58a05222c1bf8f7a656aa030cc1fe01811d5e",
+    "agents/yf_arc3_v6/laya_proto/common_cell_placement.py": "d3e1b74369272394c11fa582bc69485193183d24ecc7c86e4970d04ef7217f84",
+    "agents/yf_arc3_v6/laya_proto/cell_placement_access.py": "5fb8a4b0dbfd4b266e2d31d745d359bc4fe2d4ecfdd0941caf376e0704785fe2",
+    "agents/yf_arc3_v6/laya_proto/reference_population_access.py": "a11bddcadf9bc8c0e59060c59b4c98d62c11e418588f531a307dcc9406df76b2",
+    "agents/yf_arc3_v6/laya_proto/coupled_pair_access.py": "83eefd99a1f33123f7e99d40a066a811446d6da38358818c669fe9ac02460f0f",
+    "agents/yf_arc3_v6/laya_proto/geometric_observer.py": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac",
+    "agents/yf_arc3_v6/laya_proto/terminal_composition.py": "10ab6ba513d3cc0b4dbf96868d8c716eee449068dba3f2fcdf06d5b35566609e",
+    "agents/yf_arc3_v6/laya_proto/neutral_observer.py": "9b09085eb708c084d82682b13848666ef1ca5f3fc6c10861d96e139228af927a",
+    "agents/yf_arc3_v6/morphology_policy/strategy.py": "425aca6c30e7abb38a537dfcef38f92c418bc4dfa35201ae52dc42ba4390fa55",
+    "agents/yf_arc3_v6/morphology_policy/strategy.drm": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+  },
+  "generator": {
+    "path": "scripts/export-v6-recurrent-series-reference.py",
+    "bytes": 51565,
+    "sha256": "de5ab65f5f8c50d51977225f36c3bff686be62370d9bcefa55ddc964a3ca85c6"
+  },
+  "fixture": {
+    "path": "tests/fixtures/v6-recurrent-series-reference.json.gz",
+    "bytes": 94043,
+    "sha256": "ba0bfdcacea2fc07cdbf332838a14ee93b50b592585f94ff5a3f5d3fabd0f3f5"
+  },
+  "counts": {
+    "fieldCases": 19,
+    "pointedCases": 7,
+    "extensionCases": 12,
+    "layoutCases": 4,
+    "helperCases": 26,
+    "accessCases": 52,
+    "guardCases": 50,
+    "recordCases": 19,
+    "packetCases": 8,
+    "eventCases": 13,
+    "restoreCases": 12,
+    "adapterCases": 34,
+    "chains": 1,
+    "sourceDivergences": 8
+  },
+  "sourceErrors": 28,
+  "originalFilesVerifiedBefore": 1786,
+  "originalFilesVerifiedAfter": 1786,
+  "gameExecutions": 0,
+  "gameEngineOrSpecificationReads": 0,
+  "nativeModuleExecutions": 0,
+  "qualification": "Separate case groups, not a summed native test suite. Original source exceptions retained. Actual descendant adapter scope remains separately qualified."
+}

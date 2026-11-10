@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.report-renderer-preparation-correction.v1",
+  "recordedAt": "2026-11-10T15:56:12.403533-03:00",
+  "observedError": "KeyError: 'historicalPhaseRule'",
+  "observedFrom": "tool output of the first report-render command after the completed official window",
+  "originalRenderer": {
+    "path": "docs/migration/lot3i-evidence/diagnostic/write-cost-results-before-field-fix.py",
+    "bytes": 30918,
+    "sha256": "0a1fbedb2d0c37b2df0a3e2e763a19e69f8e9a262e5280218f65398c1e131a5b"
+  },
+  "correctedRenderer": {
+    "path": "docs/migration/lot3i-evidence/write-cost-results.py",
+    "bytes": 30918,
+    "sha256": "f35db836512f2d50cf7d76ada3b8c53b60701f971edd258e428fd32695796bf7"
+  },
+  "actualDecisionField": "diagnosticPhaseRule",
+  "decision": {
+    "path": "docs/migration/lot3i-evidence/performance/global-budget-decision.json",
+    "bytes": 29231,
+    "sha256": "c4e8a58041581e8c4ee26dc9a09508ece031442d8d99591a641695bfec423dec"
+  },
+  "qualification": "The reporting script had used the field name of the older retrospective reviewer. The actual predeclared window reviewer returns diagnosticPhaseRule. Only this reporting-field lookup changes. All official tools, policies, sessions, measurements, comparisons and the accepted decision remain unchanged. No benchmark or arithmetic review is repeated."
+}

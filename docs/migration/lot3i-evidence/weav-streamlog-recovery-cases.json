@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "cases": [
+    {
+      "id": "weav-049-streamlog",
+      "game": "WEAV",
+      "baseline": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-campaign.json.gz",
+        "sha256": "74b5890967f4675e9005549692d744cb803acbc6c8dc627f4f23585582e4caa5"
+      },
+      "trace": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "qualification": "Fourth recorded replay on the unchanged frozen native0.50 and identical81-action public stream. Both earlier signal/heap failures and the incomplete third attempt are retained. The released-baseline Node host and frozen complete harness remain identical. Only the Python driver adds persistent raw output, an immutable started receipt, atomic current status, bounded progress forwarding and finally metadata. The historical17-check comparison remains unchanged and runs separately after Node exit. No game attempt, clock reset, cost measurement or native change."
+}

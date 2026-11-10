@@ -1,0 +1,39 @@
+{
+  "schema": "logos-engine.recurrent-series-validation-scope.v1",
+  "recordedAt": "2026-11-10T15:01:48.249103-03:00",
+  "nativeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+  "technicalScope": "Own RepeatedLine/SupportedLine observations, proposals, binding, guards, passive actual acquisition and stable packet order; single shared ancestor owner, cold reconstruction and source-order registration;19published0.49checkpoints.",
+  "integratedEvidence": {
+    "path": "docs/migration/lot3i-evidence/final/recurrent-series-common-loop.json.gz",
+    "bytes": 107316,
+    "sha256": "8b87e8412a77d1aa285775ef5599c0176db038f25a9a56db664fb332b1f295c8"
+  },
+  "integratedEvidenceKind": "two_cold_controlled_repeated_line_common_caller_sessions",
+  "gameContributionStatus": "repeated_and_supported_selected_own_trajectory_and_all_returns_verified_with_component_ablations",
+  "gameEvidence": {
+    "path": "docs/migration/lot3i-evidence/final/conn-resolution.json",
+    "bytes": 9586,
+    "sha256": "63a6aee4aaa332ac49a932d1e8d44dbbb39ad14e7abb1097a817e48c0f1bea71"
+  },
+  "gameComparison": {
+    "path": "docs/migration/lot3i-evidence/diagnostic/conn-public-parity.json",
+    "bytes": 224507,
+    "sha256": "30527c4edc4f49afa42be6e17b32a6fd7ae7b4532e25fdd1efce5125edd16ec2"
+  },
+  "retainedCaseClocks": {
+    "CWSE": 2399.683865,
+    "SK48": 667.35444,
+    "FOGW": 951.320275,
+    "VOIS": 1017.469531,
+    "WEAV": 1277.782615
+  },
+  "limits": [
+    "Full inherited original-caller parity remains partial.",
+    "Component ablations do not establish full-caller counterfactual success.",
+    "The source geometric prefilter is not deadline-preempted.",
+    "Native finite search may return blocking unknown at its work/deadline or exact-integer boundary; no incomplete action or causal refutation is acquired.",
+    "Own Python Unicode rejection-key ordering and historical shared UTF-16 ordering agree for produced ASCII trial digests; opaque artificial keys retain their separately qualified behavior.",
+    "Observed support, score and alternating response remain conditional hypotheses."
+  ],
+  "qualification": "Synthetic Repeated proof and actual CONN Repeated/Supported contribution are separate. All prior case clocks remain unchanged. CONN closes within its one cumulative2400second limit. The five recorded regressions and global cost decision have their own final receipts; cost acceptance is not anticipated here."
+}

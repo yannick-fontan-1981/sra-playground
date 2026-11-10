@@ -4,10 +4,10 @@
   "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
   "implementation": "logos-engine.typescript.v6.native-migration/0.50.0",
   "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
-  "connected": 54,
+  "connected": 55,
   "partiallyConnected": 0,
   "declared": 76,
-  "percent": 71.1,
+  "percent": 72.4,
   "groups": [
     {
       "id": "goal_access",
@@ -80,7 +80,7 @@
     {
       "id": "window_constraints",
       "declared": 21,
-      "connected": 19,
+      "connected": 20,
       "partiallyConnected": 0,
       "entries": [
         {
@@ -175,8 +175,8 @@
         },
         {
           "question": "recurrent_series",
-          "family": null,
-          "status": "pending"
+          "family": "public_occurrence_recall",
+          "status": "connected"
         },
         {
           "question": "periodic_sums",
@@ -469,6 +469,7 @@
         "public_occurrence_recall",
         "public_occurrence_recall",
         "window_constraints",
+        "public_occurrence_recall",
         "periodic_sums",
         "reflected_cover",
         "regular_field_correspondence"
@@ -491,6 +492,7 @@
         "framed_window_composition",
         "coupled_prefix_reference",
         null,
+        "recurrent_series",
         null,
         null,
         null
@@ -630,7 +632,7 @@
   ],
   "pendingSupportSubcompositions": [],
   "sharedSeriesMemory": "crossed_prefix_single_ancestor_owner_occurrence_recall_ancestors_observed_program_native_relations_typed_material_and_pose_radial_ports_field_service_rooted_quota_native_mark_support_framed_window_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_composition_exposed_reception_relational_chamber_panel_service_rooted_line_reception_service_and_reference_population; observed_composition_services 6/6 declared branches connected; inherited ObservedCompositionConstraint source closure remains partial",
-  "sharedSeriesDigestScope": "native_crossed_prefix_ancestor_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_framed_window_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_exposed_reception_relational_chamber_panel_service_rooted_line_reception_service_and_reference_population_six_observed_compositions_v6",
+  "sharedSeriesDigestScope": "native_recurrent_series_crossed_prefix_ancestor_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_framed_window_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_exposed_reception_relational_chamber_panel_service_rooted_line_reception_service_and_reference_population_six_observed_compositions_v6",
   "observedCompositionBranches": {
     "owner": "public_occurrence_recall",
     "status": "all_declared_branches_connected",

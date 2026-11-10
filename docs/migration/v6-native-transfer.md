@@ -11,7 +11,54 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-## Current transfer: lot 3H native 0.49.0, CrossedPrefix and acquired coupled choices
+## Current transfer: lot 3I native 0.50.0, RecurrentSeries and observed insertions
+
+Native **0.50.0** is frozen at **`e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87`**, with **270 native files and a 281-file archive**. The reference is **Site 78 / native 0.49.0**, commit **`8fa6b261b8b23ac8d232e60c9c179e2f3407d82f`**, native digest **`d6cb9abdf48a9062936d4647dbd809dc4cee1d1528f85e973fda83c7af8e6054`**, containing 268 native files. The [report](lot3i-recurrent-series.md), [lineage](lot3i-recurrent-series-lineage.md), [evidence index](lot3i-evidence/README.md), [native manifest](lot3i-evidence/final/source-manifest.json) and [published provenance](lot3i-evidence/baseline/provenance.json) identify this scope. **Lot 3I is closed within its announced scope, including cost.** Actual publication follows the documentation freeze and will be identified by Sites metadata.
+
+`recurrent_series` consumes both **RepeatedLinePatterns** and the real **SupportedLineAccess** fallback. RepeatedLine measures multiple current fields and offers a conditional extension, retaining the first confirmed trial's source question in insertion order. Official progress may acquire a scored witness. SupportedLine passively acquires a clean pair of observed insertions, obtains their stable final order from the complete public packet, and uses the source's conditional six-ply search only when the measured roles and insertion law are unique. A visually completed line without official progress can refute goal sufficiency in the current context. Geometry, palette roles and returns remain measured; no game identifier, fixed coordinate or prepared solution supplies production decisions.
+
+One common memory owner holds the six historical Repeated/Supported projections. Their two digest positions remain at the beginning of the inherited chain, before CrossedPrefix and descendants; no duplicate final layer is appended. Mixed-envelope `record` calls consume the common dynamic `after` guard. Their acquisition precedes CrossedPrefix and respects the ancestral RootedQuota cutoff, while packet acquisition retains its independent source position. Own guards, current command availability, point authority and common WHY/ACT checks remain separate obligations. Cold restoration verifies the journal and digest before replacing the owner. Legacy opaque fragments do not gain invented planning evidence.
+
+The [declared affected validation](lot3i-evidence/final/validation/delta-tests-run.json) passes **3,225/3,225 tests in 76 files**, without failures, cancellations, skipped tests or TODOs and with native/source/test inputs unchanged. All [5/5 project checks, including compilation](lot3i-evidence/final/validation/checks-run.json), pass, qualified by the [separate migration-audit resolution](lot3i-evidence/final/validation/migration-audit-resolution.json). The first audit ran before lineage completion and retained two missing-proof references; its log is preserved, and the resolution has no audit failures. The independent oracle verifies all **1,786 original files** before and after execution. This affected scope is distinct from the entire historical repository suite.
+
+The [integrated common-loop proof](lot3i-evidence/final/recurrent-series-common-loop.json.gz) verifies **18 check groups in two cold controlled synthetic sessions**, covering matched and refuted RepeatedLine trials. It preserves ordinary competition and source declarations through current binding, WHY/ACT, actual returned-command acquisition, Kernel persistence, cold reconstruction and subsequent choice. Two component ablations remove only an already acquired own trial and change the next action or refusal. These synthetic sessions execute no game and do not force Supported's passive clicks into the caller. The [integration scope](lot3i-evidence/final/recurrent-series-validation-scope.json) also preserves **19 actual published native 0.49 checkpoints** and their historical digest slots.
+
+**CONN reaches three natural levels in one cold common session: 21 actions, 21 prefixes, arrival at level 4.** The [resolution](lot3i-evidence/final/conn-resolution.json) records `target_levels_completed` with `NOT_FINISHED`, meeting the three-level target without claiming completion of the entire game. The bounded fresh 0.49 reference stops at its declared eight-action cap with zero levels and seven prefixes; this does not establish complete-game inability.
+
+The [independent cold source/native comparison](lot3i-evidence/diagnostic/conn-public-parity.json) passes **1,361 checks**: **14 selected own prefixes** (five Repeated and nine Supported), **all 21 actual returns**, **34 own events** and **35 restorations**. Neither lane is primed from captured proposal memory. The seven other commands remain common-caller choices, with every actual return presented to the relevant acquisition layers. All **84 component ablations** execute: **33 action/refusal changes and 51 negative or unchanged outcomes**; the **35 decision-projection changes** are a separate count. Only earlier acquired events are removed. Selected own-trajectory and all-return own acquisition parity are verified; **full inherited-caller parity and full-caller counterfactuals remain outside this proof**.
+
+The [browser receipt](lot3i-evidence/final/browser/browser-qa.json) confirms **21 actions / three levels / 21 plans** in a separate continuous cold session, after Pause at one action, one isolated action and resumed natural progression. No manual game action, level jump or injected knowledge supplies the result. The [final screenshot](lot3i-evidence/final/browser/conn-browser-final.png) and [accessible state](lot3i-evidence/final/browser/conn-browser-final.txt) retain the final counters; the earlier nineteen-action capture remains intermediate.
+
+CONN's case clock closes at **1,014.763812 cumulative seconds**, with **1,385.236188 seconds remaining** in the 2,400-second envelope. It includes the initial scan, reference, candidate, comparisons, ablations, browser QA and case review, without pause or reset. Future CONN diagnosis must resume this value. Prior clocks remain **CWSE 2,399.683865 s; SK48 667.35444 s; FOGW 951.320275 s; VOIS 1,017.469531 s; WEAV 1,277.782615 s**. Release regressions, transport, documentation, integrity and STCK/SMLP costs are separate release work.
+
+**All five recorded regressions pass: 5/5 cases and 85/85 checks**, preserving **240 commands, 169 prefixes, 245 complete public packets and fifteen natural boundaries**. The [consolidated summary](lot3i-evidence/final/regressions/regression-summary.json) reuses the first four CATR/RSWP/FOGW/VOIS passes unchanged and adds WEAV's **81 commands, 81 prefixes and 17/17 checks**. The historical comparator covers seventeen declared projections per game, not every provider payload, graph identity or full inherited source-caller behavior. Recorded-return regression is separate from new live success or a speed measurement.
+
+The [WEAV recovery receipt](lot3i-evidence/regression-recovery.json) preserves three incomplete invocations: SIGKILL after 67 logged actions with an unestablished cause; explicit 768 MiB heap exhaustion; and an unavailable process handle without a retained final status or report, also of unestablished cause. The [fourth execution](lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-execution.json) completes with exit zero and all seventeen original comparisons. Its host releases the full historical baseline before the unchanged native harness starts; the driver persists raw output and process observations while running, and the unchanged comparator runs after native exit. Native code, tests, harness assertions, public returns, expected commands and tolerances remain unchanged. The 1,536 MiB replay heap cap does not apply to official costs. No case clock restarts and no production memory leak is inferred from the earlier instrumented failures.
+
+The [delivery integrity receipt](lot3i-evidence/final/delivery-integrity.json) verifies **270 native files, 281 archive files, 619 source/test inputs, 335 build inputs and 22 regression execution inputs**, with **1,786 originals unchanged**. **Six reports totaling 32,899,809 bytes are reconstructed exactly from forty parts**. The complete recovered WEAV report retains **10,802,096 gzip bytes**, SHA-256 `1943593c0961d8b49d059e34d58dd96269926ab8a24b5fc294c6bbc516cd8985`, in [thirteen exact parts](lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.parts.json). Integrity and transport do not imply publication or cost acceptance.
+
+Coverage for this freeze is **54/76 complete declared entries, zero partial entries and 22 entries remaining**, with **6/6 observed-composition branches** and **37 compiled workflows**. The resolved migration audit records **163 component-verified modules, 141 partial transfers, 1,065 pending and zero fully verified modules**. All six full-migration gates and `fullV6Parity` remain false. Lot 3 has **zero remaining registry entries**, while its functional reservations and full inherited scope remain open.
+
+Native finite bounds remain explicit. Supported search has a **250,000-node cap** and the common deadline; work, time or exact-integer exhaustion returns blocking `unknown` without an incomplete action or an acquired physical impossibility. The geometric prefilter is not internally deadline-preempted and has no complete-question or Pause latency guarantee. Own memory uses Python Unicode codepoint ordering, while shared checkpoints retain historical UTF-16 ordering. Produced ASCII hexadecimal trial identifiers agree under both orders; artificial opaque BMP/non-BMP keys retain separate compatibility qualifications. Own atomic event validation does not promise rollback of an arbitrary later exception in another common layer. Observed support, progress and alternating responses remain conditional evidence. Complete source caller scope, including descendant events such as CoupledPair anchors, remains partial.
+
+<!-- LOT3I_COST_FINAL_START -->
+**Official global cost 0.50 is accepted on 2/2 games**, according to the [final decision](lot3i-evidence/performance/global-budget-decision.json), against freshly measured Site 78 / native 0.49:
+
+| Game | Fresh 0.49 complete-session median | 0.50 complete-session median | Global change |
+| --- | ---: | ---: | ---: |
+| STCK | 11,041.932350 ms | 10,885.015557 ms | **−1.421099%** |
+| SMLP | 17,831.7418305 ms | 18,222.719469 ms | **+2.192594%** |
+
+The [completed window](lot3i-evidence/performance/window.json) retains **A1/B1/B2/A2, 32 measured sessions and 400 actions**, without excluding a measured session or outlier. Only **eight predeclared warmups, totaling 24 actions**, are excluded. Each game's pooled median of eight complete sessions per version stays **strictly below +10%**. There is no cross-game compensation, sum of nested phase medians or average of cohort ratios.
+
+The [aggregate](lot3i-evidence/performance/combined-comparison.json) passes **16/16 criteria** and the [independent arithmetic review](lot3i-evidence/performance/consolidation-review.json) **231/231 checks**. Cohorts remain **16/16 and 9/16**. The second cohort's **STCK global increase of +11.480161%** remains fully included in the predeclared pooled decision. Aggregate STCK p95 increases remain **guard 0.384598 → 1.172827 ms (+204.948804%)**, **persistence 348.460772 → 385.246448 ms (+10.556619%)**, and **restoration 50.753334 → 66.683994 ms (+31.388401%)**. All diagnostics, distributions and unfavorable results remain in the [cost report](lot3i-evidence/performance/results.md).
+
+**Lot 3I is closed within its announced functional, contribution, integrity and cost scope.** This matched common-loop replay result does not guarantee live-game latency, every long session or complete inherited-caller parity.
+<!-- LOT3I_COST_FINAL_END -->
+
+**Lot 3I's announced scope is closed; actual publication follows the documentation freeze.** The next independent entry is **`observed_feedback_sequence`**, followed by `relative_arrangement` and `facet_example` in lot 4. The separate **4A and 7A preparations will be integrated after 3I is actually published**; they add no delivered functionality or coverage to this frozen release. Lots 5–10 retain the other nineteen entries, and lot 11 retains consolidation beyond the registry. Prior FramedWindow game contribution, Population/Reception revalidation, RootedLine model limitations, prefilter latency and full inherited migration remain explicit follow-ups.
+
+## Historical transfer: lot 3H native 0.49.0, CrossedPrefix and acquired coupled choices
 
 Native **0.49.0** is frozen at **`d6cb9abdf48a9062936d4647dbd809dc4cee1d1528f85e973fda83c7af8e6054`**, with **268 native files and a 279-file archive**, against **Site 76 / native 0.48**, commit `fbbc3fb6b796c0ba359654da7234008767090e1f`. The [report](lot3h-crossed-prefix.md), [lineage](lot3h-crossed-prefix-lineage.md) and [scope](lot3h-evidence/final/crossed-prefix-validation-scope.json) identify the own-layer transfer and qualifications.
 
@@ -1754,6 +1801,39 @@ modules and therefore exceeds the minimum semantic dependency closure. This
 upper bound must be refined through documented dependency analysis, not by
 silently dropping unimplemented capabilities.
 
+### Current frozen inventory: native 0.50.0
+
+The [resolved 0.50 audit](lot3i-evidence/final/validation/migration-audit-resolution.json),
+[entry register](v6-entry-point-progress.json) and
+[delivery integrity receipt](lot3i-evidence/final/delivery-integrity.json) retain
+different coverage scopes:
+
+| Scope | Current frozen result |
+| --- | --- |
+| Complete declared DRM entries | **54/76**, with **zero partial entries** |
+| Remaining declared entries | **22**, in lots 4–10: 3 + 3 + 4 + 2 + 2 + 3 + 5 |
+| Lot 3 registry entries still open | **0**; functional and inherited-caller reservations remain |
+| Observed-composition branches | **6/6** |
+| Compiled workflows | **37**, distinct from verified consumption |
+| Component-verified modules | **163** |
+| Partially transferred modules | **141** |
+| Pending modules | **1,065** |
+| Fully verified modules | **0** |
+| Full-migration gates | **All six false**, with `fullV6Parity` false |
+
+The current delivery has passed **3,225 tests in 76 files**, all five project
+checks with the separate audit resolution, all **85 recorded regression
+checks**, CONN's declared three-level target, own contribution, browser controls
+and source/evidence integrity. Official global cost is accepted on both games:
+**STCK −1.421099%, SMLP +2.192594%**, aggregate **16/16** and independent review
+**231/231**, with cohort results **16/16 and 9/16** and all unfavorable tails
+retained. **Lot 3I is closed within its announced scope.** Actual publication
+follows the documentation freeze. Separate 4A/7A preparations are outside these
+counts and will be integrated after 3I's actual publication. No registry count
+proves complete inherited V5/V6 parity.
+
+### Historical v41 inventory and qualification
+
 The v41 inventory contains **89 component-verified modules, 61 partially
 transferred modules and 1,219 pending modules**, with zero modules marked
 fully verified. This adds three mapped Python sources: radial observation,
@@ -1813,17 +1893,23 @@ without making the migration complete.
 
 ## Remaining work before the target is met
 
-1. Transfer and verify the remaining V6 families and every inherited V5
-   primitive they call, retaining their original alternatives and ordering.
+1. Transfer and verify the **22 remaining declared V6 entries**, starting with
+   `observed_feedback_sequence`, then `relative_arrangement` and `facet_example`
+   in lot 4, together with every inherited V5 primitive they actually call.
+   Retain their original alternatives and ordering, and separately account
+   for common providers and paths outside the 76-entry registry.
 2. Complete the remaining common providers, including Morphology,
    `acquire_control_for_target` and `attention_parent_return`, while retaining
    original priorities.
-3. Complete the remaining ObservedCompositionConstraint providers and source
-   acquisitions, including `addressed_material_event`, `framed_transfer_event`
-   and `temporal_selection_state`. The v32 `repeated_series_state` includes the
-   occurrence-recall ancestry only; it is not the complete original shared
-   series memory. Preserve replay, counterexamples and cross-level reuse in the
-   same V7 graph.
+3. Complete the remaining inherited ObservedCompositionConstraint providers
+   and source acquisitions, including `addressed_material_event`,
+   `framed_transfer_event` and `temporal_selection_state`. All six declared
+   observed branches and the `recurrent_series` entry are connected at 0.50,
+   including their consumed RepeatedLine/SupportedLine layers. The historical
+   v32 `repeated_series_state` covered only occurrence-recall ancestry; the
+   subsequent own-layer transfers still do not establish the complete original
+   shared series memory. Preserve replay, counterexamples and cross-level reuse
+   in the same V7 graph.
 4. Extend the existing program/knowledge editing model and its provenance,
    scope, type and authorization checks to each newly transferred capability.
 5. Extend complete-caller differential campaigns over the entire available
@@ -1831,6 +1917,13 @@ without making the migration complete.
 6. Resolve or explicitly reproduce Python semantic domains used by those
    capabilities, including tuple/set structural equality and numeric identity.
    Current portable fixtures do not prove arbitrary Python integer/float parity.
+
+The next integration follows the actual publication of 3I. Preparations 4A and
+7A remain separate and are not counted as delivered functionality. Lot 3's
+zero open registry entries do not close CWSE/SK48, FramedWindow contribution,
+Population/Reception revalidation, prefilter timing or full inherited-caller
+reservations. The [roadmap](v6-delivery-roadmap.md) retains the exact lots 4–11
+and their dependencies.
 
 The completion criterion is functional coverage and comparison with the
 original agent, not a renamed prototype or a score claim. Reproducing all V6

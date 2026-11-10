@@ -1,0 +1,83 @@
+{
+  "schema": "logos-engine.browser-qa.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T15:01:48.249103-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "nativeVersion": "0.50.0",
+  "nativeSourceDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+  "game": "CONN",
+  "preview": "Managed Sites preview at http://127.0.0.1:4173/",
+  "continuousColdSession": true,
+  "manualGameActions": 0,
+  "levelJumps": 0,
+  "checks": [
+    {
+      "at": "2026-11-10T17:56:08.595Z",
+      "state": "Paused.",
+      "actions": 1,
+      "levels": 0,
+      "plans": 1
+    },
+    {
+      "at": "2026-11-10T17:56:47.129Z",
+      "state": "One action completed.",
+      "actions": 2,
+      "levels": 0,
+      "plans": 2
+    },
+    {
+      "at": "2026-11-10T17:57:39.876Z",
+      "state": "Level completed.",
+      "actions": 5,
+      "levels": 1,
+      "plans": 5
+    },
+    {
+      "at": "2026-11-10T17:58:55.546Z",
+      "state": "Level completed.",
+      "actions": 9,
+      "levels": 2,
+      "plans": 9
+    },
+    {
+      "state": "Level completed.",
+      "actions": 21,
+      "levels": 3,
+      "plans": 21
+    }
+  ],
+  "final": {
+    "actions": 21,
+    "levelsCompleted": 3,
+    "plans": 21,
+    "currentLevel": 4
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3i-evidence/final/browser/conn-browser-final.png",
+      "bytes": 68390,
+      "sha256": "5b1b89ff4aec11aef5be93f205a12820da1c9aace6a09aabd7aafc32d2fa4726"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/browser/conn-browser-final.txt",
+      "bytes": 10072,
+      "sha256": "64cb1afb5f07ce1cf3b64a0a3367d82ae0969d82cf735e0f9034cf9f3512bad6"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/browser/conn-browser-intermediate.png",
+      "bytes": 70848,
+      "sha256": "888471480f35ae55469a1356a565a868377d3cb989c12bd50c40fb2f47dc6205"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/browser/conn-browser-intermediate.txt",
+      "bytes": 10122,
+      "sha256": "5d8ac22373e13cac4779dbf01dbd260acfeeec42c0359c93c34f7a57ee7504ff"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/browser/conn-browser-observations.json",
+      "bytes": 5433,
+      "sha256": "c6ebc3539b6f094c307c4b076327c3efdd49dfa97159e120936c0cde4fa35861"
+    }
+  ],
+  "qualification": "Direct UI observations show Pause after one action, one additional isolated action, resumption and three natural level boundaries in one cold session. Final AX text and screenshot both show21actions/3levels/21plans. The earlier19-action capture is retained as intermediate, not final. No manual game action, level jump, seeded knowledge or new reasoning session was used."
+}

@@ -1,0 +1,38 @@
+{
+  "case": "weav-049",
+  "game": "WEAV",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-campaign.json.gz",
+    "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+    "docs/migration/lot3i-evidence/final/regressions/weav-049-replay.json.gz"
+  ],
+  "startedAt": "2026-11-10T17:58:49.362377+00:00",
+  "finishedAt": "2026-11-10T18:02:14.328247+00:00",
+  "elapsedSeconds": 204.96587783200084,
+  "exitCode": -9,
+  "timeoutSeconds": 2400,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-campaign.json.gz",
+    "sha256": "74b5890967f4675e9005549692d744cb803acbc6c8dc627f4f23585582e4caa5",
+    "bytes": 10800755
+  },
+  "trace": {
+    "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+    "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+    "bytes": 26568
+  },
+  "output": {
+    "path": "docs/migration/lot3i-evidence/final/regressions/weav-049-output.log.gz",
+    "sha256": "01b5a48c5481e64ca5be93d6fd53ecbc2101692a715c170799298db0845f7a2d",
+    "bytes": 8020
+  },
+  "passed": false,
+  "nativeSourceBeforeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+  "nativeSourceAfterDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true
+}

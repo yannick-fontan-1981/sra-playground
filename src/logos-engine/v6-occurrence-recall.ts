@@ -27,8 +27,25 @@ export interface OccurrenceRecallPolicy extends R {
 
 /** Exact retained ancestor event reducers; planning those providers is separate. */
 class SeriesEventMemory {
-  lineTrials: R = {}; lineGoals: R[] = [];
-  insertSamples: R[] = []; insertOrders: R = {}; insertRejections = new Set<string>(); insertRefutedEpochs = new Set<number>();
+  protected recurrentSeriesProjection: {
+    lineTrials: R; lineGoals: R[]; insertSamples: R[]; insertOrders: R;
+    insertRejections: Set<string>; insertRefutedEpochs: Set<number>;
+  } = { lineTrials: {}, lineGoals: [], insertSamples: [], insertOrders: {},
+    insertRejections: new Set(), insertRefutedEpochs: new Set() };
+  // Keep the historical public containers, while allowing the common caller
+  // to supply one authoritative owner for these same two ancestral slots.
+  get lineTrials(): R { return this.recurrentSeriesProjection.lineTrials; }
+  set lineTrials(value: R) { this.recurrentSeriesProjection.lineTrials = value; }
+  get lineGoals(): R[] { return this.recurrentSeriesProjection.lineGoals; }
+  set lineGoals(value: R[]) { this.recurrentSeriesProjection.lineGoals = value; }
+  get insertSamples(): R[] { return this.recurrentSeriesProjection.insertSamples; }
+  set insertSamples(value: R[]) { this.recurrentSeriesProjection.insertSamples = value; }
+  get insertOrders(): R { return this.recurrentSeriesProjection.insertOrders; }
+  set insertOrders(value: R) { this.recurrentSeriesProjection.insertOrders = value; }
+  get insertRejections(): Set<string> { return this.recurrentSeriesProjection.insertRejections; }
+  set insertRejections(value: Set<string>) { this.recurrentSeriesProjection.insertRejections = value; }
+  get insertRefutedEpochs(): Set<number> { return this.recurrentSeriesProjection.insertRefutedEpochs; }
+  set insertRefutedEpochs(value: Set<number>) { this.recurrentSeriesProjection.insertRefutedEpochs = value; }
   crossState: R | null = null; crossPairs: R[] = []; crossAxisInputs = new Map<number, Set<string>>([[0, new Set()], [1, new Set()]]); crossEvents: R[] = [];
   markedEvents: R[] = []; programEvents: R[] = [];
   programEditSamples: R[] = []; compositionModels: R[] = []; compositionContinuation: R | null = null;
@@ -37,11 +54,11 @@ class SeriesEventMemory {
 
   applyEvent(event: R): void {
     switch (event.kind) {
-      case 'repeated_line_trial': this.lineTrials[event.trial] = event; break;
-      case 'repeated_line_scored': this.lineGoals.push(event); break;
-      case 'supported_insertion_observation': this.insertSamples.push(event); break;
-      case 'supported_insertion_order': this.insertOrders[event.source] = event; break;
-      case 'supported_line_refutation': this.insertRejections.add(event.trial); this.insertRefutedEpochs.add(event.epoch); break;
+      case 'repeated_line_trial':
+      case 'repeated_line_scored':
+      case 'supported_insertion_observation':
+      case 'supported_insertion_order':
+      case 'supported_line_refutation': this.applyRecurrentSeriesEvent(event); break;
       case 'crossed_prefix_state':
       case 'crossed_prefix_pair':
       case 'crossed_prefix_input': this.applyCrossedPrefixEvent(event); break;
@@ -68,6 +85,19 @@ class SeriesEventMemory {
     }
   }
 
+  protected applyRecurrentSeriesEvent(event: R): void {
+    if (event.kind === 'repeated_line_trial') this.lineTrials[event.trial] = event;
+    else if (event.kind === 'repeated_line_scored') this.lineGoals.push(event);
+    else if (event.kind === 'supported_insertion_observation') this.insertSamples.push(event);
+    else if (event.kind === 'supported_insertion_order') this.insertOrders[event.source] = event;
+    else { this.insertRejections.add(event.trial); this.insertRefutedEpochs.add(event.epoch); }
+  }
+
+  protected recurrentSeriesDigest(): string {
+    return identity([identity([this.lineTrials, this.lineGoals]), this.insertSamples, this.insertOrders,
+      [...this.insertRejections].sort(), [...this.insertRefutedEpochs].sort((a, b) => a - b)]);
+  }
+
   /** The common caller can supply one authoritative owner at this same source
    * ancestry position. Standalone recall retains its historical reducers. */
   protected applyCrossedPrefixEvent(event: R): void {
@@ -87,8 +117,7 @@ class SeriesEventMemory {
   }
 
   retainedDigest(): string {
-    let digest = identity([this.lineTrials, this.lineGoals]);
-    digest = identity([digest, this.insertSamples, this.insertOrders, [...this.insertRejections].sort(), [...this.insertRefutedEpochs].sort((a, b) => a - b)]);
+    let digest = this.recurrentSeriesDigest();
     digest = this.crossedPrefixDigest(digest);
     digest = identity([digest, this.markedEvents, this.programEvents]);
     digest = programIdentity([digest, this.programEditSamples, this.compositionModels, this.compositionContinuation,

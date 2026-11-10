@@ -1,0 +1,42 @@
+{
+  "schema": "logos-engine.migration-audit-resolution.v1",
+  "recordedAt": "2026-11-10T14:53:22.993324-03:00",
+  "status": "passed",
+  "command": [
+    "python",
+    "-B",
+    "scripts/audit-v6-migration.py"
+  ],
+  "exitCode": 0,
+  "earlierAudit": {
+    "path": "docs/migration/lot3i-evidence/final/validation/migration-audit-output.log.gz",
+    "bytes": 268,
+    "sha256": "aba2d0a498863161e5fae3a7a683fad242316a41fcf5f00a002cd6e11a5d2a2f"
+  },
+  "resolution": "The first audit ran while the new lineage document was still being written and reported two missing-proof entries. The original log is preserved. This separate rerun verifies the completed document and all map evidence; no source or tests changed and no test/build was repeated.",
+  "audit": {
+    "complete": false,
+    "pythonModules": 1369,
+    "pythonLines": 320375,
+    "declaredClassesAndFunctions": 12857,
+    "dataFiles": 417,
+    "verifiedModules": 0,
+    "componentVerifiedModules": 163,
+    "partiallyTransferredModules": 141,
+    "transferredUnverifiedModules": 0,
+    "pendingModules": 1065,
+    "strategyFamilies": 16,
+    "failures": []
+  },
+  "output": {
+    "path": "docs/migration/lot3i-evidence/final/validation/migration-audit-resolution-output.log.gz",
+    "bytes": 207,
+    "sha256": "10c034cb93a0f863223322281b78e95d72c4e7473bbb0d23dddb40cb62c8979f"
+  },
+  "lineage": {
+    "path": "docs/migration/lot3i-recurrent-series-lineage.md",
+    "bytes": 22866,
+    "sha256": "d95656de7bf27dee695b6bd7e451b6ebfd8535095e95251a862b41feed156e51"
+  },
+  "nativeSourceDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87"
+}

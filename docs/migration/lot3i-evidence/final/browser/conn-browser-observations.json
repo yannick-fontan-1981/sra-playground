@@ -1,0 +1,35 @@
+{
+  "recordedAt": "2026-11-10T18:00:44.021Z",
+  "url": "http://127.0.0.1:4173/?game=CONN&level=4",
+  "steps": [
+    {
+      "at": "2026-11-10T17:56:08.595Z",
+      "state": "Paused.",
+      "actions": 1,
+      "levels": 0,
+      "plans": 1
+    },
+    {
+      "at": "2026-11-10T17:56:47.129Z",
+      "state": "One action completed.",
+      "actions": 2,
+      "levels": 0,
+      "plans": 2
+    },
+    {
+      "at": "2026-11-10T17:57:39.876Z",
+      "state": "Level completed.",
+      "actions": 5,
+      "levels": 1,
+      "plans": 5
+    },
+    {
+      "at": "2026-11-10T17:58:55.546Z",
+      "state": "Level completed.",
+      "actions": 9,
+      "levels": 2,
+      "plans": 9
+    }
+  ],
+  "finalText": "Skip to the games\nSRA Playground\nSYMBOLIC REASONING AGENT\nARC AGI 3\n\nYannick Fontan\n\nINTERACTIVE GAMES / INDEPENDENT RESEARCH\n\nMOTIVATION\nPLAYGROUND\n75 NEW GAMES\nREASONING LAB\nARC-AGI-3\nSYMBOLIC REASONING\nARCHITECTURE\nVIDEOS\nCONTACT\nGITHUB\nSRA Playground\n\nSymbolic Reasoning Agent\n\nToward Understandable Intelligence.\n\nEXPLORE 75 NEW GAMES\nDESIGN PREMISE\n\nThe design of artificial intelligence should begin with ethical principles. Symbolic reasoning makes deliberate design possible through explicit concepts, relations, and reasoning structures rooted in human intelligence. SRA draws its meaning and purpose from this human source, enabling us to take responsibility for the intelligence we build and thereby fulfill the ethical principle that guides its design.\n\nStart here: Motivation\nARC AGI 3\nWhat is ARC-AGI-3?\n100 GAMES/25 OFFICIAL + 75 CUSTOM\n\n75 new custom games\ncreated or compiled by Yannick Fontan.\n\nCONN\nConnect Four\n\nCUSTOM · WAVE 1\n\nCHOOSE A GAME\nReady\nCASC — Cascade Routing\nCLRS — RGB Glass\nCONN — Connect Four\nCRAF — Crafting Console\nDNOI — Pattern Denoising\nESCT — Patrol Escort\nFITE — Arena Survival\nFOGW — Hidden Motion\nGORI — Ballistic Aim\nHANO — Tower of Hanoi\nKEYD — Keys and Doors\nLIFE — Life and Lineage\nLOGI — Logic Circuits\nLS19 — Shape Alignment (Legacy)\nMEMO — Memory Recall\nMIND — Code Breaker\nPORT — Portal Topology\nREGN — Gauge Balance\nSEQN — Symbol Sequences\nSIGN — Signal Seals\nSKBN — Sokoban\nSTCK — Card Stack\nSWCH — Switch Rooms\nSYME — Symmetry Repair\nVALV — Valve Flow\nAS66 — Always Sliding\nCGWL — Cabbage, Goat and Wolf\nCOLM — Falling Columns\nCOMB — Combina\nELAS — Elastic Grid\nETAG — Multi-floor Maze\nFUIT — Fleeing Stones\nGABA — Cargo Clearance\nGARE — Rail Transfer\nGLOB — Globe Track\nGMAP — Engraved Map\nGRAV — Gravity Box\nHOLE — Nested Colour Palette\nISOS — Isometric Sketch\nKATA — Pentomino Packing\nLKEY — Lock and Key\nPOLA — Polarity\nREWI — Rewind\nSELE — Selene\nSERI — Sequence Lab\nTEQU — Tower Equilibrium\nTICT — Tic-tac-toe\nTRIA — Triade\nVOIS — Neighbour Cubes\nWEAV — Weave\nAMZE — Arrow Maze\nCATL — Caterpillar Logic\nCATR — Configured Attraction\nCAVA — Knight Maze\nCWSE — Catching Without Seeing\nDAME — Checkers Solitaire\nDICO — Dichotomy\nEVAS — Escape\nGIGO — Nested Rooms\nGRIL — Grille\nHPDL — Homogeneous Pair Deletion\nKLOT — Klotski\nMOTO — Moto Orbit\nONDE — Wave Alignment\nPIPE — Pipes\nPRTL — Portal Chambers\nRECR — Recruit Army\nRSWP — Role Swap\nSMLP — Same Length Path\nSNAR — Sonar Maze\nSPOR — Spore Lab\nTHER — Thermometers\nTRCP — Tracing Path\nUPST — Upset\nZIPP — Zip\nAR25 — Official ARC-AGI-3 game\nBP35 — Official ARC-AGI-3 game\nCD82 — Official ARC-AGI-3 game\nCN04 — Official ARC-AGI-3 game\nDC22 — Official ARC-AGI-3 game\nFT09 — Official ARC-AGI-3 game\nG50T — Official ARC-AGI-3 game\nKA59 — Official ARC-AGI-3 game\nLF52 — Official ARC-AGI-3 game\nLP85 — Official ARC-AGI-3 game\nLS20 — Official ARC-AGI-3 game\nM0R0 — Official ARC-AGI-3 game\nR11L — Official ARC-AGI-3 game\nRE86 — Official ARC-AGI-3 game\nS5I5 — Official ARC-AGI-3 game\nSB26 — Official ARC-AGI-3 game\nSC25 — Official ARC-AGI-3 game\nSK48 — Official ARC-AGI-3 game\nSP80 — Official ARC-AGI-3 game\nSU15 — Official ARC-AGI-3 game\nTN36 — Official ARC-AGI-3 game\nTR87 — Official ARC-AGI-3 game\nTU93 — Official ARC-AGI-3 game\nVC33 — Official ARC-AGI-3 game\nWA30 — Official ARC-AGI-3 game\n\nCONN selected.\n\nManual\nSRA Agent\nNative TS\nIn your browser\nSolve with SRA.\n\nLevel completed.\n\nRun to next level\nRun 16 actions\nOne action\nPause\n21\nactions\n3\nlevels solved\n21\ncompleted plans\nNew reasoning session\nReturn to Manual\nInspect reasoning\nOpen to display the current plan, trace and memory\n\nTHE PROJECT\n\nAbout SRA\nMotivation\nArchitecture\nVideo series\n\nSymbolic Reasoning Agent is Yannick Fontan’s research project for interactive games. The agent uses explicit representations of observations, mechanisms, and goals to organize its reasoning.\n\nThe 100 games on this page run locally in your browser. The ongoing SRA Agent migration transfers V6 capabilities into native TypeScript and the common V7 reasoning architecture. Coordinate inputs, guarded action sequences and memory across levels are connected. The original Python game engines remain isolated from the agent. Explore the shared reasoning syntax in the Logos Engine Reasoning Lab.\n\nSRA Playground/Independent research by Yannick Fontan\nContact\nARC Prize\nLicenses & notices"
+}

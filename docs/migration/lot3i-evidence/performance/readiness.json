@@ -1,0 +1,255 @@
+{
+  "schema": "logos-engine.native-cost-window-readiness.v1",
+  "status": "ready",
+  "finalizedAt": "2026-11-10T15:45:33.850425-03:00",
+  "measurementAuthorized": true,
+  "pendingRequirements": [],
+  "generator": {
+    "path": "docs/migration/lot3i-evidence/finalize-cost-readiness.py",
+    "bytes": 5572,
+    "sha256": "bfe6a31a9e1ded568bded5732b078e25b428ca46eb81955ed7126fe11862240d"
+  },
+  "nativeVersion": "0.50.0",
+  "nativeSourceDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+  "formalTests": {
+    "tests": 3225,
+    "pass": 3225,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "formalTestFiles": 76,
+  "regressionChecks": 85,
+  "inputs": [
+    {
+      "path": "docs/migration/lot3i-evidence/final/source-manifest.json",
+      "bytes": 32014,
+      "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/source-archive.json",
+      "bytes": 33645,
+      "sha256": "c4c99644a7140026703bf865ff7b81ffa075e2316b1ce0fc82f21a216251055a"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/source-archive-parts.json",
+      "bytes": 791,
+      "sha256": "e0f6915cbfa441b42009615f8479e986562f9b4b2cb533104665a34d67f738c0"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/baseline/source-manifest.json",
+      "bytes": 31765,
+      "sha256": "5ab90c3cbd2f8356ba27025052a1c40cd16e7cb38326a89a48ac6e53cb9b3a24"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/baseline/provenance.json",
+      "bytes": 33205,
+      "sha256": "b943f699370b3b353b8b2865b2d8fe27abb2a325bbea48d86c962cd5d575b1bb"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/validation/delta-tests-run.json",
+      "bytes": 114673,
+      "sha256": "f250f63d2ff9d4c209d711c19dda2c2691b4b0b1bb4d217b859d8e25cef0cd01"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/validation/checks-run.json",
+      "bytes": 74576,
+      "sha256": "48277595d32f6569e0c5711628270bba36a5908971bf8d99ce20388ffe21d669"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/validation/migration-audit-resolution.json",
+      "bytes": 1620,
+      "sha256": "46bcbc98ebaee6a839ec5280cae19f8d37590c3c14bb36a8f68a585195f5fb42"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/regressions/regression-summary.json",
+      "bytes": 123289,
+      "sha256": "3ffddb4d4bb4786a7218f27d95f7db8d00afa94dd20e75573c6077e1252565a9"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/regression-recovery.json",
+      "bytes": 2651,
+      "sha256": "4c3d83d83228bdf28c6a0217d7b5e44eafa6d12986b5f09a49d8b29b1ef81b9b"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/recurrent-series-common-loop.json.gz",
+      "bytes": 107316,
+      "sha256": "8b87e8412a77d1aa285775ef5599c0176db038f25a9a56db664fb332b1f295c8"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/recurrent-series-validation-scope.json",
+      "bytes": 2453,
+      "sha256": "61ad2236ec821da0cee25be12ef49914503061cb4cfcf3346b3249dbc1cafbe8"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-resolution.json",
+      "bytes": 9586,
+      "sha256": "63a6aee4aaa332ac49a932d1e8d44dbbb39ad14e7abb1097a817e48c0f1bea71"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/browser/browser-qa.json",
+      "bytes": 2678,
+      "sha256": "b3bff0a23caa446a2ef7d0fe9abfed6dc6666fe022d967b7035ae34a8f168974"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/diagnostic/conn-public-parity.json",
+      "bytes": 224507,
+      "sha256": "30527c4edc4f49afa42be6e17b32a6fd7ae7b4532e25fdd1efce5125edd16ec2"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/diagnostic/conn-public-source-parity.json.gz",
+      "bytes": 690175,
+      "sha256": "14651e04e1a0af86c2673e919cd64516cfe711976d333f2afee63e3d9b34a522"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/diagnostic/source-oracle-export.json",
+      "bytes": 2970,
+      "sha256": "6b2171fec128a84e1501033dde973241a3bab10131ae02eb8edf78ddb4e84bc2"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/diagnostic/shared-integration-review.json",
+      "bytes": 16816,
+      "sha256": "560be604cd42fe2e0e1625e9c241abd9ece8d217ee34198b1839930a98a16de5"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/delivery-integrity.json",
+      "bytes": 9119,
+      "sha256": "250e11278dac5a627ffd3736d6ae9d8496efd321d20aa888311b4e10ca90a6f7"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/pre-window-log-transport.json",
+      "bytes": 3063,
+      "sha256": "5a20595d67982244eca4c45a481abed1e37aa7e66639b9c365877d378a69059a"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/declaration.json",
+      "bytes": 4105,
+      "sha256": "f36a111701e6f2c795b391e6ff851ece136c218c8b3ff008ee20580b4b010492"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/protocol.md",
+      "bytes": 10100,
+      "sha256": "20f00e9eb612099dafd0033718b8c130d684665419525aca73334caa6653d990"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/protocol-check.json",
+      "bytes": 406,
+      "sha256": "178a281796be509cc8940efa2ab3d5fe3cba15bb7e179a29bd9c65bbdfda8dd1"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/global-budget-policy.json",
+      "bytes": 2011,
+      "sha256": "73cb36faac8bd0e49c83ccb808dc9bc71d13fad2607a917c0f886199d336e89e"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/static-preflight.json",
+      "bytes": 12138,
+      "sha256": "0b12c7b0eea353a463646f042a4ada8fd8d0812f10a3a8d5b2a4c0801cc94cc1"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/diagnostic/cost-protocol-review.json",
+      "bytes": 19167,
+      "sha256": "8115e635fe172d2bc87f0a4a4f06b75f1f3c3465480deb3efb2a3aa4a89fb45b"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/coordinated-isolation.json",
+      "bytes": 7397,
+      "sha256": "d6fc16a0860d340a8a260466ec89aff94c3e08f4a3033844448ecef2182dc1f4"
+    }
+  ],
+  "isolation": {
+    "schema": "logos-engine.coordinated-native-cost-isolation.v1",
+    "status": "acknowledged_quiet_before_window",
+    "recordedAt": "2026-11-10T15:45:33.819702-03:00",
+    "otherLaneAcknowledged": true,
+    "otherLanes": [
+      {
+        "sourcePath": "/workspace/shared/sra-coordination/lot4a-status.json",
+        "acknowledgement": {
+          "lot": "4A observed_feedback_sequence",
+          "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+          "branch": "lot4a-observed-feedback-sequence",
+          "base": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+          "stage": "QUIET acknowledged through3I recovery, cost and publication;18:55UTC release estimate received. Only light review until actual release.",
+          "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+          "publication_lock": "/workspace/shared/sra-coordination/publication.lock",
+          "updated_at": "2026-11-10T18:44:00.855711+00:00",
+          "coordination_scope": "Both roots now acknowledge the shared locks and explicit quiet sequence. No4A performance measurement has started.",
+          "coordination_request": "Lot3 owner: please acknowledge a quiet interval through lot4a-status / performance.lock before running heavy work. Lot4A will not claim exclusivity from this advisory lock alone.",
+          "own_agents": "All three agents completed. No compute, preview or measurement active. Local preparation committed ddc7d20.",
+          "performance_started": false,
+          "coordination_acknowledged": true,
+          "accepted_sequence": [
+            "isolated WEAV replay",
+            "integrity and readiness",
+            "A1 B1 B2 A2",
+            "private publication 3I",
+            "release slot for integrated 4A"
+          ],
+          "publication_order": "Confirmed3I then4A then7A; integrate actual published commits and renumber accordingly.",
+          "heavy_work_started": false,
+          "local_commit": "4fc5fac01b8b8fdb077a2aab2a5ba1a7854e7e07",
+          "scheduling_question": "Your18:35 status reports the WEAV execution handle was lost, no final report, lock free and no active computation. Can you explicitly release the next approximately10-minute cost slot and publication to4A now while you prepare streamed recovery? All4A functional gates and integrity are complete. This avoids coupling4A delivery to an unfinished3I recovery, as the user allows. Proposed order4A0.50 then3I0.51 then7A, each integrating actual published commits. Please write explicit quiet/release acknowledgement before starting another recovery.4A keeps quiet until agreement, and preserves all3I uncommitted work untouched.",
+          "known_lanes": [
+            "3I recurrent_series",
+            "4A observed_feedback_sequence",
+            "7A observed_ranked_workshop"
+          ],
+          "lot7a_acknowledged": true,
+          "scheduling_question_status": "3I replied18:37:39, maintaining3I\u21924A\u21927A with release estimate18:55UTC contingent on strict replay.4A acknowledges; no unilateral slot or publication change.",
+          "ready_for_next_slot": true,
+          "status_request": "3I: please keep status current with replay progress or its final receipt and release estimate. 4A remains quiet and preserves the agreed3I\u21924A\u21927A order; all4A functional gates already passed. No4A timing has started.",
+          "request_to_lot7a": "7A remains quiet; please acknowledge any3I-approved scheduling change4A\u21923I\u21927A. No publication order is changed without actual acknowledgement.",
+          "local_preparation_commit": "ddc7d20",
+          "optional_preparation_request": "When3I has a local committed source candidate, please expose its SHA in this shared status.4A can then prepare additive merge resolution during the quiet interval, without tests/builds/replays or publication. This is optional and does not change the agreed order or the requirement to verify the actual published commit before delivery."
+        }
+      },
+      {
+        "sourcePath": "/workspace/shared/sra-coordination/lot7a-status.json",
+        "acknowledgement": {
+          "lot": "7A observed_ranked_workshop",
+          "checkout": "/workspace/sites/sra-lot7a-20261110/.sites-checkout",
+          "branch": "lot7a-ranked-workshop",
+          "base": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+          "functionalCommit": "7c4c34797bf0bc374b448c985d0dee2fadfb81ca",
+          "nativeVersion": "0.50.0 isolated development candidate; will renumber after integration",
+          "nativeFrozenDigest": "8492388162915bd01be1279d645870d366f0fd306e4f31ea47e8b65aafebac7e",
+          "updated_at": "2026-11-10T18:37:47.938594+00:00",
+          "stage": "QUIET acknowledged:78file gate completed2960/2961 (one stale testexpectation fixed; nativeunchanged); all4recordedregressions passed68/68. No test/build/replay/browser/archive/cost job remains. Only light docs/review until3I then4A release.",
+          "coordination_acknowledged": true,
+          "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+          "publication_lock": "/workspace/shared/sra-coordination/publication.lock",
+          "heavy_work_started": false,
+          "performance_started": false,
+          "publication_started": false,
+          "request": "3I: please acknowledge4A schedulingrequest or report a concrete imminentcommand/remainingtime.7A remainsquiet; noheavy7Ajob orcostmeasurementhasstarted.",
+          "own_agents": "lightweightcode/docreview only; replay execution finished",
+          "publication_order": "3I0.50 then4A0.51 then7A0.52, subject to actual published source; request acknowledgement by both active roots.",
+          "quiet_acknowledged": true,
+          "lockObservation": {
+            "observedAt": "2026-11-10T18:34:36+00:00",
+            "performanceLockAcquirable": true,
+            "qualification": "Does not establish absenceofheavywork or replaceexplicitcoordination. Aseparate7Aprobeconfirmedlockvisibilitybetweenownexecsessions."
+          },
+          "scheduling_reply": "7A acknowledges the proposed4A\u21923I\u21927A order if3I releases its slot.7A staysquiet through4A ABBA/publication. Since3I reportsnoactivecompute and nofinalWEAVreport,7A supports giving ready4A the nextslot now; pleaseexplicitlyacknowledgebeforeanynewheavyrecovery.7A integration will useactualpublishedcommitsandversionnumbers."
+        }
+      }
+    ],
+    "ownTrackedComputeEnded": true,
+    "previewStopped": true,
+    "costNodeOptionsOverride": null,
+    "trackedCompletions": {
+      "formalTests": "3225/3225",
+      "projectChecks": "5/5 plus resolved lineage audit",
+      "CONN": "case closed; campaign, source parity and browser complete",
+      "WEAV": "durable driver and comparison exited0; strict17/17; final total85/85",
+      "deliveryIntegrity": "passed; six reports restored byte-identically"
+    },
+    "remainingOwnActivity": "Light documentation only while the official window runs. No tests, build, replay, campaign, preview or evidence compression during the window.",
+    "performanceLock": "/workspace/shared/sra-coordination/performance.lock",
+    "windowCommandRequiresExclusiveLock": true,
+    "qualification": "Both other known project lanes explicitly acknowledge quiet through this window and private publication. Own tracked executions have ended. Namespaced process listings are not treated as a complete machine inventory. This is a cooperative isolation declaration; the unchanged timing wrapper will retain all sessions and source integrity."
+  },
+  "qualification": "Completed functional, source, contribution, browser, regression and byte-integrity evidence precede the first official sample. Both interrupted WEAV attempts remain retained with the recovery. The replay-specific memory configuration is not used by the official cost window. Cooperative lane acknowledgement and tracked task completion establish the declared quiet window; process-namespace visibility is not treated as a complete machine inventory."
+}
