@@ -1,0 +1,1654 @@
+{
+  "schema": "logos-engine.feedback-public-contribution.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T18:01:51.083386+00:00",
+  "scope": "Read-only contribution analysis of the completed MIND common-caller campaign and its cold unchanged-original FeedbackSequences replay. Family parity over captured public arguments is established; full original caller parity is not established.",
+  "evidence": {
+    "campaign": {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02/mind-campaign.json.gz",
+      "bytes": 4348035,
+      "sha256": "995714bd0d458100dfce8c3f1eeeed67f76f4d83de18debfa2569598426bc2f5"
+    },
+    "publicSourceParity": {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02/mind-feedback-source-parity.json.gz",
+      "bytes": 36237,
+      "sha256": "2bb4f0681b3351908c0e93adc48c20de3a00b74b985399483eefd89d805ab3bb"
+    },
+    "comparisonGenerator": {
+      "path": "scripts/compare-feedback-public-parity.py",
+      "bytes": 18997,
+      "sha256": "0f22f59cab245e210be437c81e032bf64657fe7241ece0f49970fb25220f3ffd"
+    },
+    "diagnosticSourceManifest": {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/source-manifest.json",
+      "bytes": 32130,
+      "sha256": "09118332044f22a23eb84a7a2b76c1c28bd1c425ec665a9e883510152fc21daa"
+    },
+    "finalSourceManifest": {
+      "path": "docs/migration/lot4a-evidence/final/source-manifest.json",
+      "bytes": 32130,
+      "sha256": "09118332044f22a23eb84a7a2b76c1c28bd1c425ec665a9e883510152fc21daa"
+    },
+    "nativeInputDomain": {
+      "path": "src/logos-engine/v6-native-observer.ts",
+      "bytes": 22590,
+      "sha256": "1a0ffa26548bf6c1ebbd22724731c2238dc24c84074885e832b671dbbe8dfe02"
+    },
+    "originalInputDomain": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/observed_input_domain.py",
+      "bytes": 4897,
+      "sha256": "5b8f2f84af9e946e939a53e4f4c70c1eea49e5e2f8017bac547537380e2a7785"
+    }
+  },
+  "frozenNativeLink": {
+    "nativeSourceDigest": "66be0948fdff5abe10b12d253bb4583db067aab2f5b7248632c9f9d443bc53fe",
+    "nativeFileCount": 271,
+    "diagnosticAndFinalManifestsByteIdentical": true,
+    "campaignSourceEqualsFinalManifest": true,
+    "comparisonSourceEqualsFinalManifest": true,
+    "evidenceOrigin": "The completed diagnostic campaign is evidence for the byte-identical final native freeze.",
+    "newGameCampaignForThisReceipt": false,
+    "sourceReplayRepeatedForThisReceipt": false
+  },
+  "campaignObserved": {
+    "game": "MIND",
+    "reportStatus": "passed",
+    "targetNaturalLevels": 3,
+    "levelsCompleted": 3,
+    "actions": 31,
+    "prefixes": 20,
+    "perCompletedLevelActions": [
+      8,
+      8,
+      15
+    ],
+    "finalState": "NOT_FINISHED",
+    "stopReason": "target_levels_completed",
+    "sessions": 1,
+    "callerEnabled": true,
+    "callerAcquiredTransitions": 31,
+    "fullV6Parity": false,
+    "qualification": "Three target levels completed; the final public state is NOT_FINISHED because the retained session stopped at its declared target. No full-game completion or global performance conclusion is inferred."
+  },
+  "originalParity": {
+    "originalSourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+    "coldStart": true,
+    "nativeStatesUsedToPrimeSource": false,
+    "normalizations": [],
+    "comparisonPolicy": "Exact JSON equality for source state, return and full proposal, including SRC receipt. The source-reference tests require no receipt normalization.",
+    "callsCompared": 51,
+    "callsExpected": 51,
+    "proposalsCompared": 20,
+    "recordsCompared": 31,
+    "stateBeforeComparisons": 51,
+    "stateAfterComparisons": 51,
+    "publicObservationsRemeasuredByOriginal": 32,
+    "differences": 0,
+    "stop": null,
+    "counts": {
+      "nonNullProposals": 20,
+      "propose": 20,
+      "record": 31,
+      "recordStatus:observed_append": 24,
+      "recordStatus:observed_submission_feedback": 4,
+      "recordStatus:official_boundary": 3,
+      "selectedRecords": 31,
+      "selectionEntry:['goal_access', 'observed_feedback_sequence']": 20
+    },
+    "sourceFilesVerifiedBefore": 1786,
+    "sourceFilesVerifiedAfter": 1786,
+    "originalsUnchanged": true,
+    "comparisonInputsUnchanged": true,
+    "originalInventoryDigest": "9e8f6be8b05a83b0666066b3fda55c0f955e25d9428328e85cac1938b3d9cc2e",
+    "fullOriginalCallerRun": false
+  },
+  "capturedStreamCrossChecks": {
+    "qualification": "Independent field comparisons over the preserved campaign JSON, without replaying a game or invoking the component again.",
+    "recordCommandsMatchIndependentActionList": 31,
+    "recordAfterLevelScoreAndStateMatchIndependentActionList": 31,
+    "consecutiveRecordRevisionLinksMatched": 30,
+    "prefixRetainedStatesCompared": 20,
+    "prefixRetainedStatesEqual": 20,
+    "prefixChecks": [
+      {
+        "prefix": "prefix_evidence:1",
+        "decisionRevision": 1,
+        "acquiredActions": 1,
+        "throughAction": 1,
+        "throughFeedbackCallIndex": 1,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:2",
+        "decisionRevision": 2,
+        "acquiredActions": 1,
+        "throughAction": 2,
+        "throughFeedbackCallIndex": 3,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:3",
+        "decisionRevision": 3,
+        "acquiredActions": 1,
+        "throughAction": 3,
+        "throughFeedbackCallIndex": 5,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:4",
+        "decisionRevision": 4,
+        "acquiredActions": 1,
+        "throughAction": 4,
+        "throughFeedbackCallIndex": 7,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:5",
+        "decisionRevision": 5,
+        "acquiredActions": 3,
+        "throughAction": 7,
+        "throughFeedbackCallIndex": 11,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:8",
+        "decisionRevision": 8,
+        "acquiredActions": 1,
+        "throughAction": 8,
+        "throughFeedbackCallIndex": 13,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:9",
+        "decisionRevision": 9,
+        "acquiredActions": 1,
+        "throughAction": 9,
+        "throughFeedbackCallIndex": 15,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:10",
+        "decisionRevision": 10,
+        "acquiredActions": 1,
+        "throughAction": 10,
+        "throughFeedbackCallIndex": 17,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:11",
+        "decisionRevision": 11,
+        "acquiredActions": 1,
+        "throughAction": 11,
+        "throughFeedbackCallIndex": 19,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:12",
+        "decisionRevision": 12,
+        "acquiredActions": 1,
+        "throughAction": 12,
+        "throughFeedbackCallIndex": 21,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:13",
+        "decisionRevision": 13,
+        "acquiredActions": 3,
+        "throughAction": 15,
+        "throughFeedbackCallIndex": 25,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:16",
+        "decisionRevision": 16,
+        "acquiredActions": 1,
+        "throughAction": 16,
+        "throughFeedbackCallIndex": 27,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:17",
+        "decisionRevision": 17,
+        "acquiredActions": 1,
+        "throughAction": 17,
+        "throughFeedbackCallIndex": 29,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:18",
+        "decisionRevision": 18,
+        "acquiredActions": 1,
+        "throughAction": 18,
+        "throughFeedbackCallIndex": 31,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:19",
+        "decisionRevision": 19,
+        "acquiredActions": 2,
+        "throughAction": 20,
+        "throughFeedbackCallIndex": 34,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:21",
+        "decisionRevision": 21,
+        "acquiredActions": 1,
+        "throughAction": 21,
+        "throughFeedbackCallIndex": 36,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:22",
+        "decisionRevision": 22,
+        "acquiredActions": 4,
+        "throughAction": 25,
+        "throughFeedbackCallIndex": 41,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:26",
+        "decisionRevision": 26,
+        "acquiredActions": 1,
+        "throughAction": 26,
+        "throughFeedbackCallIndex": 43,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:27",
+        "decisionRevision": 27,
+        "acquiredActions": 4,
+        "throughAction": 30,
+        "throughFeedbackCallIndex": 48,
+        "retainedStateEqual": true
+      },
+      {
+        "prefix": "prefix_evidence:31",
+        "decisionRevision": 31,
+        "acquiredActions": 1,
+        "throughAction": 31,
+        "throughFeedbackCallIndex": 50,
+        "retainedStateEqual": true
+      }
+    ]
+  },
+  "inputDomainQualification": {
+    "owner": "ObservedInputDomain.candidates",
+    "nonAddressedControlWhitelist": [
+      "ACTION1",
+      "ACTION2",
+      "ACTION3",
+      "ACTION4",
+      "ACTION5"
+    ],
+    "originalAndNativeWhitelistAgreeBySourceInspection": true,
+    "initialPublicAvailableActionRefs": [
+      "ACTION5",
+      "ACTION6",
+      "ACTION7"
+    ],
+    "initialCandidateActionCounts": {
+      "ACTION5": 1,
+      "ACTION6": 22
+    },
+    "availableButExcludedInitialActionRefs": [
+      "ACTION7"
+    ],
+    "proposalContextsWithoutAction7Candidates": 20,
+    "firstFamilyProposalCallIndex": 0,
+    "firstFamilyAction": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 4,
+        "y": 54
+      }
+    },
+    "interpretation": "The native common caller supplies the sampled input candidates. Both inspected native and pinned-original domains admit ACTION1..5 as non-addressed controls and add bounded observed ACTION6 loci. MIND exposes ACTION7 publicly, but it is outside these candidates. The family replay consumes the captured candidates; it does not independently establish full caller/input-domain behavior or evaluate ACTION7 alternatives."
+  },
+  "fourPublicReturns": [
+    {
+      "recordCallIndex": 7,
+      "nextProposalCallIndex": 8,
+      "observation": {
+        "levelEpoch": 1,
+        "beforeRef": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:1:revision:4:frame:73cdb7a6b5595c70",
+        "afterRef": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:1:revision:5:frame:5c7fc6d05dd7864d",
+        "paletteAlphabet": [
+          8,
+          14,
+          9
+        ],
+        "orderedRankCount": 3,
+        "publicRowsAfterReturn": [
+          {
+            "rowY": 3,
+            "emptyValue": 2,
+            "observedValues": [
+              8,
+              2,
+              2
+            ],
+            "revealedRanksOneBased": [
+              {
+                "rank": 1,
+                "value": 8
+              }
+            ]
+          }
+        ]
+      },
+      "hypothesisBeforeSubmission": {
+        "assumptions": [
+          "positionwise_exact_elsewhere_absent_feedback",
+          "unrevealed_values_remain_possible",
+          "secret_repetitions_not_excluded_by_palette_removal"
+        ],
+        "candidate_count": 27,
+        "evidence": [],
+        "information_cost": 3,
+        "law_alternatives": 1,
+        "minimax": {
+          "NONWINNING_BRANCHES": 19,
+          "SUM_SQUARED_RESIDUALS": 40,
+          "WORST_NONWINNING_RESIDUAL": 2
+        },
+        "partition_count": 20,
+        "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+        "status": "proposed",
+        "trial": [
+          8,
+          14,
+          9
+        ],
+        "trial_count": 2
+      },
+      "experiment": {
+        "orderedValues": [
+          8,
+          14,
+          9
+        ],
+        "submissionCommand": {
+          "action_ref": "ACTION5",
+          "data": {}
+        },
+        "question": "Test the control with a complete proposal and measure any positional return; stop at that response.",
+        "condition": "The active ordered row was complete; the proposal stops at the unmeasured submission response."
+      },
+      "return": {
+        "status": "observed_submission_feedback",
+        "event": {
+          "y": 12,
+          "values": [
+            8,
+            14,
+            9
+          ],
+          "marks": [
+            "style:fd76db5c8ad0929a",
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2"
+          ],
+          "ref": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:1:revision:5:frame:5c7fc6d05dd7864d",
+          "before": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:1:revision:4:frame:73cdb7a6b5595c70"
+        },
+        "styleQualification": "Exact public style signatures only; no fixed exact/elsewhere/absent meaning is assigned to a style in this receipt."
+      },
+      "decision": {
+        "question": "Which complete ordered proposal distinguishes the remaining feedback-compatible compositions while preserving the active prefix?",
+        "selection": {
+          "status": "proposed",
+          "trial": [
+            8,
+            9,
+            14
+          ],
+          "candidate_count": 2,
+          "law_alternatives": 4,
+          "trial_count": 1,
+          "minimax": {
+            "WORST_NONWINNING_RESIDUAL": 1,
+            "SUM_SQUARED_RESIDUALS": 1,
+            "NONWINNING_BRANCHES": 1
+          },
+          "partition_count": 2,
+          "information_cost": 4,
+          "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+          "assumptions": [
+            "positionwise_exact_elsewhere_absent_feedback",
+            "unrevealed_values_remain_possible",
+            "secret_repetitions_not_excluded_by_palette_removal"
+          ],
+          "evidence": [
+            "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:1:revision:5:frame:5c7fc6d05dd7864d"
+          ]
+        },
+        "conditionalActions": [
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 4,
+              "y": 54
+            }
+          },
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 10,
+              "y": 54
+            }
+          },
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 4,
+              "y": 54
+            }
+          }
+        ],
+        "ablationCallIndex": 8
+      },
+      "interpretation": "The first return and the publicly revealed first rank leave two codes. Removing only acquired history, while retaining that revealed rank, leaves nine codes and changes the proposed order."
+    },
+    {
+      "recordCallIndex": 21,
+      "nextProposalCallIndex": 22,
+      "observation": {
+        "levelEpoch": 2,
+        "beforeRef": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:2:revision:12:frame:7b180d232614cf27",
+        "afterRef": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:2:revision:13:frame:aa2ee9fedc4437d0",
+        "paletteAlphabet": [
+          8,
+          14,
+          9,
+          6
+        ],
+        "orderedRankCount": 3,
+        "publicRowsAfterReturn": [
+          {
+            "rowY": 3,
+            "emptyValue": 2,
+            "observedValues": [
+              2,
+              2,
+              2
+            ],
+            "revealedRanksOneBased": []
+          }
+        ]
+      },
+      "hypothesisBeforeSubmission": {
+        "assumptions": [
+          "positionwise_exact_elsewhere_absent_feedback",
+          "unrevealed_values_remain_possible",
+          "secret_repetitions_not_excluded_by_palette_removal"
+        ],
+        "candidate_count": 64,
+        "evidence": [],
+        "information_cost": 3,
+        "law_alternatives": 1,
+        "minimax": {
+          "NONWINNING_BRANCHES": 23,
+          "SUM_SQUARED_RESIDUALS": 209,
+          "WORST_NONWINNING_RESIDUAL": 5
+        },
+        "partition_count": 24,
+        "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+        "status": "proposed",
+        "trial": [
+          8,
+          14,
+          6
+        ],
+        "trial_count": 6
+      },
+      "experiment": {
+        "orderedValues": [
+          8,
+          14,
+          6
+        ],
+        "submissionCommand": {
+          "action_ref": "ACTION5",
+          "data": {}
+        },
+        "question": "Test the control with a complete proposal and measure any positional return; stop at that response.",
+        "condition": "The active ordered row was complete; the proposal stops at the unmeasured submission response."
+      },
+      "return": {
+        "status": "observed_submission_feedback",
+        "event": {
+          "y": 12,
+          "values": [
+            8,
+            14,
+            6
+          ],
+          "marks": [
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2"
+          ],
+          "ref": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:2:revision:13:frame:aa2ee9fedc4437d0",
+          "before": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:2:revision:12:frame:7b180d232614cf27"
+        },
+        "styleQualification": "Exact public style signatures only; no fixed exact/elsewhere/absent meaning is assigned to a style in this receipt."
+      },
+      "decision": {
+        "question": "Which complete ordered proposal distinguishes the remaining feedback-compatible compositions while preserving the active prefix?",
+        "selection": {
+          "status": "proposed",
+          "trial": [
+            14,
+            6,
+            8
+          ],
+          "candidate_count": 4,
+          "law_alternatives": 12,
+          "trial_count": 3,
+          "minimax": {
+            "WORST_NONWINNING_RESIDUAL": 2,
+            "SUM_SQUARED_RESIDUALS": 6,
+            "NONWINNING_BRANCHES": 3
+          },
+          "partition_count": 5,
+          "information_cost": 4,
+          "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+          "assumptions": [
+            "positionwise_exact_elsewhere_absent_feedback",
+            "unrevealed_values_remain_possible",
+            "secret_repetitions_not_excluded_by_palette_removal"
+          ],
+          "evidence": [
+            "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:2:revision:13:frame:aa2ee9fedc4437d0"
+          ]
+        },
+        "conditionalActions": [
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 10,
+              "y": 54
+            }
+          },
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 16,
+              "y": 54
+            }
+          },
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 4,
+              "y": 54
+            }
+          }
+        ],
+        "ablationCallIndex": 22
+      },
+      "interpretation": "The return leaves four codes under twelve code/law alternatives. History removal leaves sixty-four codes but selects the same ordered trial in this context; this unchanged choice is retained."
+    },
+    {
+      "recordCallIndex": 36,
+      "nextProposalCallIndex": 37,
+      "observation": {
+        "levelEpoch": 3,
+        "beforeRef": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:21:frame:c11446f70cfef820",
+        "afterRef": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:22:frame:c252b47f27930110",
+        "paletteAlphabet": [
+          8,
+          14,
+          9,
+          6
+        ],
+        "orderedRankCount": 4,
+        "publicRowsAfterReturn": [
+          {
+            "rowY": 3,
+            "emptyValue": 2,
+            "observedValues": [
+              2,
+              2,
+              6,
+              2
+            ],
+            "revealedRanksOneBased": [
+              {
+                "rank": 3,
+                "value": 6
+              }
+            ]
+          }
+        ]
+      },
+      "hypothesisBeforeSubmission": {
+        "assumptions": [
+          "positionwise_exact_elsewhere_absent_feedback",
+          "unrevealed_values_remain_possible",
+          "secret_repetitions_not_excluded_by_palette_removal"
+        ],
+        "candidate_count": 256,
+        "evidence": [],
+        "information_cost": 4,
+        "law_alternatives": 1,
+        "minimax": {
+          "NONWINNING_BRANCHES": 71,
+          "SUM_SQUARED_RESIDUALS": 1367,
+          "WORST_NONWINNING_RESIDUAL": 12
+        },
+        "partition_count": 72,
+        "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+        "status": "proposed",
+        "trial": [
+          8,
+          14,
+          6,
+          9
+        ],
+        "trial_count": 6
+      },
+      "experiment": {
+        "orderedValues": [
+          8,
+          14,
+          6,
+          9
+        ],
+        "submissionCommand": {
+          "action_ref": "ACTION5",
+          "data": {}
+        },
+        "question": "Test the control with a complete proposal and measure any positional return; stop at that response.",
+        "condition": "The active ordered row was complete; the proposal stops at the unmeasured submission response."
+      },
+      "return": {
+        "status": "observed_submission_feedback",
+        "event": {
+          "y": 12,
+          "values": [
+            8,
+            14,
+            6,
+            9
+          ],
+          "marks": [
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2",
+            "style:fd76db5c8ad0929a",
+            "style:cc4da5498be93ad2"
+          ],
+          "ref": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:22:frame:c252b47f27930110",
+          "before": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:21:frame:c11446f70cfef820"
+        },
+        "styleQualification": "Exact public style signatures only; no fixed exact/elsewhere/absent meaning is assigned to a style in this receipt."
+      },
+      "decision": {
+        "question": "Which complete ordered proposal distinguishes the remaining feedback-compatible compositions while preserving the active prefix?",
+        "selection": {
+          "status": "proposed",
+          "trial": [
+            14,
+            9,
+            6,
+            8
+          ],
+          "candidate_count": 3,
+          "law_alternatives": 4,
+          "trial_count": 2,
+          "minimax": {
+            "WORST_NONWINNING_RESIDUAL": 2,
+            "SUM_SQUARED_RESIDUALS": 4,
+            "NONWINNING_BRANCHES": 1
+          },
+          "partition_count": 2,
+          "information_cost": 5,
+          "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+          "assumptions": [
+            "positionwise_exact_elsewhere_absent_feedback",
+            "unrevealed_values_remain_possible",
+            "secret_repetitions_not_excluded_by_palette_removal"
+          ],
+          "evidence": [
+            "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:22:frame:c252b47f27930110"
+          ]
+        },
+        "conditionalActions": [
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 10,
+              "y": 54
+            }
+          },
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 10,
+              "y": 54
+            }
+          },
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 10,
+              "y": 54
+            }
+          },
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 4,
+              "y": 54
+            }
+          }
+        ],
+        "ablationCallIndex": 37
+      },
+      "interpretation": "The first four-rank return and the publicly revealed third rank leave three codes. Keeping the revealed rank but removing history leaves sixty-four codes and changes the next ordered trial."
+    },
+    {
+      "recordCallIndex": 43,
+      "nextProposalCallIndex": 44,
+      "observation": {
+        "levelEpoch": 3,
+        "beforeRef": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:26:frame:51227c4ab04f6d42",
+        "afterRef": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:27:frame:73af6cfbe672501a",
+        "paletteAlphabet": [
+          8,
+          14,
+          9,
+          6
+        ],
+        "orderedRankCount": 4,
+        "publicRowsAfterReturn": [
+          {
+            "rowY": 3,
+            "emptyValue": 2,
+            "observedValues": [
+              2,
+              2,
+              6,
+              2
+            ],
+            "revealedRanksOneBased": [
+              {
+                "rank": 3,
+                "value": 6
+              }
+            ]
+          }
+        ]
+      },
+      "hypothesisBeforeSubmission": {
+        "assumptions": [
+          "positionwise_exact_elsewhere_absent_feedback",
+          "unrevealed_values_remain_possible",
+          "secret_repetitions_not_excluded_by_palette_removal"
+        ],
+        "candidate_count": 3,
+        "evidence": [
+          "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:22:frame:c252b47f27930110"
+        ],
+        "information_cost": 5,
+        "law_alternatives": 4,
+        "minimax": {
+          "NONWINNING_BRANCHES": 1,
+          "SUM_SQUARED_RESIDUALS": 4,
+          "WORST_NONWINNING_RESIDUAL": 2
+        },
+        "partition_count": 2,
+        "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+        "status": "proposed",
+        "trial": [
+          14,
+          9,
+          6,
+          8
+        ],
+        "trial_count": 2
+      },
+      "experiment": {
+        "orderedValues": [
+          14,
+          9,
+          6,
+          8
+        ],
+        "submissionCommand": {
+          "action_ref": "ACTION5",
+          "data": {}
+        },
+        "question": "Test the control with a complete proposal and measure any positional return; stop at that response.",
+        "condition": "The active ordered row was complete; the proposal stops at the unmeasured submission response."
+      },
+      "return": {
+        "status": "observed_submission_feedback",
+        "event": {
+          "y": 20,
+          "values": [
+            14,
+            9,
+            6,
+            8
+          ],
+          "marks": [
+            "style:cc4da5498be93ad2",
+            "style:cc4da5498be93ad2",
+            "style:fd76db5c8ad0929a",
+            "style:cc4da5498be93ad2"
+          ],
+          "ref": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:27:frame:73af6cfbe672501a",
+          "before": "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:26:frame:51227c4ab04f6d42"
+        },
+        "styleQualification": "Exact public style signatures only; no fixed exact/elsewhere/absent meaning is assigned to a style in this receipt."
+      },
+      "decision": {
+        "question": "Which complete ordered proposal distinguishes the remaining feedback-compatible compositions while preserving the active prefix?",
+        "selection": {
+          "status": "proposed",
+          "trial": [
+            9,
+            8,
+            6,
+            14
+          ],
+          "candidate_count": 2,
+          "law_alternatives": 4,
+          "trial_count": 1,
+          "minimax": {
+            "WORST_NONWINNING_RESIDUAL": 1,
+            "SUM_SQUARED_RESIDUALS": 1,
+            "NONWINNING_BRANCHES": 1
+          },
+          "partition_count": 2,
+          "information_cost": 5,
+          "scope": "minimum worst residual among complete plausible codes preserving the active prefix; no multi-attempt success guarantee",
+          "assumptions": [
+            "positionwise_exact_elsewhere_absent_feedback",
+            "unrevealed_values_remain_possible",
+            "secret_repetitions_not_excluded_by_palette_removal"
+          ],
+          "evidence": [
+            "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:22:frame:c252b47f27930110",
+            "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:27:frame:73af6cfbe672501a"
+          ]
+        },
+        "conditionalActions": [
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 16,
+              "y": 54
+            }
+          },
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 4,
+              "y": 54
+            }
+          },
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 10,
+              "y": 54
+            }
+          },
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 4,
+              "y": 54
+            }
+          }
+        ],
+        "ablationCallIndex": 44
+      },
+      "interpretation": "A second submitted trial produces the same ordered style pattern for different entered values. Combined acquired history reduces the remaining codes from three to two and changes the next trial relative to the history-free clone."
+    }
+  ],
+  "historyAblation": {
+    "intervention": "Remove only history from a clone restored from the state acquired by the cold original replay before each eligible proposal.",
+    "nativeStateSeed": false,
+    "currentPublicRevealedRanksRetained": true,
+    "alreadyBoundTrialRetained": true,
+    "allEightEligibleContextsRetained": true,
+    "counts": {
+      "actionAndTrialUnchanged": 5,
+      "actionOrRefusalChanged": 3,
+      "errors": 0,
+      "executed": 8,
+      "hypothesisAccountingChanged": 4,
+      "orderedTrialChanged": 3,
+      "strictProposalChanged": 8,
+      "total": 8
+    },
+    "cases": [
+      {
+        "callIndex": 8,
+        "removedFeedbackRows": 1,
+        "removedEvidenceRefs": [
+          "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:1:revision:5:frame:5c7fc6d05dd7864d"
+        ],
+        "retainedBoundTrial": false,
+        "allOtherOwnerFieldsPreserved": true,
+        "unmodifiedRestorationProposalEqual": true,
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            8,
+            9,
+            14
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            8,
+            14,
+            9
+          ],
+          "status": "proposed"
+        },
+        "actualAccounting": {
+          "candidate_count": 2,
+          "information_cost": 4,
+          "law_alternatives": 4,
+          "minimax": {
+            "NONWINNING_BRANCHES": 1,
+            "SUM_SQUARED_RESIDUALS": 1,
+            "WORST_NONWINNING_RESIDUAL": 1
+          },
+          "partition_count": 2,
+          "trial_count": 1
+        },
+        "counterfactualAccounting": {
+          "candidate_count": 9,
+          "information_cost": 4,
+          "law_alternatives": 1,
+          "minimax": {
+            "NONWINNING_BRANCHES": 6,
+            "SUM_SQUARED_RESIDUALS": 12,
+            "WORST_NONWINNING_RESIDUAL": 2
+          },
+          "partition_count": 7,
+          "trial_count": 2
+        },
+        "actionOrRefusalChanged": true,
+        "orderedTrialChanged": true,
+        "hypothesisAccountingChanged": true,
+        "strictProposalChanged": true
+      },
+      {
+        "callIndex": 12,
+        "removedFeedbackRows": 1,
+        "removedEvidenceRefs": [
+          "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:1:revision:5:frame:5c7fc6d05dd7864d"
+        ],
+        "retainedBoundTrial": true,
+        "allOtherOwnerFieldsPreserved": true,
+        "unmodifiedRestorationProposalEqual": true,
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            8,
+            9,
+            14
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            8,
+            9,
+            14
+          ],
+          "status": "proposed"
+        },
+        "actualAccounting": {
+          "information_cost": 1
+        },
+        "counterfactualAccounting": {
+          "information_cost": 1
+        },
+        "actionOrRefusalChanged": false,
+        "orderedTrialChanged": false,
+        "hypothesisAccountingChanged": false,
+        "strictProposalChanged": true
+      },
+      {
+        "callIndex": 22,
+        "removedFeedbackRows": 1,
+        "removedEvidenceRefs": [
+          "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:2:revision:13:frame:aa2ee9fedc4437d0"
+        ],
+        "retainedBoundTrial": false,
+        "allOtherOwnerFieldsPreserved": true,
+        "unmodifiedRestorationProposalEqual": true,
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 16,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            6,
+            8
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 16,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            6,
+            8
+          ],
+          "status": "proposed"
+        },
+        "actualAccounting": {
+          "candidate_count": 4,
+          "information_cost": 4,
+          "law_alternatives": 12,
+          "minimax": {
+            "NONWINNING_BRANCHES": 3,
+            "SUM_SQUARED_RESIDUALS": 6,
+            "WORST_NONWINNING_RESIDUAL": 2
+          },
+          "partition_count": 5,
+          "trial_count": 3
+        },
+        "counterfactualAccounting": {
+          "candidate_count": 64,
+          "information_cost": 4,
+          "law_alternatives": 1,
+          "minimax": {
+            "NONWINNING_BRANCHES": 23,
+            "SUM_SQUARED_RESIDUALS": 209,
+            "WORST_NONWINNING_RESIDUAL": 5
+          },
+          "partition_count": 24,
+          "trial_count": 24
+        },
+        "actionOrRefusalChanged": false,
+        "orderedTrialChanged": false,
+        "hypothesisAccountingChanged": true,
+        "strictProposalChanged": true
+      },
+      {
+        "callIndex": 26,
+        "removedFeedbackRows": 1,
+        "removedEvidenceRefs": [
+          "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:2:revision:13:frame:aa2ee9fedc4437d0"
+        ],
+        "retainedBoundTrial": true,
+        "allOtherOwnerFieldsPreserved": true,
+        "unmodifiedRestorationProposalEqual": true,
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            6,
+            8
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            6,
+            8
+          ],
+          "status": "proposed"
+        },
+        "actualAccounting": {
+          "information_cost": 1
+        },
+        "counterfactualAccounting": {
+          "information_cost": 1
+        },
+        "actionOrRefusalChanged": false,
+        "orderedTrialChanged": false,
+        "hypothesisAccountingChanged": false,
+        "strictProposalChanged": true
+      },
+      {
+        "callIndex": 37,
+        "removedFeedbackRows": 1,
+        "removedEvidenceRefs": [
+          "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:22:frame:c252b47f27930110"
+        ],
+        "retainedBoundTrial": false,
+        "allOtherOwnerFieldsPreserved": true,
+        "unmodifiedRestorationProposalEqual": true,
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            9,
+            6,
+            8
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            8,
+            6,
+            9
+          ],
+          "status": "proposed"
+        },
+        "actualAccounting": {
+          "candidate_count": 3,
+          "information_cost": 5,
+          "law_alternatives": 4,
+          "minimax": {
+            "NONWINNING_BRANCHES": 1,
+            "SUM_SQUARED_RESIDUALS": 4,
+            "WORST_NONWINNING_RESIDUAL": 2
+          },
+          "partition_count": 2,
+          "trial_count": 2
+        },
+        "counterfactualAccounting": {
+          "candidate_count": 64,
+          "information_cost": 5,
+          "law_alternatives": 1,
+          "minimax": {
+            "NONWINNING_BRANCHES": 23,
+            "SUM_SQUARED_RESIDUALS": 209,
+            "WORST_NONWINNING_RESIDUAL": 5
+          },
+          "partition_count": 24,
+          "trial_count": 6
+        },
+        "actionOrRefusalChanged": true,
+        "orderedTrialChanged": true,
+        "hypothesisAccountingChanged": true,
+        "strictProposalChanged": true
+      },
+      {
+        "callIndex": 42,
+        "removedFeedbackRows": 1,
+        "removedEvidenceRefs": [
+          "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:22:frame:c252b47f27930110"
+        ],
+        "retainedBoundTrial": true,
+        "allOtherOwnerFieldsPreserved": true,
+        "unmodifiedRestorationProposalEqual": true,
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            9,
+            6,
+            8
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            9,
+            6,
+            8
+          ],
+          "status": "proposed"
+        },
+        "actualAccounting": {
+          "information_cost": 1
+        },
+        "counterfactualAccounting": {
+          "information_cost": 1
+        },
+        "actionOrRefusalChanged": false,
+        "orderedTrialChanged": false,
+        "hypothesisAccountingChanged": false,
+        "strictProposalChanged": true
+      },
+      {
+        "callIndex": 44,
+        "removedFeedbackRows": 2,
+        "removedEvidenceRefs": [
+          "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:22:frame:c252b47f27930110",
+          "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:27:frame:73af6cfbe672501a"
+        ],
+        "retainedBoundTrial": false,
+        "allOtherOwnerFieldsPreserved": true,
+        "unmodifiedRestorationProposalEqual": true,
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 16,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            9,
+            8,
+            6,
+            14
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 10,
+                "y": 54
+              }
+            },
+            {
+              "action_ref": "ACTION6",
+              "data": {
+                "x": 4,
+                "y": 54
+              }
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            14,
+            8,
+            6,
+            9
+          ],
+          "status": "proposed"
+        },
+        "actualAccounting": {
+          "candidate_count": 2,
+          "information_cost": 5,
+          "law_alternatives": 4,
+          "minimax": {
+            "NONWINNING_BRANCHES": 1,
+            "SUM_SQUARED_RESIDUALS": 1,
+            "WORST_NONWINNING_RESIDUAL": 1
+          },
+          "partition_count": 2,
+          "trial_count": 1
+        },
+        "counterfactualAccounting": {
+          "candidate_count": 64,
+          "information_cost": 5,
+          "law_alternatives": 1,
+          "minimax": {
+            "NONWINNING_BRANCHES": 23,
+            "SUM_SQUARED_RESIDUALS": 209,
+            "WORST_NONWINNING_RESIDUAL": 5
+          },
+          "partition_count": 24,
+          "trial_count": 6
+        },
+        "actionOrRefusalChanged": true,
+        "orderedTrialChanged": true,
+        "hypothesisAccountingChanged": true,
+        "strictProposalChanged": true
+      },
+      {
+        "callIndex": 49,
+        "removedFeedbackRows": 2,
+        "removedEvidenceRefs": [
+          "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:22:frame:c252b47f27930110",
+          "sra-v6-4cb91ee9-6d56-43e2-b11c-673f02516234:epoch:3:revision:27:frame:73af6cfbe672501a"
+        ],
+        "retainedBoundTrial": true,
+        "allOtherOwnerFieldsPreserved": true,
+        "unmodifiedRestorationProposalEqual": true,
+        "actualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            9,
+            8,
+            6,
+            14
+          ],
+          "status": "proposed"
+        },
+        "counterfactualDecision": {
+          "actions": [
+            {
+              "action_ref": "ACTION5",
+              "data": {}
+            }
+          ],
+          "kind": "public_feedback_sequence",
+          "orderedTrial": [
+            9,
+            8,
+            6,
+            14
+          ],
+          "status": "proposed"
+        },
+        "actualAccounting": {
+          "information_cost": 1
+        },
+        "counterfactualAccounting": {
+          "information_cost": 1
+        },
+        "actionOrRefusalChanged": false,
+        "orderedTrialChanged": false,
+        "hypothesisAccountingChanged": false,
+        "strictProposalChanged": true
+      }
+    ],
+    "changedActionAndTrialCalls": [
+      8,
+      37,
+      44
+    ],
+    "unchangedActionAndTrialCalls": [
+      12,
+      22,
+      26,
+      42,
+      49
+    ],
+    "unchangedChoiceWithChangedAccounting": [
+      22
+    ],
+    "unchangedBoundSubmissionCalls": [
+      12,
+      26,
+      42,
+      49
+    ],
+    "interpretation": "History changes the next ordered trial at calls 8, 37 and 44. At call22 it changes hypothesis accounting while leaving the chosen trial unchanged. Four already-bound submissions retain both action and trial. All eight full proposals differ, including evidence changes; that strict count is not eight changed choices.",
+    "qualification": "These are component counterfactuals at the same public contexts. They establish a local dependence on acquired feedback where a choice changes. They do not prove that a full caller without feedback would fail, win later, or take these same intervening actions."
+  },
+  "methodPersistence": {
+    "boundaries": [
+      {
+        "recordCallIndex": 13,
+        "completedLevel": 1,
+        "retainedMethodSourceEpoch": 1,
+        "retainedMethodStatus": "hypothesis_to_revalidate_at_next_epoch",
+        "layoutAfter": null,
+        "lastAfter": null,
+        "historyRowsAfter": 0,
+        "methodRetainedWithoutLayout": true,
+        "nextProposalCallIndex": 14,
+        "currentRoleRevalidationPending": true,
+        "revalidationRecordCallIndex": 15,
+        "revalidationStatus": "active_rank_row_confirmed"
+      },
+      {
+        "recordCallIndex": 27,
+        "completedLevel": 2,
+        "retainedMethodSourceEpoch": 2,
+        "retainedMethodStatus": "hypothesis_to_revalidate_at_next_epoch",
+        "layoutAfter": null,
+        "lastAfter": null,
+        "historyRowsAfter": 0,
+        "methodRetainedWithoutLayout": true,
+        "nextProposalCallIndex": 28,
+        "currentRoleRevalidationPending": true,
+        "revalidationRecordCallIndex": 29,
+        "revalidationStatus": "active_rank_row_confirmed"
+      },
+      {
+        "recordCallIndex": 50,
+        "completedLevel": 3,
+        "retainedMethodSourceEpoch": 3,
+        "retainedMethodStatus": "hypothesis_to_revalidate_at_next_epoch",
+        "layoutAfter": null,
+        "lastAfter": null,
+        "historyRowsAfter": 0,
+        "methodRetainedWithoutLayout": true,
+        "qualification": "The campaign target stopped further play; no fourth-level role confirmation is claimed."
+      }
+    ],
+    "qualification": "Only the portable entry-method hypothesis crosses an official boundary. Local layout, active trial and history are reset; subsequent selected additions revalidate the current role."
+  },
+  "coverageLimits": [
+    "All twenty live selections entered through goal_access/observed_feedback_sequence. This live run does not exercise the information_goal selection path.",
+    "All thirty-one live Feedback records are selected-family records. Passive acquisition, source order relative to another selected family, unknown controls and suffix clearing require the separate source-reference/common-factory proofs.",
+    "The replay starts an empty original FeedbackSequences and checks its before/after state, return and full proposal. Captured native states are comparison data only.",
+    "The replay remeasures thirty-two public observations using the original observer. Input candidate lists remain captured caller arguments.",
+    "Public style marks remain opaque signatures. The original finite solver carries alternative code/law accounts; this receipt does not impose a fixed color-to-feedback meaning.",
+    "The Python implementation was not modified. The original common caller was not executed by the comparator, and this receipt runs neither game nor agent.",
+    "Source reference and integration tests cover additional cases; their counts and receipts are separate. No complete V5/V6 migration or global performance approval is claimed here."
+  ]
+}

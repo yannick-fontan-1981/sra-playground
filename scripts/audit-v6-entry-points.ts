@@ -14,6 +14,7 @@ const runtime = await createNativeV6Runtime(declarations), snapshot = runtime.sn
 const sourceGroups = coverage.sourceGroups as { id: string; families: string[]; entryPoints?: (string | null)[] }[];
 const aliases: Record<string, string> = {
   scored_relation_access: 'goal_access', observed_support_access: 'support_navigation',
+  observed_feedback_sequence: 'feedback_sequences',
   observed_composition_services: 'public_occurrence_recall',
   coupled_support_composition: 'public_occurrence_recall',
   alternating_graph_composition: 'public_occurrence_recall',
@@ -59,7 +60,7 @@ const groups = lists.map(([id, declared]) => {
     const family = aliases[question] ?? question;
     const explicitSharedEntry = (['goal_access', 'window_constraints'].includes(id) && family === 'public_occurrence_recall')
       || family === 'public_framed_transfer' || family === 'public_reactive_contact' || family === 'public_ordered_reaction' || family === 'public_observed_inventory'
-      || family === 'public_topological_recolor' || family === 'public_ranked_workshop';
+      || family === 'public_topological_recolor' || family === 'public_ranked_workshop' || family === 'feedback_sequences';
     const connected = registered.has(family) && (!explicitSharedEntry || actual.entryPoints?.some((entry, index) =>
       entry === question && actual.families[index] === family) === true);
     const partial = connected ? coverage.partialEntryPoints?.[question] : null;

@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "mind-campaign.json.gz",
+    "sha256": "995714bd0d458100dfce8c3f1eeeed67f76f4d83de18debfa2569598426bc2f5",
+    "bytes": 4348035
+  },
+  "parts": [
+    {
+      "file": "mind-campaign.json.gz.part000",
+      "sha256": "deb36f4f25acc2878663e15d0bba699727fca9347ee2d209543da72ec3c4f762",
+      "bytes": 900000
+    },
+    {
+      "file": "mind-campaign.json.gz.part001",
+      "sha256": "54d3153e010d97e856e15a304d9df3707b45904c36f94eadfae85fa86072c329",
+      "bytes": 900000
+    },
+    {
+      "file": "mind-campaign.json.gz.part002",
+      "sha256": "9e5e6771cc269f74343ba2526e3082d7b46bb14e3eda1ac72a3ecdbc92a58ccc",
+      "bytes": 900000
+    },
+    {
+      "file": "mind-campaign.json.gz.part003",
+      "sha256": "68da8aa633334344ff82fa6237132a303c43e008b008e09cdf7b737fd359d29c",
+      "bytes": 900000
+    },
+    {
+      "file": "mind-campaign.json.gz.part004",
+      "sha256": "bab4d43f52d7e5a2fc4fe2599310d1466e3654071c14972e2eeaf06ee378e128",
+      "bytes": 748035
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

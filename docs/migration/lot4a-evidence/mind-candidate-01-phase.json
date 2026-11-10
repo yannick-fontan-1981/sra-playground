@@ -1,0 +1,53 @@
+{
+  "schema": "logos-engine.feedback-case-phase.v1",
+  "game": "MIND",
+  "phase": "candidate-01",
+  "selection": {
+    "path": "docs/migration/lot4a-evidence/mind-selection.json",
+    "bytes": 1227,
+    "sha256": "6268cc3eadc9102122b4d3a58182887450f3d42078ff9cbbcf037698fcdde88f"
+  },
+  "generator": {
+    "path": "docs/migration/lot4a-evidence/run-case-phase.py",
+    "bytes": 3760,
+    "sha256": "8731f865589a3435d54970dca274ddc62bb198bc56c2776e54f58bd6b6c15230"
+  },
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-v53-campaign-proof.py",
+    "MIND",
+    "3",
+    "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session"
+  ],
+  "startedAt": "2026-11-10T17:54:17.373187+00:00",
+  "finishedAt": "2026-11-10T17:54:17.587888+00:00",
+  "elapsedSeconds": 0.21507545599888545,
+  "exitCode": 1,
+  "caseDeadlineReached": false,
+  "cumulativeCaseSecondsAtEnd": 0.249249,
+  "output": {
+    "path": "docs/migration/lot4a-evidence/mind-candidate-01-phase.log",
+    "bytes": 182,
+    "sha256": "c619338f77858ac45d4004e09fdadcc5a046d716a2e8b5e3db5b2b9693a6b90f"
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session/execution-mind.json",
+      "bytes": 68026,
+      "sha256": "e1317866bf11bd1fce4449600596faf53c7200f60b34591523b8be114835ab59"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session/mind-output.log.gz",
+      "bytes": 463,
+      "sha256": "fd8552f92dee3af095a477610640db6db8ea7b4d8db5c0d19b9d7584b05e5155"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session/source-manifest.json",
+      "bytes": 32130,
+      "sha256": "09118332044f22a23eb84a7a2b76c1c28bd1c425ec665a9e883510152fc21daa"
+    }
+  ],
+  "qualification": "A single cumulative wall-clock deadline covers every attempt and debugging interval for this selected case. The ordinary common agent receives only public game packets. An action-capped baseline is not a complete-game impossibility verdict."
+}

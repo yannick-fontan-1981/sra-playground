@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 169,
-    "partiallyTransferredModules": 142,
+    "componentVerifiedModules": 172,
+    "partiallyTransferredModules": 143,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1058,
+    "pendingModules": 1054,
     "strategyFamilies": 16
   },
   "families": [
@@ -18629,9 +18629,15 @@
           "endLine": 466
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-feedback-sequences-finite.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-feedback-sequences-reference.py",
+        "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+        "tests/v6-feedback-sequences-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/feedback_trial_choice_d.py",
@@ -88579,9 +88585,18 @@
           "endLine": 142
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-feedback-sequences.ts",
+        "src/logos-engine/v6-feedback-sequences-visual.ts",
+        "src/logos-engine/v6-feedback-sequences-finite.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-feedback-sequences-reference.py",
+        "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+        "tests/v6-feedback-sequences-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/feedback_sequences/finite.py",
@@ -88596,9 +88611,18 @@
           "endLine": 53
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-feedback-sequences.ts",
+        "src/logos-engine/v6-feedback-sequences-visual.ts",
+        "src/logos-engine/v6-feedback-sequences-finite.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-feedback-sequences-reference.py",
+        "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+        "tests/v6-feedback-sequences-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/feedback_sequences/visual.py",
@@ -88655,9 +88679,18 @@
           "endLine": 67
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-feedback-sequences.ts",
+        "src/logos-engine/v6-feedback-sequences-visual.ts",
+        "src/logos-engine/v6-feedback-sequences-finite.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-feedback-sequences-reference.py",
+        "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+        "tests/v6-feedback-sequences-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/framed_transfer/__init__.py",

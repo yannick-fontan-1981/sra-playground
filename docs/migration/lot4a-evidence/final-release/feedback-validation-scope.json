@@ -1,0 +1,94 @@
+{
+  "schema": "logos-engine.feedback-validation-scope.v1",
+  "status": "functional_scope_passed_browser_unverified",
+  "nativeSourceManifestDigest": "66be0948fdff5abe10b12d253bb4583db067aab2f5b7248632c9f9d443bc53fe",
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "tests": {
+    "passed": 548,
+    "files": 29,
+    "feedbackSourceTests": 37,
+    "feedbackCommonIntegrationTests": 7,
+    "entireHistoricalSuite": false
+  },
+  "buildChecks": {
+    "passed": 5,
+    "total": 5
+  },
+  "recordedPublicRegressions": {
+    "games": [
+      "CATR",
+      "RSWP",
+      "FOGW",
+      "VOIS"
+    ],
+    "passed": 68,
+    "total": 68,
+    "newLiveSuccessClaims": false
+  },
+  "sourcePublicReplay": {
+    "exactCalls": 51,
+    "totalCalls": 51,
+    "observationsRemeasured": 32,
+    "persistedPrefixStates": 20,
+    "originalsVerifiedUnchanged": 1786
+  },
+  "gameContribution": {
+    "game": "MIND",
+    "levels": 3,
+    "actions": 31,
+    "prefixes": 20,
+    "historyAblations": 8,
+    "changedActionAndTrial": 3,
+    "unchangedActionAndTrial": 5
+  },
+  "guardsAndAcquisition": [
+    "both selection paths with one owner and original flags/order",
+    "selected and passive acquisition exactly once",
+    "current point and palette bindings, compacting palette and bounded prefixes",
+    "unknown action and submission measurement barriers",
+    "ambiguous feedback, contradiction, local recalled-method refutation, no effect and official boundary",
+    "suffix clear and restoration",
+    "method-only state persistence through an official boundary and current revalidation",
+    "cooperative cancellation/deadline: incomplete domain and no recommendation"
+  ],
+  "limitations": [
+    "Browser QA blocked by Chromium/CDP/native provider failures; no visible game or UI Pause success claimed.",
+    "No complete original Python caller parity.",
+    "No import/migration of a complete legacy0.49 graph: native protocol initializes a new store and resume continues current runtime. Existing persistence formats remain unchanged.",
+    "Consumed V5 closure only; unrelated feedback-code identification operations are not transferred.",
+    "Cost acceptance, machine isolation and deployment require their own completed receipts."
+  ],
+  "evidence": [
+    {
+      "path": "docs/migration/lot4a-evidence/final/source-manifest.json",
+      "bytes": 32130,
+      "sha256": "09118332044f22a23eb84a7a2b76c1c28bd1c425ec665a9e883510152fc21daa"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final-release/validation/delta-tests-run.json",
+      "bytes": 110274,
+      "sha256": "1166890e3c7352cb56f9c576db1bc09809ddf2c9f061b313032bf31e13c75cf0"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final/validation/checks-run.json",
+      "bytes": 74808,
+      "sha256": "cc11f97c1d599a490c7e6eefa90eeea356e6add2fb9dd7b22b1ac6eceb15fc91"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final/feedback-public-contribution.json",
+      "bytes": 51324,
+      "sha256": "a60bf7aa6f3482ef694b7cfe108d48fb175f79067103367f61f290e57a68821f"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final/mind-resolution.json",
+      "bytes": 2267,
+      "sha256": "213eb088d2bf4b60be770d948f2efdf76ab73592dc4838cb5abb8e039abd119c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final/browser/browser-qa.json",
+      "bytes": 1363,
+      "sha256": "95de452b1d2cc38c0fd23ffbb414318e1ece68f9f43843320673d343926e63bd"
+    }
+  ],
+  "additionalRegistryCoverage": "The historical radial integration registry test now includes Feedback and requires its exact source entry, asserting54/76. The prior536-test/28-file receipt remains immutable in final/ as a historical gate; this release gate covers the final test inventory."
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "logos-engine.lot7a.prepared-integration.v1",
+  "recordedAt": "2026-11-10T19:17:10.439256+00:00",
+  "incomingCommit": "025b8000265f75441aaf57e62514c0b580b62218",
+  "incomingPublicationVerified": false,
+  "publicationRequiredBeforeFinalFreeze": true,
+  "preparation": "Source-only additive merge of committed4A onto published3I plus7A. Native number0.51 is provisional and not a final candidate identity.",
+  "sourceOrder": [
+    "recall passive return",
+    "workshop passive return unless selected",
+    "other existing acquisitions",
+    "Reactive state",
+    "Workshop source state",
+    "Feedback passive return unless selected and state",
+    "Morphology departures"
+  ],
+  "entryAudit": 56,
+  "declaredEntries": 76,
+  "migrationSummary": {
+    "pythonModules": 1369,
+    "pythonLines": 320375,
+    "declaredClassesAndFunctions": 12857,
+    "dataFiles": 417,
+    "verifiedModules": 0,
+    "componentVerifiedModules": 172,
+    "partiallyTransferredModules": 143,
+    "transferredUnverifiedModules": 0,
+    "pendingModules": 1054,
+    "strategyFamilies": 16
+  },
+  "initialAuditFailures": [
+    "Missing differential evidence: tests/fixtures/v6-feedback-sequences-reference.json.gz",
+    "Missing differential evidence: tests/fixtures/v6-feedback-sequences-reference.json.gz"
+  ],
+  "auditResolution": "Restored the exact1,032,946-byte Feedback fixture from its two immutable SHA256-verified parts using evidence-byte-parts.py. Recomputed audit has no missing evidence. No source/fixture expectation changes.",
+  "noRuntimeValidationClaim": true,
+  "heavyWorkStarted": false
+}
