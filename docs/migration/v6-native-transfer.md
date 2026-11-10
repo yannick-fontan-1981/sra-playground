@@ -39,6 +39,8 @@ The [publication-input integrity receipt](lot7a-evidence/integrated-final/public
 
 <!-- LOT7A_COST_FINAL_END -->
 
+**The initial 7A publication is verified in Site 82**, source commit `0ca36b0a6a358e1e89420753bbcec4a33f028e0a`, terminal deployment **`succeeded`**, with owner-private access preserved. The [publication receipt](lot7a-evidence/integrated-final/publication-site82.json) binds the pushed source and server-reported archive. The [bounded source transport](lot7a-evidence/integrated-final/publication-source-transport.json) retains all original commits and the exact target tree; five ordinary pushes were followed by one final Site deployment. All 75 deployment member contents are byte-identical across local packages; container hashes are retained separately. Documentation closure retains the same native engine. Lot 7B implementation now proceeds in a separate checkout from this published commit.
+
 Current integrated coverage is **56/76 complete declared entries, zero partial entries and 20 remaining**, with **6/6 observed-composition branches** and **37 compiled workflows**. The audit records **172 component-verified modules, 143 partial transfers, 1,054 pending and zero fully verified modules**, within **1,369 Python modules and 417 data files**. All six full-migration gates and `fullV6Parity` remain false. The LKEY 2/3 reservation, complete inherited closure and full-caller parity remain open; lot 7B is outside this transfer.
 
 ## Historical transfer: lot 4A native 0.51.0, acquired feedback and post-measurement cost qualification
