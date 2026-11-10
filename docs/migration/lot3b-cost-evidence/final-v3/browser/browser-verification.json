@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "observedAtUtc": "2026-11-10T02:14:50.763222+00:00",
+  "status": "passed",
+  "surface": "managed Vite development preview using the frozen native TypeScript source; not a test of the built dist worker asset",
+  "url": "http://127.0.0.1:4173/?game=CATR&level=4",
+  "nativeVersion": "0.40.0",
+  "nativeSourceSha256": "391a2797414c0090fa632a2fc13736c7806c1f5fceceafa34e1583dd4ef9e3a9",
+  "game": "CATR",
+  "initial": {
+    "level": 1,
+    "actions": 0,
+    "levelsSolved": 0,
+    "completedPlans": 0
+  },
+  "final": {
+    "level": 4,
+    "actions": 12,
+    "levelsSolved": 3,
+    "completedPlans": 8,
+    "statusText": "Level completed."
+  },
+  "checkpoints": [
+    {
+      "level": 2,
+      "actions": 3,
+      "levelsSolved": 1,
+      "completedPlans": 2
+    },
+    {
+      "level": 3,
+      "actions": 7,
+      "levelsSolved": 2,
+      "completedPlans": 5
+    },
+    {
+      "level": 4,
+      "actions": 12,
+      "levelsSolved": 3,
+      "completedPlans": 8
+    }
+  ],
+  "pauseChecks": [
+    {
+      "actions": 0,
+      "statusText": "Paused."
+    },
+    {
+      "actions": 5,
+      "levelsSolved": 1,
+      "completedPlans": 3,
+      "statusText": "Paused."
+    }
+  ],
+  "partialPrefixCheck": {
+    "actions": 2,
+    "completedPlans": 1,
+    "level": 1,
+    "resumedToNextNaturalLevel": true
+  },
+  "sameSession": true,
+  "manualGameActions": 0,
+  "resets": 0,
+  "levelJumps": 0,
+  "reasoningInspectorExpanded": false,
+  "screenshot": {
+    "path": "docs/migration/lot3b-cost-evidence/final-v3/browser/catr-browser.png",
+    "bytes": 82128,
+    "sha256": "1ab335a13fb6c5c4dfbc5f76e91187f7f9ca3b868a11596b92d385c756d93ec5"
+  },
+  "limitations": [
+    "Three completed levels, not a complete game victory.",
+    "UI source verification is separate from the production build receipt and from isolated performance measurement."
+  ],
+  "interactionSequence": [
+    "Select CATR; Agent tab: level 1, 0 actions, 0 solved, 0 plans.",
+    "Run then Pause: paused with 0 actions.",
+    "One action twice: 2 actions, 1 completed plan, level 1.",
+    "Run to next level: level 2, 3 actions, 1 solved, 2 plans.",
+    "One action: 4 actions.",
+    "Run then Pause: paused at 5 actions, 1 solved, 3 plans.",
+    "Run to next level: level 3, 7 actions, 2 solved, 5 plans.",
+    "Run to next level: level 4, 12 actions, 3 solved, 8 plans."
+  ]
+}

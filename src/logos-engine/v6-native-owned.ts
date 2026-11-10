@@ -11,6 +11,10 @@ const retained = new WeakMap<object, number>();
  * There is no aggregate size cap: the state graph fragments large histories.
  */
 export function retainNativeJson<T>(value: T): T {
+  // At the root, a retained value has already passed the complete depth and
+  // property contract. Descendant reuse below still checks its stored height
+  // against the insertion depth before accepting an existing immutable tree.
+  if (value !== null && typeof value === 'object' && retained.has(value)) return value;
   const ancestors = new WeakSet<object>();
   function visit(input: unknown, depth: number): { value: unknown; height: number; shared: boolean } {
     if (depth > 128) throw new TypeError('Native retained state nesting exceeds its contract');

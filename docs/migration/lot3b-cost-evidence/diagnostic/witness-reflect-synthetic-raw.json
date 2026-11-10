@@ -1,0 +1,118 @@
+{
+  "kind": "synthetic_diagnostic_only",
+  "note": "No runtime/source change; current witness reused; full structural inspections on every call; not an official budget comparison.",
+  "results": [
+    {
+      "case": "grid64",
+      "implementation": "current",
+      "round": 0,
+      "calls": 100,
+      "elapsedMs": 85.08681999999999
+    },
+    {
+      "case": "grid64",
+      "implementation": "alternative",
+      "round": 0,
+      "calls": 100,
+      "elapsedMs": 50.274269000000004
+    },
+    {
+      "case": "grid64",
+      "implementation": "alternative",
+      "round": 1,
+      "calls": 100,
+      "elapsedMs": 48.63696300000004
+    },
+    {
+      "case": "grid64",
+      "implementation": "current",
+      "round": 1,
+      "calls": 100,
+      "elapsedMs": 91.494914
+    },
+    {
+      "case": "grid64",
+      "implementation": "current",
+      "round": 2,
+      "calls": 100,
+      "elapsedMs": 85.438378
+    },
+    {
+      "case": "grid64",
+      "implementation": "alternative",
+      "round": 2,
+      "calls": 100,
+      "elapsedMs": 80.56150999999994
+    },
+    {
+      "case": "grid64",
+      "implementation": "alternative",
+      "round": 3,
+      "calls": 100,
+      "elapsedMs": 85.24329499999999
+    },
+    {
+      "case": "grid64",
+      "implementation": "current",
+      "round": 3,
+      "calls": 100,
+      "elapsedMs": 93.20593999999994
+    },
+    {
+      "case": "records",
+      "implementation": "current",
+      "round": 0,
+      "calls": 100,
+      "elapsedMs": 56.485536000000025
+    },
+    {
+      "case": "records",
+      "implementation": "alternative",
+      "round": 0,
+      "calls": 100,
+      "elapsedMs": 21.610341000000062
+    },
+    {
+      "case": "records",
+      "implementation": "alternative",
+      "round": 1,
+      "calls": 100,
+      "elapsedMs": 21.87608399999999
+    },
+    {
+      "case": "records",
+      "implementation": "current",
+      "round": 1,
+      "calls": 100,
+      "elapsedMs": 56.11446599999999
+    },
+    {
+      "case": "records",
+      "implementation": "current",
+      "round": 2,
+      "calls": 100,
+      "elapsedMs": 57.154906000000096
+    },
+    {
+      "case": "records",
+      "implementation": "alternative",
+      "round": 2,
+      "calls": 100,
+      "elapsedMs": 22.245692000000076
+    },
+    {
+      "case": "records",
+      "implementation": "alternative",
+      "round": 3,
+      "calls": 100,
+      "elapsedMs": 21.842975000000024
+    },
+    {
+      "case": "records",
+      "implementation": "current",
+      "round": 3,
+      "calls": 100,
+      "elapsedMs": 58.33174900000017
+    }
+  ]
+}

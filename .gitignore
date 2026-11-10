@@ -150,3 +150,37 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot3b-evidence/final/catr-session/catr-campaign.json.gz
 /docs/migration/lot3b-evidence/final/regressions/rswp-038-replay.json.gz
+
+# Lot 3B cost correction: lossless source/profile originals and retained measurement logs
+/docs/migration/lot3b-cost-evidence/final/source-archive.tar.gz
+/docs/migration/lot3b-cost-evidence/diagnostic/stck-before.cpuprofile
+/docs/migration/lot3b-cost-evidence/diagnostic/stck-after.cpuprofile
+!/docs/migration/lot3b-cost-evidence/performance/cohort1/baseline.log
+!/docs/migration/lot3b-cost-evidence/performance/cohort1/after.log
+!/docs/migration/lot3b-cost-evidence/performance/cohort2/baseline.log
+!/docs/migration/lot3b-cost-evidence/performance/cohort2/after.log
+/docs/migration/lot3b-cost-evidence/final-v2/source-archive.tar.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot3b-cost-evidence/final-v2/catr-cost-session/catr-campaign.json.gz
+/docs/migration/lot3b-cost-evidence/final-v2/regressions/catr-039-replay.json.gz
+/docs/migration/lot3b-cost-evidence/final-v2/regressions/rswp-039-replay.json.gz
+
+/docs/migration/lot3b-cost-evidence/final-v3/source-archive.tar.gz
+
+# Preserve every log of the second declared Lot 3B cost window.
+!/docs/migration/lot3b-cost-evidence/performance-v2/cohort1/baseline.log
+!/docs/migration/lot3b-cost-evidence/performance-v2/cohort1/after.log
+!/docs/migration/lot3b-cost-evidence/performance-v2/cohort2/baseline.log
+!/docs/migration/lot3b-cost-evidence/performance-v2/cohort2/after.log
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/catr-campaign.json.gz
+/docs/migration/lot3b-cost-evidence/final-v3/regressions/catr-039-replay.json.gz
+/docs/migration/lot3b-cost-evidence/final-v3/regressions/rswp-039-replay.json.gz
+
+# Retain all four normal-path v2 diagnostic logs alongside their profiles.
+!/docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-stck.log
+!/docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-smlp.log
+!/docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-after-stck.log
+!/docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-after-smlp.log

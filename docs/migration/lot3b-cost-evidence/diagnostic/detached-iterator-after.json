@@ -1,0 +1,133 @@
+{
+  "schema": "logos-engine.detached-iterator-regression.v1",
+  "status": "passed",
+  "command": [
+    "node",
+    "--test",
+    "--test-reporter=tap",
+    "tests/v6-inventory-family-reference.test.ts",
+    "tests/v6-inventory-restoration-cache.test.ts",
+    "tests/v6-native-working-witness.test.ts",
+    "tests/v6-shared-series-native.test.ts",
+    "tests/v6-relational-chamber-integration.test.ts"
+  ],
+  "startedAt": "2026-11-10T01:13:44.070498+00:00",
+  "finishedAt": "2026-11-10T01:13:45.718528+00:00",
+  "elapsedSeconds": 1.6480350919955526,
+  "exitCode": 0,
+  "testCounts": {
+    "tests": 232,
+    "pass": 232,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "targetTest": "a detached Map inherited iterator cannot certify a closure-dependent inventory projection",
+  "targetTestPassed": true,
+  "inputs": [
+    {
+      "path": "src/logos-engine/v6-native-working-witness.ts",
+      "sha256": "fff7787232c752b91accb917974290312fbd34f7cbddb0112fcf6ac2ee298d02",
+      "bytes": 5414
+    },
+    {
+      "path": "src/logos-engine/v6-observed-inventory.ts",
+      "sha256": "ba67f83a8c8b8457a72ed82fea84221f122acddbd866a691ba44370f03783f69",
+      "bytes": 43333
+    },
+    {
+      "path": "src/logos-engine/v6-shared-series.ts",
+      "sha256": "9a4452f1cea829d72d989331349e9abf56585b7af1bd0290e855d9fd5ed2ded6",
+      "bytes": 70157
+    },
+    {
+      "path": "tests/v6-inventory-family-reference.test.ts",
+      "sha256": "2091f6807c8bbb0549f38f0ae3cd07ece7771cab222a6cf2a84dd56174d1a755",
+      "bytes": 10102
+    },
+    {
+      "path": "tests/v6-inventory-restoration-cache.test.ts",
+      "sha256": "3cbd8db7cad3987f48cc508bf7b264b545ffe642e0639e911786a0eca3c9ad71",
+      "bytes": 14848
+    },
+    {
+      "path": "tests/v6-native-working-witness.test.ts",
+      "sha256": "09efa79b462ac9dfa998a8ca42fdc21019a01543c71d6561cc170b4658639c81",
+      "bytes": 7416
+    },
+    {
+      "path": "tests/v6-shared-series-native.test.ts",
+      "sha256": "3746f7d817f6dc17537089ac9fc430d1620e447ab23ac014e2efdc67a6f8144a",
+      "bytes": 27704
+    },
+    {
+      "path": "tests/v6-relational-chamber-integration.test.ts",
+      "sha256": "fa9195286072ccbbadc774f8737954e1b06799f71a8b95e5574a698d55cb3741",
+      "bytes": 11924
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "src/logos-engine/v6-native-working-witness.ts",
+      "sha256": "fff7787232c752b91accb917974290312fbd34f7cbddb0112fcf6ac2ee298d02",
+      "bytes": 5414
+    },
+    {
+      "path": "src/logos-engine/v6-observed-inventory.ts",
+      "sha256": "ba67f83a8c8b8457a72ed82fea84221f122acddbd866a691ba44370f03783f69",
+      "bytes": 43333
+    },
+    {
+      "path": "src/logos-engine/v6-shared-series.ts",
+      "sha256": "9a4452f1cea829d72d989331349e9abf56585b7af1bd0290e855d9fd5ed2ded6",
+      "bytes": 70157
+    },
+    {
+      "path": "tests/v6-inventory-family-reference.test.ts",
+      "sha256": "2091f6807c8bbb0549f38f0ae3cd07ece7771cab222a6cf2a84dd56174d1a755",
+      "bytes": 10102
+    },
+    {
+      "path": "tests/v6-inventory-restoration-cache.test.ts",
+      "sha256": "3cbd8db7cad3987f48cc508bf7b264b545ffe642e0639e911786a0eca3c9ad71",
+      "bytes": 14848
+    },
+    {
+      "path": "tests/v6-native-working-witness.test.ts",
+      "sha256": "09efa79b462ac9dfa998a8ca42fdc21019a01543c71d6561cc170b4658639c81",
+      "bytes": 7416
+    },
+    {
+      "path": "tests/v6-shared-series-native.test.ts",
+      "sha256": "3746f7d817f6dc17537089ac9fc430d1620e447ab23ac014e2efdc67a6f8144a",
+      "bytes": 27704
+    },
+    {
+      "path": "tests/v6-relational-chamber-integration.test.ts",
+      "sha256": "fa9195286072ccbbadc774f8737954e1b06799f71a8b95e5574a698d55cb3741",
+      "bytes": 11924
+    }
+  ],
+  "inputsUnchanged": true,
+  "nativeSourceBefore": {
+    "fileCount": 249,
+    "digest": "f0ba85e80fbe7543f2e2360c6b6e846ae76839cb6ede0e9c022d31b56f46cece"
+  },
+  "nativeSourceAfter": {
+    "fileCount": 249,
+    "digest": "f0ba85e80fbe7543f2e2360c6b6e846ae76839cb6ede0e9c022d31b56f46cece"
+  },
+  "nativeSourceUnchanged": true,
+  "beforeRegression": {
+    "path": "docs/migration/lot3b-cost-evidence/diagnostic/detached-iterator-before.json",
+    "sha256": "776a73bcdf3c5a8a9dcaede676dea5afaa401f81e954f1449e71cfe5512e826e",
+    "bytes": 2923
+  },
+  "output": {
+    "path": "docs/migration/lot3b-cost-evidence/diagnostic/detached-iterator-after-output.tap.gz",
+    "sha256": "6788d9ecf02fdb8f4b0c25eefeab3c3f194b206148a352834c75da543252bf89",
+    "bytes": 7172
+  },
+  "qualification": "The five affected contract files run once after the iterable guard correction. The exact previously failing detached-Map test now passes; all source fixtures, caller-cache, working-witness and shared Chamber integration tests in this command remain unskipped. Full TAP and input hashes are retained. No game, official cost measurement, build or source oracle ran. The later final-v2 frozen complete delta validation remains a separate required gate."
+}

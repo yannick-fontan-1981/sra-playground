@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "cases": [
+    {
+      "id": "catr-039",
+      "game": "CATR",
+      "baseline": {
+        "path": "docs/migration/lot3b-evidence/final/catr-session/catr-campaign.json.gz",
+        "sha256": "fd793852bacb8a14e90f587ec4feb7c746caddccfe3e478e62a6d436ac48349d"
+      },
+      "trace": {
+        "path": "docs/migration/lot3b-evidence/final/catr-session/catr-public-trace.json.gz",
+        "sha256": "02b5acafd9b1e260c620042f56325c52e312a9245839aa6d9030ee686108046c"
+      }
+    },
+    {
+      "id": "rswp-039",
+      "game": "RSWP",
+      "baseline": {
+        "path": "docs/migration/lot3b-evidence/final/regressions/rswp-038-replay.json.gz",
+        "sha256": "2b4971c486f742645fd26d88fdfefe5ff40b1bf87a1f6d37073de5717292548e"
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "qualification": "Two predeclared cold common-agent command recomputations against immutable successful 0.39 reports: CATR 12 actions/3 levels/8 prefixes and RSWP 19 actions/3 levels/11 prefixes. The RSWP 0.39 report was produced by replay of the retained 0.38 public trace whose complete packets are unchanged; this exact trace is reused, without relabeling its provenance. Both 0.39 baselines already include the Chamber observer-schema fields, unlike the historical 0.38-to-0.39 strict 16/17 comparison, which remains unchanged. Every current command is computed before its recorded return is supplied. No expected command, game solution, learned state or level jump initializes native reasoning. These are scoped recorded-return regressions, not new live-game successes or timing measurements."
+}

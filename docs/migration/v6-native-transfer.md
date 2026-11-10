@@ -11,7 +11,88 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-## Current functional delivery: lot 3B relational chamber, native 0.39.0, cost reserve
+## Current correction: lot 3B native 0.40.0, functional validation complete, cost reserve
+
+The current native freeze is **`391a2797414c0090fa632a2fc13736c7806c1f5fceceafa34e1583dd4ef9e3a9`**, **249 native files**, retained in
+[`final-v3/`](lot3b-cost-evidence/final-v3/source-manifest.json), with an archive
+of 260 files. The [correction report](lot3b-cost-correction.md) binds the successive
+attempts to their actual source digests. Native 0.40.0 also identifies the earlier
+`f0ba` attempt, whose failed official cost evidence remains separate and unchanged.
+
+The common restoration correction removes repeated descriptor allocations,
+checks of the same certificate within one call, and redundant tracker validation
+and copies. Staged owners are published after the complete caller context has
+validated. A full restore does not certify its incoming value as a projection of
+those owners: defaults and duplicate Map keys can normalize the input. A later
+validated source projection establishes that certificate. Mutable container
+identity, property order, direct mutations, customized or inherited iterators,
+old checkpoints, unique acquisition and atomic rejection remain covered.
+The transferred V5/V6 behavior and the two-branch functional scope are preserved.
+
+| Current evidence, freeze `391a279` | Verified result and scope |
+| --- | --- |
+| Affected contracts and integration tests | **1,322/1,322 tests in 35 files**; [formal receipt](lot3b-cost-evidence/final-v3/validation/delta-tests-run.json) |
+| Project checks | Typecheck, entry and migration audits, diff check and production build pass; [receipt](lot3b-cost-evidence/final-v3/validation/checks-run.json) |
+| Fresh CATR campaign | **12 actions, three levels, eight prefixes**, one cold session, natural arrival at level 4 in `NOT_FINISHED`; [execution](lot3b-cost-evidence/final-v3/catr-cost-v3-session/execution-catr.json) |
+| Browser confirmation | **12 actions, three levels, eight plans**, initial and five-action pauses, retained partial prefix; frozen TypeScript source preview, distinct from the built worker; [receipt](lot3b-cost-evidence/final-v3/browser/browser-verification.json) |
+| CATR and RSWP recorded regressions | **34/34 checks** against the two 0.39 references; CATR **12/3/8**, RSWP **19/3/11** in actions/levels/prefixes; [summary](lot3b-cost-evidence/final-v3/regressions/regression-summary.json) |
+| New official cost result | **`budget_review_required`, 14/16**; SMLP acquisition/persistence **+11.642%** and restoration **+14.989%** unresolved; fresh 0.38 reference and the unchanged **+10% limit for each of sixteen medians**; [aggregate](lot3b-cost-evidence/performance-v2/combined-comparison.json) |
+
+The first official 0.40 attempt, freeze
+**`f0ba85e80fbe7543f2e2360c6b6e846ae76839cb6ede0e9c022d31b56f46cece`**,
+passed **1,272/1,272 tests in 33 files**, but its
+[cost aggregate](lot3b-cost-evidence/performance/combined-comparison.json) is
+**`budget_review_required`, 14/16**. Restoration increased by **66.160% on STCK**
+and **21.511% on SMLP**. Its source archive, functional receipts and all measured
+sessions remain retained. The earlier 0.39 **15/16** cost failure also remains
+recorded below; neither result is replaced by the new source or its tests.
+
+The completed new window retains two cohorts in A1/B1/B2/A2 order, **eight
+sessions per case/version, 32 measured sessions and 400 actions**, with the same
+warmups, inputs and threshold. Its actual aggregate is **14/16**:
+
+| Phase | Fresh 0.38 median | 0.40 `391a279` median | Change | Aggregate verdict |
+| --- | ---: | ---: | ---: | --- |
+| STCK restoration, 96 samples per version | 11.0582455 ms | 11.5247265 ms | **+4.218400%** | Within +10% |
+| SMLP acquisition/persistence, 72 samples per version | 987.2867115 ms | 1,102.223294 ms | **+11.641662%** | **Unresolved** |
+| SMLP restoration, 144 samples per version | 4.871004 ms | 5.601095 ms | **+14.988512%** | **Unresolved** |
+
+Both SMLP criteria retain `over_budget_with_noise_unresolved`. Cohort 1 remains
+**14/16**, cohort 2 **13/16**, and every declared measured session remains included.
+The STCK cohort failures also remain visible: **restoration +10.266% in cohort 1**
+and **continuation guard +11.078% in cohort 2**. These measurements do not establish
+their causes.
+The [independent consolidation review](lot3b-cost-evidence/performance-v2/consolidation-review.json)
+passes **231 checks**, confirming **32 unique sessions, 400 actions and the same
+failed budget**. It validates the arithmetic, not a cost closure. The
+[full results](lot3b-cost-evidence/performance-v2/results.md) retain distributions,
+p95, cohort failures and qualifications under the
+[predeclared protocol](lot3b-cost-evidence/performance-v2/protocol.md).
+Nested phases are not additive, and noise introduces no additional allowance.
+The precise causes of the two SMLP increases remain to be isolated.
+
+**Native 0.40.0 is functionally validated with a cost reserve; 3B remains open.**
+The next priority is to diagnose and then reduce the common acquisition,
+persistence and restoration work still over budget on SMLP through a generic
+correction, while retaining
+CATR **12/3/8**, RSWP **19/3/11**, guards, unique acquisition and old checkpoints.
+A changed source freeze and predeclared protocol must precede any future cost
+validation against fresh 0.38. No additional measurement of the same `391a279`
+is requested to replace this outcome. **3C, `exposed_reception_plan`, follows
+only after the cost requirement closes.**
+The current three-level CATR confirmations establish non-regression of the generic
+correction, not an additional game capability or a complete-game victory.
+The new 34 checks against 0.39 preserve the historical strict RSWP 0.38 → 0.39
+**16/17 failure** and its separate empty-extension qualification.
+
+Coverage remains **50/76 complete entries**, **two of six branches** in the
+explicitly partial observed-composition entry, and **37 compiled workflows**.
+All six complete-migration gates remain false. The
+[delivery roadmap](v6-delivery-roadmap.md) retains all eleven lots and the separate
+2A/2B/2C scopes. The next step addresses the two unresolved common-path costs;
+this functional correction does not close lot 3B or the overall migration.
+
+## Preserved functional delivery: lot 3B relational chamber, native 0.39.0, cost reserve
 
 Native **0.39.0** connects **`chamber_relation_plan`**, the second of six
 observed-composition branches, through the existing `public_occurrence_recall`
@@ -77,13 +158,13 @@ p95 rises from **22.611702 to 29.389767 ms**, approximately **+29.98%**. P95 was
 not an additional budget gate; the higher tail remains a recorded limitation.
 The [complete cost results](lot3b-evidence/performance/results.md) preserve all
 cohorts, distributions and qualifications. The cause of the restoration increase
-is not established. **3B remains open with a functional delivery and cost reserve.**
+is not established. **This 0.39 result left 3B open with a functional delivery and cost reserve.**
 
 The registry remains **50/76**, with **two of six branches** in its explicitly
 partial observed-composition entry and **37 compiled workflows**. The complete
-migration flag remains false. The next priority is a **generic 3B restoration
-cost correction** of the common path, preserving complete identity, revision and
-invalidation checks, guards, acquisition and restoration. It requires a new source
+migration flag remains false. At that delivery, the next priority was a **generic 3B
+restoration cost correction** of the common path, preserving complete identity,
+revision and invalidation checks, guards, acquisition and restoration. That continuation required a new source
 freeze, a new protocol and functional/cost validation against a **fresh 0.38
 reference**, not merely 0.39. The threshold stays unchanged; no additional ad hoc
 measurement of the same 0.39 replaces the retained failure.

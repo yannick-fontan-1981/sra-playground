@@ -113,6 +113,22 @@ test('a chamber event outside the common journal cannot certify a new checkpoint
   family.restoreNative(trusted); assert.deepEqual(family.state(), trusted);
 });
 
+test('an equivalent replacement chamber cannot inherit the previous restoration certificate', () => {
+  const family = seeded([panelEvent(), chamberEvent()]), checkpoint = family.nativeState();
+  family.restoreNative(checkpoint);
+  const original = family.chamber, replacement = new RelationalChamberMemory();
+  replacement.applyEvent(chamberEvent());
+  assert.equal(replacement.nativeRevision, original.nativeRevision);
+  assert.deepEqual(replacement.currentState(), original.currentState());
+  family.chamber = replacement;
+  family.restoreNative(checkpoint);
+  assert.notEqual(family.chamber, replacement, 'Matching values and revisions do not certify a different working owner');
+  assert.deepEqual(family.state(), checkpoint);
+  const restored = family.chamber;
+  family.restoreNative(checkpoint);
+  assert.equal(family.chamber, restored, 'The newly verified owner can retain the unchanged authoritative state');
+});
+
 for (const item of source.commons as R[]) test(`common chamber envelope matches source ${item.id}`, async () => {
   const family = seeded(item.seedEvents), args = item.arguments, checkpoint = family.nativeState();
   const propose = () => family.observedPropose(args.obs, args.rows, args.inputs, args.remaining, args.config, args.levelDeadline);

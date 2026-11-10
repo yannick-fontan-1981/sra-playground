@@ -15,12 +15,12 @@ import { provisional_scenes } from './v6-inventory-initial.ts';
 import { measured_paths } from './v6-inventory-routing.ts';
 import { digest, find_body, locate, moved_core } from './v6-inventory-measurements.ts';
 import { InventoryPolicy, INVENTORY_WORKFLOW, inventoryReceipt } from './v6-inventory-policy.ts';
-import { InventoryCallerContext } from './v6-inventory-caller-context.ts';
-import type { CollectionEvidence } from './v6-inventory-caller-context.ts';
+import { InventoryCallerContext, ObservedMeter, CollectionEvidence } from './v6-inventory-caller-context.ts';
 import { NativeSrcProgram } from './v6-src-program.ts';
 import { checkPreservation } from './v6-transition-learning.ts';
 import { pythonEqual as same, pythonTruthy as truth } from './v6-operations.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
+import { captureWorkingWitness, matchesWorkingWitness, type NativeWorkingWitness } from './v6-native-working-witness.ts';
 import { isJsonObject } from './canonical.ts';
 import type { JsonObject, Primitive } from './ir.ts';
 import type { NativeFamily, NativeRows, NativeRecord, NativeObservation, NativePublicObservation,
@@ -28,10 +28,27 @@ import type { NativeFamily, NativeRows, NativeRecord, NativeObservation, NativeP
 type R = Record<string, any>;
 const clone = <T>(value: T): T => structuredClone(value);
 const FIELDS = ['tracker', 'seen_pairs', 'failed', 'access_returns', 'endpoint_memory', 'boundary_memory', 'pending_access', 'retained_effect_scope'] as const;
+const WORKING_FIELDS = [...FIELDS, 'callerContext'] as const;
 const FORMAT = 'native.public_observed_inventory.v1';
 const core = (entity: R): R => ({ signature: entity.signature, palette_value: entity.palette_value, area: entity.area, offsets: clone(entity.mask) });
 
-function validatedState(value: R): R {
+/** Resolve a data method without invoking a replacement accessor. A customized
+ * projection remains on the ordinary source serialization/validation path. */
+function dataMethod(value: unknown, name: string): unknown {
+  for (let owner = value; owner !== null && (typeof owner === 'object' || typeof owner === 'function'); owner = Object.getPrototypeOf(owner)) {
+    const descriptor = Object.getOwnPropertyDescriptor(owner, name);
+    if (descriptor) return 'value' in descriptor ? descriptor.value : undefined;
+  }
+  return undefined;
+}
+
+const cellStateProjection = CellProjection.prototype.state;
+const cellRestoreProjection = CellProjection.prototype.restore;
+const contextStateProjection = InventoryCallerContext.prototype.state;
+const meterStateProjection = ObservedMeter.prototype.state;
+const collectionStateProjection = CollectionEvidence.prototype.retained_state;
+
+function retainedSourceState(value: R): R {
   const state = retainNativeJson(value);
   if (Object.keys(state).length !== FIELDS.length || FIELDS.some(k => !Object.hasOwn(state, k))
     || !isJsonObject(state.tracker) || ['seen_pairs', 'access_returns', 'endpoint_memory'].some(k => !Array.isArray(state[k]) || !state[k].every(isJsonObject))
@@ -39,8 +56,27 @@ function validatedState(value: R): R {
     || ['boundary_memory', 'pending_access', 'retained_effect_scope'].some(k => state[k] !== null && !isJsonObject(state[k]))) {
     throw new TypeError('Invalid observed inventory source state');
   }
+  return state;
+}
+
+function validatedState(value: R): R {
+  const state = retainedSourceState(value);
   const tracker = new CellProjection(); tracker.restore(clone(state.tracker));
   return state;
+}
+
+interface PreparedInventoryState {
+  tracker: CellProjection;
+  fields: readonly (readonly [string, unknown])[];
+}
+
+/** CellProjection.restore already detaches its input. Keep that validated
+ * working tracker, and detach every other field before publishing any owner. */
+function prepareSourceState(value: R): PreparedInventoryState {
+  const state = retainedSourceState(value), tracker = new CellProjection();
+  tracker.restore(state.tracker);
+  const fields = FIELDS.filter(key => key !== 'tracker').map(key => [key, clone(state[key])] as const);
+  return { tracker, fields };
 }
 
 export class ObservedInventory implements NativeFamily<any> {
@@ -61,6 +97,7 @@ export class ObservedInventory implements NativeFamily<any> {
   private program!: NativeProgramHandle;
   private readonly callbacks: Readonly<Record<string, Primitive>>;
   private checkpoint: R | null = null;
+  private checkpointWitness: readonly NativeWorkingWitness[] | null = null;
   private revision = 0;
   private callerContext: InventoryCallerContext | null = null;
   private goalModels: (() => readonly R[]) | null = null;
@@ -91,35 +128,103 @@ export class ObservedInventory implements NativeFamily<any> {
     return this.callerContext?.record(before, after, command, first, second, proposal, index) ?? [];
   }
   get nativeRevision(): number { this.nativeState(); return this.revision; }
+  /** The public source containers intentionally remain mutable. These exact
+   * witnesses cover the entire persisted tracker, eight source fields and caller
+   * context, including nested maps/sets/arrays; a version alone is insufficient. */
+  private workingValues(): readonly unknown[] | null {
+    const values: unknown[] = [];
+    for (const key of WORKING_FIELDS) {
+      const descriptor = Object.getOwnPropertyDescriptor(this, key);
+      if (!descriptor || !('value' in descriptor) || !descriptor.enumerable) return null;
+      values.push(descriptor.value);
+    }
+    const tracker = values[0], context = values.at(-1);
+    if (dataMethod(this, 'state') !== inventoryStateProjection
+      || dataMethod(this, 'callerContextState') !== inventoryContextProjection
+      || dataMethod(tracker, 'state') !== cellStateProjection
+      || dataMethod(this, 'restore') !== inventoryRestoreProjection
+      || dataMethod(CellProjection.prototype, 'restore') !== cellRestoreProjection) return null;
+    if (context !== null) {
+      const meter = Object.getOwnPropertyDescriptor(context, 'meter');
+      const collection = Object.getOwnPropertyDescriptor(context, 'collection');
+      if (!meter || !('value' in meter) || !collection || !('value' in collection)
+        || dataMethod(context, 'state') !== contextStateProjection
+        || dataMethod(meter.value, 'state') !== meterStateProjection
+        || dataMethod(collection.value, 'retained_state') !== collectionStateProjection) return null;
+    }
+    return values;
+  }
+  private captureCheckpointWitness(): void {
+    // Unsupported working containers keep their previous source behavior;
+    // optional memoization never introduces an additional acceptance or refusal.
+    try { this.checkpointWitness = this.workingValues()?.map(value => captureWorkingWitness(value)) ?? null; }
+    catch { this.checkpointWitness = null; }
+  }
+  private unchangedCheckpointWorkingState(): boolean {
+    if (!this.checkpointWitness) return false;
+    try {
+      const values = this.workingValues();
+      return values !== null && values.every((value, index) => matchesWorkingWitness(this.checkpointWitness![index]!, value));
+    } catch { return false; }
+  }
   state(): R {
     return { tracker: this.tracker.state(), ...clone(Object.fromEntries(FIELDS.filter(k => k !== 'tracker').map(k => [k, this[k]]))) };
   }
   sourceState(): R { return this.state(); }
+  private publishSourceState(next: PreparedInventoryState): void {
+    this.tracker = next.tracker;
+    for (const [key, value] of next.fields) (this as unknown as R)[key] = value;
+    this.checkpointWitness = null;
+  }
   restore(value: NativeRecord): void {
-    const next = validatedState({ tracker: value.tracker, seen_pairs: value.seen_pairs ?? [], failed: value.failed ?? [],
+    const source = { tracker: value.tracker, seen_pairs: value.seen_pairs ?? [], failed: value.failed ?? [],
       access_returns: value.access_returns ?? [], endpoint_memory: value.endpoint_memory ?? [], boundary_memory: value.boundary_memory ?? null,
-      pending_access: value.pending_access ?? null, retained_effect_scope: value.retained_effect_scope ?? null });
+      pending_access: value.pending_access ?? null, retained_effect_scope: value.retained_effect_scope ?? null };
+    if (dataMethod(CellProjection.prototype, 'restore') === cellRestoreProjection) {
+      this.publishSourceState(prepareSourceState(source)); return;
+    }
+    // A customized source restore retains the original calls and their order.
+    const next = validatedState(source);
     const tracker = new CellProjection(); tracker.restore(clone(next.tracker));
     this.tracker = tracker;
     for (const k of FIELDS) if (k !== 'tracker') (this as unknown as R)[k] = clone(next[k]);
+    this.checkpointWitness = null;
   }
   nativeState(): NativeRecord {
+    if (this.checkpoint && this.unchangedCheckpointWorkingState()) return this.checkpoint;
     const value = { format: FORMAT, source_state: validatedState(this.state()), caller_context: this.callerContextState() };
-    if (this.checkpoint && same(this.checkpoint, value)) return this.checkpoint;
-    this.checkpoint = retainNativeJson(value); this.revision++; return this.checkpoint;
+    if (!this.checkpoint || !same(this.checkpoint, value)) { this.checkpoint = retainNativeJson(value); this.revision++; }
+    this.captureCheckpointWitness();
+    return this.checkpoint;
   }
   restoreNative(value: Readonly<NativeRecord>): void {
+    if (value === this.checkpoint && this.unchangedCheckpointWorkingState()) return;
     if (value === this.checkpoint && same(this.state(), this.checkpoint!.source_state)
-      && same(this.callerContextState(), this.checkpoint!.caller_context)) return;
+      && same(this.callerContextState(), this.checkpoint!.caller_context)) { this.captureCheckpointWitness(); return; }
     const supplied = retainNativeJson(value);
     if (!isJsonObject(supplied) || supplied.format !== FORMAT || Object.keys(supplied).length !== 3
       || !isJsonObject(supplied.source_state) || (supplied.caller_context === null) !== (this.callerContext === null)) {
       throw new TypeError('Invalid native observed inventory checkpoint');
     }
-    const next = validatedState(supplied.source_state), context = this.callerContext ? new InventoryCallerContext() : null;
-    if (context) context.restore(supplied.caller_context as R);
-    this.restore(next); this.callerContext = context;
+    let context: InventoryCallerContext | null;
+    if (dataMethod(this, 'restore') === inventoryRestoreProjection
+      && dataMethod(CellProjection.prototype, 'restore') === cellRestoreProjection) {
+      const next = prepareSourceState(supplied.source_state);
+      context = this.callerContext ? new InventoryCallerContext() : null;
+      if (context) context.restore(supplied.caller_context as R);
+      this.publishSourceState(next);
+    } else {
+      const next = validatedState(supplied.source_state);
+      context = this.callerContext ? new InventoryCallerContext() : null;
+      if (context) context.restore(supplied.caller_context as R);
+      this.restore(next);
+    }
+    this.callerContext = context;
     const changed = !this.checkpoint || !same(this.checkpoint, supplied); this.checkpoint = supplied; if (changed) this.revision++;
+    // Source restorers may add defaults or normalize duplicate Map entries.
+    // The incoming value is not yet a projection of those working owners.
+    // Only a subsequent source projection may certify checkpoint reuse.
+    this.checkpointWitness = null;
   }
   preservationObligations(obs: NativeObservation, rows: NativeRows): R[] { return this.preservation_obligations(obs, rows); }
   preservation_obligations(obs: R, rows: NativeRows): R[] {
@@ -472,3 +577,9 @@ export class ObservedInventory implements NativeFamily<any> {
     return { events: [this.recordSource(before, after, command, first, second, proposal, index)] };
   }
 }
+
+// Capture the original projections once. Replaced prototype or instance
+// methods are valid source customizations, but cannot certify cache reuse.
+const inventoryStateProjection = ObservedInventory.prototype.state;
+const inventoryContextProjection = ObservedInventory.prototype.callerContextState;
+const inventoryRestoreProjection = ObservedInventory.prototype.restore;

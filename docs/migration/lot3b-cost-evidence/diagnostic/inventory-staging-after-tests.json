@@ -1,0 +1,123 @@
+{
+  "schema": "logos-engine.inventory-staging-validation.v1",
+  "status": "passed",
+  "command": [
+    "node",
+    "--test",
+    "--test-reporter=tap",
+    "tests/v6-inventory-family-reference.test.ts",
+    "tests/v6-inventory-restoration-cache.test.ts"
+  ],
+  "startedAt": "2026-11-10T01:56:01.800054+00:00",
+  "finishedAt": "2026-11-10T01:56:03.285263+00:00",
+  "elapsedSeconds": 1.4852349479988334,
+  "exitCode": 0,
+  "testCounts": {
+    "tests": 185,
+    "pass": 185,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "inputs": [
+    {
+      "path": "src/logos-engine/v6-observed-inventory.ts",
+      "bytes": 45269,
+      "sha256": "4571c8c584140a77afbde6b3532d214927512d4e71173deb6ed177520d2c8f09"
+    },
+    {
+      "path": "src/logos-engine/v6-native-working-witness.ts",
+      "bytes": 5896,
+      "sha256": "08bca697678eb3a89960ff2ed1c49b9fc0c91082b86952be51edf0f34a1f38fb"
+    },
+    {
+      "path": "src/logos-engine/v6-native-owned.ts",
+      "bytes": 3414,
+      "sha256": "363201fabc39c04fde4069b410a7b1fcdba89210aabd3671987fde9c6f8ef9c0"
+    },
+    {
+      "path": "src/logos-engine/v6-inventory-project.ts",
+      "bytes": 11045,
+      "sha256": "124bacd0897db9a99a3c1975afb386cafd659c73a6ad3ea290090f4dcd866fe9"
+    },
+    {
+      "path": "src/logos-engine/v6-inventory-caller-context.ts",
+      "bytes": 21023,
+      "sha256": "da6e83d1a7bd9afcc0ad8f2b4124609285dec49dac07f54502b130c867839ff9"
+    },
+    {
+      "path": "tests/v6-inventory-family-reference.test.ts",
+      "bytes": 10102,
+      "sha256": "2091f6807c8bbb0549f38f0ae3cd07ece7771cab222a6cf2a84dd56174d1a755"
+    },
+    {
+      "path": "tests/v6-inventory-restoration-cache.test.ts",
+      "bytes": 18941,
+      "sha256": "28cab805bdfcdcc43883debd11e102f264e679628e2224a5bb53151d0a842dfc"
+    },
+    {
+      "path": "tests/fixtures/v6-inventory-family-reference.json.gz",
+      "bytes": 147644,
+      "sha256": "6ffb59fd02e8ce1755de8889e13ca9fb9773ba14334a314ef139f4c54ccc816b"
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "src/logos-engine/v6-observed-inventory.ts",
+      "bytes": 45269,
+      "sha256": "4571c8c584140a77afbde6b3532d214927512d4e71173deb6ed177520d2c8f09"
+    },
+    {
+      "path": "src/logos-engine/v6-native-working-witness.ts",
+      "bytes": 5896,
+      "sha256": "08bca697678eb3a89960ff2ed1c49b9fc0c91082b86952be51edf0f34a1f38fb"
+    },
+    {
+      "path": "src/logos-engine/v6-native-owned.ts",
+      "bytes": 3414,
+      "sha256": "363201fabc39c04fde4069b410a7b1fcdba89210aabd3671987fde9c6f8ef9c0"
+    },
+    {
+      "path": "src/logos-engine/v6-inventory-project.ts",
+      "bytes": 11045,
+      "sha256": "124bacd0897db9a99a3c1975afb386cafd659c73a6ad3ea290090f4dcd866fe9"
+    },
+    {
+      "path": "src/logos-engine/v6-inventory-caller-context.ts",
+      "bytes": 21023,
+      "sha256": "da6e83d1a7bd9afcc0ad8f2b4124609285dec49dac07f54502b130c867839ff9"
+    },
+    {
+      "path": "tests/v6-inventory-family-reference.test.ts",
+      "bytes": 10102,
+      "sha256": "2091f6807c8bbb0549f38f0ae3cd07ece7771cab222a6cf2a84dd56174d1a755"
+    },
+    {
+      "path": "tests/v6-inventory-restoration-cache.test.ts",
+      "bytes": 18941,
+      "sha256": "28cab805bdfcdcc43883debd11e102f264e679628e2224a5bb53151d0a842dfc"
+    },
+    {
+      "path": "tests/fixtures/v6-inventory-family-reference.json.gz",
+      "bytes": 147644,
+      "sha256": "6ffb59fd02e8ce1755de8889e13ca9fb9773ba14334a314ef139f4c54ccc816b"
+    }
+  ],
+  "inputsUnchanged": true,
+  "nativeSourceBefore": {
+    "fileCount": 249,
+    "digest": "e684ea04af37416b15301745725e8d483fdf05052b25e27f95e6a72af5b501b7"
+  },
+  "nativeSourceAfter": {
+    "fileCount": 249,
+    "digest": "e684ea04af37416b15301745725e8d483fdf05052b25e27f95e6a72af5b501b7"
+  },
+  "nativeSourceUnchanged": true,
+  "output": {
+    "path": "docs/migration/lot3b-cost-evidence/diagnostic/inventory-staging-after-tests.tap.gz",
+    "bytes": 5222,
+    "sha256": "eddaf0a27968ea4710652aaf07fd1b289d65500aea0a92029f93f956e8d1082b"
+  },
+  "qualification": "One targeted source-reference and inventory-cache validation after staged restoration. All previously present tests and four additional transaction/copy/custom-restoration cases execute without skips. No game, benchmark, profile or build. Full final frozen validation is a separate gate."
+}

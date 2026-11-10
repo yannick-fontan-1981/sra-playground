@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.native-restoration-copy.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T02:07:28.148406+00:00",
+  "files": [
+    {
+      "source": "/workspace/scratch/c4dd29871d33/lot3b-f0ba-diagnostic/docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-stck.json.gz",
+      "destination": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-stck.json.gz",
+      "bytes": 112591,
+      "sha256": "1cb5f280525b7221e6c9692f1b053647930c97a02cc0bac3ac0884e1e3f4abb7",
+      "byteIdentical": true
+    },
+    {
+      "source": "/workspace/scratch/c4dd29871d33/lot3b-f0ba-diagnostic/docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-stck.log",
+      "destination": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-stck.log",
+      "bytes": 588,
+      "sha256": "f370abd5c77c93b9aecbee02696cf2ce78c0a6cce3ea9517a89be980db26c3d0",
+      "byteIdentical": true
+    },
+    {
+      "source": "/workspace/scratch/c4dd29871d33/lot3b-f0ba-diagnostic/docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-smlp.json.gz",
+      "destination": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-smlp.json.gz",
+      "bytes": 142718,
+      "sha256": "dc457ab32ec38ef29b27fdf3fcc9560ef472efa659c30e2403246234f03db329",
+      "byteIdentical": true
+    },
+    {
+      "source": "/workspace/scratch/c4dd29871d33/lot3b-f0ba-diagnostic/docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-smlp.log",
+      "destination": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-smlp.log",
+      "bytes": 582,
+      "sha256": "4d56c503da588b2a94c2b1c370ab9be59bc93998e76667ded51832f74a458d9c",
+      "byteIdentical": true
+    }
+  ],
+  "qualification": "Original compressed profiles and stdout/stderr logs copied byte-for-byte. No receipt field, source identity, environment or timing is rewritten."
+}

@@ -1,0 +1,1375 @@
+{
+  "schema": "logos-engine.lot3b.cost-candidate-evidence-index.v1",
+  "status": "functional_validated_cost_reserve",
+  "recordedAt": "2026-11-10T02:31:45.149304+00:00",
+  "implementation": "0.40.0",
+  "candidate": "final-v3",
+  "publication": {
+    "status": "pending_after_evidence_freeze",
+    "audience": "owner-private",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258"
+  },
+  "nativeSourceManifestDigest": "391a2797414c0090fa632a2fc13736c7806c1f5fceceafa34e1583dd4ef9e3a9",
+  "nativeFileCount": 249,
+  "functionalBaseline": {
+    "publication": 67,
+    "implementation": "0.39.0",
+    "commitSha": "81b937373b80e8c92c36856da0ec46b37db38956"
+  },
+  "costBaseline": {
+    "publication": 66,
+    "implementation": "0.38.0",
+    "commitSha": "b5d95c59bda43e5a5ee83dd067a0f28767205ab0",
+    "remeasuredInThisWindow": true
+  },
+  "functional": {
+    "tests": {
+      "tests": 1322,
+      "pass": 1322,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "testFiles": 35,
+    "checks": [
+      {
+        "name": "typecheck",
+        "exitCode": 0
+      },
+      {
+        "name": "entry-audit",
+        "exitCode": 0
+      },
+      {
+        "name": "migration-audit",
+        "exitCode": 0
+      },
+      {
+        "name": "diff-check",
+        "exitCode": 0
+      },
+      {
+        "name": "build",
+        "exitCode": 0
+      }
+    ],
+    "regressionCases": 2,
+    "regressionChecks": 34,
+    "regressionTotals": {
+      "commands": 31,
+      "completePublicPackets": 33,
+      "animationFrames": 336,
+      "prefixes": 19,
+      "requests": 50,
+      "naturalLevelBoundaries": 6
+    },
+    "coldCATR": {
+      "actions": 12,
+      "levelsCompleted": 3,
+      "level": 4,
+      "state": "NOT_FINISHED",
+      "prefixes": 8,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 12,
+        "resume": 7
+      }
+    },
+    "coldRunTimingIsNotAnOfficialPerformanceMetric": true,
+    "browser": {
+      "schemaVersion": 1,
+      "observedAtUtc": "2026-11-10T02:14:50.763222+00:00",
+      "status": "passed",
+      "surface": "managed Vite development preview using the frozen native TypeScript source; not a test of the built dist worker asset",
+      "url": "http://127.0.0.1:4173/?game=CATR&level=4",
+      "nativeVersion": "0.40.0",
+      "nativeSourceSha256": "391a2797414c0090fa632a2fc13736c7806c1f5fceceafa34e1583dd4ef9e3a9",
+      "game": "CATR",
+      "initial": {
+        "level": 1,
+        "actions": 0,
+        "levelsSolved": 0,
+        "completedPlans": 0
+      },
+      "final": {
+        "level": 4,
+        "actions": 12,
+        "levelsSolved": 3,
+        "completedPlans": 8,
+        "statusText": "Level completed."
+      },
+      "checkpoints": [
+        {
+          "level": 2,
+          "actions": 3,
+          "levelsSolved": 1,
+          "completedPlans": 2
+        },
+        {
+          "level": 3,
+          "actions": 7,
+          "levelsSolved": 2,
+          "completedPlans": 5
+        },
+        {
+          "level": 4,
+          "actions": 12,
+          "levelsSolved": 3,
+          "completedPlans": 8
+        }
+      ],
+      "pauseChecks": [
+        {
+          "actions": 0,
+          "statusText": "Paused."
+        },
+        {
+          "actions": 5,
+          "levelsSolved": 1,
+          "completedPlans": 3,
+          "statusText": "Paused."
+        }
+      ],
+      "partialPrefixCheck": {
+        "actions": 2,
+        "completedPlans": 1,
+        "level": 1,
+        "resumedToNextNaturalLevel": true
+      },
+      "sameSession": true,
+      "manualGameActions": 0,
+      "resets": 0,
+      "levelJumps": 0,
+      "reasoningInspectorExpanded": false,
+      "screenshot": {
+        "path": "docs/migration/lot3b-cost-evidence/final-v3/browser/catr-browser.png",
+        "bytes": 82128,
+        "sha256": "1ab335a13fb6c5c4dfbc5f76e91187f7f9ca3b868a11596b92d385c756d93ec5"
+      },
+      "limitations": [
+        "Three completed levels, not a complete game victory.",
+        "UI source verification is separate from the production build receipt and from isolated performance measurement."
+      ],
+      "interactionSequence": [
+        "Select CATR; Agent tab: level 1, 0 actions, 0 solved, 0 plans.",
+        "Run then Pause: paused with 0 actions.",
+        "One action twice: 2 actions, 1 completed plan, level 1.",
+        "Run to next level: level 2, 3 actions, 1 solved, 2 plans.",
+        "One action: 4 actions.",
+        "Run then Pause: paused at 5 actions, 1 solved, 3 plans.",
+        "Run to next level: level 3, 7 actions, 2 solved, 5 plans.",
+        "Run to next level: level 4, 12 actions, 3 solved, 8 plans."
+      ]
+    },
+    "nativeAgentWorker": {
+      "path": "dist/assets/v6-agent-worker-L-T091Z6.js",
+      "sha256": "bb6d18b3d639aefcb9d75abadd886a33df66bd87f891848f747f2f7a04148c7d",
+      "bytes": 6354241
+    }
+  },
+  "cost": {
+    "status": "budget_review_required",
+    "relativeBudget": 0.1,
+    "withinObservedBudget": 14,
+    "budgetMetricCount": 16,
+    "unresolved": [
+      {
+        "case": "SMLP",
+        "stage": "acquisition_and_persistence",
+        "result": "over_budget_with_noise_unresolved",
+        "medianRelativeIncrease": 0.11641662058369717
+      },
+      {
+        "case": "SMLP",
+        "stage": "restoration",
+        "result": "over_budget_with_noise_unresolved",
+        "medianRelativeIncrease": 0.14988511608644695
+      }
+    ],
+    "cohorts": [
+      {
+        "cohort": 1,
+        "status": "budget_review_required",
+        "withinObservedBudget": 14,
+        "unresolved": [
+          {
+            "case": "STCK",
+            "stage": "restoration",
+            "result": "over_budget_with_noise_unresolved",
+            "medianRelativeIncrease": 0.1026569662616148
+          },
+          {
+            "case": "SMLP",
+            "stage": "restoration",
+            "result": "over_budget_with_noise_unresolved",
+            "medianRelativeIncrease": 0.22777047226201508
+          }
+        ]
+      },
+      {
+        "cohort": 2,
+        "status": "budget_review_required",
+        "withinObservedBudget": 13,
+        "unresolved": [
+          {
+            "case": "STCK",
+            "stage": "known_prefix_guard",
+            "result": "over_budget_with_noise_unresolved",
+            "medianRelativeIncrease": 0.11078043486188927
+          },
+          {
+            "case": "SMLP",
+            "stage": "acquisition_and_persistence",
+            "result": "over_budget_with_noise_unresolved",
+            "medianRelativeIncrease": 0.12111726173106585
+          },
+          {
+            "case": "SMLP",
+            "stage": "restoration",
+            "result": "over_budget_with_noise_unresolved",
+            "medianRelativeIncrease": 0.13801227947098282
+          }
+        ]
+      },
+      {
+        "cohort": "combined",
+        "status": "budget_review_required",
+        "withinObservedBudget": 14,
+        "unresolved": [
+          {
+            "case": "SMLP",
+            "stage": "acquisition_and_persistence",
+            "result": "over_budget_with_noise_unresolved",
+            "medianRelativeIncrease": 0.11641662058369717
+          },
+          {
+            "case": "SMLP",
+            "stage": "restoration",
+            "result": "over_budget_with_noise_unresolved",
+            "medianRelativeIncrease": 0.14988511608644695
+          }
+        ]
+      }
+    ],
+    "totalMeasuredSessions": 32,
+    "measuredActions": 400,
+    "measuredSessionsPerCaseAndVersion": 8,
+    "excludedWarmups": 8,
+    "excludedWarmupActions": 24,
+    "excludedMeasuredSessions": 0,
+    "excludedOutliers": 0,
+    "startedAt": "2026-11-10T02:14:55.244567+00:00",
+    "finishedAt": "2026-11-10T02:24:16.686977+00:00",
+    "arithmeticReview": {
+      "status": "passed",
+      "budgetStatus": "budget_review_required",
+      "checks": 231,
+      "receipt": {
+        "path": "docs/migration/lot3b-cost-evidence/performance-v2/consolidation-review.json",
+        "bytes": 45663,
+        "sha256": "282f3ce55693f781cc47dab5ed3eff9107dd65c5819db1baa1d5a087312115e9"
+      }
+    },
+    "noFollowupCohortOnSameSource": true
+  },
+  "diagnostics": {
+    "normalPathV2": [
+      {
+        "case": "STCK",
+        "receipt": {
+          "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-comparison-stck.json",
+          "bytes": 555572,
+          "sha256": "11ab08959a631a71c5fd69796bd33fe4d3f214f2c67eb596602153d0a4044926"
+        },
+        "status": "scoped_behavior_identical",
+        "checksPassed": 6,
+        "checksExpected": 6,
+        "strictFinalEquality": false,
+        "workDiagnosticsRetained": true
+      },
+      {
+        "case": "SMLP",
+        "receipt": {
+          "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-comparison-smlp.json",
+          "bytes": 714096,
+          "sha256": "3b1d7396c873616ee8a809a2fe00e6a3cf66277b5cc714a61e47113bfd25055c"
+        },
+        "status": "scoped_behavior_identical",
+        "checksPassed": 6,
+        "checksExpected": 6,
+        "strictFinalEquality": false,
+        "workDiagnosticsRetained": true
+      }
+    ],
+    "instrumentedSTCKRestorationTimingImproved": false,
+    "witnessOutcomeDifferencesRetained": true,
+    "wholeGraphEqualityClaimed": false,
+    "diagnosticDurationsDoNotOverrideBudget": true
+  },
+  "preservedAttempts": [
+    {
+      "candidate": "final",
+      "digest": "55192314213367a8c35e579b8cba17a022146359e1a76efcc1ae9caf5f6ce9cc",
+      "status": "superseded_after_reproduced_detached_iterator_contract_failure",
+      "formalTestsPassed": 1270
+    },
+    {
+      "candidate": "final-v2",
+      "digest": "f0ba85e80fbe7543f2e2360c6b6e846ae76839cb6ede0e9c022d31b56f46cece",
+      "status": "functional_validated_cost_rejected",
+      "formalTestsPassed": 1272,
+      "costWithinObservedBudget": 14,
+      "costMetricCount": 16,
+      "index": {
+        "path": "docs/migration/lot3b-cost-evidence/final-v2/campaign-evidence-index.json",
+        "bytes": 17479,
+        "sha256": "496bb854fa98a119fd13d80cacd231980bf6fc00b0f4314d629062869fe9f0e6"
+      },
+      "integrity": {
+        "path": "docs/migration/lot3b-cost-evidence/final-v2/delivery-integrity.json",
+        "bytes": 6915,
+        "sha256": "f291877a7130a447e796f212c15038f5111f6f6796d55a4941eaea57187aafa3"
+      }
+    }
+  ],
+  "migration": {
+    "connectedEntries": 50,
+    "declaredEntries": 76,
+    "observedCompositionBranchesConnected": 2,
+    "observedCompositionBranchesDeclared": 6,
+    "compiledWorkflows": 37,
+    "fullV6Parity": false,
+    "completionGates": {
+      "allRequiredCapabilitiesTransferred": false,
+      "fullCommonCallerDifferentialParity": false,
+      "allDeclaredFamiliesIntegrated": false,
+      "commonGraphEditingCoversExecutedPrograms": false,
+      "pythonNumericSemanticsCovered": false,
+      "fullCampaignRegression": false
+    },
+    "coverageSummary": {
+      "pythonModules": 1369,
+      "pythonLines": 320375,
+      "declaredClassesAndFunctions": 12857,
+      "dataFiles": 417,
+      "verifiedModules": 0,
+      "componentVerifiedModules": 153,
+      "partiallyTransferredModules": 133,
+      "transferredUnverifiedModules": 0,
+      "pendingModules": 1083,
+      "strategyFamilies": 16
+    },
+    "lot3BStatus": "open_with_functional_validation_and_cost_reserve",
+    "lot3CStatus": "waiting_for_3B_cost_closure"
+  },
+  "nextStep": "Diagnose then reduce shared acquisition/persistence and restoration work still outside the SMLP budget; preserve CATR/RSWP and all contracts; perform a materially changed source freeze and a predeclared fresh comparison before closing 3B and starting exposed_reception_plan.",
+  "limitations": [
+    "CATR confirms the previously acquired first three levels; this correction adds no new game capability and does not claim a complete victory.",
+    "CATR browser evidence uses the frozen-source Vite preview, separately from the built production worker receipt.",
+    "All original failed cohorts and the historical 0.38 to 0.39 RSWP strict 16/17 result remain retained.",
+    "Normal-path scoped comparisons do not establish strict whole-graph identity.",
+    "Finite matched public replays do not establish hours-long stability, production network latency or a population confidence interval.",
+    "File integrity and arithmetic review success never imply cost acceptance or complete migration."
+  ],
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3b-cost-correction.md",
+      "bytes": 27647,
+      "sha256": "78708e3d8351566e3931b79a81d972e224dcd88a19c88c3206d8c05ccaf23fd9"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/base/source-manifest.json",
+      "bytes": 28936,
+      "sha256": "0024028577107a7dbcc65ea0cc3ffa929a0ce5a6e7f11bf4515a169fc5cb1146"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/cpu-summary.json",
+      "bytes": 214598,
+      "sha256": "d812e763d1a90d8845e79aac1d73b38e40b03d3104a37776e4fba9643ee28f7b"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/detached-iterator-after-output.tap.gz",
+      "bytes": 7172,
+      "sha256": "6788d9ecf02fdb8f4b0c25eefeab3c3f194b206148a352834c75da543252bf89"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/detached-iterator-after.json",
+      "bytes": 4943,
+      "sha256": "89444c12b28c68d57476fc6003acb6b53c929962c15cf8c2dfb22da2c5cb9abe"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/detached-iterator-before-output.tap.gz",
+      "bytes": 2348,
+      "sha256": "ee3a4725eab8a3ec2e51adc6c77259e9d79f2ac8c00fbd00bedfa203ac8e301c"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/detached-iterator-before.json",
+      "bytes": 2923,
+      "sha256": "776a73bcdf3c5a8a9dcaede676dea5afaa401f81e954f1449e71cfe5512e826e"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/inventory-normalization-after.json",
+      "bytes": 4961,
+      "sha256": "9c9dc97dcaf9180544b58ba37f9f010cb27da6b033960012cbbf397b7a45386a"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/inventory-normalization-after.tap.gz",
+      "bytes": 5333,
+      "sha256": "a9f0b0d0254fdea40eb34597b526fd464a822c6e7eed0ed94f3fab6d93815e4d"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/inventory-normalization-before.json",
+      "bytes": 4253,
+      "sha256": "e9e5332793ae6cd08e241ebf9f6e2fc34957564d7c42df9138877131753977ba"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/inventory-normalization-before.tap.gz",
+      "bytes": 1304,
+      "sha256": "9003dd16ae134379a1f0384625fef4b144c22e7797421c3abf3259a04047b9d3"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/inventory-staging-after-tests.json",
+      "bytes": 4308,
+      "sha256": "e8b4065a650d27591e47198ab00d2856b17cf13aefddc0b694b463315cdfdc68"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/inventory-staging-after-tests.tap.gz",
+      "bytes": 5222,
+      "sha256": "eddaf0a27968ea4710652aaf07fd1b289d65500aea0a92029f93f956e8d1082b"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-before-smlp.json.gz",
+      "bytes": 143263,
+      "sha256": "ab8608f7a4492a073fe02ff018041bd1453747b7e6a94a4a2aa25c5198566f72"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-before-stck.json.gz",
+      "bytes": 112956,
+      "sha256": "e17ee82cd69142361e9e6a8014431bc531461924260f73c3ed0450cc3eae4f1f"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-comparator-v2-schema-validation.json",
+      "bytes": 752,
+      "sha256": "5d5e72f9540c1807ea15f421bf6f6189dd62b2b0d60f358585456b0f863931d0"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-comparator-validation.json",
+      "bytes": 1767,
+      "sha256": "e3028f8823bfd34c3a45fb133b047093670c7cd0fe14f28705bee55fd97456b2"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-protocol.md",
+      "bytes": 11341,
+      "sha256": "e8a95b4c5b75f1bda77725f29ecae7f896146ab2d28b2c537e37d41f16021ce7"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-after-smlp.json.gz",
+      "bytes": 142657,
+      "sha256": "40b0279ae828f7b184f5cf38af2a858f0a945ff4e25e7035e11582dbdcf77d37"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-after-smlp.log",
+      "bytes": 580,
+      "sha256": "51ddda00a529693e5fe45e32b6dfbbdbf14caba662c7372dda3d8d07b6acdb4e"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-after-stck.json.gz",
+      "bytes": 112358,
+      "sha256": "99844c25cc4e8953897502969c1acd8d1dcf8dfa2ab96dfd384ed580e77d7151"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-after-stck.log",
+      "bytes": 580,
+      "sha256": "309677533479e34781e7532af5f44dadadd316829eeafb8dcee31f221bad8fa1"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-copy.json",
+      "bytes": 1922,
+      "sha256": "0889ee52f95bf5bdc78d099f39fb30f06cc16a9cb03390c6e92035e7c5dd6ea3"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-smlp.json.gz",
+      "bytes": 142718,
+      "sha256": "dc457ab32ec38ef29b27fdf3fcc9560ef472efa659c30e2403246234f03db329"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-smlp.log",
+      "bytes": 582,
+      "sha256": "4d56c503da588b2a94c2b1c370ab9be59bc93998e76667ded51832f74a458d9c"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-stck.json.gz",
+      "bytes": 112591,
+      "sha256": "1cb5f280525b7221e6c9692f1b053647930c97a02cc0bac3ac0884e1e3f4abb7"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-before-stck.log",
+      "bytes": 588,
+      "sha256": "f370abd5c77c93b9aecbee02696cf2ce78c0a6cce3ea9517a89be980db26c3d0"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-comparison-smlp.json",
+      "bytes": 714096,
+      "sha256": "3b1d7396c873616ee8a809a2fe00e6a3cf66277b5cc714a61e47113bfd25055c"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-comparison-stck.json",
+      "bytes": 555572,
+      "sha256": "11ab08959a631a71c5fd69796bd33fe4d3f214f2c67eb596602153d0a4044926"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-isolated-source.json",
+      "bytes": 2613,
+      "sha256": "1810fae53941b3372812646d329207893b314872782c0c137d1aaf3a7e433762"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-preflight.json",
+      "bytes": 2774,
+      "sha256": "1b0ca798ecb7de810e2c826a703fd43f462c8fbd8e03b0c5ada1d1bade04f3dd"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/normal-path-v2-protocol.md",
+      "bytes": 12102,
+      "sha256": "9acd1ea4afc772e973032993607d0e8da7a601df8208ed8a81514f94bd5ad037"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/preliminary-freeze.json",
+      "bytes": 3019,
+      "sha256": "6a71abf63a6371529bdf66223739aeaa99839cb048b7eedc5529cf8b4acde3d2"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/profile-native-restoration-path-v1-archive.json",
+      "bytes": 1383,
+      "sha256": "5de808a8f65a9899e83dbd1ab9ebe6f5bc2ab18d92018a25826345c2cd36e5bd"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/profile-native-restoration-path-v1.mjs",
+      "bytes": 17301,
+      "sha256": "fa0af03af9b2e9ed6e299ee25c9466556ba67db616ccf4bd4a5586f16d72dc6c"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/protocol.md",
+      "bytes": 1816,
+      "sha256": "35995a6e9915c49df147ca0ea529101e0ad4524c100a2f0a7fb73dbbffd75e98"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/reflect-witness-after-output.tap.gz",
+      "bytes": 7258,
+      "sha256": "8eeb3500cd36ad5841c631696db4e3485d4cffe71cce95864022a85b16ea0bf3"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/reflect-witness-after.json",
+      "bytes": 4476,
+      "sha256": "84561da8102ef17d0f46a4343a6e22ea67914f493998272637f340c0955406f4"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/results.md",
+      "bytes": 22534,
+      "sha256": "64432cfe1cced2e27b1fcfb341f5d5f686204321200e762a47d458251ca776c0"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/scoped-behavior.json",
+      "bytes": 2127,
+      "sha256": "16e5289060a4a09b45f95ff392a1754cc0fe6718a9cdecad23eebc49831b2154"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/stck-after.cpuprofile.gz",
+      "bytes": 176069,
+      "sha256": "8b199477f1cda62ccf2c7d16f1f1061e8f07cc2560179c0abd75f383ffa086fa"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/stck-after.json.gz",
+      "bytes": 122423,
+      "sha256": "6a71695cf9e3ee72201ec84b796ddffddda024c8c52c4361f39316c7378a4139"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/stck-before.cpuprofile.gz",
+      "bytes": 167159,
+      "sha256": "83484c35f502514e80f3b2a602544257464d430402bc1716f0b139bf500c6eba"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/stck-before.json.gz",
+      "bytes": 122329,
+      "sha256": "c6f0d502893164c7c289fdcd697748844896952533dd9bc15b754fed977dff86"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/witness-reflect-synthetic-raw.json",
+      "bytes": 2584,
+      "sha256": "d7cad91574febb22355704830f6006fadfd04dfe97a1e6e053bde017a39edb11"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/witness-reflect-synthetic-replay.mjs",
+      "bytes": 4408,
+      "sha256": "45bbb33b7fe5859f26f30bc68cba301f5d0f968e0c77a8440688955c7995b0c1"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/diagnostic/witness-reflect-synthetic.json",
+      "bytes": 2160,
+      "sha256": "3083ccbf3887de7fc4c34ce86f4fc4987a09e12bb4454f015d682e77031bbdfe"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/release-scope.json",
+      "bytes": 2052,
+      "sha256": "4a15f6b46e76d24148674f8579dd40463769c8ef52b09f578d5f6aeb46eb48fa"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/source-archive-parts.json",
+      "bytes": 806,
+      "sha256": "a1e5af459015c30872c436bac6f505d9165f6bb05bbb3f98bb9d2b200aaa0c58"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/source-archive.json",
+      "bytes": 31067,
+      "sha256": "a212a683403950fb4c360618705a4b8c7224a83a15f7e69efacc421be909a47f"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/source-archive.tar.gz",
+      "bytes": 1627105,
+      "sha256": "dc76ed24605f80b9da48c943b0b7c39b7c0e01a839e67a6e382b3d6d5224011b"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/source-archive.tar.gz.part000",
+      "bytes": 900000,
+      "sha256": "8e113f69bde3af1d698cecac2ba081e24ce4af67952762ffd4fa93342677c801"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/source-archive.tar.gz.part001",
+      "bytes": 727105,
+      "sha256": "d6e7639af3cc0f0a4057c72c23e599faae50afdc87e52bbf854c09c2af792ae4"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/source-manifest.json",
+      "bytes": 29431,
+      "sha256": "500fd3eb8f391a59dce7d044d8b7021a942c0d4cb5c314644b1ddc6890cddbfc"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/validation/delta-tests-output.log.gz",
+      "bytes": 33930,
+      "sha256": "6d99584a1ffad004b128a09c28f2aa592e00164745f4701573d2f18f32cc7889"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final/validation/delta-tests-run.json",
+      "bytes": 99344,
+      "sha256": "b33dde7d70a00c2efb221dd41d88ebb0fa4a9c9e7a4269676e3f9ce6cfc601fe"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/browser/browser-verification.json",
+      "bytes": 1858,
+      "sha256": "e6f729a9b22c11bbaa6103dc62a2428339fcecd45466cd5f8ee95b1a2c89b674"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/browser/catr-browser.png",
+      "bytes": 82146,
+      "sha256": "e2e23114458af8f1980fb9f7a364cef9c44c9ac3a8d3fdfecebfe4a47296aac4"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/campaign-evidence-index.json",
+      "bytes": 17479,
+      "sha256": "496bb854fa98a119fd13d80cacd231980bf6fc00b0f4314d629062869fe9f0e6"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/catr-cost-session/catr-actual-public-journal.jsonl.gz",
+      "bytes": 17003,
+      "sha256": "197e3664d52bf948cf26a9e3073a9d4a2ea011776920a9a75641013c5c99de88"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/catr-cost-session/catr-campaign.json.gz",
+      "bytes": 1371815,
+      "sha256": "4fdf624c472dd7e3a95e48989bcd23a0a39b3f43d7f4c8d74ec3112e1a0ab42b"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/catr-cost-session/catr-campaign.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "5cd4e8a277da31d5ed51f5336624c502be0d8daab728679a2df1fba9d7b5d518"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/catr-cost-session/catr-campaign.json.gz.part001",
+      "bytes": 471815,
+      "sha256": "82f1b1938e5b1a998a74060fe9c34d49d2418276e006087916ea1bb3dd520562"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/catr-cost-session/catr-campaign.json.gz.parts.json",
+      "bytes": 673,
+      "sha256": "c8066cc4c35395c010288be841539d237e76f6eb351e4f8e0fa3f93a0c8e0078"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/catr-cost-session/catr-output.log.gz",
+      "bytes": 2592,
+      "sha256": "fa10bb0f52439c6b5a23a0f0be3cfdca16c70098bdb08df1af0365a0cd819fff"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/catr-cost-session/catr-public-trace.json.gz",
+      "bytes": 24340,
+      "sha256": "1f80050dd9f6b11e1ee38d0b6c7d41b5b727226c47401f0d14d3291a842bc2d1"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/catr-cost-session/execution-catr.json",
+      "bytes": 63245,
+      "sha256": "423c570f3723a204c7fac4419ef5f285ddec472f8104b0d17f3a9a517fa458e4"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/catr-cost-session/source-manifest.json",
+      "bytes": 29431,
+      "sha256": "b9fa471dfea4e4f0ffad22b9cea5dc4eb711d9099eb6408f6d349a9cb73d572e"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/delivery-integrity.json",
+      "bytes": 6915,
+      "sha256": "f291877a7130a447e796f212c15038f5111f6f6796d55a4941eaea57187aafa3"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/failed-candidate-test-sources.json",
+      "bytes": 4312,
+      "sha256": "c94b1cfda6f17784c16b677e6a27e191292967433822daed677e8cebb695522a"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/failed-candidate-test-sources.tar.gz",
+      "bytes": 76347,
+      "sha256": "4e868c6370cbb07eb6accf41fdde0e59475de5104cece57d852162a619ee143b"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/catr-039-comparison.json",
+      "bytes": 10609,
+      "sha256": "2ba2233ec67aceceeb5dfd0f4b0c4261158ec3bef0506beaf22172a8e020f78e"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/catr-039-execution.json",
+      "bytes": 4868,
+      "sha256": "93c70a9cd3d72e0be4fef738d73008442a8fce48ca64c58b11206ab5542ab0ac"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/catr-039-output.log.gz",
+      "bytes": 2483,
+      "sha256": "2d799ffc2c2b735dabffc07680264c1973de1fb9fa881157d131057c78a117b7"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/catr-039-passive-owner-presence.json",
+      "bytes": 1091,
+      "sha256": "a79e59302a34820f5d408b1c72f21f628fd0af1b530334bac63171b90aff319c"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/catr-039-replay.json.gz",
+      "bytes": 1372197,
+      "sha256": "074b8626cc00c01734a5acd28bccd3319cf13bee38216a06ea4543fef2019182"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/catr-039-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "68bc9765485ce586219d257ed1d02afa6d898e398603a1ab9c902dbd42f7c8be"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/catr-039-replay.json.gz.part001",
+      "bytes": 472197,
+      "sha256": "71835c82a3b6998c7a000413c72e78a747e4b243d40d42e9680e9757096cb89a"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/catr-039-replay.json.gz.parts.json",
+      "bytes": 679,
+      "sha256": "8f021484537fb0a74da52086781aca9c13e50a22be9bd41e82aabef29c917101"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/regression-summary.json",
+      "bytes": 75108,
+      "sha256": "ef5f5b73bfcff417c61d498acc57d669264de32962818cef0b84f635879ef594"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/rswp-039-comparison.json",
+      "bytes": 10619,
+      "sha256": "0bc3cb1157d27d1876784f8c669746f1a869a3ab84a3702723af53623389068b"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/rswp-039-execution.json",
+      "bytes": 4895,
+      "sha256": "d4bfde9c27e744b77b52fa6b8915ab78b18e3178c02094e23836597ae56e1542"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/rswp-039-output.log.gz",
+      "bytes": 2942,
+      "sha256": "353e96c1aefd3653da2da2e3b64a3b39256af7c5bfc13bbe6bab187454f605ed"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/rswp-039-passive-owner-presence.json",
+      "bytes": 1091,
+      "sha256": "449fc277c8a7fedfcaeb2fdbb153f9847b14d91547f53d98f4413445013ba116"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/rswp-039-replay.json.gz",
+      "bytes": 2176355,
+      "sha256": "5da6c5557e757d3b40f6bc74ffba02f17f145af3fa62020cd9d15fa071d50861"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/rswp-039-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "de4469bf2a072dacc6bd2f16d090f4a261bfa4d5dff92b54c61be0a09f63a03a"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/rswp-039-replay.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "2161c75e8f94d6b251fd136c44989ace2f63fbf481ea7a75cbbf943efa0c37d0"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/rswp-039-replay.json.gz.part002",
+      "bytes": 376355,
+      "sha256": "cb845724f0a59622d7c7a1eef8fd1e382ac334e37d985f506951aabc1817b57c"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/regressions/rswp-039-replay.json.gz.parts.json",
+      "bytes": 847,
+      "sha256": "92cc21b455d5574395da6bcdb76e98db19014977a0600195dc1a1dd59e8450c9"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/release-scope.json",
+      "bytes": 2226,
+      "sha256": "3325305ff505491aa190d74560a4334735545645693afc28480c6a0431ee05a0"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/source-archive-parts.json",
+      "bytes": 815,
+      "sha256": "a5382028b9aefdafcc91e9d5934bc9d52a96642dee307efef6389b61b16ff2a0"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/source-archive.json",
+      "bytes": 31070,
+      "sha256": "051935e68278c8456497ca0989bd07495fd776b5b3d61073844fb117e1ebec8f"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/source-archive.tar.gz",
+      "bytes": 1627199,
+      "sha256": "2b81e76ce02fd65bedf4d10642b6e5ac8401c83f63b43e301276ec019833f0fd"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/source-archive.tar.gz.part000",
+      "bytes": 900000,
+      "sha256": "aafbce6987da16aaa8d7c5507af548714ed3b7c9a20a0f03ac6799de8e90461f"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/source-archive.tar.gz.part001",
+      "bytes": 727199,
+      "sha256": "cce066eac41d714c04aa33aa63f1c1ef9380f78a9f32c50659da9b6eda39a082"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/source-manifest.json",
+      "bytes": 29431,
+      "sha256": "b9fa471dfea4e4f0ffad22b9cea5dc4eb711d9099eb6408f6d349a9cb73d572e"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/validation/build-output.log.gz",
+      "bytes": 1590,
+      "sha256": "27506e70b4bdaf567c6bd30b744489457c00e466946225f916a8abb9d6ef5b3b"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/validation/checks-run.json",
+      "bytes": 69407,
+      "sha256": "96099e6c3eb1be4e39e4364c5e66f0cd851d9410898d1be391ce8f52c71b5a34"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/validation/delta-tests-output.log.gz",
+      "bytes": 33945,
+      "sha256": "a605e0b44e017d9b52b69bf40709297d68defff555924c7d2bb3ab692e28a01f"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/validation/delta-tests-run.json",
+      "bytes": 99347,
+      "sha256": "8fe5eede76728ed03e2bf0cc21a212a5f7a8b8570d535ac28ec55df714f4b1cf"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/validation/diff-check-output.log.gz",
+      "bytes": 20,
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/validation/entry-audit-output.log.gz",
+      "bytes": 177,
+      "sha256": "204b6870bdf12b63de658e3a61d4dc5be9e64c13e1c1e7ccc8d2126beed57d2d"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/validation/migration-audit-output.log.gz",
+      "bytes": 205,
+      "sha256": "c47347672bc689b95cb00e77bd46756ad63c1803c2eacc440f1afded0deea694"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v2/validation/typecheck-output.log.gz",
+      "bytes": 141,
+      "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/browser/browser-verification.json",
+      "bytes": 2357,
+      "sha256": "fe3e6d04abf753b04e5c44086e46fff356f2109dd261df14d28cdf0a582f5867"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/browser/catr-browser.png",
+      "bytes": 82128,
+      "sha256": "1ab335a13fb6c5c4dfbc5f76e91187f7f9ca3b868a11596b92d385c756d93ec5"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/catr-actual-public-journal.jsonl.gz",
+      "bytes": 17003,
+      "sha256": "197e3664d52bf948cf26a9e3073a9d4a2ea011776920a9a75641013c5c99de88"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/catr-campaign.json.gz",
+      "bytes": 1371840,
+      "sha256": "1c2c0ce3a21867e3646efc161570a81241544411d8f33e17662cfa047d7e87d0"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/catr-campaign.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "cda63f073394d656f4ca228fa2bb2598224d8f390dccb8ac9c202cd2387f4f2c"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/catr-campaign.json.gz.part001",
+      "bytes": 471840,
+      "sha256": "a085db2a5084f37cee7dd33de5564e1eeb1dfc39ff1c333e1a6e5478820cfefe"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/catr-campaign.json.gz.parts.json",
+      "bytes": 673,
+      "sha256": "2422b0e73e96fcb0da812e566f74692c24947d5102c339bbd9812283f28d7314"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/catr-output.log.gz",
+      "bytes": 2603,
+      "sha256": "58334ecebe00fff2ba78ab83d33dc1e67d9945d0c48ab2caf95b204b5dea5d71"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/catr-public-trace.json.gz",
+      "bytes": 24340,
+      "sha256": "a865209c6acd3a17e028d2469bbb736669f0281350ae7ea2bca3f8ea3b732e20"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/execution-catr.json",
+      "bytes": 63265,
+      "sha256": "b1597d549586aac45afb37f7958474e5a52a9c862f98fa73ff587175d5966249"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/preflight.json",
+      "bytes": 251,
+      "sha256": "93fec8c806958237492c88358b8337936d5d3e02451c2ffd715c77db23d8c77d"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/catr-cost-v3-session/source-manifest.json",
+      "bytes": 29431,
+      "sha256": "01342c154132a0b5f86c59c4be6e41d48800793ba04916c05b9ff94672c61531"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/catr-039-comparison.json",
+      "bytes": 10609,
+      "sha256": "723c46cd7798e6124ba66f8fa14cd15d86dda51cf054428a8320ff2be87a6c19"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/catr-039-execution.json",
+      "bytes": 4863,
+      "sha256": "1db51b21f4ae447250600f68d8d834fb99cf6e9db15f44580221d68b0aa6acec"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/catr-039-output.log.gz",
+      "bytes": 2466,
+      "sha256": "94a6b3cc6f334cb53563d6aa8f117eb4c4cf616f1b45045fd2c953f37d1bd96a"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/catr-039-passive-owner-presence.json",
+      "bytes": 1091,
+      "sha256": "6534c023a61d3df381363f685f794031e6bb6ff210b034a8ec5bd546b37944a7"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/catr-039-replay.json.gz",
+      "bytes": 1372079,
+      "sha256": "fe88a289f3f7e1d35e7c94c5004064b22da162e739759989e7c53ed4514f1c91"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/catr-039-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "b965afbe46f4b3df0ac9eeeb4ad990381a057393181fd69e7a2fd9790a773453"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/catr-039-replay.json.gz.part001",
+      "bytes": 472079,
+      "sha256": "678fa338970faceabbc8b7a0b41327a4a72e17e19f48f7b8e6d76c2d178f3144"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/catr-039-replay.json.gz.parts.json",
+      "bytes": 679,
+      "sha256": "8159c264cd723f874dcb0afa4fce5d83c839ae1528a86846642fe1b615fea151"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/regression-summary.json",
+      "bytes": 75096,
+      "sha256": "3475eea28ebab79386d6e9c39dc8784dcc53b61068c79ac08a74bd34ef44a0f5"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/rswp-039-comparison.json",
+      "bytes": 10619,
+      "sha256": "5ee8ca03b4e3fbfe1e5dd4d847ec511c82667c5a3ecdba9c85a4057ab0d4abb4"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/rswp-039-execution.json",
+      "bytes": 4888,
+      "sha256": "c3989e4e80fe50ccb849995146e3a27a78bb23ec47dce245136f674588194282"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/rswp-039-output.log.gz",
+      "bytes": 2946,
+      "sha256": "7adcaa5336587cb7f4c006e26a6ddae267905bae457143e4cf30a41dbc0bb8c4"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/rswp-039-passive-owner-presence.json",
+      "bytes": 1091,
+      "sha256": "c9cdc5386f48e40523619a344fccf8e06aa1da1bb1b3d03b7359096656f7db09"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/rswp-039-replay.json.gz",
+      "bytes": 2176376,
+      "sha256": "5c489de83ef946d26253c3beb29953efddcea513b9a29a09b6ec232f1dbabbee"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/rswp-039-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "3cd47daef5e79fe7273298c0a2e613f01e5c76a4b10f5d906ffebd72353c3038"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/rswp-039-replay.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "1b8bf5bd92e74dfb1aa8363a1e4fdeb0ab40241ed1529d4ab75929181abb3008"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/rswp-039-replay.json.gz.part002",
+      "bytes": 376376,
+      "sha256": "eae376491e8c9b76ba5857e3f9ec8ad263a6e4f0036710e7e6507f67c0c78d50"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/regressions/rswp-039-replay.json.gz.parts.json",
+      "bytes": 847,
+      "sha256": "d31bb1310c97edefadc41c3630a52cc6ebe73e399d2e054d49831fea166d2561"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/release-scope.json",
+      "bytes": 2258,
+      "sha256": "a0ea5e5ab37c0fd58b8c250b2661264869d588a2f4653c750f09e23d13bc06e1"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/source-archive-parts.json",
+      "bytes": 815,
+      "sha256": "8a1c1b97eb7749db6a4fbb92a56acf0d4e6b06b8d64d5ab1e9ba708471fd3df8"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/source-archive.json",
+      "bytes": 31070,
+      "sha256": "073e9885fc8581123d18eb4dc3adb3be056e57f26ed9deb2b7141d13a0b81513"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/source-archive.tar.gz",
+      "bytes": 1628064,
+      "sha256": "1e2ebd8f9e57ce1bf4bc67849d0d332dc21d7e5a89e3edb8f9cbca7ae797e0c1"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/source-archive.tar.gz.part000",
+      "bytes": 900000,
+      "sha256": "420b06742af613808e34f42363b736af9b3e82ff7c03278496036667e59e27de"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/source-archive.tar.gz.part001",
+      "bytes": 728064,
+      "sha256": "21c89efee2bb2a9545a4f2e624ae9baa6e4eb735019f85ce1c4af54806d7a763"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/source-manifest.json",
+      "bytes": 29431,
+      "sha256": "01342c154132a0b5f86c59c4be6e41d48800793ba04916c05b9ff94672c61531"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/validation/build-output.log.gz",
+      "bytes": 1590,
+      "sha256": "717df3ce2d3c2b684e524a9c93b898601f3affd65f05d0d8b28227767d6d4a19"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/validation/checks-run.json",
+      "bytes": 69406,
+      "sha256": "a6cfb2be54d4645f5f601e49a8b1bc906e437f9a8a0f4c511dbec43992bcfbb7"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/validation/delta-tests-output.log.gz",
+      "bytes": 35916,
+      "sha256": "bd42a0bb733df9a0746557772d9048e1480926ac9624b8a317768a3efebe0811"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/validation/delta-tests-run.json",
+      "bytes": 99527,
+      "sha256": "3d41b854c675372b342e46654d452a2889d6150de4a29da941375416310a2b97"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/validation/diff-check-output.log.gz",
+      "bytes": 20,
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/validation/entry-audit-output.log.gz",
+      "bytes": 177,
+      "sha256": "204b6870bdf12b63de658e3a61d4dc5be9e64c13e1c1e7ccc8d2126beed57d2d"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/validation/migration-audit-output.log.gz",
+      "bytes": 205,
+      "sha256": "c47347672bc689b95cb00e77bd46756ad63c1803c2eacc440f1afded0deea694"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/final-v3/validation/typecheck-output.log.gz",
+      "bytes": 141,
+      "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/cohort1/after.json",
+      "bytes": 425946,
+      "sha256": "eb0c94342d3aef39e0a63d2287f123ff8c78c116806f432b7efec380fcb758a2"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/cohort1/after.log",
+      "bytes": 1580,
+      "sha256": "402e9bc1dc32e2efdffeb868c4b491bf9e67ba01a20247db14c6e73187d8da0b"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/cohort1/baseline.json",
+      "bytes": 425439,
+      "sha256": "9dfb61ae7d507e7d65a49e1a1ee559f8f3e27c0aaf011ac4190126e118750341"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/cohort1/baseline.log",
+      "bytes": 1576,
+      "sha256": "9fadcaed1e98c778a8a2d7aacd21053a1b649df4534fcda95fc06896082acc98"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/cohort1/comparison.json",
+      "bytes": 25576,
+      "sha256": "2cc265ff3fd5fbc4a940467fbdbd71a23992e3491b00cd170e7a22ef2619bf3b"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/cohort2/after.json",
+      "bytes": 425998,
+      "sha256": "f3a7ec75b4a24fabef1e796d36af76f6fbf9e69dff371976e69872889dea116d"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/cohort2/after.log",
+      "bytes": 1583,
+      "sha256": "9ecdfd7982b65f75ff551b97cdd644b749926d4d177555887811e9fcdfe8dc4d"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/cohort2/baseline.json",
+      "bytes": 425537,
+      "sha256": "a16bb149629d389b8f7db46c988f1e2ba62580e1c2543595625332a080aa68d4"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/cohort2/baseline.log",
+      "bytes": 1569,
+      "sha256": "5ae28eb2abb4deb424286d0bc570e72f0be61e276e3ca9d80b31f0a913b23ea7"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/cohort2/comparison.json",
+      "bytes": 25772,
+      "sha256": "48f813c1334e57897c15c39632958268de6957d8048c60970d1dd81ece77353b"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/combined-comparison.json",
+      "bytes": 29979,
+      "sha256": "a8fff67b4dfb7bde6612185e2713b0b3e898965aa3700fad9840aa1fd249a15f"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/consolidation-review.json",
+      "bytes": 45576,
+      "sha256": "a1436904a5bef9eb055c2f14d5f1ac6f392f0fecbe44b00b74817ae4b2e59bed"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/protocol-amendment-v2.json",
+      "bytes": 1678,
+      "sha256": "f4cf03d3e50111e34c04ee533e88d8bf3a758a10fbee8877b6ba42ce47e323e9"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/protocol.md",
+      "bytes": 15123,
+      "sha256": "700002c29970f7e59af8b4e7f29d14efcbf4b97faf21ad01a56cc6b4767da3c8"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/results.md",
+      "bytes": 14010,
+      "sha256": "51ee4c55eb58383c30f9820d412042ed15b4d243938c7ebcef1710cf0d787fcf"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance/window.json",
+      "bytes": 10783,
+      "sha256": "600879ce068839e9019193e0a20253931fb7d8186c57e71e2ad33a47dd290f68"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/cohort1/after.json",
+      "bytes": 425848,
+      "sha256": "ff28c860bcc73f681926680391deb15421bfbbd3f8e4bd3b342663d082550400"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/cohort1/after.log",
+      "bytes": 1580,
+      "sha256": "5f71798f4cd2618bbea2d9bb4cedb2b5febe59a6b95674266bd2a46865610098"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/cohort1/baseline.json",
+      "bytes": 425465,
+      "sha256": "68ac8c55c49bf88b97430dc403101d53dd028f85b32b402f3ed408c769fdc534"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/cohort1/baseline.log",
+      "bytes": 1574,
+      "sha256": "fa5cf7377d68d76b987c4d1fa1300c5671f8477fcf30d34aaefcaeb373f34a81"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/cohort1/comparison.json",
+      "bytes": 25536,
+      "sha256": "20425874aee5a0711eddfaa29c5600921dc56e14b0848dcea35af4dc61c03bf6"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/cohort2/after.json",
+      "bytes": 426071,
+      "sha256": "5d4c0d53c59119c84d62b439cd6d658dabd81048a5c379f3d81cdee945864cf6"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/cohort2/after.log",
+      "bytes": 1571,
+      "sha256": "a5038fdba5f697ce67108d4953f2d8627b43ac9db57c0b27113e2d1d3fbc3884"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/cohort2/baseline.json",
+      "bytes": 425471,
+      "sha256": "19eb916d1587922142abe4fa26212f66bb1ae2636fa5c48d258ff1017f32cb9a"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/cohort2/baseline.log",
+      "bytes": 1584,
+      "sha256": "3b8d2743fb7d1a45f41eaae87affe03cae29b340e199fd0608e7cf3cdfc4d482"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/cohort2/comparison.json",
+      "bytes": 25788,
+      "sha256": "a9f657ddc8dae9d1296a698535aa5d36b4d2d2c50abe0eff05a991a7f5235634"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/combined-comparison.json",
+      "bytes": 29983,
+      "sha256": "151e0c01f232fe9dd0395b8909aa828e6d5d1dfadf5f11badc4fca00eb222844"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/consolidation-review.json",
+      "bytes": 45663,
+      "sha256": "282f3ce55693f781cc47dab5ed3eff9107dd65c5819db1baa1d5a087312115e9"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/protocol.md",
+      "bytes": 15705,
+      "sha256": "6a5a293d14d45693ba717d767acab5f26d2d78ecb33bff05e3051516b3290ff9"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/results.md",
+      "bytes": 16032,
+      "sha256": "8fc2f6296f3b33f714b38d57b59e822bfa9857e86934867431467d5003bb531c"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/performance-v2/window.json",
+      "bytes": 10855,
+      "sha256": "25887aae8632f896ccf701c419e76627174ee7c695f2a3dbfa2a60992f3b9055"
+    },
+    {
+      "path": "docs/migration/lot3b-cost-evidence/recorded-regression-cases.json",
+      "bytes": 1863,
+      "sha256": "beade31ab2edf1d332f517ac1a496115138d40a59be9b2eccf9ce37164806f16"
+    },
+    {
+      "path": "docs/migration/v6-coverage.json",
+      "bytes": 2514331,
+      "sha256": "4c66ada3bc94926802e94ef1fa16e686dbd87e1add78c5829ed762e2e851a767"
+    },
+    {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "bytes": 70081,
+      "sha256": "a03d53b43c9794fb167f019c8ab77108d61acd1ae7dd448f10d770fd14bf967b"
+    },
+    {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "bytes": 17720,
+      "sha256": "c20176b169b98e2071dce7bfd8a290e3c5146b00eeacafefb785f6d1012e864c"
+    },
+    {
+      "path": "docs/migration/v6-native-transfer.md",
+      "bytes": 103263,
+      "sha256": "81522edb6baf27bae0c1df29a7381539d98506f3604d397fe773efe3a0181a96"
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "bytes": 19460,
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "bytes": 9861,
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    },
+    {
+      "path": "scripts/compare-native-restoration-paths.mjs",
+      "bytes": 11263,
+      "sha256": "da2468b0ff39dd30a67b46357aaf4c25ea3c94b21d569604e8b95542d2b36f0b"
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "bytes": 7210,
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "scripts/profile-native-restoration-path.mjs",
+      "bytes": 18270,
+      "sha256": "9e5e03e2d66cae16060a48aaec392a5874e464738c678cb6daab089580bba570"
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "bytes": 17810,
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4"
+    },
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "bytes": 8933,
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+    },
+    {
+      "path": "scripts/verify-native-delivery.py",
+      "bytes": 26494,
+      "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a"
+    },
+    {
+      "path": "scripts/verify-native-delta.py",
+      "bytes": 5917,
+      "sha256": "0ee99d46e7702b4b2c44c69ebef8cfaa646839be1134a8501f0d7220c0730780"
+    }
+  ],
+  "artifactTransport": "Large originals remain available locally and are preserved in exact ordered parts; original CPU profiles are represented by their retained lossless gzip files.",
+  "qualification": "Prepublication evidence freeze for a functionally validated generic native correction with an unresolved declared cost budget. All completed tests, cold/public replay evidence, source archives, measurements, failed candidates and documentation are bound to exact bytes. Publication provenance follows separately through the Site version."
+}

@@ -45,6 +45,8 @@ import { projection, rowsDigest } from './v6-native-observer.ts';
 import type { ObservedInputDomain } from './v6-native-observer.ts';
 import { symbolicDigest as identity } from './v6-hash.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
+import { captureWorkingWitness as workingWitness, matchesWorkingWitness as witnessMatches } from './v6-native-working-witness.ts';
+import type { NativeWorkingWitness as WorkingWitness } from './v6-native-working-witness.ts';
 import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts';
 import type { OccurrenceRecord as R } from './v6-occurrence-scene.ts';
 import type { NativeFamily, NativeRows, NativePublicObservation, NativeProposal } from './v6-native-types.ts';
@@ -87,58 +89,6 @@ class SharedOccurrenceMemory extends OccurrenceRecallAccess {
     return this.controlDiscoveryEvents.length
       ? programIdentity([ancestor, 'native_program_control_and_relation_evidence', this.controlDiscoveryEvents]) : ancestor;
   }
-}
-
-/**
- * Public working containers remain mutable. A version alone cannot detect a
- * direct edit to memory.lineTrials, a Set/Map or the common event array. This
- * witness owns their small container structure and stops at validated frozen
- * event subtrees, so a cache check never traverses the old cumulative payloads.
- */
-type WorkingWitness = { kind: 'leaf'; value: unknown }
-  | { kind: 'object'; value: object; fields: readonly (readonly [string, WorkingWitness])[] }
-  | { kind: 'map'; value: Map<unknown, unknown>; entries: readonly (readonly [unknown, WorkingWitness])[] }
-  | { kind: 'set'; value: Set<unknown>; entries: readonly WorkingWitness[] };
-
-function workingWitness(value: unknown, ancestors = new WeakSet<object>()): WorkingWitness {
-  if (value === null || typeof value !== 'object') return { kind: 'leaf', value };
-  if (ancestors.has(value)) throw new TypeError('Cyclic shared-series working memory');
-  ancestors.add(value);
-  try {
-    if (value instanceof Map) return { kind: 'map', value, entries: [...value].map(([key, item]) => [key, workingWitness(item, ancestors)]) };
-    if (value instanceof Set) return { kind: 'set', value, entries: [...value].map(item => workingWitness(item, ancestors)) };
-    // Object.isFrozen alone is not a trust boundary: descendants must also
-    // pass the existing ownership validator before identity can be sufficient.
-    if (Object.isFrozen(value) && retainNativeJson(value) === value) return { kind: 'leaf', value };
-    if (Object.getOwnPropertySymbols(value).length) throw new TypeError('Symbolic shared-series working memory');
-    const descriptors = Object.getOwnPropertyDescriptors(value);
-    return { kind: 'object', value, fields: Object.entries(descriptors).map(([key, descriptor]) => {
-      if (!('value' in descriptor)) throw new TypeError('Accessor shared-series working memory');
-      return [key, workingWitness(descriptor.value, ancestors)];
-    }) };
-  } finally { ancestors.delete(value); }
-}
-
-function witnessMatches(witness: WorkingWitness, value: unknown): boolean {
-  if (witness.kind === 'leaf') return Object.is(value, witness.value);
-  if (value !== witness.value) return false;
-  if (witness.kind === 'map') {
-    if (witness.value.size !== witness.entries.length) return false;
-    const entries = witness.value.entries();
-    return witness.entries.every(([key, child]) => {
-      const next = entries.next().value;
-      return next !== undefined && Object.is(next[0], key) && witnessMatches(child, next[1]);
-    });
-  }
-  if (witness.kind === 'set') {
-    if (witness.value.size !== witness.entries.length) return false;
-    const entries = witness.value.values();
-    return witness.entries.every(child => witnessMatches(child, entries.next().value));
-  }
-  if (Object.getOwnPropertySymbols(witness.value).length) return false;
-  const descriptors = Object.getOwnPropertyDescriptors(witness.value), keys = Object.keys(descriptors);
-  return keys.length === witness.fields.length && witness.fields.every(([key, child], index) => key === keys[index]
-    && 'value' in descriptors[key]! && witnessMatches(child, descriptors[key]!.value));
 }
 
 interface SharedWorkingStamp {
@@ -711,7 +661,9 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   /** Internal checkpoint only: public state() still returns an independent copy. */
   nativeState(): R {
     if (this.checkpoint && this.unchanged(this.checkpoint.stamp)) return this.checkpoint.value;
-    const certified = this.certified !== null && this.unchanged(this.certified);
+    // A failed check of this exact stamp already establishes its invalidity
+    // for this call. A different certificate still needs its own full check.
+    const certified = this.certified !== null && this.certified !== this.checkpoint?.stamp && this.unchanged(this.certified);
     const owned = this.events.map(event => retainNativeJson(event));
     // Direct public journal edits are also owned before entering persistence,
     // but cannot certify agreement with the acquired reducers on their own.
@@ -727,10 +679,18 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   /** An unchanged immutable value never outranks changed working memory. */
   restoreNative(state: Readonly<R>): void {
     const owned = retainNativeJson(state);
-    if (this.certified && this.unchanged(this.certified)) {
-      if (this.accepted?.value === owned && this.unchanged(this.accepted.stamp)) return;
-      if (this.checkpoint?.certified && this.checkpoint.value === owned && this.unchanged(this.checkpoint.stamp)) {
-        this.accepted = { value: owned, stamp: this.certified }; return;
+    const certified = this.certified;
+    const accepted = this.accepted?.value === owned ? this.accepted : null;
+    const checkpoint = this.checkpoint?.certified && this.checkpoint.value === owned ? this.checkpoint : null;
+    // A new authoritative identity always requires complete replay, so there
+    // is no reusable owner to inspect before that ordinary reconstruction.
+    if ((accepted || checkpoint) && certified && this.unchanged(certified)) {
+      // The same certificate has just been checked completely. Reuse only
+      // that exact stamp within this call; a different stamp still receives
+      // its own validation and every later call checks current working state.
+      if (accepted && (accepted.stamp === certified || this.unchanged(accepted.stamp))) return;
+      if (checkpoint && (checkpoint.stamp === certified || this.unchanged(checkpoint.stamp))) {
+        this.accepted = { value: owned, stamp: certified }; return;
       }
     }
     this.restoreOwned(owned);
