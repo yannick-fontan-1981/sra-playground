@@ -77,3 +77,39 @@ The release runner emits the existing `logos-engine.native-delta-verification.v1
 The regression launcher fingerprints its unchanged helper chain and delegates to `scripts/run-released-public-regressions-streamlog.py`. Historical reports are prevalidated in a process that exits before each replay host starts. The complete current report, public packets, raw journal, started and final receipts, original comparisons and summary remain in the evidence directory. The default 1,536 MiB Node old-space cap is only a replay-host resource bound; it does not apply to official performance measurements.
 
 Existing output receipts are never overwritten by a new attempt. A failed check or replay requires a new evidence directory with its correctly identified source manifest. The original failure and its output remain retained. A lost connection or incomplete receipt is not converted into a passing result or attributed to an out-of-memory failure without actual evidence.
+
+## Restore exact final validation logs
+
+The six final raw outputs remain unchanged locally. Their deterministic gzip
+counterparts and `integrated-final/validation/log-transport.json` retain every
+original byte, including diagnostic whitespace. Git stores the gzip copies;
+it does not normalize the raw output. Before checking readiness in a fresh
+checkout, restore the raw paths declared by the two validation receipts from
+the repository root:
+
+```python
+import gzip, hashlib, json
+from pathlib import Path
+root = Path.cwd().resolve()
+folder = root / "docs/migration/lot10a-evidence/integrated-final/validation"
+for name in ("delta-tests-run.json", "checks-run.json"):
+    receipt = json.loads((folder / name).read_text())
+    for check in receipt["checks"]:
+        packed, raw = check["output"], check["rawOutput"]
+        source, target = (root / packed["path"]).resolve(), (root / raw["path"]).resolve()
+        assert source.is_relative_to(root) and target.is_relative_to(root)
+        compressed = source.read_bytes()
+        assert len(compressed) == packed["bytes"]
+        assert hashlib.sha256(compressed).hexdigest() == packed["sha256"]
+        data = gzip.decompress(compressed)
+        assert len(data) == raw["bytes"]
+        assert hashlib.sha256(data).hexdigest() == raw["sha256"]
+        if target.exists():
+            assert target.read_bytes() == data
+        else:
+            with target.open("xb") as stream:
+                stream.write(data)
+```
+
+This reconstructs retained output only. It does not rerun any test, build,
+audit, game or measurement, and refuses to replace differing existing bytes.

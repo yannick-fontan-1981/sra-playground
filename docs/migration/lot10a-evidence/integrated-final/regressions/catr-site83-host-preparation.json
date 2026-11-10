@@ -1,0 +1,101 @@
+{
+  "schema": "logos-engine.released-baseline-replay-preparation.v1",
+  "status": "passed",
+  "game": "CATR",
+  "targetLevels": 3,
+  "expectedActions": 12,
+  "completePublicPackets": 13,
+  "baselineDecodedBytes": 15228335,
+  "baseline": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/regressions/catr-051-replay.json.gz",
+    "sha256": "29f58eb7f74b768b1fdc7e0453fc64a1ae972a54ab39f4a1fb9b2defa5e3d5aa",
+    "bytes": 1924297
+  },
+  "trace": {
+    "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+    "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+    "bytes": 24340
+  },
+  "exactExpectationSha256": "1edf825fc1328d1567a7d1c05ecf4661bfd46f10a33dde842d1ecd527d8103bf",
+  "initialPublicPacketSha256": "4be5636753fb07cfb545f5784880fb2c68285a3d8314780c978ef3c606a4a17b",
+  "packetStreamSha256": "f10f6a7df91cd10a6db2af2de0c126e79880e23331fb7cf3a33ecb05eed36e16",
+  "actions": [
+    {
+      "index": 1,
+      "commandSha256": "f558c3ae6303309be623cd4bbec2c019a1ae0572bb4114723b7b234eeba112ae",
+      "publicPacketSha256": "90d08bb1091f25ae46e98c12b63078273bb3650079457ba2fcc307da21902391"
+    },
+    {
+      "index": 2,
+      "commandSha256": "4cf388382d0edd7c06117d33deb44217ee252818095b487701a39472b53eeddd",
+      "publicPacketSha256": "8213bd5529cb16602f070fb0d45d29a8ba5898bd1541b99238299ecf97cf6478"
+    },
+    {
+      "index": 3,
+      "commandSha256": "e789aee7266f05b0ca83de89a5b2dfe5d6544b6a0d2a4ab9ac98195ccaee0e90",
+      "publicPacketSha256": "55413d0161870fb9fadeb9eb82edb573125f112162d4957615b2672d776f2768"
+    },
+    {
+      "index": 4,
+      "commandSha256": "f7ee4b32ec7e9fc25d1173e82f19a21aa40c5bab68545d1dd062579fa5d5124c",
+      "publicPacketSha256": "605ff1abec2ff39320cfc3c952e815475b0003b0172b87f58ec081af0b2b4390"
+    },
+    {
+      "index": 5,
+      "commandSha256": "c32320cf6dca8b02009f1c5e8099f9ced46854375cd68dcd650571abe55b69c7",
+      "publicPacketSha256": "692d38378a965325bda711c533261cb58915cbf34804167ae4361b42f4bfb104"
+    },
+    {
+      "index": 6,
+      "commandSha256": "c004edf25bf8cffc5ec84187c4e5a2ea9bcca546b1d110cff32abee786bcf748",
+      "publicPacketSha256": "b112b1da4a2dbe9a39a7d2dd4ec95382d2055b53997d07617a74d9c58ad33fd6"
+    },
+    {
+      "index": 7,
+      "commandSha256": "0ebdabf345ca6ff749f5b45fd066b161f625b6de4825d9d071a8c1ae60329c73",
+      "publicPacketSha256": "b6e81c3b35f0e5aed2c45a8868c5617f02a3af2ed8c24f710bb776e9fc00e845"
+    },
+    {
+      "index": 8,
+      "commandSha256": "b163755054afeeb28d19fb71304aceb0e9a4de0152f1d8b8e48ddcf8a9183efd",
+      "publicPacketSha256": "4d2b86dc6d59eb38fb327eeb0a01e83e53eff4114decfaa1a16ed61133e7e038"
+    },
+    {
+      "index": 9,
+      "commandSha256": "903b4a0bb643c5989ec8b2cbefa5f2fe8bfe4ab68d43ad54a00aedf676defcd0",
+      "publicPacketSha256": "7cb034d60dc63af4702944016c1e2670fb6dfb1d2871ec16fc91e4c3e3cabee4"
+    },
+    {
+      "index": 10,
+      "commandSha256": "6846d5595600f0a69a551e8b79961fc0754a3bbb9eb232bd5a053ac89e278cfe",
+      "publicPacketSha256": "f7dd091400e03ba15d275946ece9b2f62ba9a3088fb2c6bfc5eed43debf40a42"
+    },
+    {
+      "index": 11,
+      "commandSha256": "0ebdabf345ca6ff749f5b45fd066b161f625b6de4825d9d071a8c1ae60329c73",
+      "publicPacketSha256": "2bbf6c3767f38a82048a02535268be1ea4c7eb91f14c6bbc1461f4721f6f454c"
+    },
+    {
+      "index": 12,
+      "commandSha256": "f7ee4b32ec7e9fc25d1173e82f19a21aa40c5bab68545d1dd062579fa5d5124c",
+      "publicPacketSha256": "84c13285e782247927e78c68960edb30da6fdb357df78215a48665648a93ff94"
+    }
+  ],
+  "validation": "The unchanged historical host checks are performed for every command and complete packet hash before release. Only baseline game/target/assets, provenance and trace packets reach the unchanged harness.",
+  "memoryBeforeRelease": {
+    "rss": 201637888,
+    "heapTotal": 132214784,
+    "heapUsed": 91790992,
+    "external": 55017913,
+    "arrayBuffers": 19589260
+  },
+  "baselineRootCollectedBeforeHarnessImport": true,
+  "memoryAfterRelease": {
+    "rss": 162615296,
+    "heapTotal": 80269312,
+    "heapUsed": 11887920,
+    "external": 4098613,
+    "arrayBuffers": 212115
+  },
+  "preparationOnly": false
+}
