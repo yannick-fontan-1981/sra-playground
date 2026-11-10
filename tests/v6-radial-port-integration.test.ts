@@ -321,7 +321,7 @@ test('the revalidation question still requires the exact current frame and avail
   assert.deepEqual(family.state(), retained, 'Neither admission nor refusal acquires a current method');
 });
 
-test('declared source order registers 58 of 76 entries with all six observed-composition branches', async () => {
+test('declared source order registers 59 of 76 entries with all six observed-composition branches', async () => {
   const runtime = await createNativeV6Runtime(declarations, { now: () => 0 });
   const coverage = runtime.snapshot().coverage as R, groups = coverage.sourceGroups as R[];
   const configuration = declarations.strategy.declarations[0]!.configuration as R;
@@ -331,7 +331,7 @@ test('declared source order registers 58 of 76 entries with all six observed-com
     ['occluded_catalogue_composition', 'queued_field_composition', 'product_panel_composition', 'labeled_sequence_composition',
       'linked_packet_composition', 'trace_field_composition', 'cell_patch_composition', 'observed_occurrence_recall',
       'observed_program_composition', 'typed_material_flow', 'radial_port_composition', 'observed_framed_analogy',
-      'field_service_composition', 'rooted_quota_composition', 'framed_window_composition', 'coupled_prefix_reference', 'recurrent_series']);
+      'field_service_composition', 'rooted_quota_composition', 'framed_window_composition', 'coupled_prefix_reference', 'relative_arrangement', 'recurrent_series']);
   const radialIndex = windows.entryPoints.indexOf('radial_port_composition');
   assert.equal(windows.families[radialIndex], 'public_occurrence_recall');
   assert.equal(coverage.registeredFamilies.filter((family: string) => family === 'public_occurrence_recall').length, 1);
@@ -341,6 +341,7 @@ test('declared source order registers 58 of 76 entries with all six observed-com
   const aliases: Record<string, string> = {
     scored_relation_access: 'goal_access', observed_support_access: 'support_navigation',
     observed_feedback_sequence: 'feedback_sequences',
+    relative_arrangement: 'relative_arrangements',
     observed_composition_services: 'public_occurrence_recall',
     coupled_support_composition: 'public_occurrence_recall', alternating_graph_composition: 'public_occurrence_recall',
     occluded_catalogue_composition: 'public_occurrence_recall', queued_field_composition: 'public_occurrence_recall',
@@ -372,14 +373,14 @@ test('declared source order registers 58 of 76 entries with all six observed-com
       // A registered branch is still partial until its declared entry closes.
       if (coverage.partialEntryPoints[question]) return false;
       const family = aliases[question] ?? question;
-      const explicitEntry = family === 'public_occurrence_recall' || family === 'public_ranked_workshop' || family === 'public_symbol_transaction' || family === 'feedback_sequences';
+      const explicitEntry = family === 'public_occurrence_recall' || family === 'public_ranked_workshop' || family === 'public_symbol_transaction' || family === 'feedback_sequences' || family === 'relative_arrangements';
       return group.families.includes(family) && (!explicitEntry
         || group.entryPoints?.some((entry: string | null, index: number) => entry === question && group.families[index] === family));
     });
     return [connected.length, declared.length];
   });
-  assert.deepEqual(counts, [[10, 12], [20, 21], [9, 10], [19, 33]]);
-  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 58);
+  assert.deepEqual(counts, [[10, 12], [21, 21], [9, 10], [19, 33]]);
+  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 59);
   assert.deepEqual(Object.keys(coverage.partialEntryPoints), []);
   assert.equal(coverage.observedCompositionBranches.connectedBranches.length, 6);
   assert.deepEqual(coverage.observedCompositionBranches.pendingBranches, []);

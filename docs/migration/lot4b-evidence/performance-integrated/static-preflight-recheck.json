@@ -1,0 +1,53 @@
+{
+  "schema": "logos-engine.premeasurement-static-recheck.v1",
+  "status": "passed",
+  "startedAt": "2026-11-10T22:37:46.289397+00:00",
+  "finishedAt": "2026-11-10T22:37:46.554128+00:00",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "docs/migration/lot4b-evidence/check-cost-static-inputs.py",
+    "--performance-directory",
+    "docs/migration/lot4b-evidence/performance-integrated"
+  ],
+  "exitCode": 0,
+  "initialReceiptAtOriginalPath": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/static-preflight.json",
+    "bytes": 16166,
+    "sha256": "dd6ce62d7b752f806fbbb96d1c2995850f96d830d6826e455650929934dbc2e1"
+  },
+  "initialFailedReceiptRetained": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/static-preflight-attempt1.json",
+    "bytes": 16166,
+    "sha256": "dd6ce62d7b752f806fbbb96d1c2995850f96d830d6826e455650929934dbc2e1"
+  },
+  "initialBytesUnchanged": true,
+  "dependencyPreparation": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/premeasurement-dependency-preparation.json",
+    "bytes": 2163,
+    "sha256": "882082cb1d68a53159fe07ce25e3d2a9d56b184969d17edb445e2ee2ad8e1654"
+  },
+  "newStaticReceipt": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/static-preflight.json",
+    "bytes": 15950,
+    "sha256": "e31c198993e3536045fba1859841298662aeea451c0931e1d3bc2750b15f5894"
+  },
+  "toolBefore": {
+    "path": "docs/migration/lot4b-evidence/check-cost-static-inputs.py",
+    "bytes": 23603,
+    "sha256": "9cbe543d0166d366d4d8e576dcc8553c7a8116d4d657202c5be29a4d2607a121"
+  },
+  "toolAfter": {
+    "path": "docs/migration/lot4b-evidence/check-cost-static-inputs.py",
+    "bytes": 23603,
+    "sha256": "9cbe543d0166d366d4d8e576dcc8553c7a8116d4d657202c5be29a4d2607a121"
+  },
+  "toolUnchanged": true,
+  "log": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/static-preflight-attempt2.log",
+    "bytes": 325,
+    "sha256": "3356a6e28c80b46a39ae539578603f2c4137990823c3d47275e6a488df2ab8cc"
+  },
+  "measurementExecuted": false,
+  "qualification": "Initial static failure remains failed in an exact byte-for-byte archive. After creating only the two missing baseline dependency links, the same unchanged tool ran again and wrote its exclusive canonical output anew. No protocol, source, metric, threshold, fixture or cost population was changed. No timing measurement existed."
+}

@@ -1,0 +1,119 @@
+{
+  "schema": "logos-engine.partial-public-regression-contract.v1",
+  "declaredAt": "2026-11-10T21:22:42.592075+00:00",
+  "status": "declared",
+  "baseline": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+    "sha256": "11aa4589a7d294cc5c7aed2e0e3946541cf48a208b891b0c7229a190e290aff4",
+    "bytes": 5445629
+  },
+  "trace": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/lkey-public-trace.json.gz",
+    "sha256": "de96446d655f3c5165f4eeebfbd0aa1ed074c2b65ee35288d84c6d4112a2a763",
+    "bytes": 10983
+  },
+  "baselineExecution": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/execution-lkey.json",
+    "sha256": "ac35fbe45492ee87b02e472455d828408b33d261ed1873f6044f1419c611dfec",
+    "bytes": 70533
+  },
+  "sourceManifest": {
+    "path": "docs/migration/lot4b-evidence/development/merged-site82/source-manifest.json",
+    "sha256": "655a60d587dced4c4b1b3b234b6ec28271e8676894581776802e9bd747c27bb7",
+    "bytes": 33472
+  },
+  "executionInputs": {
+    "runner": {
+      "path": "scripts/replay-native-partial-public-regression.mjs",
+      "sha256": "abd6a49fb509323fd24aa40451d6681a4ac8f5aebc9ede666511f5c2e63d1ae0",
+      "bytes": 41906
+    },
+    "harness": {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "sha256": "93b824b078ccf259827be897e8143dc59fc0479d6f765f3a437cc95b2f4472c1",
+      "bytes": 73454
+    },
+    "service": {
+      "path": "src/runtime/v6-agent-service.ts",
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96",
+      "bytes": 18195
+    },
+    "protocol": {
+      "path": "src/runtime/v6-agent-protocol.ts",
+      "sha256": "597b4d4ab19882a37048e1fa9caeaebea2112b66e25f6294f428bb7916818aa4",
+      "bytes": 9389
+    },
+    "commonDeclaration": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f",
+      "bytes": 48531
+    },
+    "strategyDeclaration": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
+      "bytes": 46966
+    }
+  },
+  "expected": {
+    "game": "LKEY",
+    "targetLevels": 3,
+    "baselineSourceDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+    "status": "failed",
+    "traceStatus": "failed",
+    "baselineExitCode": 1,
+    "failure": "Did not complete LKEY level 3: V6 stopped: frontier_unknown. Its acquired evidence is retained for inspection.",
+    "actions": 25,
+    "prefixes": 25,
+    "completePublicPackets": 26,
+    "boundaryActionCounts": [
+      16,
+      24
+    ],
+    "final": {
+      "actions": 25,
+      "levelsCompleted": 2,
+      "level": 3,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "frontier_unknown",
+      "prefixes": 25,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 25,
+        "resume": 25
+      }
+    },
+    "workshop": {
+      "calls": 49,
+      "records": 25,
+      "selectedRecords": 14,
+      "passiveRecords": 11
+    }
+  },
+  "comparisonScope": {
+    "exact": [
+      "complete public commands and packets",
+      "action metadata except executionMs",
+      "selected prefix scalar fields and declared coordination fields",
+      "epoch order and inherited source-series counts",
+      "request protocol and caller counters/components",
+      "natural boundaries and retained-session caller counters/components",
+      "final public outcome, unresolved failure and operation counts",
+      "mechanical domain assessments",
+      "Workshop source-call order, public revisions, commands, selections and record cardinality"
+    ],
+    "excluded": [
+      "durations",
+      "native implementation label",
+      "migration coverage/status labels",
+      "fresh observation-session identifiers in coordination and epoch anchors",
+      "graph chains, graph revisions, graph node counts and complete provider state equality"
+    ],
+    "actionNormalization": "none",
+    "publicPacketNormalization": "none",
+    "targetCompletionClaim": false,
+    "speedComparisonClaim": false,
+    "originalCallerParityClaim": false
+  }
+}

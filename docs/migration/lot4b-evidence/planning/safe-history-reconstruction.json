@@ -1,0 +1,15 @@
+{
+  "schema": "logos-engine.lot4b.safe-history-reconstruction.v1",
+  "createdAt": "2026-11-10T22:10:57.039341+00:00",
+  "status": "reconstructed_pending_actual_published_predecessor",
+  "head": "d5aa99c3389f6b09d25a07f00c3e1ced110526c5",
+  "branch": "lot4b-final-relative-arrangement",
+  "safe5aTarget": "7b0637cfef2a7e5ef42fbdf0cb214cc35aa31886",
+  "unpublishedOversizedTargetIsAncestor": false,
+  "originalProvisionalBranchPreserved": "lot4b-provisional5a-history-47608f0",
+  "baselineCheckout": "/workspace/sites/sra-lot4b-baseline-5a-20261110",
+  "baselineSourceFilesVerified": 283,
+  "baselineDigest": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f",
+  "finalPublicationVerified": false,
+  "qualification": "The18reviewed source/test/audit files remain byte-identical. Final candidate freeze still awaits actual Sites terminal publication."
+}

@@ -1,0 +1,55 @@
+{
+  "schema": "logos-engine.relative-arrangement-source-parity-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-10T20:46:28.182145+00:00",
+  "completedAt": "2026-11-10T20:46:48.055515+00:00",
+  "elapsedSeconds": 19.873373659007484,
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "scripts/compare-relative-arrangement-public-parity.py",
+    "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+    "--output",
+    "docs/migration/lot4b-evidence/development/tria-live-01/tria-relative-arrangement-source-parity-02.json.gz"
+  ],
+  "cwd": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "exitCode": 0,
+  "inputs": {
+    "campaign": {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "bytes": 3161161,
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe"
+    },
+    "generator": {
+      "path": "scripts/compare-relative-arrangement-public-parity.py",
+      "bytes": 39949,
+      "sha256": "a6731204feb80b373ec79dd7fd4742a3ff24d58353597b5a8da261794e3c9f67"
+    }
+  },
+  "inputsAfter": {
+    "campaign": {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+      "bytes": 3161161,
+      "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe"
+    },
+    "generator": {
+      "path": "scripts/compare-relative-arrangement-public-parity.py",
+      "bytes": 39949,
+      "sha256": "a6731204feb80b373ec79dd7fd4742a3ff24d58353597b5a8da261794e3c9f67"
+    }
+  },
+  "inputsUnchanged": true,
+  "output": {
+    "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-relative-arrangement-source-parity-02.json.gz",
+    "bytes": 65114,
+    "sha256": "97b79e0b6d309dff79a2a49f8760d18348b617ac04704576e541f6143562c8bb"
+  },
+  "log": {
+    "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-relative-arrangement-source-parity-02.log",
+    "bytes": 2494,
+    "sha256": "585b7b44e35d9259b53b26de527c6feae878745b1f94f294b3a2ebbfc5c68fdb"
+  },
+  "gameHostRun": false,
+  "nativeAgentRun": false,
+  "originalCommonCallerRun": false
+}

@@ -1,0 +1,47 @@
+{
+  "lot": "7B observed_symbol_transaction",
+  "checkout": "/workspace/sites/sra-lot7b-20261110/.sites-checkout",
+  "branch": "lot7b-symbol-transactions-delivery",
+  "basePublishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+  "baseSiteVersion": 83,
+  "updated_at": "2026-11-10T22:30:19.524096+00:00",
+  "stage": "Quiet for4B official cost window. Read-only reviews and documentation;7B will integrate actual4B published release before its own final freeze.",
+  "heavy_work_started": false,
+  "performance_started": false,
+  "publication_started": false,
+  "publication_order": "7A Site83 ->5A ->4B ->7B, integrating actualpublishedpredecessors before7Bfreeze.",
+  "request": "5A and4B:7Bsourceport started after7Apublished; notifythisstatus beforeexclusivecostslot and7Bwillpause alltests/oracles/builds. No7Bofficialtimingplanneduntilactualpredecessorsintegrated.",
+  "caseClocks": {
+    "CRAF": {
+      "cumulativeSeconds": 847.684697,
+      "remainingSeconds": 1552.3153029999999,
+      "status": "paused"
+    }
+  },
+  "nativeVersionAssigned": false,
+  "baseNativeVersion": "0.52.0",
+  "quiet_acknowledged": true,
+  "active_command": null,
+  "own_agents": "Root and both active reviewers are text/source read-only. No tests, builds, games, captures, profiling, archive creation/compression, source push or preview.",
+  "request_to_lot5a": "Site85 closure announced and will be verified/integrated. Site84 native sources already verified and integrated without rejected oversized ancestry.",
+  "request_to_lot4b": "Fresh explicit quiet acknowledged after your22:29 request. Root and all7B agents have no active compute; text/source review only until your explicit cost-window completion and release. Actual5A Site85 terminal success verified; its closure diff is documentation-only.",
+  "functional_progress": {
+    "componentTests": 275,
+    "kernelTests": 4,
+    "crafLevels": 3,
+    "crafActions": 36,
+    "symbolSelected": 36,
+    "originalCalls": 144,
+    "originalChecks": 432,
+    "interfaceMethodAblationRemovedProposals": 27,
+    "boundAblationRemovedProposals": 18
+  },
+  "developmentCommits": [
+    "66c8b64",
+    "4533371"
+  ],
+  "preparedMergeCommit": "2c2da44f960fa01557b2d9e1fe01a62f068eb079",
+  "preparedMergeDigest": "4b2f3c698d73a78c79f2e7ffd9486620b2a391a69e5575d0e3d7c75e3597f7cb",
+  "deliveryHead": "c8ed6e81254658f23ced74eca2683ae07d728ef4",
+  "quiet_acknowledged_at": "2026-11-10T22:30:19.524096+00:00"
+}

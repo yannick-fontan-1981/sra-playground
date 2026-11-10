@@ -1,0 +1,64 @@
+{
+  "schema": "logos-engine.coordinated-cost-window-completion.v1",
+  "status": "completed_and_compute_released",
+  "recordedAt": "2026-11-10T22:48:31.995430+00:00",
+  "window": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/window.json",
+    "bytes": 10543,
+    "sha256": "cb56920dab8a5f2404f72e428c80b7fc4db7f7ff6fbb401b30a2cd064223184d"
+  },
+  "windowStartedAt": "2026-11-10T22:38:57.430443+00:00",
+  "windowFinishedAt": "2026-11-10T22:47:33.071790+00:00",
+  "sharedFlockHeldByCommand": "flock -n /workspace/shared/sra-coordination/performance.lock python -B scripts/run-native-cost-window.py ...",
+  "commandSession": 88698,
+  "exitCode": 0,
+  "quietObservations": [
+    {
+      "lane": "5a",
+      "before": {
+        "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-evidence/lot5a-status.json",
+        "bytes": 5135,
+        "sha256": "6c59d5cce15d1cd1342581cf26e886013def11f19c84777733f689511a573519"
+      },
+      "after": {
+        "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-evidence/lot5a-status-after-window.json",
+        "bytes": 5135,
+        "sha256": "6c59d5cce15d1cd1342581cf26e886013def11f19c84777733f689511a573519"
+      },
+      "sameStatusBytes": true,
+      "changedFields": {},
+      "declaredQuietRemained": true
+    },
+    {
+      "lane": "7b",
+      "before": {
+        "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-evidence/lot7b-status.json",
+        "bytes": 2439,
+        "sha256": "4daec9b73adc9785f453282df0aa71f93e38fd8d305657d3441faa446f0e0f42"
+      },
+      "after": {
+        "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-evidence/lot7b-status-after-window.json",
+        "bytes": 2655,
+        "sha256": "29522f287f8ff1608f71beedfcf56880df06563bb73b59fa50678b97a4ab9921"
+      },
+      "sameStatusBytes": false,
+      "changedFields": {
+        "own_agents": {
+          "before": "Root and both active reviewers are text/source read-only. No tests, builds, games, captures, profiling, archive creation/compression, source push or preview.",
+          "after": "Both reviewers and their child completed; root performs only text/source review and documentation. No tests, builds, games, captures, profiling, archive/compression, pushes or preview."
+        },
+        "preparation": {
+          "before": null,
+          "after": "Passive actual Symbols native restoration witness and exhaustive material-entry assertion prepared; execution deferred until4B release and actual published integration."
+        }
+      },
+      "declaredQuietRemained": true
+    }
+  ],
+  "initialCompletionBookkeepingFailure": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-completion-attempt1.json",
+    "bytes": 2643,
+    "sha256": "5c8fe0fcb9de53e4ef0f767c7d76e76de8c70e6b4624c9d6285230733f55dd76"
+  },
+  "qualification": "The flock-wrapped ABBA command terminated with exit0 and released its lock.5A terminal no-further-execution statement stayed exact.7B retained its explicit quiet/no-compute commitment, with only text/source preparation and reviewer-completion notes updated. Those precise changes and the overstrict initial bookkeeping failure are retained. No measurement was discarded or repeated."
+}

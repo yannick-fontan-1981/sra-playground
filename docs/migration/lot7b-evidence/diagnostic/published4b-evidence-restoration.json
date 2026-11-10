@@ -1,0 +1,62 @@
+{
+  "schema": "logos-engine.lot7b-published4b-evidence-restoration.v1",
+  "recordedAt": "2026-11-10T23:05:36.638990+00:00",
+  "status": "passed",
+  "publishedCommit": "082ce553ce4dfbac37071a64497bcca129b7ced0",
+  "inputs": [
+    {
+      "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz.parts.json",
+      "sha256": "8143217aa3cd4398e74d6fa85698f40f3afadfc96eddd9118d2af80f780ee28f",
+      "bytes": 736
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/recorded-regression-cases-final.json",
+      "sha256": "92039b4892be0ee05faa1e66001ec6d9f92403d7143ed0bf61462b78ba50eecc",
+      "bytes": 4490
+    }
+  ],
+  "files": [
+    {
+      "file": {
+        "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+        "sha256": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933",
+        "bytes": 1099570
+      },
+      "restored": true,
+      "transport": {
+        "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+        "sha256": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933",
+        "bytes": 1099570,
+        "manifest": "tests/fixtures/v6-relative-arrangements-reference.json.gz.parts.json",
+        "parts": 2,
+        "restored": true
+      }
+    },
+    {
+      "file": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+        "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+        "bytes": 3161161
+      },
+      "restored": true,
+      "transport": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+        "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+        "bytes": 3161161,
+        "manifest": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.parts.json",
+        "parts": 4,
+        "restored": true
+      }
+    },
+    {
+      "file": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+        "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3",
+        "bytes": 13286
+      },
+      "restored": false,
+      "transport": null
+    }
+  ],
+  "qualification": "Exact restoration or verification of the published Relative fixture and retained TRIA baseline/trace; no expectation, native source or game result changed. The preceding audit reporting the absent local fixture is retained."
+}

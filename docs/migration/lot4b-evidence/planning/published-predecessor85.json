@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.lot4b.published-predecessor.v1",
+  "observedAt": "2026-11-10 22:26:01 UTC",
+  "observedBy": "root Sites get_site_version and get_deployment_status",
+  "version": {
+    "id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_b11e67b1a2fc819192e7c9e7df191805",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "version_number": 85,
+    "source": {
+      "commit_sha": "a009e1f138bb18251d697f49647bacc615ee514f"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_000000009264820e8868c538f4b0ea40",
+      "content_hash": "sha256:f07512c1a623ae69644a85fff0a4ae69884066fe4b21da5bc2c6a64e6a9ccfa0",
+      "size_bytes": 29808640,
+      "file_count": 75
+    },
+    "deployment_id": "appgdep_6af39846f57881918f4cc499b8376aa0"
+  },
+  "deployment": {
+    "id": "appgdep_6af39846f57881918f4cc499b8376aa0",
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "title": "SRA Playground",
+    "version_id": "appgprj_6adbc388d79081918581b93b919d7258~appgver_b11e67b1a2fc819192e7c9e7df191805",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": "sediment://file_000000003d2481f9a6fda7e9c85cbb6c",
+    "provider_deployment_id": "site---6adbc388d79081918581b93b919d7258",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-10T22:18:59.858962+00:00"
+  },
+  "qualification": "Actual terminal documentation closure85 verified independently. Same server archive hash and75members as Site84; native/test/build input equality will be checked on the fetched source before merging."
+}

@@ -1,0 +1,42 @@
+{
+  "schema": "logos-engine.coordinated-cost-isolation.v1",
+  "status": "acknowledged_quiet_before_window",
+  "recordedAt": "2026-11-10T22:38:47.132254+00:00",
+  "otherLaneAcknowledged": true,
+  "ownTrackedComputeEnded": true,
+  "previewStopped": true,
+  "costNodeOptionsOverride": null,
+  "performanceLock": "/workspace/shared/sra-coordination/performance.lock",
+  "otherLaneBasis": {
+    "7B": "Fresh explicit quiet acknowledgment covering root and all agents until4B release.",
+    "5A": "Terminal explicit all-work-complete / No further5Aexecution / compute released statement. Its older quiet_acknowledged boolean remains false in the exact retained file; it is not rewritten or claimed true."
+  },
+  "evidence": [
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-evidence/lot5a-status.json",
+      "bytes": 5135,
+      "sha256": "6c59d5cce15d1cd1342581cf26e886013def11f19c84777733f689511a573519"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-evidence/lot7b-status.json",
+      "bytes": 2439,
+      "sha256": "4daec9b73adc9785f453282df0aa71f93e38fd8d305657d3441faa446f0e0f42"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/isolation-evidence/own-agents-quiet.json",
+      "bytes": 1315,
+      "sha256": "32b8ef5521fccfff88c343be47248223f7ddf27bb64ffedadb9d23a4f2e48c46"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/preview-stopped.json",
+      "bytes": 482,
+      "sha256": "b667eb921ddb1e52a1820aba7dc553cbfbf92b7af4f4db39da8c037bcb43be9a"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/static-preflight-recheck.json",
+      "bytes": 2455,
+      "sha256": "c53a07cfde0679681c26749ed2941db4121971322dfb55e302bf89043251189a"
+    }
+  ],
+  "qualification": "Exclusive cost is coordinated using actual lane statements and ended tracked jobs; process visibility alone is not asserted as proof. The benchmark will hold the shared flock. Every measured run and adverse diagnostic is retained."
+}

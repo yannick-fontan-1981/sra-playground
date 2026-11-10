@@ -1,0 +1,2 @@
+{"eventIndex":0,"phase":"qualification_failed","error":{"name":"AssertionError","message":"native public command field presence\n+ actual - expected\n\n  [\n    'action_ref',\n-   'data'\n  ]\n"}}
+{"eventIndex":1,"phase":"finished","status":"failed","rawCampaignStatus":null,"commandsCheckedBeforeReturn":0,"publicPacketsObserved":0}

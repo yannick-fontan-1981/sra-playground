@@ -1,0 +1,4 @@
+  File "/workspace/sites/sra-lot4a-20261110/.sites-checkout/scripts/export-v6-relative-arrangements-reference.py", line 470
+    "planner": len(planners), "sessions": [{"id": s["id"], "steps": len(s["steps"]), "events": [r.get("record", {}).get("status") for r in s["steps"]} for s in sessions],
+                                                                                                                                                     ^
+SyntaxError: closing parenthesis '}' does not match opening parenthesis '['

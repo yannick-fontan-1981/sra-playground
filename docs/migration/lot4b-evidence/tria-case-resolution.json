@@ -1,0 +1,53 @@
+{
+  "schema": "logos-engine.relative-arrangement-case-resolution.v1",
+  "status": "target_three_levels_achieved",
+  "game": "TRIA",
+  "selectedAt": "2026-11-10T20:41:18.627048+00:00",
+  "deadline": "2026-11-10T21:21:18.627048+00:00",
+  "resolvedAt": "2026-11-10T20:47:32.767958+00:00",
+  "maximumCumulativeSeconds": 2400,
+  "cumulativeChargedSeconds": 374.14091,
+  "clockReset": false,
+  "phases": [
+    {
+      "phase": "candidate-01",
+      "startedAt": "2026-11-10T20:41:18.656002+00:00",
+      "finishedAt": "2026-11-10T20:42:03.015547+00:00",
+      "elapsedSeconds": 44.359982177003985,
+      "exitCode": 0,
+      "cumulativeCaseSecondsAtEnd": 44.388499
+    },
+    {
+      "phase": "baseline-site81",
+      "startedAt": "2026-11-10T20:42:25.166579+00:00",
+      "finishedAt": "2026-11-10T20:42:45.539307+00:00",
+      "elapsedSeconds": 20.373108373998548,
+      "exitCode": 1,
+      "cumulativeCaseSecondsAtEnd": 86.912259
+    }
+  ],
+  "candidate": {
+    "nativeDigest": "852d5ff7cdaa15534d22fcd610043cd348bb8aa241e290ae67d75adcaeaf8f9f",
+    "actions": 17,
+    "levelsCompleted": 3,
+    "prefixes": 17,
+    "continuousColdSession": true,
+    "manualActions": 0,
+    "levelJumps": 0
+  },
+  "reference": {
+    "siteVersion": 81,
+    "nativeVersion": "0.51.0",
+    "commit": "4dafc40c53ed4406ee7cd148e3e6995a2eb4185e",
+    "actions": 8,
+    "levelsCompleted": 0,
+    "declaredActionCap": 8,
+    "actionCapReached": true
+  },
+  "sourceParity": {
+    "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-relative-arrangement-source-parity-02.json.gz",
+    "bytes": 65114,
+    "sha256": "97b79e0b6d309dff79a2a49f8760d18348b617ac04704576e541f6143562c8bb"
+  },
+  "qualification": "The single original wall-clock interval includes the bounded candidate, bounded published reference, cold original-source comparisons including their retained first annotation mismatch, and analysis. The target was reached. Recorded final-release replays do not constitute new live attempts. Any actual live continuation will charge this retained clock, never reset it. The action-capped baseline is not a general impossibility verdict."
+}
