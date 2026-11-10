@@ -1,0 +1,206 @@
+{
+  "schema": "logos-engine.lot5a-transport-independent-review.v1",
+  "status": "read_only_transport_review_passed",
+  "recordedAt": "2026-11-10T22:13:51.975208+00:00",
+  "reviewAuthority": {
+    "kind": "agent_assessment",
+    "agent": "/root/forced_paths",
+    "humanApprovalClaimed": false,
+    "reviewerAuthoredExternalPlannerVariant": true,
+    "reviewerExecutedPlanner": false,
+    "planExecutionAndAllGitMutationsOwnedBy": "/root"
+  },
+  "scope": "Bounded, read-only Git object/tree comparisons, retained-part hashing and bundle-header/prerequisite inspection. The planner and restored bundle verification were executed by root. No game, build, test, benchmark, Git mutation, network request or push was executed by this review.",
+  "reviewTiming": {
+    "performedAfterPlanFinishedAt": "2026-11-10T22:09:14.840247+00:00",
+    "exactStartAndEndTimesNotSeparatelyRecorded": true,
+    "publicationMessageReceivedAfterReadOnlyApproval": true
+  },
+  "references": [
+    {
+      "path": "/workspace/sites/sra-lot5-20261110/lot5a-bounded-source-plan-v3.json",
+      "bytes": 57779,
+      "sha256": "de07d48159a584582992c8aa6bbf6894f73a4362bd2d491604a0b524ae4760f9"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/source-tree-reconciliation.json",
+      "bytes": 7438,
+      "sha256": "7c2eaf549938b83a96e8b8c090394bebfdfcab888152f04ce03437d34ea6d5f7"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json",
+      "bytes": 11234,
+      "sha256": "bc2c0b0964d1c56eda8096b6da2620e74c4f3603a072cb3e6a24a2c7b22e06e4"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/retained-original-history.manifest.json",
+      "bytes": 571,
+      "sha256": "a96edf925fcb200e56e3f8da53af67f7cb54b83f7a6dd8b98e8a4b9a4559be7b"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/reconstruction.json",
+      "bytes": 4495,
+      "sha256": "943e0eb3935575bc913d6c733b876a91d9a7398029d19257dff7815226078ca0"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/lot5a-bounded-source-plan.json",
+      "bytes": 193244,
+      "sha256": "9d2debdb0a00bcf9d76e397440bf9b82aa37c359cf149ac7875e32129d829ff2"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/plan-bounded-source-transport-v3.py",
+      "bytes": 33531,
+      "sha256": "ffac79264506b2ae38086903756374266781d0cf27ec893976652a01012a710d"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/restore-retained-transport.py",
+      "bytes": 10216,
+      "sha256": "3be6125ce44bd19f49bd4132bddb88df8b0892eeebea436c2f4f535fd28a5c9c"
+    }
+  ],
+  "commits": {
+    "retainedOriginalTarget": "33d91ef1b8a6343c554b5c18beacd051816e11b9",
+    "originalBranch": "refs/heads/lot5-linked-temporal-and-delta",
+    "originalBranchStillAtOriginalTarget": true,
+    "alreadyPushedSourceBase": "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+    "retainedNativeHistory": "bc19974c910711f20385d9a40168a0927ec22057",
+    "safeTarget": "7b0637cfef2a7e5ef42fbdf0cb214cc35aa31886",
+    "safeTargetParents": [
+      "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+      "bc19974c910711f20385d9a40168a0927ec22057"
+    ],
+    "final": "51e2813dedb2d71001290f94f100605e0327ead3",
+    "finalTree": "f4ccc15b007cb693f6497930fb4e68ef669786bb",
+    "originalTargetIsNotAnAncestorOfFinal": true,
+    "preservedActualAncestors": [
+      "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+      "bc19974c910711f20385d9a40168a0927ec22057",
+      "3654ffd105f8ebfa503d255e0f872c15997f62c2",
+      "b5024f6888f29507fd92913d619a5e6ad33d097e",
+      "bed48116585da864dd5c412ed11dd6990a950e8e"
+    ]
+  },
+  "treeReview": {
+    "method": "Compared git ls-tree -r entries including modes, kinds and object IDs at fixed commits.",
+    "unchangedOriginalEntries": 8040,
+    "originalPathExceptions": [
+      ".gitignore",
+      "docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-first-creator.json"
+    ],
+    "gitignoreExistingBytesPreservedAsPrefix": true,
+    "allOtherChangesRestrictedTo": [
+      "docs/migration/lot5a-evidence/final/transport/",
+      "docs/migration/lot5a-evidence/plan-bounded-source-transport-v3.py",
+      "docs/migration/lot5a-evidence/restore-retained-transport.py"
+    ],
+    "nativeSourcesTestsBuildDependenciesAndOldProofEntriesIdentical": true,
+    "originalEvidenceIndexUnchanged": true,
+    "finalTreeExactlyEqualsSafeTarget": true
+  },
+  "byteRepresentation": {
+    "method": "Read every retained part from the committed safe-target tree, checked part size/SHA, concatenation size/SHA and original Git blob SHA-1 in memory; no restoration write.",
+    "json": {
+      "manifest": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json",
+      "parts": 45,
+      "partBytes": 900000,
+      "original": {
+        "bytes": 39817093,
+        "path": "docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-first-creator.json",
+        "sha256": "bdfa9286d7a03715282b7e8c7ef49a3c90ccd4eb1e4d7ac1149aa59085127163"
+      },
+      "reconstructedGitBlob": "c8daeba7547de0e3f7ded9be7cd7594932fa9b59",
+      "matchesOriginalTrackedGitBlob": true
+    },
+    "bundle": {
+      "manifest": "docs/migration/lot5a-evidence/final/transport/retained-original-history.manifest.json",
+      "parts": 1,
+      "original": {
+        "bytes": 609621,
+        "path": "docs/migration/lot5a-evidence/final/transport/retained-original-history.bundle",
+        "sha256": "0022c18ceb57f6c8cae83a247860632be61c379ba602ed35b69f670d0641c317"
+      },
+      "opaqueBytesExact": true,
+      "gitBundleVerifyByRootRetainedInReconstructionReceipt": true
+    }
+  },
+  "bundleRecoverability": {
+    "explicitBundleRefs": [
+      "33d91ef1b8a6343c554b5c18beacd051816e11b9",
+      "c8ae9b0668a001d7b15acc52a80f10c60b0f0ede",
+      "e5e225b0e26f7ddcbdcebd35c725d7e48ec08c28",
+      "3635275a96b092add8f70b813ba0d8c1f23eceb7",
+      "480002e4740040332a5eba46457a673e4458eb71"
+    ],
+    "prerequisites": [
+      "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+      "bc19974c910711f20385d9a40168a0927ec22057",
+      "bed48116585da864dd5c412ed11dd6990a950e8e"
+    ],
+    "createdCommitsAlreadyCoveredByPublishedPrerequisiteAncestry": [
+      "0ab6fdda85811eeff28bfbae38a6f1bab7fd5dbb",
+      "70bebab972a59d4bb5d60b6c6278576a767fd61d",
+      "0d69767970bff5cdc95c163bd5a02614bb661bd4"
+    ],
+    "allSevenOriginalPlanCreatedCommitsRecoverable": true,
+    "allPrerequisitesAreActualAncestorsOfSafeTarget": true,
+    "qualification": "The incremental bundle requires the explicitly named published prerequisite history. The archived original target remains recoverable; it is not falsely claimed to be an active ancestor of the final publication."
+  },
+  "planReview": {
+    "method": "Recomputed rev-list missing-object sets and cat-file object sizes for the complete safe target and all four fixed transport commits; compared exact sorted inventories, counts, sums and inventory SHA-256.",
+    "perObjectLimitBytes": 33554432,
+    "perStepRawLimitBytes": 41943040,
+    "completeTargetReachableObjects": 10309,
+    "completeTargetLargestObjectBytes": 8810498,
+    "steps": [
+      {
+        "step": 1,
+        "objects": 22,
+        "rawBytes": 535597,
+        "largestObjectBytes": 217093
+      },
+      {
+        "step": 2,
+        "objects": 52,
+        "rawBytes": 40227048,
+        "largestObjectBytes": 900000
+      },
+      {
+        "step": 3,
+        "objects": 9,
+        "rawBytes": 8672711,
+        "largestObjectBytes": 3988757
+      },
+      {
+        "step": 4,
+        "objects": 17,
+        "rawBytes": 211417,
+        "largestObjectBytes": 136857
+      }
+    ],
+    "newObjectsCountedExactlyOnce": 100,
+    "newRawObjectBytes": 49646773,
+    "eachStepFastForwardFromItsRecordedPredecessor": true,
+    "allNonDeferredPathsExactlyMatchSafeTargetAtEveryStep": true,
+    "finalSafeTargetIsDirectParent": true,
+    "allObjectAndStepBoundsPass": true,
+    "qualification": "Raw object bounds do not measure or guarantee network pack size. Actual ordinary-push receipts remain the source of transport outcomes."
+  },
+  "reviewAssumptionCorrection": {
+    "initialCheck": "An in-memory audit initially required every old created commit to appear as an explicit bundle header ref.",
+    "finding": "Three such commits were already pushed and therefore correctly excluded by bundle prerequisites.",
+    "resolution": "Checked all prerequisite ancestry in Git and accepted explicit bundle refs plus that proven published ancestry; all seven created commits and the original target are recoverable. No input, tool, Git object or ref was changed to resolve this audit assumption."
+  },
+  "publicationContextReportedByRoot": {
+    "siteVersion": 84,
+    "commit": "51e2813dedb2d71001290f94f100605e0327ead3",
+    "deploymentId": "appgdep_6af396981b2c8191872a706bffe760f3",
+    "statusReported": "private_publication_succeeded",
+    "independentSitesApiVerificationByThisReview": false
+  },
+  "decision": "No blocker remains in the reviewed tree reconciliation, byte representation, recoverable archived history or four-step bounded source plan. The native code and previously bound evidence retain their exact identities.",
+  "limitations": [
+    "This reviewer wrote the v3 planner adaptation and independently checked its actual plan against Git; this is not a claim of independent authorship review of that adaptation.",
+    "Bundle packet validity is evidenced by root’s retained real git bundle verify execution; this reviewer independently verified bundle bytes/header and prerequisite ancestry, without importing the bundle.",
+    "No network, publication or deployment operation was independently executed or observed by this review."
+  ]
+}

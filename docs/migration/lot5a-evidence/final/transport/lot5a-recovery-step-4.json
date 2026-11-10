@@ -1,0 +1,19 @@
+{
+  "step": 4,
+  "startedAt": "2026-11-10T22:10:51.925Z",
+  "finishedAt": "2026-11-10T22:11:08.963Z",
+  "planned": {
+    "step": 4,
+    "kind": "final_history_merge",
+    "previousCommit": "dd7cb29e7bd88d7dfe57042f666b3008e3b6c96e",
+    "commit": "51e2813dedb2d71001290f94f100605e0327ead3",
+    "tree": "f4ccc15b007cb693f6497930fb4e68ef669786bb",
+    "rawMissingObjectBytes": 211417
+  },
+  "source": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+    "commit_sha": "51e2813dedb2d71001290f94f100605e0327ead3",
+    "archive": "/workspace/sites/sra-lot5-20261110/lot5a-recovery-step-4.tar.gz"
+  }
+}
