@@ -51,6 +51,16 @@ intégration des prédécesseurs effectivement publiés. Le test corrigé sera i
 dans ce périmètre final. Aucun coût, succès de jeu ou déploiement supplémentaire
 n'est déduit de ce gel.
 
+## Intégration intermédiaire du lot 5A publié
+
+Le commit `fff552b4222b001b4fa6da013accb70ed539e301` fusionne le vrai
+Site 84 / `51e2813dedb2d71001290f94f100605e0327ead3` avec Axial.
+Les [audits intermédiaires](diagnostic/post5a-inventory-run.json) trouvent
+58/76 entrées et aucune défaillance sémantique. Les
+[six scénarios Axial](diagnostic/post5a-kernel-run.json) passent aussi sur le
+cœur optimisé 5A, avec leurs entrées inchangées pendant l’exécution. Ce diagnostic
+ne remplace pas le futur gel après les publications de 4B et 7B.
+
 ## Préparation des contrôles finaux
 
 - [Périmètre fonctionnel et rejeux](validation-and-regression-plan.md),
