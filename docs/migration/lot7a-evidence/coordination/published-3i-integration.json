@@ -13,5 +13,17 @@
   },
   "localHeadBeforeMerge": "47ce3922bdd76c9687d7cfd5b9091c224365816c",
   "stage": "source_reconciliation_complete_pending_4A_and_formal_validation",
-  "qualification": "Actual published3I source has been reconciled into the private7A branch. No final integrated freeze, test result, cost result or7A publication is asserted."
+  "qualification": "Actual published3I source has been reconciled into the private7A branch. No final integrated freeze, test result, cost result or7A publication is asserted.",
+  "intermediateMergeCommit": "8e51f82ca0bf483df5e2a2fd7ec88e47b5113137",
+  "entryInventory": {
+    "connected": 55,
+    "declared": 76
+  },
+  "migrationInventory": {
+    "componentVerified": 169,
+    "partial": 142,
+    "pending": 1058,
+    "fullyVerified": 0
+  },
+  "retainedEvidenceNote": "Cached diff-check reported trailing whitespace only in four lines of the imported3I raw browser AX evidence. Those original evidence bytes were preserved, not normalized. No source-conflict markers remain."
 }
