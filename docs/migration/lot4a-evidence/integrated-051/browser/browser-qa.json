@@ -1,0 +1,50 @@
+{
+  "schema": "logos-engine.feedback-browser-qa.v1",
+  "status": "blocked_infrastructure",
+  "recordedAt": "2026-11-10T19:26:09.229407+00:00",
+  "nativeVersion": "0.51.0",
+  "nativeSourceDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+  "sourceManifest": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/source-manifest.json",
+    "bytes": 32379,
+    "sha256": "391b3e33c4bbd66ed9a1885d4803fb754b596a6e31ba42b79114fc2c43d6e6cd"
+  },
+  "buildReceipt": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/validation/checks-run.json",
+    "bytes": 75358,
+    "sha256": "58daa8f4e8f19ef9a21182ed3106e465dcad66733997893fced36156d01495a9"
+  },
+  "preview": {
+    "command": [
+      "sites-preview",
+      "start",
+      "/workspace/sites/sra-lot4a-20261110/.sites-checkout"
+    ],
+    "reportedUrl": "http://127.0.0.1:4173/",
+    "started": true
+  },
+  "attempts": [
+    {
+      "surface": "CDP existing tab2",
+      "result": "Emulation.setFocusEmulationEnabled timed out",
+      "navigationCompleted": false
+    },
+    {
+      "surface": "Sky desktop screenshot",
+      "observed": "Pre-existing Chromium Motivation tab at http://127.0.0.1:4173/motivation.html#content shows Cannot open this page, Error code9."
+    },
+    {
+      "surface": "Sky native keyboard navigation",
+      "result": "AT-SPI provider with process ID3179 unavailable for X11 window10485762; registry reported0 provider connections; navigation could not be sent."
+    }
+  ],
+  "browserGameActions": 0,
+  "verifiedFunctionalChecks": [],
+  "screenshotsObservedInCuaTranscript": 2,
+  "screenshotsSavedInRepository": false,
+  "previewStopCommand": [
+    "sites-preview",
+    "stop"
+  ],
+  "qualification": "The managed preview started from the integrated checkout, but the pre-existing crashed Chromium tab could not be controlled or navigated. No native0.51 application behavior, game, Pause/resume or stepping was verified in the browser. This is separate from the cold live common-caller campaign, worker build and cancellation tests. No fallback browser driver, app-code change or permission change was used."
+}
