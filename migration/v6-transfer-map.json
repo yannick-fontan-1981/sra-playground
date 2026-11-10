@@ -821,7 +821,6 @@
     },
     {
       "sources": [
-        "agents/yf_arc3_v6/laya_proto/common_crossed_prefix.py",
         "agents/yf_arc3_v6/laya_proto/common_repeated_lines.py"
       ],
       "targets": [
@@ -835,7 +834,7 @@
         "tests/v6-support-caller-integration.test.ts",
         "tests/fixtures/v6-native-caller/memo-first-prefix.json"
       ],
-      "notes": "Only the event reduction/digest ancestry required by occurrence recall and observed-program state is transferred. Crossed-prefix and repeated-line proposal/planning/acquisition producers remain pending; their absence is not hidden by the shared native journal. Existing occurrence fixtures retain the previously compared ancestry contract."
+      "notes": "The retained repeated-line reducers/digest required by occurrence recall remain transferred. Repeated-line proposal/planning/acquisition producers remain pending. The CrossedPrefix producer and its single ancestral owner are now documented separately in lot3H; the historical standalone recall contract remains unchanged."
     },
     {
       "sources": [
@@ -4295,6 +4294,28 @@
         "tests/v6-framed-window-observation.test.ts"
       ],
       "notes": "Lot3G/native0.48 transfers only the exact_candidates MATCH operation consumed by FramedWindow: portable JSON request validation, model correlation, complete window equality including final/background/isolated pixels, finite-domain completeness, source budget accounting and model-boundary resume. Ten other temporal-fragment operations remain unported. Native adaptation native_temporal_fragment_interrupted_pixel_frontier returns incomplete NEEDS_EVIDENCE with frontier where the original interrupted-pixel fallback raises AttributeError from FrozenMap.overlay(dict). Original exceptions remain archived; exception parity is not claimed, no action or acquisition follows an incomplete certificate. General Pydantic coercions, FrozenModel transport and arbitrary Python numeric semantics are not transferred."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_crossed_prefix.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-crossed-prefix-observation.ts",
+        "src/logos-engine/v6-crossed-prefix-access.ts",
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-crossed-prefix-reference.py",
+        "tests/fixtures/v6-crossed-prefix-reference.json.gz",
+        "docs/migration/lot3h-crossed-prefix-lineage.md",
+        "tests/v6-crossed-prefix-observation.test.ts",
+        "tests/v6-crossed-prefix-access.test.ts",
+        "tests/v6-crossed-prefix-integration.test.ts"
+      ],
+      "notes": "Lot3H/native0.49 transfers the own measured geometry, controller assignment, select/recolor/advance proposals, current guards, state/input/pair acquisition and common adapter. SharedOccurrenceMemory delegates to one CrossedPrefix owner at the existing inherited digest slot, preserving old journals without inventing absent pair evidence. Standalone occurrence reducers retain their historical behavior. Native assignment work/deadline bounds return blocking unknown without acquisition; the geometric prefilter is not deadline-preempted. Atomic reducer validation is named separately from source exception parity. RepeatedLine/SupportedLine planning ancestry and complete original-caller parity remain partial; component verification alone does not claim game contribution."
     }
   ],
   "scopeNotes": [

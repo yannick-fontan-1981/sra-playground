@@ -1,0 +1,1488 @@
+{
+  "schema": "logos-engine.native-cost-consolidation-review.v2",
+  "status": "passed",
+  "budgetStatus": "budget_review_required",
+  "recordedAt": "2026-11-10T16:42:41.299329+00:00",
+  "generator": {
+    "path": "scripts/review-native-cost-consolidation.py",
+    "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+    "bytes": 17810
+  },
+  "method": "Independent Python standard-library recalculation from four retained raw reports. No timing runner, agent, game, test or build was executed. Distributions use statistics.median, empirical nearest-rank p95 only from twenty samples, exact relative ratios and unchanged noise classification.",
+  "inputs": [
+    {
+      "path": "docs/migration/lot3h-evidence/performance/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "bytes": 1451
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/comparison-policy.json",
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+      "bytes": 991
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/protocol.md",
+      "sha256": "7bd6b7d0368828378805eaecbf6be8b6f4ad89af58014175b95542ee52b19d1f",
+      "bytes": 10074
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/window.json",
+      "sha256": "50db2d4147fd6f7648f6f2080abae1db836e25f0196845063fd0908de33b1eb0",
+      "bytes": 10159
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/combined-comparison.json",
+      "sha256": "8fd3e284b2ec17578759507bdb683dd6dbfb839a06fc7cdc1d4ecb2a4e63fc18",
+      "bytes": 29988
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/cohort1/baseline.json",
+      "sha256": "18de4f9204a6ac081dce3b243346601f70ac6484e5628e6e2b1710baeacb777b",
+      "bytes": 428096
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/cohort1/after.json",
+      "sha256": "3124fd2bd8fd418637ccb8fdc84f33ac1e162c7eac859d3f3b9f898949f867f5",
+      "bytes": 428473
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/cohort1/comparison.json",
+      "sha256": "20c1870a461b39eb4e304ceea8b1ca2b7cdd04f52ae95c7bae38d8af7e919f26",
+      "bytes": 25564
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/cohort2/baseline.json",
+      "sha256": "fd58006b0068bcb7c2409532d1a5d8fc184690aded738c580b6bd1cfa782d457",
+      "bytes": 428011
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/cohort2/after.json",
+      "sha256": "fb07b62ea41a8556fcee7f8b4882b7c56ee031fe497451d35bbd7eb9782279e5",
+      "bytes": 428290
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/cohort2/comparison.json",
+      "sha256": "978debf8f08e6e8fce183c24fbe052dff8b845676eebfb3ab01d604594aa58f6",
+      "bytes": 25904
+    }
+  ],
+  "checks": [
+    {
+      "name": "declared_rounds_and_budget",
+      "passed": true
+    },
+    {
+      "name": "declared_sixteen_metrics",
+      "passed": true
+    },
+    {
+      "name": "completed_ABBA_window",
+      "passed": true
+    },
+    {
+      "name": "window_execution_A1",
+      "passed": true
+    },
+    {
+      "name": "window_report_fingerprint_A1",
+      "passed": true
+    },
+    {
+      "name": "window_execution_B1",
+      "passed": true
+    },
+    {
+      "name": "window_report_fingerprint_B1",
+      "passed": true
+    },
+    {
+      "name": "window_execution_B2",
+      "passed": true
+    },
+    {
+      "name": "window_report_fingerprint_B2",
+      "passed": true
+    },
+    {
+      "name": "window_execution_A2",
+      "passed": true
+    },
+    {
+      "name": "window_report_fingerprint_A2",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-playground-step3d/.sites-checkout/docs/migration/lot3h-evidence/baseline/source-manifest.json",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-playground-step3d/.sites-checkout/docs/migration/lot3h-evidence/final/source-manifest.json",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-playground-step3d/.sites-checkout/scripts/measure-native-loop-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-published-048/scripts/measure-native-loop-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-playground-step3d/.sites-checkout/scripts/compare-native-loop-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-playground-step3d/.sites-checkout/scripts/compare-native-cost-cohorts.mjs",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-playground-step3d/.sites-checkout/scripts/run-native-cost-window.py",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-playground-step3d/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-published-048/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-playground-step3d/.sites-checkout/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-published-048/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-playground-step3d/.sites-checkout/docs/migration/lot3h-evidence/performance/cases.json",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-published-048/docs/migration/lot3h-evidence/performance/cases.json",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-playground-step3d/.sites-checkout/docs/migration/lot3h-evidence/performance/comparison-policy.json",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-published-048/docs/migration/lot3h-evidence/performance/comparison-policy.json",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-playground-step3d/.sites-checkout/docs/migration/lot3h-evidence/performance/protocol.md",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-published-048/docs/migration/lot3h-evidence/performance/protocol.md",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-published-048/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-playground-step3d/.sites-checkout/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-published-048/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "passed": true
+    },
+    {
+      "name": "window_retained_input//workspace/sites/sra-playground-step3d/.sites-checkout/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/complete_unchanged_report",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/same_manifest_environment_harness_inputs",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/source_manifest_identity",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/same_source_within_version",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/case_order",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/STCK/round0/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/STCK/round1/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/STCK/round2/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/STCK/round3/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/STCK/round4/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/STCK/retained_trials_and_only_declared_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/STCK/exact_work_metadata",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/STCK/session_summary",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/STCK/round1/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/STCK/round2/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/STCK/round3/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/STCK/round4/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/SMLP/round0/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/SMLP/round1/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/SMLP/round2/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/SMLP/round3/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/SMLP/round4/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/SMLP/retained_trials_and_only_declared_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/SMLP/exact_work_metadata",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/SMLP/session_summary",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/SMLP/round1/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/SMLP/round2/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/SMLP/round3/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort1/baseline/SMLP/round4/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/complete_unchanged_report",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/same_manifest_environment_harness_inputs",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/source_manifest_identity",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/same_source_within_version",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/case_order",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/STCK/round0/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/STCK/round1/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/STCK/round2/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/STCK/round3/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/STCK/round4/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/STCK/retained_trials_and_only_declared_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/STCK/exact_work_metadata",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/STCK/session_summary",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/STCK/round1/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/STCK/round2/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/STCK/round3/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/STCK/round4/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/SMLP/round0/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/SMLP/round1/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/SMLP/round2/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/SMLP/round3/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/SMLP/round4/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/SMLP/retained_trials_and_only_declared_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/SMLP/exact_work_metadata",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/SMLP/session_summary",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/SMLP/round1/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/SMLP/round2/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/SMLP/round3/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort1/after/SMLP/round4/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/complete_unchanged_report",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/same_manifest_environment_harness_inputs",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/source_manifest_identity",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/same_source_within_version",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/case_order",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/STCK/round0/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/STCK/round1/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/STCK/round2/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/STCK/round3/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/STCK/round4/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/STCK/retained_trials_and_only_declared_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/STCK/exact_work_metadata",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/STCK/session_summary",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/STCK/round1/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/STCK/round2/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/STCK/round3/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/STCK/round4/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/SMLP/round0/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/SMLP/round1/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/SMLP/round2/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/SMLP/round3/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/SMLP/round4/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/SMLP/retained_trials_and_only_declared_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/SMLP/exact_work_metadata",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/SMLP/session_summary",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/SMLP/round1/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/SMLP/round2/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/SMLP/round3/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/baseline/SMLP/round4/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/complete_unchanged_report",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/same_manifest_environment_harness_inputs",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/source_manifest_identity",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/same_source_within_version",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/case_order",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/STCK/round0/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/STCK/round1/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/STCK/round2/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/STCK/round3/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/STCK/round4/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/STCK/retained_trials_and_only_declared_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/STCK/exact_work_metadata",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/STCK/session_summary",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/STCK/round1/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/STCK/round2/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/STCK/round3/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/STCK/round4/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/SMLP/round0/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/SMLP/round1/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/SMLP/round2/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/SMLP/round3/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/SMLP/round4/within_sequential_window",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/SMLP/retained_trials_and_only_declared_warmup",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/SMLP/exact_work_metadata",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/SMLP/session_summary",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/SMLP/round1/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/SMLP/round2/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/SMLP/round3/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "cohort2/after/SMLP/round4/acquisition_and_pause",
+      "passed": true
+    },
+    {
+      "name": "all_measured_sessions_retained_once",
+      "passed": true
+    },
+    {
+      "name": "measured_actions_and_sessions",
+      "passed": true
+    },
+    {
+      "name": "source_versions_distinct",
+      "passed": true
+    },
+    {
+      "name": "cohort1/comparison_input_fingerprints",
+      "passed": true
+    },
+    {
+      "name": "1/STCK/session_elapsed/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/STCK/new_decision/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/STCK/known_prefix_service/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/STCK/known_prefix_request/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/STCK/known_prefix_guard/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/STCK/acquisition_and_persistence/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/STCK/persistence/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/STCK/restoration/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/STCK/metric_count",
+      "passed": true
+    },
+    {
+      "name": "1/SMLP/session_elapsed/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/SMLP/new_decision/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/SMLP/known_prefix_service/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/SMLP/known_prefix_request/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/SMLP/known_prefix_guard/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/SMLP/acquisition_and_persistence/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/SMLP/persistence/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/SMLP/restoration/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "1/SMLP/metric_count",
+      "passed": true
+    },
+    {
+      "name": "1/unchanged_budget_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2/comparison_input_fingerprints",
+      "passed": true
+    },
+    {
+      "name": "2/STCK/session_elapsed/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/STCK/new_decision/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/STCK/known_prefix_service/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/STCK/known_prefix_request/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/STCK/known_prefix_guard/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/STCK/acquisition_and_persistence/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/STCK/persistence/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/STCK/restoration/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/STCK/metric_count",
+      "passed": true
+    },
+    {
+      "name": "2/SMLP/session_elapsed/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/SMLP/new_decision/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/SMLP/known_prefix_service/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/SMLP/known_prefix_request/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/SMLP/known_prefix_guard/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/SMLP/acquisition_and_persistence/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/SMLP/persistence/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/SMLP/restoration/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "2/SMLP/metric_count",
+      "passed": true
+    },
+    {
+      "name": "2/unchanged_budget_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_policy_fingerprint",
+      "passed": true
+    },
+    {
+      "name": "aggregate_cohort1_fingerprints",
+      "passed": true
+    },
+    {
+      "name": "aggregate_cohort2_fingerprints",
+      "passed": true
+    },
+    {
+      "name": "combined/STCK/session_elapsed/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/STCK/new_decision/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/STCK/known_prefix_service/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/STCK/known_prefix_request/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/STCK/known_prefix_guard/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/STCK/acquisition_and_persistence/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/STCK/persistence/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/STCK/restoration/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/STCK/metric_count",
+      "passed": true
+    },
+    {
+      "name": "combined/SMLP/session_elapsed/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/SMLP/new_decision/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/SMLP/known_prefix_service/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/SMLP/known_prefix_request/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/SMLP/known_prefix_guard/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/SMLP/acquisition_and_persistence/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/SMLP/persistence/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/SMLP/restoration/exact_distribution_ratio_noise_classification",
+      "passed": true
+    },
+    {
+      "name": "combined/SMLP/metric_count",
+      "passed": true
+    },
+    {
+      "name": "combined/unchanged_budget_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_totals_and_no_extra_exclusion",
+      "passed": true
+    },
+    {
+      "name": "input_fingerprint/scripts/measure-native-loop-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "input_fingerprint/docs/migration/lot3h-evidence/performance/cases.json",
+      "passed": true
+    },
+    {
+      "name": "input_fingerprint/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "passed": true
+    },
+    {
+      "name": "input_fingerprint/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "passed": true
+    },
+    {
+      "name": "input_fingerprint/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "passed": true
+    },
+    {
+      "name": "input_fingerprint/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "passed": true
+    },
+    {
+      "name": "retained_fingerprint/docs/migration/lot3h-evidence/performance/cases.json",
+      "passed": true
+    },
+    {
+      "name": "retained_fingerprint/docs/migration/lot3h-evidence/performance/comparison-policy.json",
+      "passed": true
+    },
+    {
+      "name": "retained_fingerprint/docs/migration/lot3h-evidence/performance/protocol.md",
+      "passed": true
+    },
+    {
+      "name": "retained_fingerprint/docs/migration/lot3h-evidence/performance/window.json",
+      "passed": true
+    },
+    {
+      "name": "retained_fingerprint/docs/migration/lot3h-evidence/performance/combined-comparison.json",
+      "passed": true
+    },
+    {
+      "name": "retained_fingerprint/docs/migration/lot3h-evidence/performance/cohort1/baseline.json",
+      "passed": true
+    },
+    {
+      "name": "retained_fingerprint/docs/migration/lot3h-evidence/performance/cohort1/after.json",
+      "passed": true
+    },
+    {
+      "name": "retained_fingerprint/docs/migration/lot3h-evidence/performance/cohort1/comparison.json",
+      "passed": true
+    },
+    {
+      "name": "retained_fingerprint/docs/migration/lot3h-evidence/performance/cohort2/baseline.json",
+      "passed": true
+    },
+    {
+      "name": "retained_fingerprint/docs/migration/lot3h-evidence/performance/cohort2/after.json",
+      "passed": true
+    },
+    {
+      "name": "retained_fingerprint/docs/migration/lot3h-evidence/performance/cohort2/comparison.json",
+      "passed": true
+    }
+  ],
+  "checkedCount": 231,
+  "sources": {
+    "baseline": {
+      "digest": "fce8dfc3e6861742649203161b3bf55b6480462e44c77d8015453ce55b724a26",
+      "fileCount": 266
+    },
+    "after": {
+      "digest": "d6cb9abdf48a9062936d4647dbd809dc4cee1d1528f85e973fda83c7af8e6054",
+      "fileCount": 268
+    }
+  },
+  "cohortResults": [
+    {
+      "cohort": 1,
+      "status": "budget_review_required",
+      "withinObservedBudget": 14,
+      "unresolved": [
+        {
+          "case": "STCK",
+          "stage": "acquisition_and_persistence",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.1076734082481623
+        },
+        {
+          "case": "SMLP",
+          "stage": "known_prefix_guard",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.23508744802807824
+        }
+      ]
+    },
+    {
+      "cohort": 2,
+      "status": "budget_review_required",
+      "withinObservedBudget": 12,
+      "unresolved": [
+        {
+          "case": "STCK",
+          "stage": "restoration",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.3219653605622834
+        },
+        {
+          "case": "SMLP",
+          "stage": "acquisition_and_persistence",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.18990369222198655
+        },
+        {
+          "case": "SMLP",
+          "stage": "persistence",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.10343479325456983
+        },
+        {
+          "case": "SMLP",
+          "stage": "restoration",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.19968259090484675
+        }
+      ]
+    },
+    {
+      "cohort": "combined",
+      "status": "budget_review_required",
+      "withinObservedBudget": 15,
+      "unresolved": [
+        {
+          "case": "SMLP",
+          "stage": "acquisition_and_persistence",
+          "result": "over_budget_with_noise_unresolved",
+          "medianRelativeIncrease": 0.15162881846818754
+        }
+      ]
+    }
+  ],
+  "measuredSessions": 32,
+  "measuredSessionsPerCaseAndVersion": 8,
+  "measuredActionsPerVersion": {
+    "baseline": 200,
+    "after": 200
+  },
+  "budget": {
+    "relativeThreshold": 0.1,
+    "metrics": 16,
+    "withinObservedBudget": 15,
+    "unresolved": [
+      {
+        "case": "SMLP",
+        "stage": "acquisition_and_persistence",
+        "result": "over_budget_with_noise_unresolved",
+        "medianRelativeIncrease": 0.15162881846818754
+      }
+    ]
+  },
+  "metrics": [
+    {
+      "case": "STCK",
+      "metrics": [
+        {
+          "stage": "session_elapsed",
+          "before": {
+            "count": 8,
+            "medianMs": 10646.1779525,
+            "p95Ms": null,
+            "minMs": 10181.560454999999,
+            "maxMs": 11315.892532999998
+          },
+          "after": {
+            "count": 8,
+            "medianMs": 10468.810378999999,
+            "p95Ms": null,
+            "minMs": 9690.280834999998,
+            "maxMs": 12990.139508
+          },
+          "medianRelativeIncrease": -0.016660211231801836,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.10654829207825037,
+            "afterRelativeRange": 0.3152085627245081
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "new_decision",
+          "before": {
+            "count": 48,
+            "medianMs": 352.55487099999846,
+            "p95Ms": 472.0702590000001,
+            "minMs": 186.10814299999765,
+            "maxMs": 545.456981000003
+          },
+          "after": {
+            "count": 48,
+            "medianMs": 334.4484925000015,
+            "p95Ms": 506.5939999999973,
+            "minMs": 173.4081929999993,
+            "maxMs": 555.7433149999997
+          },
+          "medianRelativeIncrease": -0.051357618315240994,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.2712803381823964,
+            "afterRelativeRange": 0.5828622573914727
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_service",
+          "before": {
+            "count": 32,
+            "medianMs": 10.667581500001688,
+            "p95Ms": 21.39890999999625,
+            "minMs": 7.320883000000322,
+            "maxMs": 22.611197000001994
+          },
+          "after": {
+            "count": 32,
+            "medianMs": 9.428431499999533,
+            "p95Ms": 16.340540000001056,
+            "minMs": 7.040139000000636,
+            "maxMs": 20.538038999999117
+          },
+          "medianRelativeIncrease": -0.11616034993517121,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.3143727026789277,
+            "afterRelativeRange": 0.2938427407556619
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_request",
+          "before": {
+            "count": 32,
+            "medianMs": 12.82911950000198,
+            "p95Ms": 23.342650999999023,
+            "minMs": 8.863742999994429,
+            "maxMs": 24.512604999999894
+          },
+          "after": {
+            "count": 32,
+            "medianMs": 11.644351999999344,
+            "p95Ms": 18.533810000000813,
+            "minMs": 8.978511999997863,
+            "maxMs": 23.290274999999383
+          },
+          "medianRelativeIncrease": -0.09234986859405692,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.35050276790137413,
+            "afterRelativeRange": 0.2733575599363042
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_guard",
+          "before": {
+            "count": 32,
+            "medianMs": 0.2728884999978618,
+            "p95Ms": 0.5998159999980999,
+            "minMs": 0.08981199999834644,
+            "maxMs": 1.40439399999741
+          },
+          "after": {
+            "count": 32,
+            "medianMs": 0.22954900000149792,
+            "p95Ms": 0.44781200000034005,
+            "minMs": 0.08471500000086962,
+            "maxMs": 1.1733939999976428
+          },
+          "medianRelativeIncrease": -0.1588176123094358,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.540854052173531,
+            "afterRelativeRange": 0.3936772969031402
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "acquisition_and_persistence",
+          "before": {
+            "count": 48,
+            "medianMs": 870.9545080000007,
+            "p95Ms": 3741.332125999994,
+            "minMs": 396.4248689999986,
+            "maxMs": 3882.284987000001
+          },
+          "after": {
+            "count": 48,
+            "medianMs": 880.3861554999985,
+            "p95Ms": 3665.0166629999985,
+            "minMs": 409.6265889999995,
+            "maxMs": 4101.165525000004
+          },
+          "medianRelativeIncrease": 0.010829093153964964,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.16749728468042568,
+            "afterRelativeRange": 0.36298218305535623
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "persistence",
+          "before": {
+            "count": 104,
+            "medianMs": 166.5234030000006,
+            "p95Ms": 327.1707880000031,
+            "minMs": 15.059532999999647,
+            "maxMs": 399.3414479999992
+          },
+          "after": {
+            "count": 104,
+            "medianMs": 179.34853199999998,
+            "p95Ms": 365.07980300000054,
+            "minMs": 15.366929000003438,
+            "maxMs": 458.8668719999987
+          },
+          "medianRelativeIncrease": 0.07701697640660954,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.32220159510345303,
+            "afterRelativeRange": 0.35738502204878847
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "restoration",
+          "before": {
+            "count": 96,
+            "medianMs": 8.431405999999697,
+            "p95Ms": 53.04395900000054,
+            "minMs": 2.014004999997269,
+            "maxMs": 85.64446499999758
+          },
+          "after": {
+            "count": 96,
+            "medianMs": 8.53324899999825,
+            "p95Ms": 54.191115999998146,
+            "minMs": 1.9398159999982454,
+            "maxMs": 97.0893300000007
+          },
+          "medianRelativeIncrease": 0.012079005565448497,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.36337167127988745,
+            "afterRelativeRange": 0.4137815925300004
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        }
+      ]
+    },
+    {
+      "case": "SMLP",
+      "metrics": [
+        {
+          "stage": "session_elapsed",
+          "before": {
+            "count": 8,
+            "medianMs": 17105.686085500005,
+            "p95Ms": null,
+            "minMs": 16110.598801,
+            "maxMs": 17660.135612
+          },
+          "after": {
+            "count": 8,
+            "medianMs": 17561.375825000003,
+            "p95Ms": null,
+            "minMs": 16734.09633,
+            "maxMs": 18813.168768000003
+          },
+          "medianRelativeIncrease": 0.02663966456664224,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.09058606613350023,
+            "afterRelativeRange": 0.11838892685391308
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "new_decision",
+          "before": {
+            "count": 72,
+            "medianMs": 383.7332055000006,
+            "p95Ms": 862.7851900000096,
+            "minMs": 189.58728399999382,
+            "maxMs": 1032.5334639999928
+          },
+          "after": {
+            "count": 72,
+            "medianMs": 405.4414720000059,
+            "p95Ms": 976.0558999999921,
+            "minMs": 201.99713000000338,
+            "maxMs": 1011.9200290000008
+          },
+          "medianRelativeIncrease": 0.05657124843214856,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.43614016854662496,
+            "afterRelativeRange": 0.17516325243912578
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_service",
+          "before": {
+            "count": 48,
+            "medianMs": 11.039623000004212,
+            "p95Ms": 24.234263999998802,
+            "minMs": 7.626805000007153,
+            "maxMs": 30.62218899999425
+          },
+          "after": {
+            "count": 48,
+            "medianMs": 11.794715500000166,
+            "p95Ms": 24.66595100000268,
+            "minMs": 8.321071999991545,
+            "maxMs": 26.50477200000023
+          },
+          "medianRelativeIncrease": 0.06839839548829385,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.4108338351561928,
+            "afterRelativeRange": 0.3163722350835339
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_request",
+          "before": {
+            "count": 48,
+            "medianMs": 13.657067499996629,
+            "p95Ms": 26.560023999991245,
+            "minMs": 9.60583799998858,
+            "maxMs": 34.049741999995604
+          },
+          "after": {
+            "count": 48,
+            "medianMs": 14.543602999998257,
+            "p95Ms": 28.014626999996835,
+            "minMs": 10.390708999999333,
+            "maxMs": 29.754842999987886
+          },
+          "medianRelativeIncrease": 0.06491404542020796,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.37213939174778904,
+            "afterRelativeRange": 0.30469597680046656
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_guard",
+          "before": {
+            "count": 48,
+            "medianMs": 0.3674475000007078,
+            "p95Ms": 11.014798000003793,
+            "minMs": 0.19152399999438785,
+            "maxMs": 13.133637999999337
+          },
+          "after": {
+            "count": 48,
+            "medianMs": 0.40356600000086473,
+            "p95Ms": 8.830633000005037,
+            "minMs": 0.19620999999460764,
+            "maxMs": 12.70566599999438
+          },
+          "medianRelativeIncrease": 0.09829567489256918,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.6275796452258675,
+            "afterRelativeRange": 0.5730450099638482
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "acquisition_and_persistence",
+          "before": {
+            "count": 72,
+            "medianMs": 840.3997755000019,
+            "p95Ms": 2727.568557000006,
+            "minMs": 295.9823710000055,
+            "maxMs": 3236.014770000009
+          },
+          "after": {
+            "count": 72,
+            "medianMs": 967.8286004999973,
+            "p95Ms": 2719.7732600000018,
+            "minMs": 316.99905200001376,
+            "maxMs": 2921.9994920000026
+          },
+          "medianRelativeIncrease": 0.15162881846818754,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.38159585568031773,
+            "afterRelativeRange": 0.27686351267317244
+          },
+          "budgetApplies": true,
+          "result": "over_budget_with_noise_unresolved"
+        },
+        {
+          "stage": "persistence",
+          "before": {
+            "count": 152,
+            "medianMs": 130.6998390000008,
+            "p95Ms": 259.04747099999804,
+            "minMs": 15.194782999999006,
+            "maxMs": 344.059419000012
+          },
+          "after": {
+            "count": 152,
+            "medianMs": 142.41805899999963,
+            "p95Ms": 272.87230199998885,
+            "minMs": 24.78309799999988,
+            "maxMs": 382.27750000001106
+          },
+          "medianRelativeIncrease": 0.0896574937632384,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.23824308718740217,
+            "afterRelativeRange": 0.22871826247821483
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "restoration",
+          "before": {
+            "count": 144,
+            "medianMs": 5.621277499998541,
+            "p95Ms": 23.80186400000821,
+            "minMs": 1.7323710000055144,
+            "maxMs": 54.42396400000143
+          },
+          "after": {
+            "count": 144,
+            "medianMs": 5.766172999999981,
+            "p95Ms": 28.803432999993674,
+            "minMs": 2.3063770000007935,
+            "maxMs": 60.51830599999812
+          },
+          "medianRelativeIncrease": 0.02577625815510398,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.3547455402678337,
+            "afterRelativeRange": 0.2569154873448015
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        }
+      ]
+    }
+  ],
+  "conclusion": "The retained aggregate, each original cohort and the predeclared ABBA session accounting agree. A passed arithmetic review does not change any budget failure.",
+  "qualification": "Verifies retained evidence and arithmetic, not operating-system isolation independently of the execution window, timing accuracy, population confidence intervals, complete private-state equivalence, browser/network/live-game latency or hours-long stability. All original cohort results remain unchanged. No historical sample is pooled into this window, and no measured trial or outlier is excluded."
+}

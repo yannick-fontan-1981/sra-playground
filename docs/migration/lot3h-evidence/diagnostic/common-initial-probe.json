@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.crossed-prefix.development-initial-probe.v1",
+  "scope": "Development synthetic initial controller only; not a frozen proof or game campaign",
+  "kind": "action",
+  "reason": null,
+  "command": {
+    "action_ref": "ACTION6",
+    "data": {
+      "x": 21,
+      "y": 18
+    }
+  },
+  "selected": "public_occurrence_recall",
+  "proposalKind": "cell_patch_placement",
+  "subquestion": "cell_patch_composition",
+  "expectedOwnCommand": {
+    "action_ref": "ACTION6",
+    "data": {
+      "x": 10,
+      "y": 13
+    }
+  }
+}

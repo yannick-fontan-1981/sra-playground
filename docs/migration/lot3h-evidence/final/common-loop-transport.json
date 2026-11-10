@@ -1,0 +1,45 @@
+{
+  "schema": "logos-engine.lot3h.common-loop-byte-transport.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T13:22:40.320840-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "helper": {
+    "path": "scripts/evidence-byte-parts.py",
+    "bytes": 7210,
+    "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350"
+  },
+  "original": {
+    "path": "docs/migration/lot3h-evidence/final/crossed-prefix-common-loop.json.gz",
+    "bytes": 1610258,
+    "sha256": "e46a4025d074fa6bf7dabf94f690bf4bcc8e15c6da5c64995f5d224fb5f25d18"
+  },
+  "manifest": {
+    "path": "docs/migration/lot3h-evidence/final/crossed-prefix-common-loop.json.gz.parts.json",
+    "bytes": 712,
+    "sha256": "25e9a894dcf7de505e3112a91c9433577a0f761b29540fe1b94174330e27afbe"
+  },
+  "parts": [
+    {
+      "path": "docs/migration/lot3h-evidence/final/crossed-prefix-common-loop.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "3e622039d64c45eb402dd959a30e7a138795d55f15b69a46180bee38200cbb78"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/crossed-prefix-common-loop.json.gz.part001",
+      "bytes": 710258,
+      "sha256": "1ddd79466064c629f079c98fa7440754f6cd9d3179ff1d9e0a557cd44e645c88"
+    }
+  ],
+  "verification": {
+    "path": "docs/migration/lot3h-evidence/final/crossed-prefix-common-loop.json.gz",
+    "sha256": "e46a4025d074fa6bf7dabf94f690bf4bcc8e15c6da5c64995f5d224fb5f25d18",
+    "bytes": 1610258,
+    "manifest": "docs/migration/lot3h-evidence/final/crossed-prefix-common-loop.json.gz.parts.json",
+    "parts": 2,
+    "restored": false
+  },
+  "reconstructedBytesIdentical": true,
+  "originalPreserved": true,
+  "gitignoreUpdatedByThisOperation": false,
+  "qualification": "The existing evidence-byte-parts helper packed only the completed common-loop report. The original remains unchanged; concatenating both ordered byte parts reconstructs it exactly. No native producer, game, test or cost was rerun. Root will add the exact original ignore entry before publication."
+}

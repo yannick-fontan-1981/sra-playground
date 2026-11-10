@@ -1,0 +1,280 @@
+{
+  "schema": "logos-engine.resumed-game-case-resolution.v1",
+  "game": "WEAV",
+  "status": "target_reached",
+  "recordedAt": "2026-11-10T13:32:44.247111-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "nativeVersion": "0.49.0",
+  "nativeSourceDigest": "d6cb9abdf48a9062936d4647dbd809dc4cee1d1528f85e973fda83c7af8e6054",
+  "targetLevels": 3,
+  "actual": {
+    "actions": 81,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 243.55298556499997,
+    "prefixes": 81,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 81,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 163,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 82
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 82
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 62
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 42
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 7
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 83
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 81,
+      "resume": 80
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.49.0"
+  },
+  "previousOutcome": {
+    "levelsCompleted": 0,
+    "actions": 97,
+    "chargedSeconds": 474.037204,
+    "source": {
+      "path": "docs/migration/lot2b-evidence/final/weav-resolution.json",
+      "bytes": 2964,
+      "sha256": "c7a0d39ff02dbbc5cc30c33ea7fd3b4ccf8fa0e36930283e8a235bf3aa0cf0b9"
+    }
+  },
+  "boundedFreshBaseline": {
+    "nativeVersion": "0.48.0",
+    "actual": {
+      "actions": 8,
+      "levelsCompleted": 0,
+      "level": 1,
+      "state": "NOT_FINISHED",
+      "status": "error",
+      "reason": null,
+      "activeSeconds": 11.078129798000006,
+      "prefixes": 7,
+      "caller": {
+        "enabled": true,
+        "acquiredTransitions": 7,
+        "boundaryReplays": 0,
+        "goalEvents": 0,
+        "frontierDeltas": 23,
+        "components": {
+          "goal": {
+            "id": "caller:goal",
+            "revision": 8
+          },
+          "frontier": {
+            "id": "caller:frontier",
+            "revision": 16
+          },
+          "view": {
+            "id": "caller:view",
+            "revision": 3
+          },
+          "attention": {
+            "id": "caller:attention",
+            "revision": 1
+          },
+          "points": {
+            "id": "caller:points",
+            "revision": 8
+          },
+          "displays": {
+            "id": "caller:displays",
+            "revision": 8
+          },
+          "controls": {
+            "id": "caller:controls",
+            "revision": 1
+          },
+          "counters": {
+            "id": "caller:counters",
+            "revision": 16
+          }
+        },
+        "pendingSourceProviders": [
+          "morphology"
+        ],
+        "morphologyProvider": {
+          "status": "partial_current_measurements_control_attention_and_methods",
+          "state_owner": "family_state:morphology",
+          "motion_owner": "caller:goal",
+          "forecast_owner": "family_state:public_observed_inventory",
+          "current_decision_scope": "one_source_selection_cycle",
+          "attention_owner": "caller:attention",
+          "method_owner": "caller:counters.targetMethod",
+          "entry_return_owner": "family_state:morphology.entry_access_return",
+          "connected_methods": [
+            "retained_station_method",
+            "entry_access_return",
+            "entry_rebind",
+            "entry_probe",
+            "managed_capacity",
+            "target_extension_continuation"
+          ],
+          "pending": [
+            "complete_original_caller_parity_and_domain_closure"
+          ]
+        },
+        "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+      },
+      "fullV6Parity": false,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 8,
+        "resume": 7
+      },
+      "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.48.0"
+    },
+    "phaseReceipt": {
+      "path": "docs/migration/lot3h-evidence/baseline-case-phase.json",
+      "bytes": 2871,
+      "sha256": "2598f8f270f40fd1a58be07d08ea41731d34cb7a9fe8f55dca1adde0cbadd269"
+    },
+    "qualification": "Predeclared eight-action cap reached with zero levels. The report retains seven planned prefixes while the actual public journal retains the eighth acquired return. This bounded reference is not a complete-game failure verdict."
+  },
+  "sourceComparison": {
+    "receipt": {
+      "path": "docs/migration/lot3h-evidence/diagnostic/weav-public-parity.json",
+      "bytes": 818824,
+      "sha256": "0f48bdd4589a0d8356d53fd65eee1a598151d7cd449732e743915806f855a9ca"
+    },
+    "sourceReceipt": {
+      "path": "docs/migration/lot3h-evidence/diagnostic/weav-public-source-parity.json.gz",
+      "bytes": 3153578,
+      "sha256": "3921646bf216aa12ed0f7d8c18b28442a33d48d98ad0ec1ac3811942a25dc8dd"
+    },
+    "checkedCount": 3596,
+    "exactOriginal": {
+      "prefixes": 81,
+      "returns": 81,
+      "ownEvents": 159,
+      "restorations": 162,
+      "coldStart": true,
+      "primedFromCapturedProposalMemory": false,
+      "completeSelectedOwnTrajectoryParity": true,
+      "fullInheritedCallerParity": false
+    }
+  },
+  "contribution": {
+    "interventions": 324,
+    "executed": 324,
+    "actionOrRefusalChanges": 191,
+    "decisionChanges": 215,
+    "negativeOrUnchanged": 133,
+    "componentAblation": true,
+    "fullCallerAblation": false
+  },
+  "browserReceipt": {
+    "path": "docs/migration/lot3h-evidence/final/browser/browser-qa.json",
+    "bytes": 2519,
+    "sha256": "77e9458de5e0a67f1dc8dec13ea62104207fe7b34e0cee51d8c076ee90730879"
+  },
+  "caseClock": {
+    "resumedAt": "2026-11-10T13:19:20.501700-03:00",
+    "workFinishedAt": "2026-11-10T13:32:44.247111-03:00",
+    "previousCumulativeSeconds": 474.037204,
+    "currentIntervalSeconds": 803.745411,
+    "cumulativeSeconds": 1277.782615,
+    "maximumCumulativeSeconds": 2400,
+    "remainingSeconds": 1122.217385,
+    "clockReset": false,
+    "exhausted": false,
+    "furtherWorkThisDelivery": false,
+    "qualification": "Full wall interval from the retained-case resumption includes reference, candidate, source and native comparison, ablations, browser verification and final case review. The earlier474.037204seconds remain charged. Subsequent transport, delivery documentation, integrity and STCK/SMLP timing are release work. Any future WEAV case diagnosis must resume this cumulative value."
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot3h-evidence/weav-resumption.json",
+      "bytes": 2713,
+      "sha256": "3cca4f824817df803266515c0a28b086684f805aa041aa9079faf2e72b70964f"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/candidate-case-phase.json",
+      "bytes": 2947,
+      "sha256": "1c4834369c46ac43e45b91628c82ab0b429850a5d0bd6d5d4999541d1a8c2c0b"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/execution-weav.json",
+      "bytes": 67956,
+      "sha256": "85e0b78d02227aad0830fcd2c8ad8a3dddbe48c4a26a96fbc1dafe46b943671e"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-campaign.json.gz",
+      "bytes": 10800755,
+      "sha256": "74b5890967f4675e9005549692d744cb803acbc6c8dc627f4f23585582e4caa5"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+      "bytes": 26568,
+      "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-actual-public-journal.jsonl.gz",
+      "bytes": 16122,
+      "sha256": "1d7a746ec9d85743c65e3bc0d07d35f73033fb689415b459e47d115bcf3ac7cd"
+    }
+  ],
+  "qualification": "The common native session reaches the requested three natural levels. The selected own CrossedPrefix trajectory matches unchanged source from cold state; component ablations demonstrate effects on observed choices. No full original-caller parity or full-caller ablation is claimed. Prior WEAV failure and every negative ablation remain retained. No game engine, specification or solution was read."
+}

@@ -1,0 +1,70 @@
+{
+  "schema": "logos-engine.resumed-game-case-phase.v1",
+  "phase": "baseline",
+  "game": "WEAV",
+  "selection": {
+    "path": "docs/migration/lot3h-evidence/weav-resumption.json",
+    "bytes": 2713,
+    "sha256": "3cca4f824817df803266515c0a28b086684f805aa041aa9079faf2e72b70964f"
+  },
+  "generator": {
+    "path": "docs/migration/lot3h-evidence/run-weav-case-phase.py",
+    "bytes": 3445,
+    "sha256": "0ae544b1689d89beffa503684ed1c2d7444678baee53e05383fc168cdb993b7c"
+  },
+  "checkout": "/workspace/sites/sra-published-048",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-bounded-native-campaign-proof.py",
+    "WEAV",
+    "3",
+    "8",
+    "docs/migration/lot3h-evidence/baseline/weav-native048"
+  ],
+  "startedAt": "2026-11-10T13:19:58.305036-03:00",
+  "finishedAt": "2026-11-10T13:20:16.377373-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "elapsedSeconds": 18.07256350300304,
+  "exitCode": 1,
+  "caseDeadlineReached": false,
+  "cumulativeCaseSecondsAtEnd": 529.912877,
+  "output": {
+    "path": "docs/migration/lot3h-evidence/baseline-case-phase.log",
+    "bytes": 2326,
+    "sha256": "7c2861fece463d327ca81b87242099162bfee8840fa8d9d80ad4a6192a1da1a6"
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3h-evidence/baseline/weav-native048/execution-weav.json",
+      "bytes": 67414,
+      "sha256": "708ab2cb864da8bdd4e84d0af3bc7f731f48c68b44443c6d5e54224303b677d5"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/baseline/weav-native048/source-manifest.json",
+      "bytes": 31520,
+      "sha256": "3830e87db836b6df95b34550dec845f3d8c95abe2e69bb05d0814b12bef6bfad"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/baseline/weav-native048/weav-actual-public-journal.jsonl.gz",
+      "bytes": 1473,
+      "sha256": "33d4da26c7233064102a41230c317480eb2f3d2ff5267506cb6b49d410c34cbc"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/baseline/weav-native048/weav-campaign.json.gz",
+      "bytes": 1815256,
+      "sha256": "a24bde84ec25cd28623b824157069133c6fa8e58201139b87f835110ac137904"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/baseline/weav-native048/weav-output.log.gz",
+      "bytes": 1910,
+      "sha256": "0de1a21f549af03bdd4fdc88436faf94751513aa4d1a4169d625b2c3790609de"
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/baseline/weav-native048/weav-public-trace.json.gz",
+      "bytes": 2430,
+      "sha256": "94e3986684e9968ec133118a2a31611b18e5bc63567b3f690f43440bceb7f325"
+    }
+  ],
+  "qualification": "Same retained WEAV identity and cumulative40-minute deadline. Standard native common harness computes every command against an opaque public game host. No policy edit, level jump, seeded knowledge or expected return. Baseline has only the predeclared8-action outer cap; it is not a complete-game failure verdict."
+}

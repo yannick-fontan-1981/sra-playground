@@ -1,0 +1,45 @@
+{
+  "schema": "logos-engine.resumed-game-case-selection.v1",
+  "game": "WEAV",
+  "targetLevels": 3,
+  "recordedAt": "2026-11-10T13:19:20.501700-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "originalSelection": {
+    "path": "docs/migration/lot2b-evidence/final/weav-selection.json",
+    "bytes": 810,
+    "sha256": "85aed2aa57d7c41bb7b02d8650e3a124e15916586e3c60e8a3b03f3e0330ab76"
+  },
+  "previousResolution": {
+    "path": "docs/migration/lot2b-evidence/final/weav-resolution.json",
+    "bytes": 2964,
+    "sha256": "c7a0d39ff02dbbc5cc30c33ea7fd3b4ccf8fa0e36930283e8a235bf3aa0cf0b9"
+  },
+  "retainedPriorStatus": "target_not_reached",
+  "retainedPriorResult": {
+    "levelsCompleted": 0,
+    "actions": 97
+  },
+  "resumedAt": "2026-11-10T13:19:20.501700-03:00",
+  "resumeDeadline": "2026-11-10T13:51:26.464496-03:00",
+  "caseClock": {
+    "maximumBlockedSeconds": 2400.0,
+    "previousChargedSeconds": 474.037204,
+    "remainingSecondsAtResume": 1925.962796,
+    "reset": false,
+    "policy": "Charge every elapsed second from this resume through diagnosis, attempts, contribution checks and any WEAV browser verification; add to retained prior spent time. Stop case work at the cumulative40-minute limit. Unrelated post-closure cost work does not extend this case."
+  },
+  "nativeVersion": "0.49.0",
+  "nativeDigest": "d6cb9abdf48a9062936d4647dbd809dc4cee1d1528f85e973fda83c7af8e6054",
+  "selectionBasis": {
+    "path": "docs/migration/lot3h-evidence/diagnostic/crossed-prefix-public-admission.json",
+    "bytes": 30472,
+    "sha256": "07fab84d4fd564618c1a5e48fb1b85fa0993afb9d9225053686d6a30b7c832eb"
+  },
+  "plan": {
+    "baseline": "Optional single cold published0.48 reference capped at8 acquired actions; no complete-game verdict from this bounded reference.",
+    "candidate": "One cold common native0.49 session, target3 natural levels, original production action/time limits unchanged. No learned checkpoint or expected command supplied.",
+    "contribution": "Replay actual selected CrossedPrefix observations against unchanged original component, check acquisition/restoration and ablate only acquired own events or entries with exact scope.",
+    "browser": "If the retained case budget permits, verify native visible controls and observed trajectory; otherwise retain explicit scope and use existing regression for common controls."
+  },
+  "qualification": "WEAV is the same previously blocked case, not a fresh timer or erased failure. Earlier explorationClosed applies to the0.34 delivery. This new generic source transfer warrants a bounded resumed case within only the retained remaining budget. Public initial scan supplied geometry only; no engine, specification or solution has been read."
+}

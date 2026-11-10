@@ -365,6 +365,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const rootedStates = (series.events as R[]).filter(event => event.kind === 'rooted_quota_state');
           const framedWindowEvents = (series.events as R[]).filter(event => event.kind === 'framed_window_response');
           const previousFramedWindowCount = report.prefixes.at(-1)?.sharedSeries.framedWindowEventCount ?? 0;
+          const crossedPrefixEvents = (series.events as R[]).filter(event =>
+            ['crossed_prefix_state', 'crossed_prefix_pair', 'crossed_prefix_input'].includes(event.kind));
+          const previousCrossedPrefixCount = report.prefixes.at(-1)?.sharedSeries.crossedPrefixEventCount ?? 0;
           const queuedModels = (series.events as R[]).filter(event => event.kind === 'observed_queue_field_model');
           const catalogueEvents = (series.events as R[]).filter(event =>
             ['catalogue_observation', 'catalogue_response', 'catalogue_field_input_observed'].includes(event.kind));
@@ -452,6 +455,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               ? { observedFramedWindow: { proposal: evidence.proposal,
                     stateNode: 'family_state:public_occurrence_recall',
                     qualification: 'Passive capture only. Production measures current framed equality, certifies its finite candidate and acquires the actual point return. This recorder supplies no plan, state, expected response or terminal law.' } } : {}),
+            ...(evidence.proposal.crossed_prefix_plan
+              ? { observedCrossedPrefix: { proposal: evidence.proposal,
+                    stateNode: 'family_state:public_occurrence_recall',
+                    qualification: 'Passive capture only. Production measures the field/reference/controllers, proposes an experiment and acquires its actual response in the single ancestral owner. This recorder supplies no action, learned state, crossing law or expected return.' } } : {}),
             ...(evidence.proposal.reference_population_plan
               ? { observedReferencePopulation: { proposal: evidence.proposal,
                     stateNode: 'family_state:public_occurrence_recall',
@@ -618,6 +625,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               ...(framedWindowEvents.length || evidence.proposal.framed_window_plan
                 ? { framedWindowEventCount: framedWindowEvents.length,
                     framedWindowAcquiredEvents: framedWindowEvents.slice(previousFramedWindowCount) } : {}),
+              ...(crossedPrefixEvents.length || evidence.proposal.crossed_prefix_plan
+                ? { crossedPrefixEventCount: crossedPrefixEvents.length,
+                    crossedPrefixAcquiredEvents: crossedPrefixEvents.slice(previousCrossedPrefixCount) } : {}),
               ...(referencePopulationEvents.length || evidence.proposal.reference_population_plan
                 ? { referencePopulationEventCount: referencePopulationEvents.length,
                     referencePopulationAcquiredEvents: referencePopulationEvents.slice(previousReferencePopulationCount) } : {}),

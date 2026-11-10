@@ -1,0 +1,76 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "weav-campaign.json.gz",
+    "sha256": "74b5890967f4675e9005549692d744cb803acbc6c8dc627f4f23585582e4caa5",
+    "bytes": 10800755
+  },
+  "parts": [
+    {
+      "file": "weav-campaign.json.gz.part000",
+      "sha256": "08762677e6940875f22f595e2a6780089b3447ae4c264877214a9124cbc72e24",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part001",
+      "sha256": "08419fdf80b4e69e5a128b3700b28e67934c1fa5494163437f4b76620ddae64d",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part002",
+      "sha256": "a173f4913a06364db6afad4943a76dd661258050ddec74037602aadea982b8ab",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part003",
+      "sha256": "60007269e1764f894a26c723e3b987c38c0d88307c555579ff831e8fba6f6edb",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part004",
+      "sha256": "2d412c5206afd04685c9d51f712cc319451f193156f9c99d4d5b83163dc6c66d",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part005",
+      "sha256": "9a3e710a8a65b50bd7a02b7c4532a585256c0d33b292b45e20aa95f16f8592f8",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part006",
+      "sha256": "d1ad223ed0f06fecd66b12aabb4aaaf59511a733c272bf8a5cb1b7db5095281d",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part007",
+      "sha256": "f8e562ad1c053a43288831f564875e980f465dbff5b723ffc8d8dde97c2aab2c",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part008",
+      "sha256": "2dfe07a6289ccd4f95043eb3b7f4de4613e6ef060bbec49d493c670b8cb928a4",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part009",
+      "sha256": "5035fa38d97cb6b981edf1a2ba2c47dc74c989f2025b69e534e681a556109a4f",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part010",
+      "sha256": "af164b205d451e80a4311c3dc9eef1662acb727a8f2589c4087895a4d52f55cc",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part011",
+      "sha256": "9a0aebefc01286213ad82253265065927a328fe573edb10fe04bb539a8750772",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-campaign.json.gz.part012",
+      "sha256": "066236faf0847edf0439dbb49dfe4087ffa19f73af1ffe70da10ec3c5842e71c",
+      "bytes": 755
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

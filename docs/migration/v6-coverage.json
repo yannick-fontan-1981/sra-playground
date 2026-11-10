@@ -30,8 +30,8 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 160,
-    "partiallyTransferredModules": 144,
+    "componentVerifiedModules": 161,
+    "partiallyTransferredModules": 143,
     "transferredUnverifiedModules": 0,
     "pendingModules": 1065,
     "strategyFamilies": 16
@@ -74958,16 +74958,21 @@
           "endLine": 257
         }
       ],
-      "status": "partial_transfer",
+      "status": "component_verified",
       "targets": [
-        "src/logos-engine/v6-occurrence-recall.ts"
+        "src/logos-engine/v6-crossed-prefix-observation.ts",
+        "src/logos-engine/v6-crossed-prefix-access.ts",
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
       ],
       "proof": [
-        "scripts/export-v6-occurrence-reference.py",
-        "tests/fixtures/v6-occurrence-reference.json",
-        "tests/v6-occurrence-recall.test.ts",
-        "tests/v6-support-caller-integration.test.ts",
-        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+        "scripts/export-v6-crossed-prefix-reference.py",
+        "tests/fixtures/v6-crossed-prefix-reference.json.gz",
+        "docs/migration/lot3h-crossed-prefix-lineage.md",
+        "tests/v6-crossed-prefix-observation.test.ts",
+        "tests/v6-crossed-prefix-access.test.ts",
+        "tests/v6-crossed-prefix-integration.test.ts"
       ]
     },
     {

@@ -1,0 +1,121 @@
+{
+  "schema": "logos-engine.crossed-prefix-validation-scope.v1",
+  "recordedAt": "2026-11-10T13:32:44.247111-03:00",
+  "nativeDigest": "d6cb9abdf48a9062936d4647dbd809dc4cee1d1528f85e973fda83c7af8e6054",
+  "technicalScope": "Own CrossedPrefix measurements, selection, binding, guards, common acquired journal, reconstruction and source-order integration; actual0.48 checkpoint compatibility, four recorded regressions, WEAV public selected trajectory and common-loop cost.",
+  "integratedEvidence": {
+    "path": "docs/migration/lot3h-evidence/final/crossed-prefix-common-loop.json.gz",
+    "bytes": 1610258,
+    "sha256": "e46a4025d074fa6bf7dabf94f690bf4bcc8e15c6da5c64995f5d224fb5f25d18"
+  },
+  "integratedEvidenceKind": "three_cold_controlled_synthetic_common_caller_sessions",
+  "gameContributionStatus": "demonstrated_on_actual_selected_own_trajectory_with_component_ablations",
+  "gameEvidence": {
+    "path": "docs/migration/lot3h-evidence/final/weav-resolution.json",
+    "bytes": 9841,
+    "sha256": "520468fb7872f163713f288cc6c3d1f62137e4bc662bcebe7207fed2435bf0ab"
+  },
+  "gameComparison": {
+    "path": "docs/migration/lot3h-evidence/diagnostic/weav-public-parity.json",
+    "bytes": 818824,
+    "sha256": "0f48bdd4589a0d8356d53fd65eee1a598151d7cd449732e743915806f855a9ca"
+  },
+  "retainedCaseClocks": [
+    {
+      "game": "CWSE",
+      "source": {
+        "path": "docs/migration/lot3c-current-evidence/final/cwse-resolution.json",
+        "bytes": 2786,
+        "sha256": "0c4d899d05750bbf56104ed18f023212823221429912d7e9f9a3a869ee47febb"
+      },
+      "caseClock": {
+        "startedAt": "2026-11-10T07:13:29+00:00",
+        "finishedGameWorkAt": "2026-11-10T07:28:01.235438+00:00",
+        "priorCumulativeSeconds": 1527.448427,
+        "continuedSeconds": 872.235438,
+        "cumulativeSeconds": 2399.683865,
+        "maximumCumulativeSeconds": 2400,
+        "clockReset": false,
+        "noFurtherCWSEAttemptsOnThisFreeze": true
+      },
+      "furtherDiagnosisOrLiveAttemptThisDelivery": false,
+      "qualification": "Retained recorded regression of FOGW/VOIS only; no new case work or clock reset."
+    },
+    {
+      "game": "SK48",
+      "source": {
+        "path": "docs/migration/lot3d-evidence/final/sk48-resolution.json",
+        "bytes": 4227,
+        "sha256": "e07b5a7ede87a70a7d321fea15480a024ecff3564cc783fdec010f4889325dc2"
+      },
+      "caseClock": {
+        "selectedAt": "2026-11-10T08:44:44.967642+00:00",
+        "workFinishedAt": "2026-11-10T08:55:52.322082+00:00",
+        "currentIntervalSeconds": 667.35444,
+        "previousCumulativeSeconds": 0,
+        "cumulativeSeconds": 667.35444,
+        "maximumCumulativeSeconds": 2400,
+        "remainingSeconds": 1732.64556,
+        "exhausted": false,
+        "furtherWorkThisDelivery": false,
+        "qualification": "Wall interval covers selection, reference, candidate, source diagnosis, contribution checks and browser session without reset. Later unrelated release validation and STCK/SMLP timing are not new SK48 work. Any future SK48 diagnosis must resume this cumulative value."
+      },
+      "furtherDiagnosisOrLiveAttemptThisDelivery": false,
+      "qualification": "Retained recorded regression of FOGW/VOIS only; no new case work or clock reset."
+    },
+    {
+      "game": "FOGW",
+      "source": {
+        "path": "docs/migration/lot3e-evidence/final/fogw-resolution.json",
+        "bytes": 4677,
+        "sha256": "832b8c8aa7b57fe9634e52f82d76d06a8808b1cdbccc5e4c96437d929b819f6e"
+      },
+      "caseClock": {
+        "selectedAt": "2026-11-10T12:42:41.071198+00:00",
+        "accountingStartedAt": "2026-11-10T12:40:45.295029+00:00",
+        "workFinishedAt": "2026-11-10T12:56:36.615304+00:00",
+        "currentIntervalSeconds": 951.320275,
+        "previousCumulativeSeconds": 0,
+        "cumulativeSeconds": 951.320275,
+        "maximumCumulativeSeconds": 2400,
+        "remainingSeconds": 1448.679725,
+        "exhausted": false,
+        "furtherWorkThisDelivery": false,
+        "qualification": "Conservative wall interval includes preparation errors, selection, bounded reference, candidate, source comparison, contribution proof and browser session, without reset. Subsequent artifact transport, delivery review and STCK/SMLP timing are unrelated release work. Future FOGW case diagnosis must resume this cumulative value."
+      },
+      "furtherDiagnosisOrLiveAttemptThisDelivery": false,
+      "qualification": "Retained recorded regression of FOGW/VOIS only; no new case work or clock reset."
+    },
+    {
+      "game": "VOIS",
+      "source": {
+        "path": "docs/migration/lot3f-evidence/final/vois-resolution.json",
+        "bytes": 5162,
+        "sha256": "d3104de3d08221ac9e1663945a46c951df4e4c4d9f43ab914e41552138ee69fa"
+      },
+      "caseClock": {
+        "selectedAt": "2026-11-10T13:52:35.837560+00:00",
+        "accountingStartedAt": "2026-11-10T13:48:47.319628+00:00",
+        "workFinishedAt": "2026-11-10T14:05:44.789159+00:00",
+        "currentIntervalSeconds": 1017.469531,
+        "previousCumulativeSeconds": 0,
+        "cumulativeSeconds": 1017.469531,
+        "maximumCumulativeSeconds": 2400,
+        "remainingSeconds": 1382.530469,
+        "exhausted": false,
+        "furtherWorkThisDelivery": false,
+        "qualification": "Conservative wall interval starts at verified build completion before the first launch-preparation error. Includes setup, reference, candidate, source comparison, contribution and both browser attempts without reset. Subsequent file transport, documentation, delivery integrity and STCK/SMLP timing are release work. Any future VOIS diagnosis must resume this cumulative value."
+      },
+      "furtherDiagnosisOrLiveAttemptThisDelivery": false,
+      "qualification": "Retained recorded regression of FOGW/VOIS only; no new case work or clock reset."
+    }
+  ],
+  "limits": [
+    "Full inherited original-caller parity remains partial.",
+    "Component ablations are not full-caller counterfactuals.",
+    "Structural geometry prefilter is finite in the common pixel domain but not deadline-preempted.",
+    "Historical/native ordering equivalence is verified for produced ACTIONn commands and the eleven old checkpoints, not arbitrary imaginary Unicode action names.",
+    "Experimental pairs and axis inputs retained across epochs are not universal game laws."
+  ],
+  "qualification": "Synthetic proof and actual WEAV success are separately identified. Existing CWSE/SK48/FOGW/VOIS clocks remain unchanged; FOGW/VOIS are recorded regressions only. WEAV retains its prior474.037204seconds and is closed within its cumulative2400second limit. Cost acceptance remains a separate pending decision."
+}

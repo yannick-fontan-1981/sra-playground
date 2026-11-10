@@ -1,0 +1,48 @@
+{
+  "schema": "logos-engine.lot3h.crossed-prefix-access-targeted.v1",
+  "status": "passed",
+  "startedAt": "2026-11-10T13:20:47.524021-03:00",
+  "endedAt": "2026-11-10T13:20:48.428289-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "command": [
+    "node",
+    "--test",
+    "tests/v6-crossed-prefix-access.test.ts"
+  ],
+  "exitCode": 0,
+  "inputs": [
+    {
+      "path": "src/logos-engine/v6-crossed-prefix-access.ts",
+      "bytes": 26105,
+      "sha256": "db35f9ad5988b899bcdc98d52a4e1bd837a3b15e0346c93a6da09433ef056465"
+    },
+    {
+      "path": "src/logos-engine/v6-crossed-prefix-observation.ts",
+      "bytes": 12478,
+      "sha256": "b1a8808d123b66f27ea4a0b9d06eeff4e91319d91f445582c01245beb7895fbd"
+    },
+    {
+      "path": "tests/v6-crossed-prefix-access.test.ts",
+      "bytes": 16680,
+      "sha256": "d8543e71e9f65ab8c3b8e2c4f9294948564c124c514400995789e480319b7ba0"
+    },
+    {
+      "path": "tests/fixtures/v6-crossed-prefix-reference.json.gz",
+      "bytes": 350899,
+      "sha256": "ca2b1e6c4ccdd41d35a45e11f989f4ea168e7959011d658c0f54e887c9b79af4"
+    }
+  ],
+  "inputsUnchanged": true,
+  "output": {
+    "path": "docs/migration/lot3h-evidence/diagnostic/crossed-prefix-access-final-targeted.log.gz",
+    "bytes": 2343,
+    "sha256": "1d36702ad2788199da1081385775c08d42f91869fd8ef04a4422a755f3153031"
+  },
+  "summary": "\u2714 native assignment bounds reject invalid request parameters without creating knowledge (8.264917ms)\n\u2714 current point support bypasses only the sampler and still needs the exact observed domain and full frame (6.52663ms)\n\u2139 tests 111\n\u2139 suites 0\n\u2139 pass 111\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 825.998404",
+  "supersedesForCurrentFixture": {
+    "path": "docs/migration/lot3h-evidence/diagnostic/crossed-prefix-access-targeted.json",
+    "bytes": 2207,
+    "sha256": "58868fcc6c99555c51f6a3f2294a6db8442b1fc27ae81296200733c628080828"
+  },
+  "qualification": "Final targeted own-access run after the oracle added two geometry-only tie cases. Own-access fixture cases remained identical; source/test implementation is unchanged from the prior 111/111 run. This receipt binds the current full fixture, preserving the earlier development receipt and logs. Native own ownership, source API, bounds and atomic rejection are checked; full caller/game contribution are separate."
+}

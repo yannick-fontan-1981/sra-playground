@@ -270,3 +270,17 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot3g-evidence/final/regressions/vois-047-replay.json.gz
 /docs/migration/lot3g-evidence/diagnostic/retained-public-command-comparison.json
 /docs/migration/lot3g-evidence/final/source-archive.tar.gz
+
+# Lot3H originals retained as checked byte parts or deterministic gzip
+/docs/migration/lot3h-evidence/final/source-archive.tar.gz
+/docs/migration/lot3h-evidence/final/regressions/catr-048-replay.json.gz
+/docs/migration/lot3h-evidence/final/regressions/rswp-048-replay.json.gz
+/docs/migration/lot3h-evidence/final/regressions/fogw-048-replay.json.gz
+/docs/migration/lot3h-evidence/final/regressions/vois-048-replay.json.gz
+
+/docs/migration/lot3h-evidence/final/crossed-prefix-common-loop.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot3h-evidence/baseline/weav-native048/weav-campaign.json.gz
+/docs/migration/lot3h-evidence/diagnostic/weav-public-source-parity.json.gz
+/docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-campaign.json.gz

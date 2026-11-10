@@ -61,9 +61,10 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.48.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.49.0';
 // The implementation identity and public snapshot describe the same extensions.
-const NATIVE_CALLER_EXTENSIONS = [TEMPORAL_FRAGMENT_NATIVE_INTERRUPTION,
+const NATIVE_CALLER_EXTENSIONS = ['native_crossed_prefix_assignment_bounds', 'native_atomic_crossed_prefix_event_validation',
+  TEMPORAL_FRAGMENT_NATIVE_INTERRUPTION,
   'atomic_framed_window_response_validation',
   'bounded_reference_population_paths_and_matching_with_current_level_deadline',
   'distinct_reception_service_and_exposed_event_owners',
@@ -1383,7 +1384,7 @@ export class NativeV6Runtime implements NativeV6Backend {
           pendingBranches: [],
           qualification: 'Complete declared entry registration; inherited source closure and full original-caller parity remain partial.',
         } : null,
-        sharedSeriesMemory: 'occurrence_recall_ancestors_observed_program_native_relations_typed_material_and_pose_radial_ports_field_service_rooted_quota_native_mark_support_framed_window_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_composition_exposed_reception_relational_chamber_panel_service_rooted_line_reception_service_and_reference_population; observed_composition_services 6/6 declared branches connected; inherited ObservedCompositionConstraint source closure remains partial',
+        sharedSeriesMemory: 'crossed_prefix_single_ancestor_owner_occurrence_recall_ancestors_observed_program_native_relations_typed_material_and_pose_radial_ports_field_service_rooted_quota_native_mark_support_framed_window_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_composition_exposed_reception_relational_chamber_panel_service_rooted_line_reception_service_and_reference_population; observed_composition_services 6/6 declared branches connected; inherited ObservedCompositionConstraint source closure remains partial',
         sharedSeriesDigestScope: SHARED_SERIES_DIGEST_SCOPE,
         nativeCallerExtensions: NATIVE_CALLER_EXTENSIONS,
         supportSubcompositionsPending: this.acquisitionFamilies?.supports.pendingSubcompositions ?? null, fullV6Parity: false },
@@ -1605,7 +1606,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     (configuration.window_constraints as R).trace_field_composition, (configuration.window_constraints as R).linked_packet_composition,
     (configuration.window_constraints as R).queued_field_composition, (configuration.window_constraints as R).occluded_catalogue_composition,
     (configuration.window_constraints as R).typed_material_flow, (configuration.window_constraints as R).field_service_composition,
-    configuration.observed_composition_services, (configuration.window_constraints as R).framed_window_composition);
+    configuration.observed_composition_services, (configuration.window_constraints as R).framed_window_composition,
+    configuration.window_constraints as R);
   const policy = loaded.common as R;
   const supportChildren: Record<string, NativeFamily<any>> = {
     ordered_support_transfer: ordered,
@@ -1633,7 +1635,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     linked_packet_composition: recall, trace_field_composition: recall,
     cell_patch_composition: recall, observed_occurrence_recall: recall,
     observed_program_composition: recall, typed_material_flow: recall, radial_port_composition: recall, observed_framed_analogy: framed,
-    field_service_composition: recall, rooted_quota_composition: recall, framed_window_composition: recall, ...supportChildren,
+    field_service_composition: recall, rooted_quota_composition: recall, framed_window_composition: recall, coupled_prefix_reference: recall, ...supportChildren,
   };
   const windowEntries = (configuration.window_constraints.ordered_subquestions as string[])
     .filter(question => windowProviders[question]);

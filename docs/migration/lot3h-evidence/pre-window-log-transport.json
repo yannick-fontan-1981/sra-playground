@@ -1,0 +1,111 @@
+{
+  "schema": "logos-engine.log-byte-transport.v1",
+  "recordedAt": "2026-11-10T13:33:02.926270-03:00",
+  "logs": [
+    {
+      "original": {
+        "path": "docs/migration/lot3h-evidence/candidate-case-phase.log",
+        "bytes": 1904,
+        "sha256": "a925f16024d49fc6b95e9ff2f5dd9bd948fced869f9ea2fc54c59a195609de4a"
+      },
+      "transport": {
+        "path": "docs/migration/lot3h-evidence/candidate-case-phase.log.gz",
+        "bytes": 841,
+        "sha256": "e6e64a4f745f5e85d793b963a0c6156cdefe5bd2df5045c5542085792776768b"
+      },
+      "byteIdentical": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot3h-evidence/baseline-case-phase.log",
+        "bytes": 2326,
+        "sha256": "7c2861fece463d327ca81b87242099162bfee8840fa8d9d80ad4a6192a1da1a6"
+      },
+      "transport": {
+        "path": "docs/migration/lot3h-evidence/baseline-case-phase.log.gz",
+        "bytes": 1050,
+        "sha256": "22087861feea96f5256ed6c8d8369a72f4737f212a957c1e2af2577dd894c6fc"
+      },
+      "byteIdentical": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/projection-targeted-final.log",
+        "bytes": 14859,
+        "sha256": "58758168a526a2167ebc812ba1d2c2dc35318ac1dbb6675c8cce50ddaf3980de"
+      },
+      "transport": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/projection-targeted-final.log.gz",
+        "bytes": 2181,
+        "sha256": "081afb360947e1a5fff11df5b13197ffdd58c7929336e0b2f5a77bc3bd77518f"
+      },
+      "byteIdentical": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/projection-targeted-oracle-final.log",
+        "bytes": 15226,
+        "sha256": "c676c437967cc442e6128ef29302da72a0d344d8b3f0e79e487d13f1b7b7edf6"
+      },
+      "transport": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/projection-targeted-oracle-final.log.gz",
+        "bytes": 2242,
+        "sha256": "ce4a1d15be84b6fe33635b51b71b03c11107d90611ccbd27d15062efa222d1c8"
+      },
+      "byteIdentical": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/legacy-export.log",
+        "bytes": 164,
+        "sha256": "1b4174731c674e1c1abcfaef90eab26a62a091ac8d35c4e28d90547acee9976b"
+      },
+      "transport": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/legacy-export.log.gz",
+        "bytes": 156,
+        "sha256": "0524c9ef36d43a54ea64ddbf5db3fdff5dc6979ab6e2e4be5a73568eb8905ad2"
+      },
+      "byteIdentical": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/projection-targeted.log",
+        "bytes": 7271,
+        "sha256": "cc104528ea7e023294680346baff512935d263f59e268077d705fb6988166d46"
+      },
+      "transport": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/projection-targeted.log.gz",
+        "bytes": 1890,
+        "sha256": "b0c3d75bb48224694d2ae1247d8e6db5463faaa71cb6b7f17718fe963594a94a"
+      },
+      "byteIdentical": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/integration-targeted.log",
+        "bytes": 5370,
+        "sha256": "8a8006d9dd85bb7238380724510746f63abedc8feb1ae12dcd4bb1a5bc9e6038"
+      },
+      "transport": {
+        "path": "docs/migration/lot3h-evidence/diagnostic/integration-targeted.log.gz",
+        "bytes": 1113,
+        "sha256": "10e2c59cecafa48053ec50c46096f1fa743b95c51fab1b433fcea267927f688d"
+      },
+      "byteIdentical": true
+    },
+    {
+      "original": {
+        "path": "docs/migration/lot3h-evidence/final/crossed-prefix-common-loop.log",
+        "bytes": 1121,
+        "sha256": "fdd40380b84261b66d56d09eb1baab5c9a7dfaf74b71996bff132855c1682ce7"
+      },
+      "transport": {
+        "path": "docs/migration/lot3h-evidence/final/crossed-prefix-common-loop.log.gz",
+        "bytes": 622,
+        "sha256": "e18b73e7b6837704c7b8940e455548a92e98a59f547d1e76c212c36ab695f720"
+      },
+      "byteIdentical": true
+    }
+  ],
+  "qualification": "Exact completed log bytes, including failed development and bounded baseline outputs. No result regenerated."
+}

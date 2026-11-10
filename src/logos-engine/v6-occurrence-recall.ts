@@ -42,13 +42,9 @@ class SeriesEventMemory {
       case 'supported_insertion_observation': this.insertSamples.push(event); break;
       case 'supported_insertion_order': this.insertOrders[event.source] = event; break;
       case 'supported_line_refutation': this.insertRejections.add(event.trial); this.insertRefutedEpochs.add(event.epoch); break;
-      case 'crossed_prefix_state': this.crossState = event.state; this.crossEvents.push(event); break;
-      case 'crossed_prefix_pair': this.crossPairs.push(event); this.crossEvents.push(event); break;
-      case 'crossed_prefix_input': {
-        let inputs = this.crossAxisInputs.get(event.axis);
-        if (!inputs) { inputs = new Set(); this.crossAxisInputs.set(event.axis, inputs); }
-        inputs.add(event.action); this.crossEvents.push(event); break;
-      }
+      case 'crossed_prefix_state':
+      case 'crossed_prefix_pair':
+      case 'crossed_prefix_input': this.applyCrossedPrefixEvent(event); break;
       case 'marked_collection_result': this.markedEvents.push(event); break;
       case 'public_program_phase_alignment': this.programEvents.push(event); break;
       case 'program_edit_sample': this.programEditSamples.push(event); this.compositionEvents.push(event); break;
@@ -72,11 +68,28 @@ class SeriesEventMemory {
     }
   }
 
+  /** The common caller can supply one authoritative owner at this same source
+   * ancestry position. Standalone recall retains its historical reducers. */
+  protected applyCrossedPrefixEvent(event: R): void {
+    if (event.kind === 'crossed_prefix_state') this.crossState = event.state;
+    else if (event.kind === 'crossed_prefix_pair') this.crossPairs.push(event);
+    else {
+      let inputs = this.crossAxisInputs.get(event.axis);
+      if (!inputs) { inputs = new Set(); this.crossAxisInputs.set(event.axis, inputs); }
+      inputs.add(event.action);
+    }
+    this.crossEvents.push(event);
+  }
+
+  protected crossedPrefixDigest(parent: string): string {
+    return identity([parent, this.crossState, this.crossPairs,
+      Object.fromEntries([...this.crossAxisInputs].map(([key, values]) => [key, [...values].sort()])), this.crossEvents]);
+  }
+
   retainedDigest(): string {
     let digest = identity([this.lineTrials, this.lineGoals]);
     digest = identity([digest, this.insertSamples, this.insertOrders, [...this.insertRejections].sort(), [...this.insertRefutedEpochs].sort((a, b) => a - b)]);
-    digest = identity([digest, this.crossState, this.crossPairs,
-      Object.fromEntries([...this.crossAxisInputs].map(([key, values]) => [key, [...values].sort()])), this.crossEvents]);
+    digest = this.crossedPrefixDigest(digest);
     digest = identity([digest, this.markedEvents, this.programEvents]);
     digest = programIdentity([digest, this.programEditSamples, this.compositionModels, this.compositionContinuation,
       [...this.compositionRefutedEpochs].sort((a, b) => a - b), this.compositionEvents, this.respondentPending, this.requestedStopReason]);
