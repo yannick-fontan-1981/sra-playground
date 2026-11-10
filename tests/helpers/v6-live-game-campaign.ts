@@ -89,7 +89,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     status: 'running', referenceCommit: V6_REFERENCE_COMMIT,
     budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: 360, clock: 'real active compute and native execution' },
     source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [], domainAssessments: [],
-    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
+    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], workshopSourceCalls: [], feedbackSourceCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
   };
   if (options.recordedPublic) report.recordedPublicReplay = {
     trace: options.recordedPublic.trace, baseline: options.recordedPublic.baseline,
@@ -165,6 +165,62 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             const failed = (error: unknown): never => {
               event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
               event.sourceAfter = this.state(); report.recolorSourceCalls.push(event); sourceDepth--; throw error;
+            };
+            try {
+              const result = original.apply(this, args);
+              return result && typeof result.then === 'function' ? result.then(complete, failed) : complete(result);
+            } catch (error) { return failed(error); }
+          };
+        }
+      }
+      const workshop = (runtime as unknown as { families: R[] }).families.find(f => f.id === 'public_ranked_workshop');
+      if (workshop) {
+        let sourceDepth = 0;
+        for (const method of ['proposeSource', 'recordSource']) {
+          const original = workshop[method];
+          assert.equal(typeof original, 'function', `Missing ranked-workshop source surface: ${method}`);
+          workshop[method] = function (...args: any[]) {
+            if (sourceDepth) return original.apply(this, args);
+            const event: R = { index: report.workshopSourceCalls.length, method,
+              arguments: structuredClone(args), sourceBefore: this.state() };
+            sourceDepth++;
+            const complete = (result: any): any => {
+              event.result = structuredClone(result ?? null); event.sourceAfter = this.state();
+              report.workshopSourceCalls.push(event); sourceDepth--; return result;
+            };
+            const failed = (error: unknown): never => {
+              event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+              event.sourceAfter = this.state(); report.workshopSourceCalls.push(event); sourceDepth--; throw error;
+            };
+            try {
+              const result = original.apply(this, args);
+              return result && typeof result.then === 'function' ? result.then(complete, failed) : complete(result);
+            } catch (error) { return failed(error); }
+          };
+        }
+      }
+      // Observe the one Feedback owner at both selection entries and its actual
+      // selected/passive acquisitions. Arguments, return values and call order
+      // remain unchanged; execution callbacks are omitted only from evidence.
+      const feedback = (runtime as unknown as { families: R[] }).families.find(f => f.id === 'feedback_sequences');
+      if (feedback) {
+        for (const method of ['propose', 'proposeInSubquestion', 'record']) {
+          const original = feedback[method];
+          assert.equal(typeof original, 'function', `Missing Feedback source surface: ${method}`);
+          feedback[method] = function (...args: any[]) {
+            const capturedArgs = method === 'proposeInSubquestion' ? args.slice(2, 6)
+              : method === 'propose' ? args.slice(0, 4) : args.slice(0, 7);
+            const event: R = { index: report.feedbackSourceCalls.length,
+              method: method === 'record' ? 'record' : 'propose', nativeMethod: method,
+              selectionEntry: method === 'proposeInSubquestion' ? args.slice(0, 2) : null,
+              arguments: structuredClone(capturedArgs), sourceBefore: this.state() };
+            const complete = (result: any): any => {
+              event.result = structuredClone(method === 'record' ? result.events[0] : result ?? null);
+              event.sourceAfter = this.state(); report.feedbackSourceCalls.push(event); return result;
+            };
+            const failed = (error: unknown): never => {
+              event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+              event.sourceAfter = this.state(); report.feedbackSourceCalls.push(event); throw error;
             };
             try {
               const result = original.apply(this, args);
@@ -412,6 +468,11 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             proposalKind: evidence.proposal.kind ?? null, fieldSubquestion: evidence.proposal.field_subquestion ?? null,
             materialSubquestion: evidence.proposal.material_access_subquestion ?? null,
             selectionGroup: evidence.proposal.strategy_receipt?.selected ?? null,
+            ...(graph.nodes['family_state:feedback_sequences'] ? { observedFeedbackSequence: {
+              stateNode: 'family_state:feedback_sequences', state: read('family_state:feedback_sequences'),
+              proposal: evidence.proposal.feedback_plan ? evidence.proposal : null,
+              qualification: 'Passive capture of the actual one-owner state after acquisition. Selected and foreign returns stay distinct; no observation, state, trial or action is supplied by this recorder.',
+            } } : {}),
             controlAttention: { morphology: evidence.proposal.morphology ?? null,
               controlAcquisition: evidence.proposal.question?.control_acquisition ?? null,
               sharedControl: evidence.proposal.question?.curiosity?.also_tests_current_control ?? null,

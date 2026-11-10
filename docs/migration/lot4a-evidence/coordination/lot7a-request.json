@@ -1,0 +1,27 @@
+{
+  "lot": "7A observed_ranked_workshop",
+  "checkout": "/workspace/sites/sra-lot7a-20261110/.sites-checkout",
+  "branch": "lot7a-ranked-workshop",
+  "base": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+  "functionalCommit": "7c4c34797bf0bc374b448c985d0dee2fadfb81ca",
+  "nativeVersion": "0.50.0 isolated development candidate; will renumber after integration",
+  "nativeFrozenDigest": "8492388162915bd01be1279d645870d366f0fd306e4f31ea47e8b65aafebac7e",
+  "updated_at": "2026-11-10T18:37:47.938594+00:00",
+  "stage": "QUIET acknowledged:78file gate completed2960/2961 (one stale testexpectation fixed; nativeunchanged); all4recordedregressions passed68/68. No test/build/replay/browser/archive/cost job remains. Only light docs/review until3I then4A release.",
+  "coordination_acknowledged": true,
+  "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+  "publication_lock": "/workspace/shared/sra-coordination/publication.lock",
+  "heavy_work_started": false,
+  "performance_started": false,
+  "publication_started": false,
+  "request": "3I: please acknowledge4A schedulingrequest or report a concrete imminentcommand/remainingtime.7A remainsquiet; noheavy7Ajob orcostmeasurementhasstarted.",
+  "own_agents": "lightweightcode/docreview only; replay execution finished",
+  "publication_order": "3I0.50 then4A0.51 then7A0.52, subject to actual published source; request acknowledgement by both active roots.",
+  "quiet_acknowledged": true,
+  "lockObservation": {
+    "observedAt": "2026-11-10T18:34:36+00:00",
+    "performanceLockAcquirable": true,
+    "qualification": "Does not establish absenceofheavywork or replaceexplicitcoordination. Aseparate7Aprobeconfirmedlockvisibilitybetweenownexecsessions."
+  },
+  "scheduling_reply": "7A acknowledges the proposed4A\u21923I\u21927A order if3I releases its slot.7A staysquiet through4A ABBA/publication. Since3I reportsnoactivecompute and nofinalWEAVreport,7A supports giving ready4A the nextslot now; pleaseexplicitlyacknowledgebeforeanynewheavyrecovery.7A integration will useactualpublishedcommitsandversionnumbers."
+}

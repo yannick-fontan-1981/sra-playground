@@ -1,0 +1,106 @@
+{
+  "schema": "logos-engine.native-cost-protocol-declaration.v2",
+  "recordedAt": "2026-11-10T19:10:19.797070+00:00",
+  "status": "declared_before_official_window",
+  "protocol": {
+    "path": "docs/migration/lot4a-evidence/performance-integrated/protocol.md",
+    "bytes": 3464,
+    "sha256": "31b2965b8c5cbb026e7ed566318994ec0068857ca6a519915207b94728732181"
+  },
+  "cases": {
+    "path": "docs/migration/lot4a-evidence/performance-integrated/cases.json",
+    "bytes": 1451,
+    "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+  },
+  "diagnosticComparisonPolicy": {
+    "path": "docs/migration/lot4a-evidence/performance-integrated/comparison-policy.json",
+    "bytes": 991,
+    "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+  },
+  "globalBudgetPolicy": {
+    "path": "docs/migration/lot4a-evidence/performance-integrated/global-budget-policy.json",
+    "bytes": 1763,
+    "sha256": "540d08e3c68cf2fa51705cab3cecfd2d6d3c14455602e43b8cb33a0afcfd5a83"
+  },
+  "baselineManifest": {
+    "path": "docs/migration/lot4a-evidence/baseline-integrated/source-manifest.json",
+    "bytes": 32014,
+    "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd"
+  },
+  "candidateManifest": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/source-manifest.json",
+    "bytes": 32379,
+    "sha256": "391b3e33c4bbd66ed9a1885d4803fb754b596a6e31ba42b79114fc2c43d6e6cd"
+  },
+  "candidateArchiveManifest": {
+    "path": "docs/migration/lot4a-evidence/integrated-051/source-archive.json",
+    "bytes": 34019,
+    "sha256": "1372ad8554dabd2dc5440ca78703faf3ad548bdac3605c1abd3982978fe20448"
+  },
+  "nativeDigests": {
+    "baseline": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+    "candidate": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7"
+  },
+  "officialTools": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    }
+  ],
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "cohorts": 2,
+  "sessionsPerCaseVersionCohort": 4,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "globalBudgetCases": 2,
+  "diagnosticMetrics": 16,
+  "relativeGlobalBudget": 0.1,
+  "globalComparison": "strictly_less_than",
+  "phaseOverrunsBlockAcceptance": false,
+  "allCasesMustPass": true,
+  "crossCaseCompensation": false,
+  "inputsByteIdenticalToHistorical": true,
+  "officialToolsByteIdenticalToHistorical": true,
+  "noOfficialWindowAtDeclaration": true,
+  "functionalReadinessNotAnticipated": true,
+  "finalizedAt": "2026-11-10T19:10:19.797626+00:00",
+  "globalDecisionTool": {
+    "path": "scripts/review-native-global-cost-window.py",
+    "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+    "bytes": 22204
+  },
+  "globalCalculationTool": {
+    "path": "scripts/review-native-global-cost-budget.py",
+    "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+    "bytes": 8476
+  },
+  "qualification": "Lot4A declaration before its complete new window. Unchanged measured work and tools; no historical duration reused. Isolation and functional readiness require their own actual receipts."
+}

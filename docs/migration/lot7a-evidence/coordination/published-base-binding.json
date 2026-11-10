@@ -1,0 +1,50 @@
+{
+  "schema": "logos-engine.lot7a-published-base-binding.v1",
+  "recordedAt": "2026-11-10T20:22:01.992323+00:00",
+  "status": "passed",
+  "published4ACommit": "4dafc40c53ed4406ee7cd148e3e6995a2eb4185e",
+  "siteVersion": 81,
+  "published4ANativeDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+  "candidateCommitAtIntegration": "1ceea98d31e659dfed618d121ee4410c88fda378",
+  "candidateNativeDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+  "publication": {
+    "path": "docs/migration/lot7a-evidence/coordination/published-4a-site81.json",
+    "sha256": "6df93261f4128a236fc24edf71f408451eb036f8ecc2e88e601b76a0483d6e17",
+    "bytes": 1321
+  },
+  "regressionInputProvenance": {
+    "path": "docs/migration/lot7a-evidence/coordination/integrated-regression-provenance.json",
+    "sha256": "2ca8d9f873d33568cdb7c42a88904472698eafb61acf57165e8dc46079c1ac3f",
+    "bytes": 8564
+  },
+  "nativeAndAllFunctionalInputsUnchangedAfterMerge": true,
+  "recorded4ABaselinesMatchActualPublishedBytes": true,
+  "checks": [
+    {
+      "name": "published4A_native",
+      "passed": true,
+      "files": 273
+    },
+    {
+      "name": "candidate_native",
+      "passed": true,
+      "files": 279
+    },
+    {
+      "name": "candidate_archived_inputs",
+      "passed": true,
+      "files": 290
+    },
+    {
+      "name": "candidate_source_and_tests",
+      "passed": true,
+      "files": 638
+    },
+    {
+      "name": "candidate_build_inputs",
+      "passed": true,
+      "files": 344
+    }
+  ],
+  "qualification": "Actual published4A commit is an ancestor. All native, frozen archive, test and build inputs remain byte-identical after the documentation merge. Functional proofs executed on those exact source bytes remain valid; no post-merge native reexecution is claimed."
+}

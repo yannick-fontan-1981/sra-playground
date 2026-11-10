@@ -1,0 +1,55 @@
+{
+  "operation": "pack",
+  "directory": "docs/migration/lot7a-evidence",
+  "partBytes": 900000,
+  "verified": [
+    {
+      "path": "docs/migration/lot7a-evidence/attempt1/lkey-campaign.json.gz",
+      "sha256": "47d69466a2e5baa598121b4f738e15a5fcaf79df3c6e5aa5a41f5dfec4b1d391",
+      "bytes": 4493221,
+      "manifest": "docs/migration/lot7a-evidence/attempt1/lkey-campaign.json.gz.parts.json",
+      "parts": 5,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/final/regressions/catr-049-replay.json.gz",
+      "sha256": "134e3d8823bfe42f41c3f3ee51c3d95568cff493616926d6a713a9a4086fc7e8",
+      "bytes": 1647979,
+      "manifest": "docs/migration/lot7a-evidence/final/regressions/catr-049-replay.json.gz.parts.json",
+      "parts": 2,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/final/regressions/fogw-049-replay.json.gz",
+      "sha256": "9030b68c13ccb78b910b8315e76a86b11699d5f58f0122a91cbcc507dbd7c3f8",
+      "bytes": 8169697,
+      "manifest": "docs/migration/lot7a-evidence/final/regressions/fogw-049-replay.json.gz.parts.json",
+      "parts": 10,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/final/regressions/rswp-049-replay.json.gz",
+      "sha256": "0f78f3f4b9c53ad66ebddb94491ca36fae8232ede79ba5d28b55a4c684436d5b",
+      "bytes": 2584024,
+      "manifest": "docs/migration/lot7a-evidence/final/regressions/rswp-049-replay.json.gz.parts.json",
+      "parts": 3,
+      "restored": false
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/final/regressions/vois-049-replay.json.gz",
+      "sha256": "aef583c27a802eacf8e67ab087b255f95364ad3e5e4c2f69f1cf7b245d2ddc0b",
+      "bytes": 10669803,
+      "manifest": "docs/migration/lot7a-evidence/final/regressions/vois-049-replay.json.gz.parts.json",
+      "parts": 12,
+      "restored": false
+    }
+  ],
+  "gitignoreEntriesAdded": [
+    "/docs/migration/lot7a-evidence/attempt1/lkey-campaign.json.gz",
+    "/docs/migration/lot7a-evidence/final/regressions/catr-049-replay.json.gz",
+    "/docs/migration/lot7a-evidence/final/regressions/fogw-049-replay.json.gz",
+    "/docs/migration/lot7a-evidence/final/regressions/rswp-049-replay.json.gz",
+    "/docs/migration/lot7a-evidence/final/regressions/vois-049-replay.json.gz"
+  ],
+  "qualification": "Exact byte transport only; no agent result is regenerated or reinterpreted."
+}

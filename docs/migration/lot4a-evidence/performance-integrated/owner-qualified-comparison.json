@@ -1,0 +1,5370 @@
+{
+  "schema": "logos-engine.native-cost-owner-qualified-comparison.v1",
+  "status": "qualified_diagnostic_calculation",
+  "recordedAt": "2026-11-10T19:59:09.546Z",
+  "budgetStatus": "budget_review_required",
+  "generator": {
+    "path": "docs/migration/lot4a-evidence/aggregate-owner-qualified-cost.mjs",
+    "bytes": 15538,
+    "sha256": "c7b735126e37e5f67e354f71cfa479d93a7b3c49fd5fab457bdaf4efc5cbda8e"
+  },
+  "calculationHelper": {
+    "path": "scripts/compare-native-cost-cohorts.mjs",
+    "bytes": 19460,
+    "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+  },
+  "inputs": {
+    "policy": {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/comparison-policy.json",
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+      "bytes": 991
+    },
+    "cohorts": [
+      {
+        "id": "cohort_1",
+        "baseline": {
+          "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/baseline.json",
+          "sha256": "eb6164f04fd26a2e23d9d7f9860facae317aac4c93f6781bef9a8c839d73cd1c",
+          "bytes": 428605
+        },
+        "after": {
+          "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/after.json",
+          "sha256": "01e8ce13b3be5fb207e8ed22d52bf27e2f9be31d0566c2f0ffb50fb46ddb6176",
+          "bytes": 428993
+        },
+        "originalComparison": {
+          "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/comparison.json",
+          "sha256": "5c59ddab5eba78f5b8c53ca85318295f0b5196b3d9d289654acd083d47d5a9f7",
+          "bytes": 25220
+        },
+        "validation": {
+          "budgetMetricsExactlyReproduced": true,
+          "originalStatus": "passed",
+          "originalUnresolved": []
+        }
+      },
+      {
+        "id": "cohort_2",
+        "baseline": {
+          "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/baseline.json",
+          "sha256": "9edcd6f308342828bd598c7bb75cdc69c99c1fa9ad41a2f30b636ecd9c020285",
+          "bytes": 428592
+        },
+        "after": {
+          "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/after.json",
+          "sha256": "8cb6aac8a3955fd011ece23dc908f37d306bcad16adcfa0bbcc7606ec80066f9",
+          "bytes": 429008
+        },
+        "originalComparison": {
+          "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/comparison.json",
+          "sha256": "abe3b5fd1f9b67a0721a3cc70987cf2935ff1dc648c21ea56b172e45db4f27b8",
+          "bytes": 25795
+        },
+        "validation": {
+          "budgetMetricsExactlyReproduced": true,
+          "originalStatus": "budget_review_required",
+          "originalUnresolved": [
+            {
+              "case": "STCK",
+              "stage": "new_decision",
+              "result": "over_budget_with_noise_unresolved",
+              "medianRelativeIncrease": 0.11793129948889103
+            },
+            {
+              "case": "SMLP",
+              "stage": "acquisition_and_persistence",
+              "result": "over_budget_with_noise_unresolved",
+              "medianRelativeIncrease": 0.16035658628329363
+            },
+            {
+              "case": "SMLP",
+              "stage": "restoration",
+              "result": "over_budget_with_noise_unresolved",
+              "medianRelativeIncrease": 0.10190082608767859
+            }
+          ]
+        }
+      }
+    ],
+    "retained": [
+      {
+        "path": "docs/migration/lot4a-evidence/performance-integrated/comparison-policy.json",
+        "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+        "bytes": 991
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/performance-integrated/cases.json",
+        "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+        "bytes": 1451
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/performance-integrated/declaration.json",
+        "sha256": "7d55983836c6d24bd365335c447b09001f3f296f78a9ab30e0a315fdf5704faa",
+        "bytes": 4036
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/performance-integrated/window.json",
+        "sha256": "3fea8d11469293bee2954f244aca164f95cb26c51edcf1e1cedc157b82faef22",
+        "bytes": 10361
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/performance-integrated/owner-addition-declaration.json",
+        "sha256": "c37b6cc8b9bcd43705e497dcd49aca57196e1e1129620ccdbb2aac57aa923dd7",
+        "bytes": 3052
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/performance-integrated/aggregation-failure-reproduced.json",
+        "sha256": "2305d404095fdcbba714b9697435a5b70afcafccfd332bf0b4504fc098c7d769",
+        "bytes": 3052
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/performance-integrated/owner-addition-qualification.json",
+        "sha256": "b3c6dd99ff278f84e6b607a29b4c4502764c9d346ac2604c340730349011c311",
+        "bytes": 67441
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/baseline.json",
+        "sha256": "eb6164f04fd26a2e23d9d7f9860facae317aac4c93f6781bef9a8c839d73cd1c",
+        "bytes": 428605
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/after.json",
+        "sha256": "01e8ce13b3be5fb207e8ed22d52bf27e2f9be31d0566c2f0ffb50fb46ddb6176",
+        "bytes": 428993
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/comparison.json",
+        "sha256": "5c59ddab5eba78f5b8c53ca85318295f0b5196b3d9d289654acd083d47d5a9f7",
+        "bytes": 25220
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/baseline.json",
+        "sha256": "9edcd6f308342828bd598c7bb75cdc69c99c1fa9ad41a2f30b636ecd9c020285",
+        "bytes": 428592
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/after.json",
+        "sha256": "8cb6aac8a3955fd011ece23dc908f37d306bcad16adcfa0bbcc7606ec80066f9",
+        "bytes": 429008
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/comparison.json",
+        "sha256": "abe3b5fd1f9b67a0721a3cc70987cf2935ff1dc648c21ea56b172e45db4f27b8",
+        "bytes": 25795
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/performance-integrated/owner-addition-protocol.md",
+        "bytes": 5065,
+        "sha256": "95f4232a6139dde7f1a69ac131011241ec9b05848e0236f41356f2b855b78025"
+      },
+      {
+        "path": "docs/migration/lot4a-evidence/aggregate-owner-qualified-cost.mjs",
+        "bytes": 15538,
+        "sha256": "c7b735126e37e5f67e354f71cfa479d93a7b3c49fd5fab457bdaf4efc5cbda8e"
+      },
+      {
+        "path": "scripts/compare-native-cost-cohorts.mjs",
+        "bytes": 19460,
+        "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+      }
+    ]
+  },
+  "ownerQualification": {
+    "path": "docs/migration/lot4a-evidence/performance-integrated/owner-addition-qualification.json",
+    "sha256": "b3c6dd99ff278f84e6b607a29b4c4502764c9d346ac2604c340730349011c311",
+    "bytes": 67441
+  },
+  "originalStrictAggregation": {
+    "status": "failed",
+    "receipt": {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/aggregation-failure-reproduced.json",
+      "sha256": "2305d404095fdcbba714b9697435a5b70afcafccfd332bf0b4504fc098c7d769",
+      "bytes": 3052
+    },
+    "unchanged": true,
+    "originalOutputAbsent": true
+  },
+  "sources": {
+    "baseline": {
+      "digest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+      "fileCount": 270
+    },
+    "after": {
+      "digest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+      "fileCount": 273
+    }
+  },
+  "environment": {
+    "node": "v24.22.1",
+    "platform": "linux",
+    "release": "6.18.57",
+    "cpuModel": "AMD EPYC 9V74 80-Core Processor",
+    "logicalCpus": 9
+  },
+  "timingHarness": {
+    "path": "scripts/measure-native-loop-costs.mjs",
+    "bytes": 20670,
+    "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+  },
+  "relativeBudget": 0.1,
+  "budgetMetricCount": 16,
+  "withinObservedBudget": 15,
+  "comparisons": [
+    {
+      "case": "STCK",
+      "unaffected": true,
+      "measuredSessionsPerVersion": 8,
+      "actionsPerSession": 10,
+      "levelsCompleted": 2,
+      "cohortRounds": [
+        {
+          "cohort": "cohort_1",
+          "rounds": 4
+        },
+        {
+          "cohort": "cohort_2",
+          "rounds": 4
+        }
+      ],
+      "metrics": [
+        {
+          "stage": "session_elapsed",
+          "before": {
+            "count": 8,
+            "medianMs": 10800.922617499999,
+            "p95Ms": null,
+            "minMs": 9329.486877,
+            "maxMs": 11575.206072
+          },
+          "after": {
+            "count": 8,
+            "medianMs": 9818.725429499998,
+            "p95Ms": null,
+            "minMs": 9293.924608000001,
+            "maxMs": 10566.645746
+          },
+          "medianRelativeIncrease": -0.0909364155992205,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.20791920047287588,
+            "afterRelativeRange": 0.12962182791833196
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "new_decision",
+          "before": {
+            "count": 48,
+            "medianMs": 331.2959489999994,
+            "p95Ms": 479.39671400000225,
+            "minMs": 191.46012399999927,
+            "maxMs": 566.5265360000012
+          },
+          "after": {
+            "count": 48,
+            "medianMs": 313.9366185000017,
+            "p95Ms": 490.3485920000003,
+            "minMs": 179.42145100000198,
+            "maxMs": 534.1786909999937
+          },
+          "medianRelativeIncrease": -0.05239825766779205,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.19113112490361092,
+            "afterRelativeRange": 0.4628325041840694
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_service",
+          "before": {
+            "count": 32,
+            "medianMs": 11.401929499999824,
+            "p95Ms": 29.65238599999975,
+            "minMs": 7.937333000001672,
+            "maxMs": 30.923688999999285
+          },
+          "after": {
+            "count": 32,
+            "medianMs": 10.078490500000044,
+            "p95Ms": 20.46121199999834,
+            "minMs": 7.9893709999960265,
+            "maxMs": 35.2589799999987
+          },
+          "medianRelativeIncrease": -0.1160714947412892,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.45565345655711453,
+            "afterRelativeRange": 0.29434227736498364
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_request",
+          "before": {
+            "count": 32,
+            "medianMs": 13.685327499997584,
+            "p95Ms": 32.88270399999965,
+            "minMs": 9.695599999999104,
+            "maxMs": 33.01077699999951
+          },
+          "after": {
+            "count": 32,
+            "medianMs": 12.128618499999902,
+            "p95Ms": 23.08787200000006,
+            "minMs": 9.472140999998373,
+            "maxMs": 37.55443100000048
+          },
+          "medianRelativeIncrease": -0.11375021898437987,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.40638520975221776,
+            "afterRelativeRange": 0.29702051132051327
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_guard",
+          "before": {
+            "count": 32,
+            "medianMs": 0.28431000000273343,
+            "p95Ms": 1.1037400000059279,
+            "minMs": 0.090914000000339,
+            "maxMs": 2.9846789999974135
+          },
+          "after": {
+            "count": 32,
+            "medianMs": 0.23226350000186358,
+            "p95Ms": 1.0425800000011805,
+            "minMs": 0.08438499999829219,
+            "maxMs": 1.3742910000000848
+          },
+          "medianRelativeIncrease": -0.18306250219960418,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.5969081687830727,
+            "afterRelativeRange": 1.2945107779677634
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "acquisition_and_persistence",
+          "before": {
+            "count": 48,
+            "medianMs": 892.5345000000002,
+            "p95Ms": 3919.4819210000005,
+            "minMs": 384.6534709999996,
+            "maxMs": 4188.140377000003
+          },
+          "after": {
+            "count": 48,
+            "medianMs": 801.9640640000016,
+            "p95Ms": 3511.1021660000006,
+            "minMs": 388.8139470000024,
+            "maxMs": 3715.255710999998
+          },
+          "medianRelativeIncrease": -0.10147555752746651,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.4195471791820539,
+            "afterRelativeRange": 0.1269630209270668
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "persistence",
+          "before": {
+            "count": 104,
+            "medianMs": 177.85946599999806,
+            "p95Ms": 319.4912169999998,
+            "minMs": 15.166588000000047,
+            "maxMs": 392.4487000000008
+          },
+          "after": {
+            "count": 104,
+            "medianMs": 156.3569690000004,
+            "p95Ms": 321.9620270000014,
+            "minMs": 15.220620000000054,
+            "maxMs": 383.48116799999843
+          },
+          "medianRelativeIncrease": -0.12089599436893572,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.26685312324058974,
+            "afterRelativeRange": 0.2661364469232318
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "restoration",
+          "before": {
+            "count": 96,
+            "medianMs": 8.503194000000803,
+            "p95Ms": 58.9672300000002,
+            "minMs": 1.695915000000241,
+            "maxMs": 78.41140499999892
+          },
+          "after": {
+            "count": 96,
+            "medianMs": 7.969951499999297,
+            "p95Ms": 50.495725000000675,
+            "minMs": 1.903811999996833,
+            "maxMs": 69.75617999999668
+          },
+          "medianRelativeIncrease": -0.06271084724180775,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.1658228499471618,
+            "afterRelativeRange": 0.31592432574219004
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        }
+      ]
+    },
+    {
+      "case": "SMLP",
+      "unaffected": true,
+      "measuredSessionsPerVersion": 8,
+      "actionsPerSession": 15,
+      "levelsCompleted": 3,
+      "cohortRounds": [
+        {
+          "cohort": "cohort_1",
+          "rounds": 4
+        },
+        {
+          "cohort": "cohort_2",
+          "rounds": 4
+        }
+      ],
+      "metrics": [
+        {
+          "stage": "session_elapsed",
+          "before": {
+            "count": 8,
+            "medianMs": 16603.995726500005,
+            "p95Ms": null,
+            "minMs": 15568.00467699999,
+            "maxMs": 17414.45244699999
+          },
+          "after": {
+            "count": 8,
+            "medianMs": 17368.032281,
+            "p95Ms": null,
+            "minMs": 15255.239948999995,
+            "maxMs": 19226.794242000004
+          },
+          "medianRelativeIncrease": 0.04601522230462818,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.11120502561037553,
+            "afterRelativeRange": 0.22867036568930985
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "new_decision",
+          "before": {
+            "count": 72,
+            "medianMs": 393.36222849999467,
+            "p95Ms": 857.0762239999895,
+            "minMs": 202.48845400000573,
+            "maxMs": 983.6981240000023
+          },
+          "after": {
+            "count": 72,
+            "medianMs": 420.55238349999854,
+            "p95Ms": 886.1396359999926,
+            "minMs": 208.05315100000007,
+            "maxMs": 988.660858999996
+          },
+          "medianRelativeIncrease": 0.06912243481965175,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.29612732558712085,
+            "afterRelativeRange": 0.3070511494914269
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_service",
+          "before": {
+            "count": 48,
+            "medianMs": 10.912371999998868,
+            "p95Ms": 18.125572000004468,
+            "minMs": 7.688886000003549,
+            "maxMs": 18.895548000000417
+          },
+          "after": {
+            "count": 48,
+            "medianMs": 10.227650499997253,
+            "p95Ms": 20.97851400000218,
+            "minMs": 8.239138999997522,
+            "maxMs": 24.213484000007156
+          },
+          "medianRelativeIncrease": -0.06274726521435359,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.30186184048065534,
+            "afterRelativeRange": 0.3995239124195063
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_request",
+          "before": {
+            "count": 48,
+            "medianMs": 13.419034999998985,
+            "p95Ms": 20.45198800000071,
+            "minMs": 9.819522999998298,
+            "maxMs": 21.593754000001354
+          },
+          "after": {
+            "count": 48,
+            "medianMs": 12.772712499994668,
+            "p95Ms": 23.76605700000073,
+            "minMs": 10.222518999988097,
+            "maxMs": 26.966849999997066
+          },
+          "medianRelativeIncrease": -0.04816460349081475,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.28759136260183266,
+            "afterRelativeRange": 0.40859990356335196
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_guard",
+          "before": {
+            "count": 48,
+            "medianMs": 0.38857350000034785,
+            "p95Ms": 0.625092999995104,
+            "minMs": 0.18981100000382867,
+            "maxMs": 7.576201000003493
+          },
+          "after": {
+            "count": 48,
+            "medianMs": 0.3567869999969844,
+            "p95Ms": 0.6610269999946468,
+            "minMs": 0.19032100000185892,
+            "maxMs": 7.6563180000084685
+          },
+          "medianRelativeIncrease": -0.08180305657317088,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.7239357135977849,
+            "afterRelativeRange": 0.5229287578859875
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "acquisition_and_persistence",
+          "before": {
+            "count": 72,
+            "medianMs": 865.5031774999952,
+            "p95Ms": 2533.136176,
+            "minMs": 303.44266900000366,
+            "maxMs": 2828.7692690000113
+          },
+          "after": {
+            "count": 72,
+            "medianMs": 966.3052275000009,
+            "p95Ms": 2776.5702889999957,
+            "minMs": 281.1707879999958,
+            "maxMs": 3119.9375750000036
+          },
+          "medianRelativeIncrease": 0.11646641239512512,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.24904032500730633,
+            "afterRelativeRange": 0.3100975113515812
+          },
+          "budgetApplies": true,
+          "result": "over_budget_with_noise_unresolved"
+        },
+        {
+          "stage": "persistence",
+          "before": {
+            "count": 152,
+            "medianMs": 132.23365100000228,
+            "p95Ms": 260.30970399999933,
+            "minMs": 14.537090999991051,
+            "maxMs": 341.9556809999922
+          },
+          "after": {
+            "count": 152,
+            "medianMs": 140.7451205000034,
+            "p95Ms": 263.03269900000305,
+            "minMs": 16.526198999999906,
+            "maxMs": 353.52830400000676
+          },
+          "medianRelativeIncrease": 0.06436689477779733,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.2409195600146818,
+            "afterRelativeRange": 0.29610769500651896
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "restoration",
+          "before": {
+            "count": 144,
+            "medianMs": 5.270259499993699,
+            "p95Ms": 23.71832299999369,
+            "minMs": 1.7587570000032429,
+            "maxMs": 55.71963700000197
+          },
+          "after": {
+            "count": 144,
+            "medianMs": 5.7345879999993485,
+            "p95Ms": 24.99572900000203,
+            "minMs": 2.164776999998139,
+            "maxMs": 41.8222209999949
+          },
+          "medianRelativeIncrease": 0.08810353645891711,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.38025242503537543,
+            "afterRelativeRange": 0.589514469723793
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        }
+      ]
+    }
+  ],
+  "unresolved": [
+    {
+      "case": "SMLP",
+      "stage": "acquisition_and_persistence",
+      "result": "over_budget_with_noise_unresolved",
+      "medianRelativeIncrease": 0.11646641239512512
+    }
+  ],
+  "includedMeasuredSessions": [
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 1,
+      "startedAt": "2026-11-10T19:29:49.784Z",
+      "finishedAt": "2026-11-10T19:30:01.915Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 2,
+      "startedAt": "2026-11-10T19:30:01.918Z",
+      "finishedAt": "2026-11-10T19:30:14.593Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 3,
+      "startedAt": "2026-11-10T19:30:14.602Z",
+      "finishedAt": "2026-11-10T19:30:26.501Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 4,
+      "startedAt": "2026-11-10T19:30:26.504Z",
+      "finishedAt": "2026-11-10T19:30:38.810Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 1,
+      "startedAt": "2026-11-10T19:36:18.606Z",
+      "finishedAt": "2026-11-10T19:36:30.130Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 2,
+      "startedAt": "2026-11-10T19:36:30.133Z",
+      "finishedAt": "2026-11-10T19:36:40.977Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 3,
+      "startedAt": "2026-11-10T19:36:40.980Z",
+      "finishedAt": "2026-11-10T19:36:51.323Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 4,
+      "startedAt": "2026-11-10T19:36:51.330Z",
+      "finishedAt": "2026-11-10T19:37:03.518Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "STCK",
+      "round": 1,
+      "startedAt": "2026-11-10T19:32:02.063Z",
+      "finishedAt": "2026-11-10T19:32:13.077Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "STCK",
+      "round": 2,
+      "startedAt": "2026-11-10T19:32:13.092Z",
+      "finishedAt": "2026-11-10T19:32:24.624Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "STCK",
+      "round": 3,
+      "startedAt": "2026-11-10T19:32:24.626Z",
+      "finishedAt": "2026-11-10T19:32:35.240Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "STCK",
+      "round": 4,
+      "startedAt": "2026-11-10T19:32:35.243Z",
+      "finishedAt": "2026-11-10T19:32:45.846Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "STCK",
+      "round": 1,
+      "startedAt": "2026-11-10T19:34:09.354Z",
+      "finishedAt": "2026-11-10T19:34:20.482Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "STCK",
+      "round": 2,
+      "startedAt": "2026-11-10T19:34:20.501Z",
+      "finishedAt": "2026-11-10T19:34:31.818Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "STCK",
+      "round": 3,
+      "startedAt": "2026-11-10T19:34:31.821Z",
+      "finishedAt": "2026-11-10T19:34:42.131Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "STCK",
+      "round": 4,
+      "startedAt": "2026-11-10T19:34:42.135Z",
+      "finishedAt": "2026-11-10T19:34:52.638Z",
+      "actions": 10,
+      "levelsCompleted": 2,
+      "sampleCount": 52,
+      "requestCount": 16
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 1,
+      "startedAt": "2026-11-10T19:30:45.029Z",
+      "finishedAt": "2026-11-10T19:31:03.460Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 2,
+      "startedAt": "2026-11-10T19:31:03.464Z",
+      "finishedAt": "2026-11-10T19:31:21.771Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 3,
+      "startedAt": "2026-11-10T19:31:21.775Z",
+      "finishedAt": "2026-11-10T19:31:39.413Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 4,
+      "startedAt": "2026-11-10T19:31:39.416Z",
+      "finishedAt": "2026-11-10T19:31:56.891Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 1,
+      "startedAt": "2026-11-10T19:37:08.632Z",
+      "finishedAt": "2026-11-10T19:37:25.989Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 2,
+      "startedAt": "2026-11-10T19:37:25.992Z",
+      "finishedAt": "2026-11-10T19:37:44.482Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 3,
+      "startedAt": "2026-11-10T19:37:44.488Z",
+      "finishedAt": "2026-11-10T19:38:02.354Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 4,
+      "startedAt": "2026-11-10T19:38:02.358Z",
+      "finishedAt": "2026-11-10T19:38:18.892Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "SMLP",
+      "round": 1,
+      "startedAt": "2026-11-10T19:32:50.666Z",
+      "finishedAt": "2026-11-10T19:33:06.972Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "SMLP",
+      "round": 2,
+      "startedAt": "2026-11-10T19:33:06.976Z",
+      "finishedAt": "2026-11-10T19:33:25.286Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "SMLP",
+      "round": 3,
+      "startedAt": "2026-11-10T19:33:25.289Z",
+      "finishedAt": "2026-11-10T19:33:45.649Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "SMLP",
+      "round": 4,
+      "startedAt": "2026-11-10T19:33:45.654Z",
+      "finishedAt": "2026-11-10T19:34:04.295Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "SMLP",
+      "round": 1,
+      "startedAt": "2026-11-10T19:34:58.110Z",
+      "finishedAt": "2026-11-10T19:35:16.523Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "SMLP",
+      "round": 2,
+      "startedAt": "2026-11-10T19:35:16.527Z",
+      "finishedAt": "2026-11-10T19:35:35.400Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "SMLP",
+      "round": 3,
+      "startedAt": "2026-11-10T19:35:35.403Z",
+      "finishedAt": "2026-11-10T19:35:52.728Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "SMLP",
+      "round": 4,
+      "startedAt": "2026-11-10T19:35:52.732Z",
+      "finishedAt": "2026-11-10T19:36:12.164Z",
+      "actions": 15,
+      "levelsCompleted": 3,
+      "sampleCount": 77,
+      "requestCount": 24
+    }
+  ],
+  "qualifiedWorkDifferences": [
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 152,
+      "after": 155,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 180,
+      "after": 183,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 182,
+      "after": 185,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 202,
+      "after": 205,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 204,
+      "after": 207,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 221,
+      "after": 224,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.final.graphRevision",
+      "baseline": 466,
+      "after": 472,
+      "delta": 6
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.final.nodeCount",
+      "baseline": 221,
+      "after": 224,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 152,
+      "after": 155,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 180,
+      "after": 183,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 182,
+      "after": 185,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 202,
+      "after": 205,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 204,
+      "after": 207,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 221,
+      "after": 224,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 223,
+      "after": 226,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 248,
+      "after": 251,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 325,
+      "after": 328,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 327,
+      "after": 330,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 842,
+      "after": 851,
+      "delta": 9
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 152,
+      "after": 155,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 180,
+      "after": 183,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 182,
+      "after": 185,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 202,
+      "after": 205,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 204,
+      "after": 207,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 221,
+      "after": 224,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 223,
+      "after": 226,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 248,
+      "after": 251,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 325,
+      "after": 328,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 327,
+      "after": 330,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 842,
+      "after": 851,
+      "delta": 9
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 152,
+      "after": 155,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 180,
+      "after": 183,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 182,
+      "after": 185,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 202,
+      "after": 205,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 204,
+      "after": 207,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 221,
+      "after": 224,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 223,
+      "after": 226,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 248,
+      "after": 251,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 325,
+      "after": 328,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 327,
+      "after": 330,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 842,
+      "after": 851,
+      "delta": 9
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 152,
+      "after": 155,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 180,
+      "after": 183,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 182,
+      "after": 185,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 202,
+      "after": 205,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 204,
+      "after": 207,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 221,
+      "after": 224,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 223,
+      "after": 226,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 248,
+      "after": 251,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 325,
+      "after": 328,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 327,
+      "after": 330,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 842,
+      "after": 851,
+      "delta": 9
+    },
+    {
+      "cohort": 1,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 157,
+      "after": 160,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 175,
+      "after": 178,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 177,
+      "after": 180,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 192,
+      "after": 195,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 194,
+      "after": 197,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 211,
+      "after": 214,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.final.graphRevision",
+      "baseline": 471,
+      "after": 477,
+      "delta": 6
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.final.nodeCount",
+      "baseline": 211,
+      "after": 214,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 157,
+      "after": 160,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 175,
+      "after": 178,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 177,
+      "after": 180,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 192,
+      "after": 195,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 194,
+      "after": 197,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 211,
+      "after": 214,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 213,
+      "after": 216,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 233,
+      "after": 236,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 276,
+      "after": 279,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 278,
+      "after": 281,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 302,
+      "after": 305,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 304,
+      "after": 307,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 321,
+      "after": 324,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[16].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[17].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[18].nodeCount",
+      "baseline": 355,
+      "after": 358,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[19].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[20].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[21].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[22].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[23].nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 1179,
+      "after": 1191,
+      "delta": 12
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 157,
+      "after": 160,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 175,
+      "after": 178,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 177,
+      "after": 180,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 192,
+      "after": 195,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 194,
+      "after": 197,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 211,
+      "after": 214,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 213,
+      "after": 216,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 233,
+      "after": 236,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 276,
+      "after": 279,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 278,
+      "after": 281,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 302,
+      "after": 305,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 304,
+      "after": 307,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 321,
+      "after": 324,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[16].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[17].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[18].nodeCount",
+      "baseline": 355,
+      "after": 358,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[19].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[20].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[21].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[22].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[23].nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 1179,
+      "after": 1191,
+      "delta": 12
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 157,
+      "after": 160,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 175,
+      "after": 178,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 177,
+      "after": 180,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 192,
+      "after": 195,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 194,
+      "after": 197,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 211,
+      "after": 214,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 213,
+      "after": 216,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 233,
+      "after": 236,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 276,
+      "after": 279,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 278,
+      "after": 281,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 302,
+      "after": 305,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 304,
+      "after": 307,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 321,
+      "after": 324,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[16].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[17].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[18].nodeCount",
+      "baseline": 355,
+      "after": 358,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[19].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[20].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[21].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[22].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[23].nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 1179,
+      "after": 1191,
+      "delta": 12
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 157,
+      "after": 160,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 175,
+      "after": 178,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 177,
+      "after": 180,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 192,
+      "after": 195,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 194,
+      "after": 197,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 211,
+      "after": 214,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 213,
+      "after": 216,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 233,
+      "after": 236,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 276,
+      "after": 279,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 278,
+      "after": 281,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 302,
+      "after": 305,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 304,
+      "after": 307,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 321,
+      "after": 324,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[16].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[17].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[18].nodeCount",
+      "baseline": 355,
+      "after": 358,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[19].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[20].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[21].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[22].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[23].nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 1179,
+      "after": 1191,
+      "delta": 12
+    },
+    {
+      "cohort": 1,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 152,
+      "after": 155,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 180,
+      "after": 183,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 182,
+      "after": 185,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 202,
+      "after": 205,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 204,
+      "after": 207,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 221,
+      "after": 224,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.final.graphRevision",
+      "baseline": 466,
+      "after": 472,
+      "delta": 6
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "path": "$.final.nodeCount",
+      "baseline": 221,
+      "after": 224,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 152,
+      "after": 155,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 180,
+      "after": 183,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 182,
+      "after": 185,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 202,
+      "after": 205,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 204,
+      "after": 207,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 221,
+      "after": 224,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 223,
+      "after": 226,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 248,
+      "after": 251,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 325,
+      "after": 328,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 327,
+      "after": 330,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 842,
+      "after": 851,
+      "delta": 9
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 152,
+      "after": 155,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 180,
+      "after": 183,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 182,
+      "after": 185,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 202,
+      "after": 205,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 204,
+      "after": 207,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 221,
+      "after": 224,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 223,
+      "after": 226,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 248,
+      "after": 251,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 325,
+      "after": 328,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 327,
+      "after": 330,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 842,
+      "after": 851,
+      "delta": 9
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 152,
+      "after": 155,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 180,
+      "after": 183,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 182,
+      "after": 185,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 202,
+      "after": 205,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 204,
+      "after": 207,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 221,
+      "after": 224,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 223,
+      "after": 226,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 248,
+      "after": 251,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 325,
+      "after": 328,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 327,
+      "after": 330,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 842,
+      "after": 851,
+      "delta": 9
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 152,
+      "after": 155,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 180,
+      "after": 183,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 182,
+      "after": 185,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 202,
+      "after": 205,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 204,
+      "after": 207,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 221,
+      "after": 224,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 223,
+      "after": 226,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 248,
+      "after": 251,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 250,
+      "after": 253,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 325,
+      "after": 328,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 327,
+      "after": 330,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 842,
+      "after": 851,
+      "delta": 9
+    },
+    {
+      "cohort": 2,
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 344,
+      "after": 347,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 157,
+      "after": 160,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 175,
+      "after": 178,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 177,
+      "after": 180,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 192,
+      "after": 195,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 194,
+      "after": 197,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 211,
+      "after": 214,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.final.graphRevision",
+      "baseline": 471,
+      "after": 477,
+      "delta": 6
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "path": "$.final.nodeCount",
+      "baseline": 211,
+      "after": 214,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 157,
+      "after": 160,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 175,
+      "after": 178,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 177,
+      "after": 180,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 192,
+      "after": 195,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 194,
+      "after": 197,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 211,
+      "after": 214,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 213,
+      "after": 216,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 233,
+      "after": 236,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 276,
+      "after": 279,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 278,
+      "after": 281,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 302,
+      "after": 305,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 304,
+      "after": 307,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 321,
+      "after": 324,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[16].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[17].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[18].nodeCount",
+      "baseline": 355,
+      "after": 358,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[19].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[20].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[21].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[22].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.observations[23].nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 1179,
+      "after": 1191,
+      "delta": 12
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 157,
+      "after": 160,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 175,
+      "after": 178,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 177,
+      "after": 180,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 192,
+      "after": 195,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 194,
+      "after": 197,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 211,
+      "after": 214,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 213,
+      "after": 216,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 233,
+      "after": 236,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 276,
+      "after": 279,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 278,
+      "after": 281,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 302,
+      "after": 305,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 304,
+      "after": 307,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 321,
+      "after": 324,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[16].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[17].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[18].nodeCount",
+      "baseline": 355,
+      "after": 358,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[19].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[20].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[21].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[22].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.observations[23].nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 1179,
+      "after": 1191,
+      "delta": 12
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 157,
+      "after": 160,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 175,
+      "after": 178,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 177,
+      "after": 180,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 192,
+      "after": 195,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 194,
+      "after": 197,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 211,
+      "after": 214,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 213,
+      "after": 216,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 233,
+      "after": 236,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 276,
+      "after": 279,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 278,
+      "after": 281,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 302,
+      "after": 305,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 304,
+      "after": 307,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 321,
+      "after": 324,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[16].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[17].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[18].nodeCount",
+      "baseline": 355,
+      "after": 358,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[19].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[20].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[21].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[22].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.observations[23].nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 1179,
+      "after": 1191,
+      "delta": 12
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[0].nodeCount",
+      "baseline": 157,
+      "after": 160,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[1].nodeCount",
+      "baseline": 175,
+      "after": 178,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[2].nodeCount",
+      "baseline": 177,
+      "after": 180,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[3].nodeCount",
+      "baseline": 192,
+      "after": 195,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[4].nodeCount",
+      "baseline": 194,
+      "after": 197,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[5].nodeCount",
+      "baseline": 211,
+      "after": 214,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[6].nodeCount",
+      "baseline": 213,
+      "after": 216,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[7].nodeCount",
+      "baseline": 233,
+      "after": 236,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[8].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[9].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[10].nodeCount",
+      "baseline": 235,
+      "after": 238,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[11].nodeCount",
+      "baseline": 276,
+      "after": 279,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[12].nodeCount",
+      "baseline": 278,
+      "after": 281,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[13].nodeCount",
+      "baseline": 302,
+      "after": 305,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[14].nodeCount",
+      "baseline": 304,
+      "after": 307,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[15].nodeCount",
+      "baseline": 321,
+      "after": 324,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[16].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[17].nodeCount",
+      "baseline": 323,
+      "after": 326,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[18].nodeCount",
+      "baseline": 355,
+      "after": 358,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[19].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[20].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[21].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[22].nodeCount",
+      "baseline": 357,
+      "after": 360,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.observations[23].nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.inspection[0].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.inspection[1].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.inspection[2].graphNodes",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.final.graphRevision",
+      "baseline": 1179,
+      "after": 1191,
+      "delta": 12
+    },
+    {
+      "cohort": 2,
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "path": "$.final.nodeCount",
+      "baseline": 412,
+      "after": 415,
+      "delta": 3
+    }
+  ],
+  "method": {
+    "workMetadataExactAcrossAllSessions": false,
+    "workMetadataExactWithinEachVersion": true,
+    "allOtherMeasuredWorkFieldsExact": true,
+    "qualificationDeclaredAfterWindow": true,
+    "originalStrictFailurePreserved": true,
+    "excludedMeasuredSessions": 0,
+    "excludedOutliers": 0,
+    "excludedWarmupsPerCaseAndVersion": 2,
+    "selectedCohort": null,
+    "noiseAllowanceAdded": false,
+    "timingsModified": false,
+    "addedOwnerCostSubtracted": false,
+    "originalBudgetMetricsExactlyReproduced": true,
+    "p95MinimumSamples": 20,
+    "combine": "All original measured sessions pooled before calculation; explicit additional-owner structural qualification only."
+  },
+  "qualification": "Separate post-measurement work qualification, never a passed strict aggregation. Native source, harness, samples, thresholds and all unfavorable results are unchanged. All measured work fields other than the four explicitly attributed graph-count paths are exact. Separate graph replays corroborate the added owner; they do not retrospectively prove uncaptured leaves of measured sessions. Every cost of the additional owner remains in the original durations. No complete private-graph identity, live-game latency or long-session stability is claimed."
+}

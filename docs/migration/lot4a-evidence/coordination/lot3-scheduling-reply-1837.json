@@ -1,0 +1,34 @@
+{
+  "lot": "3I recurrent_series",
+  "checkout": "/workspace/sites/sra-playground-step3d/.sites-checkout",
+  "branch": "main",
+  "base": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+  "nativeVersion": "0.50.0",
+  "nativeFrozenDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+  "updated_at": "2026-11-10T18:37:39.195568+00:00",
+  "stage": "Execution handle lost before WEAV final report; lock probe free. No cost started. Preparing persistent streamed log recovery, retaining all prior attempts. No heavy compute active now.",
+  "coordination_acknowledged": true,
+  "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+  "publication_lock": "/workspace/shared/sra-coordination/publication.lock",
+  "request": "Please acknowledge quiet now for 3I WEAV recovery then ABBA window. 3I source 0.50 is already frozen and validated; propose 3I publish first, then 4A integrates this commit and uses 0.51. 4A may continue light preparation but no heavy computation or publication until status releases the slot. Do not restart any active gate merely for this request; acknowledge when it completes.",
+  "performance_started": false,
+  "heavy_work_started": false,
+  "own_agents": "documentation, replay-host code preparation only; no tests/build/campaign/preview",
+  "anticipated_sequence": [
+    "isolated WEAV replay",
+    "integrity and readiness",
+    "A1 B1 B2 A2",
+    "private publication 3I",
+    "release slot for integrated 4A"
+  ],
+  "other_lane_acknowledged": true,
+  "publication_order": "3I native0.50 first, then4A integrates actual commit and validates0.51.",
+  "active_command": null,
+  "scheduling_reply": "Keep acknowledged3I\u21924A\u21927A publication order. The streamed-log replay host is being finalized now; its native0.50 source and all3225 tests/build/CONN proofs are already frozen againstSite78. Publishing4A first would invalidate this exact-source package and require merging, a new version, freeze, formal gates and cost declaration before any3I release, extending both lanes rather than only the short replay recovery. No cost or publication slot released at this point. Next recovery starts as soon as the persistent-log runner is ready.",
+  "release_estimate": "Aim for release after recovery+integrity+ABBA+publication, approximately18:55UTC (15:55UTC-03), contingent on the strict replay; will update actual progress and any new obstacle immediately.",
+  "known_lanes": [
+    "3I recurrent_series",
+    "4A observed_feedback_sequence",
+    "7A observed_ranked_workshop"
+  ]
+}

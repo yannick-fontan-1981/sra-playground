@@ -1,0 +1,3211 @@
+{
+  "schema": "logos-engine.lot7a-owner-cost-structural-attribution.v1",
+  "status": "qualified_functional_structure",
+  "startedAt": "2026-11-10T20:19:45.278Z",
+  "checks": [
+    {
+      "name": "immutable_capture_provenance_before_measurement",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:5",
+      "passed": true
+    },
+    {
+      "name": "shape:STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:5",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:6",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:7",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:8",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:9",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:10",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:11",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:12",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:13",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:14",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:15",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:16",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:17",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:18",
+      "passed": true
+    },
+    {
+      "name": "shape:STCK:measured",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:warmup:5",
+      "passed": true
+    },
+    {
+      "name": "shape:SMLP:warmup",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:5",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:6",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:7",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:8",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:9",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:10",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:11",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:12",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:13",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:14",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:15",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:16",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:17",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:18",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:19",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:20",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:21",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:22",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:23",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:24",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:25",
+      "passed": true
+    },
+    {
+      "name": "graphs:SMLP:measured:26",
+      "passed": true
+    },
+    {
+      "name": "shape:SMLP:measured",
+      "passed": true
+    },
+    {
+      "name": "all_inputs_unchanged_and_no_window_started",
+      "passed": true
+    }
+  ],
+  "nodeAttributions": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 27,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "ef6574fab745b0def26083c3bceed1e33134d32999a85d77ef3d00518c02e9d9",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "8be4a960bda5d4898c81fc4a2051f0a80d35045b9fc8d2e04befdccde8da01ba",
+      "epoch": null,
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 28,
+      "nodeId": "family_activation:public_ranked_workshop",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "080b7fa6089eb17190838b0d8ca1a950c42b283c41949cbba329e370d7440b1d",
+      "category": "workshop_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 117,
+      "nodeId": "program:v6.ranked_workshop.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.ranked_workshop.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "0d6371c557f1063b80b34117ef52e4cacd16bd09f097fce67501bef204d52814",
+      "category": "workshop_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 235,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "5101b616938a88cf0226a12dc594a14954154dfd48dee2b5791ca81405c93d71",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "epoch": 1,
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 343,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "5112db8d434ad904e8d6bce7e93c7c17281cd99e492b1b33d42835a28d0a06b5",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "epoch": 1,
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 394,
+      "nodeId": "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "4aeb40bfdee9859077c3ad706e4c66658a139344cf19f590a2a37d7aa4609baf",
+      "category": "workshop_source_event_fact",
+      "factKey": "ranked_workshop_event:3",
+      "sourceCallIndex": 2,
+      "sourceReturnStatus": "official_boundary",
+      "beforeObservation": "lot7a-owner-cost-stck-warmup:epoch:1:revision:3:frame:fd8a9f7309f0e2fd",
+      "afterObservation": "lot7a-owner-cost-stck-warmup:epoch:2:revision:4:frame:fed2f15409370124",
+      "officialBoundary": true
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 398,
+      "nodeId": "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "0c34f92f997d98b43fafd802bc722ee54faf9e83013c939e266612fe72fe7d00",
+      "category": "workshop_source_state_fact",
+      "factKey": "observed_ranked_workshop_state",
+      "sourceCallIndex": 2,
+      "sourceReturnStatus": "official_boundary",
+      "beforeObservation": "lot7a-owner-cost-stck-warmup:epoch:1:revision:3:frame:fd8a9f7309f0e2fd",
+      "afterObservation": "lot7a-owner-cost-stck-warmup:epoch:2:revision:4:frame:fed2f15409370124",
+      "officialBoundary": true
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 445,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "d6b15d0b221f9c007611250a68c74920ab935a2b977e113191f781df2ad8856e",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "a4f558d2830e7723a58eeab2f7c76bec1974f51f527a0ee440f8efb391241fa7",
+      "epoch": 2,
+      "retainedEvents": [
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-stck-warmup:epoch:1:revision:3:frame:fd8a9f7309f0e2fd",
+            "lot7a-owner-cost-stck-warmup:epoch:2:revision:4:frame:fed2f15409370124"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 27,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "824e828254d9b9417883db9ffba25be37973bd5b66c990c6c9d83c9ec6e82ea9",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "8be4a960bda5d4898c81fc4a2051f0a80d35045b9fc8d2e04befdccde8da01ba",
+      "epoch": null,
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 28,
+      "nodeId": "family_activation:public_ranked_workshop",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "1138f540c0a4b3b76ea9971416b4e05f2f8895850933133c2598cc64acdf065d",
+      "category": "workshop_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 117,
+      "nodeId": "program:v6.ranked_workshop.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.ranked_workshop.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "95de099e28a2a85ec60c8168225282c562624f8ad6dce545cb452e4e5f2e4958",
+      "category": "workshop_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 235,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "9adf60f6dba88934acebd43032590942880ea9c728fc340372a3bb4a88f19aaa",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "epoch": 1,
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 343,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "ac0c4de7900a473a6c50f584d6405e6bdf24fc0245c03a53822995c415f703df",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "epoch": 1,
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 394,
+      "nodeId": "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "a22076c9f04e46179bf2f7b22a3e966097d3ddd450555876cbc70a1c1e234e24",
+      "category": "workshop_source_event_fact",
+      "factKey": "ranked_workshop_event:3",
+      "sourceCallIndex": 2,
+      "sourceReturnStatus": "official_boundary",
+      "beforeObservation": "lot7a-owner-cost-stck-measured:epoch:1:revision:3:frame:fd8a9f7309f0e2fd",
+      "afterObservation": "lot7a-owner-cost-stck-measured:epoch:2:revision:4:frame:fed2f15409370124",
+      "officialBoundary": true
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 398,
+      "nodeId": "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "83449353270c840bfcc65e0dcf9cb24e7b03071cfc465a6db2b9ee25c0893f86",
+      "category": "workshop_source_state_fact",
+      "factKey": "observed_ranked_workshop_state",
+      "sourceCallIndex": 2,
+      "sourceReturnStatus": "official_boundary",
+      "beforeObservation": "lot7a-owner-cost-stck-measured:epoch:1:revision:3:frame:fd8a9f7309f0e2fd",
+      "afterObservation": "lot7a-owner-cost-stck-measured:epoch:2:revision:4:frame:fed2f15409370124",
+      "officialBoundary": true
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 445,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "06ca76d9f706c0418203ec0218bb0b0d4628f435be4baa0f554378609223986f",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "ffce761857225bdeaad5525f662b1b07e966a979833ed7725367247e4c0e9ab2",
+      "epoch": 2,
+      "retainedEvents": [
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-stck-measured:epoch:1:revision:3:frame:fd8a9f7309f0e2fd",
+            "lot7a-owner-cost-stck-measured:epoch:2:revision:4:frame:fed2f15409370124"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "requestSequence": 4,
+      "deltaSequence": 505,
+      "nodeId": "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+      "kind": "component_state",
+      "revision": 2,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "0e5b168f1e7ce1f0d86c7eb644d6300c60bcba63511c6da5f976e2bc13c9f537",
+      "category": "workshop_source_state_fact",
+      "factKey": "observed_ranked_workshop_state",
+      "sourceCallIndex": 3,
+      "sourceReturnStatus": null,
+      "beforeObservation": "lot7a-owner-cost-stck-measured:epoch:2:revision:4:frame:fed2f15409370124",
+      "afterObservation": "lot7a-owner-cost-stck-measured:epoch:2:revision:5:frame:8c0018c2dba659bf",
+      "officialBoundary": false
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "requestSequence": 4,
+      "deltaSequence": 560,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 5,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:4"
+      ],
+      "nodeSha256": "baef404a32ca9e8e0b04a82956173d86672f32e5951363da5fa21a8f493fe13c",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "ffce761857225bdeaad5525f662b1b07e966a979833ed7725367247e4c0e9ab2",
+      "epoch": 2,
+      "retainedEvents": [
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-stck-measured:epoch:1:revision:3:frame:fd8a9f7309f0e2fd",
+            "lot7a-owner-cost-stck-measured:epoch:2:revision:4:frame:fed2f15409370124"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "requestSequence": 9,
+      "deltaSequence": 641,
+      "nodeId": "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+      "kind": "component_state",
+      "revision": 3,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "7caeb207d02e2f743271a6e9833752e7af01ba6691dafdeebb3cf41528fa765f",
+      "category": "workshop_source_state_fact",
+      "factKey": "observed_ranked_workshop_state",
+      "sourceCallIndex": 8,
+      "sourceReturnStatus": null,
+      "beforeObservation": "lot7a-owner-cost-stck-measured:epoch:2:revision:9:frame:5c38822d7bdf8dc0",
+      "afterObservation": "lot7a-owner-cost-stck-measured:epoch:2:revision:10:frame:aac5e17b9b1c4e5b",
+      "officialBoundary": false
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "requestSequence": 9,
+      "deltaSequence": 725,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 6,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:5"
+      ],
+      "nodeSha256": "280e41b18e86a8ee0d4ea49deeb54a5cc96d8fb5d121dbc74e731353c4d1fe71",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "ffce761857225bdeaad5525f662b1b07e966a979833ed7725367247e4c0e9ab2",
+      "epoch": 2,
+      "retainedEvents": [
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-stck-measured:epoch:1:revision:3:frame:fd8a9f7309f0e2fd",
+            "lot7a-owner-cost-stck-measured:epoch:2:revision:4:frame:fed2f15409370124"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "requestSequence": 10,
+      "deltaSequence": 774,
+      "nodeId": "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+      "kind": "component_state",
+      "revision": 4,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "6672e4b5bdfca7637a4db3f414f8b75c42be3df9f8ffe68c921800f5505aaba2",
+      "category": "workshop_source_state_fact",
+      "factKey": "observed_ranked_workshop_state",
+      "sourceCallIndex": 9,
+      "sourceReturnStatus": "official_boundary",
+      "beforeObservation": "lot7a-owner-cost-stck-measured:epoch:2:revision:10:frame:aac5e17b9b1c4e5b",
+      "afterObservation": "lot7a-owner-cost-stck-measured:epoch:3:revision:11:frame:e880aa3b42a8e8c1",
+      "officialBoundary": true
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "requestSequence": 10,
+      "deltaSequence": 779,
+      "nodeId": "reasoning:fact:f51cf30bc7e9830e4c52059b2feafa0b6b227c58ab0833a5cddb3c682549b450",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "19ac916e762073b4b1763765eb747a69e21962d8a0fcb919275c143cfb7da5aa",
+      "category": "workshop_source_event_fact",
+      "factKey": "ranked_workshop_event:10",
+      "sourceCallIndex": 9,
+      "sourceReturnStatus": "official_boundary",
+      "beforeObservation": "lot7a-owner-cost-stck-measured:epoch:2:revision:10:frame:aac5e17b9b1c4e5b",
+      "afterObservation": "lot7a-owner-cost-stck-measured:epoch:3:revision:11:frame:e880aa3b42a8e8c1",
+      "officialBoundary": true
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "requestSequence": 10,
+      "deltaSequence": 831,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 7,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:10"
+      ],
+      "nodeSha256": "13a74d1350b615ad7ee7135d42de7ca5f24711e3c6b239b83916434d722a3b83",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "38b99e2e6ff6f990babbe9137dfbfeb7cf521685558839b8e2e2686dc2e84be6",
+      "epoch": 3,
+      "retainedEvents": [
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-stck-measured:epoch:1:revision:3:frame:fd8a9f7309f0e2fd",
+            "lot7a-owner-cost-stck-measured:epoch:2:revision:4:frame:fed2f15409370124"
+          ]
+        },
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-stck-measured:epoch:2:revision:10:frame:aac5e17b9b1c4e5b",
+            "lot7a-owner-cost-stck-measured:epoch:3:revision:11:frame:e880aa3b42a8e8c1"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 27,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "a485eaaaa69ff25eda66e283a96c623cc0c64fc5803ebf81f8b62e27cce36162",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "8be4a960bda5d4898c81fc4a2051f0a80d35045b9fc8d2e04befdccde8da01ba",
+      "epoch": null,
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 28,
+      "nodeId": "family_activation:public_ranked_workshop",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "96fb5252ae9be3964d313e2dd096e1fb1dedef02e874b27904d320cac998d872",
+      "category": "workshop_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 117,
+      "nodeId": "program:v6.ranked_workshop.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.ranked_workshop.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "8ae2521175ea95c5c65fbf7e9a69efc00bf9588a14cc2c9e6f41c386580d582c",
+      "category": "workshop_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 178,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "caller.prepare",
+        "step": "selection",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "fa1750b8a9c2864757ff8ff36c5919ba5ae1d262a2996a4deb2aa2b63dc7246b",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "epoch": 1,
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 247,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "2ff81a0ecbb03bc9c5e14acfd7c2b3bc25bbd8d24d5bda9fdc1d3c1d55410fa2",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "epoch": 1,
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 349,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "790884f503b9cfe75de0eccfc16bd17cb5c4e7b0bd5148b0b4677b0e71df0438",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "epoch": 1,
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 399,
+      "nodeId": "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "2013c58b7f8f1a6dd55817d97155e30c8c5712b09351d99174344201b1af8b5f",
+      "category": "workshop_source_event_fact",
+      "factKey": "ranked_workshop_event:3",
+      "sourceCallIndex": 2,
+      "sourceReturnStatus": "official_boundary",
+      "beforeObservation": "lot7a-owner-cost-smlp-warmup:epoch:1:revision:3:frame:bce8c883896b59f4",
+      "afterObservation": "lot7a-owner-cost-smlp-warmup:epoch:2:revision:4:frame:e5988dd7f87420f6",
+      "officialBoundary": true
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 403,
+      "nodeId": "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "5f664bbb231acbf893d386b2979114e76bbebb917a3c90bf17f70ce07fd84ffd",
+      "category": "workshop_source_state_fact",
+      "factKey": "observed_ranked_workshop_state",
+      "sourceCallIndex": 2,
+      "sourceReturnStatus": "official_boundary",
+      "beforeObservation": "lot7a-owner-cost-smlp-warmup:epoch:1:revision:3:frame:bce8c883896b59f4",
+      "afterObservation": "lot7a-owner-cost-smlp-warmup:epoch:2:revision:4:frame:e5988dd7f87420f6",
+      "officialBoundary": true
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 451,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 5,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "44212861863b67cee0702bb9860d356e8e24c21b6d249e8b7c2c250b6a2819ef",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "04cae542c4589f1bc2746234626f62a590b875ece85d42e26a1eed085034008d",
+      "epoch": 2,
+      "retainedEvents": [
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-smlp-warmup:epoch:1:revision:3:frame:bce8c883896b59f4",
+            "lot7a-owner-cost-smlp-warmup:epoch:2:revision:4:frame:e5988dd7f87420f6"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 27,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "b586469d53ba52c7ec2bd483c7eee19497360220ec7fd9682ee6aa9b7c1efc39",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "8be4a960bda5d4898c81fc4a2051f0a80d35045b9fc8d2e04befdccde8da01ba",
+      "epoch": null,
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 28,
+      "nodeId": "family_activation:public_ranked_workshop",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "0a200574a5f32ec8f4ec469d4ca1c6f15f7dda5717bf7edb205dc8e23f47a746",
+      "category": "workshop_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 117,
+      "nodeId": "program:v6.ranked_workshop.choose",
+      "kind": "program",
+      "revision": 1,
+      "cause": {
+        "statement": "program.install",
+        "step": "native_store",
+        "workflow": "v6.ranked_workshop.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "8d3ac3d5a1460d1385a603877a5be83ea57a9f7a31631cd151135ecbabaa2e7f",
+      "category": "workshop_installation"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 178,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "caller.prepare",
+        "step": "selection",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "b7fc2e553a41305ce8bc30bedb72a663878041fbe352d6038012b0e52cac907d",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "epoch": 1,
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 247,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "e67a3bb53ccdbd7d95696799d0babfdf63f714d74ab51b76f5e387f21c173fc9",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "epoch": 1,
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 349,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "d6d1d4938f9ee7d99aec825a568d228960f728645267e881884ade2dc51820a2",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "epoch": 1,
+      "retainedEvents": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 399,
+      "nodeId": "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "209c14e50269387384749207fe4cc0688ae57a609fd68eeed367f1018716d441",
+      "category": "workshop_source_event_fact",
+      "factKey": "ranked_workshop_event:3",
+      "sourceCallIndex": 2,
+      "sourceReturnStatus": "official_boundary",
+      "beforeObservation": "lot7a-owner-cost-smlp-measured:epoch:1:revision:3:frame:bce8c883896b59f4",
+      "afterObservation": "lot7a-owner-cost-smlp-measured:epoch:2:revision:4:frame:e5988dd7f87420f6",
+      "officialBoundary": true
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 403,
+      "nodeId": "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "8f7dee54ebb45e584769bfaf5217875ed3f753c2e43bd97b0fabb709afff1ad7",
+      "category": "workshop_source_state_fact",
+      "factKey": "observed_ranked_workshop_state",
+      "sourceCallIndex": 2,
+      "sourceReturnStatus": "official_boundary",
+      "beforeObservation": "lot7a-owner-cost-smlp-measured:epoch:1:revision:3:frame:bce8c883896b59f4",
+      "afterObservation": "lot7a-owner-cost-smlp-measured:epoch:2:revision:4:frame:e5988dd7f87420f6",
+      "officialBoundary": true
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 451,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 5,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "fa3554398c3d7bd7b4ab0e6975ae590497259b00ebf1e51d1f609031e71f7171",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "a7bebe33b9152919ad534e40425926facb4732e06c238ad6949d8cf56539c3af",
+      "epoch": 2,
+      "retainedEvents": [
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-smlp-measured:epoch:1:revision:3:frame:bce8c883896b59f4",
+            "lot7a-owner-cost-smlp-measured:epoch:2:revision:4:frame:e5988dd7f87420f6"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "requestSequence": 4,
+      "deltaSequence": 520,
+      "nodeId": "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+      "kind": "component_state",
+      "revision": 2,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "bae50d8f9ad975dccf43a205c198c2a2666b555462bdc454b8c7001b968cc9a3",
+      "category": "workshop_source_state_fact",
+      "factKey": "observed_ranked_workshop_state",
+      "sourceCallIndex": 3,
+      "sourceReturnStatus": null,
+      "beforeObservation": "lot7a-owner-cost-smlp-measured:epoch:2:revision:4:frame:e5988dd7f87420f6",
+      "afterObservation": "lot7a-owner-cost-smlp-measured:epoch:2:revision:5:frame:25d648e87fb8f86a",
+      "officialBoundary": false
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "requestSequence": 4,
+      "deltaSequence": 566,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 6,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:4"
+      ],
+      "nodeSha256": "062b98a7ce3a464871360fb813783c37de1f1f11dce8dd532848100be5b5eab6",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "a7bebe33b9152919ad534e40425926facb4732e06c238ad6949d8cf56539c3af",
+      "epoch": 2,
+      "retainedEvents": [
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-smlp-measured:epoch:1:revision:3:frame:bce8c883896b59f4",
+            "lot7a-owner-cost-smlp-measured:epoch:2:revision:4:frame:e5988dd7f87420f6"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "requestSequence": 7,
+      "deltaSequence": 628,
+      "nodeId": "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+      "kind": "component_state",
+      "revision": 3,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "3c55ea3e8ebb99bb4fa04d9ccfb6ae542078eda25b3ca1494d538306435629ff",
+      "category": "workshop_source_state_fact",
+      "factKey": "observed_ranked_workshop_state",
+      "sourceCallIndex": 6,
+      "sourceReturnStatus": "official_boundary",
+      "beforeObservation": "lot7a-owner-cost-smlp-measured:epoch:2:revision:7:frame:1fc6ca9809b62023",
+      "afterObservation": "lot7a-owner-cost-smlp-measured:epoch:3:revision:8:frame:fface9e1e28549fd",
+      "officialBoundary": true
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "requestSequence": 7,
+      "deltaSequence": 644,
+      "nodeId": "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "bfe531a600c6db9b43865a9637f69fb51834fa67b6d0d5405c87079f3248d6a1",
+      "category": "workshop_source_event_fact",
+      "factKey": "ranked_workshop_event:7",
+      "sourceCallIndex": 6,
+      "sourceReturnStatus": "official_boundary",
+      "beforeObservation": "lot7a-owner-cost-smlp-measured:epoch:2:revision:7:frame:1fc6ca9809b62023",
+      "afterObservation": "lot7a-owner-cost-smlp-measured:epoch:3:revision:8:frame:fface9e1e28549fd",
+      "officialBoundary": true
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "requestSequence": 7,
+      "deltaSequence": 696,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 7,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:5"
+      ],
+      "nodeSha256": "d19478fafb410641265bc0fa9a323fb206f0fdef2665e66ad20f49d3e56d3f18",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "4cb8abb72446a1bc99096851fa22fcab4ec67c21a322acf6a3b568dc509365eb",
+      "epoch": 3,
+      "retainedEvents": [
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-smlp-measured:epoch:1:revision:3:frame:bce8c883896b59f4",
+            "lot7a-owner-cost-smlp-measured:epoch:2:revision:4:frame:e5988dd7f87420f6"
+          ]
+        },
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-smlp-measured:epoch:2:revision:7:frame:1fc6ca9809b62023",
+            "lot7a-owner-cost-smlp-measured:epoch:3:revision:8:frame:fface9e1e28549fd"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "requestSequence": 8,
+      "deltaSequence": 760,
+      "nodeId": "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+      "kind": "component_state",
+      "revision": 4,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "c577ec76a09e99094436589dcbceedc755bf0ee579c136c36b987d390ecc7788",
+      "category": "workshop_source_state_fact",
+      "factKey": "observed_ranked_workshop_state",
+      "sourceCallIndex": 7,
+      "sourceReturnStatus": null,
+      "beforeObservation": "lot7a-owner-cost-smlp-measured:epoch:3:revision:8:frame:fface9e1e28549fd",
+      "afterObservation": "lot7a-owner-cost-smlp-measured:epoch:3:revision:9:frame:fface9e1e28549fd",
+      "officialBoundary": false
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "requestSequence": 8,
+      "deltaSequence": 808,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 8,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:8"
+      ],
+      "nodeSha256": "6b9fc847410f79d773e9b27a8dfbde366073351566cdac1d9e68a2fdfcd2b418",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "4cb8abb72446a1bc99096851fa22fcab4ec67c21a322acf6a3b568dc509365eb",
+      "epoch": 3,
+      "retainedEvents": [
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-smlp-measured:epoch:1:revision:3:frame:bce8c883896b59f4",
+            "lot7a-owner-cost-smlp-measured:epoch:2:revision:4:frame:e5988dd7f87420f6"
+          ]
+        },
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-smlp-measured:epoch:2:revision:7:frame:1fc6ca9809b62023",
+            "lot7a-owner-cost-smlp-measured:epoch:3:revision:8:frame:fface9e1e28549fd"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "requestSequence": 9,
+      "deltaSequence": 868,
+      "nodeId": "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+      "kind": "component_state",
+      "revision": 5,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "389526b22bca0891db21a3145ff585bd3353762d1e9c84cd8e0ea2942514d359",
+      "category": "workshop_source_state_fact",
+      "factKey": "observed_ranked_workshop_state",
+      "sourceCallIndex": 8,
+      "sourceReturnStatus": null,
+      "beforeObservation": "lot7a-owner-cost-smlp-measured:epoch:3:revision:9:frame:fface9e1e28549fd",
+      "afterObservation": "lot7a-owner-cost-smlp-measured:epoch:3:revision:10:frame:b45bcd1c39abbb3d",
+      "officialBoundary": false
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "requestSequence": 9,
+      "deltaSequence": 916,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 9,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:9"
+      ],
+      "nodeSha256": "ee47cb5e5b367cfb0eeb995f4507b6a85cc1c49657e9911cd960c8e7505116a2",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "4cb8abb72446a1bc99096851fa22fcab4ec67c21a322acf6a3b568dc509365eb",
+      "epoch": 3,
+      "retainedEvents": [
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-smlp-measured:epoch:1:revision:3:frame:bce8c883896b59f4",
+            "lot7a-owner-cost-smlp-measured:epoch:2:revision:4:frame:e5988dd7f87420f6"
+          ]
+        },
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-smlp-measured:epoch:2:revision:7:frame:1fc6ca9809b62023",
+            "lot7a-owner-cost-smlp-measured:epoch:3:revision:8:frame:fface9e1e28549fd"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "advance",
+      "requestSequence": 11,
+      "deltaSequence": 977,
+      "nodeId": "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+      "kind": "component_state",
+      "revision": 6,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "99ea985519d477cae9c01deeaa9362af350652ba40217dae28b30de84157e660",
+      "category": "workshop_source_state_fact",
+      "factKey": "observed_ranked_workshop_state",
+      "sourceCallIndex": 10,
+      "sourceReturnStatus": null,
+      "beforeObservation": "lot7a-owner-cost-smlp-measured:epoch:3:revision:11:frame:f083fc5522910a7f",
+      "afterObservation": "lot7a-owner-cost-smlp-measured:epoch:3:revision:12:frame:28db2c137ebdfa55",
+      "officialBoundary": false
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "advance",
+      "requestSequence": 11,
+      "deltaSequence": 1035,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 10,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:10"
+      ],
+      "nodeSha256": "653fc9e666bf68fb630375201a73e94034c8e6fb75b08d99f8d18fc223eb0fac",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "4cb8abb72446a1bc99096851fa22fcab4ec67c21a322acf6a3b568dc509365eb",
+      "epoch": 3,
+      "retainedEvents": [
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-smlp-measured:epoch:1:revision:3:frame:bce8c883896b59f4",
+            "lot7a-owner-cost-smlp-measured:epoch:2:revision:4:frame:e5988dd7f87420f6"
+          ]
+        },
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-smlp-measured:epoch:2:revision:7:frame:1fc6ca9809b62023",
+            "lot7a-owner-cost-smlp-measured:epoch:3:revision:8:frame:fface9e1e28549fd"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "request": "advance",
+      "requestSequence": 15,
+      "deltaSequence": 1104,
+      "nodeId": "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+      "kind": "component_state",
+      "revision": 7,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "c8c1ae2aaf19edddc0d34fbe87dac2686261fff26fad70162e7f88f640d03ac9",
+      "category": "workshop_source_state_fact",
+      "factKey": "observed_ranked_workshop_state",
+      "sourceCallIndex": 14,
+      "sourceReturnStatus": "official_boundary",
+      "beforeObservation": "lot7a-owner-cost-smlp-measured:epoch:3:revision:15:frame:f8b1fede3bd25976",
+      "afterObservation": "lot7a-owner-cost-smlp-measured:epoch:4:revision:16:frame:6d43ed5dd243fea3",
+      "officialBoundary": true
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "request": "advance",
+      "requestSequence": 15,
+      "deltaSequence": 1126,
+      "nodeId": "reasoning:fact:66ecb4bcf5257f3fd4c0000351e8d7d5f35324a40c2d4dc8367f43a5ec0e59d9",
+      "kind": "component_state",
+      "revision": 1,
+      "cause": {
+        "statement": "transition.acquire",
+        "step": "native_memory",
+        "workflow": "prototype.laya_router.route"
+      },
+      "evidence": [],
+      "nodeSha256": "7f650e4c480866f3fec9b9ca7aee1a79158feddd5bd7388b53cac9f1620e868e",
+      "category": "workshop_source_event_fact",
+      "factKey": "ranked_workshop_event:15",
+      "sourceCallIndex": 14,
+      "sourceReturnStatus": "official_boundary",
+      "beforeObservation": "lot7a-owner-cost-smlp-measured:epoch:3:revision:15:frame:f8b1fede3bd25976",
+      "afterObservation": "lot7a-owner-cost-smlp-measured:epoch:4:revision:16:frame:6d43ed5dd243fea3",
+      "officialBoundary": true
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "request": "advance",
+      "requestSequence": 15,
+      "deltaSequence": 1179,
+      "nodeId": "family_state:public_ranked_workshop",
+      "kind": "family_state",
+      "revision": 11,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:12"
+      ],
+      "nodeSha256": "b8eac29176caeafe8ab9b00dcb084d21d7cac4b9b72b60a93bf6cd3ebac37257",
+      "category": "workshop_owner_state",
+      "sourceStateSha256": "432a2367ff3b34a84964d5c5af24c49192df7d556666c1cd1649d81dcccabe37",
+      "epoch": 4,
+      "retainedEvents": [
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-smlp-measured:epoch:1:revision:3:frame:bce8c883896b59f4",
+            "lot7a-owner-cost-smlp-measured:epoch:2:revision:4:frame:e5988dd7f87420f6"
+          ]
+        },
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-smlp-measured:epoch:2:revision:7:frame:1fc6ca9809b62023",
+            "lot7a-owner-cost-smlp-measured:epoch:3:revision:8:frame:fface9e1e28549fd"
+          ]
+        },
+        {
+          "status": "official_boundary",
+          "evidence": [
+            "lot7a-owner-cost-smlp-measured:epoch:3:revision:15:frame:f8b1fede3bd25976",
+            "lot7a-owner-cost-smlp-measured:epoch:4:revision:16:frame:6d43ed5dd243fea3"
+          ]
+        }
+      ]
+    }
+  ],
+  "points": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 155,
+      "candidateNodeCount": 158,
+      "baselineGraphRevision": 164,
+      "candidateGraphRevision": 167,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 183,
+      "candidateNodeCount": 186,
+      "baselineGraphRevision": 266,
+      "candidateGraphRevision": 270,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 185,
+      "candidateNodeCount": 188,
+      "baselineGraphRevision": 276,
+      "candidateGraphRevision": 280,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 205,
+      "candidateNodeCount": 208,
+      "baselineGraphRevision": 373,
+      "candidateGraphRevision": 378,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 207,
+      "candidateNodeCount": 210,
+      "baselineGraphRevision": 383,
+      "candidateGraphRevision": 388,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 224,
+      "candidateNodeCount": 229,
+      "baselineGraphRevision": 472,
+      "candidateGraphRevision": 480,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 155,
+      "candidateNodeCount": 158,
+      "baselineGraphRevision": 164,
+      "candidateGraphRevision": 167,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 183,
+      "candidateNodeCount": 186,
+      "baselineGraphRevision": 266,
+      "candidateGraphRevision": 270,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 185,
+      "candidateNodeCount": 188,
+      "baselineGraphRevision": 276,
+      "candidateGraphRevision": 280,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 205,
+      "candidateNodeCount": 208,
+      "baselineGraphRevision": 373,
+      "candidateGraphRevision": 378,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 207,
+      "candidateNodeCount": 210,
+      "baselineGraphRevision": 383,
+      "candidateGraphRevision": 388,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 224,
+      "candidateNodeCount": 229,
+      "baselineGraphRevision": 472,
+      "candidateGraphRevision": 480,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 6,
+      "request": "resume",
+      "sequence": 3,
+      "baselineNodeCount": 226,
+      "candidateNodeCount": 231,
+      "baselineGraphRevision": 484,
+      "candidateGraphRevision": 492,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 8,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "sequence": 4,
+      "baselineNodeCount": 251,
+      "candidateNodeCount": 256,
+      "baselineGraphRevision": 585,
+      "candidateGraphRevision": 595,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 8,
+      "request": "resume",
+      "sequence": 4,
+      "baselineNodeCount": 253,
+      "candidateNodeCount": 258,
+      "baselineGraphRevision": 596,
+      "candidateGraphRevision": 606,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 9,
+      "request": "advance",
+      "sequence": 5,
+      "baselineNodeCount": 253,
+      "candidateNodeCount": 258,
+      "baselineGraphRevision": 596,
+      "candidateGraphRevision": 606,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 10,
+      "request": "advance",
+      "sequence": 6,
+      "baselineNodeCount": 253,
+      "candidateNodeCount": 258,
+      "baselineGraphRevision": 596,
+      "candidateGraphRevision": 606,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "sequence": 7,
+      "baselineNodeCount": 253,
+      "candidateNodeCount": 258,
+      "baselineGraphRevision": 596,
+      "candidateGraphRevision": 606,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 12,
+      "request": "advance",
+      "sequence": 8,
+      "baselineNodeCount": 253,
+      "candidateNodeCount": 258,
+      "baselineGraphRevision": 596,
+      "candidateGraphRevision": 606,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "sequence": 9,
+      "baselineNodeCount": 328,
+      "candidateNodeCount": 333,
+      "baselineGraphRevision": 748,
+      "candidateGraphRevision": 760,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 12,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 14,
+      "request": "resume",
+      "sequence": 9,
+      "baselineNodeCount": 330,
+      "candidateNodeCount": 335,
+      "baselineGraphRevision": 758,
+      "candidateGraphRevision": 770,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 12,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "sequence": 10,
+      "baselineNodeCount": 347,
+      "candidateNodeCount": 353,
+      "baselineGraphRevision": 851,
+      "candidateGraphRevision": 866,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+        "reasoning:fact:f51cf30bc7e9830e4c52059b2feafa0b6b227c58ab0833a5cddb3c682549b450"
+      ],
+      "attributedCumulativeDeltas": 15,
+      "officialBoundarySourceCalls": [
+        9
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 16,
+      "request": "inspect",
+      "sequence": 10,
+      "baselineNodeCount": 347,
+      "candidateNodeCount": 353,
+      "baselineGraphRevision": 851,
+      "candidateGraphRevision": 866,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+        "reasoning:fact:f51cf30bc7e9830e4c52059b2feafa0b6b227c58ab0833a5cddb3c682549b450"
+      ],
+      "attributedCumulativeDeltas": 15,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 17,
+      "request": "inspect",
+      "sequence": 10,
+      "baselineNodeCount": 347,
+      "candidateNodeCount": 353,
+      "baselineGraphRevision": 851,
+      "candidateGraphRevision": 866,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+        "reasoning:fact:f51cf30bc7e9830e4c52059b2feafa0b6b227c58ab0833a5cddb3c682549b450"
+      ],
+      "attributedCumulativeDeltas": 15,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "inspect",
+      "sequence": 10,
+      "baselineNodeCount": 347,
+      "candidateNodeCount": 353,
+      "baselineGraphRevision": 851,
+      "candidateGraphRevision": 866,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204",
+        "reasoning:fact:f51cf30bc7e9830e4c52059b2feafa0b6b227c58ab0833a5cddb3c682549b450"
+      ],
+      "attributedCumulativeDeltas": 15,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 160,
+      "candidateNodeCount": 163,
+      "baselineGraphRevision": 188,
+      "candidateGraphRevision": 192,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 178,
+      "candidateNodeCount": 181,
+      "baselineGraphRevision": 277,
+      "candidateGraphRevision": 282,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 180,
+      "candidateNodeCount": 183,
+      "baselineGraphRevision": 287,
+      "candidateGraphRevision": 292,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 195,
+      "candidateNodeCount": 198,
+      "baselineGraphRevision": 378,
+      "candidateGraphRevision": 384,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 197,
+      "candidateNodeCount": 200,
+      "baselineGraphRevision": 388,
+      "candidateGraphRevision": 394,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 214,
+      "candidateNodeCount": 219,
+      "baselineGraphRevision": 477,
+      "candidateGraphRevision": 486,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": [
+        2
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 160,
+      "candidateNodeCount": 163,
+      "baselineGraphRevision": 188,
+      "candidateGraphRevision": 192,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 4,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 178,
+      "candidateNodeCount": 181,
+      "baselineGraphRevision": 277,
+      "candidateGraphRevision": 282,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 180,
+      "candidateNodeCount": 183,
+      "baselineGraphRevision": 287,
+      "candidateGraphRevision": 292,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 5,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 195,
+      "candidateNodeCount": 198,
+      "baselineGraphRevision": 378,
+      "candidateGraphRevision": 384,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 197,
+      "candidateNodeCount": 200,
+      "baselineGraphRevision": 388,
+      "candidateGraphRevision": 394,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 214,
+      "candidateNodeCount": 219,
+      "baselineGraphRevision": 477,
+      "candidateGraphRevision": 486,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": [
+        2
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 6,
+      "request": "resume",
+      "sequence": 3,
+      "baselineNodeCount": 216,
+      "candidateNodeCount": 221,
+      "baselineGraphRevision": 496,
+      "candidateGraphRevision": 505,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 9,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 7,
+      "request": "advance",
+      "sequence": 4,
+      "baselineNodeCount": 236,
+      "candidateNodeCount": 241,
+      "baselineGraphRevision": 590,
+      "candidateGraphRevision": 601,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 8,
+      "request": "resume",
+      "sequence": 4,
+      "baselineNodeCount": 238,
+      "candidateNodeCount": 243,
+      "baselineGraphRevision": 600,
+      "candidateGraphRevision": 611,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 9,
+      "request": "advance",
+      "sequence": 5,
+      "baselineNodeCount": 238,
+      "candidateNodeCount": 243,
+      "baselineGraphRevision": 600,
+      "candidateGraphRevision": 611,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 10,
+      "request": "advance",
+      "sequence": 6,
+      "baselineNodeCount": 238,
+      "candidateNodeCount": 243,
+      "baselineGraphRevision": 600,
+      "candidateGraphRevision": 611,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 11,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 11,
+      "request": "advance",
+      "sequence": 7,
+      "baselineNodeCount": 279,
+      "candidateNodeCount": 285,
+      "baselineGraphRevision": 717,
+      "candidateGraphRevision": 731,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 14,
+      "officialBoundarySourceCalls": [
+        6
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 12,
+      "request": "resume",
+      "sequence": 7,
+      "baselineNodeCount": 281,
+      "candidateNodeCount": 287,
+      "baselineGraphRevision": 728,
+      "candidateGraphRevision": 742,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 14,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 13,
+      "request": "advance",
+      "sequence": 8,
+      "baselineNodeCount": 305,
+      "candidateNodeCount": 311,
+      "baselineGraphRevision": 827,
+      "candidateGraphRevision": 843,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 16,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 14,
+      "request": "resume",
+      "sequence": 8,
+      "baselineNodeCount": 307,
+      "candidateNodeCount": 313,
+      "baselineGraphRevision": 843,
+      "candidateGraphRevision": 859,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 16,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 15,
+      "request": "advance",
+      "sequence": 9,
+      "baselineNodeCount": 324,
+      "candidateNodeCount": 330,
+      "baselineGraphRevision": 933,
+      "candidateGraphRevision": 951,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 18,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 16,
+      "request": "resume",
+      "sequence": 9,
+      "baselineNodeCount": 326,
+      "candidateNodeCount": 332,
+      "baselineGraphRevision": 943,
+      "candidateGraphRevision": 961,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 18,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 17,
+      "request": "advance",
+      "sequence": 10,
+      "baselineNodeCount": 326,
+      "candidateNodeCount": 332,
+      "baselineGraphRevision": 943,
+      "candidateGraphRevision": 961,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 18,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 18,
+      "request": "advance",
+      "sequence": 11,
+      "baselineNodeCount": 358,
+      "candidateNodeCount": 364,
+      "baselineGraphRevision": 1050,
+      "candidateGraphRevision": 1070,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 20,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 19,
+      "request": "resume",
+      "sequence": 11,
+      "baselineNodeCount": 360,
+      "candidateNodeCount": 366,
+      "baselineGraphRevision": 1060,
+      "candidateGraphRevision": 1080,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 20,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 20,
+      "request": "advance",
+      "sequence": 12,
+      "baselineNodeCount": 360,
+      "candidateNodeCount": 366,
+      "baselineGraphRevision": 1060,
+      "candidateGraphRevision": 1080,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 20,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 21,
+      "request": "advance",
+      "sequence": 13,
+      "baselineNodeCount": 360,
+      "candidateNodeCount": 366,
+      "baselineGraphRevision": 1060,
+      "candidateGraphRevision": 1080,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 20,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 22,
+      "request": "advance",
+      "sequence": 14,
+      "baselineNodeCount": 360,
+      "candidateNodeCount": 366,
+      "baselineGraphRevision": 1060,
+      "candidateGraphRevision": 1080,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 20,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 23,
+      "request": "advance",
+      "sequence": 15,
+      "baselineNodeCount": 415,
+      "candidateNodeCount": 422,
+      "baselineGraphRevision": 1191,
+      "candidateGraphRevision": 1214,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:66ecb4bcf5257f3fd4c0000351e8d7d5f35324a40c2d4dc8367f43a5ec0e59d9",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 23,
+      "officialBoundarySourceCalls": [
+        14
+      ]
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 24,
+      "request": "inspect",
+      "sequence": 15,
+      "baselineNodeCount": 415,
+      "candidateNodeCount": 422,
+      "baselineGraphRevision": 1191,
+      "candidateGraphRevision": 1214,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:66ecb4bcf5257f3fd4c0000351e8d7d5f35324a40c2d4dc8367f43a5ec0e59d9",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 23,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 25,
+      "request": "inspect",
+      "sequence": 15,
+      "baselineNodeCount": 415,
+      "candidateNodeCount": 422,
+      "baselineGraphRevision": 1191,
+      "candidateGraphRevision": 1214,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:66ecb4bcf5257f3fd4c0000351e8d7d5f35324a40c2d4dc8367f43a5ec0e59d9",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 23,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "pointIndex": 26,
+      "request": "inspect",
+      "sequence": 15,
+      "baselineNodeCount": 415,
+      "candidateNodeCount": 422,
+      "baselineGraphRevision": 1191,
+      "candidateGraphRevision": 1214,
+      "addedNodeIds": [
+        "family_activation:public_ranked_workshop",
+        "family_state:public_ranked_workshop",
+        "program:v6.ranked_workshop.choose",
+        "reasoning:fact:4514d38f197b9bdfa155c334639ceaa72b643e7b9f28efe483b8534c83ee0080",
+        "reasoning:fact:66ecb4bcf5257f3fd4c0000351e8d7d5f35324a40c2d4dc8367f43a5ec0e59d9",
+        "reasoning:fact:8aa8255938f50bfef210db5357089dcacc8a2c7d1ece53247c10431fd8ed8534",
+        "reasoning:fact:a67ed010d13724d3855d32846cc7d3af1b9d35371a09085b501d070df8f02204"
+      ],
+      "attributedCumulativeDeltas": 23,
+      "officialBoundarySourceCalls": []
+    }
+  ],
+  "failures": [],
+  "commandBoundaryProjections": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "sourceCallIndex": 2,
+      "action": 3,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "sourceCallIndex": 2,
+      "action": 3,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "sourceCallIndex": 8,
+      "action": 9,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "sourceCallIndex": 9,
+      "action": 10,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "sourceCallIndex": 0,
+      "action": 1,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "sourceCallIndex": 2,
+      "action": 3,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 0,
+      "action": 1,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 2,
+      "action": 3,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 3,
+      "action": 4,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 6,
+      "action": 7,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 8,
+      "action": 9,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 10,
+      "action": 11,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "sourceCallIndex": 14,
+      "action": 15,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    }
+  ],
+  "generator": {
+    "path": "docs/migration/lot7a-evidence/qualify-cost-owner-graphs.mjs",
+    "bytes": 38940,
+    "sha256": "3bb06dfe8ad7d0ab7874dd0bfda219c7639cbc6dd27cf7b517732b40df2902f1"
+  },
+  "nativeDigests": {
+    "baseline": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+    "candidate": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb"
+  },
+  "recordedAt": "2026-11-10T20:19:58.792Z",
+  "inputs": [
+    {
+      "path": "docs/migration/lot7a-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 38940,
+      "sha256": "3bb06dfe8ad7d0ab7874dd0bfda219c7639cbc6dd27cf7b517732b40df2902f1"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 20111,
+      "sha256": "3afca2b4756a01c1ba1736ab775781e48a17977f8bdcf6654873fd904f452c33"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+      "bytes": 102291,
+      "sha256": "0108e519be6f852a12022c96ad17795d046ae73aa33441456ae47708eb19e24d"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-baseline/source-manifest.json",
+      "bytes": 32379,
+      "sha256": "391b3e33c4bbd66ed9a1885d4803fb754b596a6e31ba42b79114fc2c43d6e6cd"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-graphs-baseline.json.gz",
+      "bytes": 4739930,
+      "sha256": "0fc9843376ae50bcdcd92f126696eb0558b39cd203425810723e941f5a4c4f2a"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-graphs-candidate.receipt.json",
+      "bytes": 103274,
+      "sha256": "3443b55f40a40b185ebcd34a6a27937faf30b93af2f9eac5e10069980e8fbd64"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/source-manifest.json",
+      "bytes": 33095,
+      "sha256": "75e1dbe4002f737c2d5248a08531c6b60002c3114692b55df3a5c7255c79d6cc"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-graphs-candidate.json.gz",
+      "bytes": 4759404,
+      "sha256": "dd178574a72ecaf35a5113486ffd9e03dc8d90d2c846a0e81b07fad07cb43285"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 138902,
+      "sha256": "5c2c4a0d9fce3f6fae72973073a0348664d63b0608aae066467afb33b943c820"
+    },
+    {
+      "path": "src/logos-engine/v6-ranked-workshop.ts",
+      "bytes": 22626,
+      "sha256": "002ea017828e0dc1304c3f0a8eeb6ff4acb66c70ff1d8ff269a917d132a18cf2"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14854,
+      "sha256": "5efe83d07b6d5354b9a26b39320449ecaa631ca55563c683779f067a8d670bf0"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 19490,
+      "sha256": "9c7fb668e85bf101f88de439ff43b42bba9566917a2c2b8fb8f13e2ee00e247b"
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "bytes": 11291,
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1"
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "bytes": 21947,
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d"
+    },
+    {
+      "path": "src/logos-engine/v6-hash.ts",
+      "bytes": 2842,
+      "sha256": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5"
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "bytes": 5903,
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "bytes": 1502394,
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834"
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "bytes": 18195,
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96"
+    }
+  ],
+  "checkedCount": 64,
+  "formsSha256": "a497262722c41e2c868d488bf30c1716af4cd00a79ed690664a080755066a312",
+  "qualification": "Every captured graph reconstructs from its exact complete Kernel delta chain. Added candidate nodes/deltas receive explicit installation, Workshop state, observed source event/state-fact or reachable-fragment attribution. Common node identities/metadata and common delta identity/cause/order remain exact apart from their declared runtime source digest; private value equality across versions is not asserted. Structural counts come from the captures, without an added-node or cycle formula. The forms are fixed before any cost window and every future raw trial must match its own form exactly. No cost values, timing correction, future-run success or full graph/caller semantic parity is inferred."
+}

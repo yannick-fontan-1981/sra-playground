@@ -1,0 +1,46 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "lkey-campaign.json.gz",
+    "sha256": "11aa4589a7d294cc5c7aed2e0e3946541cf48a208b891b0c7229a190e290aff4",
+    "bytes": 5445629
+  },
+  "parts": [
+    {
+      "file": "lkey-campaign.json.gz.part000",
+      "sha256": "695447bccd4b6515ec264bf302df4544b52a821384d229f83f1879d4baaac493",
+      "bytes": 900000
+    },
+    {
+      "file": "lkey-campaign.json.gz.part001",
+      "sha256": "e88038c13f1495b169741494b928bc1e5fae9aa6ef2766df538a0bcbd53ae0b2",
+      "bytes": 900000
+    },
+    {
+      "file": "lkey-campaign.json.gz.part002",
+      "sha256": "f62711c23e96f75aae6aed069e8b0ade9577223e7233247a614012805cba414f",
+      "bytes": 900000
+    },
+    {
+      "file": "lkey-campaign.json.gz.part003",
+      "sha256": "6ad7ffceef08723072e9add855111b305fcac7edf74a3719ba2ffd25de916f95",
+      "bytes": 900000
+    },
+    {
+      "file": "lkey-campaign.json.gz.part004",
+      "sha256": "a5cbd029abe74f290512556c492505929b74a2376c7ba72e1456710c37088b26",
+      "bytes": 900000
+    },
+    {
+      "file": "lkey-campaign.json.gz.part005",
+      "sha256": "0eb42630cf102d845621b25e68adca81b76420bab38110880cf61155c27e917c",
+      "bytes": 900000
+    },
+    {
+      "file": "lkey-campaign.json.gz.part006",
+      "sha256": "1cc7b7c46d43a4287aef0b49efb206ece3298e393d119eff2dbe548c914d3d03",
+      "bytes": 45629
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

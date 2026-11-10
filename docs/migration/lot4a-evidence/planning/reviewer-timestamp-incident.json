@@ -1,0 +1,59 @@
+{
+  "schema": "logos-engine.owner-qualified-cost-review-incident.v1",
+  "status": "failed_before_final_receipt_creation",
+  "recordedAt": "2026-11-10T20:00:17.553105+00:00",
+  "command": [
+    "python",
+    "-B",
+    "docs/migration/lot4a-evidence/review-owner-qualified-cost.py"
+  ],
+  "cwd": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "exitCode": 1,
+  "reportedElapsedSeconds": 0.018,
+  "executionEvidenceSource": "Coordinating parent supplied the exact argv, cwd, exit code, duration and known traceback; this task did not rerun the failed invocation.",
+  "executionTimeQualification": "Parent reported approximately 19:59 UTC on 2026-11-10; no exact execution timestamp is asserted. recordedAt timestamps this preservation.",
+  "originalScript": {
+    "path": "docs/migration/lot4a-evidence/review-owner-qualified-cost.py",
+    "bytes": 32598,
+    "sha256": "2175840fa88dba9ba3a437c0e02c3259af640ef894217db7083f299806fb6451"
+  },
+  "preservedExactScript": {
+    "path": "docs/migration/lot4a-evidence/planning/reviewer-before-timestamp-fix.py",
+    "bytes": 32598,
+    "sha256": "2175840fa88dba9ba3a437c0e02c3259af640ef894217db7083f299806fb6451"
+  },
+  "error": {
+    "type": "KeyError",
+    "message": "'recordedAt'",
+    "function": "main",
+    "line": 129,
+    "expression": "qualification['recordedAt']",
+    "knownTracebackExcerpt": "main, line 129: qualification['recordedAt']\nKeyError: 'recordedAt'",
+    "completeOriginalTracebackAvailable": false
+  },
+  "actualQualification": {
+    "receipt": {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-addition-qualification.json",
+      "bytes": 67441,
+      "sha256": "b3c6dd99ff278f84e6b607a29b4c4502764c9d346ac2604c340730349011c311"
+    },
+    "schema": "logos-engine.feedback-cost-owner-addition-qualification.v1",
+    "startedAt": "2026-11-10T19:54:50.688Z",
+    "completedAt": "2026-11-10T19:58:00.124Z",
+    "recordedAtPresent": false
+  },
+  "finalOutputsAtPreservation": [
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-qualified-cost-review.json",
+      "exists": false
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-qualified-global-budget-decision.json",
+      "exists": false
+    }
+  ],
+  "costReviewProduced": false,
+  "globalBudgetDecisionProduced": false,
+  "plannedCorrection": "Check extension.recordedAt <= qualification.startedAt <= qualification.completedAt <= aggregate.recordedAt; retain the requirement that the extension follows the completed measurement window.",
+  "qualification": "Integration error in a post-measurement reviewer receipt timestamp field, not a measurement, graph-capture or official-comparator failure. Historical evidence remains unchanged. No main, measurement, native replay, test or build was executed by this preservation task."
+}

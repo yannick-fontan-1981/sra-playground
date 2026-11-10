@@ -1,0 +1,1087 @@
+{
+  "callCount": 49,
+  "calls": [
+    {
+      "afterSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "beforeSha256": "8be4a960bda5d4898c81fc4a2051f0a80d35045b9fc8d2e04befdccde8da01ba",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 0,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 1,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "beforeSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 1,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 1,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "beforeSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 2,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 2,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "beforeSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 3,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 2,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "beforeSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 4,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 3,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "beforeSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 5,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 3,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "beforeSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 6,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 4,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "beforeSha256": "9cbf657cbd0433f6b502430e7f885e31b4529cadd9be06f42b51a150aade52b7",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 7,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 4,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "beforeSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 8,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 5,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "beforeSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 9,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 5,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "beforeSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 10,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 6,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "beforeSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 11,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 6,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "beforeSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 12,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 7,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "beforeSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 13,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 7,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "beforeSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 14,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 8,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "beforeSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 15,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 8,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "beforeSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 16,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 9,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "beforeSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 17,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 9,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "beforeSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 18,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 10,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    },
+    {
+      "afterSha256": "1fca32763049fb44e810e7f4de564c1f85d190e2b60d67a0cebf2e1af566f1e8",
+      "beforeSha256": "4e5b18d17dfa74672db2a40db01b16ee7d973822c1877b894e2ba5afeadcba93",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 19,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 10,
+      "resultSha256": "8dc7e7c66e8ff1de3359d9e85111e234ae11161a0ae30a0a597100a17e27b720"
+    },
+    {
+      "afterSha256": "1fca32763049fb44e810e7f4de564c1f85d190e2b60d67a0cebf2e1af566f1e8",
+      "beforeSha256": "1fca32763049fb44e810e7f4de564c1f85d190e2b60d67a0cebf2e1af566f1e8",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": {
+        "actions": [
+          {
+            "action_ref": "ACTION1"
+          }
+        ],
+        "extensionKind": null,
+        "kind": "public_ranked_workshop",
+        "methodRef": null,
+        "objectiveKey": null,
+        "rule": "projection.exploration.station_profile_exchange_up",
+        "stage": "adjacent_exchange_probe",
+        "supportRef": null
+      },
+      "differences": {},
+      "epoch": 1,
+      "index": 20,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 11,
+      "resultSha256": "99769e128fdefed0560aa3a412cb9c1bd168e6e64508fab1a59d5805d4f122b7"
+    },
+    {
+      "afterSha256": "70350077fe1c4b953bb8ea2e6336933b54fa9fdff37f992b20ff7b3e1a03eb0b",
+      "beforeSha256": "1fca32763049fb44e810e7f4de564c1f85d190e2b60d67a0cebf2e1af566f1e8",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 21,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 11,
+      "resultSha256": "481729f991d2294151b80ee36d3feb15d1e876024be566ce69cad6327d8d7d41"
+    },
+    {
+      "afterSha256": "70350077fe1c4b953bb8ea2e6336933b54fa9fdff37f992b20ff7b3e1a03eb0b",
+      "beforeSha256": "70350077fe1c4b953bb8ea2e6336933b54fa9fdff37f992b20ff7b3e1a03eb0b",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": {
+        "actions": [
+          {
+            "action_ref": "ACTION4"
+          }
+        ],
+        "extensionKind": null,
+        "kind": "public_ranked_workshop",
+        "methodRef": null,
+        "objectiveKey": null,
+        "rule": "projection.exploration.station_profile_trial_right",
+        "stage": "prepared_receiver_trial",
+        "supportRef": null
+      },
+      "differences": {},
+      "epoch": 1,
+      "index": 22,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 12,
+      "resultSha256": "fb08d19bb80a6d383ca7c4a28c1434e1b48ccad319f44d49e52b25270baeeb65"
+    },
+    {
+      "afterSha256": "dee91136f566df429905a78a47fa42050138bdd8375c9159d2977bbbefe0f990",
+      "beforeSha256": "70350077fe1c4b953bb8ea2e6336933b54fa9fdff37f992b20ff7b3e1a03eb0b",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 23,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 12,
+      "resultSha256": "fda79c790f4cd28d50791f3650706ffc6f9fac30febef27e2d00e6d752596dac"
+    },
+    {
+      "afterSha256": "dee91136f566df429905a78a47fa42050138bdd8375c9159d2977bbbefe0f990",
+      "beforeSha256": "dee91136f566df429905a78a47fa42050138bdd8375c9159d2977bbbefe0f990",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": {
+        "actions": [
+          {
+            "action_ref": "ACTION5"
+          }
+        ],
+        "extensionKind": null,
+        "kind": "public_ranked_workshop",
+        "methodRef": null,
+        "objectiveKey": null,
+        "rule": "projection.exploration.station_profile_release",
+        "stage": "release_after_acceptance",
+        "supportRef": null
+      },
+      "differences": {},
+      "epoch": 1,
+      "index": 24,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 13,
+      "resultSha256": "31e393051e9961399771652cae343bb84b5bd420db6ef35b797204233dee6008"
+    },
+    {
+      "afterSha256": "fc710bacc228e6934647a7cc01b0411e380e71430111b40ddb64a79138062a04",
+      "beforeSha256": "dee91136f566df429905a78a47fa42050138bdd8375c9159d2977bbbefe0f990",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 25,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 13,
+      "resultSha256": "0f516413b93376b9ca90a1b3750d19bc47acd403367e2d0c139e700341df56d9"
+    },
+    {
+      "afterSha256": "fc710bacc228e6934647a7cc01b0411e380e71430111b40ddb64a79138062a04",
+      "beforeSha256": "fc710bacc228e6934647a7cc01b0411e380e71430111b40ddb64a79138062a04",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": {
+        "actions": [
+          {
+            "action_ref": "ACTION2"
+          }
+        ],
+        "extensionKind": null,
+        "kind": "public_ranked_workshop",
+        "methodRef": null,
+        "objectiveKey": null,
+        "rule": "projection.exploration.station_profile_focus_down",
+        "stage": "free_focus_to_next_prepared_receiver",
+        "supportRef": null
+      },
+      "differences": {},
+      "epoch": 1,
+      "index": 26,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 14,
+      "resultSha256": "4ba9a8afa4ef49b2a3a750dfdc1047ac8d70dbe2009df816f5229fe5549aa313"
+    },
+    {
+      "afterSha256": "3fefd4667b42a8a176bee62bb8b38ebfaac8f5646e95a5bedd2598d56c17d0ff",
+      "beforeSha256": "fc710bacc228e6934647a7cc01b0411e380e71430111b40ddb64a79138062a04",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 27,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 14,
+      "resultSha256": "97944fa3ff292456e2a6485e56feca0a7f5340731d3d7ae62f2a23a55a5b0c6d"
+    },
+    {
+      "afterSha256": "3fefd4667b42a8a176bee62bb8b38ebfaac8f5646e95a5bedd2598d56c17d0ff",
+      "beforeSha256": "3fefd4667b42a8a176bee62bb8b38ebfaac8f5646e95a5bedd2598d56c17d0ff",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": {
+        "actions": [
+          {
+            "action_ref": "ACTION5"
+          }
+        ],
+        "extensionKind": null,
+        "kind": "public_ranked_workshop",
+        "methodRef": null,
+        "objectiveKey": null,
+        "rule": "projection.exploration.station_profile_grasp_prepared",
+        "stage": "reacquire_mode_at_prepared_receiver",
+        "supportRef": null
+      },
+      "differences": {},
+      "epoch": 1,
+      "index": 28,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 15,
+      "resultSha256": "7a89d65f2b73135f4b2100730c0c8fb48225b6fe307ae21019a8d7031bd0d30f"
+    },
+    {
+      "afterSha256": "0269c2d4e76a1d1de785ec4c8c7f0237836aa7e9be706ce48b06f15682c5bfa2",
+      "beforeSha256": "3fefd4667b42a8a176bee62bb8b38ebfaac8f5646e95a5bedd2598d56c17d0ff",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 29,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 15,
+      "resultSha256": "9d8e10c60eccb33594ce3011276f13bfee01f0dc6ca16a5ce8dd9c70b580c023"
+    },
+    {
+      "afterSha256": "0269c2d4e76a1d1de785ec4c8c7f0237836aa7e9be706ce48b06f15682c5bfa2",
+      "beforeSha256": "0269c2d4e76a1d1de785ec4c8c7f0237836aa7e9be706ce48b06f15682c5bfa2",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": {
+        "actions": [
+          {
+            "action_ref": "ACTION4"
+          }
+        ],
+        "extensionKind": null,
+        "kind": "public_ranked_workshop",
+        "methodRef": null,
+        "objectiveKey": null,
+        "rule": "projection.exploration.station_profile_trial_right",
+        "stage": "prepared_receiver_trial",
+        "supportRef": null
+      },
+      "differences": {},
+      "epoch": 1,
+      "index": 30,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 16,
+      "resultSha256": "df0dbf50810cce98611122e7dca155fd90a8c6b82544b085b0cd6c8c97796246"
+    },
+    {
+      "afterSha256": "9614a9e13ec065ba6f2022801c7e956fe130f7b012699b2a5791e906091ff701",
+      "beforeSha256": "0269c2d4e76a1d1de785ec4c8c7f0237836aa7e9be706ce48b06f15682c5bfa2",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 1,
+      "index": 31,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 16,
+      "resultSha256": "c77b89aee41c9018fbd90caca3873847590edfe89308e89974f59696da06103b"
+    },
+    {
+      "afterSha256": "9614a9e13ec065ba6f2022801c7e956fe130f7b012699b2a5791e906091ff701",
+      "beforeSha256": "9614a9e13ec065ba6f2022801c7e956fe130f7b012699b2a5791e906091ff701",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": {
+        "actions": [
+          {
+            "action_ref": "ACTION5"
+          }
+        ],
+        "extensionKind": "revalidate_mode",
+        "kind": "public_ranked_workshop",
+        "methodRef": "mode_method:e536debfb4d7e1ca5dc63ae89312bbff709b319ef88f4470041ee53597bf384f",
+        "objectiveKey": null,
+        "rule": "projection.ranked_workshop.revalidate_mode",
+        "stage": "revalidate_mode",
+        "supportRef": null
+      },
+      "differences": {},
+      "epoch": 2,
+      "index": 32,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 17,
+      "resultSha256": "9d418544a191729df1e73034fdd181f53401460e90aee1743205c57d1d91cafb"
+    },
+    {
+      "afterSha256": "ff2ad3c914f143dfbd105ed8493a5afe47a0e862e544c9cce252bd2ef397e9df",
+      "beforeSha256": "9614a9e13ec065ba6f2022801c7e956fe130f7b012699b2a5791e906091ff701",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 2,
+      "index": 33,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 17,
+      "resultSha256": "65a9392f3c1d6911ea39328e5436bdcc4e8064b4a5cf09221980def3613da1ff"
+    },
+    {
+      "afterSha256": "ff2ad3c914f143dfbd105ed8493a5afe47a0e862e544c9cce252bd2ef397e9df",
+      "beforeSha256": "ff2ad3c914f143dfbd105ed8493a5afe47a0e862e544c9cce252bd2ef397e9df",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": {
+        "actions": [
+          {
+            "action_ref": "ACTION3",
+            "data": {}
+          }
+        ],
+        "extensionKind": "probe_transform",
+        "kind": "public_ranked_workshop",
+        "methodRef": null,
+        "objectiveKey": null,
+        "rule": "projection.ranked_workshop.probe_transform",
+        "stage": "probe_transform",
+        "supportRef": "component:f5b59c7bf91aaf9e:0"
+      },
+      "differences": {},
+      "epoch": 2,
+      "index": 34,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 18,
+      "resultSha256": "2473b9f1211f48601a5a941f4d6c06ac0dcd50349d2914701be0cb703be066d1"
+    },
+    {
+      "afterSha256": "fafae7be4f6315793b94bac5d71c193482d416888d46b95a2817e01c4531ac0b",
+      "beforeSha256": "ff2ad3c914f143dfbd105ed8493a5afe47a0e862e544c9cce252bd2ef397e9df",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 2,
+      "index": 35,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 18,
+      "resultSha256": "d79da86511ff84f01f9bf46d3fae18d9443ff3f72d4b828205baa8498a93478a"
+    },
+    {
+      "afterSha256": "fafae7be4f6315793b94bac5d71c193482d416888d46b95a2817e01c4531ac0b",
+      "beforeSha256": "fafae7be4f6315793b94bac5d71c193482d416888d46b95a2817e01c4531ac0b",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": {
+        "actions": [
+          {
+            "action_ref": "ACTION2"
+          }
+        ],
+        "extensionKind": null,
+        "kind": "public_ranked_workshop",
+        "methodRef": null,
+        "objectiveKey": null,
+        "rule": "projection.exploration.station_profile_exchange_down",
+        "stage": "adjacent_exchange_probe",
+        "supportRef": null
+      },
+      "differences": {},
+      "epoch": 2,
+      "index": 36,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 19,
+      "resultSha256": "c0d6ee37c04aae5ad774900286a5db47767fab686444c3af29a3846487f54a89"
+    },
+    {
+      "afterSha256": "61c0217326a76f9bec096361fa904a37645ad35ef86b9e0315967caea14a1197",
+      "beforeSha256": "fafae7be4f6315793b94bac5d71c193482d416888d46b95a2817e01c4531ac0b",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 2,
+      "index": 37,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 19,
+      "resultSha256": "a171f7328e90c0659a7ef2c6a8855f1a72bacd4bcd7c5524d84e48bc982b69f1"
+    },
+    {
+      "afterSha256": "61c0217326a76f9bec096361fa904a37645ad35ef86b9e0315967caea14a1197",
+      "beforeSha256": "61c0217326a76f9bec096361fa904a37645ad35ef86b9e0315967caea14a1197",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": {
+        "actions": [
+          {
+            "action_ref": "ACTION4"
+          }
+        ],
+        "extensionKind": null,
+        "kind": "public_ranked_workshop",
+        "methodRef": null,
+        "objectiveKey": null,
+        "rule": "projection.exploration.station_profile_trial_right",
+        "stage": "prepared_receiver_trial",
+        "supportRef": null
+      },
+      "differences": {},
+      "epoch": 2,
+      "index": 38,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 20,
+      "resultSha256": "bd080a1a8cf7b47b931f120c76caad6413d8d41c252275ffb27c2063e0eb8a72"
+    },
+    {
+      "afterSha256": "62a0a3693fa2512dab7e903c5554cb4df80f0ee7bc33ace29492f1e2f3d870bc",
+      "beforeSha256": "61c0217326a76f9bec096361fa904a37645ad35ef86b9e0315967caea14a1197",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 2,
+      "index": 39,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 20,
+      "resultSha256": "e0ba929e48dbcb3fdfb3eaa3fb18a970b42918a465accaa7ed8c6d801be41615"
+    },
+    {
+      "afterSha256": "62a0a3693fa2512dab7e903c5554cb4df80f0ee7bc33ace29492f1e2f3d870bc",
+      "beforeSha256": "62a0a3693fa2512dab7e903c5554cb4df80f0ee7bc33ace29492f1e2f3d870bc",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": {
+        "actions": [
+          {
+            "action_ref": "ACTION5"
+          }
+        ],
+        "extensionKind": null,
+        "kind": "public_ranked_workshop",
+        "methodRef": null,
+        "objectiveKey": null,
+        "rule": "projection.exploration.station_profile_release",
+        "stage": "release_after_acceptance",
+        "supportRef": null
+      },
+      "differences": {},
+      "epoch": 2,
+      "index": 40,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 21,
+      "resultSha256": "109c54a0a31d6aabecfd33591c7882368af39855c02d6a69c06445fd28995984"
+    },
+    {
+      "afterSha256": "717c243b733921b623be0b7a24cf286576c51a04ff04b1876257c8b251e30e72",
+      "beforeSha256": "62a0a3693fa2512dab7e903c5554cb4df80f0ee7bc33ace29492f1e2f3d870bc",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 2,
+      "index": 41,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 21,
+      "resultSha256": "99a28740d94922bdf023e4f926a783710e74981be52296c7ce6c22d856f3ff63"
+    },
+    {
+      "afterSha256": "717c243b733921b623be0b7a24cf286576c51a04ff04b1876257c8b251e30e72",
+      "beforeSha256": "717c243b733921b623be0b7a24cf286576c51a04ff04b1876257c8b251e30e72",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": {
+        "actions": [
+          {
+            "action_ref": "ACTION1"
+          }
+        ],
+        "extensionKind": null,
+        "kind": "public_ranked_workshop",
+        "methodRef": null,
+        "objectiveKey": null,
+        "rule": "projection.exploration.station_profile_focus_up",
+        "stage": "free_focus_to_next_prepared_receiver",
+        "supportRef": null
+      },
+      "differences": {},
+      "epoch": 2,
+      "index": 42,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 22,
+      "resultSha256": "9c7ec26bf9b8d594034f65b20359721ae71302b4568174df936eba0cc389f99c"
+    },
+    {
+      "afterSha256": "1cffd55480c0847fd48aa65bc230fd329b7a2dbf0af2bfa5c99579bb67b17bdd",
+      "beforeSha256": "717c243b733921b623be0b7a24cf286576c51a04ff04b1876257c8b251e30e72",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 2,
+      "index": 43,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 22,
+      "resultSha256": "8d480465c0aa62941aa13a52c652ec6b506956754a609057997d4b4c362a12b4"
+    },
+    {
+      "afterSha256": "1cffd55480c0847fd48aa65bc230fd329b7a2dbf0af2bfa5c99579bb67b17bdd",
+      "beforeSha256": "1cffd55480c0847fd48aa65bc230fd329b7a2dbf0af2bfa5c99579bb67b17bdd",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": {
+        "actions": [
+          {
+            "action_ref": "ACTION5"
+          }
+        ],
+        "extensionKind": null,
+        "kind": "public_ranked_workshop",
+        "methodRef": null,
+        "objectiveKey": null,
+        "rule": "projection.exploration.station_profile_grasp_prepared",
+        "stage": "reacquire_mode_at_prepared_receiver",
+        "supportRef": null
+      },
+      "differences": {},
+      "epoch": 2,
+      "index": 44,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 23,
+      "resultSha256": "a30466abfc647fd992c71e959048062359c544dbb0ada70eb51f70cf4472ca7d"
+    },
+    {
+      "afterSha256": "3ae81a47219ec80e96fbbd5c4d5ff1272bba285bf148721dc942eabac095647a",
+      "beforeSha256": "1cffd55480c0847fd48aa65bc230fd329b7a2dbf0af2bfa5c99579bb67b17bdd",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 2,
+      "index": 45,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 23,
+      "resultSha256": "ee13b7c055c71f59126e777532e46eb80330f9b94a6b11940d36fc33b96cc268"
+    },
+    {
+      "afterSha256": "3ae81a47219ec80e96fbbd5c4d5ff1272bba285bf148721dc942eabac095647a",
+      "beforeSha256": "3ae81a47219ec80e96fbbd5c4d5ff1272bba285bf148721dc942eabac095647a",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": {
+        "actions": [
+          {
+            "action_ref": "ACTION4"
+          }
+        ],
+        "extensionKind": null,
+        "kind": "public_ranked_workshop",
+        "methodRef": null,
+        "objectiveKey": null,
+        "rule": "projection.exploration.station_profile_trial_right",
+        "stage": "prepared_receiver_trial",
+        "supportRef": null
+      },
+      "differences": {},
+      "epoch": 2,
+      "index": 46,
+      "matched": true,
+      "method": "proposeSource",
+      "observationRevision": 24,
+      "resultSha256": "01cfce68d150519f49e77498c933ab0f6e06dda2a9abfbdf89b80b40d41e5b6f"
+    },
+    {
+      "afterSha256": "d11e8fa9d4eeb9b76092fcb37dc73895d61159a362a6ea4993595d8bcc8a3871",
+      "beforeSha256": "3ae81a47219ec80e96fbbd5c4d5ff1272bba285bf148721dc942eabac095647a",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 2,
+      "index": 47,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 24,
+      "resultSha256": "901c0d4f45b48d6d3c35fd8ba16223acf8622de266406165d1fc06f87068554c"
+    },
+    {
+      "afterSha256": "d11e8fa9d4eeb9b76092fcb37dc73895d61159a362a6ea4993595d8bcc8a3871",
+      "beforeSha256": "d11e8fa9d4eeb9b76092fcb37dc73895d61159a362a6ea4993595d8bcc8a3871",
+      "checks": {
+        "afterState": true,
+        "beforeState": true,
+        "returnValue": true
+      },
+      "decision": null,
+      "differences": {},
+      "epoch": 3,
+      "index": 48,
+      "matched": true,
+      "method": "recordSource",
+      "observationRevision": 25,
+      "resultSha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+    }
+  ],
+  "campaign": {
+    "actions": 25,
+    "elapsedSeconds": 45.2232708,
+    "game": "LKEY",
+    "levelsCompleted": 2,
+    "path": "docs/migration/lot7a-evidence/attempt1/lkey-campaign.json.gz",
+    "reason": "frontier_unknown",
+    "sha256": "47d69466a2e5baa598121b4f738e15a5fcaf79df3c6e5aa5a41f5dfec4b1d391",
+    "sourceDigest": "2646d38c1cb09dc846fdb1f4811e578b51ba3b2030bf4282457e8b00b68c3d72",
+    "sourceUnchangedDuringRun": true,
+    "status": "failed"
+  },
+  "contributionReceipt": {
+    "bytes": 40210,
+    "path": "docs/migration/lot7a-evidence/diagnostic/contribution.json.gz",
+    "sha256": "a7ce462bb168436ec22e387ea862d3d9d2f4dcc7792b9ecbe6d71cf35be47631"
+  },
+  "elapsedSeconds": 13.536817357999098,
+  "exactChecks": 147,
+  "failedCalls": 0,
+  "finalDiagnosticSummary": {
+    "activationModeEvidenceCount": 0,
+    "capturedProposeCallsAtFinalEpoch": 0,
+    "epoch": 3,
+    "extensionKinds": [
+      "revalidate_mode"
+    ],
+    "hypotheticalDecision": {
+      "actions": [
+        {
+          "action_ref": "ACTION5"
+        }
+      ],
+      "extensionKind": "revalidate_mode",
+      "kind": "public_ranked_workshop",
+      "methodRef": "mode_method:e536debfb4d7e1ca5dc63ae89312bbff709b319ef88f4470041ee53597bf384f",
+      "objectiveKey": null,
+      "rule": "projection.ranked_workshop.revalidate_mode",
+      "stage": "revalidate_mode",
+      "supportRef": null
+    },
+    "portableMethodCount": 1,
+    "projectionAdmissible": true,
+    "revision": 26
+  },
+  "initialOwner": "fresh RankedWorkshop()",
+  "matchedCalls": 49,
+  "nativeSourceStatesInjected": 0,
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "schema": "logos-engine.v6.ranked-workshop-public-parity.v1",
+  "selectedWorkshopCount": 14,
+  "sourceFilesVerifiedBeforeAndAfter": 1786,
+  "sourceHashes": {
+    "agents/yf_arc3_v5/capabilities/station_profile_scene.py": "2d671f10ef1ffc14b31d1c07eb63062932140f6c784dc990ca99a00d9c7d3c98",
+    "agents/yf_arc3_v5/capabilities/station_profile_workbench.py": "62a4be8a811464760649c4912df9cce2414edff24fc839468150c31e6b612fa5",
+    "agents/yf_arc3_v5/capabilities/stem_reliefs.py": "4ac387b50094536d62657a18e3b08ed1e8b72a90f03f1bdcda24ee76265d8a24",
+    "agents/yf_arc3_v6/morphology_policy/ranked_workshop/__init__.py": "b3ec1c0ff1f14a0bfa3c99e8c57d597f4e2e5a19abb4dd2185de53c85530d8c6",
+    "agents/yf_arc3_v6/morphology_policy/ranked_workshop/family.py": "d5e597658994d23659fc086ae9fd66d031501d1fd8a319ce95f38579bd8bb95d",
+    "agents/yf_arc3_v6/morphology_policy/ranked_workshop/geometry.py": "a3b72041268907e90addca0c6780504c56952fdb6f44532ab05afa4280d01ffe",
+    "agents/yf_arc3_v6/morphology_policy/ranked_workshop/methods.py": "385ca82f1019822f00529c23d62068f62da7e1e093b6544ca49b56885811960d",
+    "agents/yf_arc3_v6/morphology_policy/ranked_workshop/preparation.py": "67e07fe07f12ca0f064a27ee0145b72879bbb20c16b8fedea365330a5740faae",
+    "agents/yf_arc3_v6/morphology_policy/ranked_workshop/workshop.drm": "f46249629bb6d9fc4ed1276a4f287fe5dee250fc9f2fd908e47c244a1f2f8cee",
+    "agents/yf_arc3_v6/morphology_policy/ranked_workshop/workshop.src": "999c1cc9247db04ca14d36a67ee9172f54602cb7ce018eadad28e34eeab35aff"
+  },
+  "sourceModified": false,
+  "totalChecks": 147
+}

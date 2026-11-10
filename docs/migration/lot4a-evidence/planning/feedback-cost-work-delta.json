@@ -1,0 +1,2983 @@
+{
+  "schema": "logos-engine.feedback-cost-work-diagnostic.v1",
+  "status": "diagnostic_only_strict_aggregation_failed",
+  "recordedAt": "2026-11-10T19:42:55.933254+00:00",
+  "scope": "Read-only analysis of all retained cost-report work metadata and native source; no execution, test, benchmark, semantic replay or cost aggregation. The official strict failure is preserved. No timing, threshold, population, report or comparator was changed.",
+  "strictAggregation": {
+    "receipt": {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/aggregation-failure-reproduced.json",
+      "bytes": 3052,
+      "sha256": "2305d404095fdcbba714b9697435a5b70afcafccfd332bf0b4504fc098c7d769"
+    },
+    "exitCode": 1,
+    "outputExists": false,
+    "inputsUnchanged": true,
+    "workMetadataExact": false,
+    "officialFailureReclassified": false,
+    "budgetAccepted": null
+  },
+  "method": {
+    "projection": "Exact field inventory of scripts/compare-native-cost-cohorts.mjs::workSignature, reproduced in read-only Python for difference listing; includes all original measured trials and warmups.",
+    "toolDefinedExclusions": {
+      "samples": [
+        "elapsedMs"
+      ],
+      "requests": [
+        "wallMs",
+        "nativeServiceMs",
+        "transportAndSchedulingMs"
+      ],
+      "pauses": [
+        "requestedAt",
+        "acknowledgementMs",
+        "safeBoundaryMs"
+      ],
+      "inspection": [
+        "nativeServiceMs",
+        "endToEndMs"
+      ],
+      "memory": [
+        "heapUsed",
+        "rss"
+      ],
+      "final": [
+        "implementation"
+      ]
+    },
+    "additionalNormalization": [],
+    "differencePathsAndValuesRetained": true
+  },
+  "population": {
+    "sessionsRead": 40,
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "warmupSessions": 8,
+    "warmupActions": 24,
+    "pairedTrials": 20,
+    "pairedObservations": 344,
+    "pairedInspections": 48
+  },
+  "differencesByPath": {
+    "$.final.graphRevision": 20,
+    "$.final.nodeCount": 20,
+    "$.inspection[*].graphNodes": 48,
+    "$.observations[*].nodeCount": 344
+  },
+  "allOtherOfficialWorkFieldsExact": true,
+  "allObservedNodeCountDeltasAreThree": true,
+  "allFinalRevisionDeltasMatchThreePlusAcquiredPrefixes": true,
+  "withinVersionAcrossCohortsWorkExact": true,
+  "nativeInventoryDifferences": {
+    "cohort1": {
+      "added": [
+        "src/logos-engine/v6-feedback-sequences-finite.ts",
+        "src/logos-engine/v6-feedback-sequences-visual.ts",
+        "src/logos-engine/v6-feedback-sequences.ts"
+      ],
+      "removed": [],
+      "modified": [
+        "src/logos-engine/v6-native-runtime.ts"
+      ]
+    },
+    "cohort2": {
+      "added": [
+        "src/logos-engine/v6-feedback-sequences-finite.ts",
+        "src/logos-engine/v6-feedback-sequences-visual.ts",
+        "src/logos-engine/v6-feedback-sequences.ts"
+      ],
+      "removed": [],
+      "modified": [
+        "src/logos-engine/v6-native-runtime.ts"
+      ]
+    }
+  },
+  "trialPairs": [
+    {
+      "cohort": "cohort1",
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "actions": 3,
+      "levelsCompleted": 1,
+      "acquiredPrefixes": 3,
+      "observationPairs": 6,
+      "inspectionPairs": 0,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 466,
+          "candidate": 472
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 221,
+          "candidate": 224
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 152,
+          "candidate": 155
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 180,
+          "candidate": 183
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 182,
+          "candidate": 185
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 202,
+          "candidate": 205
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 204,
+          "candidate": 207
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 221,
+          "candidate": 224
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 6,
+      "installationPlusSealedPrefixRevisions": 6,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort1",
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "actions": 10,
+      "levelsCompleted": 2,
+      "acquiredPrefixes": 6,
+      "observationPairs": 16,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 842,
+          "candidate": 851
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 152,
+          "candidate": 155
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 180,
+          "candidate": 183
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 182,
+          "candidate": 185
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 202,
+          "candidate": 205
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 204,
+          "candidate": 207
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 221,
+          "candidate": 224
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 223,
+          "candidate": 226
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 248,
+          "candidate": 251
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 325,
+          "candidate": 328
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 327,
+          "candidate": 330
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 9,
+      "installationPlusSealedPrefixRevisions": 9,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort1",
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "actions": 10,
+      "levelsCompleted": 2,
+      "acquiredPrefixes": 6,
+      "observationPairs": 16,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 842,
+          "candidate": 851
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 152,
+          "candidate": 155
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 180,
+          "candidate": 183
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 182,
+          "candidate": 185
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 202,
+          "candidate": 205
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 204,
+          "candidate": 207
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 221,
+          "candidate": 224
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 223,
+          "candidate": 226
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 248,
+          "candidate": 251
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 325,
+          "candidate": 328
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 327,
+          "candidate": 330
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 9,
+      "installationPlusSealedPrefixRevisions": 9,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort1",
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "actions": 10,
+      "levelsCompleted": 2,
+      "acquiredPrefixes": 6,
+      "observationPairs": 16,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 842,
+          "candidate": 851
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 152,
+          "candidate": 155
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 180,
+          "candidate": 183
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 182,
+          "candidate": 185
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 202,
+          "candidate": 205
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 204,
+          "candidate": 207
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 221,
+          "candidate": 224
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 223,
+          "candidate": 226
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 248,
+          "candidate": 251
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 325,
+          "candidate": 328
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 327,
+          "candidate": 330
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 9,
+      "installationPlusSealedPrefixRevisions": 9,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort1",
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "actions": 10,
+      "levelsCompleted": 2,
+      "acquiredPrefixes": 6,
+      "observationPairs": 16,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 842,
+          "candidate": 851
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 152,
+          "candidate": 155
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 180,
+          "candidate": 183
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 182,
+          "candidate": 185
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 202,
+          "candidate": 205
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 204,
+          "candidate": 207
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 221,
+          "candidate": 224
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 223,
+          "candidate": 226
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 248,
+          "candidate": 251
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 325,
+          "candidate": 328
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 327,
+          "candidate": 330
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 9,
+      "installationPlusSealedPrefixRevisions": 9,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort1",
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "actions": 3,
+      "levelsCompleted": 1,
+      "acquiredPrefixes": 3,
+      "observationPairs": 6,
+      "inspectionPairs": 0,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 471,
+          "candidate": 477
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 211,
+          "candidate": 214
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 157,
+          "candidate": 160
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 175,
+          "candidate": 178
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 177,
+          "candidate": 180
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 192,
+          "candidate": 195
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 194,
+          "candidate": 197
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 211,
+          "candidate": 214
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 6,
+      "installationPlusSealedPrefixRevisions": 6,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort1",
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "actions": 15,
+      "levelsCompleted": 3,
+      "acquiredPrefixes": 9,
+      "observationPairs": 24,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 1179,
+          "candidate": 1191
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 157,
+          "candidate": 160
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 175,
+          "candidate": 178
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 177,
+          "candidate": 180
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 192,
+          "candidate": 195
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 194,
+          "candidate": 197
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 211,
+          "candidate": 214
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 213,
+          "candidate": 216
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 233,
+          "candidate": 236
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 276,
+          "candidate": 279
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 278,
+          "candidate": 281
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 302,
+          "candidate": 305
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 304,
+          "candidate": 307
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 321,
+          "candidate": 324
+        },
+        {
+          "path": "$.observations[16].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[17].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[18].nodeCount",
+          "baseline": 355,
+          "candidate": 358
+        },
+        {
+          "path": "$.observations[19].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[20].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[21].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[22].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[23].nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 12,
+      "installationPlusSealedPrefixRevisions": 12,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort1",
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "actions": 15,
+      "levelsCompleted": 3,
+      "acquiredPrefixes": 9,
+      "observationPairs": 24,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 1179,
+          "candidate": 1191
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 157,
+          "candidate": 160
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 175,
+          "candidate": 178
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 177,
+          "candidate": 180
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 192,
+          "candidate": 195
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 194,
+          "candidate": 197
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 211,
+          "candidate": 214
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 213,
+          "candidate": 216
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 233,
+          "candidate": 236
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 276,
+          "candidate": 279
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 278,
+          "candidate": 281
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 302,
+          "candidate": 305
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 304,
+          "candidate": 307
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 321,
+          "candidate": 324
+        },
+        {
+          "path": "$.observations[16].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[17].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[18].nodeCount",
+          "baseline": 355,
+          "candidate": 358
+        },
+        {
+          "path": "$.observations[19].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[20].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[21].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[22].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[23].nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 12,
+      "installationPlusSealedPrefixRevisions": 12,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort1",
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "actions": 15,
+      "levelsCompleted": 3,
+      "acquiredPrefixes": 9,
+      "observationPairs": 24,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 1179,
+          "candidate": 1191
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 157,
+          "candidate": 160
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 175,
+          "candidate": 178
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 177,
+          "candidate": 180
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 192,
+          "candidate": 195
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 194,
+          "candidate": 197
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 211,
+          "candidate": 214
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 213,
+          "candidate": 216
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 233,
+          "candidate": 236
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 276,
+          "candidate": 279
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 278,
+          "candidate": 281
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 302,
+          "candidate": 305
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 304,
+          "candidate": 307
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 321,
+          "candidate": 324
+        },
+        {
+          "path": "$.observations[16].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[17].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[18].nodeCount",
+          "baseline": 355,
+          "candidate": 358
+        },
+        {
+          "path": "$.observations[19].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[20].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[21].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[22].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[23].nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 12,
+      "installationPlusSealedPrefixRevisions": 12,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort1",
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "actions": 15,
+      "levelsCompleted": 3,
+      "acquiredPrefixes": 9,
+      "observationPairs": 24,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 1179,
+          "candidate": 1191
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 157,
+          "candidate": 160
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 175,
+          "candidate": 178
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 177,
+          "candidate": 180
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 192,
+          "candidate": 195
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 194,
+          "candidate": 197
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 211,
+          "candidate": 214
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 213,
+          "candidate": 216
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 233,
+          "candidate": 236
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 276,
+          "candidate": 279
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 278,
+          "candidate": 281
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 302,
+          "candidate": 305
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 304,
+          "candidate": 307
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 321,
+          "candidate": 324
+        },
+        {
+          "path": "$.observations[16].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[17].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[18].nodeCount",
+          "baseline": 355,
+          "candidate": 358
+        },
+        {
+          "path": "$.observations[19].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[20].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[21].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[22].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[23].nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 12,
+      "installationPlusSealedPrefixRevisions": 12,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort2",
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "actions": 3,
+      "levelsCompleted": 1,
+      "acquiredPrefixes": 3,
+      "observationPairs": 6,
+      "inspectionPairs": 0,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 466,
+          "candidate": 472
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 221,
+          "candidate": 224
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 152,
+          "candidate": 155
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 180,
+          "candidate": 183
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 182,
+          "candidate": 185
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 202,
+          "candidate": 205
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 204,
+          "candidate": 207
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 221,
+          "candidate": 224
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 6,
+      "installationPlusSealedPrefixRevisions": 6,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort2",
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "actions": 10,
+      "levelsCompleted": 2,
+      "acquiredPrefixes": 6,
+      "observationPairs": 16,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 842,
+          "candidate": 851
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 152,
+          "candidate": 155
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 180,
+          "candidate": 183
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 182,
+          "candidate": 185
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 202,
+          "candidate": 205
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 204,
+          "candidate": 207
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 221,
+          "candidate": 224
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 223,
+          "candidate": 226
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 248,
+          "candidate": 251
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 325,
+          "candidate": 328
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 327,
+          "candidate": 330
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 9,
+      "installationPlusSealedPrefixRevisions": 9,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort2",
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "actions": 10,
+      "levelsCompleted": 2,
+      "acquiredPrefixes": 6,
+      "observationPairs": 16,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 842,
+          "candidate": 851
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 152,
+          "candidate": 155
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 180,
+          "candidate": 183
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 182,
+          "candidate": 185
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 202,
+          "candidate": 205
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 204,
+          "candidate": 207
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 221,
+          "candidate": 224
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 223,
+          "candidate": 226
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 248,
+          "candidate": 251
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 325,
+          "candidate": 328
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 327,
+          "candidate": 330
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 9,
+      "installationPlusSealedPrefixRevisions": 9,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort2",
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "actions": 10,
+      "levelsCompleted": 2,
+      "acquiredPrefixes": 6,
+      "observationPairs": 16,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 842,
+          "candidate": 851
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 152,
+          "candidate": 155
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 180,
+          "candidate": 183
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 182,
+          "candidate": 185
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 202,
+          "candidate": 205
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 204,
+          "candidate": 207
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 221,
+          "candidate": 224
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 223,
+          "candidate": 226
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 248,
+          "candidate": 251
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 325,
+          "candidate": 328
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 327,
+          "candidate": 330
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 9,
+      "installationPlusSealedPrefixRevisions": 9,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort2",
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "actions": 10,
+      "levelsCompleted": 2,
+      "acquiredPrefixes": 6,
+      "observationPairs": 16,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 842,
+          "candidate": 851
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 344,
+          "candidate": 347
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 152,
+          "candidate": 155
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 180,
+          "candidate": 183
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 182,
+          "candidate": 185
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 202,
+          "candidate": 205
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 204,
+          "candidate": 207
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 221,
+          "candidate": 224
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 223,
+          "candidate": 226
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 248,
+          "candidate": 251
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 250,
+          "candidate": 253
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 325,
+          "candidate": 328
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 327,
+          "candidate": 330
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 344,
+          "candidate": 347
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 9,
+      "installationPlusSealedPrefixRevisions": 9,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort2",
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "actions": 3,
+      "levelsCompleted": 1,
+      "acquiredPrefixes": 3,
+      "observationPairs": 6,
+      "inspectionPairs": 0,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 471,
+          "candidate": 477
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 211,
+          "candidate": 214
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 157,
+          "candidate": 160
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 175,
+          "candidate": 178
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 177,
+          "candidate": 180
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 192,
+          "candidate": 195
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 194,
+          "candidate": 197
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 211,
+          "candidate": 214
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 6,
+      "installationPlusSealedPrefixRevisions": 6,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort2",
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "actions": 15,
+      "levelsCompleted": 3,
+      "acquiredPrefixes": 9,
+      "observationPairs": 24,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 1179,
+          "candidate": 1191
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 157,
+          "candidate": 160
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 175,
+          "candidate": 178
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 177,
+          "candidate": 180
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 192,
+          "candidate": 195
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 194,
+          "candidate": 197
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 211,
+          "candidate": 214
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 213,
+          "candidate": 216
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 233,
+          "candidate": 236
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 276,
+          "candidate": 279
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 278,
+          "candidate": 281
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 302,
+          "candidate": 305
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 304,
+          "candidate": 307
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 321,
+          "candidate": 324
+        },
+        {
+          "path": "$.observations[16].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[17].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[18].nodeCount",
+          "baseline": 355,
+          "candidate": 358
+        },
+        {
+          "path": "$.observations[19].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[20].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[21].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[22].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[23].nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 12,
+      "installationPlusSealedPrefixRevisions": 12,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort2",
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "actions": 15,
+      "levelsCompleted": 3,
+      "acquiredPrefixes": 9,
+      "observationPairs": 24,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 1179,
+          "candidate": 1191
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 157,
+          "candidate": 160
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 175,
+          "candidate": 178
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 177,
+          "candidate": 180
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 192,
+          "candidate": 195
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 194,
+          "candidate": 197
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 211,
+          "candidate": 214
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 213,
+          "candidate": 216
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 233,
+          "candidate": 236
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 276,
+          "candidate": 279
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 278,
+          "candidate": 281
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 302,
+          "candidate": 305
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 304,
+          "candidate": 307
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 321,
+          "candidate": 324
+        },
+        {
+          "path": "$.observations[16].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[17].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[18].nodeCount",
+          "baseline": 355,
+          "candidate": 358
+        },
+        {
+          "path": "$.observations[19].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[20].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[21].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[22].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[23].nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 12,
+      "installationPlusSealedPrefixRevisions": 12,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort2",
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "actions": 15,
+      "levelsCompleted": 3,
+      "acquiredPrefixes": 9,
+      "observationPairs": 24,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 1179,
+          "candidate": 1191
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 157,
+          "candidate": 160
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 175,
+          "candidate": 178
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 177,
+          "candidate": 180
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 192,
+          "candidate": 195
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 194,
+          "candidate": 197
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 211,
+          "candidate": 214
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 213,
+          "candidate": 216
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 233,
+          "candidate": 236
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 276,
+          "candidate": 279
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 278,
+          "candidate": 281
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 302,
+          "candidate": 305
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 304,
+          "candidate": 307
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 321,
+          "candidate": 324
+        },
+        {
+          "path": "$.observations[16].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[17].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[18].nodeCount",
+          "baseline": 355,
+          "candidate": 358
+        },
+        {
+          "path": "$.observations[19].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[20].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[21].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[22].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[23].nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 12,
+      "installationPlusSealedPrefixRevisions": 12,
+      "revisionAccountingMatches": true
+    },
+    {
+      "cohort": "cohort2",
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "actions": 15,
+      "levelsCompleted": 3,
+      "acquiredPrefixes": 9,
+      "observationPairs": 24,
+      "inspectionPairs": 3,
+      "workMetadataExact": false,
+      "differences": [
+        {
+          "path": "$.final.graphRevision",
+          "baseline": 1179,
+          "candidate": 1191
+        },
+        {
+          "path": "$.final.nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[0].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[1].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.inspection[2].graphNodes",
+          "baseline": 412,
+          "candidate": 415
+        },
+        {
+          "path": "$.observations[0].nodeCount",
+          "baseline": 157,
+          "candidate": 160
+        },
+        {
+          "path": "$.observations[1].nodeCount",
+          "baseline": 175,
+          "candidate": 178
+        },
+        {
+          "path": "$.observations[2].nodeCount",
+          "baseline": 177,
+          "candidate": 180
+        },
+        {
+          "path": "$.observations[3].nodeCount",
+          "baseline": 192,
+          "candidate": 195
+        },
+        {
+          "path": "$.observations[4].nodeCount",
+          "baseline": 194,
+          "candidate": 197
+        },
+        {
+          "path": "$.observations[5].nodeCount",
+          "baseline": 211,
+          "candidate": 214
+        },
+        {
+          "path": "$.observations[6].nodeCount",
+          "baseline": 213,
+          "candidate": 216
+        },
+        {
+          "path": "$.observations[7].nodeCount",
+          "baseline": 233,
+          "candidate": 236
+        },
+        {
+          "path": "$.observations[8].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[9].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[10].nodeCount",
+          "baseline": 235,
+          "candidate": 238
+        },
+        {
+          "path": "$.observations[11].nodeCount",
+          "baseline": 276,
+          "candidate": 279
+        },
+        {
+          "path": "$.observations[12].nodeCount",
+          "baseline": 278,
+          "candidate": 281
+        },
+        {
+          "path": "$.observations[13].nodeCount",
+          "baseline": 302,
+          "candidate": 305
+        },
+        {
+          "path": "$.observations[14].nodeCount",
+          "baseline": 304,
+          "candidate": 307
+        },
+        {
+          "path": "$.observations[15].nodeCount",
+          "baseline": 321,
+          "candidate": 324
+        },
+        {
+          "path": "$.observations[16].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[17].nodeCount",
+          "baseline": 323,
+          "candidate": 326
+        },
+        {
+          "path": "$.observations[18].nodeCount",
+          "baseline": 355,
+          "candidate": 358
+        },
+        {
+          "path": "$.observations[19].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[20].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[21].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[22].nodeCount",
+          "baseline": 357,
+          "candidate": 360
+        },
+        {
+          "path": "$.observations[23].nodeCount",
+          "baseline": 412,
+          "candidate": 415
+        }
+      ],
+      "nodeCountDeltaEveryObservation": [
+        3
+      ],
+      "graphRevisionDelta": 12,
+      "installationPlusSealedPrefixRevisions": 12,
+      "revisionAccountingMatches": true
+    }
+  ],
+  "crossCohortPairs": [
+    {
+      "side": "baseline",
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "baseline",
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "baseline",
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "baseline",
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "baseline",
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "after",
+      "case": "STCK",
+      "round": 0,
+      "warmup": true,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "after",
+      "case": "STCK",
+      "round": 1,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "after",
+      "case": "STCK",
+      "round": 2,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "after",
+      "case": "STCK",
+      "round": 3,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "after",
+      "case": "STCK",
+      "round": 4,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "after",
+      "case": "SMLP",
+      "round": 0,
+      "warmup": true,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "after",
+      "case": "SMLP",
+      "round": 1,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "after",
+      "case": "SMLP",
+      "round": 2,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "after",
+      "case": "SMLP",
+      "round": 3,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    },
+    {
+      "side": "after",
+      "case": "SMLP",
+      "round": 4,
+      "warmup": false,
+      "workMetadataExact": true,
+      "differences": []
+    }
+  ],
+  "sourceAttribution": {
+    "basis": "Static comparison with the published 0.50 runtime and source producer/consumer inspection, corroborated by every retained work counter. Cost reports do not contain the full Kernel node/delta bodies; this is not a replayed node-by-node graph equality proof.",
+    "nodes": [
+      {
+        "id": "family_state:feedback_sequences",
+        "producer": "v6-native-runtime.ts::initialize family.install",
+        "consumers": [
+          "restoreFamilies",
+          "persistFamilies",
+          "familyCheckpoint"
+        ],
+        "role": "Authoritative owner checkpoint, including a method-only state with layout absent. Both selection routes and passive acquisitions share this owner."
+      },
+      {
+        "id": "family_activation:feedback_sequences",
+        "producer": "v6-native-runtime.ts::initialize family.install",
+        "consumers": [
+          "source selection enabled check",
+          "applyEdit(set_family_enabled)",
+          "family_state controlled_by relation"
+        ],
+        "role": "Actual activation authority and editable control for this registered family; not a display-only counter."
+      },
+      {
+        "id": "program:v6.feedback_sequences.choose",
+        "producer": "FeedbackSequences.attachPrograms -> NativeKnowledgeStore.registerProgram",
+        "consumers": [
+          "FeedbackSequences.propose",
+          "StoredNativeProgram.run",
+          "programReplacement",
+          "executionDigest"
+        ],
+        "role": "Callback-bound executable SRC and its source/semantic/transitive/edited authority. This adds a registered Kernel program, not a new item to the pre-existing 37 compiled workflows."
+      }
+    ],
+    "revisionAccounting": "Three initial node installations add three deltas. seal calls persistFamilies with the current prefix_evidence id; every registered family state receives that evidence. Each sealed prefix therefore adds one Feedback owner metadata revision even when the state payload is unchanged. Kernel.commit skips only a fully equal node, not changed evidence. Delta = 3 + acquiredPrefixes: STCK 3+6=9, SMLP 3+9=12, warmups 3+3=6.",
+    "superfluousNodeFinding": "No superfluous one of these three nodes identified. Removing them or dropping the per-prefix evidence solely to satisfy equal node/revision counts would change ownership, executable authority, activation or provenance.",
+    "separateOptimizationPossibility": "The standalone constructor creates a NativeSrcProgram and attachPrograms registers/validates it again. A generic lazy standalone fallback could merit separate study, but it would not remove the three authoritative nodes or their provenance revisions. No cost attribution or correction is established here; any change requires a new freeze and validation window."
+  },
+  "separateQualificationPrecedent": {
+    "protocol": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-control-protocol.md",
+    "receipt": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-qualification.json",
+    "explanation": "docs/migration/lot2c-cost-closure-lineage.md",
+    "applicableForm": "Preserve strict_identity_failed, every path/value and immutable inputs, then add a separately named and scoped diagnostic qualification. Do not overwrite or fabricate an official aggregate passed.",
+    "nonTransferablePremise": "The 2C case retained identical 344 node identities/types/revisions and qualified provenance/clock changes. Here the three nodes and extra revisions are real structural work, so that former equivalence conclusion cannot be reused.",
+    "existingOfficialAcceptanceRoute": "No metadata-delta qualification input exists in the present official cohort consolidator or its independent/global-window reviewers. A separate structural qualification and descriptive pooled arithmetic need distinct receipts and must not masquerade as their successful output."
+  },
+  "limitations": [
+    "All differences of the official work signature are listed, not all timing/allocation differences of raw reports; these remain unchanged in the fingerprinted original inputs.",
+    "Commands and complete public packets are not duplicated in the work signature. This diagnostic verifies its recorded choices/placements/counts, while command/return agreement remains the unchanged public replay harness contract.",
+    "No global pooled timing result or acceptance verdict is computed by this diagnostic."
+  ],
+  "inputs": [
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/baseline.json",
+      "bytes": 428605,
+      "sha256": "eb6164f04fd26a2e23d9d7f9860facae317aac4c93f6781bef9a8c839d73cd1c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/after.json",
+      "bytes": 428993,
+      "sha256": "01e8ce13b3be5fb207e8ed22d52bf27e2f9be31d0566c2f0ffb50fb46ddb6176"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/baseline.json",
+      "bytes": 428592,
+      "sha256": "9edcd6f308342828bd598c7bb75cdc69c99c1fa9ad41a2f30b636ecd9c020285"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/after.json",
+      "bytes": 429008,
+      "sha256": "8cb6aac8a3955fd011ece23dc908f37d306bcad16adcfa0bbcc7606ec80066f9"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 137357,
+      "sha256": "4f029cdc1609bcbc870b557cb574565b4235825e1ad4857f859166e00c40d60b"
+    },
+    {
+      "path": "src/logos-engine/v6-feedback-sequences.ts",
+      "bytes": 27880,
+      "sha256": "4e5189878dac2d3013cea8c8639de109097a584e2811b23fe54338830f293276"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14854,
+      "sha256": "5efe83d07b6d5354b9a26b39320449ecaa631ca55563c683779f067a8d670bf0"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 19490,
+      "sha256": "9c7fb668e85bf101f88de439ff43b42bba9566917a2c2b8fb8f13e2ee00e247b"
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "bytes": 5903,
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "bytes": 19460,
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "bytes": 9861,
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "bytes": 17810,
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4"
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "bytes": 22204,
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/protocol.md",
+      "bytes": 3464,
+      "sha256": "31b2965b8c5cbb026e7ed566318994ec0068857ca6a519915207b94728732181"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/global-budget-policy.json",
+      "bytes": 1763,
+      "sha256": "540d08e3c68cf2fa51705cab3cecfd2d6d3c14455602e43b8cb33a0afcfd5a83"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-evidence/diagnostic/semantic-control-protocol.md",
+      "bytes": 3741,
+      "sha256": "d04fb7d3f351ac5423fb9bc679981df12897bb65d09d606858269fea809a80ea"
+    },
+    {
+      "path": "docs/migration/lot2c-cost-closure-lineage.md",
+      "bytes": 12183,
+      "sha256": "9763c9113008ea4d8e484832dd95ca3b5adee72aa7e7b95bf1811d3e6d8c6103"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-base79/src/logos-engine/v6-native-runtime.ts",
+      "bytes": 134097,
+      "sha256": "d0bcbebafc0473c11ecba724f2ab7adf45b0272d8e47cf3855db82cd5c9ed7c9"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/aggregation-failure-reproduced.json",
+      "bytes": 3052,
+      "sha256": "2305d404095fdcbba714b9697435a5b70afcafccfd332bf0b4504fc098c7d769"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/comparison.json",
+      "bytes": 25220,
+      "sha256": "5c59ddab5eba78f5b8c53ca85318295f0b5196b3d9d289654acd083d47d5a9f7"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/comparison.json",
+      "bytes": 25795,
+      "sha256": "abe3b5fd1f9b67a0721a3cc70987cf2935ff1dc648c21ea56b172e45db4f27b8"
+    }
+  ],
+  "inputsUnchanged": true
+}

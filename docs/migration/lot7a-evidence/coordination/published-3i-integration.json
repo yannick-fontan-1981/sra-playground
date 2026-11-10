@@ -1,0 +1,29 @@
+{
+  "schema": "logos-engine.concurrent-integration-stage.v1",
+  "recordedAt": "2026-11-10T19:06:03.105Z",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "publishedSiteVersion": 79,
+  "publishedVersionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_b50eae90dfd481918691b50c439bf10b",
+  "publishedCommit": "6d03c2adda9f60b1c97304f5491a428cfbec7a6c",
+  "deployment": {
+    "id": "appgdep_6af36a37f4f48191b4f5bf3e6fc88435",
+    "status": "succeeded",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "updatedAt": "2026-11-10T19:02:37.167593+00:00"
+  },
+  "localHeadBeforeMerge": "47ce3922bdd76c9687d7cfd5b9091c224365816c",
+  "stage": "source_reconciliation_complete_pending_4A_and_formal_validation",
+  "qualification": "Actual published3I source has been reconciled into the private7A branch. No final integrated freeze, test result, cost result or7A publication is asserted.",
+  "intermediateMergeCommit": "8e51f82ca0bf483df5e2a2fd7ec88e47b5113137",
+  "entryInventory": {
+    "connected": 55,
+    "declared": 76
+  },
+  "migrationInventory": {
+    "componentVerified": 169,
+    "partial": 142,
+    "pending": 1058,
+    "fullyVerified": 0
+  },
+  "retainedEvidenceNote": "Cached diff-check reported trailing whitespace only in four lines of the imported3I raw browser AX evidence. Those original evidence bytes were preserved, not normalized. No source-conflict markers remain."
+}

@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.game-case-selection.v1",
+  "game": "MIND",
+  "targetLevels": 3,
+  "selectedAt": "2026-11-10T17:54:17.338639+00:00",
+  "deadline": "2026-11-10T18:34:17.338639+00:00",
+  "maximumCumulativeSeconds": 2400,
+  "previousChargedSeconds": 0,
+  "previousClockQualification": "No prior live MIND attempt identified in the retained case clocks inspected; historical public candidate scans are not an active MIND resolution campaign. This is the one clock for all attempts in this delivery.",
+  "objective": "Demonstrate actual observed_feedback_sequence contribution through three natural levels if supported by the source contracts.",
+  "phases": {
+    "candidate-01": {
+      "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+      "directory": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session",
+      "manifest": "docs/migration/lot4a-evidence/diagnostic/candidate-01/source-manifest.json"
+    },
+    "baseline-78": {
+      "checkout": "/workspace/sites/sra-lot4a-base78",
+      "directory": "docs/migration/lot4a-evidence/baseline/mind-native049",
+      "manifest": "docs/migration/lot4a-evidence/baseline/source-manifest.json",
+      "actionCap": 8
+    }
+  }
+}
