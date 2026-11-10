@@ -1,0 +1,8 @@
+{
+  "schema": "logos-engine.coordination-reader-diagnostic.v1",
+  "recordedAt": "2026-11-10T23:30:50.005737+00:00",
+  "observedExitCode": 1,
+  "measurementExecuted": false,
+  "reason": "Initial setup required every historical publication_started flag to be false. It refused lot3 status before writing any copied status or isolation receipt. That status explicitly confirms terminal Site79 publication and slot release, but retains publication_started:true.",
+  "resolution": "Retain exact historical status and interpret its terminal publication/release with the actual verified successors. Require no active command, heavy work or performance in all five statuses. Current4A/7A/5A/4B publication flags are false; current5A/4B report no further execution."
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "logos-engine.published-baseline-checkout-verification.v1",
+  "recordedAt": "2026-11-10T23:19:22.024279+00:00",
+  "status": "verified",
+  "checkout": "/workspace/sites/sra-lot7b-baseline-20261110",
+  "commit": "dd355400264b50942486559b8ca56ee6dfc6a3cc",
+  "siteVersion": 87,
+  "nativeVersion": "0.54.0",
+  "nativeFiles": 286,
+  "nativeDigest": "f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9",
+  "nativeGitWorktreeClean": true,
+  "historicalCostTracesExact": true,
+  "sourceManifest": {
+    "path": "docs/migration/lot7b-evidence/baseline-integrated/source-manifest.json",
+    "sha256": "699559bcf331e34dfa8e62137b099f05ba2e160811bc8e8e18ed1a3117bec164",
+    "bytes": 33961
+  },
+  "publication": {
+    "path": "docs/migration/lot7b-evidence/coordination/published-base-binding.json",
+    "sha256": "e8db0cfbdb6e8a040a82322b0b9d72b57a42eef9904e56e5a0cd3a6b68d6ba55",
+    "bytes": 1463
+  },
+  "dependencies": "/workspace/sites/sra-lot7a-20261110/.sites-checkout/node_modules",
+  "qualification": "Detached checkout of actual published Site87. Native inventory equals published4B freeze and verified Git commit. Existing dependency directory reused. No source, test, tool or cost input modified; no engine execution or timing."
+}

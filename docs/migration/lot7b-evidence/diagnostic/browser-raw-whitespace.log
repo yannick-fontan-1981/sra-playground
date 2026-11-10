@@ -1,0 +1,8 @@
+docs/migration/lot7b-evidence/integrated-final/browser/final-ax.txt:181: trailing whitespace.
++							224 AXListMarker ▾ 
+docs/migration/lot7b-evidence/integrated-final/browser/final-ax.txt:195: trailing whitespace.
++									263 AXListMarker 1. 
+docs/migration/lot7b-evidence/integrated-final/browser/final-ax.txt:199: trailing whitespace.
++							247 text Inspect the V6 reasoning trace 
+docs/migration/lot7b-evidence/integrated-final/browser/final-ax.txt:214: trailing whitespace.
++					189 text The 100 games on this page run locally in your browser. The ongoing SRA Agent migration transfers V6 capabilities into native TypeScript and the common V7 reasoning architecture. Coordinate inputs, guarded action sequences and memory across levels are connected. The original Python game engines remain isolated from the agent. Explore the shared reasoning syntax in the 

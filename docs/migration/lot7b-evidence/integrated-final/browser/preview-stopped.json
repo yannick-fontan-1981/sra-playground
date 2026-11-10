@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.managed-preview-stop.v1",
+  "recordedAt": "2026-11-10T23:23:59.628484+00:00",
+  "command": [
+    "sites-preview",
+    "stop"
+  ],
+  "exitCode": 0,
+  "observedOutput": "Sites preview stopped",
+  "previewStopped": true,
+  "browserQa": {
+    "path": "docs/migration/lot7b-evidence/integrated-final/browser/browser-qa.json",
+    "sha256": "6ef037c81511ddf56e6d0bb5ec2585d2795a75bdb293b16b67ccf8068a76a281",
+    "bytes": 2709
+  }
+}

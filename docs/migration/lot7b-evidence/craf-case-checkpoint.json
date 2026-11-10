@@ -1,11 +1,11 @@
 {
   "schema": "logos-engine.cumulative-game-case-checkpoint.v1",
   "game": "CRAF",
-  "recordedAt": "2026-11-10T22:28:39.627893+00:00",
-  "casePhase": "paused_after_refined_development_source_replay",
+  "recordedAt": "2026-11-10T23:23:59.628484+00:00",
+  "casePhase": "paused_completed_integrated055_craf_browser_and_parity",
   "maximumCumulativeSeconds": 2400,
-  "cumulativeSeconds": 847.684697,
-  "remainingSeconds": 1552.3153029999999,
+  "cumulativeSeconds": 1646.100543,
+  "remainingSeconds": 753.899457,
   "priorCumulativeSeconds": 60.0,
   "preClockCharge": {
     "chargedSeconds": 60.0,
@@ -14,7 +14,8 @@
   },
   "targetLevels": 3,
   "attempts": [
-    "attempt1/execution-craf.json"
+    "attempt1/execution-craf.json",
+    "integrated-final/execution-craf.json"
   ],
   "chargedIntervals": [
     {
@@ -31,10 +32,26 @@
       "endedAt": "2026-11-10T22:28:39.627893+00:00",
       "elapsedSeconds": 464.219354,
       "outcome": "Refined original-source replay passed 144/144 calls and all 36 selected guard/command links. Initial validator exception retained; no new game action. Interval conservatively includes diagnosis, retry and delayed completion observation."
+    },
+    {
+      "startedAt": "2026-11-10T23:09:05.947521+00:00",
+      "purpose": "integrated055_cold_craf_campaign_and_original_checkpoint_restoration_parity",
+      "status": "closed",
+      "endedAt": "2026-11-10T23:18:29.637336+00:00",
+      "elapsedSeconds": 563.689815,
+      "outcome": "Integrated native 0.55 cold CRAF passed 3 official levels and 36 selected Symbols actions. Original Python comparison passed 144/144 calls, 432/432 source checks, 36/36 acquisition prefixes and actual native restorations, 252/252 checkpoint checks. Interval conservatively includes delayed completion observation; browser remains pending."
+    },
+    {
+      "startedAt": "2026-11-10T23:20:04.902453+00:00",
+      "purpose": "integrated055_managed_browser_cold_craf_pause_single_step_and_three_levels",
+      "status": "closed",
+      "endedAt": "2026-11-10T23:23:59.628484+00:00",
+      "elapsedSeconds": 234.726031,
+      "outcome": "Managed browser cold CRAF from level1 passed three levels and36actions. Pause after1realaction, one-action increment to2, resumed natural boundaries9/20/36. Actual UI/accessibility/screenshot retained. Preview stopped. No state injection or arbitrary level jump; Pause latency not measured."
     }
   ],
-  "limitation": "Development CRAF succeeds 3 levels/36 actions, all selected by Symbols. Strengthened replay passes 144 source calls and selected proposal/guard links; old capture lacks final checkpoint blocks. Actual 5A Site84 is integrated; 4B, final integrated campaign and browser proof remain pending. Retain this cumulative clock.",
-  "currentChargedIntervalSeconds": 464.219354,
+  "limitation": "Integrated final cold campaign, original Python source/actual restoration parity and managed browser all pass three CRAF levels/36actions. Prior failures and all cumulative time retained. No full original-caller parity, browser performance benchmark or measured Pause-latency claim.",
+  "currentChargedIntervalSeconds": 234.726031,
   "actualLevels": 3,
   "actions": 36
 }

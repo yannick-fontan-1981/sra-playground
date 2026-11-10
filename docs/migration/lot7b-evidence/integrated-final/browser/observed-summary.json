@@ -1,0 +1,51 @@
+{
+  "recordedAt": "2026-11-10T23:23:29.465Z",
+  "previewUrl": "http://127.0.0.1:4173/",
+  "finalUrl": "http://127.0.0.1:4173/?game=CRAF&level=4",
+  "game": "CRAF",
+  "startLevel": 1,
+  "learnedStateInjected": false,
+  "pause": {
+    "observed": "Paused.",
+    "actions": 1,
+    "levels": 0,
+    "plans": 1,
+    "latencyMeasured": false
+  },
+  "oneAction": {
+    "observed": "One action completed.",
+    "actions": 2,
+    "levels": 0,
+    "plans": 2
+  },
+  "boundaries": [
+    {
+      "actions": 9,
+      "levels": 1,
+      "plans": 9,
+      "visibleOwner": "public_symbol_transaction"
+    },
+    {
+      "actions": 20,
+      "levels": 2,
+      "plans": 20,
+      "visibleOwner": "public_symbol_transaction"
+    },
+    {
+      "actions": 36,
+      "levels": 3,
+      "plans": 36,
+      "visibleOwner": "public_symbol_transaction"
+    }
+  ],
+  "final": {
+    "actions": 36,
+    "levels": 3,
+    "plans": 36,
+    "activeSolvingSecondsDisplayed": 78.3,
+    "status": "Level completed.",
+    "visibleOwner": "public_symbol_transaction"
+  },
+  "targetLevels": 3,
+  "targetMet": true
+}
