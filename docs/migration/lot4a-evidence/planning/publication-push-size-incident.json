@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.source-publication-transport-incident.v1",
+  "recordedAt": "2026-11-10T20:07:32.788243+00:00",
+  "status": "remote_push_rejected_size_limit",
+  "observedAt": "2026-11-10T20:06:08Z",
+  "observedAtQualification": "Clock read immediately after collecting the failed helper result; not claimed as the server execution timestamp.",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "candidateCommit": "ef2febda6f62f4e31938b1477567c5379e6aec54",
+  "nativeDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+  "helper": "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/site-workflow.mjs",
+  "command": [
+    "node",
+    "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/site-workflow.mjs",
+    "--project-id",
+    "appgprj_6adbc388d79081918581b93b919d7258"
+  ],
+  "exitCode": 1,
+  "sentBytes": 136351470,
+  "perPushLimitBytes": 67108864,
+  "serverCode": "artifacts_git_receive_pack_request_too_large",
+  "retainedErrorExcerpt": [
+    "this push sent 136,351,470 bytes (130.0 MiB); the per-push limit is 67,108,864 bytes (64.0 MiB).",
+    "the limit applies to the data sent in one push, not to repository storage; retrying the same push will fail again.",
+    "push in smaller steps, for example older commits first with git push <remote> <commit>:<branch>, or split large changes across commits."
+  ],
+  "completeProcessLogCaptured": false,
+  "localCommitRetained": true,
+  "nativeOrRawEvidenceChanged": false,
+  "deploymentStarted": false,
+  "resolutionPlan": "Push a retained additive evidence commit chain in bounded steps, preserve all original commits, then merge the complete verified tree; use the standard Site helper and normal fast-forward pushes only. Intermediate source pushes are not Site deployments."
+}
