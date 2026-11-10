@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "cases": [
+    {
+      "id": "catr-044",
+      "game": "CATR",
+      "baseline": {
+        "path": "docs/migration/lot3c-current-evidence/final/regressions/catr-043-replay.json.gz",
+        "sha256": "2b7c3f2c53442dddda580f3d4187458306c8bc272c0e31c0fbb3b39a04282209"
+      },
+      "trace": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+      }
+    },
+    {
+      "id": "rswp-044",
+      "game": "RSWP",
+      "baseline": {
+        "path": "docs/migration/lot3c-current-evidence/final/regressions/rswp-043-replay.json.gz",
+        "sha256": "381b254ea252989d28e11ca4457cf621ddfdad63c5f68f8dcf326eee11f5e6c6"
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "qualification": "Recorded-return regressions against actual native0.44 recomputed reports from Site72, commit a39997bffdca1ce080879d967d3f5eb95a88d544, digest e914399487992c3f53b3058ee734c470d738594e7344285799203462fac6a255. Original public traces retain their historical provenance (CATR0.42, RSWP0.38); they are not new0.44 live traces. Every0.45 command is computed before its recorded return. All17unchanged checks per case apply. The new passive Rooted fields are optional until actual selection/acquisition, preserving unrelated empty report dictionaries. No new live game success, full-state equivalence, timing evidence or new-branch contribution is claimed by this replay."
+}

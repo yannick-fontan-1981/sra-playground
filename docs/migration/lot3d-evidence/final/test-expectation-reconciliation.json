@@ -1,0 +1,46 @@
+{
+  "schema": "logos-engine.test-expectation-reconciliation.v1",
+  "recordedAt": "2026-11-10T08:54:37.617912+00:00",
+  "nativeSourceUnchanged": true,
+  "nativeSourceDigest": "5b5e59e14e4d417d92cacd6e79d21b6e8e833d715c8d05df2b74806bb09b40f3",
+  "initialResult": {
+    "path": "docs/migration/lot3d-evidence/final/validation/delta-tests-run.json",
+    "bytes": 104588,
+    "sha256": "7fabfb9b44b8f7a37c5f3c934c9877037b1d076e29e8448d954d9a47c8028403"
+  },
+  "initialCounts": {
+    "tests": 1724,
+    "pass": 1722,
+    "fail": 2
+  },
+  "changedTests": [
+    {
+      "path": "tests/v6-coupled-pair-planning.test.ts",
+      "beforeSha256": "b89c61e60703cf0b0f3a03949c1df3e2fd2cee83ce776c816c9e9604a750507e",
+      "afterSha256": "507a7eb47a10323c83f11eec5c8a3c1906095d63a58add72b2f7e98e51d923fb"
+    },
+    {
+      "path": "tests/v6-support-caller-integration.test.ts",
+      "beforeSha256": "077ec35c1fe7f2f262cc97a5c25e0fe4defa6f5d22f54d03beb7ba483bfbba78",
+      "afterSha256": "058c26ebf646bcbec636fdd2959558322e924da2d4c1475d33f06ed1f88a61e9"
+    }
+  ],
+  "changes": [
+    "Expected connected/pending branch inventory updated from3/6to4/6 for the now connected RootedLine layer.",
+    "Expected shared native digest scope label updated to include RootedLine; actual legacy state digest assertions remain unchanged."
+  ],
+  "buildReceiptReuse": {
+    "original": {
+      "path": "docs/migration/lot3d-evidence/final/validation/checks-run.json",
+      "bytes": 71059,
+      "sha256": "21b25e5cb12b5005402723b64b0fb3954d40f5e230e4515df1621f338584e0bf"
+    },
+    "exactCopy": {
+      "path": "docs/migration/lot3d-evidence/final/revalidation/validation/checks-run.json",
+      "bytes": 71059,
+      "sha256": "21b25e5cb12b5005402723b64b0fb3954d40f5e230e4515df1621f338584e0bf"
+    },
+    "reason": "Successful build/source/public/content inputs did not change. Only two test expectations changed; no second build claim is made."
+  },
+  "qualification": "The initial failed formal result and all its logs are retained. No behavior assertion, comparator, source fixture, native code or cost policy is relaxed. A complete50-file rerun will bind the updated test inventory independently."
+}

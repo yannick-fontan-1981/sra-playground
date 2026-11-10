@@ -11,7 +11,19 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-## Current transfer: lot 3C native 0.44.0, current evidence corrected
+## Current transfer: lot 3D native 0.45.0, RootedLine and consumed V5 kernel
+
+Native **0.45.0** is frozen at **`5b5e59e14e4d417d92cacd6e79d21b6e8e833d715c8d05df2b74806bb09b40f3`**, with **256 native files and a 267-file archive**. The [delivery report](lot3d-rooted-line.md) and [source lineage](lot3d-rooted-line-lineage.md) cover RootedLine public measurement, acquired controls, conditional simulation/non-staged V5 search, guards, shared acquisition and atomic restoration. The new owner preserves six actual published 0.44 checkpoints and joins the current working certificate. The portable JSON integer domain and bounded native interruption are explicit; staged V5 paths and full inheritance remain untransferred.
+
+The formal scope passes **1,724/1,724 tests in 50 files**, **5/5 project checks/build**, and strict **CATR/RSWP 34/34** against 0.44. The initial 1722/1724 result is preserved: two stale coverage metadata expectations were updated, with native code unchanged. Source oracles cover 77 V5 cases, 53 V6 cases, 19 guards and 99 public initial rasters, excluding CWSE. The 1,786 pinned originals remain unchanged.
+
+**SK48 remains unsolved in the announced three-level campaign: 12 actions, 0 levels, 5 prefixes.** The original and native own layers agree on 126 checks through 12 acquisitions, 24 guards and the terminal `conditional_contact_model_refuted`. Four controls were acquired; seven conditional predictions matched and the eighth was refuted. Contribution replay verifies 6 restorations and 26 ablations, 10 changing an action/refusal. Browser Pause/step/resume reaches the same 12/0/5 failure. These checks establish transfer and acquired-knowledge use, not a solved game or universal contact law. SK48 clock 667.35444 seconds is retained with 1732.64556 seconds remaining; CWSE 2399.683865 seconds and its unmet target remain unchanged, without a new attempt.
+
+Coverage is **4/6 observed branches, 50/76 complete entries, 37 compiled workflows**. The static catalogue records 156 component-verified modules, 138 partial transfers and 1075 pending modules, with no full-transfer gate advanced. **3E, reception_service_plan**, is the next independent transfer, followed by 3F. RootedLine model refinement remains a separate qualified functional follow-up, preserving the counterexample and cumulative clock.
+
+The predeclared cost window against fresh 0.44 is **accepted on both games**: **STCK +9.609248%, SMLP −2.535940%**, across 32 measured sessions and 400 actions. The independent arithmetic review passes 231 checks. Historical metric classification stays **12/16**, with four STCK phase overruns: known-prefix service +24.858250%, request +25.726153%, guard +20.964611%, restoration +13.672589%. Cohort 2 STCK complete-session median is +15.844198% and remains included in the declared pooled decision; pooled STCK headroom is only 0.390752 percentage points. All cohorts and available p95 remain in the [cost report](lot3d-evidence/performance/results.md). Cost acceptance does not close the unmet SK48 functional target.
+
+## Historical transfer: lot 3C native 0.44.0, current evidence corrected
 
 Native **0.44.0** is frozen at **`e914399487992c3f53b3058ee734c470d738594e7344285799203462fac6a255`**, with **251 native files and a 262-file archive**. The [correction report](lot3c-current-evidence-correction.md) records an explicit native extension that binds the admitted current observation in the bounded Exposed proposal envelope without changing the plan, identity, commands, acquisition, retained memory or guards. Source fixture parity remains exact outside the three explicitly qualified evidence fields of one case. The independent retained-context proof and 14 contrary probes pass.
 

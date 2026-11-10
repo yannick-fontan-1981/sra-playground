@@ -1,0 +1,54 @@
+{
+  "schema": "logos-engine.browser-qa-observation.v1",
+  "status": "controls_and_matching_failure_verified",
+  "recordedAt": "2026-11-10T08:52:47.458439+00:00",
+  "game": "SK48",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.45.0",
+  "nativeSourceDigest": "5b5e59e14e4d417d92cacd6e79d21b6e8e833d715c8d05df2b74806bb09b40f3",
+  "managedPreview": "http://127.0.0.1:4173/",
+  "finalObservedUrl": "http://127.0.0.1:4173/?game=SK48&level=1",
+  "method": "CUA visible controls, accessibility observations and screenshot only; no browser agent state, hidden game data or game code read. Source identity comes from the separate frozen checkout/build receipts.",
+  "steps": [
+    {
+      "action": "SelectSK48thenAgent; cold session",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0,
+      "level": 1
+    },
+    {
+      "action": "Run then Pause; Paused observed",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0,
+      "level": 1
+    },
+    {
+      "action": "One action completed",
+      "actions": 1,
+      "levelsSolved": 0,
+      "completedPlans": 1,
+      "level": 1
+    },
+    {
+      "action": "Resume Run to next level; natural stop frontier_unknown",
+      "actions": 12,
+      "levelsSolved": 0,
+      "completedPlans": 5,
+      "level": 1
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3d-evidence/final/browser/sk48-final.png",
+      "bytes": 71866,
+      "sha256": "9d44942265ababb91ad191e68e154bc4bd7bec482f99c3843e174ac96797ebd5"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/final/browser/sk48-final-ax.txt",
+      "bytes": 680,
+      "sha256": "f53d7b21f1ea70812f56a0a00f843dadff4e6960369c4a1f8da311cb1691dab4"
+    }
+  ],
+  "qualification": "One separate continuous cold browser session, no level jump or memory/action injection. Pause, single action and resume verified. Final visible failure12actions/0levels/5plans matches the instrumented campaign outcome; the requested3levels remain unmet. Inspector stayed closed. The saved AX artifact is the final accessibility diff; screenshot includes all three final counters. This is source-preview UI verification, separate from compiled build, source oracle and timing evidence."
+}

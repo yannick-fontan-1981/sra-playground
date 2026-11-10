@@ -1404,7 +1404,11 @@
         "src/logos-engine/v6-relational-chamber-access.ts",
         "src/logos-engine/v5-finite-relation-domain.ts",
         "src/logos-engine/v6-exposed-reception-observation.ts",
-        "src/logos-engine/v6-exposed-reception-access.ts"
+        "src/logos-engine/v6-exposed-reception-access.ts",
+        "src/logos-engine/v6-rooted-line-observation.ts",
+        "src/logos-engine/v6-rooted-line-mechanics.ts",
+        "src/logos-engine/v6-rooted-line-access.ts",
+        "src/logos-engine/v5-piercing-plan.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -1445,9 +1449,17 @@
         "tests/v6-exposed-reception-integration.test.ts",
         "tests/fixtures/v6-exposed-reception-legacy-checkpoints.json.gz",
         "docs/migration/lot3c-evidence/diagnostic/projection-parity.json",
-        "docs/migration/lot3c-exposed-reception-lineage.md"
+        "docs/migration/lot3c-exposed-reception-lineage.md",
+        "scripts/export-v6-rooted-line-reference.py",
+        "tests/fixtures/v6-rooted-line-reference.json.gz",
+        "tests/v6-rooted-line-observation.test.ts",
+        "tests/v6-rooted-line-access.test.ts",
+        "tests/v6-rooted-line-integration.test.ts",
+        "scripts/export-v6-rooted-line-legacy-checkpoints.mjs",
+        "tests/fixtures/v6-rooted-line-legacy-checkpoints.json.gz",
+        "docs/migration/lot3d-rooted-line-lineage.md"
       ],
-      "notes": "The supported common closure integrates occurrence recall, cell placement, alternating graph, pair acquisition/planning and auxiliary support in one authoritative public_occurrence_recall family. Separate source entries preserve coupled/graph goal-access priority and cell-before-recall window order. Selected and passive acquisition follow the source record chain before occurrence/cell packet observation; native checkpoint reconstruction includes every transferred reducer. Two unchanged ObservedCompositionConstraint journals compare complete unfiltered common envelopes, including nonempty cell evidence, observed return and official terminal cases. Product-runtime checks separately verify fresh SRC/WHY-ACT selection, single acquisition ownership, causal facts and atomic rollback. The current digest is native_program_discovery_recall_radial_ports_cell_placement_alternating_graph_and_coupled_support_v6; remaining ObservedCompositionConstraint providers and the full inherited digest are still pending. Controlled observations do not establish full-caller or game-campaign parity. The v39 program acquisition and v40 control-access proofs use that same authoritative shared state. The v40 preparation witness reads acquired state without adding events during lookahead; the actual proposal, source state revision and continuation proof are retained through the Kernel. Native coordination and access remain explicit extensions, not additional completed Python providers. Lot3A/native0.37 adds observed_composition_services at its declared first goal-access position with panel_service_plan, one of six branches. The observed/coupled/graph adapters share one inherited planner, preserve blocking refusal and retain their source envelope/guard semantics. New Panel state participates in the working certificate and conditional native digest. The five other branches and cumulative point generators remain pending; 50/76 complete entry connections plus one explicit partial entry are reported separately. Lot3B/native0.39 extends the same owner with chamber_relation_plan and its measured point candidates. Panel remains ahead of Chamber in proposal/guard dispatch; Chamber acquires and contributes its conditional native digest before Panel. The facade is now2/6 branches, with ExposedReception, RootedLine, ReceptionService and ReferencePopulation still pending. The full source inheritance digest and cumulative input closure remain incomplete. Existing pre-Chamber checkpoints retain their exact native digest until a Chamber event is acquired. Lot3C/native0.43 addendum: ExposedReception own projection, nominal V5 push witnesses, conditional models and guarded proposal/acquisition now join the same owner. Proposal/guard order is Panel then Chamber then Exposed; acquisition/digest order is inherited support then Exposed then Chamber then Panel. Measured point candidates append Exposed before Chamber/Panel. The facade is now3/6, with RootedLine, ReceptionService and ReferencePopulation pending. SharedSeries replays observed_exposed_reception exactly once, includes Exposed identity/revision/structural witness, and preserves0.42 checkpoints by excluding the empty new layer from its native digest. The reception_events name collision with future ReceptionService is explicitly scoped to this own layer; full source journal/digest parity is not claimed. Native assignment/chain/heuristic/deadline bounds preserve unknown/incomplete outcomes. No campaign result or full caller parity is inferred from these component proofs."
+      "notes": "The supported common closure integrates occurrence recall, cell placement, alternating graph, pair acquisition/planning and auxiliary support in one authoritative public_occurrence_recall family. Separate source entries preserve coupled/graph goal-access priority and cell-before-recall window order. Selected and passive acquisition follow the source record chain before occurrence/cell packet observation; native checkpoint reconstruction includes every transferred reducer. Two unchanged ObservedCompositionConstraint journals compare complete unfiltered common envelopes, including nonempty cell evidence, observed return and official terminal cases. Product-runtime checks separately verify fresh SRC/WHY-ACT selection, single acquisition ownership, causal facts and atomic rollback. The current digest is native_program_discovery_recall_radial_ports_cell_placement_alternating_graph_and_coupled_support_v6; remaining ObservedCompositionConstraint providers and the full inherited digest are still pending. Controlled observations do not establish full-caller or game-campaign parity. The v39 program acquisition and v40 control-access proofs use that same authoritative shared state. The v40 preparation witness reads acquired state without adding events during lookahead; the actual proposal, source state revision and continuation proof are retained through the Kernel. Native coordination and access remain explicit extensions, not additional completed Python providers. Lot3A/native0.37 adds observed_composition_services at its declared first goal-access position with panel_service_plan, one of six branches. The observed/coupled/graph adapters share one inherited planner, preserve blocking refusal and retain their source envelope/guard semantics. New Panel state participates in the working certificate and conditional native digest. The five other branches and cumulative point generators remain pending; 50/76 complete entry connections plus one explicit partial entry are reported separately. Lot3B/native0.39 extends the same owner with chamber_relation_plan and its measured point candidates. Panel remains ahead of Chamber in proposal/guard dispatch; Chamber acquires and contributes its conditional native digest before Panel. The facade is now2/6 branches, with ExposedReception, RootedLine, ReceptionService and ReferencePopulation still pending. The full source inheritance digest and cumulative input closure remain incomplete. Existing pre-Chamber checkpoints retain their exact native digest until a Chamber event is acquired. Lot3C/native0.43 addendum: ExposedReception own projection, nominal V5 push witnesses, conditional models and guarded proposal/acquisition now join the same owner. Proposal/guard order is Panel then Chamber then Exposed; acquisition/digest order is inherited support then Exposed then Chamber then Panel. Measured point candidates append Exposed before Chamber/Panel. The facade is now3/6, with RootedLine, ReceptionService and ReferencePopulation pending. SharedSeries replays observed_exposed_reception exactly once, includes Exposed identity/revision/structural witness, and preserves0.42 checkpoints by excluding the empty new layer from its native digest. The reception_events name collision with future ReceptionService is explicitly scoped to this own layer; full source journal/digest parity is not claimed. Native assignment/chain/heuristic/deadline bounds preserve unknown/incomplete outcomes. No campaign result or full caller parity is inferred from these component proofs. Lot3D/native0.45 addendum: RootedLine is the fourth own observed-composition layer. Proposal and guard priority is RootedLine, Panel, Chamber, Exposed; own acquisition and digest order is Exposed, Chamber, Panel, RootedLine after inherited support. RootedLine has no extra input generator. SharedSeries certifies its identity/revision/structural witness and replays observed_rooted_line exactly once; the empty new layer preserves actual published0.44 checkpoints. ReceptionService and ReferencePopulation, full inherited EphemeralMap closure and original full-caller digest remain pending. Unknown/deadline refusals remain blocking; no game-specific inputs or inferred action meanings are introduced."
     },
     {
       "sources": [
@@ -1547,7 +1559,8 @@
         "src/logos-engine/v6-ordered-reaction-measurements.ts",
         "src/logos-engine/v6-inventory-measurements.ts",
         "src/logos-engine/v6-inventory-project.ts",
-        "src/logos-engine/v6-inventory-caller-context.ts"
+        "src/logos-engine/v6-inventory-caller-context.ts",
+        "src/logos-engine/v5-piercing-contracts.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -1574,9 +1587,13 @@
         "tests/v6-inventory-helpers-reference.test.ts",
         "scripts/export-v6-inventory-family-reference.py",
         "tests/fixtures/v6-inventory-family-reference.json.gz",
-        "tests/v6-inventory-family-reference.test.ts"
+        "tests/v6-inventory-family-reference.test.ts",
+        "scripts/export-v5-piercing-reference.py",
+        "tests/fixtures/v5-piercing-reference.json.gz",
+        "tests/v5-piercing-native.test.ts",
+        "docs/migration/lot3d-rooted-line-lineage.md"
       ],
-      "notes": "Only the public geometric values and bounds consumed from FrameGrid, BoundingBox and KnownGridCellRecountInput in V6 joint_route are represented, including positive extents and the 4096-cell bound. This is not a general Pydantic or contract-system replacement. V54 additionally represents the finite FrameGrid/component/periodic-grid/InteractionProbeInput values constructed by the ReactiveContact and Source81 wrappers. Their absent optional source inputs keep their original empty defaults. General Pydantic coercion, arbitrary reference types and unused contract classes remain outside the transfer. V55 additionally represents the FrameGrid and component input values actually constructed by OrderedReaction geometry: rectangular public integer rasters and four-neighbour connectivity. Its source measurement receives ordered public frames and inferred non-negative lattice phases. This extends the consumed JSON domain only; general Pydantic coercion, nominal Python values and unused contract classes remain outside this partial mapping. V56 adds the native JSON projection of FrameGrid, BoundingBox, component/periodic-grid records and InteractionProbeInput fields actually constructed by inventory initial/projection/endpoints, plus the two-frame meter predicate request. Bounding-box computed dimensions and FrameGrid rows are explicit representation adapters in the independent tests. Unused optional source fields retain empty defaults; arbitrary Pydantic coercion, Python nominal identity, malformed imported models and wider production probe inputs remain outside this partial mapping."
+      "notes": "Only the public geometric values and bounds consumed from FrameGrid, BoundingBox and KnownGridCellRecountInput in V6 joint_route are represented, including positive extents and the 4096-cell bound. This is not a general Pydantic or contract-system replacement. V54 additionally represents the finite FrameGrid/component/periodic-grid/InteractionProbeInput values constructed by the ReactiveContact and Source81 wrappers. Their absent optional source inputs keep their original empty defaults. General Pydantic coercion, arbitrary reference types and unused contract classes remain outside the transfer. V55 additionally represents the FrameGrid and component input values actually constructed by OrderedReaction geometry: rectangular public integer rasters and four-neighbour connectivity. Its source measurement receives ordered public frames and inferred non-negative lattice phases. This extends the consumed JSON domain only; general Pydantic coercion, nominal Python values and unused contract classes remain outside this partial mapping. V56 adds the native JSON projection of FrameGrid, BoundingBox, component/periodic-grid records and InteractionProbeInput fields actually constructed by inventory initial/projection/endpoints, plus the two-frame meter predicate request. Bounding-box computed dimensions and FrameGrid rows are explicit representation adapters in the independent tests. Unused optional source fields retain empty defaults; arbitrary Pydantic coercion, Python nominal identity, malformed imported models and wider production probe inputs remain outside this partial mapping. Lot3D adds the finite JSON Piercing configuration, effect, conditional-model, goal and non-staged search contracts consumed by RootedLine. Source defaults, structural checks and geometry are preserved on the explicitly portable safe-integer JSON domain. General Pydantic coercions, unsafe integers, staged requests and arbitrary Python representations remain outside this partial mapping."
     },
     {
       "sources": [
@@ -3959,6 +3976,104 @@
         "docs/migration/lot3c-exposed-reception-lineage.md"
       ],
       "notes": "Lot3C/native0.43 consumes only _expand_push_chain through nominalReceptionStep: current occupancy, sorted peer expansion, admitted/fixed-cell refusals and visit accounting. It does not transfer measure_seeded_partial_push_d, the complete Pydantic request facade, partial remote commit protocol or transaction ledger. Attached/coupled reception effects stay conditional acquired candidates. Native work bounds are explicit incomplete-result extensions, not a claim of complete V5 transaction parity."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/rooted_line_projection.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-rooted-line-observation.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-rooted-line-reference.py",
+        "tests/fixtures/v6-rooted-line-reference.json.gz",
+        "tests/v6-rooted-line-observation.test.ts",
+        "tests/v6-rooted-line-access.test.ts",
+        "tests/v6-rooted-line-integration.test.ts",
+        "scripts/export-v6-rooted-line-legacy-checkpoints.mjs",
+        "tests/fixtures/v6-rooted-line-legacy-checkpoints.json.gz",
+        "docs/migration/lot3d-rooted-line-lineage.md"
+      ],
+      "notes": "Own public raster grammar, physical projection, V5 configuration construction and predicted configuration projection are transferred. Unchanged source expectations include synthetic geometry and archived initial public packets; zero actions and no game implementation inputs. This is component parity, not full caller or game equivalence."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/rooted_line_mechanics.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-rooted-line-mechanics.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-rooted-line-reference.py",
+        "tests/fixtures/v6-rooted-line-reference.json.gz",
+        "tests/v6-rooted-line-observation.test.ts",
+        "tests/v6-rooted-line-access.test.ts",
+        "tests/v6-rooted-line-integration.test.ts",
+        "scripts/export-v6-rooted-line-legacy-checkpoints.mjs",
+        "tests/fixtures/v6-rooted-line-legacy-checkpoints.json.gz",
+        "docs/migration/lot3d-rooted-line-lineage.md",
+        "scripts/export-v5-piercing-reference.py",
+        "tests/fixtures/v5-piercing-reference.json.gz",
+        "tests/v5-piercing-native.test.ts"
+      ],
+      "notes": "Own observed effect derivation, conditional model construction and non-staged V5 request adapter are transferred. The current configuration is retained only when its physical projection still matches. Conditional laws are source library hypotheses, never claimed as universally learned physics. The additional native current-deadline interruption is named and tested separately."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/rooted_line_access.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-rooted-line-access.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-rooted-line-reference.py",
+        "tests/fixtures/v6-rooted-line-reference.json.gz",
+        "tests/v6-rooted-line-observation.test.ts",
+        "tests/v6-rooted-line-access.test.ts",
+        "tests/v6-rooted-line-integration.test.ts",
+        "scripts/export-v6-rooted-line-legacy-checkpoints.mjs",
+        "tests/fixtures/v6-rooted-line-legacy-checkpoints.json.gz",
+        "docs/migration/lot3d-rooted-line-lineage.md"
+      ],
+      "notes": "Complete own RootedLine layer: calibration, conditional plan, unresolved/refuted refusal, binding and return guards, current evidence, control persistence across epochs, tried/current reset, own events and digest. Common ownership and atomic legacy restoration are covered separately. The full inherited EphemeralMap and six-branch observed composition closure remain incomplete."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/piercing_plan.py"
+      ],
+      "targets": [
+        "src/logos-engine/v5-piercing-plan.ts",
+        "src/logos-engine/v5-piercing-contracts.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v5-piercing-reference.py",
+        "tests/fixtures/v5-piercing-reference.json.gz",
+        "tests/v5-piercing-native.test.ts",
+        "docs/migration/lot3d-rooted-line-lineage.md"
+      ],
+      "notes": "Only the subgraph consumed by V6 RootedLine: conditional simulation, geometry/contact/support checks and non-staged bounded BFS search with source identities. Staged search, continuation, rollout and unused reconciliation APIs remain untransferred. Explicit native interruption retains validated steps/witnesses, reports an open frontier and never manufactures a completed plan."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/piercing_rooted_order.py"
+      ],
+      "targets": [
+        "src/logos-engine/v5-piercing-plan.ts",
+        "src/logos-engine/v5-piercing-contracts.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v5-piercing-reference.py",
+        "tests/fixtures/v5-piercing-reference.json.gz",
+        "tests/v5-piercing-native.test.ts",
+        "docs/migration/lot3d-rooted-line-lineage.md"
+      ],
+      "notes": "Rooted intersection measurement consumed by the non-staged search is transferred with unchanged source fixtures. Requested-order goal measurement belongs to piercing_plan.py. Push/pierce/withdraw successor APIs, clearance and multi-rod wrappers not consumed by RootedLine remain outside this partial mapping."
     }
   ],
   "scopeNotes": [
@@ -4022,7 +4137,8 @@
     "Lot 2C (native 0.35.0) connects retained morphology station methods, guarded entry rebind/continuation and managed capacity planning through existing caller, morphology and inventory owners. The three focused suites contain 96 entry checks, 101 managed checks and 39 boundary/adapter checks; their synthetic/public consumer contracts are distinct from any live campaign. All exporters verify the 1786 pinned originals before/after; source boundary doubles and unordered projection-edge comparison are explicitly scoped. Four new helper mappings remain partial_transfer, existing geometry/adapter/common-caller mappings remain partial, and no complete-migration gate is advanced.",
     "Lot3A/native0.37 transfers the complete own Panel service branch from V6 into the existing SharedSeries owner. The registry facade is explicitly 1/6 partial and does not increment the connected50/76 total. Projection is component_verified; access and common facade retain partial_transfer because inherited branches remain pending. Original source fixtures, shared-owner tests, the cold three-level RSWP campaign and separate browser/cost evidence retain their distinct scopes. No new V5 numerical kernel or full source-caller parity is claimed; all six complete-migration gates remain false.",
     "Lot3B/native0.39 transfers the Chamber own layer into SharedSeries and reuses the consumed V5 finite relation domain kernel. observed_composition_services is explicitly2/6 partial, with connected50/76 unchanged. Own Chamber projection is component_verified; access and V5 kernel are partial_transfer. Current binding, contradiction, acquisition, native checkpoint and source identity contracts have separate proofs. All six complete-migration gates remain false; compile counts and isolated component parity do not imply full caller or game equivalence.",
-    "Lot3C/native0.43 adds ExposedReception as the third of six observed-composition branches under SharedSeries. The small-lattice projection is component_verified; access and the sole consumed V5 _expand_push_chain remain partial_transfer because their full ancestor/transaction closures are not transferred. Numeric source identity, acquired conditional effects, strict-progress bounded search, source dispatch/acquisition order and atomic0.42 checkpoint compatibility have separate component/integration proofs. The future reception_events collision with ReceptionService remains an explicit ownership/migration contract for that port. Connected50/76,37 compiled workflows and all six false completion gates remain distinct; no live campaign or cost result is anticipated by these mappings."
+    "Lot3C/native0.43 adds ExposedReception as the third of six observed-composition branches under SharedSeries. The small-lattice projection is component_verified; access and the sole consumed V5 _expand_push_chain remain partial_transfer because their full ancestor/transaction closures are not transferred. Numeric source identity, acquired conditional effects, strict-progress bounded search, source dispatch/acquisition order and atomic0.42 checkpoint compatibility have separate component/integration proofs. The future reception_events collision with ReceptionService remains an explicit ownership/migration contract for that port. Connected50/76,37 compiled workflows and all six false completion gates remain distinct; no live campaign or cost result is anticipated by these mappings.",
+    "Lot3D/native0.45 adds RootedLine as the fourth of six observed-composition branches, in the same SharedSeries owner. Its own projection/mechanics have component proofs; access and the consumed V5 conditional Piercing subgraph remain partial transfers. Source fixture parity, common binding/acquisition/restoration and measured game contribution are distinct evidence. The native portable JSON integer domain and current-deadline interruption are explicit; staged V5 paths remain untransferred. Complete-entry coverage remains50/76,37 compiled workflows, and all global completion gates remain false. No game/cost success is inferred from static mappings."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,

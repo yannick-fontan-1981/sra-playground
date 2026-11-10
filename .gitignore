@@ -227,3 +227,10 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot3c-current-evidence/final/regressions/catr-043-replay.json.gz
 /docs/migration/lot3c-current-evidence/final/regressions/rswp-043-replay.json.gz
 /docs/migration/lot3c-current-evidence/final/source-archive.tar.gz
+/docs/migration/lot3d-evidence/final/source-archive.tar.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot3d-evidence/baseline/sk48-bounded-reference/sk48-campaign.json.gz
+/docs/migration/lot3d-evidence/final/regressions/catr-044-replay.json.gz
+/docs/migration/lot3d-evidence/final/regressions/rswp-044-replay.json.gz
+/docs/migration/lot3d-evidence/final/sk48-rooted-session/sk48-campaign.json.gz

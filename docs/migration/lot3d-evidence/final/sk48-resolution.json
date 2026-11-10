@@ -1,0 +1,105 @@
+{
+  "schema": "logos-engine.lot3d.rooted-line-resolution.v1",
+  "status": "transferred_and_contract_verified_functional_target_unmet",
+  "game": "SK48",
+  "targetLevels": 3,
+  "actual": {
+    "actions": 12,
+    "levelsCompleted": 0,
+    "prefixes": 5,
+    "stop": "frontier_unknown",
+    "ownTerminalRefusal": "conditional_contact_model_refuted"
+  },
+  "baseline": {
+    "native": "0.44.0",
+    "actions": 16,
+    "levelsCompleted": 0,
+    "outerActionCapReached": true,
+    "qualification": "Bounded diagnostic reference; not a full-game verdict."
+  },
+  "sourceParity": {
+    "checksPassed": 126,
+    "checksTotal": 126,
+    "proposals": 5,
+    "returns": 12,
+    "guards": 24,
+    "completeOwnStatesAndDigestsMatched": true,
+    "terminalOwnRefusalMatched": true
+  },
+  "contribution": {
+    "prefixes": 5,
+    "actions": 12,
+    "ownEvents": 12,
+    "restorations": 6,
+    "ablations": 26,
+    "changedActionOrRefusal": 10,
+    "unchangedActionOrRefusal": 16,
+    "controlsAndRefutationContribute": true,
+    "retainedCurrentContributionNotDemonstrated": true,
+    "isolatedTriedContributionNotDemonstrated": true
+  },
+  "conditionalOutcomes": {
+    "matched": 7,
+    "refuted": 1,
+    "qualification": "Seven conditional predictions matched the public return before the eighth contradicted the material displacement. Both source and native seal and block. Matching geometry does not prove a universal contact or support law."
+  },
+  "browser": {
+    "actions": 12,
+    "levelsCompleted": 0,
+    "plans": 5,
+    "pauseAtActions": 0,
+    "singleActionVerified": true,
+    "resumeVerified": true,
+    "naturalFailureMatchesCampaign": true
+  },
+  "caseClock": {
+    "selectedAt": "2026-11-10T08:44:44.967642+00:00",
+    "workFinishedAt": "2026-11-10T08:55:52.322082+00:00",
+    "currentIntervalSeconds": 667.35444,
+    "previousCumulativeSeconds": 0,
+    "cumulativeSeconds": 667.35444,
+    "maximumCumulativeSeconds": 2400,
+    "remainingSeconds": 1732.64556,
+    "exhausted": false,
+    "furtherWorkThisDelivery": false,
+    "qualification": "Wall interval covers selection, reference, candidate, source diagnosis, contribution checks and browser session without reset. Later unrelated release validation and STCK/SMLP timing are not new SK48 work. Any future SK48 diagnosis must resume this cumulative value."
+  },
+  "CWSE": {
+    "cumulativeSeconds": 2399.683865,
+    "furtherAttemptOrDiagnosis": false,
+    "remainingFunctionalTargetUnmet": true
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot3d-evidence/diagnostic/sk48-clock-start.json",
+      "sha256": "d0a29043557f86e904a1b0aa6f3a1f4c2d5906ae1df53689199e4f28a6f5ed91",
+      "bytes": 1012
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/final/sk48-rooted-session/execution-sk48.json",
+      "sha256": "b5e964cc01d1f4993056e9f85708e5450ff977a437c1bc0697d4361e140eb195",
+      "bytes": 64859
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/final/sk48-rooted-session/rooted-line-contribution.json",
+      "sha256": "fef338266aeb4bf9c2c191a06d6c9d89538df979c08a5ece8bb14616a673a3a4",
+      "bytes": 198156
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/diagnostic/sk48-public-parity.json",
+      "sha256": "ea716954b3e94314ee68d8525d05c817f3eaba5d2cd3855aa137886cdc381aa4",
+      "bytes": 8557
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/final/browser/browser-qa.json",
+      "sha256": "5dd0ee9b6134354ddf98b8f41fa25d5eb076f8e5c9b8d79f145dc9e4175af537",
+      "bytes": 2244
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/baseline/sk48-bounded-reference/execution-sk48.json",
+      "sha256": "07e557f0697c1a55de99a19baa63bd03d174d39839d9b35174d43c29ba246a38",
+      "bytes": 63736
+    }
+  ],
+  "qualification": "RootedLine own transfer and consumed V5 subgraph are verified, with acquired controls and refutation consumed by the common engine. The three-level campaign target is not met; no full original caller parity, universal learned physics or closed game capability is claimed. The observed mismatch also occurs in unchanged Python and does not support a game-specific rule or label-based workaround. Future model refinement and other independent observed branches remain explicit roadmap work."
+}

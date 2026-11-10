@@ -1,0 +1,84 @@
+{
+  "schema": "logos-engine.native-cost-protocol-preparation.v1",
+  "preparedAt": "2026-11-10T08:45:52.105995+00:00",
+  "status": "awaiting_candidate_source_freeze",
+  "measurementExecuted": false,
+  "baselineCheckout": "/workspace/sites/sra-published-044",
+  "candidateCheckout": "/workspace/sites/sra-playground-step3d/.sites-checkout",
+  "baselineManifest": {
+    "path": "docs/migration/lot3d-evidence/baseline/source-manifest.json",
+    "sha256": "827f90441f353be4f4c0e9b3ec35c5c71cf7dadd923e4fe7d98cf7bd8e0350c3",
+    "bytes": 29682
+  },
+  "candidateManifestPath": "docs/migration/lot3d-evidence/final/source-manifest.json",
+  "candidateArchiveManifestPath": "docs/migration/lot3d-evidence/final/source-archive.json",
+  "cases": {
+    "path": "docs/migration/lot3d-evidence/performance/cases.json",
+    "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+    "bytes": 1451
+  },
+  "diagnosticComparisonPolicy": {
+    "path": "docs/migration/lot3d-evidence/performance/comparison-policy.json",
+    "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+    "bytes": 991
+  },
+  "retainedTools": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613",
+      "bytes": 8933
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4",
+      "bytes": 17810
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940",
+      "bytes": 22204
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341",
+      "bytes": 8476
+    }
+  ],
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "relativeGlobalBudget": 0.1,
+  "globalComparison": "strictly_less_than",
+  "phaseOverrunsBlockAcceptance": false,
+  "allCasesMustPass": true,
+  "crossCaseCompensation": false,
+  "pendingRequirements": [
+    "Freeze and hash native 0.45 candidate and its source archive.",
+    "Finalize the global policy, protocol and declaration after the freeze, before any official measurement.",
+    "Complete and bind functional, regression, integrated-campaign and browser evidence, preserving their actual limits.",
+    "Stop preview and all compute work; record readiness and isolation before the official window."
+  ],
+  "qualification": "Preparation only, not an official declaration, readiness approval, cost measurement or acceptance. Cases and diagnostic phase policy are byte-identical to the preserved lot 3C current-evidence window. Every retained tool fingerprint was checked without running a benchmark."
+}

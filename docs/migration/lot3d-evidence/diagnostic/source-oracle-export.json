@@ -1,0 +1,74 @@
+{
+  "schema": "logos-engine.lot3d.source-oracle-export.v1",
+  "fixtures": [
+    {
+      "path": "tests/fixtures/v5-piercing-reference.json.gz",
+      "sha256": "f36682c8fc491240bebbba10413a6aa4901a2b30db57d72e7a3f6fee320e5f5b",
+      "bytes": 8217,
+      "schema": "logos-engine.v5.piercing-source-reference.v1",
+      "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+      "caseCount": 77,
+      "operations": {
+        "configuration": 2,
+        "effect": 2,
+        "model": 2,
+        "simulate": 46,
+        "goal": 10,
+        "intersections": 4,
+        "search": 11
+      },
+      "guardCount": 0,
+      "originalFilesVerifiedBefore": 1786,
+      "originalFilesVerifiedAfter": 1786,
+      "sourceFiles": {
+        "agents/yf_arc3_v5/capabilities/contracts.py": "7597c2d1fc88993dafea3514c5adaf8210cf5cd65b1823f408810467d2791172",
+        "agents/yf_arc3_v5/capabilities/piercing_plan.py": "1fffbd3ee72371d258c3c11b014fb6c85755508e78c027a81b399aa8354e1424",
+        "agents/yf_arc3_v5/capabilities/piercing_rooted_order.py": "68c4ef8933187bdcaf547d9f9af7b1b1545972f8892632e01ece1e410319fcb7",
+        "agents/yf_arc3_v5/logos/types.py": "92703a65cda3d92844688ad37242db030ba7709a494bd7cc1b61b885fa88a9d9"
+      }
+    },
+    {
+      "path": "tests/fixtures/v6-rooted-line-reference.json.gz",
+      "sha256": "39275a93a5db4de49beeba4b789e4a08af000dd5c8f63a02b0d1c0153f58e565",
+      "bytes": 201516,
+      "schema": "logos-engine.v6.rooted-line-source-reference.v1",
+      "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+      "caseCount": 53,
+      "operations": {
+        "scene": 13,
+        "physical": 1,
+        "configuration": 1,
+        "projected": 1,
+        "effect": 8,
+        "model": 1,
+        "propose": 15,
+        "plan": 3,
+        "record": 9,
+        "apply_events": 1
+      },
+      "guardCount": 19,
+      "originalFilesVerifiedBefore": 1786,
+      "originalFilesVerifiedAfter": 1786,
+      "sourceFiles": {
+        "agents/yf_arc3_v6/laya_proto/rooted_line_access.py": "8a693afb3cb387c940330a457da7aafa8280d6c52a95c3f0b2edac749c044b97",
+        "agents/yf_arc3_v6/laya_proto/rooted_line_mechanics.py": "35681ff1c4c9207865af5dde830db3f22d7a24e392a04219e327c61f0447eff9",
+        "agents/yf_arc3_v6/laya_proto/rooted_line_projection.py": "901941b0023f174b3267eef68c686c1b2037d6bd5d5d1f718dedeb6735b10cb1",
+        "agents/yf_arc3_v6/morphology_policy/strategy.drm": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+      }
+    }
+  ],
+  "publicInitialProjection": {
+    "count": 99,
+    "admittedGames": [
+      "SK48"
+    ],
+    "actions": 0,
+    "excludedGames": [
+      "CWSE"
+    ],
+    "levelJumps": 0,
+    "path": "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+    "sha256": "3f82fb0b60a104095623216023054ef438ca4cc516941c671c385ebcbf1e54f2"
+  },
+  "scope": "Unchanged original component contracts and archived public initial pixels. No game run, no engine/spec/solution read, no authored route. CWSE skipped before every projector call. Complete inherited caller parity not claimed."
+}

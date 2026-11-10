@@ -1,0 +1,91 @@
+{
+  "schema": "logos-engine.native-cost-window-readiness.v1",
+  "recordedAt": "2026-11-10T08:59:15.894578+00:00",
+  "finalizedAt": "2026-11-10T08:59:15.894578+00:00",
+  "status": "ready_for_predeclared_official_window",
+  "inputs": [
+    {
+      "path": "docs/migration/lot3d-evidence/final/revalidation/validation/delta-tests-run.json",
+      "bytes": 104602,
+      "sha256": "f5c043f855b671bb240b1654e38493a6c5c722d10e2e71f99e5cf79ca3da6aa1"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/final/revalidation/validation/checks-run.json",
+      "bytes": 71059,
+      "sha256": "21b25e5cb12b5005402723b64b0fb3954d40f5e230e4515df1621f338584e0bf"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/final/test-expectation-reconciliation.json",
+      "bytes": 2182,
+      "sha256": "6a96d7b64ee22d39e736f053b6c3f1d2441a8be5730e0113d4a7335006c054bd"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/final/regressions/regression-summary.json",
+      "bytes": 76760,
+      "sha256": "719683663a33e1700a43a16d51e21a885d6da500154e05335bed6f79f2e0a9c2"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/performance/declaration.json",
+      "bytes": 4268,
+      "sha256": "094b76123a4b627b224e9af651c7004ba7a952d7018098ac80ed851fdc956c3b"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/performance/protocol.md",
+      "bytes": 11429,
+      "sha256": "e7c6eb10f60c7da0eb49e726d7ef39627205021ffc7e3ec76d1812f3e09568f2"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/performance/global-budget-policy.json",
+      "bytes": 1974,
+      "sha256": "ce49ce6af3fb2f43f9c4453fc82453e5d4047235b85115f9c5b2e254ec01176b"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/performance/protocol-check.json",
+      "bytes": 406,
+      "sha256": "5be475edced88bed406dbe9e014e7090c20eec0919829c9f6e2456fa0749838c"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/performance/static-preflight.json",
+      "bytes": 10343,
+      "sha256": "f10edd66d267b5fbe8ec098e752f2c4e1d35b221075ee827e8ee7610ecdee8cf"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/final/browser/browser-qa.json",
+      "bytes": 2244,
+      "sha256": "5dd0ee9b6134354ddf98b8f41fa25d5eb076f8e5c9b8d79f145dc9e4175af537"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/final/sk48-rooted-session/execution-sk48.json",
+      "bytes": 64859,
+      "sha256": "b5e964cc01d1f4993056e9f85708e5450ff977a437c1bc0697d4361e140eb195"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/final/sk48-rooted-session/rooted-line-contribution.json",
+      "bytes": 198156,
+      "sha256": "fef338266aeb4bf9c2c191a06d6c9d89538df979c08a5ece8bb14616a673a3a4"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/final/sk48-resolution.json",
+      "bytes": 4227,
+      "sha256": "e07b5a7ede87a70a7d321fea15480a024ecff3564cc783fdec010f4889325dc2"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/final/delivery-integrity.json",
+      "bytes": 7443,
+      "sha256": "da2e22dc2fdf0d05fa875ccc017a7a8c59c708b11d5119d5eaddb1f45bdf302e"
+    },
+    {
+      "path": "docs/migration/lot3d-evidence/diagnostic/sk48-public-parity.json",
+      "bytes": 8557,
+      "sha256": "ea716954b3e94314ee68d8525d05c817f3eaba5d2cd3855aa137886cdc381aa4"
+    }
+  ],
+  "preview": "sites-preview stop completed; status confirmed Sites preview stopped.",
+  "isolation": "All owned formal tests, build, regression replays, campaigns, source comparisons, contribution checks, browser actions and delivery-integrity work finished. All delegated agents are idle. During the sequential A1/B1/B2/A2 window only light reading/documentation is allowed; no test/build/replay/game/preview/heavy calculation will run concurrently.",
+  "functionalQualification": "Native0.45 frozen:1724/1724 tests50files,5/5project checks/build, strictCATR/RSWP34/34. Initial1722/1724 receipt with2stale metadata expectations is retained; only these expected coverage labels changed, native source identical. SK48 target3unmet:12actions/0levels/5prefixes. Source and native agree on126own-layer checks, acquired refutation and blocking refusal. Contribution reconstructs12events/6restorations with10action/refusal changes out of26ablations. Browser12/0/5afterPause/step/resume. SK48clock667.35444seconds retained; CWSE2399.683865unchanged. These limitations stay explicit and do not prevent measuring independentSTCK/SMLPcosts.",
+  "costPolicy": "Strict complete-session median increase below10% per game. Phase overruns do not block if both globals pass. All32measuredsessions400actions and all phase/p95 diagnostics retained; no exclusions or cross-game compensation.",
+  "authorization": "User requested continuation and explicitly accepts phase overruns if global increase stays below10%.",
+  "measurementAuthorized": true,
+  "pendingRequirements": [],
+  "qualification": "Readiness binds completed functional and integrity evidence. It permits the predeclared timing window, not acceptance of costs or closure of unmet functional targets."
+}
