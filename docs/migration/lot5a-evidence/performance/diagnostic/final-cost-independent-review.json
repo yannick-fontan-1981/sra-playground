@@ -1,0 +1,810 @@
+{
+  "schema": "logos-engine.lot5a-final-cost-independent-review.v1",
+  "status": "independent_cost_review_passed_with_postmeasurement_io_correction",
+  "reviewAuthority": {
+    "kind": "independent_agent_assessment",
+    "agent": "/root/forced_paths",
+    "costToolsOwner": "/root/delta_runtime",
+    "humanApprovalClaimed": false,
+    "officialToolsImportedOrExecutedByReviewer": false
+  },
+  "startedAt": "2026-11-10T21:39:18Z",
+  "finishedAt": "2026-11-10T21:49:03.148643+00:00",
+  "scope": "Read-only reconstruction from all four retained raw reports, discrete input/native-source hashes, chronology and fixed-work comparisons, independent Decimal statistics, then comparison with both original cohort reports and the final JavaScript/Python results. No test, native runtime, game, replay, new timing or benchmark executed.",
+  "inputs": [
+    {
+      "path": "docs/migration/lot5a-evidence/performance/window.json",
+      "bytes": 10145,
+      "sha256": "0be3eceb2139347ffa5efa0200fc1f68c98544517d0c521f3eee71b468401c5c"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/declaration.json",
+      "bytes": 5524,
+      "sha256": "9dba35881a2ef113bdfb2b7a1477bf0f6514d774f933926a649f844798365651"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/global-budget-policy.json",
+      "bytes": 2282,
+      "sha256": "424fc43a38f363a9d8e983b4810bbd23817c80f68b375f53397239dd836aad18"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/readiness.json",
+      "bytes": 121997,
+      "sha256": "85a1ab694c88cca9f216ed7ca5e731377ee6eaea8d14e784d47bd15d89a88952"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/exclusive-window-execution.json",
+      "bytes": 1049,
+      "sha256": "7b2e2f33d706f3e2936c7de77d8ca153ee99ab1525d67f685f7d5df4d764ce27"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-contract.json",
+      "bytes": 3799,
+      "sha256": "f48f3289cd31b150cfcf7aaaf3dc1386f22e2731b7934a1a431bd5a0bafea1c1"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-structural-fixture.json",
+      "bytes": 59963,
+      "sha256": "b6d77cd1bf4f2a5611d1092c6d754eec7dcab4fbce9d1210804bd87c374203bb"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/shared-fragment-premeasurement-supplement.json",
+      "bytes": 3802271,
+      "sha256": "71820d69e926954a9859e066b05d098b7faf23c3358321352b0e0c32d1411e33"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort1/baseline.json",
+      "bytes": 429659,
+      "sha256": "1aed12b02ccd7884c715cedabd0cacbb02cdde05123aa264252459c26a19692b"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort1/after.json",
+      "bytes": 430265,
+      "sha256": "b255e57ee5a22590303ded28229d05fb62ffadc132edf297d299db0902983024"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort2/after.json",
+      "bytes": 430204,
+      "sha256": "45b9f458e3cb6eb3c511a57c8e3ddc1e3619afdc2439848f3cbcadc254b70f37"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort2/baseline.json",
+      "bytes": 429790,
+      "sha256": "eed86f986c9c87fbf1d915b3e90b2928b60c44edc82b0fb96d564ba9b4f0b687"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort1/comparison.json",
+      "bytes": 26258,
+      "sha256": "d090b8e7b54e41d463dc7d768696ea3dfec3d692329f4221c22f20ae85c96e69"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort2/comparison.json",
+      "bytes": 26450,
+      "sha256": "8d6882bf7333c0a39606b3f4aefaa706ed33ec1543cc4b3c97b2ebb4c6ccf462"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-v1.json",
+      "bytes": 16360,
+      "sha256": "95aed6b270a5ed97ec1dc0b4882250f188dc059588b6aea1a30c80a0af7c3a4e"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-v1.diff",
+      "bytes": 19890,
+      "sha256": "967b81b46bc0686a090efd0ca2e03d3be80c0379928b1112abd8f0f8f9386896"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/aggregation-failure.json",
+      "bytes": 2989,
+      "sha256": "2e8b075f458def3b670acd5306fe9db438b8fa65ba73341d0a6d75f92331e623"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/aggregation-failure.log",
+      "bytes": 204708,
+      "sha256": "be915a192d40ad5cf02969f7c0f0f11d400e2219c75071e5008573d25a79351e"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-analysis-initial-failure.json",
+      "bytes": 2147,
+      "sha256": "3bc6607c1154569db6dce6387fdb4187de7bfbc3479f94d8dbc4ebeea6efbf91"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-comparison.log",
+      "bytes": 231,
+      "sha256": "81d970422c69515fc07b6c5e41e366793207b6005b9998837e97e948d96d836d"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-comparison.json",
+      "bytes": 249277,
+      "sha256": "7340d02ad452a84ebcc24a334670f275d2871c34655225694dced2e100cd56f8"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-review.json",
+      "bytes": 866984,
+      "sha256": "5419d66e691fd44a66c6398da917aec12e48fd4f104c79dc5f3041ff7dfebbef"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-comparison-directory-v1.log",
+      "bytes": 280,
+      "sha256": "819001395a175136b97ef0859094014745d3a261b26bb3ec592ec23ad3452022"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-review-directory-v1.log",
+      "bytes": 326,
+      "sha256": "3309fcbe9bf2a5981e3693f7b35477d8bcb5484b4cc58d9be628d805b51ef195"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-independent-review.json",
+      "bytes": 13056,
+      "sha256": "4579a161df394c8019138c4a8f7aa05836b652753fe276621b50ab1954b42fa4"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/consolidate-owner-costs.mjs",
+      "bytes": 50598,
+      "sha256": "9e6112ec83b75bbdc7bdb2a614dd7ce0e860e1ea9b71ba2f74fb37e4f2e74f1e"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/review-owner-costs.py",
+      "bytes": 67816,
+      "sha256": "40b6a2068b61652725a55567407a58e54b88cd81056ecbe56755018d7a3d496d"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/consolidate-owner-costs-directory-v1.mjs",
+      "bytes": 53989,
+      "sha256": "9a8208f8cf5e87cc2ed8b68c250dc0dfdfbec372eecdd7ce8a1867d3abe63166"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/review-owner-costs-directory-v1.py",
+      "bytes": 72659,
+      "sha256": "2126add0ccfe746dd33e113f19f5baa793bb32a9f2bb532c8fe714cf705562be"
+    }
+  ],
+  "window": {
+    "startedAt": "2026-11-10T21:29:50.481038+00:00",
+    "finishedAt": "2026-11-10T21:38:25.694666+00:00",
+    "order": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
+    "executionElapsedSeconds": "515.2503746669972"
+  },
+  "identity": {
+    "nativeSourceFilesRehashed": {
+      "baseline": {
+        "files": 279,
+        "digest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb"
+      },
+      "candidate": {
+        "files": 283,
+        "digest": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f"
+      }
+    },
+    "measuredReportGitHeads": {
+      "A1": "0ca36b0a6a358e1e89420753bbcec4a33f028e0a",
+      "B1": "bc19974c910711f20385d9a40168a0927ec22057",
+      "B2": "bc19974c910711f20385d9a40168a0927ec22057",
+      "A2": "0ca36b0a6a358e1e89420753bbcec4a33f028e0a"
+    },
+    "publishedPredecessor": {
+      "siteVersion": 83,
+      "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_56ab94a2e69081918fc923b11c4484b9",
+      "commit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+      "deploymentId": "appgdep_6af3859669708191a724098872b5c7d4",
+      "deploymentStatus": "succeeded",
+      "deploymentUpdatedAt": "2026-11-10T20:59:14.979903+00:00"
+    },
+    "qualification": "Measured baseline is the declared native0.52 Site82 source; Site83 is the later published predecessor retained for integration/transport. Native file hashes, not Git-head labels alone, identify measured code. Git ancestry itself was not re-proved by this review."
+  },
+  "coverage": {
+    "allDistinctTrials": 40,
+    "includedMeasuredSessions": 32,
+    "includedMeasuredActions": 400,
+    "excludedDeclaredWarmups": 8,
+    "excludedWarmupActions": 24,
+    "excludedMeasuredSessions": 0,
+    "excludedOutliers": 0,
+    "cohortsRetained": 2,
+    "all40TrialsMatchFrozenFunctionalForms": true,
+    "withinVersionWorkExact": true,
+    "acrossVersionWorkExactExceptFourQualifiedCountPaths": true,
+    "windowInputFingerprintsRechecked": 21,
+    "finalPythonBoundInputFingerprintsRechecked": 276,
+    "rawSummaryAndOriginalPairDistributionChecks": 448,
+    "independentlyCalculatedMetricComparisons": 48,
+    "aggregateAndReviewerMetricRowsCompared": 96,
+    "measuredSessionLedgerTimingsExact": true
+  },
+  "method": {
+    "timingNumbers": "Original raw JSON decimal literals, parsed as Decimal at precision60; midpoint medians of all retained samples.",
+    "globalDecision": "For each game independently, exact pooled B median < 1.1 * exact pooled A median. No ratio averaging between cohorts, no compensation between games, no tolerance.",
+    "phaseDecision": "Original diagnostic median relative increase <=10%, with its original noise labels; noise never changes the allowance.",
+    "p95": "Empirical nearest rank ceil(0.95*n), withheld below20 samples. Complete-session p95 remains null for four/eight samples.",
+    "reportRepresentationCrossCheckTolerance": "Only for comparing independently calculated numbers to float-serialized summaries: max(1e-9 ms,1e-12 relative); ratio absolute tolerance1e-12. This tolerance is never used for the budget decision.",
+    "nestedPhasesSummed": false
+  },
+  "allCompleteSessionDurations": [
+    {
+      "execution": "A1",
+      "case": "STCK",
+      "measuredDurationsMs": [
+        "9841.392194",
+        "9222.212988000001",
+        "10301.171630999997",
+        "9948.136112"
+      ],
+      "warmupDurationMs": "4346.58251"
+    },
+    {
+      "execution": "A1",
+      "case": "SMLP",
+      "measuredDurationsMs": [
+        "16287.013481000002",
+        "16859.040897999992",
+        "18072.850328",
+        "17200.980758000005"
+      ],
+      "warmupDurationMs": "5114.9537749999945"
+    },
+    {
+      "execution": "B1",
+      "case": "STCK",
+      "measuredDurationsMs": [
+        "10986.328935",
+        "10578.380053999997",
+        "10657.081539999996",
+        "11086.986272999995"
+      ],
+      "warmupDurationMs": "4685.62672"
+    },
+    {
+      "execution": "B1",
+      "case": "SMLP",
+      "measuredDurationsMs": [
+        "16400.357082999995",
+        "18195.94993999999",
+        "17890.546143999993",
+        "17941.012766999993"
+      ],
+      "warmupDurationMs": "4742.782902999999"
+    },
+    {
+      "execution": "B2",
+      "case": "STCK",
+      "measuredDurationsMs": [
+        "11188.846869",
+        "10489.003205",
+        "10494.46817",
+        "12062.863862999999"
+      ],
+      "warmupDurationMs": "4575.692739"
+    },
+    {
+      "execution": "B2",
+      "case": "SMLP",
+      "measuredDurationsMs": [
+        "17809.011743000003",
+        "16883.29913700001",
+        "16203.354703000005",
+        "15936.838164999994"
+      ],
+      "warmupDurationMs": "4690.531429999995"
+    },
+    {
+      "execution": "A2",
+      "case": "STCK",
+      "measuredDurationsMs": [
+        "9513.800675999999",
+        "9979.455368",
+        "9902.918853",
+        "9484.881580000001"
+      ],
+      "warmupDurationMs": "4066.043413"
+    },
+    {
+      "execution": "A2",
+      "case": "SMLP",
+      "measuredDurationsMs": [
+        "17345.914190000003",
+        "15797.230304000012",
+        "15871.134921000004",
+        "15693.036317000006"
+      ],
+      "warmupDurationMs": "4554.882577000004"
+    }
+  ],
+  "globalAndCohortResults": [
+    {
+      "group": "cohort1",
+      "case": "STCK",
+      "sessionsPerVersion": 4,
+      "beforeMedianMs": "9894.764153",
+      "afterMedianMs": "10821.705237499998",
+      "strictLimitMs": "10884.2405683",
+      "marginBelowLimitMs": "62.535330800002",
+      "strictlyBelowTenPercent": true,
+      "percentageIncrease": "9.3679957416565419"
+    },
+    {
+      "group": "cohort1",
+      "case": "SMLP",
+      "sessionsPerVersion": 4,
+      "beforeMedianMs": "17030.0108279999985",
+      "afterMedianMs": "17915.779455499993",
+      "strictLimitMs": "18733.01191079999835",
+      "marginBelowLimitMs": "817.23245530000535",
+      "strictlyBelowTenPercent": true,
+      "percentageIncrease": "5.2012217516835191"
+    },
+    {
+      "group": "cohort2",
+      "case": "STCK",
+      "sessionsPerVersion": 4,
+      "beforeMedianMs": "9708.3597644999995",
+      "afterMedianMs": "10841.6575195",
+      "strictLimitMs": "10679.19574094999945",
+      "marginBelowLimitMs": "-162.46177855000055",
+      "strictlyBelowTenPercent": false,
+      "percentageIncrease": "11.6734214892207146"
+    },
+    {
+      "group": "cohort2",
+      "case": "SMLP",
+      "sessionsPerVersion": 4,
+      "beforeMedianMs": "15834.182612500008",
+      "afterMedianMs": "16543.3269200000075",
+      "strictLimitMs": "17417.6008737500088",
+      "marginBelowLimitMs": "874.2739537500013",
+      "strictlyBelowTenPercent": true,
+      "percentageIncrease": "4.4785659282480322"
+    },
+    {
+      "group": "pooled",
+      "case": "STCK",
+      "sessionsPerVersion": 8,
+      "beforeMedianMs": "9872.1555235",
+      "afterMedianMs": "10821.705237499998",
+      "strictLimitMs": "10859.37107585",
+      "marginBelowLimitMs": "37.665838350002",
+      "strictlyBelowTenPercent": true,
+      "percentageIncrease": "9.6184638880501729"
+    },
+    {
+      "group": "pooled",
+      "case": "SMLP",
+      "sessionsPerVersion": 8,
+      "beforeMedianMs": "16573.027189499997",
+      "afterMedianMs": "17346.1554400000065",
+      "strictLimitMs": "18230.3299084499967",
+      "marginBelowLimitMs": "884.1744684499902",
+      "strictlyBelowTenPercent": true,
+      "percentageIncrease": "4.6649790750951790"
+    }
+  ],
+  "pooledPhaseMetrics": [
+    {
+      "case": "STCK",
+      "stage": "session_elapsed",
+      "before": {
+        "count": 8,
+        "medianMs": "9872.1555235",
+        "p95Ms": null,
+        "minMs": "9222.212988000001",
+        "maxMs": "10301.171630999997"
+      },
+      "after": {
+        "count": 8,
+        "medianMs": "10821.705237499998",
+        "p95Ms": null,
+        "minMs": "10489.003205",
+        "maxMs": "12062.863862999999"
+      },
+      "percentageIncrease": "9.6184638880501729",
+      "diagnosticResult": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "new_decision",
+      "before": {
+        "count": 48,
+        "medianMs": "292.02854150000167",
+        "p95Ms": "454.30494700000054",
+        "minMs": "176.40910300000178",
+        "maxMs": "532.8988170000011"
+      },
+      "after": {
+        "count": 48,
+        "medianMs": "358.44425600000022",
+        "p95Ms": "644.9059619999971",
+        "minMs": "217.70436300000074",
+        "maxMs": "729.2008390000046"
+      },
+      "percentageIncrease": "22.7428847053287667",
+      "diagnosticResult": "over_budget_with_noise_unresolved"
+    },
+    {
+      "case": "STCK",
+      "stage": "known_prefix_service",
+      "before": {
+        "count": 32,
+        "medianMs": "9.0766510000003105",
+        "p95Ms": "16.34258000000409",
+        "minMs": "7.1773619999985385",
+        "maxMs": "18.913715999999113"
+      },
+      "after": {
+        "count": 32,
+        "medianMs": "9.581211499997153",
+        "p95Ms": "13.751831999998103",
+        "minMs": "7.750477999998111",
+        "maxMs": "15.348359000003256"
+      },
+      "percentageIncrease": "5.5588839980387616",
+      "diagnosticResult": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "known_prefix_request",
+      "before": {
+        "count": 32,
+        "medianMs": "10.8857685000002675",
+        "p95Ms": "18.100036000003456",
+        "minMs": "8.771085000000312",
+        "maxMs": "21.08095599999797"
+      },
+      "after": {
+        "count": 32,
+        "medianMs": "11.2645180000008625",
+        "p95Ms": "16.54333499999848",
+        "minMs": "9.3578230000021",
+        "maxMs": "16.93797800000175"
+      },
+      "percentageIncrease": "3.4793087874373380",
+      "diagnosticResult": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "known_prefix_guard",
+      "before": {
+        "count": 32,
+        "medianMs": "0.234410999997635375",
+        "p95Ms": "0.4766440000021248",
+        "minMs": "0.08528600000136066",
+        "maxMs": "0.9566930000000866"
+      },
+      "after": {
+        "count": 32,
+        "medianMs": "0.23969450000186043",
+        "p95Ms": "0.5354109999971115",
+        "minMs": "0.08316299999933108",
+        "maxMs": "0.701907000002393"
+      },
+      "percentageIncrease": "2.2539471288797678",
+      "diagnosticResult": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "acquisition_and_persistence",
+      "before": {
+        "count": 48,
+        "medianMs": "809.86309200000005",
+        "p95Ms": "3561.2005229999995",
+        "minMs": "387.2454960000032",
+        "maxMs": "3713.0688120000013"
+      },
+      "after": {
+        "count": 48,
+        "medianMs": "859.2370425000008",
+        "p95Ms": "3678.273740999999",
+        "minMs": "435.65263699999923",
+        "maxMs": "4546.814312000002"
+      },
+      "percentageIncrease": "6.0965799019275158",
+      "diagnosticResult": "within_observed_budget"
+    },
+    {
+      "case": "STCK",
+      "stage": "persistence",
+      "before": {
+        "count": 104,
+        "medianMs": "159.34890449999921",
+        "p95Ms": "322.98840500000006",
+        "minMs": "13.032979999999952",
+        "maxMs": "378.23258200000055"
+      },
+      "after": {
+        "count": 104,
+        "medianMs": "189.576209500002725",
+        "p95Ms": "483.3295630000066",
+        "minMs": "13.924395999998524",
+        "maxMs": "570.2370999999985"
+      },
+      "percentageIncrease": "18.9692581162386748",
+      "diagnosticResult": "over_budget_with_noise_unresolved"
+    },
+    {
+      "case": "STCK",
+      "stage": "restoration",
+      "before": {
+        "count": 96,
+        "medianMs": "8.6309984999988955",
+        "p95Ms": "47.21375600000101",
+        "minMs": "1.7619230000018433",
+        "maxMs": "53.110844999999244"
+      },
+      "after": {
+        "count": 96,
+        "medianMs": "17.21031500000026425",
+        "p95Ms": "138.30851899999834",
+        "minMs": "2.1088239999990037",
+        "maxMs": "161.97250700000222"
+      },
+      "percentageIncrease": "99.4012048548318788",
+      "diagnosticResult": "over_budget_with_noise_unresolved"
+    },
+    {
+      "case": "SMLP",
+      "stage": "session_elapsed",
+      "before": {
+        "count": 8,
+        "medianMs": "16573.027189499997",
+        "p95Ms": null,
+        "minMs": "15693.036317000006",
+        "maxMs": "18072.850328"
+      },
+      "after": {
+        "count": 8,
+        "medianMs": "17346.1554400000065",
+        "p95Ms": null,
+        "minMs": "15936.838164999994",
+        "maxMs": "18195.94993999999"
+      },
+      "percentageIncrease": "4.6649790750951790",
+      "diagnosticResult": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "new_decision",
+      "before": {
+        "count": 72,
+        "medianMs": "384.16041250000125",
+        "p95Ms": "820.7326259999973",
+        "minMs": "190.62766700000793",
+        "maxMs": "857.1217649999962"
+      },
+      "after": {
+        "count": 72,
+        "medianMs": "432.5956154999949",
+        "p95Ms": "883.7493610000092",
+        "minMs": "236.7101110000076",
+        "maxMs": "1015.0932839999878"
+      },
+      "percentageIncrease": "12.6080672094221818",
+      "diagnosticResult": "over_budget_with_noise_unresolved"
+    },
+    {
+      "case": "SMLP",
+      "stage": "known_prefix_service",
+      "before": {
+        "count": 48,
+        "medianMs": "9.7953475000031175",
+        "p95Ms": "17.140247000003",
+        "minMs": "7.7874010000086855",
+        "maxMs": "23.533991999996942"
+      },
+      "after": {
+        "count": 48,
+        "medianMs": "9.6090724999958185",
+        "p95Ms": "13.463526000006823",
+        "minMs": "7.7976460000063526",
+        "maxMs": "18.67023600000539"
+      },
+      "percentageIncrease": "-1.9016681134307866",
+      "diagnosticResult": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "known_prefix_request",
+      "before": {
+        "count": 48,
+        "medianMs": "12.2235094999996365",
+        "p95Ms": "19.500201999995625",
+        "minMs": "9.88471899999422",
+        "maxMs": "26.284363999999186"
+      },
+      "after": {
+        "count": 48,
+        "medianMs": "11.8215005000020025",
+        "p95Ms": "16.281908000004478",
+        "minMs": "9.798932999998215",
+        "maxMs": "21.04766799999925"
+      },
+      "percentageIncrease": "-3.2888181581373660",
+      "diagnosticResult": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "known_prefix_guard",
+      "before": {
+        "count": 48,
+        "medianMs": "0.359640999995463075",
+        "p95Ms": "0.7381600000080653",
+        "minMs": "0.1879579999949783",
+        "maxMs": "7.181085999996867"
+      },
+      "after": {
+        "count": 48,
+        "medianMs": "0.34353250000276603",
+        "p95Ms": "0.5799569999944651",
+        "minMs": "0.1921239999937825",
+        "maxMs": "0.8052100000058999"
+      },
+      "percentageIncrease": "-4.4790499394952901",
+      "diagnosticResult": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "acquisition_and_persistence",
+      "before": {
+        "count": 72,
+        "medianMs": "914.7475420000046",
+        "p95Ms": "2617.875098999997",
+        "minMs": "325.26329700001224",
+        "maxMs": "2827.4337769999984"
+      },
+      "after": {
+        "count": 72,
+        "medianMs": "841.6308890000073",
+        "p95Ms": "2684.751933000007",
+        "minMs": "385.5940760000012",
+        "maxMs": "3154.210700999989"
+      },
+      "percentageIncrease": "-7.9930964165407872",
+      "diagnosticResult": "within_observed_budget"
+    },
+    {
+      "case": "SMLP",
+      "stage": "persistence",
+      "before": {
+        "count": 152,
+        "medianMs": "133.21297449999838",
+        "p95Ms": "249.66219600000477",
+        "minMs": "14.703917999999248",
+        "maxMs": "295.1347459999961"
+      },
+      "after": {
+        "count": 152,
+        "medianMs": "168.757396499997415",
+        "p95Ms": "261.37550300000294",
+        "minMs": "12.13124699999753",
+        "maxMs": "695.7445069999958"
+      },
+      "percentageIncrease": "26.6824024712393666",
+      "diagnosticResult": "over_budget_with_noise_unresolved"
+    },
+    {
+      "case": "SMLP",
+      "stage": "restoration",
+      "before": {
+        "count": 144,
+        "medianMs": "5.5652195000002395",
+        "p95Ms": "24.600562999999966",
+        "minMs": "1.9485380000114674",
+        "maxMs": "43.68175899999915"
+      },
+      "after": {
+        "count": 144,
+        "medianMs": "9.4328824999975045",
+        "p95Ms": "57.702957999994396",
+        "minMs": "2.0278549999929965",
+        "maxMs": "139.4321190000046"
+      },
+      "percentageIncrease": "69.4970431983338403",
+      "diagnosticResult": "over_budget_with_noise_unresolved"
+    }
+  ],
+  "diagnosticVerdict": {
+    "totalMetrics": 16,
+    "withinPhaseBudget": 10,
+    "phaseOverrunsRetained": 6,
+    "cohort1WithinPhaseBudget": 10,
+    "cohort2WithinPhaseBudget": 9,
+    "stckCohort2GlobalOverrunRetained": true
+  },
+  "postMeasurementIoCorrection": {
+    "explicitlyAfterMeasurement": true,
+    "receipt": {
+      "path": "docs/migration/lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-v1.json",
+      "bytes": 16360,
+      "sha256": "95aed6b270a5ed97ec1dc0b4882250f188dc059588b6aea1a30c80a0af7c3a4e"
+    },
+    "originalFrozenTools": {
+      "consolidator": {
+        "path": "docs/migration/lot5a-evidence/consolidate-owner-costs.mjs",
+        "bytes": 50598,
+        "sha256": "9e6112ec83b75bbdc7bdb2a614dd7ce0e860e1ea9b71ba2f74fb37e4f2e74f1e"
+      },
+      "reviewer": {
+        "path": "docs/migration/lot5a-evidence/review-owner-costs.py",
+        "bytes": 67816,
+        "sha256": "40b6a2068b61652725a55567407a58e54b88cd81056ecbe56755018d7a3d496d"
+      }
+    },
+    "executedVariants": {
+      "consolidator": {
+        "path": "docs/migration/lot5a-evidence/consolidate-owner-costs-directory-v1.mjs",
+        "bytes": 53989,
+        "sha256": "9a8208f8cf5e87cc2ed8b68c250dc0dfdfbec372eecdd7ce8a1867d3abe63166"
+      },
+      "reviewer": {
+        "path": "docs/migration/lot5a-evidence/review-owner-costs-directory-v1.py",
+        "bytes": 72659,
+        "sha256": "2126add0ccfe746dd33e113f19f5baa793bb32a9f2bb532c8fe714cf705562be"
+      }
+    },
+    "originalFailure": {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-analysis-initial-failure.json",
+      "bytes": 2147,
+      "sha256": "3bc6607c1154569db6dce6387fdb4187de7bfbc3479f94d8dbc4ebeea6efbf91"
+    },
+    "reason": "Frozen consolidator rejected the literal directory already bound by its own premeasurement declaration/contract. The separately recorded variant admits only that exact directory.",
+    "independentDiffReview": {
+      "savedDiffEqualsActualDiff": true,
+      "javascriptArithmeticValidationAndAggregationBodiesByteIdentical": true,
+      "pythonUnchangedAstDefinitions": 31,
+      "pythonProvenanceOnlyModifiedDefinitions": [
+        "Review.load_protocol",
+        "Review.finish",
+        "main"
+      ],
+      "newPythonDefinition": "Review.load_directory_correction",
+      "declaredAndExecutedGeneratorsBothTruthfullyBound": true,
+      "arithmeticOrSampleRuleChanged": false
+    },
+    "qualification": "This correction is postmeasurement. It is not represented as an unchanged predeclared analyzer or as a new measurement."
+  },
+  "retainedFailures": {
+    "initialStructuralQualifierRemainsFailed": true,
+    "historicalStrictAggregatorRemainsFailed": true,
+    "initialFrozenOwnerConsolidatorRemainsFailed": true,
+    "historicalCombinedComparisonRemainsAbsent": true
+  },
+  "finalCrossCheck": {
+    "aggregate": {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-comparison.json",
+      "bytes": 249277,
+      "sha256": "7340d02ad452a84ebcc24a334670f275d2871c34655225694dced2e100cd56f8"
+    },
+    "pythonReview": {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-review.json",
+      "bytes": 866984,
+      "sha256": "5419d66e691fd44a66c6398da917aec12e48fd4f104c79dc5f3041ff7dfebbef"
+    },
+    "pythonReviewChecks": 4669,
+    "pythonReviewAllChecksPassed": true,
+    "globalDecisionsAgree": true,
+    "cohortAndPooledAllPhasesAgree": true,
+    "allAvailableP95AndExtremaAgree": true,
+    "noSourceOrRawInputChangedDuringThisReview": true
+  },
+  "decision": {
+    "acceptedUnderDeclaredGlobalBudget": true,
+    "acceptedCases": 2,
+    "totalCases": 2,
+    "stckMarginBelowStrictLimitMs": "37.665838350002",
+    "smlpMarginBelowStrictLimitMs": "884.1744684499902",
+    "qualification": "The finite pooled STCK/SMLP window meets the user-authorized global rule, with a narrow STCK margin and all six phase overruns plus the unfavorable second STCK cohort retained. This is budget acceptance, not a speed improvement."
+  },
+  "limitations": [
+    "No population confidence interval or guarantee for another machine/run is inferred.",
+    "Cooperative quiet and lock acquisition are evidenced by retained coordination/execution receipts; this review does not independently monitor every process during the completed window.",
+    "The historical strict graph-count comparator remains failed; only the separately qualified owner-aware comparison is accepted.",
+    "The necessary analyzer directory/provenance repair was made after measurement and is explicitly retained as such.",
+    "No proof of WEAV level-six completion, long-session performance, arbitrary path continuation or live-browser speed follows from these STCK/SMLP measurements."
+  ]
+}

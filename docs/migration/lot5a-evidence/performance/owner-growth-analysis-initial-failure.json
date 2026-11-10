@@ -1,0 +1,48 @@
+{
+  "schema": "logos-engine.lot5a-owner-cost-analysis-execution-failure.v1",
+  "recordedAt": "2026-11-10T21:41:17.471741+00:00",
+  "status": "retained_actual_analysis_failure",
+  "command": [
+    "node",
+    "docs/migration/lot5a-evidence/consolidate-owner-costs.mjs",
+    "docs/migration/lot5a-evidence/performance/owner-growth-contract.json",
+    "docs/migration/lot5a-evidence/performance/owner-growth-comparison.json"
+  ],
+  "exitCode": 1,
+  "exitCodeEvidence": "Actual exec_command completion reported exit_code 1.",
+  "generator": {
+    "path": "docs/migration/lot5a-evidence/consolidate-owner-costs.mjs",
+    "bytes": 50598,
+    "sha256": "9e6112ec83b75bbdc7bdb2a614dd7ce0e860e1ea9b71ba2f74fb37e4f2e74f1e"
+  },
+  "contract": {
+    "path": "docs/migration/lot5a-evidence/performance/owner-growth-contract.json",
+    "bytes": 3799,
+    "sha256": "f48f3289cd31b150cfcf7aaaf3dc1386f22e2731b7934a1a431bd5a0bafea1c1"
+  },
+  "declaration": {
+    "path": "docs/migration/lot5a-evidence/performance/declaration.json",
+    "bytes": 5524,
+    "sha256": "9dba35881a2ef113bdfb2b7a1477bf0f6514d774f933926a649f844798365651"
+  },
+  "window": {
+    "path": "docs/migration/lot5a-evidence/performance/window.json",
+    "bytes": 10145,
+    "sha256": "0be3eceb2139347ffa5efa0200fc1f68c98544517d0c521f3eee71b468401c5c"
+  },
+  "log": {
+    "path": "docs/migration/lot5a-evidence/performance/owner-growth-comparison.log",
+    "bytes": 231,
+    "sha256": "81d970422c69515fc07b6c5e41e366793207b6005b9998837e97e948d96d836d"
+  },
+  "reportedError": {
+    "schema": "logos-engine.lot5a-owner-cost-analysis-failure.v1",
+    "status": "owner_cost_analysis_blocked",
+    "structuralProof": false,
+    "historicalStrictPassed": false,
+    "outputWritten": false,
+    "error": "A new lot 5A window directory is required"
+  },
+  "outputExists": false,
+  "qualification": "The original frozen consolidator was actually executed after the complete ABBA window and strict historical rejection. It stopped on its directory-name guard before loading timing reports. This failure remains failed; the original tool, contract, directory and all measured inputs remain unchanged."
+}

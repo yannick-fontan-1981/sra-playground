@@ -1,0 +1,1 @@
+{"status": "ready", "receipt": {"path": "docs/migration/lot5a-evidence/performance/readiness.json", "sha256": "85a1ab694c88cca9f216ed7ca5e731377ee6eaea8d14e784d47bd15d89a88952", "bytes": 121997}, "measurementExecuted": false, "reservations": ["browser_unavailable", "weav_case_budget_exhausted"]}

@@ -1,0 +1,101 @@
+{
+  "schema": "logos-engine.independent-python-oracle-export.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T17:17:54.441078-03:00",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourceFilesVerifiedBefore": 1786,
+  "sourceFilesVerifiedAfter": 1786,
+  "sourceInventoryUnchanged": true,
+  "directModules": [
+    "common_linked_preparation",
+    "common_linked_contact",
+    "common_phase_relations",
+    "common_phase_transfer"
+  ],
+  "importedOriginalModules": {
+    "common_linked_contact": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_linked_contact.py",
+      "sha256": "bb2f258632fc71f280afaf2c988907fe7ee916e51da926389df44bb70f63f8b9"
+    },
+    "common_linked_preparation": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_linked_preparation.py",
+      "sha256": "90095faefe45772155a565b32fb12172f23569d317e890e814925b801c098012"
+    },
+    "common_phase_relations": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_phase_relations.py",
+      "sha256": "8b43e2cf31d784af6efe7b1535520fcb3385f8d58893b7617d4e0360e07fea0f"
+    },
+    "common_phase_transfer": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_phase_transfer.py",
+      "sha256": "34ea2a9d1827d5a9c61269b40f15fb7adedb618aedbd8f781832c68749dcbe88"
+    },
+    "geometric_observer": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/geometric_observer.py",
+      "sha256": "1017b130cb91f799ab5bdb2f26789c2645078d9b9d226469b3915d4a7262eaac"
+    },
+    "neutral_observer": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/neutral_observer.py",
+      "sha256": "9b09085eb708c084d82682b13848666ef1ca5f3fc6c10861d96e139228af927a"
+    }
+  },
+  "sourceManifest": {
+    "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+    "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+  },
+  "sourceInventorySha256Before": "2c06ba8133eddb500e1cfc9ef7620f978e13530dc690b7255f457a2b7cf441f2",
+  "sourceInventorySha256After": "2c06ba8133eddb500e1cfc9ef7620f978e13530dc690b7255f457a2b7cf441f2",
+  "directSourceBeforeAfter": {
+    "common_linked_preparation": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_linked_preparation.py",
+      "sha256Before": "90095faefe45772155a565b32fb12172f23569d317e890e814925b801c098012",
+      "sha256After": "90095faefe45772155a565b32fb12172f23569d317e890e814925b801c098012"
+    },
+    "common_linked_contact": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_linked_contact.py",
+      "sha256Before": "bb2f258632fc71f280afaf2c988907fe7ee916e51da926389df44bb70f63f8b9",
+      "sha256After": "bb2f258632fc71f280afaf2c988907fe7ee916e51da926389df44bb70f63f8b9"
+    },
+    "common_phase_relations": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_phase_relations.py",
+      "sha256Before": "8b43e2cf31d784af6efe7b1535520fcb3385f8d58893b7617d4e0360e07fea0f",
+      "sha256After": "8b43e2cf31d784af6efe7b1535520fcb3385f8d58893b7617d4e0360e07fea0f"
+    },
+    "common_phase_transfer": {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_phase_transfer.py",
+      "sha256Before": "34ea2a9d1827d5a9c61269b40f15fb7adedb618aedbd8f781832c68749dcbe88",
+      "sha256After": "34ea2a9d1827d5a9c61269b40f15fb7adedb618aedbd8f781832c68749dcbe88"
+    }
+  },
+  "fixture": {
+    "path": "tests/fixtures/v6-linked-preparation-reference.json.gz",
+    "bytes": 719074,
+    "sha256": "280397c931e2ba7bff5aa99931b64b938d18e5224e66e9da397407c0e3018299",
+    "uncompressedBytes": 11809591
+  },
+  "exporter": {
+    "path": "scripts/export-v6-linked-preparation-reference.py",
+    "sha256": "8049dcf96962b98da4245dd8e71cc023c3b122e7ed3eae96dcf36a13a712ad59",
+    "bytes": 31435
+  },
+  "counts": {
+    "helpers": 14,
+    "coldChains": 9,
+    "chainOperations": 165,
+    "directComponents": 13,
+    "sourceExceptions": 2
+  },
+  "acquiredPhaseChain": {
+    "model": true,
+    "remote": true,
+    "supportedChangedEndpoint": true,
+    "portableRetainedAfterTwoScoredBoundaries": true
+  },
+  "qualifications": [
+    "All rasters and returned transitions are synthetic public observations, not game solutions.",
+    "Wrapper propose delegates directly to LinkedContact, even when PhaseRelations retains a portable hypothesis.",
+    "Direct component calls are separated from cold wrapper acquisition and production selection.",
+    "Source exceptions and mutation before exceptions remain explicit; they are not normalized to null.",
+    "No TypeScript output supplies source expectations; all original files are verified before and after import/execution.",
+    "Source state is an explicit representation of Python arrays, tuples, sets, maps and bytes; it is not a source-defined checkpoint API."
+  ]
+}

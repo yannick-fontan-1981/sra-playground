@@ -90,6 +90,7 @@ for (const item of fixture.chains as R[]) test('original crossed-prefix cold cha
 });
 
 function freshCase(): R { return copy(fixture.accessCases.find((value: R) => value.id === 'fresh_select')); }
+function recolorCase(): R { return copy(fixture.accessCases.find((value: R) => value.id === 'recolor_explicit')); }
 function recordCase(id: string): R { const item = fixture.recordCases.find((value: R) => value.id === id); assert.ok(item); return copy(item); }
 
 // Independent native contracts complement the unchanged-source oracle. They
@@ -194,8 +195,8 @@ test('native assignment bounds are explicit and preserve the exact completed sou
   assert.deepEqual(memory.currentState(), freshCrossedPrefixMemory());
 });
 
-test('native assignment exhaustion is an unknown frontier without candidate action or acquisition', async () => {
-  const value = freshCase(), memory = new CrossedPrefixMemory(), baseline = memory.currentState();
+test('native unfinished nonzero-cost assignment exhaustion remains unknown without action or acquisition', async () => {
+  const value = recolorCase(), memory = new CrossedPrefixMemory(), baseline = memory.currentState();
   for (const [bounds, expectedBound, examined] of [
     [{ maxControllers: 0 }, 'controllers', 0],
     [{ maxAssignments: 0 }, 'assignments', 0],
@@ -210,7 +211,7 @@ test('native assignment exhaustion is an unknown frontier without candidate acti
 });
 
 test('native assignment deadline cuts before or during the same request-wide enumeration', async () => {
-  const value = freshCase(), memory = new CrossedPrefixMemory();
+  const value = recolorCase(), memory = new CrossedPrefixMemory();
   const before = await proposeCrossedPrefixCommon(memory, value.observation, value.rows, [], 1, 10, () => 10);
   assert.equal(before.exhausted_bound, 'deadline'); assert.equal(before.frontier.assignments_examined, 0);
   let ticks = 0;
@@ -218,6 +219,41 @@ test('native assignment deadline cuts before or during the same request-wide enu
   assert.equal(during.exhausted_bound, 'deadline'); assert.equal(during.frontier.assignments_examined, 2);
   assert.equal(ticks, 3); assert.deepEqual(memory.currentState(), freshCrossedPrefixMemory());
   assert.equal(await proposeCrossedPrefixCommon(memory, value.observation, value.rows, [], 0, 0, () => 0), null);
+});
+
+test('current compatible appearances prove the unchanged source optimum within one permitted assignment', async () => {
+  const cases = (fixture.accessCases as R[]).filter(value => value.expected?.crossed_prefix_plan
+    && value.expected.crossed_prefix_plan.mode !== 'recolor');
+  assert.ok(cases.length > 5, 'Exercise fresh, acquired, blocked and cross-epoch source cases');
+  for (const item of cases) {
+    const value = copy(item), memory = seeded(value.initialEvents), baseline = memory.currentState();
+    let ticks = 0;
+    const options = { nativeBounds: true, maxAssignments: 1, deadlineMs: 1, now: () => ticks++ };
+    const result = value.method === 'cross_propose'
+      ? await proposeCrossedPrefixCommon(memory, value.observation, value.rows, value.inputs,
+        value.remaining, options.deadlineMs, options.now, { maxAssignments: 1 })
+      : memory.crossQuestion(value.observation, value.rows, value.inputs, options);
+    assert.deepEqual(result, value.expected, item.id + ': exact original Python proposal, not a partial search result');
+    assert.equal(ticks, 1, item.id + ': no second assignment or deadline iteration is needed');
+    assert.deepEqual(memory.currentState(), baseline, item.id + ': proof does not acquire knowledge');
+    assert.deepEqual(value, item, item.id + ': public inputs and reference expectations remain unchanged');
+  }
+});
+
+test('a zero-cost proof still requires available controller, assignment and time budgets', async () => {
+  const value = freshCase(), memory = new CrossedPrefixMemory();
+  for (const [bounds, deadline, expected] of [
+    [{ maxControllers: 0 }, 10, 'controllers'],
+    [{ maxAssignments: 0 }, 10, 'assignments'],
+    [{ maxAssignments: 1 }, 0, 'deadline'],
+  ] as [R, number, string][]) {
+    const result = await proposeCrossedPrefixCommon(memory, value.observation, value.rows, value.inputs,
+      1, deadline, () => 0, bounds);
+    assert.equal(result.status, 'unknown'); assert.equal(result.exhausted_bound, expected);
+    assert.equal(result.frontier.assignments_examined, 0); assert.equal(result.frontier.complete, false);
+    assert.equal(result.block_unrelated_probe, true); assert.equal(Object.hasOwn(result, 'actions'), false);
+    assert.deepEqual(memory.currentState(), freshCrossedPrefixMemory());
+  }
 });
 
 test('native assignment bounds reject invalid request parameters without creating knowledge', () => {

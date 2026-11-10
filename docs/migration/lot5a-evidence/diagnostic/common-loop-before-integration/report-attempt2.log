@@ -1,0 +1,25 @@
+{"branch":"learned-multi-action-access","stage":1,"returned":1,"ownReturns":0,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-multi-action-access","stage":2,"returned":2,"ownReturns":1,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-multi-action-access","stage":3,"returned":3,"ownReturns":2,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-multi-action-access","stage":4,"returned":4,"ownReturns":3,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-multi-action-access","stage":5,"returned":5,"ownReturns":4,"next":"action","family":"linked_temporal_preparation"}
+{"branch":"learned-multi-action-access","stage":6,"returned":6,"ownReturns":5,"next":"action","family":"linked_temporal_preparation"}
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: LinkedPreparation must contribute both commands without owner-dependent public responses
+
+5 !== 2
+
+    at branch (file:///workspace/sites/sra-lot5-20261110/.sites-checkout/scripts/prove-linked-temporal-common-loop.mjs:251:10)
+    at async file:///workspace/sites/sra-lot5-20261110/.sites-checkout/scripts/prove-linked-temporal-common-loop.mjs:279:98 {
+  generatedMessage: false,
+  code: 'ERR_ASSERTION',
+  actual: 5,
+  expected: 2,
+  operator: 'strictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.1

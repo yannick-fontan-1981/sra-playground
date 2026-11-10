@@ -1,0 +1,39 @@
+{
+  "lot": "7B observed_symbol_transaction",
+  "checkout": "/workspace/sites/sra-lot7b-20261110/.sites-checkout",
+  "branch": "lot7b-symbol-transactions",
+  "basePublishedCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+  "baseSiteVersion": 83,
+  "updated_at": "2026-11-10T21:24:13.816528+00:00",
+  "stage": "Explicitquietfor5A renewed21:20:19ABBArequest. CRAFdevelopment3levels36Symbolsactions,144originalcalls432exactchecks; source/textonlywhilewaitingactualpredecessors.",
+  "heavy_work_started": false,
+  "performance_started": false,
+  "publication_started": false,
+  "publication_order": "7A Site83 ->5A ->4B ->7B, integrating actualpublishedpredecessors before7Bfreeze.",
+  "request": "5A and4B:7Bsourceport started after7Apublished; notifythisstatus beforeexclusivecostslot and7Bwillpause alltests/oracles/builds. No7Bofficialtimingplanneduntilactualpredecessorsintegrated.",
+  "caseClocks": {
+    "CRAF": {
+      "cumulativeSeconds": 383.465343,
+      "remainingSeconds": 2016.534657,
+      "status": "paused"
+    }
+  },
+  "nativeVersionAssigned": false,
+  "baseNativeVersion": "0.52.0",
+  "quiet_acknowledged": true,
+  "active_command": null,
+  "own_agents": "Allthreeagents source/review/costtoolTEXTonly. RootCRAFcampaignandoriginalparityendedsuccessfully. Noactivefixtures/tests/build/game/preview/profiling/archive/measurement.",
+  "request_to_lot5a": "FRESH explicitquietack for your renewed21:20:19request. Rootandall7Bagentsquiet; allboundedfunctionaljobsended. Onlysource/text/reviewcontinues; noarchivejobsuntilyourrelease.5Amaystart afteritsownreadinessand4Back. CRAFdevelopmentcompleted3levels36actions; nofurther7Bcomputeuntilrelease.",
+  "request_to_lot4b": "4B notified:5A21:10:37 temporarycompute release accepted.7B resumesoracles/targetedtests/publicreadonlyscanner. Willpauseuponnext5Aor4Bexplicitquietrequest;publicationorder7A83->5A->4B->7B preserved.",
+  "functional_progress": {
+    "componentTests": 275,
+    "kernelTests": 4,
+    "crafLevels": 3,
+    "crafActions": 36,
+    "symbolSelected": 36,
+    "originalCalls": 144,
+    "originalChecks": 432,
+    "interfaceMethodAblationRemovedProposals": 27,
+    "boundAblationRemovedProposals": 18
+  }
+}

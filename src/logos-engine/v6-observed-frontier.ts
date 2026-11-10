@@ -5,6 +5,7 @@ import { pythonEqual as same, pythonTruthy as truth } from './v6-operations.ts';
 import { factConditionHolds } from './v6-drm-projector.ts';
 import type { DrmCondition } from './v6-drm-projector.ts';
 import { predictCandidateRule } from './v6-transition-learning.ts';
+import { retainNativeJson } from './v6-native-owned.ts';
 
 type R = Record<string, any>;
 export const FRONTIER_SCHEMA = 'prototype.observed_frontier.v1';
@@ -47,6 +48,10 @@ export interface FrontierProposeOptions {
   control_acquisition?: R | null; curiosity?: R | null; return_episode?: readonly (readonly [R, string, R])[] | null;
 }
 
+/** Internal checkpoint ownership. The default source-compatible object remains
+ * mutable and snapshot() always returns detached values in either mode. */
+export interface NativeFrontierOptions { nativeOwned?: boolean }
+
 export class ObservedFrontier {
   target_levels: number; max_prefix: number;
   nodes: R = {}; observations: R = {}; edges: R = {}; rules: R = {};
@@ -55,22 +60,42 @@ export class ObservedFrontier {
   private candidateContext: readonly [R, R] | null = null;
   private candidateChecks = new Map<string, R>();
   private deltas: R[] = [];
-  constructor(targetLevels = 3, maxPrefix = 16, state: R | null = null) {
+  private readonly nativeOwned: boolean;
+  private nativeSnapshotValue: R | null = null;
+  private nativeSnapshotInputs: readonly unknown[] | null = null;
+  constructor(targetLevels = 3, maxPrefix = 16, state: R | null = null, options: NativeFrontierOptions = {}) {
     if (!(maxPrefix >= 1 && maxPrefix <= 16)) throw new RangeError('Prefix must be bounded by 16');
+    this.nativeOwned = options.nativeOwned === true;
     this.target_levels = targetLevels; this.max_prefix = maxPrefix;
     if (state !== null) {
       if (state.schema !== FRONTIER_SCHEMA) throw new TypeError('Unsupported frontier snapshot');
-      for (const key of this.stateKeys) (this as any)[key] = copy(state[key]);
+      for (const key of this.stateKeys) (this as any)[key] = this.nativeOwned ? retainNativeJson(state[key]) : copy(state[key]);
     }
+    if (this.nativeOwned) this.closeNativeState();
   }
   private get stateKeys(): readonly string[] { return ['target_levels', 'max_prefix', 'nodes', 'observations', 'edges', 'rules', 'knowledge_revision', 'sequence', 'chain', 'pending', 'navigation_trials', 'action_counts']; }
+  private closeNativeState(): R {
+    // Close the complete replacement before publishing any of it. A foreign
+    // shallow freeze does not establish ownership of its mutable descendants.
+    const state = retainNativeJson(Object.fromEntries(this.stateKeys.map(key => [key, (this as any)[key]])));
+    Object.assign(this, state);
+    return state;
+  }
   private async commit(kind: string, payload: R): Promise<R> {
-    const event: R = { schema: FRONTIER_SCHEMA, sequence: this.sequence + 1, previous_digest: this.chain, kind, payload: copy(payload) };
-    event.digest = await digest(event); await this.applyDelta(event); this.deltas.push(event); return event;
+    const event: R = { schema: FRONTIER_SCHEMA, sequence: this.sequence + 1, previous_digest: this.chain, kind,
+      payload: this.nativeOwned ? retainNativeJson(payload) : copy(payload) };
+    event.digest = await digest(event);
+    const owned = this.nativeOwned ? retainNativeJson(event) : event;
+    await this.applyDelta(owned); this.deltas.push(owned); return owned;
   }
   async applyDelta(event: R): Promise<void> {
+    // Capture both the supplied event and the working state before awaiting its
+    // hash. The native path stages each change and publishes it only on success.
+    const previous = this.nativeOwned ? this.closeNativeState() : null;
+    if (this.nativeOwned) event = retainNativeJson(event);
     const base = Object.fromEntries(Object.entries(event).filter(([key]) => key !== 'digest'));
     if (event.schema !== FRONTIER_SCHEMA || event.sequence !== this.sequence + 1 || event.previous_digest !== this.chain || event.digest !== await digest(base)) throw new TypeError('Frontier delta chain/order mismatch');
+    if (previous) { await this.applyNativeDelta(event, previous); return; }
     const p = copy(event.payload), kind = event.kind;
     if (kind === 'observation') {
       const key = p.index;
@@ -97,11 +122,68 @@ export class ObservedFrontier {
     else throw new TypeError('Unknown frontier delta kind');
     this.sequence = event.sequence; this.chain = event.digest;
   }
+  private async applyNativeDelta(event: R, previous: R): Promise<void> {
+    const p = event.payload, kind = event.kind, next: R = { ...previous };
+    if (kind === 'observation') {
+      const key = p.index, old = previous.nodes[key] ?? { protocol: p.protocol,
+        composition_ref: `C_observed_${key.split(':')[1].slice(0, 16)}`, occurrences: [], actions: {}, attempts: {},
+        measurement_summary: p.measurement_summary };
+      const actions = p.action_candidates !== null ? await this.actionMap(p.action_candidates) : old.actions;
+      next.nodes = { ...previous.nodes, [key]: { ...old, occurrences: [...old.occurrences, p.observation_ref], actions } };
+      next.observations = { ...previous.observations,
+        [p.observation_ref]: { index: key, knowledge_revision: p.knowledge_revision } };
+    } else if (kind === 'domain') {
+      const old = previous.nodes[p.index];
+      if (!old) throw new TypeError('Frontier domain requires an existing observation');
+      next.nodes = { ...previous.nodes, [p.index]: { ...old, actions: await this.actionMap(p.actions) } };
+    } else if (kind === 'transition') {
+      const node = previous.nodes[p.source], oldAttempt = node.attempts[p.action_key]
+        ?? { count: 0, outcomes: {}, evidence_refs: [], assessment: {} };
+      const attempt = { ...oldAttempt, count: oldAttempt.count + 1,
+        outcomes: { ...oldAttempt.outcomes, [p.target]: (oldAttempt.outcomes[p.target] ?? 0) + 1 },
+        evidence_refs: [...oldAttempt.evidence_refs, p.transition_ref], assessment: p.assessment };
+      next.nodes = { ...previous.nodes, [p.source]: { ...node, attempts: { ...node.attempts, [p.action_key]: attempt } } };
+      const edge = previous.edges[p.edge_id] ?? { edge_id: p.edge_id, source: p.source, target: p.target,
+        action: p.action, action_key: p.action_key, evidence_refs: [] };
+      next.edges = { ...previous.edges, [p.edge_id]: { ...edge, evidence_refs: [...edge.evidence_refs, p.transition_ref] } };
+      const countKey = `${node.protocol.level_epoch}:${p.action_key}`;
+      next.action_counts = { ...previous.action_counts, [countKey]: (previous.action_counts[countKey] ?? 0) + 1 };
+      if (p.rules.length) {
+        next.rules = { ...previous.rules };
+        for (const rule of p.rules) {
+          const old = next.rules[rule.rule_id];
+          if (!old || ['status', 'scope_epochs', 'counterexample_count'].some(key => !same(old[key], rule[key]))) next.knowledge_revision++;
+          // Define own data properties, including opaque prototype-like IDs.
+          Object.defineProperty(next.rules, rule.rule_id, { value: rule, enumerable: true, writable: true, configurable: true });
+        }
+      }
+      if (truth(p.navigation_trial)) next.navigation_trials = { ...previous.navigation_trials,
+        [p.navigation_trial]: (previous.navigation_trials[p.navigation_trial] ?? 0) + 1 };
+      if (previous.pending && p.proposal_id === previous.pending.proposal_id) next.pending = { ...previous.pending, executed: previous.pending.executed + 1 };
+    } else if (kind === 'proposal') next.pending = { ...p, executed: 0 };
+    else throw new TypeError('Unknown frontier delta kind');
+    next.sequence = event.sequence; next.chain = event.digest;
+    const closed = retainNativeJson(next);
+    if (this.stateKeys.some(key => (this as any)[key] !== previous[key])) throw new TypeError('Native frontier changed while applying a delta');
+    Object.assign(this, closed);
+    this.nativeSnapshotValue = null; this.nativeSnapshotInputs = null;
+  }
   private async actionMap(actions: readonly R[]): Promise<R> {
     const entries: [string, R][] = []; for (const action of actions) entries.push([await frontierActionKey(action), action]); return Object.fromEntries(entries);
   }
   drainDeltas(): R[] { const events = this.deltas; this.deltas = []; return events; }
   snapshot(): R { return { schema: FRONTIER_SCHEMA, ...Object.fromEntries(this.stateKeys.map(key => [key, copy((this as any)[key])])) }; }
+  /** Exact source snapshot values with immutable branch identities retained for
+   * native fragmentation. All public mutable snapshots keep using snapshot(). */
+  nativeSnapshot(): R {
+    if (!this.nativeOwned) return retainNativeJson(this.snapshot());
+    const state = this.closeNativeState(), inputs = this.stateKeys.map(key => state[key]);
+    if (this.nativeSnapshotValue && this.nativeSnapshotInputs
+      && inputs.every((value, index) => value === this.nativeSnapshotInputs![index])) return this.nativeSnapshotValue;
+    this.nativeSnapshotInputs = inputs;
+    this.nativeSnapshotValue = retainNativeJson({ schema: FRONTIER_SCHEMA, ...state });
+    return this.nativeSnapshotValue;
+  }
 
   async observe(observation: R, actionCandidates: readonly R[] | null = null): Promise<R> {
     const index = await frontierIndex(observation), ref = frontierRef(observation), protocol = frontierProtocol(observation);

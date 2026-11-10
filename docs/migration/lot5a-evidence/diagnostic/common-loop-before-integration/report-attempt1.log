@@ -1,0 +1,47 @@
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
++ actual - expected
+
+  [
+    'surface_program',
+    'code_program',
+    'slot_substitution',
++   'word_interface',
++   'port_assembly',
++   'constellation_cover',
+    'linked_temporal_preparation',
+    'configured_arrivals',
+    'fixed_origin'
+  ]
+
+    at branch (file:///workspace/sites/sra-lot5-20261110/.sites-checkout/scripts/prove-linked-temporal-common-loop.mjs:181:10)
+    at async file:///workspace/sites/sra-lot5-20261110/.sites-checkout/scripts/prove-linked-temporal-common-loop.mjs:278:98 {
+  generatedMessage: true,
+  code: 'ERR_ASSERTION',
+  actual: [
+    'surface_program',
+    'code_program',
+    'slot_substitution',
+    'word_interface',
+    'port_assembly',
+    'constellation_cover',
+    'linked_temporal_preparation',
+    'configured_arrivals',
+    'fixed_origin'
+  ],
+  expected: [
+    'surface_program',
+    'code_program',
+    'slot_substitution',
+    'linked_temporal_preparation',
+    'configured_arrivals',
+    'fixed_origin'
+  ],
+  operator: 'deepStrictEqual',
+  diff: 'simple'
+}
+
+Node.js v24.22.1

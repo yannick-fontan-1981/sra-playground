@@ -1,0 +1,1002 @@
+{
+  "schema": "logos-engine.lot5a-owner-cost-structural-attribution.v1",
+  "status": "functional_structure_qualification_failed",
+  "startedAt": "2026-11-10T21:02:38.331Z",
+  "checks": [
+    {
+      "name": "immutable_capture_provenance_before_measurement",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:warmup:5",
+      "passed": true
+    },
+    {
+      "name": "shape:STCK:warmup",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:0",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:1",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:2",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:3",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:4",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:5",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:6",
+      "passed": true
+    },
+    {
+      "name": "graphs:STCK:measured:7",
+      "passed": false,
+      "error": {
+        "name": "AssertionError",
+        "message": "Common node origin changed: state_fragment:5447ef09940380a38d6cc708206498b3d6a06766b7d5001f47d51f6abcc4d837/statement\n+ actual - expected\n\n+ 'transition.acquire'\n- 'outcome.acquire'\n"
+      }
+    }
+  ],
+  "nodeAttributions": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 39,
+      "nodeId": "family_state:linked_temporal_preparation",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "2b5190bb1eda9ac218483404499be12f0433efc6a66a519e2c6f53db2412a65b",
+      "category": "linkedTemporal_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "9d9a7d94c8b6256119d39593c06d14cc695305408a6f761f178e8d0704479cbd",
+      "epoch": null,
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 40,
+      "nodeId": "family_activation:linked_temporal_preparation",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "a4e9bee840949f8339564c636c3fe75c968bb1a2803556fcfc190b2eace6a8d5",
+      "category": "linkedTemporal_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 243,
+      "nodeId": "family_state:linked_temporal_preparation",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "548cf84a845618280f4d356068190e603d6719ac79f824389fce549c89cca8ff",
+      "category": "linkedTemporal_owner_state",
+      "checkpointIndex": 2,
+      "sourceStateSha256": "cb092586d50c70b818553475ec58f59c13bf985bf5c8df02da7b9e7155faec36",
+      "epoch": 1,
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 352,
+      "nodeId": "state_fragment:ee07393ad83d3a9b3245bbde6cc094787d72a0825b3b6c13c56c2febc7a8fa6c",
+      "kind": "state_fragment",
+      "revision": 1,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "f523f83721dda4709d79a3ce78fa634b3739a57f3d5685387b65e68fa59a1b04",
+      "category": "linkedTemporal_referenced_state_fragment",
+      "parentNodes": [
+        "family_state:linked_temporal_preparation"
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 353,
+      "nodeId": "state_fragment:c2c5f8a85889ae413060b91e1bcf9f8c1de86e8829a180efb3655371e96f8da2",
+      "kind": "state_fragment",
+      "revision": 1,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "f7bea831d6a2b7ec6e832d50744df279fc41517a4104b1d59ba6df89f498b64a",
+      "category": "linkedTemporal_referenced_state_fragment",
+      "parentNodes": [
+        "family_state:linked_temporal_preparation"
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 354,
+      "nodeId": "family_state:linked_temporal_preparation",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "88a23a75a9ddc53ef3129d9ca1c4734fe937b69ed6341fabeab4dbf96ccb0b6f",
+      "category": "linkedTemporal_owner_state",
+      "checkpointIndex": 4,
+      "sourceStateSha256": "68b3f83db0700bd572ff8db36da8d9aad8fdb3fe9d4afae6c426002d16337a14",
+      "epoch": 1,
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 457,
+      "nodeId": "state_fragment:8cd8faa0eb62d720e178a2b7834a274eaefa28c21aceabd2eab13a6679b4a73c",
+      "kind": "state_fragment",
+      "revision": 1,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "5f3801cc2de00885d8fe63dea4ae9a3e8f77536f43a47e86ad1fe20e8b6959cc",
+      "category": "linkedTemporal_referenced_state_fragment",
+      "parentNodes": [
+        "family_state:linked_temporal_preparation"
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 458,
+      "nodeId": "state_fragment:5447ef09940380a38d6cc708206498b3d6a06766b7d5001f47d51f6abcc4d837",
+      "kind": "state_fragment",
+      "revision": 1,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "c68d8170c8f40d1c858f3d5b816b43ff71259252a230da9a6a8e53ccace90b5e",
+      "category": "linkedTemporal_referenced_state_fragment",
+      "parentNodes": [
+        "family_state:linked_temporal_preparation"
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 459,
+      "nodeId": "state_fragment:c681ff44ef770cde3f07446f676daa1e6f1db740f28e61bce6542de890cd9cce",
+      "kind": "state_fragment",
+      "revision": 1,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "4ad71356bad48f93260a98d326d91bc4dc1c1d27269ce0a36c9ee6fffc1e71ef",
+      "category": "linkedTemporal_referenced_state_fragment",
+      "parentNodes": [
+        "family_state:linked_temporal_preparation"
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 460,
+      "nodeId": "family_state:linked_temporal_preparation",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "bca33d3bb04e9f2de1939edcb1ff79afbbd2eacbc65a8b8828b65782bb24a1fd",
+      "category": "linkedTemporal_owner_state",
+      "checkpointIndex": 6,
+      "sourceStateSha256": "10ad1bb4d85444e0b9b0758bb7676bcb9429dbeacca4e5e4abea1384363a92f4",
+      "epoch": 2,
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 39,
+      "nodeId": "family_state:linked_temporal_preparation",
+      "kind": "family_state",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "db9dc31b19934f2348bd0bd26b1ca2cbfb8d9e35b483e57823b8d4417d6d19fd",
+      "category": "linkedTemporal_owner_state",
+      "checkpointIndex": 0,
+      "sourceStateSha256": "9d9a7d94c8b6256119d39593c06d14cc695305408a6f761f178e8d0704479cbd",
+      "epoch": null,
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "requestSequence": 0,
+      "deltaSequence": 40,
+      "nodeId": "family_activation:linked_temporal_preparation",
+      "kind": "family_activation",
+      "revision": 1,
+      "cause": {
+        "statement": "family.install",
+        "step": "initialize",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "fcdd531f9ebc2d6a81e5561d41503090f97be9c10085f2cab56382894149e165",
+      "category": "linkedTemporal_installation"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "requestSequence": 1,
+      "deltaSequence": 243,
+      "nodeId": "family_state:linked_temporal_preparation",
+      "kind": "family_state",
+      "revision": 2,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:1"
+      ],
+      "nodeSha256": "aa56fe0153bbed657c6f38268f2925dcef3fcb849de9997d45d553cae9798a03",
+      "category": "linkedTemporal_owner_state",
+      "checkpointIndex": 2,
+      "sourceStateSha256": "2a7630a505da1a3cabfd1481c7f6d3c38133fc8e23aaffc9054a7c783a972106",
+      "epoch": 1,
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 352,
+      "nodeId": "state_fragment:ee07393ad83d3a9b3245bbde6cc094787d72a0825b3b6c13c56c2febc7a8fa6c",
+      "kind": "state_fragment",
+      "revision": 1,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "714dad4a0c7c8b001fe2fa2c011786440539e260692e1c3ba6bd2aba38fd0857",
+      "category": "linkedTemporal_referenced_state_fragment",
+      "parentNodes": [
+        "family_state:linked_temporal_preparation"
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 353,
+      "nodeId": "state_fragment:73ff94870ea0337e208dd258125424ae0470c1139a02011c6e2b942d28420b01",
+      "kind": "state_fragment",
+      "revision": 1,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "e183e0a885adb366f620d4aa85df4d108946388f96f5e4ff661fbb285754f081",
+      "category": "linkedTemporal_referenced_state_fragment",
+      "parentNodes": [
+        "family_state:linked_temporal_preparation"
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "requestSequence": 2,
+      "deltaSequence": 354,
+      "nodeId": "family_state:linked_temporal_preparation",
+      "kind": "family_state",
+      "revision": 3,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:2"
+      ],
+      "nodeSha256": "b7ccb747696bfef2339b0c72b44df01580ea76b1e32a5e5ef7604f2aea519764",
+      "category": "linkedTemporal_owner_state",
+      "checkpointIndex": 4,
+      "sourceStateSha256": "07f970218d1ea30a5d958a2609c11df65a7a868a942810b7818d42b9c2c124f9",
+      "epoch": 1,
+      "retainedEvents": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 457,
+      "nodeId": "state_fragment:8cd8faa0eb62d720e178a2b7834a274eaefa28c21aceabd2eab13a6679b4a73c",
+      "kind": "state_fragment",
+      "revision": 1,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "7bd1bfaf38cca165441c19f342f70d83ebc7a2ea499308638d6796b261cb8768",
+      "category": "linkedTemporal_referenced_state_fragment",
+      "parentNodes": [
+        "family_state:linked_temporal_preparation"
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 458,
+      "nodeId": "state_fragment:5447ef09940380a38d6cc708206498b3d6a06766b7d5001f47d51f6abcc4d837",
+      "kind": "state_fragment",
+      "revision": 1,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "d173741d378b0f1a8d7849f2aa37fe94983ae6e67426fee40899cb2e19300924",
+      "category": "linkedTemporal_referenced_state_fragment",
+      "parentNodes": [
+        "family_state:linked_temporal_preparation"
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 459,
+      "nodeId": "state_fragment:c681ff44ef770cde3f07446f676daa1e6f1db740f28e61bce6542de890cd9cce",
+      "kind": "state_fragment",
+      "revision": 1,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [],
+      "nodeSha256": "58ac306e95e337a8a59a7459a3dab8915f5df6b545a098334d6f9d58a3094d00",
+      "category": "linkedTemporal_referenced_state_fragment",
+      "parentNodes": [
+        "family_state:linked_temporal_preparation"
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "requestSequence": 3,
+      "deltaSequence": 460,
+      "nodeId": "family_state:linked_temporal_preparation",
+      "kind": "family_state",
+      "revision": 4,
+      "cause": {
+        "statement": "outcome.acquire",
+        "step": "sealed_prefix",
+        "workflow": "v6.composition_strategy.choose"
+      },
+      "evidence": [
+        "prefix_evidence:3"
+      ],
+      "nodeSha256": "cd3cc489803ff34dc313e1118601433cd81a41fd850c15381bfb029bb34a10c7",
+      "category": "linkedTemporal_owner_state",
+      "checkpointIndex": 6,
+      "sourceStateSha256": "19337203eb6fec298caca7c7598b4586b3f317f7ff453c2a961ff03a02b1a769",
+      "epoch": 2,
+      "retainedEvents": []
+    }
+  ],
+  "points": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 158,
+      "candidateNodeCount": 160,
+      "baselineGraphRevision": 167,
+      "candidateGraphRevision": 169,
+      "addedNodeIds": [
+        "family_activation:linked_temporal_preparation",
+        "family_state:linked_temporal_preparation"
+      ],
+      "attributedCumulativeDeltas": 2,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 186,
+      "candidateNodeCount": 188,
+      "baselineGraphRevision": 270,
+      "candidateGraphRevision": 273,
+      "addedNodeIds": [
+        "family_activation:linked_temporal_preparation",
+        "family_state:linked_temporal_preparation"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 188,
+      "candidateNodeCount": 190,
+      "baselineGraphRevision": 280,
+      "candidateGraphRevision": 283,
+      "addedNodeIds": [
+        "family_activation:linked_temporal_preparation",
+        "family_state:linked_temporal_preparation"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 208,
+      "candidateNodeCount": 212,
+      "baselineGraphRevision": 378,
+      "candidateGraphRevision": 384,
+      "addedNodeIds": [
+        "family_activation:linked_temporal_preparation",
+        "family_state:linked_temporal_preparation",
+        "state_fragment:c2c5f8a85889ae413060b91e1bcf9f8c1de86e8829a180efb3655371e96f8da2",
+        "state_fragment:ee07393ad83d3a9b3245bbde6cc094787d72a0825b3b6c13c56c2febc7a8fa6c"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 210,
+      "candidateNodeCount": 214,
+      "baselineGraphRevision": 388,
+      "candidateGraphRevision": 394,
+      "addedNodeIds": [
+        "family_activation:linked_temporal_preparation",
+        "family_state:linked_temporal_preparation",
+        "state_fragment:c2c5f8a85889ae413060b91e1bcf9f8c1de86e8829a180efb3655371e96f8da2",
+        "state_fragment:ee07393ad83d3a9b3245bbde6cc094787d72a0825b3b6c13c56c2febc7a8fa6c"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 229,
+      "candidateNodeCount": 236,
+      "baselineGraphRevision": 480,
+      "candidateGraphRevision": 490,
+      "addedNodeIds": [
+        "family_activation:linked_temporal_preparation",
+        "family_state:linked_temporal_preparation",
+        "state_fragment:5447ef09940380a38d6cc708206498b3d6a06766b7d5001f47d51f6abcc4d837",
+        "state_fragment:8cd8faa0eb62d720e178a2b7834a274eaefa28c21aceabd2eab13a6679b4a73c",
+        "state_fragment:c2c5f8a85889ae413060b91e1bcf9f8c1de86e8829a180efb3655371e96f8da2",
+        "state_fragment:c681ff44ef770cde3f07446f676daa1e6f1db740f28e61bce6542de890cd9cce",
+        "state_fragment:ee07393ad83d3a9b3245bbde6cc094787d72a0825b3b6c13c56c2febc7a8fa6c"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 0,
+      "request": "init",
+      "sequence": 0,
+      "baselineNodeCount": 158,
+      "candidateNodeCount": 160,
+      "baselineGraphRevision": 167,
+      "candidateGraphRevision": 169,
+      "addedNodeIds": [
+        "family_activation:linked_temporal_preparation",
+        "family_state:linked_temporal_preparation"
+      ],
+      "attributedCumulativeDeltas": 2,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 1,
+      "request": "advance",
+      "sequence": 1,
+      "baselineNodeCount": 186,
+      "candidateNodeCount": 188,
+      "baselineGraphRevision": 270,
+      "candidateGraphRevision": 273,
+      "addedNodeIds": [
+        "family_activation:linked_temporal_preparation",
+        "family_state:linked_temporal_preparation"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 2,
+      "request": "resume",
+      "sequence": 1,
+      "baselineNodeCount": 188,
+      "candidateNodeCount": 190,
+      "baselineGraphRevision": 280,
+      "candidateGraphRevision": 283,
+      "addedNodeIds": [
+        "family_activation:linked_temporal_preparation",
+        "family_state:linked_temporal_preparation"
+      ],
+      "attributedCumulativeDeltas": 3,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 3,
+      "request": "advance",
+      "sequence": 2,
+      "baselineNodeCount": 208,
+      "candidateNodeCount": 212,
+      "baselineGraphRevision": 378,
+      "candidateGraphRevision": 384,
+      "addedNodeIds": [
+        "family_activation:linked_temporal_preparation",
+        "family_state:linked_temporal_preparation",
+        "state_fragment:73ff94870ea0337e208dd258125424ae0470c1139a02011c6e2b942d28420b01",
+        "state_fragment:ee07393ad83d3a9b3245bbde6cc094787d72a0825b3b6c13c56c2febc7a8fa6c"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 4,
+      "request": "resume",
+      "sequence": 2,
+      "baselineNodeCount": 210,
+      "candidateNodeCount": 214,
+      "baselineGraphRevision": 388,
+      "candidateGraphRevision": 394,
+      "addedNodeIds": [
+        "family_activation:linked_temporal_preparation",
+        "family_state:linked_temporal_preparation",
+        "state_fragment:73ff94870ea0337e208dd258125424ae0470c1139a02011c6e2b942d28420b01",
+        "state_fragment:ee07393ad83d3a9b3245bbde6cc094787d72a0825b3b6c13c56c2febc7a8fa6c"
+      ],
+      "attributedCumulativeDeltas": 6,
+      "officialBoundarySourceCalls": []
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 5,
+      "request": "advance",
+      "sequence": 3,
+      "baselineNodeCount": 229,
+      "candidateNodeCount": 236,
+      "baselineGraphRevision": 480,
+      "candidateGraphRevision": 490,
+      "addedNodeIds": [
+        "family_activation:linked_temporal_preparation",
+        "family_state:linked_temporal_preparation",
+        "state_fragment:5447ef09940380a38d6cc708206498b3d6a06766b7d5001f47d51f6abcc4d837",
+        "state_fragment:73ff94870ea0337e208dd258125424ae0470c1139a02011c6e2b942d28420b01",
+        "state_fragment:8cd8faa0eb62d720e178a2b7834a274eaefa28c21aceabd2eab13a6679b4a73c",
+        "state_fragment:c681ff44ef770cde3f07446f676daa1e6f1db740f28e61bce6542de890cd9cce",
+        "state_fragment:ee07393ad83d3a9b3245bbde6cc094787d72a0825b3b6c13c56c2febc7a8fa6c"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": [
+        2
+      ]
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "pointIndex": 6,
+      "request": "resume",
+      "sequence": 3,
+      "baselineNodeCount": 231,
+      "candidateNodeCount": 238,
+      "baselineGraphRevision": 492,
+      "candidateGraphRevision": 502,
+      "addedNodeIds": [
+        "family_activation:linked_temporal_preparation",
+        "family_state:linked_temporal_preparation",
+        "state_fragment:5447ef09940380a38d6cc708206498b3d6a06766b7d5001f47d51f6abcc4d837",
+        "state_fragment:73ff94870ea0337e208dd258125424ae0470c1139a02011c6e2b942d28420b01",
+        "state_fragment:8cd8faa0eb62d720e178a2b7834a274eaefa28c21aceabd2eab13a6679b4a73c",
+        "state_fragment:c681ff44ef770cde3f07446f676daa1e6f1db740f28e61bce6542de890cd9cce",
+        "state_fragment:ee07393ad83d3a9b3245bbde6cc094787d72a0825b3b6c13c56c2febc7a8fa6c"
+      ],
+      "attributedCumulativeDeltas": 10,
+      "officialBoundarySourceCalls": []
+    }
+  ],
+  "failures": [
+    {
+      "name": "AssertionError",
+      "message": "Common node origin changed: state_fragment:5447ef09940380a38d6cc708206498b3d6a06766b7d5001f47d51f6abcc4d837/statement\n+ actual - expected\n\n+ 'transition.acquire'\n- 'outcome.acquire'\n"
+    }
+  ],
+  "commandBoundaryProjections": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "sourceCallIndex": 2,
+      "action": 3,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "sourceCallIndex": 2,
+      "action": 3,
+      "sourceCommand": {
+        "action_ref": "ACTION5"
+      },
+      "publicCommand": {
+        "action_ref": "ACTION5",
+        "data": {}
+      },
+      "rule": "V6AgentService.commandFromNative data object spread; source omission retained"
+    }
+  ],
+  "generator": {
+    "path": "docs/migration/lot5a-evidence/qualify-cost-owner-graphs.mjs",
+    "bytes": 41436,
+    "sha256": "99c9ca930f6ca86bb54f7ef1d0e67dbb5af84365b827b9c881b956f6a519f0d7"
+  },
+  "nativeDigests": {
+    "baseline": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+    "candidate": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f"
+  },
+  "recordedAt": "2026-11-10T21:02:42.731Z",
+  "inputs": [
+    {
+      "path": "docs/migration/lot5a-evidence/qualify-cost-owner-graphs.mjs",
+      "bytes": 41436,
+      "sha256": "99c9ca930f6ca86bb54f7ef1d0e67dbb5af84365b827b9c881b956f6a519f0d7"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/capture-cost-owner-graphs.mjs",
+      "bytes": 20995,
+      "sha256": "e4e2394eedb4aff41f312e5627d262666c38d4e84cbeebb7655ac9866e1e8cdc"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/baseline-structure.receipt.json",
+      "bytes": 103744,
+      "sha256": "b6aa1ebad686f3cfea072268fcdff0fc57b528fcd82563c50e279c951a4c0aed"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/baseline/source-manifest.json",
+      "bytes": 33095,
+      "sha256": "75e1dbe4002f737c2d5248a08531c6b60002c3114692b55df3a5c7255c79d6cc"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz",
+      "bytes": 4755121,
+      "sha256": "2938b69b5b02028e197ab2eadb1352918459def94ad38a0c17de2e0e6268e8f3"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5-baseline-052/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5-baseline-052/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5-baseline-052/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5-baseline-052/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5-baseline-052/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/candidate-structure.receipt.json",
+      "bytes": 104466,
+      "sha256": "ec940f9a384c8021422a683f0412aa0b975444b3a9687cb112462f71bd323b4c"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/test-expectation-correction/source-manifest.json",
+      "bytes": 33584,
+      "sha256": "631951d71c675e5c29f712e92724f17e446915807570581c049357bb97bf46b3"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz",
+      "bytes": 6820472,
+      "sha256": "dfcd0141da2ae230efbee9efedb8177c91d3cb1d3ddb17c0bcd22eac66eefa37"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 141662,
+      "sha256": "3dd8ff07f3b0e82c6059f825295e15d9e49af47d4aebb850aa9cb8fac90ed2e4"
+    },
+    {
+      "path": "src/logos-engine/v6-linked-temporal-preparation.ts",
+      "bytes": 24845,
+      "sha256": "c85464b1162352f7c6cb329f2d2f9b6cbcc74baae616be3d643d1ac1b646aeed"
+    },
+    {
+      "path": "src/logos-engine/v6-linked-temporal-contact.ts",
+      "bytes": 34974,
+      "sha256": "29b68e614203302e36ef731866544e35146b2b553b7d424c0e533eb38519b1b5"
+    },
+    {
+      "path": "src/logos-engine/v6-linked-temporal-phase.ts",
+      "bytes": 30482,
+      "sha256": "d431c10a89c967b056417ba526d68907ef1ddac62b5411b51f9d70edb8c994e1"
+    },
+    {
+      "path": "src/logos-engine/v6-linked-temporal-common.ts",
+      "bytes": 8267,
+      "sha256": "3e7111bccfefa22a67afad24cefdbc95834053eb233007f4f4ddda19f1bfe54f"
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14849,
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08"
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "bytes": 23637,
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207"
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "bytes": 11291,
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1"
+    },
+    {
+      "path": "src/logos-engine/v6-native-state-graph.ts",
+      "bytes": 21947,
+      "sha256": "b739db6d6066a06f4175b4377f0d0ae1f351b708e5d27fbdb99c9de7e6ed0b4d"
+    },
+    {
+      "path": "src/logos-engine/v6-hash.ts",
+      "bytes": 2842,
+      "sha256": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5"
+    },
+    {
+      "path": "src/logos-engine/v6-src-program.ts",
+      "bytes": 5903,
+      "sha256": "d41717575e252784a81519e8c7853853af3c2d7372b86ecb7efb3655c3e3df77"
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "bytes": 1502394,
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834"
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "bytes": 18195,
+      "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5-baseline-052/src/logos-engine/kernel.ts",
+      "bytes": 19490,
+      "sha256": "9c7fb668e85bf101f88de439ff43b42bba9566917a2c2b8fb8f13e2ee00e247b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot5-baseline-052/src/logos-engine/v6-knowledge-store.ts",
+      "bytes": 14854,
+      "sha256": "5efe83d07b6d5354b9a26b39320449ecaa631ca55563c683779f067a8d670bf0"
+    }
+  ],
+  "checkedCount": 16,
+  "formsSha256": "16841f7563e11eee237e8d3eb64db0d28fa291bc6d2fd248e8be954cbc561d50",
+  "qualification": "Every captured graph reconstructs from its exact complete Kernel delta chain using the validator bound to its own source freeze and identical value codecs. Added candidate nodes/deltas receive explicit installation, actual LinkedTemporal checkpoint, raw passive source-event fact or reachable-fragment attribution. Common node identities/metadata and common delta identity/cause/order remain exact apart from their declared runtime source digest; private value equality across versions is not asserted. Structural counts come from the captures, without an added-node or cycle formula. The forms are fixed before any cost window and every future raw trial must match its own form exactly. No cost values, timing correction, future-run success or full graph/caller semantic parity is inferred."
+}

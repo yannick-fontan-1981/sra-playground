@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.lot5a-renderer-path-description.v1",
+  "recordedAt": "2026-11-10T21:43:08.073375+00:00",
+  "before": {
+    "path": "docs/migration/lot5a-evidence/diagnostic/write-cost-results-before-directory-description.py",
+    "bytes": 43040,
+    "sha256": "1aa2dbcfe96c2c3aa47f388732a92d29a69fcbded3dc644857647fb28a685b9d"
+  },
+  "after": {
+    "path": "docs/migration/lot5a-evidence/write-cost-results.py",
+    "bytes": 43132,
+    "sha256": "9230ff38bd9022666d657e6e4689a8ab0de9c7ecba4669b9aa11d6f9d5082707"
+  },
+  "scope": "exact_predeclared_performance_directory_only",
+  "changes": [
+    "Replace inherited five-external-path description with actual declared-directory guard defect.",
+    "Require the actual repair scope in the displayed provenance."
+  ],
+  "rendererPreviouslyExecuted": false,
+  "arithmeticOrPopulationsChanged": false
+}

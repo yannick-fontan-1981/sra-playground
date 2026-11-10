@@ -1,0 +1,73 @@
+{
+  "schema": "logos-engine.lot5a-cost-dependency-preparation-repair.v1",
+  "recordedAt": "2026-11-10T21:24:08.720628+00:00",
+  "status": "opaque_dependency_materialized_before_measurement",
+  "failedCheck": "baseline_dependency_equivalence_public/vendor/pyodide",
+  "originalFailureFiles": [
+    {
+      "path": "docs/migration/lot5a-evidence/performance/static-preflight.json",
+      "bytes": 16305,
+      "sha256": "21f12cdcb5c36a8be513c1a3c74eadc2093d4037f5b9c21a1db1068ffe8196d5"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/static-preflight.log",
+      "bytes": 374,
+      "sha256": "893c6c59544a3b60de55ae0f8039ef1a64fc42ddff29fd533f22ccb3ee4ecaa5"
+    }
+  ],
+  "retainedFailureFiles": [
+    {
+      "path": "docs/migration/lot5a-evidence/performance/diagnostic/static-preflight-initial-failure.json",
+      "bytes": 16305,
+      "sha256": "21f12cdcb5c36a8be513c1a3c74eadc2093d4037f5b9c21a1db1068ffe8196d5"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/diagnostic/static-preflight-initial-failure.log",
+      "bytes": 374,
+      "sha256": "893c6c59544a3b60de55ae0f8039ef1a64fc42ddff29fd533f22ccb3ee4ecaa5"
+    }
+  ],
+  "dependency": {
+    "baselinePath": "/workspace/sites/sra-lot5-baseline-052/public/vendor/pyodide",
+    "candidatePath": "/workspace/sites/sra-lot5-20261110/.sites-checkout/public/vendor/pyodide",
+    "before": {
+      "existed": false,
+      "isSymlink": false
+    },
+    "after": {
+      "existed": true,
+      "isSymlink": true,
+      "resolvedTarget": "/workspace/sites/sra-lot5-20261110/.sites-checkout/public/vendor/pyodide",
+      "sameTargetAsCandidate": true
+    }
+  },
+  "action": "Created one directory symlink to the exact existing candidate Pyodide assets. No asset content was read, imported, interpreted or executed.",
+  "nativeInventoryBefore": {
+    "fileCount": 279,
+    "digest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb"
+  },
+  "nativeInventoryAfter": {
+    "fileCount": 279,
+    "digest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb"
+  },
+  "nativeSourceUnchanged": true,
+  "existingContract": {
+    "path": "docs/migration/lot5a-evidence/performance/owner-growth-contract.json",
+    "bytes": 3799,
+    "sha256": "f48f3289cd31b150cfcf7aaaf3dc1386f22e2731b7934a1a431bd5a0bafea1c1"
+  },
+  "captures": [
+    {
+      "path": "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz",
+      "bytes": 4755121,
+      "sha256": "2938b69b5b02028e197ab2eadb1352918459def94ad38a0c17de2e0e6268e8f3"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz",
+      "bytes": 6820472,
+      "sha256": "dfcd0141da2ae230efbee9efedb8177c91d3cb1d3ddb17c0bcd22eac66eefa37"
+    }
+  ],
+  "qualification": "The first failed preflight remains failed and is retained byte-for-byte under diagnostic/. A subsequent exclusive preflight must recheck the same unmodified rules against the now-shared dependency. Captures and the official source freezes are unchanged; no timing, build, test, game or replay executed.",
+  "costMeasurementExecuted": false
+}

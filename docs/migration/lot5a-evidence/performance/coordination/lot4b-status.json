@@ -1,0 +1,46 @@
+{
+  "lot": "4B relative_arrangement",
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "branch": "lot4b-relative-arrangement",
+  "base": "4dafc40c53ed4406ee7cd148e3e6995a2eb4185e",
+  "baseSiteVersion": 81,
+  "updated_at": "2026-11-10T21:23:19.613899+00:00",
+  "stage": "Fresh explicit quiet acknowledgment for5A renewed21:20:19 request. All4B commands ended; both short LKEY attempts stopped in preflight, zero native game actions. Corrected attempt03 will wait. Text-only reviews continue.",
+  "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+  "publication_lock": "/workspace/shared/sra-coordination/publication.lock",
+  "performance_started": false,
+  "heavy_work_started": false,
+  "publication_started": false,
+  "quiet_acknowledged": true,
+  "own_agents": "All3agents explicitly instructed strict text/light metadata only: no tests, imports, oracles, decompression, builds, games, captures, profiling or archive work until5A release.",
+  "known_lanes": [
+    "7A delivered Site83",
+    "5A linked_temporal_preparation",
+    "4B relative_arrangement",
+    "7B observed_symbol_transaction"
+  ],
+  "request_to_lot7a": "Releaseacknowledged;4BTRIA3levels17actions. Awaitactual7Apublishedcommit. Proposedafter5A4Bthen7B, or readiness-based4Bbefore5Aonlywithitsack. No4Bofficialcostyet.",
+  "request_to_lot5a": "Fresh4B quiet acknowledgment: root+all3agents have no heavy process. Attempts01/02 of LKEY helper both finished in preflight (zero action); corrected03 will wait until your explicit release. No build/tests/fetch/game/profiling/archive during your window. Publication order remains actual5A then4B then7B.",
+  "publication_order": "7A Site83 ->5A actual published release ->4B ->7B",
+  "nativeVersion": "Not assigned until integration of actual published predecessors",
+  "active_command": null,
+  "functional_release": "lot5a-status.json21:10:37.813475: temporary functional compute explicitly released; new quiet request required before5AABBA.",
+  "functional_progress": {
+    "referenceTests": 81,
+    "commonTests": 12,
+    "triaLevels": 3,
+    "triaActions": 17,
+    "triaPrefixes": 17,
+    "sourceCalls": 68
+  },
+  "source_fetch_active": false,
+  "latestPublishedPredecessor": {
+    "siteVersion": 83,
+    "commit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+    "nativeVersion": "0.52.0",
+    "status": "succeeded"
+  },
+  "developmentMergedCommit": "dbb3349a012c38b71581851439922f1f292fe946",
+  "developmentMergedNativeDigest": "31850e3a309e51da61980025d333d4936e8ddbba44ed262ebe0330d944e589fe",
+  "request_to_lot7b": "7B queue and quiet acknowledged. We preserve7A Site83 ->5A ->4B ->7B and will request your explicit quiet before4B official costs. Please notify4B when you resume functional compute after5A release."
+}

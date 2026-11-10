@@ -1,0 +1,418 @@
+{
+  "schema": "logos-engine.lot5a-owner-cost-io-correction.v1",
+  "status": "declared_post_measurement_io_correction",
+  "recordedAt": "2026-11-10T21:45:11.433266+00:00",
+  "postMeasurement": true,
+  "scope": "exact_predeclared_performance_directory_only",
+  "allowedPerformanceDirectory": "docs/migration/lot5a-evidence/performance",
+  "contract": {
+    "path": "docs/migration/lot5a-evidence/performance/owner-growth-contract.json",
+    "bytes": 3799,
+    "sha256": "f48f3289cd31b150cfcf7aaaf3dc1386f22e2731b7934a1a431bd5a0bafea1c1"
+  },
+  "declaration": {
+    "path": "docs/migration/lot5a-evidence/performance/declaration.json",
+    "bytes": 5524,
+    "sha256": "9dba35881a2ef113bdfb2b7a1477bf0f6514d774f933926a649f844798365651"
+  },
+  "window": {
+    "path": "docs/migration/lot5a-evidence/performance/window.json",
+    "bytes": 10145,
+    "sha256": "0be3eceb2139347ffa5efa0200fc1f68c98544517d0c521f3eee71b468401c5c"
+  },
+  "originalFailure": {
+    "path": "docs/migration/lot5a-evidence/performance/owner-growth-analysis-initial-failure.json",
+    "bytes": 2147,
+    "sha256": "3bc6607c1154569db6dce6387fdb4187de7bfbc3479f94d8dbc4ebeea6efbf91"
+  },
+  "declaredTools": {
+    "consolidator": {
+      "path": "docs/migration/lot5a-evidence/consolidate-owner-costs.mjs",
+      "bytes": 50598,
+      "sha256": "9e6112ec83b75bbdc7bdb2a614dd7ce0e860e1ea9b71ba2f74fb37e4f2e74f1e"
+    },
+    "reviewer": {
+      "path": "docs/migration/lot5a-evidence/review-owner-costs.py",
+      "bytes": 67816,
+      "sha256": "40b6a2068b61652725a55567407a58e54b88cd81056ecbe56755018d7a3d496d"
+    }
+  },
+  "executedTools": {
+    "consolidator": {
+      "path": "docs/migration/lot5a-evidence/consolidate-owner-costs-directory-v1.mjs",
+      "bytes": 53989,
+      "sha256": "9a8208f8cf5e87cc2ed8b68c250dc0dfdfbec372eecdd7ce8a1867d3abe63166"
+    },
+    "reviewer": {
+      "path": "docs/migration/lot5a-evidence/review-owner-costs-directory-v1.py",
+      "bytes": 72659,
+      "sha256": "2126add0ccfe746dd33e113f19f5baa793bb32a9f2bb532c8fe714cf705562be"
+    }
+  },
+  "rulesChanged": false,
+  "calculationsChanged": false,
+  "rawInputsRewritten": false,
+  "sourceChecks": [
+    {
+      "language": "JavaScript",
+      "section": "rules_constants_and_existing_readers",
+      "comparison": "byte_identical",
+      "passed": true,
+      "sha256": "49fc5d3be6a335b8097b93b28616635766a9341094612c811edfd181cd685634"
+    },
+    {
+      "language": "JavaScript",
+      "section": "all_existing_pure_and_raw_validation_functions",
+      "comparison": "byte_identical",
+      "passed": true,
+      "sha256": "643331de857240861d41acd097749446d0d2332873404fc75422a0a53cd9ec6a"
+    },
+    {
+      "language": "JavaScript",
+      "section": "all_original_protocol_work_cohort_pooling_and_global_loops",
+      "comparison": "byte_identical",
+      "passed": true,
+      "sha256": "88139e9e8f2f8b5e699d71c0bf2de1b55153e2afcd8588c66d6741e66304fac5"
+    },
+    {
+      "language": "JavaScript",
+      "section": "all_output_metrics_methods_counts_and_verdicts",
+      "comparison": "byte_identical",
+      "passed": true,
+      "sha256": "3934a182ce9e44b5623e579e52a09cc69bddc490d88d8d1eca082f1bb0ebdc2b"
+    },
+    {
+      "language": "Python",
+      "section": "same",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "2399bdfa3a1a6ce1e7ee7e3323c2a886eefbe39cce22aac1967592a7bf8603d4"
+    },
+    {
+      "language": "Python",
+      "section": "object_unique",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "0a0fae090d3869cc73a5ea397859111af11cf64d019d9cc9a33dbe76d0088d7c"
+    },
+    {
+      "language": "Python",
+      "section": "invalid_constant",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "2369a6d1663d658e102425eeaa6096511780f8c4ba81c29ed9541026bca1da53"
+    },
+    {
+      "language": "Python",
+      "section": "instant",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "1759d68859d35e967db4a09481d96651741240604dc88e6eedcbe6f5c4e984f9"
+    },
+    {
+      "language": "Python",
+      "section": "without",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "bfb65ac2dfcf018c92f453d86586902a81d680760cb5c1e5ef7a25a7a8cfb150"
+    },
+    {
+      "language": "Python",
+      "section": "numeric",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "a58f9f595b7bc848dc508d92d23e8b2c707d6977570a00f2d6ca8faa8b2071a0"
+    },
+    {
+      "language": "Python",
+      "section": "distribution",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "b0e42a038c0192cdeb52344239c464261fe5f6020a93d9c3a8feb2510205c2bc"
+    },
+    {
+      "language": "Python",
+      "section": "samples",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "6fce5b22f51eb217c3885072ab40b48b650e8f61ae3b7f0af3cbfd2ff4aa3a16"
+    },
+    {
+      "language": "Python",
+      "section": "calculate",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "eaf8c7acdb5c0e2deddcf2e3e1aeaeb28f1840513db9ce098756ec3824373ea3"
+    },
+    {
+      "language": "Python",
+      "section": "metric",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "8c1e20671a137465799b13c9d3f95c680ad6491d271404e9606c84fe1ba36450"
+    },
+    {
+      "language": "Python",
+      "section": "unresolved_for",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "4e9f210d491bc147d62badc2341d84987907e62cd11a1748f097e7e80800255f"
+    },
+    {
+      "language": "Python",
+      "section": "within_decimal",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "caed93a826aa0192bc64af0bb6311e6632fb22703047c2149219535ad4d8bfa4"
+    },
+    {
+      "language": "Python",
+      "section": "work",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "68014095012946caf4fd930b8ebf605d6ce7c5a140af7379e2dd02d664be8616"
+    },
+    {
+      "language": "Python",
+      "section": "functional_shape",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "307925cf9e4b2e1b203e31d8d9c9b7006afe39a1db3f9af029367be525101d4d"
+    },
+    {
+      "language": "Python",
+      "section": "Review.__init__",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "1324d576ac4f7b6e9b8038610fc069de2c2ce269b50c6f379da4d80db0d5663c"
+    },
+    {
+      "language": "Python",
+      "section": "Review.check",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "f427fac1c7ae59a9f551f9faae3e4327a0c39969172223130927bf7dd41ea06e"
+    },
+    {
+      "language": "Python",
+      "section": "Review.equal",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "04dd33725f0b87f150efbaa348c6bc9c1260c6b6f81f3063304d1e7c25d177a4"
+    },
+    {
+      "language": "Python",
+      "section": "Review.local",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "5eeed0c60a59b090b5ee1cb7a0a8d00833b303412d3aa957fec619ced607eeb5"
+    },
+    {
+      "language": "Python",
+      "section": "Review.bytes",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "ca0bdead74e9fa768eb66650adc8f50cf4921f104ec33ee5a026bf75bde3f3a1"
+    },
+    {
+      "language": "Python",
+      "section": "Review.read",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "a3b07b9c991f3dc6d4b20069d6657458e290553b5fd18e2f57b591575d649ffe"
+    },
+    {
+      "language": "Python",
+      "section": "Review.fingerprint",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "f8d9dd24a39fcbe528a291ef2d755f73eade8c092ee5e2fdafba87328be676c5"
+    },
+    {
+      "language": "Python",
+      "section": "Review.verify",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "c80dd799c08595298b21ee32fbbfde5a38af4fe734555bb8502acf17f113bf9d"
+    },
+    {
+      "language": "Python",
+      "section": "Review.manifest",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "da303e487449453a0fda015e0d1fcc9b6361c05e8fdf9d3ff06dff94aa121334"
+    },
+    {
+      "language": "Python",
+      "section": "Review.load_structural_fixture",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "f0cf2b99a581cc8ec27f07a12d6149c7d71cb274007334c0076912832a4bc291"
+    },
+    {
+      "language": "Python",
+      "section": "Review.verify_capture_input",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "1876490789346fffba79d5255fa9b3696082f85945d1deaa5e88bca165e7b68a"
+    },
+    {
+      "language": "Python",
+      "section": "Review.validate_capture_receipt",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "5eaf81c504f67c8aaa9ff14990cd2e2869a050af8d883d252d2d57400f4ac38e"
+    },
+    {
+      "language": "Python",
+      "section": "Review.load_window",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "49a4fd591088801299dca6a613cffbe26ff1283f63007f41ba8f0cf19c038640"
+    },
+    {
+      "language": "Python",
+      "section": "Review.structural_pair",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "49694cd9fce5e7e24a1109f0236011b1df41518480a138bf80967004b268c41a"
+    },
+    {
+      "language": "Python",
+      "section": "Review.verify_structure_and_ledgers",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "967fc724c75f872ccd2373f1780824feb9ff132c99e2f1ac72905228d9935d63"
+    },
+    {
+      "language": "Python",
+      "section": "Review.verify_historical_failure",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "2fe1cf757eac74e172eafbe85cc01c68d7e6da827a1d4c250564b5b2fde5050d"
+    },
+    {
+      "language": "Python",
+      "section": "Review.recalculate",
+      "comparison": "ast_identical_without_source_positions",
+      "passed": true,
+      "sha256": "a2a68cbcecd9a3fc212f4499d3bf682fd848c06735404688b9d8c57c12b08fff"
+    }
+  ],
+  "patch": {
+    "path": "docs/migration/lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-v1.diff",
+    "bytes": 19890,
+    "sha256": "967b81b46bc0686a090efd0ca2e03d3be80c0379928b1112abd8f0f8f9386896"
+  },
+  "boundInputs": [
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-contract.json",
+      "bytes": 3799,
+      "sha256": "f48f3289cd31b150cfcf7aaaf3dc1386f22e2731b7934a1a431bd5a0bafea1c1"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/declaration.json",
+      "bytes": 5524,
+      "sha256": "9dba35881a2ef113bdfb2b7a1477bf0f6514d774f933926a649f844798365651"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/readiness.json",
+      "bytes": 121997,
+      "sha256": "85a1ab694c88cca9f216ed7ca5e731377ee6eaea8d14e784d47bd15d89a88952"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/static-preflight.json",
+      "bytes": 16197,
+      "sha256": "aacf4832b6085442dea65f04471ccb788bbb95c492a33f7b419bbf3701fbdeae"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/window.json",
+      "bytes": 10145,
+      "sha256": "0be3eceb2139347ffa5efa0200fc1f68c98544517d0c521f3eee71b468401c5c"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/aggregation-failure.json",
+      "bytes": 2989,
+      "sha256": "2e8b075f458def3b670acd5306fe9db438b8fa65ba73341d0a6d75f92331e623"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/aggregation-failure.log",
+      "bytes": 204708,
+      "sha256": "be915a192d40ad5cf02969f7c0f0f11d400e2219c75071e5008573d25a79351e"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-analysis-initial-failure.json",
+      "bytes": 2147,
+      "sha256": "3bc6607c1154569db6dce6387fdb4187de7bfbc3479f94d8dbc4ebeea6efbf91"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-growth-comparison.log",
+      "bytes": 231,
+      "sha256": "81d970422c69515fc07b6c5e41e366793207b6005b9998837e97e948d96d836d"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-structural-fixture.json",
+      "bytes": 59963,
+      "sha256": "b6d77cd1bf4f2a5611d1092c6d754eec7dcab4fbce9d1210804bd87c374203bb"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-structural-attribution-v2.json",
+      "bytes": 3988757,
+      "sha256": "bf3e4c7d8ae032e0964760263eda1bf91dce288e436155f197a79ed4534372dd"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/shared-fragment-premeasurement-supplement.json",
+      "bytes": 3802271,
+      "sha256": "71820d69e926954a9859e066b05d098b7faf23c3358321352b0e0c32d1411e33"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/owner-source-inventory.json",
+      "bytes": 107904,
+      "sha256": "6f8a9990a077a6ad5c597188fdfd43513f43e0e4cf1eb8680057085699145acc"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort1/baseline.json",
+      "bytes": 429659,
+      "sha256": "1aed12b02ccd7884c715cedabd0cacbb02cdde05123aa264252459c26a19692b"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort1/after.json",
+      "bytes": 430265,
+      "sha256": "b255e57ee5a22590303ded28229d05fb62ffadc132edf297d299db0902983024"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort1/comparison.json",
+      "bytes": 26258,
+      "sha256": "d090b8e7b54e41d463dc7d768696ea3dfec3d692329f4221c22f20ae85c96e69"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort2/baseline.json",
+      "bytes": 429790,
+      "sha256": "eed86f986c9c87fbf1d915b3e90b2928b60c44edc82b0fb96d564ba9b4f0b687"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort2/after.json",
+      "bytes": 430204,
+      "sha256": "45b9f458e3cb6eb3c511a57c8e3ddc1e3619afdc2439848f3cbcadc254b70f37"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort2/comparison.json",
+      "bytes": 26450,
+      "sha256": "8d6882bf7333c0a39606b3f4aefaa706ed33ec1543cc4b3c97b2ebb4c6ccf462"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-v1.diff",
+      "bytes": 19890,
+      "sha256": "967b81b46bc0686a090efd0ca2e03d3be80c0379928b1112abd8f0f8f9386896"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/declare-cost-directory-correction.py",
+      "bytes": 9715,
+      "sha256": "f5ed3d0f159c30f62005a415a455b28189ae370bb00991aaf987a42f0bcaff05"
+    }
+  ],
+  "originalDirectoryGuard": "assert.ok(perf.startsWith(EVIDENCE) && perf !== EVIDENCE + 'performance', 'A new lot 5A window directory is required');",
+  "correctedDirectoryGuard": "assert.equal(perf, EXACT_PERFORMANCE_DIRECTORY, 'Only the exact already-declared lot 5A directory is admitted');",
+  "executionPerformedByThisCorrection": false,
+  "qualification": "The original frozen JavaScript consolidator actually rejected the literal performance directory that its own premeasurement declaration and contract already bind. The separate executed variant admits only that exact existing directory; it does not admit another directory or change any reader, structural allowance, arithmetic, sample, phase or global rule. The independent Python variant changes only correction and declared/executed generator provenance; its arithmetic and data checks remain unchanged. Original tools, declaration, readiness, window, retained failures and raw reports remain intact. This correction is explicitly post-measurement and still requires independent diff review and real execution."
+}

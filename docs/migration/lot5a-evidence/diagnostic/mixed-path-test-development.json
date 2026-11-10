@@ -1,0 +1,14 @@
+{
+  "scope": "Synthetic mixed-path test development, not a game campaign or official timing window",
+  "firstRun": {
+    "command": ["node", "--test", "tests/v6-native-mixed-path.test.ts"],
+    "tests": 6,
+    "pass": 5,
+    "fail": 1,
+    "exitCode": 1,
+    "failure": "The test expected {id:1,data:{}} and {id:2,data:{}} at the browser host. The existing nativeV6Action transport correctly emits {id:1} and {id:2} for nonpoint commands.",
+    "correction": "Corrected only the expected host-side key command shape. NativeCommand acquisition expectations still include their canonical data:{} field. No production source was changed for this test correction."
+  },
+  "finalRun": "mixed-path-targeted-tests.tap",
+  "qualification": "The proof exercises an existing generic three-step key/click/key contract through the actual controller, service and runtime with a declared synthetic family. It does not introduce a WEAV multi-action path or assert that WEAV's next physical move is forced."
+}

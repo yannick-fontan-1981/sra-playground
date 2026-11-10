@@ -1,0 +1,78 @@
+{
+  "schema": "logos-engine.linked-temporal-targeted-validation.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T20:38:52Z",
+  "activityWindow": { "startedAt": "2026-11-10T20:38:11Z", "completedBy": "2026-11-10T20:38:52Z" },
+  "authorization": "Parent explicitly released the coordinated quiet window after lot 7A released compute at 20:36:50 UTC.",
+  "scope": "Targeted development validation before integration of the effectively published lot 7A parent. Not the final integrated lot 5A gate or a performance measurement.",
+  "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "tests": {
+    "command": [
+      "node", "--test", "--test-reporter=tap",
+      "tests/v6-linked-temporal-preparation.test.ts",
+      "tests/v6-linked-temporal-reference.test.ts"
+    ],
+    "exitCode": 0,
+    "counts": { "tests": 51, "pass": 51, "fail": 0, "cancelled": 0, "skipped": 0, "todo": 0 },
+    "tapDurationMs": 6067.37623,
+    "nativeCases": 13,
+    "referenceAndCheckpointCases": 38
+  },
+  "typecheck": {
+    "command": [
+      "node", "node_modules/typescript/bin/tsc", "--noEmit", "--target", "ES2022",
+      "--lib", "ES2022,DOM,DOM.Iterable", "--module", "ESNext", "--moduleResolution", "Bundler",
+      "--allowImportingTsExtensions", "--verbatimModuleSyntax", "--isolatedModules", "--strict",
+      "--noUncheckedIndexedAccess", "--skipLibCheck", "src/logos-engine/v6-linked-temporal-preparation.ts"
+    ],
+    "exitCode": 0,
+    "diagnostics": 0
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-tests.tap",
+      "sha256": "17beb93a288a61157cc43a6fcc41ed981101cdf7239e0828306b629c7b63bb82"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-tests.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-typecheck.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-inputs-before.sha256",
+      "sha256": "50f61000a72dc815b6a2738b75921e1ae0732cbf63bd7985964408c4e0707bce"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-inputs-after.sha256",
+      "sha256": "50f61000a72dc815b6a2738b75921e1ae0732cbf63bd7985964408c4e0707bce"
+    }
+  ],
+  "directInputsUnchangedDuringValidation": true,
+  "directInputs": [
+    { "path": "src/logos-engine/v6-linked-temporal-common.ts", "sha256": "3e7111bccfefa22a67afad24cefdbc95834053eb233007f4f4ddda19f1bfe54f" },
+    { "path": "src/logos-engine/v6-linked-temporal-contact.ts", "sha256": "29b68e614203302e36ef731866544e35146b2b553b7d424c0e533eb38519b1b5" },
+    { "path": "src/logos-engine/v6-linked-temporal-phase.ts", "sha256": "d431c10a89c967b056417ba526d68907ef1ddac62b5411b51f9d70edb8c994e1" },
+    { "path": "src/logos-engine/v6-linked-temporal-preparation.ts", "sha256": "c85464b1162352f7c6cb329f2d2f9b6cbcc74baae616be3d643d1ac1b646aeed" },
+    { "path": "tests/v6-linked-temporal-preparation.test.ts", "sha256": "289d207d31ed1f2ce68346d5ad538405cb20b60468120198f61090c2a39fba21" },
+    { "path": "tests/v6-linked-temporal-reference.test.ts", "sha256": "700078b51c3e6c849493d4594746f460ebd52ccfa9964f506cd4b1cd6c901690" },
+    { "path": "tests/fixtures/v6-linked-preparation-reference.json.gz", "sha256": "280397c931e2ba7bff5aa99931b64b938d18e5224e66e9da397407c0e3018299" }
+  ],
+  "validatedPostreviewChanges": [
+    "Immutable geometry receipts bind mask, digest, width and height and reject rebinding.",
+    "Contact body mask must agree with the canonical acquired geometry.",
+    "Malformed geometry and portable template checkpoints reject atomically.",
+    "Portable knowledge after two scored boundaries does not retain old-epoch raster histories.",
+    "Adapter event children are shared only after immutable native retention."
+  ],
+  "qualifications": [
+    "No production source was changed to obtain this passing result.",
+    "The frozen Python fixture was consumed without regeneration and retained its expected-data hash.",
+    "The malformed AFTER source KeyError and partial mutation remain explicit; native ingress rejects the invalid observation atomically.",
+    "Only the two named test files and the named transitive typecheck were executed by this validation.",
+    "No game, WEAV live attempt, full build, all-tests run or cost benchmark was executed.",
+    "These results do not replace the parent-owned common-loop proof, merged-source gates, official costs, final integrity or publication."
+  ]
+}
