@@ -1,0 +1,28 @@
+{
+  "schema": "logos-engine.cumulative-game-case-checkpoint.v1",
+  "game": "LKEY",
+  "recordedAt": "2026-11-10T18:18:30.524030+00:00",
+  "casePhase": "paused_after_final_browser_confirmation",
+  "priorCumulativeSeconds": 497.4164029909999,
+  "currentChargedIntervalSeconds": 480.995192,
+  "cumulativeSeconds": 1120.6761759909998,
+  "remainingSeconds": 1279.3238240090002,
+  "maximumCumulativeSeconds": 2400,
+  "currentAttemptExecutionSeconds": 48.23324090800452,
+  "executionAlreadyIncludedInInterval": true,
+  "attempts": [
+    "attempt1/execution-lkey.json"
+  ],
+  "actualLevels": 2,
+  "targetLevels": 3,
+  "limitation": "At epoch3 the original workshop would propose revalidate_mode, but the common caller stops before consulting it after an earlier animated_contact refusal. The source order remains unchanged. Further case work must resume this clock; general build/release/performance work is not a new game attempt.",
+  "chargedIntervals": [
+    {
+      "startedAt": "2026-11-10T18:16:08.259449+00:00",
+      "purpose": "final_0.50_browser_interface_proof",
+      "status": "closed",
+      "endedAt": "2026-11-10T18:18:30.524030+00:00",
+      "elapsedSeconds": 142.264581
+    }
+  ]
+}

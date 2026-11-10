@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "catr-049-replay.json.gz",
+    "sha256": "134e3d8823bfe42f41c3f3ee51c3d95568cff493616926d6a713a9a4086fc7e8",
+    "bytes": 1647979
+  },
+  "parts": [
+    {
+      "file": "catr-049-replay.json.gz.part000",
+      "sha256": "6e27bac726b89955a84625ae2b974039b1b8bdd42510d13db3a73e066e7a65e3",
+      "bytes": 900000
+    },
+    {
+      "file": "catr-049-replay.json.gz.part001",
+      "sha256": "9d3280252fecad006cd47584eff81c789a09a6f4fc1ff1030b21056632892115",
+      "bytes": 747979
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.validation-expectation-correction.v1",
+  "recordedAt": "2026-11-10T18:25:06.424323+00:00",
+  "nativeSourceChanged": false,
+  "failedReceipt": "docs/migration/lot7a-evidence/final/validation/delta-tests-run.json",
+  "counts": {
+    "tests": 2961,
+    "pass": 2960,
+    "fail": 1
+  },
+  "failure": "Inventory registration expected reactive_contact_continuation as immediate predecessor; faithful declared ranked workshop insertion now occupies that position.",
+  "correction": "Check all connected material entries against the original DRM ordered_subquestions and retain Inventory after reactive contact. This allows newly connected source entries without relaxing source-order verification.",
+  "changedTest": "tests/v6-inventory-kernel.test.ts",
+  "changedTestSha256": "51825c88b4be17d1a67f86c319b19ebea9439d0d48c636a8918a367fcc2605cf",
+  "rerun": "Pending integrated candidate verification after coordination slot is released; no new heavy job now."
+}

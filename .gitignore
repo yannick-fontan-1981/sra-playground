@@ -287,3 +287,10 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 
 # Lot 7A immutable source archives are tracked as verified ordered byte parts.
 /docs/migration/lot7a-evidence/**/source-archive.tar.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot7a-evidence/attempt1/lkey-campaign.json.gz
+/docs/migration/lot7a-evidence/final/regressions/catr-049-replay.json.gz
+/docs/migration/lot7a-evidence/final/regressions/fogw-049-replay.json.gz
+/docs/migration/lot7a-evidence/final/regressions/rswp-049-replay.json.gz
+/docs/migration/lot7a-evidence/final/regressions/vois-049-replay.json.gz

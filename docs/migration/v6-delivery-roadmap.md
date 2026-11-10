@@ -1,6 +1,16 @@
 # Feuille de route V5/V6 vers Logos Engine TypeScript
 
-## État courant : CrossedPrefix transféré, trois niveaux WEAV réussis
+## Travail en cours : 7A vérifié sur ses contrats, intégration coordonnée
+
+Le sous-lot **7A, `observed_ranked_workshop`**, est porté dans la branche `lot7a-ranked-workshop`, depuis Site 78 / commit `8fa6b261b8b23ac8d232e60c9c179e2f3407d82f`. Le commit fonctionnel est `7c4c34797bf0bc374b448c985d0dee2fadfb81ca`. Le candidat isolé **0.50.0**, digest `8492388162915bd01be1279d645870d366f0fd306e4f31ea47e8b65aafebac7e`, contient 274 fichiers natifs ; ce numéro de développement sera réconcilié avec les publications concurrentes.
+
+Les **155 contrôles différentiels** comparent le port à la référence Python épinglée et les **quatre contrats de boucle commune** couvrent l’acquisition passive puis la sélection, le retour actif unique, l’absence d’effet, la frontière et la restauration. Sur la trajectoire LKEY réelle, **49/49 appels et 147/147 comparaisons** sont exacts depuis un propriétaire Python froid : **14 retours actifs, 11 passifs, sans doublon**. Les ablations distinguent la consommation des contrastes, méthodes et effets des modèles d’opérateur dont l’utilité décisionnelle reste non démontrée sur ce parcours.
+
+**Deux niveaux LKEY sont officiellement franchis**, avec 25 actions et 25 préfixes ; la cible de trois niveaux reste ouverte. Au niveau 3, un refus de `animated_contact` interrompt l’appelant avant la consultation de l’atelier. La priorité source reste conservée. Le navigateur du candidat final reproduit **25 actions, deux niveaux et 25 plans** après Pause, pas unique et reprise. L’horloge cumulée est en pause à **1 120,676176 secondes**, avec **1 279,323824 secondes restantes** ; les tentatives antérieures sont conservées.
+
+Le [bilan 7A](lot7a-ranked-workshop.md), sa [filiation](lot7a-ranked-workshop-lineage.md) et les [preuves navigateur](lot7a-evidence/final/browser/browser-qa.json) définissent le périmètre. Dans cette branche, le registre est **54/76**, avec 22 entrées en attente, 37 workflows compilés et la façade 6/6. Les tests élargis et les rejeux sont en cours. **Le coût, l’intégration commune et la publication ne sont pas encore acquis.** La coordination existante réserve d’abord la publication 3I, puis 4A ; 7A intégrera les commits effectivement publiés et remesurera le candidat commun. Sa préparation de coût isolée est conservée sans aucune session mesurée. **7B n’est pas commencé.**
+
+## Dernier jalon publié à la base : CrossedPrefix, trois niveaux WEAV réussis
 
 Le moteur **0.49.0**, gel **`d6cb9abdf48a9062936d4647dbd809dc4cee1d1528f85e973fda83c7af8e6054`**, raccorde **3H, `coupled_prefix_reference`**, dans le propriétaire commun. Le gel contient **268 fichiers natifs**, avec une archive de **279 fichiers**. Le registre atteint **53/76 entrées raccordées**, sans entrée partielle ; **23 entrées restent ouvertes**. La façade observée reste **6/6**, avec **37 workflows compilés**. Le [rapport du lot](lot3h-crossed-prefix.md), la [filiation](lot3h-crossed-prefix-lineage.md) et la [portée vérifiée](lot3h-evidence/final/crossed-prefix-validation-scope.json) délimitent cette livraison.
 
@@ -93,13 +103,13 @@ Une dépendance désigne un contrat réellement consommé. Les numéros indiquen
 | 4 | Exemples, correspondances et retours discriminants | 3 | Observations, callbacks SRC et gardes | Planifié |
 | 5 | Temps, adressage et liaisons | 3 | Historique public ; contrat de conservation pour les consommateurs concernés | Planifié |
 | 6 | Pièces rigides, cargaisons et stabilisation commune | 4 | Géométrie, contrôles, recherche bornée et interruption | Planifié |
-| 7 | Ateliers et transactions symboliques | 2 | Interfaces mesurées, SRC et mémoire des méthodes | Planifié |
+| 7 | Ateliers et transactions symboliques | 1 | Interfaces mesurées, SRC et mémoire des méthodes | **7A : contrats et boucle commune vérifiés, deux niveaux LKEY ; coût, intégration et publication en cours.** 7B reste ouvert. |
 | 8 | Accès conditionné et routage de branches | 2 | Calibration des commandes et préfixes gardés | Planifié |
 | 9 | Navigation, régions et canaux | 3 | Graphes, retours publics et budgets courants | Planifié ; Recolor déjà acquis |
 | 10 | Questions d'axe, de fenêtre, d'ordre et de temps | 5 | Observations, séquences et méthodes revalidées | Planifié |
 | 11 | Consolidation, couverture et lisibilité | Hors compteur | Résultats et preuves des lots précédents | Planifié |
 
-La réconciliation initiale avec le registre de la base 59 conserve **26 noms planifiés, 26 noms distincts, aucun nom absent et aucun nom supplémentaire**. Depuis 3F, `observed_composition_services` est raccordé ; 3G ajoute `framed_window_composition` et 3H `coupled_prefix_reference`. **23 noms restent ouverts**. Les entrées sont détaillées ci-dessous. Les chemins directs et les fournisseurs communs gardent leur propre bilan hors registre.
+La réconciliation initiale avec le registre de la base 59 conserve **26 noms planifiés, 26 noms distincts, aucun nom absent et aucun nom supplémentaire**. Depuis 3F, `observed_composition_services` est raccordé ; 3G ajoute `framed_window_composition` et 3H `coupled_prefix_reference`. **22 noms restent ouverts dans la branche 7A** ; ce compteur sera recalculé après intégration des autres fils. Les entrées sont détaillées ci-dessous. Les chemins directs et les fournisseurs communs gardent leur propre bilan hors registre.
 
 ## Règles communes de livraison
 
@@ -446,7 +456,13 @@ La branche est raccordée à sa place source après RootedQuota. Mesure de la fe
 
 ## Lot 7 : ateliers et transactions
 
-**Entrées :** `observed_ranked_workshop`, `observed_symbol_transaction`.
+**7A :** `observed_ranked_workshop` raccordé dans la branche de travail ; **7B :** `observed_symbol_transaction` reste ouvert, avec un propriétaire distinct et sans extension passive implicite.
+
+Le propriétaire `public_ranked_workshop` consomme réellement `v6.ranked_workshop.choose`, `workshop.measure`, `workshop.select` et les règles DRM. L’acquisition passive d’une action étrangère peut rendre l’atelier admissible à la décision suivante. Son retour propre est traité une seule fois et n’est pas réenregistré passivement. Les méthodes transportées doivent être revalidées après changement de portée ; caches de projection et autorisations courantes restent séparés des huit champs de connaissances sauvegardés.
+
+Le [rapport 7A](lot7a-ranked-workshop.md) et la [filiation source → TypeScript → consommateur → preuve](lot7a-ranked-workshop-lineage.md) distinguent fidélité, raccordement, contribution et succès officiel. Le résultat actuel est de deux niveaux LKEY, avec une réserve explicite de préemption au troisième niveau. Le coût et la livraison commune attendent le candidat intégré ; la préparation isolée ne compte aucune mesure. La parité de tout l’appelant original et une latence maximale de Pause ne sont pas revendiquées.
+
+**Suite :** terminer les contrôles, réconcilier, mesurer et publier 7A, puis entreprendre 7B lors de la continuation. Le diagnostic de priorité LKEY reste une question de coordination commune séparée du port fidèle de l’atelier.
 
 **Dépendances :** interfaces, SRC/DRM, gardes exactes et mémoire des méthodes. Les lots de transport/routage ne sont pas des prérequis globaux. Garder les propriétaires distincts lorsque la source les distingue.
 

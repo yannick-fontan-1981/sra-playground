@@ -1,0 +1,32 @@
+{
+  "schema": "logos-engine.lot7a.game-selection.v1",
+  "selectedAt": "2026-11-10T15:03:36.444683-03:00",
+  "game": "LKEY",
+  "targetLevels": 3,
+  "baseCommit": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+  "initialPublicAdmission": "Two admitted ranked profiles, two receiver bindings, two reference packets, one marked profile, singleton count zero. Cold mode evidence remains absent.",
+  "selectionBasis": "Original source projection over retained public initial frames, not game implementation or solution.",
+  "maximumCumulativeSeconds": 2400,
+  "historicalAttempts": [
+    {
+      "receipt": "docs/migration/native-campaigns-v52/final/logs/execution-lkey.json",
+      "sha256": "17e940ec7f6b30e45ec63f497801d5a4c7f36469c03118c576794fc3ead9f183",
+      "elapsedSeconds": 496.78954699099995,
+      "actions": 98,
+      "levelsCompleted": 0,
+      "status": "failed:level_active_time_budget"
+    },
+    {
+      "receipt": "tests/fixtures/v6-framed-transfer-original-lkey-public.json.gz",
+      "sha256": "52c542a45606f93a96f589d8e187837e88b78b1eda63733df9469eb9d4a44b64",
+      "elapsedSeconds": 0.626856,
+      "actions": 2,
+      "levelsCompleted": 0,
+      "status": "isolated component abstained",
+      "scope": "Original FramedTransfer-only two-action probe, not full common caller"
+    }
+  ],
+  "priorCumulativeSeconds": 497.4164029909999,
+  "remainingSecondsBeforeAttempt": 1902.5835970090002,
+  "qualification": "Previous attempts and time are retained. New live attempt uses cold common runtime and public packets only. Synthetic source contracts are separate from game completion; official contribution must identify selected workshop actions and changed later decisions."
+}
