@@ -1,0 +1,100 @@
+{
+  "schema": "logos-engine.lot5a-source-transport-reconstruction.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T22:06:11.564409+00:00",
+  "originalRetainedTarget": "33d91ef1b8a6343c554b5c18beacd051816e11b9",
+  "publishedPredecessor": "bed48116585da864dd5c412ed11dd6990a950e8e",
+  "pushedSourcePredecessor": "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+  "retainedNativeHistory": "bc19974c910711f20385d9a40168a0927ec22057",
+  "perObjectLimitBytes": 33554432,
+  "perStepRawObjectLimitBytes": 41943040,
+  "allOriginalEvidenceBytesUnchanged": true,
+  "rows": [
+    {
+      "operation": "pack",
+      "result": {
+        "status": "packed_exact_transport",
+        "manifest": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json",
+        "original": {
+          "bytes": 39817093,
+          "path": "docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-first-creator.json",
+          "sha256": "bdfa9286d7a03715282b7e8c7ef49a3c90ccd4eb1e4d7ac1149aa59085127163"
+        },
+        "parts": 45,
+        "originalPresent": true,
+        "overwrittenFiles": 0,
+        "deletedFiles": 0
+      }
+    },
+    {
+      "operation": "restore_fresh_root",
+      "result": {
+        "status": "restored_or_validated_exact_original",
+        "manifest": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json",
+        "original": {
+          "bytes": 39817093,
+          "path": "docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-first-creator.json",
+          "sha256": "bdfa9286d7a03715282b7e8c7ef49a3c90ccd4eb1e4d7ac1149aa59085127163"
+        },
+        "parts": 45,
+        "originalPresent": true,
+        "overwrittenFiles": 0,
+        "deletedFiles": 0
+      }
+    },
+    {
+      "operation": "pack",
+      "result": {
+        "status": "packed_exact_transport",
+        "manifest": "docs/migration/lot5a-evidence/final/transport/retained-original-history.manifest.json",
+        "original": {
+          "bytes": 609621,
+          "path": "docs/migration/lot5a-evidence/final/transport/retained-original-history.bundle",
+          "sha256": "0022c18ceb57f6c8cae83a247860632be61c379ba602ed35b69f670d0641c317"
+        },
+        "parts": 1,
+        "originalPresent": false,
+        "overwrittenFiles": 0,
+        "deletedFiles": 0
+      }
+    },
+    {
+      "operation": "restore_fresh_root",
+      "result": {
+        "status": "restored_or_validated_exact_original",
+        "manifest": "docs/migration/lot5a-evidence/final/transport/retained-original-history.manifest.json",
+        "original": {
+          "bytes": 609621,
+          "path": "docs/migration/lot5a-evidence/final/transport/retained-original-history.bundle",
+          "sha256": "0022c18ceb57f6c8cae83a247860632be61c379ba602ed35b69f670d0641c317"
+        },
+        "parts": 1,
+        "originalPresent": true,
+        "overwrittenFiles": 0,
+        "deletedFiles": 0
+      }
+    },
+    {
+      "operation": "verify_restored_bundle",
+      "stdout": "The bundle contains these 5 refs:\n33d91ef1b8a6343c554b5c18beacd051816e11b9 refs/heads/lot5-linked-temporal-and-delta\nc8ae9b0668a001d7b15acc52a80f10c60b0f0ede refs/heads/lot5a-retained-original-plan-1\ne5e225b0e26f7ddcbdcebd35c725d7e48ec08c28 refs/heads/lot5a-retained-original-plan-5\n3635275a96b092add8f70b813ba0d8c1f23eceb7 refs/heads/lot5a-retained-original-plan-6\n480002e4740040332a5eba46457a673e4458eb71 refs/heads/lot5a-retained-original-plan-7\nThe bundle requires these 3 refs:\nbc19974c910711f20385d9a40168a0927ec22057 \nbed48116585da864dd5c412ed11dd6990a950e8e \n0d69767970bff5cdc95c163bd5a02614bb661bd4 \nThe bundle uses this hash algorithm: sha1\n",
+      "stderr": "/workspace/sites/sra-lot5-20261110/transport-roundtrip/docs/migration/lot5a-evidence/final/transport/retained-original-history.bundle is okay\n",
+      "exitCode": 0
+    },
+    {
+      "operation": "restore_checkout_bundle",
+      "result": {
+        "status": "restored_or_validated_exact_original",
+        "manifest": "docs/migration/lot5a-evidence/final/transport/retained-original-history.manifest.json",
+        "original": {
+          "bytes": 609621,
+          "path": "docs/migration/lot5a-evidence/final/transport/retained-original-history.bundle",
+          "sha256": "0022c18ceb57f6c8cae83a247860632be61c379ba602ed35b69f670d0641c317"
+        },
+        "parts": 1,
+        "originalPresent": true,
+        "overwrittenFiles": 0,
+        "deletedFiles": 0
+      }
+    }
+  ]
+}

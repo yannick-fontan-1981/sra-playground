@@ -376,3 +376,7 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot5a-evidence/performance/baseline-structure.json.gz
 /docs/migration/lot5a-evidence/performance/candidate-structure.json.gz
+
+# Lot 5A server object-size repair: exact bytes are retained as parts and manifests.
+/docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-first-creator.json
+/docs/migration/lot5a-evidence/final/transport/retained-original-history.bundle
