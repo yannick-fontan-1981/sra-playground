@@ -24,6 +24,13 @@ contrats propres ; ils ne sont pas présentés comme une capture native complèt
 qui n'aurait pas eu lieu. Le helper final ajoute ce bloc de lecture seule, et le
 validateur final exige les enveloppes, faits et événements effectivement retenus.
 
+Le validateur préparé relie la proposition source entière aux gardes, au retour
+et au checkpoint. Il réapplique le domaine de point original ; quatre annotations
+nommées de l'appelant restent hors de la comparaison avec la proposition source,
+mais doivent rester identiques entre garde, enregistrement et état conservé.
+Une réécriture par préservation est refusée explicitement par ce validateur de
+composant. Il ne revendique pas la parité de sélection de tout l'appelant Python.
+
 `diagnostic/compare-symbol-transactions-public-parity-initial.py` conserve les
 octets exacts du premier analyseur exécuté. Sa classification de quatre ablations
 du compteur inclut les références de règles dans la décision ; elle ne démontre
@@ -38,6 +45,14 @@ Les logs de génération Interface et du propriétaire conservent les correction
 de construction d'oracle, de types readonly et de détachement local des arguments
 SRC immuables. Les résultats courants sont 124 tests géométriques, 78 tests
 d'interface, 73 tests du propriétaire et quatre tests Kernel, tous réussis.
+
+L'audit de développement raccorde **57 entrées sur 76**. L'inventaire des modules
+compte **176 composants vérifiés, 144 transferts partiels et 1 049 modules en
+attente**, sans module entièrement vérifié. Le premier contrôle a signalé une
+fixture historique Feedback non restaurée ; les fixtures Feedback et Outline
+ont été reconstituées à partir de leurs parties exactes, puis le nouvel audit
+ne contient aucun échec. Les deux résultats et le reçu de restauration sont
+conservés. Ces compteurs précèdent l'intégration effective de 5A et 4B.
 
 Les rapports complets et les archives restent distincts des preuves de
 publication et de coût, qui ne sont pas encore acquises pour 7B.
