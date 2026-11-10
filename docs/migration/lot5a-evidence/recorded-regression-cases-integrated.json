@@ -1,0 +1,91 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "cases": [
+    {
+      "id": "catr-052",
+      "game": "CATR",
+      "baseline": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/catr-051-replay.json.gz",
+        "sha256": "29f58eb7f74b768b1fdc7e0453fc64a1ae972a54ab39f4a1fb9b2defa5e3d5aa"
+      },
+      "trace": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+      }
+    },
+    {
+      "id": "rswp-052",
+      "game": "RSWP",
+      "baseline": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/rswp-051-replay.json.gz",
+        "sha256": "e201922c639e6dfb19661d2a50d519166cc3eaffd21108022b0b4e878888fa21"
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+      }
+    },
+    {
+      "id": "fogw-052",
+      "game": "FOGW",
+      "baseline": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/fogw-051-replay.json.gz",
+        "sha256": "add01b91655d718fe4ea70033948ed9b2434d9571ea0e05874d4e0532484a5b8"
+      },
+      "trace": {
+        "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+        "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46"
+      }
+    },
+    {
+      "id": "vois-052",
+      "game": "VOIS",
+      "baseline": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/vois-051-replay.json.gz",
+        "sha256": "add92f05b526b0ed4b760488282285f86173f618d139af1b86d7ca70a149d249"
+      },
+      "trace": {
+        "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+        "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d"
+      }
+    },
+    {
+      "id": "conn-052",
+      "game": "CONN",
+      "baseline": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/conn-050-replay.json.gz",
+        "sha256": "5e736b0167acada767719054e9672f51086ee8659159ceaee6c5815a5ba9813c"
+      },
+      "trace": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+        "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102"
+      }
+    },
+    {
+      "id": "mind-052",
+      "game": "MIND",
+      "baseline": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/mind-051-replay.json.gz",
+        "sha256": "a23bcfb3603b904f7049fb6ff1dd1426b2959b8ffd2e20612c616053b887dc44"
+      },
+      "trace": {
+        "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+        "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c"
+      }
+    },
+    {
+      "id": "weav-052",
+      "game": "WEAV",
+      "baseline": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/weav-051-replay.json.gz",
+        "sha256": "b7340c28c16b52f45ac06cca5bcc66b6fcb6d15e03e33fb9e30108228729fe02"
+      },
+      "trace": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "qualification": "Cold recorded-public-return regressions on frozen integrated native 0.53.0. All seven baselines are immutable successful native 0.52.0 reports retained under lot7a-evidence/integrated-final/regressions; every original public trace is unchanged. The unchanged historical comparator applies the same 17 checks per case after each cold run. Expected commands never initialize native state or select an action. These bounded recorded regressions are not new live success, full V6 parity, a new WEAV case, or performance measurements. Game case clocks are unaffected."
+}

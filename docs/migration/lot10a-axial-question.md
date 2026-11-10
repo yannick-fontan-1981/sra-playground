@@ -4,11 +4,13 @@
 
 Le lot 10A raccorde `axial_question` au runtime commun depuis la base réellement publiée **Site 83**, moteur **0.52.0**, commit `bed48116585da864dd5c412ed11dd6990a950e8e`. Le travail est isolé dans la branche `lot10a-axial-question`. Le numéro du prochain moteur sera établi après réconciliation des publications concurrentes. Les entrées 10B à 10E ne sont pas réalisées par ce lot.
 
-Le registre recalculé de cette branche compte **57/76 entrées raccordées**, sans entrée partielle, soit **19 entrées restantes**. Les **37 workflows compilés** ne changent pas : `v6.axial_question.choose`, déjà compilé, est maintenant installé et exécuté avec son callback `axial.select`.
+Le registre recalculé du gel isolé compte **57/76 entrées raccordées**, sans entrée partielle, soit **19 entrées restantes**. Les **37 workflows compilés** ne changent pas : `v6.axial_question.choose`, déjà compilé, est maintenant installé et exécuté avec son callback `axial.select`.
 
 Les contrats de composant passent **130/130**, et les scénarios du caller commun passent **6/6**. Les contrôles de régression, la compilation de livraison, le coût, l'intégration finale et la publication restent des étapes distinctes à établir. Aucun résultat de coût ou de partie nouvelle n'est déduit des tests de composant.
 
 La [première validation isolée](lot10a-evidence/README.md) utilise le gel `cabd056f2fddded1c5f7bcc214bd1fd1ac387764b61cddf42606debe72f37915`, avec **282 fichiers natifs et 293 membres d'archive**. Les cinq contrôles du projet, build compris, passent. La suite de 31 fichiers conserve **866/867** : son seul échec est l'ancienne attente plaçant Reactive immédiatement après Recolor. Le DRM place Axial à cet endroit ; la correction porte uniquement sur ce test et sa reprise passe **3/3**. Le reçu initial reste en échec et le périmètre final sera exécuté après intégration. Les [sept rejeux publics](lot10a-evidence/isolated-functional/regressions/regression-summary.json) passent **7/7 et 119/119 comparaisons**, en conservant **292 commandes, 210 préfixes et 21 frontières naturelles**. Ils ne constituent pas une nouvelle partie ni une contribution propre Axial.
+
+La fusion du prédécesseur publié **5A / Site 84**, commit `51e2813dedb2d71001290f94f100605e0327ead3`, conserve ses optimisations communes et les raccordements Axial. L’[audit de cette intégration intermédiaire](lot10a-evidence/diagnostic/post5a-inventory-run.json) trouve **58/76 entrées**, 178 composants vérifiés, 146 transferts partiels et 1 045 modules en attente, sans défaillance sémantique. La version finale 10A, son gel et son coût attendent toujours les prédécesseurs publiés 4B et 7B.
 
 ## Comportement porté
 

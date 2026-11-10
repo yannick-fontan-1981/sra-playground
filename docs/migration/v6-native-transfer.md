@@ -7,6 +7,8 @@ The isolated 10A branch starts from actual Site 83/native 0.52, commit `bed48116
 The independent source suite passes 130/130; six cold common-caller scenarios cover passive activation, OP18/WHY-ACT, active return acquisition exactly once, learned next decision, no-effect attempts and reactivation after restored portable knowledge across a boundary. Integrated release checks and cost remain pending; no additional publication or live-game success is claimed here. The 95-view initial public scan admits only POLA, whose older interrupted 94-action run has no recoverable elapsed receipt. Its historical budget is not reset and the own-family game contribution remains open. The historical release sections below retain their original scope.
 
 
+The actual Site 84 / 5A predecessor is now merged into the development branch. Its optimized common core is preserved. The [intermediate inventory](lot10a-evidence/diagnostic/post5a-inventory-run.json) records **58/76 entries**, 178 component-verified modules, 146 partial transfers and 1,045 pending modules, with no semantic audit failures. This is still an intermediate integration; the final 10A source identity and cost require the actual published 4B and 7B predecessors.
+
 ## Required outcome
 
 The accepted target is **100% of the published V6 common symbolic agent's
@@ -18,7 +20,31 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-## Current integrated transfer: lot 7A native 0.52.0, RankedWorkshop
+<!-- LOT5A_CURRENT_START -->
+
+## Current integrated transfer: lot 5A native 0.53.0, linked temporal preparation
+
+Native **0.53.0** is frozen at **`d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f`**, with **283 native files and a 294-file execution archive**. Both actually published 7A commits, Site 82 and its documentation-only Site 83 successor, are ancestors. The [reconciliation receipt](lot5a-evidence/final/published-predecessor-reconciliation.json) records identical execution inputs between those publications; the predeclared cost baseline remains Site 82/native 0.52.
+
+The [5A report](lot5a-linked-temporal-preparation.md) and [source lineage](lot5a-linked-temporal-lineage.md) distinguish complete consumed LinkedPreparation/LinkedContact contracts from partial PhaseRelations/PhaseTransfer coverage. The original ordered caller has one `linked_temporal_preparation` owner, single selected/passive acquisition, bounded guarded key paths and validated restoration. Its negative and positive acquired effects change the next common decision. Autonomous phase proposal policies, 5B addressed material and 5C object binding remain outside this milestone.
+
+Generic changes batch Kernel writes per checkpoint, retain immutable Frontier branches, discard duplicate retained records and accept the exact zero-recolor optimum before enumerating a crossed-prefix color product. Full graphs, history, causes, node order, deltas and authoritative restoration remain. These are limited reductions of repeated work, not a complete history compactor or a universal forced-move propagator. Mixed key/click/key transport is tested through the browser controller and native service with a declared synthetic family; a new WEAV path policy is not claimed.
+
+The final [official validation](lot5a-evidence/final/test-expectation-correction/validation/delta-tests-run.json) passes **3,835/3,835 tests in 102 files**, and [all five checks](lot5a-evidence/final/test-expectation-correction/validation/checks-run.json) pass. The earlier **3,834/3,835** failure and its test-only 56/57 inventory expectation correction remain recorded. The [common-loop proof](lot5a-evidence/final/linked-temporal-common-loop.json.gz) passes **16/16**, with two cold branches, 12 acquired returns and two own paths of two keys. The [seven recorded regressions](lot5a-evidence/final/regressions/regression-summary.json) pass **119/119 comparisons**, retaining **292 commands and 210 prefixes**, including the recorded 81-command WEAV trajectory.
+
+**WEAV level 6 is not established.** The [earlier isolated diagnostic](lot5a-evidence/weav/native050-delta-diagnostic/result.json), on 0.50 plus the first optimizations only, ended under the cumulative case clock at level 4 after three completed levels and 105 actions. It lacks the final Frontier change and 5A owner and is qualified by concurrent functional work. No new live attempt resets the exhausted clock. [Browser attachment](lot5a-evidence/final/browser/browser-qa.json) failed twice before any current-candidate gameplay; UI success and Pause/resume are not asserted from that attempt.
+
+Current coverage is **57/76 connected entries, zero partial entries and 19 remaining**. The audit retains **174 component-verified, 145 partially transferred, 1,050 pending and zero fully verified modules**; all six global gates remain false. The [complete ABBA window](lot5a-evidence/performance/window.json) retains **32 measured sessions and 400 actions**, with the eight predeclared warmups and 24 warmup actions excluded. The [independent Python review](lot5a-evidence/performance/owner-growth-review.json) passes **4,669/4,669 checks**. **The global rule is accepted for both games**: STCK **9,872.1555235 → 10,821.7052375 ms (+9.618464%)** and SMLP **16,573.0271895 → 17,346.1554400 ms (+4.664979%)**. Each pooled median is strictly below +10%; the margin for STCK is only **0.381536 percentage points / about 37.666 ms**. Cohort2 STCK **+11.673421%** remains retained. The measured complete sessions are still slower; no general speed gain or WEAV6 success is inferred.
+
+The sixteen pooled diagnostics retain **10/16 within budget**, with cohorts **10/16 and 9/16**. New decisions, persistence and restoration exceed +10% in both games. Restoration median increases are **+99.40% STCK** and **+69.50% SMLP**, with p95 increases **+192.94%** and **+134.56%**. SMLP acquisition with persistence decreases **7.99%**. No cross-game compensation, nested-phase sum, selected cohort or removed observation is used.
+
+The [historical strict aggregator remains failed](lot5a-evidence/performance/aggregation-failure.json). The premeasurement structural supplement and its independent review retain the fourteen exact early fragment creators, full canonical values, origins and revision catch-ups. A [separate postmeasurement reader correction](lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-v1.json) admits only the exact performance directory already named in the declaration; it preserves the rejected frozen tool, all raw data, rules, calculations and populations, and distinguishes executed from declared tool hashes. This qualified cost acceptance does not close the functional reservations. **5A is published as Site 84, commit `51e2813dedb2d71001290f94f100605e0327ead3`; the 10A publication remains pending.**
+
+The [final delivery integrity check](lot5a-evidence/final/delivery-integrity.json) passes **283 native, 294 archive, 647 source/test and 348 build inputs**, with **1,786 original reference files unchanged** and lossless recorded-evidence reconstruction.
+
+<!-- LOT5A_CURRENT_END -->
+
+## Historical integrated transfer: lot 7A native 0.52.0, RankedWorkshop
 
 Native **0.52.0** is frozen at **`f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb`**, with **279 native files and a 290-file execution archive**. It integrates the **actually published Site 81 / lot 4A / native 0.51.0**, commit **`4dafc40c53ed4406ee7cd148e3e6995a2eb4185e`**, digest **`c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7`**, while retaining the published 3I contribution. The [verified Site 81 publication](lot7a-evidence/coordination/published-4a-site81.json) and [published-base binding](lot7a-evidence/coordination/published-base-binding.json) establish that ancestry. The latter verifies that native, archive, test and build inputs remained byte-identical after the documentation merge; it does not claim a new native execution after that merge. The earlier isolated 7A evidence retains its own provisional version and scope.
 
@@ -48,7 +74,7 @@ The [publication-input integrity receipt](lot7a-evidence/integrated-final/public
 
 **The initial 7A publication is verified in Site 82**, source commit `0ca36b0a6a358e1e89420753bbcec4a33f028e0a`, terminal deployment **`succeeded`**, with owner-private access preserved. The [publication receipt](lot7a-evidence/integrated-final/publication-site82.json) binds the pushed source and server-reported archive. The [bounded source transport](lot7a-evidence/integrated-final/publication-source-transport.json) retains all original commits and the exact target tree; five ordinary pushes were followed by one final Site deployment. All 75 deployment member contents are byte-identical across local packages; container hashes are retained separately. Documentation closure retains the same native engine. Lot 7B implementation now proceeds in a separate checkout from this published commit.
 
-Current integrated coverage is **56/76 complete declared entries, zero partial entries and 20 remaining**, with **6/6 observed-composition branches** and **37 compiled workflows**. The audit records **172 component-verified modules, 143 partial transfers, 1,054 pending and zero fully verified modules**, within **1,369 Python modules and 417 data files**. All six full-migration gates and `fullV6Parity` remain false. The LKEY 2/3 reservation, complete inherited closure and full-caller parity remain open; lot 7B is outside this transfer.
+Coverage at the 0.52 milestone is **56/76 complete declared entries, zero partial entries and 20 remaining**, with **6/6 observed-composition branches** and **37 compiled workflows**. The audit records **172 component-verified modules, 143 partial transfers, 1,054 pending and zero fully verified modules**, within **1,369 Python modules and 417 data files**. All six full-migration gates and `fullV6Parity` remain false. The LKEY 2/3 reservation, complete inherited closure and full-caller parity remain open; lot 7B is outside this transfer.
 
 ## Historical transfer: lot 4A native 0.51.0, acquired feedback and post-measurement cost qualification
 
@@ -1866,7 +1892,11 @@ modules and therefore exceeds the minimum semantic dependency closure. This
 upper bound must be refined through documented dependency analysis, not by
 silently dropping unimplemented capabilities.
 
-### Current frozen inventory: integrated lot 7A native 0.52.0
+### Current frozen inventory: integrated lot 5A native 0.53.0
+
+The [current register](v6-entry-point-progress.json), [coverage](v6-coverage.json), [5A report](lot5a-linked-temporal-preparation.md) and exact final validation receipts above retain different scopes: **57/76 entries**, **19 remaining**, **174 component-verified / 145 partial / 1,050 pending modules**, **zero fully verified modules** and **all six global gates false**. Formal validation is **3,835/3,835 in 102 files**, with **5/5 checks**, **16/16 common-loop checks** and **119/119 comparisons across seven recorded cases**. The graph has **50 installed owners versus 49** and **21 family-installed programs in both versions**; installed programs are distinct from compiled workflow inventory. The global cost is accepted for2/2games under the qualified rule described above; private publication is pending. WEAV6 and browser reservations remain explicit.
+
+### Historical frozen inventory: integrated lot 7A native 0.52.0
 
 The [integrated functional findings](lot7a-evidence/integrated-final/functional-findings.md),
 [entry register](v6-entry-point-progress.json), [coverage inventory](v6-coverage.json)
@@ -1989,8 +2019,9 @@ without making the migration complete.
    capabilities, including tuple/set structural equality and numeric identity.
    Current portable fixtures do not prove arbitrary Python integer/float parity.
 
-The current 7A/native 0.52 candidate incorporates the actual published 3I and
-4A lineage. Remaining lot 4 work and lot 7B keep their separate roadmap scopes.
+The current 5A/native 0.53 candidate incorporates the actually published 3I,
+4A and 7A lineage, including Site 83 documentation closure. Remaining lot 4 work
+and lot 7B keep their separate roadmap scopes; lot 5 continues with 5B then 5C.
 The LKEY third-level reservation remains open with its retained cumulative
 clock. Lot 3's zero open registry entries do not close CWSE/SK48, FramedWindow
 contribution, Population/Reception revalidation, prefilter timing or full

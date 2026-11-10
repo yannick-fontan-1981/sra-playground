@@ -1,0 +1,5317 @@
+{
+  "schema": "logos-engine.bounded-source-push-plan.v2",
+  "status": "planned_not_pushed",
+  "recordedAt": "2026-11-10T21:52:40.088529+00:00",
+  "generator": {
+    "path": "docs/migration/lot5a-evidence/plan-bounded-source-transport.py",
+    "bytes": 30314,
+    "sha256": "0b31a36da1bf41f191f2abb9559a122edc28a9f9d88aad16dbc6f30ca5a7ede9"
+  },
+  "window": {
+    "path": "docs/migration/lot5a-evidence/performance/window.json",
+    "bytes": 10145,
+    "sha256": "0be3eceb2139347ffa5efa0200fc1f68c98544517d0c521f3eee71b468401c5c"
+  },
+  "checkout": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+  "output": "/workspace/sites/sra-lot5-20261110/lot5a-bounded-source-plan.json",
+  "requestedBase": "bed48116585da864dd5c412ed11dd6990a950e8e",
+  "requestedTarget": "HEAD",
+  "perPushServerLimitBytes": 67108864,
+  "perStepRawObjectLimitBytes": 41943040,
+  "bulkProofMinimumBytes": 262144,
+  "steps": [
+    {
+      "step": 1,
+      "kind": "complete_source",
+      "previousCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+      "commit": "0ab6fdda85811eeff28bfbae38a6f1bab7fd5dbb",
+      "tree": "9173b32b5b3f994feab641437c80fa78ab0d9b39",
+      "parents": [
+        "bed48116585da864dd5c412ed11dd6990a950e8e"
+      ],
+      "rawMissingObjectBytes": 9900078,
+      "missingObjects": {
+        "count": 286,
+        "rawBytes": 9900078,
+        "byType": {
+          "blob": {
+            "count": 258,
+            "bytes": 9819306
+          },
+          "tree": {
+            "count": 27,
+            "bytes": 80519
+          },
+          "commit": {
+            "count": 1,
+            "bytes": 253
+          }
+        },
+        "inventorySha256": "be6f848d5389a5dbd62200d9d8c9884ca9f834b75fefb53bbf67c0578aa2ca6c",
+        "objects": [
+          {
+            "oid": "029c47734796145683b99a58eb64881bb533c7bf",
+            "type": "blob",
+            "bytes": 847
+          },
+          {
+            "oid": "03a387591c4e75c82811c2f478935ed45a59987b",
+            "type": "blob",
+            "bytes": 8267
+          },
+          {
+            "oid": "0671fbc8bdd66f24527f859be2896841fe273557",
+            "type": "blob",
+            "bytes": 31435
+          },
+          {
+            "oid": "07e46fc7b06d2e5d97e4fff31c9a5ebf83bfade6",
+            "type": "tree",
+            "bytes": 6544
+          },
+          {
+            "oid": "0887834c4173cbe9dea058d6b44858f7b571f4c1",
+            "type": "blob",
+            "bytes": 178
+          },
+          {
+            "oid": "088d9b13f1c2c39613aa7a697044369aa92c385d",
+            "type": "blob",
+            "bytes": 1555
+          },
+          {
+            "oid": "096758fe52b97d70aa5123b2aa1b56474a024d34",
+            "type": "blob",
+            "bytes": 1239
+          },
+          {
+            "oid": "0a12079bb7817d0a0c5a5a8ace954311d115a803",
+            "type": "blob",
+            "bytes": 2651
+          },
+          {
+            "oid": "0ab6fdda85811eeff28bfbae38a6f1bab7fd5dbb",
+            "type": "commit",
+            "bytes": 253
+          },
+          {
+            "oid": "0b58d6a5d39ed7daafa778205d878e87fe273d95",
+            "type": "blob",
+            "bytes": 791
+          },
+          {
+            "oid": "0c5b90af1836bd3d6ba4b16677fe1fa3b164a182",
+            "type": "blob",
+            "bytes": 2179
+          },
+          {
+            "oid": "0c68838d37a5c45ee0a7ce1889eeb74117d5c6d5",
+            "type": "blob",
+            "bytes": 23360
+          },
+          {
+            "oid": "0ded7386cb38bc1dfc1ca6a17c501d7f95f412d8",
+            "type": "blob",
+            "bytes": 7902
+          },
+          {
+            "oid": "0dfefb2ec39d514798e7aa73bdd96408fdca74f8",
+            "type": "blob",
+            "bytes": 395982
+          },
+          {
+            "oid": "0f1cd2044eba98fa27aa8b5efbb3fab330b68678",
+            "type": "blob",
+            "bytes": 437
+          },
+          {
+            "oid": "0ff74b0bf46223fae559fd2f2b62c2075c3bb37c",
+            "type": "blob",
+            "bytes": 3044
+          },
+          {
+            "oid": "10a31302014e8d60a837fee73b843d53f69afe33",
+            "type": "blob",
+            "bytes": 314
+          },
+          {
+            "oid": "10c2948c873be24b909303da047e19f58d10e9bf",
+            "type": "blob",
+            "bytes": 10997
+          },
+          {
+            "oid": "113860a00efaea10c0a62093b387b3f62e06824d",
+            "type": "blob",
+            "bytes": 11859
+          },
+          {
+            "oid": "124cbf0ea90b0ff3c46cecc08e1323e9e60a14d8",
+            "type": "blob",
+            "bytes": 1028
+          },
+          {
+            "oid": "139b2a484333ca8bbe87d690daa183a8035247c2",
+            "type": "blob",
+            "bytes": 11002
+          },
+          {
+            "oid": "13bd6f7bd929ee91a4baa62bd08a8c4b64565e5e",
+            "type": "blob",
+            "bytes": 28229
+          },
+          {
+            "oid": "13fc34698587c156baf96067acc5df3aaebd6fb9",
+            "type": "blob",
+            "bytes": 131114
+          },
+          {
+            "oid": "14111a5a61e98ecab3c5ca3b114d5ec29487ba4f",
+            "type": "blob",
+            "bytes": 1777
+          },
+          {
+            "oid": "14d132c1c9ae559a8d40817f6e20852892aec074",
+            "type": "blob",
+            "bytes": 273
+          },
+          {
+            "oid": "1526122993fa3079ae36aa9ee59ffb729d8d429e",
+            "type": "blob",
+            "bytes": 881
+          },
+          {
+            "oid": "1577868d1d6f161363acec6ab87ed744b277b79b",
+            "type": "tree",
+            "bytes": 431
+          },
+          {
+            "oid": "17a0ba24c7424a99ad6871c484e4b7034af5487c",
+            "type": "blob",
+            "bytes": 34974
+          },
+          {
+            "oid": "17eacd17f0ed377cd5be1405d6eac52de468e872",
+            "type": "blob",
+            "bytes": 55324
+          },
+          {
+            "oid": "18b2a5042662c60d706de2cec4a954583d3f9c7a",
+            "type": "blob",
+            "bytes": 1521
+          },
+          {
+            "oid": "190a691e65f40558f8f8cfe879bb94e187416b5b",
+            "type": "blob",
+            "bytes": 41090
+          },
+          {
+            "oid": "19b31eb751f09bfdc9ff5a65fb25adb29170b10e",
+            "type": "blob",
+            "bytes": 107797
+          },
+          {
+            "oid": "19b5d6f7b1a5ae3e255d7eacf74cb27bab2f1d87",
+            "type": "tree",
+            "bytes": 185
+          },
+          {
+            "oid": "1a0639b6a9325f5485ff1e6a1779faa03561e6a9",
+            "type": "tree",
+            "bytes": 48
+          },
+          {
+            "oid": "1db4156233a76a91f40ba334ef1389c9db920718",
+            "type": "blob",
+            "bytes": 2258
+          },
+          {
+            "oid": "1de7b4a6962c7ed57ed06e3aa3f1eb6cc32abe38",
+            "type": "tree",
+            "bytes": 13982
+          },
+          {
+            "oid": "1edaf66cd789083ec2b1821038e63a1aba8a6497",
+            "type": "blob",
+            "bytes": 200788
+          },
+          {
+            "oid": "1fae1161658dd6f975c2fb7b8fe50cae68d2013b",
+            "type": "blob",
+            "bytes": 12492
+          },
+          {
+            "oid": "219d50205bd339165ba92390f712302a5c007f5c",
+            "type": "blob",
+            "bytes": 1624
+          },
+          {
+            "oid": "2280306951f44efeb6d4e7d81663219dff2fa7ae",
+            "type": "blob",
+            "bytes": 1090
+          },
+          {
+            "oid": "2332f620522e778b4f626eb1487f9c43361a6d8a",
+            "type": "blob",
+            "bytes": 1089
+          },
+          {
+            "oid": "248b9f8954dd47d6dadad932e1787b35afa92d2a",
+            "type": "blob",
+            "bytes": 30482
+          },
+          {
+            "oid": "26ec616a5043ab6763271064baac96a69b849ca9",
+            "type": "blob",
+            "bytes": 19259
+          },
+          {
+            "oid": "2868536d5028040b7d775b86e03c47ae758c7169",
+            "type": "blob",
+            "bytes": 26258
+          },
+          {
+            "oid": "295d1c55398e424c594348b1257a7ba64beb21f0",
+            "type": "blob",
+            "bytes": 20897
+          },
+          {
+            "oid": "29d9ac122c95fa96c29242bcf64e4aab930de395",
+            "type": "tree",
+            "bytes": 536
+          },
+          {
+            "oid": "2a334b673a603a04cb48c61b7640f63337591fae",
+            "type": "blob",
+            "bytes": 50598
+          },
+          {
+            "oid": "2acfa65eefc351ce66ad8575b6ebdc7346385c63",
+            "type": "blob",
+            "bytes": 9096
+          },
+          {
+            "oid": "2b91b243c39ff8cdd1e324e332c7ebe94c218ac4",
+            "type": "blob",
+            "bytes": 249277
+          },
+          {
+            "oid": "2c8694c9c9c4a61e3db0d7101ae01144e3a8c66c",
+            "type": "blob",
+            "bytes": 3020
+          },
+          {
+            "oid": "2cf47686f18a0b78924f5e485fd492471213a9c6",
+            "type": "blob",
+            "bytes": 34095
+          },
+          {
+            "oid": "2ede1c4fcc466066f57dc436b2aeb3a79a5ddb87",
+            "type": "blob",
+            "bytes": 141
+          },
+          {
+            "oid": "2ee09199ce670c8b208803baaa667d3fd425384f",
+            "type": "tree",
+            "bytes": 467
+          },
+          {
+            "oid": "2f7bd1f467ef981fcab2ceb86e8920a18f702d72",
+            "type": "tree",
+            "bytes": 245
+          },
+          {
+            "oid": "316c0d266431ad354317fff13e7a043169a16a64",
+            "type": "blob",
+            "bytes": 32014
+          },
+          {
+            "oid": "321bc5ae76574ff9578d1b437f598d35733e3fd1",
+            "type": "blob",
+            "bytes": 1089
+          },
+          {
+            "oid": "322481c093bfc67f37d85b95e3794aa44b304918",
+            "type": "blob",
+            "bytes": 67816
+          },
+          {
+            "oid": "3378871bbc9bd940e194fc78bf0cca342a1a4fa0",
+            "type": "tree",
+            "bytes": 12311
+          },
+          {
+            "oid": "353a7a2f602d08ef42cba51de7d5321d5a755174",
+            "type": "tree",
+            "bytes": 43
+          },
+          {
+            "oid": "36724368033c11603c6cab6c9091b1b39668081d",
+            "type": "blob",
+            "bytes": 20044
+          },
+          {
+            "oid": "377a21f2c22a2221d665c8bc41bdf1c87ca80cee",
+            "type": "blob",
+            "bytes": 7690
+          },
+          {
+            "oid": "3830e57ca1b6312793cde9e88266dbc881a813a2",
+            "type": "blob",
+            "bytes": 14280
+          },
+          {
+            "oid": "388d697dcfa8c1c7d3ccd27c177a7ab273d5938b",
+            "type": "blob",
+            "bytes": 104466
+          },
+          {
+            "oid": "3a40c9055bdb36476e6b7fff181ffe1253d4f8eb",
+            "type": "blob",
+            "bytes": 1175
+          },
+          {
+            "oid": "3a5bb4f675a2948e91a7369f2641a1e68043bda9",
+            "type": "blob",
+            "bytes": 16360
+          },
+          {
+            "oid": "3a6781086686612d677bdcaf129d6cd08342d4e3",
+            "type": "tree",
+            "bytes": 3306
+          },
+          {
+            "oid": "3aba0f511b6fb96776076d7d87a28c4e06930377",
+            "type": "blob",
+            "bytes": 15321
+          },
+          {
+            "oid": "3adf9d98c954ce477df3ec17e62f19d9a9170f4c",
+            "type": "blob",
+            "bytes": 310
+          },
+          {
+            "oid": "3b1e80f46c858cb6a5cd8c4f8eadb8b385581f15",
+            "type": "blob",
+            "bytes": 43040
+          },
+          {
+            "oid": "3b538c4109dddbed0cbdd67a056e45dc99ac1a61",
+            "type": "blob",
+            "bytes": 8880
+          },
+          {
+            "oid": "3ba776d5d60b25c51a937d2b2fb20c3e4596b269",
+            "type": "blob",
+            "bytes": 33584
+          },
+          {
+            "oid": "3d8cb80539987a7094124b6f56abbd580cdb98e2",
+            "type": "blob",
+            "bytes": 13056
+          },
+          {
+            "oid": "3e8fc2cbe344228a5773606a64403fcd4975bc92",
+            "type": "blob",
+            "bytes": 57320
+          },
+          {
+            "oid": "3f08d0dbe8549632e4316fa94ba612d60e1aa349",
+            "type": "blob",
+            "bytes": 18430
+          },
+          {
+            "oid": "3f493387a392b58f8bacf5f72060826db486c234",
+            "type": "blob",
+            "bytes": 88053
+          },
+          {
+            "oid": "3f7851ad466c0e16a8de54930ab7cd5b7cab6ab1",
+            "type": "blob",
+            "bytes": 122235
+          },
+          {
+            "oid": "3fbd11b9942f42164953613d37afa17a16bac0fa",
+            "type": "blob",
+            "bytes": 124691
+          },
+          {
+            "oid": "40d9bccbddeb0ca6b7b610ea65a72de553438a09",
+            "type": "blob",
+            "bytes": 39154
+          },
+          {
+            "oid": "413193c33e2d4d3b84aebf375bf3c06961e02fb6",
+            "type": "blob",
+            "bytes": 1636
+          },
+          {
+            "oid": "414b752c085f0cd42d99457f787cea3d3986809c",
+            "type": "blob",
+            "bytes": 2545610
+          },
+          {
+            "oid": "41e7d965d3daa2126efb25b9d5d9cc71f3baafa1",
+            "type": "tree",
+            "bytes": 1284
+          },
+          {
+            "oid": "424c2527240b160432781c7b6beb055a319d85b5",
+            "type": "tree",
+            "bytes": 21065
+          },
+          {
+            "oid": "4260c3936a55a65d748bda240107aaf43adad633",
+            "type": "blob",
+            "bytes": 18723
+          },
+          {
+            "oid": "438213db20975f2a2fc4fdf09b95609306b6dc8e",
+            "type": "blob",
+            "bytes": 13396
+          },
+          {
+            "oid": "43dea5c2100d2868a17a012c6e70f805c79d8776",
+            "type": "blob",
+            "bytes": 41436
+          },
+          {
+            "oid": "45e645d0f0806f66eb28cddc25bc916305798446",
+            "type": "tree",
+            "bytes": 8762
+          },
+          {
+            "oid": "4644972e47f0be05c03d2c6e9be29c35c733c5f6",
+            "type": "blob",
+            "bytes": 3367
+          },
+          {
+            "oid": "47e7aae845586fc1779915f4b172ed512d95e3a1",
+            "type": "blob",
+            "bytes": 11005
+          },
+          {
+            "oid": "48190761c1677cd5af75642ffb3d3ef5d2abd47e",
+            "type": "blob",
+            "bytes": 12363
+          },
+          {
+            "oid": "4977cc9207da928e015a260896c775e1b452eb7a",
+            "type": "blob",
+            "bytes": 3434
+          },
+          {
+            "oid": "4978b57504275ffc8e0a9e744df260846234029c",
+            "type": "blob",
+            "bytes": 113
+          },
+          {
+            "oid": "4a40cbe3858858fa7c550f3c9d976377df7b9022",
+            "type": "blob",
+            "bytes": 11498
+          },
+          {
+            "oid": "4b1ec8161941daee2f8be4243936d73a6dcaceb0",
+            "type": "blob",
+            "bytes": 2696
+          },
+          {
+            "oid": "4bf7be55a89a81f82c989f9c09b127664100b3fe",
+            "type": "blob",
+            "bytes": 297
+          },
+          {
+            "oid": "4c10528d36ab0c56f2341e22e60ef54bcfe8762a",
+            "type": "blob",
+            "bytes": 1089
+          },
+          {
+            "oid": "4c3eaa9a28a72fe23ccd09f8e256766c5ed35a60",
+            "type": "blob",
+            "bytes": 930
+          },
+          {
+            "oid": "4d1064b301293beb71be19dd9942ef19003fcfae",
+            "type": "blob",
+            "bytes": 6960
+          },
+          {
+            "oid": "4d24bf315eb0bc521254209440e4b4952031a2a4",
+            "type": "blob",
+            "bytes": 12555
+          },
+          {
+            "oid": "4f9d318d89daf503333ad441336115e41387a7a7",
+            "type": "blob",
+            "bytes": 893
+          },
+          {
+            "oid": "5010268daaf1705733380e2b9c81f57e6f78e35b",
+            "type": "blob",
+            "bytes": 4212
+          },
+          {
+            "oid": "50434189260c5b2f45f502bf729a5a66fab9f146",
+            "type": "blob",
+            "bytes": 2781
+          },
+          {
+            "oid": "50acbc432891ff785a92f6d2e053bdb76b3a4982",
+            "type": "tree",
+            "bytes": 1563
+          },
+          {
+            "oid": "51bf02c1268602084e776c0475daa9ca64236f93",
+            "type": "blob",
+            "bytes": 3164
+          },
+          {
+            "oid": "52b7c3f32d7ef58a1423736fd597aa716657062f",
+            "type": "blob",
+            "bytes": 9526
+          },
+          {
+            "oid": "53b4101c839fba1101283d7403221066ec1f31a0",
+            "type": "blob",
+            "bytes": 1089
+          },
+          {
+            "oid": "54d898b1e379f22c53e350cd1d6932e7dd94492f",
+            "type": "blob",
+            "bytes": 40967
+          },
+          {
+            "oid": "55e8bb0e71122a79c90c083d12831897b16e29c1",
+            "type": "blob",
+            "bytes": 309
+          },
+          {
+            "oid": "576b3f48d04d9c5b8fcab31edbf775cde473936d",
+            "type": "blob",
+            "bytes": 9695
+          },
+          {
+            "oid": "57fc9745d6438d363552a4fd291e2983d2c409ad",
+            "type": "blob",
+            "bytes": 210
+          },
+          {
+            "oid": "59c3df438d57aebbe77886bb71976fcef08b9659",
+            "type": "blob",
+            "bytes": 204708
+          },
+          {
+            "oid": "5ac5a423c3682de2385fdd1b3cd2aaa6deb8cf5a",
+            "type": "blob",
+            "bytes": 36744
+          },
+          {
+            "oid": "5e08983c2920f13528442f99bcdeaebcf877b99d",
+            "type": "blob",
+            "bytes": 3016
+          },
+          {
+            "oid": "5e0da5d4a5e3817ff7456e7c6c97a763e6c88397",
+            "type": "blob",
+            "bytes": 442
+          },
+          {
+            "oid": "5e7059a7f8f14b70a3c2429cd62890463c5e9763",
+            "type": "blob",
+            "bytes": 1371
+          },
+          {
+            "oid": "5e8f8702fa51841197b5eb712d6372c7d572fe81",
+            "type": "blob",
+            "bytes": 5725
+          },
+          {
+            "oid": "5f857b12d4fd6e16d37f2bb577a645f833be260f",
+            "type": "blob",
+            "bytes": 1372
+          },
+          {
+            "oid": "60b349617ef7194624b6e43a8fd76709410fa5df",
+            "type": "blob",
+            "bytes": 1183
+          },
+          {
+            "oid": "61ed905eb8ffd706ecb02558174a4ec16b842d9f",
+            "type": "blob",
+            "bytes": 1172
+          },
+          {
+            "oid": "6380b1703406a7de02adfd1ca00ee857bc2344db",
+            "type": "blob",
+            "bytes": 24498
+          },
+          {
+            "oid": "64172be64aafdae9e446e2e9d44738a14e9e88da",
+            "type": "blob",
+            "bytes": 36942
+          },
+          {
+            "oid": "64fc689b65a7b209fb205cdf7ad6e6456a37ccdc",
+            "type": "blob",
+            "bytes": 22325
+          },
+          {
+            "oid": "664b08c55d071e6dfa06b2b4526a6df65ad58e92",
+            "type": "blob",
+            "bytes": 21680
+          },
+          {
+            "oid": "665d7f8416cbc52ae078698abb716fca59088f4f",
+            "type": "blob",
+            "bytes": 5595
+          },
+          {
+            "oid": "66a435033498b515d7e4481f7b14ccfd87c5ab82",
+            "type": "blob",
+            "bytes": 40188
+          },
+          {
+            "oid": "66adaab7abebe665d9f20eac2bb5a1d4dc4940a8",
+            "type": "blob",
+            "bytes": 165041
+          },
+          {
+            "oid": "67933b9926b4ad86688cd73f4f5734f1a3052960",
+            "type": "blob",
+            "bytes": 708
+          },
+          {
+            "oid": "67fe6b3e4717351c35e6fd0630419d68fd3ff20b",
+            "type": "blob",
+            "bytes": 3023
+          },
+          {
+            "oid": "6800fe2b897523aadc33dd2df465e773cc0e99a1",
+            "type": "blob",
+            "bytes": 10145
+          },
+          {
+            "oid": "6882618203c2dc979ba38cf18474e64f6223f4f5",
+            "type": "blob",
+            "bytes": 27111
+          },
+          {
+            "oid": "689729fa86243748432e1c67b14caffd8e9f5395",
+            "type": "blob",
+            "bytes": 2922
+          },
+          {
+            "oid": "68ffaed8917137b48f5f12e06fe0ff73c7c7228a",
+            "type": "blob",
+            "bytes": 5497
+          },
+          {
+            "oid": "6ac24e9165e61015ff74e2c2f5818e9606bf6eff",
+            "type": "blob",
+            "bytes": 231
+          },
+          {
+            "oid": "6bd3405f47fd4e677550e5d1224bbf863d9e5ce1",
+            "type": "tree",
+            "bytes": 1717
+          },
+          {
+            "oid": "6c5cc4168db2a474ead7e718df7323a4ea20f803",
+            "type": "blob",
+            "bytes": 1351
+          },
+          {
+            "oid": "6d7f47e69161bc15e334d44eca636cab7442759f",
+            "type": "blob",
+            "bytes": 8567
+          },
+          {
+            "oid": "711ef18f354891f0a80f6db0ca6d33e69ace98e4",
+            "type": "blob",
+            "bytes": 12147
+          },
+          {
+            "oid": "7140b6f87393deaf2ff8c60236bda013a8f91484",
+            "type": "blob",
+            "bytes": 35215
+          },
+          {
+            "oid": "71d6c36799da3c1a4e7e293222e4c204e08a52d1",
+            "type": "blob",
+            "bytes": 1706
+          },
+          {
+            "oid": "742cb15b8144d6b433e92ae6eb5315f1d0e522ab",
+            "type": "blob",
+            "bytes": 22725
+          },
+          {
+            "oid": "75d37472cd1093e597703305a42a8cea13db83f1",
+            "type": "blob",
+            "bytes": 3031
+          },
+          {
+            "oid": "75d4a1fdda68e5b6deae986350606655db5ea26c",
+            "type": "blob",
+            "bytes": 1156
+          },
+          {
+            "oid": "76c05646e91868a32f54481a5735648bbc514ac9",
+            "type": "blob",
+            "bytes": 3799
+          },
+          {
+            "oid": "7860b46a32a83b4990ce15312eebd8850a53c2b4",
+            "type": "blob",
+            "bytes": 26450
+          },
+          {
+            "oid": "7a657277c6c5c503bfbdb522ac4270071a24e610",
+            "type": "blob",
+            "bytes": 5266
+          },
+          {
+            "oid": "7bd58a28afc3e5fbc60d2d8b11e16081de2c294b",
+            "type": "blob",
+            "bytes": 1591
+          },
+          {
+            "oid": "7dd4a488a51c3ce63742ddd5abe28b43fd2b851f",
+            "type": "blob",
+            "bytes": 21543
+          },
+          {
+            "oid": "7e77882725562b5ad939f5b0a03f789ff63d7f0c",
+            "type": "blob",
+            "bytes": 10992
+          },
+          {
+            "oid": "7f0ac86e03330c02e9324972e2aac1d10b8d61b5",
+            "type": "blob",
+            "bytes": 3592
+          },
+          {
+            "oid": "81e995812d56d4d7920b92a48365b4624a782810",
+            "type": "blob",
+            "bytes": 3323
+          },
+          {
+            "oid": "823ef80e81f52950ba81b9588d3ea95020ace084",
+            "type": "blob",
+            "bytes": 20995
+          },
+          {
+            "oid": "82835f8f84c73e5e5de43a9824ca0f46f15e9b85",
+            "type": "blob",
+            "bytes": 28096
+          },
+          {
+            "oid": "82d348e5ab521d3b8547c07a989c8de3c31e5239",
+            "type": "blob",
+            "bytes": 1028
+          },
+          {
+            "oid": "842019d880fd218585a0fd22094aa23cb097cbda",
+            "type": "blob",
+            "bytes": 74624
+          },
+          {
+            "oid": "8499ed741320b9237a7231a21e0cc7d41734ffac",
+            "type": "blob",
+            "bytes": 8348
+          },
+          {
+            "oid": "84f4b45b7b30482ea8870cc71c7a808e55d7b0ca",
+            "type": "blob",
+            "bytes": 406
+          },
+          {
+            "oid": "8509b132c5bbcf28bf5ca92c2e765f20720a4aef",
+            "type": "blob",
+            "bytes": 75352
+          },
+          {
+            "oid": "874858937a7ef8483bb2bb59692b9e5aa4f0d55b",
+            "type": "blob",
+            "bytes": 3020
+          },
+          {
+            "oid": "8822c265ad6c249abb32b4014490e853f505677e",
+            "type": "blob",
+            "bytes": 4366
+          },
+          {
+            "oid": "89cc5263f18236725da2217ddd3473bb1415000a",
+            "type": "tree",
+            "bytes": 144
+          },
+          {
+            "oid": "8a06f79db9418721f56549e6c21c11e1b7ccc0a3",
+            "type": "blob",
+            "bytes": 9703
+          },
+          {
+            "oid": "8af2b84eb852638078a283fa13e714854d7c10c4",
+            "type": "blob",
+            "bytes": 374
+          },
+          {
+            "oid": "8b7991db31d539e9007623dc99974f90af7cf725",
+            "type": "blob",
+            "bytes": 757
+          },
+          {
+            "oid": "8c2ef261e450b953801051c3485382244183a0ad",
+            "type": "blob",
+            "bytes": 141662
+          },
+          {
+            "oid": "8ca17a46e47b935677b2e0ab63d58abf0cd8e9a8",
+            "type": "blob",
+            "bytes": 108245
+          },
+          {
+            "oid": "8dea2dc6c5039abc90e3afe321d78a64c8fb08fc",
+            "type": "blob",
+            "bytes": 435
+          },
+          {
+            "oid": "8e2c9922e6c6cd3b469c5af4089745b779b34f0e",
+            "type": "blob",
+            "bytes": 1049
+          },
+          {
+            "oid": "8ec91204c5bfc4d9e4c7b0e8639a6d542f7c3961",
+            "type": "blob",
+            "bytes": 11482
+          },
+          {
+            "oid": "903a824ecac4fbdf6ae3acd5699f9d3cdba87c37",
+            "type": "blob",
+            "bytes": 4735
+          },
+          {
+            "oid": "9118049be0f8b564fa47be1d33ab288c9ded1ffc",
+            "type": "blob",
+            "bytes": 72659
+          },
+          {
+            "oid": "9150ddf2bd462b046cbc3bc099ba993deba3d34f",
+            "type": "blob",
+            "bytes": 3034
+          },
+          {
+            "oid": "9173b32b5b3f994feab641437c80fa78ab0d9b39",
+            "type": "tree",
+            "bytes": 1137
+          },
+          {
+            "oid": "92850d53a1215e3d68aaa18073ec7f5d417e0eb4",
+            "type": "blob",
+            "bytes": 2220
+          },
+          {
+            "oid": "9286b22c0ffc4f45674e53687dd406d84a3ed0a4",
+            "type": "blob",
+            "bytes": 6762
+          },
+          {
+            "oid": "93081ad3877250b398da35a6c760b2e3f39f61ff",
+            "type": "blob",
+            "bytes": 24845
+          },
+          {
+            "oid": "9340ae3e064520168a3cfde0ee1fd645256c675d",
+            "type": "blob",
+            "bytes": 10739
+          },
+          {
+            "oid": "9438ec5339b7022384c5d04eaa22de59dd477e6f",
+            "type": "blob",
+            "bytes": 5876
+          },
+          {
+            "oid": "94b9ccc11c3fea8196d0f63fe2c27714f102f796",
+            "type": "blob",
+            "bytes": 88952
+          },
+          {
+            "oid": "954491c3c05bdd74809342e06514a4d692844c68",
+            "type": "blob",
+            "bytes": 3123
+          },
+          {
+            "oid": "955b2c29c361a6356f9cfeace6c7eb36878ba8ff",
+            "type": "blob",
+            "bytes": 1572
+          },
+          {
+            "oid": "96b0d27bdf92ec596318c1e3232c90a52c6d285d",
+            "type": "blob",
+            "bytes": 1423
+          },
+          {
+            "oid": "98eb05df1eb0c1591865f9c1bab4d23a5c533476",
+            "type": "blob",
+            "bytes": 895
+          },
+          {
+            "oid": "990e0919e373bcd8f5aa7c0e3fa56baeb8b89975",
+            "type": "blob",
+            "bytes": 994
+          },
+          {
+            "oid": "9916a2b8ed2f567299fd6ede6a6945a6489c0ac4",
+            "type": "blob",
+            "bytes": 40259
+          },
+          {
+            "oid": "9a89c90fd89a1433f8349b0a87a2a7d1ad84706e",
+            "type": "blob",
+            "bytes": 19890
+          },
+          {
+            "oid": "9b372e4116e0bb6ad0e1e70dfff5e8ea7b24a579",
+            "type": "blob",
+            "bytes": 38342
+          },
+          {
+            "oid": "9cd05eeebc1bb6809133e79a5d90b0a0e01401db",
+            "type": "blob",
+            "bytes": 19101
+          },
+          {
+            "oid": "9d426bfe1339281596be643483bd15cb91afc15f",
+            "type": "blob",
+            "bytes": 719
+          },
+          {
+            "oid": "9df892435f0bd26946a29082b19580213eff3100",
+            "type": "tree",
+            "bytes": 100
+          },
+          {
+            "oid": "9e1815416fc46abda5ed76fcdbd57f8c0b8e6fd8",
+            "type": "blob",
+            "bytes": 121997
+          },
+          {
+            "oid": "9e9f37eff7f756f6ccd0451881e764879f9a0d66",
+            "type": "blob",
+            "bytes": 3288
+          },
+          {
+            "oid": "a15ce276c477f2dbc4f81175f0a487f3e23401bb",
+            "type": "blob",
+            "bytes": 107904
+          },
+          {
+            "oid": "a1b123971e1b7ebc330037b5cfd7cea551e3823f",
+            "type": "tree",
+            "bytes": 551
+          },
+          {
+            "oid": "a36bca4cc8208936312d0bb83496d996ec4c5506",
+            "type": "blob",
+            "bytes": 1422
+          },
+          {
+            "oid": "a5c96d16c2a60ded6527b62d831484240e6db408",
+            "type": "blob",
+            "bytes": 4149
+          },
+          {
+            "oid": "a6884bd8d2b07f857f3e25db5dd17da5485d5ca7",
+            "type": "blob",
+            "bytes": 9846
+          },
+          {
+            "oid": "a728a51c2fafa275410f3b7fe08fed05b31f9d83",
+            "type": "blob",
+            "bytes": 59963
+          },
+          {
+            "oid": "a76c9399c6262f6023e31350a2defa3fc55420f2",
+            "type": "blob",
+            "bytes": 146509
+          },
+          {
+            "oid": "a7f6f118fb76ed440c8c44cf32f355cc42b4b0fe",
+            "type": "blob",
+            "bytes": 205
+          },
+          {
+            "oid": "a96775965211051d1d26c0b4b31030b1e906e557",
+            "type": "blob",
+            "bytes": 960
+          },
+          {
+            "oid": "a9f6af485c8dbb0f979540c143d5bafd7377a196",
+            "type": "blob",
+            "bytes": 6174
+          },
+          {
+            "oid": "aaa9056cadfd583b430472631e3a98a10775c9b4",
+            "type": "blob",
+            "bytes": 2989
+          },
+          {
+            "oid": "abc04d1e1481edb02e18f08572da15889a6dd0b7",
+            "type": "blob",
+            "bytes": 234
+          },
+          {
+            "oid": "ac7665ee1170bb7f1aa7c655a815d7043ab58e18",
+            "type": "blob",
+            "bytes": 581
+          },
+          {
+            "oid": "ad7e3cb9aa3f69eb091ece0cbe62f30e0beab1ae",
+            "type": "blob",
+            "bytes": 77881
+          },
+          {
+            "oid": "ad90cbd07683ec570ce7f21ef01cce8f961cbaee",
+            "type": "blob",
+            "bytes": 173662
+          },
+          {
+            "oid": "aee531446dcb291069c5a941521517572f8abba9",
+            "type": "tree",
+            "bytes": 102
+          },
+          {
+            "oid": "af5391d180c57e823e202bcf32aedb9ffcb74568",
+            "type": "blob",
+            "bytes": 2690
+          },
+          {
+            "oid": "af63cb1c1dc5ed07d74c318e0e671998d69955b6",
+            "type": "blob",
+            "bytes": 794
+          },
+          {
+            "oid": "af67ccd1ed35a5dd88d2d62719c228b7348a6ae4",
+            "type": "tree",
+            "bytes": 700
+          },
+          {
+            "oid": "afa552e1a669f8f2d69822286fd5d05bc78622f0",
+            "type": "blob",
+            "bytes": 2787
+          },
+          {
+            "oid": "afeb6ee3afd64dd78467def63597e924a3c06759",
+            "type": "blob",
+            "bytes": 1723
+          },
+          {
+            "oid": "b01bb327ca5a714a8f57917dc7cdefdca0bd5cbe",
+            "type": "blob",
+            "bytes": 7609
+          },
+          {
+            "oid": "b045a1d545bc8c4a6802ab293850c5e562686309",
+            "type": "tree",
+            "bytes": 1859
+          },
+          {
+            "oid": "b08017800c3ad056a46975788828212c23c7bb71",
+            "type": "blob",
+            "bytes": 10994
+          },
+          {
+            "oid": "b6fa7477d76034ac533b4a01c109b48502805a45",
+            "type": "blob",
+            "bytes": 13362
+          },
+          {
+            "oid": "b882d40ad3650abbe26f9f2138dabc80acf12d2f",
+            "type": "blob",
+            "bytes": 1561
+          },
+          {
+            "oid": "b9226e7f87fa24cb6e284ba2a9ecee2be7cae9e8",
+            "type": "blob",
+            "bytes": 17620
+          },
+          {
+            "oid": "b9682ec3bd7b18d8f1ad8240d6c15efea4b276cf",
+            "type": "blob",
+            "bytes": 199708
+          },
+          {
+            "oid": "bad48aaf5623cfcbe77622ba2c308c9cbb649065",
+            "type": "blob",
+            "bytes": 10994
+          },
+          {
+            "oid": "bc8370dd3e3253fa1bacedcee91895117c440129",
+            "type": "blob",
+            "bytes": 1090
+          },
+          {
+            "oid": "bcfbfb7020186abd17c7bb9a19378bf5f8d6dc86",
+            "type": "blob",
+            "bytes": 1591
+          },
+          {
+            "oid": "bfdb02da30130bac6093b96d7ffe4f7fe3651ce1",
+            "type": "blob",
+            "bytes": 860
+          },
+          {
+            "oid": "c12014558bdcc0ec32f758c5bd6d2c01cf80e9a6",
+            "type": "blob",
+            "bytes": 9647
+          },
+          {
+            "oid": "c1ebbe1e5510886778eff28279ead1065f3502c3",
+            "type": "blob",
+            "bytes": 2665
+          },
+          {
+            "oid": "c297f5046095ee46e3986014b56a34e3036c8058",
+            "type": "blob",
+            "bytes": 23637
+          },
+          {
+            "oid": "c32b02abaca614dbe7ca02deda94b4e391db5ca3",
+            "type": "blob",
+            "bytes": 30314
+          },
+          {
+            "oid": "c50422a9a53685a410d612c4201ca0567844f632",
+            "type": "blob",
+            "bytes": 32503
+          },
+          {
+            "oid": "c67ce041ac7ee31ac6ac691841530ff927fc5180",
+            "type": "blob",
+            "bytes": 11001
+          },
+          {
+            "oid": "c68341fc0fed42245983ddff861ab5bcb387050c",
+            "type": "blob",
+            "bytes": 2149
+          },
+          {
+            "oid": "c6d2853623efd15f487f2c96eea4054d14ae7df6",
+            "type": "blob",
+            "bytes": 43132
+          },
+          {
+            "oid": "c6ed74ce2094d27e197d6c89f9d1262b7fa1fc87",
+            "type": "blob",
+            "bytes": 3778
+          },
+          {
+            "oid": "c70b3edc3cded5bf78c49d1480aa31020912f568",
+            "type": "blob",
+            "bytes": 1089
+          },
+          {
+            "oid": "c8ab94e7096652c83e6c45d74c166b71eb66d2fc",
+            "type": "blob",
+            "bytes": 2191
+          },
+          {
+            "oid": "caaf05ef6de71121347d4df61594e5e986ae16db",
+            "type": "blob",
+            "bytes": 2282
+          },
+          {
+            "oid": "cb6cf1b8e4bd97b0631dd7cfe6f62f503cf7d7db",
+            "type": "tree",
+            "bytes": 245
+          },
+          {
+            "oid": "cc6477500ef583d075cfe3606f07fe5c6e0a6c33",
+            "type": "blob",
+            "bytes": 2184
+          },
+          {
+            "oid": "ce93d98083d4572508ce524542db4c926297aa45",
+            "type": "blob",
+            "bytes": 280
+          },
+          {
+            "oid": "d01a2e620933af35977f104017e52f81f7455e6f",
+            "type": "blob",
+            "bytes": 499
+          },
+          {
+            "oid": "d24b26a5a34d3c7f0f06d54be173816f86b8a322",
+            "type": "blob",
+            "bytes": 9656
+          },
+          {
+            "oid": "d2d594f1a90b8f245cf2235c76d2726f4c03a7c0",
+            "type": "blob",
+            "bytes": 10089
+          },
+          {
+            "oid": "d2f574a8ae7ed1b2c0b249a6909c36144ab6f99f",
+            "type": "blob",
+            "bytes": 1579
+          },
+          {
+            "oid": "d4bc665b87a3ca442249d0befc9a8c1eb755b728",
+            "type": "blob",
+            "bytes": 326
+          },
+          {
+            "oid": "d50233221bf90028d21f6ef325c70e5360248408",
+            "type": "blob",
+            "bytes": 756
+          },
+          {
+            "oid": "d5e7d903516e3fd48843b88ac76f18fa5c36383d",
+            "type": "blob",
+            "bytes": 7013
+          },
+          {
+            "oid": "d742d53010f28c233c802873c999013af97ca4fd",
+            "type": "blob",
+            "bytes": 7130
+          },
+          {
+            "oid": "d7cb959f68d1866eea8726cc9438b81cebe9b075",
+            "type": "blob",
+            "bytes": 9809
+          },
+          {
+            "oid": "db6bba3a798f93412be050e0748804985fbd37e8",
+            "type": "blob",
+            "bytes": 773
+          },
+          {
+            "oid": "dc57fb7726c529638ec5d32320c385398711087f",
+            "type": "blob",
+            "bytes": 1149
+          },
+          {
+            "oid": "ddaa1d265fb7360e91cd2be17bcfb09aaedcb3bb",
+            "type": "blob",
+            "bytes": 6373
+          },
+          {
+            "oid": "ded534c48e8e69302c7bfe4584115d7e152cade8",
+            "type": "blob",
+            "bytes": 53989
+          },
+          {
+            "oid": "e00220213224928e321ce62d1bc89d81ba037739",
+            "type": "blob",
+            "bytes": 327
+          },
+          {
+            "oid": "e05d2cee96d14ae3a17a92dd906d2cd7ac47f7cd",
+            "type": "blob",
+            "bytes": 4285
+          },
+          {
+            "oid": "e0d67235d2d939effcfc08b9863db3e83cbcfc59",
+            "type": "blob",
+            "bytes": 28493
+          },
+          {
+            "oid": "e251b2025aa0f9bdb05b3d79f78259c4a46de494",
+            "type": "blob",
+            "bytes": 103744
+          },
+          {
+            "oid": "e259dc6ac35412d9f37afc65eeb771b3fc9f69e0",
+            "type": "blob",
+            "bytes": 2147
+          },
+          {
+            "oid": "e479b2aad9da25e633678f97d8a1ce8d6dc5bc95",
+            "type": "blob",
+            "bytes": 13034
+          },
+          {
+            "oid": "e5c644b108eb22f3c2581a6e86ce134e6944be45",
+            "type": "blob",
+            "bytes": 435
+          },
+          {
+            "oid": "e6cb89ec0bab335097e1c99cadb8a9ec5dda31b5",
+            "type": "blob",
+            "bytes": 10191
+          },
+          {
+            "oid": "e74e4cd2004eb5465c0f26686b68d444b31048c0",
+            "type": "blob",
+            "bytes": 719074
+          },
+          {
+            "oid": "e88112831b2634491de820f0d172752f9f0bdbf8",
+            "type": "blob",
+            "bytes": 8189
+          },
+          {
+            "oid": "eaffddc85b1ac87bad51f5944855d2d3db92705e",
+            "type": "blob",
+            "bytes": 132748
+          },
+          {
+            "oid": "eb7a3a605acb2fe65aab29ea594cc78de35f5fb7",
+            "type": "blob",
+            "bytes": 1015
+          },
+          {
+            "oid": "ec71f302f1ad7c651e6c2b61cac58dc522c966b9",
+            "type": "blob",
+            "bytes": 2199
+          },
+          {
+            "oid": "ecd6148e33f9bf0b51b2fc22b90cda35b744381d",
+            "type": "blob",
+            "bytes": 255121
+          },
+          {
+            "oid": "ed322ec087ca076bdc5da7179bc92d18f9125606",
+            "type": "blob",
+            "bytes": 1404
+          },
+          {
+            "oid": "edf39698d8ff0f4d29ba2f67056411f634f0347f",
+            "type": "blob",
+            "bytes": 875
+          },
+          {
+            "oid": "ee9f8442e38b61f2e30f907f894a332ed8413d05",
+            "type": "tree",
+            "bytes": 2384
+          },
+          {
+            "oid": "eeab704b4be30c792c4dda5342cf22177455ff9f",
+            "type": "blob",
+            "bytes": 190165
+          },
+          {
+            "oid": "f0d460d983e8246bfd8585b48df8009ca2144f69",
+            "type": "blob",
+            "bytes": 35243
+          },
+          {
+            "oid": "f0e73d513b02a09f5c3fa57c91c2ce36cda85679",
+            "type": "blob",
+            "bytes": 16305
+          },
+          {
+            "oid": "f1d8a7aeea758fa3cbb1c943a06c536cc0579837",
+            "type": "blob",
+            "bytes": 3146
+          },
+          {
+            "oid": "f21870f78a2c8433ae05ee904ec8b2b0c335c853",
+            "type": "blob",
+            "bytes": 12289
+          },
+          {
+            "oid": "f239b2eae957d72a4a93f126092f8c185ff79623",
+            "type": "tree",
+            "bytes": 404
+          },
+          {
+            "oid": "f2b7aa2478b4db3877edfea808dea0d0c5d73336",
+            "type": "blob",
+            "bytes": 43028
+          },
+          {
+            "oid": "f31accce2bcd237140c5c9ff7075b52065fd9d68",
+            "type": "blob",
+            "bytes": 10408
+          },
+          {
+            "oid": "f3e345faa6a032b24ab984424d7fb29bf4b575d3",
+            "type": "blob",
+            "bytes": 5524
+          },
+          {
+            "oid": "f436355fd5804bbf2bb4d496468b8eb52a541560",
+            "type": "blob",
+            "bytes": 72483
+          },
+          {
+            "oid": "f487cec75e11ed23b087d25754a2f599b1cdde69",
+            "type": "tree",
+            "bytes": 404
+          },
+          {
+            "oid": "f5bf85e389d3e191f433f02eb52374f6bf62178e",
+            "type": "blob",
+            "bytes": 9715
+          },
+          {
+            "oid": "f7a18409b0e72ecd3081e647491f26aebf999911",
+            "type": "blob",
+            "bytes": 14849
+          },
+          {
+            "oid": "f9fbf80d9af8a12c7b358a4fc2972058293d9b92",
+            "type": "blob",
+            "bytes": 13872
+          },
+          {
+            "oid": "fa32a4d167d175043cc585cf9d51b7d10c91922b",
+            "type": "blob",
+            "bytes": 3998
+          },
+          {
+            "oid": "fb7092714986895f9af27d00c849e36edea4de49",
+            "type": "blob",
+            "bytes": 12534
+          },
+          {
+            "oid": "fc55bbc0ff82637d10b23afef09f67512dd35f63",
+            "type": "blob",
+            "bytes": 883
+          },
+          {
+            "oid": "fee2db4452ce7069ed50df3e61fbaca0a687e0b6",
+            "type": "blob",
+            "bytes": 16197
+          },
+          {
+            "oid": "ff9bc3baa09180f5725e2fa744dabfe507939feb",
+            "type": "blob",
+            "bytes": 18598
+          }
+        ]
+      },
+      "changedPaths": [
+        ".gitignore",
+        "docs/migration/lot5a-evidence/README.md",
+        "docs/migration/lot5a-evidence/baseline/published-predecessor.json",
+        "docs/migration/lot5a-evidence/baseline/source-manifest.json",
+        "docs/migration/lot5a-evidence/capture-cost-owner-graphs.mjs",
+        "docs/migration/lot5a-evidence/check-cost-static-inputs.py",
+        "docs/migration/lot5a-evidence/consolidate-owner-costs-directory-v1.mjs",
+        "docs/migration/lot5a-evidence/consolidate-owner-costs.mjs",
+        "docs/migration/lot5a-evidence/declare-cost-directory-correction.py",
+        "docs/migration/lot5a-evidence/declare-shared-fragment-supplement.py",
+        "docs/migration/lot5a-evidence/diagnose-cost-fragment-reuse.py",
+        "docs/migration/lot5a-evidence/diagnose-cost-shared-fragment.py",
+        "docs/migration/lot5a-evidence/diagnostic/blocking-and-registration-tests.json",
+        "docs/migration/lot5a-evidence/diagnostic/blocking-and-registration-tests.tap",
+        "docs/migration/lot5a-evidence/diagnostic/bounded-transport-planner-adaptation.json",
+        "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/attempt-review.json",
+        "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt1.execution.json",
+        "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt1.log",
+        "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt2.execution.json",
+        "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt2.log",
+        "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt3.execution.json",
+        "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt3.log",
+        "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/script-attempt1.mjs",
+        "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/script-attempt2.mjs",
+        "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/script-attempt3.mjs",
+        "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/source-manifest.json",
+        "docs/migration/lot5a-evidence/diagnostic/cost-renderer-adaptation.json",
+        "docs/migration/lot5a-evidence/diagnostic/cost-renderer-directory-description.json",
+        "docs/migration/lot5a-evidence/diagnostic/cost-renderer-owner-labels.json",
+        "docs/migration/lot5a-evidence/diagnostic/delivery-verifier-path-failure.json",
+        "docs/migration/lot5a-evidence/diagnostic/finalize-cost-readiness-initial.py",
+        "docs/migration/lot5a-evidence/diagnostic/frontier-delta-review.json",
+        "docs/migration/lot5a-evidence/diagnostic/frontier-snapshot-targeted-tests-initial.tap",
+        "docs/migration/lot5a-evidence/diagnostic/initial-typecheck.log",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-inputs-after.sha256",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-inputs-before.sha256",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-tests.stderr.log",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-tests.tap",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-typecheck.log",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-validation.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-development.json",
+        "docs/migration/lot5a-evidence/diagnostic/mixed-path-targeted-tests.tap",
+        "docs/migration/lot5a-evidence/diagnostic/mixed-path-test-development.json",
+        "docs/migration/lot5a-evidence/diagnostic/performance-targeted-tests.tap",
+        "docs/migration/lot5a-evidence/diagnostic/readiness-initial-failure.json",
+        "docs/migration/lot5a-evidence/diagnostic/runtime-store-targeted-tests.tap",
+        "docs/migration/lot5a-evidence/diagnostic/source-oracle-export.json",
+        "docs/migration/lot5a-evidence/diagnostic/transfer-map-application.json",
+        "docs/migration/lot5a-evidence/diagnostic/validation-correction.json",
+        "docs/migration/lot5a-evidence/diagnostic/write-cost-results-before-directory-description.py",
+        "docs/migration/lot5a-evidence/diagnostic/write-cost-results-before-owner-labels.py",
+        "docs/migration/lot5a-evidence/final/browser/browser-qa.json",
+        "docs/migration/lot5a-evidence/final/delivery-integrity.json",
+        "docs/migration/lot5a-evidence/final/evidence-byte-transport.json",
+        "docs/migration/lot5a-evidence/final/evidence-index.json",
+        "docs/migration/lot5a-evidence/final/functional-block-review.json",
+        "docs/migration/lot5a-evidence/final/linked-temporal-common-loop-execution.json",
+        "docs/migration/lot5a-evidence/final/linked-temporal-common-loop.log",
+        "docs/migration/lot5a-evidence/final/log-preservation.json",
+        "docs/migration/lot5a-evidence/final/preflight.json",
+        "docs/migration/lot5a-evidence/final/publication-inputs.json",
+        "docs/migration/lot5a-evidence/final/published-predecessor-reconciliation.json",
+        "docs/migration/lot5a-evidence/final/regression-baselines-restore-execution.json",
+        "docs/migration/lot5a-evidence/final/regression-baselines-restore.log",
+        "docs/migration/lot5a-evidence/final/regression-driver-execution.json",
+        "docs/migration/lot5a-evidence/final/regression-driver-started.json",
+        "docs/migration/lot5a-evidence/final/regression-driver.log",
+        "docs/migration/lot5a-evidence/final/regression-evidence-pack-execution.json",
+        "docs/migration/lot5a-evidence/final/regression-evidence-parts.json",
+        "docs/migration/lot5a-evidence/final/regressions/catr-052-comparison.json",
+        "docs/migration/lot5a-evidence/final/regressions/catr-052-execution-started.json",
+        "docs/migration/lot5a-evidence/final/regressions/catr-052-execution.json",
+        "docs/migration/lot5a-evidence/final/regressions/catr-052-host-preparation.json",
+        "docs/migration/lot5a-evidence/final/regressions/catr-052-output.log.gz",
+        "docs/migration/lot5a-evidence/final/regressions/catr-052-output.raw.log",
+        "docs/migration/lot5a-evidence/final/regressions/catr-052-passive-owner-presence.json",
+        "docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz.part002",
+        "docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz.parts.json",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-comparison.json",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-execution-started.json",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-execution.json",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-host-preparation.json",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-output.log.gz",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-output.raw.log",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-passive-owner-presence.json",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.part004",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.parts.json",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-comparison.json",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-execution-started.json",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-execution.json",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-host-preparation.json",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-output.log.gz",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-output.raw.log",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-passive-owner-presence.json",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.parts.json",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-comparison.json",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-execution-started.json",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-execution.json",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-host-preparation.json",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-output.log.gz",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-output.raw.log",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-passive-owner-presence.json",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.parts.json",
+        "docs/migration/lot5a-evidence/final/regressions/regression-summary.json",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-comparison.json",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-execution-started.json",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-execution.json",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-host-preparation.json",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-output.log.gz",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-output.raw.log",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-passive-owner-presence.json",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz.parts.json",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-comparison.json",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-execution-started.json",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-execution.json",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-host-preparation.json",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-output.log.gz",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-output.raw.log",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-passive-owner-presence.json",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.parts.json",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-comparison.json",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-execution-started.json",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-execution.json",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-host-preparation.json",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-output.log.gz",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-passive-owner-presence.json",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part017",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.parts.json",
+        "docs/migration/lot5a-evidence/final/source-archive-parts.json",
+        "docs/migration/lot5a-evidence/final/source-archive.json",
+        "docs/migration/lot5a-evidence/final/source-manifest.json",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive-parts.json",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive.json",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/source-manifest.json",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/build-output.log.gz",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/checks-run.json",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/delta-tests-output.log.gz",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/delta-tests-run.json",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/diff-check-output.log.gz",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/entry-audit-output.log.gz",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/migration-audit-output.log.gz",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/typecheck-output.log.gz",
+        "docs/migration/lot5a-evidence/final/validation/build-output.log.gz",
+        "docs/migration/lot5a-evidence/final/validation/checks-run.json",
+        "docs/migration/lot5a-evidence/final/validation/delta-tests-output.log.gz",
+        "docs/migration/lot5a-evidence/final/validation/delta-tests-run.json",
+        "docs/migration/lot5a-evidence/final/validation/diff-check-output.log.gz",
+        "docs/migration/lot5a-evidence/final/validation/entry-audit-output.log.gz",
+        "docs/migration/lot5a-evidence/final/validation/migration-audit-output.log.gz",
+        "docs/migration/lot5a-evidence/final/validation/typecheck-output.log.gz",
+        "docs/migration/lot5a-evidence/finalize-cost-readiness.py",
+        "docs/migration/lot5a-evidence/finalize-owner-cost-contract.py",
+        "docs/migration/lot5a-evidence/owner-cost-contract.md",
+        "docs/migration/lot5a-evidence/performance/aggregation-failure.json",
+        "docs/migration/lot5a-evidence/performance/aggregation-failure.log",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part005",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.parts.json",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.receipt.json",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.parts.json",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.receipt.json",
+        "docs/migration/lot5a-evidence/performance/cases.json",
+        "docs/migration/lot5a-evidence/performance/cohort1/after.log",
+        "docs/migration/lot5a-evidence/performance/cohort1/after.log.gz",
+        "docs/migration/lot5a-evidence/performance/cohort1/baseline.log",
+        "docs/migration/lot5a-evidence/performance/cohort1/baseline.log.gz",
+        "docs/migration/lot5a-evidence/performance/cohort1/comparison.json",
+        "docs/migration/lot5a-evidence/performance/cohort1/comparison.log",
+        "docs/migration/lot5a-evidence/performance/cohort2/after.log",
+        "docs/migration/lot5a-evidence/performance/cohort2/after.log.gz",
+        "docs/migration/lot5a-evidence/performance/cohort2/baseline.log",
+        "docs/migration/lot5a-evidence/performance/cohort2/baseline.log.gz",
+        "docs/migration/lot5a-evidence/performance/cohort2/comparison.json",
+        "docs/migration/lot5a-evidence/performance/cohort2/comparison.log",
+        "docs/migration/lot5a-evidence/performance/comparison-policy.json",
+        "docs/migration/lot5a-evidence/performance/coordination.json",
+        "docs/migration/lot5a-evidence/performance/coordination/lot4b-status.json",
+        "docs/migration/lot5a-evidence/performance/coordination/lot7b-status.json",
+        "docs/migration/lot5a-evidence/performance/coordination/own-quiet-attestation.json",
+        "docs/migration/lot5a-evidence/performance/declaration.json",
+        "docs/migration/lot5a-evidence/performance/dependency-preparation-repair.json",
+        "docs/migration/lot5a-evidence/performance/diagnostic/final-cost-independent-review.json",
+        "docs/migration/lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-declaration.log",
+        "docs/migration/lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-v1.diff",
+        "docs/migration/lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-v1.json",
+        "docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-independent-review.json",
+        "docs/migration/lot5a-evidence/performance/diagnostic/static-preflight-initial-failure.json",
+        "docs/migration/lot5a-evidence/performance/diagnostic/static-preflight-initial-failure.log",
+        "docs/migration/lot5a-evidence/performance/exclusive-window-execution.json",
+        "docs/migration/lot5a-evidence/performance/exclusive-window-execution.log",
+        "docs/migration/lot5a-evidence/performance/global-budget-policy.json",
+        "docs/migration/lot5a-evidence/performance/initial-preparation-tools/capture-cost-owner-graphs.mjs",
+        "docs/migration/lot5a-evidence/performance/initial-preparation-tools/check-cost-static-inputs.py",
+        "docs/migration/lot5a-evidence/performance/initial-preparation-tools/consolidate-owner-costs.mjs",
+        "docs/migration/lot5a-evidence/performance/initial-preparation-tools/finalize-owner-cost-contract.py",
+        "docs/migration/lot5a-evidence/performance/initial-preparation-tools/manifest.json",
+        "docs/migration/lot5a-evidence/performance/initial-preparation-tools/owner-cost-contract.md",
+        "docs/migration/lot5a-evidence/performance/initial-preparation-tools/prepare-cost-protocol.py",
+        "docs/migration/lot5a-evidence/performance/initial-preparation-tools/qualify-cost-owner-graphs.mjs",
+        "docs/migration/lot5a-evidence/performance/initial-preparation-tools/record-owner-source-inventory.mjs",
+        "docs/migration/lot5a-evidence/performance/initial-preparation-tools/review-owner-costs.py",
+        "docs/migration/lot5a-evidence/performance/log-transport.json",
+        "docs/migration/lot5a-evidence/performance/log-transport.log",
+        "docs/migration/lot5a-evidence/performance/owner-contract-launch-failure.json",
+        "docs/migration/lot5a-evidence/performance/owner-growth-analysis-initial-failure.json",
+        "docs/migration/lot5a-evidence/performance/owner-growth-comparison-directory-v1.log",
+        "docs/migration/lot5a-evidence/performance/owner-growth-comparison.json",
+        "docs/migration/lot5a-evidence/performance/owner-growth-comparison.log",
+        "docs/migration/lot5a-evidence/performance/owner-growth-contract-finalization.log",
+        "docs/migration/lot5a-evidence/performance/owner-growth-contract.json",
+        "docs/migration/lot5a-evidence/performance/owner-growth-review-directory-v1.log",
+        "docs/migration/lot5a-evidence/performance/owner-source-inventory.json",
+        "docs/migration/lot5a-evidence/performance/owner-structural-attribution-v2.log",
+        "docs/migration/lot5a-evidence/performance/owner-structural-attribution.json",
+        "docs/migration/lot5a-evidence/performance/owner-structural-fixture.json",
+        "docs/migration/lot5a-evidence/performance/preparation.json",
+        "docs/migration/lot5a-evidence/performance/protocol-check.json",
+        "docs/migration/lot5a-evidence/performance/protocol.md",
+        "docs/migration/lot5a-evidence/performance/readiness-execution.json",
+        "docs/migration/lot5a-evidence/performance/readiness-execution.log",
+        "docs/migration/lot5a-evidence/performance/readiness.json",
+        "docs/migration/lot5a-evidence/performance/results-render.json",
+        "docs/migration/lot5a-evidence/performance/results-render.log",
+        "docs/migration/lot5a-evidence/performance/results.md",
+        "docs/migration/lot5a-evidence/performance/static-preflight.json",
+        "docs/migration/lot5a-evidence/performance/static-preflight.log",
+        "docs/migration/lot5a-evidence/performance/window.json",
+        "docs/migration/lot5a-evidence/plan-bounded-source-transport.py",
+        "docs/migration/lot5a-evidence/prepare-cost-protocol.py",
+        "docs/migration/lot5a-evidence/qualify-cost-owner-graphs-v2.mjs",
+        "docs/migration/lot5a-evidence/qualify-cost-owner-graphs.mjs",
+        "docs/migration/lot5a-evidence/record-cost-log-transport.py",
+        "docs/migration/lot5a-evidence/record-owner-source-inventory.mjs",
+        "docs/migration/lot5a-evidence/record-publication-inputs.py",
+        "docs/migration/lot5a-evidence/recorded-regression-cases-integrated.json",
+        "docs/migration/lot5a-evidence/review-owner-costs-directory-v1.py",
+        "docs/migration/lot5a-evidence/review-owner-costs.py",
+        "docs/migration/lot5a-evidence/run-release-checks.py",
+        "docs/migration/lot5a-evidence/shared-fragment-premeasurement-qualification.md",
+        "docs/migration/lot5a-evidence/transfer-map-additions.json",
+        "docs/migration/lot5a-evidence/weav/followup-clock.json",
+        "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/declaration.json",
+        "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/driver-execution.json",
+        "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/driver-output.raw.log",
+        "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/driver-started.json",
+        "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/heartbeat.json",
+        "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/partial-live-output.log.gz",
+        "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/partial-public-journal.jsonl.gz",
+        "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/result.json",
+        "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/source-manifest.json",
+        "docs/migration/lot5a-evidence/write-cost-results.py",
+        "docs/migration/lot5a-evidence/write-evidence-index.py",
+        "docs/migration/lot5a-linked-temporal-lineage.md",
+        "docs/migration/lot5a-linked-temporal-preparation.md",
+        "docs/migration/v6-coverage.json",
+        "docs/migration/v6-delivery-roadmap.md",
+        "docs/migration/v6-entry-point-progress.json",
+        "docs/migration/v6-native-transfer.md",
+        "migration/v6-transfer-map.json",
+        "scripts/export-v6-linked-preparation-reference.py",
+        "scripts/prove-linked-temporal-common-loop.mjs",
+        "src/logos-engine/kernel.ts",
+        "src/logos-engine/v6-crossed-prefix-access.ts",
+        "src/logos-engine/v6-knowledge-store.ts",
+        "src/logos-engine/v6-linked-temporal-common.ts",
+        "src/logos-engine/v6-linked-temporal-contact.ts",
+        "src/logos-engine/v6-linked-temporal-phase.ts",
+        "src/logos-engine/v6-linked-temporal-preparation.ts",
+        "src/logos-engine/v6-native-caller.ts",
+        "src/logos-engine/v6-native-runtime.ts",
+        "src/logos-engine/v6-observed-frontier.ts",
+        "tests/fixtures/v6-linked-preparation-reference.json.gz",
+        "tests/kernel-batch.test.ts",
+        "tests/v6-crossed-prefix-access.test.ts",
+        "tests/v6-frontier-native-snapshot.test.ts",
+        "tests/v6-linked-temporal-preparation.test.ts",
+        "tests/v6-linked-temporal-reference.test.ts",
+        "tests/v6-native-family-registration.test.ts",
+        "tests/v6-native-mixed-path.test.ts",
+        "tests/v6-radial-port-integration.test.ts",
+        "tests/v6-source-entry-routing.test.ts"
+      ],
+      "nonDeferredPathsExactlyMatchTarget": true,
+      "remainingDeferredPaths": [
+        "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt3.json.gz",
+        "docs/migration/lot5a-evidence/final/linked-temporal-common-loop.json.gz",
+        "docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz.part000",
+        "docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz.part001",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.part000",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.part001",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.part002",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.part003",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part000",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part001",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part002",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part003",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part004",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part005",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part006",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part007",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part008",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part009",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part010",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part000",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part001",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part002",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part003",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part004",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part005",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz.part000",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz.part001",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz.part002",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz.part003",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part000",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part001",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part002",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part003",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part004",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part005",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part006",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part007",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part008",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part009",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part010",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part011",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part012",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part013",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-output.raw.log",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part000",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part001",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part002",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part003",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part004",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part005",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part006",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part007",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part008",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part009",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part010",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part011",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part012",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part013",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part014",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part015",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part016",
+        "docs/migration/lot5a-evidence/final/source-archive.tar.gz.part000",
+        "docs/migration/lot5a-evidence/final/source-archive.tar.gz.part001",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive.tar.gz.part000",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive.tar.gz.part001",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part000",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part001",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part002",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part003",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part004",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part000",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part001",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part002",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part003",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part004",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part005",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part006",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part007",
+        "docs/migration/lot5a-evidence/performance/cohort1/after.json",
+        "docs/migration/lot5a-evidence/performance/cohort1/baseline.json",
+        "docs/migration/lot5a-evidence/performance/cohort2/after.json",
+        "docs/migration/lot5a-evidence/performance/cohort2/baseline.json",
+        "docs/migration/lot5a-evidence/performance/diagnostic/fragment-first-creator-inventory.json",
+        "docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-first-creator.json",
+        "docs/migration/lot5a-evidence/performance/owner-growth-review.json",
+        "docs/migration/lot5a-evidence/performance/owner-structural-attribution-v2.json",
+        "docs/migration/lot5a-evidence/performance/shared-fragment-premeasurement-supplement.json"
+      ]
+    },
+    {
+      "step": 2,
+      "kind": "evidence",
+      "previousCommit": "0ab6fdda85811eeff28bfbae38a6f1bab7fd5dbb",
+      "commit": "70bebab972a59d4bb5d60b6c6278576a767fd61d",
+      "tree": "b505cf87669ab6e6322ed33cd64bfb3d34ea1827",
+      "parents": [
+        "0ab6fdda85811eeff28bfbae38a6f1bab7fd5dbb"
+      ],
+      "rawMissingObjectBytes": 40583412,
+      "missingObjects": {
+        "count": 58,
+        "rawBytes": 40583412,
+        "byType": {
+          "blob": {
+            "count": 49,
+            "bytes": 40562342
+          },
+          "tree": {
+            "count": 8,
+            "bytes": 20840
+          },
+          "commit": {
+            "count": 1,
+            "bytes": 230
+          }
+        },
+        "inventorySha256": "92985abda2c8aa47254cf4073a8bb4f03fabe2176006ff5d0144df9fa43bf472",
+        "objects": [
+          {
+            "oid": "008ce70b5d5c6c2be3cafe71b7b03709aa943f5b",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "01457fa3ad5ca693c3728afef7dc8b53d6a0596a",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "02d8f79a96699a6ebb6ac8b6969b16a8ffd3d5d2",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "0b3e6d7f399f3e135e408d3fcc32ae43e902fdb3",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "0ba5f2caa18bccdd3fcdd6af468578128f168d6b",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "0dafb94ec3abf52898dccbb69cc089d1efa4294f",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "1351eab5518296935eeb7cb8a2ad0c62b84a5577",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "2d207f0238463afde332a2a096e2f04b9a0b9fb1",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "3a2aafed08dfcd3598517a289c03b586d119402a",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "3eecd8ea1f750e7ddffcb4a85c5396fdabdaff39",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "40db184e1dda26787262ce8f1ee58989c4fb156b",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "413cec89de975c697933cd055fa3a9ce1db090dd",
+            "type": "tree",
+            "bytes": 1859
+          },
+          {
+            "oid": "44ae862e8dbbd562b95751d660a212f368554874",
+            "type": "blob",
+            "bytes": 478068
+          },
+          {
+            "oid": "4cd455bc5c171b49d2307a66ccea3673e0fcb26c",
+            "type": "tree",
+            "bytes": 1347
+          },
+          {
+            "oid": "6190b389ff0de9e2d1e58a44e00db65812516787",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "65c6f0bf465fc7bea0b38c3d10da920a5b320fa0",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "6f36c738950a11d7a7ef0792544d339da5afce04",
+            "type": "blob",
+            "bytes": 290968
+          },
+          {
+            "oid": "7034fabd7d949d76f8dd4d78619baa387f3f3861",
+            "type": "blob",
+            "bytes": 625547
+          },
+          {
+            "oid": "7038d22a6b1c5c993598af8c94fba4c16092faf2",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "70bebab972a59d4bb5d60b6c6278576a767fd61d",
+            "type": "commit",
+            "bytes": 230
+          },
+          {
+            "oid": "7549fedeec4ab9c01b8e37bd240453951a2981ac",
+            "type": "blob",
+            "bytes": 321940
+          },
+          {
+            "oid": "75693db10443c27fd8ee41cb064d5aa68631935b",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "75c0b76d98590a82b080168723fb0bf5d8e7c7a1",
+            "type": "tree",
+            "bytes": 6544
+          },
+          {
+            "oid": "7e15a421ef273397a7a017d046cd082907a2882a",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "833cb4a85489d33629a4a40510dec912ba8b127b",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "8732ebaec8dc2bac7bba0078af13a7dc85603598",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "8f37ab075116ada4d8023323c64612ea9a28c2d1",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "8fa4b9ba27c0f1625dc6e6b7ddea6ad20c6448f7",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "96dcf0f06111cde8374a43217a4740bbb449b2ff",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "9d206f07eae3e10a8acbce7ace1294620a910d54",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "9fc852fd5889f9b3380549f3e49afb6f4e43dca3",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "a069227e6f79a0c7eead612da17c908fac5b301c",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "a18b129a7017ea0d4b87172fc44a11e2b7e12917",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "a7da2581f9fcd636a1378737a51b534e3a239b25",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "a95922d3c875376a5687873f2e0f025013c14978",
+            "type": "blob",
+            "bytes": 452737
+          },
+          {
+            "oid": "aabb6a469c87a9102970faa4b365d176dc0c7fae",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "abffb45b80a121f1d9d22b3c1132b390b03f21c9",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "b066214186960e21c65ddd2ff12e7695c89cb5cf",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "b1ae6a9ad9746dd7c7ed6a3f97266a890b5ed600",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "b505cf87669ab6e6322ed33cd64bfb3d34ea1827",
+            "type": "tree",
+            "bytes": 1137
+          },
+          {
+            "oid": "b7c3ac96a6e61083f6863441093c391474bbe1f6",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "c0425c19014792777fce87f1a311b77cbb1f4d80",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "c2d40eed0f4e35ce75d98d6a97adc2b4d14b037b",
+            "type": "blob",
+            "bytes": 268724
+          },
+          {
+            "oid": "c8429c3af2feb93420f4fc7244f423f8d05e9231",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "cc31c55b4df7e8db530756bdc3e65d494ebf7943",
+            "type": "tree",
+            "bytes": 6071
+          },
+          {
+            "oid": "d21403bffed4aee4906ff996e1da5f6cdb50567f",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "d33776df57e6a7fe656e67ba05d12df2138a9ea4",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "d42a1a7b03ff7e3df2c1267e05567bf4d9022d98",
+            "type": "tree",
+            "bytes": 602
+          },
+          {
+            "oid": "da32f3407a4b53008f867770d5a68380b733e6ec",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "da90652accbd88a851e40af1eb0fbb117ba51e89",
+            "type": "blob",
+            "bytes": 324358
+          },
+          {
+            "oid": "def56d4bb2f6c0a432134156803e7ce2ae73c706",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "e0c086f85237496d3df1d95f273e49f1735bd12f",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "e92a8a9d714fd85c0a6f43a8878508d2998d744a",
+            "type": "tree",
+            "bytes": 1563
+          },
+          {
+            "oid": "ecbc87ecf7c647e6117709c55782af4be0aa362f",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "f4c49867df17d87003b0a2dcec14543d97b046ee",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "fd56588017a6e127bc181ffc946757e3e5caeb3b",
+            "type": "tree",
+            "bytes": 1717
+          },
+          {
+            "oid": "fdbb4e594037c6873ea2d8cd0487f9478fbe5513",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "fff4df27dce75f2dc15e95b8298c08b7499c5c2d",
+            "type": "blob",
+            "bytes": 900000
+          }
+        ]
+      },
+      "changedPaths": [
+        "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt3.json.gz",
+        "docs/migration/lot5a-evidence/final/linked-temporal-common-loop.json.gz",
+        "docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz.part000",
+        "docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz.part001",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.part000",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.part001",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.part002",
+        "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.part003",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part000",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part001",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part002",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part003",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part004",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part005",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part006",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part007",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part008",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part009",
+        "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part010",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part000",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part001",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part002",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part003",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part004",
+        "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part005",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz.part000",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz.part001",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz.part002",
+        "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz.part003",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part000",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part001",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part002",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part003",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part004",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part005",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part006",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part007",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part008",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part009",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part010",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part011",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part012",
+        "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part013",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-output.raw.log",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part000",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part001",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part002",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part003",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part004"
+      ],
+      "nonDeferredPathsExactlyMatchTarget": true,
+      "remainingDeferredPaths": [
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part005",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part006",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part007",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part008",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part009",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part010",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part011",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part012",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part013",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part014",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part015",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part016",
+        "docs/migration/lot5a-evidence/final/source-archive.tar.gz.part000",
+        "docs/migration/lot5a-evidence/final/source-archive.tar.gz.part001",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive.tar.gz.part000",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive.tar.gz.part001",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part000",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part001",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part002",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part003",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part004",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part000",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part001",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part002",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part003",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part004",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part005",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part006",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part007",
+        "docs/migration/lot5a-evidence/performance/cohort1/after.json",
+        "docs/migration/lot5a-evidence/performance/cohort1/baseline.json",
+        "docs/migration/lot5a-evidence/performance/cohort2/after.json",
+        "docs/migration/lot5a-evidence/performance/cohort2/baseline.json",
+        "docs/migration/lot5a-evidence/performance/diagnostic/fragment-first-creator-inventory.json",
+        "docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-first-creator.json",
+        "docs/migration/lot5a-evidence/performance/owner-growth-review.json",
+        "docs/migration/lot5a-evidence/performance/owner-structural-attribution-v2.json",
+        "docs/migration/lot5a-evidence/performance/shared-fragment-premeasurement-supplement.json"
+      ]
+    },
+    {
+      "step": 3,
+      "kind": "evidence",
+      "previousCommit": "70bebab972a59d4bb5d60b6c6278576a767fd61d",
+      "commit": "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+      "tree": "9f8719e758cbac92810ac72a743dfb6bb5c4c787",
+      "parents": [
+        "70bebab972a59d4bb5d60b6c6278576a767fd61d"
+      ],
+      "rawMissingObjectBytes": 29744913,
+      "missingObjects": {
+        "count": 44,
+        "rawBytes": 29744913,
+        "byType": {
+          "tree": {
+            "count": 11,
+            "bytes": 23878
+          },
+          "blob": {
+            "count": 32,
+            "bytes": 29720805
+          },
+          "commit": {
+            "count": 1,
+            "bytes": 230
+          }
+        },
+        "inventorySha256": "7e2210c1d8b76bf12b43f02f1379fed1314261a559e028bd855077a3e7ea0144",
+        "objects": [
+          {
+            "oid": "011df701b09a602792a30d64ac5a3960533ffac6",
+            "type": "tree",
+            "bytes": 6544
+          },
+          {
+            "oid": "06530a66e2c2c279855bc4a417f8af23cb318d03",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "0a51b9a09301772c6f17f8b682ba4fd0917ee365",
+            "type": "tree",
+            "bytes": 3198
+          },
+          {
+            "oid": "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+            "type": "commit",
+            "bytes": 230
+          },
+          {
+            "oid": "11dbd86683c0f6fa9fe64226475e0eedc9754c34",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "122476930ef1efc52db16faf922c97fd1c59563c",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "195b86944c362f8952b224188ed64d530d5f4e50",
+            "type": "blob",
+            "bytes": 4108930
+          },
+          {
+            "oid": "1b8f9342681767ca72c3faed725273e98f167d1c",
+            "type": "blob",
+            "bytes": 430204
+          },
+          {
+            "oid": "20b900ba978bf1a621b5c1aaa92dc0a1e0c2c30f",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "28bc5423c96c884ba74ac05af3bfd0d6c0daaa64",
+            "type": "blob",
+            "bytes": 429790
+          },
+          {
+            "oid": "2cff610763500e02a1d42d773e62888e2aa7b406",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "2e1568ffeef4bb5b29ffed4ce31f2ecc4061bbbe",
+            "type": "blob",
+            "bytes": 871485
+          },
+          {
+            "oid": "2ff7c6f227f333796e31be27357bf1c9adc7acf2",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "3ae836d81b896f07276c86417c34d31669403b17",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "43958106575c3c7f885f5e93bc5606076a4c89ba",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "4f31532ee0589bff647c9f436aaec9d70c17c336",
+            "type": "tree",
+            "bytes": 324
+          },
+          {
+            "oid": "4facd168573cde761e51f5cbe2b964e3872b331a",
+            "type": "tree",
+            "bytes": 324
+          },
+          {
+            "oid": "57c0d8fec66f418e35ec6b3cb03f8dbb02fbed8a",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "6090f24d235ecc957464afff91b42f719ccf8550",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "63298b357b214875e0172d97e3f37fbd159a05d8",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "66e13ed52d7e9e6712e1ea26d64ed0683691dd6e",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "673f4c62e8e4ba298ca2796cacaa35ff640274ee",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "67b1a04d50b967c0b4bcc4e3acda5fb4d630cc5e",
+            "type": "tree",
+            "bytes": 1717
+          },
+          {
+            "oid": "7635534fffdbb3f3d094b504a4b50bd3230f029f",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "784123c3efcc5e5dc47b1b2d14c8500a0e79821d",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "854bc2e7bef0f95097076ff40a024fc1e9f7ffa9",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "8929f598f1f3acc718bc9bde268c16255abbcb6b",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "8c065ad3fe64fcd23919c8b8e2610546f24be126",
+            "type": "blob",
+            "bytes": 429659
+          },
+          {
+            "oid": "92f1a45a871fe5e20a24523584ab6d43d16e2779",
+            "type": "tree",
+            "bytes": 1563
+          },
+          {
+            "oid": "9d1b6205e16861d5e0e97af5707f9acb4b00aed0",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "9f8719e758cbac92810ac72a743dfb6bb5c4c787",
+            "type": "tree",
+            "bytes": 1137
+          },
+          {
+            "oid": "c3d3fc8c38ca43e0b21cd010e8d158141e02f818",
+            "type": "tree",
+            "bytes": 6779
+          },
+          {
+            "oid": "d3c482580a0bf185ace1432208de7a8edb87705e",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "d91d641c0d84053e684023330df4e9bce485c483",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "da13eb9a1d8ea2cbd0ffd279f11a3296450aeac4",
+            "type": "blob",
+            "bytes": 520472
+          },
+          {
+            "oid": "dfd821b759022d608211403461926db6044567f3",
+            "type": "tree",
+            "bytes": 532
+          },
+          {
+            "oid": "e7ebb03a5cd211add0348b1d63924b8aabf74e9d",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "e88e5c0d61daa338085de4b7308abe2088a9dc8d",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "ed8b0003966307aaf7474a069719d9c55b33d853",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "ee8f321cfca5487eef90c5f7ed5b5a1ad912206d",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "f41f000daa2443b3d1f9395b4d975d4ff9fea13a",
+            "type": "blob",
+            "bytes": 430265
+          },
+          {
+            "oid": "f58f7acdd6e3976c21272e2828c00a2b9cc8f041",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "f75e947b10e251bd9a7559608ed6139a01e7d4e8",
+            "type": "tree",
+            "bytes": 1461
+          },
+          {
+            "oid": "fe612232142c30531f36d7e5a217c28af6f35528",
+            "type": "tree",
+            "bytes": 299
+          }
+        ]
+      },
+      "changedPaths": [
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part005",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part006",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part007",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part008",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part009",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part010",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part011",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part012",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part013",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part014",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part015",
+        "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part016",
+        "docs/migration/lot5a-evidence/final/source-archive.tar.gz.part000",
+        "docs/migration/lot5a-evidence/final/source-archive.tar.gz.part001",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive.tar.gz.part000",
+        "docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive.tar.gz.part001",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part000",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part001",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part002",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part003",
+        "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part004",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part000",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part001",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part002",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part003",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part004",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part005",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part006",
+        "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part007",
+        "docs/migration/lot5a-evidence/performance/cohort1/after.json",
+        "docs/migration/lot5a-evidence/performance/cohort1/baseline.json",
+        "docs/migration/lot5a-evidence/performance/cohort2/after.json",
+        "docs/migration/lot5a-evidence/performance/cohort2/baseline.json",
+        "docs/migration/lot5a-evidence/performance/diagnostic/fragment-first-creator-inventory.json"
+      ],
+      "nonDeferredPathsExactlyMatchTarget": true,
+      "remainingDeferredPaths": [
+        "docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-first-creator.json",
+        "docs/migration/lot5a-evidence/performance/owner-growth-review.json",
+        "docs/migration/lot5a-evidence/performance/owner-structural-attribution-v2.json",
+        "docs/migration/lot5a-evidence/performance/shared-fragment-premeasurement-supplement.json"
+      ]
+    },
+    {
+      "step": 4,
+      "kind": "evidence",
+      "previousCommit": "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+      "commit": "e5e225b0e26f7ddcbdcebd35c725d7e48ec08c28",
+      "tree": "bae64abefb066e3932b84b1cde3caed951cdb21e",
+      "parents": [
+        "0d69767970bff5cdc95c163bd5a02614bb661bd4"
+      ],
+      "rawMissingObjectBytes": 40699112,
+      "missingObjects": {
+        "count": 9,
+        "rawBytes": 40699112,
+        "byType": {
+          "tree": {
+            "count": 6,
+            "bytes": 14805
+          },
+          "blob": {
+            "count": 2,
+            "bytes": 40684077
+          },
+          "commit": {
+            "count": 1,
+            "bytes": 230
+          }
+        },
+        "inventorySha256": "05fbe41114db70364f5f8b96c89dd0cdb834978aa375ad9ef50a02458cea5b9b",
+        "objects": [
+          {
+            "oid": "3d5d27c00c6d2b9bb86dfd12c64275464bcdd4ab",
+            "type": "tree",
+            "bytes": 6544
+          },
+          {
+            "oid": "68d55580dfb64e015e009a0d68148498caa2ce0f",
+            "type": "tree",
+            "bytes": 3250
+          },
+          {
+            "oid": "786756d8e9ae050b1193b0d60bdd3eac43cd6d99",
+            "type": "tree",
+            "bytes": 1563
+          },
+          {
+            "oid": "a8451c0a5f8cc35523782599f12b02cdbc08eddc",
+            "type": "blob",
+            "bytes": 866984
+          },
+          {
+            "oid": "bae64abefb066e3932b84b1cde3caed951cdb21e",
+            "type": "tree",
+            "bytes": 1137
+          },
+          {
+            "oid": "c8daeba7547de0e3f7ded9be7cd7594932fa9b59",
+            "type": "blob",
+            "bytes": 39817093
+          },
+          {
+            "oid": "e5e225b0e26f7ddcbdcebd35c725d7e48ec08c28",
+            "type": "commit",
+            "bytes": 230
+          },
+          {
+            "oid": "f4db8054e813d342d3244765e9a3715a025dafc2",
+            "type": "tree",
+            "bytes": 1717
+          },
+          {
+            "oid": "f9bb999555de843b628312b6bb15a633847c0d26",
+            "type": "tree",
+            "bytes": 594
+          }
+        ]
+      },
+      "changedPaths": [
+        "docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-first-creator.json",
+        "docs/migration/lot5a-evidence/performance/owner-growth-review.json"
+      ],
+      "nonDeferredPathsExactlyMatchTarget": true,
+      "remainingDeferredPaths": [
+        "docs/migration/lot5a-evidence/performance/owner-structural-attribution-v2.json",
+        "docs/migration/lot5a-evidence/performance/shared-fragment-premeasurement-supplement.json"
+      ]
+    },
+    {
+      "step": 5,
+      "kind": "evidence",
+      "previousCommit": "e5e225b0e26f7ddcbdcebd35c725d7e48ec08c28",
+      "commit": "3635275a96b092add8f70b813ba0d8c1f23eceb7",
+      "tree": "25b952f6c6c91f82fbd17fb1496b0a3d78f28ef3",
+      "parents": [
+        "e5e225b0e26f7ddcbdcebd35c725d7e48ec08c28"
+      ],
+      "rawMissingObjectBytes": 7805607,
+      "missingObjects": {
+        "count": 8,
+        "rawBytes": 7805607,
+        "byType": {
+          "tree": {
+            "count": 5,
+            "bytes": 14349
+          },
+          "commit": {
+            "count": 1,
+            "bytes": 230
+          },
+          "blob": {
+            "count": 2,
+            "bytes": 7791028
+          }
+        },
+        "inventorySha256": "95f90525ab41271b04850810c074ab2bbb6d079f867b37cdadefb03aa6d515b8",
+        "objects": [
+          {
+            "oid": "25b952f6c6c91f82fbd17fb1496b0a3d78f28ef3",
+            "type": "tree",
+            "bytes": 1137
+          },
+          {
+            "oid": "3635275a96b092add8f70b813ba0d8c1f23eceb7",
+            "type": "commit",
+            "bytes": 230
+          },
+          {
+            "oid": "3bd001dde62a11a03dbb26aa3b764f43e1bddea7",
+            "type": "tree",
+            "bytes": 1717
+          },
+          {
+            "oid": "657eb9ad6308f5c1e1a3f10d657cede2fbb5f403",
+            "type": "blob",
+            "bytes": 3988757
+          },
+          {
+            "oid": "785e6f1d054c4f8ce4fe39dbccf6275e9de11859",
+            "type": "blob",
+            "bytes": 3802271
+          },
+          {
+            "oid": "e51b7fa566c0170617e6c618e5c7b385e400a3af",
+            "type": "tree",
+            "bytes": 3388
+          },
+          {
+            "oid": "e6610d7e40f7f1ca5f7ae2724fc4b9aa2df5703e",
+            "type": "tree",
+            "bytes": 1563
+          },
+          {
+            "oid": "f0438f7c38307a5d84ddc420ad67657c794b2cf3",
+            "type": "tree",
+            "bytes": 6544
+          }
+        ]
+      },
+      "changedPaths": [
+        "docs/migration/lot5a-evidence/performance/owner-structural-attribution-v2.json",
+        "docs/migration/lot5a-evidence/performance/shared-fragment-premeasurement-supplement.json"
+      ],
+      "nonDeferredPathsExactlyMatchTarget": true,
+      "remainingDeferredPaths": []
+    },
+    {
+      "step": 6,
+      "kind": "final_history_merge",
+      "previousCommit": "3635275a96b092add8f70b813ba0d8c1f23eceb7",
+      "commit": "480002e4740040332a5eba46457a673e4458eb71",
+      "tree": "25b952f6c6c91f82fbd17fb1496b0a3d78f28ef3",
+      "parents": [
+        "3635275a96b092add8f70b813ba0d8c1f23eceb7",
+        "33d91ef1b8a6343c554b5c18beacd051816e11b9"
+      ],
+      "rawMissingObjectBytes": 211138,
+      "missingObjects": {
+        "count": 17,
+        "rawBytes": 211138,
+        "byType": {
+          "commit": {
+            "count": 6,
+            "bytes": 1968
+          },
+          "tree": {
+            "count": 10,
+            "bytes": 72313
+          },
+          "blob": {
+            "count": 1,
+            "bytes": 136857
+          }
+        },
+        "inventorySha256": "466644e3ceafc202f3e1f8481f4e24834120b49b22620230b666248ebce7bbbd",
+        "objects": [
+          {
+            "oid": "0544f588baf4c6cb04db361574b65ce9e4cf1cb3",
+            "type": "commit",
+            "bytes": 364
+          },
+          {
+            "oid": "0a8a6a5191c7bb2f4f746ceb6913b268e33acb30",
+            "type": "tree",
+            "bytes": 8470
+          },
+          {
+            "oid": "0cb9edbe15947b07e04036f1648585783cf4279a",
+            "type": "tree",
+            "bytes": 1084
+          },
+          {
+            "oid": "1dbd50e412f2ecd4bc9d83a1fdacd8382aee7b56",
+            "type": "blob",
+            "bytes": 136857
+          },
+          {
+            "oid": "33d91ef1b8a6343c554b5c18beacd051816e11b9",
+            "type": "commit",
+            "bytes": 280
+          },
+          {
+            "oid": "3654ffd105f8ebfa503d255e0f872c15997f62c2",
+            "type": "commit",
+            "bytes": 355
+          },
+          {
+            "oid": "3bf82845868fb792151064d1abcfedbf97bbfd21",
+            "type": "tree",
+            "bytes": 700
+          },
+          {
+            "oid": "4546ed863ed3d559912a455fc97b1c5ca00ba60b",
+            "type": "tree",
+            "bytes": 12311
+          },
+          {
+            "oid": "480002e4740040332a5eba46457a673e4458eb71",
+            "type": "commit",
+            "bytes": 317
+          },
+          {
+            "oid": "786458a656f04c9c82c497f7f586f82b5292aac4",
+            "type": "tree",
+            "bytes": 12050
+          },
+          {
+            "oid": "7bbed39a5f70699f91b9edc8c70e2fed7bc60e55",
+            "type": "tree",
+            "bytes": 13486
+          },
+          {
+            "oid": "81c9065ae1639871bbb8449acdb8213b19b22eb1",
+            "type": "tree",
+            "bytes": 1137
+          },
+          {
+            "oid": "83d483d1a3bd8ea6e1dc8c03e868502ff9a7e0bc",
+            "type": "tree",
+            "bytes": 1137
+          },
+          {
+            "oid": "9919b9923974eacd97b677e014c3b212b0894d63",
+            "type": "tree",
+            "bytes": 1137
+          },
+          {
+            "oid": "b5024f6888f29507fd92913d619a5e6ad33d097e",
+            "type": "commit",
+            "bytes": 288
+          },
+          {
+            "oid": "bc19974c910711f20385d9a40168a0927ec22057",
+            "type": "commit",
+            "bytes": 364
+          },
+          {
+            "oid": "dc72910403a029f8015324c2ef26533039ac3b71",
+            "type": "tree",
+            "bytes": 20801
+          }
+        ]
+      },
+      "changedPaths": [],
+      "nonDeferredPathsExactlyMatchTarget": true,
+      "remainingDeferredPaths": []
+    }
+  ],
+  "createdCommitObjects": [
+    "c8ae9b0668a001d7b15acc52a80f10c60b0f0ede",
+    "0ab6fdda85811eeff28bfbae38a6f1bab7fd5dbb",
+    "70bebab972a59d4bb5d60b6c6278576a767fd61d",
+    "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+    "e5e225b0e26f7ddcbdcebd35c725d7e48ec08c28",
+    "3635275a96b092add8f70b813ba0d8c1f23eceb7",
+    "480002e4740040332a5eba46457a673e4458eb71"
+  ],
+  "pushesPerformed": 0,
+  "siteDeploymentsPerformed": 0,
+  "forcePush": false,
+  "intermediateSiteDeployment": false,
+  "branchUpdatesPerformed": 0,
+  "qualification": "Raw bounds include all newly reachable commits, trees and blobs from every parent. They are not observed network pack sizes. The published base is supplied by the operator; no remote lookup, credential access, push, package or deployment is performed.",
+  "executionNotes": [
+    "Execute only a plan with status planned_not_pushed and checkoutUnchanged true.",
+    "Keep this plan and every helper archive outside the checkout.",
+    "Starting at the clean original HEAD, use a complete detached checkout of each step.commit, in order. Do not use an index-only reset/read-tree: future proof files left untracked would be staged by the standard helper.",
+    "A complete checkout removes tracked future proof files absent from that step. All non-deferred paths, including the final .gitignore and source/test/build inputs, are already final from step 1.",
+    "Before each standard Sites helper call, verify actual HEAD and tree equal that step and the tracked/untracked status is clean. Never force-add the separately listed ignored raw evidence.",
+    "The standard helper pushes current HEAD normally to remote main and verifies the remote result. Advance only after success; stop if the remote no longer matches the planned predecessor. Never force-push.",
+    "Run the Sites deployment only after the final helper source push. Intermediate helper source/archive calls must not be followed by an intermediate Site deployment.",
+    "The planner leaves the original branch untouched. Planned commit objects have no new refs; keep this plan and execute before pruning unreachable objects. The final commit directly retains the original HEAD."
+  ],
+  "checkoutBefore": {
+    "head": "33d91ef1b8a6343c554b5c18beacd051816e11b9",
+    "symbolicHead": "refs/heads/lot5-linked-temporal-and-delta",
+    "index": {
+      "path": ".git/index",
+      "bytes": 1179663,
+      "sha256": "a7b125330e3ed9fd1bfa870f75d104aa078350ca771c218d13cbef0739deacf8"
+    },
+    "refsSha256": "be23d0b489cd30edda045c3463e7ffc1f0bcfe85e88a8995c815461bfdbfff7b",
+    "statusBytes": 0,
+    "statusSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "publishedBaseCommit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+  "retainedTargetCommit": "33d91ef1b8a6343c554b5c18beacd051816e11b9",
+  "originalHead": "33d91ef1b8a6343c554b5c18beacd051816e11b9",
+  "targetTree": "25b952f6c6c91f82fbd17fb1496b0a3d78f28ef3",
+  "publishedBaseIsAncestorOfOriginalHead": true,
+  "ignoredUntrackedEvidence": [
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz",
+      "bytes": 1924691,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz",
+      "bytes": 3732748,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz",
+      "bytes": 9452737,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz",
+      "bytes": 4978068,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz",
+      "bytes": 2990968,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz",
+      "bytes": 12325547,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz",
+      "bytes": 15388053,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/source-archive.tar.gz",
+      "bytes": 1771485,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive.tar.gz",
+      "bytes": 1771485,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz",
+      "bytes": 4755121,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz",
+      "bytes": 6820472,
+      "symlink": false,
+      "includedInTarget": false
+    }
+  ],
+  "criticalPaths": [
+    ".gitignore",
+    "docs/migration/lot5a-evidence/README.md",
+    "docs/migration/lot5a-evidence/baseline/published-predecessor.json",
+    "docs/migration/lot5a-evidence/baseline/source-manifest.json",
+    "docs/migration/lot5a-evidence/capture-cost-owner-graphs.mjs",
+    "docs/migration/lot5a-evidence/check-cost-static-inputs.py",
+    "docs/migration/lot5a-evidence/consolidate-owner-costs-directory-v1.mjs",
+    "docs/migration/lot5a-evidence/consolidate-owner-costs.mjs",
+    "docs/migration/lot5a-evidence/declare-cost-directory-correction.py",
+    "docs/migration/lot5a-evidence/declare-shared-fragment-supplement.py",
+    "docs/migration/lot5a-evidence/diagnose-cost-fragment-reuse.py",
+    "docs/migration/lot5a-evidence/diagnose-cost-shared-fragment.py",
+    "docs/migration/lot5a-evidence/diagnostic/blocking-and-registration-tests.json",
+    "docs/migration/lot5a-evidence/diagnostic/blocking-and-registration-tests.tap",
+    "docs/migration/lot5a-evidence/diagnostic/bounded-transport-planner-adaptation.json",
+    "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/attempt-review.json",
+    "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt1.execution.json",
+    "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt1.log",
+    "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt2.execution.json",
+    "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt2.log",
+    "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt3.execution.json",
+    "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt3.log",
+    "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/script-attempt1.mjs",
+    "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/script-attempt2.mjs",
+    "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/script-attempt3.mjs",
+    "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/source-manifest.json",
+    "docs/migration/lot5a-evidence/diagnostic/cost-renderer-adaptation.json",
+    "docs/migration/lot5a-evidence/diagnostic/cost-renderer-directory-description.json",
+    "docs/migration/lot5a-evidence/diagnostic/cost-renderer-owner-labels.json",
+    "docs/migration/lot5a-evidence/diagnostic/delivery-verifier-path-failure.json",
+    "docs/migration/lot5a-evidence/diagnostic/finalize-cost-readiness-initial.py",
+    "docs/migration/lot5a-evidence/diagnostic/frontier-delta-review.json",
+    "docs/migration/lot5a-evidence/diagnostic/frontier-snapshot-targeted-tests-initial.tap",
+    "docs/migration/lot5a-evidence/diagnostic/initial-typecheck.log",
+    "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-inputs-after.sha256",
+    "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-inputs-before.sha256",
+    "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-tests.stderr.log",
+    "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-tests.tap",
+    "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-typecheck.log",
+    "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-validation.json",
+    "docs/migration/lot5a-evidence/diagnostic/linked-temporal-development.json",
+    "docs/migration/lot5a-evidence/diagnostic/mixed-path-targeted-tests.tap",
+    "docs/migration/lot5a-evidence/diagnostic/mixed-path-test-development.json",
+    "docs/migration/lot5a-evidence/diagnostic/performance-targeted-tests.tap",
+    "docs/migration/lot5a-evidence/diagnostic/readiness-initial-failure.json",
+    "docs/migration/lot5a-evidence/diagnostic/runtime-store-targeted-tests.tap",
+    "docs/migration/lot5a-evidence/diagnostic/source-oracle-export.json",
+    "docs/migration/lot5a-evidence/diagnostic/transfer-map-application.json",
+    "docs/migration/lot5a-evidence/diagnostic/validation-correction.json",
+    "docs/migration/lot5a-evidence/diagnostic/write-cost-results-before-directory-description.py",
+    "docs/migration/lot5a-evidence/diagnostic/write-cost-results-before-owner-labels.py",
+    "docs/migration/lot5a-evidence/final/browser/browser-qa.json",
+    "docs/migration/lot5a-evidence/final/delivery-integrity.json",
+    "docs/migration/lot5a-evidence/final/evidence-byte-transport.json",
+    "docs/migration/lot5a-evidence/final/evidence-index.json",
+    "docs/migration/lot5a-evidence/final/functional-block-review.json",
+    "docs/migration/lot5a-evidence/final/linked-temporal-common-loop-execution.json",
+    "docs/migration/lot5a-evidence/final/linked-temporal-common-loop.log",
+    "docs/migration/lot5a-evidence/final/log-preservation.json",
+    "docs/migration/lot5a-evidence/final/preflight.json",
+    "docs/migration/lot5a-evidence/final/publication-inputs.json",
+    "docs/migration/lot5a-evidence/final/published-predecessor-reconciliation.json",
+    "docs/migration/lot5a-evidence/final/regression-baselines-restore-execution.json",
+    "docs/migration/lot5a-evidence/final/regression-baselines-restore.log",
+    "docs/migration/lot5a-evidence/final/regression-driver-execution.json",
+    "docs/migration/lot5a-evidence/final/regression-driver-started.json",
+    "docs/migration/lot5a-evidence/final/regression-driver.log",
+    "docs/migration/lot5a-evidence/final/regression-evidence-pack-execution.json",
+    "docs/migration/lot5a-evidence/final/regression-evidence-parts.json",
+    "docs/migration/lot5a-evidence/final/regressions/catr-052-comparison.json",
+    "docs/migration/lot5a-evidence/final/regressions/catr-052-execution-started.json",
+    "docs/migration/lot5a-evidence/final/regressions/catr-052-execution.json",
+    "docs/migration/lot5a-evidence/final/regressions/catr-052-host-preparation.json",
+    "docs/migration/lot5a-evidence/final/regressions/catr-052-output.log.gz",
+    "docs/migration/lot5a-evidence/final/regressions/catr-052-output.raw.log",
+    "docs/migration/lot5a-evidence/final/regressions/catr-052-passive-owner-presence.json",
+    "docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz.part002",
+    "docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz.parts.json",
+    "docs/migration/lot5a-evidence/final/regressions/conn-052-comparison.json",
+    "docs/migration/lot5a-evidence/final/regressions/conn-052-execution-started.json",
+    "docs/migration/lot5a-evidence/final/regressions/conn-052-execution.json",
+    "docs/migration/lot5a-evidence/final/regressions/conn-052-host-preparation.json",
+    "docs/migration/lot5a-evidence/final/regressions/conn-052-output.log.gz",
+    "docs/migration/lot5a-evidence/final/regressions/conn-052-output.raw.log",
+    "docs/migration/lot5a-evidence/final/regressions/conn-052-passive-owner-presence.json",
+    "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.part004",
+    "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.parts.json",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-comparison.json",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-execution-started.json",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-execution.json",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-host-preparation.json",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-output.log.gz",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-output.raw.log",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-passive-owner-presence.json",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.parts.json",
+    "docs/migration/lot5a-evidence/final/regressions/mind-052-comparison.json",
+    "docs/migration/lot5a-evidence/final/regressions/mind-052-execution-started.json",
+    "docs/migration/lot5a-evidence/final/regressions/mind-052-execution.json",
+    "docs/migration/lot5a-evidence/final/regressions/mind-052-host-preparation.json",
+    "docs/migration/lot5a-evidence/final/regressions/mind-052-output.log.gz",
+    "docs/migration/lot5a-evidence/final/regressions/mind-052-output.raw.log",
+    "docs/migration/lot5a-evidence/final/regressions/mind-052-passive-owner-presence.json",
+    "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.parts.json",
+    "docs/migration/lot5a-evidence/final/regressions/regression-summary.json",
+    "docs/migration/lot5a-evidence/final/regressions/rswp-052-comparison.json",
+    "docs/migration/lot5a-evidence/final/regressions/rswp-052-execution-started.json",
+    "docs/migration/lot5a-evidence/final/regressions/rswp-052-execution.json",
+    "docs/migration/lot5a-evidence/final/regressions/rswp-052-host-preparation.json",
+    "docs/migration/lot5a-evidence/final/regressions/rswp-052-output.log.gz",
+    "docs/migration/lot5a-evidence/final/regressions/rswp-052-output.raw.log",
+    "docs/migration/lot5a-evidence/final/regressions/rswp-052-passive-owner-presence.json",
+    "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz.parts.json",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-comparison.json",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-execution-started.json",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-execution.json",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-host-preparation.json",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-output.log.gz",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-output.raw.log",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-passive-owner-presence.json",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.parts.json",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-comparison.json",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-execution-started.json",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-execution.json",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-host-preparation.json",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-output.log.gz",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-passive-owner-presence.json",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part017",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.parts.json",
+    "docs/migration/lot5a-evidence/final/source-archive-parts.json",
+    "docs/migration/lot5a-evidence/final/source-archive.json",
+    "docs/migration/lot5a-evidence/final/source-manifest.json",
+    "docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive-parts.json",
+    "docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive.json",
+    "docs/migration/lot5a-evidence/final/test-expectation-correction/source-manifest.json",
+    "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/build-output.log.gz",
+    "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/checks-run.json",
+    "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/delta-tests-output.log.gz",
+    "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/delta-tests-run.json",
+    "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/diff-check-output.log.gz",
+    "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/entry-audit-output.log.gz",
+    "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/migration-audit-output.log.gz",
+    "docs/migration/lot5a-evidence/final/test-expectation-correction/validation/typecheck-output.log.gz",
+    "docs/migration/lot5a-evidence/final/validation/build-output.log.gz",
+    "docs/migration/lot5a-evidence/final/validation/checks-run.json",
+    "docs/migration/lot5a-evidence/final/validation/delta-tests-output.log.gz",
+    "docs/migration/lot5a-evidence/final/validation/delta-tests-run.json",
+    "docs/migration/lot5a-evidence/final/validation/diff-check-output.log.gz",
+    "docs/migration/lot5a-evidence/final/validation/entry-audit-output.log.gz",
+    "docs/migration/lot5a-evidence/final/validation/migration-audit-output.log.gz",
+    "docs/migration/lot5a-evidence/final/validation/typecheck-output.log.gz",
+    "docs/migration/lot5a-evidence/finalize-cost-readiness.py",
+    "docs/migration/lot5a-evidence/finalize-owner-cost-contract.py",
+    "docs/migration/lot5a-evidence/owner-cost-contract.md",
+    "docs/migration/lot5a-evidence/performance/aggregation-failure.json",
+    "docs/migration/lot5a-evidence/performance/aggregation-failure.log",
+    "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part005",
+    "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.parts.json",
+    "docs/migration/lot5a-evidence/performance/baseline-structure.receipt.json",
+    "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.parts.json",
+    "docs/migration/lot5a-evidence/performance/candidate-structure.receipt.json",
+    "docs/migration/lot5a-evidence/performance/cases.json",
+    "docs/migration/lot5a-evidence/performance/cohort1/after.log",
+    "docs/migration/lot5a-evidence/performance/cohort1/after.log.gz",
+    "docs/migration/lot5a-evidence/performance/cohort1/baseline.log",
+    "docs/migration/lot5a-evidence/performance/cohort1/baseline.log.gz",
+    "docs/migration/lot5a-evidence/performance/cohort1/comparison.json",
+    "docs/migration/lot5a-evidence/performance/cohort1/comparison.log",
+    "docs/migration/lot5a-evidence/performance/cohort2/after.log",
+    "docs/migration/lot5a-evidence/performance/cohort2/after.log.gz",
+    "docs/migration/lot5a-evidence/performance/cohort2/baseline.log",
+    "docs/migration/lot5a-evidence/performance/cohort2/baseline.log.gz",
+    "docs/migration/lot5a-evidence/performance/cohort2/comparison.json",
+    "docs/migration/lot5a-evidence/performance/cohort2/comparison.log",
+    "docs/migration/lot5a-evidence/performance/comparison-policy.json",
+    "docs/migration/lot5a-evidence/performance/coordination.json",
+    "docs/migration/lot5a-evidence/performance/coordination/lot4b-status.json",
+    "docs/migration/lot5a-evidence/performance/coordination/lot7b-status.json",
+    "docs/migration/lot5a-evidence/performance/coordination/own-quiet-attestation.json",
+    "docs/migration/lot5a-evidence/performance/declaration.json",
+    "docs/migration/lot5a-evidence/performance/dependency-preparation-repair.json",
+    "docs/migration/lot5a-evidence/performance/diagnostic/final-cost-independent-review.json",
+    "docs/migration/lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-declaration.log",
+    "docs/migration/lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-v1.diff",
+    "docs/migration/lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-v1.json",
+    "docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-independent-review.json",
+    "docs/migration/lot5a-evidence/performance/diagnostic/static-preflight-initial-failure.json",
+    "docs/migration/lot5a-evidence/performance/diagnostic/static-preflight-initial-failure.log",
+    "docs/migration/lot5a-evidence/performance/exclusive-window-execution.json",
+    "docs/migration/lot5a-evidence/performance/exclusive-window-execution.log",
+    "docs/migration/lot5a-evidence/performance/global-budget-policy.json",
+    "docs/migration/lot5a-evidence/performance/initial-preparation-tools/capture-cost-owner-graphs.mjs",
+    "docs/migration/lot5a-evidence/performance/initial-preparation-tools/check-cost-static-inputs.py",
+    "docs/migration/lot5a-evidence/performance/initial-preparation-tools/consolidate-owner-costs.mjs",
+    "docs/migration/lot5a-evidence/performance/initial-preparation-tools/finalize-owner-cost-contract.py",
+    "docs/migration/lot5a-evidence/performance/initial-preparation-tools/manifest.json",
+    "docs/migration/lot5a-evidence/performance/initial-preparation-tools/owner-cost-contract.md",
+    "docs/migration/lot5a-evidence/performance/initial-preparation-tools/prepare-cost-protocol.py",
+    "docs/migration/lot5a-evidence/performance/initial-preparation-tools/qualify-cost-owner-graphs.mjs",
+    "docs/migration/lot5a-evidence/performance/initial-preparation-tools/record-owner-source-inventory.mjs",
+    "docs/migration/lot5a-evidence/performance/initial-preparation-tools/review-owner-costs.py",
+    "docs/migration/lot5a-evidence/performance/log-transport.json",
+    "docs/migration/lot5a-evidence/performance/log-transport.log",
+    "docs/migration/lot5a-evidence/performance/owner-contract-launch-failure.json",
+    "docs/migration/lot5a-evidence/performance/owner-growth-analysis-initial-failure.json",
+    "docs/migration/lot5a-evidence/performance/owner-growth-comparison-directory-v1.log",
+    "docs/migration/lot5a-evidence/performance/owner-growth-comparison.json",
+    "docs/migration/lot5a-evidence/performance/owner-growth-comparison.log",
+    "docs/migration/lot5a-evidence/performance/owner-growth-contract-finalization.log",
+    "docs/migration/lot5a-evidence/performance/owner-growth-contract.json",
+    "docs/migration/lot5a-evidence/performance/owner-growth-review-directory-v1.log",
+    "docs/migration/lot5a-evidence/performance/owner-source-inventory.json",
+    "docs/migration/lot5a-evidence/performance/owner-structural-attribution-v2.log",
+    "docs/migration/lot5a-evidence/performance/owner-structural-attribution.json",
+    "docs/migration/lot5a-evidence/performance/owner-structural-fixture.json",
+    "docs/migration/lot5a-evidence/performance/preparation.json",
+    "docs/migration/lot5a-evidence/performance/protocol-check.json",
+    "docs/migration/lot5a-evidence/performance/protocol.md",
+    "docs/migration/lot5a-evidence/performance/readiness-execution.json",
+    "docs/migration/lot5a-evidence/performance/readiness-execution.log",
+    "docs/migration/lot5a-evidence/performance/readiness.json",
+    "docs/migration/lot5a-evidence/performance/results-render.json",
+    "docs/migration/lot5a-evidence/performance/results-render.log",
+    "docs/migration/lot5a-evidence/performance/results.md",
+    "docs/migration/lot5a-evidence/performance/static-preflight.json",
+    "docs/migration/lot5a-evidence/performance/static-preflight.log",
+    "docs/migration/lot5a-evidence/performance/window.json",
+    "docs/migration/lot5a-evidence/plan-bounded-source-transport.py",
+    "docs/migration/lot5a-evidence/prepare-cost-protocol.py",
+    "docs/migration/lot5a-evidence/qualify-cost-owner-graphs-v2.mjs",
+    "docs/migration/lot5a-evidence/qualify-cost-owner-graphs.mjs",
+    "docs/migration/lot5a-evidence/record-cost-log-transport.py",
+    "docs/migration/lot5a-evidence/record-owner-source-inventory.mjs",
+    "docs/migration/lot5a-evidence/record-publication-inputs.py",
+    "docs/migration/lot5a-evidence/recorded-regression-cases-integrated.json",
+    "docs/migration/lot5a-evidence/review-owner-costs-directory-v1.py",
+    "docs/migration/lot5a-evidence/review-owner-costs.py",
+    "docs/migration/lot5a-evidence/run-release-checks.py",
+    "docs/migration/lot5a-evidence/shared-fragment-premeasurement-qualification.md",
+    "docs/migration/lot5a-evidence/transfer-map-additions.json",
+    "docs/migration/lot5a-evidence/weav/followup-clock.json",
+    "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/declaration.json",
+    "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/driver-execution.json",
+    "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/driver-output.raw.log",
+    "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/driver-started.json",
+    "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/heartbeat.json",
+    "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/partial-live-output.log.gz",
+    "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/partial-public-journal.jsonl.gz",
+    "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/result.json",
+    "docs/migration/lot5a-evidence/weav/native050-delta-diagnostic/source-manifest.json",
+    "docs/migration/lot5a-evidence/write-cost-results.py",
+    "docs/migration/lot5a-evidence/write-evidence-index.py",
+    "docs/migration/lot5a-linked-temporal-lineage.md",
+    "docs/migration/lot5a-linked-temporal-preparation.md",
+    "docs/migration/v6-coverage.json",
+    "docs/migration/v6-delivery-roadmap.md",
+    "docs/migration/v6-entry-point-progress.json",
+    "docs/migration/v6-native-transfer.md",
+    "migration/v6-transfer-map.json",
+    "scripts/export-v6-linked-preparation-reference.py",
+    "scripts/prove-linked-temporal-common-loop.mjs",
+    "src/logos-engine/kernel.ts",
+    "src/logos-engine/v6-crossed-prefix-access.ts",
+    "src/logos-engine/v6-knowledge-store.ts",
+    "src/logos-engine/v6-linked-temporal-common.ts",
+    "src/logos-engine/v6-linked-temporal-contact.ts",
+    "src/logos-engine/v6-linked-temporal-phase.ts",
+    "src/logos-engine/v6-linked-temporal-preparation.ts",
+    "src/logos-engine/v6-native-caller.ts",
+    "src/logos-engine/v6-native-runtime.ts",
+    "src/logos-engine/v6-observed-frontier.ts",
+    "tests/fixtures/v6-linked-preparation-reference.json.gz",
+    "tests/kernel-batch.test.ts",
+    "tests/v6-crossed-prefix-access.test.ts",
+    "tests/v6-frontier-native-snapshot.test.ts",
+    "tests/v6-linked-temporal-preparation.test.ts",
+    "tests/v6-linked-temporal-reference.test.ts",
+    "tests/v6-native-family-registration.test.ts",
+    "tests/v6-native-mixed-path.test.ts",
+    "tests/v6-radial-port-integration.test.ts",
+    "tests/v6-source-entry-routing.test.ts"
+  ],
+  "deferredProofPaths": [
+    "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt3.json.gz",
+    "docs/migration/lot5a-evidence/final/linked-temporal-common-loop.json.gz",
+    "docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz.part000",
+    "docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz.part001",
+    "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.part000",
+    "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.part001",
+    "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.part002",
+    "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz.part003",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part000",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part001",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part002",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part003",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part004",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part005",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part006",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part007",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part008",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part009",
+    "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz.part010",
+    "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part000",
+    "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part001",
+    "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part002",
+    "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part003",
+    "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part004",
+    "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz.part005",
+    "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz.part000",
+    "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz.part001",
+    "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz.part002",
+    "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz.part003",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part000",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part001",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part002",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part003",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part004",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part005",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part006",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part007",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part008",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part009",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part010",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part011",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part012",
+    "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz.part013",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-output.raw.log",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part000",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part001",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part002",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part003",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part004",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part005",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part006",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part007",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part008",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part009",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part010",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part011",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part012",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part013",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part014",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part015",
+    "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz.part016",
+    "docs/migration/lot5a-evidence/final/source-archive.tar.gz.part000",
+    "docs/migration/lot5a-evidence/final/source-archive.tar.gz.part001",
+    "docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive.tar.gz.part000",
+    "docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive.tar.gz.part001",
+    "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part000",
+    "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part001",
+    "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part002",
+    "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part003",
+    "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz.part004",
+    "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part000",
+    "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part001",
+    "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part002",
+    "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part003",
+    "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part004",
+    "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part005",
+    "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part006",
+    "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz.part007",
+    "docs/migration/lot5a-evidence/performance/cohort1/after.json",
+    "docs/migration/lot5a-evidence/performance/cohort1/baseline.json",
+    "docs/migration/lot5a-evidence/performance/cohort2/after.json",
+    "docs/migration/lot5a-evidence/performance/cohort2/baseline.json",
+    "docs/migration/lot5a-evidence/performance/diagnostic/fragment-first-creator-inventory.json",
+    "docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-first-creator.json",
+    "docs/migration/lot5a-evidence/performance/owner-growth-review.json",
+    "docs/migration/lot5a-evidence/performance/owner-structural-attribution-v2.json",
+    "docs/migration/lot5a-evidence/performance/shared-fragment-premeasurement-supplement.json"
+  ],
+  "deletedTargetPaths": [],
+  "originalTargetMissingObjects": {
+    "count": 386,
+    "rawBytes": 128874002,
+    "byType": {
+      "blob": {
+        "count": 344,
+        "bytes": 128714415
+      },
+      "commit": {
+        "count": 5,
+        "bytes": 1651
+      },
+      "tree": {
+        "count": 37,
+        "bytes": 157936
+      }
+    },
+    "inventorySha256": "bef7a50ae30499078f41d97f86f5bf5c384a02e98bcccb4724fa461655a375fd",
+    "objects": [
+      {
+        "oid": "008ce70b5d5c6c2be3cafe71b7b03709aa943f5b",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "01457fa3ad5ca693c3728afef7dc8b53d6a0596a",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "029c47734796145683b99a58eb64881bb533c7bf",
+        "type": "blob",
+        "bytes": 847
+      },
+      {
+        "oid": "02d8f79a96699a6ebb6ac8b6969b16a8ffd3d5d2",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "03a387591c4e75c82811c2f478935ed45a59987b",
+        "type": "blob",
+        "bytes": 8267
+      },
+      {
+        "oid": "0544f588baf4c6cb04db361574b65ce9e4cf1cb3",
+        "type": "commit",
+        "bytes": 364
+      },
+      {
+        "oid": "06530a66e2c2c279855bc4a417f8af23cb318d03",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "0671fbc8bdd66f24527f859be2896841fe273557",
+        "type": "blob",
+        "bytes": 31435
+      },
+      {
+        "oid": "0887834c4173cbe9dea058d6b44858f7b571f4c1",
+        "type": "blob",
+        "bytes": 178
+      },
+      {
+        "oid": "088d9b13f1c2c39613aa7a697044369aa92c385d",
+        "type": "blob",
+        "bytes": 1555
+      },
+      {
+        "oid": "096758fe52b97d70aa5123b2aa1b56474a024d34",
+        "type": "blob",
+        "bytes": 1239
+      },
+      {
+        "oid": "0a12079bb7817d0a0c5a5a8ace954311d115a803",
+        "type": "blob",
+        "bytes": 2651
+      },
+      {
+        "oid": "0a8a6a5191c7bb2f4f746ceb6913b268e33acb30",
+        "type": "tree",
+        "bytes": 8470
+      },
+      {
+        "oid": "0b3e6d7f399f3e135e408d3fcc32ae43e902fdb3",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "0b58d6a5d39ed7daafa778205d878e87fe273d95",
+        "type": "blob",
+        "bytes": 791
+      },
+      {
+        "oid": "0ba5f2caa18bccdd3fcdd6af468578128f168d6b",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "0c5b90af1836bd3d6ba4b16677fe1fa3b164a182",
+        "type": "blob",
+        "bytes": 2179
+      },
+      {
+        "oid": "0c68838d37a5c45ee0a7ce1889eeb74117d5c6d5",
+        "type": "blob",
+        "bytes": 23360
+      },
+      {
+        "oid": "0cb9edbe15947b07e04036f1648585783cf4279a",
+        "type": "tree",
+        "bytes": 1084
+      },
+      {
+        "oid": "0dafb94ec3abf52898dccbb69cc089d1efa4294f",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "0ded7386cb38bc1dfc1ca6a17c501d7f95f412d8",
+        "type": "blob",
+        "bytes": 7902
+      },
+      {
+        "oid": "0dfefb2ec39d514798e7aa73bdd96408fdca74f8",
+        "type": "blob",
+        "bytes": 395982
+      },
+      {
+        "oid": "0f1cd2044eba98fa27aa8b5efbb3fab330b68678",
+        "type": "blob",
+        "bytes": 437
+      },
+      {
+        "oid": "0ff74b0bf46223fae559fd2f2b62c2075c3bb37c",
+        "type": "blob",
+        "bytes": 3044
+      },
+      {
+        "oid": "10a31302014e8d60a837fee73b843d53f69afe33",
+        "type": "blob",
+        "bytes": 314
+      },
+      {
+        "oid": "10c2948c873be24b909303da047e19f58d10e9bf",
+        "type": "blob",
+        "bytes": 10997
+      },
+      {
+        "oid": "113860a00efaea10c0a62093b387b3f62e06824d",
+        "type": "blob",
+        "bytes": 11859
+      },
+      {
+        "oid": "11dbd86683c0f6fa9fe64226475e0eedc9754c34",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "122476930ef1efc52db16faf922c97fd1c59563c",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "124cbf0ea90b0ff3c46cecc08e1323e9e60a14d8",
+        "type": "blob",
+        "bytes": 1028
+      },
+      {
+        "oid": "1351eab5518296935eeb7cb8a2ad0c62b84a5577",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "139b2a484333ca8bbe87d690daa183a8035247c2",
+        "type": "blob",
+        "bytes": 11002
+      },
+      {
+        "oid": "13bd6f7bd929ee91a4baa62bd08a8c4b64565e5e",
+        "type": "blob",
+        "bytes": 28229
+      },
+      {
+        "oid": "13fc34698587c156baf96067acc5df3aaebd6fb9",
+        "type": "blob",
+        "bytes": 131114
+      },
+      {
+        "oid": "14111a5a61e98ecab3c5ca3b114d5ec29487ba4f",
+        "type": "blob",
+        "bytes": 1777
+      },
+      {
+        "oid": "14d132c1c9ae559a8d40817f6e20852892aec074",
+        "type": "blob",
+        "bytes": 273
+      },
+      {
+        "oid": "1526122993fa3079ae36aa9ee59ffb729d8d429e",
+        "type": "blob",
+        "bytes": 881
+      },
+      {
+        "oid": "1577868d1d6f161363acec6ab87ed744b277b79b",
+        "type": "tree",
+        "bytes": 431
+      },
+      {
+        "oid": "17a0ba24c7424a99ad6871c484e4b7034af5487c",
+        "type": "blob",
+        "bytes": 34974
+      },
+      {
+        "oid": "17eacd17f0ed377cd5be1405d6eac52de468e872",
+        "type": "blob",
+        "bytes": 55324
+      },
+      {
+        "oid": "18b2a5042662c60d706de2cec4a954583d3f9c7a",
+        "type": "blob",
+        "bytes": 1521
+      },
+      {
+        "oid": "190a691e65f40558f8f8cfe879bb94e187416b5b",
+        "type": "blob",
+        "bytes": 41090
+      },
+      {
+        "oid": "195b86944c362f8952b224188ed64d530d5f4e50",
+        "type": "blob",
+        "bytes": 4108930
+      },
+      {
+        "oid": "19b31eb751f09bfdc9ff5a65fb25adb29170b10e",
+        "type": "blob",
+        "bytes": 107797
+      },
+      {
+        "oid": "1a0639b6a9325f5485ff1e6a1779faa03561e6a9",
+        "type": "tree",
+        "bytes": 48
+      },
+      {
+        "oid": "1b8f9342681767ca72c3faed725273e98f167d1c",
+        "type": "blob",
+        "bytes": 430204
+      },
+      {
+        "oid": "1db4156233a76a91f40ba334ef1389c9db920718",
+        "type": "blob",
+        "bytes": 2258
+      },
+      {
+        "oid": "1dbd50e412f2ecd4bc9d83a1fdacd8382aee7b56",
+        "type": "blob",
+        "bytes": 136857
+      },
+      {
+        "oid": "1de7b4a6962c7ed57ed06e3aa3f1eb6cc32abe38",
+        "type": "tree",
+        "bytes": 13982
+      },
+      {
+        "oid": "1edaf66cd789083ec2b1821038e63a1aba8a6497",
+        "type": "blob",
+        "bytes": 200788
+      },
+      {
+        "oid": "1fae1161658dd6f975c2fb7b8fe50cae68d2013b",
+        "type": "blob",
+        "bytes": 12492
+      },
+      {
+        "oid": "20b900ba978bf1a621b5c1aaa92dc0a1e0c2c30f",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "219d50205bd339165ba92390f712302a5c007f5c",
+        "type": "blob",
+        "bytes": 1624
+      },
+      {
+        "oid": "2280306951f44efeb6d4e7d81663219dff2fa7ae",
+        "type": "blob",
+        "bytes": 1090
+      },
+      {
+        "oid": "2332f620522e778b4f626eb1487f9c43361a6d8a",
+        "type": "blob",
+        "bytes": 1089
+      },
+      {
+        "oid": "248b9f8954dd47d6dadad932e1787b35afa92d2a",
+        "type": "blob",
+        "bytes": 30482
+      },
+      {
+        "oid": "25b952f6c6c91f82fbd17fb1496b0a3d78f28ef3",
+        "type": "tree",
+        "bytes": 1137
+      },
+      {
+        "oid": "26ec616a5043ab6763271064baac96a69b849ca9",
+        "type": "blob",
+        "bytes": 19259
+      },
+      {
+        "oid": "2868536d5028040b7d775b86e03c47ae758c7169",
+        "type": "blob",
+        "bytes": 26258
+      },
+      {
+        "oid": "28bc5423c96c884ba74ac05af3bfd0d6c0daaa64",
+        "type": "blob",
+        "bytes": 429790
+      },
+      {
+        "oid": "295d1c55398e424c594348b1257a7ba64beb21f0",
+        "type": "blob",
+        "bytes": 20897
+      },
+      {
+        "oid": "29d9ac122c95fa96c29242bcf64e4aab930de395",
+        "type": "tree",
+        "bytes": 536
+      },
+      {
+        "oid": "2a334b673a603a04cb48c61b7640f63337591fae",
+        "type": "blob",
+        "bytes": 50598
+      },
+      {
+        "oid": "2acfa65eefc351ce66ad8575b6ebdc7346385c63",
+        "type": "blob",
+        "bytes": 9096
+      },
+      {
+        "oid": "2b91b243c39ff8cdd1e324e332c7ebe94c218ac4",
+        "type": "blob",
+        "bytes": 249277
+      },
+      {
+        "oid": "2c8694c9c9c4a61e3db0d7101ae01144e3a8c66c",
+        "type": "blob",
+        "bytes": 3020
+      },
+      {
+        "oid": "2cf47686f18a0b78924f5e485fd492471213a9c6",
+        "type": "blob",
+        "bytes": 34095
+      },
+      {
+        "oid": "2cff610763500e02a1d42d773e62888e2aa7b406",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "2d207f0238463afde332a2a096e2f04b9a0b9fb1",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "2e1568ffeef4bb5b29ffed4ce31f2ecc4061bbbe",
+        "type": "blob",
+        "bytes": 871485
+      },
+      {
+        "oid": "2ede1c4fcc466066f57dc436b2aeb3a79a5ddb87",
+        "type": "blob",
+        "bytes": 141
+      },
+      {
+        "oid": "2ff7c6f227f333796e31be27357bf1c9adc7acf2",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "316c0d266431ad354317fff13e7a043169a16a64",
+        "type": "blob",
+        "bytes": 32014
+      },
+      {
+        "oid": "321bc5ae76574ff9578d1b437f598d35733e3fd1",
+        "type": "blob",
+        "bytes": 1089
+      },
+      {
+        "oid": "322481c093bfc67f37d85b95e3794aa44b304918",
+        "type": "blob",
+        "bytes": 67816
+      },
+      {
+        "oid": "3378871bbc9bd940e194fc78bf0cca342a1a4fa0",
+        "type": "tree",
+        "bytes": 12311
+      },
+      {
+        "oid": "33d91ef1b8a6343c554b5c18beacd051816e11b9",
+        "type": "commit",
+        "bytes": 280
+      },
+      {
+        "oid": "353a7a2f602d08ef42cba51de7d5321d5a755174",
+        "type": "tree",
+        "bytes": 43
+      },
+      {
+        "oid": "3654ffd105f8ebfa503d255e0f872c15997f62c2",
+        "type": "commit",
+        "bytes": 355
+      },
+      {
+        "oid": "36724368033c11603c6cab6c9091b1b39668081d",
+        "type": "blob",
+        "bytes": 20044
+      },
+      {
+        "oid": "377a21f2c22a2221d665c8bc41bdf1c87ca80cee",
+        "type": "blob",
+        "bytes": 7690
+      },
+      {
+        "oid": "3830e57ca1b6312793cde9e88266dbc881a813a2",
+        "type": "blob",
+        "bytes": 14280
+      },
+      {
+        "oid": "388d697dcfa8c1c7d3ccd27c177a7ab273d5938b",
+        "type": "blob",
+        "bytes": 104466
+      },
+      {
+        "oid": "3a2aafed08dfcd3598517a289c03b586d119402a",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "3a40c9055bdb36476e6b7fff181ffe1253d4f8eb",
+        "type": "blob",
+        "bytes": 1175
+      },
+      {
+        "oid": "3a5bb4f675a2948e91a7369f2641a1e68043bda9",
+        "type": "blob",
+        "bytes": 16360
+      },
+      {
+        "oid": "3aba0f511b6fb96776076d7d87a28c4e06930377",
+        "type": "blob",
+        "bytes": 15321
+      },
+      {
+        "oid": "3adf9d98c954ce477df3ec17e62f19d9a9170f4c",
+        "type": "blob",
+        "bytes": 310
+      },
+      {
+        "oid": "3ae836d81b896f07276c86417c34d31669403b17",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "3b1e80f46c858cb6a5cd8c4f8eadb8b385581f15",
+        "type": "blob",
+        "bytes": 43040
+      },
+      {
+        "oid": "3b538c4109dddbed0cbdd67a056e45dc99ac1a61",
+        "type": "blob",
+        "bytes": 8880
+      },
+      {
+        "oid": "3ba776d5d60b25c51a937d2b2fb20c3e4596b269",
+        "type": "blob",
+        "bytes": 33584
+      },
+      {
+        "oid": "3bd001dde62a11a03dbb26aa3b764f43e1bddea7",
+        "type": "tree",
+        "bytes": 1717
+      },
+      {
+        "oid": "3bf82845868fb792151064d1abcfedbf97bbfd21",
+        "type": "tree",
+        "bytes": 700
+      },
+      {
+        "oid": "3d8cb80539987a7094124b6f56abbd580cdb98e2",
+        "type": "blob",
+        "bytes": 13056
+      },
+      {
+        "oid": "3e8fc2cbe344228a5773606a64403fcd4975bc92",
+        "type": "blob",
+        "bytes": 57320
+      },
+      {
+        "oid": "3eecd8ea1f750e7ddffcb4a85c5396fdabdaff39",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "3f08d0dbe8549632e4316fa94ba612d60e1aa349",
+        "type": "blob",
+        "bytes": 18430
+      },
+      {
+        "oid": "3f493387a392b58f8bacf5f72060826db486c234",
+        "type": "blob",
+        "bytes": 88053
+      },
+      {
+        "oid": "3f7851ad466c0e16a8de54930ab7cd5b7cab6ab1",
+        "type": "blob",
+        "bytes": 122235
+      },
+      {
+        "oid": "3fbd11b9942f42164953613d37afa17a16bac0fa",
+        "type": "blob",
+        "bytes": 124691
+      },
+      {
+        "oid": "40d9bccbddeb0ca6b7b610ea65a72de553438a09",
+        "type": "blob",
+        "bytes": 39154
+      },
+      {
+        "oid": "40db184e1dda26787262ce8f1ee58989c4fb156b",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "413193c33e2d4d3b84aebf375bf3c06961e02fb6",
+        "type": "blob",
+        "bytes": 1636
+      },
+      {
+        "oid": "413cec89de975c697933cd055fa3a9ce1db090dd",
+        "type": "tree",
+        "bytes": 1859
+      },
+      {
+        "oid": "414b752c085f0cd42d99457f787cea3d3986809c",
+        "type": "blob",
+        "bytes": 2545610
+      },
+      {
+        "oid": "424c2527240b160432781c7b6beb055a319d85b5",
+        "type": "tree",
+        "bytes": 21065
+      },
+      {
+        "oid": "4260c3936a55a65d748bda240107aaf43adad633",
+        "type": "blob",
+        "bytes": 18723
+      },
+      {
+        "oid": "438213db20975f2a2fc4fdf09b95609306b6dc8e",
+        "type": "blob",
+        "bytes": 13396
+      },
+      {
+        "oid": "43958106575c3c7f885f5e93bc5606076a4c89ba",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "43dea5c2100d2868a17a012c6e70f805c79d8776",
+        "type": "blob",
+        "bytes": 41436
+      },
+      {
+        "oid": "44ae862e8dbbd562b95751d660a212f368554874",
+        "type": "blob",
+        "bytes": 478068
+      },
+      {
+        "oid": "4546ed863ed3d559912a455fc97b1c5ca00ba60b",
+        "type": "tree",
+        "bytes": 12311
+      },
+      {
+        "oid": "45e645d0f0806f66eb28cddc25bc916305798446",
+        "type": "tree",
+        "bytes": 8762
+      },
+      {
+        "oid": "4644972e47f0be05c03d2c6e9be29c35c733c5f6",
+        "type": "blob",
+        "bytes": 3367
+      },
+      {
+        "oid": "47e7aae845586fc1779915f4b172ed512d95e3a1",
+        "type": "blob",
+        "bytes": 11005
+      },
+      {
+        "oid": "48190761c1677cd5af75642ffb3d3ef5d2abd47e",
+        "type": "blob",
+        "bytes": 12363
+      },
+      {
+        "oid": "4977cc9207da928e015a260896c775e1b452eb7a",
+        "type": "blob",
+        "bytes": 3434
+      },
+      {
+        "oid": "4978b57504275ffc8e0a9e744df260846234029c",
+        "type": "blob",
+        "bytes": 113
+      },
+      {
+        "oid": "4a40cbe3858858fa7c550f3c9d976377df7b9022",
+        "type": "blob",
+        "bytes": 11498
+      },
+      {
+        "oid": "4b1ec8161941daee2f8be4243936d73a6dcaceb0",
+        "type": "blob",
+        "bytes": 2696
+      },
+      {
+        "oid": "4bf7be55a89a81f82c989f9c09b127664100b3fe",
+        "type": "blob",
+        "bytes": 297
+      },
+      {
+        "oid": "4c10528d36ab0c56f2341e22e60ef54bcfe8762a",
+        "type": "blob",
+        "bytes": 1089
+      },
+      {
+        "oid": "4c3eaa9a28a72fe23ccd09f8e256766c5ed35a60",
+        "type": "blob",
+        "bytes": 930
+      },
+      {
+        "oid": "4d1064b301293beb71be19dd9942ef19003fcfae",
+        "type": "blob",
+        "bytes": 6960
+      },
+      {
+        "oid": "4d24bf315eb0bc521254209440e4b4952031a2a4",
+        "type": "blob",
+        "bytes": 12555
+      },
+      {
+        "oid": "4f31532ee0589bff647c9f436aaec9d70c17c336",
+        "type": "tree",
+        "bytes": 324
+      },
+      {
+        "oid": "4f9d318d89daf503333ad441336115e41387a7a7",
+        "type": "blob",
+        "bytes": 893
+      },
+      {
+        "oid": "4facd168573cde761e51f5cbe2b964e3872b331a",
+        "type": "tree",
+        "bytes": 324
+      },
+      {
+        "oid": "5010268daaf1705733380e2b9c81f57e6f78e35b",
+        "type": "blob",
+        "bytes": 4212
+      },
+      {
+        "oid": "50434189260c5b2f45f502bf729a5a66fab9f146",
+        "type": "blob",
+        "bytes": 2781
+      },
+      {
+        "oid": "51bf02c1268602084e776c0475daa9ca64236f93",
+        "type": "blob",
+        "bytes": 3164
+      },
+      {
+        "oid": "52b7c3f32d7ef58a1423736fd597aa716657062f",
+        "type": "blob",
+        "bytes": 9526
+      },
+      {
+        "oid": "53b4101c839fba1101283d7403221066ec1f31a0",
+        "type": "blob",
+        "bytes": 1089
+      },
+      {
+        "oid": "54d898b1e379f22c53e350cd1d6932e7dd94492f",
+        "type": "blob",
+        "bytes": 40967
+      },
+      {
+        "oid": "55e8bb0e71122a79c90c083d12831897b16e29c1",
+        "type": "blob",
+        "bytes": 309
+      },
+      {
+        "oid": "576b3f48d04d9c5b8fcab31edbf775cde473936d",
+        "type": "blob",
+        "bytes": 9695
+      },
+      {
+        "oid": "57c0d8fec66f418e35ec6b3cb03f8dbb02fbed8a",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "57fc9745d6438d363552a4fd291e2983d2c409ad",
+        "type": "blob",
+        "bytes": 210
+      },
+      {
+        "oid": "59c3df438d57aebbe77886bb71976fcef08b9659",
+        "type": "blob",
+        "bytes": 204708
+      },
+      {
+        "oid": "5ac5a423c3682de2385fdd1b3cd2aaa6deb8cf5a",
+        "type": "blob",
+        "bytes": 36744
+      },
+      {
+        "oid": "5e08983c2920f13528442f99bcdeaebcf877b99d",
+        "type": "blob",
+        "bytes": 3016
+      },
+      {
+        "oid": "5e0da5d4a5e3817ff7456e7c6c97a763e6c88397",
+        "type": "blob",
+        "bytes": 442
+      },
+      {
+        "oid": "5e7059a7f8f14b70a3c2429cd62890463c5e9763",
+        "type": "blob",
+        "bytes": 1371
+      },
+      {
+        "oid": "5e8f8702fa51841197b5eb712d6372c7d572fe81",
+        "type": "blob",
+        "bytes": 5725
+      },
+      {
+        "oid": "5f857b12d4fd6e16d37f2bb577a645f833be260f",
+        "type": "blob",
+        "bytes": 1372
+      },
+      {
+        "oid": "6090f24d235ecc957464afff91b42f719ccf8550",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "60b349617ef7194624b6e43a8fd76709410fa5df",
+        "type": "blob",
+        "bytes": 1183
+      },
+      {
+        "oid": "6190b389ff0de9e2d1e58a44e00db65812516787",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "61ed905eb8ffd706ecb02558174a4ec16b842d9f",
+        "type": "blob",
+        "bytes": 1172
+      },
+      {
+        "oid": "63298b357b214875e0172d97e3f37fbd159a05d8",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "6380b1703406a7de02adfd1ca00ee857bc2344db",
+        "type": "blob",
+        "bytes": 24498
+      },
+      {
+        "oid": "64172be64aafdae9e446e2e9d44738a14e9e88da",
+        "type": "blob",
+        "bytes": 36942
+      },
+      {
+        "oid": "64fc689b65a7b209fb205cdf7ad6e6456a37ccdc",
+        "type": "blob",
+        "bytes": 22325
+      },
+      {
+        "oid": "657eb9ad6308f5c1e1a3f10d657cede2fbb5f403",
+        "type": "blob",
+        "bytes": 3988757
+      },
+      {
+        "oid": "65c6f0bf465fc7bea0b38c3d10da920a5b320fa0",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "664b08c55d071e6dfa06b2b4526a6df65ad58e92",
+        "type": "blob",
+        "bytes": 21680
+      },
+      {
+        "oid": "665d7f8416cbc52ae078698abb716fca59088f4f",
+        "type": "blob",
+        "bytes": 5595
+      },
+      {
+        "oid": "66a435033498b515d7e4481f7b14ccfd87c5ab82",
+        "type": "blob",
+        "bytes": 40188
+      },
+      {
+        "oid": "66adaab7abebe665d9f20eac2bb5a1d4dc4940a8",
+        "type": "blob",
+        "bytes": 165041
+      },
+      {
+        "oid": "66e13ed52d7e9e6712e1ea26d64ed0683691dd6e",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "673f4c62e8e4ba298ca2796cacaa35ff640274ee",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "67933b9926b4ad86688cd73f4f5734f1a3052960",
+        "type": "blob",
+        "bytes": 708
+      },
+      {
+        "oid": "67fe6b3e4717351c35e6fd0630419d68fd3ff20b",
+        "type": "blob",
+        "bytes": 3023
+      },
+      {
+        "oid": "6800fe2b897523aadc33dd2df465e773cc0e99a1",
+        "type": "blob",
+        "bytes": 10145
+      },
+      {
+        "oid": "6882618203c2dc979ba38cf18474e64f6223f4f5",
+        "type": "blob",
+        "bytes": 27111
+      },
+      {
+        "oid": "689729fa86243748432e1c67b14caffd8e9f5395",
+        "type": "blob",
+        "bytes": 2922
+      },
+      {
+        "oid": "68ffaed8917137b48f5f12e06fe0ff73c7c7228a",
+        "type": "blob",
+        "bytes": 5497
+      },
+      {
+        "oid": "6ac24e9165e61015ff74e2c2f5818e9606bf6eff",
+        "type": "blob",
+        "bytes": 231
+      },
+      {
+        "oid": "6c5cc4168db2a474ead7e718df7323a4ea20f803",
+        "type": "blob",
+        "bytes": 1351
+      },
+      {
+        "oid": "6d7f47e69161bc15e334d44eca636cab7442759f",
+        "type": "blob",
+        "bytes": 8567
+      },
+      {
+        "oid": "6f36c738950a11d7a7ef0792544d339da5afce04",
+        "type": "blob",
+        "bytes": 290968
+      },
+      {
+        "oid": "7034fabd7d949d76f8dd4d78619baa387f3f3861",
+        "type": "blob",
+        "bytes": 625547
+      },
+      {
+        "oid": "7038d22a6b1c5c993598af8c94fba4c16092faf2",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "711ef18f354891f0a80f6db0ca6d33e69ace98e4",
+        "type": "blob",
+        "bytes": 12147
+      },
+      {
+        "oid": "7140b6f87393deaf2ff8c60236bda013a8f91484",
+        "type": "blob",
+        "bytes": 35215
+      },
+      {
+        "oid": "71d6c36799da3c1a4e7e293222e4c204e08a52d1",
+        "type": "blob",
+        "bytes": 1706
+      },
+      {
+        "oid": "742cb15b8144d6b433e92ae6eb5315f1d0e522ab",
+        "type": "blob",
+        "bytes": 22725
+      },
+      {
+        "oid": "7549fedeec4ab9c01b8e37bd240453951a2981ac",
+        "type": "blob",
+        "bytes": 321940
+      },
+      {
+        "oid": "75693db10443c27fd8ee41cb064d5aa68631935b",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "75d37472cd1093e597703305a42a8cea13db83f1",
+        "type": "blob",
+        "bytes": 3031
+      },
+      {
+        "oid": "75d4a1fdda68e5b6deae986350606655db5ea26c",
+        "type": "blob",
+        "bytes": 1156
+      },
+      {
+        "oid": "7635534fffdbb3f3d094b504a4b50bd3230f029f",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "76c05646e91868a32f54481a5735648bbc514ac9",
+        "type": "blob",
+        "bytes": 3799
+      },
+      {
+        "oid": "784123c3efcc5e5dc47b1b2d14c8500a0e79821d",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "785e6f1d054c4f8ce4fe39dbccf6275e9de11859",
+        "type": "blob",
+        "bytes": 3802271
+      },
+      {
+        "oid": "7860b46a32a83b4990ce15312eebd8850a53c2b4",
+        "type": "blob",
+        "bytes": 26450
+      },
+      {
+        "oid": "786458a656f04c9c82c497f7f586f82b5292aac4",
+        "type": "tree",
+        "bytes": 12050
+      },
+      {
+        "oid": "7a657277c6c5c503bfbdb522ac4270071a24e610",
+        "type": "blob",
+        "bytes": 5266
+      },
+      {
+        "oid": "7bbed39a5f70699f91b9edc8c70e2fed7bc60e55",
+        "type": "tree",
+        "bytes": 13486
+      },
+      {
+        "oid": "7bd58a28afc3e5fbc60d2d8b11e16081de2c294b",
+        "type": "blob",
+        "bytes": 1591
+      },
+      {
+        "oid": "7dd4a488a51c3ce63742ddd5abe28b43fd2b851f",
+        "type": "blob",
+        "bytes": 21543
+      },
+      {
+        "oid": "7e15a421ef273397a7a017d046cd082907a2882a",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "7e77882725562b5ad939f5b0a03f789ff63d7f0c",
+        "type": "blob",
+        "bytes": 10992
+      },
+      {
+        "oid": "7f0ac86e03330c02e9324972e2aac1d10b8d61b5",
+        "type": "blob",
+        "bytes": 3592
+      },
+      {
+        "oid": "81c9065ae1639871bbb8449acdb8213b19b22eb1",
+        "type": "tree",
+        "bytes": 1137
+      },
+      {
+        "oid": "81e995812d56d4d7920b92a48365b4624a782810",
+        "type": "blob",
+        "bytes": 3323
+      },
+      {
+        "oid": "823ef80e81f52950ba81b9588d3ea95020ace084",
+        "type": "blob",
+        "bytes": 20995
+      },
+      {
+        "oid": "82835f8f84c73e5e5de43a9824ca0f46f15e9b85",
+        "type": "blob",
+        "bytes": 28096
+      },
+      {
+        "oid": "82d348e5ab521d3b8547c07a989c8de3c31e5239",
+        "type": "blob",
+        "bytes": 1028
+      },
+      {
+        "oid": "833cb4a85489d33629a4a40510dec912ba8b127b",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "83d483d1a3bd8ea6e1dc8c03e868502ff9a7e0bc",
+        "type": "tree",
+        "bytes": 1137
+      },
+      {
+        "oid": "842019d880fd218585a0fd22094aa23cb097cbda",
+        "type": "blob",
+        "bytes": 74624
+      },
+      {
+        "oid": "8499ed741320b9237a7231a21e0cc7d41734ffac",
+        "type": "blob",
+        "bytes": 8348
+      },
+      {
+        "oid": "84f4b45b7b30482ea8870cc71c7a808e55d7b0ca",
+        "type": "blob",
+        "bytes": 406
+      },
+      {
+        "oid": "8509b132c5bbcf28bf5ca92c2e765f20720a4aef",
+        "type": "blob",
+        "bytes": 75352
+      },
+      {
+        "oid": "854bc2e7bef0f95097076ff40a024fc1e9f7ffa9",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "8732ebaec8dc2bac7bba0078af13a7dc85603598",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "874858937a7ef8483bb2bb59692b9e5aa4f0d55b",
+        "type": "blob",
+        "bytes": 3020
+      },
+      {
+        "oid": "8822c265ad6c249abb32b4014490e853f505677e",
+        "type": "blob",
+        "bytes": 4366
+      },
+      {
+        "oid": "8929f598f1f3acc718bc9bde268c16255abbcb6b",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "89cc5263f18236725da2217ddd3473bb1415000a",
+        "type": "tree",
+        "bytes": 144
+      },
+      {
+        "oid": "8a06f79db9418721f56549e6c21c11e1b7ccc0a3",
+        "type": "blob",
+        "bytes": 9703
+      },
+      {
+        "oid": "8af2b84eb852638078a283fa13e714854d7c10c4",
+        "type": "blob",
+        "bytes": 374
+      },
+      {
+        "oid": "8b7991db31d539e9007623dc99974f90af7cf725",
+        "type": "blob",
+        "bytes": 757
+      },
+      {
+        "oid": "8c065ad3fe64fcd23919c8b8e2610546f24be126",
+        "type": "blob",
+        "bytes": 429659
+      },
+      {
+        "oid": "8c2ef261e450b953801051c3485382244183a0ad",
+        "type": "blob",
+        "bytes": 141662
+      },
+      {
+        "oid": "8ca17a46e47b935677b2e0ab63d58abf0cd8e9a8",
+        "type": "blob",
+        "bytes": 108245
+      },
+      {
+        "oid": "8dea2dc6c5039abc90e3afe321d78a64c8fb08fc",
+        "type": "blob",
+        "bytes": 435
+      },
+      {
+        "oid": "8e2c9922e6c6cd3b469c5af4089745b779b34f0e",
+        "type": "blob",
+        "bytes": 1049
+      },
+      {
+        "oid": "8ec91204c5bfc4d9e4c7b0e8639a6d542f7c3961",
+        "type": "blob",
+        "bytes": 11482
+      },
+      {
+        "oid": "8f37ab075116ada4d8023323c64612ea9a28c2d1",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "8fa4b9ba27c0f1625dc6e6b7ddea6ad20c6448f7",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "903a824ecac4fbdf6ae3acd5699f9d3cdba87c37",
+        "type": "blob",
+        "bytes": 4735
+      },
+      {
+        "oid": "9118049be0f8b564fa47be1d33ab288c9ded1ffc",
+        "type": "blob",
+        "bytes": 72659
+      },
+      {
+        "oid": "9150ddf2bd462b046cbc3bc099ba993deba3d34f",
+        "type": "blob",
+        "bytes": 3034
+      },
+      {
+        "oid": "92850d53a1215e3d68aaa18073ec7f5d417e0eb4",
+        "type": "blob",
+        "bytes": 2220
+      },
+      {
+        "oid": "9286b22c0ffc4f45674e53687dd406d84a3ed0a4",
+        "type": "blob",
+        "bytes": 6762
+      },
+      {
+        "oid": "93081ad3877250b398da35a6c760b2e3f39f61ff",
+        "type": "blob",
+        "bytes": 24845
+      },
+      {
+        "oid": "9340ae3e064520168a3cfde0ee1fd645256c675d",
+        "type": "blob",
+        "bytes": 10739
+      },
+      {
+        "oid": "9438ec5339b7022384c5d04eaa22de59dd477e6f",
+        "type": "blob",
+        "bytes": 5876
+      },
+      {
+        "oid": "94b9ccc11c3fea8196d0f63fe2c27714f102f796",
+        "type": "blob",
+        "bytes": 88952
+      },
+      {
+        "oid": "954491c3c05bdd74809342e06514a4d692844c68",
+        "type": "blob",
+        "bytes": 3123
+      },
+      {
+        "oid": "955b2c29c361a6356f9cfeace6c7eb36878ba8ff",
+        "type": "blob",
+        "bytes": 1572
+      },
+      {
+        "oid": "96b0d27bdf92ec596318c1e3232c90a52c6d285d",
+        "type": "blob",
+        "bytes": 1423
+      },
+      {
+        "oid": "96dcf0f06111cde8374a43217a4740bbb449b2ff",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "98eb05df1eb0c1591865f9c1bab4d23a5c533476",
+        "type": "blob",
+        "bytes": 895
+      },
+      {
+        "oid": "990e0919e373bcd8f5aa7c0e3fa56baeb8b89975",
+        "type": "blob",
+        "bytes": 994
+      },
+      {
+        "oid": "9916a2b8ed2f567299fd6ede6a6945a6489c0ac4",
+        "type": "blob",
+        "bytes": 40259
+      },
+      {
+        "oid": "9919b9923974eacd97b677e014c3b212b0894d63",
+        "type": "tree",
+        "bytes": 1137
+      },
+      {
+        "oid": "9a89c90fd89a1433f8349b0a87a2a7d1ad84706e",
+        "type": "blob",
+        "bytes": 19890
+      },
+      {
+        "oid": "9b372e4116e0bb6ad0e1e70dfff5e8ea7b24a579",
+        "type": "blob",
+        "bytes": 38342
+      },
+      {
+        "oid": "9cd05eeebc1bb6809133e79a5d90b0a0e01401db",
+        "type": "blob",
+        "bytes": 19101
+      },
+      {
+        "oid": "9d1b6205e16861d5e0e97af5707f9acb4b00aed0",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "9d206f07eae3e10a8acbce7ace1294620a910d54",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "9d426bfe1339281596be643483bd15cb91afc15f",
+        "type": "blob",
+        "bytes": 719
+      },
+      {
+        "oid": "9df892435f0bd26946a29082b19580213eff3100",
+        "type": "tree",
+        "bytes": 100
+      },
+      {
+        "oid": "9e1815416fc46abda5ed76fcdbd57f8c0b8e6fd8",
+        "type": "blob",
+        "bytes": 121997
+      },
+      {
+        "oid": "9e9f37eff7f756f6ccd0451881e764879f9a0d66",
+        "type": "blob",
+        "bytes": 3288
+      },
+      {
+        "oid": "9fc852fd5889f9b3380549f3e49afb6f4e43dca3",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "a069227e6f79a0c7eead612da17c908fac5b301c",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "a15ce276c477f2dbc4f81175f0a487f3e23401bb",
+        "type": "blob",
+        "bytes": 107904
+      },
+      {
+        "oid": "a18b129a7017ea0d4b87172fc44a11e2b7e12917",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "a36bca4cc8208936312d0bb83496d996ec4c5506",
+        "type": "blob",
+        "bytes": 1422
+      },
+      {
+        "oid": "a5c96d16c2a60ded6527b62d831484240e6db408",
+        "type": "blob",
+        "bytes": 4149
+      },
+      {
+        "oid": "a6884bd8d2b07f857f3e25db5dd17da5485d5ca7",
+        "type": "blob",
+        "bytes": 9846
+      },
+      {
+        "oid": "a728a51c2fafa275410f3b7fe08fed05b31f9d83",
+        "type": "blob",
+        "bytes": 59963
+      },
+      {
+        "oid": "a76c9399c6262f6023e31350a2defa3fc55420f2",
+        "type": "blob",
+        "bytes": 146509
+      },
+      {
+        "oid": "a7da2581f9fcd636a1378737a51b534e3a239b25",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "a7f6f118fb76ed440c8c44cf32f355cc42b4b0fe",
+        "type": "blob",
+        "bytes": 205
+      },
+      {
+        "oid": "a8451c0a5f8cc35523782599f12b02cdbc08eddc",
+        "type": "blob",
+        "bytes": 866984
+      },
+      {
+        "oid": "a95922d3c875376a5687873f2e0f025013c14978",
+        "type": "blob",
+        "bytes": 452737
+      },
+      {
+        "oid": "a96775965211051d1d26c0b4b31030b1e906e557",
+        "type": "blob",
+        "bytes": 960
+      },
+      {
+        "oid": "a9f6af485c8dbb0f979540c143d5bafd7377a196",
+        "type": "blob",
+        "bytes": 6174
+      },
+      {
+        "oid": "aaa9056cadfd583b430472631e3a98a10775c9b4",
+        "type": "blob",
+        "bytes": 2989
+      },
+      {
+        "oid": "aabb6a469c87a9102970faa4b365d176dc0c7fae",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "abc04d1e1481edb02e18f08572da15889a6dd0b7",
+        "type": "blob",
+        "bytes": 234
+      },
+      {
+        "oid": "abffb45b80a121f1d9d22b3c1132b390b03f21c9",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "ac7665ee1170bb7f1aa7c655a815d7043ab58e18",
+        "type": "blob",
+        "bytes": 581
+      },
+      {
+        "oid": "ad7e3cb9aa3f69eb091ece0cbe62f30e0beab1ae",
+        "type": "blob",
+        "bytes": 77881
+      },
+      {
+        "oid": "ad90cbd07683ec570ce7f21ef01cce8f961cbaee",
+        "type": "blob",
+        "bytes": 173662
+      },
+      {
+        "oid": "aee531446dcb291069c5a941521517572f8abba9",
+        "type": "tree",
+        "bytes": 102
+      },
+      {
+        "oid": "af5391d180c57e823e202bcf32aedb9ffcb74568",
+        "type": "blob",
+        "bytes": 2690
+      },
+      {
+        "oid": "af63cb1c1dc5ed07d74c318e0e671998d69955b6",
+        "type": "blob",
+        "bytes": 794
+      },
+      {
+        "oid": "af67ccd1ed35a5dd88d2d62719c228b7348a6ae4",
+        "type": "tree",
+        "bytes": 700
+      },
+      {
+        "oid": "afa552e1a669f8f2d69822286fd5d05bc78622f0",
+        "type": "blob",
+        "bytes": 2787
+      },
+      {
+        "oid": "afeb6ee3afd64dd78467def63597e924a3c06759",
+        "type": "blob",
+        "bytes": 1723
+      },
+      {
+        "oid": "b01bb327ca5a714a8f57917dc7cdefdca0bd5cbe",
+        "type": "blob",
+        "bytes": 7609
+      },
+      {
+        "oid": "b066214186960e21c65ddd2ff12e7695c89cb5cf",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "b08017800c3ad056a46975788828212c23c7bb71",
+        "type": "blob",
+        "bytes": 10994
+      },
+      {
+        "oid": "b1ae6a9ad9746dd7c7ed6a3f97266a890b5ed600",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "b5024f6888f29507fd92913d619a5e6ad33d097e",
+        "type": "commit",
+        "bytes": 288
+      },
+      {
+        "oid": "b6fa7477d76034ac533b4a01c109b48502805a45",
+        "type": "blob",
+        "bytes": 13362
+      },
+      {
+        "oid": "b7c3ac96a6e61083f6863441093c391474bbe1f6",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "b882d40ad3650abbe26f9f2138dabc80acf12d2f",
+        "type": "blob",
+        "bytes": 1561
+      },
+      {
+        "oid": "b9226e7f87fa24cb6e284ba2a9ecee2be7cae9e8",
+        "type": "blob",
+        "bytes": 17620
+      },
+      {
+        "oid": "b9682ec3bd7b18d8f1ad8240d6c15efea4b276cf",
+        "type": "blob",
+        "bytes": 199708
+      },
+      {
+        "oid": "bad48aaf5623cfcbe77622ba2c308c9cbb649065",
+        "type": "blob",
+        "bytes": 10994
+      },
+      {
+        "oid": "bc19974c910711f20385d9a40168a0927ec22057",
+        "type": "commit",
+        "bytes": 364
+      },
+      {
+        "oid": "bc8370dd3e3253fa1bacedcee91895117c440129",
+        "type": "blob",
+        "bytes": 1090
+      },
+      {
+        "oid": "bcfbfb7020186abd17c7bb9a19378bf5f8d6dc86",
+        "type": "blob",
+        "bytes": 1591
+      },
+      {
+        "oid": "bfdb02da30130bac6093b96d7ffe4f7fe3651ce1",
+        "type": "blob",
+        "bytes": 860
+      },
+      {
+        "oid": "c0425c19014792777fce87f1a311b77cbb1f4d80",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "c12014558bdcc0ec32f758c5bd6d2c01cf80e9a6",
+        "type": "blob",
+        "bytes": 9647
+      },
+      {
+        "oid": "c1ebbe1e5510886778eff28279ead1065f3502c3",
+        "type": "blob",
+        "bytes": 2665
+      },
+      {
+        "oid": "c297f5046095ee46e3986014b56a34e3036c8058",
+        "type": "blob",
+        "bytes": 23637
+      },
+      {
+        "oid": "c2d40eed0f4e35ce75d98d6a97adc2b4d14b037b",
+        "type": "blob",
+        "bytes": 268724
+      },
+      {
+        "oid": "c32b02abaca614dbe7ca02deda94b4e391db5ca3",
+        "type": "blob",
+        "bytes": 30314
+      },
+      {
+        "oid": "c3d3fc8c38ca43e0b21cd010e8d158141e02f818",
+        "type": "tree",
+        "bytes": 6779
+      },
+      {
+        "oid": "c50422a9a53685a410d612c4201ca0567844f632",
+        "type": "blob",
+        "bytes": 32503
+      },
+      {
+        "oid": "c67ce041ac7ee31ac6ac691841530ff927fc5180",
+        "type": "blob",
+        "bytes": 11001
+      },
+      {
+        "oid": "c68341fc0fed42245983ddff861ab5bcb387050c",
+        "type": "blob",
+        "bytes": 2149
+      },
+      {
+        "oid": "c6d2853623efd15f487f2c96eea4054d14ae7df6",
+        "type": "blob",
+        "bytes": 43132
+      },
+      {
+        "oid": "c6ed74ce2094d27e197d6c89f9d1262b7fa1fc87",
+        "type": "blob",
+        "bytes": 3778
+      },
+      {
+        "oid": "c70b3edc3cded5bf78c49d1480aa31020912f568",
+        "type": "blob",
+        "bytes": 1089
+      },
+      {
+        "oid": "c8429c3af2feb93420f4fc7244f423f8d05e9231",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "c8ab94e7096652c83e6c45d74c166b71eb66d2fc",
+        "type": "blob",
+        "bytes": 2191
+      },
+      {
+        "oid": "c8daeba7547de0e3f7ded9be7cd7594932fa9b59",
+        "type": "blob",
+        "bytes": 39817093
+      },
+      {
+        "oid": "caaf05ef6de71121347d4df61594e5e986ae16db",
+        "type": "blob",
+        "bytes": 2282
+      },
+      {
+        "oid": "cc6477500ef583d075cfe3606f07fe5c6e0a6c33",
+        "type": "blob",
+        "bytes": 2184
+      },
+      {
+        "oid": "ce93d98083d4572508ce524542db4c926297aa45",
+        "type": "blob",
+        "bytes": 280
+      },
+      {
+        "oid": "d01a2e620933af35977f104017e52f81f7455e6f",
+        "type": "blob",
+        "bytes": 499
+      },
+      {
+        "oid": "d21403bffed4aee4906ff996e1da5f6cdb50567f",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "d24b26a5a34d3c7f0f06d54be173816f86b8a322",
+        "type": "blob",
+        "bytes": 9656
+      },
+      {
+        "oid": "d2d594f1a90b8f245cf2235c76d2726f4c03a7c0",
+        "type": "blob",
+        "bytes": 10089
+      },
+      {
+        "oid": "d2f574a8ae7ed1b2c0b249a6909c36144ab6f99f",
+        "type": "blob",
+        "bytes": 1579
+      },
+      {
+        "oid": "d33776df57e6a7fe656e67ba05d12df2138a9ea4",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "d3c482580a0bf185ace1432208de7a8edb87705e",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "d42a1a7b03ff7e3df2c1267e05567bf4d9022d98",
+        "type": "tree",
+        "bytes": 602
+      },
+      {
+        "oid": "d4bc665b87a3ca442249d0befc9a8c1eb755b728",
+        "type": "blob",
+        "bytes": 326
+      },
+      {
+        "oid": "d50233221bf90028d21f6ef325c70e5360248408",
+        "type": "blob",
+        "bytes": 756
+      },
+      {
+        "oid": "d5e7d903516e3fd48843b88ac76f18fa5c36383d",
+        "type": "blob",
+        "bytes": 7013
+      },
+      {
+        "oid": "d742d53010f28c233c802873c999013af97ca4fd",
+        "type": "blob",
+        "bytes": 7130
+      },
+      {
+        "oid": "d7cb959f68d1866eea8726cc9438b81cebe9b075",
+        "type": "blob",
+        "bytes": 9809
+      },
+      {
+        "oid": "d91d641c0d84053e684023330df4e9bce485c483",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "da13eb9a1d8ea2cbd0ffd279f11a3296450aeac4",
+        "type": "blob",
+        "bytes": 520472
+      },
+      {
+        "oid": "da32f3407a4b53008f867770d5a68380b733e6ec",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "da90652accbd88a851e40af1eb0fbb117ba51e89",
+        "type": "blob",
+        "bytes": 324358
+      },
+      {
+        "oid": "db6bba3a798f93412be050e0748804985fbd37e8",
+        "type": "blob",
+        "bytes": 773
+      },
+      {
+        "oid": "dc57fb7726c529638ec5d32320c385398711087f",
+        "type": "blob",
+        "bytes": 1149
+      },
+      {
+        "oid": "dc72910403a029f8015324c2ef26533039ac3b71",
+        "type": "tree",
+        "bytes": 20801
+      },
+      {
+        "oid": "ddaa1d265fb7360e91cd2be17bcfb09aaedcb3bb",
+        "type": "blob",
+        "bytes": 6373
+      },
+      {
+        "oid": "ded534c48e8e69302c7bfe4584115d7e152cade8",
+        "type": "blob",
+        "bytes": 53989
+      },
+      {
+        "oid": "def56d4bb2f6c0a432134156803e7ce2ae73c706",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "e00220213224928e321ce62d1bc89d81ba037739",
+        "type": "blob",
+        "bytes": 327
+      },
+      {
+        "oid": "e05d2cee96d14ae3a17a92dd906d2cd7ac47f7cd",
+        "type": "blob",
+        "bytes": 4285
+      },
+      {
+        "oid": "e0c086f85237496d3df1d95f273e49f1735bd12f",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "e0d67235d2d939effcfc08b9863db3e83cbcfc59",
+        "type": "blob",
+        "bytes": 28493
+      },
+      {
+        "oid": "e251b2025aa0f9bdb05b3d79f78259c4a46de494",
+        "type": "blob",
+        "bytes": 103744
+      },
+      {
+        "oid": "e259dc6ac35412d9f37afc65eeb771b3fc9f69e0",
+        "type": "blob",
+        "bytes": 2147
+      },
+      {
+        "oid": "e479b2aad9da25e633678f97d8a1ce8d6dc5bc95",
+        "type": "blob",
+        "bytes": 13034
+      },
+      {
+        "oid": "e51b7fa566c0170617e6c618e5c7b385e400a3af",
+        "type": "tree",
+        "bytes": 3388
+      },
+      {
+        "oid": "e5c644b108eb22f3c2581a6e86ce134e6944be45",
+        "type": "blob",
+        "bytes": 435
+      },
+      {
+        "oid": "e6610d7e40f7f1ca5f7ae2724fc4b9aa2df5703e",
+        "type": "tree",
+        "bytes": 1563
+      },
+      {
+        "oid": "e6cb89ec0bab335097e1c99cadb8a9ec5dda31b5",
+        "type": "blob",
+        "bytes": 10191
+      },
+      {
+        "oid": "e74e4cd2004eb5465c0f26686b68d444b31048c0",
+        "type": "blob",
+        "bytes": 719074
+      },
+      {
+        "oid": "e7ebb03a5cd211add0348b1d63924b8aabf74e9d",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "e88112831b2634491de820f0d172752f9f0bdbf8",
+        "type": "blob",
+        "bytes": 8189
+      },
+      {
+        "oid": "e88e5c0d61daa338085de4b7308abe2088a9dc8d",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "eaffddc85b1ac87bad51f5944855d2d3db92705e",
+        "type": "blob",
+        "bytes": 132748
+      },
+      {
+        "oid": "eb7a3a605acb2fe65aab29ea594cc78de35f5fb7",
+        "type": "blob",
+        "bytes": 1015
+      },
+      {
+        "oid": "ec71f302f1ad7c651e6c2b61cac58dc522c966b9",
+        "type": "blob",
+        "bytes": 2199
+      },
+      {
+        "oid": "ecbc87ecf7c647e6117709c55782af4be0aa362f",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "ecd6148e33f9bf0b51b2fc22b90cda35b744381d",
+        "type": "blob",
+        "bytes": 255121
+      },
+      {
+        "oid": "ed322ec087ca076bdc5da7179bc92d18f9125606",
+        "type": "blob",
+        "bytes": 1404
+      },
+      {
+        "oid": "ed8b0003966307aaf7474a069719d9c55b33d853",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "edf39698d8ff0f4d29ba2f67056411f634f0347f",
+        "type": "blob",
+        "bytes": 875
+      },
+      {
+        "oid": "ee8f321cfca5487eef90c5f7ed5b5a1ad912206d",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "eeab704b4be30c792c4dda5342cf22177455ff9f",
+        "type": "blob",
+        "bytes": 190165
+      },
+      {
+        "oid": "f0438f7c38307a5d84ddc420ad67657c794b2cf3",
+        "type": "tree",
+        "bytes": 6544
+      },
+      {
+        "oid": "f0d460d983e8246bfd8585b48df8009ca2144f69",
+        "type": "blob",
+        "bytes": 35243
+      },
+      {
+        "oid": "f0e73d513b02a09f5c3fa57c91c2ce36cda85679",
+        "type": "blob",
+        "bytes": 16305
+      },
+      {
+        "oid": "f1d8a7aeea758fa3cbb1c943a06c536cc0579837",
+        "type": "blob",
+        "bytes": 3146
+      },
+      {
+        "oid": "f21870f78a2c8433ae05ee904ec8b2b0c335c853",
+        "type": "blob",
+        "bytes": 12289
+      },
+      {
+        "oid": "f239b2eae957d72a4a93f126092f8c185ff79623",
+        "type": "tree",
+        "bytes": 404
+      },
+      {
+        "oid": "f2b7aa2478b4db3877edfea808dea0d0c5d73336",
+        "type": "blob",
+        "bytes": 43028
+      },
+      {
+        "oid": "f31accce2bcd237140c5c9ff7075b52065fd9d68",
+        "type": "blob",
+        "bytes": 10408
+      },
+      {
+        "oid": "f3e345faa6a032b24ab984424d7fb29bf4b575d3",
+        "type": "blob",
+        "bytes": 5524
+      },
+      {
+        "oid": "f41f000daa2443b3d1f9395b4d975d4ff9fea13a",
+        "type": "blob",
+        "bytes": 430265
+      },
+      {
+        "oid": "f436355fd5804bbf2bb4d496468b8eb52a541560",
+        "type": "blob",
+        "bytes": 72483
+      },
+      {
+        "oid": "f487cec75e11ed23b087d25754a2f599b1cdde69",
+        "type": "tree",
+        "bytes": 404
+      },
+      {
+        "oid": "f4c49867df17d87003b0a2dcec14543d97b046ee",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "f58f7acdd6e3976c21272e2828c00a2b9cc8f041",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "f5bf85e389d3e191f433f02eb52374f6bf62178e",
+        "type": "blob",
+        "bytes": 9715
+      },
+      {
+        "oid": "f75e947b10e251bd9a7559608ed6139a01e7d4e8",
+        "type": "tree",
+        "bytes": 1461
+      },
+      {
+        "oid": "f7a18409b0e72ecd3081e647491f26aebf999911",
+        "type": "blob",
+        "bytes": 14849
+      },
+      {
+        "oid": "f9bb999555de843b628312b6bb15a633847c0d26",
+        "type": "tree",
+        "bytes": 594
+      },
+      {
+        "oid": "f9fbf80d9af8a12c7b358a4fc2972058293d9b92",
+        "type": "blob",
+        "bytes": 13872
+      },
+      {
+        "oid": "fa32a4d167d175043cc585cf9d51b7d10c91922b",
+        "type": "blob",
+        "bytes": 3998
+      },
+      {
+        "oid": "fb7092714986895f9af27d00c849e36edea4de49",
+        "type": "blob",
+        "bytes": 12534
+      },
+      {
+        "oid": "fc55bbc0ff82637d10b23afef09f67512dd35f63",
+        "type": "blob",
+        "bytes": 883
+      },
+      {
+        "oid": "fdbb4e594037c6873ea2d8cd0487f9478fbe5513",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "fe612232142c30531f36d7e5a217c28af6f35528",
+        "type": "tree",
+        "bytes": 299
+      },
+      {
+        "oid": "fee2db4452ce7069ed50df3e61fbaca0a687e0b6",
+        "type": "blob",
+        "bytes": 16197
+      },
+      {
+        "oid": "ff9bc3baa09180f5725e2fa744dabfe507939feb",
+        "type": "blob",
+        "bytes": 18598
+      },
+      {
+        "oid": "fff4df27dce75f2dc15e95b8298c08b7499c5c2d",
+        "type": "blob",
+        "bytes": 900000
+      }
+    ]
+  },
+  "oversizedIndividualObjects": [],
+  "finalCommit": "480002e4740040332a5eba46457a673e4458eb71",
+  "finalTree": "25b952f6c6c91f82fbd17fb1496b0a3d78f28ef3",
+  "finalParents": [
+    "3635275a96b092add8f70b813ba0d8c1f23eceb7",
+    "33d91ef1b8a6343c554b5c18beacd051816e11b9"
+  ],
+  "finalTreeExactlyEqualToRetainedTarget": true,
+  "originalHeadIsFinalDirectParent": true,
+  "allOriginalTargetObjectsRetained": true,
+  "allPublishedBaseObjectsRetained": true,
+  "allMissingAncestryAccountedFor": true,
+  "allStepsWithinRawObjectLimit": true,
+  "nativeTestBuildInputsEqualToTargetFromFirstStep": true,
+  "totalNewReachableRawObjectBytes": 128944260,
+  "totalNewReachableObjects": 422,
+  "maximumStepRawObjectBytes": 40699112,
+  "checkoutAfter": {
+    "head": "33d91ef1b8a6343c554b5c18beacd051816e11b9",
+    "symbolicHead": "refs/heads/lot5-linked-temporal-and-delta",
+    "index": {
+      "path": ".git/index",
+      "bytes": 1179663,
+      "sha256": "a7b125330e3ed9fd1bfa870f75d104aa078350ca771c218d13cbef0739deacf8"
+    },
+    "refsSha256": "be23d0b489cd30edda045c3463e7ffc1f0bcfe85e88a8995c815461bfdbfff7b",
+    "statusBytes": 0,
+    "statusSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "checkoutUnchanged": true,
+  "finishedAt": "2026-11-10T21:52:40.556128+00:00"
+}

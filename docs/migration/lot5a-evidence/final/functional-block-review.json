@@ -1,0 +1,192 @@
+{
+  "schema": "logos-engine.lot5a-final-functional-block.v1",
+  "status": "passed",
+  "nativeSource": {
+    "fileCount": 283,
+    "digest": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f"
+  },
+  "commonLoop": {
+    "report": {
+      "path": "docs/migration/lot5a-evidence/final/linked-temporal-common-loop.json.gz",
+      "bytes": 324358,
+      "sha256": "f797543fa6b47b364dc19eeb87002171511d97f62d1000e6b353e5903f43d53c"
+    },
+    "execution": {
+      "path": "docs/migration/lot5a-evidence/final/linked-temporal-common-loop-execution.json",
+      "bytes": 1521,
+      "sha256": "9d3c6ab5828be22d347b8f5a78a2fabdfc98d4bee15b6f327836e9a8928bec43"
+    },
+    "labeledChecksPassed": 16,
+    "labeledChecksFailed": 0,
+    "branches": 2,
+    "actualReturns": 12,
+    "ownPathReturns": 4
+  },
+  "regressions": {
+    "summary": {
+      "path": "docs/migration/lot5a-evidence/final/regressions/regression-summary.json",
+      "bytes": 165041,
+      "sha256": "57145ae56fa89ed8aa61148d0a65303d297a03fa20ffcf53235aa0055c700c77"
+    },
+    "caseManifest": {
+      "path": "docs/migration/lot5a-evidence/recorded-regression-cases-integrated.json",
+      "bytes": 4149,
+      "sha256": "ced2b310b4946f76d7601483bfd4a69407744dd66a6515ab5bd1fb1f040694cb"
+    },
+    "driverExecution": {
+      "path": "docs/migration/lot5a-evidence/final/regression-driver-execution.json",
+      "bytes": 2690,
+      "sha256": "b6202f9365173fc666642736478e0f993a80248d213fd36991d77f1e39519094"
+    },
+    "passed": 7,
+    "total": 7,
+    "comparisonChecksPassed": 119,
+    "comparisonChecksExpected": 119,
+    "counts": {
+      "commands": 292,
+      "completePublicPackets": 299,
+      "animationFrames": 1405,
+      "prefixes": 210,
+      "requests": 502,
+      "naturalLevelBoundaries": 21
+    },
+    "cases": [
+      {
+        "case": "catr-052",
+        "game": "CATR",
+        "actions": 12,
+        "prefixes": 8,
+        "levelsCompleted": 3,
+        "comparisonChecks": 17,
+        "failedChecks": [],
+        "passed": true,
+        "nodeOldSpaceMiB": 1536,
+        "execution": {
+          "path": "docs/migration/lot5a-evidence/final/regressions/catr-052-execution.json",
+          "sha256": "c28621f02852bcd781feef0a2176a20ccb46312eefc66eb747859499b9c6ca90",
+          "bytes": 8567
+        }
+      },
+      {
+        "case": "rswp-052",
+        "game": "RSWP",
+        "actions": 19,
+        "prefixes": 11,
+        "levelsCompleted": 3,
+        "comparisonChecks": 17,
+        "failedChecks": [],
+        "passed": true,
+        "nodeOldSpaceMiB": 1536,
+        "execution": {
+          "path": "docs/migration/lot5a-evidence/final/regressions/rswp-052-execution.json",
+          "sha256": "d5299bc64a332db114edadf22bd62107f558176ca630adaa94841a90f1c391ad",
+          "bytes": 9096
+        }
+      },
+      {
+        "case": "fogw-052",
+        "game": "FOGW",
+        "actions": 50,
+        "prefixes": 27,
+        "levelsCompleted": 3,
+        "comparisonChecks": 17,
+        "failedChecks": [],
+        "passed": true,
+        "nodeOldSpaceMiB": 1536,
+        "execution": {
+          "path": "docs/migration/lot5a-evidence/final/regressions/fogw-052-execution.json",
+          "sha256": "8e2fdeed28ae70da19b4b8e71bf7031690f0d4d0656a6401e1756a28de69e718",
+          "bytes": 11498
+        }
+      },
+      {
+        "case": "vois-052",
+        "game": "VOIS",
+        "actions": 78,
+        "prefixes": 42,
+        "levelsCompleted": 3,
+        "comparisonChecks": 17,
+        "failedChecks": [],
+        "passed": true,
+        "nodeOldSpaceMiB": 1536,
+        "execution": {
+          "path": "docs/migration/lot5a-evidence/final/regressions/vois-052-execution.json",
+          "sha256": "6a746121e5ac64cbca60cb6cac79e566c7ae1afb6f3aa4040924b6174fd43401",
+          "bytes": 13362
+        }
+      },
+      {
+        "case": "conn-052",
+        "game": "CONN",
+        "actions": 21,
+        "prefixes": 21,
+        "levelsCompleted": 3,
+        "comparisonChecks": 17,
+        "failedChecks": [],
+        "passed": true,
+        "nodeOldSpaceMiB": 1536,
+        "execution": {
+          "path": "docs/migration/lot5a-evidence/final/regressions/conn-052-execution.json",
+          "sha256": "215a6348e4772ba06a0021377a3336f2186e18535318dcc85612e05a4221a434",
+          "bytes": 9846
+        }
+      },
+      {
+        "case": "mind-052",
+        "game": "MIND",
+        "actions": 31,
+        "prefixes": 20,
+        "levelsCompleted": 3,
+        "comparisonChecks": 17,
+        "failedChecks": [],
+        "passed": true,
+        "nodeOldSpaceMiB": 1536,
+        "execution": {
+          "path": "docs/migration/lot5a-evidence/final/regressions/mind-052-execution.json",
+          "sha256": "704bfa83ea5dcb08711ac81aee7e272380a3fdf6205f6d9fa866eb18a499294c",
+          "bytes": 9656
+        }
+      },
+      {
+        "case": "weav-052",
+        "game": "WEAV",
+        "actions": 81,
+        "prefixes": 81,
+        "levelsCompleted": 3,
+        "comparisonChecks": 17,
+        "failedChecks": [],
+        "passed": true,
+        "nodeOldSpaceMiB": 1536,
+        "execution": {
+          "path": "docs/migration/lot5a-evidence/final/regressions/weav-052-execution.json",
+          "sha256": "2c1a7bcf029ed47fa87905b91d0ec70fee8848b24df4a5ea0f72e768661ba8b6",
+          "bytes": 17620
+        }
+      }
+    ]
+  },
+  "transport": {
+    "receipt": {
+      "path": "docs/migration/lot5a-evidence/final/regression-evidence-pack-execution.json",
+      "bytes": 719,
+      "sha256": "8ef8b53e4d5a0d3f73a8770a7bc380778799fd7b82617a753f7dde20bb81ae9a"
+    },
+    "partsManifest": {
+      "path": "docs/migration/lot5a-evidence/final/regression-evidence-parts.json",
+      "bytes": 3323,
+      "sha256": "3fada6e26ee840faa09f85550f0ad9aab55a5493c81a01d4dc57c3e1af2787e5"
+    },
+    "verifiedReports": 7,
+    "verifiedParts": 61
+  },
+  "incidents": [],
+  "qualifications": [
+    "The unchanged common proof passed against the integrated native 0.53 freeze; its two preintegration harness errors remain preserved separately under diagnostic/common-loop-before-integration.",
+    "All seven baselines are actual immutable successful native 0.52 reports from 7A integrated-final; source traces and historical 17-check comparator are unchanged.",
+    "Every replay starts cold and computes each command before its archived public return is supplied.",
+    "The fixed heap limit is 1536 MiB; baseline decoding, Node replay, and historical comparison use separate nonoverlapping child lifetimes.",
+    "Only proof/replay evidence, a new distinct lot5A case manifest, and exact .gitignore entries for partitioned report originals were written by this block. No production file, formal test, replay harness, comparator, command, priority, or trace was modified.",
+    "The parent correction to the radial-registration expectation was outside replay execution inputs; native inventory and all actual execution inputs remained unchanged.",
+    "These are bounded functional recorded-return regressions and synthetic contract proofs, not fresh live game success, a WEAV level 6 result, complete V6 parity, or a performance comparison."
+  ]
+}

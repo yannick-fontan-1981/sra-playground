@@ -1,0 +1,57 @@
+{
+  "schema": "logos-engine.lot5a-cost-coordination.v1",
+  "status": "acknowledged_quiet_before_window",
+  "recordedAt": "2026-11-10T21:25:17.466063+00:00",
+  "performanceDirectory": "docs/migration/lot5a-evidence/performance",
+  "nativeSourceDigest": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f",
+  "renewedQuietRequestedAt": "2026-11-10T21:20:19.280121+00:00",
+  "otherLanes": [
+    {
+      "lane": "4B",
+      "status": "acknowledged_quiet",
+      "acknowledgedAt": "2026-11-10T21:23:19.613899+00:00",
+      "evidence": [
+        {
+          "path": "docs/migration/lot5a-evidence/performance/coordination/lot4b-status.json",
+          "bytes": 2787,
+          "sha256": "d2b913da9c5d76078036d656028972a4a6554b318d44449f39607fc50c3a8434"
+        }
+      ]
+    },
+    {
+      "lane": "7B",
+      "status": "acknowledged_quiet",
+      "acknowledgedAt": "2026-11-10T21:24:13.816528+00:00",
+      "evidence": [
+        {
+          "path": "docs/migration/lot5a-evidence/performance/coordination/lot7b-status.json",
+          "bytes": 2184,
+          "sha256": "b2b2a6538e0abc263b36f8823c5e414b4df5225d5e685394304f89470ab9fd70"
+        }
+      ]
+    }
+  ],
+  "ownTrackedComputeEnded": true,
+  "previewStopped": true,
+  "costNodeOptionsOverride": null,
+  "performanceLock": "/workspace/shared/sra-coordination/performance.lock",
+  "lockAcquisition": "Required by the root launch command immediately before the unchanged official runner; not asserted acquired by this receipt.",
+  "evidence": [
+    {
+      "path": "docs/migration/lot5a-evidence/performance/coordination/own-quiet-attestation.json",
+      "bytes": 1028,
+      "sha256": "0d07db13c72e161d31e8b1d68f42fb594ae4477d15117d66d5bec5fd4202134e"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-independent-review.json",
+      "bytes": 13056,
+      "sha256": "4579a161df394c8019138c4a8f7aa05836b652753fe276621b50ab1954b42fa4"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/dependency-preparation-repair.json",
+      "bytes": 3123,
+      "sha256": "54342420dab724eedd7e13edf587fe583a82d31bc1366fa0cd665b3d848affe8"
+    }
+  ],
+  "publicationOrder": "Site83 ->5A ->4B ->7B"
+}

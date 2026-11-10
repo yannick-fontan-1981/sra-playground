@@ -1,0 +1,68 @@
+{
+  "schema": "logos-engine.retained-tool-failure.v1",
+  "startedAt": "2026-11-10T21:40:11.961579+00:00",
+  "finishedAt": "2026-11-10T21:40:12.076716+00:00",
+  "command": [
+    "node",
+    "scripts/compare-native-cost-cohorts.mjs",
+    "docs/migration/lot5a-evidence/performance/comparison-policy.json",
+    "docs/migration/lot5a-evidence/performance/cohort1/baseline.json",
+    "docs/migration/lot5a-evidence/performance/cohort1/after.json",
+    "docs/migration/lot5a-evidence/performance/cohort1/comparison.json",
+    "docs/migration/lot5a-evidence/performance/cohort2/baseline.json",
+    "docs/migration/lot5a-evidence/performance/cohort2/after.json",
+    "docs/migration/lot5a-evidence/performance/cohort2/comparison.json",
+    "docs/migration/lot5a-evidence/performance/combined-comparison.json"
+  ],
+  "exitCode": 1,
+  "inputs": [
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/comparison-policy.json",
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+      "bytes": 991
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort1/baseline.json",
+      "sha256": "1aed12b02ccd7884c715cedabd0cacbb02cdde05123aa264252459c26a19692b",
+      "bytes": 429659
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort1/after.json",
+      "sha256": "b255e57ee5a22590303ded28229d05fb62ffadc132edf297d299db0902983024",
+      "bytes": 430265
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort1/comparison.json",
+      "sha256": "d090b8e7b54e41d463dc7d768696ea3dfec3d692329f4221c22f20ae85c96e69",
+      "bytes": 26258
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort2/baseline.json",
+      "sha256": "eed86f986c9c87fbf1d915b3e90b2928b60c44edc82b0fb96d564ba9b4f0b687",
+      "bytes": 429790
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort2/after.json",
+      "sha256": "45b9f458e3cb6eb3c511a57c8e3ddc1e3619afdc2439848f3cbcadc254b70f37",
+      "bytes": 430204
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/cohort2/comparison.json",
+      "sha256": "8d6882bf7333c0a39606b3f4aefaa706ed33ec1543cc4b3c97b2ebb4c6ccf462",
+      "bytes": 26450
+    }
+  ],
+  "inputsUnchanged": true,
+  "log": {
+    "path": "docs/migration/lot5a-evidence/performance/aggregation-failure.log",
+    "sha256": "be915a192d40ad5cf02969f7c0f0f11d400e2219c75071e5008573d25a79351e",
+    "bytes": 204708
+  },
+  "outputExists": false,
+  "qualification": "Actual unchanged historical strict aggregator was executed after all four ABBA series and both unchanged pair comparators. This failure remains failed. The separate structural qualification and closed shared-fragment supplement were frozen before measurement; no sample, timing, cause or rule is changed."
+}

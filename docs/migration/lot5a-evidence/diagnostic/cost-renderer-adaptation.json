@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.lot5a.cost-renderer-adaptation.v1",
+  "recordedAt": "2026-11-10T21:16:38.632550+00:00",
+  "status": "prepared_not_executed",
+  "source": {
+    "path": "docs/migration/lot7a-evidence/write-cost-results.py",
+    "sha256": "60245844520a48eef37f662f8826648b84ee348a1983b13da3786b6be0cb845a"
+  },
+  "candidate": {
+    "path": "docs/migration/lot5a-evidence/write-cost-results.py",
+    "sha256": "041543e7b5763d5a914863ee19874d6959240070750c51d7100a9d05cda91b1e"
+  },
+  "changes": [
+    "Lot and schema attribution7A\u21925A",
+    "Owner description Workshop\u2192linkedtemporal",
+    "Conditional display and integrity binding of retained premeasurement attribution supplement"
+  ],
+  "costArithmeticChanged": false,
+  "measurementExecuted": false
+}

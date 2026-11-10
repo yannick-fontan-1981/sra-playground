@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.evidence-restore-execution.v1",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "scripts/evidence-byte-parts.py",
+    "restore",
+    "docs/migration/lot7a-evidence/integrated-final/regressions"
+  ],
+  "startedAt": "2026-11-10T20:47:50.340465+00:00",
+  "endedAt": "2026-11-10T20:47:50.567038+00:00",
+  "durationSeconds": 0.22658086300361902,
+  "exitCode": 0,
+  "log": {
+    "path": "docs/migration/lot5a-evidence/final/regression-baselines-restore.log",
+    "bytes": 2922,
+    "sha256": "7ed04bb8ecf6613b448edd7c348993d32ed2afd79ac9b70bd0c88e6291215bb5"
+  },
+  "qualification": "Exact lossless reconstruction of retained 7A baseline reports; no agent result is regenerated."
+}

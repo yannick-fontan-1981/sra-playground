@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 176,
-    "partiallyTransferredModules": 144,
+    "componentVerifiedModules": 178,
+    "partiallyTransferredModules": 146,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1049,
+    "pendingModules": 1045,
     "strategyFamilies": 16
   },
   "families": [
@@ -76235,9 +76235,22 @@
           "endLine": 586
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-linked-temporal-contact.ts",
+        "src/logos-engine/v6-linked-temporal-common.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-linked-preparation-reference.py",
+        "tests/fixtures/v6-linked-preparation-reference.json.gz",
+        "tests/v6-linked-temporal-reference.test.ts",
+        "tests/v6-linked-temporal-preparation.test.ts",
+        "docs/migration/lot5a-linked-temporal-lineage.md",
+        "docs/migration/lot5a-evidence/diagnostic/source-oracle-export.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-development.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-validation.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-tests.tap"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_linked_packet.py",
@@ -76360,9 +76373,21 @@
           "endLine": 52
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-linked-temporal-preparation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-linked-preparation-reference.py",
+        "tests/fixtures/v6-linked-preparation-reference.json.gz",
+        "tests/v6-linked-temporal-reference.test.ts",
+        "tests/v6-linked-temporal-preparation.test.ts",
+        "docs/migration/lot5a-linked-temporal-lineage.md",
+        "docs/migration/lot5a-evidence/diagnostic/source-oracle-export.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-development.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-validation.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-tests.tap"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_mechanisms.py",
@@ -77754,9 +77779,23 @@
           "endLine": 245
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-linked-temporal-phase.ts",
+        "src/logos-engine/v6-linked-temporal-common.ts",
+        "src/logos-engine/v6-linked-temporal-preparation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-linked-preparation-reference.py",
+        "tests/fixtures/v6-linked-preparation-reference.json.gz",
+        "tests/v6-linked-temporal-reference.test.ts",
+        "tests/v6-linked-temporal-preparation.test.ts",
+        "docs/migration/lot5a-linked-temporal-lineage.md",
+        "docs/migration/lot5a-evidence/diagnostic/source-oracle-export.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-development.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-validation.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-tests.tap"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_phase_transfer.py",
@@ -77867,9 +77906,23 @@
           "endLine": 194
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-linked-temporal-phase.ts",
+        "src/logos-engine/v6-linked-temporal-common.ts",
+        "src/logos-engine/v6-linked-temporal-preparation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-linked-preparation-reference.py",
+        "tests/fixtures/v6-linked-preparation-reference.json.gz",
+        "tests/v6-linked-temporal-reference.test.ts",
+        "tests/v6-linked-temporal-preparation.test.ts",
+        "docs/migration/lot5a-linked-temporal-lineage.md",
+        "docs/migration/lot5a-evidence/diagnostic/source-oracle-export.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-development.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-validation.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-tests.tap"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_point_contrasts.py",
@@ -98964,6 +99017,14 @@
     "Lot3E/native0.46 transfers ReceptionService own measured projection, access/return contracts, consumed ResidualAccess evidence reducer and V5 wait ledger. Source-mode component fixtures remain distinct from named native common ownership/current-epoch/wait adaptations. The facade is5/6; ReferencePopulation and full inherited closure remain pending.50/76complete entries,37compiled workflows and six false completion gates remain distinct. No campaign or cost result is inferred from mappings; actual evidence is documented in lot3e-reception-service.md.",
     "Lot3F/native0.47 connects ReferencePopulation as the sixth declared observed-composition branch under the existing SharedSeries owner. Measured projection, acquired selection/control, exact finite-cell matching and conditional selected cardinal motion have independent source and native contracts. The entry facade becomes6/6 and51/76 complete declared entries, with37 compiled workflows; inherited source closure, color/terminal laws and full original-caller parity remain partial. All six global completion gates remain false. Campaign and cost outcomes are separate evidence, not inferred from this mapping.",
     "Lot3G/native0.48 connects framed_window_composition immediately after rooted_quota_composition under the authoritative SharedSeries owner. Exact current pixel equality supports a conditional point experiment; only real supplied returns acquire trial outcomes. Source component parity, native interrupted-pixel/malformed-response adaptations and exhaustive prefilter limits remain explicit.52/76 declared entries,6/6 observed branches and37 compiled workflows are separate counts; all six completion gates remain false. Integrated synthetic evidence, retained public views, regressions and cost outcomes are qualified independently, with no game victory inferred from component contracts.",
-    "Lot10A transfers axial_question with an independently checked source chooser, geometry and active/passive acquired owner. Its complete common synthetic loop is cold and uses actual SRC/WHY-ACT/action/return/restoration. The current_epoch_axial_packet_attribution extension is separately qualified from exact Python behavior. Four subsequent lot10 entries remain pending; no new game success or cost acceptance follows from these component proofs."
+    "Lot10A transfers axial_question with an independently checked source chooser, geometry and active/passive acquired owner. Its complete common synthetic loop is cold and uses actual SRC/WHY-ACT/action/return/restoration. The current_epoch_axial_packet_attribution extension is separately qualified from exact Python behavior. Four subsequent lot10 entries remain pending; no new game success or cost acceptance follows from these component proofs.",
+    "Lot5A proposes two component_verified mappings (LinkedPreparation and LinkedContact) and two partial_transfer mappings (PhaseRelations and PhaseTransfer). The consumed entry calls phase.linked_contact.propose directly. Passive phase acquisition, conditional portable knowledge and legacy guard delegation do not activate the independent PhaseRelations/PhaseTransfer proposal policies. No complete-migration gate, final integrated entry audit or campaign result is advanced by these component statuses.",
+    "The independent Python fixture is generated from the unchanged pinned originals and contains 14 helpers, nine cold chains / 165 operations, 13 explicit direct components and two retained source exceptions. Native tests compare admitted results and complete projected state for both continuous owners and owners restored after every operation. All 51 focused tests and the transitive targeted typecheck pass in the postreview development receipt, with unchanged direct-input fingerprints; this predates integration of the effectively published lot 7A parent and is not its merged-source gate.",
+    "Malformed AFTER without entities is an explicit invalid-input difference: Python appends a command and then raises KeyError('entities'), leaving a partial inconsistent history, which the fixture preserves verbatim. Native ingress rejects that malformed observation with TypeError before mutation. An already retained partial BEFORE remains admitted when source record does not snapshot it. Neither exception is normalized into null or a successful acquired transition, and restoration is not weakened to admit the corrupted source history.",
+    "The source-compatible temporal API has no added search bound by default. Production opts into maximumNodes=65536 and maximumWork=2000000, with its current deadline and abort signal. A cutoff restores pre-proposal contact state and retains a current-bound unknown with frontier.complete=false, release_authority=false and block_unrelated_probe=true; it produces no action, learned impossibility or refutation. Synchronous work checks do not establish a hard global Pause-latency or acquisition/serialization deadline guarantee. The common selection effect of the refusal requires its separate integration evidence.",
+    "Native checkpoint schema logos-engine.linked-temporal-preparation.v1 and immutable ownership are explicit extensions, not Python-defined checkpoint semantics. Foreign mutable rows are retained before sharing; geometry receipts bind mask/digest/dimensions; contact body geometry and portable byte templates are validated; restore constructs a replacement owner before publication. Public state projections remain detached. Source epoch/state boundaries release phase rasters and commands, and portable reset releases local trials; conditional priors and adapter event/score witnesses remain. This is not global historical-fact eviction or a constant-memory claim for the full caller.",
+    "Cold temporal chains demonstrate calibrated, guarded key prefixes of up to min(16, remaining), contrasted effects and subsequent component decisions. The separate key/click/key controller proof uses a declared synthetic family and is not a temporal click-policy transfer. A component source match, a legacy guard component or a present runtime registration does not certify complete production-priority selection, WHY/ACT authority or contribution to a real game. The 5B addressed-material and 5C object-binding entries remain separate and open.",
+    "The portable native constructor initializes local fields eagerly, whereas the Python constructor initially holds only prior and the consumed boundary immediately calls reset_epoch. Direct from_boundary cases therefore compare prior; actual cold boundaries compare the full reset/acquisition state. Portable templates retain conditional source references without old-epoch raster lists. Native safe-integer and uint8 public-raster contracts do not claim arbitrary Python numeric or malformed-input coercion equivalence.",
+    "No new game, live WEAV attempt, official cost decision or publication result is established by these mappings. The separate WEAV diagnostic retains its exhausted cumulative case clock and unmet six-level target. Common-loop contribution, merged-source functional gates, the predeclared global cost policy, final integrity and publication remain parent-owned evidence to be reviewed before any 5A closure."
   ]
 }

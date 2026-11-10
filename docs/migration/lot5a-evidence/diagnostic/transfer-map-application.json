@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.lot5a.transfer-map-application.v1",
+  "appliedAt": "2026-11-10T20:47:01.522035+00:00",
+  "proposalSha256": "e7c608813eb18232850f51d179d483d70c6d98db7997cd1d4f56c89c810c3525",
+  "mapBeforeSha256": "56d5a81b06f8ea9e75a4788cec0806e585e9acfb71148b47cfdee301246bb70a",
+  "mapAfterSha256": "f03947fe5d553c794ed794b86196c577bef007fd83115bc9fff551ababc48eab",
+  "sourceMappingsAdded": 4,
+  "componentVerified": 2,
+  "partialTransfer": 2,
+  "completionGatesUnchanged": true,
+  "qualification": "Applied after merging committed7A preparation5ff6d707ca3b924d554e4ed9de2b002326543f3c; actual7Apublication identity will be reconciled before cost declaration and5Apublication. Component scope only; not full migration or game contribution."
+}

@@ -1,0 +1,85 @@
+{"phase": "starting", "label": "A1"}
+{"case":"STCK","phase":"warmup","actions":3}
+{"case":"STCK","phase":"measuring","round":1,"actions":10}
+{"case":"STCK","phase":"measured","round":1,"elapsedMs":9841.392194,"actions":10}
+{"case":"STCK","phase":"measuring","round":2,"actions":10}
+{"case":"STCK","phase":"measured","round":2,"elapsedMs":9222.212988000001,"actions":10}
+{"case":"STCK","phase":"measuring","round":3,"actions":10}
+{"case":"STCK","phase":"measured","round":3,"elapsedMs":10301.171630999997,"actions":10}
+{"case":"STCK","phase":"measuring","round":4,"actions":10}
+{"case":"STCK","phase":"measured","round":4,"elapsedMs":9948.136112,"actions":10}
+{"case":"SMLP","phase":"warmup","actions":3}
+{"case":"SMLP","phase":"measuring","round":1,"actions":15}
+{"case":"SMLP","phase":"measured","round":1,"elapsedMs":16287.013481000002,"actions":15}
+{"case":"SMLP","phase":"measuring","round":2,"actions":15}
+{"case":"SMLP","phase":"measured","round":2,"elapsedMs":16859.040897999992,"actions":15}
+{"case":"SMLP","phase":"measuring","round":3,"actions":15}
+{"case":"SMLP","phase":"measured","round":3,"elapsedMs":18072.850328,"actions":15}
+{"case":"SMLP","phase":"measuring","round":4,"actions":15}
+{"case":"SMLP","phase":"measured","round":4,"elapsedMs":17200.980758000005,"actions":15}
+{"status":"passed","output":"docs/migration/lot5a-evidence/performance/cohort1/baseline.json","nativeDigest":"f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb","cases":[{"id":"STCK","actions":40,"sessionMedianMs":9894.764153},{"id":"SMLP","actions":60,"sessionMedianMs":17030.010828}]}
+{"phase": "finished", "label": "A1", "exitCode": 0}
+{"phase": "starting", "label": "B1"}
+{"case":"STCK","phase":"warmup","actions":3}
+{"case":"STCK","phase":"measuring","round":1,"actions":10}
+{"case":"STCK","phase":"measured","round":1,"elapsedMs":10986.328935,"actions":10}
+{"case":"STCK","phase":"measuring","round":2,"actions":10}
+{"case":"STCK","phase":"measured","round":2,"elapsedMs":10578.380053999997,"actions":10}
+{"case":"STCK","phase":"measuring","round":3,"actions":10}
+{"case":"STCK","phase":"measured","round":3,"elapsedMs":10657.081539999996,"actions":10}
+{"case":"STCK","phase":"measuring","round":4,"actions":10}
+{"case":"STCK","phase":"measured","round":4,"elapsedMs":11086.986272999995,"actions":10}
+{"case":"SMLP","phase":"warmup","actions":3}
+{"case":"SMLP","phase":"measuring","round":1,"actions":15}
+{"case":"SMLP","phase":"measured","round":1,"elapsedMs":16400.357082999995,"actions":15}
+{"case":"SMLP","phase":"measuring","round":2,"actions":15}
+{"case":"SMLP","phase":"measured","round":2,"elapsedMs":18195.94993999999,"actions":15}
+{"case":"SMLP","phase":"measuring","round":3,"actions":15}
+{"case":"SMLP","phase":"measured","round":3,"elapsedMs":17890.546143999993,"actions":15}
+{"case":"SMLP","phase":"measuring","round":4,"actions":15}
+{"case":"SMLP","phase":"measured","round":4,"elapsedMs":17941.012766999993,"actions":15}
+{"status":"passed","output":"docs/migration/lot5a-evidence/performance/cohort1/after.json","nativeDigest":"d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f","cases":[{"id":"STCK","actions":40,"sessionMedianMs":10821.705237499998},{"id":"SMLP","actions":60,"sessionMedianMs":17915.779455499993}]}
+{"phase": "finished", "label": "B1", "exitCode": 0}
+{"phase": "starting", "label": "B2"}
+{"case":"STCK","phase":"warmup","actions":3}
+{"case":"STCK","phase":"measuring","round":1,"actions":10}
+{"case":"STCK","phase":"measured","round":1,"elapsedMs":11188.846869,"actions":10}
+{"case":"STCK","phase":"measuring","round":2,"actions":10}
+{"case":"STCK","phase":"measured","round":2,"elapsedMs":10489.003205,"actions":10}
+{"case":"STCK","phase":"measuring","round":3,"actions":10}
+{"case":"STCK","phase":"measured","round":3,"elapsedMs":10494.46817,"actions":10}
+{"case":"STCK","phase":"measuring","round":4,"actions":10}
+{"case":"STCK","phase":"measured","round":4,"elapsedMs":12062.863862999999,"actions":10}
+{"case":"SMLP","phase":"warmup","actions":3}
+{"case":"SMLP","phase":"measuring","round":1,"actions":15}
+{"case":"SMLP","phase":"measured","round":1,"elapsedMs":17809.011743000003,"actions":15}
+{"case":"SMLP","phase":"measuring","round":2,"actions":15}
+{"case":"SMLP","phase":"measured","round":2,"elapsedMs":16883.29913700001,"actions":15}
+{"case":"SMLP","phase":"measuring","round":3,"actions":15}
+{"case":"SMLP","phase":"measured","round":3,"elapsedMs":16203.354703000005,"actions":15}
+{"case":"SMLP","phase":"measuring","round":4,"actions":15}
+{"case":"SMLP","phase":"measured","round":4,"elapsedMs":15936.838164999994,"actions":15}
+{"status":"passed","output":"docs/migration/lot5a-evidence/performance/cohort2/after.json","nativeDigest":"d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f","cases":[{"id":"STCK","actions":40,"sessionMedianMs":10841.6575195},{"id":"SMLP","actions":60,"sessionMedianMs":16543.326920000007}]}
+{"phase": "finished", "label": "B2", "exitCode": 0}
+{"phase": "starting", "label": "A2"}
+{"case":"STCK","phase":"warmup","actions":3}
+{"case":"STCK","phase":"measuring","round":1,"actions":10}
+{"case":"STCK","phase":"measured","round":1,"elapsedMs":9513.800675999999,"actions":10}
+{"case":"STCK","phase":"measuring","round":2,"actions":10}
+{"case":"STCK","phase":"measured","round":2,"elapsedMs":9979.455368,"actions":10}
+{"case":"STCK","phase":"measuring","round":3,"actions":10}
+{"case":"STCK","phase":"measured","round":3,"elapsedMs":9902.918853,"actions":10}
+{"case":"STCK","phase":"measuring","round":4,"actions":10}
+{"case":"STCK","phase":"measured","round":4,"elapsedMs":9484.881580000001,"actions":10}
+{"case":"SMLP","phase":"warmup","actions":3}
+{"case":"SMLP","phase":"measuring","round":1,"actions":15}
+{"case":"SMLP","phase":"measured","round":1,"elapsedMs":17345.914190000003,"actions":15}
+{"case":"SMLP","phase":"measuring","round":2,"actions":15}
+{"case":"SMLP","phase":"measured","round":2,"elapsedMs":15797.230304000012,"actions":15}
+{"case":"SMLP","phase":"measuring","round":3,"actions":15}
+{"case":"SMLP","phase":"measured","round":3,"elapsedMs":15871.134921000004,"actions":15}
+{"case":"SMLP","phase":"measuring","round":4,"actions":15}
+{"case":"SMLP","phase":"measured","round":4,"elapsedMs":15693.036317000006,"actions":15}
+{"status":"passed","output":"docs/migration/lot5a-evidence/performance/cohort2/baseline.json","nativeDigest":"f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb","cases":[{"id":"STCK","actions":40,"sessionMedianMs":9708.359764499999},{"id":"SMLP","actions":60,"sessionMedianMs":15834.182612500008}]}
+{"phase": "finished", "label": "A2", "exitCode": 0}
+{"status": "passed", "window": "/workspace/sites/sra-lot5-20261110/.sites-checkout/docs/migration/lot5a-evidence/performance/window.json"}

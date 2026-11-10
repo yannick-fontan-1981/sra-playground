@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.evidence-pack-execution.v1",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "scripts/evidence-byte-parts.py",
+    "pack",
+    "docs/migration/lot5a-evidence/final/regressions"
+  ],
+  "startedAt": "2026-11-10T21:00:12.614820+00:00",
+  "endedAt": "2026-11-10T21:00:13.278099+00:00",
+  "durationSeconds": 0.6632794350007316,
+  "exitCode": 0,
+  "log": {
+    "path": "docs/migration/lot5a-evidence/final/regression-evidence-parts.json",
+    "bytes": 3323,
+    "sha256": "3fada6e26ee840faa09f85550f0ad9aab55a5493c81a01d4dc57c3e1af2787e5"
+  },
+  "qualification": "Exact lossless byte partitions of closed final reports; no result recomputed."
+}

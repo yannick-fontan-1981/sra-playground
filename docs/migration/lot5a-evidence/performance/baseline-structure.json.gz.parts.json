@@ -1,0 +1,41 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "baseline-structure.json.gz",
+    "sha256": "2938b69b5b02028e197ab2eadb1352918459def94ad38a0c17de2e0e6268e8f3",
+    "bytes": 4755121
+  },
+  "parts": [
+    {
+      "file": "baseline-structure.json.gz.part000",
+      "sha256": "bf752089927e679e6213457e87050571e318e9443c3262ddc2dff9b4cbcd87ed",
+      "bytes": 900000
+    },
+    {
+      "file": "baseline-structure.json.gz.part001",
+      "sha256": "21f92615ef26ce1f753850498039e0e4903e47aba4bc0654e276c23677031c88",
+      "bytes": 900000
+    },
+    {
+      "file": "baseline-structure.json.gz.part002",
+      "sha256": "c358ca15fabfbd9a13d4933dd778cacded6128c1a032744f7b83c82adab99159",
+      "bytes": 900000
+    },
+    {
+      "file": "baseline-structure.json.gz.part003",
+      "sha256": "fd6e50ef54a92eba1dc830bab481161921b938d870b64e897ec42a0eee080264",
+      "bytes": 900000
+    },
+    {
+      "file": "baseline-structure.json.gz.part004",
+      "sha256": "2e32fcd7e2b56e36e319e8903652aa2e6b2a12337bc7788429f72dd27aa52ce5",
+      "bytes": 900000
+    },
+    {
+      "file": "baseline-structure.json.gz.part005",
+      "sha256": "5c628c3f4671761d5e27bf2b79c4c7b634efa9c0e51918ae91152cf5f4300b83",
+      "bytes": 255121
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

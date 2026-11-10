@@ -1,0 +1,29 @@
+✔ native Float64 leaves round-trip fractional evidence, negative zero and reserved object keys (3.089323ms)
+✔ native state rejects executable/nonfinite input and malformed tagged values (0.46709ms)
+✔ the larger native Kernel profile leaves the ordinary V7 ceiling unchanged (0.7518ms)
+✔ native store commits actual V7 revisions and rolls back a failed multi-node transaction (9.898129ms)
+✔ native state fragments retain an entire large episode and reuse immutable frames across revisions (93.64304ms)
+✔ reasoning dynamic restore preserves the real catalog and rolls back malformed table updates (130.849433ms)
+✔ family state is read from the Kernel graph before the next real plan (77.723226ms)
+✔ edits reject an active prefix even when its caller is paused (42.236393ms)
+✔ a boundary activation edit changes actual selection without resetting evidence (30.363376ms)
+✔ stored SRC edits execute the revised tree and preserve separate original provenance (55.868968ms)
+✔ a family-internal SRC program reads its actual edited node from the same store (81.198539ms)
+✔ stale and invalid multi-node edits roll back and preserve a usable session (51.528382ms)
+✔ the browser edit/inspection API changes no game state and resumes from revised nodes (44.668255ms)
+✔ an action ticket from another graph never reaches the native game (24.412427ms)
+✔ native SRC/service/controller replays public HANO transitions without a Python solver (38544.466725ms)
+✔ native SRC/service/controller replays public SYME transitions without a Python solver (44321.422826ms)
+✔ native SRC/service/controller replays public DNOI transitions without a Python solver (27120.921858ms)
+✔ native service binds one immutable ticket, preserves it on resume and burns it after the witnessed action (4.358288ms)
+✔ bad outcome identity, timing and animation packets do not consume a native service authorization (4.74631ms)
+✔ a native backend state failure closes its authority and never resumes from partial evidence (2.515946ms)
+✔ native runtime defers family recording until a sealed prefix and ignores paused wall time (21.595572ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 110918.395852
