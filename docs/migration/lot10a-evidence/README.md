@@ -61,6 +61,12 @@ Les [audits intermédiaires](diagnostic/post5a-inventory-run.json) trouvent
 cœur optimisé 5A, avec leurs entrées inchangées pendant l’exécution. Ce diagnostic
 ne remplace pas le futur gel après les publications de 4B et 7B.
 
+La [recherche locale des méthodes](history-lookup-source-review.md) a ensuite
+été simplifiée pour éviter les copies répétées de l’historique par relation.
+La [reprise des deux fichiers Axial](diagnostic/history-lookup-validation.json)
+passe **136/136**, avec les mêmes attentes Python et des entrées inchangées.
+Cette réduction d’allocations ne constitue pas une mesure de durée.
+
 ## Préparation des contrôles finaux
 
 - [Périmètre fonctionnel et rejeux](validation-and-regression-plan.md),

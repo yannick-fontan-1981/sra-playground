@@ -94,7 +94,31 @@ export class AxialQuestion implements NativeFamily<any> {
     if (selected.epoch !== obs.level_epoch || !equal(actor.center, selected.center) || actor.marker !== selected.marker
       || !equal(this.methodSignature(m), selected.signature)) return [[], m];
     const cfg = this.policy.config, cycle = cfg.cycle as number[][], projections = projectedTurns(m, actor, cycle), out: R[] = [],
-      methods: R[] = [...this.portable.flatMap(p => p.methods), ...this.rotations];
+      signature = this.methodSignature(m), recalledMethods = new Map<string, R | null>();
+    const recalledMethod = (action: string): R | null => {
+      if (recalledMethods.has(action)) return recalledMethods.get(action) ?? null;
+      const matches = (r: R): boolean => r.action === action && equal(r.signature, signature) && r.evidence.length >= 2;
+      let method: R | null = null;
+      // Reverse the source concatenation's traversal, without copying history.
+      for (let index = this.rotations.length - 1; index >= 0; index--) {
+        const receipt = this.rotations[index]!;
+        if (matches(receipt)) { method = receipt; break; }
+      }
+      for (let index = this.portable.length - 1; method === null && index >= 0; index--) {
+        const methods = this.portable[index]!.methods;
+        if (Array.isArray(methods)) {
+          for (let methodIndex = methods.length - 1; methodIndex >= 0; methodIndex--) {
+            const receipt = methods[methodIndex];
+            if (matches(receipt)) { method = receipt; break; }
+          }
+        } else if (matches(methods)) {
+          // Preserve flatMap's single-candidate behavior for non-array
+          // method values, including any property error if reached.
+          method = methods;
+        }
+      }
+      recalledMethods.set(action, method); return method;
+    };
     for (const measuredRelation of relations(m, actor)) {
       const declared = cfg.desired_axis_relation[measuredRelation.kind], relation = { ...measuredRelation,
         // Python integer multiplication never introduces IEEE negative zero.
@@ -103,8 +127,7 @@ export class AxialQuestion implements NativeFamily<any> {
       for (const prior of cfg.rotation_priors as R[]) {
         if (!obs.available_action_refs.includes(prior.action)) continue;
         let turn = prior.turn;
-        const method = [...methods].reverse().find(r => r.action === prior.action && equal(r.signature, this.methodSignature(m))
-          && r.evidence.length >= 2) ?? null;
+        const method = recalledMethod(prior.action);
         if (method) turn = method.turn;
         const projected = projections.find(p => p.turn === turn);
         if (!projected) throw new RangeError('Axial recalled turn is outside the source pivot domain');

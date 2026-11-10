@@ -63,6 +63,8 @@ La clé de tentative comprend l'époque, la cible, tous les centres/axes/marqueu
 
 La proposition conserve OP18, une action et `expected_after: null`. La garde source vérifie l'index zéro, l'observation, l'époque, le hash public, l'ensemble d'actions et la mesure actuelle. Le score figure dans la liaison, sans comparaison séparée dans cette garde source. L'autorisation commune de livraison conserve ses contrôles propres ; la famille ne prétend pas authentifier seule toute l'enveloppe. Après l'action, elle scelle toujours le préfixe avec effet et préservation encore inconnus.
 
+Le [parcours natif des méthodes](lot10a-evidence/history-lookup-source-review.md) conserve cet ordre de rappel sans recopier les listes. Un résultat, y compris l’absence de méthode, est mémorisé seulement pour la même commande dans le même appel synchrone à `offers`. L’historique complet reste conservé et le prochain appel renouvelle cette recherche. Les 130 contrats et six scénarios communs passent sur ce changement ; le coût des longues histoires reste ouvert.
+
 ## Acquisition et attribution des images
 
 L'attestation initiale demande une sélection mesurée absente avant, unique après, **un seul pixel changé au centre du corps sélectionné**, et la conservation ordonnée des centres, axes et signatures de tous les corps. Elle peut donc provenir de l'action d'une autre famille. Une sélection déjà dessinée au démarrage ne devient pas automatiquement une connaissance acquise.
