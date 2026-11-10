@@ -1,0 +1,121 @@
+{
+  "schema": "logos-engine.native-cost-window-readiness.v1",
+  "recordedAt": "2026-11-10T12:58:52.243309+00:00",
+  "finalizedAt": "2026-11-10T12:58:52.243309+00:00",
+  "status": "ready_for_predeclared_official_window",
+  "inputs": [
+    {
+      "path": "docs/migration/lot3e-evidence/final/validation/delta-tests-run.json",
+      "bytes": 107247,
+      "sha256": "cb8bc93dffa50aab7a0489ea925e126d9fd591cbd6f68811f4d21b8597ac1e45"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/validation/checks-run.json",
+      "bytes": 72069,
+      "sha256": "78925d2aceae25a29356fef35f59cea12d5148b452644cfd5d4a2054b22aba1b"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/regressions/regression-summary.json",
+      "bytes": 77752,
+      "sha256": "2a0a9303ffb14e8c76f3d5afe1d20b61f3f7de902cc45f847fe90da80e63e04c"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/performance/declaration.json",
+      "bytes": 4102,
+      "sha256": "119dee907a5e0c386258e16addb48e9f23927b1356aade6ce2ed01e041033366"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/performance/protocol.md",
+      "bytes": 9795,
+      "sha256": "e9525d29ff41ae5105d456ce69d589168f4c6e5befcf2b2215be95361fd67b39"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/performance/global-budget-policy.json",
+      "bytes": 2009,
+      "sha256": "2b29897c49907e30ff57fd359f1c4600180cf23c68177d873b73eaf701de7550"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/performance/protocol-check.json",
+      "bytes": 406,
+      "sha256": "53ed983089e1dda908dfdc1bb7dcb9ae81eef03f1a869319315360752d17272c"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/performance/static-preflight.json",
+      "bytes": 12140,
+      "sha256": "d1eb1f93dd75c8b7be9ed59b1e58bef5f663aa2d6ee7eede19913bd6046519d1"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/diagnostic/source-oracle-export.json",
+      "bytes": 2303,
+      "sha256": "06ffb1f1dc6f3799fd03de64248280ed5aaa6b93fe4ea696f27f4f8d94852348"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/diagnostic/native-contract-review.json",
+      "bytes": 1633,
+      "sha256": "829681282d554b057de956377478bb131ef7f38920131761f3dacdd93590b67c"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/diagnostic/integration-code-review.json",
+      "bytes": 6981,
+      "sha256": "ec3bf41dceaa2099a5376f8e34f41a32fd76b3b69727dfc80043e926a9fa3ffe"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/diagnostic/fogw-public-parity.json",
+      "bytes": 74935,
+      "sha256": "a0b62b98328df6505c562cb130f3b8ed781e538ef9526fb6bb07b789c0191e7a"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/diagnostic/fogw-public-replay-execution.json",
+      "bytes": 1083,
+      "sha256": "be019c4be3b962753e1a5150d271715b407db086a0356b78d1cbd3a5a64bb5a2"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/browser/browser-qa.json",
+      "bytes": 2441,
+      "sha256": "7dc2c8bb79ebbcf89c3731d8a070bfe008d38179ef193fc13fa3e52031eb2b72"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/fogw-resolution.json",
+      "bytes": 4677,
+      "sha256": "832b8c8aa7b57fe9634e52f82d76d06a8808b1cdbccc5e4c96437d929b819f6e"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/execution-fogw.json",
+      "bytes": 65897,
+      "sha256": "1e1bf71c8a5120c541368b65600afa5013f1ab41dd5453c9ff7b4537eeeb1e5d"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/reception-service-contribution.json",
+      "bytes": 1761156,
+      "sha256": "f829416ae63473ae02cbe1bd98ec3c7789fb8a7d6bd4bcd7362971ef188e3e49"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/contribution-transport.json",
+      "bytes": 715,
+      "sha256": "a9132aaed4bb79256a45b4d5232c4458e5c3c3d0e0a2878f926857ec93ff81fc"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/diagnostic-log-transport.json",
+      "bytes": 1643,
+      "sha256": "d0bed63411055154dc2a2a6e5b89e66f95887db64324de3c66fd119a8fa4319c"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/diagnostic/evidence-byte-parts-verification.json",
+      "bytes": 1714,
+      "sha256": "2c584541731033f980a34647fff00757f92b8ee85655d78e9898664a3e0fc779"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/delivery-integrity.json",
+      "bytes": 7218,
+      "sha256": "834029db4bfd19311efb88970d6f7c63cf4462ac2cf738e9e63100de6687edc1"
+    }
+  ],
+  "preview": "sites-preview stop completed; subsequent status confirmed Sites preview stopped.",
+  "isolation": "All owned formal tests, build, regression replays, campaigns, source comparisons, contribution checks, browser actions, transport and delivery-integrity work finished. Delegated agents confirmed no compute work remains. During sequential A1/B1/B2/A2 only light reading/documentation is allowed; no test/build/replay/game/preview or heavy calculation will run concurrently.",
+  "functionalQualification": "Frozen native0.46:1904/1904 tests56files,5/5checks/build,strictCATR/RSWP34/34. ColdFOGWtarget3met50actions27prefixes; browser same afterPause/step/resume. Independent1112checks preserve255exact-original checks through its revision16ValidationError and849explicitly adapted checks plus8common. Contribution162ablations41action/refusalchanges; negative trials retained. FOGWclock951.320275secondsclosed; CWSE2399.683865 andSK48667.35444 unchanged. Full original caller parity and request-specific continuation sealing remain unproved.",
+  "costPolicy": "Strict complete-session pooled median increase below10% separately for each game. Phase overruns do not block when both globals pass. All32measuredsessions400actions and phase/p95 diagnostics retained, no exclusions or cross-game compensation.",
+  "authorization": "User requested continuation and explicitly permits phase overruns if global increase remains below10%.",
+  "measurementAuthorized": true,
+  "pendingRequirements": [],
+  "qualification": "Readiness binds completed functional and integrity evidence. It authorizes the predeclared timing window, not cost acceptance or completion of untransferred source dependencies."
+}

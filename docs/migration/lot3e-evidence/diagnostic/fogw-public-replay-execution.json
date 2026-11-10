@@ -1,0 +1,34 @@
+{
+  "schema": "logos-engine.lot3e.public-replay-execution.v1",
+  "status": "passed_with_declared_native_adaptations",
+  "commands": [
+    [
+      "python",
+      "-B",
+      "docs/migration/lot3e-evidence/diagnostic/replay-reception-public.py"
+    ],
+    [
+      "node",
+      "docs/migration/lot3e-evidence/diagnostic/check-reception-public-parity.mjs"
+    ]
+  ],
+  "exitCodes": [
+    0,
+    0
+  ],
+  "logs": [
+    {
+      "path": "docs/migration/lot3e-evidence/diagnostic/fogw-public-source-replay.log",
+      "sha256": "26e551acfdc0f845185c8c36bd44889f740546a63896033b262bf0fc917244aa",
+      "bytes": 937
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/diagnostic/fogw-public-native-review.log",
+      "sha256": "1f3fbdf2b0aee29856b0ba25e5ed1ef54e6cb379456b0c4a1ca450f8cee5ef2a",
+      "bytes": 1409
+    }
+  ],
+  "newGameActions": 0,
+  "levelJumps": 0,
+  "qualification": "Two completed read-only executions. Original 585>128 exception is a retained source limitation inside the first replay, not an omitted process failure. Native source and tests were not edited."
+}

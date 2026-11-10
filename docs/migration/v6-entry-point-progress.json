@@ -2,7 +2,7 @@
   "schema": "logos-engine.v6.declared-entry-coverage.v1",
   "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
   "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
-  "implementation": "logos-engine.typescript.v6.native-migration/0.45.0",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.46.0",
   "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
   "connected": 50,
   "partiallyConnected": 1,
@@ -23,10 +23,10 @@
             "panel_service_plan",
             "chamber_relation_plan",
             "exposed_reception_plan",
-            "rooted_line_plan"
+            "rooted_line_plan",
+            "reception_service_plan"
           ],
           "pendingBranches": [
-            "reception_service_plan",
             "reference_population_plan"
           ]
         },
@@ -633,7 +633,7 @@
     }
   ],
   "pendingSupportSubcompositions": [],
-  "sharedSeriesMemory": "occurrence_recall_ancestors_observed_program_native_relations_typed_material_and_pose_radial_ports_field_service_rooted_quota_native_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_composition_exposed_reception_relational_chamber_panel_service_and_rooted_line; observed_composition_services 4/6 branches connected; remaining ObservedCompositionConstraint providers pending",
-  "sharedSeriesDigestScope": "native_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_exposed_reception_relational_chamber_panel_service_and_rooted_line_four_of_six_observed_compositions_v6",
+  "sharedSeriesMemory": "occurrence_recall_ancestors_observed_program_native_relations_typed_material_and_pose_radial_ports_field_service_rooted_quota_native_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_composition_exposed_reception_relational_chamber_panel_service_rooted_line_and_reception_service; observed_composition_services 5/6 branches connected; remaining ObservedCompositionConstraint providers pending",
+  "sharedSeriesDigestScope": "native_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_exposed_reception_relational_chamber_panel_service_rooted_line_and_reception_service_five_of_six_observed_compositions_v6",
   "fullV6Parity": false
 }

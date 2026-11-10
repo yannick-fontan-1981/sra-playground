@@ -234,3 +234,19 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot3d-evidence/final/regressions/catr-044-replay.json.gz
 /docs/migration/lot3d-evidence/final/regressions/rswp-044-replay.json.gz
 /docs/migration/lot3d-evidence/final/sk48-rooted-session/sk48-campaign.json.gz
+
+# Lot3E native source snapshots are stored as checked exact byte parts.
+/docs/migration/lot3e-evidence/**/source-archive.tar.gz
+!/docs/migration/lot3e-evidence/performance/cohort*/*.log
+
+# Exact contribution JSON; restore with lot3e-evidence/restore-contribution.py
+/docs/migration/lot3e-evidence/final/fogw-reception-session/reception-service-contribution.json
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot3e-evidence/baseline/fogw-bounded-reference/fogw-campaign.json.gz
+/docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-campaign.json.gz
+/docs/migration/lot3e-evidence/final/regressions/catr-045-replay.json.gz
+/docs/migration/lot3e-evidence/final/regressions/rswp-045-replay.json.gz
+
+# Exact pre-freeze audit output is preserved in deterministic gzip.
+/docs/migration/lot3e-evidence/diagnostic/pre-freeze-migration-audit.json

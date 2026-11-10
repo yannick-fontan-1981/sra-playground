@@ -1,0 +1,38 @@
+{
+  "status": "byte_identical",
+  "fromCheckout": "/workspace/sites/sra-published-045",
+  "toCheckout": "/workspace/sites/sra-playground-step3d/.sites-checkout",
+  "files": [
+    {
+      "path": "docs/migration/lot3e-evidence/baseline/fogw-bounded-reference/execution-fogw.json",
+      "sha256": "8598691580029c6cbb68aab4d0e4838c0af4b61636f806e24f599f39f47aeda6",
+      "bytes": 64934
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/baseline/fogw-bounded-reference/fogw-actual-public-journal.jsonl.gz",
+      "sha256": "e7e2829abbb4ed209726b880b687d356b0f703fa66d6f7e281a983d71ceb40b7",
+      "bytes": 6329
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/baseline/fogw-bounded-reference/fogw-campaign.json.gz",
+      "sha256": "322330007f26d35cb5ff7113524ce534864649ffbe158e7f43123fc7edaf2db8",
+      "bytes": 3662523
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/baseline/fogw-bounded-reference/fogw-output.log.gz",
+      "sha256": "72cf0eb455a465546eda38359223f88107ad7f2ac1cf959f25fd026ef08a00c3",
+      "bytes": 2659
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/baseline/fogw-bounded-reference/fogw-public-trace.json.gz",
+      "sha256": "410e57144353b3c7d30012065b82344bf48c24aa93be44dcfb60b050695e943e",
+      "bytes": 10366
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/baseline/fogw-bounded-reference/source-manifest.json",
+      "sha256": "d7c139d6b4da64e6070f044ab49d0a6646b3dbf69bfedaa1434b853df5a5ebb6",
+      "bytes": 30270
+    }
+  ],
+  "qualification": "Actual bounded0.45reference results copied without altering their bytes or reinterpreting the outer16actioncap failure."
+}

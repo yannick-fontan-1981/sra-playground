@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.reception-contribution-transport.v1",
+  "original": {
+    "path": "final/fogw-reception-session/reception-service-contribution.json",
+    "bytes": 1761156,
+    "sha256": "f829416ae63473ae02cbe1bd98ec3c7789fb8a7d6bd4bcd7362971ef188e3e49"
+  },
+  "compressed": {
+    "path": "final/fogw-reception-session/reception-service-contribution.json.gz",
+    "bytes": 60004,
+    "sha256": "8f4dab87126c9ef905d6eed7427db295efe1551013e0bae9405c65125ad17df7"
+  },
+  "gzipMtime": 0,
+  "roundTripBytesEqual": true,
+  "qualification": "Lossless deterministic gzip of the completed contribution proof. Original JSON bytes are preserved exactly; this is transport only, not a new proof or game analysis."
+}

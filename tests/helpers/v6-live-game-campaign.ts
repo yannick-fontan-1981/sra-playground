@@ -380,6 +380,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const previousExposedReceptionCount = report.prefixes.at(-1)?.sharedSeries.exposedReceptionEventCount ?? 0;
           const rootedLineEvents = (series.events as R[]).filter(event => event.kind === 'observed_rooted_line');
           const previousRootedLineCount = report.prefixes.at(-1)?.sharedSeries.rootedLineEventCount ?? 0;
+          const receptionServiceEvents = (series.events as R[]).filter(event => event.kind === 'observed_reception_service');
+          const previousReceptionServiceCount = report.prefixes.at(-1)?.sharedSeries.receptionServiceEventCount ?? 0;
           const productStates = (series.events as R[]).filter(event => event.kind === 'observed_factor_product');
           const labeledSubmissions = (series.events as R[]).filter(event => event.kind === 'labeled_sequence_submission');
           const traceExtensions = (series.events as R[]).filter(event => event.kind === 'observed_trace_extension');
@@ -442,6 +444,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               ? { observedExposedReception: { proposal: evidence.proposal,
                     stateNode: 'family_state:public_occurrence_recall',
                     qualification: 'Passive capture of the selected common proposal. Production measures the scene, searches with conditional acquired effects and V5 nominal push expansion, and acquires each actual return once. No action, state or expected return is supplied by this recorder.' } } : {}),
+            ...(evidence.proposal.reception_service_plan
+              ? { observedReceptionService: { proposal: evidence.proposal,
+                    stateNode: 'family_state:public_occurrence_recall',
+                    qualification: 'Passive capture only. Production measures the lattice and carrier, acquires controls and actual returns, and enforces the cumulative wait ledger. No decision, state or expected return is supplied by this recorder.' } } : {}),
             ...(evidence.proposal.rooted_line_plan
               ? { observedRootedLine: { proposal: evidence.proposal,
                     stateNode: 'family_state:public_occurrence_recall',
@@ -597,6 +603,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               chamberRelationAcquiredEvents: chamberRelationEvents.slice(previousChamberRelationCount),
               exposedReceptionEventCount: exposedReceptionEvents.length,
               exposedReceptionAcquiredEvents: exposedReceptionEvents.slice(previousExposedReceptionCount),
+              ...(receptionServiceEvents.length || evidence.proposal.reception_service_plan
+                ? { receptionServiceEventCount: receptionServiceEvents.length,
+                    receptionServiceAcquiredEvents: receptionServiceEvents.slice(previousReceptionServiceCount) } : {}),
               ...(rootedLineEvents.length || evidence.proposal.rooted_line_plan
                 ? { rootedLineEventCount: rootedLineEvents.length,
                     rootedLineAcquiredEvents: rootedLineEvents.slice(previousRootedLineCount) } : {}),

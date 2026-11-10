@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "fogw-campaign.json.gz",
+    "sha256": "322330007f26d35cb5ff7113524ce534864649ffbe158e7f43123fc7edaf2db8",
+    "bytes": 3662523
+  },
+  "parts": [
+    {
+      "file": "fogw-campaign.json.gz.part000",
+      "sha256": "5418b275547e502b94521b9e5c459675f7dcd657dec8b8c46b1f3d6124503ddb",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-campaign.json.gz.part001",
+      "sha256": "7dfb1494fe4f7b92f29297c258fcf63428edf5b2ad2b657f6830cab6b1f31639",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-campaign.json.gz.part002",
+      "sha256": "bbdea75835d22976f9ef38db26043ead4f99a041c2a95971a2895e49098152c2",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-campaign.json.gz.part003",
+      "sha256": "b126643fbbba73f072e99e58604fcfb4312dc1b9873a9a59bf527148daaf8eea",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-campaign.json.gz.part004",
+      "sha256": "3ff5b85453176979a4ee14efff6ea8e08de3d95cf146a1b22ac7c95ed12ab901",
+      "bytes": 62523
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

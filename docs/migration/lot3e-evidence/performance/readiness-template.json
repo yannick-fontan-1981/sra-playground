@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.native-cost-window-readiness-template.v1",
+  "preparedAt": "2026-11-10T12:37:43.518802+00:00",
+  "status": "template_not_ready",
+  "measurementAuthorized": false,
+  "inputs": [],
+  "requiredEvidence": [
+    "final exact-source test receipt",
+    "final checks/build receipt",
+    "CATR/RSWP regression receipt",
+    "source fixture and integrated contribution receipts",
+    "actual campaign resolution and cumulative clock",
+    "browser QA including Pause/step/resume",
+    "candidate source/build integrity",
+    "final declaration, policy, protocol and static preflight"
+  ],
+  "pendingRequirements": [
+    "Freeze and hash native0.46 candidate and its source archive.",
+    "Finalize global policy, protocol and declaration after freeze and before every official measurement.",
+    "Complete and bind actual functional, regression, campaign, contribution, browser and integrity evidence.",
+    "Stop preview and all compute work; record final readiness and isolation."
+  ],
+  "qualification": "Owner must create readiness.json from completed evidence; this template authorizes no measurement."
+}

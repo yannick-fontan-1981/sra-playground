@@ -1,0 +1,143 @@
+{
+  "schema": "logos-engine.reception-integration-code-review.v1",
+  "reviewedAt": "2026-11-10T12:41:01.989382+00:00",
+  "status": "no_blocking_issue_found",
+  "method": "Independent read-only comparison of current TypeScript, pinned source hierarchy, integration/access tests and migration mappings. This receipt is a code review, not a test execution or game result.",
+  "checkedCount": 12,
+  "checks": [
+    {
+      "name": "source_dispatch_order",
+      "status": "reviewed",
+      "finding": "ReceptionService is proposed and guarded before RootedLine, PanelService, Chamber and Exposed. Inactive/unmeasured reception delegates; own blocking refusals remain visible."
+    },
+    {
+      "name": "source_acquisition_order",
+      "status": "reviewed",
+      "finding": "Inherited support acquires before Exposed, Chamber, Panel, RootedLine and ReceptionService. SharedSeries invokes each own reducer once, then packet acquisition."
+    },
+    {
+      "name": "distinct_event_owners",
+      "status": "reviewed",
+      "finding": "observed_exposed_reception and observed_reception_service are routed to distinct owners during live acquisition and replay. Native extension is explicit; exact inherited source alias/digest parity is not claimed."
+    },
+    {
+      "name": "legacy_digest_compatibility",
+      "status": "reviewed",
+      "finding": "Reception enters sharedDigest and replay digest only after an own event. Actual published0.45 fixture coverage includes combined old layers; the new empty layer leaves old digests exact."
+    },
+    {
+      "name": "atomic_restoration",
+      "status": "reviewed",
+      "finding": "Replay constructs fresh owners and checks the complete digest before replacing live owners. The accepted-state shortcut validates owner identity, revision and structural witness, including the native epoch option."
+    },
+    {
+      "name": "current_epoch_acquisition",
+      "status": "reviewed",
+      "finding": "Common owner enables currentEpochAcquisition. The first actual return with a current bound tentative epoch commits the reset; later returns use acquired memory. Evidence and residual histories are retained."
+    },
+    {
+      "name": "stationary_authority",
+      "status": "reviewed",
+      "finding": "Current-epoch native reset deletes stationary proof. Controls reset on epoch change, and a current actual zero delta is required before a longer wait batch."
+    },
+    {
+      "name": "cumulative_wait",
+      "status": "reviewed",
+      "finding": "Source integer counters stay independently in0..128. Native caller clamps larger overall budgets to128, blocks exhaustion before fallback and keeps wait_spent through prefixes/restoration."
+    },
+    {
+      "name": "physical_action_allowance",
+      "status": "reviewed",
+      "finding": "Common observed entry returns null at remaining<1 and supplies remaining_level_actions with max prefix min16. Access paths must fit remaining; confirmed waits use min(limit,16,remaining,wait_batch); runtime independently rejects oversized proposals."
+    },
+    {
+      "name": "current_context_guards",
+      "status": "reviewed",
+      "finding": "Before guards bind layout, epoch, score, plan identity and command equality, availability, first observation/frame, then carrier positions. Outcomes preserve unknown/ambiguous/boundary as sealed prefixes and acquired contradictions as refusals."
+    },
+    {
+      "name": "residual_consumed_scope",
+      "status": "reviewed",
+      "finding": "Only source record/apply/state closure is ported. Unassigned correspondence sets, repeated-role shapes, transitions, ambiguous arrivals and failures remain; independent residual navigation/forecast selection is not claimed."
+    },
+    {
+      "name": "coverage_reconciliation",
+      "status": "reviewed",
+      "finding": "Four new source mappings are unique:projection and wait contract component_verified; access and consumed residual partial_transfer. Registry/workflow denominator remains unchanged; common snapshot is5/6branches."
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src/logos-engine/v6-shared-series.ts",
+      "bytes": 76196,
+      "sha256": "124016b5549e2a2556c959f41a5fee73ccddd74e30aa047845d5e5ce317be0cb"
+    },
+    {
+      "path": "src/logos-engine/v6-reception-service-access.ts",
+      "bytes": 14126,
+      "sha256": "6bfb06ec5d3b06f2206c0511fa4fe27184635663f51a83235e1b2d9bc06a8c06"
+    },
+    {
+      "path": "src/logos-engine/v6-reception-residual-evidence.ts",
+      "bytes": 7637,
+      "sha256": "30bbad1ffb6a285616aed59f83f22aeb083dc97c687c1d8959662e6c83174656"
+    },
+    {
+      "path": "src/logos-engine/v5-reception-wait-contracts.ts",
+      "bytes": 2151,
+      "sha256": "24f9a184e1de37f577e0cbb4dcc2eb1b0c718a06a39c966e27c82b987ac2b79b"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 133208,
+      "sha256": "ebf265af2d74c3559c64e393cca0f867c28796cc0fc8b6c05b8f7590ddc0c0ed"
+    },
+    {
+      "path": "tests/v6-reception-service-integration.test.ts",
+      "bytes": 12598,
+      "sha256": "d618f4d24511b1b3ae1124fd4792dfd693a66198b9e22590deb263d520750da3"
+    },
+    {
+      "path": "tests/v6-reception-service-access.test.ts",
+      "bytes": 12019,
+      "sha256": "40514cd985eae59fed33e8b765ca4448025f1b5775f4dedf6b33d965f763914a"
+    },
+    {
+      "path": "tests/v6-reception-residual-evidence.test.ts",
+      "bytes": 2003,
+      "sha256": "2d7f266a75b5db684998adb06a5a742fa07a86b675003e607f37e4a422bffa92"
+    },
+    {
+      "path": "tests/v5-reception-wait-contracts.test.ts",
+      "bytes": 3440,
+      "sha256": "8fdde7013a20e2215db51515bdd43158285b312697237aee3e9b0ed172b2fe10"
+    },
+    {
+      "path": "migration/v6-transfer-map.json",
+      "bytes": 359411,
+      "sha256": "1fd4873dc05efee4cd4ef8d79b8a81251d369c405475c57c2a8c023368bfc57b"
+    }
+  ],
+  "expectedAudit": {
+    "pythonModules": 1369,
+    "componentVerifiedModules": 158,
+    "partiallyTransferredModules": 140,
+    "pendingModules": 1071,
+    "verifiedModules": 0,
+    "observedCompositionBranches": 5,
+    "observedCompositionBranchDenominator": 6,
+    "completeEntryPoints": 50,
+    "entryPointDenominator": 76,
+    "partialEntryPoints": 1,
+    "compiledWorkflows": 37
+  },
+  "remainingQualifications": [
+    "Default own-layer source mode retains source defects for differential comparison; production common mode explicitly applies ownership, current-epoch and bounded-wait extensions.",
+    "Retained target/counterpart handling remains the source projection rule. A proposed reception is still a conditional hypothesis, not a terminal law or hidden-motion explanation.",
+    "Direct source-compatible access is not itself the zero-action-budget entry; the common owner and runtime enforce the physical allowance.",
+    "Full source inherited digest, complete caller parity and functional success remain separate evidence."
+  ],
+  "nativeChangesMadeByReview": false,
+  "gamesExecuted": 0,
+  "costMeasurementsExecuted": 0
+}

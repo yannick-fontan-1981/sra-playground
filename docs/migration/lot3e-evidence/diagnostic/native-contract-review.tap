@@ -1,0 +1,22 @@
+✔ independent source receipts retain the actual originals and all identified discrepancies (2.569635ms)
+✔ independent original wait ledger ledger:base (0.574809ms)
+✔ independent original wait ledger ledger:zero_budget (0.220235ms)
+✔ independent original wait ledger ledger:fully_spent (0.347734ms)
+✔ independent original wait ledger ledger:spent_exceeds_budget_source_accepts (0.150903ms)
+✔ independent original wait ledger ledger:budget_129 (0.249178ms)
+✔ independent original wait ledger ledger:budget_600 (0.149211ms)
+✔ independent original wait ledger ledger:spent_129 (0.132325ms)
+✔ independent original wait ledger ledger:negative_spent (0.276288ms)
+✔ independent original wait ledger ledger:negative_epoch (0.185904ms)
+✔ independent original wait ledger ledger:negative_clock (0.116232ms)
+✔ native journal separation changes only the documented inherited alias boundary (19.555441ms)
+✔ native cumulative ceiling consumes exactly 128 actual waits across four restores (1597.934709ms)
+✔ native zero and one wait capacities block without changing the whole-level budget (23.872698ms)
+ℹ tests 14
+ℹ suites 0
+ℹ pass 14
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1887.963942

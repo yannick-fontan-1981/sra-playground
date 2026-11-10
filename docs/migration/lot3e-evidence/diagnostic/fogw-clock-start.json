@@ -1,0 +1,27 @@
+{
+  "schema": "logos-engine.cumulative-case-clock.v1",
+  "game": "FOGW",
+  "selectedAt": "2026-11-10T12:42:41.071198+00:00",
+  "accountingStartedAt": "2026-11-10T12:40:45.295029+00:00",
+  "deadlineAt": "2026-11-10T13:20:45.295029+00:00",
+  "maximumCumulativeSeconds": 2400,
+  "priorRecordedActiveSeconds": 0,
+  "startingCumulativeSeconds": 115.776169,
+  "selectionEvidence": {
+    "path": "docs/migration/lot3e-evidence/diagnostic/reception-public-admission.json",
+    "sha256": "672ab284864acef4a22b12891cfa13e529c985bb2f3fe45a2169b4955d714c84"
+  },
+  "selection": "Only public scene admission among 98 archived initial rasters. No game specification, private state, authored route or solution inspected.",
+  "plannedWork": [
+    "bounded 0.45 cold reference: 16 actions",
+    "frozen 0.46 common cold campaign: target 3 levels",
+    "contribution and independent original public comparison",
+    "browser Pause/step/resume"
+  ],
+  "noClockReset": true,
+  "priorCaseClocksUnchanged": {
+    "CWSE": 2399.683865,
+    "SK48": 667.35444
+  },
+  "qualification": "Conservative accounting starts at the preceding protocol declaration, covering failed launch preparation and subsequent case work. Setup errors executed no game. Every new FOGW attempt and case diagnosis is charged until this case work closes."
+}

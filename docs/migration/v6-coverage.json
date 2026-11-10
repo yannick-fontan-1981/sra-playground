@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 156,
-    "partiallyTransferredModules": 138,
+    "componentVerifiedModules": 158,
+    "partiallyTransferredModules": 140,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1075,
+    "pendingModules": 1071,
     "strategyFamilies": 16
   },
   "families": [
@@ -43835,9 +43835,21 @@
           "endLine": 15
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v5-reception-wait-contracts.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reception-service-reference.py",
+        "tests/fixtures/v6-reception-service-reference.json.gz",
+        "tests/v6-reception-service-observation.test.ts",
+        "tests/v6-reception-service-access.test.ts",
+        "tests/v6-reception-service-integration.test.ts",
+        "scripts/export-v6-reception-service-legacy-checkpoints.mjs",
+        "tests/fixtures/v6-reception-service-legacy-checkpoints.json.gz",
+        "docs/migration/lot3e-reception-service-lineage.md",
+        "tests/v5-reception-wait-contracts.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/recipe_body_observation_contracts_d.py",
@@ -84783,9 +84795,21 @@
           "endLine": 68
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-reception-service-access.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reception-service-reference.py",
+        "tests/fixtures/v6-reception-service-reference.json.gz",
+        "tests/v6-reception-service-observation.test.ts",
+        "tests/v6-reception-service-access.test.ts",
+        "tests/v6-reception-service-integration.test.ts",
+        "scripts/export-v6-reception-service-legacy-checkpoints.mjs",
+        "tests/fixtures/v6-reception-service-legacy-checkpoints.json.gz",
+        "docs/migration/lot3e-reception-service-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/reception_service_projection.py",
@@ -84824,9 +84848,20 @@
           "endLine": 59
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-reception-service-observation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reception-service-reference.py",
+        "tests/fixtures/v6-reception-service-reference.json.gz",
+        "tests/v6-reception-service-observation.test.ts",
+        "tests/v6-reception-service-access.test.ts",
+        "tests/v6-reception-service-integration.test.ts",
+        "scripts/export-v6-reception-service-legacy-checkpoints.mjs",
+        "tests/fixtures/v6-reception-service-legacy-checkpoints.json.gz",
+        "docs/migration/lot3e-reception-service-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/reference_population_access.py",
@@ -85188,9 +85223,21 @@
           "endLine": 182
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-reception-residual-evidence.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-reception-service-reference.py",
+        "tests/fixtures/v6-reception-service-reference.json.gz",
+        "tests/v6-reception-service-observation.test.ts",
+        "tests/v6-reception-service-access.test.ts",
+        "tests/v6-reception-service-integration.test.ts",
+        "scripts/export-v6-reception-service-legacy-checkpoints.mjs",
+        "tests/fixtures/v6-reception-service-legacy-checkpoints.json.gz",
+        "docs/migration/lot3e-reception-service-lineage.md",
+        "tests/v6-reception-residual-evidence.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/resource_alignment.py",
@@ -98573,15 +98620,7 @@
       "kind": "reference_data"
     }
   ],
-  "failures": [
-    "Missing differential evidence: docs/migration/lot3d-rooted-line-lineage.md",
-    "Missing differential evidence: docs/migration/lot3d-rooted-line-lineage.md",
-    "Missing differential evidence: docs/migration/lot3d-rooted-line-lineage.md",
-    "Missing differential evidence: docs/migration/lot3d-rooted-line-lineage.md",
-    "Missing differential evidence: docs/migration/lot3d-rooted-line-lineage.md",
-    "Missing differential evidence: docs/migration/lot3d-rooted-line-lineage.md",
-    "Missing differential evidence: docs/migration/lot3d-rooted-line-lineage.md"
-  ],
+  "failures": [],
   "scopeNotes": [
     "The completion gate includes the published common symbolic caller and every transitive reasoning capability it requires, including inherited V5 implementations.",
     "The original Python sources are development references. Shipping them as an executable agent, or calling a Python backend, does not satisfy the migration requirement.",
@@ -98644,6 +98683,7 @@
     "Lot3A/native0.37 transfers the complete own Panel service branch from V6 into the existing SharedSeries owner. The registry facade is explicitly 1/6 partial and does not increment the connected50/76 total. Projection is component_verified; access and common facade retain partial_transfer because inherited branches remain pending. Original source fixtures, shared-owner tests, the cold three-level RSWP campaign and separate browser/cost evidence retain their distinct scopes. No new V5 numerical kernel or full source-caller parity is claimed; all six complete-migration gates remain false.",
     "Lot3B/native0.39 transfers the Chamber own layer into SharedSeries and reuses the consumed V5 finite relation domain kernel. observed_composition_services is explicitly2/6 partial, with connected50/76 unchanged. Own Chamber projection is component_verified; access and V5 kernel are partial_transfer. Current binding, contradiction, acquisition, native checkpoint and source identity contracts have separate proofs. All six complete-migration gates remain false; compile counts and isolated component parity do not imply full caller or game equivalence.",
     "Lot3C/native0.43 adds ExposedReception as the third of six observed-composition branches under SharedSeries. The small-lattice projection is component_verified; access and the sole consumed V5 _expand_push_chain remain partial_transfer because their full ancestor/transaction closures are not transferred. Numeric source identity, acquired conditional effects, strict-progress bounded search, source dispatch/acquisition order and atomic0.42 checkpoint compatibility have separate component/integration proofs. The future reception_events collision with ReceptionService remains an explicit ownership/migration contract for that port. Connected50/76,37 compiled workflows and all six false completion gates remain distinct; no live campaign or cost result is anticipated by these mappings.",
-    "Lot3D/native0.45 adds RootedLine as the fourth of six observed-composition branches, in the same SharedSeries owner. Its own projection/mechanics have component proofs; access and the consumed V5 conditional Piercing subgraph remain partial transfers. Source fixture parity, common binding/acquisition/restoration and measured game contribution are distinct evidence. The native portable JSON integer domain and current-deadline interruption are explicit; staged V5 paths remain untransferred. Complete-entry coverage remains50/76,37 compiled workflows, and all global completion gates remain false. No game/cost success is inferred from static mappings."
+    "Lot3D/native0.45 adds RootedLine as the fourth of six observed-composition branches, in the same SharedSeries owner. Its own projection/mechanics have component proofs; access and the consumed V5 conditional Piercing subgraph remain partial transfers. Source fixture parity, common binding/acquisition/restoration and measured game contribution are distinct evidence. The native portable JSON integer domain and current-deadline interruption are explicit; staged V5 paths remain untransferred. Complete-entry coverage remains50/76,37 compiled workflows, and all global completion gates remain false. No game/cost success is inferred from static mappings.",
+    "Lot3E/native0.46 transfers ReceptionService own measured projection, access/return contracts, consumed ResidualAccess evidence reducer and V5 wait ledger. Source-mode component fixtures remain distinct from named native common ownership/current-epoch/wait adaptations. The facade is5/6; ReferencePopulation and full inherited closure remain pending.50/76complete entries,37compiled workflows and six false completion gates remain distinct. No campaign or cost result is inferred from mappings; actual evidence is documented in lot3e-reception-service.md."
   ]
 }

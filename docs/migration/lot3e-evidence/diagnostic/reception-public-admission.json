@@ -1,0 +1,1563 @@
+{
+  "schema": "logos-engine.v6.reception-service-public-admission.v1",
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "sourcePath": "agents/yf_arc3_v6/laya_proto/reception_service_projection.py",
+  "sourceSha256": "a0f88ac17512319130aa525d08a3744de874f1624a3e700ca6e74eecb32c4f84",
+  "corpus": {
+    "path": "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+    "sha256": "3f82fb0b60a104095623216023054ef438ca4cc516941c671c385ebcbf1e54f2",
+    "actions": 0,
+    "levelJumps": 0,
+    "excludedGames": [
+      "CWSE",
+      "SK48"
+    ]
+  },
+  "cases": [
+    {
+      "game": "AR25",
+      "rowsSha256": "dcb73927160522c26e2655d31ead221e6da6aab818037d20388bbf46e9afa1b0",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "BP35",
+      "rowsSha256": "73ed3968e48e2ac7b6d4a41c2a408abeba6f9ce1c493ad03ce2dd512b0be55bd",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "CD82",
+      "rowsSha256": "824ef203a4308533d58fd0b7207d4bb4396f1ac1b6ed8bf4a5160259c94a6904",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "CN04",
+      "rowsSha256": "76e9c99bc22f6b778aa1edd6bf938de351aedb10016b72f95bb67d75490ba0e7",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "DC22",
+      "rowsSha256": "3882264d7cb6462eb124e8cfc3c3920d25a499167b2b0436cf62c1d753e12d4a",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "FT09",
+      "rowsSha256": "b537cde839031c143072b1b1fd7612179a55b4a8ff85a1c485e3be3fd3b33211",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "G50T",
+      "rowsSha256": "f79ab0e9d856fdf82c39b63b513bc997ebe8313394732f8318bd2815d639e586",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "KA59",
+      "rowsSha256": "a5391f47a4b5f63feb8af396ab4b0bbdd2f80a18a0f19ffe6f128765e9d75e2c",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "LF52",
+      "rowsSha256": "8c3509a81bc0b33cdcadefd63b15f8d8259dcfc4f6f12c00a1ff598d849bc4ff",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "LP85",
+      "rowsSha256": "10d339c4ff95d67f9c94ded838ab2080df929551e32ae1443ffa888cd580632a",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "LS20",
+      "rowsSha256": "f530cf6adb4a6d0fe87baa072ecf62be621169f9ef3b0baf09539904c5f4220f",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "M0R0",
+      "rowsSha256": "bb1341069e852a7c58ff55efadf07481d91af3c13f11fd3d2e791b9c061074c9",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "R11L",
+      "rowsSha256": "130ccc591dbbae50cc3698a6746ac101dcfa7a83f87135ae411ed7e863358d1f",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "RE86",
+      "rowsSha256": "86e77cb5586f7c726877e5b5e100f6a5e7904970a02d0be64f15550162ed399f",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "S5I5",
+      "rowsSha256": "0de899ef426dee32a5ae69f04d75484537ada1c8a01db97fc25b240227139335",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "SB26",
+      "rowsSha256": "8cc17052ea2038b2a490b9e2c224d25ed1ec8a167f5f28bc0b0f2abe01ac3f01",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "SC25",
+      "rowsSha256": "518653148c1631c7757a723e0e9f144e62e09fce58cdd5648881c2a8b4c8211c",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "SP80",
+      "rowsSha256": "0ba719661c41cd3db3499afa4ec373d1ae79386e50c866e2487946b59a255b1b",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "SU15",
+      "rowsSha256": "e04c9e9cd2bdb08059068a08a978791e5772f5fa4433ac90d22453b8ce96c82e",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "TN36",
+      "rowsSha256": "3e8702e648bb97558ba2787491f62222b7148b397a9176f60c3ce18d38a62f8b",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "TR87",
+      "rowsSha256": "bf60e2953965adca1444960d2bf267bab440c2d18234c0a245ce214ea0982174",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "TU93",
+      "rowsSha256": "23357766b7528ba534149f7208fb60ca49ff5ef82d5df20d3d48a4f30f3c0ad0",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "VC33",
+      "rowsSha256": "fdde551e3fd269f62e14eb380d2244aefb8f8230f3af72741a2d89acbf1fe414",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "WA30",
+      "rowsSha256": "22f3ccd4739a85cebbd807dc32cee300c3e43630d38a8422ccf48e81fba53e82",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "SKBN",
+      "rowsSha256": "397457b492afea44a57c288c30be2deca0273bea7b0e1478c8a0050994c69316",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "CLRS",
+      "rowsSha256": "e2b4355c3cbb57a22e040fe0acfb5ae7a6f7b71c73584dac7a1b1b14efa03c88",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "SWCH",
+      "rowsSha256": "2a01379c598b3d702d63422050272988fe3438f432111386b085561b5c32d65d",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "STCK",
+      "rowsSha256": "0aff2f0878f2054d021b294f4972e1450ef08479ba80af7cca138998bc341521",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "HANO",
+      "rowsSha256": "b98de996d71bd15851a87548cec2dfe58106d84aa35339aad5963407bdbaaf2e",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "SEQN",
+      "rowsSha256": "90b98f0d2993a9338e5446a775a38e880770aabbdf7f5ff297aed6f6c14252bc",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "MIND",
+      "rowsSha256": "38a98b347eb0eff5c6715e6e34925f0a95bc1cb499c9865f1ddfb7fbc2011e19",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "MEMO",
+      "rowsSha256": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "REGN",
+      "rowsSha256": "47aa13d6af55af3e0efd065ed7eacc0793512ef6c920614ef326caa1d92f6662",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "CONN",
+      "rowsSha256": "8582db376241703619ffe1d10270b7cc526be874c62085c23b4f31e89979bee7",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "DNOI",
+      "rowsSha256": "fe8185baa681f8b64efdc63295c621b807d85c690745d8d564aa59e0d6c192f1",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "SYME",
+      "rowsSha256": "a8e7722fbd6f8241e802a54867e6428e28e7f7178ce3a114ddc3c7302f7294ef",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "GORI",
+      "rowsSha256": "b7789fb9ae19a319ec1ea7fc4a2b5d1c2032885c185218e4bdcb3f93bf61207c",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "KEYD",
+      "rowsSha256": "1968dffaf6bef93353bc2796ce9df0ebb70698d8baf58f7da9b0783c6aa7f5ee",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "LOGI",
+      "rowsSha256": "93695febfcefd196d6fbbcff9f117a5ce5de86d17055a4da802b798a61030999",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "PORT",
+      "rowsSha256": "3e7e40321ad15433fc75d6adecc02c58d7d5c16546c8f49f14c2883710f9f9e3",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "FOGW",
+      "rowsSha256": "68605777340ade0dfabc54e2d9f94160754d942647a210b6304c914a40521910",
+      "scene": {
+        "box": [
+          7,
+          3,
+          56,
+          52
+        ],
+        "pitch": 4,
+        "cells": [
+          [
+            10,
+            6
+          ],
+          [
+            14,
+            6
+          ],
+          [
+            18,
+            6
+          ],
+          [
+            22,
+            6
+          ],
+          [
+            26,
+            6
+          ],
+          [
+            30,
+            6
+          ],
+          [
+            34,
+            6
+          ],
+          [
+            38,
+            6
+          ],
+          [
+            42,
+            6
+          ],
+          [
+            46,
+            6
+          ],
+          [
+            50,
+            6
+          ],
+          [
+            10,
+            10
+          ],
+          [
+            14,
+            10
+          ],
+          [
+            18,
+            10
+          ],
+          [
+            22,
+            10
+          ],
+          [
+            26,
+            10
+          ],
+          [
+            30,
+            10
+          ],
+          [
+            34,
+            10
+          ],
+          [
+            38,
+            10
+          ],
+          [
+            42,
+            10
+          ],
+          [
+            46,
+            10
+          ],
+          [
+            50,
+            10
+          ],
+          [
+            10,
+            14
+          ],
+          [
+            14,
+            14
+          ],
+          [
+            18,
+            14
+          ],
+          [
+            22,
+            14
+          ],
+          [
+            26,
+            14
+          ],
+          [
+            30,
+            14
+          ],
+          [
+            34,
+            14
+          ],
+          [
+            38,
+            14
+          ],
+          [
+            42,
+            14
+          ],
+          [
+            46,
+            14
+          ],
+          [
+            50,
+            14
+          ],
+          [
+            10,
+            18
+          ],
+          [
+            14,
+            18
+          ],
+          [
+            18,
+            18
+          ],
+          [
+            22,
+            18
+          ],
+          [
+            26,
+            18
+          ],
+          [
+            30,
+            18
+          ],
+          [
+            34,
+            18
+          ],
+          [
+            38,
+            18
+          ],
+          [
+            42,
+            18
+          ],
+          [
+            46,
+            18
+          ],
+          [
+            50,
+            18
+          ],
+          [
+            10,
+            22
+          ],
+          [
+            14,
+            22
+          ],
+          [
+            18,
+            22
+          ],
+          [
+            22,
+            22
+          ],
+          [
+            26,
+            22
+          ],
+          [
+            30,
+            22
+          ],
+          [
+            34,
+            22
+          ],
+          [
+            38,
+            22
+          ],
+          [
+            42,
+            22
+          ],
+          [
+            46,
+            22
+          ],
+          [
+            50,
+            22
+          ],
+          [
+            10,
+            26
+          ],
+          [
+            14,
+            26
+          ],
+          [
+            18,
+            26
+          ],
+          [
+            22,
+            26
+          ],
+          [
+            26,
+            26
+          ],
+          [
+            30,
+            26
+          ],
+          [
+            34,
+            26
+          ],
+          [
+            38,
+            26
+          ],
+          [
+            42,
+            26
+          ],
+          [
+            46,
+            26
+          ],
+          [
+            50,
+            26
+          ],
+          [
+            10,
+            30
+          ],
+          [
+            14,
+            30
+          ],
+          [
+            18,
+            30
+          ],
+          [
+            22,
+            30
+          ],
+          [
+            26,
+            30
+          ],
+          [
+            30,
+            30
+          ],
+          [
+            34,
+            30
+          ],
+          [
+            38,
+            30
+          ],
+          [
+            42,
+            30
+          ],
+          [
+            46,
+            30
+          ],
+          [
+            50,
+            30
+          ],
+          [
+            10,
+            34
+          ],
+          [
+            14,
+            34
+          ],
+          [
+            18,
+            34
+          ],
+          [
+            22,
+            34
+          ],
+          [
+            26,
+            34
+          ],
+          [
+            30,
+            34
+          ],
+          [
+            34,
+            34
+          ],
+          [
+            38,
+            34
+          ],
+          [
+            42,
+            34
+          ],
+          [
+            46,
+            34
+          ],
+          [
+            50,
+            34
+          ],
+          [
+            10,
+            38
+          ],
+          [
+            14,
+            38
+          ],
+          [
+            18,
+            38
+          ],
+          [
+            22,
+            38
+          ],
+          [
+            26,
+            38
+          ],
+          [
+            30,
+            38
+          ],
+          [
+            34,
+            38
+          ],
+          [
+            38,
+            38
+          ],
+          [
+            42,
+            38
+          ],
+          [
+            46,
+            38
+          ],
+          [
+            50,
+            38
+          ],
+          [
+            10,
+            42
+          ],
+          [
+            14,
+            42
+          ],
+          [
+            18,
+            42
+          ],
+          [
+            22,
+            42
+          ],
+          [
+            26,
+            42
+          ],
+          [
+            30,
+            42
+          ],
+          [
+            34,
+            42
+          ],
+          [
+            38,
+            42
+          ],
+          [
+            42,
+            42
+          ],
+          [
+            46,
+            42
+          ],
+          [
+            50,
+            42
+          ],
+          [
+            10,
+            46
+          ],
+          [
+            14,
+            46
+          ],
+          [
+            18,
+            46
+          ],
+          [
+            22,
+            46
+          ],
+          [
+            26,
+            46
+          ],
+          [
+            30,
+            46
+          ],
+          [
+            34,
+            46
+          ],
+          [
+            38,
+            46
+          ],
+          [
+            42,
+            46
+          ],
+          [
+            46,
+            46
+          ],
+          [
+            50,
+            46
+          ]
+        ],
+        "background": 5,
+        "target": {
+          "bbox": [
+            51,
+            26,
+            53,
+            29
+          ],
+          "anchor": [
+            50,
+            26
+          ],
+          "color": 9,
+          "mask": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ]
+          ]
+        },
+        "support_candidates": [
+          {
+            "bbox": [
+              10,
+              10,
+              12,
+              13
+            ],
+            "anchor": [
+              10,
+              10
+            ],
+            "color": 8,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                1
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                3
+              ]
+            ]
+          },
+          {
+            "bbox": [
+              51,
+              10,
+              53,
+              13
+            ],
+            "anchor": [
+              50,
+              10
+            ],
+            "color": 8,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                2,
+                3
+              ]
+            ]
+          },
+          {
+            "bbox": [
+              10,
+              18,
+              12,
+              21
+            ],
+            "anchor": [
+              10,
+              18
+            ],
+            "color": 8,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                3
+              ]
+            ]
+          },
+          {
+            "bbox": [
+              51,
+              18,
+              53,
+              21
+            ],
+            "anchor": [
+              50,
+              18
+            ],
+            "color": 8,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                2,
+                3
+              ]
+            ]
+          },
+          {
+            "bbox": [
+              10,
+              26,
+              12,
+              29
+            ],
+            "anchor": [
+              10,
+              26
+            ],
+            "color": 8,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                3
+              ]
+            ]
+          },
+          {
+            "bbox": [
+              51,
+              26,
+              53,
+              29
+            ],
+            "anchor": [
+              50,
+              26
+            ],
+            "color": 9,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                2,
+                3
+              ]
+            ]
+          },
+          {
+            "bbox": [
+              10,
+              34,
+              12,
+              37
+            ],
+            "anchor": [
+              10,
+              34
+            ],
+            "color": 8,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                3
+              ]
+            ]
+          },
+          {
+            "bbox": [
+              51,
+              34,
+              53,
+              37
+            ],
+            "anchor": [
+              50,
+              34
+            ],
+            "color": 8,
+            "mask": [
+              [
+                0,
+                0
+              ],
+              [
+                0,
+                3
+              ],
+              [
+                1,
+                0
+              ],
+              [
+                1,
+                3
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                2,
+                3
+              ]
+            ]
+          }
+        ],
+        "counterparts": [
+          {
+            "request_shape": "8081538d1e0e8aa003d8a2bc35d49b899e71e80b872ed77efa61a1298bdb26d5",
+            "request_bbox": [
+              24,
+              57,
+              26,
+              59
+            ],
+            "body_bbox": [
+              14,
+              26,
+              16,
+              28
+            ]
+          }
+        ],
+        "layout": "37ffa18c40fd30ea5b2b4233fec7e4ab081f3dcc02915cdab09594f39d7c97be"
+      },
+      "carriers": [
+        {
+          "anchor": [
+            30,
+            42
+          ],
+          "color": 10
+        }
+      ]
+    },
+    {
+      "game": "LIFE",
+      "rowsSha256": "9cf0321c97cd4ec754393e834b157de7e7cde599fe0974595ae4ffdba7d8ab3c",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "VALV",
+      "rowsSha256": "cde1b5db276f7597a9cd17df4a7fd8b23aa162a91794fdd6d9b1d33233614cb4",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "SIGN",
+      "rowsSha256": "bbef948cb4925d829a7f5d95461d85ec055d1d78afa9ad728ad04f52ed3739b5",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "CASC",
+      "rowsSha256": "8c751a15869573d10359498d60bf0d9b344fbdbb71ecf05056fa864ae313a0b1",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "CRAF",
+      "rowsSha256": "2731a599e06fc2a4c77cbcabfd56c7435bb2460502797e671265a1197286578b",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "ESCT",
+      "rowsSha256": "cb790f27dc27d7dcc8a3d1628c47b76477a44340e54c5639fb6dee4e7c8b7bee",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "LS19",
+      "rowsSha256": "19e99dde912cee08a4af4335e108a6e015c69930f09e3187badbee1cfce79df0",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "FITE",
+      "rowsSha256": "d87fbc49803097ac0ba44180e25bdb74e570f659e14320faedc958eaeb4385d1",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "AS66",
+      "rowsSha256": "39bddf2920c3e13f28141733944f4c45ff9b67f56c82a0069b7ae8064eeb01c6",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "GARE",
+      "rowsSha256": "372d5629c8032c12bb6be9150b40108818a3af65d203882cf571cd065376ee8c",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "COLM",
+      "rowsSha256": "9d4a4267497767523469da17ab2b360ec596e6586b14f76669f21a35ebc12ef6",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "GABA",
+      "rowsSha256": "dad2631650c921872de1c150ac09acb85d27679acb68414d4b8b77670559c0d6",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "FUIT",
+      "rowsSha256": "17c5c4147e1623328f2b519b60befd3f96eb71e4902ae84a542f25b597f261ed",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "ETAG",
+      "rowsSha256": "bf64cd6cbf5bc15a9b00f0270ceb7ce53217119e180463a4307d97f0c9c9fc2a",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "TICT",
+      "rowsSha256": "a672cd7ff15e02d16aaaed5a5afaf7fe0e4c0e6577cda214e9edeb950d15a6ae",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "GLOB",
+      "rowsSha256": "ba5d996decc75763ca4b613ce00433341e5d95f6a656a487341aacbdd92f23ae",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "KATA",
+      "rowsSha256": "6b968a6e6ad21fd191e6e71b41ec2062fab66dd436551e5c7615bb8a262709de",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "HOLE",
+      "rowsSha256": "e4e1a575a19b1589791565ca108e306f748ddfaa2101cf6f0b8dd09d9c1f2577",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "GRAV",
+      "rowsSha256": "864f1740139121cfca5655e1c6162fb94eddf1032b314ff1e81a6b30606b8193",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "VOIS",
+      "rowsSha256": "d1bacc3cc20afcc86908da990af89337b1f06efe6851c9a1d234ce54afbede01",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "POLA",
+      "rowsSha256": "c3a7becb1324bb0c32fd017492b17ca549984223997a3b0d9e9e90a4f81e9490",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "ELAS",
+      "rowsSha256": "56f3647e10bd9638197258bdfccd3a6050cd3f80c781e70c0f28bb80f9be0c81",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "TRIA",
+      "rowsSha256": "a3db269ad73475b813151f988b54a441394e6903a148f291a88f454d4a150be7",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "SERI",
+      "rowsSha256": "a3d9e5b6d56eb9f748d1aeb08b87e47ac5df4ebabf02c279692ba2eebecaaefe",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "COMB",
+      "rowsSha256": "a188f019a6b99b2b0e8e6bdb65d91087423c62941d320a2b204edfcb1e1a17fa",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "ISOS",
+      "rowsSha256": "2213b32effda75e66db7f38caf14b276feafbd547a28086089e6000a114ffabe",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "SELE",
+      "rowsSha256": "e0cab414a9ad4004ac9d3b63fd660f69e8e03d9d8e5112bb7c3be11dce00f1bf",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "REWI",
+      "rowsSha256": "470ca6d4cd27a31e2474b9d2c31e2a0b6acd5517dd84f3a80230e5a10f60a345",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "LKEY",
+      "rowsSha256": "8d0eaeb50c797a2aa1e22d0a4ebbfc101b6b8c16ffce0d9a4fb1626689eebfc2",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "TEQU",
+      "rowsSha256": "414f03727847c86e0878f9f4b726d0594946230a299f3b138a4ae28629d874a1",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "GMAP",
+      "rowsSha256": "2bcae799f4729d870ad808e3c67aabf045f134537ae6f43086139088b9bbcef7",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "CGWL",
+      "rowsSha256": "5b9f513c36c7067d1ffb90e4c9771a8913b0d80a9fd8c47279f11f16b98b156a",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "WEAV",
+      "rowsSha256": "af1b67ae6a394974d223dc41ee8d488064f289215c74bcdb98b97163d42ae550",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "GRIL",
+      "rowsSha256": "586f549f819870203dd5c0e39249781c696f013f174149462967d1aeefcd224a",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "DICO",
+      "rowsSha256": "4c66a07b55379fb40871c5ebf6ed4908fe63b83c977c44d48c75cd73cc13bb55",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "EVAS",
+      "rowsSha256": "ceac639fe38e32deec9e52b3735a601e68b464736e3187d5644c2854fbfd3bc5",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "KLOT",
+      "rowsSha256": "b70f41cc40f08e72bc7e6b23399bf2a34a507a21b01957f126d454e1c9ea4f4b",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "UPST",
+      "rowsSha256": "97ddaef0e9538cf50e870eac5cda28e075fdc130423b1690323931649dd648a4",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "THER",
+      "rowsSha256": "e4949964e4d02658f8a3a275445fa1d2e2e46af5d370cf0269d20527e9215e54",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "ZIPP",
+      "rowsSha256": "32f5e9dc5ce9d135fc44aeecf95f6e6396bcb5d9a14350a3f8c13a1553c49c4d",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "AMZE",
+      "rowsSha256": "0859ffa1372ea6ac6d27ebb210802441bd8af406bafdba55073752f132375bb7",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "PIPE",
+      "rowsSha256": "cc2da57812c48d52f01a6a481ab614622744023eca0d9786e1f8294e63e9adfd",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "GIGO",
+      "rowsSha256": "7e07e5696982516142d1fbbac0829a30743c0c3d9ee5364c4f90ec25d5f21519",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "CATL",
+      "rowsSha256": "645b3c0a4e06f24412f2c54de3ba3c15269956e85b62fa87778d892afa269152",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "PRTL",
+      "rowsSha256": "6ef4fd56acd3239f2bda6ae13a7ce1bc6e1ef9359d3876cec7b8af69b53a3d87",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "MOTO",
+      "rowsSha256": "507788fb1b628579d36689d261d4816b083c40ce51b57a387e9fa6b1042ea817",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "ONDE",
+      "rowsSha256": "f5c3dcb0500da2091d8daac7acd1cbb72aebb33c04c70c67581597b1fbbc90cd",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "SNAR",
+      "rowsSha256": "23a18f323d2571f2a275ba89cd389c2fb6218b9ab25972c6da613eeecbc5fac1",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "TRCP",
+      "rowsSha256": "03590df58a79831a29e72b892f3a529280a4eced2dd549b81c7710887a42bda2",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "SPOR",
+      "rowsSha256": "ef7046fff5e68e4fe5410037c13726829e2670eccd87b21574aa8de5d518cd1c",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "CAVA",
+      "rowsSha256": "3a81cada09d4393d3485a246ad461ef1d6166729c0ac6be0de0c61333c2891a0",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "SMLP",
+      "rowsSha256": "63772d1746311d0c37da6dcd30cff4ba62157a79f1e16ec4aa08459daebc1b8c",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "DAME",
+      "rowsSha256": "1f154e9b119b149c01a2b34fadeb0f48516193742535984798e748a1ac85e91e",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "HPDL",
+      "rowsSha256": "a736549b36c7d3a0374e9634ba3694317e060824f7863219344ea69c4a141586",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "CATR",
+      "rowsSha256": "8c49c0659af32834cd35d79a00608588832424e35fc567bbd58a249652d28657",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "RECR",
+      "rowsSha256": "9c659d0462f191ba93ee6aa1bb8c433cdca6d890e4f69b81d28b7fa31325ff79",
+      "scene": null,
+      "carriers": []
+    },
+    {
+      "game": "RSWP",
+      "rowsSha256": "3e364c99f049645bdf11855e84a26fad61cb91abd02efe914b6bf78f17006256",
+      "scene": null,
+      "carriers": []
+    }
+  ],
+  "count": 98,
+  "admittedGames": [
+    "FOGW"
+  ],
+  "originalFilesVerifiedBefore": 1786,
+  "originalFilesVerifiedAfter": 1786,
+  "scope": "Only unchanged source projection of already archived initial public pixels. No game run, engine/spec/solution inspection, authored route, or diagnosis of excluded cases."
+}

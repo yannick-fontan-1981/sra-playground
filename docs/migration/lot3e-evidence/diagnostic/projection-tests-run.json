@@ -1,0 +1,37 @@
+{
+  "schema": "logos-engine.reception-projection-test-run.v1",
+  "startedAt": "2026-11-10T12:40:27.444216+00:00",
+  "finishedAt": "2026-11-10T12:40:29.171706+00:00",
+  "command": [
+    "node",
+    "--test",
+    "tests/v6-reception-service-observation.test.ts"
+  ],
+  "exitCode": 0,
+  "status": "passed",
+  "inputs": [
+    {
+      "path": "src/logos-engine/v6-reception-service-observation.ts",
+      "bytes": 10192,
+      "sha256": "5ba914e70bbfd86c84b40e9b0666a97bf412c0c4a4af70276e00e0dcfad463c3"
+    },
+    {
+      "path": "tests/v6-reception-service-observation.test.ts",
+      "bytes": 7605,
+      "sha256": "36704d0d7f8dcc2b514d4d2536a59ed704ce256da9539eb53d6e20197af49cf1"
+    },
+    {
+      "path": "tests/fixtures/v6-reception-service-reference.json.gz",
+      "bytes": 755239,
+      "sha256": "0542610d8e0e4c495ca9ca7cf28ca4aba29b848724f71f35dc95775f0b0f034d"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/diagnostic/reception-public-admission.json",
+      "bytes": 32039,
+      "sha256": "672ab284864acef4a22b12891cfa13e529c985bb2f3fe45a2169b4955d714c84"
+    }
+  ],
+  "stdout": "\u2714 reception projection fixtures pin original source and retain public-only scope (89.396667ms)\n\u2714 98 archived public rasters preserve source admission and carriers without a new game attempt (458.564539ms)\n\u2714 original reception projection scene:base (10.150631ms)\n\u2714 original reception projection carriers:base (0.772351ms)\n\u2714 original reception projection scene:translated (4.10325ms)\n\u2714 original reception projection carriers:translated (0.575249ms)\n\u2714 original reception projection scene:palette_permuted (3.580848ms)\n\u2714 original reception projection carriers:palette_permuted (0.572555ms)\n\u2714 original reception projection scene:pitch_five (4.505294ms)\n\u2714 original reception projection carriers:pitch_five (0.813261ms)\n\u2714 original reception projection scene:pitch_six (5.679502ms)\n\u2714 original reception projection carriers:pitch_six (0.480399ms)\n\u2714 original reception projection scene:no_carrier (3.035353ms)\n\u2714 original reception projection carriers:no_carrier (0.320633ms)\n\u2714 original reception projection scene:no_support (1.937021ms)\n\u2714 original reception projection scene:three_supports (2.579781ms)\n\u2714 original reception projection scene:all_repeated_supports (2.658727ms)\n\u2714 original reception projection scene:multiple_unique_supports (2.452553ms)\n\u2714 original reception projection scene:no_request (3.059408ms)\n\u2714 original reception projection scene:no_world_counterpart (2.395458ms)\n\u2714 original reception projection scene:blank (2.646438ms)\n\u2714 original reception projection scene:target_carrier (3.24982ms)\n\u2714 original reception projection scene:ambiguous_carriers (3.529783ms)\n\u2714 original reception projection carriers:ambiguous_carriers (0.42702ms)\n\u2714 original reception projection scene:filled_carrier_edge (3.376847ms)\n\u2714 original reception projection carriers:filled_carrier_edge (0.417567ms)\n\u2714 original reception projection scene:equal_borders_python_tuple_max (7.564973ms)\n\u2714 original reception projection scene:retained_no_request (1.928499ms)\n\u2714 original reception projection carriers:retained_no_request (0.334874ms)\n\u2714 original reception projection scene:retained_no_world_counterpart (1.69275ms)\n\u2714 original reception projection carriers:retained_no_world_counterpart (0.256259ms)\n\u2714 original reception projection scene:retained_target_carrier (2.020694ms)\n\u2714 original reception projection carriers:retained_target_carrier (0.313553ms)\n\u2714 original reception projection scene:retained_multiple_unique_supports (3.238773ms)\n\u2714 original reception projection carriers:retained_multiple_unique_supports (0.335405ms)\n\u2714 original reception projection scene:retained_noncorner_refuted (1.66591ms)\n\u2714 original reception projection sides:concave (0.247074ms)\n\u2714 original reception projection sides:border_square (0.228057ms)\n\u2714 original reception projection sides:blank (0.194798ms)\n\u2714 original reception projection path:complete (1.327871ms)\n\u2714 original reception projection path:budget_too_short (0.398088ms)\n\u2714 original reception projection path:already_target (0.286513ms)\n\u2714 original reception projection path:partial_one_direction (0.29131ms)\n\u2714 original reception projection path:no_improvement (0.31148ms)\n\u2714 original reception projection path:no_moves (0.334204ms)\n\u2714 original reception projection path:support_avoidance (0.634547ms)\n\u2714 palette permutation keeps measured geometric relations without fixed color meanings (7.063903ms)\n\u2714 measured and retained projections are detached from inputs and earlier results (15.085629ms)\n\u2714 path uses opaque observed commands, avoids other supports, and never truncates a budget failure (7.408211ms)\n\u2714 carrier requires four equal corners, distinct edge interiors, and a non-background color (7.890032ms)\n\u2139 tests 50\n\u2139 suites 0\n\u2139 pass 50\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 1485.762313\n",
+  "stderr": "",
+  "scope": "Only the focused projection source, archived-public and ownership/invariance tests. No game, benchmark or full repository test run."
+}

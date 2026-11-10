@@ -5,7 +5,7 @@
  * migration stage that chain contains observed-program composition, occurrence recall, cell-patch placement,
  * coupled-pair epoch anchors, alternating graph evidence, pair-response evidence
  * and coupled support planning/acquisition, followed by exposed reception,
- * relational chamber, panel-service and rooted-line layers, four of the six observed-composition branches.
+ * relational chamber, panel-service, rooted-line and reception-service layers, five of the six observed-composition branches.
  * Other providers remain pending. The retained digest describes this native closure, not the
  * original full ObservedCompositionConstraint inheritance chain.
  */
@@ -14,6 +14,7 @@ import type { OccurrenceRecallPolicy } from './v6-occurrence-recall.ts';
 import { CoupledPairEvidenceMemory, coupledPairAfter } from './v6-coupled-pair-evidence.ts';
 import { proposeCoupledPairGraph, coupledPairBefore } from './v6-coupled-pair-planning.ts';
 import { AuxiliarySupportMemory, auxiliarySupportBefore, auxiliarySupportAfter } from './v6-auxiliary-support.ts';
+import { ReceptionServiceMemory, proposeReceptionService, receptionServiceBefore, receptionServiceAfter } from './v6-reception-service-access.ts';
 import { RootedLineMemory, proposeRootedLine, rootedLineBefore, rootedLineAfter } from './v6-rooted-line-access.ts';
 import { PanelServiceMemory, proposePanelService, panelServiceBefore, panelServiceAfter } from './v6-panel-service-access.ts';
 import { panelServiceInputCandidates } from './v6-panel-service-observation.ts';
@@ -54,7 +55,7 @@ import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts'
 import type { OccurrenceRecord as R } from './v6-occurrence-scene.ts';
 import type { NativeFamily, NativeRows, NativePublicObservation, NativeProposal } from './v6-native-types.ts';
 
-export const SHARED_SERIES_DIGEST_SCOPE = 'native_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_exposed_reception_relational_chamber_panel_service_and_rooted_line_four_of_six_observed_compositions_v6';
+export const SHARED_SERIES_DIGEST_SCOPE = 'native_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_exposed_reception_relational_chamber_panel_service_rooted_line_and_reception_service_five_of_six_observed_compositions_v6';
 
 export interface NativeSharedSeriesOptions {
   /** Native current-control revalidation; the default preserves source contracts. */
@@ -114,6 +115,7 @@ interface SharedWorkingStamp {
   chamber: RelationalChamberMemory; chamberRevision: number; chamberWitness: WorkingWitness;
   panel: PanelServiceMemory; panelRevision: number; panelWitness: WorkingWitness;
   rootedLine: RootedLineMemory; rootedLineRevision: number; rootedLineWitness: WorkingWitness;
+  reception: ReceptionServiceMemory; receptionRevision: number; receptionWitness: WorkingWitness;
   events: WorkingWitness;
 }
 
@@ -138,6 +140,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   chamber = new RelationalChamberMemory();
   panel = new PanelServiceMemory();
   rootedLine = new RootedLineMemory();
+  reception = new ReceptionServiceMemory({ currentEpochAcquisition: true });
   private certified: SharedWorkingStamp | null = null;
   private checkpoint: { value: R; stamp: SharedWorkingStamp; certified: boolean } | null = null;
   private accepted: { value: Readonly<R>; stamp: SharedWorkingStamp } | null = null;
@@ -179,6 +182,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       chamber: this.chamber, chamberRevision: this.chamber.nativeRevision, chamberWitness: workingWitness(this.chamber),
       panel: this.panel, panelRevision: this.panel.nativeRevision, panelWitness: workingWitness(this.panel),
       rootedLine: this.rootedLine, rootedLineRevision: this.rootedLine.nativeRevision, rootedLineWitness: workingWitness(this.rootedLine),
+      reception: this.reception, receptionRevision: this.reception.nativeRevision, receptionWitness: workingWitness(this.reception),
       events: workingWitness(this.events) };
   }
   private unchanged(stamp: SharedWorkingStamp): boolean {
@@ -201,24 +205,25 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       && this.chamber === stamp.chamber && this.chamber.nativeRevision === stamp.chamberRevision && witnessMatches(stamp.chamberWitness, this.chamber)
       && this.panel === stamp.panel && this.panel.nativeRevision === stamp.panelRevision && witnessMatches(stamp.panelWitness, this.panel)
       && this.rootedLine === stamp.rootedLine && this.rootedLine.nativeRevision === stamp.rootedLineRevision && witnessMatches(stamp.rootedLineWitness, this.rootedLine)
+      && this.reception === stamp.reception && this.reception.nativeRevision === stamp.receptionRevision && witnessMatches(stamp.receptionWitness, this.reception)
       && witnessMatches(stamp.events, this.events) && witnessMatches(stamp.memoryWitness, this.memory);
   }
 
-  /** Four transferred branches of the original six-plan observed-composition entry. */
+  /** Five transferred branches of the original six-plan observed-composition entry. */
   async observedPropose(observation: R, rows: NativeRows, inputs: readonly R[], remaining: number,
     config: R, levelDeadline: number | null, now?: () => number): Promise<R | null> {
     if (remaining < 1) return null;
     if (levelDeadline === null || levelDeadline === undefined) throw new TypeError('Observed composition requires current level deadline');
     // Exposed inputs precede Chamber and Panel in their inherited generator chain.
-    // Other source candidate generators remain outside this 4/6 closure.
+    // Other source candidate generators remain outside this 5/6 closure.
     const candidates = [...inputs, ...panelServiceInputCandidates(rows, observation.available_action_refs,
       relationalChamberInputCandidates(rows, observation.available_action_refs,
         exposedReceptionInputCandidates(rows, observation.available_action_refs)))];
     const proposal = this.sourceGraphProposal(observation, rows, candidates, Math.min(16, remaining),
-      { ...config, remaining_level_actions: remaining, level_deadline: levelDeadline,
+      { ...config, remaining_level_actions: remaining, level_deadline: levelDeadline, native_reception_wait_budget: true,
         ...(now ? { native_reception_now: now, native_rooted_now: now } : {}) });
     if (proposal.block_unrelated_probe) return proposal;
-    if (proposal.status !== 'proposed' || !['rooted_line_plan', 'panel_service_plan', 'chamber_relation_plan', 'exposed_reception_plan'].some(key => Object.hasOwn(proposal, key))) return null;
+    if (proposal.status !== 'proposed' || !['reception_service_plan', 'rooted_line_plan', 'panel_service_plan', 'chamber_relation_plan', 'exposed_reception_plan'].some(key => Object.hasOwn(proposal, key))) return null;
     proposal.field_subquestion = 'observed_composition_services';
     for (const [index, action] of (proposal.actions as R[]).entries()) {
       const step = proposal.steps[index];
@@ -410,6 +415,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   private sourceGraphProposal(observation: R, rows: NativeRows, inputs: readonly R[], maxPrefix: number, config: R): R {
     // All three source adapters call this same inherited planner. Their own
     // configurations and result filters decide which entry can expose a plan.
+    const reception = proposeReceptionService(this.reception, observation, rows, inputs, maxPrefix, config);
+    if (reception) return reception;
     const rootedLine = proposeRootedLine(this.rootedLine, observation, rows, inputs, maxPrefix, config);
     if (rootedLine) return rootedLine;
     const panel = proposePanelService(this.panel, observation, rows, inputs, maxPrefix, config);
@@ -427,7 +434,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   override bind(proposal: R, domain: ObservedInputDomain): void {
     // The common source wrappers dispatch by key presence in this inherited
     // order; a mixed envelope must not let a lower layer bypass its parent.
-    if (['rooted_line_plan', 'panel_service_plan', 'chamber_relation_plan', 'exposed_reception_plan'].some(key => Object.hasOwn(proposal, key))) {
+    if (['reception_service_plan', 'rooted_line_plan', 'panel_service_plan', 'chamber_relation_plan', 'exposed_reception_plan'].some(key => Object.hasOwn(proposal, key))) {
       for (const [index, action] of (proposal.actions as R[]).entries()) {
         const step = proposal.steps[index];
         if (action.action_ref === 'ACTION6') {
@@ -487,6 +494,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   }
 
   override before(proposal: R, index: number, packet: NativePublicObservation, observation: R): R {
+    if (truth(proposal.reception_service_plan)) return receptionServiceBefore(proposal, index, packet.frame_rows,
+      { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
     if (truth(proposal.rooted_line_plan)) return rootedLineBefore(proposal, index, packet.frame_rows,
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
     if (truth(proposal.panel_service_plan)) return panelServiceBefore(proposal, index, packet.frame_rows,
@@ -539,6 +548,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     return super.before(proposal, index, packet, observation);
   }
   override after(proposal: R, index: number, before: R, after: R, first: NativeRows, second: NativeRows): R {
+    if (truth(proposal.reception_service_plan)) return receptionServiceAfter(proposal, index, first, second,
+      { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
     if (truth(proposal.rooted_line_plan)) return rootedLineAfter(proposal, index, first, second,
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
     if (truth(proposal.panel_service_plan)) return panelServiceAfter(proposal, index, first, second,
@@ -652,12 +663,13 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     const supportEvents = this.auxiliary.record(this.pairs.currentState(), before, command, after, first, second, proposal, index);
     for (const event of supportEvents) if (event.kind === 'coupled_pair_evidence') this.pairs.applyEvent(event);
     events.push(...supportEvents);
-    // The source hierarchy acquires Exposed after Coupled/Auxiliary, then Chamber, Panel and RootedLine.
+    // The source hierarchy acquires Exposed after Coupled/Auxiliary, then Chamber, Panel, RootedLine and ReceptionService.
     // This common owner runs each layer once, then the public packet acquisition.
     events.push(...this.exposed.record(before, command, after, first, second, proposal, index));
     events.push(...this.chamber.record(before, command, after, first, second, proposal, index));
     events.push(...this.panel.record(before, command, after, first, second, proposal, index));
     events.push(...this.rootedLine.record(before, command, after, first, second, proposal, index));
+    events.push(...this.reception.record(before, command, after, first, second, proposal, index));
     events.push(...recordObservedProgramPacket(this.memory, before, command, after, first, frames));
     events.push(...this.queued.recordPacket(before, command, after, first, frames));
     events.push(...this.linked.recordPacket(before, command, after, first, frames));
@@ -684,6 +696,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     if (this.chamber.eventCount) digest = this.chamber.retainedDigest(digest);
     if (this.panel.eventCount) digest = this.panel.retainedDigest(digest);
     if (this.rootedLine.eventCount) digest = this.rootedLine.retainedDigest(digest);
+    if (this.reception.eventCount) digest = this.reception.retainedDigest(digest);
     return digest;
   }
 
@@ -734,7 +747,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   private restoreOwned(state: Readonly<R>): void {
     if (!Array.isArray(state.events) || typeof state.digest !== 'string') throw new TypeError('Incomplete shared series memory');
     const events = [...state.events] as R[], memory = new SharedOccurrenceMemory(), material = new TypedMaterialMemory(), radial = new RadialPortMemory(), service = new FieldServiceMemory(), rooted = new RootedQuotaMemory(), catalogue = new OccludedCatalogueMemory(), queued = new QueuedFieldMemory(), product = new ProductPanelMemory(), labeled = new LabeledSequenceMemory(), trace = new TraceFieldMemory(), linked = new LinkedPacketMemory(), cells = new CellPlacementMemory(), graph = new AlternatingGraphMemory(),
-      pairs = new CoupledPairEvidenceMemory(), auxiliary = new AuxiliarySupportMemory(), exposed = new ExposedReceptionMemory(), chamber = new RelationalChamberMemory(), panel = new PanelServiceMemory(), rootedLine = new RootedLineMemory();
+      pairs = new CoupledPairEvidenceMemory(), auxiliary = new AuxiliarySupportMemory(), exposed = new ExposedReceptionMemory(), chamber = new RelationalChamberMemory(), panel = new PanelServiceMemory(), rootedLine = new RootedLineMemory(), reception = new ReceptionServiceMemory({ currentEpochAcquisition: true });
     for (const event of events) {
       if (['typed_carrier_response', 'typed_material_flow', 'typed_pose_scope', 'typed_pose_model', 'typed_pose_response'].includes(event.kind)) material.applyEvent(event);
       else if (event.kind === 'radial_method_recall' || event.kind === 'radial_port_effect') radial.applyEvent(event);
@@ -750,12 +763,13 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       else if (event.kind === 'alternating_graph_evidence') graph.applyEvent(event);
       else if (event.kind === 'coupled_pair_epoch_anchor' || event.kind === 'coupled_pair_evidence') pairs.applyEvent(event);
       else if (event.kind === 'coupled_support_control_model' || event.kind === 'coupled_support_preparation') auxiliary.applyEvent(event);
-      // The source name reception_events is also used by a later, pending layer.
-      // This transferred owner acquires only the explicit exposed event kind.
+      // The source aliases reception_events across Exposed and ReceptionService.
+      // Native migration retains disjoint event owners and historical digests.
       else if (event.kind === 'observed_exposed_reception') exposed.applyEvent(event);
       else if (event.kind === 'observed_chamber_relations') chamber.applyEvent(event);
       else if (event.kind === 'observed_panel_service') panel.applyEvent(event);
       else if (event.kind === 'observed_rooted_line') rootedLine.applyEvent(event);
+      else if (event.kind === 'observed_reception_service') reception.applyEvent(event);
       else memory.applyEvent(event);
     }
     let digest = memory.retainedDigest();
@@ -764,10 +778,11 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     if (chamber.eventCount) digest = chamber.retainedDigest(digest);
     if (panel.eventCount) digest = panel.retainedDigest(digest);
     if (rootedLine.eventCount) digest = rootedLine.retainedDigest(digest);
+    if (reception.eventCount) digest = reception.retainedDigest(digest);
     if (digest !== state.digest) throw new TypeError('Shared series memory changed during recall');
     // Only publish the reconstructed working copies after the complete journal
     // has passed integrity checks. A rejected edit cannot clear learned state.
-    this.memory = memory; this.material = material; this.radial = radial; this.service = service; this.rooted = rooted; this.catalogue = catalogue; this.queued = queued; this.product = product; this.labeled = labeled; this.trace = trace; this.linked = linked; this.cells = cells; this.graph = graph; this.pairs = pairs; this.auxiliary = auxiliary; this.exposed = exposed; this.chamber = chamber; this.panel = panel; this.rootedLine = rootedLine; this.events = events;
+    this.memory = memory; this.material = material; this.radial = radial; this.service = service; this.rooted = rooted; this.catalogue = catalogue; this.queued = queued; this.product = product; this.labeled = labeled; this.trace = trace; this.linked = linked; this.cells = cells; this.graph = graph; this.pairs = pairs; this.auxiliary = auxiliary; this.exposed = exposed; this.chamber = chamber; this.panel = panel; this.rootedLine = rootedLine; this.reception = reception; this.events = events;
     const stamp = this.workingStamp();
     this.certified = stamp; this.accepted = { value: state, stamp };
     this.checkpoint = { value: retainNativeJson({ events: this.events, digest: state.digest }), stamp, certified: true };

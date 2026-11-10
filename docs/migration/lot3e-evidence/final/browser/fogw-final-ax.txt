@@ -1,0 +1,15 @@
+Browser tab: 7, Title: "SRA Playground · FOGW — Symbolic Reasoning Agent", URL: "http://127.0.0.1:4173/?game=FOGW&level=4".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+~0 AXWebArea SRA Playground · FOGW — Symbolic Reasoning Agent, URL: 127.0.0.1:4173/?game=FOGW&level=4
+~		2 link Description: Skip to the games, Value: 127.0.0.1:4173/?game=FOGW&level=4#game-select
+~				8 link Description: PLAYGROUND, Value: 127.0.0.1:4173/?game=FOGW&level=4#playground
+~						228 text Level completed.
+~						209 button Run to next level, ID: agent-run
+~						210 button Run 16 actions, ID: agent-batch
+~						211 button One action, ID: agent-step
+~						212 button (disabled) Pause, ID: agent-pause
+~							229 text 50
+~							230 text 3
+~							231 text 27
+~						220 button New reasoning session, ID: agent-new-session
+The focused UI element is 0 AXWebArea SRA Playground · FOGW — Symbolic Reasoning Agent, URL: 127.0.0.1:4173/?game=FOGW&level=4

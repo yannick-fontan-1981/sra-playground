@@ -1,0 +1,15 @@
+{
+  "operation": "verify",
+  "status": "passed",
+  "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/reception-service-contribution.json",
+  "original": {
+    "bytes": 1761156,
+    "sha256": "f829416ae63473ae02cbe1bd98ec3c7789fb8a7d6bd4bcd7362971ef188e3e49"
+  },
+  "compressed": {
+    "bytes": 60004,
+    "sha256": "8f4dab87126c9ef905d6eed7427db295efe1551013e0bae9405c65125ad17df7"
+  },
+  "restored": false,
+  "qualification": "Exact byte reconstruction only; no case analysis or proof execution."
+}

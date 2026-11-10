@@ -1,0 +1,130 @@
+{
+  "schema": "logos-engine.lot3e.reception-service-resolution.v1",
+  "status": "own_transfer_verified_three_level_target_met",
+  "game": "FOGW",
+  "targetLevels": 3,
+  "actual": {
+    "actions": 50,
+    "levelsCompleted": 3,
+    "prefixes": 27,
+    "actionsPerLevel": [
+      18,
+      14,
+      18
+    ],
+    "stop": "target_levels_completed",
+    "reachedLevel": 4,
+    "terminalGameState": "NOT_FINISHED"
+  },
+  "baseline": {
+    "native": "0.45.0",
+    "actions": 16,
+    "levelsCompleted": 0,
+    "prefixes": 13,
+    "outerActionCapReached": true,
+    "qualification": "Bounded cold diagnostic reference, not a full-game verdict."
+  },
+  "sourceComparison": {
+    "checksPassed": 1112,
+    "checksTotal": 1112,
+    "exactOriginal": {
+      "checks": 255,
+      "prefixes": 7,
+      "returns": 15,
+      "restorations": 7,
+      "exceptionRevision": 16,
+      "exception": "ValidationError",
+      "requestedWaitMaximum": 585,
+      "sourceCeiling": 128,
+      "wholeTrajectoryParity": false
+    },
+    "declaredNativeAdaptation": {
+      "checks": 849,
+      "prefixes": 27,
+      "returns": 50,
+      "restorations": 27,
+      "differences": 0
+    },
+    "globalChecks": 8,
+    "originalFilesVerifiedUnchanged": 1786
+  },
+  "contribution": {
+    "prefixes": 27,
+    "actions": 50,
+    "ownEvents": 50,
+    "restorations": 28,
+    "publicObservationsRecomputed": 51,
+    "ablations": 162,
+    "changedAcquiredKnowledge": 86,
+    "changedActionOrRefusal": 41,
+    "changedDecisionProjection": 43,
+    "unchangedDecisionProjection": 119,
+    "strictOnlyDifferencesExcluded": 33,
+    "controlsTrialsAndStationaryContribute": true,
+    "waitSpentAndRefutedActionContributionNotDemonstratedOnThisTrajectory": true
+  },
+  "browser": {
+    "actions": 50,
+    "levelsCompleted": 3,
+    "plans": 27,
+    "pauseAtActions": 0,
+    "singleActionVerified": true,
+    "resumeVerified": true,
+    "matchesCampaign": true
+  },
+  "caseClock": {
+    "selectedAt": "2026-11-10T12:42:41.071198+00:00",
+    "accountingStartedAt": "2026-11-10T12:40:45.295029+00:00",
+    "workFinishedAt": "2026-11-10T12:56:36.615304+00:00",
+    "currentIntervalSeconds": 951.320275,
+    "previousCumulativeSeconds": 0,
+    "cumulativeSeconds": 951.320275,
+    "maximumCumulativeSeconds": 2400,
+    "remainingSeconds": 1448.679725,
+    "exhausted": false,
+    "furtherWorkThisDelivery": false,
+    "qualification": "Conservative wall interval includes preparation errors, selection, bounded reference, candidate, source comparison, contribution proof and browser session, without reset. Subsequent artifact transport, delivery review and STCK/SMLP timing are unrelated release work. Future FOGW case diagnosis must resume this cumulative value."
+  },
+  "priorCaseClocksUnchanged": {
+    "CWSE": 2399.683865,
+    "SK48": 667.35444
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot3e-evidence/diagnostic/fogw-clock-start.json",
+      "bytes": 1306,
+      "sha256": "50a7e2c58e332252177b61e33878f3c977c51e5d47b6acf9613d2c9e754b5d7e"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/diagnostic/baseline-launch-preparation-error.json",
+      "bytes": 480,
+      "sha256": "bdd57a4f2ebd4a75540ce6ea4c91b6dc2321b14e5b8799cbfcc231e6cdcb978c"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/execution-fogw.json",
+      "bytes": 65897,
+      "sha256": "1e1bf71c8a5120c541368b65600afa5013f1ab41dd5453c9ff7b4537eeeb1e5d"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/reception-service-contribution.json",
+      "bytes": 1761156,
+      "sha256": "f829416ae63473ae02cbe1bd98ec3c7789fb8a7d6bd4bcd7362971ef188e3e49"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/diagnostic/fogw-public-parity.json",
+      "bytes": 74935,
+      "sha256": "a0b62b98328df6505c562cb130f3b8ed781e538ef9526fb6bb07b789c0191e7a"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/final/browser/browser-qa.json",
+      "bytes": 2441,
+      "sha256": "7dc2c8bb79ebbcf89c3731d8a070bfe008d38179ef193fc13fa3e52031eb2b72"
+    },
+    {
+      "path": "docs/migration/lot3e-evidence/baseline/fogw-bounded-reference/execution-fogw.json",
+      "bytes": 64934,
+      "sha256": "8598691580029c6cbb68aab4d0e4838c0af4b61636f806e24f599f39f47aeda6"
+    }
+  ],
+  "qualification": "The own ReceptionService branch and consumed residual/wait dependencies meet the announced three-level target. Full untouched-original trajectory parity, full inherited-caller migration, complete game victory and independent request-specific continuation sealing are not claimed. All named native adaptations, source exception and negative ablations remain explicit."
+}
