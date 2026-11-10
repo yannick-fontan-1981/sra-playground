@@ -64,7 +64,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.51.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.52.0';
 // The implementation identity and public snapshot describe the same extensions.
 const NATIVE_CALLER_EXTENSIONS = ['native_feedback_search_cooperative_incompletion',
   'native_crossed_prefix_assignment_bounds', 'native_atomic_crossed_prefix_event_validation',
