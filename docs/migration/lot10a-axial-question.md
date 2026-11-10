@@ -14,6 +14,8 @@ La fusion du prédécesseur publié **5A / Site 84**, commit `51e2813dedb2d71001
 
 La fusion de **4B / Site 86**, commit `082ce553ce4dfbac37071a64497bcca129b7ced0`, conserve ensuite ses arrêts locaux de groupe et ses gardes de priorité. Le [diagnostic intermédiaire](lot10a-evidence/diagnostic/post4b-inventory-run.json) établit **59/76 entrées**, 181 composants vérifiés, 146 transferts partiels et 1 042 modules en attente, avec zéro défaillance de mapping. La [réconciliation native](lot10a-evidence/coordination/published-4b-site86-reconciliation.json) conserve les 285 autres entrées natives du prédécesseur ; les différences portent seulement sur les trois modules Axial et leur raccordement au runtime. L’étiquette 0.54 est héritée et provisoire ; le gel final attend 7B.
 
+Le candidat de validation **0.56.0** est composé avec le gel préparé **7B / 0.55.0**, commit `28f3f388e18bad21a186795f965102a83e6b53d7`, digest `ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b`. Ce prédécesseur n'est pas encore publié. La [déclaration de source préparée](lot10a-evidence/coordination/prepared-7b-source-observation.json) identifie ses octets ; la réutilisation finale des contrôles exige une fusion de la publication réelle et une comparaison exacte de toutes les entrées natives, source/tests, build et d'exécution. Aucun coût 10A n'est déclaré ou mesuré sur ce seul état préparé.
+
 ## Comportement porté
 
 La mesure retrouve les corps à barres opposées, leurs axes, leurs marqueurs, les ancres et l'unique cible. La sélection doit avoir été acquise par un contraste public compatible. Une sélection seulement dessinée, ambiguë ou incompatible avec la scène courante n'autorise pas Axial.

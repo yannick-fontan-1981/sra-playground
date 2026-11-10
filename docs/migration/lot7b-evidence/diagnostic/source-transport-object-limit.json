@@ -1,0 +1,21 @@
+{
+  "schema": "logos-engine.lot7b-source-transport-object-limit.v1",
+  "recordedAt": "2026-11-10T22:14:22.605758+00:00",
+  "generator": {
+    "path": "docs/migration/lot7b-evidence/plan-bounded-source-transport.py",
+    "sha256": "299e8422e96b2e5d7d60ceef99dc2d47b409b2f30f589bfd22ed65f3dc2f2fe2",
+    "bytes": 31099
+  },
+  "individualObjectLimitExclusiveBytes": 33554432,
+  "perStepRawObjectLimitBytes": 41943040,
+  "perPushServerLimitBytes": 67108864,
+  "checksAt": [
+    "initial complete target ancestry",
+    "each accepted step",
+    "final complete ancestry"
+  ],
+  "syntax": "AST passed without import or planner execution",
+  "planExecuted": false,
+  "publishedRefsChanged": false,
+  "sourceOfConstraint": "Actual5A source push rejection of39,817,093-byte diagnostic blobc8daeba7547de0e3f7ded9be7cd7594932fa9b59 at the source server32MiB individual-object limit. Bound is conservatively strict."
+}

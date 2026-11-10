@@ -1,0 +1,16 @@
+{
+  "complete": false,
+  "pythonModules": 1369,
+  "pythonLines": 320375,
+  "declaredClassesAndFunctions": 12857,
+  "dataFiles": 417,
+  "verifiedModules": 0,
+  "componentVerifiedModules": 181,
+  "partiallyTransferredModules": 146,
+  "transferredUnverifiedModules": 0,
+  "pendingModules": 1042,
+  "strategyFamilies": 16,
+  "failures": [
+    "Missing differential evidence: tests/fixtures/v6-relative-arrangements-reference.json.gz"
+  ]
+}

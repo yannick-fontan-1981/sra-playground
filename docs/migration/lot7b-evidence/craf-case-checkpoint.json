@@ -1,0 +1,40 @@
+{
+  "schema": "logos-engine.cumulative-game-case-checkpoint.v1",
+  "game": "CRAF",
+  "recordedAt": "2026-11-10T22:28:39.627893+00:00",
+  "casePhase": "paused_after_refined_development_source_replay",
+  "maximumCumulativeSeconds": 2400,
+  "cumulativeSeconds": 847.684697,
+  "remainingSeconds": 1552.3153029999999,
+  "priorCumulativeSeconds": 60.0,
+  "preClockCharge": {
+    "chargedSeconds": 60.0,
+    "kind": "conservative_charge_not_precise_runtime_measurement",
+    "purpose": "Initial public candidate diagnosis, source Kernel fixture and targeted Kernel verification before this live case clock. Includes candidate original offer0.1374992619967088seconds. No prior CRAF live campaign or case checkpoint found in repository evidence."
+  },
+  "targetLevels": 3,
+  "attempts": [
+    "attempt1/execution-craf.json"
+  ],
+  "chargedIntervals": [
+    {
+      "startedAt": "2026-11-10T21:17:44.674792+00:00",
+      "purpose": "development_cold_campaign_and_original_public_parity",
+      "status": "closed",
+      "endedAt": "2026-11-10T21:23:08.140135+00:00",
+      "elapsedSeconds": 323.465343
+    },
+    {
+      "startedAt": "2026-11-10T22:20:55.408539+00:00",
+      "purpose": "refined_source_proposal_guard_link_validation_on_retained_development_calls",
+      "status": "closed",
+      "endedAt": "2026-11-10T22:28:39.627893+00:00",
+      "elapsedSeconds": 464.219354,
+      "outcome": "Refined original-source replay passed 144/144 calls and all 36 selected guard/command links. Initial validator exception retained; no new game action. Interval conservatively includes diagnosis, retry and delayed completion observation."
+    }
+  ],
+  "limitation": "Development CRAF succeeds 3 levels/36 actions, all selected by Symbols. Strengthened replay passes 144 source calls and selected proposal/guard links; old capture lacks final checkpoint blocks. Actual 5A Site84 is integrated; 4B, final integrated campaign and browser proof remain pending. Retain this cumulative clock.",
+  "currentChargedIntervalSeconds": 464.219354,
+  "actualLevels": 3,
+  "actions": 36
+}

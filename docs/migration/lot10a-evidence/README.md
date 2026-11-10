@@ -78,6 +78,10 @@ Les [audits réels](diagnostic/post4b-inventory-run.json) passent : **59/76 entr
 de mapping. Ce point intermédiaire ne constitue pas la validation finale 10A ;
 la publication de 7B doit encore être intégrée.
 
+## Candidat composé avant publication 7B
+
+Le candidat de validation **0.56.0** est composé avec le gel préparé **7B / 0.55.0**, commit `28f3f388e18bad21a186795f965102a83e6b53d7`, digest `ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b`. Ce prédécesseur n'est pas encore publié. La [déclaration de source préparée](coordination/prepared-7b-source-observation.json) identifie ses octets ; la réutilisation finale des contrôles exige une fusion de la publication réelle et une comparaison exacte de toutes les entrées natives, source/tests, build et d'exécution. Aucun coût 10A n'est déclaré ou mesuré sur ce seul état préparé.
+
 ## Préparation des contrôles finaux
 
 - [Périmètre fonctionnel et rejeux](validation-and-regression-plan.md),

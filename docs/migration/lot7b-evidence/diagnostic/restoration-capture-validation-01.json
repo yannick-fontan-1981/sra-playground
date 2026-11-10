@@ -1,0 +1,72 @@
+{
+  "schema": "logos-engine.lot7b-restoration-capture-preparation-check.v1",
+  "recordedAt": "2026-11-10T22:49:29.430635+00:00",
+  "status": "passed",
+  "inputs": [
+    {
+      "path": "scripts/compare-symbol-transactions-public-parity.py",
+      "bytes": 32449,
+      "sha256": "0c1341e87e59cb4d276158eb74a626b41cbc140c891af82c08cec5cf3ae441ea"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/finalize-cost-readiness.py",
+      "bytes": 30488,
+      "sha256": "2daef854c33b272a4641e4f42035b229ea08427ad94648489de922624568d45f"
+    },
+    {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "bytes": 77616,
+      "sha256": "83826a022884e51b631ff6eb48a458ddd8dcd22090ebcbd9ff051c9b60b3041c"
+    },
+    {
+      "path": "tests/v6-radial-port-integration.test.ts",
+      "bytes": 28200,
+      "sha256": "e82b27a55a6e092ab84a230cae6c73c39ef52713f980da3a89d4910e7a1c7985"
+    }
+  ],
+  "inputsUnchanged": true,
+  "preservedExecutedComparator": {
+    "path": "docs/migration/lot7b-evidence/diagnostic/compare-symbol-transactions-public-parity-refined.py",
+    "bytes": 28530,
+    "sha256": "3c36c49928f7ee654ca6a4e3588d4dcdc3925ec9c04062098b843f76c735e1a5"
+  },
+  "checks": [
+    {
+      "kind": "python_ast",
+      "input": {
+        "path": "scripts/compare-symbol-transactions-public-parity.py",
+        "bytes": 32449,
+        "sha256": "0c1341e87e59cb4d276158eb74a626b41cbc140c891af82c08cec5cf3ae441ea"
+      },
+      "passed": true
+    },
+    {
+      "kind": "python_ast",
+      "input": {
+        "path": "docs/migration/lot7b-evidence/finalize-cost-readiness.py",
+        "bytes": 30488,
+        "sha256": "2daef854c33b272a4641e4f42035b229ea08427ad94648489de922624568d45f"
+      },
+      "passed": true
+    },
+    {
+      "kind": "typescript_typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "startedAt": "2026-11-10T22:49:20.528246+00:00",
+      "finishedAt": "2026-11-10T22:49:29.430139+00:00",
+      "elapsedSeconds": 8.901902690995485,
+      "exitCode": 0,
+      "passed": true,
+      "output": {
+        "path": "docs/migration/lot7b-evidence/diagnostic/restoration-capture-typecheck.log.gz",
+        "bytes": 141,
+        "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d"
+      }
+    }
+  ],
+  "qualification": "Syntax and type checks of the prepared passive native restoration observer, strengthened source comparator and exhaustive Symbols entry expectation. No game, native action, source replay, final integrated gate or cost executed. Actual final4B publication remains a prerequisite to the release freeze."
+}

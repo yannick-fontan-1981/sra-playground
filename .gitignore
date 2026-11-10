@@ -387,6 +387,11 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot10a-evidence/isolated-functional/validation/delta-tests-output.raw.txt
 /docs/migration/lot10a-evidence/isolated-functional/validation/typecheck-output.raw.txt
 
+/docs/migration/lot7b-evidence/attempt1/craf-campaign.json.gz
+
+# Exact frozen source archive; restore with freeze-v53-native-source.py restore DIRECTORY
+/docs/migration/lot7b-evidence/attempt1/source-archive.tar.gz
+
 /docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz
 /docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz
 /docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz

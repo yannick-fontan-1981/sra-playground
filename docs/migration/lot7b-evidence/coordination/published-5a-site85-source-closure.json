@@ -1,0 +1,32 @@
+{
+  "schema": "logos-engine.lot7b-published-source-closure.v1",
+  "recordedAt": "2026-11-10T22:37:12.374976+00:00",
+  "status": "passed",
+  "priorPublishedCommit": "51e2813dedb2d71001290f94f100605e0327ead3",
+  "publishedCommit": "a009e1f138bb18251d697f49647bacc615ee514f",
+  "siteVersion": 85,
+  "changedFiles": [
+    "docs/migration/lot5a-evidence/README.md",
+    "docs/migration/lot5a-evidence/final/documentation-closure-integrity.json",
+    "docs/migration/lot5a-evidence/final/publication-site84.json",
+    "docs/migration/lot5a-evidence/final/publication-source-transport.json",
+    "docs/migration/lot5a-evidence/final/transport/independent-review.json",
+    "docs/migration/lot5a-evidence/final/transport/lot5a-bounded-source-plan-v3.json",
+    "docs/migration/lot5a-evidence/final/transport/lot5a-pushed-archive-integrity.json",
+    "docs/migration/lot5a-evidence/final/transport/lot5a-recovery-step-1.json",
+    "docs/migration/lot5a-evidence/final/transport/lot5a-recovery-step-2.json",
+    "docs/migration/lot5a-evidence/final/transport/lot5a-recovery-step-3.json",
+    "docs/migration/lot5a-evidence/final/transport/lot5a-recovery-step-4.json",
+    "docs/migration/lot5a-evidence/final/transport/lot5a-safe-source-target.json",
+    "docs/migration/lot5a-linked-temporal-lineage.md",
+    "docs/migration/lot5a-linked-temporal-preparation.md",
+    "docs/migration/v6-delivery-roadmap.md",
+    "docs/migration/v6-native-transfer.md"
+  ],
+  "onlyDocumentationChanged": true,
+  "nativeSourceDigest": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f",
+  "nativeFileCount": 283,
+  "nativeTestsScriptsBuildInputsUnchanged": true,
+  "samePublishedArchiveAsSite84": true,
+  "qualification": "Git object diff contains only documentation paths; the native, test, script, runtime dependency and build configuration objects remain exactly those independently verified for actual Site84. Site85 and its terminal deployment were independently checked through Sites. No functional execution or cost is performed by this comparison."
+}

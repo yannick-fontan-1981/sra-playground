@@ -1,0 +1,27 @@
+{
+  "schema": "logos-engine.lot7b-published-baseline.v1",
+  "status": "verified",
+  "recordedAt": "2026-11-10T20:59:42.144Z",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 83,
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_56ab94a2e69081918fc923b11c4484b9",
+  "commit": "bed48116585da864dd5c412ed11dd6990a950e8e",
+  "deploymentId": "appgdep_6af3859669708191a724098872b5c7d4",
+  "deploymentStatus": "succeeded",
+  "deploymentUpdatedAt": "2026-11-10T20:59:14.979903+00:00",
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "nativeVersion": "0.52.0",
+  "nativeSourceDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+  "archiveStorage": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_000000007c4c820ebf54585a58c72f94",
+    "content_hash": "sha256:95d1d9780bdb75c1eda9fe36ad66f3cab2e9277306722bea087592c19dab83c9",
+    "size_bytes": 29747200,
+    "file_count": 75
+  },
+  "initialNativePublication": {
+    "siteVersion": 82,
+    "commit": "0ca36b0a6a358e1e89420753bbcec4a33f028e0a"
+  },
+  "qualification": "Actually published 7A documentation closure; native source remains 0.52.0. This is the initial development base for 7B; later published concurrent predecessors must be reconciled before its final freeze."
+}

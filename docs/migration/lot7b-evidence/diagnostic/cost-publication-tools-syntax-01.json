@@ -1,0 +1,78 @@
+{
+  "schema": "logos-engine.lot7b-cost-tools-syntax.v1",
+  "status": "passed",
+  "startedAt": "2026-11-10T21:55:19.254688+00:00",
+  "finishedAt": "2026-11-10T21:55:19.337975+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "priorSyntaxReceipt": {
+    "path": "docs/migration/lot7b-evidence/diagnostic/cost-tools-syntax-01.json",
+    "bytes": 6450,
+    "sha256": "0a8710888acd1b010f7cb3819c9f89ee204c66d17bc7e3a453cd173f5aa235be"
+  },
+  "sourceInputsBefore": [
+    {
+      "path": "docs/migration/lot7b-evidence/record-publication-inputs.py",
+      "bytes": 20491,
+      "sha256": "f9186b9d83d030428534582a8131f35fe18216def9bdcfa96a14ddf38a3611d2"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/record-cost-log-transport.py",
+      "bytes": 3879,
+      "sha256": "b9083755fdc25fabaa2bb599552e90104b403bf22c91668912108ae294ef8b18"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/consolidate-owner-costs.mjs",
+      "bytes": 52832,
+      "sha256": "2858a65766d624c467232da84aeed89ed529225bc8ea5478216a716d09097064"
+    }
+  ],
+  "sourceInputsAfter": [
+    {
+      "path": "docs/migration/lot7b-evidence/record-publication-inputs.py",
+      "bytes": 20491,
+      "sha256": "f9186b9d83d030428534582a8131f35fe18216def9bdcfa96a14ddf38a3611d2"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/record-cost-log-transport.py",
+      "bytes": 3879,
+      "sha256": "b9083755fdc25fabaa2bb599552e90104b403bf22c91668912108ae294ef8b18"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/consolidate-owner-costs.mjs",
+      "bytes": 52832,
+      "sha256": "2858a65766d624c467232da84aeed89ed529225bc8ea5478216a716d09097064"
+    }
+  ],
+  "sourcesUnchanged": true,
+  "checkedCount": 3,
+  "checks": [
+    {
+      "file": "docs/migration/lot7b-evidence/record-publication-inputs.py",
+      "method": "Python ast.parse; no import or execution",
+      "passed": true
+    },
+    {
+      "file": "docs/migration/lot7b-evidence/record-cost-log-transport.py",
+      "method": "Python ast.parse; no import or execution",
+      "passed": true
+    },
+    {
+      "file": "docs/migration/lot7b-evidence/consolidate-owner-costs.mjs",
+      "method": "Node --check; no module evaluation",
+      "command": [
+        "node",
+        "--check",
+        "docs/migration/lot7b-evidence/consolidate-owner-costs.mjs"
+      ],
+      "passed": true,
+      "exitCode": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "costToolsExecuted": false,
+  "runtimeOrGameExecuted": false,
+  "measurementExecuted": false,
+  "publicationExecuted": false,
+  "qualification": "Supplementary syntax only. Two new Python publication/transport helpers parsed without imports. JavaScript consolidator rechecked after removal of the inherited literal performance-directory exclusion before measurement. No capture, measure, test, build, archive, compression or publication."
+}

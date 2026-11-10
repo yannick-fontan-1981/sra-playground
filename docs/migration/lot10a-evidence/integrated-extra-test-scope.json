@@ -1,6 +1,6 @@
 {
   "schema": "logos-engine.lot10a.integrated-extra-test-scope.v1",
-  "status": "provisional_source_paths_verified",
+  "status": "declared_for_frozen_candidate_pending_actual7b_publication",
   "testFiles": [
     "tests/kernel-batch.test.ts",
     "tests/v6-crossed-prefix-access.test.ts",
@@ -27,5 +27,18 @@
   "extraTestFileCount": 14,
   "duplicateExtraTestFiles": [],
   "overlapWithBaseScope": [],
-  "qualification": "Provisional explicit additions for eventual integration of actually published 5A, 4B and 7B. The initial 11-file declaration was expanded by source review of prepared 4B 7d44dbff8ad70c4c34845c246c77cfecf4e451db and 7B b2593ddd34e547bcf28962e135433a1ccdf39d5f: CoupledPair exhaustive registry assertion plus Symbols geometry and interface source contracts. Fourteen filenames are declared with no duplicate or overlap against the 31-file base, giving 45 files. This does not establish final integrated source identity or executed validation. Reconcile all paths and relevant changes with actual published commits before final frozen use."
+  "qualification": "Explicit45-file scope for the composed0.56 candidate:31base contracts plus14 predecessor tests. All paths exist and are unique. Published5A/4B and the frozen prepared7B source are identified here. Final reuse requires merging actual7B publication and proving unchanged native/source/test/build/execution bytes in a separate reconciliation receipt; this immutable scope declaration does not claim published7B or passed tests.",
+  "preparedPredecessor": {
+    "lot": "7B",
+    "commit": "28f3f388e18bad21a186795f965102a83e6b53d7",
+    "nativeDigest": "ea25603262a7473e5ab9994d2e2e86dd64a8291dd7c1dc18ede4d1f443cdc53b",
+    "nativeVersion": "0.55.0",
+    "status": "prepared_not_published"
+  },
+  "publishedPredecessors": {
+    "5A": "a009e1f138bb18251d697f49647bacc615ee514f",
+    "4B": "dd355400264b50942486559b8ca56ee6dfc6a3cc"
+  },
+  "candidateNativeVersion": "0.56.0",
+  "reconciledAt": "2026-11-10T23:11:26.466195+00:00"
 }

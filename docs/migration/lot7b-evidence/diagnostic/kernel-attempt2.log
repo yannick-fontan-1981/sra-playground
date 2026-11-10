@@ -1,0 +1,12 @@
+✔ symbol state retention requires the same single owner registered for selection (131.009716ms)
+✔ the production factory registers Symbols once at its declared position after Workshop and before Inventory (1043.043189ms)
+✔ the complete production caller selects a measured guide through SRC and acquires its ineffective action exactly once (3237.274343ms)
+✔ a foreign actual return can teach Workshop while Symbols has no active or passive acquisition (1736.088307ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6894.334584

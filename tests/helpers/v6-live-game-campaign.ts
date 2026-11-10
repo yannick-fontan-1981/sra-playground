@@ -89,13 +89,14 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     status: 'running', referenceCommit: V6_REFERENCE_COMMIT,
     budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: 360, clock: 'real active compute and native execution' },
     source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [], domainAssessments: [],
-    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], workshopSourceCalls: [], feedbackSourceCalls: [], relativeArrangementSourceCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
+    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], workshopSourceCalls: [], symbolSourceCalls: [], symbolRestoreCalls: [], feedbackSourceCalls: [], relativeArrangementSourceCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
   };
   if (options.recordedPublic) report.recordedPublicReplay = {
     trace: options.recordedPublic.trace, baseline: options.recordedPublic.baseline,
     qualification: 'A cold native common session recomputes every command before the recorded complete public return is supplied. No game host executes and no new live completion or speed comparison is claimed. Expected commands never enter the production transport.',
   };
   let runtime: Awaited<ReturnType<typeof createNativeV6Runtime>> | undefined;
+  let symbolsOwner: R | undefined;
   let native: Awaited<ReturnType<typeof loadPyodide>> | undefined;
   let agent: BrowserV6Agent | undefined, current: GameObservation | undefined;
   let lastResponse: V6AgentResult | undefined, lastCycles = 0, previousActions = 0, previousSeconds = 0;
@@ -198,6 +199,76 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             } catch (error) { return failed(error); }
           };
         }
+      }
+      const symbols = (runtime as unknown as { families: R[] }).families.find(f => f.id === 'public_symbol_transaction');
+      if (symbols) {
+        symbolsOwner = symbols;
+        let sourceDepth = 0;
+        for (const method of ['proposeSource', 'before', 'after', 'recordSource']) {
+          const original = symbols[method];
+          assert.equal(typeof original, 'function', `Missing symbol-transactions source surface: ${method}`);
+          symbols[method] = function (...args: any[]) {
+            if (sourceDepth) return original.apply(this, args);
+            const event: R = { index: report.symbolSourceCalls.length, method,
+              arguments: structuredClone(args), sourceBefore: this.state() };
+            sourceDepth++;
+            const complete = (result: any): any => {
+              event.result = structuredClone(result ?? null); event.sourceAfter = this.state();
+              report.symbolSourceCalls.push(event); sourceDepth--; return result;
+            };
+            const failed = (error: unknown): never => {
+              event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+              event.sourceAfter = this.state(); report.symbolSourceCalls.push(event); sourceDepth--; throw error;
+            };
+            try {
+              const result = original.apply(this, args);
+              return result && typeof result.then === 'function' ? result.then(complete, failed) : complete(result);
+            } catch (error) { return failed(error); }
+          };
+        }
+        const restoreNative = symbols.restoreNative;
+        assert.equal(typeof restoreNative, 'function', 'Missing symbol-transactions native restoration surface');
+        symbols.restoreNative = function (...args: any[]) {
+          const event: R = { index: report.symbolRestoreCalls.length, method: 'restoreNative',
+            arguments: null, sourceCallsBefore: report.symbolSourceCalls.length, sourceDepthBefore: sourceDepth,
+            sourceCallsAfter: null, sourceDepthAfter: null, sourceAfter: null,
+            returnMode: null, completion: 'pending', returnedNormally: false, exception: null, observationErrors: [] };
+          report.symbolRestoreCalls.push(event);
+          const describe = (error: unknown): R => {
+            try { return { type: error instanceof Error ? error.name : typeof error,
+              message: error instanceof Error ? error.message : String(error) }; }
+            catch { return { type: 'uninspectable_exception', message: 'The passive observer could not serialize this exception.' }; }
+          };
+          const observationError = (phase: string, error: unknown): void => {
+            event.observationErrors.push({ phase, ...describe(error) });
+          };
+          // Evidence owns a detached copy. The real call receives the original
+          // argument objects, exactly once; no checkpoint is supplied by us.
+          try { event.arguments = structuredClone(args); }
+          catch (error) { observationError('arguments', error); }
+          const complete = (completion: string, error?: unknown): void => {
+            event.completion = completion;
+            event.returnedNormally = completion === 'returned' || completion === 'resolved';
+            if (!event.returnedNormally) event.exception = describe(error);
+            event.sourceCallsAfter = report.symbolSourceCalls.length; event.sourceDepthAfter = sourceDepth;
+            // state() is the detached source projection. nativeState() and
+            // nativeRevision are deliberately not called by this observer.
+            try { event.sourceAfter = this.state(); }
+            catch (failure) { observationError('sourceAfter', failure); }
+          };
+          let result: any;
+          try { result = restoreNative.apply(this, args); }
+          catch (error) { event.returnMode = 'sync'; complete('threw', error); throw error; }
+          try {
+            if (result && typeof result.then === 'function') {
+              event.returnMode = 'async';
+              // Observe settlement without replacing the original promise,
+              // awaiting it here, or changing a synchronous return into one.
+              void result.then(() => complete('resolved'), (error: unknown) => complete('rejected', error));
+            } else { event.returnMode = 'sync'; complete('returned'); }
+          } catch (error) { observationError('completion', error); }
+          return result;
+        };
       }
       // Observe the one Feedback owner at both selection entries and its actual
       // selected/passive acquisitions. Arguments, return values and call order
@@ -416,6 +487,12 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             ? read('family_state:public_observed_inventory') : null;
           const recolorCheckpoint = graph.nodes['family_state:public_topological_recolor']
             ? read('family_state:public_topological_recolor') : null;
+          const symbolsCheckpoint = graph.nodes['family_state:public_symbol_transaction']
+            ? read('family_state:public_symbol_transaction') : null;
+          // service.handle has already completed the real sealed-prefix
+          // persistence and restore, including when this is the terminal prefix.
+          const symbolsInstanceState = symbolsOwner ? symbolsOwner.state() : null;
+          const symbolsRestoration = report.symbolRestoreCalls.at(-1) ?? null;
           const morphologyCheckpoint = graph.nodes['family_state:morphology']
             ? read('family_state:morphology') : null;
           const reasoningFacts = (read('reasoning:memory').facts as string[]).map(read);
@@ -438,6 +515,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const recolorFacts = reasoningFacts
             .filter(fact => evidence.transitions.some((_: R, index: number) =>
               fact.key === `topological_recolor_event:${evidence.decision_revision + index}`));
+          const symbolsFacts = reasoningFacts
+            .filter(fact => evidence.transitions.some((_: R, index: number) =>
+              fact.key === `symbol_transaction_event:${evidence.decision_revision + index}`));
           const anchors = (series.events as R[]).filter(event => event.kind === 'coupled_pair_epoch_anchor');
           const alternating = (series.events as R[]).filter(event => event.kind === 'alternating_graph_evidence');
           const graphEvidence = alternating.at(-1);
@@ -645,6 +725,18 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               acquired: recolorFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
               ...(evidence.proposal.recolor_plan ? { selectedProposal: evidence.proposal } : {}),
               qualification: 'Actual single six-field source owner. Only selected recolor actions call record; foreign returns do not become recolor experiments. Complete losing proposal evaluations and sealed checkpoints are observed without providing state or decisions.',
+            } } : {}),
+            ...(symbolsCheckpoint ? { symbolAcquisition: {
+              stateNode: 'family_state:public_symbol_transaction', checkpointFormat: symbolsCheckpoint.format,
+              sourceState: symbolsCheckpoint.source_state, nativeCheckpoint: symbolsCheckpoint,
+              instanceSourceState: symbolsInstanceState,
+              nativeRestoration: symbolsRestoration ? structuredClone(symbolsRestoration) : null,
+              restoreCallsThrough: report.symbolRestoreCalls.length,
+              transitions: evidence.transitions, sourceCallsThrough: report.symbolSourceCalls.length,
+              acquired: symbolsFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
+              retainedSourceFact: reasoningFacts.find(fact => fact.key === 'observed_symbol_transactions_state') ?? null,
+              ...(evidence.proposal.symbol_transaction_plan ? { selectedProposal: evidence.proposal } : {}),
+              qualification: 'Evidence only: the persisted five-field Symbols checkpoint, the actual restoreNative call and its source result, and the source state read from the live instance after this sealed prefix, including a terminal prefix. Source and restore cursors retain their observed order. Only selected own proposals record transitions; a foreign action does not acquire a symbol event. Source facts and immutable envelopes stay distinct. No restoration, state, decision or expected return is supplied by this observer, and private caches are not inspected.',
             } } : {}),
             informationGoal: evidence.proposal.question?.curiosity ?? null,
             motionSourceCallsThrough: report.motionSourceCalls.length,

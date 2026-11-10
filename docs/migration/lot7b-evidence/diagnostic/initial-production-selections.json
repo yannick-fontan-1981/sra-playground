@@ -1,0 +1,1411 @@
+[
+  {
+    "scene": "controlled",
+    "kind": "action",
+    "reason": null,
+    "command": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 44,
+        "y": 22
+      }
+    },
+    "selected": "public_occurrence_recall",
+    "proposal": {
+      "status": "proposed",
+      "kind": "nested_control_experiment",
+      "proposal_id": "C_nested_5a4ef937317daf1957bd",
+      "nested_control_plan": {
+        "epoch": 1,
+        "score": 0,
+        "observation_ref": "symbols:production-diagnostic:epoch:1:revision:1:frame:ddeedc5c1eeb4a11",
+        "frame_digest": "ddeedc5c1eeb4a11bab83b72e55a4d1286a3818cf15b928a4911fe1d8c0d9e17",
+        "selected": {
+          "frame_ref": "component-8",
+          "bbox": [
+            41,
+            19,
+            47,
+            25
+          ],
+          "point": [
+            44,
+            22
+          ],
+          "core_area": 9,
+          "core_scale": 3,
+          "core_palette": 5
+        },
+        "alternative_enclosures": [],
+        "action": {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 44,
+            "y": 22
+          }
+        },
+        "expected_effect": "unknown",
+        "scope": "Unique smallest measured compact two-value enclosure; other enclosures retain unknown roles. Action semantics and distant effects unconfirmed.",
+        "no_visible_effect_contract": {
+          "disposition": "local_no_visible_effect",
+          "meaning": "An exact point command with no visible pixel change and no official progress closes only this measured probe. Selection and impossibility remain unacquired; an invisible control remains unknown. Retain epoch, observation evidence, full frame, motif, point and payload. Reject the same offer while these premises remain unchanged. Re-examine other declared composition families; no unscoped input fallback is licensed by this return. A click-to-motion experiment needs its own explicit hypothesis, current binding and falsifier.",
+          "decline_unscoped_families": [
+            "returned_branch_contrast",
+            "observed_frontier"
+          ]
+        }
+      },
+      "actions": [
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 44,
+            "y": 22
+          }
+        }
+      ],
+      "steps": [
+        {
+          "action": {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 44,
+              "y": 22
+            }
+          },
+          "expected_after": null,
+          "expected_before": {
+            "level_epoch": 1,
+            "frame_hash": "ddeedc5c1eeb4a11",
+            "levels_completed": 0,
+            "state": "NOT_FINISHED"
+          },
+          "point_support": {
+            "level_epoch": 1,
+            "observation_ref": "symbols:production-diagnostic:epoch:1:revision:1:frame:ddeedc5c1eeb4a11",
+            "frame_hash": "ddeedc5c1eeb4a11",
+            "point": [
+              44,
+              22
+            ],
+            "palette_value": 5,
+            "projection_bbox": [
+              41,
+              19,
+              47,
+              25
+            ],
+            "projected_rows_digest": "e19304036249cc9d41cc6b2791d72ca9ddcf80394241a0ac815a86034f2ff2c6",
+            "entity_ref": "measured-field-control:f307f672722d5d4443e439ab97450052a2a1f6e639091d5b20229bd23f359fc1",
+            "signature": "c3f6e3cdffdcf0204b13aced73ecab55779851ca7889475c9914fe2afc60f628",
+            "scope": "Current measured control/envelope, exact full-frame and epoch guard. Unknown response seals this one-action experiment; no capacity or terminal law supplied."
+          },
+          "point_binding": {
+            "level_epoch": 1,
+            "observation_ref": "symbols:production-diagnostic:epoch:1:revision:1:frame:ddeedc5c1eeb4a11",
+            "frame_hash": "ddeedc5c1eeb4a11",
+            "point": [
+              44,
+              22
+            ],
+            "palette_value": 5,
+            "projection_bbox": [
+              41,
+              19,
+              47,
+              25
+            ],
+            "projected_rows_digest": "e19304036249cc9d41cc6b2791d72ca9ddcf80394241a0ac815a86034f2ff2c6",
+            "entity_ref": "measured-field-control:f307f672722d5d4443e439ab97450052a2a1f6e639091d5b20229bd23f359fc1",
+            "signature": "c3f6e3cdffdcf0204b13aced73ecab55779851ca7889475c9914fe2afc60f628",
+            "scope": "Current measured control/envelope, exact full-frame and epoch guard. Unknown response seals this one-action experiment; no capacity or terminal law supplied."
+          }
+        }
+      ],
+      "facts": {
+        "unique_smallest_measured_nested_compact_motif": true,
+        "point_on_current_core": true
+      },
+      "compositions": [
+        {
+          "id": "C_nested_5a4ef937317daf1957bd",
+          "observed": false,
+          "open_question": "Test the unique smallest measured compact solid core within a measured closed two-value square enclosure. Its control role is hypothetical. Bind one exact point, preserve local and distant changes as separate observations, and close at the first unknown effect before inferring a resource, quantity, relay or terminal role.",
+          "properties": {
+            "roles": [
+              "current_compact_core",
+              "measured_closed_enclosure",
+              "unknown_control",
+              "local_effect",
+              "distant_effect"
+            ]
+          },
+          "relations": [
+            "contributes_to:G_official_completion"
+          ]
+        }
+      ],
+      "question": {
+        "reason": "test_unique_nested_compact_motif",
+        "hypothesis_refs": []
+      },
+      "route_refs": [
+        "symbols:production-diagnostic:epoch:1:revision:1:frame:ddeedc5c1eeb4a11"
+      ],
+      "binding": {
+        "level_epoch": 1,
+        "observation_ref": "symbols:production-diagnostic:epoch:1:revision:1:frame:ddeedc5c1eeb4a11"
+      },
+      "bundle_template": {
+        "operation_key": "OP18",
+        "composition_ref": "C_nested_5a4ef937317daf1957bd",
+        "objective_ref": "G_official_completion",
+        "preserve_refs": [],
+        "actions": [
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 44,
+              "y": 22
+            }
+          }
+        ],
+        "purpose": "Test the unique smallest measured compact solid core within a measured closed two-value square enclosure. Its control role is hypothetical. Bind one exact point, preserve local and distant changes as separate observations, and close at the first unknown effect before inferring a resource, quantity, relay or terminal role.",
+        "preconditions": {
+          "unique_smallest_measured_nested_compact_motif": true,
+          "point_on_current_core": true
+        },
+        "evidence": [
+          "symbols:production-diagnostic:epoch:1:revision:1:frame:ddeedc5c1eeb4a11"
+        ],
+        "outcome_guard": {
+          "path": [
+            "value"
+          ],
+          "contains": "C_nested_5a4ef937317daf1957bd"
+        }
+      },
+      "field_subquestion": "field_service_composition",
+      "strategy_receipt": {
+        "workflow": "v6.composition_strategy.choose",
+        "src_hash": "80ef231352527fa731c65fad400256a61ffcf9cff4dbd8615204d8d9a0b4e84d",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.composition_strategy.choose.open.s0000",
+          "v6.composition_strategy.choose.open.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0001"
+        ],
+        "all_executed_statements": [
+          "v6.composition_strategy.choose.open.s0000",
+          "v6.composition_strategy.choose.open.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0001"
+        ],
+        "instruction_quantum": 128,
+        "instructions": 14,
+        "trace": [
+          {
+            "index": 1,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.open",
+            "statementId": "v6.composition_strategy.choose.open.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 0,
+            "status": "completed",
+            "target": "families.begin",
+            "resultBinding": "session",
+            "summary": "object(5 fields)"
+          },
+          {
+            "index": 2,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.open",
+            "statementId": "v6.composition_strategy.choose.open.s0001",
+            "kind": "NEXT",
+            "phase": "statement",
+            "depth": 0,
+            "status": "completed",
+            "target": "v6.composition_strategy.choose.examine",
+            "summary": "next → examine"
+          },
+          {
+            "index": 3,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000",
+            "kind": "WHILE",
+            "phase": "statement",
+            "depth": 0,
+            "status": "completed",
+            "summary": "while → body"
+          },
+          {
+            "index": 4,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "target": "families.offer",
+            "resultBinding": "trial",
+            "summary": "object(2 fields)"
+          },
+          {
+            "index": 5,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "summary": "false → else"
+          },
+          {
+            "index": 6,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 2,
+            "status": "completed",
+            "target": "families.advance",
+            "resultBinding": "session",
+            "summary": "object(5 fields)"
+          },
+          {
+            "index": 7,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "frame_complete",
+            "depth": 2,
+            "status": "completed",
+            "summary": "else complete"
+          },
+          {
+            "index": 8,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000",
+            "kind": "WHILE",
+            "phase": "frame_complete",
+            "depth": 1,
+            "status": "completed",
+            "summary": "step complete"
+          },
+          {
+            "index": 9,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "target": "families.offer",
+            "resultBinding": "trial",
+            "summary": "object(2 fields)"
+          },
+          {
+            "index": 10,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "summary": "true → body"
+          },
+          {
+            "index": 11,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001.body.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 2,
+            "status": "completed",
+            "target": "families.finish",
+            "resultBinding": "session",
+            "summary": "object(6 fields)"
+          },
+          {
+            "index": 12,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "frame_complete",
+            "depth": 2,
+            "status": "completed",
+            "summary": "body complete"
+          },
+          {
+            "index": 13,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000",
+            "kind": "WHILE",
+            "phase": "frame_complete",
+            "depth": 1,
+            "status": "completed",
+            "summary": "step complete"
+          },
+          {
+            "index": 14,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0001",
+            "kind": "STOP",
+            "phase": "statement",
+            "depth": 0,
+            "status": "completed",
+            "summary": "object(6 fields)"
+          }
+        ],
+        "execution_engine": "logos-engine.typescript",
+        "reference_commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+        "reference_semantic_hash": "6ae4f0b4d1fd7a8245e3f55ec9326814380faaa81c69a6ba3f9385b8d67b1ecf",
+        "native_execution_hash": "2f10469f07affd9b68647c4619f287b68991c7bf7fc8c5eda158b29ffdad9cd2",
+        "source_definition_hash": "80ef231352527fa731c65fad400256a61ffcf9cff4dbd8615204d8d9a0b4e84d",
+        "edited": false,
+        "visited": [
+          "goal_access",
+          "window_constraints"
+        ],
+        "selected": "window_constraints",
+        "deferred_curiosity": []
+      },
+      "morphology": {
+        "status": "not_evaluated",
+        "reason": "prior_family_selected"
+      },
+      "composition_target_tree": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "symbols:production-diagnostic:epoch:1:revision:1:frame:ddeedc5c1eeb4a11",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "C_nested_5a4ef937317daf1957bd"
+        ],
+        "reason": "independent_current_contribution"
+      }
+    },
+    "symbolsCalls": 0,
+    "symbolsState": {
+      "epoch": null,
+      "rejected": [],
+      "events": [],
+      "transition_count": 0,
+      "interface_state": {
+        "epoch": null,
+        "samples": [],
+        "contrasts": [],
+        "methods": [],
+        "refutations": [],
+        "bound": null
+      }
+    }
+  },
+  {
+    "scene": "CRAF",
+    "kind": "action",
+    "reason": null,
+    "command": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 4,
+        "y": 11
+      }
+    },
+    "selected": "public_symbol_transaction",
+    "proposal": {
+      "status": "proposed",
+      "kind": "public_symbol_transaction",
+      "actions": [
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 4,
+            "y": 11
+          }
+        }
+      ],
+      "steps": [
+        {
+          "action": {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 4,
+              "y": 11
+            }
+          },
+          "expected_before": {
+            "level_epoch": 1,
+            "frame_hash": "2731a599e06fc2a4"
+          },
+          "expected_after": null,
+          "point_binding": {
+            "observation_ref": "symbols:production-diagnostic:epoch:1:revision:1:frame:2731a599e06fc2a4",
+            "level_epoch": 1,
+            "frame_hash": "2731a599e06fc2a4",
+            "entity_ref": "component:0f78380c8b40d9bf:1",
+            "signature": "0f78380c8b40d9bf855b5ecc5eff3e39cd90ba96c90fa4296c33970b01ba9988",
+            "bbox": [
+              3,
+              10,
+              5,
+              12
+            ],
+            "palette_value": 11,
+            "point": [
+              4,
+              11
+            ],
+            "total_occurrences": 79,
+            "sampled_occurrences": 79
+          }
+        }
+      ],
+      "facts": {
+        "symbol_transaction_current_bound": true
+      },
+      "binding": {
+        "observation_ref": "symbols:production-diagnostic:epoch:1:revision:1:frame:2731a599e06fc2a4",
+        "level_epoch": 1,
+        "levels_completed": 0,
+        "frame_hash": "2731a599e06fc2a4"
+      },
+      "symbol_transaction_plan": {
+        "interface_offer": null,
+        "mode": "guide",
+        "measured_facts": {
+          "added_spaced_rect_count": 0,
+          "added_spaced_rect_point_center_count": 0,
+          "added_tight_rect_count": 0,
+          "added_tight_rect_distinct_horizontal_peer_span_count": 0,
+          "added_tight_rect_narrower_horizontal_peer_span_count": 0,
+          "added_tight_rect_point_center_count": 0,
+          "added_tight_rect_wider_horizontal_peer_span_count": 0,
+          "added_tight_rect_wider_lower_span_present": false,
+          "candidate_local_horizontal_span_is_narrower_than_added_tight_rect": false,
+          "candidate_local_horizontal_span_is_unique_widest_distinct_peer": false,
+          "candidate_local_horizontal_span_width": 0,
+          "current_spaced_frame_entity_count": 1,
+          "diagram_equal_pair_matches_left_group_count": 0,
+          "diagram_left_removal_right_appearance_count": 0,
+          "diagram_point_branch_value_square_count": 0,
+          "diagram_point_equal_pair_center_count": 0,
+          "diagram_point_full_matches_hollow_count": 0,
+          "diagram_point_full_symbol_count": 1,
+          "diagram_point_hollow_correspondence_context": {},
+          "diagram_point_hollow_matches_tight_value_count": 0,
+          "diagram_tight_white_center_count": 0,
+          "spaced_rect_count": 1,
+          "spaced_rect_palette_white_count": 1,
+          "spaced_rect_point_center_count": 1,
+          "spaced_rect_point_palette_white_count": 1,
+          "three_branch_diagram_row_count": 4,
+          "three_branch_pair_left_row_count": 2,
+          "tight_rect_point_palette_white_count": 0,
+          "unique_added_tight_rect_distinct_horizontal_peer": false
+        },
+        "conclusions": {
+          "active_goal_ref": "goal.acquire_indicated_needed_symbol",
+          "emphasis_instruction_admissible": true,
+          "symbol_diagram_roles_remain_revisable": true,
+          "added_spaced_rect_count": 0,
+          "added_spaced_rect_point_center_count": 0,
+          "added_tight_rect_count": 0,
+          "added_tight_rect_distinct_horizontal_peer_span_count": 0,
+          "added_tight_rect_narrower_horizontal_peer_span_count": 0,
+          "added_tight_rect_point_center_count": 0,
+          "added_tight_rect_wider_horizontal_peer_span_count": 0,
+          "added_tight_rect_wider_lower_span_present": false,
+          "candidate_local_horizontal_span_is_narrower_than_added_tight_rect": false,
+          "candidate_local_horizontal_span_is_unique_widest_distinct_peer": false,
+          "candidate_local_horizontal_span_width": 0,
+          "current_spaced_frame_entity_count": 1,
+          "diagram_equal_pair_matches_left_group_count": 0,
+          "diagram_left_removal_right_appearance_count": 0,
+          "diagram_point_branch_value_square_count": 0,
+          "diagram_point_equal_pair_center_count": 0,
+          "diagram_point_full_matches_hollow_count": 0,
+          "diagram_point_full_symbol_count": 1,
+          "diagram_point_hollow_correspondence_context": {},
+          "diagram_point_hollow_matches_tight_value_count": 0,
+          "diagram_tight_white_center_count": 0,
+          "spaced_rect_count": 1,
+          "spaced_rect_palette_white_count": 1,
+          "spaced_rect_point_center_count": 1,
+          "spaced_rect_point_palette_white_count": 1,
+          "three_branch_diagram_row_count": 4,
+          "three_branch_pair_left_row_count": 2,
+          "tight_rect_point_palette_white_count": 0,
+          "unique_added_tight_rect_distinct_horizontal_peer": false,
+          "selection_principle_ref": "principle.white_frame_opens_strong_competing_instruction_and_selection_suppositions",
+          "active_terminal_goal_ref": "goal.satisfy_observed_symbol_requests",
+          "advances_active_goal_chain": true,
+          "committed_plan_ref": null,
+          "committed_verified_repetition": false,
+          "declared_terminal_goal_ref": "goal.satisfy_observed_symbol_requests",
+          "dynamic_goal_binding_satisfied": true,
+          "emphasis_action_eligible": true,
+          "inherited_priority_from_terminal_goal": true,
+          "persistent_effectful_control_fragment_eligible": true,
+          "post_focus_transfer_invalidates_pre_reaction_click_frontier": true,
+          "produced_enclosed_region_interaction_eligible": true,
+          "remaining_action_bound": 1,
+          "declared_dependency_chain_refs": [
+            "goal.understand_and_satisfy_observed_requests",
+            "goal.test_indicated_interaction_at_emphasis_center",
+            "subgoal.reconcile_indicated_interaction.component:0f78380c8b40d9bf:1"
+          ],
+          "discriminating_experiment_ref": "experiment.indicated_interaction.component:0f78380c8b40d9bf:1",
+          "expected_configuration_or_goal_delta_ref": "expectation.indicated_interaction_changes_scene_and_cue.component:0f78380c8b40d9bf:1",
+          "falsifier_refs": [
+            "falsifier.emphasis_is_selection_or_feedback_only.component:0f78380c8b40d9bf:1",
+            "falsifier.indicated_interaction_has_no_effect.component:0f78380c8b40d9bf:1"
+          ],
+          "goal_dependency_chain_refs": [
+            "goal.understand_and_satisfy_observed_requests",
+            "goal.test_indicated_interaction_at_emphasis_center",
+            "subgoal.reconcile_indicated_interaction.component:0f78380c8b40d9bf:1"
+          ],
+          "goal_graph_edge_refs": [
+            "edge.understanding_requires_reconciled_indication.component:0f78380c8b40d9bf:1"
+          ],
+          "premise_claim_refs": [
+            "claim.distinct_spaced_rectangular_emphasis.component:0f78380c8b40d9bf:1"
+          ],
+          "reconciliation_checkpoint_ref": "checkpoint.indicated_interaction.component:0f78380c8b40d9bf:1",
+          "subgoal_ref": "subgoal.reconcile_indicated_interaction.component:0f78380c8b40d9bf:1",
+          "hot_workflow_activity_ref": "activity.select_needed_available_symbol",
+          "hot_workflow_ref": "workflow.hot.revalidated_symbol_recipe_requests",
+          "symbol_diagram_effect_support": "pending_action_conditioned_evidence",
+          "symbol_diagram_rule_interpretation": "left_operands_right_results",
+          "terminal_objective_contract_ref": "contract.all_observed_symbol_requests_filled_then_official_boundary"
+        },
+        "rule_refs": [
+          "projection.exploration.white_spaced_frame_instruction_test",
+          "projection.exploration.test_distinct_spaced_emphasis_center",
+          "projection.exploration.symbol_diagram_hot_activity",
+          "projection.exploration.symbol_diagram_select_symbol"
+        ],
+        "entity_ref": "component:3da0201963e8a489:0",
+        "entity_signature": "3da0201963e8a489478c6d250f50d32ebc32e24bad145c945a21bcc382ba0fe2",
+        "rejection_key": "e204b28f7484ba8badb38852c0e96f8efe723c84d48893f3b123e5198b0909f2",
+        "workflow": {
+          "workflow": "v6.symbol_transactions.choose",
+          "src_hash": "67fdffbde20f0917fb889e18678df341bcc426f38e536dd115e4dca49d91ffd7",
+          "src_status": "completed",
+          "executed_statements": [
+            "v6.symbol_transactions.choose.measure.s0000",
+            "v6.symbol_transactions.choose.measure.s0001",
+            "v6.symbol_transactions.choose.choose.s0000",
+            "v6.symbol_transactions.choose.choose.s0001"
+          ]
+        },
+        "drm_sha256": "4af915b9b0dd7a81472c26ab18aa58eed66f36b532b1b63c25dea91cb5708fc1",
+        "origin_drm_sha256": "0f9b3aa1585b44a1de01ce0705fc97af3f83979b39c740c5a9837313fcadc197",
+        "hypotheses": [
+          "supposition.frame_indicates_instruction",
+          "supposition.frame_indicates_selection",
+          "supposition.frame_indicates_feedback",
+          "supposition.frame_is_decoration"
+        ],
+        "expected_effect": "Observe a current selection, transfer, transformation or request change; do not assume that a halo is an acquired guide.",
+        "falsifiers": [
+          "no_discriminating_change",
+          "different_current_center",
+          "competing_spaced_frames",
+          "unpredicted_change_of_other_compositions",
+          "scope_changed"
+        ],
+        "authority": "current_revisable_experiment_not_acquired_role",
+        "preserve": [
+          "other_loaded_supports",
+          "other_observed_requests",
+          "unselected_occurrences"
+        ],
+        "effect_status": "unknown_until_sealed_observation"
+      },
+      "compositions": [
+        {
+          "id": "composition:symbol_transaction:8caba54ccf1730de1b624ef512297184ff02e8b74ae7a9c64d464a4444674757",
+          "role": "information_question",
+          "observed": false,
+          "things": [
+            "component:3da0201963e8a489:0"
+          ],
+          "properties": {
+            "target": "goal.acquire_indicated_needed_symbol",
+            "conditional": true,
+            "hypotheses": [
+              "supposition.frame_indicates_instruction",
+              "supposition.frame_indicates_selection",
+              "supposition.frame_indicates_feedback",
+              "supposition.frame_is_decoration"
+            ],
+            "falsifiers": [
+              "no_discriminating_change",
+              "different_current_center",
+              "competing_spaced_frames",
+              "unpredicted_change_of_other_compositions",
+              "scope_changed"
+            ],
+            "roles_remain_revisable": true,
+            "interface_dependency": null
+          },
+          "relations": [
+            "contributes_to:G_official_completion"
+          ],
+          "open_question": "Test the currently indicated interface contribution, retaining guide, selection, feedback and decoration as competing explanations."
+        }
+      ],
+      "question": {
+        "reason": "Test the currently indicated interface contribution, retaining guide, selection, feedback and decoration as competing explanations.",
+        "hypothesis_refs": [
+          "supposition.frame_indicates_instruction",
+          "supposition.frame_indicates_selection",
+          "supposition.frame_indicates_feedback",
+          "supposition.frame_is_decoration"
+        ]
+      },
+      "route_refs": [
+        "symbols:production-diagnostic:epoch:1:revision:1:frame:2731a599e06fc2a4"
+      ],
+      "bundle_template": {
+        "operation_key": "OP18",
+        "composition_ref": "composition:symbol_transaction:8caba54ccf1730de1b624ef512297184ff02e8b74ae7a9c64d464a4444674757",
+        "objective_ref": "G_official_completion",
+        "purpose": "Test the currently indicated interface contribution, retaining guide, selection, feedback and decoration as competing explanations.",
+        "preconditions": {
+          "symbol_transaction_current_bound": true
+        },
+        "evidence": [
+          "symbols:production-diagnostic:epoch:1:revision:1:frame:2731a599e06fc2a4"
+        ],
+        "actions": [
+          {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 4,
+              "y": 11
+            }
+          }
+        ],
+        "preserve_refs": [],
+        "preservation_evidence": {},
+        "outcome_guard": {
+          "path": [
+            "value"
+          ],
+          "contains": "composition:symbol_transaction:8caba54ccf1730de1b624ef512297184ff02e8b74ae7a9c64d464a4444674757"
+        }
+      },
+      "material_access_subquestion": "observed_symbol_transaction",
+      "strategy_receipt": {
+        "workflow": "v6.composition_strategy.choose",
+        "src_hash": "80ef231352527fa731c65fad400256a61ffcf9cff4dbd8615204d8d9a0b4e84d",
+        "src_status": "completed",
+        "executed_statements": [
+          "v6.composition_strategy.choose.open.s0000",
+          "v6.composition_strategy.choose.open.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0001"
+        ],
+        "all_executed_statements": [
+          "v6.composition_strategy.choose.open.s0000",
+          "v6.composition_strategy.choose.open.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001.body.s0000",
+          "v6.composition_strategy.choose.examine.s0000.body.s0001",
+          "v6.composition_strategy.choose.examine.s0000",
+          "v6.composition_strategy.choose.examine.s0001"
+        ],
+        "instruction_quantum": 128,
+        "instructions": 44,
+        "trace": [
+          {
+            "index": 1,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.open",
+            "statementId": "v6.composition_strategy.choose.open.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 0,
+            "status": "completed",
+            "target": "families.begin",
+            "resultBinding": "session",
+            "summary": "object(5 fields)"
+          },
+          {
+            "index": 2,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.open",
+            "statementId": "v6.composition_strategy.choose.open.s0001",
+            "kind": "NEXT",
+            "phase": "statement",
+            "depth": 0,
+            "status": "completed",
+            "target": "v6.composition_strategy.choose.examine",
+            "summary": "next → examine"
+          },
+          {
+            "index": 3,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000",
+            "kind": "WHILE",
+            "phase": "statement",
+            "depth": 0,
+            "status": "completed",
+            "summary": "while → body"
+          },
+          {
+            "index": 4,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "target": "families.offer",
+            "resultBinding": "trial",
+            "summary": "object(2 fields)"
+          },
+          {
+            "index": 5,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "summary": "false → else"
+          },
+          {
+            "index": 6,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 2,
+            "status": "completed",
+            "target": "families.advance",
+            "resultBinding": "session",
+            "summary": "object(5 fields)"
+          },
+          {
+            "index": 7,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "frame_complete",
+            "depth": 2,
+            "status": "completed",
+            "summary": "else complete"
+          },
+          {
+            "index": 8,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000",
+            "kind": "WHILE",
+            "phase": "frame_complete",
+            "depth": 1,
+            "status": "completed",
+            "summary": "step complete"
+          },
+          {
+            "index": 9,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "target": "families.offer",
+            "resultBinding": "trial",
+            "summary": "object(2 fields)"
+          },
+          {
+            "index": 10,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "summary": "false → else"
+          },
+          {
+            "index": 11,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 2,
+            "status": "completed",
+            "target": "families.advance",
+            "resultBinding": "session",
+            "summary": "object(5 fields)"
+          },
+          {
+            "index": 12,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "frame_complete",
+            "depth": 2,
+            "status": "completed",
+            "summary": "else complete"
+          },
+          {
+            "index": 13,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000",
+            "kind": "WHILE",
+            "phase": "frame_complete",
+            "depth": 1,
+            "status": "completed",
+            "summary": "step complete"
+          },
+          {
+            "index": 14,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "target": "families.offer",
+            "resultBinding": "trial",
+            "summary": "object(2 fields)"
+          },
+          {
+            "index": 15,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "summary": "false → else"
+          },
+          {
+            "index": 16,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 2,
+            "status": "completed",
+            "target": "families.advance",
+            "resultBinding": "session",
+            "summary": "object(5 fields)"
+          },
+          {
+            "index": 17,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "frame_complete",
+            "depth": 2,
+            "status": "completed",
+            "summary": "else complete"
+          },
+          {
+            "index": 18,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000",
+            "kind": "WHILE",
+            "phase": "frame_complete",
+            "depth": 1,
+            "status": "completed",
+            "summary": "step complete"
+          },
+          {
+            "index": 19,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "target": "families.offer",
+            "resultBinding": "trial",
+            "summary": "object(2 fields)"
+          },
+          {
+            "index": 20,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "summary": "false → else"
+          },
+          {
+            "index": 21,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 2,
+            "status": "completed",
+            "target": "families.advance",
+            "resultBinding": "session",
+            "summary": "object(5 fields)"
+          },
+          {
+            "index": 22,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "frame_complete",
+            "depth": 2,
+            "status": "completed",
+            "summary": "else complete"
+          },
+          {
+            "index": 23,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000",
+            "kind": "WHILE",
+            "phase": "frame_complete",
+            "depth": 1,
+            "status": "completed",
+            "summary": "step complete"
+          },
+          {
+            "index": 24,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "target": "families.offer",
+            "resultBinding": "trial",
+            "summary": "object(2 fields)"
+          },
+          {
+            "index": 25,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "summary": "false → else"
+          },
+          {
+            "index": 26,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 2,
+            "status": "completed",
+            "target": "families.advance",
+            "resultBinding": "session",
+            "summary": "object(5 fields)"
+          },
+          {
+            "index": 27,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "frame_complete",
+            "depth": 2,
+            "status": "completed",
+            "summary": "else complete"
+          },
+          {
+            "index": 28,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000",
+            "kind": "WHILE",
+            "phase": "frame_complete",
+            "depth": 1,
+            "status": "completed",
+            "summary": "step complete"
+          },
+          {
+            "index": 29,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "target": "families.offer",
+            "resultBinding": "trial",
+            "summary": "object(2 fields)"
+          },
+          {
+            "index": 30,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "summary": "false → else"
+          },
+          {
+            "index": 31,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 2,
+            "status": "completed",
+            "target": "families.advance",
+            "resultBinding": "session",
+            "summary": "object(5 fields)"
+          },
+          {
+            "index": 32,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "frame_complete",
+            "depth": 2,
+            "status": "completed",
+            "summary": "else complete"
+          },
+          {
+            "index": 33,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000",
+            "kind": "WHILE",
+            "phase": "frame_complete",
+            "depth": 1,
+            "status": "completed",
+            "summary": "step complete"
+          },
+          {
+            "index": 34,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "target": "families.offer",
+            "resultBinding": "trial",
+            "summary": "object(2 fields)"
+          },
+          {
+            "index": 35,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "summary": "false → else"
+          },
+          {
+            "index": 36,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001.else.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 2,
+            "status": "completed",
+            "target": "families.advance",
+            "resultBinding": "session",
+            "summary": "object(5 fields)"
+          },
+          {
+            "index": 37,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "frame_complete",
+            "depth": 2,
+            "status": "completed",
+            "summary": "else complete"
+          },
+          {
+            "index": 38,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000",
+            "kind": "WHILE",
+            "phase": "frame_complete",
+            "depth": 1,
+            "status": "completed",
+            "summary": "step complete"
+          },
+          {
+            "index": 39,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "target": "families.offer",
+            "resultBinding": "trial",
+            "summary": "object(2 fields)"
+          },
+          {
+            "index": 40,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "statement",
+            "depth": 1,
+            "status": "completed",
+            "summary": "true → body"
+          },
+          {
+            "index": 41,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001.body.s0000",
+            "kind": "CALL",
+            "phase": "statement",
+            "depth": 2,
+            "status": "completed",
+            "target": "families.finish",
+            "resultBinding": "session",
+            "summary": "object(6 fields)"
+          },
+          {
+            "index": 42,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000.body.s0001",
+            "kind": "IF",
+            "phase": "frame_complete",
+            "depth": 2,
+            "status": "completed",
+            "summary": "body complete"
+          },
+          {
+            "index": 43,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0000",
+            "kind": "WHILE",
+            "phase": "frame_complete",
+            "depth": 1,
+            "status": "completed",
+            "summary": "step complete"
+          },
+          {
+            "index": 44,
+            "workflowId": "v6.composition_strategy.choose",
+            "stepId": "v6.composition_strategy.choose.examine",
+            "statementId": "v6.composition_strategy.choose.examine.s0001",
+            "kind": "STOP",
+            "phase": "statement",
+            "depth": 0,
+            "status": "completed",
+            "summary": "object(6 fields)"
+          }
+        ],
+        "execution_engine": "logos-engine.typescript",
+        "reference_commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+        "reference_semantic_hash": "6ae4f0b4d1fd7a8245e3f55ec9326814380faaa81c69a6ba3f9385b8d67b1ecf",
+        "native_execution_hash": "2f10469f07affd9b68647c4619f287b68991c7bf7fc8c5eda158b29ffdad9cd2",
+        "source_definition_hash": "80ef231352527fa731c65fad400256a61ffcf9cff4dbd8615204d8d9a0b4e84d",
+        "edited": false,
+        "visited": [
+          "goal_access",
+          "window_constraints",
+          "orbit_constraints",
+          "scored_local_rewrite",
+          "containment",
+          "surface",
+          "pre_score_contact",
+          "factored_material_return"
+        ],
+        "selected": "factored_material_return",
+        "deferred_curiosity": []
+      },
+      "morphology": {
+        "status": "not_evaluated",
+        "reason": "prior_family_selected"
+      },
+      "composition_target_tree": {
+        "root": "G_official_completion",
+        "level_epoch": 1,
+        "observation_ref": "symbols:production-diagnostic:epoch:1:revision:1:frame:2731a599e06fc2a4",
+        "version": "1.1-v6",
+        "retained_target": null,
+        "admitted": true,
+        "path": [
+          "G_official_completion",
+          "composition:symbol_transaction:8caba54ccf1730de1b624ef512297184ff02e8b74ae7a9c64d464a4444674757"
+        ],
+        "reason": "independent_current_contribution"
+      }
+    },
+    "symbolsCalls": 1,
+    "symbolsState": {
+      "epoch": 1,
+      "rejected": [],
+      "events": [],
+      "transition_count": 0,
+      "interface_state": {
+        "epoch": null,
+        "samples": [],
+        "contrasts": [],
+        "methods": [],
+        "refutations": [],
+        "bound": null
+      }
+    }
+  }
+]
