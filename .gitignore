@@ -142,3 +142,11 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 
 # Preserve the four complete logs of the declared cost window.
 !/docs/migration/lot3a-cost-evidence/performance/cohort*/*.log
+
+# Lot 3B frozen sources are retained in checked ordered byte parts.
+/docs/migration/lot3b-evidence/**/source-archive.tar.gz
+!/docs/migration/lot3b-evidence/performance/cohort*/*.log
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot3b-evidence/final/catr-session/catr-campaign.json.gz
+/docs/migration/lot3b-evidence/final/regressions/rswp-038-replay.json.gz

@@ -1,0 +1,59 @@
+{
+  "schema": "logos-engine.native-candidate-resolution.v1",
+  "game": "CATR",
+  "status": "three_levels_completed",
+  "selection": {
+    "path": "docs/migration/lot3b-evidence/candidate-selection.json",
+    "sha256": "0bf28a56dd336a833917ecf8b93736b04cb15ddfd4752efc4fcd71bd943b1b81",
+    "bytes": 1706
+  },
+  "execution": {
+    "path": "docs/migration/lot3b-evidence/final/catr-session/execution-catr.json",
+    "sha256": "846b2fe4ff1b10c1348ff6033bd91e32e00cad7a0f2e1939cc972b448e6f77a8",
+    "bytes": 62915
+  },
+  "contribution": {
+    "path": "docs/migration/lot3b-evidence/final/catr-session/chamber-contribution.json",
+    "sha256": "f892e34d94ba73f2f9ef57dc280e2ab3e03a333375329e06aa06be8e43d10d83",
+    "bytes": 328153
+  },
+  "finishedAt": "2026-11-10T00:21:46.292401+00:00",
+  "carriedSeconds": 107.399326,
+  "elapsedSinceSelectionSeconds": 923.292401,
+  "cumulativeSeconds": 1030.6917270000001,
+  "maximumBlockedSeconds": 2400,
+  "deadlineRespected": true,
+  "levels": [
+    {
+      "level": 1,
+      "actions": 3,
+      "prefixes": 2
+    },
+    {
+      "level": 2,
+      "actions": 4,
+      "prefixes": 3
+    },
+    {
+      "level": 3,
+      "actions": 5,
+      "prefixes": 3
+    }
+  ],
+  "actual": {
+    "actions": 12,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "prefixes": 8,
+    "sessions": 1,
+    "activeSeconds": 12.805287840000007,
+    "operationCounts": {
+      "init": 1,
+      "advance": 12,
+      "resume": 7
+    }
+  },
+  "fullGameWin": false,
+  "qualification": "Cold live common-agent campaign, natural level boundaries and one retained reasoning session. The selection clock retains earlier blocked time and all elapsed preparation/diagnosis until this verified success. Later independent replay, browser and cost checks do not reopen the resolved selection. The activeSeconds figure is not a cross-version speed comparison."
+}

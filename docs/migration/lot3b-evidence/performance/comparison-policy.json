@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.native-loop-cost-comparison-policy.v1",
+  "relativeBudget": 0.1,
+  "unaffectedCaseIds": [
+    "STCK",
+    "SMLP"
+  ],
+  "stages": [
+    "session_elapsed",
+    "new_decision",
+    "known_prefix_service",
+    "known_prefix_request",
+    "known_prefix_guard",
+    "acquisition_and_persistence",
+    "persistence",
+    "restoration"
+  ],
+  "qualification": "Lot3B chamber integration, freshly measured publication66/native0.38 baseline versus frozen native0.39 integration. Same STCK10 and SMLP15 public returns, commands, counts, unchanged timing runner and sixteen median criteria as the retained lot3A-cost comparison. Two predeclared cohorts of four sessions are both compared and all eight sessions are pooled for the final decision. The relative budget remains 10%; an over-budget result stays unresolved. Historical measurements, cohort overruns and failures remain separate and unchanged."
+}

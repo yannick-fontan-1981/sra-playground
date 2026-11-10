@@ -1,0 +1,94 @@
+{
+  "schema": "logos-engine.browser-session-verification.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T00:32:24.043421+00:00",
+  "method": "Observed cloud-browser UI actions and accessibility snapshots on the managed local Site preview; screenshot retained unchanged. This is a manual browser verification receipt, not an automated replay report.",
+  "previewUrl": "http://127.0.0.1:4173/",
+  "finalObservedUrl": "http://127.0.0.1:4173/?game=CATR&level=4",
+  "game": "CATR",
+  "engineVersion": "0.39.0",
+  "nativeDigest": "49648e72cf7d3d719addfe4a6bebd8c29842a0f618664a45ef3929a5d17132b1",
+  "builtWorker": {
+    "path": "dist/assets/v6-agent-worker-CFo-PFhs.js",
+    "sha256": "5f7ebf8675ff57930b5512709d78c67a0ee3a7475473308a92645b555473b02d",
+    "bytes": 6351201
+  },
+  "start": {
+    "level": 1,
+    "actions": 0,
+    "levelsSolved": 0,
+    "completedPlans": 0
+  },
+  "observations": [
+    {
+      "action": "Run then Pause during initial planning",
+      "status": "Paused.",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0
+    },
+    {
+      "action": "One action",
+      "actions": 1,
+      "levelsSolved": 0,
+      "completedPlans": 1
+    },
+    {
+      "action": "One action; stopped with a partially consumed prefix",
+      "actions": 2,
+      "levelsSolved": 0,
+      "completedPlans": 1
+    },
+    {
+      "action": "Run then Pause; natural level boundary ended the run",
+      "status": "Level completed.",
+      "actions": 3,
+      "levelsSolved": 1,
+      "completedPlans": 2,
+      "naturalLevel": 2,
+      "pauseAcknowledged": false
+    },
+    {
+      "action": "One action; stopped with a partially consumed prefix",
+      "actions": 4,
+      "levelsSolved": 1,
+      "completedPlans": 2
+    },
+    {
+      "action": "Run then Pause; paused at the next safe V6 boundary",
+      "status": "Paused.",
+      "actions": 5,
+      "levelsSolved": 1,
+      "completedPlans": 3
+    },
+    {
+      "action": "Run to next level",
+      "status": "Level completed.",
+      "actions": 7,
+      "levelsSolved": 2,
+      "completedPlans": 5,
+      "naturalLevel": 3
+    },
+    {
+      "action": "Run to next level",
+      "status": "Level completed.",
+      "actions": 12,
+      "levelsSolved": 3,
+      "completedPlans": 8,
+      "naturalLevel": 4
+    }
+  ],
+  "sameReasoningSession": true,
+  "resetCount": 0,
+  "levelJumpCount": 0,
+  "newReasoningSessionCount": 0,
+  "manualGameActionCount": 0,
+  "inspectorOpened": false,
+  "fullGameWinClaimed": false,
+  "screenshot": {
+    "path": "docs/migration/lot3b-evidence/final/browser/catr-browser.png",
+    "sha256": "75ffba012296ad1906ebc403e43b5656d6c84985417fa82ab24c24154ed86e69",
+    "bytes": 248521
+  },
+  "scope": "Three natural levels and UI pause/resume/partial-prefix continuity. The selected game remains at level 4; no full-game victory is claimed. The managed preview was stopped before the official performance window."
+}

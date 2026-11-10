@@ -11,7 +11,89 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-## Current delivery: lot 3A cost closure, native 0.38.0
+## Current functional delivery: lot 3B relational chamber, native 0.39.0, cost reserve
+
+Native **0.39.0** connects **`chamber_relation_plan`**, the second of six
+observed-composition branches, through the existing `public_occurrence_recall`
+owner. It reuses V6 chamber measurement, acquired partial relation tables,
+contradictions and guarded edits, together with the actually consumed V5
+`_network_domain` and `_indexed_combination` helpers. The
+[delivery report](lot3b-relational-chamber.md) and
+[lineage](lot3b-relational-chamber-lineage.md) qualify the source and native scopes.
+
+The frozen **248-file** native inventory is
+`49648e72cf7d3d719addfe4a6bebd8c29842a0f618664a45ef3929a5d17132b1`.
+The [formal affected delta](lot3b-evidence/final/validation/delta-tests-run.json)
+passes **1,077/1,077 tests in 29 files**. Typecheck, entry and migration audits,
+diff checks and the production build pass. The local typed geometry encoder
+preserves Python float spellings in scene and plan identities without changing
+the common digest. Historical checkpoints and atomic shared-owner restoration
+remain covered.
+
+A fresh common [CATR campaign](lot3b-evidence/final/catr-session/execution-catr.json)
+completes **three levels in 12 actions (3/4/5), eight prefixes (2/3/3), one
+session**, reaching level 4 naturally in `NOT_FINISHED`. The frozen 0.38
+[reference](lot3b-evidence/baseline/catr-reference/summary.json) stopped naturally
+after one acquired action and no completed level with `frontier_unknown`.
+The [contribution proof](lot3b-evidence/final/catr-session/chamber-contribution.json)
+reconstructs all eight selected own-layer plans and twelve acquisitions from
+only earlier events. All 24 component ablations remain visible: eight change
+a command or refusal, fourteen change the decision projection and ten leave
+that projection unchanged. These scoped checks do not claim full private graph
+identity or a second counterfactual live-game success.
+
+The carried CATR clock, including preparation since selection, resolves at
+**1,030.691727 seconds**, below forty minutes. An independent
+[browser check](lot3b-evidence/final/browser/browser-verification.json) confirms
+**12 actions, three levels, eight plans**, initial Pause, retained partial-prefix
+execution, Pause at five actions and resumed natural boundaries, all in the
+same session with inspection closed.
+
+The RSWP recorded-return regression preserves **19 actions, three levels,
+eleven prefixes, 20 complete public packets and 221 animation-inclusive images**.
+Its [strict summary](lot3b-evidence/final/regressions/strict-regression-summary.json)
+remains **failed, 16/17 checks**. The only mismatch is the newly added
+`chamberRelationEventCount` field. A
+[separate qualification](lot3b-evidence/final/regressions/empty-series-extension-qualification.json)
+passes after independently establishing integer zero, an exactly empty acquired
+event list and no Chamber plan/capture on all eleven prefixes, with every
+inherited counter unchanged. The strict summary was relocated byte-identically;
+it is never relabeled 17/17 or passed. No full private-state identity is claimed.
+
+The [predeclared cost protocol](lot3b-evidence/performance/protocol.md) compares
+fresh 0.38 with frozen 0.39, retaining all eight sessions per case/version in
+A1/B1/B2/A2 order and the unchanged sixteen-median **+10%** budget. The
+[aggregate comparison](lot3b-evidence/performance/combined-comparison.json) is
+**`budget_review_required`, 15/16 criteria within budget**. STCK restoration
+increases from **9.104383 to 10.805602 ms**, **+1.701219 ms / +18.685720%**, on
+96 samples per version. The first cohort retains 15/16 with restoration +21.843%;
+the second passes 16/16. Every declared measured session remains included.
+The favorable second cohort and STCK session median −0.442% do not replace or
+compensate the unresolved aggregate restoration criterion. Noise adds no allowance.
+
+STCK restoration p95 changes from 64.059772 to 63.913278 ms. SMLP restoration
+median remains near its reference, 4.858142 to 4.860754 ms (+0.054%), but its
+p95 rises from **22.611702 to 29.389767 ms**, approximately **+29.98%**. P95 was
+not an additional budget gate; the higher tail remains a recorded limitation.
+The [complete cost results](lot3b-evidence/performance/results.md) preserve all
+cohorts, distributions and qualifications. The cause of the restoration increase
+is not established. **3B remains open with a functional delivery and cost reserve.**
+
+The registry remains **50/76**, with **two of six branches** in its explicitly
+partial observed-composition entry and **37 compiled workflows**. The complete
+migration flag remains false. The next priority is a **generic 3B restoration
+cost correction** of the common path, preserving complete identity, revision and
+invalidation checks, guards, acquisition and restoration. It requires a new source
+freeze, a new protocol and functional/cost validation against a **fresh 0.38
+reference**, not merely 0.39. The threshold stays unchanged; no additional ad hoc
+measurement of the same 0.39 replaces the retained failure.
+**3C, `exposed_reception_plan`, follows only after that cost closure.** The
+[evidence index](lot3b-evidence/final/campaign-evidence-index.json) binds retained
+artifacts. The [delivery integrity receipt](lot3b-evidence/final/delivery-integrity.json)
+is produced after final evidence verification; its own status establishes that
+check and cannot reclassify either the strict 16/17 regression or the 15/16 cost.
+
+## Preserved delivery: lot 3A cost closure, native 0.38.0
 
 **Lot 3A is closed within its announced functional and cost scope.** Native
 `0.38.0` preserves the Panel capability delivered in publication 65 and all three
@@ -50,9 +132,9 @@ not a proof of long-session stability or global migration completeness.
 
 The registry remains **50/76**, with one explicitly partial entry covering
 **one of six observed-composition branches**. The 37 compiled workflows and
-global migration gates keep their previous scope. Next is **lot 3B,
-`chamber_relation_plan`**, including the actually consumed V5 finite-relation
-helpers and candidate CATR with **107.399326 seconds carried forward**.
+global migration gates kept their previous scope. The following step was
+**lot 3B, `chamber_relation_plan`**, with candidate CATR carrying forward
+**107.399326 seconds**, now accounted for in the current 3B result above.
 
 ## Preserved functional delivery: lot 3A, native 0.37.0, initial cost open
 

@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 152,
-    "partiallyTransferredModules": 131,
+    "componentVerifiedModules": 153,
+    "partiallyTransferredModules": 133,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1086,
+    "pendingModules": 1083,
     "strategyFamilies": 16
   },
   "families": [
@@ -19756,9 +19756,16 @@
           "endLine": 407
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v5-finite-relation-domain.ts"
+      ],
+      "proof": [
+        "scripts/export-v5-finite-relation-domain-reference.py",
+        "tests/fixtures/v5-finite-relation-domain-reference.json.gz",
+        "tests/v5-finite-relation-domain.test.ts",
+        "docs/migration/lot3b-relational-chamber-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/finite_search_c.py",
@@ -76853,7 +76860,10 @@
         "src/logos-engine/v6-alternating-graph-access.ts",
         "src/logos-engine/v6-cell-placement.ts",
         "src/logos-engine/v6-panel-service-access.ts",
-        "src/logos-engine/v6-panel-service-observation.ts"
+        "src/logos-engine/v6-panel-service-observation.ts",
+        "src/logos-engine/v6-relational-chamber-observation.ts",
+        "src/logos-engine/v6-relational-chamber-access.ts",
+        "src/logos-engine/v5-finite-relation-domain.ts"
       ],
       "proof": [
         "tests/v6-shared-series.test.ts",
@@ -76880,7 +76890,12 @@
         "tests/v6-panel-service.test.ts",
         "docs/migration/lot3a-observed-panel-lineage.md",
         "docs/migration/lot3a-evidence/final/execution-rswp.json",
-        "docs/migration/lot3a-evidence/final/rswp-resolution.json"
+        "docs/migration/lot3a-evidence/final/rswp-resolution.json",
+        "scripts/export-v6-relational-chamber-parity.py",
+        "tests/fixtures/v6-relational-chamber-parity.json.gz",
+        "tests/v6-relational-chamber.test.ts",
+        "tests/v6-relational-chamber-integration.test.ts",
+        "docs/migration/lot3b-relational-chamber-lineage.md"
       ]
     },
     {
@@ -84917,9 +84932,19 @@
           "endLine": 103
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-relational-chamber-access.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v5-finite-relation-domain.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-relational-chamber-parity.py",
+        "tests/fixtures/v6-relational-chamber-parity.json.gz",
+        "tests/v6-relational-chamber.test.ts",
+        "tests/v6-relational-chamber-integration.test.ts",
+        "docs/migration/lot3b-relational-chamber-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/relational_chamber_projection.py",
@@ -84964,9 +84989,17 @@
           "endLine": 88
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-relational-chamber-observation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-relational-chamber-parity.py",
+        "tests/fixtures/v6-relational-chamber-parity.json.gz",
+        "tests/v6-relational-chamber.test.ts",
+        "tests/v6-relational-chamber-integration.test.ts",
+        "docs/migration/lot3b-relational-chamber-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/residual_access.py",
@@ -98485,6 +98518,7 @@
     "Lot 1 (native implementation 0.32.0), reconciled from published V59, adds retained_typed_material_request_parent outside the 76-entry registry. The common typed-material loop retains a parent, consumes actual child returns, resumes delivery or pose under ordinary WHY/ACT, and records suspension, refutation or an observed boundary. Attention owns the binding and selection witness; SharedSeries remains the one business owner. The roadmap keeps 50/76 entries connected, 37 compiled workflows and all six complete-migration gates false. Baseline ablations, original-source contracts, cold common-runtime tests, a separate live campaign and cost measurements are documented under docs/migration/lot1-evidence; no new game success or full source-provider transfer is inferred solely from the new parent trace.",
     "Lot 2A connects the morphology current producer at its declared source priority with a single morphology contact journal and existing goal/meter/collection owners. Current measurements can now release guarded proposals through common WHY/ACT. The 76-entry registry denominator is unchanged; morphology remains a partial source provider, and no global migration gate is advanced.",
     "Lot 2C (native 0.35.0) connects retained morphology station methods, guarded entry rebind/continuation and managed capacity planning through existing caller, morphology and inventory owners. The three focused suites contain 96 entry checks, 101 managed checks and 39 boundary/adapter checks; their synthetic/public consumer contracts are distinct from any live campaign. All exporters verify the 1786 pinned originals before/after; source boundary doubles and unordered projection-edge comparison are explicitly scoped. Four new helper mappings remain partial_transfer, existing geometry/adapter/common-caller mappings remain partial, and no complete-migration gate is advanced.",
-    "Lot3A/native0.37 transfers the complete own Panel service branch from V6 into the existing SharedSeries owner. The registry facade is explicitly 1/6 partial and does not increment the connected50/76 total. Projection is component_verified; access and common facade retain partial_transfer because inherited branches remain pending. Original source fixtures, shared-owner tests, the cold three-level RSWP campaign and separate browser/cost evidence retain their distinct scopes. No new V5 numerical kernel or full source-caller parity is claimed; all six complete-migration gates remain false."
+    "Lot3A/native0.37 transfers the complete own Panel service branch from V6 into the existing SharedSeries owner. The registry facade is explicitly 1/6 partial and does not increment the connected50/76 total. Projection is component_verified; access and common facade retain partial_transfer because inherited branches remain pending. Original source fixtures, shared-owner tests, the cold three-level RSWP campaign and separate browser/cost evidence retain their distinct scopes. No new V5 numerical kernel or full source-caller parity is claimed; all six complete-migration gates remain false.",
+    "Lot3B/native0.39 transfers the Chamber own layer into SharedSeries and reuses the consumed V5 finite relation domain kernel. observed_composition_services is explicitly2/6 partial, with connected50/76 unchanged. Own Chamber projection is component_verified; access and V5 kernel are partial_transfer. Current binding, contradiction, acquisition, native checkpoint and source identity contracts have separate proofs. All six complete-migration gates remain false; compile counts and isolated component parity do not imply full caller or game equivalence."
   ]
 }
