@@ -1,0 +1,68 @@
+{
+  "schema": "logos-engine.retained-tool-failure.v1",
+  "startedAt": "2026-11-10T19:39:21.654941+00:00",
+  "finishedAt": "2026-11-10T19:39:21.775480+00:00",
+  "command": [
+    "node",
+    "scripts/compare-native-cost-cohorts.mjs",
+    "docs/migration/lot4a-evidence/performance-integrated/comparison-policy.json",
+    "docs/migration/lot4a-evidence/performance-integrated/cohort1/baseline.json",
+    "docs/migration/lot4a-evidence/performance-integrated/cohort1/after.json",
+    "docs/migration/lot4a-evidence/performance-integrated/cohort1/comparison.json",
+    "docs/migration/lot4a-evidence/performance-integrated/cohort2/baseline.json",
+    "docs/migration/lot4a-evidence/performance-integrated/cohort2/after.json",
+    "docs/migration/lot4a-evidence/performance-integrated/cohort2/comparison.json",
+    "docs/migration/lot4a-evidence/performance-integrated/combined-comparison.json"
+  ],
+  "exitCode": 1,
+  "inputs": [
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "bytes": 19460,
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/baseline.json",
+      "bytes": 428605,
+      "sha256": "eb6164f04fd26a2e23d9d7f9860facae317aac4c93f6781bef9a8c839d73cd1c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/after.json",
+      "bytes": 428993,
+      "sha256": "01e8ce13b3be5fb207e8ed22d52bf27e2f9be31d0566c2f0ffb50fb46ddb6176"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/comparison.json",
+      "bytes": 25220,
+      "sha256": "5c59ddab5eba78f5b8c53ca85318295f0b5196b3d9d289654acd083d47d5a9f7"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/baseline.json",
+      "bytes": 428592,
+      "sha256": "9edcd6f308342828bd598c7bb75cdc69c99c1fa9ad41a2f30b636ecd9c020285"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/after.json",
+      "bytes": 429008,
+      "sha256": "8cb6aac8a3955fd011ece23dc908f37d306bcad16adcfa0bbcc7606ec80066f9"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/comparison.json",
+      "bytes": 25795,
+      "sha256": "abe3b5fd1f9b67a0721a3cc70987cf2935ff1dc648c21ea56b172e45db4f27b8"
+    }
+  ],
+  "inputsUnchanged": true,
+  "log": {
+    "path": "docs/migration/lot4a-evidence/performance-integrated/aggregation-failure-reproduced.log",
+    "bytes": 204711,
+    "sha256": "b18b7f5ec1d90b3913d8e217a91276c20711ae46e646eea14d9ce0f89352bc78"
+  },
+  "outputExists": false,
+  "qualification": "Exact read-only reproduction of the initial aggregation failure whose API output was truncated; no measurement rerun, no change to reports or official tools, no acceptance verdict."
+}

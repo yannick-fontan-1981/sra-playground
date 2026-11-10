@@ -1,0 +1,76 @@
+{
+  "schema": "logos-engine.native-cost-owner-qualification-declaration.v1",
+  "recordedAt": "2026-11-10T19:46:27.114239+00:00",
+  "status": "declared_after_measurement_before_graph_capture_and_qualified_pooling",
+  "originalStrictAggregationStatus": "failed",
+  "numericPolicyChanged": false,
+  "measurementOrNativeChange": false,
+  "rawTimingModificationPermitted": false,
+  "qualifiedAggregateExists": false,
+  "captureExists": false,
+  "expectedAddedNodeIds": [
+    "family_state:feedback_sequences",
+    "family_activation:feedback_sequences",
+    "program:v6.feedback_sequences.choose"
+  ],
+  "expectedNodeCountDelta": 3,
+  "expectedFinalGraphRevisionDelta": "3 + trial.cycles",
+  "allOtherWorkFieldsMustBeExact": true,
+  "inputs": [
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/owner-addition-protocol.md",
+      "bytes": 5065,
+      "sha256": "95f4232a6139dde7f1a69ac131011241ec9b05848e0236f41356f2b855b78025"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/declaration.json",
+      "bytes": 4036,
+      "sha256": "7d55983836c6d24bd365335c447b09001f3f296f78a9ab30e0a315fdf5704faa"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/window.json",
+      "bytes": 10361,
+      "sha256": "3fea8d11469293bee2954f244aca164f95cb26c51edcf1e1cedc157b82faef22"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/aggregation-failure-reproduced.json",
+      "bytes": 3052,
+      "sha256": "2305d404095fdcbba714b9697435a5b70afcafccfd332bf0b4504fc098c7d769"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/baseline.json",
+      "bytes": 428605,
+      "sha256": "eb6164f04fd26a2e23d9d7f9860facae317aac4c93f6781bef9a8c839d73cd1c"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/after.json",
+      "bytes": 428993,
+      "sha256": "01e8ce13b3be5fb207e8ed22d52bf27e2f9be31d0566c2f0ffb50fb46ddb6176"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort1/comparison.json",
+      "bytes": 25220,
+      "sha256": "5c59ddab5eba78f5b8c53ca85318295f0b5196b3d9d289654acd083d47d5a9f7"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/baseline.json",
+      "bytes": 428592,
+      "sha256": "9edcd6f308342828bd598c7bb75cdc69c99c1fa9ad41a2f30b636ecd9c020285"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/after.json",
+      "bytes": 429008,
+      "sha256": "8cb6aac8a3955fd011ece23dc908f37d306bcad16adcfa0bbcc7606ec80066f9"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/performance-integrated/cohort2/comparison.json",
+      "bytes": 25795,
+      "sha256": "abe3b5fd1f9b67a0721a3cc70987cf2935ff1dc648c21ea56b172e45db4f27b8"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/planning/feedback-cost-work-delta.json",
+      "bytes": 78018,
+      "sha256": "27f8bb84df1cee13787b73eddd99e5387eb4517ebe93175c1172e0f2e7dc22c9"
+    }
+  ]
+}

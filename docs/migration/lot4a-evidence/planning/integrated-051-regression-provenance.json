@@ -1,0 +1,1128 @@
+{
+  "schema": "logos-engine.integrated-regression-input-provenance.v1",
+  "status": "verified_published_baseline_inputs",
+  "verifiedAt": "2026-11-10T19:07:56.277650+00:00",
+  "publishedBaseline": {
+    "siteVersion": 79,
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.50.0",
+    "commit": "6d03c2adda9f60b1c97304f5491a428cfbec7a6c",
+    "tree": "fccd10712f043aa11800e4f047e7fac6758850a4",
+    "deploymentStatus": "succeeded",
+    "deploymentEvidenceScope": "Publication and deployment success supplied by coordinating parent; no hosting query performed by this provenance task.",
+    "sourceManifest": {
+      "path": "docs/migration/lot3i-evidence/final/source-manifest.json",
+      "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd",
+      "bytes": 32014,
+      "gitBlob": "10b04242b5c754be623747fa506bf5b35158db8f"
+    },
+    "sourceDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+    "nativeSourceFilesVerifiedAgainstPublishedGitBlobs": 270,
+    "verification": "Every SHA256 in the published source manifest was checked against the corresponding blob in the published commit; its ordered file-map digest was recomputed. The integrated working source was not substituted for the published source."
+  },
+  "caseManifest": {
+    "path": "docs/migration/lot4a-evidence/integrated-051-regression-cases.json",
+    "sha256": "b6477f196390d0ae78c71ac74dfd9bb9656fee68f2f01161d027b7e51e1f6483",
+    "bytes": 3474
+  },
+  "publishedSummary": {
+    "path": "docs/migration/lot3i-evidence/final/regressions/regression-summary.json",
+    "sha256": "3ffddb4d4bb4786a7218f27d95f7db8d00afa94dd20e75573c6077e1252565a9",
+    "bytes": 123289,
+    "gitBlob": "d76b63580bd5163f0bdad4fc7f9453e01aecca45"
+  },
+  "publishedCaseDeclaration": {
+    "path": "docs/migration/lot3i-evidence/recorded-regression-cases-final.json",
+    "sha256": "20e9d27607501cd347a59018df08430b3660056fd819932f4cff8dc98456bd2a",
+    "bytes": 3093,
+    "gitBlob": "99071d58b156141ff2e8a57fd3a52e19b72d18b6"
+  },
+  "publishedRecoveryReceipt": {
+    "path": "docs/migration/lot3i-evidence/regression-recovery.json",
+    "sha256": "4c3d83d83228bdf28c6a0217d7b5e44eafa6d12986b5f09a49d8b29b1ef81b9b",
+    "bytes": 2651,
+    "gitBlob": "0e1be13810119a500fbd505f244c5d73f86cf5ae"
+  },
+  "publishedResults": {
+    "passedCases": 5,
+    "totalCases": 5,
+    "checksPassed": 85,
+    "checksExpected": 85,
+    "totals": {
+      "commands": 240,
+      "completePublicPackets": 245,
+      "prefixes": 169,
+      "requests": 409,
+      "naturalLevelBoundaries": 15,
+      "animationFrames": 705
+    }
+  },
+  "checks": [
+    "both runs passed with the same declared game and target",
+    "same production budgets, source reference and opaque game asset provenance",
+    "same complete initial public packet hash and public state",
+    "every archived public packet independently hashes to the v53 baseline",
+    "every archived host-only command equals its prior baseline command",
+    "same commands, complete returned packet hashes, animation lengths and primitive boundaries",
+    "same selected family/group/kind/subquestion, acquired prefix lengths and retained solver scalars",
+    "same retained coordination source/preferred entries and current guard scope",
+    "same historical epoch anchors with session namespace normalized",
+    "same inherited source-series event counts on every sealed prefix",
+    "same common request outcomes and retained caller acquisition counters",
+    "same natural level boundaries and retained-session caller counters",
+    "same final public result and retained-session operation counts",
+    "same retained mechanical-domain assessments",
+    "both source runs remained unchanged and imported no Python agent module",
+    "current replay used the declared complete frozen native source",
+    "current replay identifies the exact host-only baseline and public trace"
+  ],
+  "cases": [
+    {
+      "id": "catr-050",
+      "publishedCase": "catr-049",
+      "game": "CATR",
+      "report": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/catr-049-replay.json.gz",
+        "sha256": "779d50a3088a8c2c16abc2ff46213356402db4001309babac005a238cdd83350",
+        "bytes": 1373207
+      },
+      "partsManifest": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/catr-049-replay.json.gz.parts.json",
+        "sha256": "8ce5d0a68178f8509462cfc14d3ae7e0ab9783d9630e2f047f45e4307342c923",
+        "bytes": 679,
+        "gitBlob": "a88dd821488185988da87eb711537c47dd31253c"
+      },
+      "partCount": 2,
+      "trace": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+        "bytes": 24340,
+        "gitBlob": "a54c02f65ccf9fbbc324283d6dad097dc700319e"
+      },
+      "execution": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/catr-049-execution.json",
+        "sha256": "ed494481dca833497f70a8ee76521254701f7e137d459caaff8109054651c286",
+        "bytes": 4875,
+        "gitBlob": "9b6379fc34abbc5780c5d7b6c87ca185faa3d3a1"
+      },
+      "comparison": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/catr-049-comparison.json",
+        "sha256": "8957fb8a435d3b7b1e4f9f8d3ae82ccadce1a8cbe892ca8ec7e5bb5857538ca7",
+        "bytes": 10624,
+        "gitBlob": "b06b9ef7217b8e4e08be9852d1cd364fff8de3eb"
+      },
+      "reportHeader": {
+        "schema": "logos-engine.v6.recorded-public-regression.v1",
+        "status": "passed",
+        "game": "CATR",
+        "targetLevels": 3,
+        "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+        "nativeSourceDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+        "nativeSourceFileCount": 270
+      },
+      "publishedExecution": {
+        "status": "passed",
+        "exitCode": 0,
+        "timedOut": false,
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.50.0",
+        "sourceBeforeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+        "sourceAfterDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+        "nativeSourceUnchanged": true,
+        "immutableInputsUnchanged": true,
+        "hostPreparationPassed": null,
+        "nodeOldSpaceMiB": null
+      },
+      "publishedComparison": {
+        "passed": true,
+        "checksPassed": 17,
+        "checksExpected": 17,
+        "failedChecks": [],
+        "compared": {
+          "commands": 12,
+          "completePublicPackets": 13,
+          "prefixes": 8,
+          "requests": 20,
+          "naturalLevelBoundaries": 3,
+          "animationFrames": 115
+        }
+      },
+      "finalPublicResult": {
+        "actions": 12,
+        "prefixes": 8,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 12,
+          "resume": 7
+        }
+      }
+    },
+    {
+      "id": "rswp-050",
+      "publishedCase": "rswp-049",
+      "game": "RSWP",
+      "report": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/rswp-049-replay.json.gz",
+        "sha256": "b443cdf19caa7b4c3bbc353d3dc9273b8d3d9b0115323d879fdbeadf2694a183",
+        "bytes": 2179314
+      },
+      "partsManifest": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/rswp-049-replay.json.gz.parts.json",
+        "sha256": "2cd5c03bd9b596907bd0f29b4889eafb8e1a3f0dfbc3f654b3aae966462d14fd",
+        "bytes": 847,
+        "gitBlob": "38e228dd0b6bf3f5906245a2a72ca243028127a0"
+      },
+      "partCount": 3,
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+        "bytes": 41445,
+        "gitBlob": "6fe15d7dd35b01213bedb991b555ccc708017d4d"
+      },
+      "execution": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/rswp-049-execution.json",
+        "sha256": "7980ec3315bfa7d7d903be5e5904e51475c979ed0ae5f0058af4349be0f459dc",
+        "bytes": 4856,
+        "gitBlob": "b91fd9595570dc46b90ed41291bf66e2b4ae7755"
+      },
+      "comparison": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/rswp-049-comparison.json",
+        "sha256": "bd13a439e11af35cd6014bbeee97c03ea71117d0403adec6e8ae034efd60f381",
+        "bytes": 10611,
+        "gitBlob": "17c5f38abc5821f3cd5c33101df6051d85e09d6c"
+      },
+      "reportHeader": {
+        "schema": "logos-engine.v6.recorded-public-regression.v1",
+        "status": "passed",
+        "game": "RSWP",
+        "targetLevels": 3,
+        "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+        "nativeSourceDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+        "nativeSourceFileCount": 270
+      },
+      "publishedExecution": {
+        "status": "passed",
+        "exitCode": 0,
+        "timedOut": false,
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.50.0",
+        "sourceBeforeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+        "sourceAfterDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+        "nativeSourceUnchanged": true,
+        "immutableInputsUnchanged": true,
+        "hostPreparationPassed": null,
+        "nodeOldSpaceMiB": null
+      },
+      "publishedComparison": {
+        "passed": true,
+        "checksPassed": 17,
+        "checksExpected": 17,
+        "failedChecks": [],
+        "compared": {
+          "commands": 19,
+          "completePublicPackets": 20,
+          "prefixes": 11,
+          "requests": 30,
+          "naturalLevelBoundaries": 3,
+          "animationFrames": 221
+        }
+      },
+      "finalPublicResult": {
+        "actions": 19,
+        "prefixes": 11,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 19,
+          "resume": 10
+        }
+      }
+    },
+    {
+      "id": "fogw-050",
+      "publishedCase": "fogw-049",
+      "game": "FOGW",
+      "report": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz",
+        "sha256": "566dd7bd6056ca514c06b3f37ba1740b00961f119aa8e9b792ca60b66bd54322",
+        "bytes": 6891744
+      },
+      "partsManifest": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz.parts.json",
+        "sha256": "f837e6c7aedd0bfa4929853d7255ae74833df1d59a4b5e9e3738d5d227b6d456",
+        "bytes": 1687,
+        "gitBlob": "48ab13a6266ef919eeb782defcc9faeb3a9f565f"
+      },
+      "partCount": 8,
+      "trace": {
+        "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+        "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+        "bytes": 39060,
+        "gitBlob": "4d538223e04834d4d9bd8bd419f87415d76d9ef3"
+      },
+      "execution": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-execution.json",
+        "sha256": "aab6d5e839437283d96626a5fac640beaf169b5e3a68f42cb7c2d9aadabbf3b0",
+        "bytes": 4860,
+        "gitBlob": "56e7b1401eebc81a47689446bec50c81e3847416"
+      },
+      "comparison": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-comparison.json",
+        "sha256": "0a318e45f1501ec6bb42a40b9d63775102457d3a16c766569ff5db11e472b53d",
+        "bytes": 10613,
+        "gitBlob": "c8125bbd869d9ef509ccd969d05868dd04cce0be"
+      },
+      "reportHeader": {
+        "schema": "logos-engine.v6.recorded-public-regression.v1",
+        "status": "passed",
+        "game": "FOGW",
+        "targetLevels": 3,
+        "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+        "nativeSourceDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+        "nativeSourceFileCount": 270
+      },
+      "publishedExecution": {
+        "status": "passed",
+        "exitCode": 0,
+        "timedOut": false,
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.50.0",
+        "sourceBeforeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+        "sourceAfterDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+        "nativeSourceUnchanged": true,
+        "immutableInputsUnchanged": true,
+        "hostPreparationPassed": null,
+        "nodeOldSpaceMiB": null
+      },
+      "publishedComparison": {
+        "passed": true,
+        "checksPassed": 17,
+        "checksExpected": 17,
+        "failedChecks": [],
+        "compared": {
+          "commands": 50,
+          "completePublicPackets": 51,
+          "prefixes": 27,
+          "requests": 77,
+          "naturalLevelBoundaries": 3,
+          "animationFrames": 167
+        }
+      },
+      "finalPublicResult": {
+        "actions": 50,
+        "prefixes": 27,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 50,
+          "resume": 26
+        }
+      }
+    },
+    {
+      "id": "vois-050",
+      "publishedCase": "vois-049",
+      "game": "VOIS",
+      "report": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz",
+        "sha256": "c0e10237ef6e955675ccbd73bc6828d963ac6b67a752f682b768a537b7624378",
+        "bytes": 9022543
+      },
+      "partsManifest": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz.parts.json",
+        "sha256": "6cfbf3e9cd847f8d244a1925eeecc2bbf2c60dbe49f604a8b92ecbc46c5706c4",
+        "bytes": 2190,
+        "gitBlob": "d8b055773e90c720f26676774fb36d1359fd6f05"
+      },
+      "partCount": 11,
+      "trace": {
+        "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+        "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+        "bytes": 19976,
+        "gitBlob": "957ca7f6dd7cdce9a89cf537e103166844c7f71a"
+      },
+      "execution": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-execution.json",
+        "sha256": "3e9b62ddbb6af27e06530a4396b2fae5b25cdbc736dba8a0cbb7d05ba6c101ac",
+        "bytes": 4864,
+        "gitBlob": "9001b2f58bebd74c0107baaea4de7ba944aa6e2b"
+      },
+      "comparison": {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-comparison.json",
+        "sha256": "81893191683c6c1426f4e4566773be3415629343ac91e21e77ff306115994318",
+        "bytes": 10614,
+        "gitBlob": "c0b3388dda86fcac3bfdc609615756e99944f7bc"
+      },
+      "reportHeader": {
+        "schema": "logos-engine.v6.recorded-public-regression.v1",
+        "status": "passed",
+        "game": "VOIS",
+        "targetLevels": 3,
+        "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+        "nativeSourceDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+        "nativeSourceFileCount": 270
+      },
+      "publishedExecution": {
+        "status": "passed",
+        "exitCode": 0,
+        "timedOut": false,
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.50.0",
+        "sourceBeforeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+        "sourceAfterDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+        "nativeSourceUnchanged": true,
+        "immutableInputsUnchanged": true,
+        "hostPreparationPassed": null,
+        "nodeOldSpaceMiB": null
+      },
+      "publishedComparison": {
+        "passed": true,
+        "checksPassed": 17,
+        "checksExpected": 17,
+        "failedChecks": [],
+        "compared": {
+          "commands": 78,
+          "completePublicPackets": 79,
+          "prefixes": 42,
+          "requests": 120,
+          "naturalLevelBoundaries": 3,
+          "animationFrames": 97
+        }
+      },
+      "finalPublicResult": {
+        "actions": 78,
+        "prefixes": 42,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 78,
+          "resume": 41
+        }
+      }
+    },
+    {
+      "id": "weav-050-streamlog",
+      "publishedCase": "weav-049-streamlog",
+      "game": "WEAV",
+      "report": {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz",
+        "sha256": "1943593c0961d8b49d059e34d58dd96269926ab8a24b5fc294c6bbc516cd8985",
+        "bytes": 10802096
+      },
+      "partsManifest": {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.parts.json",
+        "sha256": "33e0ace8a871ae52010eb2917206243e0c8c24078da7feb51e29538463d9c0f9",
+        "bytes": 2666,
+        "gitBlob": "754d30b0b9668df8d7673cf83fc0f6f4ffe93d00"
+      },
+      "partCount": 13,
+      "trace": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+        "bytes": 26568,
+        "gitBlob": "c989fe28117de2b3e42a3c40d571eb604ef86381"
+      },
+      "execution": {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-execution.json",
+        "sha256": "412c2bf13ddf129d9df96da14681c859de0bba7cdd5cd5bd337c9c7787cd1392",
+        "bytes": 17530,
+        "gitBlob": "9a838fa7be3049e3c1e3db1da50a97c12e958400"
+      },
+      "comparison": {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-comparison.json",
+        "sha256": "796968472df6159bc18348ca6457c138d2fc7804226bbb613a6a95e889f0ccc3",
+        "bytes": 11036,
+        "gitBlob": "ab9029c583c7e9eee674ca0b69935b5dfb420ef1"
+      },
+      "reportHeader": {
+        "schema": "logos-engine.v6.recorded-public-regression.v1",
+        "status": "passed",
+        "game": "WEAV",
+        "targetLevels": 3,
+        "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+        "nativeSourceDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+        "nativeSourceFileCount": 270
+      },
+      "publishedExecution": {
+        "status": "passed",
+        "exitCode": 0,
+        "timedOut": false,
+        "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.50.0",
+        "sourceBeforeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+        "sourceAfterDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+        "nativeSourceUnchanged": true,
+        "immutableInputsUnchanged": true,
+        "hostPreparationPassed": true,
+        "nodeOldSpaceMiB": 1536
+      },
+      "publishedComparison": {
+        "passed": true,
+        "checksPassed": 17,
+        "checksExpected": 17,
+        "failedChecks": [],
+        "compared": {
+          "commands": 81,
+          "completePublicPackets": 82,
+          "prefixes": 81,
+          "requests": 162,
+          "naturalLevelBoundaries": 3,
+          "animationFrames": 105
+        }
+      },
+      "finalPublicResult": {
+        "actions": 81,
+        "prefixes": 81,
+        "levelsCompleted": 3,
+        "level": 4,
+        "state": "NOT_FINISHED",
+        "status": "stopped",
+        "reason": "target_levels_completed",
+        "sessions": 1,
+        "operationCounts": {
+          "init": 1,
+          "advance": 81,
+          "resume": 80
+        }
+      }
+    }
+  ],
+  "restoration": [
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "scripts/evidence-byte-parts.py",
+        "restore",
+        "docs/migration/lot3i-evidence/final/regressions"
+      ],
+      "exitCode": 0,
+      "receipt": {
+        "operation": "restore",
+        "directory": "docs/migration/lot3i-evidence/final/regressions",
+        "partBytes": 900000,
+        "verified": [
+          {
+            "path": "docs/migration/lot3i-evidence/final/regressions/catr-049-replay.json.gz",
+            "sha256": "779d50a3088a8c2c16abc2ff46213356402db4001309babac005a238cdd83350",
+            "bytes": 1373207,
+            "manifest": "docs/migration/lot3i-evidence/final/regressions/catr-049-replay.json.gz.parts.json",
+            "parts": 2,
+            "restored": true
+          },
+          {
+            "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz",
+            "sha256": "566dd7bd6056ca514c06b3f37ba1740b00961f119aa8e9b792ca60b66bd54322",
+            "bytes": 6891744,
+            "manifest": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz.parts.json",
+            "parts": 8,
+            "restored": true
+          },
+          {
+            "path": "docs/migration/lot3i-evidence/final/regressions/rswp-049-replay.json.gz",
+            "sha256": "b443cdf19caa7b4c3bbc353d3dc9273b8d3d9b0115323d879fdbeadf2694a183",
+            "bytes": 2179314,
+            "manifest": "docs/migration/lot3i-evidence/final/regressions/rswp-049-replay.json.gz.parts.json",
+            "parts": 3,
+            "restored": true
+          },
+          {
+            "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz",
+            "sha256": "c0e10237ef6e955675ccbd73bc6828d963ac6b67a752f682b768a537b7624378",
+            "bytes": 9022543,
+            "manifest": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz.parts.json",
+            "parts": 11,
+            "restored": true
+          }
+        ],
+        "gitignoreEntriesAdded": [],
+        "qualification": "Exact byte transport only; no agent result is regenerated or reinterpreted."
+      }
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+        "-B",
+        "scripts/evidence-byte-parts.py",
+        "restore",
+        "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions"
+      ],
+      "exitCode": 0,
+      "receipt": {
+        "operation": "restore",
+        "directory": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions",
+        "partBytes": 900000,
+        "verified": [
+          {
+            "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz",
+            "sha256": "1943593c0961d8b49d059e34d58dd96269926ab8a24b5fc294c6bbc516cd8985",
+            "bytes": 10802096,
+            "manifest": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.parts.json",
+            "parts": 13,
+            "restored": true
+          }
+        ],
+        "gitignoreEntriesAdded": [],
+        "qualification": "Exact byte transport only; no agent result is regenerated or reinterpreted."
+      }
+    }
+  ],
+  "publishedBlobsVerified": {
+    "count": 354,
+    "workingEvidenceAndToolsMatchPublishedCommit": true,
+    "files": [
+      {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+        "bytes": 41445,
+        "gitBlob": "6fe15d7dd35b01213bedb991b555ccc708017d4d"
+      },
+      {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+        "bytes": 24340,
+        "gitBlob": "a54c02f65ccf9fbbc324283d6dad097dc700319e"
+      },
+      {
+        "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+        "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+        "bytes": 39060,
+        "gitBlob": "4d538223e04834d4d9bd8bd419f87415d76d9ef3"
+      },
+      {
+        "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+        "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+        "bytes": 19976,
+        "gitBlob": "957ca7f6dd7cdce9a89cf537e103166844c7f71a"
+      },
+      {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+        "bytes": 26568,
+        "gitBlob": "c989fe28117de2b3e42a3c40d571eb604ef86381"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/catr-049-comparison.json",
+        "sha256": "8957fb8a435d3b7b1e4f9f8d3ae82ccadce1a8cbe892ca8ec7e5bb5857538ca7",
+        "bytes": 10624,
+        "gitBlob": "b06b9ef7217b8e4e08be9852d1cd364fff8de3eb"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/catr-049-execution.json",
+        "sha256": "ed494481dca833497f70a8ee76521254701f7e137d459caaff8109054651c286",
+        "bytes": 4875,
+        "gitBlob": "9b6379fc34abbc5780c5d7b6c87ca185faa3d3a1"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/catr-049-output.log.gz",
+        "sha256": "4666743b0db07e2c57e9284b28e2126f6e99da091e00853e4c556447e615cc1c",
+        "bytes": 2484,
+        "gitBlob": "63fbe9c5eb1f0b40445a1704d2e74556e039b815"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/catr-049-passive-owner-presence.json",
+        "sha256": "52114a13881599aa884f924c318df3881b1cf7526568a9509914af9056b8f827",
+        "bytes": 1078,
+        "gitBlob": "6f14dfc8a9034f6f8b1eb9ac74b7cb06a3698e92"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/catr-049-replay.json.gz.part000",
+        "sha256": "2db1445affa820561a66e2f77e518400b19f18b0d7d78ab63664457daa24ac99",
+        "bytes": 900000,
+        "gitBlob": "a11d1ed13b24cd947972565ca083dd63a15a2077"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/catr-049-replay.json.gz.part001",
+        "sha256": "71553962ae7c5a62dc200a82447b3d6cebaccf2ecd31d3764b432a24d8663071",
+        "bytes": 473207,
+        "gitBlob": "42ba0ef535c8a3006519fe7665842e9d573e9906"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/catr-049-replay.json.gz.parts.json",
+        "sha256": "8ce5d0a68178f8509462cfc14d3ae7e0ab9783d9630e2f047f45e4307342c923",
+        "bytes": 679,
+        "gitBlob": "a88dd821488185988da87eb711537c47dd31253c"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-comparison.json",
+        "sha256": "0a318e45f1501ec6bb42a40b9d63775102457d3a16c766569ff5db11e472b53d",
+        "bytes": 10613,
+        "gitBlob": "c8125bbd869d9ef509ccd969d05868dd04cce0be"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-execution.json",
+        "sha256": "aab6d5e839437283d96626a5fac640beaf169b5e3a68f42cb7c2d9aadabbf3b0",
+        "bytes": 4860,
+        "gitBlob": "56e7b1401eebc81a47689446bec50c81e3847416"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-output.log.gz",
+        "sha256": "4117692cd1aa0c388d3716ec4bc3c8e4d5bf369d10f17fe5ef54a1809c270d15",
+        "bytes": 5291,
+        "gitBlob": "e7af2080362f81529506decd58d34e0c95d1b7ed"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-passive-owner-presence.json",
+        "sha256": "4a89b8453aef970db425f0e1c5e03a4cc3e39e49164f6e433995eaf184020763",
+        "bytes": 1078,
+        "gitBlob": "29fa0346b4cd15da850216c215b17ba9eb98958c"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz.part000",
+        "sha256": "c0868f8f6785718394e445776d2bc6976533525473de710eb241813fae94cf39",
+        "bytes": 900000,
+        "gitBlob": "dc51983a67b985ed6840c0a59cbd2ce76abdf79b"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz.part001",
+        "sha256": "8c91524f00117aa30da211a61e58957743f1a31bcc8ac3ed1dc3037b166c6e31",
+        "bytes": 900000,
+        "gitBlob": "cc32b294b247ffd66b84b9c262df2b4e2bc2c506"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz.part002",
+        "sha256": "a287e366c1ac7709d91a1dc4107079f1faf4e2b203aef28850bb2eb5cc6431bf",
+        "bytes": 900000,
+        "gitBlob": "dcf72bb1edac5cbf72dd1b51c569710ab9b87a6e"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz.part003",
+        "sha256": "6d36b78967c9012a7e54b9ee91beb853f0f3ffce781a4c029d935a8c23319fa4",
+        "bytes": 900000,
+        "gitBlob": "78e738b5f48609525e389fcd035186173b32583f"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz.part004",
+        "sha256": "f8b1e96002a0b26ba5976953db57d3f0c04e15358923372c62a1272993f9bb1f",
+        "bytes": 900000,
+        "gitBlob": "3b9fc4e0aa5b43071da4a65cef58153f77e681f9"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz.part005",
+        "sha256": "0c31e61db5a9f8be1c31a022dc2766f7414c6acd3088e7dc27c8512781d6dc31",
+        "bytes": 900000,
+        "gitBlob": "0bc0c9a035fac99437e19627e50042d29a707907"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz.part006",
+        "sha256": "e3339bb12aee37198939c394a34d8edf6987619743f34745d0bc6a3b3e0a3a1b",
+        "bytes": 900000,
+        "gitBlob": "2aae89260752e68d5a71af6bb83bce23ddd0cbe8"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz.part007",
+        "sha256": "d18db7c0368436f62f619bf82aafb3e546616531d65f48322a05437d1dabec07",
+        "bytes": 591744,
+        "gitBlob": "b206374e372d9aa5479f0b8b9e55f8d77f5c4713"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz.parts.json",
+        "sha256": "f837e6c7aedd0bfa4929853d7255ae74833df1d59a4b5e9e3738d5d227b6d456",
+        "bytes": 1687,
+        "gitBlob": "48ab13a6266ef919eeb782defcc9faeb3a9f565f"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/regression-summary.json",
+        "sha256": "3ffddb4d4bb4786a7218f27d95f7db8d00afa94dd20e75573c6077e1252565a9",
+        "bytes": 123289,
+        "gitBlob": "d76b63580bd5163f0bdad4fc7f9453e01aecca45"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/rswp-049-comparison.json",
+        "sha256": "bd13a439e11af35cd6014bbeee97c03ea71117d0403adec6e8ae034efd60f381",
+        "bytes": 10611,
+        "gitBlob": "17c5f38abc5821f3cd5c33101df6051d85e09d6c"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/rswp-049-execution.json",
+        "sha256": "7980ec3315bfa7d7d903be5e5904e51475c979ed0ae5f0058af4349be0f459dc",
+        "bytes": 4856,
+        "gitBlob": "b91fd9595570dc46b90ed41291bf66e2b4ae7755"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/rswp-049-output.log.gz",
+        "sha256": "5895bfababb8253a1729674aa0f2f30293d781424356394c16c500c41763ec0e",
+        "bytes": 2961,
+        "gitBlob": "63d7c252f92abc6634313ea7eb27b69c50e7caaa"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/rswp-049-passive-owner-presence.json",
+        "sha256": "5343949a3b06ff29632309e59b8705235edfdd8790af0ecd42ff90bad835c466",
+        "bytes": 1078,
+        "gitBlob": "2e364422359059f729e6e7a3e1d8071c494e0d59"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/rswp-049-replay.json.gz.part000",
+        "sha256": "46306db92f4bbb2d3900ae809d7992e285a748c04b01009a87bad22ba0f8d5bc",
+        "bytes": 900000,
+        "gitBlob": "123ef64a07a4f4344759424f31500a8e56b129fc"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/rswp-049-replay.json.gz.part001",
+        "sha256": "77ff34d5fa08a580b64e02c576995b64b67fed3a8106115af697be0fed3ad657",
+        "bytes": 900000,
+        "gitBlob": "d90f7c99956c429a6a677265a94c0d583ce5a24f"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/rswp-049-replay.json.gz.part002",
+        "sha256": "9d652b6a6e74d0fae8472124562482e77897d2294d803eb197c4083fd43b4e0e",
+        "bytes": 379314,
+        "gitBlob": "60732aa0ba0c7a6aeff238769c13701e3fa5aa8f"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/rswp-049-replay.json.gz.parts.json",
+        "sha256": "2cd5c03bd9b596907bd0f29b4889eafb8e1a3f0dfbc3f654b3aae966462d14fd",
+        "bytes": 847,
+        "gitBlob": "38e228dd0b6bf3f5906245a2a72ca243028127a0"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-comparison.json",
+        "sha256": "81893191683c6c1426f4e4566773be3415629343ac91e21e77ff306115994318",
+        "bytes": 10614,
+        "gitBlob": "c0b3388dda86fcac3bfdc609615756e99944f7bc"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-execution.json",
+        "sha256": "3e9b62ddbb6af27e06530a4396b2fae5b25cdbc736dba8a0cbb7d05ba6c101ac",
+        "bytes": 4864,
+        "gitBlob": "9001b2f58bebd74c0107baaea4de7ba944aa6e2b"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-output.log.gz",
+        "sha256": "401a9deba6ad9d7329bdd72c506360f7d4ead4821cee2ab6339ff13ad3980b9e",
+        "bytes": 7385,
+        "gitBlob": "ff9e896fa4ca6d59e18831545cdabeff04118f87"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-passive-owner-presence.json",
+        "sha256": "13ce24f8d22828f6bf46b98bca77b8d44ee399f01ddd954106548f67068b658b",
+        "bytes": 1078,
+        "gitBlob": "e666e491b33425482c83010fc9a3e943177debbb"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz.part000",
+        "sha256": "c6ea351319a5b2148ae4e3ff74a6918cc4f1c5d6023ea04edfc6154834a8eb46",
+        "bytes": 900000,
+        "gitBlob": "a3edce586b3710acd6a3886f0acbbb994cce540f"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz.part001",
+        "sha256": "64ce235d8e0962b0be31ad516a0c914993f62630cf4abef8395369ebc53b4fca",
+        "bytes": 900000,
+        "gitBlob": "92165077c61dd562710ae854ed4b8ed43c97e8ab"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz.part002",
+        "sha256": "87d64682b2e1b74eaac4db2ded613fb42e380195cf50a64c606808b50eb989b7",
+        "bytes": 900000,
+        "gitBlob": "483f775414db0549a49dc44df777a5a91c79fdce"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz.part003",
+        "sha256": "39e9861eadd3d19f2bf10eb4396aa0fed81e3f9113e04d70d2549f0400660156",
+        "bytes": 900000,
+        "gitBlob": "2e94d6e3cbadb190bf775fc1ed3e4c5dd53d55ef"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz.part004",
+        "sha256": "5993f79140ed95332c482753c4e2290f121a9f7feb5c5156c4548b04fcee9766",
+        "bytes": 900000,
+        "gitBlob": "65e04c1dfd70fa382a7df207379adf65894cb835"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz.part005",
+        "sha256": "18c381bd40ff293eb36659c27720adb803f2ab59129413d0a79776c929519259",
+        "bytes": 900000,
+        "gitBlob": "19d7c6a1195bd74335e4cae9266a15048516c532"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz.part006",
+        "sha256": "aad5fc7d700b2993db4919a67aa8583f73c0611123bc9ecfb5d6c8cb88fbde91",
+        "bytes": 900000,
+        "gitBlob": "b7d620a5ccc2e165c44f4592de87e88141447613"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz.part007",
+        "sha256": "760df62247f94954894b27683485c566a79cd003c8e0ef9fae26a35e459eeb10",
+        "bytes": 900000,
+        "gitBlob": "ec3fc394dd878b85afc3926930da6835611d2119"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz.part008",
+        "sha256": "5aef4b697f814dbf63b0bc6190dd325c94b88c98eb27bd0f99b287eede9cc0dd",
+        "bytes": 900000,
+        "gitBlob": "b541d5d975ae13dc5a592fcbce7b3ba5ae9be7f3"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz.part009",
+        "sha256": "38a2dfc8bd9f514aa11b95a741c58881c797f317557d5ba7e924e2802beb6ea8",
+        "bytes": 900000,
+        "gitBlob": "021358f0e118087cafc54598a272f057f4a227c3"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz.part010",
+        "sha256": "0c59289c006f49c13d2b091d918fbe78db956872e3faa16df772074e871cde9a",
+        "bytes": 22543,
+        "gitBlob": "a0e78681fc3d9f6eb44110314f4c72639e7641b5"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz.parts.json",
+        "sha256": "6cfbf3e9cd847f8d244a1925eeecc2bbf2c60dbe49f604a8b92ecbc46c5706c4",
+        "bytes": 2190,
+        "gitBlob": "d8b055773e90c720f26676774fb36d1359fd6f05"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/source-manifest.json",
+        "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd",
+        "bytes": 32014,
+        "gitBlob": "10b04242b5c754be623747fa506bf5b35158db8f"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/regression-summary.json",
+        "sha256": "88c2d6d642f06f3e6cd2b77b603c158e1920e57c234924d151ea23c806ec2f53",
+        "bytes": 90744,
+        "gitBlob": "b8b58358c6f381b445c0c04265fb516b38b8f602"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-comparison.json",
+        "sha256": "796968472df6159bc18348ca6457c138d2fc7804226bbb613a6a95e889f0ccc3",
+        "bytes": 11036,
+        "gitBlob": "ab9029c583c7e9eee674ca0b69935b5dfb420ef1"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-execution-started.json",
+        "sha256": "e4e6ba5b85f981772848d5d551406117c3e7794e0df293dd840bedbcc211afbc",
+        "bytes": 3154,
+        "gitBlob": "7b82ef427b8000118bd40cedd83728144e6916d0"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-execution.json",
+        "sha256": "412c2bf13ddf129d9df96da14681c859de0bba7cdd5cd5bd337c9c7787cd1392",
+        "bytes": 17530,
+        "gitBlob": "9a838fa7be3049e3c1e3db1da50a97c12e958400"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-host-preparation.json",
+        "sha256": "9ef86bc04ebf5abec6f9e76fb8f797babb9b34f40c3b8e4b70a23b8846120a3b",
+        "bytes": 19259,
+        "gitBlob": "c0c7abd87f0b544ac20627536348db40c1f4f94b"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-output.log.gz",
+        "sha256": "2f8e585c4a2d5f464a874bbe7713b189866a3f6e176d1c1274c7fa37ed5a560b",
+        "bytes": 10252,
+        "gitBlob": "46ebe0b9f44b7d5aec62e813b3dacfe40e9c19a6"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-output.raw.log",
+        "sha256": "1648a43eee4675b1808a0f5cb9072e463b4ae72ad324db90b775cf8359130145",
+        "bytes": 268633,
+        "gitBlob": "e7593b951e3ce8f617542480916ba4013ce314e7"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-passive-owner-presence.json",
+        "sha256": "1edacfefe72f7f590ce71ee5b8158ec939ee97b4657b3ce075d37019df311f2b",
+        "bytes": 1114,
+        "gitBlob": "eaa7f6498bce97285757efc0ed0d97859659f8e2"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.part000",
+        "sha256": "a22e893b941d364ae588894bdb25b7a93ee1cc13d31e9af89d1851dffb0c63f0",
+        "bytes": 900000,
+        "gitBlob": "cb5512ec20dd1d17ef81640c01611b297495731f"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.part001",
+        "sha256": "eeb0afd61d2907fe0d1b1ec7c9ef6cc1f48c84ec3b5cbca20c2dba50a32ed777",
+        "bytes": 900000,
+        "gitBlob": "5ee5003c700342e04d5ee15c856f45b39f2dc805"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.part002",
+        "sha256": "e2a843dbe245207d2c5431f232a729daffde0347c01cc16121b0ef922ad485e8",
+        "bytes": 900000,
+        "gitBlob": "002713385785e77b99516d10c776ac1b3594f92d"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.part003",
+        "sha256": "f3d4fd76684083fd36a1ebea00e0e2a196df5b795108a677c6cdf0736af0ff97",
+        "bytes": 900000,
+        "gitBlob": "3b3d4e5eb4853d56a5dc87fbfa473482ca6c58dc"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.part004",
+        "sha256": "38af08bf685da2c9f3f34d3039b804c0a26b7891ac164f529e2918ea8c0c077a",
+        "bytes": 900000,
+        "gitBlob": "cf1527df76bc63a6c34e785e820e851a0080392a"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.part005",
+        "sha256": "aaafa8809e2bc45c21670951be2498e33be5327c1e588982685244b7bd5cd0ab",
+        "bytes": 900000,
+        "gitBlob": "f05bc6c959d0caf180d526edbff225eff8db6eea"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.part006",
+        "sha256": "c19591d85f38f4e959057509779d1149277997f89f5e674972999471b8326f68",
+        "bytes": 900000,
+        "gitBlob": "78cb891b5739131d90934c89858b3ab10f679646"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.part007",
+        "sha256": "8f3abc5428efd7865da90ac90997de6036a3d1739f1e3f4440e758484cc5278e",
+        "bytes": 900000,
+        "gitBlob": "ede7c772a891b88ed54c677196919ede6673ad15"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.part008",
+        "sha256": "ba5ec4bc61d651df4b2a0a91e88bf1d47194fae0ce843669fb9a7066afee52d5",
+        "bytes": 900000,
+        "gitBlob": "4461d605846e2819e0036c22bdf4f3eaaa1475b0"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.part009",
+        "sha256": "c9c41f8dcf5faa00901143df1632e2a39cb7d5da3838741c25d33625bf3c7e01",
+        "bytes": 900000,
+        "gitBlob": "72562dd8555b4a8fef48232d1054dde7c4a1179c"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.part010",
+        "sha256": "dada99f1b1ccaa395d7cfbc9764ebfad875c2a548850ae188549282271a135af",
+        "bytes": 900000,
+        "gitBlob": "6a13b526c0b091a5c3e91691d0aa821e24f844c4"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.part011",
+        "sha256": "12e5b4bd0df455a13bafa4215ec7ac572a86c279b537619835b3d7e51ad2e7fd",
+        "bytes": 900000,
+        "gitBlob": "41db4836907b83f792b2400e698a6574caf6c228"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.part012",
+        "sha256": "4c1c1b8dbf0a76bb80b91f2df5ccbdec791d5adaf5eeb21c035d596c217c6472",
+        "bytes": 2096,
+        "gitBlob": "8175aafdbef58c6db1271b45d3072beb79efe3a5"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.parts.json",
+        "sha256": "33e0ace8a871ae52010eb2917206243e0c8c24078da7feb51e29538463d9c0f9",
+        "bytes": 2666,
+        "gitBlob": "754d30b0b9668df8d7673cf83fc0f6f4ffe93d00"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/recorded-regression-cases-final.json",
+        "sha256": "20e9d27607501cd347a59018df08430b3660056fd819932f4cff8dc98456bd2a",
+        "bytes": 3093,
+        "gitBlob": "99071d58b156141ff2e8a57fd3a52e19b72d18b6"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/regression-recovery.json",
+        "sha256": "4c3d83d83228bdf28c6a0217d7b5e44eafa6d12986b5f09a49d8b29b1ef81b9b",
+        "bytes": 2651,
+        "gitBlob": "0e1be13810119a500fbd505f244c5d73f86cf5ae"
+      },
+      {
+        "path": "scripts/compare-v54-regressions.py",
+        "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+        "bytes": 18166,
+        "gitBlob": "4ad314789d8dc512f777b64da411d44e1728dfc6"
+      },
+      {
+        "path": "scripts/evidence-byte-parts.py",
+        "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+        "bytes": 7210,
+        "gitBlob": "4bde766db972be5956da3a21adcd8b37c1e5426e"
+      },
+      {
+        "path": "scripts/replay-public-regression-released-baseline.mjs",
+        "sha256": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+        "bytes": 6355,
+        "gitBlob": "60a2c351ca1ba57be75c7499339c42324b7a6463"
+      },
+      {
+        "path": "scripts/replay-v53-public-regression.mjs",
+        "sha256": "4359e008db8dadaac17f6504199ff20c752f40f1666ba527f1cd5f16df100a9e",
+        "bytes": 2447,
+        "gitBlob": "fac8e0a7939ee459d8b12e84c2672d31bff3360c"
+      },
+      {
+        "path": "scripts/restore-v53-evidence.py",
+        "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+        "bytes": 3361,
+        "gitBlob": "43c5c9ad3126347297212755d6937e3a71662215"
+      },
+      {
+        "path": "scripts/run-recorded-public-regressions.py",
+        "sha256": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+        "bytes": 20897,
+        "gitBlob": "d90315bfb08f7f0323c72b76de574c97b8f7f265"
+      },
+      {
+        "path": "scripts/run-released-public-regressions-streamlog.py",
+        "sha256": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9",
+        "bytes": 15626,
+        "gitBlob": "440af2d9034748c4afff715f8427df41654ef1df"
+      },
+      {
+        "path": "scripts/run-released-public-regressions.py",
+        "sha256": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+        "bytes": 14089,
+        "gitBlob": "4503356b2d72076ae2483cab59f086984c1f75d9"
+      },
+      {
+        "path": "scripts/run-v53-campaign-proof.py",
+        "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+        "bytes": 5421,
+        "gitBlob": "997b7de1c4c719832546d3e825dc60a89ac589f4"
+      }
+    ]
+  },
+  "futureExecution": {
+    "status": "not_started",
+    "runner": {
+      "path": "scripts/run-released-public-regressions-streamlog.py",
+      "sha256": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9",
+      "bytes": 15626,
+      "gitBlob": "440af2d9034748c4afff715f8427df41654ef1df"
+    },
+    "commandTemplate": [
+      "python",
+      "-B",
+      "scripts/run-released-public-regressions-streamlog.py",
+      "docs/migration/lot4a-evidence/integrated-051-regression-cases.json",
+      "<new-integrated-output-directory>",
+      "--source-manifest",
+      "<fresh-integrated-source-manifest.json>",
+      "--node-old-space-mib",
+      "1536",
+      "--timeout-seconds",
+      "2400"
+    ],
+    "requirements": [
+      "Complete and freeze the integrated native0.51 source before replay.",
+      "Use a new output directory and the fresh integrated source manifest; preserve the published baseline inputs.",
+      "Preserve the unchanged 17-check comparator and streamlog runner; retain all execution and recovery receipts.",
+      "Treat MIND as a new live campaign with retained cumulative time, never as this recorded replay."
+    ],
+    "candidateSourceDigest": null,
+    "replaysExecuted": 0,
+    "testsExecuted": 0,
+    "comparatorsExecuted": 0
+  },
+  "qualification": "This is a byte and published-receipt provenance audit only. The existing byte-parts tool restored exactly five gzip originals from 37 published parts. Only the leading 65536 decompressed characters of each report were inspected for metadata; complete report payloads were verified by compressed SHA256. The passing 17-check results are historical published receipts, not freshly executed comparisons. Earlier incomplete WEAV attempts remain unchanged and are not used as baselines. No test, regression, cost, build or live game campaign was run; no candidate result or future publication provenance is asserted."
+}

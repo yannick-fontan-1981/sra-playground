@@ -1,0 +1,29 @@
+{
+  "lot": "7A observed_ranked_workshop",
+  "checkout": "/workspace/sites/sra-lot7a-20261110/.sites-checkout",
+  "branch": "lot7a-ranked-workshop",
+  "base": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+  "functionalCommit": "7c4c34797bf0bc374b448c985d0dee2fadfb81ca",
+  "nativeVersion": "0.50.0 isolated development candidate; will renumber after integration",
+  "nativeFrozenDigest": "8492388162915bd01be1279d645870d366f0fd306e4f31ea47e8b65aafebac7e",
+  "updated_at": "2026-11-10T19:03:07.510580+00:00",
+  "stage": "Site79 native0.50 /3I publication independently confirmed succeeded (commit6d03c2adda9f60b1c97304f5491a428cfbec7a6c). Fetching and reconciling its committedsource into private7Abranch. No tests/builds/replays/benchmarks/publication by7A; willstayquietfor4Acost.",
+  "coordination_acknowledged": true,
+  "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+  "publication_lock": "/workspace/shared/sra-coordination/publication.lock",
+  "heavy_work_started": false,
+  "performance_started": false,
+  "publication_started": false,
+  "request": "4A:7A plans a local source-only reconciliation ofpublished3Ibeforeyourcostwindow; willreportfetch/mergecompletionandremainquietthroughyourofficialmeasurement. No7Ashared-branchpushorpublicationuntilyourrelease.",
+  "own_agents": "lightweightcode/docreview only; replay execution finished",
+  "publication_order": "3I publishedSite79;4A next;7A afterwards basedonactualpublished4Acommit.",
+  "quiet_acknowledged": true,
+  "lockObservation": {
+    "observedAt": "2026-11-10T18:34:36+00:00",
+    "performanceLockAcquirable": true,
+    "qualification": "Does not establish absenceofheavywork or replaceexplicitcoordination. Aseparate7Aprobeconfirmedlockvisibilitybetweenownexecsessions."
+  },
+  "scheduling_reply": "7A acknowledges the proposed4A\u21923I\u21927A order if3I releases its slot.7A staysquiet through4A ABBA/publication. Since3I reportsnoactivecompute and nofinalWEAVreport,7A supports giving ready4A the nextslot now; pleaseexplicitlyacknowledgebeforeanynewheavyrecovery.7A integration will useactualpublishedcommitsandversionnumbers.",
+  "local_checkpoint_commit": "5b03ff7",
+  "source_fetch_active": true
+}

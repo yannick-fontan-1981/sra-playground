@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.game-case-selection.v1",
+  "game": "MIND",
+  "targetLevels": 3,
+  "maximumCumulativeSeconds": 2400,
+  "previousChargedSeconds": 692.530992,
+  "selectedAt": "2026-11-10T19:22:59.174932+00:00",
+  "deadline": "2026-11-10T19:51:26.643940+00:00",
+  "previousClockQualification": "Validation on the integrated native0.51 candidate after the previous candidate was closed successfully. All692.530992 charged seconds remain; this is not a new2400-second budget. Prior files and their old deadline remain unchanged.",
+  "resumes": {
+    "path": "docs/migration/lot4a-evidence/final/mind-resolution.json",
+    "bytes": 2267,
+    "sha256": "213eb088d2bf4b60be770d948f2efdf76ab73592dc4838cb5abb8e039abd119c"
+  },
+  "phases": {
+    "integrated-051-01": {
+      "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+      "directory": "docs/migration/lot4a-evidence/integrated-051/mind-live-01",
+      "manifest": "docs/migration/lot4a-evidence/integrated-051/source-manifest.json"
+    }
+  },
+  "qualification": "One new cold live campaign on the merged candidate replaces the planned recorded MIND replay. No expected command, learned state or prior solution is supplied to the native agent. Counts are taken from the actual result."
+}

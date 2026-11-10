@@ -326,3 +326,32 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot7a-evidence/integrated-final/regressions/rswp-051-replay.json.gz
 /docs/migration/lot7a-evidence/integrated-final/regressions/vois-051-replay.json.gz
 /docs/migration/lot7a-evidence/integrated-final/regressions/weav-051-replay.json.gz
+# Frozen source archive retained as exact ordered byte parts
+/docs/migration/lot4a-evidence/integrated-051/source-archive.tar.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz
+/docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz
+/docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz
+/docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz
+/docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz
+
+!/docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-output.raw.log
+!/docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-output.raw.log
+!/docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-output.raw.log
+!/docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-output.raw.log
+!/docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-output.raw.log
+!/docs/migration/lot4a-evidence/mind-integrated-051-01-phase.log
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz
+
+!/docs/migration/lot4a-evidence/performance-integrated/cohort1/baseline.log
+!/docs/migration/lot4a-evidence/performance-integrated/cohort1/after.log
+!/docs/migration/lot4a-evidence/performance-integrated/cohort2/baseline.log
+!/docs/migration/lot4a-evidence/performance-integrated/cohort2/after.log
+!/docs/migration/lot4a-evidence/performance-integrated/aggregation-failure-reproduced.log
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot4a-evidence/performance-integrated/owner-graphs-A-01.json.gz
+/docs/migration/lot4a-evidence/performance-integrated/owner-graphs-B-01.json.gz

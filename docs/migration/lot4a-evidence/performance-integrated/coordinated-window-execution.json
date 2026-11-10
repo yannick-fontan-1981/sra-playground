@@ -1,0 +1,38 @@
+{
+  "schema": "logos-engine.coordinated-cost-window-execution.v1",
+  "generator": {
+    "path": "docs/migration/lot4a-evidence/run-coordinated-cost-window.py",
+    "bytes": 6616,
+    "sha256": "5bff6cfa8d7d21d2021fa2a6e9a166a686bbd82c5f59c04baf42c365a87b36ba"
+  },
+  "officialCommand": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-native-cost-window.py",
+    "/workspace/sites/sra-lot4a-base79",
+    "docs/migration/lot4a-evidence/performance-integrated",
+    "docs/migration/lot4a-evidence/baseline-integrated/source-manifest.json",
+    "docs/migration/lot4a-evidence/integrated-051/source-manifest.json"
+  ],
+  "startedAt": "2026-11-10T19:29:44.670456+00:00",
+  "finishedAt": "2026-11-10T19:38:19.178918+00:00",
+  "exitCode": 0,
+  "lockAcquisition": {
+    "path": "docs/migration/lot4a-evidence/performance-integrated/lock-acquisition.json",
+    "bytes": 8205,
+    "sha256": "639cad1fd7c60e51a7f5ee7d73773af43790e3eeac656c713c28131e6ca32d63"
+  },
+  "readiness": {
+    "path": "docs/migration/lot4a-evidence/performance-integrated/readiness.json",
+    "bytes": 4942,
+    "sha256": "1897d6565363c01a838dfa7e91d41b330b04956f9c9d319ffaa5f7786be0697d"
+  },
+  "lockHeldThroughoutChild": true,
+  "window": {
+    "path": "docs/migration/lot4a-evidence/performance-integrated/window.json",
+    "bytes": 10361,
+    "sha256": "3fea8d11469293bee2954f244aca164f95cb26c51edcf1e1cedc157b82faef22"
+  },
+  "windowStatus": "passed",
+  "lockReleasedAt": "2026-11-10T19:38:19.179622+00:00"
+}
