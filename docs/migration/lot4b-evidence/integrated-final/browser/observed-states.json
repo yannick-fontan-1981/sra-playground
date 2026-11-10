@@ -1,0 +1,113 @@
+{
+  "schema": "logos-engine.browser-accessibility-observations.v1",
+  "recordedAt": "2026-11-10T22:23:11.817264+00:00",
+  "captureMethod": "Structured transcription of actual cua_repl getAXState outputs observed by root. No screenshot artifact is claimed.",
+  "previewUrl": "http://127.0.0.1:4173/",
+  "game": "TRIA",
+  "learnedStateInjected": false,
+  "newReasoningSessionsDuringRun": 0,
+  "manualBoardActions": 0,
+  "levelJumps": 0,
+  "states": [
+    {
+      "stage": "cold-game-selection",
+      "url": "http://127.0.0.1:4173/?game=TRIA&level=1",
+      "message": "TRIA selected.",
+      "level": 1,
+      "gameAvailability": "Ready"
+    },
+    {
+      "stage": "agent-cold",
+      "message": "Ready to run from level 1.",
+      "actions": 0,
+      "levels": 0,
+      "plans": 0
+    },
+    {
+      "stage": "run-started",
+      "control": "Run 16 actions",
+      "message": "Preparing the agent…",
+      "actions": 0,
+      "levels": 0,
+      "plans": 0,
+      "pauseEnabled": true
+    },
+    {
+      "stage": "first-pause",
+      "message": "Paused.",
+      "actions": 1,
+      "levels": 0,
+      "plans": 1
+    },
+    {
+      "stage": "first-one-action-and-boundary",
+      "control": "One action",
+      "url": "http://127.0.0.1:4173/?game=TRIA&level=2",
+      "message": "Level completed.",
+      "actions": 2,
+      "levels": 1,
+      "plans": 2,
+      "qualification": "The one action completed an official level. The exact-text waiter for One action completed. timed out; the actual boundary was retained."
+    },
+    {
+      "stage": "second-pause",
+      "controls": [
+        "Run 16 actions",
+        "Pause"
+      ],
+      "message": "Paused.",
+      "actions": 2,
+      "levels": 1,
+      "plans": 2
+    },
+    {
+      "stage": "one-action-confirmed",
+      "control": "One action",
+      "message": "One action completed.",
+      "actions": 3,
+      "levels": 1,
+      "plans": 3
+    },
+    {
+      "stage": "second-boundary",
+      "control": "Run to next level",
+      "url": "http://127.0.0.1:4173/?game=TRIA&level=3",
+      "message": "Level completed.",
+      "actions": 13,
+      "levels": 2,
+      "plans": 13
+    },
+    {
+      "stage": "third-boundary",
+      "control": "Run to next level",
+      "url": "http://127.0.0.1:4173/?game=TRIA&level=4",
+      "message": "Level completed.",
+      "actions": 17,
+      "levels": 3,
+      "plans": 17
+    }
+  ],
+  "retainedObservationErrors": [
+    {
+      "operation": "initial getBrowser",
+      "result": "Kernel state was reset after inactivity. This code was not executed.",
+      "resolution": "Retried the same documented entry point once, then created the managed preview tab successfully."
+    },
+    {
+      "operation": "First One action exact-text waiter",
+      "timeoutMs": 20000,
+      "error": "Playwright selector deadline exceeded; no visible match for One action completed.",
+      "followingObservedState": {
+        "stage": "first-one-action-and-boundary",
+        "control": "One action",
+        "url": "http://127.0.0.1:4173/?game=TRIA&level=2",
+        "message": "Level completed.",
+        "actions": 2,
+        "levels": 1,
+        "plans": 2,
+        "qualification": "The one action completed an official level. The exact-text waiter for One action completed. timed out; the actual boundary was retained."
+      },
+      "resolution": "Same cold session retained. A new Pause at action2 and one action to action3 displayed One action completed. The prior boundary and waiter failure remain recorded."
+    }
+  ]
+}
