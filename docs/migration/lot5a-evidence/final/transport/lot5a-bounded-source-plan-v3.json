@@ -1,0 +1,1498 @@
+{
+  "schema": "logos-engine.bounded-source-push-plan.v3",
+  "status": "planned_not_pushed",
+  "recordedAt": "2026-11-10T22:09:14.396050+00:00",
+  "generator": {
+    "path": "docs/migration/lot5a-evidence/plan-bounded-source-transport-v3.py",
+    "bytes": 33531,
+    "sha256": "ffac79264506b2ae38086903756374266781d0cf27ec893976652a01012a710d"
+  },
+  "window": {
+    "path": "docs/migration/lot5a-evidence/performance/window.json",
+    "bytes": 10145,
+    "sha256": "0be3eceb2139347ffa5efa0200fc1f68c98544517d0c521f3eee71b468401c5c"
+  },
+  "checkout": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+  "output": "/workspace/sites/sra-lot5-20261110/lot5a-bounded-source-plan-v3.json",
+  "requestedBase": "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+  "requestedTarget": "HEAD",
+  "perPushServerLimitBytes": 67108864,
+  "perStepRawObjectLimitBytes": 41943040,
+  "perObjectServerLimitBytes": 33554432,
+  "perObjectSizeMeaning": "Uncompressed Git objectsize; every kind, all target ancestry and every newly missing set.",
+  "bulkProofMinimumBytes": 262144,
+  "steps": [
+    {
+      "step": 1,
+      "kind": "complete_source",
+      "previousCommit": "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+      "commit": "842e8f5da4a3230900a5d4f1cec4dff5fcb6ace8",
+      "tree": "7151f8bddebc7e40c68e11a024ef3d44ed64d41f",
+      "parents": [
+        "0d69767970bff5cdc95c163bd5a02614bb661bd4"
+      ],
+      "rawMissingObjectBytes": 535597,
+      "missingObjects": {
+        "count": 22,
+        "rawBytes": 535597,
+        "byType": {
+          "tree": {
+            "count": 6,
+            "bytes": 13286
+          },
+          "blob": {
+            "count": 15,
+            "bytes": 522058
+          },
+          "commit": {
+            "count": 1,
+            "bytes": 253
+          }
+        },
+        "inventorySha256": "b7478ef8a35a55e524f322152c7c7653fe8971c44104225b13fa10c811438d75",
+        "maximumObjectBytes": 217093,
+        "perObjectLimitBytes": 33554432,
+        "allObjectsWithinPerObjectLimit": true,
+        "objects": [
+          {
+            "oid": "0ca141181282437f4fcb2ccac654e96f73fea478",
+            "type": "tree",
+            "bytes": 1563
+          },
+          {
+            "oid": "166a2545ae657813e6f750438fc2314a3937729e",
+            "type": "blob",
+            "bytes": 3360
+          },
+          {
+            "oid": "17ebdf385f1d19a97ab046dcbdb933f9479595df",
+            "type": "tree",
+            "bytes": 6544
+          },
+          {
+            "oid": "317572dfb7ae5ee0c33a71c8045b3812a88c533d",
+            "type": "blob",
+            "bytes": 217093
+          },
+          {
+            "oid": "344cbcc3278d29a3f8bc2911ef00e1ba42d367a3",
+            "type": "blob",
+            "bytes": 680
+          },
+          {
+            "oid": "4467689f3fc6a53ce8ed0c0543f1af37a8f78c5d",
+            "type": "tree",
+            "bytes": 708
+          },
+          {
+            "oid": "5b228a4d53a258ac461f06f95295b2505d7a14c1",
+            "type": "blob",
+            "bytes": 571
+          },
+          {
+            "oid": "7151f8bddebc7e40c68e11a024ef3d44ed64d41f",
+            "type": "tree",
+            "bytes": 1137
+          },
+          {
+            "oid": "7a7bd3f2ca2ee74999a9c62f644e54b18db14a8c",
+            "type": "tree",
+            "bytes": 1497
+          },
+          {
+            "oid": "7ed737477316acb5c246abc6f37c674244b5c873",
+            "type": "blob",
+            "bytes": 33531
+          },
+          {
+            "oid": "82b30834d6aa79094540098152fc48ff908783bc",
+            "type": "blob",
+            "bytes": 643
+          },
+          {
+            "oid": "842e8f5da4a3230900a5d4f1cec4dff5fcb6ace8",
+            "type": "commit",
+            "bytes": 253
+          },
+          {
+            "oid": "8feb39e4ba92752539692f0dc45950c2f5d2f58d",
+            "type": "blob",
+            "bytes": 2312
+          },
+          {
+            "oid": "a48b074dc877c35db0fe7ee4f56bfa83261b629c",
+            "type": "blob",
+            "bytes": 4495
+          },
+          {
+            "oid": "c55de9ce461ada36447df1f6866f27815d8b22b3",
+            "type": "blob",
+            "bytes": 680
+          },
+          {
+            "oid": "d2e46170e32e0031152ae0f30fd97b0467a4f941",
+            "type": "tree",
+            "bytes": 1837
+          },
+          {
+            "oid": "d52219661ae7b3540d1ad4726721b992bc54a90a",
+            "type": "blob",
+            "bytes": 7438
+          },
+          {
+            "oid": "e8f36b34df1d400582db3e7526359027220e5cef",
+            "type": "blob",
+            "bytes": 22980
+          },
+          {
+            "oid": "e9b93f3ae1e7b6b5c91bd3e100ad3964864efd81",
+            "type": "blob",
+            "bytes": 193244
+          },
+          {
+            "oid": "fbc69aafb0479c0def71029dc83c003d7a2fa8cb",
+            "type": "blob",
+            "bytes": 11234
+          },
+          {
+            "oid": "ff155dbbf933453d02a30c863764c39201557523",
+            "type": "blob",
+            "bytes": 10216
+          },
+          {
+            "oid": "ff45cf1399423ca8a4b2deea007e257eda0febe2",
+            "type": "blob",
+            "bytes": 13581
+          }
+        ]
+      },
+      "changedPaths": [
+        ".gitignore",
+        "docs/migration/lot5a-evidence/final/transport/README.md",
+        "docs/migration/lot5a-evidence/final/transport/lot5a-bounded-source-plan.json",
+        "docs/migration/lot5a-evidence/final/transport/lot5a-transport-step-1.json",
+        "docs/migration/lot5a-evidence/final/transport/lot5a-transport-step-2.json",
+        "docs/migration/lot5a-evidence/final/transport/lot5a-transport-step-3.json",
+        "docs/migration/lot5a-evidence/final/transport/lot5a-transport-step-4-failure.json",
+        "docs/migration/lot5a-evidence/final/transport/reconstruction.json",
+        "docs/migration/lot5a-evidence/final/transport/retained-original-history.manifest.json",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000045.bin",
+        "docs/migration/lot5a-evidence/final/transport/source-tree-reconciliation.json",
+        "docs/migration/lot5a-evidence/final/transport/transport-input-index.json",
+        "docs/migration/lot5a-evidence/plan-bounded-source-transport-v3.py",
+        "docs/migration/lot5a-evidence/restore-retained-transport.py"
+      ],
+      "nonDeferredPathsExactlyMatchTarget": true,
+      "remainingDeferredPaths": [
+        "docs/migration/lot5a-evidence/final/transport/retained-original-history.manifest.json.part-000001.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000001.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000002.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000003.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000004.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000005.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000006.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000007.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000008.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000009.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000010.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000011.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000012.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000013.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000014.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000015.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000016.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000017.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000018.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000019.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000020.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000021.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000022.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000023.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000024.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000025.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000026.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000027.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000028.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000029.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000030.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000031.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000032.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000033.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000034.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000035.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000036.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000037.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000038.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000039.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000040.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000041.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000042.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000043.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000044.bin",
+        "docs/migration/lot5a-evidence/performance/owner-growth-review.json",
+        "docs/migration/lot5a-evidence/performance/owner-structural-attribution-v2.json",
+        "docs/migration/lot5a-evidence/performance/shared-fragment-premeasurement-supplement.json"
+      ]
+    },
+    {
+      "step": 2,
+      "kind": "evidence",
+      "previousCommit": "842e8f5da4a3230900a5d4f1cec4dff5fcb6ace8",
+      "commit": "83de3943d5942350a6a54b9dc4c508e5b6745b78",
+      "tree": "c892d20f24716d4554729b70e1fca759087972ce",
+      "parents": [
+        "842e8f5da4a3230900a5d4f1cec4dff5fcb6ace8"
+      ],
+      "rawMissingObjectBytes": 40227048,
+      "missingObjects": {
+        "count": 52,
+        "rawBytes": 40227048,
+        "byType": {
+          "blob": {
+            "count": 45,
+            "bytes": 40209621
+          },
+          "tree": {
+            "count": 6,
+            "bytes": 17197
+          },
+          "commit": {
+            "count": 1,
+            "bytes": 230
+          }
+        },
+        "inventorySha256": "377b8c67490902dcda5b9290cc9c225c60a643c718f08bbb4cb2483728bea407",
+        "maximumObjectBytes": 900000,
+        "perObjectLimitBytes": 33554432,
+        "allObjectsWithinPerObjectLimit": true,
+        "objects": [
+          {
+            "oid": "11a30dd2a9b03d8746c4243ba613fc9ad35c99e0",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "139c10a085077993b7f76dece8a58dab6b6f318e",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "16814f379d0a140e2be71bd83ff711a69c9e7e62",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "1b24826f223b4b31198e09519aa483edfcede330",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "204078d2d5933039f1953e76f0d34d5ec08be6b3",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "2bbc25287b77da8f4b4bc48b0c04ffb9b554e0d1",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "2bf1d7889d85e00e158259aa915ef68296070e3d",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "2ea718d8070782ce1e367825d420f0e4147f1031",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "2fd3348b4f11ce865106882a9e68be34920e65a0",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "31e913c24ec645105c34db74c468b9152bf3f673",
+            "type": "tree",
+            "bytes": 1497
+          },
+          {
+            "oid": "3c5390e3e5cd87af077acc2eb815f82343fef257",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "3da6360cae6826c1559a594fb5470690e2e65d16",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "4113fa6b610f82307d90abadc03fb4c6c71e2838",
+            "type": "blob",
+            "bytes": 609621
+          },
+          {
+            "oid": "42048e6f34a44f0d8fc02d3ecdc5c20b5489c7e2",
+            "type": "tree",
+            "bytes": 1837
+          },
+          {
+            "oid": "5838d763779906d56ac92c9ee6c3c611d5d78302",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "5f44a6d996ab4d83002ad6347f8e0adf6c9fddb6",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "611ac43ab33246b8f1d886edf4757a589d24f9ea",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "66bb443bd84df14c0ebb511cfb28082daab20162",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "68a4b048abd94b5afc443d29c39407b77bab8d37",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "6fcbb058ef5e4cfe18fb4a8553a80500c25c3b96",
+            "type": "tree",
+            "bytes": 6544
+          },
+          {
+            "oid": "80d174c77d51345fcabaab5f0fe209fa4247471a",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "818078eddfa4425aa01768b614cb8493d8f62f38",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "8349baef00d44047ac40cf41db39e4b03d4dc977",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "83de3943d5942350a6a54b9dc4c508e5b6745b78",
+            "type": "commit",
+            "bytes": 230
+          },
+          {
+            "oid": "8509f29c999653eabce1eb1c4055c6a32227c3a0",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "884902a6c0b8ca5e33d17b802d4c14425da29c79",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "8c822899e2ba85c79f2016c76e62d9e9e4db6e1e",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "902d730256d2c77fc8e99d3cd018abdf8470916a",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "908f841e04c35a43b64c6e58fc65553d684da5df",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "9226752e3d769ee4ab0b4ab57ab4b4e1a0eb1c5d",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "92e5f604b1c9f83bd3b7d455eeaff735ac1b50f9",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "9d533fe738435ca615a887b697a0a835ccdc85c9",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "9dc74cd998fe65a01cc5ea2cceb8d50d38d09315",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "a0fbff8490d7de625a278e2e40c0da0f75a2b495",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "a2dd80da833d3bc0dab4e4b21c26fa44ad7b1e28",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "a5167303e8be410817cf7c7a12b8ad358534da8a",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "a93abfd0043bb14aac55a5f54085b0e30ab38d06",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "b5ec35a69bff2d4eb64b46cd06c0ad13625ce0af",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "bea962acc068e79a0ae3205a6f411d491006864c",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "c5dac7cdf676f28b5091dc14d4e02bc316c20f3f",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "c6315d81349c0106622414d61b7dcd5d6319611c",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "c892d20f24716d4554729b70e1fca759087972ce",
+            "type": "tree",
+            "bytes": 1137
+          },
+          {
+            "oid": "d64857ea6d63b506d34371859d10a7164390d855",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "d72870a8e6d63fe114dd012f86fb753bb715746a",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "db9aaf1a868be5d7d13b3e9f062a629eb2d4ba7c",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "dbda2a8999394ad35f7af2b6f1a440ba6c870161",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "df7a165121f0abada3de013a7b1225523e0dd90a",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "e6c9715818923d70e97c2b72e50fd76c9cd51b77",
+            "type": "tree",
+            "bytes": 4619
+          },
+          {
+            "oid": "e9ddd9c02624430c1aea8be9192779032f44750f",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "ed0a713b04a3652e31faeb8ac94486dc46ed6ddc",
+            "type": "tree",
+            "bytes": 1563
+          },
+          {
+            "oid": "ef9e547816db9a58ea4629e574b3bac2d37d3273",
+            "type": "blob",
+            "bytes": 900000
+          },
+          {
+            "oid": "fd6035d214ae13fa0b4b9092f2ec176522ffe4b0",
+            "type": "blob",
+            "bytes": 900000
+          }
+        ]
+      },
+      "changedPaths": [
+        "docs/migration/lot5a-evidence/final/transport/retained-original-history.manifest.json.part-000001.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000001.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000002.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000003.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000004.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000005.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000006.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000007.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000008.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000009.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000010.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000011.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000012.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000013.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000014.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000015.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000016.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000017.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000018.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000019.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000020.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000021.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000022.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000023.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000024.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000025.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000026.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000027.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000028.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000029.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000030.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000031.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000032.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000033.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000034.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000035.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000036.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000037.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000038.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000039.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000040.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000041.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000042.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000043.bin",
+        "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000044.bin"
+      ],
+      "nonDeferredPathsExactlyMatchTarget": true,
+      "remainingDeferredPaths": [
+        "docs/migration/lot5a-evidence/performance/owner-growth-review.json",
+        "docs/migration/lot5a-evidence/performance/owner-structural-attribution-v2.json",
+        "docs/migration/lot5a-evidence/performance/shared-fragment-premeasurement-supplement.json"
+      ]
+    },
+    {
+      "step": 3,
+      "kind": "evidence",
+      "previousCommit": "83de3943d5942350a6a54b9dc4c508e5b6745b78",
+      "commit": "dd7cb29e7bd88d7dfe57042f666b3008e3b6c96e",
+      "tree": "f4ccc15b007cb693f6497930fb4e68ef669786bb",
+      "parents": [
+        "83de3943d5942350a6a54b9dc4c508e5b6745b78"
+      ],
+      "rawMissingObjectBytes": 8672711,
+      "missingObjects": {
+        "count": 9,
+        "rawBytes": 8672711,
+        "byType": {
+          "tree": {
+            "count": 5,
+            "bytes": 14469
+          },
+          "blob": {
+            "count": 3,
+            "bytes": 8658012
+          },
+          "commit": {
+            "count": 1,
+            "bytes": 230
+          }
+        },
+        "inventorySha256": "45f9a83fde4e6dc53c0d556d901696e21e45dc681c602c9e80b41bc77ceda994",
+        "maximumObjectBytes": 3988757,
+        "perObjectLimitBytes": 33554432,
+        "allObjectsWithinPerObjectLimit": true,
+        "objects": [
+          {
+            "oid": "3529a9ca552948d205232b7fc4236862e05db106",
+            "type": "tree",
+            "bytes": 1837
+          },
+          {
+            "oid": "373ea46bf31fbdc751e0a4de30a3ce8abfb11c78",
+            "type": "tree",
+            "bytes": 1563
+          },
+          {
+            "oid": "657eb9ad6308f5c1e1a3f10d657cede2fbb5f403",
+            "type": "blob",
+            "bytes": 3988757
+          },
+          {
+            "oid": "785e6f1d054c4f8ce4fe39dbccf6275e9de11859",
+            "type": "blob",
+            "bytes": 3802271
+          },
+          {
+            "oid": "a8451c0a5f8cc35523782599f12b02cdbc08eddc",
+            "type": "blob",
+            "bytes": 866984
+          },
+          {
+            "oid": "b5e4ea730e425a8ae335b0acb27bc7f0b908829c",
+            "type": "tree",
+            "bytes": 6544
+          },
+          {
+            "oid": "d3671731fb2b9ad0e863642e9f27cbaebf0df418",
+            "type": "tree",
+            "bytes": 3388
+          },
+          {
+            "oid": "dd7cb29e7bd88d7dfe57042f666b3008e3b6c96e",
+            "type": "commit",
+            "bytes": 230
+          },
+          {
+            "oid": "f4ccc15b007cb693f6497930fb4e68ef669786bb",
+            "type": "tree",
+            "bytes": 1137
+          }
+        ]
+      },
+      "changedPaths": [
+        "docs/migration/lot5a-evidence/performance/owner-growth-review.json",
+        "docs/migration/lot5a-evidence/performance/owner-structural-attribution-v2.json",
+        "docs/migration/lot5a-evidence/performance/shared-fragment-premeasurement-supplement.json"
+      ],
+      "nonDeferredPathsExactlyMatchTarget": true,
+      "remainingDeferredPaths": []
+    },
+    {
+      "step": 4,
+      "kind": "final_history_merge",
+      "previousCommit": "dd7cb29e7bd88d7dfe57042f666b3008e3b6c96e",
+      "commit": "51e2813dedb2d71001290f94f100605e0327ead3",
+      "tree": "f4ccc15b007cb693f6497930fb4e68ef669786bb",
+      "parents": [
+        "dd7cb29e7bd88d7dfe57042f666b3008e3b6c96e",
+        "7b0637cfef2a7e5ef42fbdf0cb214cc35aa31886"
+      ],
+      "rawMissingObjectBytes": 211417,
+      "missingObjects": {
+        "count": 17,
+        "rawBytes": 211417,
+        "byType": {
+          "commit": {
+            "count": 6,
+            "bytes": 2247
+          },
+          "tree": {
+            "count": 10,
+            "bytes": 72313
+          },
+          "blob": {
+            "count": 1,
+            "bytes": 136857
+          }
+        },
+        "inventorySha256": "45b9cc4fe62734d66200d0e5f4d890ab70e638d42388cfa519bed7abf417a221",
+        "maximumObjectBytes": 136857,
+        "perObjectLimitBytes": 33554432,
+        "allObjectsWithinPerObjectLimit": true,
+        "objects": [
+          {
+            "oid": "0544f588baf4c6cb04db361574b65ce9e4cf1cb3",
+            "type": "commit",
+            "bytes": 364
+          },
+          {
+            "oid": "0a8a6a5191c7bb2f4f746ceb6913b268e33acb30",
+            "type": "tree",
+            "bytes": 8470
+          },
+          {
+            "oid": "0cb9edbe15947b07e04036f1648585783cf4279a",
+            "type": "tree",
+            "bytes": 1084
+          },
+          {
+            "oid": "1dbd50e412f2ecd4bc9d83a1fdacd8382aee7b56",
+            "type": "blob",
+            "bytes": 136857
+          },
+          {
+            "oid": "3654ffd105f8ebfa503d255e0f872c15997f62c2",
+            "type": "commit",
+            "bytes": 355
+          },
+          {
+            "oid": "3bf82845868fb792151064d1abcfedbf97bbfd21",
+            "type": "tree",
+            "bytes": 700
+          },
+          {
+            "oid": "4546ed863ed3d559912a455fc97b1c5ca00ba60b",
+            "type": "tree",
+            "bytes": 12311
+          },
+          {
+            "oid": "51e2813dedb2d71001290f94f100605e0327ead3",
+            "type": "commit",
+            "bytes": 317
+          },
+          {
+            "oid": "786458a656f04c9c82c497f7f586f82b5292aac4",
+            "type": "tree",
+            "bytes": 12050
+          },
+          {
+            "oid": "7b0637cfef2a7e5ef42fbdf0cb214cc35aa31886",
+            "type": "commit",
+            "bytes": 559
+          },
+          {
+            "oid": "7bbed39a5f70699f91b9edc8c70e2fed7bc60e55",
+            "type": "tree",
+            "bytes": 13486
+          },
+          {
+            "oid": "81c9065ae1639871bbb8449acdb8213b19b22eb1",
+            "type": "tree",
+            "bytes": 1137
+          },
+          {
+            "oid": "83d483d1a3bd8ea6e1dc8c03e868502ff9a7e0bc",
+            "type": "tree",
+            "bytes": 1137
+          },
+          {
+            "oid": "9919b9923974eacd97b677e014c3b212b0894d63",
+            "type": "tree",
+            "bytes": 1137
+          },
+          {
+            "oid": "b5024f6888f29507fd92913d619a5e6ad33d097e",
+            "type": "commit",
+            "bytes": 288
+          },
+          {
+            "oid": "bc19974c910711f20385d9a40168a0927ec22057",
+            "type": "commit",
+            "bytes": 364
+          },
+          {
+            "oid": "dc72910403a029f8015324c2ef26533039ac3b71",
+            "type": "tree",
+            "bytes": 20801
+          }
+        ]
+      },
+      "changedPaths": [],
+      "nonDeferredPathsExactlyMatchTarget": true,
+      "remainingDeferredPaths": []
+    }
+  ],
+  "createdCommitObjects": [
+    "14f87ed08e0e5477cce9f15dfee43f1977949d10",
+    "842e8f5da4a3230900a5d4f1cec4dff5fcb6ace8",
+    "83de3943d5942350a6a54b9dc4c508e5b6745b78",
+    "dd7cb29e7bd88d7dfe57042f666b3008e3b6c96e",
+    "51e2813dedb2d71001290f94f100605e0327ead3"
+  ],
+  "pushesPerformed": 0,
+  "siteDeploymentsPerformed": 0,
+  "forcePush": false,
+  "intermediateSiteDeployment": false,
+  "branchUpdatesPerformed": 0,
+  "qualification": "Raw bounds include all newly reachable commits, trees, blobs and tags from every parent. Every target-reachable and every newly missing object is capped at 32 MiB; each step is capped at 40 MiB raw content. These are not observed network pack sizes. The already-pushed source base is supplied by the operator and need not identify a deployed Site version; no remote lookup, credential access, push, package or deployment is performed.",
+  "executionNotes": [
+    "Execute only a plan with status planned_not_pushed and checkoutUnchanged true.",
+    "Keep this plan and every helper archive outside the checkout.",
+    "Starting at the clean original HEAD, use a complete detached checkout of each step.commit, in order. Do not use an index-only reset/read-tree: future proof files left untracked would be staged by the standard helper.",
+    "A complete checkout removes tracked future proof files absent from that step. All non-deferred paths, including the final .gitignore and source/test/build inputs, are already final from step 1.",
+    "Before each standard Sites helper call, verify actual HEAD and tree equal that step and the tracked/untracked status is clean. Never force-add the separately listed ignored raw evidence.",
+    "The standard helper pushes current HEAD normally to remote main and verifies the remote result. Advance only after success; stop if the remote no longer matches the planned predecessor. Never force-push.",
+    "Run the Sites deployment only after the final helper source push. Intermediate helper source/archive calls must not be followed by an intermediate Site deployment.",
+    "The planner leaves the original branch untouched. Planned commit objects have no new refs; keep this plan and execute before pruning unreachable objects. The final commit directly retains the original HEAD."
+  ],
+  "checkoutBefore": {
+    "head": "7b0637cfef2a7e5ef42fbdf0cb214cc35aa31886",
+    "symbolicHead": "refs/heads/lot5a-publish-bounded",
+    "index": {
+      "path": ".git/index",
+      "bytes": 1189058,
+      "sha256": "7eab7c8b4e7f356dee96f5d400e796b33a68b432432bbcff5a56bdac94acec6e"
+    },
+    "refsSha256": "2d62a507cbb15bf35d18c6eb5b0c0fde68c887941775fb23cf18369c0d385936",
+    "statusBytes": 0,
+    "statusSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "sourceBaseCommit": "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+  "sourceBaseRole": "already_pushed_source_commit_not_necessarily_a_deployed_site_version",
+  "retainedTargetCommit": "7b0637cfef2a7e5ef42fbdf0cb214cc35aa31886",
+  "originalHead": "7b0637cfef2a7e5ef42fbdf0cb214cc35aa31886",
+  "targetTree": "f4ccc15b007cb693f6497930fb4e68ef669786bb",
+  "sourceBaseIsAncestorOfOriginalHead": true,
+  "ignoredUntrackedEvidence": [
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz",
+      "bytes": 1924691,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz",
+      "bytes": 3732748,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz",
+      "bytes": 9452737,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz",
+      "bytes": 4978068,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz",
+      "bytes": 2990968,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz",
+      "bytes": 12325547,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz",
+      "bytes": 15388053,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/source-archive.tar.gz",
+      "bytes": 1771485,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive.tar.gz",
+      "bytes": 1771485,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/retained-original-history.bundle",
+      "bytes": 609621,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/baseline-structure.json.gz",
+      "bytes": 4755121,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/candidate-structure.json.gz",
+      "bytes": 6820472,
+      "symlink": false,
+      "includedInTarget": false
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-first-creator.json",
+      "bytes": 39817093,
+      "symlink": false,
+      "includedInTarget": false
+    }
+  ],
+  "targetReachableObjects": {
+    "count": 10309,
+    "rawBytes": 1622961689,
+    "byType": {
+      "blob": {
+        "count": 8832,
+        "bytes": 1619783643
+      },
+      "tree": {
+        "count": 1359,
+        "bytes": 3150081
+      },
+      "commit": {
+        "count": 118,
+        "bytes": 27965
+      }
+    },
+    "inventorySha256": "d73da921053525b6c6c9eb3fa7a5d209be9733ab557852f8ccaf82b75b3300c4",
+    "maximumObjectBytes": 8810498,
+    "perObjectLimitBytes": 33554432,
+    "allObjectsWithinPerObjectLimit": true
+  },
+  "allTargetReachableObjectsWithinPerObjectLimit": true,
+  "criticalPaths": [
+    ".gitignore",
+    "docs/migration/lot5a-evidence/final/transport/README.md",
+    "docs/migration/lot5a-evidence/final/transport/lot5a-bounded-source-plan.json",
+    "docs/migration/lot5a-evidence/final/transport/lot5a-transport-step-1.json",
+    "docs/migration/lot5a-evidence/final/transport/lot5a-transport-step-2.json",
+    "docs/migration/lot5a-evidence/final/transport/lot5a-transport-step-3.json",
+    "docs/migration/lot5a-evidence/final/transport/lot5a-transport-step-4-failure.json",
+    "docs/migration/lot5a-evidence/final/transport/reconstruction.json",
+    "docs/migration/lot5a-evidence/final/transport/retained-original-history.manifest.json",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000045.bin",
+    "docs/migration/lot5a-evidence/final/transport/source-tree-reconciliation.json",
+    "docs/migration/lot5a-evidence/final/transport/transport-input-index.json",
+    "docs/migration/lot5a-evidence/plan-bounded-source-transport-v3.py",
+    "docs/migration/lot5a-evidence/restore-retained-transport.py"
+  ],
+  "deferredProofPaths": [
+    "docs/migration/lot5a-evidence/final/transport/retained-original-history.manifest.json.part-000001.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000001.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000002.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000003.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000004.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000005.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000006.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000007.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000008.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000009.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000010.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000011.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000012.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000013.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000014.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000015.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000016.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000017.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000018.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000019.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000020.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000021.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000022.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000023.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000024.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000025.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000026.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000027.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000028.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000029.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000030.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000031.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000032.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000033.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000034.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000035.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000036.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000037.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000038.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000039.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000040.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000041.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000042.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000043.bin",
+    "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000044.bin",
+    "docs/migration/lot5a-evidence/performance/owner-growth-review.json",
+    "docs/migration/lot5a-evidence/performance/owner-structural-attribution-v2.json",
+    "docs/migration/lot5a-evidence/performance/shared-fragment-premeasurement-supplement.json"
+  ],
+  "deletedTargetPaths": [],
+  "originalTargetMissingObjects": {
+    "count": 86,
+    "rawBytes": 49621376,
+    "byType": {
+      "commit": {
+        "count": 5,
+        "bytes": 1930
+      },
+      "tree": {
+        "count": 17,
+        "bytes": 92898
+      },
+      "blob": {
+        "count": 64,
+        "bytes": 49526548
+      }
+    },
+    "inventorySha256": "d1ffdcb08e9a9b36436c0360596b0578ebd7c33ca5298bf1279f04220456401f",
+    "maximumObjectBytes": 3988757,
+    "perObjectLimitBytes": 33554432,
+    "allObjectsWithinPerObjectLimit": true,
+    "objects": [
+      {
+        "oid": "0544f588baf4c6cb04db361574b65ce9e4cf1cb3",
+        "type": "commit",
+        "bytes": 364
+      },
+      {
+        "oid": "0a8a6a5191c7bb2f4f746ceb6913b268e33acb30",
+        "type": "tree",
+        "bytes": 8470
+      },
+      {
+        "oid": "0cb9edbe15947b07e04036f1648585783cf4279a",
+        "type": "tree",
+        "bytes": 1084
+      },
+      {
+        "oid": "11a30dd2a9b03d8746c4243ba613fc9ad35c99e0",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "139c10a085077993b7f76dece8a58dab6b6f318e",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "166a2545ae657813e6f750438fc2314a3937729e",
+        "type": "blob",
+        "bytes": 3360
+      },
+      {
+        "oid": "16814f379d0a140e2be71bd83ff711a69c9e7e62",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "1b24826f223b4b31198e09519aa483edfcede330",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "1dbd50e412f2ecd4bc9d83a1fdacd8382aee7b56",
+        "type": "blob",
+        "bytes": 136857
+      },
+      {
+        "oid": "204078d2d5933039f1953e76f0d34d5ec08be6b3",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "2bbc25287b77da8f4b4bc48b0c04ffb9b554e0d1",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "2bf1d7889d85e00e158259aa915ef68296070e3d",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "2ea718d8070782ce1e367825d420f0e4147f1031",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "2fd3348b4f11ce865106882a9e68be34920e65a0",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "317572dfb7ae5ee0c33a71c8045b3812a88c533d",
+        "type": "blob",
+        "bytes": 217093
+      },
+      {
+        "oid": "31e913c24ec645105c34db74c468b9152bf3f673",
+        "type": "tree",
+        "bytes": 1497
+      },
+      {
+        "oid": "344cbcc3278d29a3f8bc2911ef00e1ba42d367a3",
+        "type": "blob",
+        "bytes": 680
+      },
+      {
+        "oid": "3529a9ca552948d205232b7fc4236862e05db106",
+        "type": "tree",
+        "bytes": 1837
+      },
+      {
+        "oid": "3654ffd105f8ebfa503d255e0f872c15997f62c2",
+        "type": "commit",
+        "bytes": 355
+      },
+      {
+        "oid": "373ea46bf31fbdc751e0a4de30a3ce8abfb11c78",
+        "type": "tree",
+        "bytes": 1563
+      },
+      {
+        "oid": "3bf82845868fb792151064d1abcfedbf97bbfd21",
+        "type": "tree",
+        "bytes": 700
+      },
+      {
+        "oid": "3c5390e3e5cd87af077acc2eb815f82343fef257",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "3da6360cae6826c1559a594fb5470690e2e65d16",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "4113fa6b610f82307d90abadc03fb4c6c71e2838",
+        "type": "blob",
+        "bytes": 609621
+      },
+      {
+        "oid": "4546ed863ed3d559912a455fc97b1c5ca00ba60b",
+        "type": "tree",
+        "bytes": 12311
+      },
+      {
+        "oid": "5838d763779906d56ac92c9ee6c3c611d5d78302",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "5b228a4d53a258ac461f06f95295b2505d7a14c1",
+        "type": "blob",
+        "bytes": 571
+      },
+      {
+        "oid": "5f44a6d996ab4d83002ad6347f8e0adf6c9fddb6",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "611ac43ab33246b8f1d886edf4757a589d24f9ea",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "657eb9ad6308f5c1e1a3f10d657cede2fbb5f403",
+        "type": "blob",
+        "bytes": 3988757
+      },
+      {
+        "oid": "66bb443bd84df14c0ebb511cfb28082daab20162",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "68a4b048abd94b5afc443d29c39407b77bab8d37",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "785e6f1d054c4f8ce4fe39dbccf6275e9de11859",
+        "type": "blob",
+        "bytes": 3802271
+      },
+      {
+        "oid": "786458a656f04c9c82c497f7f586f82b5292aac4",
+        "type": "tree",
+        "bytes": 12050
+      },
+      {
+        "oid": "7b0637cfef2a7e5ef42fbdf0cb214cc35aa31886",
+        "type": "commit",
+        "bytes": 559
+      },
+      {
+        "oid": "7bbed39a5f70699f91b9edc8c70e2fed7bc60e55",
+        "type": "tree",
+        "bytes": 13486
+      },
+      {
+        "oid": "7ed737477316acb5c246abc6f37c674244b5c873",
+        "type": "blob",
+        "bytes": 33531
+      },
+      {
+        "oid": "80d174c77d51345fcabaab5f0fe209fa4247471a",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "818078eddfa4425aa01768b614cb8493d8f62f38",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "81c9065ae1639871bbb8449acdb8213b19b22eb1",
+        "type": "tree",
+        "bytes": 1137
+      },
+      {
+        "oid": "82b30834d6aa79094540098152fc48ff908783bc",
+        "type": "blob",
+        "bytes": 643
+      },
+      {
+        "oid": "8349baef00d44047ac40cf41db39e4b03d4dc977",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "83d483d1a3bd8ea6e1dc8c03e868502ff9a7e0bc",
+        "type": "tree",
+        "bytes": 1137
+      },
+      {
+        "oid": "8509f29c999653eabce1eb1c4055c6a32227c3a0",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "884902a6c0b8ca5e33d17b802d4c14425da29c79",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "8c822899e2ba85c79f2016c76e62d9e9e4db6e1e",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "8feb39e4ba92752539692f0dc45950c2f5d2f58d",
+        "type": "blob",
+        "bytes": 2312
+      },
+      {
+        "oid": "902d730256d2c77fc8e99d3cd018abdf8470916a",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "908f841e04c35a43b64c6e58fc65553d684da5df",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "9226752e3d769ee4ab0b4ab57ab4b4e1a0eb1c5d",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "92e5f604b1c9f83bd3b7d455eeaff735ac1b50f9",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "9919b9923974eacd97b677e014c3b212b0894d63",
+        "type": "tree",
+        "bytes": 1137
+      },
+      {
+        "oid": "9d533fe738435ca615a887b697a0a835ccdc85c9",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "9dc74cd998fe65a01cc5ea2cceb8d50d38d09315",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "a0fbff8490d7de625a278e2e40c0da0f75a2b495",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "a2dd80da833d3bc0dab4e4b21c26fa44ad7b1e28",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "a48b074dc877c35db0fe7ee4f56bfa83261b629c",
+        "type": "blob",
+        "bytes": 4495
+      },
+      {
+        "oid": "a5167303e8be410817cf7c7a12b8ad358534da8a",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "a8451c0a5f8cc35523782599f12b02cdbc08eddc",
+        "type": "blob",
+        "bytes": 866984
+      },
+      {
+        "oid": "a93abfd0043bb14aac55a5f54085b0e30ab38d06",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "b5024f6888f29507fd92913d619a5e6ad33d097e",
+        "type": "commit",
+        "bytes": 288
+      },
+      {
+        "oid": "b5e4ea730e425a8ae335b0acb27bc7f0b908829c",
+        "type": "tree",
+        "bytes": 6544
+      },
+      {
+        "oid": "b5ec35a69bff2d4eb64b46cd06c0ad13625ce0af",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "bc19974c910711f20385d9a40168a0927ec22057",
+        "type": "commit",
+        "bytes": 364
+      },
+      {
+        "oid": "bea962acc068e79a0ae3205a6f411d491006864c",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "c55de9ce461ada36447df1f6866f27815d8b22b3",
+        "type": "blob",
+        "bytes": 680
+      },
+      {
+        "oid": "c5dac7cdf676f28b5091dc14d4e02bc316c20f3f",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "c6315d81349c0106622414d61b7dcd5d6319611c",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "d3671731fb2b9ad0e863642e9f27cbaebf0df418",
+        "type": "tree",
+        "bytes": 3388
+      },
+      {
+        "oid": "d52219661ae7b3540d1ad4726721b992bc54a90a",
+        "type": "blob",
+        "bytes": 7438
+      },
+      {
+        "oid": "d64857ea6d63b506d34371859d10a7164390d855",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "d72870a8e6d63fe114dd012f86fb753bb715746a",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "db9aaf1a868be5d7d13b3e9f062a629eb2d4ba7c",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "dbda2a8999394ad35f7af2b6f1a440ba6c870161",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "dc72910403a029f8015324c2ef26533039ac3b71",
+        "type": "tree",
+        "bytes": 20801
+      },
+      {
+        "oid": "df7a165121f0abada3de013a7b1225523e0dd90a",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "e6c9715818923d70e97c2b72e50fd76c9cd51b77",
+        "type": "tree",
+        "bytes": 4619
+      },
+      {
+        "oid": "e8f36b34df1d400582db3e7526359027220e5cef",
+        "type": "blob",
+        "bytes": 22980
+      },
+      {
+        "oid": "e9b93f3ae1e7b6b5c91bd3e100ad3964864efd81",
+        "type": "blob",
+        "bytes": 193244
+      },
+      {
+        "oid": "e9ddd9c02624430c1aea8be9192779032f44750f",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "ef9e547816db9a58ea4629e574b3bac2d37d3273",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "f4ccc15b007cb693f6497930fb4e68ef669786bb",
+        "type": "tree",
+        "bytes": 1137
+      },
+      {
+        "oid": "fbc69aafb0479c0def71029dc83c003d7a2fa8cb",
+        "type": "blob",
+        "bytes": 11234
+      },
+      {
+        "oid": "fd6035d214ae13fa0b4b9092f2ec176522ffe4b0",
+        "type": "blob",
+        "bytes": 900000
+      },
+      {
+        "oid": "ff155dbbf933453d02a30c863764c39201557523",
+        "type": "blob",
+        "bytes": 10216
+      },
+      {
+        "oid": "ff45cf1399423ca8a4b2deea007e257eda0febe2",
+        "type": "blob",
+        "bytes": 13581
+      }
+    ]
+  },
+  "oversizedIndividualObjects": [],
+  "finalCommit": "51e2813dedb2d71001290f94f100605e0327ead3",
+  "finalTree": "f4ccc15b007cb693f6497930fb4e68ef669786bb",
+  "finalParents": [
+    "dd7cb29e7bd88d7dfe57042f666b3008e3b6c96e",
+    "7b0637cfef2a7e5ef42fbdf0cb214cc35aa31886"
+  ],
+  "finalTreeExactlyEqualToRetainedTarget": true,
+  "originalHeadIsFinalDirectParent": true,
+  "allOriginalTargetObjectsRetained": true,
+  "allSourceBaseObjectsRetained": true,
+  "allMissingAncestryAccountedFor": true,
+  "allStepsWithinRawObjectLimit": true,
+  "allStepsWithinPerObjectLimit": true,
+  "maximumNewReachableObjectBytes": 3988757,
+  "nativeTestBuildInputsEqualToTargetFromFirstStep": true,
+  "totalNewReachableRawObjectBytes": 49646773,
+  "totalNewReachableObjects": 100,
+  "maximumStepRawObjectBytes": 40227048,
+  "checkoutAfter": {
+    "head": "7b0637cfef2a7e5ef42fbdf0cb214cc35aa31886",
+    "symbolicHead": "refs/heads/lot5a-publish-bounded",
+    "index": {
+      "path": ".git/index",
+      "bytes": 1189058,
+      "sha256": "7eab7c8b4e7f356dee96f5d400e796b33a68b432432bbcff5a56bdac94acec6e"
+    },
+    "refsSha256": "2d62a507cbb15bf35d18c6eb5b0c0fde68c887941775fb23cf18369c0d385936",
+    "statusBytes": 0,
+    "statusSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "checkoutUnchanged": true,
+  "finishedAt": "2026-11-10T22:09:14.840247+00:00"
+}

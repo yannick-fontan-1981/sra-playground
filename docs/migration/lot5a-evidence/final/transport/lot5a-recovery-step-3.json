@@ -1,0 +1,19 @@
+{
+  "step": 3,
+  "startedAt": "2026-11-10T22:10:27.617Z",
+  "finishedAt": "2026-11-10T22:10:47.719Z",
+  "planned": {
+    "step": 3,
+    "kind": "evidence",
+    "previousCommit": "83de3943d5942350a6a54b9dc4c508e5b6745b78",
+    "commit": "dd7cb29e7bd88d7dfe57042f666b3008e3b6c96e",
+    "tree": "f4ccc15b007cb693f6497930fb4e68ef669786bb",
+    "rawMissingObjectBytes": 8672711
+  },
+  "source": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+    "commit_sha": "dd7cb29e7bd88d7dfe57042f666b3008e3b6c96e",
+    "archive": "/workspace/sites/sra-lot5-20261110/lot5a-recovery-step-3.tar.gz"
+  }
+}

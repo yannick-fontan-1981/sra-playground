@@ -2,7 +2,7 @@
 
 <!-- LOT5A_CURRENT_START -->
 
-## Jalon prêt à publier : lot 5A, moteur 0.53 et coût global accepté
+## Jalon publié : lot 5A, Site 84, moteur 0.53 et coût global accepté
 
 Le moteur **0.53.0** intègre les publications réelles **Site 82 puis Site 83 / 7A / native 0.52**, en conservant 4A et 3I. Le [reçu de réconciliation](lot5a-evidence/final/published-predecessor-reconciliation.json) vérifie les deux ascendances et l'absence de différence d'entrées d'exécution entre 82 et 83. La référence de coût reste donc le Site 82 annoncé avant mesure. Le gel candidat contient **283 fichiers natifs**, digest `d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f`, dans une archive de **294 fichiers**.
 
@@ -14,7 +14,7 @@ La [validation finale](lot5a-evidence/final/test-expectation-correction/validati
 
 **WEAV niveau 6 reste non résolu.** Le [diagnostic antérieur isolé](lot5a-evidence/weav/native050-delta-diagnostic/result.json), limité aux premières optimisations sur 0.50, s'arrête au quatrième niveau après trois niveaux acquis et 105 actions lorsque l'horloge cumulative atteint sa limite. Il n'inclut ni le partage Frontier final ni le propriétaire 5A ; il ne prouve pas leur gain en jeu. Aucune nouvelle tentative ne remet cette horloge à zéro. Le graphe et ses journaux historiques restent conservés : certaines copies de tables restent proportionnelles à l'historique. Une compaction future doit prouver quelles données ne sont plus consommées et préserver connaissances, réfutations et obligations. Le [contrôle navigateur](lot5a-evidence/final/browser/browser-qa.json) n'a pas pu s'attacher à l'onglet après deux timeouts CDP ; aucun succès UI 0.53 n'est revendiqué.
 
-Le registre atteint **57/76 entrées raccordées, zéro partielle et 19 ouvertes**. L'audit compte **174 composants vérifiés, 145 transferts partiels, 1 050 modules en attente et zéro module entièrement vérifié** ; les six portes de migration globale restent ouvertes. La [fenêtre officielle](lot5a-evidence/performance/window.json) est terminée : **A1/B1/B2/A2, 32 sessions mesurées et 400 actions**, avec huit chauffes et 24 actions exclues comme annoncé. La [revue indépendante Python](lot5a-evidence/performance/owner-growth-review.json) passe **4 669/4 669 contrôles**. Le coût global est **accepté sur 2/2 jeux** sous la règle déclarée ; la publication 5A reste à effectuer.
+Le registre atteint **57/76 entrées raccordées, zéro partielle et 19 ouvertes**. L'audit compte **174 composants vérifiés, 145 transferts partiels, 1 050 modules en attente et zéro module entièrement vérifié** ; les six portes de migration globale restent ouvertes. La [fenêtre officielle](lot5a-evidence/performance/window.json) est terminée : **A1/B1/B2/A2, 32 sessions mesurées et 400 actions**, avec huit chauffes et 24 actions exclues comme annoncé. La [revue indépendante Python](lot5a-evidence/performance/owner-growth-review.json) passe **4 669/4 669 contrôles**. Le coût global est **accepté sur 2/2 jeux** sous la règle déclarée ; la première publication privée 5A est confirmée dans **Site 84**.
 
 <!-- LOT5A_COST_FINAL_START -->
 
@@ -30,6 +30,16 @@ La qualification structurelle **préalable** passe 64/64 contrôles et sa [revue
 L'[intégrité de livraison](lot5a-evidence/final/delivery-integrity.json) vérifie **283 fichiers natifs, 294 membres d'archive, 647 entrées source/tests et 348 entrées de build**, ainsi que les **1 786 références originales inchangées**. Les archives et les grands rapports restent reconstruisibles octet pour octet.
 
 <!-- LOT5A_COST_FINAL_END -->
+
+<!-- LOT5A_PUBLICATION_FINAL_START -->
+
+**La première publication 5A est confirmée dans Site 84**, moteur **0.53.0**, commit **`51e2813dedb2d71001290f94f100605e0327ead3`**, déploiement **`succeeded` le 10 novembre 2026 à 22:11:55 UTC**, accès privé conservé. Le [reçu Sites](lot5a-evidence/final/publication-site84.json) identifie la version, le commit et l'archive déclarée par le serveur. Une clôture documentaire ultérieure conserve exactement ce moteur et son build.
+
+Le [reçu de transport](lot5a-evidence/final/publication-source-transport.json) conserve trois envois initiaux réussis, le refus d'un objet de 39 817 093 octets dépassant la limite de 32 Mio, puis quatre envois correctifs réussis. Aucun Site intermédiaire n'a été déployé. Le JSON est reconstruit depuis 45 morceaux ; le commit complet original et les commits du premier plan restent récupérables dans un bundle Git incrémental exact de 609 621 octets. L'historique natif et les sources déjà envoyées sont conservés dans l'ascendance publiée, sans envoi forcé. La [procédure et la preuve de reconstruction](lot5a-evidence/final/transport/README.md) distinguent cette conservation du transport initial des neuf gzip en 75 parties. Les 75 fichiers des sept archives de déploiement ont des contenus identiques.
+
+**Prochain périmètre de ce fil : 5B, `observed_addressed_material`, puis 5C, `observed_object_binding`.** La réduction du travail historique et la propagation générique des coups obligatoires restent à poursuivre avec des preuves distinctes ; WEAV niveau 6 n'est pas clôturé. Les lots 4 et 7 restent pris en charge dans leurs autres conversations.
+
+<!-- LOT5A_PUBLICATION_FINAL_END -->
 
 <!-- LOT5A_CURRENT_END -->
 
@@ -221,7 +231,7 @@ Une dépendance désigne un contrat réellement consommé. Les numéros indiquen
 | 2 | Stratégie morphologique et fournisseurs communs | Hors compteur | Cycle validé du lot 1, mesures et mémoire courantes | **2A et 2B livrés ; 2C clôturé dans son périmètre annoncé, coût validé avec `0.36.0`** ; fermeture de domaine et parité globale ouvertes |
 | 3 | Mémoire commune et compositions | **0 au registre** | Propriétaire commun, acquisition et contrats de continuation | **3A, 3B, 3E, 3F, 3H et 3I clôturés dans leurs périmètres.** 3C/3D conservent CWSE/SK48 ; 3G garde sa réserve de contribution propre en jeu. **3I / 0.50 : RecurrentSeries et son repli SupportedLine, CONN trois niveaux/21 actions, validation formelle, cinq rejeux, intégrité et coût global acceptés.** Publication confirmée : Site 79. Façade à six branches sur six ; aucune réserve historique effacée. |
 | 4 | Exemples, correspondances et retours discriminants | 2 | Observations, callbacks SRC, gardes et mémoire propre | **4A livré : Site 80 puis clôture documentaire Site 81, native 0.51 ; contribution MIND et coût qualifié vérifiés.** 4B puis 4C restent à réaliser dans leur fil. |
-| 5 | Temps, adressage et liaisons | 2 | Historique public ; contrat de conservation pour les consommateurs concernés | **5A intégré en 0.53 : contrats, boucle commune, régressions et coût global qualifié validés ; publication en préparation.** 5B puis 5C restent à réaliser dans ce fil. |
+| 5 | Temps, adressage et liaisons | 2 | Historique public ; contrat de conservation pour les consommateurs concernés | **5A publié dans Site 84 / 0.53 : contrats, boucle commune, régressions et coût global qualifié validés.** 5B puis 5C restent à réaliser dans ce fil. |
 | 6 | Pièces rigides, cargaisons et stabilisation commune | 4 | Géométrie, contrôles, recherche bornée et interruption | Planifié |
 | 7 | Ateliers et transactions symboliques | 1 | Interfaces mesurées, SRC et mémoire des méthodes | **7A : contrats et boucle commune vérifiés, deux niveaux LKEY ; intégration fonctionnelle 0.52 vérifiée ; coût accepté et publication confirmée dans Site 82.** 7B est en cours dans son checkout distinct. |
 | 8 | Accès conditionné et routage de branches | 2 | Calibration des commandes et préfixes gardés | Planifié |
@@ -578,11 +588,11 @@ La recherche finie coopérative conserve explicitement l'incomplétude en cas d'
 
 ## Lot 5 : temps, adressage et objets
 
-**État de ce fil :** 5A est intégré, fonctionnellement validé et son coût global qualifié est accepté dans le gel 0.53 ; la publication reste à finaliser. 5B et 5C ne sont pas implémentés par cette livraison.
+**État de ce fil :** 5A est publié dans Site 84, fonctionnellement validé et son coût global qualifié est accepté dans le gel 0.53. 5B et 5C ne sont pas implémentés par cette livraison.
 
 | Sous-lot | Périmètre | État et prochaine étape |
 | --- | --- | --- |
-| **5A** | `linked_temporal_preparation` | Propriétaire unique, contact lié, acquisition passive des phases, chemins bornés, restauration et influence du retour vérifiés. Qualification des graphes, fenêtre officielle et revue du coût terminées ; finaliser la publication privée. |
+| **5A** | `linked_temporal_preparation` | Propriétaire unique, contact lié, acquisition passive des phases, chemins bornés, restauration et influence du retour vérifiés. Qualification des graphes, fenêtre officielle, revue du coût et première publication privée Site 84 terminées. |
 | **5B** | `observed_addressed_material` | Prochaine réalisation : adressage observé lié à l'objet et au contexte courants, mise à jour après retour, invalidation de l'adresse devenue ambiguë ou périmée. |
 | **5C** | `observed_object_binding` | Après les contrats consommés : conservation du parent, liaison observée, effet attesté, réfutation ou frontière ; restauration des obligations et influence sur la décision suivante. |
 | **Sessions longues** | Delta, mémoire active et coups obligatoires | Les premières copies répétées sont corrigées. Restent la compaction démontrée des données devenues inutiles, les coûts encore liés à l'historique et la propagation générale des domaines réduits à un seul choix. WEAV niveau 6 reste une réserve distincte. |
