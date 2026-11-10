@@ -73,6 +73,9 @@ Cette réduction d’allocations ne constitue pas une mesure de durée.
   [revue des runners](validation-runner-source-review.md).
 - [Commandes de coût](README-commands.md),
   [préparation des déclarations](README-preparation.md).
+- [Finalisation de la readiness](README-readiness.md),
+  [revue indépendante du lecteur](readiness-source-review.md). Sa préparation
+  et sa revue textuelle ne constituent pas une readiness exécutée.
 - [Revue des analyseurs de coût](cost-tool-source-review.md),
   [revue des finaliseurs](cost-preparation-source-review.md),
   [contrôle syntaxique borné](diagnostic/cost-preparation-syntax.json).

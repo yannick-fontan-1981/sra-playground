@@ -167,6 +167,11 @@ réelles. La readiness doit conserver les empreintes de la déclaration, du
 contrat, du préflight et des deux analyseurs ; elle doit précéder strictement le
 début de la fenêtre. Les helpers n'en fabriquent aucune.
 
+Le [lecteur de readiness](README-readiness.md), préparé séparément, peut lier
+ces preuves après leur achèvement effectif. Il conserve les réserves POLA et
+navigateur et autorise seulement la future mesure ; sa présence ne constitue
+pas une readiness.
+
 Un nouveau calme explicite de tous les lots concurrents est nécessaire pour
 les coûts réels. La simple existence du verrou ou d'un ancien reçu de calme ne
 suffit pas. Après cette coordination et readiness complète, le responsable peut
