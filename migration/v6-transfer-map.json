@@ -4377,6 +4377,27 @@
         "tests/v6-feedback-sequences-reference.test.ts"
       ],
       "notes": "Only the V5 closure consumed by V6 Feedback finite.py is transferred: constraint_filter PROPAGATE and trial_partitions DOMAIN with feedback accounting. Protocol fitting, identification policies, transactions and the rest of this V5 module remain outside the port."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/relative_arrangements/family.py",
+        "agents/yf_arc3_v6/morphology_policy/relative_arrangements/geometry.py",
+        "agents/yf_arc3_v6/morphology_policy/relative_arrangements/planner.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-relative-arrangements.ts",
+        "src/logos-engine/v6-relative-arrangements-geometry.ts",
+        "src/logos-engine/v6-relative-arrangements-planner.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-relative-arrangements-reference.py",
+        "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+        "tests/v6-relative-arrangements-reference.test.ts",
+        "tests/v6-relative-arrangements-integration.test.ts"
+      ],
+      "notes": "Lot4B transfers the three own RelativeArrangements modules through the existing compiled SRC. Unchanged-original public synthetic fixtures compare complete offers, measured geometry, ordered assignments/options, guards, acquisitions, five source state fields and restored decisions. Selected acquisition binds its initial observation; recognized null offers stop only the remaining window-constraint group including symmetry, while unknown interfaces leave fallbacks available. Only failed set transport order is normalized. The local module proof does not claim complete original-caller parity, unrestricted input equivalence or live game contribution."
     }
   ],
   "scopeNotes": [

@@ -337,3 +337,13 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4a-evidence/performance-integrated/owner-graphs-A-01.json.gz
 /docs/migration/lot4a-evidence/performance-integrated/owner-graphs-B-01.json.gz
+
+# Retained lot4B development and case execution logs
+!/docs/migration/lot4b-evidence/**/*.log
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot4b-evidence/development/tria-baseline-site81/tria-campaign.json.gz
+/docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/tests/fixtures/v6-relative-arrangements-reference.json.gz

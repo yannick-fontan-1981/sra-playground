@@ -4,10 +4,10 @@
   "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
   "implementation": "logos-engine.typescript.v6.native-migration/0.51.0",
   "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
-  "connected": 55,
+  "connected": 56,
   "partiallyConnected": 0,
   "declared": 76,
-  "percent": 72.4,
+  "percent": 73.7,
   "groups": [
     {
       "id": "goal_access",
@@ -80,7 +80,7 @@
     {
       "id": "window_constraints",
       "declared": 21,
-      "connected": 20,
+      "connected": 21,
       "partiallyConnected": 0,
       "entries": [
         {
@@ -165,8 +165,8 @@
         },
         {
           "question": "relative_arrangement",
-          "family": null,
-          "status": "pending"
+          "family": "relative_arrangements",
+          "status": "connected"
         },
         {
           "question": "multiscale_constraints",
@@ -470,6 +470,7 @@
         "public_occurrence_recall",
         "public_occurrence_recall",
         "public_occurrence_recall",
+        "relative_arrangements",
         "window_constraints",
         "public_occurrence_recall",
         "periodic_sums",
@@ -493,6 +494,7 @@
         "rooted_quota_composition",
         "framed_window_composition",
         "coupled_prefix_reference",
+        "relative_arrangement",
         null,
         "recurrent_series",
         null,

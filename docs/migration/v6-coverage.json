@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 166,
+    "componentVerifiedModules": 169,
     "partiallyTransferredModules": 142,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1061,
+    "pendingModules": 1058,
     "strategyFamilies": 16
   },
   "families": [
@@ -93689,9 +93689,19 @@
           "endLine": 71
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-relative-arrangements.ts",
+        "src/logos-engine/v6-relative-arrangements-geometry.ts",
+        "src/logos-engine/v6-relative-arrangements-planner.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-relative-arrangements-reference.py",
+        "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+        "tests/v6-relative-arrangements-reference.test.ts",
+        "tests/v6-relative-arrangements-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/relative_arrangements/geometry.py",
@@ -93736,9 +93746,19 @@
           "endLine": 114
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-relative-arrangements.ts",
+        "src/logos-engine/v6-relative-arrangements-geometry.ts",
+        "src/logos-engine/v6-relative-arrangements-planner.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-relative-arrangements-reference.py",
+        "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+        "tests/v6-relative-arrangements-reference.test.ts",
+        "tests/v6-relative-arrangements-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/relative_arrangements/planner.py",
@@ -93759,9 +93779,19 @@
           "endLine": 67
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-relative-arrangements.ts",
+        "src/logos-engine/v6-relative-arrangements-geometry.ts",
+        "src/logos-engine/v6-relative-arrangements-planner.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-relative-arrangements-reference.py",
+        "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+        "tests/v6-relative-arrangements-reference.test.ts",
+        "tests/v6-relative-arrangements-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/selected_rigid/__init__.py",
