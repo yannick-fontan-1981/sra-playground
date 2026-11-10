@@ -1,0 +1,131 @@
+{
+  "schema": "logos-engine.recorded-regression-streamlog-recovery-plan.v1",
+  "recordedAt": "2026-11-10T18:39:02.827822+00:00",
+  "status": "prepared_not_executed",
+  "previousAttempt": {
+    "status": "incomplete_process_handle_unavailable",
+    "preflight": {
+      "path": "docs/migration/lot3i-evidence/final/weav-memory-retry/preflight.json",
+      "bytes": 1390,
+      "sha256": "e493c1df0492f4cda7f087ca519fc5d9b550d9816a06df34095fd89de011b4b5"
+    },
+    "hostPreparation": {
+      "path": "docs/migration/lot3i-evidence/final/weav-memory-retry/regressions/weav-049-memory-efficient-host-preparation.json",
+      "bytes": 19259,
+      "sha256": "d75deeff8be8db9d946661f7f271392065aa7a9dcaadcd3457eb9071669a40b9"
+    },
+    "exitCode": null,
+    "cause": "Unknown; no final process receipt or raw journal survived the prior driver temporary output. No OOM classification is inferred."
+  },
+  "hostReleasePreviouslyObserved": {
+    "baselineRootCollectedBeforeHarnessImport": true,
+    "expectedActions": 81,
+    "completePublicPackets": 82,
+    "heapUsedBeforeRelease": 581457192,
+    "heapUsedAfterRelease": 12723560
+  },
+  "preservedEarlierFailures": [
+    {
+      "path": "docs/migration/lot3i-evidence/final/regressions/weav-049-execution.json",
+      "bytes": 1573,
+      "sha256": "7ff21722fa9d1ead445db13b1870a615f023e8796c0c918c235b3d5e70caf8b5"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/regressions/weav-049-output.log.gz",
+      "bytes": 8020,
+      "sha256": "01b5a48c5481e64ca5be93d6fd53ecbc2101692a715c170799298db0845f7a2d"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/weav-retry/regressions/weav-049-isolated-execution.json",
+      "bytes": 1621,
+      "sha256": "f77765990d011e477ebe1725bcbef8beab1d9ebeda309a6f144ea813dce1ea34"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/weav-retry/regressions/weav-049-isolated-output.log.gz",
+      "bytes": 2928,
+      "sha256": "3ce7d041b1b91a9cfa75ca8b5b416f5fa55d171af60f5a297e1a242c93d4d41a"
+    }
+  ],
+  "command": [
+    "python",
+    "scripts/run-released-public-regressions-streamlog.py",
+    "docs/migration/lot3i-evidence/weav-streamlog-recovery-cases.json",
+    "docs/migration/lot3i-evidence/final/weav-memory-retry-v2",
+    "--source-manifest",
+    "docs/migration/lot3i-evidence/final/source-manifest.json",
+    "--node-old-space-mib",
+    "1536",
+    "--timeout-seconds",
+    "2400"
+  ],
+  "caseManifest": {
+    "path": "docs/migration/lot3i-evidence/weav-streamlog-recovery-cases.json",
+    "bytes": 1210,
+    "sha256": "bf8c6275205154b0b277150af667c52597dfd7a3d7e045fa4d7f606565fc32d6"
+  },
+  "sourceManifest": {
+    "path": "docs/migration/lot3i-evidence/final/source-manifest.json",
+    "bytes": 32014,
+    "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd"
+  },
+  "newDriver": {
+    "path": "scripts/run-released-public-regressions-streamlog.py",
+    "bytes": 15626,
+    "sha256": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9"
+  },
+  "unchangedDriverHelpers": {
+    "path": "scripts/run-released-public-regressions.py",
+    "bytes": 14089,
+    "sha256": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909"
+  },
+  "unchangedReleasedBaselineHost": {
+    "path": "scripts/replay-public-regression-released-baseline.mjs",
+    "bytes": 6355,
+    "sha256": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164"
+  },
+  "unchangedHarness": {
+    "path": "tests/helpers/v6-live-game-campaign.ts",
+    "bytes": 66724,
+    "sha256": "b0acd3a5a3a7e1293745c3a5843231eda7929589a7ce0c5fe402fc30d390d257"
+  },
+  "unchangedComparator": {
+    "path": "scripts/compare-v54-regressions.py",
+    "bytes": 18166,
+    "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0"
+  },
+  "durability": {
+    "rawNodeOutput": "direct child file descriptor to persistent *-output.raw.log",
+    "startedReceipt": "immutable *-execution-started.json before Popen",
+    "currentReceipt": "atomic *-execution.json every5seconds, including PID,last progress,raw bytes and VmRSS/VmHWM samples",
+    "stdout": "compact progress maximum15-second heartbeat; display BrokenPipe does not discard raw output",
+    "finish": "catchable interruptions stop the child and finally retain exit metadata and compressed copy; raw file remains",
+    "uncatchableSignal": "SIGKILL cannot execute finally; immutable started receipt,current receipt and raw log remain incomplete evidence"
+  },
+  "memoryPolicy": {
+    "nodeOldSpaceMiB": 1536,
+    "nodeFlags": [
+      "--expose-gc",
+      "--max-old-space-size=1536"
+    ],
+    "releasedBaselineHostUnchanged": true,
+    "prevalidationProcessExitsBeforeNode": true,
+    "comparisonProcessStartsAfterNodeExit": true,
+    "fullHarnessReportRetained": true,
+    "reportSerializationUnchanged": true,
+    "productionBudgetsChanged": false,
+    "officialCostEnvironmentChanged": false
+  },
+  "expected": {
+    "id": "weav-049-streamlog",
+    "commands": 81,
+    "completePublicPackets": 82,
+    "comparisonChecks": 17,
+    "summary": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/regression-summary.json"
+  },
+  "verification": {
+    "pythonSyntax": "passed",
+    "additionalReplayOrHeavyCalculationExecuted": false,
+    "hostCollectionProof": "previous actual preparation receipt retained"
+  },
+  "reportMemoryAssessment": "The frozen harness retains full prefix/checkpoint evidence and source-call snapshots; it may grow substantially, and the unchanged host additionally serializes the full report at completion. Neither the size nor an OOM of the third run is established. Durable raw diagnostics and process RSS/HWM samples will distinguish an observed heap failure from process/connection interruption. Streaming or draining report arrays is not authorized by this retry and would require separate evidence-preserving design."
+}

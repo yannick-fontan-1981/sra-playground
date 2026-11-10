@@ -398,6 +398,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const crossedPrefixEvents = (series.events as R[]).filter(event =>
             ['crossed_prefix_state', 'crossed_prefix_pair', 'crossed_prefix_input'].includes(event.kind));
           const previousCrossedPrefixCount = report.prefixes.at(-1)?.sharedSeries.crossedPrefixEventCount ?? 0;
+          const recurrentSeriesEvents = (series.events as R[]).filter(event =>
+            ['repeated_line_trial', 'repeated_line_scored', 'supported_insertion_observation',
+              'supported_insertion_order', 'supported_line_refutation'].includes(event.kind));
+          const previousRecurrentSeriesCount = report.prefixes.at(-1)?.sharedSeries.recurrentSeriesEventCount ?? 0;
           const queuedModels = (series.events as R[]).filter(event => event.kind === 'observed_queue_field_model');
           const catalogueEvents = (series.events as R[]).filter(event =>
             ['catalogue_observation', 'catalogue_response', 'catalogue_field_input_observed'].includes(event.kind));
@@ -494,6 +498,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               ? { observedCrossedPrefix: { proposal: evidence.proposal,
                     stateNode: 'family_state:public_occurrence_recall',
                     qualification: 'Passive capture only. Production measures the field/reference/controllers, proposes an experiment and acquires its actual response in the single ancestral owner. This recorder supplies no action, learned state, crossing law or expected return.' } } : {}),
+            ...(evidence.proposal.line_plan || evidence.proposal.supported_line_plan
+              ? { observedRecurrentSeries: { proposal: evidence.proposal,
+                    stateNode: 'family_state:public_occurrence_recall',
+                    qualification: 'Passive capture only. Production measures repeated fields, retains actual line and insertion responses with their public packet order, and bounds conditional search. This recorder supplies no action, role, goal, acquired memory or expected return.' } } : {}),
             ...(evidence.proposal.reference_population_plan
               ? { observedReferencePopulation: { proposal: evidence.proposal,
                     stateNode: 'family_state:public_occurrence_recall',
@@ -663,6 +671,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               ...(crossedPrefixEvents.length || evidence.proposal.crossed_prefix_plan
                 ? { crossedPrefixEventCount: crossedPrefixEvents.length,
                     crossedPrefixAcquiredEvents: crossedPrefixEvents.slice(previousCrossedPrefixCount) } : {}),
+              ...(recurrentSeriesEvents.length || evidence.proposal.line_plan || evidence.proposal.supported_line_plan
+                ? { recurrentSeriesEventCount: recurrentSeriesEvents.length,
+                    recurrentSeriesAcquiredEvents: recurrentSeriesEvents.slice(previousRecurrentSeriesCount) } : {}),
               ...(referencePopulationEvents.length || evidence.proposal.reference_population_plan
                 ? { referencePopulationEventCount: referencePopulationEvents.length,
                     referencePopulationAcquiredEvents: referencePopulationEvents.slice(previousReferencePopulationCount) } : {}),

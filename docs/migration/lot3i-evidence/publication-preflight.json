@@ -1,0 +1,478 @@
+{
+  "schema": "logos-engine.lot3i.publication-inputs.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T16:01:06.985581-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "generator": {
+    "path": "docs/migration/lot3i-evidence/verify-publication-inputs.py",
+    "bytes": 37687,
+    "sha256": "64717787e76841636aa97bf4e070fad4328a9eefd113d3095da5f152dc98dfa1"
+  },
+  "nativeVersion": "0.50.0",
+  "nativeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+  "baselineSiteVersion": 78,
+  "baselineNativeVersion": "0.49.0",
+  "baselineCommit": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+  "checkedInventories": {
+    "native": 270,
+    "frozenArchiveInputs": 281,
+    "sourceAndTests": 619,
+    "buildInputs": 335,
+    "regressionExecutionInputs": 22
+  },
+  "globalCostAccepted": true,
+  "globalCostStatus": "accepted_under_user_global_rule",
+  "finalFormalTestCounts": {
+    "tests": 3225,
+    "pass": 3225,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "formalTestFiles": 76,
+  "formalValidationDirectory": "docs/migration/lot3i-evidence/final/validation",
+  "gameContributionStatus": "repeated_and_supported_selected_own_trajectory_and_all_returns_verified_with_component_ablations",
+  "integratedEvidenceKind": "two_cold_controlled_repeated_line_common_caller_sessions",
+  "integratedCheckGroups": 18,
+  "syntheticCommonScope": {
+    "synthetic": true,
+    "coldControllerSessions": 2,
+    "controlledReturnedCommands": 2,
+    "ownControlledReturnedCommands": 2,
+    "priorSourceControlledReturns": 0,
+    "commonAcquiredTransitions": 2,
+    "furtherReleasedCommandsNotReturned": 2,
+    "liveGameSessions": 0,
+    "liveGameActions": 0,
+    "liveGameLevelCompletions": 0,
+    "liveGameVictories": 0,
+    "sourcePythonAgentExecutions": 0,
+    "learnedCheckpointsInjected": 0,
+    "fullCallerParityClaimed": false,
+    "fullCallerAblationExecuted": false,
+    "supportedPreparationCompleteCallerClaimed": false
+  },
+  "connResolutionStatus": "target_reached",
+  "connActual": {
+    "actions": 21,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 45.058072626999994,
+    "prefixes": 21,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 21,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 50,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 22
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 29
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 17
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 19
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 3
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 14
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 30
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 21,
+      "resume": 20
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.50.0"
+  },
+  "connCaseClock": {
+    "startedAt": "2026-11-10T14:44:53.485291-03:00",
+    "workFinishedAt": "2026-11-10T15:01:48.249103-03:00",
+    "previousCumulativeSeconds": 0,
+    "currentIntervalSeconds": 1014.763812,
+    "cumulativeSeconds": 1014.763812,
+    "maximumCumulativeSeconds": 2400,
+    "remainingSeconds": 1385.2361879999999,
+    "clockReset": false,
+    "exhausted": false,
+    "furtherWorkThisDelivery": false,
+    "qualification": "Conservatively charged from the initial public scan, before case selection. Entire interval includes baseline, candidate, source/native comparisons, ablations, browser QA and case review with no pause/reset. Subsequent release transport, documentation, regressions of other games, integrity and STCK/SMLP costs are release work. Future CONN diagnosis must resume this value."
+  },
+  "browserStatus": "passed",
+  "connSourceParity": {
+    "receipt": {
+      "path": "docs/migration/lot3i-evidence/diagnostic/conn-public-parity.json",
+      "bytes": 224507,
+      "sha256": "30527c4edc4f49afa42be6e17b32a6fd7ae7b4532e25fdd1efce5125edd16ec2"
+    },
+    "sourceReceipt": {
+      "path": "docs/migration/lot3i-evidence/diagnostic/conn-public-source-parity.json.gz",
+      "bytes": 690175,
+      "sha256": "14651e04e1a0af86c2673e919cd64516cfe711976d333f2afee63e3d9b34a522"
+    },
+    "checkedCount": 1361,
+    "exactOriginal": {
+      "selectedPrefixes": 14,
+      "returns": 21,
+      "selectedReturns": 14,
+      "ownEvents": 34,
+      "restorations": 35,
+      "coldStart": true,
+      "primedFromCapturedProposalMemory": false,
+      "completeSelectedOwnTrajectoryParity": true,
+      "completeAllReturnAcquisitionParity": true,
+      "fullInheritedCallerParity": false
+    }
+  },
+  "connComponentContribution": {
+    "interventions": 84,
+    "executed": 84,
+    "actionOrRefusalChanges": 33,
+    "decisionChanges": 35,
+    "negativeOrUnchanged": 51,
+    "componentAblation": true,
+    "fullCallerAblation": false
+  },
+  "migrationAuditResolution": {
+    "path": "docs/migration/lot3i-evidence/final/validation/migration-audit-resolution.json",
+    "bytes": 1620,
+    "sha256": "46bcbc98ebaee6a839ec5280cae19f8d37590c3c14bb36a8f68a585195f5fb42"
+  },
+  "regressionRecovery": {
+    "status": "passed",
+    "retainedFailedAttempts": [
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/weav-049-execution.json",
+        "bytes": 1573,
+        "sha256": "7ff21722fa9d1ead445db13b1870a615f023e8796c0c918c235b3d5e70caf8b5"
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-retry/regressions/weav-049-isolated-execution.json",
+        "bytes": 1621,
+        "sha256": "f77765990d011e477ebe1725bcbef8beab1d9ebeda309a6f144ea813dce1ea34"
+      }
+    ],
+    "retainedFailureExitCodes": [
+      -9,
+      -6
+    ],
+    "secondAttemptDeclaredNodeOldSpaceMiB": 768,
+    "retainedIncompleteAttempts": [
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry/interruption-observation.json",
+        "bytes": 1298,
+        "sha256": "2e3efef071845d9208a8384e76b6c3b022b91ff939fd1b8aa4b443e49ee3c787"
+      }
+    ],
+    "retainedIncompleteAttemptStatuses": [
+      "incomplete_process_handle_unavailable"
+    ],
+    "incompleteAttemptExitStatusKnown": false,
+    "incompleteAttemptCauseEstablished": false,
+    "incompleteHostPreparation": {
+      "path": "docs/migration/lot3i-evidence/final/weav-memory-retry/regressions/weav-049-memory-efficient-host-preparation.json",
+      "bytes": 19259,
+      "sha256": "d75deeff8be8db9d946661f7f271392065aa7a9dcaadcd3457eb9071669a40b9"
+    },
+    "incompleteSubprocessPreflight": {
+      "path": "docs/migration/lot3i-evidence/final/weav-memory-retry/preflight.json",
+      "bytes": 1390,
+      "sha256": "e493c1df0492f4cda7f087ca519fc5d9b550d9816a06df34095fd89de011b4b5"
+    },
+    "finalAttemptNumber": 4,
+    "finalExecution": {
+      "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-execution.json",
+      "bytes": 17530,
+      "sha256": "412c2bf13ddf129d9df96da14681c859de0bba7cdd5cd5bd337c9c7787cd1392"
+    },
+    "strictComparison": {
+      "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-comparison.json",
+      "sha256": "796968472df6159bc18348ca6457c138d2fc7804226bbb613a6a95e889f0ccc3",
+      "bytes": 11036
+    },
+    "startedReceipt": {
+      "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-execution-started.json",
+      "bytes": 3154,
+      "sha256": "e4e6ba5b85f981772848d5d551406117c3e7794e0df293dd840bedbcc211afbc"
+    },
+    "retainedOutputRaw": {
+      "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-output.raw.log",
+      "sha256": "1648a43eee4675b1808a0f5cb9072e463b4ae72ad324db90b775cf8359130145",
+      "bytes": 268633
+    },
+    "retainedOutputCompressed": {
+      "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-output.log.gz",
+      "sha256": "2f8e585c4a2d5f464a874bbe7713b189866a3f6e176d1c1274c7fa37ed5a560b",
+      "bytes": 10252
+    },
+    "rawOutputMatchesCompressed": true,
+    "nodeExitObserved": true,
+    "hostPreparation": {
+      "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-host-preparation.json",
+      "bytes": 19259,
+      "sha256": "9ef86bc04ebf5abec6f9e76fb8f797babb9b34f40c3b8e4b70a23b8846120a3b"
+    },
+    "subprocessPreflight": {
+      "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/preflight.json",
+      "bytes": 1386,
+      "sha256": "79f7b18e0547b2fe89993f61fddb70033fe81f74585b5ac2bf8dc4bb191f3f50"
+    },
+    "recovery": {
+      "path": "docs/migration/lot3i-evidence/regression-recovery.json",
+      "bytes": 2651,
+      "sha256": "4c3d83d83228bdf28c6a0217d7b5e44eafa6d12986b5f09a49d8b29b1ef81b9b"
+    },
+    "strictChecksPassed": 17,
+    "qualification": "Both failures remain retained. The first signal9 termination is not asserted to have a proved memory cause; the second log records heap exhaustion. The third invocation remains incomplete with an unavailable process handle, no retained exit status and no established cause; only its completed prevalidation and host preparation are credited. The fourth invocation must complete every unchanged strict comparison on identical archived baseline and public-trace bytes before this verification can pass."
+  },
+  "strictRegressionCases": 5,
+  "strictRegressionChecks": 85,
+  "coordinatedIsolation": {
+    "path": "docs/migration/lot3i-evidence/performance/coordinated-isolation.json",
+    "bytes": 7397,
+    "sha256": "d6fc16a0860d340a8a260466ec89aff94c3e08f4a3033844448ecef2182dc1f4"
+  },
+  "publicationQualification": "functional_evidence_verified_global_cost_accepted",
+  "optionalIndependentCostReview": null,
+  "inputs": [
+    {
+      "path": "docs/migration/lot3i-evidence/baseline/provenance.json",
+      "bytes": 33205,
+      "sha256": "b943f699370b3b353b8b2865b2d8fe27abb2a325bbea48d86c962cd5d575b1bb"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/source-manifest.json",
+      "bytes": 32014,
+      "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/source-archive.json",
+      "bytes": 33645,
+      "sha256": "c4c99644a7140026703bf865ff7b81ffa075e2316b1ce0fc82f21a216251055a"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/validation/delta-tests-run.json",
+      "bytes": 114673,
+      "sha256": "f250f63d2ff9d4c209d711c19dda2c2691b4b0b1bb4d217b859d8e25cef0cd01"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/validation/checks-run.json",
+      "bytes": 74576,
+      "sha256": "48277595d32f6569e0c5711628270bba36a5908971bf8d99ce20388ffe21d669"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/regressions/regression-summary.json",
+      "bytes": 123289,
+      "sha256": "3ffddb4d4bb4786a7218f27d95f7db8d00afa94dd20e75573c6077e1252565a9"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/browser/browser-qa.json",
+      "bytes": 2678,
+      "sha256": "b3bff0a23caa446a2ef7d0fe9abfed6dc6666fe022d967b7035ae34a8f168974"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/recurrent-series-common-loop.json.gz",
+      "bytes": 107316,
+      "sha256": "8b87e8412a77d1aa285775ef5599c0176db038f25a9a56db664fb332b1f295c8"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/recurrent-series-validation-scope.json",
+      "bytes": 2453,
+      "sha256": "61ad2236ec821da0cee25be12ef49914503061cb4cfcf3346b3249dbc1cafbe8"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-resolution.json",
+      "bytes": 9586,
+      "sha256": "63a6aee4aaa332ac49a932d1e8d44dbbb39ad14e7abb1097a817e48c0f1bea71"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/delivery-integrity.json",
+      "bytes": 9119,
+      "sha256": "250e11278dac5a627ffd3736d6ae9d8496efd321d20aa888311b4e10ca90a6f7"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/readiness.json",
+      "bytes": 14149,
+      "sha256": "8c87e74ecc7f63309d3bc445e245db5954527067e81388c37394ed5808ea339a"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/window.json",
+      "bytes": 10160,
+      "sha256": "546f808271364643b26b27bf912d6c44b2061adc8bb38e7c7bb6d6efbf4fc919"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/global-budget-policy.json",
+      "bytes": 2011,
+      "sha256": "73cb36faac8bd0e49c83ccb808dc9bc71d13fad2607a917c0f886199d336e89e"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/global-budget-decision.json",
+      "bytes": 29231,
+      "sha256": "c4e8a58041581e8c4ee26dc9a09508ece031442d8d99591a641695bfec423dec"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/consolidation-review.json",
+      "bytes": 44697,
+      "sha256": "ed867f0a395f1de8c633c3e1cab0836bf1aaf5a181d315944081846055ee04fd"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/coordinated-isolation.json",
+      "bytes": 7397,
+      "sha256": "d6fc16a0860d340a8a260466ec89aff94c3e08f4a3033844448ecef2182dc1f4"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/other-lane-quiet-acknowledgement.json",
+      "bytes": 1851,
+      "sha256": "ffe085a10d1bb65888eb032e85ae00d6e0930f7ec6dfe5f96e42d30cf013caf6"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/performance/results.md",
+      "bytes": 30763,
+      "sha256": "d92421a89543d203585c2a1d323baf29e28e50f11b73b595251f48dadaa92271"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/README.md",
+      "bytes": 18054,
+      "sha256": "5fbe05a45c0b528c8b4aeaf2cd4c3c69e0aec1329a5649448f7768987f02c398"
+    },
+    {
+      "path": "docs/migration/lot3i-recurrent-series.md",
+      "bytes": 30136,
+      "sha256": "dbd39ecc4526f29b977e028cff656fcd177088eaae8ce6d1e9483e5a88318e16"
+    },
+    {
+      "path": "docs/migration/lot3i-recurrent-series-lineage.md",
+      "bytes": 22866,
+      "sha256": "d95656de7bf27dee695b6bd7e451b6ebfd8535095e95251a862b41feed156e51"
+    },
+    {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "bytes": 119387,
+      "sha256": "f4f7c979449e9397219b4aaf619d56de409393d40e26f545e3154a5f9bbf974f"
+    },
+    {
+      "path": "docs/migration/v6-native-transfer.md",
+      "bytes": 174595,
+      "sha256": "2b937fe9f47e518c99fd4299a4f791764072d394540c90542b3d15cbbcfeaeea"
+    },
+    {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "bytes": 18450,
+      "sha256": "191d1c7c133bca27e808396d69aacf3458c023190a23961a0b02021cc9afb0db"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/conn-selection.json",
+      "bytes": 3099,
+      "sha256": "5f8c293fe4ff440a0167b08f04551b90608ffa4f609e6c15cda73e1b9309ea98"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/diagnostic/conn-public-parity.json",
+      "bytes": 224507,
+      "sha256": "30527c4edc4f49afa42be6e17b32a6fd7ae7b4532e25fdd1efce5125edd16ec2"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/diagnostic/conn-public-source-parity.json.gz",
+      "bytes": 690175,
+      "sha256": "14651e04e1a0af86c2673e919cd64516cfe711976d333f2afee63e3d9b34a522"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/validation/migration-audit-resolution.json",
+      "bytes": 1620,
+      "sha256": "46bcbc98ebaee6a839ec5280cae19f8d37590c3c14bb36a8f68a585195f5fb42"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/regressions/regression-summary-interrupted.json",
+      "bytes": 93599,
+      "sha256": "c198464bd121be3c129e62986c8558b6f65c46310325764b0ca483d667b5a7e5"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/weav-retry/regressions/regression-summary.json",
+      "bytes": 70939,
+      "sha256": "3fec12632710bbcb25cd6a020cc2539f3361888974c72c3e1f9a6486d1630be2"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/weav-memory-retry/interruption-observation.json",
+      "bytes": 1298,
+      "sha256": "2e3efef071845d9208a8384e76b6c3b022b91ff939fd1b8aa4b443e49ee3c787"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/regression-summary.json",
+      "bytes": 90744,
+      "sha256": "88c2d6d642f06f3e6cd2b77b603c158e1920e57c234924d151ea23c806ec2f53"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/weav-recovery-plan.json",
+      "bytes": 1569,
+      "sha256": "65cab03388bc9a7670bb5cc1c7d5f973783f2799ce8da4c1ce00d650b0f3180d"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/weav-memory-recovery-plan.json",
+      "bytes": 5309,
+      "sha256": "e840cfea0d96e2f196fae64ef5db4ecbabd104f1bfca470b2bd0cdf4fc693e43"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/weav-streamlog-recovery-plan.json",
+      "bytes": 5885,
+      "sha256": "5b0058893fa6bbbc02a1219f4f8a0fcf28c09321da30b4c9f2c38ab4e58df566"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/regression-recovery.json",
+      "bytes": 2651,
+      "sha256": "4c3d83d83228bdf28c6a0217d7b5e44eafa6d12986b5f09a49d8b29b1ef81b9b"
+    }
+  ],
+  "qualification": "Final retained-input verification only; no producer is rerun. The actual 3225-test/76-file receipt, five checks and separate resolved migration audit are preserved. The two-cold-session/18-group synthetic proof has two own returned commands and zero live game actions. CONN actual contribution and its unchanged 1014.763812-second cumulative clock remain separate. All five strict recorded regressions must complete 85 checks; both WEAV failures and the incomplete third invocation remain retained, and only the fourth actual complete recovery can satisfy the strict gate. No exit status or memory cause is inferred for the third invocation. Cost rejection is accepted here only as an explicit qualified publication outcome; no threshold, phase or session is changed. Full inherited-caller parity and whole migration closure are not claimed."
+}

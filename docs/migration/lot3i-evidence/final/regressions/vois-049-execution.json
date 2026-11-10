@@ -1,0 +1,147 @@
+{
+  "case": "vois-049",
+  "game": "VOIS",
+  "mode": "recorded-public-replay",
+  "command": [
+    "node",
+    "scripts/replay-v53-public-regression.mjs",
+    "docs/migration/lot3h-evidence/final/regressions/vois-048-replay.json.gz",
+    "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+    "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz"
+  ],
+  "startedAt": "2026-11-10T17:56:23.559472+00:00",
+  "finishedAt": "2026-11-10T17:58:44.401481+00:00",
+  "elapsedSeconds": 140.84200961300667,
+  "exitCode": 0,
+  "timeoutSeconds": 2400,
+  "timedOut": false,
+  "baseline": {
+    "path": "docs/migration/lot3h-evidence/final/regressions/vois-048-replay.json.gz",
+    "sha256": "2d130642dab5cd2b0f5660a692fa4d9e7620ccbc6743d246293c913ce0ebec96",
+    "bytes": 9022393
+  },
+  "trace": {
+    "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+    "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+    "bytes": 19976
+  },
+  "output": {
+    "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-output.log.gz",
+    "sha256": "401a9deba6ad9d7329bdd72c506360f7d4ead4821cee2ab6339ff13ad3980b9e",
+    "bytes": 7385
+  },
+  "passed": true,
+  "report": {
+    "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz",
+    "sha256": "c0e10237ef6e955675ccbd73bc6828d963ac6b67a752f682b768a537b7624378",
+    "bytes": 9022543
+  },
+  "status": "passed",
+  "actions": 78,
+  "prefixes": 42,
+  "final": {
+    "actions": 78,
+    "levelsCompleted": 3,
+    "level": 4,
+    "state": "NOT_FINISHED",
+    "status": "stopped",
+    "reason": "target_levels_completed",
+    "activeSeconds": 115.46699503900005,
+    "prefixes": 42,
+    "caller": {
+      "enabled": true,
+      "acquiredTransitions": 78,
+      "boundaryReplays": 2,
+      "goalEvents": 3,
+      "frontierDeltas": 157,
+      "components": {
+        "goal": {
+          "id": "caller:goal",
+          "revision": 43
+        },
+        "frontier": {
+          "id": "caller:frontier",
+          "revision": 43
+        },
+        "view": {
+          "id": "caller:view",
+          "revision": 34
+        },
+        "attention": {
+          "id": "caller:attention",
+          "revision": 1
+        },
+        "points": {
+          "id": "caller:points",
+          "revision": 30
+        },
+        "displays": {
+          "id": "caller:displays",
+          "revision": 1
+        },
+        "controls": {
+          "id": "caller:controls",
+          "revision": 27
+        },
+        "counters": {
+          "id": "caller:counters",
+          "revision": 43
+        }
+      },
+      "pendingSourceProviders": [
+        "morphology"
+      ],
+      "morphologyProvider": {
+        "status": "partial_current_measurements_control_attention_and_methods",
+        "state_owner": "family_state:morphology",
+        "motion_owner": "caller:goal",
+        "forecast_owner": "family_state:public_observed_inventory",
+        "current_decision_scope": "one_source_selection_cycle",
+        "attention_owner": "caller:attention",
+        "method_owner": "caller:counters.targetMethod",
+        "entry_return_owner": "family_state:morphology.entry_access_return",
+        "connected_methods": [
+          "retained_station_method",
+          "entry_access_return",
+          "entry_rebind",
+          "entry_probe",
+          "managed_capacity",
+          "target_extension_continuation"
+        ],
+        "pending": [
+          "complete_original_caller_parity_and_domain_closure"
+        ]
+      },
+      "scope": "native common acquisition and connected providers; remaining source families are still in migration"
+    },
+    "fullV6Parity": false,
+    "sessions": 1,
+    "operationCounts": {
+      "init": 1,
+      "advance": 78,
+      "resume": 41
+    },
+    "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.50.0"
+  },
+  "passiveOwnerPresence": {
+    "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-passive-owner-presence.json",
+    "sha256": "13ce24f8d22828f6bf46b98bca77b8d44ee399f01ddd954106548f67068b658b",
+    "bytes": 1078
+  },
+  "passiveOwnerPresencePassed": true,
+  "passiveOwnerPrefixesChecked": 0,
+  "passiveOwnerPrefixesPassed": 0,
+  "passiveOwnerTransitionsRetained": 0,
+  "comparison": {
+    "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-comparison.json",
+    "sha256": "81893191683c6c1426f4e4566773be3415629343ac91e21e77ff306115994318",
+    "bytes": 10614
+  },
+  "comparisonPassed": true,
+  "comparisonChecks": 17,
+  "failedChecks": [],
+  "nativeSourceBeforeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+  "nativeSourceAfterDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+  "nativeSourceUnchanged": true,
+  "immutableInputsUnchanged": true
+}

@@ -1,0 +1,233 @@
+{
+  "schema": "logos-engine.native-delivery-integrity.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T18:44:25.768738+00:00",
+  "directory": "docs/migration/lot3i-evidence/final",
+  "validationDirectory": "docs/migration/lot3i-evidence/final/validation",
+  "generator": {
+    "path": "scripts/verify-native-delivery.py",
+    "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+    "bytes": 26494
+  },
+  "verificationHelpers": [
+    {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "bytes": 5421
+    },
+    {
+      "path": "scripts/compare-v54-reactive-public-evidence.py",
+      "sha256": "3274acc5ed28a40f91ad0ee2e34c247ab160919ea43855cf514b4fbc22ef6a69",
+      "bytes": 18850
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+      "bytes": 3361
+    }
+  ],
+  "nativeSourceDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+  "matchedFileInventories": {
+    "native": 270,
+    "archive": 281,
+    "sourceAndTests": 619,
+    "buildInputs": 335,
+    "regressionExecutionInputs": 22
+  },
+  "originalSourceFilesUnchanged": 1786,
+  "originalSourceManifest": {
+    "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+    "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6",
+    "bytes": 424024
+  },
+  "tests": {
+    "tests": 3225,
+    "pass": 3225,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "regressions": {
+    "passed": 5,
+    "total": 5,
+    "comparisonChecksPassed": 85,
+    "comparisonChecksExpected": 85,
+    "passiveOwnerPrefixesChecked": 0,
+    "passiveOwnerPrefixesPassed": 0,
+    "passiveOwnerTransitionsRetained": 0,
+    "prevalidatedTotals": {
+      "commands": 240,
+      "completePublicPackets": 245,
+      "animationFrames": 705,
+      "prefixes": 169,
+      "requests": 409,
+      "naturalLevelBoundaries": 15
+    }
+  },
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-BWK8mjSZ.js",
+    "sha256": "abcd332ebe20e94098ac4f302e5b96dd14a703a64495f238bbfa8ae5de669391",
+    "bytes": 6514985
+  },
+  "sourceArchiveVerification": {
+    "files": 281,
+    "archive": {
+      "path": "docs/migration/lot3i-evidence/final/source-archive.tar.gz",
+      "sha256": "0584411aa31fb00c60d523e8eafd7b51394a182ac75b06f49206c8375def6fed",
+      "bytes": 1712185
+    },
+    "members": 281,
+    "parts": 2,
+    "byteIdentical": true
+  },
+  "byteStorage": {
+    "reports": 6,
+    "parts": 40,
+    "bytes": 32899809,
+    "originalsAbsentBeforeRestore": true,
+    "temporaryRootRemoved": true,
+    "originalsUnchanged": true,
+    "restoredByteIdentical": [
+      {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+        "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+        "bytes": 2630905,
+        "manifest": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.parts.json",
+        "parts": 3,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/catr-049-replay.json.gz",
+        "sha256": "779d50a3088a8c2c16abc2ff46213356402db4001309babac005a238cdd83350",
+        "bytes": 1373207,
+        "manifest": "docs/migration/lot3i-evidence/final/regressions/catr-049-replay.json.gz.parts.json",
+        "parts": 2,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz",
+        "sha256": "566dd7bd6056ca514c06b3f37ba1740b00961f119aa8e9b792ca60b66bd54322",
+        "bytes": 6891744,
+        "manifest": "docs/migration/lot3i-evidence/final/regressions/fogw-049-replay.json.gz.parts.json",
+        "parts": 8,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/rswp-049-replay.json.gz",
+        "sha256": "b443cdf19caa7b4c3bbc353d3dc9273b8d3d9b0115323d879fdbeadf2694a183",
+        "bytes": 2179314,
+        "manifest": "docs/migration/lot3i-evidence/final/regressions/rswp-049-replay.json.gz.parts.json",
+        "parts": 3,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz",
+        "sha256": "c0e10237ef6e955675ccbd73bc6828d963ac6b67a752f682b768a537b7624378",
+        "bytes": 9022543,
+        "manifest": "docs/migration/lot3i-evidence/final/regressions/vois-049-replay.json.gz.parts.json",
+        "parts": 11,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz",
+        "sha256": "1943593c0961d8b49d059e34d58dd96269926ab8a24b5fc294c6bbc516cd8985",
+        "bytes": 10802096,
+        "manifest": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz.parts.json",
+        "parts": 13,
+        "restored": true,
+        "byteIdentical": true
+      }
+    ],
+    "generators": [
+      {
+        "path": "scripts/evidence-byte-parts.py",
+        "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+        "bytes": 7210
+      },
+      {
+        "path": "scripts/restore-v53-evidence.py",
+        "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+        "bytes": 3361
+      }
+    ]
+  },
+  "receipts": [
+    {
+      "path": "docs/migration/lot3i-evidence/final/source-manifest.json",
+      "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd",
+      "bytes": 32014
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/source-archive.json",
+      "sha256": "c4c99644a7140026703bf865ff7b81ffa075e2316b1ce0fc82f21a216251055a",
+      "bytes": 33645
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/source-archive-parts.json",
+      "sha256": "e0f6915cbfa441b42009615f8479e986562f9b4b2cb533104665a34d67f738c0",
+      "bytes": 791
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/validation/delta-tests-run.json",
+      "sha256": "f250f63d2ff9d4c209d711c19dda2c2691b4b0b1bb4d217b859d8e25cef0cd01",
+      "bytes": 114673
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/validation/checks-run.json",
+      "sha256": "48277595d32f6569e0c5711628270bba36a5908971bf8d99ce20388ffe21d669",
+      "bytes": 74576
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/regressions/regression-summary.json",
+      "sha256": "3ffddb4d4bb4786a7218f27d95f7db8d00afa94dd20e75573c6077e1252565a9",
+      "bytes": 123289
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/recurrent-series-validation-scope.json",
+      "sha256": "61ad2236ec821da0cee25be12ef49914503061cb4cfcf3346b3249dbc1cafbe8",
+      "bytes": 2453
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/recurrent-series-common-loop.json.gz",
+      "sha256": "8b87e8412a77d1aa285775ef5599c0176db038f25a9a56db664fb332b1f295c8",
+      "bytes": 107316
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/conn-resolution.json",
+      "sha256": "63a6aee4aaa332ac49a932d1e8d44dbbb39ad14e7abb1097a817e48c0f1bea71",
+      "bytes": 9586
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/browser/browser-qa.json",
+      "sha256": "b3bff0a23caa446a2ef7d0fe9abfed6dc6666fe022d967b7035ae34a8f168974",
+      "bytes": 2678
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/validation/migration-audit-resolution.json",
+      "sha256": "46bcbc98ebaee6a839ec5280cae19f8d37590c3c14bb36a8f68a585195f5fb42",
+      "bytes": 1620
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/preflight.json",
+      "sha256": "79f7b18e0547b2fe89993f61fddb70033fe81f74585b5ac2bf8dc4bb191f3f50",
+      "bytes": 1386
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/final/weav-memory-retry/interruption-observation.json",
+      "sha256": "2e3efef071845d9208a8384e76b6c3b022b91ff939fd1b8aa4b443e49ee3c787",
+      "bytes": 1298
+    }
+  ],
+  "qualification": "Post-validation file integrity and lossless evidence transport only. Every completed JSON evidence parts manifest is checked with the existing transport helpers, restored into an initially empty temporary root and compared byte for byte with its unchanged original. Frozen source archive members, recorded native/source/test/build inputs and recorded validation status are checked without rerunning or reinterpreting a game, agent, source comparison, test or build. Additional receipts are fingerprinted only. This is not a new campaign, proof of causal game improvement or complete migration."
+}

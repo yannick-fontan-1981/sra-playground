@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "cases": [
+    {
+      "id": "weav-049-isolated",
+      "game": "WEAV",
+      "baseline": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-campaign.json.gz",
+        "sha256": "74b5890967f4675e9005549692d744cb803acbc6c8dc627f4f23585582e4caa5"
+      },
+      "trace": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "qualification": "Only the externally killed WEAV replay is repeated, on the identical frozen native source and identical immutable public inputs. The first four completed passes and the entire interrupted run remain retained. This cold recorded-return regression is not a new WEAV game attempt and does not restart its case clock. A process-local768MiB Node old-space cap bounds replay-host memory; it is not applied to official cost measurement."
+}

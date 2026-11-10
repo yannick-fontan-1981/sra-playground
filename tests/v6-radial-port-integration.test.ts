@@ -321,7 +321,7 @@ test('the revalidation question still requires the exact current frame and avail
   assert.deepEqual(family.state(), retained, 'Neither admission nor refusal acquires a current method');
 });
 
-test('declared source order registers 54 of 76 entries with all six observed-composition branches', async () => {
+test('declared source order registers 55 of 76 entries with all six observed-composition branches', async () => {
   const runtime = await createNativeV6Runtime(declarations, { now: () => 0 });
   const coverage = runtime.snapshot().coverage as R, groups = coverage.sourceGroups as R[];
   const configuration = declarations.strategy.declarations[0]!.configuration as R;
@@ -331,7 +331,7 @@ test('declared source order registers 54 of 76 entries with all six observed-com
     ['occluded_catalogue_composition', 'queued_field_composition', 'product_panel_composition', 'labeled_sequence_composition',
       'linked_packet_composition', 'trace_field_composition', 'cell_patch_composition', 'observed_occurrence_recall',
       'observed_program_composition', 'typed_material_flow', 'radial_port_composition', 'observed_framed_analogy',
-      'field_service_composition', 'rooted_quota_composition', 'framed_window_composition', 'coupled_prefix_reference']);
+      'field_service_composition', 'rooted_quota_composition', 'framed_window_composition', 'coupled_prefix_reference', 'recurrent_series']);
   const radialIndex = windows.entryPoints.indexOf('radial_port_composition');
   assert.equal(windows.families[radialIndex], 'public_occurrence_recall');
   assert.equal(coverage.registeredFamilies.filter((family: string) => family === 'public_occurrence_recall').length, 1);
@@ -346,7 +346,7 @@ test('declared source order registers 54 of 76 entries with all six observed-com
     occluded_catalogue_composition: 'public_occurrence_recall', queued_field_composition: 'public_occurrence_recall',
     linked_packet_composition: 'public_occurrence_recall', trace_field_composition: 'public_occurrence_recall',
     typed_material_flow: 'public_occurrence_recall', field_service_composition: 'public_occurrence_recall',
-    framed_window_composition: 'public_occurrence_recall', coupled_prefix_reference: 'public_occurrence_recall',
+    framed_window_composition: 'public_occurrence_recall', coupled_prefix_reference: 'public_occurrence_recall', recurrent_series: 'public_occurrence_recall',
     observed_framed_analogy: 'public_framed_transfer', observed_framed_transfer: 'public_framed_transfer',
     observed_outline_service: 'public_outline_service', observed_inventory_composition: 'public_observed_inventory',
     reactive_contact: 'public_reactive_contact', reactive_contact_continuation: 'public_reactive_contact',
@@ -375,8 +375,8 @@ test('declared source order registers 54 of 76 entries with all six observed-com
     });
     return [connected.length, declared.length];
   });
-  assert.deepEqual(counts, [[10, 12], [19, 21], [8, 10], [17, 33]]);
-  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 54);
+  assert.deepEqual(counts, [[10, 12], [20, 21], [8, 10], [17, 33]]);
+  assert.equal(counts.reduce((sum, count) => sum + count[0]!, 0), 55);
   assert.deepEqual(Object.keys(coverage.partialEntryPoints), []);
   assert.equal(coverage.observedCompositionBranches.connectedBranches.length, 6);
   assert.deepEqual(coverage.observedCompositionBranches.pendingBranches, []);

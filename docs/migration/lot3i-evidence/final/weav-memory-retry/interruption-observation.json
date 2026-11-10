@@ -1,0 +1,22 @@
+{
+  "schema": "logos-engine.external-execution-interruption-observation.v1",
+  "recordedAt": "2026-11-10T15:35:34.060188-03:00",
+  "status": "incomplete_process_handle_unavailable",
+  "executionSessionId": 68109,
+  "observedToolError": "write_stdin failed: Unknown process id68109",
+  "performanceLockProbeExitCode": 0,
+  "finalSummaryPresent": false,
+  "finalReplayReportPresent": false,
+  "completedHostPreparation": {
+    "path": "docs/migration/lot3i-evidence/final/weav-memory-retry/regressions/weav-049-memory-efficient-host-preparation.json",
+    "bytes": 19259,
+    "sha256": "d75deeff8be8db9d946661f7f271392065aa7a9dcaadcd3457eb9071669a40b9"
+  },
+  "completedPreflight": {
+    "path": "docs/migration/lot3i-evidence/final/weav-memory-retry/preflight.json",
+    "bytes": 1390,
+    "sha256": "e493c1df0492f4cda7f087ca519fc5d9b550d9816a06df34095fd89de011b4b5"
+  },
+  "cause": "Not established. No retained exit status or completed Node output is available for this externally interrupted invocation.",
+  "qualification": "Only the immutable prevalidation and host-memory-release preparation completed. No WEAV success, comparator pass, failure category or native performance result is inferred. Earlier attempts are untouched; a separately declared recovery will retain live process logs."
+}

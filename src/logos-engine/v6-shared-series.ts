@@ -33,6 +33,7 @@ import { FieldServiceMemory, commonFieldServiceProposal, bindFieldService, field
 import { RootedQuotaMemory, commonRootedQuotaProposal, bindRootedQuota, rootedQuotaBefore, rootedQuotaAfter } from './v6-rooted-quota-access.ts';
 import { FramedWindowMemory, proposeFramedWindowCommon, bindFramedWindow, framedWindowBefore, framedWindowAfter } from './v6-framed-window-access.ts';
 import { CrossedPrefixMemory, proposeCrossedPrefixCommon, bindCrossedPrefix, crossedPrefixBefore, crossedPrefixAfter } from './v6-crossed-prefix-access.ts';
+import { RecurrentSeriesMemory, proposeRecurrentSeriesCommon, bindRecurrentSeries, recurrentSeriesBefore, recurrentSeriesAfter } from './v6-recurrent-series-access.ts';
 import { OccludedCatalogueMemory, commonOccludedCatalogueProposal, commonCatalogueViewProposal,
   bindOccludedCatalogue, occludedCatalogueBefore, occludedCatalogueAfter } from './v6-occluded-catalogue-access.ts';
 import { QueuedFieldMemory, commonQueuedFieldProposal, bindQueuedField, queuedFieldBefore, queuedFieldAfter } from './v6-queued-field-access.ts';
@@ -59,7 +60,7 @@ import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts'
 import type { OccurrenceRecord as R } from './v6-occurrence-scene.ts';
 import type { NativeFamily, NativeRows, NativePublicObservation, NativeProposal } from './v6-native-types.ts';
 
-export const SHARED_SERIES_DIGEST_SCOPE = 'native_crossed_prefix_ancestor_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_framed_window_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_exposed_reception_relational_chamber_panel_service_rooted_line_reception_service_and_reference_population_six_observed_compositions_v6';
+export const SHARED_SERIES_DIGEST_SCOPE = 'native_recurrent_series_crossed_prefix_ancestor_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_framed_window_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_exposed_reception_relational_chamber_panel_service_rooted_line_reception_service_and_reference_population_six_observed_compositions_v6';
 
 export interface NativeSharedSeriesOptions {
   /** Native current-control revalidation; the default preserves source contracts. */
@@ -79,8 +80,15 @@ export interface NativeSharedSeriesOptions {
 /** The inherited public reducer participates in the native mutation guard. */
 class SharedOccurrenceMemory extends OccurrenceRecallAccess {
   private version = 0;
+  protected override recurrentSeriesProjection = new RecurrentSeriesMemory();
+  get recurrentSeries(): RecurrentSeriesMemory { return this.recurrentSeriesProjection; }
   crossedPrefix = new CrossedPrefixMemory();
   controlDiscoveryEvents: R[] = [];
+  protected override applyRecurrentSeriesEvent(event: R): void { this.recurrentSeries.applyEvent(event); }
+  // The public shared checkpoint retains its historical UTF-16 ordering for
+  // opaque rejection keys. Produced source trial IDs are ASCII digests, so
+  // their order is identical to the own source-compatible Unicode ordering.
+  protected override recurrentSeriesDigest(): string { return super.recurrentSeriesDigest(); }
   protected override applyCrossedPrefixEvent(event: R): void { this.crossedPrefix.applyEvent(event); }
   protected override crossedPrefixDigest(parent: string): string { return this.crossedPrefix.retainedDigest(parent); }
   get nativeRevision(): number { return this.version; }
@@ -104,6 +112,7 @@ class SharedOccurrenceMemory extends OccurrenceRecallAccess {
 
 interface SharedWorkingStamp {
   memory: SharedOccurrenceMemory; memoryRevision: number; memoryWitness: WorkingWitness;
+  recurrentSeries: RecurrentSeriesMemory; recurrentSeriesRevision: number; recurrentSeriesWitness: WorkingWitness;
   crossedPrefix: CrossedPrefixMemory; crossedPrefixRevision: number; crossedPrefixWitness: WorkingWitness;
   material: TypedMaterialMemory; materialRevision: number;
   radial: RadialPortMemory; radialRevision: number;
@@ -132,6 +141,8 @@ interface SharedWorkingStamp {
 /** One journal is owned by the already registered public-occurrence provider. */
 export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   override memory = new SharedOccurrenceMemory();
+  /** Repeated and Supported share their existing first two digest slots. */
+  get recurrentSeries(): RecurrentSeriesMemory { return this.memory.recurrentSeries; }
   /** One owner, at the existing CrossedPrefix digest ancestry position. */
   get crossedPrefix(): CrossedPrefixMemory { return this.memory.crossedPrefix; }
   material = new TypedMaterialMemory();
@@ -178,6 +189,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
 
   private workingStamp(): SharedWorkingStamp {
     return { memory: this.memory, memoryRevision: this.memory.nativeRevision, memoryWitness: workingWitness(this.memory),
+      recurrentSeries: this.recurrentSeries, recurrentSeriesRevision: this.recurrentSeries.nativeRevision, recurrentSeriesWitness: workingWitness(this.recurrentSeries),
       crossedPrefix: this.crossedPrefix, crossedPrefixRevision: this.crossedPrefix.nativeRevision, crossedPrefixWitness: workingWitness(this.crossedPrefix),
       material: this.material, materialRevision: this.material.nativeRevision,
       radial: this.radial, radialRevision: this.radial.nativeRevision,
@@ -204,6 +216,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   }
   private unchanged(stamp: SharedWorkingStamp): boolean {
     return this.memory === stamp.memory && this.memory.nativeRevision === stamp.memoryRevision
+      && this.recurrentSeries === stamp.recurrentSeries && this.recurrentSeries.nativeRevision === stamp.recurrentSeriesRevision && witnessMatches(stamp.recurrentSeriesWitness, this.recurrentSeries)
       && this.crossedPrefix === stamp.crossedPrefix && this.crossedPrefix.nativeRevision === stamp.crossedPrefixRevision && witnessMatches(stamp.crossedPrefixWitness, this.crossedPrefix)
       && this.material === stamp.material && this.material.nativeRevision === stamp.materialRevision
       && this.radial === stamp.radial && this.radial.nativeRevision === stamp.radialRevision
@@ -352,6 +365,13 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   crossedPrefixPropose(observation: R, rows: NativeRows, inputs: readonly R[], remaining: number,
     deadlineMs: number | null, now?: () => number): Promise<R | null> {
     return proposeCrossedPrefixCommon(this.crossedPrefix, observation, rows, inputs, remaining, deadlineMs, now);
+  }
+
+  /** The declared recurrent entry includes its supported-insertion fallback. */
+  recurrentSeriesPropose(observation: R, rows: NativeRows, inputs: readonly R[], remaining: number, config: R,
+    deadlineMs: number | null, now?: () => number): Promise<R | null> {
+    return proposeRecurrentSeriesCommon(this.recurrentSeries, observation, rows, inputs, remaining,
+      { prepare_supported_lines: config.prepare_supported_lines, supported_line_reply_plies: config.supported_line_reply_plies }, deadlineMs, now);
   }
 
   /** ProductPanelConstraint's declared entry, sharing the actual acquired journal. */
@@ -527,6 +547,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       return;
     }
     if (Object.hasOwn(proposal, 'crossed_prefix_plan')) { bindCrossedPrefix(proposal, domain); return; }
+    if (Object.hasOwn(proposal, 'line_plan') || Object.hasOwn(proposal, 'supported_line_plan')) { bindRecurrentSeries(proposal, domain); return; }
     super.bind(proposal, domain);
   }
 
@@ -588,6 +609,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     }
     if (!truth(proposal.occurrence_recall_plan) && truth(proposal.crossed_prefix_plan)) return crossedPrefixBefore(proposal, index, packet.frame_rows,
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
+    if (!truth(proposal.occurrence_recall_plan) && (truth(proposal.line_plan) || truth(proposal.supported_line_plan))) return recurrentSeriesBefore(proposal, index, packet.frame_rows,
+      { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
     return super.before(proposal, index, packet, observation);
   }
   override after(proposal: R, index: number, before: R, after: R, first: NativeRows, second: NativeRows): R {
@@ -646,6 +669,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     }
     if (!truth(proposal.occurrence_recall_plan) && truth(proposal.crossed_prefix_plan)) return crossedPrefixAfter(proposal, index, first, second,
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
+    if (!truth(proposal.occurrence_recall_plan) && (truth(proposal.line_plan) || truth(proposal.supported_line_plan))) return recurrentSeriesAfter(proposal, index, first, second,
+      { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
     return super.after(proposal, index, before, after, first, second);
   }
 
@@ -669,9 +694,12 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     // CrossedPrefix precedes Marked/Program/Occurrence in the source ancestry.
     // It already occupies a digest slot in memory: acquire once and never add
     // a second owner or a second digest layer after the FramedWindow selector.
-    const events = selectedRooted ? [] : this.crossedPrefix.record(before, command, after, first, second, parentProposal, index, {
+    const events = selectedRooted ? [] : this.recurrentSeries.record(before, command, after, first, second, parentProposal, index, {
       after: (p, i, rows, later) => this.after(p, i, before, after, rows, later),
     });
+    if (!selectedRooted) events.push(...this.crossedPrefix.record(before, command, after, first, second, parentProposal, index, {
+      after: (p, i, rows, later) => this.after(p, i, before, after, rows, later),
+    }));
     if (!selectedRooted) events.push(...recordObservedProgram(this.memory, before, command, after, first, second, parentProposal, index, {
       before: (p, i, rows, meta) => this.before(p, i, { frame_rows: rows, level: meta.epoch,
         levels_completed: meta.score, available_action_refs: meta.available } as NativePublicObservation, before),
@@ -729,6 +757,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     events.push(...this.rootedLine.record(before, command, after, first, second, proposal, index));
     events.push(...this.reception.record(before, command, after, first, second, proposal, index));
     events.push(...this.population.record(before, command, after, first, second, proposal, index));
+    events.push(...this.recurrentSeries.recordPacket(before, command, after, first, frames));
     events.push(...recordObservedProgramPacket(this.memory, before, command, after, first, frames));
     events.push(...this.queued.recordPacket(before, command, after, first, frames));
     events.push(...this.linked.recordPacket(before, command, after, first, frames));
@@ -861,7 +890,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
 export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, coupledConfig?: R, graphConfig?: R, cellConfig?: R,
   options: NativeSharedSeriesOptions = {}, radialConfig?: R, rootedConfig?: R, productConfig?: R, labeledConfig?: R, traceConfig?: R, linkedConfig?: R,
   queuedConfig?: R, catalogueConfig?: R, materialConfig?: R, serviceConfig?: R, observedConfig?: R, framedWindowConfig?: R,
-  crossedPrefixConfig?: R): NativeFamily {
+  crossedPrefixConfig?: R, recurrentSeriesConfig?: R): NativeFamily {
   const family = new SharedSeriesConstraint(config, options), adapter = asNativeOccurrenceRecallFamily(family);
   return { ...adapter, nativeState: () => family.nativeState(), restoreNative: state => family.restoreNative(state),
     compositionDependencyState: () => family.material.currentState() as unknown as R,
@@ -945,6 +974,12 @@ export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, c
           const proposal = crossedPrefixConfig ? await family.crossedPrefixPropose(observation, rows, inputs, remaining,
             execution?.deadlineMs ?? null, execution?.now) : null;
           if (proposal) proposal.field_subquestion = 'coupled_prefix_reference';
+          return proposal as NativeProposal | null;
+        }
+        if (subquestion === 'recurrent_series') {
+          const proposal = recurrentSeriesConfig ? await family.recurrentSeriesPropose(observation, rows, inputs, remaining, recurrentSeriesConfig,
+            execution?.deadlineMs ?? null, execution?.now) : null;
+          if (proposal) proposal.field_subquestion = 'recurrent_series';
           return proposal as NativeProposal | null;
         }
         if (subquestion === 'field_service_composition') {
@@ -1050,7 +1085,11 @@ export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, c
       const crossedPrefix = crossedPrefixConfig ? await family.crossedPrefixPropose(observation, rows, inputs, remaining,
         execution?.deadlineMs ?? null, execution?.now) : null;
       if (crossedPrefix) crossedPrefix.field_subquestion = 'coupled_prefix_reference';
-      return crossedPrefix as NativeProposal | null;
+      if (crossedPrefix) return crossedPrefix as NativeProposal;
+      const recurrentSeries = recurrentSeriesConfig ? await family.recurrentSeriesPropose(observation, rows, inputs, remaining, recurrentSeriesConfig,
+        execution?.deadlineMs ?? null, execution?.now) : null;
+      if (recurrentSeries) recurrentSeries.field_subquestion = 'recurrent_series';
+      return recurrentSeries as NativeProposal | null;
     }
     return null;
   } };

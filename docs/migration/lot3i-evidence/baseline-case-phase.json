@@ -1,0 +1,70 @@
+{
+  "schema": "logos-engine.resumed-game-case-phase.v1",
+  "phase": "baseline",
+  "game": "CONN",
+  "selection": {
+    "path": "docs/migration/lot3i-evidence/conn-selection.json",
+    "bytes": 3099,
+    "sha256": "5f8c293fe4ff440a0167b08f04551b90608ffa4f609e6c15cda73e1b9309ea98"
+  },
+  "generator": {
+    "path": "docs/migration/lot3i-evidence/run-conn-case-phase.py",
+    "bytes": 3494,
+    "sha256": "4ebaa37340bfd1024d21f931f215cfd73e7630e4e9dadb2a2ea758f63d65d1a0"
+  },
+  "checkout": "/workspace/sites/sra-published-049",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-bounded-native-campaign-proof.py",
+    "CONN",
+    "3",
+    "8",
+    "docs/migration/lot3i-evidence/baseline/conn-native049"
+  ],
+  "startedAt": "2026-11-10T14:51:50.125253-03:00",
+  "finishedAt": "2026-11-10T14:52:12.810876-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "elapsedSeconds": 22.685954594999203,
+  "exitCode": 1,
+  "caseDeadlineReached": false,
+  "cumulativeCaseSecondsAtEnd": 439.325585,
+  "output": {
+    "path": "docs/migration/lot3i-evidence/baseline-case-phase.log",
+    "bytes": 2326,
+    "sha256": "8fecaa6b331c18d97264c6423ac48708ea4bbf4ff76666142dfc33408c5a6c91"
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3i-evidence/baseline/conn-native049/conn-actual-public-journal.jsonl.gz",
+      "bytes": 10961,
+      "sha256": "bb1bc87e9d9b75ee80b45e4a0cd91040e392646a61754a273fbd7f043e48d0a5"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/baseline/conn-native049/conn-campaign.json.gz",
+      "bytes": 1963887,
+      "sha256": "5bae335dcdbd19430eb12deddf399d573a38289334c10f913211e8d623b42567"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/baseline/conn-native049/conn-output.log.gz",
+      "bytes": 1874,
+      "sha256": "ff3231f30cb49c2196cd6816e95a10ecf7080e84d27e54e57d484d27243a17b5"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/baseline/conn-native049/conn-public-trace.json.gz",
+      "bytes": 16696,
+      "sha256": "48e843f7210cc65fad3e9013a62d4602ecad58d12d36034a38643a829a399de1"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/baseline/conn-native049/execution-conn.json",
+      "bytes": 67915,
+      "sha256": "8e5a61dedb6acabb12985d6c9bc1d761b9567937659f785ffe14f3547fb09f39"
+    },
+    {
+      "path": "docs/migration/lot3i-evidence/baseline/conn-native049/source-manifest.json",
+      "bytes": 31765,
+      "sha256": "5ab90c3cbd2f8356ba27025052a1c40cd16e7cb38326a89a48ac6e53cb9b3a24"
+    }
+  ],
+  "qualification": "One declared CONN identity and cumulative40-minute deadline; conservative clock starts at initial public scan. Standard native common harness computes every command against an opaque public game host. No policy edit, level jump, seeded knowledge or expected return. Baseline has only the predeclared8-action outer cap; it is not a complete-game failure verdict."
+}

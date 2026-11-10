@@ -824,17 +824,30 @@
         "agents/yf_arc3_v6/laya_proto/common_repeated_lines.py"
       ],
       "targets": [
-        "src/logos-engine/v6-occurrence-recall.ts"
+        "src/logos-engine/v6-recurrent-series-observation.ts",
+        "src/logos-engine/v6-recurrent-series-access.ts",
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
       ],
-      "status": "partial_transfer",
+      "status": "component_verified",
       "proof": [
         "scripts/export-v6-occurrence-reference.py",
         "tests/fixtures/v6-occurrence-reference.json",
         "tests/v6-occurrence-recall.test.ts",
         "tests/v6-support-caller-integration.test.ts",
-        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json",
+        "scripts/export-v6-recurrent-series-reference.py",
+        "tests/fixtures/v6-recurrent-series-reference.json.gz",
+        "docs/migration/lot3i-recurrent-series-lineage.md",
+        "tests/v6-recurrent-series-observation.test.ts",
+        "tests/v6-recurrent-series-native.test.ts",
+        "tests/v6-recurrent-series-access.test.ts",
+        "tests/v6-recurrent-series-integration.test.ts",
+        "scripts/export-v6-recurrent-series-legacy-checkpoints.mjs",
+        "tests/fixtures/v6-recurrent-series-legacy-checkpoints.json.gz"
       ],
-      "notes": "The retained repeated-line reducers/digest required by occurrence recall remain transferred. Repeated-line proposal/planning/acquisition producers remain pending. The CrossedPrefix producer and its single ancestral owner are now documented separately in lot3H; the historical standalone recall contract remains unchanged."
+      "notes": "Lot3I/native0.50 transfers fields, pointed candidates, repeated geometric extensions, source support selection, proposal, guards, actual trial/scored acquisition, reducers, digest and consumed adapter. The single shared owner occupies the existing first two ancestry slots with SupportedLine, preserving published 0.49 checkpoints and public mutable projections. Source scalar raster domain and native bounds are explicit; generated trial keys are ASCII digests. Shared historical UTF-16 rejection-key ordering remains compatible with opaque old checkpoints, while the own source API preserves Python Unicode order. Component transfer does not assert full inherited original-caller parity or universal game success."
     },
     {
       "sources": [
@@ -1807,10 +1820,14 @@
         "agents/yf_arc3_v6/laya_proto/common_supported_lines.py"
       ],
       "targets": [
+        "src/logos-engine/v6-recurrent-series-observation.ts",
+        "src/logos-engine/v6-recurrent-series-access.ts",
+        "src/logos-engine/v6-supported-lines.ts",
         "src/logos-engine/v6-occurrence-recall.ts",
-        "src/logos-engine/v6-supported-lines.ts"
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
       ],
-      "status": "partial_transfer",
+      "status": "component_verified",
       "proof": [
         "scripts/export-v6-occurrence-reference.py",
         "tests/fixtures/v6-occurrence-reference.json",
@@ -1819,9 +1836,18 @@
         "tests/fixtures/v6-native-caller/memo-first-prefix.json",
         "scripts/export-v6-cell-placement-reference.py",
         "tests/fixtures/v6-cell-placement-reference.json.gz",
-        "tests/v6-cell-placement.test.ts"
+        "tests/v6-cell-placement.test.ts",
+        "scripts/export-v6-recurrent-series-reference.py",
+        "tests/fixtures/v6-recurrent-series-reference.json.gz",
+        "docs/migration/lot3i-recurrent-series-lineage.md",
+        "tests/v6-recurrent-series-observation.test.ts",
+        "tests/v6-recurrent-series-native.test.ts",
+        "tests/v6-recurrent-series-access.test.ts",
+        "tests/v6-recurrent-series-integration.test.ts",
+        "scripts/export-v6-recurrent-series-legacy-checkpoints.mjs",
+        "tests/fixtures/v6-recurrent-series-legacy-checkpoints.json.gz"
       ],
-      "notes": "Retains the previously transferred supported-insertion event reducers/digest used by occurrence recall and adds line_windows, insertions, place and search_lines for cell-patch planning. Differential helpers compare complete rankings, immediate-goal flags, geometric counts, exact search-node counts, alpha-beta/cache behavior, free/supported axes, holes and Python coordinate tie ordering. Search parity is limited to exact native integer scores and the compared scalar board domain; NativeLineSearchDomainError explicitly refuses larger Python-integer domains before rounded values can select an action. This refusal is a native portability boundary, not a source-law refutation. Other SupportedLineAccess planning/acquisition, layout_key and the full SupportedLineConstraint entry remain outside this partial transfer."
+      "notes": "Lot3I/native0.50 completes the consumed SupportedLineConstraint entry after its previously retained reducers and conditional line kernel: layout key, compatible insertion inference, finite preparation, current guards, passive actual insertion acquisition, stable packet order, refutation, cold replay and binding. The kernel keeps exact completed rankings/node counts and historical unbounded calls; the new common entry adds a 250000-node/current-deadline bound returning blocking unknown with no action or acquired refutation on cutoff. The original exact-integer domain boundary remains. The geometric field prefilter is not deadline-preempted. One owner retains the original first two digest slots; higher guard dispatch, packet order and RootedQuota cutoff are explicit. Complete original-caller parity remains qualified."
     },
     {
       "sources": [
@@ -4315,7 +4341,7 @@
         "tests/v6-crossed-prefix-access.test.ts",
         "tests/v6-crossed-prefix-integration.test.ts"
       ],
-      "notes": "Lot3H/native0.49 transfers the own measured geometry, controller assignment, select/recolor/advance proposals, current guards, state/input/pair acquisition and common adapter. SharedOccurrenceMemory delegates to one CrossedPrefix owner at the existing inherited digest slot, preserving old journals without inventing absent pair evidence. Standalone occurrence reducers retain their historical behavior. Native assignment work/deadline bounds return blocking unknown without acquisition; the geometric prefilter is not deadline-preempted. Atomic reducer validation is named separately from source exception parity. RepeatedLine/SupportedLine planning ancestry and complete original-caller parity remain partial; component verification alone does not claim game contribution."
+      "notes": "Lot3H/native0.49 transfers the own measured geometry, controller assignment, select/recolor/advance proposals, current guards, state/input/pair acquisition and common adapter. SharedOccurrenceMemory delegates to one CrossedPrefix owner at the existing inherited digest slot, preserving old journals without inventing absent pair evidence. Standalone occurrence reducers retain their historical behavior. Native assignment work/deadline bounds return blocking unknown without acquisition; the geometric prefilter is not deadline-preempted. Atomic reducer validation is named separately from source exception parity. RepeatedLine/SupportedLine planning ancestry is separately transferred in lot3I; complete original-caller parity remains partial; component verification alone does not claim game contribution."
     },
     {
       "sources": [

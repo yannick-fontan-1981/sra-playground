@@ -1,0 +1,38 @@
+{
+  "schema": "logos-engine.recorded-regression-recovery-plan.v1",
+  "recordedAt": "2026-11-10T15:06:45.109683-03:00",
+  "firstSummary": {
+    "path": "docs/migration/lot3i-evidence/final/regressions/regression-summary-interrupted.json",
+    "bytes": 93599,
+    "sha256": "c198464bd121be3c129e62986c8558b6f65c46310325764b0ca483d667b5a7e5"
+  },
+  "interruptedExecution": {
+    "path": "docs/migration/lot3i-evidence/final/regressions/weav-049-execution.json",
+    "bytes": 1573,
+    "sha256": "7ff21722fa9d1ead445db13b1870a615f023e8796c0c918c235b3d5e70caf8b5"
+  },
+  "failure": "Process terminated by signal9 after67 acquired public actions; no final report or comparison. Memory-event counters are unavailable, so a memory cause is not established.",
+  "isolation": "All tests, source/native comparisons, game campaigns and managed preview have ended. Only this bounded replay runs.",
+  "repeatedCase": "WEAV",
+  "preservedPasses": [
+    "CATR",
+    "RSWP",
+    "FOGW",
+    "VOIS"
+  ],
+  "sourceManifest": {
+    "path": "docs/migration/lot3i-evidence/final/weav-retry/source-manifest.json",
+    "bytes": 32014,
+    "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd"
+  },
+  "caseManifest": {
+    "path": "docs/migration/lot3i-evidence/weav-recovery-cases.json",
+    "bytes": 1076,
+    "sha256": "0ee6b625b4d2ad004a3d2bda791eb7183d7f31710e90816e10861df3ae554180"
+  },
+  "nodeOldSpaceMiB": 768,
+  "productionSourceChanged": false,
+  "traceOrComparatorChanged": false,
+  "officialCostEnvironmentChanged": false,
+  "priorWEAVClockChanged": false
+}

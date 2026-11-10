@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "cases": [
+    {
+      "id": "weav-049-memory-efficient",
+      "game": "WEAV",
+      "baseline": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-campaign.json.gz",
+        "sha256": "74b5890967f4675e9005549692d744cb803acbc6c8dc627f4f23585582e4caa5"
+      },
+      "trace": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "qualification": "Third recorded WEAV replay on the identical frozen native 0.50 and immutable 81-action public stream. The first SIGKILL and second V8 heap failure remain retained. Only host lifetimes change: the full baseline is collected before the unchanged Node harness starts, and Python prevalidation/comparison use separate non-overlapping processes. The same historical comparator supplies all17 unchanged checks. A1536MiB old-space cap applies only to this evidence replay. No game attempt, case-clock restart or official cost-environment change."
+}
