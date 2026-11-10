@@ -32,6 +32,17 @@ interface HydratedFragment { readonly value: JsonValue; readonly height: number 
 // not caller-frozen envelopes. The disposable cache retains at most 256 results
 // and 8 MiB of conservative structural weight; no graph revision is discarded.
 const hydratedLeaves = new BoundedWeakCache<HydratedFragment & { readonly id: string }>(8 * 1024 * 1024, 256);
+// Read-only provenance for closed values built by this decoder. A caller's
+// frozen graph envelope or shallowly frozen JSON value never enters this set.
+// Consumers can copy these plain immutable trees without re-inspecting their
+// property descriptors; no decoder validation or fragment lookup is skipped.
+const hydratedObjects = new WeakSet<object>();
+export function isHydratedNativeJson(value: unknown): boolean {
+  return value !== null && typeof value === 'object' && hydratedObjects.has(value);
+}
+function freezeHydrated<T extends object>(value: T): T {
+  Object.freeze(value); hydratedObjects.add(value); return value;
+}
 
 // Own the closed AST when each node is built. Its children are then recognized
 // at the ordinary V7 ingress boundary, so persisting the next root preserves
@@ -122,18 +133,42 @@ export function splitNativeState(value: unknown, component: string, options: { m
     }
     if (typeof input !== 'object') throw new TypeError('Native state requires explicit JSON values');
     if (!Array.isArray(input) && !isJsonObject(input)) throw new TypeError('Native state requires plain objects and arrays');
-    if (Object.getOwnPropertySymbols(input).length) throw new TypeError('Symbolic native state members are unsupported');
     if (ancestors.has(input)) throw new TypeError('Cyclic native state is unsupported');
     ancestors.add(input);
     try {
-      const descriptors = Object.getOwnPropertyDescriptors(input), names = Object.keys(descriptors).filter(name => !Array.isArray(input) || name !== 'length');
-      for (const name of names) {
-        assertUnicode(name); const descriptor = descriptors[name]!;
-        if (!('value' in descriptor) || !descriptor.enumerable) throw new TypeError('Native state requires enumerable data properties');
+      const array = Array.isArray(input);
+      let entries: [string, unknown][];
+      if (isOwnedImmutableJson(input)) {
+        // A private immutableJson identity already certifies the complete own
+        // property domain. Raw numbers and nesting still pass visit below.
+        entries = Object.entries(input);
+      } else {
+        if (Object.getOwnPropertySymbols(input).length) throw new TypeError('Symbolic native state members are unsupported');
+        entries = [];
+        for (const name of Object.getOwnPropertyNames(input)) {
+          const descriptor = Object.getOwnPropertyDescriptor(input, name);
+          if (!descriptor) continue;
+          if (array && name === 'length') continue;
+          entries.push([name, descriptor]);
+        }
+        let orderedArray = true;
+        for (let index = 0; index < entries.length; index++) {
+          const entry = entries[index]!, name = entry[0], descriptor = entry[1] as PropertyDescriptor;
+          assertUnicode(name);
+          if (!('value' in descriptor) || !descriptor.enumerable) throw new TypeError('Native state requires enumerable data properties');
+          entry[1] = descriptor.value;
+          if (array && name !== String(index)) orderedArray = false;
+        }
+        if (array) {
+          if (entries.length !== input.length) throw new TypeError('Sparse or decorated native arrays are unsupported');
+          if (!orderedArray) {
+            entries.sort(([a], [b]) => Number(a) - Number(b));
+            if (entries.some(([name], index) => name !== String(index))) throw new TypeError('Sparse or decorated native arrays are unsupported');
+          }
+        }
       }
-      if (Array.isArray(input) && (names.length !== input.length || names.some((name, index) => name !== String(index)))) throw new TypeError('Sparse or decorated native arrays are unsupported');
-      if (Array.isArray(input)) {
-        const children = names.map(name => visit(descriptors[name]!.value, depth + 1));
+      if (array) {
+        const children = entries.map(([, value]) => visit(value, depth + 1));
         const cost = 3 + children.reduce((n, child) => n + child.cost, 0);
         if (cost <= bound) {
           const node = ownedEncoded({ kind: 'array' as const, items: Object.freeze(children.map(child => child.node)) });
@@ -152,11 +187,11 @@ export function splitNativeState(value: unknown, component: string, options: { m
         if (group.length) groups.push(fragment(ownedEncoded({ kind: 'array', items: Object.freeze(group.map(c => c.node)) })));
         return combine('concat', groups);
       }
-      const entries = names.sort(compareUnicode).map(name => [name, visit(descriptors[name]!.value, depth + 1)] as const);
-      const cost = 3 + entries.reduce((n, [, child]) => n + child.cost, 0);
-      if (cost <= bound) return { node: ownedEncoded({ kind: 'object', members: Object.freeze(Object.fromEntries(entries.map(([name, child]) => [name, child.node]))) }), cost };
+      const children = entries.sort(([a], [b]) => compareUnicode(a, b)).map(([name, value]) => [name, visit(value, depth + 1)] as const);
+      const cost = 3 + children.reduce((n, [, child]) => n + child.cost, 0);
+      if (cost <= bound) return { node: ownedEncoded({ kind: 'object', members: Object.freeze(Object.fromEntries(children.map(([name, child]) => [name, child.node]))) }), cost };
       const groups: Sized[] = []; let group: (readonly [string, Sized])[] = [], groupCost = 3;
-      for (const [name, original] of entries) {
+      for (const [name, original] of children) {
         const child = original.cost + 3 > bound ? fragment(original.node) : original;
         if (groupCost + child.cost > bound && group.length) { groups.push(fragment(ownedEncoded({ kind: 'object', members: Object.freeze(Object.fromEntries(group.map(([name, child]) => [name, child.node]))) }))); group = []; groupCost = 3; }
         group.push([name, child]); groupCost += child.cost;
@@ -262,29 +297,41 @@ export function hydrateNativeState(root: unknown, readFragment: (id: string) => 
       return referenced(result, depth);
     }
     if (value.kind === 'array') {
-      exact(value, ['kind', 'items']); if (!Array.isArray(value.items)) throw new TypeError('Invalid native array items');
-      return Object.freeze(value.items.map(item => decode(item, depth + 1)));
+      exact(value, ['kind', 'items']); const items = value.items;
+      if (!Array.isArray(items)) throw new TypeError('Invalid native array items');
+      // A raw graph may supply an Array subclass or an own `map` method. Build
+      // our own dense container; neither caller methods nor Symbol.species may
+      // choose the object whose deep immutability is certified below.
+      const output: JsonValue[] = [], length = items.length;
+      for (let index = 0; index < length; index++) output.push(decode(items[index], depth + 1));
+      return freezeHydrated(output);
     }
     if (value.kind === 'object') {
       exact(value, ['kind', 'members']); if (!isJsonObject(value.members)) throw new TypeError('Invalid native object members');
-      return Object.freeze(Object.fromEntries(Object.entries(value.members).map(([name, item]) => {
+      return freezeHydrated(Object.fromEntries(Object.entries(value.members).map(([name, item]) => {
         assertUnicode(name); if (measure) measure.weight += 2 * name.length;
         return [name, decode(item, depth + 1)];
       })));
     }
     if (value.kind === 'concat' || value.kind === 'merge') {
-      exact(value, ['kind', 'parts']); if (!Array.isArray(value.parts) || !value.parts.length) throw new TypeError('Invalid native state groups');
-      const parts = value.parts.map(part => decode(part, depth + 1));
+      exact(value, ['kind', 'parts']); const encodedParts = value.parts;
+      if (!Array.isArray(encodedParts) || !encodedParts.length) throw new TypeError('Invalid native state groups');
+      const parts: JsonValue[] = [], length = encodedParts.length;
+      for (let index = 0; index < length; index++) parts.push(decode(encodedParts[index], depth + 1));
       if (value.kind === 'concat') {
         if (parts.some(part => !Array.isArray(part))) throw new TypeError('Native array group contains a non-array');
-        return Object.freeze((parts as (readonly JsonValue[])[]).flat());
+        const output: JsonValue[] = [];
+        for (const part of parts as (readonly JsonValue[])[]) {
+          for (let index = 0; index < part.length; index++) output.push(part[index]!);
+        }
+        return freezeHydrated(output);
       }
       const output: Record<string, JsonValue> = Object.create(null);
       for (const part of parts) {
         if (!isJsonObject(part)) throw new TypeError('Native object group contains a non-object');
         for (const [name, item] of Object.entries(part)) { if (Object.hasOwn(output, name)) throw new TypeError('Duplicate native object member across groups'); output[name] = item; }
       }
-      return Object.freeze({ ...output });
+      return freezeHydrated({ ...output });
     }
     throw new TypeError('Unknown native graph node kind');
   };

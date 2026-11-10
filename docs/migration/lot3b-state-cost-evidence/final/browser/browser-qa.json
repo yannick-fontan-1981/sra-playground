@@ -1,0 +1,89 @@
+{
+  "schema": "logos-engine.browser-qa-observation.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T04:28:00.323431+00:00",
+  "game": "CATR",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.42.0",
+  "nativeSourceDigest": "2de70025ae08845efd491929416e091e9dc9e8e4b473440b9c6a86838e0b3d19",
+  "managedPreview": "http://127.0.0.1:4173/",
+  "finalObservedUrl": "http://127.0.0.1:4173/?game=CATR&level=4",
+  "method": "CUA visible controls and accessibility observations; no browser internal state or game code was read.",
+  "steps": [
+    {
+      "action": "Initial cold Agent tab",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0,
+      "level": 1
+    },
+    {
+      "action": "Run then Pause during initialization; Paused observed",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0,
+      "level": 1
+    },
+    {
+      "action": "One action completed",
+      "actions": 1,
+      "levelsSolved": 0,
+      "completedPlans": 1,
+      "level": 1
+    },
+    {
+      "action": "One action completed; partial prefix retained",
+      "actions": 2,
+      "levelsSolved": 0,
+      "completedPlans": 1,
+      "level": 1
+    },
+    {
+      "action": "Run to next level",
+      "actions": 3,
+      "levelsSolved": 1,
+      "completedPlans": 2,
+      "level": 2
+    },
+    {
+      "action": "One action completed after natural boundary",
+      "actions": 4,
+      "levelsSolved": 1,
+      "completedPlans": 2,
+      "level": 2
+    },
+    {
+      "action": "Run then Pause after engaged action; Paused observed",
+      "actions": 5,
+      "levelsSolved": 1,
+      "completedPlans": 3,
+      "level": 2
+    },
+    {
+      "action": "Run to next level",
+      "actions": 7,
+      "levelsSolved": 2,
+      "completedPlans": 5,
+      "level": 3
+    },
+    {
+      "action": "Run to next level",
+      "actions": 12,
+      "levelsSolved": 3,
+      "completedPlans": 8,
+      "level": 4
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/browser/catr-three-levels.png",
+      "bytes": 85235,
+      "sha256": "100f6ef6fd8977aa35bb89873673f4bd0badcfdf9fe620b67479e62450dd71b1"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/browser/catr-final-ax.txt",
+      "bytes": 10094,
+      "sha256": "d12a61961358bc292630ffe6a43ac5b562d34daf426bb2177ed7e7c84a5cff50"
+    }
+  ],
+  "qualification": "Manual QA of frozen source in managed development preview. Confirms controls, pause at0 and5 actions, partial-prefix continuation, one continuous session and counters12/3/8. Distinct from production bundle execution, complete game victory or timing measurement. Inspector remained closed."
+}

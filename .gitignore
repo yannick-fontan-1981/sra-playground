@@ -200,3 +200,14 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/catr-campaign.json.gz
 /docs/migration/lot3b-smlp-cost-evidence/final/regressions/catr-040-replay.json.gz
 /docs/migration/lot3b-smlp-cost-evidence/final/regressions/rswp-040-replay.json.gz
+
+# Lot 3B common state correction: lossless profiles and frozen source parts.
+/docs/migration/lot3b-state-cost-evidence/diagnostic/*.cpuprofile
+/docs/migration/lot3b-state-cost-evidence/final/source-archive.tar.gz
+!/docs/migration/lot3b-state-cost-evidence/diagnostic/*.log
+!/docs/migration/lot3b-state-cost-evidence/performance/cohort*/*.log
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-campaign.json.gz
+/docs/migration/lot3b-state-cost-evidence/final/regressions/catr-041-replay.json.gz
+/docs/migration/lot3b-state-cost-evidence/final/regressions/rswp-041-replay.json.gz

@@ -60,10 +60,10 @@ test('new canonical encodings reuse validated ingress properties without repeati
   };
   collect(owned);
   let trustedDescriptors = 0, externalDescriptors = 0;
-  const original = Object.getOwnPropertyDescriptors;
-  context.mock.method(Object, 'getOwnPropertyDescriptors', (value: object) => {
+  const original = Object.getOwnPropertyDescriptor;
+  context.mock.method(Object, 'getOwnPropertyDescriptor', (value: object, key: PropertyKey) => {
     if (trusted.has(value)) trustedDescriptors++; else externalDescriptors++;
-    return original(value);
+    return original(value, key);
   });
   // owned is newly created and has never entered the canonical text cache.
   assert.equal(canonical(owned), canonical(raw));
@@ -76,10 +76,10 @@ test('foreign frozen trees and mutable descendants are not promoted to trusted i
   const member = { value: 1 }, shallow = Object.freeze({ member });
   const foreignMember = Object.freeze({ value: 2 }), foreign = Object.freeze([foreignMember]);
   const watched = new Set<object>([shallow, member, foreign, foreignMember]);
-  const seen = new Set<object>(), original = Object.getOwnPropertyDescriptors;
-  context.mock.method(Object, 'getOwnPropertyDescriptors', (value: object) => {
+  const seen = new Set<object>(), original = Object.getOwnPropertyDescriptor;
+  context.mock.method(Object, 'getOwnPropertyDescriptor', (value: object, key: PropertyKey) => {
     if (watched.has(value)) seen.add(value);
-    return original(value);
+    return original(value, key);
   });
   assert.equal(canonical(shallow), '{"member":{"value":1}}');
   assert.equal(canonical(foreign), '[{"value":2}]');
@@ -104,6 +104,51 @@ test('trusted ingress preserves metadata numbers but canonical still enforces th
   assert.equal(Object.getPrototypeOf(owned), Object.prototype);
   assert.equal(canonical(owned), canonical(raw));
   assert.equal(canonical(owned), '{"10":1,"2":2,"__proto__":{"witnessed":true},"":4,"𐀀":3}');
+});
+
+test('property snapshots precede child traversal even when a child changes its parent', () => {
+  for (const read of [immutableJson, canonical]) {
+    const parent: Record<string, unknown> = {};
+    parent.first = new Proxy({ count: 1 }, {
+      getPrototypeOf(target) { parent.last = 9; return Reflect.getPrototypeOf(target); },
+    });
+    parent.last = 2;
+    const result = read(parent);
+    assert.equal(parent.last, 9, 'The child boundary actually exercised the mutation');
+    assert.deepEqual(typeof result === 'string' ? JSON.parse(result) : result, { first: { count: 1 }, last: 2 });
+  }
+});
+
+test('direct descriptor snapshots retain rejection of hidden members and decorated array domains', () => {
+  let getterCalls = 0;
+  const hidden = Object.defineProperty({ visible: 1 }, 'hidden', { value: 2 });
+  const hiddenSymbol = Object.defineProperty({}, Symbol('hidden'), { value: 1 });
+  const invalidKey = { '\ud800': 1 };
+  const arrayAccessor = Object.defineProperty([1, 2], '1', { enumerable: true, get() { getterCalls++; return 2; } });
+  const decorated = Object.assign([1], { extra: 2 });
+  const hiddenArrayMember = Object.defineProperty([1], 'extra', { value: 2 });
+  for (const value of [hidden, hiddenSymbol, invalidKey, arrayAccessor, decorated, hiddenArrayMember, [, 2], [1, ,]]) {
+    assert.throws(() => immutableJson(value));
+    assert.throws(() => canonical(value));
+  }
+  assert.equal(getterCalls, 0);
+});
+
+test('proxy array snapshots keep descriptor order while normalizing numeric property order', () => {
+  for (const read of [immutableJson, canonical]) {
+    const target = [1, 2], descriptors: PropertyKey[] = [];
+    const input = new Proxy(target, {
+      ownKeys() { return ['length', '1', '0']; },
+      getOwnPropertyDescriptor(array, key) {
+        descriptors.push(key);
+        if (key === 'length') array[0] = 7;
+        return Reflect.getOwnPropertyDescriptor(array, key);
+      },
+    });
+    const result = read(input);
+    assert.deepEqual(typeof result === 'string' ? JSON.parse(result) : result, [7, 2]);
+    assert.deepEqual(descriptors, ['length', '1', '0']);
+  }
 });
 
 test('evicted historical encodings preserve canonical bytes, hashes and warmed structural limits', async () => {

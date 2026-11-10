@@ -11,7 +11,29 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-## Current correction: lot 3B native 0.41.0, functional validation complete, cost reserve
+## Current correction: lot 3B native 0.42.0, functional validation complete, cost reserve
+
+Native **0.42.0** is frozen at **`2de70025ae08845efd491929416e091e9dc9e8e4b473440b9c6a86838e0b3d19`**, with **249 native files** and a **260-file source archive**. The [delivery report](lot3b-state-cost-correction.md) and [evidence index](lot3b-state-cost-evidence/README.md) retain the common-state corrections, contracts and limitations. The entry count remains **50/76**, with **26 remaining**, **37 compiled workflows**, and **2/6 branches** of `observed_composition_services`; complete migration remains false.
+
+The validators collect property descriptors directly while keeping the complete parent snapshot before child traversal, including accepted Proxy ordering. The raw encoder reuses existing private immutable ownership. Hydration certifies only containers it constructs itself; the shared `copyNativeValue` helper copies certified values into detached mutable owners while preserving internal aliases and exact numbers. Foreign values retain `structuredClone`, and custom restorers retain their dispatch. The explicit rejection of holes in malformed raw encoded arrays is a validation tightening. There is no new checkpoint reuse authority or game-specific policy.
+
+| Frozen 0.42 evidence | Result and scope |
+| --- | --- |
+| Affected formal suite | **1,396/1,396 tests, 42 files**, no failures, cancellations, skips or TODOs; native source and test inputs unchanged; [receipt](lot3b-state-cost-evidence/final/validation/delta-tests-run.json) |
+| Project checks | **5/5 passed**, including typecheck, both audits, diff check and production build; [receipt](lot3b-state-cost-evidence/final/validation/checks-run.json) |
+| Fresh CATR campaign | **12 actions, three levels, eight prefixes**, one cold session, natural arrival at level 4 in `NOT_FINISHED`; [execution](lot3b-state-cost-evidence/final/catr-state-cost-session/execution-catr.json) |
+| CATR/RSWP recorded regressions | **2/2 cases, 34/34 historical checks** against 0.41; CATR **12/3/8**, RSWP **19/3/11**; selected comparator fields, not complete state equality or passive-owner coverage; [summary](lot3b-state-cost-evidence/final/regressions/regression-summary.json) |
+| Browser confirmation | Same **12/3/8**, Pause/resume and partial-prefix continuation, source development preview; compiled build verified separately; [receipt](lot3b-state-cost-evidence/final/browser/browser-qa.json) |
+| Official costs | **14/16, `budget_review_required`**, same +10% median threshold, 32 sessions and 400 actions in A1/B1/B2/A2 order; [aggregate](lot3b-state-cost-evidence/performance/combined-comparison.json) |
+| Independent arithmetic review | **231/231 checks**, same budget failure; [receipt](lot3b-state-cost-evidence/performance/consolidation-review.json) |
+
+Against freshly measured 0.38, the two prior targets are within budget: **STCK persistence −8.261037%** and **SMLP restoration +6.223866%**. Two STCK metrics remain unresolved: **known-prefix service +27.720363%** and **known-prefix request +26.350748%**, both above budget in both cohorts. Cohorts retain **14/16 and 13/16**; the second also has a guard overrun. Session medians improve **17.795781% STCK** and **13.442302% SMLP**, without compensating for any individual gate. SMLP guard p95 rises **0.756828 → 7.512366 ms**, and new-decision p95 **800.527360 → 892.998337 ms**. All metrics and tails remain in the [cost report](lot3b-state-cost-evidence/performance/results.md); there are no excluded measured sessions, outliers or added noise allowances.
+
+Instrumented diagnostics against 0.41 pass six scoped behavioral checks per case while retaining `strictFinalEquality: false`. Their timing isolation is not established because short development tests were allowed during baseline scheduling; the [qualification](lot3b-state-cost-evidence/diagnostic/isolation-deviation.json) records the uncertainty without replacing the baseline. Those timings do not establish a causal improvement and are separate from the official window. The measured official work metadata is identical; recorded-return timing does not establish live-game speed or multi-hour stability.
+
+**Lot 3B remains open.** The next correction must investigate the common known-prefix service/request path, preserve guards, witnesses, detached ownership and acquisition, and produce materially changed source before a new frozen official window. **3C `exposed_reception_plan` remains after cost closure.** The [updated roadmap](v6-delivery-roadmap.md) preserves all historical failures and their distinct source identities.
+
+## Historical correction: lot 3B native 0.41.0, functional validation complete, cost reserve
 
 Native 0.41.0 is frozen at
 **`3edffde9b21f4fc8af9dda9a1dbd40707c015d9f7cba8a41460021e39acb7605`**,
@@ -55,7 +77,7 @@ accepts the same subtree at that depth after a shallower occurrence. The candida
 rejects both over-limit forms and continues to accept depth **512**. This is a
 structural-contract correction, not an encoded-format or gameplay-policy change.
 
-| Current 0.41 evidence | Qualification |
+| Historical 0.41 evidence | Qualification |
 | --- | --- |
 | Targeted Inventory contracts | **194/194 passed**, including six new copy/restorer contracts; [receipt](lot3b-smlp-cost-evidence/diagnostic/inventory-copy-getter-tests.json) |
 | Targeted hydration, persistence and canonical contracts | **57/57 passed**, including twelve new hydration-cache contracts; [receipt](lot3b-smlp-cost-evidence/diagnostic/hydration-cache-tests.json) |
@@ -126,8 +148,9 @@ the same **`budget_review_required`, 14/16** verdict. A successful arithmetic
 review does not validate the cost budget.
 
 **Native 0.41.0 is functionally validated with a cost reserve; lot 3B remains open.**
-The next step is to diagnose and reduce the common **STCK persistence** and
-**SMLP restoration** work, retaining source semantics, identities, revisions,
+The next step recorded for this historical 0.41 result was to diagnose and reduce
+the common **STCK persistence** and **SMLP restoration** work. The 0.42 correction
+above performs that step while retaining source semantics, identities, revisions,
 guards, unique acquisition and old checkpoints. A concrete generic code change,
 new source freeze and predeclared protocol must precede the next official cost
 validation against fresh 0.38. No repeat of the unchanged `3edffde` source replaces
@@ -140,7 +163,7 @@ this retained result. The earlier outcomes remain **15/16 for 0.39**,
 workflows**; the [roadmap](v6-delivery-roadmap.md) retains all eleven lots, the
 separate 2A/2B/2C scopes and the six false complete-migration gates.
 
-The next implementation hypotheses remain **unproven**: traverse dense arrays
+The historical 0.41 implementation hypotheses were **unproven** at that stage: traverse dense arrays
 certified by `immutableJson` directly by index in `canonical.encode`, avoiding
 `Object.entries` pair allocations while preserving full foreign-input validation,
 canonical bytes, Unicode, structural limits and Kernel commits. The

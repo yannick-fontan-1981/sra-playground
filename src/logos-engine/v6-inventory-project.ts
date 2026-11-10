@@ -6,6 +6,7 @@ import { measure as measure_effect_scope } from './v6-inventory-effect-scope.ts'
 import { transferred_shape,reverse_transfer,display_matches } from './v6-inventory-contrast.ts';
 import { measurements } from './v6-inventory-control-revalidation.ts';
 import { pythonEqual as same,pythonTruthy as truth } from './v6-operations.ts';
+import { copyNativeValue } from './v6-native-owned.ts';
 import type { NativeRows } from './v6-native-types.ts';
 
 export class CellProjection {
@@ -15,7 +16,7 @@ export class CellProjection {
   if(this.initial_hash===null){this.initial_hash=digest(rows);this.initial_ref=obs.observation_ref;}
  }
  state():R{return clone({...this,underlays:[...this.underlays].map(([k,v])=>[k.split(',').map(Number),v])});}
- restore(state:R):void{const value=clone(state);value.underlays=new Map((value.underlays??[]).map(([k,v]:[number[],R])=>[key(k),v]));Object.assign(this,value);}
+ restore(state:R):void{const value=copyNativeValue(state);value.underlays=new Map((value.underlays??[]).map(([k,v]:[number[],R])=>[key(k),v]));Object.assign(this,value);}
  record(before:R,after:R,action:R,first:NativeRows,second:NativeRows,control_revalidation:((facts:R)=>R)|null=null):R|null{
   this.observe_scope(before,first);if(before.level_epoch!==after.level_epoch)return null;
   if(digest(second)===this.initial_hash&&!same(first,second)){this.underlays=new Map();this.displayed=null;this.last_motion=null;for(const control of Object.values(this.controls))control.recalled_hypothesis=true;

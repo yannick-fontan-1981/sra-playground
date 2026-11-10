@@ -1,0 +1,25 @@
+{
+  "schema": "logos-engine.native-loop-cost-cases.v1",
+  "rounds": 1,
+  "cases": [
+    {
+      "id": "STCK",
+      "trace": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "traceSha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+      "actions": 10,
+      "targetLevels": 3,
+      "warmupActions": 0,
+      "purpose": "One cold normal-path attribution diagnostic; no warmup and no official budget decision."
+    },
+    {
+      "id": "SMLP",
+      "trace": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "traceSha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+      "actions": 15,
+      "targetLevels": 3,
+      "warmupActions": 0,
+      "purpose": "One cold normal-path attribution diagnostic; no warmup and no official budget decision."
+    }
+  ],
+  "qualification": "Four fixed diagnostic runs: published 0.41 STCK10, published 0.41 SMLP15, frozen correction 0.42 STCK10, frozen correction 0.42 SMLP15. One session per case/source, zero warmup. The unchanged profiler executes only the selected case once. The sixteen-median budget remains a separate ABBA window against freshly measured 0.38."
+}

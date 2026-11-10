@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.native-state-cost-diagnostic-declaration.v1",
+  "recordedAt": "2026-11-10T04:13:39.290658+00:00",
+  "status": "declared_before_execution",
+  "generator": {
+    "path": "scripts/profile-native-state-costs.mjs",
+    "sha256": "d4ebd302163ea4d96c6d7699d29a036547f0e82fec35c93c7c3a0c4ee077de55",
+    "bytes": 18208
+  },
+  "comparator": {
+    "path": "scripts/compare-native-restoration-paths.mjs",
+    "sha256": "da2468b0ff39dd30a67b46357aaf4c25ea3c94b21d569604e8b95542d2b36f0b",
+    "bytes": 11263
+  },
+  "protocol": {
+    "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/protocol.md",
+    "sha256": "98386327f981904ab111d752cf40ff1dec7dcefefeb989dfa7acb170bb838c0d",
+    "bytes": 5107
+  },
+  "cases": {
+    "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/cases.json",
+    "sha256": "8989691c48a0d2b8204bb9039979fb8112d06697a02d3c93c8892d0c90a87e32",
+    "bytes": 1206
+  },
+  "publishedNativeSourceManifest": {
+    "path": "docs/migration/lot3b-state-cost-evidence/published/source-manifest.json",
+    "sha256": "12b765bcd7348af0f7e3e4325862cae570c2b81470475839fdfe9df79fa2078b",
+    "bytes": 29431
+  },
+  "beforeNativeDigest": "3edffde9b21f4fc8af9dda9a1dbd40707c015d9f7cba8a41460021e39acb7605",
+  "afterNativeDigest": "required_as_generator_argument_and_recorded_in_frozen_after_manifest_before_execution",
+  "order": [
+    "published_041_STCK10",
+    "published_041_SMLP15",
+    "frozen_corrected_042_STCK10",
+    "frozen_corrected_042_SMLP15"
+  ],
+  "sessionsPerSource": 2,
+  "sessionsPerCaseSource": 1,
+  "warmupSessions": 0,
+  "cpuSampleIntervalMicroseconds": 1000,
+  "budgetDecision": false,
+  "qualification": "Pre-execution declaration only. The exact generator/protocol/cases remain fixed through all four profiles. Future correction identity is bound separately by its frozen manifest and expected digest argument. No execution launched by this declaration."
+}

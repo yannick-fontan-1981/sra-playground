@@ -30,7 +30,7 @@ export function isOwnedImmutableJson(value: unknown): boolean {
   return value !== null && typeof value === 'object' && immutableObjects.has(value);
 }
 
-function jsonEntries(item: object): readonly (readonly [string, unknown])[] {
+function jsonEntries(item: object): [string, unknown][] {
   // Only immutableJson's own closed, deeply frozen results enter this set.
   // Their keys and enumerable data properties have already been validated at
   // ingress. A canonical-text eviction must not make us allocate and validate
@@ -41,16 +41,35 @@ function jsonEntries(item: object): readonly (readonly [string, unknown])[] {
   if (Object.getOwnPropertySymbols(item).length) throw new TypeError('JSON symbol properties are unsupported');
   const array = Array.isArray(item);
   if (!array && !isJsonObject(item)) throw new TypeError('Only plain JSON objects are accepted');
-  const descriptors = Object.getOwnPropertyDescriptors(item);
-  const entries: [string, unknown][] = Object.entries(descriptors).filter(([key]) => !array || key !== 'length');
-  for (const entry of entries) {
-    const [key, descriptor] = entry as [string, PropertyDescriptor];
+  // Snapshot each own descriptor directly. Building a second descriptor record
+  // and then enumerating/filtering it creates several temporary collections for
+  // every persisted array or mapping. The values below still come exclusively
+  // from descriptors: foreign accessors are rejected without being invoked.
+  const entries: [string, unknown][] = [];
+  for (const key of Object.getOwnPropertyNames(item)) {
+    const descriptor = Object.getOwnPropertyDescriptor(item, key);
+    // Like Object.getOwnPropertyDescriptors, ignore a key removed between the
+    // own-key enumeration and descriptor acquisition (possible for a Proxy).
+    if (!descriptor) continue;
+    if (array && key === 'length') continue;
+    entries.push([key, descriptor]);
+  }
+  let orderedArray = true;
+  for (let index = 0; index < entries.length; index++) {
+    const entry = entries[index]!, key = entry[0], descriptor = entry[1] as PropertyDescriptor;
     assertUnicode(key);
     if (!('value' in descriptor) || !descriptor.enumerable) throw new TypeError('JSON requires enumerable data properties');
     entry[1] = descriptor.value;
+    if (array && key !== String(index)) orderedArray = false;
   }
-  if (array && (entries.length !== item.length || entries.some(([key], index) => key !== String(index)))) {
-    throw new TypeError('Sparse or decorated arrays are unsupported');
+  if (array) {
+    if (entries.length !== item.length) throw new TypeError('Sparse or decorated arrays are unsupported');
+    // Object.getOwnPropertyDescriptors used a plain record, whose numeric keys
+    // enumerate in index order even for a Proxy returning reordered ownKeys.
+    if (!orderedArray) {
+      entries.sort(([a], [b]) => Number(a) - Number(b));
+      if (entries.some(([key], index) => key !== String(index))) throw new TypeError('Sparse or decorated arrays are unsupported');
+    }
   }
   return entries;
 }
@@ -145,7 +164,7 @@ export function immutableJson(value: unknown): JsonValue {
     if (Array.isArray(item)) {
       result = entries.map(([, child]) => visit(child, depth + 1));
     } else {
-      const members = [...entries].sort(([a], [b]) => compareUnicode(a, b)).map(([key, child]) => {
+      const members = entries.sort(([a], [b]) => compareUnicode(a, b)).map(([key, child]) => {
         return [key, visit(child, depth + 1)] as const;
       });
       result = Object.fromEntries(members) as JsonObject;
@@ -191,7 +210,7 @@ export function canonical(value: unknown): string {
     if (Array.isArray(item)) {
       encoded = `[${entries.map(([, value]) => child(value)).join(',')}]`;
     } else {
-      encoded = `{${[...entries].sort(([a], [b]) => compareUnicode(a, b)).map(([key, value]) => {
+      encoded = `{${entries.sort(([a], [b]) => compareUnicode(a, b)).map(([key, value]) => {
         return `${JSON.stringify(key)}:${child(value)}`;
       }).join(',')}}`;
     }

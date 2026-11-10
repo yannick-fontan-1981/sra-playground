@@ -1,0 +1,3124 @@
+{
+  "schema": "lot3b-known-prefix-readonly-followup/v1",
+  "status": "post_hoc_analysis_only_no_new_test_no_established_cause",
+  "recordedAt": "2026-11-10T04:46:17.533368+00:00",
+  "scope": "Read-only decomposition of already recorded official STCK known-prefix requests; no execution of native code, test, profile or new performance window; only these two new documentation files are written.",
+  "versions": {
+    "baseline": "0.38",
+    "after": "0.42"
+  },
+  "inputs": {
+    "reports": [
+      {
+        "path": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+        "sha256": "9123080371c68231c7784a5c16fe5d547b99c5e86078eb52e39d9c35eae98e2c",
+        "bytes": 425336,
+        "cohort": "cohort1",
+        "side": "baseline"
+      },
+      {
+        "path": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+        "sha256": "47e3f4f1fb80749dc8529a0075705bf47685a1fbc9341ced522dd4e8ec69f394",
+        "bytes": 426008,
+        "cohort": "cohort1",
+        "side": "after"
+      },
+      {
+        "path": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+        "sha256": "6db7e653a705a8126af5e4e687e6e30cb37051835e1236ed8ae63845ea10065c",
+        "bytes": 425448,
+        "cohort": "cohort2",
+        "side": "baseline"
+      },
+      {
+        "path": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+        "sha256": "83d30f4e59b720982cee615d6dd4db3ee8bdb4152fe26bb7646fbafba8f165b3",
+        "bytes": 426019,
+        "cohort": "cohort2",
+        "side": "after"
+      }
+    ],
+    "combinedComparison": {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/combined-comparison.json",
+      "sha256": "1491be326fccd34d2487be30fca912b9b7a56d4bef0647e13eb2312028011e02",
+      "bytes": 30034
+    },
+    "sourceManifests": {
+      "base": {
+        "path": "docs/migration/lot3b-state-cost-evidence/base/source-manifest.json",
+        "sha256": "0024028577107a7dbcc65ea0cc3ffa929a0ce5a6e7f11bf4515a169fc5cb1146",
+        "bytes": 28936,
+        "nativeDigest": "f0d8b2b0a746f19036076010025fffa1ad532d5751caa176f7efcccff7bc4aff"
+      },
+      "final": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/source-manifest.json",
+        "sha256": "03d74f1cbb023f041a306565c42c48b727674089479e54a5e147219f309cb26c",
+        "bytes": 29431,
+        "nativeDigest": "2de70025ae08845efd491929416e091e9dc9e8e4b473440b9c6a86838e0b3d19"
+      }
+    },
+    "measurementCode": {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59",
+      "bytes": 20670
+    },
+    "comparisonCode": {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    }
+  },
+  "method": {
+    "case": "STCK",
+    "warmups": "Exclude only trials whose warmup is true, as in the official comparison.",
+    "requestFilter": "request.type == 'advance' and request.kind == 'action'",
+    "pairing": "Match guard samples within the same cohort/report/trial and request sequence. This is intra-request pairing, not a paired experimental A/B design.",
+    "formulas": {
+      "guardMs_i": "sum(s.elapsedMs for s in same_trial.samples if s.sequence == request.sequence and s.stage == 'known_prefix_guard')",
+      "serviceOutsideGuardMs_i": "nativeServiceMs_i - guardMs_i",
+      "transportResidualMs_i": "max(0, wallMs_i - nativeServiceMs_i)",
+      "pooledMedian": "For each side separately, pool all 32 request-level differences, sort and average elements 16 and 17 (one-based). Never subtract separately computed medians.",
+      "relativeIncrease": "after_median / baseline_median - 1"
+    },
+    "nesting": "Guard is nested within service and service within request; their reported medians must not be summed. serviceOutsideGuard is a remainder, not an independently timed phase.",
+    "reproduction": "Executable read-only Python snippet included in known-prefix-followup.md; the JSON also contains every selected sample and its source indexes."
+  },
+  "officialSelectedMetrics": [
+    {
+      "stage": "known_prefix_service",
+      "before": {
+        "count": 32,
+        "medianMs": 8.844152000001486,
+        "p95Ms": 11.184790999999677,
+        "minMs": 7.39634500000102,
+        "maxMs": 11.194546999999147
+      },
+      "after": {
+        "count": 32,
+        "medianMs": 11.295783000000483,
+        "p95Ms": 15.736011000000872,
+        "minMs": 7.384601000001567,
+        "maxMs": 17.51669099999708
+      },
+      "medianRelativeIncrease": 0.2772036256272603,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.36440205606023357,
+        "afterRelativeRange": 0.6224441402594562
+      },
+      "budgetApplies": true,
+      "result": "over_budget_with_noise_unresolved"
+    },
+    {
+      "stage": "known_prefix_request",
+      "before": {
+        "count": 32,
+        "medianMs": 10.522126500000013,
+        "p95Ms": 13.319492000002356,
+        "minMs": 8.972701999999117,
+        "maxMs": 13.320585000001302
+      },
+      "after": {
+        "count": 32,
+        "medianMs": 13.294785500000216,
+        "p95Ms": 20.205341999993834,
+        "minMs": 8.962036000000808,
+        "maxMs": 21.51053999999931
+      },
+      "medianRelativeIncrease": 0.2635074763642311,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.3594230071132283,
+        "afterRelativeRange": 0.5780549782650124
+      },
+      "budgetApplies": true,
+      "result": "over_budget_with_noise_unresolved"
+    },
+    {
+      "stage": "known_prefix_guard",
+      "before": {
+        "count": 32,
+        "medianMs": 0.2279915000035544,
+        "p95Ms": 0.3517499999998108,
+        "minMs": 0.08658800000011979,
+        "maxMs": 0.998394999995071
+      },
+      "after": {
+        "count": 32,
+        "medianMs": 0.2437145000021701,
+        "p95Ms": 0.41879899999912595,
+        "minMs": 0.0802880000010191,
+        "maxMs": 0.7669630000018515
+      },
+      "medianRelativeIncrease": 0.06896309730130556,
+      "roundMedianNoise": {
+        "baselineRelativeRange": 0.4222480889795134,
+        "afterRelativeRange": 0.5324223125086565
+      },
+      "budgetApplies": true,
+      "result": "within_observed_budget"
+    }
+  ],
+  "officialBudgetUnchanged": {
+    "relativeLimit": 0.1,
+    "gateCount": 16,
+    "withinObservedBudget": 14,
+    "status": "budget_review_required"
+  },
+  "summaries": {
+    "baseline": {
+      "count": 32,
+      "mediansMs": {
+        "nativeServiceMs": 8.844152000001486,
+        "wallMs": 10.522126500000013,
+        "guardMs": 0.2279915000035544,
+        "serviceOutsideGuardMs": 8.600408000002062,
+        "transportResidualMs": 1.7717114999986734
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 7.39634500000102,
+          "max": 11.194546999999147
+        },
+        "wallMs": {
+          "min": 8.972701999999117,
+          "max": 13.320585000001302
+        },
+        "guardMs": {
+          "min": 0.08658800000011979,
+          "max": 0.998394999995071
+        },
+        "serviceOutsideGuardMs": {
+          "min": 7.224511000000348,
+          "max": 11.058335999994597
+        },
+        "transportResidualMs": {
+          "min": 1.4787739999992482,
+          "max": 3.019149000007019
+        }
+      }
+    },
+    "after": {
+      "count": 32,
+      "mediansMs": {
+        "nativeServiceMs": 11.295783000000483,
+        "wallMs": 13.294785500000216,
+        "guardMs": 0.2437145000021701,
+        "serviceOutsideGuardMs": 11.045734500001345,
+        "transportResidualMs": 1.8937200000000303
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 7.384601000001567,
+          "max": 17.51669099999708
+        },
+        "wallMs": {
+          "min": 8.962036000000808,
+          "max": 21.51053999999931
+        },
+        "guardMs": {
+          "min": 0.0802880000010191,
+          "max": 0.7669630000018515
+        },
+        "serviceOutsideGuardMs": {
+          "min": 7.150705000003654,
+          "max": 16.74972799999523
+        },
+        "transportResidualMs": {
+          "min": 1.4902110000002722,
+          "max": 10.174667999999656
+        }
+      }
+    }
+  },
+  "cohortSummaries": {
+    "cohort1": {
+      "baseline": {
+        "count": 16,
+        "mediansMs": {
+          "nativeServiceMs": 9.175265500000023,
+          "wallMs": 10.864628000000266,
+          "guardMs": 0.23832150000089314,
+          "serviceOutsideGuardMs": 8.998234000000593,
+          "transportResidualMs": 1.9260974999997416
+        },
+        "rangesMs": {
+          "nativeServiceMs": {
+            "min": 7.868671000003815,
+            "max": 11.184790999999677
+          },
+          "wallMs": {
+            "min": 9.490005999999994,
+            "max": 13.320585000001302
+          },
+          "guardMs": {
+            "min": 0.08658800000011979,
+            "max": 0.3517499999998108
+          },
+          "serviceOutsideGuardMs": {
+            "min": 7.632232000003569,
+            "max": 11.013308000001416
+          },
+          "transportResidualMs": {
+            "min": 1.5672249999988708,
+            "max": 3.019149000007019
+          }
+        }
+      },
+      "after": {
+        "count": 16,
+        "mediansMs": {
+          "nativeServiceMs": 11.629465500000151,
+          "wallMs": 13.83770899999945,
+          "guardMs": 0.2579460000015388,
+          "serviceOutsideGuardMs": 11.373017500003698,
+          "transportResidualMs": 2.0678645000007236
+        },
+        "rangesMs": {
+          "nativeServiceMs": {
+            "min": 7.89668299999903,
+            "max": 17.51669099999708
+          },
+          "wallMs": {
+            "min": 9.420414000000164,
+            "max": 20.205341999993834
+          },
+          "guardMs": {
+            "min": 0.0802880000010191,
+            "max": 0.7669630000018515
+          },
+          "serviceOutsideGuardMs": {
+            "min": 7.676226999996288,
+            "max": 16.74972799999523
+          },
+          "transportResidualMs": {
+            "min": 1.4902110000002722,
+            "max": 2.688650999996753
+          }
+        }
+      }
+    },
+    "cohort2": {
+      "baseline": {
+        "count": 16,
+        "mediansMs": {
+          "nativeServiceMs": 8.719924000000901,
+          "wallMs": 10.385583500000394,
+          "guardMs": 0.20887349999975413,
+          "serviceOutsideGuardMs": 8.387448000001314,
+          "transportResidualMs": 1.6733964999984892
+        },
+        "rangesMs": {
+          "nativeServiceMs": {
+            "min": 7.39634500000102,
+            "max": 11.194546999999147
+          },
+          "wallMs": {
+            "min": 8.972701999999117,
+            "max": 13.319492000002356
+          },
+          "guardMs": {
+            "min": 0.08965200000056939,
+            "max": 0.998394999995071
+          },
+          "serviceOutsideGuardMs": {
+            "min": 7.224511000000348,
+            "max": 11.058335999994597
+          },
+          "transportResidualMs": {
+            "min": 1.4787739999992482,
+            "max": 2.2521560000022873
+          }
+        }
+      },
+      "after": {
+        "count": 16,
+        "mediansMs": {
+          "nativeServiceMs": 9.865846500000771,
+          "wallMs": 11.604545000000144,
+          "guardMs": 0.23723550000067917,
+          "serviceOutsideGuardMs": 9.538292500000352,
+          "transportResidualMs": 1.8028174999999464
+        },
+        "rangesMs": {
+          "nativeServiceMs": {
+            "min": 7.384601000001567,
+            "max": 12.739346000002115
+          },
+          "wallMs": {
+            "min": 8.962036000000808,
+            "max": 21.51053999999931
+          },
+          "guardMs": {
+            "min": 0.08779899999899499,
+            "max": 0.3883640000003652
+          },
+          "serviceOutsideGuardMs": {
+            "min": 7.150705000003654,
+            "max": 12.49249200000122
+          },
+          "transportResidualMs": {
+            "min": 1.5133849999983795,
+            "max": 10.174667999999656
+          }
+        }
+      }
+    }
+  },
+  "sessionSummaries": [
+    {
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 1,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 8.767613499999243,
+        "wallMs": 10.550494000000072,
+        "guardMs": 0.2490879999995741,
+        "serviceOutsideGuardMs": 8.55936600000041,
+        "transportResidualMs": 1.9023600000009537
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 8.413927000001422,
+          "max": 9.328437000000122
+        },
+        "wallMs": {
+          "min": 10.47533199999998,
+          "max": 11.13727900000049
+        },
+        "guardMs": {
+          "min": 0.08658800000011979,
+          "max": 0.3517499999998108
+        },
+        "serviceOutsideGuardMs": {
+          "min": 8.16138299999875,
+          "max": 9.060962000001382
+        },
+        "transportResidualMs": {
+          "min": 1.569883000000118,
+          "max": 2.061404999998558
+        }
+      }
+    },
+    {
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 2,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 11.030126499999824,
+        "wallMs": 13.205353999999716,
+        "guardMs": 0.2720969999991212,
+        "serviceOutsideGuardMs": 10.758029500000703,
+        "transportResidualMs": 2.1752274999998917
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 10.824056000001292,
+          "max": 11.184790999999677
+        },
+        "wallMs": {
+          "min": 13.040389999998297,
+          "max": 13.320585000001302
+        },
+        "guardMs": {
+          "min": 0.17148299999826122,
+          "max": 0.3134729999983392
+        },
+        "serviceOutsideGuardMs": {
+          "min": 10.510583000002953,
+          "max": 11.013308000001416
+        },
+        "transportResidualMs": {
+          "min": 2.1357940000016242,
+          "max": 2.216333999997005
+        }
+      }
+    },
+    {
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 3,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 8.922138500001893,
+        "wallMs": 10.524670499999047,
+        "guardMs": 0.23832150000089314,
+        "serviceOutsideGuardMs": 8.639792000001762,
+        "transportResidualMs": 1.6295869999958086
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 7.868671000003815,
+          "max": 9.77970600000117
+        },
+        "wallMs": {
+          "min": 9.490005999999994,
+          "max": 11.514286999998149
+        },
+        "guardMs": {
+          "min": 0.11810500000137836,
+          "max": 0.32448899999872083
+        },
+        "serviceOutsideGuardMs": {
+          "min": 7.632232000003569,
+          "max": 9.661600999999791
+        },
+        "transportResidualMs": {
+          "min": 1.5672249999988708,
+          "max": 1.7345809999969788
+        }
+      }
+    },
+    {
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 4,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 9.053869499999564,
+        "wallMs": 10.994578999998339,
+        "guardMs": 0.22602399999959744,
+        "serviceOutsideGuardMs": 8.827845499999967,
+        "transportResidualMs": 1.9407094999987748
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 8.55881099999533,
+          "max": 10.07269699999597
+        },
+        "wallMs": {
+          "min": 10.230199999998149,
+          "max": 13.091846000002988
+        },
+        "guardMs": {
+          "min": 0.0964120000062394,
+          "max": 0.3397110000005341
+        },
+        "serviceOutsideGuardMs": {
+          "min": 8.219099999994796,
+          "max": 9.97628499998973
+        },
+        "transportResidualMs": {
+          "min": 1.6713890000028186,
+          "max": 3.019149000007019
+        }
+      }
+    },
+    {
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 1,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 11.923569999999927,
+        "wallMs": 14.064241500000207,
+        "guardMs": 0.3237329999992653,
+        "serviceOutsideGuardMs": 11.599837000000662,
+        "transportResidualMs": 2.0967664999998306
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 11.25578399999904,
+          "max": 13.739653000000544
+        },
+        "wallMs": {
+          "min": 13.316376999999193,
+          "max": 15.866202999999587
+        },
+        "guardMs": {
+          "min": 0.1346190000003844,
+          "max": 0.34231499999987136
+        },
+        "serviceOutsideGuardMs": {
+          "min": 11.121164999998655,
+          "max": 13.397338000000673
+        },
+        "transportResidualMs": {
+          "min": 2.0605930000001536,
+          "max": 2.2143599999999424
+        }
+      }
+    },
+    {
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 2,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 11.619143500000064,
+        "wallMs": 13.837208999999348,
+        "guardMs": 0.25136600000041653,
+        "serviceOutsideGuardMs": 11.385253000000375,
+        "transportResidualMs": 1.9849900000008347
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 10.458580999998958,
+          "max": 14.517316000001301
+        },
+        "wallMs": {
+          "min": 12.359814999999799,
+          "max": 16.40352200000052
+        },
+        "guardMs": {
+          "min": 0.15700199999992037,
+          "max": 0.3107789999994566
+        },
+        "serviceOutsideGuardMs": {
+          "min": 10.179308999999193,
+          "max": 14.293856000000233
+        },
+        "transportResidualMs": {
+          "min": 1.8862059999992198,
+          "max": 2.367384999997739
+        }
+      }
+    },
+    {
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 3,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 7.973981999999523,
+        "wallMs": 9.681940000000395,
+        "guardMs": 0.19936450000204786,
+        "serviceOutsideGuardMs": 7.8212469999998575,
+        "transportResidualMs": 1.680818000000727
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 7.89668299999903,
+          "max": 8.072673000002396
+        },
+        "wallMs": {
+          "min": 9.420414000000164,
+          "max": 9.732715000001917
+        },
+        "guardMs": {
+          "min": 0.0802880000010191,
+          "max": 0.22518199999831268
+        },
+        "serviceOutsideGuardMs": {
+          "min": 7.676226999996288,
+          "max": 7.894400000001042
+        },
+        "transportResidualMs": {
+          "min": 1.4902110000002722,
+          "max": 1.7478420000006736
+        }
+      }
+    },
+    {
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 4,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 14.593088000001444,
+        "wallMs": 17.118024499999592,
+        "guardMs": 0.3413795000014943,
+        "serviceOutsideGuardMs": 14.25170849999995,
+        "transportResidualMs": 2.524936499998148
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 11.680662000006123,
+          "max": 17.51669099999708
+        },
+        "wallMs": {
+          "min": 14.077502000000095,
+          "max": 20.205341999993834
+        },
+        "guardMs": {
+          "min": 0.2519319999992149,
+          "max": 0.7669630000018515
+        },
+        "serviceOutsideGuardMs": {
+          "min": 11.428730000006908,
+          "max": 16.74972799999523
+        },
+        "transportResidualMs": {
+          "min": 2.396839999993972,
+          "max": 2.688650999996753
+        }
+      }
+    },
+    {
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 1,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 8.732072000000699,
+        "wallMs": 10.358100500000546,
+        "guardMs": 0.22271899999941525,
+        "serviceOutsideGuardMs": 8.509353000001283,
+        "transportResidualMs": 1.6238509999993767
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 8.304174000000785,
+          "max": 8.799415000001318
+        },
+        "wallMs": {
+          "min": 9.782948000000033,
+          "max": 10.44457599999987
+        },
+        "guardMs": {
+          "min": 0.08965200000056939,
+          "max": 0.30109400000037567
+        },
+        "serviceOutsideGuardMs": {
+          "min": 8.00308000000041,
+          "max": 8.709763000000748
+        },
+        "transportResidualMs": {
+          "min": 1.4787739999992482,
+          "max": 1.649515999999494
+        }
+      }
+    },
+    {
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 2,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 8.611213500000304,
+        "wallMs": 10.349790999998731,
+        "guardMs": 0.21593399999983376,
+        "serviceOutsideGuardMs": 8.42665549999947,
+        "transportResidualMs": 1.6859199999980774
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 8.419925000001967,
+          "max": 8.952042000000802
+        },
+        "wallMs": {
+          "min": 10.11255600000004,
+          "max": 10.637982000000193
+        },
+        "guardMs": {
+          "min": 0.09381800000119256,
+          "max": 0.24356000000261702
+        },
+        "serviceOutsideGuardMs": {
+          "min": 8.254210999999486,
+          "max": 8.717626000001474
+        },
+        "transportResidualMs": {
+          "min": 1.6608930000002147,
+          "max": 1.8229929999979504
+        }
+      }
+    },
+    {
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 3,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 10.248474500000157,
+        "wallMs": 12.397700500005158,
+        "guardMs": 0.2472295000043232,
+        "serviceOutsideGuardMs": 10.001244999995833,
+        "transportResidualMs": 2.097741000005044
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 9.10307499999908,
+          "max": 11.194546999999147
+        },
+        "wallMs": {
+          "min": 10.937274000003526,
+          "max": 13.319492000002356
+        },
+        "guardMs": {
+          "min": 0.13621100000455044,
+          "max": 0.998394999995071
+        },
+        "serviceOutsideGuardMs": {
+          "min": 8.10468000000401,
+          "max": 11.058335999994597
+        },
+        "transportResidualMs": {
+          "min": 1.8341990000044461,
+          "max": 2.2279150000031223
+        }
+      }
+    },
+    {
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 4,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 7.807035500001803,
+        "wallMs": 9.417904500001896,
+        "guardMs": 0.1740624999983993,
+        "serviceOutsideGuardMs": 7.622443000000203,
+        "transportResidualMs": 1.6108690000000934
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 7.39634500000102,
+          "max": 8.075777999998536
+        },
+        "wallMs": {
+          "min": 8.972701999999117,
+          "max": 10.327934000000823
+        },
+        "guardMs": {
+          "min": 0.09010300000227289,
+          "max": 0.19328500000119675
+        },
+        "serviceOutsideGuardMs": {
+          "min": 7.224511000000348,
+          "max": 7.985284000002139
+        },
+        "transportResidualMs": {
+          "min": 1.5763569999980973,
+          "max": 2.2521560000022873
+        }
+      }
+    },
+    {
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 1,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 9.865846500000771,
+        "wallMs": 11.604545000000144,
+        "guardMs": 0.2889015000000654,
+        "serviceOutsideGuardMs": 9.538292500000352,
+        "transportResidualMs": 1.8028174999999464
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 8.700039999999717,
+          "max": 10.325370000000476
+        },
+        "wallMs": {
+          "min": 10.492686999999933,
+          "max": 12.173069000000396
+        },
+        "guardMs": {
+          "min": 0.08779899999899499,
+          "max": 0.3883640000003652
+        },
+        "serviceOutsideGuardMs": {
+          "min": 8.612241000000722,
+          "max": 10.014311000000816
+        },
+        "transportResidualMs": {
+          "min": 1.6644089999990683,
+          "max": 1.8476989999999205
+        }
+      }
+    },
+    {
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 2,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 9.7510970000003,
+        "wallMs": 12.269771999999648,
+        "guardMs": 0.22037599999748636,
+        "serviceOutsideGuardMs": 9.588862000002337,
+        "transportResidualMs": 1.8169379999981174
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 7.384601000001567,
+          "max": 12.739346000002115
+        },
+        "wallMs": {
+          "min": 8.962036000000808,
+          "max": 21.51053999999931
+        },
+        "guardMs": {
+          "min": 0.11761399999886635,
+          "max": 0.2468540000008943
+        },
+        "serviceOutsideGuardMs": {
+          "min": 7.150705000003654,
+          "max": 12.49249200000122
+        },
+        "transportResidualMs": {
+          "min": 1.577434999999241,
+          "max": 10.174667999999656
+        }
+      }
+    },
+    {
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 3,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 11.402265999999145,
+        "wallMs": 13.458177000000433,
+        "guardMs": 0.28210150000086287,
+        "serviceOutsideGuardMs": 11.119848499998625,
+        "transportResidualMs": 2.056227000000945
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 11.335782000001927,
+          "max": 11.50098699999944
+        },
+        "wallMs": {
+          "min": 13.27319400000124,
+          "max": 13.691021000002365
+        },
+        "guardMs": {
+          "min": 0.1206979999988107,
+          "max": 0.313653000001068
+        },
+        "serviceOutsideGuardMs": {
+          "min": 11.022761000000173,
+          "max": 11.38028900000063
+        },
+        "transportResidualMs": {
+          "min": 1.9367799999999988,
+          "max": 2.1900340000029246
+        }
+      }
+    },
+    {
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 4,
+      "count": 4,
+      "mediansMs": {
+        "nativeServiceMs": 8.204968499998358,
+        "wallMs": 9.82779550000123,
+        "guardMs": 0.20439199999600532,
+        "serviceOutsideGuardMs": 8.000856499998918,
+        "transportResidualMs": 1.6117250000024796
+      },
+      "rangesMs": {
+        "nativeServiceMs": {
+          "min": 8.139953000005335,
+          "max": 8.243634999998903
+        },
+        "wallMs": {
+          "min": 9.653338000003714,
+          "max": 9.848956000001635
+        },
+        "guardMs": {
+          "min": 0.09118499999749474,
+          "max": 0.2405750000034459
+        },
+        "serviceOutsideGuardMs": {
+          "min": 7.922462000009546,
+          "max": 8.128806000000623
+        },
+        "transportResidualMs": {
+          "min": 1.5133849999983795,
+          "max": 1.6275250000035157
+        }
+      }
+    }
+  ],
+  "selectedWorkMetadata": {
+    "family": [
+      "public_occurrence_recall"
+    ],
+    "proposalKind": [
+      "public_program_composition"
+    ],
+    "cycles": [
+      4
+    ],
+    "nodeCount": [
+      250
+    ],
+    "acquiredTransitions": [
+      4
+    ]
+  },
+  "sameSequenceMeasuredStages": [
+    "known_prefix_guard"
+  ],
+  "byteIdenticalModulesAcrossOfficialSources": [
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "baselineSha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96",
+      "afterSha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96",
+      "identical": true
+    },
+    {
+      "path": "src/runtime/v6-agent-protocol.ts",
+      "baselineSha256": "597b4d4ab19882a37048e1fa9caeaebea2112b66e25f6294f428bb7916818aa4",
+      "afterSha256": "597b4d4ab19882a37048e1fa9caeaebea2112b66e25f6294f428bb7916818aa4",
+      "identical": true
+    },
+    {
+      "path": "src/logos-engine/v6-native-observer.ts",
+      "baselineSha256": "1a0ffa26548bf6c1ebbd22724731c2238dc24c84074885e832b671dbbe8dfe02",
+      "afterSha256": "1a0ffa26548bf6c1ebbd22724731c2238dc24c84074885e832b671dbbe8dfe02",
+      "identical": true
+    },
+    {
+      "path": "src/logos-engine/v6-native-authority.ts",
+      "baselineSha256": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff",
+      "afterSha256": "f5a54ecac86fb097ee739dc6e4f8b4729819d58c9992fee92188527a1544b3ff",
+      "identical": true
+    },
+    {
+      "path": "src/logos-engine/v6-reasoning-memory.ts",
+      "baselineSha256": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a",
+      "afterSha256": "b55c186c99636f28c9e6e9c657b9bb50892eac06a3306be197503188069d901a",
+      "identical": true
+    },
+    {
+      "path": "src/logos-engine/v6-program-composition-access.ts",
+      "baselineSha256": "0a7c7e5b9fc8123b0c9305ce83c635e9bcfddaeb519a90f8cb9fcc9d62cbfb3b",
+      "afterSha256": "0a7c7e5b9fc8123b0c9305ce83c635e9bcfddaeb519a90f8cb9fcc9d62cbfb3b",
+      "identical": true
+    }
+  ],
+  "findings": [
+    "The official STCK service and request medians exceed the unchanged +10% gate in both cohorts and their aggregate. The lot remains open; aggregate 14/16 is not changed by this analysis.",
+    "The request-level service-minus-guard median rises from 8.600408000002062 ms to 11.045734500001345 ms. The outer residual median rises from 1.7717114999986734 ms to 1.8937200000000303 ms. This locates the unresolved wall-duration increase mainly inside the complete service outside the measured guard, without identifying its cause.",
+    "Only known_prefix_guard is an instrumented inner stage at these sequences; no instrumented plan/seal/persistence/restoration sample is present for these requests.",
+    "Visible selected work metadata and the listed source modules match. This does not establish equal full payload sizes, allocation histories, JIT state, GC state or scheduling.",
+    "Round-to-round ranges are substantial. Two cohort failures cannot be dismissed as noise, and these data do not prove a causal regression from any individual 0.42 edit."
+  ],
+  "hypothesesNotEstablishedCauses": [
+    "Repeated validation/copy/hash/measurement/snapshot work may dominate these requests; the existing phase timings do not break it down.",
+    "JIT, GC and scheduling may contribute to wall-duration differences; no causal evidence is available here.",
+    "A future generic optimization could privately certify a service-created validated/detached/frozen observation and avoid a second runtime clone for that provenance only, retaining defensive processing of foreign inputs.",
+    "A future generic optimization could reuse unchanged immutable snapshot branches by revision, while retaining fresh observations, dynamic fields, tickets, traces and every authorization check."
+  ],
+  "instrumentationNext": [
+    {
+      "path": "src/runtime/v6-agent-protocol.ts",
+      "symbols": [
+        "validateV6PublicObservation",
+        "toV6PublicObservation",
+        "publicFrame"
+      ],
+      "work": "Validation and detached copies of the current 64 by 64 frame and animation frames; record frame counts and validation/copy time separately."
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "symbols": [
+        "nativeObservation"
+      ],
+      "related": [
+        "src/runtime/v6-agent-protocol.ts::v6FrameHash"
+      ],
+      "work": "Construct native public observation, JSON encoding/TextEncoder and async SHA-256 for the frame; distinguish synchronous preparation from await duration."
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "symbols": [
+        "advance"
+      ],
+      "work": "Command comparison, detached observation clone/freeze, measureNativeObservation, family.after, preservation/witness/note work, authorize, and output. Time these separately without adding nested durations together."
+    },
+    {
+      "path": "src/logos-engine/v6-native-observer.ts",
+      "symbols": [
+        "measureNativeObservation",
+        "geometricComponents"
+      ],
+      "work": "Connected components, async component signatures and entity construction; record public component counts and await duration."
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "symbols": [
+        "snapshot",
+        "output"
+      ],
+      "work": "Coverage and family/caller revision maps, authority snapshot, trace outer list and dynamic fields; record branch sizes and revision/identity stability."
+    },
+    {
+      "path": "src/logos-engine/v6-native-authority.ts",
+      "symbols": [
+        "snapshot"
+      ],
+      "related": [
+        "src/logos-engine/v6-reasoning-memory.ts::get"
+      ],
+      "work": "Measure detached copy of EPISODE composition_target returned by reasoning-memory get; record target size and whether its revision changed."
+    },
+    {
+      "path": "src/runtime/v6-agent-service.ts",
+      "symbols": [
+        "snapshot",
+        "accept"
+      ],
+      "work": "Immutable branch checks and reuse, detached copy of remaining snapshot branches, freeze and command/ticket construction; record payload sizes and cache hits."
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "symbols": [
+        "nativeWorker parentPort handler",
+        "transport.request"
+      ],
+      "work": "Keep complete service duration and worker/controller residual separate. Residual includes message cloning/scheduling and worker bookkeeping outside service.handle; it is not pure wire transport."
+    }
+  ],
+  "acceptanceForFutureWork": [
+    "Use a separately declared bounded diagnostic to attribute the remainder before selecting a correction; do not reinterpret this analysis as a new benchmark.",
+    "Preserve point guards, newly observed frames, detached ownership, malformed/foreign input validation, acquisition and checkpoint contracts; add no game- or level-keyed behavior.",
+    "Preserve action/query/state witnesses and the predeclared official protocol, +10% threshold and all measured sessions in the next official comparison."
+  ],
+  "samples": [
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 1,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 8.413927000001422,
+      "wallMs": 10.47533199999998,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.23070100000040838,
+      "serviceOutsideGuardMs": 8.183226000001014,
+      "transportResidualMs": 2.061404999998558,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 1,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 8.513132999998561,
+      "wallMs": 10.5090110000001,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.3517499999998108,
+      "serviceOutsideGuardMs": 8.16138299999875,
+      "transportResidualMs": 1.9958780000015395,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 1,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 9.328437000000122,
+      "wallMs": 11.13727900000049,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.2674749999987398,
+      "serviceOutsideGuardMs": 9.060962000001382,
+      "transportResidualMs": 1.808842000000368,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 1,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 9.022093999999925,
+      "wallMs": 10.591977000000043,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.08658800000011979,
+      "serviceOutsideGuardMs": 8.935505999999805,
+      "transportResidualMs": 1.569883000000118,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 2,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 11.033215999999811,
+      "wallMs": 13.216620999999577,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.2545959999988554,
+      "serviceOutsideGuardMs": 10.778620000000956,
+      "transportResidualMs": 2.183404999999766,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 2,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 10.824056000001292,
+      "wallMs": 13.040389999998297,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.3134729999983392,
+      "serviceOutsideGuardMs": 10.510583000002953,
+      "transportResidualMs": 2.216333999997005,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 2,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 11.027036999999837,
+      "wallMs": 13.194086999999854,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.28959799999938696,
+      "serviceOutsideGuardMs": 10.73743900000045,
+      "transportResidualMs": 2.1670500000000175,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 2,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 11.184790999999677,
+      "wallMs": 13.320585000001302,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.17148299999826122,
+      "serviceOutsideGuardMs": 11.013308000001416,
+      "transportResidualMs": 2.1357940000016242,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 3,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 8.888889000001654,
+      "wallMs": 10.526727999997092,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.2402040000015404,
+      "serviceOutsideGuardMs": 8.648685000000114,
+      "transportResidualMs": 1.637838999995438,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 3,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 8.95538800000213,
+      "wallMs": 10.522613000001002,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.32448899999872083,
+      "serviceOutsideGuardMs": 8.63089900000341,
+      "transportResidualMs": 1.5672249999988708,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 3,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 7.868671000003815,
+      "wallMs": 9.490005999999994,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.23643900000024587,
+      "serviceOutsideGuardMs": 7.632232000003569,
+      "transportResidualMs": 1.6213349999961792,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 3,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 9.77970600000117,
+      "wallMs": 11.514286999998149,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.11810500000137836,
+      "serviceOutsideGuardMs": 9.661600999999791,
+      "transportResidualMs": 1.7345809999969788,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 4,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 8.66532300000108,
+      "wallMs": 10.521639999999024,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.22598399999696994,
+      "serviceOutsideGuardMs": 8.43933900000411,
+      "transportResidualMs": 1.8563169999979436,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 4,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 8.55881099999533,
+      "wallMs": 10.230199999998149,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.3397110000005341,
+      "serviceOutsideGuardMs": 8.219099999994796,
+      "transportResidualMs": 1.6713890000028186,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 4,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 9.442415999998047,
+      "wallMs": 11.467517999997654,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.22606400000222493,
+      "serviceOutsideGuardMs": 9.216351999995823,
+      "transportResidualMs": 2.025101999999606,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "cohort": "cohort1",
+      "side": "baseline",
+      "round": 4,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 10.07269699999597,
+      "wallMs": 13.091846000002988,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.0964120000062394,
+      "serviceOutsideGuardMs": 9.97628499998973,
+      "transportResidualMs": 3.019149000007019,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 1,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 11.630847000000358,
+      "wallMs": 13.697830000000977,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.31733899999926507,
+      "serviceOutsideGuardMs": 11.313508000001093,
+      "transportResidualMs": 2.0669830000006186,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 1,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 12.216292999999496,
+      "wallMs": 14.430652999999438,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.33012699999926554,
+      "serviceOutsideGuardMs": 11.88616600000023,
+      "transportResidualMs": 2.2143599999999424,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 1,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 13.739653000000544,
+      "wallMs": 15.866202999999587,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.34231499999987136,
+      "serviceOutsideGuardMs": 13.397338000000673,
+      "transportResidualMs": 2.1265499999990425,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 1,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 11.25578399999904,
+      "wallMs": 13.316376999999193,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.1346190000003844,
+      "serviceOutsideGuardMs": 11.121164999998655,
+      "transportResidualMs": 2.0605930000001536,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 2,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 14.517316000001301,
+      "wallMs": 16.40352200000052,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.2234600000010687,
+      "serviceOutsideGuardMs": 14.293856000000233,
+      "transportResidualMs": 1.8862059999992198,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 2,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 10.458580999998958,
+      "wallMs": 12.359814999999799,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.2792719999997644,
+      "serviceOutsideGuardMs": 10.179308999999193,
+      "transportResidualMs": 1.9012340000008408,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 2,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 11.628083999999944,
+      "wallMs": 13.696830000000773,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.3107789999994566,
+      "serviceOutsideGuardMs": 11.317305000000488,
+      "transportResidualMs": 2.0687460000008286,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 2,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 11.610203000000183,
+      "wallMs": 13.977587999997922,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.15700199999992037,
+      "serviceOutsideGuardMs": 11.453201000000263,
+      "transportResidualMs": 2.367384999997739,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 3,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 8.017760999999155,
+      "wallMs": 9.732715000001917,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.22518199999831268,
+      "serviceOutsideGuardMs": 7.792579000000842,
+      "transportResidualMs": 1.7149540000027628,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 3,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 8.072673000002396,
+      "wallMs": 9.719355000001087,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.17827300000135438,
+      "serviceOutsideGuardMs": 7.894400000001042,
+      "transportResidualMs": 1.646681999998691,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 3,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 7.89668299999903,
+      "wallMs": 9.644524999999703,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.22045600000274135,
+      "serviceOutsideGuardMs": 7.676226999996288,
+      "transportResidualMs": 1.7478420000006736,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 3,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 7.930202999999892,
+      "wallMs": 9.420414000000164,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.0802880000010191,
+      "serviceOutsideGuardMs": 7.849914999998873,
+      "transportResidualMs": 1.4902110000002722,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 4,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 17.51669099999708,
+      "wallMs": 20.205341999993834,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.7669630000018515,
+      "serviceOutsideGuardMs": 16.74972799999523,
+      "transportResidualMs": 2.688650999996753,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 4,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 15.736011000000872,
+      "wallMs": 18.23230799999874,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.41879899999912595,
+      "serviceOutsideGuardMs": 15.317212000001746,
+      "transportResidualMs": 2.496296999997867,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 4,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 11.680662000006123,
+      "wallMs": 14.077502000000095,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.2519319999992149,
+      "serviceOutsideGuardMs": 11.428730000006908,
+      "transportResidualMs": 2.396839999993972,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "cohort": "cohort1",
+      "side": "after",
+      "round": 4,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 13.450165000002016,
+      "wallMs": 16.003741000000446,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.26396000000386266,
+      "serviceOutsideGuardMs": 13.186204999998154,
+      "transportResidualMs": 2.5535759999984293,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 1,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 8.795060000000376,
+      "wallMs": 10.44457599999987,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.2251429999996617,
+      "serviceOutsideGuardMs": 8.569917000000714,
+      "transportResidualMs": 1.649515999999494,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 1,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 8.304174000000785,
+      "wallMs": 9.782948000000033,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.30109400000037567,
+      "serviceOutsideGuardMs": 8.00308000000041,
+      "transportResidualMs": 1.4787739999992482,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 1,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 8.669084000001021,
+      "wallMs": 10.272968000001129,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.2202949999991688,
+      "serviceOutsideGuardMs": 8.448789000001852,
+      "transportResidualMs": 1.6038840000001073,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 1,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 8.799415000001318,
+      "wallMs": 10.443232999999964,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.08965200000056939,
+      "serviceOutsideGuardMs": 8.709763000000748,
+      "transportResidualMs": 1.643817999998646,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 2,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 8.952042000000802,
+      "wallMs": 10.637982000000193,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.23441599999932805,
+      "serviceOutsideGuardMs": 8.717626000001474,
+      "transportResidualMs": 1.6859399999993911,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 2,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 8.451662999999826,
+      "wallMs": 10.11255600000004,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.19745200000033947,
+      "serviceOutsideGuardMs": 8.254210999999486,
+      "transportResidualMs": 1.6608930000002147,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 2,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 8.770764000000781,
+      "wallMs": 10.456663999997545,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.24356000000261702,
+      "serviceOutsideGuardMs": 8.527203999998164,
+      "transportResidualMs": 1.6858999999967637,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 2,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 8.419925000001967,
+      "wallMs": 10.242917999999918,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.09381800000119256,
+      "serviceOutsideGuardMs": 8.326107000000775,
+      "transportResidualMs": 1.8229929999979504,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 3,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 9.10307499999908,
+      "wallMs": 10.937274000003526,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.998394999995071,
+      "serviceOutsideGuardMs": 8.10468000000401,
+      "transportResidualMs": 1.8341990000044461,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 3,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 10.11162499999773,
+      "wallMs": 12.18216200000461,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.22991900000488386,
+      "serviceOutsideGuardMs": 9.881705999992846,
+      "transportResidualMs": 2.0705370000068797,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 3,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 10.385324000002583,
+      "wallMs": 12.613239000005706,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.26454000000376254,
+      "serviceOutsideGuardMs": 10.120783999998821,
+      "transportResidualMs": 2.2279150000031223,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 3,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 11.194546999999147,
+      "wallMs": 13.319492000002356,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.13621100000455044,
+      "serviceOutsideGuardMs": 11.058335999994597,
+      "transportResidualMs": 2.1249450000032084,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 4,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 8.075777999998536,
+      "wallMs": 10.327934000000823,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.19328500000119675,
+      "serviceOutsideGuardMs": 7.882492999997339,
+      "transportResidualMs": 2.2521560000022873,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 4,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 7.5386839999991935,
+      "wallMs": 9.142682999998215,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.17629099999612663,
+      "serviceOutsideGuardMs": 7.362393000003067,
+      "transportResidualMs": 1.6039989999990212,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 4,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 7.39634500000102,
+      "wallMs": 8.972701999999117,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.17183400000067195,
+      "serviceOutsideGuardMs": 7.224511000000348,
+      "transportResidualMs": 1.5763569999980973,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "cohort": "cohort2",
+      "side": "baseline",
+      "round": 4,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 8.075387000004412,
+      "wallMs": 9.693126000005577,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.09010300000227289,
+      "serviceOutsideGuardMs": 7.985284000002139,
+      "transportResidualMs": 1.6177390000011656,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 1,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 9.618967000000339,
+      "wallMs": 11.283375999999407,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.2667440000004717,
+      "serviceOutsideGuardMs": 9.352222999999867,
+      "transportResidualMs": 1.6644089999990683,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 1,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 10.112726000001203,
+      "wallMs": 11.92571400000088,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.3883640000003652,
+      "serviceOutsideGuardMs": 9.724362000000838,
+      "transportResidualMs": 1.8129879999996774,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 1,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 10.325370000000476,
+      "wallMs": 12.173069000000396,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.31105899999965914,
+      "serviceOutsideGuardMs": 10.014311000000816,
+      "transportResidualMs": 1.8476989999999205,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 1,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 8.700039999999717,
+      "wallMs": 10.492686999999933,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.08779899999899499,
+      "serviceOutsideGuardMs": 8.612241000000722,
+      "transportResidualMs": 1.7926470000002155,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 2,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 12.739346000002115,
+      "wallMs": 14.505372999999963,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.2468540000008943,
+      "serviceOutsideGuardMs": 12.49249200000122,
+      "transportResidualMs": 1.7660269999978482,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 2,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 7.384601000001567,
+      "wallMs": 8.962036000000808,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.23389599999791244,
+      "serviceOutsideGuardMs": 7.150705000003654,
+      "transportResidualMs": 1.577434999999241,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 2,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 8.166322000000946,
+      "wallMs": 10.034170999999333,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.20685599999706028,
+      "serviceOutsideGuardMs": 7.959466000003886,
+      "transportResidualMs": 1.8678489999983867,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 2,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 11.335871999999654,
+      "wallMs": 21.51053999999931,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.11761399999886635,
+      "serviceOutsideGuardMs": 11.218258000000787,
+      "transportResidualMs": 10.174667999999656,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 3,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 11.336414000001241,
+      "wallMs": 13.27319400000124,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.313653000001068,
+      "serviceOutsideGuardMs": 11.022761000000173,
+      "transportResidualMs": 1.9367799999999988,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 3,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 11.335782000001927,
+      "wallMs": 13.32124499999918,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.26707399999941117,
+      "serviceOutsideGuardMs": 11.068708000002516,
+      "transportResidualMs": 1.985462999997253,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 3,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 11.468117999997048,
+      "wallMs": 13.595109000001685,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.29712900000231457,
+      "serviceOutsideGuardMs": 11.170988999994734,
+      "transportResidualMs": 2.1269910000046366,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 3,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 11.50098699999944,
+      "wallMs": 13.691021000002365,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.1206979999988107,
+      "serviceOutsideGuardMs": 11.38028900000063,
+      "transportResidualMs": 2.1900340000029246,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 4,
+      "requestIndex": 9,
+      "sequence": 5,
+      "actions": 5,
+      "nativeServiceMs": 8.1899459999986,
+      "wallMs": 9.817471000002115,
+      "guardSampleIndexes": [
+        34
+      ],
+      "guardMs": 0.19129299999622162,
+      "serviceOutsideGuardMs": 7.998653000002378,
+      "transportResidualMs": 1.6275250000035157,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 5,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 5,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 4,
+      "requestIndex": 10,
+      "sequence": 6,
+      "actions": 6,
+      "nativeServiceMs": 8.243634999998903,
+      "wallMs": 9.848956000001635,
+      "guardSampleIndexes": [
+        36
+      ],
+      "guardMs": 0.2405750000034459,
+      "serviceOutsideGuardMs": 8.003059999995457,
+      "transportResidualMs": 1.605321000002732,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 6,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 6,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 4,
+      "requestIndex": 11,
+      "sequence": 7,
+      "actions": 7,
+      "nativeServiceMs": 8.139953000005335,
+      "wallMs": 9.653338000003714,
+      "guardSampleIndexes": [
+        38
+      ],
+      "guardMs": 0.21749099999578902,
+      "serviceOutsideGuardMs": 7.922462000009546,
+      "transportResidualMs": 1.5133849999983795,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 7,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 7,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    },
+    {
+      "source": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "cohort": "cohort2",
+      "side": "after",
+      "round": 4,
+      "requestIndex": 12,
+      "sequence": 8,
+      "actions": 8,
+      "nativeServiceMs": 8.219990999998117,
+      "wallMs": 9.838120000000345,
+      "guardSampleIndexes": [
+        40
+      ],
+      "guardMs": 0.09118499999749474,
+      "serviceOutsideGuardMs": 8.128806000000623,
+      "transportResidualMs": 1.6181290000022273,
+      "sameSequenceMeasuredStages": [
+        "known_prefix_guard"
+      ],
+      "observation": {
+        "type": "advance",
+        "sequence": 8,
+        "family": "public_occurrence_recall",
+        "proposalKind": "public_program_composition",
+        "poseMode": null,
+        "actions": 8,
+        "cycles": 4,
+        "levelsCompleted": 1,
+        "nodeCount": 250,
+        "acquiredTransitions": 4
+      }
+    }
+  ]
+}

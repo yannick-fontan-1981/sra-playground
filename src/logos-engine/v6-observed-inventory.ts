@@ -19,7 +19,7 @@ import { InventoryCallerContext, ObservedMeter, CollectionEvidence } from './v6-
 import { NativeSrcProgram } from './v6-src-program.ts';
 import { checkPreservation } from './v6-transition-learning.ts';
 import { pythonEqual as same, pythonTruthy as truth } from './v6-operations.ts';
-import { retainNativeJson } from './v6-native-owned.ts';
+import { copyNativeValue, retainNativeJson } from './v6-native-owned.ts';
 import { captureWorkingWitness, matchesWorkingWitness, type NativeWorkingWitness } from './v6-native-working-witness.ts';
 import { isJsonObject } from './canonical.ts';
 import type { JsonObject, Primitive } from './ir.ts';
@@ -79,7 +79,7 @@ interface PreparedInventoryState {
 function prepareSourceState(value: R): PreparedInventoryState {
   const state = retainedSourceState(value), tracker = new CellProjection();
   tracker.restore(state.tracker);
-  const fields = FIELDS.filter(key => key !== 'tracker').map(key => [key, clone(state[key])] as const);
+  const fields = FIELDS.filter(key => key !== 'tracker').map(key => [key, copyNativeValue(state[key])] as const);
   return { tracker, fields };
 }
 

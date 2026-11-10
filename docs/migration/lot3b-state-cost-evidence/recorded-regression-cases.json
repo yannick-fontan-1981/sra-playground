@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.recorded-public-regression-cases.v1",
+  "cases": [
+    {
+      "id": "catr-041",
+      "game": "CATR",
+      "baseline": {
+        "path": "docs/migration/lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/catr-campaign.json.gz",
+        "sha256": "2ba882f125d1727dd51325555b5bf80dc1bc77c0bf13249b47e27cac29486412"
+      },
+      "trace": {
+        "path": "docs/migration/lot3b-smlp-cost-evidence/final/catr-smlp-cost-session/catr-public-trace.json.gz",
+        "sha256": "f0602a7a40bde7c40f850eeef8ad496c3ad9a4e0aeb38fc1ff0ae21b4a6de846"
+      }
+    },
+    {
+      "id": "rswp-041",
+      "game": "RSWP",
+      "baseline": {
+        "path": "docs/migration/lot3b-smlp-cost-evidence/final/regressions/rswp-040-replay.json.gz",
+        "sha256": "ba6bf1e144daf09d554086d1b035a2ec6afa05515340ceb99d4ce1771e490c06"
+      },
+      "trace": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+      }
+    }
+  ],
+  "passiveOwnerRequirements": [],
+  "qualification": "Cold command recomputations against the retained native 0.41 reports from Site 69, commit c1d5e044dce6291b3eee7320f29663ec5b80ea85, native digest 3edffde9b21f4fc8af9dda9a1dbd40707c015d9f7cba8a41460021e39acb7605. CATR baseline is its 0.41 cold campaign and actual corresponding 0.41 public trace: 12 actions, 3 levels, 8 prefixes. RSWP baseline decisions were recomputed by 0.41 in the historically named rswp-040-replay report; actual public returns remain the retained 0.38 trace, without relabeling: 19 actions, 3 levels, 11 prefixes. Each current command is computed before its recorded return. The unchanged historical comparator applies 17 bounded checks per case. No passive-owner checks are added by the empty requirements list. These are recorded-return regressions, not new live-game successes, complete state equality or timing evidence."
+}

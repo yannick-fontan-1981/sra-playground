@@ -2,16 +2,14 @@
  * It is checkpointed separately from the inventory family's eight source
  * fields. An indicator is measured before a resource role is hypothesized. */
 import { pythonEqual as same, pythonTruthy as truth } from './v6-operations.ts';
-import { retainNativeJson } from './v6-native-owned.ts';
+import { copyNativeValue, retainNativeJson } from './v6-native-owned.ts';
 import { isJsonObject } from './canonical.ts';
 import type { NativeRows } from './v6-native-types.ts';
 type R = Record<string, any>;
 type Key = [string, number, number, string, number];
-// Primitive values have no mutable owner to detach. Keep structuredClone for
-// objects and for its rejection of functions/symbols; numeric edge values and
-// bigint/undefined retain the same source-facing copy semantics.
-const clone = <T>(v: T): T => v === null || (typeof v !== 'object' && typeof v !== 'function' && typeof v !== 'symbol')
-  ? v : structuredClone(v);
+// The common copy boundary detaches native JSON and preserves structuredClone
+// semantics for foreign source values and custom objects.
+const clone = copyNativeValue;
 const keyOf = (key: readonly unknown[]): string => JSON.stringify(key);
 const tuple = (key: string): Key => JSON.parse(key);
 const compare = (a: readonly any[], b: readonly any[]): number => {

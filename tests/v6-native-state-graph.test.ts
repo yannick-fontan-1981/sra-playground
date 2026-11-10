@@ -4,7 +4,7 @@ import test from 'node:test';
 import { immutableJson } from '../src/logos-engine/canonical.ts';
 import { sha256Bytes } from '../src/logos-engine/v6-hash.ts';
 import { decodeNativeState, encodeNativeState } from '../src/logos-engine/v6-knowledge-store.ts';
-import { hydrateNativeState, isNativeStateGraph, splitNativeState, type SplitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
+import { hydrateNativeState, isHydratedNativeJson, isNativeStateGraph, splitNativeState, type SplitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 
 function restore(graph: SplitNativeState) {
   const fragments = new Map(graph.fragments.map(fragment => [fragment.id, decodeNativeState(encodeNativeState(fragment.value))]));
@@ -84,4 +84,110 @@ test('unsupported native values are rejected without invoking getters or accepti
   }
   assert.equal(getterCalled, false);
   for (const maxFragmentNodes of [0, 31, 1.5, 65_537]) assert.throws(() => splitNativeState({}, 'invalid', { maxFragmentNodes }), /bound/);
+});
+
+test('native state property snapshots precede child traversal', () => {
+  const input: Record<string, unknown> = {};
+  input.first = new Proxy({ count: 1 }, {
+    getPrototypeOf(target) { input.last = 9; return Reflect.getPrototypeOf(target); },
+  });
+  input.last = 2;
+  const graph = splitNativeState(input, 'snapshot');
+  assert.equal(input.last, 9);
+  assert.deepEqual(restore(graph), { first: { count: 1 }, last: 2 });
+});
+
+test('native state snapshots acquire array length descriptors and normalize proxy key order', () => {
+  const target = [1, 2], descriptors: PropertyKey[] = [];
+  const input = new Proxy(target, {
+    ownKeys() { return ['length', '1', '0']; },
+    getOwnPropertyDescriptor(array, key) {
+      descriptors.push(key);
+      if (key === 'length') array[0] = 7;
+      return Reflect.getOwnPropertyDescriptor(array, key);
+    },
+  });
+  assert.deepEqual(restore(splitNativeState(input, 'proxy-keys')), [7, 2]);
+  assert.deepEqual(descriptors, ['length', '1', '0']);
+});
+
+test('native state reuses only private immutable ingress property validation', context => {
+  const input = immutableJson({ '\u{10000}': Array.from({ length: 40 }, (_, index) => [index, index / 3, -0]), '\ue000': { observed: true } });
+  const trusted = new Set<object>();
+  const collect = (value: unknown): void => {
+    if (!value || typeof value !== 'object') return;
+    trusted.add(value); for (const child of Object.values(value)) collect(child);
+  };
+  collect(input);
+  const original = Object.getOwnPropertyDescriptor;
+  let trustedReads = 0;
+  context.mock.method(Object, 'getOwnPropertyDescriptor', (value: object, key: PropertyKey) => {
+    if (trusted.has(value)) trustedReads++;
+    return original(value, key);
+  });
+  const trustedGraph = splitNativeState(input, 'owned', { maxFragmentNodes: 32 });
+  assert.equal(trustedReads, 0);
+  assert.deepEqual(trustedGraph, splitNativeState(structuredClone(input), 'owned', { maxFragmentNodes: 32 }));
+  assert.deepEqual(restore(trustedGraph), input);
+  const mutable = { value: 3 }, shallow = Object.freeze({ mutable });
+  assert.deepEqual(restore(splitNativeState(shallow, 'foreign')), { mutable: { value: 3 } });
+  mutable.value = 4;
+  assert.deepEqual(restore(splitNativeState(shallow, 'foreign')), { mutable: { value: 4 } });
+});
+
+test('hydration ownership marks only closed decoder outputs, including assembled groups', () => {
+  const input = { values: Array.from({ length: 100 }, (_, index) => ({ value: index })),
+    members: Object.fromEntries(Array.from({ length: 100 }, (_, index) => [`k${index}`, [index, -0]])) };
+  const graph = splitNativeState(input, 'hydrated-ownership', { maxFragmentNodes: 32 });
+  const restored = restore(graph);
+  const check = (value: unknown): void => {
+    if (!value || typeof value !== 'object') return;
+    assert.equal(isHydratedNativeJson(value), true);
+    assert.equal(Object.isFrozen(value), true);
+    for (const child of Object.values(value)) check(child);
+  };
+  check(restored);
+  assert.deepEqual(restored, input);
+  for (const unowned of [input, graph.root, graph.fragments[0]!.value, Object.freeze({ child: {} }), immutableJson({ child: [1] }), null, 1]) {
+    assert.equal(isHydratedNativeJson(unowned), false);
+  }
+});
+
+test('raw graph collection methods and species cannot supply a hydration-owned container', () => {
+  let callerCalls = 0;
+  const foreign = { child: { mutable: true } };
+  const items = Object.assign([1, 2], { map() { callerCalls++; return foreign; } });
+  const root = (node: unknown) => ({ profile: 'logos-engine.v6.state-graph.v1', component: 'raw', root: node });
+  const decoded = hydrateNativeState(root({ kind: 'array', items }), () => undefined);
+  assert.deepEqual(decoded, [1, 2]);
+  assert.equal(isHydratedNativeJson(decoded), true);
+  assert.equal(isHydratedNativeJson(foreign), false);
+  assert.equal(Object.isFrozen(foreign), false);
+  class CallerArray extends Array {
+    static get [Symbol.species]() { callerCalls++; throw new Error('Caller species must not run'); }
+  }
+  const subclass = new CallerArray(); subclass.push(3, 4);
+  const decodedSubclass = hydrateNativeState(root({ kind: 'array', items: subclass }), () => undefined);
+  assert.deepEqual(decodedSubclass, [3, 4]);
+  assert.equal(Object.getPrototypeOf(decodedSubclass), Array.prototype);
+  const parts = Object.assign([{ kind: 'array', items: [5] }, { kind: 'array', items: [6] }], {
+    map() { callerCalls++; return [foreign]; },
+  });
+  assert.deepEqual(hydrateNativeState(root({ kind: 'concat', parts }), () => undefined), [5, 6]);
+  assert.throws(() => hydrateNativeState(root({ kind: 'array', items: [, 1] }), () => undefined), /Invalid native state graph node/);
+  assert.equal(callerCalls, 0);
+});
+
+test('raw hydration snapshots collection length before decoding children', () => {
+  const items: unknown[] = [], parts: unknown[] = [];
+  items.push(new Proxy({ kind: 'object', members: { value: 1 } }, {
+    getPrototypeOf(target) { items.push(9); return Reflect.getPrototypeOf(target); },
+  }));
+  parts.push(new Proxy({ kind: 'array', items: [2] }, {
+    getPrototypeOf(target) { parts.push({ kind: 'array', items: [9] }); return Reflect.getPrototypeOf(target); },
+  }));
+  const root = (node: unknown) => ({ profile: 'logos-engine.v6.state-graph.v1', component: 'raw', root: node });
+  assert.deepEqual(hydrateNativeState(root({ kind: 'array', items }), () => undefined), [{ value: 1 }]);
+  assert.deepEqual(hydrateNativeState(root({ kind: 'concat', parts }), () => undefined), [2]);
+  assert.equal(items.length, 2); assert.equal(parts.length, 2);
 });

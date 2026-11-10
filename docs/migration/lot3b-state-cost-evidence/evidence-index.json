@@ -1,0 +1,622 @@
+{
+  "schema": "logos-engine.native-state-cost-evidence-index.v1",
+  "recordedAt": "2026-11-10T04:46:38.405907+00:00",
+  "directory": "docs/migration/lot3b-state-cost-evidence",
+  "nativeVersion": "0.42.0",
+  "nativeSourceDigest": "2de70025ae08845efd491929416e091e9dc9e8e4b473440b9c6a86838e0b3d19",
+  "functionalStatus": "passed",
+  "budgetStatus": "budget_review_required",
+  "budgetMetrics": 16,
+  "withinObservedBudget": 14,
+  "lot3B": "open",
+  "lot3C": "awaits_cost_closure",
+  "fileCount": 95,
+  "totalStoredBytes": 12374520,
+  "files": [
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/README.md",
+      "bytes": 7362,
+      "sha256": "431ec63a3f770e110c03d561487caf643f572304bb7cc3f8991b4c80cd80ab49"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/base/source-manifest.json",
+      "bytes": 28936,
+      "sha256": "0024028577107a7dbcc65ea0cc3ffa929a0ce5a6e7f11bf4515a169fc5cb1146"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/after-smlp.cpuprofile.gz",
+      "bytes": 194984,
+      "sha256": "a42781c754030165e5ebd9a705bfed727f90bd8ebf099d002165c1a62ca061fd"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/after-smlp.json.gz",
+      "bytes": 142189,
+      "sha256": "7b6b713cf1cb0468ff8282253744fc7a636ee324ff8b7d63026798dd3836aa07"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/after-smlp.log",
+      "bytes": 562,
+      "sha256": "c721606666397238d6ca4085aeb0db120e38f386abeb23b3c68c9fc263f979d5"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/after-stck.cpuprofile.gz",
+      "bytes": 170559,
+      "sha256": "2609eaff89ad56e6b2b935d61c5b2ccb0a416850845a5a5f044e4af52c8f7be6"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/after-stck.json.gz",
+      "bytes": 112389,
+      "sha256": "699ba587ba7428b20bd257af356d1674dcd727e3410799e929d27b7c5e4ac71e"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/after-stck.log",
+      "bytes": 562,
+      "sha256": "1ac6f8bfb859a593eaac86bedf3a559fdf195a9941cb9ea49d287a1b05bf4f6c"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-copy-receipt.json",
+      "bytes": 2221,
+      "sha256": "533c513fd4d3c5e515acdd32676576c2845a102afbe499c7b6a3a54b17cbb022"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-smlp.cpuprofile.gz",
+      "bytes": 200120,
+      "sha256": "722abf48835b3b419c36459111a75f883a3a4b8b5fd1a59f2146b9c1cd69bfc3"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-smlp.json.gz",
+      "bytes": 142549,
+      "sha256": "f686cd0336aca4f403d5e9fcc2cbcbf081c72fb716859aa14cc88c3b83934bb7"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-smlp.log",
+      "bytes": 564,
+      "sha256": "4f226f0f4fd84955b19d0ba30c23086cb8dc3ae88f9f6d0abfc9947827b3beb7"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-stck.cpuprofile.gz",
+      "bytes": 167516,
+      "sha256": "2ae1cb4a9440c7ab1b7e1475dd591100bd86039b95fc961d6051a49e53e08453"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-stck.json.gz",
+      "bytes": 112516,
+      "sha256": "470d11eb0f82b2a0e6bbc36cd7279bfc709279e2f88591f721c39e13e09c2330"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-stck.log",
+      "bytes": 564,
+      "sha256": "d5c6afd6169b20ffc1f557a6aaf548db7ce19e79515e7e8d0e2dbceccab64b9a"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/cases.json",
+      "bytes": 1206,
+      "sha256": "8989691c48a0d2b8204bb9039979fb8112d06697a02d3c93c8892d0c90a87e32"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/code-review.json",
+      "bytes": 6473,
+      "sha256": "990162fe2296ed2fa6dbb87c2fc8c52764489eeb3fa115b92b2a4f71df4d8747"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/comparison-smlp.json",
+      "bytes": 709145,
+      "sha256": "6d914e3e473ea372a70487f2776bbafcd0224c2394249e60eccb8464756549c6"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/comparison-stck.json",
+      "bytes": 551544,
+      "sha256": "7e2c1fe9c4d7f5ce88d56e179e73fe21fef76eade7c7fbf9e02658372b7bb15d"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/cpu-smlp.json",
+      "bytes": 271871,
+      "sha256": "baf55c5f623b9834e8395b133438cff3cb162134264ffcb621e3cdfc384c2511"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/cpu-stck.json",
+      "bytes": 232984,
+      "sha256": "aa2963b641de6040444b5eb2addb41a875f3fa149de7e7da3908e56aa64eeef8"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/declaration.json",
+      "bytes": 1921,
+      "sha256": "7332d28767f703dcd2efab3fec47cf017c40e6314c7d73ea8c14a9004bf8cb85"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/isolation-deviation.json",
+      "bytes": 1695,
+      "sha256": "84983e4cf041015d213f53f98770d568cf56294f2922537f83d0c62e1c7115bf"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/known-prefix-followup.json",
+      "bytes": 93314,
+      "sha256": "50d1f39f490621986def06f51bb3a8d5256477300f48c236ce59d8d6fb44e460"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/known-prefix-followup.md",
+      "bytes": 10534,
+      "sha256": "7d257a6ac275430acca7a33c2ab52c75199871b80f0919a2e98f98e8b53cddb8"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/protocol.md",
+      "bytes": 5107,
+      "sha256": "98386327f981904ab111d752cf40ff1dec7dcefefeb989dfa7acb170bb838c0d"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/restoration-breakdown.json",
+      "bytes": 51604,
+      "sha256": "0b1489069876e90a9a978625237e260e9e0492a690ea68b6fe6cabe2e3469aef"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/restoration-tests-pre-index-normalization.tap.gz",
+      "bytes": 6718,
+      "sha256": "c6aa7ce537420ac86fa8b1c8885b6e19571ede195146440ad44b3d675a1b7a33"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/restoration-tests.json",
+      "bytes": 31633,
+      "sha256": "6cb87766d9bfd39f65f23eceb1560c40161a5ef2a621a517bb6438805f88725f"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/restoration-tests.tap.gz",
+      "bytes": 6744,
+      "sha256": "fa87badb2876faa6848acfd412eb0958bd9ead317253d487b7f2a44deb1d502e"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/results.md",
+      "bytes": 10229,
+      "sha256": "454426af6ee001abe2494f35deaff64d5b427bef3dc8270381e17ccb789099b6"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/browser/browser-qa.json",
+      "bytes": 2704,
+      "sha256": "f7b550c427936f6933e03d1cb7403447140442b106ab18098c55547f9fc31aae"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/browser/catr-final-ax.txt",
+      "bytes": 10094,
+      "sha256": "d12a61961358bc292630ffe6a43ac5b562d34daf426bb2177ed7e7c84a5cff50"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/browser/catr-three-levels.png",
+      "bytes": 85235,
+      "sha256": "100f6ef6fd8977aa35bb89873673f4bd0badcfdf9fe620b67479e62450dd71b1"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-actual-public-journal.jsonl.gz",
+      "bytes": 17003,
+      "sha256": "197e3664d52bf948cf26a9e3073a9d4a2ea011776920a9a75641013c5c99de88"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-campaign.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "63d185e4da13e043f73439d381d050bb37d9a73d3461120c138c431d2b6d8b05"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-campaign.json.gz.part001",
+      "bytes": 471861,
+      "sha256": "b0c366d55b76efdc4af12de15835a4c502b6b3e603e72325f583714c737ade05"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-campaign.json.gz.parts.json",
+      "bytes": 673,
+      "sha256": "6d165ba36ab32b859c54cc69a6c5079411b16b248a6dbbd5eb2080bed446218a"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-output.log.gz",
+      "bytes": 2603,
+      "sha256": "9039c900a94d132c671b21232933d865fb3c0f8204f00759e1e649d760aaec11"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+      "bytes": 24340,
+      "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/execution-catr.json",
+      "bytes": 63249,
+      "sha256": "a45b3c2292229e5a522c70ffdd6d16ef3226cee1799e68725b1fed7fdab4eed0"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/source-manifest.json",
+      "bytes": 29431,
+      "sha256": "03d74f1cbb023f041a306565c42c48b727674089479e54a5e147219f309cb26c"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/delivery-integrity.json",
+      "bytes": 6983,
+      "sha256": "d055d981e2382b2de2cee830b4a18b80315fcb2b71541b70656edfd309da7fa9"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/catr-041-comparison.json",
+      "bytes": 10652,
+      "sha256": "f7cd66b7934c2064c78250f597eca2a29afe659427ec9a203a95e43b7886163f"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/catr-041-execution.json",
+      "bytes": 4964,
+      "sha256": "cba263e42845e2b68554fed3bc2f5f2ca086294091eb3cfd4f40d395bed08c58"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/catr-041-output.log.gz",
+      "bytes": 2469,
+      "sha256": "03ed5673808c7c186bd49c8714e862d06ff5eb0d4263e0231609573eed56fb1c"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/catr-041-passive-owner-presence.json",
+      "bytes": 1100,
+      "sha256": "8523457092921a3c1f6bb956afb42fbcc9f4dcff693e93d2a57d77857cee86b5"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/catr-041-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "5760ceac7bce05260e7a8a013b227d1c65428b1764e6a93093193a8a9774a5dc"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/catr-041-replay.json.gz.part001",
+      "bytes": 472086,
+      "sha256": "0b979bece451b58fd7b1fcd5d96a37139522fbc37064ce1ff96f155fe9323c4a"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/catr-041-replay.json.gz.parts.json",
+      "bytes": 679,
+      "sha256": "83b06f485f181b266d8e64377d36765fb5c0baeffdafc684c89e6de3125eb489"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/regression-summary.json",
+      "bytes": 75269,
+      "sha256": "331710468156a08004500f637f8f8de91cc24b160d6be6b0ce9fc832bc6c9a2e"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/rswp-041-comparison.json",
+      "bytes": 10632,
+      "sha256": "113a07d3b33ac4f6f5951a153a8a74acd1500b8ebb793e7d568a197398dac125"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/rswp-041-execution.json",
+      "bytes": 4930,
+      "sha256": "66b1bfb16def19eb939af9b2beeedd09a9cb43e6cd6ca1e47f20c57b64a93eca"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/rswp-041-output.log.gz",
+      "bytes": 2958,
+      "sha256": "284562010c8e03e8ec198d1fe347af5051d856f93e0475d1e4c1f86539304edc"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/rswp-041-passive-owner-presence.json",
+      "bytes": 1100,
+      "sha256": "f4523c34083b1a6ea8e32b580e99af6b3590d84a90ba6d2209ace89ce71cbbd3"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/rswp-041-replay.json.gz.part000",
+      "bytes": 900000,
+      "sha256": "c5bf02e1f82f03781ad0fc4637ab38585efdb16ee4199654a7793a374b296665"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/rswp-041-replay.json.gz.part001",
+      "bytes": 900000,
+      "sha256": "b424f9f69581365131a9178028240879ff9c2fd94bf4f61d8d4a565af60dfea5"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/rswp-041-replay.json.gz.part002",
+      "bytes": 376342,
+      "sha256": "02b222af02ca71f115ddaf12a823e6e874104320e624a7b788c8a53cb5e3b68e"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/rswp-041-replay.json.gz.parts.json",
+      "bytes": 847,
+      "sha256": "e5969965dda98a22a698821e32a596a7c87b5fd72bfa975d3ad5a24fb96a3b9b"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/release-scope.json",
+      "bytes": 2312,
+      "sha256": "b5254431709ef58b213bf6b8851bee61f293f78c713723adc29143cd41795660"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/source-archive-parts.json",
+      "bytes": 824,
+      "sha256": "3352536c90f8687a700073ee5f0b2aea7774abda4e298a75f75cdd2628d19534"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/source-archive.json",
+      "bytes": 31073,
+      "sha256": "d9149fbdc159dcc869d5a6c6cef4b3e54d2c882906891a972a2a8f012887c8db"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/source-archive.tar.gz.part000",
+      "bytes": 900000,
+      "sha256": "5e3967199388efee759a6a40a35c7c417f5ec5c8d8b4f71e8ee70e12defe8433"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/source-archive.tar.gz.part001",
+      "bytes": 730872,
+      "sha256": "d10dac1b51b54778a707491af4363df347182aa57832c6184ce1b2182eefaf94"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/source-manifest.json",
+      "bytes": 29431,
+      "sha256": "03d74f1cbb023f041a306565c42c48b727674089479e54a5e147219f309cb26c"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/validation/build-output.log.gz",
+      "bytes": 1588,
+      "sha256": "c95be9c324cd1fe4c9ad02eb221f59586889919963b3e7818af6a1fae7968f45"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/validation/checks-run.json",
+      "bytes": 69421,
+      "sha256": "83fd4219816fbed2690efaa5d30c666003d22be58ccafab4ae2cce211ce9fd96"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/validation/delta-tests-output.log.gz",
+      "bytes": 39600,
+      "sha256": "b26905efc595ce6e2fc329931518e5e14c5496f5bc7331b9ce777f54dae1b2c8"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/validation/delta-tests-run.json",
+      "bytes": 100439,
+      "sha256": "f728b987c550290e590168d8d27e394dc6acc19e51fe9e6cb5fd11c8294dae88"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/validation/diff-check-output.log.gz",
+      "bytes": 20,
+      "sha256": "f61f27bd17de546264aa58f40f3aafaac7021e0ef69c17f6b1b4cd7664a037ec"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/validation/entry-audit-output.log.gz",
+      "bytes": 177,
+      "sha256": "204b6870bdf12b63de658e3a61d4dc5be9e64c13e1c1e7ccc8d2126beed57d2d"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/validation/migration-audit-output.log.gz",
+      "bytes": 205,
+      "sha256": "c47347672bc689b95cb00e77bd46756ad63c1803c2eacc440f1afded0deea694"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/final/validation/typecheck-output.log.gz",
+      "bytes": 141,
+      "sha256": "0d2cbbee31ca5839df68f3a5ae10b6102ed35a65bd129facd4509c36a18a564d"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/input-copies.json",
+      "bytes": 2295,
+      "sha256": "710e7d6026f409f0691b788b483d8ec0424ebb70f7175889471a07dd9773817f"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.json",
+      "bytes": 426008,
+      "sha256": "47e3f4f1fb80749dc8529a0075705bf47685a1fbc9341ced522dd4e8ec69f394"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/after.log",
+      "bytes": 1584,
+      "sha256": "91e5af44e2debf9f7b137ee84ba719d708151a574a956b74f1a3185837b05db9"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.json",
+      "bytes": 425336,
+      "sha256": "9123080371c68231c7784a5c16fe5d547b99c5e86078eb52e39d9c35eae98e2c"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/baseline.log",
+      "bytes": 1569,
+      "sha256": "a18b0c62aee7c7adc252b3dcd7ec4b5a2ed2af46a0bd1418e63b5e76eb67e677"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/cohort1/comparison.json",
+      "bytes": 25592,
+      "sha256": "415f176b7761151f459efe50a391f017220e5006042ac126c50c50debe478b94"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.json",
+      "bytes": 426019,
+      "sha256": "83d30f4e59b720982cee615d6dd4db3ee8bdb4152fe26bb7646fbafba8f165b3"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/after.log",
+      "bytes": 1566,
+      "sha256": "2725ad0db0170c0ed28c136332566e3f65dc25fbdb1d3c45b36d62bca9a75937"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.json",
+      "bytes": 425448,
+      "sha256": "6db7e653a705a8126af5e4e687e6e30cb37051835e1236ed8ae63845ea10065c"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/baseline.log",
+      "bytes": 1582,
+      "sha256": "3b794fed84d527b124a6fa636f7292c8fb6f573f5ed3882365d09bdb7081f427"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/cohort2/comparison.json",
+      "bytes": 25777,
+      "sha256": "48bb4a6673efc32d22a8eb9d0413501653776da5e9f30f7d4a3b26928e636cc3"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/combined-comparison.json",
+      "bytes": 30034,
+      "sha256": "1491be326fccd34d2487be30fca912b9b7a56d4bef0647e13eb2312028011e02"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/consolidation-review.json",
+      "bytes": 45471,
+      "sha256": "8fb4789cc0b846b43e4783ddf835767817f1cfbec00278feae1b7fa97a8d7433"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/declaration.json",
+      "bytes": 4397,
+      "sha256": "bcd373730fe56e59c2b9c4d069fa77ffd4f1f44ba4458af6af4a7079f50077bf"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/protocol.md",
+      "bytes": 10456,
+      "sha256": "5cb3e2547319f0f66b228f38d0b8b54677fb89dfaff652f253f4078d1d1accdd"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/readiness.json",
+      "bytes": 1525,
+      "sha256": "c32deae36f9bb3ae5f9b563e7686a188639497505cecb030cff355d8d447a9d5"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/results.md",
+      "bytes": 15007,
+      "sha256": "ab8ce047074f779791afebd1e71b654e18d36b75efb6f684364313035219b5d2"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/performance/window.json",
+      "bytes": 10378,
+      "sha256": "d5a337c380d081e9940a6f4e326a16d4d56f74d28b25aec784f994e37fe2f34e"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/published/source-manifest.json",
+      "bytes": 29431,
+      "sha256": "12b765bcd7348af0f7e3e4325862cae570c2b81470475839fdfe9df79fa2078b"
+    },
+    {
+      "path": "docs/migration/lot3b-state-cost-evidence/recorded-regression-cases.json",
+      "bytes": 1981,
+      "sha256": "97c8feaa09e9a363f4492bd1225d93e8e239b65225d87baacb847279742836a9"
+    }
+  ],
+  "relatedDocuments": [
+    {
+      "path": "docs/migration/lot3b-state-cost-correction.md",
+      "bytes": 18081,
+      "sha256": "05797f04b382ecbce23b24d24e614d1601902f0cb189ceef6dac2a3ac719ee74"
+    },
+    {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "bytes": 87527,
+      "sha256": "048a0a1b40e83a4a433dab1d37e4585397a0b26d890398ebfb6f9c7d0ddfd43f"
+    },
+    {
+      "path": "docs/migration/v6-native-transfer.md",
+      "bytes": 119026,
+      "sha256": "9cf7620a97ab15145b27856a2f669eea94ca28380e57e2e5b6f545711808fdb3"
+    },
+    {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "bytes": 17720,
+      "sha256": "6e054c544337d0de959eb8c5e081b985fce369b74f6412e47d568188770b1330"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 12215,
+      "sha256": "8c1dd79ca43b19f13d32bf1ac04a26d21b2bd9abf194f56900e9ba0dbcef53c9"
+    }
+  ],
+  "reconstructableOriginals": {
+    "frozenSourceArchive": {
+      "files": 260,
+      "archive": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/source-archive.tar.gz",
+        "sha256": "2ab985c0fb636d3c4492785ad6b87d2f478f5d1227e2d8aa4fa9db7bd7db6b7e",
+        "bytes": 1630872
+      },
+      "members": 260,
+      "parts": 2,
+      "byteIdentical": true
+    },
+    "reports": [
+      {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-campaign.json.gz",
+        "sha256": "e56a0ff8cedbe9881f28ef7f0059f94848dce38c6c81dafc16e9d5ab0891d835",
+        "bytes": 1371861,
+        "manifest": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-campaign.json.gz.parts.json",
+        "parts": 2,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/catr-041-replay.json.gz",
+        "sha256": "22006ab4ed20d06247187ab3cabb9df5d64296018e2457194bf3103fca54d44a",
+        "bytes": 1372086,
+        "manifest": "docs/migration/lot3b-state-cost-evidence/final/regressions/catr-041-replay.json.gz.parts.json",
+        "parts": 2,
+        "restored": true,
+        "byteIdentical": true
+      },
+      {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/regressions/rswp-041-replay.json.gz",
+        "sha256": "66e3281641743a1e678e47fde0beebf5fcfa4a97af72599088f6d2c1a003aa1e",
+        "bytes": 2176342,
+        "manifest": "docs/migration/lot3b-state-cost-evidence/final/regressions/rswp-041-replay.json.gz.parts.json",
+        "parts": 3,
+        "restored": true,
+        "byteIdentical": true
+      }
+    ],
+    "cpuProfiles": [
+      {
+        "compressed": {
+          "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/after-smlp.cpuprofile.gz",
+          "bytes": 194984,
+          "sha256": "a42781c754030165e5ebd9a705bfed727f90bd8ebf099d002165c1a62ca061fd"
+        },
+        "original": {
+          "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/after-smlp.cpuprofile",
+          "bytes": 2819544,
+          "sha256": "c986be6e67402c6796b514549f7fc5de541f619b019aebbb1b5c95bc42ccf19d"
+        },
+        "byteIdentical": true
+      },
+      {
+        "compressed": {
+          "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/after-stck.cpuprofile.gz",
+          "bytes": 170559,
+          "sha256": "2609eaff89ad56e6b2b935d61c5b2ccb0a416850845a5a5f044e4af52c8f7be6"
+        },
+        "original": {
+          "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/after-stck.cpuprofile",
+          "bytes": 2543995,
+          "sha256": "8b0fa7f05e9dae0f8fa56a775652d7004e8a4997251841a9104e37596ec3fa2b"
+        },
+        "byteIdentical": true
+      },
+      {
+        "compressed": {
+          "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-smlp.cpuprofile.gz",
+          "bytes": 200120,
+          "sha256": "722abf48835b3b419c36459111a75f883a3a4b8b5fd1a59f2146b9c1cd69bfc3"
+        },
+        "original": {
+          "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-smlp.cpuprofile",
+          "bytes": 2748824,
+          "sha256": "c90e15645b76b29815296adaaf916f55ac1394c4446b3e1ee89d6d0e9d3bfbea"
+        },
+        "byteIdentical": true
+      },
+      {
+        "compressed": {
+          "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-stck.cpuprofile.gz",
+          "bytes": 167516,
+          "sha256": "2ae1cb4a9440c7ab1b7e1475dd591100bd86039b95fc961d6051a49e53e08453"
+        },
+        "original": {
+          "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-stck.cpuprofile",
+          "bytes": 2390956,
+          "sha256": "d06fc8b629a03d998da977c7a082251630fbabb417891f82be1e44cf1948e84c"
+        },
+        "byteIdentical": true
+      }
+    ]
+  },
+  "qualifications": [
+    "The index inventories every nonignored file in this evidence directory except itself; it does not hash itself.",
+    "Files and related documents are named relative to the repository root. Sources and tests are bound separately by the frozen validation receipts.",
+    "Archive and report originals excluded from Git remain reconstructable through retained parts and manifests. Raw CPU profiles remain reconstructable from byte-identical gzip files.",
+    "Functional validation and integrity do not constitute budget acceptance or complete migration.",
+    "Diagnostic timing isolation was not established; the official window is separately declared and all its measured sessions are retained."
+  ]
+}

@@ -1,0 +1,1526 @@
+{
+  "schema": "logos-engine.native-restoration-readonly-breakdown.v1",
+  "recordedAt": "2026-11-10T04:31:33.379489+00:00",
+  "status": "descriptive_accounting_only",
+  "inputs": {
+    "before": {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/before-smlp.json.gz",
+      "bytes": 142549,
+      "sha256": "f686cd0336aca4f403d5e9fcc2cbcbf081c72fb716859aa14cc88c3b83934bb7",
+      "uncompressedBytes": 1680617,
+      "uncompressedSha256": "766eba872118efda7425ad88c2d11bd6479029766d746c897b2de9108eba126d"
+    },
+    "after": {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/after-smlp.json.gz",
+      "bytes": 142189,
+      "sha256": "7b6b713cf1cb0468ff8282253744fc7a636ee324ff8b7d63026798dd3836aa07",
+      "uncompressedBytes": 1680545,
+      "uncompressedSha256": "a8acdc1018d191c1f8600202f1a998533e67176e549df0d7b6df242e37e28aff"
+    },
+    "isolationDeviation": {
+      "path": "docs/migration/lot3b-state-cost-evidence/diagnostic/isolation-deviation.json",
+      "bytes": 1695,
+      "sha256": "84983e4cf041015d213f53f98770d568cf56294f2922537f83d0c62e1c7115bf"
+    }
+  },
+  "sourceDigests": {
+    "before": "3edffde9b21f4fc8af9dda9a1dbd40707c015d9f7cba8a41460021e39acb7605",
+    "after": "2de70025ae08845efd491929416e091e9dc9e8e4b473440b9c6a86838e0b3d19"
+  },
+  "scope": {
+    "case": "SMLP",
+    "beforeVersion": "0.41.0",
+    "afterVersion": "0.42.0",
+    "parentStage": "runtime.restoreFamilies",
+    "method": "Select recorded runtime.restoreFamilies samples; sum only samples whose parentId directly identifies one of those calls. Nested descendants are not added to their enclosing child duration. Residual is parent elapsed time minus its direct children, not independently sampled CPU self-time.",
+    "newNativeExecutions": 0,
+    "newTimingMeasurements": 0,
+    "accountingToleranceMs": 1e-08
+  },
+  "before": {
+    "parentCount": 18,
+    "parentTotalMs": 140.76483800000233,
+    "parentMedianMs": 6.2620795000002545,
+    "directChildCount": 1692,
+    "directChildComponents": {
+      "family.restore": {
+        "count": 702,
+        "totalMs": 17.057495999997172,
+        "medianMs": 0.008277499999394422
+      },
+      "family.restoreNative": {
+        "count": 144,
+        "totalMs": 87.41035799999827,
+        "medianMs": 0.03619899999921472
+      },
+      "knowledge.stateValue": {
+        "count": 846,
+        "totalMs": 25.571048999960567,
+        "medianMs": 0.0020780000002105226
+      }
+    },
+    "directChildrenTotalMs": 130.038902999956,
+    "parentResidualMs": 10.72593500004632,
+    "summaryParentTotalMs": 140.76483800000233,
+    "readsByNode": {
+      "family_state:acquire_control_for_target": {
+        "count": 18,
+        "totalMs": 0.03404999999929714,
+        "medianMs": 0.0018424999998387648
+      },
+      "family_state:animated_contact": {
+        "count": 18,
+        "totalMs": 0.11418699999649107,
+        "medianMs": 0.002037999999629392
+      },
+      "family_state:attention_parent_return": {
+        "count": 18,
+        "totalMs": 0.021298999994996848,
+        "medianMs": 0.0011269999999967695
+      },
+      "family_state:band_transfer": {
+        "count": 18,
+        "totalMs": 0.05639399999631678,
+        "medianMs": 0.002313999998932559
+      },
+      "family_state:code_program": {
+        "count": 18,
+        "totalMs": 0.0744590000019798,
+        "medianMs": 0.002528499999698397
+      },
+      "family_state:conditional_transit": {
+        "count": 18,
+        "totalMs": 0.029080000000021755,
+        "medianMs": 0.0016224999994847167
+      },
+      "family_state:configured_arrivals": {
+        "count": 18,
+        "totalMs": 1.9776919999978873,
+        "medianMs": 0.10537049999993542
+      },
+      "family_state:constellation_cover": {
+        "count": 18,
+        "totalMs": 0.033970999998928164,
+        "medianMs": 0.001471999999921536
+      },
+      "family_state:containment": {
+        "count": 18,
+        "totalMs": 0.1054550000017116,
+        "medianMs": 0.0020280000001093867
+      },
+      "family_state:contextual_compartments": {
+        "count": 18,
+        "totalMs": 0.045416000001068824,
+        "medianMs": 0.0016769999997450213
+      },
+      "family_state:factored_material_return": {
+        "count": 18,
+        "totalMs": 0.029043000000228858,
+        "medianMs": 0.0015869999997448758
+      },
+      "family_state:fixed_origin": {
+        "count": 18,
+        "totalMs": 0.09838499999546002,
+        "medianMs": 0.002994500000113476
+      },
+      "family_state:goal_access": {
+        "count": 18,
+        "totalMs": 0.03627199999846198,
+        "medianMs": 0.0016470000000481377
+      },
+      "family_state:information_goal": {
+        "count": 18,
+        "totalMs": 0.028593000001365,
+        "medianMs": 0.0016219999995428225
+      },
+      "family_state:invited_reduction": {
+        "count": 18,
+        "totalMs": 0.05810599999927035,
+        "medianMs": 0.002088000000185275
+      },
+      "family_state:joint_transport": {
+        "count": 18,
+        "totalMs": 0.1726539999999659,
+        "medianMs": 0.003900999999814303
+      },
+      "family_state:metric_composition": {
+        "count": 18,
+        "totalMs": 0.08029799999917486,
+        "medianMs": 0.0015719999996690603
+      },
+      "family_state:morphology": {
+        "count": 18,
+        "totalMs": 0.07564199999637822,
+        "medianMs": 0.0023629999996046536
+      },
+      "family_state:observed_frontier": {
+        "count": 18,
+        "totalMs": 0.027572000002237473,
+        "medianMs": 0.001352000000224507
+      },
+      "family_state:orbit_constraints": {
+        "count": 18,
+        "totalMs": 0.07641100000137158,
+        "medianMs": 0.002944000000752567
+      },
+      "family_state:ordered_support_transfer": {
+        "count": 18,
+        "totalMs": 0.055760999997346516,
+        "medianMs": 0.0030244999998103594
+      },
+      "family_state:oriented_coupling": {
+        "count": 18,
+        "totalMs": 0.08371199999714918,
+        "medianMs": 0.0023384999997233535
+      },
+      "family_state:periodic_sums": {
+        "count": 18,
+        "totalMs": 0.048503000002028784,
+        "medianMs": 0.0020579999995788967
+      },
+      "family_state:port_assembly": {
+        "count": 18,
+        "totalMs": 0.039471000000958156,
+        "medianMs": 0.0017779999998310814
+      },
+      "family_state:pre_score_contact": {
+        "count": 18,
+        "totalMs": 0.027180000000498694,
+        "medianMs": 0.001396999999997206
+      },
+      "family_state:public_framed_transfer": {
+        "count": 18,
+        "totalMs": 0.26302800000075877,
+        "medianMs": 0.007896999999957188
+      },
+      "family_state:public_observed_inventory": {
+        "count": 18,
+        "totalMs": 17.606785999996646,
+        "medianMs": 0.13764299999979812
+      },
+      "family_state:public_occurrence_recall": {
+        "count": 18,
+        "totalMs": 0.2553669999986141,
+        "medianMs": 0.0042414999998072744
+      },
+      "family_state:public_ordered_reaction": {
+        "count": 18,
+        "totalMs": 0.0931599999989885,
+        "medianMs": 0.003384999999525462
+      },
+      "family_state:public_outline_service": {
+        "count": 18,
+        "totalMs": 2.3236150000004727,
+        "medianMs": 0.013430000000312248
+      },
+      "family_state:public_reactive_contact": {
+        "count": 18,
+        "totalMs": 0.443442999996023,
+        "medianMs": 0.019974000000729575
+      },
+      "family_state:public_topological_recolor": {
+        "count": 18,
+        "totalMs": 0.11020399999870278,
+        "medianMs": 0.003930999999283813
+      },
+      "family_state:reduction_transport": {
+        "count": 18,
+        "totalMs": 0.08011599999986174,
+        "medianMs": 0.002193500000430504
+      },
+      "family_state:reflected_cover": {
+        "count": 18,
+        "totalMs": 0.038879000002680186,
+        "medianMs": 0.001587500000368891
+      },
+      "family_state:regular_field_correspondence": {
+        "count": 18,
+        "totalMs": 0.0867869999992763,
+        "medianMs": 0.0022634999997990235
+      },
+      "family_state:returned_branch_contrast": {
+        "count": 18,
+        "totalMs": 0.028331000005664464,
+        "medianMs": 0.001421999999365653
+      },
+      "family_state:scored_local_rewrite": {
+        "count": 18,
+        "totalMs": 0.035302999996702056,
+        "medianMs": 0.001832500000091386
+      },
+      "family_state:sliding_cavity": {
+        "count": 18,
+        "totalMs": 0.05393899999739915,
+        "medianMs": 0.002103499999975611
+      },
+      "family_state:slot_substitution": {
+        "count": 18,
+        "totalMs": 0.08048799999801304,
+        "medianMs": 0.002819000000727101
+      },
+      "family_state:subset_diagnosis": {
+        "count": 18,
+        "totalMs": 0.052813000000014654,
+        "medianMs": 0.0023339999997915584
+      },
+      "family_state:support_navigation": {
+        "count": 18,
+        "totalMs": 0.18227899999578767,
+        "medianMs": 0.005502999999862368
+      },
+      "family_state:surface_program": {
+        "count": 18,
+        "totalMs": 0.05821800000148869,
+        "medianMs": 0.0017724999997881241
+      },
+      "family_state:view": {
+        "count": 18,
+        "totalMs": 0.027431999999862455,
+        "medianMs": 0.0014974999999139982
+      },
+      "family_state:view_continuity": {
+        "count": 18,
+        "totalMs": 0.030382999997755178,
+        "medianMs": 0.0016975000000911677
+      },
+      "family_state:visual_sequences": {
+        "count": 18,
+        "totalMs": 0.03601399999888599,
+        "medianMs": 0.001682000000073458
+      },
+      "family_state:window_constraints": {
+        "count": 18,
+        "totalMs": 0.20502499999793145,
+        "medianMs": 0.005342999999811582
+      },
+      "family_state:word_interface": {
+        "count": 18,
+        "totalMs": 0.049832999998443483,
+        "medianMs": 0.0023330000003625173
+      }
+    },
+    "inventoryRestore": {
+      "count": 18,
+      "totalMs": 52.68217699999764,
+      "medianMs": 2.5577524999998786,
+      "minimumMs": 0.483543999999938,
+      "maximumMs": 7.627567000001363
+    },
+    "restorationEvents": [
+      {
+        "sampleId": 57,
+        "sequence": 0,
+        "actionBefore": 0,
+        "actionAfter": 0,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 7.972374999999829,
+        "inventoryRestoreMs": 0.483543999999938,
+        "inventoryReadMs": 0.06795000000010987,
+        "configuredArrivalsReadMs": 0.1559709999999086,
+        "outlineReadMs": 0.01717600000006314
+      },
+      {
+        "sampleId": 340,
+        "sequence": 1,
+        "actionBefore": 1,
+        "actionAfter": 1,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 12.885777999999846,
+        "inventoryRestoreMs": 4.558547999999973,
+        "inventoryReadMs": 1.0367920000003323,
+        "configuredArrivalsReadMs": 0.06527600000026723,
+        "outlineReadMs": 1.1496680000000197
+      },
+      {
+        "sampleId": 437,
+        "sequence": 1,
+        "actionBefore": 1,
+        "actionAfter": 1,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 5.278156000000308,
+        "inventoryRestoreMs": 3.216581000000133,
+        "inventoryReadMs": 0.002314000000296801,
+        "configuredArrivalsReadMs": 0.002084000000195374,
+        "outlineReadMs": 0.018206999999620166
+      },
+      {
+        "sampleId": 673,
+        "sequence": 2,
+        "actionBefore": 2,
+        "actionAfter": 2,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 10.118886999999631,
+        "inventoryRestoreMs": 4.264358999999786,
+        "inventoryReadMs": 1.454899000000296,
+        "configuredArrivalsReadMs": 0.15487799999937124,
+        "outlineReadMs": 0.03934800000024552
+      },
+      {
+        "sampleId": 770,
+        "sequence": 2,
+        "actionBefore": 2,
+        "actionAfter": 2,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 4.563850000000457,
+        "inventoryRestoreMs": 1.9158589999997275,
+        "inventoryReadMs": 0.0025340000001961016,
+        "configuredArrivalsReadMs": 0.00228400000014517,
+        "outlineReadMs": 0.003175000000737782
+      },
+      {
+        "sampleId": 1008,
+        "sequence": 3,
+        "actionBefore": 3,
+        "actionAfter": 3,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 6.072860000000219,
+        "inventoryRestoreMs": 2.519600999999966,
+        "inventoryReadMs": 1.183256999999685,
+        "configuredArrivalsReadMs": 0.2146969999994326,
+        "outlineReadMs": 0.01924799999960669
+      },
+      {
+        "sampleId": 1105,
+        "sequence": 3,
+        "actionBefore": 3,
+        "actionAfter": 3,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 2.5991690000000744,
+        "inventoryRestoreMs": 1.370535000000018,
+        "inventoryReadMs": 0.0039049999995768303,
+        "configuredArrivalsReadMs": 0.001991999999518157,
+        "outlineReadMs": 0.0020839999997406267
+      },
+      {
+        "sampleId": 1344,
+        "sequence": 4,
+        "actionBefore": 4,
+        "actionAfter": 4,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 7.760092000000441,
+        "inventoryRestoreMs": 3.0860579999998663,
+        "inventoryReadMs": 0.8482130000002144,
+        "configuredArrivalsReadMs": 0.14706800000021758,
+        "outlineReadMs": 0.03408099999978731
+      },
+      {
+        "sampleId": 1441,
+        "sequence": 4,
+        "actionBefore": 4,
+        "actionAfter": 4,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 3.0624330000000555,
+        "inventoryRestoreMs": 1.4858640000002197,
+        "inventoryReadMs": 0.0018129999998564017,
+        "configuredArrivalsReadMs": 0.0019730000003619352,
+        "outlineReadMs": 0.002735000000029686
+      },
+      {
+        "sampleId": 1693,
+        "sequence": 7,
+        "actionBefore": 7,
+        "actionAfter": 7,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 6.45129900000029,
+        "inventoryRestoreMs": 2.5959039999997913,
+        "inventoryReadMs": 0.9147009999996953,
+        "configuredArrivalsReadMs": 0.2804040000009991,
+        "outlineReadMs": 0.007661999999982072
+      },
+      {
+        "sampleId": 1790,
+        "sequence": 7,
+        "actionBefore": 7,
+        "actionAfter": 7,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 2.9321210000016436,
+        "inventoryRestoreMs": 1.504782999998497,
+        "inventoryReadMs": 0.0025139999997918494,
+        "configuredArrivalsReadMs": 0.001802000000679982,
+        "outlineReadMs": 0.0011520000007294584
+      },
+      {
+        "sampleId": 2010,
+        "sequence": 8,
+        "actionBefore": 8,
+        "actionAfter": 8,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 11.259490000000369,
+        "inventoryRestoreMs": 3.3825269999997545,
+        "inventoryReadMs": 0.20733599999948638,
+        "configuredArrivalsReadMs": 0.1454649999996036,
+        "outlineReadMs": 0.04008900000007998
+      },
+      {
+        "sampleId": 2107,
+        "sequence": 8,
+        "actionBefore": 8,
+        "actionAfter": 8,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 2.961623999999574,
+        "inventoryRestoreMs": 1.7638150000002497,
+        "inventoryReadMs": 0.004085999999006162,
+        "configuredArrivalsReadMs": 0.001120999999329797,
+        "outlineReadMs": 0.003914999999324209
+      },
+      {
+        "sampleId": 2340,
+        "sequence": 9,
+        "actionBefore": 9,
+        "actionAfter": 9,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 12.874295999999958,
+        "inventoryRestoreMs": 4.867228999999497,
+        "inventoryReadMs": 1.0323449999996228,
+        "configuredArrivalsReadMs": 0.2683469999992667,
+        "outlineReadMs": 0.13875499999994645
+      },
+      {
+        "sampleId": 2437,
+        "sequence": 9,
+        "actionBefore": 9,
+        "actionAfter": 9,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 3.2525540000006004,
+        "inventoryRestoreMs": 1.7829230000006646,
+        "inventoryReadMs": 0.0029149999991204822,
+        "configuredArrivalsReadMs": 0.0019929999998566927,
+        "outlineReadMs": 0.00273399999969115
+      },
+      {
+        "sampleId": 2677,
+        "sequence": 11,
+        "actionBefore": 11,
+        "actionAfter": 11,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 25.93537699999979,
+        "inventoryRestoreMs": 7.627567000001363,
+        "inventoryReadMs": 9.88798400000087,
+        "configuredArrivalsReadMs": 0.21103199999924982,
+        "outlineReadMs": 0.8314080000000104
+      },
+      {
+        "sampleId": 2774,
+        "sequence": 11,
+        "actionBefore": 11,
+        "actionAfter": 11,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 4.240632999999434,
+        "inventoryRestoreMs": 2.3729440000006434,
+        "inventoryReadMs": 0.004566999999951804,
+        "configuredArrivalsReadMs": 0.00171299999965413,
+        "outlineReadMs": 0.002494000000297092
+      },
+      {
+        "sampleId": 3032,
+        "sequence": 15,
+        "actionBefore": 15,
+        "actionAfter": 15,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 10.543843999999808,
+        "inventoryRestoreMs": 3.883535999997548,
+        "inventoryReadMs": 0.9486609999985376,
+        "configuredArrivalsReadMs": 0.31959199999982957,
+        "outlineReadMs": 0.009684000000561355
+      }
+    ],
+    "globalNativeRestoreSampleCount": 147,
+    "summaryMatchesWithin1eMinus8Ms": true
+  },
+  "after": {
+    "parentCount": 18,
+    "parentTotalMs": 148.09919799999966,
+    "parentMedianMs": 7.9094170000001895,
+    "directChildCount": 1692,
+    "directChildComponents": {
+      "family.restore": {
+        "count": 702,
+        "totalMs": 16.047418999975662,
+        "medianMs": 0.008276999999907275
+      },
+      "family.restoreNative": {
+        "count": 144,
+        "totalMs": 84.54310200000964,
+        "medianMs": 0.03733500000043932
+      },
+      "knowledge.stateValue": {
+        "count": 846,
+        "totalMs": 36.14031700000942,
+        "medianMs": 0.0022134999990157667
+      }
+    },
+    "directChildrenTotalMs": 136.73083799999472,
+    "parentResidualMs": 11.368360000004941,
+    "summaryParentTotalMs": 148.09919799999966,
+    "readsByNode": {
+      "family_state:acquire_control_for_target": {
+        "count": 18,
+        "totalMs": 0.028801999995721417,
+        "medianMs": 0.0013469999994413229
+      },
+      "family_state:animated_contact": {
+        "count": 18,
+        "totalMs": 0.040310000006002156,
+        "medianMs": 0.0016575000004195317
+      },
+      "family_state:attention_parent_return": {
+        "count": 18,
+        "totalMs": 0.036072999999760214,
+        "medianMs": 0.001767500000369182
+      },
+      "family_state:band_transfer": {
+        "count": 18,
+        "totalMs": 0.13432000000307198,
+        "medianMs": 0.0034800000003087916
+      },
+      "family_state:code_program": {
+        "count": 18,
+        "totalMs": 0.08952400000066518,
+        "medianMs": 0.002594000000044616
+      },
+      "family_state:conditional_transit": {
+        "count": 18,
+        "totalMs": 0.030428999999912776,
+        "medianMs": 0.0016520000001492008
+      },
+      "family_state:configured_arrivals": {
+        "count": 18,
+        "totalMs": 3.9895740000040405,
+        "medianMs": 0.20596450000027744
+      },
+      "family_state:constellation_cover": {
+        "count": 18,
+        "totalMs": 0.028942000001961787,
+        "medianMs": 0.001327000000173939
+      },
+      "family_state:containment": {
+        "count": 18,
+        "totalMs": 0.13381699999968077,
+        "medianMs": 0.002963999999792577
+      },
+      "family_state:contextual_compartments": {
+        "count": 18,
+        "totalMs": 0.0538489999983085,
+        "medianMs": 0.002378499999849737
+      },
+      "family_state:factored_material_return": {
+        "count": 18,
+        "totalMs": 0.028971999998930187,
+        "medianMs": 0.0014470000003257155
+      },
+      "family_state:fixed_origin": {
+        "count": 18,
+        "totalMs": 0.1182580000033795,
+        "medianMs": 0.004196499999807202
+      },
+      "family_state:goal_access": {
+        "count": 18,
+        "totalMs": 0.03710600000135855,
+        "medianMs": 0.001873000000614411
+      },
+      "family_state:information_goal": {
+        "count": 18,
+        "totalMs": 0.026409000002786343,
+        "medianMs": 0.0013020000003507448
+      },
+      "family_state:invited_reduction": {
+        "count": 18,
+        "totalMs": 0.051907999999912136,
+        "medianMs": 0.002147999999579042
+      },
+      "family_state:joint_transport": {
+        "count": 18,
+        "totalMs": 0.21690999999918859,
+        "medianMs": 0.0023385000004054746
+      },
+      "family_state:metric_composition": {
+        "count": 18,
+        "totalMs": 0.086779000000206,
+        "medianMs": 0.0020935000002282322
+      },
+      "family_state:morphology": {
+        "count": 18,
+        "totalMs": 0.0947789999984252,
+        "medianMs": 0.0024790000002212764
+      },
+      "family_state:observed_frontier": {
+        "count": 18,
+        "totalMs": 0.027559000000110245,
+        "medianMs": 0.0014769999997952254
+      },
+      "family_state:orbit_constraints": {
+        "count": 18,
+        "totalMs": 0.060368000001290056,
+        "medianMs": 0.0027289999998174608
+      },
+      "family_state:ordered_support_transfer": {
+        "count": 18,
+        "totalMs": 0.049563999997644714,
+        "medianMs": 0.002523999999539228
+      },
+      "family_state:oriented_coupling": {
+        "count": 18,
+        "totalMs": 0.087467999999717,
+        "medianMs": 0.002228500000001077
+      },
+      "family_state:periodic_sums": {
+        "count": 18,
+        "totalMs": 0.04619700000012017,
+        "medianMs": 0.002132999999957974
+      },
+      "family_state:port_assembly": {
+        "count": 18,
+        "totalMs": 0.032725999997865074,
+        "medianMs": 0.0015779999994265381
+      },
+      "family_state:pre_score_contact": {
+        "count": 18,
+        "totalMs": 0.028845000000274013,
+        "medianMs": 0.0014924999995855615
+      },
+      "family_state:public_framed_transfer": {
+        "count": 18,
+        "totalMs": 0.31199900000092384,
+        "medianMs": 0.0033145000006697956
+      },
+      "family_state:public_observed_inventory": {
+        "count": 18,
+        "totalMs": 24.83805600000278,
+        "medianMs": 0.2899134999997841
+      },
+      "family_state:public_occurrence_recall": {
+        "count": 18,
+        "totalMs": 0.35249000000089836,
+        "medianMs": 0.0044320000001789595
+      },
+      "family_state:public_ordered_reaction": {
+        "count": 18,
+        "totalMs": 0.1091190000036022,
+        "medianMs": 0.004596499999934167
+      },
+      "family_state:public_outline_service": {
+        "count": 18,
+        "totalMs": 3.1504830000017137,
+        "medianMs": 0.014301000000386921
+      },
+      "family_state:public_reactive_contact": {
+        "count": 18,
+        "totalMs": 0.4979149999992387,
+        "medianMs": 0.01954349999994065
+      },
+      "family_state:public_topological_recolor": {
+        "count": 18,
+        "totalMs": 0.06459500000164553,
+        "medianMs": 0.0030194999990271754
+      },
+      "family_state:reduction_transport": {
+        "count": 18,
+        "totalMs": 0.18489999999883366,
+        "medianMs": 0.001983000000109314
+      },
+      "family_state:reflected_cover": {
+        "count": 18,
+        "totalMs": 0.04494599999998172,
+        "medianMs": 0.002002999999831445
+      },
+      "family_state:regular_field_correspondence": {
+        "count": 18,
+        "totalMs": 0.12075699999536482,
+        "medianMs": 0.003244499999937034
+      },
+      "family_state:returned_branch_contrast": {
+        "count": 18,
+        "totalMs": 0.05697800000029929,
+        "medianMs": 0.0016425000001163426
+      },
+      "family_state:scored_local_rewrite": {
+        "count": 18,
+        "totalMs": 0.025691000000506392,
+        "medianMs": 0.0013069999997696868
+      },
+      "family_state:sliding_cavity": {
+        "count": 18,
+        "totalMs": 0.0544809999971676,
+        "medianMs": 0.001907500000015716
+      },
+      "family_state:slot_substitution": {
+        "count": 18,
+        "totalMs": 0.08051899999759371,
+        "medianMs": 0.0027890000001207227
+      },
+      "family_state:subset_diagnosis": {
+        "count": 18,
+        "totalMs": 0.054430999999567575,
+        "medianMs": 0.002423499999622436
+      },
+      "family_state:support_navigation": {
+        "count": 18,
+        "totalMs": 0.216628999997738,
+        "medianMs": 0.004957500000273285
+      },
+      "family_state:surface_program": {
+        "count": 18,
+        "totalMs": 0.07053500000029089,
+        "medianMs": 0.0021284999997988052
+      },
+      "family_state:view": {
+        "count": 18,
+        "totalMs": 0.035338999998430154,
+        "medianMs": 0.0020930000000589644
+      },
+      "family_state:view_continuity": {
+        "count": 18,
+        "totalMs": 0.037604999999530264,
+        "medianMs": 0.0019225000000915315
+      },
+      "family_state:visual_sequences": {
+        "count": 18,
+        "totalMs": 0.03435000000013133,
+        "medianMs": 0.001616999999669133
+      },
+      "family_state:window_constraints": {
+        "count": 18,
+        "totalMs": 0.19769100000348772,
+        "medianMs": 0.004696999999850959
+      },
+      "family_state:word_interface": {
+        "count": 18,
+        "totalMs": 0.041319999999359425,
+        "medianMs": 0.00203300000021045
+      }
+    },
+    "inventoryRestore": {
+      "count": 18,
+      "totalMs": 53.032617000003484,
+      "medianMs": 2.1553080000001046,
+      "minimumMs": 0.6485680000000684,
+      "maximumMs": 8.200802000001204
+    },
+    "restorationEvents": [
+      {
+        "sampleId": 57,
+        "sequence": 0,
+        "actionBefore": 0,
+        "actionAfter": 0,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 8.125361000000112,
+        "inventoryRestoreMs": 0.6485680000000684,
+        "inventoryReadMs": 0.12294199999996636,
+        "configuredArrivalsReadMs": 0.12436400000001413,
+        "outlineReadMs": 0.0150220000000445
+      },
+      {
+        "sampleId": 340,
+        "sequence": 1,
+        "actionBefore": 1,
+        "actionAfter": 1,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 12.49529500000017,
+        "inventoryRestoreMs": 3.8349240000002283,
+        "inventoryReadMs": 1.817062999999962,
+        "configuredArrivalsReadMs": 0.40238399999998364,
+        "outlineReadMs": 1.248113000000103
+      },
+      {
+        "sampleId": 437,
+        "sequence": 1,
+        "actionBefore": 1,
+        "actionAfter": 1,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 3.4534710000002633,
+        "inventoryRestoreMs": 2.109925999999632,
+        "inventoryReadMs": 0.0031049999997776467,
+        "configuredArrivalsReadMs": 0.0018430000000080327,
+        "outlineReadMs": 0.024236000000200875
+      },
+      {
+        "sampleId": 673,
+        "sequence": 2,
+        "actionBefore": 2,
+        "actionAfter": 2,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 11.460817000000134,
+        "inventoryRestoreMs": 5.738304999999855,
+        "inventoryReadMs": 1.3938490000000456,
+        "configuredArrivalsReadMs": 0.36208499999975174,
+        "outlineReadMs": 0.04381499999999505
+      },
+      {
+        "sampleId": 770,
+        "sequence": 2,
+        "actionBefore": 2,
+        "actionAfter": 2,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 3.3169889999999214,
+        "inventoryRestoreMs": 2.034004999999979,
+        "inventoryReadMs": 0.0028449999999793363,
+        "configuredArrivalsReadMs": 0.0011920000001737208,
+        "outlineReadMs": 0.0032740000001467706
+      },
+      {
+        "sampleId": 1008,
+        "sequence": 3,
+        "actionBefore": 3,
+        "actionAfter": 3,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 6.58396300000004,
+        "inventoryRestoreMs": 2.200690000000577,
+        "inventoryReadMs": 1.49353500000052,
+        "configuredArrivalsReadMs": 0.34698200000002544,
+        "outlineReadMs": 0.021671999999853142
+      },
+      {
+        "sampleId": 1105,
+        "sequence": 3,
+        "actionBefore": 3,
+        "actionAfter": 3,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 3.8213239999995494,
+        "inventoryRestoreMs": 1.9434300000002622,
+        "inventoryReadMs": 0.004407000000355765,
+        "configuredArrivalsReadMs": 0.003125000000181899,
+        "outlineReadMs": 0.002042999999503081
+      },
+      {
+        "sampleId": 1344,
+        "sequence": 4,
+        "actionBefore": 4,
+        "actionAfter": 4,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 11.322594000000208,
+        "inventoryRestoreMs": 3.437397000000601,
+        "inventoryReadMs": 2.049337000000378,
+        "configuredArrivalsReadMs": 0.38656100000025617,
+        "outlineReadMs": 0.05226700000002893
+      },
+      {
+        "sampleId": 1441,
+        "sequence": 4,
+        "actionBefore": 4,
+        "actionAfter": 4,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 4.62600300000031,
+        "inventoryRestoreMs": 2.671104999999443,
+        "inventoryReadMs": 0.00258399999984249,
+        "configuredArrivalsReadMs": 0.0022330000001602457,
+        "outlineReadMs": 0.0036860000000160653
+      },
+      {
+        "sampleId": 1693,
+        "sequence": 7,
+        "actionBefore": 7,
+        "actionAfter": 7,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 7.693473000000267,
+        "inventoryRestoreMs": 3.458298000000468,
+        "inventoryReadMs": 1.1364690000000337,
+        "configuredArrivalsReadMs": 0.457075000000259,
+        "outlineReadMs": 0.013580000000729342
+      },
+      {
+        "sampleId": 1790,
+        "sequence": 7,
+        "actionBefore": 7,
+        "actionAfter": 7,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 2.6771740000003774,
+        "inventoryRestoreMs": 1.4455649999999878,
+        "inventoryReadMs": 0.0020629999999073334,
+        "configuredArrivalsReadMs": 0.0009410000002390007,
+        "outlineReadMs": 0.0010019999999713036
+      },
+      {
+        "sampleId": 2010,
+        "sequence": 8,
+        "actionBefore": 8,
+        "actionAfter": 8,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 8.649454999998852,
+        "inventoryRestoreMs": 1.7212520000011864,
+        "inventoryReadMs": 0.45688499999960186,
+        "configuredArrivalsReadMs": 0.35131900000124006,
+        "outlineReadMs": 0.0421329999990121
+      },
+      {
+        "sampleId": 2107,
+        "sequence": 8,
+        "actionBefore": 8,
+        "actionAfter": 8,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 3.0518670000001293,
+        "inventoryRestoreMs": 1.6558359999999084,
+        "inventoryReadMs": 0.004726999999547843,
+        "configuredArrivalsReadMs": 0.0014830000000074506,
+        "outlineReadMs": 0.0041359999995620456
+      },
+      {
+        "sampleId": 2340,
+        "sequence": 9,
+        "actionBefore": 9,
+        "actionAfter": 9,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 11.440356999999494,
+        "inventoryRestoreMs": 3.4966739999999845,
+        "inventoryReadMs": 1.8508240000010119,
+        "configuredArrivalsReadMs": 0.28756500000054075,
+        "outlineReadMs": 0.04324300000007497
+      },
+      {
+        "sampleId": 2437,
+        "sequence": 9,
+        "actionBefore": 9,
+        "actionAfter": 9,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 3.1827510000002803,
+        "inventoryRestoreMs": 1.442189999999755,
+        "inventoryReadMs": 0.0019230000016250415,
+        "configuredArrivalsReadMs": 0.0010820000006788177,
+        "outlineReadMs": 0.001733000000967877
+      },
+      {
+        "sampleId": 2677,
+        "sequence": 11,
+        "actionBefore": 11,
+        "actionAfter": 11,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 26.63903500000015,
+        "inventoryRestoreMs": 5.079391999999643,
+        "inventoryReadMs": 13.19420700000046,
+        "configuredArrivalsReadMs": 0.5548189999990427,
+        "outlineReadMs": 1.614305000000968
+      },
+      {
+        "sampleId": 2774,
+        "sequence": 11,
+        "actionBefore": 11,
+        "actionAfter": 11,
+        "occurrenceAtAction": 2,
+        "runtimeRestoreFamiliesMs": 10.940939000000071,
+        "inventoryRestoreMs": 8.200802000001204,
+        "inventoryReadMs": 0.004635999999663909,
+        "configuredArrivalsReadMs": 0.0021630000010190997,
+        "outlineReadMs": 0.0029340000000956934
+      },
+      {
+        "sampleId": 3032,
+        "sequence": 15,
+        "actionBefore": 15,
+        "actionAfter": 15,
+        "occurrenceAtAction": 1,
+        "runtimeRestoreFamiliesMs": 8.618329999999332,
+        "inventoryRestoreMs": 1.9142580000007001,
+        "inventoryReadMs": 1.2966550000001007,
+        "configuredArrivalsReadMs": 0.7023580000004586,
+        "outlineReadMs": 0.013289000000440865
+      }
+    ],
+    "globalNativeRestoreSampleCount": 147,
+    "summaryMatchesWithin1eMinus8Ms": true
+  },
+  "deltaTotalMs": {
+    "family.restore": -1.0100770000215107,
+    "family.restoreNative": -2.867255999988629,
+    "knowledge.stateValue": 10.56926800004885,
+    "parentResidual": 0.6424249999586209,
+    "parentTotal": 7.334359999997332
+  },
+  "readIncreaseBreakdown": [
+    {
+      "nodeId": "family_state:public_observed_inventory",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 17.606785999996646,
+      "afterTotalMs": 24.83805600000278,
+      "deltaTotalMs": 7.231270000006134,
+      "beforeMedianMs": 0.13764299999979812,
+      "afterMedianMs": 0.2899134999997841
+    },
+    {
+      "nodeId": "family_state:configured_arrivals",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 1.9776919999978873,
+      "afterTotalMs": 3.9895740000040405,
+      "deltaTotalMs": 2.0118820000061532,
+      "beforeMedianMs": 0.10537049999993542,
+      "afterMedianMs": 0.20596450000027744
+    },
+    {
+      "nodeId": "family_state:public_outline_service",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 2.3236150000004727,
+      "afterTotalMs": 3.1504830000017137,
+      "deltaTotalMs": 0.8268680000012409,
+      "beforeMedianMs": 0.013430000000312248,
+      "afterMedianMs": 0.014301000000386921
+    },
+    {
+      "nodeId": "family_state:reduction_transport",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.08011599999986174,
+      "afterTotalMs": 0.18489999999883366,
+      "deltaTotalMs": 0.10478399999897192,
+      "beforeMedianMs": 0.002193500000430504,
+      "afterMedianMs": 0.001983000000109314
+    },
+    {
+      "nodeId": "family_state:public_occurrence_recall",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.2553669999986141,
+      "afterTotalMs": 0.35249000000089836,
+      "deltaTotalMs": 0.09712300000228424,
+      "beforeMedianMs": 0.0042414999998072744,
+      "afterMedianMs": 0.0044320000001789595
+    },
+    {
+      "nodeId": "family_state:band_transfer",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.05639399999631678,
+      "afterTotalMs": 0.13432000000307198,
+      "deltaTotalMs": 0.0779260000067552,
+      "beforeMedianMs": 0.002313999998932559,
+      "afterMedianMs": 0.0034800000003087916
+    },
+    {
+      "nodeId": "family_state:public_reactive_contact",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.443442999996023,
+      "afterTotalMs": 0.4979149999992387,
+      "deltaTotalMs": 0.054472000003215726,
+      "beforeMedianMs": 0.019974000000729575,
+      "afterMedianMs": 0.01954349999994065
+    },
+    {
+      "nodeId": "family_state:public_framed_transfer",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.26302800000075877,
+      "afterTotalMs": 0.31199900000092384,
+      "deltaTotalMs": 0.04897100000016508,
+      "beforeMedianMs": 0.007896999999957188,
+      "afterMedianMs": 0.0033145000006697956
+    },
+    {
+      "nodeId": "family_state:joint_transport",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.1726539999999659,
+      "afterTotalMs": 0.21690999999918859,
+      "deltaTotalMs": 0.044255999999222695,
+      "beforeMedianMs": 0.003900999999814303,
+      "afterMedianMs": 0.0023385000004054746
+    },
+    {
+      "nodeId": "family_state:support_navigation",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.18227899999578767,
+      "afterTotalMs": 0.216628999997738,
+      "deltaTotalMs": 0.03435000000195032,
+      "beforeMedianMs": 0.005502999999862368,
+      "afterMedianMs": 0.004957500000273285
+    },
+    {
+      "nodeId": "family_state:regular_field_correspondence",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.0867869999992763,
+      "afterTotalMs": 0.12075699999536482,
+      "deltaTotalMs": 0.03396999999608852,
+      "beforeMedianMs": 0.0022634999997990235,
+      "afterMedianMs": 0.003244499999937034
+    },
+    {
+      "nodeId": "family_state:returned_branch_contrast",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.028331000005664464,
+      "afterTotalMs": 0.05697800000029929,
+      "deltaTotalMs": 0.028646999994634825,
+      "beforeMedianMs": 0.001421999999365653,
+      "afterMedianMs": 0.0016425000001163426
+    },
+    {
+      "nodeId": "family_state:containment",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.1054550000017116,
+      "afterTotalMs": 0.13381699999968077,
+      "deltaTotalMs": 0.02836199999796918,
+      "beforeMedianMs": 0.0020280000001093867,
+      "afterMedianMs": 0.002963999999792577
+    },
+    {
+      "nodeId": "family_state:fixed_origin",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.09838499999546002,
+      "afterTotalMs": 0.1182580000033795,
+      "deltaTotalMs": 0.019873000007919472,
+      "beforeMedianMs": 0.002994500000113476,
+      "afterMedianMs": 0.004196499999807202
+    },
+    {
+      "nodeId": "family_state:morphology",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.07564199999637822,
+      "afterTotalMs": 0.0947789999984252,
+      "deltaTotalMs": 0.01913700000204699,
+      "beforeMedianMs": 0.0023629999996046536,
+      "afterMedianMs": 0.0024790000002212764
+    },
+    {
+      "nodeId": "family_state:public_ordered_reaction",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.0931599999989885,
+      "afterTotalMs": 0.1091190000036022,
+      "deltaTotalMs": 0.0159590000046137,
+      "beforeMedianMs": 0.003384999999525462,
+      "afterMedianMs": 0.004596499999934167
+    },
+    {
+      "nodeId": "family_state:code_program",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.0744590000019798,
+      "afterTotalMs": 0.08952400000066518,
+      "deltaTotalMs": 0.01506499999868538,
+      "beforeMedianMs": 0.002528499999698397,
+      "afterMedianMs": 0.002594000000044616
+    },
+    {
+      "nodeId": "family_state:attention_parent_return",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.021298999994996848,
+      "afterTotalMs": 0.036072999999760214,
+      "deltaTotalMs": 0.014774000004763366,
+      "beforeMedianMs": 0.0011269999999967695,
+      "afterMedianMs": 0.001767500000369182
+    },
+    {
+      "nodeId": "family_state:surface_program",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.05821800000148869,
+      "afterTotalMs": 0.07053500000029089,
+      "deltaTotalMs": 0.012316999998802203,
+      "beforeMedianMs": 0.0017724999997881241,
+      "afterMedianMs": 0.0021284999997988052
+    },
+    {
+      "nodeId": "family_state:contextual_compartments",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.045416000001068824,
+      "afterTotalMs": 0.0538489999983085,
+      "deltaTotalMs": 0.008432999997239676,
+      "beforeMedianMs": 0.0016769999997450213,
+      "afterMedianMs": 0.002378499999849737
+    },
+    {
+      "nodeId": "family_state:view",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.027431999999862455,
+      "afterTotalMs": 0.035338999998430154,
+      "deltaTotalMs": 0.007906999998567699,
+      "beforeMedianMs": 0.0014974999999139982,
+      "afterMedianMs": 0.0020930000000589644
+    },
+    {
+      "nodeId": "family_state:view_continuity",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.030382999997755178,
+      "afterTotalMs": 0.037604999999530264,
+      "deltaTotalMs": 0.007222000001775086,
+      "beforeMedianMs": 0.0016975000000911677,
+      "afterMedianMs": 0.0019225000000915315
+    },
+    {
+      "nodeId": "family_state:metric_composition",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.08029799999917486,
+      "afterTotalMs": 0.086779000000206,
+      "deltaTotalMs": 0.006481000001031134,
+      "beforeMedianMs": 0.0015719999996690603,
+      "afterMedianMs": 0.0020935000002282322
+    },
+    {
+      "nodeId": "family_state:reflected_cover",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.038879000002680186,
+      "afterTotalMs": 0.04494599999998172,
+      "deltaTotalMs": 0.0060669999973015365,
+      "beforeMedianMs": 0.001587500000368891,
+      "afterMedianMs": 0.002002999999831445
+    },
+    {
+      "nodeId": "family_state:oriented_coupling",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.08371199999714918,
+      "afterTotalMs": 0.087467999999717,
+      "deltaTotalMs": 0.0037560000025678164,
+      "beforeMedianMs": 0.0023384999997233535,
+      "afterMedianMs": 0.002228500000001077
+    },
+    {
+      "nodeId": "family_state:pre_score_contact",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.027180000000498694,
+      "afterTotalMs": 0.028845000000274013,
+      "deltaTotalMs": 0.0016649999997753184,
+      "beforeMedianMs": 0.001396999999997206,
+      "afterMedianMs": 0.0014924999995855615
+    },
+    {
+      "nodeId": "family_state:subset_diagnosis",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.052813000000014654,
+      "afterTotalMs": 0.054430999999567575,
+      "deltaTotalMs": 0.0016179999995529215,
+      "beforeMedianMs": 0.0023339999997915584,
+      "afterMedianMs": 0.002423499999622436
+    },
+    {
+      "nodeId": "family_state:conditional_transit",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.029080000000021755,
+      "afterTotalMs": 0.030428999999912776,
+      "deltaTotalMs": 0.0013489999998910207,
+      "beforeMedianMs": 0.0016224999994847167,
+      "afterMedianMs": 0.0016520000001492008
+    },
+    {
+      "nodeId": "family_state:goal_access",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.03627199999846198,
+      "afterTotalMs": 0.03710600000135855,
+      "deltaTotalMs": 0.0008340000028965733,
+      "beforeMedianMs": 0.0016470000000481377,
+      "afterMedianMs": 0.001873000000614411
+    },
+    {
+      "nodeId": "family_state:sliding_cavity",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.05393899999739915,
+      "afterTotalMs": 0.0544809999971676,
+      "deltaTotalMs": 0.0005419999997684499,
+      "beforeMedianMs": 0.002103499999975611,
+      "afterMedianMs": 0.001907500000015716
+    },
+    {
+      "nodeId": "family_state:slot_substitution",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.08048799999801304,
+      "afterTotalMs": 0.08051899999759371,
+      "deltaTotalMs": 3.099999958067201e-05,
+      "beforeMedianMs": 0.002819000000727101,
+      "afterMedianMs": 0.0027890000001207227
+    },
+    {
+      "nodeId": "family_state:observed_frontier",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.027572000002237473,
+      "afterTotalMs": 0.027559000000110245,
+      "deltaTotalMs": -1.3000002127228072e-05,
+      "beforeMedianMs": 0.001352000000224507,
+      "afterMedianMs": 0.0014769999997952254
+    },
+    {
+      "nodeId": "family_state:factored_material_return",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.029043000000228858,
+      "afterTotalMs": 0.028971999998930187,
+      "deltaTotalMs": -7.100000129867112e-05,
+      "beforeMedianMs": 0.0015869999997448758,
+      "afterMedianMs": 0.0014470000003257155
+    },
+    {
+      "nodeId": "family_state:visual_sequences",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.03601399999888599,
+      "afterTotalMs": 0.03435000000013133,
+      "deltaTotalMs": -0.0016639999987546616,
+      "beforeMedianMs": 0.001682000000073458,
+      "afterMedianMs": 0.001616999999669133
+    },
+    {
+      "nodeId": "family_state:information_goal",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.028593000001365,
+      "afterTotalMs": 0.026409000002786343,
+      "deltaTotalMs": -0.0021839999985786562,
+      "beforeMedianMs": 0.0016219999995428225,
+      "afterMedianMs": 0.0013020000003507448
+    },
+    {
+      "nodeId": "family_state:periodic_sums",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.048503000002028784,
+      "afterTotalMs": 0.04619700000012017,
+      "deltaTotalMs": -0.0023060000019086146,
+      "beforeMedianMs": 0.0020579999995788967,
+      "afterMedianMs": 0.002132999999957974
+    },
+    {
+      "nodeId": "family_state:constellation_cover",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.033970999998928164,
+      "afterTotalMs": 0.028942000001961787,
+      "deltaTotalMs": -0.005028999996966377,
+      "beforeMedianMs": 0.001471999999921536,
+      "afterMedianMs": 0.001327000000173939
+    },
+    {
+      "nodeId": "family_state:acquire_control_for_target",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.03404999999929714,
+      "afterTotalMs": 0.028801999995721417,
+      "deltaTotalMs": -0.005248000003575726,
+      "beforeMedianMs": 0.0018424999998387648,
+      "afterMedianMs": 0.0013469999994413229
+    },
+    {
+      "nodeId": "family_state:ordered_support_transfer",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.055760999997346516,
+      "afterTotalMs": 0.049563999997644714,
+      "deltaTotalMs": -0.006196999999701802,
+      "beforeMedianMs": 0.0030244999998103594,
+      "afterMedianMs": 0.002523999999539228
+    },
+    {
+      "nodeId": "family_state:invited_reduction",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.05810599999927035,
+      "afterTotalMs": 0.051907999999912136,
+      "deltaTotalMs": -0.006197999999358217,
+      "beforeMedianMs": 0.002088000000185275,
+      "afterMedianMs": 0.002147999999579042
+    },
+    {
+      "nodeId": "family_state:port_assembly",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.039471000000958156,
+      "afterTotalMs": 0.032725999997865074,
+      "deltaTotalMs": -0.006745000003093082,
+      "beforeMedianMs": 0.0017779999998310814,
+      "afterMedianMs": 0.0015779999994265381
+    },
+    {
+      "nodeId": "family_state:window_constraints",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.20502499999793145,
+      "afterTotalMs": 0.19769100000348772,
+      "deltaTotalMs": -0.0073339999944437295,
+      "beforeMedianMs": 0.005342999999811582,
+      "afterMedianMs": 0.004696999999850959
+    },
+    {
+      "nodeId": "family_state:word_interface",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.049832999998443483,
+      "afterTotalMs": 0.041319999999359425,
+      "deltaTotalMs": -0.008512999999084059,
+      "beforeMedianMs": 0.0023330000003625173,
+      "afterMedianMs": 0.00203300000021045
+    },
+    {
+      "nodeId": "family_state:scored_local_rewrite",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.035302999996702056,
+      "afterTotalMs": 0.025691000000506392,
+      "deltaTotalMs": -0.009611999996195664,
+      "beforeMedianMs": 0.001832500000091386,
+      "afterMedianMs": 0.0013069999997696868
+    },
+    {
+      "nodeId": "family_state:orbit_constraints",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.07641100000137158,
+      "afterTotalMs": 0.060368000001290056,
+      "deltaTotalMs": -0.01604300000008152,
+      "beforeMedianMs": 0.002944000000752567,
+      "afterMedianMs": 0.0027289999998174608
+    },
+    {
+      "nodeId": "family_state:public_topological_recolor",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.11020399999870278,
+      "afterTotalMs": 0.06459500000164553,
+      "deltaTotalMs": -0.045608999997057253,
+      "beforeMedianMs": 0.003930999999283813,
+      "afterMedianMs": 0.0030194999990271754
+    },
+    {
+      "nodeId": "family_state:animated_contact",
+      "beforeCount": 18,
+      "afterCount": 18,
+      "beforeTotalMs": 0.11418699999649107,
+      "afterTotalMs": 0.040310000006002156,
+      "deltaTotalMs": -0.07387699999048891,
+      "beforeMedianMs": 0.002037999999629392,
+      "afterMedianMs": 0.0016575000004195317
+    }
+  ],
+  "largestThreeReadIncreases": {
+    "nodes": [
+      "family_state:public_observed_inventory",
+      "family_state:configured_arrivals",
+      "family_state:public_outline_service"
+    ],
+    "totalMs": 10.070020000013528,
+    "shareOfNetReadIncreasePercent": 95.27641838552097
+  },
+  "accountingChecks": {
+    "sameParentCount": true,
+    "sameDirectChildCounts": true,
+    "beforeParentSummaryMatches": true,
+    "afterParentSummaryMatches": true,
+    "deltaComponentsCloseWithin1eMinus8Ms": true
+  },
+  "observations": [
+    "Family-state reads account for +10.569268 ms of direct-child elapsed time. Native restorers improve by 2.867256 ms total and ordinary restorers by 1.010077 ms total; the residual increases by 0.642425 ms. These values account for the parent increase of 7.334360 ms.",
+    "Inventory restore median falls while its total rises slightly (52.682177 to 53.032617 ms). The second restoration at action 11 rises from 2.372944 to 8.200802 ms. The first inventory state read at action 11 rises from 9.887984 to 13.194207 ms. Both events remain in the complete arrays above.",
+    "There are 144 native-restore calls directly inside these parents; the global profile summary has 147. The three calls outside these parents must not be included in this parent decomposition."
+  ],
+  "qualifications": [
+    "Diagnostic baseline isolation is not established, as recorded in isolation-deviation.json. Short unit-test runs were permitted during preparation of the baseline profiles; their exact start/end timestamps were not retained. Overlap with SMLP can neither be established nor excluded from file-edit time bounds. No STCK overlap is evidenced.",
+    "This is descriptive arithmetic over existing diagnostic samples, not causal before/after performance evidence, a new measurement, or an official budget result. The independent official window has its own baseline and isolation conditions.",
+    "Parent residual includes uninstrumented work and observer/wrapper overhead. These records do not identify an exclusive CPU cause, garbage collection, scheduler delay, memory behavior, or the specific cost of provenance marking.",
+    "Medians of separate groups do not add. A lower owner median does not imply a lower parent median or lower owner total. No sample, extreme, or unfavorable result has been removed."
+  ]
+}
