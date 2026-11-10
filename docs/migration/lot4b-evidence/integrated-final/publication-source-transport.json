@@ -1,0 +1,62 @@
+{
+  "schema": "logos-engine.bounded-source-publication-transport.v1",
+  "status": "source_pushed_and_first_publication_verified",
+  "recordedAt": "2026-11-10T23:00:20.414586+00:00",
+  "publishedBaseCommit": "a009e1f138bb18251d697f49647bacc615ee514f",
+  "originalTargetCommit": "9bcee745d7260a0876a15a7a3d057aab90629ca5",
+  "originalTargetTree": "6527ec2b5fa30f36c9f01c8d0864e6f375394d64",
+  "publishedCommit": "082ce553ce4dfbac37071a64497bcca129b7ced0",
+  "siteVersion": 86,
+  "siteDeploymentCount": 1,
+  "intermediateSiteDeployments": 0,
+  "ordinarySourcePushCount": 5,
+  "forcePush": false,
+  "originalTargetRetainedAsFinalDirectParent": true,
+  "finalTreeExactlyPreserved": true,
+  "nativeTestBuildInputsEqualFromFirstStep": true,
+  "allOriginalObjectsRetained": true,
+  "maxRawStepBytes": 40579945,
+  "totalNewRawObjectBytes": 109016535,
+  "maxNewObjectBytes": 2547146,
+  "plan": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/transport/source-push-plan.json",
+    "bytes": 268522,
+    "sha256": "3861df2b50aed4775d224b93605ff7a0be854d518384ab770ca1b226edcf0ced"
+  },
+  "executions": [
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/transport/step-01-execution.json",
+      "bytes": 1818,
+      "sha256": "30612c59345908c9c7405654490aa79109bc6f37b578ae48d9e881bd78ef0ba2"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/transport/step-02-execution.json",
+      "bytes": 1811,
+      "sha256": "7db851a394ccb7308e53f2fbad0498f48823a68c203b204a2bbefbfe84b57cab"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/transport/step-03-execution.json",
+      "bytes": 1811,
+      "sha256": "84d115811cc0d701365734e5bb1659d76bdf7b5e15ef9bdf855c15310e12dc1a"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/transport/step-04-execution.json",
+      "bytes": 1810,
+      "sha256": "ea97efd9de2a9166a9cc8e9bf6cddd38ea04211735b2b419b4daf6141c76cf1c"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/transport/step-05-execution.json",
+      "bytes": 1821,
+      "sha256": "8b644919bb0cbf0a6fe3dd561fc8d69f1819c9e2de3607abf92ac542e2f253c1"
+    }
+  ],
+  "archiveVerification": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/transport/archive-member-verification.json",
+    "bytes": 14440,
+    "sha256": "7121959a0e43c7184b611a854d082045324e0efa4febad40e06a4dfb4dc83fae"
+  },
+  "allFiveDeploymentMemberContentsIdentical": true,
+  "memberCount": 75,
+  "nativeSourceDigest": "f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9",
+  "qualification": "Five ordinary fast-forward source pushes using the standard Sites helper, followed by exactly one private Site deployment. The complete original target history is a direct parent of the final transport commit; all target-tree bytes and verified build members are preserved. No intermediate Site was deployed and no native input was edited or remeasured."
+}
