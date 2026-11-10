@@ -1,5 +1,11 @@
 # Feuille de route V5/V6 vers Logos Engine TypeScript
 
+## Lot 10A en préparation : questions axiales acquises
+
+Le fil du lot 10 porte `axial_question` depuis la publication réelle **Site 83 / native 0.52**, commit `bed48116585da864dd5c412ed11dd6990a950e8e`, dans une branche isolée. Son [bilan](lot10a-axial-question.md) et sa [filiation](lot10a-axial-question-lineage.md) conservent le choix source, OP18, le propriétaire unique, l'acquisition passive et active, les gardes, les tentatives et les méthodes transportables. **130/130 comparaisons et contrats de composant**, puis **6/6 scénarios du caller commun**, passent. Une sélection acquise par une autre famille rend Axial admissible ; une rotation réellement acquise modifie son choix suivant. Le passage de frontière impose une nouvelle attestation de sélection avant rappel des méthodes.
+
+Le registre recalculé de cette branche est **57/76**, soit **19 entrées ouvertes**, avec **37 workflows compilés**. Il ne constitue pas encore une publication supplémentaire : régressions, build, coût, intégration et publication sont suivis séparément. Les travaux concurrents des lots 4, 5 et 7 restent dans leurs fils. La réserve de jeu Axial demeure ouverte : le seul cas initial admis, POLA, possède une tentative historique interrompue dont le temps n'est pas reconstructible ; aucun budget de cas n'est remis à zéro.
+
 ## Jalon publié : Workshop 0.52 ; transactions symboliques 7B en cours
 
 Le candidat **7A / native 0.52.0** intègre la publication réelle **4A / Site 81**, commit `4dafc40c53ed4406ee7cd148e3e6995a2eb4185e`, après **3I / Site 79**. Son gel `f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb` contient **279 fichiers natifs** et une archive de **290 fichiers**. La réconciliation conserve l'ordre des familles, leurs propriétaires et l'acquisition unique des retours. Le registre courant est **56/76**, avec **20 entrées ouvertes**, 37 workflows compilés et une façade 6/6.
@@ -193,7 +199,7 @@ Une dépendance désigne un contrat réellement consommé. Les numéros indiquen
 | 7 | Ateliers et transactions symboliques | 1 | Interfaces mesurées, SRC et mémoire des méthodes | **7A : contrats et boucle commune vérifiés, deux niveaux LKEY ; intégration fonctionnelle 0.52 vérifiée ; coût accepté et publication confirmée dans Site 82.** 7B est en cours dans son checkout distinct. |
 | 8 | Accès conditionné et routage de branches | 2 | Calibration des commandes et préfixes gardés | Planifié |
 | 9 | Navigation, régions et canaux | 3 | Graphes, retours publics et budgets courants | Planifié ; Recolor déjà acquis |
-| 10 | Questions d'axe, de fenêtre, d'ordre et de temps | 5 | Observations, séquences et méthodes revalidées | Planifié |
+| 10 | Questions d'axe, de fenêtre, d'ordre et de temps | 4 dans la branche 10A | Observations, séquences et méthodes revalidées | **10A fonctionnel ciblé : 130 contrats et 6 scénarios communs passés ; contrôle de livraison intégré et coût à terminer.** Réserve de contribution propre en jeu conservée. 10B à 10E restent à réaliser. |
 | 11 | Consolidation, couverture et lisibilité | Hors compteur | Résultats et preuves des lots précédents | Planifié |
 
 La réconciliation initiale avec le registre de la base 59 conserve **26 noms planifiés, 26 noms distincts, aucun nom absent et aucun nom supplémentaire**. Depuis 3F, `observed_composition_services` est raccordé ; 3G ajoute `framed_window_composition`, 3H `coupled_prefix_reference`, 3I `recurrent_series`, 4A `observed_feedback_sequence` et 7A `observed_ranked_workshop`. **20 noms restent ouverts** dans le gel intégré 0.52, répartis dans les lots 4 à 10 : **2 + 3 + 4 + 1 + 2 + 3 + 5**. Les entrées sont détaillées ci-dessous. Les chemins directs et les fournisseurs communs gardent leur propre bilan hors registre.
@@ -592,6 +598,14 @@ Le [rapport 7A](lot7a-ranked-workshop.md) et la [filiation source → TypeScript
 ## Lot 10 : axe, fenêtre, ordre et temps
 
 **Entrées :** `axial_question`, `window_question`, `ordered_recruitment`, `temporal_selection`, `invited_endpoints`.
+
+| Sous-lot | Entrée et workflow | État dans le fil 10 |
+| --- | --- | --- |
+| 10A | `axial_question` / `v6.axial_question.choose` | Port et boucle commune vérifiés dans la branche isolée ; livraison intégrée et coût en préparation ; contribution en partie ouverte |
+| 10B | `window_question` / `v6.window_question.choose` | Prochaine réalisation après clôture de 10A |
+| 10C | `ordered_recruitment` / `v6.ordered_recruitment.choose` | À réaliser |
+| 10D | `temporal_selection` / `v6.temporal_selection.choose` | À réaliser |
+| 10E | `invited_endpoints` / `v6.invited_endpoints.choose` | À réaliser |
 
 **Dépendances :** observations, commandes, retours de séquence, méthodes revalidées et contrats communs. La ressemblance des noms n'établit pas une dépendance : `window_question` n'attend pas automatiquement `framed_window_composition`.
 

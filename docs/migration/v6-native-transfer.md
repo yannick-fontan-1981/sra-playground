@@ -1,5 +1,12 @@
 # Complete V6 capability transfer into the V7 architecture
 
+## Lot 10A development: acquired axial questions
+
+The isolated 10A branch starts from actual Site 83/native 0.52, commit `bed48116585da864dd5c412ed11dd6990a950e8e`. It connects `axial_question` through one owner, the existing `v6.axial_question.choose` program and `axial.select`. The recalculated branch inventory is **57/76 connected**, with 37 compiled workflows. The [10A report](lot10a-axial-question.md) and [source lineage](lot10a-axial-question-lineage.md) distinguish the source-faithful component from the conservative native boundary attribution adapter.
+
+The independent source suite passes 130/130; six cold common-caller scenarios cover passive activation, OP18/WHY-ACT, active return acquisition exactly once, learned next decision, no-effect attempts and reactivation after restored portable knowledge across a boundary. Integrated release checks and cost remain pending; no additional publication or live-game success is claimed here. The 95-view initial public scan admits only POLA, whose older interrupted 94-action run has no recoverable elapsed receipt. Its historical budget is not reset and the own-family game contribution remains open. The historical release sections below retain their original scope.
+
+
 ## Required outcome
 
 The accepted target is **100% of the published V6 common symbolic agent's
