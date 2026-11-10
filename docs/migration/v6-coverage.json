@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 177,
-    "partiallyTransferredModules": 145,
+    "componentVerifiedModules": 181,
+    "partiallyTransferredModules": 146,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1047,
+    "pendingModules": 1042,
     "strategyFamilies": 16
   },
   "families": [
@@ -8101,9 +8101,15 @@
           "endLine": 40
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v5-concentric-frames.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-symbol-geometry-reference.py",
+        "tests/fixtures/v6-symbol-geometry-reference.json.gz",
+        "tests/v6-symbol-geometry-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/conditional_room_frontiers.py",
@@ -54244,9 +54250,15 @@
           "endLine": 179
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v5-symbolic-diagrams.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-symbol-geometry-reference.py",
+        "tests/fixtures/v6-symbol-geometry-reference.json.gz",
+        "tests/v6-symbol-geometry-reference.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/symbolic_navigation_extensions_a.py",
@@ -95022,9 +95034,27 @@
           "endLine": 96
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-symbol-transactions.ts",
+        "src/logos-engine/v6-symbol-interface.ts",
+        "src/logos-engine/v6-symbol-transactions-geometry.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-symbol-transactions-reference.py",
+        "tests/fixtures/v6-symbol-transactions-reference.json.gz",
+        "tests/v6-symbol-transactions-reference.test.ts",
+        "scripts/export-v6-symbol-interface-reference.py",
+        "tests/fixtures/v6-symbol-interface-reference.json.gz",
+        "tests/v6-symbol-interface-reference.test.ts",
+        "scripts/export-v6-symbol-geometry-reference.py",
+        "tests/v6-symbol-geometry-reference.test.ts",
+        "scripts/export-v6-symbol-kernel-reference.py",
+        "tests/v6-symbol-transactions-kernel.test.ts",
+        "scripts/compare-symbol-transactions-public-parity.py",
+        "docs/migration/lot7b-symbol-transactions-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/symbol_transactions/geometry.py",
@@ -95051,9 +95081,27 @@
           "endLine": 32
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-symbol-transactions.ts",
+        "src/logos-engine/v6-symbol-interface.ts",
+        "src/logos-engine/v6-symbol-transactions-geometry.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-symbol-transactions-reference.py",
+        "tests/fixtures/v6-symbol-transactions-reference.json.gz",
+        "tests/v6-symbol-transactions-reference.test.ts",
+        "scripts/export-v6-symbol-interface-reference.py",
+        "tests/fixtures/v6-symbol-interface-reference.json.gz",
+        "tests/v6-symbol-interface-reference.test.ts",
+        "scripts/export-v6-symbol-geometry-reference.py",
+        "tests/v6-symbol-geometry-reference.test.ts",
+        "scripts/export-v6-symbol-kernel-reference.py",
+        "tests/v6-symbol-transactions-kernel.test.ts",
+        "scripts/compare-symbol-transactions-public-parity.py",
+        "docs/migration/lot7b-symbol-transactions-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/symbol_transactions/interface.py",
@@ -95170,9 +95218,27 @@
           "endLine": 136
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-symbol-transactions.ts",
+        "src/logos-engine/v6-symbol-interface.ts",
+        "src/logos-engine/v6-symbol-transactions-geometry.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-symbol-transactions-reference.py",
+        "tests/fixtures/v6-symbol-transactions-reference.json.gz",
+        "tests/v6-symbol-transactions-reference.test.ts",
+        "scripts/export-v6-symbol-interface-reference.py",
+        "tests/fixtures/v6-symbol-interface-reference.json.gz",
+        "tests/v6-symbol-interface-reference.test.ts",
+        "scripts/export-v6-symbol-geometry-reference.py",
+        "tests/v6-symbol-geometry-reference.test.ts",
+        "scripts/export-v6-symbol-kernel-reference.py",
+        "tests/v6-symbol-transactions-kernel.test.ts",
+        "scripts/compare-symbol-transactions-public-parity.py",
+        "docs/migration/lot7b-symbol-transactions-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/morphology_policy/temporal_selection/__init__.py",

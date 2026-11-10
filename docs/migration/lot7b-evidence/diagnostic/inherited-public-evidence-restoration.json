@@ -1,0 +1,286 @@
+{
+  "schema": "logos-engine.lot7b-inherited-public-evidence-restoration.v1",
+  "recordedAt": "2026-11-10T22:57:32.214881+00:00",
+  "status": "passed",
+  "inputs": [
+    {
+      "path": "docs/migration/lot7a-evidence/recorded-regression-cases-integrated.json",
+      "sha256": "9dc1302d8289118e38a3c8b54112fbdfba35d5b3d7ae29b1d93bb49fa0b14474",
+      "bytes": 4280
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/execution-lkey.json",
+      "sha256": "ac35fbe45492ee87b02e472455d828408b33d261ed1873f6044f1419c611dfec",
+      "bytes": 70533
+    },
+    {
+      "path": "docs/migration/lot3h-evidence/performance/cases.json",
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d",
+      "bytes": 1451
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    }
+  ],
+  "checkedFiles": 18,
+  "restoredFiles": 8,
+  "files": [
+    {
+      "case": "catr-051",
+      "role": "baseline",
+      "file": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+        "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+        "bytes": 1649205
+      },
+      "restored": true,
+      "transport": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+        "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6",
+        "bytes": 1649205,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.parts.json",
+        "parts": 2,
+        "restored": true
+      }
+    },
+    {
+      "case": "catr-051",
+      "role": "trace",
+      "file": {
+        "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+        "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816",
+        "bytes": 24340
+      },
+      "restored": false,
+      "transport": null
+    },
+    {
+      "case": "rswp-051",
+      "role": "baseline",
+      "file": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+        "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba",
+        "bytes": 2585868
+      },
+      "restored": true,
+      "transport": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+        "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba",
+        "bytes": 2585868,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.parts.json",
+        "parts": 3,
+        "restored": true
+      }
+    },
+    {
+      "case": "rswp-051",
+      "role": "trace",
+      "file": {
+        "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+        "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755",
+        "bytes": 41445
+      },
+      "restored": false,
+      "transport": null
+    },
+    {
+      "case": "fogw-051",
+      "role": "baseline",
+      "file": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+        "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+        "bytes": 8174480
+      },
+      "restored": true,
+      "transport": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+        "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c",
+        "bytes": 8174480,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.parts.json",
+        "parts": 10,
+        "restored": true
+      }
+    },
+    {
+      "case": "fogw-051",
+      "role": "trace",
+      "file": {
+        "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+        "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46",
+        "bytes": 39060
+      },
+      "restored": false,
+      "transport": null
+    },
+    {
+      "case": "vois-051",
+      "role": "baseline",
+      "file": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+        "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+        "bytes": 10678168
+      },
+      "restored": true,
+      "transport": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+        "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d",
+        "bytes": 10678168,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.parts.json",
+        "parts": 12,
+        "restored": true
+      }
+    },
+    {
+      "case": "vois-051",
+      "role": "trace",
+      "file": {
+        "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+        "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d",
+        "bytes": 19976
+      },
+      "restored": false,
+      "transport": null
+    },
+    {
+      "case": "conn-050",
+      "role": "baseline",
+      "file": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+        "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+        "bytes": 2630905
+      },
+      "restored": true,
+      "transport": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+        "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750",
+        "bytes": 2630905,
+        "manifest": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.parts.json",
+        "parts": 3,
+        "restored": true
+      }
+    },
+    {
+      "case": "conn-050",
+      "role": "trace",
+      "file": {
+        "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+        "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102",
+        "bytes": 56466
+      },
+      "restored": false,
+      "transport": null
+    },
+    {
+      "case": "mind-051",
+      "role": "baseline",
+      "file": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+        "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+        "bytes": 4349054
+      },
+      "restored": true,
+      "transport": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+        "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a",
+        "bytes": 4349054,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.parts.json",
+        "parts": 5,
+        "restored": true
+      }
+    },
+    {
+      "case": "mind-051",
+      "role": "trace",
+      "file": {
+        "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+        "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+        "bytes": 17256
+      },
+      "restored": false,
+      "transport": null
+    },
+    {
+      "case": "weav-051",
+      "role": "baseline",
+      "file": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+        "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3",
+        "bytes": 13577757
+      },
+      "restored": true,
+      "transport": {
+        "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+        "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3",
+        "bytes": 13577757,
+        "manifest": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.parts.json",
+        "parts": 16,
+        "restored": true
+      }
+    },
+    {
+      "case": "weav-051",
+      "role": "trace",
+      "file": {
+        "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+        "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2",
+        "bytes": 26568
+      },
+      "restored": false,
+      "transport": null
+    },
+    {
+      "case": "LKEY",
+      "role": "report",
+      "file": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+        "sha256": "11aa4589a7d294cc5c7aed2e0e3946541cf48a208b891b0c7229a190e290aff4",
+        "bytes": 5445629
+      },
+      "restored": true,
+      "transport": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+        "sha256": "11aa4589a7d294cc5c7aed2e0e3946541cf48a208b891b0c7229a190e290aff4",
+        "bytes": 5445629,
+        "manifest": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz.parts.json",
+        "parts": 7,
+        "restored": true
+      }
+    },
+    {
+      "case": "LKEY",
+      "role": "trace",
+      "file": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/lkey-public-trace.json.gz",
+        "sha256": "de96446d655f3c5165f4eeebfbd0aa1ed074c2b65ee35288d84c6d4112a2a763",
+        "bytes": 10983
+      },
+      "restored": false,
+      "transport": null
+    },
+    {
+      "case": "STCK",
+      "role": "cost_trace",
+      "file": {
+        "path": "docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+        "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b",
+        "bytes": 53583
+      },
+      "restored": false,
+      "transport": null
+    },
+    {
+      "case": "SMLP",
+      "role": "cost_trace",
+      "file": {
+        "path": "docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+        "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9",
+        "bytes": 111624
+      },
+      "restored": false,
+      "transport": null
+    }
+  ],
+  "qualification": "Only exact retained historical public evidence bytes were restored or fingerprinted. Seven published7A regression cases, partial LKEY and the two historical cost traces. Future4B TRIA evidence is deferred until actual4B publication. No game, native runtime, source replay, or cost executed."
+}

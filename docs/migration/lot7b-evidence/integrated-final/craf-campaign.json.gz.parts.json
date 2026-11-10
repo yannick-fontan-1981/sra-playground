@@ -1,0 +1,86 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "craf-campaign.json.gz",
+    "sha256": "78e86660961ed6d75707c001c021b8c223d205137d86288ac21d09a533b680f2",
+    "bytes": 12767727
+  },
+  "parts": [
+    {
+      "file": "craf-campaign.json.gz.part000",
+      "sha256": "5619ba9a053e4af15ce58a509e857d92c61d6985ffe46b06e887fc7dc4c2c1da",
+      "bytes": 900000
+    },
+    {
+      "file": "craf-campaign.json.gz.part001",
+      "sha256": "0f2c783066da02c5796be4cd87fc2a4cf77d6fc53f30bbfb5a949711a01cea1e",
+      "bytes": 900000
+    },
+    {
+      "file": "craf-campaign.json.gz.part002",
+      "sha256": "84defcf8dfcb4778f4c9bf06072a43b45ef7cc404e6946f368bdb13b19ac3a91",
+      "bytes": 900000
+    },
+    {
+      "file": "craf-campaign.json.gz.part003",
+      "sha256": "323b2e062ec47362c5618713403665208de9883274e605d6edf3808ee812072c",
+      "bytes": 900000
+    },
+    {
+      "file": "craf-campaign.json.gz.part004",
+      "sha256": "13dd9330bf2a502ac45988bd8b335d5c665912b3035f68e489016f9ae2c084bc",
+      "bytes": 900000
+    },
+    {
+      "file": "craf-campaign.json.gz.part005",
+      "sha256": "7bf77fea36a329971343633716233c54e6950bbf8c0ee91dd67c8779a5257ee6",
+      "bytes": 900000
+    },
+    {
+      "file": "craf-campaign.json.gz.part006",
+      "sha256": "0ea9a4050d0f95466037b36b68061798ac1fcf46c0686365f9f7daddd6e59b4a",
+      "bytes": 900000
+    },
+    {
+      "file": "craf-campaign.json.gz.part007",
+      "sha256": "f18b6ff4388555d329e9af0dfed977890ea781d3c1bf801089cf9bc2c6320782",
+      "bytes": 900000
+    },
+    {
+      "file": "craf-campaign.json.gz.part008",
+      "sha256": "3720d452eee1f0e873e7067073890bf31f95287edb432d2d78db464a1a760e16",
+      "bytes": 900000
+    },
+    {
+      "file": "craf-campaign.json.gz.part009",
+      "sha256": "4bdce6d136778a7c147c9c59c4e4be509b57fe8f20e5f0d5bbbc3a89234ea1f4",
+      "bytes": 900000
+    },
+    {
+      "file": "craf-campaign.json.gz.part010",
+      "sha256": "2db5df86b5617a29e4e4ebf0d1eae1af4da3d2a7c95865d94dafab6cf0ce413c",
+      "bytes": 900000
+    },
+    {
+      "file": "craf-campaign.json.gz.part011",
+      "sha256": "7e98f2815c9075b13dcfba905d87f1d444b4c129811f0041daa51698eab419e6",
+      "bytes": 900000
+    },
+    {
+      "file": "craf-campaign.json.gz.part012",
+      "sha256": "d3ba7cd86ff9fbe621a1491f51f6829dd7b376fb8bbc15a5f03a2bde5b6f0709",
+      "bytes": 900000
+    },
+    {
+      "file": "craf-campaign.json.gz.part013",
+      "sha256": "f9b0e9e543106b820f17383bab622502f9da2f21fdcfe4c240fb5af8ac2c4e2b",
+      "bytes": 900000
+    },
+    {
+      "file": "craf-campaign.json.gz.part014",
+      "sha256": "a894ebe5bf454572c6dc0f92a5799b95acc241b2afda02510f1c2a199462a2f2",
+      "bytes": 167727
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

@@ -1,0 +1,1 @@
+{"output": "/workspace/sites/sra-lot7b-20261110/.sites-checkout/tests/fixtures/v6-symbol-interface-reference.json.gz", "bytes": 498543, "acquisitionSteps": 8, "pureCases": 8, "cases": 64, "sequences": 1, "learnedMethod": "symbol_interface:c0d592aeb13d70ac412e2cd36d80ee287724c4ba4beab3ed98637ad5f27d01ef", "sourceFilesVerifiedBeforeAndAfter": 1786}

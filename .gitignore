@@ -374,6 +374,11 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot7a-evidence/performance-integrated/owner-graphs-candidate.json.gz
 
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot7b-evidence/attempt1/craf-campaign.json.gz
+
+# Exact frozen source archive; restore with freeze-v53-native-source.py restore DIRECTORY
+/docs/migration/lot7b-evidence/attempt1/source-archive.tar.gz
+
 /docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz
 /docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz
 /docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz
@@ -411,3 +416,22 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 # Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
 /docs/migration/lot4b-evidence/performance-integrated/owner-graphs-baseline.json.gz
 /docs/migration/lot4b-evidence/performance-integrated/owner-graphs-candidate.json.gz
+
+# Exact frozen7B archive; restore from the retained source archive parts.
+/docs/migration/lot7b-evidence/integrated-final/source-archive.tar.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot7b-evidence/integrated-final/craf-campaign.json.gz
+/docs/migration/lot7b-evidence/integrated-final/lkey-partial/replay-campaign.json.gz
+/docs/migration/lot7b-evidence/integrated-final/regressions/catr-051-replay.json.gz
+/docs/migration/lot7b-evidence/integrated-final/regressions/conn-050-replay.json.gz
+/docs/migration/lot7b-evidence/integrated-final/regressions/fogw-051-replay.json.gz
+/docs/migration/lot7b-evidence/integrated-final/regressions/mind-051-replay.json.gz
+/docs/migration/lot7b-evidence/integrated-final/regressions/rswp-051-replay.json.gz
+/docs/migration/lot7b-evidence/integrated-final/regressions/tria-development-4b-replay.json.gz
+/docs/migration/lot7b-evidence/integrated-final/regressions/vois-051-replay.json.gz
+/docs/migration/lot7b-evidence/integrated-final/regressions/weav-051-replay.json.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot7b-evidence/performance-integrated/owner-graphs-baseline.json.gz
+/docs/migration/lot7b-evidence/performance-integrated/owner-graphs-candidate.json.gz

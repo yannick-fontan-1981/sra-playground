@@ -1,0 +1,93 @@
+{
+  "schema": "logos-engine.lot7b-comparator-readiness-source-review.v1",
+  "recordedAt": "2026-11-10T21:52:37Z",
+  "status": "source_review_completed_no_new_blocking_defect",
+  "reviewer": "/root/merge_feedback_evidence",
+  "checkout": "/workspace/sites/sra-lot7b-20261110/.sites-checkout",
+  "scope": {
+    "method": "Bounded source reading and one AST syntax check of the patched comparator; no semantic replay.",
+    "comparatorAst": "passed",
+    "comparatorReplayExecuted": false,
+    "gameExecuted": false,
+    "functionalCaptureExecuted": false,
+    "costMeasurementExecuted": false,
+    "testsOrBuildExecuted": false,
+    "archiveProcessed": false,
+    "nativeSourceModified": false,
+    "costToolsModifiedByReviewer": false,
+    "publicationExecuted": false
+  },
+  "comparator": {
+    "path": "scripts/compare-symbol-transactions-public-parity.py",
+    "result": "authorized_patch_and_ast_passed_replay_pending",
+    "changes": [
+      "Generator now has exactly path, sha256 and bytes, matching readiness fingerprint validation.",
+      "A selected original Python proposal is independently rebound with the unchanged original ObservedInputDomain.candidates and bind_proposal, using the original common-policy point limit. Every source proposal field must then match the actual guard proposal.",
+      "Only the four explicitly named caller annotation additions material_access_subquestion, strategy_receipt, morphology and composition_target_tree are excluded from that source-field comparison. They remain exact between the actual guards, record and retained selectedProposal.",
+      "Selected prefix revisions must be unique and ordered exactly as selected physical actions; each Symbols prefix acquires one primitive at index zero. Source proposal, actual before/after and record retain their ordered exact links.",
+      "Checkpoint selectedProposal and transitions now match the actual source record and actual after result; sourceCallsThrough must end exactly at that record. These requirements strengthen the existing seven checkpoint checks without changing their count."
+    ],
+    "limitations": [
+      "The patched comparator has not been replayed. The earlier development campaign and its executed comparator remain separate retained evidence.",
+      "Caller annotation values are not independently replayed through the complete original caller. Preservation and preservation_rejected_candidates explicitly fail as unsupported caller projections; their bundle mutations are never silently ignored.",
+      "Checkpoint conservation covers selected Symbols prefixes, not every foreign-family prefix."
+    ]
+  },
+  "readiness": {
+    "path": "docs/migration/lot7b-evidence/finalize-cost-readiness.py",
+    "result": "root_corrections_confirmed_by_source_reading",
+    "findings": [
+      "An unmet browser target now independently requires browser qualification, even when the campaign reaches its target. Both outcomes and qualifications are retained separately.",
+      "Every retained absolute structure input is physically confined to the declared baseline checkout, fingerprinted, and rehashed in the final validation loop.",
+      "The generator fingerprint expects the three fields now produced by the comparator. Readiness continues to require seven checkpoint checks per captured selected prefix.",
+      "The cumulative CRAF ledger uses the explicit pre-clock charge plus closed, non-overlapping charged intervals, with the unchanged cumulative limit and an explicit qualification when a target is unmet."
+    ]
+  },
+  "costIoAndRendering": {
+    "paths": [
+      "docs/migration/lot7b-evidence/consolidate-owner-costs.mjs",
+      "docs/migration/lot7b-evidence/check-cost-static-inputs.py",
+      "docs/migration/lot7b-evidence/write-cost-results.py"
+    ],
+    "result": "no_concrete_path_schema_or_provenance_defect_found",
+    "findings": [
+      "Removing the lexical exclusion of a directory literally named performance preserves confinement under lot7b-evidence, the exact declared declaration path, output-parent binding, fingerprints and exclusive output creation. Arithmetic and the four allowed work-counter paths are unchanged.",
+      "Static preflight binds absolute attribution inputs to the fingerprinted baseline capture, its exact input whitelist and the physical predeclared baseline checkout.",
+      "The renderer requires exact predeclared 7B generator fingerprints and rejects post-measurement I/O-correction fields. Its arithmetic and tables remain unchanged."
+    ],
+    "retainedMinorLimits": [
+      "The general JavaScript local reader uses lexical confinement, while its external adapter and the independent Python reviewer use physical confinement. Use physical in-checkout paths for ordinary evidence, as already recorded in reservation R1.",
+      "The renderer checks external fingerprints when reading them; its final local-record loop does not itself rehash those external entries. The two cost analyzers rehash their retained external inputs at completion."
+    ]
+  },
+  "fragmentReservationR2": {
+    "result": "closed_7b_scope_retained_until_actual_final_captures",
+    "sourceEvidence": [
+      "/workspace/sites/sra-lot5-20261110/.sites-checkout/docs/migration/lot5a-evidence/shared-fragment-premeasurement-qualification.md",
+      "/workspace/sites/sra-lot5-20261110/.sites-checkout/docs/migration/lot5a-evidence/qualify-cost-owner-graphs-v2.mjs",
+      "docs/migration/lot7b-evidence/qualify-cost-owner-graphs.mjs",
+      "src/logos-engine/v6-knowledge-store.ts",
+      "src/logos-engine/v6-native-state-graph.ts",
+      "src/logos-engine/v6-symbol-transactions.ts",
+      "src/logos-engine/v6-symbol-interface.ts"
+    ],
+    "observed5aEvidenceAsDocumented": "5A records fourteen terminal fragments created earlier in B through linked_temporal_preparation.phase.masks, then created by A through common reasoning transitions: three in STCK measured and eleven in SMLP measured, none in warmups. This review read their documented inventory and qualifier source, not the capture archives.",
+    "fiveAClosedRule": "The distinct premeasurement supplement and v2 qualifier bind the retained failure, exact captures and closed identities. They require complete equal fragment values and addresses, exact real causes and creation deltas, owner-only earlier consumers and complete equal common consumer roots at catch-up. Monotone E counts actual attributed B deltas and C counts explicitly matched A creations; revisionB minus revisionA must equal E minus C. Historical deltas are not rewritten.",
+    "symbolsAssessment": "First-creator sharing is generic to the content-addressed store, so the mechanism cannot be dismissed for an arbitrary populated Symbols history. The specific 5A passive matrix mechanism is absent: Symbols acquires scenes, contrasts and methods only from its selected returns. Cold unselected proposals mainly change scope epochs. Furthermore, admissible A/B work shapes compare family and proposalKind exactly and baseline has no Symbols owner, so a Symbols selection would already violate those work constraints. These source observations reduce the expected route to R2 but are not a proof about future integrated frozen captures.",
+    "currentRefusal": "The unchanged 7B qualifier recomputes extra-node categories per point but keeps a cumulative B-only attribution count. An extra fragment becoming common can fail common origin, common delta or cumulative revision equality. This is a closed refusal, not a silent acceptance.",
+    "decision": "Do not import the fourteen identities, phase.masks rule or E-minus-C accounting into 7B now. Examine the actual final frozen graphs before contract and measurement. Preserve any failed qualification and review any required distinct attribution rule before the window."
+  },
+  "publicationInputReview": {
+    "path": "docs/migration/lot7b-evidence/record-publication-inputs.py",
+    "reviewer": "/root/merge_feedback_evidence/cost_arithmetic_review",
+    "result": "no_concrete_field_contract_defect_found_by_source_reading",
+    "findings": [
+      "Native delta tests and five checks, counts, dynamic scope.testFiles/testFileCount, worker provenance and delivery-integrity fields match their producers and readiness.",
+      "Validation-directory resolution matches readiness. Readiness baseline, candidate, formalTests, formalTestFiles, ownerCostContract, inputs, watchedExternalInputs and game fields exist in the current producer.",
+      "Published-baseline fields are bound to the final declaration; the historical Site83 receipt cannot replace a different declared predecessor.",
+      "Window logs and copied baseline outputs are local as required by the local reader. Actual external inputs remain separately bound through watchedExternalInputs and the physical baseline checkout."
+    ],
+    "limitation": "Final integrated 7B receipts and scope are not yet present. This is a producer-consumer source-contract review, not execution against their future bytes."
+  },
+  "conclusion": "The authorized comparator patch passes syntax; the latest readiness, lexical-path and publication-field changes are coherent by source reading. No native or cost rule was changed in this review. No semantic replay, functional qualification, readiness authorization, measured-cost acceptance or publication is asserted."
+}

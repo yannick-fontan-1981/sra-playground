@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot7b-retained-validator-failure.v1",
+  "recordedAt": "2026-11-10T22:22:54.193339+00:00",
+  "status": "failed",
+  "exitCode": 1,
+  "generator": {
+    "path": "scripts/compare-symbol-transactions-public-parity.py",
+    "sha256": "79feb3fd04cacb91f25f41b5ef90bbb33bca082677faa7f0b6c1e9b68c04309f",
+    "bytes": 28485
+  },
+  "preservedGenerator": {
+    "path": "docs/migration/lot7b-evidence/diagnostic/compare-symbol-transactions-public-parity-guard-shadowing.py",
+    "sha256": "79feb3fd04cacb91f25f41b5ef90bbb33bca082677faa7f0b6c1e9b68c04309f",
+    "bytes": 28485
+  },
+  "log": {
+    "path": "docs/migration/lot7b-evidence/diagnostic/attempt1-refined-public-parity.log",
+    "sha256": "d4dc34d1aaf7e6b0e23b3e76fd49c6e9a4b43d56bea797d88f4744e5afb2cb30",
+    "bytes": 617
+  },
+  "error": "AttributeError: 'list' object has no attribute 'require_checkpoints'",
+  "cause": "A local selected-record arguments list shadows the parsed CLI Namespace inside the ordered-guard loop. The replay aborts before producing parity/contribution receipts.",
+  "qualification": "This is a validator execution failure, not a native or original-source parity verdict. Input campaign, old executed proof and native source remain unchanged; no new game action was executed."
+}

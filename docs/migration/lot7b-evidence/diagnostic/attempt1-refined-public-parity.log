@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/sites/sra-lot7b-20261110/.sites-checkout/scripts/compare-symbol-transactions-public-parity.py", line 360, in <module>
+    if __name__ == '__main__': main()
+                               ^^^^^^
+  File "/workspace/sites/sra-lot7b-20261110/.sites-checkout/scripts/compare-symbol-transactions-public-parity.py", line 318, in main
+    checkpoint_proof = {'required': args.require_checkpoints, 'selectedPrefixes': len(selected_prefixes),
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'list' object has no attribute 'require_checkpoints'

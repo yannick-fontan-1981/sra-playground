@@ -1,0 +1,25 @@
+{
+  "schema": "logos-engine.lot7b-published-baseline.v1",
+  "status": "verified",
+  "recordedAt": "2026-11-10T22:17:48.413Z",
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "siteVersion": 84,
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_ca41687c6e7c81918e080169d2798504",
+  "commit": "51e2813dedb2d71001290f94f100605e0327ead3",
+  "deploymentId": "appgdep_6af396981b2c8191872a706bffe760f3",
+  "deploymentStatus": "succeeded",
+  "deploymentUpdatedAt": "2026-11-10T22:11:55.472527+00:00",
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "nativeVersion": "0.53.0",
+  "nativeSourceDigest": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f",
+  "nativeSourceFiles": 283,
+  "sourceVerificationPath": "docs/migration/lot7b-evidence/coordination/published-5a-source-verification.json",
+  "archiveStorage": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_000000000770820eb57f1ba8049418da",
+    "content_hash": "sha256:f07512c1a623ae69644a85fff0a4ae69884066fe4b21da5bc2c6a64e6a9ccfa0",
+    "size_bytes": 29808640,
+    "file_count": 75
+  },
+  "qualification": "Actual verified Site84 release of5A. The merged native source equals the independently reviewed preparatory source, while corrected published ancestry preserves the original oversized history through a separate bundle. This precedes the required actual4B successor and final7B baseline."
+}

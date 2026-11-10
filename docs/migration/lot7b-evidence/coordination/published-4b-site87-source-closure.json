@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.lot7b-published-source-closure.v1",
+  "recordedAt": "2026-11-10T23:11:47.609448+00:00",
+  "status": "passed",
+  "priorPublishedCommit": "082ce553ce4dfbac37071a64497bcca129b7ced0",
+  "publishedCommit": "dd355400264b50942486559b8ca56ee6dfc6a3cc",
+  "siteVersion": 87,
+  "changedFiles": [
+    "docs/migration/lot4b-evidence/README.md",
+    "docs/migration/lot4b-evidence/integrated-final/documentation-closure-inputs.json",
+    "docs/migration/lot4b-evidence/integrated-final/publication-site86-api.json",
+    "docs/migration/lot4b-evidence/integrated-final/publication-site86.json",
+    "docs/migration/lot4b-evidence/integrated-final/publication-source-transport.json",
+    "docs/migration/lot4b-evidence/integrated-final/transport/archive-member-verification.json",
+    "docs/migration/lot4b-evidence/integrated-final/transport/source-push-plan.json",
+    "docs/migration/lot4b-evidence/integrated-final/transport/step-01-execution.json",
+    "docs/migration/lot4b-evidence/integrated-final/transport/step-02-execution.json",
+    "docs/migration/lot4b-evidence/integrated-final/transport/step-03-execution.json",
+    "docs/migration/lot4b-evidence/integrated-final/transport/step-04-execution.json",
+    "docs/migration/lot4b-evidence/integrated-final/transport/step-05-execution.json",
+    "docs/migration/lot4b-relative-arrangements.md",
+    "docs/migration/v6-delivery-roadmap.md",
+    "docs/migration/v6-native-transfer.md"
+  ],
+  "onlyDocumentationChanged": true,
+  "nativeSourceDigest": "f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9",
+  "nativeFileCount": 286,
+  "nativeTestsScriptsBuildInputsUnchanged": true,
+  "samePublishedArchiveAsSite86": true,
+  "qualification": "The complete Git diff from the independently verified actual Site86 source contains only15 documentation/publication receipt paths. Native source, test, harness, script and build inputs are byte-identical; final7B source freeze remains unchanged."
+}
