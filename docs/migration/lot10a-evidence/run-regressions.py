@@ -147,12 +147,31 @@ def run(args):
     except BaseException as exc:
         error = exc; receipt['error'] = f'{type(exc).__name__}: {exc}'
     finally:
-        if raw.exists():
-            PROOF.archive(raw, compressed); receipt['rawOutput'] = PROOF.evidence(raw); receipt['output'] = PROOF.evidence(compressed)
-        after = {name: PROOF.sha(ROOT/name) for name in watched}
-        receipt['executionInputsAfter'] = after; receipt['executionInputsUnchanged'] = after == watched
-        receipt['nativeSourceUnchanged'] = PROOF.native_source() == frozen
-        receipt.update(status='passed' if error is None and receipt['executionInputsUnchanged'] and receipt['nativeSourceUnchanged'] else 'failed',
+        # A failed archive or a deleted input must still produce a terminal
+        # failed receipt. Keep raw output and the original driver error intact.
+        finalization_errors = []
+        try:
+            if raw.exists():
+                receipt['rawOutput'] = PROOF.evidence(raw)
+                PROOF.archive(raw, compressed); receipt['output'] = PROOF.evidence(compressed)
+        except BaseException as exc:
+            error = error or exc
+            finalization_errors.append({'stage': 'output_retention', 'error': f'{type(exc).__name__}: {exc}'})
+        try:
+            after = {name: PROOF.sha(ROOT/name) for name in watched}
+            receipt['executionInputsAfter'] = after; receipt['executionInputsUnchanged'] = after == watched
+            require(receipt['executionInputsUnchanged'], 'Regression execution inputs changed during the attempt')
+        except BaseException as exc:
+            error = error or exc; receipt['executionInputsUnchanged'] = False
+            finalization_errors.append({'stage': 'execution_input_integrity', 'error': f'{type(exc).__name__}: {exc}'})
+        try:
+            receipt['nativeSourceUnchanged'] = PROOF.native_source() == frozen
+            require(receipt['nativeSourceUnchanged'], 'Frozen native source changed during the attempt')
+        except BaseException as exc:
+            error = error or exc; receipt['nativeSourceUnchanged'] = False
+            finalization_errors.append({'stage': 'native_source_integrity', 'error': f'{type(exc).__name__}: {exc}'})
+        if finalization_errors: receipt['finalizationErrors'] = finalization_errors
+        receipt.update(status='passed' if error is None else 'failed',
                        finishedAt=now(), elapsedSeconds=time.monotonic()-clock)
         atomic_json(receipt_path, receipt)
         print(json.dumps({'status': receipt['status'], 'receipt': relative(receipt_path), 'summary': receipt.get('summary')}), flush=True)

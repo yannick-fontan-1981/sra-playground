@@ -607,7 +607,7 @@ Le [rapport 7A](lot7a-ranked-workshop.md) et la [filiation source → TypeScript
 | 10D | `temporal_selection` / `v6.temporal_selection.choose` | À réaliser |
 | 10E | `invited_endpoints` / `v6.invited_endpoints.choose` | À réaliser |
 
-**Dépendances :** observations, commandes, retours de séquence, méthodes revalidées et contrats communs. La ressemblance des noms n'établit pas une dépendance : `window_question` n'attend pas automatiquement `framed_window_composition`.
+**Dépendances :** observations, commandes, retours de séquence, méthodes revalidées et contrats communs. La [lecture des dépendances et contrats des cinq sous-lots](lot10-source-dependencies.md) identifie les primitives V5 effectivement consommées, les choix distincts et les conditions source de sauvegarde. La ressemblance des noms n'établit pas une dépendance : `window_question` n'attend pas automatiquement `framed_window_composition`.
 
 **Critères de fin :** questions dérivées des mesures et retours modifiant méthode/proposition ; recrutement déterminé par marqueurs/files/relations observés ; changement d'ordre/configuration invalidant la continuation ; sélection temporelle distinguant sélection, arrangement et lancement avec images attribuées aux bons niveaux ; invitations courantes et arrivée vérifiée ; tentatives, méthodes et réfutations restaurées sans permis périmé.
 
