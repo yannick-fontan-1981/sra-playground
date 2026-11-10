@@ -1,0 +1,505 @@
+{
+  "schema": "logos-engine.lot7a-source-shape-compatibility.v1",
+  "status": "historical_source_shape_compatible",
+  "startedAt": "2026-11-10T20:18:05.662Z",
+  "finishedAt": "2026-11-10T20:18:05.687Z",
+  "nativeDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+  "baselineCapture": {
+    "path": "docs/migration/lot7a-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+    "bytes": 102291,
+    "sha256": "0108e519be6f852a12022c96ad17795d046ae73aa33441456ae47708eb19e24d"
+  },
+  "method": {
+    "extractor": {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "bytes": 19460,
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    "export": "workSignature",
+    "shapeProjection": "actions, cycles, levelsCompleted, requests, observations, inspection and final from workSignature; final.implementation restored and compared explicitly",
+    "canonicalShapeHash": "SHA-256 of compact UTF-8 JSON with recursively sorted object keys",
+    "durationValuesUsed": false,
+    "timingStatisticsCalculated": false,
+    "fixtureUpdated": false,
+    "frozenAnalyzersModified": false
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+      "bytes": 102291,
+      "sha256": "0108e519be6f852a12022c96ad17795d046ae73aa33441456ae47708eb19e24d"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "bytes": 19460,
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-20261110/.sites-checkout/docs/migration/lot4a-evidence/performance-integrated/cohort1/after.json",
+      "bytes": 428993,
+      "sha256": "01e8ce13b3be5fb207e8ed22d52bf27e2f9be31d0566c2f0ffb50fb46ddb6176"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-20261110/.sites-checkout/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-20261110/.sites-checkout/docs/migration/lot4a-evidence/performance-integrated/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "/workspace/sites/sra-lot4a-20261110/.sites-checkout/docs/migration/lot4a-evidence/performance-integrated/cohort2/after.json",
+      "bytes": 429008,
+      "sha256": "8cb6aac8a3955fd011ece23dc908f37d306bcad16adcfa0bbcc7606ec80066f9"
+    }
+  ],
+  "forms": [
+    {
+      "case": "STCK",
+      "form": "warmup",
+      "captureShapeSha256": "42d417c47f83a75433553f0523a8046b7fa0dde1b33a1ef2a2aab091b99b7383",
+      "actions": 3,
+      "requests": 6,
+      "observations": 6,
+      "inspections": 0,
+      "finalNodeCount": 224,
+      "finalGraphRevision": 472
+    },
+    {
+      "case": "STCK",
+      "form": "measured",
+      "captureShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "actions": 10,
+      "requests": 16,
+      "observations": 16,
+      "inspections": 3,
+      "finalNodeCount": 347,
+      "finalGraphRevision": 851
+    },
+    {
+      "case": "SMLP",
+      "form": "warmup",
+      "captureShapeSha256": "2d3e1d45b159d95d535de1051ee997bb2cf9ca81d90f0370e52e7fe278d7517e",
+      "actions": 3,
+      "requests": 6,
+      "observations": 6,
+      "inspections": 0,
+      "finalNodeCount": 214,
+      "finalGraphRevision": 477
+    },
+    {
+      "case": "SMLP",
+      "form": "measured",
+      "captureShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "actions": 15,
+      "requests": 24,
+      "observations": 24,
+      "inspections": 3,
+      "finalNodeCount": 415,
+      "finalGraphRevision": 1191
+    }
+  ],
+  "historicalReportsChecked": 2,
+  "historicalTrialsChecked": 20,
+  "historicalMeasuredTrials": 16,
+  "historicalWarmupTrials": 4,
+  "comparisons": [
+    {
+      "cohort": "4A_cohort_1",
+      "case": "STCK",
+      "form": "warmup",
+      "round": 0,
+      "matched": true,
+      "captureShapeSha256": "42d417c47f83a75433553f0523a8046b7fa0dde1b33a1ef2a2aab091b99b7383",
+      "historicalShapeSha256": "42d417c47f83a75433553f0523a8046b7fa0dde1b33a1ef2a2aab091b99b7383",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_1",
+      "case": "STCK",
+      "form": "measured",
+      "round": 1,
+      "matched": true,
+      "captureShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "historicalShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_1",
+      "case": "STCK",
+      "form": "measured",
+      "round": 2,
+      "matched": true,
+      "captureShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "historicalShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_1",
+      "case": "STCK",
+      "form": "measured",
+      "round": 3,
+      "matched": true,
+      "captureShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "historicalShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_1",
+      "case": "STCK",
+      "form": "measured",
+      "round": 4,
+      "matched": true,
+      "captureShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "historicalShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_1",
+      "case": "SMLP",
+      "form": "warmup",
+      "round": 0,
+      "matched": true,
+      "captureShapeSha256": "2d3e1d45b159d95d535de1051ee997bb2cf9ca81d90f0370e52e7fe278d7517e",
+      "historicalShapeSha256": "2d3e1d45b159d95d535de1051ee997bb2cf9ca81d90f0370e52e7fe278d7517e",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_1",
+      "case": "SMLP",
+      "form": "measured",
+      "round": 1,
+      "matched": true,
+      "captureShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "historicalShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_1",
+      "case": "SMLP",
+      "form": "measured",
+      "round": 2,
+      "matched": true,
+      "captureShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "historicalShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_1",
+      "case": "SMLP",
+      "form": "measured",
+      "round": 3,
+      "matched": true,
+      "captureShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "historicalShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_1",
+      "case": "SMLP",
+      "form": "measured",
+      "round": 4,
+      "matched": true,
+      "captureShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "historicalShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_2",
+      "case": "STCK",
+      "form": "warmup",
+      "round": 0,
+      "matched": true,
+      "captureShapeSha256": "42d417c47f83a75433553f0523a8046b7fa0dde1b33a1ef2a2aab091b99b7383",
+      "historicalShapeSha256": "42d417c47f83a75433553f0523a8046b7fa0dde1b33a1ef2a2aab091b99b7383",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_2",
+      "case": "STCK",
+      "form": "measured",
+      "round": 1,
+      "matched": true,
+      "captureShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "historicalShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_2",
+      "case": "STCK",
+      "form": "measured",
+      "round": 2,
+      "matched": true,
+      "captureShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "historicalShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_2",
+      "case": "STCK",
+      "form": "measured",
+      "round": 3,
+      "matched": true,
+      "captureShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "historicalShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_2",
+      "case": "STCK",
+      "form": "measured",
+      "round": 4,
+      "matched": true,
+      "captureShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "historicalShapeSha256": "f9c7ac57d6adcd48eaa2e22bae30423bf2513a68f3430fc543afb568c8dfc3a6",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_2",
+      "case": "SMLP",
+      "form": "warmup",
+      "round": 0,
+      "matched": true,
+      "captureShapeSha256": "2d3e1d45b159d95d535de1051ee997bb2cf9ca81d90f0370e52e7fe278d7517e",
+      "historicalShapeSha256": "2d3e1d45b159d95d535de1051ee997bb2cf9ca81d90f0370e52e7fe278d7517e",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_2",
+      "case": "SMLP",
+      "form": "measured",
+      "round": 1,
+      "matched": true,
+      "captureShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "historicalShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_2",
+      "case": "SMLP",
+      "form": "measured",
+      "round": 2,
+      "matched": true,
+      "captureShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "historicalShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_2",
+      "case": "SMLP",
+      "form": "measured",
+      "round": 3,
+      "matched": true,
+      "captureShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "historicalShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    },
+    {
+      "cohort": "4A_cohort_2",
+      "case": "SMLP",
+      "form": "measured",
+      "round": 4,
+      "matched": true,
+      "captureShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "historicalShapeSha256": "faaa62ea6ef7e4bf989985bd77744a6f6013eb6e10e9ebcf03acb2d568b65196",
+      "requestSequenceMatched": true,
+      "inspectionsMatched": true,
+      "differenceCount": 0
+    }
+  ],
+  "mismatches": [],
+  "checkedCount": 33,
+  "checks": [
+    {
+      "name": "7A_official_window_not_started",
+      "passed": true
+    },
+    {
+      "name": "baseline_capture_status",
+      "passed": true
+    },
+    {
+      "name": "four_functional_forms",
+      "passed": true
+    },
+    {
+      "name": "capture_cases_fingerprint",
+      "passed": true
+    },
+    {
+      "name": "cohort1_completed_0_51_report",
+      "passed": true
+    },
+    {
+      "name": "cohort1_same_native_digest",
+      "passed": true,
+      "detail": {
+        "capture": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+        "historical": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7"
+      }
+    },
+    {
+      "name": "cohort1_same_source_inventory",
+      "passed": true
+    },
+    {
+      "name": "cohort1_same_historical_harness",
+      "passed": true
+    },
+    {
+      "name": "cohort1_retained_harness_unchanged",
+      "passed": true
+    },
+    {
+      "name": "cohort1_same_cases_bytes",
+      "passed": true
+    },
+    {
+      "name": "cohort1_four_rounds",
+      "passed": true
+    },
+    {
+      "name": "cohort1_two_cases",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_trial_order",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_trial_order",
+      "passed": true
+    },
+    {
+      "name": "cohort2_completed_0_51_report",
+      "passed": true
+    },
+    {
+      "name": "cohort2_same_native_digest",
+      "passed": true,
+      "detail": {
+        "capture": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+        "historical": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7"
+      }
+    },
+    {
+      "name": "cohort2_same_source_inventory",
+      "passed": true
+    },
+    {
+      "name": "cohort2_same_historical_harness",
+      "passed": true
+    },
+    {
+      "name": "cohort2_retained_harness_unchanged",
+      "passed": true
+    },
+    {
+      "name": "cohort2_same_cases_bytes",
+      "passed": true
+    },
+    {
+      "name": "cohort2_four_rounds",
+      "passed": true
+    },
+    {
+      "name": "cohort2_two_cases",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_trial_order",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_trial_order",
+      "passed": true
+    },
+    {
+      "name": "all_twenty_retained_trial_shapes_match",
+      "passed": true
+    },
+    {
+      "name": "input_unchanged/docs/migration/lot7a-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+      "passed": true
+    },
+    {
+      "name": "input_unchanged/docs/migration/lot7a-evidence/performance-integrated/cases.json",
+      "passed": true
+    },
+    {
+      "name": "input_unchanged/scripts/compare-native-cost-cohorts.mjs",
+      "passed": true
+    },
+    {
+      "name": "input_unchanged/scripts/measure-native-loop-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "input_unchanged//workspace/sites/sra-lot4a-20261110/.sites-checkout/docs/migration/lot4a-evidence/performance-integrated/cohort1/after.json",
+      "passed": true
+    },
+    {
+      "name": "input_unchanged//workspace/sites/sra-lot4a-20261110/.sites-checkout/scripts/measure-native-loop-costs.mjs",
+      "passed": true
+    },
+    {
+      "name": "input_unchanged//workspace/sites/sra-lot4a-20261110/.sites-checkout/docs/migration/lot4a-evidence/performance-integrated/cases.json",
+      "passed": true
+    },
+    {
+      "name": "input_unchanged//workspace/sites/sra-lot4a-20261110/.sites-checkout/docs/migration/lot4a-evidence/performance-integrated/cohort2/after.json",
+      "passed": true
+    }
+  ],
+  "qualification": "Pre-measurement read-only compatibility diagnostic. The independent 7A baseline functional capture is compared with work metadata from retained 4A candidate 0.51 trials of identical native bytes. Historical duration values are not used and no timing statistics are calculated. This does not create 7A cost evidence, supply or alter the functional fixture, verify the 7A candidate cost shape, or replace the future exact checks on all 7A trials."
+}

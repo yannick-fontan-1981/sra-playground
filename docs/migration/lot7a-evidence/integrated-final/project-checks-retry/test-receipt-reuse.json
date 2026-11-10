@@ -1,0 +1,26 @@
+{
+  "schema": "logos-engine.byte-identical-validation-reuse.v1",
+  "recordedAt": "2026-11-10T20:03:27.104418+00:00",
+  "status": "passed",
+  "original": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/validation/delta-tests-run.json",
+    "sha256": "eb5e186bd8cc576c96b75d5f33c1639a5964bbce314f78b910974b76ad9422d7",
+    "bytes": 120188
+  },
+  "copy": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/project-checks-retry/validation/delta-tests-run.json",
+    "sha256": "eb5e186bd8cc576c96b75d5f33c1639a5964bbce314f78b910974b76ad9422d7",
+    "bytes": 120188
+  },
+  "reason": "The initial project checks retained a build helper MODULE_NOT_FOUND failure before compilation. The same frozen native source and test run are reused byte for byte with the successful current-helper project checks; no test rerun or synthesized result.",
+  "sourceManifest": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/source-manifest.json",
+    "sha256": "75e1dbe4002f737c2d5248a08531c6b60002c3114692b55df3a5c7255c79d6cc",
+    "bytes": 33095
+  },
+  "projectChecks": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/project-checks-retry/validation/checks-run.json",
+    "sha256": "7ad9d883a3c370a1b8806ca3ce5916be8ae86952d8b4ed26003c2dd594f15050",
+    "bytes": 76916
+  }
+}
