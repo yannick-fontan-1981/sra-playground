@@ -1,0 +1,54 @@
+{
+  "schema": "logos-engine.feedback-exact-evidence-reuse.v1",
+  "recordedAt": "2026-11-10T18:15:56.117311+00:00",
+  "nativeSourceDigest": "66be0948fdff5abe10b12d253bb4583db067aab2f5b7248632c9f9d443bc53fe",
+  "nativeFiles": 271,
+  "sourceArchiveInputsIdentical": true,
+  "nativeSourceChangeSinceGame": false,
+  "changesAfterInitialGate": [
+    "Update the preexisting radial-port registry coverage test to recognize the added Feedback entry and54/76 total; no production change."
+  ],
+  "finalTestGate": {
+    "path": "docs/migration/lot4a-evidence/final-release/validation/delta-tests-run.json",
+    "bytes": 110274,
+    "sha256": "1166890e3c7352cb56f9c576db1bc09809ddf2c9f061b313032bf31e13c75cf0"
+  },
+  "historicalTestGate": {
+    "path": "docs/migration/lot4a-evidence/final/validation/delta-tests-run.json",
+    "bytes": 110166,
+    "sha256": "37a303137e85923886f5fce8f523ab97aaa00756563ff2f0d97093bb1e5ca12e"
+  },
+  "reusedBuild": {
+    "path": "docs/migration/lot4a-evidence/final/validation/checks-run.json",
+    "bytes": 74808,
+    "sha256": "cc11f97c1d599a490c7e6eefa90eeea356e6add2fb9dd7b22b1ac6eceb15fc91"
+  },
+  "reusedRegressions": {
+    "path": "docs/migration/lot4a-evidence/final/regressions/regression-summary.json",
+    "bytes": 91878,
+    "sha256": "90dc2a5c1d8e07150cfa3887188aa2e72835ec72b6c9ef0f5a85671e1e01f00d"
+  },
+  "reusedCampaign": {
+    "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02/execution-mind.json",
+    "bytes": 68771,
+    "sha256": "94f3300c5bcd653e6e0dd86575ad8e65b2b89b7baa954786e98f518f4025f9eb"
+  },
+  "frozenManifests": [
+    {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/source-manifest.json",
+      "bytes": 32130,
+      "sha256": "09118332044f22a23eb84a7a2b76c1c28bd1c425ec665a9e883510152fc21daa"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final/source-manifest.json",
+      "bytes": 32130,
+      "sha256": "09118332044f22a23eb84a7a2b76c1c28bd1c425ec665a9e883510152fc21daa"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final-release/source-manifest.json",
+      "bytes": 32130,
+      "sha256": "09118332044f22a23eb84a7a2b76c1c28bd1c425ec665a9e883510152fc21daa"
+    }
+  ],
+  "qualification": "One final548-test gate after the coverage-test correction. Build, regressions, native campaign and source comparisons are reused because their native/execution/build inputs are unchanged. Previous receipts remain byte-identical; no extra game run or performance sample is claimed."
+}

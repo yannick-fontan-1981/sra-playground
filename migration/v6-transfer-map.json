@@ -4316,6 +4316,41 @@
         "tests/v6-crossed-prefix-integration.test.ts"
       ],
       "notes": "Lot3H/native0.49 transfers the own measured geometry, controller assignment, select/recolor/advance proposals, current guards, state/input/pair acquisition and common adapter. SharedOccurrenceMemory delegates to one CrossedPrefix owner at the existing inherited digest slot, preserving old journals without inventing absent pair evidence. Standalone occurrence reducers retain their historical behavior. Native assignment work/deadline bounds return blocking unknown without acquisition; the geometric prefilter is not deadline-preempted. Atomic reducer validation is named separately from source exception parity. RepeatedLine/SupportedLine planning ancestry and complete original-caller parity remain partial; component verification alone does not claim game contribution."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/morphology_policy/feedback_sequences/family.py",
+        "agents/yf_arc3_v6/morphology_policy/feedback_sequences/visual.py",
+        "agents/yf_arc3_v6/morphology_policy/feedback_sequences/finite.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-feedback-sequences.ts",
+        "src/logos-engine/v6-feedback-sequences-visual.ts",
+        "src/logos-engine/v6-feedback-sequences-finite.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-feedback-sequences-reference.py",
+        "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+        "tests/v6-feedback-sequences-reference.test.ts"
+      ],
+      "notes": "Own V6 Feedback family, visual measurements and finite discrimination transferred through existing compiled SRC. Original-source synthetic fixtures compare complete offers, bindings, guards, acquisitions, restores and discriminating outcomes. Two source caller paths share one native owner; selected/passive acquisition remains distinct. Cooperative search interruption and missing-raster refusal are explicit native adaptations. Component coverage does not claim whole caller parity or game contribution."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/feedback_code_identification.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-feedback-sequences-finite.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-feedback-sequences-reference.py",
+        "tests/fixtures/v6-feedback-sequences-reference.json.gz",
+        "tests/v6-feedback-sequences-reference.test.ts"
+      ],
+      "notes": "Only the V5 closure consumed by V6 Feedback finite.py is transferred: constraint_filter PROPAGATE and trial_partitions DOMAIN with feedback accounting. Protocol fitting, identification policies, transactions and the rest of this V5 module remain outside the port."
     }
   ],
   "scopeNotes": [

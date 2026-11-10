@@ -1,0 +1,69 @@
+{
+  "schema": "logos-engine.feedback-case-phase.v1",
+  "game": "MIND",
+  "phase": "baseline-78",
+  "selection": {
+    "path": "docs/migration/lot4a-evidence/mind-selection.json",
+    "bytes": 1227,
+    "sha256": "6268cc3eadc9102122b4d3a58182887450f3d42078ff9cbbcf037698fcdde88f"
+  },
+  "generator": {
+    "path": "docs/migration/lot4a-evidence/run-case-phase.py",
+    "bytes": 3760,
+    "sha256": "8731f865589a3435d54970dca274ddc62bb198bc56c2776e54f58bd6b6c15230"
+  },
+  "checkout": "/workspace/sites/sra-lot4a-base78",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-bounded-native-campaign-proof.py",
+    "MIND",
+    "3",
+    "8",
+    "docs/migration/lot4a-evidence/baseline/mind-native049"
+  ],
+  "startedAt": "2026-11-10T17:58:04.827806+00:00",
+  "finishedAt": "2026-11-10T17:58:11.829448+00:00",
+  "elapsedSeconds": 7.001932555998792,
+  "exitCode": 1,
+  "caseDeadlineReached": false,
+  "cumulativeCaseSecondsAtEnd": 234.490809,
+  "output": {
+    "path": "docs/migration/lot4a-evidence/mind-baseline-78-phase.log",
+    "bytes": 2346,
+    "sha256": "0150d8ce5f82de9df7a0b8a88e0df80f774aa26cd13c667c4e2b498affd6d8f5"
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot4a-evidence/baseline/mind-native049/execution-mind.json",
+      "bytes": 67906,
+      "sha256": "cf9960e023e2fb24a80401dad4e94b884d09ccf20a3d76ef12ffb3c40f4222c3"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/baseline/mind-native049/mind-actual-public-journal.jsonl.gz",
+      "bytes": 553,
+      "sha256": "75947a9a4ed08b19604ef602fa242b001e251adac0ea552047a3a32f542fa212"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/baseline/mind-native049/mind-campaign.json.gz",
+      "bytes": 115671,
+      "sha256": "c717826d5c9ccf750d6706d10c583d304dd1e1a32c4f2bb99efa2dcc025e1704"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/baseline/mind-native049/mind-output.log.gz",
+      "bytes": 1061,
+      "sha256": "a41b1e026df87d12d02cad5991c402210c7750264cd358ac79c39945d5df2990"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/baseline/mind-native049/mind-public-trace.json.gz",
+      "bytes": 746,
+      "sha256": "1f0f760f9a9feb42a55f66f106ec0f3509fd186f80022530a933e2619ea6ceb5"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/baseline/mind-native049/source-manifest.json",
+      "bytes": 31765,
+      "sha256": "5ab90c3cbd2f8356ba27025052a1c40cd16e7cb38326a89a48ac6e53cb9b3a24"
+    }
+  ],
+  "qualification": "A single cumulative wall-clock deadline covers every attempt and debugging interval for this selected case. The ordinary common agent receives only public game packets. An action-capped baseline is not a complete-game impossibility verdict."
+}

@@ -1,0 +1,68 @@
+{
+  "schema": "logos-engine.feedback-case-phase.v1",
+  "game": "MIND",
+  "phase": "candidate-02",
+  "selection": {
+    "path": "docs/migration/lot4a-evidence/mind-resumption-02.json",
+    "bytes": 1858,
+    "sha256": "b80a29cb995853170930455d8ebdf71c1adb1b41612affe81da3f382e1c93fea"
+  },
+  "generator": {
+    "path": "docs/migration/lot4a-evidence/run-case-phase.py",
+    "bytes": 3760,
+    "sha256": "8731f865589a3435d54970dca274ddc62bb198bc56c2776e54f58bd6b6c15230"
+  },
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "scripts/run-v53-campaign-proof.py",
+    "MIND",
+    "3",
+    "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02"
+  ],
+  "startedAt": "2026-11-10T17:56:47.727629+00:00",
+  "finishedAt": "2026-11-10T17:57:41.707735+00:00",
+  "elapsedSeconds": 53.9804637490015,
+  "exitCode": 0,
+  "caseDeadlineReached": false,
+  "cumulativeCaseSecondsAtEnd": 204.369096,
+  "output": {
+    "path": "docs/migration/lot4a-evidence/mind-candidate-02-phase.log",
+    "bytes": 1918,
+    "sha256": "bd940bb1b312e45e3b4a51d4c050165aa47cf9dd340b20a005ae0255fa823591"
+  },
+  "artifacts": [
+    {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02/execution-mind.json",
+      "bytes": 68771,
+      "sha256": "94f3300c5bcd653e6e0dd86575ad8e65b2b89b7baa954786e98f518f4025f9eb"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02/mind-actual-public-journal.jsonl.gz",
+      "bytes": 11527,
+      "sha256": "eed9ed2b157b178e227ed3e8f71ea6319fac309d5dd6aa5b68e0958720862bfd"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02/mind-campaign.json.gz",
+      "bytes": 4348035,
+      "sha256": "995714bd0d458100dfce8c3f1eeeed67f76f4d83de18debfa2569598426bc2f5"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02/mind-output.log.gz",
+      "bytes": 4483,
+      "sha256": "dd61a3545131fa899d3379cd2a42751140a22805104c5945d5d62c6197ec65ab"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02/mind-public-trace.json.gz",
+      "bytes": 17257,
+      "sha256": "3fe7708a8372041bc081dae17ef0c11ab0f4e6d514e41fb51f8d025760bdf752"
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/diagnostic/candidate-01/mind-feedback-session-02/source-manifest.json",
+      "bytes": 32130,
+      "sha256": "09118332044f22a23eb84a7a2b76c1c28bd1c425ec665a9e883510152fc21daa"
+    }
+  ],
+  "qualification": "A single cumulative wall-clock deadline covers every attempt and debugging interval for this selected case. The ordinary common agent receives only public game packets. An action-capped baseline is not a complete-game impossibility verdict."
+}

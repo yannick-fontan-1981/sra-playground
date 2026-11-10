@@ -2,17 +2,17 @@
   "schema": "logos-engine.v6.declared-entry-coverage.v1",
   "referenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
   "strategySha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44",
-  "implementation": "logos-engine.typescript.v6.native-migration/0.49.0",
+  "implementation": "logos-engine.typescript.v6.native-migration/0.50.0",
   "metric": "Connection of the explicit subquestions in the four ordered source DRM lists",
-  "connected": 53,
+  "connected": 54,
   "partiallyConnected": 0,
   "declared": 76,
-  "percent": 69.7,
+  "percent": 71.1,
   "groups": [
     {
       "id": "goal_access",
       "declared": 12,
-      "connected": 9,
+      "connected": 10,
       "partiallyConnected": 0,
       "entries": [
         {
@@ -67,8 +67,8 @@
         },
         {
           "question": "observed_feedback_sequence",
-          "family": null,
-          "status": "pending"
+          "family": "feedback_sequences",
+          "status": "connected"
         },
         {
           "question": "animated_contact",
@@ -435,6 +435,7 @@
         "subset_diagnosis",
         "invited_reduction",
         "joint_transport",
+        "feedback_sequences",
         "animated_contact"
       ],
       "entryPoints": [
@@ -446,6 +447,7 @@
         null,
         null,
         null,
+        "observed_feedback_sequence",
         null
       ]
     },
@@ -597,6 +599,7 @@
       "id": "information_goal",
       "families": [
         "visual_sequences",
+        "feedback_sequences",
         "information_goal"
       ]
     },

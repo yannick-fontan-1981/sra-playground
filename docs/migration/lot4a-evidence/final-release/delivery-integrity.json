@@ -1,0 +1,168 @@
+{
+  "schema": "logos-engine.native-delivery-integrity.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T18:15:58.800317+00:00",
+  "directory": "docs/migration/lot4a-evidence/final-release",
+  "validationDirectory": "docs/migration/lot4a-evidence/final-release/validation",
+  "generator": {
+    "path": "scripts/verify-native-delivery.py",
+    "sha256": "ca36a235e5da8aa8abd963aaa6a282d90217ed58a721bfdbba361527dd48409a",
+    "bytes": 26494
+  },
+  "verificationHelpers": [
+    {
+      "path": "scripts/run-v53-campaign-proof.py",
+      "sha256": "1624ba6b0d49e50c197407c986790a205003ecd17c525c4cc144879c708be782",
+      "bytes": 5421
+    },
+    {
+      "path": "scripts/compare-v54-reactive-public-evidence.py",
+      "sha256": "3274acc5ed28a40f91ad0ee2e34c247ab160919ea43855cf514b4fbc22ef6a69",
+      "bytes": 18850
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    },
+    {
+      "path": "scripts/restore-v53-evidence.py",
+      "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+      "bytes": 3361
+    }
+  ],
+  "nativeSourceDigest": "66be0948fdff5abe10b12d253bb4583db067aab2f5b7248632c9f9d443bc53fe",
+  "matchedFileInventories": {
+    "native": 271,
+    "archive": 282,
+    "sourceAndTests": 620,
+    "buildInputs": 336,
+    "regressionExecutionInputs": 7
+  },
+  "originalSourceFilesUnchanged": 1786,
+  "originalSourceManifest": {
+    "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+    "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6",
+    "bytes": 424024
+  },
+  "tests": {
+    "tests": 548,
+    "pass": 548,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "regressions": {
+    "passed": 4,
+    "total": 4,
+    "comparisonChecksPassed": 68,
+    "comparisonChecksExpected": 68,
+    "passiveOwnerPrefixesChecked": 0,
+    "passiveOwnerPrefixesPassed": 0,
+    "passiveOwnerTransitionsRetained": 0,
+    "prevalidatedTotals": {
+      "commands": 159,
+      "completePublicPackets": 163,
+      "animationFrames": 600,
+      "prefixes": 88,
+      "requests": 247,
+      "naturalLevelBoundaries": 12
+    }
+  },
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-DZdl7dpx.js",
+    "sha256": "21efd3e7ac5012e753162a1663c67651944f0f6ce5c68bfec9ec24b5598bc465",
+    "bytes": 6513913
+  },
+  "sourceArchiveVerification": {
+    "files": 282,
+    "archive": {
+      "path": "docs/migration/lot4a-evidence/final-release/source-archive.tar.gz",
+      "sha256": "9f21476f3bb21c96bcdce6f3af990d4e4c3c9099dea176f8af27fea52c7b567c",
+      "bytes": 1712865
+    },
+    "members": 282,
+    "parts": 2,
+    "byteIdentical": true
+  },
+  "byteStorage": {
+    "reports": 0,
+    "parts": 0,
+    "bytes": 0,
+    "originalsAbsentBeforeRestore": true,
+    "temporaryRootRemoved": true,
+    "originalsUnchanged": true,
+    "restoredByteIdentical": [],
+    "generators": [
+      {
+        "path": "scripts/evidence-byte-parts.py",
+        "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+        "bytes": 7210
+      },
+      {
+        "path": "scripts/restore-v53-evidence.py",
+        "sha256": "e0494dda3dd445e0db0bf04cccac27ad8d19c917ccd2b4b10c068df6faf7c23d",
+        "bytes": 3361
+      }
+    ]
+  },
+  "receipts": [
+    {
+      "path": "docs/migration/lot4a-evidence/final-release/source-manifest.json",
+      "sha256": "09118332044f22a23eb84a7a2b76c1c28bd1c425ec665a9e883510152fc21daa",
+      "bytes": 32130
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final-release/source-archive.json",
+      "sha256": "9759f0fdf9f8355236a91c884d722dba8ca73b66d6b701806fafd6fa9bcb5abd",
+      "bytes": 33769
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final-release/source-archive-parts.json",
+      "sha256": "56f2c532fd0309f83a69b9c304fb8bde8e55cb007513c5ec3b44f82c22f9f6e2",
+      "bytes": 815
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final-release/validation/delta-tests-run.json",
+      "sha256": "1166890e3c7352cb56f9c576db1bc09809ddf2c9f061b313032bf31e13c75cf0",
+      "bytes": 110274
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final-release/validation/checks-run.json",
+      "sha256": "cc11f97c1d599a490c7e6eefa90eeea356e6add2fb9dd7b22b1ac6eceb15fc91",
+      "bytes": 74808
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final-release/regressions/regression-summary.json",
+      "sha256": "90dc2a5c1d8e07150cfa3887188aa2e72835ec72b6c9ef0f5a85671e1e01f00d",
+      "bytes": 91878
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final-release/feedback-validation-scope.json",
+      "sha256": "732e13b22524499c2ae0b726d454bcb08916133ddf357656661de08d9b8718ae",
+      "bytes": 3744
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final-release/feedback-public-contribution.json",
+      "sha256": "a60bf7aa6f3482ef694b7cfe108d48fb175f79067103367f61f290e57a68821f",
+      "bytes": 51324
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final-release/mind-resolution.json",
+      "sha256": "213eb088d2bf4b60be770d948f2efdf76ab73592dc4838cb5abb8e039abd119c",
+      "bytes": 2267
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final-release/evidence-reuse.json",
+      "sha256": "2b65e9ecced470661349b78778864f9e2f0de017aec33a33135a14ce3f7caf72",
+      "bytes": 2516
+    },
+    {
+      "path": "docs/migration/lot4a-evidence/final-release/browser/browser-qa.json",
+      "sha256": "95de452b1d2cc38c0fd23ffbb414318e1ece68f9f43843320673d343926e63bd",
+      "bytes": 1363
+    }
+  ],
+  "qualification": "Post-validation file integrity and lossless evidence transport only. Every completed JSON evidence parts manifest is checked with the existing transport helpers, restored into an initially empty temporary root and compared byte for byte with its unchanged original. Frozen source archive members, recorded native/source/test/build inputs and recorded validation status are checked without rerunning or reinterpreting a game, agent, source comparison, test or build. Additional receipts are fingerprinted only. This is not a new campaign, proof of causal game improvement or complete migration."
+}
