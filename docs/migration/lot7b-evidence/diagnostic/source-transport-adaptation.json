@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.lot7b-source-transport-adaptation.v1",
+  "recordedAt": "2026-11-10T21:56:51.348216+00:00",
+  "source": {
+    "path": "docs/migration/lot7a-evidence/plan-bounded-source-transport.py",
+    "sha256": "163a8fc62222b0dc824a1534310adad51baa7ebde681f030bc72252f8e552dfe",
+    "bytes": 30325
+  },
+  "target": {
+    "path": "docs/migration/lot7b-evidence/plan-bounded-source-transport.py",
+    "sha256": "aeb86546071e580e6034f4569363f334b061a19600e52a88735be9bd0bf67ba2",
+    "bytes": 30333
+  },
+  "changes": [
+    "lot-specific evidence root and completed-window default",
+    "lot labels and published-predecessor CLI wording"
+  ],
+  "logicChanged": false,
+  "syntax": "AST passed without import or execution",
+  "planExecuted": false,
+  "gitObjectsCreated": false,
+  "remoteActionExecuted": false,
+  "qualification": "The unchanged v2 bounded source transport planner is prepared for the eventual completed7B window. No transport plan or release success is asserted."
+}
