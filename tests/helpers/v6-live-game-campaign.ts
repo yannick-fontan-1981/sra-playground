@@ -89,7 +89,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     status: 'running', referenceCommit: V6_REFERENCE_COMMIT,
     budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: 360, clock: 'real active compute and native execution' },
     source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [], domainAssessments: [],
-    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], workshopSourceCalls: [], feedbackSourceCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
+    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], workshopSourceCalls: [], symbolSourceCalls: [], feedbackSourceCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
   };
   if (options.recordedPublic) report.recordedPublicReplay = {
     trace: options.recordedPublic.trace, baseline: options.recordedPublic.baseline,
@@ -191,6 +191,32 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             const failed = (error: unknown): never => {
               event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
               event.sourceAfter = this.state(); report.workshopSourceCalls.push(event); sourceDepth--; throw error;
+            };
+            try {
+              const result = original.apply(this, args);
+              return result && typeof result.then === 'function' ? result.then(complete, failed) : complete(result);
+            } catch (error) { return failed(error); }
+          };
+        }
+      }
+      const symbols = (runtime as unknown as { families: R[] }).families.find(f => f.id === 'public_symbol_transaction');
+      if (symbols) {
+        let sourceDepth = 0;
+        for (const method of ['proposeSource', 'before', 'after', 'recordSource']) {
+          const original = symbols[method];
+          assert.equal(typeof original, 'function', `Missing symbol-transactions source surface: ${method}`);
+          symbols[method] = function (...args: any[]) {
+            if (sourceDepth) return original.apply(this, args);
+            const event: R = { index: report.symbolSourceCalls.length, method,
+              arguments: structuredClone(args), sourceBefore: this.state() };
+            sourceDepth++;
+            const complete = (result: any): any => {
+              event.result = structuredClone(result ?? null); event.sourceAfter = this.state();
+              report.symbolSourceCalls.push(event); sourceDepth--; return result;
+            };
+            const failed = (error: unknown): never => {
+              event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+              event.sourceAfter = this.state(); report.symbolSourceCalls.push(event); sourceDepth--; throw error;
             };
             try {
               const result = original.apply(this, args);
@@ -386,6 +412,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             ? read('family_state:public_observed_inventory') : null;
           const recolorCheckpoint = graph.nodes['family_state:public_topological_recolor']
             ? read('family_state:public_topological_recolor') : null;
+          const symbolsCheckpoint = graph.nodes['family_state:public_symbol_transaction']
+            ? read('family_state:public_symbol_transaction') : null;
           const morphologyCheckpoint = graph.nodes['family_state:morphology']
             ? read('family_state:morphology') : null;
           const reasoningFacts = (read('reasoning:memory').facts as string[]).map(read);
@@ -408,6 +436,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const recolorFacts = reasoningFacts
             .filter(fact => evidence.transitions.some((_: R, index: number) =>
               fact.key === `topological_recolor_event:${evidence.decision_revision + index}`));
+          const symbolsFacts = reasoningFacts
+            .filter(fact => evidence.transitions.some((_: R, index: number) =>
+              fact.key === `symbol_transaction_event:${evidence.decision_revision + index}`));
           const anchors = (series.events as R[]).filter(event => event.kind === 'coupled_pair_epoch_anchor');
           const alternating = (series.events as R[]).filter(event => event.kind === 'alternating_graph_evidence');
           const graphEvidence = alternating.at(-1);
@@ -609,6 +640,15 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               acquired: recolorFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
               ...(evidence.proposal.recolor_plan ? { selectedProposal: evidence.proposal } : {}),
               qualification: 'Actual single six-field source owner. Only selected recolor actions call record; foreign returns do not become recolor experiments. Complete losing proposal evaluations and sealed checkpoints are observed without providing state or decisions.',
+            } } : {}),
+            ...(symbolsCheckpoint ? { symbolAcquisition: {
+              stateNode: 'family_state:public_symbol_transaction', checkpointFormat: symbolsCheckpoint.format,
+              sourceState: symbolsCheckpoint.source_state, nativeCheckpoint: symbolsCheckpoint,
+              transitions: evidence.transitions, sourceCallsThrough: report.symbolSourceCalls.length,
+              acquired: symbolsFacts.map(fact => ({ key: fact.key, evidence: fact.evidence, revision: fact.revision, result: fact.value })),
+              retainedSourceFact: reasoningFacts.find(fact => fact.key === 'observed_symbol_transactions_state') ?? null,
+              ...(evidence.proposal.symbol_transaction_plan ? { selectedProposal: evidence.proposal } : {}),
+              qualification: 'Evidence only: the actual five-field Symbols owner and complete native checkpoint after the sealed prefix. Only selected own proposals record transitions; a foreign action does not acquire a symbol event. Source facts and immutable native envelopes stay distinct. This recorder supplies no state, decision or expected return.',
             } } : {}),
             informationGoal: evidence.proposal.question?.curiosity ?? null,
             motionSourceCallsThrough: report.motionSourceCalls.length,
