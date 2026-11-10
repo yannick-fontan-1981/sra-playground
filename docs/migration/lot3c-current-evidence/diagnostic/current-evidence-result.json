@@ -1,0 +1,304 @@
+{
+  "schema": "logos-engine.v6.exposed-current-evidence-diagnostic.v1",
+  "scope": "Component proof on prior real public packets and 19 own events, plus explicitly synthetic contract probes. No new game execution or success claim.",
+  "baseline": {
+    "nativeVersion": "0.43",
+    "commit": "e9fd144112b05a65af5c88e9f05c541f43ed8ed7",
+    "nativeSourceDigest": "3e88aa12214fd3d4a4feb8d63b946123b8394cb4a0cbd0a156cc059c37f7b46c"
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot3c-evidence/final/cwse-session/cwse-campaign.json.gz",
+      "sha256": "ecd9797b3c9290041c232df469a3359525b4f9f4fe2c805e0885c05875f8fe88"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/cwse-session/cwse-public-trace.json.gz",
+      "sha256": "6e985640f012326ba2cfeba4cc3be8939521de3498442852ef994c509084696a"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/final/cwse-terminal-diagnostic/source-result.json",
+      "sha256": "fab959ef2ac9f9123c5d179524c8cfdd7407cf24d22fe7e0f2c800833c0d7f96"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    }
+  ],
+  "sourceHashes": [
+    {
+      "path": "src/logos-engine/v6-exposed-reception-access.ts",
+      "baselineSha256": "a6e0f67afb8ecb4360389c0fa96b5cab765acb6e64e4fff61915bbe876a4a61a",
+      "candidateSha256": "25083b8b5238c5fe27ba1a77c0e56798d3717fa7b983b38f44a6838f6181b8b8"
+    },
+    {
+      "path": "src/logos-engine/v6-exposed-reception-observation.ts",
+      "baselineSha256": "5a149e23a06a07af56dd92f32e7d0bdb1e7e9e2c8805bdc6d8e54dafac84a36a",
+      "candidateSha256": "5a149e23a06a07af56dd92f32e7d0bdb1e7e9e2c8805bdc6d8e54dafac84a36a"
+    },
+    {
+      "path": "src/logos-engine/v6-target-binding.ts",
+      "baselineSha256": "c3767ea64e21422a55b5b80ed3830171805f6bfda7db5b3a81d094d344b6eb00",
+      "candidateSha256": "c3767ea64e21422a55b5b80ed3830171805f6bfda7db5b3a81d094d344b6eb00"
+    }
+  ],
+  "realTrajectory": {
+    "sceneAdmissions": [
+      {
+        "sequence": 19,
+        "admitted": true
+      },
+      {
+        "sequence": 20,
+        "admitted": false
+      },
+      {
+        "sequence": 21,
+        "admitted": true
+      }
+    ],
+    "retainedOwnEvents": 19,
+    "terminalObservation": {
+      "frame_hash": "280241335b079aeb",
+      "level_epoch": 3,
+      "levels_completed": 2,
+      "observation_ref": "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:22:frame:280241335b079aeb",
+      "revision": 22,
+      "available_action_refs": [
+        "ACTION1",
+        "ACTION2",
+        "ACTION3",
+        "ACTION4",
+        "ACTION5",
+        "ACTION6",
+        "ACTION7"
+      ],
+      "state": "NOT_FINISHED"
+    },
+    "originalSourceProposalReproduced": true,
+    "samePlanIdentity": true,
+    "sameCompletePlan": true,
+    "sameActions": true,
+    "action": [
+      {
+        "action_ref": "ACTION1"
+      }
+    ],
+    "noAcquisitionDuringProposal": true,
+    "unmeasurableTransitionStillProducesNoOwnEvent": true,
+    "historicalEvidenceUnchanged": true,
+    "historicalEvidenceCount": 15,
+    "currentEnvelopeCount": 16,
+    "beforeGuardAdmitted": true,
+    "oldTargetBinding": {
+      "root": "G_official_completion",
+      "level_epoch": 3,
+      "observation_ref": "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:22:frame:280241335b079aeb",
+      "version": "1.1-v6",
+      "retained_target": null,
+      "admitted": false,
+      "reason": "unbound_action_set"
+    },
+    "correctedTargetBinding": {
+      "root": "G_official_completion",
+      "level_epoch": 3,
+      "observation_ref": "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:22:frame:280241335b079aeb",
+      "version": "1.1-v6",
+      "retained_target": null,
+      "admitted": true,
+      "path": [
+        "G_official_completion",
+        "exposed-reception:3667852415271c3a61f3b59b6ca28e747d988321852fd10bf3a20270ae7a7b4e"
+      ],
+      "reason": "independent_current_contribution"
+    }
+  },
+  "exactProposalDifference": [
+    {
+      "path": "bundle_template.evidence",
+      "before": [
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:20:frame:3fa6b9427de7ff5d"
+      ],
+      "after": [
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:20:frame:3fa6b9427de7ff5d",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:22:frame:280241335b079aeb"
+      ]
+    },
+    {
+      "path": "question.hypothesis_refs",
+      "before": [
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:20:frame:3fa6b9427de7ff5d"
+      ],
+      "after": [
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:20:frame:3fa6b9427de7ff5d",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:22:frame:280241335b079aeb"
+      ]
+    },
+    {
+      "path": "route_refs",
+      "before": [
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:20:frame:3fa6b9427de7ff5d"
+      ],
+      "after": [
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:20:frame:3fa6b9427de7ff5d",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:22:frame:280241335b079aeb"
+      ]
+    }
+  ],
+  "contractProbes": [
+    {
+      "name": "unmeasurable_public_packet_still_returns_null_without_event",
+      "passed": true,
+      "scope": "synthetic_contract_probe"
+    },
+    {
+      "name": "stale_current_reference_rejected_by_target_and_before",
+      "passed": true,
+      "scope": "synthetic_contract_probe"
+    },
+    {
+      "name": "other_epoch_rejected_for_existing_plan",
+      "passed": true,
+      "scope": "synthetic_contract_probe"
+    },
+    {
+      "name": "mutated_action_ref_rejected_by_target_and_before",
+      "passed": true,
+      "scope": "synthetic_contract_probe"
+    },
+    {
+      "name": "synchronized_action_and_point_mutation_still_rejected_by_before",
+      "passed": true,
+      "scope": "synthetic_contract_probe"
+    },
+    {
+      "name": "mutated_public_raster_rejected_by_before",
+      "passed": true,
+      "scope": "synthetic_contract_probe"
+    },
+    {
+      "name": "unavailable_action_rejected_by_before",
+      "passed": true,
+      "scope": "synthetic_contract_probe"
+    },
+    {
+      "name": "other_epoch_uses_fresh_proposal_state_without_acquisition",
+      "passed": true,
+      "scope": "synthetic_contract_probe"
+    },
+    {
+      "name": "other_layout_memory_uses_fresh_proposal_state",
+      "passed": true,
+      "scope": "synthetic_contract_probe"
+    },
+    {
+      "name": "evidence_bound_keeps_fifteen_recent_history_refs_plus_current",
+      "passed": true,
+      "scope": "synthetic_contract_probe"
+    },
+    {
+      "name": "current_ref_already_in_window_preserves_order_and_duplicates",
+      "passed": true,
+      "scope": "synthetic_contract_probe"
+    },
+    {
+      "name": "current_ref_outside_retained_window_is_added_back",
+      "passed": true,
+      "scope": "synthetic_contract_probe"
+    },
+    {
+      "name": "mutating_old_snapshot_or_proposal_does_not_alias_owned_memory",
+      "passed": true,
+      "scope": "synthetic_contract_probe"
+    },
+    {
+      "name": "restoring_actual_events_reproduces_same_corrected_proposal_and_guards",
+      "passed": true,
+      "scope": "synthetic_contract_probe"
+    }
+  ],
+  "qualification": "The native extension differs intentionally from source only at current proposal evidence. A newly admitted plan is not a witnessed command or completed level. Future live behavior remains outside this component proof."
+}

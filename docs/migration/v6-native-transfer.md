@@ -11,7 +11,17 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-## Current transfer: lot 3C native 0.43.0, verified own layer, guarded campaign limit
+## Current transfer: lot 3C native 0.44.0, current evidence corrected
+
+Native **0.44.0** is frozen at **`e914399487992c3f53b3058ee734c470d738594e7344285799203462fac6a255`**, with **251 native files and a 262-file archive**. The [correction report](lot3c-current-evidence-correction.md) records an explicit native extension that binds the admitted current observation in the bounded Exposed proposal envelope without changing the plan, identity, commands, acquisition, retained memory or guards. Source fixture parity remains exact outside the three explicitly qualified evidence fields of one case. The independent retained-context proof and 14 contrary probes pass.
+
+The affected formal suite passes **1,536/1,536 tests in 46 files**, all **five project checks/build**, and strict **CATR/RSWP 34/34** against published 0.43 decisions. Their older 32/34 schema-extension result is preserved. The cold CWSE campaign passes the former evidence refusal but still stops at the unchanged active-time budget: **107 actions, 2 levels, 93 prefixes**. The three-level target is unmet. Actual own-layer contribution verifies **19 prefixes, 29 actions, 21 events, 19 restorations**, including 8 legitimate returns without own acquisition. Browser QA is separately bounded at 46 actions / 2 levels / 32 plans, with Pause/resume verified.
+
+The [cumulative candidate clock](lot3c-current-evidence/final/cwse-resolution.json) is 2,399.683865 seconds; no further CWSE attempt or diagnosis on this freeze. The current-evidence contract follow-up is complete, but **3C remains qualified/open for remaining functional capability**. The next independent source priority is 3D, `rooted_line_plan`, using a different pertinent case. Complete inherited EphemeralMap closure and full original-caller equivalence remain unproved. Coverage stays **3/6 observed branches, 50/76 entries, 37 compiled workflows**, and global migration remains incomplete.
+
+The separately predeclared 0.44 cost window against fresh 0.43 is **accepted for both cases**: **STCK +1.540821%, SMLP −0.378796%**, from 32 measured sessions and 400 actions. The independent arithmetic review passes 231 checks. The retained phase diagnostic remains **14/16**, with STCK new-decision median **+15.102315%** and known-prefix guard median **+15.178145%**. These phases are accepted under the strict global rule; their diagnostic classifications and available p95 remain visible in the [results](lot3c-current-evidence/performance/results.md). Historical 0.43 timing is not reused as a sample, and cost acceptance does not close the unmet CWSE target.
+
+## Historical transfer: lot 3C native 0.43.0, verified own layer, guarded campaign limit
 
 Native **0.43.0** is frozen at **`3e88aa12214fd3d4a4feb8d63b946123b8394cb4a0cbd0a156cc059c37f7b46c`**, with **251 native files and a 262-file archive**. [The delivery report](lot3c-exposed-reception.md) and [lineage](lot3c-exposed-reception-lineage.md) document Exposed reception measurements, conditional acquired models, the consumed V5 nominal push kernel, source guards, private ownership and compatibility with actual published 0.42 checkpoints. The observed composition entry now contains **3/6 branches**. Complete entry coverage remains **50/76**, with **37 compiled workflows** and incomplete global migration.
 

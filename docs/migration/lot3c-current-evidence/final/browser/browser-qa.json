@@ -1,0 +1,75 @@
+{
+  "schema": "logos-engine.browser-qa-observation.v1",
+  "status": "controls_verified_bounded_followup",
+  "recordedAt": "2026-11-10T07:24:13.969956+00:00",
+  "game": "CWSE",
+  "nativeImplementation": "logos-engine.typescript.v6.native-migration/0.44.0",
+  "nativeSourceDigest": "e914399487992c3f53b3058ee734c470d738594e7344285799203462fac6a255",
+  "managedPreview": "http://127.0.0.1:4173/",
+  "finalObservedUrl": "http://127.0.0.1:4173/?game=CWSE&level=3",
+  "method": "CUA visible controls and AX observations only; no browser internal agent state or game code read.",
+  "steps": [
+    {
+      "action": "Cold session",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0,
+      "level": 1
+    },
+    {
+      "action": "Run then Pause; Paused observed",
+      "actions": 0,
+      "levelsSolved": 0,
+      "completedPlans": 0,
+      "level": 1
+    },
+    {
+      "action": "One action completed",
+      "actions": 1,
+      "levelsSolved": 0,
+      "completedPlans": 1,
+      "level": 1
+    },
+    {
+      "action": "Run to natural boundary",
+      "actions": 4,
+      "levelsSolved": 1,
+      "completedPlans": 4,
+      "level": 2
+    },
+    {
+      "action": "Run then Pause; Paused observed",
+      "actions": 5,
+      "levelsSolved": 1,
+      "completedPlans": 5,
+      "level": 2
+    },
+    {
+      "action": "Resume to natural boundary",
+      "actions": 12,
+      "levelsSolved": 2,
+      "completedPlans": 11,
+      "level": 3
+    },
+    {
+      "action": "Continue beyond prior21-action refusal then Pause; Paused observed",
+      "actions": 46,
+      "levelsSolved": 2,
+      "completedPlans": 32,
+      "level": 3
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/browser/cwse-paused-after-current-evidence.png",
+      "bytes": 235709,
+      "sha256": "57e92ba659bfb0adee04661aab9e3bb161e7c785095c02e4b972d7026446777e"
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/browser/cwse-final-ax.txt",
+      "bytes": 10095,
+      "sha256": "e3b232a426c3816abc44214e58e80857a312736232d56ef0eec25767f537f3cb"
+    }
+  ],
+  "qualification": "One continuous cold source-preview session, no level jump, no injected memory or actions. Paused at0,5,46actions; single action1; natural boundaries4/1/4 and12/2/11. Browser run intentionally stopped at46/2/32 after passing the previous refusal at21actions; this is control and bounded progression QA, not a completed third level or reproduction of the final instrumented campaign. Inspector remained closed. Separate from compiled-production and cost evidence."
+}

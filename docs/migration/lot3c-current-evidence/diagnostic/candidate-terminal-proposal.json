@@ -1,0 +1,666 @@
+{
+  "status": "proposed",
+  "kind": "exposed_reception",
+  "proposal_id": "exposed-reception:3667852415271c3a61f3b59b6ca28e747d988321852fd10bf3a20270ae7a7b4e",
+  "exposed_reception_plan": {
+    "scene": {
+      "origin": [
+        10,
+        7
+      ],
+      "pitch": 4,
+      "size": [
+        11,
+        9
+      ],
+      "actor": [
+        5,
+        6
+      ],
+      "actor_color": 0,
+      "bodies": [
+        {
+          "pos": [
+            5,
+            2
+          ],
+          "color": 9
+        },
+        {
+          "pos": [
+            5,
+            7
+          ],
+          "color": 15
+        },
+        {
+          "pos": [
+            6,
+            4
+          ],
+          "color": 9,
+          "underlay": "receiver_overlap_candidate"
+        },
+        {
+          "pos": [
+            7,
+            6
+          ],
+          "color": 15
+        }
+      ],
+      "slots": [
+        {
+          "pos": [
+            5,
+            6
+          ],
+          "color": 15
+        },
+        {
+          "pos": [
+            6,
+            4
+          ],
+          "color": 9
+        },
+        {
+          "pos": [
+            7,
+            2
+          ],
+          "color": 8
+        },
+        {
+          "pos": [
+            9,
+            6
+          ],
+          "color": 15
+        }
+      ],
+      "walls": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          4,
+          0
+        ],
+        [
+          5,
+          0
+        ],
+        [
+          6,
+          0
+        ],
+        [
+          7,
+          0
+        ],
+        [
+          8,
+          0
+        ],
+        [
+          9,
+          0
+        ],
+        [
+          10,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          10,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          6,
+          2
+        ],
+        [
+          10,
+          2
+        ],
+        [
+          0,
+          3
+        ],
+        [
+          8,
+          3
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          10,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          10,
+          5
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          6,
+          6
+        ],
+        [
+          10,
+          6
+        ],
+        [
+          0,
+          7
+        ],
+        [
+          10,
+          7
+        ],
+        [
+          0,
+          8
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          7,
+          8
+        ],
+        [
+          8,
+          8
+        ],
+        [
+          9,
+          8
+        ],
+        [
+          10,
+          8
+        ]
+      ],
+      "dial": [
+        {
+          "point": [
+            55,
+            49
+          ],
+          "vector": [
+            0,
+            -6
+          ],
+          "active": false
+        },
+        {
+          "point": [
+            51,
+            51
+          ],
+          "vector": [
+            -4,
+            -4
+          ],
+          "active": false
+        },
+        {
+          "point": [
+            59,
+            51
+          ],
+          "vector": [
+            4,
+            -4
+          ],
+          "active": false
+        },
+        {
+          "point": [
+            49,
+            55
+          ],
+          "vector": [
+            -6,
+            0
+          ],
+          "active": true
+        },
+        {
+          "point": [
+            61,
+            55
+          ],
+          "vector": [
+            6,
+            0
+          ],
+          "active": false
+        },
+        {
+          "point": [
+            51,
+            59
+          ],
+          "vector": [
+            -4,
+            4
+          ],
+          "active": false
+        },
+        {
+          "point": [
+            59,
+            59
+          ],
+          "vector": [
+            4,
+            4
+          ],
+          "active": false
+        },
+        {
+          "point": [
+            55,
+            61
+          ],
+          "vector": [
+            0,
+            6
+          ],
+          "active": false
+        }
+      ],
+      "orientation": [
+        -6,
+        0
+      ],
+      "layout": "ff30ba4b56713bf365fc5b80bebb5cdd3ae863a2c15389e8c4f106016f5d1420"
+    },
+    "state": {
+      "dial_tried": [],
+      "epoch": 3,
+      "evidence": [
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+        "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:20:frame:3fa6b9427de7ff5d"
+      ],
+      "layout": "ff30ba4b56713bf365fc5b80bebb5cdd3ae863a2c15389e8c4f106016f5d1420",
+      "probed": [
+        [
+          [
+            2,
+            4
+          ],
+          "ACTION2"
+        ],
+        [
+          [
+            2,
+            5
+          ],
+          "ACTION1"
+        ],
+        [
+          [
+            2,
+            4
+          ],
+          "ACTION4"
+        ],
+        [
+          [
+            3,
+            4
+          ],
+          "ACTION1"
+        ],
+        [
+          [
+            3,
+            3
+          ],
+          "ACTION4"
+        ],
+        [
+          [
+            4,
+            3
+          ],
+          "ACTION4"
+        ],
+        [
+          [
+            5,
+            3
+          ],
+          "ACTION2"
+        ]
+      ]
+    },
+    "commands": [
+      {
+        "action_ref": "ACTION1"
+      }
+    ],
+    "predicted": [
+      {
+        "actor": [
+          5,
+          5
+        ],
+        "bodies": [
+          [
+            [
+              5,
+              2
+            ],
+            9
+          ],
+          [
+            [
+              5,
+              6
+            ],
+            15
+          ],
+          [
+            [
+              6,
+              4
+            ],
+            9
+          ],
+          [
+            [
+              7,
+              6
+            ],
+            15
+          ]
+        ]
+      }
+    ],
+    "epoch": 3,
+    "score": 2,
+    "observation_ref": "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:22:frame:280241335b079aeb",
+    "frame_digest": "280241335b079aeb471081bc7abdbb49aaa80d77ed1b756398c08bc22789f87c",
+    "kind": "access",
+    "why": "Library hypothesis: align current hollow bodies with compatible corner-marked receivers. Reuse measured occupancy and the V5 push-chain calculator for a conditional geometric prefix; optical, remote and contact effects remain open and seal the prefix on disagreement. This is not a learned universal terminal predicate.",
+    "controls": {
+      "ACTION1": {
+        "delta": [
+          0,
+          -1
+        ],
+        "evidence": [
+          "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+          "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4"
+        ]
+      },
+      "ACTION2": {
+        "delta": [
+          0,
+          1
+        ],
+        "evidence": [
+          "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+          "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:20:frame:3fa6b9427de7ff5d"
+        ]
+      },
+      "ACTION3": {
+        "delta": [
+          -1,
+          0
+        ],
+        "evidence": [
+          "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:2:revision:10:frame:7e73d3bf8bcf3680",
+          "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:2:revision:11:frame:329daa4a5cde09f9"
+        ]
+      },
+      "ACTION4": {
+        "delta": [
+          1,
+          0
+        ],
+        "evidence": [
+          "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+          "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174"
+        ]
+      }
+    },
+    "models": {
+      "attached": {
+        "15": {
+          "evidence": [
+            "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+            "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4"
+          ],
+          "status": "side_contact_co_motion_candidate"
+        }
+      },
+      "color_edges": [
+        [
+          9,
+          8
+        ],
+        [
+          15,
+          14
+        ]
+      ],
+      "coupled": {
+        "9": {
+          "evidence": [
+            "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+            "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625"
+          ],
+          "status": "observed_same_mode_co_motion_candidate"
+        }
+      },
+      "repulsion": {
+        "14": {
+          "delta": [
+            1,
+            0
+          ],
+          "evidence": [
+            "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:2:revision:11:frame:329daa4a5cde09f9",
+            "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:2:revision:12:frame:e9ee44aa2e2842fe"
+          ],
+          "status": "orientation_associated_motion_candidate"
+        }
+      }
+    },
+    "search_nodes": 137,
+    "v5_chain_visits": 3890
+  },
+  "actions": [
+    {
+      "action_ref": "ACTION1"
+    }
+  ],
+  "steps": [
+    {
+      "action": {
+        "action_ref": "ACTION1"
+      },
+      "expected_after": null
+    }
+  ],
+  "facts": {
+    "current_reception_geometry": true,
+    "optical_law_unknown": true,
+    "v5_nominal_chain_only": true,
+    "conditional_contact_model": true
+  },
+  "compositions": [
+    {
+      "id": "exposed-reception:3667852415271c3a61f3b59b6ca28e747d988321852fd10bf3a20270ae7a7b4e",
+      "observed": false,
+      "open_question": "Library hypothesis: align current hollow bodies with compatible corner-marked receivers. Reuse measured occupancy and the V5 push-chain calculator for a conditional geometric prefix; optical, remote and contact effects remain open and seal the prefix on disagreement. This is not a learned universal terminal predicate.",
+      "relations": [
+        "contributes_to:G_official_completion"
+      ]
+    }
+  ],
+  "question": {
+    "reason": "Library hypothesis: align current hollow bodies with compatible corner-marked receivers. Reuse measured occupancy and the V5 push-chain calculator for a conditional geometric prefix; optical, remote and contact effects remain open and seal the prefix on disagreement. This is not a learned universal terminal predicate.",
+    "hypothesis_refs": [
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:20:frame:3fa6b9427de7ff5d",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:22:frame:280241335b079aeb"
+    ]
+  },
+  "route_refs": [
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:20:frame:3fa6b9427de7ff5d",
+    "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:22:frame:280241335b079aeb"
+  ],
+  "binding": {
+    "level_epoch": 3,
+    "observation_ref": "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:22:frame:280241335b079aeb"
+  },
+  "bundle_template": {
+    "operation_key": "OP18",
+    "composition_ref": "exposed-reception:3667852415271c3a61f3b59b6ca28e747d988321852fd10bf3a20270ae7a7b4e",
+    "objective_ref": "G_official_completion",
+    "purpose": "Library hypothesis: align current hollow bodies with compatible corner-marked receivers. Reuse measured occupancy and the V5 push-chain calculator for a conditional geometric prefix; optical, remote and contact effects remain open and seal the prefix on disagreement. This is not a learned universal terminal predicate.",
+    "evidence": [
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:13:frame:ea303a78b821c48f",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:14:frame:2c099be3b8178094",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:15:frame:25aaa0b08589da04",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:16:frame:372eb32cd93a8625",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:17:frame:b554773001f878f4",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:18:frame:de6517cbbe039d2f",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:19:frame:c620401d8014e174",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:20:frame:3fa6b9427de7ff5d",
+      "sra-v6-e10e1039-505a-4a29-963c-a72f936fd866:epoch:3:revision:22:frame:280241335b079aeb"
+    ],
+    "preconditions": {},
+    "actions": [
+      {
+        "action_ref": "ACTION1"
+      }
+    ],
+    "outcome_guard": {
+      "path": [
+        "value"
+      ],
+      "contains": "exposed-reception:3667852415271c3a61f3b59b6ca28e747d988321852fd10bf3a20270ae7a7b4e"
+    }
+  }
+}

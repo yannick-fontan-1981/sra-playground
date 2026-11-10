@@ -430,6 +430,14 @@ export class ExposedReceptionMemory {
       ...(interrupted && interrupted.stop_reason !== 'reception_search_node_bound' ? { native_reception_work_budget: {
         complete: false, reason: interrupted.stop_reason, assignment_checks: interrupted.assignment_checks, assignments: interrupted.assignments, heuristic_checks: interrupted.heuristic_checks } } : {}) });
     const ref = 'exposed-reception:' + exposedReceptionPlanIdentity(plan), evidence = memory.evidence.slice(-16);
+    // Native extension: the admitted current scene supports this proposal even
+    // when no own event followed an unmeasurable or foreign transition. Keep
+    // that observation in the bounded envelope, without rewriting learned
+    // provenance, changing plan identity or acquiring a predicted effect.
+    if (!evidence.includes(observation.observation_ref)) {
+      if (evidence.length === 16) evidence.shift();
+      evidence.push(observation.observation_ref);
+    }
     return { status: 'proposed', kind: 'exposed_reception', proposal_id: ref, exposed_reception_plan: plan, actions,
       steps: actions.map(action => ({ action, expected_after: null })), facts: { current_reception_geometry: true, optical_law_unknown: true,
         v5_nominal_chain_only: true, conditional_contact_model: true },

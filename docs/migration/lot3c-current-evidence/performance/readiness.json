@@ -1,0 +1,86 @@
+{
+  "schema": "logos-engine.native-cost-window-readiness.v1",
+  "recordedAt": "2026-11-10T07:23:59.061708+00:00",
+  "status": "ready_for_predeclared_official_window",
+  "inputs": [
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/validation/delta-tests-run.json",
+      "bytes": 102211,
+      "sha256": "9224783687a5eae00852d33f2f4169ad2b2b7b9155622366a5a2a5a838e118d3"
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/validation/checks-run.json",
+      "bytes": 69913,
+      "sha256": "ea8b1fae93b5ac44b92ecad938c9857c6d1a8f7cb6b280ce21423df788cf6fb1"
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/regressions/regression-summary.json",
+      "bytes": 75669,
+      "sha256": "fda28d8f00646d5b9341bc03cd429629121bbfc7bf98036694019aeaa6966a85"
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/performance/declaration.json",
+      "bytes": 4244,
+      "sha256": "64400b443eadfc7023fc8826e44d27ca8c557bf05fff5e970e2bc8993789d214"
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/performance/protocol.md",
+      "bytes": 12082,
+      "sha256": "459aabe0e4f47efb6ab89b9371dfce092eedb688c353529b51adeaa559d3fe61"
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/performance/global-budget-policy.json",
+      "bytes": 1923,
+      "sha256": "da452c7a5378882ba08e5d4bbe4f4c8539e8711bbf54cbbc84d7e1295a63cd0f"
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/performance/protocol-check.json",
+      "bytes": 414,
+      "sha256": "cf9429bcedb9a92339dc28efbb55b30d9b4a6a8709cae568441eec89d3d9cb5a"
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/performance/static-preflight.json",
+      "bytes": 6085,
+      "sha256": "2b4ea264a16a933800c8e7f2a51ebb4cd9e9897765b8957424e00b702960049f"
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/browser/browser-qa.json",
+      "bytes": 2595,
+      "sha256": "145bbf1858ca3d1ca57ce1e43a072c4d8b28b5507075cef497a9ddfb080e501c"
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/cwse-current-session/execution-cwse.json",
+      "bytes": 63721,
+      "sha256": "ee8138176b03e07a1c5d96d808b507d42c0004a688a78b956a70854335adc0e3"
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/cwse-current-session/exposed-contribution.json",
+      "bytes": 334227,
+      "sha256": "88d996440ae43fd854d0d72c023beabac3313cc20c55538d7796ba69401102b0"
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/cwse-resolution.json",
+      "bytes": 2786,
+      "sha256": "0c4d899d05750bbf56104ed18f023212823221429912d7e9f9a3a869ee47febb"
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/final/delivery-integrity.json",
+      "bytes": 7353,
+      "sha256": "f195e741a71c1aa2b413e4943e58c52226b1c9f24b60be84d97f9dea045eccea"
+    },
+    {
+      "path": "docs/migration/lot3c-current-evidence/diagnostic/current-evidence-result.json",
+      "bytes": 15862,
+      "sha256": "0d9ea18e46d5082cf1043b0f72f8427249d53ab16694b495923cb7339258cc48"
+    }
+  ],
+  "preview": "sites-preview stop completed; sites-preview status returned Sites preview stopped before launch",
+  "isolation": "All owned formal tests, build, campaign, replays, source comparisons, browser operations, contribution and delivery-integrity work finished. Agents have been instructed to limit work to light documentation and reading during the sequential A1/B1/B2/A2 window. No concurrent test, worker, campaign, replay or preview remains.",
+  "functionalQualification": "Native0.44 frozen:1536/1536 tests46files,5/5project checks/build, strictCATR/RSWP34/34. ActualCWSE target3unmet:107actions/2levels/93prefixes, stopped at unchanged per-level active-time budget after passing former unbound_action_set. Contribution verified19prefixes29actions21own events; browser bounded46/2/32 and Pause. Cumulative game clock2399.683865seconds; no furtherCWSEwork on this freeze. These limitations remain explicit and do not invalidate observing STCK/SMLP costs.",
+  "costPolicy": "Strict per-case global session median increase below10%; all original phase diagnostics and p95 retained, no exclusion of measured sessions.",
+  "authorization": "User requested continuation and explicitly permitted phase overruns while global increase remains below10%. The new rule is declared before this window, unlike the separate historical3B acceptance.",
+  "pendingRequirements": [],
+  "qualification": "Premeasurement readiness finalized from completed immutable functional evidence. This permits the predeclared cost measurement, not acceptance of cost or closure of the unmet CWSE target. The global decision remains pending all four series.",
+  "finalizedAt": "2026-11-10T07:29:48.815233+00:00",
+  "measurementAuthorized": true
+}

@@ -42,7 +42,8 @@ test('exposed reception parity pins unchanged V5/V6 and separates synthetic cont
   assert.equal(fixture.qualification.physicalActions, 0);
 });
 
-for (const item of fixture.cases as R[]) test(`original exposed reception ${item.id}`, () => {
+for (const item of fixture.cases as R[]) test(`${item.id === 'propose:after_observed_control'
+  ? 'native current-evidence extension of original exposed reception' : 'original exposed reception'} ${item.id}`, () => {
   const a = clone(item.arguments), memory = seeded(item.seedEvents);
   if (item.beforeState) assertState(memory, item.beforeState);
   let actual: unknown;
@@ -64,7 +65,21 @@ for (const item of fixture.cases as R[]) test(`original exposed reception ${item
     case 'record': actual = memory.record(a.before, a.command, a.after, a.rows, a.later, a.proposal, a.index); break;
     default: throw new Error('Unknown exposed-reception operation: ' + item.operation);
   }
-  assert.deepEqual(actual, item.expected, item.id);
+  if (item.id === 'propose:after_observed_control') {
+    // This unchanged source oracle intentionally retains historical evidence
+    // after a new observation. Native 0.44 extends only its proposal envelope.
+    const extended = actual as R, expected = item.expected;
+    assert.equal(expected.bundle_template.evidence.includes(a.obs.observation_ref), false);
+    const evidence = [...expected.bundle_template.evidence, a.obs.observation_ref];
+    assert.deepEqual(extended.bundle_template.evidence, evidence);
+    assert.deepEqual(extended.route_refs, evidence);
+    assert.deepEqual(extended.question.hypothesis_refs, evidence);
+    const sourceEquivalent = clone(extended);
+    sourceEquivalent.bundle_template.evidence = clone(expected.bundle_template.evidence);
+    sourceEquivalent.route_refs = clone(expected.route_refs);
+    sourceEquivalent.question.hypothesis_refs = clone(expected.question.hypothesis_refs);
+    assert.deepEqual(sourceEquivalent, expected, item.id + ': all other fields retain exact source parity');
+  } else assert.deepEqual(actual, item.expected, item.id);
   if (item.afterState) assertState(memory, item.afterState);
 });
 

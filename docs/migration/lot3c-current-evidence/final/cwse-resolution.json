@@ -1,0 +1,50 @@
+{
+  "schema": "logos-engine.lot3c.current-evidence-cwse-resolution.v1",
+  "recordedAt": "2026-11-10T07:28:01.235438+00:00",
+  "nativeSourceDigest": "e914399487992c3f53b3058ee734c470d738594e7344285799203462fac6a255",
+  "game": "CWSE",
+  "status": "current_evidence_corrected_two_levels_verified_time_budget_at_third",
+  "targetLevels": 3,
+  "targetMet": false,
+  "actions": 107,
+  "levelsCompleted": 2,
+  "prefixes": 93,
+  "reason": "level_active_time_budget",
+  "actualCampaign": {
+    "path": "docs/migration/lot3c-current-evidence/final/cwse-current-session/execution-cwse.json",
+    "bytes": 63721,
+    "sha256": "ee8138176b03e07a1c5d96d808b507d42c0004a688a78b956a70854335adc0e3"
+  },
+  "contribution": {
+    "path": "docs/migration/lot3c-current-evidence/final/cwse-current-session/exposed-contribution.json",
+    "bytes": 334227,
+    "sha256": "88d996440ae43fd854d0d72c023beabac3313cc20c55538d7796ba69401102b0"
+  },
+  "browser": {
+    "path": "docs/migration/lot3c-current-evidence/final/browser/browser-qa.json",
+    "bytes": 2595,
+    "sha256": "145bbf1858ca3d1ca57ce1e43a072c4d8b28b5507075cef497a9ddfb080e501c"
+  },
+  "componentDiagnostic": {
+    "path": "docs/migration/lot3c-current-evidence/diagnostic/current-evidence-result.json",
+    "bytes": 15862,
+    "sha256": "0d9ea18e46d5082cf1043b0f72f8427249d53ab16694b495923cb7339258cc48"
+  },
+  "continuedClock": {
+    "path": "docs/migration/lot3c-current-evidence/continued-clock.json",
+    "bytes": 797,
+    "sha256": "f91ff3205614b900cd0acf9573348c9876ce4aececdbd09c878cedd875134fa3"
+  },
+  "clock": {
+    "startedAt": "2026-11-10T07:13:29+00:00",
+    "finishedGameWorkAt": "2026-11-10T07:28:01.235438+00:00",
+    "priorCumulativeSeconds": 1527.448427,
+    "continuedSeconds": 872.235438,
+    "cumulativeSeconds": 2399.683865,
+    "maximumCumulativeSeconds": 2400,
+    "clockReset": false,
+    "noFurtherCWSEAttemptsOnThisFreeze": true
+  },
+  "decision": "The generic current-evidence binding correction is verified. The fresh common campaign passes the former refusal, solves two levels, and then stops under the unchanged per-level active-time budget. The three-level target is not met. Keep3C functionally qualified/open; continue next with an independent source transfer or different relevant case, with no renewed CWSE attempt on this freeze and no reset of this candidate clock.",
+  "qualification": "The entire current selection-to-campaign/contribution/browser interval is conservatively added to the previous1527.448427seconds. No further game diagnosis or implementation is authorized within this nearly exhausted candidate budget. Later packaging, integrity, documentation and STCK/SMLP measurement are not additional CWSE game work. No inference of impossibility, full source caller trajectory or full parity."
+}

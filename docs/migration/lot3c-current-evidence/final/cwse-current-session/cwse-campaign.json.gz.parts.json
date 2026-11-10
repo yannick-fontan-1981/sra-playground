@@ -1,0 +1,136 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "cwse-campaign.json.gz",
+    "sha256": "e3b5055e513970d6f3d95003c929ccf3c61149b18ff72459f2ba9e9ce862d1fa",
+    "bytes": 22082069
+  },
+  "parts": [
+    {
+      "file": "cwse-campaign.json.gz.part000",
+      "sha256": "9772592545fa4dc22f3236e772c3423f52a07b520a9a57be3f33dd9b45df84c1",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part001",
+      "sha256": "dba63b7df8202cdea8044ae17f5f78c8f2c83fd2e348d11d1fb5f8f6ab9dacb1",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part002",
+      "sha256": "e6db5dcb846ee17648f68d08fbe7831fb7ff331d147d8405ff00118e534dbbeb",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part003",
+      "sha256": "cd632871c86f09933082524ea895515b7f931254326db546f1b75741f1379b34",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part004",
+      "sha256": "a0baa81f73fc12f60b7e40d17eb8ee5fc3cbdfebf42fcc2854b1116817e16507",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part005",
+      "sha256": "1a531173fef74eddc30928982a02a9246eecf5e24f330203fec1d0372c868478",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part006",
+      "sha256": "af598d794a74f68c777beba7342b74044a8d14e158b6c2e118bb3f045bb6cee5",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part007",
+      "sha256": "4289fa6422f92a692bd9173123e4db0e0c437a4e117ecf15a49bff7eb7d6ad39",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part008",
+      "sha256": "865c69a91c9f10e389d2d1edfc8cb40a4a4777c9ee49deb1ddcea5bcecf21504",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part009",
+      "sha256": "a08ebde3c5d1f4b09f56d034cf23789d53ed740ea50c6296c55d66859d423941",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part010",
+      "sha256": "ba5640ff4e4a629f2548e8a3789f53ee556d5edc73d59966352e3c8101cb60a2",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part011",
+      "sha256": "cbd4f94017fca63e1a56b92497c2b2c36a4e8c61646e7468965c6ede9fe02176",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part012",
+      "sha256": "879511b7c230bf23f21f01596d3aaac97f39e92eb2270b2a890779d04c4760b9",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part013",
+      "sha256": "c6522000274e4b1047051f134c7b8d3c07839647a3f55e348755d8fc656ced5c",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part014",
+      "sha256": "91b4312c668aa38305a676db152819a107005f910f8c20d234d85bf769093fbd",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part015",
+      "sha256": "6a2feacb3eaba56d8110d76aab0ae1891b690e20871680f854f788a05abc3fe8",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part016",
+      "sha256": "120e7c726a47c0d5cac0483436ec15191014281b979b27c9f8b052f53bb328e1",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part017",
+      "sha256": "990b0205494cf8d8f7e309d74f036761e1d1c4b78df17dc28d5cf3f10884737f",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part018",
+      "sha256": "1679a783a6adddad47b82f8bb096a49aa40dbc724fcdf17837f1d21c5c728f6c",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part019",
+      "sha256": "1ebd64b06f5e4c7deaffd3e35b4b0ead2598d505c50d6b8790c8aacae085b3f7",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part020",
+      "sha256": "89fd1a58d33acf10f63d393d98087fe7ec3dd317760e767ed2c6831385249dec",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part021",
+      "sha256": "1f39a0721a84377fa99c86c4117205bd7c86122ad92b2b2f399ea3ed0166e5a4",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part022",
+      "sha256": "dee71680fa8a1c60d1f5a13d87bd4a26d5486a322ebcec8f3baa088f8a679714",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part023",
+      "sha256": "c07491adb7e43dfbf2211a183bdb816019bcf9a91e4d7f547405425559c64466",
+      "bytes": 900000
+    },
+    {
+      "file": "cwse-campaign.json.gz.part024",
+      "sha256": "3ab1b035a814faa81ab936a3050053cda87b08b19c0a00c380b8c967ba4afae7",
+      "bytes": 482069
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}
