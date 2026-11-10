@@ -1402,7 +1402,9 @@
         "src/logos-engine/v6-panel-service-observation.ts",
         "src/logos-engine/v6-relational-chamber-observation.ts",
         "src/logos-engine/v6-relational-chamber-access.ts",
-        "src/logos-engine/v5-finite-relation-domain.ts"
+        "src/logos-engine/v5-finite-relation-domain.ts",
+        "src/logos-engine/v6-exposed-reception-observation.ts",
+        "src/logos-engine/v6-exposed-reception-access.ts"
       ],
       "status": "partial_transfer",
       "proof": [
@@ -1435,9 +1437,17 @@
         "tests/fixtures/v6-relational-chamber-parity.json.gz",
         "tests/v6-relational-chamber.test.ts",
         "tests/v6-relational-chamber-integration.test.ts",
-        "docs/migration/lot3b-relational-chamber-lineage.md"
+        "docs/migration/lot3b-relational-chamber-lineage.md",
+        "scripts/export-v6-exposed-reception-reference.py",
+        "tests/fixtures/v6-exposed-reception-parity.json.gz",
+        "tests/v6-exposed-reception-observation.test.ts",
+        "tests/v6-exposed-reception.test.ts",
+        "tests/v6-exposed-reception-integration.test.ts",
+        "tests/fixtures/v6-exposed-reception-legacy-checkpoints.json.gz",
+        "docs/migration/lot3c-evidence/diagnostic/projection-parity.json",
+        "docs/migration/lot3c-exposed-reception-lineage.md"
       ],
-      "notes": "The supported common closure integrates occurrence recall, cell placement, alternating graph, pair acquisition/planning and auxiliary support in one authoritative public_occurrence_recall family. Separate source entries preserve coupled/graph goal-access priority and cell-before-recall window order. Selected and passive acquisition follow the source record chain before occurrence/cell packet observation; native checkpoint reconstruction includes every transferred reducer. Two unchanged ObservedCompositionConstraint journals compare complete unfiltered common envelopes, including nonempty cell evidence, observed return and official terminal cases. Product-runtime checks separately verify fresh SRC/WHY-ACT selection, single acquisition ownership, causal facts and atomic rollback. The current digest is native_program_discovery_recall_radial_ports_cell_placement_alternating_graph_and_coupled_support_v6; remaining ObservedCompositionConstraint providers and the full inherited digest are still pending. Controlled observations do not establish full-caller or game-campaign parity. The v39 program acquisition and v40 control-access proofs use that same authoritative shared state. The v40 preparation witness reads acquired state without adding events during lookahead; the actual proposal, source state revision and continuation proof are retained through the Kernel. Native coordination and access remain explicit extensions, not additional completed Python providers. Lot3A/native0.37 adds observed_composition_services at its declared first goal-access position with panel_service_plan, one of six branches. The observed/coupled/graph adapters share one inherited planner, preserve blocking refusal and retain their source envelope/guard semantics. New Panel state participates in the working certificate and conditional native digest. The five other branches and cumulative point generators remain pending; 50/76 complete entry connections plus one explicit partial entry are reported separately. Lot3B/native0.39 extends the same owner with chamber_relation_plan and its measured point candidates. Panel remains ahead of Chamber in proposal/guard dispatch; Chamber acquires and contributes its conditional native digest before Panel. The facade is now2/6 branches, with ExposedReception, RootedLine, ReceptionService and ReferencePopulation still pending. The full source inheritance digest and cumulative input closure remain incomplete. Existing pre-Chamber checkpoints retain their exact native digest until a Chamber event is acquired."
+      "notes": "The supported common closure integrates occurrence recall, cell placement, alternating graph, pair acquisition/planning and auxiliary support in one authoritative public_occurrence_recall family. Separate source entries preserve coupled/graph goal-access priority and cell-before-recall window order. Selected and passive acquisition follow the source record chain before occurrence/cell packet observation; native checkpoint reconstruction includes every transferred reducer. Two unchanged ObservedCompositionConstraint journals compare complete unfiltered common envelopes, including nonempty cell evidence, observed return and official terminal cases. Product-runtime checks separately verify fresh SRC/WHY-ACT selection, single acquisition ownership, causal facts and atomic rollback. The current digest is native_program_discovery_recall_radial_ports_cell_placement_alternating_graph_and_coupled_support_v6; remaining ObservedCompositionConstraint providers and the full inherited digest are still pending. Controlled observations do not establish full-caller or game-campaign parity. The v39 program acquisition and v40 control-access proofs use that same authoritative shared state. The v40 preparation witness reads acquired state without adding events during lookahead; the actual proposal, source state revision and continuation proof are retained through the Kernel. Native coordination and access remain explicit extensions, not additional completed Python providers. Lot3A/native0.37 adds observed_composition_services at its declared first goal-access position with panel_service_plan, one of six branches. The observed/coupled/graph adapters share one inherited planner, preserve blocking refusal and retain their source envelope/guard semantics. New Panel state participates in the working certificate and conditional native digest. The five other branches and cumulative point generators remain pending; 50/76 complete entry connections plus one explicit partial entry are reported separately. Lot3B/native0.39 extends the same owner with chamber_relation_plan and its measured point candidates. Panel remains ahead of Chamber in proposal/guard dispatch; Chamber acquires and contributes its conditional native digest before Panel. The facade is now2/6 branches, with ExposedReception, RootedLine, ReceptionService and ReferencePopulation still pending. The full source inheritance digest and cumulative input closure remain incomplete. Existing pre-Chamber checkpoints retain their exact native digest until a Chamber event is acquired. Lot3C/native0.43 addendum: ExposedReception own projection, nominal V5 push witnesses, conditional models and guarded proposal/acquisition now join the same owner. Proposal/guard order is Panel then Chamber then Exposed; acquisition/digest order is inherited support then Exposed then Chamber then Panel. Measured point candidates append Exposed before Chamber/Panel. The facade is now3/6, with RootedLine, ReceptionService and ReferencePopulation pending. SharedSeries replays observed_exposed_reception exactly once, includes Exposed identity/revision/structural witness, and preserves0.42 checkpoints by excluding the empty new layer from its native digest. The reception_events name collision with future ReceptionService is explicitly scoped to this own layer; full source journal/digest parity is not claimed. Native assignment/chain/heuristic/deadline bounds preserve unknown/incomplete outcomes. No campaign result or full caller parity is inferred from these component proofs."
     },
     {
       "sources": [
@@ -3832,9 +3842,11 @@
         "tests/v6-shared-series-native.test.ts",
         "docs/migration/lot3a-observed-panel-lineage.md",
         "docs/migration/lot3a-evidence/final/execution-rswp.json",
-        "docs/migration/lot3a-evidence/final/rswp-resolution.json"
+        "docs/migration/lot3a-evidence/final/rswp-resolution.json",
+        "tests/v6-exposed-reception-integration.test.ts",
+        "docs/migration/lot3c-exposed-reception-lineage.md"
       ],
-      "notes": "The complete Panel own layer is transferred: current direct/rewrite/room-parameter question, guarded selection and application, acquired selection_observed, retained contrary/no-information trials, exact own-layer events and digest. SharedSeries owns one acquisition and atomic restore. Source-parity and 19 real actions complete three RSWP levels in one common session. The module remains partial because the full inherited RelationalChamber/ExposedReception chain and cumulative input candidates are not covered. Existing native digests stay compatible before the first Panel event; this is an explicit native envelope, not the full Python inheritance digest. The later lot3B transfers the Chamber own layer and its point candidates; ExposedReception and the complete inherited closure remain outside the verified scope, so the partial status is retained."
+      "notes": "The complete Panel own layer is transferred: current direct/rewrite/room-parameter question, guarded selection and application, acquired selection_observed, retained contrary/no-information trials, exact own-layer events and digest. SharedSeries owns one acquisition and atomic restore. Source-parity and 19 real actions complete three RSWP levels in one common session. The module remains partial because the full inherited RelationalChamber/ExposedReception chain and cumulative input candidates are not covered. Existing native digests stay compatible before the first Panel event; this is an explicit native envelope, not the full Python inheritance digest. The later lot3B transfers the Chamber own layer and its point candidates; ExposedReception and the complete inherited closure remain outside the verified scope, so the partial status is retained. Lot3C/native0.43 addendum: the ExposedReception own layer and its measured candidates are now transferred beneath Chamber/Panel. Earlier scope statements above describe their historical delivery. The full EphemeralMap/inherited closure and remaining observed-composition branches remain incomplete; partial_transfer is retained."
     },
     {
       "sources": [
@@ -3884,9 +3896,69 @@
         "tests/fixtures/v6-relational-chamber-parity.json.gz",
         "tests/v6-relational-chamber.test.ts",
         "tests/v6-relational-chamber-integration.test.ts",
-        "docs/migration/lot3b-relational-chamber-lineage.md"
+        "docs/migration/lot3b-relational-chamber-lineage.md",
+        "tests/v6-exposed-reception-integration.test.ts",
+        "docs/migration/lot3c-exposed-reception-lineage.md"
       ],
-      "notes": "Complete own Chamber layer transferred: observed relation rows, conflicts, learned control edits, bounded inverse candidates, conditional prefixes, current bindings, acquired returns, boundary qualification and refusal of contradicted tables. SharedSeries owns each acquisition and an atomic journal restore; a conditional native digest layer preserves earlier checkpoints. The inherited ExposedReception chain and full Python caller are still pending. Knowledge comes only from current and retained public observations; incomplete rows and the frame-centering objective remain explicit hypotheses."
+      "notes": "Complete own Chamber layer transferred: observed relation rows, conflicts, learned control edits, bounded inverse candidates, conditional prefixes, current bindings, acquired returns, boundary qualification and refusal of contradicted tables. SharedSeries owns each acquisition and an atomic journal restore; a conditional native digest layer preserves earlier checkpoints. The inherited ExposedReception chain and full Python caller are still pending. Knowledge comes only from current and retained public observations; incomplete rows and the frame-centering objective remain explicit hypotheses. Lot3C/native0.43 addendum: the ExposedReception own layer and its measured candidates are now transferred beneath Chamber/Panel. Earlier scope statements above describe their historical delivery. The full EphemeralMap/inherited closure and remaining observed-composition branches remain incomplete; partial_transfer is retained."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/reception_lattice_projection.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-exposed-reception-observation.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-exposed-reception-reference.py",
+        "tests/fixtures/v6-exposed-reception-parity.json.gz",
+        "tests/v6-exposed-reception-observation.test.ts",
+        "tests/v6-exposed-reception.test.ts",
+        "tests/v6-exposed-reception-integration.test.ts",
+        "tests/fixtures/v6-exposed-reception-legacy-checkpoints.json.gz",
+        "docs/migration/lot3c-evidence/diagnostic/projection-parity.json",
+        "docs/migration/lot3c-exposed-reception-lineage.md"
+      ],
+      "notes": "Lot3C/native0.43 transfers the complete small_scene projection and retains its structural admission, measured roles, receiver-overlap candidate, pattern walls and float dial orientation. The same native module also hosts the large_scene own projection from exposed_reception_access. All100 retained public initial rasters and explicit synthetic accepted/refused projections agree with unchanged Python;347 scoped projection/candidate/plan-identity comparisons are retained. This status concerns the projection component, not a full caller or live campaign."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/exposed_reception_access.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-exposed-reception-observation.ts",
+        "src/logos-engine/v6-exposed-reception-access.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-exposed-reception-reference.py",
+        "tests/fixtures/v6-exposed-reception-parity.json.gz",
+        "tests/v6-exposed-reception-observation.test.ts",
+        "tests/v6-exposed-reception.test.ts",
+        "tests/v6-exposed-reception-integration.test.ts",
+        "tests/fixtures/v6-exposed-reception-legacy-checkpoints.json.gz",
+        "docs/migration/lot3c-evidence/diagnostic/projection-parity.json",
+        "docs/migration/lot3c-exposed-reception-lineage.md"
+      ],
+      "notes": "Lot3C/native0.43 transfers the own large/small scene selection, measured dial candidates, nominal conditional reception search, exposure/contact/control/maintain questions, bound plans, before/after guards, unique-minimum body correspondence, conflict/ambiguity retention and observed_exposed_reception reducer. Python float scene vectors retain source plan identities. Only the consumed V5 _expand_push_chain is reused. Native finite assignment/heuristic/chain/domain and physical deadline bounds are explicit extensions: incomplete work remains unknown, partial prefixes require strict residual progress from a completed assignment domain. SharedSeries owns one acquisition, revision/witness certification and atomic0.42-compatible restore. The EphemeralMap ancestor closure, full source digest and future ReceptionService reception_events collision remain outside complete transfer. No game-specific rule, oracle, solution or unexecuted campaign success is claimed."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v5/capabilities/seeded_partial_push_d.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-exposed-reception-access.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-exposed-reception-reference.py",
+        "tests/fixtures/v6-exposed-reception-parity.json.gz",
+        "tests/v6-exposed-reception.test.ts",
+        "docs/migration/lot3c-exposed-reception-lineage.md"
+      ],
+      "notes": "Lot3C/native0.43 consumes only _expand_push_chain through nominalReceptionStep: current occupancy, sorted peer expansion, admitted/fixed-cell refusals and visit accounting. It does not transfer measure_seeded_partial_push_d, the complete Pydantic request facade, partial remote commit protocol or transaction ledger. Attached/coupled reception effects stay conditional acquired candidates. Native work bounds are explicit incomplete-result extensions, not a claim of complete V5 transaction parity."
     }
   ],
   "scopeNotes": [
@@ -3949,7 +4021,8 @@
     "Lot 2A connects the morphology current producer at its declared source priority with a single morphology contact journal and existing goal/meter/collection owners. Current measurements can now release guarded proposals through common WHY/ACT. The 76-entry registry denominator is unchanged; morphology remains a partial source provider, and no global migration gate is advanced.",
     "Lot 2C (native 0.35.0) connects retained morphology station methods, guarded entry rebind/continuation and managed capacity planning through existing caller, morphology and inventory owners. The three focused suites contain 96 entry checks, 101 managed checks and 39 boundary/adapter checks; their synthetic/public consumer contracts are distinct from any live campaign. All exporters verify the 1786 pinned originals before/after; source boundary doubles and unordered projection-edge comparison are explicitly scoped. Four new helper mappings remain partial_transfer, existing geometry/adapter/common-caller mappings remain partial, and no complete-migration gate is advanced.",
     "Lot3A/native0.37 transfers the complete own Panel service branch from V6 into the existing SharedSeries owner. The registry facade is explicitly 1/6 partial and does not increment the connected50/76 total. Projection is component_verified; access and common facade retain partial_transfer because inherited branches remain pending. Original source fixtures, shared-owner tests, the cold three-level RSWP campaign and separate browser/cost evidence retain their distinct scopes. No new V5 numerical kernel or full source-caller parity is claimed; all six complete-migration gates remain false.",
-    "Lot3B/native0.39 transfers the Chamber own layer into SharedSeries and reuses the consumed V5 finite relation domain kernel. observed_composition_services is explicitly2/6 partial, with connected50/76 unchanged. Own Chamber projection is component_verified; access and V5 kernel are partial_transfer. Current binding, contradiction, acquisition, native checkpoint and source identity contracts have separate proofs. All six complete-migration gates remain false; compile counts and isolated component parity do not imply full caller or game equivalence."
+    "Lot3B/native0.39 transfers the Chamber own layer into SharedSeries and reuses the consumed V5 finite relation domain kernel. observed_composition_services is explicitly2/6 partial, with connected50/76 unchanged. Own Chamber projection is component_verified; access and V5 kernel are partial_transfer. Current binding, contradiction, acquisition, native checkpoint and source identity contracts have separate proofs. All six complete-migration gates remain false; compile counts and isolated component parity do not imply full caller or game equivalence.",
+    "Lot3C/native0.43 adds ExposedReception as the third of six observed-composition branches under SharedSeries. The small-lattice projection is component_verified; access and the sole consumed V5 _expand_push_chain remain partial_transfer because their full ancestor/transaction closures are not transferred. Numeric source identity, acquired conditional effects, strict-progress bounded search, source dispatch/acquisition order and atomic0.42 checkpoint compatibility have separate component/integration proofs. The future reception_events collision with ReceptionService remains an explicit ownership/migration contract for that port. Connected50/76,37 compiled workflows and all six false completion gates remain distinct; no live campaign or cost result is anticipated by these mappings."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,

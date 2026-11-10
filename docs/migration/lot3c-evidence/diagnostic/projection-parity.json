@@ -1,0 +1,122 @@
+{
+  "schema": "logos-engine.v6.exposed-reception-projection-parity.v1",
+  "recordedAt": "2026-11-10T05:06:16.785Z",
+  "status": "passed",
+  "sourceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "inputs": [
+    {
+      "path": "tests/fixtures/v6-exposed-reception-parity.json.gz",
+      "bytes": 655567,
+      "sha256": "80bf5ec28780bd398a8d8dc6ccdb63d2faa9d4759bb79b6e653e1fdedf09ebef"
+    },
+    {
+      "path": "tests/fixtures/v6-linked-packet-initial-public.json.gz",
+      "bytes": 1026835,
+      "sha256": "3f82fb0b60a104095623216023054ef438ca4cc516941c671c385ebcbf1e54f2"
+    },
+    {
+      "path": "scripts/export-v6-exposed-reception-reference.py",
+      "bytes": 22040,
+      "sha256": "3af33092c25c231075744efaab7e6e14cb4105ec771acebf75ee041883fb8106"
+    },
+    {
+      "path": "src/logos-engine/v6-exposed-reception-observation.ts",
+      "bytes": 13191,
+      "sha256": "5a149e23a06a07af56dd92f32e7d0bdb1e7e9e2c8805bdc6d8e54dafac84a36a"
+    },
+    {
+      "path": "src/logos-engine/v6-native-observer.ts",
+      "bytes": 22590,
+      "sha256": "1a0ffa26548bf6c1ebbd22724731c2238dc24c84074885e832b671dbbe8dfe02"
+    },
+    {
+      "path": "src/logos-engine/v6-hash.ts",
+      "bytes": 2842,
+      "sha256": "6b86db7b533d55da900a3c65a06ec1e18547180245b3e3a2eaa837be09c669f5"
+    },
+    {
+      "path": "src/logos-engine/v6-program-identity.ts",
+      "bytes": 3130,
+      "sha256": "28f5ef405f24d1994a55df6e7aac20b00a41ddb59f111605e104e5a55f802d35"
+    },
+    {
+      "path": "src/logos-engine/canonical.ts",
+      "bytes": 11291,
+      "sha256": "5c2884287aed82d97e7a85c905db5fb800a7e58a523c3ba128a1b61db5069cc1"
+    },
+    {
+      "path": "tests/v6-exposed-reception-observation.test.ts",
+      "bytes": 10333,
+      "sha256": "88627b8a24b9f21854371d1dbc655aaadb5118447a588e397a48152851ca7747"
+    },
+    {
+      "path": "tests/helpers/v6-exposed-reception-raster.ts",
+      "bytes": 2408,
+      "sha256": "e6d7303747da0ba180fc86602a65e49080f6cca147ba27297472a6c78402be5b"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/diagnostic/check-projection-parity.mjs",
+      "bytes": 4490,
+      "sha256": "a0de79aa489cf2e90cfa899f0c9861025f17467a9cbdb563645a8c870b1197a8"
+    }
+  ],
+  "inputsUnchanged": true,
+  "counts": {
+    "originalPublicRasters": 100,
+    "initialChecks": 300,
+    "sceneChecks": 24,
+    "inputChecks": 8,
+    "identityChecks": 15,
+    "total": 347
+  },
+  "matchedCases": [
+    "scene:public_initial",
+    "large_scene:public_initial",
+    "small_scene:public_initial",
+    "scene:small",
+    "large_scene:small",
+    "small_scene:small",
+    "scene:large",
+    "large_scene:large",
+    "small_scene:large",
+    "scene:receiver_overlap",
+    "large_scene:receiver_overlap",
+    "small_scene:receiver_overlap",
+    "scene:palette_permutation",
+    "large_scene:palette_permutation",
+    "small_scene:palette_permutation",
+    "scene:orientation_changed",
+    "large_scene:orientation_changed",
+    "small_scene:orientation_changed",
+    "scene:ambiguous_dial",
+    "large_scene:ambiguous_dial",
+    "small_scene:ambiguous_dial",
+    "scene:missing",
+    "large_scene:missing",
+    "small_scene:missing",
+    "inputs:small:6",
+    "inputs:small:1",
+    "inputs:large:6",
+    "inputs:large:1",
+    "inputs:public:6",
+    "inputs:public:1",
+    "inputs:missing:6",
+    "inputs:missing:1",
+    "propose:public_initial:plan-identity",
+    "propose:small_unmeasured_controls:plan-identity",
+    "propose:large_unmeasured_controls:plan-identity",
+    "propose:known_controls_path:plan-identity",
+    "propose:known_controls_limit_one:plan-identity",
+    "propose:wrong_epoch_reset:plan-identity",
+    "propose:wrong_layout_reset:plan-identity",
+    "propose:search_partial:plan-identity",
+    "propose:mismatched_receiver_exposure:plan-identity",
+    "propose:unmatched_color_fallback:plan-identity",
+    "propose:maintain_repulsion:plan-identity",
+    "propose:side_contact_question:plan-identity",
+    "propose:after_observed_control:plan-identity",
+    "propose:multi_unmeasured:plan-identity",
+    "propose:ambiguous_correspondence_initial:plan-identity"
+  ],
+  "qualification": "Development projection, candidate and schema-specific identity comparison only, using the retained unmodified-Python oracle. No game, action, source modification, official cost measurement or claim of complete inheritance parity."
+}

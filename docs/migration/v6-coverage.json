@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 153,
-    "partiallyTransferredModules": 133,
+    "componentVerifiedModules": 154,
+    "partiallyTransferredModules": 135,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1083,
+    "pendingModules": 1080,
     "strategyFamilies": 16
   },
   "families": [
@@ -50302,9 +50302,16 @@
           "endLine": 55
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-exposed-reception-access.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-exposed-reception-reference.py",
+        "tests/fixtures/v6-exposed-reception-parity.json.gz",
+        "tests/v6-exposed-reception.test.ts",
+        "docs/migration/lot3c-exposed-reception-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/sensing_transaction_d.py",
@@ -76863,7 +76870,9 @@
         "src/logos-engine/v6-panel-service-observation.ts",
         "src/logos-engine/v6-relational-chamber-observation.ts",
         "src/logos-engine/v6-relational-chamber-access.ts",
-        "src/logos-engine/v5-finite-relation-domain.ts"
+        "src/logos-engine/v5-finite-relation-domain.ts",
+        "src/logos-engine/v6-exposed-reception-observation.ts",
+        "src/logos-engine/v6-exposed-reception-access.ts"
       ],
       "proof": [
         "tests/v6-shared-series.test.ts",
@@ -76895,7 +76904,15 @@
         "tests/fixtures/v6-relational-chamber-parity.json.gz",
         "tests/v6-relational-chamber.test.ts",
         "tests/v6-relational-chamber-integration.test.ts",
-        "docs/migration/lot3b-relational-chamber-lineage.md"
+        "docs/migration/lot3b-relational-chamber-lineage.md",
+        "scripts/export-v6-exposed-reception-reference.py",
+        "tests/fixtures/v6-exposed-reception-parity.json.gz",
+        "tests/v6-exposed-reception-observation.test.ts",
+        "tests/v6-exposed-reception.test.ts",
+        "tests/v6-exposed-reception-integration.test.ts",
+        "tests/fixtures/v6-exposed-reception-legacy-checkpoints.json.gz",
+        "docs/migration/lot3c-evidence/diagnostic/projection-parity.json",
+        "docs/migration/lot3c-exposed-reception-lineage.md"
       ]
     },
     {
@@ -81244,9 +81261,22 @@
           "endLine": 220
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-exposed-reception-observation.ts",
+        "src/logos-engine/v6-exposed-reception-access.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-exposed-reception-reference.py",
+        "tests/fixtures/v6-exposed-reception-parity.json.gz",
+        "tests/v6-exposed-reception-observation.test.ts",
+        "tests/v6-exposed-reception.test.ts",
+        "tests/v6-exposed-reception-integration.test.ts",
+        "tests/fixtures/v6-exposed-reception-legacy-checkpoints.json.gz",
+        "docs/migration/lot3c-evidence/diagnostic/projection-parity.json",
+        "docs/migration/lot3c-exposed-reception-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/factored_return.py",
@@ -83316,7 +83346,9 @@
         "tests/v6-shared-series-native.test.ts",
         "docs/migration/lot3a-observed-panel-lineage.md",
         "docs/migration/lot3a-evidence/final/execution-rswp.json",
-        "docs/migration/lot3a-evidence/final/rswp-resolution.json"
+        "docs/migration/lot3a-evidence/final/rswp-resolution.json",
+        "tests/v6-exposed-reception-integration.test.ts",
+        "docs/migration/lot3c-exposed-reception-lineage.md"
       ]
     },
     {
@@ -84648,9 +84680,20 @@
           "endLine": 39
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-exposed-reception-observation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-exposed-reception-reference.py",
+        "tests/fixtures/v6-exposed-reception-parity.json.gz",
+        "tests/v6-exposed-reception-observation.test.ts",
+        "tests/v6-exposed-reception.test.ts",
+        "tests/v6-exposed-reception-integration.test.ts",
+        "tests/fixtures/v6-exposed-reception-legacy-checkpoints.json.gz",
+        "docs/migration/lot3c-evidence/diagnostic/projection-parity.json",
+        "docs/migration/lot3c-exposed-reception-lineage.md"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/reception_service_access.py",
@@ -84943,7 +84986,9 @@
         "tests/fixtures/v6-relational-chamber-parity.json.gz",
         "tests/v6-relational-chamber.test.ts",
         "tests/v6-relational-chamber-integration.test.ts",
-        "docs/migration/lot3b-relational-chamber-lineage.md"
+        "docs/migration/lot3b-relational-chamber-lineage.md",
+        "tests/v6-exposed-reception-integration.test.ts",
+        "docs/migration/lot3c-exposed-reception-lineage.md"
       ]
     },
     {
@@ -98519,6 +98564,7 @@
     "Lot 2A connects the morphology current producer at its declared source priority with a single morphology contact journal and existing goal/meter/collection owners. Current measurements can now release guarded proposals through common WHY/ACT. The 76-entry registry denominator is unchanged; morphology remains a partial source provider, and no global migration gate is advanced.",
     "Lot 2C (native 0.35.0) connects retained morphology station methods, guarded entry rebind/continuation and managed capacity planning through existing caller, morphology and inventory owners. The three focused suites contain 96 entry checks, 101 managed checks and 39 boundary/adapter checks; their synthetic/public consumer contracts are distinct from any live campaign. All exporters verify the 1786 pinned originals before/after; source boundary doubles and unordered projection-edge comparison are explicitly scoped. Four new helper mappings remain partial_transfer, existing geometry/adapter/common-caller mappings remain partial, and no complete-migration gate is advanced.",
     "Lot3A/native0.37 transfers the complete own Panel service branch from V6 into the existing SharedSeries owner. The registry facade is explicitly 1/6 partial and does not increment the connected50/76 total. Projection is component_verified; access and common facade retain partial_transfer because inherited branches remain pending. Original source fixtures, shared-owner tests, the cold three-level RSWP campaign and separate browser/cost evidence retain their distinct scopes. No new V5 numerical kernel or full source-caller parity is claimed; all six complete-migration gates remain false.",
-    "Lot3B/native0.39 transfers the Chamber own layer into SharedSeries and reuses the consumed V5 finite relation domain kernel. observed_composition_services is explicitly2/6 partial, with connected50/76 unchanged. Own Chamber projection is component_verified; access and V5 kernel are partial_transfer. Current binding, contradiction, acquisition, native checkpoint and source identity contracts have separate proofs. All six complete-migration gates remain false; compile counts and isolated component parity do not imply full caller or game equivalence."
+    "Lot3B/native0.39 transfers the Chamber own layer into SharedSeries and reuses the consumed V5 finite relation domain kernel. observed_composition_services is explicitly2/6 partial, with connected50/76 unchanged. Own Chamber projection is component_verified; access and V5 kernel are partial_transfer. Current binding, contradiction, acquisition, native checkpoint and source identity contracts have separate proofs. All six complete-migration gates remain false; compile counts and isolated component parity do not imply full caller or game equivalence.",
+    "Lot3C/native0.43 adds ExposedReception as the third of six observed-composition branches under SharedSeries. The small-lattice projection is component_verified; access and the sole consumed V5 _expand_push_chain remain partial_transfer because their full ancestor/transaction closures are not transferred. Numeric source identity, acquired conditional effects, strict-progress bounded search, source dispatch/acquisition order and atomic0.42 checkpoint compatibility have separate component/integration proofs. The future reception_events collision with ReceptionService remains an explicit ownership/migration contract for that port. Connected50/76,37 compiled workflows and all six false completion gates remain distinct; no live campaign or cost result is anticipated by these mappings."
   ]
 }

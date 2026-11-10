@@ -1,0 +1,54 @@
+{
+  "schema": "logos-engine.lot3c.cwse-resolution.v1",
+  "recordedAt": "2026-11-10T05:25:51.715730+00:00",
+  "nativeSourceDigest": "3e88aa12214fd3d4a4feb8d63b946123b8394cb4a0cbd0a156cc059c37f7b46c",
+  "game": "CWSE",
+  "status": "two_levels_verified_guarded_stop_at_third",
+  "targetLevels": 3,
+  "targetMet": false,
+  "actions": 21,
+  "levelsCompleted": 2,
+  "prefixes": 13,
+  "actualCampaign": {
+    "path": "docs/migration/lot3c-evidence/final/cwse-session/execution-cwse.json",
+    "bytes": 63616,
+    "sha256": "647180bd2d523c4fe26eb4b0b8b7d5fb8b1dd8c1c47874b749b7e31bd400e929"
+  },
+  "contribution": {
+    "path": "docs/migration/lot3c-evidence/final/cwse-session/exposed-contribution.json",
+    "bytes": 204381,
+    "sha256": "7c5b8a874b6845f4aad2f8515b57e967fe0ca9bd1cb27a7a654eed4bbe539d3f"
+  },
+  "terminalSourceDiagnostic": {
+    "path": "docs/migration/lot3c-evidence/final/cwse-terminal-diagnostic/source-result.json",
+    "bytes": 44096,
+    "sha256": "fab959ef2ac9f9123c5d179524c8cfdd7407cf24d22fe7e0f2c800833c0d7f96"
+  },
+  "terminalNativeDiagnostic": {
+    "path": "docs/migration/lot3c-evidence/final/cwse-terminal-diagnostic/native-result.json",
+    "bytes": 2020,
+    "sha256": "aff37a6d2d90d054622bc7afdbec2c4f8bdfce8a9f7506b6e632480a52a948dd"
+  },
+  "browser": {
+    "path": "docs/migration/lot3c-evidence/final/browser/browser-qa.json",
+    "bytes": 3093,
+    "sha256": "3c23e1883d3ba4abb9ff8fcfd17563c3c2ab19f2cfcb16e6714beea602db8a5f"
+  },
+  "baseline": {
+    "nativeVersion": "0.42.0",
+    "actionCap": 12,
+    "levelsCompleted": 0,
+    "qualification": "Bounded comparison; no impossibility claim and timing is not official."
+  },
+  "clock": {
+    "selectedAt": "2026-11-10T05:00:24.267303+00:00",
+    "finishedGameWorkAt": "2026-11-10T05:25:51.715730+00:00",
+    "priorBlockedSeconds": 0,
+    "elapsedSinceSelectionSeconds": 1527.448427,
+    "maximumCumulativeBlockedSeconds": 2400,
+    "clockReset": false,
+    "policy": "All selection-to-browser/diagnostic wall time conservatively counted; no further game attempt on this freeze."
+  },
+  "decision": "Retain the verified own-layer port and the exact failed three-level target. Keep lot3C open for generic current-evidence binding follow-up before claiming its game target met. No native source change, guard bypass, repeated campaign or game-specific correction is introduced to hide the failure.",
+  "qualification": "The original Exposed and TargetTree components produce the same terminal proposal and refusal on the actual retained trace. Full original-caller trajectory and necessity of untransferred EphemeralMap inheritance are not established."
+}

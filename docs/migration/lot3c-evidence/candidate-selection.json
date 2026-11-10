@@ -1,0 +1,23 @@
+{
+  "schema": "logos-engine.lot3c.public-candidate-selection.v1",
+  "selectedAt": "2026-11-10T05:00:24.267303+00:00",
+  "game": "CWSE",
+  "targetLevels": 3,
+  "basis": "Only archived initial public raster admitted by unchanged original ExposedReception scene measurement among100views. Native projection and independent source oracle also report the same candidate. No game implementation or solution is inspected.",
+  "scan": {
+    "path": "docs/migration/lot3a-evidence/public-candidate-scan.json",
+    "sha256": "cba88bbca4263d8f195a6d26a7290b29a49c2f0383bdf5c7938ac7bcd8a44d37"
+  },
+  "sourceReferenceCommit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "publishedBaseline": {
+    "siteVersion": 70,
+    "nativeVersion": "0.42.0",
+    "commit": "97208e1ac39599cbca06b70fe1ff98cfec7ef8b6",
+    "nativeDigest": "2de70025ae08845efd491929416e091e9dc9e8e4b473440b9c6a86838e0b3d19"
+  },
+  "priorBlockedSeconds": 0,
+  "priorClockBasis": "Retained selection/result documents contain CWSE as candidate/admission/list entries, but no selected CWSE campaign or accumulated blocked clock is recorded. This selection starts its own cumulative clock; failed attempts will not reset it.",
+  "maximumCumulativeBlockedSeconds": 2400,
+  "baselineMaximumAcquiredActions": 12,
+  "baselineQualification": "Bounded public cold reference only; a cap cannot prove impossibility or a complete-game failure. Concurrent implementation/test work means baseline timing is not official performance evidence."
+}

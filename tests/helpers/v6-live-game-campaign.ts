@@ -376,6 +376,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const previousPanelServiceCount = report.prefixes.at(-1)?.sharedSeries.panelServiceEventCount ?? 0;
           const chamberRelationEvents = (series.events as R[]).filter(event => event.kind === 'observed_chamber_relations');
           const previousChamberRelationCount = report.prefixes.at(-1)?.sharedSeries.chamberRelationEventCount ?? 0;
+          const exposedReceptionEvents = (series.events as R[]).filter(event => event.kind === 'observed_exposed_reception');
+          const previousExposedReceptionCount = report.prefixes.at(-1)?.sharedSeries.exposedReceptionEventCount ?? 0;
           const productStates = (series.events as R[]).filter(event => event.kind === 'observed_factor_product');
           const labeledSubmissions = (series.events as R[]).filter(event => event.kind === 'labeled_sequence_submission');
           const traceExtensions = (series.events as R[]).filter(event => event.kind === 'observed_trace_extension');
@@ -434,6 +436,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               ? { observedChamberRelations: { proposal: evidence.proposal,
                     stateNode: 'family_state:public_occurrence_recall',
                     qualification: 'Passive capture of the selected common proposal. Production measures the relations, enumerates its finite conditional domain and acquires each actual return. The recorder supplies no decision or expected return.' } } : {}),
+            ...(evidence.proposal.exposed_reception_plan
+              ? { observedExposedReception: { proposal: evidence.proposal,
+                    stateNode: 'family_state:public_occurrence_recall',
+                    qualification: 'Passive capture of the selected common proposal. Production measures the scene, searches with conditional acquired effects and V5 nominal push expansion, and acquires each actual return once. No action, state or expected return is supplied by this recorder.' } } : {}),
             ...(evidence.proposal.queued_field_plan
               ? { queuedField: { plan: evidence.proposal.queued_field_plan,
                     stateNode: 'family_state:public_occurrence_recall' } } : {}),
@@ -583,6 +589,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               panelServiceAcquiredEvents: panelServiceEvents.slice(previousPanelServiceCount),
               chamberRelationEventCount: chamberRelationEvents.length,
               chamberRelationAcquiredEvents: chamberRelationEvents.slice(previousChamberRelationCount),
+              exposedReceptionEventCount: exposedReceptionEvents.length,
+              exposedReceptionAcquiredEvents: exposedReceptionEvents.slice(previousExposedReceptionCount),
               productPanelStateCount: productStates.length,
               productPanelLatestState: productStates.at(-1) ?? null,
               labeledSequenceSubmissionCount: labeledSubmissions.length,

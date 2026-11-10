@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.exposed-contribution-development-attempt.v1",
+  "recordedAt": "2026-11-10T05:20:10.784086+00:00",
+  "command": [
+    "node",
+    "scripts/prove-observed-exposed-contribution.mjs",
+    "CWSE",
+    "docs/migration/lot3c-evidence/final/cwse-session",
+    "docs/migration/lot3c-evidence/baseline"
+  ],
+  "generatorAtAttempt": {
+    "path": "scripts/prove-observed-exposed-contribution.mjs",
+    "bytes": 21867,
+    "sha256": "08659361969db2bafe7f4de6e83b9e8c505eeb5b3932c04e31ae7d1325555015"
+  },
+  "exitCode": 1,
+  "status": "proof_assertion_failed_before_output",
+  "failure": {
+    "kind": "AssertionError",
+    "line": 176,
+    "actual": {
+      "action_ref": "ACTION4"
+    },
+    "expected": {
+      "action_ref": "ACTION4",
+      "data": {}
+    },
+    "operator": "deepStrictEqual"
+  },
+  "qualification": "This is a failed post-campaign evidence-analysis attempt, not another game execution or an invalidated native result. The controller materializes an empty data object for physical movement commands while native proposal/event commands omit it. The final proof normalizes only this empty command field for the public transport comparison and retains exact native command equality for record replay. All campaign and trace bytes remain unchanged."
+}

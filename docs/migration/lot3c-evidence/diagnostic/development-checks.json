@@ -1,0 +1,31 @@
+{
+  "schema": "logos-engine.lot3c.development-checks.v1",
+  "logs": [
+    {
+      "path": "docs/migration/lot3c-evidence/diagnostic/exposed-access-development.tap.gz",
+      "bytes": 2252,
+      "sha256": "5712609631f095a666c678dbca378be18f8d6fc92de01fe733913ecc80a1b4fc"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/diagnostic/exposed-access-final.tap.gz",
+      "bytes": 1857,
+      "sha256": "485bfe76ca4c867dfcd4baf3bc40363b649eeae68d4994ad8b7cd7f773fafa83"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/diagnostic/exposed-integration-development.tap.gz",
+      "bytes": 495,
+      "sha256": "44787e465c80bcd273e6b6f45bf8856c69b8d1c8b3daf2037d2603403f9a55a2"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/diagnostic/exposed-integration-final-development.tap.gz",
+      "bytes": 735,
+      "sha256": "4cdde14d3b9cd46c2de9a82ce6891815eac4222f5e1d4f9475afc3356853bf44"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/diagnostic/exposed-shared-integration.tap.gz",
+      "bytes": 3072,
+      "sha256": "720eae4d4b476dbb2be57aed68fdfad217c87c427b0d614413dee4e4e043f5ac"
+    }
+  ],
+  "qualification": "Development only, before formal frozen delta. Initial access integrity failure occurred while source oracle exporter was still being regenerated; all behavioral cases passed. Later stabilized access suite99/99 and final integration suite19/19 passed. Four-file integration122/122 preceded addition of nine final integration cases. These runs are retained, not substituted for formal validation."
+}

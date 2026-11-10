@@ -1,0 +1,38 @@
+{
+  "schema": "logos-engine.exact-published-baseline-copy.v1",
+  "sourceCheckout": "/workspace/sites/sra-published-042",
+  "nativeVersion": "0.42.0",
+  "files": [
+    {
+      "path": "docs/migration/lot3c-evidence/baseline/cwse-actual-public-journal.jsonl.gz",
+      "bytes": 7877,
+      "sha256": "10d05706518cdb1887412e2fc7d61c20cdc0ec88e55e56317d7daf60c11f9274"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/baseline/cwse-campaign.json.gz",
+      "bytes": 2217433,
+      "sha256": "8b0bd6257a0258bf0de55c263500e99f69962648a8850c1b65120180a6c7ad35"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/baseline/cwse-output.log.gz",
+      "bytes": 2097,
+      "sha256": "a06201cc8a675f60815af5b4f11ca2bde6b38f57ade5a2ccfab5b68e32d4a1fa"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/baseline/cwse-public-trace.json.gz",
+      "bytes": 11113,
+      "sha256": "39f077f104df698ecb82f5924c63076305fd19fae2e96d20cb542cadddae764c"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/baseline/execution-cwse.json",
+      "bytes": 63075,
+      "sha256": "3b4adb8ec809df72cc78da01bda41d898fbb697ac407222f2afc72c97fb68b98"
+    },
+    {
+      "path": "docs/migration/lot3c-evidence/baseline/source-manifest.json",
+      "bytes": 29431,
+      "sha256": "03d74f1cbb023f041a306565c42c48b727674089479e54a5e147219f309cb26c"
+    }
+  ],
+  "qualification": "Retained byte-identical bounded cold reference,12actions0levels; outer cap result is not a complete-game failure and timings are not official cost evidence."
+}

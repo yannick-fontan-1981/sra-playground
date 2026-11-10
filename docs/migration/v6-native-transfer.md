@@ -11,7 +11,28 @@ not satisfy this target.
 The migration is **in progress**. The completion flag remains false. The native
 modules and verified trajectories below establish progress, not completion.
 
-## Current correction: lot 3B native 0.42.0, functional validation complete, cost reserve
+## Current transfer: lot 3C native 0.43.0, verified own layer, guarded campaign limit
+
+Native **0.43.0** is frozen at **`3e88aa12214fd3d4a4feb8d63b946123b8394cb4a0cbd0a156cc059c37f7b46c`**, with **251 native files and a 262-file archive**. [The delivery report](lot3c-exposed-reception.md) and [lineage](lot3c-exposed-reception-lineage.md) document Exposed reception measurements, conditional acquired models, the consumed V5 nominal push kernel, source guards, private ownership and compatibility with actual published 0.42 checkpoints. The observed composition entry now contains **3/6 branches**. Complete entry coverage remains **50/76**, with **37 compiled workflows** and incomplete global migration.
+
+The affected formal suite passes **1,525/1,525 tests in 45 files**, with no failure, cancellation, skip or TODO; [receipt](lot3c-evidence/final/validation/delta-tests-run.json). All **five project checks pass**, including the production build; [receipt](lot3c-evidence/final/validation/checks-run.json). Component comparison retains **347 projection checks**, 74 source cases, 16 guards, seven common-envelope cases and explicit native interruption/ownership contracts.
+
+CWSE completes its first two levels in **12 actions**, then stops at level3 after **21 actions and13 prefixes**. The three-level target is **not met**. The browser reproduces **21/2/13** with pauses and resumption; [receipt](lot3c-evidence/final/browser/browser-qa.json). The [contribution proof](lot3c-evidence/final/cwse-session/exposed-contribution.json) reconstructs12 selected prefixes,20 actions,19 actual own events and12 own-owner restorations. Controlled removal of acquired controls and conditional models changes actions or refusals in16 of36 retained ablations; negative and identity-only outcomes remain explicit. No future captured plan state primes a decision.
+
+The [terminal diagnostic](lot3c-evidence/final/cwse-terminal-diagnostic/README.md) produces the same scene, complete proposal, identity and TargetTree refusal from unchanged Python and native components. After a nonmeasurable return and one foreign action, retained evidence lacks the current observation. The guard refuses before morphology-specific checks. This is not proof of complete original-caller trajectory or that untransferred EphemeralMap is needed for this particular refusal. **Lot3C remains open for a generic current-evidence binding follow-up**, without weakening the guard or fabricating acquisition.
+
+CATR and RSWP preserve their commands and three-level trajectories. The strict historical comparator remains **failed32/34**, solely because its full counter dictionary includes the new Exposed count. A [separate diagnostic](lot3c-evidence/final/regressions/empty-series-diagnostic-contract.json) verifies **551 unchanged old counter values across19 prefixes**, plus exactly zero new counts and empty new event lists. It preserves the historical namespace normalization, explicitly excludes changed digest/digestScope from full-state equality, and claims **zero passive-owner coverage**. [Qualified delivery integrity](lot3c-evidence/final/delivery-integrity-qualified.json) verifies native/archive/test/build/source inputs and byte-identical reconstruction while retaining this strict failure, without rewriting the old gate.
+
+**Lot3B is now closed under the user's explicitly authorized global budget rule.** [The separate retrospective acceptance](lot3b-global-budget-acceptance.md) verifies STCK session **−17.795781%** and SMLP **−13.442302%** in the retained0.42 window. Its historical14/16 result and tails are unchanged. For new windows, each tested game's complete-session median increase must be **strictly below10%**; phase overruns remain published and are acceptable under that global condition.
+
+The [predeclared 0.43 window](lot3c-evidence/performance/global-budget-decision.json) is **accepted on both games** against freshly measured published 0.42: complete-session medians change **+0.199134% STCK** and **−0.254060% SMLP**. All32 measured sessions/400 actions are retained; the independent arithmetic review passes231 checks. The historical phase classification remains **15/16, budget_review_required**, with STCK known-prefix request **+11.602583%**, accepted under the global rule. Phase distributions and tails remain in the [full report](lot3c-evidence/performance/results.md). Cost acceptance does not close the documented functional follow-up.
+
+The source inventory now reports **154 component-verified modules,135 partial transfers,1,080 pending modules and0 fully verified modules**. The six full-migration gates remain false. The roadmap prioritizes the generic evidence-binding follow-up, then RootedLine, ReceptionService and ReferencePopulation, without relabeling partial inheritance as complete.
+
+## Historical correction: lot 3B native 0.42.0, original phase-cost reserve
+
+The following section preserves the original decision before the explicit global-rule acceptance above.
+
 
 Native **0.42.0** is frozen at **`2de70025ae08845efd491929416e091e9dc9e8e4b473440b9c6a86838e0b3d19`**, with **249 native files** and a **260-file source archive**. The [delivery report](lot3b-state-cost-correction.md) and [evidence index](lot3b-state-cost-evidence/README.md) retain the common-state corrections, contracts and limitations. The entry count remains **50/76**, with **26 remaining**, **37 compiled workflows**, and **2/6 branches** of `observed_composition_services`; complete migration remains false.
 

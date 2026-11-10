@@ -211,3 +211,13 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 /docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-campaign.json.gz
 /docs/migration/lot3b-state-cost-evidence/final/regressions/catr-041-replay.json.gz
 /docs/migration/lot3b-state-cost-evidence/final/regressions/rswp-041-replay.json.gz
+
+# Lot 3C source freeze is retained as exact ordered archive parts.
+/docs/migration/lot3c-evidence/final/source-archive.tar.gz
+!/docs/migration/lot3c-evidence/performance/cohort*/*.log
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot3c-evidence/baseline/cwse-campaign.json.gz
+/docs/migration/lot3c-evidence/final/cwse-session/cwse-campaign.json.gz
+/docs/migration/lot3c-evidence/final/regressions/catr-042-replay.json.gz
+/docs/migration/lot3c-evidence/final/regressions/rswp-042-replay.json.gz
