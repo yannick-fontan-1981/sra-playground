@@ -1,0 +1,24 @@
+{
+  "schema": "logos-engine.framed-window-source-oracle-export.v1",
+  "status": "passed",
+  "generator": {
+    "path": "scripts/export-v6-framed-window-reference.py",
+    "sha256": "1b2cafae70f4487e90a8df9838031095826099e371e74e31ef808eac3505b991"
+  },
+  "fixture": {
+    "path": "tests/fixtures/v6-framed-window-reference.json.gz",
+    "bytes": 60773,
+    "sha256": "c95c3e9bfaddd0746d3e4bc173995d89f0243dcab5eef2b2ddcec8fd7cac5b00"
+  },
+  "cases": 68,
+  "guards": 24,
+  "sourceExceptions": 9,
+  "kernelCases": 43,
+  "restoreCases": 5,
+  "coldReplays": 2,
+  "publicProjectionCases": 96,
+  "admittedGames": [],
+  "originalFilesVerifiedBefore": 1786,
+  "originalFilesVerifiedAfter": 1786,
+  "qualification": "Original own FramedWindow measurement, certificate, proposal, full-frame guard, response and common point envelope; consumed V5 exact_candidates only. Parent RootedQuota digest is an explicit opaque boundary, and expectedOriginal retains ancestor fallback/acquisition where expectedOwn/expectedOwnEvents isolate the transferred own contract. Source guards do not authenticate proposal identity, receipt or coherent point rewriting; bind validates its frame membership and zipped support points only. Empty finite domains, source exceptions, failed-trial blocking, unknown laws and deadline clamp remain visible. Synthetic contract seeds never preinitialize a live campaign. No game host/engine/specification/solution/action is read or executed."
+}

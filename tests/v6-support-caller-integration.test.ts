@@ -53,7 +53,7 @@ test('the real common caller retains the complete first recall envelope, epoch a
   assert.notEqual(series.digest, sourceFacts.find(fact => fact.key === 'repeated_series_state')!.value.digest,
     'The native closure does not impersonate the digest of the unported inheritance chain');
   assert.match((result.snapshot.coverage as R).sharedSeriesMemory, /inherited ObservedCompositionConstraint source closure remains partial/);
-  assert.equal((result.snapshot.coverage as R).sharedSeriesDigestScope, 'native_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_exposed_reception_relational_chamber_panel_service_rooted_line_reception_service_and_reference_population_six_observed_compositions_v6');
+  assert.equal((result.snapshot.coverage as R).sharedSeriesDigestScope, 'native_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_framed_window_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_exposed_reception_relational_chamber_panel_service_rooted_line_reception_service_and_reference_population_six_observed_compositions_v6');
   assert.equal(read('family_state:public_occurrence_recall').events.filter((event: R) => event.kind === 'occurrence_recall_transition').length, 1,
     'The selected recall event is not acquired a second time by passive observation');
 });

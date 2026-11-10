@@ -262,3 +262,11 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 
 # Exact large contribution JSON retained as deterministic gzip
 /docs/migration/lot3f-evidence/final/vois-population-session/reference-population-contribution.json
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot3g-evidence/final/regressions/catr-047-replay.json.gz
+/docs/migration/lot3g-evidence/final/regressions/fogw-047-replay.json.gz
+/docs/migration/lot3g-evidence/final/regressions/rswp-047-replay.json.gz
+/docs/migration/lot3g-evidence/final/regressions/vois-047-replay.json.gz
+/docs/migration/lot3g-evidence/diagnostic/retained-public-command-comparison.json
+/docs/migration/lot3g-evidence/final/source-archive.tar.gz

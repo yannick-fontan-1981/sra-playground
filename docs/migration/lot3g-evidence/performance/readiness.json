@@ -1,0 +1,132 @@
+{
+  "schema": "logos-engine.native-cost-window-readiness.v1",
+  "recordedAt": "2026-11-10T12:14:48.031299-03:00",
+  "finalizedAt": "2026-11-10T12:14:48.031299-03:00",
+  "status": "ready_for_predeclared_official_window",
+  "preview": "sites-preview stop completed; subsequent status confirmed stopped; preview command session exited. Browser CATR run is finished.",
+  "isolation": "All owned test runs, build, regression replays, public source exports/diagnoses, synthetic common-loop proof, browser actions, transport and delivery integrity are finished. All three delegated agents have completed and confirmed no active compute. During sequential A1/B1/B2/A2 only light reading and documentation are allowed; no test/build/replay/game/preview/profile/archive or large calculation will run concurrently.",
+  "functionalQualification": "Frozen native0.48:2566/2566 tests in68 files,5/5 checks/build, CATR/RSWP/FOGW/VOIS68/68 on159 recorded actions. Initial2564/2566 failure retained; only two old registry expectations changed and all68 files re-run on unchanged native code. Common FramedWindow loop passes15 check groups in2 cold controlled synthetic sessions; negative acquired event changes next decision, separate component ablation confirms action/refusal effect. Browser CATR confirms12actions/3levels/8plans after Pause/step/resume. Own FramedWindow game contribution remains open: no new selected game/target/clock and no actual archived Framed return acquired. Original scope and prefilter/deadline/guard limits remain. Prior CWSE/SK48/FOGW/VOIS clocks unchanged.",
+  "preparationTemplateDisposition": "The generic campaign/clock item is resolved by the explicit technical validation scope, synthetic integrated proof and preserved prior clocks. No game target is represented as completed. The remaining own-game contribution is a declared field-validation reserve, separate from this technical cost decision.",
+  "costPolicy": "Strict complete-session pooled median increase below10% separately for STCK and SMLP. Phase overruns may be accepted if both globals pass. All32 measured sessions400actions and all phase/p95/cohort diagnostics retained; no measured exclusions, nested-phase sum or cross-game compensation.",
+  "authorization": "User requested continuation and explicitly permits phase overruns if global increase remains below10%.",
+  "measurementAuthorized": true,
+  "pendingRequirements": [],
+  "retainedOpenValidation": [
+    "FramedWindow own contribution in a game",
+    "Full inherited original-caller parity",
+    "Bounded interruption of the exhaustive geometric prefilter"
+  ],
+  "inputs": [
+    {
+      "path": "docs/migration/lot3g-evidence/final/source-manifest.json",
+      "bytes": 31520,
+      "sha256": "3830e87db836b6df95b34550dec845f3d8c95abe2e69bb05d0814b12bef6bfad"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/revalidated/validation/delta-tests-run.json",
+      "bytes": 111528,
+      "sha256": "183989e228d1dba52eeeafba448fb5692d49ca246ab7f219e06ba35c46abb367"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/revalidated/validation/checks-run.json",
+      "bytes": 73581,
+      "sha256": "d0d50ff43fa606579f9c0fc1c6941b8632512a3c0d5ac25678ff2a74302365e4"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/validation/delta-tests-run.json",
+      "bytes": 111515,
+      "sha256": "23f83e764f9701b62cf0de2a718feaa4b8505d15b29944b1a125d6b105e87fd9"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/diagnostic/formal-validation-retry.json",
+      "bytes": 1922,
+      "sha256": "0ede3e6bbe61e595e589c12a1d4f3bb416fa0b21cb56382ba160d9f3b8efe07a"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/regressions/regression-summary.json",
+      "bytes": 90658,
+      "sha256": "092a07fb762ae58f224d03d0520aae087a5cca199d9d34be680d4772a75e7ed0"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/declaration.json",
+      "bytes": 4102,
+      "sha256": "3224f875715181be556063ef63a91a6a49f74aea2d1a6dab5a5100b73d3c2a13"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/protocol.md",
+      "bytes": 9984,
+      "sha256": "ffbcbe1b0b9583b70ce8f029a2a6465370150128da91c6c0977ed096b2b75541"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/global-budget-policy.json",
+      "bytes": 2009,
+      "sha256": "96876fa3f683bca67c8f8d314cb0b42011b48c91b02d0d1c63aa06bd9e84bb2b"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/protocol-check.json",
+      "bytes": 406,
+      "sha256": "bc3125ba3942d920facabd109babeac5fa9a666922e05cd4c8192e7443d42ba3"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/static-preflight.json",
+      "bytes": 11217,
+      "sha256": "66bb980b481a3f5d937ce4522da80a827208ce8266fbb0f027c9e480b301a6df"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/diagnostic/source-oracle-export.json",
+      "bytes": 1456,
+      "sha256": "592c58919a0134b4704d5991b849d52a0f372c29d9d0aaa2fcc254ef19a0eb9b"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/diagnostic/shared-integration-review.json",
+      "bytes": 9565,
+      "sha256": "4ccabebec337309bbd560b352aef176a75c8dee5e125f1952f10f16d400bde05"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/diagnostic/framed-window-public-admission.json",
+      "bytes": 14670,
+      "sha256": "f163d84caeb4c025d21703ca6f7ab96211f4966781697e38b9b23c2a822c3da5"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/diagnostic/retained-public-admission.json",
+      "bytes": 434073,
+      "sha256": "953778bd206cce040dd2bc5057be03ea1dbfe5a4623292ef43157f9791015529"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/diagnostic/retained-public-command-comparison.json.gz",
+      "bytes": 206109,
+      "sha256": "f296ff7a5dae7f201174e836028fee5172e9a38ccb92b55ad012316a3c8271fb"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/public-command-comparison-transport.json",
+      "bytes": 669,
+      "sha256": "7091a6a223226622dc4af9defd94fc58a7976e7c63c651ed70dd3d41a3988b94"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/public-command-comparison-transport-verify.json",
+      "bytes": 505,
+      "sha256": "1c247b9fa05572659f7f2aa1a3c52e87c41d4086d2c49d2870c9e8a35bbfe8f7"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/framed-window-common-loop.json.gz",
+      "bytes": 87289,
+      "sha256": "f28205cc681edc8988baf05a7ac6b27d4234c72317b43d37648c8f08dcd9a91b"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/framed-window-validation-scope.json",
+      "bytes": 6752,
+      "sha256": "f169bccc6ab84a588e0aa00931d0a1f87e3056309fa8ef17f8da4c9a5322d5ce"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/browser/browser-qa.json",
+      "bytes": 2271,
+      "sha256": "73001f5a1481c51803fba38b8c88fe427463b583df964687abf420d73275a0c4"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/delivery-integrity.json",
+      "bytes": 7417,
+      "sha256": "2cb052ed730dc824146fc237d77ab0ff78267dc4a6ff6f2b28abdb1dadfbd8f7"
+    }
+  ],
+  "qualification": "Readiness binds completed technical functional and integrity evidence. It authorizes only the declared timing window, without anticipating cost acceptance or closing the explicit own-game validation reserve."
+}

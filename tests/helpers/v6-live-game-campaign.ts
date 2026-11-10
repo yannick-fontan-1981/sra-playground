@@ -363,6 +363,8 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
           const controlBindings = (series.events as R[]).filter(event => event.kind === 'native_program_control_binding');
           const controlEffects = (series.events as R[]).filter(event => event.kind === 'native_program_control_effect');
           const rootedStates = (series.events as R[]).filter(event => event.kind === 'rooted_quota_state');
+          const framedWindowEvents = (series.events as R[]).filter(event => event.kind === 'framed_window_response');
+          const previousFramedWindowCount = report.prefixes.at(-1)?.sharedSeries.framedWindowEventCount ?? 0;
           const queuedModels = (series.events as R[]).filter(event => event.kind === 'observed_queue_field_model');
           const catalogueEvents = (series.events as R[]).filter(event =>
             ['catalogue_observation', 'catalogue_response', 'catalogue_field_input_observed'].includes(event.kind));
@@ -446,6 +448,10 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               ? { observedExposedReception: { proposal: evidence.proposal,
                     stateNode: 'family_state:public_occurrence_recall',
                     qualification: 'Passive capture of the selected common proposal. Production measures the scene, searches with conditional acquired effects and V5 nominal push expansion, and acquires each actual return once. No action, state or expected return is supplied by this recorder.' } } : {}),
+            ...(evidence.proposal.framed_window_plan
+              ? { observedFramedWindow: { proposal: evidence.proposal,
+                    stateNode: 'family_state:public_occurrence_recall',
+                    qualification: 'Passive capture only. Production measures current framed equality, certifies its finite candidate and acquires the actual point return. This recorder supplies no plan, state, expected response or terminal law.' } } : {}),
             ...(evidence.proposal.reference_population_plan
               ? { observedReferencePopulation: { proposal: evidence.proposal,
                     stateNode: 'family_state:public_occurrence_recall',
@@ -609,6 +615,9 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
               chamberRelationAcquiredEvents: chamberRelationEvents.slice(previousChamberRelationCount),
               exposedReceptionEventCount: exposedReceptionEvents.length,
               exposedReceptionAcquiredEvents: exposedReceptionEvents.slice(previousExposedReceptionCount),
+              ...(framedWindowEvents.length || evidence.proposal.framed_window_plan
+                ? { framedWindowEventCount: framedWindowEvents.length,
+                    framedWindowAcquiredEvents: framedWindowEvents.slice(previousFramedWindowCount) } : {}),
               ...(referencePopulationEvents.length || evidence.proposal.reference_population_plan
                 ? { referencePopulationEventCount: referencePopulationEvents.length,
                     referencePopulationAcquiredEvents: referencePopulationEvents.slice(previousReferencePopulationCount) } : {}),

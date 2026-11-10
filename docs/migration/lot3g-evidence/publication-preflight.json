@@ -1,0 +1,188 @@
+{
+  "schema": "logos-engine.lot3g.publication-inputs.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T12:32:43.626768-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "generator": {
+    "path": "docs/migration/lot3g-evidence/verify-publication-inputs.py",
+    "bytes": 13818,
+    "sha256": "8074ca90dfd2d9092d5544bc3274802a7bc3595154f7a6edce7ff9ddb0c7f6d1"
+  },
+  "nativeVersion": "0.48.0",
+  "nativeDigest": "fce8dfc3e6861742649203161b3bf55b6480462e44c77d8015453ce55b724a26",
+  "baselineSiteVersion": 75,
+  "baselineNativeVersion": "0.47.0",
+  "baselineCommit": "08bc35e447d17530a774c146ce4e660b1ef29d9a",
+  "checkedInventories": {
+    "native": 266,
+    "frozenArchiveInputs": 277,
+    "revalidatedSourceAndTests": 604,
+    "unchangedBuildInputs": 331
+  },
+  "globalCostAccepted": true,
+  "initialFormalTestCountsRetained": {
+    "tests": 2566,
+    "pass": 2564,
+    "fail": 2,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "finalFormalTestCounts": {
+    "tests": 2566,
+    "pass": 2566,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "todo": 0
+  },
+  "formalValidationDirectory": "docs/migration/lot3g-evidence/final/revalidated/validation",
+  "buildReceiptReusedByteIdentically": true,
+  "changedTestMetadataFiles": [
+    "tests/v6-coupled-pair-planning.test.ts",
+    "tests/v6-radial-port-integration.test.ts"
+  ],
+  "gameContributionStatus": "open_not_demonstrated",
+  "newSelectedGame": null,
+  "newCaseClock": null,
+  "integratedEvidenceKind": "two_cold_controlled_synthetic_common_caller_sessions",
+  "integratedCheckGroups": 15,
+  "inputs": [
+    {
+      "path": "docs/migration/lot3g-evidence/baseline/provenance.json",
+      "bytes": 32285,
+      "sha256": "4859518d10e30ebd7002941332eb8b8b09057b455a40595246491d28a61ba360"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/source-manifest.json",
+      "bytes": 31520,
+      "sha256": "3830e87db836b6df95b34550dec845f3d8c95abe2e69bb05d0814b12bef6bfad"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/source-archive.json",
+      "bytes": 33151,
+      "sha256": "ed5f97a0e284f24fa8fa76c2440d9b1cdc790c7ed82b097144830943491e9ac2"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/revalidated/source-manifest.json",
+      "bytes": 31520,
+      "sha256": "3830e87db836b6df95b34550dec845f3d8c95abe2e69bb05d0814b12bef6bfad"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/revalidated/validation/delta-tests-run.json",
+      "bytes": 111528,
+      "sha256": "183989e228d1dba52eeeafba448fb5692d49ca246ab7f219e06ba35c46abb367"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/revalidated/validation/checks-run.json",
+      "bytes": 73581,
+      "sha256": "d0d50ff43fa606579f9c0fc1c6941b8632512a3c0d5ac25678ff2a74302365e4"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/validation/delta-tests-run.json",
+      "bytes": 111515,
+      "sha256": "23f83e764f9701b62cf0de2a718feaa4b8505d15b29944b1a125d6b105e87fd9"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/validation/checks-run.json",
+      "bytes": 73581,
+      "sha256": "d0d50ff43fa606579f9c0fc1c6941b8632512a3c0d5ac25678ff2a74302365e4"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/diagnostic/formal-validation-retry.json",
+      "bytes": 1922,
+      "sha256": "0ede3e6bbe61e595e589c12a1d4f3bb416fa0b21cb56382ba160d9f3b8efe07a"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/regressions/regression-summary.json",
+      "bytes": 90658,
+      "sha256": "092a07fb762ae58f224d03d0520aae087a5cca199d9d34be680d4772a75e7ed0"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/browser/browser-qa.json",
+      "bytes": 2271,
+      "sha256": "73001f5a1481c51803fba38b8c88fe427463b583df964687abf420d73275a0c4"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/framed-window-common-loop.json.gz",
+      "bytes": 87289,
+      "sha256": "f28205cc681edc8988baf05a7ac6b27d4234c72317b43d37648c8f08dcd9a91b"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/framed-window-validation-scope.json",
+      "bytes": 6752,
+      "sha256": "f169bccc6ab84a588e0aa00931d0a1f87e3056309fa8ef17f8da4c9a5322d5ce"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/diagnostic/shared-integration-review.json",
+      "bytes": 9565,
+      "sha256": "4ccabebec337309bbd560b352aef176a75c8dee5e125f1952f10f16d400bde05"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/final/delivery-integrity.json",
+      "bytes": 7417,
+      "sha256": "2cb052ed730dc824146fc237d77ab0ff78267dc4a6ff6f2b28abdb1dadfbd8f7"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/readiness.json",
+      "bytes": 7328,
+      "sha256": "6af44fb9b788c195b96770eb0c2e9bb970e200de636cdd0cd2d9d2e50d0b08b9"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/window.json",
+      "bytes": 10160,
+      "sha256": "938701e3061ac6e1ae2a26d03c35d503f0e196dd8d333810a4a99badaa7dae2f"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/global-budget-policy.json",
+      "bytes": 2009,
+      "sha256": "96876fa3f683bca67c8f8d314cb0b42011b48c91b02d0d1c63aa06bd9e84bb2b"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/global-budget-decision.json",
+      "bytes": 30063,
+      "sha256": "fc98b778492bda82934da0d5b4a4490a9dd1b8177125dcb6056bbc843e7f3149"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/consolidation-review.json",
+      "bytes": 46779,
+      "sha256": "8c5c9e514088e5f04a5162e0afde0e5514bf1e9c6668982248e984499a551294"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/results.md",
+      "bytes": 31135,
+      "sha256": "a2c432abbe8c74defe17fab30b48296bdc4a57bfc56fbc216cce749d87a94068"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/diagnostic/cost-result-review.json",
+      "bytes": 52375,
+      "sha256": "189dd4434698a338ef5d249cf57abd3ebe878ee148512eeb663110c9dbc29346"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/README.md",
+      "bytes": 7283,
+      "sha256": "2d6ff0f7c2acd9c3d80ffa154df81c7bd22a089c465420ba923757693a49ff95"
+    },
+    {
+      "path": "docs/migration/lot3g-framed-window.md",
+      "bytes": 16722,
+      "sha256": "911ae2f16dcec71cc8f81d4e9e70096e9ef658052d46c100a6978cf11b2ba7e7"
+    },
+    {
+      "path": "docs/migration/lot3g-framed-window-lineage.md",
+      "bytes": 20120,
+      "sha256": "be5978833138ef3904ad8fa3f69f2ac92049d0a722e397ac034678433043cd92"
+    },
+    {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "bytes": 103555,
+      "sha256": "7c91a36288505b30b2ebca552b1a9a091c6379301f0aadc39a79f07668ee51e8"
+    },
+    {
+      "path": "docs/migration/v6-native-transfer.md",
+      "bytes": 154195,
+      "sha256": "5b00e0e62c0368e62408a7dc41e3477d3ea1741811e6c9192ba74c7e950d414c"
+    }
+  ],
+  "qualification": "Final retained-input check after completed timing. No test, build, game or cost result is regenerated. The original 2564/2566 formal result remains retained; only two stale registry expectations changed, followed by the complete 68-file revalidation on the same frozen native source. The passing build receipt is reused byte-identically. FramedWindow common-loop evidence is explicitly synthetic; its component ablation is not a full-caller ablation. Game contribution remains open_not_demonstrated. No new game case or clock is selected; CWSE/SK48/FOGW/VOIS clocks remain unchanged. Global per-case cost acceptance is reported independently and cannot be overridden by this integrity check. Inherited source closure and full original-caller parity remain partial."
+}

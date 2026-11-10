@@ -1,0 +1,15 @@
+{
+  "operation": "verify",
+  "status": "passed",
+  "path": "docs/migration/lot3g-evidence/diagnostic/retained-public-command-comparison.json",
+  "original": {
+    "bytes": 4194954,
+    "sha256": "0ceafbb9bbe5543b240bb8d66fff429e9220b80453bed8740352d60b8d55c414"
+  },
+  "compressed": {
+    "bytes": 206109,
+    "sha256": "f296ff7a5dae7f201174e836028fee5172e9a38ccb92b55ad012316a3c8271fb"
+  },
+  "restored": false,
+  "qualification": "Exact byte reconstruction only; no case analysis or proof execution."
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.framed-window-public-command-comparison-transport.v1",
+  "original": {
+    "path": "diagnostic/retained-public-command-comparison.json",
+    "bytes": 4194954,
+    "sha256": "0ceafbb9bbe5543b240bb8d66fff429e9220b80453bed8740352d60b8d55c414"
+  },
+  "compressed": {
+    "path": "diagnostic/retained-public-command-comparison.json.gz",
+    "bytes": 206109,
+    "sha256": "f296ff7a5dae7f201174e836028fee5172e9a38ccb92b55ad012316a3c8271fb"
+  },
+  "gzipMtime": 0,
+  "roundTripBytesEqual": true,
+  "qualification": "Lossless deterministic gzip of the unchanged completed public command diagnosis; no game, corpus analysis or proof recomputation."
+}

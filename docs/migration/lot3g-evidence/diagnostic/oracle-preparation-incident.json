@@ -1,0 +1,50 @@
+{
+  "schema": "logos-engine.framed-window-oracle-preparation-incident.v1",
+  "recordedAt": "2026-11-10T14:52:15.992211+00:00",
+  "status": "resolved_in_generator_with_source_exception_retained",
+  "failedGeneratorRuns": 2,
+  "diagnosticReexecution": 1,
+  "failure": "The exporter assumed a receipt at node_bound=8 for the second correlated model, then raised KeyError: expected because unchanged source raised AttributeError inside its interrupted-pixel overlay.",
+  "originalException": {
+    "type": "AttributeError",
+    "message": "'dict' object has no attribute '_data'"
+  },
+  "cause": "temporal_fragment_match._compare_window supplies a plain dict as FrozenMap.overlay fallback when handling DComputationInterrupted.",
+  "correction": "Retain node_bound=8 as an original exception case. Produce the genuine original completed-prefix resumption at node_bound=7, whose interruption occurs before entering the second model pixel loop. No original source or expected outcome is edited.",
+  "sourceExceptionCases": [
+    {
+      "id": "kernel:node_bound_one",
+      "error": {
+        "message": "'dict' object has no attribute '_data'",
+        "type": "AttributeError"
+      }
+    },
+    {
+      "id": "kernel:node_bound_six",
+      "error": {
+        "message": "'dict' object has no attribute '_data'",
+        "type": "AttributeError"
+      }
+    },
+    {
+      "id": "kernel:time_bound_during_pixels_original_overlay_exception",
+      "error": {
+        "message": "'dict' object has no attribute '_data'",
+        "type": "AttributeError"
+      }
+    },
+    {
+      "id": "kernel:two_models_interrupted_inside_pixels_original_overlay_exception",
+      "error": {
+        "message": "'dict' object has no attribute '_data'",
+        "type": "AttributeError"
+      }
+    }
+  ],
+  "fixture": {
+    "path": "tests/fixtures/v6-framed-window-reference.json.gz",
+    "bytes": 60773,
+    "sha256": "c95c3e9bfaddd0746d3e4bc173995d89f0243dcab5eef2b2ddcec8fd7cac5b00"
+  },
+  "qualification": "Oracle-development preparation only, no game host, action, campaign or official cost execution. The successful export separately verifies all 1786 originals before and after."
+}

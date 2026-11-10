@@ -1,0 +1,741 @@
+{
+  "schema": "logos-engine.native-loop-cost-comparison.v1",
+  "status": "budget_review_required",
+  "recordedAt": "2026-11-10T15:24:32.994Z",
+  "inputs": {
+    "policy": {
+      "path": "docs/migration/lot3g-evidence/performance/comparison-policy.json",
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+      "bytes": 991
+    },
+    "baseline": {
+      "path": "docs/migration/lot3g-evidence/performance/cohort2/baseline.json",
+      "sha256": "eb89b8397ebb8d8935b3d83a51455c1c4aba17756ab15fa63981ed69a5ffa85f",
+      "bytes": 427702
+    },
+    "after": {
+      "path": "docs/migration/lot3g-evidence/performance/cohort2/after.json",
+      "sha256": "ead110f710a32d6d80b0830d1a836ed51ada41c9b58a8b04cb014570064a9ba3",
+      "bytes": 428034
+    }
+  },
+  "generator": {
+    "path": "scripts/compare-native-loop-costs.mjs",
+    "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+  },
+  "before": {
+    "headCommit": "08bc35e447d17530a774c146ce4e660b1ef29d9a",
+    "nativeDigest": "54d8742300a04dcdf0cb1b038bc62b947d4a1c60f70da4ee80e6971b0f021165"
+  },
+  "after": {
+    "headCommit": "08bc35e447d17530a774c146ce4e660b1ef29d9a",
+    "nativeDigest": "fce8dfc3e6861742649203161b3bf55b6480462e44c77d8015453ce55b724a26"
+  },
+  "harnessInputsMatched": true,
+  "environmentMatched": true,
+  "replayWorkMatched": true,
+  "relativeBudget": 0.1,
+  "comparisons": [
+    {
+      "case": "STCK",
+      "unaffected": true,
+      "measuredSessions": 4,
+      "actionsPerSession": 10,
+      "levelsCompleted": 2,
+      "sessionElapsed": {
+        "before": {
+          "count": 4,
+          "medianMs": 10474.639974999998,
+          "p95Ms": null,
+          "minMs": 10155.472673,
+          "maxMs": 10636.760377999999,
+          "tailQualification": "Fewer than 20 samples; no p95 reported."
+        },
+        "after": {
+          "count": 4,
+          "medianMs": 10584.9160895,
+          "p95Ms": null,
+          "minMs": 10246.652062000001,
+          "maxMs": 10924.766375000003,
+          "tailQualification": "Fewer than 20 samples; no p95 reported."
+        },
+        "medianRelativeIncrease": 0.010527914540566563
+      },
+      "metrics": [
+        {
+          "stage": "session_elapsed",
+          "before": {
+            "count": 4,
+            "medianMs": 10474.639974999998,
+            "p95Ms": null,
+            "minMs": 10155.472673,
+            "maxMs": 10636.760377999999
+          },
+          "after": {
+            "count": 4,
+            "medianMs": 10584.9160895,
+            "p95Ms": null,
+            "minMs": 10246.652062000001,
+            "maxMs": 10924.766375000003
+          },
+          "medianRelativeIncrease": 0.010527914540566563,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.045947899512412495,
+            "afterRelativeRange": 0.06406421243836558
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "new_decision",
+          "before": {
+            "count": 24,
+            "medianMs": 368.5584605000008,
+            "p95Ms": 467.87443899999926,
+            "minMs": 182.63518900000054,
+            "maxMs": 475.9738550000038
+          },
+          "after": {
+            "count": 24,
+            "medianMs": 303.97297900000194,
+            "p95Ms": 456.07588600000054,
+            "minMs": 169.71065400000043,
+            "maxMs": 510.6397069999948
+          },
+          "medianRelativeIncrease": -0.17523809224832254,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.2830094329801767,
+            "afterRelativeRange": 0.20562037608281444
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_service",
+          "before": {
+            "count": 16,
+            "medianMs": 9.294617499999731,
+            "p95Ms": null,
+            "minMs": 7.970822000002954,
+            "maxMs": 22.038447999999335
+          },
+          "after": {
+            "count": 16,
+            "medianMs": 11.032611499998893,
+            "p95Ms": null,
+            "minMs": 8.469810000000507,
+            "maxMs": 23.36958799999411
+          },
+          "medianRelativeIncrease": 0.18698929783815332,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.4885049740660017,
+            "afterRelativeRange": 0.16819801011711938
+          },
+          "budgetApplies": true,
+          "result": "over_budget_with_noise_unresolved"
+        },
+        {
+          "stage": "known_prefix_request",
+          "before": {
+            "count": 16,
+            "medianMs": 11.127472500000295,
+            "p95Ms": null,
+            "minMs": 9.576374000003852,
+            "maxMs": 24.29746499999601
+          },
+          "after": {
+            "count": 16,
+            "medianMs": 13.37682500000301,
+            "p95Ms": null,
+            "minMs": 10.46479200000067,
+            "maxMs": 25.538751000000047
+          },
+          "medianRelativeIncrease": 0.20214406281414354,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.581758806113395,
+            "afterRelativeRange": 0.15993875016814066
+          },
+          "budgetApplies": true,
+          "result": "over_budget_with_noise_unresolved"
+        },
+        {
+          "stage": "known_prefix_guard",
+          "before": {
+            "count": 16,
+            "medianMs": 0.26123550000193063,
+            "p95Ms": null,
+            "minMs": 0.09036299999934272,
+            "maxMs": 0.8407470000001922
+          },
+          "after": {
+            "count": 16,
+            "medianMs": 0.2756119999976363,
+            "p95Ms": null,
+            "minMs": 0.08692800000062562,
+            "maxMs": 0.44828200000483776
+          },
+          "medianRelativeIncrease": 0.05503271950251554,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.40590219900929697,
+            "afterRelativeRange": 0.2099313465735163
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "acquisition_and_persistence",
+          "before": {
+            "count": 24,
+            "medianMs": 855.1149305000008,
+            "p95Ms": 3422.8845070000007,
+            "minMs": 361.1651259999999,
+            "maxMs": 3661.7260010000027
+          },
+          "after": {
+            "count": 24,
+            "medianMs": 873.5826955000011,
+            "p95Ms": 3729.857075,
+            "minMs": 401.12023600000066,
+            "maxMs": 3791.7852029999995
+          },
+          "medianRelativeIncrease": 0.021596822066013877,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.19183386664265886,
+            "afterRelativeRange": 0.14792955435375485
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "persistence",
+          "before": {
+            "count": 52,
+            "medianMs": 162.841694499999,
+            "p95Ms": 339.0084450000004,
+            "minMs": 14.348762000001443,
+            "maxMs": 374.95540299999993
+          },
+          "after": {
+            "count": 52,
+            "medianMs": 180.00580600000103,
+            "p95Ms": 368.6579720000009,
+            "minMs": 13.870490000001155,
+            "maxMs": 389.2894840000008
+          },
+          "medianRelativeIncrease": 0.10540366552131486,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.29153846099288644,
+            "afterRelativeRange": 0.30164616216091555
+          },
+          "budgetApplies": true,
+          "result": "over_budget_with_noise_unresolved"
+        },
+        {
+          "stage": "restoration",
+          "before": {
+            "count": 48,
+            "medianMs": 7.516321000000062,
+            "p95Ms": 50.34541799999715,
+            "minMs": 1.8348999999980151,
+            "maxMs": 66.82202099999995
+          },
+          "after": {
+            "count": 48,
+            "medianMs": 7.848141999998916,
+            "p95Ms": 63.823403000002145,
+            "minMs": 1.7846250000002328,
+            "maxMs": 84.81478000000061
+          },
+          "medianRelativeIncrease": 0.04414673082733578,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.19978130884807926,
+            "afterRelativeRange": 0.4192313495092979
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        }
+      ],
+      "selectedPoseCosts": {
+        "before": {},
+        "after": {}
+      },
+      "inspection": {
+        "before": {
+          "nativeService": {
+            "count": 12,
+            "medianMs": 189.03890649999994,
+            "p95Ms": null,
+            "minMs": 169.31077599999844,
+            "maxMs": 255.94962999999916,
+            "tailQualification": "Fewer than 20 samples; no p95 reported."
+          },
+          "endToEnd": {
+            "count": 12,
+            "medianMs": 343.41503399999783,
+            "p95Ms": null,
+            "minMs": 306.38224099999934,
+            "maxMs": 420.1445359999998,
+            "tailQualification": "Fewer than 20 samples; no p95 reported."
+          }
+        },
+        "after": {
+          "nativeService": {
+            "count": 12,
+            "medianMs": 218.66122199999882,
+            "p95Ms": null,
+            "minMs": 178.296875,
+            "maxMs": 272.95204199999716,
+            "tailQualification": "Fewer than 20 samples; no p95 reported."
+          },
+          "endToEnd": {
+            "count": 12,
+            "medianMs": 390.49632400000155,
+            "p95Ms": null,
+            "minMs": 319.3751009999978,
+            "maxMs": 489.17676400000346,
+            "tailQualification": "Fewer than 20 samples; no p95 reported."
+          }
+        }
+      },
+      "pause": {
+        "before": {
+          "initial_planning": {
+            "acknowledgement": {
+              "count": 4,
+              "medianMs": 0.0159685000016907,
+              "p95Ms": null,
+              "minMs": 0.008513000000675675,
+              "maxMs": 0.09152600000015809,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            },
+            "safeBoundary": {
+              "count": 4,
+              "medianMs": 1059.1479729999996,
+              "p95Ms": null,
+              "minMs": 1024.7964570000004,
+              "maxMs": 1222.4457909999983,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            }
+          },
+          "engaged_action": {
+            "acknowledgement": {
+              "count": 4,
+              "medianMs": 0.01652950000061537,
+              "p95Ms": null,
+              "minMs": 0.01268900000013673,
+              "maxMs": 0.021180999996431638,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            },
+            "safeBoundary": {
+              "count": 4,
+              "medianMs": 842.5686145000018,
+              "p95Ms": null,
+              "minMs": 760.9157590000032,
+              "maxMs": 882.2626519999994,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            }
+          }
+        },
+        "after": {
+          "initial_planning": {
+            "acknowledgement": {
+              "count": 4,
+              "medianMs": 0.009894499999063555,
+              "p95Ms": null,
+              "minMs": 0.00893299999734154,
+              "maxMs": 0.0411709999998493,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            },
+            "safeBoundary": {
+              "count": 4,
+              "medianMs": 1085.4209389999996,
+              "p95Ms": null,
+              "minMs": 951.2225749999998,
+              "maxMs": 1231.6035780000002,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            }
+          },
+          "engaged_action": {
+            "acknowledgement": {
+              "count": 4,
+              "medianMs": 0.016955000000052678,
+              "p95Ms": null,
+              "minMs": 0.010975999997754116,
+              "maxMs": 0.019539000000804663,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            },
+            "safeBoundary": {
+              "count": 4,
+              "medianMs": 860.8857479999988,
+              "p95Ms": null,
+              "minMs": 777.0912150000004,
+              "maxMs": 928.9162199999992,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            }
+          }
+        }
+      }
+    },
+    {
+      "case": "SMLP",
+      "unaffected": true,
+      "measuredSessions": 4,
+      "actionsPerSession": 15,
+      "levelsCompleted": 3,
+      "sessionElapsed": {
+        "before": {
+          "count": 4,
+          "medianMs": 18551.237411,
+          "p95Ms": null,
+          "minMs": 17482.443698000003,
+          "maxMs": 18876.657775000014,
+          "tailQualification": "Fewer than 20 samples; no p95 reported."
+        },
+        "after": {
+          "count": 4,
+          "medianMs": 18620.491169499997,
+          "p95Ms": null,
+          "minMs": 17049.34290399999,
+          "maxMs": 20249.47741600001,
+          "tailQualification": "Fewer than 20 samples; no p95 reported."
+        },
+        "medianRelativeIncrease": 0.0037331072297599466
+      },
+      "metrics": [
+        {
+          "stage": "session_elapsed",
+          "before": {
+            "count": 4,
+            "medianMs": 18551.237411,
+            "p95Ms": null,
+            "minMs": 17482.443698000003,
+            "maxMs": 18876.657775000014
+          },
+          "after": {
+            "count": 4,
+            "medianMs": 18620.491169499997,
+            "p95Ms": null,
+            "minMs": 17049.34290399999,
+            "maxMs": 20249.47741600001
+          },
+          "medianRelativeIncrease": 0.0037331072297599466,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.07515477518353084,
+            "afterRelativeRange": 0.17186090758130895
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "new_decision",
+          "before": {
+            "count": 36,
+            "medianMs": 406.2924675000031,
+            "p95Ms": 1053.994786999996,
+            "minMs": 224.54959199999576,
+            "maxMs": 1075.0952709999983
+          },
+          "after": {
+            "count": 36,
+            "medianMs": 397.71507949999796,
+            "p95Ms": 993.381092999989,
+            "minMs": 204.39866900000197,
+            "maxMs": 1075.466413000002
+          },
+          "medianRelativeIncrease": -0.021111363577039688,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.19738109629113712,
+            "afterRelativeRange": 0.10655682790942218
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_service",
+          "before": {
+            "count": 24,
+            "medianMs": 12.67678349999187,
+            "p95Ms": 22.368537000002107,
+            "minMs": 8.720639999999548,
+            "maxMs": 32.76394099999743
+          },
+          "after": {
+            "count": 24,
+            "medianMs": 11.797510500007775,
+            "p95Ms": 24.47632600000361,
+            "minMs": 8.92294899999979,
+            "maxMs": 25.731775000007474
+          },
+          "medianRelativeIncrease": -0.0693608911112712,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.07792755365320238,
+            "afterRelativeRange": 0.3798291817540334
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_request",
+          "before": {
+            "count": 24,
+            "medianMs": 15.555000000007567,
+            "p95Ms": 25.194080999994185,
+            "minMs": 10.686944000000949,
+            "maxMs": 35.7913120000012
+          },
+          "after": {
+            "count": 24,
+            "medianMs": 14.567924499999208,
+            "p95Ms": 27.520195999997668,
+            "minMs": 11.0592719999986,
+            "maxMs": 29.199615000004997
+          },
+          "medianRelativeIncrease": -0.06345711989764569,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.05828194010413806,
+            "afterRelativeRange": 0.40167825653987294
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "known_prefix_guard",
+          "before": {
+            "count": 24,
+            "medianMs": 0.42463649999990594,
+            "p95Ms": 0.8015630000008969,
+            "minMs": 0.21520800000871532,
+            "maxMs": 18.947704999998678
+          },
+          "after": {
+            "count": 24,
+            "medianMs": 0.4178474999971513,
+            "p95Ms": 0.6480770000052871,
+            "minMs": 0.19864300001063384,
+            "maxMs": 10.306252000009408
+          },
+          "medianRelativeIncrease": -0.01598779191792543,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.2622260849656392,
+            "afterRelativeRange": 0.2710052038731038
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "acquisition_and_persistence",
+          "before": {
+            "count": 36,
+            "medianMs": 987.3051859999978,
+            "p95Ms": 2912.7070609999937,
+            "minMs": 353.01057299999957,
+            "maxMs": 2975.882368000006
+          },
+          "after": {
+            "count": 36,
+            "medianMs": 961.7148584999959,
+            "p95Ms": 3233.148503000004,
+            "minMs": 341.481037000005,
+            "maxMs": 3414.795739999987
+          },
+          "medianRelativeIncrease": -0.025919369069334453,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.10965897080556843,
+            "afterRelativeRange": 0.2953257095798444
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "persistence",
+          "before": {
+            "count": 76,
+            "medianMs": 156.0551415000009,
+            "p95Ms": 268.4977110000036,
+            "minMs": 19.52764100000786,
+            "maxMs": 397.36727300001075
+          },
+          "after": {
+            "count": 76,
+            "medianMs": 141.58010049999575,
+            "p95Ms": 313.8341000000073,
+            "minMs": 17.821991999997408,
+            "maxMs": 459.5466529999976
+          },
+          "medianRelativeIncrease": -0.09275593781064284,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.19449643073388453,
+            "afterRelativeRange": 0.12190935902823226
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        },
+        {
+          "stage": "restoration",
+          "before": {
+            "count": 72,
+            "medianMs": 5.928606500005117,
+            "p95Ms": 34.12683300000208,
+            "minMs": 1.9846509999915725,
+            "maxMs": 52.966440000003786
+          },
+          "after": {
+            "count": 72,
+            "medianMs": 5.5294005000032485,
+            "p95Ms": 25.107151999982307,
+            "minMs": 2.676622999992105,
+            "maxMs": 37.74344299999939
+          },
+          "medianRelativeIncrease": -0.06733555347306719,
+          "roundMedianNoise": {
+            "baselineRelativeRange": 0.4970911691487082,
+            "afterRelativeRange": 0.3187174986276218
+          },
+          "budgetApplies": true,
+          "result": "within_observed_budget"
+        }
+      ],
+      "selectedPoseCosts": {
+        "before": {},
+        "after": {}
+      },
+      "inspection": {
+        "before": {
+          "nativeService": {
+            "count": 12,
+            "medianMs": 210.30211949999648,
+            "p95Ms": null,
+            "minMs": 192.31114499999967,
+            "maxMs": 243.68080299999565,
+            "tailQualification": "Fewer than 20 samples; no p95 reported."
+          },
+          "endToEnd": {
+            "count": 12,
+            "medianMs": 397.12134499999956,
+            "p95Ms": null,
+            "minMs": 322.78594899999734,
+            "maxMs": 438.6425059999892,
+            "tailQualification": "Fewer than 20 samples; no p95 reported."
+          }
+        },
+        "after": {
+          "nativeService": {
+            "count": 12,
+            "medianMs": 242.7069510000074,
+            "p95Ms": null,
+            "minMs": 195.3151360000047,
+            "maxMs": 315.6148899999971,
+            "tailQualification": "Fewer than 20 samples; no p95 reported."
+          },
+          "endToEnd": {
+            "count": 12,
+            "medianMs": 445.0263075000039,
+            "p95Ms": null,
+            "minMs": 366.58384300000034,
+            "maxMs": 524.801398999989,
+            "tailQualification": "Fewer than 20 samples; no p95 reported."
+          }
+        }
+      },
+      "pause": {
+        "before": {
+          "initial_planning": {
+            "acknowledgement": {
+              "count": 4,
+              "medianMs": 0.009483499998168554,
+              "p95Ms": null,
+              "minMs": 0.005157999999937601,
+              "maxMs": 0.027881000001798384,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            },
+            "safeBoundary": {
+              "count": 4,
+              "medianMs": 1732.6308525000022,
+              "p95Ms": null,
+              "minMs": 1499.7565109999996,
+              "maxMs": 1782.0823859999946,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            }
+          },
+          "engaged_action": {
+            "acknowledgement": {
+              "count": 4,
+              "medianMs": 0.007020500001090113,
+              "p95Ms": null,
+              "minMs": 0.004545999996480532,
+              "maxMs": 0.02311399999598507,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            },
+            "safeBoundary": {
+              "count": 4,
+              "medianMs": 768.5966894999983,
+              "p95Ms": null,
+              "minMs": 718.2800459999999,
+              "maxMs": 934.4156389999989,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            }
+          }
+        },
+        "after": {
+          "initial_planning": {
+            "acknowledgement": {
+              "count": 4,
+              "medianMs": 0.009563500003423542,
+              "p95Ms": null,
+              "minMs": 0.006559999994351529,
+              "maxMs": 0.02231299999402836,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            },
+            "safeBoundary": {
+              "count": 4,
+              "medianMs": 1722.2332620000016,
+              "p95Ms": null,
+              "minMs": 1567.281925999996,
+              "maxMs": 2070.285376,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            }
+          },
+          "engaged_action": {
+            "acknowledgement": {
+              "count": 4,
+              "medianMs": 0.007676000001083594,
+              "p95Ms": null,
+              "minMs": 0.005007999992812984,
+              "maxMs": 0.022253000002820045,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            },
+            "safeBoundary": {
+              "count": 4,
+              "medianMs": 767.9773975000026,
+              "p95Ms": null,
+              "minMs": 701.9656289999984,
+              "maxMs": 917.6788220000017,
+              "tailQualification": "Fewer than 20 samples; no p95 reported."
+            }
+          }
+        }
+      }
+    }
+  ],
+  "unresolved": [
+    {
+      "case": "STCK",
+      "stage": "known_prefix_service",
+      "result": "over_budget_with_noise_unresolved",
+      "medianRelativeIncrease": 0.18698929783815332
+    },
+    {
+      "case": "STCK",
+      "stage": "known_prefix_request",
+      "result": "over_budget_with_noise_unresolved",
+      "medianRelativeIncrease": 0.20214406281414354
+    },
+    {
+      "case": "STCK",
+      "stage": "persistence",
+      "result": "over_budget_with_noise_unresolved",
+      "medianRelativeIncrease": 0.10540366552131486
+    }
+  ],
+  "qualification": "Observed median ratios under matched recorded-public work, not a hardware-independent speed claim. Native digests bind the actual measured inputs; headCommit names the Git base and does not imply that a dirty working tree was already committed. Nested stages must not be summed. known_prefix_service is the complete service advance returning another action in the committed prefix, including observation/guard/snapshot work; known_prefix_request additionally includes worker transport/scheduling before controller acceptance. session_elapsed includes the complete controller replay. restoration isolates family restoration only; caller/authority restoration remains included in new_decision. Inspection is service plus worker transport, with no rendered inspector. Pause covers only initial planning and the first engaged action, not arbitrary long-search preemption. Three cold-knowledge sessions calibrate observed round-to-round variation, not confidence intervals. P95 is withheld below 20 samples. An over-budget result with large noise remains unresolved and requires a targeted follow-up; the noise is never added to the allowance. Selected pose samples diagnose the changed path. A finite multi-level session does not establish hours-long memory behavior. Live game, browser rendering and external hosting times are not measured."
+}

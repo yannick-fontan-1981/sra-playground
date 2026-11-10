@@ -166,12 +166,12 @@ test('observed, coupled and graph source entries share one retained public_occur
   assert.equal(coverage.observedCompositionBranches.owner, 'public_occurrence_recall');
   assert.equal(coverage.observedCompositionBranches.status, 'all_declared_branches_connected');
   assert.deepEqual(coverage.observedCompositionBranches.pendingBranches, []);
-  assert.equal(window.families.filter((id: string) => id === 'public_occurrence_recall').length, 13);
+  assert.equal(window.families.filter((id: string) => id === 'public_occurrence_recall').length, 14);
   assert.deepEqual(window.entryPoints.filter((entry: string | null) => entry !== null),
     ['occluded_catalogue_composition', 'queued_field_composition', 'product_panel_composition', 'labeled_sequence_composition',
       'linked_packet_composition', 'trace_field_composition', 'cell_patch_composition', 'observed_occurrence_recall',
       'observed_program_composition', 'typed_material_flow', 'radial_port_composition', 'observed_framed_analogy',
-      'field_service_composition', 'rooted_quota_composition']);
+      'field_service_composition', 'rooted_quota_composition', 'framed_window_composition']);
   assert.ok(coverage.sourceGroups.indexOf(goal) < coverage.sourceGroups.indexOf(window));
   assert.equal(coverage.fullV6Parity, false);
 });

@@ -1,0 +1,21 @@
+CATR — observed CUA accessibility outcome, native0.48 frozen build
+Final URL: http://127.0.0.1:4173/?game=CATR&level=4#playground
+Final visible status: Level completed.
+Actions: 12
+Levels solved: 3
+Completed plans: 8
+Run to next level: enabled
+Run 16 actions: enabled
+One action: enabled
+Pause: disabled
+
+Observed control sequence:
+Ready at level1: actions0, levels0, plans0.
+Run16 followed by Pause reached Level completed before a paused state: level2, actions3, levels1, plans2.
+One action: One action completed, actions4, levels1, plans2.
+Run16 then Pause: Pausing after the engaged action and its real outcome…; actions5.
+Paused confirmed: actions5, levels1, plans3.
+Resume Run to next level: level3, actions7, levels2, plans5.
+Run to next level: level4, actions12, levels3, plans8.
+
+This is a faithful textual record of the returned browser AX observations, not a screenshot or hidden-state export.

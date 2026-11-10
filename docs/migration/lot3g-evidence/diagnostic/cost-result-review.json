@@ -1,0 +1,1754 @@
+{
+  "schema": "logos-engine.lot3g-independent-cost-result-review.v1",
+  "recordedAt": "2026-11-10T12:29:02.918791-03:00",
+  "startedAt": "2026-11-10T12:29:02.890948-03:00",
+  "timezone": "UTC−03",
+  "status": "passed",
+  "scope": "Independent arithmetic review of retained official results only; no measurement, test, build, replay, worker or game executed.",
+  "officialWindow": {
+    "startedAt": "2026-11-10T12:14:48.069607-03:00",
+    "finishedAt": "2026-11-10T12:23:59.503198-03:00",
+    "order": [
+      "A1",
+      "B1",
+      "B2",
+      "A2"
+    ],
+    "status": "passed",
+    "finalIntegrity": "passed"
+  },
+  "method": {
+    "implementation": "Independent Python standard-library calculation; no official comparator or review module imported or executed.",
+    "globalValues": "Every trial with warmup false, replayElapsedMs; four sessions per case/version/cohort, pooled before median.",
+    "globalFormula": "median(candidate sessions) / median(baseline sessions) - 1; strictly less than 0.1 separately per case.",
+    "phaseValues": "session_elapsed uses replayElapsedMs; known_prefix_service/request use nativeServiceMs/wallMs from requests with type advance and kind action; other stages use matching samples[].elapsedMs.",
+    "phaseClassification": "Historical <= 0.1 median rule; noisy/unresolved classification retained above the threshold when either per-session median relative range exceeds 0.1. Noise adds no allowance.",
+    "p95": "Empirical nearest rank ceil(0.95*n), withheld below 20 samples; independently recalculated from all raw samples.",
+    "numericComparison": "Absolute and relative float tolerance 1e-12 for comparing arithmetic receipts only. The strict global budget threshold itself is not adjusted.",
+    "exclusions": "Only eight declared warmups. No measured sample or outlier excluded; exact ledger multiplicities checked against both aggregate and decision."
+  },
+  "counts": {
+    "measuredSessions": 32,
+    "measuredActions": 400,
+    "sessionsPerCaseVersion": 8,
+    "excludedWarmupSessions": 8,
+    "excludedWarmupActions": 24,
+    "excludedMeasuredSessions": 0,
+    "excludedOutliers": 0
+  },
+  "globalCases": [
+    {
+      "case": "STCK",
+      "sessionsPerVersion": 8,
+      "beforeValuesMs": [
+        11579.221106,
+        10661.177982999998,
+        10253.819735999998,
+        10937.589778000001,
+        10636.760377999999,
+        10155.472673,
+        10344.853022999996,
+        10604.426927
+      ],
+      "afterValuesMs": [
+        11076.877697000002,
+        11028.703456,
+        11116.872496,
+        10667.953825999997,
+        10246.652062000001,
+        10667.322189000002,
+        10924.766375000003,
+        10502.509989999999
+      ],
+      "beforeMedianMs": 10620.5936525,
+      "afterMedianMs": 10796.3601005,
+      "medianRelativeIncrease": 0.016549587880958727,
+      "reportedMedianRelativeIncrease": 0.016549587880958644,
+      "arithmeticRoundoffDifference": 8.326672684688674e-17,
+      "headroomPercentagePoints": 8.345041211904128,
+      "accepted": true
+    },
+    {
+      "case": "SMLP",
+      "sessionsPerVersion": 8,
+      "beforeValuesMs": [
+        17377.235008000003,
+        17960.309836999993,
+        18133.083996999994,
+        17414.928656000004,
+        18851.58225,
+        18250.892571999997,
+        17482.443698000003,
+        18876.657775000014
+      ],
+      "afterValuesMs": [
+        17685.564125000004,
+        19191.586318,
+        19298.847959000006,
+        20446.897582999998,
+        17510.613576999996,
+        20249.47741600001,
+        19730.368762,
+        17049.34290399999
+      ],
+      "beforeMedianMs": 18046.696916999994,
+      "afterMedianMs": 19245.217138500004,
+      "medianRelativeIncrease": 0.06641216545123019,
+      "reportedMedianRelativeIncrease": 0.06641216545123022,
+      "arithmeticRoundoffDifference": -2.7755575615628914e-17,
+      "headroomPercentagePoints": 3.3587834548769817,
+      "accepted": true
+    }
+  ],
+  "metricReview": {
+    "aggregate": {
+      "status": "budget_review_required",
+      "withinObservedBudget": 12,
+      "totalDiagnostics": 16,
+      "globalDiagnostics": [
+        {
+          "case": "STCK",
+          "stage": "session_elapsed",
+          "before": {
+            "count": 8,
+            "medianMs": 10620.5936525,
+            "p95Ms": null,
+            "minMs": 10155.472673,
+            "maxMs": 11579.221106
+          },
+          "after": {
+            "count": 8,
+            "medianMs": 10796.3601005,
+            "p95Ms": null,
+            "minMs": 10246.652062000001,
+            "maxMs": 11116.872496
+          },
+          "medianRelativeIncrease": 0.016549587880958727,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": null
+        },
+        {
+          "case": "SMLP",
+          "stage": "session_elapsed",
+          "before": {
+            "count": 8,
+            "medianMs": 18046.696916999994,
+            "p95Ms": null,
+            "minMs": 17377.235008000003,
+            "maxMs": 18876.657775000014
+          },
+          "after": {
+            "count": 8,
+            "medianMs": 19245.217138500004,
+            "p95Ms": null,
+            "minMs": 17049.34290399999,
+            "maxMs": 20446.897582999998
+          },
+          "medianRelativeIncrease": 0.06641216545123019,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": null
+        }
+      ],
+      "phaseOverruns": [
+        {
+          "case": "STCK",
+          "stage": "known_prefix_service",
+          "before": {
+            "count": 32,
+            "medianMs": 9.617089000001215,
+            "p95Ms": 18.527493999999933,
+            "minMs": 7.970822000002954,
+            "maxMs": 22.038447999999335
+          },
+          "after": {
+            "count": 32,
+            "medianMs": 11.032611499998893,
+            "p95Ms": 23.36958799999411,
+            "minMs": 8.017284000001382,
+            "maxMs": 23.4033500000005
+          },
+          "medianRelativeIncrease": 0.14718824999929803,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": 0.2613464076682035
+        },
+        {
+          "case": "STCK",
+          "stage": "known_prefix_request",
+          "before": {
+            "count": 32,
+            "medianMs": 11.805869499999972,
+            "p95Ms": 22.524217000000135,
+            "minMs": 9.576374000003852,
+            "maxMs": 24.29746499999601
+          },
+          "after": {
+            "count": 32,
+            "medianMs": 13.37682500000301,
+            "p95Ms": 25.538751000000047,
+            "minMs": 9.872458999998344,
+            "maxMs": 25.83462100000179
+          },
+          "medianRelativeIncrease": 0.13306563315840836,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": 0.133835240532441
+        },
+        {
+          "case": "STCK",
+          "stage": "known_prefix_guard",
+          "before": {
+            "count": 32,
+            "medianMs": 0.24728049999976065,
+            "p95Ms": 0.3857800000005227,
+            "minMs": 0.0886609999997745,
+            "maxMs": 0.8407470000001922
+          },
+          "after": {
+            "count": 32,
+            "medianMs": 0.2756119999976363,
+            "p95Ms": 0.45110700000077486,
+            "minMs": 0.08467499999824213,
+            "maxMs": 0.4798990000053891
+          },
+          "medianRelativeIncrease": 0.11457231766315212,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": 0.16933744621329172
+        },
+        {
+          "case": "SMLP",
+          "stage": "known_prefix_guard",
+          "before": {
+            "count": 48,
+            "medianMs": 0.38265050000336487,
+            "p95Ms": 10.343482000011136,
+            "minMs": 0.1934259999979986,
+            "maxMs": 18.947704999998678
+          },
+          "after": {
+            "count": 48,
+            "medianMs": 0.4330900000022666,
+            "p95Ms": 0.733583000022918,
+            "minMs": 0.1945770000020275,
+            "maxMs": 10.306252000009408
+          },
+          "medianRelativeIncrease": 0.1318161089517933,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": -0.9290777515712669
+        }
+      ],
+      "p95IncreasesOverTenPercent": [
+        {
+          "case": "STCK",
+          "stage": "restoration",
+          "before": {
+            "count": 96,
+            "medianMs": 7.516321000000062,
+            "p95Ms": 50.34541799999715,
+            "minMs": 1.8348999999980151,
+            "maxMs": 66.82202099999995
+          },
+          "after": {
+            "count": 96,
+            "medianMs": 7.997757999999521,
+            "p95Ms": 63.823403000002145,
+            "minMs": 1.7846250000002328,
+            "maxMs": 84.81478000000061
+          },
+          "medianRelativeIncrease": 0.06405221384231141,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": 0.2677102611404627
+        },
+        {
+          "case": "STCK",
+          "stage": "known_prefix_service",
+          "before": {
+            "count": 32,
+            "medianMs": 9.617089000001215,
+            "p95Ms": 18.527493999999933,
+            "minMs": 7.970822000002954,
+            "maxMs": 22.038447999999335
+          },
+          "after": {
+            "count": 32,
+            "medianMs": 11.032611499998893,
+            "p95Ms": 23.36958799999411,
+            "minMs": 8.017284000001382,
+            "maxMs": 23.4033500000005
+          },
+          "medianRelativeIncrease": 0.14718824999929803,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": 0.2613464076682035
+        },
+        {
+          "case": "SMLP",
+          "stage": "acquisition_and_persistence",
+          "before": {
+            "count": 72,
+            "medianMs": 982.9261910000059,
+            "p95Ms": 2649.28895799999,
+            "minMs": 353.01057299999957,
+            "maxMs": 2975.882368000006
+          },
+          "after": {
+            "count": 72,
+            "medianMs": 985.5163339999926,
+            "p95Ms": 3129.223696000001,
+            "minMs": 341.481037000005,
+            "maxMs": 3418.166194999998
+          },
+          "medianRelativeIncrease": 0.002635134788047111,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": 0.18115605568458815
+        },
+        {
+          "case": "STCK",
+          "stage": "known_prefix_guard",
+          "before": {
+            "count": 32,
+            "medianMs": 0.24728049999976065,
+            "p95Ms": 0.3857800000005227,
+            "minMs": 0.0886609999997745,
+            "maxMs": 0.8407470000001922
+          },
+          "after": {
+            "count": 32,
+            "medianMs": 0.2756119999976363,
+            "p95Ms": 0.45110700000077486,
+            "minMs": 0.08467499999824213,
+            "maxMs": 0.4798990000053891
+          },
+          "medianRelativeIncrease": 0.11457231766315212,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": 0.16933744621329172
+        },
+        {
+          "case": "STCK",
+          "stage": "known_prefix_request",
+          "before": {
+            "count": 32,
+            "medianMs": 11.805869499999972,
+            "p95Ms": 22.524217000000135,
+            "minMs": 9.576374000003852,
+            "maxMs": 24.29746499999601
+          },
+          "after": {
+            "count": 32,
+            "medianMs": 13.37682500000301,
+            "p95Ms": 25.538751000000047,
+            "minMs": 9.872458999998344,
+            "maxMs": 25.83462100000179
+          },
+          "medianRelativeIncrease": 0.13306563315840836,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": 0.133835240532441
+        },
+        {
+          "case": "SMLP",
+          "stage": "persistence",
+          "before": {
+            "count": 152,
+            "medianMs": 154.8830550000057,
+            "p95Ms": 276.46966400000383,
+            "minMs": 19.320487000004505,
+            "maxMs": 397.36727300001075
+          },
+          "after": {
+            "count": 152,
+            "medianMs": 149.94435699999303,
+            "p95Ms": 305.67702400000417,
+            "minMs": 17.821991999997408,
+            "maxMs": 459.5466529999976
+          },
+          "medianRelativeIncrease": -0.031886625686796344,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": 0.1056439957188211
+        }
+      ],
+      "allDistributionsRecalculatedFromRawSessions": true
+    },
+    "cohort1": {
+      "status": "budget_review_required",
+      "withinObservedBudget": 10,
+      "totalDiagnostics": 16,
+      "globalDiagnostics": [
+        {
+          "case": "STCK",
+          "stage": "session_elapsed",
+          "before": {
+            "count": 4,
+            "medianMs": 10799.3838805,
+            "p95Ms": null,
+            "minMs": 10253.819735999998,
+            "maxMs": 11579.221106
+          },
+          "after": {
+            "count": 4,
+            "medianMs": 11052.7905765,
+            "p95Ms": null,
+            "minMs": 10667.953825999997,
+            "maxMs": 11116.872496
+          },
+          "medianRelativeIncrease": 0.023464921592199817,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": null
+        },
+        {
+          "case": "SMLP",
+          "stage": "session_elapsed",
+          "before": {
+            "count": 4,
+            "medianMs": 17687.6192465,
+            "p95Ms": null,
+            "minMs": 17377.235008000003,
+            "maxMs": 18133.083996999994
+          },
+          "after": {
+            "count": 4,
+            "medianMs": 19245.217138500004,
+            "p95Ms": null,
+            "minMs": 17685.564125000004,
+            "maxMs": 20446.897582999998
+          },
+          "medianRelativeIncrease": 0.08806147793509411,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": null
+        }
+      ],
+      "phaseOverruns": [
+        {
+          "case": "STCK",
+          "stage": "known_prefix_service",
+          "before": {
+            "count": 16,
+            "medianMs": 9.848340000000462,
+            "p95Ms": null,
+            "minMs": 8.097263999999996,
+            "maxMs": 18.527493999999933
+          },
+          "after": {
+            "count": 16,
+            "medianMs": 10.953279499999553,
+            "p95Ms": null,
+            "minMs": 8.017284000001382,
+            "maxMs": 23.4033500000005
+          },
+          "medianRelativeIncrease": 0.11219550705997539,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": null
+        },
+        {
+          "case": "STCK",
+          "stage": "known_prefix_request",
+          "before": {
+            "count": 16,
+            "medianMs": 11.978225999999268,
+            "p95Ms": null,
+            "minMs": 9.816514999998617,
+            "maxMs": 20.529532000000472
+          },
+          "after": {
+            "count": 16,
+            "medianMs": 13.332956000002014,
+            "p95Ms": null,
+            "minMs": 9.872458999998344,
+            "maxMs": 25.83462100000179
+          },
+          "medianRelativeIncrease": 0.11309938550189558,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": null
+        },
+        {
+          "case": "STCK",
+          "stage": "known_prefix_guard",
+          "before": {
+            "count": 16,
+            "medianMs": 0.24647450000156823,
+            "p95Ms": null,
+            "minMs": 0.0886609999997745,
+            "maxMs": 0.341443999999683
+          },
+          "after": {
+            "count": 16,
+            "medianMs": 0.2752710000004299,
+            "p95Ms": null,
+            "minMs": 0.08467499999824213,
+            "maxMs": 0.4798990000053891
+          },
+          "medianRelativeIncrease": 0.11683358724200055,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": null
+        },
+        {
+          "case": "SMLP",
+          "stage": "known_prefix_service",
+          "before": {
+            "count": 24,
+            "medianMs": 9.977319999998144,
+            "p95Ms": 21.61049500000081,
+            "minMs": 8.036379999990459,
+            "maxMs": 24.38833399998839
+          },
+          "after": {
+            "count": 24,
+            "medianMs": 11.935350500003551,
+            "p95Ms": 20.613328999999794,
+            "minMs": 9.20521000000008,
+            "maxMs": 28.400789999985136
+          },
+          "medianRelativeIncrease": 0.19624814078387498,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": -0.04614267280786388
+        },
+        {
+          "case": "SMLP",
+          "stage": "known_prefix_request",
+          "before": {
+            "count": 24,
+            "medianMs": 12.874447000001965,
+            "p95Ms": 24.526897999996436,
+            "minMs": 10.12159999999858,
+            "maxMs": 28.445504999996047
+          },
+          "after": {
+            "count": 24,
+            "medianMs": 14.691408999999112,
+            "p95Ms": 23.541439000007813,
+            "minMs": 11.858804000003147,
+            "maxMs": 31.172284000000218
+          },
+          "medianRelativeIncrease": 0.14112932384566657,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": -0.04017870502779297
+        },
+        {
+          "case": "SMLP",
+          "stage": "known_prefix_guard",
+          "before": {
+            "count": 24,
+            "medianMs": 0.3494859999991604,
+            "p95Ms": 10.343482000011136,
+            "minMs": 0.1934259999979986,
+            "maxMs": 11.440253000007942
+          },
+          "after": {
+            "count": 24,
+            "medianMs": 0.46136650000698864,
+            "p95Ms": 0.733583000022918,
+            "minMs": 0.1945770000020275,
+            "maxMs": 9.076109000001452
+          },
+          "medianRelativeIncrease": 0.32012870331886534,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": -0.9290777515712669
+        }
+      ],
+      "p95IncreasesOverTenPercent": [
+        {
+          "case": "SMLP",
+          "stage": "restoration",
+          "before": {
+            "count": 72,
+            "medianMs": 6.317875999993703,
+            "p95Ms": 22.964999999996508,
+            "minMs": 2.1026960000017425,
+            "maxMs": 43.220455999995465
+          },
+          "after": {
+            "count": 72,
+            "medianMs": 6.685618500006967,
+            "p95Ms": 38.06671300000744,
+            "minMs": 2.067773999995552,
+            "maxMs": 96.12293599999975
+          },
+          "medianRelativeIncrease": 0.058206666293170395,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": 0.6575969083393525
+        },
+        {
+          "case": "SMLP",
+          "stage": "acquisition_and_persistence",
+          "before": {
+            "count": 36,
+            "medianMs": 969.1972380000007,
+            "p95Ms": 2644.7679329999955,
+            "minMs": 369.71214599999075,
+            "maxMs": 2649.28895799999
+          },
+          "after": {
+            "count": 36,
+            "medianMs": 1015.1061174999995,
+            "p95Ms": 3044.558289000008,
+            "minMs": 405.09741800000484,
+            "maxMs": 3418.166194999998
+          },
+          "medianRelativeIncrease": 0.04736794297385205,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": 0.15116273568340066
+        },
+        {
+          "case": "STCK",
+          "stage": "restoration",
+          "before": {
+            "count": 48,
+            "medianMs": 7.832419500002288,
+            "p95Ms": 49.75040099999751,
+            "minMs": 1.8523699999968812,
+            "maxMs": 51.63222200000018
+          },
+          "after": {
+            "count": 48,
+            "medianMs": 8.369207499999902,
+            "p95Ms": 56.44018999999389,
+            "minMs": 1.7995689999988826,
+            "maxMs": 72.78800000000047
+          },
+          "medianRelativeIncrease": 0.06853412282085469,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": 0.13446703675809002
+        },
+        {
+          "case": "SMLP",
+          "stage": "persistence",
+          "before": {
+            "count": 76,
+            "medianMs": 150.86152950000542,
+            "p95Ms": 276.4742159999878,
+            "minMs": 19.320487000004505,
+            "maxMs": 290.87376299999596
+          },
+          "after": {
+            "count": 76,
+            "medianMs": 156.37096449999808,
+            "p95Ms": 305.67702400000417,
+            "minMs": 20.31962000000931,
+            "maxMs": 369.11861799999315
+          },
+          "medianRelativeIncrease": 0.03651981401920268,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": 0.10562579188222632
+        }
+      ],
+      "allDistributionsRecalculatedFromRawSessions": true
+    },
+    "cohort2": {
+      "status": "budget_review_required",
+      "withinObservedBudget": 13,
+      "totalDiagnostics": 16,
+      "globalDiagnostics": [
+        {
+          "case": "STCK",
+          "stage": "session_elapsed",
+          "before": {
+            "count": 4,
+            "medianMs": 10474.639974999998,
+            "p95Ms": null,
+            "minMs": 10155.472673,
+            "maxMs": 10636.760377999999
+          },
+          "after": {
+            "count": 4,
+            "medianMs": 10584.9160895,
+            "p95Ms": null,
+            "minMs": 10246.652062000001,
+            "maxMs": 10924.766375000003
+          },
+          "medianRelativeIncrease": 0.010527914540566563,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": null
+        },
+        {
+          "case": "SMLP",
+          "stage": "session_elapsed",
+          "before": {
+            "count": 4,
+            "medianMs": 18551.237411,
+            "p95Ms": null,
+            "minMs": 17482.443698000003,
+            "maxMs": 18876.657775000014
+          },
+          "after": {
+            "count": 4,
+            "medianMs": 18620.491169499997,
+            "p95Ms": null,
+            "minMs": 17049.34290399999,
+            "maxMs": 20249.47741600001
+          },
+          "medianRelativeIncrease": 0.0037331072297599466,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": null
+        }
+      ],
+      "phaseOverruns": [
+        {
+          "case": "STCK",
+          "stage": "known_prefix_service",
+          "before": {
+            "count": 16,
+            "medianMs": 9.294617499999731,
+            "p95Ms": null,
+            "minMs": 7.970822000002954,
+            "maxMs": 22.038447999999335
+          },
+          "after": {
+            "count": 16,
+            "medianMs": 11.032611499998893,
+            "p95Ms": null,
+            "minMs": 8.469810000000507,
+            "maxMs": 23.36958799999411
+          },
+          "medianRelativeIncrease": 0.18698929783815332,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": null
+        },
+        {
+          "case": "STCK",
+          "stage": "known_prefix_request",
+          "before": {
+            "count": 16,
+            "medianMs": 11.127472500000295,
+            "p95Ms": null,
+            "minMs": 9.576374000003852,
+            "maxMs": 24.29746499999601
+          },
+          "after": {
+            "count": 16,
+            "medianMs": 13.37682500000301,
+            "p95Ms": null,
+            "minMs": 10.46479200000067,
+            "maxMs": 25.538751000000047
+          },
+          "medianRelativeIncrease": 0.20214406281414354,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": null
+        },
+        {
+          "case": "STCK",
+          "stage": "persistence",
+          "before": {
+            "count": 52,
+            "medianMs": 162.841694499999,
+            "p95Ms": 339.0084450000004,
+            "minMs": 14.348762000001443,
+            "maxMs": 374.95540299999993
+          },
+          "after": {
+            "count": 52,
+            "medianMs": 180.00580600000103,
+            "p95Ms": 368.6579720000009,
+            "minMs": 13.870490000001155,
+            "maxMs": 389.2894840000008
+          },
+          "medianRelativeIncrease": 0.10540366552131486,
+          "result": "over_budget_with_noise_unresolved",
+          "p95RelativeIncrease": 0.08745955281438622
+        }
+      ],
+      "p95IncreasesOverTenPercent": [
+        {
+          "case": "STCK",
+          "stage": "restoration",
+          "before": {
+            "count": 48,
+            "medianMs": 7.516321000000062,
+            "p95Ms": 50.34541799999715,
+            "minMs": 1.8348999999980151,
+            "maxMs": 66.82202099999995
+          },
+          "after": {
+            "count": 48,
+            "medianMs": 7.848141999998916,
+            "p95Ms": 63.823403000002145,
+            "minMs": 1.7846250000002328,
+            "maxMs": 84.81478000000061
+          },
+          "medianRelativeIncrease": 0.04414673082733578,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": 0.2677102611404627
+        },
+        {
+          "case": "SMLP",
+          "stage": "persistence",
+          "before": {
+            "count": 76,
+            "medianMs": 156.0551415000009,
+            "p95Ms": 268.4977110000036,
+            "minMs": 19.52764100000786,
+            "maxMs": 397.36727300001075
+          },
+          "after": {
+            "count": 76,
+            "medianMs": 141.58010049999575,
+            "p95Ms": 313.8341000000073,
+            "minMs": 17.821991999997408,
+            "maxMs": 459.5466529999976
+          },
+          "medianRelativeIncrease": -0.09275593781064284,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": 0.1688520502880677
+        },
+        {
+          "case": "SMLP",
+          "stage": "acquisition_and_persistence",
+          "before": {
+            "count": 36,
+            "medianMs": 987.3051859999978,
+            "p95Ms": 2912.7070609999937,
+            "minMs": 353.01057299999957,
+            "maxMs": 2975.882368000006
+          },
+          "after": {
+            "count": 36,
+            "medianMs": 961.7148584999959,
+            "p95Ms": 3233.148503000004,
+            "minMs": 341.481037000005,
+            "maxMs": 3414.795739999987
+          },
+          "medianRelativeIncrease": -0.025919369069334453,
+          "result": "within_observed_budget",
+          "p95RelativeIncrease": 0.11001499130846204
+        }
+      ],
+      "allDistributionsRecalculatedFromRawSessions": true
+    }
+  },
+  "measuredSessionLedger": [
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 1,
+      "startedAt": "2026-11-10T15:14:54.912Z",
+      "actions": 10,
+      "series": "A1",
+      "startedAtLocal": "2026-11-10T12:14:54.912000-03:00",
+      "elapsedMs": 11579.221106
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 2,
+      "startedAt": "2026-11-10T15:15:07.766Z",
+      "actions": 10,
+      "series": "A1",
+      "startedAtLocal": "2026-11-10T12:15:07.766000-03:00",
+      "elapsedMs": 10661.177982999998
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 3,
+      "startedAt": "2026-11-10T15:15:19.433Z",
+      "actions": 10,
+      "series": "A1",
+      "startedAtLocal": "2026-11-10T12:15:19.433000-03:00",
+      "elapsedMs": 10253.819735999998
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 4,
+      "startedAt": "2026-11-10T15:15:30.631Z",
+      "actions": 10,
+      "series": "A1",
+      "startedAtLocal": "2026-11-10T12:15:30.631000-03:00",
+      "elapsedMs": 10937.589778000001
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 1,
+      "startedAt": "2026-11-10T15:15:48.280Z",
+      "actions": 15,
+      "series": "A1",
+      "startedAtLocal": "2026-11-10T12:15:48.280000-03:00",
+      "elapsedMs": 17377.235008000003
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 2,
+      "startedAt": "2026-11-10T15:16:06.889Z",
+      "actions": 15,
+      "series": "A1",
+      "startedAtLocal": "2026-11-10T12:16:06.889000-03:00",
+      "elapsedMs": 17960.309836999993
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 3,
+      "startedAt": "2026-11-10T15:16:26.229Z",
+      "actions": 15,
+      "series": "A1",
+      "startedAtLocal": "2026-11-10T12:16:26.229000-03:00",
+      "elapsedMs": 18133.083996999994
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 4,
+      "startedAt": "2026-11-10T15:16:45.707Z",
+      "actions": 15,
+      "series": "A1",
+      "startedAtLocal": "2026-11-10T12:16:45.707000-03:00",
+      "elapsedMs": 17414.928656000004
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "STCK",
+      "round": 1,
+      "startedAt": "2026-11-10T15:17:10.234Z",
+      "actions": 10,
+      "series": "B1",
+      "startedAtLocal": "2026-11-10T12:17:10.234000-03:00",
+      "elapsedMs": 11076.877697000002
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "STCK",
+      "round": 2,
+      "startedAt": "2026-11-10T15:17:22.328Z",
+      "actions": 10,
+      "series": "B1",
+      "startedAtLocal": "2026-11-10T12:17:22.328000-03:00",
+      "elapsedMs": 11028.703456
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "STCK",
+      "round": 3,
+      "startedAt": "2026-11-10T15:17:34.333Z",
+      "actions": 10,
+      "series": "B1",
+      "startedAtLocal": "2026-11-10T12:17:34.333000-03:00",
+      "elapsedMs": 11116.872496
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "STCK",
+      "round": 4,
+      "startedAt": "2026-11-10T15:17:46.473Z",
+      "actions": 10,
+      "series": "B1",
+      "startedAtLocal": "2026-11-10T12:17:46.473000-03:00",
+      "elapsedMs": 10667.953825999997
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "SMLP",
+      "round": 1,
+      "startedAt": "2026-11-10T15:18:03.632Z",
+      "actions": 15,
+      "series": "B1",
+      "startedAtLocal": "2026-11-10T12:18:03.632000-03:00",
+      "elapsedMs": 17685.564125000004
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "SMLP",
+      "round": 2,
+      "startedAt": "2026-11-10T15:18:22.761Z",
+      "actions": 15,
+      "series": "B1",
+      "startedAtLocal": "2026-11-10T12:18:22.761000-03:00",
+      "elapsedMs": 19191.586318
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "SMLP",
+      "round": 3,
+      "startedAt": "2026-11-10T15:18:43.428Z",
+      "actions": 15,
+      "series": "B1",
+      "startedAtLocal": "2026-11-10T12:18:43.428000-03:00",
+      "elapsedMs": 19298.847959000006
+    },
+    {
+      "cohort": "cohort_1",
+      "side": "after",
+      "case": "SMLP",
+      "round": 4,
+      "startedAt": "2026-11-10T15:19:03.972Z",
+      "actions": 15,
+      "series": "B1",
+      "startedAtLocal": "2026-11-10T12:19:03.972000-03:00",
+      "elapsedMs": 20446.897582999998
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 1,
+      "startedAt": "2026-11-10T15:21:49.958Z",
+      "actions": 10,
+      "series": "A2",
+      "startedAtLocal": "2026-11-10T12:21:49.958000-03:00",
+      "elapsedMs": 10636.760377999999
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 2,
+      "startedAt": "2026-11-10T15:22:01.756Z",
+      "actions": 10,
+      "series": "A2",
+      "startedAtLocal": "2026-11-10T12:22:01.756000-03:00",
+      "elapsedMs": 10155.472673
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 3,
+      "startedAt": "2026-11-10T15:22:12.883Z",
+      "actions": 10,
+      "series": "A2",
+      "startedAtLocal": "2026-11-10T12:22:12.883000-03:00",
+      "elapsedMs": 10344.853022999996
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "STCK",
+      "round": 4,
+      "startedAt": "2026-11-10T15:22:24.285Z",
+      "actions": 10,
+      "series": "A2",
+      "startedAtLocal": "2026-11-10T12:22:24.285000-03:00",
+      "elapsedMs": 10604.426927
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 1,
+      "startedAt": "2026-11-10T15:22:41.041Z",
+      "actions": 15,
+      "series": "A2",
+      "startedAtLocal": "2026-11-10T12:22:41.041000-03:00",
+      "elapsedMs": 18851.58225
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 2,
+      "startedAt": "2026-11-10T15:23:01.051Z",
+      "actions": 15,
+      "series": "A2",
+      "startedAtLocal": "2026-11-10T12:23:01.051000-03:00",
+      "elapsedMs": 18250.892571999997
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 3,
+      "startedAt": "2026-11-10T15:23:20.411Z",
+      "actions": 15,
+      "series": "A2",
+      "startedAtLocal": "2026-11-10T12:23:20.411000-03:00",
+      "elapsedMs": 17482.443698000003
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "baseline",
+      "case": "SMLP",
+      "round": 4,
+      "startedAt": "2026-11-10T15:23:39.145Z",
+      "actions": 15,
+      "series": "A2",
+      "startedAtLocal": "2026-11-10T12:23:39.145000-03:00",
+      "elapsedMs": 18876.657775000014
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "STCK",
+      "round": 1,
+      "startedAt": "2026-11-10T15:19:32.441Z",
+      "actions": 10,
+      "series": "B2",
+      "startedAtLocal": "2026-11-10T12:19:32.441000-03:00",
+      "elapsedMs": 10246.652062000001
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "STCK",
+      "round": 2,
+      "startedAt": "2026-11-10T15:19:43.789Z",
+      "actions": 10,
+      "series": "B2",
+      "startedAtLocal": "2026-11-10T12:19:43.789000-03:00",
+      "elapsedMs": 10667.322189000002
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "STCK",
+      "round": 3,
+      "startedAt": "2026-11-10T15:19:55.714Z",
+      "actions": 10,
+      "series": "B2",
+      "startedAtLocal": "2026-11-10T12:19:55.714000-03:00",
+      "elapsedMs": 10924.766375000003
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "STCK",
+      "round": 4,
+      "startedAt": "2026-11-10T15:20:07.681Z",
+      "actions": 10,
+      "series": "B2",
+      "startedAtLocal": "2026-11-10T12:20:07.681000-03:00",
+      "elapsedMs": 10502.509989999999
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "SMLP",
+      "round": 1,
+      "startedAt": "2026-11-10T15:20:24.990Z",
+      "actions": 15,
+      "series": "B2",
+      "startedAtLocal": "2026-11-10T12:20:24.990000-03:00",
+      "elapsedMs": 17510.613576999996
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "SMLP",
+      "round": 2,
+      "startedAt": "2026-11-10T15:20:44.009Z",
+      "actions": 15,
+      "series": "B2",
+      "startedAtLocal": "2026-11-10T12:20:44.009000-03:00",
+      "elapsedMs": 20249.47741600001
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "SMLP",
+      "round": 3,
+      "startedAt": "2026-11-10T15:21:05.617Z",
+      "actions": 15,
+      "series": "B2",
+      "startedAtLocal": "2026-11-10T12:21:05.617000-03:00",
+      "elapsedMs": 19730.368762
+    },
+    {
+      "cohort": "cohort_2",
+      "side": "after",
+      "case": "SMLP",
+      "round": 4,
+      "startedAt": "2026-11-10T15:21:26.697Z",
+      "actions": 15,
+      "series": "B2",
+      "startedAtLocal": "2026-11-10T12:21:26.697000-03:00",
+      "elapsedMs": 17049.34290399999
+    }
+  ],
+  "excludedWarmupLedger": [
+    {
+      "cohort": 1,
+      "side": "baseline",
+      "series": "A1",
+      "case": "STCK",
+      "round": 0,
+      "actions": 3,
+      "warmup": true
+    },
+    {
+      "cohort": 1,
+      "side": "baseline",
+      "series": "A1",
+      "case": "SMLP",
+      "round": 0,
+      "actions": 3,
+      "warmup": true
+    },
+    {
+      "cohort": 1,
+      "side": "after",
+      "series": "B1",
+      "case": "STCK",
+      "round": 0,
+      "actions": 3,
+      "warmup": true
+    },
+    {
+      "cohort": 1,
+      "side": "after",
+      "series": "B1",
+      "case": "SMLP",
+      "round": 0,
+      "actions": 3,
+      "warmup": true
+    },
+    {
+      "cohort": 2,
+      "side": "baseline",
+      "series": "A2",
+      "case": "STCK",
+      "round": 0,
+      "actions": 3,
+      "warmup": true
+    },
+    {
+      "cohort": 2,
+      "side": "baseline",
+      "series": "A2",
+      "case": "SMLP",
+      "round": 0,
+      "actions": 3,
+      "warmup": true
+    },
+    {
+      "cohort": 2,
+      "side": "after",
+      "series": "B2",
+      "case": "STCK",
+      "round": 0,
+      "actions": 3,
+      "warmup": true
+    },
+    {
+      "cohort": 2,
+      "side": "after",
+      "series": "B2",
+      "case": "SMLP",
+      "round": 0,
+      "actions": 3,
+      "warmup": true
+    }
+  ],
+  "checks": [
+    {
+      "name": "declared_cases_and_rounds",
+      "passed": true
+    },
+    {
+      "name": "strict_global_policy",
+      "passed": true
+    },
+    {
+      "name": "unchanged_phase_definition",
+      "passed": true
+    },
+    {
+      "name": "declared_and_observed_abba_order",
+      "passed": true
+    },
+    {
+      "name": "window_completed",
+      "passed": true
+    },
+    {
+      "name": "window_sequential_without_overlap",
+      "passed": true
+    },
+    {
+      "name": "declaration_precedes_window",
+      "passed": true
+    },
+    {
+      "name": "retained_231_review_passed",
+      "passed": true
+    },
+    {
+      "name": "A1_report_and_source_identity",
+      "passed": true
+    },
+    {
+      "name": "A1_case_list",
+      "passed": true
+    },
+    {
+      "name": "A1_STCK_rounds",
+      "passed": true
+    },
+    {
+      "name": "A1_STCK_actions_and_times",
+      "passed": true
+    },
+    {
+      "name": "A1_SMLP_rounds",
+      "passed": true
+    },
+    {
+      "name": "A1_SMLP_actions_and_times",
+      "passed": true
+    },
+    {
+      "name": "B1_report_and_source_identity",
+      "passed": true
+    },
+    {
+      "name": "B1_case_list",
+      "passed": true
+    },
+    {
+      "name": "B1_STCK_rounds",
+      "passed": true
+    },
+    {
+      "name": "B1_STCK_actions_and_times",
+      "passed": true
+    },
+    {
+      "name": "B1_SMLP_rounds",
+      "passed": true
+    },
+    {
+      "name": "B1_SMLP_actions_and_times",
+      "passed": true
+    },
+    {
+      "name": "A2_report_and_source_identity",
+      "passed": true
+    },
+    {
+      "name": "A2_case_list",
+      "passed": true
+    },
+    {
+      "name": "A2_STCK_rounds",
+      "passed": true
+    },
+    {
+      "name": "A2_STCK_actions_and_times",
+      "passed": true
+    },
+    {
+      "name": "A2_SMLP_rounds",
+      "passed": true
+    },
+    {
+      "name": "A2_SMLP_actions_and_times",
+      "passed": true
+    },
+    {
+      "name": "B2_report_and_source_identity",
+      "passed": true
+    },
+    {
+      "name": "B2_case_list",
+      "passed": true
+    },
+    {
+      "name": "B2_STCK_rounds",
+      "passed": true
+    },
+    {
+      "name": "B2_STCK_actions_and_times",
+      "passed": true
+    },
+    {
+      "name": "B2_SMLP_rounds",
+      "passed": true
+    },
+    {
+      "name": "B2_SMLP_actions_and_times",
+      "passed": true
+    },
+    {
+      "name": "all_measured_sessions_retained_with_multiplicity",
+      "passed": true
+    },
+    {
+      "name": "measured_and_warmup_totals",
+      "passed": true
+    },
+    {
+      "name": "no_measured_exclusion_or_selected_cohort",
+      "passed": true
+    },
+    {
+      "name": "STCK_pooled_global_recalculation",
+      "passed": true
+    },
+    {
+      "name": "SMLP_pooled_global_recalculation",
+      "passed": true
+    },
+    {
+      "name": "global_verdict_matches",
+      "passed": true
+    },
+    {
+      "name": "aggregate_case_and_stage_coverage",
+      "passed": true
+    },
+    {
+      "name": "aggregate_STCK_session_elapsed_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_STCK_new_decision_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_STCK_known_prefix_service_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_STCK_known_prefix_request_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_STCK_known_prefix_guard_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_STCK_acquisition_and_persistence_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_STCK_persistence_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_STCK_restoration_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_SMLP_session_elapsed_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_SMLP_new_decision_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_SMLP_known_prefix_service_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_SMLP_known_prefix_request_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_SMLP_known_prefix_guard_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_SMLP_acquisition_and_persistence_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_SMLP_persistence_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_SMLP_restoration_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "aggregate_unresolved_list_preserved",
+      "passed": true
+    },
+    {
+      "name": "cohort1_case_and_stage_coverage",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_session_elapsed_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_new_decision_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_known_prefix_service_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_known_prefix_request_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_known_prefix_guard_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_acquisition_and_persistence_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_persistence_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_STCK_restoration_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_session_elapsed_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_new_decision_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_known_prefix_service_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_known_prefix_request_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_known_prefix_guard_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_acquisition_and_persistence_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_persistence_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_SMLP_restoration_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort1_unresolved_list_preserved",
+      "passed": true
+    },
+    {
+      "name": "cohort2_case_and_stage_coverage",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_session_elapsed_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_new_decision_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_known_prefix_service_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_known_prefix_request_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_known_prefix_guard_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_acquisition_and_persistence_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_persistence_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_STCK_restoration_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_session_elapsed_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_new_decision_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_known_prefix_service_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_known_prefix_request_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_known_prefix_guard_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_acquisition_and_persistence_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_persistence_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_SMLP_restoration_distribution_and_classification",
+      "passed": true
+    },
+    {
+      "name": "cohort2_unresolved_list_preserved",
+      "passed": true
+    },
+    {
+      "name": "aggregate_twelve_of_sixteen_four_overruns",
+      "passed": true
+    },
+    {
+      "name": "both_cohort_diagnostics_preserved",
+      "passed": true
+    },
+    {
+      "name": "seven_official_tools_match_declaration",
+      "passed": true
+    },
+    {
+      "name": "input_bytes_unchanged_during_review",
+      "passed": true
+    }
+  ],
+  "checkedCount": 96,
+  "unsatisfied": [],
+  "inputs": [
+    {
+      "path": "docs/migration/lot3g-evidence/performance/window.json",
+      "bytes": 10160,
+      "sha256": "938701e3061ac6e1ae2a26d03c35d503f0e196dd8d333810a4a99badaa7dae2f"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/declaration.json",
+      "bytes": 4102,
+      "sha256": "3224f875715181be556063ef63a91a6a49f74aea2d1a6dab5a5100b73d3c2a13"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/global-budget-policy.json",
+      "bytes": 2009,
+      "sha256": "96876fa3f683bca67c8f8d314cb0b42011b48c91b02d0d1c63aa06bd9e84bb2b"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/combined-comparison.json",
+      "bytes": 31232,
+      "sha256": "1fe05aea7a623abb381016372412f493e082cc62d4e790683e4fcb3390c78f76"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/global-budget-decision.json",
+      "bytes": 30063,
+      "sha256": "fc98b778492bda82934da0d5b4a4490a9dd1b8177125dcb6056bbc843e7f3149"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/consolidation-review.json",
+      "bytes": 46779,
+      "sha256": "8c5c9e514088e5f04a5162e0afde0e5514bf1e9c6668982248e984499a551294"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort1/baseline.json",
+      "bytes": 427696,
+      "sha256": "243087f0becd29958751b919ffdc6c8de5a91b53fc5ff5d8d1c2f7823f1b6ddd"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort1/after.json",
+      "bytes": 428069,
+      "sha256": "ca0dd201131d977596f54baa9a67c5fcd7062c8927a2c4dede4a71298a3cbee8"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort1/comparison.json",
+      "bytes": 26303,
+      "sha256": "5d1d84c3ae4350207690202b7cf78a7483690a40be8adda67774b5724cf697c5"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort2/baseline.json",
+      "bytes": 427702,
+      "sha256": "eb89b8397ebb8d8935b3d83a51455c1c4aba17756ab15fa63981ed69a5ffa85f"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort2/after.json",
+      "bytes": 428034,
+      "sha256": "ead110f710a32d6d80b0830d1a836ed51ada41c9b58a8b04cb014570064a9ba3"
+    },
+    {
+      "path": "docs/migration/lot3g-evidence/performance/cohort2/comparison.json",
+      "bytes": 25757,
+      "sha256": "26bc8eb73bf016e706861ed263a5acae96daf5ad0f93540bf20fa976fa0bfd33"
+    }
+  ],
+  "officialTools": [
+    {
+      "path": "scripts/run-native-cost-window.py",
+      "bytes": 8933,
+      "sha256": "0ec9c69c859d0555e963643010d2254caee8c63d1c9a98ec07cd9af0ce0ce613"
+    },
+    {
+      "path": "scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "bytes": 9861,
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb"
+    },
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "bytes": 19460,
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34"
+    },
+    {
+      "path": "scripts/review-native-cost-consolidation.py",
+      "bytes": 17810,
+      "sha256": "b13174cec5befbb816e70554fd5d47da215eae941b983e66f05b9dd4417b3bd4"
+    },
+    {
+      "path": "scripts/review-native-global-cost-window.py",
+      "bytes": 22204,
+      "sha256": "9ab2ecd9d6ddf234e96332421a6e55937a766495c1a20dd223f4441d6b516940"
+    },
+    {
+      "path": "scripts/review-native-global-cost-budget.py",
+      "bytes": 8476,
+      "sha256": "b4312bcdae058ba58c16b4e5e24cb53626496b38f8a154834e0452a43e97d341"
+    }
+  ],
+  "inputReceiptsUnchanged": true,
+  "benchmarkExecuted": false,
+  "testExecuted": false,
+  "buildExecuted": false,
+  "runtimeOrGameExecuted": false,
+  "reviewPreparation": {
+    "initialInlineAttempt": "Python SyntaxError before execution: an unclosed parenthesis. No input or output file was changed. Corrected only the independent review expression; retained reports and official tools were never repaired."
+  },
+  "conclusions": [
+    "Global acceptance is reproduced for both cases from all 32 measured sessions: STCK +1.6549587880958727%, SMLP +6.641216545123019%.",
+    "Aggregate diagnostics remain 12/16 with STCK known_prefix_service, known_prefix_request and known_prefix_guard, plus SMLP known_prefix_guard, above the historical phase threshold.",
+    "Cohort 1 remains 10/16; cohort 2 remains 13/16. SMLP global cohort diagnostics differ: +8.806147793509411% versus +0.37331072297599466%. Both are fully retained, without selecting a cohort.",
+    "Largest aggregate p95 increases: STCK restoration +26.77102611404627% and known_prefix_service +26.13464076682035%. Cohort 1 SMLP restoration has a larger separate p95 increase, +65.75969083393525%.",
+    "Approximately 1e-16 differences between mathematically equivalent global ratio formulas are floating-point roundoff and affect neither decision nor retained data."
+  ],
+  "qualification": "This lightweight review does not replace the retained 231-check consolidation review, prove hardware-independent speed, identify causal costs, establish tail confidence intervals, or demonstrate FramedWindow contribution in a public game. Nested phases are not summed, cohort ratios are not averaged and one game does not compensate another. Results and seven official tools are unchanged."
+}

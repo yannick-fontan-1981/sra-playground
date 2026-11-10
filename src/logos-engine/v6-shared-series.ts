@@ -31,6 +31,7 @@ import { proposedTypedMaterialInquiryWitness } from './v6-typed-material-evidenc
 import { RadialPortMemory, commonRadialPortProposal, bindRadialPort, radialPortBefore, radialPortAfter } from './v6-radial-port-access.ts';
 import { FieldServiceMemory, commonFieldServiceProposal, bindFieldService, fieldServiceBefore, fieldServiceAfter } from './v6-field-service-access.ts';
 import { RootedQuotaMemory, commonRootedQuotaProposal, bindRootedQuota, rootedQuotaBefore, rootedQuotaAfter } from './v6-rooted-quota-access.ts';
+import { FramedWindowMemory, proposeFramedWindowCommon, bindFramedWindow, framedWindowBefore, framedWindowAfter } from './v6-framed-window-access.ts';
 import { OccludedCatalogueMemory, commonOccludedCatalogueProposal, commonCatalogueViewProposal,
   bindOccludedCatalogue, occludedCatalogueBefore, occludedCatalogueAfter } from './v6-occluded-catalogue-access.ts';
 import { QueuedFieldMemory, commonQueuedFieldProposal, bindQueuedField, queuedFieldBefore, queuedFieldAfter } from './v6-queued-field-access.ts';
@@ -57,7 +58,7 @@ import { pythonEqual as equal, pythonTruthy as truth } from './v6-operations.ts'
 import type { OccurrenceRecord as R } from './v6-occurrence-scene.ts';
 import type { NativeFamily, NativeRows, NativePublicObservation, NativeProposal } from './v6-native-types.ts';
 
-export const SHARED_SERIES_DIGEST_SCOPE = 'native_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_exposed_reception_relational_chamber_panel_service_rooted_line_reception_service_and_reference_population_six_observed_compositions_v6';
+export const SHARED_SERIES_DIGEST_SCOPE = 'native_program_relations_recall_typed_material_and_pose_radial_ports_field_service_rooted_quota_mark_support_framed_window_occluded_catalogue_and_view_queued_field_product_panel_labeled_sequence_trace_field_linked_packet_cell_placement_alternating_graph_coupled_support_exposed_reception_relational_chamber_panel_service_rooted_line_reception_service_and_reference_population_six_observed_compositions_v6';
 
 export interface NativeSharedSeriesOptions {
   /** Native current-control revalidation; the default preserves source contracts. */
@@ -103,6 +104,7 @@ interface SharedWorkingStamp {
   radial: RadialPortMemory; radialRevision: number;
   service: FieldServiceMemory; serviceRevision: number;
   rooted: RootedQuotaMemory; rootedRevision: number;
+  framedWindow: FramedWindowMemory; framedWindowRevision: number; framedWindowWitness: WorkingWitness;
   catalogue: OccludedCatalogueMemory; catalogueRevision: number;
   queued: QueuedFieldMemory; queuedRevision: number;
   product: ProductPanelMemory; productRevision: number;
@@ -129,6 +131,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
   radial = new RadialPortMemory();
   service = new FieldServiceMemory();
   rooted = new RootedQuotaMemory();
+  framedWindow = new FramedWindowMemory();
   catalogue = new OccludedCatalogueMemory();
   queued = new QueuedFieldMemory();
   product = new ProductPanelMemory();
@@ -172,6 +175,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       radial: this.radial, radialRevision: this.radial.nativeRevision,
       service: this.service, serviceRevision: this.service.nativeRevision,
       rooted: this.rooted, rootedRevision: this.rooted.nativeRevision,
+      framedWindow: this.framedWindow, framedWindowRevision: this.framedWindow.nativeRevision, framedWindowWitness: workingWitness(this.framedWindow),
       catalogue: this.catalogue, catalogueRevision: this.catalogue.nativeRevision,
       queued: this.queued, queuedRevision: this.queued.nativeRevision,
       product: this.product, productRevision: this.product.nativeRevision,
@@ -196,6 +200,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       && this.radial === stamp.radial && this.radial.nativeRevision === stamp.radialRevision
       && this.service === stamp.service && this.service.nativeRevision === stamp.serviceRevision
       && this.rooted === stamp.rooted && this.rooted.nativeRevision === stamp.rootedRevision
+      && this.framedWindow === stamp.framedWindow && this.framedWindow.nativeRevision === stamp.framedWindowRevision && witnessMatches(stamp.framedWindowWitness, this.framedWindow)
       && this.catalogue === stamp.catalogue && this.catalogue.nativeRevision === stamp.catalogueRevision
       && this.queued === stamp.queued && this.queued.nativeRevision === stamp.queuedRevision
       && this.product === stamp.product && this.product.nativeRevision === stamp.productRevision
@@ -326,6 +331,12 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     deadlineMs: number | null, now?: () => number): Promise<R | null> {
     return commonRootedQuotaProposal(this.rooted, observation, rows, inputs, remaining, config, deadlineMs, now, undefined,
       { extendedMarkSupport: this.extendedRootedMarkSupport });
+  }
+
+  /** Current exact-window experiment at its declared source entry. */
+  framedWindowPropose(observation: R, rows: NativeRows, inputs: readonly R[], remaining: number, config: R,
+    deadlineMs: number | null, now?: () => number): Promise<R | null> {
+    return proposeFramedWindowCommon(this.framedWindow, observation, rows, inputs, remaining, config, deadlineMs, now);
   }
 
   /** ProductPanelConstraint's declared entry, sharing the actual acquired journal. */
@@ -481,6 +492,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     if (Object.hasOwn(proposal, 'product_panel_plan')) { bindProductPanel(proposal, domain); return; }
     if (Object.hasOwn(proposal, 'queued_field_plan')) { bindQueuedField(proposal, domain); return; }
     if (Object.hasOwn(proposal, 'occluded_catalogue_plan')) { bindOccludedCatalogue(proposal, domain); return; }
+    if (Object.hasOwn(proposal, 'framed_window_plan')) { bindFramedWindow(proposal, domain); return; }
     if (Object.hasOwn(proposal, 'rooted_quota_plan')) { bindRootedQuota(proposal, domain); return; }
     if (Object.hasOwn(proposal, 'nested_control_plan')) { bindFieldService(proposal, domain); return; }
     if (Object.hasOwn(proposal, 'radial_port_plan')) { bindRadialPort(proposal, domain); return; }
@@ -535,6 +547,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     if (truth(proposal.queued_field_plan)) return queuedFieldBefore(proposal, index, packet.frame_rows,
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs }, this.queued);
     if (truth(proposal.occluded_catalogue_plan)) return occludedCatalogueBefore(proposal, index, packet.frame_rows,
+      { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
+    if (truth(proposal.framed_window_plan)) return framedWindowBefore(proposal, index, packet.frame_rows,
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref, available: packet.available_action_refs });
     if (truth(proposal.program_relation_plan)) return programRelationBefore(proposal, index, packet.frame_rows,
       { epoch: packet.level, score: packet.levels_completed, observation_ref: observation.observation_ref,
@@ -591,6 +605,8 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     if (truth(proposal.queued_field_plan)) return queuedFieldAfter(proposal, index, first, second,
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
     if (truth(proposal.occluded_catalogue_plan)) return occludedCatalogueAfter(proposal, index, first, second,
+      { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
+    if (truth(proposal.framed_window_plan)) return framedWindowAfter(proposal, index, first, second,
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state });
     if (truth(proposal.program_relation_plan)) return programRelationAfter(proposal, index, first, second,
       { epoch: after.level_epoch, score: after.levels_completed, state: after.state,
@@ -656,6 +672,9 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       events.push(...this.service.record(before, command, after, first, second, parentProposal, index));
     }
     events.push(...this.rooted.record(before, command, after, first, second, parentProposal, index));
+    // FramedWindowAccess acquires its actual point response after RootedQuota
+    // and before Catalogue, even when the older rooted chain cuts off.
+    events.push(...this.framedWindow.record(before, command, after, first, second, parentProposal, index));
     // Public returns chosen by any provider can acquire a field-changing input.
     events.push(...this.catalogue.record(before, command, after, first, second, proposal, index));
     // ProductPanelAccess calls its inherited record first, then measures every
@@ -702,7 +721,11 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
 
   private sharedDigest(): string {
     let digest = this.memory.retainedDigest();
-    for (const layer of [this.material, this.radial, this.service, this.rooted, this.catalogue, this.queued, this.product, this.labeled, this.trace,
+    for (const layer of [this.material, this.radial, this.service, this.rooted]) digest = layer.retainedDigest(digest);
+    // Native empty-layer compatibility preserves published 0.47 checkpoints.
+    // Once acquired, this own layer remains at its inherited source position.
+    if (this.framedWindow.eventCount) digest = this.framedWindow.retainedDigest(digest);
+    for (const layer of [this.catalogue, this.queued, this.product, this.labeled, this.trace,
       this.linked, this.cells, this.graph, this.pairs, this.auxiliary]) digest = layer.retainedDigest(digest);
     // Each new layer enters only after its first event, preserving historical
     // checkpoints. This is a native migration envelope, not the full source digest.
@@ -761,13 +784,14 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
 
   private restoreOwned(state: Readonly<R>): void {
     if (!Array.isArray(state.events) || typeof state.digest !== 'string') throw new TypeError('Incomplete shared series memory');
-    const events = [...state.events] as R[], memory = new SharedOccurrenceMemory(), material = new TypedMaterialMemory(), radial = new RadialPortMemory(), service = new FieldServiceMemory(), rooted = new RootedQuotaMemory(), catalogue = new OccludedCatalogueMemory(), queued = new QueuedFieldMemory(), product = new ProductPanelMemory(), labeled = new LabeledSequenceMemory(), trace = new TraceFieldMemory(), linked = new LinkedPacketMemory(), cells = new CellPlacementMemory(), graph = new AlternatingGraphMemory(),
+    const events = [...state.events] as R[], memory = new SharedOccurrenceMemory(), material = new TypedMaterialMemory(), radial = new RadialPortMemory(), service = new FieldServiceMemory(), rooted = new RootedQuotaMemory(), framedWindow = new FramedWindowMemory(), catalogue = new OccludedCatalogueMemory(), queued = new QueuedFieldMemory(), product = new ProductPanelMemory(), labeled = new LabeledSequenceMemory(), trace = new TraceFieldMemory(), linked = new LinkedPacketMemory(), cells = new CellPlacementMemory(), graph = new AlternatingGraphMemory(),
       pairs = new CoupledPairEvidenceMemory(), auxiliary = new AuxiliarySupportMemory(), exposed = new ExposedReceptionMemory(), chamber = new RelationalChamberMemory(), panel = new PanelServiceMemory(), rootedLine = new RootedLineMemory(), reception = new ReceptionServiceMemory({ currentEpochAcquisition: true }), population = new ReferencePopulationMemory();
     for (const event of events) {
       if (['typed_carrier_response', 'typed_material_flow', 'typed_pose_scope', 'typed_pose_model', 'typed_pose_response'].includes(event.kind)) material.applyEvent(event);
       else if (event.kind === 'radial_method_recall' || event.kind === 'radial_port_effect') radial.applyEvent(event);
       else if (['nested_control_response', 'envelope_fill_context', 'field_service_context', 'field_service_transfer'].includes(event.kind)) service.applyEvent(event);
       else if (event.kind === 'rooted_quota_state') rooted.applyEvent(event);
+      else if (event.kind === 'framed_window_response') framedWindow.applyEvent(event);
       else if (['catalogue_observation', 'catalogue_response', 'catalogue_field_input_observed'].includes(event.kind)) catalogue.applyEvent(event);
       else if (event.kind === 'observed_queue_field_model') queued.applyEvent(event);
       else if (event.kind === 'observed_factor_product') product.applyEvent(event);
@@ -789,7 +813,9 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
       else memory.applyEvent(event);
     }
     let digest = memory.retainedDigest();
-    for (const layer of [material, radial, service, rooted, catalogue, queued, product, labeled, trace, linked, cells, graph, pairs, auxiliary]) digest = layer.retainedDigest(digest);
+    for (const layer of [material, radial, service, rooted]) digest = layer.retainedDigest(digest);
+    if (framedWindow.eventCount) digest = framedWindow.retainedDigest(digest);
+    for (const layer of [catalogue, queued, product, labeled, trace, linked, cells, graph, pairs, auxiliary]) digest = layer.retainedDigest(digest);
     if (exposed.eventCount) digest = exposed.retainedDigest(digest);
     if (chamber.eventCount) digest = chamber.retainedDigest(digest);
     if (panel.eventCount) digest = panel.retainedDigest(digest);
@@ -799,7 +825,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
     if (digest !== state.digest) throw new TypeError('Shared series memory changed during recall');
     // Only publish the reconstructed working copies after the complete journal
     // has passed integrity checks. A rejected edit cannot clear learned state.
-    this.memory = memory; this.material = material; this.radial = radial; this.service = service; this.rooted = rooted; this.catalogue = catalogue; this.queued = queued; this.product = product; this.labeled = labeled; this.trace = trace; this.linked = linked; this.cells = cells; this.graph = graph; this.pairs = pairs; this.auxiliary = auxiliary; this.exposed = exposed; this.chamber = chamber; this.panel = panel; this.rootedLine = rootedLine; this.reception = reception; this.population = population; this.events = events;
+    this.memory = memory; this.material = material; this.radial = radial; this.service = service; this.rooted = rooted; this.framedWindow = framedWindow; this.catalogue = catalogue; this.queued = queued; this.product = product; this.labeled = labeled; this.trace = trace; this.linked = linked; this.cells = cells; this.graph = graph; this.pairs = pairs; this.auxiliary = auxiliary; this.exposed = exposed; this.chamber = chamber; this.panel = panel; this.rootedLine = rootedLine; this.reception = reception; this.population = population; this.events = events;
     const stamp = this.workingStamp();
     this.certified = stamp; this.accepted = { value: state, stamp };
     this.checkpoint = { value: retainNativeJson({ events: this.events, digest: state.digest }), stamp, certified: true };
@@ -808,7 +834,7 @@ export class SharedSeriesConstraint extends OccurrenceRecallConstraint {
 
 export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, coupledConfig?: R, graphConfig?: R, cellConfig?: R,
   options: NativeSharedSeriesOptions = {}, radialConfig?: R, rootedConfig?: R, productConfig?: R, labeledConfig?: R, traceConfig?: R, linkedConfig?: R,
-  queuedConfig?: R, catalogueConfig?: R, materialConfig?: R, serviceConfig?: R, observedConfig?: R): NativeFamily {
+  queuedConfig?: R, catalogueConfig?: R, materialConfig?: R, serviceConfig?: R, observedConfig?: R, framedWindowConfig?: R): NativeFamily {
   const family = new SharedSeriesConstraint(config, options), adapter = asNativeOccurrenceRecallFamily(family);
   return { ...adapter, nativeState: () => family.nativeState(), restoreNative: state => family.restoreNative(state),
     compositionDependencyState: () => family.material.currentState() as unknown as R,
@@ -880,6 +906,12 @@ export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, c
           const proposal = rootedConfig ? await family.rootedPropose(observation, rows, inputs, remaining, rootedConfig,
             execution?.deadlineMs ?? null, execution?.now) : null;
           if (proposal) proposal.field_subquestion = 'rooted_quota_composition';
+          return proposal as NativeProposal | null;
+        }
+        if (subquestion === 'framed_window_composition') {
+          const proposal = framedWindowConfig ? await family.framedWindowPropose(observation, rows, inputs, remaining, framedWindowConfig,
+            execution?.deadlineMs ?? null, execution?.now) : null;
+          if (proposal) proposal.field_subquestion = 'framed_window_composition';
           return proposal as NativeProposal | null;
         }
         if (subquestion === 'field_service_composition') {
@@ -977,7 +1009,11 @@ export function createNativeSharedSeriesFamily(config: OccurrenceRecallPolicy, c
       const rooted = rootedConfig ? await family.rootedPropose(observation, rows, inputs, remaining, rootedConfig,
         execution?.deadlineMs ?? null, execution?.now) : null;
       if (rooted) rooted.field_subquestion = 'rooted_quota_composition';
-      return rooted as NativeProposal | null;
+      if (rooted) return rooted as NativeProposal;
+      const framedWindow = framedWindowConfig ? await family.framedWindowPropose(observation, rows, inputs, remaining, framedWindowConfig,
+        execution?.deadlineMs ?? null, execution?.now) : null;
+      if (framedWindow) framedWindow.field_subquestion = 'framed_window_composition';
+      return framedWindow as NativeProposal | null;
     }
     return null;
   } };

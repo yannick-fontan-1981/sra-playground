@@ -30,6 +30,7 @@ const aliases: Record<string, string> = {
   observed_inventory_composition: 'public_observed_inventory',
   topological_recolor: 'public_topological_recolor',
   rooted_quota_composition: 'public_occurrence_recall',
+  framed_window_composition: 'public_occurrence_recall',
   occluded_catalogue_composition: 'public_occurrence_recall',
   typed_material_flow: 'public_occurrence_recall',
   queued_field_composition: 'public_occurrence_recall',

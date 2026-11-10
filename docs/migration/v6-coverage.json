@@ -30,10 +30,10 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 159,
-    "partiallyTransferredModules": 142,
+    "componentVerifiedModules": 160,
+    "partiallyTransferredModules": 144,
     "transferredUnverifiedModules": 0,
-    "pendingModules": 1068,
+    "pendingModules": 1065,
     "strategyFamilies": 16
   },
   "families": [
@@ -29811,7 +29811,8 @@
         "src/logos-engine/v6-product-panel-mechanics.ts",
         "src/logos-engine/v6-labeled-sequence-mechanics.ts",
         "src/logos-engine/v6-topological-recolor-geometry.ts",
-        "src/logos-engine/v5-reference-population-calculus.ts"
+        "src/logos-engine/v5-reference-population-calculus.ts",
+        "src/logos-engine/v5-temporal-fragment-match.ts"
       ],
       "proof": [
         "scripts/export-v6-configured-arrivals-reference.py",
@@ -29835,7 +29836,11 @@
         "scripts/export-v6-reference-population-reference.py",
         "tests/fixtures/v6-reference-population-reference.json.gz",
         "docs/migration/lot3f-reference-population-lineage.md",
-        "tests/v5-reference-population-calculus.test.ts"
+        "tests/v5-reference-population-calculus.test.ts",
+        "scripts/export-v6-framed-window-reference.py",
+        "tests/fixtures/v6-framed-window-reference.json.gz",
+        "docs/migration/lot3g-framed-window-lineage.md",
+        "tests/v5-temporal-fragment-match.test.ts"
       ]
     },
     {
@@ -54682,9 +54687,18 @@
           "endLine": 711
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v5-temporal-fragment-match.ts",
+        "src/logos-engine/v6-framed-window-observation.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-framed-window-reference.py",
+        "tests/fixtures/v6-framed-window-reference.json.gz",
+        "docs/migration/lot3g-framed-window-lineage.md",
+        "tests/v5-temporal-fragment-match.test.ts",
+        "tests/v6-framed-window-observation.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v5/capabilities/temporal_reference_matching.py",
@@ -75407,9 +75421,19 @@
           "endLine": 27
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "component_verified",
+      "targets": [
+        "src/logos-engine/v6-framed-window-access.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-framed-window-reference.py",
+        "tests/fixtures/v6-framed-window-reference.json.gz",
+        "docs/migration/lot3g-framed-window-lineage.md",
+        "tests/v6-framed-window-access.test.ts",
+        "tests/v6-framed-window-integration.test.ts"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/common_frontier.py",
@@ -76932,7 +76956,9 @@
         "src/logos-engine/v5-piercing-plan.ts",
         "src/logos-engine/v6-reference-population-observation.ts",
         "src/logos-engine/v6-reference-population-access.ts",
-        "src/logos-engine/v5-reference-population-calculus.ts"
+        "src/logos-engine/v5-reference-population-calculus.ts",
+        "src/logos-engine/v6-framed-window-access.ts",
+        "src/logos-engine/v6-framed-window-observation.ts"
       ],
       "proof": [
         "tests/v6-shared-series.test.ts",
@@ -76985,7 +77011,11 @@
         "tests/fixtures/v6-reference-population-reference.json.gz",
         "docs/migration/lot3f-reference-population-lineage.md",
         "tests/v6-reference-population-integration.test.ts",
-        "tests/fixtures/v6-reference-population-legacy-checkpoints.json.gz"
+        "tests/fixtures/v6-reference-population-legacy-checkpoints.json.gz",
+        "scripts/export-v6-framed-window-reference.py",
+        "tests/fixtures/v6-framed-window-reference.json.gz",
+        "docs/migration/lot3g-framed-window-lineage.md",
+        "tests/v6-framed-window-integration.test.ts"
       ]
     },
     {
@@ -81703,9 +81733,22 @@
           "endLine": 87
         }
       ],
-      "status": "pending",
-      "targets": [],
-      "proof": []
+      "status": "partial_transfer",
+      "targets": [
+        "src/logos-engine/v6-framed-window-observation.ts",
+        "src/logos-engine/v6-framed-window-access.ts",
+        "src/logos-engine/v6-shared-series.ts"
+      ],
+      "proof": [
+        "scripts/export-v6-framed-window-reference.py",
+        "tests/fixtures/v6-framed-window-reference.json.gz",
+        "docs/migration/lot3g-framed-window-lineage.md",
+        "tests/v6-framed-window-observation.test.ts",
+        "tests/v6-framed-window-access.test.ts",
+        "tests/v6-framed-window-integration.test.ts",
+        "scripts/export-v6-framed-window-legacy-checkpoints.mjs",
+        "tests/fixtures/v6-framed-window-legacy-checkpoints.json.gz"
+      ]
     },
     {
       "path": "agents/yf_arc3_v6/laya_proto/geometric_observer.py",
@@ -98726,6 +98769,7 @@
     "Lot3C/native0.43 adds ExposedReception as the third of six observed-composition branches under SharedSeries. The small-lattice projection is component_verified; access and the sole consumed V5 _expand_push_chain remain partial_transfer because their full ancestor/transaction closures are not transferred. Numeric source identity, acquired conditional effects, strict-progress bounded search, source dispatch/acquisition order and atomic0.42 checkpoint compatibility have separate component/integration proofs. The future reception_events collision with ReceptionService remains an explicit ownership/migration contract for that port. Connected50/76,37 compiled workflows and all six false completion gates remain distinct; no live campaign or cost result is anticipated by these mappings.",
     "Lot3D/native0.45 adds RootedLine as the fourth of six observed-composition branches, in the same SharedSeries owner. Its own projection/mechanics have component proofs; access and the consumed V5 conditional Piercing subgraph remain partial transfers. Source fixture parity, common binding/acquisition/restoration and measured game contribution are distinct evidence. The native portable JSON integer domain and current-deadline interruption are explicit; staged V5 paths remain untransferred. Complete-entry coverage remains50/76,37 compiled workflows, and all global completion gates remain false. No game/cost success is inferred from static mappings.",
     "Lot3E/native0.46 transfers ReceptionService own measured projection, access/return contracts, consumed ResidualAccess evidence reducer and V5 wait ledger. Source-mode component fixtures remain distinct from named native common ownership/current-epoch/wait adaptations. The facade is5/6; ReferencePopulation and full inherited closure remain pending.50/76complete entries,37compiled workflows and six false completion gates remain distinct. No campaign or cost result is inferred from mappings; actual evidence is documented in lot3e-reception-service.md.",
-    "Lot3F/native0.47 connects ReferencePopulation as the sixth declared observed-composition branch under the existing SharedSeries owner. Measured projection, acquired selection/control, exact finite-cell matching and conditional selected cardinal motion have independent source and native contracts. The entry facade becomes6/6 and51/76 complete declared entries, with37 compiled workflows; inherited source closure, color/terminal laws and full original-caller parity remain partial. All six global completion gates remain false. Campaign and cost outcomes are separate evidence, not inferred from this mapping."
+    "Lot3F/native0.47 connects ReferencePopulation as the sixth declared observed-composition branch under the existing SharedSeries owner. Measured projection, acquired selection/control, exact finite-cell matching and conditional selected cardinal motion have independent source and native contracts. The entry facade becomes6/6 and51/76 complete declared entries, with37 compiled workflows; inherited source closure, color/terminal laws and full original-caller parity remain partial. All six global completion gates remain false. Campaign and cost outcomes are separate evidence, not inferred from this mapping.",
+    "Lot3G/native0.48 connects framed_window_composition immediately after rooted_quota_composition under the authoritative SharedSeries owner. Exact current pixel equality supports a conditional point experiment; only real supplied returns acquire trial outcomes. Source component parity, native interrupted-pixel/malformed-response adaptations and exhaustive prefilter limits remain explicit.52/76 declared entries,6/6 observed branches and37 compiled workflows are separate counts; all six completion gates remain false. Integrated synthetic evidence, retained public views, regressions and cost outcomes are qualified independently, with no game victory inferred from component contracts."
   ]
 }
