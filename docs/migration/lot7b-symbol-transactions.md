@@ -5,8 +5,9 @@
 Le propriétaire `public_symbol_transaction` est porté et raccordé à l'entrée
 `observed_symbol_transaction`. Le développement part de **Site 83**, commit
 `bed48116585da864dd5c412ed11dd6990a950e8e`, qui clôt 7A/native 0.52.
-Le candidat 7B n'est pas encore publié : il doit intégrer les publications
-effectives de 5A et 4B, passer ses contrôles finaux et sa fenêtre de coût.
+La publication effective 5A/Site 84 est intégrée et sa clôture Site 85 est
+vérifiée. Le candidat 7B n'est pas encore publié : il doit intégrer la publication
+de 4B, passer ses contrôles finaux et sa fenêtre de coût.
 
 La campagne de développement CRAF réussit **trois niveaux en 36 actions**,
 toutes sélectionnées par le nouveau propriétaire. Les connaissances acquises au
@@ -104,8 +105,12 @@ sans ces connaissances.
 Le premier analyseur classe quatre effets de l'ablation du compteur de
 transitions comme `decision_changed` parce que sa description de décision
 comprend les références de règles. Cette étiquette ne prouve pas un clic différent.
-Le script exécuté et son reçu restent conservés. Le validateur final préparé
-sépare le choix physique, la méthode et le but des changements de justification.
+Le script exécuté et son reçu restent conservés. Un second rejeu des mêmes
+144 appels avec le validateur renforcé confirme **quatre changements de preuves
+pour la même décision**, et les mêmes 27/18 propositions supprimées par ablation.
+Il relie aussi chacune des 36 actions à sa proposition source et à ses gardes
+ordonnées. La capture historique ne contient aucun bloc de checkpoint complet ;
+le gel final devra les produire et les vérifier avec `--require-checkpoints`.
 
 ### Identité du premier gel
 
@@ -116,16 +121,17 @@ version reste celle de la base 0.52 pendant ce développement ; ce digest distin
 le candidat de la version publiée. Aucun numéro de livraison 7B n'est encore revendiqué.
 
 Les sources sont restées inchangées pendant CRAF. Le temps de cas cumulé conservé
-est de **383,465343 secondes**, avec **2 016,534657 secondes restantes** sur le
+est de **847,684697 secondes**, avec **1 552,315303 secondes restantes** sur le
 plafond de 40 minutes. Le compteur est suspendu pendant le travail général
 d'intégration et de livraison, et sera repris sans remise à zéro pour les
 vérifications supplémentaires du cas.
 
 ## Limites et étapes encore nécessaires
 
-La réussite est actuellement celle du candidat de développement sur la base
-publiée 7A. Les changements communs de 5A et 4B doivent être intégrés depuis leurs
-commits réellement publiés avant la validation finale. Les suites requises et
+La réussite en jeu est actuellement celle du candidat de développement sur la
+base publiée 7A. Les changements communs de 5A sont intégrés depuis Site 84 ;
+ceux de 4B doivent encore être intégrés depuis son commit publié avant la
+validation finale. Les suites requises et
 les régressions des prédécesseurs seront préservées, puis exécutées sur ce candidat.
 La vérification navigateur et les captures complètes des états et faits Symbols
 après chaque préfixe restent à produire sur ce gel final.

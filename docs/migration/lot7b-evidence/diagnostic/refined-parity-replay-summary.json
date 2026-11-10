@@ -1,0 +1,78 @@
+{
+  "schema": "logos-engine.lot7b-retained-refined-replay.v1",
+  "recordedAt": "2026-11-10T22:50:06.320969+00:00",
+  "status": "passed",
+  "parity": {
+    "path": "docs/migration/lot7b-evidence/attempt1/refined-original/craf-public-parity.json",
+    "bytes": 107232,
+    "sha256": "466f8a83d680a3fa6f3faaf2cbab221a737110193aacc9f4c0a3857ccbf7c9b1"
+  },
+  "contribution": {
+    "path": "docs/migration/lot7b-evidence/attempt1/refined-original/craf-contribution.json.gz",
+    "bytes": 17280,
+    "sha256": "a3ba1a844194add7c0ab34aed5d182bd0d003bbd176e4a7caff49d03eae78520"
+  },
+  "executedGenerator": {
+    "path": "scripts/compare-symbol-transactions-public-parity.py",
+    "sha256": "3c36c49928f7ee654ca6a4e3588d4dcdc3925ec9c04062098b843f76c735e1a5",
+    "bytes": 28530
+  },
+  "preservedExecutedGenerator": {
+    "path": "docs/migration/lot7b-evidence/diagnostic/compare-symbol-transactions-public-parity-refined.py",
+    "bytes": 28530,
+    "sha256": "3c36c49928f7ee654ca6a4e3588d4dcdc3925ec9c04062098b843f76c735e1a5"
+  },
+  "initialValidatorFailure": {
+    "path": "docs/migration/lot7b-evidence/diagnostic/refined-parity-validator-failure.json",
+    "bytes": 1282,
+    "sha256": "0bda6a4453aaa599b729d59e66235d9ec99c16e80e7ece8865e4f26b856f82aa"
+  },
+  "executionLogs": [
+    {
+      "path": "docs/migration/lot7b-evidence/diagnostic/attempt1-refined-public-parity.log",
+      "bytes": 617,
+      "sha256": "d4dc34d1aaf7e6b0e23b3e76fd49c6e9a4b43d56bea797d88f4744e5afb2cb30"
+    },
+    {
+      "path": "docs/migration/lot7b-evidence/diagnostic/attempt1-refined-public-parity-retry.log",
+      "bytes": 991,
+      "sha256": "2494062d9735615ba38910248801c2c62d1cd5aad92e7d49bc77ca29a1d753c0"
+    }
+  ],
+  "matchedCalls": 144,
+  "exactChecks": 432,
+  "orderedGuardLinks": 36,
+  "checkpointCaptureComplete": false,
+  "ablationCounts": {
+    "rejected": {
+      "unchanged": 36
+    },
+    "transition_count": {
+      "unchanged": 32,
+      "same_decision_different_evidence": 4
+    },
+    "interface.samples": {
+      "unchanged": 36
+    },
+    "interface.contrasts": {
+      "unchanged": 36
+    },
+    "interface.methods": {
+      "unchanged": 9,
+      "proposal_removed": 27
+    },
+    "interface.refutations": {
+      "unchanged": 36
+    },
+    "interface.bound": {
+      "unchanged": 18,
+      "proposal_removed": 18
+    },
+    "all_interface_knowledge": {
+      "unchanged": 9,
+      "proposal_removed": 27
+    }
+  },
+  "nativeActionsExecutedByReplay": 0,
+  "qualification": "The immutable development campaign is unchanged. This corrected execution proves captured original source calls and selected ordered proposal/guard links. The initial validator exception remains retained; the executed successful script is preserved exactly before the subsequent passive restoration enhancement. Legacy capture has no checkpoint blocks and cannot satisfy final readiness."
+}

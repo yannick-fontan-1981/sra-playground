@@ -4,11 +4,13 @@
 
 Le portage part de la publication **Site 83**, commit
 `bed48116585da864dd5c412ed11dd6990a950e8e`, native **0.52.0**, qui clôt 7A.
-Les changements 7B sont préparés dans la branche `lot7b-symbol-transactions`.
-Cette correspondance décrit le code et les preuves à exécuter ; elle ne déclare
-encore ni résultat de test, ni réussite en jeu, ni acceptation de coût, ni publication 7B.
-Les publications effectivement livrées par les voies 5A et 4B seront réconciliées
-avant le gel final. Le numéro natif final de 7B reste à attribuer après cette intégration.
+Les changements 7B sont conservés dans la branche
+`lot7b-symbol-transactions-delivery`. Le [bilan de développement](lot7b-symbol-transactions.md)
+relie les 275 tests de composants, quatre tests Kernel et la campagne CRAF de
+trois niveaux aux reçus exécutés. La publication 5A/Site 84 est intégrée ; sa
+clôture Site 85 est vérifiée. La publication réelle de 4B sera intégrée avant
+le gel final, ses nouvelles preuves et le contrôle de coût. Le numéro natif
+final de 7B reste à attribuer après cette intégration ; 7B n'est pas encore publié.
 
 Toutes les références Python, SRC et DRM ci-dessous proviennent du commit
 `786dcf51ca57773d8e3a8948ce9ea3655e7baf8e`, conservé sous
@@ -16,7 +18,7 @@ Toutes les références Python, SRC et DRM ci-dessous proviennent du commit
 
 ## Contrat source → implémentation → consommateur → preuve
 
-| Contrat source | Implémentation native | Consommateur effectif | Preuve prévue |
+| Contrat source | Implémentation native | Consommateur effectif | Preuve de développement et contrôle final attendu |
 | --- | --- | --- | --- |
 | `symbol_transactions/family.py` : projection, repli conditionnel, règles ordonnées, regroupement par action, proposition et garde | `v6-symbol-transactions.ts` | Propriétaire unique `public_symbol_transaction` de l'entrée `observed_symbol_transaction` | Oracle Python du propriétaire, comparaison des propositions et refus complets, tests de boucle commune |
 | `transactions.src` : `symbols.measure` puis `symbols.select` | `NativeSrcProgram` et callbacks du propriétaire | Programme commun `v6.symbol_transactions.choose` | Reçus réels du workflow, compteurs de callbacks et OP18 dans la sélection normale |
@@ -31,7 +33,8 @@ Toutes les références Python, SRC et DRM ci-dessous proviennent du commit
 
 Les noms TypeScript du tableau sont relatifs à `src/logos-engine/`. Les sources
 `symbol_transactions/` sont relatives à `agents/yf_arc3_v6/morphology_policy/`.
-Les oracles et tests seront conservés avec leurs empreintes dans les preuves finales.
+Les oracles, tests et reçus de développement sont conservés. Leurs résultats
+ne remplacent pas les contrôles à exécuter sur les sources intégrées finales.
 
 ## Deux chemins de proposition, une seule autorité
 
@@ -106,9 +109,13 @@ Une chaîne synthétique compare des contrats et le passage réel dans le Kernel
 elle ne devient pas une réussite de jeu. La sélection des cas en jeu examine
 les observations publiques déjà conservées, avec une instance Python froide
 par scène, sans moteur de jeu importé, sans état acquis fourni et sans action.
-Une campagne ultérieure utilisera le moteur opaque et les commandes du runtime
-commun. Les succès officiels, les décisions de Symbols et les décisions des
-autres familles seront comptés séparément.
+La première campagne utilise le moteur opaque et les commandes du runtime
+commun : trois niveaux officiels, 36 actions toutes sélectionnées par Symbols,
+36 retours enregistrés une seule fois. Le rejeu original reconstruit son propre
+état et compare 144 appels ; les ablations des méthodes et liaisons montrent
+leur consommation dans les propositions ultérieures. La capture intégrée finale
+devra aussi lier chaque état persisté au résultat de sa restauration native
+effectivement observée, y compris après le dernier retour.
 
 Le coût suivra le protocole courant, déclaré avant sa mesure, depuis le dernier
 prédécesseur réellement publié. Les 32 sessions mesurées seront conservées ; la

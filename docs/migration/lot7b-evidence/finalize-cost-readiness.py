@@ -23,6 +23,10 @@ BASE = ROOT / 'docs/migration/lot7b-evidence'
 REFERENCE = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e'
 TEST_RUNNER = ROOT / 'scripts/verify-native-delta.py'
 COUNT_KEYS = ('tests', 'pass', 'fail', 'cancelled', 'skipped', 'todo')
+CHECKPOINT_CHECK_KEYS = frozenset({
+    'onePrimitiveSourceRecord', 'ownerAndFormat', 'exactNativeEnvelope', 'exactSourceProjection',
+    'exactSelectedEvent', 'exactRetainedSourceFact', 'captureEndsAtAcquiredState',
+})
 
 
 def require(condition, message):
@@ -273,11 +277,17 @@ def main():
             'Selected actions are not fully bound to ordered original proposal, guards and record')
     checkpoint = parity['checkpointProof']
     require(checkpoint['required'] is True and checkpoint['complete'] is True
+            and checkpoint['restorationComplete'] is True and checkpoint['restoreTraceOrdered'] is True
+            and checkpoint['legacyWithoutCheckpointBlocks'] is False
             and checkpoint['capturedPrefixes'] == checkpoint['matchedPrefixes'] == checkpoint['selectedPrefixes']
-            == len(checkpoint['prefixes']) > 0
+            == checkpoint['matchedRestorations'] == len(checkpoint['prefixes']) > 0
+            and type(checkpoint['nativeRestoreCalls']) is int
+            and checkpoint['nativeRestoreCalls'] >= checkpoint['capturedPrefixes']
             and checkpoint['exactChecks'] == checkpoint['totalChecks'] == 7 * checkpoint['capturedPrefixes']
-            and all(row['matched'] is True and all(value is True for value in row['checks'].values())
-                    for row in checkpoint['prefixes']), 'Actual retained Symbols checkpoints are incomplete')
+            and all(row['matched'] is True and row['nativeRestorationMatched'] is True
+                    and set(row['checks']) == CHECKPOINT_CHECK_KEYS
+                    and all(value is True for value in row['checks'].values())
+                    for row in checkpoint['prefixes']), 'Actual retained Symbols checkpoints or observed restorations are incomplete')
     require(all(row['matched'] is True and row['differences'] == {}
                 and set(row['checks']) == {'beforeState', 'returnValue', 'afterState'}
                 and all(value is True for value in row['checks'].values()) for row in parity['calls']),
@@ -424,6 +434,7 @@ def main():
         'formalTests': counts, 'formalTestFiles': len(test_files), 'regressionChecks': comparison_count,
         'sourceParityCalls': parity['callCount'], 'sourceParityChecks': parity['totalChecks'],
         'sourceCheckpointPrefixes': checkpoint['capturedPrefixes'], 'sourceCheckpointChecks': checkpoint['totalChecks'],
+        'sourceRestoredPrefixes': checkpoint['matchedRestorations'],
         'game': {'id': 'CRAF', 'targetLevels': 3, 'campaignLevels': campaign_record['levelsCompleted'],
                  'browserLevels': browser['final']['levels'], 'targetMet': game_target_met,
                  'browserTargetMet': browser_target_met, 'browserQualification': browser.get('qualification'),
@@ -431,7 +442,8 @@ def main():
                  'remainingSeconds': case['remainingSeconds'], 'clockReset': False},
         'inputs': list(inputs.values()), 'isolation': isolation,
         'qualification': 'Completed official delta tests, five checks, empty audit failures, strict regressions, '
-            'delivery integrity, cold original-Python parity, actual browser evidence and the cumulative game '
+            'delivery integrity, cold original-Python parity with observed selected-prefix native restoration, '
+            'actual browser evidence and the cumulative game '
             'clock precede this cost window. An explicitly qualified unmet three-level game target is retained '
             'and does not become a success claim. Cooperative lane acknowledgement and ended tracked work '
             'establish the declared quiet interval; process visibility alone does not establish isolation.'}

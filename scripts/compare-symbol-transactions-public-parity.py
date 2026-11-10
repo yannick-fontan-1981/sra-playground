@@ -77,7 +77,7 @@ def main():
     parser.add_argument('--out-dir', required=True)
     parser.add_argument('--label', default='symbols')
     parser.add_argument('--require-checkpoints', action='store_true',
-                        help='Require every selected prefix to retain its actual graph checkpoint, source fact and event.')
+                        help='Require every selected prefix to retain its graph checkpoint, actual native restore, live source state, fact and event.')
     args = parser.parse_args(); started = time.monotonic()
     report_path, out_dir = ROOT / args.report, ROOT / args.out_dir
     report = json.loads(gzip.decompress(report_path.read_bytes()) if report_path.suffix == '.gz' else report_path.read_bytes())
@@ -233,14 +233,14 @@ def main():
             and canonical(public_command(call['arguments'][2])) == canonical(action['command'])]
         matched = False; witnesses = None; projection_attempts = []
         if len(selected_records) == 1:
-            recorded = selected_records[0]; args = recorded['arguments']; proposal = args[5]
+            recorded = selected_records[0]; recorded_args = recorded['arguments']; proposal = recorded_args[5]
             def same_selected_proposal(value):
                 return canonical(value) == canonical(proposal) and canonical(public_command(value['actions'][index])) == canonical(action['command'])
             before_calls = [call for call in calls if call['method'] == 'before' and call['result'].get('admitted') is True
-                and call['arguments'][1] == index and canonical(call['arguments'][3]) == canonical(args[0])
+                and call['arguments'][1] == index and canonical(call['arguments'][3]) == canonical(recorded_args[0])
                 and same_selected_proposal(call['arguments'][0])]
             after_calls = [call for call in calls if call['method'] == 'after' and call['arguments'][1] == index
-                and canonical(call['arguments'][2]) == canonical(args[0]) and canonical(call['arguments'][3]) == canonical(args[1])
+                and canonical(call['arguments'][2]) == canonical(recorded_args[0]) and canonical(call['arguments'][3]) == canonical(recorded_args[1])
                 and same_selected_proposal(call['arguments'][0])]
             proposed_calls = []
             for call in calls:
@@ -280,7 +280,17 @@ def main():
                 'everySelectedActionHasItsExactOrderedProposalGuardsAndRecord': all(row['matched'] for row in ordered_guard_rows),
                 'allSelectedActionsBelongToSealedPrefixes': exact_selected_prefixes,
                 'noForeignRecord': records['foreign'] == 0, 'noDuplicateRecord': not duplicates}
-    checkpoint_rows = []
+    native_restores = report.get('symbolRestoreCalls')
+    restore_trace_present = isinstance(native_restores, list)
+    if not restore_trace_present: native_restores = []
+    restore_trace_ordered = restore_trace_present and all(
+        isinstance(row, dict) and type(row.get('index')) is int and row['index'] == index
+        and row.get('method') == 'restoreNative' and type(row.get('sourceCallsBefore')) is int
+        and 0 <= row['sourceCallsBefore'] <= len(calls) for index, row in enumerate(native_restores))
+    if restore_trace_ordered:
+        restore_trace_ordered = all(first['sourceCallsBefore'] <= second['sourceCallsBefore']
+                                    for first, second in zip(native_restores, native_restores[1:]))
+    checkpoint_rows = []; previous_restore_index = -1
     for prefix in selected_prefixes:
         evidence = prefix.get('symbolAcquisition')
         if evidence is None: continue
@@ -295,6 +305,27 @@ def main():
             actual_after = calls[witnesses[0]['captureIndices']['after']]
             expected_transitions = [{'command': source['command'], 'before': source['before']['observation_ref'],
                 'after': source['after']['observation_ref'], 'outcome': actual_after['result']}]
+        restoration = evidence.get('nativeRestoration') or {}
+        restore_through = evidence.get('restoreCallsThrough')
+        restore_index = restore_through - 1 if type(restore_through) is int else None
+        recorded_restore = native_restores[restore_index] if restore_index is not None \
+            and 0 <= restore_index < len(native_restores) else None
+        restoration_matched = (
+            source is not None and restore_trace_ordered and recorded_restore is not None
+            and isinstance(restoration, dict) and restore_index > previous_restore_index
+            and canonical(restoration) == canonical(recorded_restore)
+            and restoration.get('index') == restore_index and restoration.get('method') == 'restoreNative'
+            and (restoration.get('returnMode'), restoration.get('completion')) == ('sync', 'returned')
+            and restoration.get('returnedNormally') is True and restoration.get('exception') is None
+            and restoration.get('observationErrors') == []
+            and all(type(restoration.get(key)) is int and restoration[key] == source['callIndex'] + 1
+                    for key in ('sourceCallsBefore', 'sourceCallsAfter'))
+            and all(type(restoration.get(key)) is int and restoration[key] == 0
+                    for key in ('sourceDepthBefore', 'sourceDepthAfter'))
+            and canonical(restoration.get('arguments')) == canonical([checkpoint])
+            and canonical(restoration.get('sourceAfter')) == canonical(source['state'])
+            and canonical(evidence.get('instanceSourceState')) == canonical(source['state']))
+        if restore_index is not None: previous_restore_index = restore_index
         checks = {'onePrimitiveSourceRecord': exact_selected_prefixes and prefix['acquiredActions'] == 1
                 and source is not None and source['actionIndex'] == 0 and len(witnesses) == 1,
             'ownerAndFormat': evidence.get('stateNode') == 'family_state:public_symbol_transaction'
@@ -311,16 +342,25 @@ def main():
                 and fact.get('revision') == source['after']['revision'] and fact.get('evidence') == source['after']['observation_ref'],
             'captureEndsAtAcquiredState': source is not None and type(through) is int and through == source['callIndex'] + 1
                 and through in states_after_calls
-                and canonical(states_after_calls[through]) == canonical(evidence.get('sourceState'))}
+                and canonical(states_after_calls[through]) == canonical(evidence.get('sourceState'))
+                and restoration_matched}
         checkpoint_rows.append({'decisionRevision': revision, 'checks': checks, 'matched': all(checks.values()),
                                 'sourceStateSha256': digest(source['state']) if source else None,
-                                'checkpointSha256': digest(checkpoint)})
+                                'checkpointSha256': digest(checkpoint),
+                                'nativeRestorationMatched': restoration_matched, 'nativeRestoreIndex': restore_index,
+                                'restoreCallsThrough': restore_through,
+                                'instanceSourceStateSha256': digest(evidence.get('instanceSourceState'))})
     checkpoint_proof = {'required': args.require_checkpoints, 'selectedPrefixes': len(selected_prefixes),
         'capturedPrefixes': len(checkpoint_rows), 'matchedPrefixes': sum(row['matched'] for row in checkpoint_rows),
         'exactChecks': sum(sum(row['checks'].values()) for row in checkpoint_rows), 'totalChecks': len(checkpoint_rows) * 7,
         'complete': len(checkpoint_rows) == len(selected_prefixes) and all(row['matched'] for row in checkpoint_rows),
+        'legacyWithoutCheckpointBlocks': bool(selected_prefixes) and not checkpoint_rows,
+        'nativeRestoreCalls': len(native_restores), 'restoreTraceOrdered': restore_trace_ordered,
+        'matchedRestorations': sum(row['nativeRestorationMatched'] for row in checkpoint_rows),
+        'restorationComplete': bool(selected_prefixes) and len(checkpoint_rows) == len(selected_prefixes)
+            and all(row['nativeRestorationMatched'] for row in checkpoint_rows),
         'prefixes': checkpoint_rows,
-        'qualification': 'Seven independent comparisons bind the cold original owner state, exact complete selected proposal, acquired event, retained source fact, exact command/observation/outcome transition, and capture cursor immediately after each selected record. Only selected Symbols prefixes are covered; foreign-prefix checkpoint conservation is not asserted. Missing legacy captures are not counted as a checkpoint proof.'}
+        'qualification': 'Seven comparisons bind the cold original owner state, exact complete selected proposal, acquired event, retained source fact, exact command/observation/outcome transition and source cursor. The final check also requires the actual synchronous native restore after that record: exact received envelope, successful completion outside any source call, and equality of its resulting source state with the live instance at prefix capture and the independently reconstructed original. Increasing restore indices and the two captured cursors establish record then restore then capture, including a terminal prefix without a later proposal. An asynchronous restore is observed without changing its return but cannot qualify this synchronous runtime contract. No extra native restoration or state injection is performed. Only selected Symbols prefixes and exported source fields are covered; foreign-prefix conservation and private caches are not asserted. Missing legacy checkpoint or restoration captures are not counted as this proof.'}
     contribution = {'schema': 'logos-engine.v6.symbol-transactions-public-contribution.v1', 'referenceCommit': COMMIT,
         'campaign': campaign, 'trajectoryStateOrigin': 'One cold original Python SymbolTransactions; native captured states are comparison targets only.',
         'records': dict(records), 'selectedRecordOnly': records['foreign'] == 0, 'captureCoverage': coverage,
