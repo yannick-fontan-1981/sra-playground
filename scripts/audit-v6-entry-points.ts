@@ -32,6 +32,7 @@ const aliases: Record<string, string> = {
   rooted_quota_composition: 'public_occurrence_recall',
   framed_window_composition: 'public_occurrence_recall',
   coupled_prefix_reference: 'public_occurrence_recall',
+  recurrent_series: 'public_occurrence_recall',
   occluded_catalogue_composition: 'public_occurrence_recall',
   typed_material_flow: 'public_occurrence_recall',
   queued_field_composition: 'public_occurrence_recall',

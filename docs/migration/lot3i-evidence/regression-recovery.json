@@ -1,0 +1,46 @@
+{
+  "schema": "logos-engine.recorded-regression-recovery.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T15:44:00.221410-03:00",
+  "generator": {
+    "path": "docs/migration/lot3i-evidence/consolidate-regression-recovery.py",
+    "bytes": 9023,
+    "sha256": "2849324dbdd7f4591ac8e072cd3cd0dfa5e4991fb0a6909b7a8ffe87783e5949"
+  },
+  "initialSummary": {
+    "path": "docs/migration/lot3i-evidence/final/regressions/regression-summary-interrupted.json",
+    "bytes": 93599,
+    "sha256": "c198464bd121be3c129e62986c8558b6f65c46310325764b0ca483d667b5a7e5"
+  },
+  "memoryCappedSummary": {
+    "path": "docs/migration/lot3i-evidence/final/weav-retry/regressions/regression-summary.json",
+    "bytes": 70939,
+    "sha256": "3fec12632710bbcb25cd6a020cc2539f3361888974c72c3e1f9a6486d1630be2"
+  },
+  "incompleteAttempt": {
+    "path": "docs/migration/lot3i-evidence/final/weav-memory-retry/interruption-observation.json",
+    "bytes": 1298,
+    "sha256": "2e3efef071845d9208a8384e76b6c3b022b91ff939fd1b8aa4b443e49ee3c787"
+  },
+  "isolatedSummary": {
+    "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/regression-summary.json",
+    "bytes": 90744,
+    "sha256": "88c2d6d642f06f3e6cd2b77b603c158e1920e57c234924d151ea23c806ec2f53"
+  },
+  "finalSummary": {
+    "path": "docs/migration/lot3i-evidence/final/regressions/regression-summary.json",
+    "bytes": 123289,
+    "sha256": "3ffddb4d4bb4786a7218f27d95f7db8d00afa94dd20e75573c6077e1252565a9"
+  },
+  "firstPasses": 4,
+  "firstInterrupted": 1,
+  "memoryCappedFailures": 1,
+  "isolatedPasses": 1,
+  "incompleteInvocationWithoutFinalExitStatus": 1,
+  "finalCasesPassed": 5,
+  "finalCasesExpected": 5,
+  "finalChecksPassed": 85,
+  "finalChecksExpected": 85,
+  "nativeSourceDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+  "qualification": "The first four completed passes are reused verbatim. WEAV retains the signal 9 interruption at 67 actions (cause unproven), the separate 768 MiB V8 heap exhaustion, and the later invocation whose execution handle disappeared without a retained final exit status or report. No cause is assigned to that incomplete invocation. The final host releases the full historical baseline before running the unchanged campaign harness and reloads it for the unchanged 17-check comparator only after the native process ends. Its raw log and heartbeat are persisted while it runs. All 17 original checks pass on the full 81-action replay. No trace, expected command, comparison tolerance, native source or test changed. No game clock restarts and the official timing runner/environment does not use this replay host."
+}

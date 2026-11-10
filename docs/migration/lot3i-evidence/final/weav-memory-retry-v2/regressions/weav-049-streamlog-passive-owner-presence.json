@@ -1,0 +1,16 @@
+{
+  "schema": "logos-engine.passive-owner-evidence-presence.v1",
+  "report": {
+    "path": "docs/migration/lot3i-evidence/final/weav-memory-retry-v2/regressions/weav-049-streamlog-replay.json.gz",
+    "sha256": "1943593c0961d8b49d059e34d58dd96269926ab8a24b5fc294c6bbc516cd8985",
+    "bytes": 10802096
+  },
+  "caseManifest": {
+    "path": "docs/migration/lot3i-evidence/weav-streamlog-recovery-cases.json",
+    "sha256": "bf8c6275205154b0b277150af667c52597dfd7a3d7e045fa4d7f606565fc32d6",
+    "bytes": 1210
+  },
+  "owners": [],
+  "passed": true,
+  "qualification": "Post-run evidence-presence checks on every completed current replay prefix. The manifest declares retained owner identity, exact source-field names, checkpoint format and optional context annex bindings. Each retained checkpoint is checked against its own current source projection, and its transition count against that prefix acquiredActions. These checks neither initialize native state nor assert equality with an older baseline, complete caller parity or a live game success. They are separate from the 17 historical regression comparisons."
+}

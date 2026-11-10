@@ -30,8 +30,8 @@
     "declaredClassesAndFunctions": 12857,
     "dataFiles": 417,
     "verifiedModules": 0,
-    "componentVerifiedModules": 161,
-    "partiallyTransferredModules": 143,
+    "componentVerifiedModules": 163,
+    "partiallyTransferredModules": 141,
     "transferredUnverifiedModules": 0,
     "pendingModules": 1065,
     "strategyFamilies": 16
@@ -78911,16 +78911,29 @@
           "endLine": 196
         }
       ],
-      "status": "partial_transfer",
+      "status": "component_verified",
       "targets": [
-        "src/logos-engine/v6-occurrence-recall.ts"
+        "src/logos-engine/v6-recurrent-series-observation.ts",
+        "src/logos-engine/v6-recurrent-series-access.ts",
+        "src/logos-engine/v6-occurrence-recall.ts",
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
       ],
       "proof": [
         "scripts/export-v6-occurrence-reference.py",
         "tests/fixtures/v6-occurrence-reference.json",
         "tests/v6-occurrence-recall.test.ts",
         "tests/v6-support-caller-integration.test.ts",
-        "tests/fixtures/v6-native-caller/memo-first-prefix.json"
+        "tests/fixtures/v6-native-caller/memo-first-prefix.json",
+        "scripts/export-v6-recurrent-series-reference.py",
+        "tests/fixtures/v6-recurrent-series-reference.json.gz",
+        "docs/migration/lot3i-recurrent-series-lineage.md",
+        "tests/v6-recurrent-series-observation.test.ts",
+        "tests/v6-recurrent-series-native.test.ts",
+        "tests/v6-recurrent-series-access.test.ts",
+        "tests/v6-recurrent-series-integration.test.ts",
+        "scripts/export-v6-recurrent-series-legacy-checkpoints.mjs",
+        "tests/fixtures/v6-recurrent-series-legacy-checkpoints.json.gz"
       ]
     },
     {
@@ -79644,10 +79657,14 @@
           "endLine": 111
         }
       ],
-      "status": "partial_transfer",
+      "status": "component_verified",
       "targets": [
+        "src/logos-engine/v6-recurrent-series-observation.ts",
+        "src/logos-engine/v6-recurrent-series-access.ts",
+        "src/logos-engine/v6-supported-lines.ts",
         "src/logos-engine/v6-occurrence-recall.ts",
-        "src/logos-engine/v6-supported-lines.ts"
+        "src/logos-engine/v6-shared-series.ts",
+        "src/logos-engine/v6-native-runtime.ts"
       ],
       "proof": [
         "scripts/export-v6-occurrence-reference.py",
@@ -79657,7 +79674,16 @@
         "tests/fixtures/v6-native-caller/memo-first-prefix.json",
         "scripts/export-v6-cell-placement-reference.py",
         "tests/fixtures/v6-cell-placement-reference.json.gz",
-        "tests/v6-cell-placement.test.ts"
+        "tests/v6-cell-placement.test.ts",
+        "scripts/export-v6-recurrent-series-reference.py",
+        "tests/fixtures/v6-recurrent-series-reference.json.gz",
+        "docs/migration/lot3i-recurrent-series-lineage.md",
+        "tests/v6-recurrent-series-observation.test.ts",
+        "tests/v6-recurrent-series-native.test.ts",
+        "tests/v6-recurrent-series-access.test.ts",
+        "tests/v6-recurrent-series-integration.test.ts",
+        "scripts/export-v6-recurrent-series-legacy-checkpoints.mjs",
+        "tests/fixtures/v6-recurrent-series-legacy-checkpoints.json.gz"
       ]
     },
     {

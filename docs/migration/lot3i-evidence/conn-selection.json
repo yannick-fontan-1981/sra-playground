@@ -1,0 +1,58 @@
+{
+  "schema": "logos-engine.selected-game-case.v1",
+  "game": "CONN",
+  "recordedAt": "2026-11-10T14:51:50.060051-03:00",
+  "displayTimeZone": "UTC-03:00",
+  "resumedAt": "2026-11-10T14:44:53.485291-03:00",
+  "resumeDeadline": "2026-11-10T15:24:53.485291-03:00",
+  "targetLevels": 3,
+  "caseClock": {
+    "maximumSeconds": 2400,
+    "previousChargedSeconds": 0,
+    "conservativeStart": "Start of the initial public scan, earlier than the case choice; all ensuing elapsed time counts without pauses or resets.",
+    "previousRecordedAttemptsFound": false,
+    "historyMetadataReviewed": [
+      "docs/migration/native-campaigns-v55/ordered-reaction-candidate-selection.json",
+      "docs/migration/lot3e-evidence/diagnostic/reception-public-admission.json",
+      "docs/migration/native-campaigns-v52/candidate-selection.json",
+      "docs/migration/native-campaigns-v57/initial-morphology-rerun.json",
+      "docs/migration/native-campaigns-v57/initial-morphology.json",
+      "docs/migration/lot3h-evidence/diagnostic/crossed-prefix-public-admission.json",
+      "docs/migration/native-campaigns-v50/candidate-selection.json",
+      "docs/migration/native-campaigns-v49/candidate-selection.json",
+      "docs/migration/native-campaigns-v51/candidate-selection.json",
+      "docs/migration/lot3f-evidence/diagnostic/reference-population-public-admission.json",
+      "docs/migration/native-campaigns-v51/framed-transfer-candidate-selection.json",
+      "docs/migration/lot3g-evidence/diagnostic/framed-window-public-admission.json",
+      "docs/migration/native-campaigns-v53/candidate-selection.json"
+    ]
+  },
+  "selectionEvidence": {
+    "path": "docs/migration/lot3i-evidence/diagnostic/initial-public-scan.json.gz",
+    "bytes": 3472,
+    "sha256": "50517fa1b8f41e1425de33ddcce0dbb4d52873814ea61f7ebc3c168aa675160e"
+  },
+  "nativeCandidate": {
+    "path": "docs/migration/lot3i-evidence/final/source-manifest.json",
+    "bytes": 32014,
+    "sha256": "6345dc2902336aaf6f680b798b3c312281dcb66bbd7994b349b1734e5a42c1bd"
+  },
+  "nativeBaseline": {
+    "path": "docs/migration/lot3i-evidence/baseline/source-manifest.json",
+    "bytes": 31765,
+    "sha256": "5ab90c3cbd2f8356ba27025052a1c40cd16e7cb38326a89a48ac6e53cb9b3a24"
+  },
+  "baselineMaximumActions": 8,
+  "baselineQualification": "Predeclared short cold reference only; stopping at eight actions cannot establish complete-game inability.",
+  "selectionReason": "Only one of95 retained initial public rasters yields a source recurrent-series proposal from cold own memory; four repeated fields are measured.",
+  "forbiddenInputsRead": false,
+  "gameExecutionBeforeDeclaration": false,
+  "clocksUnchanged": {
+    "CWSE": 2399.683865,
+    "SK48": 667.35444,
+    "FOGW": 951.320275,
+    "VOIS": 1017.469531,
+    "WEAV": 1277.782615
+  },
+  "qualification": "No engine, specification or solution is read. Production common caller owns all actions on the opaque public host. No level jump, priming, stored route, seeded memory, game-dependent policy or clock restart. Baseline and candidate remain under this one cumulative40-minute deadline."
+}

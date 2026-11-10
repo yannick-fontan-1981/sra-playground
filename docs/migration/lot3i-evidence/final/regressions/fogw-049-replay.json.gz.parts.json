@@ -1,0 +1,51 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "fogw-049-replay.json.gz",
+    "sha256": "566dd7bd6056ca514c06b3f37ba1740b00961f119aa8e9b792ca60b66bd54322",
+    "bytes": 6891744
+  },
+  "parts": [
+    {
+      "file": "fogw-049-replay.json.gz.part000",
+      "sha256": "c0868f8f6785718394e445776d2bc6976533525473de710eb241813fae94cf39",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part001",
+      "sha256": "8c91524f00117aa30da211a61e58957743f1a31bcc8ac3ed1dc3037b166c6e31",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part002",
+      "sha256": "a287e366c1ac7709d91a1dc4107079f1faf4e2b203aef28850bb2eb5cc6431bf",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part003",
+      "sha256": "6d36b78967c9012a7e54b9ee91beb853f0f3ffce781a4c029d935a8c23319fa4",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part004",
+      "sha256": "f8b1e96002a0b26ba5976953db57d3f0c04e15358923372c62a1272993f9bb1f",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part005",
+      "sha256": "0c31e61db5a9f8be1c31a022dc2766f7414c6acd3088e7dc27c8512781d6dc31",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part006",
+      "sha256": "e3339bb12aee37198939c394a34d8edf6987619743f34745d0bc6a3b3e0a3a1b",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part007",
+      "sha256": "d18db7c0368436f62f619bf82aafb3e546616531d65f48322a05437d1dabec07",
+      "bytes": 591744
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

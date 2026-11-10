@@ -4,6 +4,21 @@ type Point = readonly [number, number];
 type R = Record<string, any>;
 const pointOrder = (a: readonly number[], b: readonly number[]): number => a[0]! - b[0]! || a[1]! - b[1]!;
 export class NativeLineSearchDomainError extends RangeError {}
+export interface NativeLineSearchOptions {
+  maxNodes?: number;
+  deadlineMs?: number | null;
+  now?: () => number;
+}
+/** Only production callers that provide an explicit work/deadline budget use
+ * this interruption. No partial ranking is a complete minimax conclusion. */
+export class NativeLineSearchWorkBoundError extends RangeError {
+  readonly bound: 'nodes' | 'deadline';
+  readonly nodes: number;
+  constructor(bound: 'nodes' | 'deadline', nodes: number) {
+    super('Conditional line search reached its native ' + bound + ' bound');
+    this.bound = bound; this.nodes = nodes;
+  }
+}
 
 export function lineInsertions(board: Board, empty: unknown, axis: number | null, sign: number): Point[] {
   const height = board.length, width = board[0]!.length, result: Point[] = [];
@@ -39,14 +54,24 @@ export function linePlace(board: Board, point: readonly number[], color: unknown
 }
 
 export function searchLines(board: Board, own: unknown, other: unknown, empty: unknown,
-  length: number, axis: number | null, sign: number, depth: number): [R[], R] {
+  length: number, axis: number | null, sign: number, depth: number, options: NativeLineSearchOptions = {}): [R[], R] {
+  const maxNodes = options.maxNodes ?? Infinity, deadline = options.deadlineMs ?? Infinity;
+  if (options.maxNodes !== undefined && (!Number.isSafeInteger(maxNodes) || maxNodes < 0)) {
+    throw new TypeError('Conditional line search node bound requires a nonnegative safe integer');
+  }
+  if (typeof deadline !== 'number' || Number.isNaN(deadline)) throw new TypeError('Conditional line search deadline must be numeric');
+  const now = options.now ?? (() => performance.now());
+  let nodes = 0;
+  const checkDeadline = (): void => {
+    if (deadline !== Infinity && now() >= deadline) throw new NativeLineSearchWorkBoundError('deadline', nodes);
+  };
+  checkDeadline();
   const windows = lineWindows(board, length), terminal = (windows.length + 1) * 4 ** length * 100, cache = new Map<string, number>();
   // Python scores are unbounded integers. Reject a broader numeric domain
   // before rounded bounds or ties could authorize a different physical move.
   if (!Number.isSafeInteger(terminal * 2 + Math.abs(depth) + board.length * board[0]!.length)) {
     throw new NativeLineSearchDomainError('Conditional line search exceeds the native exact-integer domain');
   }
-  let nodes = 0;
   const won = (current: Board, color: unknown): boolean => windows.some(window => window.every(([x, y]) => current[y]![x] === color));
   const evaluate = (current: Board): number => {
     let value = 0;
@@ -59,6 +84,8 @@ export function searchLines(board: Board, own: unknown, other: unknown, empty: u
     return value;
   };
   const solve = (current: Board, left: number, player: unknown, startAlpha: number, startBeta: number): number => {
+    checkDeadline();
+    if (nodes >= maxNodes) throw new NativeLineSearchWorkBoundError('nodes', nodes);
     nodes++;
     if (won(current, own)) return terminal + left;
     if (won(current, other)) return -terminal - left;
@@ -80,10 +107,12 @@ export function searchLines(board: Board, own: unknown, other: unknown, empty: u
     return best;
   };
   const ranked = lineInsertions(board, empty, axis, sign).map(point => {
+    checkDeadline();
     const child = linePlace(board, point, own), value = solve(child, depth - 1, other, -terminal * 2, terminal * 2);
     const useful = windows.reduce((count, window) => count + Number(window.some(candidate => pointOrder(candidate, point) === 0)), 0);
     return { point: [...point], value, immediate_goal: won(child, own), geometric_windows: useful };
   }).sort((a, b) => b.value - a.value || b.geometric_windows - a.geometric_windows || pointOrder(a.point, b.point));
+  checkDeadline();
   return [ranked, { nodes, reply_plies: depth, windows: windows.length,
     scope: 'Exact finite-horizon search under conditional insertion, alternating response and symmetric line-goal hypotheses; future response policy unknown.' }];
 }
