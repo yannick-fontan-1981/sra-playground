@@ -1,0 +1,114 @@
+{
+  "schema": "logos-engine.lot7a-publication-inputs.v1",
+  "status": "passed",
+  "recordedAt": "2026-11-10T20:46:51.296896+00:00",
+  "generator": {
+    "path": "docs/migration/lot7a-evidence/record-publication-inputs.py",
+    "bytes": 6771,
+    "sha256": "62ca2700e4798b4288d814a8a0903b9ff71238ffce5ea031548738fce2a24609"
+  },
+  "nativeVersion": "0.52.0",
+  "nativeSourceDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+  "fileInventories": {
+    "native": 279,
+    "archiveMembers": 290,
+    "sourceAndTests": 638,
+    "buildInputs": 344
+  },
+  "nativeAgentWorker": {
+    "path": "dist/assets/v6-agent-worker-EpUBUNha.js",
+    "sha256": "2458853e7664001d7dc035d05d6aeee1b65d0b7147ae8509c723c28429c2c063",
+    "bytes": 6578757
+  },
+  "costGlobalStatus": "accepted_under_predeclared_owner_cost_rule",
+  "historicalStrictPassed": false,
+  "postMeasurementIoCorrection": true,
+  "receipts": [
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/source-manifest.json",
+      "bytes": 33095,
+      "sha256": "75e1dbe4002f737c2d5248a08531c6b60002c3114692b55df3a5c7255c79d6cc"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/source-archive.json",
+      "bytes": 34737,
+      "sha256": "8456173a89df59cf3d433c31c1b801e8dd209465dfa5086d8b4eeaad2e7a2c33"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/validation/delta-tests-run.json",
+      "bytes": 120188,
+      "sha256": "eb5e186bd8cc576c96b75d5f33c1639a5964bbce314f78b910974b76ad9422d7"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/project-checks-retry/validation/checks-run.json",
+      "bytes": 76916,
+      "sha256": "7ad9d883a3c370a1b8806ca3ce5916be8ae86952d8b4ed26003c2dd594f15050"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/delivery-integrity.json",
+      "bytes": 10191,
+      "sha256": "b64c5c78283039eb5766ca91858d1fc68fc4b33ea8e574fb9ab1c96e4587206a"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/readiness.json",
+      "bytes": 35712,
+      "sha256": "4a7c821f19201fda910345d35d2787c83189c64c02b7dc6c8ff52c65c23d9a6e"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/window.json",
+      "bytes": 10531,
+      "sha256": "d950d2d319d85d705e13f0e3941ef07e9ca513d1b09e8fbeb4f0a914f8f33434"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-growth-contract.json",
+      "bytes": 2724,
+      "sha256": "562c60c639690c86a11cd386c71d2b5d40a7217859a8b08ab7f69653d30df391"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-growth-comparison.json",
+      "bytes": 244977,
+      "sha256": "279768930da02c8d68788bbd238c01a7b2c3092f84323ac9f0e77543c6eb2129"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-growth-review.json",
+      "bytes": 746269,
+      "sha256": "dde0cf688affab3160b135f007708350b62d46dcc2c5d02858bdc464e5db70a5"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/aggregation-failure.json",
+      "bytes": 3089,
+      "sha256": "43dcf55534f7f26cb77bb3d0614f199dc7b459d72fb0f81e88e7157d2c172fd3"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/aggregation-failure.log",
+      "bytes": 204711,
+      "sha256": "5058a4d25e2d8d0535a653bdd45059d216380f7cda23d5901f69b9fdc7727804"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/log-transport.json",
+      "bytes": 2880,
+      "sha256": "37a5f2c9c93961513c391bc83a27387599d043232006c364dd240863ef6efc5b"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/results.md",
+      "bytes": 34407,
+      "sha256": "51c33a58dd7662c12fecde1c52a32717abf2b417728eea747bf4542de54068f7"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/results-render.json",
+      "bytes": 11457,
+      "sha256": "092e9975651efba44bd63eb62690b27c8faae9e2f3582551da2f2319c2999f01"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/coordination/published-base-binding.json",
+      "bytes": 1817,
+      "sha256": "b9e4ebd1b5d42ab4ed4fac76ffcaa1af98971925b92674a963dabd42cc64be96"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/diagnostic/owner-cost-io-correction-v1.json",
+      "bytes": 8227,
+      "sha256": "bda3465da0bcc5c6ba3b2df015183c99fab29a7f73ca90e697d9add5c2ccef13"
+    }
+  ],
+  "qualification": "File integrity and release provenance only. No test, build, game or cost sample rerun. The already compiled worker and every recorded source/test/build input are unchanged. All 32 measured sessions and eight declared warmups remain in the four original reports. The historical strict failure remains failed; the independently reviewed supplementary decision retains its premeasurement structural rule and explicit postmeasurement I/O repair. This receipt does not assert publication, full caller parity, a third LKEY level, or a bound on arbitrary long-session latency or memory."
+}

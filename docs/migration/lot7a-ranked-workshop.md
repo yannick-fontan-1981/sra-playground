@@ -4,20 +4,22 @@
 
 **Le composant `observed_ranked_workshop` est porté, raccordé au runtime commun et vérifié sur ses contrats. Sa contribution est observée sur les deux premiers niveaux de LKEY. Le troisième niveau reste ouvert.**
 
-Ce compte rendu est préparé sur la branche du lot 7. **Le verdict de coût, l'intégration dans la branche commune et la publication restent à compléter par le responsable de livraison.** Le présent document ne les déclare pas accomplis.
+Le candidat intégré **0.52.0** réunit le port Workshop et les commits effectivement publiés de 3I puis 4A. **Les validations fonctionnelles et l'intégrité de ce gel passent.** Le verdict de coût et la publication propre de 7A sont consignés séparément dans la section de livraison ; les résultats de jeu ne les anticipent pas. La [relecture fonctionnelle indépendante](lot7a-evidence/integrated-final/functional-findings.md) détaille les preuves et leurs limites.
 
 | Identité | Valeur vérifiée |
 | --- | --- |
 | Référence Python V6 | `786dcf51ca57773d8e3a8948ce9ea3655e7baf8e` |
-| Base du travail | `8fa6b261b8b23ac8d232e60c9c179e2f3407d82f`, Site 78, native 0.49.0 |
+| Base initiale du port | `8fa6b261b8b23ac8d232e60c9c179e2f3407d82f`, Site 78, native 0.49.0 |
 | Commit du portage et du raccordement | `7c4c34797bf0bc374b448c985d0dee2fadfb81ca` |
-| Candidat natif | `logos-engine.typescript.v6.native-migration/0.50.0` |
-| Digest des 274 fichiers natifs du candidat | `8492388162915bd01be1279d645870d366f0fd306e4f31ea47e8b65aafebac7e` |
+| Prédécesseur publié intégré | Site 81, native 0.51.0, commit `4dafc40c53ed4406ee7cd148e3e6995a2eb4185e` |
+| Commit de fusion du prédécesseur publié | `1ceea98d31e659dfed618d121ee4410c88fda378` |
+| Candidat natif | `logos-engine.typescript.v6.native-migration/0.52.0` |
+| Digest des 279 fichiers natifs du candidat | `f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb` |
 | Propriétaire | `public_ranked_workshop` |
 | Entrée déclarée | `factored_material_return / observed_ranked_workshop` |
 | Workflow exécuté | `v6.ranked_workshop.choose` |
 
-L'[inventaire gelé](lot7a-evidence/final/source-manifest.json), l'[archive du candidat](lot7a-evidence/final/source-archive.json) et la [filiation détaillée](lot7a-ranked-workshop-lineage.md) permettent de distinguer le code livré, les primitives V5 effectivement consommées et les capacités qui restent hors du lot.
+L'[inventaire gelé](lot7a-evidence/integrated-final/source-manifest.json), l'[archive de 290 fichiers](lot7a-evidence/integrated-final/source-archive.json) et la [filiation détaillée](lot7a-ranked-workshop-lineage.md) définissent les octets vérifiés et les primitives V5 réellement consommées. Le [rattachement au prédécesseur publié](lot7a-evidence/coordination/published-base-binding.json) vérifie après fusion l'identité des 279 fichiers natifs, des 290 entrées archivées, des 638 entrées de source et de tests et des 344 entrées de compilation. Les preuves exécutées sur ces mêmes octets restent applicables ; ce reçu ne prétend pas les avoir rejouées après la fusion documentaire.
 
 ## Comportement ajouté à Logos Engine
 
@@ -37,21 +39,25 @@ Le corpus de comparaison comprend **40 cas de propriétaire, 41 cas de géométr
 
 Les [quatre contrats du Kernel](../../tests/v6-ranked-workshop-kernel.test.ts) utilisent la fabrique de production et son ordre stratégique. Ils établissent le propriétaire unique, l'acquisition passive à froid, l'appel effectif des callbacks, la sélection WHY/ACT, l'enregistrement unique du retour, la restauration du propriétaire depuis le graphe autoritaire et la revalidation dans une nouvelle portée. Les modifications d'image de ces contrats sont **synthétiques et déclarées** ; elles ne comptent pas comme des niveaux de jeu.
 
-Le [premier contrôle élargi](lot7a-evidence/final/validation/delta-tests-run.json) conserve **2 960/2 961 tests réussis dans 78 fichiers**, sans modification native. L'unique échec provient d'une ancienne attente d'adjacence dans le test d'Inventory. La [correction tracée](lot7a-evidence/diagnostic/inventory-order-expectation-correction.json) vérifie désormais l'ordre des entrées connectées contre le DRM original ; elle sera rejouée dans la validation intégrée. Les [quatre régressions enregistrées](lot7a-evidence/final/regressions/regression-summary.json) passent **68/68 contrôles**, sur **159 actions, 88 préfixes et 12 frontières naturelles** CATR/RSWP/FOGW/VOIS. Elles ne constituent ni de nouvelles parties ni des succès propres à l'atelier. La couverture de ces contrats ne signifie pas que tout l'appelant Python est transféré.
+La [validation intégrée](lot7a-evidence/integrated-final/validation/delta-tests-run.json) passe **3 745/3 745 tests dans 97 fichiers**, avec les sources et les tests inchangés. Le périmètre est l'union déclarée des contrats 7A et 4A, sans retrait des tests précédents. Les [cinq contrôles de projet](lot7a-evidence/integrated-final/project-checks-retry/validation/checks-run.json) passent : TypeScript, registre, audit de migration, différences et compilation. Le [contrôle d'intégrité](lot7a-evidence/integrated-final/delivery-integrity.json) confirme les inventaires, les sources originales, l'archive et les reçus fonctionnels de ce gel.
+
+Les incidents antérieurs restent consultables. Le [premier contrôle isolé](lot7a-evidence/final/validation/delta-tests-run.json) conservait **2 960/2 961 tests réussis dans 78 fichiers** ; son attente d'adjacence Inventory a été [corrigée selon l'ordre DRM](lot7a-evidence/diagnostic/inventory-order-expectation-correction.json), puis vérifiée dans le passage intégré. L'[alias Workshop du test de registre](lot7a-evidence/diagnostic/radial-alias-correction.json) est également couvert. La première tentative de compilation intégrée a échoué avant exécution sur l'ancien chemin du helper Sites 1.1.5 ; la [reprise avec 1.1.6](lot7a-evidence/integrated-final/build-helper-path-resolution.json) conserve le reçu initial et [réutilise le reçu de tests à l'identique](lot7a-evidence/integrated-final/project-checks-retry/test-receipt-reuse.json).
+
+Les [sept régressions intégrées enregistrées](lot7a-evidence/integrated-final/regressions/regression-summary.json) passent **119/119 contrôles**, sur **292 actions, 210 préfixes et 21 frontières naturelles**. CATR, RSWP, FOGW, VOIS, MIND et WEAV utilisent les rapports réels de native 0.51, dont les octets sont rattachés au commit 4A publié. CONN utilise le rapport publié 3I/native 0.50, puisqu'aucun rapport CONN n'a été produit par 4A. Ces rejeux ne constituent ni de nouvelles parties ni des succès propres à l'atelier. La couverture de ces contrats ne signifie pas que tout l'appelant Python est transféré.
 
 ## Contribution sur des retours réels de LKEY
 
-La [campagne conservée](lot7a-evidence/attempt1/lkey-campaign.json.gz) part du niveau 1 avec le runtime commun froid. Elle comporte **25 actions et 25 préfixes** : 4 actions de `public_framed_transfer`, 6 du frontier, 14 de l'atelier et 1 d'`animated_contact`. Deux niveaux officiels sont terminés.
+La [campagne intégrée conservée](lot7a-evidence/integrated-final/lkey-campaign.json.gz) part du niveau 1 avec le runtime commun froid 0.52. Elle comporte **25 actions et 25 préfixes** : 4 actions de `public_framed_transfer`, 6 du frontier, 14 de l'atelier et 1 d'`animated_contact`. Deux niveaux officiels sont terminés. Le [reçu d'exécution](lot7a-evidence/integrated-final/execution-lkey.json) conserve le statut d'échec de la cible de trois niveaux et l'identité inchangée des sources.
 
 Le premier contraste de mode pertinent provient d'un **retour passif d'`ACTION5`, de la révision 10 à la révision 11**. L'atelier acquiert le contraste `[0,1]`, puis produit les décisions des révisions 11 à 24. Il ne reçoit aucun état appris pour amorcer cette activation.
 
-Le [rejeu Python indépendant](lot7a-evidence/diagnostic/attempt1-public-parity.json) reprend les **49 appels capturés**, dans leur ordre, avec un seul `RankedWorkshop()` original initialement vide. Les états natifs avant et après chaque appel sont uniquement des cibles de comparaison. **Les 49 appels concordent : 147 comparaisons exactes d'état avant, de résultat et d'état après.** La comparaison utilise le JSON canonique pour ne pas confondre un booléen avec un nombre.
+Le [rejeu Python indépendant intégré](lot7a-evidence/integrated-final/diagnostic/integrated-public-parity.json) reprend les **49 appels capturés**, dans leur ordre, avec un seul `RankedWorkshop()` original initialement vide. Les états natifs avant et après chaque appel sont uniquement des cibles de comparaison. **Les 49 appels concordent : 147 comparaisons exactes d'état avant, de résultat et d'état après.** La comparaison utilise le JSON canonique pour ne pas confondre un booléen avec un nombre.
 
 Les 25 retours sont enregistrés une fois chacun : **14 acquisitions actives, 11 passives, 25 transitions distinctes et aucun doublon**. Les appels de proposition comprennent les abstentions, qui ne sont pas écartées du reçu.
 
 ### Connaissances qui ont effectivement changé une décision
 
-Les [ablations conservées](lot7a-evidence/diagnostic/contribution.json.gz) retirent séparément une couche de connaissance avant chaque proposition sélectionnée. Elles repartent des états produits par le rejeu Python original et gardent la situation publique fixe. Elles établissent une contribution à la décision de composant, sans prétendre simuler une partie entière dans un monde contrefactuel.
+Les [ablations intégrées conservées](lot7a-evidence/integrated-final/diagnostic/contribution.json.gz) retirent séparément une couche de connaissance avant chaque proposition sélectionnée. Elles repartent des états produits par le rejeu Python original et gardent la situation publique fixe. Elles établissent une contribution à la décision de composant, sans prétendre simuler une partie entière dans un monde contrefactuel.
 
 | Couche retirée | Résultat sur les 14 propositions sélectionnées |
 | --- | --- |
@@ -82,13 +88,13 @@ Ce constat ne justifie ni un changement de priorité propre à LKEY, ni un conto
 
 ### Vérification dans le navigateur final
 
-Le [reçu navigateur du candidat 0.50.0](lot7a-evidence/final/browser/browser-qa.json) confirme, sans état appris injecté, les mêmes passages à **16 puis 24 actions**, et le même arrêt à **25 actions, deux niveaux terminés**. Les commandes **Pause** et **One action** ont été observées respectivement à une puis deux actions. Le temps actif affiché en fin de parcours est **28,1 s** ; ce nombre n'est pas le résultat du protocole de coût.
+Le [reçu navigateur intégré 0.52.0](lot7a-evidence/integrated-final/browser/browser-qa.json) confirme, sans état appris injecté, les mêmes passages à **16 puis 24 actions**, et le même arrêt à **25 actions, deux niveaux terminés**. Les commandes **Pause** et **One action** ont été observées respectivement à une puis deux actions. Le temps actif affiché en fin de parcours est **33,2 s** ; ce nombre n'est pas le résultat du protocole de coût. Les [états d'interface](lot7a-evidence/integrated-final/browser/observed-states.json) et la [capture finale](lot7a-evidence/integrated-final/browser/final.png) sont conservés.
 
 La Pause fonctionne dans cette vérification, mais sa latence n'a pas été mesurée. Les projecteurs possèdent des domaines finis ; aucune borne de préemption à l'intérieur d'une mesure synchrone n'est revendiquée.
 
-L'essai initial portait le digest `2646d38c1cb09dc846fdb1f4811e578b51ba3b2030bf4282457e8b00b68c3d72`. La différence native avec le candidat final est limitée au numéro d'implémentation et au contrôle d'unicité du propriétaire dans le constructeur. Le corps de la famille et son acquisition sont inchangés ; le navigateur final possède son reçu propre sur le digest `84923881…`.
+La [campagne initiale isolée](lot7a-evidence/attempt1/execution-lkey.json) et le [navigateur isolé](lot7a-evidence/final/browser/browser-qa.json) restent disponibles avec leurs propres digests et résultats. Ils ne sont pas réattribués à 0.52 : le candidat intégré possède une nouvelle campagne réelle, un nouveau rejeu source et son propre reçu navigateur sur le digest `f5f4a67d…`.
 
-Le [compteur cumulé du cas](lot7a-evidence/lkey-case-checkpoint.json) conserve les tentatives antérieures. Après cette vérification, il est suspendu à **1 120,676 s**, avec **1 279,324 s** restantes sur les 40 minutes. Toute reprise de LKEY doit continuer ce compteur.
+Le [compteur cumulé figé du cas intégré](lot7a-evidence/integrated-final/lkey-case-checkpoint.json) conserve les tentatives antérieures. Après cette vérification, il est suspendu à **1 341,623 s**, soit **22 min 22 s**, avec **1 058,377 s** restantes sur les 40 minutes. Toute reprise de LKEY doit continuer le [compteur du dossier](lot7a-evidence/lkey-case-checkpoint.json).
 
 ## Conservation et restauration
 
@@ -100,18 +106,53 @@ La restauration effective native vide le cache de projection et les données tra
 
 ## Coût, intégration et publication
 
-Le [protocole isolé déclaré](lot7a-evidence/performance/protocol.md), de native 0.49.0 vers le candidat de développement 0.50.0, est **conservé sans aucune mesure** et [supplanté avant exécution](lot7a-evidence/performance/superseded-before-measurement.json). La coordination existante prévoit les publications 3I puis 4A ; 7A intégrera leurs commits effectivement publiés et déclarera le coût du candidat commun dans `performance-integrated`. Le protocole garde **STCK et SMLP**, 32 sessions mesurées au total, les seules chauffes exclues et l'ordre A1/B1/B2/A2 fixé avant mesure.
+Le [protocole isolé déclaré](lot7a-evidence/performance/protocol.md), de native 0.49.0 vers le candidat de développement 0.50.0, est **conservé sans aucune mesure** et [supplanté avant exécution](lot7a-evidence/performance/superseded-before-measurement.json). Le [protocole intégré](lot7a-evidence/performance-integrated/protocol.md) et sa [déclaration](lot7a-evidence/performance-integrated/declaration.json) lient désormais **Site 81 / native 0.51** remesuré au candidat gelé **0.52**. Ils fixent **STCK et SMLP, 32 sessions et 400 actions mesurées**, huit chauffes séparées représentant 24 actions exclues, et l'ordre **A1/B1/B2/A2** avant mesure.
 
 Le critère autorisé demeure : **pour chaque jeu séparément, la médiane de durée complète de session doit rester strictement inférieure à +10 %**. Les dépassements de phase restent publiés même lorsque le critère global permet de les accepter. Les phases imbriquées ne sont pas additionnées.
 
-**Résultats et verdict du coût : en attente.** Compléter cette section avec les reçus finaux, les médianes par jeu, les diagnostics de phase et les percentiles disponibles. Les temps de campagne et du navigateur ci-dessus ne remplacent pas cette mesure.
+La [readiness](lot7a-evidence/performance-integrated/readiness.json), précédée des [65 contrôles statiques réussis](lot7a-evidence/performance-integrated/static-preflight.json), lie les preuves terminées, le compteur LKEY et l'isolation coordonnée. Elle autorise la mesure ; elle n'en annonce pas le résultat.
 
-**Intégration : en attente de réconciliation et de livraison par le responsable.** Les fichiers communs doivent être relus sur la branche courante pour préserver les lots 3 et 4. L'inventaire de ce commit donne 54 entrées raccordées sur 76, soit 22 restantes ; ce compteur doit être recalculé après réconciliation. Il mesure des raccordements, pas des pourcentages de résolution.
+### Qualification structurelle fixée avant les mesures
 
-**Publication : en attente.** Renseigner le commit effectivement poussé, la version Sites et le résultat du déploiement. Le commit local et la vérification du preview ne constituent pas une publication.
+L'ajout de Workshop installe son propriétaire, son activation et son programme. Il acquiert aussi des faits aux frontières officielles, y compris lorsque le jeu de référence ne le sélectionne pas. Le [contrat v2](lot7a-evidence/performance-integrated/owner-growth-contract.json) ne suppose donc pas une croissance constante de trois nœuds. Il lie une [fixture fonctionnelle](lot7a-evidence/performance-integrated/owner-structural-fixture.json) observée avant la fenêtre sur les deux gels : chauffe et session complète pour STCK, puis chauffe et session complète pour SMLP. Les sessions complètes comprennent trois inspections terminales réelles.
+
+La [qualification des graphes](lot7a-evidence/performance-integrated/owner-structural-attribution-02.json) passe **64 contrôles**, avec **55 deltas ou écritures de graphe attribués** et les quatre formes publiques figées. Chaque rapport de coût doit correspondre exactement aux valeurs de sa forme pré-déclarée. Seuls `observations[*].nodeCount`, `inspection[*].graphNodes`, `final.nodeCount` et `final.graphRevision` peuvent différer entre les versions selon cette fixture ; les autres champs restent stricts. Les captures fonctionnelles permettent l'attribution des nœuds, tandis que les compteurs des sessions mesurées ne prétendent pas exposer leurs feuilles privées.
+
+Un [incident de comparaison](lot7a-evidence/diagnostic/owner-structural-command-projection-incident.json) est conservé : la commande native sans champ `data` était comparée directement à sa projection publique `data: {}`. La [correction avant mesure](lot7a-evidence/diagnostic/owner-structural-command-projection-resolution.json) applique exactement la frontière de conversion du service, conserve les deux commandes brutes et rejette les clés inconnues. Ni la source native ni les captures n'ont été modifiées ou régénérées pour cette correction.
+
+Le contrôle historique d'identité intégrale du travail doit conserver son propre résultat. La consolidation complémentaire et sa revue indépendante utilisent des schémas distincts ; elles ne reclassent pas un refus historique comme une réussite. Aucun temps n'est corrigé pour les nœuds supplémentaires, et aucune session mesurée ou valeur défavorable n'est exclue.
+
+<!-- LOT7A_COST_FINAL_START -->
+
+**Le coût global 7A est accepté sur 2/2 jeux sous la règle structurelle déclarée avant mesure**, selon la [revue indépendante](lot7a-evidence/performance-integrated/owner-growth-review.json), **3 866/3 866 contrôles**. La [fenêtre exclusive](lot7a-evidence/performance-integrated/window.json) conserve **A1/B1/B2/A2, 32 sessions et 400 actions**, référence fraîche Site 81/native 0.51 contre native 0.52 :
+
+| Jeu | Médiane complète 0.51 | Médiane complète 0.52 | Variation |
+| --- | ---: | ---: | ---: |
+| STCK | 9 821,3656235 ms | 9 865,8814085 ms | **+0,453255 %** |
+| SMLP | 16 545,1855975 ms | 16 310,572066 ms | **−1,418017 %** |
+
+Les huit sessions par jeu/version sont toutes retenues. Chaque médiane groupée reste **strictement sous +10 %**, sans compensation entre jeux, somme de phases, moyenne de ratios ou exclusion de valeur mesurée. Seules les huit chauffes annoncées, 24 actions, sont exclues. Les phases groupées passent **16/16** ; les cohortes conservent **15/16 puis 16/16**, avec **restauration SMLP +12,133996 %** dans la première. Les p95 groupés augmentent de **+10,534805 % pour la nouvelle décision STCK** et **+50,326822 % pour la restauration SMLP**. Toutes les phases, dispersions, inspections, mesures Pause et mémoire figurent dans le [rapport complet](lot7a-evidence/performance-integrated/results.md).
+
+**L’agrégateur historique strict demeure en échec**, avec son [reçu réel](lot7a-evidence/performance-integrated/aggregation-failure.json). Les **432 différences de signature** correspondent aux quatre chemins structurels et aux formes fonctionnelles fixées avant mesure ; tous les autres champs restent exacts. Les captures fonctionnelles n'exposent pas rétroactivement les feuilles privées des sessions mesurées. Une [correction E/S séparée, après mesure](lot7a-evidence/performance-integrated/diagnostic/owner-cost-io-correction-v1.json), traite uniquement cinq chemins de référence déjà fingerprintés ; l’échec initial et les outils gelés sont conservés. Les outils exécutés sont identifiés séparément, sans changement des règles, calculs, captures, données, seuils ni populations. Cette acceptation qualifiée conserve la réserve LKEY et ne vaut pas parité complète de l’appelant.
+
+L’[intégrité des entrées de publication](lot7a-evidence/integrated-final/publication-inputs.json) confirme les **279 fichiers natifs, 290 membres d’archive, 638 entrées source/tests et 344 entrées du build**, sans nouvelle exécution ni modification du worker déjà compilé.
+
+<!-- LOT7A_COST_FINAL_END -->
+
+### Intégration et inventaire
+
+Le [déploiement réussi du prédécesseur 4A](lot7a-evidence/coordination/published-4a-site81.json), **Site 81 / native 0.51**, est vérifié. Le commit `4dafc40c53ed4406ee7cd148e3e6995a2eb4185e` est un ancêtre du candidat via la fusion `1ceea98d31e659dfed618d121ee4410c88fda378`. Le [reçu de rattachement](lot7a-evidence/coordination/published-base-binding.json) confirme l'identité des sources, des tests, des entrées de compilation et des références 4A utilisées par les rejeux. L'ordre déclaré des familles et leurs propriétaires d'acquisition distincts sont préservés.
+
+L'inventaire intégré donne **56 entrées raccordées sur 76**, soit **20 restantes** : goal 10/12, window 20/21, surface 8/10, material 18/33. L'audit conserve **172 modules vérifiés au niveau composant, 143 partiellement transférés et 1 054 en attente**, sur **1 369 modules Python et 417 fichiers de données** ; aucun module n'est déclaré intégralement vérifié. Ces compteurs mesurent le transfert et les raccordements, pas des pourcentages de résolution. [Registre](lot7a-evidence/integrated-final/project-checks-retry/validation/entry-audit-output.log.gz), [audit de migration](lot7a-evidence/integrated-final/project-checks-retry/validation/migration-audit-output.log.gz).
+
+<!-- LOT7A_PUBLICATION_FINAL_START -->
+
+**Publication 7A : en attente.** Le commit effectivement poussé, la version Sites et le résultat du déploiement seront renseignés après vérification. Le commit local et le preview ne constituent pas une publication de 7A.
+
+<!-- LOT7A_PUBLICATION_FINAL_END -->
 
 ## Travail encore nécessaire
 
-Terminer les validations finales et le contrôle de coût, puis réconcilier et livrer le candidat par le circuit existant. Conserver la réserve LKEY L3 et son compteur cumulé ; une reprise doit examiner la coordination commune qui empêche actuellement la consultation de l'atelier.
+Conserver la réserve LKEY L3 et son compteur cumulé ; une reprise doit examiner la coordination commune qui empêche actuellement la consultation de l'atelier. L'acquisition d'une observation d'opérateur reste distincte de la preuve qu'elle influence une décision ultérieure. La parité de tout l'appelant demeure un chantier séparé des contrats de cette famille.
 
 Le lot **7B, transactions symboliques**, demeure distinct. Son propriétaire, son marqueur `symbol_transaction_plan`, ses deux chemins de projection et son acquisition sélectionnée doivent être portés selon leurs propres contrats. La présence de l'atelier ne les considère pas livrés.

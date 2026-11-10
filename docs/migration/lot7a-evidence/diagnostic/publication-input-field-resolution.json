@@ -1,0 +1,18 @@
+{
+  "schema": "logos-engine.tool-field-resolution.v1",
+  "recordedAt": "2026-11-10T20:46:50.334001+00:00",
+  "original": {
+    "path": "docs/migration/lot7a-evidence/diagnostic/record-publication-inputs-before-field-correction.py",
+    "bytes": 6767,
+    "sha256": "cfed8a592535f50eff4fe29cdb4fc8f493182db5fd49b725a43b55c8e73c5b61"
+  },
+  "corrected": {
+    "path": "docs/migration/lot7a-evidence/record-publication-inputs.py",
+    "bytes": 6771,
+    "sha256": "62ca2700e4798b4288d814a8a0903b9ff71238ffce5ea031548738fce2a24609"
+  },
+  "originalInvocationExitCode": 1,
+  "originalError": "KeyError: 'historicalStrictPassed'",
+  "outputProduced": false,
+  "qualification": "The first publication-integrity invocation read a nonexistent top-level aggregate field. The aggregate stores the same failed strict status at historicalStrict.passed. Only the checker field lookup is corrected; no source, test, build, cost result, rule or retained receipt is changed."
+}

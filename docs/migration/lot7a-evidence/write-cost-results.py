@@ -232,6 +232,23 @@ def main():
             require(fp(ROOT / record['path']) == record, 'A qualified structural input changed')
             records.append(record)
         records.append(fp(contract_path))
+        if aggregate.get('postMeasurementIoCorrection') or review.get('postMeasurementIoCorrection'):
+            require(aggregate.get('postMeasurementIoCorrection') is review.get('postMeasurementIoCorrection') is True
+                    and aggregate['ioCorrection'] == review['ioCorrection'],
+                    'The two analyses must identify the same post-measurement I/O correction')
+            correction_path = ROOT / aggregate['ioCorrection']['path']
+            correction = read(correction_path)
+            require(fp(correction_path) == aggregate['ioCorrection']
+                    and correction['postMeasurement'] is True
+                    and correction['rulesChanged'] is correction['calculationsChanged'] is correction['rawInputsRewritten'] is False
+                    and aggregate['generator'] == correction['executedTools']['consolidator']
+                    and review['generator'] == correction['executedTools']['reviewer']
+                    and aggregate['declaredGenerator'] == contract['tools']['consolidator']
+                    and review['declaredGenerator'] == contract['tools']['reviewer'],
+                    'Executed and originally declared tool provenance must remain distinct')
+            for record in [aggregate['ioCorrection'], correction['originalFailure'], *correction['executedTools'].values()]:
+                require(fp(ROOT / record['path']) == record, 'An I/O correction input changed')
+                records.append(record)
     require(policy['globalStage'] == 'session_elapsed' and policy['relativeIncreaseLimit'] == 0.1
             and policy['comparison'] == 'strictly_less_than' and policy['allCasesMustPass'] is True
             and policy['crossCaseCompensation'] is False
@@ -490,6 +507,20 @@ def main():
             'et les signatures complètes restent identiques au sein de chaque version. '
             'Aucune durée ni observation défavorable n’est corrigée ou retirée pour compenser les nœuds supplémentaires.'
         ]
+        if review.get('postMeasurementIoCorrection'):
+            relative_correction = Path(os.path.relpath(correction_path, PERF)).as_posix()
+            relative_io_failure = Path(os.path.relpath(ROOT / correction['originalFailure']['path'], PERF)).as_posix()
+            lines[4:4] = [
+                '### Correction de lecture après mesure',
+                'Le consolidateur gelé avant la fenêtre a ensuite échoué en lisant cinq empreintes de fichiers '
+                f'situés dans le checkout de référence. Cet [échec initial]({relative_io_failure}) est conservé. '
+                f'La [correction E/S distincte]({relative_correction}) est explicitement **postérieure à la mesure** : '
+                'elle accepte uniquement ces cinq chemins déjà inscrits dans l’attribution fonctionnelle, '
+                'vérifie leur emplacement dans la référence gelée, leur taille et leur SHA-256, puis les revérifie en fin de calcul. '
+                'Les deux sorties nomment séparément les outils exécutés et ceux déclarés avant la fenêtre. '
+                'Les outils d’origine, le contrat, les formes attendues, les populations, les données brutes, '
+                'les calculs et le seuil restent inchangés. Cette réparation ne transforme aucun refus historique en réussite.'
+            ]
     document = '\n\n'.join(lines) + '\n'
     links = re.findall(r'\[[^\]]+\]\(([^)]+)\)', document)
     require(all((PERF / link).resolve().is_file() for link in links), 'A report link is missing')

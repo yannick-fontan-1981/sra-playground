@@ -1,0 +1,68 @@
+{
+  "schema": "logos-engine.retained-tool-failure.v1",
+  "startedAt": "2026-11-10T20:37:17.919076+00:00",
+  "finishedAt": "2026-11-10T20:37:18.043809+00:00",
+  "command": [
+    "node",
+    "scripts/compare-native-cost-cohorts.mjs",
+    "docs/migration/lot7a-evidence/performance-integrated/comparison-policy.json",
+    "docs/migration/lot7a-evidence/performance-integrated/cohort1/baseline.json",
+    "docs/migration/lot7a-evidence/performance-integrated/cohort1/after.json",
+    "docs/migration/lot7a-evidence/performance-integrated/cohort1/comparison.json",
+    "docs/migration/lot7a-evidence/performance-integrated/cohort2/baseline.json",
+    "docs/migration/lot7a-evidence/performance-integrated/cohort2/after.json",
+    "docs/migration/lot7a-evidence/performance-integrated/cohort2/comparison.json",
+    "docs/migration/lot7a-evidence/performance-integrated/combined-comparison.json"
+  ],
+  "exitCode": 1,
+  "inputs": [
+    {
+      "path": "scripts/compare-native-cost-cohorts.mjs",
+      "sha256": "cb21e18c889e4a1af118221d5c5cbb3f31f87483efd20ed388a81791e2b2fc34",
+      "bytes": 19460
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/comparison-policy.json",
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+      "bytes": 991
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort1/baseline.json",
+      "sha256": "5b73b48fed29a26ade21664c0e1e4d6432a5a1b50f5f6dad54ae61f731f467be",
+      "bytes": 428904
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort1/after.json",
+      "sha256": "254823718bbdde20522ace19809cfad34cd47df2971e12d55153160ded21e824",
+      "bytes": 429686
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort1/comparison.json",
+      "sha256": "0f6d4c0d7901ba28ecb2a4ea560f7cb8df7e9b9245270ff2b67b70ca4e2bc391",
+      "bytes": 25340
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort2/baseline.json",
+      "sha256": "b3160ac9e9f6f1ca4a8e239fc4db1a4b88bb4ea972d5fa3dd2e28127c6a7b263",
+      "bytes": 429026
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort2/after.json",
+      "sha256": "627a1ba5267d9c9ab8137b207d086625856e725beb5928ea153e84e8e94231a7",
+      "bytes": 429695
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort2/comparison.json",
+      "sha256": "4f3b0a54661e35edb9f3ce4b0fee5a8b0c7bd4689a6958ef386236663a9a39f5",
+      "bytes": 25218
+    }
+  ],
+  "inputsUnchanged": true,
+  "log": {
+    "path": "docs/migration/lot7a-evidence/performance-integrated/aggregation-failure.log",
+    "sha256": "5058a4d25e2d8d0535a653bdd45059d216380f7cda23d5901f69b9fdc7727804",
+    "bytes": 204711
+  },
+  "outputExists": false,
+  "qualification": "Actual unchanged historical strict aggregator was executed after all four ABBA series. This failure remains failed. Supplemental structural qualification was separately frozen before measurement and must not relabel this result."
+}
