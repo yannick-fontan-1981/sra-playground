@@ -1,0 +1,20 @@
+{
+  "lot": "7A observed_ranked_workshop",
+  "checkout": "/workspace/sites/sra-lot7a-20261110/.sites-checkout",
+  "branch": "lot7a-ranked-workshop",
+  "base": "8fa6b261b8b23ac8d232e60c9c179e2f3407d82f",
+  "functionalCommit": "7c4c34797bf0bc374b448c985d0dee2fadfb81ca",
+  "nativeVersion": "0.50.0 isolated development candidate; will renumber after integration",
+  "nativeFrozenDigest": "8492388162915bd01be1279d645870d366f0fd306e4f31ea47e8b65aafebac7e",
+  "updated_at": "2026-11-10T18:21:36.401773+00:00",
+  "stage": "Discovered existing3I/4A coordination just now.78-file final test gate running since18:18:31Z and recorded4-game replay currentlyrunning. Browser stopped. No cost window launched. Will let active gates finish then acknowledge quiet, and start no further heavy jobs during3I slot.",
+  "coordination_acknowledged": true,
+  "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+  "publication_lock": "/workspace/shared/sra-coordination/publication.lock",
+  "heavy_work_started": true,
+  "performance_started": false,
+  "publication_started": false,
+  "request": "Please include7A in acknowledgements before any cost window.7A accepts existing3I\u21924A publication order then proposes7A with fresh common-source verification. Do not count7A as quiet until updated status says active gates finished.7A will preserve all main commits and not copy your uncommitted work.",
+  "own_agents": "one recorded-regression runner; two lightdoc/staticreview agents",
+  "publication_order": "3I0.50 then4A0.51 then7A0.52, subject to actual published source; request acknowledgement by both active roots."
+}

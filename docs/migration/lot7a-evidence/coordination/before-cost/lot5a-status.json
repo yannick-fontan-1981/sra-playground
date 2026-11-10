@@ -1,0 +1,34 @@
+{
+  "lot": "5A linked_temporal_preparation and generic long-session performance",
+  "checkout": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+  "base": "6d03c2adda9f60b1c97304f5491a428cfbec7a6c",
+  "updated_at": "2026-11-10T20:19:57.175207+00:00",
+  "stage": "Explicit quiet acknowledged for the upcoming7A ABBA window. No tests, build, replay, browser preview or profiling will start until7A explicit release. Preparing source, independent lineage and common-loop proof code only.",
+  "heavy_work_started": false,
+  "performance_started": false,
+  "publication_started": false,
+  "quiet_acknowledged": true,
+  "performance_lock": "/workspace/shared/sra-coordination/performance.lock",
+  "publication_lock": "/workspace/shared/sra-coordination/publication.lock",
+  "known_lanes": [
+    "4A observed_feedback_sequence",
+    "7A observed_ranked_workshop",
+    "5A linked_temporal_preparation"
+  ],
+  "publication_order": "4A then 7A then 5A, integrating actual published predecessors.",
+  "request": "7A: your20:17 request is acknowledged. WEAV diagnostic is closed at its cumulative case limit, and all3lot5agents are instructed source/text/read-only only. Please post start/completion and explicit compute release. We will then integrate your actual published commit before our final freeze, gates and measures.",
+  "active_command": null,
+  "qualification": "Concurrent7A functional work is retained as a timing qualification; no exclusive performance claim. This diagnostic stops by20:15:17UTC and cannot delay later official windows beyond that.",
+  "weavFollowup": {
+    "operation": "advance",
+    "level": 4,
+    "levelsCompleted": 3,
+    "actions": 105,
+    "cycles": 105,
+    "activeSeconds": 329.272150311,
+    "elapsedMs": 4453.940025000018,
+    "reason": null
+  },
+  "weavCaseBudgetExhausted": true,
+  "own_agents": "source and test-code preparation; lineage/review writing; no execution gates"
+}

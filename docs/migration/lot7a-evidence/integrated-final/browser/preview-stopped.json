@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.managed-preview-stop.v1",
+  "recordedAt": "2026-11-10T20:11:47.079215+00:00",
+  "command": [
+    "sites-preview",
+    "stop"
+  ],
+  "exitCode": 0,
+  "output": "Sites preview stopped",
+  "status": "stopped"
+}

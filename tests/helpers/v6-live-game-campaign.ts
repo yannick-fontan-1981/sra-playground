@@ -89,7 +89,7 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
     status: 'running', referenceCommit: V6_REFERENCE_COMMIT,
     budget: { levelActionCaps: Array(targetLevels).fill(600), activeSecondsPerLevel: 360, clock: 'real active compute and native execution' },
     source: sourceBefore, gameAssets: {}, actions: [], boundaries: [], prefixes: [], requests: [], domainAssessments: [],
-    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], feedbackSourceCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
+    baseline: null, pythonAgentModules: null, failure: null, inventorySourceCalls: [], recolorSourceCalls: [], workshopSourceCalls: [], feedbackSourceCalls: [], motionSourceCalls: [], motionSnapshots: {}, morphologySourceCalls: [], controlAttentionSourceCalls: [],
   };
   if (options.recordedPublic) report.recordedPublicReplay = {
     trace: options.recordedPublic.trace, baseline: options.recordedPublic.baseline,
@@ -165,6 +165,32 @@ export async function runNativeGameCampaign(options: NativeGameCampaignOptions):
             const failed = (error: unknown): never => {
               event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
               event.sourceAfter = this.state(); report.recolorSourceCalls.push(event); sourceDepth--; throw error;
+            };
+            try {
+              const result = original.apply(this, args);
+              return result && typeof result.then === 'function' ? result.then(complete, failed) : complete(result);
+            } catch (error) { return failed(error); }
+          };
+        }
+      }
+      const workshop = (runtime as unknown as { families: R[] }).families.find(f => f.id === 'public_ranked_workshop');
+      if (workshop) {
+        let sourceDepth = 0;
+        for (const method of ['proposeSource', 'recordSource']) {
+          const original = workshop[method];
+          assert.equal(typeof original, 'function', `Missing ranked-workshop source surface: ${method}`);
+          workshop[method] = function (...args: any[]) {
+            if (sourceDepth) return original.apply(this, args);
+            const event: R = { index: report.workshopSourceCalls.length, method,
+              arguments: structuredClone(args), sourceBefore: this.state() };
+            sourceDepth++;
+            const complete = (result: any): any => {
+              event.result = structuredClone(result ?? null); event.sourceAfter = this.state();
+              report.workshopSourceCalls.push(event); sourceDepth--; return result;
+            };
+            const failed = (error: unknown): never => {
+              event.error = error instanceof Error ? `${error.name}: ${error.message}` : String(error);
+              event.sourceAfter = this.state(); report.workshopSourceCalls.push(event); sourceDepth--; throw error;
             };
             try {
               const result = original.apply(this, args);

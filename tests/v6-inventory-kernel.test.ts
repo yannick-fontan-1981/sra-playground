@@ -28,7 +28,10 @@ test('inventory has one cold source owner at its original entry and reuses the o
     const service=new V6AgentService(()=>runtime),result=await service.handle({type:'init',sequence:0,sessionId:'inventory-registration',observation:copy(hano.publicProtocol.events[0].observation),budgets:copy(hano.budgets)});
     const material=(result.snapshot.coverage as R).sourceGroups.find((g:R)=>g.id==='factored_material_return'),index=material.entryPoints.indexOf('observed_inventory_composition');
     assert.ok(index>=0);assert.equal(material.families[index],ID);assert.equal(material.families.filter((id:string)=>id===ID).length,1);
-    assert.equal(material.entryPoints[index-1],'reactive_contact_continuation');
+    const declared=declarations.strategy.declarations[0]!.configuration.factored_material_return.ordered_subquestions;
+    const connected=material.entryPoints.filter((entry:string|null)=>entry!==null);
+    assert.deepEqual(connected,declared.filter((entry:string)=>connected.includes(entry)));
+    assert.ok(material.entryPoints.indexOf('reactive_contact_continuation')<index);
     const graph=runtime.inspectKnowledge();assert.deepEqual(Object.values(graph.nodes).filter(n=>n.kind==='family_state'&&n.family===ID).map(n=>n.id),[OWNER]);
     assert.ok(graph.nodes['program:v6.observed_inventory.choose']);assert.equal(Object.keys(value(runtime,OWNER).source_state).length,8);
     assert.ok(value(runtime,OWNER).caller_context);assert.ok(value(runtime,OWNER).caller_context.meter);

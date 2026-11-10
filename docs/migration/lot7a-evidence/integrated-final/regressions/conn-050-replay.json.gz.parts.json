@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "conn-050-replay.json.gz",
+    "sha256": "5e736b0167acada767719054e9672f51086ee8659159ceaee6c5815a5ba9813c",
+    "bytes": 3732728
+  },
+  "parts": [
+    {
+      "file": "conn-050-replay.json.gz.part000",
+      "sha256": "3fc48f39e0d301f417bcd8ac92f02470fa36b823d8d6e4c73005106dfca6341b",
+      "bytes": 900000
+    },
+    {
+      "file": "conn-050-replay.json.gz.part001",
+      "sha256": "cbac9750f5aa22197024fa0cefc2b88639f40f026daee5a228dba6b0587119d5",
+      "bytes": 900000
+    },
+    {
+      "file": "conn-050-replay.json.gz.part002",
+      "sha256": "c334516e2ed1658ff3776919dd6312d8d9231689f0ab04e657a1734c8c0b977e",
+      "bytes": 900000
+    },
+    {
+      "file": "conn-050-replay.json.gz.part003",
+      "sha256": "d9c5d5bc2cba57021da4ae59115fc2b774686ba74f926ee5a6354797418d2c02",
+      "bytes": 900000
+    },
+    {
+      "file": "conn-050-replay.json.gz.part004",
+      "sha256": "378d549d49a73d7c7176cc39e5f537df63431f6f432ed88e85515e3c480c2032",
+      "bytes": 132728
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

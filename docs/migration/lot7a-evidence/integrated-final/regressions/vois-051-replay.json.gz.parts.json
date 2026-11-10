@@ -1,0 +1,81 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "vois-051-replay.json.gz",
+    "sha256": "add92f05b526b0ed4b760488282285f86173f618d139af1b86d7ca70a149d249",
+    "bytes": 12325381
+  },
+  "parts": [
+    {
+      "file": "vois-051-replay.json.gz.part000",
+      "sha256": "adab97680fdbfb2d0dbac4a9cf7164915165c86af3cee2ccc401ee9903f7f157",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-051-replay.json.gz.part001",
+      "sha256": "47359f171b368e57a33c0ddc035cc1bf87b8e82e306b7fc379141c06cc893d69",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-051-replay.json.gz.part002",
+      "sha256": "6f97fa428ff836d63d03e4fcbd48ab0f7bf17b2cfc64113e8fb224d93dee9824",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-051-replay.json.gz.part003",
+      "sha256": "530ad7ede7a6087fc02eb024920dc1a3449f63f1657330ea5a24a97b96365675",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-051-replay.json.gz.part004",
+      "sha256": "0b5abade0ddd9d822d70318ca84b567a00b76fb8e80ad6d738eafbbe66cdfca7",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-051-replay.json.gz.part005",
+      "sha256": "0d5f7a0660a39fe4a17d833c345e22d485b422e772387e49de492bdd70e881ab",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-051-replay.json.gz.part006",
+      "sha256": "302f05fb766d7c1e389403e4b98697483f04d6c9d239577aab6ea42a50b31b08",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-051-replay.json.gz.part007",
+      "sha256": "a6b45cc4778a4b93227cc1324949d38389b3e8409c5d812ac1fcb58e7c975d5a",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-051-replay.json.gz.part008",
+      "sha256": "999a9af7b4953c53d83df84d69011714311230a17195b2fafda60f93241a63e1",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-051-replay.json.gz.part009",
+      "sha256": "45b3f3d29cfe8bcc986f1eeb9f13678fd7763720e28a678a28e51aab36ced60e",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-051-replay.json.gz.part010",
+      "sha256": "d6362afda2e6aabb272e864b608c76d1211b5d05593cc3d0228be6e15abc9737",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-051-replay.json.gz.part011",
+      "sha256": "728469205bd5218a9c6b9f6ee7b98d1f484cfa2fc6bcf912d67875f427e69480",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-051-replay.json.gz.part012",
+      "sha256": "501f630e448390f4d18ebf8342ad7fd8b98fc1ddd8ae3bcf253debbb7b42ca93",
+      "bytes": 900000
+    },
+    {
+      "file": "vois-051-replay.json.gz.part013",
+      "sha256": "a807587717299c25845b43eddf05c05b03cb4eb73d860e46210e0abcc1200356",
+      "bytes": 625381
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

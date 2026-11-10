@@ -1,0 +1,273 @@
+{
+  "schema": "logos-engine.lot7a-cost-report-render.v1",
+  "recordedAt": "2026-11-10T17:46:25.264298-03:00",
+  "status": "rendered_retained_receipts",
+  "generator": {
+    "path": "docs/migration/lot7a-evidence/write-cost-results.py",
+    "bytes": 41978,
+    "sha256": "60245844520a48eef37f662f8826648b84ee348a1983b13da3786b6be0cb845a"
+  },
+  "report": {
+    "path": "docs/migration/lot7a-evidence/performance-integrated/results.md",
+    "bytes": 34407,
+    "sha256": "51c33a58dd7662c12fecde1c52a32717abf2b417728eea747bf4542de54068f7"
+  },
+  "inputs": [
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/window.json",
+      "bytes": 10531,
+      "sha256": "d950d2d319d85d705e13f0e3941ef07e9ca513d1b09e8fbeb4f0a914f8f33434"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/declaration.json",
+      "bytes": 5556,
+      "sha256": "ceeab7f6148871594857fc7638c5af5f5a1fddcee6cf29e69489d36d8926b7f0"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/global-budget-policy.json",
+      "bytes": 2293,
+      "sha256": "7d1e6bc63875e7bd3b4f8e30dbc6ce9da2e8d668f8aa1bf4c76f8dbb23a891ec"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/readiness.json",
+      "bytes": 35712,
+      "sha256": "4a7c821f19201fda910345d35d2787c83189c64c02b7dc6c8ff52c65c23d9a6e"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/static-preflight.json",
+      "bytes": 15937,
+      "sha256": "bc9f90445c62714eebc962a2ebf144a521d08b28386364158fc2bb6b86e8428b"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-growth-comparison.json",
+      "bytes": 244977,
+      "sha256": "279768930da02c8d68788bbd238c01a7b2c3092f84323ac9f0e77543c6eb2129"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-growth-review.json",
+      "bytes": 746269,
+      "sha256": "dde0cf688affab3160b135f007708350b62d46dcc2c5d02858bdc464e5db70a5"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/log-transport.json",
+      "bytes": 2880,
+      "sha256": "37a5f2c9c93961513c391bc83a27387599d043232006c364dd240863ef6efc5b"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/preparation.json",
+      "bytes": 3414,
+      "sha256": "f41b16c4ad509962afe5c1bcc0fffc941ed19befd2c250e65485cf095aecb809"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/protocol-check.json",
+      "bytes": 417,
+      "sha256": "e7587fc3a0ce1725f8d71762d6a2a9f3c316d57ae424e80c9ecf05d433fd6362"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort1/baseline.json",
+      "bytes": 428904,
+      "sha256": "5b73b48fed29a26ade21664c0e1e4d6432a5a1b50f5f6dad54ae61f731f467be"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort1/after.json",
+      "bytes": 429686,
+      "sha256": "254823718bbdde20522ace19809cfad34cd47df2971e12d55153160ded21e824"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort1/comparison.json",
+      "bytes": 25340,
+      "sha256": "0f6d4c0d7901ba28ecb2a4ea560f7cb8df7e9b9245270ff2b67b70ca4e2bc391"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort2/baseline.json",
+      "bytes": 429026,
+      "sha256": "b3160ac9e9f6f1ca4a8e239fc4db1a4b88bb4ea972d5fa3dd2e28127c6a7b263"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort2/after.json",
+      "bytes": 429695,
+      "sha256": "627a1ba5267d9c9ab8137b207d086625856e725beb5928ea153e84e8e94231a7"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort2/comparison.json",
+      "bytes": 25218,
+      "sha256": "4f3b0a54661e35edb9f3ce4b0fee5a8b0c7bd4689a6958ef386236663a9a39f5"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/source-archive.json",
+      "bytes": 34737,
+      "sha256": "8456173a89df59cf3d433c31c1b801e8dd209465dfa5086d8b4eeaad2e7a2c33"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/source-manifest.json",
+      "bytes": 33095,
+      "sha256": "75e1dbe4002f737c2d5248a08531c6b60002c3114692b55df3a5c7255c79d6cc"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-baseline/source-manifest.json",
+      "bytes": 32379,
+      "sha256": "391b3e33c4bbd66ed9a1885d4803fb754b596a6e31ba42b79114fc2c43d6e6cd"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/consolidate-owner-costs.mjs",
+      "sha256": "2f105646bf41022f83b330b9d95d5a7720cb7f02a4385a0dfb97122b68a4c132",
+      "bytes": 50099
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/review-owner-costs.py",
+      "sha256": "5b1758f03d2031e956a68b4e43a3f1b5a079c32ec168c813de88b3e7f64b802c",
+      "bytes": 67447
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-structural-fixture.json",
+      "sha256": "146b702ae04126eb5bc45208c96c8ba190d1d693d050e0e48f41f10303ab49cb",
+      "bytes": 60040
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-source-inventory.json",
+      "sha256": "772e37516ea22987663f6c8fe780c94da37e1faeaccdd63bae82e3e2927e0927",
+      "bytes": 105942
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "5c2c4a0d9fce3f6fae72973073a0348664d63b0608aae066467afb33b943c820",
+      "bytes": 138902
+    },
+    {
+      "path": "src/logos-engine/v6-ranked-workshop.ts",
+      "sha256": "002ea017828e0dc1304c3f0a8eeb6ff4acb66c70ff1d8ff269a917d132a18cf2",
+      "bytes": 22626
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "sha256": "5efe83d07b6d5354b9a26b39320449ecaa631ca55563c683779f067a8d670bf0",
+      "bytes": 14854
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-growth-contract.json",
+      "bytes": 2724,
+      "sha256": "562c60c639690c86a11cd386c71d2b5d40a7217859a8b08ab7f69653d30df391"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/diagnostic/owner-cost-io-correction-v1.json",
+      "sha256": "bda3465da0bcc5c6ba3b2df015183c99fab29a7f73ca90e697d9add5c2ccef13",
+      "bytes": 8227
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/diagnostic/consolidator-initial-path-failure.json",
+      "bytes": 1070,
+      "sha256": "c23326c59d705bb08d6ea5c1954350ff5bef6576e4090968d8e9c99c53aecb6b"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/consolidate-owner-costs-io-v1.mjs",
+      "bytes": 54936,
+      "sha256": "78ed9ea54051f9f5de6ce7a6659094d33d2729f3cd53075a03c44be3a98f6aac"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/review-owner-costs-io-v1.py",
+      "bytes": 73478,
+      "sha256": "c95fd37389b7af18c049b6264fab968a52d4055f7c590004ecd4877d8b65044e"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort1/baseline.log",
+      "bytes": 1569,
+      "sha256": "d406ed5572afe9de4f6d5660046fa7db8547400773b5bcf4602fbad0a438c9c1"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort1/baseline.log.gz",
+      "bytes": 442,
+      "sha256": "c4923c52f2bd1fbb2c1d7e74b6786c9eab787b92d5adc877ee3a72838607bb6f"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort1/after.log",
+      "bytes": 1569,
+      "sha256": "6f528e72a58cff7ce518263f4a77ccbe36910c570f2f8d7ca8019eab952324e2"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort1/after.log.gz",
+      "bytes": 441,
+      "sha256": "3f21e5eb43a8321af0b1deab3f3768c2b98c39642180d6e0d711ee7f4f516db4"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort2/after.log",
+      "bytes": 1576,
+      "sha256": "4c6100b2bdaa671fcbb0420462b4da58399e8068361e2065174c075615976bec"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort2/after.log.gz",
+      "bytes": 446,
+      "sha256": "99a0ff9c90fd172a4c9209f605c63952c3c000a6dee2db7d20446fe52f59d660"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort2/baseline.log",
+      "bytes": 1571,
+      "sha256": "0b5dd72e339eccfd65ffb2ad8ec45bc33134de683b85cb473586b42cd7cf3e2b"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/cohort2/baseline.log.gz",
+      "bytes": 440,
+      "sha256": "85c7afda421b6a4e060ee207f1d9adafcca1d7b738ffd45ba2250beed45b6d88"
+    }
+  ],
+  "aggregateDiagnostics": 16,
+  "cohortDiagnostics": 32,
+  "displayedMeasuredSessions": 32,
+  "timezone": "UTC−03",
+  "inputReceiptsUnchanged": true,
+  "localLinksChecked": 30,
+  "runtimeOrGameExecuted": false,
+  "measurementExecuted": false,
+  "watchedExternalInputs": [
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/scripts/measure-native-loop-costs.mjs",
+      "bytes": 20670,
+      "sha256": "47686d5c3294cf9fde70b9699a0ea184b8b978257d8c45a0f36945f8beb37c59"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+      "bytes": 48531,
+      "sha256": "a6f6fe587dfe5e6d65b19d44b45120bd807d4bfaa80117821999d5bfd4b8d91f"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "bytes": 46966,
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/docs/migration/native-campaigns-v39/stck-public-trace.json.gz",
+      "bytes": 53583,
+      "sha256": "4610327ca5c6b67e3a42983cc55b40eab3d5aa858a185d8e81f753ba2bcb7e6b"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/docs/migration/native-campaigns-v57/final/smlp-public-trace.json.gz",
+      "bytes": 111624,
+      "sha256": "325ff611d1f80d0c07ce2c4ee8af707297a918d505db607c35cf411db9753de9"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/docs/migration/lot7a-evidence/performance-integrated/cases.json",
+      "bytes": 1451,
+      "sha256": "487e4cf2be5415855af688c6b03be90ffc8b57c29ae0abfe7bef4b340af15a6d"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/docs/migration/lot7a-evidence/performance-integrated/comparison-policy.json",
+      "bytes": 991,
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68"
+    },
+    {
+      "path": "/workspace/sites/sra-lot7a-baseline-integrated/docs/migration/lot7a-evidence/performance-integrated/protocol.md",
+      "bytes": 12532,
+      "sha256": "164588588e75f7b88486c0277b5f038ad5614e901285391734dc87f799dd166c"
+    }
+  ],
+  "qualification": "Formatting of completed retained evidence only. No assumed outcome, selected session or new acceptance rule."
+}

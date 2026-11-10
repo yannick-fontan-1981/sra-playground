@@ -1,0 +1,10 @@
+{
+  "schema": "logos-engine.lot7a.cost-report-schema-correction.v1",
+  "createdAt": "2026-11-10T19:14:13.313614+00:00",
+  "reason": "Read-only preflight review found four report accesses to historicalPhaseRule, whereas the predeclared unchanged review-native-global-cost-window.py emits diagnosticPhaseRule.",
+  "modified": "docs/migration/lot7a-evidence/write-cost-results.py",
+  "changedField": "diagnosticPhaseRule",
+  "measurementChanged": false,
+  "measuredSessionsBeforeCorrection": 0,
+  "verification": "Python AST parsed; field name checked against the actual reviewer source. No cost/test/build/replay executed."
+}

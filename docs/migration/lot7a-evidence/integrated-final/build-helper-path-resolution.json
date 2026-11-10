@@ -1,0 +1,19 @@
+{
+  "schema": "logos-engine.lot7a.build-helper-path-resolution.v1",
+  "recordedAt": "2026-11-10T19:59:13.323201+00:00",
+  "initialChecks": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/validation/checks-run.json",
+    "bytes": 36815,
+    "sha256": "a680e914b20710fcc18973e9e80a3c1122d325026758267e49ffb38c929e1d95"
+  },
+  "initialBuildLog": {
+    "path": "docs/migration/lot7a-evidence/integrated-final/validation/build-output.log.gz",
+    "bytes": 391,
+    "sha256": "ca25ffd15bc807fc3ad3450f71d3e224a852d931da99845b4228a1a3d44a0f2e"
+  },
+  "initialPath": "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.5/scripts/build-site.mjs",
+  "actualHelper": "/home/agent/.codex/plugins/cache/openai-curated-remote/sites/1.1.6/scripts/build-site.mjs",
+  "cause": "MODULE_NOT_FOUND before build execution. Current installed Sites helper is1.1.6; the remembered1.1.5 path no longer exists.",
+  "resolution": "Rerun the existing five-check gate in an exclusive retry directory with the actual installed helper. No native source or test edit. The first receipt remains unchanged.",
+  "testsRerun": false
+}

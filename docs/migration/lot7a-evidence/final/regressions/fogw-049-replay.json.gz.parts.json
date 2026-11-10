@@ -1,0 +1,61 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "fogw-049-replay.json.gz",
+    "sha256": "9030b68c13ccb78b910b8315e76a86b11699d5f58f0122a91cbcc507dbd7c3f8",
+    "bytes": 8169697
+  },
+  "parts": [
+    {
+      "file": "fogw-049-replay.json.gz.part000",
+      "sha256": "a7b3e5c84b60c94643ea58cbc900e577729f2c07b308dc3f32f71b48f8ac011f",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part001",
+      "sha256": "28909cef4e4d317cc2d819ba380a8ec5e0bc7fde2d10dca15af351b5c0d72866",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part002",
+      "sha256": "142acd150cc28b4cc9f30eea3ef466a0904d662fe86b738123367164f99680ec",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part003",
+      "sha256": "78bd37c66a092733619068f985cf2d57397f91b493be603c7a4814af21c6a8e3",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part004",
+      "sha256": "83812597d902c6e561b3633430606f6c056e4b5b6ec24bce6dbf5c6772c004e6",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part005",
+      "sha256": "6c4857ce128d6f58cb2d3996114e8358c62d7669fc771227b67896537eb4127e",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part006",
+      "sha256": "b76e21082854e32319a7a2ec1d6f6d38bbb1ec0ed4ee7258fea1c4b18dafc9c7",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part007",
+      "sha256": "9485d91dfa17c33241306e1e7cbbda1a08b12b59223e7cde674c35458757f845",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part008",
+      "sha256": "72251f9c749d8ec40f8431cd647f9f001a8546224610a953acf54989b6a3b4c1",
+      "bytes": 900000
+    },
+    {
+      "file": "fogw-049-replay.json.gz.part009",
+      "sha256": "3769c3ec710a79a25da7008daca314c3b8ccaa568d9a106057dd06349e7ff606",
+      "bytes": 69697
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

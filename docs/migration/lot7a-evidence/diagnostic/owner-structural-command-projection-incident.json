@@ -1,0 +1,56 @@
+{
+  "schema": "logos-engine.lot7a-functional-qualification-incident.v1",
+  "status": "diagnosed_before_measurement",
+  "recordedAt": "2026-11-10T20:19:13.840938+00:00",
+  "failureReceipt": {
+    "path": "docs/migration/lot7a-evidence/performance-integrated/owner-structural-attribution.json",
+    "sha256": "42b5f3a6f73d14a8ca273805fc516de1176eef2da85fe888bb06082c54e23ca8",
+    "bytes": 14224
+  },
+  "priorQualifier": {
+    "path": "docs/migration/lot7a-evidence/diagnostic/qualify-cost-owner-graphs-before-command-projection.mjs",
+    "sha256": "27ee57bdef6e345c53698f9ff87f4ab48c388a495b69cbf69e9f0c1795f2ebf7",
+    "bytes": 37629
+  },
+  "serviceBoundarySource": {
+    "path": "src/runtime/v6-agent-service.ts",
+    "sha256": "02ce41d5e014fcc06f85371f552f949b9dfce56093afae4bc0fcb7aad2f60d96",
+    "bytes": 18195
+  },
+  "failedCheck": {
+    "name": "graphs:STCK:warmup:5",
+    "passed": false,
+    "error": {
+      "name": "AssertionError",
+      "message": "Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n    action_ref: 'ACTION5',\n-   data: {}\n  }\n"
+    }
+  },
+  "diagnosis": "Captured native recordSource command omits optional data; the actual V6AgentService commandFromNative boundary spreads command.data into a public data object, producing data:{} when absent. The qualifier incorrectly demanded cross-layer object identity. Captures and native decisions remain unchanged.",
+  "approvedCorrection": "Compare source command after precisely the service data-spread projection; retain raw source command and exact public command. Reject unknown command keys and invalid present data rather than widen equality.",
+  "captureInputs": [
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-graphs-baseline.receipt.json",
+      "bytes": 102291,
+      "sha256": "0108e519be6f852a12022c96ad17795d046ae73aa33441456ae47708eb19e24d"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-graphs-baseline.json.gz",
+      "bytes": 4739930,
+      "sha256": "0fc9843376ae50bcdcd92f126696eb0558b39cd203425810723e941f5a4c4f2a"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-graphs-candidate.receipt.json",
+      "bytes": 103274,
+      "sha256": "3443b55f40a40b185ebcd34a6a27937faf30b93af2f9eac5e10069980e8fbd64"
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/performance-integrated/owner-graphs-candidate.json.gz",
+      "bytes": 4759404,
+      "sha256": "dd178574a72ecaf35a5113486ffd9e03dc8d90d2c846a0e81b07fad07cb43285"
+    }
+  ],
+  "preservedFailure": true,
+  "captureRegenerationRequired": false,
+  "officialCostWindowExists": false,
+  "readinessExists": false
+}

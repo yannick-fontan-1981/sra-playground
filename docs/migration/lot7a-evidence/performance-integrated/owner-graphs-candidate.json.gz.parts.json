@@ -1,0 +1,41 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "owner-graphs-candidate.json.gz",
+    "sha256": "dd178574a72ecaf35a5113486ffd9e03dc8d90d2c846a0e81b07fad07cb43285",
+    "bytes": 4759404
+  },
+  "parts": [
+    {
+      "file": "owner-graphs-candidate.json.gz.part000",
+      "sha256": "64e9c4aa6d057da38b01cc0535cd06ae363f22a5dbcf3a46fdab966ee285bdda",
+      "bytes": 900000
+    },
+    {
+      "file": "owner-graphs-candidate.json.gz.part001",
+      "sha256": "9f67f5491bb6797a601efb68b953d6d2acaeafc31bf55477e5733afc85c9e220",
+      "bytes": 900000
+    },
+    {
+      "file": "owner-graphs-candidate.json.gz.part002",
+      "sha256": "1d36ba4f9609b49aa10e5254627dad4f10fb3b5b86ee64b6067ad1fa7f2bb074",
+      "bytes": 900000
+    },
+    {
+      "file": "owner-graphs-candidate.json.gz.part003",
+      "sha256": "32ee119b5bdf6f483b843f86c5a6f6dbb83ebca828a3af156dfef95c0f9063bc",
+      "bytes": 900000
+    },
+    {
+      "file": "owner-graphs-candidate.json.gz.part004",
+      "sha256": "e1d728ac4d95e3097fd0bfd7f0ec6fd79efb0f6bfc0c3bcc0debd8549aae8b9a",
+      "bytes": 900000
+    },
+    {
+      "file": "owner-graphs-candidate.json.gz.part005",
+      "sha256": "9c8e8eb5fc4898e3ffb133fac62265baf7f90c9f0474f3f9f3656094ce406c04",
+      "bytes": 259404
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}
