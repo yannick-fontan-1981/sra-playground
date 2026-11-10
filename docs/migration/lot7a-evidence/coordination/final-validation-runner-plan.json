@@ -1,0 +1,10 @@
+{
+  "schema": "logos-engine.lot7a.final-validation-runner-plan.v1",
+  "createdAt": "2026-11-10T19:15:20.587626+00:00",
+  "finalRunner": "scripts/verify-native-delta.py",
+  "testScope": "Union of preserved7A78-file scope and actual published4A integrated test inventory; no removals. Manifest fixed before launch.",
+  "reason": "The unchanged delivery-integrity verifier requires schema logos-engine.native-delta-verification.v1. The earlier isolated7A run-release-checks.py generated its own receipt schema and is retained unchanged with its original failed result. Final integrated checks use the existing official runner directly, so no receipt conversion or retrospective schema rewriting is needed.",
+  "unchangedIntegrityVerifier": "scripts/verify-native-delivery.py",
+  "finalEvidenceDirectory": "docs/migration/lot7a-evidence/integrated-final",
+  "executed": false
+}

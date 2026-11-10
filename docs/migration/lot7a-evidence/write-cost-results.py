@@ -227,10 +227,10 @@ def main():
             'Global decision summary differs from its cases')
     expected_status = 'accepted_under_user_global_rule' if decision['accepted'] else 'global_budget_review_required'
     require(decision['status'] == expected_status, 'Global decision status is inconsistent')
-    require(decision['sources'] == aggregate['sources'] and decision['historicalPhaseRule']['status'] == aggregate['status']
-            and decision['historicalPhaseRule']['budgetMetricCount'] == aggregate['budgetMetricCount']
-            and decision['historicalPhaseRule']['withinObservedBudget'] == aggregate['withinObservedBudget']
-            and decision['historicalPhaseRule']['unresolved'] == aggregate['unresolved'], 'Copied diagnostics differ')
+    require(decision['sources'] == aggregate['sources'] and decision['diagnosticPhaseRule']['status'] == aggregate['status']
+            and decision['diagnosticPhaseRule']['budgetMetricCount'] == aggregate['budgetMetricCount']
+            and decision['diagnosticPhaseRule']['withinObservedBudget'] == aggregate['withinObservedBudget']
+            and decision['diagnosticPhaseRule']['unresolved'] == aggregate['unresolved'], 'Copied diagnostics differ')
     require(decision['measuredSessions'] == policy['measuredSessions'] == 32
             and decision['measuredActions'] == policy['measuredActions'] == 400
             and aggregate['method']['excludedMeasuredSessions'] == aggregate['method']['excludedOutliers'] == 0,
