@@ -1,0 +1,12 @@
+{
+  "schema": "logos-engine.retained-tool-launch-failure.v1",
+  "recordedAt": "2026-11-10T21:22:35.627950+00:00",
+  "status": "launch_failed",
+  "recordingMethod": "Assistant-observed exec_command launch error; no subprocess output or exit code existed.",
+  "attemptedWorkingDirectory": "/workspace/sites/sra-lot5a-20261110/.sites-checkout",
+  "command": "python -B docs/migration/lot5a-evidence/finalize-owner-cost-contract.py docs/migration/lot5a-evidence/performance > docs/migration/lot5a-evidence/performance/owner-growth-contract-finalization.log 2>&1",
+  "processStarted": false,
+  "exitCode": null,
+  "error": "exec_command failed: CreateProcess: exec-server rejected request (-32603): No such file or directory (os error 2)",
+  "correction": "Use the existing authorized checkout /workspace/sites/sra-lot5-20261110/.sites-checkout; no source or comparison policy change."
+}

@@ -140,7 +140,7 @@ export class NativeKnowledgeStore {
     if (expectedChain !== this.graphChain) throw new Error('Native knowledge graph changed');
     this.busy = true;
     try {
-      let staged = this.state;
+      const staged = this.kernel.beginTransaction(this.state);
       for (const write of writes) {
         // Fragment before the ordinary V7 JSON boundary: a complete observed
         // episode can exceed one million values without any individual node
@@ -150,12 +150,12 @@ export class NativeKnowledgeStore {
         if (GRAPH_STATE_KINDS.has(write.kind)) {
           const graph = splitNativeState(write.value, write.id);
           for (const fragment of graph.fragments) {
-            const existing = staged.nodes[fragment.id];
+            const existing = staged.node(fragment.id);
             if (existing) {
               if (existing.kind !== 'state_fragment' || existing.scope !== this.scope) throw new TypeError('Native fragment identity is already bound to another kind or scope');
               continue;
             }
-            staged = await this.kernel.commit(staged, immutableJson({
+            await staged.commit(immutableJson({
               id: fragment.id, kind: 'state_fragment', revision: 0, status: 'retained', scope: this.scope,
               origin: { source_digest: this.kernel.sourceDigest, store_profile: NATIVE_STORE_PROFILE, ...cause },
               evidence: [], relations: [], component: 'native_state_fragments', value: fragment.value,
@@ -163,7 +163,7 @@ export class NativeKnowledgeStore {
           }
           storedValue = immutableJson(graph.root);
         } else storedValue = encodeNativeState(write.value);
-        const previous = staged.nodes[write.id];
+        const previous = staged.node(write.id);
         if (previous && (previous.kind !== write.kind || previous.scope !== this.scope)) throw new TypeError('Native node identity cannot change kind or scope');
         // Metadata-only writes must retain their delta, provenance and revision.
         // Share only the already closed payload when its full typed encoding is
@@ -179,9 +179,9 @@ export class NativeKnowledgeStore {
           ...(write.component === undefined ? previous?.component === undefined ? {} : { component: previous.component } : { component: write.component }),
           ...(definition === undefined ? {} : { definition }),
         };
-        staged = await this.kernel.commit(staged, immutableJson(node) as JsonObject, cause);
+        await staged.commit(immutableJson(node) as JsonObject, cause);
       }
-      this.state = staged;
+      this.state = staged.finish();
     } finally { this.busy = false; }
   }
 

@@ -1,0 +1,28 @@
+{
+  "schema": "logos-engine.lot5a-exclusive-window-execution.v1",
+  "status": "passed",
+  "startedAt": "2026-11-10T21:29:50.452507+00:00",
+  "command": [
+    "python",
+    "-B",
+    "scripts/run-native-cost-window.py",
+    "/workspace/sites/sra-lot5-baseline-052",
+    "docs/migration/lot5a-evidence/performance",
+    "docs/migration/lot5a-evidence/baseline/source-manifest.json",
+    "docs/migration/lot5a-evidence/final/test-expectation-correction/source-manifest.json"
+  ],
+  "lock": "/workspace/shared/sra-coordination/performance.lock",
+  "lockAcquired": true,
+  "nodeOptionsOverride": null,
+  "coordination": "docs/migration/lot5a-evidence/performance/coordination.json",
+  "exitCode": 0,
+  "finishedAt": "2026-11-10T21:38:25.703235+00:00",
+  "elapsedSeconds": 515.2503746669972,
+  "log": {
+    "path": "docs/migration/lot5a-evidence/performance/exclusive-window-execution.log",
+    "bytes": 6762,
+    "sha256": "39835097f7b9d3d96d353f52228f123f36f119fe726818ed7666d6f50313e87d"
+  },
+  "windowStatus": "passed",
+  "finalIntegrity": "passed"
+}

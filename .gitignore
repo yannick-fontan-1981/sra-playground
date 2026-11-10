@@ -365,3 +365,23 @@ docs/migration/lot3a-cost-evidence/diagnostic/smlp-after.cpuprofile
 
 # Exact frozen source archive; restore with freeze-v53-native-source.py restore DIRECTORY
 /docs/migration/lot7b-evidence/attempt1/source-archive.tar.gz
+
+/docs/migration/lot5a-evidence/final/regressions/catr-052-replay.json.gz
+/docs/migration/lot5a-evidence/final/regressions/conn-052-replay.json.gz
+/docs/migration/lot5a-evidence/final/regressions/fogw-052-replay.json.gz
+/docs/migration/lot5a-evidence/final/regressions/mind-052-replay.json.gz
+/docs/migration/lot5a-evidence/final/regressions/rswp-052-replay.json.gz
+/docs/migration/lot5a-evidence/final/regressions/vois-052-replay.json.gz
+/docs/migration/lot5a-evidence/final/regressions/weav-052-replay.json.gz
+
+# Lot5A exact frozen archives; lossless parts and reconstruction receipts are retained.
+/docs/migration/lot5a-evidence/final/source-archive.tar.gz
+/docs/migration/lot5a-evidence/final/test-expectation-correction/source-archive.tar.gz
+
+# Exact evidence originals; restore with scripts/evidence-byte-parts.py restore DIRECTORY
+/docs/migration/lot5a-evidence/performance/baseline-structure.json.gz
+/docs/migration/lot5a-evidence/performance/candidate-structure.json.gz
+
+# Lot 5A server object-size repair: exact bytes are retained as parts and manifests.
+/docs/migration/lot5a-evidence/performance/diagnostic/shared-fragment-first-creator.json
+/docs/migration/lot5a-evidence/final/transport/retained-original-history.bundle

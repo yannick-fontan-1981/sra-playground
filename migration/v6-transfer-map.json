@@ -4521,6 +4521,95 @@
         "tests/v6-symbol-geometry-reference.test.ts"
       ],
       "notes": "Only the frame, context and candidate measurements consumed by Symbols are transferred and compared to original source, with source bounds4096area/512components/32frames and the empty result above32frames. Symbols always supplies additions=(). The unused spaced wrapper, predecessor translation reasoning and additions-history updater remain outside this module transfer. Immutable FrameGrid-keyed measurement caching is bounded to8entries and carries no learned state or authorization."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_linked_preparation.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-linked-temporal-preparation.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-linked-preparation-reference.py",
+        "tests/fixtures/v6-linked-preparation-reference.json.gz",
+        "tests/v6-linked-temporal-reference.test.ts",
+        "tests/v6-linked-temporal-preparation.test.ts",
+        "docs/migration/lot5a-linked-temporal-lineage.md",
+        "docs/migration/lot5a-evidence/diagnostic/source-oracle-export.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-development.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-validation.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-tests.tap"
+      ],
+      "notes": "Lot5A transfers the complete consumed LinkedPreparation wrapper on the admitted public-observation domain: propose delegates exactly to PhaseRelations.linked_contact.propose and adds linked_preparation_plan; full_observation preserves already complete observations or uses the existing neutral observer; before/after preserve delegation; record retains the raw event list and scored witnesses. Native recordSource preserves the raw source list and record adapts it to the standard {events} envelope. The independent original-Python fixture compares cold chains, complete wrapper state and repeated native restoration. An already retained partial BEFORE remains admitted when source snapshot does not consume it. Malformed AFTER without entities has an explicit atomic native-ingress qualification recorded below. Native checkpoint ownership, validation and bounded production search are named extensions. This component status does not certify the production-priority common caller or the final merged source."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_linked_contact.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-linked-temporal-contact.ts",
+        "src/logos-engine/v6-linked-temporal-common.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-linked-preparation-reference.py",
+        "tests/fixtures/v6-linked-preparation-reference.json.gz",
+        "tests/v6-linked-temporal-reference.test.ts",
+        "tests/v6-linked-temporal-preparation.test.ts",
+        "docs/migration/lot5a-linked-temporal-lineage.md",
+        "docs/migration/lot5a-evidence/diagnostic/source-oracle-export.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-development.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-validation.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-tests.tap"
+      ],
+      "notes": "Lot5A transfers the LinkedContact own layer: measured open enclosures and linked nodes, phase-slot measurement, body/floor/quantum inference, command-vector acquisition, source-ordered floor paths and contact selection, entry/departure/reentry contrasts, persistent and reversible preparation, frozen source paths, replay support and refutation, proposal envelopes, per-step guards and preservation obligations. Source JSON spacing and ordered vector insertion are preserved. Cold fixtures include actual public calibrations followed by a two-action key path and a contrasting no-remote-effect return, not injected learned contact state. The source prefix bound min(16, remaining), stop at unresolved contact and official-boundary behavior remain. The default component path is source-compatible; native production node/work/deadline bounds roll back partial contact-proposal mutation and retain blocking unknown. Component verification does not assert WEAV contribution, a forced physical move or a new click-path policy."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_phase_relations.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-linked-temporal-phase.ts",
+        "src/logos-engine/v6-linked-temporal-common.ts",
+        "src/logos-engine/v6-linked-temporal-preparation.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-linked-preparation-reference.py",
+        "tests/fixtures/v6-linked-preparation-reference.json.gz",
+        "tests/v6-linked-temporal-reference.test.ts",
+        "tests/v6-linked-temporal-preparation.test.ts",
+        "docs/migration/lot5a-linked-temporal-lineage.md",
+        "docs/migration/lot5a-evidence/diagnostic/source-oracle-export.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-development.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-validation.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-tests.tap"
+      ],
+      "notes": "Lot5A transfers the closure consumed passively by LinkedPreparation: contiguous public snapshots, geometry registries, path compression and marker switches, conditional path-repetition fitting, reversible remote candidates, frozen future-path prediction, counterexamples, changed-endpoint support, condition visibility/occlusion, epoch/state boundaries, conditional PhaseTransfer construction and source guard delegation. The oracle autonomously acquires model, remote relation and changed-endpoint support before two scored boundaries; the complete wrapper states are compared. Legacy phase guards are tested as explicitly seeded components and do not imply their proposal was selected in production. The independent PhaseRelations.propose policy and its separate planning alternatives remain unported/unrouted, so the complete source module remains partial_transfer. Native snapshot ownership and checkpoint validation are explicit adaptations, including atomic rejection of malformed AFTER rather than reproduction of the source partial mutation."
+    },
+    {
+      "sources": [
+        "agents/yf_arc3_v6/laya_proto/common_phase_transfer.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-linked-temporal-phase.ts",
+        "src/logos-engine/v6-linked-temporal-common.ts",
+        "src/logos-engine/v6-linked-temporal-preparation.ts"
+      ],
+      "status": "partial_transfer",
+      "proof": [
+        "scripts/export-v6-linked-preparation-reference.py",
+        "tests/fixtures/v6-linked-preparation-reference.json.gz",
+        "tests/v6-linked-temporal-reference.test.ts",
+        "tests/v6-linked-temporal-preparation.test.ts",
+        "docs/migration/lot5a-linked-temporal-lineage.md",
+        "docs/migration/lot5a-evidence/diagnostic/source-oracle-export.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-development.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-validation.json",
+        "docs/migration/lot5a-evidence/diagnostic/linked-temporal-20261110T203811Z-tests.tap"
+      ],
+      "notes": "Lot5A transfers conditional from_boundary construction, portable prior fields, strict byte patches, reset_epoch, role/site measurement, changed pixels, visible effect assessment, passive input/mode/site/reversal acquisition and portable before/after delegation. Original conditional knowledge survives two scored boundaries in a cold wrapper chain, while old-epoch raster histories and local portable trials are released according to source boundaries. Direct portable guards begin from the explicitly retained acquired setup; their proposal inputs are legacy component cases and do not certify autonomous proposal selection. Native construction eagerly initializes local fields that the source creates in reset_epoch; the direct constructor case compares prior, and the consumed boundary path compares full post-reset state. PhaseTransfer.propose, its path search and separate autonomous proposal policy remain unported/unrouted. The complete module therefore remains partial_transfer."
     }
   ],
   "scopeNotes": [
@@ -4588,7 +4677,15 @@
     "Lot3D/native0.45 adds RootedLine as the fourth of six observed-composition branches, in the same SharedSeries owner. Its own projection/mechanics have component proofs; access and the consumed V5 conditional Piercing subgraph remain partial transfers. Source fixture parity, common binding/acquisition/restoration and measured game contribution are distinct evidence. The native portable JSON integer domain and current-deadline interruption are explicit; staged V5 paths remain untransferred. Complete-entry coverage remains50/76,37 compiled workflows, and all global completion gates remain false. No game/cost success is inferred from static mappings.",
     "Lot3E/native0.46 transfers ReceptionService own measured projection, access/return contracts, consumed ResidualAccess evidence reducer and V5 wait ledger. Source-mode component fixtures remain distinct from named native common ownership/current-epoch/wait adaptations. The facade is5/6; ReferencePopulation and full inherited closure remain pending.50/76complete entries,37compiled workflows and six false completion gates remain distinct. No campaign or cost result is inferred from mappings; actual evidence is documented in lot3e-reception-service.md.",
     "Lot3F/native0.47 connects ReferencePopulation as the sixth declared observed-composition branch under the existing SharedSeries owner. Measured projection, acquired selection/control, exact finite-cell matching and conditional selected cardinal motion have independent source and native contracts. The entry facade becomes6/6 and51/76 complete declared entries, with37 compiled workflows; inherited source closure, color/terminal laws and full original-caller parity remain partial. All six global completion gates remain false. Campaign and cost outcomes are separate evidence, not inferred from this mapping.",
-    "Lot3G/native0.48 connects framed_window_composition immediately after rooted_quota_composition under the authoritative SharedSeries owner. Exact current pixel equality supports a conditional point experiment; only real supplied returns acquire trial outcomes. Source component parity, native interrupted-pixel/malformed-response adaptations and exhaustive prefilter limits remain explicit.52/76 declared entries,6/6 observed branches and37 compiled workflows are separate counts; all six completion gates remain false. Integrated synthetic evidence, retained public views, regressions and cost outcomes are qualified independently, with no game victory inferred from component contracts."
+    "Lot3G/native0.48 connects framed_window_composition immediately after rooted_quota_composition under the authoritative SharedSeries owner. Exact current pixel equality supports a conditional point experiment; only real supplied returns acquire trial outcomes. Source component parity, native interrupted-pixel/malformed-response adaptations and exhaustive prefilter limits remain explicit.52/76 declared entries,6/6 observed branches and37 compiled workflows are separate counts; all six completion gates remain false. Integrated synthetic evidence, retained public views, regressions and cost outcomes are qualified independently, with no game victory inferred from component contracts.",
+    "Lot5A proposes two component_verified mappings (LinkedPreparation and LinkedContact) and two partial_transfer mappings (PhaseRelations and PhaseTransfer). The consumed entry calls phase.linked_contact.propose directly. Passive phase acquisition, conditional portable knowledge and legacy guard delegation do not activate the independent PhaseRelations/PhaseTransfer proposal policies. No complete-migration gate, final integrated entry audit or campaign result is advanced by these component statuses.",
+    "The independent Python fixture is generated from the unchanged pinned originals and contains 14 helpers, nine cold chains / 165 operations, 13 explicit direct components and two retained source exceptions. Native tests compare admitted results and complete projected state for both continuous owners and owners restored after every operation. All 51 focused tests and the transitive targeted typecheck pass in the postreview development receipt, with unchanged direct-input fingerprints; this predates integration of the effectively published lot 7A parent and is not its merged-source gate.",
+    "Malformed AFTER without entities is an explicit invalid-input difference: Python appends a command and then raises KeyError('entities'), leaving a partial inconsistent history, which the fixture preserves verbatim. Native ingress rejects that malformed observation with TypeError before mutation. An already retained partial BEFORE remains admitted when source record does not snapshot it. Neither exception is normalized into null or a successful acquired transition, and restoration is not weakened to admit the corrupted source history.",
+    "The source-compatible temporal API has no added search bound by default. Production opts into maximumNodes=65536 and maximumWork=2000000, with its current deadline and abort signal. A cutoff restores pre-proposal contact state and retains a current-bound unknown with frontier.complete=false, release_authority=false and block_unrelated_probe=true; it produces no action, learned impossibility or refutation. Synchronous work checks do not establish a hard global Pause-latency or acquisition/serialization deadline guarantee. The common selection effect of the refusal requires its separate integration evidence.",
+    "Native checkpoint schema logos-engine.linked-temporal-preparation.v1 and immutable ownership are explicit extensions, not Python-defined checkpoint semantics. Foreign mutable rows are retained before sharing; geometry receipts bind mask/digest/dimensions; contact body geometry and portable byte templates are validated; restore constructs a replacement owner before publication. Public state projections remain detached. Source epoch/state boundaries release phase rasters and commands, and portable reset releases local trials; conditional priors and adapter event/score witnesses remain. This is not global historical-fact eviction or a constant-memory claim for the full caller.",
+    "Cold temporal chains demonstrate calibrated, guarded key prefixes of up to min(16, remaining), contrasted effects and subsequent component decisions. The separate key/click/key controller proof uses a declared synthetic family and is not a temporal click-policy transfer. A component source match, a legacy guard component or a present runtime registration does not certify complete production-priority selection, WHY/ACT authority or contribution to a real game. The 5B addressed-material and 5C object-binding entries remain separate and open.",
+    "The portable native constructor initializes local fields eagerly, whereas the Python constructor initially holds only prior and the consumed boundary immediately calls reset_epoch. Direct from_boundary cases therefore compare prior; actual cold boundaries compare the full reset/acquisition state. Portable templates retain conditional source references without old-epoch raster lists. Native safe-integer and uint8 public-raster contracts do not claim arbitrary Python numeric or malformed-input coercion equivalence.",
+    "No new game, live WEAV attempt, official cost decision or publication result is established by these mappings. The separate WEAV diagnostic retains its exhausted cumulative case clock and unmet six-level target. Common-loop contribution, merged-source functional gates, the predeclared global cost policy, final integrity and publication remain parent-owned evidence to be reviewed before any 5A closure."
   ],
   "completionGates": {
     "allRequiredCapabilitiesTransferred": false,

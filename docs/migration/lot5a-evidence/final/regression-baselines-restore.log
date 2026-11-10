@@ -1,0 +1,65 @@
+{
+  "operation": "restore",
+  "directory": "docs/migration/lot7a-evidence/integrated-final/regressions",
+  "partBytes": 900000,
+  "verified": [
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/regressions/catr-051-replay.json.gz",
+      "sha256": "29f58eb7f74b768b1fdc7e0453fc64a1ae972a54ab39f4a1fb9b2defa5e3d5aa",
+      "bytes": 1924297,
+      "manifest": "docs/migration/lot7a-evidence/integrated-final/regressions/catr-051-replay.json.gz.parts.json",
+      "parts": 3,
+      "restored": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/regressions/conn-050-replay.json.gz",
+      "sha256": "5e736b0167acada767719054e9672f51086ee8659159ceaee6c5815a5ba9813c",
+      "bytes": 3732728,
+      "manifest": "docs/migration/lot7a-evidence/integrated-final/regressions/conn-050-replay.json.gz.parts.json",
+      "parts": 5,
+      "restored": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/regressions/fogw-051-replay.json.gz",
+      "sha256": "add01b91655d718fe4ea70033948ed9b2434d9571ea0e05874d4e0532484a5b8",
+      "bytes": 9451915,
+      "manifest": "docs/migration/lot7a-evidence/integrated-final/regressions/fogw-051-replay.json.gz.parts.json",
+      "parts": 11,
+      "restored": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/regressions/mind-051-replay.json.gz",
+      "sha256": "a23bcfb3603b904f7049fb6ff1dd1426b2959b8ffd2e20612c616053b887dc44",
+      "bytes": 4977259,
+      "manifest": "docs/migration/lot7a-evidence/integrated-final/regressions/mind-051-replay.json.gz.parts.json",
+      "parts": 6,
+      "restored": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/regressions/rswp-051-replay.json.gz",
+      "sha256": "e201922c639e6dfb19661d2a50d519166cc3eaffd21108022b0b4e878888fa21",
+      "bytes": 2990807,
+      "manifest": "docs/migration/lot7a-evidence/integrated-final/regressions/rswp-051-replay.json.gz.parts.json",
+      "parts": 4,
+      "restored": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/regressions/vois-051-replay.json.gz",
+      "sha256": "add92f05b526b0ed4b760488282285f86173f618d139af1b86d7ca70a149d249",
+      "bytes": 12325381,
+      "manifest": "docs/migration/lot7a-evidence/integrated-final/regressions/vois-051-replay.json.gz.parts.json",
+      "parts": 14,
+      "restored": true
+    },
+    {
+      "path": "docs/migration/lot7a-evidence/integrated-final/regressions/weav-051-replay.json.gz",
+      "sha256": "b7340c28c16b52f45ac06cca5bcc66b6fcb6d15e03e33fb9e30108228729fe02",
+      "bytes": 15387477,
+      "manifest": "docs/migration/lot7a-evidence/integrated-final/regressions/weav-051-replay.json.gz.parts.json",
+      "parts": 18,
+      "restored": true
+    }
+  ],
+  "gitignoreEntriesAdded": [],
+  "qualification": "Exact byte transport only; no agent result is regenerated or reinterpreted."
+}

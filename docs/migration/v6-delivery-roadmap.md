@@ -1,6 +1,39 @@
 # Feuille de route V5/V6 vers Logos Engine TypeScript
 
-## Jalon publié : Workshop 0.52 ; transactions symboliques 7B en cours
+<!-- LOT5A_CURRENT_START -->
+
+## Jalon prêt à publier : lot 5A, moteur 0.53 et coût global accepté
+
+Le moteur **0.53.0** intègre les publications réelles **Site 82 puis Site 83 / 7A / native 0.52**, en conservant 4A et 3I. Le [reçu de réconciliation](lot5a-evidence/final/published-predecessor-reconciliation.json) vérifie les deux ascendances et l'absence de différence d'entrées d'exécution entre 82 et 83. La référence de coût reste donc le Site 82 annoncé avant mesure. Le gel candidat contient **283 fichiers natifs**, digest `d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f`, dans une archive de **294 fichiers**.
+
+**5A raccorde `linked_temporal_preparation`** à sa position source, avec un propriétaire unique, des retours sélectionnés ou passifs acquis une fois, des chemins de touches bornés et une restauration contrôlée. Les contrats effectivement consommés de LinkedPreparation et LinkedContact sont transférés ; les politiques autonomes de PhaseRelations et PhaseTransfer restent partielles. Le [rapport 5A](lot5a-linked-temporal-preparation.md) et sa [filiation](lot5a-linked-temporal-lineage.md) conservent ces limites. **5B, `observed_addressed_material`, puis 5C, `observed_object_binding`, restent ouverts.** Les lots 4 et 7 poursuivent leurs travaux dans leurs propres fils.
+
+Les changements communs regroupent les écritures du Kernel par point de sauvegarde, partagent les branches immuables de Frontier, suppriment des copies retenues en double et reconnaissent l'optimum exact sans recoloration dans CrossedPrefix. Ils préservent les retours, les gardes, les causes, l'ordre et la restauration. Les tests couvrent également un chemin mixte touche/clic/touche, Pause et reprise. Cette preuve de transport ne crée pas une politique de chemins multiples pour WEAV. Le raccourci sans recoloration ne constitue pas encore une propagation générale de tous les coups obligatoires.
+
+La [validation finale](lot5a-evidence/final/test-expectation-correction/validation/delta-tests-run.json) passe **3 835/3 835 tests dans 102 fichiers**, ainsi que les [cinq contrôles](lot5a-evidence/final/test-expectation-correction/validation/checks-run.json). L'échec initial **3 834/3 835** et la correction de l'attente de compteur 56/57 restent conservés ; le moteur n'a pas changé. La [preuve de boucle commune](lot5a-evidence/final/linked-temporal-common-loop.json.gz) passe **16/16 contrôles**, avec deux branches froides, 12 retours et deux préfixes propres de deux touches ; l'effet du retour positif ou négatif modifie la décision suivante. Les [sept rejeux](lot5a-evidence/final/regressions/regression-summary.json) passent **119/119 comparaisons**, **292 actions et 210 préfixes**, dont les 81 actions WEAV déjà enregistrées.
+
+**WEAV niveau 6 reste non résolu.** Le [diagnostic antérieur isolé](lot5a-evidence/weav/native050-delta-diagnostic/result.json), limité aux premières optimisations sur 0.50, s'arrête au quatrième niveau après trois niveaux acquis et 105 actions lorsque l'horloge cumulative atteint sa limite. Il n'inclut ni le partage Frontier final ni le propriétaire 5A ; il ne prouve pas leur gain en jeu. Aucune nouvelle tentative ne remet cette horloge à zéro. Le graphe et ses journaux historiques restent conservés : certaines copies de tables restent proportionnelles à l'historique. Une compaction future doit prouver quelles données ne sont plus consommées et préserver connaissances, réfutations et obligations. Le [contrôle navigateur](lot5a-evidence/final/browser/browser-qa.json) n'a pas pu s'attacher à l'onglet après deux timeouts CDP ; aucun succès UI 0.53 n'est revendiqué.
+
+Le registre atteint **57/76 entrées raccordées, zéro partielle et 19 ouvertes**. L'audit compte **174 composants vérifiés, 145 transferts partiels, 1 050 modules en attente et zéro module entièrement vérifié** ; les six portes de migration globale restent ouvertes. La [fenêtre officielle](lot5a-evidence/performance/window.json) est terminée : **A1/B1/B2/A2, 32 sessions mesurées et 400 actions**, avec huit chauffes et 24 actions exclues comme annoncé. La [revue indépendante Python](lot5a-evidence/performance/owner-growth-review.json) passe **4 669/4 669 contrôles**. Le coût global est **accepté sur 2/2 jeux** sous la règle déclarée ; la publication 5A reste à effectuer.
+
+<!-- LOT5A_COST_FINAL_START -->
+
+| Jeu | Médiane complète 0.52 | Médiane complète 0.53 | Variation |
+| --- | ---: | ---: | ---: |
+| STCK | 9 872,1555235 ms | 10 821,7052375 ms | **+9,618464 %** |
+| SMLP | 16 573,0271895 ms | 17 346,1554400 ms | **+4,664979 %** |
+
+Chaque jeu reste **strictement sous +10 %**, sans compensation entre jeux, somme de phases imbriquées ou moyenne des ratios de cohortes. STCK ne garde que **0,381536 point de marge**, soit environ **37,666 ms** sur la médiane du candidat avant le seuil ; la seconde cohorte STCK est à **+11,673421 %** et reste conservée. Les diagnostics agrégés passent **10/16**, les cohortes **10/16 puis 9/16**. Les six dépassements portent sur les nouvelles décisions, la persistance et la restauration : respectivement **+22,74 %, +18,97 %, +99,40 % pour STCK**, **+12,61 %, +26,68 %, +69,50 % pour SMLP**. Les p95 de restauration augmentent de **+192,94 % STCK** et **+134,56 % SMLP**. Cette version ajoute une capacité en respectant le budget autorisé ; les sessions globales mesurées restent plus longues. L'acquisition avec persistance SMLP diminue de **7,99 %**, sans compenser artificiellement un autre critère.
+
+La qualification structurelle **préalable** passe 64/64 contrôles et sa [revue indépendante](lot5a-evidence/performance/diagnostic/shared-fragment-independent-review.json) confirme les 14 premiers créateurs, 70 deltas supplémentaires B et 58 équilibres de révisions. Le [refus historique strict](lot5a-evidence/performance/aggregation-failure.json) reste en échec. Une [réparation de lecteur distincte et postérieure à la mesure](lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-v1.json) corrige uniquement le rejet du dossier exact pourtant déclaré avant la fenêtre ; outils gelés, échec initial, données brutes, règles, formules et populations sont conservés. Les variantes réellement exécutées sont identifiées séparément. Cette acceptation qualifiée garde les réserves WEAV6, navigateur et migration globale.
+
+L'[intégrité de livraison](lot5a-evidence/final/delivery-integrity.json) vérifie **283 fichiers natifs, 294 membres d'archive, 647 entrées source/tests et 348 entrées de build**, ainsi que les **1 786 références originales inchangées**. Les archives et les grands rapports restent reconstruisibles octet pour octet.
+
+<!-- LOT5A_COST_FINAL_END -->
+
+<!-- LOT5A_CURRENT_END -->
+
+## Jalon publié précédent : Workshop 0.52 ; transactions symboliques 7B en cours
 
 Le candidat **7A / native 0.52.0** intègre la publication réelle **4A / Site 81**, commit `4dafc40c53ed4406ee7cd148e3e6995a2eb4185e`, après **3I / Site 79**. Son gel `f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb` contient **279 fichiers natifs** et une archive de **290 fichiers**. La réconciliation conserve l'ordre des familles, leurs propriétaires et l'acquisition unique des retours. Le registre courant est **56/76**, avec **20 entrées ouvertes**, 37 workflows compilés et une façade 6/6.
 
@@ -188,7 +221,7 @@ Une dépendance désigne un contrat réellement consommé. Les numéros indiquen
 | 2 | Stratégie morphologique et fournisseurs communs | Hors compteur | Cycle validé du lot 1, mesures et mémoire courantes | **2A et 2B livrés ; 2C clôturé dans son périmètre annoncé, coût validé avec `0.36.0`** ; fermeture de domaine et parité globale ouvertes |
 | 3 | Mémoire commune et compositions | **0 au registre** | Propriétaire commun, acquisition et contrats de continuation | **3A, 3B, 3E, 3F, 3H et 3I clôturés dans leurs périmètres.** 3C/3D conservent CWSE/SK48 ; 3G garde sa réserve de contribution propre en jeu. **3I / 0.50 : RecurrentSeries et son repli SupportedLine, CONN trois niveaux/21 actions, validation formelle, cinq rejeux, intégrité et coût global acceptés.** Publication confirmée : Site 79. Façade à six branches sur six ; aucune réserve historique effacée. |
 | 4 | Exemples, correspondances et retours discriminants | 2 | Observations, callbacks SRC, gardes et mémoire propre | **4A livré : Site 80 puis clôture documentaire Site 81, native 0.51 ; contribution MIND et coût qualifié vérifiés.** 4B puis 4C restent à réaliser dans leur fil. |
-| 5 | Temps, adressage et liaisons | 3 | Historique public ; contrat de conservation pour les consommateurs concernés | Planifié |
+| 5 | Temps, adressage et liaisons | 2 | Historique public ; contrat de conservation pour les consommateurs concernés | **5A intégré en 0.53 : contrats, boucle commune, régressions et coût global qualifié validés ; publication en préparation.** 5B puis 5C restent à réaliser dans ce fil. |
 | 6 | Pièces rigides, cargaisons et stabilisation commune | 4 | Géométrie, contrôles, recherche bornée et interruption | Planifié |
 | 7 | Ateliers et transactions symboliques | 1 | Interfaces mesurées, SRC et mémoire des méthodes | **7A : contrats et boucle commune vérifiés, deux niveaux LKEY ; intégration fonctionnelle 0.52 vérifiée ; coût accepté et publication confirmée dans Site 82.** 7B est en cours dans son checkout distinct. |
 | 8 | Accès conditionné et routage de branches | 2 | Calibration des commandes et préfixes gardés | Planifié |
@@ -196,7 +229,7 @@ Une dépendance désigne un contrat réellement consommé. Les numéros indiquen
 | 10 | Questions d'axe, de fenêtre, d'ordre et de temps | 5 | Observations, séquences et méthodes revalidées | Planifié |
 | 11 | Consolidation, couverture et lisibilité | Hors compteur | Résultats et preuves des lots précédents | Planifié |
 
-La réconciliation initiale avec le registre de la base 59 conserve **26 noms planifiés, 26 noms distincts, aucun nom absent et aucun nom supplémentaire**. Depuis 3F, `observed_composition_services` est raccordé ; 3G ajoute `framed_window_composition`, 3H `coupled_prefix_reference`, 3I `recurrent_series`, 4A `observed_feedback_sequence` et 7A `observed_ranked_workshop`. **20 noms restent ouverts** dans le gel intégré 0.52, répartis dans les lots 4 à 10 : **2 + 3 + 4 + 1 + 2 + 3 + 5**. Les entrées sont détaillées ci-dessous. Les chemins directs et les fournisseurs communs gardent leur propre bilan hors registre.
+La réconciliation initiale avec le registre de la base 59 conserve **26 noms planifiés, 26 noms distincts, aucun nom absent et aucun nom supplémentaire**. Depuis 3F, `observed_composition_services` est raccordé ; 3G ajoute `framed_window_composition`, 3H `coupled_prefix_reference`, 3I `recurrent_series`, 4A `observed_feedback_sequence`, 7A `observed_ranked_workshop` et 5A `linked_temporal_preparation`. **19 noms restent ouverts** dans le gel intégré 0.53, répartis dans les lots 4 à 10 : **2 + 2 + 4 + 1 + 2 + 3 + 5**. Les entrées sont détaillées ci-dessous. Les chemins directs et les fournisseurs communs gardent leur propre bilan hors registre.
 
 ## Règles communes de livraison
 
@@ -544,6 +577,15 @@ La recherche finie coopérative conserve explicitement l'incomplétude en cas d'
 **Suite de ce fil : 4B, `relative_arrangement`, lorsque la poursuite sera demandée.** La suite du lot 3 reste pilotée dans son propre fil. 4C peut être scindé en une livraison simple et une livraison composée si leur périmètre l'exige, avec des statuts distincts. Aucun de ces sous-lots ne clôt la migration globale.
 
 ## Lot 5 : temps, adressage et objets
+
+**État de ce fil :** 5A est intégré, fonctionnellement validé et son coût global qualifié est accepté dans le gel 0.53 ; la publication reste à finaliser. 5B et 5C ne sont pas implémentés par cette livraison.
+
+| Sous-lot | Périmètre | État et prochaine étape |
+| --- | --- | --- |
+| **5A** | `linked_temporal_preparation` | Propriétaire unique, contact lié, acquisition passive des phases, chemins bornés, restauration et influence du retour vérifiés. Qualification des graphes, fenêtre officielle et revue du coût terminées ; finaliser la publication privée. |
+| **5B** | `observed_addressed_material` | Prochaine réalisation : adressage observé lié à l'objet et au contexte courants, mise à jour après retour, invalidation de l'adresse devenue ambiguë ou périmée. |
+| **5C** | `observed_object_binding` | Après les contrats consommés : conservation du parent, liaison observée, effet attesté, réfutation ou frontière ; restauration des obligations et influence sur la décision suivante. |
+| **Sessions longues** | Delta, mémoire active et coups obligatoires | Les premières copies répétées sont corrigées. Restent la compaction démontrée des données devenues inutiles, les coûts encore liés à l'historique et la propagation générale des domaines réduits à un seul choix. WEAV niveau 6 reste une réserve distincte. |
 
 **Entrées :** `linked_temporal_preparation`, `observed_addressed_material`, `observed_object_binding`.
 

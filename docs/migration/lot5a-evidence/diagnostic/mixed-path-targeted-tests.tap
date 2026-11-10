@@ -1,0 +1,46 @@
+TAP version 13
+# Subtest: a mixed key/click/key prefix survives Pause and resumes its current ticket without replanning
+ok 1 - a mixed key/click/key prefix survives Pause and resumes its current ticket without replanning
+  ---
+  duration_ms: 122.948756
+  type: 'test'
+  ...
+# Subtest: the current point guard refuses a changed click target before any click is dispatched
+ok 2 - the current point guard refuses a changed click target before any click is dispatched
+  ---
+  duration_ms: 42.102812
+  type: 'test'
+  ...
+# Subtest: loss of the next public action stops a mixed prefix after acquiring the engaged action
+ok 3 - loss of the next public action stops a mixed prefix after acquiring the engaged action
+  ---
+  duration_ms: 46.137462
+  type: 'test'
+  ...
+# Subtest: a later family before-guard is required even after a successful key and click
+ok 4 - a later family before-guard is required even after a successful key and click
+  ---
+  duration_ms: 60.370562
+  type: 'test'
+  ...
+# Subtest: a mismatched public click return acquires the actual result and seals before the next key
+ok 5 - a mismatched public click return acquires the actual result and seals before the next key
+  ---
+  duration_ms: 47.128436
+  type: 'test'
+  ...
+# Subtest: a natural level boundary seals and acquires the executed prefix without sending its remaining click or key
+ok 6 - a natural level boundary seals and acquires the executed prefix without sending its remaining click or key
+  ---
+  duration_ms: 38.00472
+  type: 'test'
+  ...
+1..6
+# tests 6
+# suites 0
+# pass 6
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1129.569459

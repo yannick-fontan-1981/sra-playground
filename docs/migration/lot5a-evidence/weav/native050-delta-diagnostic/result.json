@@ -1,0 +1,29 @@
+{
+  "schema": "sra.case-followup-result.v1",
+  "status": "case_budget_exhausted",
+  "targetLevels": 6,
+  "lastObserved": {
+    "operation": "advance",
+    "level": 4,
+    "levelsCompleted": 3,
+    "actions": 105,
+    "cycles": 105,
+    "activeSeconds": 329.272150311,
+    "elapsedMs": 4453.940025000018,
+    "reason": null
+  },
+  "driver": {
+    "exitCode": -15,
+    "startedAt": "2026-11-10T20:07:57.326576+00:00",
+    "finishedAt": "2026-11-10T20:15:18.445226+00:00",
+    "elapsedSeconds": 441.11865,
+    "caseCutoffReached": true,
+    "concurrentFunctionalWorkQualification": true
+  },
+  "nativeSourceUnchanged": true,
+  "priorCumulativeSeconds": 1277.782615,
+  "followupElapsedSeconds": 1123.445226,
+  "cumulativeSeconds": 2401.227841,
+  "remainingSeconds": 0,
+  "qualification": "The complete six-level target is not established. This is an isolated earlier diagnostic patch, not the final integrated lot5 source. The outer cumulative case clock, rather than a claim of per-level failure, ended the attempt. Public returns and partial logs are retained; concurrent7A functional work prevents an exclusive comparative performance conclusion."
+}

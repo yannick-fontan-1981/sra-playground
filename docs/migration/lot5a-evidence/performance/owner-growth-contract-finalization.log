@@ -1,0 +1,1 @@
+{"status": "owner_cost_contract_finalized_before_measurement", "contract": "docs/migration/lot5a-evidence/performance/owner-growth-contract.json", "nativeDigests": {"baseline": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb", "candidate": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f"}}

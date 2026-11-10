@@ -1,0 +1,27 @@
+{
+  "schema": "logos-engine.lot5a-own-quiet-attestation.v1",
+  "recordedAt": "2026-11-10T21:25:17.466063+00:00",
+  "rootTrackedTestsBuildsGamesEnded": true,
+  "managedPreviewStopped": true,
+  "browserPartCompleted": true,
+  "noNewLiveWEAVAttempt": true,
+  "agents": [
+    {
+      "agent": "delta_runtime",
+      "state": "quiet",
+      "evidence": "Explicit message after65/65staticpreflight: no window.json or active session; silent for the window."
+    },
+    {
+      "agent": "forced_paths",
+      "state": "quiet",
+      "evidence": "Final independent premeasurement review completed; no further activity until ABBA ends."
+    },
+    {
+      "agent": "lot5_source",
+      "state": "completed",
+      "evidence": "Readiness helper prepared and AST-checked only; no running execution."
+    }
+  ],
+  "nodeOptionsOverride": null,
+  "qualification": "Cooperative scope attestation plus explicit agent and lane acknowledgments. Process namespaces do not establish global host-idle observations; no such observation is claimed."
+}

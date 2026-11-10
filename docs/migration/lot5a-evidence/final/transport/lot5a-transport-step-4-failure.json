@@ -1,0 +1,32 @@
+{
+  "schema": "logos-engine.lot5a-retained-source-push-failure.v1",
+  "recordedAt": "2026-11-10T21:58:55.673Z",
+  "status": "rejected_per_object_limit",
+  "step": 4,
+  "planned": {
+    "step": 4,
+    "kind": "evidence",
+    "previousCommit": "0d69767970bff5cdc95c163bd5a02614bb661bd4",
+    "commit": "e5e225b0e26f7ddcbdcebd35c725d7e48ec08c28",
+    "tree": "bae64abefb066e3932b84b1cde3caed951cdb21e",
+    "rawMissingObjectBytes": 40699112
+  },
+  "exitCode": 1,
+  "output": "Ready for Site workflow JSON on stdin (input is hidden).\r\nremote: error: artifacts_git_receive_pack_object_too_large: a pushed object is 39,817,093 bytes (38.0 MiB) uncompressed; the per-object limit is 33,554,432 bytes (32.0 MiB).        \r\nremote: error: to list files over the limit with their paths, run: git rev-list --objects --all | git cat-file --batch-check='%(objectsize) %(rest)' | awk '$1 > 33554432'        \r\nremote: error: the limit applies to each file, not to repository storage; retrying the same push will fail again.        \r\nremote: error: remove the file from the pushed commits; a later commit that deletes it is not enough.        \r\nerror: remote unpack failed: artifacts_git_receive_pack_object_too_large: object is 38.0 MiB, limit is 32.0 MiB\r\nTo https://git.chatgpt-team.site/1420c261-4288-48ec-92c8-f957ea49ece1/appgprj_6adbc388d79081918581b93b919d7258.git\r\n ! [remote failure]  e5e225b0e26f7ddcbdcebd35c725d7e48ec08c28 -> main (remote failed to report status)\r\nerror: failed to push some refs to 'https://git.chatgpt-team.site/1420c261-4288-48ec-92c8-f957ea49ece1/appgprj_6adbc388d79081918581b93b919d7258.git'\r\nLocal source and commits are retained. Reconcile remote changes and rebuild before retrying publishing.\r\n",
+  "sourceSiteDeployed": false,
+  "completedSteps": [
+    {
+      "step": 1,
+      "commit": "0ab6fdda85811eeff28bfbae38a6f1bab7fd5dbb"
+    },
+    {
+      "step": 2,
+      "commit": "70bebab972a59d4bb5d60b6c6278576a767fd61d"
+    },
+    {
+      "step": 3,
+      "commit": "0d69767970bff5cdc95c163bd5a02614bb661bd4"
+    }
+  ],
+  "qualification": "The server rejected an individual object over32MiB. All local commits and original bytes remain. This failure is distinct from the earlier known64MiB pack limit. No identical retry or force-push is authorized by this receipt."
+}

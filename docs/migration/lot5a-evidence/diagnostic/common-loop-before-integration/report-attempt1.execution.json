@@ -1,0 +1,33 @@
+{
+  "schema": "logos-engine.native-contract-diagnostic-execution.v1",
+  "qualification": "Preintegration diagnostic; no official performance measurement or game campaign.",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "scripts/prove-linked-temporal-common-loop.mjs",
+    "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt1.json.gz",
+    "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/source-manifest.json"
+  ],
+  "cwd": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+  "startedAt": "2026-11-10T20:39:01.700699+00:00",
+  "endedAt": "2026-11-10T20:39:03.598739+00:00",
+  "durationSeconds": 1.8980526450031903,
+  "exitCode": 1,
+  "executionInputs": [
+    {
+      "path": "scripts/prove-linked-temporal-common-loop.mjs",
+      "bytes": 21543,
+      "sha256": "792bb99dac69942613e44ad230853a6907ba6215a480607101802e370805214b"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/source-manifest.json",
+      "bytes": 32503,
+      "sha256": "41d92f0f59e02272cb0a821d8df06203d39e93d193ef2265b216d45d5ca1a9fc"
+    }
+  ],
+  "log": {
+    "path": "docs/migration/lot5a-evidence/diagnostic/common-loop-before-integration/report-attempt1.log",
+    "bytes": 1172,
+    "sha256": "99e7ed17a5942d74fea72b34f8011fb87e5775210207a11208bf0bba778937e8"
+  },
+  "report": null
+}

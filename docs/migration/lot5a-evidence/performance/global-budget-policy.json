@@ -1,0 +1,55 @@
+{
+  "schema": "logos-engine.native-global-cost-policy.v1",
+  "declaredAt": "2026-11-10T18:00:47.379679-03:00",
+  "authorization": {
+    "source": "explicit lot5A user instructions before the official window",
+    "date": "2026-11-10",
+    "verbatim": "si le global reste en dessous de 10% d'augmentation alors une phase qui dépasse 10% peut être accepté."
+  },
+  "globalStage": "session_elapsed",
+  "statistic": "pooled median of complete measured-session durations per tested case",
+  "caseIds": [
+    "STCK",
+    "SMLP"
+  ],
+  "relativeIncreaseLimit": 0.1,
+  "comparison": "strictly_less_than",
+  "allCasesMustPass": true,
+  "crossCaseCompensation": false,
+  "phaseOverrunsMayBeAccepted": true,
+  "phasesAndP95RemainVisible": true,
+  "diagnosticPhasePolicy": "docs/migration/lot5a-evidence/performance/comparison-policy.json",
+  "plannedOrder": [
+    "A1",
+    "B1",
+    "B2",
+    "A2"
+  ],
+  "cohorts": 2,
+  "sessionsPerCaseVersionCohort": 4,
+  "measuredSessions": 32,
+  "measuredActions": 400,
+  "excludedWarmupSessions": 8,
+  "excludedWarmupActions": 24,
+  "excludedMeasuredSessions": 0,
+  "excludedOutliers": 0,
+  "baseline": {
+    "nativeVersion": "0.52.0",
+    "siteVersion": 82,
+    "commit": "0ca36b0a6a358e1e89420753bbcec4a33f028e0a",
+    "nativeDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+    "nativeFiles": 279
+  },
+  "candidate": {
+    "nativeVersion": "0.53.0",
+    "nativeDigest": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f",
+    "nativeFiles": 283,
+    "sourceBaseCommit": "3654ffd105f8ebfa503d255e0f872c15997f62c2",
+    "checkoutHead": "0544f588baf4c6cb04db361574b65ce9e4cf1cb3",
+    "nativeSourceCommit": "0544f588baf4c6cb04db361574b65ce9e4cf1cb3",
+    "nativeWorktreeChanges": [],
+    "siteVersion": null,
+    "qualification": "The frozen digest and archive identify candidate bytes. A null source commit means the checkout HEAD is ancestry only. No candidate publication is asserted."
+  },
+  "qualification": "Declared before a new lot5A official window on exact retained source freezes. Each game must independently remain strictly below +10% complete-session median increase. All measured samples, phase results and available p95 remain. Readiness, isolation and functional evidence are separate."
+}

@@ -1,0 +1,19 @@
+{
+  "step": 2,
+  "startedAt": "2026-11-10T21:55:21.819Z",
+  "finishedAt": "2026-11-10T21:55:37.026Z",
+  "planned": {
+    "step": 2,
+    "kind": "evidence",
+    "previousCommit": "0ab6fdda85811eeff28bfbae38a6f1bab7fd5dbb",
+    "commit": "70bebab972a59d4bb5d60b6c6278576a767fd61d",
+    "tree": "b505cf87669ab6e6322ed33cd64bfb3d34ea1827",
+    "rawMissingObjectBytes": 40583412
+  },
+  "source": {
+    "project_id": "appgprj_6adbc388d79081918581b93b919d7258",
+    "checkout_path": "/workspace/sites/sra-lot5-20261110/.sites-checkout",
+    "commit_sha": "70bebab972a59d4bb5d60b6c6278576a767fd61d",
+    "archive": "/workspace/sites/sra-lot5-20261110/lot5a-transport-step-2.tar.gz"
+  }
+}

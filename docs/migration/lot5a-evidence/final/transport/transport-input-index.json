@@ -1,0 +1,288 @@
+{
+  "schema": "logos-engine.lot5a-transport-input-index.v1",
+  "recordedAt": "2026-11-10T22:07:57.372012+00:00",
+  "files": [
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/README.md",
+      "bytes": 3360,
+      "sha256": "5938a45bd5b3bbf6c43e0237087cd81df048200b5e5a8fada05188aad123ec4c"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/lot5a-bounded-source-plan.json",
+      "bytes": 193244,
+      "sha256": "9d2debdb0a00bcf9d76e397440bf9b82aa37c359cf149ac7875e32129d829ff2"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/lot5a-transport-step-1.json",
+      "bytes": 643,
+      "sha256": "ce3ac678e0a2a0e7092a95a3337bf874da91cfab5076598fe8ad5f98ff0ae94b"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/lot5a-transport-step-2.json",
+      "bytes": 680,
+      "sha256": "724d2b258ceab8aea5d732da521c5b910088671f60f6963ad5dfad103de9e5fe"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/lot5a-transport-step-3.json",
+      "bytes": 680,
+      "sha256": "a7c55c2c1d56e13e34d1c397a76092be33326427b85a49cf2c75188298a10ca1"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/lot5a-transport-step-4-failure.json",
+      "bytes": 2312,
+      "sha256": "2b0f464f3d15dbaeec164faad5d3918daa467b3b3f7c820d8e2d6338f6aa6e0a"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/reconstruction.json",
+      "bytes": 4495,
+      "sha256": "943e0eb3935575bc913d6c733b876a91d9a7398029d19257dff7815226078ca0"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/retained-original-history.manifest.json",
+      "bytes": 571,
+      "sha256": "a96edf925fcb200e56e3f8da53af67f7cb54b83f7a6dd8b98e8a4b9a4559be7b"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/retained-original-history.manifest.json.part-000001.bin",
+      "bytes": 609621,
+      "sha256": "0022c18ceb57f6c8cae83a247860632be61c379ba602ed35b69f670d0641c317"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json",
+      "bytes": 11234,
+      "sha256": "bc2c0b0964d1c56eda8096b6da2620e74c4f3603a072cb3e6a24a2c7b22e06e4"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000001.bin",
+      "bytes": 900000,
+      "sha256": "3985981e771c5ba10178af62136b7f894e1b3686e34282d23ca10e6530eea68e"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000002.bin",
+      "bytes": 900000,
+      "sha256": "69d698e964ac8de5a1964c29e683704ac48491afc02f8b58b4ec7fdbcf684571"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000003.bin",
+      "bytes": 900000,
+      "sha256": "edaad49308f8aafe23eec964b3a89dffcfbcd42af82515929bad24d662910536"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000004.bin",
+      "bytes": 900000,
+      "sha256": "ccf054c7c55d954b52ac8318fde65a1053178a129cf5abbd25d87385ef74f802"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000005.bin",
+      "bytes": 900000,
+      "sha256": "c254bb85051f62537e4aade6512251bb198432ace5ba7e1587c00c1a1d76dcb1"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000006.bin",
+      "bytes": 900000,
+      "sha256": "43382031d8e5fc11813220a0ea1358e2028357e9deb649ae693db9411f8babfc"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000007.bin",
+      "bytes": 900000,
+      "sha256": "ecbbe87689c0ece1ee26be0fa4293c542207f938cfd5c95e1775188af70fa73f"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000008.bin",
+      "bytes": 900000,
+      "sha256": "a7d79fea6a38c6933d6a8af962d073bd6300f5b2cc9562f0ecb58e2142f49268"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000009.bin",
+      "bytes": 900000,
+      "sha256": "459154b723091fa89792f2530478716576426a04392410c327f60c15f996c2e1"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000010.bin",
+      "bytes": 900000,
+      "sha256": "56933c21c2cf4f402245d62901607a6a552b1acba8987af0e35c3938f3b03ba3"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000011.bin",
+      "bytes": 900000,
+      "sha256": "fa6bcae52c2841815f823dc374c2d4c532be686acecfe32b98adcd310f243ef5"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000012.bin",
+      "bytes": 900000,
+      "sha256": "b04a0931c16f1f5b3785cc83a033cb3ead11c9f8342b8ae61f57cb21d53fb8d0"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000013.bin",
+      "bytes": 900000,
+      "sha256": "d909cb79b5f5feadb3d561be3061a7fca542174ed7464d325f192f1cd66e9887"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000014.bin",
+      "bytes": 900000,
+      "sha256": "eeeeb2295d99d3635763d81989cc5d02f8ba3b861640d50ef16e8958a90fe5c9"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000015.bin",
+      "bytes": 900000,
+      "sha256": "326e5f65fcd2d9dab589fcff50696744e5591f6858ade42e4a4a0643e8877d76"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000016.bin",
+      "bytes": 900000,
+      "sha256": "91bd8d406c3dcff38d5518d8793b951d06b869d95de3de67d0cc4c05f959044d"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000017.bin",
+      "bytes": 900000,
+      "sha256": "6f596050aa518d479e4c0b14f85689b977b79efa827934579e7b43cbd748669b"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000018.bin",
+      "bytes": 900000,
+      "sha256": "5464dec2c74cb6f9f90f9295baf9b7b0a57829cbdc1bcd9e1777a8940334545e"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000019.bin",
+      "bytes": 900000,
+      "sha256": "34e9e92afd145ab09605fb33a549414e1d91f48db75a7dfa713b64f92dcf7939"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000020.bin",
+      "bytes": 900000,
+      "sha256": "71a8e2ed9cab56e7cfde6e6592c687ca4aa5985a2201b7cd506123d48d792b80"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000021.bin",
+      "bytes": 900000,
+      "sha256": "cb9a4b38749f13f65a79bbc88a2ecec7bb844715bca1ddb81b40d598d3c4565e"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000022.bin",
+      "bytes": 900000,
+      "sha256": "5be1d1e439c2dfe9d6d4d47d3913d50fed2a9df81e513e389fb0c6ce145caf83"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000023.bin",
+      "bytes": 900000,
+      "sha256": "07fa886a376b15cdadfcdfd5a9b1f68c2436c3b5aaade7a301128e1534c6b51f"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000024.bin",
+      "bytes": 900000,
+      "sha256": "8f0c1ebcbf0a1d2f07138c83e29c0310664a0c8ba26abe4f26efad36c36ef50d"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000025.bin",
+      "bytes": 900000,
+      "sha256": "3b44dad2eb71234abf486dcd6fd92fe1166ff25218e630c4ae54947dee0b7b3e"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000026.bin",
+      "bytes": 900000,
+      "sha256": "99fcc393543bc1e9753bd5a20a93b4ebfd60eee881a5f390a5f235a54efd9da2"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000027.bin",
+      "bytes": 900000,
+      "sha256": "4263dd7af52505c30a9bd167032b9f1e76cdd0e3281bf2cbb3fa06b0478bf1a1"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000028.bin",
+      "bytes": 900000,
+      "sha256": "21ee48fa9f35a1a3cd9037b50375c6e6f9a6e569856d6bfdf0dbec4631816a6b"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000029.bin",
+      "bytes": 900000,
+      "sha256": "3ce8c38220d8edef926d34f1239746c640db3c0bb0a115deda392acd5d9e9275"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000030.bin",
+      "bytes": 900000,
+      "sha256": "5289927e71f7eb031b222ebdc78b4df3da53d6c95b208018508a365365d889a3"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000031.bin",
+      "bytes": 900000,
+      "sha256": "063083ee862c72b69283018cf44d7eb875c0e5c97aad740b40f5cf02d5cde2df"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000032.bin",
+      "bytes": 900000,
+      "sha256": "6bf024aa2bf7fed14d0de751b2f37672d1decb93c1cd2410ac41337723a91ae0"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000033.bin",
+      "bytes": 900000,
+      "sha256": "63a91c74c18f6078a86950e4bfd1bc17c975ee35b09492e99a86115061d87577"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000034.bin",
+      "bytes": 900000,
+      "sha256": "20b32a0847c9fd352cbb32de1c69e39c3a28ab084288122974eb5d54e832f49c"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000035.bin",
+      "bytes": 900000,
+      "sha256": "f8475895c8fa4e315a983d6adb546977ef29e879193a2e3698543dc0ac033da1"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000036.bin",
+      "bytes": 900000,
+      "sha256": "1007f0a2f7c38e1b9e06298b0bcac4ae304adccfa203769dc2c4ae691c41daf7"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000037.bin",
+      "bytes": 900000,
+      "sha256": "6d6911bc46c2daecf8b06571eb0bbd6f42fdfcd08a4fbebc57bcff5d82319f93"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000038.bin",
+      "bytes": 900000,
+      "sha256": "b6db8d70ce50d9538e667dc9e2b258e212dd0e2cff55a3670b3b2ef0af10d027"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000039.bin",
+      "bytes": 900000,
+      "sha256": "746a9f9b558592c4cb58cea6c748084dc04359ed7a7096c25e92fed47ce9b827"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000040.bin",
+      "bytes": 900000,
+      "sha256": "6eeb5abb1f57a2545e10b0be814dbef937bcc0207aa18ee432e79d47bd7b7cde"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000041.bin",
+      "bytes": 900000,
+      "sha256": "2dea618997b927d26660efcb1ebd8ab5336c16d4d270edfd393e2d8236595e13"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000042.bin",
+      "bytes": 900000,
+      "sha256": "7ba614c8732f4133c71b43b87540a6ab3cca6270b673a8face0d276799c57abd"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000043.bin",
+      "bytes": 900000,
+      "sha256": "a769733cd33cb297d231a3790a1c50d0d51034b88d44448036bf97c2079743d5"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000044.bin",
+      "bytes": 900000,
+      "sha256": "1f0a25a441efff27c3f64f9739da13e26d2f91bb1dd7a2260436538503e5d375"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/final/transport/shared-fragment-first-creator.manifest.json.part-000045.bin",
+      "bytes": 217093,
+      "sha256": "dab88854f19a0f2db457620c346410ae1b570217fae731dc807a10c3ddc73449"
+    },
+    {
+      "path": "docs/migration/lot5a-evidence/restore-retained-transport.py",
+      "bytes": 10216,
+      "sha256": "3be6125ce44bd19f49bd4132bddb88df8b0892eeebea436c2f4f535fd28a5c9c"
+    }
+  ],
+  "count": 56,
+  "qualification": "Supplementary index only; original final/evidence-index.json remains byte-identical and its JSON original is reconstructed before validation. This inventory excludes itself and future publication receipts."
+}

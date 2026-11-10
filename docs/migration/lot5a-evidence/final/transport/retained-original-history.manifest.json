@@ -1,0 +1,17 @@
+{
+  "codec": "raw",
+  "original": {
+    "bytes": 609621,
+    "path": "docs/migration/lot5a-evidence/final/transport/retained-original-history.bundle",
+    "sha256": "0022c18ceb57f6c8cae83a247860632be61c379ba602ed35b69f670d0641c317"
+  },
+  "partBytes": 900000,
+  "parts": [
+    {
+      "bytes": 609621,
+      "path": "docs/migration/lot5a-evidence/final/transport/retained-original-history.manifest.json.part-000001.bin",
+      "sha256": "0022c18ceb57f6c8cae83a247860632be61c379ba602ed35b69f670d0641c317"
+    }
+  ],
+  "schema": "logos-engine.retained-byte-transport.v1"
+}

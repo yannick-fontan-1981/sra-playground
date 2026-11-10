@@ -1,0 +1,44 @@
+{
+  "schema": "logos-engine.lot5a-readiness-initial-failure.v1",
+  "status": "failed_before_any_readiness_write",
+  "recordedAt": "2026-11-10T21:27:14.782005+00:00",
+  "execution": {
+    "sessionId": 91021,
+    "exitCode": 1,
+    "startedAt": null,
+    "finishedAt": null,
+    "afterCoordinationRecordedAt": "2026-11-10T21:25:17.466063+00:00",
+    "timestampQualification": "The tool response retained no exact wall-clock execution end; recordedAt is the time this diagnostic receipt was written, not an inferred execution time.",
+    "traceback": "Traceback (most recent call last):\n  File \"/workspace/sites/sra-lot5-20261110/.sites-checkout/docs/migration/lot5a-evidence/finalize-cost-readiness.py\", line 617, in <module>\n    main()\n  File \"/workspace/sites/sra-lot5-20261110/.sites-checkout/docs/migration/lot5a-evidence/finalize-cost-readiness.py\", line 559, in main\n    functional = functional_inputs(evidence, candidate)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/sites/sra-lot5-20261110/.sites-checkout/docs/migration/lot5a-evidence/finalize-cost-readiness.py\", line 284, in functional_inputs\n    require(common['schema'] == 'logos-engine.linked-temporal-common-loop.v1'\n  File \"/workspace/sites/sra-lot5-20261110/.sites-checkout/docs/migration/lot5a-evidence/finalize-cost-readiness.py\", line 52, in require\n    raise ValueError(message)\nValueError: The exact final common proof is incomplete\n"
+  },
+  "originalReader": {
+    "path": "docs/migration/lot5a-evidence/diagnostic/finalize-cost-readiness-initial.py",
+    "sha256": "201b8481bfdb7f9ba9850d12420a21a7d265e8eeff4c4dd1e4ba4a480bf3e407",
+    "bytes": 40188
+  },
+  "failure": {
+    "type": "ValueError",
+    "message": "The exact final common proof is incomplete"
+  },
+  "cause": {
+    "field": "common.nativeSource",
+    "actualFields": [
+      "fileCount",
+      "digest"
+    ],
+    "candidateFields": [
+      "fileCount",
+      "digest",
+      "files"
+    ],
+    "incorrectComparison": "common.nativeSource == complete candidate manifest",
+    "requiredComparison": "common.nativeSource == {fileCount: candidate.fileCount, digest: candidate.digest}",
+    "qualification": "Only a reader metadata-shape mismatch. All source hashes, gates and real contribution counts remain required."
+  },
+  "nativeSourceDigest": "d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f",
+  "nativeImplementationChanged": false,
+  "validationEvidenceChanged": false,
+  "readinessWritten": false,
+  "windowWritten": false,
+  "provenance": "Exit status, session, full traceback and lower timestamp bound supplied by the root agent that executed readiness."
+}

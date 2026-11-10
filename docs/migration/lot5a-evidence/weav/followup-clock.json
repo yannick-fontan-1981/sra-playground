@@ -1,0 +1,12 @@
+{
+  "schema": "sra.case-followup-clock.v1",
+  "case": "WEAV",
+  "priorCumulativeSeconds": 1277.782615,
+  "totalBudgetSeconds": 2400,
+  "remainingAtStartSeconds": 1122.217385,
+  "followupStartedAt": "2026-11-10T19:56:35+00:00",
+  "absoluteCutoff": "2026-11-10T20:15:17.217385+00:00",
+  "scope": "User-reported progressive latency and level6 timeout follow-up, continuing the historical case clock. Generic lot5 implementation may continue independently after this case budget; no further live WEAV attempts after cutoff.",
+  "target": "At least six levels in one cold common session, without increasing the 360-second active budget per level, changing engine inputs, supplying learned knowledge or jumping levels.",
+  "comparison": "Existing 0.50 three-level replay is diagnostic evidence of growth, not a controlled before/after six-level baseline. All current attempts and concurrent workload qualifications will be retained."
+}
