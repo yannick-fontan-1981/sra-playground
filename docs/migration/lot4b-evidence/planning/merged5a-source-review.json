@@ -1,0 +1,802 @@
+{
+  "schema": "logos-engine.lot4b.merged-5a-static-source-review.v1",
+  "status": "static_review_no_blocking_finding_pending_final_publication_and_validation",
+  "reviewer": "/root/feedback_component",
+  "completedAt": "2026-11-10T21:58:05.656790+00:00",
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "scope": "Revue indépendante du texte fusionné, des empreintes et des métadonnées. Aucun moteur, import natif, oracle, test, typecheck, build, rejeu, jeu ou benchmark exécuté. Aucun fichier de production, de test, de harnais ou d’audit modifié par cette revue.",
+  "revisions": {
+    "ours": "d49474cc013a62a71a22369baa1eee907bf12007",
+    "fiveA": "33d91ef1b8a6343c554b5c18beacd051816e11b9",
+    "mergedHead": "47608f05b4cec1094d5268811892a1fa02c51682",
+    "mergeCommit": "be959f30a31b9c612d1212aa3e97ca171b73d808",
+    "mergeParents": [
+      "d49474cc013a62a71a22369baa1eee907bf12007",
+      "33d91ef1b8a6343c554b5c18beacd051816e11b9"
+    ],
+    "headParents": [
+      "be959f30a31b9c612d1212aa3e97ca171b73d808"
+    ]
+  },
+  "candidateStatus": {
+    "nativeImplementationAtReview": "logos-engine.typescript.v6.native-migration/0.53.0",
+    "finalFreeze": false,
+    "fiveAPublicationTerminalVerifiedByThisReview": false,
+    "qualification": "Le commit local 5A final est une entrée de comparaison réelle. Sa publication terminale est encore attendue selon la coordination parent. Le HEAD réuni est lu avant le futur passage à 0.54 et avant le gel/les validations finaux. Cette revue ne déclare ni une publication ni un candidat validé."
+  },
+  "reviewedFiles": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "sha256": "96071ede181246c251b5611d769505f033470a7666f92890c5e8aba5681e6941",
+      "bytes": 147934,
+      "ours": {
+        "present": true,
+        "sha256": "fd7cd01e4b35db37886f910d710dbabda99e0a40a729dadf2ae9e1f43bbd0aa8",
+        "bytes": 145046,
+        "sameBytes": false
+      },
+      "fiveA": {
+        "present": true,
+        "sha256": "3dd8ff07f3b0e82c6059f825295e15d9e49af47d4aebb850aa9cb8fac90ed2e4",
+        "bytes": 141662,
+        "sameBytes": false
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "96071ede181246c251b5611d769505f033470a7666f92890c5e8aba5681e6941",
+        "bytes": 147934,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "src/logos-engine/v6-native-types.ts",
+      "sha256": "6fbb3e98ba8350e4a9ec82fb4d155e635887a8a83c53a9603f8f3e7d075d0b07",
+      "bytes": 13052,
+      "ours": {
+        "present": true,
+        "sha256": "6fbb3e98ba8350e4a9ec82fb4d155e635887a8a83c53a9603f8f3e7d075d0b07",
+        "bytes": 13052,
+        "sameBytes": true
+      },
+      "fiveA": {
+        "present": true,
+        "sha256": "a400b8664370be04950ee721ea4503774a245300251624bf632376ad489b668b",
+        "bytes": 12773,
+        "sameBytes": false
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "6fbb3e98ba8350e4a9ec82fb4d155e635887a8a83c53a9603f8f3e7d075d0b07",
+        "bytes": 13052,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "tests/helpers/v6-live-game-campaign.ts",
+      "sha256": "93b824b078ccf259827be897e8143dc59fc0479d6f765f3a437cc95b2f4472c1",
+      "bytes": 73454,
+      "ours": {
+        "present": true,
+        "sha256": "93b824b078ccf259827be897e8143dc59fc0479d6f765f3a437cc95b2f4472c1",
+        "bytes": 73454,
+        "sameBytes": true
+      },
+      "fiveA": {
+        "present": true,
+        "sha256": "a33b59fc84bb2007a6c80842e9cc395836270bc3ddd90eece606f1dcce04261a",
+        "bytes": 70789,
+        "sameBytes": false
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "93b824b078ccf259827be897e8143dc59fc0479d6f765f3a437cc95b2f4472c1",
+        "bytes": 73454,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "tests/v6-radial-port-integration.test.ts",
+      "sha256": "86a051c90fd919488b69509c24b6fca29420041a4870f728aa2bb083c02b50fa",
+      "bytes": 28209,
+      "ours": {
+        "present": true,
+        "sha256": "d471de7ac2cc4844be26ff69e8557d78d47e141e9d9516c8053d796b2a648c8f",
+        "bytes": 28209,
+        "sameBytes": false
+      },
+      "fiveA": {
+        "present": true,
+        "sha256": "41aeb040cc64bd9e1bece99b45a72e69747c99813618cd3116d922bf4c1799aa",
+        "bytes": 28096,
+        "sameBytes": false
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "86a051c90fd919488b69509c24b6fca29420041a4870f728aa2bb083c02b50fa",
+        "bytes": 28209,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "scripts/audit-v6-entry-points.ts",
+      "sha256": "3dbf9f4c327cdd5f6554af0b2a89da602a3d4f7141b08fb456b2f5aa9fe96d20",
+      "bytes": 6893,
+      "ours": {
+        "present": true,
+        "sha256": "3dbf9f4c327cdd5f6554af0b2a89da602a3d4f7141b08fb456b2f5aa9fe96d20",
+        "bytes": 6893,
+        "sameBytes": true
+      },
+      "fiveA": {
+        "present": true,
+        "sha256": "7db616a4abe6d176c7f638cc3e8d350a22d2a08f0386d23dae6b63b83ae479f8",
+        "bytes": 6808,
+        "sameBytes": false
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "3dbf9f4c327cdd5f6554af0b2a89da602a3d4f7141b08fb456b2f5aa9fe96d20",
+        "bytes": 6893,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "migration/v6-transfer-map.json",
+      "sha256": "8b7be10059a287b597f9425dee558e3a2a4a2408ec26527c11c1cbf220ed9417",
+      "bytes": 397512,
+      "ours": {
+        "present": true,
+        "sha256": "b05238e07257c28b6a7100d2a63382c817ebeb14fa9275b5dc348a4aee33cccb",
+        "bytes": 384971,
+        "sameBytes": false
+      },
+      "fiveA": {
+        "present": true,
+        "sha256": "f03947fe5d553c794ed794b86196c577bef007fd83115bc9fff551ababc48eab",
+        "bytes": 395982,
+        "sameBytes": false
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "8b7be10059a287b597f9425dee558e3a2a4a2408ec26527c11c1cbf220ed9417",
+        "bytes": 397512,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements.ts",
+      "sha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c",
+      "bytes": 13576,
+      "ours": {
+        "present": true,
+        "sha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c",
+        "bytes": 13576,
+        "sameBytes": true
+      },
+      "fiveA": {
+        "present": false,
+        "sha256": null,
+        "bytes": null,
+        "sameBytes": false
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c",
+        "bytes": 13576,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements-geometry.ts",
+      "sha256": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db",
+      "bytes": 14815,
+      "ours": {
+        "present": true,
+        "sha256": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db",
+        "bytes": 14815,
+        "sameBytes": true
+      },
+      "fiveA": {
+        "present": false,
+        "sha256": null,
+        "bytes": null,
+        "sameBytes": false
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db",
+        "bytes": 14815,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements-planner.ts",
+      "sha256": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30",
+      "bytes": 10252,
+      "ours": {
+        "present": true,
+        "sha256": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30",
+        "bytes": 10252,
+        "sameBytes": true
+      },
+      "fiveA": {
+        "present": false,
+        "sha256": null,
+        "bytes": null,
+        "sameBytes": false
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30",
+        "bytes": 10252,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "src/logos-engine/v6-linked-temporal-common.ts",
+      "sha256": "3e7111bccfefa22a67afad24cefdbc95834053eb233007f4f4ddda19f1bfe54f",
+      "bytes": 8267,
+      "ours": {
+        "present": false,
+        "sha256": null,
+        "bytes": null,
+        "sameBytes": false
+      },
+      "fiveA": {
+        "present": true,
+        "sha256": "3e7111bccfefa22a67afad24cefdbc95834053eb233007f4f4ddda19f1bfe54f",
+        "bytes": 8267,
+        "sameBytes": true
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "3e7111bccfefa22a67afad24cefdbc95834053eb233007f4f4ddda19f1bfe54f",
+        "bytes": 8267,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "src/logos-engine/v6-linked-temporal-contact.ts",
+      "sha256": "29b68e614203302e36ef731866544e35146b2b553b7d424c0e533eb38519b1b5",
+      "bytes": 34974,
+      "ours": {
+        "present": false,
+        "sha256": null,
+        "bytes": null,
+        "sameBytes": false
+      },
+      "fiveA": {
+        "present": true,
+        "sha256": "29b68e614203302e36ef731866544e35146b2b553b7d424c0e533eb38519b1b5",
+        "bytes": 34974,
+        "sameBytes": true
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "29b68e614203302e36ef731866544e35146b2b553b7d424c0e533eb38519b1b5",
+        "bytes": 34974,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "src/logos-engine/v6-linked-temporal-phase.ts",
+      "sha256": "d431c10a89c967b056417ba526d68907ef1ddac62b5411b51f9d70edb8c994e1",
+      "bytes": 30482,
+      "ours": {
+        "present": false,
+        "sha256": null,
+        "bytes": null,
+        "sameBytes": false
+      },
+      "fiveA": {
+        "present": true,
+        "sha256": "d431c10a89c967b056417ba526d68907ef1ddac62b5411b51f9d70edb8c994e1",
+        "bytes": 30482,
+        "sameBytes": true
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "d431c10a89c967b056417ba526d68907ef1ddac62b5411b51f9d70edb8c994e1",
+        "bytes": 30482,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "src/logos-engine/v6-linked-temporal-preparation.ts",
+      "sha256": "c85464b1162352f7c6cb329f2d2f9b6cbcc74baae616be3d643d1ac1b646aeed",
+      "bytes": 24845,
+      "ours": {
+        "present": false,
+        "sha256": null,
+        "bytes": null,
+        "sameBytes": false
+      },
+      "fiveA": {
+        "present": true,
+        "sha256": "c85464b1162352f7c6cb329f2d2f9b6cbcc74baae616be3d643d1ac1b646aeed",
+        "bytes": 24845,
+        "sameBytes": true
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "c85464b1162352f7c6cb329f2d2f9b6cbcc74baae616be3d643d1ac1b646aeed",
+        "bytes": 24845,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "src/logos-engine/kernel.ts",
+      "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207",
+      "bytes": 23637,
+      "ours": {
+        "present": true,
+        "sha256": "9c7fb668e85bf101f88de439ff43b42bba9566917a2c2b8fb8f13e2ee00e247b",
+        "bytes": 19490,
+        "sameBytes": false
+      },
+      "fiveA": {
+        "present": true,
+        "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207",
+        "bytes": 23637,
+        "sameBytes": true
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "1cac40f5f9a3356d31ae0fd5247709eb82c5f6402aae3cb68d8edc54c838f207",
+        "bytes": 23637,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "src/logos-engine/v6-knowledge-store.ts",
+      "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08",
+      "bytes": 14849,
+      "ours": {
+        "present": true,
+        "sha256": "5efe83d07b6d5354b9a26b39320449ecaa631ca55563c683779f067a8d670bf0",
+        "bytes": 14854,
+        "sameBytes": false
+      },
+      "fiveA": {
+        "present": true,
+        "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08",
+        "bytes": 14849,
+        "sameBytes": true
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "035d41597a5831bfa65bb1f627e3a0d05b84cc44cfda05566359873ef8c5af08",
+        "bytes": 14849,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "src/logos-engine/v6-native-caller.ts",
+      "sha256": "621aa8b5569420e12905af4c22db1be50a387e22cec0e01bc24db1695b1b917a",
+      "bytes": 41090,
+      "ours": {
+        "present": true,
+        "sha256": "07b6811595812ea2d4f266cea7b7c44633567ebca044b8dc7254c4d082a19968",
+        "bytes": 41003,
+        "sameBytes": false
+      },
+      "fiveA": {
+        "present": true,
+        "sha256": "621aa8b5569420e12905af4c22db1be50a387e22cec0e01bc24db1695b1b917a",
+        "bytes": 41090,
+        "sameBytes": true
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "621aa8b5569420e12905af4c22db1be50a387e22cec0e01bc24db1695b1b917a",
+        "bytes": 41090,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "src/logos-engine/v6-observed-frontier.ts",
+      "sha256": "c2adeb462bf5a4089af59c8141b880c9ef2ba6378d1fc5c52c33333fe564ba62",
+      "bytes": 40967,
+      "ours": {
+        "present": true,
+        "sha256": "1812e3b6209271420a776d3ff823090488cef4ab19b08f173d2b3a80a2e2c5e0",
+        "bytes": 35262,
+        "sameBytes": false
+      },
+      "fiveA": {
+        "present": true,
+        "sha256": "c2adeb462bf5a4089af59c8141b880c9ef2ba6378d1fc5c52c33333fe564ba62",
+        "bytes": 40967,
+        "sameBytes": true
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "c2adeb462bf5a4089af59c8141b880c9ef2ba6378d1fc5c52c33333fe564ba62",
+        "bytes": 40967,
+        "sameBytes": true
+      }
+    },
+    {
+      "path": "src/logos-engine/v6-crossed-prefix-access.ts",
+      "sha256": "1fa16f6712e281d50628a2fc6ff619d224d7f44d492f1152ce8a09a93767d162",
+      "bytes": 27111,
+      "ours": {
+        "present": true,
+        "sha256": "db35f9ad5988b899bcdc98d52a4e1bd837a3b15e0346c93a6da09433ef056465",
+        "bytes": 26105,
+        "sameBytes": false
+      },
+      "fiveA": {
+        "present": true,
+        "sha256": "1fa16f6712e281d50628a2fc6ff619d224d7f44d492f1152ce8a09a93767d162",
+        "bytes": 27111,
+        "sameBytes": true
+      },
+      "mergedHead": {
+        "present": true,
+        "sha256": "1fa16f6712e281d50628a2fc6ff619d224d7f44d492f1152ce8a09a93767d162",
+        "bytes": 27111,
+        "sameBytes": true
+      }
+    }
+  ],
+  "inputsUnchangedDuringReview": true,
+  "scopedGitWorktreeStatus": "",
+  "unresolvedConflictMarkers": [],
+  "textPreservation": [
+    {
+      "surface": "retainProposalRefusal",
+      "expectedParent": "fiveA",
+      "sameText": true,
+      "sha256": "6ba6e6e71ca60a54b96ca3cecb929313dc471c8e03470e9bcdb851af8b098aee"
+    },
+    {
+      "surface": "retainSourceGroupStop",
+      "expectedParent": "ours",
+      "sameText": true,
+      "sha256": "4514b748f4b6669ff505418b1a632ce406c9b4259853eef0a4b1ef7976c969ec"
+    },
+    {
+      "surface": "sourceGroupAllowsEntry",
+      "expectedParent": "ours",
+      "sameText": true,
+      "sha256": "20bd3afc3e0248cf85235fbea545420291ed766d26b4c7932d2b4487a05e677c"
+    },
+    {
+      "surface": "preferCurrentRequiredService",
+      "expectedParent": "ours",
+      "sameText": true,
+      "sha256": "60e5f3fe94ec200319886527746a71d0d34c1dfc3a66cf07953370ffeaadf7db"
+    },
+    {
+      "surface": "preferAcquiredContinuation",
+      "expectedParent": "ours",
+      "sameText": true,
+      "sha256": "62cada8855caa7fd8d5529d3c1b49ec5242e8a8ac1ab6be6390857adacbf4f1f"
+    },
+    {
+      "surface": "seal",
+      "expectedParent": "fiveA",
+      "sameText": true,
+      "sha256": "948f5f85d79ad9dad60045d31902cc4fbbee81c25222e72127d20256c52c763b"
+    },
+    {
+      "surface": "acquirePassiveFamilies",
+      "expectedParent": "fiveA",
+      "sameText": true,
+      "sha256": "a9ba013bad55b84737d13779c3056b5340b625e630350c6414daaa39dd7fd1e0"
+    },
+    {
+      "surface": "restoreFamilies",
+      "expectedParent": "fiveA",
+      "sameText": true,
+      "sha256": "fc329073d3d11c3ef5c0d3e2e9f35a8e0abafbfbd4966297c9b3c867b893e291"
+    },
+    {
+      "surface": "persistFamilies",
+      "expectedParent": "fiveA",
+      "sameText": true,
+      "sha256": "d0ebe9c90ff8d9748f22eb2b389136e2d2666604c5667532c92b9a856e16ccaf"
+    },
+    {
+      "surface": "retainFamilyState",
+      "expectedParent": "fiveA",
+      "sameText": true,
+      "sha256": "cb3c138c12c1525a2e43280e092b8ba746a018115cc47810bbff00b32aca3cb2"
+    },
+    {
+      "surface": "scopeReturnedContactRefusal",
+      "expectedParent": "fiveA",
+      "sameText": true,
+      "sha256": "a0ff33b32ea60adf398ddf85390797e1160131f99048676d58cb99ef92d23863"
+    },
+    {
+      "surface": "deferUnlearnedInvitation",
+      "expectedParent": "fiveA",
+      "sameText": true,
+      "sha256": "11479faba5e2c9236b9c9e532766da4a874a9dd84f184280b3e262b95675f57d"
+    },
+    {
+      "surface": "relativeArrangementFamily",
+      "expectedParent": "ours",
+      "sameText": true,
+      "sha256": "51b2626fba6b436f8215bae1560dfd147d79b948b5a7dbde7bbf500369a15275"
+    },
+    {
+      "surface": "subquestionFamily",
+      "expectedParent": "ours",
+      "sameText": true,
+      "sha256": "69844659734454b513c8696d7e9739e2b3035868bffbc46eb9243b1b36832669"
+    },
+    {
+      "surface": "familyCheckpoint",
+      "expectedParent": "fiveA",
+      "sameText": true,
+      "sha256": "49c16f149735e46ef227bd62295d27a38a5ac589a8632f20ace5e4326404a1fc"
+    }
+  ],
+  "transferMapUnion": {
+    "counts": {
+      "merged": 217,
+      "ours": 213,
+      "fiveA": 216
+    },
+    "unionKeyCount": 217,
+    "currentKeysEqualUnion": true,
+    "unexpectedRows": [],
+    "divergentParentRows": [],
+    "allOursRowsPreserved": true,
+    "allFiveARowsPreserved": true,
+    "scopeNotesCounts": {
+      "merged": 73,
+      "ours": 65,
+      "fiveA": 73
+    },
+    "scopeNotesEqualUnion": true,
+    "otherFieldsSameBothParents": true
+  },
+  "findings": [
+    {
+      "id": "ordinary_null_refusal_and_local_stop",
+      "disposition": "preserved_by_static_inspection",
+      "locations": [
+        "src/logos-engine/v6-native-runtime.ts:507-521",
+        "src/logos-engine/v6-native-runtime.ts:572-603"
+      ],
+      "evidence": "Sous enabled && !proposal, retainProposalRefusal est appelé une seule fois. Le refus courant avec block_unrelated_probe===true produit l’offre unknown sans actions/steps et termine le choix. À défaut de ce blocage, retainSourceGroupStop peut terminer uniquement la boucle du groupe courant sans inventer d’offre. Les propositions non-null conservent ensuite leur traitement local et leurs préférences.",
+      "preserved": [
+        "Validation observation_ref/level_epoch/frame_hash et release_authority=false du refus 5A.",
+        "Validation stop_group/source_entry et de la même portée courante pour le stop 4B.",
+        "Aucun appel de refus ou de barrière pour une famille désactivée dans ce chemin.",
+        "Aucune conversion du stop local Relative en refus global.",
+        "scopeReturnedContactRefusal et deferUnlearnedInvitation sont exactement conservés de 5A."
+      ],
+      "qualification": "Lecture de l’ordre des branches ; les futurs tests comportementaux restent nécessaires sur le candidat gelé."
+    },
+    {
+      "id": "two_priority_helpers_and_cache",
+      "disposition": "preserved_exact_4b_text",
+      "locations": [
+        "src/logos-engine/v6-native-types.ts:139-142",
+        "src/logos-engine/v6-native-runtime.ts:210-212",
+        "src/logos-engine/v6-native-runtime.ts:464-466",
+        "src/logos-engine/v6-native-runtime.ts:585-628",
+        "src/logos-engine/v6-native-runtime.ts:738-740",
+        "src/logos-engine/v6-native-runtime.ts:809-811"
+      ],
+      "evidence": "retainSourceGroupStop, sourceGroupAllowsEntry et les deux aides de préférence sont textuellement identiques au parent 4B. Le contrôle précède la proposition de service ; pour la continuation, il suit la corroboration de la contribution Kernel réelle et précède la proposition candidate.",
+      "preserved": [
+        "Cache sourceStops neuf par sélection, clé groupe/propriétaire/entrée ; planning relâché dans finally.",
+        "Les seules familles de barrière antérieures et activées sont consultées paresseusement ; entryOffers est réutilisé.",
+        "Le hook n’est consulté qu’après leur proposition null ; une interface non reconnue permet la suite.",
+        "subquestionFamily transmet sourceGroupStop, currentProposalRefusal et les autres hooks sans créer de propriétaire."
+      ]
+    },
+    {
+      "id": "factory_owner_union_and_order",
+      "disposition": "preserved_by_static_inspection",
+      "locations": [
+        "src/logos-engine/v6-native-runtime.ts:1700-1730",
+        "src/logos-engine/v6-native-runtime.ts:1755",
+        "src/logos-engine/v6-native-runtime.ts:1796-1798",
+        "src/logos-engine/v6-native-runtime.ts:1815-1839",
+        "src/logos-engine/v6-native-runtime.ts:1868-1883"
+      ],
+      "evidence": "Une seule création Relative et une seule création LinkedTemporal sont présentes. Le wrapper linkedTemporal et acquisitionFamilies.preparations ferment sur la même instance preparations. Les deux propriétaires figurent dans families. Relative a son entrée window exacte ; LinkedTemporal rejoint surface via l’ordre DRM.",
+      "preserved": [
+        "relative_arrangement après coupled_prefix_reference et avant multiscale_constraints ; la symétrie reste après les entrées window.",
+        "relative_arrangements figure parmi les propriétaires à entryPoint explicite, avec recall et framed.",
+        "linked_temporal_preparation occupe son entrée DRM après controlled_constellation_cover et avant configured_arrivals.",
+        "La factory conserve boundedSearch: LINKED_TEMPORAL_NATIVE_SEARCH_BOUNDS.",
+        "Relative ne rejoint aucune acquisition passive ; LinkedTemporal n’est pas placé dans SharedSeries ou SupportNavigation."
+      ],
+      "qualification": "L’identité d’instance est établie ici par la construction unique et les fermetures du wrapper. Le contrôle générique du constructeur compare principalement les ids ; cette revue ne prétend pas renforcer ce contrat."
+    },
+    {
+      "id": "selected_and_passive_acquisition",
+      "disposition": "preserved",
+      "locations": [
+        "src/logos-engine/v6-native-runtime.ts:1113-1150",
+        "src/logos-engine/v6-native-runtime.ts:1207-1236",
+        "src/logos-engine/v6-native-runtime.ts:1255-1297"
+      ],
+      "evidence": "seal et acquirePassiveFamilies correspondent exactement au parent 5A. Le bloc spécialisé LinkedTemporal conserve toute la liste record.events, même vide. Le passif appelle recordSource uniquement lorsque selectedId diffère, après les supports et avant recall. Les deux raccordements de mémoire Relative sont ajoutés séparément au chemin sélectionné.",
+      "preserved": [
+        "relative_arrangement_event:<revision> retient son événement source unique, puis relative_arrangement_state et family_state:relative_arrangements.",
+        "La liste LinkedTemporal n’est pas réduite à events[0].",
+        "Le selectedId du propriétaire empêche une seconde acquisition passive LinkedTemporal.",
+        "Les protections et l’ordre Feedback, Workshop, Framed et SharedSeries restent ceux du parent 5A ; aucun nouveau chemin passif Relative.",
+        "L’incrément acquiredRecordCount reste une seule fois par transition scellée réelle."
+      ]
+    },
+    {
+      "id": "relative_source_quirks",
+      "disposition": "preserved_exact_modules_and_adapter",
+      "locations": [
+        "src/logos-engine/v6-relative-arrangements.ts:69-75",
+        "src/logos-engine/v6-relative-arrangements.ts:89-103",
+        "src/logos-engine/v6-relative-arrangements.ts:142-175"
+      ],
+      "evidence": "Les trois modules Relative et leur adapter sont identiques au parent 4B. record exige la commande exacte et l’observation initiale liée à l’offre. measure réinitialise models/failed/selection_ref lors d’un nouvel epoch, conserve events et recalcule last_layout.",
+      "preserved": [
+        "La reconnaissance est liée à observation_ref, level_epoch et frame_hash courants, y compris après un refus dû à ACTION6 ou à un support non unique.",
+        "Le checkpoint transporte uniquement les cinq champs source models/events/failed/selection_ref/epoch.",
+        "Source restore laisse les transitoires du propriétaire existant tels quels ; un nouveau propriétaire restauré n’a pas de layout avant measure. La revue ne prétend pas que restore efface universellement last_layout.",
+        "Copie du modèle avant ajout expected/risks à l’événement ; trial failed conservé lors d’une selection_observed ; seul l’ordre de transport du set failed est qualifié."
+      ]
+    },
+    {
+      "id": "persistence_and_5a_memory_changes",
+      "disposition": "preserved_exact_incoming_text",
+      "locations": [
+        "src/logos-engine/v6-native-runtime.ts:124-126",
+        "src/logos-engine/v6-native-runtime.ts:200-204",
+        "src/logos-engine/v6-native-runtime.ts:1122-1125",
+        "src/logos-engine/v6-native-runtime.ts:1240-1251",
+        "src/logos-engine/v6-native-runtime.ts:1414-1435",
+        "src/logos-engine/v6-linked-temporal-preparation.ts:225-242"
+      ],
+      "evidence": "familyCheckpoint, retainFamilyState, restoreFamilies, persistFamilies et seal sont identiques au parent 5A. Les compteurs acquiredRecordCount/compositionIds remplacent intégralement records/compositions ; aucun ancien accès this.records ou this.compositions n’est laissé.",
+      "preserved": [
+        "LinkedTemporal conserve nativeState/restoreNative via le wrapper ; l’hydratation autoritaire reste validée avant restitution au propriétaire.",
+        "Relative conserve state/restore ; ses événements et son miroir ne changent pas le schéma de son checkpoint.",
+        "Kernel, KnowledgeStore, NativeCaller, ObservedFrontier et CrossedPrefixAccess sont octet par octet ceux du commit 5A comparé.",
+        "Les quatre modules LinkedTemporal sont octet par octet ceux de 5A ; la restauration reconstruit la phase hors du propriétaire avant publication et le refus transitoire ne devient pas une autorité persistée."
+      ],
+      "qualification": "Vérification de conservation du code de mémoire livré dans l’entrée 5A, pas nouvel essai d’import complet d’un ancien graphe/runtime ni nouveau résultat de coût."
+    },
+    {
+      "id": "helper_source_capture_retention",
+      "disposition": "preserved_exact_4b_helper",
+      "locations": [
+        "tests/helpers/v6-live-game-campaign.ts:88-94",
+        "tests/helpers/v6-live-game-campaign.ts:231-264",
+        "tests/helpers/v6-live-game-campaign.ts:505-513"
+      ],
+      "evidence": "Le helper complet est octet par octet celui de d49474c. Son diff contre 5A est limité au tableau relativeArrangementSourceCalls, à l’observateur des cinq méthodes de l’adapter et à la capture Relative par préfixe.",
+      "preserved": [
+        "Les callbacks rendent le résultat original et réémettent les erreurs ; aucune commande, observation ou mémoire acquise n’est fournie.",
+        "La projection events[0] appartient seulement au record Relative ; elle n’est pas appliquée à LinkedTemporal.",
+        "family_state:relative_arrangements, sourceCallsThrough et la proposition arrangement_plan restent capturés.",
+        "Workshop, Feedback, Morphology et caller conservent leurs observateurs ; aucun observer de coût 5A n’est importé dans le helper public.",
+        "Le défaut historique de libellé phase des frontières du helper n’est pas modifié ; le runner partiel externe utilise désormais le champ réel completedLevel."
+      ]
+    },
+    {
+      "id": "registration_auditor_and_test",
+      "disposition": "consistent_static_and_existing_inventory",
+      "locations": [
+        "scripts/audit-v6-entry-points.ts:16-17",
+        "scripts/audit-v6-entry-points.ts:60-64",
+        "tests/v6-radial-port-integration.test.ts:324-388"
+      ],
+      "evidence": "Types et auditeur sont octet par octet ceux de 4B. L’auditeur conserve l’alias Relative et son exact-entry guard. Le test conserve Feedback, Workshop et Relative dans le contrôle d’entrée explicite ; il attend [10/12,21/21,9/10,18/33], total 58/76.",
+      "titleCorrection": {
+        "resolvedBy": "/root",
+        "commit": "47608f05b4cec1094d5268811892a1fa02c51682",
+        "oldTitleCount": 57,
+        "currentTitleCount": 58,
+        "assertionChangesInTitleCommit": false
+      },
+      "existingGeneratedInventory": {
+        "input": {
+          "path": "docs/migration/v6-entry-point-progress.json",
+          "sha256": "2a703a27aaade2e83075d6f138cf4cc343532f0d9bcadbe842653fb761b36bb4",
+          "bytes": 18811
+        },
+        "implementation": "logos-engine.typescript.v6.native-migration/0.53.0",
+        "connected": 58,
+        "declared": 76,
+        "groups": [
+          {
+            "id": "goal_access",
+            "declared": 12,
+            "connected": 10,
+            "partiallyConnected": 0
+          },
+          {
+            "id": "window_constraints",
+            "declared": 21,
+            "connected": 21,
+            "partiallyConnected": 0
+          },
+          {
+            "id": "surface",
+            "declared": 10,
+            "connected": 9,
+            "partiallyConnected": 0
+          },
+          {
+            "id": "factored_material_return",
+            "declared": 33,
+            "connected": 18,
+            "partiallyConnected": 0
+          }
+        ],
+        "fullV6Parity": false,
+        "readOnlyByReviewer": true,
+        "auditorExecutedByReviewer": false
+      },
+      "qualification": "Le reçu d’inventaire existant est lu comme métadonnée produite par root. Aucun lancement d’auditeur ou de factory n’est effectué par cette revue ; 58/76 est une couverture d’entrées, pas une parité complète."
+    },
+    {
+      "id": "transfer_map_union",
+      "disposition": "exact_union",
+      "evidence": "217 mappings : union des 213 lignes de 4B et 216 lignes de 5A par clé sources. Toutes les lignes des deux parents sont conservées exactement ; aucune ligne divergente ou ajout étranger. Les notes de portée sont l’union exacte et les autres champs sont identiques aux deux parents.",
+      "comparisons": {
+        "counts": {
+          "merged": 217,
+          "ours": 213,
+          "fiveA": 216
+        },
+        "unionKeyCount": 217,
+        "currentKeysEqualUnion": true,
+        "unexpectedRows": [],
+        "divergentParentRows": [],
+        "allOursRowsPreserved": true,
+        "allFiveARowsPreserved": true,
+        "scopeNotesCounts": {
+          "merged": 73,
+          "ours": 65,
+          "fiveA": 73
+        },
+        "scopeNotesEqualUnion": true,
+        "otherFieldsSameBothParents": true
+      }
+    }
+  ],
+  "remainingScopeLimits": [
+    "Le blocage null 5A est conservé et vérifié statiquement sur le chemin ordonné. Les aides de priorité ne consomment pas toutes la valeur retournée par retainProposalRefusal ; LinkedTemporal ne déclare pas leurs hooks d’éligibilité. Aucun blocage universel de toutes les coordinations n’est prétendu.",
+    "Les nouvelles interactions fonctionnelles restent à vérifier après le gel réel, avec la sélection ciblée de tests et les régressions finales déjà planifiées.",
+    "La publication terminale 5A, l’identité finale 0.54, le manifeste natif final et les preuves associées n’existent pas du seul fait de cette revue.",
+    "Le futur rejeu LKEY reste une conservation partielle de 25 actions / 2 niveaux/frontier_unknown. Attempt-03 et les deux préflights précédents restent failed."
+  ],
+  "prospectiveLkey": {
+    "runner": {
+      "path": "scripts/replay-native-partial-public-regression.mjs",
+      "sha256": "7fed8d182e48c9707d07856a78b3604f2279a678020906ed5e5716c4cb1d9665",
+      "bytes": 42152
+    },
+    "diagnostic": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03-postrun-review.json",
+    "correction": "docs/migration/lot4b-evidence/development/lkey-partial-site83/boundary-observer-correction.json",
+    "finalContractDeclaredByThisReview": false,
+    "replayExecutedByThisReview": false
+  },
+  "blockingFindings": [],
+  "execution": {
+    "sourceTextAndMetadataOnly": true,
+    "nativeImports": 0,
+    "originalImports": 0,
+    "auditorExecutions": 0,
+    "tests": 0,
+    "typechecks": 0,
+    "builds": 0,
+    "replays": 0,
+    "games": 0,
+    "benchmarks": 0,
+    "productionWrites": 0,
+    "testOrHarnessWrites": 0,
+    "reportDoesNotFreezeCandidate": true
+  },
+  "conclusion": "Aucune perte concrète des raccordements 4B/5A relevée dans le texte fusionné et ses empreintes stables. La résolution conserve le refus global 5A avant le stop local 4B, les deux préférences, les propriétaires uniques, les chemins d’acquisition, les optimisations de mémoire et les captures. Le seul libellé périmé relevé a été corrigé par root et les octets corrigés sont ceux de ce reçu. Le candidat reste à publier/geler/valider selon la coordination."
+}

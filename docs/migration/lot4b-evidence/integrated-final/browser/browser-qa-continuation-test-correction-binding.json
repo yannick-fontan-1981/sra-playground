@@ -1,0 +1,36 @@
+{
+  "schema": "logos-engine.relative-arrangement-browser-qa-continuation.v1",
+  "status": "completed",
+  "game": "TRIA",
+  "scope": "continuous_final_browser_qa_interval",
+  "initialCaseStatus": "target_three_levels_achieved",
+  "clockReset": false,
+  "maximumCumulativeSeconds": 2400,
+  "initialResolution": {
+    "path": "docs/migration/lot4b-evidence/tria-case-resolution.json",
+    "sha256": "db90a62494a55bb8c96e59676a6bd9baf9521421cc3ea4f084acd23c70cf46fc",
+    "bytes": 2135
+  },
+  "sourceManifest": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/source-manifest.json",
+    "sha256": "699559bcf331e34dfa8e62137b099f05ba2e160811bc8e8e18ed1a3117bec164",
+    "bytes": 33961
+  },
+  "browserReceipt": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/browser/browser-qa-test-correction-binding.json",
+    "sha256": "f94d60ed2e3a4c562f0724f20124b5ab69b3275f856a2771460ee39bd47396b4",
+    "bytes": 3840
+  },
+  "browserStatus": "passed",
+  "startedAt": "2026-11-10T22:16:42.221510+00:00",
+  "finishedAt": "2026-11-10T22:23:11.817264+00:00",
+  "cumulativeBeforeSeconds": 374.14091,
+  "elapsedSeconds": 389.595754,
+  "cumulativeAfterSeconds": 763.736664,
+  "qualification": "Full final QA interval including opening, all attempts, the text waiter timeout and resumed same-session controls. Historical resolved case remains unchanged; no reset and no intervening publication wait charged. Same continuous QA interval and cumulative total, rebound to the identical-build test-correction receipt. No additional run or reset.",
+  "retainedOriginalContinuation": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/browser/browser-qa-continuation.json",
+    "sha256": "ec68d88b2ec1e15286d86f9be1c0db89bc31ff2a15bf64db926da42b4002d11d",
+    "bytes": 1391
+  }
+}

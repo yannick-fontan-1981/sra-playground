@@ -1,0 +1,75 @@
+{
+  "schema": "logos-engine.relative-arrangements-development-source-integrity.v1",
+  "status": "pinned_source_integrity_verified",
+  "recordedAt": "2026-11-10T20:40:30.115169+00:00",
+  "commit": "786dcf51ca57773d8e3a8948ce9ea3655e7baf8e",
+  "manifest": {
+    "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/manifest.json",
+    "bytes": 424024,
+    "sha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6"
+  },
+  "source": {
+    "fileCount": 1786,
+    "bytes": 45288462,
+    "digest": "2c06ba8133eddb500e1cfc9ef7620f978e13530dc690b7255f457a2b7cf441f2",
+    "allManifestHashesMatched": true,
+    "allManifestSizesMatched": true,
+    "missingManifestFiles": []
+  },
+  "nonmanifestFiles": {
+    "count": 735,
+    "onlyPythonCompiledCaches": true,
+    "allCacheCtimesBeforeFirstOracleStartedAt": true,
+    "inventoryScopeIncident": {
+      "path": "docs/migration/lot4b-evidence/development/relative-reference-inventory-scope-incident.json",
+      "bytes": 172826,
+      "sha256": "aee1f3b7e0b7ed4ddb29d677fd051e18e625f215d8f9596378d6092a624a1d36"
+    }
+  },
+  "sameBeforeAndAfterOracleAndAfterTargetedTest": true,
+  "receipts": [
+    {
+      "path": "docs/migration/lot4b-evidence/development/relative-oracle-01.json",
+      "bytes": 1669,
+      "sha256": "f84d92411b401951ad48179dce95e4cb101cc176f08c685483274f916febe124"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/relative-oracle-02.json",
+      "bytes": 1864,
+      "sha256": "8107951e2231b4c59f4752c8bbf830c90c82e6d4394abb4bfaef0fc01e219f5e"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/relative-reference-test-01.json",
+      "bytes": 3046,
+      "sha256": "9236d32b597302b286231656c687ff583d5a3d38a202537d45c404a933285dfd"
+    }
+  ],
+  "preservedFailedGenerator": {
+    "path": "docs/migration/lot4b-evidence/development/relative-oracle-01-generator.py",
+    "bytes": 31759,
+    "sha256": "3f8349768f54baac67cc6066653637853a99d09ad9af42358221c7f378f5f228"
+  },
+  "generator": {
+    "path": "scripts/export-v6-relative-arrangements-reference.py",
+    "bytes": 31760,
+    "sha256": "da4d30efb8c44eacecf5a41fa6e0d66e5f901567d8254b69332d74cd2b5bfe36"
+  },
+  "test": {
+    "path": "tests/v6-relative-arrangements-reference.test.ts",
+    "bytes": 14199,
+    "sha256": "11f92e2aee67db509c7523a8b7ebba37ae47110f320a3dcc1e156e3f93f5ffa6"
+  },
+  "fixture": {
+    "path": "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+    "bytes": 1099570,
+    "sha256": "fa52436d34ee32e7fcf4e30f67122c5bede6823d0ff2cb34980cdc4885c3f933"
+  },
+  "targetedTest": {
+    "tests": 81,
+    "passed": 81,
+    "failed": 0,
+    "skipped": 0,
+    "runnerDurationMs": 1216.160846
+  },
+  "qualification": "Integrity of exactly the 1786 pinned manifest source files. Original oracle and one targeted differential test executed after explicit 7A release. No live game, full caller replay, build or performance measurement."
+}

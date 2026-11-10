@@ -1,0 +1,20 @@
+{
+  "schema": "logos-engine.relative-arrangement-case-selection.v1",
+  "game": "TRIA",
+  "targetLevels": 3,
+  "selectedAt": "2026-11-10T20:41:18.627048+00:00",
+  "deadline": "2026-11-10T21:21:18.627048+00:00",
+  "previousChargedSeconds": 0,
+  "maximumCumulativeSeconds": 2400,
+  "clockReset": false,
+  "reason": "Catalogue public describes participants and separate actuators plus a visible relative model. No game implementation or hidden state was inspected. Recognition and attribution remain to be established by the common native session.",
+  "phases": {
+    "candidate-01": {
+      "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+      "directory": "docs/migration/lot4b-evidence/development/tria-live-01",
+      "manifest": "docs/migration/lot4b-evidence/development/freeze-01/source-manifest.json",
+      "actionCap": 120
+    }
+  },
+  "qualification": "First bounded cold developmental candidate; inherited runtime version label0.51 does not identify its added4B source. The852d5ff7 freeze is separate from the later integrated release. One wall-clock interval includes attempts, debugging and source-return analysis; no reset."
+}

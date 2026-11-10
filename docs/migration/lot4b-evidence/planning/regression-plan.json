@@ -1,0 +1,754 @@
+{
+  "schema": "logos-engine.lot4b.regression-plan.v1",
+  "createdAt": "2026-11-10T20:51:55.061483+00:00",
+  "status": "planned_pending_published_predecessors_and_final_freeze",
+  "executable": false,
+  "executionsPerformedForThisPlan": 0,
+  "newRegressionResults": null,
+  "qualification": "Plan statique de non-régression. Les succès cités sont historiques. Aucun rejeu, test ou jeu exécuté pour ce plan. Le candidat 4B fusionné et ses empreintes seront déclarés par root après intégration des publications réelles.",
+  "candidate": {
+    "version": null,
+    "publishedPredecessorCommit": null,
+    "sourceManifest": null,
+    "nativeDigest": null,
+    "fileCount": null,
+    "requirement": "Aucune valeur future fictive. Remplir uniquement depuis le gel complet effectivement vérifié du candidat fusionné."
+  },
+  "predecessors": {
+    "published4A": {
+      "siteVersion": 81,
+      "nativeVersion": "0.51.0",
+      "commit": "4dafc40c53ed4406ee7cd148e3e6995a2eb4185e",
+      "nativeDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7"
+    },
+    "published3I": {
+      "siteVersion": 79,
+      "nativeVersion": "0.50.0",
+      "commit": "6d03c2adda9f60b1c97304f5491a428cfbec7a6c",
+      "nativeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87"
+    },
+    "sevenAObserved": {
+      "statusPath": "/workspace/shared/sra-coordination/lot7a-status.json",
+      "statusUpdatedAt": "2026-11-10T20:50:37.884452+00:00",
+      "publicationStarted": true,
+      "publicationVerifiedByThisPlan": false,
+      "publishedCommit": null,
+      "publishedSiteVersion": null,
+      "nativeVersion": "0.52.0",
+      "nativeDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+      "fileCount": 279,
+      "sourceManifest": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/source-manifest.json",
+        "sha256": "75e1dbe4002f737c2d5248a08531c6b60002c3114692b55df3a5c7255c79d6cc",
+        "bytes": 33095
+      },
+      "qualification": "Dernier état de coordination lu : préparation de publication, pas encore de publication terminale vérifiée. Ne pas confondre commit local, candidat gelé et version effectivement publiée."
+    }
+  },
+  "successfulTrajectorySuite": {
+    "inheritedManifest": {
+      "path": "docs/migration/lot7a-evidence/recorded-regression-cases-integrated.json",
+      "sha256": "9dc1302d8289118e38a3c8b54112fbdfba35d5b3d7ae29b1d93bb49fa0b14474",
+      "bytes": 4280
+    },
+    "originCheckout": "/workspace/sites/sra-lot7a-20261110/.sites-checkout",
+    "originalSchema": "logos-engine.recorded-public-regression-cases.v1",
+    "preserveCasesAndOrderExactly": true,
+    "cases": [
+      {
+        "id": "catr-051",
+        "game": "CATR",
+        "baseline": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz",
+          "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6"
+        },
+        "trace": {
+          "path": "docs/migration/lot3b-state-cost-evidence/final/catr-state-cost-session/catr-public-trace.json.gz",
+          "sha256": "e152eb2705947addd1506cb01872d23770d188cb1dd46c86dcbc9bdf7f4f2816"
+        }
+      },
+      {
+        "id": "rswp-051",
+        "game": "RSWP",
+        "baseline": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz",
+          "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba"
+        },
+        "trace": {
+          "path": "docs/migration/lot3a-cost-evidence/final/rswp-regression/rswp-public-trace.json.gz",
+          "sha256": "43f32a75b0d8cd747457602a3c3f113e5d63ec621e45bb2bc1d195f242997755"
+        }
+      },
+      {
+        "id": "fogw-051",
+        "game": "FOGW",
+        "baseline": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz",
+          "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c"
+        },
+        "trace": {
+          "path": "docs/migration/lot3e-evidence/final/fogw-reception-session/fogw-public-trace.json.gz",
+          "sha256": "1d4e92e6ef063e7799bfb4237b17beb148b49bde4ab46ef26ef91a3271d44b46"
+        }
+      },
+      {
+        "id": "vois-051",
+        "game": "VOIS",
+        "baseline": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz",
+          "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d"
+        },
+        "trace": {
+          "path": "docs/migration/lot3f-evidence/final/vois-population-session/vois-public-trace.json.gz",
+          "sha256": "d642c805485571c0e54ed3421644cbd8463ca3697ce135b223f635487b58069d"
+        }
+      },
+      {
+        "id": "conn-050",
+        "game": "CONN",
+        "baseline": {
+          "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz",
+          "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750"
+        },
+        "trace": {
+          "path": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-public-trace.json.gz",
+          "sha256": "fc8c7bf4529490e6e6ee04e7a5a51b389180e5fb5e35255145c59ecf4dd0f102"
+        }
+      },
+      {
+        "id": "mind-051",
+        "game": "MIND",
+        "baseline": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz",
+          "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a"
+        },
+        "trace": {
+          "path": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+          "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c"
+        }
+      },
+      {
+        "id": "weav-051",
+        "game": "WEAV",
+        "baseline": {
+          "path": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz",
+          "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3"
+        },
+        "trace": {
+          "path": "docs/migration/lot3h-evidence/final/weav-crossed-prefix-session/weav-public-trace.json.gz",
+          "sha256": "a46f6a331e8f98767ee709c2931edd6d0abde9cc636b93ef384509c04adface2"
+        }
+      }
+    ],
+    "passiveOwnerRequirements": [],
+    "additionalCases": [
+      {
+        "id": "tria-development-4b",
+        "game": "TRIA",
+        "baseline": {
+          "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+          "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe"
+        },
+        "trace": {
+          "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+          "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3"
+        }
+      }
+    ],
+    "historical7AResults": {
+      "summary": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/regressions/regression-summary.json",
+        "sha256": "e575a6aa95e532c6e9b6275502d1cd16b69a438976a0d75a615108465bc6b5e6",
+        "bytes": 165701
+      },
+      "status": "passed",
+      "casesPassed": 7,
+      "casesTotal": 7,
+      "checksPassed": 119,
+      "checksExpected": 119,
+      "nativeDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+      "prevalidatedTotals": {
+        "commands": 292,
+        "completePublicPackets": 299,
+        "animationFrames": 1405,
+        "prefixes": 210,
+        "requests": 502,
+        "naturalLevelBoundaries": 21
+      },
+      "cases": [
+        {
+          "id": "catr-051",
+          "game": "CATR",
+          "historicalActions": 12,
+          "historicalPrefixes": 8,
+          "baselineTransport": {
+            "partsManifest": "docs/migration/lot4a-evidence/integrated-051/regressions/catr-050-replay.json.gz.parts.json",
+            "parts": 2,
+            "bytes": 1649205,
+            "sha256": "379ce17151369af5ba39e205cc8b2882aa4e97a3dd8909b9c831a7b2b0ac7fb6"
+          },
+          "baselineNativeDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+          "subsequent7AReplay": {
+            "path": "docs/migration/lot7a-evidence/integrated-final/regressions/catr-051-replay.json.gz",
+            "sha256": "29f58eb7f74b768b1fdc7e0453fc64a1ae972a54ab39f4a1fb9b2defa5e3d5aa",
+            "bytes": 1924297
+          },
+          "subsequent7AReplayStatus": "passed",
+          "qualification": "Preuve historique 7A, sans promotion silencieuse de ce rapport en nouvelle baseline et sans résultat 4B."
+        },
+        {
+          "id": "rswp-051",
+          "game": "RSWP",
+          "historicalActions": 19,
+          "historicalPrefixes": 11,
+          "baselineTransport": {
+            "partsManifest": "docs/migration/lot4a-evidence/integrated-051/regressions/rswp-050-replay.json.gz.parts.json",
+            "parts": 3,
+            "bytes": 2585868,
+            "sha256": "5de1bbc32db1a3dffdf5c350ef70ca90142007c6ebc7735f8b8c56e9fdfa00ba"
+          },
+          "baselineNativeDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+          "subsequent7AReplay": {
+            "path": "docs/migration/lot7a-evidence/integrated-final/regressions/rswp-051-replay.json.gz",
+            "sha256": "e201922c639e6dfb19661d2a50d519166cc3eaffd21108022b0b4e878888fa21",
+            "bytes": 2990807
+          },
+          "subsequent7AReplayStatus": "passed",
+          "qualification": "Preuve historique 7A, sans promotion silencieuse de ce rapport en nouvelle baseline et sans résultat 4B."
+        },
+        {
+          "id": "fogw-051",
+          "game": "FOGW",
+          "historicalActions": 50,
+          "historicalPrefixes": 27,
+          "baselineTransport": {
+            "partsManifest": "docs/migration/lot4a-evidence/integrated-051/regressions/fogw-050-replay.json.gz.parts.json",
+            "parts": 10,
+            "bytes": 8174480,
+            "sha256": "fe037e48df8dd3a7c302a5e85355b2b9555daa6d9d8aa56f7772fc363732726c"
+          },
+          "baselineNativeDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+          "subsequent7AReplay": {
+            "path": "docs/migration/lot7a-evidence/integrated-final/regressions/fogw-051-replay.json.gz",
+            "sha256": "add01b91655d718fe4ea70033948ed9b2434d9571ea0e05874d4e0532484a5b8",
+            "bytes": 9451915
+          },
+          "subsequent7AReplayStatus": "passed",
+          "qualification": "Preuve historique 7A, sans promotion silencieuse de ce rapport en nouvelle baseline et sans résultat 4B."
+        },
+        {
+          "id": "vois-051",
+          "game": "VOIS",
+          "historicalActions": 78,
+          "historicalPrefixes": 42,
+          "baselineTransport": {
+            "partsManifest": "docs/migration/lot4a-evidence/integrated-051/regressions/vois-050-replay.json.gz.parts.json",
+            "parts": 12,
+            "bytes": 10678168,
+            "sha256": "39a6e6551cf94a48842b154afdc2256dafd88fd93404e4776bd67b24d5a4796d"
+          },
+          "baselineNativeDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+          "subsequent7AReplay": {
+            "path": "docs/migration/lot7a-evidence/integrated-final/regressions/vois-051-replay.json.gz",
+            "sha256": "add92f05b526b0ed4b760488282285f86173f618d139af1b86d7ca70a149d249",
+            "bytes": 12325381
+          },
+          "subsequent7AReplayStatus": "passed",
+          "qualification": "Preuve historique 7A, sans promotion silencieuse de ce rapport en nouvelle baseline et sans résultat 4B."
+        },
+        {
+          "id": "conn-050",
+          "game": "CONN",
+          "historicalActions": 21,
+          "historicalPrefixes": 21,
+          "baselineTransport": {
+            "partsManifest": "docs/migration/lot3i-evidence/final/conn-recurrent-series-session/conn-campaign.json.gz.parts.json",
+            "parts": 3,
+            "bytes": 2630905,
+            "sha256": "f3df06cff6d370874889f5183a77dd91ae585060c04ba052d0025cd2db9e3750"
+          },
+          "baselineNativeDigest": "e039a62b5dbb563a6c25f5469228e0025ffb66f243a4e09fdf27caeaeef2bf87",
+          "subsequent7AReplay": {
+            "path": "docs/migration/lot7a-evidence/integrated-final/regressions/conn-050-replay.json.gz",
+            "sha256": "5e736b0167acada767719054e9672f51086ee8659159ceaee6c5815a5ba9813c",
+            "bytes": 3732728
+          },
+          "subsequent7AReplayStatus": "passed",
+          "qualification": "Preuve historique 7A, sans promotion silencieuse de ce rapport en nouvelle baseline et sans résultat 4B."
+        },
+        {
+          "id": "mind-051",
+          "game": "MIND",
+          "historicalActions": 31,
+          "historicalPrefixes": 20,
+          "baselineTransport": {
+            "partsManifest": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-campaign.json.gz.parts.json",
+            "parts": 5,
+            "bytes": 4349054,
+            "sha256": "6a187286069287a89cedb60ac0f206e0702abae5d8df0dd2615bd43c1bb5c75a"
+          },
+          "baselineNativeDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+          "subsequent7AReplay": {
+            "path": "docs/migration/lot7a-evidence/integrated-final/regressions/mind-051-replay.json.gz",
+            "sha256": "a23bcfb3603b904f7049fb6ff1dd1426b2959b8ffd2e20612c616053b887dc44",
+            "bytes": 4977259
+          },
+          "subsequent7AReplayStatus": "passed",
+          "qualification": "Preuve historique 7A, sans promotion silencieuse de ce rapport en nouvelle baseline et sans résultat 4B."
+        },
+        {
+          "id": "weav-051",
+          "game": "WEAV",
+          "historicalActions": 81,
+          "historicalPrefixes": 81,
+          "baselineTransport": {
+            "partsManifest": "docs/migration/lot4a-evidence/integrated-051/regressions/weav-050-streamlog-replay.json.gz.parts.json",
+            "parts": 16,
+            "bytes": 13577757,
+            "sha256": "114906e80b2ff5817adeaa105fd4e84ea2b057d8393b202dc03f35248b350fc3"
+          },
+          "baselineNativeDigest": "c1e3dbdba85929dee4a287bc2f5cb6a011457ba43e9a67078f2764f659b603b7",
+          "subsequent7AReplay": {
+            "path": "docs/migration/lot7a-evidence/integrated-final/regressions/weav-051-replay.json.gz",
+            "sha256": "b7340c28c16b52f45ac06cca5bcc66b6fcb6d15e03e33fb9e30108228729fe02",
+            "bytes": 15387477
+          },
+          "subsequent7AReplayStatus": "passed",
+          "qualification": "Preuve historique 7A, sans promotion silencieuse de ce rapport en nouvelle baseline et sans résultat 4B."
+        }
+      ],
+      "qualification": "Le manifest source reste identique, y compris CONN avant 4A et le chemin MIND retenu par 7A. Les sept rapports 7A postérieurs sont liés comme preuves historiques, pas substitués sans décision explicite."
+    },
+    "triaDevelopmentBaseline": {
+      "execution": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/execution-tria.json",
+        "sha256": "efaaa2b4b358f6577cc506a0f8abc5ddc6049a0782e4451591ad16fe39e46ae5",
+        "bytes": 70005
+      },
+      "sourceManifest": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/source-manifest.json",
+        "sha256": "0d8527fe8f19b92fed78b38a5e6947b2952ef9dd21d79e00286b6cae0e7bf419",
+        "bytes": 32756
+      },
+      "nativeDigest": "852d5ff7cdaa15534d22fcd610043cd348bb8aa241e290ae67d75adcaeaf8f9f",
+      "nativeFileCount": 276,
+      "nativeVersionLabel": "0.51.0 inherited; use the development digest to identify this 4B candidate",
+      "report": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz",
+        "sha256": "e473af537c042d76ce98f13b2cc9be495e7b4ac08ca443251df7804d542bdbbe",
+        "bytes": 3161161
+      },
+      "trace": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-public-trace.json.gz",
+        "sha256": "916d0f1cb1dcbfd9b7ba7624e7d3d4648a91ae7ef64583288af4711d2a955ac3",
+        "bytes": 13286
+      },
+      "publicJournal": {
+        "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-actual-public-journal.jsonl.gz",
+        "sha256": "8bc723a62bea09308d6fd905b1c6b3104d61acd5babc726016612d55a43b698c",
+        "bytes": 9185
+      },
+      "reportPartsManifest": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.parts.json",
+      "reportParts": 4,
+      "observed": {
+        "status": "passed",
+        "exitCode": 0,
+        "targetLevels": 3,
+        "levelsCompleted": 3,
+        "actions": 17,
+        "prefixes": 17,
+        "completePublicPackets": 18,
+        "requests": 34,
+        "operationCounts": {
+          "init": 1,
+          "advance": 17,
+          "resume": 16
+        },
+        "naturalLevelBoundaries": 3,
+        "finalLevel": 4,
+        "finalState": "NOT_FINISHED",
+        "finalReason": "target_levels_completed"
+      },
+      "qualification": "Campagne de développement avant fusion de 7A. Ce n’est ni la campagne du futur candidat final ni une preuve de publication. Aucune nouvelle parité source n’est déduite de ce plan."
+    },
+    "plannedHistoricalCoverage": {
+      "cases": 8,
+      "commands": 309,
+      "completePublicPackets": 317,
+      "prefixes": 227,
+      "requests": 536,
+      "naturalLevelBoundaries": 24,
+      "expectedHistoricalComparatorChecks": 136,
+      "animationFrames": null,
+      "qualification": "Somme des sept cas historiques et de TRIA développement; toutes les vérifications du candidat final restent à exécuter."
+    },
+    "futureRunner": {
+      "path": "scripts/run-released-public-regressions-streamlog.py",
+      "manifestSchema": "logos-engine.recorded-public-regression-cases.v1",
+      "maximumConcurrentReplays": 1,
+      "nodeOldSpaceMiB": 1536,
+      "timeoutSecondsPerReplay": 2400,
+      "argumentsTemplate": [
+        "FINAL_CASE_MANIFEST",
+        "NEW_EXCLUSIVE_OUTPUT_DIRECTORY",
+        "--source-manifest",
+        "ACTUAL_FINAL_SOURCE_MANIFEST",
+        "--node-old-space-mib",
+        "1536",
+        "--timeout-seconds",
+        "2400"
+      ],
+      "prerequisites": [
+        "Publication 7A effectivement vérifiée et intégrée avec les autres prédécesseurs livrés.",
+        "Gel du vrai candidat fusionné; source complète et outils d’exécution inchangés avant/après.",
+        "Création séparée du manifest exécutable après le gel, avec les huit objets baseline/trace ci-dessus et aucun digest fictif.",
+        "Matérialisation des gzip exacts à partir de leurs parties avant le preflight historique."
+      ]
+    },
+    "scopeOf17Checks": [
+      "Statuts passed des deux rapports et même jeu/cible.",
+      "Budgets de production, référence source et empreintes opaques des assets.",
+      "Paquet initial, toutes les commandes calculées, paquets complets avec animations et frontières primitives.",
+      "Famille/groupe/kind/sous-question choisis, longueurs acquises, scalaires retenus, coordination et gardes.",
+      "Ancres epoch avec seule normalisation explicite du préfixe de session neuf; compteurs de séries.",
+      "Demandes common, compteurs d’acquisition caller, frontières naturelles et résultat final.",
+      "Évaluations mécaniques de domaine, absence d’agent Python, source gelée, identités de baseline/trace."
+    ],
+    "scopeLimits": [
+      "Ce comparateur ne prouve pas l’égalité des graphes complets, de leurs révisions ou des nouveaux états propriétaires.",
+      "Durées et identifiants de version ne constituent pas des assertions de non-régression fonctionnelle.",
+      "Le comparateur strict de campagnes live indépendantes ne remplace pas celui des replays: il exige baseline=null, réussite de la cible et exécution exit0.",
+      "Aucune acquisition passive de RelativeArrangements; ne pas ajouter une exigence passive artificielle."
+    ]
+  },
+  "materialization": {
+    "executed": false,
+    "method": "python -B scripts/evidence-byte-parts.py restore DIRECTORY",
+    "requiredDirectories": [
+      "docs/migration/lot4a-evidence/integrated-051/regressions",
+      "docs/migration/lot4a-evidence/integrated-051/mind-live-01",
+      "docs/migration/lot3i-evidence/final/conn-recurrent-series-session",
+      "docs/migration/lot4b-evidence/development/tria-live-01"
+    ],
+    "optionalLkeyDirectory": "docs/migration/lot7a-evidence/integrated-final",
+    "qualification": "L’outil vérifie chaque partie et l’empreinte concaténée, refuse les conflits et conserve les octets. Les replayers historiques lisent les gzip matérialisés, pas directement les parts.",
+    "mindTrace": {
+      "requiredPath": "docs/migration/lot7a-evidence/integrated-baseline/recorded/mind-public-trace.json.gz",
+      "sameBytesOriginalPath": "docs/migration/lot4a-evidence/integrated-051/mind-live-01/mind-public-trace.json.gz",
+      "sha256": "f74678fa4d9c1b5397545b648ab353c29fc0a5a4c0eb35ab36a5258bfa34ca0c",
+      "requirement": "Conserver le chemin exact du manifest 7A après intégration; une copie éventuelle doit être explicite, vérifiée et liée par reçu."
+    }
+  },
+  "partialLkeySuite": {
+    "separateFromSuccessfulSuite": true,
+    "historicalRawStatus": "failed",
+    "historicalExitCode": 1,
+    "baseline": {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+      "sha256": "11aa4589a7d294cc5c7aed2e0e3946541cf48a208b891b0c7229a190e290aff4",
+      "bytes": 5445629
+    },
+    "trace": {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-public-trace.json.gz",
+      "sha256": "de96446d655f3c5165f4eeebfbd0aa1ed074c2b65ee35288d84c6d4112a2a763",
+      "bytes": 10983
+    },
+    "publicJournal": {
+      "path": "docs/migration/lot7a-evidence/integrated-final/lkey-actual-public-journal.jsonl.gz",
+      "sha256": "d00fd30f4c5579137e603e53faf9ab29d51c82c4b0dfb1c28ef31a0fcab67450",
+      "bytes": 8081
+    },
+    "execution": {
+      "path": "docs/migration/lot7a-evidence/integrated-final/execution-lkey.json",
+      "sha256": "ac35fbe45492ee87b02e472455d828408b33d261ed1873f6044f1419c611dfec",
+      "bytes": 70533
+    },
+    "sourceManifest": {
+      "path": "docs/migration/lot7a-evidence/integrated-final/source-manifest.json",
+      "sha256": "75e1dbe4002f737c2d5248a08531c6b60002c3114692b55df3a5c7255c79d6cc",
+      "bytes": 33095
+    },
+    "baselineNativeDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+    "baselineNativeVersion": "0.52.0",
+    "reportPartsManifest": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz.parts.json",
+    "reportParts": 7,
+    "observed": {
+      "targetLevels": 3,
+      "levelsCompleted": 2,
+      "actions": 25,
+      "prefixes": 25,
+      "completePublicPackets": 26,
+      "naturalLevelBoundaries": 2,
+      "boundaryActionCounts": [
+        16,
+        24
+      ],
+      "finalLevel": 3,
+      "finalState": "NOT_FINISHED",
+      "finalStatus": "stopped",
+      "finalReason": "frontier_unknown",
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 25,
+        "resume": 25
+      },
+      "failure": "Did not complete LKEY level 3: V6 stopped: frontier_unknown. Its acquired evidence is retained for inspection.",
+      "workshopSourceCalls": 49,
+      "workshopRecords": 25,
+      "workshopSelectedRecords": 14,
+      "workshopPassiveRecords": 11
+    },
+    "historicalGates": {
+      "successfulManifestPreflightAccepts": false,
+      "releasedBaselineHostAccepts": false,
+      "all17ChecksCanPass": false,
+      "hardcodedBothRunsPassedGateWouldFail": true,
+      "strictIndependentLiveComparatorAccepts": false
+    },
+    "newHost": {
+      "path": "scripts/replay-native-partial-public-regression.mjs",
+      "status": "written_statically_reviewed_not_executed",
+      "historicalToolsModified": false,
+      "commonHarness": "tests/helpers/v6-live-game-campaign.ts",
+      "hostMode": "recordedPublic",
+      "contractRequired": true,
+      "contractSchema": "logos-engine.partial-public-regression-contract.v1",
+      "candidateDigestInContract": null,
+      "requiredContract": [
+        "Empreintes exactes baseline/trace/exécution historique et source candidate réellement gelée.",
+        "Cible3 et échec historique explicites; 25commandes/26paquets, deux frontières après16et24,25préfixes et fin frontier_unknown.",
+        "Budgets inchangés, session froide unique, toutes les demandes common/WHYACT et acquisition caller réelle.",
+        "Aucun retour archivé n’est fourni après une commande divergente; aucune normalisation des actions ou paquets.",
+        "Rapport brut failed conservé intégralement; qualification partielle séparée, aucune réussite de trois niveaux.",
+        "Sources/outils/entrées identiques avant/après, sortie exclusive et conservation des tentatives incomplètes."
+      ],
+      "qualificationOnExactPreservation": "partial_trajectory_preserved",
+      "qualificationMeaning": "Préservation de la trajectoire partielle historique et de sa limite, pas nouvelle résolution du jeu.",
+      "doNotExecuteBefore": "Autorisation de root après gel final fusionné et déclaration du contrat réel.",
+      "commandTemplate": [
+        "node",
+        "--expose-gc",
+        "--max-old-space-size=1536",
+        "scripts/replay-native-partial-public-regression.mjs",
+        "BASELINE",
+        "TRACE",
+        "ACTUAL_FINAL_SOURCE_MANIFEST",
+        "NEW_EXCLUSIVE_OUTPUT_DIRECTORY",
+        "--contract",
+        "DECLARED_FINAL_PARTIAL_CONTRACT"
+      ],
+      "helperBaselineFor": {
+        "reviewedGamesWithFixture": [
+          "HANO",
+          "SYME",
+          "DNOI"
+        ],
+        "lkeyFixture": null,
+        "reviewedFunctionSha256": "77c9d5ca75f6ff41104d74f9afe30e130e458cc847c9820cbbb601a9f91df28d",
+        "requirement": "L’outil refuse une modification du corps baselineFor avant revue; le helper final doit également capturer workshopSourceCalls."
+      },
+      "durableOutputs": [
+        "started.json",
+        "preparation.json",
+        "progress.jsonl",
+        "public-journal.jsonl",
+        "public-journal.jsonl.gz",
+        "replay-campaign.json.gz",
+        "replay-public-trace.json.gz",
+        "command-checks.json",
+        "qualification.json"
+      ],
+      "behavior": "Observer en lecture seule de la vraie réponse V6AgentService.handle : contrôle exact de la commande autorisée avant tout retour archivé, puis retour du même objet. Le host recordedPublic inchangé garde la seconde vérification. Checkpoints de préfixes, réponses common, frontières et acquisition Workshop sont contrôlés sans alimenter les décisions. Le journal public brut est écrit avant chaque comparaison et conservé en cas d’échec.",
+      "contractTemplateIsExecutable": false,
+      "contractTemplate": {
+        "schema": "logos-engine.partial-public-regression-contract.v1",
+        "declaredAt": null,
+        "status": "template_not_executable",
+        "baseline": {
+          "path": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+          "sha256": "11aa4589a7d294cc5c7aed2e0e3946541cf48a208b891b0c7229a190e290aff4",
+          "bytes": 5445629
+        },
+        "trace": {
+          "path": "docs/migration/lot7a-evidence/integrated-final/lkey-public-trace.json.gz",
+          "sha256": "de96446d655f3c5165f4eeebfbd0aa1ed074c2b65ee35288d84c6d4112a2a763",
+          "bytes": 10983
+        },
+        "baselineExecution": {
+          "path": "docs/migration/lot7a-evidence/integrated-final/execution-lkey.json",
+          "sha256": "ac35fbe45492ee87b02e472455d828408b33d261ed1873f6044f1419c611dfec",
+          "bytes": 70533
+        },
+        "sourceManifest": {
+          "path": null,
+          "sha256": null
+        },
+        "executionInputs": {
+          "runner": {
+            "path": "scripts/replay-native-partial-public-regression.mjs",
+            "sha256": null
+          },
+          "harness": {
+            "path": "tests/helpers/v6-live-game-campaign.ts",
+            "sha256": null
+          },
+          "service": {
+            "path": "src/runtime/v6-agent-service.ts",
+            "sha256": null
+          },
+          "protocol": {
+            "path": "src/runtime/v6-agent-protocol.ts",
+            "sha256": null
+          },
+          "commonDeclaration": {
+            "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_policy.drm.json",
+            "sha256": null
+          },
+          "strategyDeclaration": {
+            "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+            "sha256": null
+          }
+        },
+        "expected": {
+          "game": "LKEY",
+          "targetLevels": 3,
+          "baselineSourceDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+          "status": "failed",
+          "traceStatus": "failed",
+          "baselineExitCode": 1,
+          "failure": "Did not complete LKEY level 3: V6 stopped: frontier_unknown. Its acquired evidence is retained for inspection.",
+          "actions": 25,
+          "prefixes": 25,
+          "completePublicPackets": 26,
+          "boundaryActionCounts": [
+            16,
+            24
+          ],
+          "final": {
+            "actions": 25,
+            "levelsCompleted": 2,
+            "level": 3,
+            "state": "NOT_FINISHED",
+            "status": "stopped",
+            "reason": "frontier_unknown",
+            "prefixes": 25,
+            "sessions": 1,
+            "operationCounts": {
+              "init": 1,
+              "advance": 25,
+              "resume": 25
+            }
+          },
+          "workshop": {
+            "calls": 49,
+            "records": 25,
+            "selectedRecords": 14,
+            "passiveRecords": 11
+          }
+        },
+        "comparisonScope": {
+          "exact": [
+            "complete public commands and packets",
+            "action metadata except executionMs",
+            "selected prefix scalar fields and declared coordination fields",
+            "epoch order and inherited source-series counts",
+            "request protocol and caller counters/components",
+            "natural boundaries and retained-session caller counters/components",
+            "final public outcome, unresolved failure and operation counts",
+            "mechanical domain assessments",
+            "Workshop source-call order, public revisions, commands, selections and record cardinality"
+          ],
+          "excluded": [
+            "durations",
+            "native implementation label",
+            "migration coverage/status labels",
+            "fresh observation-session identifiers in coordination and epoch anchors",
+            "graph chains, graph revisions, graph node counts and complete provider state equality"
+          ],
+          "actionNormalization": "none",
+          "publicPacketNormalization": "none",
+          "targetCompletionClaim": false,
+          "speedComparisonClaim": false,
+          "originalCallerParityClaim": false
+        }
+      },
+      "contractFinalization": "Après gel et autorisation de root seulement: écrire un nouveau fichier contrat, déclarer date/statut réels, épingler le vrai manifest source et tous les fichiers d’exécution finaux. Le template présent contient des null intentionnels et doit être refusé tel quel. Aucun import/exécution native ni syntax-check réalisé pour cette préparation.",
+      "staticReview": {
+        "reviewer": "/root/validation_plan",
+        "executed": false,
+        "conclusion": "No concrete defect found in the comparison path against the current helper; the final merged helper must capture Workshop. No replay, import, syntax-check, test or game executed."
+      },
+      "preparedScriptFingerprint": {
+        "path": "scripts/replay-native-partial-public-regression.mjs",
+        "sha256": "2ad1bc5cb7763efbf8d1905d184dbb33c873c70416dd5ce125ea2f85f45ace69",
+        "bytes": 40628
+      }
+    },
+    "retainedLimits": [
+      "Le niveau3 reste non résolu; le Workshop original isolé proposait revalidate_mode mais le common s’arrête avant sa consultation.",
+      "Une divergence ou amélioration ne reçoit pas le retour prévu par l’ancienne commande et ne devient pas automatiquement un succès de non-régression.",
+      "Si le comparateur historique17est exécuté en diagnostic, conserver sa sortie failed; ne pas masquer son premier gate.",
+      "Aucun jeu LKEY live ni remise à zéro de son horloge dans cette préparation."
+    ],
+    "cumulativeCaseClock": {
+      "checkpoint": {
+        "path": "docs/migration/lot7a-evidence/integrated-final/lkey-case-checkpoint.json",
+        "sha256": "b528be71ae5836dc1b476f087accc4185a3d0cd033a2f85519249a282ff96542",
+        "bytes": 1736
+      },
+      "cumulativeSeconds": 1341.6227419909999,
+      "remainingSeconds": 1058.3772580090001,
+      "maximumCumulativeSeconds": 2400,
+      "casePhase": "paused_after_integrated_052_live_parity_browser",
+      "requirement": "Toute nouvelle activité imputable au cas doit reprendre son horloge existante selon le protocole. L’outil ne lit ni ne réinitialise ni ne remplace cette horloge; ses durées brutes restent diagnostiques. Le présent plan ne crée aucune nouvelle tentative."
+    }
+  },
+  "toolsRead": [
+    {
+      "path": "scripts/run-released-public-regressions-streamlog.py",
+      "sha256": "b05b0e113c93696be45408e4c10549f2a379c22330efbddfcaa0f09cd51309b9",
+      "bytes": 15626
+    },
+    {
+      "path": "scripts/run-released-public-regressions.py",
+      "sha256": "7988863afd2b171f31987434bb1176370be2e3afd49dead1edcdc59770d81909",
+      "bytes": 14089
+    },
+    {
+      "path": "scripts/run-recorded-public-regressions.py",
+      "sha256": "df19dc88ff29e78a1cb5935d445644e96cc9fb1ef90b73d802cf51868d2b2c40",
+      "bytes": 20897
+    },
+    {
+      "path": "scripts/replay-public-regression-released-baseline.mjs",
+      "sha256": "2ce2a0e1b8f969510373ae161156b2b163d208b4e426cb1f26218f9952b3b164",
+      "bytes": 6355
+    },
+    {
+      "path": "scripts/compare-v54-regressions.py",
+      "sha256": "f13fee083fda44ff4bd71ac46bc01cdce99eaccf9d6c691a2df7040e698b36c0",
+      "bytes": 18166
+    },
+    {
+      "path": "scripts/compare-native-public-campaigns.mjs",
+      "sha256": "d7af5df6252c57e19a0c69af44bd4a18832ae94cbd30ba586485d284bb12d24c",
+      "bytes": 22417
+    },
+    {
+      "path": "scripts/evidence-byte-parts.py",
+      "sha256": "fcc651b3d533a87805378c126b1253d40f343ccc51108a7881c3db33bf1f8350",
+      "bytes": 7210
+    }
+  ],
+  "publicationAndMembershipRecheckBeforeFinal": [
+    "Lire le reçu terminal de publication7A: déploiement succeeded, Site/version/commit réels; actualiser le statut de coordination sans prendre le commit local pour une publication.",
+    "Vérifier que les fichiers natifs du commit publié7A produisent exactement le digest déclaré, et préciser toute révision publiée ultérieure.",
+    "Vérifier l’appartenance au commit publié du manifest, des rapports/parts manifest/toutes parties, traces, journaux, reçus d’exécution et manifests source cités.",
+    "Reconstituer les octets des rapports depuis les parties et confronter chaque SHA au manifest original; aucune régénération de rapport.",
+    "Vérifier les bindings de publication des prédécesseurs4A/Site81 et3I/Site79 utilisés par les sept baselines historiques.",
+    "Après fusion par root de tous les prédécesseurs réellement livrés, geler source et harnais réels du candidat4B; aucune projection d’empreinte future.",
+    "Préserver les sorties brutes de tous les essais, y compris refus, divergence, timeout ou échec; distinguer la suite8cas des preuves partiellesLKEY.",
+    "Ne reporter aucun nombre de succès final avant les reçus correspondants."
+  ]
+}

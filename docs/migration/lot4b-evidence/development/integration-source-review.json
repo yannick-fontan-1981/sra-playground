@@ -1,0 +1,394 @@
+{
+  "schema": "logos-engine.relative-arrangement-integration-source-review.v1",
+  "reviewedAt": "2026-11-10T20:55:22.494414+00:00",
+  "status": "static_review_no_blocking_finding",
+  "reviewer": "/root/feedback_source_audit",
+  "scope": "Independent static review of the 4B native integration against Site 81, with source contracts and the 12 integration scenarios. No execution verdict is issued by this receipt.",
+  "execution": {
+    "testsExecuted": false,
+    "buildExecuted": false,
+    "originalImportsExecuted": false,
+    "gamesRun": 0,
+    "replaysRun": 0,
+    "benchmarksRun": 0,
+    "productionFilesModified": []
+  },
+  "baseline": {
+    "siteVersion": 81,
+    "commit": "4dafc40c53ed4406ee7cd148e3e6995a2eb4185e",
+    "files": [
+      {
+        "path": "src/logos-engine/v6-native-runtime.ts",
+        "present": true,
+        "bytes": 137357,
+        "sha256": "4f029cdc1609bcbc870b557cb574565b4235825e1ad4857f859166e00c40d60b"
+      },
+      {
+        "path": "src/logos-engine/v6-native-types.ts",
+        "present": true,
+        "bytes": 12773,
+        "sha256": "a400b8664370be04950ee721ea4503774a245300251624bf632376ad489b668b"
+      },
+      {
+        "path": "scripts/audit-v6-entry-points.ts",
+        "present": true,
+        "bytes": 6715,
+        "sha256": "d8009c70a3e533a55cf3163af8c4aec5cd3b1a40c976f9391a7bca46f181bf38"
+      },
+      {
+        "path": "tests/v6-relative-arrangements-integration.test.ts",
+        "present": false
+      },
+      {
+        "path": "tests/v6-radial-port-integration.test.ts",
+        "present": true,
+        "bytes": 27953,
+        "sha256": "b4c997da14b2dafbe975632aba94961d622911cfe3ec40d1076cafe70e67f0cc"
+      }
+    ]
+  },
+  "candidate": {
+    "localCommit": "165a7372171012002ca69bec8347813f6d1f742c",
+    "publicationVerified": false,
+    "nativeInventoryDigest": "852d5ff7cdaa15534d22fcd610043cd348bb8aa241e290ae67d75adcaeaf8f9f",
+    "liveInventoryDigest": "852d5ff7cdaa15534d22fcd610043cd348bb8aa241e290ae67d75adcaeaf8f9f",
+    "targetedProductionFreezeChecks": [
+      {
+        "path": "src/logos-engine/v6-native-runtime.ts",
+        "currentSha256": "f33f0b36a1ce1082b96e6b6cb4cbcdd7980e1c4ba68e291cb853ff8bede36fd9",
+        "freezeSha256": "f33f0b36a1ce1082b96e6b6cb4cbcdd7980e1c4ba68e291cb853ff8bede36fd9",
+        "liveSha256": "f33f0b36a1ce1082b96e6b6cb4cbcdd7980e1c4ba68e291cb853ff8bede36fd9",
+        "equal": true
+      },
+      {
+        "path": "src/logos-engine/v6-native-types.ts",
+        "currentSha256": "6fbb3e98ba8350e4a9ec82fb4d155e635887a8a83c53a9603f8f3e7d075d0b07",
+        "freezeSha256": "6fbb3e98ba8350e4a9ec82fb4d155e635887a8a83c53a9603f8f3e7d075d0b07",
+        "liveSha256": "6fbb3e98ba8350e4a9ec82fb4d155e635887a8a83c53a9603f8f3e7d075d0b07",
+        "equal": true
+      },
+      {
+        "path": "src/logos-engine/v6-relative-arrangements.ts",
+        "currentSha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c",
+        "freezeSha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c",
+        "liveSha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c",
+        "equal": true
+      },
+      {
+        "path": "src/logos-engine/v6-relative-arrangements-geometry.ts",
+        "currentSha256": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db",
+        "freezeSha256": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db",
+        "liveSha256": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db",
+        "equal": true
+      },
+      {
+        "path": "src/logos-engine/v6-relative-arrangements-planner.ts",
+        "currentSha256": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30",
+        "freezeSha256": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30",
+        "liveSha256": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30",
+        "equal": true
+      }
+    ],
+    "qualification": "Only the five listed production hashes were recomputed here; the full native inventory is linked, not revalidated by this review."
+  },
+  "diff": {
+    "argv": [
+      "git",
+      "diff",
+      "4dafc40c53ed4406ee7cd148e3e6995a2eb4185e",
+      "--",
+      "src/logos-engine/v6-native-runtime.ts",
+      "src/logos-engine/v6-native-types.ts",
+      "scripts/audit-v6-entry-points.ts",
+      "tests/v6-relative-arrangements-integration.test.ts",
+      "tests/v6-radial-port-integration.test.ts"
+    ],
+    "bytes": 57515,
+    "sha256": "c0d3bf94e88111dc205ad75d31beda77414c9c47840d620011f8d775ca28adae",
+    "changedProductionPaths": [
+      "src/logos-engine/v6-native-runtime.ts",
+      "src/logos-engine/v6-native-types.ts",
+      "src/logos-engine/v6-relative-arrangements-geometry.ts",
+      "src/logos-engine/v6-relative-arrangements-planner.ts",
+      "src/logos-engine/v6-relative-arrangements.ts"
+    ]
+  },
+  "observations": [
+    {
+      "id": "local_null_only_barrier",
+      "conclusion": "The normal cursor stops only the remaining families of window_constraints after a null offer from an enabled provider. It does not stop subsequent outer groups. The concrete adapter only recognizes the relative_arrangement entry, and recognition is bound to the current observation_ref, level_epoch and frame_hash. A non-null offer or unrecognized interface does not trigger this barrier.",
+      "locations": [
+        "src/logos-engine/v6-native-runtime.ts:461",
+        "src/logos-engine/v6-native-runtime.ts:494",
+        "src/logos-engine/v6-native-runtime.ts:560",
+        "src/logos-engine/v6-native-runtime.ts:1659",
+        "src/logos-engine/v6-relative-arrangements.ts:89"
+      ],
+      "sourceContract": "strategy.py:414-433 returns None from repeated_field when last_layout exists and the arrangement offer is absent; this also excludes the local symmetry fallback."
+    },
+    {
+      "id": "lookahead_and_cache",
+      "conclusion": "Both native priority helpers preflight earlier enabled barrier providers in the same prospective group before invoking a later candidate proposal. They reuse entryOffers and sourceStops within one planning selection. Both maps are replaced at the start of every selection. The acquired-continuation helper may read retained success and corroborate existing Kernel evidence before this barrier, but cannot propose, admit or acquire the later candidate after a stop. A stop does not prohibit later groups.",
+      "locations": [
+        "src/logos-engine/v6-native-runtime.ts:449",
+        "src/logos-engine/v6-native-runtime.ts:580",
+        "src/logos-engine/v6-native-runtime.ts:713",
+        "src/logos-engine/v6-native-runtime.ts:784"
+      ],
+      "authority": "The stop receipt is checked against the exact group, entry and public observation and must have release_authority=false."
+    },
+    {
+      "id": "conservative_other_helpers",
+      "conclusion": "The three invitation/contact scoping helpers are unchanged by this diff and retain their existing early refusal when the prospective provider lacks the required witness. The new optional hook is implemented only by the Relative adapter; the generic subquestion wrapper forwards it without creating a new owner.",
+      "locations": [
+        "src/logos-engine/v6-native-runtime.ts:835",
+        "src/logos-engine/v6-native-runtime.ts:884",
+        "src/logos-engine/v6-native-runtime.ts:941",
+        "src/logos-engine/v6-native-runtime.ts:1581",
+        "src/logos-engine/v6-native-types.ts:140"
+      ]
+    },
+    {
+      "id": "one_owner_exact_entry",
+      "conclusion": "The real factory creates one RelativeArrangements owner, installs it once in families and routes relative_arrangement to it at the DRM-declared window position before multiscale_constraints and recurrent_series. The remaining window symmetry fallback stays last. The audit alias requires the exact entry and actual owner together; registering the owner alone is insufficient. No 4C entry is added.",
+      "locations": [
+        "src/logos-engine/v6-native-runtime.ts:1701",
+        "src/logos-engine/v6-native-runtime.ts:1756",
+        "src/logos-engine/v6-native-runtime.ts:1762",
+        "src/logos-engine/v6-native-runtime.ts:1809",
+        "scripts/audit-v6-entry-points.ts:17",
+        "scripts/audit-v6-entry-points.ts:62"
+      ]
+    },
+    {
+      "id": "selected_only_acquisition",
+      "conclusion": "Relative is absent from acquisitionFamilies and passive acquisition. Its adapter delegates the seven original record arguments and wraps the single source event in events[0]. The existing sealed-prefix selected callback records it once. The source command and initially bound observation are checked by the family before an event is acquired; the native trailing animation packet is not passed into this source method.",
+      "locations": [
+        "src/logos-engine/v6-native-runtime.ts:1088",
+        "src/logos-engine/v6-native-runtime.ts:1221",
+        "src/logos-engine/v6-native-runtime.ts:1668",
+        "src/logos-engine/v6-relative-arrangements.ts:143"
+      ],
+      "sourceContract": "common_frontier_runtime.py:842-860; family.py:57-70."
+    },
+    {
+      "id": "source_state_and_event_retention",
+      "conclusion": "The selected event is retained as relative_arrangement_event:<before.revision>, with after observation/revision as evidence. The source state is also round-tripped through relative_arrangement_state and persisted under family_state:relative_arrangements by the unchanged generic Kernel checkpoint/restore path. Its payload has exactly models, events, failed, selection_ref and epoch. The next measure on an epoch change clears models/failed/selection_ref, retains events and recomputes the transient layout. Source restore does not persist layout/diagnostics. Only failed has the declared set-order transport adaptation.",
+      "locations": [
+        "src/logos-engine/v6-native-runtime.ts:1181",
+        "src/logos-engine/v6-native-runtime.ts:1200",
+        "src/logos-engine/v6-native-runtime.ts:1207",
+        "src/logos-engine/v6-native-runtime.ts:1359",
+        "src/logos-engine/v6-native-runtime.ts:1370",
+        "src/logos-engine/v6-relative-arrangements.ts:70",
+        "src/logos-engine/v6-relative-arrangements.ts:160"
+      ]
+    },
+    {
+      "id": "bounded_change_to_existing_families",
+      "conclusion": "The source-tree diff changes runtime/types and adds only the three Relative modules. No existing family algorithm is edited. The shared changes are the optional barrier/preflight, one new owner/entry, and its selected event/state mapping. Existing native arbitration and passive family algorithms remain unchanged; the newly recognized source interface intentionally prevents later window fallbacks.",
+      "qualification": "This is a static diff conclusion, not a claim that all existing game behavior or runtime cost is unchanged."
+    }
+  ],
+  "integrationTestInventory": {
+    "path": "tests/v6-relative-arrangements-integration.test.ts",
+    "cases": 12,
+    "executionPerformedInThisReview": false,
+    "groups": [
+      {
+        "cases": 1,
+        "location": 152,
+        "scope": "Unmodified production factory registration, exact entry order and unique owner; no game execution."
+      },
+      {
+        "cases": 3,
+        "location": 170,
+        "ids": [
+          "selected_displacement",
+          "failed_trial",
+          "official_boundary"
+        ],
+        "scope": "Original public fixtures through real common WHY/ACT, selected acquisition, event keys, owner persistence and graph restoration; selection is deliberately restricted to the relative entry."
+      },
+      {
+        "cases": 1,
+        "location": 203,
+        "scope": "Same prior command, two original public returns, distinct acquired models and subsequent commands after Kernel restoration; no fabricated next return."
+      },
+      {
+        "cases": 3,
+        "location": 237,
+        "ids": [
+          "already_arranged",
+          "action6-unavailable",
+          "unrecognized_no_model"
+        ],
+        "scope": "Normal selection barrier: recognized null closes local later/symmetry providers, other group remains available; unrecognized input leaves the local fallbacks available."
+      },
+      {
+        "cases": 2,
+        "location": 281,
+        "ids": [
+          "already_arranged",
+          "unrecognized_no_model"
+        ],
+        "scope": "Current-service lookahead with explicit controlled provider contracts; later candidate is not proposed across a recognized barrier."
+      },
+      {
+        "cases": 2,
+        "location": 326,
+        "ids": [
+          "already_arranged",
+          "unrecognized_no_model"
+        ],
+        "scope": "Acquired-continuation lookahead after a controlled public return acquired by common WHY/ACT; Kernel success corroboration is real, provider contracts remain controlled."
+      }
+    ],
+    "expectationsReconciled": "The separate radial integration expectations add this one explicit window entry (56/76 overall and 21/21 window entries). These are inspected assertions, not new execution results."
+  },
+  "blockingFindings": [],
+  "limitations": [
+    "No test, replay, game, original Python import, build or cost measurement was run for this review. The existing TRIA campaign and cold-family parity are separate evidence and are not rerun or promoted to full-caller Python parity here.",
+    "Native priority lookahead remains an explicitly declared native coordination extension. This review verifies that its candidate proposal cannot cross the source-local recognized-null barrier; it does not claim source-global selection equivalence.",
+    "The 12 integration cases combine production factory registration, isolated source-entry lifecycle scenarios and controlled priority providers. They must not be described collectively as twelve live full-router campaigns.",
+    "The tests do not explicitly count all repeated barrier-provider calls across both lookaheads or dynamically prove cache invalidation across every planning lifecycle. The shared cache and its per-selection reset were reviewed statically.",
+    "A preflight may measure an arrangement without selecting it, and measure may reset its epoch-local working fields. Selected-only applies to record/acquisition, not to every family method or graph checkpoint.",
+    "The added owner and program necessarily extend the graph. No conclusion about numerical cost, final publication or full graph equality follows from this receipt."
+  ],
+  "inputs": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 143501,
+      "sha256": "f33f0b36a1ce1082b96e6b6cb4cbcdd7980e1c4ba68e291cb853ff8bede36fd9"
+    },
+    {
+      "path": "src/logos-engine/v6-native-types.ts",
+      "bytes": 13052,
+      "sha256": "6fbb3e98ba8350e4a9ec82fb4d155e635887a8a83c53a9603f8f3e7d075d0b07"
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements.ts",
+      "bytes": 13576,
+      "sha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c"
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements-geometry.ts",
+      "bytes": 14815,
+      "sha256": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db"
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements-planner.ts",
+      "bytes": 10252,
+      "sha256": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30"
+    },
+    {
+      "path": "scripts/audit-v6-entry-points.ts",
+      "bytes": 6800,
+      "sha256": "0739fe3d7526d280c6d9f030c954d8a93c39ed5e5b3d9ba1ae547d2dbdc24663"
+    },
+    {
+      "path": "tests/v6-relative-arrangements-integration.test.ts",
+      "bytes": 32659,
+      "sha256": "9f413be4fb48c72872bb584b8919e9b331935ba4179156ef93aae052ceed88d9"
+    },
+    {
+      "path": "tests/v6-radial-port-integration.test.ts",
+      "bytes": 28053,
+      "sha256": "819f112248c02f2495947067ed7c05e1bfcebf5556b310d6ca0ee76a717e11a9"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/relative_arrangements/family.py",
+      "bytes": 6845,
+      "sha256": "34931e43892cc7c8ef3c82dbeb4952feea2cecabda633086d122b0ffa500eba8"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.py",
+      "bytes": 34610,
+      "sha256": "425aca6c30e7abb38a537dfcef38f92c418bc4dfa35201ae52dc42ba4390fa55"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_runtime.py",
+      "bytes": 97217,
+      "sha256": "bcc9bc79d04287c830efedce48b4cc2ab89b5600b8a77fe09782c35d1c05c064"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/freeze-01/source-manifest.json",
+      "bytes": 32756,
+      "sha256": "0d8527fe8f19b92fed78b38a5e6947b2952ef9dd21d79e00286b6cae0e7bf419"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/source-manifest.json",
+      "bytes": 32756,
+      "sha256": "0d8527fe8f19b92fed78b38a5e6947b2952ef9dd21d79e00286b6cae0e7bf419"
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 143501,
+      "sha256": "f33f0b36a1ce1082b96e6b6cb4cbcdd7980e1c4ba68e291cb853ff8bede36fd9"
+    },
+    {
+      "path": "src/logos-engine/v6-native-types.ts",
+      "bytes": 13052,
+      "sha256": "6fbb3e98ba8350e4a9ec82fb4d155e635887a8a83c53a9603f8f3e7d075d0b07"
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements.ts",
+      "bytes": 13576,
+      "sha256": "4e283c8a8cba9f48740ae59b83edf2821f6fa505591e4d699a8c9cce9fd3917c"
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements-geometry.ts",
+      "bytes": 14815,
+      "sha256": "77ef5e1b75a9b9ae683bb95fda3f667c9b6f5c849cb5d526808309ace62b84db"
+    },
+    {
+      "path": "src/logos-engine/v6-relative-arrangements-planner.ts",
+      "bytes": 10252,
+      "sha256": "95681a2cddd92628f830058a72b6e6afe4311a0666b2ccb50e1f6677ad105b30"
+    },
+    {
+      "path": "scripts/audit-v6-entry-points.ts",
+      "bytes": 6800,
+      "sha256": "0739fe3d7526d280c6d9f030c954d8a93c39ed5e5b3d9ba1ae547d2dbdc24663"
+    },
+    {
+      "path": "tests/v6-relative-arrangements-integration.test.ts",
+      "bytes": 32659,
+      "sha256": "9f413be4fb48c72872bb584b8919e9b331935ba4179156ef93aae052ceed88d9"
+    },
+    {
+      "path": "tests/v6-radial-port-integration.test.ts",
+      "bytes": 28053,
+      "sha256": "819f112248c02f2495947067ed7c05e1bfcebf5556b310d6ca0ee76a717e11a9"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/relative_arrangements/family.py",
+      "bytes": 6845,
+      "sha256": "34931e43892cc7c8ef3c82dbeb4952feea2cecabda633086d122b0ffa500eba8"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.py",
+      "bytes": 34610,
+      "sha256": "425aca6c30e7abb38a537dfcef38f92c418bc4dfa35201ae52dc42ba4390fa55"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_runtime.py",
+      "bytes": 97217,
+      "sha256": "bcc9bc79d04287c830efedce48b4cc2ab89b5600b8a77fe09782c35d1c05c064"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/freeze-01/source-manifest.json",
+      "bytes": 32756,
+      "sha256": "0d8527fe8f19b92fed78b38a5e6947b2952ef9dd21d79e00286b6cae0e7bf419"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/source-manifest.json",
+      "bytes": 32756,
+      "sha256": "0d8527fe8f19b92fed78b38a5e6947b2952ef9dd21d79e00286b6cae0e7bf419"
+    }
+  ],
+  "inputsUnchanged": true,
+  "output": "docs/migration/lot4b-evidence/development/integration-source-review.json"
+}

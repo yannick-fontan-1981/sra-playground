@@ -1,0 +1,40 @@
+{
+  "schema": "logos-engine.prospective-test-registration-update.v1",
+  "recordedAt": "2026-11-10T21:27:20.022528+00:00",
+  "status": "text_updated_before_final_freeze_not_executed",
+  "file": "tests/v6-learned-preparation-priority.test.ts",
+  "beforeSha256": "32556af0bb3f2aec66a4e1ae58b6a161ca0d9449b9bc812683807dc455e0d345",
+  "afterSha256": "95925a8f78a504f2ead485bff35a23a0295af3756d21193f7a275017dfc185ec",
+  "addedRegisteredEntries": [
+    "framed_window_composition",
+    "coupled_prefix_reference",
+    "relative_arrangement",
+    "recurrent_series"
+  ],
+  "newExactNonNullRegistrationList": [
+    "occluded_catalogue_composition",
+    "queued_field_composition",
+    "product_panel_composition",
+    "labeled_sequence_composition",
+    "linked_packet_composition",
+    "trace_field_composition",
+    "cell_patch_composition",
+    "observed_occurrence_recall",
+    "observed_program_composition",
+    "typed_material_flow",
+    "radial_port_composition",
+    "observed_framed_analogy",
+    "field_service_composition",
+    "rooted_quota_composition",
+    "framed_window_composition",
+    "coupled_prefix_reference",
+    "relative_arrangement",
+    "recurrent_series"
+  ],
+  "reason": "The full factory registration expectation omitted three already delivered families and the new Relative family. The eight actually visited source entries, public commands, guards, acquired witnesses and all behavioral assertions remain unchanged. Final merged publication and tests must verify this prospective change.",
+  "selectionReview": {
+    "path": "docs/migration/lot4b-evidence/planning/predecessor5a-merge-review.json",
+    "sha256": "69acf0d82ae2a18b57478890129f7cdad41d1fff2526dece871d8bae96f601e6"
+  },
+  "executedTests": 0
+}

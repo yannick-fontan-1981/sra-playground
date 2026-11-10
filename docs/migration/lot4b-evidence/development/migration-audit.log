@@ -1,0 +1,14 @@
+{
+  "complete": false,
+  "pythonModules": 1369,
+  "pythonLines": 320375,
+  "declaredClassesAndFunctions": 12857,
+  "dataFiles": 417,
+  "verifiedModules": 0,
+  "componentVerifiedModules": 169,
+  "partiallyTransferredModules": 142,
+  "transferredUnverifiedModules": 0,
+  "pendingModules": 1058,
+  "strategyFamilies": 16,
+  "failures": []
+}

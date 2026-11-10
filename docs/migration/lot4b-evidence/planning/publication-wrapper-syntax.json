@@ -1,0 +1,11 @@
+{
+  "schema": "logos-engine.syntax-only-review.v1",
+  "recordedAt": "2026-11-10T21:17:13.760603+00:00",
+  "status": "parsed",
+  "input": {
+    "path": "docs/migration/lot4b-evidence/verify-publication-inputs.py",
+    "sha256": "75c8ba20cab0f0d231ce7193fe42664aa8ad75fef0b418778e018475615ad20c",
+    "bytes": 15729
+  },
+  "method": "Python ast.parse of file bytes only; no module import, main, native runtime, game or benchmark executed."
+}

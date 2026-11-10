@@ -1,0 +1,122 @@
+{
+  "schema": "logos-engine.partial-regression-source-command-correction.v1",
+  "recordedAt": "2026-11-10T21:22:42.598927+00:00",
+  "status": "independently_reviewed_prepared_not_executed",
+  "attemptRetained": {
+    "directory": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-02",
+    "qualification": {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-02/qualification.json",
+      "sha256": "087c0cada91a7dd2c69ca7dbff87bdf6889785dc11ed3cd6e54fb7ad69dc5e7f",
+      "bytes": 3021
+    },
+    "rawCampaignStatus": null,
+    "error": {
+      "name": "AssertionError",
+      "message": "Workshop source scalar command field presence\n+ actual - expected\n\n  [\n    'action_ref',\n+   'data'\n  ]\n"
+    }
+  },
+  "earlierAttemptsRetained": [
+    "attempt-01",
+    "attempt-02"
+  ],
+  "previousRunner": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-02/runner-before-fix.mjs",
+    "sha256": "b1618a2cf7867c0a783de131ed3cb8d24baffb77c858f04927fe85843c7688bf",
+    "bytes": 41724
+  },
+  "correctedRunner": {
+    "path": "scripts/replay-native-partial-public-regression.mjs",
+    "sha256": "abd6a49fb509323fd24aa40451d6681a4ac8f5aebc9ede666511f5c2e63d1ae0",
+    "bytes": 41906
+  },
+  "previousContract": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/contract-02.json",
+    "sha256": "3da0449b6a864c0c5cfe587e3b1b0cf6200bfe7920587a0839a9a2151dddeca9",
+    "bytes": 4339
+  },
+  "contract": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/contract-03.json",
+    "sha256": "36e8f4f9910f0553c18f3a891a432365e08258f97345f8584c8154a01f50e13e",
+    "bytes": 4339
+  },
+  "onlyChangedFunction": "workshopProjection",
+  "outsideFunctionBytesUnchanged": true,
+  "publicCommandValidatorUnchanged": true,
+  "publicCommandAndPacketComparisonsUnchanged": true,
+  "retainedSourceEnvelopeInventory": {
+    "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/source-command-envelope-inventory.json",
+    "sha256": "f1939a828fb68c4a06f19e0416afb121ca8b5840af53e7d75a18ee46c1e65f78",
+    "bytes": 8052
+  },
+  "inventoryReview": {
+    "method": "Read all 25 retained raw source envelopes and their public command joins from the existing published-report inventory; inspect the corrected source guard for all three observed categories. No report decompression, native import or runner execution.",
+    "rowsRead": 25,
+    "points": 5,
+    "scalarsWithoutData": 19,
+    "scalarsWithEmptyData": 1,
+    "selected": 14,
+    "passive": 11,
+    "sequentialPublicActionJoinsVerified": 25
+  },
+  "correction": "Within workshopProjection only, each scalar source command admits exactly action_ref or exactly action_ref plus data:{}, with no additional field. A point source command still requires exactly action_ref and data{x,y}, deeply equal to the strictly validated public point data. Every source action_ref must equal the actual sequential public command. Raw args[2] remains in row.command, so omission versus presence of data remains a baseline/candidate difference. Public command() still requires explicit data; public commands and packets are never normalized.",
+  "sourceShapeScope": "These are the source command envelopes accepted for the retained trajectory. RankedWorkshop copies its received command; this guard does not claim universal rewriting of foreign source commands. The generic guard contains no game, call-index or action-sequence special case.",
+  "previousReviewLimitation": "The previous correction and its source-only review missed the retained scalar envelope with explicit empty data. Attempt-02 is retained as failed preflight with zero public returns or native campaign status, and is not reclassified.",
+  "candidateSourceManifest": {
+    "path": "docs/migration/lot4b-evidence/development/merged-site82/source-manifest.json",
+    "sha256": "655a60d587dced4c4b1b3b234b6ec28271e8676894581776802e9bd747c27bb7",
+    "bytes": 33472
+  },
+  "otherContractInputsUnchanged": true,
+  "expectedHistoricalOutcomeUnchanged": {
+    "game": "LKEY",
+    "targetLevels": 3,
+    "baselineSourceDigest": "f5f4a67d68f867d3a37ef66fd7c07b9e75b9d201daceb732038f8fa71caa59eb",
+    "status": "failed",
+    "traceStatus": "failed",
+    "baselineExitCode": 1,
+    "failure": "Did not complete LKEY level 3: V6 stopped: frontier_unknown. Its acquired evidence is retained for inspection.",
+    "actions": 25,
+    "prefixes": 25,
+    "completePublicPackets": 26,
+    "boundaryActionCounts": [
+      16,
+      24
+    ],
+    "final": {
+      "actions": 25,
+      "levelsCompleted": 2,
+      "level": 3,
+      "state": "NOT_FINISHED",
+      "status": "stopped",
+      "reason": "frontier_unknown",
+      "prefixes": 25,
+      "sessions": 1,
+      "operationCounts": {
+        "init": 1,
+        "advance": 25,
+        "resume": 25
+      }
+    },
+    "workshop": {
+      "calls": 49,
+      "records": 25,
+      "selectedRecords": 14,
+      "passiveRecords": 11
+    }
+  },
+  "comparisonScopeUnchanged": true,
+  "independentStaticReview": {
+    "receipt": {
+      "path": "docs/migration/lot4b-evidence/development/lkey-partial-site83/workshop-projection-review-03.json",
+      "sha256": "73dc21440f6ba87d2bf10bf67caf88a250c26e170688c23dfe1a2662e9ce5ea8",
+      "bytes": 8274
+    },
+    "status": "static_review_no_blocking_finding",
+    "reviewer": "/root/feedback_source_audit",
+    "scope": "Static source and retained-envelope review only; no runner/native execution or successful replay claimed."
+  },
+  "runnerExecuted": false,
+  "nativeExecutions": 0,
+  "suggestedOutputDirectory": "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-03",
+  "executionScheduling": "Parent received renewed 5A strict quiet at 21:20:19 UTC. Contract-03 is retained for a later explicit release; no attempt-03 is started by this preparation."
+}

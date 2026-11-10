@@ -11,6 +11,8 @@ import type { FieldProposal, SymmetryPolicy } from './v6-field-constraints.ts';
 import { VisualSequences } from './v6-visual-sequences.ts';
 import { FeedbackSequences } from './v6-feedback-sequences.ts';
 import type { FeedbackSequenceProposal } from './v6-feedback-sequences.ts';
+import { RelativeArrangements } from './v6-relative-arrangements.ts';
+import type { RelativeArrangementProposal } from './v6-relative-arrangements.ts';
 import { OrbitConstraints } from './v6-orbit-constraints.ts';
 import { Containment } from './v6-containment.ts';
 import { SurfaceProgram } from './v6-surface-program.ts';
@@ -65,7 +67,7 @@ import type {
 } from './v6-native-types.ts';
 
 export const NATIVE_V6_REFERENCE_COMMIT = '786dcf51ca57773d8e3a8948ce9ea3655e7baf8e';
-export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.53.0';
+export const NATIVE_V6_IMPLEMENTATION = 'logos-engine.typescript.v6.native-migration/0.54.0';
 // The implementation identity and public snapshot describe the same extensions.
 const NATIVE_CALLER_EXTENSIONS = ['native_feedback_search_cooperative_incompletion',
   'native_crossed_prefix_assignment_bounds', 'native_atomic_crossed_prefix_event_validation',
@@ -207,7 +209,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private selectionReceipt: NativeSrcReceipt | null = null;
   private planning: { execution: NativeExecution; inputs: readonly NativeCommand[];
     offers: Map<string, { family: NativeFamily; proposal: NativeProposal } | null>;
-    entryOffers: Map<string, NativeProposal | null>; coordination: R[]; refusals: R[] } | null = null;
+    entryOffers: Map<string, NativeProposal | null>; sourceStops: Map<string, NativeRecord | null>; coordination: R[]; refusals: R[] } | null = null;
 
   constructor(configuration: NativeV6RuntimeConfiguration) {
     if (!configuration.sourceDigest || !configuration.families.length
@@ -461,7 +463,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.acquisitionFamilies?.morphology?.beginDecision();
     const remainingActiveMs = Math.max(0, 360_000 - (this.levelMs.get(this.current.level) ?? 0) - this.runningMs(this.current.level));
     this.planning = { execution: { ...execution, now: this.now, deadlineMs: this.now() + remainingActiveMs },
-      inputs, offers: new Map(), entryOffers: new Map(), coordination: [], refusals: [] };
+      inputs, offers: new Map(), entryOffers: new Map(), sourceStops: new Map(), coordination: [], refusals: [] };
     try {
       if (!this.knowledge) throw new Error('Native knowledge store is not initialized');
       this.selectionProgram ??= await this.knowledge.registerProgram(SELECTION_PROGRAM, {
@@ -512,6 +514,9 @@ export class NativeV6Runtime implements NativeV6Backend {
                   kind: 'native_current_proposal_refusal', actions: [], steps: [] } };
                 break;
               }
+              // Recognition closes only this source group. Other strategy
+              // groups still run; no global blocking refusal is invented.
+              if (this.retainSourceGroupStop(family, group.id, entry ?? null)) break;
             }
             if (proposal && group.id === 'goal_access'
               && (await this.deferUnlearnedInvitation(proposal) || await this.scopeStationaryContactRefusal(family, proposal)
@@ -575,6 +580,50 @@ export class NativeV6Runtime implements NativeV6Backend {
     const retained = { family: family.id, group, entry, source_state_ref: `family_state:${family.id}`, refusal: structuredClone(refusal) };
     this.planning.refusals.push(retained); this.note({ kind: 'native_proposal_refusal', ...retained });
     return retained.refusal;
+  }
+
+  /** A source recognition barrier has no action authority and closes only its
+   * own remaining group. It is evaluated only after that entry returned null. */
+  private retainSourceGroupStop(family: NativeFamily, group: string, entry: string | null): boolean {
+    if (!this.planning || !this.observation || !family.sourceGroupStop) return false;
+    const key = `${group}:${family.id}:${entry}`;
+    if (this.planning.sourceStops.has(key)) return this.planning.sourceStops.get(key) !== null;
+    const stop = family.sourceGroupStop(group, entry, this.observation);
+    if (!stop) { this.planning.sourceStops.set(key, null); return false; }
+    if (stop.observation_ref !== this.observation.observation_ref || stop.level_epoch !== this.observation.level_epoch
+      || stop.frame_hash !== this.observation.frame_hash || stop.stop_group !== group
+      || stop.source_entry !== entry || stop.release_authority !== false) {
+      throw new TypeError('A source group stop must bind this entry and the current observation without action authority');
+    }
+    const retained = { family: family.id, group, entry, source_state_ref: `family_state:${family.id}`, refusal: structuredClone(stop) };
+    this.planning.sourceStops.set(key, structuredClone(stop));
+    this.planning.refusals.push(retained); this.note({ kind: 'source_group_stop', ...retained });
+    return true;
+  }
+
+  /** Native priority look-ahead must not cross an earlier source-local stop.
+   * Only declared barrier providers are evaluated, lazily and once per current
+   * entry. An unrecognized interface leaves later entries available. */
+  private async sourceGroupAllowsEntry(group: NativeSelectionGroup, index: number): Promise<boolean> {
+    if (!this.planning || !this.knowledge || !this.current || !this.observation) return false;
+    for (let prior = 0; prior < index; prior++) {
+      const family = this.families.find(value => value.id === group.families[prior]);
+      if (!family?.sourceGroupStop || objectValue(this.knowledge.value(`family_activation:${family.id}`)).enabled !== true) continue;
+      const entry = group.entryPoints?.[prior], key = `${group.id}:${family.id}:${entry}`;
+      let proposal: NativeProposal | null;
+      if (this.planning.entryOffers.has(key)) proposal = this.planning.entryOffers.get(key)!;
+      else {
+        this.check(this.planning.execution); await this.planning.execution.yieldControl(); this.check(this.planning.execution);
+        proposal = entry ? await family.proposeInSubquestion!(group.id, entry, this.observation,
+          this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution)
+          : family.proposeInGroup ? await family.proposeInGroup(group.id, this.observation,
+            this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution)
+          : await family.propose(this.observation, this.current.frame_rows, this.planning.inputs, this.remaining(), this.planning.execution);
+        this.planning.entryOffers.set(key, proposal);
+      }
+      if (!proposal && this.retainSourceGroupStop(family, group.id, entry ?? null)) return false;
+    }
+    return true;
   }
 
   /**
@@ -688,6 +737,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     for (const group of this.groups.slice(sourceIndex + 1)) for (const [entryIndex, id] of group.families.entries()) {
       const family = this.families.find(candidate => candidate.id === id);
       if (!family?.currentRequiredServiceWitness || objectValue(this.knowledge.value(`family_activation:${id}`)).enabled !== true) continue;
+      if (!(await this.sourceGroupAllowsEntry(group, entryIndex))) continue;
       const entry = group.entryPoints?.[entryIndex], key = `${group.id}:${family.id}:${entry}`;
       let candidate: NativeProposal | null;
       if (this.planning.entryOffers.has(key)) candidate = this.planning.entryOffers.get(key)!;
@@ -758,6 +808,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       const entry = group.entryPoints?.[entryIndex], key = `${group.id}:${family.id}:${entry}`;
       const contribution = this.acquiredContribution(family, retained, entry ?? null);
       if (!contribution) continue;
+      if (!(await this.sourceGroupAllowsEntry(group, entryIndex))) continue;
       let candidate: NativeProposal | null;
       if (entry && this.planning.entryOffers.has(key)) candidate = this.planning.entryOffers.get(key)!;
       else {
@@ -1157,7 +1208,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     const memory = this.authority!.memory, after = transition.after;
     const singleEventKeys: Record<string, string> = { window_constraints: 'window_constraint', regular_field_correspondence: 'symmetric_field',
       orbit_constraints: 'orbit_constraint', containment: 'containment', surface_program: 'surface', code_program: 'codes', band_transfer: 'bands', reduction_transport: 'reduction',
-      visual_sequences: 'visual_sequence_event', feedback_sequences: 'feedback_sequence_event', slot_substitution: 'slots', word_interface: 'words', port_assembly: 'ports', constellation_cover: 'constellations',
+      visual_sequences: 'visual_sequence_event', feedback_sequences: 'feedback_sequence_event', relative_arrangements: 'relative_arrangement_event', slot_substitution: 'slots', word_interface: 'words', port_assembly: 'ports', constellation_cover: 'constellations',
       public_framed_transfer: 'framed_transfer_event', public_outline_service: 'outline_service_event',
       public_observed_inventory: 'observed_inventory_event', public_ordered_reaction: 'reaction_event', public_reactive_contact: 'reactive_event',
       public_topological_recolor: 'topological_recolor_event', public_ranked_workshop: 'ranked_workshop_event', morphology: 'morphology_event' };
@@ -1181,6 +1232,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       memory.put(EPISODE, family.id === 'ordered_support_transfer' ? 'ordered_support_state' : 'visual_sequence_state', state, after.observation_ref, after.revision);
       family.restore(memory.get(EPISODE, family.id === 'ordered_support_transfer' ? 'ordered_support_state' : 'visual_sequence_state').value);
     }
+    if (family.id === 'relative_arrangements') this.retainFamilyState(family, 'relative_arrangement_state', transition);
     if ((family.id === 'window_constraints' || family.id === 'regular_field_correspondence')
       && (record.events[0] as R | null)?.status === 'official_boundary_witness') {
       const state = family.state();
@@ -1581,6 +1633,7 @@ function subquestionFamily(family: NativeFamily<any>, field: string, subquestion
     } } : {}),
     ...(family.proposeInSubquestion ? { proposeInSubquestion: (...args: Parameters<NonNullable<NativeFamily['proposeInSubquestion']>>) => family.proposeInSubquestion!(...args) } : {}),
     ...(family.currentProposalRefusal ? { currentProposalRefusal: (...args: Parameters<NonNullable<NativeFamily['currentProposalRefusal']>>) => family.currentProposalRefusal!(...args) } : {}),
+    ...(family.sourceGroupStop ? { sourceGroupStop: (...args: Parameters<NonNullable<NativeFamily['sourceGroupStop']>>) => family.sourceGroupStop!(...args) } : {}),
     ...(family.currentRequiredServiceWitness ? { currentRequiredServiceWitness: (...args: Parameters<NonNullable<NativeFamily['currentRequiredServiceWitness']>>) => family.currentRequiredServiceWitness!(...args) } : {}),
     ...(family.preservationObligations ? { preservationObligations: (...args: Parameters<NonNullable<NativeFamily['preservationObligations']>>) => family.preservationObligations!(...args) } : {}),
     ...(family.retainedSuccessWitness ? { retainedSuccessWitness: (...args: Parameters<NonNullable<NativeFamily['retainedSuccessWitness']>>) => family.retainedSuccessWitness!(...args) } : {}),
@@ -1644,6 +1697,35 @@ export function feedbackSequenceFamily(feedback = new FeedbackSequences()): Nati
     state: () => feedback.state(), restore: state => feedback.restore(state),
   };
 }
+/** RelativeArrangements acquires only its selected, initially bound experiment. */
+export function relativeArrangementFamily(arrangements = new RelativeArrangements()): NativeFamily {
+  const sourceProposal = (value: NativeProposal) => value as RelativeArrangementProposal;
+  const offer: NativeFamily['propose'] = async (observation, rows, inputs, remaining) => {
+    const value = await arrangements.propose(observation, rows, inputs, remaining);
+    if (value) value.field_subquestion = 'relative_arrangement';
+    return value;
+  };
+  return {
+    id: 'relative_arrangements',
+    attachPrograms: registry => arrangements.attachPrograms(registry),
+    propose: offer,
+    proposeInSubquestion: (group, entry, ...args) => group === 'window_constraints' && entry === 'relative_arrangement'
+      ? offer(...args) : null,
+    sourceGroupStop: (group, entry, observation) => group === 'window_constraints' && entry === 'relative_arrangement'
+      && arrangements.recognizedCurrentInterface(observation) ? {
+        status: 'recognized_arrangement_without_admissible_experiment', stop_group: group, source_entry: entry,
+        observation_ref: observation.observation_ref, level_epoch: observation.level_epoch, frame_hash: observation.frame_hash,
+        reason: 'measured_control_interface_is_not_a_point_repair_field', release_authority: false,
+      } : null,
+    bind: (value, domain) => arrangements.bind(sourceProposal(value), domain),
+    before: (value, index, publicPacket, observation) => arrangements.before(sourceProposal(value), index, publicPacket, observation),
+    after: (value, index, before, after, firstRows, secondRows) => arrangements.after(sourceProposal(value), index, before, after, firstRows, secondRows),
+    record: async (before, after, command, firstRows, secondRows, value, index) => ({
+      events: [await arrangements.record(before, after, command, firstRows, secondRows, sourceProposal(value), index)],
+    }),
+    state: () => arrangements.state(), restore: state => arrangements.restore(state),
+  };
+}
 export interface NativeV6Declarations {
   common: { provided_objective: { definition: string }; input_domain: { max_point_occurrences: number }; ordered_support_transfer: OrderedSupportPolicy };
   strategy: { declarations: { configuration: R & {
@@ -1671,6 +1753,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   const visualFirst = configuration.information_goal?.visual_sequences_first === true;
   const feedbackFirst = configuration.information_goal?.feedback_sequences_first === true;
   const feedback = feedbackSequenceFamily();
+  const arrangements = relativeArrangementFamily();
   const windows = subquestionFamily(fieldFamily(new WindowConstraints()), 'field_subquestion', 'multiscale_constraints'), symmetric = fieldFamily(new SymmetricField(symmetry));
   const orbit = originalEventFamily(new OrbitConstraints()), containment = originalEventFamily(new Containment());
   const surface = subquestionFamily(originalEventFamily(new SurfaceProgram()), 'program_subquestion', 'surface_rewrite');
@@ -1729,13 +1812,13 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     animated_contact: new AnimatedContact(policy.animated_contact_question),
   };
   const supports = new SupportNavigation(supportChildren, policy);
-  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, inventory, reactive, reaction, recolor, workshop, morphology, reduction, recall, supports, feedback, linkedTemporal, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
+  const families: NativeFamily[] = [windows, symmetric, orbit, containment, surface, code, band, framed, outline, inventory, reactive, reaction, recolor, workshop, morphology, reduction, recall, supports, feedback, arrangements, linkedTemporal, ...Object.values(supportChildren), ...(visual ? [visual] : []), ...Object.values(interfaces)];
   const registeredSubquestions = (order: readonly string[], registered: Record<string, NativeFamily>): string[] =>
     order.flatMap(question => registered[question] ? [registered[question].id] : []);
   // The cell, occurrence and program source entries share one acquired journal, but
   // each is consulted only at its own position in the original DRM order.
   const windowProviders: Record<string, NativeFamily> = {
-    multiscale_constraints: windows, occluded_catalogue_composition: recall, queued_field_composition: recall, product_panel_composition: recall, labeled_sequence_composition: recall,
+    relative_arrangement: arrangements, multiscale_constraints: windows, occluded_catalogue_composition: recall, queued_field_composition: recall, product_panel_composition: recall, labeled_sequence_composition: recall,
     linked_packet_composition: recall, trace_field_composition: recall,
     cell_patch_composition: recall, observed_occurrence_recall: recall,
     observed_program_composition: recall, typed_material_flow: recall, radial_port_composition: recall, observed_framed_analogy: framed,
@@ -1783,7 +1866,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
   });
   const groups: NativeSelectionGroup[] = loaded.strategy.declarations[0]!.configuration.families.map(id => ({
     id, families: groupMembers[id] ?? [], ...(id === 'goal_access' ? { entryPoints: goalEntryPoints }
-      : id === 'window_constraints' ? { entryPoints: [...windowEntries.map(question => [recall, framed].includes(windowProviders[question]!) ? question : null), null] }
+      : id === 'window_constraints' ? { entryPoints: [...windowEntries.map(question => [recall, framed, arrangements].includes(windowProviders[question]!) ? question : null), null] }
       : id === 'factored_material_return' ? { entryPoints: materialEntryPoints } : {}),
   }));
   // Some original policy declarations contain non-integer thresholds. This

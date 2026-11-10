@@ -1,0 +1,101 @@
+{
+  "schema": "logos-engine.evidence-byte-parts.v1",
+  "original": {
+    "file": "weav-051-replay.json.gz",
+    "sha256": "37ed530b06c7b545bb4901773d2d3973dcc67b4eda352e6d88a23c30e28b9848",
+    "bytes": 15394957
+  },
+  "parts": [
+    {
+      "file": "weav-051-replay.json.gz.part000",
+      "sha256": "74f817dbd9af31ad1d60c900a202dfcb54872ae3078b3def5ad1a034b82ad9f9",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part001",
+      "sha256": "c7aad876f02d76b220f767ee31fddd63d77628ae6fe2c3c3c4b2ed2b6076910c",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part002",
+      "sha256": "91934e5755ad54c73781324c4eca15c7b25e4e8e4799f0f305e29b290b73b5f6",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part003",
+      "sha256": "61417e471600420185ca1ee816b3b731410ec03f1432c826217647078bd4ee4b",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part004",
+      "sha256": "cc2ba4de21b3e02a1d86c6631c97191c02ebe78ffb0cb8a79edba5481e92f935",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part005",
+      "sha256": "268227b2b0b0a64c67f966bae2f8e9e81699d4078164d857ec1f20b29b66cb9c",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part006",
+      "sha256": "5141d9df866ec566c8f97fbfb3822018dc6709090f615b62dff17dd0f699e4a4",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part007",
+      "sha256": "7260957dff080563629f74f6dc787d77b153c95eb11357f402806ef2d300c4f1",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part008",
+      "sha256": "57f9dda5f83a2f8e33ed0f77cc5255cb47f645c2a1093d5dd8cad46ddd26ce54",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part009",
+      "sha256": "fa0383be31caee9c1c9f3eea67997b206638ee026a051154164ac68dc25e76d5",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part010",
+      "sha256": "32c8e1890658c1e25f7244a1923f049ac700ed8889f7a4bf893c965a3917d9a3",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part011",
+      "sha256": "f17451fb305f7730a89c308a7a30c22b21d6222e194d05e250023ed3d2bbe615",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part012",
+      "sha256": "de0553fbc753059dfeafc0eb8a507af9df7574722e68310fa895b47486bc2636",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part013",
+      "sha256": "a0f2e177e25daf0d8b73882daf6bd9092c14b7ec687fe7d2b19b7da64bbaeb09",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part014",
+      "sha256": "3de2524b530c2998d2ecfa9125b667d0affec5faa04ffbdf6d263ecd85e904d0",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part015",
+      "sha256": "afaff60ab87c73a4c996b6c998058eb5bb2b9d68d2c27bc0b35a6c3bec2567f5",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part016",
+      "sha256": "12d6f7cfb0a7571e82e8491ca5d7a2b83c0714855c7fb7fbbeaa4ac789e8c7b9",
+      "bytes": 900000
+    },
+    {
+      "file": "weav-051-replay.json.gz.part017",
+      "sha256": "5e678367a12dc772ff51c4ca680698749a7048317185d42e2305b89691afe42c",
+      "bytes": 94957
+    }
+  ],
+  "qualification": "Exact byte partitions of immutable evidence; original data and checksum are unchanged."
+}

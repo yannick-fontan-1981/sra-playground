@@ -1,0 +1,99 @@
+{
+  "schema": "logos-engine.relative-arrangement-browser-qa.v1",
+  "status": "passed",
+  "startedAt": "2026-11-10T22:16:42.221510+00:00",
+  "finishedAt": "2026-11-10T22:23:11.817264+00:00",
+  "nativeVersion": "0.54.0",
+  "nativeSourceDigest": "f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9",
+  "previewUrl": "http://127.0.0.1:4173/",
+  "finalUrl": "http://127.0.0.1:4173/?game=TRIA&level=4",
+  "previewMode": "Sites managed development server on the frozen source; production build separately verified.",
+  "game": "TRIA",
+  "startLevel": 1,
+  "learnedStateInjected": false,
+  "targetLevels": 3,
+  "targetMet": true,
+  "browserGameActions": 17,
+  "pause": {
+    "observed": "Paused.",
+    "actions": 2,
+    "levels": 1,
+    "plans": 2,
+    "latencyMeasured": false
+  },
+  "oneAction": {
+    "observed": "One action completed.",
+    "actions": 3,
+    "levels": 1,
+    "plans": 3
+  },
+  "boundaries": [
+    {
+      "actions": 2,
+      "levels": 1,
+      "plans": 2
+    },
+    {
+      "actions": 13,
+      "levels": 2,
+      "plans": 13
+    },
+    {
+      "actions": 17,
+      "levels": 3,
+      "plans": 17
+    }
+  ],
+  "final": {
+    "actions": 17,
+    "levels": 3,
+    "plans": 17,
+    "level": 4,
+    "status": "Level completed."
+  },
+  "sourceManifest": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/source-manifest.json",
+    "sha256": "699559bcf331e34dfa8e62137b099f05ba2e160811bc8e8e18ed1a3117bec164",
+    "bytes": 33961
+  },
+  "buildReceipt": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/test-expectation-correction/validation/checks-run.json",
+    "sha256": "74e6034d12e7cc7fe408a5b23b82bc02763da673f4ac949570f6219dd20bd135",
+    "bytes": 78558
+  },
+  "cumulativeGameCaseSeconds": 763.736664,
+  "artifacts": [
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/observed-states.json",
+      "sha256": "4262133043c084ec18e0cff925d19bf2ac7d36ee6479cb112fd9f6903b9f5856",
+      "bytes": 3515
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/preview-start.json",
+      "sha256": "8c43ecf96f3772d1c12add47825b5564b9e4bc64e1e7d0cae115992fc1f2ac10",
+      "bytes": 493
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/preview-start.log",
+      "sha256": "f9393e80b0c26ca24f28a0b25f4c1d032efe90dfc75ec07d9690b4627ec1d1a7",
+      "bytes": 48
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/integrated-final/browser/preview-stopped.json",
+      "sha256": "b667eb921ddb1e52a1820aba7dc553cbfbf92b7af4f4db39da8c037bcb43be9a",
+      "bytes": 482
+    }
+  ],
+  "qualification": "Actual managed browser UI on the final0.54 source freeze. Cold TRIA at level1, one retained reasoning session, Pause, exactly one additional action and three natural completed levels observed. Initial kernel inactivity reset and exact-text wait timeout at the first actual level boundary are retained. No state injection, arbitrary level jump, screenshot artifact, full original-caller parity, immediate interrupt guarantee or browser latency measurement is claimed. This binding references the byte-identical successful build receipt in the corrected formal-test validation directory. It retains the same observed browser run, dates and cumulative interval; no second browser run is claimed.",
+  "retainedOriginalBrowserReceipt": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/browser/browser-qa.json",
+    "sha256": "f665c8e611de6a5c82a02191bd05c195c6d9adcad08e878f70e31757ba1fafce",
+    "bytes": 3066
+  },
+  "identicalBuildReceiptOriginal": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/validation/checks-run.json",
+    "sha256": "74e6034d12e7cc7fe408a5b23b82bc02763da673f4ac949570f6219dd20bd135",
+    "bytes": 78558
+  },
+  "bindingRecordedAt": "2026-11-10T22:28:17.046324+00:00"
+}

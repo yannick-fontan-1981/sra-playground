@@ -1,0 +1,22 @@
+{
+  "schema": "logos-engine.partial-public-regression-started.v1",
+  "startedAt": "2026-11-10T21:19:45.501Z",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "/workspace/sites/sra-lot4a-20261110/.sites-checkout/scripts/replay-native-partial-public-regression.mjs",
+    "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+    "docs/migration/lot7a-evidence/integrated-final/lkey-public-trace.json.gz",
+    "docs/migration/lot4b-evidence/development/merged-site82/source-manifest.json",
+    "docs/migration/lot4b-evidence/development/lkey-partial-site83/attempt-02",
+    "--contract",
+    "docs/migration/lot4b-evidence/development/lkey-partial-site83/contract-02.json"
+  ],
+  "inputs": {
+    "baseline": "docs/migration/lot7a-evidence/integrated-final/lkey-campaign.json.gz",
+    "trace": "docs/migration/lot7a-evidence/integrated-final/lkey-public-trace.json.gz",
+    "sourceManifest": "docs/migration/lot4b-evidence/development/merged-site82/source-manifest.json",
+    "contract": "docs/migration/lot4b-evidence/development/lkey-partial-site83/contract-02.json"
+  },
+  "status": "started",
+  "qualification": "No success is implied by this receipt. Missing terminal qualification means incomplete."
+}

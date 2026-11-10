@@ -1,0 +1,69 @@
+{
+  "schema": "logos-engine.retained-tool-execution.v1",
+  "command": [
+    "node",
+    "scripts/compare-native-loop-costs.mjs",
+    "docs/migration/lot4b-evidence/performance-integrated/comparison-policy.json",
+    "docs/migration/lot4b-evidence/performance-integrated/cohort2/baseline.json",
+    "docs/migration/lot4b-evidence/performance-integrated/cohort2/after.json",
+    "docs/migration/lot4b-evidence/performance-integrated/cohort2/comparison.json"
+  ],
+  "startedAt": "2026-11-10T22:48:01.316754+00:00",
+  "finishedAt": "2026-11-10T22:48:01.383539+00:00",
+  "exitCode": 0,
+  "inputs": [
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/comparison-policy.json",
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+      "bytes": 991
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/baseline.json",
+      "sha256": "c9fce4ac5acf4450edf96d66d19ea18fd476b0573d513be183c237d70b9f748e",
+      "bytes": 430207
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/after.json",
+      "sha256": "3cf02b142de6fadbb5b840df894f8c87abe776854ad042b6e2a87c2ed3c21b9e",
+      "bytes": 430661
+    }
+  ],
+  "inputsAfter": [
+    {
+      "path": "scripts/compare-native-loop-costs.mjs",
+      "sha256": "3be24f09690a00411d6c89a3f1557e3061a2cd472897db4f7a8e03e55dbff3fb",
+      "bytes": 9861
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/comparison-policy.json",
+      "sha256": "5ca681d721d510892cd957d2bde0074e5ea3410b02cfccd7ab43139c99a7af68",
+      "bytes": 991
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/baseline.json",
+      "sha256": "c9fce4ac5acf4450edf96d66d19ea18fd476b0573d513be183c237d70b9f748e",
+      "bytes": 430207
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/after.json",
+      "sha256": "3cf02b142de6fadbb5b840df894f8c87abe776854ad042b6e2a87c2ed3c21b9e",
+      "bytes": 430661
+    }
+  ],
+  "inputsUnchanged": true,
+  "log": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/comparison-execution.log",
+    "sha256": "5f6b3b666014d722ed5e70dee85a563eb30550a4bc3bf69f861d62de582ad883",
+    "bytes": 273
+  },
+  "output": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/cohort2/comparison.json",
+    "sha256": "bf8714d55eba72dc73c236cfe48226c75b0639197ede8bb86f835c09ebb196a5",
+    "bytes": 25420
+  }
+}

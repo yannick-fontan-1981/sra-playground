@@ -4465,6 +4465,27 @@
     },
     {
       "sources": [
+        "agents/yf_arc3_v6/morphology_policy/relative_arrangements/family.py",
+        "agents/yf_arc3_v6/morphology_policy/relative_arrangements/geometry.py",
+        "agents/yf_arc3_v6/morphology_policy/relative_arrangements/planner.py"
+      ],
+      "targets": [
+        "src/logos-engine/v6-relative-arrangements.ts",
+        "src/logos-engine/v6-relative-arrangements-geometry.ts",
+        "src/logos-engine/v6-relative-arrangements-planner.ts",
+        "src/logos-engine/v6-native-runtime.ts"
+      ],
+      "status": "component_verified",
+      "proof": [
+        "scripts/export-v6-relative-arrangements-reference.py",
+        "tests/fixtures/v6-relative-arrangements-reference.json.gz",
+        "tests/v6-relative-arrangements-reference.test.ts",
+        "tests/v6-relative-arrangements-integration.test.ts"
+      ],
+      "notes": "Lot4B transfers the three own RelativeArrangements modules through the existing compiled SRC. Unchanged-original public synthetic fixtures compare complete offers, measured geometry, ordered assignments/options, guards, acquisitions, five source state fields and restored decisions. Selected acquisition binds its initial observation; recognized null offers stop only the remaining window-constraint group including symmetry, while unknown interfaces leave fallbacks available. Only failed set transport order is normalized. The local module proof does not claim complete original-caller parity, unrestricted input equivalence or live game contribution."
+    },
+    {
+      "sources": [
         "agents/yf_arc3_v6/laya_proto/common_linked_preparation.py"
       ],
       "targets": [

@@ -1,0 +1,43 @@
+{
+  "schema": "logos-engine.relative-arrangements-development-oracle.v1",
+  "status": "failed",
+  "startedAt": "2026-11-10T20:38:30.977203+00:00",
+  "completedAt": "2026-11-10T20:38:31.098909+00:00",
+  "seconds": 0.12170664599398151,
+  "command": [
+    "python",
+    "-B",
+    "scripts/export-v6-relative-arrangements-reference.py"
+  ],
+  "cwd": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "exitCode": 1,
+  "generatorBefore": {
+    "path": "scripts/export-v6-relative-arrangements-reference.py",
+    "bytes": 31759,
+    "sha256": "3f8349768f54baac67cc6066653637853a99d09ad9af42358221c7f378f5f228"
+  },
+  "generatorAfter": {
+    "path": "scripts/export-v6-relative-arrangements-reference.py",
+    "bytes": 31759,
+    "sha256": "3f8349768f54baac67cc6066653637853a99d09ad9af42358221c7f378f5f228"
+  },
+  "sourceBefore": {
+    "fileCount": 1786,
+    "digest": "2c06ba8133eddb500e1cfc9ef7620f978e13530dc690b7255f457a2b7cf441f2",
+    "manifestSha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6",
+    "allManifestHashesMatched": true
+  },
+  "sourceAfter": {
+    "fileCount": 1786,
+    "digest": "2c06ba8133eddb500e1cfc9ef7620f978e13530dc690b7255f457a2b7cf441f2",
+    "manifestSha256": "491eb3b737bbb490a1b7c212f5b1e75f5a8f84b2124b95d9dd54a0d09eca85d6",
+    "allManifestHashesMatched": true
+  },
+  "sourceUnchanged": true,
+  "log": {
+    "path": "docs/migration/lot4b-evidence/development/relative-oracle-01.log",
+    "bytes": 522,
+    "sha256": "91bd5dc2da3b374731fb5fcc96a99c5fedc917ddabd9a995a348c83a08ec380a"
+  },
+  "qualification": "Original component oracle only; no live game, full caller replay, build or performance measurement."
+}

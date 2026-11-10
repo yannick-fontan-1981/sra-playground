@@ -1,0 +1,473 @@
+{
+  "schema": "logos-engine.lot4b.final-report-review.v1",
+  "status": "intermediate_report_reviewed_closure_pending",
+  "reviewer": "/root/feedback_source_audit",
+  "reviewedAt": "2026-11-10T21:14:11Z",
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "scope": "Relecture documentaire et statique pendant la fenêtre exclusive 5A. Proposition de mise à jour après libération explicite ; aucune modification du rapport principal ou de la roadmap, aucune clôture anticipée, aucune implémentation 4C.",
+  "execution": {
+    "sourceAndReceiptTextRead": true,
+    "lightweightFingerprints": true,
+    "pythonOrNodeProcesses": 0,
+    "nativeOrOriginalImports": 0,
+    "tests": 0,
+    "builds": 0,
+    "games": 0,
+    "replays": 0,
+    "benchmarks": 0,
+    "campaignDecompressions": 0,
+    "fetches": 0
+  },
+  "reviewedDocuments": [
+    {
+      "path": "docs/migration/lot4b-relative-arrangements.md",
+      "bytes": 13868,
+      "sha256": "97a51207c1bd9be0fe927a2b63931f9d2270e63417ec281ef56ee679c8b7b0da"
+    },
+    {
+      "path": "docs/migration/v6-delivery-roadmap.md",
+      "bytes": 138091,
+      "sha256": "84790ca64407bd28ab665b000326a9a52a7a60903f87df91ec6093ff2cc3ed11"
+    }
+  ],
+  "evidenceQualification": "Les grands rapports et campagnes n'ont pas été décompressés pendant cette revue. Les nombres sont corroborés par les petits journaux/reçus existants, par la revue source antérieure conservée et par les observations déjà établies du comparateur froid. Cette relecture ne réexécute pas ces preuves sur le futur gel intégré.",
+  "establishedDevelopmentEvidence": {
+    "nativeDigest": "852d5ff7cdaa15534d22fcd610043cd348bb8aa241e290ae67d75adcaeaf8f9f",
+    "baseline": {
+      "siteVersion": 81,
+      "nativeVersion": "0.51.0",
+      "commit": "4dafc40c53ed4406ee7cd148e3e6995a2eb4185e",
+      "actions": 8,
+      "levelsCompleted": 0,
+      "declaredActionCap": 8,
+      "qualification": "Référence finie ayant atteint la borne annoncée ; aucun verdict d'impossibilité générale."
+    },
+    "live": {
+      "game": "TRIA",
+      "actions": 17,
+      "levelsCompleted": 3,
+      "prefixes": 17,
+      "continuousColdSession": true,
+      "manualActions": 0,
+      "levelJumps": 0,
+      "selectedFamilyActions": 17,
+      "qualification": "Contribution de la famille dans le caller commun du gel de développement, distincte du routage synthétique et des futures régressions du gel final."
+    },
+    "coldOriginalFamily": {
+      "compared": 68,
+      "expected": 68,
+      "guards": 34,
+      "uniquePublicObservations": 18,
+      "prefixStates": 17,
+      "restorations": 17,
+      "followingChoices": 16,
+      "lastRecordTerminal": true,
+      "differences": 0,
+      "counts": {
+        "propose": 17,
+        "before": 17,
+        "after": 17,
+        "record": 17,
+        "selectedRecords": 17,
+        "passiveRecords": 0,
+        "selectionObserved": 5,
+        "singleObjectAndActuatorDisplacement": 9,
+        "officialBoundary": 3
+      },
+      "originalsVerifiedBefore": 1786,
+      "originalsVerifiedAfter": 1786,
+      "originalsUnchanged": true,
+      "scope": "Reconstitution de la famille originale à froid depuis les paquets publics ; états et plans natifs comparés, jamais utilisés pour amorcer l'oracle. Ne prouve pas la parité de l'appelant Python entier."
+    },
+    "ablations": {
+      "total": 51,
+      "interventionsApplied": 28,
+      "emptyInterventions": 23,
+      "actionOrRefusalChanged": 2,
+      "distinctProposalsWithActionOrRefusalChange": 1,
+      "changedProposalCall": 44,
+      "changedInterventions": [
+        "remove_models",
+        "clear_selection_ref"
+      ],
+      "observedCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 35,
+          "y": 49
+        }
+      },
+      "ablatedCommand": {
+        "action_ref": "ACTION6",
+        "data": {
+          "x": 17,
+          "y": 57
+        }
+      },
+      "metadataOnlyChanged": 4,
+      "fullProposalUnchanged": 45,
+      "actionOrRefusalUnchanged": 49,
+      "removeFailed": {
+        "total": 17,
+        "emptyInterventions": 17,
+        "actionOrRefusalChanged": 0,
+        "fullProposalUnchanged": 17
+      },
+      "qualification": "Deux interventions sur une seule décision distincte, pas deux décisions indépendantes ni deux campagnes ablatées. Les négatifs et interventions vides restent conservés. L'effet de failed n'est pas établi par ce trajet live."
+    },
+    "tests": {
+      "component": {
+        "passed": 81,
+        "files": 1
+      },
+      "integration": {
+        "verifiedCases": 12,
+        "developmentRuns": [
+          {
+            "receipt": "docs/migration/lot4b-evidence/development/integration-attempt1.json",
+            "passed": 8
+          },
+          {
+            "receipt": "docs/migration/lot4b-evidence/development/integration-attempt2.json",
+            "passed": 2
+          },
+          {
+            "receipt": "docs/migration/lot4b-evidence/development/integration-attempt3.json",
+            "passed": 2
+          }
+        ]
+      },
+      "qualification": "Les 12 cas de développement sont couverts par 8 cas initiaux puis deux ciblages de deux nouveaux cas ; ne pas présenter ces reçus comme un nouveau gate final complet. La configuration isolant Relative et les fournisseurs synthétiques de priorité sont déclarés."
+    },
+    "caseClock": {
+      "maximumCumulativeSeconds": 2400,
+      "cumulativeChargedSeconds": 374.14091,
+      "clockReset": false,
+      "status": "target_three_levels_achieved",
+      "qualification": "Deux tentatives et deux comparaisons, dont le premier échec, restent imputées. Un futur rejeu public enregistré n'est pas une nouvelle campagne live ; toute véritable reprise live conserve ce cumul."
+    }
+  },
+  "findings": [
+    {
+      "id": "routing_barrier_wording",
+      "severity": "documentary_precision",
+      "location": {
+        "path": "docs/migration/lot4b-relative-arrangements.md",
+        "section": "Source, comportement et propriété",
+        "lineAtReview": 27
+      },
+      "current": "Les deux préférences natives capables de rechercher un fournisseur plus tardif vérifient cette barrière avant de le consulter.",
+      "observation": "preferAcquiredContinuation lit retainedSuccessWitness puis acquiredContribution avant sourceGroupAllowsEntry. La barrière précède la proposition du candidat, son acquiredContinuationWitness et sa garde before. La formulation « avant de le consulter » couvre trop largement les lectures de corroboration conservée.",
+      "proposed": "Les deux préférences natives capables de rechercher un fournisseur plus tardif vérifient cette barrière avant de demander sa proposition ou d'admettre sa continuation. Le parcours de continuation peut auparavant lire son témoin conservé et sa corroboration Kernel ; ces lectures n'admettent aucune action.",
+      "evidence": [
+        "src/logos-engine/v6-native-runtime.ts:765-809",
+        "docs/migration/lot4b-evidence/development/integration-source-review.json"
+      ],
+      "productionBugClaimed": false,
+      "changeTiming": "Révision documentaire après quiet, sans changement de production."
+    },
+    {
+      "id": "development_registry_count",
+      "severity": "stale_current_summary",
+      "location": {
+        "path": "docs/migration/lot4b-relative-arrangements.md",
+        "section": "Limites et suite",
+        "lineAtReview": 79
+      },
+      "current": "Le raccordement du développement atteint 56/76 entrées [...] ces compteurs ne comprennent pas encore les futurs prédécesseurs concurrentiels.",
+      "observation": "56/76 décrit le gel de développement isolé. Le fichier d'audit actuellement présent indique 57/76, implementation 0.52.0, avec Relative et Workshop présents ; root confirme que les prédécesseurs publiés jusqu'à Site 83 ont été intégrés. Le candidat après 5A n'est pas encore attesté par cette revue.",
+      "proposed": "Conserver 56/76 comme compteur du gel de développement 852d5ff7 ; distinguer le compteur du dernier gel intégré et le reprendre exactement dans l'audit final après 5A. Ne pas présenter les prédécesseurs déjà intégrés comme futurs.",
+      "currentAudit": {
+        "path": "docs/migration/v6-entry-point-progress.json",
+        "connected": 57,
+        "declared": 76,
+        "windowConnected": 21,
+        "windowDeclared": 21
+      },
+      "finalAuditCount": null,
+      "changeTiming": "Après intégration effective de 5A et audit du gel retenu ; aucune addition arithmétique anticipée aux compteurs globaux."
+    },
+    {
+      "id": "integration_status_temporal_scope",
+      "severity": "stale_intermediate_status",
+      "location": {
+        "path": "docs/migration/lot4b-relative-arrangements.md",
+        "section": "État de la livraison",
+        "lineAtReview": 7
+      },
+      "observation": "La formule met toutes les publications concurrentes en attente. Des prédécesseurs sont déjà intégrés d'après root, mais 5A et les étapes finales restent en attente. Le statut intermédiaire demeure approprié.",
+      "proposed": "Nommer les prédécesseurs effectivement intégrés, puis indiquer séparément l'intégration 5A encore attendue, le gel final, ses validations, son coût et sa publication. Conserver l'identité 852d5ff7 pour la campagne de développement.",
+      "changeTiming": "Après publication/fetch autorisé et vérification des reçus réels ; ne pas substituer un numéro de Site ou un digest supposé."
+    },
+    {
+      "id": "roadmap_lot4b_still_only_planned",
+      "severity": "stale_progress_status",
+      "locations": [
+        {
+          "section": "Priorités, dépendances et statuts",
+          "lineAtReview": 190
+        },
+        {
+          "section": "Lot 4 : exemples et retours discriminants",
+          "linesAtReview": [
+            530,
+            536,
+            537,
+            544
+          ]
+        },
+        {
+          "section": "Journal et prochain lot",
+          "linesAtReview": [
+            651,
+            653,
+            657
+          ]
+        }
+      ],
+      "observation": "La roadmap présente encore 4B comme travail à commencer « à la prochaine demande », alors que son transfert et la contribution TRIA de développement sont établis. Les verdicts de livraison/coût/publication finaux ne le sont pas.",
+      "proposed": "Pendant la clôture, indiquer « transfert et contribution de développement vérifiés ; livraison intégrée en attente ». Après les preuves finales réelles seulement, déclarer 4B livré dans son périmètre et conserver facet_example / 4C comme seule entrée restante du lot 4.",
+      "changeTiming": "Mise à jour coordonnée après quiet 5A ; statut livré conditionné aux reçus finaux."
+    },
+    {
+      "id": "historical_forward_statements",
+      "severity": "temporal_qualification",
+      "locations": [
+        {
+          "section": "Jalon Feedback 0.51",
+          "lineAtReview": 65
+        },
+        {
+          "section": "Jalon RecurrentSeries",
+          "lineAtReview": 98
+        }
+      ],
+      "observation": "Ces passages historiques parlent encore de 7A en préparation et de 4B comme prochain travail non commencé. Leur contexte historique peut être conservé, mais le présent doit être explicitement daté.",
+      "proposed": "Qualifier ces phrases comme suites annoncées au moment de leur livraison et renvoyer au journal courant. Ne pas modifier leurs nombres, échecs, coûts ni réserves historiques."
+    }
+  ],
+  "correctDistinctionsToPreserve": [
+    "68/68 est la parité des appels de la famille sur les observations publiques ; ce n'est ni le compteur 51/51 de Feedback 4A ni une parité globale du caller Python.",
+    "Le routage, la restauration et les priorités couverts par des cas synthétiques sont nommés comme tels ; TRIA fournit séparément la contribution live.",
+    "Deux ablations changent la commande au même appel 44. Quatre autres changent seulement les données de proposition ; 45 propositions et 49 décisions d'action/refus demeurent inchangées.",
+    "failed est vide aux 17 propositions live. Ses refus et réinitialisations sont des preuves synthétiques, pas une contribution observée sur ce trajet.",
+    "Trois niveaux/17 actions appartiennent au gel de développement ; huit actions/zéro niveau sur Site 81 constituent une référence bornée, sans extrapolation générale.",
+    "Les cinq champs durables models/events/failed/selection_ref/epoch appartiennent à Relative ; les réinitialisations de mesure et la conservation des événements restent explicites. Le passif de Feedback n'est pas transféré à Relative.",
+    "Le premier générateur en faute de syntaxe et la première comparaison froide en échec sont conservés. La seconde comparaison identifie seulement les annotations exactes du caller au premier niveau et ne retire aucun plan métier ni SRC.",
+    "Aucun navigateur 4B n'est établi par les éléments inspectés. Un futur résultat réel ou blocage d'infrastructure doit avoir son propre reçu ; le blocage navigateur de 4A ne qualifie pas 4B.",
+    "Les phases de coût peuvent dépasser 10 % ; le veto autorisé reste la médiane groupée de session complète strictement inférieure à +10 % pour chacun de STCK et SMLP. Toute qualification structurelle garde l'échec strict et tous les coûts.",
+    "Aucun coût final, livraison publiée ou transfert 4C ne découle de cette revue. Les réserves des autres lots, les conditions globales ouvertes et les horloges historiques ne sont pas effacées."
+  ],
+  "roadmapUpdatesAfter5A": [
+    {
+      "section": "Jalon publié en tête",
+      "action": "Ajouter le jalon 4B effectivement publié avec version native, Site, commit, digest, validation, régressions, coût et réserves exacts. Laisser les jalons 7A/4A/3I historiques intacts."
+    },
+    {
+      "section": "Priorités, dépendances et statuts",
+      "action": "Actualiser le statut 4B et la ligne du lot 4. Après livraison, seule facet_example demeure ouverte dans ce lot. Actualiser les lots concurrents uniquement à partir de leurs publications attestées."
+    },
+    {
+      "section": "Réconciliation du registre et compteurs globaux",
+      "action": "Utiliser les nouveaux audits réellement générés sur le gel final. Conserver les anciens 56/76 et 20 restants lorsqu'ils sont explicitement rattachés au gel publié 0.52 ; ne pas les remplacer rétroactivement par le compteur de travail 57/76."
+    },
+    {
+      "section": "Lot 4 : exemples et retours discriminants",
+      "action": "Ajouter les liens du rapport 4B, de sa filiation et des preuves intégrées. Résumer selected-only, barrière locale reconnue-sans-offre, modèles conditionnels, TRIA et l'ablation à une décision. Retirer les anciennes formulations demandant encore de commencer 4B."
+    },
+    {
+      "section": "Journal et prochain lot",
+      "action": "Ajouter une ligne 4B avec gel et livraison réels, coûts globaux par jeu et diagnostics défavorables retenus. Ajouter TRIA 374,140910 s sans remise à zéro, distinguer live de développement et rejeux finaux. Annoncer 4C comme travail suivant sans le déclarer implémenté."
+    }
+  ],
+  "closureProposal": {
+    "currentWording": "Le transfert de RelativeArrangements et sa première contribution dans l'appelant commun sont vérifiés sur le gel de développement 852d5ff7 : TRIA réussit trois niveaux en 17 actions. La famille originale concorde sur 68 appels publics. Deux interventions de mémoire modifient une seule décision distincte, à l'appel 44 ; les ablations inchangées et l'absence de failed sur ce trajet restent conservées. La livraison intégrée, son coût final et sa publication demeurent en attente.",
+    "finalClosureCondition": "Clôturer 4B dans son périmètre seulement après liaison du gel intégrant les prédécesseurs publiés, de ses validations/régressions/intégrité, de la parité familiale publique sur ce code livré, du résultat navigateur ou de sa réserve déclarée, du coût STCK/SMLP conforme à la règle autorisée et du reçu de publication.",
+    "finalNativeDigest": null,
+    "finalNativeVersion": null,
+    "finalSiteVersion": null,
+    "finalValidationReceipt": null,
+    "finalParityReceipt": null,
+    "finalCostVerdict": null,
+    "publicationReceipt": null,
+    "qualification": "Les valeurs null restent non établies. Le protocole et sa revue statique ne sont pas des résultats de mesure."
+  },
+  "exactEvidenceLinks": {
+    "report": "docs/migration/lot4b-relative-arrangements.md",
+    "lineage": "docs/migration/lot4b-relative-arrangements-lineage.md",
+    "currentRegistry": "docs/migration/v6-entry-point-progress.json",
+    "developmentFreeze": "docs/migration/lot4b-evidence/development/freeze-01/source-manifest.json",
+    "liveCampaignParts": "docs/migration/lot4b-evidence/development/tria-live-01/tria-campaign.json.gz.parts.json",
+    "liveExecution": "docs/migration/lot4b-evidence/development/tria-live-01/execution-tria.json",
+    "baselineCampaignParts": "docs/migration/lot4b-evidence/development/tria-baseline-site81/tria-campaign.json.gz.parts.json",
+    "baselineExecution": "docs/migration/lot4b-evidence/development/tria-baseline-site81/execution-tria.json",
+    "firstParityFailure": "docs/migration/lot4b-evidence/development/tria-live-01/tria-relative-arrangement-source-parity-01.json.gz",
+    "coldParity": "docs/migration/lot4b-evidence/development/tria-live-01/tria-relative-arrangement-source-parity-02.json.gz",
+    "coldParityReceipt": "docs/migration/lot4b-evidence/development/tria-live-01/tria-relative-arrangement-source-parity-02.receipt.json",
+    "coldParityReadableSummary": "docs/migration/lot4b-evidence/development/tria-live-01/tria-relative-arrangement-source-parity-02.log",
+    "componentTests": "docs/migration/lot4b-evidence/development/relative-reference-test-01.json",
+    "fixtureParts": "tests/fixtures/v6-relative-arrangements-reference.json.gz.parts.json",
+    "integrationSourceReview": "docs/migration/lot4b-evidence/development/integration-source-review.json",
+    "caseSelection": "docs/migration/lot4b-evidence/tria-case-selection.json",
+    "caseResolution": "docs/migration/lot4b-evidence/tria-case-resolution.json",
+    "prospectiveCostContract": "docs/migration/lot4b-evidence/owner-cost-contract.md",
+    "staticCostReview": "docs/migration/lot4b-evidence/planning/cost-tool-review.json",
+    "staticCostTextAddendum": "docs/migration/lot4b-evidence/planning/cost-tool-review-text-addendum.json"
+  },
+  "next4CStaticPresence": {
+    "scope": "Petite vérification statique demandée par root ; aucun port, import ou essai 4C.",
+    "entry": "facet_example",
+    "workflow": "v6.facet_examples.choose",
+    "compiledIr": {
+      "path": "src/logos-engine/v6/programs.json",
+      "entryLineAtReview": 2356,
+      "present": true,
+      "entryStep": "v6.facet_examples.choose.measure",
+      "callbackOrder": [
+        "facet.measure",
+        "facet.bind"
+      ],
+      "sourceHash": "3a7ef1b93988619cd23690b00c0791793657799f32ff12afed11e94adde79ddf",
+      "semanticHash": "f2c4824a7ca4986b1c920bac994f8c89b4f97afdc7ed53fb45f0aa24c0dc4ee7",
+      "authoritySourceHash": "fb567ddc4e4cb8208d831c76dfbb917a37d78477f9324b22fc069480ac9bd468",
+      "executionVerifiedByThisReview": false
+    },
+    "declaredPosition": {
+      "source": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "linesAtReview": [
+        342,
+        344,
+        358,
+        364
+      ],
+      "configuration": "program_construction.ordered_subquestions",
+      "entryIndexZeroBased": 0,
+      "group": "surface",
+      "groupIndexZeroBased": 5,
+      "followingEntry": "surface_rewrite",
+      "sourceStrategy": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.py:434-444",
+      "contract": "Le premier fournisseur de cette liste retourne sa proposition annotée program_subquestion ; un refus laisse la suite de la liste disponible."
+    },
+    "currentNativeStatus": {
+      "registryGroup": "surface",
+      "registryEntryStatus": "pending",
+      "registeredFamily": null,
+      "factory": "src/logos-engine/v6-native-runtime.ts:1772-1801",
+      "observation": "registeredSubquestions filtre les entrées sans fournisseur. Le mapping surface contient surface_rewrite, learned_code_program, interfaces et supportChildren, sans facet_example. La recherche exacte des identifiants FacetExamples/facet_examples/facet_example/facet.measure/facet.bind/facet_plan/compound_methods/refuted_compounds dans les sources TypeScript ne trouve aucune implémentation."
+    },
+    "missingProducerConsumerWork": [
+      {
+        "part": "Callbacks de workflow",
+        "source": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/family.py:11-28",
+        "contract": "facet.measure est lié à measure ; facet.bind est lié à select. Mesurer la projection publique puis, si nécessaire et configuré, le composé ; sélectionner une expérience courante, bornée et non refusée. La présence de l'IR ne fournit pas ces callbacks natifs."
+      },
+      {
+        "part": "Projection simple et branches composées consommées",
+        "sources": [
+          "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/geometry.py",
+          "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/compound.py",
+          "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/stencils.py",
+          "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/facet_examples.drm"
+        ],
+        "contract": "La configuration originale active compound : au plus cinq unités et 1024 états, avec graine, effet vertical et frontière observés requis. Un éventuel découpage simple/composé doit être nommé partiel ; il ne vaut pas transfert complet de l'entrée configurée."
+      },
+      {
+        "part": "Proposition, liaison et gardes",
+        "source": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/family.py:29-62",
+        "contract": "Produire facet_plan, point courant, propositions et méthode conditionnelle ; conserver la liaison à l'observation initiale, la garde avant et le scellement après l'édition inconnue."
+      },
+      {
+        "part": "Acquisition selected-only et réfutations",
+        "source": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/family.py:63-99",
+        "contract": "Contrôler commande et observation initiale, conserver absence d'effet, préservation hors région, correspondance, déplacement du cap et extension des côtés, puis méthodes portables/locales et réfutation du composé. Un rendu composé conforme sans frontière officielle reste compound_visual_candidate_not_accepted et réfute cette portée."
+      },
+      {
+        "part": "Propriétaire durable et raccord commun",
+        "sources": [
+          "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/family.py:100-102",
+          "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/laya_proto/common_frontier_runtime.py:842-856"
+        ],
+        "contract": "Installer un propriétaire unique, son état et l'entrée de routage ; acquérir facet_example_event:<revision>, conserver facet_example_state puis restaurer. Champs source : failed, events, method, epoch, portable, compound_methods, refuted_compounds. compound_cache est recalculable et absent de state()."
+      }
+    ],
+    "nextConcreteStep": "Lire et établir la filiation complète des quatre modules propres et des dépendances réellement consommées, puis définir les preuves source, le cycle sélection/retour/reprise et la contribution. Cette présence statique ne démontre ni transfert ni contribution 4C.",
+    "implementedBy4B": false
+  },
+  "supportingFingerprints": [
+    {
+      "path": "docs/migration/v6-entry-point-progress.json",
+      "bytes": 18743,
+      "sha256": "ad956b88f4ac6b3645f85b35bf4d7aaa6b24f5b6e48971d46684f991ef55ff39"
+    },
+    {
+      "path": "src/logos-engine/v6-native-runtime.ts",
+      "bytes": 145046,
+      "sha256": "fd7cd01e4b35db37886f910d710dbabda99e0a40a729dadf2ae9e1f43bbd0aa8"
+    },
+    {
+      "path": "src/logos-engine/v6/programs.json",
+      "bytes": 1502394,
+      "sha256": "e006723f49460276a0753c1977ab0eabb30775409b37ba7d7af8b0b8b8527834"
+    },
+    {
+      "path": "scripts/audit-v6-entry-points.ts",
+      "bytes": 6893,
+      "sha256": "3dbf9f4c327cdd5f6554af0b2a89da602a3d4f7141b08fb456b2f5aa9fe96d20"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/integration-source-review.json",
+      "bytes": 19865,
+      "sha256": "988eeb98f285b0b57857b43d6042e788df06955dab097723cd805edbe63c671f"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/tria-live-01/tria-relative-arrangement-source-parity-02.log",
+      "bytes": 2494,
+      "sha256": "585b7b44e35d9259b53b26de527c6feae878745b1f94f294b3a2ebbfc5c68fdb"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/tria-case-resolution.json",
+      "bytes": 2135,
+      "sha256": "db90a62494a55bb8c96e59676a6bd9baf9521421cc3ea4f084acd23c70cf46fc"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/relative-reference-test-01.json",
+      "sha256": "9236d32b597302b286231656c687ff583d5a3d38a202537d45c404a933285dfd"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/integration-attempt1.json",
+      "sha256": "45c63a5e4ccf9f5ca2f7f7e8158bfee6e98eb860512500e3a3f06a3b35a29a13"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/integration-attempt2.json",
+      "sha256": "513a8e5bf3ce67f6c2a253848d1edd001b41b91b03a82543ae225e74e220a6bf"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/development/integration-attempt3.json",
+      "sha256": "83a54f144e9fdaa273ff105a3ac80335cf4585057c7dedc44200c77573fb2ba7"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/family.py",
+      "sha256": "fb567ddc4e4cb8208d831c76dfbb917a37d78477f9324b22fc069480ac9bd468"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/facet_examples.src",
+      "sha256": "3a7ef1b93988619cd23690b00c0791793657799f32ff12afed11e94adde79ddf"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/facet_examples/facet_examples.drm",
+      "sha256": "45eecb21a708a21a82dc6a265417d342354831be26bed596a30e8f9b7803cfe0"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.py",
+      "sha256": "425aca6c30e7abb38a537dfcef38f92c418bc4dfa35201ae52dc42ba4390fa55"
+    },
+    {
+      "path": "reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/morphology_policy/strategy.drm",
+      "sha256": "6e8aee941d56511273be79222b03c88d092cdc3ca1c295c91509b9cc93b15f44"
+    }
+  ],
+  "changesMadeByThisReview": [
+    "docs/migration/lot4b-evidence/planning/final-report-review.json"
+  ],
+  "reportAndRoadmapEdited": false
+}

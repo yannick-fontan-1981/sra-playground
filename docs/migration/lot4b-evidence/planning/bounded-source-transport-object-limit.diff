@@ -1,0 +1,74 @@
+--- docs/migration/lot4b-evidence/planning/plan-bounded-source-transport-before-object-limit.py
++++ docs/migration/lot4b-evidence/plan-bounded-source-transport.py
+@@ -17,6 +17,9 @@
+ the previous planned remote commit, using rev-list and cat-file object sizes.
+ 40 MiB of raw object contents is a bound with headroom below the observed
+ 64 MiB server limit; it is not a measurement or guarantee of wire pack size.
++Every newly reachable individual object must also be at most 32 MiB, including
++retained history and synthetic transport trees/commits. An oversized object is
++a hard refusal: neither history nor final tree is rewritten to hide it.
+ Large proof blobs are deferred, while all other target paths are complete in
+ the first step. The final tree is exactly the original HEAD tree, and the
+ original HEAD is a direct parent of the final transport commit.
+@@ -41,6 +44,7 @@
+ DEFAULT_WINDOW = ROOT / 'docs/migration/lot4b-evidence/performance-integrated/window.json'
+ RAW_LIMIT = 40 * 1024 * 1024
+ SERVER_LIMIT = 64 * 1024 * 1024
++INDIVIDUAL_OBJECT_LIMIT = 32 * 1024 * 1024
+ SCHEMA = 'logos-engine.bounded-source-push-plan.v2'
+ REDIRECT_ENV = ('GIT_DIR', 'GIT_WORK_TREE', 'GIT_INDEX_FILE', 'GIT_COMMON_DIR',
+                 'GIT_OBJECT_DIRECTORY', 'GIT_ALTERNATE_OBJECT_DIRECTORIES',
+@@ -218,6 +222,11 @@
+     def accept(self, kind, commit, tree, parents, stats, paths=()):
+         require(parents[0] == self.current and self.ancestor(self.current, commit),
+                 'A planned step is not a fast-forward from its predecessor')
++        oversized = [row for row in stats['objects'] if row['bytes'] > INDIVIDUAL_OBJECT_LIMIT]
++        if oversized:
++            self.plan.setdefault('rejectedStepsForIndividualObjectLimit', []).append(
++                {'kind': kind, 'commit': commit, 'previousCommit': self.current, 'objects': oversized})
++        require(not oversized, f'{kind} contains a newly reachable Git object above the 32 MiB server object limit')
+         require(stats['rawBytes'] <= self.args.max_missing_raw_bytes,
+                 f'{kind} exceeds the per-step raw missing-object limit')
+         delta = self.differing_paths(tree, self.target_tree)
+@@ -366,6 +375,10 @@
+         required = self.missing(self.target, self.base)
+         self.required_ids = {row['oid'] for row in required['objects']}
+         self.plan['originalTargetMissingObjects'] = required
++        server_oversized = [row for row in required['objects'] if row['bytes'] > INDIVIDUAL_OBJECT_LIMIT]
++        self.plan['serverOversizedIndividualObjects'] = server_oversized
++        require(not server_oversized, 'An individual missing Git object exceeds the 32 MiB server object limit; '
++                'target/history cannot be silently split')
+         oversized = [row for row in required['objects'] if row['bytes'] > self.args.max_missing_raw_bytes]
+         self.plan['oversizedIndividualObjects'] = oversized
+         require(not oversized, 'An individual missing Git object exceeds the raw limit; target/history cannot be silently split')
+@@ -410,6 +423,8 @@
+                 'Final commit does not retain the original HEAD directly with its exact tree')
+         require(self.ancestor(self.base, self.current), 'Final source is not a fast-forward from the published base')
+         final_missing = self.missing(self.current, self.base)
++        require(all(row['bytes'] <= INDIVIDUAL_OBJECT_LIMIT for row in final_missing['objects']),
++                'Final transport ancestry contains an object above the 32 MiB server object limit')
+         require({row['oid'] for row in final_missing['objects']} == self.uploaded
+                 and self.required_ids <= self.uploaded
+                 and final_missing['rawBytes'] == sum(step['rawMissingObjectBytes'] for step in self.steps),
+@@ -418,6 +433,8 @@
+                          finalTreeExactlyEqualToRetainedTarget=True, originalHeadIsFinalDirectParent=True,
+                          allOriginalTargetObjectsRetained=True, allPublishedBaseObjectsRetained=True,
+                          allMissingAncestryAccountedFor=True, allStepsWithinRawObjectLimit=True,
++                         allStepsWithinIndividualObjectLimit=True,
++                         maximumNewReachableObjectBytes=max((row['bytes'] for row in final_missing['objects']), default=0),
+                          nativeTestBuildInputsEqualToTargetFromFirstStep=True,
+                          totalNewReachableRawObjectBytes=final_missing['rawBytes'],
+                          totalNewReachableObjects=final_missing['count'],
+@@ -449,10 +466,12 @@
+             'generator': fingerprint(__file__), 'window': window_fp, 'checkout': str(ROOT),
+             'output': str(output), 'requestedBase': args.base, 'requestedTarget': args.target,
+             'perPushServerLimitBytes': SERVER_LIMIT, 'perStepRawObjectLimitBytes': args.max_missing_raw_bytes,
++            'perObjectServerLimitBytes': INDIVIDUAL_OBJECT_LIMIT,
+             'bulkProofMinimumBytes': args.bulk_min_bytes, 'steps': [], 'createdCommitObjects': [],
+             'pushesPerformed': 0, 'siteDeploymentsPerformed': 0, 'forcePush': False,
+             'intermediateSiteDeployment': False, 'branchUpdatesPerformed': 0,
+             'qualification': 'Raw bounds include all newly reachable commits, trees and blobs from every parent. '
++                             'Each newly reachable individual object is also bounded by the observed 32 MiB server limit. '
+                              'They are not observed network pack sizes. The published base is supplied by the operator; '
+                              'no remote lookup, credential access, push, package or deployment is performed.',
+             'executionNotes': [

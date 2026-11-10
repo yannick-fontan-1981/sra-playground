@@ -1,0 +1,191 @@
+{
+  "schema": "logos-engine.lot4b-bounded-source-transport-object-limit-review.v1",
+  "status": "static_review_complete_no_blocking_defect_identified",
+  "recordedAt": "2026-11-10T22:05:11Z",
+  "reviewer": "/root/feedback_source_audit",
+  "checkout": "/workspace/sites/sra-lot4a-20261110/.sites-checkout",
+  "scope": "Revue indépendante prospective du delta de garde par objet et des invariants de transport du script complet. Lecture, empreintes, comparaison textuelle et ast.parse seulement ; aucune exécution du module visé.",
+  "inputsBefore": [
+    {
+      "path": "docs/migration/lot4b-evidence/plan-bounded-source-transport.py",
+      "bytes": 32122,
+      "sha256": "235eb59eae2c1d2ef29c8dd4b1721adf524923a91eb47197246740d31f639d7d"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/plan-bounded-source-transport-before-object-limit.py",
+      "bytes": 30493,
+      "sha256": "7e7c92fe4c11609beed41dd62d9ef5da371d4ef7a57e4e14c7317deefeade7b5"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/bounded-source-transport-object-limit.diff",
+      "bytes": 5723,
+      "sha256": "3a8af97c2e5fb31277369adb110dff3ba2aef2752e276eb160f9fc9fb9aef5c0"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/bounded-source-transport-object-limit-adaptation.json",
+      "bytes": 12767,
+      "sha256": "038835c76b656f1463398d4eae55cc6b2a1e80a1087282d0b7eaeafcc949a750"
+    }
+  ],
+  "checks": [
+    {
+      "name": "exact_recorded_delta_and_input_identity",
+      "passed": true,
+      "method": "Lecture des octets, SHA-256, difflib et AST.",
+      "evidence": "Le diff autonome et le unifiedDiff du reçu sont exactement le diff recalculé entre l'ancien et le nouveau script. Les empreintes current4bTool, previous4bTool et diff du reçu correspondent aux fichiers réels. Tous les noms de fonctions sont conservés.",
+      "source": "bounded-source-transport-object-limit.diff et bounded-source-transport-object-limit-adaptation.json"
+    },
+    {
+      "name": "complete_missing_original_ancestry_before_commit_creation",
+      "passed": true,
+      "method": "Lecture et ordre des appels.",
+      "evidence": "Planner.prepare appelle missing(target, base), qui parcourt rev-list --objects --no-object-names target --not base sans --first-parent ni filtre de chemin. Les tailles proviennent de cat-file --batch-check. Le contrôle de chaque objet > 33554432 intervient avant Planner.build et toute création par commit-tree. Un gros blob historique absent de l'arbre final reste donc refusé s'il est dans l'ascendance manquante.",
+      "source": "Planner.missing:193-204 ; Planner.prepare:326-384 ; main:493-501"
+    },
+    {
+      "name": "synthetic_steps_checked_at_acceptance",
+      "passed": true,
+      "method": "Lecture de tous les chemins menant à accept.",
+      "evidence": "Les chemins complete_source_and_history, complete_source, evidence, retained_history et final_history_merge passent par Planner.accept avec les objets effectivement manquants depuis le prédécesseur. Tous les parents sont parcourus. Les objets synthétiques commit/tree sont inclus ; > 33554432 est refusé avant ajout de l'étape et avant modification de current/uploaded. Les candidats créés puis rejetés peuvent rester comme objets locaux non référencés ; ils ne sont pas des étapes acceptées.",
+      "source": "Planner.accept:222-243 ; proof_batch:259-271 ; preserve_history:279-314 ; Planner.build:386-441"
+    },
+    {
+      "name": "fixed_individual_ceiling_and_bounded_aggregate",
+      "passed": true,
+      "method": "Lecture des constantes et gardes CLI.",
+      "evidence": "INDIVIDUAL_OBJECT_LIMIT vaut 32 * 1024 * 1024 et n'est pas paramétrable en CLI. L'égalité à 33554432 est autorisée, seul le dépassement est refusé. RAW_LIMIT reste 40 * 1024 * 1024 ; max_missing_raw_bytes doit être strictement positif et au plus RAW_LIMIT. Chaque accept contrôle la somme brute exacte, y compris arbres, commits et histoire. La valeur déclarée de serveur 64 MiB reste distincte et inchangée.",
+      "source": "Constantes:45-47 ; Planner.accept:225-231 ; main:450-457"
+    },
+    {
+      "name": "global_final_inventory_reconciles_without_hidden_removal",
+      "passed": true,
+      "method": "Lecture de la clôture de Planner.build.",
+      "evidence": "Le graphe final relatif à base est inventorié à nouveau ; chaque objet doit être <= 33554432. Son ensemble d'identifiants égale uploaded, comprend tous les required_ids de la cible d'origine et sa somme brute égale la somme des étapes. accept interdit aussi le comptage d'un objet déjà transmis. Aucune suppression d'histoire ou normalisation de taille n'est ajoutée.",
+      "source": "Planner.accept:233-242 ; Planner.build:424-430"
+    },
+    {
+      "name": "final_tree_and_original_target_retained",
+      "passed": true,
+      "method": "Lecture des mécanismes inchangés et des gardes finales.",
+      "evidence": "Les arbres sont construits depuis les entrées exactes de la cible avec leurs modes et identifiants. Chaque étape ne peut différer de la cible que sur les preuves différées. Le dernier commit utilise target_tree, conserve le commit cible comme parent direct et demeure descendant de base. Planner.build relit le tree et les parents réels puis exige l'égalité exacte avec target_tree. Le mécanisme ne reconstruit pas ni ne retire un parent original indésirable.",
+      "source": "Planner.write_step_tree:245-257 ; final_candidate:273-277 ; Planner.build:415-423"
+    },
+    {
+      "name": "real_index_head_refs_and_worktree_are_not_write_targets",
+      "passed": true,
+      "method": "Lecture complète et inspection AST de tous les appels écrivant l'index.",
+      "evidence": "Les trois appels read-tree, update-index et write-tree reçoivent explicitement index=index. Ce chemin est créé dans un TemporaryDirectory extérieur au checkout ; Planner.git transmet GIT_INDEX_FILE uniquement pour ces appels. Les variables de redirection Git sont refusées en entrée. commit-tree crée seulement des objets ; aucune commande checkout, reset, update-ref, push, clean ou merge n'est exécutée par le planificateur. Les seules écritures de fichiers explicites concernent l'index temporaire et le JSON exclusif extérieur. HEAD, HEAD symbolique, références, index réel et statut sont comparés avant/après, même après un échec.",
+      "source": "Planner.git:127-141 ; Planner.snapshot:154-165 ; Planner.commit:206-215 ; Planner.write_step_tree:245-257 ; main:454-520",
+      "indexWritingCalls": [
+        {
+          "line": 246,
+          "command": "read-tree",
+          "indexKeyword": "index"
+        },
+        {
+          "line": 256,
+          "command": "update-index",
+          "indexKeyword": "index"
+        },
+        {
+          "line": 257,
+          "command": "write-tree",
+          "indexKeyword": "index"
+        }
+      ]
+    },
+    {
+      "name": "ancestry_and_execution_prerequisites_retained",
+      "passed": true,
+      "method": "Comparaison AST et lecture.",
+      "evidence": "La fenêtre ABBA passée avec intégrité est exigée avant tout travail Git. Le checkout doit être complet, non shallow, sans promisor/partial clone, sans grafts ni opération Git en cours, propre et engagé ; target doit être le HEAD réel. GIT_NO_REPLACE_OBJECTS et GIT_NO_LAZY_FETCH restent actifs. La source et le reçu de fenêtre sont vérifiés à nouveau à la clôture. Ces conditions ne prouvent pas à elles seules la publication effective de base ni l'acceptation économique indépendante.",
+      "source": "passed_window:86-102 ; Planner.__init__:113-124 ; Planner.prepare:326-384 ; main:454-515"
+    },
+    {
+      "name": "scope_of_edit_is_limited_to_declared_guard",
+      "passed": true,
+      "method": "Comparaison AST indépendante des fonctions.",
+      "evidence": "Seuls Planner.accept, Planner.prepare, Planner.build et main changent dans leurs AST, comme annoncé. Le delta ajoute la constante, le refus par objet, les champs de reçu et la documentation. Les 22 autres fonctions ont des AST identiques, notamment missing, commit, write_step_tree, proof_batch, final_candidate, preserve_history, snapshot et passed_window. Aucun changement des parents, de l'arbre, de la fenêtre, du découpage des preuves ou de la borne agrégée 40 MiB n'est introduit."
+    }
+  ],
+  "checkedCount": 9,
+  "allStaticChecksPassed": true,
+  "blockingFindings": [],
+  "syntax": {
+    "method": "ast.parse des deux scripts ; aucun import ni appel de leurs fonctions.",
+    "oldParsed": true,
+    "newParsed": true,
+    "exactStandaloneDiff": true,
+    "exactEmbeddedDiff": true,
+    "allFunctionNamesRetained": true,
+    "changedFunctions": [
+      "Planner.accept",
+      "Planner.build",
+      "Planner.prepare",
+      "main"
+    ],
+    "unchangedFunctionCount": 22,
+    "recordedFunctionSetsExactlyMatch": true
+  },
+  "retainedLimits": {
+    "individualNewObjectBytes": 33554432,
+    "individualRefusalOperator": ">",
+    "maximumStepRawObjectBytes": 41943040,
+    "declaredServerAggregateLimitBytes": 67108864,
+    "allMissingParentsTraversed": true,
+    "originalTargetIsFinalDirectParent": true,
+    "finalTreeEqualsOriginalTargetTree": true,
+    "historyRewritingPerformed": false
+  },
+  "preparationConstraint": {
+    "requestedByRoot": "La reconstruction finale doit éviter l'ancien commit 33d91ef non publié.",
+    "reviewFinding": "Le planificateur ne peut pas corriger cette ascendance : si la cible finale conserve un objet historique manquant de plus de 32 MiB, prepare doit refuser. Le choix et la reconstruction de la branche à partir du prédécesseur effectivement publié restent une opération distincte préalable.",
+    "reconstructedBranchInspected": false
+  },
+  "execution": {
+    "plannerMainExecuted": false,
+    "targetModuleImported": false,
+    "gitCommandInvoked": false,
+    "gitObjectCreated": false,
+    "transportPlanCreated": false,
+    "pushPerformed": false,
+    "deploymentPerformed": false,
+    "nativeOrGameExecuted": false,
+    "testOrBuildExecuted": false,
+    "serverProbePerformed": false,
+    "sourceFilesModified": false,
+    "onlyOutput": "docs/migration/lot4b-evidence/planning/bounded-source-transport-object-limit-review.json"
+  },
+  "limitations": [
+    "Les propriétés de non-mutation et d'égalité de l'arbre sont vérifiées dans le code ; elles n'ont pas été observées lors d'un lancement du planificateur. Le reçu ne vaut pas qualification d'un plan réel.",
+    "La limite de serveur de 32 MiB est celle rapportée à l'équipe et figée prospectivement ; aucune sonde indépendante du serveur n'est effectuée.",
+    "La borne de 40 MiB porte sur les contenus bruts manquants, non sur la taille d'un pack réseau. Aucun succès de push ni garantie de taille réseau n'est revendiqué.",
+    "Les objets déjà atteignables depuis la base fournie sont exclus de la population nouvelle. La publication réelle de cette base doit être attestée séparément.",
+    "Le contrôle de checkout compare HEAD, références, empreinte de l'index et statut Git ; il ne constitue pas un manifeste exhaustif du contenu des fichiers ignorés. Aucun chemin d'écriture du planificateur ne les vise.",
+    "Les reçus indépendants de validation, coût et publication doivent être achevés avant un usage autorisé. Une fenêtre ABBA passée n'est pas, seule, un verdict de coût accepté.",
+    "La sauvegarde située dans planning est une preuve historique et ne doit pas être lancée depuis ce chemin, dont le calcul ROOT serait différent."
+  ],
+  "inputsAfter": [
+    {
+      "path": "docs/migration/lot4b-evidence/plan-bounded-source-transport.py",
+      "bytes": 32122,
+      "sha256": "235eb59eae2c1d2ef29c8dd4b1721adf524923a91eb47197246740d31f639d7d"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/plan-bounded-source-transport-before-object-limit.py",
+      "bytes": 30493,
+      "sha256": "7e7c92fe4c11609beed41dd62d9ef5da371d4ef7a57e4e14c7317deefeade7b5"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/bounded-source-transport-object-limit.diff",
+      "bytes": 5723,
+      "sha256": "3a8af97c2e5fb31277369adb110dff3ba2aef2752e276eb160f9fc9fb9aef5c0"
+    },
+    {
+      "path": "docs/migration/lot4b-evidence/planning/bounded-source-transport-object-limit-adaptation.json",
+      "bytes": 12767,
+      "sha256": "038835c76b656f1463398d4eae55cc6b2a1e80a1087282d0b7eaeafcc949a750"
+    }
+  ],
+  "inputsUnchanged": true
+}
