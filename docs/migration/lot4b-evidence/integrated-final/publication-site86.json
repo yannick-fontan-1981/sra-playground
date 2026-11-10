@@ -1,0 +1,81 @@
+{
+  "schema": "logos-engine.native-delivery-sites-publication.v1",
+  "status": "published_and_verified",
+  "recordedAt": "2026-11-10T23:00:20.415770+00:00",
+  "nativeVersion": "0.54.0",
+  "nativeSourceDigest": "f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9",
+  "siteVersion": 86,
+  "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+  "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_4ef4534a7080819194a01604513ae2dc",
+  "publishedCommit": "082ce553ce4dfbac37071a64497bcca129b7ced0",
+  "retainedDeliveryCommit": "9bcee745d7260a0876a15a7a3d057aab90629ca5",
+  "deploymentId": "appgdep_6af3a1a4ffb081918113831cbc83ee4d",
+  "deploymentStatus": "succeeded",
+  "deployedAt": "2026-11-10T22:59:03.528254+00:00",
+  "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+  "siteAccess": {
+    "projectId": "appgprj_6adbc388d79081918581b93b919d7258",
+    "currentUserRole": "owner",
+    "accessMode": "custom",
+    "accessPolicyRevision": 3,
+    "allowedUserCount": 1,
+    "allowedUserRoles": [
+      "owner"
+    ],
+    "allowedGroupCount": 0,
+    "externalVisitorCount": 0,
+    "currentLiveUrl": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "latestVersionNumber": 86
+  },
+  "apiObservation": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/publication-site86-api.json",
+    "bytes": 1824,
+    "sha256": "77af0b5e7643ab41f50b3e9b5d38c6f046770dbb78e7f906a39f4c5294803ea4"
+  },
+  "nativeSourceManifest": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/source-manifest.json",
+    "bytes": 33961,
+    "sha256": "699559bcf331e34dfa8e62137b099f05ba2e160811bc8e8e18ed1a3117bec164"
+  },
+  "deliveryIntegrity": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/delivery-integrity.json",
+    "bytes": 10357,
+    "sha256": "c27b10eea5302a5b15563e8c64476ffe48ad20780e0e8339d85e3cae00be9e63"
+  },
+  "publicationInputs": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/publication-inputs.json",
+    "bytes": 147344,
+    "sha256": "ac3ffae3b17c8f4642689fb1c2c28404b91d7d29609b417beb67a21da0cb50bc"
+  },
+  "costReview": {
+    "path": "docs/migration/lot4b-evidence/performance-integrated/owner-growth-review.json",
+    "bytes": 764063,
+    "sha256": "445b0283d1ae3860a2639da1af8f28cd369fa359424d846357bf8e37772098f1"
+  },
+  "sourceTransport": {
+    "path": "docs/migration/lot4b-evidence/integrated-final/publication-source-transport.json",
+    "bytes": 2959,
+    "sha256": "ed2c5447a779533aaaab71620fa182e411d4295b188b9bd3c72f9f720fed0456"
+  },
+  "localDeploymentArchive": {
+    "step": 5,
+    "path": "/workspace/sites/sra-lot4b-publication-20261110/step-05.tar.gz",
+    "bytes": 14794436,
+    "sha256": "1cf6b93ee67f5555652be91d1f0bea38fcb4b99b1914d0b7f1ed8b32f3746dfb",
+    "memberCount": 75,
+    "memberManifestSha256": "49c630d2eaa2419b5cd5c45b44c29018d64376e1bb2c5d97bb5dcf15a6ea88a3"
+  },
+  "serverReportedArchive": {
+    "archive_format": "tar",
+    "sediment_file_id": "file_00000000a9bc820e8f857d8eb6004942",
+    "content_hash": "sha256:f53c8790f0b099113c899c06ac55f455eb7c86153da7d5036499b6076433870c",
+    "size_bytes": 29829120,
+    "file_count": 75
+  },
+  "nativeWorker": {
+    "path": "dist/assets/v6-agent-worker-D7_Txg6T.js",
+    "sha256": "f16238fb553fa0357510f6bfba67a7803144ed667e795e0abfb65b88ade12faf",
+    "bytes": 6660281
+  },
+  "qualification": "The version source commit and terminal deployment success were independently reread from Sites after the private publication call. Owner-only access remains unchanged. Local compressed archive hashes and server-repackaged TAR identity are recorded separately; neither is substituted for the other. This is the first native0.54 publication; a subsequent documentation closure preserves the exact native and build inputs."
+}

@@ -2,7 +2,7 @@
 
 Référence source : `786dcf51ca57773d8e3a8948ce9ea3655e7baf8e`. La preuve de composant, le contrat synthétique de l'appelant, la campagne live, le rejeu enregistré et la mesure de coût ont des portées distinctes.
 
-**Candidat final : native 0.54.0**, gel `f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9`, **286 fichiers natifs et 297 membres d'archive**. La référence effectivement publiée est **Site 85**, commit `a009e1f138bb18251d697f49647bacc615ee514f`, native 0.53.0, digest `d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f`. Les preuves fonctionnelles, l'intégrité finale et le contrôle des entrées de publication passent. **Le coût global est accepté sur 2/2 jeux sous la qualification structurelle déclarée avant mesure : STCK −1,812977 %, SMLP +2,735461 %. La publication 4B seule reste en attente.** 4C demeure non implémenté.
+**Moteur livré : native 0.54.0, première publication Site 86**, gel `f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9`, **286 fichiers natifs et 297 membres d'archive**. La référence effectivement publiée est **Site 85**, commit `a009e1f138bb18251d697f49647bacc615ee514f`, native 0.53.0, digest `d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f`. Les preuves fonctionnelles, l'intégrité finale et le contrôle des entrées de publication passent. **Le coût global est accepté sur 2/2 jeux sous la qualification structurelle déclarée avant mesure : STCK −1,812977 %, SMLP +2,735461 %. La première publication 4B est vérifiée dans Site 86, commit `082ce553ce4dfbac37071a64497bcca129b7ced0`, statut `succeeded`.** 4C demeure non implémenté.
 
 ## Développement conservé
 
@@ -89,10 +89,21 @@ La [première assertion de clôture d'isolation](performance-integrated/isolatio
 
 Le [contrôle des entrées de publication](integrated-final/publication-inputs.json) passe avec le statut `integrity_verified_with_predeclared_owner_cost` : **286 fichiers natifs, 297 membres d'archive, 657 entrées source/tests, 351 entrées de build et dix entrées d'exécution des régressions**. Il relie les preuves fonctionnelles, leurs transports et le coût qualifié, en conservant `historicalStrictPassed: false` et `workMetadataExactAcrossVersions: false`. Il n'exécute ni moteur, ni jeu, ni nouvelle mesure.
 
-**La publication 4B reste en attente ; aucun Site 4B ni déploiement n'est revendiqué par ce contrôle préalable.** Le verdict économique est terminé pour le gel courant. Les réserves de contribution, de parité de l'appelant complet, d'accumulation et de migration globale ne sont pas fermées par le coût ; LKEY reste partiel et 4C non implémenté.
+**La première publication 4B est vérifiée dans Site 86**, moteur **0.54.0**, commit `082ce553ce4dfbac37071a64497bcca129b7ced0`, statut `succeeded` à **22:59:03 UTC**, accès privé du propriétaire conservé. Le [reçu Sites](integrated-final/publication-site86.json) est distinct du contrôle préalable ; il lie la version et le commit réellement publiés au déploiement terminal. Le verdict de coût reste celui du gel vérifié. Les réserves héritées de contribution, de parité de l'appelant complet, d'accumulation et de migration globale ne sont pas fermées par le coût ; LKEY reste partiel et 4C non implémenté.
 
 Le [rapport de lot](../lot4b-relative-arrangements.md) donne l'interprétation humaine, la [filiation](../lot4b-relative-arrangements-lineage.md) les contrats, et la [feuille de route](../v6-delivery-roadmap.md) les statuts de livraison.
 
 ## Transport Git des preuves
 
 La [déclaration des fragments binaires](planning/binary-transport-attributes.json) conserve le premier avertissement de `git diff --cached --check` sur un fragment gzip intérieur, puis le résultat réussi avec l’attribut Git `binary` des fichiers `.partNNN`. Les **1 149 identifiants d’objets de fragments présents dans l’index sont identiques** avant/après. Aucun octet de preuve, source native, entrée de build, outil ou résultat de coût n’est modifié.
+
+## Publication et historique conservé
+
+| Entrée | Résultat |
+| --- | --- |
+| [Publication Site 86](integrated-final/publication-site86.json) et [observations API](integrated-final/publication-site86-api.json) | Source et déploiement relus indépendamment : première publication native 0.54, `succeeded`, accès propriétaire inchangé. |
+| [Transport source](integrated-final/publication-source-transport.json) | Cinq envois ordinaires, zéro envoi forcé et aucun Site intermédiaire. Le commit original `9bcee745…` est conservé comme parent direct du commit publié, avec le même arbre. |
+| [Plan](integrated-final/transport/source-push-plan.json) et cinq reçus `step-01-execution.json` à `step-05-execution.json` | Tous les envois source et empaquetages du helper standard ont réussi ; les limites de taille sont vérifiées sur les objets réellement atteignables. |
+| [Archives de déploiement](integrated-final/transport/archive-member-verification.json) | 75 contenus de fichiers identiques dans les cinq archives ; worker compilé identique au build validé. Empreintes des conteneurs conservées séparément. |
+
+La clôture documentaire qui intègre ces reçus garde les sources natives, tests, entrées de build et résultats de mesure identiques. Elle ne constitue pas une nouvelle exécution de ces preuves.

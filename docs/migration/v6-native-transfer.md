@@ -13,9 +13,9 @@ modules and verified trajectories below establish progress, not completion.
 
 <!-- LOT4B_CURRENT_START -->
 
-## Current integrated candidate: lot 4B native 0.54.0, relative arrangements
+## Current integrated transfer: lot 4B native 0.54.0, relative arrangements
 
-Native **0.54.0** is frozen at **`f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9`**, with **286 native files and a 297-file archive**. It integrates the actual published **5A / Site 85 / native 0.53.0** commit **`a009e1f138bb18251d697f49647bacc615ee514f`**, following Site 84 with unchanged execution inputs. The [published predecessor closure](lot4b-evidence/integrated-baseline/published-closure85.json), [report](lot4b-relative-arrangements.md) and [source lineage](lot4b-relative-arrangements-lineage.md) bind that scope. **Functional verification and the global cost gate are complete; 4B publication remains pending.**
+Native **0.54.0** is frozen at **`f25d56d1c63dc929b01bb31b3898b84cecc69e6e412d535c0d122170ea401ce9`**, with **286 native files and a 297-file archive**. It integrates the actual published **5A / Site 85 / native 0.53.0** commit **`a009e1f138bb18251d697f49647bacc615ee514f`**, following Site 84 with unchanged execution inputs. The [published predecessor closure](lot4b-evidence/integrated-baseline/published-closure85.json), [report](lot4b-relative-arrangements.md) and [source lineage](lot4b-relative-arrangements-lineage.md) bind that scope. **Functional verification and the global cost gate are complete; the first 4B publication is verified in Site 86.**
 
 One `relative_arrangements` owner consumes the existing `v6.relative_arrangements.choose` workflow. Current geometry, participants, targets and actuator markers produce conditional experiments. Only the selected proposal's exact command and initially bound observation authorize acquisition. There is no passive Relative acquisition. Retained `models`, `events`, `failed`, `selection_ref` and `epoch` preserve the source distinctions; a new epoch clears the three local hypothesis/selection fields while retaining the event journal. Contradictory gains, ambiguous effects and inadmissible assignments remain refusals. Production rules contain no game identifier, fixed palette, prepared coordinate or recorded solution.
 
@@ -39,13 +39,15 @@ Strict historical aggregation remains **failed** on cross-version work metadata.
 
 <!-- LOT4B_COST_FINAL_END -->
 
+**The first 4B publication is verified in Site 86**, source commit **`082ce553ce4dfbac37071a64497bcca129b7ced0`**, terminal deployment **`succeeded` at 2026-11-10 22:59:03 UTC**, with owner-private access preserved. The [publication receipt](lot4b-evidence/integrated-final/publication-site86.json) records independent rereads of saved version/source and deployment status. The [bounded transport](lot4b-evidence/integrated-final/publication-source-transport.json) retains five ordinary source pushes, no force push, no intermediate Site deployment and the complete original delivery commit as a direct final parent with its exact tree. All 75 packaged file contents and the verified compiled native worker are identical across helper archives; local container hashes and server archive identity remain separate. Documentation closure retains the same native engine and build.
+
 Coverage is now **58/76 connected declared entries, zero partial entries and 18 remaining**: `goal_access` 10/12, `window_constraints` 21/21, `surface` 9/10 and `factored_material_return` 18/33. The audit records **177 component-verified modules, 145 partial transfers, 1,047 pending and zero fully verified modules**, within **1,369 Python modules and 417 data files**. All six full-migration gates and `fullV6Parity` remain false. **Lot 4C `facet_example` remains unimplemented and is the next lot4 transfer.** Its existing compiled workflow still requires actual measurement/binding callbacks, owner, selected acquisition, conditional simple/composed methods, observed refutations and restoration/revalidation proofs.
 
 <!-- LOT4B_CURRENT_END -->
 
 <!-- LOT5A_CURRENT_START -->
 
-## Current integrated transfer: lot 5A native 0.53.0, linked temporal preparation
+## Previous integrated transfer: lot 5A native 0.53.0, linked temporal preparation
 
 Native **0.53.0** is frozen at **`d30dedc767c588b0fdf33ea398a4ad207b07b027e8b3642b3b262c625c52387f`**, with **283 native files and a 294-file execution archive**. Both actually published 7A commits, Site 82 and its documentation-only Site 83 successor, are ancestors. The [reconciliation receipt](lot5a-evidence/final/published-predecessor-reconciliation.json) records identical execution inputs between those publications; the predeclared cost baseline remains Site 82/native 0.52.
 
