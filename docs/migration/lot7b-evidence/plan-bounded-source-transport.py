@@ -16,6 +16,8 @@ Every step counts ALL objects newly reachable from ALL of its parents, against
 the previous planned remote commit, using rev-list and cat-file object sizes.
 40 MiB of raw object contents is a bound with headroom below the observed
 64 MiB server limit; it is not a measurement or guarantee of wire pack size.
+Every newly reachable individual object must also be strictly below 32 MiB,
+including objects reachable only through retained historical parents.
 Large proof blobs are deferred, while all other target paths are complete in
 the first step. The final tree is exactly the original HEAD tree, and the
 original HEAD is a direct parent of the final transport commit.
@@ -40,6 +42,7 @@ EVIDENCE = b'docs/migration/lot7b-evidence/'
 DEFAULT_WINDOW = ROOT / 'docs/migration/lot7b-evidence/performance-integrated/window.json'
 RAW_LIMIT = 40 * 1024 * 1024
 SERVER_LIMIT = 64 * 1024 * 1024
+INDIVIDUAL_OBJECT_LIMIT = 32 * 1024 * 1024
 SCHEMA = 'logos-engine.bounded-source-push-plan.v2'
 REDIRECT_ENV = ('GIT_DIR', 'GIT_WORK_TREE', 'GIT_INDEX_FILE', 'GIT_COMMON_DIR',
                 'GIT_OBJECT_DIRECTORY', 'GIT_ALTERNATE_OBJECT_DIRECTORIES',
@@ -219,6 +222,8 @@ class Planner:
                 'A planned step is not a fast-forward from its predecessor')
         require(stats['rawBytes'] <= self.args.max_missing_raw_bytes,
                 f'{kind} exceeds the per-step raw missing-object limit')
+        require(all(row['bytes'] < INDIVIDUAL_OBJECT_LIMIT for row in stats['objects']),
+                f'{kind} includes an individual object at or above the 32 MiB limit')
         delta = self.differing_paths(tree, self.target_tree)
         require(delta <= self.deferred, 'A step leaves a non-deferred target source path incomplete')
         require(not (self.uploaded & {row['oid'] for row in stats['objects']}),
@@ -365,9 +370,10 @@ class Planner:
         required = self.missing(self.target, self.base)
         self.required_ids = {row['oid'] for row in required['objects']}
         self.plan['originalTargetMissingObjects'] = required
-        oversized = [row for row in required['objects'] if row['bytes'] > self.args.max_missing_raw_bytes]
+        oversized = [row for row in required['objects']
+                     if row['bytes'] >= INDIVIDUAL_OBJECT_LIMIT or row['bytes'] > self.args.max_missing_raw_bytes]
         self.plan['oversizedIndividualObjects'] = oversized
-        require(not oversized, 'An individual missing Git object exceeds the raw limit; target/history cannot be silently split')
+        require(not oversized, 'An individual missing Git object exceeds a transport limit; target/history cannot be silently split')
 
     def build(self, index):
         # A one-push plan is sufficient if the complete tree AND original history fit.
@@ -409,6 +415,8 @@ class Planner:
                 'Final commit does not retain the original HEAD directly with its exact tree')
         require(self.ancestor(self.base, self.current), 'Final source is not a fast-forward from the published base')
         final_missing = self.missing(self.current, self.base)
+        require(all(row['bytes'] < INDIVIDUAL_OBJECT_LIMIT for row in final_missing['objects']),
+                'Final ancestry includes an individual object at or above the 32 MiB limit')
         require({row['oid'] for row in final_missing['objects']} == self.uploaded
                 and self.required_ids <= self.uploaded
                 and final_missing['rawBytes'] == sum(step['rawMissingObjectBytes'] for step in self.steps),
@@ -417,6 +425,7 @@ class Planner:
                          finalTreeExactlyEqualToRetainedTarget=True, originalHeadIsFinalDirectParent=True,
                          allOriginalTargetObjectsRetained=True, allPublishedBaseObjectsRetained=True,
                          allMissingAncestryAccountedFor=True, allStepsWithinRawObjectLimit=True,
+                         allIndividualObjectsBelowServerLimit=True,
                          nativeTestBuildInputsEqualToTargetFromFirstStep=True,
                          totalNewReachableRawObjectBytes=final_missing['rawBytes'],
                          totalNewReachableObjects=final_missing['count'],
@@ -448,6 +457,7 @@ def main():
             'generator': fingerprint(__file__), 'window': window_fp, 'checkout': str(ROOT),
             'output': str(output), 'requestedBase': args.base, 'requestedTarget': args.target,
             'perPushServerLimitBytes': SERVER_LIMIT, 'perStepRawObjectLimitBytes': args.max_missing_raw_bytes,
+            'individualObjectLimitExclusiveBytes': INDIVIDUAL_OBJECT_LIMIT,
             'bulkProofMinimumBytes': args.bulk_min_bytes, 'steps': [], 'createdCommitObjects': [],
             'pushesPerformed': 0, 'siteDeploymentsPerformed': 0, 'forcePush': False,
             'intermediateSiteDeployment': False, 'branchUpdatesPerformed': 0,
