@@ -1,0 +1,28 @@
+{
+  "schema": "logos-engine.lot10a.integrated-extra-test-scope.v1",
+  "status": "provisional_source_paths_verified",
+  "testFiles": [
+    "tests/kernel-batch.test.ts",
+    "tests/v6-crossed-prefix-access.test.ts",
+    "tests/v6-frontier-native-snapshot.test.ts",
+    "tests/v6-native-mixed-path.test.ts",
+    "tests/v6-linked-temporal-preparation.test.ts",
+    "tests/v6-linked-temporal-reference.test.ts",
+    "tests/v6-learned-preparation-priority.test.ts",
+    "tests/v6-relative-arrangements-reference.test.ts",
+    "tests/v6-relative-arrangements-integration.test.ts",
+    "tests/v6-symbol-transactions-reference.test.ts",
+    "tests/v6-symbol-transactions-kernel.test.ts"
+  ],
+  "predecessorTestFileCounts": {
+    "5A": 6,
+    "4B": 3,
+    "7B": 2
+  },
+  "baseScope": "docs/migration/lot10a-evidence/validation-test-scope.json",
+  "baseTestFileCountAtPreparation": 31,
+  "extraTestFileCount": 11,
+  "duplicateExtraTestFiles": [],
+  "overlapWithBaseScope": [],
+  "qualification": "Provisional explicit additions for the eventual integration of the actually published 5A, 4B and 7B predecessors. All eleven filenames were verified by read-only listing in their respective workspaces, with no duplicate or overlap against the current 31-file base scope. This declares neither the final integrated source nor executed validation evidence. Root must reconcile these paths with the actual published commits before supplying this manifest to the final frozen run."
+}

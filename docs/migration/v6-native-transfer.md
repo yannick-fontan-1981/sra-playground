@@ -7,7 +7,7 @@ The isolated 10A branch starts from actual Site 83/native 0.52, commit `bed48116
 The independent source suite passes 130/130; six cold common-caller scenarios cover passive activation, OP18/WHY-ACT, active return acquisition exactly once, learned next decision, no-effect attempts and reactivation after restored portable knowledge across a boundary. Integrated release checks and cost remain pending; no additional publication or live-game success is claimed here. The 95-view initial public scan admits only POLA, whose older interrupted 94-action run has no recoverable elapsed receipt. Its historical budget is not reset and the own-family game contribution remains open. The historical release sections below retain their original scope.
 
 
-The actual Site 84 / 5A predecessor is now merged into the development branch. Its optimized common core is preserved. The [intermediate inventory](lot10a-evidence/diagnostic/post5a-inventory-run.json) records **58/76 entries**, 178 component-verified modules, 146 partial transfers and 1,045 pending modules, with no semantic audit failures. This is still an intermediate integration; the final 10A source identity and cost require the actual published 4B and 7B predecessors.
+The actual Site 84 / 5A predecessor and its Site 85 documentation closure are now merged into the development branch. Its optimized common core is preserved. The [intermediate inventory](lot10a-evidence/diagnostic/post5a-inventory-run.json) records **58/76 entries**, 178 component-verified modules, 146 partial transfers and 1,045 pending modules, with no semantic audit failures. This is still an intermediate integration; the final 10A source identity and cost require the actual published 4B and 7B predecessors.
 
 ## Required outcome
 
@@ -41,6 +41,10 @@ The sixteen pooled diagnostics retain **10/16 within budget**, with cohorts **10
 The [historical strict aggregator remains failed](lot5a-evidence/performance/aggregation-failure.json). The premeasurement structural supplement and its independent review retain the fourteen exact early fragment creators, full canonical values, origins and revision catch-ups. A [separate postmeasurement reader correction](lot5a-evidence/performance/diagnostic/owner-cost-directory-correction-v1.json) admits only the exact performance directory already named in the declaration; it preserves the rejected frozen tool, all raw data, rules, calculations and populations, and distinguishes executed from declared tool hashes. This qualified cost acceptance does not close the functional reservations. **5A is published as Site 84, commit `51e2813dedb2d71001290f94f100605e0327ead3`; the 10A publication remains pending.**
 
 The [final delivery integrity check](lot5a-evidence/final/delivery-integrity.json) passes **283 native, 294 archive, 647 source/test and 348 build inputs**, with **1,786 original reference files unchanged** and lossless recorded-evidence reconstruction.
+
+**Site 84 is the first actual publication of native 0.53**, commit `51e2813dedb2d71001290f94f100605e0327ead3`, terminal deployment `succeeded` at 2026-11-10T22:11:55.472527+00:00, with owner-only access preserved. The [Sites receipt](lot5a-evidence/final/publication-site84.json) binds the source and server archive. Documentation closure retains the same native source and compiled build.
+
+The [source-transport receipt](lot5a-evidence/final/publication-source-transport.json) preserves three successful original pushes, the actual 32 MiB object-limit rejection, and four successful recovery pushes with no intermediate Site publication. The 39,817,093-byte diagnostic is represented by 45 exact byte parts. Original commit `33d91` and all original plan commits remain recoverable through a verified 609,621-byte incremental Git bundle; published native history and already-pushed source commits remain actual ancestors. No forced push or evidence alteration occurred. The [reconstruction procedure](lot5a-evidence/final/transport/README.md) and all seven deployment archives verify identical compiled file contents. These transport repairs neither rerun nor modify native validation, costs or their premeasurement declarations.
 
 <!-- LOT5A_CURRENT_END -->
 
@@ -1894,7 +1898,7 @@ silently dropping unimplemented capabilities.
 
 ### Current frozen inventory: integrated lot 5A native 0.53.0
 
-The [current register](v6-entry-point-progress.json), [coverage](v6-coverage.json), [5A report](lot5a-linked-temporal-preparation.md) and exact final validation receipts above retain different scopes: **57/76 entries**, **19 remaining**, **174 component-verified / 145 partial / 1,050 pending modules**, **zero fully verified modules** and **all six global gates false**. Formal validation is **3,835/3,835 in 102 files**, with **5/5 checks**, **16/16 common-loop checks** and **119/119 comparisons across seven recorded cases**. The graph has **50 installed owners versus 49** and **21 family-installed programs in both versions**; installed programs are distinct from compiled workflow inventory. The global cost is accepted for2/2games under the qualified rule described above; private publication is pending. WEAV6 and browser reservations remain explicit.
+The [current register](v6-entry-point-progress.json), [coverage](v6-coverage.json), [5A report](lot5a-linked-temporal-preparation.md) and exact final validation receipts above retain different scopes: **57/76 entries**, **19 remaining**, **174 component-verified / 145 partial / 1,050 pending modules**, **zero fully verified modules** and **all six global gates false**. Formal validation is **3,835/3,835 in 102 files**, with **5/5 checks**, **16/16 common-loop checks** and **119/119 comparisons across seven recorded cases**. The graph has **50 installed owners versus 49** and **21 family-installed programs in both versions**; installed programs are distinct from compiled workflow inventory. The global cost is accepted for both games under the qualified rule described above; the first private publication is verified in Site 84. WEAV6 and browser reservations remain explicit.
 
 ### Historical frozen inventory: integrated lot 7A native 0.52.0
 
@@ -2019,7 +2023,7 @@ without making the migration complete.
    capabilities, including tuple/set structural equality and numeric identity.
    Current portable fixtures do not prove arbitrary Python integer/float parity.
 
-The current 5A/native 0.53 candidate incorporates the actually published 3I,
+The published 5A/native 0.53 delivery incorporates the actually published 3I,
 4A and 7A lineage, including Site 83 documentation closure. Remaining lot 4 work
 and lot 7B keep their separate roadmap scopes; lot 5 continues with 5B then 5C.
 The LKEY third-level reservation remains open with its retained cumulative

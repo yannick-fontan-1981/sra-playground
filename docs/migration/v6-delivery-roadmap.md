@@ -8,7 +8,7 @@ Le registre recalculé du gel isolé est **57/76**, soit **19 entrées ouvertes*
 
 La [validation isolée](lot10a-evidence/README.md) ajoute **5/5 contrôles du projet**, build compris, et **7/7 rejeux, 119/119 comparaisons sur 292 commandes**. La première suite de 31 fichiers conserve son résultat **866/867** ; l'attente d'adjacence Recolor devenue obsolète est corrigée selon le DRM, puis ses trois tests passent. Le gel natif `cabd056f` demeure distinct du futur candidat intégré. Le coût et la publication de 10A ne sont pas encore établis.
 
-La fusion du prédécesseur réellement publié **5A / Site 84 / native 0.53**, commit `51e2813dedb2d71001290f94f100605e0327ead3`, est engagée. Le candidat final 10A reste à composer avec les publications réelles de 4B puis 7B. Sa version, son registre et ses validations seront fixés après ces intégrations et les audits ; aucune version finale 10A n'est encore assignée.
+La fusion du prédécesseur réellement publié **5A / Site 84 / native 0.53**, commit `51e2813dedb2d71001290f94f100605e0327ead3`, est engagée. La clôture documentaire publiée **Site 85**, commit `a009e1f138bb18251d697f49647bacc615ee514f`, est également conservée, sans changement des entrées natives, tests ou build de 5A. Le candidat final 10A reste à composer avec les publications réelles de 4B puis 7B. Sa version, son registre et ses validations seront fixés après ces intégrations et les audits ; aucune version finale 10A n'est encore assignée.
 
 <!-- LOT5A_CURRENT_START -->
 
@@ -40,6 +40,16 @@ La qualification structurelle **préalable** passe 64/64 contrôles et sa [revue
 L'[intégrité de livraison](lot5a-evidence/final/delivery-integrity.json) vérifie **283 fichiers natifs, 294 membres d'archive, 647 entrées source/tests et 348 entrées de build**, ainsi que les **1 786 références originales inchangées**. Les archives et les grands rapports restent reconstruisibles octet pour octet.
 
 <!-- LOT5A_COST_FINAL_END -->
+
+<!-- LOT5A_PUBLICATION_FINAL_START -->
+
+**La première publication 5A est confirmée dans Site 84**, moteur **0.53.0**, commit **`51e2813dedb2d71001290f94f100605e0327ead3`**, déploiement **`succeeded` le 10 novembre 2026 à 22:11:55 UTC**, accès privé conservé. Le [reçu Sites](lot5a-evidence/final/publication-site84.json) identifie la version, le commit et l'archive déclarée par le serveur. Une clôture documentaire ultérieure conserve exactement ce moteur et son build.
+
+Le [reçu de transport](lot5a-evidence/final/publication-source-transport.json) conserve trois envois initiaux réussis, le refus d'un objet de 39 817 093 octets dépassant la limite de 32 Mio, puis quatre envois correctifs réussis. Aucun Site intermédiaire n'a été déployé. Le JSON est reconstruit depuis 45 morceaux ; le commit complet original et les commits du premier plan restent récupérables dans un bundle Git incrémental exact de 609 621 octets. L'historique natif et les sources déjà envoyées sont conservés dans l'ascendance publiée, sans envoi forcé. La [procédure et la preuve de reconstruction](lot5a-evidence/final/transport/README.md) distinguent cette conservation du transport initial des neuf gzip en 75 parties. Les 75 fichiers des sept archives de déploiement ont des contenus identiques.
+
+**Prochain périmètre de ce fil : 5B, `observed_addressed_material`, puis 5C, `observed_object_binding`.** La réduction du travail historique et la propagation générique des coups obligatoires restent à poursuivre avec des preuves distinctes ; WEAV niveau 6 n'est pas clôturé. Les lots 4 et 7 restent pris en charge dans leurs autres conversations.
+
+<!-- LOT5A_PUBLICATION_FINAL_END -->
 
 <!-- LOT5A_CURRENT_END -->
 
