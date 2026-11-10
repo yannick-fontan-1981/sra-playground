@@ -120,6 +120,10 @@ def protocol(stamp, baseline_checkout, baseline_identity, candidate_identity, ar
     window_command = shlex.join(['flock', '-x', '/workspace/shared/sra-coordination/performance.lock',
                                  'python', '-B', 'scripts/run-native-cost-window.py', str(baseline_checkout),
                                  relative(OUT), relative(baseline_path), relative(candidate_path)])
+    pair_commands = '\n'.join(shlex.join(['node', 'scripts/compare-native-loop-costs.mjs',
+        relative(OUT / 'comparison-policy.json'),
+        *[relative(OUT / ('cohort' + str(cohort)) / name)
+          for name in ('baseline.json', 'after.json', 'comparison.json')]]) for cohort in (1, 2))
     strict_command = shlex.join(['node', 'scripts/compare-native-cost-cohorts.mjs', relative(OUT / 'comparison-policy.json'),
         *[relative(OUT / ('cohort' + str(cohort)) / name) for cohort in (1, 2)
           for name in ('baseline.json', 'after.json', 'comparison.json')], relative(OUT / 'combined-comparison.json')])
@@ -207,8 +211,16 @@ Après readiness et isolation constatées, lancer le runner conservé :
 {window_command}
 ```
 
-Après les quatre séries, exécuter l'agrégateur historique inchangé sur les rapports
-de paires conservés par le runner. Conserver son véritable journal, ses entrées,
+Après les quatre séries, produire les deux comparaisons de paires à partir des
+quatre rapports bruts conservés par le runner. Le comparateur de paires reste
+inchangé et conserve tous ses diagnostics de phase :
+
+```bash
+{pair_commands}
+```
+
+Exécuter ensuite l'agrégateur historique inchangé sur les rapports bruts et les
+deux comparaisons de paires. Conserver son véritable journal, ses entrées,
 son code de sortie et l'absence éventuelle de sortie dans `aggregation-failure.json`
 et `aggregation-failure.log`. Le reçu doit décrire l'exécution réelle, sans
 fabriquer un refus ou traiter le contrôle strict comme réussi :

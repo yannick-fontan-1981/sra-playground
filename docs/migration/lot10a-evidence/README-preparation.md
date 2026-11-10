@@ -195,7 +195,9 @@ publiés.
 ## 6. Conserver le vrai refus historique
 
 Après les mesures, le comparateur historique brut reste distinct de l'analyse
-qualifiée. La commande exacte figure dans le protocole généré et dans
+qualifiée. Le runner ne produit que les quatre rapports bruts : créer d'abord
+les deux `cohortN/comparison.json` avec `compare-native-loop-costs.mjs`, puis
+exécuter l'agrégateur. Les commandes exactes figurent dans le protocole généré et dans
 `README-commands.md`. Son reçu doit provenir de l'exécution réelle. Il conserve :
 
 | Champ | Valeur liée à l'exécution |

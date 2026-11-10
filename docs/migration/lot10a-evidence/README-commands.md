@@ -134,6 +134,16 @@ flock -x /workspace/shared/sra-coordination/performance.lock \
   "$AXIAL_COST" "$AXIAL_BASELINE_MANIFEST" "$AXIAL_CANDIDATE_MANIFEST"
 ```
 
+Produire d'abord les deux comparaisons de paires à partir des quatre rapports
+bruts du runner, avec le comparateur inchangé :
+
+```bash
+node scripts/compare-native-loop-costs.mjs "$AXIAL_COST/comparison-policy.json" \
+  "$AXIAL_COST/cohort1/baseline.json" "$AXIAL_COST/cohort1/after.json" "$AXIAL_COST/cohort1/comparison.json"
+node scripts/compare-native-loop-costs.mjs "$AXIAL_COST/comparison-policy.json" \
+  "$AXIAL_COST/cohort2/baseline.json" "$AXIAL_COST/cohort2/after.json" "$AXIAL_COST/cohort2/comparison.json"
+```
+
 Exécuter ensuite l'agrégateur historique inchangé et conserver son véritable
 journal et code de sortie. Le contrat complémentaire exige son reçu de refus
 strict ; il ne le fabrique pas et n'annonce jamais une réussite stricte.
